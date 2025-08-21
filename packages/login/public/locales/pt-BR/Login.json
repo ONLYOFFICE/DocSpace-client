@@ -1,4 +1,5 @@
 {
+  "ChangePasswordSuccess": "A senha foi alterada com sucesso",
   "CodeTitle": "O código foi enviado por e-mail para você",
   "ErrorInvalidText": "Em 10 segundos, você será redirecionado para a <1>{{productName}}</1>",
   "ForgotPassword": "Esqueceu-se da senha?",

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -57,8 +57,9 @@ const WebhookTableHeader = (props) => {
     columnStorageName,
     columnInfoPanelStorageName,
     setHideColumns,
+    isAdmin,
   } = props;
-  const { t } = useTranslation(["Webhooks", "Common"]);
+  const { t } = useTranslation(["Webhooks", "Files", "Common"]);
 
   const [columns, setColumns] = useState([]);
 
@@ -77,6 +78,16 @@ const WebhookTableHeader = (props) => {
     localStorage.setItem(`${TABLE_COLUMNS}=${userId}`, tableColumns);
   }
 
+  const authorBlock = isAdmin
+    ? {
+        key: "Author",
+        title: t("Files:ByAuthor"),
+        enable: true,
+        resizable: true,
+        onChange: onColumnChange,
+      }
+    : {};
+
   const defaultColumns = [
     {
       key: "Name",
@@ -88,6 +99,7 @@ const WebhookTableHeader = (props) => {
       minWidth: 210,
       onChange: onColumnChange,
     },
+    authorBlock,
     {
       key: "URL",
       title: t("URL"),
@@ -106,7 +118,7 @@ const WebhookTableHeader = (props) => {
 
   useEffect(() => {
     setColumns(getColumns(defaultColumns, userId));
-  }, [userId, defaultColumns]);
+  }, []);
 
   return (
     <TableHeader
@@ -128,5 +140,6 @@ const WebhookTableHeader = (props) => {
 export default inject(({ userStore }) => {
   return {
     userId: userStore.user.id,
+    isAdmin: userStore.user.isAdmin,
   };
 })(observer(WebhookTableHeader));

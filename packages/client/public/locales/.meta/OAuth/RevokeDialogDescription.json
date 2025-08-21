@@ -1,0 +1,298 @@
+{
+  "key_path": "RevokeDialogDescription",
+  "content": "Any integrations using this token will no longer be able to access the API. You cannot undo this action.",
+  "content_en_sha1_hash": "79302397ee86c7a499f68d74b556077608115ed1",
+  "created_at": "2025-05-19T21:30:54.021Z",
+  "updated_at": "2025-08-12T19:46:26.148Z",
+  "comment": {
+    "text": "This translation key is used to display a warning message when revoking an OAuth token, informing users that any integrations using the token will be disabled. The message appears in a modal dialog header.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:36.773Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/RevokeDeveloperTokenDialog.tsx",
+      "line_number": 161,
+      "context": ">\n <ModalDialog.Header>{t(\"OAuth:RevokeDialogHeader\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div>\n <Text style={{ marginBottom: \"16px\" }}>\n {t(\"OAuth:RevokeDialogDescription\")}\n </Text>\n <Text style={{ marginBottom: \"16px\" }}>\n {t(\"OAuth:RevokeDialogEnterToken\")}\n </Text>\n <FieldContainer",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"integrations\" is best translated as \"tətbiqlər\" rather than \"inteqrasiyalar\" in this context to be more accessible and understandable to a broader Azerbaijani audience. While \"inteqrasiyalar\" is technically correct, it is more technical and less user-friendly.",
+          "suggestion": "Bu tokenlə əlaqəli tətbiqlər artıq API-yə daxil ola bilməyəcək."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence \"Bu əməliyyatı geri qaytara bilməzsiniz.\" is slightly formal. For a dialog description, a more conversational tone is preferable.",
+          "suggestion": "Bu əməliyyatı geri qaytara bilməyəcəksiniz."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'integrations' is translated as 'ինտեգրում' which is singular. It should be plural 'ինտեգրումներ' to accurately reflect 'integrations'.",
+          "suggestion": "Այս token-ն օգտագործող ցանկացած ինտեգրումներ այլևս չի կարողանա մուտք գործել API:"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "Space missing before 'ທ່ານ' in the Lao translation.",
+          "suggestion": "ການເຊື່ອມຕໍ່ໃດໆທີ່ໃຊ້ໂຕ໊ກຽນນີ້ຈະບໍ່ສາມາດເຂົ້າໃຊ້ API ໄດ້ອີກຕໍ່ໄປ ທ່ານ ບໍ່ສາມາດຍົກເລີກການກະ ທຳ ນີ້ໄດ້"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ກະ' appears to be a typo; it should be 'ສາມາດ'.",
+          "suggestion": "ການເຊື່ອມຕໍ່ໃດໆທີ່ໃຊ້ໂຕ໊ກຽນນີ້ຈະບໍ່ສາມາດເຂົ້າໃຊ້ API ໄດ້ອີກຕໍ່ໄປ ທ່ານ ບໍ່ສາມາດຍົກເລີກການກະ ສາມາດເຮັດໄດ້"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'token' is translated as 'marķieri'. While 'marķieri' can mean token, in this context, 'atslēga' would be a more accurate and natural translation, as it specifically refers to an access key or credential.",
+          "suggestion": "Jebkura integrācija, izmantojot šo atslēgu, vairs nevarēs piekļūt API. Šo darbību nevar atsaukt."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Dane działanie\" is grammatically incorrect. It should be \"To działanie\" or \"Ta operacja\". While \"działanie\" isn't wrong, \"operacja\" is more typical in a technical context.",
+          "suggestion": "To działanie nie może zostać cofnięte."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Soluții' (Solutions) is not the best translation for 'integrations' in this context. 'Integrare' would be more accurate.",
+          "suggestion": "Integrare care folosesc acest token nu vor mai putea accesa API."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'API' is acceptable, it's becoming common to romanize it as 'A.P.I.' in Romanian, especially in technical documentation. While not strictly incorrect, the non-romanized version may be less familiar to some users.",
+          "suggestion": "Integrare care folosesc acest token nu vor mai putea accesa A.P.I."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ඒකායනතාවන්' (ekāyanathavān) is a somewhat formal and potentially less common term. While technically correct, a more accessible and natural equivalent might improve clarity.",
+          "suggestion": "Consider using a more common term like 'අයදුම්පත්' (ayadumpatha) or 'සමමුහුන් කිරීම්' (samamuhun kirim) depending on the specific context, which translates to 'applications' or 'integrations' respectively.  However, 'ඒකායනතාවන්' is not strictly incorrect."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation maintains a slightly formal tone. For a user-facing dialog, a more conversational tone might improve understanding and user experience.",
+          "suggestion": "While the translation is accurate, consider rephrasing for a less formal tone, for example, 'මෙම ටෝකනය භාවිතා කරන සියලුම අයදුම්පත්වලට API වෙත පිවිසිය බැරි වනු ඇත.  ඔබට මෙය අවලංගු කිරීමට බැරි.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'rozhranie API' is a direct transliteration of 'API' and can sound awkward in Slovak. It's more natural to use 'API' directly or use the Slovak equivalent 'API rozhranie' depending on the context. 'Rozhranie API' can be interpreted as a compound word that doesn't quite exist.",
+          "suggestion": "Consider using 'API' or 'API rozhranie' instead of 'rozhranie API'."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, using a comma instead of a period after 'token' would improve readability and flow.",
+          "suggestion": "Change ',' to '.' after 'token'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'integrations' is awkwardly translated. While technically correct, it sounds less natural in Serbian. A more natural phrasing would be 'Aplikacije koje koriste ovaj token...'",
+          "suggestion": "Aplikacije koje koriste ovaj token више неће имати приступ API-ју."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'cannot undo this action' is a bit literal. A more natural Serbian equivalent would be 'Не можете да одузмете ову радњу' or 'Ову радњу не можете урадити назад'.",
+          "suggestion": "Ову радњу не можете урадити назад."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'API-ju' is missing a diacritic. It should be 'API-ju'.",
+          "suggestion": "API-ju"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

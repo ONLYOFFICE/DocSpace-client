@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,16 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation, Trans } from "react-i18next";
-import { useLocation, Outlet } from "react-router-dom";
+import { useLocation, Outlet } from "react-router";
 import Section from "@docspace/shared/components/section";
 import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
 import {
   FolderType,
   RoomsType,
@@ -56,10 +54,6 @@ const PublicRoomPage = (props) => {
     fetchFiles,
     isEmptyPage,
 
-    showSecondaryProgressBar,
-    secondaryProgressBarValue,
-    secondaryProgressBarIcon,
-    showSecondaryButtonAlert,
     fetchPublicRoom,
     fetchPreviewMediaFile,
 
@@ -70,13 +64,19 @@ const PublicRoomPage = (props) => {
     access,
     roomType,
     parentRoomType,
+
+    isSecondaryProgressVisbile,
+    secondaryOperationsCompleted,
+    clearSecondaryProgressData,
+    secondaryActiveOperations,
+    secondaryOperationsAlert,
+    onOpenSignInWindow,
+    windowIsOpen,
   } = props;
 
   const location = useLocation();
 
   const { t, ready } = useTranslation(["Common"]);
-
-  const [windowIsOpen, setWindowIsOpen] = useState(false);
 
   useSDK({ frameConfig, setFrameConfig, isLoading });
 
@@ -86,50 +86,6 @@ const PublicRoomPage = (props) => {
     fetchPublicRoom,
     fetchPreviewMediaFile,
   });
-
-  const getAuthWindow = () => {
-    return new Promise((res, rej) => {
-      try {
-        const path = combineUrl(
-          window.ClientConfig?.proxy?.url,
-          "/login?publicAuth=true",
-        );
-
-        const authModal = window.open(
-          path,
-          t("Common:Authorization"),
-          "height=800, width=866",
-        );
-
-        const checkConnect = setInterval(() => {
-          if (!authModal || !authModal.closed) {
-            return;
-          }
-
-          clearInterval(checkConnect);
-
-          res(authModal);
-        }, 500);
-      } catch (error) {
-        rej(error);
-      }
-    });
-  };
-
-  const onOpenSignInWindow = async () => {
-    if (windowIsOpen) return;
-
-    setWindowIsOpen(true);
-    await getAuthWindow();
-    setWindowIsOpen(false);
-
-    const isAuth = localStorage.getItem(PUBLIC_STORAGE_KEY);
-
-    if (isAuth) {
-      localStorage.removeItem(PUBLIC_STORAGE_KEY);
-      window.location.reload();
-    }
-  };
 
   const getAccessTranslation = () => {
     switch (access) {
@@ -166,7 +122,7 @@ const PublicRoomPage = (props) => {
         t={t}
         ns="Common"
         i18nKey="PublicAuthorizeToast"
-        values={{ roomMode }}
+        values={{ roomMode, productName: t("Common:ProductName") }}
         components={{
           1: <Text as="span" fontSize="12px" fontWeight={700} />,
         }}
@@ -193,10 +149,11 @@ const PublicRoomPage = (props) => {
   }, [access, ready, roomType, parentRoomType]);
 
   const sectionProps = {
-    showSecondaryProgressBar,
-    secondaryProgressBarValue,
-    secondaryProgressBarIcon,
-    showSecondaryButtonAlert,
+    isSecondaryProgressVisbile,
+    secondaryOperationsCompleted,
+    clearSecondaryProgressData,
+    secondaryActiveOperations,
+    secondaryOperationsAlert,
   };
 
   return (
@@ -209,12 +166,12 @@ const PublicRoomPage = (props) => {
         <Section.SectionHeader>
           <SectionHeaderContent
             showSignInButton={!isFrame}
-            onSignInClick={onOpenSignInWindow}
+            onSignInClick={() => onOpenSignInWindow()}
             signInButtonIsDisabled={windowIsOpen}
           />
         </Section.SectionHeader>
 
-        {!isEmptyPage && (
+        {!isEmptyPage ? (
           <Section.SectionFilter>
             {isFrame ? (
               frameConfig?.showFilter && <SectionFilterContent />
@@ -222,7 +179,7 @@ const PublicRoomPage = (props) => {
               <SectionFilterContent />
             )}
           </Section.SectionFilter>
-        )}
+        ) : null}
 
         <Section.SectionBody>
           <Outlet />
@@ -249,7 +206,13 @@ export default inject(
     clientLoadingStore,
   }) => {
     const { frameConfig, setFrameConfig, isFrame } = settingsStore;
-    const { isLoaded, roomStatus, fetchPublicRoom } = publicRoomStore;
+    const {
+      isLoaded,
+      roomStatus,
+      fetchPublicRoom,
+      onOpenSignInWindow,
+      windowIsOpen,
+    } = publicRoomStore;
     const { isLoading } = clientLoadingStore;
 
     const { fetchFiles, isEmptyPage } = filesStore;
@@ -257,10 +220,11 @@ export default inject(
     const { access, roomType, parentRoomType } = selectedFolderStore;
 
     const {
-      visible: showSecondaryProgressBar,
-      percent: secondaryProgressBarValue,
-      icon: secondaryProgressBarIcon,
-      alert: showSecondaryButtonAlert,
+      isSecondaryProgressVisbile,
+      secondaryOperationsCompleted,
+      clearSecondaryProgressData,
+      secondaryActiveOperations,
+      secondaryOperationsAlert,
     } = uploadDataStore.secondaryProgressDataStore;
 
     const { fetchPreviewMediaFile } = mediaViewerDataStore;
@@ -272,10 +236,11 @@ export default inject(
       fetchFiles,
       getFilesSettings,
 
-      showSecondaryProgressBar,
-      secondaryProgressBarValue,
-      secondaryProgressBarIcon,
-      showSecondaryButtonAlert,
+      isSecondaryProgressVisbile,
+      secondaryOperationsCompleted,
+      clearSecondaryProgressData,
+      secondaryActiveOperations,
+      secondaryOperationsAlert,
 
       isAuthenticated: authStore.isAuthenticated,
       isEmptyPage,
@@ -288,6 +253,8 @@ export default inject(
       access,
       roomType,
       parentRoomType,
+      onOpenSignInWindow,
+      windowIsOpen,
     };
   },
 )(observer(PublicRoomPage));

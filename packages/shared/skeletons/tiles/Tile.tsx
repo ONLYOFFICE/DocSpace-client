@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,16 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-import {
-  StyledTile,
-  StyledBottom,
-  StyledMainContent,
-  StyledRoomTile,
-  StyledRoomTileTopContent,
-  StyledRoomTileBottomContent,
-} from "./Tiles.styled";
+import classNames from "classnames";
+
+import { RectangleSkeleton } from "../rectangle";
+import styles from "./Tiles.module.scss";
+
 import type { TileSkeletonProps } from "./Tiles.types";
 
 export const TileSkeleton = ({
@@ -48,56 +44,37 @@ export const TileSkeleton = ({
   foregroundOpacity,
   speed,
   animate,
+  className,
   ...rest
 }: TileSkeletonProps) => {
   return isFolder ? (
-    <StyledTile {...rest}>
-      <StyledBottom className="bottom-content" isFolder>
-        <RectangleSkeleton
-          className="first-content"
-          title={title}
-          width="100%"
-          borderRadius={borderRadius}
-          backgroundColor={backgroundColor}
-          foregroundColor={foregroundColor}
-          backgroundOpacity={backgroundOpacity}
-          foregroundOpacity={foregroundOpacity}
-          speed={speed}
-          animate
-        />
-        <RectangleSkeleton
-          className="second-content"
-          title={title}
-          height="22px"
-          borderRadius={borderRadius}
-          backgroundColor={backgroundColor}
-          foregroundColor={foregroundColor}
-          backgroundOpacity={backgroundOpacity}
-          foregroundOpacity={foregroundOpacity}
-          speed={speed}
-          animate
-        />
-        <RectangleSkeleton
-          className="option-button"
-          title={title}
-          height="16px"
-          width="16px"
-          borderRadius={borderRadius}
-          backgroundColor={backgroundColor}
-          foregroundColor={foregroundColor}
-          backgroundOpacity={backgroundOpacity}
-          foregroundOpacity={foregroundOpacity}
-          speed={speed}
-          animate
-        />
-      </StyledBottom>
-    </StyledTile>
+    <div
+      className={classNames(styles.tile, "bottom-content", className)}
+      data-testid="tile-skeleton-folder"
+      {...rest}
+    >
+      <RectangleSkeleton
+        title={title}
+        width="100%"
+        height="64px"
+        borderRadius={borderRadius || "12px"}
+        backgroundColor={backgroundColor}
+        foregroundColor={foregroundColor}
+        backgroundOpacity={backgroundOpacity}
+        foregroundOpacity={foregroundOpacity}
+        speed={speed}
+        animate
+      />
+    </div>
   ) : isRoom ? (
-    <StyledTile {...rest}>
-      <StyledRoomTile>
-        <StyledRoomTileTopContent>
+    <div
+      className={classNames(styles.tile, className)}
+      data-testid="tile-skeleton-room"
+      {...rest}
+    >
+      <div className={styles.roomTile} data-testid="room-tile-content">
+        <div className={styles.roomTileTopContent}>
           <RectangleSkeleton
-            className="first-content"
             title={title}
             width="32px"
             height="32px"
@@ -110,7 +87,6 @@ export const TileSkeleton = ({
             animate
           />
           <RectangleSkeleton
-            className="second-content"
             title={title}
             height="22px"
             borderRadius={borderRadius}
@@ -122,7 +98,6 @@ export const TileSkeleton = ({
             animate
           />
           <RectangleSkeleton
-            className="option-button"
             title={title}
             height="16px"
             width="16px"
@@ -134,10 +109,9 @@ export const TileSkeleton = ({
             speed={speed}
             animate
           />
-        </StyledRoomTileTopContent>
-        <StyledRoomTileBottomContent>
+        </div>
+        <div className={styles.roomTileBottomContent}>
           <RectangleSkeleton
-            className="main-content"
             title={title}
             height="24px"
             width="50px"
@@ -150,7 +124,6 @@ export const TileSkeleton = ({
             animate
           />
           <RectangleSkeleton
-            className="main-content"
             title={title}
             height="24px"
             width="50px"
@@ -162,65 +135,26 @@ export const TileSkeleton = ({
             speed={speed}
             animate
           />
-        </StyledRoomTileBottomContent>
-      </StyledRoomTile>
-    </StyledTile>
+        </div>
+      </div>
+    </div>
   ) : (
-    <StyledTile {...rest}>
-      <StyledMainContent>
-        <RectangleSkeleton
-          className="main-content"
-          title={title}
-          height="156px"
-          borderRadius={borderRadius || "0"}
-          backgroundColor={backgroundColor}
-          foregroundColor={foregroundColor}
-          backgroundOpacity={backgroundOpacity}
-          foregroundOpacity={foregroundOpacity}
-          speed={speed}
-          animate
-        />
-      </StyledMainContent>
-
-      <StyledBottom className="bottom-content">
-        <RectangleSkeleton
-          className="first-content"
-          title={title}
-          width="100%"
-          borderRadius={borderRadius}
-          backgroundColor={backgroundColor}
-          foregroundColor={foregroundColor}
-          backgroundOpacity={backgroundOpacity}
-          foregroundOpacity={foregroundOpacity}
-          speed={speed}
-          animate
-        />
-        <RectangleSkeleton
-          className="second-content"
-          title={title}
-          height="22px"
-          borderRadius={borderRadius}
-          backgroundColor={backgroundColor}
-          foregroundColor={foregroundColor}
-          backgroundOpacity={backgroundOpacity}
-          foregroundOpacity={foregroundOpacity}
-          speed={speed}
-          animate
-        />
-        <RectangleSkeleton
-          className="option-button"
-          title={title}
-          height="16px"
-          width="16px"
-          borderRadius={borderRadius}
-          backgroundColor={backgroundColor}
-          foregroundColor={foregroundColor}
-          backgroundOpacity={backgroundOpacity}
-          foregroundOpacity={foregroundOpacity}
-          speed={speed}
-          animate
-        />
-      </StyledBottom>
-    </StyledTile>
+    <div
+      className={classNames(styles.tile, styles.file, className)}
+      data-testid="tile-skeleton-file"
+      {...rest}
+    >
+      <RectangleSkeleton
+        title={title}
+        height="220px"
+        borderRadius={borderRadius || "12px"}
+        backgroundColor={backgroundColor}
+        foregroundColor={foregroundColor}
+        backgroundOpacity={backgroundOpacity}
+        foregroundOpacity={foregroundOpacity}
+        speed={speed}
+        animate
+      />
+    </div>
   );
 };

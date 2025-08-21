@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { inject, observer } from "mobx-react";
 import moment from "moment";
@@ -32,10 +32,12 @@ import { useTranslation } from "react-i18next";
 
 import { regDesktop } from "@docspace/shared/utils/desktop";
 import PaymentsLoader from "@docspace/shared/skeletons/payments";
-import { setDocumentTitle } from "@docspace/client/src/helpers/utils";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import { StorageTariffDeactiveted } from "SRC_DIR/components/dialogs";
 
 import PaymentContainer from "./PaymentContainer";
 
+let timerId = null;
 const SaaSPage = ({
   language,
   isLoadedTariffStatus,
@@ -52,8 +54,14 @@ const SaaSPage = ({
   isDesktop,
   isDesktopClientInit,
   setIsDesktopClientInit,
+  setIsUpdatingBasicSettings,
+  isShowStorageTariffDeactivatedModal,
 }) => {
   const { t, ready } = useTranslation(["Payments", "Common", "Settings"]);
+  const shouldShowLoader =
+    !isInitPaymentPage || !ready || isUpdatingTariff || isUpdatingBasicSettings;
+
+  const [showLoader, setShowLoader] = useState(false);
 
   useEffect(() => {
     moment.locale(language);
@@ -84,13 +92,37 @@ const SaaSPage = ({
     init(t);
   }, [isLoadedTariffStatus, isLoadedCurrentQuota, ready]);
 
-  return !isInitPaymentPage ||
-    !ready ||
-    isUpdatingTariff ||
-    isUpdatingBasicSettings ? (
-    <PaymentsLoader />
+  useEffect(() => {
+    if (!shouldShowLoader && timerId) {
+      clearTimeout(timerId);
+      timerId = null;
+    }
+  }, [shouldShowLoader]);
+
+  useEffect(() => {
+    timerId = setTimeout(() => {
+      setShowLoader(true);
+    }, 200);
+
+    return () => {
+      clearTimeout(timerId);
+      setIsUpdatingBasicSettings(true);
+    };
+  }, []);
+
+  return shouldShowLoader ? (
+    showLoader ? (
+      <PaymentsLoader />
+    ) : null
   ) : (
-    <PaymentContainer t={t} />
+    <>
+      <PaymentContainer t={t} />
+      {isShowStorageTariffDeactivatedModal ? (
+        <StorageTariffDeactiveted
+          visible={isShowStorageTariffDeactivatedModal}
+        />
+      ) : null}
+    </>
   );
 };
 
@@ -116,7 +148,10 @@ export default inject(
       init,
       isUpdatingBasicSettings,
       resetTariffContainerToBasic,
+      setIsUpdatingBasicSettings,
+      isShowStorageTariffDeactivatedModal,
     } = paymentStore;
+
     const {
       isEncryptionSupport,
       setEncryptionKeys,
@@ -141,6 +176,8 @@ export default inject(
       isLoadedTariffStatus,
       isLoadedCurrentQuota,
       isUpdatingBasicSettings,
+      setIsUpdatingBasicSettings,
+      isShowStorageTariffDeactivatedModal,
     };
   },
 )(observer(SaaSPage));

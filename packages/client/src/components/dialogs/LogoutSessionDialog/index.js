@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -59,6 +59,7 @@ const LogoutSessionDialog = ({
           primary
           onClick={onClick}
           isLoading={isLoading}
+          testId="dialog_logout_button"
         />
         <Button
           key="CloseBtn"
@@ -67,6 +68,7 @@ const LogoutSessionDialog = ({
           scale
           onClick={onClose}
           isDisabled={isLoading}
+          testId="dialog_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

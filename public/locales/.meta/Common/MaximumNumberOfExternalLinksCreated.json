@@ -1,0 +1,317 @@
+{
+  "key_path": "MaximumNumberOfExternalLinksCreated",
+  "content": "Maximum number of external links created",
+  "content_en_sha1_hash": "f2bb6f59b405402c64e0664aa39c4df21c8d83ab",
+  "created_at": "2025-05-19T21:30:46.376Z",
+  "updated_at": "2025-08-11T09:02:43.922Z",
+  "comment": {
+    "text": "The \"Maximum number of external links created\" translation key is used to display a tooltip or text label in the UI, indicating the maximum limit of external links allowed. It appears on an icon button and is part of the info panel on the home page, providing context for users when viewing certain types of content.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:33.510Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/index.tsx",
+      "line_number": 185,
+      "context": "{!isArchiveFolder && !isFormRoom ? (\n <div\n data-tooltip-id=\"emailTooltip\"\n data-tooltip-content={t(\n \"Common:MaximumNumberOfExternalLinksCreated\",\n )}\n >\n <IconButton\n className=\"link-to-viewing-icon\"\n iconName={LinksToViewingIconUrl}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/components/share/index.tsx",
+      "line_number": 393,
+      "context": "};\n \n const getTextTooltip = () => {\n return (\n <Text fontSize=\"12px\" noSelect>\n {t(\"Common:MaximumNumberOfExternalLinksCreated\")}\n </Text>\n );\n };\n \n if (hideSharePanel) return null;",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'تم إنشاء الحد الأقصى من الروابط الخارجية' literally translates to 'The maximum number of external links was created.' While not entirely wrong, it implies a completed action. The English 'Maximum number of external links created' describes a limit or capacity, not necessarily a completed action. A better translation would convey this limit.",
+          "suggestion": "أقصى عدد من الروابط الخارجية الممكن إنشاؤها"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek translation \"Δημιουργήθηκε ο μέγιστος αριθμός εξωτερικών συνδέσμων\" translates to \"The maximum number of external links was created\". This is passive voice, whereas the English is a statement of a limit. A more accurate translation would indicate a limit or allowance.",
+          "suggestion": "Μέγιστος αριθμός εξωτερικών συνδέσμων που επιτρέπεται"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Enimmäismäärä ulkoisia linkkejä luotu' is not the most natural or accurate translation of 'Maximum number of external links created'. While technically correct, it sounds awkward in Finnish. The passive voice ('luotu') is not ideal here.",
+          "suggestion": "Enimmäismäärä ulkoisia linkkejä"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation includes 'luotu' which creates an unnecessary verb form and changes the phrasing from a noun phrase to a sentence fragment. The English is a noun phrase describing a maximum number. The Finnish should reflect that.",
+          "suggestion": "Remove 'luotu' to match the English phrasing."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"作成される外部リンクの最大数\" (Sakusei sareru erubanku no saidai suu) is technically correct but can be improved for clarity and naturalness. It's a bit verbose.",
+          "suggestion": "外部リンク作成の上限数 (Erubanku sakusei no jougen suu)"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '생성된 외부 링크의 최대 갯수' is a literal translation that isn't the most natural or idiomatic way to express 'Maximum number of external links created' in Korean. While technically correct, it sounds a bit clunky.",
+          "suggestion": "Consider alternatives like '외부 링크 생성 최대 개수' or '외부 링크 최대 생성 개수' for a more natural flow."
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase '갯수' (gaet-su) is the Korean word for 'number' or 'quantity'. While correct, a more commonly used term in this context might be '개수' (gae-su).",
+          "suggestion": "Replace '갯수' with '개수'."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ລິ້ງ' is a transliteration of 'link'. While understandable, the more formal/correct term in Lao would be 'ເຊື່ອມຕໍ່'.",
+          "suggestion": "ສູງສຸດຈຳນວນເຊື່ອມຕໍ່ຕ່າງປະເທດທີ່ສ້າງຂຶ້ນ"
+        },
+        {
+          "type": "grammar",
+          "description": "While technically grammatically correct, the phrasing 'ທີ່ສ້າງຂຶ້ນ' is slightly redundant. It can be shortened to 'ສ້າງ'.",
+          "suggestion": "ສູງສຸດຈຳນວນລິ້ງຕ່າງປະເທດທີ່ສ້າງ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Utworzono maksymalną liczbę linków zewnętrznych' literally translates to 'Maximum number of external links created' but implies an action has already taken place. The original English phrase describes a limit or setting, not a completed action. A more accurate translation would convey the concept of a maximum limit.",
+          "suggestion": "Maksymalna liczba linków zewnętrznych"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation \"Numărul maxim permis de link-uri externe a fost depășit\" translates to \"The maximum allowed number of external links has been exceeded.\" It doesn't directly translate \"Maximum number of external links created\". It describes a consequence of exceeding the limit, not the limit itself.",
+          "suggestion": "Numărul maxim de link-uri externe create"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'උපරිම බාහිර සබැඳි ගණන සාදා ඇත' implies 'maximum external links created *by someone*'. The English phrase describes a *limit*, not an action performed. A more accurate translation would focus on the concept of a maximum limit.",
+          "suggestion": "උපරිම බාහිර සබැඳි ගණන"
+        },
+        {
+          "type": "grammar",
+          "description": "The verb 'සාදා ඇත' (saadaa tha) indicates a completed action. Using it implies someone has created the maximum number of links, which isn't the intended meaning.",
+          "suggestion": "Remove the verb 'සාදා ඇත' (saadaa tha) to focus on the limit itself."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Serbian translation uses the passive voice ('kreirano' - created) which doesn't perfectly align with the English active voice. It sounds slightly awkward.",
+          "suggestion": "Максималан број спољашњих линкова које је креирано"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'спољних линкова' translates to 'external links', 'спољашњих линкова' might be more precise in this context, emphasizing the links originating from outside the current system.",
+          "suggestion": "Максимални број спољашњих линкова креирано"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Serbian translation uses the past participle 'kreirano' which doesn't grammatically fit with 'broj'. It should be in the nominative case.",
+          "suggestion": "Maksimalni broj spoljnih linkova kreiran"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Maksimum sayıda harici bağlantı oluşturuldu' literally translates to \"Maximum number of external links were created.\" The English key implies a maximum *allowed* number, not a statement about what *has* been created. The translation doesn't convey the intended meaning of a limit or constraint.",
+          "suggestion": "Maksimum harici bağlantı sayısı"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Số lượng liên kết bên ngoài tối đa đã được tạo' implies that the maximum number of external links has *already* been created. The English phrase 'Maximum number of external links created' refers to the allowed limit, not a completed action. It's a restriction, not a statement of fact.",
+          "suggestion": "Số lượng liên kết bên ngoài tối đa có thể tạo"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

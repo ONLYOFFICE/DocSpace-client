@@ -1,0 +1,287 @@
+{
+  "key_path": "EnterAppCodeDescription",
+  "content": "Enter 6-digit generated code from your app. If you don't have access to your phone, use the backup codes.",
+  "content_en_sha1_hash": "2becb50812c03a28380cb672fdd577cf8b46d8fd",
+  "created_at": "2025-05-19T21:30:57.358Z",
+  "updated_at": "2025-08-04T07:30:01.646Z",
+  "comment": {
+    "text": "This translation key is used to display instructions for users to enter a 6-digit code generated from their app. The description explains that if users cannot access their phone, they can use backup codes instead, appearing in a UI element within the TFA Auth page.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:28.942Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/login/src/app/(root)/confirm/TfaAuth/page.client.tsx",
+      "line_number": 140,
+      "context": "<>\n <div className=\"app-code-description\">\n <Text isBold fontSize=\"14px\" className=\"app-code-text\">\n {t(\"EnterAppCodeTitle\")}\n </Text>\n <Text>{t(\"EnterAppCodeDescription\")}</Text>\n </div>\n <div className=\"app-code-wrapper\">\n <div className=\"app-code-input\">\n <FieldContainer\n labelVisible={false}",
+      "module": "/packages/login"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Arabic translation uses a full stop (.) at the end of each sentence, which is more common in formal Arabic. While not strictly incorrect, using a less formal punctuation (or no punctuation) might be more natural in a user interface.",
+          "suggestion": "Consider removing or modifying the full stops for a more conversational tone. Alternatively, ensure consistent punctuation use throughout the application."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Öz tətbiqinizdən əldə etdiyiniz\" can be improved. A more natural phrasing would be \"Telefonunuzdakı tətbiqinizdən\". While technically correct, the current translation sounds slightly awkward.",
+          "suggestion": "Telefonunuzdakı tətbiqinizdən əldə etdiyiniz"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'anmelden' (login) is a less direct translation of 'use the backup codes.' A more appropriate translation might be 'können Sie Ihre Back-up-Codes verwenden' or 'können Sie Ihre Ersatzcodes nutzen'. 'Anmelden' implies a complete login process, while the English phrase simply indicates using the codes as an alternative.",
+          "suggestion": "können Sie Ihre Back-up-Codes verwenden"
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"desde su aplicación\" is a literal translation and sounds unnatural in Spanish. It would be more natural to say \"de tu aplicación\" (informal) or \"de su aplicación\" (formal, but potentially too formal depending on the app's tone).  The current phrasing makes it sound like the code is originating *from* the application, rather than being accessed *through* it.",
+          "suggestion": "Introduzca el código de 6 dígitos generado en tu aplicación. Si no tienes acceso a tu teléfono, utiliza los códigos de reserva."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While grammatically correct, 'códigos de reserva' is a direct translation of 'backup codes'. A more common and natural phrasing in Spanish would be 'códigos de seguridad' or 'códigos alternativos'.",
+          "suggestion": "Introduzca el código de 6 dígitos generado en tu aplicación. Si no tienes acceso a tu teléfono, utiliza los códigos de seguridad."
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Ձեր հեռախոսին' (Your phone to) is grammatically awkward. It should be 'Ձեր հեռախոսը' (Your phone).",
+          "suggestion": "Մուտքագրեք 6 նիշանոց կոդը ձեր հավելվածից:Եթե ​​Դուք մուտք չունեք Ձեր հեռախոսը, օգտագործեք պահուստային կոդերը:"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"generated code\" is not accurately translated. While \"ທີ່ສ້າງຂຶ້ນ\" conveys a sense of creation, a more accurate translation of 'generated' in this context would be something closer to 'ທີ່ຖືກສ້າງຂື້ນໂດຍອັດຕະໂນມັດ' or 'ທີ່ຖືກສ້າງຂື້ນ'.",
+          "suggestion": "ໃສ່ລະຫັດ 6 ຕົວເລກທີ່ຖືກສ້າງຂື້ນຈາກແອັບຂອງເຈົ້າ."
+        },
+        {
+          "type": "formatting",
+          "description": "While not a strict error, consider adding a period after 'ເຈົ້າ' for better readability.",
+          "suggestion": "ໃສ່ລະຫັດ 6 ຕົວເລກທີ່ຖືກສ້າງຂື້ນຈາກແອັບຂອງເຈົ້າ. "
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'generated code from your app' is translated as 'código de 6 dígitos gerado através da sua app'. While technically correct, a more natural and common phrasing in Portuguese would be 'código de 6 dígitos gerado no seu aplicativo' or 'código de 6 dígitos gerado pelo seu aplicativo'.",
+          "suggestion": "Insira o código de 6 dígitos gerado no seu aplicativo. Se não tiver acesso ao seu telemóvel, utilize os códigos de segurança."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'códigos de segurança' is acceptable, 'códigos de backup' aligns better with the original's 'backup codes'.",
+          "suggestion": "Insira o código de 6 dígitos gerado no seu aplicativo. Se não tiver acesso ao seu telemóvel, utilize os códigos de backup."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'gererat' is a misspelling of 'generat'. It should be 'generat' to correctly translate 'generated'.",
+          "suggestion": "Introduceți un cod de verificare din șase cifre generat cu aplicația dvs. Dacă nu aveți acces la telefonul dvs, folosiți un cod de rezervă."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence 'Dacă nu aveți acces la telefonul dvs, folosiți un cod de rezervă' could benefit from a more formal punctuation. A period would enhance readability.",
+          "suggestion": "Introduceți un cod de verificare din șase cifre generat cu aplicația dvs. Dacă nu aveți acces la telefonul dvs, folosiți un cod de rezervă."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'generated' is not accurately translated. 'උත්පාදිත' (uthpaaditha) implies 'produced' or 'manufactured' which doesn't quite capture the meaning of 'generated' in this context. A more accurate translation might convey the sense of 'created' or 'issued'.",
+          "suggestion": "ඔබගේ යෙදුමෙන් නිර්මිත (nirmittha) කේතය"
+        },
+        {
+          "type": "formatting",
+          "description": "The number 6 is included as a Sinhala character 𑇦 (riya). This is unconventional and will likely cause display issues. It should be a standard numeral.",
+          "suggestion": "ඔබගේ යෙදුමෙන් උත්පාදිත අංක (6) ක කේතය"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

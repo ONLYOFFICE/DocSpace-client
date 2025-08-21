@@ -1,6 +1,5 @@
 {
   "AccountWillBeCreated": "Účet {{productName}} bude vytvořen pro <1>{{email}}</1>. Dokončete prosím svou registraci:",
-  "ChangePasswordSuccess": "Heslo bylo úspěšně změněno",
   "ConfirmOwnerPortalSuccessMessage": "Vlastník {{productName}} byl úspěšně změněn. Za 10 sekund budete přesměrováni.",
   "ConfirmOwnerPortalTitle": "Potvrďte prosím, že chcete změnit vlastníka {{productName}} na {{newOwner}}.",
   "CurrentNumber": "Vaše aktuální číslo mobilního telefonu",
@@ -26,9 +25,6 @@
   "PortalRemoveTitle": "Potvrďte, že chcete odstranit svůj prostor {{productName}}.",
   "Reactivate": "Znovu aktivovat",
   "SetAppButton": "Připojit aplikaci",
-  "SetAppDescription": "Dvoufázové ověřování je povoleno. Nakonfigurujte aplikaci autentizátoru, abyste mohli pokračovat v práci v {{productName}}. Můžete použít aplikaci Google Authenticator pro <1>Android</1> a <4>iOS</4> nebo Authenticator pro <8>Windows Phone</8>.",
-  "SetAppInstallDescription": "Chcete-li aplikaci připojit, naskenujte kód QR nebo ručně zadejte svůj tajný klíč <1>{{ secretKey }}</1> a poté zadejte šestimístný kód z aplikace do pole níže.",
-  "SetAppTitle": "Nastavení aplikace autentizačního zařízení",
   "SignUp": "Zaregistrovat se",
   "SuccessDeactivate": "Váš účet byl úspěšně deaktivován. Za 10 sekund budete přesměrováni na <1>stránku</1>.",
   "SuccessReactivate": "Váš účet byl úspěšně reaktivován. Za 10 sekund budete přesměrováni na <1>prostor</1>.",

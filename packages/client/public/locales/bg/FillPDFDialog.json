@@ -2,8 +2,5 @@
   "FillOutButtonLabel": "Попълни",
   "FillOutDescription": "Попълнете полетата на оригиналния формуляр в прозореца на редактора.",
   "FillOutTitle": "Попълнете формуляра сами",
-  "FillPDFDialogTitle": "Попълни като",
-  "ShareCollectButtonLabel": "Копие към стая",
-  "ShareCollectDescription": "Споделете формуляра си и съберете отговори чрез Стая за попълване на формуляри.",
-  "ShareCollectTitle": "Сподели"
+  "FillPDFDialogTitle": "Попълни като"
 }

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,14 +27,17 @@
 import { TColorScheme } from "../../themes";
 import { ButtonSize } from "./Button.enums";
 
-export interface ButtonProps {
+type BaseButtonProps = {
+  /** Ref to access the DOM element or React component instance */
+  ref?: React.Ref<HTMLButtonElement>;
   /** Button text */
   label: string;
+  /** Optional title attribute */
   title?: string;
   /** Sets the button primary */
   primary?: boolean;
   /** Size of the button.
-   The normal size equals 36px and 40px in height on the Desktop and Touchcreen devices. */
+   * The normal size equals 36px and 40px in height on the Desktop and Touchscreen devices. */
   size?: ButtonSize;
   /** Scales the width of the button to 100% */
   scale?: boolean;
@@ -42,16 +45,14 @@ export interface ButtonProps {
   icon?: React.ReactNode;
   /** Button tab index */
   tabIndex?: number;
-  /** Accepts class */
+  /** Custom CSS class */
   className?: string;
-  /** Accepts id */
+  /** HTML id attribute */
   id?: string;
-  /** Accepts CSS style */
+  /** Custom CSS styles */
   style?: React.CSSProperties;
   /** Sets the button to show a hovered state */
   isHovered?: boolean;
-  /** Disable hover effect */
-  disableHover?: boolean;
   /** Sets the button to show a clicked state */
   isClicked?: boolean;
   /** Sets the button to show a disabled state */
@@ -61,11 +62,25 @@ export interface ButtonProps {
   /** Sets the minimal button width */
   minWidth?: string;
   /** Sets the action initiated upon clicking the button */
-  onClick?: (e: React.MouseEvent) => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  /** HTML button type attribute */
   type?: HTMLButtonElement["type"];
-}
+  /** HTML data-testid attribute */
+  testId?: string;
+};
 
-export interface ButtonThemeProps extends ButtonProps {
-  ref: React.LegacyRef<HTMLButtonElement>;
+/** Props for the Button component */
+export type ButtonProps = BaseButtonProps & {
+  /** ARIA label for accessibility */
+  "aria-label"?: string;
+  /** ARIA disabled state */
+  "aria-disabled"?: "true" | "false";
+  /** ARIA busy state */
+  "aria-busy"?: "true" | "false";
+};
+
+/** Props for the styled ButtonTheme component */
+export type ButtonThemeProps = ButtonProps & {
+  ref?: React.RefObject<HTMLButtonElement | null>;
   $currentColorScheme?: TColorScheme;
-}
+};

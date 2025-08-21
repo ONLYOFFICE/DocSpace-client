@@ -1,0 +1,398 @@
+{
+  "key_path": "TemplateRoomCreated",
+  "content": "Room based on the template <1>«{{title}}»</1> created.",
+  "content_en_sha1_hash": "6a8df0a004c7e61b689c124e267e93ff4887cded",
+  "created_at": "2025-05-19T21:30:56.247Z",
+  "updated_at": "2025-05-24T11:19:30.423Z",
+  "comment": {
+    "text": "This translation key is used to display a success message when a room based on a template is created. It mentions the template's title and is likely displayed in a toast notification or dialog box after successful creation.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:39:03.477Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/GlobalEvents/CreateRoomEvent.js",
+      "line_number": 93,
+      "context": "const successToast = roomParams.isTemplate ? (\n <Trans\n t={t}\n ns=\"Files\"\n i18nKey=\"TemplateRoomCreated\"\n values={{\n title: roomParams.title,\n }}\n components={{\n 1: <Text as=\"span\" fontWeight={600} fontSize=\"12px\" />,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"استنادًا إلى\" is a bit formal for this context. A more natural phrasing would be \"بناءً على\" or simply \"من\".",
+          "suggestion": "تم إنشاء غرفة بناءً على القالب <1>«{{title}}»</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The opening and closing tags <1> and </1> are maintained correctly.",
+          "suggestion": null
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, 'Otaq' can sound slightly unnatural. A more natural phrasing might use a preposition to clearly indicate 'based on'.",
+          "suggestion": "Otaq şablon <1>«{{title}}»</1> əsasında yaradılmışdır."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'based on the template' is better conveyed by 'əsasında' (on the basis of) than just the general 'uyğun' (suitable/consistent with). While 'uyğun' isn't wrong, it's not as accurate.",
+          "suggestion": "Otaq <1>«{{title}}»</1> şablon əsasında yaradılmışdır."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Room based on the template\" is better translated as \"Стая, базирана на шаблона\" or \"Стая, създадена по шаблон\". \"Стая по шаблона\" implies the room *is* the template, not based on it.",
+          "suggestion": "Стая, базирана на шаблона <1>«{{title}}»</1>."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence is a bit awkward in Bulgarian. While grammatically correct, it's not the most natural phrasing.  It's passive voice and can be improved.",
+          "suggestion": "Създадена е стая, базирана на шаблона <1>«{{title}}»</1>."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation \"Místnost na základě vytvořené šablony\" literally translates to \"Room based on a created template.\" It's awkward and doesn't quite convey the intended meaning of \"Room based on the template...\" A more natural phrasing would be something like \"Místnost vytvořená na základě šablony\".",
+          "suggestion": "Místnost vytvořená na základě šablony"
+        },
+        {
+          "type": "grammar",
+          "description": "The use of 'vytvořené' is grammatically correct, but in this context, it's unnecessarily passive. It implies the template *itself* was created, rather than a room created *using* a template.",
+          "suggestion": "Consider using a more active construction, such as 'Místnost vytvořená podle šablony'."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Room based on the template\" is better translated as \"Δωμάτιο βασισμένο στο πρότυπο\" instead of \"Δωμάτιο που βασίζεται στο πρότυπο\". While both are understandable, the former is more natural and accurate.",
+          "suggestion": "Δημιουργήθηκε δωμάτιο βασισμένο στο πρότυπο <1>«{{title}}»</1>."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets <1>«{{title}}»</1> are present in both the English and Finnish versions. While technically correct, it's worth confirming if they are necessary and appropriately rendered in the application using the translation.",
+          "suggestion": "Verify if the angle brackets and placeholders are required for the application's rendering of the room title."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Salle à partir de modèle\" is not the most natural way to express 'Room based on the template'. A more fluent translation would be 'Salle créée à partir du modèle' or 'Salle basée sur le modèle'.",
+          "suggestion": "Salle créée à partir du modèle"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation 'Կաղապարների հիմնված սենյակը' literally translates to 'Room based on templates'. It should be 'Room based on the template' to match the English content.",
+          "suggestion": "Կաղապարի հիմնված սենյակը"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'based on the template' is not accurately conveyed by 'basandosi sul modello'. A more natural Italian translation would be 'basata sul modello' or 'creata secondo il modello'. 'Basandosi sul modello' implies an ongoing action, whereas the English sentence describes a completed action.",
+          "suggestion": "Stanza creata basata sul modello <1>«{{title}}»</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Japanese translation preserves the HTML tags `<1>` and `</1>`, which is unnecessary and potentially confusing for Japanese users. These tags should ideally be removed or handled more gracefully depending on the context of their usage.",
+          "suggestion": "Remove the tags `<1>` and `</1>` from the Japanese translation unless they are crucial for rendering or other technical reasons."
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets <1> and </1> are replicated verbatim in both the English and Korean versions. This suggests they are likely placeholders or XML tags, and their inclusion in the visible translation is likely incorrect and creates unnecessary formatting in the displayed text.",
+          "suggestion": "Remove the <1> and </1> tags from the Korean translation if they are not necessary for the underlying system and are intended only as placeholders. The translated text should be \"{{title}} 템플릿을 기반으로 한 룸이 생성되었습니다.\""
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Lao translation preserves the XML tags (<1>«{{title}}»</1>) exactly as in the English source. While technically correct, this is likely unnecessary and could cause display issues in the target language. The tags should ideally be removed or handled appropriately by the rendering system.",
+          "suggestion": "Remove the XML tags <1>«{{title}}»</1> from the translation to simplify the text and improve display. The system should handle the template variable separately."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The opening and closing tags `<1>` and `</1>` are inconsistent with common practices. While technically valid XML, they are often simplified to `<1>` and `</1>` or omitted entirely depending on the context.",
+          "suggestion": "Consider simplifying the tags to `<1>` and `</1>` or omitting them if possible."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Dutch translation preserves the XML tags '<1>«{{title}}»</1>' exactly as in the English source. This might be unnecessary and could be simplified depending on the context of how this string is used.",
+          "suggestion": "Consider simplifying the XML tags if possible, e.g., based on the usage context.  If the tags are essential, confirm with the developers."
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'template' should be translated as 'modelo' in Portuguese, not 'template'.",
+          "suggestion": "Sala baseada no modelo <1>«{{title}}»</1> criado."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'criado' (created) doesn't align well with the context. It implies a passive creation that doesn't fully convey the action of creating a room *based on* a template. A better translation would convey the *creation* or *generation* of the room using the template.",
+          "suggestion": "Sala baseada no modelo <1>«{{title}}»</1> gerada."
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'with the help of the template' ('cu ajutorul șablonului') isn't the most natural way to express the creation of a room based on a template. It implies the template was actively used as a tool, rather than being the foundation for the room's structure.",
+          "suggestion": "Sala a fost creată pe baza șablonului <1>«{{title}}»</1>."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "A more literal and common translation would emphasize the template as the basis for the creation, not merely a helping tool.",
+          "suggestion": "Sala a fost creată folosind șablonul <1>«{{title}}»</1>."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'අන්තරායය' (antharayaaya) means 'danger' or 'hazard'. It's an incorrect translation of 'template'.",
+          "suggestion": "The correct translation for 'template' would be something like 'ආකාරය' (akaaray) or 'වර්ගය' (vargaya)."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The sentence structure is slightly awkward. It would be more natural to place 'සාදා ඇත' (saadaaa athaa) closer to the action of creating the room.",
+          "suggestion": "A more natural translation would be something like: 'ආකාරය' (akaaray) හෝ 'වර්ගය' (vargaya) මත පදනම් වූ කාමරය සාදා ඇත'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Slovak translation uses the past tense 'bola vytvorená' (was created). While technically correct, it might be more natural to use the present tense 'je vytvorená' (is created) to align with the ongoing process of room creation.",
+          "suggestion": "Miestnosť podľa šablóny <1>«{{title}}»</1> je vytvorená."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ustvarjena soba na podlagi predloge' could be more natural. A better translation for 'Room based on the template' would be 'Soba, ki temelji na predlogi' or 'Soba, ustvarjena po predlogi'.",
+          "suggestion": "Soba, ki temelji na predlogi"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of 'created' as 'Ustvarjena' is technically correct but might sound slightly formal. A more common and flowing option would be 'je ustvarjena'.",
+          "suggestion": "je ustvarjena"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Соба креирана на основу шаблона' does not accurately convey the meaning of 'Room based on the template'.  'Соба' means 'room', but the phrasing is awkward. A more natural translation would use a word like 'Направљена' (made/created) or 'Изграђена' (built) to describe the creation process related to the template.",
+          "suggestion": "Направљена на основу шаблона"
+        },
+        {
+          "type": "spelling",
+          "description": "While 'шаблона' is technically correct, 'шаблон' (without the genitive ending) might be more common and natural in this context. The choice depends on the overall tone, but a simpler form could be preferred.",
+          "suggestion": "шаблон"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'šablona' should be 'šablona'.",
+          "suggestion": "Soba kreirana na osnovu šablona <1>«{{title}}»</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Room based on the template\" is better translated as \"Şablon esaslı oda\" or \"Şablonu baz alan oda\" in Turkish, rather than \"Şablonuna göre oluşturuldu\". The current translation implies the room *created* the template, not the other way around.",
+          "suggestion": "Oda, şablon esaslı <1>«{{title}}»</1> oluşturuldu."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Đã tạo phòng dựa trên mẫu <1>«{{title}}»</1>.\" is technically correct but could be more natural. \"Đã tạo phòng theo mẫu <1>«{{title}}»</1>.\" is a more common and fluid phrasing in Vietnamese.",
+          "suggestion": "Đã tạo phòng theo mẫu <1>«{{title}}»</1>."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Chinese translation retains the XML tags `<1>` and `</1>` from the English content. These tags likely shouldn't be present in the final translated text, as they are meant for internal processing and not user display.",
+          "suggestion": "Remove the XML tags `<1>` and `</1>` from the Chinese translation. The translation should be \"使用模板«{{title}}»创建的房间。\""
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

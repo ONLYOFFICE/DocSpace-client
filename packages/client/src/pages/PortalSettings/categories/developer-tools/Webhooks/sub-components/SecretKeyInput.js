@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -127,23 +127,27 @@ const SecretKeyInput = (props) => {
           tooltipContent={
             <Text fontSize="12px">
               {t("SecretKeyHint")} <br /> <br />
-              <Link
-                id="read-more-link"
-                type="page"
-                isHovered
-                fontWeight={600}
-                href={webhooksGuideUrl}
-                target="_blank"
-                className="link"
-              >
-                {t("ReadMore")}
-              </Link>
+              {webhooksGuideUrl ? (
+                <Link
+                  id="read-more-link"
+                  type="page"
+                  isHovered
+                  fontWeight={600}
+                  href={webhooksGuideUrl}
+                  target="_blank"
+                  className="link"
+                  dataTestId="webhooks_guide_link"
+                >
+                  {t("ReadMore")}
+                </Link>
+              ) : null}
             </Text>
           }
           place="bottom"
+          dataTestId="secret_key_help_button"
         />
       </Header>
-      {isResetVisible && (
+      {isResetVisible ? (
         <Hint>
           {t("SecretKeyWarning")} <br />
           <Link
@@ -153,11 +157,12 @@ const SecretKeyInput = (props) => {
             isHovered
             onClick={hideReset}
             className="link"
+            dataTestId="reset_key_link"
           >
             {t("ResetKey")}
           </Link>
         </Hint>
-      )}
+      ) : null}
       <div hidden={isResetVisible}>
         <PasswordInput
           id={`${additionalId}-secret-key-input`}
@@ -174,6 +179,7 @@ const SecretKeyInput = (props) => {
           passwordSettings={passwordSettings}
           key={passwordInputKey}
           isDisabled={isDisabled}
+          dataTestId="secret_key_input"
         />
         <Link
           id="generate-link"
@@ -182,6 +188,7 @@ const SecretKeyInput = (props) => {
           isHovered
           onClick={generatePassword}
           className="link dotted"
+          dataTestId="generate_link"
         >
           {t("Generate")}
         </Link>

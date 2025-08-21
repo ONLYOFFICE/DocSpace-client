@@ -1,8 +1,6 @@
 {
   "DeleteForeverButton": "Ջնջել ընդմիշտ",
-  "DeleteForeverNote": "Աղբարկղից բոլոր միավորներն ընդմիշտ կջնջվեն: Դուք չեք կարողանա վերականգնել դրանք:",
-  "DeleteForeverNoteArchive": "Արխիվացված բոլոր տարրերը ընդմիշտ կջնջվեն: Դուք չեք կարողանա վերականգնել դրանք:",
+  "DeleteForeverNote": "Բոլոր տարրերը «{{sectionName}}» բաժնից կջնջվեն ընդմիշտ։ Դրանք հնարավոր չի լինի վերականգնել։",
   "DeleteForeverTitle": "Ջնջե՞լ ընդմիշտ",
-  "SuccessEmptyArchived": "Պահոցը դատարկված է",
-  "SuccessEmptyTrash": "Աղբարկղը դատարկվեց"
+  "SuccessEmptyAction": "«{{sectionName}}» բաժինը դատարկվեց"
 }

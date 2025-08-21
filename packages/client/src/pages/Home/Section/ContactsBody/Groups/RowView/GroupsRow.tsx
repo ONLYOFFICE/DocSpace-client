@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,6 +26,7 @@
 
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import { useTheme } from "styled-components";
 
 import { Link, LinkTarget } from "@docspace/shared/components/link";
 import {
@@ -48,7 +49,7 @@ import {
 type GroupsRowProps = {
   item: TGroup;
   sectionWidth: number;
-
+  itemIndex: number;
   selection?: GroupsStore["selection"];
   bufferSelection?: GroupsStore["bufferSelection"];
   getGroupContextOptions?: GroupsStore["getGroupContextOptions"];
@@ -60,6 +61,7 @@ type GroupsRowProps = {
 
 const GroupsRowComponent = ({
   item,
+  itemIndex,
   selection,
   bufferSelection,
   getGroupContextOptions,
@@ -70,6 +72,7 @@ const GroupsRowComponent = ({
   changeGroupContextSelection,
 }: GroupsRowProps) => {
   const { t } = useTranslation(["People", "Common", "PeopleTranslations"]);
+  const theme = useTheme();
 
   const isChecked = selection?.some((el) => el.id === item.id);
   const isActive = bufferSelection?.id === item?.id;
@@ -89,6 +92,9 @@ const GroupsRowComponent = ({
 
   const getContextModel = () => getModel!(t, item);
 
+  // used for selection-area
+  const value = `group_${item.id}_false_index_${itemIndex}`;
+
   return (
     <GroupsRowWrapper
       isChecked={isChecked}
@@ -96,7 +102,7 @@ const GroupsRowComponent = ({
       className={`group-item row-wrapper ${
         isChecked || isActive ? "row-selected" : ""
       } ${item.id}`}
-      value={item.id}
+      value={value}
     >
       <div className="group-item">
         <GroupsRow
@@ -119,8 +125,13 @@ const GroupsRowComponent = ({
           getContextModel={getContextModel}
           mode="modern"
           className="group-row"
+          dataTestId={`contacts_groups_row_${itemIndex}`}
         >
-          <GroupsRowContent sectionWidth={sectionWidth}>
+          <GroupsRowContent
+            className="group-row-content"
+            sectionWidth={sectionWidth}
+            sideColor={theme.peopleTableRow.sideInfoColor}
+          >
             <Link
               key="group-title"
               target={LinkTarget.blank}
@@ -130,6 +141,8 @@ const GroupsRowComponent = ({
               lineHeight="20px"
               isTextOverflow
               onClick={onOpenGroup}
+              truncate
+              dataTestId={`contacts_groups_title_link_${itemIndex}`}
             >
               {item.name}
             </Link>
@@ -137,7 +150,6 @@ const GroupsRowComponent = ({
             <Badges isLDAP={item.isLDAP} />
 
             <Link
-              key="group-title"
               target={LinkTarget.blank}
               title={item.name}
               fontWeight={600}
@@ -145,8 +157,9 @@ const GroupsRowComponent = ({
               lineHeight="20px"
               isTextOverflow
               onClick={onOpenGroup}
+              dataTestId={`contacts_groups_members_count_link_${itemIndex}`}
             >
-              {t("PeopleTranslations:PeopleCount", {
+              {t("PeopleTranslations:MembersCount", {
                 count: item.membersCount,
               })}
             </Link>

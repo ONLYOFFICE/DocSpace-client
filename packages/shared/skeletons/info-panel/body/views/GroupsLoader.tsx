@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,21 +26,21 @@
 
 import React from "react";
 
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { StyledGroupMemberLoader, StyledGroupsLoader } from "../body.styled";
+import { RectangleSkeleton } from "../../../rectangle";
+import styles from "../Body.module.scss";
 
 const GroupsLoader = () => {
   return (
-    <StyledGroupsLoader>
+    <div className={styles.groupsLoader} data-testid="groups-loader">
       {[...Array(5).keys()].map((i) => (
-        <StyledGroupMemberLoader key={i}>
+        <div key={i} className={styles.groupMemberLoader}>
           <RectangleSkeleton
             className="avatar"
             width="32px"
             height="32px"
             borderRadius="50%"
           />
-          <div className="user-info">
+          <div className={styles.userInfo}>
             <RectangleSkeleton width="128px" height="12px" borderRadius="3px" />
             <RectangleSkeleton
               className="role-selector"
@@ -49,9 +49,9 @@ const GroupsLoader = () => {
               borderRadius="3px"
             />
           </div>
-        </StyledGroupMemberLoader>
+        </div>
       ))}
-    </StyledGroupsLoader>
+    </div>
   );
 };
 

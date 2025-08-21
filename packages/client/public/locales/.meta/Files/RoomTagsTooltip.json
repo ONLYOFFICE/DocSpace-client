@@ -1,0 +1,316 @@
+{
+  "key_path": "RoomTagsTooltip",
+  "content": "Tags will apply to the room that will be created based on this template.",
+  "content_en_sha1_hash": "496a0f22260ab35d09561070f794c68a57378e2b",
+  "created_at": "2025-05-19T21:30:56.147Z",
+  "updated_at": "2025-08-11T09:02:43.858Z",
+  "comment": {
+    "text": "This translation key is used to display a tooltip explaining how room tags will be applied when creating or editing a new room based on a template. The tooltip appears in a dialog component and helps users understand the behavior of room tags in this context.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:39:10.625Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/SetRoomParams.js",
+      "line_number": 479,
+      "context": "isDisabled={isDisabled}\n onFocus={() => setForceHideRoomTypeDropdown(true)}\n onBlur={() => setForceHideRoomTypeDropdown(false)}\n dataTestId=\"create_edit_room_tags_input\"\n tooltipLabel={\n isTemplateSelected || isTemplate ? t(\"Files:RoomTagsTooltip\") : \"\"\n }\n />\n \n {/* //TODO: Uncomment when private rooms are done\n {!isEdit && (",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'سيتم تطبيق الوسوم على الغرفة التي ستُنشأ باستخدام هذا القالب' is a literal translation and could be phrased more naturally in Arabic. The phrase 'ستُنشأ باستخدام هذا القالب' is somewhat clunky. A more idiomatic translation might be 'سيتم تطبيق الوسوم على الغرفة التي سيتم إنشاؤها من هذا القالب' or 'سيتم تطبيق الوسوم على الغرفة بناءً على هذا القالب'.",
+          "suggestion": "سيتم تطبيق الوسوم على الغرفة بناءً على هذا القالب."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is grammatically correct but sounds unnatural and overly literal. A more natural German phrasing would improve clarity and flow.",
+          "suggestion": "Tags werden auf den Raum angewendet, der anhand dieser Vorlage erstellt wird."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrasing 'auf Grundlage dieser Vorlage' can be simplified and sounds somewhat formal for a tooltip.",
+          "suggestion": "Tags werden auf den Raum angewendet, der mit dieser Vorlage erstellt wird."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Պիտակները կկիրառվեն այս կաղապարի հիման վրա ստեղծվելիք սենյակի համար:\" is a bit literal and can be improved for clarity and naturalness in Armenian. The English phrase 'will apply to the room that will be created' is slightly awkward. A more natural Armenian phrasing would be preferred.",
+          "suggestion": "Պիտակները կկիրառվեն ստեղծվելիք սենյակի համար, այս կաղապարի հիման վրա:"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is technically correct, but it could be more natural. '적용됩니다' (apply) sounds a bit formal and stiff in this context. A more conversational phrasing might improve the user experience.",
+          "suggestion": "태그는 이 템플릿을 기반으로 만들어지는 룸에 적용됩니다."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ແມ່ແບບ' (mae-baep) is a standard translation for 'template', but depending on the context, 'ແບບຢ່າງ' (baep-yang) might be more appropriate. While 'ແມ່ແບບ' isn't *incorrect*, 'ແບບຢ່າງ' could be considered slightly more precise in some situations.",
+          "suggestion": "Consider using 'ແບບຢ່າງ' instead of 'ແມ່ແບບ' for a potentially more precise translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Birkas tiks piemērotas telpai, kas tiks izveidota, pamatojoties uz šo veidni' is a bit literal and could be more naturally phrased. It implies the tags are actively 'applied' to the room during creation.",
+          "suggestion": "Birkas būs saistītas ar telpu, kas tiks izveidota, pamatojoties uz šo veidni."
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct, the original translation is long and can be simplified for better readability in a tooltip.",
+          "suggestion": "Birkas tiks saistītas ar telpu, kas izveidota pēc šī veidņa."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Tags zijn van toepassing op de kamer die op basis van dit sjabloon wordt gemaakt' is not a perfect equivalent of the English content. While understandable, it's a bit wordy and formal for a tooltip. A more natural translation might emphasize that the tags *are associated with* the room.",
+          "suggestion": "Tags zijn gekoppeld aan de kamer die op basis van dit sjabloon wordt gemaakt."
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'templates' is misspelled. It should be 'template'.",
+          "suggestion": "templates -> template"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Etichete sunt aplicate la sala care va fi creată cu ajutorul acestui șablon' is a literal translation but doesn't quite capture the nuance of the English. It implies the tags are *actively* being applied, rather than being inherent to the room created from the template. A more natural translation would focus on the tags being *associated with* the room.",
+          "suggestion": "Etichete sunt asociate cu sala care va fi creată cu ajutorul acestui șablon."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'cu ajutorul acestui șablon' is grammatically correct, it's slightly awkward. A more concise and natural phrasing exists.",
+          "suggestion": "Etichete sunt asociate cu sala creată pe baza acestui șablon."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is not the most natural way to express the meaning in Sinhala. A more common and easily understood phrasing would improve clarity.",
+          "suggestion": "මෙම සැකිල්ලෙන් නිර්මාණය වන කාමරයට ටැග් අදාළ වනු ඇත."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Oznake će se primeniti na sobu koja će biti kreirana na osnovu ovog šablona.' is technically correct but could be more natural. 'Povezać' (to connect/associate) might be a better verb choice than 'primeniti' (to apply) in this context. 'Na osnovu ovog šablona' can be simplified.",
+          "suggestion": "Oznake će se povezati sa sobom koja će biti kreirana iz ovog šablona."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Etiketler bu şablona göre oluşturulacak odaya uygulanacaktır.' is a bit literal and could be more natural. While technically correct, it sounds slightly awkward in Turkish.",
+          "suggestion": "Etiketler, bu şablondan oluşturulacak odaya uygulanır."
+        },
+        {
+          "type": "formatting",
+          "description": "The original English uses a sentence. The Turkish translation also should be a sentence structure for consistency.",
+          "suggestion": "Etiketler, bu şablondan oluşturulacak odaya uygulanır."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is not entirely accurate. 'will apply to' is awkward in Vietnamese. The original emphasizes the *future* application based on the template.",
+          "suggestion": "Thẻ tag sẽ được áp dụng cho phòng được tạo ra từ mẫu này."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'được sẽ áp dụng' is slightly unnatural. 'sẽ áp dụng' is more common and flows better.",
+          "suggestion": "sẽ áp dụng"
+        },
+        {
+          "type": "formatting",
+          "description": "The word 'dựa trên' is a bit formal. While not incorrect, it might be softened for a more user-friendly feel.",
+          "suggestion": "từ"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

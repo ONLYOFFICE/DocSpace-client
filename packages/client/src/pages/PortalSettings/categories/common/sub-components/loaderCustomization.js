@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -201,9 +201,9 @@ const LoaderCustomization = ({
     >
       <RectangleSkeleton height="22px" className="header" />
 
-      {portalRenaming && (
+      {portalRenaming ? (
         <RectangleSkeleton height="80px" className="description" />
-      )}
+      ) : null}
 
       {dnsSettings ? (
         <>
@@ -228,12 +228,12 @@ const LoaderCustomization = ({
         </>
       )}
 
-      {lngTZSettings && (
+      {lngTZSettings ? (
         <>
           <RectangleSkeleton height="20px" className="title-long" />
           <RectangleSkeleton height="32px" className="combo-box" />
         </>
-      )}
+      ) : null}
       <RectangleSkeleton
         height={heightSaveCancelButtons}
         className="save-cancel-buttons"

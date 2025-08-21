@@ -1,0 +1,242 @@
+{
+  "key_path": "ChooseNewPlan",
+  "content": "Would you like to choose a new pricing plan?",
+  "content_en_sha1_hash": "827866603046faa49bb9d21d0bd4785aba26a659",
+  "created_at": "2025-05-19T21:30:53.677Z",
+  "updated_at": "2025-05-24T06:56:17.430Z",
+  "comment": {
+    "text": "This translation key is used to display a message asking users to choose a new pricing plan, typically found in contexts where user plans need to be upgraded or changed.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:13.444Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/sub-components/RoomsContent.tsx",
+      "line_number": 52,
+      "context": "const { t } = useTranslation([\"Payments\", \"Common\", \"MainBar\"]);\n \n const chooseNewPlan = (\n <Text>\n {isPaymentPageAvailable\n ? t(\"ChooseNewPlan\")\n : t(\"MainBar:ContactToUpgradeTariff\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n );",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/sub-components/UsersContent.tsx",
+      "line_number": 76,
+      "context": "const { t } = useTranslation([\"Payments\", \"Common\", \"MainBar\"]);\n \n const chooseNewPlan = (\n <Text>\n {isPaymentPageAvailable\n ? t(\"ChooseNewPlan\")\n : t(\"MainBar:ContactToUpgradeTariff\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n );",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'abonament' implies a subscription, which might not be the intended meaning of 'pricing plan'. 'Plan de prețuri' would be a more direct translation.",
+          "suggestion": "Plan de prețuri"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses the formal 'Doriți' which is appropriate but consider if a less formal tone ('Vrei') is more suitable for the application's overall voice.",
+          "suggestion": "Vrei să alegeți un plan de prețuri?"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'tarifný program' is a possible translation for 'pricing plan', it leans towards a more technical or service-specific plan. 'Cenový plán' would be a more direct and generally understood translation for 'pricing plan' in this context.",
+          "suggestion": "Chcete si vybrať nový cenový plán?"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '是否选择新的定价版本？' is a literal translation that doesn't flow naturally in Chinese. '版本' (version) isn't the most common term for a pricing plan in this context. It sounds a bit technical and formal.",
+          "suggestion": "是否选择新的套餐？ (Shìfǒu xuǎnzé xīn de tàocān?)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, '是否' sounds slightly stiff. A more conversational approach would be better.",
+          "suggestion": "您想选择新的套餐吗？ (Nín xiǎng xuǎnzé xīn de tàocān ma?)"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

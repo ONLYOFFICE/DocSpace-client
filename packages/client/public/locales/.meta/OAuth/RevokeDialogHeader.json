@@ -1,0 +1,279 @@
+{
+  "key_path": "RevokeDialogHeader",
+  "content": "Revoke token",
+  "content_en_sha1_hash": "9b8466169cf13a97ddbd21c83909af55a5a8e71a",
+  "created_at": "2025-05-19T21:30:54.026Z",
+  "updated_at": "2025-08-12T19:46:26.148Z",
+  "comment": {
+    "text": "The translation key \"RevokeDialogHeader\" is used to display the text \"Revoke token\" in a modal dialog header. It appears when revoking a developer token and serves as a label for the revoke action. Translators should provide an equivalent phrase that communicates this same action in the user's native language.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:36.193Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/RevokeDeveloperTokenDialog.tsx",
+      "line_number": 157,
+      "context": "visible\n onClose={onClose}\n displayType={ModalDialogType.modal}\n autoMaxHeight\n >\n <ModalDialog.Header>{t(\"OAuth:RevokeDialogHeader\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div>\n <Text style={{ marginBottom: \"16px\" }}>\n {t(\"OAuth:RevokeDialogDescription\")}\n </Text>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/OAuthStore.ts",
+      "line_number": 777,
+      "context": "};\n \n const revokeDeveloperTokenOption = {\n key: \"revoke-token\",\n icon: RevokeIconUrl,\n label: t(\"OAuth:RevokeDialogHeader\"),\n onClick: onRevokeDeveloperToken,\n disabled: !item.enabled,\n dataTestId: \"oauth_revoke_token_option\",\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Tokeni ləğv edin\" is understandable, a more natural and accurate translation of \"Revoke token\" would be \"Tokeni etibar etməyi dayandırın\" or \"Tokeni silin\". \"Ləğv etmək\" often implies more formal cancellation or abolition, not the simple act of revoking a token.",
+          "suggestion": "Tokeni etibar etməyi dayandırın"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Peruuta tunnus' is understandable, a more accurate and natural translation of 'Revoke token' would be 'Poista tunnus' or 'Kumoaa tunnus'. 'Peruuta' implies canceling something, whereas 'Poista' or 'Kumoaa' better conveys the action of revoking a token.",
+          "suggestion": "Poista tunnus"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation 'Չեղյալ համարել նշանը' while literally meaning 'invalidate the symbol', doesn't accurately convey the meaning of 'Revoke token'. 'Revoke' implies cancellation or withdrawal, not just invalidation. A more accurate translation would emphasize that aspect.",
+          "suggestion": "Consider alternatives like 'Ջնջել տոքենը' (delete the token) or 'Արտեղել տոքենը' (withdraw the token)."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"トークンの取消し\" is understandable, it's not the most natural or common way to say \"Revoke token\" in Japanese. \"取消し\" implies cancellation or nullification, which can be too strong for simply revoking a token.",
+          "suggestion": "トークン取り消し (Token torikeshi) or トークン失効 (Token shikō) would be more appropriate and common translations for \"Revoke token\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The term \"ໂຕ໊ະຄ໌\" is a transliteration of \"token\" and might be simplified or localized for better readability. While understandable, it's not the most natural way to express \"token\" in Lao.",
+          "suggestion": "Consider using a more localized term for 'token' if a suitable equivalent exists. Otherwise, 'ໂຕ໊ະຄ໌' is acceptable but could be reviewed for a more natural feel."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Atsaukt marķieri\" is technically correct, a more natural and idiomatic translation for \"Revoke token\" would be \"Atcelt tokenu\". \"Atsaukt\" implies recalling something, while \"Atcelt\" is more fitting for revoking a digital token.",
+          "suggestion": "Atcelt tokenu"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ප්‍රතෝකනය' is a valid transliteration of 'token' but might be overly formal or technical for a revocation dialog. A simpler term might be more user-friendly.",
+          "suggestion": "Consider using a more common word for 'token' like 'අඩවිය' (adaviya - meaning 'area' or 'site') or a simplified term if one exists that is widely understood in the context of authentication."
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the sentence 'ප්‍රතෝකනය අහෝසි කරන්න' can be slightly more natural in Sinhala. The verb 'අහෝසි කරන්න' (ahosi kanna - to abolish) is direct but could be softened.",
+          "suggestion": "Consider 'ප්‍රතෝකනය අවලංගු කරන්න' (prathokanya avalangu kanna - to cancel the token) which is more common in similar contexts."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Опозови токен' is not the accurate translation of 'Revoke token'. 'Опозови' means 'to shame' or 'to disgrace'. The correct term for 'revoke' in this context would be 'укини' (ukini) or 'опозивати' (opozivati).",
+          "suggestion": "Use 'Укини токен' or 'Опозивати токен'"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Belirteci iptal et' is a literal translation but doesn't flow naturally in Turkish. A more idiomatic translation for 'Revoke token' would be 'Token'u iptal et'.",
+          "suggestion": "Token'u iptal et"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Thu hồi mã token\" is understandable, a more natural and common Vietnamese translation for \"Revoke token\" would be \"Hủy bỏ token\" or \"Rút token\". \"Thu hồi\" is more often used for retrieving something, not canceling.",
+          "suggestion": "Hủy bỏ token"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

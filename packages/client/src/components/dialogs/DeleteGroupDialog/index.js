@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -102,6 +102,7 @@ const DeleteGroupDialog = (props) => {
           scale
           onClick={onDeleteAction}
           isLoading={isLoading}
+          testId="delete_group_dialog_confirm"
         />
         <Button
           id="group-modal_cancel"
@@ -110,6 +111,7 @@ const DeleteGroupDialog = (props) => {
           size="normal"
           scale
           onClick={onClose}
+          testId="delete_group_dialog_cancel"
         />
       </ModalDialog.Footer>
     </ModalDialog>

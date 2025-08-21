@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,48 +24,67 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, {
-  forwardRef,
-  useCallback,
-  useImperativeHandle,
-  useState,
-} from "react";
+import React, { useCallback, useImperativeHandle, useState } from "react";
 import { isMobile } from "react-device-detect";
 
 import PanelReactSvg from "PUBLIC_DIR/images/panel.react.svg";
-import PageCountProps, { PageCountRef } from "./PageCount.props";
-import { PageCountWrapper } from "./PageCount.styled";
+import classNames from "classnames";
+import PageCountProps from "./PageCount.props";
 
-const PageCount = forwardRef<PageCountRef, PageCountProps>(
-  ({ isPanelOpen, visible, className, setIsOpenMobileDrawer }, ref) => {
-    const [pagesCount, setPagesCount] = useState<number>(0);
-    const [pageNumber, setPageNumber] = useState<number>(0);
+import styles from "./PageCount.module.scss";
 
-    useImperativeHandle(ref, () => ({
-      setPagesCount(pagesCountArg: number) {
-        setPagesCount(pagesCountArg);
-      },
-      setPageNumber: (pageNumberArg: number) => {
-        setPageNumber(pageNumberArg);
-      },
-    }));
+const PageCount = ({
+  ref,
+  isPanelOpen,
+  visible,
+  className,
+  setIsOpenMobileDrawer,
+}: PageCountProps) => {
+  const [pagesCount, setPagesCount] = useState<number>(0);
+  const [pageNumber, setPageNumber] = useState<number>(0);
 
-    const openMobileDrawer = useCallback(() => {
-      setIsOpenMobileDrawer(true);
-    }, [setIsOpenMobileDrawer]);
+  useImperativeHandle(ref, () => ({
+    setPagesCount(pagesCountArg: number) {
+      setPagesCount(pagesCountArg);
+    },
+    setPageNumber: (pageNumberArg: number) => {
+      setPageNumber(pageNumberArg);
+    },
+  }));
 
-    if (!visible) return;
+  const openMobileDrawer = useCallback(() => {
+    setIsOpenMobileDrawer(true);
+  }, [setIsOpenMobileDrawer]);
 
-    return (
-      <PageCountWrapper isPanelOpen={isPanelOpen} className={className}>
-        {isMobile && <PanelReactSvg onClick={openMobileDrawer} />}
-        <div>
-          <span>{pageNumber}</span> / <span>{pagesCount}</span>
-        </div>
-      </PageCountWrapper>
-    );
-  },
-);
+  if (!visible) return;
+
+  return (
+    <div
+      className={classNames(
+        styles.pageCountWrapper,
+        {
+          [styles.isPanelOpen]: isPanelOpen,
+          [styles.isMobile]: isMobile,
+        },
+        className,
+      )}
+      data-testid="page-count"
+      aria-label="Page counter"
+    >
+      {isMobile ? (
+        <PanelReactSvg
+          onClick={openMobileDrawer}
+          data-testid="mobile-panel-button"
+          aria-label="Open mobile panel"
+        />
+      ) : null}
+      <div data-testid="page-numbers">
+        <span data-testid="current-page">{pageNumber}</span> /
+        <span data-testid="total-pages">{pagesCount}</span>
+      </div>
+    </div>
+  );
+};
 
 PageCount.displayName = "PageCount";
 

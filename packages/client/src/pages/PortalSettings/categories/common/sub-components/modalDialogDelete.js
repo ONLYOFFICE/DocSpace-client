@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -63,12 +63,14 @@ const ModalDialogDelete = (props) => {
             onClick={onClickDelete}
             primary
             size="normal"
+            testId="portal_settings_modal_dialog_delete_button"
           />
           <Button
             className="cancel-button button-modal"
             label={t("Common:CancelButton")}
             size="normal"
             onClick={onClose}
+            testId="portal_settings_modal_dialog_cancel_button"
           />
         </StyledFooterContent>
       </ModalDialog.Footer>

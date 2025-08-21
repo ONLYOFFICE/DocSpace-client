@@ -4,7 +4,6 @@
   "DataReassignment": "Neuzuordnung der Daten",
   "DeleteProfileIsFinished": "Profil löschen, wenn die Neuzuordnung abgeschlossen ist",
   "DescriptionDataReassignment": "Wir übertragen die vom Benutzer erstellten Räume und die in den Räumen des Benutzers gespeicherten Dokumente.",
-  "InProgress": "Laufend",
   "Interrupted": "Unterbrochen, einige Daten konnten nicht übertragen werden",
   "MoreAboutDataTransfer": "Mehr über die Datenübertragung",
   "NewDataOwner": "Neuer Dateneigentümer",
@@ -14,6 +13,7 @@
   "ReassignData": "Daten neu zuweisen",
   "ReassigningDataToAnother": "Der Prozess der Neuzuweisung von Daten von Benutzer <0>{{fromUser}}</0> zu Benutzer <1>{{toUser}}</1> hat begonnen. Bitte beachten Sie, dass dies einige Zeit in Anspruch nehmen kann.",
   "ReassigningDataToItself": "Der Prozess der Neuzuordnung der Daten von Benutzer <0>{{fromUser}}</0> zu Benutzer <1>{{toUser}}</1> <2>{{you}}</2> hat begonnen. Bitte beachten Sie, dass dies einige Zeit dauern kann.",
+  "RoomsOnlyReassignment": "Wir übertragen die durch Kontaktaufnahme erstellten Räume.",
   "StartTransferAgain": "Übertragung erneut starten",
   "UserToWhomTheDataWillBeTransferred": "Benutzer, an den die Daten übertragen werden sollen"
 }

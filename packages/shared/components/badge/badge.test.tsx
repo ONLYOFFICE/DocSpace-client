@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,67 +27,122 @@
 import React from "react";
 import { screen, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import userEvent from "@testing-library/user-event";
 
-import { Badge } from "./Badge";
+import { Badge } from ".";
+import styles from "./Badge.module.scss";
 
 describe("<Badge />", () => {
-  it("renders without error", () => {
-    render(<Badge />);
+  const renderComponent = (props = {}) => {
+    return render(<Badge {...props} />);
+  };
 
-    expect(screen.getByTestId("badge")).toBeInTheDocument();
+  describe("Rendering", () => {
+    test("renders Badge component", () => {
+      renderComponent();
+      const badgeElement = screen.getByRole("generic");
+      expect(badgeElement).toBeInTheDocument();
+    });
+
+    test("renders Badge with correct text", () => {
+      renderComponent({ label: "Test Badge" });
+      const badgeElement = screen.getByText("Test Badge");
+      expect(badgeElement).toBeInTheDocument();
+    });
+
+    it("displays label correctly", () => {
+      renderComponent({ label: "10" });
+      expect(screen.getByText("10")).toBeInTheDocument();
+    });
+
+    it("renders with default props", () => {
+      renderComponent();
+      const badge = screen.getByTestId("badge");
+      expect(badge).toHaveAttribute("role", "status");
+      expect(badge).toHaveAttribute("aria-atomic", "true");
+      expect(badge).toHaveAttribute("aria-live", "polite");
+    });
+
+    it("applies base styles correctly", () => {
+      renderComponent({ label: "10" });
+      const badge = screen.getByTestId("badge");
+
+      expect(badge.classList.contains(styles.badge)).toBeTruthy();
+      expect(badge.classList.contains(styles.themed)).toBeTruthy();
+    });
+
+    it("applies custom styles correctly", () => {
+      const customProps = {
+        fontSize: "14px",
+        color: "red",
+        backgroundColor: "blue",
+        borderRadius: "5px",
+        padding: "10px",
+        maxWidth: "100px",
+        height: "30px",
+        border: "1px solid black",
+        label: "10",
+      };
+
+      renderComponent(customProps);
+      const badge = screen.getByTestId("badge");
+
+      expect(badge).toHaveStyle({
+        height: "30px",
+        border: "1px solid black",
+        borderRadius: "5px",
+      });
+    });
   });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("displays label", () => {
-  //   const wrapper = mount(<Badge label="10" />);
+  describe("Styling", () => {
+    test("renders Badge with custom className", () => {
+      const customClass = "custom-badge";
+      renderComponent({ className: customClass });
+      const badgeElement = screen.getByTestId("badge");
+      expect(badgeElement.className).toContain(customClass);
+    });
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("label")).toBe("10");
-  // });
+  describe("Accessibility", () => {
+    it("has correct ARIA attributes when non-interactive", () => {
+      renderComponent({ label: "5" });
+      const badge = screen.getByTestId("badge");
+      expect(badge).toHaveAttribute("role", "status");
+      expect(badge).toHaveAttribute("aria-label", "5 ");
+      expect(badge).toHaveAttribute("aria-live", "polite");
+      expect(badge).toHaveAttribute("aria-atomic", "true");
+    });
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("call onClick()", () => {
-  //   // @ts-expect-error TS(2708): Cannot use namespace 'jest' as a value.
-  //   const onClick = jest.fn();
-  //   const wrapper = mount(<Badge onClick={onClick} />);
+  describe("Interactions", () => {
+    it("handles click events", async () => {
+      const onClick = jest.fn();
+      renderComponent({ label: "Click", onClick });
 
-  //   wrapper.simulate("click");
+      const badge = screen.getByTestId("badge");
+      await userEvent.click(badge);
+      expect(onClick).toHaveBeenCalledTimes(1);
+    });
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(onClick).toBeCalled();
-  // });
+  describe("Display Logic", () => {
+    it("does not display when label is 0", () => {
+      renderComponent({ label: "0" });
+      const badge = screen.getByTestId("badge");
+      expect(badge).toHaveAttribute("data-hidden", "true");
+    });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("call onClick() without wrapper", () => {
-  //   const wrapper = mount(<Badge />);
+    it("displays when label is non-zero", () => {
+      renderComponent({ label: "1" });
+      const badge = screen.getByTestId("badge");
+      expect(badge).not.toHaveAttribute("data-hidden", "true");
+    });
 
-  //   wrapper.simulate("click");
-
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper).toExist();
-  // });
-
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts id", () => {
-  //   const wrapper = mount(<Badge id="testId" />);
-
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("id")).toEqual("testId");
-  // });
-
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts className", () => {
-  //   const wrapper = mount(<Badge className="test" />);
-
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("className")).toEqual("test");
-  // });
-
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts style", () => {
-  //   const wrapper = mount(<Badge style={{ color: "red" }} />);
-
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.getDOMNode().style).toHaveProperty("color", "red");
-  // });
+    it("applies high priority styling", () => {
+      renderComponent({ label: "High", type: "high" });
+      const badge = screen.getByTestId("badge");
+      expect(badge).toHaveAttribute("data-type", "high");
+    });
+  });
 });

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,56 +24,40 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TColorScheme, TTheme } from "../../themes";
+import type { TextProps } from "../text/Text.types";
 
-export interface ToggleIconProps {
-  isChecked?: boolean;
-  isLoading?: boolean;
-  noAnimation: boolean;
-}
+type PickedTextProps = Pick<TextProps, "fontWeight" | "fontSize">;
 
-export interface ToggleButtonProps {
-  /** Returns the value indicating that the toggle button is enabled. */
-  isChecked: boolean;
-  /** Disables the ToggleButton */
-  isDisabled?: boolean;
-  /** Sets a callback function that is triggered when the ToggleButton is clicked */
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  /** Label of the input  */
-  label?: string;
-  /** Sets component id */
-  id?: string;
-  /** Class name */
-  className?: string;
-  /** Accepts css style */
-  style?: React.CSSProperties;
-  /** Disable toggle button animation */
-  noAnimation?: boolean;
-  /** Set loading state */
-  isLoading?: boolean;
-  /** Used as HTML `name` property  */
-  name?: string;
-  /** Sets the font weight */
-  fontWeight?: number | string;
-  /** Sets the font size */
-  fontSize?: string;
-}
+type PickedHtmlElementProps = Pick<
+  React.HTMLAttributes<HTMLElement>,
+  "id" | "className" | "style"
+>;
 
-export interface StyledToggleButtonProps {
-  isChecked?: boolean;
-  isDisabled?: boolean;
-  theme: TTheme;
-}
+type PickedInputProps = Pick<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  "name" | "onChange"
+>;
 
-export interface ContainerToggleButtonThemeProps {
-  $currentColorScheme?: TColorScheme;
-  isChecked?: boolean;
-  isDisabled?: boolean;
-}
+/** Props for the toggle icon SVG component */
+export type ToggleIconProps = Pick<
+  ToggleButtonProps,
+  "isChecked" | "isLoading" | "noAnimation"
+>;
 
-export interface ToggleButtonThemeProps
-  extends Omit<ContainerToggleButtonThemeProps, "$currentColorScheme"> {
-  id?: string;
-  className?: string;
-  style?: React.CSSProperties;
-}
+/** Props for the main ToggleButton component */
+export type ToggleButtonProps = PickedTextProps &
+  PickedHtmlElementProps &
+  PickedInputProps & {
+    /** Label text to display next to the toggle */
+    label?: string;
+    /** Whether the toggle is in checked state */
+    isChecked?: boolean;
+    /** Whether the toggle is disabled */
+    isDisabled?: boolean;
+    /** Whether the toggle is in loading state */
+    isLoading?: boolean;
+    /** Whether animations are disabled */
+    noAnimation?: boolean;
+    /** Data test id for the toggle button */
+    dataTestId?: string;
+  };

@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "Son görüntülediğiniz veya düzenlediğiniz dokümanlar bu bölümde görüntülenecektir.",
   "EmptyRootRoomUserDescription": "Paylaşılan oda burada görünecektir.",
   "EmptyRootRoomUserTitle": "Burada henüz oda yok",
+  "EmptyTemplatesDescription": "Oda bölümünde bir odadan şablon oluşturabilirsiniz",
+  "EmptyTemplatesTitle": "Burada henüz şablon yok",
   "FormFolderDefaultDescription": "PDF formlarını buraya bırakın veya {{productName}} veya cihazdan yükleyin.",
   "FormFolderDefaultTitle": "Burada henüz form yok",
   "FormFolderDefaultUserDescription": "Yöneticiler tarafından yüklenen formlar burada görünecektir.",
@@ -33,6 +35,7 @@
   "MigrationDataDescription": "Verileri {{organizationName}} Workspace, Google Workspace veya Nextcloud'dan {{productName}} üzerine aktarın.",
   "MigrationDataTitle": "Taşınma Verileri",
   "PublicRoomEmptyTitle": "Genel odaya hoş geldiniz",
+  "SectionsUploadDescription": "{{sectionNameFirst}} veya {{sectionNameSecond}} bölümlerinden her türlü dosyayı yükle",
   "SendInvitationLetter": "Portala yeni üyeler eklemek için davet mektubu gönderin",
   "ShareOptionDescription": "Bir genel erişim bağlantısını kopyalayın veya form doldurma işlemini başlatmak için diğer kullanıcıları odaya davet edin.",
   "ShareOptionTitle": "Oda paylaşma",
@@ -42,9 +45,7 @@
   "UploadDeviceOptionTitle": "Cihazınızdan Yükleme",
   "UploadDevicePDFFormOptionDescription": "Hazır bir PDF formunu cihazınızdan odaya yükleyin.",
   "UploadDevicePDFFormOptionTitle": "Cihazdan yükleyin",
-  "UploadFromPortalDescription": "Belgeler veya Odalardan her tür dosyayı yükleyin",
   "UploadFromPortalTitle": "{{productName}} kaynağından yükleyin",
   "UploadPDFFormOptionDescription": "{{productName}} içinde bulunan hazır bir PDF formunu seçin ve odaya yükleyin.",
-  "UserEmptyDescription": "Yöneticiler tarafından yüklenen dosya ve klasörler burada görünecektir.",
   "VirtualDataRoomEmptyTitle": "Sanal Veri Odasına Hoş Geldiniz"
 }

@@ -1,10 +1,8 @@
 {
   "ActiveSessions": "アクティブなセッション",
   "AutoDeleteTitle": "60日以上前のセッションは自動的に削除されます。",
-  "ChangeEmailSuccess": "メールの変更が完了しました 。",
   "ChangePasswordAfterLoggingOut": "ログアウト後にパスワードを変更する",
   "ConnectSocialNetworks": "SNSに接続する",
-  "DarkTheme": "ダークテーマ",
   "DescriptionForSecurity": "より安全性を高めるために、パスワードの変更をお勧めします。",
   "DesktopTheme": "デスクトップエディタの設定と同期",
   "DesktopThemeDescription": "デスクトップエディタの現在のテーマに応じて、明るいテーマと暗いテーマを自動的に切り替えます。",
@@ -13,7 +11,6 @@
   "ErrorAccountAlreadyUse": "他のユーザーが使用中のリンクアカウント",
   "FileManagement": "ファイル管理",
   "InterfaceTheme": "インターフェイスのテーマ",
-  "LightTheme": "ライトのテーマ",
   "LogoutActiveConnection": "アクティブな接続からログアウトする",
   "LogoutAllActiveSessionsDescription": "この接続以外の接続は、現在使用中のため、ログアウトされます。",
   "LogoutBtn": "ログアウト",

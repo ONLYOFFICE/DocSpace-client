@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,136 +25,134 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { MouseEvent } from "react";
-import { InputSize, InputType } from "../text-input";
+
+import { InputType } from "../text-input";
+import { InputBlockProps } from "../input-block/InputBlock.types";
 
 export type TPasswordSettings = {
+  /** Minimum length requirement for the password */
   minLength?: number;
+  /** Requires uppercase characters in the password */
   upperCase?: boolean;
+  /** Requires digits in the password */
   digits?: boolean;
+  /** Requires special symbols in the password */
   specSymbols?: boolean;
+  /** Regular expression for validating digits */
   digitsRegexStr?: string;
+  /** Regular expression for validating uppercase characters */
   upperCaseRegexStr?: string;
+  /** Regular expression for validating special symbols */
   specSymbolsRegexStr?: string;
+  /** Regular expression for allowed characters */
   allowedCharactersRegexStr?: string;
 };
 
 export type TPasswordValidation = {
+  /** Whether all characters are allowed */
   allowed: boolean;
+  /** Whether digits requirement is met */
   digits: boolean;
+  /** Whether capital letters requirement is met */
   capital: boolean;
+  /** Whether special characters requirement is met */
   special: boolean;
+  /** Whether length requirement is met */
   length: boolean;
 };
 
-export type PasswordInputHandle = {
-  onGeneratePassword: (e: MouseEvent) => void;
-  setState(state: TState): void;
-  value?: string;
-};
-
-export type TState = {
+export type TPasswordState = {
+  /** Current input type (text/password) */
   type: InputType.text | InputType.password;
+  /** Current input value */
   value?: string;
+  /** Copy button label */
   copyLabel?: string;
+  /** Whether copy action is disabled */
   disableCopyAction?: boolean;
+  /** Whether tooltip is displayed */
   displayTooltip: boolean;
+  /** Validation states */
   validLength: boolean;
   validDigits: boolean;
   validCapital: boolean;
   validSpecial: boolean;
 };
 
-export interface PasswordInputProps {
-  /** Allows setting the component id  */
-  id?: string;
-  /** Allows setting the component auto-complete */
-  autoComplete?: string;
-  /** Facilitates the correct display of values inside the input */
-  inputType?: InputType.text | InputType.password;
-  /** Input name */
-  inputName?: string;
-  /** Required to associate the password field with the email field */
-  emailInputName?: string;
-  /** Input value */
-  inputValue?: string;
-  /** Sets a callback function that is triggered on PasswordInput */
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>, value?: string) => void;
-  /** Default event that is triggered when the button is already pressed but not released */
-  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-  /** Event that is triggered when the focused item is lost  */
-  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
-  /** Sets the input width manually */
-  inputWidth?: string;
-  /** Notifies if the error occurs */
-  hasError?: boolean;
-  /** Notifies if the warning occurs */
-  hasWarning?: boolean;
-  /** Default placeholder input */
-  placeholder?: string;
-  /** Tab index input */
-  tabIndex?: number;
-  /** Default maxLength input */
-  maxLength?: number;
-  /** Accepts class */
-  className?: string;
-  /** Accepts css style */
-  style?: React.CSSProperties;
-  /** Forwarded ref */
-  forwardedRef?: React.Ref<HTMLInputElement>;
-  /** Sets the input disabled */
-  isDisabled?: boolean;
-  size: InputSize;
-  /** Indicates that the input field has scale  */
-  scale?: boolean;
+export type PasswordInputHandle = {
+  /** Generate password handler */
+  onGeneratePassword: (e: MouseEvent) => void;
+  /** Set component state */
+  setState(state: TPasswordState): void;
+  /** Current value */
+  value?: string;
+};
+
+export type TPasswordTooltipProps = {
+  /** Title for password requirements tooltip */
+  tooltipPasswordTitle?: string;
+  /** Prompt for minimum length requirement */
+  tooltipPasswordLength?: string;
+  /** Prompt for digits requirement */
+  tooltipPasswordDigits?: string;
+  /** Prompt for capital letters requirement */
+  tooltipPasswordCapital?: string;
+  /** Prompt for special characters requirement */
+  tooltipPasswordSpecial?: string;
+  /** Title for allowed characters tooltip */
+  tooltipAllowedCharacters?: string;
   /** Allows to hide Tooltip */
   isDisableTooltip?: boolean;
-  /** Allows to show Tooltip text */
-  isTextTooltipVisible?: boolean;
-  /** Prompts to copy the email and password data to clipboard */
-  clipActionResource?: string;
-  /** Prompts to copy the email data to clipboard */
-  clipEmailResource?: string;
-  /** Prompts to copy the password data to clipboard */
-  clipPasswordResource?: string;
-  /** Prompts that the data has been copied to clipboard */
-  clipCopiedResource?: string;
-  /** Title that indicates that the tooltip must contain a password */
-  tooltipPasswordTitle?: string;
-  /** Prompt that indicates the minimal password length  */
-  tooltipPasswordLength?: string;
-  /** Prompt that instructs to include digits into the password */
-  tooltipPasswordDigits?: string;
-  /** Prompt that indicates that capital letters are allowed */
-  tooltipPasswordCapital?: string;
-  /** Prompt that indicates that special characters are allowed */
-  tooltipPasswordSpecial?: string;
-  /** Set of special characters for password generator and validator */
-  generatorSpecial?: string;
+  /** Title of the password generation button */
+  generatePasswordTitle?: string;
+};
+
+type PasswordInputBaseProps = {
+  ref?: React.RefObject<PasswordInputHandle | null>;
+  /** Input value */
+  inputValue?: string;
+  /** Required to associate the password field with the email field */
+  emailInputName?: string;
   /** Set of settings for password generator and validator */
   passwordSettings?: TPasswordSettings;
-  /** Sets a callback function that is triggered on PasswordInput. Returns boolean value */
+  /** Callback function triggered on validation */
   onValidateInput?: (
     progressScore: boolean,
     passwordValidation: TPasswordValidation,
   ) => void;
-  /** Sets a callback function that is triggered when the copy button is clicked. Returns formatted value */
-  onCopyToClipboard?: (value: string) => string;
-  /** Sets the tooltip offset to the left */
-  tooltipOffsetLeft?: number;
-  /** Sets the tooltip offset to the top */
-  tooltipOffsetTop?: number;
-  /** Sets the password input view to simple (without tooltips, password progress bar and several additional buttons (copy and generate password) */
+  /** Set of special characters for password generator */
+  generatorSpecial?: string;
+  /** Sets the password input view to simple */
   simpleView?: boolean;
-  /** Sets a title of the password generation button */
-  generatePasswordTitle?: string;
-  /** Title that indicates that the tooltip must contain allowed characters */
-  tooltipAllowedCharacters?: string;
-  /** Setting display block to set element to full width */
+  /** Setting display block for full width */
   isFullWidth?: boolean;
-  /** Focus the input field on initial render */
-  isAutoFocussed?: boolean;
-  /** Indicating the password type simulation. Disables the browser password window */
+  /** Indicating the password type simulation */
   isSimulateType?: boolean;
   /** Sets simulate input symbol */
   simulateSymbol?: string;
-}
+  /** Prompts to copy the email and password data */
+  clipActionResource?: string;
+  /** Prompts that the data has been copied */
+  clipCopiedResource?: string;
+};
+
+export type PasswordInputProps = Omit<
+  InputBlockProps,
+  | "type"
+  | "value"
+  | "onChange"
+  | "children"
+  | "iconName"
+  | "iconButtonClassName"
+  | "name"
+  | "width"
+> &
+  PasswordInputBaseProps &
+  TPasswordTooltipProps & {
+    /** Input type override */
+    inputType?: InputType.text | InputType.password;
+    inputName?: string;
+    inputWidth?: string;
+    /** Callback function triggered on input change */
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>, value?: string) => void;
+  };

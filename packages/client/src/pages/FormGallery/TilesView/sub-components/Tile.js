@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,7 +31,7 @@ import PropTypes from "prop-types";
 import { Link } from "@docspace/shared/components/link";
 import { withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 import { isMobile } from "@docspace/shared/utils";
 import {

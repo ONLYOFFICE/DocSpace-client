@@ -1,0 +1,47 @@
+@use "../../styles/variables/colors";
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+  z-index: 1000;
+  color: black;
+
+  &.blue {
+    background-color: #e3f2fd;
+  }
+
+  &.purple {
+    background-color: #f3e5f5;
+  }
+
+  &.green {
+    background-color: #e8f5e9;
+  }
+
+  &.top30 {
+    top: 30%;
+  }
+
+  &.top50 {
+    top: 50%;
+  }
+
+  &.top70 {
+    top: 70%;
+  }
+}
+
+.customContainer {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  border: 2px dashed #ccc;
+  margin: 20px;
+  padding: 10px;
+}

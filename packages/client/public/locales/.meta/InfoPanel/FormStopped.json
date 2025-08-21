@@ -1,0 +1,280 @@
+{
+  "key_path": "FormStopped",
+  "content": "Form stopped.",
+  "content_en_sha1_hash": "29785601a8c8de71454fde4d74d3b83fda068cae",
+  "created_at": "2025-05-19T21:30:54.867Z",
+  "updated_at": "2025-08-04T07:30:01.250Z",
+  "comment": {
+    "text": "This translation key is used to display a message indicating that a form has stopped or been cancelled. It appears in UI elements related to forms, such as buttons or alerts, where it conveys a negative outcome to the user.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:56.999Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 346,
+      "context": "case FeedActionKeys.FormCompletelyFilled:\n return t(\"InfoPanel:FormCompletelyFilled\");\n \n case FeedActionKeys.FormStopped:\n return t(\"InfoPanel:FormStopped\");\n \n default:\n return null;\n }\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
+      "line_number": 324,
+      "context": "case FeedActionKeys.FormCompletelyFilled:\n return t(\"InfoPanel:FormCompletelyFilled\");\n \n case FeedActionKeys.FormStopped:\n return t(\"InfoPanel:FormStopped\");\n \n default:\n return null;\n }\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'تم إيقاف تعبئة النموذج' is a literal translation of 'Form stopped.' While technically correct, it's not the most natural or concise way to express the meaning in Arabic. A more common and user-friendly translation would be something like 'تم إيقاف النموذج' or 'النموذج متوقف'.",
+          "suggestion": "النموذج متوقف"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Formular angehalten' is understandable, a more accurate and natural translation of 'Form stopped' would be 'Formular pausiert' or 'Formular angehalten (nicht weiter ausgeführt)'. 'Angehalten' can imply a forceful stop, whereas 'pausiert' suggests a temporary halt.",
+          "suggestion": "Formular pausiert"
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ջևաթուղթը դադարեցված է։' literally translates to 'The paper is stopped.' While conveying a similar meaning, 'Form stopped' often implies the process has halted, not just a physical stopping of paper. A more accurate translation might reflect that.",
+          "suggestion": "Մուտքային ձևը դադարեցված է։ (Mutqayin dzevը dadaretsvad e.) - 'The input form is stopped.' or Ձևը դադարեցվել է։ (Devը dadaretsvel e.) - 'The form has been stopped.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '中止されているフォーム' implies that the form has been stopped by someone or something, and is currently in a stopped state. The English 'Form stopped' is a more direct statement that the form has ceased operation. A more accurate translation would convey the action of stopping rather than the state of being stopped.",
+          "suggestion": "フォームが停止しました。"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Formulário parado\" is technically correct, it implies the form has been physically stopped. A more natural and accurate translation would convey that the form submission or processing has halted.",
+          "suggestion": "Formulário interrompido."
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Completarea formularului încetată\" is grammatically correct, it's a rather formal and less natural way to say \"Form stopped.\" A more common and user-friendly translation would be \"Formularul a fost oprit\" or \"Formularul a fost închis\".",
+          "suggestion": "Formularul a fost oprit"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'පෝරමය නතර විය.' while understandable, isn't the most natural or precise translation of 'Form stopped.' A more accurate and common phrasing would convey the form being 'closed' or 'disabled'.",
+          "suggestion": "පෝරමය අවසන් විය."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Формулар прекинут' is a literal translation of 'Form stopped.' While understandable, a more natural and idiomatic translation in Serbian (Cyrillic) might be 'Форма је заустављена.' or 'Формулар је прекинут'. The current translation sounds slightly awkward.",
+          "suggestion": "Форма је заустављена."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Formular prekinut' doesn't accurately convey the meaning of 'Form stopped.' 'Formular' is a less common word for 'form' in Serbian and 'prekinut' means 'stopped' or 'interrupted' in the sense of being cut off. A more natural translation would use 'obrazac' for 'form' and 'zaustavljen' for 'stopped'.",
+          "suggestion": "Obrazac zaustavljen."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Biểu mẫu đã bị dừng' while technically correct, sounds slightly awkward in Vietnamese. 'Biểu mẫu đã dừng' is more natural and concise.",
+          "suggestion": "Biểu mẫu đã dừng."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '表单填写已停止' (biǎo dān tiánxiě yǐ tíngzhǐ) translates more accurately to 'Form filling has stopped.' While technically correct, 'Form stopped' implies a more direct halt. A slightly better translation would convey the sense of finality of 'Form stopped'.",
+          "suggestion": "表单已停止 (Biǎo dān yǐ tíngzhǐ) - 'Form has stopped.'"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

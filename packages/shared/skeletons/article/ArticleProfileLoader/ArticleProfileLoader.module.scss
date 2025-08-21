@@ -1,0 +1,48 @@
+@use "../../../styles/variables/colors";
+@use "../../../styles/mixins";
+
+.container {
+  z-index: 209;
+  position: absolute;
+  bottom: 0;
+  inset-inline-start: 0;
+  min-width: 251px;
+  max-width: 251px;
+  background-color: var(--catalog-profile-background);
+
+  @include mixins.tablet-and-below {
+    min-width: 243px;
+    max-width: 243px;
+
+    &[data-show-text="false"] {
+      min-width: 60px;
+      max-width: 60px;
+    }
+  }
+}
+
+.block {
+  padding: 16px 20px;
+  height: 40px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-top: var(--catalog-profile-border-top);
+  border-inline-end: var(---catalog-profile-border-top);
+  background-color: var(--catalog-profile-background);
+
+  @include mixins.tablet-and-below {
+    padding: 16px 14px;
+  }
+
+  :global {
+    .title {
+      margin-inline-start: 12px;
+    }
+
+    .option-button {
+      margin-inline-start: auto;
+    }
+  }
+}

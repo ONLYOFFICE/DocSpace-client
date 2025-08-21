@@ -1,10 +1,8 @@
 {
   "ActiveSessions": "Aktivne sesije",
   "AutoDeleteTitle": "Sve sesije starije od 60 dana će biti automatski izbrisane.",
-  "ChangeEmailSuccess": "Email je uspešno promenjen",
   "ChangePasswordAfterLoggingOut": "Promeni lozinku posle odjavljivanja",
   "ConnectSocialNetworks": "Poveži svoje društvene mreže",
-  "DarkTheme": "Tamna tema",
   "DescriptionForSecurity": "Za veću bezbednost, morate promeniti vašu lozinku.",
   "DesktopTheme": "Sinhronizacija sa podešavanjima Desktop Uređivača",
   "DesktopThemeDescription": "Automatski menjaj između svetlih i tamnih tema u zavisnosti od trenutne teme Desktop Uređivača.",
@@ -13,7 +11,6 @@
   "ErrorAccountAlreadyUse": "Povezani nalog već koristi drugi korisnik",
   "FileManagement": "Upravljanje datotekama",
   "InterfaceTheme": "Tema interfejsa",
-  "LightTheme": "Svetla tema",
   "LogoutActiveConnection": "Odjavi se sa aktivnih konekcija",
   "LogoutAllActiveSessionsDescription": "Sve aktivne konekcije osim ove konekcije će biti odjavljene, zato što je trenutno u upotrebi.",
   "LogoutBtn": "Odjavi se",

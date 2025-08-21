@@ -1,0 +1,259 @@
+{
+  "key_path": "TurnOffDiskSpaceLimit",
+  "content": "Turn off disk space limit for this {{productName}}.",
+  "content_en_sha1_hash": "00f04ca4180774b7c9a26c6f91babcdac9551e23",
+  "created_at": "2025-05-19T21:30:49.361Z",
+  "updated_at": "2025-08-12T19:46:26.364Z",
+  "comment": {
+    "text": "This translation key is used to display a message that allows users to turn off the disk space limit feature in the {{productName}} application. The text appears in a dialog box when users need to change storage quota settings. It provides context for translators to ensure the correct phrase is used in the corresponding language.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T08:37:18.290Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/dialogs/change-storage-quota/index.tsx",
+      "line_number": 138,
+      "context": ": t(\"Common:ManageStorageQuota\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n {isDisableQuota\n ? t(\"Common:TurnOffDiskSpaceLimit\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"Common:SetDiskSpaceQuota\", {\n productName: t(\"Common:ProductName\"),\n })}",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'prostor' (space) is incorrectly translated. It doesn't accurately convey the meaning of 'for this' in the context of a product. It seems like a literal translation that doesn't fit the intended meaning.",
+          "suggestion": "Vypnutí limitu místa na disku pro tento {{productName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Turn off disk space limit' isn't perfectly captured by 'ປິດຈໍາກັດເນື້ອທີ່ໂຕ້ຫນາ'. While 'ປິດຈໍາກັດ' is close to 'turn off' and 'ເນື້ອທີ່' refers to space, 'ໂຕ້ຫນາ' (toonhaa) which translates to 'bold' doesn't accurately describe the limitation. A more accurate phrase would convey the concept of limiting or restricting disk space.",
+          "suggestion": "ປິດການຈໍາກັດເນື້ອທີ່ໂຕ້ຫນາສໍາລັບ {{productName}} ນີ້. (Consider rewording to a phrase more directly conveying restriction/limitation of disk space – e.g., 'ປິດການຈໍາກັດເນື້ອທີ່ໂຕ້ຫນາສໍາລັບ {{productName}} ນີ້.')"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Dezactivare limita spatiul de stocare pentru acest spațiu {{productName}}' is not an accurate translation of 'Turn off disk space limit for this {{productName}}'. 'Spațiu' (space) is redundant and doesn't fit the context. It implies a physical space instead of a feature.",
+          "suggestion": "Dezactivare limita spațiu de stocare pentru acest {{productName}}."
+        },
+        {
+          "type": "grammar",
+          "description": "While technically correct, the sentence structure 'Dezactivare limita spațiu de stocare...' could be more natural in Romanian. Starting with a verb or a more descriptive phrase might improve readability.",
+          "suggestion": "Elimină limita spațiului de stocare pentru acest {{productName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'තැටියේ' is a less common and potentially inaccurate translation for 'disk'. A more common and generally understood term would be 'ඩිස්කය'.",
+          "suggestion": "මෙම {{productName}} සඳහා ඩිස්කය ඉඩ සීමාව අක්‍රිය කරන්න."
+        },
+        {
+          "type": "grammar",
+          "description": "While not strictly incorrect, 'අක්‍රිය කරන්න' is a somewhat formal phrasing. A more conversational and natural phrasing would be 'නවත්වා' or 'තියුණු කරන්න'.",
+          "suggestion": "මෙම {{productName}} සඳහා ඩිස්කය ඉඩ සීමාව නවත්වා."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation 'priestor' is used instead of 'produkt' or a more appropriate term for 'product'. 'priestor' translates to 'space' which is not the intended meaning.  'produkt' would be a direct translation, but a more contextually appropriate word like 'výrobok' or simply removing the term and rephrasing might be better.",
+          "suggestion": "Consider using 'výrobok' (product) or rephrasing the sentence to avoid needing a direct translation of 'product'."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure is somewhat awkward. While grammatically correct, it could be improved for better flow and naturalness in Slovak.",
+          "suggestion": "Consider rephrasing to something like: 'Zakážte obmedzenie miesta na disku pre tento {{productName}}.' (Disable the disk space limit for this {{productName}}.)"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'prostor' (space) is used incorrectly. It translates to 'space' in a more general sense, not specifically 'disk space'.",
+          "suggestion": "Izklopite omejitev prostora na disku za ta disk {{productName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

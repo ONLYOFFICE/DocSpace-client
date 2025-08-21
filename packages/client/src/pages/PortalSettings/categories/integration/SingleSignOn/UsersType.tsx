@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,6 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { isMobile } from "@docspace/shared/utils";
 
@@ -54,18 +53,20 @@ const UsersType = (props: UsersTypeProps) => {
   };
 
   return (
-    <Box displayProp="flex" flexDirection="column" marginProp="24px 0">
-      <Box
-        alignItems="center"
-        displayProp="flex"
-        flexDirection="row"
-        gapProp="4px"
-        marginProp="0 0 8px 0"
+    <div style={{ display: "flex", flexDirection: "column", margin: "24px 0" }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "row",
+          gap: "4px",
+          margin: "0 0 8px 0",
+        }}
       >
         <Text fontWeight={600} fontSize="15px" lineHeight="16px">
           {t("LdapUsersType")}
         </Text>
-      </Box>
+      </div>
       <StyledInputWrapper>
         <Text fontWeight={400} fontSize="12px" lineHeight="16px">
           {t("LdapUserTypeTooltip", {
@@ -87,7 +88,7 @@ const UsersType = (props: UsersTypeProps) => {
           scaledOptions={!isMobile()}
         />
       </StyledInputWrapper>
-    </Box>
+    </div>
   );
 };
 

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,11 +26,12 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import moment from "moment";
+import classNames from "classnames";
 
 import { InputSize, InputType, TextInput } from "../text-input";
 
 import { TimePickerProps } from "./TimePicker.types";
-import TimeInput from "./TimePicker.styled";
+import styles from "./TimePicker.module.scss";
 
 const TimePicker = ({
   initialTime,
@@ -42,6 +43,7 @@ const TimePicker = ({
   onBlur,
   focusOnRender = false,
   forwardedRef,
+  testId,
 }: TimePickerProps) => {
   const hoursInputRef = useRef<HTMLInputElement>(null);
   const minutesInputRef = useRef<HTMLInputElement>(null);
@@ -187,12 +189,16 @@ const TimePicker = ({
     e.preventDefault();
 
   return (
-    <TimeInput
+    <div
       onClick={focusHoursInput}
-      className={className}
-      hasError={hasError}
-      isFocused={isInputFocused}
+      className={classNames(styles.timeInput, className, {
+        [styles.hasError]: hasError,
+        [styles.isFocused]: isInputFocused,
+      })}
       ref={forwardedRef}
+      data-testid={testId ?? "time-picker"}
+      role="group"
+      aria-label="Time picker"
     >
       <TextInput
         className={`${classNameInput}-hours-input`}
@@ -208,6 +214,8 @@ const TimePicker = ({
         autoComplete="off"
         inputMode="numeric"
         size={InputSize.base}
+        data-test-id="hours-input"
+        aria-label="Hours"
       />
       :
       <TextInput
@@ -224,8 +232,10 @@ const TimePicker = ({
         autoComplete="off"
         inputMode="numeric"
         size={InputSize.base}
+        data-test-id="minutes-input"
+        aria-label="Minutes"
       />
-    </TimeInput>
+    </div>
   );
 };
 

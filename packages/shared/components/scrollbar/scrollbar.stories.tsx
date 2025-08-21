@@ -29,41 +29,166 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Scrollbar } from ".";
 
 const meta = {
-  title: "Components/Scrollbar",
+  title: "Layout components/Scrollbar",
   component: Scrollbar,
   parameters: {
     docs: {
       description: {
-        component: "Scrollbar is used for displaying custom scrollbar",
+        component:
+          "Scrollbar is used for displaying custom scrollbar with auto-hide functionality, custom styling, and both vertical and horizontal scrolling support.",
       },
     },
   },
+  argTypes: {
+    autoHide: {
+      control: "boolean",
+      description: "Automatically hide scrollbar when not in use",
+      table: { defaultValue: { summary: "false" } },
+    },
+    fixedSize: {
+      control: "boolean",
+      description: "Keep scrollbar thumb size fixed",
+      table: { defaultValue: { summary: "false" } },
+    },
+    paddingAfterLastItem: {
+      control: "text",
+      description: "Add padding after the last item",
+    },
+    paddingInlineEnd: {
+      control: "text",
+      description: "Add padding-inline-end",
+    },
+    style: {
+      control: "object",
+      description: "Custom styles for the scrollbar container",
+    },
+  },
 } satisfies Meta<typeof Scrollbar>;
+
 type Story = StoryObj<typeof Scrollbar>;
 
 export default meta;
 
+const LongContent = () => (
+  <>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+      commodo consequat.
+    </p>
+    <p>
+      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+      dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+    <p>
+      Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+      doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo
+      inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+    </p>
+    <p>
+      Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut
+      fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem
+      sequi nesciunt.
+    </p>
+  </>
+);
+
 export const Default: Story = {
-  render: (args) => (
-    <Scrollbar {...args}>
-      ================================================================ Lorem
-      ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-      incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-      nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-      non proident, sunt in culpa qui officia deserunt mollit anim id est
-      laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-      minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-      ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.
-      ================================================================
-    </Scrollbar>
-  ),
   args: {
     style: { width: 300, height: 200 },
+    autoHide: false,
   },
+  render: (args) => (
+    <Scrollbar {...args}>
+      <LongContent />
+    </Scrollbar>
+  ),
+};
+
+export const WithAutoHide: Story = {
+  args: {
+    style: { width: 300, height: 200 },
+    autoHide: true,
+  },
+  render: (args) => (
+    <Scrollbar {...args}>
+      <LongContent />
+    </Scrollbar>
+  ),
+};
+
+export const WithFixedSize: Story = {
+  args: {
+    style: { width: 300, height: 200 },
+    autoHide: false,
+    fixedSize: true,
+  },
+  render: (args) => (
+    <Scrollbar {...args}>
+      <LongContent />
+    </Scrollbar>
+  ),
+};
+
+export const WithHorizontalScroll: Story = {
+  args: {
+    style: { width: 300, height: 100 },
+    autoHide: false,
+  },
+  render: (args) => (
+    <Scrollbar {...args}>
+      <div
+        style={{
+          whiteSpace: "nowrap",
+          padding: "10px",
+          display: "flex",
+          flexDirection: "row",
+        }}
+      >
+        <LongContent />
+      </div>
+    </Scrollbar>
+  ),
+};
+
+export const WithBothScrollbars: Story = {
+  args: {
+    style: { width: 300, height: 200 },
+    autoHide: false,
+  },
+  render: (args) => (
+    <Scrollbar {...args}>
+      <div style={{ width: "500px" }}>
+        <LongContent />
+      </div>
+    </Scrollbar>
+  ),
+};
+
+export const WithPaddingAfterLastItem: Story = {
+  args: {
+    style: { width: 300, height: 200 },
+    autoHide: false,
+    paddingAfterLastItem: "50px",
+  },
+  render: (args) => (
+    <Scrollbar {...args}>
+      <LongContent />
+    </Scrollbar>
+  ),
+};
+
+export const WithPaddingInlineEnd: Story = {
+  args: {
+    style: { width: 300, height: 200 },
+    autoHide: false,
+    paddingInlineEnd: "100px",
+  },
+  render: (args) => (
+    <Scrollbar {...args}>
+      <LongContent />
+    </Scrollbar>
+  ),
 };

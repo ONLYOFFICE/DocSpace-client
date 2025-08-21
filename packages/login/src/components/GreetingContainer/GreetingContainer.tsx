@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable @next/next/no-img-element */
-
 "use client";
 
 import React from "react";
@@ -37,17 +35,24 @@ import { getLogoUrl } from "@docspace/shared/utils/common";
 
 export const GreetingContainer = ({
   greetingText,
+  culture,
 }: {
   greetingText?: string | undefined;
+  culture?: string;
 }) => {
   const theme = useTheme();
 
-  const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !theme.isBase);
+  const logoUrl = getLogoUrl(
+    WhiteLabelLogoType.LoginPage,
+    !theme.isBase,
+    false,
+    culture,
+  );
 
   return (
     <>
       <img src={logoUrl} className="logo-wrapper" alt="greeting-logo" />
-      {greetingText && (
+      {greetingText ? (
         <Text
           fontSize="23px"
           fontWeight={700}
@@ -56,7 +61,7 @@ export const GreetingContainer = ({
         >
           {greetingText}
         </Text>
-      )}
+      ) : null}
     </>
   );
 };

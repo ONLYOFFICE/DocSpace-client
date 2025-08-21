@@ -24,64 +24,274 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
-
 import { LinkWithDropdown } from "./LinkWithDropdown";
-
-import { LinkWithDropDownProps } from "./LinkWithDropdown.types";
 
 const meta = {
   title: "Components/LinkWithDropdown",
   component: LinkWithDropdown,
-  parameters: { docs: { description: { component: "Link with dropdown" } } },
-  argTypes: {
-    color: { control: "color" },
-    dropdownType: { required: false },
-    // linkLabel: { control: "text", description: "Link text" },
-    // onItemClick: { action: "Button action", table: { disable: true } },
+  parameters: {
+    docs: {
+      description: {
+        component: `
+A dropdown component that appears as a link and expands to show a menu of options.
+
+## Features
+- Customizable text styles (font size, weight, color)
+- Optional expander icon
+- Support for disabled state
+- Theme support (light/dark)
+- Keyboard navigation
+- ARIA attributes for accessibility
+`,
+      },
+    },
   },
+  argTypes: {
+    children: {
+      control: "text",
+      description:
+        "Content to be displayed as the link text. Can be a string or React nodes",
+      table: {
+        type: { summary: "ReactNode" },
+        defaultValue: { summary: "undefined" },
+      },
+    },
+    data: {
+      control: "object",
+      description:
+        "Array of dropdown items. Each item should have: `key` (required), `label` (string), `onClick` (function), and optionally `isSeparator` (boolean)",
+      table: {
+        type: {
+          summary:
+            "Array<{ key: string; label?: string; onClick?: () => void; isSeparator?: boolean; }>",
+        },
+        defaultValue: { summary: "[]" },
+      },
+    },
+    fontWeight: {
+      control: "text",
+      description:
+        "CSS font-weight value. Can be a number (400, 500, etc.) or string (normal, bold, etc.). Used in conjunction with or instead of isBold",
+      table: {
+        type: { summary: "number | string" },
+        defaultValue: { summary: "undefined" },
+      },
+    },
+    isBold: {
+      control: "boolean",
+      description:
+        "Quick way to make text bold (equivalent to fontWeight: 'bold'). Takes precedence over fontWeight if both are specified",
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+      },
+    },
+    isTextOverflow: {
+      control: "boolean",
+      description:
+        "When true, long text will be truncated with ellipsis (...). Useful for fixed-width containers",
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+      },
+    },
+    color: {
+      control: "color",
+      description: "Text color of the link",
+      table: {
+        type: { summary: "string" },
+        defaultValue: { summary: "theme.color" },
+      },
+    },
+    dropdownType: {
+      control: "select",
+      options: ["alwaysDashed", "appearDashedAfterHover"],
+      description: "Determines when the dashed underline appears",
+      table: {
+        type: { summary: "string" },
+        defaultValue: { summary: "alwaysDashed" },
+      },
+    },
+    fontSize: {
+      control: "text",
+      description: "Font size of the link text",
+      table: {
+        type: { summary: "string" },
+        defaultValue: { summary: "13px" },
+      },
+    },
+    isDisabled: {
+      control: "boolean",
+      description: "Disables the dropdown functionality",
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+      },
+    },
+    withExpander: {
+      control: "boolean",
+      description: "Shows/hides the expander icon",
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+      },
+    },
+    isSemitransparent: {
+      control: "boolean",
+      description: "Makes the link semi-transparent",
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+      },
+    },
+    manualWidth: {
+      control: "text",
+      description:
+        "Sets a custom width for the dropdown menu. If not provided, the width is automatically calculated based on the content width plus padding",
+      table: {
+        type: { summary: "string" },
+        defaultValue: { summary: "undefined" },
+      },
+    },
+    fixedDirection: {
+      control: "boolean",
+      description: "Fixes the direction of the dropdown menu",
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+      },
+    },
+    directionY: {
+      control: "select",
+      options: ["top", "bottom"],
+      description: "Sets the direction of the dropdown menu",
+      table: {
+        type: { summary: "string" },
+        defaultValue: { summary: "bottom" },
+      },
+    },
+  },
+  tags: ["autodocs"],
+  decorators: [
+    (Story) => (
+      <div style={{ padding: "20px", marginBottom: "200px" }}>
+        <Story />
+      </div>
+    ),
+  ],
 } satisfies Meta<typeof LinkWithDropdown>;
+
 type Story = StoryObj<typeof meta>;
 
 export default meta;
 
-const Template = ({ ...args }: LinkWithDropDownProps) => {
-  const dropdownItems = [
-    {
-      key: "key1",
-      label: "Button 1",
-      onClick: () => {},
-    },
-    {
-      key: "key2",
-      label: "Button 2",
-      onClick: () => {},
-    },
-    {
-      key: "key3",
-      isSeparator: true,
-    },
-    {
-      key: "key4",
-      label: "Button 3",
-      onClick: () => {},
-    },
-  ];
-  return (
-    <LinkWithDropdown {...args} data={dropdownItems}>
-      Test link
-    </LinkWithDropdown>
-  );
-};
+const dropdownItems = [
+  {
+    key: "key1",
+    label: "Button 1",
+    onClick: () => console.log("Button 1 clicked"),
+  },
+  {
+    key: "key2",
+    label: "Button 2",
+    onClick: () => console.log("Button 2 clicked"),
+  },
+  {
+    key: "key3",
+    isSeparator: true,
+  },
+  {
+    key: "key4",
+    label: "Button 3",
+    onClick: () => console.log("Button 3 clicked"),
+  },
+];
 
 export const Default: Story = {
-  render: (args) => <Template {...args} />,
   args: {
+    children: "Default Link",
+    data: dropdownItems,
     fontSize: "13px",
     fontWeight: 400,
     isBold: false,
     isTextOverflow: false,
     isSemitransparent: false,
+    directionY: "bottom",
+    fixedDirection: true,
+    isDefaultMode: false,
+  },
+};
+
+export const WithExpander: Story = {
+  args: {
+    children: "Link with Expander",
+    data: dropdownItems,
+    fontSize: "13px",
+    fontWeight: 400,
+    isBold: false,
+    isTextOverflow: false,
+    isSemitransparent: false,
+    withExpander: true,
+    directionY: "bottom",
+    fixedDirection: true,
+    isDefaultMode: false,
+  },
+};
+
+export const CustomStyling: Story = {
+  args: {
+    children: "Custom Styled Link",
+    data: dropdownItems,
+    fontSize: "16px",
+    fontWeight: 600,
+    isBold: true,
+    color: "#4781d1",
+    directionY: "bottom",
+    fixedDirection: true,
+    isDefaultMode: false,
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    children: "Disabled Link",
+    data: dropdownItems,
+    fontSize: "13px",
+    fontWeight: 400,
+    isBold: false,
+    isTextOverflow: false,
+    isSemitransparent: false,
+    isDisabled: true,
+  },
+};
+
+export const SemiTransparent: Story = {
+  args: {
+    children: "Semi-transparent Link",
+    data: dropdownItems,
+    fontSize: "13px",
+    fontWeight: 400,
+    isBold: false,
+    isTextOverflow: false,
+    isSemitransparent: true,
+    directionY: "bottom",
+    fixedDirection: true,
+    isDefaultMode: false,
+  },
+};
+
+export const WithCustomWidth: Story = {
+  args: {
+    children: "Custom Width Link",
+    data: dropdownItems,
+    fontSize: "13px",
+    fontWeight: 400,
+    isBold: false,
+    isTextOverflow: false,
+    manualWidth: "300px",
+    directionY: "bottom",
+    fixedDirection: true,
+    isDefaultMode: false,
   },
 };

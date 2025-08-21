@@ -1,4 +1,5 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+/* eslint-disable func-names */
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,184 +26,338 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { render } from "@testing-library/react";
+import { screen, fireEvent, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { DropDown } from ".";
 
 const baseProps = {
   open: false,
-  isOpen: false,
-  // directionX: "left",
-  // directionY: "bottom",
+  directionX: "left" as const,
+  directionY: "bottom" as const,
   manualWidth: "100%",
   showDisabledItems: true,
-  withBackdrop: false,
 };
 
-// const baseChildren = <div label="1" />;
-
 describe("<DropDown />", () => {
-  it("rendered without error", () => {
+  it("renders without error", () => {
     render(<DropDown {...baseProps} />);
   });
 
-  // it("opened/isOpen", () => {
-  //   // @ts-expect-error TS(2769): No overload matches this call.
-  //   const wrapper = mount(<DropDown {...baseProps} open />);
+  it("renders children when open", () => {
+    render(
+      <DropDown {...baseProps} open>
+        <div data-testid="child">Test Content</div>
+      </DropDown>,
+    );
 
-  //
-  //   expect(wrapper.prop("open")).toEqual(true);
-  // });
+    expect(screen.getByTestId("child")).toBeInTheDocument();
+    expect(screen.getByTestId("child")).toHaveTextContent("Test Content");
+  });
 
-  // it("showDisabledItems", () => {
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2769): No overload matches this call.
-  //     <DropDown {...baseProps} open showDisabledItems={false} />,
-  //   );
+  it("applies correct directional classes", () => {
+    render(
+      <DropDown {...baseProps} open directionY="top" directionX="right">
+        <div>Content</div>
+      </DropDown>,
+    );
 
-  //
-  //   expect(wrapper.prop("showDisabledItems")).toEqual(false);
-  // });
+    const dropdown = screen.getByTestId("dropdown");
+    expect(dropdown).toHaveClass("directionTop");
+    expect(dropdown).toHaveClass("directionRight");
+    expect(dropdown).not.toHaveClass("directionBottom");
+    expect(dropdown).not.toHaveClass("directionLeft");
+  });
 
-  // it("render with backdrop", () => {
-  //   // @ts-expect-error TS(2769): No overload matches this call.
-  //   const wrapper = mount(<DropDown {...baseProps} open withBackdrop={true} />);
+  it("applies mobile view class when isMobileView is true", () => {
+    render(
+      <DropDown {...baseProps} open isMobileView>
+        <div>Content</div>
+      </DropDown>,
+    );
 
-  //
-  //   expect(wrapper.prop("withBackdrop")).toEqual(true);
-  // });
+    const dropdown = screen.getByTestId("dropdown");
+    expect(dropdown).toHaveClass("mobileView");
+  });
 
-  // it("directionX right", () => {
-  //   // @ts-expect-error TS(2769): No overload matches this call.
-  //   const wrapper = mount(<DropDown {...baseProps} directionX="right" />);
+  it("applies maxHeight class when maxHeight prop is provided", () => {
+    render(
+      <DropDown {...baseProps} open maxHeight={200}>
+        <div>Content</div>
+      </DropDown>,
+    );
 
-  //
-  //   expect(wrapper.prop("directionX")).toEqual("right");
-  // });
+    const dropdown = screen.getByTestId("dropdown");
+    expect(dropdown).toHaveClass("maxHeight");
+  });
 
-  // it("directionX right manualX", () => {
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2769): No overload matches this call.
-  //     <DropDown {...baseProps} directionX="right" manualX="100px" />,
-  //   );
+  it("applies withManualWidth class when manualWidth is provided", () => {
+    render(
+      <DropDown {...baseProps} open manualWidth="200px">
+        <div>Content</div>
+      </DropDown>,
+    );
 
-  //
-  //   expect(wrapper.prop("directionX")).toEqual("right");
-  // });
+    const dropdown = screen.getByTestId("dropdown");
+    expect(dropdown).toHaveClass("withManualWidth");
+  });
 
-  // it("directionY top", () => {
-  //   // @ts-expect-error TS(2769): No overload matches this call.
-  //   const wrapper = mount(<DropDown {...baseProps} directionY="top" />);
+  it("applies notReady class before dropdown is ready", () => {
+    render(
+      <DropDown {...baseProps} open>
+        <div>Content</div>
+      </DropDown>,
+    );
 
-  //
-  //   expect(wrapper.prop("directionY")).toEqual("top");
-  // });
+    const dropdown = screen.getByTestId("dropdown");
+    expect(dropdown).toHaveClass("notReady");
+  });
 
-  // it("directionY top manualY", () => {
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2769): No overload matches this call.
-  //     <DropDown {...baseProps} directionY="top" manualY="100%" />,
-  //   );
+  it("doesn't handle click outside when enableOnClickOutside is false", () => {
+    const onClose = jest.fn();
+    render(
+      <div>
+        <div data-testid="outside">Outside</div>
+        <DropDown {...baseProps} open clickOutsideAction={onClose}>
+          <div>Content</div>
+        </DropDown>
+      </div>,
+    );
 
-  //
-  //   expect(wrapper.prop("directionY")).toEqual("top");
-  // });
+    fireEvent.mouseDown(screen.getByTestId("outside"));
+    expect(onClose).not.toHaveBeenCalled();
+  });
 
-  // it("withArrow", () => {
-  //   // @ts-expect-error TS(2769): No overload matches this call.
-  //   const wrapper = mount(<DropDown {...baseProps} withArrow />);
+  it("applies custom styles correctly", () => {
+    render(
+      <DropDown
+        {...baseProps}
+        open
+        zIndex={1000}
+        maxHeight={200}
+        manualWidth="300px"
+        manualX="10px"
+        manualY="20px"
+      >
+        <div>Content</div>
+      </DropDown>,
+    );
 
-  //
-  //   expect(wrapper.prop("withArrow")).toEqual(true);
-  // });
+    const dropdown = screen.getByTestId("dropdown");
+    expect(dropdown).toHaveStyle({
+      "--z-index": "1000",
+      "--max-height": "200px",
+      "--manual-width": "300px",
+      "--manual-x": "10px",
+      "--manual-y": "20px",
+    });
+  });
 
-  // it("manualY", () => {
-  //   // @ts-expect-error TS(2769): No overload matches this call.
-  //   const wrapper = mount(<DropDown {...baseProps} manualY="100%" />);
+  it("doesn't handle keyboard events when enableKeyboardEvents is false", () => {
+    const onClose = jest.fn();
+    render(
+      <DropDown
+        {...baseProps}
+        open
+        enableKeyboardEvents={false}
+        clickOutsideAction={onClose}
+      >
+        <div>Content</div>
+      </DropDown>,
+    );
 
-  //
-  //   expect(wrapper.prop("manualY")).toEqual("100%");
-  // });
+    fireEvent.keyDown(document, { key: "Escape" });
+    expect(onClose).not.toHaveBeenCalled();
+  });
 
-  // it("manualX", () => {
-  //   // @ts-expect-error TS(2769): No overload matches this call.
-  //   const wrapper = mount(<DropDown {...baseProps} manualX="100%" />);
+  it("renders with custom class name", () => {
+    const customClass = "custom-dropdown";
+    render(
+      <DropDown {...baseProps} open className={customClass}>
+        <div>Content</div>
+      </DropDown>,
+    );
 
-  //
-  //   expect(wrapper.prop("manualX")).toEqual("100%");
-  // });
+    const dropdown = screen.getByTestId("dropdown");
+    expect(dropdown).toHaveClass(customClass);
+  });
 
-  // it("isUserPreview", () => {
-  //   // @ts-expect-error TS(2769): No overload matches this call.
-  //   const wrapper = mount(<DropDown {...baseProps} isUserPreview />);
+  it("applies directionX styles when not disabled", () => {
+    render(
+      <DropDown {...baseProps} open directionX="right">
+        <div>Content</div>
+      </DropDown>,
+    );
 
-  //
-  //   expect(wrapper.prop("isUserPreview")).toEqual(true);
-  // });
+    const dropdown = screen.getByTestId("dropdown");
+    expect(dropdown).toHaveClass("directionRight");
+  });
 
-  // it("with children", () => {
-  //   const wrapper = mount(<DropDown {...baseProps}>{baseChildren}</DropDown>);
+  it("renders virtual list with correct props", () => {
+    const items = [
+      { id: 1, label: "Item 1" },
+      { id: 2, label: "Item 2" },
+    ];
 
-  //
-  //   expect(wrapper.children()).toHaveLength(1);
-  // });
+    render(
+      <DropDown {...baseProps} open>
+        {items.map((item) => (
+          <div key={item.id}>{item.label}</div>
+        ))}
+      </DropDown>,
+    );
 
-  // it("with maxHeight and children", () => {
-  //   const child = <div>1</div>;
-  //   const wrapper = shallow(
-  //     // @ts-expect-error TS(2769): No overload matches this call.
-  //     <DropDown maxHeight={0}>{child}</DropDown>,
-  //   ).instance();
+    const dropdown = screen.getByTestId("dropdown");
+    expect(dropdown).toBeInTheDocument();
+    expect(screen.getByText("Item 1")).toBeInTheDocument();
+    expect(screen.getByText("Item 2")).toBeInTheDocument();
+  });
 
-  //
-  //   expect(wrapper.props.children).toEqual(child);
-  // });
+  it("handles fixed direction prop correctly", () => {
+    render(
+      <DropDown {...baseProps} open fixedDirection>
+        <div>Content</div>
+      </DropDown>,
+    );
 
-  // //TODO: Fix final condition checks
-  // /* it('componentDidUpdate() state lifecycle test', () => {
-  //   const wrapper = shallow(<DropDown {...baseProps} />);
-  //   const instance = wrapper.instance();
+    const dropdown = screen.getByTestId("dropdown");
+    expect(dropdown).toHaveClass("directionBottom");
+    expect(dropdown).toHaveClass("directionLeft");
+  });
 
-  //   wrapper.setState({ opened: true });
+  it("updates maxHeight based on calculatedHeight", () => {
+    const maxHeight = 200;
+    render(
+      <DropDown {...baseProps} open maxHeight={maxHeight}>
+        <div style={{ height: "300px" }}>Content</div>
+      </DropDown>,
+    );
 
-  //   instance.componentDidUpdate(wrapper.props(), wrapper.state());
+    const dropdown = screen.getByTestId("dropdown");
+    expect(dropdown).toHaveStyle({ height: `${maxHeight}px` });
+  });
 
-  //   expect(wrapper.state()).toBe(wrapper.state());
-  // }); */
+  describe("backdrop behavior", () => {
+    it("doesn't render backdrop when backDrop is false", () => {
+      render(
+        <DropDown {...baseProps} open withBackdrop={false}>
+          <div>Content</div>
+        </DropDown>,
+      );
 
-  // //TODO: Fix final condition checks
-  // /* it('componentDidUpdate() props lifecycle test', () => {
-  //   const wrapper = shallow(<DropDown {...baseProps} />);
-  //   const instance = wrapper.instance();
+      expect(document.querySelector(".backdrop")).not.toBeInTheDocument();
+    });
+  });
 
-  //   instance.componentDidUpdate({ open: true }, wrapper.state());
+  describe("position calculation", () => {
+    const mockViewport = (width: number, height: number) => {
+      const originalGetViewport = window.innerWidth;
+      const originalGetHeight = window.innerHeight;
 
-  //   expect(wrapper.props()).toBe(wrapper.props());
-  // }); */
+      Object.defineProperty(window, "innerWidth", {
+        value: width,
+        configurable: true,
+      });
+      Object.defineProperty(window, "innerHeight", {
+        value: height,
+        configurable: true,
+      });
 
-  // it("accepts id", () => {
-  //   // @ts-expect-error TS(2769): No overload matches this call.
-  //   const wrapper = mount(<DropDown {...baseProps} id="testId" />);
+      return () => {
+        Object.defineProperty(window, "innerWidth", {
+          value: originalGetViewport,
+          configurable: true,
+        });
+        Object.defineProperty(window, "innerHeight", {
+          value: originalGetHeight,
+          configurable: true,
+        });
+      };
+    };
 
-  //
-  //   expect(wrapper.prop("id")).toEqual("testId");
-  // });
+    beforeEach(() => {
+      jest
+        .spyOn(Element.prototype, "getBoundingClientRect")
+        .mockImplementation(function (this: Element) {
+          if (this.classList.contains("dropdown")) {
+            return {
+              width: 200,
+              height: 300,
+              top: 100,
+              left: 50,
+              right: 250,
+              bottom: 400,
+              x: 50,
+              y: 100,
+            } as DOMRect;
+          }
+          // Mock parent element rect
+          return {
+            width: 100,
+            height: 50,
+            top: 80,
+            left: 40,
+            right: 140,
+            bottom: 130,
+            x: 40,
+            y: 80,
+          } as DOMRect;
+        });
+    });
 
-  // it("accepts className", () => {
-  //   // @ts-expect-error TS(2769): No overload matches this call.
-  //   const wrapper = mount(<DropDown {...baseProps} className="test" />);
+    afterEach(() => {
+      jest.restoreAllMocks();
+    });
 
-  //
-  //   expect(wrapper.prop("className")).toEqual("test");
-  // });
+    it("calculates correct position for bottom-left alignment", () => {
+      const cleanup = mockViewport(1000, 800);
 
-  // it("accepts style", () => {
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2769): No overload matches this call.
-  //     <DropDown {...baseProps} open style={{ color: "red" }} />,
-  //   );
+      render(
+        <DropDown {...baseProps} open directionY="bottom" directionX="left">
+          <div>Content</div>
+        </DropDown>,
+      );
 
-  //
-  //   expect(wrapper.getDOMNode().style).toHaveProperty("color", "red");
-  // });
+      const dropdown = screen.getByTestId("dropdown");
+      expect(dropdown).toHaveClass("directionBottom");
+      expect(dropdown).toHaveClass("directionLeft");
+
+      cleanup();
+    });
+
+    it("maintains fixed direction when fixedDirection is true", () => {
+      const cleanup = mockViewport(1000, 300); // Small viewport height
+
+      render(
+        <DropDown
+          {...baseProps}
+          open
+          directionY="bottom"
+          directionX="left"
+          fixedDirection
+        >
+          <div>Content</div>
+        </DropDown>,
+      );
+
+      const dropdown = screen.getByTestId("dropdown");
+      expect(dropdown).toHaveClass("directionBottom");
+      expect(dropdown).toHaveClass("directionLeft");
+
+      cleanup();
+    });
+
+    it("applies manual positioning when provided", () => {
+      render(
+        <DropDown {...baseProps} open manualX="100px" manualY="200px">
+          <div>Content</div>
+        </DropDown>,
+      );
+
+      const dropdown = screen.getByTestId("dropdown");
+      expect(dropdown).toHaveStyle({
+        "--manual-x": "100px",
+        "--manual-y": "200px",
+      });
+    });
+  });
 });

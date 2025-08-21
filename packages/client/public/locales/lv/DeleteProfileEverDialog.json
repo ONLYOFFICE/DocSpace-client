@@ -6,17 +6,17 @@
   "DeleteGroupUsersSuccessMessage": "Lietotāji ir veiksmīgi izdzēsti.",
   "DeleteGuest": "Izdzēst viesi",
   "DeleteGuests": "Izdzēst viesus",
-  "DeleteMyDocumentsUser": "Visi šī lietotāja personiskie faili un mapes sadaļā Mani dokumenti tiks neatgriezeniski izdzēsti.",
-  "DeletePersonalData": "Personas dati, visi personas faili un mapes atlasīto lietotāju sadaļās Dokumenti un Atkritne * tiks neatgriezeniski izdzēsti. Atlasīto lietotāju faili un mapes, kas tiek glabātas kopējās sadaļās*, piemēram, telpās, paliks {{productName}}.",
   "DeletePersonalDataApplicable": "*Attiecas uz atlasītajiem lietotājiem, kuriem ir šādi faili un mapes.",
-  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Šī lietotāja izveidotās telpas un šajās telpās glabātie dokumenti tiks automātiski piešķirti administratoram, kurš izdzēsīs: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Manuāli atkārtoti piešķiriet datus, lai atkārtotai piešķiršanai izvēlētos citu mērķa lietotāju.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Šī lietotāja izveidotās telpas un šajās telpās glabātie dokumenti tiks automātiski piešķirti administratoram, kurš izdzēsīs: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Manuāli atkārtoti piešķiriet datus, lai atkārtotai piešķiršanai izvēlētos citu mērķa lietotāju.",
   "DeleteReqassignDescriptionGuest": "{{userCaption}} tiks izdzēsts no visām telpām, uz kurām viņi tika uzaicināti. Telpās izveidotie {{userCaption}} dokumenti tiks automātiski piešķirti telpu īpašniekiem.",
   "DeleteUser": "Dzēst lietotāju",
-  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> tiks izdzēsts. Šo darbību nevar atsaukt.",
+  "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> tiks izdzēsts. Šo darbību nevar atsaukt.",
   "DeletingUsers": "Lietotāju dzēšana",
+  "PersonalDataDeletionInfo": "Personas dati, visi personīgie faili un mapes izvēlēto lietotāju sadaļās {{sectionNameFirst}} un {{sectionNameSecond}}* tiks neatgriezeniski dzēsti. Izvēlēto lietotāju faili un mapes, kas glabājas kopīgās sadaļās* (piemēram, telpās), paliks {{productName}}.",
   "PleaseNote": "Ievērojiet:",
   "ReassignDataToAnotherUser": "Atkārtoti piešķirt datus citam lietotājam",
   "SuccessfullyDeleteGuestInfoMessage": "Viesis ir veiksmīgi izdzēsts",
   "SuccessfullyDeleteUserInfoMessage": "Lietotājs ir veiksmīgi izdzēsts",
-  "ToBeAbleToReassignData": "Lai varētu atkārtoti piešķirt datus, vienlaikus izdzēsiet vienu lietotāju."
+  "ToBeAbleToReassignData": "Lai varētu atkārtoti piešķirt datus, vienlaikus izdzēsiet vienu lietotāju.",
+  "UserFilesRemovalScope": "Personas dati, visi faili un mapes šī lietotāja sadaļās {{sectionNameFirst}} un {{sectionNameSecond}} tiks neatgriezeniski dzēsti."
 }

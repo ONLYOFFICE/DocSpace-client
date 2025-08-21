@@ -1,0 +1,271 @@
+{
+  "key_path": "PortalSecurityTitle",
+  "content": "This subsection allows you to provide users with secure and convenient ways to access the portal.",
+  "content_en_sha1_hash": "0f3b230f6983fda1db2a358a7aa46ce3c5840a0f",
+  "created_at": "2025-05-19T21:30:52.300Z",
+  "updated_at": "2025-06-18T17:11:42.490Z",
+  "comment": {
+    "text": "This translation key is used for the subtitle displayed next to a button or similar element that allows users to access the secure portal. It provides a brief description of the functionality offered by this section, helping users understand its purpose in the portal settings page.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:43.037Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
+      "line_number": 138,
+      "context": "return (\n <MainContainer\n className=\"desktop-view\"\n withoutExternalLink={!helpCenterDomain}\n >\n <Text className=\"subtitle\">{t(\"PortalSecurityTitle\")}</Text>\n \n <Text fontSize=\"16px\" fontWeight=\"700\">\n {t(\"SettingPasswordTittle\")}\n </Text>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Tässä aliosiossa voit tarjota käyttäjille turvallisia ja käteviä tapoja portaaliin pääsyyn' is a bit literal and less natural. While technically correct, it doesn't flow as smoothly in Finnish. A more idiomatic translation would be better.",
+          "suggestion": "Tässä osiossa voit tarjota käyttäjille turvallisia ja helppoja tapoja päästä portaaliin."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'տրամադրել' (t Ramadrel) which means 'to provide' is not the most natural or precise way to convey 'allow' in this context. It implies an action being provided to the users, rather than granting them permission. A better translation would convey the idea of 'enabling' or 'providing access'.",
+          "suggestion": "Consider replacing 'տրամադրել' with a word like 'ձեռք բերել' (dzerk' bernel - to obtain/acquire) or rephrasing the sentence to better convey the meaning of 'allow'."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ປະຕູ' (door) doesn't accurately convey 'portal'. 'Portal' refers to a digital entry point or gateway. A more suitable term would be something like 'ເວັບໄຊ້' (website) or 'ລະບົບ' (system), depending on the context.",
+          "suggestion": "Consider using 'ເວັບໄຊ້' (website) or 'ລະບົບ' (system) instead of 'ປະຕູ' (door)."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'ວິທີທີ່ປອດໄພແລະສະດວກ' is a literal translation but might sound awkward. It might be improved for better flow in Lao.",
+          "suggestion": "Consider phrasing it as 'ວິທີການທີ່ປອດໄພແລະໃຊ້ງ່າຍ' or 'ທາງເຂົ້າທີ່ປອດໄພແລະສະດວກ' to improve the natural flow."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'nodrošināt drošus un ērtus veidus' (to provide secure and convenient ways) doesn't accurately reflect the intended meaning of 'allows users with secure and convenient ways'. It implies the users are providing the ways, not being provided them. A better phrasing would focus on enabling or offering the ways.",
+          "suggestion": "Šī apakšsadaļa ļauj lietotājiem piekļūt portālam drošos un ērtos veidos."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Esta subseção permite fornecer aos usuários maneiras seguras e convenientes de acessar o portal' is grammatically correct, but the verb 'fornecer' (to provide) doesn't quite capture the nuance of 'allows'. A better phrasing would convey that the section *enables* users to access the portal securely.",
+          "suggestion": "Esta subseção permite que os usuários acessem o portal de forma segura e conveniente."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Esta subseção permite fornecer aos usuários maneiras seguras e convenientes de acessar o portal' is grammatically correct but not the most natural way to express the English meaning in Portuguese.  'Permite fornecer' is a bit awkward. A more natural phrasing would be 'Esta subseção permite que você ofereça aos usuários...'",
+          "suggestion": "Esta subseção permite que você ofereça aos usuários maneiras seguras e convenientes de acessar o portal."
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Această subsecțiune vă permite să le oferă utilizatorilor accesul sigur și convenabil la portal' is not a precise translation of 'This subsection allows you to provide users with secure and convenient ways to access the portal.' The pronoun 'le' is awkward and doesn't fit the sentence structure. It should convey 'to provide *them*'.",
+          "suggestion": "Această subsecțiune vă permite să oferiți utilizatorilor modalități sigure și convenabile de a accesa portalul."
+        },
+        {
+          "type": "formatting",
+          "description": "The Romanian translation uses 'accesul sigur și convenabil' which is a bit clunky. 'Modalități sigure și convenabile' sounds more natural in this context.",
+          "suggestion": "Replace 'accesul sigur și convenabil' with 'modalități sigure și convenabile'."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"මෙම අනුකොටස පරිශ්‍රීලකයින්ට ද්වාරය වෙත ප්‍රවේශ වීමට ආරක්‍ෂිත සහ පහසු ක්‍රම ලබා දීමට ඉඩ සලසයි\" is a bit too literal and verbose. It translates to 'This subsection allows users to provide ways to access the portal securely and conveniently'.  The verb 'provide' is awkward. A better translation would focus on enabling access rather than providing methods.",
+          "suggestion": "මෙම අනුකොටස පරිශ්‍රීලකයින්ට ද්වාරයට ආරක්ෂිත හා පහසු ප්‍රවේශයක් ලබා ගැනීමට හැකි කරයි."
+        },
+        {
+          "type": "grammar",
+          "description": "The passive voice used in the suggestion is common in Sinhala but could be slightly rephrased for improved flow. While grammatically correct, a more direct phrasing may be preferable.",
+          "suggestion": "මෙම අනුකොටස පරිශ්‍රීලකයින්ට ද්වාරයට ආරක්ෂිත හා පහසු ප්‍රවේශයක් ලබා ගැනීමට ඉඩකඩ සලසයි."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

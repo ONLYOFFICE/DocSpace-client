@@ -1,0 +1,367 @@
+{
+  "key_path": "EnableThirdPartyIntegration",
+  "content": "Please ask a {{productName}} owner or administrator to enable the corresponding service in the Integration section of the {{productName}} Settings.",
+  "content_en_sha1_hash": "35e9604b801c1ceaa5a2a8906693118c1ffb1762",
+  "created_at": "2025-05-19T21:30:44.932Z",
+  "updated_at": "2025-05-26T07:57:32.266Z",
+  "comment": {
+    "text": "This translation key is used to provide a tooltip or hint for users when they need to enable third-party integration in the {{productName}} settings. The text appears as a tooltip next to a button that triggers this action in the Create/Edit Room Dialog component, indicating the step required to proceed further.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:36:26.758Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ThirdPartyStorage/ThirdPartyComboBox.js",
+      "line_number": 244,
+      "context": "};\n \n const getTextTooltip = () => {\n return (\n <Text fontSize=\"12px\" noSelect>\n {t(\"Common:EnableThirdPartyIntegration\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n );\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'يرجى' (yarja) is a slightly formal way to say 'please'. A more common and natural phrasing in Saudi Arabian Arabic could be used.",
+          "suggestion": "من فضلك (min fadlik)"
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the phrase 'في قسم التكامل ضمن إعدادات {{productName}}' could be slightly more fluid. The order of 'التكامل' (integration) and 'إعدادات' (settings) could be improved.",
+          "suggestion": "في قسم التكامل بإعدادات {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses a semicolon where a period might be more appropriate, especially in a formal instruction. It's stylistically less common to end sentences with semicolons in Azerbaijani.",
+          "suggestion": "Lütfən, {{productName}} sahibindən və ya administratordan {{productName}} Parametrlərinin İnteqrasiya bölməsində müvafiq xidməti aktivləşdirməsini xahiş edin."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translated text uses a semicolon (;) which is less common in Bulgarian sentence structure and feels slightly unnatural. A conjunction like 'и' would flow better.",
+          "suggestion": "Моля, помолете собственик или администратор на {{productName}} да активира съответната услуга в раздела Интегриране на настройките на {{productName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Czech translation contains a period at the end of 'Nastavení.' It should be separated from the previous part of the sentence with a comma.",
+          "suggestion": "Požádejte prosím vlastníka nebo správce {{productName}} o povolení příslušné služby v sekci Integrace u {{productName}}, Nastavení."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The German translation uses a hyphenated compound word \"Integration\" which might not be ideal for readability. Consider using a space.",
+          "suggestion": "Bitten Sie einen {{productName}}-Besitzer oder -Administrator, den entsprechenden Dienst im Abschnitt \"Integration\" (with a space) der {{productName}}-Einstellungen zu aktivieren."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Greek translation uses a full stop (.) after 'Ρυθμίσεις' which is not standard in this context. A colon (:) or no punctuation is more appropriate to follow the product name.",
+          "suggestion": "Replace '.' with ':' or remove the punctuation entirely after '{{productName}}'."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"habilite el servicio correspondiente\" is a bit formal and not the most natural way to say \"enable the corresponding service\". A more natural phrasing would be \"active el servicio correspondiente\" or \"configure el servicio correspondiente\".",
+          "suggestion": "Por favor, pida al propietario o administrador de {{productName}} que active el servicio correspondiente en la sección Integración de la Configuración de {{productName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The colon in \"{{productName}}:n\" feels slightly unnatural in Finnish. While grammatically correct, a more natural phrasing might omit it.",
+          "suggestion": "Ole hyvä ja pyydä {{productName}} omistajaa tai pääkäyttäjää ottamaan käyttöön vastaava palvelu {{productName}} asetusten integraatio-osiossa."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase 'des paramètres' after 'section Intégration' is slightly awkward and could be improved for flow.",
+          "suggestion": "Veuillez demander au propriétaire ou à l'administrateur de {{productName}} d'activer le service correspondant dans la section Intégration des {{productName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The sentence structure is a bit awkward. While grammatically correct, it could be improved for natural flow. Using a more direct phrasing would be better.",
+          "suggestion": "Խնդրում ենք {{productName}}-ի սեփականատիրոջը կամ ադմինիստրատորին ակտիվացնել համապատասխան ծառայությունը {{productName}} կարգավորումների ինտեգրման բաժնում:"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "“enable” is translated as “միացնել” which is more accurately 'turn on'. 'activate' (ակտիվացնել) would be a more appropriate translation for the context of enabling a service within a settings panel.",
+          "suggestion": "Խնդրում ենք {{productName}}-ի սեփականատիրոջը կամ ադմինիստրատորին ակտիվացնել համապատասխան ծառայությունը {{productName}} կարգավորումների ինտեգրման բաժնում:"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Lao translation uses a mix of Lao and English words (e.g., 'Settings'). It would be more consistent to translate 'Settings' into Lao if possible. Although understandable, it detracts from the overall localization.",
+          "suggestion": "Consider translating 'Settings' to something like 'ການຕັ້ງຄ່າລວມ' (kan tang kha long)"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses a period (.) after 'Integrācija'. While grammatically correct, the English original does not have a period at the end of the sentence. Consistency in formatting is preferred.",
+          "suggestion": "Lūdziet {{productName}} īpašniekam vai administratoram iespējot atbilstošo pakalpojumu {{productName}} iestatījumu sadaļā Integrācija"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Dutch translation uses 'Integratie' (capitalized) which should consistently match the English 'Integration' if it refers to a specific section. Consider lowercasing to 'integratie' for consistency, unless 'Integratie' is a formally named section.",
+          "suggestion": "Consider using 'integratie' instead of 'Integratie'."
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Polish translation uses a comma (,) instead of a period (.) to separate the clauses 'w sekcji Integracja' and 'w ustawieniach {{productName}}'. In Polish, a period is generally preferred.",
+          "suggestion": "Poproś właściciela lub administratora {{productName}} o włączenie odpowiedniej usługi w sekcji Integracja. w ustawieniach {{productName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Portuguese translation uses 'das Configurações' which is less common and slightly awkward. It would be more natural to use 'em Configurações'.",
+          "suggestion": "Peça a um proprietário ou administrador de {{productName}} para ativar o serviço correspondente na seção Integração em Configurações de {{productName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'das {{productName}} Configurações' is not idiomatic Portuguese. It's unnecessarily adding 'das' which implies possession when it's not needed. It sounds awkward.",
+          "suggestion": "Solicite ao proprietário ou administrador do {{productName}} que ative o serviço correspondente na seção Integração do {{productName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The variable {{productName}} is not consistently formatted. While present in both the English and Romanian versions, ensuring consistent casing and spacing is recommended for clarity and maintainability.",
+          "suggestion": "Ensure consistent casing and spacing for the variable {{productName}} throughout the translated content."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'සක්‍රීය' (sakriya) is a valid word but 'ප්‍රවර්ධනය' (prawadhanya) could be more appropriate depending on the context. 'සක්‍රීය' means 'active' and can sometimes imply something was previously inactive, while the context here indicates enabling a feature.",
+          "suggestion": "කරුණාකර {{productName}} සැකසීම්වල ඒකාබද්ධ කිරීමේ කොටසේ අනුරූප සේවාව ප්‍රවර්ධනය කරන ලෙස {{productName}} හිමිකරුවෙකුගෙන් හෝ පරිපාලකයෙකුගෙන් ඉල්ලා සිටින්න."
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the use of 'හෝ' (ho) directly after 'එකතු' can sound slightly less fluent. Replacing it with a comma or slight rewording might improve readability.",
+          "suggestion": "කරුණාකර {{productName}} සැකසීම්වල ඒකාබද්ධ කිරීමේ කොටසෙහි අනුරූප සේවාව සක්‍රීය කරන ලෙස {{productName}} හිමිකරුවෙකුගෙන්, හෝ පරිපාලකයෙකුගෙන් ඉල්ලා සිටින්න."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English term 'service' is better translated as 'službu' rather than 'funkciu'. While 'funkcia' isn't *incorrect*, 'službu' aligns more closely with the intended meaning of an integrated service.",
+          "suggestion": "Požiadajte vlastníka alebo administrátora {{productName}}, aby povolil príslušnú službu v časti Integrácia v nastaveniach {{productName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Prosite lastnika ali skrbnika\" is a bit clunky and could be more naturally translated. While technically correct, it's not the most elegant way to phrase a request in Slovenian.",
+          "suggestion": "Please ask the {{productName}} owner or administrator to enable the corresponding service in the Integration section of the {{productName}} Settings.  Could be rephrased to something like 'Prosim lastnika ali upravljalca {{productName}}, da omogoči...' or 'Povabite lastnika ali skrbnika {{productName}}, da omogoči...'"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'одговарајућу' (odgovarajuću) could be slightly improved for better flow in this context. It translates to 'corresponding' but feels a bit formal.",
+          "suggestion": "Молимо вас да замолите власника или администратора {{productName}} да омогући релевантну услугу у одељку за интеграцију у Подешавањима {{productName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation includes a space before the opening curly brace '{' in '{{productName}}'. While not strictly incorrect, it's unusual and inconsistent with typical formatting in user interfaces.",
+          "suggestion": "Remove the space before the opening curly brace: {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Etentgrasyon' is misspelled. It should be 'Entegrasyon'.",
+          "suggestion": "Entegrasyon"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"bật dịch vụ tương ứng\" is a somewhat literal translation of \"enable the corresponding service.\" A more natural Vietnamese phrasing would be \"kích hoạt dịch vụ liên quan\" or \"bật tính năng liên quan\".",
+          "suggestion": "Vui lòng yêu cầu chủ sở hữu hoặc quản trị viên {{productName}} kích hoạt dịch vụ liên quan trong phần Tích hợp của Cài đặt {{productName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

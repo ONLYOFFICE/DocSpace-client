@@ -6,17 +6,17 @@
   "DeleteGroupUsersSuccessMessage": "İstifadəçilər müvəffəqiyyətlə silinmişdir.",
   "DeleteGuest": "Qonağı silin",
   "DeleteGuests": "Qonaqları silin",
-  "DeleteMyDocumentsUser": "Bu istifadəçinin Sənədlərdəki bütün şəxsi faylları və qovluqları həmişəlik silinəcək.",
-  "DeletePersonalData": "Seçilmiş istifadəçilərin Sənədlər və Zibil bölmələrində* şəxsi məlumatları, bütün şəxsi faylları və qovluqları həmişəlik silinəcək. Seçilmiş istifadəçilərin fayl və qovluqları otaqlar kimi ümumi yerlərdə* saxlanılan {{productName}} daxilində qalacaq.",
   "DeletePersonalDataApplicable": "*Belə fayl və qovluqları olan seçilmiş istifadəçilərə aiddir.",
-  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Bu istifadəçi tərəfindən yaradılan otaqlar və onlarda saxlanılan sənədlər avtomatik olaraq silməni həyata keçirən administratora yenidən təyin ediləcək: <strong>{{{userPerformedDeletion}} ({{userYou}})</strong>. Yenidən təyinata başqa bir hədəf istifadəçi seçmək üçün məlumatları əl ilə yenidən təyin edin.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Bu istifadəçi tərəfindən yaradılan otaqlar və onlarda saxlanılan sənədlər avtomatik olaraq silməni həyata keçirən administratora yenidən təyin ediləcək: <1>{{{userPerformedDeletion}} ({{userYou}})</1>. Yenidən təyinata başqa bir hədəf istifadəçi seçmək üçün məlumatları əl ilə yenidən təyin edin.",
   "DeleteReqassignDescriptionGuest": "{{userCaption}} dəvət olunduqları bütün otaqlardan silinəcək. Bu {{userCaption}} tərəfindən otaqlarda yaradılmış sənədlər avtomatik olaraq otaq sahiblərinə təyin ediləcək.",
   "DeleteUser": "İstifadəçini sil",
-  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> silinəcək. Bu əməliyyat geri qaytarıla bilməz.",
+  "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> silinəcək. Bu əməliyyat geri qaytarıla bilməz.",
   "DeletingUsers": "İstifadəçilər silinir",
+  "PersonalDataDeletionInfo": "Şəxsi məlumatlar, seçilmiş istifadəçilərin {{sectionNameFirst}} və {{sectionNameSecond}} bölmələrindəki bütün şəxsi fayllar və qovluqlar həmişəlik silinəcək. Seçilmiş istifadəçilərin otaqlar kimi ümumi bölmələrdə* saxlanılan fayl və qovluqları {{productName}}-da qalacaq.",
   "PleaseNote": "Lütfən, nəzərə alın",
   "ReassignDataToAnotherUser": "Məlumatı başqa istifadəçiyə təyin edin",
   "SuccessfullyDeleteGuestInfoMessage": "Qonaq uğurla silindi",
   "SuccessfullyDeleteUserInfoMessage": "İstifadəçi müvəffəqiyyətlə silinmişdir",
-  "ToBeAbleToReassignData": "Məlumatı yenidən təyin etmək üçün bir istifadəçini silin."
+  "ToBeAbleToReassignData": "Məlumatı yenidən təyin etmək üçün bir istifadəçini silin.",
+  "UserFilesRemovalScope": "Şəxsi məlumatlar, bu istifadəçinin {{sectionNameFirst}} və {{sectionNameSecond}} bölmələrindəki bütün fayl və qovluqlar həmişəlik silinəcək."
 }

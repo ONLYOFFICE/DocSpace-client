@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -56,7 +56,7 @@ const PasswordEntryDialog = ({
   onClickDownload,
 }: PasswordEntryDialogProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const abortControllerRef = useRef<AbortController>();
+  const abortControllerRef = useRef<AbortController>(undefined);
 
   const { t } = useTranslation(["UploadPanel", "Common"]);
 
@@ -139,7 +139,7 @@ const PasswordEntryDialog = ({
       onClose={handleClose}
       displayType={ModalDialogType.modal}
     >
-      <ModalDialog.Header>{t("UploadPanel:EnterPassword")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:EnterPassword")}</ModalDialog.Header>
       <ModalDialog.Body>
         <ModalContentContainer>
           <span>{t("Common:NeedPassword")}:</span>

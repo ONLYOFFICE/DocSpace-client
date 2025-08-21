@@ -1,0 +1,446 @@
+{
+  "key_path": "ThirdPartyStorageDescription",
+  "content": "Backup can be saved to a third-party storage. Before, you need to connect the corresponding service in the 'Integration' section. Otherwise, the following settings will be inactive.",
+  "content_en_sha1_hash": "5e6be94c1952c34628c180bcbab06fe0c10d622a",
+  "created_at": "2025-05-19T21:30:52.927Z",
+  "updated_at": "2025-05-24T03:54:50.112Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"وحدة تخزين تابعة لجهة خارجية\" (unit storage affiliated with a third party) is a bit literal and clunky. A more natural phrasing would be something like \"خدمة تخزين خارجية\" (external storage service) or \"مخزن خارجي\" (external storage).",
+          "suggestion": "يمكن حفظ النسخ الاحتياطي في خدمة تخزين خارجية. (Backup can be saved to an external storage service.) or يمكن حفظ النسخ الاحتياطي في مخزن خارجي. (Backup can be saved to an external storage.)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"قبل ذلك\" (before that) is a bit stiff and not the most natural way to express the meaning in Arabic. A smoother phrasing would be something like \"مسبقًا\" or simply omit the phrase entirely.",
+          "suggestion": "مسبقًا، تحتاج إلى توصيل الخدمة المقابلة في قسم \"التكامل\". (Previously, you need to connect the corresponding service in the 'Integration' section.) or تحتاج إلى توصيل الخدمة المقابلة في قسم \"التكامل\". (You need to connect the corresponding service in the 'Integration' section.)"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of quotation marks for \"التكامل\" is inconsistent with standard Arabic typesetting. It might be better to use Arabic quotation marks or simply use regular parenthesis.",
+          "suggestion": "قسم (التكامل)"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Before, you need to connect' is a bit awkward. A more natural phrasing in Azerbaijani would be 'Əvvəlcə qoşulmanız lazımdır'.",
+          "suggestion": "Əvvəlcə qoşulmanız lazımdır"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'inactive' is translated as 'aktivləşdirilməyəcək' which literally means 'will not be activated'. A better translation would convey that the settings are disabled or unavailable, such as 'işləməyəcək' or 'dəyişdirilə bilməyəcək'.",
+          "suggestion": "dəyişdirilə bilməyəcək"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Before, you need to connect\" is awkward in Greek. A more natural phrasing would be 'Πριν από αυτό, θα πρέπει να συνδέσετε'. The original phrasing suggests a condition not a suggestion.",
+          "suggestion": "Πριν από αυτό, θα πρέπει να συνδέσετε"
+        },
+        {
+          "type": "formatting",
+          "description": "The word 'Integration' is in English within a Greek sentence, which is inconsistent. While acceptable for some contexts, maintaining consistent language is preferable. The translation uses 'Ενοποίηση' which is the Greek equivalent.",
+          "suggestion": "Consider whether to consistently translate technical terms or keep the original. If translating, ensure the context suits 'Ενοποίηση'."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"passiivisia\" (passive) doesn't accurately convey the meaning of \"inactive\" in this context. It implies a state of being acted upon, rather than being disabled or unavailable.",
+          "suggestion": "A better translation for 'inactive' would be 'ei aktiivisia' or 'poissa käytöstä'.  For example, 'Muussa tapauksessa seuraavat asetukset ovat poissa käytöstä.'"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure could be improved for better readability in Finnish.  While grammatically correct, it sounds slightly stilted.",
+          "suggestion": "Consider restructuring to something like: 'Muussa tapauksessa seuraavat asetukset eivät ole käytössä.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'il faut vous connecter le service correspondant' is grammatically awkward and doesn't accurately convey the meaning of 'you need to connect the corresponding service'.",
+          "suggestion": "Il faut connecter le service correspondant."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The sentence structure is a bit clunky. While technically correct, it could be more natural in French.",
+          "suggestion": "Avant de pouvoir enregistrer la sauvegarde sur un stockage tiers, vous devez connecter le service correspondant dans la section 'Intégration'. Sinon, les paramètres suivants seront désactivés."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Մինչև' (Minchev) is not an appropriate translation for 'Before' in this context. It translates more to 'Until'.",
+          "suggestion": "Replace 'Մինչև' with a more suitable word like 'առաջարկվում է' (aracharkvom e) or rephrase the sentence to better convey the meaning of 'Before'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "'Ամբողջացում' is not the correct translation for 'Integration'. It translates to 'Completeness' or 'Integration' but doesn't convey the intended meaning of 'Integration' section.",
+          "suggestion": "Replace 'Ամբողջացում' with 'Միավորում' (Miavorum) or a more contextually appropriate term for 'Integration'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Հետևյալ կարգավորումներն անգործուն կլինեն' (Hetevyal kargavorumnern angorts’un klinen) is a somewhat literal and slightly awkward translation of 'the following settings will be inactive.'",
+          "suggestion": "Rephrase to something more natural like 'Հետևյալ գործառույթները աշխատուն չեն լինի' (Hetevyal gorarumutyuner ashkharhun chen lini) or 'Հետևյալ կարգավորումները չեն աշխատի' (Hetevyal kargavorumnern chen ashxati)."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase '상응하는 서비스에 연결해야 합니다' (saeng-eong-ha-neun seobiseue connects-haeya hamnida) can be a bit formal and potentially unclear. A more natural and understandable translation for 'connect the corresponding service' would be something like '해당 서비스에 연결해야 합니다' (hae-dang seobiseue connects-haeya hamnida).",
+          "suggestion": "백업은 타사 저장소에 저장될 수 있습니다. 그 전에 '통합' 섹션에서 해당 서비스에 연결해야 합니다. 그렇지 않으면, 다음 설정이 활성화되지 않습니다."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ບ່ອນເກັບຂໍ້ມູນ ພາກສ່ວນທີສາມ\" translates literally to \"third-party storage location\". While understandable, it's less natural in Lao. A more idiomatic translation for \"third-party storage\" would be something like \"ການເກັບຂໍ້ມູນຂອງບຸກຄົນທີສາມ\" or \"ບ່ອນເກັບຂໍ້ມູນພາກສ່ວນທີສາມ\" (though the latter is closer to the literal translation and can be kept if preferred, but should be carefully reviewed for naturalness in context).",
+          "suggestion": "Consider revising to \"ການເກັບຂໍ້ມູນຂອງບຸກຄົນທີສາມ\" or keeping \"ບ່ອນເກັບຂໍ້ມູນພາກສ່ວນທີສາມ\" but ensure it reads naturally."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ຕິດຕາມ ການຕັ້ງຄ່າ ຈະ ເປັນ ບໍ່ເຄື່ອນໄຫວ\" is grammatically awkward and doesn't quite capture the intended meaning. It literally translates to something like 'following settings will be inactive'.",
+          "suggestion": "A better translation for 'the following settings will be inactive' would be something like “ການຕັ້ງຄ່າຕໍ່ໄປຈະບໍ່ສາມາດໃຊ້ງານໄດ້” or “ການຕັ້ງຄ່າຕໍ່ໜ້າຈະຖືກປິດໃຊ້ງານ”."
+        },
+        {
+          "type": "formatting",
+          "description": "There is a space missing before 'ຈະ' in the sentence: “ຕິດຕາມ ການຕັ້ງຄ່າ ຈະ ເປັນ ບໍ່ເຄື່ອນໄຫວ”.",
+          "suggestion": "Correct the space: “ຕິດຕາມ ການຕັ້ງຄ່າ ຈະ ເປັນ ບໍ່ເຄື່ອນໄຫວ” -> “ຕິດຕາມ ການຕັ້ງຄ່າ ຈະ ເປັນ ບໍ່ເຄື່ອນໄຫວ”"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Before, you need to connect...' sounds awkward in Latvian. A more natural phrasing would be 'Pirms tam jā...' or 'Pirms tam nepieciešams...'",
+          "suggestion": "Pirms tam nepieciešams pieslēgt attiecīgo pakalpojumu sadaļā Integrācija."
+        },
+        {
+          "type": "formatting",
+          "description": "The order of 'sadaļā Integrācija' and 'attiecīgais pakalpojums' could be improved for better readability in Latvian. Putting the service first sounds more natural.",
+          "suggestion": "Pirms tam nepieciešams pieslēgt attiecīgo pakalpojumu sadaļā Integrācija."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'third-party storage' is translated as 'opslagruimte van derden.' While technically correct, a more natural and common Dutch term would be 'externe opslag' or 'opslag van derden'. 'Oplagsruimte van derden' sounds a bit formal and less user-friendly.",
+          "suggestion": "Back-up kan worden opgeslagen in externe opslag."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'corresponding' is translated as 'overeenkomstige'. A more suitable term in this context, conveying the idea of connecting the appropriate service, would be 'bijbehorende' or 'aanbevolen'.",
+          "suggestion": "Eerst moet u de bijbehorende dienst verbinden in het 'Integratie' gedeelte."
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Third-party storage' is somewhat literally translated. A more natural Polish phrasing would be something like 'zewnętrzne usługi przechowywania' or 'usługi przechowywania od innych dostawców'.",
+          "suggestion": "Kopia zapasowa może być przechowywana w zewnętrznych usługach przechowywania lub w usługach przechowywania od innych dostawców."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Before, you need to connect...' can be improved for better flow. 'Najpierw musisz jednak podłączyć' is grammatically correct, but it's a bit clunky.",
+          "suggestion": "Najpierw należy jednak podłączyć..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "'Niniejsze ustawienia będą nieaktywne' is a formal and somewhat unnatural translation of 'the following settings will be inactive'.",
+          "suggestion": "W przeciwnym razie te ustawienia będą nieaktywne."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Para que o possa fazer\" is overly formal and doesn't directly translate the intended meaning of \"Before, you need to...\" A more natural phrasing would be required.",
+          "suggestion": "Para isso, precisa de conectar..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"as seguintes alterações ficaram inativas\" is an awkward translation of \"the following settings will be inactive.\" 'Alterações' refers to changes, not settings. 'Inactive' also sounds unnatural in this context.",
+          "suggestion": "as seguintes opções ficarão desativadas."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"prin intermediu contului de stocare de la terți\" is not the most natural or accurate translation of \"to a third-party storage.\" It's a bit clunky. A better phrasing would convey the meaning more smoothly.",
+          "suggestion": "Puteți salva copia de rezervă pe un serviciu de stocare de la terți."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"trebuie să vă conectați cu acest cont de stocare\" is less clear than it could be. It implies a direct connection rather than an integration. The original text focuses on connecting a service.",
+          "suggestion": "trebuie să vă conectați la acest serviciu de stocare în secțiunea Integrare."
+        },
+        {
+          "type": "formatting",
+          "description": "While not a major issue, maintaining consistency in verb tense would be beneficial. The text begins with 'Puteți salva' (you can save) and then shifts to 'trebuie să vă conectați' (you must connect). Using a similar tense throughout might improve flow.",
+          "suggestion": "Puteți salva copia de rezervă pe un serviciu de stocare de la terți. Înainte, trebuie să vă conectați la acest serviciu de stocare în secțiunea Integrare.  În caz contrar, următoarele setări vor fi inactive."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'ThirdPartyStorageDescription' isn't directly conveyed in the translation. 'Third Party' should be explicitly translated to represent the concept.",
+          "suggestion": "උපස්ථය තුන් වන පාටි සේවා ආචයනයකට සුරැකීමට හැකිය. (Backup can be saved to a third-party service)"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ආචයනය' (aachayanaya) is likely a misspelling or incorrect terminology. It may be intended to mean 'storage' or 'service'.",
+          "suggestion": "උපස්ථය තුන් වන පාටි සේවා සුරැකීමට හැකිය. (Backup can be saved to a third-party service)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Integration' ('අනුකලනය') is a direct transliteration and might not be the most natural way to express the concept of integrating a service. A more contextually appropriate Sinhala term could be used.",
+          "suggestion": "උපස්ථය තුන් වන පාටි සේවා සුරැකීමට හැකිය. ඊට පෙර, ඔබ ඒකාංගීකරණය කොටස හරහා අදාළ සේවාව සම්බන්ධ කළ යුතුය. නොඑසේ නම්, පහත සැකසුම් අක්‍රිය වනු ඇත."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Backup can be saved' is translated as 'Zálohované údaje môžete uložiť'. While technically correct, a more natural and direct translation might be 'Zálohy môžete uložiť' or 'Možné je uložiť zálohy'.  The current phrasing is a bit convoluted.",
+          "suggestion": "Zálohy môžete uložiť"
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'Before, you need to connect...' is translated as 'Predtým však musíte...'. While grammatically correct, adding a comma after 'Predtým' would improve readability in Slovak.",
+          "suggestion": "Predtým, však musíte..."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase \"Varnostno kopijo lahko shranite pri zunanjem ponudniku\" could be more naturally translated as \"Varnostno kopijo lahko shranite na zunanjem shrambišču\" or \"Varnostno kopijo lahko shranite pri zunanjem ponudniku za shranjevanje.\"",
+          "suggestion": "Varnostno kopijo lahko shranite na zunanjem shrambišču."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "“Third-party storage” is best translated as 'zunanjem shrambišču' rather than simply 'zunanjem ponudniku' which translates to 'external provider'.",
+          "suggestion": "Varnostno kopijo lahko shranite na zunanjem shrambišču."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Резервна' is misspelled. It should be 'Резервна копија'.",
+          "suggestion": "Резервна копија"
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence 'Пре тога, морате повезати одговарајућу услугу у одељку 'Интеграција'.' could be more naturally phrased in Serbian.  The use of 'морате' implies a strong obligation that might not be the intention.",
+          "suggestion": "Пре тога, потребно је да повежете одговарајућу услугу у одељку 'Интеграција'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'треће стране' (third party) while technically correct, is not the most natural way to express this in Serbian in this context.  A more common and understandable phrasing would be 'спољашње складиште' (external storage) or 'друге платформе' (other platforms).",
+          "suggestion": "спољашње складиште"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'third-party storage' is translated as 'skladište treće strane'. While technically correct, a more natural and commonly used term in Serbian would be 'vanjski skladište' or 'skladište spoljašnjeg provajdera'.",
+          "suggestion": "Rezervna kopija se može sačuvati na vanjski skladište (or 'skladište spoljašnjeg provajdera')."
+        },
+        {
+          "type": "formatting",
+          "description": "The word 'odeljku' (section) is not capitalized.  Capitalization should match the English original.",
+          "suggestion": "Rezervna kopija se može sačuvati na vanjski skladište. Pre toga, morate povezati odgovarajuću uslugu u odeljku 'Integracija'."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"сторонньому сховищі\" (third-party storage) is technically correct, but \"зовнішньому сховищу\" might be more natural and commonly used in this context, particularly for user-facing text.",
+          "suggestion": "Резервну копію можна зберегти у зовнішньому сховищі."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "“У іншому випадку” is a bit clunky. A more natural phrasing would be 'Інакше'.",
+          "suggestion": "Інакше зазначені налаштування будуть неактивними."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase 'Integration' is enclosed in single quotes instead of double quotes. This is inconsistent with standard Chinese quotation practices.",
+          "suggestion": "“集成”板块"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

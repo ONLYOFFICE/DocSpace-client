@@ -1,7 +1,6 @@
 {
   "DeleteAllGroupDescription": "Seçilmiş qruplar silinəcək. Qruplardakı istifadəçilər {{productName}}-dən silinməyəcək. Davam etmək istədiyinizə əminsiniz?",
   "DeleteAllGroupsTitle": "Qrupları silin",
-  "DeleteFile": "Bu faylı silmək üzrəsiniz.",
   "DeleteFolder": "Bu qovluğu silmək üzrəsiniz.",
   "DeleteGroupDescription": "{{groupName}} qrupu silinəcək. Qrupdakı istifadəçilər {{productName}}-dən silinməyəcək. Davam etmək istədiyinizə əminsiniz?",
   "DeleteGroupTitle": "Qrupu silin",
@@ -10,11 +9,10 @@
   "DeleteRoom": "Siz bu otağı silmək üzrəsiniz. Siz onu bərpa edə bilməzsiniz.",
   "DeleteRooms": "Bu otaqları silmək üzrəsiniz. Onları bərpa edə bilməzsiniz.",
   "DeleteSharedNote": "Nəzərə alın ki, onu kiminləsə paylaşmısınızsa, ondan istifadə etmək mümkün deyil.",
-  "FilePermanentlyDeleted": "Fayl 30 gün ərzində həmişəlik silinəcək.",
+  "DeleteTemplate": "<1>«{{templateName}}»</1> şablon otağını silmək istədiyinizdən əminsiniz? Şablonu bərpa etmək mümkün deyil.",
+  "DeleteTemplates": "Seçilmiş otaq şablonlarını silmək istədiyinizdən əminsiniz? Onları bərpa etmək mümkün deyil.",
   "FolderPermanentlyDeleted": "Qovluq 30 gün ərzində həmişəlik silinəcək.",
   "ItemsPermanentlyDeleted": "Elementlər 30 gün ərzində həmişəlik silinəcək.",
-  "MoveToTrashButton": "Zibil qutusuna yerləşdir",
-  "MoveToTrashTitle": "Zibil qutusuna atılsın?",
   "UnsubscribeButton": "Abunəlikdən çıx",
   "UnsubscribeNote": "Siyahıda göstərilən elementlərdən abunəliyi dayandırmağı əminsinizmi?",
   "UnsubscribeTitle": "Abunəlikdən çıxma təsdiqi"

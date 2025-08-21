@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,7 @@
 import { useState, useEffect } from "react";
 import Section from "@docspace/shared/components/section";
 import { observer, inject } from "mobx-react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router";
 
 import OformsFilter from "@docspace/shared/api/oforms/filter";
 import SectionWrapper from "SRC_DIR/components/Section";
@@ -103,11 +103,11 @@ const FormGallery = ({
           <SectionHeaderContent />
         </Section.SectionHeader>
 
-        {!oformsLoadError && (
+        {!oformsLoadError ? (
           <Section.SectionFilter>
             <SectionFilterContent />
           </Section.SectionFilter>
-        )}
+        ) : null}
 
         <Section.SectionBody isFormGallery>
           {!oformsLoadError ? <SectionBodyContent /> : <ErrorView />}

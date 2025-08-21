@@ -1,8 +1,6 @@
 {
-  "CancelUpload": "Загрузка была прервана. Не удалось загрузить часть файлов.",
-  "EnterPassword": "Ввести пароль",
   "HideInput": "Скрыть ввод",
   "Ready": "Готово",
-  "UploadAndConvert": "Загрузки и конвертация",
-  "Uploads": "Загрузки"
+  "UploadingAndConversion": "Загрузка и конвертация",
+  "UploadingError": "Ошибка загрузки"
 }

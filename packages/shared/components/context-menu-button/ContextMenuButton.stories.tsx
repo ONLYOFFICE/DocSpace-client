@@ -24,29 +24,26 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
 
 import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
 
 import { ContextMenuButton } from "./ContextMenuButton";
-import { ContextMenuButtonProps } from "./ContextMenuButton.types";
 import { ContextMenuButtonDisplayType } from "./ContextMenuButton.enums";
 
+const menuData = [
+  { key: "key1", label: "Option 1" },
+  { key: "key2", label: "Option 2" },
+];
+
+function getMenuData() {
+  return menuData;
+}
+
 const meta = {
-  title: "Components/ContextMenuButton",
+  title: "Interactive elements/ContextMenuButton",
   component: ContextMenuButton,
-  argTypes: {
-    clickColor: { control: "color" },
-    color: { control: "color" },
-    getData: { required: true },
-    hoverColor: { control: "color" },
-    // onClickLabel: { action: "onClickLabel", table: { disable: true } },
-    onMouseLeave: { action: "onMouseLeave" },
-    onMouseEnter: { action: "onMouseEnter" },
-    onMouseOver: { action: "onMouseOver" },
-    onMouseOut: { action: "onMouseOut" },
-  },
   parameters: {
     docs: {
       description: {
@@ -55,51 +52,28 @@ const meta = {
     },
   },
 } satisfies Meta<typeof ContextMenuButton>;
+
 type Story = StoryObj<typeof meta>;
 
 export default meta;
 
-const Template = (args: ContextMenuButtonProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const onClickHandler = () => {
-    setIsOpen(!isOpen);
-  };
-  return (
-    <div style={{ height: "100px" }}>
-      <ContextMenuButton
-        {...args}
-        opened={isOpen}
-        isDisabled={false}
-        onClick={onClickHandler}
-      />
-    </div>
-  );
-};
-
-const getData = () => {
-  return [
-    {
-      key: "key1",
-      label: "label1",
-    },
-    {
-      key: "key2",
-      label: "label2",
-    },
-  ];
-};
-
 export const Default: Story = {
-  render: (args) => <Template {...args} />,
+  render: (args) => (
+    <div style={{ height: "100px" }}>
+      <ContextMenuButton {...args} />
+    </div>
+  ),
   args: {
     title: "Actions",
     displayType: ContextMenuButtonDisplayType.dropdown,
     iconName: VerticalDotsReactSvgUrl,
     size: 16,
-    directionX: "left",
+    directionX: "right",
+    directionY: "bottom",
+    fixedDirection: true,
     isDisabled: false,
-    data: [],
-    getData,
+    data: menuData,
+    usePortal: false,
+    getData: getMenuData,
   },
 };

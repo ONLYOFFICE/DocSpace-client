@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,7 +29,6 @@ import { useTranslation } from "react-i18next";
 
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { HelpButton } from "@docspace/shared/components/help-button";
-import { Box } from "@docspace/shared/components/box";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 
 import LdapFieldComponent from "./LdapFieldComponent";
@@ -97,14 +96,16 @@ const GroupMembership = (props) => {
           onChange={setIsGroupMembership}
           label={t("LdapGroupMembership")}
           isDisabled={!isLdapEnabled || isUIDisabled}
+          dataTestId="group_membership_toggle_button"
         />
         <HelpButton
           tooltipContent={t("LdapGroupMembershipTooltip", {
             productName: t("Common:ProductName"),
           })}
+          dataTestId="group_membership_help_button"
         />
       </div>
-      <Box className="group_membership-container">
+      <div className="group_membership-container">
         <FieldContainer
           isVertical
           labelVisible
@@ -114,6 +115,7 @@ const GroupMembership = (props) => {
           isRequired
           hasError={errors.groupDN}
           tooltipContent={t("LdapGroupDNTooltip")}
+          dataTestId="group_dn_field_container"
         >
           <LdapFieldComponent
             className="field-input"
@@ -124,6 +126,7 @@ const GroupMembership = (props) => {
             isDisabled={!isLdapEnabled || isUIDisabled || !groupMembership}
             scale
             tabIndex={13}
+            dataTestId="group_dn_field"
           />
         </FieldContainer>
         <FieldContainer
@@ -135,6 +138,7 @@ const GroupMembership = (props) => {
           labelText={t("LdapUserAttribute")}
           isRequired
           tooltipContent={t("LdapGroupUserAttributeTooltip")}
+          dataTestId="user_attribute_field_container"
         >
           <LdapFieldComponent
             className="field-input"
@@ -145,6 +149,7 @@ const GroupMembership = (props) => {
             isDisabled={!isLdapEnabled || isUIDisabled || !groupMembership}
             scale
             tabIndex={14}
+            dataTestId="user_attribute_field"
           />
         </FieldContainer>
         <FieldContainer
@@ -158,6 +163,7 @@ const GroupMembership = (props) => {
           className="ldap_group-filter"
           inlineHelpButton
           isRequired
+          dataTestId="group_filter_field_container"
         >
           <LdapFieldComponent
             isTextArea
@@ -168,6 +174,7 @@ const GroupMembership = (props) => {
             isDisabled={!isLdapEnabled || isUIDisabled || !groupMembership}
             heightTextArea={100}
             tabIndex={15}
+            dataTestId="group_filter_field"
           />
         </FieldContainer>
         <FieldContainer
@@ -179,6 +186,7 @@ const GroupMembership = (props) => {
           labelText={t("LdapGroupNameAttribute")}
           isRequired
           tooltipContent={t("LdapGroupNameAttributeTooltip")}
+          dataTestId="group_name_attribute_field_container"
         >
           <LdapFieldComponent
             className="field-input"
@@ -189,6 +197,7 @@ const GroupMembership = (props) => {
             value={groupNameAttribute}
             scale
             tabIndex={16}
+            dataTestId="group_name_attribute_field"
           />
         </FieldContainer>
         <FieldContainer
@@ -199,6 +208,7 @@ const GroupMembership = (props) => {
           labelText={t("LdapGroupAttribute")}
           isRequired
           tooltipContent={t("LdapGroupAttributeTooltip")}
+          dataTestId="group_attribute_field_container"
         >
           <LdapFieldComponent
             className="field-input"
@@ -209,9 +219,10 @@ const GroupMembership = (props) => {
             hasError={errors.groupAttribute}
             scale
             tabIndex={17}
+            dataTestId="group_attribute_field"
           />
         </FieldContainer>
-      </Box>
+      </div>
     </>
   );
 };

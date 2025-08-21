@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,10 +27,9 @@ import { ReactSVG } from "react-svg";
 
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
-
+import { inject, observer } from "mobx-react";
 import { TColorScheme, TTheme } from "@docspace/shared/themes";
-import { TTranslation } from "@docspace/shared/types";
-
+import { useTranslation } from "react-i18next";
 import ZoomIcon from "PUBLIC_DIR/images/zoom.integration.react.svg?url";
 import WordpressIcon from "PUBLIC_DIR/images/wordpress.integration.react.svg?url";
 import DrupalIcon from "PUBLIC_DIR/images/drupal.integration.react.svg?url";
@@ -41,22 +40,28 @@ import {
   CategoryHeader,
 } from "./StyledPortalIntegration";
 
-const allConnectors = "https://www.onlyoffice.com/all-connectors.aspx";
-const zoom = "https://www.onlyoffice.com/office-for-zoom.aspx";
-const wordPress = "https://www.onlyoffice.com/office-for-wordpress.aspx";
-const drupal = "https://www.onlyoffice.com/office-for-drupal.aspx";
-
 const zoomTitle = "Zoom";
 const wordPressTitle = "WordPress";
 const drupalTitle = "Drupal";
 
-export const Integration = (props: {
-  t: TTranslation;
+const Integration: React.FC<{
   theme: TTheme;
   currentColorScheme: TColorScheme;
   className: string;
+  allConnectorsUrl: string;
+  zoomUrl: string;
+  wordPressUrl: string;
+  drupalUrl: string;
+}> = ({
+  theme,
+  currentColorScheme,
+  className,
+  allConnectorsUrl,
+  zoomUrl,
+  wordPressUrl,
+  drupalUrl,
 }) => {
-  const { t, theme, currentColorScheme, className } = props;
+  const { t } = useTranslation(["JavascriptSdk"]);
 
   return (
     <IntegrationContainer
@@ -71,48 +76,80 @@ export const Integration = (props: {
         {t("IntegrationDescription", { productName: t("Common:ProductName") })}
       </Text>
       <div className="icons">
-        <div className="icon" title={zoomTitle}>
+        <div
+          data-testid="integration_zoom_container"
+          className="icon"
+          title={zoomTitle}
+        >
           <ReactSVG
             className="icon-zoom"
             src={ZoomIcon}
-            onClick={() => window.open(zoom, "_blank")}
+            onClick={() => window.open(zoomUrl, "_blank")}
           />
         </div>
 
-        <div className="icon" title={wordPressTitle}>
+        <div
+          data-testid="integration_wordpress_container"
+          className="icon"
+          title={wordPressTitle}
+        >
           <ReactSVG
             className="icon-wordpress"
             src={WordpressIcon}
-            onClick={() => window.open(wordPress, "_blank")}
+            onClick={() => window.open(wordPressUrl, "_blank")}
           />
         </div>
 
-        <div className="icon" title={drupalTitle}>
+        <div
+          data-testid="integration_drupal_container"
+          className="icon"
+          title={drupalTitle}
+        >
           <ReactSVG
             className="icon-drupal"
             src={DrupalIcon}
-            onClick={() => window.open(drupal, "_blank")}
+            onClick={() => window.open(drupalUrl, "_blank")}
           />
         </div>
       </div>
       <div className="link-container">
         <Link
+          data-testid="all_connectors_link"
           className="link"
           noHover
           color={currentColorScheme.main?.accent}
-          onClick={() => window.open(allConnectors, "_blank")}
+          onClick={() => window.open(allConnectorsUrl, "_blank")}
         >
           {t("SeeAllConnectors")}
         </Link>
 
-        <div className="icon">
+        <div data-testid="all_connectors_icon" className="icon">
           <ReactSVG
             className="icon-arrow"
             src={ArrowIcon}
-            onClick={() => window.open(allConnectors, "_blank")}
+            onClick={() => window.open(allConnectorsUrl, "_blank")}
           />
         </div>
       </div>
     </IntegrationContainer>
   );
 };
+
+export default inject<TStore>(({ settingsStore }) => {
+  const {
+    allConnectorsUrl,
+    zoomUrl,
+    wordPressUrl,
+    drupalUrl,
+    theme,
+    currentColorScheme,
+  } = settingsStore;
+  return {
+    allConnectorsUrl,
+    zoomUrl,
+    wordPressUrl,
+    drupalUrl,
+    theme,
+    currentColorScheme,
+  };
+})(observer(Integration));

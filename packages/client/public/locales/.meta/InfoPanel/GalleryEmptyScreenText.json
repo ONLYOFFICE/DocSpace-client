@@ -1,0 +1,237 @@
+{
+  "key_path": "GalleryEmptyScreenText",
+  "content": "See form template details here",
+  "content_en_sha1_hash": "b7b7142711a93367eb3d5281f8eb4a92c1c24471",
+  "created_at": "2025-05-19T21:30:54.869Z",
+  "updated_at": "2025-08-04T07:30:01.205Z",
+  "comment": {
+    "text": "The \"GalleryEmptyScreenText\" translation key is used to display a message indicating that there are no items in a gallery, pointing users to see details about form templates. This text appears in an empty gallery screen within a UI component. Translators should provide a clear and concise message for this context.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:56.714Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/NoItem/NoGalleryItem.tsx",
+      "line_number": 45,
+      "context": "className={styles.galleryEmptyScreenImg}\n src={FormGalleryEmptyInfoReactSvgUrl}\n alt=\"Empty Screen Gallery\"\n />\n <Text className={styles.galleryEmptyScreenText}>\n {t(\"InfoPanel:GalleryEmptyScreenText\")}\n </Text>\n </div>\n );\n };\n export default NoGalleryItem;",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Здесь будут представлены подробности о шаблонах форм' is too literal and doesn't convey the same meaning as 'See form template details here'. It implies that the details will be presented in the future, while the original implies they are available to be seen.",
+          "suggestion": "Consider a more natural translation like 'Подробности о шаблонах форм здесь' or 'Смотрите детали шаблонов форм здесь'."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ආකෘතිපත්‍ර අච්චුවේ විස්තර මෙතැන බලන්න' is not an ideal translation of 'See form template details here'.  'අච්චුවේ' (achchuwe) implies a mold or pattern, which isn't directly related to the meaning of 'template'. It creates a potentially misleading connotation.",
+          "suggestion": "Consider a translation that more directly conveys 'template' without the implication of a mold. Possible suggestions include: 'ආකෘතිපත්‍රයේ විස්තර මෙතැන බලන්න' (Akruthipatraye visthara methana balanna - See the form's details here) or 'ආකෘතියේ විස්තර මෙතැන බලන්න' (Akruhie visthara methana balanna - See the template's details here)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Види детаље шаблона обрасца овде' is a literal translation but sounds unnatural in Serbian. A more natural phrasing would be 'Погледајте детаље шаблона обрасца овде' or 'Видите детаље шаблона обрасца овде'.",
+          "suggestion": "Погледајте детаље шаблона обрасца овде"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Vidi detalje šablona obrasca ovde\" doesn't accurately convey the meaning of \"See form template details here.\"  'Vidi' (see) is a bit formal and doesn't fit the context of an empty gallery screen. A more natural and idiomatic translation would be something like 'Pogledajte detalje šablona obrasca ovde' or 'Vidite detalje šablona obrasca.'",
+          "suggestion": "Pogledajte detalje šablona obrasca ovde"
+        },
+        {
+          "type": "spelling",
+          "description": "While technically correct, 'ovde' might be improved to 'tamo' depending on the UI flow. 'Ovde' translates to 'here', but 'tamo' (there) might be more appropriate as a call to action to view more details.",
+          "suggestion": "Pogledajte detalje šablona obrasca tamo"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

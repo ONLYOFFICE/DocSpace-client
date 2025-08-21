@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,179 +25,183 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent, cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import SearchReactSvgUrl from "PUBLIC_DIR/images/search.react.svg?url";
-
-import { Button, ButtonSize } from "../button";
 import { InputSize, InputType } from "../text-input";
-
-import { InputBlock } from "./InputBlock";
+import { InputBlock } from ".";
 
 describe("<InputBlock />", () => {
-  it("renders without error", () => {
-    const mask = [/\d/, /\d/, "/", /\d/, /\d/, "/", /\d/, /\d/, /\d/, /\d/];
-    render(
-      <InputBlock
-        mask={mask}
-        value=""
-        iconName={SearchReactSvgUrl}
-        onIconClick={jest.fn}
-        onChange={jest.fn}
-        size={InputSize.base}
-        type={InputType.text}
-      >
-        <Button
-          size={ButtonSize.small}
-          isDisabled={false}
-          onClick={jest.fn}
-          label="OK"
-        />
-      </InputBlock>,
-    );
+  const defaultProps = {
+    value: "",
+    iconName: SearchReactSvgUrl,
+    onIconClick: jest.fn(),
+    onChange: jest.fn(),
+    size: InputSize.base,
+    type: InputType.text,
+  };
 
-    expect(screen.getByTestId("input-block")).toBeInTheDocument();
+  afterEach(() => {
+    cleanup();
+    jest.clearAllMocks();
   });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("test base size props", () => {
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2322): Type '{ iconName: any; size: string; }' is not ass... Remove this comment to see the full error message
-  //     <InputBlock iconName={SearchReactSvgUrl} size="base"></InputBlock>,
-  //   );
+  it("handles input interactions correctly", () => {
+    const onChange = jest.fn();
+    const onBlur = jest.fn();
+    const onFocus = jest.fn();
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("size")).toBe("base");
-  // });
+    const { container } = render(
+      <InputBlock
+        {...defaultProps}
+        onChange={onChange}
+        onBlur={onBlur}
+        onFocus={onFocus}
+        data-testid="test-input"
+      />,
+    );
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("test middle size props", () => {
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2322): Type '{ iconName: any; size: string; }' is not ass... Remove this comment to see the full error message
-  //     <InputBlock iconName={SearchReactSvgUrl} size="middle"></InputBlock>,
-  //   );
+    const input = container.querySelector('input[type="text"]');
+    expect(input).toBeInTheDocument();
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("size")).toBe("middle");
-  // });
+    if (input) {
+      fireEvent.change(input, { target: { value: "test" } });
+      expect(onChange).toHaveBeenCalled();
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("test big size props", () => {
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2322): Type '{ iconName: any; size: string; }' is not ass... Remove this comment to see the full error message
-  //     <InputBlock iconName={SearchReactSvgUrl} size="big"></InputBlock>,
-  //   );
+      fireEvent.focus(input);
+      expect(onFocus).toHaveBeenCalled();
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("size")).toBe("big");
-  // });
+      fireEvent.blur(input);
+      expect(onBlur).toHaveBeenCalled();
+    }
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("test huge size props", () => {
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2322): Type '{ iconName: any; size: string; }' is not ass... Remove this comment to see the full error message
-  //     <InputBlock iconName={SearchReactSvgUrl} size="huge"></InputBlock>,
-  //   );
+  it("handles icon interactions correctly", () => {
+    const onIconClick = jest.fn();
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("size")).toBe("huge");
-  // });
+    render(
+      <InputBlock
+        {...defaultProps}
+        onIconClick={onIconClick}
+        iconColor="blue"
+        hoverColor="red"
+      />,
+    );
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("test iconSize props", () => {
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2322): Type '{ iconName: any; iconSize: number; }' is not... Remove this comment to see the full error message
-  //     <InputBlock iconName={SearchReactSvgUrl} iconSize={18}></InputBlock>,
-  //   );
+    const iconButton = screen.getByTestId("icon-button-svg").closest("div");
+    expect(iconButton).toBeInTheDocument();
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("iconSize")).toBe(18);
-  // });
+    if (iconButton) fireEvent.click(iconButton);
+    expect(onIconClick).toHaveBeenCalled();
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("test empty props", () => {
-  //   const wrapper = mount(<InputBlock></InputBlock>);
+  it("handles disabled state correctly", () => {
+    const { container } = render(<InputBlock {...defaultProps} isDisabled />);
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper).toExist();
-  // });
+    const input = container.querySelector('input[type="text"]');
+    expect(input).toBeDisabled();
+    expect(screen.queryByTestId("icon-button-svg")).not.toBeInTheDocument();
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts id", () => {
-  //   // @ts-expect-error TS(2322): Type '{ id: string; }' is not assignable to type '... Remove this comment to see the full error message
-  //   const wrapper = mount(<InputBlock id="testId" />);
+  it("handles error and warning states correctly", () => {
+    render(<InputBlock {...defaultProps} hasError hasWarning />);
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("id")).toEqual("testId");
-  // });
+    const inputBlock = screen.getByTestId("text-input");
+    expect(inputBlock).toHaveAttribute("data-error", "true");
+    expect(inputBlock).toHaveAttribute("data-warning", "true");
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts className", () => {
-  //   // @ts-expect-error TS(2322): Type '{ className: string; }' is not assignable to... Remove this comment to see the full error message
-  //   const wrapper = mount(<InputBlock className="test" />);
+  it("handles different sizes correctly", () => {
+    const sizes = [
+      InputSize.base,
+      InputSize.middle,
+      InputSize.big,
+      InputSize.huge,
+    ];
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("className")).toEqual("test");
-  // });
+    sizes.forEach((size) => {
+      const { container, unmount } = render(
+        <InputBlock {...defaultProps} size={size} />,
+      );
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts style", () => {
-  //   // @ts-expect-error TS(2322): Type '{ style: { color: string; }; }' is not assig... Remove this comment to see the full error message
-  //   const wrapper = mount(<InputBlock style={{ color: "red" }} />);
+      const input = container.querySelector('input[type="text"]');
+      expect(input).toBeInTheDocument();
+      unmount();
+    });
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.getDOMNode().style).toHaveProperty("color", "red");
-  // });
-  // //TODO: Fix tests
-  // /* it("call onChange", () => {
-  //   const onChange = jest.fn();
-  //   const wrapper = mount(
-  //     <InputBlock
-  //       iconName={SearchReactSvgUrl}
-  //       size="huge"
-  //       onChange={onChange}
-  //     />
-  //   );
-  //   const input = wrapper.find("input");
-  //   input.first().simulate("change", { target: { value: "test" } });
-  //   expect(onChange).toHaveBeenCalled();
-  // });
-  // it("call onIconClick", () => {
-  //   const onIconClick = jest.fn();
-  //   const wrapper = mount(
-  //     <InputBlock
-  //       iconName={SearchReactSvgUrl}
-  //       size="huge"
-  //       isDisabled={false}
-  //       onIconClick={onIconClick}
-  //     />
-  //   );
-  //   const input = wrapper.find(".append div");
-  //   input.first().simulate("click");
-  //   expect(onIconClick).toHaveBeenCalled();
-  // });
-  // it("not call onChange", () => {
-  //   const onChange = jest.fn();
-  //   const wrapper = mount(
-  //     <InputBlock iconName={SearchReactSvgUrl} size="huge" />
-  //   );
-  //   const input = wrapper.find("input");
-  //   input.first().simulate("change", { target: { value: "test" } });
-  //   expect(onChange).not.toHaveBeenCalled();
-  // });
-  // it("not call onIconClick", () => {
-  //   const onIconClick = jest.fn();
-  //   const wrapper = mount(
-  //     <InputBlock
-  //       iconName={SearchReactSvgUrl}
-  //       size="huge"
-  //       isDisabled={true}
-  //       onIconClick={onIconClick}
-  //     />
-  //   );
-  //   const input = wrapper.find(".append div");
-  //   input.first().simulate("click");
-  //   expect(onIconClick).not.toHaveBeenCalled();
-  // });*/
+  it("handles password type correctly", () => {
+    const { container } = render(
+      <InputBlock {...defaultProps} type={InputType.password} />,
+    );
+
+    const input = container.querySelector('input[type="password"]');
+    expect(input).toBeInTheDocument();
+  });
+
+  it("handles read-only state correctly", () => {
+    const { container } = render(<InputBlock {...defaultProps} isReadOnly />);
+
+    const input = container.querySelector('input[type="text"]');
+    expect(input).toHaveAttribute("readonly");
+  });
+
+  it("handles auto-focus correctly", () => {
+    const { container } = render(
+      <InputBlock {...defaultProps} isAutoFocussed />,
+    );
+
+    const input = container.querySelector('input[type="text"]');
+    expect(input).toHaveFocus();
+  });
+
+  it("handles keyboard events correctly", () => {
+    const onKeyDown = jest.fn();
+    const { container } = render(
+      <InputBlock {...defaultProps} onKeyDown={onKeyDown} />,
+    );
+
+    const input = container.querySelector('input[type="text"]');
+    if (input) {
+      fireEvent.keyDown(input, { key: "Enter", code: "Enter" });
+      expect(onKeyDown).toHaveBeenCalled();
+    }
+  });
+
+  it("handles placeholder text correctly", () => {
+    const placeholder = "Enter text here";
+    const { container } = render(
+      <InputBlock {...defaultProps} placeholder={placeholder} />,
+    );
+
+    const input = container.querySelector('input[type="text"]');
+    expect(input).toHaveAttribute("placeholder", placeholder);
+  });
+
+  it("handles maxLength correctly", () => {
+    const maxLength = 10;
+    const { container } = render(
+      <InputBlock {...defaultProps} maxLength={maxLength} />,
+    );
+
+    const input = container.querySelector('input[type="text"]');
+    expect(input).toHaveAttribute("maxLength", maxLength.toString());
+  });
+
+  it("handles custom className correctly", () => {
+    const customClass = "custom-input-block";
+    render(<InputBlock {...defaultProps} className={customClass} />);
+
+    const inputBlock = screen.getByTestId("input-block");
+    expect(inputBlock).toHaveClass(customClass);
+  });
+
+  it("handles custom styles correctly", () => {
+    const customStyle = { width: "300px", margin: "10px" };
+    render(<InputBlock {...defaultProps} style={customStyle} />);
+
+    const inputBlock = screen.getByTestId("input-block");
+    expect(inputBlock).toHaveStyle(customStyle);
+  });
 });

@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "Os seus últimos documentos visualizados ou editados serão apresentados nesta secção.",
   "EmptyRootRoomUserDescription": "O quarto compartilhado aparecerá aqui.",
   "EmptyRootRoomUserTitle": "Não há quartos aqui ainda",
+  "EmptyTemplatesDescription": "Pode criar um templates a partir de uma sala na secção Sala",
+  "EmptyTemplatesTitle": "Ainda não tem templates aqui",
   "FormFolderDefaultDescription": "Solte os formulários em PDF aqui ou faça upload do {{productName}} ou do dispositivo.",
   "FormFolderDefaultTitle": "Ainda não há formulários aqui",
   "FormFolderDefaultUserDescription": "Os formulários carregados pelos administradores aparecerão aqui.",
@@ -33,6 +35,7 @@
   "MigrationDataDescription": "Importe dados para o {{productName}} do {{organizationName}} Workspace, Google Workspace ou Nextcloud.",
   "MigrationDataTitle": "Dados de migração",
   "PublicRoomEmptyTitle": "Bem-vindo à Sala Pública",
+  "SectionsUploadDescription": "Enviar qualquer tipo de arquivo da {{sectionNameFirst}} ou {{sectionNameSecond}}",
   "SendInvitationLetter": "Enviar uma carta convite para adicionar novos membros ao portal",
   "ShareOptionDescription": "Copie um link de acesso público ou convide outros usuários para a sala para iniciar o processo de preenchimento do formulário.",
   "ShareOptionTitle": "Dividir uma sala",
@@ -42,9 +45,7 @@
   "UploadDeviceOptionTitle": "Carregar do seu dispositivo",
   "UploadDevicePDFFormOptionDescription": "Carregue um formulário PDF pronto para a sala a partir do seu dispositivo.",
   "UploadDevicePDFFormOptionTitle": "Carregar do dispositivo",
-  "UploadFromPortalDescription": "Carregue qualquer tipo de arquivo de Documentos ou Salas",
   "UploadFromPortalTitle": "Fazer upload de {{productName}}",
   "UploadPDFFormOptionDescription": "Selecione um formulário PDF pronto disponível em {{productName}} e carregue-o na sala.",
-  "UserEmptyDescription": "Arquivos e pastas enviados por administradores aparecerão aqui.",
   "VirtualDataRoomEmptyTitle": "Bem-vindo ao Data Room Virtual"
 }

@@ -1,0 +1,47 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: translation-app-backend
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=${PORT}
+      - NODE_ENV=production
+      - APP_ROOT_PATH=/app
+      - OLLAMA_API_URL=${OLLAMA_API_URL}
+      - BASE_LANGUAGE=${BASE_LANGUAGE}
+      - DB_PATH=/app/common/translation-app/backend/db
+      - DB_NAME=${DB_NAME}
+      - NODE_PATH=/app
+    volumes:
+      - ../../:/app
+    working_dir: /app/common/translation-app/backend
+    # Start the backend server directly without npm install
+    command: sh -c 'node src/index.js'
+    networks:
+      - translation-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: translation-app-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://backend:3001
+    volumes:
+      - ../../:/app
+    working_dir: /app/common/translation-app/frontend
+    depends_on:
+      - backend
+    networks:
+      - translation-network
+
+networks:
+  translation-network:
+    driver: bridge

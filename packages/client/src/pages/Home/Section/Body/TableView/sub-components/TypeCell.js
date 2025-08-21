@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,11 +26,13 @@
 
 import React from "react";
 import { FileType } from "@docspace/shared/enums";
+import { getSinglePDFTitle } from "@docspace/shared/utils/getPDFTite";
+
 import { StyledTypeCell } from "./CellStyles";
 import { getRoomTypeName } from "../../../../../../helpers/filesUtils";
 
 const TypeCell = ({ t, item, sideColor }) => {
-  const { fileExst, fileTypeName, fileType, roomType } = item;
+  const { fileExst, fileTypeName, fileType, roomType, isPDFForm } = item;
   const getItemType = () => {
     switch (fileType) {
       case FileType.Unknown:
@@ -44,23 +46,26 @@ const TypeCell = ({ t, item, sideColor }) => {
       case FileType.Image:
         return t("Common:Image");
       case FileType.Spreadsheet:
-        return t("Spreadsheet");
+        return t("Common:Spreadsheet");
       case FileType.Presentation:
-        return t("Presentation");
+        return t("Common:Presentation");
       case FileType.Document:
+        return t("Common:Document");
+      case FileType.Diagram:
+        return t("Common:Diagram");
       case FileType.OForm:
       case FileType.OFormTemplate:
-      case FileType.PDF:
-        return t("Document");
-
+      case FileType.PDF: {
+        return getSinglePDFTitle(t, isPDFForm);
+      }
       default:
-        return t("Folder");
+        return t("Common:Folder");
     }
   };
 
   const type = item.isRoom ? getRoomTypeName(roomType, t) : getItemType();
   const Exst = fileExst ? fileExst.slice(1).toUpperCase() : "";
-  const data = `${type} ${Exst}`;
+  const data = Exst ? `${Exst} ${type}` : type;
 
   return (
     <StyledTypeCell
@@ -70,10 +75,15 @@ const TypeCell = ({ t, item, sideColor }) => {
       truncate
       title={data}
     >
-      <span className="type">{type}</span>&nbsp;
-      <span dir="ltr" className="extension">
-        {Exst}
-      </span>
+      {Exst ? (
+        <>
+          <span dir="ltr" className="extension">
+            {Exst}
+          </span>
+          &nbsp;
+        </>
+      ) : null}
+      <span className="type">{type}</span>
     </StyledTypeCell>
   );
 };

@@ -1,5 +1,4 @@
 {
-  "ActivationRequired": "attivazione richiesta",
   "AddStaticText": "Aggiungi testo statico",
   "AddWatermarkElements": "Aggiungi elementi di filigrana",
   "AddWatermarksToDocuments": "Aggiungi filigrane ai documenti",
@@ -33,7 +32,6 @@
   "StorageDescription": "Quota di archiviazione impostata per stanza. Puoi modificare questo valore o disattivare il limite di spazio di archiviazione.",
   "TagsPlaceholder": "Aggiungi un tag",
   "ThirdPartyStorageComboBoxPlaceholder": "Seleziona spazio di archiviazione",
-  "ThirdPartyStorageDescription": "Utilizza servizi di terze parti come archivio dati per questa stanza. Verrà creata una nuova cartella per l'archiviazione dei dati di questa stanza nell&apos;archivio connesso.",
   "ThirdPartyStorageNoStorageAlert": "Prima è necessario collegare il servizio corrispondente nella sezione \"Integrazione\". Altrimenti la connessione non sarà possibile.",
   "ThirdPartyStoragePermanentSettingDescription": "I file sono archiviati in uno spazio di archiviazione {{thirdpartyTitle}} di terze parti nella cartella \"{{thirdpartyFolderName}}\".\n<strong>{{thirdpartyPath}}</strong>",
   "ThirdPartyStorageRoomAdminNoStorageAlert": "Per connettere uno storage di terze parti, è necessario aggiungere il servizio corrispondente nella sezione Integrazione delle impostazioni di {{productName}}. Contatta il proprietario o l'amministratore di {{productName}} per abilitare l'integrazione.",

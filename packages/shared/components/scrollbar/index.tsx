@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,20 +26,20 @@
 
 "use client";
 
-import { ScrollbarType } from "./Scrollbar.enums";
-import { ScrollbarComponent as Scrollbar } from "./Scrollbar";
-// import { ScrollbarContext } from "./custom-scrollbar";
+import { Scrollbar } from "./Scrollbar";
+import type {
+  ScrollbarProps,
+  CustomScrollbarsVirtualListProps,
+} from "./Scrollbar.types";
 import {
   CustomScrollbarsVirtualList,
   CustomScrollbarsVirtualListWithAutoFocus,
 } from "./sub-components";
-import type { ScrollbarProps } from "./Scrollbar.types";
+
+export type { CustomScrollbarsVirtualListProps, ScrollbarProps };
 
 export {
   Scrollbar,
-  ScrollbarProps,
-  ScrollbarType,
   CustomScrollbarsVirtualList,
   CustomScrollbarsVirtualListWithAutoFocus,
-  // ScrollbarContext,
 };

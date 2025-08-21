@@ -1,6 +1,6 @@
 {
+  "CancellaionNotification": "Nezobrazovať znova oznámenie o zrušení",
   "DisplayFileExtension": "Zobrazenie prípony súboru vedľa jeho názvu",
-  "DisplayNotification": "Zobraziť upozornenie pri presúvaní položiek do koša",
   "OpenSameTab": "Otvorte redaktor {{organizationName}} v tej istej záložke",
   "OriginalCopy": "Uložte kópiu súboru aj v pôvodnom formáte"
 }

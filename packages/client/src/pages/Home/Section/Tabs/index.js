@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -23,24 +23,74 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { useLocation } from "react-router-dom";
-
-import { getContactsView } from "SRC_DIR/helpers/contacts";
+import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
+
 import ContactsTabs from "./ContactsTabs";
 import MyDocumentsTabs from "./MyDocumentsTabs";
+import RoomTemplatesTabs from "./RoomTemplatesTabs";
 
-const SectionSubmenuContent = ({ isPersonalRoom, isRecentTab }) => {
-  const location = useLocation();
+const SectionSubmenuContent = ({
+  isPersonalRoom,
+  isRecentTab,
+  isRoomsFolderRoot,
+  isTemplatesFolder,
+  allowInvitingGuests,
+  checkGuests,
+  hasGuests,
+  currentClientView,
+}) => {
+  const [showGuestsTab, setShowGuestsTab] = useState(true);
+  const [isCheckGuests, setIsCheckGuests] = useState(false);
 
-  const isContacts = getContactsView(location);
+  const isContacts =
+    currentClientView === "users" || currentClientView === "groups";
+  const isProfile = currentClientView === "profile";
 
-  if (isPersonalRoom || isRecentTab) return <MyDocumentsTabs />;
-  if (isContacts) return <ContactsTabs />;
+  useEffect(() => {
+    if (typeof hasGuests !== "boolean") return;
+    if (!hasGuests) setShowGuestsTab(hasGuests);
+    setIsCheckGuests(true);
+  }, [hasGuests]);
+
+  if (isProfile) return null;
+
+  if (isContacts && allowInvitingGuests === false) checkGuests();
+
+  if (isContacts && (allowInvitingGuests || isCheckGuests))
+    return (
+      <ContactsTabs showGuestsTab={allowInvitingGuests || showGuestsTab} />
+    );
+
+  if (!isContacts && (isPersonalRoom || isRecentTab))
+    return <MyDocumentsTabs />;
+  if (!isContacts && (isRoomsFolderRoot || isTemplatesFolder))
+    return <RoomTemplatesTabs />;
   return null;
 };
 
-export default inject(({ treeFoldersStore }) => ({
-  isPersonalRoom: treeFoldersStore.isPersonalRoom,
-  isRecentTab: treeFoldersStore.isRecentTab,
-}))(observer(SectionSubmenuContent));
+export default inject(
+  ({ treeFoldersStore, settingsStore, clientLoadingStore }) => {
+    const {
+      isPersonalRoom,
+      isRecentTab,
+      isRoomsFolderRoot,
+      isTemplatesFolder,
+    } = treeFoldersStore;
+
+    const { allowInvitingGuests, checkGuests, hasGuests } = settingsStore;
+
+    const { currentClientView } = clientLoadingStore;
+
+    return {
+      isPersonalRoom,
+      isRecentTab,
+      isRoomsFolderRoot,
+      isTemplatesFolder,
+      allowInvitingGuests,
+      checkGuests,
+      hasGuests,
+      currentClientView,
+    };
+  },
+)(observer(SectionSubmenuContent));

@@ -1,0 +1,278 @@
+{
+  "key_path": "ResetAndStartFilling",
+  "content": "Reset and start filling",
+  "content_en_sha1_hash": "fa6a4c3b2b734af36fa7e82b2f344fd875383107",
+  "created_at": "2025-05-19T21:30:47.883Z",
+  "updated_at": "2025-08-04T07:30:01.599Z",
+  "comment": {
+    "text": "This translation key is used to display the phrase \"Reset and start filling\" in various UI elements. It appears on a button within a filling status panel, indicating an option to reset the filling process, and may also be referenced in a context options store where it enables or disables this functionality.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:34:42.858Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 1836,
+      "context": "disabled: false,\n },\n {\n id: \"option_reset-and-start-filling\",\n key: \"reset-and-start-filling\",\n label: t(\"Common:ResetAndStartFilling\"),\n icon: BackupSvgUrl,\n onClick: () => this.onClickResetAndStartFilling(item),\n disabled: false,\n },\n {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/dialogs/FillingStatusPanel/index.tsx",
+      "line_number": 213,
+      "context": "scale\n primary\n onClick={() => onResetFilling(file)}\n id=\"panel_button_reset-and-start\"\n key=\"panel_button_reset-and-start\"\n label={t(\"Common:ResetAndStartFilling\")}\n size={ButtonSize.normal}\n />\n ) : null}\n {file.security?.Delete && onDelete ? (\n <Button",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Common:ResetAndStartFilling' is not a proper translation of 'Reset and start filling'. It appears to be the key itself rather than the translated text.",
+          "suggestion": "A proper Azerbaijani translation would depend on the context. Possible translations include 'Sıfırla və doldurmağa başla' or 'Təmizlə və doldurmağa başla'."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation includes 'Common:ResetAndStartFilling', which is not standard practice for displayed text. It suggests this is a key identifier.",
+          "suggestion": "Remove the 'Common:ResetAndStartFilling' prefix and provide only the translated text."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The verb 'վրացնել' (vratsnel) doesn't accurately convey the meaning of 'filling' in this context. It generally means 'to load' or 'to load onto a vehicle'. The intended meaning is more akin to 'filling' something up.",
+          "suggestion": "Consider using a more appropriate verb like 'լցնել' (ltsnel) which means 'to fill' or 'to pour'."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'リセットして入力を始める' while generally conveying the idea, isn't the most natural or precise translation of 'Reset and start filling'. 'Reset' is well translated, but 'start filling' is translated as '始める入力を' (hajimeru nyūki o) which is more like 'start input'. It doesn't convey the sense of filling something up, which could be a container, form, etc.",
+          "suggestion": "Consider alternatives like '入力開始' (nyūki kaishi - start input) or '埋め始め' (umeme hajime - start filling) depending on the context."
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"재설정\" is a reasonable translation for \"Reset\", \"작성 시작\" is less idiomatic for \"start filling\" in this context. It implies writing something, not filling a container or form. A more appropriate translation would depend on the context.",
+          "suggestion": "Consider alternatives like \"채우기 시작\" (start filling - literally) or a more contextual translation depending on what's being filled."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Resetare și începere completare' is not the most natural or accurate rendering of 'Reset and start filling'. While technically conveys the meaning, it's clunky. 'Resetare și completare' would be more idiomatic.",
+          "suggestion": "Resetare și completare"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ප්‍රතිසංස්කරණය කර නැවත පිරවීම ආරම්භ කරන්න\" is a bit literal and clunky. \"ප්‍රතිසංස්කරණය\" (pratisanskaranya) implies a major overhaul or restoration, which might be stronger than just a 'reset'. A more natural translation for 'reset' in this context might involve a term that suggests a return to an initial state or a refresh.",
+          "suggestion": "Consider alternatives like \"නැවත සැකසීම ආරම්භ කරන්න\" (naewatha saekesima arambakara nna) which translates to 'start reconfiguring' or \"මුල සිට නැවත පිරවීම ආරම්භ කරන්න\" (mula sitha naewatha piravim arambakara nna) which translates to 'start filling from the beginning'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Поновно постављање и почетак попуњавања\" is a bit too literal and formal for the simple phrase \"Reset and start filling\". It's not necessarily *wrong*, but sounds clunky in Serbian. \"Поновно постављање\" implies a complete reset, which might not be intended.",
+          "suggestion": "Consider a more natural phrasing like \"Враћање на почетну позицију и попуњавање\" or \"Ресетовање и попуњавање\" depending on the context."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Ponovno postavljanje i početak popunjavanja' doesn't fully capture the concise meaning of 'Reset and start filling'. 'Ponovno postavljanje' implies a more complex reset than simply starting over. A more direct translation focusing on the 'start filling' aspect would be more suitable.",
+          "suggestion": "Počni sa popunjavanjem"
+        },
+        {
+          "type": "spelling",
+          "description": "While technically correct, 'popunjavanja' could be perceived as slightly formal in this context. 'Popunjavanje' might be more conversational and relatable.",
+          "suggestion": "Popunjavanje"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Đặt lại\" is a valid translation for \"Reset\", \"bắt đầu điền\" isn't the most natural or idiomatic translation for \"start filling\". It literally translates to 'start filling'. A more natural phrasing would depend on the context, but a better translation might be something like \"bắt đầu lấp đầy\" (start filling/filling) or \"bắt đầu đổ đầy\" (start filling/pouring).",
+          "suggestion": "Consider alternative translations like \"bắt đầu lấp đầy\" or \"bắt đầu đổ đầy\" depending on the context."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

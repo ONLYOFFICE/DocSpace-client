@@ -1,0 +1,381 @@
+{
+  "key_path": "PublicRoomPresetInfo",
+  "content": "Embed a public room to allow users to view, edit, comment, or review all the documents stored there without registration",
+  "content_en_sha1_hash": "44b0f19f1cc2230605339b239499132c0ecb337c",
+  "created_at": "2025-05-19T21:30:54.619Z",
+  "updated_at": "2025-08-04T07:30:01.377Z",
+  "comment": {
+    "text": "Embed a public room allows users to view, edit, comment, or review all documents stored there without registration. This preset info is used in UI elements such as buttons and dialogues on the PortalSettings page.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:27.477Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
+      "line_number": 97,
+      "context": "image: theme.isBase ? PortalImg : PortalImgDark,\n handleOnClick: navigateToPortal,\n },\n {\n title: t(\"Common:PublicRoom\"),\n description: t(\"JavascriptSdk:PublicRoomPresetInfo\"),\n image: theme.isBase ? PublicRoomImg : PublicRoomImgDark,\n handleOnClick: navigateToPublicRoom,\n },\n {\n title: t(\"Common:Editor\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
+      "line_number": 274,
+      "context": "</Frame>\n );\n \n return (\n <PresetWrapper\n description={t(\"JavascriptSdk:PublicRoomPresetInfo\")}\n header={t(\"CreateSamplePublicRoom\")}\n >\n <Container>\n <PreviewBlock\n loadCurrentFrame={initFrame}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Embed a public room' is better translated to reflect the action of 'integrating' or 'linking' rather than simply 'entering' (أدخل).  'أدخل' implies physically entering, which doesn't accurately convey the embedding functionality.",
+          "suggestion": "دمج غرفة عامة"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English word 'view' is not accurately represented by the implied meaning of 'عرض'. While 'عرض' can mean 'view', in the context of documents, it often means 'display'. A more suitable translation might reflect 'access'.",
+          "suggestion": "السماح للمستخدمين بالوصول"
+        },
+        {
+          "type": "grammar",
+          "description": "While not strictly incorrect, the sentence structure 'عرض أو تعديل أو تعليق أو مراجعة' is slightly awkward.  A smoother flow could be achieved by rephrasing.",
+          "suggestion": "عرض أو تعديل أو إضافة تعليقات أو مراجعة"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'nəzərdən keçirmək' (review) could be potentially ambiguous. It can mean both 'review' (as in check) and 'to look at/consider'.  While technically correct, it might not convey the intended meaning of a formal review process.",
+          "suggestion": "Consider using a more specific term for 'review' if the context requires a formal review process. For instance, 'yoxlamaq' or 'dəyərləndirmək' could be alternatives, but require further context confirmation."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Embed a public room' could be better translated to convey the technical meaning of integrating or including a public room. 'Incruste' is a valid translation but might not be the most natural or clear for a technical context.",
+          "suggestion": "Integre una sala pública"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'almacenados en ella' is grammatically correct, it can be improved for clarity and flow. It's a bit clunky.",
+          "suggestion": "almacenados allí"
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"review\" is missing from the Finnish translation. The original English implies users can also review documents.",
+          "suggestion": "Upota julkiseen huoneeseen salliaksesi käyttäjien katsella, muokata, kommentoida tai tarkastella sinne tallennettuja asiakirjoja rekisteröitymättä"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"閲覧、編集、コメント、レビューを行うことを許可する\" is a bit clunky. It's literally \"to allow them to perform viewing, editing, commenting, and reviewing\". A more natural Japanese phrasing would be something like \"閲覧、編集、コメント、レビューなどを許可する\" or \"閲覧、編集、コメント、レビューが可能にする\" to better convey the meaning of allowing users to perform those actions.",
+          "suggestion": "公開ルームを埋め込み、ユーザーが登録せずに、そこに保存されているすべてのドキュメントの閲覧、編集、コメント、レビューなどを行えるようにする"
+        },
+        {
+          "type": "grammar",
+          "description": "While not strictly incorrect, the repetition of \"を\" can be slightly improved for smoother reading. It’s functionally correct, but stylistically a bit heavy.",
+          "suggestion": "公開ルームを埋め込み、ユーザーが登録せずに、そこに保存されているすべてのドキュメントを閲覧、編集、コメント、レビューできるようにする"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"view\" is missing. The English content mentions viewing documents, which is not reflected in the Korean translation. It only covers editing, commenting, and reviewing.",
+          "suggestion": "사용자가 등록하지 않고도 모든 문서를 확인, 편집하고 주석을 달거나 검토할 수 있도록 공개 룸을 임베드하세요"
+        },
+        {
+          "type": "formatting",
+          "description": "The comma after \"확인\" creates a slightly awkward reading. While grammatically correct, a more natural flow might be achieved with a different punctuation choice.",
+          "suggestion": "사용자가 등록하지 않고도 모든 문서를 확인 편집하고 주석을 달거나 검토할 수 있도록 공개 룸을 임베드하세요"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Lao translation uses commas to separate list items. While not strictly incorrect, using 'ແລະ' (lae - and) is more common and sounds more natural in Lao for this type of list.",
+          "suggestion": "ຝັງຫ້ອງສາທາລະນະ ເພື່ອໃຫ້ຜູ້ໃຊ້ສາມາດເບິ່ງ, ແກ້ໄຂ, ຕີຄຳເຫັນ, ແລະ ກວດແກ້ ເອກະສານທັງໝົດທີ່ເກັບໄວ້ ໂດຍບໍ່ຕ້ອງລົງທະບຽນ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Embed' is not accurately reflected in the Dutch translation. 'Integreer' is a possible translation but lacks the nuance of embedding a component.",
+          "suggestion": "Consider using 'Bepaal een openbare kamer...' or 'Maak een openbare kamer...' to better convey the idea of embedding."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'opmerkingen te plaatsen' is slightly awkward. A more natural phrasing exists.",
+          "suggestion": "Consider using 'reacties achterlaten' or 'commentaar te geven' instead of 'opmerkingen te plaatsen'."
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'incorporar' (incorporate) is a bit formal and doesn't quite capture the nuance of 'embed' in this context. A more natural translation would be 'Integrar'.",
+          "suggestion": "Integrar uma sala pública para permitir que os usuários visualizem, editem, comentem ou revisem todos os documentos armazenados lá sem registro"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'nela' (in it) is slightly awkward. While grammatically correct, it doesn't flow as naturally as a more direct phrasing.",
+          "suggestion": "Incorporar uma sala pública para permitir que os usuários visualizem, editem, comentem ou revisem todos os documentos armazenados lá sem registro."
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'embed' (English) is translated as 'încorporează'. While technically correct, 'încorporează' implies a more integrated or physical incorporation. A more suitable translation, reflecting the digital context, would be 'integrează' or 'adaugă'.",
+          "suggestion": "Integrează sală publică pentru a permite utilizatorilor să afișeze, să editeze, să comenteze sau să revizuiască toate documentele disponibile fără înregistrare."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'available' is implied but not explicitly stated. While 'disponibile' does convey availability, adding an explicit reference to where the documents are stored (e.g., 'stocate în sala publică') might enhance clarity.",
+          "suggestion": "Integrează sală publică pentru a permite utilizatorilor să afișeze, să editeze, să comenteze sau să revizuiască toate documentele stocate în sala publică fără înregistrare."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'පහත ලියූ ලේඛන සියල්ල බලන්න' (pahatha liyū lēkhana siyalla balanna) translates to 'view all the written documents'. While not entirely wrong, it’s not the best fit for 'view all the documents stored there'. A more accurate rendering would emphasize the existence of the documents within the room, not just that they are written.",
+          "suggestion": "පොදු කාමරයේ ගබඩා කර ඇති සියලු ලේඛන බලන්න (pōdu kāmaryē gabadā kara athi siyallu lēkhana balanna)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ඇතුළු කරන්න' (athulu kanna) can be interpreted as 'to enter' or 'include'. 'Embed' requires a more appropriate verb indicating insertion or integration. ",
+          "suggestion": "පොදු කාමරයක් ස්ථාපනය කරන්න (pōdu kāmaryak sthāpanaya kanna)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The entire phrasing 'ලියාපදිංචි කිරීමකින් තොරව' (liyāpadin̄g̣i karimakin thōravā) translates to 'without registration'. While technically correct, a more natural phrasing emphasizing ease of access might be better. It's a bit clunky.",
+          "suggestion": "නි:සඳහන nélkül (ni:sadahana nēkulā)"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation of 'review' is not accurately conveyed. 'Prezerať' is used twice and doesn't fully capture the meaning of 'review' which implies a more critical assessment or evaluation.",
+          "suggestion": "Consider using a word like 'hodnotiť' or 'skúmať' to better convey the meaning of 'review'."
+        },
+        {
+          "type": "formatting",
+          "description": "The repeated use of 'prezerať' makes the sentence sound slightly awkward.  A slight rephrasing could improve flow.",
+          "suggestion": "Rewrite to avoid repetition. For example: 'Vložiť verejnú miestnosť, aby si používatelia mohli prezerať, upravovať, komentovať a hodnotiť všetky dokumenty, ktoré sú v nej uložené, bez registrácie.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"прегледају\" is used twice, which translates to \"review\". The second instance likely intended to convey \"examine\" or a similar term, as the context implies users are evaluating documents. It's repetitive.",
+          "suggestion": "Replace the second instance of 'прегледају' with a more specific term like 'испитују' (examine), 'оцењују' (evaluate), or 'проверавају' (verify)."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure feels slightly awkward. While technically correct, it can be improved for better flow.",
+          "suggestion": "Consider restructuring the sentence for better readability. For example: 'Уградите јавну собу како би корисници могли да прегледају, уређују, коментишу или испитују све документе који су тамо сачувани, без регистрације.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ugradite' (embed) doesn't quite capture the nuance of 'allow'. It implies a technical installation, rather than granting permission.",
+          "suggestion": "Omogućite javnu sobu kako bi korisnici..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'pregledaju' is used twice, which can sound repetitive. While technically correct, it could be improved for better flow.",
+          "suggestion": "Omogućite javnu sobu kako bi korisnici mogli da pregledaju, uređuju, komentarišu ili recenziraju sve dokumente koji su tamo sačuvani, bez registracije."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'kullanıcıların kaydolmadan, bünyesinde saklanan tüm belgeleri görüntülemesine, düzenlemesine, yorum yapmasına veya incelemesine izin vermek için herkese açık bir oda ekleyin' is a bit verbose and doesn't fully capture the conciseness of the English original. 'Bünyesinde saklanan' (stored within) is unnecessarily wordy.",
+          "suggestion": "Kullanıcıların kaydolmadan tüm belgeleri görüntülemesine, düzenlemesine, yorum yapmasına veya incelemesine izin vermek için herkese açık bir oda ekleyin."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is a bit clunky in Turkish.  It could benefit from rephrasing for better flow.",
+          "suggestion": "Herkese açık bir oda ekleyerek kullanıcıların kaydolmadan tüm belgeleri görüntülemesine, düzenlemesine, yorum yapmasına veya incelemesine olanak sağlayın."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term '审阅' (shen_yue) is somewhat archaic and doesn't perfectly capture the nuance of 'review' in this context. It leans towards a more formal, academic review.",
+          "suggestion": "Consider using a more common term for 'review', such as '评价' (ping_jia) or '审核' (shen_he), which better aligns with the intended user action within the platform."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

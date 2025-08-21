@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,6 @@
 import React from "react";
 import { isMobile } from "react-device-detect";
 
-import { Portal } from "../portal";
 import { Backdrop } from "../backdrop";
 
 import { DropDownProps } from "./DropDown.types";
@@ -50,9 +49,10 @@ const DropDown = (props: DropDownProps) => {
     showDisabledItems = false,
     isDefaultMode = true,
     fixedDirection = false,
-    offsetLeft = 0,
+    offsetX = 0,
     enableKeyboardEvents = true,
     usePortalBackdrop = false,
+    shouldShowBackdrop = false,
   } = props;
 
   const toggleDropDown = (e: React.MouseEvent) => {
@@ -77,18 +77,19 @@ const DropDown = (props: DropDownProps) => {
       isAside={isAside}
       withBackground={withBackground}
       withoutBackground={withoutBackground}
+      shouldShowBackdrop={shouldShowBackdrop}
     />
   ) : null;
 
   return (
     <>
-      {!usePortalBackdrop && backDrop}
+      {!usePortalBackdrop ? backDrop : null}
       <EnhancedComponent
         {...eventTypesProp}
         showDisabledItems={showDisabledItems}
         isDefaultMode={isDefaultMode}
         fixedDirection={fixedDirection}
-        offsetLeft={offsetLeft}
+        offsetX={offsetX}
         enableKeyboardEvents={enableKeyboardEvents}
         backDrop={backDrop}
         {...props}

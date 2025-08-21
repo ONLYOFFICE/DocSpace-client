@@ -1,0 +1,244 @@
+{
+  "key_path": "SelectDate",
+  "content": "Select date",
+  "content_en_sha1_hash": "b84a6ecbc04c1f54b6fa504c6441ca78e07db586",
+  "created_at": "2025-05-19T21:30:48.374Z",
+  "updated_at": "2025-08-11T18:11:59.160Z",
+  "comment": {
+    "text": "The \"SelectDate\" translation key is used to display a label for date selection in various UI components, including a toggle block and a filter dialog. Its purpose is to provide users with clear instructions on how to select a date in these interfaces. It appears as part of the labels for date pickers and edit link panels.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T08:52:22.543Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/EditLinkPanel/LimitTimeBlock.js",
+      "line_number": 82,
+      "context": "onChange={onChange}\n minDate={minDate}\n openDate={new Date()}\n hasError={isExpired}\n locale={language}\n selectDateText={t(\"Common:SelectDate\")}\n dataTestId=\"edit_link_panel_date_time_picker\"\n />\n </ToggleBlock>\n );\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/FilterDialog/DeliveryDatePicker.js",
+      "line_number": 261,
+      "context": ") : (\n <DatePicker\n outerDate={filters.deliveryDate}\n isMobile={isMobile()}\n onChange={onDateSet}\n selectDateText={t(\"Common:SelectDate\")}\n showCalendarIcon={false}\n locale={i18n.language}\n dataTestId=\"delivery_date_picker\"\n />\n )}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
+      "line_number": 267,
+      "context": "components={{\n 1: (\n <DatePicker\n initialDate={startDate}\n onChange={onStartDateChange}\n selectDateText={t(\"Common:SelectDate\")}\n locale={moment.locale()}\n openDate={startDate}\n minDate={undefined}\n maxDate={endDate}\n outerDate={startDate}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
+      "line_number": 267,
+      "context": "components={{\n 1: (\n <DatePicker\n initialDate={startDate}\n onChange={onStartDateChange}\n selectDateText={t(\"Common:SelectDate\")}\n locale={moment.locale()}\n openDate={startDate}\n minDate={undefined}\n maxDate={endDate}\n outerDate={startDate}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Selectare dată' is not the most natural or accurate translation of 'Select date'. 'Selectare' implies a process of selection, whereas 'Select date' refers to choosing a date. A more suitable translation would be 'Alegere dată' or simply 'Data selectată'.",
+          "suggestion": "Alegere dată"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation 'Одабери датум' while understandable, isn't the most natural or common way to say 'Select date' in Serbian. A more idiomatic translation would be 'Избери датум'.",
+          "suggestion": "Избери датум"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Tarih seç' is understandable, a more natural and complete translation of 'Select date' in Turkish would be 'Tarih seçin'. The addition of '-in' makes it a more polite and complete command/request.",
+          "suggestion": "Tarih seçin"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "DescriptionUploading": "{{productName}}-da (məsələn, {{sectionName}} bölməsində) PDF formaları yaradın və hazır olanları otağa yükləyin. Daxili şablon kitabxanasından istifadə edin və çoxsaylı hazır PDF şablonları arasından seçim edin.",
+  "HeaderComplete": "Toplanmış cavabların asan təhlili",
+  "HeaderSharing": "Sürətli paylaşım",
+  "HeaderStarting": "Forma doldurulması prosesinə başlanır",
+  "HeaderSubmitting": "Cavablar göndərilir",
+  "HeaderUploading": "Asan formanın yüklənməsi",
+  "TitleComplete": "Tamamlanmış formaları yoxlayın və elektron cədvəldə avtomatik toplanan məlumatları təhlil edin. Hər şey - bir otaqda.",
+  "TitleSharing": "Yüklənmiş PDF formalarını doldurmaq üçün digər {{productName}} üzvlərini otağa dəvət edin. Otağı xarici istifadəçilərlə paylaşmaq üçün ictimai giriş linkini kopyalayın.",
+  "TitleStarting": "Forma doldurmaq üçün açıldıqda, hər bir respondent üçün avtomatik olaraq ayrıca nüsxə yaradılır və Davam edən qovluğunda saxlanılır. Bu o deməkdir ki, forma işə salınıb, lakin hələ tamamlanmayıb.",
+  "TitleSubmitting": "Açılan forma nüsxəsində Tamamla və Göndər düyməsini sıxdıqda, Tamamlanmış qovluğuna köçürülür.",
+  "WelcomeDescription": "Burada sadə PDF formasının doldurulmasını redaktə edə və cavabları asanlıqla toplayıb təhlil edə bilərsiniz. Başlamağa hazırsınız?",
+  "WelcomeFillingForm": "Forma Doldurma Otağına xoş gəlmisiniz!",
+  "WelcomeStartTutorial": "Qısa bir ekskursiya edin"
+}

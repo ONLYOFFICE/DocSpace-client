@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -93,6 +93,7 @@ const SubmitToGalleryTile = ({
   hideSubmitToGalleryTile,
   setSubmitToGalleryDialogVisible,
   currentColorScheme,
+  logoText,
 }) => {
   if (!submitToGalleryTileIsVisible) return null;
 
@@ -109,12 +110,12 @@ const SubmitToGalleryTile = ({
       <div className="info">
         <div className="title">
           {t("Common:SubmitToGalleryBlockHeader", {
-            organizationName: t("Common:OrganizationName"),
+            organizationName: logoText,
           })}
         </div>
         <div className="body">
           {t("Common:SubmitToGalleryBlockBody", {
-            organizationName: t("Common:OrganizationName"),
+            organizationName: logoText,
           })}
         </div>
       </div>
@@ -124,13 +125,14 @@ const SubmitToGalleryTile = ({
         size="small"
         label={t("Common:SubmitToFormGallery")}
         scale
+        testId="submit_to_gallery_tile"
       />
     </StyledSubmitToGalleryTile>
   );
 };
 
 export default inject(({ settingsStore, oformsStore, dialogsStore }) => {
-  const { currentColorScheme } = settingsStore;
+  const { currentColorScheme, logoText } = settingsStore;
 
   return {
     submitToGalleryTileIsVisible: oformsStore.submitToGalleryTileIsVisible,
@@ -138,5 +140,6 @@ export default inject(({ settingsStore, oformsStore, dialogsStore }) => {
     setSubmitToGalleryDialogVisible:
       dialogsStore.setSubmitToGalleryDialogVisible,
     currentColorScheme,
+    logoText,
   };
 })(withTranslation("Common", "FormGallery")(observer(SubmitToGalleryTile)));

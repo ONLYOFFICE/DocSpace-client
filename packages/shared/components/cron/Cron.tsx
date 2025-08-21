@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -45,21 +45,22 @@ import {
 import { getCronStringFromValues, stringToArray } from "./Cron.part";
 import { defaultCronString, defaultPeriod } from "./Cron.constants";
 import { getPeriodFromCronParts, getUnits } from "./Cron.utils";
-import { CronWrapper, Suffix, Wrapper } from "./Cron.styled";
 
 import type { PeriodType, CronProps } from "./Cron.types";
+import styles from "./Cron.module.scss";
 
 const Cron = ({
   value = defaultCronString,
   setValue,
   onError,
   isDisabled,
+  dataTestId,
 }: CronProps) => {
   const { t, i18n } = useTranslation("Common");
 
   const didMountRef = useRef<boolean>(false);
   const cronRef = useRef<string>(value);
-  const errorRef = useRef<Error>();
+  const errorRef = useRef<Error>(undefined);
 
   const [error, setError] = useState<Error>();
   const [cron, setCron] = useState<string>(value);
@@ -152,23 +153,25 @@ const Cron = ({
   const units = useMemo(() => getUnits(i18n.language), [i18n.language]);
 
   return (
-    <CronWrapper data-testid="cron">
+    <div data-testid={dataTestId ?? "cron"} className={styles.cronWrapper}>
       <Period
         t={t}
         period={period}
         setPeriod={setPeriod}
         isDisabled={isDisabled}
+        dataTestId={dataTestId ? `${dataTestId}_period` : undefined}
       />
-      {isYear && (
+      {isYear ? (
         <Months
           unit={units[3]}
           t={t}
           months={months}
           setMonths={setMonths}
           isDisabled={isDisabled}
+          dataTestId={dataTestId ? `${dataTestId}_months` : undefined}
         />
-      )}
-      {(isYear || isMonth) && (
+      ) : null}
+      {isYear || isMonth ? (
         <MonthDays
           t={t}
           unit={units[2]}
@@ -176,9 +179,10 @@ const Cron = ({
           monthDays={monthDays}
           setMonthDays={setMonthDays}
           isDisabled={isDisabled}
+          dataTestId={dataTestId ? `${dataTestId}_month_days` : undefined}
         />
-      )}
-      {(isYear || isMonth || isWeek) && (
+      ) : null}
+      {isYear || isMonth || isWeek ? (
         <WeekDays
           t={t}
           unit={units[4]}
@@ -187,20 +191,22 @@ const Cron = ({
           weekDays={weekDays}
           setWeekDays={setWeekDays}
           isDisabled={isDisabled}
+          dataTestId={dataTestId ? `${dataTestId}_week_days` : undefined}
         />
-      )}
-      <Wrapper>
-        {!isHour && !isMinute && (
+      ) : null}
+      <div className={styles.wrapper}>
+        {!isHour && !isMinute ? (
           <Hours
             unit={units[1]}
             t={t}
             hours={hours}
             setHours={setHours}
             isDisabled={isDisabled}
+            dataTestId={dataTestId ? `${dataTestId}_hours` : undefined}
           />
-        )}
+        ) : null}
 
-        {!isMinute && (
+        {!isMinute ? (
           <Minutes
             t={t}
             unit={units[0]}
@@ -208,11 +214,12 @@ const Cron = ({
             minutes={minutes}
             setMinutes={setMinutes}
             isDisabled={isDisabled}
+            dataTestId={dataTestId ? `${dataTestId}_minutes` : undefined}
           />
-        )}
-        <Suffix>{t("Common:UTC")}</Suffix>
-      </Wrapper>
-    </CronWrapper>
+        ) : null}
+        <span className={styles.suffix}>{t("Common:UTC")}</span>
+      </div>
+    </div>
   );
 };
 

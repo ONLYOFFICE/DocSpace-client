@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -42,7 +42,7 @@ import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const EmptyContainer = styled(EmptyScreenContainer)`
   .ec-header {
-    font-size: 23px;
+    font-size: 23px !important;
   }
 
   .ec-image {
@@ -55,14 +55,14 @@ const EmptyContainer = styled(EmptyScreenContainer)`
   }
 
   .ec-desc {
-    font-size: 13px;
+    font-size: 13px !important;
     margin-top: 12px;
     margin-bottom: 22px;
   }
 `;
 
 const Api = (props) => {
-  const { t, theme, apiBasicLink, currentDeviceType } = props;
+  const { t, theme, apiBasicLink, currentDeviceType, logoText } = props;
 
   const imgSrc = theme.isBase ? ApiSvgUrl : ApiDarkSvgUrl;
 
@@ -77,13 +77,14 @@ const Api = (props) => {
             primary
             size="normal"
             minWidth="135px"
+            testId="learn_more_button"
             onClick={() => window.open(apiBasicLink, "_blank")}
             scale={currentDeviceType === DeviceType.mobile}
           />
         }
         descriptionText={t("ApiPageDescription", {
           productName: t("Common:ProductName"),
-          organizationName: t("Common:OrganizationName"),
+          organizationName: logoText,
         })}
         headerText={t("ApiPageHeader")}
         imageAlt={t("ApiPageHeader")}
@@ -94,11 +95,12 @@ const Api = (props) => {
 };
 
 export default inject(({ settingsStore }) => {
-  const { theme, apiBasicLink, currentDeviceType } = settingsStore;
+  const { theme, apiBasicLink, currentDeviceType, logoText } = settingsStore;
 
   return {
     theme,
     apiBasicLink,
     currentDeviceType,
+    logoText,
   };
 })(withTranslation(["Settings", "Common"])(observer(Api)));

@@ -1,0 +1,243 @@
+{
+  "key_path": "ErrorUnavailableText",
+  "content": "{{productName}} unavailable",
+  "content_en_sha1_hash": "cea8f8fad51c09003165080355d21a1507a41869",
+  "created_at": "2025-05-19T21:30:56.422Z",
+  "updated_at": "2025-05-26T07:57:32.796Z",
+  "comment": {
+    "text": "This translation key is used to display a message when a product is unavailable. The text will appear on a portal dialog button and in an error container, indicating that the product cannot be accessed. Translators should provide a localized version of \"Product Name\" in this context.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:54.510Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalUnavailable/index.js",
+      "line_number": 89,
+      "context": "})}\n onClose={onCloseDialog}\n />\n <ErrorContainer\n className=\"portal-unavailable_container\"\n headerText={t(\"ErrorUnavailableText\", {\n productName: t(\"Common:ProductName\"),\n })}\n >\n <StyledBodyContent>\n <Text textAlign=\"center\" className=\"portal-unavailable_text\">",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'əlçatan deyil' while technically meaning 'not accessible', doesn't fully convey the meaning of 'unavailable' in a product context. It suggests an accessibility issue rather than simply a lack of stock or a product not being offered.",
+          "suggestion": "Consider a translation like 'mövcud deyil' which more directly translates to 'not available' or 'out of stock'."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '이용 불가' while technically meaning 'unavailable', carries a connotation of 'usage not permitted' or 'service unavailable' rather than simply 'unavailable'. A more direct translation would better reflect the original meaning.",
+          "suggestion": "{{productName}} 사용 불가능"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Oprogramowanie {{productName}} jest niedostępne' is too literal and not idiomatic. While technically correct, 'Oprogramowanie' (Software) isn't always necessary and can sound clunky. A more natural translation would depend on the context, but often omitting 'Oprogramowanie' is preferred.",
+          "suggestion": "Consider \"{{productName}} niedostępne\" or \"{{productName}} jest niedostępne\" depending on context."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'nedostupan' while technically meaning 'unavailable,' sounds awkward and isn't the most natural translation for 'unavailable' in this context. A more natural and commonly used translation would be 'nema u ponudi' or 'nije dostupan'.",
+          "suggestion": "Use 'nema u ponudi' or 'nije dostupan' instead of 'nedostupan'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "Leading space before the product name in the Chinese translation.",
+          "suggestion": "Remove the leading space. The translation should be \"{{productName}}不可用\"."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While '不可用' is a technically correct translation for 'unavailable', it sounds somewhat stiff and unnatural in most contexts. A more natural translation might be '售罄' (sold out) or '缺货' (out of stock) depending on the exact reason for unavailability.",
+          "suggestion": "Consider alternative translations like '售罄' or '缺货' for a more natural-sounding result."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

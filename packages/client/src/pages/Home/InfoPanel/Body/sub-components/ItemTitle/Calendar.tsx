@@ -115,13 +115,12 @@ const CalendarComponent = ({
     if (!date) return;
     const formattedDate = moment(date.format("YYYY-MM-DD"));
     setSelectedDate(date);
-    // eslint-disable-next-line no-underscore-dangle
-    setCalendarDay(formattedDate._i);
+    setCalendarDay(formattedDate.format("YYYY-MM-DD"));
     setIsOpen(false);
   };
 
   const formattedRoomCreationDate =
-    moment(roomCreationDate).format("YYYY/MM/DD");
+    moment(roomCreationDate).format("YYYY-MM-DD");
 
   return (
     <StyledCalendarComponent>
@@ -133,7 +132,7 @@ const CalendarComponent = ({
         />
       </div>
 
-      {isOpen && (
+      {isOpen ? (
         <StyledCalendar
           height={height}
           setSelectedDate={onDateSet}
@@ -145,7 +144,7 @@ const CalendarComponent = ({
           isScroll={!isMobile()}
           locale={locale}
         />
-      )}
+      ) : null}
     </StyledCalendarComponent>
   );
 };

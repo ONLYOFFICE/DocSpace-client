@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,41 +24,49 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
-import { Box } from "@docspace/shared/components/box";
-import { Label } from "@docspace/shared/components/label";
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { ComboBox } from "@docspace/shared/components/combobox";
 import { inject, observer } from "mobx-react";
+
 import SDK from "@onlyoffice/docspace-sdk-js";
 
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { ComboBox } from "@docspace/shared/components/combobox";
+import { Label } from "@docspace/shared/components/label";
 import { RoomsType } from "@docspace/shared/enums";
+import { getSdkScriptUrl, loadScript } from "@docspace/shared/utils/common";
 
-import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import { WidthSetter } from "../sub-components/WidthSetter";
-import { HeightSetter } from "../sub-components/HeightSetter";
-import { FrameIdSetter } from "../sub-components/FrameIdSetter";
-import { PresetWrapper } from "../sub-components/PresetWrapper";
-import { SelectTextInput } from "../sub-components/SelectTextInput";
-import { CancelTextInput } from "../sub-components/CancelTextInput";
-import { MainElementParameter } from "../sub-components/MainElementParameter";
-import { PreviewBlock } from "../sub-components/PreviewBlock";
-import { Integration } from "../sub-components/Integration";
-
-import { dimensionsModel, defaultSize, defaultDimension } from "../constants";
 
 import {
-  Controls,
+  defaultDimension,
+  defaultSize,
+  dimensionsModel,
+  sdkSource,
+  sdkVersion,
+} from "../constants";
+
+import { CancelTextInput } from "../sub-components/CancelTextInput";
+import { FrameIdSetter } from "../sub-components/FrameIdSetter";
+import { HeightSetter } from "../sub-components/HeightSetter";
+import Integration from "../sub-components/Integration";
+import { MainElementParameter } from "../sub-components/MainElementParameter";
+import { PresetWrapper } from "../sub-components/PresetWrapper";
+import { PreviewBlock } from "../sub-components/PreviewBlock";
+import { SelectTextInput } from "../sub-components/SelectTextInput";
+import { VersionSelector } from "../sub-components/VersionSelector";
+import { WidthSetter } from "../sub-components/WidthSetter";
+
+import {
   CategorySubHeader,
+  Container,
+  Controls,
   ControlsSection,
   Frame,
-  Container,
 } from "./StyledPresets";
 
 const RoomSelector = (props) => {
-  const { t, theme, currentColorScheme } = props;
+  const { t, theme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
@@ -68,28 +76,37 @@ const RoomSelector = (props) => {
       label: t("AllTypes"),
       roomType: undefined,
       default: true,
+      // dataTestId: "room_type_all_option",
     },
     {
       key: "room-filling-form-collaboration",
       label: t("Common:FormFilingRoomTitle"),
       roomType: RoomsType.FormRoom,
+      // dataTestId: "room_type_form_option",
     },
     {
       key: "room-type-collaboration",
       label: t("Common:CollaborationRoomTitle"),
       roomType: RoomsType.EditingRoom,
+      // dataTestId: "room_type_editing_option",
     },
     {
       key: "room-type-public",
       label: t("Common:PublicRoom"),
       roomType: RoomsType.PublicRoom,
+      // dataTestId: "room_type_public_option",
     },
     {
       key: "room-type-custom",
       label: t("Common:CustomRoomTitle"),
       roomType: RoomsType.CustomRoom,
+      // dataTestId: "room_type_custom_option",
     },
   ];
+
+  const [version, onSetVersion] = useState(sdkVersion[210]);
+
+  const [source, onSetSource] = useState(sdkSource.Package);
 
   const [roomType, setRoomType] = useState(roomTypeOptions[0]);
 
@@ -120,19 +137,44 @@ const RoomSelector = (props) => {
     },
   });
 
-  const sdk = new SDK();
+  const fromPackage = source === sdkSource.Package;
+
+  const sdkScriptUrl = getSdkScriptUrl(version);
+
+  const sdk = fromPackage ? new SDK() : window.DocSpace.SDK;
 
   const destroyFrame = () => {
-    sdk.frames[config.frameId]?.destroyFrame();
+    sdk?.frames[config.frameId]?.destroyFrame();
   };
 
   const initFrame = () => {
-    setTimeout(() => sdk.init(config), 10);
+    setTimeout(() => sdk?.init(config), 0);
   };
 
   useEffect(() => {
+    const script = document.getElementById("sdk-script");
+
+    if (script) {
+      script.remove();
+      destroyFrame();
+    }
+
+    if (!fromPackage) {
+      loadScript(sdkScriptUrl, "sdk-script");
+    }
+
+    return () => {
+      destroyFrame();
+      setTimeout(() => script?.remove(), 10);
+    };
+  }, [source, version]);
+
+  useEffect(() => {
     initFrame();
-    return () => destroyFrame();
+
+    return () => {
+      destroyFrame();
+    };
   });
 
   useEffect(() => {
@@ -156,19 +198,11 @@ const RoomSelector = (props) => {
 
   const preview = (
     <Frame
-      width={
-        config.id !== undefined && config.width.includes("px")
-          ? config.width
-          : undefined
-      }
-      height={
-        config.id !== undefined && config.height.includes("px")
-          ? config.height
-          : undefined
-      }
+      width={config.width.includes("px") ? config.width : undefined}
+      height={config.height.includes("px") ? config.height : undefined}
       targetId={config.frameId}
     >
-      <Box id={config.frameId} />
+      <div id={config.frameId} />
     </Frame>
   );
 
@@ -179,15 +213,19 @@ const RoomSelector = (props) => {
     >
       <Container>
         <PreviewBlock
-          t={t}
           loadCurrentFrame={initFrame}
           preview={preview}
           theme={theme}
           frameId={config.frameId}
-          scriptUrl={SDK_SCRIPT_URL}
+          scriptUrl={sdkScriptUrl}
           config={config}
         />
         <Controls>
+          <VersionSelector
+            t={t}
+            onSetSource={onSetSource}
+            onSetVersion={onSetVersion}
+          />
           <MainElementParameter
             t={t}
             config={config}
@@ -225,6 +263,7 @@ const RoomSelector = (props) => {
               label={t("Common:Search")}
               onChange={toggleWithSearch}
               isChecked={config.withSearch}
+              dataTestId="search_checkbox"
             />
             <SelectTextInput t={t} config={config} setConfig={setConfig} />
             <CancelTextInput t={t} config={config} setConfig={setConfig} />
@@ -241,34 +280,25 @@ const RoomSelector = (props) => {
               selectedOption={roomType}
               displaySelectedOption
               directionY="top"
+              dataTestId="room_type_combobox"
+              dropDownTestId="room_type_dropdown"
             />
           </ControlsSection>
 
-          <Integration
-            className="integration-examples"
-            t={t}
-            theme={theme}
-            currentColorScheme={currentColorScheme}
-          />
+          <Integration className="integration-examples" />
         </Controls>
       </Container>
 
-      <Integration
-        className="integration-examples integration-examples-bottom"
-        t={t}
-        theme={theme}
-        currentColorScheme={currentColorScheme}
-      />
+      <Integration className="integration-examples integration-examples-bottom" />
     </PresetWrapper>
   );
 };
 
 export const Component = inject(({ settingsStore }) => {
-  const { theme, currentColorScheme } = settingsStore;
+  const { theme } = settingsStore;
 
   return {
     theme,
-    currentColorScheme,
   };
 })(
   withTranslation([

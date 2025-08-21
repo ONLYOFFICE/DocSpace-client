@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,13 +33,16 @@ import { Button } from "@docspace/shared/components/button";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { Text } from "@docspace/shared/components/text";
 import { Tooltip } from "@docspace/shared/components/tooltip";
-import { connectedCloudsTypeTitleTranslation as ProviderKeyTranslation } from "@docspace/client/src/helpers/filesUtils";
+import { connectedCloudsTypeTitleTranslation as ProviderKeyTranslation } from "SRC_DIR/helpers/filesUtils";
 import { toastr } from "@docspace/shared/components/toast";
 import { ComboBox } from "@docspace/shared/components/combobox";
 
 import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
+import {
+  THIRD_PARTY_SERVICES_URL,
+  ThirdPartyServicesUrlName,
+} from "@docspace/shared/constants";
 import { injectDefaultTheme, isDesktop } from "@docspace/shared/utils";
-import { ThirdPartyServicesUrlName } from "../../../../../helpers/constants";
 
 const StyledStorageLocation = styled.div.attrs(injectDefaultTheme)`
   display: flex;
@@ -157,7 +160,7 @@ const ThirdPartyComboBox = ({
   const setStorageLocaiton = (thirparty, isConnected) => {
     if (!isConnected) {
       window.open(
-        `/portal-settings/integration/third-party-services?service=${ThirdPartyServicesUrlName[thirparty.id]}`,
+        `${THIRD_PARTY_SERVICES_URL}${ThirdPartyServicesUrlName[thirparty.id]}`,
         "_blank",
       );
       return;
@@ -250,7 +253,8 @@ const ThirdPartyComboBox = ({
     ?.map((item) => {
       const disabled = !item.isConnected && !isAdmin;
       const itemLabel =
-        item.title + (item.isConnected ? "" : ` (${t("ActivationRequired")})`);
+        item.title +
+        (item.isConnected ? "" : ` (${t("Common:ActivationRequired")})`);
 
       const disabledData = disabled
         ? { "data-tooltip-id": "file-links-tooltip", "data-tip": "tooltip" }
@@ -262,6 +266,7 @@ const ThirdPartyComboBox = ({
             onClick={onSelect}
             data-third-party-id={item.id}
             disabled={disabled}
+            testId={`drop_down_item_${item.id}`}
             {...disabledData}
           >
             <Text className="drop-down-item_text" fontWeight={600}>
@@ -275,14 +280,14 @@ const ThirdPartyComboBox = ({
               />
             ) : null}
           </DropDownItem>
-          {disabled && (
+          {disabled ? (
             <Tooltip
               float={isDesktop()}
               id="file-links-tooltip"
               getContent={getTextTooltip}
               place="bottom"
             />
-          )}
+          ) : null}
         </StyledComboBoxItem>
       );
     });
@@ -309,6 +314,7 @@ const ThirdPartyComboBox = ({
           scaledOptions
           showDisabledItems
           displayArrow
+          dataTestId="create_edit_room_thirdparty_combobox"
         />
         <Button
           id="shared_third-party-storage_connect"
@@ -321,6 +327,7 @@ const ThirdPartyComboBox = ({
           size="small"
           label={t("Common:Connect")}
           onClick={onShowService}
+          testId="create_edit_room_thirdparty_connect"
         />
       </div>
     </StyledStorageLocation>

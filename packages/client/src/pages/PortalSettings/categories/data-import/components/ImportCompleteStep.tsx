@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -142,23 +142,24 @@ const ImportCompleteStep = (props: ImportCompleteStepProps) => {
         })}
       </InfoText>
 
-      {importResult.failedUsers > 0 && (
+      {importResult.failedUsers > 0 ? (
         <ErrorText>
           {t("Settings:ErrorsWereFound", {
             errors: importResult.failedUsers,
           })}
         </ErrorText>
-      )}
+      ) : null}
 
-      {importResult.errors?.length > 0 && (
+      {importResult.errors?.length > 0 ? (
         <ErrorText>{t("Settings:ErrorOccuredDownloadLog")}</ErrorText>
-      )}
+      ) : null}
 
       <Wrapper>
         <Checkbox
           label={t("Settings:SendInviteLetter")}
           isChecked={isChecked}
           onChange={onChangeCheckbox}
+          dataTestId="send_invite_letter_checkbox"
         />
         <HelpButton
           place="right"
@@ -167,6 +168,7 @@ const ImportCompleteStep = (props: ImportCompleteStepProps) => {
           tooltipContent={
             <Text fontSize="12px">{t("Settings:InviteLetterTooltip")}</Text>
           }
+          dataTestId="invite_letter_help_button"
         />
       </Wrapper>
 
@@ -178,6 +180,8 @@ const ImportCompleteStep = (props: ImportCompleteStepProps) => {
         cancelButtonLabel={t("Settings:DownloadLog")}
         displaySettings
         showReminder
+        saveButtonDataTestId="finish_import_button"
+        cancelButtonDataTestId="download_log_button"
       />
     </>
   );

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -91,6 +91,7 @@ const SupportBlock = ({
           isRequired
           isError={policyError || policyRequiredError}
           onBlur={onBlur}
+          dataTestId="policy_url_input_group"
         />
         <InputGroup
           label={t("TermsOfServiceURL")}
@@ -108,6 +109,7 @@ const SupportBlock = ({
           isRequired
           isError={termsError || termsRequiredError}
           onBlur={onBlur}
+          dataTestId="terms_url_input_group"
         />
       </StyledInputBlock>
     </StyledBlock>

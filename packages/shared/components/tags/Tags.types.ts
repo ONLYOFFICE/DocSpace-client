@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,9 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { TDirectionY } from "../../types";
+
 export type TagType = {
+  /** Accepts a unique key for the tag. */
   key?: string;
+  /** Indicates if the tag is a default tag. */
   isDefault?: boolean;
+  /** Indicates if the tag is associated with a third-party provider. */
   isThirdParty?: boolean;
   /** Accepts the tag label */
   label: string;
@@ -36,12 +41,16 @@ export type TagType = {
   advancedOptions?: React.ReactNode[];
   /** Accepts the tag styles as disabled and disables clicking */
   isDisabled?: boolean;
+  /** Indicates the type of room associated with the tag. */
   roomType?: number;
+  /** Accepts the icon associated with the tag. */
   icon?: string;
+  /** Indicates the type of provider associated with the tag. */
   providerType?: number;
+  onClick?: () => void;
 };
 
-export interface TagsProps {
+export type TagsProps = {
   /** Accepts id */
   id?: string;
   /** Accepts the tags */
@@ -55,4 +64,16 @@ export interface TagsProps {
   /** Accepts the function that is called when the tag is selected */
   onSelectTag: (tag?: object) => void;
   removeTagIcon?: boolean;
-}
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
+  /** Controls whether the dropdown uses portal mode or not */
+  isDefaultMode?: boolean;
+  /** Sets the opening direction relative to the parent */
+  directionY?: TDirectionY;
+  /** Disables check position. Used to set the direction explicitly */
+  fixedDirection?: boolean;
+  /** Required for specifying the exact distance from the parent component */
+  manualY?: string;
+  /** Required for specifying the exact distance from the parent component */
+  manualX?: string;
+};

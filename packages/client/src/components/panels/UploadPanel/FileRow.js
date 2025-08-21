@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,140 +25,26 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { Component } from "react";
-import styled, { css } from "styled-components";
-import { Row } from "@docspace/shared/components/row";
+
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { isMobile } from "react-device-detect";
-import { NoUserSelect, tablet } from "@docspace/shared/utils";
+
 import { Button } from "@docspace/shared/components/button";
-import ActionsUploadedFile from "./SubComponents/ActionsUploadedFile";
-import ErrorFileUpload from "./SubComponents/ErrorFileUpload";
-import SimulatePassword from "../../SimulatePassword";
-import LoadingButton from "./SubComponents/LoadingButton";
+import { ProgressBar } from "@docspace/shared/components/progress-bar";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { toastr } from "@docspace/shared/components/toast";
+import { SimulatePassword } from "@docspace/shared/components/simulate-password";
 
-const StyledFileRow = styled(Row)`
-  width: 100%;
-  box-sizing: border-box;
+import CloseSvgUrl from "PUBLIC_DIR/images/icons/16/cross.react.svg?url";
 
-  .row_context-menu-wrapper {
-    width: auto;
-    display: none;
-  }
+import {
+  StyledFileRow,
+  ErrorFile,
+  FileActions,
+} from "SRC_DIR/components/PanelComponents";
 
-  ${!isMobile && "min-height: 48px;"}
-
-  height: 100%;
-
-  padding-inline-end: 16px;
-
-  .styled-element,
-  .row_content {
-    ${(props) =>
-      props.showPasswordInput &&
-      css`
-        margin-top: -40px;
-
-        @media ${tablet} {
-          margin-top: -44px;
-        }
-      `}
-  }
-
-  .styled-element {
-    margin-inline-end: 8px !important;
-  }
-
-  .upload-panel_file-name {
-    max-width: 412px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    align-items: center;
-    display: flex;
-  }
-
-  .enter-password {
-    white-space: nowrap;
-    max-width: 97px;
-    overflow: hidden;
-    ${NoUserSelect}
-  }
-  .password-input {
-    position: absolute;
-    top: 48px;
-    inset-inline: 0;
-    max-width: 470px;
-    width: calc(100% - 16px);
-    display: flex;
-  }
-
-  #conversion-button {
-    margin-inline-start: 8px;
-    width: 100%;
-    max-width: 78px;
-  }
-  .row_content > a,
-  .row_content > p {
-    margin: auto 0;
-    line-height: 16px;
-  }
-
-  .upload_panel-icon {
-    margin-inline-start: auto;
-    padding-inline-start: 16px;
-
-    line-height: 24px;
-    display: flex;
-    align-items: center;
-    flex-direction: row-reverse;
-
-    svg {
-      width: 16px;
-      height: 16px;
-    }
-
-    .enter-password {
-      color: ${(props) => props.theme.filesPanels.upload.color};
-      margin-inline-end: 8px;
-      text-decoration: underline dashed;
-      cursor: pointer;
-    }
-  }
-
-  .img_error {
-    filter: grayscale(1);
-  }
-
-  .convert_icon {
-    color: ${(props) => props.theme.filesPanels.upload.iconFill};
-    padding-inline-end: 12px;
-  }
-
-  .upload-panel_file-row-link {
-    ${(props) =>
-      !props.isMediaActive &&
-      css`
-        cursor: default;
-      `}
-    :hover {
-      cursor: pointer;
-    }
-  }
-
-  .upload-panel-file-error_text {
-    ${(props) =>
-      props.isError &&
-      css`
-        color: ${props.theme.filesPanels.upload.color};
-      `}
-  }
-
-  .file-exst {
-    color: ${(props) => props.theme.filesPanels.upload.color};
-  }
-`;
 class FileRow extends Component {
   constructor(props) {
     super(props);
@@ -168,7 +54,7 @@ class FileRow extends Component {
       password: "",
       passwordValid: true,
     };
-
+    this.inputRef = React.createRef();
     this.onChangePassword = this.onChangePassword.bind(this);
   }
 
@@ -197,26 +83,21 @@ class FileRow extends Component {
     const {
       setMediaViewerData,
       setUploadPanelVisible,
-      clearUploadedFilesHistory,
+
       isMediaActive,
       setCurrentItem,
       item,
-      uploaded,
     } = this.props;
     if (!isMediaActive) setCurrentItem(item);
 
     const data = { visible: true, id };
     setMediaViewerData(data);
     setUploadPanelVisible(false);
-
-    if (uploaded) {
-      clearUploadedFilesHistory();
-    }
   };
 
   onButtonClick = () => {
     const { password } = this.state;
-    const { removeFileFromList, convertFile, item, uploadedFiles } = this.props;
+    const { convertFile, item, uploadedFiles, t } = this.props;
     const { fileId, toFolderId, fileInfo } = item;
 
     if (this.hasError()) return;
@@ -231,10 +112,9 @@ class FileRow extends Component {
       password,
       index,
     };
-
+    toastr.clear();
     this.onTextClick();
-    removeFileFromList(fileId);
-    convertFile(newItem);
+    convertFile(newItem, t);
   };
 
   onChangePassword(password) {
@@ -291,14 +171,17 @@ class FileRow extends Component {
       if (!url) return;
       window.open(url, downloadInCurrentTab ? "_self" : "_blank");
     };
-
     return (
       <StyledFileRow
         className="download-row"
         key={item.uniqueId}
         checkbox={false}
         element={
-          <img className={item.error && "img_error"} src={fileIcon} alt="" />
+          <img
+            className={item.error ? "img_error" : null}
+            src={fileIcon}
+            alt=""
+          />
         }
         isMediaActive={isMediaActive}
         showPasswordInput={showPasswordInput}
@@ -348,12 +231,9 @@ class FileRow extends Component {
           )}
 
           {item.fileId && !item.error ? (
-            <ActionsUploadedFile
-              item={item}
-              onCancelCurrentUpload={this.onCancelCurrentUpload}
-            />
+            <FileActions item={item} />
           ) : item.error || (!item.fileId && uploaded) ? (
-            <ErrorFileUpload
+            <ErrorFile
               t={t}
               item={item}
               theme={theme}
@@ -361,24 +241,44 @@ class FileRow extends Component {
               showPasswordInput={showPasswordInput}
             />
           ) : (
-            <div
-              className="upload_panel-icon"
-              data-id={item.uniqueId}
-              onClick={this.onCancelCurrentUpload}
-            >
-              <LoadingButton item={item} />
-            </div>
+            <>
+              <div className="actions-wrapper">
+                {item.percent >= 0 ? (
+                  <Text className="upload-panel_percent-text">
+                    {Math.trunc(item.percent)}&#37;
+                  </Text>
+                ) : null}
+                <IconButton
+                  data-id={item.uniqueId}
+                  data-action={item.action}
+                  data-file-id={item.fileId}
+                  iconName={CloseSvgUrl}
+                  size={16}
+                  className="upload-panel_close-button"
+                  onClick={this.onCancelCurrentUpload}
+                />
+              </div>
+              {item.action !== "convert" ? (
+                <div className="password-input">
+                  <ProgressBar
+                    style={{ width: "100%" }}
+                    percent={item.percent}
+                  />
+                </div>
+              ) : null}
+            </>
           )}
-          {showPasswordInput && (
+
+          {showPasswordInput ? (
             <div className="password-input">
               <SimulatePassword
                 onChange={this.onChangePassword}
                 onKeyDown={this.onKeyDown}
                 hasError={!passwordValid}
+                forwardedRef={this.inputRef}
               />
               <Button
-                id="conversion-button"
-                className="conversion-password_button"
+                className="conversion-button"
                 size="small"
                 scale
                 primary
@@ -387,7 +287,7 @@ class FileRow extends Component {
                 isDisabled={!password}
               />
             </div>
-          )}
+          ) : null}
         </>
       </StyledFileRow>
     );
@@ -418,8 +318,8 @@ export default inject(
         ext = splitted.length > 1 ? `.${splitted.pop()}` : "";
       }
     } else {
-      ext = item.fileInfo.fileExst;
-      splitted = item.fileInfo.title.split(".");
+      ext = item?.fileInfo?.fileExst;
+      splitted = item.fileInfo?.title?.split(".");
       if (ext) splitted.splice(-1);
     }
 
@@ -448,7 +348,7 @@ export default inject(
       }
     }
 
-    const name = splitted.join(".");
+    const name = splitted?.join(".");
 
     const { theme } = settingsStore;
     const { canViewedDocs, getIconSrc, isArchive, openOnNewPage } =
@@ -458,10 +358,9 @@ export default inject(
       cancelCurrentUpload,
       cancelCurrentFileConversion,
       setUploadPanelVisible,
-      removeFileFromList,
+
       convertFile,
-      files: uploadedFiles,
-      clearUploadedFilesHistory,
+      uploadedFilesHistory: uploadedFiles,
     } = uploadDataStore;
     const { playlist, setMediaViewerData, setCurrentItem } =
       mediaViewerDataStore;
@@ -487,7 +386,7 @@ export default inject(
       name,
       isMediaActive,
       downloadInCurrentTab,
-      removeFileFromList,
+
       convertFile,
       uploadedFiles,
 
@@ -497,7 +396,6 @@ export default inject(
       setUploadPanelVisible,
 
       setCurrentItem,
-      clearUploadedFilesHistory,
 
       isPlugin,
       onPluginClick,

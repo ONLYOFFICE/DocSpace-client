@@ -24,90 +24,130 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useState } from "react";
+import type { Meta, StoryFn } from "@storybook/react";
 import moment from "moment";
-import { StoryObj, Meta } from "@storybook/react";
-import styled from "styled-components";
 
 import { DatePicker } from "./DatePicker";
 import { DatePickerProps } from "./DatePicker.types";
 
-const locales = [
-  "az",
-  "ar-SA",
-  "zh-cn",
-  "cs",
-  "nl",
-  "en-gb",
-  "en",
-  "fi",
-  "fr",
-  "de",
-  "de-ch",
-  "el",
-  "it",
-  "ja",
-  "ko",
-  "lv",
-  "pl",
-  "pt",
-  "pt-br",
-  "ru",
-  "sk",
-  "sl",
-  "es",
-  "tr",
-  "uk",
-  "vi",
-];
-
-const meta = {
+export default {
   title: "Components/DatePicker",
   component: DatePicker,
-
-  argTypes: {
-    minDate: { control: "date" },
-    maxDate: { control: "date" },
-    initialDate: { control: "date" },
-    openDate: { control: "date" },
-    onChange: { action: "onChange" },
-    locale: { control: "select", options: locales },
-  },
   parameters: {
     docs: {
       description: {
-        component: "Date input",
+        component:
+          "A customizable date picker component that allows users to select dates with various configuration options.",
       },
     },
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/9AtdOHnhjhZCIRDrj4Unta/Public-room?type=design&node-id=1846-218508&mode=design&t=xSsXehQdoxpp5o7F-4",
+  },
+  argTypes: {
+    initialDate: {
+      control: "date",
+      description: "Initial selected date value in the picker",
+    },
+    maxDate: {
+      control: "date",
+      description: "Maximum selectable date",
+    },
+    minDate: {
+      control: "date",
+      description: "Minimum selectable date",
+    },
+    openDate: {
+      control: "date",
+      description: "Date to display when the calendar initially opens",
+    },
+    locale: {
+      control: "text",
+      description:
+        "Locale for date formatting and calendar display (e.g., 'en', 'ru')",
+    },
+    selectDateText: {
+      control: "text",
+      description: "Placeholder text shown when no date is selected",
+    },
+    onChange: {
+      action: "onChange",
+      description:
+        "Callback function called when the selected date changes. Receives a Moment object or null",
+    },
+    showCalendarIcon: {
+      control: "boolean",
+      description: "Whether to show the calendar icon in the input field",
+    },
+    className: {
+      control: "text",
+      description: "Additional CSS class for the date picker container",
     },
   },
-} satisfies Meta<typeof DatePicker>;
-type Story = StoryObj<typeof meta>;
+} as Meta;
 
-export default meta;
+const Wrapper = ({ children }: { children: React.ReactNode }) => {
+  return <div style={{ height: "280px", padding: "20px" }}>{children}</div>;
+};
 
-const Wrapper = styled.div`
-  height: 500px;
-`;
+const Template: StoryFn<typeof DatePicker> = ({
+  initialDate,
+  ...rest
+}: DatePickerProps) => {
+  const [selectedDate, setSelectedDate] = useState<moment.Moment | null>(
+    initialDate ? moment(initialDate) : null,
+  );
 
-const Template = ({ ...args }: DatePickerProps) => {
   return (
     <Wrapper>
-      <DatePicker {...args} />
+      <DatePicker
+        {...rest}
+        initialDate={initialDate}
+        onChange={(date) => {
+          rest.onChange?.(date);
+          setSelectedDate(date);
+        }}
+        outerDate={selectedDate}
+      />
     </Wrapper>
   );
 };
 
-export const Default: Story = {
-  render: (args) => <Template {...args} />,
-  args: {
-    maxDate: new Date(`${new Date().getFullYear() + 10}/01/01`),
-    minDate: new Date("1970/01/01"),
-    openDate: moment(),
-    initialDate: moment(),
-    locale: "en",
-  },
+export const Default = Template.bind({});
+Default.args = {
+  maxDate: moment().add(10, "years").startOf("year"),
+  minDate: moment("1970-01-01"),
+  openDate: moment(),
+  locale: "en",
+  selectDateText: "Select date",
+  onChange: (date) =>
+    console.log("Selected date:", date?.format("DD MMM YYYY") ?? "No date"),
+};
+
+export const WithInitialDate = Template.bind({});
+WithInitialDate.args = {
+  ...Default.args,
+  initialDate: moment(),
+  selectDateText: "Date with initial value",
+};
+
+export const WithCustomOpenDate = Template.bind({});
+WithCustomOpenDate.args = {
+  ...Default.args,
+  openDate: moment().add(1, "month"),
+  selectDateText: "Date with custom open date",
+};
+
+export const WithFutureOnlyDates = Template.bind({});
+WithFutureOnlyDates.args = {
+  ...Default.args,
+  minDate: moment().startOf("day"),
+  selectDateText: "Only future dates available",
+};
+
+export const WithSpecificYear = Template.bind({});
+WithSpecificYear.args = {
+  ...Default.args,
+  minDate: moment("2023-01-01"),
+  maxDate: moment("2023-12-31"),
+  openDate: moment("2023-06-15"),
+  selectDateText: "Only dates from 2023",
 };

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,142 +24,215 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+/* eslint-disable no-param-reassign */
+
 "use client";
 
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import { useTheme } from "styled-components";
+import React, {
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import throttle from "lodash/throttle";
 
 import { classNames, isTouchDevice } from "../../utils";
+import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
 
-import StyledScrollbar from "./Scrollbar.styled";
-import { ScrollbarProps } from "./Scrollbar.types";
-import { Scrollbar } from "./custom-scrollbar";
+import { Scrollbar as CustomScrollbar } from "./custom-scrollbar";
+import styles from "./Scrollbar.module.scss";
+import type { ScrollbarProps } from "./Scrollbar.types";
 
-const ScrollbarComponent = React.forwardRef<Scrollbar, ScrollbarProps>(
-  (props, ref) => {
-    const {
-      onScroll,
-      autoHide = true,
-      scrollClass,
-      fixedSize = false,
-      className,
-      autoFocus,
-      tabIndex = -1,
-      paddingAfterLastItem,
-      bodyPadding,
-      ...rest
-    } = props;
+const Scrollbar = (props: ScrollbarProps) => {
+  const {
+    ref,
+    onScroll,
+    autoHide = true,
+    scrollClass,
+    fixedSize = false,
+    className,
+    scrollBodyClassName,
+    autoFocus,
+    tabIndex = -1,
+    paddingAfterLastItem,
+    paddingInlineEnd,
+    ...rest
+  } = props;
 
-    const defaultTheme = useTheme();
-    const interfaceDirection = defaultTheme?.interfaceDirection;
+  const { isRTL } = useInterfaceDirection();
 
-    const [scrollVisible, setScrollVisible] = useState(false);
-    const timerId = useRef<null | ReturnType<typeof setTimeout>>(null);
+  const [scrollVisible, setScrollVisible] = useState(false);
+  const timerId = useRef<null | ReturnType<typeof setTimeout>>(null);
 
-    const scrollRef = useRef<null | Scrollbar>(null);
+  const scrollRef = useRef<null | CustomScrollbar>(null);
 
-    const isRtl = interfaceDirection === "rtl";
+  // onScroll handler placed here on Scroller element to get native event instead of parameters that library put
+  const renderScroller = React.useCallback(
+    (libProps: { elementRef?: React.Ref<HTMLDivElement> }) => {
+      const { elementRef, ...restLibProps } = libProps;
 
-    // onScroll handler placed here on Scroller element to get native event instead of parameters that library put
-    const renderScroller = React.useCallback(
-      (libProps: { elementRef?: React.LegacyRef<HTMLDivElement> }) => {
-        const { elementRef, ...restLibProps } = libProps;
+      return (
+        <div
+          {...restLibProps}
+          key="scroll-renderer-div"
+          className={classNames(styles.scroller, "scroller", scrollClass)}
+          ref={elementRef}
+          onScroll={onScroll}
+          data-testid="scroller"
+        />
+      );
+    },
+    [onScroll, scrollClass],
+  );
 
-        return (
-          <div
-            {...restLibProps}
-            key="scroll-renderer-div"
-            className={classNames("scroller", scrollClass || "") || "scroller"}
-            ref={elementRef}
-            onScroll={onScroll}
-          />
-        );
-      },
-      [onScroll, scrollClass],
-    );
+  const showTracks = useMemo(
+    () =>
+      throttle(
+        () => {
+          setScrollVisible(true);
 
-    const showTracks = useMemo(
-      () =>
-        throttle(
-          () => {
-            setScrollVisible(true);
+          if (timerId.current) {
+            clearTimeout(timerId.current);
+          }
 
-            if (timerId.current) {
-              clearTimeout(timerId.current);
-            }
+          timerId.current = setTimeout(() => setScrollVisible(false), 3000);
+        },
+        500,
+        { trailing: false },
+      ),
+    [],
+  );
 
-            timerId.current = setTimeout(() => setScrollVisible(false), 3000);
-          },
-          500,
-          { trailing: false },
-        ),
-      [],
-    );
+  const refSetter = (elementRef: CustomScrollbar) => {
+    // react-window passes a function ref
+    if (typeof ref === "function") {
+      ref(elementRef);
+    } else if (ref) {
+      ref.current = elementRef;
+    }
+    scrollRef.current = elementRef;
+  };
 
-    const refSetter = (elementRef: Scrollbar) => {
-      if (typeof ref === "function") {
-        ref(elementRef);
-      } else if (ref) {
-        ref.current = elementRef;
-      }
-      scrollRef.current = elementRef;
-    };
+  const autoHideContainerProps = autoHide ? { onScroll: showTracks } : {};
 
-    useEffect(() => {
-      return () => {
-        if (timerId.current) clearTimeout(timerId.current);
-      };
-    }, []);
+  const autoHideContentProps =
+    autoHide && !isTouchDevice ? { onMouseMove: showTracks } : {};
+  const tabIndexProp = tabIndex !== null ? { tabIndex } : {};
 
-    useEffect(() => {
-      if (autoFocus) {
-        scrollRef.current?.contentElement?.focus();
-      }
-    }, [autoFocus]);
-
-    const autoHideContainerProps = autoHide
-      ? {
-          onScroll: showTracks,
-          className: classNames(className, {
-            "auto-hide": autoHide,
-            "scroll-visible": autoHide && scrollVisible,
-          }),
-        }
-      : {};
-
-    const autoHideContentProps =
-      autoHide && !isTouchDevice ? { onMouseMove: showTracks } : {};
-    const tabIndexProp = tabIndex !== null ? { tabIndex } : {};
+  const renderScrollBody = (libProps: {
+    elementRef?: React.Ref<HTMLDivElement>;
+  }) => {
+    const { elementRef, ...restLibProps } = libProps;
 
     return (
-      <StyledScrollbar
-        {...rest}
-        data-testid="scrollbar"
-        disableTracksWidthCompensation
-        $fixedSize={fixedSize}
-        $paddingAfterLastItem={paddingAfterLastItem}
-        $bodyPadding={bodyPadding}
-        rtl={isRtl}
-        className={className}
-        wrapperProps={{ className: "scroll-wrapper" }}
-        scrollerProps={{ renderer: renderScroller }}
-        contentProps={{
-          className: "scroll-body",
-          ...tabIndexProp,
-          ...autoHideContentProps,
-        }}
-        thumbYProps={{ className: "thumb thumb-vertical" }}
-        thumbXProps={{ className: "thumb thumb-horizontal" }}
-        trackYProps={{ className: "track track-vertical" }}
-        trackXProps={{ className: "track track-horizontal" }}
-        ref={refSetter}
-        {...autoHideContainerProps}
+      <div
+        {...restLibProps}
+        key="scroll-body-renderer-div"
+        ref={elementRef}
+        data-testid="scroll-body"
+        className={classNames(
+          styles.scrollBody,
+          "scroll-body",
+          scrollBodyClassName,
+        )}
+        {...tabIndexProp}
+        {...autoHideContentProps}
       />
     );
-  },
-);
+  };
 
-ScrollbarComponent.displayName = "Scrollbar";
+  useEffect(() => {
+    return () => {
+      if (timerId.current) clearTimeout(timerId.current);
+    };
+  }, []);
 
-export { ScrollbarComponent };
+  useEffect(() => {
+    if (autoFocus) {
+      scrollRef.current?.contentElement?.focus();
+    }
+  }, [autoFocus]);
+
+  useLayoutEffect(() => {
+    if (!scrollRef.current?.holderElement) return;
+
+    if (paddingAfterLastItem) {
+      scrollRef.current.holderElement.style.setProperty(
+        "--scrollbar-padding-after-last-item",
+        paddingAfterLastItem,
+      );
+    }
+
+    if (paddingInlineEnd) {
+      scrollRef.current.holderElement.style.setProperty(
+        "--scrollbar-padding-inline-end",
+        paddingInlineEnd,
+      );
+      scrollRef.current.holderElement.style.setProperty(
+        "--scrollbar-padding-inline-end-mobile",
+        paddingInlineEnd,
+      );
+    }
+  }, [paddingAfterLastItem, paddingInlineEnd]);
+
+  return (
+    <CustomScrollbar
+      {...rest}
+      data-testid="scrollbar"
+      disableTracksWidthCompensation
+      rtl={isRTL}
+      className={classNames(styles.scrollbar, className, {
+        [styles.fixedSize]: fixedSize,
+        [styles.paddingAfterLastItem]: paddingAfterLastItem,
+        [styles.autoHide]: autoHide,
+        [styles.scrollVisible]: autoHide && scrollVisible,
+        [styles.noScrollY]: rest.noScrollY,
+      })}
+      wrapperProps={{ className: "scroll-wrapper" }}
+      scrollerProps={{ renderer: renderScroller }}
+      contentProps={{
+        renderer: renderScrollBody,
+      }}
+      thumbYProps={{
+        className: classNames(
+          styles.thumb,
+          styles.thumbVertical,
+          "thumb",
+          "thumb-vertical",
+        ),
+      }}
+      thumbXProps={{
+        className: classNames(
+          styles.thumb,
+          styles.thumbHorizontal,
+          "thumb",
+          "thumb-horizontal",
+        ),
+      }}
+      trackYProps={{
+        className: classNames(
+          styles.track,
+          styles.trackVertical,
+          "track",
+          "track-vertical",
+        ),
+      }}
+      trackXProps={{
+        className: classNames(
+          styles.track,
+          styles.trackHorizontal,
+          "track",
+          "track-horizontal",
+        ),
+      }}
+      // @ts-expect-error error from custom scrollbar
+      ref={refSetter}
+      {...autoHideContainerProps}
+    />
+  );
+};
+
+Scrollbar.displayName = "Scrollbar";
+
+export { Scrollbar };

@@ -1,11 +1,17 @@
 {
+  "ChangeContactType": "Zmeniť typ kontaktu",
   "ChangeGuestsTypeMessage": "Hosť <strong>{{userName}}</strong> bude presunutý do sekcie {{membersSection}} a bude mu priradený typ Používateľ. Používatelia majú vlastnú sekciu {{documentsSection}}, môžu vytvárať a upravovať súbory, ale nemôžu vytvárať miestnosti.",
   "ChangeGuestsTypeMessageMulti": "Vybraní hostia budú presunutí do sekcie Ľudia a bude im priradený typ {{membersSection}}. Používatelia majú vlastnú sekciu {{documentsSection}}, môžu vytvárať a upravovať súbory, ale nemôžu vytvárať miestnosti.",
+  "ChangeGuestsTypeToAdmin": "Hosť <strong>{{userName}}</strong> bude premiestnený do časti {{membersSection}} a bude mu priradený typ <strong>'{{ secondType }}'</strong>. Administrátori {{productName}} môžu pristupovať k nastaveniam {{productName}}, spravovať a archivovať miestnosti, pozývať nových používateľov a prideľovať roly pod ich úrovňou. Administrátori {{productName}} majú prístup do časti {{documentsSection}}.",
+  "ChangeGuestsTypeToAdminMulti": "Vybraní hostia budú premiestnení do časti {{membersSection}} a bude mu priradený typ <strong>'{{ secondType }}'</strong>. Administrátori {{productName}} môžu pristupovať k nastaveniam {{productName}}, spravovať a archivovať miestnosti, pozývať nových používateľov a prideľovať roly pod ich úrovňou. Administrátori {{productName}} majú prístup do časti {{documentsSection}}.",
+  "ChangeGuestsTypeToManager": "Hosť <strong>{{userName}}</strong> bude premiestnený do časti {{membersSection}} a bude mu priradený typ <strong>'{{ secondType }}'</strong>. Administrátori miestností môžu vytvárať a spravovať pridelené miestnosti, pozývať nových používateľov a zadávať roly administrátora miestnosti a nižšie. Administrátori miestností majú prístup do časti {{documentsSection}}.",
+  "ChangeGuestsTypeToManagerMulti": "Vybraní hostia budú premiestnení do časti {{membersSection}} a bude mu priradený typ <strong>'{{ secondType }}'</strong>. Administrátori miestností môžu vytvárať a spravovať pridelené miestnosti, pozývať nových používateľov a zadávať roly administrátora miestnosti a nižšie. Administrátori miestností majú prístup do časti {{documentsSection}}.",
   "ChangeUserTypeButton": "Zmeniť typ",
-  "ChangeUserTypeHeader": "Zmeňte typ používateľa",
   "ChangeUserTypeMessage": "Používatelia s typom <strong>'{{ firstType }}'</strong> budú presunutí do typu <strong>'{{ secondType }}'</strong> .",
-  "ChangeUserTypeMessageMulti": "Vybraní používatelia budú presunutí do typu <strong>'{{secondType}}'</strong>.",
-  "ChangeUserTypeMessageWarning": "Nemôžete zmeniť typ pre správcov {{productName}} a pre seba.",
+  "ChangeUserTypeNote": "<1>Poznámka:</1> nemôžete zmeniť typ pre administrátora {{productName}} a pre seba.",
+  "DataReassignmentInfo": "Miestnosti vytvorené týmto používateľom budú automaticky pridelené vám. Ak chcete miestnosti prideliť inej osobe, kliknite na príslušný odkaz nižšie.",
+  "DataReassignmentWithFilesDeletion": "Všetky zdieľané súbory vytvorené týmto kontaktom budú <1>do 30 dní automaticky pridelené vám</1>. Ak chcete miestnosti/zdieľané súbory prideliť inej osobe, kliknite na príslušný odkaz nižšie.",
+  "PersonalDataDeletion": "Všetky súbory a priečinky v časti {{sectionName}} tohto kontaktu budú <1>natrvalo vymazané do 30 dní</1>.",
   "SuccessChangeGuestType": "Typ hosťa bol úspešne zmenený",
   "SuccessChangeUserType": "Typ používateľa bol úspešne zmenený"
 }

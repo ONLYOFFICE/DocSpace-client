@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,127 +25,126 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import userEvent from "@testing-library/user-event";
+import { MemoryRouter } from "react-router";
 
 import ArticleFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
-import ArticleTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
 
-import { ArticleItem } from "./ArticleItem";
+import { ArticleItem } from ".";
+
+const mockOnClick = jest.fn();
+const mockOnClickBadge = jest.fn();
+const mockOnDrop = jest.fn();
 
 const baseProps = {
   icon: ArticleFolderReactSvgUrl,
   text: "Documents",
   showText: true,
-  onClick: () => jest.fn(),
+  onClick: mockOnClick,
   showInitial: true,
   showBadge: true,
   isEndOfBlock: true,
   labelBadge: "2",
-  iconBadge: ArticleTrashReactSvgUrl,
-  onClickBadge: () => jest.fn(),
+  onClickBadge: mockOnClickBadge,
+  linkData: { path: "", state: {} },
+};
+
+const renderWithRouter = (ui: React.ReactElement) => {
+  return render(ui, { wrapper: MemoryRouter });
 };
 
 describe("<ArticleItem />", () => {
-  it("renders without error", () => {
-    render(<ArticleItem {...baseProps} />);
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
 
+  it("renders without error", () => {
+    renderWithRouter(<ArticleItem {...baseProps} />);
     expect(screen.getByTestId("article-item")).toBeInTheDocument();
   });
 
-  // it("render without text", () => {
-  //   const wrapper = mount(<ArticleItem {...baseProps} text="My profile" />);
+  it("displays text when showText is true", () => {
+    renderWithRouter(<ArticleItem {...baseProps} />);
+    expect(screen.getByText("Documents")).toBeInTheDocument();
+  });
 
-  //   expect(wrapper.prop("text")).toEqual("My profile");
-  // });
+  it("hides text when showText is false", () => {
+    renderWithRouter(<ArticleItem {...baseProps} showText={false} />);
+    expect(screen.queryByText("Documents")).not.toBeInTheDocument();
+  });
 
-  // it("render without text", () => {
-  //   const wrapper = mount(<ArticleItem {...baseProps} text="My profile" />);
+  it("shows initial letter when showInitial is true", () => {
+    renderWithRouter(
+      <ArticleItem {...baseProps} showInitial showText={false} />,
+    );
+    expect(screen.getByText("D")).toBeInTheDocument();
+  });
 
-  //   expect(wrapper.prop("text")).toEqual("My profile");
-  // });
+  it("displays built-in badge when showBadge is true, iconBadge and badgeComponent are not provided", () => {
+    renderWithRouter(<ArticleItem {...baseProps} showBadge />);
+    expect(screen.getByText("2")).toBeInTheDocument();
+  });
 
-  // it("render how not end of block", () => {
-  //   const wrapper = mount(<ArticleItem {...baseProps} isEndOfBlock={false} />);
+  it("handles click events", async () => {
+    renderWithRouter(<ArticleItem {...baseProps} />);
+    const articleItemSibling = screen.getByTestId("article-item-sibling");
+    await userEvent.click(articleItemSibling);
+    expect(mockOnClick).toHaveBeenCalled();
+  });
 
-  //   expect(wrapper.prop("isEndOfBlock")).toEqual(false);
-  // });
+  it("handles badge click events", async () => {
+    renderWithRouter(<ArticleItem {...baseProps} />);
+    const badge = screen.getByText("2");
+    await userEvent.click(badge);
+    expect(mockOnClickBadge).toHaveBeenCalled();
+    expect(mockOnClick).not.toHaveBeenCalled();
+  });
 
-  // it("render without badge", () => {
-  //   const wrapper = mount(<ArticleItem {...baseProps} showBadge={false} />);
+  it("renders as header when isHeader is true", () => {
+    renderWithRouter(<ArticleItem {...baseProps} isHeader />);
+    const articleItemHeader = screen.getByTestId("article-item-header");
+    expect(articleItemHeader).toBeInTheDocument();
+  });
 
-  //   expect(wrapper.prop("showBadge")).toEqual(false);
-  // });
+  it("handles drag and drop", () => {
+    renderWithRouter(
+      <ArticleItem {...baseProps} isDragging onDrop={mockOnDrop} />,
+    );
+    const articleItemSibling = screen.getByTestId("article-item-sibling");
+    fireEvent.mouseUp(articleItemSibling);
+    expect(mockOnDrop).toHaveBeenCalledWith(undefined, "Documents", undefined);
+  });
 
-  // it("render without initial", () => {
-  //   const wrapper = mount(<ArticleItem {...baseProps} showInitial={false} />);
+  it("applies active styles when isActive is true", () => {
+    renderWithRouter(<ArticleItem {...baseProps} isActive />);
+    expect(screen.getByTestId("article-item")).toHaveStyle({
+      backgroundColor: expect.any(String),
+    });
+  });
 
-  //   expect(wrapper.prop("showInitial")).toEqual(false);
-  // });
+  it("renders with custom className and style", () => {
+    const customStyle = { width: "200px" };
+    renderWithRouter(
+      <ArticleItem
+        {...baseProps}
+        className="custom-class"
+        style={customStyle}
+      />,
+    );
+    const articleItem = screen.getByTestId("article-item");
+    expect(articleItem).toHaveClass("custom-class");
+    expect(articleItem).toHaveStyle({ width: "200px" });
+  });
 
-  // it("render without icon badge", () => {
-  //   const wrapper = mount(<ArticleItem {...baseProps} iconBadge="" />);
-
-  //   expect(wrapper.prop("iconBadge")).toEqual("");
-  // });
-
-  // it("render without label badge and icon badge", () => {
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2322): Type '{ iconBadge: string; iconLabel: string; icon... Remove this comment to see the full error message
-  //     <ArticleItem {...baseProps} iconBadge="" iconLabel="" />,
-  //   );
-
-  //   expect(wrapper.prop("iconBadge")).toEqual("");
-  //   expect(wrapper.prop("iconLabel")).toEqual("");
-  // });
-
-  // it("render without icon", () => {
-  //   const wrapper = mount(<ArticleItem {...baseProps} icon="" />);
-
-  //   expect(wrapper.prop("icon")).toEqual("");
-  // });
-
-  // it("accepts id", () => {
-  //   const wrapper = mount(<ArticleItem {...baseProps} id="testId" />);
-
-  //   expect(wrapper.prop("id")).toEqual("testId");
-  // });
-
-  // it("accepts className", () => {
-  //   const wrapper = mount(<ArticleItem {...baseProps} className="test" />);
-
-  //   expect(wrapper.prop("className")).toEqual("test");
-  // });
-
-  // it("accepts style", () => {
-  //   const wrapper = mount(
-  //     <ArticleItem {...baseProps} style={{ width: "100px" }} />,
-  //   );
-
-  //   expect(wrapper.getDOMNode().style).toHaveProperty("width", "100px");
-  // });
-
-  // it("trigger click", () => {
-  //   const wrapper = mount(
-  //     <ArticleItem {...baseProps} style={{ width: "100px" }} />,
-  //   );
-
-  //   expect(wrapper.simulate("click"));
-  // });
-
-  // it("trigger update", () => {
-  //   const wrapper = mount(
-  //     <ArticleItem {...baseProps} style={{ width: "100px" }} />,
-  //   );
-
-  //   expect(wrapper.simulate("click"));
-  // });
-
-  // it("unmount without errors", () => {
-  //   const wrapper = mount(
-  //     <ArticleItem {...baseProps} style={{ width: "100px" }} />,
-  //   );
-
-  //   wrapper.unmount();
-  // });
+  it("renders with custom badge component", () => {
+    const CustomBadge = () => (
+      <div data-testid="custom-badge">Custom Badge</div>
+    );
+    renderWithRouter(
+      <ArticleItem {...baseProps} badgeComponent={<CustomBadge />} />,
+    );
+    expect(screen.getByTestId("custom-badge")).toBeInTheDocument();
+  });
 });

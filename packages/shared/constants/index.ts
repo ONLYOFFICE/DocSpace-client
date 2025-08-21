@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,6 +32,7 @@ import ShareLinkedinReactSvg from "PUBLIC_DIR/images/share.linkedin.react.svg";
 import ShareMicrosoftReactSvg from "PUBLIC_DIR/images/share.microsoft.react.svg";
 import ShareZoomReactSvg from "PUBLIC_DIR/images/share.zoom.react.svg";
 import { globalColors } from "../themes/globalColors";
+import { FileFillingFormStatus } from "../enums";
 
 export const LOADER_STYLE = Object.freeze({
   title: "",
@@ -53,6 +54,7 @@ export const FILE_SIZE = "file_size";
 export const ROOM = "room";
 export const USERS = "users";
 export const USERS_IN_ROOM = "usersInRoom";
+export const YEAR_KEY = "year";
 export const PDF_FORM_DIALOG_KEY = "pdf_form_dialog";
 export const CREATED_FORM_KEY = "created_form_key";
 export const PUBLIC_STORAGE_KEY = "public-auth";
@@ -63,6 +65,7 @@ export const COUNT_FOR_SHOWING_BAR = 2;
 export const PERCENTAGE_FOR_SHOWING_BAR = 90;
 
 export const LANGUAGE = "asc_language";
+export const TIMEZONE = "timezone";
 
 export const MOBILE_FOOTER_HEIGHT = "64px";
 export const ASIDE_PADDING_AFTER_LAST_ITEM = "12px";
@@ -121,7 +124,7 @@ export const PROVIDERS_DATA = Object.freeze({
   twitter: {
     label: "twitter",
     icon: ShareTwitterReactSvg,
-    iconOptions: { color: globalColors.darkBlack },
+    iconOptions: undefined,
   },
   linkedin: {
     label: "linkedin",
@@ -144,9 +147,7 @@ export const PASSWORD_LIMIT_SPECIAL_CHARACTERS = "!@#$%^&*";
 
 export const EDITOR_ID = "portal_editor";
 
-export const WRONG_PORTAL_NAME_URL =
-  (typeof window !== "undefined" && window.ClientConfig?.wrongPortalNameUrl) ||
-  `https://www.onlyoffice.com/wrongportalname.aspx`;
+export const FILLING_STATUS_ID = "fillingStatusDialog" as const;
 
 export const MEDIA_VIEW_URL = "/media/view/";
 export const PUBLIC_MEDIA_VIEW_URL = "/rooms/share/media/view";
@@ -182,7 +183,7 @@ export const EBOOK_EXST = [".fb2", ".pb2", ".ibk", ".prc", ".epub", ".djvu"];
 
 export const SYSTEM_THEME_KEY = "system_theme";
 
-const SDK_VERSION = "1.0.1";
+const SDK_VERSION = "2.1.0";
 
 export const SDK_SCRIPT_URL =
   typeof window !== "undefined"
@@ -192,4 +193,57 @@ export const SDK_SCRIPT_URL =
 export const ALLOWED_PASSWORD_CHARACTERS =
   "a-z, A-Z, 0-9, !\"#%&'()*+,-./:;<=>?@[]^_`{|}";
 
+export const ThirdPartyServicesUrlName = Object.freeze({
+  GoogleDrive: "google",
+  Box: "box",
+  Dropbox: "dropbox",
+  OneDrive: "skydrive",
+  Nextcloud: "nextcloud",
+  kDrive: "kdrive",
+  ownCloud: "owncloud",
+  WebDav: "webdav",
+});
 export const GENERAL_LINK_HEADER_KEY = "general-link_header";
+
+export const FOLDER_FORM_VALIDATION = /[*+:"<>?|\\\/]/gim;
+
+export const FILLING_FORM_STATUS_COLORS = Object.freeze({
+  [FileFillingFormStatus.None]: globalColors.mainRed,
+  [FileFillingFormStatus.Draft]: globalColors.mainRed,
+  [FileFillingFormStatus.YourTurn]: globalColors.lightBlueMain,
+  [FileFillingFormStatus.InProgress]: globalColors.gray,
+  [FileFillingFormStatus.Completed]: globalColors.mainGreen,
+  [FileFillingFormStatus.Stopped]: globalColors.mainRed,
+});
+
+export const OPERATIONS_NAME = Object.freeze({
+  trash: "trash",
+  deletePermanently: "deletePermanently",
+  download: "download",
+  duplicate: "duplicate",
+  exportIndex: "exportIndex",
+  markAsRead: "markAsRead",
+  copy: "copy",
+  move: "move",
+  convert: "convert",
+  other: "other",
+  upload: "upload",
+  deleteVersionFile: "deleteVersionFile",
+  backup: "backup",
+});
+
+export const thumbnailStatuses = {
+  WAITING: 0,
+  CREATED: 1,
+  ERROR: 2,
+  NOT_REQUIRED: 3,
+};
+
+export const THIRD_PARTY_SERVICES_URL =
+  "/portal-settings/integration/third-party-services?service=";
+
+export const STORAGE_TARIFF_DEACTIVATED = "storageTariffDeactivated";
+
+// any unicode letters are allowed, characters are prohibited
+export const BRAND_NAME_REGEX =
+  /^[^\s-]([^<>\/\\|:*?"'`~!@#$%^&()+={}[\];,.])*[^\s-]$/;

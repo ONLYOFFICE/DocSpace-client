@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,20 +28,24 @@
 
 import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
+import { ChangeEvent, MouseEvent, useRef, useState, useMemo } from "react";
 
 import {
-  convertLanguage,
   createPasswordHash,
   getSelectZone,
-  getUserTimezone,
   mapCulturesToArray,
   mapTimezonesToArray,
+  setLanguageForUnauthorized,
+  setTimezoneForUnauthorized,
 } from "@docspace/shared/utils/common";
 import { Text } from "@docspace/shared/components/text";
 import { FieldContainer } from "@docspace/shared/components/field-container";
-import { ChangeEvent, MouseEvent, useEffect, useRef, useState } from "react";
 import { EmailInput, TValidate } from "@docspace/shared/components/email-input";
-import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "@docspace/shared/constants";
+import {
+  COOKIE_EXPIRATION_YEAR,
+  LANGUAGE,
+  TIMEZONE,
+} from "@docspace/shared/constants";
 import { EmailSettings } from "@docspace/shared/utils";
 import {
   PasswordInput,
@@ -60,7 +64,7 @@ import { BetaBadge } from "@docspace/shared/components/beta-badge";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import api from "@docspace/shared/api";
-import { setCookie } from "@docspace/shared/utils/cookie";
+import { setCookie, deleteCookie } from "@docspace/shared/utils/cookie";
 import {
   InputSize,
   InputType,
@@ -76,21 +80,16 @@ import {
   TTimeZone,
 } from "@docspace/shared/api/settings/types";
 
-import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
+import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg";
 
-import { TCulturesOption, TError, TTimeZoneOption } from "@/types";
-import {
-  DEFAULT_SELECT_LANGUAGE,
-  DEFAULT_SELECT_TIMEZONE,
-} from "@/utils/constants";
-
+import { TError, TTimeZoneOption } from "@/types";
+import { toastr } from "@docspace/shared/components/toast";
 import {
   StyledAcceptTerms,
   StyledInfo,
   StyledLink,
   WizardContainer,
 } from "./page.styled";
-import { toastr } from "@docspace/shared/components/toast";
 
 type WizardFormProps = {
   passwordSettings?: TPasswordSettings;
@@ -99,13 +98,13 @@ type WizardFormProps = {
   portalTimeZones?: TTimeZone[];
   portalCultures?: TPortalCultures;
 
-  forumLink?: string;
+  forumLinkUrl?: string;
   documentationEmail?: string;
-  culture?: string;
   wizardToken?: string;
   passwordHash?: TPasswordHash;
   licenseUrl?: string;
   isAmi?: boolean;
+  userTimeZone: string;
 };
 
 const emailSettings = new EmailSettings();
@@ -119,22 +118,15 @@ function WizardForm(props: WizardFormProps) {
     isRequiredLicense,
     portalTimeZones,
     portalCultures,
-    culture,
     wizardToken,
     passwordHash,
-    forumLink,
+    forumLinkUrl,
     documentationEmail,
     isAmi,
+    userTimeZone,
   } = props;
 
-  const [selectedTimezone, setSelectedTimezone] = useState<TTimeZoneOption>(
-    DEFAULT_SELECT_TIMEZONE,
-  );
-  const [selectedLanguage, setSelectedLanguage] = useState<TCulturesOption>(
-    DEFAULT_SELECT_LANGUAGE,
-  );
-  const [cultures, setCultures] = useState<TOption[]>();
-  const [timezones, setTimezones] = useState<TOption[]>();
+  const [selectedTimezone, setSelectedTimezone] = useState<TTimeZoneOption>();
 
   const [email, setEmail] = useState("");
   const [hasErrorEmail, setHasErrorEmail] = useState(false);
@@ -155,6 +147,7 @@ function WizardForm(props: WizardFormProps) {
   const [isCreated, setIsCreated] = useState(false);
 
   const { t, i18n } = useTranslation(["Wizard", "Common"]);
+
   const theme = useTheme();
   const { currentDeviceType } = useDeviceType();
 
@@ -162,55 +155,19 @@ function WizardForm(props: WizardFormProps) {
 
   const isMobileView = currentDeviceType === DeviceType.mobile;
 
-  const [userCulture, setUserCulture] = useState("en");
+  const currCulture = i18n.language;
 
-  const convertedCulture = convertLanguage(userCulture);
+  const cultureNames = useMemo(() => {
+    if (portalCultures) return mapCulturesToArray(portalCultures, true, i18n);
+    return [];
+  }, [portalCultures, i18n]);
+  const currentCulture = cultureNames?.find((item) => item.key === currCulture);
 
-  useEffect(() => {
-    setUserCulture(
-      window.navigator ? window.navigator.language : (culture ?? "en"),
-    );
-  }, [culture]);
-
-  useEffect(() => {
-    if (portalTimeZones) {
-      const userTimezone = getUserTimezone();
-      const zones = mapTimezonesToArray(portalTimeZones);
-      const select = getSelectZone(zones, userTimezone);
-      setTimezones(zones);
-
-      if (select.length === 0) {
-        setSelectedTimezone(DEFAULT_SELECT_TIMEZONE);
-      } else {
-        setSelectedTimezone(select[0]);
-      }
-    }
+  const zones = useMemo(() => {
+    if (portalTimeZones) return mapTimezonesToArray(portalTimeZones);
+    return [];
   }, [portalTimeZones]);
-
-  useEffect(() => {
-    if (portalCultures) {
-      const cultures = mapCulturesToArray(portalCultures, true, i18n);
-      const select = cultures.filter((lang) => lang.key === convertedCulture);
-      setCultures(
-        cultures.map((culture) => ({
-          key: culture.key,
-          label: "label" in culture ? culture.label : "",
-          icon: culture.icon,
-        })),
-      );
-
-      if (select.length === 0) {
-        setSelectedLanguage(DEFAULT_SELECT_LANGUAGE);
-      } else {
-        const culture = select[0];
-        setSelectedLanguage({
-          key: culture.key,
-          label: "label" in culture ? culture.label : "",
-          icon: culture.icon,
-        });
-      }
-    }
-  }, [convertedCulture, i18n, portalCultures]);
+  const currentZone = getSelectZone(zones ?? [], userTimeZone)[0];
 
   const onEmailChangeHandler = (result: TValidate): undefined => {
     setHasErrorEmail(!result.isValid);
@@ -241,18 +198,8 @@ function WizardForm(props: WizardFormProps) {
   };
 
   const onLanguageSelect = (lang: TOption) => {
-    const cultures = mapCulturesToArray(portalCultures!, true, i18n);
-    const select = cultures.filter((culture) => culture.key === lang.key);
-    if (select.length === 0) {
-      setSelectedLanguage(DEFAULT_SELECT_LANGUAGE);
-    } else {
-      const culture = select[0];
-      setSelectedLanguage({
-        key: culture.key,
-        label: "label" in culture ? culture.label : "",
-        icon: culture.icon,
-      });
-    }
+    setLanguageForUnauthorized(lang.key.toString(), false);
+    i18n.changeLanguage(lang.key.toString());
   };
 
   const onTimezoneSelect = (timezone: TOption) => {
@@ -260,6 +207,7 @@ function WizardForm(props: WizardFormProps) {
       key: timezone.key,
       label: timezone.label ?? "",
     });
+    setTimezoneForUnauthorized(timezone.key.toString());
   };
 
   const onLicenseFileHandler = async (file: File | File[]) => {
@@ -267,7 +215,7 @@ function WizardForm(props: WizardFormProps) {
     setHasErrorLicense(false);
     setInvalidLicense(false);
 
-    let fd = new FormData();
+    const fd = new FormData();
     fd.append("files", file as Blob);
 
     if (!wizardToken) return;
@@ -275,8 +223,21 @@ function WizardForm(props: WizardFormProps) {
     try {
       const res = await setLicense(wizardToken, fd);
       setLicenseUpload(res);
-    } catch (e) {
-      console.error(e);
+    } catch (error) {
+      const knownError = error as TError;
+      let errorMessage: string = "";
+
+      if (typeof knownError === "object") {
+        errorMessage =
+          knownError?.response?.data?.error?.message ||
+          knownError?.statusText ||
+          knownError?.message ||
+          "";
+      } else {
+        errorMessage = knownError;
+      }
+
+      toastr.error(errorMessage);
       setHasErrorLicense(true);
       setInvalidLicense(true);
     }
@@ -333,16 +294,17 @@ function WizardForm(props: WizardFormProps) {
       await api.settings.setPortalOwner(
         emailTrim,
         hash,
-        selectedLanguage.key,
-        selectedTimezone.key,
+        currentCulture?.key || "en",
+        selectedTimezone?.key || currentZone?.key,
         wizardToken,
         analytics,
         isAmi && amiId ? amiId : null,
       );
 
-      setCookie(LANGUAGE, selectedLanguage.key.toString(), {
+      setCookie(LANGUAGE, currentCulture?.key || "en", {
         "max-age": COOKIE_EXPIRATION_YEAR,
       });
+      deleteCookie(TIMEZONE);
 
       window.location.replace("/");
     } catch (error) {
@@ -372,23 +334,23 @@ function WizardForm(props: WizardFormProps) {
       </Text>
       <FieldContainer
         className="wizard-field"
-        isVertical={true}
+        isVertical
         labelVisible={false}
         hasError={hasErrorEmail}
         errorMessage={t("ErrorEmail")}
+        dataTestId="email_field_container"
       >
         <EmailInput
           name="wizard-email"
           tabIndex={1}
-          type={InputType.email}
           size={InputSize.large}
-          scale={true}
+          scale
           value={email}
           placeholder={t("Common:Email")}
           emailSettings={emailSettings}
           hasError={hasErrorEmail}
           onValidateInput={onEmailChangeHandler}
-          isAutoFocussed={true}
+          isAutoFocussed
           onChange={onChangeEmail}
           isDisabled={isCreated}
         />
@@ -396,23 +358,23 @@ function WizardForm(props: WizardFormProps) {
 
       <FieldContainer
         className="wizard-field password-field"
-        isVertical={true}
+        isVertical
         labelVisible={false}
         hasError={hasErrorPass}
         errorMessage={t("ErrorPassword")}
+        dataTestId="password_field_container"
       >
         <PasswordInput
           ref={refPassInput}
           tabIndex={2}
           size={InputSize.large}
-          scale={true}
+          scale
           inputValue={password}
           inputType={InputType.password}
           passwordSettings={passwordSettings}
           isDisabled={isCreated}
           placeholder={t("Common:Password")}
-          isDisableTooltip={true}
-          isTextTooltipVisible={false}
+          isDisableTooltip
           hasError={hasErrorPass}
           onChange={onChangePassword}
           autoComplete="current-password"
@@ -423,27 +385,30 @@ function WizardForm(props: WizardFormProps) {
       <StyledLink>
         <IconButton
           size={12}
-          iconName={RefreshReactSvgUrl}
+          iconNode={<RefreshReactSvgUrl />}
           onClick={generatePassword}
+          dataTestId="generate_password_icon_button"
         />
         <Link
           className="generate-password-link"
           type={LinkType.action}
           fontWeight={600}
-          isHovered={true}
+          isHovered
           onClick={generatePassword}
+          dataTestId="generate_password_link"
         >
           {t("Common:GeneratePassword")}
         </Link>
       </StyledLink>
 
-      {isAmi && (
+      {isAmi ? (
         <FieldContainer
           className="wizard-field instance-id-field"
-          isVertical={true}
+          isVertical
           labelVisible={false}
           hasError={hasErrorInstanceId}
           errorMessage={t("ErrorInstanceId")}
+          dataTestId="instance_id_field_container"
         >
           <TextInput
             id="instance-id"
@@ -453,23 +418,25 @@ function WizardForm(props: WizardFormProps) {
             hasError={hasErrorInstanceId}
             value={instanceId}
             placeholder={t("Common:InstanceId")}
-            scale={true}
+            scale
             tabIndex={3}
             isDisabled={isCreated}
             onChange={onChangeInstanceId}
+            testId="instance_id_input"
           />
         </FieldContainer>
-      )}
+      ) : null}
 
-      {isRequiredLicense && (
+      {isRequiredLicense ? (
         <FieldContainer
           className="license-filed"
-          isVertical={true}
+          isVertical
           labelVisible={false}
           hasError={hasErrorLicense}
           errorMessage={
             invalidLicense ? t("ErrorLicenseBody") : t("ErrorUploadLicenseFile")
           }
+          dataTestId="license_field_container"
         >
           <FileInput
             scale
@@ -478,9 +445,11 @@ function WizardForm(props: WizardFormProps) {
             placeholder={t("PlaceholderLicense")}
             onInput={onLicenseFileHandler}
             hasError={hasErrorLicense}
+            isDisabled={isCreated}
+            data-test-id="license_file_input"
           />
         </FieldContainer>
-      )}
+      ) : null}
 
       <StyledInfo>
         <Text className="text" fontWeight={400}>
@@ -499,30 +468,34 @@ function WizardForm(props: WizardFormProps) {
           <ComboBox
             withoutPadding
             directionY="both"
-            options={cultures || []}
-            selectedOption={selectedLanguage as TOption}
+            options={cultureNames ?? []}
+            selectedOption={currentCulture as TOption}
             onSelect={onLanguageSelect}
             isDisabled={isCreated}
             scaled={isMobileView}
             scaledOptions={false}
             size={ComboBoxSize.content}
-            showDisabledItems={true}
+            showDisabledItems
             dropDownMaxHeight={364}
             manualWidth="250px"
             isDefaultMode={!isMobileView}
             withBlur={isMobileView}
             fillIcon={false}
-            modernView={true}
+            modernView
+            dataTestId="wizard_language_combobox"
+            dropDownTestId="wizard_language_dropdown"
           />
-          {selectedLanguage?.isBeta && (
+          {currentCulture &&
+          "isBeta" in currentCulture &&
+          currentCulture.isBeta ? (
             <BetaBadge
               withOutFeedbackLink
               place="bottom"
-              forumLink={forumLink}
+              forumLinkUrl={forumLinkUrl}
               currentDeviceType={currentDeviceType}
               documentationEmail={documentationEmail}
             />
-          )}
+          ) : null}
         </div>
       </StyledInfo>
 
@@ -534,20 +507,22 @@ function WizardForm(props: WizardFormProps) {
           textOverflow
           withoutPadding
           directionY="both"
-          options={timezones || []}
-          selectedOption={selectedTimezone}
+          options={zones ?? []}
+          selectedOption={selectedTimezone ?? currentZone}
           onSelect={onTimezoneSelect}
           isDisabled={isCreated}
           scaled={isMobileView}
           scaledOptions={false}
           size={ComboBoxSize.content}
-          showDisabledItems={true}
+          showDisabledItems
           dropDownMaxHeight={364}
           manualWidth="350px"
           isDefaultMode={!isMobileView}
           withBlur={isMobileView}
           fillIcon={false}
-          modernView={true}
+          modernView
+          dataTestId="timezone_combobox"
+          dropDownTestId="timezone_dropdown"
         />
       </StyledInfo>
 
@@ -561,17 +536,20 @@ function WizardForm(props: WizardFormProps) {
           onChange={onAgreeTermsChange}
           isDisabled={isCreated}
           hasError={hasErrorAgree}
+          truncate={false}
+          dataTestId="agree_terms_checkbox"
         />
         <Link
           type={LinkType.page}
           color={
             hasErrorAgree
               ? theme.checkbox.errorColor
-              : theme.client.wizard.linkColor
+              : theme.currentColorScheme?.main.accent
           }
           fontSize="13px"
           target={LinkTarget.blank}
           href={licenseUrl}
+          dataTestId="license_agreements_link"
         >
           {t("LicenseLink")}
         </Link>
@@ -579,11 +557,12 @@ function WizardForm(props: WizardFormProps) {
 
       <Button
         size={ButtonSize.medium}
-        scale={true}
+        scale
         primary
         label={t("Common:ContinueButton")}
         isLoading={isCreated}
         onClick={onContinueClick}
+        testId="wizard_continue_button"
       />
     </WizardContainer>
   );

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,16 +26,16 @@
 
 import React from "react";
 import moment from "moment";
+import classNames from "classnames";
+import styles from "../Calendar.module.scss";
 
-import { Weekday } from "../Calendar.styled";
-
-export const getWeekdayElements = (isMobile: boolean) => {
+export const getWeekdayElements = () => {
   const weekdays = moment
     .weekdaysMin(true)
     .map((weekday) => weekday.charAt(0).toUpperCase() + weekday.substring(1));
   return weekdays.map((day) => (
-    <Weekday className="weekday" key={day} isMobile={isMobile}>
+    <span className={classNames(styles.weekDay, "weekday")} key={day}>
       {day}
-    </Weekday>
+    </span>
   ));
 };

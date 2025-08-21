@@ -26,13 +26,16 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 
-import { Tags } from "./Tags";
+import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
+import CatalogGuestReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.user.solid.react.svg?url";
+
+import { Tags } from ".";
 
 type TagsType = typeof Tags;
 type Story = StoryObj<TagsType>;
 
 const meta: Meta<TagsType> = {
-  title: "Components/Tags",
+  title: "Data Display/Tags",
   component: Tags,
   parameters: {
     design: {
@@ -49,5 +52,35 @@ export const Default: Story = {
     tags: ["tag1", "tag2"],
     columnCount: 2,
     onSelectTag: () => {},
+  },
+};
+
+export const TagsWithIcons: Story = {
+  args: {
+    tags: [
+      { label: "tag1", isDefault: true, icon: CatalogFolderReactSvgUrl },
+      { label: "tag2", isDefault: true, icon: CatalogGuestReactSvgUrl },
+    ],
+    columnCount: 2,
+    onSelectTag: () => {},
+  },
+};
+
+export const TagsWithDropDown: Story = {
+  render: (args) => (
+    <div style={{ height: "100px", paddingTop: "20px" }}>
+      <Tags {...args} />
+    </div>
+  ),
+  args: {
+    tags: ["tag1", "tag2", "tag3", "tag4"],
+    style: { width: "150px" },
+    columnCount: 2,
+    onSelectTag: () => {},
+    isDefaultMode: false,
+    directionY: "bottom",
+    fixedDirection: true,
+    manualY: "56px",
+    manualX: "100px",
   },
 };

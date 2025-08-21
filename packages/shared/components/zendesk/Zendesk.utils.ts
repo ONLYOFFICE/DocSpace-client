@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,7 +29,6 @@ class ZendeskAPI {
 
   addChanges = (...args: (string | object)[]) => {
     if (typeof window?.document?.createElement !== "undefined" && window?.zE) {
-      // @ts-expect-error its ok
       window?.zE?.apply(null, args);
     } else {
       // console.warn("Zendesk is not initialized yet");

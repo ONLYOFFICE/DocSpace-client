@@ -4,7 +4,6 @@
   "DataReassignment": "Reatribuição de dados",
   "DeleteProfileIsFinished": "Excluir perfil quando a reatribuição for concluída",
   "DescriptionDataReassignment": "Transferiremos salas criadas pelo usuário e documentos armazenados nas salas dos usuários.",
-  "InProgress": "Em andamento",
   "Interrupted": "Interrompido, alguns dados não puderam ser transferidos",
   "MoreAboutDataTransfer": "Mais sobre transferência de dados",
   "NewDataOwner": "Novo proprietário dos dados",
@@ -14,6 +13,7 @@
   "ReassignData": "Reatribuir dados",
   "ReassigningDataToAnother": "O processo de reatribuição de dados do usuário <0>{{fromUser}}</0> para o usuário <1>{{toUser}}</1> foi iniciado. Observe que isso pode levar um tempo considerável.",
   "ReassigningDataToItself": "O processo de reatribuição de dados do usuário <0>{{fromUser}}</0> para o usuário <1>{{toUser}}</1> <2>{{you}}</2> foi iniciado. Observe que isso pode levar um tempo considerável.",
+  "RoomsOnlyReassignment": "Transferiremos as salas criadas pelo contato.",
   "StartTransferAgain": "Iniciar a transferência novamente",
   "UserToWhomTheDataWillBeTransferred": "Usuário para quem os dados serão transferidos"
 }

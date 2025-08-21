@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,26 +25,95 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { render, screen } from "@testing-library/react";
-
+import { screen, fireEvent, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import ErrorContainer from "./ErrorContainer";
 
-test("<ErrorContainer />: render without error", () => {
-  render(<ErrorContainer id="error-container" />);
+describe("ErrorContainer", () => {
+  const mockOnClick = jest.fn();
 
-  expect(screen.queryByTestId("ErrorContainer")).toBeInTheDocument();
-});
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
-test("renders with props", () => {
-  render(
-    <ErrorContainer
-      headerText="Some error has happened"
-      bodyText="Try again later"
-    />,
-  );
+  test("renders without error", () => {
+    render(<ErrorContainer id="error-container" />);
+    expect(screen.getByTestId("ErrorContainer")).toBeInTheDocument();
+  });
 
-  expect(screen.queryByText("Some error has happened")).toBeInTheDocument();
-  expect(screen.queryByText("Try again later")).toBeInTheDocument();
+  test("renders with header and body text", () => {
+    const headerText = "Some error has happened";
+    const bodyText = "Try again later";
+
+    render(<ErrorContainer headerText={headerText} bodyText={bodyText} />);
+
+    expect(screen.getByText(headerText)).toBeInTheDocument();
+    expect(screen.getByText(bodyText)).toBeInTheDocument();
+  });
+
+  test("renders with customized body text", () => {
+    const customText = "Custom error message";
+
+    render(<ErrorContainer customizedBodyText={customText} />);
+
+    expect(screen.getByText(customText)).toBeInTheDocument();
+  });
+
+  test("renders with button and handles click", () => {
+    const buttonText = "Retry";
+
+    render(
+      <ErrorContainer buttonText={buttonText} onClickButton={mockOnClick} />,
+    );
+
+    const button = screen.getByText(buttonText);
+    expect(button).toBeInTheDocument();
+
+    fireEvent.click(button);
+    expect(mockOnClick).toHaveBeenCalledTimes(1);
+  });
+
+  test("renders with primary button style", () => {
+    const buttonText = "Primary Button";
+
+    render(
+      <ErrorContainer
+        buttonText={buttonText}
+        onClickButton={mockOnClick}
+        isPrimaryButton
+      />,
+    );
+
+    const button = screen.getByText(buttonText);
+    expect(button).toBeInTheDocument();
+  });
+
+  test("renders in editor mode", () => {
+    render(<ErrorContainer isEditor />);
+
+    const container = screen.getByTestId("ErrorContainer");
+    expect(container.className).toContain("isEditor");
+  });
+
+  test("renders with additional className", () => {
+    const className = "custom-class";
+
+    render(<ErrorContainer className={className} />);
+
+    const container = screen.getByTestId("ErrorContainer");
+    expect(container.className).toContain(className);
+  });
+
+  test("renders with children", () => {
+    const childText = "Child component";
+
+    render(
+      <ErrorContainer>
+        <div>{childText}</div>
+      </ErrorContainer>,
+    );
+
+    expect(screen.getByText(childText)).toBeInTheDocument();
+  });
 });

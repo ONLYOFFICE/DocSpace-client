@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -98,8 +98,9 @@ const PortalDeactivation = (props) => {
           size={isDesktopView ? "small" : "normal"}
           onClick={onDeactivateClick}
           isDisabled={notActivatedEmail}
+          testId="request_deactivate_portal_button"
         />
-        {notActivatedEmail && (
+        {notActivatedEmail ? (
           <Text fontSize="12px" fontWeight="600">
             {t("MainBar:ConfirmEmailHeader", {
               email: owner.email,
@@ -111,11 +112,12 @@ const PortalDeactivation = (props) => {
               fontSize="12px"
               fontWeight="400"
               onClick={requestAgain}
+              testId="request_deactivate_portal_link"
             >
               {t("MainBar:RequestActivation")}
             </Link>
           </Text>
-        )}
+        ) : null}
       </ButtonWrapper>
     </MainContainer>
   );

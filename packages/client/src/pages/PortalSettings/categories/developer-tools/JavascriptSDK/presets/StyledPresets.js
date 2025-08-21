@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,11 +31,11 @@ import {
   tablet,
   desktop,
 } from "@docspace/shared/utils/device";
-import { Box } from "@docspace/shared/components/box";
 import { injectDefaultTheme } from "@docspace/shared/utils";
 import { showPreviewThreshold } from "../constants";
 
-export const SDKContainer = styled(Box)`
+export const SDKContainer = styled.div`
+  box-sizing: border-box;
   .integration-examples-bottom {
     display: none;
   }
@@ -69,7 +69,8 @@ export const SDKContainer = styled(Box)`
   }
 `;
 
-export const Controls = styled(Box)`
+export const Controls = styled.div`
+  box-sizing: border-box;
   max-width: 350px;
   min-width: 350px;
   width: 100%;
@@ -154,7 +155,8 @@ export const CategorySubHeader = styled.div`
   }
 `;
 
-export const CategoryDescription = styled(Box)`
+export const CategoryDescription = styled.div`
+  box-sizing: border-box;
   max-width: 700px;
   .sdk-description {
     line-height: 20px;
@@ -162,7 +164,8 @@ export const CategoryDescription = styled(Box)`
   }
 `;
 
-export const ControlsGroup = styled(Box)`
+export const ControlsGroup = styled.div`
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -181,25 +184,29 @@ export const ControlsGroup = styled(Box)`
   `}
 `;
 
-export const CheckboxGroup = styled(Box)`
+export const CheckboxGroup = styled.div`
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 10px;
 `;
 
-export const LabelGroup = styled(Box)`
+export const LabelGroup = styled.div`
+  box-sizing: border-box;
   display: inline-flex;
   align-items: center;
   gap: 4px;
 `;
 
-export const ControlsSection = styled(Box)`
+export const ControlsSection = styled.div`
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 16px;
 `;
 
-export const Frame = styled(Box).attrs(injectDefaultTheme)`
+export const Frame = styled.div.attrs(injectDefaultTheme)`
+  box-sizing: border-box;
   margin-top: 16px;
   position: relative;
 
@@ -252,7 +259,8 @@ export const Frame = styled(Box).attrs(injectDefaultTheme)`
   }
 `;
 
-export const Container = styled(Box)`
+export const Container = styled.div`
+  box-sizing: border-box;
   width: 100%;
   display: flex;
   flex-direction: row-reverse;
@@ -271,7 +279,8 @@ export const Container = styled(Box)`
   `}
 `;
 
-export const RowContainer = styled(Box)`
+export const RowContainer = styled.div`
+  box-sizing: border-box;
   flex-direction: row;
   display: flex;
   gap: 8px;
@@ -284,7 +293,8 @@ export const RowContainer = styled(Box)`
     `}
 `;
 
-export const ColumnContainer = styled(Box)`
+export const ColumnContainer = styled.div`
+  box-sizing: border-box;
   flex-direction: column;
   display: flex;
   gap: 8px;
@@ -303,7 +313,8 @@ export const ColumnContainer = styled(Box)`
   `}
 `;
 
-export const Preview = styled(Box)`
+export const Preview = styled.div`
+  box-sizing: border-box;
   width: 100%;
   flex-direction: row;
 

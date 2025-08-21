@@ -1,0 +1,237 @@
+{
+  "key_path": "CurrentSpace",
+  "content": "Current space",
+  "content_en_sha1_hash": "d57183d309dc0b116a6ffaefaf2638416e24c6d7",
+  "created_at": "2025-05-19T21:30:57.422Z",
+  "updated_at": "2025-06-30T12:20:31.758Z",
+  "comment": {
+    "text": "This translation key is used to display the text \"Current space\" in a specific UI component. It is intended to be truncated and styled as a title, appearing in a row view of spaces on a mobile view when not in a completed wizard state.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:48:00.995Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/management/src/app/spaces/multiple/row-content.tsx",
+      "line_number": 108,
+      "context": "fontSize=\"14px\"\n fontWeight={600}\n truncate\n className=\"spaces_row-current\"\n >\n {t(\"CurrentSpace\")}\n </Text>\n ) : !isWizardCompleted && isMobileView ? (\n <Text\n fontSize=\"12px\"\n fontWeight={600}",
+      "module": "/packages/management"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Aktuelles Space' is not the most natural or accurate translation of 'Current space'. While 'aktuell' correctly conveys 'current', 'Space' is an English loanword and might not be the best choice for a German audience. A more natural translation would depend on the context of 'space', but options include 'aktueller Bereich', 'aktueller Raum', or 'aktueller Ort'.",
+          "suggestion": "Consider alternatives like 'aktueller Bereich', 'aktueller Raum', or 'aktueller Ort' depending on the context."
+        },
+        {
+          "type": "formatting",
+          "description": "The term 'Space' is an English loanword and should ideally be italicized or in a specific font to indicate it's a foreign term.",
+          "suggestion": "Consider italicizing 'Space' or using a font style that indicates it's a loanword."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Nykyinen tila\" is a literal translation of 'Current space', it doesn't perfectly convey the meaning in the context of a management interface. 'Current space' often refers to the actively selected workspace or environment within a system. 'Nykyinen tila' could be interpreted more broadly as 'current state' or 'current condition'.",
+          "suggestion": "Consider using 'Nykyinen ympäristö' or 'Nykyinen työtila' which more accurately reflect the concept of a workspace."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"Тренутни простор\" is a literal translation of 'current space'. While not strictly incorrect, 'тренутни простор' can sound a bit awkward in Serbian. A more natural and common translation for 'Current space' in a management context would be 'Текући простор'.",
+          "suggestion": "Текући простор"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"当前协作空间\" is understandable, it's a bit literal and verbose for 'Current space'. A more natural and concise translation might be better.",
+          "suggestion": "Consider alternatives like \"当前空间\" or \"工作空间\" depending on the context."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

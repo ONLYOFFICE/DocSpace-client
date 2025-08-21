@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,10 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { AxiosRequestConfig } from "axios";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { EmployeeType } from "../../enums";
 import { request } from "../client";
 import {
+  TBackupSchedule,
+  TAutoTopUpSettings,
+  TBalance,
+  TCustomerInfo,
   TPaymentQuota,
   TPortal,
   TPortalTariff,
@@ -97,18 +103,24 @@ export function startBackup(
   return request(options);
 }
 
-export function getBackupProgress() {
+export function getBackupProgress(dump: boolean = false) {
   const options = {
     method: "get",
     url: "/portal/getbackupprogress",
+    params: {
+      dump,
+    },
   };
   return request(options);
 }
 
-export function deleteBackupSchedule() {
+export function deleteBackupSchedule(dump: boolean = false) {
   const options = {
     method: "delete",
     url: "/portal/deletebackupschedule",
+    params: {
+      dump,
+    },
   };
   return request(options);
 }
@@ -121,7 +133,7 @@ export function getBackupSchedule(dump: boolean = false) {
       dump,
     },
   };
-  return request(options);
+  return request<TBackupSchedule>(options);
 }
 
 export function createBackupSchedule(
@@ -130,7 +142,7 @@ export function createBackupSchedule(
   backupsStored,
   Period,
   Hour,
-  Day = null,
+  Day: string | null = null,
   backupMail = false,
   dump = false,
 ) {
@@ -155,19 +167,39 @@ export function createBackupSchedule(
   return request(options);
 }
 
-export function deleteBackupHistory() {
-  return request({ method: "delete", url: "/portal/deletebackuphistory" });
+export function deleteBackupHistory(dump: boolean = false) {
+  return request({
+    method: "delete",
+    url: "/portal/deletebackuphistory",
+    params: {
+      dump,
+    },
+  });
 }
 
-export function deleteBackup(id) {
+export function deleteBackup(id: string) {
   return request({ method: "delete", url: `/portal/deletebackup/${id}` });
 }
 
-export function getBackupHistory() {
-  return request({ method: "get", url: "/portal/getbackuphistory" });
+export function getBackupHistory(
+  dump: boolean = false,
+): Promise<TBackupHistory[]> {
+  return request({
+    method: "get",
+    url: "/portal/getbackuphistory",
+    params: {
+      dump,
+    },
+  });
 }
 
-export function startRestore(backupId, storageType, storageParams, notify) {
+export function startRestore(
+  backupId: string,
+  storageType: string,
+  storageParams,
+  notify: boolean,
+  dump = false,
+) {
   return request({
     method: "post",
     url: `/portal/startrestore`,
@@ -176,6 +208,7 @@ export function startRestore(backupId, storageType, storageParams, notify) {
       storageType,
       storageParams,
       notify,
+      dump,
     },
   });
 }
@@ -261,6 +294,15 @@ export async function getPortalPaymentQuotas() {
   return res;
 }
 
+export async function getServicesQuotas() {
+  const res = (await request({
+    method: "get",
+    url: "/portal/payment/quotas?wallet=true",
+  })) as TPaymentQuota[];
+
+  return res;
+}
+
 export async function getPortalQuota(refresh = false) {
   const params = refresh ? { refresh: true } : {};
   // console.log("getPortalQuota", { params });
@@ -312,14 +354,55 @@ export async function getPaymentLink(
   return res;
 }
 
-export function updatePayment(adminCount) {
+export function updatePayment(adminCount, isYearTariff) {
+  const data = isYearTariff ? { adminyear: adminCount } : { admin: adminCount };
+
   return request({
     method: "put",
     url: `/portal/payment/update`,
     data: {
-      quantity: { admin: adminCount },
+      quantity: data,
     },
   });
+}
+
+export function updateWalletPayment(
+  amount: number | null,
+  productQuantityType: number,
+) {
+  return request({
+    method: "put",
+    url: `/portal/payment/updatewallet`,
+    data: {
+      quantity: {
+        storage: amount,
+      },
+      productQuantityType,
+    },
+  });
+}
+
+export function calcalateWalletPayment(
+  amount: number,
+  productQuantityType: number,
+  signal?: AbortSignal,
+) {
+  return request({
+    method: "put",
+    url: `/portal/payment/calculatewallet`,
+    data: {
+      quantity: {
+        storage: amount,
+      },
+      productQuantityType,
+    },
+    signal,
+  }) as {
+    operationId: number;
+    amount: number;
+    currency: string;
+    quantity: number;
+  };
 }
 
 export function getCurrencies() {
@@ -342,8 +425,132 @@ export function sendPaymentRequest(email, userName, message) {
   });
 }
 
+export function getBalance(refresh?: boolean) {
+  const params = refresh ? { refresh: true } : {};
+
+  return request({
+    method: "get",
+    url: `/portal/payment/customer/balance`,
+    params,
+  }) as TBalance;
+}
+
+export function getWalletPayer(refresh?: boolean) {
+  const params = refresh ? { refresh: true } : {};
+
+  return request({
+    method: "get",
+    url: `/portal/payment/customerinfo`,
+    params,
+  }) as TCustomerInfo;
+}
+
+export async function getCardLinked(backUrl) {
+  const params = backUrl ? { backUrl } : {};
+
+  const res = (await request({
+    method: "get",
+    url: "/portal/payment/chechoutsetupurl",
+    params,
+  })) as string;
+
+  return res;
+}
+
+export async function saveDeposite(amount: number, currency: string) {
+  return request({
+    method: "post",
+    url: "/portal/payment/deposit",
+    data: {
+      amount,
+      currency,
+    },
+  }) as string;
+}
+
+export async function getTransactionHistory(
+  startDate: string,
+  endDate: string,
+  credit: boolean = true,
+  withdrawal: boolean = true,
+  offset: number = 0,
+  limit: number = 25,
+) {
+  const options = {
+    method: "get",
+    url: "/portal/payment/customer/operations",
+    params: {
+      startDate,
+      endDate,
+      credit,
+      withdrawal,
+      offset,
+      limit,
+    },
+  };
+  const res = (await request(options)) as TCustomerOperation;
+
+  return res;
+}
+
+export async function getAutoTopUpSettings() {
+  const options = {
+    method: "get",
+    url: "/portal/payment/topupsettings",
+  };
+  const res = (await request(options)) as TAutoTopUpSettings;
+
+  return res;
+}
+
+export async function updateAutoTopUpSettings(
+  enabled: boolean,
+  minBalance: number,
+  upToBalance: number,
+  currency: string,
+) {
+  const body = enabled
+    ? {
+        settings: {
+          enabled,
+          minBalance,
+          upToBalance,
+          currency,
+        },
+      }
+    : {};
+
+  const options = {
+    method: "post",
+    url: "/portal/payment/topupsettings",
+    data: { ...body },
+  };
+  return request(options);
+}
+
+export async function getTransactionHistoryReport(
+  startDate: string,
+  endDate: string,
+  credit: boolean,
+  withdrawal: boolean,
+) {
+  const options = {
+    method: "post",
+    url: "/portal/payment/customer/operationsreport",
+    data: {
+      startDate,
+      endDate,
+      credit,
+      withdrawal,
+    },
+  };
+  const res = (await request(options)) as string;
+
+  return res;
+}
+
 export async function getPortal() {
-  const options: AxiosRequestConfig = {
+  const options = {
     method: "get",
     url: "/portal",
   };

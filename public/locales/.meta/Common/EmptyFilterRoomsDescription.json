@@ -1,0 +1,281 @@
+{
+  "key_path": "EmptyFilterRoomsDescription",
+  "content": "No room matches this filter. Try another or reset filter to view all rooms.",
+  "content_en_sha1_hash": "903ae72970d5a0064d0416b48ff4bea5fe279cc3",
+  "created_at": "2025-05-19T21:30:44.841Z",
+  "updated_at": "2025-05-28T09:30:02.089Z",
+  "comment": {
+    "text": "This translation key is used for a generic message displayed when no rooms match the filter applied, prompting the user to try another filter or reset it. It appears in an empty container component where filter options are provided. Translators should aim to convey a neutral tone and a call-to-action encouraging users to explore other options.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:36:30.040Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/EmptyFilterContainer.js",
+      "line_number": 63,
+      "context": "}) => {\n const navigate = useNavigate();\n const location = useLocation();\n \n const descriptionText = isRooms\n ? t(\"Common:EmptyFilterRoomsDescription\")\n : t(\"Common:EmptyFilterFilesDescription\");\n \n const getIconURL = () => {\n if (isRooms)\n return theme.isBase ? (",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Try another' is not accurately translated. 'Try another' implies trying a different filter, while the Azerbaijani 'başqa filtri yoxlayın' suggests 'check another filter'. This subtly changes the meaning.",
+          "suggestion": "Consider a more accurate translation of 'Try another', such as 'başqa birini sınayın' (try another one) or 'başqa seçim edin' (make another selection)."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is a bit long and could be improved for readability. While grammatically correct, it feels a little clunky.",
+          "suggestion": "Consider splitting the sentence into two shorter sentences for improved flow. For example: 'Bu filtrə uyğun otaq yoxdur. Bütün otaqlara baxmaq üçün başqa filtri seçin və ya sıfırlayın.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Try another' is a bit too literal and doesn't flow naturally in Finnish. It's better to convey the meaning of 'adjust the filter' or 'modify the filter'.",
+          "suggestion": "Kokeile muokata hakuehtoja."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'poista' (remove) could be better replaced with a more gentle term. 'Poista' implies a complete removal, while 'nollaa' (reset) aligns better with the original English meaning.",
+          "suggestion": "Nollaa hakuehdot"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"վերակայեք բոլոր սենյակները դիտելու համար\" is a literal translation of 'reset filter to view all rooms'. A more natural and accurate Armenian phrasing would be something like 'դիտելու համար բոլոր սենյակները' or 'պատճառելու համար բոլոր սենյակները'. The original English implies 'reset the filter,' not 'view all rooms'.",
+          "suggestion": "Ոչ մի սենյակ չի համապատասխանում այս ֆիլտրին: Փորձեք մեկ այլ զտիչ կամ զտիչը վերականգնեք բոլոր սենյակները դիտելու համար:"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"필터를 리셋하세요\" (filter-eul reset-hayo) while technically correct, is a direct transliteration of 'reset'. A more natural and idiomatic Korean expression for 'reset' in this context would be '필터를 초기화하세요' (filter-eul cho-gi-hwa-hayo) or '필터를 다시 설정하세요' (filter-eul dasi seol-jeong-hayo).",
+          "suggestion": "이 필터와 일치하는 룸이 없습니다. 다른 필터를 시도하거나 모든 룸을 보려면 필터를 초기화하세요. / 이 필터와 일치하는 룸이 없습니다. 다른 필터를 시도하거나 모든 룸을 보려면 필터를 다시 설정하세요."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ກວດຄືນການກັ່ນຕອງ\" (gvet khuen gaan gan dtong) is a literal translation of 'check the filter' and might be better phrased to convey 'reset the filter' as in the English original. A more natural translation would be something along the lines of 'ປັບການກັ່ນຕອງຄືນ' (bap gaan gan dtong khuen).",
+          "suggestion": "ປັບການກັ່ນຕອງຄືນ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'reset filter' is translated as 'verwijder het filter'. While technically correct, 'reset filter' conveys the intended meaning of returning to the initial filter settings more accurately. 'Verwijder het filter' implies deletion.",
+          "suggestion": "reset het filter"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Filtru de sală nu a produs rezultate' is a literal translation that is not natural Romanian. A more natural phrasing would be 'Nici o sală nu corespunde filtrului'.",
+          "suggestion": "Nici o sală nu corespunde filtrului."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Încercați un alt filtru' is technically correct, 'Încearcă un alt filtru' is more conversational and typical in this context.",
+          "suggestion": "Încearcă un alt filtru"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The use of 'resetați filtrul' is technically correct, but 'șterge filtrul' or 'anulează filtrul' might be more common and understandable to users. 'Resetați' implies a more complex process than might be intended.",
+          "suggestion": "anulează filtrul"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'පෙරහන' (perahana) is used repeatedly. While technically correct, it's a bit formal and repetitive. A more natural phrasing might be considered.",
+          "suggestion": "Consider replacing some instances of 'පෙරහන' with a synonym like 'පෙරහන්' or 'පෙරහඳි'."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure 'සියලු කාමර බැලීමට වෙනත් එකක් උත්සාහ කරන්න හෝ පෙරහන නැවත සකසන්න' is a bit awkward. While grammatically understandable, it can be improved for a more natural flow.",
+          "suggestion": "Consider rephrasing as 'වෙනත් එකක් උත්සාහ කරන්න, නැත්නම් පෙරහන නැවත සකසන්න, සියලු කාමර බැලීමට.' or 'සියලු කාමර බැලීමට නම් පෙරහන නැවත සකසන්න, නැත්නම් වෙනත් එකක් උත්සාහ කරන්න.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

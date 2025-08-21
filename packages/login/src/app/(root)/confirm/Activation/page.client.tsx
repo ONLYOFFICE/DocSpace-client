@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -69,9 +69,9 @@ const ActivateUserForm = ({
   defaultPage = "/",
 }: ActivateUserFormPorps) => {
   const { t } = useTranslation(["Confirm", "Common"]);
-  const { linkData } = useContext(ConfirmRouteContext);
+  const { confirmLinkResult, linkData } = useContext(ConfirmRouteContext);
 
-  const emailFromLink = linkData?.email ? linkData.email : "";
+  const emailFromLink = confirmLinkResult?.email ? confirmLinkResult.email : "";
 
   const [name, setName] = useState(linkData.firstname ?? "");
   const [nameValid, setNameValid] = useState(true);
@@ -104,6 +104,27 @@ const ActivateUserForm = ({
     setIsPasswordErrorShow(true);
   };
 
+  const activateConfirmUser = async ({
+    personalData,
+    loginData,
+    key,
+    userId,
+    activationStatus,
+  }: TActivateConfirmUser) => {
+    const changedData = {
+      id: userId,
+      FirstName: personalData.firstname,
+      LastName: personalData.lastname,
+    };
+
+    const { userName, passwordHash: ph } = loginData;
+
+    await changePassword(userId, ph, key);
+    await updateActivationStatus(activationStatus, userId, key);
+    await login(userName, ph);
+    await updateUser(changedData);
+  };
+
   const onSubmit = async () => {
     setIsLoading(true);
     if (!name?.trim()) setNameValid(false);
@@ -121,7 +142,7 @@ const ActivateUserForm = ({
     const hash = createPasswordHash(password, passwordHash);
 
     const loginData = {
-      userName: linkData.email ?? "",
+      userName: confirmLinkResult.email ?? "",
       passwordHash: hash,
     };
 
@@ -161,27 +182,6 @@ const ActivateUserForm = ({
     }
   };
 
-  const activateConfirmUser = async ({
-    personalData,
-    loginData,
-    key,
-    userId,
-    activationStatus,
-  }: TActivateConfirmUser) => {
-    const changedData = {
-      id: userId,
-      FirstName: personalData.firstname,
-      LastName: personalData.lastname,
-    };
-
-    const { userName, passwordHash } = loginData;
-
-    await changePassword(userId, passwordHash, key);
-    await updateActivationStatus(activationStatus, userId, key);
-    await login(userName, passwordHash);
-    await updateUser(changedData);
-  };
-
   const onKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === ButtonKeys.enter) {
       onSubmit();
@@ -198,10 +198,11 @@ const ActivateUserForm = ({
 
         <FieldContainer
           className="form-field"
-          isVertical={true}
+          isVertical
           labelVisible={false}
           hasError={!nameValid}
           errorMessage={t("Common:RequiredField")}
+          dataTestId="name_field"
         >
           <TextInput
             id="name"
@@ -210,21 +211,23 @@ const ActivateUserForm = ({
             placeholder={t("Common:FirstName")}
             type={InputType.text}
             size={InputSize.large}
-            scale={true}
+            scale
             tabIndex={1}
-            isAutoFocussed={true}
+            isAutoFocussed
             autoComplete="given-name"
             onChange={onChangeName}
             onKeyDown={onKeyPress}
+            testId="name_input"
           />
         </FieldContainer>
 
         <FieldContainer
           className="form-field"
-          isVertical={true}
+          isVertical
           labelVisible={false}
           hasError={!surNameValid}
           errorMessage={t("Common:RequiredField")}
+          dataTestId="surname_field"
         >
           <TextInput
             id="surname"
@@ -233,20 +236,22 @@ const ActivateUserForm = ({
             placeholder={t("Common:LastName")}
             type={InputType.text}
             size={InputSize.large}
-            scale={true}
+            scale
             tabIndex={2}
             autoComplete="family-name"
             onChange={onChangeSurName}
             onKeyDown={onKeyPress}
+            testId="surname_input"
           />
         </FieldContainer>
 
         <FieldContainer
           className="form-field password-field"
-          isVertical={true}
+          isVertical
           labelVisible={false}
-          hasError={isPasswordErrorShow && !passwordValid}
+          hasError={isPasswordErrorShow ? !passwordValid : undefined}
           errorMessage={t("Common:IncorrectPassword")}
+          dataTestId="password_field"
         >
           <PasswordInput
             className="confirm-input"
@@ -257,9 +262,9 @@ const ActivateUserForm = ({
             placeholder={t("Common:Password")}
             inputType={InputType.password}
             inputValue={password}
-            hasError={isPasswordErrorShow && !passwordValid}
+            hasError={isPasswordErrorShow ? !passwordValid : undefined}
             size={InputSize.large}
-            scale={true}
+            scale
             tabIndex={1}
             autoComplete="current-password"
             onChange={onChangePassword}
@@ -290,6 +295,7 @@ const ActivateUserForm = ({
           tabIndex={5}
           onClick={onSubmit}
           isDisabled={isLoading}
+          testId="signup_button"
         />
       </form>
     </RegisterContainer>

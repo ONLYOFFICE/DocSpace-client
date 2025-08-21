@@ -4,9 +4,7 @@ export const DirectionContext = createContext("ltr");
 
 const DirectionWrapper = ({ interfaceDirection, children }) => {
   return (
-    <DirectionContext.Provider value={interfaceDirection}>
-      {children}
-    </DirectionContext.Provider>
+    <DirectionContext value={interfaceDirection}>{children}</DirectionContext>
   );
 };
 

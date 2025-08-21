@@ -1,0 +1,26 @@
+.container {
+  position: relative;
+  height: auto;
+
+  user-select: text;
+
+  & *:not(img) {
+    user-select: text;
+  }
+
+  &.noSelect {
+    user-select: none;
+
+    & *:not(img) {
+      user-select: none;
+    }
+  }
+
+  &.useReactWindow {
+    height: 100%;
+
+    &.manualHeight {
+      height: var(--manual-height);
+    }
+  }
+}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,6 +28,7 @@
 
 import React from "react";
 import { I18nextProvider } from "react-i18next";
+import { usePathname, useSearchParams } from "next/navigation";
 
 import { ThemeProvider } from "@docspace/shared/components/theme-provider";
 import { TFirebaseSettings } from "@docspace/shared/api/settings/types";
@@ -41,23 +42,25 @@ import useTheme from "@/hooks/useTheme";
 import pkgFile from "../../package.json";
 
 import ErrorBoundaryWrapper from "./ErrorBoundary";
-import { usePathname, useSearchParams } from "next/navigation";
 
 export const Providers = ({
   children,
   value,
   redirectURL,
   user,
+  locale,
 }: {
   children: React.ReactNode;
   value: TDataContext;
   redirectURL: string;
   user?: TUser;
+  locale?: string;
 }) => {
   const firebaseHelper = new FirebaseHelper(
     value.settings?.firebase ?? ({} as TFirebaseSettings),
   );
-  const confirmType = useSearchParams().get("type");
+  const searchParams = useSearchParams();
+  const confirmType = searchParams?.get("type");
 
   let shouldRedirect = true;
   if (redirectURL === "unavailable" && confirmType === "PortalContinue") {
@@ -68,19 +71,32 @@ export const Providers = ({
   const expectedPathName = `/${redirectURL}`;
 
   React.useEffect(() => {
+    if (
+      redirectURL &&
+      (confirmType === "GuestShareLink" || confirmType === "EmailChange")
+    ) {
+      sessionStorage.setItem(
+        "referenceUrl",
+        `/confirm/${confirmType}?${searchParams?.toString()}`,
+      );
+    }
+  }, [redirectURL, searchParams, confirmType]);
+
+  React.useEffect(() => {
     if (shouldRedirect && redirectURL && pathName !== expectedPathName)
       window.location.replace(expectedPathName);
   }, [redirectURL, pathName, expectedPathName, shouldRedirect]);
 
   const { i18n } = useI18N({
     settings: value.settings,
+    locale,
   });
 
   const { theme, currentColorTheme } = useTheme({
     user,
     colorTheme: value.colorTheme,
     systemTheme: value.systemTheme,
-    i18n,
+    lang: locale,
   });
 
   return (
@@ -91,11 +107,9 @@ export const Providers = ({
           version={pkgFile.version}
           firebaseHelper={firebaseHelper}
         >
-          {shouldRedirect && redirectURL && expectedPathName !== pathName ? (
-            <></>
-          ) : (
-            children
-          )}
+          {shouldRedirect && redirectURL && expectedPathName !== pathName
+            ? null
+            : children}
         </ErrorBoundaryWrapper>
       </I18nextProvider>
     </ThemeProvider>

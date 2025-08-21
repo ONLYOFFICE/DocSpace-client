@@ -1,0 +1,273 @@
+{
+  "key_path": "SuccessDeactivate",
+  "content": "Your account has been successfully deactivated. In 10 seconds you will be redirected to the <1>site</1>.",
+  "content_en_sha1_hash": "d6d11d0d371364467018610063c9cdc6f6c7d21c",
+  "created_at": "2025-05-19T21:30:57.396Z",
+  "updated_at": "2025-06-30T12:20:31.660Z",
+  "comment": {
+    "text": "This translation key displays a message confirming account deactivation and provides information about the redirect to another site after 10 seconds. It is used in a UI confirmation page where the user's account has been successfully deactivated.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:23.012Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/login/src/app/(root)/confirm/PortalSuspend/page.client.tsx",
+      "line_number": 88,
+      "context": "window.location.href = \"/\";\n };\n \n return isDeactivate ? (\n <Text>\n <Trans t={t} i18nKey=\"SuccessDeactivate\" ns=\"Confirm\">\n Your account has been successfully deactivated. In 10 seconds you will\n be redirected to the\n <Link isHovered href={url}>\n site\n </Link>",
+      "module": "/packages/login"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The tag `<1>site</1>` is not properly localized or translated. It should ideally be adapted to the Arabic context (e.g., 'الموقع').",
+          "suggestion": "Replace `<1>site</1>` with `<1>الموقع</1> or a more contextually relevant Arabic term for 'site'."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags `<1>` and `</1>` are correctly preserved in the Czech translation, mirroring the English content.",
+          "suggestion": null
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags `<1>` and `</1>` are inconsistent between the English and Lao translations. The English uses `<1>` and `</1>` while the Lao uses `<1>` and `</1>`.",
+          "suggestion": "Ensure consistent HTML tag usage.  The Lao translation should use `<1>` and `</1>` to match the English."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The tag `<1>` is present in both the English and Polish versions, indicating it's likely a placeholder and should be handled consistently.  It's important to ensure this tag is replaced with the appropriate value in the final implementation.",
+          "suggestion": "Verify the intended use of the `<1>` tag and ensure it is replaced with the correct value in the final implementation.  If intended to be HTML, ensure it's properly escaped."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Sinhala translation uses a Sinhala numeral '𑇪' instead of the Arabic numeral '10'. This may confuse users familiar with Arabic numerals and is inconsistent with common practice for numbers.",
+          "suggestion": "Replace '𑇪' with '10'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The tags <1> and </1> are inconsistent between the English and Slovak versions. The English uses <1> while the Slovak uses an arbitrary tag.",
+          "suggestion": "Ensure the tags used for dynamic content are consistent between the source and target language (e.g., both use <1> and </1>)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English text states 'deactivated', but the Slovenian translation uses 'ponovno aktiviran' which means 'reactivated'. This is a significant translation error.",
+          "suggestion": "Vaš račun je bil uspešno deaktiviran. Čez 10 sekund boste preusmerjeni na <1>stran</1>."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'биц́ете' is a less common and slightly archaic form. A more natural and modern form would be 'бићете'.",
+          "suggestion": "бићете"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The verb conjugation 'будете' is incorrect. It should be 'будете перенаправлено'. The passive voice is required here.",
+          "suggestion": "Ваш обліковий запис успішно деактивовано. Через 10 секунд вас буде перенаправлено на <1>сайт</1>."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Deactivated' is translated as 'vô hiệu hóa'. While technically correct, 'vô hiệu hóa' can sound very formal or even negative in this context. A more natural and user-friendly translation would be 'đã ngừng hoạt động' or 'đã tắt'.",
+          "suggestion": "Tài khoản của bạn đã ngừng hoạt động thành công. Trong 10 giây, bạn sẽ được chuyển hướng đến <1>trang</1>."
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> seem unusual and likely unintentional.  They are likely meant to signify a variable or placeholder.",
+          "suggestion": "Review the original English content's HTML tags to ensure correct representation in the Vietnamese translation. They are probably not needed."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

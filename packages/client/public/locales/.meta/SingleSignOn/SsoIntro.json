@@ -1,0 +1,388 @@
+{
+  "key_path": "SsoIntro",
+  "content": "The Single Sign-On section allows you to enable/disable third-party authentication using SAML, thereby providing a quicker, easier and more secure way to access the space for users.",
+  "content_en_sha1_hash": "934dd1dc1e384a2a4a53a740d7eba5216ea9f77b",
+  "created_at": "2025-05-19T21:30:50.185Z",
+  "updated_at": "2025-08-12T19:46:26.210Z",
+  "comment": {
+    "text": "The Single Sign-On section allows users to enable or disable third-party authentication using SAML, providing a quicker and more secure way to access the space. This translation key is used in the portal settings page, where it appears as a title for a section explaining the functionality of SSO.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:02.514Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/index.js",
+      "line_number": 76,
+      "context": "return (\n <StyledSsoPage\n hideSettings={serviceProviderSettings}\n hideMetadata={spMetadata}\n >\n <Text className=\"intro-text settings_unavailable\">{t(\"SsoIntro\")}</Text>\n \n {isMobileView ? (\n <MobileView isSSOAvailable={isSSOAvailable} logoText={logoText} />\n ) : (\n <>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'SAML' is translated as 'لغة ترميز تأكيد الأمان'. While technically accurate, it's overly literal and complex for a user interface. A more understandable translation for users might be 'بروتوكول SAML' or a simpler explanation of its function.",
+          "suggestion": "Consider using 'بروتوكول SAML' or 'طريقة تسجيل دخول موحدة باستخدام SAML' to improve clarity for the target audience."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a full stop at the end of the sentence which may not align with common Arabic UI writing conventions. It might be better to remove it.",
+          "suggestion": "Remove the trailing full stop."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'more secure way to access the space' is not accurately reflected by 'domenə daxil olmaq üçün daha təhlükəsiz yol'. 'Space' refers to a specific area or platform, and 'domenə daxil olmaq' implies accessing a domain, which isn't quite the same. A better translation would clarify the access point being referred to.",
+          "suggestion": "Birdəfəlik Giriş bölməsi SAML-dən istifadə edərək üçüncü tərəfin doğrulamasını aktivləşdirməyə/deaktiv etməyə imkan verir, beləliklə, istifadəçilər üçün platformaya daxil olmaq üçün daha sürətli, asan və daha təhlükəsiz yol təqdim edir."
+        },
+        {
+          "type": "spelling",
+          "description": "While technically correct, 'Birdəfəlik Giriş' could be improved for readability. While a literal translation is 'Single Sign-On', a more commonly used term in the user interface would improve clarity.",
+          "suggestion": "Tək Giriş (Single Sign-On) bölməsi"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The term 'Single Sign-On' is translated as 'Single Sign-On (jednotné přihlášení)'. While the Czech explanation is helpful, it's better to maintain consistency with the English and just use 'Single Sign-On' throughout, especially in UI contexts. The parenthetical explanation should be reserved for initial introductions or help text.",
+          "suggestion": "Use 'Single Sign-On' throughout the translation, and only include the explanation of 'jednotné přihlášení' in a separate help text or tooltip if necessary."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'space' is translated as 'Bereich'. While 'Bereich' isn't incorrect, it's more literal. A more natural translation might be 'System' or 'Plattform' depending on the context of the application.",
+          "suggestion": "Consider replacing 'Bereich' with 'System' or 'Plattform' for a more natural flow."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The acronym 'SML' should be 'SAML'.",
+          "suggestion": "Kertakirjautumisosion avulla voit ottaa käyttöön/poistaa kolmannen osapuolen todennuksen käyttäen SAML:ää, tarjoten käyttäjille nopeamman helpomman ja turvallisemman pääsyn tilaan."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'տարածք' (space) might be too literal. It's generally understood as 'area' or 'platform' in this context. While not strictly incorrect, it could be improved.",
+          "suggestion": "տարածք → պլատֆորմ / հարթակ"
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure 'այնպիսով ապահովելով...' is a bit clunky in Armenian. A more natural flow would be to rephrase.",
+          "suggestion": "այնպիսով ապահովելով... → ապահովելով օգտվողներին տարածք մուտք գործելու ավելի արագ, հեշտ և անվտանգ եղանակ"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"より迅速で簡単、かつ安全な\" (yorimousubeki, kantan, katsu anzennna) sounds slightly awkward and could be improved. While literally translating to 'quicker, easier, and more secure', it lacks a natural flow in Japanese. It could be rephrased to express the same meaning more elegantly.",
+          "suggestion": "ユーザーに対して、より迅速かつ安全で、より便利なスペースへのアクセスを提供します。"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"더 빠르고 쉽고 안전하게\" (more fast and easy and secure) is grammatically awkward in Korean. It sounds unnatural and repetitive. While it technically conveys the meaning, a more natural phrasing would improve readability.",
+          "suggestion": "싱글 사인온 섹션에서는 SAML을 사용하여 제3자 인증을 활성화/비활성화할 수 있으므로 스페이스에 보다 빠르고 편리하며 안전하게 액세스할 수 있습니다."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ພາກສ່ວນການເຂົ້າສູ່ລະບົບດຽວ\" (pak suan kan khao su ling diaw) translates to 'Single Sign-On section' but the English original is more simply 'Single Sign-On'.  While technically correct, it's slightly wordy for a UI element label.",
+          "suggestion": "ການເຂົ້າສູ່ລະບົບດຽວ (kan khao su ling diaw)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ພິສູດຢືນຢັນ\" (phisut yunyen) is a bit formal. While accurate for 'authentication', a more natural translation might be 'ການຢັ້ງຢືນ' (kan yangyeun) or simply 'ການຮັບຮູ້' (kan rapru).",
+          "suggestion": "ການຢັ້ງຢືນ (kan yangyeun)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "“ພື້ນທີ່” (pheun thia) literally means 'area' or 'space'. While usable, 'ສະຖານທີ່' (sathan thi) might be a more appropriate term for 'space' in a digital context.",
+          "suggestion": "ສະຖານທີ່ (sathan thi)"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'third-party authentication' is translated as 'uwierzytelniania przez zewnętrznych dostawców'. While technically correct, it's a bit clunky. A more natural Polish phrasing would be 'uwierzytelniania przez dostawcy zewnętrznych usług' or simply 'uwierzytelniania zewnętrznego'.",
+          "suggestion": "uwierzytelniania przez dostawców zewnętrznych usług"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'space' is translated as 'obszaru'. While 'obszar' is a valid translation, 'platforma' or 'system' might be more appropriate depending on the context. 'Obszar' implies a more limited area.",
+          "suggestion": "platformy"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses a hyphenated form 'Início de Sessão Único' which isn't standard Portuguese. It should be 'Autenticação Única' or 'Single Sign-On'.",
+          "suggestion": "Autenticação Única"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'proporcionando assim' is grammatically correct, it can be simplified for better flow and readability. It translates to 'thereby providing', which is a bit clunky.",
+          "suggestion": "oferecendo"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"prin implicarea autentificării de la terțe SAML\" is awkward and doesn't accurately convey the meaning of \"using SAML\". It implies SAML is being involved in a process rather than being the authentication method itself.",
+          "suggestion": "prin utilizarea SAML"
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure is a bit convoluted.  While grammatically correct, it's not the most natural flow in Romanian.",
+          "suggestion": "Secţiunea Single Sign-On (Autentificare unică) vă permite să activați/să dezactivați autentificarea prin SAML, oferind utilizatorilor un mod mai rapid, mai ușor și mai sigur de a accesa spațiul."
+        },
+        {
+          "type": "formatting",
+          "description": "Inconsistent capitalization. 'şi' should be 'și'.",
+          "suggestion": "mai rapid, mai ușor și mai sigur"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses a slash (/) between 'включать' and 'отключать'. While acceptable, a dash (–) might be more natural in Russian when indicating a range of options.",
+          "suggestion": "Раздел «Единый вход» позволяет включать–отключать стороннюю аутентификацию..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English uses the word 'space'. While 'portal' is a reasonable translation, it might be more accurate to consider the context. A 'platform' or 'system' might also be suitable depending on what 'space' refers to.",
+          "suggestion": "Consider if 'portal' is the most accurate translation of 'space'. Other possibilities include 'платформу' (platform) or 'систему' (system)."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ද්වි-සාධක\" (dvi-sadaka) translates to 'two-factor' but in the English context, it's not necessary. It implies a two-factor authentication process which isn't the core function described.",
+          "suggestion": "Remove \"ද්වි-සාධක\" (dvi-sadaka) and simply use \"SAML භාවිතයෙන්\" (using SAML)."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"අබල කිරීමට\" is a somewhat formal way to say 'disable'. It could be simplified.",
+          "suggestion": "Replace \"අබල කිරීමට\" with \"නිර්වල කිරීමට\" (nirvala karamatu) or simply \"අයින් කිරීමට\" (ain karamatu)."
+        },
+        {
+          "type": "formatting",
+          "description": "The punctuation could be improved for better readability. Specifically, a comma after 'SAML භාවිතයෙන්' might be beneficial.",
+          "suggestion": "Add a comma after 'SAML භාවිතයෙන්' (SAML භාවිතයෙන්,)"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Slovak translation uses a comma (,) before 'čím' which is not standard in this context. A semicolon (;) would be more appropriate.",
+          "suggestion": "Sekcia jednotného prihlásenia vám umožňuje povoliť/zakázať autentifikáciu od tretej strany pomocou SAML; čím používateľom poskytuje rýchlejší, jednoduchší a bezpečnejší spôsob prístupu k priestoru."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The use of an em dash (—) might be less common or preferred in Serbian Cyrillic. A hyphen (-) or a more descriptive phrasing could be considered.",
+          "suggestion": "Consider replacing '–' with 'или' or restructuring the sentence to avoid the em dash altogether."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"treće strane\" (third party) is technically correct but sounds awkward in this context. \"vanjske providjace\" (external providers) or simply \"spoljnih servisa\" (external services) would read more naturally in Serbian for this technical context.",
+          "suggestion": "Odeljak za Jednokratnu prijavu omogućava vam da omogućite/onemogućite autentifikaciju spoljnih servisa korišćenjem SAML-a, čime se korisnicima pruža brži, jednostavniji i sigurniji način pristupa prostoru."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses a semicolon (;) instead of a comma (,) after 'devre dışı bırakmanıza'. While semicolons are grammatically correct, commas are more common and preferred in this context for readability in Turkish.",
+          "suggestion": "Replace ';' with ',' after 'devre dışı bırakmanıza'."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"do đó\" (therefore) doesn't quite capture the nuance of \"thereby.\" It implies a direct causal relationship that might not be fully accurate in this context.  It reads a bit stilted.",
+          "suggestion": "Consider rephrasing to something like \"giúp\" (helping) or \"cung cấp\" (providing) but with slightly different wording to flow better.  For example: \"Phần Đăng nhập một lần cho phép bạn bật/tắt xác thực của bên thứ ba bằng SAML, giúp cung cấp cách truy cập không gian cho người dùng nhanh hơn, dễ dàng hơn và an toàn hơn.\" Or, \"Phần Đăng nhập một lần cho phép bạn bật/tắt xác thực của bên thứ ba bằng SAML, từ đó cung cấp một cách thức truy cập không gian nhanh hơn, dễ dàng hơn và an toàn hơn cho người dùng.\" "
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'quicker, easier and more secure' is somewhat lost in the Chinese translation. While '更便捷、更安全的' conveys 'more convenient and more secure,' the nuance of 'quicker' is missing. Consider adding a word to convey speed.",
+          "suggestion": "您可在单点登录部分启用/禁用使用 SAML 的第三方身份验证功能，从而为用户提供更快速、更便捷、更安全的空间访问方式。"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

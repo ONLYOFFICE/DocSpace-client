@@ -1,6 +1,4 @@
 {
   "ErrorEmptyResponse": "Răspunsul necompletat",
-  "ErrorUnavailableText": "{{productName}} nu este disponibil",
-  "LinkDoesNotExist": "Lunk-ul pe care încercați să-l deschideți nu există.",
-  "LinkHasExpired": "Linkul pe care l-ați urmat a expirat."
+  "ErrorUnavailableText": "{{productName}} nu este disponibil"
 }

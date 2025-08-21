@@ -1,0 +1,390 @@
+{
+  "key_path": "SpMetadataDescription",
+  "content": "Access Service Provider metadata to add {{organizationName}} {{productName}} as a trusted Service Provider in your IdP account.",
+  "content_en_sha1_hash": "098786ad0d536a8db1b1460c33f375fa8fd80406",
+  "created_at": "2025-05-19T21:30:50.169Z",
+  "updated_at": "2025-08-11T18:11:59.260Z",
+  "comment": {
+    "text": "This translation key is used for the \"Add Trusted Service Provider\" button subtitle. It provides a brief explanation of what information will be added to the IdP account when selecting an organization as a trusted service provider. The translated text appears in a dialog box related to Single Sign On (SSO) settings on mobile devices.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:04.758Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/MobileView.js",
+      "line_number": 66,
+      "context": "/>\n <MobileCategoryWrapper\n title={t(\"SpMetadata\", {\n organizationName: logoText,\n })}\n subtitle={t(\"SpMetadataDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n })}\n url=\"/portal-settings/integration/sso/metadata\"\n withPaidBadge={!isSSOAvailable}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"كمقدم خدمة موثوق به\" (as a trusted service provider) is a literal translation but might sound unnatural in a Saudi Arabian context. A more natural phrasing could be \"كمزود خدمة موثوق به\" or \"كشريك موثوق به\".",
+          "suggestion": "قم بالوصول إلى البيانات التعريفية لموفر الخدمة لإضافة {{organizationName}} {{productName}} كمزود خدمة موثوق به في حساب IdP الخاص بك."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses 'Xidmət Provayderi' which is a direct transliteration of 'Service Provider'. While understandable, using a more localized term or a more natural phrasing might improve readability for Azerbaijani speakers.  Consider a phrase like 'Xidmət Təminatçısı' (Service Provider) or a rephrased sentence that avoids the direct translation.",
+          "suggestion": "Consider alternative phrasing to avoid direct transliteration of 'Service Provider'."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Bulgarian translation retains the double curly braces `{{...}}` which are placeholders and should be removed or replaced with the intended variable substitution mechanism.",
+          "suggestion": "Remove or replace `{{organizationName}}` and `{{productName}}` with the appropriate variable substitution method for the target platform/system."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Czech translation uses 'službu' which implies a service. While technically correct, it might be more accurate to omit it and just state 'přidejte {{organizationName}} {{productName}}'. The English doesn't specify 'service' before the product name.",
+          "suggestion": "Získejte přístup k metadatům poskytovatele služeb a přidejte {{organizationName}} {{productName}} jako důvěryhodného poskytovatele služeb do svého účtu IdP."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Access Service Provider metadata' is a bit awkward in German. A more natural phrasing would be 'Rufen Sie die Service Provider-Metadaten ab' or 'Service Provider-Metadaten abrufen'.",
+          "suggestion": "Rufen Sie die Service Provider-Metadaten ab, um..."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Access Service Provider metadata\" is translated as \"Αποκτήστε πρόσβαση στα μεταδεδομένα παρόχου υπηρεσιών\". While technically correct, a more natural phrasing in Greek might be \"Λάβετε τα μεταδεδομένα παρόχου υπηρεσιών\" or \"Εξαγάγετε τα μεταδεδομένα παρόχου υπηρεσιών\". \"Αποκτήστε πρόσβαση\" is a bit literal and less common in this context.",
+          "suggestion": "Λάβετε τα μεταδεδομένα παρόχου υπηρεσιών"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"as a trusted Service Provider\" is translated as \"ως αξιόπιστο πάροχο υπηρεσιών\". While correct, it could be slightly improved for clarity.  A more common term for 'trusted' in this context might be 'εγκεκριμένο'.",
+          "suggestion": "ως εγκεκριμένο πάροχο υπηρεσιών"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Armenian translation uses Armenian script, which is appropriate. However, consistency in capitalization should be reviewed for proper noun usage (e.g., 'Service Provider').",
+          "suggestion": "Review capitalization of 'Ծառայությունների Մատակարար' for consistency and proper noun usage."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While the general meaning is conveyed, 'վստահելի Ծառայությունների Մատակարար ավելացնելու համար' could be more naturally phrased. 'ավելացնելու համար' is a bit literal and could be replaced with something that implies integration or adding as a trusted party.",
+          "suggestion": "Consider alternatives for 'ավելացնելու համար' to convey the meaning of integration or adding as a trusted party. Examples: 'ներառելու համար', 'ավանդելու համար' (depending on the context)."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ເຂົ້າເຖິງ' (khao theng) can be a bit ambiguous and might be better suited to a more specific term like 'ດຶງຂໍ້ມູນ' (dueng khom-mun) or 'ຮັບຂໍ້ມູນ' (rap khom-mun) depending on the precise meaning intended.",
+          "suggestion": "Consider replacing 'ເຂົ້າເຖິງ' with 'ດຶງຂໍ້ມູນ' or 'ຮັບຂໍ້ມູນ' for more clarity."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure could be improved for a more natural flow in Lao. While technically correct, it sounds a little stiff.",
+          "suggestion": "Reconsider the sentence structure to improve readability. For example: 'ເພື່ອກວດວິທີການເພີ່ມ {{organizationName}} {{productName}} ເປັນຜູ້ໃຫ້ບໍລິການທີ່ເຊື່ອຖືໄດ້ໃນບັນຊີ IdP ຂອງທ່ານ, ໃຫ້ດຶງຂໍ້ມູນ metadata ຂອງຜູ້ໃຫ້ບໍລິການ'."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Access Service Provider metadata' is translated as 'Ga naar de Service Provider metadata'. While understandable, a more accurate and natural translation might be 'Bekijk de Service Provider metadata' or 'Download de Service Provider metadata'. 'Ga naar' implies navigation, whereas 'bekijk' or 'download' more accurately reflects the action of accessing metadata.",
+          "suggestion": "Bekijk de Service Provider metadata"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'trusted Service Provider' is not ideally translated. While 'provedor de serviços confiável' is understandable, a more natural phrasing in Portuguese might emphasize the integration aspect.",
+          "suggestion": "Acesse os metadados do provedor de serviços para integrar o {{organizationName}} {{productName}} como um provedor de serviços em sua conta IdP."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Acesse os metadados do provedor de serviços\" is a literal translation of \"Access Service Provider metadata\". While grammatically correct, it's less natural in Portuguese. A more natural phrasing would be \"Obtenha os metadados do provedor de serviços\" or \"Recupere os metadados do provedor de serviços\".",
+          "suggestion": "Obtenha os metadados do provedor de serviços"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The term 'furnizorului de identitate (IdP)' is slightly awkward. While technically correct, it can be improved for better flow.",
+          "suggestion": "Accesați metadatele ale furnizorului de servicii pentru a adăuga {{organizationName}} {{productName}} ca un furnizor de servicii de încredere în contul dvs. IdP."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"IdP account\" is translated as \"аккаунт поставщика учетных записей\".  A more common and accurate translation would be \"аккаунт удостоверяющего органа\" or \"аккаунт IdP\".",
+          "suggestion": "Получите доступ к метаданным поставщика сервиса, чтобы добавить {{organizationName}} {{productName}} в качестве надежного поставщика сервиса в ваш аккаунт удостоверяющего органа (IdP)."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Sinhala translation retains the English placeholders {{organizationName}} and {{productName}}. While technically correct, it would be more natural to replace these with Sinhala equivalents or a more descriptive phrase if direct equivalents are unavailable.",
+          "suggestion": "Consider replacing {{organizationName}} and {{productName}} with Sinhala equivalents if available. If not, a more descriptive phrase like 'ඔබේ සංවිධානය සහ නිෂ්පාදනය' (your organization and product) could be used. Alternatively, a more general term could be used to avoid direct translation if the placeholders aren't critical."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'Access Service Provider metadata වෙත පිවිසීම' is grammatically correct but slightly awkward. A more natural phrasing could improve readability.",
+          "suggestion": "Consider rephrasing to 'Access Service Provider metadata  mengakses කරන්න' or 'Access Service Provider metadata වෙත යාමට' for a more natural flow. (accessing/to access)"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Service Provider' is not consistently translated. While 'poskytovateľa služieb' is used, the English original uses 'Service Provider' which is more common and precise in this context. Maintaining consistency is important.",
+          "suggestion": "Consider translating consistently as 'poskytovateľa služieb' throughout the entire document, or alternatively, keeping 'Service Provider' in English if it's common terminology in the user's environment.  A good option is to use 'poskytovateľa služby' as it's slightly more natural in Slovak."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Access Service Provider metadata\" is not accurately reflected in Slovenian. A more natural translation would be something like \"Pridobite metapodatke ponudnika storitev\" or \"Prejmite metapodatke ponudnika storitev\". \"Dostopajte do metapodatkov\" is grammatically correct but less idiomatic in this context.",
+          "suggestion": "Pridobite metapodatke ponudnika storitev"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"trusted Service Provider\" could be improved. While \"zaupanja vrednega ponudnika storitev\" is literally correct, \"priznanega ponudnika storitev\" or \"potrjenega ponudnika storitev\" might be more suitable depending on the exact nuance intended.",
+          "suggestion": "priznanega ponudnika storitev"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Приступ' (Accessed/Access) in the Serbian translation is not the most natural way to convey 'Access' in this context. A more appropriate translation might be 'Прибављење' (Obtaining) or 'Преузимање' (Downloading/Retrieving).",
+          "suggestion": "Прибављење метаподацима пружаоца услуга како бисте додали..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'поузданог' (trusted) is grammatically correct, but 'овереног' (verified/certified) may be a more accurate and common term in the context of Service Provider relationships within an Identity Provider setup.",
+          "suggestion": "Прибављење метаподацима пружаоца услуга како бисте додали... као овереног пружаоца услуга у вашем IdP налогу."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Access Service Provider metadata\" is not accurately translated. 'Pristup metapodacima pružaoca usluga' is overly literal and clunky. A more natural translation would be something like 'Preuzmite metapodatke pružaoca usluga' or 'Dobijte metapodatke pružaoca usluga'.",
+          "suggestion": "Preuzmite metapodatke pružaoca usluga"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'pouzdanog' translates to 'trusted' but in this context, 'prihvaćenog' might be a more appropriate word conveying that the Service Provider is accepted or registered.",
+          "suggestion": "prihvaćenog"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses double curly braces '{{...}}' which match the English format. This may not be standard Turkish formatting for placeholders.",
+          "suggestion": "Consider using a standard Turkish placeholder format (e.g., <%organizationName%> <%productName%> or similar)"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"Service Provider\" is translated as \"постачальника послуг\", which is a literal translation and might sound awkward in Ukrainian. A more natural translation would be \"провайдера послуг\" or simply \"сервісу\".",
+          "suggestion": "Отримайте доступ до метаданих постачальника послуг, щоб додати {{organizationName}} {{productName}} як надійного провайдера послуг у вашому обліковому записі постачальника посвідчень."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"IdP account\" is translated as \"обліковому записі постачальника посвідчень\".  While technically correct, it's verbose. A simpler and more common translation would be \"обліковому записі IdP\" or \"ваш обліковий запис IdP\".",
+          "suggestion": "Отримайте доступ до метаданих постачальника послуг, щоб додати {{organizationName}} {{productName}} як надійного провайдера послуг у вашому обліковому записі IdP."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Access Service Provider metadata' is not accurately translated. A more natural Vietnamese phrasing would convey the meaning of retrieving or accessing the metadata.",
+          "suggestion": "Cập nhật siêu dữ liệu của Nhà cung cấp Dịch vụ"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'đáng tin cậy' (trustworthy) might be too literal. A more common phrasing for Service Providers in an IdP context would be 'đối tác' (partner) or 'ứng dụng' (application).",
+          "suggestion": "thêm {{organizationName}} {{productName}} làm đối tác/ứng dụng trong tài khoản IdP của bạn."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '访问服务提供商元数据以将 {{organizationName}}{{productName}}添加为您的 IdP 帐户中的受信任服务提供商' is a very literal translation and doesn't flow naturally in Chinese. The phrasing '添加为您的 IdP 帐户中的受信任服务提供商' is clunky.",
+          "suggestion": "访问服务提供商元数据，将 {{organizationName}}{{productName}} 配置为您的 IdP 账户中的信任服务提供商。"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation directly includes the variables {{organizationName}} and {{productName}}. While this is acceptable, it's important that the surrounding text flows properly around these variables in the translated version.",
+          "suggestion": "Ensure the surrounding text is grammatically correct and flows naturally when the variables are populated."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,7 @@
 import { useEffect, useState, useMemo, useRef } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation, Trans } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 import {
   EmployeeType,
@@ -40,17 +40,18 @@ import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
 import api from "@docspace/shared/api";
+import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
+import { Link } from "@docspace/shared/components/link";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
 import PeopleSelector from "@docspace/shared/selectors/People";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
-import { fixAccess, getAccessOptions } from "./utils";
+import { fixAccess } from "./utils";
 import ExternalLinks from "./sub-components/ExternalLinks";
 import InviteInput from "./sub-components/InviteInput";
 import ItemsList from "./sub-components/ItemsList";
@@ -67,10 +68,7 @@ const InvitePanel = ({
   defaultAccess,
   setInfoPanelIsMobileHidden,
   updateInfoPanelMembers,
-  isRoomMembersPanelOpen,
   setInviteLanguage,
-  getUsersList,
-  filter,
   isRoomAdmin,
   setIsNewUserByCurrentUser,
 
@@ -79,6 +77,10 @@ const InvitePanel = ({
   standalone,
   hideSelector,
   isUserTariffLimit,
+
+  allowInvitingGuests,
+  checkGuests,
+  hasGuests,
 }) => {
   const [invitePanelIsLoding, setInvitePanelIsLoading] = useState(
     roomId !== -1,
@@ -95,6 +97,7 @@ const InvitePanel = ({
   const [inputValue, setInputValue] = useState("");
   const [usersList, setUsersList] = useState([]);
   const [cultureKey, setCultureKey] = useState();
+  const [showGuestsTab, setShowGuestsTab] = useState(true);
 
   const navigate = useNavigate();
 
@@ -111,6 +114,10 @@ const InvitePanel = ({
       defaultAccess: 1,
     });
     setInviteItems([]);
+  };
+
+  const onBackClick = () => {
+    if (!hideSelector && addUsersPanelVisible) setAddUsersPanelVisible(false);
   };
 
   const onCheckHeight = () => {
@@ -207,6 +214,14 @@ const InvitePanel = ({
   };
 
   useEffect(() => {
+    if (!allowInvitingGuests) checkGuests();
+  }, [allowInvitingGuests]);
+
+  useEffect(() => {
+    if (typeof hasGuests === "boolean") setShowGuestsTab(hasGuests);
+  }, [hasGuests]);
+
+  useEffect(() => {
     if (roomId === -1) {
       setShareLinks(accessModel);
       return;
@@ -223,7 +238,13 @@ const InvitePanel = ({
       return inviteItems.some((item) => !!item.errors?.length);
     };
 
-    setHasErrors(hasValidationErrors());
+    const needRemoveGuests = !allowInvitingGuests
+      ? inviteItems.some(
+          (item) => item.userType === EmployeeType.Guest && !item.status,
+        )
+      : false;
+
+    setHasErrors(hasValidationErrors() || needRemoveGuests);
   }, [inviteItems]);
 
   useEffect(() => {
@@ -273,11 +294,11 @@ const InvitePanel = ({
         ns="Common"
         components={{
           1: (
-            <ColorTheme
+            <Link
               tag="a"
-              themeId={ThemeId.Link}
               onClick={onClickPayments}
               target="_blank"
+              color="accent"
             />
           ),
         }}
@@ -288,7 +309,7 @@ const InvitePanel = ({
       <>
         {error}
         &nbsp;
-        {!isRoomAdmin && paymentLink}
+        {!isRoomAdmin ? paymentLink : null}
       </>
     );
   };
@@ -336,9 +357,7 @@ const InvitePanel = ({
         toastr.warning(result?.warning);
       }
 
-      if (isRoomMembersPanelOpen) {
-        updateInfoPanelMembers(t);
-      }
+      updateInfoPanelMembers();
     } catch (err) {
       let error = err;
 
@@ -361,9 +380,7 @@ const InvitePanel = ({
         const isPeoplePage =
           window.location.pathname.includes("accounts/people");
 
-        if (isPeoplePage) {
-          await getUsersList(filter, false);
-        } else {
+        if (!isPeoplePage) {
           navigate("/accounts/people/filter");
         }
       }
@@ -419,7 +436,7 @@ const InvitePanel = ({
           usersList={usersList}
           setUsersList={setUsersList}
         />
-        {hasInvitedUsers && (
+        {hasInvitedUsers ? (
           <ItemsList
             t={t}
             setHasErrors={setHasErrors}
@@ -430,7 +447,7 @@ const InvitePanel = ({
             invitePanelBodyRef={invitePanelBodyRef}
             isMobileView={isMobileView}
           />
-        )}
+        ) : null}
       </div>
     );
   }, [
@@ -503,13 +520,15 @@ const InvitePanel = ({
     <ModalDialog
       visible={isVisible}
       onClose={onClose}
+      onBackClick={onBackClick}
       displayType={ModalDialogType.aside}
-      containerVisible={!hideSelector && addUsersPanelVisible}
+      containerVisible={!hideSelector ? addUsersPanelVisible : null}
       isLoading={invitePanelIsLoding}
       withBodyScroll
       isInvitePanelLoader
+      id="invite_panel_modal"
     >
-      {!hideSelector && addUsersPanelVisible && (
+      {!hideSelector && addUsersPanelVisible ? (
         <ModalDialog.Container>
           <PeopleSelector
             useAside
@@ -529,8 +548,9 @@ const InvitePanel = ({
             withGroups={!isPublicRoomType}
             roomId={roomId}
             disableInvitedUsers={invitedUsersArray}
-            withGuests
+            withGuests={showGuestsTab}
             withHeader
+            dataTestId="invite_panel_people_selector"
             headerProps={{
               // Todo: Update groups empty screen texts when they are ready
               headerLabel: t("Common:Contacts"),
@@ -545,7 +565,7 @@ const InvitePanel = ({
             }}
           />
         </ModalDialog.Container>
-      )}
+      ) : null}
 
       <ModalDialog.Header>{t("Common:Invite")}</ModalDialog.Header>
       <ModalDialog.Body>{bodyInvitePanel}</ModalDialog.Body>
@@ -559,6 +579,7 @@ const InvitePanel = ({
           onClick={onClickSend}
           label={t("SendInvitation")}
           isLoading={isLoading}
+          testId="invite_panel_send_button"
         />
         <Button
           className="cancel-button"
@@ -567,6 +588,7 @@ const InvitePanel = ({
           onClick={onClose}
           label={t("Common:CancelButton")}
           isDisabled={isLoading}
+          testId="invite_panel_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>
@@ -576,7 +598,6 @@ const InvitePanel = ({
 export default inject(
   ({
     settingsStore,
-    peopleStore,
     filesStore,
     dialogsStore,
     infoPanelStore,
@@ -584,13 +605,12 @@ export default inject(
     currentQuotaStore,
     userStore,
   }) => {
-    const { theme, standalone } = settingsStore;
+    const { theme, standalone, allowInvitingGuests, checkGuests, hasGuests } =
+      settingsStore;
 
-    const { getUsersList, filter } = peopleStore.usersStore;
     const {
       setIsMobileHidden: setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
-      isRoomMembersPanelOpen,
     } = infoPanelStore;
 
     const {
@@ -623,9 +643,6 @@ export default inject(
       getFolderInfo,
       setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
-      isRoomMembersPanelOpen,
-      getUsersList,
-      filter,
       isRoomAdmin,
 
       setIsNewUserByCurrentUser,
@@ -634,6 +651,9 @@ export default inject(
       hideSelector: invitePanelOptions.hideSelector,
       isUserTariffLimit,
       isAdmin,
+      allowInvitingGuests,
+      checkGuests,
+      hasGuests,
     };
   },
 )(

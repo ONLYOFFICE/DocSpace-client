@@ -1,0 +1,244 @@
+{
+  "key_path": "Guest",
+  "content": "Guest",
+  "content_en_sha1_hash": "face83ee3014bdc8f98203cc94e2e89222452e90",
+  "created_at": "2025-05-19T21:30:45.686Z",
+  "updated_at": "2025-08-11T18:11:59.144Z",
+  "comment": {
+    "text": "The translation key \"Common:Guest\" is used to display a text indicating that the user being referred to is a guest. This text is typically displayed in a dialog or UI element, such as an icon badge, to provide context for users.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:59.416Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
+      "line_number": 68,
+      "context": "});\n \n const warningMessageReassign = onlyGuests ? (\n t(\"DeleteReqassignDescriptionGuest\", {\n userCaption: onlyOneUser\n ? t(\"Common:Guest\").toLowerCase()\n : t(\"Common:Guests\").toLowerCase(),\n })\n ) : (\n <Trans\n i18nKey=\"DeleteReassignDescriptionUser\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
+      "line_number": 68,
+      "context": "});\n \n const warningMessageReassign = onlyGuests ? (\n t(\"DeleteReqassignDescriptionGuest\", {\n userCaption: onlyOneUser\n ? t(\"Common:Guest\").toLowerCase()\n : t(\"Common:Guests\").toLowerCase(),\n })\n ) : (\n <Trans\n i18nKey=\"DeleteReassignDescriptionUser\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/ReducedRightsDialog/index.tsx",
+      "line_number": 50,
+      "context": "<Trans\n t={t}\n ns=\"Files\"\n i18nKey=\"YourUserTypeHasChanged\"\n values={{\n userType: t(\"Common:Guest\"),\n productName: t(\"Common:ProductName\"),\n adminName,\n }}\n components={{ 1: <span style={{ fontWeight: 600 }} /> }}\n />",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/Item.js",
+      "line_number": 206,
+      "context": ": filteredAccesses.find((option) => option.access === +access);\n \n const typeLabel = isEmailInvite\n ? roomId === -1 || isRolePaid\n ? getUserTypeTranslation(roomId !== -1 ? type : defaultAccess.type, t)\n : t(\"Common:Guest\")\n : defaultAccess?.type === EmployeeType.RoomAdmin &&\n type !== EmployeeType.Admin &&\n type !== EmployeeType.Owner\n ? getUserTypeTranslation(defaultAccess.type, t)\n : getUserTypeTranslation(type, t);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/utils/common.ts",
+      "line_number": 340,
+      "context": "return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");\n case EmployeeType.Guest:\n default:\n return t(\"Common:Guest\");\n }\n };\n \n export function clickBackdrop() {\n const elms = document.getElementsByClassName(",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/utils/common.ts",
+      "line_number": 340,
+      "context": "return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");\n case EmployeeType.Guest:\n default:\n return t(\"Common:Guest\");\n }\n };\n \n export function clickBackdrop() {\n const elms = document.getElementsByClassName(",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation \"Host\" is not the most accurate translation of \"Guest\". While \"Host\" can sometimes be a suitable translation, \"Guest\" more commonly translates to \"Host\" (as in the person receiving guests) or \"Návštěvník\" (visitor).",
+          "suggestion": "Consider \"Návštěvník\" or \"Host\" (depending on context)."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

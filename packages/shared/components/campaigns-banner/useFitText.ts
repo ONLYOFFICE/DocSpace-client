@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,8 +30,8 @@ const useFitText = (
   campaignBackground: string,
   currentFontSize: string = "13px",
 ) => {
-  const ref: React.RefObject<HTMLDivElement> = useRef(null);
-  const wrapperRef: React.RefObject<HTMLDivElement> = useRef(null);
+  const ref: React.RefObject<HTMLDivElement | null> = useRef(null);
+  const wrapperRef: React.RefObject<HTMLDivElement | null> = useRef(null);
 
   const [fontSize, setFontSize] = useState(parseInt(currentFontSize, 10));
 

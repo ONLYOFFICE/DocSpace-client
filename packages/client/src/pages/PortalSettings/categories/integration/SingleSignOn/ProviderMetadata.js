@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
@@ -83,6 +83,7 @@ const ProviderMetadata = (props) => {
         placeholder={`${url}/sso/metadata`}
         tooltipContent={<Text fontSize="12px">{t("SPEntityIdTooltip")}</Text>}
         tooltipClass="sp-entity-id-tooltip icon-button"
+        dataTestId="sp_entity_id"
       />
 
       <MetadataUrlField
@@ -93,6 +94,7 @@ const ProviderMetadata = (props) => {
           <Text fontSize="12px">{t("SPAssertionConsumerURLTooltip")}</Text>
         }
         tooltipClass="sp-assertion-consumer-url-tooltip icon-button"
+        dataTestId="sp_assertion_consumer_url"
       />
 
       <MetadataUrlField
@@ -103,6 +105,7 @@ const ProviderMetadata = (props) => {
           <Text fontSize="12px">{t("SPSingleLogoutURLTooltip")}</Text>
         }
         tooltipClass="sp-single-logout-url-tooltip icon-button"
+        dataTestId="sp_single_logout_url"
       />
 
       <div className="button-wrapper">
@@ -115,6 +118,7 @@ const ProviderMetadata = (props) => {
           tabIndex={25}
           onClick={downloadMetadata}
           isDisabled={!isSSOAvailable}
+          testId="download_metadata_xml_button"
         />
       </div>
     </StyledWrapper>

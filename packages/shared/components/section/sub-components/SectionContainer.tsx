@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,24 +24,31 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import classNames from "classnames";
 
 import { Scrollbar } from "../../scrollbar";
 import { DeviceType } from "../../../enums";
 
-import { StyledSectionContainer } from "../Section.styled";
 import { SectionContainerProps } from "../Section.types";
+import styles from "../Section.module.scss";
 
-const SectionContainer = React.forwardRef<
-  HTMLDivElement,
-  SectionContainerProps
->(({ withBodyScroll, children, currentDeviceType, ...props }, forwardRef) => {
+const SectionContainer = ({
+  ref: forwardRef,
+  withBodyScroll,
+  children,
+  currentDeviceType,
+  isInfoPanelVisible,
+  isSectionHeaderAvailable,
+}: SectionContainerProps) => {
   return (
-    <StyledSectionContainer
+    <div
       ref={forwardRef}
       id="section"
-      withBodyScroll={withBodyScroll}
-      {...props}
+      className={classNames(styles.sectionContainer, {
+        [styles.withBodyScroll]: withBodyScroll,
+        [styles.infoPanelVisible]: isInfoPanelVisible,
+        [styles.withoutSectionHeader]: !isSectionHeaderAvailable,
+      })}
     >
       {withBodyScroll && currentDeviceType !== DeviceType.mobile ? (
         <Scrollbar id="sectionScroll" scrollClass="section-scroll" fixedSize>
@@ -50,9 +57,9 @@ const SectionContainer = React.forwardRef<
       ) : (
         children
       )}
-    </StyledSectionContainer>
+    </div>
   );
-});
+};
 
 SectionContainer.displayName = "SectionContainer";
 

@@ -1,5 +1,0 @@
-{
-  "DisconnectCloudMessage": "Da li ste sigurni da želite da uklonite {{service}}? Ovo neće uticati na vaš {{account}} nalog na bilo koji način.",
-  "DisconnectCloudTitle": "Isključi oblak",
-  "SuccessDeleteThirdParty": "Treća strana {{service}} je obrisana"
-}

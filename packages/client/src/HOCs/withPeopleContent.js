@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,23 +29,23 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Avatar } from "@docspace/shared/components/avatar";
+import { getUserAvatarRoleByType } from "@docspace/shared/utils/common";
 
 export default function withContent(WrappedContent) {
   const WithContent = (props) => {
     const {
-      item,
       checked,
-      selectUser,
       deselectUser,
-      setBufferSelection,
-      selectRow,
-      singleContextMenuAction,
-      multipleContextMenuAction,
-      resetSelections,
-      openGroupAction,
-
       getModel,
+      item,
       itemIndex,
+      multipleContextMenuAction,
+      openGroupAction,
+      resetSelections,
+      selectRow,
+      selectUser,
+      setBufferSelection,
+      singleContextMenuAction,
     } = props;
 
     const { mobilePhone, email, role, displayName, avatar } = item;
@@ -69,20 +69,20 @@ export default function withContent(WrappedContent) {
 
     const onContentRowClick = useCallback(
       (e, user) => {
-        if (
-          e.target?.tagName === "A" ||
-          e.target.closest(".checkbox") ||
-          e.target.closest(".table-container_row-checkbox") ||
-          e.target.closest(".type-combobox") ||
-          e.target.closest(".groups-combobox") ||
-          e.target.closest(".paid-badge") ||
-          e.target.closest(".pending-badge") ||
-          e.target.closest(".disabled-badge") ||
-          e.target.closest(".dropdown-container") ||
-          e.detail === 0
-        ) {
-          return;
-        }
+        if (e.detail === 0 || e.target?.tagName === "A") return;
+
+        const selectors = [
+          ".checkbox",
+          ".table-container_row-checkbox",
+          ".type-combobox",
+          ".groups-combobox",
+          ".paid-badge",
+          ".pending-badge",
+          ".disabled-badge",
+          ".dropdown-container",
+        ];
+
+        if (selectors.some((selector) => e.target.closest(selector))) return;
 
         selectRow(user);
       },
@@ -97,21 +97,27 @@ export default function withContent(WrappedContent) {
       [resetSelections, openGroupAction],
     );
 
-    const checkedProps = useMemo(() => ({ checked }), [checked]);
+    const checkedProps = { checked };
 
     const element = useMemo(
       () => (
-        <Avatar size="min" role={role} userName={displayName} source={avatar} />
+        <Avatar
+          size="min"
+          role={getUserAvatarRoleByType(role)}
+          userName={displayName}
+          source={avatar}
+        />
       ),
       [role, displayName, avatar],
     );
 
     const onPhoneClick = useCallback(
-      () => window.open(`sms:${mobilePhone}`),
+      () => mobilePhone && window.open(`sms:${mobilePhone}`),
       [mobilePhone],
     );
+
     const onEmailClick = useCallback(
-      () => window.open(`mailto:${email}`),
+      () => email && window.open(`mailto:${email}`),
       [email],
     );
 
@@ -154,13 +160,8 @@ export default function withContent(WrappedContent) {
 
   return inject(({ settingsStore, peopleStore, userStore }, { item }) => {
     const { theme, standalone } = settingsStore;
-
-    const { getTargetUser } = peopleStore.targetUserStore;
-    const { contextOptionsStore, usersStore } = peopleStore;
+    const { getModel } = peopleStore.contextOptionsStore;
     const { openGroupAction } = peopleStore.groupsStore;
-
-    const { getModel } = contextOptionsStore;
-
     const {
       selection,
       bufferSelection,
@@ -171,16 +172,21 @@ export default function withContent(WrappedContent) {
       singleContextMenuAction,
       multipleContextMenuAction,
       resetSelections,
-    } = usersStore;
+      activeUsers,
+    } = peopleStore.usersStore;
+
+    const itemId = item.id;
+    const checked = selection.some((el) => el.id === itemId);
+    const isActive = bufferSelection?.id === itemId;
+    const inProgress = activeUsers.some((user) => user.id === itemId);
 
     return {
       theme,
       standalone,
       currentUserId: userStore.user.id,
-      fetchProfile: getTargetUser,
-      checked: selection.some((el) => el.id === item.id),
+      checked,
       isSeveralSelection: selection.length > 1,
-      isActive: bufferSelection?.id === item?.id,
+      isActive,
       setBufferSelection,
       selectUser,
       deselectUser,
@@ -190,6 +196,7 @@ export default function withContent(WrappedContent) {
       multipleContextMenuAction,
       resetSelections,
       openGroupAction,
+      inProgress,
     };
   })(observer(WithContent));
 }

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -44,6 +44,7 @@ const keyedCollections = {
   uk: "uk-UA",
   ja: "ja-JP",
   zh: "zh-CN",
+  sq: "sq-AL",
 };
 
 const convertToCulture = (key) => {
@@ -93,6 +94,7 @@ const LanguageFilter = ({
       selectedCulture={convertToCulture(oformsLocal)}
       id="comboBoxLanguage"
       isMobileView={isMobileView}
+      dataTestId="form_gallery_language_combobox"
     />
   );
 };

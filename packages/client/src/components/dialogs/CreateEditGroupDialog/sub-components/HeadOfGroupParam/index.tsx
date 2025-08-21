@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -52,13 +52,17 @@ const HeadOfGroup = ({
 
       {!groupManager ? (
         <Styled.SelectGroupManager onClick={onShowSelectGroupManagerPanel}>
-          <SelectorAddButton iconName={PlusSvgUrl} />
-          <div className="label">{t("Common:SelectAction")}</div>
+          <SelectorAddButton
+            iconName={PlusSvgUrl}
+            label={t("Common:SelectAction")}
+            testId="select_group_manager"
+          />
         </Styled.SelectGroupManager>
       ) : (
         <GroupMemberRow
           groupMember={groupManager}
           removeMember={removeManager}
+          dataTestId="head_of_group_row"
         />
       )}
     </div>

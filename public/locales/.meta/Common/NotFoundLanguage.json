@@ -1,0 +1,426 @@
+{
+  "key_path": "NotFoundLanguage",
+  "content": "Can't find your language? Contact us at <1>{{supportEmail}}</1> to take part in the translation program and get rewards.",
+  "content_en_sha1_hash": "d9fc9ee07a76cc5a6bc5a5eeaad93f29138ddd5e",
+  "created_at": "2025-05-19T21:30:46.900Z",
+  "updated_at": "2025-08-11T18:11:59.301Z",
+  "comment": {
+    "text": "This translation key is used to display a message when the user cannot find their preferred language in the available options. It appears as a tooltip in the profile settings section, inviting users to contact support for further assistance. Translators should aim to preserve the friendly and encouraging tone of this text.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:17.534Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
+      "line_number": 248,
+      "context": "const tooltipLanguage = (\n <Text as=\"div\" fontSize=\"12px\">\n <Trans\n t={t}\n i18nKey=\"NotFoundLanguage\"\n ns=\"Common\"\n values={{ supportEmail: documentationEmail }}\n components={{\n 1: (\n <Link",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Can't find your language?' is translated as 'لا يمكن العثور على اللغة الخاصة بك؟'. While understandable, a more natural translation might be 'هل اللغة غير موجودة؟' or 'لا توجد لغتك؟'.",
+          "suggestion": "هل اللغة غير موجودة؟"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'to take part in the translation program' is translated as 'للمشاركة في برنامج الترجمة'. While accurate, a slightly more engaging translation might be 'للمساعدة في ترجمة'.",
+          "suggestion": "للمساعدة في ترجمة"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"take part in the translation program\" is not accurately reflected. The Azerbaijani translation emphasizes participation and reward but doesn't explicitly mention a 'translation program'.",
+          "suggestion": "Tərcümə proqramına qoşulmaq və mükafat qazanmaq istəyirsinizsə bizimlə əlaqə saxlayın."
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are unusual. It's unclear what their purpose is. They should be investigated and potentially removed or replaced with standard HTML if relevant.",
+          "suggestion": "Remove the unusual HTML tags if they serve no purpose. If they represent specific formatting or markup, ensure they are correct and standard."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"take part in the translation program\" is not accurately conveyed. \"Включите в превода\" literally translates to 'participate in the translation', which is too literal and doesn't capture the nuance of joining a program.",
+          "suggestion": "Свържете се с нас на <1>{{supportEmail}}</1>, за да се включите в програмата за преводи и да получите награда."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'take part in the translation program' is not accurately translated. 'zúčastněte se překladu' literally means 'participate in the translation', which implies performing the translation, not joining a program to do so.",
+          "suggestion": "Consider a more accurate translation such as 'zúčastněte se překladatelského programu' (participate in the translation program) or 'připojte se k překladatelskému programu' (join the translation program)."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'take part in the translation' is not the most natural way to express participation in a translation program in Spanish. A more idiomatic translation would be 'participar en el programa de traducción'.",
+          "suggestion": "participar en el programa de traducción"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'translation' might be better translated as 'traducción' to specify that it is a translation project. Using just 'traducción' sounds more natural in context.",
+          "suggestion": "participar en el programa de traducción y obtener recompensas."
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"get rewards\" is translated as \"obtenez des avantages.\" While \"avantages\" is correct, \"get rewards\" implies a more concrete reward system. A better translation might be \"recevez des récompenses\" to better convey the original meaning.",
+          "suggestion": "recevez des récompenses"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tag <1> is not standard or widely understood. It appears to be an attempt to mark the support email, but a more conventional HTML tag like <span> or <a> is recommended.",
+          "suggestion": "Replace <1> with <span> or use an <a> tag for a hyperlink if applicable."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Չե՞ք կարողանում գտնել ձեր լեզուն\" translates literally as \"Can't you find your language?\" which is grammatically correct but sounds somewhat awkward in Armenian. A more natural phrasing would be \"Եթե չեք գտնում ձեր լեզուն\" (If you don't find your language) or \"Ձեր լեզուն չգտնվո՞ւմ\" (Is your language not found?).",
+          "suggestion": "Consider rephrasing to \"Եթե չեք գտնում ձեր լեզուն\" or \"Ձեր լեզուն չգտնվո՞ւմ\" for a more natural flow."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'take part in the translation' is a literal translation of 'take part in the translation program'. A more natural Italian translation would be 'partecipare al programma di traduzione'.",
+          "suggestion": "partecipare al programma di traduzione"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"take part in the translation program\" is not accurately translated. The Japanese translation uses a generic \"翻訳に参加する\" (translation program participation) which lacks the nuance of a program offering rewards.",
+          "suggestion": "Consider a more specific translation that conveys the participation in a program that provides incentives, such as \"翻訳プロジェクトに参加して報酬を得る\" (Participate in the translation project and receive rewards)."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure can be improved for better flow. Currently, it feels slightly awkward.",
+          "suggestion": "Reorder the sentence to place the offer of rewards closer to the act of contacting support. Example: \"言語が見つかりませんか？翻訳に参加して報酬を得るには、<1>{{supportEmail}}</1>までご連絡ください。」 could become “言語が見つかりませんか？<1>{{supportEmail}}</1>までご連絡ください。翻訳に参加して報酬を得るには、お気軽にご連絡ください。” (Can't find your language? Contact us at <1>{{supportEmail}}</1> and feel free to contact us to participate in the translation program and receive rewards.)"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Can't find your language?\" is translated as \"아직 모국어가 없나요?\" which literally means \"Don't you yet have your mother tongue?\" While understandable, it's a slightly awkward and not the most natural way to phrase the question in Korean. A more natural translation would be something like \"저희가 원하시는 언어가 없나요?\" (Don't we have the language you want?).",
+          "suggestion": "저희가 원하시는 언어가 없나요?"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"take part in the translation program and get rewards\" is translated as \"번역에 참여하시고 리워드를 받으세요.\" which is accurate but could be more engaging. It is very literal.",
+          "suggestion": "번역 프로그램에 참여하셔서 보상을 받으세요."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ເພື່ອໃຫ້ພວກເຮົາມີສ່ວນຮ່ວມໃນການແປພາສາ' does not accurately convey the meaning of 'to take part in the translation program'. It translates to something like 'so that we can participate in translating languages', which changes the meaning to imply the user is inviting the translators to participate.",
+          "suggestion": "ເພື່ອເຂົ້າຮ່ວມໃນໂຄງການແປພາສາ ແລະຮັບຂອງຂວັນ"
+        },
+        {
+          "type": "missing_content",
+          "description": "The Lao translation is missing the mention of 'and get rewards' which is present in the English version.  This removes a key incentive.",
+          "suggestion": "ເພື່ອກຽມເຂົ້າຮ່ວມໃນການແປພາສາ ແລະ ຮັບຂອງຂວັນ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'take part in the translation program' is not accurately conveyed. 'Tulkotu' implies simply 'to translate' rather than participating in a program.",
+          "suggestion": "Vai nevarat atrast savu valodu? Sazinieties ar mums, rakstot e-pastu uz <1>{{supportEmail}}</1>, lai piedalītos tulkošanas programmā un saņemtu atlīdzību."
+        },
+        {
+          "type": "formatting",
+          "description": "The angle brackets <1>...</1> are present in the Latvian translation, mirroring the English, but their purpose might not be clear to a Latvian user. It's best to remove them or replace them with a more appropriate visual cue if needed.",
+          "suggestion": "Vai nevarat atrast savu valodu? Sazinieties ar mums, rakstot e-pastu uz {{supportEmail}}, lai piedalītos tulkošanas programmā un saņemtu atlīdzību."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"translation program\" is better translated as something more specific to the context. \"Vertaling\" can mean translation in general, but it's unclear if it refers to participating in a translation project or simply having the language translated.",
+          "suggestion": "Consider using a phrase like \"vertalingsproject\" or \"meedoen aan de vertaling\" to clarify the meaning."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"beloningen te krijgen\" is somewhat awkward in Dutch. It's grammatically correct, but not the most natural way to express 'to get rewards'.",
+          "suggestion": "Rephrase to something like \"om beloningen te ontvangen\" or \"en beloningen te ontvangen.\""
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"take part in the translation program\" is translated as \"pomóc w tłumaczeniu\", which translates to \"help with translation.\" It doesn't convey the meaning of joining a program.",
+          "suggestion": "Consider a more accurate translation like \"dołączyć do programu tłumaczeń\" or \"wziąć udział w programie tłumaczeniowym\" to better reflect joining a translation program."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"get rewards\" is translated as \"zdobyć za nie nagrody\". This construction is a bit awkward. While technically correct, it’s not the most natural way to say it in Polish.",
+          "suggestion": "Consider using a more direct translation, such as \"otrzymać nagrody\" or \"dostać nagrody\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"take part in the translation program\" is not accurately reflected in the Romanian translation \"doriți să contribuiți la traducerea\". \"Contribuție\" implies a general contribution, while the original implies participation in a specific program.  A better translation would be something like \"să vă alăturați programului de traducere\".",
+          "suggestion": "Consider revising to something like: \"să vă alăturați programului de traducere\""
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"get rewards\" is translated as \"să obțineți beneficii\". While \"beneficii\" is a valid translation for \"benefits\", \"rewards\" carries a connotation of specific incentives or prizes. A more accurate translation might be \"să primiți recompense\".",
+          "suggestion": "Consider revising to \"să primiți recompense\""
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags `<1>{{supportEmail}}</1>` are consistent between the English and Romanian versions, which is good. However, ensure the `{{supportEmail}}` variable is correctly handled in the rendering engine to dynamically insert the email address.",
+          "suggestion": "Verify correct variable substitution for `{{supportEmail}}` during rendering."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'get rewards' is translated as 'get up to 1 year of free use'. This significantly alters the meaning of the original text. The original implies a reward program, while the translation implies a free usage period.",
+          "suggestion": "Consider a translation closer to the original meaning of 'rewards', such as 'получить вознаграждение' or 'получить бонусы'."
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tag <1> is used in both the English and Russian texts. While this indicates a variable, it's important to confirm this is the correct format for the target platform.  It's assumed to be correct given the prompt.",
+          "suggestion": "Verify the correct format for variable injection in the target environment."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"take part in the translation program\" is not accurately conveyed. The Sinhala translation \"පරිවර්තන වැඩසටහනට සහභාගී වී\" literally translates to 'participate in the translation project/program'. It's correct but a bit formal and could be softened.",
+          "suggestion": "පරිවර්තනය කිරීමට උදව් කරන්න. (Parivathanaya udaw karnna) - Help with the translation."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'rewards' is best conveyed with more specific terms depending on what is offered. Simply translating to 'ත්‍යාග' (thyaag) means 'gifts' which isn't quite accurate. It needs to be something tangible or appealing.",
+          "suggestion": "මිතුරන් සහ විශේෂ දීමනා ලබා ගැනීමට අප අමතන්න. (Mithuran saha wishesh deemanawa laba ganneka ama thanna.) - Contact us to get friends and special offers."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"take part in the translation program\" is translated as \"pridať k prekladateľom\". While understandable, a more accurate translation would be something like \"zapojiť sa do prekladateľského programu\" or \"stať sa prekladateľom\".",
+          "suggestion": "zapojiť sa do prekladateľského programu"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Can't find your language?\" is somewhat literally translated. A more natural Serbian (Cyrillic) equivalent would be something like \"Не можете да пронађете језик који тражите?\" or \"Не можете да нађете језик који тражите?\"",
+          "suggestion": "Не можете да пронађете језик који тражите? or Не можете да нађете језик који тражите?"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"to take part in the translation program and get rewards\" is a little awkward. \"да будете део програма за превођење и добијете награде\" could be improved to something more concise and natural.",
+          "suggestion": "да учествујете у програму превода и добијете награде."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'take part in the translation program' is not perfectly captured by 'da budete deo programa za prevođenje'. A more accurate translation would be 'da učestvujete u programu za prevođenje'.",
+          "suggestion": "da učestvujete u programu za prevođenje"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'take part in the translation program' is not accurately translated. 'Çeviride yer almak' literally means 'to be in the translation' which is not idiomatic and doesn't convey the meaning of participating in a program.",
+          "suggestion": "Bir çeviri programında yer almak için veya çeviri programına katılmak için bize ulaşın."
+        },
+        {
+          "type": "formatting",
+          "description": "The formatting tags <1> and </1> are present in both the English and Turkish text. This is unusual and likely unintended.  These should be reviewed to confirm whether they represent a specific system tag or are extraneous.",
+          "suggestion": "Remove or adjust the formatting tags based on the intended use."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"take part in the translation\" is not the most natural way to express the idea in Ukrainian. A more fluent option would be to convey the meaning of contributing to or helping with the translation process.",
+          "suggestion": "Узяти участь у перекладі can be rephrased to something like \"допомогти з перекладом\" (help with the translation) or \"сприяти перекладу\" (contribute to the translation)."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'translation program' is translated as 'phiên dịch'. While 'phiên dịch' can refer to translation, in this context, 'chương trình dịch' or 'dự án dịch' would be more accurate, as it implies a program or project involving multiple translators and rewards.",
+          "suggestion": "Hãy liên hệ với chúng tôi tại <1>{{supportEmail}}</1> để tham gia chương trình dịch/dự án dịch và nhận phần thưởng."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

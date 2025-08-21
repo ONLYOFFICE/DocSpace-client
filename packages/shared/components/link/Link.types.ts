@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,19 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { LinkTarget, LinkType } from "./Link.enums";
+import { TextProps } from "../text/Text.types";
 
-export interface LinkProps {
-  children?: React.ReactNode | string;
-  /** Accepts class */
-  className?: string;
-  /** Link color */
-  color?: string;
-  /** Link font size */
-  fontSize?: string;
-  /** Link font weight  */
-  fontWeight?: number | string;
-  /** Line height of the link */
-  lineHeight?: string;
+export type LinkProps = TextProps & {
   /** Used as HTML `href` property */
   href?: string;
   /** Accepts id */
@@ -50,24 +40,36 @@ export interface LinkProps {
   isSemitransparent?: boolean;
   /** Activates or deactivates _text-overflow_ CSS property with ellipsis (' … ') value */
   isTextOverflow?: boolean;
-  /** Disables hover styles */
+  /** Disables hover effect */
   noHover?: boolean;
-  /** Sets a callback function that is triggered when the link is clicked. Only for \'action\' type of link */
+  /** Enables user selection */
+  enableUserSelect?: boolean;
+  /** Sets the link type */
+  type?: LinkType;
+  /** Sets the target attribute */
+  target?: LinkTarget;
+  /** Label */
+  label?: string;
+  /** Sets the text decoration style */
+  textDecoration?:
+    | "none"
+    | "underline"
+    | "line-through"
+    | "overline"
+    | "underline dotted"
+    | "underline dashed";
+  /** Accessibility label for the link */
+  ariaLabel?: string;
+  /** Data attribute for testing */
+  dataTestId?: string;
+  /** Sets a callback function that is triggered when the link is clicked. Only for 'action' type of link */
   onClick?: (e: React.MouseEvent<Element>) => void;
   /** Used as HTML `rel` property */
   rel?: string;
-  /** Accepts css style */
-  style?: React.CSSProperties;
   /** Used as HTML `tabindex` property */
   tabIndex?: number;
-  /** Specifies where the linked document will open once the link is clicked. */
-  target?: LinkTarget;
   /** Used as HTML `title` property */
   title?: string;
-  /** Link type */
-  type?: LinkType;
-  /** Label */
-  label?: string;
-  /** Allows enabling UserSelect */
-  enableUserSelect?: boolean;
-}
+  /** CSS color or accent theme color */
+  color?: "accent" | (string & {});
+};

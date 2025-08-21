@@ -1,0 +1,44 @@
+@use "../../styles/mixins";
+@use "../../styles/variables/colors";
+
+.label {
+  line-height: 20px;
+  margin-inline-end: 10px;
+  max-width: 23ch;
+
+  @include mixins.no-user-select;
+
+  @include mixins.truncate;
+
+  &.disabled {
+    color: var(--disabled-selected-item-color);
+  }
+}
+
+.selectedItem {
+  width: 100%;
+  height: 32px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+
+  box-sizing: border-box;
+
+  border-radius: 3px;
+
+  padding: 6px 8px;
+
+  margin-inline-end: 4px;
+  margin-bottom: 4px;
+
+  background: var(--filter-input-selected-items-background);
+
+  &.isInline {
+    width: fit-content;
+  }
+
+  &:not(.disabled):hover {
+    background: var(--filter-input-selected-items-hover-background);
+  }
+}

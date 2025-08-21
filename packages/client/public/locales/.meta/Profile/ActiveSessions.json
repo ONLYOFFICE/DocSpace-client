@@ -1,0 +1,243 @@
+{
+  "key_path": "ActiveSessions",
+  "content": "Active Sessions",
+  "content_en_sha1_hash": "c71ffaf9d95811865c2053fe8d448a6cc7d90243",
+  "created_at": "2025-05-19T21:30:53.331Z",
+  "updated_at": "2025-08-11T18:11:59.299Z",
+  "comment": {
+    "text": "The \"ActiveSessions\" translation key displays the label for an active session section on a profile page. The exact wording may vary based on translation and localization settings. It appears as a header title in a sub-component within the profile section.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:56.967Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/login/active-session/index.js",
+      "line_number": 150,
+      "context": ");\n \n return (\n <StyledWrapper>\n <Text fontSize=\"16px\" fontWeight={700} lineHeight=\"22px\">\n {t(\"Profile:ActiveSessions\")}\n </Text>\n \n {/* TODO: Uncomment after fix on backend */}\n {/* <Text className=\"auto-delete-title\">{t(\"Profile:AutoDeleteTitle\")}</Text> */}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ເຊດຊັນທີ່ເຄື່ອນໄຫວ\" is a literal translation of 'Active Sessions'. While understandable, a more natural and common Lao phrasing for 'Active Sessions' might be 'ກອງນໍາທີ່ເປັນກິດຈະກໍາ' or 'ບັນຊີທີ່ກຳລັງໃຊ້ງານ'.",
+          "suggestion": "Consider 'ກອງນໍາທີ່ເປັນກິດຈະກໍາ' or 'ບັນຊີທີ່ກຳລັງໃຊ້ງານ'."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation \"සක්‍රිය වාර\" is a literal translation of \"active times\" or \"active occurrences\" rather than \"active sessions.\"  \"Sessions\" implies a period of user activity, which isn't accurately conveyed by \"වර\".",
+          "suggestion": "Consider \"ප්‍රවර්තන ලේඛන\" (prawaṛthana lēkhana) for 'sessions' or \"සක්‍රිය සැසි\" (sakriya sesi) which is a transliteration and more closely aligns with the English term."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"Активне сесије\" is not a natural or accurate translation of \"Active Sessions.\" It's a literal, word-for-word translation that doesn't convey the intended meaning effectively. The word 'активне' (aktivne) is in feminine plural, but 'sesije' is also in plural and doesn't flow well. A more appropriate translation would consider the context of what 'Active Sessions' refers to (e.g., logged-in sessions, ongoing sessions).",
+          "suggestion": "Consider alternatives like \"Активне сеансе\" (Aktivne seanse) or \"Тренутно активне сесије\" (Trenutno aktivne sesije) depending on the specific context. A more concise option might be \"Активне сесије\" (Aktivne sesije), but requires caution to ensure clarity."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Các phiên Hoạt động' is not the most natural or accurate translation of 'Active Sessions'. While technically correct, it sounds somewhat clunky in Vietnamese. 'Active Sessions' implies sessions that are currently in progress or connected.",
+          "suggestion": "Phiên hoạt động"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "Using 'Các' (plural marker) might be unnecessary depending on the specific context. If it always refers to a list of active sessions, keeping it is fine. However, if it can refer to a single active session, it should be omitted.",
+          "suggestion": "Phiên hoạt động"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"活动会话\" (huódòng huìhuà) is understandable, it's not the most natural or precise translation for \"Active Sessions\". \"活动\" (huódòng) implies activity, which isn't the core meaning. \"会话\" (huìhuà) is accurate for 'session,' but the combination feels slightly awkward.",
+          "suggestion": "Consider alternatives like \"活跃会话\" (huóyuè huìhuà) which more directly conveys 'active', or simply \"活动记录\" (huódòng jìlù) if the context allows for a more general term for activity logs."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

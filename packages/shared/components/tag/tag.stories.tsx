@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 // (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
@@ -26,19 +27,19 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 
-import { TagPure } from "./Tag";
+import { Tag } from ".";
 
 const meta = {
-  title: "Components/Tag",
-  component: TagPure,
+  title: "Base UI components/Tag",
+  component: Tag,
   parameters: {
     design: {
       type: "figma",
       url: "https://www.figma.com/file/ZiW5KSwb4t7Tj6Nz5TducC/UI-Kit-DocSpace-1.0.0?type=design&node-id=62-2597&mode=design&t=TBNCKMQKQMxr44IZ-0",
     },
   },
-} satisfies Meta<typeof TagPure>;
-type Story = StoryObj<typeof TagPure>;
+} satisfies Meta<typeof Tag>;
+type Story = StoryObj<typeof Tag>;
 
 export default meta;
 
@@ -58,24 +59,24 @@ export const Default: Story = {
   },
 };
 
-export const WithDropDown: Story = {
-  args: {
-    tag: "script",
-    label: "Script",
-    isNewTag: false,
-    isDisabled: false,
-    onDelete: () => {},
-    onClick: () => {},
-    advancedOptions: ["Option 1", "Option 2"],
-  },
-};
-
 export const NewTag: Story = {
   args: {
     tag: "script",
     label: "Script",
     isNewTag: true,
     isDisabled: false,
+    onDelete: () => {},
+    onClick: () => {},
+  },
+};
+
+export const DeletedTag: Story = {
+  args: {
+    tag: "script",
+    label: "Script",
+    isNewTag: false,
+    isDisabled: false,
+    isDeleted: true,
     onDelete: () => {},
     onClick: () => {},
   },
@@ -89,5 +90,30 @@ export const DisabledTag: Story = {
     isDisabled: true,
     onDelete: () => {},
     onClick: () => {},
+  },
+};
+
+export const TagWithCustomStyles: Story = {
+  args: {
+    tag: "custom",
+    label: "Custom Styled Tag",
+    isNewTag: false,
+    isDisabled: false,
+    onDelete: () => {},
+    onClick: () => {},
+    tagMaxWidth: "200px",
+    style: { backgroundColor: "pink" },
+  },
+};
+
+export const TagWithClickHandler: Story = {
+  args: {
+    tag: "clickable",
+    label: "Clickable Tag",
+    isNewTag: false,
+    isDisabled: false,
+    onDelete: () => {},
+    onClick: () => alert("Tag clicked!"),
+    tagMaxWidth: "160px",
   },
 };

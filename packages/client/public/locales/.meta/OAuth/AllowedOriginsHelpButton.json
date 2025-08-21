@@ -1,0 +1,249 @@
+{
+  "key_path": "AllowedOriginsHelpButton",
+  "content": "URLs added here are used to improve the OAuth redirect security.",
+  "content_en_sha1_hash": "b91fa47198899abef0fcb42efe9d338f64b5361f",
+  "created_at": "2025-05-19T21:30:53.784Z",
+  "updated_at": "2025-08-04T07:30:01.431Z",
+  "comment": {
+    "text": "\"This translation key is used for a help button that provides instructions on how URLs added to improve OAuth redirect security are utilized in the application.\"",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:00.532Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/OAuthBlock.tsx",
+      "line_number": 85,
+      "context": "label={t(\"AllowedOrigins\")}\n placeholder={t(\"EnterURL\")}\n name=\"allowed_origins\"\n onAdd={changeValue}\n currentValue={allowedOriginsValue}\n helpButtonText={t(\"AllowedOriginsHelpButton\")}\n hasError={requiredErrorFields.includes(\"allowed_origins\")}\n dataTestId=\"allowed_origins\"\n />\n </StyledInputBlock>\n </StyledBlock>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The term 'URL-ներն' contains a hyphen where it's not needed. It should be 'URLներն'.",
+          "suggestion": "URLներն"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'vietrāži URL' is not the standard or most natural way to refer to URLs in Latvian in this context. 'URL adresi' or simply 'adreses' would be more accurate and commonly used.",
+          "suggestion": "Šeit pievienotās adreses URL tiek izmantotas, lai uzlabotu OAuth novirzīšanas drošību."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Adresele URL care au fost adăugate aici sunt folosite pentru a oferi un nivel mai înalt de securitate al redirecționării OAuth\" is a bit verbose and less direct than the English original. \"a oferi un nivel mai înalt de securitate\" is more descriptive than the English 'to improve'.",
+          "suggestion": "Adresele URL adăugate aici sunt folosite pentru a îmbunătăți securitatea redirecționării OAuth."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'යලි නැවත හරවන ආරක්ෂාව වැඩිදියුණු කිරීම සඳහා මෙහි එක් කරන ලද URL භාවිතා කරනු ලැබේ.' is a bit wordy and not the most natural way to express the meaning. A more concise and accurate translation would be better.",
+          "suggestion": "යලි නැවත හරවන ආරක්ෂාව වැඩිදියුණු කිරීමට මෙහි එක් කරන URL භාවිතා වේ."
+        },
+        {
+          "type": "spelling",
+          "description": "While technically not incorrect, the repetition of 'යලි' (yali) and 'හරවන' (haravana) makes it feel awkward. It would be more natural to rephrase.",
+          "suggestion": "The overall phrasing could be improved for better flow."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'URL-ови' is not standard Serbian. It is a transliteration from English and should be written as 'URL-ovi'.",
+          "suggestion": "URL-ovi"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'URL-ovi' should be 'URL-ovi'. The hyphen is placed correctly in this case.",
+          "suggestion": "URL-ovi"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

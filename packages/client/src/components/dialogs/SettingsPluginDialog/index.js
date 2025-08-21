@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -117,14 +117,15 @@ const SettingsPluginDialog = ({
             withDelete={withDelete}
             withSeparator={!!customSettingsProps?.children}
           />
-          {withDelete && (
+          {withDelete ? (
             <Button
               label={t("DeletePlugin")}
               onClick={onDeleteAction}
               scale
               size="normal"
+              testId="settings_delete_plugin_button"
             />
-          )}
+          ) : null}
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>

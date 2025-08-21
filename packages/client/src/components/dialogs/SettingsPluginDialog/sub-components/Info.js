@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -82,101 +82,71 @@ const Info = ({ t, plugin, withDelete, withSeparator }) => {
 
   return (
     <StyledContainer withDelete={withDelete}>
-      {withSeparator && <StyledSeparator />}
-      <Text fontSize="14px" fontWeight={600} lineHeight="16px" noSelect>
+      {withSeparator ? <StyledSeparator /> : null}
+      <Text fontSize="14px" fontWeight={600} lineHeight="16px">
         {t("Metadata")}
       </Text>
       <StyledInfo>
-        {plugin.author && (
+        {plugin.author ? (
           <>
-            <Text
-              fontSize="13px"
-              fontWeight={400}
-              lineHeight="20px"
-              noSelect
-              truncate
-            >
+            <Text fontSize="13px" fontWeight={400} lineHeight="20px" truncate>
               {t("Files:ByAuthor")}
             </Text>
-            <Text fontSize="13px" fontWeight={600} lineHeight="20px" noSelect>
+            <Text fontSize="13px" fontWeight={600} lineHeight="20px">
               {plugin.author}
             </Text>
           </>
-        )}
+        ) : null}
 
-        {plugin.version && (
+        {plugin.version ? (
           <>
-            <Text
-              fontSize="13px"
-              fontWeight={400}
-              lineHeight="20px"
-              noSelect
-              truncate
-            >
+            <Text fontSize="13px" fontWeight={400} lineHeight="20px" truncate>
               {t("Common:Version")}
             </Text>
-            <Text fontSize="13px" fontWeight={600} lineHeight="20px" noSelect>
+            <Text fontSize="13px" fontWeight={600} lineHeight="20px">
               {plugin.version}
             </Text>
           </>
-        )}
+        ) : null}
 
-        {!plugin.system && (
+        {!plugin.system ? (
           <>
-            <Text
-              fontSize="13px"
-              fontWeight={400}
-              lineHeight="20px"
-              noSelect
-              truncate
-            >
+            <Text fontSize="13px" fontWeight={400} lineHeight="20px" truncate>
               {t("Common:Uploader")}
             </Text>
-            <Text fontSize="13px" fontWeight={600} lineHeight="20px" noSelect>
+            <Text fontSize="13px" fontWeight={600} lineHeight="20px">
               {plugin.createBy.displayName}
             </Text>
           </>
-        )}
+        ) : null}
 
-        {!plugin.system && uploadDate && (
+        {!plugin.system && uploadDate ? (
           <>
             <Text
               fontSize="13px"
               fontWeight={400}
               lineHeight="20px"
-              noSelect
               truncate
+              dataTestId="plugin_upload_date"
             >
               {t("Common:UploadDate")}
             </Text>
-            <Text fontSize="13px" fontWeight={600} lineHeight="20px" noSelect>
+            <Text fontSize="13px" fontWeight={600} lineHeight="20px">
               {uploadDate}
             </Text>
           </>
-        )}
+        ) : null}
 
-        <Text
-          fontSize="13px"
-          fontWeight={400}
-          lineHeight="20px"
-          noSelect
-          truncate
-        >
+        <Text fontSize="13px" fontWeight={400} lineHeight="20px" truncate>
           {t("People:UserStatus")}
         </Text>
-        <Text fontSize="13px" fontWeight={600} lineHeight="20px" noSelect>
+        <Text fontSize="13px" fontWeight={600} lineHeight="20px">
           {pluginStatus}
         </Text>
 
-        {plugin.homePage && (
+        {plugin.homePage ? (
           <>
-            <Text
-              fontSize="13px"
-              fontWeight={400}
-              lineHeight="20px"
-              noSelect
-              truncate
-            >
+            <Text fontSize="13px" fontWeight={400} lineHeight="20px" truncate>
               {t("Common:Homepage")}
             </Text>
             <Link
@@ -186,29 +156,23 @@ const Info = ({ t, plugin, withDelete, withSeparator }) => {
               type="page"
               href={plugin?.homePage}
               target="_blank"
-              noSelect
               isHovered
+              dataTestId="plugin_home_page_link"
             >
               {plugin.homePage}
             </Link>
           </>
-        )}
-        {plugin.description && (
+        ) : null}
+        {plugin.description ? (
           <>
-            <Text
-              fontSize="13px"
-              fontWeight={400}
-              lineHeight="20px"
-              noSelect
-              truncate
-            >
+            <Text fontSize="13px" fontWeight={400} lineHeight="20px" truncate>
               {t("Common:Description")}
             </Text>
-            <Text fontSize="13px" fontWeight={600} lineHeight="20px" noSelect>
+            <Text fontSize="13px" fontWeight={600} lineHeight="20px">
               {plugin.description}
             </Text>
           </>
-        )}
+        ) : null}
       </StyledInfo>
     </StyledContainer>
   );

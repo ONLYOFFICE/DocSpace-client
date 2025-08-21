@@ -6,17 +6,17 @@
   "DeleteGroupUsersSuccessMessage": "Utilizatorii au fost șterse cu succes.",
   "DeleteGuest": "Ștergere invitat",
   "DeleteGuests": "Ștergere invitați",
-  "DeleteMyDocumentsUser": "Toate fișierele și dosarele personale din secțiunea Documentele a utilizatorului vor fi șterse definitiv.",
-  "DeletePersonalData": "Datele personale, toate fișierele și dosarele personale din secțiunile Documente și Coșul de gunoi* ale utilizatorilor selectate vor fi șterse definitiv. Fișierele și folderele ai utilizatorilor selectate care sunt stocate în secțiunile comune*, cum ar fi săli, vor rămâne în {{productName}}.",
   "DeletePersonalDataApplicable": "*Se referă la toți utilizatorii selectați, care au astfel de fișiere și foldere.",
-  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Sălile create de acest utilizator și documentele stocate în aceste săli vor fi reatribuite automat administratorului care efectuează ștergerea: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Reatribuiți datele manual pentru a alege un alt destinatar datelor reatribuite.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Sălile create de acest utilizator și documentele stocate în aceste săli vor fi reatribuite automat administratorului care efectuează ștergerea: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Reatribuiți datele manual pentru a alege un alt destinatar datelor reatribuite.",
   "DeleteReqassignDescriptionGuest": "{{userCaption}} va fi eliminat din toate sălile la care a fost invitat. Documentele create de acest utilizator {{userCaption}} în sălile vor fi reatribuite automat proprietarilor acestor săli.",
   "DeleteUser": "Șterge utilizatorul",
-  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> va fi șters. Această acțiune nu poate fi anulată.",
+  "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> va fi șters. Această acțiune nu poate fi anulată.",
   "DeletingUsers": "Ștergere utilizatori",
+  "PersonalDataDeletionInfo": "Datele personale, toate fișierele și dosarele personale din secțiunile* {{sectionNameFirst}} și {{sectionNameSecond}} ale utilizatorilor selectați vor fi șterse definitiv. Fișierele și folderele ai utilizatorilor selectate care sunt stocate în secțiunile comune*, cum ar fi săli,  vor rămâne în {{productName}}.",
   "PleaseNote": "Vă rugăm să rețineți că:",
   "ReassignDataToAnotherUser": "Reatribuiți datele unui alt utilizator",
   "SuccessfullyDeleteGuestInfoMessage": "Invitatul a fost șters cu succes",
   "SuccessfullyDeleteUserInfoMessage": "Utilizatorul a fost șters cu succes",
-  "ToBeAbleToReassignData": "Pentru a putea reafectaa datele, ștergeți utilizatorii unul câte unul."
+  "ToBeAbleToReassignData": "Pentru a putea reafectaa datele, ștergeți utilizatorii unul câte unul.",
+  "UserFilesRemovalScope": "Datele personale, toate fișierele și dosarele din secţiunile {{sectionNameFirst}} și {{sectionNameSecond}} ale utilizatorului vor fi șterse definitiv."
 }

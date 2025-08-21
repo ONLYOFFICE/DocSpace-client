@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,25 +25,30 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import { isMobile } from "react-device-detect";
 
 import ArchiveSvg32Url from "PUBLIC_DIR/images/icons/32/room/archive.svg?url";
 import CustomSvg32Url from "PUBLIC_DIR/images/icons/32/room/custom.svg?url";
 import EditingSvg32Url from "PUBLIC_DIR/images/icons/32/room/editing.svg?url";
-// import FillingFormSvg32Url from "PUBLIC_DIR/images/icons/32/room/filling.form.svg?url";
-// import ReviewSvg32Url from "PUBLIC_DIR/images/icons/32/room/review.svg?url";
-// import ViewOnlySvg32Url from "PUBLIC_DIR/images/icons/32/room/view.only.svg?url";
 import PublicRoomSvg32Url from "PUBLIC_DIR/images/icons/32/room/public.svg?url";
 import FormRoomSvg32Url from "PUBLIC_DIR/images/icons/32/room/form.svg?url";
 import VirtualDataRoomRoomSvg32Url from "PUBLIC_DIR/images/icons/32/room/virtual-data.svg?url";
+import TemplateRoomsSvg32Url from "PUBLIC_DIR/images/icons/32/room/template.svg?url";
+
+import CollaborationTemplateSvg32Url from "PUBLIC_DIR/images/icons/32/template/collaboration.svg?url";
+import CustomTemplateSvg32Url from "PUBLIC_DIR/images/icons/32/template/custom.svg?url";
+import FormTemplateSvg32Url from "PUBLIC_DIR/images/icons/32/template/form.svg?url";
+import PublicTemplateSvg32Url from "PUBLIC_DIR/images/icons/32/template/public.svg?url";
+import VirtualDataTemplateSvg32Url from "PUBLIC_DIR/images/icons/32/template/virtual-data.svg?url";
 
 import { RoomsType } from "../../enums";
 
 import { Checkbox } from "../checkbox";
 
-import { StyledContainer, StyledLogoContainer } from "./RoomLogo.styled";
 import { RoomLogoProps } from "./RoomLogo.types";
+import styles from "./RoomLogo.module.scss";
 
 const RoomLogoPure = ({
   id,
@@ -52,9 +57,11 @@ const RoomLogoPure = ({
   type,
 
   isArchive = false,
+  isTemplate = false,
   withCheckbox = false,
   isChecked = false,
   isIndeterminate = false,
+  isTemplateRoom = false,
   onChange,
 }: RoomLogoProps) => {
   const getIcon = () => {
@@ -62,13 +69,29 @@ const RoomLogoPure = ({
       return ArchiveSvg32Url;
     }
 
+    if (isTemplate) {
+      return TemplateRoomsSvg32Url;
+    }
+
+    if (isTemplateRoom) {
+      switch (type) {
+        case RoomsType.EditingRoom:
+          return CollaborationTemplateSvg32Url;
+        case RoomsType.CustomRoom:
+          return CustomTemplateSvg32Url;
+        case RoomsType.PublicRoom:
+          return PublicTemplateSvg32Url;
+        case RoomsType.VirtualDataRoom:
+          return VirtualDataTemplateSvg32Url;
+        case RoomsType.FormRoom:
+          return FormTemplateSvg32Url;
+
+        default:
+          return "";
+      }
+    }
+
     switch (type) {
-      //   case RoomsType.ReadOnlyRoom:
-      //     return ViewOnlySvg32Url;
-      //   case RoomsType.ReviewRoom:
-      //     return ReviewSvg32Url;
-      //   case RoomsType.FillingFormsRoom:
-      //     return FillingFormSvg32Url;
       case RoomsType.EditingRoom:
         return EditingSvg32Url;
       case RoomsType.CustomRoom:
@@ -79,6 +102,7 @@ const RoomLogoPure = ({
         return VirtualDataRoomRoomSvg32Url;
       case RoomsType.FormRoom:
         return FormRoomSvg32Url;
+
       default:
         return "";
     }
@@ -93,28 +117,28 @@ const RoomLogoPure = ({
   const icon = getIcon();
 
   return (
-    <StyledContainer
+    <div
       id={id}
-      className={className}
+      className={classNames(className, styles.container)}
       style={style}
       data-testid="room-logo"
     >
-      <StyledLogoContainer
-        className="room-logo_icon-container"
+      <div
+        className={classNames("room-logo_icon-container", styles.container)}
         onClick={onSelect}
       >
         <img className="room-logo_icon" alt="room-logo" src={icon} />
-      </StyledLogoContainer>
+      </div>
 
-      {withCheckbox && (
+      {withCheckbox ? (
         <Checkbox
           className="room-logo_checkbox checkbox"
           isChecked={isChecked}
           isIndeterminate={isIndeterminate}
           onChange={onChange}
         />
-      )}
-    </StyledContainer>
+      ) : null}
+    </div>
   );
 };
 

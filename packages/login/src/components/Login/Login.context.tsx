@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,25 +26,44 @@
 
 "use client";
 
-import React, { createContext, useState } from "react";
+import React, { createContext, useMemo, useState } from "react";
 
 export const LoginValueContext = createContext({
   isLoading: false,
   isModalOpen: false,
 });
 
-export const LoginDispatchContext = createContext({
-  setIsLoading: (value: boolean) => {},
-  setIsModalOpen: (value: boolean) => {},
+export const LoginDispatchContext = createContext<{
+  setIsLoading: (value: boolean) => void;
+  setIsModalOpen: (value: boolean) => void;
+}>({
+  setIsLoading: () => {},
+  setIsModalOpen: () => {},
 });
 
 export const LoginContext = ({ children }: { children: React.ReactNode }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const value = useMemo(
+    () => ({
+      isLoading,
+      isModalOpen,
+    }),
+    [isLoading, isModalOpen],
+  );
+
+  const dispatchValue = useMemo(
+    () => ({
+      setIsLoading,
+      setIsModalOpen,
+    }),
+    [setIsLoading, setIsModalOpen],
+  );
+
   return (
-    <LoginDispatchContext.Provider value={{ setIsLoading, setIsModalOpen }}>
-      <LoginValueContext.Provider value={{ isLoading, isModalOpen }}>
+    <LoginDispatchContext.Provider value={dispatchValue}>
+      <LoginValueContext.Provider value={value}>
         {children}
       </LoginValueContext.Provider>
     </LoginDispatchContext.Provider>

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -64,7 +64,7 @@ const EmptyContainer = ({
     <EmptyViewContainer
       type={roomType}
       folderType={type}
-      isFolder={!isRoom && !isRootEmptyPage}
+      isFolder={!isRoom ? !isRootEmptyPage : null}
       folderId={folderId}
       isRootEmptyPage={isRootEmptyPage}
       parentRoomType={parentRoomType}

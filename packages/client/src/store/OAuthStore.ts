@@ -1,5 +1,6 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
+import api from "@docspace/shared/api";
 import {
   changeClientStatus,
   regenerateSecret,
@@ -8,6 +9,8 @@ import {
   getScopeList,
   getConsentList,
   revokeUserClient,
+  getOAuthJWTSignature,
+  setOAuthJWTSignature,
 } from "@docspace/shared/api/oauth";
 import {
   IClientListProps,
@@ -30,7 +33,7 @@ import RevokeIconUrl from "PUBLIC_DIR/images/revoke.react.svg?url";
 import DeleteIconUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import SettingsIconUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 
-const PAGE_LIMIT = 100;
+const PAGE_LIMIT = 50;
 
 export type ViewAsType = "table" | "row";
 
@@ -87,10 +90,38 @@ class OAuthStore {
 
   revokeDialogVisible: boolean = false;
 
+  setJwtTokenRunning: boolean = false;
+
   constructor(userStore: UserStore) {
     this.userStore = userStore;
+
     makeAutoObservable(this);
   }
+
+  setJwtToken = async () => {
+    let cookieToken = getOAuthJWTSignature(this.userStore!.user!.id);
+
+    if (cookieToken) return;
+
+    if (this.setJwtTokenRunning) {
+      await new Promise((resolve) => {
+        setInterval(() => {
+          cookieToken = getOAuthJWTSignature(this.userStore!.user!.id);
+          if (cookieToken) resolve(cookieToken);
+        }, 100);
+      });
+
+      this.setJwtTokenRunning = false;
+
+      return;
+    }
+
+    this.setJwtTokenRunning = true;
+
+    await setOAuthJWTSignature(this.userStore!.user!.id);
+
+    this.setJwtTokenRunning = false;
+  };
 
   setRevokeDialogVisible = (value: boolean) => {
     this.revokeDialogVisible = value;
@@ -181,15 +212,55 @@ class OAuthStore {
     this.setInfoDialogVisible(false);
     this.setPreviewDialogVisible(false);
 
-    window?.DocSpace?.navigate(
-      `/portal-settings/developer-tools/oauth/${clientId}`,
-    );
+    const isPortalSettings =
+      window?.DocSpace?.location.pathname.includes("portal-settings");
+
+    const basePath = isPortalSettings ? "/portal-settings" : "";
+
+    const path = `${basePath}/developer-tools/oauth/${clientId}`;
+
+    window?.DocSpace?.navigate(path);
   };
 
   fetchClients = async () => {
+    await this.setJwtToken();
+
     try {
       this.setClientsIsLoading(true);
       const clientList: IClientListProps = await getClientList(0, PAGE_LIMIT);
+
+      const fetchUsers = async () => {
+        const { id, displayName, avatarSmall } = this.userStore!.user!;
+
+        const newUsers = clientList.data
+          .filter((c) => c.createdBy !== id)
+          .map((c) => c.createdBy)
+          .filter((c, idx, arr) => arr.indexOf(c) === idx);
+
+        const users = await Promise.all(
+          newUsers.map((u) => api.people.getUserById(u)),
+        );
+
+        clientList.data.forEach((client) => {
+          const user = users.find((u) => u.id === client.createdBy);
+
+          if (user) {
+            client.creatorAvatar = user.avatarSmall;
+            client.creatorDisplayName = user.displayName;
+          }
+
+          if (client.createdBy === id) {
+            client.creatorAvatar = avatarSmall;
+            client.creatorDisplayName = displayName;
+          }
+        });
+
+        runInAction(() => {
+          this.clients = [...clientList.data];
+        });
+      };
+
+      fetchUsers();
 
       runInAction(() => {
         this.clients = [...clientList.data];
@@ -207,10 +278,13 @@ class OAuthStore {
     } catch (e) {
       const err = e as TData;
       toastr.error(err);
+      throw new Error(err.message);
     }
   };
 
   fetchNextClients = async (startIndex: number) => {
+    await this.setJwtToken();
+
     if (this.clientsIsLoading) return;
 
     this.setClientsIsLoading(true);
@@ -226,6 +300,47 @@ class OAuthStore {
       PAGE_LIMIT,
     );
 
+    const fetchUsers = async () => {
+      const { id, displayName, avatarSmall } = this.userStore!.user!;
+
+      const newUsers = clientList.data
+        .filter(
+          (c) =>
+            c.createdBy !== id ||
+            !this.clientList.find((cl) => cl.createdBy === c.createdBy),
+        )
+        .map((c) => c.createdBy)
+        .filter((c, idx, arr) => arr.indexOf(c) === idx);
+
+      const users = await Promise.all(
+        newUsers.map((u) => api.people.getUserById(u)),
+      );
+
+      clientList.data.forEach((client) => {
+        const user =
+          users.find((u) => u.id === client.createdBy) ??
+          this.clientList.find((cl) => cl.createdBy === client.createdBy);
+
+        if (user) {
+          client.creatorAvatar =
+            "avatarSmall" in user ? user.avatarSmall : user.creatorAvatar;
+          client.creatorDisplayName =
+            "displayName" in user ? user.displayName : user.creatorDisplayName;
+        }
+
+        if (client.createdBy === id) {
+          client.creatorAvatar = avatarSmall;
+          client.creatorDisplayName = displayName;
+        }
+      });
+
+      runInAction(() => {
+        this.clients = [...this.clients, ...clientList.data];
+      });
+    };
+
+    fetchUsers();
+
     runInAction(() => {
       this.currentPage = clientList.page;
       this.nextPage = clientList.next || null;
@@ -239,6 +354,8 @@ class OAuthStore {
 
   fetchConsents = async () => {
     try {
+      await this.setJwtToken();
+
       this.setClientsIsLoading(true);
       const consentList = await getConsentList(0, PAGE_LIMIT);
 
@@ -262,6 +379,8 @@ class OAuthStore {
   };
 
   fetchNextConsents = async (startIndex: number) => {
+    await this.setJwtToken();
+
     if (this.consentsIsLoading) return;
 
     this.setConsentsIsLoading(true);
@@ -286,6 +405,8 @@ class OAuthStore {
   };
 
   changeClientStatus = async (clientId: string, status: boolean) => {
+    await this.setJwtToken();
+
     try {
       await changeClientStatus(clientId, status);
 
@@ -303,6 +424,8 @@ class OAuthStore {
   };
 
   regenerateSecret = async (clientId: string) => {
+    await this.setJwtToken();
+
     try {
       const { client_secret: clientSecret } = await regenerateSecret(clientId);
 
@@ -316,6 +439,8 @@ class OAuthStore {
   };
 
   deleteClient = async (clientsId: string[]) => {
+    await this.setJwtToken();
+
     try {
       const requests: Promise<void>[] = [];
 
@@ -341,21 +466,25 @@ class OAuthStore {
 
   fetchScopes = async () => {
     try {
+      await this.setJwtToken();
+
       const scopes = await getScopeList();
 
       this.scopes = scopes;
     } catch (e) {
       const err = e as TData;
       toastr.error(err);
+      throw new Error(err.message);
     }
   };
 
   revokeClient = async (clientsId: string[]) => {
+    await this.setJwtToken();
+
     try {
       const requests: Promise<void>[] = [];
 
       clientsId.forEach((id) => {
-        // this.setActiveClient(id);
         requests.push(revokeUserClient(id));
       });
 
@@ -366,8 +495,6 @@ class OAuthStore {
           (c) => !clientsId.includes(c.clientId),
         );
       });
-
-      // this.setActiveClient("");
     } catch (e) {
       const err = e as TData;
       toastr.error(err);
@@ -565,6 +692,7 @@ class OAuthStore {
       label: t("Files:Open"),
       onClick: () => window.open(item.websiteUrl, "_blank"),
       disabled: isInfo,
+      dataTestId: "oauth_files_open_option",
     };
 
     const infoOption = {
@@ -573,6 +701,7 @@ class OAuthStore {
       label: t("Common:Info"),
       onClick: onShowInfo,
       disabled: isInfo,
+      dataTestId: "oauth_info_option",
     };
 
     if (!isSettings) {
@@ -595,6 +724,7 @@ class OAuthStore {
         label: t("Revoke"),
         onClick: () => this.onRevoke(clientId),
         disabled: false,
+        dataTestId: "oauth_revoke_option",
       });
 
       return items;
@@ -605,6 +735,7 @@ class OAuthStore {
       icon: PencilReactSvgUrl,
       label: t("Common:EditButton"),
       onClick: () => this.editClient(clientId),
+      dataTestId: "oauth_edit_option",
     };
 
     const authButtonOption = {
@@ -612,6 +743,8 @@ class OAuthStore {
       icon: CodeReactSvgUrl,
       label: t("AuthButton"),
       onClick: onShowPreview,
+      disabled: !item.enabled,
+      dataTestId: "oauth_auth_option",
     };
 
     const enableOption = {
@@ -626,6 +759,7 @@ class OAuthStore {
       icon: RemoveReactSvgUrl,
       label: t("Common:Disable"),
       onClick: () => this.onDisable(clientId),
+      dataTestId: "oauth_disable_option",
     };
 
     const generateDeveloperTokenOption = {
@@ -633,6 +767,8 @@ class OAuthStore {
       icon: GenerateIconUrl,
       label: t("OAuth:GenerateToken"),
       onClick: onGenerateDeveloperToken,
+      disabled: !item.enabled,
+      dataTestId: "oauth_generate_token_option",
     };
 
     const revokeDeveloperTokenOption = {
@@ -640,6 +776,8 @@ class OAuthStore {
       icon: RevokeIconUrl,
       label: t("OAuth:RevokeDialogHeader"),
       onClick: onRevokeDeveloperToken,
+      disabled: !item.enabled,
+      dataTestId: "oauth_revoke_token_option",
     };
 
     const contextOptions: ContextMenuModel[] = [
@@ -648,6 +786,7 @@ class OAuthStore {
         label: t("Common:Delete"),
         icon: DeleteIconUrl,
         onClick: () => this.onDelete(clientId),
+        dataTestId: "oauth_delete_option",
       },
     ];
 
@@ -665,10 +804,11 @@ class OAuthStore {
         contextOptions.unshift(enableOption);
       }
 
-      contextOptions.unshift({
-        key: "Separator dropdownItem",
-        isSeparator: true,
-      });
+      if (item.enabled)
+        contextOptions.unshift({
+          key: "Separator dropdownItem",
+          isSeparator: true,
+        });
 
       contextOptions.unshift(revokeDeveloperTokenOption);
       contextOptions.unshift(generateDeveloperTokenOption);
@@ -695,6 +835,7 @@ class OAuthStore {
           label: t("OAuth:Revoke"),
           onClick: this.onRevoke,
           disabled: false,
+          dataTestId: "oauth_revoke_option",
         },
       ];
 
@@ -705,6 +846,7 @@ class OAuthStore {
         label: t("Common:Enable"),
         onClick: () => this.onEnable(t, ""),
         disabled: !this.withEnabledOptions,
+        dataTestId: "oauth_enable_option",
       },
       {
         key: "disable",
@@ -712,12 +854,14 @@ class OAuthStore {
         label: t("Common:Disable"),
         onClick: this.onDisable,
         disabled: !this.withDisabledOptions,
+        dataTestId: "oauth_disable_option",
       },
       {
         key: "delete",
         label: t("Common:Delete"),
         iconUrl: DeleteIconUrl,
         onClick: this.onDelete,
+        dataTestId: "oauth_delete_option",
       },
     ];
   };

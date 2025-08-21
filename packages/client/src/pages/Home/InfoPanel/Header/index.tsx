@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,40 +26,20 @@
 
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import { FolderType } from "@docspace/shared/enums";
-import { AsideHeader } from "@docspace/shared/components/aside";
+import { AsideHeader } from "@docspace/shared/components/aside-header";
 import { Tabs } from "@docspace/shared/components/tabs";
-import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { isLockedSharedRoom } from "@docspace/shared/utils";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
-import PluginStore from "SRC_DIR/store/PluginStore";
-import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
-import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
+import { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
+import { getContactsView } from "SRC_DIR/helpers/contacts";
 
-import { TInfoPanelSelection } from "../InfoPanel.types";
-
-import { StyledInfoPanelHeader } from "./Header.styled";
-
-type InfoPanelHeaderContentProps = {
-  // TODO change InfoPanelStore["infoPanelSelection"]
-  selection: TInfoPanelSelection;
-  setIsVisible: InfoPanelStore["setIsVisible"];
-  roomsView: InfoPanelStore["roomsView"];
-  fileView: InfoPanelStore["fileView"];
-  setView: InfoPanelStore["setView"];
-  getIsGallery: InfoPanelStore["getIsGallery"];
-  getIsContacts: InfoPanelStore["getIsContacts"];
-  getIsTrash: InfoPanelStore["getIsTrash"];
-
-  infoPanelItemsList: PluginStore["infoPanelItemsList"];
-
-  enablePlugins: SettingsStore["enablePlugins"];
-
-  selectedId: SelectedFolderStore["id"];
-};
+import styles from "./Header.module.scss";
+import InfoPanelHeaderContentProps from "./Header.types";
 
 const InfoPanelHeaderContent = ({
   selection,
@@ -67,23 +47,18 @@ const InfoPanelHeaderContent = ({
   roomsView,
   fileView,
   setView,
-  getIsGallery,
-  getIsContacts,
+
   getIsTrash,
   infoPanelItemsList,
   enablePlugins,
-  selectedId,
 }: InfoPanelHeaderContentProps) => {
   const { t } = useTranslation(["Common", "InfoPanel"]);
 
-  const isGallery = getIsGallery();
-  const isContacts = getIsContacts();
+  const isGallery = window.location.pathname.includes("form-gallery");
+  const isContacts = getContactsView();
   const isTrash = getIsTrash();
 
-  const isSeveralItems = selection && Array.isArray(selection);
-
   const isRoot =
-    !isSeveralItems &&
     selection &&
     "isFolder" in selection &&
     "rootFolderId" in selection &&
@@ -97,26 +72,40 @@ const InfoPanelHeaderContent = ({
 
   const withTabs =
     !isRoot &&
-    !isSeveralItems &&
+    !Array.isArray(selection) &&
     !isGallery &&
     !isContacts &&
     !isTrash &&
     !isLockedSharedRoom(selection as TRoom) &&
     !(external && expired === true);
 
+  const isTemplate =
+    selection &&
+    "rootFolderType" in selection &&
+    selection.rootFolderType === FolderType.RoomTemplates;
+
   const closeInfoPanel = () => setIsVisible(false);
 
-  const setMembers = () => setView("info_members");
-  const setHistory = () => setView("info_history");
-  const setDetails = () => setView("info_details");
-  const setShare = () => setView("info_share");
+  const setMembers = () => setView(InfoPanelView.infoMembers);
+  const setHistory = () => setView(InfoPanelView.infoHistory);
+  const setDetails = () => setView(InfoPanelView.infoDetails);
+  const setShare = () => setView(InfoPanelView.infoShare);
 
   const memberTab = {
     id: "info_members",
-    name: t("Common:Contacts"),
+    name: isTemplate ? t("Common:Accesses") : t("Common:Contacts"),
     onClick: setMembers,
     content: null,
   };
+
+  const detailsTab = {
+    id: "info_details",
+    name: t("InfoPanel:SubmenuDetails"),
+    onClick: setDetails,
+    content: null,
+  };
+
+  const templateSubmenu = [memberTab, detailsTab];
 
   const tabsData = [
     {
@@ -125,19 +114,15 @@ const InfoPanelHeaderContent = ({
       onClick: setHistory,
       content: null,
     },
-    {
-      id: "info_details",
-      name: t("InfoPanel:SubmenuDetails"),
-      onClick: setDetails,
-      content: null,
-    },
+    detailsTab,
   ];
 
   const isRoomsType =
     selection &&
     "rootFolderType" in selection &&
     (selection.rootFolderType === FolderType.Rooms ||
-      selection.rootFolderType === FolderType.Archive);
+      selection.rootFolderType === FolderType.Archive ||
+      selection.rootFolderType === FolderType.RoomTemplates);
 
   if (isRoomsType) tabsData.unshift(memberTab);
 
@@ -161,15 +146,11 @@ const InfoPanelHeaderContent = ({
 
     infoPanelItemsList.forEach((item) => {
       const onClick = async () => {
-        setView(`info_plugin`);
-
-        if (item.value.subMenu.onClick) {
-          item.value.subMenu.onClick(selectedId ? +selectedId : 0);
-        }
+        setView(`info_plugin-${item.key}`);
       };
 
       const tabsItem = {
-        id: `info_plugin`,
+        id: `info_plugin-${item.key}`,
         name: item.value.subMenu.name,
         onClick,
         content: null,
@@ -205,67 +186,63 @@ const InfoPanelHeaderContent = ({
   }
 
   return (
-    <StyledInfoPanelHeader withTabs={withTabs}>
+    <div
+      className={classNames(styles.infoPanelHeader, {
+        [styles.withTabs]: withTabs,
+      })}
+    >
       <AsideHeader
         header={t("Common:Info")}
         onCloseClick={closeInfoPanel}
         withoutBorder
         className="header-text"
         isCloseable
+        dataTestId="info_panel_aside_header"
       />
 
-      {withTabs && (
+      {withTabs ? (
         <div className="tabs">
           <Tabs
             style={{ width: "100%" }}
-            items={tabsData}
+            items={isTemplate ? templateSubmenu : tabsData}
             selectedItemId={isRoomsType ? roomsView : fileView}
+            withAnimation
           />
         </div>
-      )}
-    </StyledInfoPanelHeader>
+      ) : null}
+    </div>
   );
 };
 
 export default inject(
-  ({
-    settingsStore,
-    infoPanelStore,
-    pluginStore,
-    selectedFolderStore,
-  }: TStore) => {
-    const selectedId = selectedFolderStore.id;
-
+  ({ settingsStore, infoPanelStore, pluginStore }: TStore) => {
     const { infoPanelItemsList } = pluginStore;
 
     const {
-      infoPanelSelection,
-      setIsVisible,
       roomsView,
       fileView,
       setView,
-      getIsGallery,
-      getIsContacts,
+
+      setIsVisible,
       getIsTrash,
     } = infoPanelStore;
 
     const { enablePlugins } = settingsStore;
 
+    const selection = infoPanelStore.infoPanelSelection;
+
     return {
-      selection: infoPanelSelection,
-      setIsVisible,
+      selection,
       roomsView,
       fileView,
       setView,
-      getIsGallery,
-      getIsContacts,
+
+      setIsVisible,
       getIsTrash,
 
       infoPanelItemsList,
 
       enablePlugins,
-
-      selectedId,
     };
   },
 )(observer(InfoPanelHeaderContent));

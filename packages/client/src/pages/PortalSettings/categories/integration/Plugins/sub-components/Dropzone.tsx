@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -36,7 +36,12 @@ const StyledDropzoneComponent = styled(DropzoneComponent)`
   height: 135px;
 `;
 
-const Dropzone = ({ onDrop, isLoading, isDisabled }: PluginDropzoneProps) => {
+const Dropzone = ({
+  onDrop,
+  isLoading,
+  isDisabled,
+  dataTestId,
+}: PluginDropzoneProps) => {
   const { t } = useTranslation(["Article", "Common"]);
 
   return (
@@ -48,6 +53,7 @@ const Dropzone = ({ onDrop, isLoading, isDisabled }: PluginDropzoneProps) => {
       linkMainText={t("Article:Upload")}
       linkSecondaryText={t("Common:DropzoneTitleSecondary")}
       exstsText="(ZIP)"
+      dataTestId={dataTestId}
     />
   );
 };

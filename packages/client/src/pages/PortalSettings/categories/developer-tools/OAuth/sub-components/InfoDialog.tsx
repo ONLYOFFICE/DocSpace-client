@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { IClientProps, TScope } from "@docspace/shared/utils/oauth/types";
-import ScopeList from "@docspace/shared/utils/oauth/ScopeList";
+import { ScopeList } from "@docspace/shared/utils/oauth/scope-list";
 import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
 import { getCookie } from "@docspace/shared/utils/cookie";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
@@ -135,13 +135,7 @@ const InfoDialog = ({
                 src={client?.logo}
               />
 
-              <Text
-                fontSize="16px"
-                lineHeight="22px"
-                fontWeight="700"
-                noSelect
-                truncate
-              >
+              <Text fontSize="16px" lineHeight="22px" fontWeight="700" truncate>
                 {client?.name}
               </Text>
             </div>
@@ -149,16 +143,16 @@ const InfoDialog = ({
             <ContextMenuButton
               displayType={ContextMenuButtonDisplayType.dropdown}
               getData={getContextOptions}
+              testId="client_info_context_menu_button"
             />
           </div>
-          {!isProfile && (
+          {!isProfile ? (
             <>
               <Text
                 className="block-header"
                 fontSize="14px"
                 lineHeight="16px"
                 fontWeight="600"
-                noSelect
                 truncate
               >
                 {t("Creator")}
@@ -174,22 +168,20 @@ const InfoDialog = ({
                   fontSize="14px"
                   lineHeight="16px"
                   fontWeight="600"
-                  noSelect
                   truncate
                 >
                   {client?.creatorDisplayName}
                 </Text>
               </div>
             </>
-          )}
-          {!isProfile && (
+          ) : null}
+          {!isProfile ? (
             <>
               <Text
                 className="block-header"
                 fontSize="14px"
                 lineHeight="16px"
                 fontWeight="600"
-                noSelect
                 truncate
               >
                 {t("Common:Description")}
@@ -201,11 +193,10 @@ const InfoDialog = ({
                 fontSize="13px"
                 lineHeight="20px"
                 fontWeight="400"
-                noSelect
               >
                 {client?.description}
               </Text>
-              {withShowText && (
+              {withShowText ? (
                 <Link
                   className="desc-link"
                   fontSize="13px"
@@ -214,18 +205,18 @@ const InfoDialog = ({
                   isHovered
                   onClick={() => setShowDescription((val) => !val)}
                   type={LinkType.action}
+                  dataTestId="client_info_description_link"
                 >
                   {showDescription ? "Hide" : "Show more"}
                 </Link>
-              )}
+              ) : null}
             </>
-          )}
+          ) : null}
           <Text
             className="block-header"
             fontSize="14px"
             lineHeight="16px"
             fontWeight="600"
-            noSelect
             truncate
           >
             {t("Common:Website")}
@@ -238,6 +229,7 @@ const InfoDialog = ({
             href={client?.websiteUrl}
             type={LinkType.action}
             target={LinkTarget.blank}
+            dataTestId="client_info_website_link"
           >
             {client?.websiteUrl}
           </Link>
@@ -246,7 +238,6 @@ const InfoDialog = ({
             fontSize="14px"
             lineHeight="16px"
             fontWeight="600"
-            noSelect
             truncate
           >
             {t("Access")}
@@ -261,7 +252,6 @@ const InfoDialog = ({
             fontSize="14px"
             lineHeight="16px"
             fontWeight="600"
-            noSelect
             truncate
           >
             {t("Scopes")}
@@ -276,36 +266,28 @@ const InfoDialog = ({
               />
             ))}
           </div>
-          {isProfile && (
+          {isProfile ? (
             <>
               <Text
                 className="block-header"
                 fontSize="14px"
                 lineHeight="16px"
                 fontWeight="600"
-                noSelect
                 truncate
               >
                 {t("AccessGranted")}
               </Text>
 
-              <Text
-                fontSize="13px"
-                lineHeight="20px"
-                fontWeight="600"
-                noSelect
-                truncate
-              >
+              <Text fontSize="13px" lineHeight="20px" fontWeight="600" truncate>
                 {modifiedDate}
               </Text>
             </>
-          )}
+          ) : null}
           <Text
             className="block-header"
             fontSize="14px"
             lineHeight="20px"
             fontWeight="600"
-            noSelect
             truncate
           >
             {t("SupportAndLegalInfo")}
@@ -315,7 +297,6 @@ const InfoDialog = ({
             fontSize="13px"
             lineHeight="15px"
             fontWeight="600"
-            noSelect
             truncate
           >
             <Link
@@ -326,6 +307,7 @@ const InfoDialog = ({
               href={client?.policyUrl}
               type={LinkType.action}
               target={LinkTarget.blank}
+              dataTestId="client_info_policy_link"
             >
               {t("PrivacyPolicy")}
             </Link>
@@ -339,19 +321,20 @@ const InfoDialog = ({
               href={client?.termsUrl}
               type={LinkType.action}
               target={LinkTarget.blank}
+              dataTestId="client_info_terms_link"
             >
               {t("TermsOfService")}
             </Link>
           </Text>
-          {!isProfile && (
+          {!isProfile ? (
             <>
               <Text
                 className="block-header"
                 fontSize="14px"
                 lineHeight="16px"
                 fontWeight="600"
-                noSelect
                 truncate
+                dataTestId="client_info_last_modified"
               >
                 {t("LastModified")}
               </Text>
@@ -360,13 +343,13 @@ const InfoDialog = ({
                 fontSize="13px"
                 lineHeight="20px"
                 fontWeight="600"
-                noSelect
                 truncate
+                dataTestId="client_info_modified"
               >
                 {modifiedDate}
               </Text>
             </>
-          )}
+          ) : null}
         </StyledInfoContainer>
       </ModalDialog.Body>
     </ModalDialog>

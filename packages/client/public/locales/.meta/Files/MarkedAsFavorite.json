@@ -1,0 +1,256 @@
+{
+  "key_path": "MarkedAsFavorite",
+  "content": "Added to favorites",
+  "content_en_sha1_hash": "2f1e3bed43fab05cf7aa088a31554bc16e6d5e5c",
+  "created_at": "2025-05-19T21:30:55.819Z",
+  "updated_at": "2025-08-11T09:02:43.814Z",
+  "comment": {
+    "text": "This translation key \"MarkedAsFavorite\" is used to display a success message when an item has been marked as a favorite in a UI component, likely a button or action within a details page. The context suggests that this phrase appears in response to user interaction with the application's favoriting functionality.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:39:34.330Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/HOCs/withQuickButtons.js",
+      "line_number": 77,
+      "context": ".catch((err) => toastr.error(err));\n return;\n }\n \n setFavoriteAction(\"mark\", item.id)\n .then(() => toastr.success(t(\"MarkedAsFavorite\")))\n .catch((err) => toastr.error(err));\n };\n \n onClickShare = async () => {\n const {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 442,
+      "context": "this.filesActionsStore\n .setFavoriteAction(action, id)\n .then(() =>\n action === \"mark\"\n ? toastr.success(t(\"MarkedAsFavorite\"))\n : toastr.success(t(\"RemovedFromFavorites\")),\n )\n .catch((err) => toastr.error(err));\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Çox istifadə olunan siyahısına əlavə olundu\" does not accurately convey the meaning of \"Added to favorites.\" \"Çox istifadə olunan siyahısına əlavə olundu\" translates to \"Added to frequently used list.\"  A more accurate translation would be closer to \"Sevimli siyahısına əlavə olundu\" or \"Xüsusi siyahıya əlavə olundu\".",
+          "suggestion": "Sevimli siyahısına əlavə olundu"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation 'Ավելացվեց ընտրյալների մեջ' is a literal translation that doesn't fully capture the meaning of 'Added to favorites.' It translates to 'Added to the chosen ones' which is less natural and idiomatic in Armenian.",
+          "suggestion": "A more natural and accurate translation would be something like 'Ավելացվել է հավելվածների մեջ' (Avelacvel e havelvadneri mej) which translates to 'Added to favorites' or 'Saved to favorites'."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Aggiungi ai favoriti' means 'Add to favorites,' not 'Added to favorites.' The English content indicates an action that has already been completed.",
+          "suggestion": "Preferirei \"In preferiti\" o \"Salvato tra i preferiti\" per indicare che l'azione è già stata eseguita."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ເພີ່ມໃນລາຍການໂປດ' is understandable, a more accurate and natural translation for 'Added to favorites' would be something like 'ເພີ່ມເຂົ້າໃນສາຍໂປດ' or 'ເພີ່ມເຂົ້າໃນບັນຊີໂປດ'.  'ລາຍການ' is more suitable for a list, whereas 'ສາຍ' or 'ບັນຊີ' implies a collection of favorites.",
+          "suggestion": "ເພີ່ມເຂົ້າໃນສາຍໂປດ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Adicionar ao favoritos' literally translates to 'Add to favorites'. A more natural and common translation for 'Added to favorites' would be 'Favoritado(a)' or 'Adicionado(a) aos favoritos'.",
+          "suggestion": "Favoritado(a)"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation \"ප්‍රියතමයන්ට දමන්න\" literally translates to \"Add to favorites\" or \"Put into favorites\". While conveying a similar meaning, it's a bit more literal and less idiomatic than the English \"Added to favorites\".  A more natural translation would be something like \"සරලවශයෙන් ප්‍රියතමයන්ට එක් කරන්න\" (saralavasayan priyathaman ek karanna) which means 'Simply add to favorites' or something similar that emphasizes the action of adding.",
+          "suggestion": "Consider a more idiomatic translation such as \"ප්‍රියතමයන් අතරට එක් කරන්න\" (Priyathaman athara ek karanna) which means 'Add among favorites'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Додато у омиљено' while understandable, is not the most natural or common way to say 'Added to favorites' in Serbian. A more idiomatic translation would be 'Додато у зафаворисане ствари' or 'Сачувано у омиљене ствари'.",
+          "suggestion": "Додато у зафаворисане ствари"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

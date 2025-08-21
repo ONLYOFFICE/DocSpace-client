@@ -1,0 +1,339 @@
+{
+  "key_path": "TabPlugins",
+  "content": "Tab Plugins",
+  "content_en_sha1_hash": "e55bd87644d60d366a8efd44d8bb849c63a4a8f9",
+  "created_at": "2025-05-19T21:30:54.702Z",
+  "updated_at": "2025-08-04T07:30:01.386Z",
+  "comment": {
+    "text": "The \"TabPlugins\" translation key is used to display the label for a checkbox that enables or disables tab plugins in the portal settings. It appears as a simple label in a UI element and needs to be translated into different languages for consistency.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:18.062Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Editor.js",
+      "line_number": 248,
+      "context": "onChange={() => {}}\n isChecked\n />\n <Checkbox\n className=\"checkbox\"\n label={t(\"TabPlugins\")}\n onChange={() => {}}\n isChecked\n />\n <RowContainer>\n <Checkbox label={t(\"Chat\")} onChange={() => {}} isChecked />",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Nişan Plaginləri\" doesn't accurately convey the meaning of \"Tab Plugins.\" \"Nişan\" translates to \"sign\" or \"mark,\" which is not related to \"tab.\" A more accurate translation would involve conveying the idea of plugins related to tabs, perhaps using a term like \"Səkkizbucaq Pluginləri\" (if 'tab' refers to a 'corner/tab' in the application) or exploring a more descriptive phrase.",
+          "suggestion": "Consider 'Səkkizbucaq Pluginləri' or a similar descriptive phrase conveying plugins related to tabs."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Плъгини на раздел' is a literal translation, it doesn't flow naturally in Bulgarian. A more idiomatic translation for 'Tab Plugins' would be 'Разделни плъгини' or 'Плъгини за раздели'.",
+          "suggestion": "Разделни плъгини"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Registerkarte “Plugins”\" is a somewhat literal translation that doesn't flow naturally in German. A more idiomatic translation would be something like \"Plugin-Registerkarte\" or \"Plugins-Registerkarte\". Using quotation marks around \"Plugins\" feels a little awkward.",
+          "suggestion": "Consider \"Plugin-Registerkarte\" or \"Plugins-Registerkarte\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Pestaña Extensiones\" doesn't accurately convey the meaning of \"Tab Plugins.\" 'Pestaña' means 'Tab' but 'Extensiones' suggests something more akin to browser extensions, not plugins that enhance the tab functionality.",
+          "suggestion": "Consider 'Plugins de Pestaña' or 'Complementos de Pestaña' to more accurately reflect the meaning."
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Laajennukset-välilehti' literally translates to 'Extensions-tab'. While it conveys a similar concept, 'Tab Plugins' refers to plugins that operate within a tab, which is not explicitly communicated.  'Laajennukset' implies plugins generally, not necessarily within a tab.",
+          "suggestion": "Consider 'Välilehden lisäosat' (Tab add-ons) or 'Välilehden laajennukset' (Tab extensions) for a more accurate translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Onglet' is correct for 'Tab', 'Module complémentaires' is not the most natural translation for 'Plugins'. A more common and fluent translation would be 'Extensions' or 'Compléments'. 'Module complémentaires' is a bit too literal and technical.",
+          "suggestion": "Onglet Extensions"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Ներդիրի պլագիններ\" is not the most natural or accurate translation of \"Tab Plugins.\" While \"ներդիր\" can relate to insertion or integration, it doesn't directly convey the meaning of 'tab' in this context (referring to tabs within a browser or application).",
+          "suggestion": "Consider alternatives like \"Պիտակներում պլագիններ\" (Plugins in Tabs) or \"Տաբ-պլագիններ\" (Tab-Plugins, a more direct transliteration, if appropriate for the target audience). A more general option could be \"Պլագիններ տաբի համար\" (Plugins for Tabs)."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Scheda dei plugin' is not the most accurate or idiomatic translation of 'Tab Plugins'. 'Scheda' translates more to 'card' or 'sheet'. While technically correct, it doesn't convey the full meaning of 'Tab Plugins' which refers to plugins associated with tabs in a UI.",
+          "suggestion": "Consider 'Plugin per schede' or 'Plugin delle schede' or 'Estensioni per schede' depending on the specific context. 'Plugin' itself is often used in Italian tech contexts."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"「プラグイン」タブ\" literally translates to \"[Plugin] Tab\". While understandable, it's not the most natural or idiomatic way to convey \"Tab Plugins\" in Japanese. It implies the tab *is* a plugin, rather than a section for plugins.",
+          "suggestion": "Consider a translation like \"タブプラグイン\" (Tabu Puragin) which is a more direct transliteration, or \"プラグインのタブ\" (Puragin no Tabu) which translates to \"Plugin's Tab\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ແຖບປລັກອິນ\" is a literal translation of \"Tab Plugins,\" it might not be the most natural or understandable phrasing in Lao. It's a direct transliteration and could be improved for clarity.",
+          "suggestion": "Consider alternatives like \"ຕົວຊ່ວຍແຖບ\" (tua chuay thap - tab helpers) or \"ຟັງຊັນເສີມໃນແຖບ\" (fang chan soem nai tap - functions added to tab) depending on the specific context and intended meaning.  The most accurate alternative would depend on the functionality the plugins provide."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Ciļņu spraudņi\" is a literal translation, it's not the most natural or commonly used term for 'Tab Plugins' in Latvian. The term often implies a mechanical or physical plug-in rather than a software component. A more suitable translation would depend on the specific context, but generally, something closer to 'Izdevniecības paplašinājumi' or 'Pielikumi cilnēm' would be preferable.",
+          "suggestion": "Consider 'Izdevniecības paplašinājumi' or 'Pielikumi cilnēm' depending on context."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Tabblad Plug-ins\" isn't the most natural or accurate translation of \"Tab Plugins.\" \"Tab Plugins\" refers to plugins that extend the functionality of tabs. A more accurate translation would convey this meaning.",
+          "suggestion": "Tab-plugins"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of a space between 'Tab' and 'plugins' might not be the standard in Dutch terminology for software or technical documentation. Using a hyphen often integrates the words more smoothly.",
+          "suggestion": "Tab-plugins"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Karta z wtyczkami\" is too literal. 'Tab' in this context refers to a 'tab' within an application or browser, not a physical card. A more accurate translation would convey the concept of plugins associated with a tab interface.",
+          "suggestion": "Wtyczki do kart"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Plug-ins de guias\" is a literal translation, \"Tab Plugins\" typically refers to plugins that enhance the functionality of browser tabs. A more accurate translation might be 'Plugins para abas' or 'Extensões para abas'.",
+          "suggestion": "Plugins para abas"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Plug-ins de guias\" is technically correct, a more natural and commonly used translation for \"Tab Plugins\" in Brazilian Portuguese would be \"Plugins de Abas\". \"Guias\" often refers to browser tabs, but \"abas\" is the more direct equivalent.",
+          "suggestion": "Plugins de Abas"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Fila Plugin-uri' doesn't accurately convey the meaning of 'Tab Plugins.' 'Fila' translates to 'row' or 'file,' which isn't appropriate for plugins related to tabs. 'Plugin-uri' is the correct plural form for 'plugin'.",
+          "suggestion": "Plugin-uri de tab"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Вкладка Плагины\" literally translates to \"Tab Plugins\" but sounds awkward and unnatural in Russian. 'Плагины для вкладок' or 'Плагины для табов' would be more idiomatic.",
+          "suggestion": "Плагины для вкладок"
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation \"පේනු පටිත්ත\" doesn't accurately convey the meaning of \"Tab Plugins\". \"පටිත්ත\" generally refers to a booklet or leaflet. \"Tab Plugins\" refers to extensions or add-ons for a tab interface.",
+          "suggestion": "Consider alternatives like \"බාහිර ටැබ් ප්ලගිन्स\" (Bahira Tab Plugins - External Tab Plugins) or \"ටැබ් අඩත්‍යාලම්\" (Tab Adaththiyalam - Tab Add-ons), or a more descriptive phrase depending on the context."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Додаци за Картице\" (Dodaci za Kartice) doesn't directly translate to 'Tab Plugins'. 'Dodaci' means 'Add-ons' or 'Plugins', and 'Kartice' means 'Cards'.  While it's a possible interpretation within context, it's not a literal or standard translation. A more accurate translation might be 'Управљачки елементи за картице' or 'Проширења за картице'.",
+          "suggestion": "Consider 'Управљачки елементи за картице' or 'Проширења за картице' for a more accurate translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Dodaci\" can mean 'add-ons' or 'plugins', \"Kartice\" typically refers to 'cards'.  'Tab Plugins' implies plugins for tabs, not cards. A more accurate translation would consider alternatives like 'Dodaci za Karte' or 'Tab Dodaci'.",
+          "suggestion": "Consider 'Tab Dodaci' or 'Dodaci za Karte' to better reflect the meaning of 'Tab Plugins'."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Vietnamese translation \"Tab Plugins\" is identical to the English source. While technically accurate as it directly transliterates the term, it's not a natural or idiomatic translation for a Vietnamese audience.  It's likely the intention was to translate the concept, not just transliterate.",
+          "suggestion": "Consider translating to something like 'Phần Mở Rộng Tab' or 'Tiện Íc Tab' depending on the specific context and intended meaning.  More context would help determine the best option."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,260 @@
+{
+  "key_path": "RoleCommentatorDescription",
+  "content": "Operations with existing files: viewing, commenting.",
+  "content_en_sha1_hash": "ce4731d6a339d2e7324665f3b5fc839d54a12c0e",
+  "created_at": "2025-05-19T21:30:47.993Z",
+  "updated_at": "2025-06-02T10:20:51.581Z",
+  "comment": {
+    "text": "This translation key is used to display a description for comments made by users with access as a commentator. It appears in UI elements related to commenting on files and shares, such as dialogs or buttons, guiding the user on their role and permissions.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:34:38.579Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
+      "line_number": 173,
+      "context": "label: t(\"Common:RoleReviewer\"),\n icon: AccessReviewReactSvgUrl,\n },\n {\n access: ShareAccessRights.Comment,\n description: t(\"Common:RoleCommentatorDescription\"),\n key: \"commenting\",\n label: t(\"Commentator\"),\n icon: AccessCommentReactSvgUrl,\n },\n {",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/utils/getAccessOptions.ts",
+      "line_number": 171,
+      "context": "type: EmployeeType.User,\n },\n commentator: {\n key: \"commentator\",\n label: t(\"Common:RoleCommentator\"),\n description: t(\"Common:RoleCommentatorDescription\"),\n access: ShareAccessRights.Comment,\n type: EmployeeType.User,\n },\n viewer: {\n key: \"viewer\",",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Operations with existing files' is translated as 'العمليات المتاحة على الملفات الحالية'. While understandable, a more accurate translation reflecting 'Operations' could be 'إجراءات' or 'وظائف'. 'العمليات المتاحة' implies available operations, which isn't the direct meaning.",
+          "suggestion": "إجراءات على الملفات الحالية"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the translation could benefit from a more natural flow and punctuation to align better with common Arabic usage. Consider adding a colon after 'الحالية' to mirror the English structure.",
+          "suggestion": "إجراءات على الملفات الحالية: العرض والتعليق."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Գործողություններ գոյություն ունեցող ֆայլերով՝ դիտում, մեկնաբանում։\" is a literal translation and not a natural-sounding expression in Armenian. The phrase 'գործողություններ գոյություն ունեցող ֆայլերով' is clunky.",
+          "suggestion": "A more natural translation would be something like \"գործողություններ առկա ֆայլերի հետ՝ դիտում, մեկնաբանություն։\" or \"առկա ֆայլերի հետ գործողություններ՝ դիտում, մեկնաբանություն։\""
+        },
+        {
+          "type": "formatting",
+          "description": "The comma after \"դիտում\" creates an awkward pause. While grammatically correct, it's not typical in this context.",
+          "suggestion": "Remove the comma after \"դիտում\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ການສະແດງຄວາມຄິດເຫັນ\" is a literal translation of \"commenting\" but might sound a bit formal or stilted in this context. A more natural phrasing might be preferred.",
+          "suggestion": "Consider a more colloquial or contextually appropriate phrasing for 'commenting,' such as 'ການຕີຄຳເຫັນ' or 'ການເີ້ຊີ້ຟ້າຽນຄຳເຫັນ'."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'අදහස් දැක්වීම්' (adahas dekivim) is a valid translation for 'commenting,' but could be slightly more natural. Consider 'අදහස් පළ කිරීම්' (adahas pala kirim) for a more common phrasing.",
+          "suggestion": "අදහස් පළ කිරීම්"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Операције' (Operacije) translates to 'Operations', but in this context, a more natural translation would be 'Radnje' or 'Поступаци'. While 'Операције' isn't strictly incorrect, it sounds overly formal for a user-facing description.",
+          "suggestion": "Радње са постојећим датотекама: прегледање, коментарисање."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '支持的文件操作：查看、评论。' implies 'supported file operations', which is not necessarily the meaning of 'Operations with existing files'. A more accurate translation would emphasize working *on* existing files.",
+          "suggestion": "现有文件操作：查看、评论。"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

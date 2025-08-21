@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "Šajā sadaļā tiks parādīti pēdējie skatītie vai rediģētie dokumenti.",
   "EmptyRootRoomUserDescription": "Koplietotā telpa tiks parādīta šeit.",
   "EmptyRootRoomUserTitle": "Šeit vēl nav nevienas telpas",
+  "EmptyTemplatesDescription": "Varat izveidot veidni no telpas sadaļā \"Telpas\"",
+  "EmptyTemplatesTitle": "Šeit vēl nav veidņu",
   "FormFolderDefaultDescription": "Nometiet PDF veidlapas šeit vai augšupielādējiet no {{productName}} vai ierīces.",
   "FormFolderDefaultTitle": "Šeit vēl nav veidlapu",
   "FormFolderDefaultUserDescription": "Šeit tiks parādītas administratoru augšupielādētās veidlapas.",
@@ -33,6 +35,7 @@
   "MigrationDataDescription": "Importējiet datus uz savu {{productName}} no {{organizationName}} Workspace, Google Workspace vai Nextcloud.",
   "MigrationDataTitle": "Migrācijas dati",
   "PublicRoomEmptyTitle": "Esiet sveicināti publiskajā telpā",
+  "SectionsUploadDescription": "Personas dati, visi faili un mapes šī lietotāja sadaļās {{sectionNameFirst}} un {{sectionNameSecond}} tiks neatgriezeniski dzēsti.",
   "SendInvitationLetter": "Nosūtiet uzaicinājuma vēstuli, lai pievienotu portālam jaunus dalībniekus",
   "ShareOptionDescription": "Kopējiet publiskās piekļuves saiti vai uzaiciniet citus lietotājus uz telpu, lai sāktu aizpildīt veidlapas.",
   "ShareOptionTitle": "Kopīgot telpu",
@@ -42,9 +45,7 @@
   "UploadDeviceOptionTitle": "Augšupielādēt no ierīces",
   "UploadDevicePDFFormOptionDescription": "Augšupielādējiet telpā gatavu PDF veidlapu no savas ierīces.",
   "UploadDevicePDFFormOptionTitle": "Augšupielādēt no ierīces",
-  "UploadFromPortalDescription": "Augšupielādējiet jebkāda veida failus no Dokumentiem vai Telpām",
   "UploadFromPortalTitle": "Augšupielādēt no {{productName}}",
   "UploadPDFFormOptionDescription": "Izvēlieties gatavu PDF veidlapu, kas pieejama šeit: {{productName}}, un augšupielādējiet to telpā.",
-  "UserEmptyDescription": "Šeit tiks parādīti administratoru augšupielādētie faili un mapes.",
   "VirtualDataRoomEmptyTitle": "Laipni lūdzam virtuālajā datu telpā"
 }

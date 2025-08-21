@@ -1,0 +1,21 @@
+@use "../../styles/mixins";
+@use "../../styles/variables/colors";
+
+.notification {
+  display: grid;
+  grid-template-columns: 1fr 24px;
+  max-width: 660px;
+  grid-gap: 24px;
+  margin-bottom: 24px;
+
+  :global {
+    .notifications_title-loader {
+      max-width: 133px;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .notifications_content-loader {
+      max-width: 540px;
+    }
+  }
+}

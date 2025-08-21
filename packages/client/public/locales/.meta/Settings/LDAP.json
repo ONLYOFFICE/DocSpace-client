@@ -1,0 +1,244 @@
+{
+  "key_path": "LDAP",
+  "content": "LDAP Settings",
+  "content_en_sha1_hash": "fa317c0328f913259d21719d60750333e991d03c",
+  "created_at": "2025-05-19T21:30:51.782Z",
+  "updated_at": "2025-05-26T07:57:32.705Z",
+  "comment": {
+    "text": "This translation key \"LDAP Settings\" is used to label a settings container that contains configuration options for Lightweight Directory Access Protocol (LDAP). It appears as a button in certain mobile views and is likely displayed in a dialog or settings section.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:01.084Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/SettingsContainer.js",
+      "line_number": 84,
+      "context": "}, []);\n \n const renderBody = () => (\n <>\n {!isMobileView ? (\n <HideButton text={t(\"Settings:LDAP\")} value={isSettingsShown} />\n ) : null}\n \n {isMobileView ? <ToggleLDAP /> : null}\n \n {isMobileView || isSettingsShown ? (",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/index.js",
+      "line_number": 38,
+      "context": "import config from \"PACKAGE_FILE\";\n \n import { SECTION_HEADER_HEIGHT } from \"@docspace/shared/components/section/Section.constants\";\n \n import SSO from \"./SingleSignOn\";\n import LDAP from \"./LDAP\";\n import ThirdParty from \"./ThirdPartyServicesSettings\";\n \n import SMTPSettings from \"./SMTPSettings\";\n import DocumentService from \"./DocumentService\";\n import PluginPage from \"./Plugins\";",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Parametrləri\" (Parameters) is a reasonable translation, \"Parametrləri\" doesn't fully capture the meaning of 'Settings'. A more accurate translation would reflect the context of configurations.",
+          "suggestion": "Consider \"LDAP Tənzimləmələri\" (LDAP Adjustments/Configurations) or \"LDAP Ayarları\" (LDAP Settings - uses a more common term for settings in Turkish-influenced Azerbaijani)."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Armenian word 'Կարգավորումներ' is generally correct for 'Settings,' but contextually, 'LDAP' is being used as a specific technical term. A more precise translation might be considered for technical accuracy.",
+          "suggestion": "Consider 'LDAP-ի կարգավորումներ' (LDAP-i kargavorumner) to emphasize that these are settings *for* LDAP."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Sinhala translation \"LDAP සැකසුම්\" uses the word \"සැකසුම්\" which is a general term for 'settings' or 'arrangements'. While not incorrect, it may not fully convey the specific meaning of 'LDAP Settings'.",
+          "suggestion": "Consider a more specific translation that captures the technical meaning of 'LDAP Settings', such as \"LDAP හරඹ සැකසුම්\" (LDAP haramba sakasuum - LDAP configuration) or \"LDAP පරිශීලක සැකසුම්\" (LDAP parishilaka sakasuum - LDAP user settings). However, this requires understanding the context of where these settings are used."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Подешавања' is generally correct but depending on the context (technical documentation), 'Поставке' might be a more common and preferred term for 'Settings'.",
+          "suggestion": "Consider using 'LDAP Поставке' for increased clarity and consistency with common technical terminology."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Cài đặt\" translates to \"Settings\" or \"Installation\", it doesn't fully convey the meaning of \"LDAP Settings\". It implies an installation process rather than configuration options.",
+          "suggestion": "Consider \"Thiết lập LDAP\" or \"Cấu hình LDAP\". \"Thiết lập\" is a more general term for settings, and \"Cấu hình\" specifically refers to configuration."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

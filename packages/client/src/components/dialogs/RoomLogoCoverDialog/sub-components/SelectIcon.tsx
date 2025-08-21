@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,7 +30,7 @@ import styled, { css } from "styled-components";
 import { tablet } from "@docspace/shared/utils";
 import { TColorScheme } from "@docspace/shared/themes";
 import hexRgb from "hex-rgb";
-import { ILogo, SelectIconProps } from "../RoomLogoCoverDialog.types";
+import { SelectIconProps, ILogo } from "../RoomLogoCoverDialog.types";
 
 interface WithoutIconProps {
   isSelected?: boolean;
@@ -148,31 +148,38 @@ export const SelectIcon = ({
     <div>
       <div className="icon-container">
         <div className="color-name">{t("CreateEditRoomDialog:Icon")}</div>
-        <StyledWithoutIcon onClick={toggleWithoutIcon} isSelected={withoutIcon}>
+        <StyledWithoutIcon
+          onClick={toggleWithoutIcon}
+          isSelected={withoutIcon}
+          data-testid="room_logo_cover_without_icon"
+        >
           {t("WithoutIcon")}
         </StyledWithoutIcon>
       </div>
 
       <div className="cover-icon-container">
-        {covers &&
-          covers?.map((icon) => {
-            function createMarkup() {
-              return { __html: icon.data };
-            }
-            return (
-              <StyledIconContainer
-                isSelected={coverId === icon.id && !withoutIcon}
-                $currentColorScheme={$currentColorScheme}
-                onClick={
-                  coverId === icon.id
-                    ? toggleWithoutIcon
-                    : () => onSelectIcon(icon)
-                }
-                key={icon.id}
-                dangerouslySetInnerHTML={createMarkup()}
-              />
-            );
-          })}
+        {covers
+          ? covers?.map((icon, index) => {
+              function createMarkup() {
+                return { __html: icon.data };
+              }
+              return (
+                <StyledIconContainer
+                  isSelected={coverId === icon.id ? !withoutIcon : false}
+                  $currentColorScheme={$currentColorScheme}
+                  onClick={
+                    coverId === icon.id
+                      ? toggleWithoutIcon
+                      : () => onSelectIcon(icon as unknown as string)
+                  }
+                  key={icon.id}
+                  id={`cover-icon-${icon?.id}`}
+                  data-testid={`room_logo_cover_icon_${index}`}
+                  dangerouslySetInnerHTML={createMarkup()}
+                />
+              );
+            })
+          : null}
       </div>
     </div>
   );

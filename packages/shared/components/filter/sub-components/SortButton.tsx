@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,7 @@
 import React from "react";
 
 import SortDesc from "PUBLIC_DIR/images/sort.desc.react.svg";
-import SortReactSvgUrl from "PUBLIC_DIR/images/sort.react.svg?url";
+import SortReactSvg from "PUBLIC_DIR/images/sort.react.svg";
 
 import { Events } from "../../../enums";
 
@@ -38,7 +38,7 @@ import { ViewSelector } from "../../view-selector";
 import { Text } from "../../text";
 
 import { SortButtonProps, TSortDataItem } from "../Filter.types";
-import { StyledSortButton } from "../Filter.styled";
+import styles from "../Filter.module.scss";
 
 const SortButton = ({
   id,
@@ -68,7 +68,8 @@ const SortButton = ({
     const value = getSortData?.();
     const selectedValue = getSelectedSortData?.();
 
-    const data = value.map((item) => {
+    const data = value.map((itemProp) => {
+      const item = { ...itemProp };
       item.className = "option-item";
 
       if (selectedValue.sortId === item.key) {
@@ -82,8 +83,8 @@ const SortButton = ({
     setSortData(data);
 
     setSelectedSortData({
-      sortDirection: selectedValue.sortDirection,
-      sortId: selectedValue.sortId,
+      sortDirection: selectedValue.sortDirection ?? "",
+      sortId: selectedValue.sortId ?? "",
     });
   }, [getSortData, getSelectedSortData]);
 
@@ -109,7 +110,7 @@ const SortButton = ({
       const key = (target.closest(".option-item") as HTMLDivElement)?.dataset
         .value;
 
-      let sortDirection = selectedSortData.sortDirection;
+      let { sortDirection } = selectedSortData;
 
       if (key === selectedSortData.sortId) {
         sortDirection = sortDirection === "desc" ? "asc" : "desc";
@@ -117,7 +118,8 @@ const SortButton = ({
 
       let data = sortData.map((item) => ({ ...item }));
 
-      data = data.map((item) => {
+      data = data.map((itemProp) => {
+        const item = { ...itemProp };
         item.className = "option-item";
         item.isSelected = false;
         if (key === item.key) {
@@ -135,8 +137,6 @@ const SortButton = ({
         sortDirection,
       });
 
-      // toggleCombobox();
-
       onSort?.(key || "", sortDirection);
     },
     [onSort, sortData, selectedSortData],
@@ -144,9 +144,13 @@ const SortButton = ({
 
   const advancedOptions = (
     <>
-      {viewSelectorVisible && (
+      {viewSelectorVisible ? (
         <>
-          <DropDownItem noHover className="view-selector-item">
+          <DropDownItem
+            noHover
+            className="view-selector-item"
+            testId="filter_sort_view_selector_item"
+          >
             <Text fontWeight={600}>{view}</Text>
             <ViewSelector
               className="view-selector"
@@ -158,7 +162,7 @@ const SortButton = ({
 
           <DropDownItem isSeparator />
         </>
-      )}
+      ) : null}
       {sortData?.map((item) => (
         <DropDownItem
           id={item.id}
@@ -166,6 +170,7 @@ const SortButton = ({
           className={item.className}
           key={item.key}
           data-value={item.key}
+          testId={`filter_sort_option_${item.key}`}
         >
           <Text fontWeight={600}>{item.label}</Text>
           <SortDesc
@@ -185,12 +190,14 @@ const SortButton = ({
   }
 
   return (
-    <StyledSortButton
-      viewAs={viewAs}
-      isDesc={selectedSortData.sortDirection === "desc"}
+    <div
       onClick={toggleCombobox}
       id={id}
       title={title}
+      className={styles.sortButton}
+      data-row-view={viewAs === "row" ? "true" : "false"}
+      data-desc={selectedSortData.sortDirection === "desc" ? "true" : "false"}
+      data-testid="filter_sort_button"
     >
       <ComboBox
         opened={isOpen}
@@ -198,7 +205,7 @@ const SortButton = ({
         className="sort-combo-box"
         options={[]}
         selectedOption={{ key: "", label: "" }}
-        directionX="right"
+        directionX="left"
         directionY="both"
         scaled
         size={ComboBoxSize.content}
@@ -206,16 +213,17 @@ const SortButton = ({
         disableIconClick={false}
         disableItemClick
         isDefaultMode={false}
-        manualY="102%"
         advancedOptionsCount={advancedOptionsCount}
         onSelect={() => {}}
         withBlur={false}
         withBackdrop
         onBackdropClick={toggleCombobox}
+        type="onlyIcon"
+        dataTestId="filter_sort_combobox"
       >
-        <IconButton iconName={SortReactSvgUrl} size={16} />
+        <IconButton iconNode={<SortReactSvg />} size={16} />
       </ComboBox>
-    </StyledSortButton>
+    </div>
   );
 };
 

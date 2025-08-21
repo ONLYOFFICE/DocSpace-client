@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -93,7 +93,7 @@ const CertificatesTable = (props) => {
         <ReactSVG src={FileSvgUrl} />
         <div className="column">
           <div className="column-row">
-            <Text fontWeight={600} fontSize="14px" lineHeight="16px" noSelect>
+            <Text fontWeight={600} fontSize="14px" lineHeight="16px">
               {certificate.domainName}
             </Text>
           </div>
@@ -103,7 +103,6 @@ const CertificatesTable = (props) => {
               fontSize="12px"
               fontWeight={600}
               lineHeight="16px"
-              noSelect
             >
               {certificate.action}
               {" | "}
@@ -125,11 +124,13 @@ const CertificatesTable = (props) => {
   return (
     <StyledCertificatesTable>
       <div className="body">
-        {prefix === "idp" &&
-          idpCertificates.map((cert, index) => renderRow(cert, index))}
+        {prefix === "idp"
+          ? idpCertificates.map((cert, index) => renderRow(cert, index))
+          : null}
 
-        {prefix === "sp" &&
-          spCertificates.map((cert, index) => renderRow(cert, index))}
+        {prefix === "sp"
+          ? spCertificates.map((cert, index) => renderRow(cert, index))
+          : null}
       </div>
     </StyledCertificatesTable>
   );

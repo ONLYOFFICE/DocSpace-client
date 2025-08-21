@@ -1,0 +1,288 @@
+{
+  "key_path": "ActionCannotBeUndoneGuests",
+  "content": "The selected disabled guests will be removed from {{productName}}. This action cannot be undone.",
+  "content_en_sha1_hash": "30d31508654a982388d1de3331d59f4101062ba0",
+  "created_at": "2025-05-19T21:30:56.650Z",
+  "updated_at": "2025-06-30T12:20:31.236Z",
+  "comment": {
+    "text": "This translation key is used in a \"Delete Profile Ever\" dialog to inform users that removing disabled guests from {{productName}} is an irreversible action. The text appears as a confirmation message when deleting guests without reassigning them.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:30.895Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
+      "line_number": 112,
+      "context": "if (deleteWithoutReassign) {\n return (\n <>\n <Text className=\"user-delete\">\n {onlyGuests\n ? t(\"ActionCannotBeUndoneGuests\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"ActionCannotBeUndone\", {\n productName: t(\"Common:ProductName\"),\n })}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
+      "line_number": 112,
+      "context": "if (deleteWithoutReassign) {\n return (\n <>\n <Text className=\"user-delete\">\n {onlyGuests\n ? t(\"ActionCannotBeUndoneGuests\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"ActionCannotBeUndone\", {\n productName: t(\"Common:ProductName\"),\n })}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"սահմանափակ հնարավորություններով\" (sahmanapak hnaravorut'yot'v hnyure) translates to 'with limited possibilities' or 'with disabilities'. While it's not strictly incorrect, a more natural and direct translation for 'disabled guests' would be something closer to 'աշխատունակության սահմանափակումներով հյուրեր' (ashxatunagut'yut'i sahmanapaknerov hnyurer), or potentially simplified to 'սահմանափակված հյուրեր' (sahmanapakvac hnyurer) depending on the desired level of formality and precision.  The current translation sounds slightly awkward.",
+          "suggestion": "Consider revising to 'աշխատունակության սահմանափակումներով հյուրեր' or 'սահմանափակված հյուրեր'."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "There is an extra space before 'ດ້ວຍ' (with).",
+          "suggestion": "ບັນຊີລາຍຊື່ຜູ້ຮັບບໍານານທີ່ຖືກເລືອກຈະຖືກລົບອອກຈາກ {{productName}}ດ້ວຍການກະ ທຳ ນີ້ບໍ່ສາມາດຍົກເລີກໄດ້."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ກະ' appears to be a typo, likely intending 'ການ'.",
+          "suggestion": "ບັນຊີລາຍຊື່ຜູ້ຮັບບໍານານທີ່ຖືກເລືອກຈະຖືກລົບອອກຈາກ {{productName}}ດ້ວຍການກະ ທຳ ນີ້ບໍ່ສາມາດຍົກເລີກໄດ້."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"disabled guests\" is translated as \"viesi ar īpašām vajadzībām\". While not entirely wrong, it's a rather formal and potentially awkward translation. A more natural and less clinical translation might be \"personas ar invaliditāti\" or \"personas ar īpašām vajadzībām\" (depending on the precise intended meaning and tone). The current translation implies the guests have special needs rather than simply being disabled.",
+          "suggestion": "Consider translating \"disabled guests\" as \"personas ar invaliditāti\" or \"personas ar īpašām vajadzībām\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Utilizatorii dezactivați pe care le-ați selectat' is a bit awkward. While technically correct, a more natural Romanian phrasing would be 'Utilizatorii dezactivați selectați'.",
+          "suggestion": "Utilizatorii dezactivați selectați vor fi șterși din {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"පහත දැක්වුණු\" (pahaṭa ḍekwuṇu) translates to 'listed below' which doesn't accurately convey 'selected'. The original English implies the user actively selected guests.",
+          "suggestion": "පහත සඳහන් කළ ආබාධ සහිත අමුත්තන් (pahaṭa sanhan kaḷ ābādha sahitā amuṭṭan)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The use of 'අහෝසි කළ නොහැකි වනු ඇත' (ahōsi kala naḥaki vanu ata) is a bit formal and clunky for a user-facing message. It literally translates to 'cannot be abolished/negated'.",
+          "suggestion": "මේ ක්‍රියාව අවබwechslීමට බැහැ (mē kriyāva avabæṭalīma bāhē)"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'This action cannot be undone' is better translated as 'Tento proces je nevratný' rather than 'Tento krok sa nedá vrátiť späť'. The latter sounds slightly awkward and less natural in Slovak in this context.",
+          "suggestion": "Tento proces je nevratný."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Serbian translation uses Cyrillic characters, which is appropriate for the Serbian language. However, the English original uses double curly braces `{{productName}}`. Ensure this is replicated in the Serbian translation. The Cyrillic version should also use double curly braces.",
+          "suggestion": "Ensure the variable `{{productName}}` is correctly formatted in the Serbian version using double curly braces: `{{productName}}`."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'disabled guests' is not accurately reflected in the Turkish translation. 'Devre dışı bırakılmış' implies deactivated or disconnected, but 'disabled' in this context likely refers to guests who have been excluded or removed from a list for some reason. A more appropriate term would convey this exclusion.",
+          "suggestion": "Seçilen listeden çıkarılmış konuklar"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the Turkish sentence structure is a bit formal and could be improved for readability. The phrasing '{{productName}} üzerinden' sounds slightly awkward.",
+          "suggestion": "Seçilen listeden çıkarılmış konuklar {{productName}}'den kaldırılacaktır."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'The selected disabled guests will be removed from {{productName}}' is better translated as '所选的已禁用访客将被从{{productName}}移除' to better convey the passive voice and sense of removal.",
+          "suggestion": "所选的已禁用访客将被从{{productName}}移除。"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While '此操作无法撤销' is technically correct, a more natural and common phrasing in Chinese would be '此操作不可逆' or '此操作无法恢复'.",
+          "suggestion": "此操作不可逆"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "translation-app-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "build": "next build",
+    "start": "next start -p 3000",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "autoprefixer": "^10",
+    "axios": "^1.6.2",
+    "framer-motion": "^11.18.2",
+    "next": "^14.2.28",
+    "postcss": "^8",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-toastify": "^11.0.5",
+    "recharts": "^2.15.3",
+    "socket.io-client": "^4.7.2",
+    "tailwindcss": "^3.3.5",
+    "zustand": "^4.4.6"
+  },
+  "devDependencies": {
+    "@types/node": "20.17.46",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.3",
+    "typescript": "5.8.3"
+  }
+}

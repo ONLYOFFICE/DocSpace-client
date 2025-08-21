@@ -1,0 +1,232 @@
+{
+  "key_path": "DisableGuestsDescription",
+  "content": "If you disable these guests, they won’t be able to log in to {{productName}}.",
+  "content_en_sha1_hash": "a0962aa99cc36e50610e49a6c158b9dfd0740163",
+  "created_at": "2025-05-19T21:30:56.952Z",
+  "updated_at": "2025-08-04T07:30:01.063Z",
+  "comment": {
+    "text": "This translation key is used to describe the consequence of disabling guests on {{productName}}, informing users about their accessibility. It appears in a change user status dialog and is displayed when only one guest is being disabled.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:37:46.795Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
+      "line_number": 174,
+      "context": "bodyText = onlyOneUser\n ? isGuests\n ? t(\"DisableGuestDescription\", { productName: t(\"Common:ProductName\") })\n : t(\"DisableUserDescription\", { productName: t(\"Common:ProductName\") })\n : isGuests\n ? t(\"DisableGuestsDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"DisableUsersDescription\", {\n productName: t(\"Common:ProductName\"),\n });",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Latvian translation uses a period (.) after 'pieteikties'.  It should use a comma (,) to match the English source's punctuation.",
+          "suggestion": "Ja atspējosiet šos viesus, viņi nevarēs pieteikties, {{productName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'conecta' is not the correct translation for 'log in'. The appropriate term would be 'autentifica' or 'se autentifica'. 'Conecta' implies a connection, not authentication.",
+          "suggestion": "Dacă dezactivați invitații, aceștia nu vor putea să se autentifice la {{productName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'පුරනය' (puranya) translates to 'enter' or 'access' but in this context, 'log in' is more appropriate. It doesn't convey the intended meaning of accessing an account.",
+          "suggestion": "ඔබ මෙම අමුත්තන් අක්‍රිය කළහොත්, ඔවුන්ට {{productName}} වෙත ඇතුළුවීමට නොහැකි වනු ඇත."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"oturum açamazlar\" (cannot log in) is technically correct, but a more natural and common phrasing in Turkish would be \"giriş yapamazlar\".",
+          "suggestion": "Bu konukları devre dışı bırakırsanız, {{productName}} üzerinde giriş yapamazlar."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

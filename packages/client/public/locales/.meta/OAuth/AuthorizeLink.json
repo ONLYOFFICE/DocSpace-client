@@ -1,0 +1,310 @@
+{
+  "key_path": "AuthorizeLink",
+  "content": "Authorize link",
+  "content_en_sha1_hash": "81ad6b89c40401161374de86969d1109d955deff",
+  "created_at": "2025-05-19T21:30:53.826Z",
+  "updated_at": "2025-08-12T19:46:26.146Z",
+  "comment": {
+    "text": "The \"AuthorizeLink\" translation key is used to display the text for an authorization link in a preview dialog, providing users with a clear indication of what action will be performed when they click the link. This text appears on a button-like component within the dialog. Translators should provide a descriptive and actionable label for this link.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:55.588Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/PreviewDialog.tsx",
+      "line_number": 256,
+      "context": "dataTestId=\"script_block_textarea\"\n />\n </div>\n <div className=\"block-container\">\n <Text fontWeight={600} lineHeight=\"20px\" fontSize=\"13px\">\n {t(\"OAuth:AuthorizeLink\")}\n </Text>\n <Textarea\n heightTextArea={64}\n enableCopy\n isReadOnly",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Bağlantıya icazə verin\" is a literal translation of \"Give permission to the link.\" It doesn't accurately convey the meaning of \"Authorize link.\" A more accurate translation would focus on authorization, not permission.",
+          "suggestion": "İcazəli keçid"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Valtuuta linkki\" is understandable, a more idiomatic and natural Finnish translation for \"Authorize link\" would be \"Hyväksyntäl linkki\" or \"Kirjautumislinkki\". \"Valtuuta\" implies giving authorization, whereas \"Authorize link\" refers to a link used to initiate the authorization process.",
+          "suggestion": "Hyväksyntäl linkki"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The French translation 'Autoriser le lien' is a literal translation and doesn't accurately reflect the meaning of 'Authorize link' in the context of OAuth. It's too literal and awkward. A more natural and accurate translation would be something like 'Lien d'autorisation' or 'URL d'autorisation'.",
+          "suggestion": "Lien d'autorisation"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Լիազորել հղումը\" is a literal translation of \"Authorize link\" but doesn't convey the intended meaning effectively. 'Authorize' implies granting permission. A more accurate translation would convey that meaning.",
+          "suggestion": "Consider alternatives like \"կարգավորման հղում\" (regulation link), \"անդորրագի հղում\" (authorization link), or a more contextual phrasing depending on the specific use case."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Autorizza il link\" is not the most natural or accurate translation of \"Authorize link\". While technically correct, it's more literal and less idiomatic.",
+          "suggestion": "A better translation would be \"Link di autorizzazione\" or \"Collegamento di autorizzazione\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ເຊື່ອມຕໍ່ຮັບອະນຸຍາດ' is understandable, a more precise translation of 'Authorize link' would be 'ເຊື່ອມຕໍ່ການອະນຸຍາດ' or 'ລິ້ງການອະນຸຍາດ'. The current translation emphasizes 'receiving' authorization, whereas 'Authorize link' refers to the link itself that initiates the authorization process.",
+          "suggestion": "ລິ້ງການອະນຸຍາດ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Link autoriseren\" is a literal translation of \"Authorize link\" and doesn't quite convey the intended meaning. While understandable, it's not idiomatic Dutch.  A better translation would focus on the purpose of the link, which is to initiate authorization.",
+          "suggestion": "Autorisatielink"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Autoryzuj link' is not the most accurate or natural rendering of 'Authorize link' in Polish. 'Autoryzuj' implies an action, while 'Authorize link' is a noun phrase referring to the link itself.",
+          "suggestion": "Link autoryzacyjny"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Autorizar link\" is not the most accurate or idiomatic translation of \"Authorize link\" in Portuguese. \"Autorizar\" implies a process of authorization, while \"Authorize link\" refers to the link itself.",
+          "suggestion": "Link de autorização"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation \"Autorizare link\" is not the most natural or accurate translation of \"Authorize link.\" While \"Autorizare\" is correct for \"Authorize\", \"link\" is often translated as \"legătură\" in Romanian, especially in technical contexts.",
+          "suggestion": "Legătură de autorizare"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Авторизовать ссылку\" literally translates to \"Authorize link\". While understandable, it's not the most natural or accurate translation for 'Authorize link' in this context. It implies 'to authorize a link,' rather than simply referring to the link itself.",
+          "suggestion": "Consider alternatives like \"Ссылка авторизации\" (Authorization link) or \"URL авторизации\" (Authorization URL)."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"අනුමත සම්බන්ධතාවය\" (Anumata Sanbandhayaya) while technically meaning 'approved connection,' doesn't accurately convey the meaning of \"Authorize link.\"  'Authorize link' refers to a URL that grants access.",
+          "suggestion": "A more accurate translation would be something along the lines of \"අනුමැති පිටුවැව\" (Anumathi Pitavava - Authorization Page/Link) or \"අනුමැතිකරණ සබැඳිය\" (Anumathakaranaya Sabandhiya - Authorization Link)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Autorizovať odkaz\" is understandable, it's not the most natural or idiomatic Slovak translation for \"Authorize link.\" The verb 'autorizovať' is a bit formal and direct. A more common and user-friendly translation would be \"Odkaz na autorizáciu\" or \"Autorizačný odkaz\".",
+          "suggestion": "Odkaz na autorizáciu"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Avtoriziraj povezavo' is understandable, a more accurate and natural translation of 'Authorize link' would be 'Povezava za pooblaščanje' or 'Pooblaščevalna povezava'. 'Avtoriziraj' is an action verb and 'Authorize link' is a noun phrase referring to a link.",
+          "suggestion": "Povezava za pooblaščanje"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Веза за ауторизацију' is a literal translation of 'link for authorization'. A more natural and idiomatic translation for 'Authorize link' would be 'Линк за овлашћивање' or 'Овлашћивачки линк'. 'Веза за ауторизацију' sounds awkward.",
+          "suggestion": "Линк за овлашћивање"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Авторизувати посилання' is a literal translation but doesn't convey the intended meaning of 'Authorize link' in the context of OAuth. It sounds awkward and less natural. A more appropriate translation would focus on the action of authorization and the link facilitating it.",
+          "suggestion": "Розрив авторизації"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Vietnamese translation \"Liên kết được ủy quyền\" is a literal translation of 'Authorize link' but isn't the most natural or commonly used term in Vietnamese for this context. 'Authorize' implies granting permission or authority, which isn't always directly conveyed with 'được ủy quyền'. A more appropriate translation would depend on the precise use case.",
+          "suggestion": "Consider alternatives such as 'Liên kết phê duyệt', 'Liên kết xác thực', or 'URL ủy quyền', depending on the context. 'Liên kết cấp quyền' is also a viable option."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

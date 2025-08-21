@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,7 +31,7 @@ import { Select } from "./Select";
 import type { MonthsProps } from "../Cron.types";
 
 export const Months = memo(
-  ({ months, unit, setMonths, t, isDisabled }: MonthsProps) => {
+  ({ months, unit, setMonths, t, isDisabled, dataTestId }: MonthsProps) => {
     return (
       <Select
         unit={unit}
@@ -40,6 +40,7 @@ export const Months = memo(
         dropDownMaxHeight={300}
         placeholder={t("EveryMonth")}
         isDisabled={isDisabled}
+        dataTestId={dataTestId}
       />
     );
   },

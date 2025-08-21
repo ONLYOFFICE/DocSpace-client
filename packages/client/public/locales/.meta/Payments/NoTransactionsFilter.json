@@ -1,0 +1,28 @@
+{
+  "key_path": "NoTransactionsFilter",
+  "content": "No transactions match this filter. Try another or remove the filter to view all transactions.",
+  "content_en_sha1_hash": "eba4ef52edab3fd64687b2eb2518afb2c5ec427d",
+  "created_at": "2025-05-28T09:33:06.755Z",
+  "updated_at": "2025-05-28T09:35:57.242Z",
+  "comment": {
+    "text": "The \"NoTransactionsFilter\" translation key is used to display a message indicating that there are no transactions matching a specific filter. This text appears in UI elements such as buttons or dialogs when no transactions meet the criteria set by the filter. Its purpose is to provide an alternative action for users, either encouraging them to try again with different settings or remove the filter to view all available transactions.",
+    "is_auto": true,
+    "updated_at": "2025-05-28T09:35:57.242Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/TransactionBody.tsx",
+      "line_number": 36,
+      "context": "import { DeviceType } from \"@docspace/shared/enums\";\n import { Consumer } from \"@docspace/shared/utils\";\n \n import NoTransactionsIcon from \"PUBLIC_DIR/images/no.transactions.react.svg\";\n import NoTransactionsFilterIcon from \"PUBLIC_DIR/images/no.transactions.filter.react.svg\";\n \n import useViewEffect from \"SRC_DIR/Hooks/useViewEffect\";\n \n import TableView from \"./TableView\";\n import RowView from \"./RowView\";",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

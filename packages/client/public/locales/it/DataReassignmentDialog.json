@@ -4,7 +4,6 @@
   "DataReassignment": "Riassegnazione dei dati",
   "DeleteProfileIsFinished": "Elimina il profilo al termine della riassegnazione",
   "DescriptionDataReassignment": "Trasferiremo le stanze create dall'utente e i documenti archiviati nelle stanze dell'utente.",
-  "InProgress": "In corso",
   "Interrupted": "Interrotto, non è stato possibile trasferire alcuni dati",
   "MoreAboutDataTransfer": "Ulteriori informazioni sul trasferimento dei dati",
   "NewDataOwner": "Nuovo proprietario dei dati",
@@ -14,6 +13,7 @@
   "ReassignData": "Riassegna i dati",
   "ReassigningDataToAnother": "Il processo di riassegnazione dei dati dall'utente <0>{{fromUser}}</0> all'utente <1>{{toUser}}</1> è iniziato. Tieni presente che potrebbe richiedere molto tempo.",
   "ReassigningDataToItself": "Il processo di riassegnazione dei dati dall'utente <0>{{fromUser}}</0> all'utente <1>{{toUser}}</1> <2>{{you}}</2> è iniziato. Tieni presente che potrebbe richiedere molto tempo.",
+  "RoomsOnlyReassignment": "Trasferiremo le stanze create dal contatto.",
   "StartTransferAgain": "Avvia nuovamente il trasferimento",
   "UserToWhomTheDataWillBeTransferred": "Utente a cui verranno trasferiti i dati"
 }

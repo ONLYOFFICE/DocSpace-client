@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -56,7 +56,7 @@ const SubList = ({
       marginTop={marginTop}
       id={`category-sub-list-${categoryType}`}
       className={`dropdown-sub sub-by-${categoryType}`}
-      directionX="right"
+      directionX="left"
       directionY="bottom"
       manualY="0px"
       manualX="0px"
@@ -82,6 +82,7 @@ const SubList = ({
             onClick={onCategoryClick}
             onMouseDown={onPreventDefault}
             title={categoryTitle}
+            testId={`category_sub_list_${categoryType}_${category.id}`}
           >
             <div
               className="item-content"

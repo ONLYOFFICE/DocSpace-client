@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,8 +27,11 @@
 import { useRef, useState, useEffect } from "react";
 
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { isMobile, DomHelpers } from "@docspace/shared/utils";
 import { StyledDropDown } from "../StyledDropdown";
+
+const MAX_ITEMS_COUNT = 7;
 
 const TagDropdown = ({
   open,
@@ -144,7 +147,13 @@ const TagDropdown = ({
       isDefaultMode={false}
       manualY="54px"
     >
-      {dropdownItems}
+      {dropdownItems.length > MAX_ITEMS_COUNT ? (
+        <Scrollbar style={{ height: `${32 * MAX_ITEMS_COUNT}px` }}>
+          {dropdownItems}
+        </Scrollbar>
+      ) : (
+        dropdownItems
+      )}
     </StyledDropDown>
   );
 };

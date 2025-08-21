@@ -1,6 +1,4 @@
 {
   "ErrorEmptyResponse": "Դատարկ պատասխան",
-  "ErrorUnavailableText": "{{productName}}-ը առկա չէ",
-  "LinkDoesNotExist": "Հղումը, որը փորձում եք բացել, գոյություն չունի:",
-  "LinkHasExpired": "Ձեր հետևած հղումը ժամկետանց է:"
+  "ErrorUnavailableText": "{{productName}}-ը առկա չէ"
 }

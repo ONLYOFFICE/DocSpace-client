@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -44,8 +44,8 @@ const QUERY_PARAMS = [
     value: "123",
   },
   {
-    name: "email",
-    value: "mail@mail.com",
+    name: "encemail",
+    value: "b5COc6kRm3veeYqA72sOfA&uid=66faa6e4-f133-11ea-b126-00ffeec8b4ef",
   },
 ];
 
@@ -69,11 +69,10 @@ test("portal suspend deactivate", async ({ page, mockRequest }) => {
   await mockRequest.router([endpoints.suspendPortal]);
   await page.goto(URL_WITH_PARAMS);
 
-  await page.getByRole("button", { name: "Deactivate" }).click();
+  const deactivateButton = page.getByTestId("deactivate_portal_button");
+  await deactivateButton.click();
 
-  await page
-    .getByRole("button", { name: "Deactivate" })
-    .waitFor({ state: "detached" });
+  await deactivateButton.waitFor({ state: "detached" });
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -81,7 +80,7 @@ test("portal suspend deactivate", async ({ page, mockRequest }) => {
     "portal-suspend-deactivate.png",
   ]);
 
-  await page.getByTestId("link").click();
+  await page.getByTestId("redirect_site_link").click();
 
   await page.waitForURL(new RegExp("^(http|https)://(.*)"), {
     waitUntil: "commit",
@@ -97,7 +96,7 @@ test("portal suspend deactivate", async ({ page, mockRequest }) => {
 test("portal suspend cancel", async ({ page }) => {
   await page.goto(URL_WITH_PARAMS);
 
-  await page.getByRole("button", { name: "Cancel" }).click();
+  await page.getByTestId("cancel_button").click();
 
   await page.waitForURL("/", { waitUntil: "load" });
 

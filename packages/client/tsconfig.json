@@ -3,10 +3,12 @@
   "compilerOptions": {
     "rootDir": "./",
     "baseUrl": "./",
+    "jsx": "react-jsx",
     "paths": {
       "PUBLIC_DIR/*": ["../../public/*"],
       "SRC_DIR/*": ["./src/*"],
       "PACKAGE_FILE": ["./package.json"]
     }
-  }
+  },
+  "include": ["**/*.ts", "**/*.tsx", "types/**/*.d.ts"]
 }

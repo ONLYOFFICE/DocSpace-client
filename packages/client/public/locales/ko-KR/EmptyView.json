@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "마지막으로 본 문서나 편집한 문서가 이 섹션에 표시됩니다.",
   "EmptyRootRoomUserDescription": "공유 룸이 여기에 표시됩니다.",
   "EmptyRootRoomUserTitle": "여기에 아직 룸이 없습니다",
+  "EmptyTemplatesDescription": "룸 섹션의 룸에서 템플릿을 생성할 수 있습니다",
+  "EmptyTemplatesTitle": "아직 템플릿이 없습니다",
   "FormFolderDefaultDescription": "PDF 양식을 여기에 드롭하거나 {{productName}} 또는 장치에서 업로드하세요. ",
   "FormFolderDefaultTitle": "아직 여기에 양식이 없습니다",
   "FormFolderDefaultUserDescription": "관리자가 업로드한 양식이 여기에 표시됩니다.",
@@ -33,6 +35,7 @@
   "MigrationDataDescription": "{{organizationName}} Workspace, Google Workspace 또는 Nextcloud에서 {{productName}}에 데이터를 가져오기하세요.",
   "MigrationDataTitle": "마이그레이션 데이터",
   "PublicRoomEmptyTitle": "공용 룸에 오신 것을 환영합니다",
+  "SectionsUploadDescription": "{{sectionNameFirst}} 또는 {{sectionNameSecond}}에서 모든 유형의 파일 업로드",
   "SendInvitationLetter": "포털에 새 멤버를 추가하기 위해 초대장을 보냅니다 ",
   "ShareOptionDescription": "액세스 링크를 복사하거나 다른 사용자를 룸에 초대하여 양식 작성 프로세스를 시작하세요.",
   "ShareOptionTitle": "룸 공유",
@@ -42,9 +45,7 @@
   "UploadDeviceOptionTitle": "장치에서 업로드",
   "UploadDevicePDFFormOptionDescription": "장치에서 준비된 PDF 양식을 룸에 업로드하세요.",
   "UploadDevicePDFFormOptionTitle": "장치에서 업로드",
-  "UploadFromPortalDescription": "문서 또는 룸에서 모든 유형의 파일을 업로드",
   "UploadFromPortalTitle": "{{productName}}에서 업로드",
   "UploadPDFFormOptionDescription": "{{productName}}에서 이용 가능한 PDF 양식을 선택하여 룸에 업로드하세요. ",
-  "UserEmptyDescription": "관리자가 업로드한 파일 및 폴더가 여기에 표시됩니다.",
   "VirtualDataRoomEmptyTitle": "가상 데이터 룸에 오신 것을 환영합니다"
 }

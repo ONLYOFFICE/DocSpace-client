@@ -5,8 +5,6 @@
   "DailyFeedDescription": "일일 다이제스트에서 {{productName}}의 뉴스 및 이벤트 읽기.",
   "ManageNotifications": "관리",
   "Notifications": "알림",
-  "RoomsActions": "방 내 파일 관련 작업",
-  "RoomsActivity": "방 활동",
   "RoomsActivityDescription": "시간별 알림. 방의 모든 활동에 대한 최신 정보를 받아보세요.",
   "UsefulTips": "유용한 {{productName}} 팁",
   "UsefulTipsDescription": "{{productName}}에 대한 유용한 가이드 얻기"

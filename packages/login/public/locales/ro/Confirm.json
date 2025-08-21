@@ -1,6 +1,5 @@
 {
   "AccountWillBeCreated": "Un cont {{productName}} va fi creat pentru adresa <1>{{email}}</1>. Finalizați inregistrarea activă:",
-  "ChangePasswordSuccess": "Parola a fost schimbată cu succes",
   "ConfirmOwnerPortalSuccessMessage": "Proprietarul {{productName}} a fost schimbat cu succes. Veţi fi redirecționat automat după 10 secunde.",
   "ConfirmOwnerPortalTitle": "Confirmați dacă doriți să schimbați proprietarul {{productName}} în {{newOwner}}.",
   "CurrentNumber": "Numărul dvs. de telefon mobil curent",
@@ -26,9 +25,6 @@
   "PortalRemoveTitle": "Confirmaţi că doriţi să ştergeţi spaţiul dvs {{productName}}.",
   "Reactivate": "Reactivare",
   "SetAppButton": "Conectarea aplicației",
-  "SetAppDescription": "Autentificarea cu doi factori este activată. Configurați aplicația dvs de autentificare pentru a continua lucrul în {{productName}}. Puteți folosi aplicația Google Authenticator pentru <1>Android</1> și <4>iOS</4> sau Authenticator pentru <8>Windows Phone</8>.",
-  "SetAppInstallDescription": "Pentru a conecta aplicația, scanați codul QR sau introduceți manual cheia secretă <1>{{ secretKey }}</1>, și apoi introduceți codul din 6 cifre din aplicația în câmpul aflat dedesubt.",
-  "SetAppTitle": "Configurarea aplicației de autentificare dvs.",
   "SignUp": "Conectare",
   "SuccessDeactivate": "Contul dvs a fost dezactivat cu succes. Veţi fi redirecţionat în 10 secunde către <1>site-ul</1>.",
   "SuccessReactivate": "Contul dvs a fost reactivat cu succes. Veți fi redirecționat către <1>portal</1> după 10 secunde.",

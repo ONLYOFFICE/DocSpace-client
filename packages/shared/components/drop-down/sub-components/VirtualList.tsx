@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,15 +32,12 @@ import React, {
   useState,
 } from "react";
 import { VariableSizeList } from "react-window";
-
 import { Scrollbar } from "../../scrollbar";
-
 import { VirtualListProps } from "../DropDown.types";
 
-function VirtualList({
+const VirtualList = ({
   Row,
   width,
-  theme,
   isOpen,
   children,
   itemCount,
@@ -50,14 +47,18 @@ function VirtualList({
   isNoFixedHeightOptions,
   getItemSize,
   enableKeyboardEvents,
-}: VirtualListProps) {
-  const ref = useRef<VariableSizeList>(null);
+}: VirtualListProps) => {
+  const listRef = useRef<VariableSizeList>(null);
 
   const activeIndex = useMemo(() => {
     let foundIndex = -1;
     React.Children.forEach(cleanChildren, (child, index) => {
-      const props = child && React.isValidElement(child) && child.props;
-      if (props?.disabled) foundIndex = index;
+      if (
+        React.isValidElement(child) &&
+        (child.props as { disabled?: boolean })?.disabled
+      ) {
+        foundIndex = index;
+      }
     });
     return foundIndex;
   }, [cleanChildren]);
@@ -65,9 +66,9 @@ function VirtualList({
   const [currentIndex, setCurrentIndex] = useState(activeIndex);
   const currentIndexRef = useRef<number>(activeIndex);
 
-  const onKeyDown = useCallback(
+  const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
-      if (!ref.current || !isOpen) return;
+      if (!listRef.current || !isOpen) return;
 
       event.preventDefault();
 
@@ -92,30 +93,33 @@ function VirtualList({
           return;
       }
 
-      if (index < 0 || index >= React.Children.count(children)) return;
-
       setCurrentIndex(index);
       currentIndexRef.current = index;
-      ref.current.scrollToItem(index, "smart");
+      listRef.current.scrollToItem(index, "smart");
     },
     [isOpen, children],
   );
 
+  const handleMouseMove = useCallback((index: number) => {
+    if (currentIndexRef.current === index) return;
+    setCurrentIndex(index);
+    currentIndexRef.current = index;
+  }, []);
+
   useEffect(() => {
     if (isOpen && maxHeight && enableKeyboardEvents) {
-      window.addEventListener("keydown", onKeyDown);
+      window.addEventListener("keydown", handleKeyDown);
     }
 
-    const refVar = ref.current;
+    const list = listRef.current;
 
     return () => {
-      window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("keydown", handleKeyDown);
 
-      if (itemCount > 0 && refVar) {
+      if (itemCount > 0 && list) {
         setCurrentIndex(activeIndex);
         currentIndexRef.current = activeIndex;
-
-        refVar.scrollToItem(activeIndex, "smart");
+        list.scrollToItem(activeIndex, "smart");
       }
     };
   }, [
@@ -123,17 +127,9 @@ function VirtualList({
     activeIndex,
     maxHeight,
     enableKeyboardEvents,
-    children,
-    onKeyDown,
     itemCount,
+    handleKeyDown,
   ]);
-
-  const handleMouseMove = useCallback((index: number) => {
-    if (currentIndexRef.current === index) return;
-
-    setCurrentIndex(index);
-    currentIndexRef.current = index;
-  }, []);
 
   if (!maxHeight) return cleanChildren || children;
 
@@ -141,14 +137,13 @@ function VirtualList({
     <Scrollbar style={{ height: maxHeight }}>{cleanChildren}</Scrollbar>
   ) : (
     <VariableSizeList
-      ref={ref}
+      ref={listRef}
       width={width}
       itemCount={itemCount}
       itemSize={getItemSize}
       height={calculatedHeight}
       itemData={{
         children: cleanChildren,
-        theme,
         activeIndex,
         activedescendant: currentIndex,
         handleMouseMove,
@@ -158,6 +153,8 @@ function VirtualList({
       {Row}
     </VariableSizeList>
   );
-}
+};
+
+VirtualList.displayName = "VirtualList";
 
 export { VirtualList };

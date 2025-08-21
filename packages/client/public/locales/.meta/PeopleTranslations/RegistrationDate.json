@@ -1,0 +1,237 @@
+{
+  "key_path": "RegistrationDate",
+  "content": "Registration date",
+  "content_en_sha1_hash": "c498221a5aad95b5674daf56badfb16892c6ed05",
+  "created_at": "2025-05-19T21:30:53.492Z",
+  "updated_at": "2025-08-12T19:46:26.045Z",
+  "comment": {
+    "text": "This translation key is used to display the registration date of a user in the application. It appears as a label on an info panel and is rendered when the user's status is active. Translators should provide a human-readable version of this date in their respective language.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:38.249Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
+      "line_number": 272,
+      "context": "{userSelection.status === EmployeeStatus.Active ? (\n <>\n <Text\n className={styles.infoField}\n title={t(\"PeopleTranslations:RegistrationDate\")}\n >\n {t(\"PeopleTranslations:RegistrationDate\")}\n </Text>\n <Text\n fontSize=\"13px\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
+      "line_number": 272,
+      "context": "{userSelection.status === EmployeeStatus.Active ? (\n <>\n <Text\n className={styles.infoField}\n title={t(\"PeopleTranslations:RegistrationDate\")}\n >\n {t(\"PeopleTranslations:RegistrationDate\")}\n </Text>\n <Text\n fontSize=\"13px\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
+      "line_number": 790,
+      "context": "};\n \n const registrationDate = {\n id: \"registration_date\",\n key: \"registrationDate\",\n label: t(\"PeopleTranslations:RegistrationDate\"),\n default: true,\n };\n \n if (isGuests) {\n options.push(firstName, email);",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation \"Înregistrat la data de\" is not the most accurate or natural translation of \"Registration date\". It literally translates to \"Registered on the date of\". A more accurate and natural translation would be \"Data înregistrării\" or \"Data înscrierii\".",
+          "suggestion": "Consider using \"Data înregistrării\" or \"Data înscrierii\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'පහregister කිරීමේ දිනය' is not an accurate translation of 'Registration date'. It seems to be a direct transliteration and incorrect combination of English and Sinhala words. The word 'register' shouldn't be used in this context in Sinhala.",
+          "suggestion": "නි ලියාපදිංචි කිරීමේ දිනය (ni liyāpadiñci kirimē dinaya) - which translates to 'date of registration'"
+        },
+        {
+          "type": "spelling",
+          "description": "Although 'register' is not a Sinhala word, it is transliterated, and this transliteration is not standardized, potentially leading to confusion for readers.",
+          "suggestion": "Avoid direct transliterations. Use appropriate Sinhala vocabulary."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

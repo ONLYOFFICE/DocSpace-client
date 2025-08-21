@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -71,7 +71,7 @@ class AccessRightsStore {
   };
 
   canChangeUserType = (user) => {
-    const { id, isOwner, isCollaborator, isRoomAdmin } = this.userStore.user;
+    const { id, isCollaborator, isRoomAdmin, isOwner } = this.userStore.user;
     if (isCollaborator || isRoomAdmin) return false;
 
     const { id: userId, statusType, role } = user;
@@ -83,11 +83,12 @@ class AccessRightsStore {
         return false;
 
       case EmployeeType.Admin:
-      case EmployeeType.RoomAdmin:
         if (isOwner) {
           return true;
         }
         return false;
+      case EmployeeType.RoomAdmin:
+        return true;
 
       case EmployeeType.User:
       case EmployeeType.Guest:
@@ -107,8 +108,6 @@ class AccessRightsStore {
       isAdmin: userIsAdmin,
       isOwner: userIsOwner,
       isVisitor: userIsVisitor,
-      // isCollaborator: userIsCollaborator,
-      isRoomAdmin: userIsRoomAdmin,
     } = user;
 
     const needMakeEmployee =
@@ -118,7 +117,7 @@ class AccessRightsStore {
 
     if (isOwner) return true;
 
-    if (isAdmin) return !userIsAdmin && !userIsOwner && !userIsRoomAdmin;
+    if (isAdmin) return !userIsAdmin && !userIsOwner;
 
     if (isRoomAdmin && userIsVisitor) return true;
 

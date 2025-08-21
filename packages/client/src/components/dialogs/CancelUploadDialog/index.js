@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 
@@ -66,6 +66,7 @@ const CancelUploadDialog = ({
           primary
           onClick={onCancelProcess}
           isLoading={loading}
+          testId="confirm_cancel_upload_button"
         />
         <Button
           label={t("Common:No")}
@@ -73,6 +74,7 @@ const CancelUploadDialog = ({
           scale
           onClick={onClose}
           isDisabled={loading}
+          testId="cancel_confirmation_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

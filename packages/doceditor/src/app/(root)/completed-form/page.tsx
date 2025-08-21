@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -23,28 +23,77 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { CompletedForm } from "@/components/completed-form";
+import isNil from "lodash/isNil";
+
+import { StartFillingMode } from "@docspace/shared/enums";
+
 import { logger } from "@/../logger.mjs";
+import { CompletedForm } from "@/components/completed-form";
 
-import { getFillingSession } from "@/utils/actions";
-
-const log = logger.child({ module: "Create page" });
+import {
+  getFileById,
+  getFillingSession,
+  getFormFillingStatus,
+  getSettings,
+  getUser,
+} from "@/utils/actions";
+import { CompletedVDRForm } from "@/components/completed-form/CompletedVDRForm";
+import { CompletedFormEmpty } from "@/components/completed-form/CompletedForm.empty";
 
 interface PageProps {
-  searchParams: Record<string, string | undefined>;
+  searchParams: Promise<Record<string, string | undefined>>;
 }
 
-async function Page({ searchParams }: PageProps) {
-  const { share, fillingSessionId, is_file } = searchParams;
+async function Page(props: PageProps) {
+  const { searchParams: sp } = props;
+  const searchParams = await sp;
+  const { share, fillingSessionId, roomId, is_file, formId, type, isSDK } =
+    searchParams;
 
-  log.info("Open completed form page");
+  logger.info("Open completed form page");
 
-  const session = await getFillingSession(fillingSessionId!, share);
+  if (type && type === StartFillingMode.StartFilling.toString()) {
+    const [formFillingStatus, file, user, settings] = await Promise.all([
+      getFormFillingStatus(formId!),
+      getFileById(formId!),
+      getUser(formId!),
+      getSettings(share),
+    ]);
+
+    if (
+      !file ||
+      !user ||
+      !roomId ||
+      !settings ||
+      settings === "access-restricted"
+    )
+      return <CompletedFormEmpty />;
+
+    return (
+      <CompletedVDRForm
+        file={file}
+        user={user}
+        roomId={roomId}
+        formFillingStatus={formFillingStatus}
+        settings={settings}
+      />
+    );
+  }
+
+  if (isNil(fillingSessionId)) return <CompletedFormEmpty />;
+
+  const session = await getFillingSession(fillingSessionId, share);
 
   const isShareFile = is_file === "true";
+  const isSDKForm = isSDK === "true";
 
   return (
-    <CompletedForm session={session} share={share} isShareFile={isShareFile} />
+    <CompletedForm
+      session={session}
+      share={share}
+      isShareFile={isShareFile}
+      isSDK={isSDKForm}
+    />
   );
 }
 

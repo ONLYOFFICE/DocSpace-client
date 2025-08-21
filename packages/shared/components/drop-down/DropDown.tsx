@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,34 +25,33 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTheme } from "styled-components";
+import classNames from "classnames";
 import { isIOS, isMobile } from "react-device-detect";
 
-import { Portal } from "../portal";
-import { DomHelpers, isTablet } from "../../utils";
+import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
 
-import StyledDropdown from "./DropDown.styled";
+import { Portal } from "../portal";
+import { DomHelpers } from "../../utils";
 
 import { VirtualList } from "./sub-components/VirtualList";
 import { Row } from "./sub-components/Row";
 
 import { DropDownProps } from "./DropDown.types";
 import { DEFAULT_PARENT_HEIGHT } from "./DropDown.constants";
+import { getItemHeight, hideDisabledItems } from "./DropDown.utils";
+import styles from "./DropDown.module.scss";
+import type { TDirectionX } from "../../types";
 
 const DropDown = ({
   directionY = "bottom",
-  directionX = "left",
+  directionX = "right",
 
   open,
   enableOnClickOutside,
   isDefaultMode = true,
   fixedDirection = false,
-  smallSectionWidth,
   forwardedRef,
-  disableOnClickOutside,
-  right,
-  offsetLeft = 0,
-  top,
+  offsetX = 0,
   children,
   maxHeight,
   showDisabledItems,
@@ -70,10 +69,10 @@ const DropDown = ({
   style,
   topSpace,
   backDrop,
+  dataTestId,
 }: DropDownProps) => {
-  const theme = useTheme();
+  const { isRTL } = useInterfaceDirection();
 
-  const documentResizeListener = React.useRef<null | (() => void)>(null);
   const dropDownRef = React.useRef<null | HTMLDivElement>(null);
 
   const [state, setState] = React.useState({
@@ -100,17 +99,17 @@ const DropDown = ({
 
     const parentRects = parent.current.getBoundingClientRect();
 
-    const dropDownHeight = dropDownRef.current?.offsetParent
-      ? dropDownRef.current.offsetHeight
-      : DomHelpers.getHiddenElementOuterHeight(dropDownRef.current);
+    const dropDownHeight = dropDown?.offsetParent
+      ? dropDown.offsetHeight
+      : DomHelpers.getHiddenElementOuterHeight(dropDown);
 
-    let bottom = parentRects.bottom;
+    let { bottom } = parentRects;
 
     const viewport = DomHelpers.getViewport();
     const scrollBarWidth =
       viewport.width - document.documentElement.clientWidth;
 
-    const dropDownRects = dropDownRef.current?.getBoundingClientRect();
+    const dropDownRects = dropDown?.getBoundingClientRect();
 
     if (
       directionY === "top" ||
@@ -121,46 +120,56 @@ const DropDown = ({
       if (topSpace && bottom < 0) bottom = topSpace;
     }
 
-    if (dropDown) {
-      if (theme?.interfaceDirection === "ltr") {
-        if (right) {
-          dropDown.style.right = right;
-        } else if (directionX === "right") {
-          dropDown.style.left = `${parentRects.right - dropDown.clientWidth}px`;
-        } else if (
-          dropDownRects &&
-          parentRects.left + dropDownRects.width > viewport.width
-        ) {
-          if (parentRects.right - dropDownRects.width < 0) {
-            dropDown.style.left = "0px";
-          } else {
-            dropDown.style.left = `${
-              parentRects.right - dropDown.clientWidth
-            }px`;
-          }
-        } else {
-          dropDown.style.left = `${parentRects.left + offsetLeft}px`;
-        }
-      } else if (right) {
-        dropDown.style.left = right;
-      } else if (directionX === "right") {
-        dropDown.style.left = `${parentRects.left - scrollBarWidth}px`;
-      } else if (dropDownRects && parentRects.right - dropDownRects.width < 0) {
-        if (parentRects.left + dropDownRects.width > viewport.width) {
-          dropDown.style.left = `${
-            viewport.width - dropDown.clientWidth - scrollBarWidth
-          }px`;
-        } else {
-          dropDown.style.left = `${parentRects.left - scrollBarWidth}px`;
-        }
-      } else {
-        dropDown.style.left = `${
-          parentRects.right - dropDown.clientWidth - offsetLeft - scrollBarWidth
-        }px`;
-      }
+    if (dropDown && dropDownRects) {
+      // directionX logic
+
+      // Check available space around the parent
+      const hasRightSpace =
+        parentRects.left + dropDownRects.width + offsetX < viewport.width;
+      const hasLeftSpace =
+        parentRects.right - dropDownRects.width - offsetX > 0;
+      const hasNoSpace = !hasRightSpace && !hasLeftSpace;
+
+      // Determine if start/end alignment is possible
+      const canAlignStart = isRTL ? hasLeftSpace : hasRightSpace;
+      const canAlignEnd = isRTL ? hasRightSpace : hasLeftSpace;
+
+      // Alignment functions
+      const alignToParentStart = () => {
+        const left = isRTL
+          ? parentRects.right - dropDownRects.width - scrollBarWidth - offsetX
+          : parentRects.left + offsetX;
+
+        dropDown.style.left = `${left}px`;
+      };
+
+      const alignToParentEnd = () => {
+        const left = isRTL
+          ? parentRects.left - scrollBarWidth + offsetX
+          : parentRects.right - dropDownRects.width - offsetX;
+
+        dropDown.style.left = `${left}px`;
+      };
+
+      const alignToViewportStart = () => {
+        const left = isRTL ? viewport.width - dropDownRects.width : 0;
+
+        dropDown.style.left = `${left}px`;
+      };
+
+      // Alignment logic based on direction and space
+      const alignMap: Record<TDirectionX | "hasNoSpace", () => void> = {
+        right: canAlignStart ? alignToParentStart : alignToParentEnd,
+        left: canAlignEnd ? alignToParentEnd : alignToParentStart,
+        hasNoSpace: alignToViewportStart,
+      };
+
+      // Apply alignment
+      const setAlignment = alignMap[hasNoSpace ? "hasNoSpace" : directionX];
+      setAlignment();
     }
     if (dropDownRef.current)
-      dropDownRef.current.style.top = top || `${bottom}px`;
+      dropDownRef.current.style.top = `${bottom + window.scrollY}px`;
 
     setState((s) => ({
       ...s,
@@ -174,10 +183,9 @@ const DropDown = ({
     directionY,
     fixedDirection,
     forwardedRef,
-    offsetLeft,
-    right,
-    theme?.interfaceDirection,
-    top,
+    offsetX,
+    isRTL,
+    topSpace,
   ]);
 
   const checkPosition = React.useCallback(() => {
@@ -190,175 +198,63 @@ const DropDown = ({
       return;
     }
 
-    if (dropDownRef.current) {
-      const isRtl = theme?.interfaceDirection === "rtl";
-      const rects = dropDownRef.current.getBoundingClientRect();
-      const parentRects = forwardedRef?.current?.getBoundingClientRect();
+    const rects = dropDownRef.current.getBoundingClientRect();
+    const parentRects = forwardedRef?.current?.getBoundingClientRect();
 
-      const container = DomHelpers.getViewport();
+    const container = DomHelpers.getViewport();
 
-      const dimensions = parentRects
-        ? {
-            toTopCorner: parentRects.top,
-            parentHeight: parentRects.height,
-            containerHeight: parentRects.top,
-          }
-        : {
-            toTopCorner: rects.top,
-            parentHeight: DEFAULT_PARENT_HEIGHT,
-            containerHeight: container.height,
-          };
+    const dimensions = parentRects
+      ? {
+          toTopCorner: parentRects.top,
+          parentHeight: parentRects.height,
+          containerHeight: parentRects.top,
+        }
+      : {
+          toTopCorner: rects.top,
+          parentHeight: DEFAULT_PARENT_HEIGHT,
+          containerHeight: container.height,
+        };
 
-      let left;
-      let rightVar;
+    let left;
+    let rightVar;
 
-      if (isRtl) {
-        rightVar =
-          rects.right > container.width && rects.width < container.width;
-        left =
-          rects.width &&
-          rects.right > (container.width - rects.width || 250) &&
-          rects.right < container.width - rects.width &&
-          rects.width < container.width;
-      } else {
-        left = rects.left < 0 && rects.width < container.width;
-        rightVar =
-          rects.width &&
-          rects.left < (rects.width || 250) &&
-          rects.left > rects.width &&
-          rects.width < container.width;
-      }
-
-      const topVar =
-        rects.bottom > dimensions.containerHeight &&
-        dimensions.toTopCorner > rects.height;
-      const bottom = rects.top < 0;
-
-      const x = left
-        ? "left"
-        : rightVar || smallSectionWidth
-          ? "right"
-          : state.directionX;
-
-      const y = bottom ? "bottom" : topVar ? "top" : state.directionY;
-
-      const mY = topVar ? `${dimensions.parentHeight}px` : state.manualY;
-
-      setState((s) => ({
-        ...s,
-        directionX: x,
-        directionY: y,
-        manualY: mY,
-        width: dropDownRef.current ? dropDownRef.current.offsetWidth : 240,
-        isDropdownReady: true,
-      }));
+    if (isRTL) {
+      left = rects.left < 0 && rects.width < container.width;
+      rightVar = rects.right > container.width && rects.width < container.width;
+    } else {
+      left = rects.right > container.width && rects.width < container.width;
+      rightVar = rects.left < 0 && rects.width < container.width;
     }
+
+    const topVar =
+      rects.bottom > dimensions.containerHeight &&
+      dimensions.toTopCorner > rects.height;
+    const bottom = rects.top < 0;
+
+    const x = left ? "left" : rightVar ? "right" : state.directionX;
+
+    const y = bottom ? "bottom" : topVar ? "top" : state.directionY;
+
+    const mY = topVar ? `${dimensions.parentHeight}px` : state.manualY;
+
+    setState((s) => ({
+      ...s,
+      directionX: x,
+      directionY: y,
+      manualY: mY,
+      width: dropDownRef.current ? dropDownRef.current.offsetWidth : 240,
+      isDropdownReady: true,
+    }));
   }, [
     fixedDirection,
-    theme?.interfaceDirection,
+    isRTL,
     forwardedRef,
-    smallSectionWidth,
     state.directionX,
     state.directionY,
     state.manualY,
   ]);
 
-  // const handleClickOutside = (e: any) => {
-  //   if (e.type !== "touchstart") {
-  //     e.preventDefault();
-  //   }
-
-  //   toggleDropDown(e);
-  // };
-
-  // const toggleDropDown = (e: any) => {
-  //   clickOutsideAction?.(e, open);
-  // };
-
-  const bindDocumentResizeListener = React.useCallback(() => {
-    if (!documentResizeListener.current) {
-      documentResizeListener.current = () => {
-        if (open) {
-          if (isDefaultMode) {
-            checkPositionPortal();
-          } else {
-            checkPosition();
-          }
-        }
-      };
-
-      window.addEventListener("resize", documentResizeListener.current);
-
-      if (isIOS && isMobile)
-        window.visualViewport?.addEventListener(
-          "resize",
-          documentResizeListener.current,
-        );
-    }
-  }, [checkPosition, checkPositionPortal, isDefaultMode, open]);
-
-  const unbindDocumentResizeListener = React.useCallback(() => {
-    if (documentResizeListener.current) {
-      window.removeEventListener("resize", documentResizeListener.current);
-
-      if (isIOS && isMobile)
-        window.visualViewport?.removeEventListener(
-          "resize",
-          documentResizeListener.current,
-        );
-
-      documentResizeListener.current = null;
-    }
-  }, []);
-
-  const getItemHeight = (item: React.ReactElement) => {
-    const isTabletDevice = isTablet();
-
-    const height = item?.props.height ?? 32;
-    const heightTablet = item?.props.heightTablet ?? 36;
-
-    if (item && item.props.isSeparator) {
-      return isTabletDevice ? 16 : 12;
-    }
-
-    return isTabletDevice ? heightTablet : height;
-  };
-
-  const hideDisabledItems = () => {
-    if (React.Children.count(children) > 0) {
-      const enabledChildren = React.Children.map(children, (child) => {
-        const props =
-          child &&
-          React.isValidElement(child) &&
-          (child.props as { disabled?: boolean });
-        if (props && !props?.disabled) return child;
-      });
-
-      const sizeEnabledChildren = enabledChildren?.length;
-
-      const cleanChildren = React.Children.map(
-        enabledChildren,
-        (child, index) => {
-          const props =
-            child &&
-            React.isValidElement(child) &&
-            (child.props as { isSeparator?: boolean });
-          if (props && !props?.isSeparator) return child;
-          if (
-            index !== 0 &&
-            sizeEnabledChildren &&
-            index !== sizeEnabledChildren - 1
-          )
-            return child;
-        },
-      );
-
-      return cleanChildren;
-    }
-  };
-
   const renderDropDown = () => {
-    // Need to avoid conflict between inline styles from checkPositionPortal and styled-component styles
     const directionXStylesDisabled =
       isDefaultMode && forwardedRef?.current && !fixedDirection;
 
@@ -366,7 +262,7 @@ const DropDown = ({
     let itemCount = children ? React.Children.toArray(children).length : 0;
 
     if (!showDisabledItems) {
-      cleanChildren = hideDisabledItems();
+      cleanChildren = hideDisabledItems(cleanChildren);
       if (cleanChildren)
         itemCount = React.Children.toArray(cleanChildren).length;
     }
@@ -378,11 +274,13 @@ const DropDown = ({
         return getItemHeight(child);
       });
 
-    const getItemSize = (index: number) => rowHeights && rowHeights[index];
+    const getItemSize = (index: number) =>
+      (rowHeights && rowHeights[index]) as number;
     const fullHeight =
-      cleanChildren &&
-      rowHeights &&
-      rowHeights.reduce((a: number, b: number) => a + b, 0);
+      (cleanChildren &&
+        rowHeights &&
+        rowHeights.reduce((a: number, b: number) => a + b, 0)) ||
+      0;
     const calculatedHeight =
       fullHeight > 0 && maxHeight && fullHeight < maxHeight
         ? fullHeight
@@ -392,79 +290,103 @@ const DropDown = ({
       ? { height: `${calculatedHeight}px` }
       : {};
 
+    const dropDownStyles: React.CSSProperties = {
+      ...dropDownMaxHeightProp,
+      ...style,
+      ["--z-index" as string]: zIndex,
+      ["--max-height" as string]: maxHeight && `${maxHeight}px`,
+      ["--manual-width" as string]: manualWidth,
+      ["--manual-x" as string]: manualX,
+      ["--manual-y" as string]: state.manualY,
+    };
+
+    const dropDownClasses = classNames(styles.dropDown, className, {
+      "dropdown-container": true,
+      [styles.directionTop]: state.directionY === "top",
+      [styles.directionBottom]: state.directionY === "bottom",
+      [styles.directionRight]:
+        state.directionX === "right" && !directionXStylesDisabled,
+      [styles.directionLeft]:
+        state.directionX === "left" && !directionXStylesDisabled,
+      [styles.open]: open,
+      [styles.mobileView]: isMobileView,
+      [styles.directionXStylesDisabled]: directionXStylesDisabled,
+      [styles.maxHeight]: maxHeight,
+      [styles.withManualWidth]: manualWidth,
+      [styles.notReady]: !state.isDropdownReady,
+    });
+
     return (
       <>
-        {isDefaultMode && backDrop}
-        {/* {withBackdrop ? ( //TODO: consider a solution when there will be a structure of correct z index for components
-          <Backdrop
-            visible={open || false}
-            zIndex={199} // TODO: zIndex should almost be equal to the dropdown index
-            onClick={toggleDropDown}
-            withoutBlur={!withBlur}
-            isAside={isAside}
-            withBackground={withBackground}
-            withoutBackground={withoutBackground}
-          />
-        ) : null} */}
-        <StyledDropdown
+        {isDefaultMode ? backDrop : null}
+
+        <div
           ref={dropDownRef}
-          style={style}
-          // {...this.props}
-          directionX={state.directionX}
-          directionY={state.directionY}
-          manualY={state.manualY}
-          isMobileView={isMobileView}
-          itemCount={itemCount}
-          {...dropDownMaxHeightProp}
-          directionXStylesDisabled={directionXStylesDisabled}
-          isDropdownReady={state.isDropdownReady}
-          open={open}
-          maxHeight={maxHeight}
-          zIndex={zIndex}
-          manualWidth={manualWidth}
-          className={className}
-          manualX={manualX}
+          style={dropDownStyles}
+          className={dropDownClasses}
+          data-testid={dataTestId ?? "dropdown"}
+          role="listbox"
         >
           <VirtualList
             Row={Row}
-            theme={theme}
             width={state.width}
             itemCount={itemCount}
             maxHeight={maxHeight}
             cleanChildren={cleanChildren}
-            calculatedHeight={calculatedHeight}
-            isNoFixedHeightOptions={isNoFixedHeightOptions || false}
+            calculatedHeight={calculatedHeight || 0}
+            isNoFixedHeightOptions={isNoFixedHeightOptions ?? false}
             getItemSize={getItemSize}
-            isOpen={open || false}
-            enableKeyboardEvents={enableKeyboardEvents || false}
+            isOpen={open ?? false}
+            enableKeyboardEvents={enableKeyboardEvents ?? false}
           >
             {children}
           </VirtualList>
-        </StyledDropdown>
+        </div>
       </>
     );
   };
 
   React.useEffect(() => {
+    const resizeListener = () => {
+      if (isDefaultMode) {
+        checkPositionPortal();
+      } else {
+        checkPosition();
+      }
+    };
+
     if (open) {
       enableOnClickOutside?.();
-      bindDocumentResizeListener();
+
+      window.addEventListener("resize", resizeListener);
+
+      if (isIOS && isMobile)
+        window.visualViewport?.addEventListener("resize", resizeListener);
+
       if (isDefaultMode) {
-        setTimeout(() => checkPositionPortal?.(), 0);
-        return;
-      }
-      checkPosition?.();
+        setTimeout(checkPositionPortal, 0);
+      } else checkPosition();
     } else {
-      // disableOnClickOutside;
+      window.removeEventListener("resize", resizeListener);
+
+      if (isIOS && isMobile)
+        window.visualViewport?.removeEventListener("resize", resizeListener);
     }
+
+    return () => {
+      setState((s) => ({ ...s, isDropdownReady: false }));
+      window.removeEventListener("resize", resizeListener);
+
+      if (isIOS && isMobile)
+        window.visualViewport?.removeEventListener("resize", resizeListener);
+    };
   }, [
     checkPosition,
     checkPositionPortal,
     enableOnClickOutside,
-    // disableOnClickOutside,
+
     isDefaultMode,
     open,
-    bindDocumentResizeListener,
   ]);
 
   React.useEffect(() => {
@@ -474,6 +396,7 @@ const DropDown = ({
       const target = evt.target as HTMLElement;
 
       if (dropDownRef.current && dropDownRef.current.contains(target)) return;
+
       clickOutsideAction?.(evt, !open);
     };
 
@@ -501,13 +424,6 @@ const DropDown = ({
       });
     };
   }, [clickOutsideAction, eventTypes, open]);
-
-  React.useEffect(() => {
-    return () => {
-      // disableOnClickOutside?.();
-      unbindDocumentResizeListener();
-    };
-  }, [disableOnClickOutside, unbindDocumentResizeListener]);
 
   const element = renderDropDown();
 

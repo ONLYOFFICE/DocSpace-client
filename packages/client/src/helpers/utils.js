@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,30 +24,28 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { authStore } from "@docspace/shared/store";
+import { authStore, settingsStore } from "@docspace/shared/store";
 import { toCommunityHostname } from "@docspace/shared/utils/common";
 import { FolderType } from "@docspace/shared/enums";
 import { CategoryType } from "./constants";
 
-// import router from "SRC_DIR/router";
-import i18n from "../i18n";
 import { PEOPLE_ROUTE_WITH_FILTER } from "./contacts";
 
 export const setDocumentTitle = (subTitle = "") => {
   const { isAuthenticated, product: currentModule } = authStore;
-  const organizationName = i18n.t("Common:OrganizationName");
+  const { logoText } = settingsStore;
 
   let title;
   if (subTitle) {
     if (isAuthenticated && currentModule) {
       title = `${subTitle} - ${currentModule.title}`;
     } else {
-      title = `${subTitle} - ${organizationName}`;
+      title = `${subTitle} - ${logoText}`;
     }
-  } else if (currentModule && organizationName) {
-    title = `${currentModule.title} - ${organizationName}`;
+  } else if (currentModule && logoText) {
+    title = `${currentModule.title} - ${logoText}`;
   } else {
-    title = organizationName;
+    title = logoText;
   }
 
   document.title = title;
@@ -108,9 +106,9 @@ export const getCategoryType = (location) => {
     if (pathname.indexOf("personal") > -1) {
       categoryType = CategoryType.Personal;
     } else if (pathname.indexOf("shared") > -1) {
-      const regexp = /(rooms)\/([\d])\/(shared)/;
+      const regexp = /(rooms)\/shared\/([\d])/;
 
-      categoryType = !regexp.test(location)
+      categoryType = !regexp.test(location.pathname)
         ? CategoryType.Shared
         : CategoryType.SharedRoom;
     } else if (pathname.indexOf("share") > -1) {
@@ -136,6 +134,7 @@ export const getCategoryType = (location) => {
 export const getCategoryTypeByFolderType = (folderType, parentId) => {
   switch (folderType) {
     case FolderType.Rooms:
+    case FolderType.RoomTemplates:
       return parentId > 0 ? CategoryType.SharedRoom : CategoryType.Shared;
 
     case FolderType.Archive:

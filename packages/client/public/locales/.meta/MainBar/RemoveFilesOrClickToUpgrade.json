@@ -1,0 +1,375 @@
+{
+  "key_path": "RemoveFilesOrClickToUpgrade",
+  "content": "Remove the unnecessary files or <1>click here</1> to upgrade your tariff plan.",
+  "content_en_sha1_hash": "cdeb38f2a17c458e5fc316eb9262594e8c76ff82",
+  "created_at": "2025-05-19T21:30:54.117Z",
+  "updated_at": "2025-05-24T08:03:43.213Z",
+  "comment": {
+    "text": "This translation key is used for a button or link that prompts users to remove unnecessary files or upgrade their tariff plan. The text will appear on a screen where user quotas are being managed, encouraging users to take action to manage their files or change their plan.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:24.434Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
+      "line_number": 135,
+      "context": "});\n \n return (\n <Trans\n t={t}\n i18nKey=\"RemoveFilesOrClickToUpgrade\"\n components={{\n 1: (\n <Link\n fontSize=\"12px\"\n fontWeight=\"400\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are inconsistent. The English uses <1>click here</1>, suggesting a consistent tag. The Arabic translation follows this format, which is correct but should be documented in translation guidelines for consistency.",
+          "suggestion": "Ensure consistent use of HTML tags or remove tags entirely if not required for display."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are not standard and appear to be incorrectly used to mark the 'click here' portion. They don't correspond to any specific formatting.",
+          "suggestion": "Remove the <1> and </1> tags. The text should be rendered as plain text.  For example: \"... və ya buraya klikləyin.\""
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The `<1>` tag is inconsistently applied. It should be consistent with the English original.",
+          "suggestion": "Ensure the `<1>` tags are applied exactly as in the English version - around 'click here' and 'натиснете тук'."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are preserved in the German translation, matching the English. While technically correct, it's generally preferred to remove these tags and allow the platform to handle the formatting.",
+          "suggestion": "Remove the <1> and </1> tags from the German translation. The platform should handle the hyperlink formatting."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are identical in both the English and Spanish versions. This suggests a potential formatting or templating issue where the tags should be different or dynamically generated.",
+          "suggestion": "Investigate the templating or formatting process that generates these tags. Ensure the tags are correctly rendered and potentially use different tags for the Spanish version if appropriate."
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'tariff plan' is translated as 'tilauksesi'. While 'tilauksesi' can mean subscription, 'tariff plan' implies a pricing structure and may be better translated as 'hinnoittelusuunnitelmasi' or a similar term. 'Tilaus' is generally a subscription service.",
+          "suggestion": "Consider translating 'tariff plan' as 'hinnoittelusuunnitelmasi' or a similar term that conveys the pricing structure aspect."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are inconsistent between the English and French versions.  The English uses <1> and </1>, while the French uses the same.",
+          "suggestion": "Ensure consistency in HTML tags.  Either change the English to use <1> and </1> or the French to use <1> and </1>."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are present in both the English and Armenian versions, indicating a potential formatting issue. These tags seem to be intended to highlight or link the 'click here' element, and their presence needs to be confirmed and ensured consistency with the intended functionality.",
+          "suggestion": "Verify the intended purpose of the <1> and </1> tags and ensure consistent application in both the English and Armenian versions. If these tags are meant to be HTML, they should be rendered correctly in the target environment. If they are just placeholders for highlighting, consider using a different method."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are preserved in the Italian translation. While technically not incorrect, they are unnecessary and disrupt the flow of the text. It's preferable to remove them.",
+          "suggestion": "Remove the <1> and </1> tags. The text should read: 'Rimuovi i file non necessari o clicca qui per effettuare l'upgrade del tuo piano tariffario.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are inconsistent with the English source. The English uses `<1>` and `</1>` while the Japanese uses the same tags.",
+          "suggestion": "Ensure consistency in HTML tag usage. Use `<1>` and `</1>` in the Japanese translation to match the English source."
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tag <1> is inconsistent. The English content uses <1>click here</1> while the Korean translation only has <1>여기를 클릭</1>.  This might disrupt rendering.",
+          "suggestion": "Ensure the HTML tags match exactly, including closing tags. Suggest <1>여기를 클릭</1>."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tag <1> is present in both the English and Lao versions. While not inherently incorrect, it's crucial to verify that the rendering of this tag is consistent across all platforms and devices. It's likely intended for styling or highlighting.",
+          "suggestion": "Ensure the styling/highlighting applied by the <1> tag is consistent with the English version and renders correctly in the Lao locale."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are present in both the English and Latvian translations, which may not be the desired formatting. Consider removing or adjusting these tags depending on the intended display.",
+          "suggestion": "Review and adjust the HTML tags <1> and </1> based on the required formatting in the application or website."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are inconsistent. The English uses <1> and </1>, while the Polish uses <1> and </1>.",
+          "suggestion": "Ensure consistent HTML tag usage. Change </1> to </1>."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are duplicated in both the English and Portuguese versions.  It is unclear what their purpose is, but they appear unnecessary.",
+          "suggestion": "Review and remove or correct the HTML tags <1> and </1> if they serve a specific purpose. If not, remove them entirely."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1>click here</1> are not properly closed in the Portuguese translation. The opening tag uses <1> and the closing tag uses </1>. This is inconsistent with common HTML practices.",
+          "suggestion": "<1>clique aqui</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets <1>click here</1> are not properly translated and formatted. The English uses `<1>click here</1>` and the Romanian uses `<1>apăsați aici</1>`. The original tag structure should be maintained.",
+          "suggestion": "Maintain the original formatting: `<1>apăsați aici</1>`"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The tags <1> and </1> are inconsistent. The English uses `<1>` and `</1>`, while the Russian uses `<1>` and `</1>`.",
+          "suggestion": "Ensure the tag formatting matches the source English: Change `</1>` to `</1>`."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tag `<1>` is inconsistent between the English and Sinhala content. The English content uses `<1>click here</1>`, while the Sinhala uses `<1>මෙතැන ක්ලික් කරන්න</1>`. This suggests a potential mismatch in how the clickable element is being handled.",
+          "suggestion": "Ensure the HTML tags used for the clickable element are consistent and appropriate for the platform and intended display."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'upgrade your tariff plan' is translated as 'aktualizujte svoj tarifný plán'. While 'aktualizovať' can mean upgrade, a more natural Slovak translation would be 'zvýšte svoj tarifný plán' or 'prejdite na vyšší tarifný plán'.",
+          "suggestion": "Prejdite na vyšší tarifný plán."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are inconsistent with the English content. While both contain the tag, the English uses 'click here' directly, while the Slovenian uses HTML markup around the phrase.",
+          "suggestion": "Remove the HTML tags and change '<1>kliknite tukaj</1>' to 'kliknite tukaj'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags `<1>` and `</1>` are inconsistent. The opening tag uses `<1>` and the closing tag uses `</1>`.",
+          "suggestion": "Ensure consistent HTML tag usage.  Consider using `<1>` and `</1>` or replacing with another consistent tagging method, or removing the tags entirely if they aren't necessary."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are not standard and should be replaced with appropriate formatting.  In this case, it's likely intended to be a hyperlink.",
+          "suggestion": "Replace <1>click here</1> with <a href=\"#\">click here</a> or a similar appropriate hyperlink implementation."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> were correctly translated and preserved in the Turkish version, but it's important to confirm if this is the desired behavior. The original English used different tags. Consider whether this should be replicated or if the tags should be removed or replaced.",
+          "suggestion": "Confirm the desired tag format. If the original intention was to preserve the HTML, then the translation is correct. Otherwise, adjust the tags to match the original or remove them."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are inconsistent. The English content uses <1> and </1>, while the Ukrainian translation uses the same tags.",
+          "suggestion": "Ensure consistent HTML tag usage. Either use <1> and </1> or a different consistent tagging system."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tag `<1>` is present in both the English and Vietnamese translations. This likely indicates a placeholder that needs to be addressed by the development team and not part of the translation itself.",
+          "suggestion": "Remove the `<1>` tags from the translated string before implementation. The development team should handle the link functionality."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'tariff plan' is not accurately translated. '费用版本' (feiyong banben) translates to 'version of fees' and doesn't convey the meaning of a tariff plan.",
+          "suggestion": "Consider a more accurate translation for 'tariff plan' like '套餐计划' (taocan jihua) or '费率计划' (feilv jihua)."
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags `<1>` and `</1>` are not standard and may cause display issues. They should be standard HTML tags if that is intended.",
+          "suggestion": "Ensure the tags used for the link are standard HTML, like `<a>` and `</a>` or `<1>` and `</1>`. Review the source context for correct tagging."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

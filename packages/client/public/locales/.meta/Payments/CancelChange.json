@@ -1,0 +1,28 @@
+{
+  "key_path": "CancelChange",
+  "content": "Cancel change",
+  "content_en_sha1_hash": "ee482cca4ea179eb40c0a3f042dd6082445ae2a4",
+  "created_at": "2025-05-29T12:12:54.387Z",
+  "updated_at": "2025-06-03T21:00:56.305Z",
+  "comment": {
+    "text": "The translation key \"CancelChange\" is used to display the text \"Cancel change\" in a cancel button within a storage settings portal. This text is intended to be clicked when a user wants to discard any changes made to their storage plan or settings.",
+    "is_auto": true,
+    "updated_at": "2025-06-03T21:00:56.305Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/StorageSummary.tsx",
+      "line_number": 44,
+      "context": "import StorageWarning from \"./StorageWarning\";\n \n type StorageSummaryProps = {\n amount: number;\n totalPrice: number;\n onCancelChange: () => void;\n isExceedingStorageLimit?: boolean;\n isCurrentStoragePlan?: boolean;\n storageExpiryDate?: string;\n hasScheduledStorageChange?: boolean;\n hasStorageSubscription?: boolean;",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

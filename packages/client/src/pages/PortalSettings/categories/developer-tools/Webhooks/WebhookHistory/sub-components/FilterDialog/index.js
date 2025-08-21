@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,7 +32,7 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import styled from "styled-components";
 
 import { Button } from "@docspace/shared/components/button";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { formatFilters } from "SRC_DIR/helpers/webhooks";
 import DeliveryDatePicker from "./DeliveryDatePicker";
@@ -119,16 +119,11 @@ const FilterDialog = (props) => {
           status: [],
         });
       }
-      isLoaded && navigate(`/portal-settings/developer-tools/webhooks/${id}`);
+      isLoaded && navigate(`/developer-tools/webhooks/${id}`);
     } else {
       setFilters(historyFilters);
       setIsApplied(true);
-      navigate(
-        constructUrl(
-          `/portal-settings/developer-tools/webhooks/${id}`,
-          historyFilters,
-        ),
-      );
+      navigate(constructUrl(`/developer-tools/webhooks/${id}`, historyFilters));
     }
     setIsLoaded(true);
   }, [historyFilters, visible]);
@@ -155,7 +150,7 @@ const FilterDialog = (props) => {
           <StatusPicker filters={filters} setFilters={setFilters} />
         </DialogBodyWrapper>
       </ModalDialog.Body>
-      {!areFiltersChanged && (
+      {!areFiltersChanged ? (
         <ModalDialog.Footer>
           <Footer>
             <Button
@@ -165,16 +160,18 @@ const FilterDialog = (props) => {
               primary
               onClick={handleApplyFilters}
               isDisabled={filters.deliveryTo <= filters.deliveryFrom}
+              testId="apply_filter_button"
             />
             <Button
               className="cancel-button"
               label={t("Common:CancelButton")}
               size="normal"
               onClick={closeModal}
+              testId="cancel_filter_button"
             />
           </Footer>
         </ModalDialog.Footer>
-      )}
+      ) : null}
     </ModalDialog>
   );
 };

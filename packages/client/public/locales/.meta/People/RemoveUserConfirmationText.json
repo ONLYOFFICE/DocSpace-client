@@ -1,0 +1,433 @@
+{
+  "key_path": "RemoveUserConfirmationText",
+  "content": "You are about to remove a user from the room. Please note that this user is actively participating in form completion. If you proceed, any forms they are involved in will be halted at their step.",
+  "content_en_sha1_hash": "04db0ec5cc3cc59fd4ba3bde67bf871fb252d45c",
+  "created_at": "2025-05-19T21:30:53.554Z",
+  "updated_at": "2025-08-12T19:46:25.935Z",
+  "comment": {
+    "text": "This translation key is used to display a confirmation message when removing a user from a room, warning that any ongoing form completion will be halted. The text appears in a dialog box and is translated as \"People:RemoveUserConfirmationText\".",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:30.490Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/RemoveUserConfirmationDialog/index.tsx",
+      "line_number": 83,
+      "context": "visible={removeUserConfirmation.visible}\n onClose={onClose}\n >\n <ModalDialog.Header>{t(\"People:RemoveUser\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{t(\"People:RemoveUserConfirmationText\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"delete-file-modal_submit\"\n key=\"OKButton\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"You are about to remove a user from the room\" is not perfectly conveyed. \"أنتم على وشك إزالة مستخدم من الغرفة\" translates more literally to 'You are about to remove a user from the room,' which is accurate, but lacks some of the urgency and directness of the English. A more impactful translation might consider something like 'You are about to delete a user...'",
+          "suggestion": "أنتم على وشك حذف مستخدم من الغرفة."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"actively participating in form completion\" is translated as \"يشارك حاليًا في ملء نموذج\". While accurate, it’s a bit verbose. A more concise and natural sounding translation could be used.",
+          "suggestion": "يشارك حاليًا في تعبئة نموذج"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"halted at their step\" is translated as \"سيتم إيقاف النموذج عند الخطوة التي وصل إليها هذا المستخدم\". This is a long and somewhat convoluted way of saying it. It's technically correct but not ideal.",
+          "suggestion": "سيتم إيقاف النموذج عند آخر خطوة قام بها المستخدم"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'actively participating in form completion' is not perfectly translated. 'Formanın doldurulmasında fəal iştirak edir' is a bit literal and could be improved for better flow. A more natural phrasing might be 'forma doldurma prosesində fəal iştirak edir' or 'forma doldurma işinə fəal cəhd edir'.",
+          "suggestion": "forma doldurma prosesində fəal iştirak edir"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'halted at their step' translates to 'onların addımında dayandırılacaq'. While technically correct, 'addımında' can be ambiguous. A clearer phrasing could express that forms will be paused *at the user’s current stage*.",
+          "suggestion": "onların hazırkı mərhələsində dayandırılacaq"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'form completion' is translated as 'попълването на формуляра'. While technically correct, 'попълването на формуляри' (plural) would be more aligned with the English phrasing, implying multiple forms, as stated later in the sentence.",
+          "suggestion": "На път сте да премахнете потребител от стаята. Моля, имайте предвид, че този потребител участва активно в попълването на формуляри. Ако продължите, всички формуляри, в които участва, ще бъдат спрени на неговата стъпка."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'actively participating in form completion' is not perfectly captured by 'aktivně účastní vyplňování formuláře'. A more natural translation might be 'aktivně vyplňuje formuláře' or 'aktivně zapojen do vyplňování formulářů'.",
+          "suggestion": "aktivně vyplňuje formuláře"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'halted at their step' is not ideally translated as 'v jeho kroku zastaveny'. It implies that the forms are stopped at *their* step, not necessarily stopped by their actions.",
+          "suggestion": "zastaveny na jeho kroku"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"an diesem Schritt angehalten\" could be misinterpreted. It literally translates to 'halted at this step', which isn't the intended meaning. The user’s progress should be *stopped*, not just halted at a specific step.",
+          "suggestion": "Sie sind dabei, einen Nutzer aus dem Raum zu entfernen. Bitte beachten Sie, dass dieser Nutzer aktiv am Ausfüllen des Formulars beteiligt ist. Wenn Sie fortfahren, werden alle Formulare, an denen er beteiligt ist, angehalten."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"actively participating in form completion\" is not accurately reflected. A more natural Greek translation would convey a sense of ongoing involvement, not just participation.",
+          "suggestion": "Είναι σημαντικό να γνωρίζετε ότι ο χρήστης αυτός συμπληρώνει ενεργά μια φόρμα."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"will be halted at their step\" is a bit awkward and doesn't fully convey the meaning. It implies the user is literally at a step, which is not the intended meaning.",
+          "suggestion": "θα σταματήσουν στην τρέχουσα φάση τους."
+        },
+        {
+          "type": "formatting",
+          "description": "There's a missing article before 'τρέχουσα φάση'.",
+          "suggestion": "θα σταματήσουν στην τρέχουσα τους φάση."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The use of 'Está a punto de' can sound slightly awkward in some contexts. While grammatically correct, 'Va a eliminar' might be a more natural phrasing.",
+          "suggestion": "Va a eliminar a un usuario de la sala."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'a su paso' is an unusual and potentially confusing way to translate 'at their step.' It doesn't convey the intended meaning of halting the form at the user's current progress.",
+          "suggestion": "en los que participe se detendrán en su etapa."
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"tous les formulaires auxquels il participe\" could be more naturally translated as \"tous les formulaires dans lesquels il est impliqué\" or \"tous les formulaires auxquels il contribue\".  'Participer à' is not incorrect, but the suggested phrasing flows better in French.",
+          "suggestion": "tous les formulaires dans lesquels il est impliqué"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"շարունակեք\" (sharanakeq) which translates to 'proceed' sounds a bit abrupt and formal in this context. A more natural phrasing might be 'եթե համաձայն եք շարունակել' (eteq hamadzyan eq sharanakel) or simply 'եթե շարունակեք' but softening the tone.",
+          "suggestion": "եթե համաձայն եք շարունակել"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"նրանց կողմից մշակվող բոլոր ձևաթղթերը\" (nranqs koghmits mshakvog bolor dvatightere) could be simplified and made more clear. It literally translates to 'all forms developed by them'. A more direct and understandable translation would be 'ցանկացած ձևաթուղթ, որոնց մասնակցությամբ լրացվում է' (tsankac dzvatighter, oronk masnakcutyamb lracvac e).",
+          "suggestion": "ցանկացած ձևաթուղթ, որոնց մասնակցությամբ լրացվում է"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'form completion' is translated as 'compilazione'. While technically correct, it's a bit formal and doesn't quite capture the intended meaning of the user actively working on a form. A more natural phrasing would be 'compilazione del modulo'.",
+          "suggestion": "Stai per rimuovere un utente dalla stanza. Tieni presente che l’utente sta attivamente compilando il modulo. Se procedi, la compilazione verrà interrotta alla fase attuale."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'halted at their step' is too literal and lacks clarity. It doesn't convey that the user's progress is lost or that they will be unable to complete the form.",
+          "suggestion": "Stai per rimuovere un utente dalla stanza. Tieni presente che l’utente sta attivamente compilando il modulo. Se procedi, la compilazione verrà interrotta alla fase attuale, e l’utente non potrà completarla."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"進めると、ユーザーが関与しているフォームは、そのユーザーの番で停止します\" is a literal translation that doesn't convey the intended meaning as clearly as it could. It could be misinterpreted to mean only the user's turn is stopped, not the entire form.",
+          "suggestion": "進めると、ユーザーが関与しているフォームは、そのステップで中断されます。(Susumemasu to, yūzaa ga kan'yō shite iru fōmu wa, sono suteppu de chūdan saremasu.) - This translates to: 'If you proceed, any forms the user is involved in will be halted at their step.'"
+        },
+        {
+          "type": "formatting",
+          "description": "While not technically incorrect, the Japanese translation uses a slightly formal tone which may not be optimal for a user-facing confirmation message. Considering the context, a more conversational tone may be more appropriate.",
+          "suggestion": "Consider rephrasing to use a slightly more casual phrasing to improve user understanding and reduce formality. For example: \"ユーザーをルームから削除しようとしています。このユーザーはフォームの記入に参加しているので、注意してください。進めると、ユーザーが記入中のフォームは、そのユーザーのステップで中断されます。」(Yūzaa o rūmu kara sakujo shiyō to shite imasu. Kono yūzaa wa fōmu no kijutsu ni sanka shite iru node, chūi shite kudasai. Susumemasu to, yūzaa ga kijutsu-chū no fōmu wa, sono yūzaa no suteppu de chūdan saremasu.)"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'actively participating in form completion' is translated as '양식 작성에 적극적으로 참여하고 있음을'. While technically correct, a more natural and idiomatic translation would be something like '폼 작성 중' or '폼 작성 활동을 하고 있습니다' to convey the same meaning in a less literal way. The current translation sounds slightly stiff.",
+          "suggestion": "룸에서 사용자를 제거하려고 합니다. 이 사용자는 폼 작성 중임을 참고하시기 바랍니다. 계속 진행하면 해당 사용자가 참여한 모든 양식이 해당 단계에서 중지됩니다."
+        },
+        {
+          "type": "formatting",
+          "description": "The original text has a slight pause after 'Please note'. The Korean translation doesn't reflect this with punctuation. A comma or ellipsis could improve readability.",
+          "suggestion": "룸에서 사용자를 제거하려고 합니다. 이 사용자는 양식 작성에 적극적으로 참여하고 있음을, 참고하시기 바랍니다. 계속 진행하면 해당 사용자가 참여한 모든 양식이 해당 단계에서 중지됩니다."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ຫ້ອງສົນທະນາ\" (hong sonthatana) translates to 'chatroom' or 'discussion room' and doesn't quite capture the nuance of 'room' in this context. A better translation might be something like 'ກຸ່ມ' (kum) which means 'group'.",
+          "suggestion": "ທ່ານກຳລັງຈະລົບຜູ້ໃຊ້ຫນຶ່ງອອກຈາກກຸ່ມ."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ເຂົາເຈົ້າກ່ຽນຂ້ອງ\" (khao jao kian khong) translates to 'they are involved' but sounds a bit formal and unnatural in Lao. A more natural phrasing would be something along the lines of 'ທີ່ເຂົາເຈົ້າເຮັດຢູ່' (thi khao jao het u).",
+          "suggestion": "ແບບຟອມໃດໆທີ່ເຂົາເຈົ້າເຮັດຢູ່ຈະຖືກຢຸດຊະນະໄວ້ທີ່ຂັ້ນຕອນຂອງເຂົາເຈົ້າ."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure could be improved for better flow. While technically correct, it reads a little clunky.",
+          "suggestion": "ທ່ານກຳລັງຈະລົບຜູ້ໃຊ້ຫນຶ່ງອອກຈາກກຸ່ມ ຂໍ້ຄວນສັງເກດວ່າຜູ້ໃຊ້ນີ້ກຳລັງຮ່ວມມືຢ່າງຕັ້ງໜ້າໃນການປະກອບແບບຟອມ ຖ້າທ່ານດຳເນີນການຕໍ່ໄປ ແບບຟອມທີ່ເຂົາເຈົ້າກຳລັງເຮັດຢູ່ຈະຖືກຢຸດໄວ້ໃນຂັ້ນຕອນຂອງເຂົາເຈົ້າ."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'formulas' (formulas) is used to translate 'forms'. Forms is the correct term in this context.",
+          "suggestion": "Jūs gatavojaties izdzēst lietotāju no istabas. Lūdzu, ņemiet vērā, ka šis lietotājs aktīvi piedalās veidlapju aizpildīšanā. Ja turpināt, visas veidlapas, kurās viņš iesaistīts, tiks apturētas pie viņa soļa."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'room' is translated as 'pokoju'. While technically correct, in this context 'room' likely refers to a workspace or platform feature, not a physical room. A more accurate translation might be 'przestrzeni' or 'systemu'.",
+          "suggestion": "Zamierzasz usunąć użytkownika z przestrzeni. "
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'If you proceed' is translated as 'Jeśli przejdziesz dalej'. While understandable, it lacks the formality of a confirmation message.  'Jeśli potwierdzisz' would be more suitable.",
+          "suggestion": "Jeśli potwierdzisz"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'involved in' is translated as 'nad którymi pracował'.  While technically correct, 'zaangażowany w' is a better fit for the context of 'involved in' forms.",
+          "suggestion": "Zamierzasz usunąć użytkownika z przestrzeni. Jeśli potwierdzisz, wszystkie formularze, w które jest zaangażowany, zostaną zatrzymane na ich aktualnym etapie."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"demonstrează o implicire activă\" (demonstrates an active involvement) is not the most natural or accurate translation of \"actively participating.\" A more fluent translation would convey active participation more directly.",
+          "suggestion": "participă activ"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"în care acest utilizator este implicit\" is awkward and doesn't accurately translate \"they are involved in.\" It sounds like the user is 'implicitly involved', which isn't what's meant.",
+          "suggestion": "în care este implicat"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "“completarea tuturor formularelor...se va opri” is a bit clunky. A smoother phrasing would improve readability.",
+          "suggestion": "completarea formularelor se va întrerupe"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'actively participating in form completion' is not accurately translated. 'ආකරය සම්පූර්ණ කිරීමේ ක්‍රියාවලියේ යෙදී සිටී' is a bit awkward. A more natural translation would capture the sense of 'actively working on forms'.",
+          "suggestion": "ඔබ කාමරයෙන් පරිශීලකයෙකු ඉවත් කිරීමට සුදානමින් සිටී. කරුණාකර සලකන්න, මෙම පරිශීලකයා දැන්ම ආකරය සම්පූර්ණ කරන අතරතුර සිටී."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'If you proceed, any forms they are involved in will be halted at their step' could be improved. 'ඔවුන් සම්බන්ධිත ඕනෑම ආකරයක් ඔවුන්ගේ පියවරේදී නතර වනු ඇත' sounds a bit formal and could be clearer.",
+          "suggestion": "ඔබ ඉදිරියට ගියහොත්, ඔවුන් කරන ඕනෑම ආකරය ඔවුන්ගේ වැඩ කරන ස්ථානයේදී නතර වනු ඇත."
+        },
+        {
+          "type": "formatting",
+          "description": "While not a critical error, consistency in terminology ('ආකරය' vs. 'ඕනෑම ආකරයක්') could be improved.",
+          "suggestion": "Maintain consistent use of 'ආකරය' throughout the translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'actively participating' is better translated as 'активно учествује' rather than just 'учествује'. While 'учествује' is correct, 'активно учествује' better conveys the level of participation.",
+          "suggestion": "Спремате се да уклоните корисника из собе. Имајте на уму да овај корисник тренутно активно учествује у попуњавању формулара. Ако наставите, сви формулари у којима учествује биће заустављени на његовом кораку."
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct, the sentence structure could be slightly improved for readability. Consider rephrasing to flow more naturally.",
+          "suggestion": "Спремате се да уклоните корисника из собе. Имајте на уму да овај корисник тренутно активно попуњава формулар. Ако наставите, попуњавање формулара у којима учествује биће заустављено на његовом кораку."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"na njegovom koraku\" is awkward and doesn't accurately convey \"at their step.\" It implies a literal step, rather than the stage of the form they were working on.",
+          "suggestion": "na njegovom/njenom mestu (or potentially \"na mestu gde je zaustavio formular\")"
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'Ako nastavite' could be improved to be more polite.",
+          "suggestion": "Ukoliko nastavite"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Bu kullanıcının yer aldığı formlar onun sorumlu olduğu adımda durdurulacaktır\" is not the best translation of \"If you proceed, any forms they are involved in will be halted at their step.\" A more accurate translation would convey that the forms will be paused at the user's current progress, not necessarily where they are 'responsible'.",
+          "suggestion": "Devam ederseniz, bu kullanıcının yer aldığı formlar, o kullanıcının mevcut aşamasında durdurulacaktır."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

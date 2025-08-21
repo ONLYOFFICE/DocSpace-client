@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -43,6 +43,10 @@ class ContactsHotkeysStore {
   hotkeyCaret: AccountsType | null = null;
 
   hotkeyCaretStart: AccountsType | null = null;
+
+  selectionAreaIsEnabled: boolean = true;
+
+  withContentSelection: boolean = false;
 
   elemOffset: number = 0;
 
@@ -321,6 +325,24 @@ class ContactsHotkeysStore {
     }
 
     if (!this.hotkeyCaret || isDefaultKeys) return e;
+  };
+
+  setSelectionAreaIsEnabled = (selectionAreaIsEnabled: boolean) => {
+    this.selectionAreaIsEnabled = selectionAreaIsEnabled;
+  };
+
+  setWithContentSelection = (withContentSelection: boolean) => {
+    this.withContentSelection = withContentSelection;
+  };
+
+  enableSelection = (e: KeyboardEvent) => {
+    if (e.type === "keydown" && this.selectionAreaIsEnabled) {
+      this.setSelectionAreaIsEnabled(false);
+      this.setWithContentSelection(true);
+    } else if (e.type === "keyup") {
+      this.setSelectionAreaIsEnabled(true);
+    }
+    e.preventDefault();
   };
 }
 

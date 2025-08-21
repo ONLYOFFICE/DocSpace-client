@@ -1,0 +1,116 @@
+@use "../../styles/mixins";
+
+.body {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 640px;
+
+  & > * {
+    margin-bottom: 0;
+  }
+
+  &.withSubheading {
+    & > * {
+      margin-bottom: 0;
+    }
+  }
+
+  &.withDescription {
+    & > * {
+      margin-bottom: 0;
+    }
+  }
+
+  &.withoutFilter {
+    padding-top: 91px;
+  }
+
+  &:not(.withoutFilter) {
+    padding-top: 52px;
+  }
+
+  .image {
+    height: 100px;
+    width: 100px;
+    margin-bottom: 32px;
+    @include mixins.no-user-select;
+    background: no-repeat 0 0 transparent;
+  }
+
+  .header {
+    font-size: 16px;
+    color: var(--empty-content-header-color);
+    text-align: center;
+  }
+
+  .subheading {
+  }
+
+  .description {
+    line-height: 18px;
+    margin-top: 8px;
+    color: var(--empty-content-description-color);
+    text-align: center;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-top: 24px;
+
+    svg {
+      path {
+        fill: var(--empty-content-button-color-link);
+      }
+    }
+
+    a {
+      color: var(--empty-content-button-color-link);
+    }
+    span {
+      color: var(--empty-content-button-color-text);
+    }
+  }
+
+  @include mixins.transitional-screen-size {
+    width: fit-content;
+    max-width: 640px;
+  }
+
+  @include mixins.tablet {
+    &.withoutFilter {
+      padding-top: 109px;
+    }
+
+    &:not(.withoutFilter) {
+      padding-top: 71px;
+    }
+    max-width: 480px;
+  }
+
+  @include mixins.mobile {
+    &.withoutFilter {
+      padding-top: 69px;
+    }
+
+    &:not(.withoutFilter) {
+      padding-top: 31px;
+    }
+    max-width: 343px;
+    padding-inline: 28px;
+    width: fit-content;
+
+    .image {
+      height: 75px;
+      width: 75px;
+    }
+
+    .buttons {
+      max-width: 274px;
+    }
+  }
+}

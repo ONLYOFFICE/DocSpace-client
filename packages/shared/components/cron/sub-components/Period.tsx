@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,7 +32,7 @@ import { getLabel, getOptions } from "../Cron.utils";
 import type { PeriodProps, PeriodType } from "../Cron.types";
 
 export const Period = memo(
-  ({ period = "Hour", setPeriod, t, isDisabled }: PeriodProps) => {
+  ({ period = "Hour", setPeriod, t, isDisabled, dataTestId }: PeriodProps) => {
     const onSelect = (arg: TOption) => {
       setPeriod(arg.key as PeriodType);
     };
@@ -54,6 +54,8 @@ export const Period = memo(
         size={ComboBoxSize.content}
         selectedOption={selectedOption}
         isDisabled={isDisabled}
+        dataTestId={dataTestId}
+        dropDownTestId={dataTestId ? `${dataTestId}_dropdown` : undefined}
       />
     );
   },

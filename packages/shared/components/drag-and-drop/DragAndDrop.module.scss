@@ -1,0 +1,35 @@
+@use "../../styles/variables/colors";
+
+@use "../../styles/mixins";
+
+.dragAndDrop {
+  height: var(--drag-and-drop-height);
+  border: var(--drag-and-drop-border);
+  margin-inline-start: -2px;
+  position: relative;
+  outline: none;
+
+  @include mixins.tablet {
+    margin-inline-start: 0;
+  }
+
+  &.dragging {
+    background: var(--drag-and-drop-bg);
+
+    &.dragAccept {
+      background: var(--drag-and-drop-accept-bg);
+    }
+  }
+
+  &.dragDisabled {
+    opacity: 0.4;
+  }
+
+  &:not(.dragging):not(.dragDisabled) {
+    background: none !important;
+  }
+}
+
+.droppableHover {
+  background: var(--drag-and-drop-accept-bg);
+}

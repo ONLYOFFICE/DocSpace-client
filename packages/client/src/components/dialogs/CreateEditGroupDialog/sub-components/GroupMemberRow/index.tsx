@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -38,7 +38,6 @@ import {
   getUserTypeTranslation,
 } from "@docspace/shared/utils/common";
 import { TUser } from "@docspace/shared/api/people/types";
-import { Box } from "@docspace/shared/components/box";
 import { EmployeeStatus, EmployeeType } from "@docspace/shared/enums";
 
 import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
@@ -49,9 +48,14 @@ import * as Styled from "./index.styled";
 interface GroupMemberRowProps {
   groupMember: TUser;
   removeMember: (member: TUser) => void;
+  dataTestId?: string;
 }
 
-const GroupMemberRow = ({ groupMember, removeMember }: GroupMemberRowProps) => {
+const GroupMemberRow = ({
+  groupMember,
+  removeMember,
+  dataTestId,
+}: GroupMemberRowProps) => {
   const { t } = useTranslation(["Common"]);
 
   const type = getUserType(groupMember);
@@ -77,29 +81,26 @@ const GroupMemberRow = ({ groupMember, removeMember }: GroupMemberRowProps) => {
   };
 
   return (
-    <Styled.GroupMemberRow>
+    <Styled.GroupMemberRow data-testid={dataTestId ?? "group_member_row"}>
       <Avatar
         className="avatar"
         size={AvatarSize.min}
         role={avatarRole}
         source={groupMember.avatarSmall ?? groupMember.avatar}
+        dataTestId="create_edit_group_member_row_avatar"
       />
-      <div className="info">
-        <Box
-          displayProp="flex"
-          alignItems="center"
-          gapProp="8px"
-          widthProp="100%"
-        >
+      <div className="info" data-testid="create_edit_group_member_row_info">
+        <div className="info-box">
           <div className="name">{groupMember.displayName}</div>
-          {groupMember.status === EmployeeStatus.Pending && (
+          {groupMember.status === EmployeeStatus.Pending ? (
             <StyledSendClockIcon />
-          )}
-        </Box>
+          ) : null}
+        </div>
         <div className="email">{`${getUserTypeTranslation(type, t)} | ${groupMember.email}`}</div>
       </div>
       <ReactSVG
         className="remove-icon"
+        data-testid="remove_group_member"
         src={RemoveReactSvgUrl}
         onClick={onRemove}
       />

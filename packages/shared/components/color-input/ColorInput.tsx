@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,14 +26,15 @@
 
 import { useState } from "react";
 import { HexColorInput } from "react-colorful";
+import classNames from "classnames";
 
-import { Wrapper, InputWrapper, ColorBlock } from "./ColorInput.styled";
 import { DropDownItem } from "../drop-down-item";
 import { DropDown } from "../drop-down";
 
 import { ColorInputProps } from "./ColorInput.types";
 import { ColorPicker } from "../color-picker";
 import { globalColors } from "../../themes";
+import styles from "./ColorInput.module.scss";
 
 const ColorInput = ({
   className,
@@ -45,6 +46,7 @@ const ColorInput = ({
   isDisabled,
   hasError,
   hasWarning,
+  dataTestId,
 }: ColorInputProps) => {
   const [color, setColor] = useState(
     defaultColor || globalColors.lightBlueMain,
@@ -58,47 +60,60 @@ const ColorInput = ({
     handleChange?.(value);
     setColor(value);
   };
+
+  const colorBlockStyles = {
+    "--block-color": color,
+  } as React.CSSProperties;
+
   return (
-    <Wrapper
-      className={className}
+    <div
+      data-testid={dataTestId ?? "color-input"}
+      className={classNames(styles.wrapper, className)}
       id={id}
-      size={size}
-      scale={scale}
-      isDisabled={isDisabled}
-      hasError={hasError}
-      hasWarning={hasWarning}
     >
-      <InputWrapper scale={scale}>
+      <div
+        className={classNames(styles.inputWrapper, { [styles.scale]: scale })}
+      >
         <HexColorInput
-          className="hex-value"
+          className={styles.hexValue}
           prefixed
           color={color.toUpperCase()}
           onChange={onChange}
+          data-size={size}
+          data-error={hasError ? "true" : undefined}
+          data-warning={hasWarning ? "true" : undefined}
+          data-scale={scale ? "true" : undefined}
+          data-disabled={isDisabled ? "true" : undefined}
+          disabled={isDisabled}
         />
-        <ColorBlock
-          color={color}
+        <span
+          className={classNames(styles.colorBlock, {
+            [styles.disabled]: isDisabled,
+          })}
+          style={colorBlockStyles}
           onClick={togglePicker}
-          isDisabled={isDisabled}
         />
-      </InputWrapper>
+      </div>
 
       <DropDown
-        directionX="left"
         manualY="48px"
         withBackdrop
         isDefaultMode={false}
         open={isPickerOpen}
         clickOutsideAction={closePicker}
       >
-        <DropDownItem className="drop-down-item-hex">
+        <DropDownItem
+          className={classNames(styles.dropDownItemHex, "drop-down-item-hex")}
+        >
           <ColorPicker
             appliedColor={color}
             handleChange={onChange}
             isPickerOnly
+            onClose={closePicker}
           />
         </DropDownItem>
       </DropDown>
-    </Wrapper>
+    </div>
   );
 };
 

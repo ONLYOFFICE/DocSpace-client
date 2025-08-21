@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,14 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import moment from "moment-timezone";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
-import { RowContent } from "@docspace/shared/components/row-content";
+import { RowContent } from "@docspace/shared/components/rows";
 
-import { useTranslation } from "react-i18next";
 import { globalColors } from "@docspace/shared/themes";
+import { getCorrectDate } from "@docspace/shared/utils";
+
 import StatusBadge from "../../../../sub-components/StatusBadge";
 
 const StyledRowContent = styled(RowContent)`
@@ -56,12 +57,10 @@ const StatusHeader = styled.div`
 `;
 
 export const HistoryRowContent = ({ sectionWidth, historyItem }) => {
-  const { t, i18n } = useTranslation("Webhooks");
+  const { i18n } = useTranslation("Webhooks");
 
-  const formattedDelivery = `${moment(historyItem.delivery)
-    .tz(window.timezone)
-    .locale(i18n.language)
-    .format("MMM D, YYYY, h:mm:ss A")} ${t("Common:UTC")}`;
+  const formattedDelivery = getCorrectDate(i18n.language, historyItem.delivery);
+
   return (
     <StyledRowContent sectionWidth={sectionWidth}>
       <ContentWrapper>

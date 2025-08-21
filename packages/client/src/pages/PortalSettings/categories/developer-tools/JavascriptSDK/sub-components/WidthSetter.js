@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -70,6 +70,7 @@ export const WidthSetter = (props) => {
           placeholder={t("EnterWidth")}
           value={width}
           tabIndex={2}
+          testId="width_dimension_input"
         />
         <ComboBox
           size="content"
@@ -80,6 +81,8 @@ export const WidthSetter = (props) => {
           selectedOption={widthDimension}
           displaySelectedOption
           directionY="bottom"
+          dataTestId="width_dimension_combobox"
+          dropDownTestId="width_dimension_dropdown"
         />
       </RowContainer>
     </ControlsGroup>

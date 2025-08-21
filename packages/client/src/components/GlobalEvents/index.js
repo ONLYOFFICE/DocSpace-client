@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,6 +32,8 @@ import { FileAction, Events } from "@docspace/shared/enums";
 import { getStartRoomParams } from "@docspace/shared/utils/rooms";
 import { toastr } from "@docspace/shared/components/toast";
 
+import { getFormFillingTipsStorageName } from "@docspace/shared/utils";
+
 import CreateEvent from "./CreateEvent";
 import RenameEvent from "./RenameEvent";
 import CreateRoomEvent from "./CreateRoomEvent";
@@ -41,6 +43,7 @@ import EditGroupEvent from "./GroupEvents/EditGroupEvent";
 import ChangeUserTypeEvent from "./ChangeUserTypeEvent";
 import CreatePluginFile from "./CreatePluginFileEvent";
 import ChangeQuotaEvent from "./ChangeQuotaEvent";
+import SaveAsTemplateEvent from "./SaveAsTemplateEvent";
 import { CreatedPDFFormDialog } from "../dialogs/CreatedPDFFormDialog";
 
 const GlobalEvents = ({
@@ -51,6 +54,10 @@ const GlobalEvents = ({
   createRoomDialogProps,
   setCreateRoomDialogProps,
   setCover,
+
+  setCreatePDFFormFile,
+  createPDFFormFileProps,
+  userId,
 }) => {
   const [createDialogProps, setCreateDialogProps] = useState({
     visible: false,
@@ -96,11 +103,9 @@ const GlobalEvents = ({
     props: null,
     onClose: null,
   });
-
-  const [createPDFFormFile, setCreatePDFFormFile] = useState({
+  const [saveAsTemplateDialog, setSaveAsTemplateDialog] = useState({
     visible: false,
-    file: null,
-    localKey: "",
+    props: null,
     onClose: null,
   });
 
@@ -168,6 +173,7 @@ const GlobalEvents = ({
     );
     setCreateRoomDialogProps({
       ...startRoomParams,
+      item: e.item,
       visible: true,
       onClose: () =>
         setCreateRoomDialogProps({
@@ -268,8 +274,12 @@ const GlobalEvents = ({
         );
       }
 
+      const closedFormFillingTips = localStorage.getItem(
+        getFormFillingTipsStorageName(userId),
+      );
+
       setCreatePDFFormFile({
-        visible: true,
+        visible: closedFormFillingTips,
         file,
         localKey,
         onClose: () => {
@@ -311,6 +321,22 @@ const GlobalEvents = ({
     });
   }, []);
 
+  const onSaveAsTemplate = (e) => {
+    const visible = !!e.item;
+
+    setSaveAsTemplateDialog({
+      visible,
+      item: e.item,
+      onClose: () => {
+        setCover();
+        setSaveAsTemplateDialog({
+          visible: false,
+          item: null,
+        });
+      },
+    });
+  };
+
   useEffect(() => {
     window.addEventListener(
       Events.CREATE_PDF_FORM_FILE,
@@ -334,6 +360,7 @@ const GlobalEvents = ({
     window.addEventListener(Events.GROUP_CREATE, onCreateGroup);
     window.addEventListener(Events.GROUP_EDIT, onEditGroup);
     window.addEventListener(Events.CHANGE_QUOTA, onChangeQuota);
+    window.addEventListener(Events.SAVE_AS_TEMPLATE, onSaveAsTemplate);
     if (enablePlugins) {
       window.addEventListener(
         Events.CREATE_PLUGIN_FILE,
@@ -361,6 +388,7 @@ const GlobalEvents = ({
       window.removeEventListener(Events.CHANGE_USER_TYPE, onChangeUserType);
       window.removeEventListener(Events.GROUP_CREATE, onCreateGroup);
       window.removeEventListener(Events.GROUP_EDIT, onEditGroup);
+      window.addEventListener(Events.SAVE_AS_TEMPLATE, onSaveAsTemplate);
 
       if (enablePlugins) {
         window.removeEventListener(
@@ -421,38 +449,51 @@ const GlobalEvents = ({
         {...createPluginFileDialog}
       />
     ),
+    saveAsTemplateDialog.visible && (
+      <SaveAsTemplateEvent
+        key={Events.SAVE_AS_TEMPLATE}
+        {...saveAsTemplateDialog}
+      />
+    ),
     changeQuotaDialog.visible && (
       <ChangeQuotaEvent key={Events.CHANGE_QUOTA} {...changeQuotaDialog} />
     ),
-    createPDFFormFile.visible && !createDialogProps.visible && (
+    createPDFFormFileProps.visible && !createDialogProps.visible ? (
       <CreatedPDFFormDialog
         key="created-pdf-form-dialog"
-        {...createPDFFormFile}
+        {...createPDFFormFileProps}
       />
-    ),
+    ) : null,
   ];
 };
 
-export default inject(({ settingsStore, pluginStore, dialogsStore }) => {
-  const { enablePlugins } = settingsStore;
+export default inject(
+  ({ settingsStore, pluginStore, dialogsStore, userStore }) => {
+    const { enablePlugins } = settingsStore;
 
-  const {
-    editRoomDialogProps,
-    setEditRoomDialogProps,
-    createRoomDialogProps,
-    setCreateRoomDialogProps,
-    setCover,
-  } = dialogsStore;
+    const {
+      editRoomDialogProps,
+      setEditRoomDialogProps,
+      createRoomDialogProps,
+      setCreateRoomDialogProps,
+      setCover,
+      setCreatePDFFormFile,
+      createPDFFormFileProps,
+    } = dialogsStore;
 
-  const { eventListenerItemsList } = pluginStore;
+    const { eventListenerItemsList } = pluginStore;
 
-  return {
-    enablePlugins,
-    eventListenerItemsList,
-    editRoomDialogProps,
-    setEditRoomDialogProps,
-    createRoomDialogProps,
-    setCreateRoomDialogProps,
-    setCover,
-  };
-})(observer(GlobalEvents));
+    return {
+      enablePlugins,
+      eventListenerItemsList,
+      editRoomDialogProps,
+      setEditRoomDialogProps,
+      createRoomDialogProps,
+      setCreateRoomDialogProps,
+      setCover,
+      setCreatePDFFormFile,
+      createPDFFormFileProps,
+      userId: userStore?.user?.id,
+    };
+  },
+)(observer(GlobalEvents));

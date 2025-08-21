@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,10 +24,69 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+type TOwner = {
+  id: string;
+  displayName: string;
+  email: string;
+};
+
+type TQuotaUsage = {
+  tenantId: number;
+  tenantAlias: string;
+  tenantDomain: string;
+  storageSize: number;
+  usedSize: number;
+  maxRoomAdminsCount: number;
+  roomAdminCount: number;
+  maxUsers: number;
+  usersCount: number;
+  maxRoomsCount: number;
+  roomsCount: 0;
+};
+
+type TWizardSettings = {
+  completed: boolean;
+};
+
+export type TPortals = {
+  created: string;
+  domain: string;
+  industry: number;
+  language: string;
+  name: string;
+  ownerId: string;
+  portalName: string;
+  status: string;
+  tenantId: number;
+  owner: TOwner;
+  timeZoneName: string;
+  quotaUsage: TQuotaUsage;
+  customQuota: number;
+  usedSize: number;
+  wizardSettings: TWizardSettings;
+};
+
+export type TGetAllPortals = {
+  tenants: TPortals[];
+};
+
 export type TGetDomainName = {
   settings: string;
 };
 
-export type TGetAllPortals = {
-  tenants: string[];
+export type TRemovedPortal = {
+  removed: boolean;
+  tenant: {
+    created: string;
+    domain: string;
+    industry: number;
+    language: string;
+    name: string;
+    ownerId: string;
+    portalName: string;
+    status: string;
+    tenantId: number;
+    timeZoneName: string;
+    customQuota: number;
+  };
 };

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,13 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import Dropzone from "./Dropzone";
 import ImageCropper from "./ImageCropper";
 import ButtonDelete from "./ButtonDelete";
 
 import { ImageEditorProps } from "./ImageEditor.types";
-import AvatarPreview from "./AvatarPreview";
 
 const ImageEditor = ({
   t,
@@ -43,7 +40,6 @@ const ImageEditor = ({
   className,
   disableImageRescaling,
   editorBorderRadius,
-  maxImageSize,
   onChangeFile,
 }: ImageEditorProps) => {
   const setUploadedFile = (f?: File) => {
@@ -55,9 +51,17 @@ const ImageEditor = ({
     image.uploadedFile.includes("default_user_photo");
 
   return (
-    <div className={className}>
-      {image.uploadedFile && !isDefaultAvatar && (
-        <div className={classNameWrapperImageCropper}>
+    <div
+      className={className}
+      role="region"
+      aria-label="Image editor"
+      data-test-id="image-editor"
+    >
+      {image.uploadedFile && !isDefaultAvatar ? (
+        <div
+          className={classNameWrapperImageCropper}
+          data-test-id="image-cropper-wrapper"
+        >
           <ImageCropper
             t={t}
             image={image}
@@ -72,15 +76,9 @@ const ImageEditor = ({
           />
           {Preview}
         </div>
-      )}
-      {/* <Dropzone
-        t={t}
-        setUploadedFile={setUploadedFile}
-        isDisabled={isDisabled}
-        maxImageSize={maxImageSize}
-      /> */}
+      ) : null}
     </div>
   );
 };
 
-export { ImageEditor, AvatarPreview, Dropzone, ButtonDelete };
+export { ImageEditor, ButtonDelete };

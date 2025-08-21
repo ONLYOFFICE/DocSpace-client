@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,3 +26,7 @@
 
 export const OFFSET_RIGHT = 48;
 export const OFFSET_LEFT = 48;
+export const MAX_TAB_WIDTH = 218;
+export const TAB_PADDING = 31;
+export const ARROW_WIDTH = 32;
+export const TABS_GAP = 4;

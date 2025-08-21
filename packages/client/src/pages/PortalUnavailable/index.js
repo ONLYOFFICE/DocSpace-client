@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,9 +31,9 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
 import { Button } from "@docspace/shared/components/button";
-import RecoverAccessModalDialog from "@docspace/shared/components/recover-access-modal-dialog/RecoverAccessModalDialog";
+import RecoverAccessModalDialog from "@docspace/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog";
 import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { Link } from "@docspace/shared/components/link";
 
 const StyledBodyContent = styled.div`
   max-width: 480px;
@@ -48,6 +48,7 @@ const StyledBody = styled.div`
 
   .portal-unavailable_container {
     .portal-unavailable_contact-text {
+      display: block;
       text-decoration: underline;
       cursor: pointer;
       margin-top: 26px;
@@ -96,25 +97,25 @@ const PortalUnavailable = ({ onLogoutClick }) => {
             })}
           </Text>
           {!window.navigator.userAgent.includes("ZoomWebKit") &&
-            !window.navigator.userAgent.includes("ZoomApps") && (
-              <Button
-                scale
-                label={t("Common:LogoutButton")}
-                size="medium"
-                onClick={onClick}
-              />
-            )}
+          !window.navigator.userAgent.includes("ZoomApps") ? (
+            <Button
+              scale
+              label={t("Common:LogoutButton")}
+              size="medium"
+              onClick={onClick}
+            />
+          ) : null}
 
-          <ColorTheme
+          <Link
             textAlign="center"
-            themeId={ThemeId.Link}
             className="portal-unavailable_contact-text"
             onClick={onClickToContact}
+            color="accent"
           >
             {t("PortalUnavailable:ContactAdministrator", {
               productName: t("Common:ProductName"),
             })}
-          </ColorTheme>
+          </Link>
         </StyledBodyContent>
       </ErrorContainer>
     </StyledBody>

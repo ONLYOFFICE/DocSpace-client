@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,10 +31,11 @@ import styled from "styled-components";
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Link, LinkType } from "@docspace/shared/components/link";
-import { Box } from "@docspace/shared/components/box";
-import { TableGroupMenu } from "@docspace/shared/components/table";
-import { RowContainer } from "@docspace/shared/components/row-container";
-import { Row } from "@docspace/shared/components/row";
+import {
+  TableGroupMenu,
+  TGroupMenuItem,
+} from "@docspace/shared/components/table";
+import { RowContainer, Row } from "@docspace/shared/components/rows";
 import { Text } from "@docspace/shared/components/text";
 import ChangeTypeReactSvgUrl from "PUBLIC_DIR/images/change.type.react.svg?url";
 import EmptyScreenUserReactSvgUrl from "PUBLIC_DIR/images/empty_screen_user.react.svg?url";
@@ -98,6 +99,12 @@ const StyledRowContainer = styled(RowContainer)`
       margin: 0;
     }
   }
+
+  .buttons-box {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+  }
 `;
 
 const StyledRow = styled(Row)`
@@ -154,11 +161,11 @@ const RowView = (props: TypeSelectRowViewProps) => {
       onClick: () => {},
       title: t("ChangeUserTypeDialog:ChangeUserTypeButton"),
     },
-  ];
+  ] as TGroupMenuItem[];
 
   return (
     <StyledRowContainer useReactWindow={false}>
-      {checkedUsers.result.length > 0 && (
+      {checkedUsers.result.length > 0 ? (
         <div className="table-group-menu">
           <TableGroupMenu
             headerMenu={headerMenu}
@@ -169,7 +176,7 @@ const RowView = (props: TypeSelectRowViewProps) => {
             onChange={toggleAll}
           />
         </div>
-      )}
+      ) : null}
       {accountsData.length > 0 ? (
         <>
           <StyledRow key="Name">
@@ -194,7 +201,7 @@ const RowView = (props: TypeSelectRowViewProps) => {
           headerText={t("Common:NotFoundUsers")}
           descriptionText={t("Common:NotFoundUsersDescription")}
           buttons={
-            <Box displayProp="flex" alignItems="center">
+            <div className="buttons-box">
               <IconButton
                 className="clear-icon"
                 isFill
@@ -210,7 +217,7 @@ const RowView = (props: TypeSelectRowViewProps) => {
               >
                 {t("Common:ClearFilter")}
               </Link>
-            </Box>
+            </div>
           }
         />
       )}

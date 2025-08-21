@@ -1,5 +1,5 @@
 /**
- * (c) Copyright Ascensio System SIA 2009-2024
+ * (c) Copyright Ascensio System SIA 2009-2025
  *
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -28,7 +28,9 @@
 
 $font-family-base: "Open Sans", sans-serif;
 
-@import url(../../../../public/css/fonts.css);
+@use "../../../../public/css/fonts.css";
+@use "../../../shared/styles/variables/colors";
+@use "../../../shared/styles/theme.scss";
 
 html,
 body {

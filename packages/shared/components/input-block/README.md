@@ -1,6 +1,6 @@
 # InputBlock
 
-InputBlock description
+A versatile input component that combines a text input with optional icon and children elements. It supports various states, sizes, and customization options.
 
 ### Usage
 
@@ -9,51 +9,90 @@ import { InputBlock } from "@docspace/shared/components";
 import SearchReactSvgUrl from "PUBLIC_DIR/images/search.react.svg?url";
 ```
 
-```js
-const mask = [/\d/, /\d/, "/", /\d/, /\d/, "/", /\d/, /\d/, /\d/, /\d/];
-```
+### Basic Example
 
 ```jsx
 <InputBlock
-  mask={mask}
+  id="search-input"
   iconName={SearchReactSvgUrl}
-  onIconClick={(event) => alert(event.target.value)}
-  onChange={(event) => alert(event.target.value)}
+  placeholder="Search..."
+  onChange={(e) => console.log(e.target.value)}
+  onIconClick={() => console.log("Search clicked")}
+/>
+```
+
+### With Mask Example
+
+```jsx
+const dateMask = [/\d/, /\d/, "/", /\d/, /\d/, "/", /\d/, /\d/, /\d/, /\d/];
+
+<InputBlock
+  mask={dateMask}
+  placeholder="DD/MM/YYYY"
+  onChange={(e) => console.log(e.target.value)}
+/>;
+```
+
+### With Children Example
+
+```jsx
+<InputBlock
+  iconName={SearchReactSvgUrl}
+  onChange={(e) => console.log(e.target.value)}
 >
   <Button
     size="base"
-    isDisabled={false}
-    onClick={() => alert("Button clicked")}
-    label="OK"
+    onClick={() => console.log("Button clicked")}
+    label="Search"
   />
 </InputBlock>
 ```
 
 ### Properties
 
-| Props            |      Type      | Required |             Values              | Default | Description                                                                                            |
-| ---------------- | :------------: | :------: | :-----------------------------: | :-----: | ------------------------------------------------------------------------------------------------------ |
-| `autoComplete`   |    `string`    |    -     |                -                |    -    | Used as HTML `autocomplete` property                                                                   |
-| `className`      |    `string`    |    -     |                -                |    -    | Accepts class                                                                                          |
-| `hasError`       |     `bool`     |    -     |                -                |    -    | Indicates the input field has an error                                                                 |
-| `hasWarning`     |     `bool`     |    -     |                -                |    -    | Indicates the input field has a warning                                                                |
-| `iconColor`      |    `string`    |    -     |                -                | `black` | Specifies the icon color                                                                               |
-| `iconName`       |    `string`    |    -     |                -                |    -    | Specifies the icon name                                                                                |
-| `iconSize`       |    `number`    |    ✅    |                -                |    -    | Size icon                                                                                              |
-| `id`             |    `string`    |    -     |                -                |    -    | Used as HTML `id` property                                                                             |
-| `isAutofocussed` |     `bool`     |    -     |                -                |    -    | Focus the input field on initial render                                                                |
-| `isDisabled`     |     `bool`     |    -     |                -                | `false` | Indicates that the field cannot be used (e.g not authorised, or changes not saved)                     |
-| `isIconFill`     |     `bool`     |    -     |                -                | `false` | Determines if icon fill is needed                                                                      |
-| `isReadOnly`     |     `bool`     |    -     |                -                | `false` | Indicates that the field is displaying read-only content                                               |
-| `mask`           |    `array`     |    -     |                -                |    -    | input text mask                                                                                        |
-| `name`           |    `string`    |    -     |                -                |    -    | Used as HTML `name` property                                                                           |
-| `onBlur`         |     `func`     |    -     |                -                |    -    | Called when field is blurred                                                                           |
-| `onChange`       |     `func`     |    -     |                -                |    -    | Called with the new value. Required when input is not read only. Parent should pass it back as `value` |
-| `onFocus`        |     `func`     |    -     |                -                |    -    | Called when field is focused                                                                           |
-| `onIconClick`    |     `func`     |    ✅    |                -                |    -    | Will be triggered whenever an icon is clicked                                                          |
-| `placeholder`    |    `string`    |    -     |                -                |    -    | Placeholder text for the input                                                                         |
-| `scale`          |     `bool`     |    -     |                -                |    -    | Indicates the input field has scale                                                                    |
-| `size`           |    `string`    |    -     | `base`, `middle`, `big`, `huge` | `base`  | Supported size of the input fields.                                                                    |
-| `style`          | `obj`, `array` |    -     |                -                |    -    | Accepts css style                                                                                      |
-| `type`           |    `string`    |    -     |       `text`, `password`        | `text`  | Supported type of the input fields.                                                                    |
-| `value`          |    `string`    |    ✅    |                -                |    -    | Value of the input                                                                                     |
+| Props                 | Type                         | Required | Default  | Description                                           |
+| --------------------- | :--------------------------- | :------: | :------- | ----------------------------------------------------- |
+| `id`                  | `string`                     |    -     | -        | Input field identifier                                |
+| `name`                | `string`                     |    -     | -        | Input field name                                      |
+| `type`                | `string`                     |    -     | `"text"` | Input type (e.g., 'text', 'password')                 |
+| `value`               | `string`                     |    -     | `""`     | Input value                                           |
+| `placeholder`         | `string`                     |    -     | -        | Placeholder text                                      |
+| `tabIndex`            | `number`                     |    -     | `-1`     | Tab order of the input                                |
+| `maxLength`           | `number`                     |    -     | `255`    | Maximum input length                                  |
+| `autoComplete`        | `string`                     |    -     | `"off"`  | HTML autocomplete attribute                           |
+| `mask`                | `Array<RegExp \| string>`    |    -     | -        | Input mask pattern                                    |
+| `keepCharPositions`   | `boolean`                    |    -     | `false`  | Keep character positions when applying mask           |
+| `hasError`            | `boolean`                    |    -     | `false`  | Error state                                           |
+| `hasWarning`          | `boolean`                    |    -     | `false`  | Warning state                                         |
+| `isDisabled`          | `boolean`                    |    -     | `false`  | Disabled state                                        |
+| `isReadOnly`          | `boolean`                    |    -     | `false`  | Read-only state                                       |
+| `isAutoFocussed`      | `boolean`                    |    -     | `false`  | Auto-focus on mount                                   |
+| `scale`               | `boolean`                    |    -     | `false`  | Enable input scaling                                  |
+| `iconName`            | `string`                     |    -     | `""`     | Icon URL or name                                      |
+| `iconNode`            | `ReactNode`                  |    -     | -        | Custom icon component                                 |
+| `iconSize`            | `number`                     |    -     | -        | Custom icon size                                      |
+| `iconColor`           | `string`                     |    -     | -        | Icon color                                            |
+| `hoverColor`          | `string`                     |    -     | -        | Icon hover color                                      |
+| `iconButtonClassName` | `string`                     |    -     | `""`     | Icon button class name                                |
+| `isIconFill`          | `boolean`                    |    -     | `false`  | Fill icon style                                       |
+| `size`                | `InputSize`                  |    -     | `base`   | Input size (`base`, `middle`, `big`, `huge`, `large`) |
+| `className`           | `string`                     |    -     | -        | Container class name                                  |
+| `style`               | `CSSProperties`              |    -     | -        | Container inline styles                               |
+| `onChange`            | `(e: ChangeEvent) => void`   |    -     | -        | Change event handler                                  |
+| `onIconClick`         | `(e: MouseEvent) => void`    |    -     | -        | Icon click handler                                    |
+| `onBlur`              | `(e: FocusEvent) => void`    |    -     | -        | Blur event handler                                    |
+| `onFocus`             | `(e: FocusEvent) => void`    |    -     | -        | Focus event handler                                   |
+| `onKeyDown`           | `(e: KeyboardEvent) => void` |    -     | -        | Keydown event handler                                 |
+| `onClick`             | `(e: MouseEvent) => void`    |    -     | -        | Click event handler                                   |
+| `children`            | `ReactNode`                  |    -     | -        | Child components                                      |
+| `forwardedRef`        | `Ref<HTMLInputElement>`      |    -     | -        | Forward ref to input element                          |
+
+### Size Options
+
+The component supports the following sizes through the `size` prop:
+
+- `base` (default): 16px icon
+- `middle`: 18px icon
+- `big`: 21px icon
+- `huge`: 24px icon
+- `large`: 24px icon

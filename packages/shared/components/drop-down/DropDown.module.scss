@@ -1,0 +1,90 @@
+@use "../../styles/mixins";
+@use "../../styles/variables/colors";
+
+.dropDown {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+
+  height: fit-content;
+  position: absolute;
+  overflow: hidden;
+
+  background: var(--dropdown-background);
+  border: var(--dropdown-border);
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  box-shadow: var(--dropdown-box-shadow);
+  -moz-box-shadow: var(--dropdown-box-shadow);
+  -webkit-box-shadow: var(--dropdown-box-shadow);
+
+  padding: 8px 0;
+  table-layout: fixed;
+
+  z-index: var(--z-index, 400);
+
+  display: none;
+
+  &.withMaxHeight {
+    max-height: var(--max-height);
+    overflow-y: auto;
+  }
+
+  &.withManualWidth {
+    width: var(--manual-width);
+  }
+
+  &.directionTop {
+    bottom: var(--manual-y, 100%);
+  }
+
+  &.directionBottom {
+    top: var(--manual-y, 100%);
+  }
+
+  &.directionLeft {
+    inset-inline-end: var(--manual-x, 0);
+  }
+
+  &.directionRight {
+    inset-inline-start: var(--manual-x, 0);
+  }
+
+  &.open {
+    display: table;
+  }
+
+  &.withColumns {
+    display: block;
+
+    -webkit-column-count: var(--column-count);
+    -moz-column-count: var(--column-count);
+    column-count: var(--column-count);
+  }
+
+  &.notReady {
+    visibility: hidden;
+    top: 0;
+  }
+
+  :global(.scroll-drop-down-item) {
+    .scroll-body {
+      padding-inline-end: 0 !important;
+    }
+  }
+
+  :global(.download-dialog-dropDown) {
+    margin-top: 4px;
+  }
+
+  @media (orientation: portrait) {
+    &.mobileView {
+      top: auto !important;
+      bottom: 0;
+      inset-inline-start: 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+  }
+}

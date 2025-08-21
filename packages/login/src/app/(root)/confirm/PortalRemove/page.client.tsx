@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -36,28 +36,32 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 
 import { TError } from "@/types";
-import { URL_ONLYOFFICE } from "@/utils/constants";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import { ButtonsWrapper } from "@/components/Confirm.styled";
 
 type RemovePortalFormProps = {
   siteUrl?: string;
+  onlyofficeUrl: string;
 };
 
-const RemovePortalForm = ({ siteUrl }: RemovePortalFormProps) => {
+const RemovePortalForm = ({
+  onlyofficeUrl,
+  siteUrl,
+}: RemovePortalFormProps) => {
   const { t } = useTranslation(["Confirm", "Common"]);
   const { linkData } = useContext(ConfirmRouteContext);
 
   const [isRemoved, setIsRemoved] = useState(false);
 
-  const url = siteUrl ? siteUrl : URL_ONLYOFFICE;
+  const url = siteUrl || onlyofficeUrl;
 
   const onDeleteClick = async () => {
     try {
       const res = await deletePortal(linkData.confirmHeader);
       setIsRemoved(true);
       setTimeout(
-        () => (location.href = res && typeof res === "string" ? res : url),
+        () =>
+          (window.location.href = res && typeof res === "string" ? res : url),
         10000,
       );
     } catch (error) {
@@ -80,47 +84,45 @@ const RemovePortalForm = ({ siteUrl }: RemovePortalFormProps) => {
   };
 
   const onCancelClick = () => {
-    location.href = "/";
+    window.location.href = "/";
   };
 
-  return (
+  return isRemoved ? (
+    <Text>
+      <Trans t={t} i18nKey="SuccessRemoved" ns="Confirm">
+        Your account has been successfully removed. In 10 seconds you will be
+        redirected to the
+        <Link isHovered href={url} dataTestId="redirect_site_link">
+          site
+        </Link>
+      </Trans>
+    </Text>
+  ) : (
     <>
-      {isRemoved ? (
-        <Text>
-          <Trans t={t} i18nKey="SuccessRemoved" ns="Confirm">
-            Your account has been successfully removed. In 10 seconds you will
-            be redirected to the
-            <Link isHovered href={url}>
-              site
-            </Link>
-          </Trans>
-        </Text>
-      ) : (
-        <>
-          <Text className="subtitle">
-            {t("PortalRemoveTitle", {
-              productName: t("Common:ProductName"),
-            })}
-          </Text>
-          <ButtonsWrapper>
-            <Button
-              primary
-              scale
-              size={ButtonSize.medium}
-              label={t("Common:Delete")}
-              tabIndex={1}
-              onClick={onDeleteClick}
-            />
-            <Button
-              scale
-              size={ButtonSize.medium}
-              label={t("Common:CancelButton")}
-              tabIndex={1}
-              onClick={onCancelClick}
-            />
-          </ButtonsWrapper>
-        </>
-      )}
+      <Text className="subtitle">
+        {t("PortalRemoveTitle", {
+          productName: t("Common:ProductName"),
+        })}
+      </Text>
+      <ButtonsWrapper>
+        <Button
+          primary
+          scale
+          size={ButtonSize.medium}
+          label={t("Common:Delete")}
+          tabIndex={1}
+          onClick={onDeleteClick}
+          testId="delete_portal_button"
+        />
+        <Button
+          scale
+          size={ButtonSize.medium}
+          label={t("Common:CancelButton")}
+          tabIndex={1}
+          onClick={onCancelClick}
+          testId="cancel_button"
+        />
+      </ButtonsWrapper>
     </>
   );
 };

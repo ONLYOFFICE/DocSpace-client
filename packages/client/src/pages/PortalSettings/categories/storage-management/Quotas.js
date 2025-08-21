@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,23 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useTranslation, Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useTheme } from "styled-components";
 
 import { isMobile } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
 import { Badge } from "@docspace/shared/components/badge";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { globalColors } from "@docspace/shared/themes";
+import { Link } from "@docspace/shared/components/link";
 
 import { StyledBaseQuotaComponent, StyledMainTitle } from "./StyledComponent";
 import { QuotaPerRoomComponentSection } from "./sub-components/QuotaPerRoom";
 import { QuotaPerUserComponentSection } from "./sub-components/QuotaPerUser";
 import MobileQuotasComponent from "./sub-components/MobileQuotas";
-
-const helpLink =
-  "https://helpcenter.onlyoffice.com/administration/docspace-settings.aspx#StorageManagement_block";
 
 const QuotaPerItemsComponent = ({ isStatisticsAvailable }) => {
   if (isMobile())
@@ -57,7 +54,7 @@ const QuotasComponent = (props) => {
   const { t } = useTranslation("Settings");
   const theme = useTheme();
 
-  const { isStatisticsAvailable } = props;
+  const { isStatisticsAvailable, storageManagementUrl } = props;
 
   return (
     <StyledBaseQuotaComponent>
@@ -66,7 +63,7 @@ const QuotasComponent = (props) => {
           {t("Quotas")}
         </StyledMainTitle>
 
-        {!isStatisticsAvailable && (
+        {!isStatisticsAvailable ? (
           <Badge
             backgroundColor={
               theme.isBase
@@ -77,21 +74,22 @@ const QuotasComponent = (props) => {
             className="paid-badge"
             isPaidBadge
           />
-        )}
+        ) : null}
       </div>
       <Text className="quotas_description">
-        <Trans t={t} i18nKey="QuotasDescription" ns="Settings">
-          Here, you can set storage quota for users and rooms.
-          <ColorTheme
-            themeId={ThemeId.Link}
+        {t("Settings:QuotasDescription")}{" "}
+        {storageManagementUrl ? (
+          <Link
             tag="a"
             isHovered={false}
             target="_blank"
-            href={helpLink}
+            href={storageManagementUrl}
+            color="accent"
+            dataTestId="help_center_link"
           >
-            Help Center
-          </ColorTheme>
-        </Trans>
+            {t("Common:HelpCenter")}
+          </Link>
+        ) : null}
       </Text>
 
       <QuotaPerItemsComponent isStatisticsAvailable={isStatisticsAvailable} />
@@ -99,10 +97,12 @@ const QuotasComponent = (props) => {
   );
 };
 
-export default inject(({ currentQuotaStore }) => {
+export default inject(({ currentQuotaStore, settingsStore }) => {
   const { isStatisticsAvailable } = currentQuotaStore;
+  const { storageManagementUrl } = settingsStore;
 
   return {
     isStatisticsAvailable,
+    storageManagementUrl,
   };
 })(observer(QuotasComponent));

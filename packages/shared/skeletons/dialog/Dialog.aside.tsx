@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,7 @@ import React from "react";
 import { RectangleSkeleton } from "../rectangle";
 import { Aside } from "../../components/aside";
 import { Backdrop } from "../../components/backdrop";
-import { StyledDialogAsideLoader } from "./Dialog.styled";
+import styles from "./Dialog.module.scss";
 
 import { DialogAsideSkeletonProps } from "./Dialog.types";
 import { DialogInvitePanelSkeleton } from "./Dialog.invite";
@@ -38,6 +38,7 @@ const DialogAsideSkeleton = ({
   withoutAside,
   withFooterBorder = false,
   isInvitePanelLoader,
+  onClose,
 }: DialogAsideSkeletonProps) => {
   const zIndex = 310;
 
@@ -45,9 +46,11 @@ const DialogAsideSkeleton = ({
 
   const renderClearDialogAsideLoader = () => {
     return (
-      <StyledDialogAsideLoader
-        withFooterBorder={withFooterBorder}
-        isPanel={isPanel}
+      <div
+        className={styles.dialogAsideLoader}
+        data-is-panel={isPanel ? "true" : "false"}
+        data-with-footer-border={withFooterBorder ? "true" : "false"}
+        data-testid="dialog-aside-skeleton"
       >
         <div className="dialog-loader-header">
           <RectangleSkeleton height="29px" />
@@ -55,12 +58,11 @@ const DialogAsideSkeleton = ({
         <div className="dialog-loader-body">
           <RectangleSkeleton height="200px" />
         </div>
-
         <div className="dialog-loader-footer">
           <RectangleSkeleton height="40px" />
           <RectangleSkeleton height="40px" />
         </div>
-      </StyledDialogAsideLoader>
+      </div>
     );
   };
 
@@ -68,18 +70,22 @@ const DialogAsideSkeleton = ({
     renderClearDialogAsideLoader()
   ) : (
     <>
-      <Backdrop visible isAside zIndex={zIndex} />
+      <Backdrop visible isAside zIndex={zIndex} onClick={onClose} />
 
-      <StyledDialogAsideLoader isPanel={isPanel} withFooterBorder={false}>
+      <div
+        className={styles.dialogAsideLoader}
+        data-is-panel={isPanel ? "true" : "false"}
+        data-with-footer-border={withFooterBorder ? "true" : "false"}
+      >
         <Aside
           className="dialog-aside-loader"
           visible
           zIndex={zIndex}
-          onClose={() => {}}
+          onClose={() => onClose?.()}
         >
           {renderClearDialogAsideLoader()}
         </Aside>
-      </StyledDialogAsideLoader>
+      </div>
     </>
   );
 };

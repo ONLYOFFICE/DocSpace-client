@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,9 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { HeaderContainer, Title, HeaderActionIcon } from "../Calendar.styled";
+import classNames from "classnames";
 import { HeaderButtons } from "./HeaderButtons";
 import { DaysHeaderProps } from "../Calendar.types";
+import styles from "../Calendar.module.scss";
 
 export const DaysHeader = ({
   observedDate,
@@ -56,13 +57,16 @@ export const DaysHeader = ({
     observedDate.clone().add(1, "month").startOf("month") > maxDate;
 
   return (
-    <HeaderContainer>
-      <Title onClick={onTitleClick} className="days-header" isMobile={isMobile}>
+    <div className={styles.headerContainer}>
+      <h2
+        onClick={onTitleClick}
+        className={classNames(styles.title, "days-header")}
+      >
         {observedDate.format("MMMM").charAt(0).toUpperCase() +
           observedDate.format("MMMM").substring(1)}{" "}
         {observedDate.format("YYYY")}
-        <HeaderActionIcon isMobile={isMobile} />
-      </Title>
+        <span className={styles.headerActionIcon} />
+      </h2>
       <HeaderButtons
         onLeftClick={onLeftClick}
         onRightClick={onRightClick}
@@ -70,6 +74,6 @@ export const DaysHeader = ({
         isRightDisabled={isRightDisabled}
         isMobile={isMobile}
       />
-    </HeaderContainer>
+    </div>
   );
 };

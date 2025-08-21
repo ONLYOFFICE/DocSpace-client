@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,14 +26,16 @@
 
 import { useState } from "react";
 import styled from "styled-components";
+
 import { Paging } from "@docspace/shared/components/paging";
+import type { TOption } from "@docspace/shared/components/combobox";
+
 import { AccountsPagingProps } from "../types";
 
 const StyledPaging = styled(Paging)`
   display: flex;
   margin-bottom: 30px;
   align-items: center;
-  justify-content: center;
 `;
 
 const AccountsPaging = (props: AccountsPagingProps) => {
@@ -51,7 +53,7 @@ const AccountsPaging = (props: AccountsPagingProps) => {
     return pageItems;
   };
 
-  const countItems = [
+  const countItems: TOption[] = [
     {
       key: "25-items-per-page",
       label: t("Common:CountPerPage", { count: pagesPerPage }),
@@ -72,7 +74,7 @@ const AccountsPaging = (props: AccountsPagingProps) => {
   const [selectedCountItem, setSelectedCountItem] = useState(countItems[0]);
 
   const [pageItems, setPageItems] = useState(
-    createPageItems(Math.ceil(numberOfItems / selectedCountItem.count)),
+    createPageItems(Math.ceil(numberOfItems / selectedCountItem.count!)),
   );
   const [selectedPageItem, setSelectedPageItems] = useState(pageItems[0]);
 
@@ -80,8 +82,8 @@ const AccountsPaging = (props: AccountsPagingProps) => {
     const currentPage = pageItems[selectedPageItem.pageNumber + 1];
     if (currentPage) {
       setDataPortion(
-        currentPage.pageNumber * selectedCountItem.count,
-        (currentPage.pageNumber + 1) * selectedCountItem.count,
+        currentPage.pageNumber * selectedCountItem.count!,
+        (currentPage.pageNumber + 1) * selectedCountItem.count!,
       );
       setSelectedPageItems(currentPage);
     }
@@ -91,28 +93,24 @@ const AccountsPaging = (props: AccountsPagingProps) => {
     const currentPage = pageItems[selectedPageItem.pageNumber - 1];
     if (currentPage) {
       setDataPortion(
-        currentPage.pageNumber * selectedCountItem.count,
-        (currentPage.pageNumber + 1) * selectedCountItem.count,
+        currentPage.pageNumber * selectedCountItem.count!,
+        (currentPage.pageNumber + 1) * selectedCountItem.count!,
       );
       setSelectedPageItems(currentPage);
     }
   };
 
-  const onSelectPage = (selectedPage: { pageNumber: number }) => {
-    const count = selectedPage.pageNumber * selectedCountItem.count;
-    setDataPortion(count, count + selectedCountItem.count);
-    setSelectedPageItems(pageItems[selectedPage.pageNumber]);
+  const onSelectPage = (selectedPage: TOption) => {
+    const count = selectedPage.pageNumber! * selectedCountItem.count!;
+    setDataPortion(count, count + selectedCountItem.count!);
+    setSelectedPageItems(pageItems[selectedPage.pageNumber!]);
   };
 
-  const onCountChange = (countItem: {
-    key: string;
-    label: string;
-    count: number;
-  }) => {
+  const onCountChange = (countItem: TOption) => {
     setSelectedCountItem(countItem);
-    setDataPortion(0, countItem.count);
+    setDataPortion(0, countItem.count!);
     const tempPageItems = createPageItems(
-      Math.ceil(numberOfItems / countItem.count),
+      Math.ceil(numberOfItems / countItem.count!),
     );
     setPageItems(tempPageItems);
     setSelectedPageItems(tempPageItems[0]);
@@ -134,6 +132,7 @@ const AccountsPaging = (props: AccountsPagingProps) => {
       selectedCountItem={selectedCountItem}
       disablePrevious={!pageItems[selectedPageItem.pageNumber - 1]}
       disableNext={!pageItems[selectedPageItem.pageNumber + 1]}
+      dataTestId="accounts_paging"
     />
   );
 };

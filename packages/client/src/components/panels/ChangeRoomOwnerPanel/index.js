@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -79,7 +79,6 @@ const ChangeRoomOwner = (props) => {
     roomOwnerId,
     changeRoomOwner,
     userId,
-    updateInfoPanelSelection,
     useModal = true,
   } = props;
 
@@ -99,7 +98,6 @@ const ChangeRoomOwner = (props) => {
       onOwnerChange && onOwnerChange(user[0]);
     } else {
       await changeRoomOwner(t, user[0]?.id, isChecked);
-      updateInfoPanelSelection();
     }
     handleClosePanel();
   };
@@ -133,7 +131,7 @@ const ChangeRoomOwner = (props) => {
         headerLabel: t("Files:ChangeTheRoomOwner"),
       }}
       filter={filter}
-      withFooterCheckbox={!showBackButton && ownerIsCurrentUser}
+      withFooterCheckbox={!showBackButton ? ownerIsCurrentUser : null}
       footerCheckboxLabel={t("Files:LeaveTheRoom")}
       isChecked={!showBackButton}
       withOutCurrentAuthorizedUser
@@ -149,6 +147,7 @@ const ChangeRoomOwner = (props) => {
         productName: t("Common:ProductName"),
       })}
       className="change-owner_people-selector"
+      data-test-id="change_owner_people_selector"
     />
   );
 
@@ -162,7 +161,7 @@ const ChangeRoomOwner = (props) => {
     >
       <ModalDialog.Body>
         <StyledChangeRoomOwner
-          withFooterCheckbox={!showBackButton && ownerIsCurrentUser}
+          withFooterCheckbox={!showBackButton ? ownerIsCurrentUser : null}
         >
           {selectorComponent}
         </StyledChangeRoomOwner>
@@ -180,12 +179,10 @@ export default inject(
     selectedFolderStore,
     filesActionsStore,
     userStore,
-    infoPanelStore,
   }) => {
     const { changeRoomOwnerIsVisible, setChangeRoomOwnerIsVisible } =
       dialogsStore;
     const { selection, bufferSelection } = filesStore;
-    const { updateInfoPanelSelection } = infoPanelStore;
 
     const room = selection.length
       ? selection[0]
@@ -199,7 +196,6 @@ export default inject(
       roomOwnerId: room?.createdBy?.id,
       changeRoomOwner: filesActionsStore.changeRoomOwner,
       userId: id,
-      updateInfoPanelSelection,
     };
   },
 )(

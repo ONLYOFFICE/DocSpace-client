@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -40,10 +40,10 @@ const contextCss = css`
 
 export const StyledTableContainer = styled(TableContainer)`
   :has(
-    .table-container_body
-      .table-list-item:first-child:first-child
-      > .table-row-selected
-  ) {
+      .table-container_body
+        .table-list-item:first-child:first-child
+        > .table-row-selected
+    ) {
     .table-container_header {
       border-image-slice: 1;
       border-image-source: ${(props) =>
@@ -159,6 +159,10 @@ export const StyledPeopleRow = styled(TableRow)<{
       margin-inline-start: -4px;
       padding-block: 16px;
       padding-inline: 12px 0;
+    }
+    .table-container_row-loader {
+      border-bottom: unset;
+      padding-inline-start: 7px;
     }
   }
 

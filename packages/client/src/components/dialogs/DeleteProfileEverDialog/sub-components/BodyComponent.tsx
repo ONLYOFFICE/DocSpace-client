@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,6 +34,7 @@ import { Nullable, TTranslation } from "@docspace/shared/types";
 import { TUser } from "@docspace/shared/api/people/types";
 
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
+import { TFunction } from "i18next";
 
 type BodyComponentProps = {
   needReassignData: boolean;
@@ -56,7 +57,10 @@ const BodyComponent = ({
   onlyOneUser,
   onlyGuests,
 }: BodyComponentProps) => {
-  const warningMessageMyDocuments = t("DeleteMyDocumentsUser");
+  const warningMessageMyDocuments = t("UserFilesRemovalScope", {
+    sectionNameFirst: t("Common:MyFilesSection"),
+    sectionNameSecond: t("Common:TrashSection"),
+  });
 
   const warningMessageReassign = onlyGuests ? (
     t("DeleteReqassignDescriptionGuest", {
@@ -68,14 +72,16 @@ const BodyComponent = ({
     <Trans
       i18nKey="DeleteReassignDescriptionUser"
       ns="DeleteProfileEverDialog"
-      t={t}
-    >
-      {{ warningMessageMyDocuments }}
-      <strong>
-        {{ userPerformedDeletion: userPerformedDeletion!.displayName }}
-        {{ userYou: t("Common:You") }}
-      </strong>
-    </Trans>
+      t={t as TFunction}
+      values={{
+        warningMessageMyDocuments,
+        userPerformedDeletion: userPerformedDeletion!.displayName,
+        userYou: t("Common:You"),
+      }}
+      components={{
+        1: <strong />,
+      }}
+    />
   );
 
   const warningMessage =
@@ -84,10 +90,18 @@ const BodyComponent = ({
       : warningMessageMyDocuments;
 
   const deleteMessage = (
-    <Trans i18nKey="DeleteUserMessage" ns="DeleteProfileEverDialog" t={t}>
-      {{ userCaption: onlyGuests ? t("Common:Guest") : t("Common:User") }}
-      <strong>{{ user: users[0].displayName }}</strong>
-    </Trans>
+    <Trans
+      i18nKey="DeleteUserMessage"
+      ns="DeleteProfileEverDialog"
+      t={t as TFunction}
+      values={{
+        userCaption: onlyGuests ? t("Common:Guest") : t("Common:User"),
+        user: users[0].displayName,
+      }}
+      components={{
+        1: <strong />,
+      }}
+    />
   );
 
   if (deleteWithoutReassign) {
@@ -104,7 +118,11 @@ const BodyComponent = ({
         </Text>
         <Text className="text-warning">{t("PleaseNote")}</Text>
         <Text className="text-delete-description">
-          {t("DeletePersonalData", { productName: t("Common:ProductName") })}
+          {t("PersonalDataDeletionInfo", {
+            productName: t("Common:ProductName"),
+            sectionNameFirst: t("Common:MyFilesSection"),
+            sectionNameSecond: t("Common:TrashSection"),
+          })}
         </Text>
         <Text className="text-delete-description">
           {t("CannotReassignFiles")}
@@ -145,7 +163,7 @@ const BodyComponent = ({
       <Text className="text-warning">{t("Common:Warning")}</Text>
       <Text className="text-delete-description">{warningMessage}</Text>
 
-      {needReassignData && (
+      {needReassignData ? (
         <Link
           className="reassign-data"
           type={LinkType.action}
@@ -153,10 +171,11 @@ const BodyComponent = ({
           fontWeight={600}
           isHovered
           onClick={onClickReassignData}
+          dataTestId="dialog_reassign_data_link"
         >
           {t("DeleteProfileEverDialog:ReassignDataToAnotherUser")}
         </Link>
-      )}
+      ) : null}
     </>
   );
 };

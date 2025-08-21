@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,9 +30,8 @@ import { withTranslation } from "react-i18next";
 
 import { TFilterSortBy } from "@docspace/shared/api/people/types";
 import { TableHeader, TTableColumn } from "@docspace/shared/components/table";
-import { Events } from "@docspace/shared/enums";
 
-import { SortByFieldName } from "SRC_DIR/helpers/constants";
+import { Events, SortByFieldName } from "@docspace/shared/enums";
 
 import {
   TableHeaderColumn,
@@ -164,6 +163,81 @@ class PeopleTableHeader extends React.Component<
     this.state = { columns, resetColumnsSize };
   }
 
+  componentDidUpdate(prevProps: Readonly<TableHeaderProps>) {
+    const {
+      isRoomAdmin,
+      contactsTab,
+      t,
+      inviterColumnIsEnabled,
+      invitedDateColumnIsEnabled,
+      storageColumnIsEnabled,
+      isDefaultUsersQuotaSet,
+    } = this.props;
+    if (prevProps.isRoomAdmin !== isRoomAdmin) {
+      if (contactsTab === "guests") {
+        if (!isRoomAdmin)
+          this.setState((prev) => ({
+            columns: [
+              ...prev.columns,
+              {
+                key: "Inviter",
+                title: t!("Common:Inviter"),
+                enable: inviterColumnIsEnabled,
+                resizable: true,
+                sortBy: "createdby",
+                onChange: this.onColumnChange,
+                onClick: this.onFilter,
+              },
+
+              {
+                key: "InvitedDate",
+                title: t!("PeopleTranslations:RegistrationDate"),
+                enable: invitedDateColumnIsEnabled,
+                resizable: true,
+                sortBy: "registrationDate",
+                onChange: this.onColumnChange,
+                onClick: this.onFilter,
+              },
+            ],
+            resetColumnsSize: true,
+          }));
+        else
+          this.setState((prev) => ({
+            columns: [...prev.columns].filter(
+              (c) => c.key !== "Inviter" && c.key !== "InvitedDate",
+            ),
+            resetColumnsSize: true,
+          }));
+      }
+
+      if (contactsTab === "people") {
+        if (isRoomAdmin)
+          this.setState((prev) => ({
+            columns: [...prev.columns].filter((c) => c.key !== "Storage"),
+            resetColumnsSize: true,
+          }));
+        else
+          this.setState((prev) => ({
+            columns: [
+              ...prev.columns,
+              {
+                key: "Storage",
+                title: isDefaultUsersQuotaSet
+                  ? t!("Common:StorageAndQuota")
+                  : t!("Common:Storage"),
+                enable: storageColumnIsEnabled,
+                sortBy: SortByFieldName.UsedSpace,
+                resizable: true,
+                onChange: this.onColumnChange,
+                onClick: this.onFilter,
+              },
+            ],
+            resetColumnsSize: true,
+          }));
+      }
+    }
+  }
+
   onColumnChange = (key: string) => {
     const { columns } = this.state;
     const { setColumnEnable } = this.props;
@@ -220,7 +294,6 @@ class PeopleTableHeader extends React.Component<
       filter,
       sectionWidth,
       infoPanelVisible,
-      tableStorageName,
       columnStorageName,
       columnInfoPanelStorageName,
       setHideColumns,
@@ -236,7 +309,6 @@ class PeopleTableHeader extends React.Component<
         // fix types for table header and remove this
         containerRef={containerRef as unknown as { current: HTMLDivElement }}
         columns={columns as TTableColumn[]}
-        tableStorageName={tableStorageName!}
         columnStorageName={columnStorageName!}
         columnInfoPanelStorageName={columnInfoPanelStorageName!}
         sectionWidth={sectionWidth}

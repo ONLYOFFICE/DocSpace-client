@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,21 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { memo, useState } from "react";
+import { memo, useState } from "react";
 import equal from "fast-deep-equal/react";
-
-import { getProviderLabel } from "@docspace/shared/utils/common";
 
 import VerticalDotsReactSvg from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg";
 
+import { getProviderLabel } from "../../utils/common";
 import { SocialButton } from "../social-button";
-import StyledSocialButtonsGroup from "./SocialButtonsGroup.styled";
+import styles from "./SocialButtonsGroup.module.scss";
 import type {
   SocialButtonProps,
   ProvidersDataType,
 } from "./SocialButtonsGroup.types";
 import { PROVIDERS_DATA } from "../../constants";
-import MoreLoginModal from "../more-login-modal";
+import MoreLoginModal from "../../dialogs/more-login-modal";
 
 export const SocialButtonsGroup = memo(
   ({
@@ -68,8 +67,8 @@ export const SocialButtonsGroup = memo(
       onMoreAuthToggle?.(true);
     };
     const elements = showingProviders.map((item) => {
-      const provider = item.provider;
-      const url = item.url;
+      const { provider } = item;
+      const { url } = item;
 
       if (!PROVIDERS_DATA[provider as keyof ProvidersDataType]) return;
 
@@ -77,13 +76,19 @@ export const SocialButtonsGroup = memo(
         PROVIDERS_DATA[provider as keyof ProvidersDataType];
 
       return (
-        <div className="buttonWrapper" key={`${provider}ProviderItem`}>
+        <div
+          className={styles.buttonWrapper}
+          key={`${provider}ProviderItem`}
+          data-test-id={`${provider}-button-wrapper`}
+        >
           <SocialButton
             isDisabled={isDisabled}
             label={length >= 2 ? "" : getProviderLabel(label, t)}
             $iconOptions={iconOptions}
             data-url={url}
             data-providername={provider}
+            data-test-id={`${provider}-social-button`}
+            aria-label={getProviderLabel(label, t)}
             IconComponent={icon}
             onClick={onClick}
             className="social-button"
@@ -93,26 +98,28 @@ export const SocialButtonsGroup = memo(
     });
 
     return (
-      <StyledSocialButtonsGroup>
-        {ssoUrl && (
+      <div className={styles.container}>
+        {ssoUrl ? (
           <SocialButton
             isDisabled={isDisabled}
             IconComponent={ssoSVG}
-            className="sso-button social-button"
+            data-test-id="sso-button"
+            aria-label={ssoLabel}
+            className={styles.ssoButton}
             label={ssoLabel || getProviderLabel("sso", t)}
             onClick={() => (window.location.href = ssoUrl)}
           />
-        )}
-        {providers.length !== 0 && (
-          <div className="social-buttons-group">
+        ) : null}
+        {providers.length !== 0 ? (
+          <div className={styles.socialButtonsGroup}>
             {elements}
-            {length > 2 && (
+            {length > 2 ? (
               <SocialButton
                 IconComponent={VerticalDotsReactSvg}
                 onClick={moreAuthOpen}
-                className="show-more-button"
+                className={styles.showMoreButton}
               />
-            )}
+            ) : null}
 
             <MoreLoginModal
               t={t}
@@ -122,11 +129,10 @@ export const SocialButtonsGroup = memo(
               onSocialLoginClick={onClick}
               ssoLabel={ssoLabel ?? ""}
               ssoUrl={ssoUrl ?? ""}
-              isSignUp
             />
           </div>
-        )}
-      </StyledSocialButtonsGroup>
+        ) : null}
+      </div>
     );
   },
   equal,

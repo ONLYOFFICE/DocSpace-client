@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -37,6 +37,7 @@ export const MonthDays = memo(
     setMonthDays,
     t,
     isDisabled,
+    dataTestId,
   }: MonthDaysProps) => {
     const placeholder = useMemo(() => {
       const isEmpty = weekDays.length === 0;
@@ -52,6 +53,7 @@ export const MonthDays = memo(
         unit={unit}
         dropDownMaxHeight={300}
         isDisabled={isDisabled}
+        dataTestId={dataTestId}
       />
     );
   },

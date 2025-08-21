@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,29 +34,52 @@ const StyledLoader = styled.div`
 
   .description_loader {
     max-width: 700px;
-    margin-bottom: 16px;
+    margin-bottom: 5px;
   }
 
   .header_loader {
-    margin-bottom: 8px;
+    margin-bottom: 16px;
   }
 
   .text-input_loader {
-    margin: 12px 0;
+    margin-bottom: 16px;
+  }
+
+  .subtitle_loader {
+    margin-top: 20px;
+    margin-bottom: 16px;
+  }
+
+  .buttons_loader {
+    margin-button: 24px;
   }
 `;
 
 const LoaderWhiteLabel = () => {
   return (
     <StyledLoader>
-      <RectangleSkeleton height="20px" className="description_loader" />
       <RectangleSkeleton height="22px" width="95px" className="header_loader" />
       <RectangleSkeleton height="16px" className="description_loader" />
-      <RectangleSkeleton height="20px" width="291px" />
+      <RectangleSkeleton
+        height="16px"
+        width="200px"
+        className="description_loader"
+      />
+
+      <RectangleSkeleton
+        height="20px"
+        width="151px"
+        className="subtitle_loader"
+      />
       <RectangleSkeleton
         height="32px"
         width="350px"
         className="text-input_loader"
+      />
+      <RectangleSkeleton
+        height="32px"
+        width="115px"
+        className="buttons_loader"
       />
     </StyledLoader>
   );

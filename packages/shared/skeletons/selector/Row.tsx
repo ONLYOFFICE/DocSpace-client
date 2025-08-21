@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,52 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled, { css } from "styled-components";
+import classNames from "classnames";
 
 import { RectangleSkeleton, RectangleSkeletonProps } from "../rectangle";
-
-const StyledContainer = styled.div`
-  width: 100%;
-  height: 100%;
-
-  overflow: hidden;
-
-  display: flex;
-  flex-direction: column;
-`;
-
-const StyledItem = styled.div<{ isUser?: boolean }>`
-  width: 100%;
-  height: 48px;
-  min-height: 48px;
-
-  padding: 0 16px;
-
-  box-sizing: border-box;
-
-  display: flex;
-  align-items: center;
-
-  .avatar {
-    margin-inline-end: 8px;
-
-    ${(props) =>
-      props.isUser &&
-      css`
-        border-radius: 50px;
-      `}
-  }
-
-  .checkbox {
-    margin-inline-start: auto;
-  }
-`;
-
-const Divider = styled.div`
-  height: 1px;
-  margin: 12px 16px;
-  border-bottom: ${(props) => props.theme.selector.border};
-`;
+import styles from "./Row.module.scss";
 
 interface RowLoaderProps extends RectangleSkeletonProps {
   id?: string;
@@ -96,20 +54,23 @@ const RowLoader = ({
 }: RowLoaderProps) => {
   const getRowItem = (key: number) => {
     return (
-      <StyledItem
+      <div
         id={id}
-        className={className}
+        className={classNames(
+          styles.item,
+          { [styles.isUser]: isUser },
+          className,
+        )}
         style={style}
-        isUser={isUser}
         key={`selector-row-${key}`}
         {...rest}
       >
         <RectangleSkeleton className="avatar" width="32px" height="32px" />
         <RectangleSkeleton width="212px" height="16px" />
-        {isMultiSelect && (
+        {isMultiSelect ? (
           <RectangleSkeleton className="checkbox" width="16px" height="16px" />
-        )}
-      </StyledItem>
+        ) : null}
+      </div>
     );
   };
 
@@ -123,21 +84,22 @@ const RowLoader = ({
   };
 
   return isContainer ? (
-    <StyledContainer
+    <div
       id={id}
-      className={className}
+      className={classNames(styles.container, className)}
       key="test"
       style={style}
       {...rest}
+      data-testid="row-loader"
     >
-      {withAllSelect && (
+      {withAllSelect ? (
         <>
           {getRowItem(-1)}
-          <Divider />
+          <div className={styles.divider} />
         </>
-      )}
+      ) : null}
       {getRowItems()}
-    </StyledContainer>
+    </div>
   ) : (
     getRowItem(0)
   );

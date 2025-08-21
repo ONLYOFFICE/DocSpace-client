@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,6 +26,7 @@
 
 import type { TTranslation } from "@docspace/shared/types";
 import { TColorScheme } from "@docspace/shared/themes";
+import FilesStore from "SRC_DIR/store/FilesStore";
 
 export interface ICover {
   data: string;
@@ -72,11 +73,13 @@ export type CoverDialogProps = RoomLogoCoverProps & {
   createRoomDialogVisible: boolean;
   editRoomDialogPropsVisible: boolean;
   roomLogoCoverDialogVisible: boolean;
+  templateEventVisible: boolean;
+  setEnabledHotkeys?: FilesStore["setEnabledHotkeys"];
 };
 
 export interface CustomLogoProps {
   color: string | null;
-  icon: string | ILogo | null;
+  icon: string | ILogo | ICover | null;
   withoutIcon: boolean;
   isBaseTheme: boolean;
   roomTitle: string;

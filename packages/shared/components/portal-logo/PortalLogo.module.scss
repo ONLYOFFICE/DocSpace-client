@@ -1,0 +1,38 @@
+@use "../../styles/variables/colors";
+
+@use "../../styles/mixins";
+
+.wrapper {
+  @include mixins.mobile {
+    &:not(.resizable) {
+      display: none;
+    }
+
+    &.mobile.resizable {
+      display: flex;
+      background-color: var(--header-background-color);
+      height: var(--header-height);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      align-content: center;
+      text-align: center;
+
+      img {
+        height: 24px;
+        margin: auto;
+      }
+
+      [dir="rtl"] & {
+        right: 0;
+      }
+    }
+  }
+
+  &:global(.not-mobile) {
+    img {
+      width: 386px;
+    }
+  }
+}

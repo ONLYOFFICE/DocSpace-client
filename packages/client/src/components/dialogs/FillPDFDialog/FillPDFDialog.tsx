@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -23,18 +23,22 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { observer, inject } from "mobx-react";
 
+import FormDataCollectionIcon from "PUBLIC_DIR/images/icons/32/form.data.collection.svg";
+import FillOutYourselfIcon from "PUBLIC_DIR/images/icons/32/fill.out.yourself.svg";
+import RoleBasedFillingIcon from "PUBLIC_DIR/images/icons/32/role.based.filling.svg";
+
+import { RoomsType } from "@docspace/shared/enums";
 import {
-  ModalDialog,
-  ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+  ShareFormDialog,
+  type PanelCard,
+} from "@docspace/shared/dialogs/share-form-dialog";
 
-import { Card } from "./sub-components/Card";
+import { ShareCollectSelector } from "SRC_DIR/components/ShareCollectSelector";
 
-import { Container } from "./FillPDFDialog.styled";
 import type {
   FillPDFDialogProps,
   InjectFillPDFDialogProps,
@@ -42,10 +46,10 @@ import type {
 
 const FillPDFDialog = inject<TStore>(
   ({ dialogsStore, contextOptionsStore }) => {
-    const { setFillPDFDialogData, setShareCollectSelector } = dialogsStore;
+    const { setFillPDFDialogData } = dialogsStore;
     const { gotoDocEditor } = contextOptionsStore;
 
-    return { setFillPDFDialogData, gotoDocEditor, setShareCollectSelector };
+    return { setFillPDFDialogData, gotoDocEditor };
   },
 )(
   observer(
@@ -53,52 +57,85 @@ const FillPDFDialog = inject<TStore>(
       visible,
       setFillPDFDialogData,
       gotoDocEditor,
-      setShareCollectSelector,
       data,
     }: FillPDFDialogProps & InjectFillPDFDialogProps) => {
-      const { t } = useTranslation(["FillPDFDialog"]);
+      const { t } = useTranslation(["FillPDFDialog", "Common"]);
+
+      const [isVisibleSelectFormRoomDialog, setIsVisibleSelectFormRoomDialog] =
+        useState(false);
+      const [roomType, setRoomType] = useState<RoomsType>(RoomsType.FormRoom);
 
       const onClose = () => {
-        setFillPDFDialogData!(false, null);
+        setFillPDFDialogData!(false);
       };
 
       const openEditorFill = () => {
-        gotoDocEditor!(false, data, null, false, true);
+        gotoDocEditor!(data, false, null, false, true);
         onClose();
       };
 
-      const openSelector = () => {
-        setShareCollectSelector(true, data);
-        onClose();
+      const openSelector = (type: RoomsType) => {
+        setIsVisibleSelectFormRoomDialog(true);
+        setRoomType(type);
       };
+
+      const onCloseSelectionFormRoom = (): void => {
+        setIsVisibleSelectFormRoomDialog(false);
+      };
+
+      const container = (
+        <ShareCollectSelector
+          file={data}
+          visible={isVisibleSelectFormRoomDialog}
+          headerProps={{
+            headerLabel: t("Common:ShareAndCollect"),
+            withoutBorder: false,
+            onCloseClick: onClose,
+            withoutBackButton: false,
+            onBackClick: onCloseSelectionFormRoom,
+          }}
+          onCloseActionProp={onClose}
+          createDefineRoomType={roomType}
+          onCancel={onCloseSelectionFormRoom}
+        />
+      );
+
+      const cards = [
+        {
+          id: "form-yourself",
+          title: t("FillPDFDialog:FillOutTitle"),
+          description: t("FillPDFDialog:FillOutDescription"),
+          buttonLabel: t("FillPDFDialog:FillOutButtonLabel"),
+          onClick: openEditorFill,
+          icon: <FillOutYourselfIcon />,
+        },
+        {
+          id: "form-data-collection",
+          title: t("Common:FormDataCollection"),
+          description: t("Common:FormDataCollectionDescription"),
+          buttonLabel: t("Common:ShareInTheRoom"),
+          onClick: () => openSelector(RoomsType.FormRoom),
+          icon: <FormDataCollectionIcon />,
+        },
+        {
+          id: "role-based-filling",
+          title: t("Common:RoleBasedFilling"),
+          description: t("Common:RoleBasedFillingDescription"),
+          buttonLabel: t("Common:ShareInTheRoom"),
+          onClick: () => openSelector(RoomsType.VirtualDataRoom),
+          icon: <RoleBasedFillingIcon />,
+        },
+      ] satisfies PanelCard[];
 
       return (
-        <ModalDialog
-          autoMaxHeight
+        <ShareFormDialog
+          cards={cards}
           visible={visible}
           onClose={onClose}
-          displayType={ModalDialogType.aside}
-        >
-          <ModalDialog.Header>
-            {t("FillPDFDialog:FillPDFDialogTitle")}
-          </ModalDialog.Header>
-          <ModalDialog.Body>
-            <Container>
-              <Card
-                title={t("FillPDFDialog:FillOutTitle")}
-                description={t("FillPDFDialog:FillOutDescription")}
-                buttonLabel={t("FillPDFDialog:FillOutButtonLabel")}
-                onClick={openEditorFill}
-              />
-              <Card
-                title={t("FillPDFDialog:ShareCollectTitle")}
-                description={t("FillPDFDialog:ShareCollectDescription")}
-                buttonLabel={t("FillPDFDialog:ShareCollectButtonLabel")}
-                onClick={openSelector}
-              />
-            </Container>
-          </ModalDialog.Body>
-        </ModalDialog>
+          container={container}
+          title={t("FillPDFDialog:FillPDFDialogTitle")}
+          containerVisible={isVisibleSelectFormRoomDialog}
+        />
       );
     },
   ),

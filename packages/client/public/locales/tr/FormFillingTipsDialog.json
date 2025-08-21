@@ -1,0 +1,15 @@
+{
+  "DescriptionUploading": "{{productName}} içinde (örneğin {{sectionName}} bölümünüzde) PDF formları oluşturun ve hazır olanları odaya yükleyin. Entegre şablon kitaplığını kullanın ve hazır PDF şablonları arasından seçim yapın.",
+  "HeaderComplete": "Toplanan yanıtların kolay analizi",
+  "HeaderSharing": "Hızlı paylaşım",
+  "HeaderStarting": "Form doldurma süreci başlatılıyor",
+  "HeaderSubmitting": "Yanıtlar gönderiliyor",
+  "HeaderUploading": "Kolay form yükleme",
+  "TitleComplete": "Doldurulan formları kontrol edin ve otomatik olarak toplanan verileri bir elektronik tabloda analiz edin. Hepsi tek bir oda içinde.",
+  "TitleSharing": "Yüklenen PDF formları doldurmaları için diğer {{productName}} üyelerini odaya davet edin. Odayı harici kullanıcılarla paylaşmak için genel erişim bağlantısını kopyalayın.",
+  "TitleStarting": "Bir form, doldurmak için açıldığında her yanıtlayıcı için otomatik olarak bireysel bir kopya oluşturulur ve Devam Ediyor klasörüne kaydedilir. Bu, formun başlatıldığını fakat henüz tamamlanmadığını gösterir.",
+  "TitleSubmitting": "Açılan form kopyasında Tamamla ve Gönder butonuna tıklandığında, form Tamamlananlar klasörüne taşınır.",
+  "WelcomeDescription": "Burada kolay bir PDF form doldurma süreci düzenleyebilir, yanıtları zahmetsizce toplayıp analiz edebilirsiniz. Başlamaya hazır mısınız?",
+  "WelcomeFillingForm": "Form Doldurma Odasına Hoş Geldiniz!",
+  "WelcomeStartTutorial": "Kısa göz gezdirin"
+}

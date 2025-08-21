@@ -1,0 +1,433 @@
+{
+  "key_path": "FileProtectionMessage",
+  "content": "These files are protected. Please try entering the password for all files. If you don't remember the password but need these files, you can download them in their original format or simply remove them from the list. Then you can download the rest of the files.",
+  "content_en_sha1_hash": "f5fddb42e87596a64459b490711a116988ce134e",
+  "created_at": "2025-05-19T21:30:45.260Z",
+  "updated_at": "2025-05-26T07:57:32.941Z",
+  "comment": {
+    "text": "\"This translation key is used for a warning message that informs users their files are protected and prompts them to enter a password for download. The text appears in a password input field or related dialog component.\"",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:36:14.760Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/dialogs/download-dialog/sub-components/PasswordContent.tsx",
+      "line_number": 104,
+      "context": "data-testid=\"password-content\"\n >\n {barIsVisible ? (\n <PublicRoomBar\n headerText={t(\"Common:ProtectedFiles\")}\n bodyText={t(\"Common:FileProtectionMessage\")}\n iconName={InfoSvgUrl}\n onClose={onClose}\n />\n ) : null}\n {other && other?.length > 0",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The sentence \"إن لم تتذكروا كلمة المرور وتحتاجون إلى الملفات\" is a bit long and could be broken down for better readability. It’s a single, lengthy clause.",
+          "suggestion": "Consider splitting it into two sentences: \"إن لم تتذكروا كلمة المرور. وتحتاجون إلى الملفات...\" or rephrasing to something like \"إذا لم تتذكروا كلمة المرور وكنتم بحاجة إلى الملفات...\""
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"بصيغتها الأصلية\" (bi sighgatiha al-asliyya) translates literally to 'in its original form.' While technically correct, 'بصيغة أصلية' (bi sighgatin asliyya) – or potentially just 'بنسختها الأصلية' (bi nuskhatiha al-asliyya) which means ‘in its original version’ – might be more natural in this context, especially when referring to files.",
+          "suggestion": "Consider using 'بصيغة أصلية' or 'بنسختها الأصلية'."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'Bütün fayllar üçün şifrə daxil etməyə cəhd edin' sounds slightly awkward. A more natural phrasing would emphasize trying the password for *each* file.",
+          "suggestion": "Bütün fayllar üçün fərdi şifrə daxil etməyə cəhd edin."
+        },
+        {
+          "type": "grammar",
+          "description": "The last sentence 'Sonra qalan faylları endirə bilərsiniz' could be more concise. It implies a sequence of events that isn't necessarily clear.",
+          "suggestion": "Sonra qalan faylları yükləyə bilərsiniz."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'simply remove them from the list' is translated as 'siyahıdan silə bilərsiniz'. A more accurate translation in context would imply removing them from the *protected* files list.",
+          "suggestion": "Onları mühafizə olunan faylların siyahısından silə bilərsiniz."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"These files are protected\" is adequately translated as \"Αυτά τα αρχεία προστατεύονται\". However, the overall tone is slightly formal and could be adjusted for better user experience. While technically correct, a more conversational and user-friendly approach might be preferable depending on the target audience.",
+          "suggestion": "Consider a slightly less formal phrasing like 'Αυτά τα αρχεία έχουν προστασία.' or 'Αυτά τα αρχεία είναι κλειδωμένα.'"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Please try entering the password for all files\" translates to \"Προσπαθήστε να εισάγετε τον κωδικό πρόσβασης για όλα τα αρχεία\".  While grammatically correct, it sounds a bit stiff. A more natural phrasing might be used.",
+          "suggestion": "Consider 'Δοκιμάστε να βάλετε τον κωδικό πρόσβασης για όλα τα αρχεία.' or 'Προσπαθήστε να πληκτρολογήσετε τον κωδικό πρόσβασης για όλα τα αρχεία.'"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"If you don't remember the password but need these files\" is translated as \"Εάν δεν θυμάστε τον κωδικό πρόσβασης αλλά χρειάζεστε αυτά τα αρχεία\". It is technically correct but lacks flow.  Adding a conjunction would enhance readability.",
+          "suggestion": "Consider 'Αν δεν θυμάστε τον κωδικό πρόσβασης, αλλά χρειάζεστε αυτά τα αρχεία...' "
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence \"Στη συνέχεια, μπορείτε να κατεβάσετε τα υπόλοιπα αρχεία.\" could be improved in terms of flow and clarity in relation to the previous sentences. It’s a bit abrupt.",
+          "suggestion": "Consider rephrasing to something like: 'Μετά, μπορείτε να κατεβάσετε τα υπόλοιπα αρχεία.' or 'Στη συνέχεια, μπορείτε να κατεβάσετε και τα υπόλοιπα αρχεία.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses a somewhat informal phrasing ('Ole hyvä ja...'). A more formal/neutral tone might be preferred for a file protection message.",
+          "suggestion": "Nämä tiedostot ovat suojattuja. Kokeile syöttää kaikkien tiedostojen salasana."
+        },
+        {
+          "type": "formatting",
+          "description": "The word 'niin' after 'mutta tarvitset näitä tiedostoja' creates a slightly awkward sentence structure. While grammatically correct, it can be improved for readability.",
+          "suggestion": "Jos et muista salasanaa, mutta tarvitset näitä tiedostoja, voit ladata ne alkuperäisessä muodossaan tai yksinkertaisesti poistaa ne listalta."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence 'Sitten voit ladata loput tiedostot' feels slightly detached from the preceding sentences. A more integrated phrasing might flow better.",
+          "suggestion": "Voit sitten ladata loput tiedostot."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses a colon after 'Խնդրում ենք մուտքագրել գաղտնաբառը բոլոր ֆայլերի համար:'. While colons are used in Armenian, it's slightly less common to follow the verb like this in this context. It might flow better without it.",
+          "suggestion": "Խնդրում ենք մուտքագրել գաղտնաբառը բոլոր ֆայլերի համար"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Please try entering the password for all files' is translated as 'Խնդրում ենք մուտքագրել գաղտնաբառը բոլոր ֆայլերի համար:'. A more natural translation would be something along the lines of 'Խնդրում ենք փորձեք մուտքագրել գաղտնաբառը բոլոր ֆայլերի համար' or 'Խնդրում ենք դիտարկեք մուտքագրել գաղտնաբառը բոլոր ֆայլերի համար'.",
+          "suggestion": "Խնդրում ենք փորձեք մուտքագրել գաղտնաբառը բոլոր ֆայլերի համար"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"These files are protected\" is accurately translated as \"これらのファイルは保護されています\". However, the subsequent sentence 'Please try entering the password for all files' could be more naturally expressed. The direct translation \"すべてのファイルのパスワードを入力してみてください\" is a bit stiff.",
+          "suggestion": "すべてのファイルでパスワードの入力を試してください"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'If you don't remember the password but need these files' is translated as \"パスワードを思い出せないが、これらのファイルが必要な場合は\". The 'but' is not effectively conveyed.  A smoother phrasing might be more appropriate.",
+          "suggestion": "パスワードを覚えていないけれど、これらのファイルが必要な場合は"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"simply remove them from the list\" is translated as \"単にリストから削除してください\". While technically correct, it sounds abrupt. A softer phrasing might be preferred in a user-facing message.",
+          "suggestion": "リストから削除していただくこともできます"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Then you can download the rest of the files' is translated as \"そうすれば、残りのファイルをダウンロードできます\". \"そうすれば\" (Sou sureba) implies 'if that is done' or 'as a result of that'. While technically correct, it might be interpreted as implying a direct cause/effect relationship that may not be intended.",
+          "suggestion": "その後、残りのファイルをダウンロードできます"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'try entering the password for all files' is a bit awkward in Korean. It implies a trial-and-error approach which might not be the intended meaning.",
+          "suggestion": "이 파일들은 암호로 보호되어 있습니다. 모든 파일에 대한 암호를 입력해 보세요. (This file are protected by password. Please try entering the password for all files.) or 이 파일들은 암호로 보호되어 있습니다. 각 파일에 대한 암호를 입력해 보세요. (These files are protected by password. Please try entering the password for each file.)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'remove them from the list' can be interpreted differently. It's unclear if this refers to removing the specific file or the whole list.",
+          "suggestion": "목록에서 해당 파일을 제거하거나 (or remove the corresponding file from the list) or 목록에서 해당 파일을 삭제하거나 (or delete the corresponding file from the list)"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure could be smoother. Separating the two actions (remove and download) feels disjointed.",
+          "suggestion": "파일이 필요하지만 비밀번호가 기억나지 않는 경우, 원본 형식으로 다운로드하거나 목록에서 해당 파일을 제거한 뒤 나머지 파일을 다운로드할 수 있습니다. -> 파일이 필요하지만 비밀번호가 기억나지 않는 경우, 원본 형식으로 다운로드하거나 목록에서 해당 파일을 제거하여 나머지 파일을 다운로드할 수 있습니다. (Adds a conjunction to improve flow)"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"These files are protected\" is translated as \"ເອກະສານເຫຼົ່ານີ້ຖືກປົກປ້ອງໄວ້\". While technically correct, it could be more natural to say \"ເອກະສານເຫຼົ່ານີ້ຖືກປົກປ້ອງ\". The addition of 'ໄວ້' is slightly redundant.",
+          "suggestion": "ເອກະສານເຫຼົ່ານີ້ຖືກປົກປ້ອງ"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"password for all files\" is translated as \"ລະຫັດລັບສໍາລັບເອກະສານທັງຫມົດ.\" While understandable, a more direct translation, and perhaps more common phrasing, would be \"ລະຫັດລັບຂອງເອກະສານທັງຫມົດ\" or simply \"ລະຫັດລັບເອກະສານທັງຫມົດ\".",
+          "suggestion": "ລະຫັດລັບຂອງເອກະສານທັງຫມົດ"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"If you don't remember the password\" is translated as \"ຖ້າມື້ບໍ່ຈໍາໄດ້ລະຫັດລັບ\". 'ມື້' seems misplaced. A more accurate rendering would be \"ຖ້າທ່ານບໍ່ຈໍາໄດ້ລະຫັດລັບ\"",
+          "suggestion": "ຖ້າທ່ານບໍ່ຈໍາໄດ້ລະຫັດລັບ"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrasing \"download them in their original format\" is translated as \"ດາວໂລດພວກມັນໃນຮູບແບບຕົ້ນສະບັບ\". While accurate, it is slightly verbose. 'ໃນຮູບແບບຕົ້ນສະບັບ' can be shortened to 'ໃນຮູບແບບດັ້ງເດີມ' or simply 'ຕົ້ນສະບັບ'.",
+          "suggestion": "ດາວໂລດພວກມັນໃນຕົ້ນສະບັບ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'Następnie będziesz w stanie pobrać resztę plików' is slightly awkward. It implies future ability, which isn't the intended meaning. A more natural phrasing would be more direct.",
+          "suggestion": "Następnie możesz pobrać resztę plików."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Romanian translation lacks a period at the end of the second sentence. This makes the flow a bit choppy.",
+          "suggestion": "Add a period after 'fișierele' in the sentence: 'Încercați să introduceți parola pentru toate fișierele.'"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'simply remove them from the list' is translated as 'pur și simplu le puteți elimina din lista'. While accurate, a more natural phrasing in Romanian would be 'pur și simplu le puteți șterge din listă'.",
+          "suggestion": "Change 'elimina' to 'șterge' in the sentence 'pur și simplu le puteți elimina din lista.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"These files are protected\" is translated as \"Эти файлы защищены.\" While technically correct, a more natural translation might be something like \"Эти файлы находятся под защитой\" or \"Эти файлы имеют защиту.\" The current translation sounds a bit stiff.",
+          "suggestion": "Эти файлы находятся под защитой"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"If you don't remember the password\" is translated as \"Если вы забыли пароль\". While accurate, a more conversational and slightly more nuanced translation might be \"Если вы не помните пароль...\"",
+          "suggestion": "Если вы не помните пароль..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Then you can download the rest of the files\" is translated as \"Затем вы сможете загрузить остальные файлы.\" It's accurate, but the phrasing \"Then you can\" could be made more fluid.  A more natural flow might be \"После этого вы сможете...\"",
+          "suggestion": "После этого вы сможете загрузить остальные файлы."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"for all files\" in the English content is not accurately reflected in the Sinhala translation. The Sinhala 'සියලුම ගොනු සඳහා' (siyalumu gonu saha) literally translates to 'for all files' but doesn't fully capture the intended meaning, which is 'for each file'.",
+          "suggestion": "මෙම ගොනු සඳහා මුරපදය ඇතුළත් කිරීමට උත්සාහ කරන්න. (Mema gonu saha murupadaya ethulat kirimata utsaahaya karranaa.) - Try entering the password for these files."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"simply remove them from the list\" is slightly awkward in the Sinhala translation. 'ලැයිස්තුවෙන් ඉවත් කළ හැකිය' (laisistuwen ivala kala yadhi) is grammatically correct, but it sounds less natural than a more colloquial phrasing.",
+          "suggestion": "ඔවුන් ලැයිස්තුවෙන් ඉවත් කරන්න. (Uvan laisistuwen ivala kanna.) - Remove them from the list."
+        },
+        {
+          "type": "formatting",
+          "description": "The Sinhala translation lacks punctuation. Specifically, periods are missing at the end of several sentences, making the text less readable.",
+          "suggestion": "Add periods at the end of each sentence."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Please try entering the password for all files\" is a bit awkward. A more natural Serbian phrasing would be better.",
+          "suggestion": "Молимо покушајте да унесете лозинку за све датотеке."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'remove them from the list' is a direct translation but sounds unnatural. It lacks a more idiomatic expression for removing items from a list in this context.",
+          "suggestion": "Можете их уклонити са листе."
+        },
+        {
+          "type": "spelling",
+          "description": "In the original english 'files' is plural, but in some areas of the translation it seems to imply a single file. Although technically correct, the meaning can be confusing.",
+          "suggestion": "Ensure consistency in whether 'file' or 'files' is used throughout the translation to match the original intent."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'fajlove' is repeatedly used. While technically correct, using synonyms for stylistic variation would improve readability.",
+          "suggestion": "Consider using 'datoteke' or 'dokumenta' as alternatives for 'fajlovi' to avoid repetition."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence 'Ako se ne sećate lozinke, ali su vam ovi fajlovi potrebni' could be improved for clarity and flow.",
+          "suggestion": "Consider restructuring to: 'Ako ne sećate lozinku, a potrebni su vam ovi fajlovi...'"
+        },
+        {
+          "type": "formatting",
+          "description": "The sequence 'Zatim možete preuzeti ostatak fajlova' feels slightly abrupt. A smoother transition could be beneficial.",
+          "suggestion": "Consider adding a connecting phrase like 'Nakon toga' or 'Zatim...' to link this sentence to the preceding one."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The sentence \"Parolayı hatırlamıyorsanız fakat bu dosyalara ihtiyacınız varsa\" is a bit clunky. \"Fakat\" (but) creates an awkward phrasing.",
+          "suggestion": "Parolayı hatırlamıyorsanız ve bu dosyalara ihtiyacınız varsa"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'remove them from the list' isn't directly and naturally translated in the Turkish version. A more appropriate phrasing would emphasize removing the protection from the files, not removing the files themselves.",
+          "suggestion": "Listedeki korumayı kaldırabilirsiniz."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

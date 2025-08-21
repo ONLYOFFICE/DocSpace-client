@@ -60,3 +60,9 @@ export {
   companyInfoSuccess,
   PATH as COMPANY_INFO_PATH,
 } from "./companyInfo";
+
+export {
+  invitationSettings as invitationSettingsHandler,
+  invitationSettingsSuccess,
+  PATH as INVITATION_SETTINGS_PATH,
+} from "./invitationSettings";

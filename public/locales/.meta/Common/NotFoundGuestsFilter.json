@@ -1,0 +1,226 @@
+{
+  "key_path": "NotFoundGuestsFilter",
+  "content": "No guests found",
+  "content_en_sha1_hash": "b91968e9823bf736346896bcc6a5923a94d5c5b3",
+  "created_at": "2025-05-19T21:30:46.891Z",
+  "updated_at": "2025-08-04T07:30:01.266Z",
+  "comment": {
+    "text": "The \"NotFoundGuestsFilter\" translation key is used to display a message when no guests are found in a contacts list. It appears as a header on an empty screen in the Home/ContactsBody section, informing users that there are no guest groups or members.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:17.881Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/EmptyScreen.tsx",
+      "line_number": 86,
+      "context": "const isEmptyGroup = contactsTab === \"inside_group\";\n const isEmptyGuests = contactsTab === \"guests\";\n \n const title = isEmptyGuests\n ? isFiltered\n ? t(\"Common:NotFoundGuestsFilter\")\n : t(\"Common:NotFoundGuests\")\n : t(\"Common:NotFoundMembers\");\n \n const description = isEmptyGuests\n ? isFiltered",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/selectors/People/index.tsx",
+      "line_number": 678,
+      "context": ": t(\"Common:GroupsNotFoundDescription\"))\n }\n searchEmptyScreenImage={emptyScreenImage}\n searchEmptyScreenHeader={\n activeTabId === GUESTS_TAB_ID\n ? t(\"Common:NotFoundGuestsFilter\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"Common:NotFoundMembers\")\n : t(\"Common:NotFoundGroups\")\n }\n searchEmptyScreenDescription={",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'අමුත්තන් හමු නොවීය' literally translates to 'Guests were not found'. While understandable, it's a slightly awkward phrasing. A more natural and idiomatic translation for 'No guests found' would be 'අමුත්තන් නොවීය' or 'අමුත්තන් කීවත් නොවීය'.",
+          "suggestion": "Consider 'අමුත්තන් නොවීය' or 'අමුත්තන් කීවත් නොවීය'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While '未找到访客' is technically correct, it sounds a bit formal and stiff for a user-facing message like \"No guests found.\" A more natural and user-friendly translation would be something like \"没有访客\" or \"没有找到任何访客\" (no guests found).",
+          "suggestion": "没有访客"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

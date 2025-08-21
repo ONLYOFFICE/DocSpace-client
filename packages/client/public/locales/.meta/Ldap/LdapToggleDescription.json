@@ -1,0 +1,470 @@
+{
+  "key_path": "LdapToggleDescription",
+  "content": "Enable this option if you want to add users from LDAP server to {{productName}} automatically. The added users will be able to authorize using their LDAP server credentials. {{productName}} does not save the user passwords locally and will authenticate users sending their login and password to LDAP server.",
+  "content_en_sha1_hash": "da5fb1c0bb22d780f948c5590af28e3858662dfd",
+  "created_at": "2025-05-19T21:30:54.320Z",
+  "updated_at": "2025-08-12T19:46:26.194Z",
+  "comment": {
+    "text": "Enable this option to automatically add users from an LDAP server to {{productName}}, allowing them to authenticate using their LDAP credentials. This setting is part of PortalSettings and appears in toggle options within the integration settings section.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:57.029Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/ToggleLDAP.js",
+      "line_number": 133,
+      "context": "fontSize=\"12px\"\n fontWeight={400}\n lineHeight=\"16px\"\n className=\"settings_unavailable\"\n >\n {t(\"LdapToggleDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n </div>\n </StyledWrapper>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'دليل بيانات اعتماد LDAP الخاص بهم' (data credentials of their LDAP) is slightly awkward. A more natural phrasing would be 'بيانات اعتمادهم في خادم LDAP' (their credentials in the LDAP server).",
+          "suggestion": "قم بتمكين هذا الخيار إذا كنت تريد إضافة مستخدمين تلقائيًا من LDAP إلى {{productName}}. سيتمكن المستخدمون المضافون من التفويض باستخدام بيانات اعتمادهم في خادم LDAP."
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'دليل' (directory) can be confusing in this context. While technically correct, 'خادم' (server) is clearer. Using 'خادم LDAP' throughout maintains consistency and prevents confusion. Although, the best solution is to use the corrected suggestion above which naturally incorporates 'خادم'.",
+          "suggestion": "N/A (See suggestion for incorrect_translation - it addresses this more comprehensively)"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The use of '{{productName}}' is consistent in the English and Azerbaijani text, which is good. However, ensure the placeholder is correctly handled during rendering.",
+          "suggestion": "Verify the rendering process correctly substitutes the '{{productName}}' placeholder with the appropriate product name."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'LDAP server məlumatlarından istifadə edərək avtorizasiya edə biləcəklər' could be more natural. It's technically correct, but a smoother phrasing might be beneficial.",
+          "suggestion": "Consider rewording to 'LDAP server məlumatları ilə avtorizasiya edə biləcəklər' or 'LDAP serverin məlumatlarını istifadə edərək avtorizasiya edə biləcəklər'."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'istifadəçi adları və şifrələrini LDAP serverinə göndərməklə istifadəçilərin autentifikasiyasını həyata keçirir' is quite long and complex. It could benefit from simplification.",
+          "suggestion": "Consider rewording to 'İstifadəçi adları və şifrələrini LDAP serverinə göndərərək istifadəçilərin autentifikasiyasını həyata keçirir' or 'İstifadəçi adları və şifrələrini LDAP serverinə göndərərək istifadəçiləri autentifikasiya edir.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"идентификационни данни\" is a bit formal and less common in this context. A more natural phrasing would be something like \"удостоверяващи данни\" or simply \"данни за вход\".",
+          "suggestion": "Активирайте тази опция, ако искате автоматично да добавяте потребители от LDAP сървър към {{productName}}. Добавените потребители ще могат да се оторизират с помощта на техните данни за вход за LDAP сървър."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Přidaní uživatelé' is grammatically incorrect. It should be 'Přidaní uživatelé' (added users) instead of 'Added users'. The current translation implies the act of adding users, not the users themselves.",
+          "suggestion": "Přidaní uživatelé se budou moci autorizovat"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'pověření' is a generally accepted word but 'přihlašovací údaje' would be more precise and understandable for a broader audience in this context.",
+          "suggestion": "používají své přihlašovací údaje ze serveru LDAP."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The variable {{productName}} appears in the German translation, but it needs to be replaced with the actual product name for consistency.",
+          "suggestion": "Replace {{productName}} with the correct product name in the German translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The double curly braces `{{productName}}` are used consistently in both English and Greek, which is correct. However, ensure the product name is properly rendered in the UI when the translation is applied.",
+          "suggestion": "Verify proper rendering of `{{productName}}` within the UI."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'διαπιστευτήρια του διακομιστή LDAP' is a bit literal and could be improved. While technically correct, it sounds less natural in Greek.",
+          "suggestion": "Consider a more natural phrasing like 'τα στοιχεία σύνδεσης του διακομιστή LDAP' or 'τα διαπιστευτήρια του LDAP'."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence 'Οι χρήστες που θα προστεθούν θα μπορούν να εξουσιοδοτηθούν χρησιμοποιώντας τα διαπιστευτήρια του διακομιστή LDAP' is grammatically correct, but slightly wordy. It could be slightly more concise.",
+          "suggestion": "Consider rephrasing to: 'Οι χρήστες που θα προστεθούν θα μπορούν να συνδεθούν χρησιμοποιώντας τα στοιχεία σύνδεσης του διακομιστή LDAP.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'հավատարմագրերը' is a bit ambiguous and could be more accurately translated as 'չարքային տվյալները' (credentials/authentication data).",
+          "suggestion": "Change 'իրենց LDAP սերվեր-ի հավատարմագրերը' to 'իրենց LDAP սերվեր-ի չարքային տվյալները'"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'կնույնականացնի այն օգտվողներին' is slightly awkward.  'Կնույնականացնի օգտվողներին' is more natural.",
+          "suggestion": "Change 'կնույնականացնի այն օգտվողներին' to 'կնույնականացնի օգտվողներին'"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The placement of {{productName}} might be awkward in Japanese. It's repeated, which isn't the standard practice. Consider rephrasing to avoid repetition.",
+          "suggestion": "LDAPサーバーから{{productName}}にユーザーを自動的に追加する場合、このオプションを有効にします。追加されたユーザーは、LDAPサーバーの認証情報を使用してログインできます。{{productName}}はユーザのパスワードをローカルに保存せず、ユーザのログイン名とパスワードをLDAPサーバに送信して認証します。"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'LDAP サーバー 認証情報を使用して認証できます' could be improved. It's a bit clunky in Japanese.  '認証できます' is too direct and literal.",
+          "suggestion": "LDAP サーバーの認証情報を使用してログインできます"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The sentence \"LDAP 서버의 사용자를 {{productName}}에 자동으로 추가하려면 이 옵션을 활성화하세요.\" could be slightly improved for flow. It's a bit abrupt.",
+          "suggestion": "LDAP 서버의 사용자를 {{productName}}에 자동으로 추가하려면 이 옵션을 활성화하십시오. (Adding '하십시오' adds a bit of formality and flows better)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'LDAP 서버 자격 증명을 사용하여 인증할 수 있습니다' could be more accurately translated to reflect that users authenticate *with* their LDAP credentials, rather than 'using' them. The current wording is a bit awkward.",
+          "suggestion": "LDAP 서버 자격 증명을 통해 인증할 수 있습니다."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ຮັບສິດໃຊ້ງານໄດ້\" (receive usage rights) is not the best translation for 'authorize'. A more accurate translation would be something like 'ສາມາດເຂົ້າສູ່ລະບົບໄດ້' (can log in) or 'ສາມາດຢັ້ງຢືນຕົວຕົນໄດ້' (can authenticate).",
+          "suggestion": "ປ່ຽນແທກວ່າ \"ຮັບສິດໃຊ້ງານໄດ້\" ເປັນ \"ສາມາດເຂົ້າສູ່ລະບົບໄດ້\" ຫລື \"ສາມາດຢັ້ງຢືນຕົວຕົນໄດ້\""
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ຂໍ້ມູນຮັບສິດເຂົ້າໃຊ້ງານ\" (usage rights information) is overly literal and doesn't quite capture the meaning of 'credentials'.",
+          "suggestion": "ປ່ຽນແທກວ່າ \"ຂໍ້ມູນຮັບສິດເຂົ້າໃຊ້ງານ\" ເປັນ \"ຊື່ຜູ້ໃຊ້ ແລະ ລະບົບເອກະສານານຸສັນ\" ຫລື ເປັນ “ຂໍ້ມູນເຂົ້າສູ່ລະບົບ”"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is a bit clunky. The phrase \"ຜະລິດຕະພັນ {{productName}} ບໍ່ໄດ້ບັນທຶກລະບົບເອກະສານານຸສັນຂອງຜູ້ໃຊ້ໄວ້ໃນບ່ອນແຫ່ງນີ້\" is long and could be broken down for better readability.",
+          "suggestion": "ແບ່ງປະໂຫຍດນີ້ອອກເປັນສອງປະໂຫຍດ: 'ຜະລິດຕະພັນ {{productName}} ບໍ່ໄດ້ບັນທຶກລະບົບເອກະສານານຸສັນຂອງຜູ້ໃຊ້ໄວ້ໃນບ່ອນໃດນຶ່ງ.' ແລະ 'ມັນຈະຢັ້ງຢືນຕົວຕົນຜູ້ໃຊ້ໂດຍການສົ່ງຂໍ້ມູນເຂົ້າສູ່ລະບົບໄປສູ່ເຄື່ອງແມ່ຂ່າຍ LDAP.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"akreditācijas datus\" is a somewhat formal and less common translation for \"credentials.\" A more natural phrasing might be \"lietotājvārdu un paroli\".",
+          "suggestion": "Iespējojiet šo opciju, ja vēlaties {{productName}} automātiski pievienot lietotājus no LDAP servera. Pievienotie lietotāji varēs autorizēties, izmantojot savus LDAP servera lietotājvārdu un paroli."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'inloggegevens' (login details) is a general term. While understandable, 'LDAP server credentials' would be more precise, reflecting the English original.",
+          "suggestion": "Schakel deze optie in als u gebruikers van de LDAP server automatisch wilt toevoegen aan {{productName}}. De toegevoegde gebruikers kunnen autoriseren met hun LDAP server inloggegevens."
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'autorizar' (authorize) feels slightly unnatural in this context. A more common and natural verb would be 'acessar' (access) or 'logar' (log in).",
+          "suggestion": "Ative esta opção se desejar adicionar usuários do servidor LDAP ao {{productName}} automaticamente. Os usuários adicionados poderão acessar/logar usando suas credenciais de servidor LDAP."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the sentence structure could be improved for better flow.  Splitting a long sentence often improves readability.",
+          "suggestion": "Ative esta opção se desejar adicionar usuários do servidor LDAP ao {{productName}} automaticamente. Os usuários adicionados poderão acessar/logar usando suas credenciais de servidor LDAP. O {{productName}} não salva as senhas dos usuários localmente e autentica os usuários enviando suas informações de login para o servidor LDAP."
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Parolele utilizatorilor nu sunt salvate și stocate de {{productName}}\" is redundant. 'Salvate și stocate' essentially means the same thing. The English says 'does not save'.",
+          "suggestion": "Parolele utilizatorilor nu sunt salvate de {{productName}}."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The sentence \"dar nume de utilizator și parolă sunt trimise pentru autentificare către serverul LDAP server.\" is awkward and contains repetition. 'LDAP server' is repeated. It also doesn't quite reflect the English meaning.",
+          "suggestion": "Parolele utilizatorilor sunt trimise pentru autentificare către serverul LDAP."
+        },
+        {
+          "type": "formatting",
+          "description": "There's an extra space before the period at the end of the second sentence.",
+          "suggestion": "Remove the extra space before the period."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ඔවුන්ගේ ලොග්ඉන් සහ මුරපදය LDAP සේවකයට යවා පරිශීලකයින්ගේ වලංගතාවය පරීක්ෂා කරනු ඇත\" is not a precise translation of \"{{productName}} does not save the user passwords locally and will authenticate users sending their login and password to LDAP server.\"  It's too passive and doesn't convey the active sending of credentials.",
+          "suggestion": "මෙම {{productName}} පරිශීලකයන්ගේ ලොග්ඉන් සහ මුරපදය LDAP සේවකයට යවා වලංගිභාවය පරීක්ෂාකරනු ඇත ({{productName}} will authenticate users by sending their login and password to the LDAP server)."
+        },
+        {
+          "type": "formatting",
+          "description": "The double curly braces {{ }} around productName appear inconsistently. While present in the English content, it's not clear if they should be rendered or just represent a placeholder.",
+          "suggestion": "Clarify whether the `{{productName}}` placeholders should be rendered or removed during the translation process."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence \"මෙම විකල්පය ක්‍රියාත්මක කරන්න, ඔබට LDAP සේවකයෙන් පරිශීලකයින් {{productName}} වෙත ස්වයංක්‍රීයව එක් කිරීමට අවශ්‍ය නම්\" is grammatically correct but sounds a bit awkward. It could be rephrased for better flow.",
+          "suggestion": "මෙම විකල්පය ක්‍රියාත්මක කිරීමෙන් ඔබට LDAP සේවකයෙන් පරිශීලකයින් {{productName}} වෙත ස්වයංක්‍රීයව එක් කිරීමට හැකි වනු ඇත (Enabling this option will allow you to automatically add users from the LDAP server to {{productName}})."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"autorizovať\" (authorize) isn't the most natural translation of \"authorize\" in this context. \"Prihlásiť sa\" or \"overiť sa\" would be more appropriate.",
+          "suggestion": "Zmeňte 'autorizovať' na 'prihlásiť sa' alebo 'overiť sa'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"prihlasovacie udaje\" (login details) is a bit verbose.  A simpler phrasing would be better.",
+          "suggestion": "Zmeňte 'prihlasovacie udaje' na 'prihlášenia'."
+        },
+        {
+          "type": "spelling",
+          "description": "The phrase \"prihlášenia\" is missing an accent mark on the 'a'.",
+          "suggestion": "Použite 'prihlášenia'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase 'pošljejo svojo prijavo in geslo' sounds a bit clunky in Slovenian. A more natural phrasing would be 'pošljejo uporabniško ime in geslo'.",
+          "suggestion": "pošljejo uporabniško ime in geslo"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'акредитиве' (akreditve) is not the most common or natural way to say 'credentials' in Serbian. It sounds overly formal and technical.",
+          "suggestion": "Consider using 'пријавне податке' (prijavne podatke) or 'подаци за пријаву' (podaci za prijavu) for 'credentials'."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'ц́е моц́и да се ауторизују' (ce moci da se autorizuju) is grammatically correct but could be improved for flow and readability.",
+          "suggestion": "Consider 'имаће могућност да се ауторизују' (imaće mogućnost da se autorizuju) or simply 'моћи ће да се ауторизују' (moći će da se autorizuju)."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'проверавац́е аутентичност корисника' (proveravaće autentičnost korisnika) - 'will verify the authenticity of the users' - doesn't fully and accurately reflect the original meaning. It's more about authentication, not verifying authenticity.",
+          "suggestion": "Replace with 'ће аутентификовати корисника' (će autentifikovati korisnika) or 'извршиће аутентификацију корисника' (izvršiće autentifikaciju korisnika)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'akreditive' is a less common and potentially incorrect word choice for 'credentials'.",
+          "suggestion": "credentials (or a more common synonym like 'prijave i lozinke')"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'proveravaće autentičnost korisnika slanjem...' is a bit clunky. A more natural phrasing would flow better.",
+          "suggestion": "autentifikovaće korisnike slanjem..."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of the combined character 'ć' is consistent. However, ensure consistent use throughout the entire application/localization file."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"yetkilendirme yapabilecektir\" is a bit awkward. A more natural phrasing in Turkish would be something like \"yetkilendirilebilir\" or \"giriş yapabilirler\".",
+          "suggestion": "Eklenen kullanıcılar LDAP sunucusu kimlik bilgilerini kullanarak yetkilendirilebilir veya giriş yapabilirler."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The wording \"kullanıcı adı ve parolalarını LDAP sunucusu göndererek yapar\" is not idiomatic. It suggests that the application sends the username and password *to* the LDAP server. It's more accurate to say it *uses* them to authenticate.",
+          "suggestion": "Eklenen kullanıcıların kimlik doğrulamasını kullanıcı adı ve parolalarını LDAP sunucusuna başvurarak yapar."
+        },
+        {
+          "type": "formatting",
+          "description": "Consistency with the English template would benefit from explicitly stating that {{productName}} does not store passwords locally.",
+          "suggestion": "Kullanıcı parolalarını yerel olarak kaydetmez ve {{productName}}, kullanıcıların kimlik doğrulamasını kullanıcı adı ve parolalarını LDAP sunucusu göndererek yapar."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The variable {{productName}} appears in the translation, which requires consistent handling across all locales. Ensure proper handling of this variable during localization, potentially by using a placeholder or a variable substitution mechanism.",
+          "suggestion": "Ensure the variable {{productName}} is properly handled within the translation pipeline. It might require a placeholder or a variable substitution mechanism, depending on the localization system used."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ủy quyền\" (authorization) is not the best translation for 'authorize' in this context. It implies a delegation of authority rather than simply logging in. A more suitable translation would be 'đăng nhập' (login) or 'xác thực' (authenticate).",
+          "suggestion": "Thay đổi 'ủy quyền' thành 'đăng nhập' hoặc 'xác thực'."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation maintains the English formatting of using double curly braces for the product name. While this might be acceptable, it's good practice to confirm the localization standard for the product.",
+          "suggestion": "Check if the double curly braces are the standard for localization of product names in Vietnamese. If not, adjust accordingly."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Chinese translation uses a full stop (句号) at the end of each sentence, which is common in formal writing but might feel a bit stilted in a UI context. A slightly more conversational tone might benefit from omitting some of these, especially in a user interface where brevity is valued.",
+          "suggestion": "Consider removing some full stops to make the text more conversational. For example, remove the full stop after '授权' and '密码' for a less formal feel. This is a stylistic choice and depends on the desired tone."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

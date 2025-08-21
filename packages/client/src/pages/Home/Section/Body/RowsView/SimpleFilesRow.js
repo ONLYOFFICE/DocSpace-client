@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,305 +25,22 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
-import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
-import { Row } from "@docspace/shared/components/row";
-import { isMobile, isMobileOnly } from "react-device-detect";
+import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
+import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
+import { isMobile as isMobileUtile, classNames } from "@docspace/shared/utils";
+import { FolderType } from "@docspace/shared/enums";
 import {
-  isMobile as isMobileUtile,
-  mobile,
-  tablet,
-  classNames,
-  injectDefaultTheme,
-} from "@docspace/shared/utils";
-import { globalColors } from "@docspace/shared/themes";
-import CursorPalmReactSvgUrl from "PUBLIC_DIR/images/cursor.palm.react.svg?url";
+  FilesRow,
+  FilesRowWrapper,
+} from "@docspace/shared/components/files-row";
+
 import FilesRowContent from "./FilesRowContent";
 
 import withFileActions from "../../../../../HOCs/withFileActions";
 import withQuickButtons from "../../../../../HOCs/withQuickButtons";
 import withBadges from "../../../../../HOCs/withBadges";
 import ItemIcon from "../../../../../components/ItemIcon";
-import marginStyles from "./CommonStyles";
-
-const checkedStyle = css`
-  background: ${(props) => props.theme.filesSection.rowView.checkedBackground};
-  ${marginStyles}
-`;
-
-const StyledWrapper = styled.div`
-  .files-item {
-    border-inline: none;
-    margin-inline-start: 0;
-  }
-  height: 59px;
-  box-sizing: border-box;
-
-  border-bottom: ${(props) =>
-    `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
-  border-top: ${(props) =>
-    `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
-  margin-top: -1px;
-
-  ${(props) =>
-    (props.checked || props.isActive) &&
-    !props.isIndexEditingMode &&
-    checkedStyle};
-  ${(props) =>
-    (props.checked || props.isActive) &&
-    props.isFirstElem &&
-    css`
-      border-top-color: ${({ theme }) =>
-        `${theme.filesSection.tableView.row.borderColor} !important`};
-    `};
-
-  ${(props) =>
-    props.isIndexUpdated &&
-    css`
-      background: ${({ theme, isIndexEditingMode }) =>
-        isIndexEditingMode
-          ? `${theme.filesSection.tableView.row.indexUpdate} !important`
-          : `${theme.filesSection.tableView.row.backgroundActive} !important`};
-
-      &:hover {
-        background: ${({ theme }) =>
-          `${theme.filesSection.tableView.row.indexActive} !important`};
-      }
-
-      ${marginStyles}
-    `}
-
-  ${(props) =>
-    !isMobile &&
-    !props.isDragging &&
-    !props.isIndexEditingMode &&
-    css`
-      :hover {
-        cursor: pointer;
-        ${checkedStyle}
-      }
-    `};
-
-  ${(props) =>
-    !isMobile &&
-    props.isIndexEditingMode &&
-    css`
-      :hover {
-        cursor: pointer;
-        background: ${({ theme }) =>
-          theme.filesSection.tableView.row.indexActive};
-        ${marginStyles}
-      }
-    `};
-
-  ${(props) =>
-    props.showHotkeyBorder &&
-    css`
-      border-color: ${globalColors.lightSecondMain} !important;
-      z-index: 1;
-      position: relative;
-
-      margin-inline: -24px;
-      padding-inline: 24px;
-    `}
-
-  ${(props) =>
-    props.isHighlight &&
-    css`
-      ${marginStyles}
-      animation: Highlight 2s 1;
-
-      @keyframes Highlight {
-        0% {
-          background: ${({ theme }) => theme.filesSection.animationColor};
-        }
-
-        100% {
-          background: none;
-        }
-      }
-    `}
-`;
-
-const StyledSimpleFilesRow = styled(Row).attrs(injectDefaultTheme)`
-  height: 56px;
-
-  position: unset;
-  cursor: ${(props) =>
-    !props.isThirdPartyFolder &&
-    (props.checked || props.isActive) &&
-    props.canDrag &&
-    `url(${CursorPalmReactSvgUrl}) 8 0, auto`};
-  ${(props) =>
-    props.inProgress &&
-    css`
-      pointer-events: none;
-      /* cursor: wait; */
-    `}
-
-  margin-top: 0px;
-
-  ${(props) =>
-    (!props.contextOptions || props.isEdit) &&
-    `
-    & > div:last-child {
-        width: 0px;
-        overflow: hidden;
-      }
-  `}
-
-  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
-
-  .styled-element {
-    height: 32px;
-    margin-inline-end: 12px;
-  }
-
-  .row_content {
-    ${(props) =>
-      props.sectionWidth > 500 && `max-width: fit-content;`}//min-width: auto
-  }
-
-  .badges {
-    display: flex;
-    align-items: center;
-
-    .badge-version {
-      &:hover {
-        cursor: pointer;
-      }
-    }
-  }
-
-  .tablet-row-copy-link {
-    display: none;
-  }
-
-  @media ${tablet} {
-    .tablet-row-copy-link {
-      display: block;
-    }
-
-    .row-copy-link {
-      display: none;
-    }
-  }
-
-  @media ${mobile} {
-    .tablet-row-copy-link {
-      display: none;
-    }
-
-    .row-copy-link {
-      display: block;
-
-      ${isMobileOnly &&
-      css`
-        :hover {
-          svg path {
-            fill: ${({ theme }) => theme.iconButton.color};
-          }
-        }
-      `}
-    }
-  }
-
-  .favorite {
-    cursor: pointer;
-    margin-top: 1px;
-  }
-
-  .row_context-menu-wrapper {
-    width: min-content;
-    justify-content: space-between;
-    flex: 0 1 auto;
-  }
-
-  .row_content {
-    max-width: none;
-    min-width: 0;
-  }
-
-  .badges {
-    margin-top: 0px;
-    margin-bottom: 0px;
-  }
-
-  .temp-badges {
-    margin-top: 0px;
-  }
-
-  .lock-file {
-    cursor: ${(props) => (props.withAccess ? "pointer" : "default")};
-    svg {
-      height: 16px;
-    }
-  }
-
-  .expandButton {
-    margin-inline-start: ${(props) =>
-      !props.folderCategory ? "17px" : "24px"};
-    padding-top: 0px;
-  }
-  .expandButton > div:first-child {
-    ${(props) => props.folderCategory && `padding-inline-start: 0 !important;`}
-  }
-
-  .badges {
-    flex-direction: row-reverse;
-    gap: 24px;
-  }
-
-  .file__badges,
-  .room__badges,
-  .folder__badges {
-    margin-top: 0px;
-
-    > div {
-      margin-top: 0px;
-      margin-inline: 0;
-    }
-  }
-
-  @media ${mobile} {
-    .lock-file {
-      svg {
-        height: 12px;
-      }
-    }
-
-    .badges {
-      gap: 8px;
-    }
-
-    /* .badges__quickButtons:not(:empty) {
-      margin-inline-start: 8px;
-    } */
-    .room__badges:empty,
-    .file__badges:empty,
-    .folder__badges:empty,
-    .badges__quickButtons:empty {
-      display: none;
-    }
-
-    .badges,
-    .folder__badges,
-    .room__badges,
-    .file__badges {
-      margin-top: 0px;
-      align-items: center;
-      height: 100%;
-    }
-
-    .room__badges,
-    .folder__badges {
-      > div {
-        margin-top: 0px;
-      }
-    }
-  }
-`;
 
 const SimpleFilesRow = (props) => {
   const {
@@ -364,13 +81,21 @@ const SimpleFilesRow = (props) => {
     changeIndex,
     isIndexUpdated,
     isFolder,
-    icon,
-    isDownload,
+    isBlockingOperation,
+    isTutorialEnabled,
+    setRefMap,
+    deleteRefMap,
+    selectedFolderTitle,
+    setDropTargetPreview,
+    disableDrag,
+    canCreateSecurity,
   } = props;
 
   const isMobileDevice = isMobileUtile();
 
   const [isDragActive, setIsDragActive] = React.useState(false);
+
+  const rowRef = React.useRef(null);
 
   const withAccess = item.security?.Lock;
   const isSmallContainer = sectionWidth <= 500;
@@ -378,6 +103,22 @@ const SimpleFilesRow = (props) => {
   const onChangeIndex = (action) => {
     return changeIndex(action, item, t);
   };
+
+  React.useEffect(() => {
+    if (!rowRef?.current) return;
+
+    if (item?.isPDF) {
+      setRefMap(GuidanceRefKey.Pdf, rowRef);
+    }
+    if (item?.type === FolderType.Done) {
+      setRefMap(GuidanceRefKey.Ready, rowRef);
+    }
+
+    return () => {
+      deleteRefMap(GuidanceRefKey.Pdf);
+      deleteRefMap(GuidanceRefKey.Ready);
+    };
+  }, [setRefMap, deleteRefMap]);
 
   const element = (
     <ItemIcon
@@ -388,10 +129,11 @@ const SimpleFilesRow = (props) => {
       title={item.title}
       logo={item.logo}
       showDefault={
-        !(!!item?.logo?.cover || !!item?.logo?.medium) && item.isRoom
+        !(!!item?.logo?.cover || !!item?.logo?.medium) ? item.isRoom : null
       }
       color={item.logo?.color}
       isArchive={item.isArchive}
+      isTemplate={item.isTemplate}
       badgeUrl={badgeUrl}
     />
   );
@@ -408,10 +150,12 @@ const SimpleFilesRow = (props) => {
     onDragLeave && onDragLeave(e);
 
     setIsDragActive(false);
+    setDropTargetPreview(null);
   };
+  const isDragDisabled = dragging && !isDragging;
 
   const dragStyles =
-    dragging && isDragging
+    (dragging && isDragging) || isDragDisabled
       ? {
           marginInline: "-16px",
           paddingInline: "16px",
@@ -422,8 +166,28 @@ const SimpleFilesRow = (props) => {
     ? `${item.id}_${item.fileExst}`
     : (item.id ?? "");
 
+  React.useEffect(() => {
+    if (dragging) {
+      if (isDragging) {
+        setDropTargetPreview(item.title);
+      } else if (!disableDrag && canCreateSecurity) {
+        setDropTargetPreview(selectedFolderTitle);
+      } else {
+        setDropTargetPreview(null);
+      }
+    }
+  }, [
+    dragging,
+    isDragging,
+    isDragActive,
+    isDragDisabled,
+    selectedFolderTitle,
+    setDropTargetPreview,
+  ]);
+
   return (
-    <StyledWrapper
+    <FilesRowWrapper
+      ref={rowRef}
       id={id}
       onDragOver={onDragOver}
       className={`row-wrapper ${
@@ -435,7 +199,7 @@ const SimpleFilesRow = (props) => {
       }`}
       checked={checkedProps}
       isActive={isActive}
-      showHotkeyBorder={showHotkeyBorder}
+      showHotkeyBorder={showHotkeyBorder ? !isTutorialEnabled : false}
       isIndexEditingMode={isIndexEditingMode}
       isIndexUpdated={isIndexUpdated}
       isFirstElem={itemIndex === 0}
@@ -447,22 +211,24 @@ const SimpleFilesRow = (props) => {
         className={classNames("files-item", className, idWithFileExst)}
         onDrop={onDrop}
         onMouseDown={onMouseDown}
-        dragging={dragging && isDragging}
+        dragging={dragging ? isDragging : null}
         onDragOver={onDragOverEvent}
         onDragLeave={onDragLeaveEvent}
         style={dragStyles}
+        isDragDisabled={isDragDisabled}
       >
-        <StyledSimpleFilesRow
+        <FilesRow
           key={item.id}
           data={item}
           isEdit={isEdit}
           element={element}
           mode="modern"
-          sectionWidth={sectionWidth}
           contentElement={
             isMobileDevice || isRooms ? null : quickButtonsComponent
           }
-          badgesComponent={!isMobileDevice && badgesComponent}
+          badgesComponent={
+            !isMobileDevice || item.isTemplate ? badgesComponent : null
+          }
           onSelect={onContentFileSelect}
           onContextClick={fileContextClick}
           isPrivacy={isPrivacy}
@@ -471,16 +237,13 @@ const SimpleFilesRow = (props) => {
           checked={checkedProps}
           contextOptions={item.contextOptions}
           contextButtonSpacerWidth={displayShareButton}
-          dragging={dragging && isDragging}
+          dragging={dragging ? isDragging : null}
           isDragging={dragging}
           isIndexEditingMode={isIndexEditingMode}
           onChangeIndex={onChangeIndex}
           isActive={isActive}
-          inProgress={
-            inProgress && isFolder
-              ? icon !== "duplicate" && icon !== "duplicate-room" && !isDownload
-              : inProgress
-          }
+          isBlockingOperation={isBlockingOperation}
+          inProgress={inProgress}
           isThirdPartyFolder={item.isThirdPartyFolder}
           className="files-row"
           withAccess={withAccess}
@@ -496,6 +259,7 @@ const SimpleFilesRow = (props) => {
           badgeUrl={badgeUrl}
           canDrag={canDrag}
           isFolder={isFolder}
+          dataTestId={`files_row_${itemIndex}`}
         >
           <FilesRowContent
             item={item}
@@ -505,11 +269,13 @@ const SimpleFilesRow = (props) => {
               isMobileDevice || isRooms ? quickButtonsComponent : null
             }
             isRooms={isRooms}
-            badgesComponent={isMobileDevice && badgesComponent}
+            badgesComponent={
+              isMobileDevice && !item.isTemplate ? badgesComponent : null
+            }
           />
-        </StyledSimpleFilesRow>
+        </FilesRow>
       </DragAndDrop>
-    </StyledWrapper>
+    </FilesRowWrapper>
   );
 };
 

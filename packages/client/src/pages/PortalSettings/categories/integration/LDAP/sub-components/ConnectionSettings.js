@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,6 @@
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Box } from "@docspace/shared/components/box";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import LdapFieldComponent from "./LdapFieldComponent";
 
@@ -85,7 +84,7 @@ const ConnectionSettings = (props) => {
   };
 
   return (
-    <Box className="ldap_connection-container">
+    <div className="ldap_connection-container">
       <div>
         <FieldContainer
           style={FIELD_STYLE}
@@ -97,6 +96,7 @@ const ConnectionSettings = (props) => {
           tooltipContent={t("LdapServerTooltip")}
           inlineHelpButton
           isRequired
+          dataTestId="server_field_container"
         >
           <LdapFieldComponent
             name={SERVER}
@@ -106,6 +106,7 @@ const ConnectionSettings = (props) => {
             scale
             isDisabled={!isLdapEnabled || isUIDisabled}
             tabIndex={3}
+            dataTestId="server_field"
           />
         </FieldContainer>
         <FieldContainer
@@ -118,6 +119,7 @@ const ConnectionSettings = (props) => {
           tooltipContent={t("LdapUserDNTooltip")}
           inlineHelpButton
           isRequired
+          dataTestId="user_dn_field_container"
         >
           <LdapFieldComponent
             name={USER_DN}
@@ -127,6 +129,7 @@ const ConnectionSettings = (props) => {
             scale
             isDisabled={!isLdapEnabled || isUIDisabled}
             tabIndex={5}
+            dataTestId="user_dn_field"
           />
         </FieldContainer>
         <FieldContainer
@@ -139,6 +142,7 @@ const ConnectionSettings = (props) => {
           tooltipContent={t("LdapLoginAttributeTooltip")}
           inlineHelpButton
           isRequired
+          dataTestId="login_attribute_field_container"
         >
           <LdapFieldComponent
             name={LOGIN_ATTRIBUTE}
@@ -148,6 +152,7 @@ const ConnectionSettings = (props) => {
             scale
             isDisabled={!isLdapEnabled || isUIDisabled}
             tabIndex={7}
+            dataTestId="login_attribute_field"
           />
         </FieldContainer>
       </div>
@@ -162,6 +167,7 @@ const ConnectionSettings = (props) => {
           tooltipContent={t("LdapPortNumberTooltip")}
           inlineHelpButton
           isRequired
+          dataTestId="port_number_field_container"
         >
           <LdapFieldComponent
             pattern="[0-9]*"
@@ -172,6 +178,7 @@ const ConnectionSettings = (props) => {
             scale
             isDisabled={!isLdapEnabled || isUIDisabled}
             tabIndex={4}
+            dataTestId="port_number_field"
           />
         </FieldContainer>
 
@@ -185,6 +192,7 @@ const ConnectionSettings = (props) => {
           tooltipContent={t("LdapUserFilterTooltip")}
           inlineHelpButton
           isRequired
+          dataTestId="user_filter_field_container"
         >
           <LdapFieldComponent
             isTextArea
@@ -195,10 +203,11 @@ const ConnectionSettings = (props) => {
             heightTextArea={100}
             isDisabled={!isLdapEnabled || isUIDisabled}
             tabIndex={6}
+            dataTestId="user_filter_field"
           />
         </FieldContainer>
       </div>
-    </Box>
+    </div>
   );
 };
 

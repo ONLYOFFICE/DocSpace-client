@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -35,7 +35,7 @@ import { inject, observer } from "mobx-react";
 import { DeviceType } from "@docspace/shared/enums";
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "@docspace/shared/constants";
 import { setCookie } from "@docspace/shared/utils/cookie";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { isMobileDevice, isBetaLanguage } from "@docspace/shared/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Text } from "@docspace/shared/components/text";
@@ -144,6 +144,8 @@ const LanguageAndTimeZoneComponent = (props) => {
   };
 
   const checkChanges = () => {
+    if (!state.timezoneDefault || !state.languageDefault) return;
+
     let hasChanged = false;
 
     settingNames.forEach((settingName) => {
@@ -179,11 +181,7 @@ const LanguageAndTimeZoneComponent = (props) => {
       initSettings(page).then(() => setIsLoaded(true));
     }
 
-    const isLoadedSetting =
-      isLoaded &&
-      tReady &&
-      timezoneFromSessionStorage &&
-      languageFromSessionStorage;
+    const isLoadedSetting = isLoaded && tReady && timezoneFromSessionStorage;
 
     if (isLoadedSetting) {
       setIsLoadedLngTZSettings(isLoadedSetting);
@@ -231,13 +229,6 @@ const LanguageAndTimeZoneComponent = (props) => {
         ...val,
         language: selectedLanguage,
         languageDefault: selectedLanguageDefault,
-      }));
-    }
-
-    if (!languageDefaultFromSessionStorage) {
-      setState((val) => ({
-        ...val,
-        languageDefault: languageFromSessionStorage,
       }));
     }
 
@@ -315,6 +306,7 @@ const LanguageAndTimeZoneComponent = (props) => {
         newCultureNames[0];
 
       const selectedLanguageDefault =
+        languageDefaultFromSessionStorage ||
         findSelectedItemByKey(newCultureNames, portalLanguage) ||
         newCultureNames[0];
 
@@ -400,23 +392,22 @@ const LanguageAndTimeZoneComponent = (props) => {
   };
 
   const onSaveClick = () => {
-    const { translate, selectedLanguage, selectedTimezone } = state;
     const { setLanguageAndTime, user, language: lng } = props;
 
     setState((val) => ({ ...val, isLoading: true }));
-    setLanguageAndTime(selectedLanguage.key, selectedTimezone.key)
+    setLanguageAndTime(state.language.key, state.timezone.key)
       .then(() => {
         !user.cultureName &&
-          setCookie(LANGUAGE, selectedLanguage.key || "en", {
+          setCookie(LANGUAGE, state.language.key || "en", {
             "max-age": COOKIE_EXPIRATION_YEAR,
           });
-        window.timezone = selectedTimezone.key;
+        window.timezone = state.timezone.key;
       })
-      .then(() => toastr.success(translate("SuccessfullySaveSettingsMessage")))
+      .then(() => toastr.success(t("Common:SuccessfullySaveSettingsMessage")))
       .then(
         () =>
           !user.cultureName &&
-          lng !== selectedLanguage.key &&
+          lng !== state.language.key &&
           window.location.reload(),
       )
       .catch((error) => toastr.error(error))
@@ -429,8 +420,8 @@ const LanguageAndTimeZoneComponent = (props) => {
       languageDefault: state.language,
     }));
 
-    saveToSessionStorage("languageDefault", selectedLanguage);
-    saveToSessionStorage("timezoneDefault", selectedTimezone);
+    saveToSessionStorage("languageDefault", state.language);
+    saveToSessionStorage("timezoneDefault", state.timezone);
   };
 
   const onCancelClick = () => {
@@ -488,8 +479,9 @@ const LanguageAndTimeZoneComponent = (props) => {
             dropDownMaxHeight={300}
             className="dropdown-item-width combo-box-settings"
             showDisabledItems
+            dataTestId="language_and_time_zone_combo_box_language"
           />
-          {isBetaLang && <BetaBadge place="right-start" />}
+          {isBetaLang ? <BetaBadge place="right-start" /> : null}
         </div>
       </FieldContainer>
       <FieldContainer
@@ -511,6 +503,7 @@ const LanguageAndTimeZoneComponent = (props) => {
           dropDownMaxHeight={300}
           className="dropdown-item-width combo-box-settings"
           showDisabledItems
+          dataTestId="language_and_time_zone_combo_box_timezone"
         />
       </FieldContainer>
     </div>
@@ -522,14 +515,15 @@ const LanguageAndTimeZoneComponent = (props) => {
     <StyledSettingsComponent
       hasScroll={hasScroll}
       className="category-item-wrapper"
+      withoutExternalLink={!languageAndTimeZoneSettingsUrl}
     >
-      {isCustomizationView && !isMobileView && (
+      {isCustomizationView && !isMobileView ? (
         <div className="category-item-heading">
           <div className="category-item-title">
             {t("StudioTimeLanguageSettings")}
           </div>
         </div>
-      )}
+      ) : null}
       <div className="category-item-description">
         <Text fontSize="13px" fontWeight={400}>
           {t("TimeLanguageSettingsDescription", {
@@ -539,15 +533,18 @@ const LanguageAndTimeZoneComponent = (props) => {
         <Text>
           <Trans t={t} i18nKey="TimeLanguageSettingsSave" />
         </Text>
-        <Link
-          className="link-learn-more"
-          color={currentColorScheme.main?.accent}
-          target="_blank"
-          isHovered
-          href={languageAndTimeZoneSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {languageAndTimeZoneSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            color={currentColorScheme.main?.accent}
+            target="_blank"
+            isHovered
+            dataTestId="language_and_time_zone_link"
+            href={languageAndTimeZoneSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </div>
       {settingsBlock}
       <SaveCancelButtons
@@ -556,13 +553,15 @@ const LanguageAndTimeZoneComponent = (props) => {
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
-        reminderText={t("YouHaveUnsavedChanges")}
+        reminderText={t("Common:YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
         displaySettings
         hasScroll={hasScroll}
         additionalClassSaveButton="language-time-zone-save"
         additionalClassCancelButton="language-time-zone-cancel"
+        saveButtonDataTestId="language_and_time_zone_save_buttons"
+        cancelButtonDataTestId="language_and_time_zone_cancel_buttons"
       />
     </StyledSettingsComponent>
   );

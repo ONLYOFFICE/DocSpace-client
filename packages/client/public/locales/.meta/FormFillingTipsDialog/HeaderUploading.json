@@ -1,0 +1,237 @@
+{
+  "key_path": "HeaderUploading",
+  "content": "Easy form uploading",
+  "content_en_sha1_hash": "53b5cd8f127b338e857ffd707341bec35ab11adc",
+  "created_at": "2025-05-19T21:30:55.142Z",
+  "updated_at": "2025-07-10T11:11:07.133Z",
+  "comment": {
+    "text": "This translation key is used for the header text in a guidance component that explains easy form uploading. It appears in a guidance dialog and displays the product name and section name related to file uploads.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:20.888Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/guidance/configs/form-filling.ts",
+      "line_number": 87,
+      "context": "},\n ],\n },\n {\n id: 5,\n header: t(\"FormFillingTipsDialog:HeaderUploading\"),\n description: t(\"FormFillingTipsDialog:DescriptionUploading\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyFilesSection\"),\n }),\n key: \"form-filling-uploading\",",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Asan formanın yüklənməsi\" is understandable, a more precise and natural translation of \"Easy form uploading\" would be something like \"Formanı asan yükləmə\" or \"Formanın rahat yüklənməsi\". \"Asan\" often implies an official government initiative or ease provided by a service, which might not be the intended meaning here. Using 'Asan' in this context could be misleading.",
+          "suggestion": "Formanı asan yükləmə"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Ձևերի հեշտ բեռնում\" is understandable, a more natural and accurate translation of 'Easy form uploading' in Armenian might be \"Արագ ձևերի բեռնում\" (Arag dzveri brenum) or \"Հեշտ ձևերի բեռնում\" (Hesht dzveri brenum). The current translation focuses solely on 'easy' and misses the implication of speed often associated with 'easy uploading'.",
+          "suggestion": "Արագ ձևերի բեռնում"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Fácil upload de formulário' is understandable, a more natural and common Portuguese (Brazil) translation for 'Easy form uploading' would be 'Upload fácil de formulários' or 'Upload de formulários fácil'. The current phrasing places the adjective after the noun, which is grammatically correct but less idiomatic in this context.",
+          "suggestion": "Upload fácil de formulários"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Просте передавання форми' while conveying a similar meaning, isn't the most natural or common way to express 'Easy form uploading' in Ukrainian. 'Передавання' implies a transfer, while 'uploading' is more about sending data to a system.",
+          "suggestion": "Завантаження форми (Zavantuvannia formy)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Просте передавання форми' is understandable, 'Завантаження форми' directly translates the concept of 'uploading'.",
+          "suggestion": "Завантаження форми (Zavantuvannia formy)"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

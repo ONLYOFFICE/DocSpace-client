@@ -1,0 +1,274 @@
+{
+  "key_path": "EnterEmail",
+  "content": "Enter email",
+  "content_en_sha1_hash": "2561af4e3ae4688b16392bbda30fa27b36cf9e1a",
+  "created_at": "2025-05-19T21:30:53.296Z",
+  "updated_at": "2025-08-11T18:11:59.146Z",
+  "comment": {
+    "text": "\"Used as a placeholder and label for an email input field in various UI components, such as dialogs and tables, to prompt users to enter their email address.\"",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:01.315Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/EmailChangeDialog/index.tsx",
+      "line_number": 84,
+      "context": "<ModalDialog.Header>{t(\"AddEmail\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <DialogBodyWrapper>\n <Text>{displayName}</Text>\n <EmailInput\n placeholder={t(\"SMTPSettings:EnterEmail\")}\n className=\"import-email-input\"\n value={tempEmail}\n onChange={handleEmailChange}\n onValidateInput={onValidateEmail}\n hasError={hasError}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/SalesDepartmentRequestDialog/index.js",
+      "line_number": 213,
+      "context": "scale\n value={email}\n onChange={onChangeEmail}\n onValidateInput={onValidateEmailInput}\n hasError={!isValidEmail}\n placeholder={t(\"SMTPSettings:EnterEmail\")}\n testId=\"request_email_input\"\n />\n </FieldContainer>\n \n <FieldContainer",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/RowView/UsersRowContent.tsx",
+      "line_number": 204,
+      "context": "displayName={displayName}\n />\n ) : (\n <EmailInputWrapper ref={emailInputRef}>\n <EmailInput\n placeholder={t(\"SMTPSettings:EnterEmail\")}\n className=\"import-email-input\"\n value={tempEmail}\n onChange={handleEmailChange}\n onValidateInput={onValidateEmail}\n hasError={hasError}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/TableView/UsersTableRow.tsx",
+      "line_number": 203,
+      "context": "<TableCell>\n {isEmailOpen ? (\n <EmailInputWrapper ref={emailInputRef}>\n <EmailInput\n placeholder={t(\"SMTPSettings:EnterEmail\")}\n className=\"import-email-input\"\n value={tempEmail}\n onChange={handleEmailChange}\n onValidateInput={onValidateEmail}\n onKeyDown={handleKeyDown}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Saisir l'adresse e-mail\" is a valid translation, it's slightly more formal than the simplicity of \"Enter email\".  A more direct and common translation for UI labels would be \"Entrez votre adresse e-mail\" or \"Adresse e-mail\".",
+          "suggestion": "Entrez votre adresse e-mail"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Մուտքագրեք էլ\" is not a complete or accurate translation of \"Enter email\". It translates to something like \"Enter el\", where \"el\" is an incomplete word. The full word for 'email' in Armenian is \"էլփոստ\".",
+          "suggestion": "Մուտքագրեք էլփոստ (Mut’yagreq el’post)"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Introduceți adresa de e-mail\" is understandable, it's a bit formal for a simple label like 'Enter email'. A more natural and user-friendly translation would be more direct.",
+          "suggestion": "Introduceți email"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'වි-තැපෑල යොදන්න' while understandable, isn't the most natural or accurate translation of 'Enter email'. It literally translates to 'Connect email'. A more common and accurate translation would be something like 'විද්යුත් තැපෑල ඇතුළත් කරන්න' or 'විද්යුත් තැපෑල ලිවන්න'.",
+          "suggestion": "විද්යුත් තැපෑල ඇතුළත් කරන්න"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Унеси емаил' is understandable, it's a transliteration rather than a true translation. 'Email' is often used in Serbian, but a more natural translation would be something like 'Унесите адресу е-поште' or 'Унесите е-маил адресу'.",
+          "suggestion": "Унесите адресу е-поште"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Unesi email' is not the most natural or accurate Serbian (Latin) translation of 'Enter email'. While understandable, it's a direct transliteration and not idiomatic.",
+          "suggestion": "The more natural translation would be 'Unesite e-mail' or 'Upisite e-mail'."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Введіть адресу ел. пошти\" is a more literal and verbose translation of \"Enter email\". A more natural Ukrainian equivalent would be \"Введіть електронну пошту\" or \"Введіть email\".",
+          "suggestion": "Введіть електронну пошту"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Nhập địa chỉ email\" is understandable, a more natural and common translation for \"Enter email\" would be \"Nhập email\". \"Địa chỉ\" (address) is often implied and not explicitly stated in this context.",
+          "suggestion": "Nhập email"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

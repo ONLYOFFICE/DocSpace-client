@@ -1,3 +1,4 @@
+import React from "react";
 import PropTypes from "prop-types";
 import { ThemeProvider } from "../../components/theme-provider";
 import { globalColors } from "../../themes";
@@ -10,6 +11,10 @@ const ThemeWrapper = ({ theme, children }) => {
         main: {
           accent: globalColors.lightBlueMain,
           buttons: globalColors.lightSecondMain,
+        },
+        text: {
+          accent: globalColors.white,
+          buttons: globalColors.white,
         },
       }}
     >

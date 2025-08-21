@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -36,6 +36,8 @@ import BookTrainingReactSvgUrl from "PUBLIC_DIR/images/book.training.react.svg?u
 import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import LogoutReactSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import SpacesReactSvgUrl from "PUBLIC_DIR/images/spaces.react.svg?url";
+import LampReactSvgUrl from "PUBLIC_DIR/images/lamp.react.svg?url";
+
 import { makeAutoObservable } from "mobx";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
@@ -49,7 +51,8 @@ import TariffBar from "SRC_DIR/components/TariffBar";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 
 const PROXY_HOMEPAGE_URL = combineUrl(window.ClientConfig?.proxy?.url, "/");
-const PROFILE_SELF_URL = combineUrl(PROXY_HOMEPAGE_URL, "/profile");
+const PROFILE_SELF_URL = combineUrl(PROXY_HOMEPAGE_URL, "/profile/login");
+const SETTINGS_URL = combineUrl(PROXY_HOMEPAGE_URL, "/portal-settings");
 // const PROFILE_MY_URL = combineUrl(PROXY_HOMEPAGE_URL, "/my");
 const ABOUT_URL = combineUrl(PROXY_HOMEPAGE_URL, "/about");
 const PAYMENTS_URL = combineUrl(
@@ -64,6 +67,8 @@ class ProfileActionsStore {
   authStore = null;
 
   userStore = null;
+
+  infoPanelStore = null;
 
   settingsStore = null;
 
@@ -92,6 +97,7 @@ class ProfileActionsStore {
     userStore,
     settingsStore,
     currentTariffStatusStore,
+    infoPanelStore,
   ) {
     this.authStore = authStore;
     this.filesStore = filesStore;
@@ -101,10 +107,13 @@ class ProfileActionsStore {
     this.userStore = userStore;
     this.settingsStore = settingsStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
+    this.infoPanelStore = infoPanelStore;
 
     this.isShowLiveChat = this.getStateLiveChat();
 
     makeAutoObservable(this);
+
+    this.checkUrlActions();
   }
 
   getStateLiveChat = () => {
@@ -132,9 +141,6 @@ class ProfileActionsStore {
   };
 
   onProfileClick = (obj) => {
-    const { isAdmin, isOwner } = this.userStore.user;
-    const { isRoomAdmin } = this.authStore;
-
     const prefix = window.DocSpace.location.pathname.includes("portal-settings")
       ? "/portal-settings"
       : "";
@@ -145,9 +151,9 @@ class ProfileActionsStore {
 
     this.profileClicked = true;
 
-    if ((isAdmin || isOwner || isRoomAdmin) && !prefix) {
-      this.selectedFolderStore.setSelectedFolder(null);
-    }
+    // if ((isAdmin || isOwner || isRoomAdmin) && !prefix) {
+    //   this.selectedFolderStore.setSelectedFolder(null);
+    // }
 
     const state = {
       fromUrl: `${window.DocSpace.location.pathname}${window.DocSpace.location.search}`,
@@ -176,9 +182,9 @@ class ProfileActionsStore {
   };
 
   onHelpCenterClick = () => {
-    const helpUrl = this.settingsStore.helpLink;
+    const helpCenterDomain = this.settingsStore.helpCenterDomain;
 
-    window.open(helpUrl, "_blank");
+    window.open(helpCenterDomain, "_blank");
   };
 
   onLiveChatClick = (t) => {
@@ -192,10 +198,15 @@ class ProfileActionsStore {
   };
 
   onSupportClick = () => {
-    const supportUrl =
-      this.settingsStore.additionalResourcesData?.feedbackAndSupportUrl;
+    const supportUrl = this.settingsStore.feedbackAndSupportUrl;
 
     window.open(supportUrl, "_blank");
+  };
+
+  onSuggestFeatureClick = () => {
+    const SuggestFeatureUrl = this.settingsStore.suggestFeatureUrl;
+
+    window.open(SuggestFeatureUrl, "_blank");
   };
 
   onBookTraining = () => {
@@ -208,11 +219,17 @@ class ProfileActionsStore {
   //  window.open(VIDEO_GUIDES_URL, "_blank");
   // };
 
-  onHotkeysClick = () => {
+  onHotkeysClick = (event) => {
+    if (event && event.originalEvent) {
+      event.originalEvent.preventDefault();
+    }
     this.settingsStore.setHotkeyPanelVisible(true);
   };
 
-  onAboutClick = () => {
+  onAboutClick = (event) => {
+    if (event && event.originalEvent) {
+      event.originalEvent.preventDefault();
+    }
     if (isDesktop() || isTablet()) {
       this.setIsAboutDialogVisible(true);
     } else {
@@ -249,6 +266,7 @@ class ProfileActionsStore {
     } = this.settingsStore;
     const isAdmin = this.authStore.isAdmin;
     const isCommunity = this.currentTariffStatusStore.isCommunity;
+
     // const { isOwner } = this.userStore.user;
 
     // const settingsModule = modules.find((module) => module.id === "settings");
@@ -266,20 +284,24 @@ class ProfileActionsStore {
           icon: CatalogSettingsReactSvgUrl,
           label: t("Common:Settings"),
           onClick: (obj) => this.onSettingsClick("/portal-settings", obj),
+          url: SETTINGS_URL,
+          preventNewTab: true,
         }
       : null;
 
     const protocol = window?.location?.protocol;
 
-    const managementItems = portals.map((portal) => {
-      return {
-        key: portal.tenantId,
-        label: portal.domain,
-        onClick: () => window.open(`${protocol}//${portal.domain}/`, "_self"),
-        disabled: false,
-        checked: tenantAlias === portal.portalName,
-      };
-    });
+    const managementItems =
+      portals?.map((portal) => {
+        return {
+          key: portal.tenantId,
+          label: portal.domain,
+          isPortal: true,
+          onClick: () => window.open(`${protocol}//${portal.domain}/`, "_self"),
+          disabled: false,
+          checked: tenantAlias === portal.portalName,
+        };
+      }) ?? [];
 
     const management =
       isAdmin && standalone && !limitedAccessSpace
@@ -289,6 +311,8 @@ class ProfileActionsStore {
             icon: SpacesReactSvgUrl,
             label: t("Common:Spaces"),
             onClick: this.onSpacesClick,
+            url: SPACES_URL,
+            preventNewTab: true,
             items:
               baseDomain && baseDomain !== "localhost"
                 ? [
@@ -320,7 +344,9 @@ class ProfileActionsStore {
         key: "user-menu-hotkeys",
         icon: HotkeysReactSvgUrl,
         label: t("Common:Hotkeys"),
-        onClick: this.onHotkeysClick,
+        onClick: (e) => this.onHotkeysClick(e),
+        url: `${window.location.pathname}?action=hotkeys`,
+        preventNewTab: true,
       };
     }
     // }
@@ -361,7 +387,8 @@ class ProfileActionsStore {
         key: "user-menu-about",
         icon: InfoOutlineReactSvgUrl,
         label: t("Common:AboutCompanyTitle"),
-        onClick: this.onAboutClick,
+        onClick: (e) => this.onAboutClick(e),
+        url: `${window.location.pathname}?action=about`,
       };
     }
 
@@ -379,6 +406,8 @@ class ProfileActionsStore {
         icon: ProfileReactSvgUrl,
         label: t("Common:Profile"),
         onClick: (obj) => this.onProfileClick(obj),
+        url: PROFILE_SELF_URL,
+        preventNewTab: true,
       },
       settings,
       management,
@@ -389,6 +418,8 @@ class ProfileActionsStore {
           label: t("Common:PaymentsTitle"),
           onClick: (obj) => this.onPaymentsClick(obj),
           additionalElement: <TariffBar />,
+          url: PAYMENTS_URL,
+          preventNewTab: true,
         },
       {
         isSeparator: true,
@@ -399,6 +430,8 @@ class ProfileActionsStore {
         icon: HelpCenterReactSvgUrl,
         label: t("Common:HelpCenter"),
         onClick: this.onHelpCenterClick,
+        url: this.settingsStore.helpCenterDomain || "#",
+        preventNewTab: true,
       },
       /* videoGuidesEnabled && {
         key: "user-menu-video",
@@ -417,6 +450,16 @@ class ProfileActionsStore {
         icon: EmailReactSvgUrl,
         label: t("Common:FeedbackAndSupport"),
         onClick: this.onSupportClick,
+        url: this.settingsStore.feedbackAndSupportUrl || "#",
+        preventNewTab: true,
+      },
+      feedbackAndSupportEnabled && {
+        key: "user-menu-suggest-feature",
+        icon: LampReactSvgUrl,
+        label: t("Common:SuggestFeature"),
+        onClick: this.onSuggestFeatureClick,
+        url: this.settingsStore.suggestFeatureUrl || "#",
+        preventNewTab: true,
       },
       bookTraining,
       about,
@@ -450,7 +493,26 @@ class ProfileActionsStore {
       });
     }
 
-    return actions;
+    return actions.filter(Boolean);
+  };
+
+  checkUrlActions = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const action = urlParams.get("action");
+    if (action === "hotkeys") {
+      const newUrl = window.location.pathname + window.location.hash;
+      window.history.replaceState({}, document.title, newUrl);
+      setTimeout(() => {
+        this.onHotkeysClick();
+      }, 1000);
+    } else if (action === "about") {
+      const newUrl = window.location.pathname + window.location.hash;
+      window.history.replaceState({}, document.title, newUrl);
+
+      setTimeout(() => {
+        this.onAboutClick();
+      }, 1000);
+    }
   };
 }
 

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -40,8 +40,8 @@ const QUERY_PARAMS = [
     value: "123",
   },
   {
-    name: "email",
-    value: "mail@mail.com",
+    name: "encemail",
+    value: "b5COc6kRm3veeYqA72sOfA&uid=66faa6e4-f133-11ea-b126-00ffeec8b4ef",
   },
 ];
 
@@ -61,11 +61,10 @@ test("portal continue reactivate", async ({ page, mockRequest }) => {
   await mockRequest.router([endpoints.continuePortal]);
   await page.goto(URL_WITH_PARAMS);
 
-  await page.getByRole("button", { name: "Reactivate" }).click();
+  const reactivateButton = page.getByTestId("continue_reactivate_button");
+  await reactivateButton.click();
 
-  await page
-    .getByRole("button", { name: "Reactivate" })
-    .waitFor({ state: "detached" });
+  await reactivateButton.waitFor({ state: "detached" });
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -73,7 +72,7 @@ test("portal continue reactivate", async ({ page, mockRequest }) => {
     "portal-continue-reactivate.png",
   ]);
 
-  await page.getByTestId("link").click();
+  await page.getByTestId("redirect_portal_link").click();
 
   await page.waitForURL("/", { waitUntil: "load" });
 
@@ -87,7 +86,7 @@ test("portal continue reactivate", async ({ page, mockRequest }) => {
 test("portal continue cancel", async ({ page }) => {
   await page.goto(URL_WITH_PARAMS);
 
-  await page.getByRole("button", { name: "Cancel" }).click();
+  await page.getByTestId("continue_cancel_button").click();
 
   await page.waitForURL("/", { waitUntil: "load" });
 

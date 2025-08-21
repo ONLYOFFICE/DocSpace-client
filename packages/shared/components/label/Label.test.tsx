@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,6 +30,7 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { Label } from ".";
+import { globalColors } from "../../themes";
 
 const baseProps = {
   text: "First name:",
@@ -38,8 +39,68 @@ const baseProps = {
   display: "block",
 };
 
-test("<Text />: renders without error", () => {
-  render(<Label {...baseProps}>Test label</Label>);
+describe("Label Component", () => {
+  test("renders without error", () => {
+    render(<Label {...baseProps}>Test label</Label>);
+    expect(screen.getByTestId("label")).toBeInTheDocument();
+  });
 
-  expect(screen.queryByTestId("label")).toBeInTheDocument();
+  test("renders with required indicator when isRequired is true", () => {
+    render(<Label {...baseProps} isRequired />);
+    const label = screen.getByTestId("label");
+    expect(label).toHaveTextContent("*");
+  });
+
+  test("applies error styles when error prop is true", () => {
+    render(<Label {...baseProps} error />);
+    const label = screen.getByTestId("label");
+    expect(label).toHaveStyle({ color: globalColors.lightErrorStatus });
+  });
+
+  test("renders with custom className", () => {
+    const className = "custom-label";
+    render(<Label {...baseProps} className={className} />);
+    expect(screen.getByTestId("label")).toHaveClass(className);
+  });
+
+  test("renders with custom style", () => {
+    const customStyle = { marginBottom: "10px" };
+    render(<Label {...baseProps} style={customStyle} />);
+    expect(screen.getByTestId("label")).toHaveStyle(customStyle);
+  });
+
+  test("renders children correctly", () => {
+    const childText = "Child content";
+    render(<Label {...baseProps}>{childText}</Label>);
+    expect(screen.getByTestId("label")).toHaveTextContent(childText);
+  });
+
+  test("renders with correct htmlFor attribute", () => {
+    render(<Label {...baseProps} />);
+    expect(screen.getByTestId("label")).toHaveAttribute(
+      "for",
+      baseProps.htmlFor,
+    );
+  });
+
+  test("renders with correct text content", () => {
+    render(<Label {...baseProps} />);
+    expect(screen.getByTestId("label")).toHaveTextContent(baseProps.text);
+  });
+
+  test("renders with title attribute", () => {
+    render(<Label {...baseProps} />);
+    expect(screen.getByTestId("label")).toHaveAttribute(
+      "title",
+      baseProps.title,
+    );
+  });
+
+  test("renders with truncate prop", () => {
+    render(<Label {...baseProps} truncate />);
+    expect(screen.getByTestId("label")).toHaveAttribute(
+      "data-truncate",
+      "true",
+    );
+  });
 });

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,11 +30,10 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/shared/components/text";
-import { RowContent } from "@docspace/shared/components/row-content";
+import { RowContent } from "@docspace/shared/components/rows";
 
 import { EmailInput } from "@docspace/shared/components/email-input";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
-import { InputType } from "@docspace/shared/components/text-input";
 
 import { isMobile } from "@docspace/shared/utils";
 
@@ -206,11 +205,11 @@ const UsersRowContent = (props: AddEmailRowContentProps) => {
               className="import-email-input"
               value={tempEmail}
               onChange={handleEmailChange}
-              type={InputType.email}
               onValidateInput={onValidateEmail}
               hasError={hasError}
               onBlur={checkEmailValidity}
               isAutoFocussed
+              dataTestId="change_email_input"
             />
 
             <IconButton
@@ -220,6 +219,7 @@ const UsersRowContent = (props: AddEmailRowContentProps) => {
               iconName={CheckSvgUrl}
               isFill
               isClickable
+              dataTestId="change_email_save_button"
             />
             <IconButton
               className="import-clear-container-button"
@@ -228,11 +228,17 @@ const UsersRowContent = (props: AddEmailRowContentProps) => {
               iconName={CrossSvgUrl}
               isFill
               isClickable
+              dataTestId="change_email_clear_button"
             />
           </EmailInputWrapper>
         )
       ) : (
-        <span onClick={openEmail} className="user-email" ref={emailTextRef}>
+        <span
+          onClick={openEmail}
+          className="user-email"
+          ref={emailTextRef}
+          data-testid="open_email_button"
+        >
           <EditSvg />
         </span>
       )}

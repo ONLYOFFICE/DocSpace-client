@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { Location } from "@remix-run/router";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
+import type { Location } from "react-router";
 
 import {
   AccountLoginType,
@@ -36,6 +39,7 @@ import {
 import { Nullable } from "../../types";
 import { getObjectByLocation, toUrlParams } from "../../utils/common";
 import { TFilterArea, TFilterSortBy, TSortOrder } from "./types";
+import { validateAndFixObject } from "../../utils/filterValidator";
 
 const DEFAULT_PAGE = 0;
 const DEFAULT_PAGE_COUNT = 100;
@@ -58,6 +62,7 @@ const DEFAULT_INVITER_ID = null;
 const DEFAULT_INVITED_BY_ME = false;
 const DEFAULT_AREA = null;
 const DEFAULT_INCLUDE_STRANGERS = false;
+const DEFAULT_INCLUDE_SHARED = null;
 
 const ACTIVE_EMPLOYEE_STATUS = EmployeeStatus.Active;
 
@@ -79,6 +84,26 @@ const INVITER_ID = "inviterid";
 const INVITED_BY_ME = "invitedbyme";
 const AREA = "area";
 const INCLUDE_STRANGERS = "includeStrangers";
+const INCLUDE_SHARED = "includeShared";
+
+export const typeDefinition = {
+  sortBy: [
+    "AZ",
+    "displayname",
+    "type",
+    "department",
+    "email",
+    "usedspace",
+    "registrationDate",
+    "createdby",
+  ] as TFilterSortBy[],
+  sortOrder: ["ascending", "descending"] as TSortOrder[],
+  employeeStatus: Object.values(EmployeeStatus).map((value) => String(value)),
+  role: Object.values(EmployeeType).map((value) => String(value)),
+  payments: Object.values(PaymentsType).map((value) => String(value)),
+  accountLoginType: Object.values(AccountLoginType),
+  area: ["all", "people", "guests"] as TFilterArea[],
+};
 
 class Filter {
   static getDefault(total = DEFAULT_TOTAL) {
@@ -106,6 +131,7 @@ class Filter {
       DEFAULT_INVITER_ID,
       DEFAULT_AREA,
       DEFAULT_INCLUDE_STRANGERS,
+      DEFAULT_INCLUDE_SHARED,
     );
   }
 
@@ -209,7 +235,9 @@ class Filter {
     public sortOrder: TSortOrder = DEFAULT_SORT_ORDER,
     public employeeStatus: Nullable<EmployeeStatus> = DEFAULT_EMPLOYEE_STATUS,
     public activationStatus: Nullable<EmployeeActivationStatus> = DEFAULT_ACTIVATION_STATUS,
-    public role: Nullable<EmployeeType> = DEFAULT_ROLE,
+    public role:
+      | Nullable<EmployeeType>
+      | Nullable<EmployeeType[]> = DEFAULT_ROLE,
     public search: string = DEFAULT_SEARCH,
     public group: Nullable<string> = DEFAULT_GROUP,
     public payments: Nullable<PaymentsType> = DEFAULT_PAYMENTS,
@@ -221,6 +249,7 @@ class Filter {
     public inviterId: Nullable<string> = DEFAULT_INVITER_ID,
     public area: Nullable<TFilterArea> = DEFAULT_AREA,
     public includeStrangers: boolean = DEFAULT_INCLUDE_STRANGERS,
+    public includeShared: Nullable<boolean> = DEFAULT_INCLUDE_SHARED,
   ) {
     this.page = page;
     this.pageCount = pageCount;
@@ -256,6 +285,8 @@ class Filter {
   };
 
   toApiUrlParams = () => {
+    const fixedValidObject = validateAndFixObject(this, typeDefinition);
+
     const {
       pageCount,
       sortBy,
@@ -273,7 +304,8 @@ class Filter {
       inviterId,
       area,
       includeStrangers,
-    } = this;
+      includeShared,
+    } = fixedValidObject;
 
     let employeetype = null;
 
@@ -300,6 +332,7 @@ class Filter {
       inviterId,
       area,
       includeStrangers,
+      includeShared,
     };
 
     dtoFilter = { ...dtoFilter, ...employeetype };
@@ -309,6 +342,8 @@ class Filter {
   };
 
   toUrlParams = () => {
+    const fixedValidObject = validateAndFixObject(this, typeDefinition);
+
     const {
       pageCount,
       sortBy,
@@ -327,7 +362,8 @@ class Filter {
       inviterId,
       area,
       includeStrangers,
-    } = this;
+      includeShared,
+    } = fixedValidObject;
 
     const dtoFilter: {
       [PAGE]: typeof page;
@@ -347,6 +383,7 @@ class Filter {
       [INVITER_ID]?: typeof inviterId;
       [AREA]?: typeof area;
       [INCLUDE_STRANGERS]?: typeof includeStrangers;
+      [INCLUDE_SHARED]?: typeof includeShared;
     } = {
       page: page + 1,
       sortby: sortBy,
@@ -380,6 +417,8 @@ class Filter {
     if (area) dtoFilter[AREA] = area;
 
     if (includeStrangers) dtoFilter[INCLUDE_STRANGERS] = includeStrangers;
+
+    if (includeShared) dtoFilter[INCLUDE_SHARED] = includeShared;
 
     const str = toUrlParams(dtoFilter, true);
 
@@ -415,6 +454,7 @@ class Filter {
           this.inviterId,
           this.area,
           this.includeStrangers,
+          this.includeShared,
         );
   }
 
@@ -436,7 +476,8 @@ class Filter {
       this.invitedByMe === filter.invitedByMe &&
       this.inviterId === filter.inviterId &&
       this.area === filter.area &&
-      this.includeStrangers === filter.includeStrangers;
+      this.includeStrangers === filter.includeStrangers &&
+      this.includeShared === filter.includeShared;
 
     return equals;
   }

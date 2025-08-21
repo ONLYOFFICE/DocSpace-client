@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,7 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 const path = require("path");
-const beforeBuild = require("@docspace/shared/utils/beforeBuild");
+const beforeBuild = require(
+  path.join(__dirname, "../../shared/utils/beforeBuild.js"),
+);
 
 beforeBuild(
   [
@@ -36,4 +38,3 @@ beforeBuild(
   null,
   true,
 );
-

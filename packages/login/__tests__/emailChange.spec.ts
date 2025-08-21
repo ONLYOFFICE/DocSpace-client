@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,12 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { endpoints } from "@docspace/shared/__mocks__/e2e";
+import {
+  endpoints,
+  HEADER_AUTHENTICATED_SETTINGS,
+} from "@docspace/shared/__mocks__/e2e";
 
 import { expect, test } from "./fixtures/base";
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 
 const URL = "/login/confirm/EmailChange";
+const NEXT_REQUEST_URL = "*/**/login/confirm/EmailChange";
 
 const QUERY_PARAMS = [
   {
@@ -41,8 +45,8 @@ const QUERY_PARAMS = [
     value: "123",
   },
   {
-    name: "email",
-    value: "mail@mail.com",
+    name: "encemail",
+    value: "b5COc6kRm3veeYqA72sOfA&uid=66faa6e4-f133-11ea-b126-00ffeec8b4ef",
   },
   {
     name: "uid",
@@ -51,12 +55,31 @@ const QUERY_PARAMS = [
 ];
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
+const NEXT_REQUEST_URL_WITH_PARAMS = getUrlWithQueryParams(
+  NEXT_REQUEST_URL,
+  QUERY_PARAMS,
+);
+
+test("email change without auth", async ({ page }) => {
+  await page.goto(URL_WITH_PARAMS);
+
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "email-change",
+    "email-change-without-auth.png",
+  ]);
+});
 
 test("email change success", async ({ page, mockRequest }) => {
+  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
+    HEADER_AUTHENTICATED_SETTINGS,
+  ]);
   await mockRequest.router([endpoints.changeEmail]);
   await page.goto(URL_WITH_PARAMS);
 
-  await page.waitForURL("/profile?email_change=success", { waitUntil: "load" });
+  await page.waitForURL("/profile/login?email_change=success", {
+    waitUntil: "load",
+  });
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -66,6 +89,9 @@ test("email change success", async ({ page, mockRequest }) => {
 });
 
 test("email change error", async ({ page, mockRequest }) => {
+  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
+    HEADER_AUTHENTICATED_SETTINGS,
+  ]);
   await mockRequest.router([endpoints.changeEmailError]);
   await page.goto(URL_WITH_PARAMS);
 

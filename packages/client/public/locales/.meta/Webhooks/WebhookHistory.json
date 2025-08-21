@@ -1,0 +1,244 @@
+{
+  "key_path": "WebhookHistory",
+  "content": "Webhook history",
+  "content_en_sha1_hash": "d5c876e94d902e5dbeaa0db16f985a22a99969df",
+  "created_at": "2025-05-19T21:30:49.879Z",
+  "updated_at": "2025-08-04T07:30:01.473Z",
+  "comment": {
+    "text": "This translation key is used for the label of a dropdown item that displays \"Webhook history\". It appears in a table or list where webhooks are displayed, likely as part of an interface for managing webhooks in the Portal Settings.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:45.812Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhooksTable/WebhooksRowView/WebhookRow.js",
+      "line_number": 100,
+      "context": "onClick: onSettingsOpen,\n },\n {\n id: \"webhook-history\",\n key: \"Webhook history dropdownItem\",\n label: t(\"WebhookHistory\"),\n icon: HistoryIcon,\n onClick: redirectToHistory,\n },\n {\n key: \"Separator dropdownItem\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhooksTable/WebhooksTableView/WebhooksTableRow.js",
+      "line_number": 140,
+      "context": "onClick: onSettingsOpen,\n dataTestId: \"webhook_settings_item\",\n },\n {\n key: \"Webhook history dropdownItem\",\n label: t(\"WebhookHistory\"),\n icon: HistoryIcon,\n onClick: redirectToHistory,\n dataTestId: \"webhook_history_item\",\n },\n {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Arabic translation \"تأريخ ويب هوك\" while understandable, isn't the most natural or accurate translation of \"Webhook history.\" \"تأريخ\" (ta'rikh) primarily refers to 'history' as in a historical account or timeline, rather than the technical history of webhook events.",
+          "suggestion": "سجل ويب هوك (Sijill Web Hook) - 'Sijill' means record or log, which is more appropriate for technical webhook history."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'История на уеб кука' is not the most natural or accurate translation of 'Webhook history'. 'Уеб кука' is a literal translation of 'webhook' and sounds awkward in Bulgarian. A more appropriate translation would be 'История на уебхукове'.",
+          "suggestion": "История на уебхукове"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Lao translation 'ປະຫວັດ Webhook' lacks a space between 'ປະຫວັດ' and 'Webhook'.",
+          "suggestion": "ປະຫວັດ Webhook"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Tīmekļa aizķeres vēsture\" doesn't accurately reflect the meaning of \"Webhook history.\" \"Aizķere\" translates to 'blockage' or 'obstacle,' which is not the intended meaning. 'Webhook' refers to a specific technical concept.",
+          "suggestion": "A more accurate translation would be something like \"Webhooku vēsture\" or \"Webhook vēstures ieraksti\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Istoricul Webhook' is technically correct but could be improved for naturalness in Romanian. While 'Webhook' can be directly transliterated, it's often better to use a more descriptive phrase for clarity. The article 'Istoricul' is correctly used.",
+          "suggestion": "Istoricul webhook-urilor"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

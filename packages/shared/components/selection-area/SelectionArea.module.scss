@@ -1,0 +1,13 @@
+@use "../../styles/variables/colors";
+
+.selectionArea {
+  top: 0;
+  // doesn't require mirroring for RTL
+  left: 0;
+  position: fixed;
+  margin: 0;
+  display: none;
+  background: rgba(68, 170, 255, 0.5);
+  border: 1px solid #{colors.$light-second-main};
+  z-index: 1000;
+}

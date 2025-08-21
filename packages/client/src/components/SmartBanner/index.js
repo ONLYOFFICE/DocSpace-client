@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,7 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import { isMobile, isIOS } from "react-device-detect";
 import { inject, observer } from "mobx-react";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import SmartBanner from "react-smartbanner";
 import { getCookie } from "@docspace/shared/utils";
 import "./main.css";
@@ -38,7 +38,7 @@ const Wrapper = styled.div`
 `;
 
 const ReactSmartBanner = (props) => {
-  const { t, ready, isBannerVisible, setIsBannerVisible } = props;
+  const { t, ready, isBannerVisible, setIsBannerVisible, logoText } = props;
   const force = isIOS ? "ios" : "android";
   const location = useLocation();
 
@@ -94,7 +94,7 @@ const ReactSmartBanner = (props) => {
     <Wrapper>
       <SmartBanner
         title={t("SmartBanner:AppName", {
-          organizationName: t("Common:OrganizationName"),
+          organizationName: logoText,
         })}
         author="Ascensio System SIA"
         button={t("Common:View")}
@@ -110,9 +110,10 @@ const ReactSmartBanner = (props) => {
 };
 
 export default inject(({ settingsStore }) => {
-  const { isBannerVisible, setIsBannerVisible } = settingsStore;
+  const { isBannerVisible, setIsBannerVisible, logoText } = settingsStore;
   return {
     isBannerVisible,
     setIsBannerVisible,
+    logoText,
   };
 })(observer(ReactSmartBanner));

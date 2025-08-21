@@ -1,0 +1,250 @@
+{
+  "key_path": "Load",
+  "content": "Load",
+  "content_en_sha1_hash": "ddcb77ff769ea54ca622848f6bedd4004fa4f4fa",
+  "created_at": "2025-05-19T21:30:46.262Z",
+  "updated_at": "2025-05-26T07:57:32.977Z",
+  "comment": {
+    "text": "This translation key is used to display the label for a loading action button in a snackbar component. It appears on a button that triggers an action when clicked. The phrase \"Load\" should be translated into the target language to reflect this UI element's purpose.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:37.304Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/sw/register.jsx",
+      "line_number": 76,
+      "context": "//   if (ready) {\n //     const barConfig = {\n //       parentElementId: \"snackbar\",\n //       text: t(\"Common:NewVersionAvailable\"),\n //       btnText: t(\"Common:Load\"),\n //       onAction: () => onButtonClick(),\n //       opacity: 1,\n //       countDownTime: 5 * 60 * 1000,\n //     };",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Yükləyin\" is the imperative form (command) of \"load\" in Azerbaijani. The English \"Load\" is a noun, often used as a key name. The translation should reflect this, potentially using a noun form or a more general term.",
+          "suggestion": "Consider alternatives like \"Yük\" (load - noun), \"Daşınma\" (transportation/loading), or a more context-specific term depending on the function of 'Load' in this context."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation \"Ielādē\" is an imperative form (command) of \"to load.\" The English word \"Load\" in this context (likely referring to a setting, feature, or element) requires a noun or a more neutral translation.",
+          "suggestion": "Consider alternatives like \"Slodze\" (noun for load) or \"Iestatījums\" (setting) depending on the exact context. Without context, it's difficult to provide a definitive correction."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Polish translation \"Załaduj\" is an imperative form (\"Load!\" or \"You load!\"). The English \"Load\" can be a noun or verb in a more general sense. A more appropriate translation would depend on the context. Without knowing the context, \"Załadunek\" (noun - loading) or \"Ładowanie\" (gerund - loading) might be better alternatives. 'Załaduj' implies an action being requested.",
+          "suggestion": "Consider alternatives like 'Załadunek' or 'Ładowanie' depending on context."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation \"පූරණය\" (pooranaya) primarily means \"filling\" or \"fulfillment,\" not \"load.\" While 'load' can sometimes imply filling, it's not the best translation in most contexts. A more accurate translation might depend on the specific context where 'Load' is used. Considering the context is 'Common:Load,' a more direct translation reflecting the concept of a weight or burden might be preferable.",
+          "suggestion": "Consider alternatives like \"බර\" (bara - weight), \"ආහාර\" (ahaara - cargo/supply, if referring to a physical load), or a more nuanced term depending on the context."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Оптерећење' is a valid Serbian (Cyrillic) word, it doesn't directly translate to 'Load' in this context. 'Load' often refers to a weight, cargo, or a program being loaded. 'Оптерећење' more closely means 'burden' or 'stress'. A more accurate translation would depend on the specific context of 'Load'.",
+          "suggestion": "Consider alternatives like 'Терет' (weight/cargo), 'Учитавање' (loading - a process), or 'Постављање' (installation, if referring to software) based on the context."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Yükle\" can mean \"Load\", it is more commonly used for \"Upload\" or \"Install\" in a digital context. \"Load\" in the general sense (e.g., loading cargo) would be better translated as \"Yük\" or \"İndir\".",
+          "suggestion": "Consider \"Yük\" or \"İndir\" depending on the intended meaning of 'Load'."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Ukrainian translation 'Завантажити' (Zavantazhyty) means 'to download' or 'to upload', which isn't a direct translation of 'Load' in all contexts. 'Load' can mean to place items onto a vehicle, to load a program, or to apply pressure. A more appropriate translation would depend on the context. A possible alternative could be 'Навантажити' (Navantazhyty) or a more general term depending on the context.",
+          "suggestion": "Consider 'Навантажити' (Navantazhyty) or a context-specific translation. Further context is needed to determine the best translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

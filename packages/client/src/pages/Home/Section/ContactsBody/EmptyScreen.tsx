@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -57,7 +57,7 @@ type EmptyScreenProps = {
   currentGroup?: GroupsStore["currentGroup"];
   setIsSectionBodyLoading?: ClientLoadingStore["setIsSectionBodyLoading"];
   deleteGroup?: GroupsStore["deleteGroup"];
-  getContactsModel: PeopleStore["contextOptionsStore"]["getContactsModel"];
+  getContactsModel?: PeopleStore["contextOptionsStore"]["getContactsModel"];
 };
 
 const EmptyScreen = ({
@@ -143,7 +143,7 @@ const EmptyScreen = ({
           description: t("EmptyView:SendInvitationLetter"),
           disabled: isRoomAdmin || currentGroup?.isLDAP || isEmptyGuests,
           icon: <InviteUserIcon />,
-          model: (getContactsModel(t, false) ?? []).filter(
+          model: (getContactsModel?.(t, false) ?? []).filter(
             (m) => typeof m !== "boolean",
           ) as ContextMenuModel[],
         },

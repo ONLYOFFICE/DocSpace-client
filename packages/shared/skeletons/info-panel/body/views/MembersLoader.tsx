@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,18 +26,14 @@
 
 import React from "react";
 
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import {
-  StyledMemberLoader,
-  StyledMemberSubtitleLoader,
-  StyledMembersLoader,
-} from "../body.styled";
+import { RectangleSkeleton } from "../../../rectangle";
+import styles from "../Body.module.scss";
 
 export const MemberLoader = ({ count = 1 }: { count?: number }) => {
   return (
     <>
       {[...Array(count).keys()].map((i) => (
-        <StyledMemberLoader key={i}>
+        <div className={styles.styledMemberLoader} key={i}>
           <RectangleSkeleton
             className="avatar"
             width="32px"
@@ -51,7 +47,7 @@ export const MemberLoader = ({ count = 1 }: { count?: number }) => {
             height="20px"
             borderRadius="3px"
           />
-        </StyledMemberLoader>
+        </div>
       ))}
     </>
   );
@@ -59,21 +55,21 @@ export const MemberLoader = ({ count = 1 }: { count?: number }) => {
 
 const MembersLoader = () => {
   return (
-    <StyledMembersLoader>
-      <StyledMemberSubtitleLoader>
+    <div className={styles.memberLoader} data-testid="members-loader">
+      <div className={styles.memberSubtitleLoader}>
         <RectangleSkeleton width="111px" height="16px" borderRadius="3px" />
         <RectangleSkeleton width="16px" height="16px" borderRadius="3px" />
-      </StyledMemberSubtitleLoader>
+      </div>
 
       <MemberLoader count={4} />
 
-      <StyledMemberSubtitleLoader className="pending_users">
+      <div className={`${styles.memberSubtitleLoader} pending_users`}>
         <RectangleSkeleton width="111px" height="16px" borderRadius="3px" />
         <RectangleSkeleton width="16px" height="16px" borderRadius="3px" />
-      </StyledMemberSubtitleLoader>
+      </div>
 
       <MemberLoader count={4} />
-    </StyledMembersLoader>
+    </div>
   );
 };
 

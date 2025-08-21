@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,10 +29,14 @@ import React, { useEffect, useState } from "react";
 import uniqueid from "lodash/uniqueId";
 
 import { TileSkeleton } from "@docspace/shared/skeletons/tiles";
-import { InfiniteLoaderComponent } from "@docspace/shared/components/infinite-loader";
+import { getCountTilesInRow } from "@docspace/shared/utils";
 
-import { getCountTilesInRow } from "SRC_DIR/helpers/filesUtils";
-import { StyledCard, StyledItem, StyledHeaderItem } from "./StyledInfiniteGrid";
+import {
+  StyledCard,
+  StyledItem,
+  StyledHeaderItem,
+  StyledInfiniteLoader,
+} from "./StyledInfiniteGrid";
 
 const HeaderItem = ({ children, className, ...rest }) => {
   return (
@@ -47,19 +51,23 @@ const Card = ({ children, countTilesInRow, ...rest }) => {
     const isFile = child?.props?.className?.includes("file");
     const isFolder = child?.props?.className?.includes("folder");
     const isRoom = child?.props?.className?.includes("room");
+    const isTemplate = child?.props?.className?.includes("template");
 
     const horizontalGap = 16;
     const verticalGap = 14;
+    const verticalRoomGap = 16;
     const headerMargin = 15;
 
     const folderHeight = 64 + verticalGap;
-    const roomHeight = 122 + verticalGap;
+    const roomHeight = 104 + verticalRoomGap;
     const fileHeight = 220 + horizontalGap;
     const titleHeight = 20 + headerMargin;
+    const templateHeight = 126 + verticalRoomGap;
 
     if (isRoom) return roomHeight;
     if (isFolder) return folderHeight;
     if (isFile) return fileHeight;
+    if (isTemplate) return templateHeight;
     return titleHeight;
   };
 
@@ -73,8 +81,15 @@ const Card = ({ children, countTilesInRow, ...rest }) => {
 };
 
 const Item = ({ children, className, ...rest }) => {
+  const isRoom = className === "isRoom";
+  const isTemplate = className === "isTemplate";
   return (
-    <StyledItem className={`Item ${className}`} {...rest}>
+    <StyledItem
+      className={`Item ${className}`}
+      isRoom={isRoom}
+      isTemplate={isTemplate}
+      {...rest}
+    >
       {children}
     </StyledItem>
   );
@@ -89,10 +104,12 @@ const InfiniteGrid = (props) => {
     filesLength,
     className,
     currentFolderId,
+    isRooms,
+    isTemplates,
     ...rest
   } = props;
 
-  const [countTilesInRow, setCountTilesInRow] = useState(getCountTilesInRow());
+  const [countTilesInRow, setCountTilesInRow] = useState();
 
   let cards = [];
   const list = [];
@@ -122,11 +139,17 @@ const InfiniteGrid = (props) => {
 
     if (isFolder) return "isFolder";
 
+    const isTemplate = useTempList
+      ? card.props.children.props.className.includes("template")
+      : listItem.props.className.includes("isTemplate");
+
+    if (isTemplate) return "isTemplate";
+
     return "isRoom";
   };
 
   const setTilesCount = () => {
-    const newCount = getCountTilesInRow();
+    const newCount = getCountTilesInRow(isRooms, isTemplates);
     if (countTilesInRow !== newCount) setCountTilesInRow(newCount);
   };
 
@@ -135,7 +158,8 @@ const InfiniteGrid = (props) => {
   };
 
   useEffect(() => {
-    setTilesCount();
+    onResize();
+
     window.addEventListener("resize", onResize);
 
     return () => {
@@ -145,7 +169,7 @@ const InfiniteGrid = (props) => {
 
   React.Children.map(children.props.children, (child) => {
     if (child) {
-      if (child.props.className === "tile-items-heading") {
+      if (child?.props["data-type"] === "header") {
         // If cards is not empty then put the cards into the list
         if (cards.length) {
           const type = checkType();
@@ -164,7 +188,14 @@ const InfiniteGrid = (props) => {
       } else {
         const isFile = child?.props?.className?.includes("file");
         const isRoom = child?.props?.className?.includes("room");
-        const cls = isFile ? "isFile" : isRoom ? "isRoom" : "isFolder";
+        const isTemplate = child?.props?.className?.includes("template");
+        const cls = isFile
+          ? "isFile"
+          : isRoom
+            ? "isRoom"
+            : isTemplate
+              ? "isTemplate"
+              : "isFolder";
 
         if (cards.length && cards.length === countTilesInRow) {
           const listKey = uniqueid("list-item_");
@@ -188,7 +219,6 @@ const InfiniteGrid = (props) => {
     if (cards.length === countTilesInRow) {
       addItemToList("loaded-row", type, true);
     }
-
     // Added line of loaders
     while (countTilesInRow > cards.length && cards.length !== countTilesInRow) {
       const key = `tiles-loader_${countTilesInRow - cards.length}`;
@@ -208,11 +238,8 @@ const InfiniteGrid = (props) => {
     const listKey = uniqueid("list-item_");
     addItemToList(listKey, type);
   }
-
-  // console.log("InfiniteGrid render", list);
-
   return (
-    <InfiniteLoaderComponent
+    <StyledInfiniteLoader
       viewAs="tile"
       countTilesInRow={countTilesInRow}
       filesLength={filesLength}
@@ -224,7 +251,7 @@ const InfiniteGrid = (props) => {
       {...rest}
     >
       {list}
-    </InfiniteLoaderComponent>
+    </StyledInfiniteLoader>
   );
 };
 

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,7 @@
 
 import { ConflictResolveType } from "../../enums";
 
-export interface ConflictResolveProps {
+export type ConflictResolveProps = {
   isLoading: boolean;
   visible: boolean;
   onClose: () => void;
@@ -42,4 +42,4 @@ export interface ConflictResolveProps {
   skipTitle: string;
   skipDescription: string;
   headerLabel: string;
-}
+};

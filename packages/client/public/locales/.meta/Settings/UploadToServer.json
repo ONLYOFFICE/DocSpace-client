@@ -1,0 +1,238 @@
+{
+  "key_path": "UploadToServer",
+  "content": "Upload to server",
+  "content_en_sha1_hash": "64e8bb3b5f86ea7da45c956345a760d2533c5442",
+  "created_at": "2025-05-19T21:30:53.077Z",
+  "updated_at": "2025-08-11T09:02:43.949Z",
+  "comment": {
+    "text": "Upload to server is used as a button label on a save cancel buttons component in the data import process. It is displayed when saving file data and appears in a dialog or modal context.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:11.828Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectFileStep.tsx",
+      "line_number": 473,
+      "context": "{isNetworkError ? (\n <SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onUploadToServer}\n onCancelClick={returnToProviders}\n saveButtonLabel={t(\"Settings:UploadToServer\")}\n cancelButtonLabel={t(\"Common:Back\")}\n displaySettings\n showReminder\n saveButtonDataTestId=\"upload_to_server_button\"\n cancelButtonDataTestId=\"back_to_providers_button\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Serverə yükləyin' is understandable, a more natural and precise translation of 'Upload to server' would be 'Serverə yüklə' or 'Serverə göndərin'. The imperative form 'yükləyin' implies a direct command, which might not be suitable depending on the context of the setting.",
+          "suggestion": "Serverə yüklə or Serverə göndərin"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Качи в сървър' is a literal translation and while understandable, it's not the most natural way to say 'Upload to server' in Bulgarian. 'Качи' implies an upload, but 'сървър' feels slightly awkward in this context.",
+          "suggestion": "Прехвърли към сървър"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Վերբեռնել սերվերը' literally translates to 'Upload the server' instead of 'Upload to server'. It implies uploading *the* server as an object, not uploading *to* a server.",
+          "suggestion": "Վերբեռնել սերվերում (Verbərnel' serverum) - This translates to 'Upload to server' and is a more accurate representation of the English meaning. Alternatively, 'Վերբեռնել դեպի սերվեր (Verbərnel' depi server) - Upload to server"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'සේවාදායකයට' (sevadaayakayaat) is a valid Sinhala word, but might be slightly ambiguous. It literally translates to 'to the service holder' and while understandable in context, 'සේවාකාරයට' (sevakaaraayaat) is more commonly used to mean 'to the server' in a technical context.",
+          "suggestion": "සේවාකාරයට උඩුගත කරන්න"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Отпреми на сервер' doesn't accurately convey the meaning of 'Upload to server.' 'Отпреми' typically means 'ship' or 'dispatch,' not 'upload.'",
+          "suggestion": "Уплоад на сервер"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

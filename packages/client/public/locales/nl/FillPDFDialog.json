@@ -2,8 +2,5 @@
   "FillOutButtonLabel": "Invullen",
   "FillOutDescription": "Vul de velden van het oorspronkelijke formulier in het editorvenster in.",
   "FillOutTitle": "Vul het formulier zelf in",
-  "FillPDFDialogTitle": "Invullen als",
-  "ShareCollectButtonLabel": "Kopieer naar kamer",
-  "ShareCollectDescription": "Deel uw formulier en ontvang reacties via een Kamer voor het invullen van formulieren",
-  "ShareCollectTitle": "Delen"
+  "FillPDFDialogTitle": "Invullen als"
 }

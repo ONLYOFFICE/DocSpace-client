@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,24 +29,25 @@ import { inject, observer } from "mobx-react";
 
 import { isMobile } from "@docspace/shared/utils";
 import { AccessRightSelect } from "@docspace/shared/components/access-right-select";
+import { TOption } from "@docspace/shared/components/combobox";
 import { TTranslation } from "@docspace/shared/types";
 import { RoomsType } from "@docspace/shared/enums";
-import { getAccessOptions } from "../panels/InvitePanel/utils";
+import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
+
 import StyledAccessSelector from "./AccessSelector.styled";
 
 interface AccessSelectorProps {
   t: TTranslation;
-  roomType: RoomsType;
+  roomType: RoomsType | -1;
   onSelectAccess: (access: any) => void;
-  containerRef: React.RefObject<HTMLDivElement>;
+  containerRef?: React.RefObject<HTMLDivElement | null>;
   defaultAccess: number;
   isOwner: boolean;
   isAdmin: boolean;
   withRemove?: boolean;
-  filteredAccesses: any[];
-  setIsOpenItemAccess: (isOpen: boolean) => void;
+  filteredAccesses?: any[];
   className: string;
-  standalone: boolean;
+  standalone?: boolean;
   isMobileView: boolean;
   noBorder?: boolean;
   manualWidth?: number;
@@ -54,9 +55,10 @@ interface AccessSelectorProps {
   directionX?: string;
   directionY?: string;
   isSelectionDisabled?: boolean;
-  selectionErrorText: React.ReactNode;
+  selectionErrorText?: React.ReactNode;
   availableAccess?: number[];
   scaledOptions?: boolean;
+  dataTestId?: string;
 }
 
 const AccessSelector: React.FC<AccessSelectorProps> = ({
@@ -69,19 +71,19 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
   isAdmin,
   withRemove = false,
   filteredAccesses,
-  setIsOpenItemAccess,
   className,
   standalone,
   isMobileView,
   noBorder = false,
   manualWidth,
   isDisabled,
-  directionX = "right",
+  directionX = "left",
   directionY = "bottom",
   isSelectionDisabled,
   selectionErrorText,
   availableAccess,
   scaledOptions,
+  dataTestId,
 }) => {
   const [horizontalOrientation, setHorizontalOrientation] = useState(false);
   const [width, setWidth] = useState(manualWidth || 0);
@@ -98,7 +100,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
 
   const accessOptions = getAccessOptions(
     t,
-    roomType,
+    roomType as RoomsType,
     withRemove,
     true,
     isOwner,
@@ -107,7 +109,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
   );
 
   const selectedOption = accessOptions.filter(
-    (access) => access?.access === +defaultAccess,
+    (access) => "access" in access && access?.access === +defaultAccess,
   )[0];
 
   const checkWidth = () => {
@@ -130,33 +132,32 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
 
   return (
     <StyledAccessSelector className="access-selector">
-      {!(isMobile() && !isMobileHorizontalOrientation) && (
+      {!(isMobile() && !isMobileHorizontalOrientation) ? (
         <AccessRightSelect
           className={className}
-          selectedOption={selectedOption}
+          selectedOption={selectedOption as unknown as TOption}
           onSelect={onSelectAccess}
           accessOptions={filteredAccesses || accessOptions}
           noBorder={noBorder}
-          directionX={directionX}
-          directionY={directionY}
+          directionX={directionX as "right" | "left"}
+          directionY={directionY as "bottom" | "top" | "both" | undefined}
           fixedDirection
           manualWidth={`${width}px`}
           isDefaultMode={false}
           isAside={false}
-          setIsOpenItemAccess={setIsOpenItemAccess}
-          hideMobileView={isMobileHorizontalOrientation}
           isDisabled={isDisabled}
           isSelectionDisabled={isSelectionDisabled}
           selectionErrorText={selectionErrorText}
           availableAccess={availableAccess}
           scaledOptions={scaledOptions}
+          dataTestId={dataTestId}
         />
-      )}
+      ) : null}
 
-      {isMobile() && !isMobileHorizontalOrientation && (
+      {isMobile() && !isMobileHorizontalOrientation ? (
         <AccessRightSelect
           className={className}
-          selectedOption={selectedOption}
+          selectedOption={selectedOption as unknown as TOption}
           onSelect={onSelectAccess}
           accessOptions={filteredAccesses || accessOptions}
           noBorder={noBorder}
@@ -166,18 +167,17 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
           manualWidth="auto"
           isDefaultMode
           isAside={isMobileView}
-          setIsOpenItemAccess={setIsOpenItemAccess}
           manualY="0px"
-          withoutBackground={isMobileView}
-          withBackground={!isMobileView}
+          withBackground={isMobileView}
           withBlur={isMobileView}
           isDisabled={isDisabled}
           isSelectionDisabled={isSelectionDisabled}
           selectionErrorText={selectionErrorText}
           availableAccess={availableAccess}
           scaledOptions={scaledOptions}
+          dataTestId={dataTestId}
         />
-      )}
+      ) : null}
     </StyledAccessSelector>
   );
 };

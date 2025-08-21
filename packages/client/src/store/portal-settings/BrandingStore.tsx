@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,10 +27,11 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
 import {
-  getLogoText as getWhiteLabelText,
-  getIsDefaultWhiteLabel,
-  setWhiteLabelSettings,
-  restoreWhiteLabelSettings,
+  getBrandName as getWhiteLabelBrandName,
+  setBrandName,
+  getIsDefaultWhiteLabelLogos,
+  setWhiteLabelLogos,
+  restoreWhiteLabelLogos,
 } from "@docspace/shared/api/settings";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { isManagement } from "@docspace/shared/utils/common";
@@ -44,11 +45,11 @@ class BrandingStore {
 
   logoUrls: ILogo[] = [];
 
-  logoText = "";
+  brandName = "";
 
-  defaultLogoText = "";
+  defaultBrandName = "";
 
-  isDefaultWhiteLabel = false;
+  isDefaultLogos = false;
 
   settingsStore: SettingsStore = {} as SettingsStore;
 
@@ -65,20 +66,27 @@ class BrandingStore {
     this.isLoadedCompanyInfoSettingsData = isLoaded;
   };
 
+  setBrandName = (text: string) => {
+    this.brandName = text;
+  };
+
+  setDefaultBrandName = (text: string) => {
+    this.defaultBrandName = text;
+  };
+
+  getBrandName = async () => {
+    const res = (await getWhiteLabelBrandName(isManagement())) as string;
+    this.setBrandName(res);
+    this.setDefaultBrandName(res);
+    return res;
+  };
+
   setLogoUrls = (urls: ILogo[]) => {
     this.logoUrls = urls;
   };
 
-  setLogoText = (text: string) => {
-    this.logoText = text;
-  };
-
-  setDefaultLogoText = (text: string) => {
-    this.defaultLogoText = text;
-  };
-
-  setIsDefaultWhiteLabel = (isDefault: boolean) => {
-    this.isDefaultWhiteLabel = isDefault;
+  setIsDefaultLogos = (isDefault: boolean) => {
+    this.isDefaultLogos = isDefault;
   };
 
   getLogoUrls = async () => {
@@ -88,60 +96,65 @@ class BrandingStore {
     return logos;
   };
 
-  getLogoText = async () => {
-    const res = (await getWhiteLabelText(isManagement())) as string;
-    this.setLogoText(res);
-    this.setDefaultLogoText(res);
-    return res;
-  };
-
-  getIsDefault = async () => {
-    const res = await getIsDefaultWhiteLabel(isManagement());
-    const isDefaultWhiteLabel = res.map((item) => item.default).includes(false);
-    this.setIsDefaultWhiteLabel(isDefaultWhiteLabel);
+  getIsDefaultLogos = async () => {
+    const res = await getIsDefaultWhiteLabelLogos(isManagement());
+    if (!res) return;
+    const isDefaultWhiteLabel = (res as { default: boolean }[])
+      .map((item) => item.default)
+      .includes(false);
+    this.setIsDefaultLogos(isDefaultWhiteLabel);
   };
 
   applyNewLogos = (logos: ILogo[]) => {
     const theme = this.settingsStore.theme.isBase ? "light" : "dark";
 
-    const favicon = document.getElementById("favicon");
-    const logo = document.getElementsByClassName("logo-icon_svg")?.[0];
-    const logoBurger = document.getElementsByClassName("burger-logo")?.[0];
+    const favicon = document.getElementById("favicon") as HTMLLinkElement;
+    const logo = document.getElementsByClassName(
+      "logo-icon_svg",
+    )?.[0] as HTMLImageElement;
+    const logoBurger = document.getElementsByClassName(
+      "burger-logo",
+    )?.[0] as HTMLImageElement;
 
     runInAction(() => {
-      // eslint-disable-next-line
-      favicon && (favicon.href = logos?.[2]?.path?.["light"]); // we have single favicon for both themes
-      // eslint-disable-next-line
+      favicon && (favicon.href = logos?.[2]?.path?.light); // we have single favicon for both themes
       logo && (logo.src = logos?.[0]?.path?.[theme]);
-      // eslint-disable-next-line
       logoBurger && (logoBurger.src = logos?.[5]?.path?.[theme]);
     });
   };
 
-  saveWhiteLabelSettings = async (data) => {
-    await setWhiteLabelSettings(data, isManagement());
+  saveBrandName = async (data: string) => {
+    await setBrandName(data, isManagement());
+    this.settingsStore.getPortalSettings();
+    this.getBrandName();
+  };
+
+  saveWhiteLabelLogos = async (data: ILogo[]) => {
+    await setWhiteLabelLogos(data, isManagement());
+    this.settingsStore.getPortalSettings();
     const logos = await this.getLogoUrls();
-    this.getIsDefault();
-    this.getLogoText();
+    this.getIsDefaultLogos();
     this.applyNewLogos(logos);
   };
 
-  resetWhiteLabelSettings = async () => {
-    await restoreWhiteLabelSettings(isManagement());
+  resetWhiteLabelLogos = async () => {
+    await restoreWhiteLabelLogos(isManagement());
     const logos = await this.getLogoUrls();
-    this.getIsDefault();
-    this.getLogoText();
+    this.getIsDefaultLogos();
     this.applyNewLogos(logos);
   };
 
   initWhiteLabel = () => {
     this.getLogoUrls();
-    this.getLogoText();
-    this.getIsDefault();
+    this.getIsDefaultLogos();
   };
 
   get isWhiteLabelLoaded() {
-    return this.logoUrls.length > 0 && this.logoText !== undefined;
+    return this.logoUrls.length > 0;
+  }
+
+  get isBrandNameLoaded() {
+    return this.brandName !== undefined && this.defaultBrandName !== undefined;
   }
 }
 

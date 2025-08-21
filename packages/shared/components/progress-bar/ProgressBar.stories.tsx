@@ -24,34 +24,75 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { ProgressBar } from "./ProgressBar";
+import { ProgressBar } from ".";
 
-const meta = {
-  title: "Components/ProgressBar",
+const meta: Meta<typeof ProgressBar> = {
+  title: "Status components/ProgressBar",
   component: ProgressBar,
-  parameters: {
-    docs: {
-      description: {
-        component:
-          "A container that displays a process or operation as a progress bar",
-      },
+  argTypes: {
+    percent: {
+      control: { type: "number", min: 0, max: 100 },
+      description: "Percentage of progress",
     },
-    design: {
-      type: "figma",
-      url: "https://www.figma.com/file/ZiW5KSwb4t7Tj6Nz5TducC/UI-Kit-DocSpace-1.0.0?node-id=991%3A43382&mode=dev",
+    label: {
+      control: "text",
+      description: "Label to display",
+    },
+    status: {
+      control: "text",
+      description: "Status text to show",
+    },
+    error: {
+      control: "text",
+      description: "Error message to display",
+    },
+    className: {
+      control: "text",
+      description: "Additional CSS class name",
     },
   },
-} satisfies Meta<typeof ProgressBar>;
-type Story = StoryObj<typeof meta>;
+};
 
 export default meta;
+type Story = StoryObj<typeof ProgressBar>;
 
 export const Default: Story = {
   args: {
-    label: "Operation in progress...",
-    percent: 20,
-    isInfiniteProgress: false,
+    percent: 50,
+    label: "Uploading file...",
+  },
+};
+
+export const WithStatus: Story = {
+  args: {
+    percent: 75,
+    label: "Processing document",
+    status: "3 of 4 files processed",
+  },
+};
+
+export const WithError: Story = {
+  args: {
+    percent: 30,
+    label: "Upload failed",
+    error: "Network connection error",
+  },
+};
+
+export const InfiniteProgress: Story = {
+  args: {
+    percent: 0,
+    label: "Please wait...",
+    isInfiniteProgress: true,
+  },
+};
+
+export const Complete: Story = {
+  args: {
+    percent: 100,
+    label: "Upload complete",
+    status: "All files processed successfully",
   },
 };

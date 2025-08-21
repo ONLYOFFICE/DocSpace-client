@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,16 +26,19 @@
 
 import moment from "moment";
 import { TCreatedBy, TPathParts } from "../../types";
-import {
+import type {
   EmployeeActivationStatus,
   EmployeeStatus,
+  FileFillingFormStatus,
   FileStatus,
   FileType,
+  FillingFormStatusHistory,
   FolderType,
   RoomsType,
   ShareAccessRights,
 } from "../../enums";
 import { TUser } from "../people/types";
+import type { TRoom } from "../rooms/types";
 
 export type TFileViewAccessibility = {
   CanConvert: boolean;
@@ -68,6 +71,13 @@ export type TFileSecurity = {
   Rename: boolean;
   Review: boolean;
   SubmitToFormGallery: boolean;
+  StopFilling?: boolean;
+  ResetFilling?: boolean;
+  EditForm: boolean;
+  Comment: boolean;
+  CreateRoomFrom: boolean;
+  CopyLink: boolean;
+  Embed: boolean;
 };
 
 export type TAvailableExternalRights = {
@@ -78,18 +88,19 @@ export type TAvailableExternalRights = {
   Read: boolean;
   Restrict: boolean;
   Review: boolean;
+  FillForms: boolean;
 };
 
 export type TFile = {
-  isFile: boolean;
+  isFile?: boolean;
   access: ShareAccessRights;
   canShare: boolean;
   comment: string;
   contentLength: string;
-  created: Date;
+  created: string;
   createdBy: TCreatedBy;
-  denyDownload: boolean;
-  denySharing: boolean;
+  denyDownload?: boolean;
+  denySharing?: boolean;
   fileExst: string;
   fileStatus: FileStatus;
   fileType: FileType;
@@ -103,13 +114,14 @@ export type TFile = {
   shared: boolean;
   thumbnailStatus: number;
   title: string;
-  updated: Date;
+  updated: string;
   updatedBy: TCreatedBy;
   version: number;
   versionGroup: number;
   viewAccessibility: TFileViewAccessibility;
   viewUrl: string;
   webUrl: string;
+  shortWebUrl: string;
   availableExternalRights?: TAvailableExternalRights;
   providerId?: number;
   providerKey?: string;
@@ -117,6 +129,13 @@ export type TFile = {
   thumbnailUrl?: string;
   expired?: string;
   isForm?: boolean;
+  isFolder?: boolean;
+  formFillingStatus?: FileFillingFormStatus;
+  startFilling?: boolean;
+  fileEntryType: number;
+  hasDraft?: boolean;
+  order?: string;
+  lockedBy?: string;
 };
 
 export type TOpenEditRequest = {
@@ -133,6 +152,7 @@ export type TGetReferenceData = {
   instanceId: string;
   sourceFileId?: number;
   path?: string;
+  link?: string;
 };
 
 export type TGetReferenceDataRequest = {
@@ -165,6 +185,12 @@ export type TFolderSecurity = {
   Duplicate: boolean;
   Download: boolean;
   CopySharedLink: boolean;
+  Reconnect: boolean;
+  CreateRoomFrom: boolean;
+  CopyLink: boolean;
+  Embed: boolean;
+  ChangeOwner: boolean;
+  IndexExport: boolean;
 };
 
 export type TFolder = {
@@ -182,15 +208,22 @@ export type TFolder = {
   title: string;
   access: ShareAccessRights;
   shared: boolean;
-  created: Date;
+  created: string;
   createdBy: TCreatedBy;
-  updated: Date;
+  updated: string;
   updatedBy: TCreatedBy;
   rootFolderType: FolderType;
   isArchive?: boolean;
   roomType?: RoomsType;
   path?: TPathParts[];
   type?: FolderType;
+  isFolder?: boolean;
+  indexing: boolean;
+  denyDownload: boolean;
+  fileEntryType: number;
+  parentRoomType?: number;
+  order?: string;
+  isRoom?: false;
 };
 
 export type TGetFolderPath = TFolder[];
@@ -206,6 +239,17 @@ export type TGetFolder = {
   new: number;
 };
 
+export type TGetRootFolder = {
+  files: TFile[];
+  folders: (TFolder | TRoom)[];
+  current: TFolder;
+  pathParts: TPathParts[];
+  startIndex: number;
+  count: number;
+  total: number;
+  new: number;
+};
+
 export type TOperation = {
   Operation: number;
   error: string;
@@ -213,6 +257,8 @@ export type TOperation = {
   id: string;
   processed: string;
   progress: number;
+  url?: string;
+  files?: TFile[];
 };
 
 export type TUploadOperation = {
@@ -227,15 +273,17 @@ export type TUploadOperation = {
 
 export type TThirdPartyCapabilities = string[][];
 
-export type TThierdParty = {
+export type TThirdParty = {
   corporate: boolean;
   roomsStorage: boolean;
   customerTitle: string;
   providerId: string;
   providerKey: string;
+  provider_id?: string;
+  customer_title?: string;
 };
 
-export type TTirdParties = TThierdParty[];
+export type TThirdParties = TThirdParty[];
 
 export type TFilesSettings = {
   automaticallyCleanUp: {
@@ -245,10 +293,10 @@ export type TFilesSettings = {
   canSearchByContent: boolean;
   chunkUploadSize: number;
   maxUploadThreadCount: number;
-  maxUploadFilesCount: number;
+  maxUploadFilesCount?: number;
   confirmDelete: boolean;
   convertNotify: boolean;
-  defaultOrder: { is_asc: boolean; property: 1 };
+  defaultOrder: { is_asc: boolean; property: number };
   defaultSharingAccessRights: ShareAccessRights[];
   downloadTarGz: boolean;
   enableThirdParty: boolean;
@@ -257,8 +305,9 @@ export type TFilesSettings = {
   extsArchive: string[];
   extsAudio: string[];
   extsCoAuthoring: string[];
-  extsConvertible: string[];
+  extsConvertible: Record<string, string[]>;
   extsDocument: string[];
+  extsDiagram: string[];
   extsImage: string[];
   extsImagePreviewed: string[];
   extsMediaPreviewed: string[];
@@ -290,6 +339,7 @@ export type TFilesSettings = {
     Document: string;
     Presentation: string;
     Spreadsheet: string;
+    Pdf: string;
   };
   keepNewFileName: boolean;
   masterFormExtension: string;
@@ -299,7 +349,7 @@ export type TFilesSettings = {
   storeForcesave: boolean;
   storeOriginalFiles: boolean;
   templatesSection: boolean;
-  updateIfExist: boolean;
+  updateIfExist?: boolean;
   openEditorInSameTab: boolean;
   displayFileExtension: boolean;
 };
@@ -383,7 +433,10 @@ export type TDocServiceLocation = {
   docServiceUrl: string;
   docServiceUrlInternal: string;
   docServicePortalUrl: string;
+  docServiceSignatureHeader: string;
+  docServiceSignatureSecret: string;
   isDefault: boolean;
+  docServiceSslVerification: boolean;
 };
 
 export type TFileLink = {
@@ -432,6 +485,8 @@ export type TConnectingStorage = {
   connected: boolean;
   oauth: boolean;
   redirectUrl: string;
+  clientId?: string;
+  requiredConnectionUrl: boolean;
 };
 
 export type TIndexItems = {
@@ -441,3 +496,38 @@ export type TIndexItems = {
 };
 
 export type TConnectingStorages = TConnectingStorage[];
+
+export type SettingsThirdPartyType = {
+  id: string;
+  title: string;
+  providerId: string;
+  providerKey: string;
+};
+
+export type TUploadBackup = {
+  Message?: string;
+  EndUpload: boolean;
+  Success: boolean;
+  ChunkSize: number;
+};
+
+export type TFormRoleMappingRequest = {
+  formId: number;
+  roles: {
+    userId: string;
+    roleName: string;
+    roleColor: string;
+    roomId: number;
+  }[];
+};
+
+export type TFileFillingFormStatus = {
+  user: TUser;
+  stopedBy?: TUser;
+  roleName: string;
+  roleColor: string;
+  roleStatus: FileFillingFormStatus;
+  sequence: number;
+  submitted: boolean;
+  history?: Record<FillingFormStatusHistory, string>;
+};

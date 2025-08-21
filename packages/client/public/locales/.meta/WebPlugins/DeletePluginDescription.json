@@ -1,0 +1,299 @@
+{
+  "key_path": "DeletePluginDescription",
+  "content": "This plugin will no longer be available to {{productName}} users. Are you sure you want to continue?",
+  "content_en_sha1_hash": "f9dd38d9a79d72110282ab407149bc43bb96edf0",
+  "created_at": "2025-05-19T21:30:49.904Z",
+  "updated_at": "2025-05-24T02:00:06.682Z",
+  "comment": {
+    "text": "This translation key is used for a confirmation message that appears when deleting a plugin in an application, prompting users to confirm their action. The message includes placeholders for product name and title. It is displayed within a delete dialog modal.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:43.396Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeletePluginDialog/index.js",
+      "line_number": 63,
+      "context": "onClose={onClose}\n displayType=\"modal\"\n >\n <ModalDialog.Header>{t(\"DeletePluginTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n {t(\"DeletePluginDescription\", { productName: t(\"Common:ProductName\") })}\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"delete-button\"\n key=\"DeletePortalBtn\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The sentence structure is slightly awkward. The word order 'Haluako varmasti jatkaa?' isn't the most natural way to express 'Are you sure you want to continue?' in Finnish.",
+          "suggestion": "Haluatko varmasti jatkaa?"
+        },
+        {
+          "type": "formatting",
+          "description": "Missing a question mark at the end of the sentence.",
+          "suggestion": "Haluatko varmasti jatkaa?"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"This plugin will no longer be available to {{productName}} users\" is not perfectly conveyed. A more natural Armenian phrasing might be \"This plugin will no longer be accessible to {{productName}} users\" or \"{{productName}} users will no longer have access to this plugin\".",
+          "suggestion": "Այս փլագինը այլևս հասանելի չի լինի {{productName}} օգտատերերի համար:"
+        },
+        {
+          "type": "formatting",
+          "description": "The preposition \"to\" in \"available to {{productName}} users\" can be improved for flow.  Adding \"համար\" (for) is more natural.",
+          "suggestion": "Այս փլագինը այլևս հասանելի չի լինի {{productName}}-ի օգտատերերին համար:"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"このプラグインは{{productName}}ユーザーには提供されません。このまま続けますか？\" is a literal translation but slightly unnatural in Japanese. A more natural phrasing would convey that the plugin will be removed or unavailable rather than simply not 'provided'.",
+          "suggestion": "このプラグインは{{productName}}ユーザー向けに利用できなくなります。よろしいですか？"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"{{productName}} 사용자는 더 이상 이 플러그인을 사용할 수 없게 됩니다.\" is a literal translation but loses the urgency and confirmation aspect of the English phrase. It simply states that users won't be able to use the plugin anymore, without the 'Are you sure' element.",
+          "suggestion": "{{productName}} 사용자는 더 이상 이 플러그인을 사용할 수 없습니다. 정말 삭제하시겠습니까?"
+        },
+        {
+          "type": "formatting",
+          "description": "The Korean translation doesn't include the question mark that's natural at the end of a question.",
+          "suggestion": "Add a question mark at the end of the suggested correction: \"{{productName}} 사용자는 더 이상 이 플러그인을 사용할 수 없습니다. 정말 삭제하시겠습니까?\""
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'plug-in' is spelled incorrectly. The correct spelling is 'plugin'.",
+          "suggestion": "plugin"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Dana' in 'Dana wtyczka' is unusual and doesn't accurately translate 'This plugin'. It sounds awkward and potentially means 'Given' or 'Granted' which isn't the intended meaning.  'Ta wtyczka' would be a more natural and accurate translation of 'This plugin'.",
+          "suggestion": "Ta wtyczka nie będzie już dostępna dla użytkowników {{productName}}. Czy na pewno chcesz kontynuować?"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'spațiului' translates to 'space' or 'area' and doesn't accurately reflect the intended meaning of 'users'. It creates an awkward phrasing.",
+          "suggestion": "Acest plugin nu va mai fi disponibil pentru utilizatorii {{productName}}. Sigur doriți să continuați?"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"පේනුව\" for \"plugin\" is not the standard or most understood term in Sinhala. A more common and understandable term would be \"ආපනුව\".",
+          "suggestion": "ආපනුව"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ඔබට ඉදිරියට යාමට වුවමනා ද?\" is a bit clunky and formal for a confirmation prompt. It implies a level of permission or formality not usually associated with such prompts.",
+          "suggestion": "ඔබ ඉදිරියට යාමට කැමතියි?"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the punctuation and capitalization could be refined to align with common Sinhala practices in user interfaces. The question mark at the end feels somewhat rigid.",
+          "suggestion": "ඔබ ඉදිරියට යාමට කැමතියි?"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The possessive suffix '-а' is attached to productName. While grammatically correct, it might be more natural to omit it or use a slightly different phrasing to better suit the context of a UI message. Consider if the possessive is truly necessary.",
+          "suggestion": "Овај додатак више неће бити доступан корисницима {{productName}}. Да ли сте сигурни да желите да наставите?"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The possessive marker '-a' after '{{productName}}' is grammatically correct, but might be stylistically improved for clarity or flow depending on the overall tone. While technically correct, a more natural phrasing could be considered.",
+          "suggestion": "Consider rephrasing to '{{productName}}'.  Or, if the specific grammatical structure is required, confirm it aligns with established brand guidelines for possessives."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Plugin này sẽ không còn khả dụng cho người dùng {{productName}}' is a literal translation but could be improved for naturalness in Vietnamese. A more fluent phrasing would be 'Plugin này sẽ không còn được sử dụng cho người dùng {{productName}}' or 'Plugin này sẽ không còn hỗ trợ người dùng {{productName}}'.",
+          "suggestion": "Plugin này sẽ không còn được sử dụng cho người dùng {{productName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

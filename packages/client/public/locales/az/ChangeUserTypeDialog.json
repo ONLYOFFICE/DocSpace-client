@@ -1,11 +1,17 @@
 {
+  "ChangeContactType": "Əlaqə növünü dəyişdirin",
   "ChangeGuestsTypeMessage": "Qonaq <strong>{{userName}}</strong> {{membersSection}} bölməsinə köçürüləcək və İstifadəçi növü təyin ediləcək. İstifadəçilərin faylları yarada və redaktə edə biləcəkləri öz {{documentsSection}} bölməsi mövcuddur, lakin otaqlar yarada bilmirlər.",
   "ChangeGuestsTypeMessageMulti": "Seçilmiş qonaqlar {{membersSection}} bölməsinə köçürüləcək və onlara İstifadəçi növü təyin ediləcək. İstifadəçilərin faylları yarada və redaktə edə biləcəkləri öz {{documentsSection}} bölməsi mövcuddur, lakin otaqlar yarada bilmirlər.",
+  "ChangeGuestsTypeToAdmin": "Qonaq <strong>{{userName}}</strong> {{membersSection}} bölməsinə köçürüləcək və ona <strong>'{{ secondType }}'</strong> növü təyin ediləcək. {{productName}} administratorları {{productName}} parametrlərinə daxil ola, otaqları idarə edə və arxivləşdirə, yeni istifadəçiləri dəvət edə və səviyyələrindən aşağı rollar təyin edə bilər. {{productName}} administratorları {{documentsSection}} bölməsinə daxil ola bilər.",
+  "ChangeGuestsTypeToAdminMulti": "Seçilmiş qonaqlar {{membersSection}} bölməsinə köçürüləcək və <strong>'{{ secondType }}'</strong> növü təyin ediləcək. {{productName}} administratorları {{productName}} parametrlərinə daxil ola, otaqları idarə edə və arxivləşdirə, yeni istifadəçiləri dəvət edə və səviyyələrindən aşağı rollar təyin edə bilər. {{productName}} administratorları {{documentsSection}} bölməsinə daxil ola bilər.",
+  "ChangeGuestsTypeToManager": "Qonaq <strong>{{userName}}</strong> {{membersSection}} bölməsinə köçürüləcək və ona <strong>'{{ secondType }}'</strong> növü təyin ediləcək. Otaq administratorları təyin olunmuş otaqlar yarada və idarə edə, yeni istifadəçiləri dəvət edə, Otaq administratoru və aşağı rollar təyin edə bilər. Otaq administratorları {{documentsSection}} bölməsinə daxil ola bilər.",
+  "ChangeGuestsTypeToManagerMulti": "Seçilmiş qonaqlar {{membersSection}} bölməsinə köçürüləcək və <strong>'{{ secondType }}'</strong> növü təyin ediləcək. Otaq administratorları təyin olunmuş otaqlar yarada və idarə edə, yeni istifadəçiləri dəvət edə, Otaq administratoru və aşağı rollar təyin edə bilər. Otaq administratorları {{documentsSection}} bölməsinə daxil ola bilər.",
   "ChangeUserTypeButton": "Növün dəyişdirilməsi",
-  "ChangeUserTypeHeader": "İstifadəçi növünün dəyişdirilməsi",
   "ChangeUserTypeMessage": "<strong>'{{ firstType }}'</strong> tipinə malik olan istifadəçilər <strong>'{{ secondType }}'</strong> istifadəçi tipinə dəyişdirildi.",
-  "ChangeUserTypeMessageMulti": "Seçilmiş istifadəçilər <strong>'{{ secondType }}'</strong> növünə köçürüləcək.",
-  "ChangeUserTypeMessageWarning": "{{productName}} inzibatçının və özüvüzün istifadəçi tipini dəyişdirə bilməzsiniz.",
+  "ChangeUserTypeNote": "<1>Qeyd:</1> Siz {{productName}} administratoru və özünüz üçün növü dəyişə bilməzsiniz.",
+  "DataReassignmentInfo": "İstifadəçi tərəfindən yaradılmış bu otaqlar avtomatik olaraq sizə təyin olunacaq. Otaqları başqa şəxsə təyin etmək üçün aşağıdakı müvafiq linkə klikləyin.",
+  "DataReassignmentWithFilesDeletion": "Bu əlaqə tərəfindən yaradılmış bütün paylaşılan fayllar <1>30 gün sonra avtomatik olaraq sizə təyin olunacaq </1>. Otaqları/paylaşılan faylları başqa şəxsə təyin etmək üçün aşağıdakı müvafiq linkə klikləyin.",
+  "PersonalDataDeletion": "Bu əlaqə {{sectionName}} bölməsindəki bütün fayl və qovluqlar <1>30 gün sonra həmişəlik silinəcək</1>.",
   "SuccessChangeGuestType": "Qonaq növü uğurla dəyişdirildi",
   "SuccessChangeUserType": "İstifadəçi tipi müvəffəqiyyətlə dəyişdirildi"
 }

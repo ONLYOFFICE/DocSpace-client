@@ -1,6 +1,5 @@
 {
   "AccountWillBeCreated": "Račun {{productName}} bo ustvarjen za <1>{{email}}</1>. Prosimo, dokončajte registracijo:",
-  "ChangePasswordSuccess": "Geslo je bilo uspešno spremenjeno",
   "ConfirmOwnerPortalSuccessMessage": "Lastnik {{productName}} je bil uspešno spremenjen. Čez 10 sekund boste preusmerjeni.",
   "ConfirmOwnerPortalTitle": "Potrdite, da želite spremeniti lastnika {{productName}} v {{newOwner}}.",
   "CurrentNumber": "Vaša trenutna številka mobilnega telefona",
@@ -26,9 +25,6 @@
   "PortalRemoveTitle": "Potrdi, če želiš izbrisati svoj {{productName}}.",
   "Reactivate": "Ponovno aktiviraj",
   "SetAppButton": "Aplikacija za prijavo",
-  "SetAppDescription": "Omogočena je dvofaktorska avtentikacija. Za nadaljevanje dela v {{productName}} konfigurirajte aplikacijo za avtentikacijo. Google Authenticator lahko uporabite za <1>Android</1> in <4>iOS</4> ali Avtentikator za <8>Windows Telefon</8>.",
-  "SetAppInstallDescription": "Če želite povezati aplikacijo, skenirajte kodo QR ali ročno vnesite svoj skrivni ključ <1>{{ secretKey }}</1>, nato vnesite 6-mestno kodo iz aplikacije v polje spodaj.",
-  "SetAppTitle": "Konfigurirajte vašo aplikacijo za avtentikacijo",
   "SignUp": "Prijava",
   "SuccessDeactivate": "Vaš račun je bil uspešno ponovno aktiviran. Čez 10 sekund boste preusmerjeni na <1>stran</1>.",
   "SuccessReactivate": "Vaš račun je bil uspešno ponovno aktiviran. Čez 10 sekund boste preusmerjeni v <1>portal</1>.",

@@ -1,0 +1,249 @@
+{
+  "key_path": "DefaultQuota",
+  "content": "Default quota",
+  "content_en_sha1_hash": "74e18c6f0fe3effdc2053a9286b7b902f2d9c1b1",
+  "created_at": "2025-05-19T21:30:44.442Z",
+  "updated_at": "2025-08-11T09:02:43.927Z",
+  "comment": {
+    "text": "The \"DefaultQuota\" translation key is used to display the label for the default quota option in a filter section. It appears on a page where users can customize their filters and provides an alternative label when the default quota option is selected. This text should be translated to provide a consistent user experience across different languages.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:36:45.121Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
+      "line_number": 558,
+      "context": "const key = roomsFilter.quotaFilter;\n \n const label =\n key === FilterKeys.customQuota\n ? t(\"Common:CustomQuota\")\n : t(\"Common:DefaultQuota\");\n \n filterValues.push({\n key: roomsFilter.quotaFilter,\n label,\n group: FilterGroups.filterQuota,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
+      "line_number": 558,
+      "context": "const key = roomsFilter.quotaFilter;\n \n const label =\n key === FilterKeys.customQuota\n ? t(\"Common:CustomQuota\")\n : t(\"Common:DefaultQuota\");\n \n filterValues.push({\n key: roomsFilter.quotaFilter,\n label,\n group: FilterGroups.filterQuota,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
+      "line_number": 382,
+      "context": "const key = usersFilter.quotaFilter.toString();\n \n const label =\n key === FilterKeys.customQuota\n ? t(\"Common:CustomQuota\")\n : t(\"Common:DefaultQuota\");\n \n filterValues.push({\n key,\n label,\n group: FilterGroups.filterQuota,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word \"Default\" is misspelled as \"Defolt\".",
+          "suggestion": "Default"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While \"kvota\" is a valid loanword for \"quota\" in Azerbaijani, \"Default\" is best translated as \"standart\". The current translation misses the intended meaning.",
+          "suggestion": "Standart kvota"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"デフォルトな容量制限\" is overly literal and slightly awkward. While technically correct, \"デフォルト容量\" or \"初期容量制限\" would be more natural and commonly used in Japanese.",
+          "suggestion": "デフォルト容量 or 初期容量制限"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation \"පෙරනිමි සලාකය\" does not accurately convey the meaning of \"Default quota\". \"පෙරනිමි\" (peranimu) translates to 'previous' or 'former,' and \"සලාකය\" (salakaya) translates to 'slice' or 'portion.' This combination doesn't capture the concept of a default quota.",
+          "suggestion": "A more accurate translation would be something like \"නිර්දේශිත වාරකය\" (nirdeshitha varakaya) which translates to 'recommended quota' or \"ප්‍රස්ථාරණාත්මක වාරකය\" (prastharanathmakatha varakaya) which translates to 'default quota'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"Подразумевана квота\" translates to \"Implied quota\" or \"Assumed quota,\" which doesn't fully capture the meaning of \"Default quota.\" \"Default\" implies a pre-set or standard value.",
+          "suggestion": "Почетна квота"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

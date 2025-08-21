@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -44,8 +44,15 @@ const StyledWrapper = styled.div`
 
 const HideButton = (props) => {
   const { t } = useTranslation("SingleSignOn");
-  const { text, label, isAdditionalParameters, value, setHideLabel, id } =
-    props;
+  const {
+    text,
+    label,
+    isAdditionalParameters,
+    value,
+    setHideLabel,
+    id,
+    dataTestId,
+  } = props;
 
   const onClick = () => {
     setHideLabel(label);
@@ -53,17 +60,16 @@ const HideButton = (props) => {
 
   return (
     <StyledWrapper isAdditionalParameters={isAdditionalParameters}>
-      {!isAdditionalParameters && (
+      {!isAdditionalParameters ? (
         <Text
           as="h2"
           fontSize="16px"
           fontWeight={700}
           className="settings_unavailable"
-          noSelect
         >
           {text}
         </Text>
-      )}
+      ) : null}
 
       <Link
         id={id}
@@ -71,6 +77,7 @@ const HideButton = (props) => {
         isHovered
         onClick={onClick}
         type="action"
+        dataTestId={dataTestId}
       >
         {value
           ? isAdditionalParameters

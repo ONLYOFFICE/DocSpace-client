@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,7 @@
 
 import moment from "moment-timezone";
 import React, { useEffect } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation } from "react-router";
 import { useTheme } from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
@@ -41,13 +41,14 @@ import { Portal } from "@docspace/shared/components/portal";
 import { SnackBar } from "@docspace/shared/components/snackbar";
 import { Toast, toastr } from "@docspace/shared/components/toast";
 import { ToastType } from "@docspace/shared/components/toast/Toast.enums";
-import { getRestoreProgress } from "@docspace/shared/api/portal";
 import { updateTempContent } from "@docspace/shared/utils/common";
 import { DeviceType, IndexedDBStores } from "@docspace/shared/enums";
 import indexedDbHelper from "@docspace/shared/utils/indexedDBHelper";
 import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
 import { sendToastReport } from "@docspace/shared/utils/crashReport";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { getCookie, deleteCookie } from "@docspace/shared/utils/cookie";
+import "@docspace/shared/styles/theme.scss";
 
 import config from "PACKAGE_FILE";
 
@@ -88,12 +89,12 @@ const Shell = ({ page = "home", ...rest }) => {
     pagesWithoutNavMenu,
     isFrame,
     barTypeInFrame,
-    setShowGuestReleaseTip,
 
-    isOwner,
-    isAdmin,
-    releaseDate,
-    registrationDate,
+    logoText,
+    setLogoText,
+    standalone,
+    isGuest,
+    setSocialAuthWelcomeDialogVisible,
   } = rest;
 
   const theme = useTheme();
@@ -103,6 +104,12 @@ const Shell = ({ page = "home", ...rest }) => {
     setFormCreationInfo,
     setConvertPasswordDialogVisible,
   });
+
+  const { t, ready } = useTranslation(["Common", "SmartBanner"]);
+
+  useEffect(() => {
+    if (!logoText) setLogoText(t("Common:OrganizationName"));
+  }, [logoText, setLogoText]);
 
   useEffect(() => {
     try {
@@ -129,8 +136,14 @@ const Shell = ({ page = "home", ...rest }) => {
 
   useEffect(() => {
     SocketHelper.emit(SocketCommands.Subscribe, {
-      roomParts: "backup-restore",
+      roomParts: "restore",
     });
+
+    if (standalone) {
+      SocketHelper.emit(SocketCommands.SubscribeInSpaces, {
+        roomParts: "restore",
+      });
+    }
 
     SocketHelper.emit(SocketCommands.Subscribe, {
       roomParts: "quota",
@@ -143,31 +156,58 @@ const Shell = ({ page = "home", ...rest }) => {
   }, []);
 
   useEffect(() => {
+    if (standalone) {
+      SocketHelper.emit(SocketCommands.SubscribeInSpaces, {
+        roomParts: "restore",
+      });
+
+      SocketHelper.emit(SocketCommands.SubscribeInSpaces, {
+        roomParts: "storage-encryption",
+      });
+    }
+  }, [standalone]);
+
+  useEffect(() => {
     SocketHelper.emit(SocketCommands.Subscribe, { roomParts: userId });
   }, [userId]);
 
   useEffect(() => {
-    const callback = () => {
-      getRestoreProgress()
-        .then((response) => {
-          if (!response) {
-            console.log(
-              "Skip show <PreparationPortalDialog /> - empty progress response",
-            );
-            return;
-          }
-          setPreparationPortalDialogVisible(true);
-        })
-        .catch((e) => {
-          console.error("getRestoreProgress", e);
-        });
-    };
-    SocketHelper.on(SocketEvents.RestoreBackup, callback);
+    if (isGuest && userId) {
+      const token = getCookie(`x-signature`);
+
+      if (token) {
+        deleteCookie(`x-signature-${userId}`);
+        deleteCookie("x-signature");
+      }
+    }
+  }, [userId]);
+
+  useEffect(() => {
+    SocketHelper.on(SocketEvents.RestoreBackup, () => {
+      setPreparationPortalDialogVisible(true);
+    });
 
     return () => {
-      SocketHelper.off(SocketEvents.RestoreBackup, callback);
+      SocketHelper.off(SocketEvents.RestoreBackup, () => {
+        setPreparationPortalDialogVisible(false);
+      });
     };
   }, [setPreparationPortalDialogVisible]);
+
+  useEffect(() => {
+    const storageEncryptionHandler = () => {
+      window.location.href = "/encryption-portal";
+    };
+
+    SocketHelper.on(SocketEvents.StorageEncryption, storageEncryptionHandler);
+
+    return () => {
+      SocketHelper.off(
+        SocketEvents.StorageEncryption,
+        storageEncryptionHandler,
+      );
+    };
+  }, []);
 
   useEffect(() => {
     const callback = (loginEventId) => {
@@ -189,8 +229,6 @@ const Shell = ({ page = "home", ...rest }) => {
       SocketHelper.off(SocketEvents.LogoutSession, callback);
     };
   }, [userLoginEventId]);
-
-  const { t, ready } = useTranslation(["Common", "SmartBanner"]);
 
   let snackTimer = null;
   let fbInterval = null;
@@ -286,7 +324,7 @@ const Shell = ({ page = "home", ...rest }) => {
       headerText: t("Attention"),
       text: `${t("BarMaintenanceDescription", {
         targetDate,
-        productName: `${t("Common:OrganizationName")} ${t("Common:ProductName")}`,
+        productName: `${logoText} ${t("Common:ProductName")}`,
       })} ${t("BarMaintenanceDisclaimer")}`,
       isMaintenance: true,
       onAction: () => {
@@ -409,6 +447,16 @@ const Shell = ({ page = "home", ...rest }) => {
     if (userTheme) setTheme(userTheme);
   }, [userTheme]);
 
+  useEffect(() => {
+    if (
+      isLoaded &&
+      localStorage.getItem("showSocialAuthWelcomeDialog") === "true"
+    ) {
+      localStorage.removeItem("showSocialAuthWelcomeDialog");
+      setSocialAuthWelcomeDialogVisible(true);
+    }
+  }, [isLoaded]);
+
   const pathname = window.location.pathname.toLowerCase();
   const isEditor = pathname.indexOf("doceditor") !== -1;
 
@@ -437,31 +485,6 @@ const Shell = ({ page = "home", ...rest }) => {
     });
   }, [isLoaded]);
 
-  useEffect(() => {
-    if (isFrame) return setShowGuestReleaseTip(false);
-
-    if (!releaseDate || !registrationDate) return;
-
-    if (!isAdmin && !isOwner) return setShowGuestReleaseTip(false);
-
-    const closed = localStorage.getItem(`closedGuestReleaseTip-${userId}`);
-
-    if (closed) return setShowGuestReleaseTip(false);
-
-    const regDate = new Date(registrationDate).getTime();
-    const release = new Date(releaseDate).getTime();
-
-    setShowGuestReleaseTip(regDate < release);
-  }, [
-    isFrame,
-    userId,
-    setShowGuestReleaseTip,
-    isAdmin,
-    isOwner,
-    releaseDate,
-    registrationDate,
-  ]);
-
   const rootElement = document.getElementById("root");
 
   const toast =
@@ -482,15 +505,19 @@ const Shell = ({ page = "home", ...rest }) => {
   return (
     <Layout>
       {toast}
-      {isMobileOnly && !isFrame && <ReactSmartBanner t={t} ready={ready} />}
+      {isMobileOnly && !isFrame ? (
+        <ReactSmartBanner t={t} ready={ready} />
+      ) : null}
       {withoutNavMenu ? null : <NavMenu />}
       <IndicatorLoader />
       <ScrollToTop />
       <DialogsWrapper t={t} />
 
       <Main isDesktop={isDesktop}>
-        {!isMobileOnly && !isFrame && <ReactSmartBanner t={t} ready={ready} />}
-        {barTypeInFrame !== "none" && <MainBar />}
+        {!isMobileOnly && !isFrame ? (
+          <ReactSmartBanner t={t} ready={ready} />
+        ) : null}
+        {barTypeInFrame !== "none" ? <MainBar /> : null}
         <div className="main-container">
           <Outlet />
         </div>
@@ -534,8 +561,9 @@ const ShellWrapper = inject(
       frameConfig,
       isPortalDeactivate,
       isPortalRestoring,
-      setShowGuestReleaseTip,
-      buildVersionInfo,
+      logoText,
+      setLogoText,
+      standalone,
     } = settingsStore;
 
     const isBase = settingsStore.theme.isBase;
@@ -553,8 +581,11 @@ const ShellWrapper = inject(
 
     const {
       setConvertPasswordDialogVisible,
+      setFormFillingTipsDialog,
+      formFillingTipsVisible,
 
       setFormCreationInfo,
+      setSocialAuthWelcomeDialogVisible,
     } = dialogsStore;
     const { user } = userStore;
 
@@ -583,6 +614,8 @@ const ShellWrapper = inject(
       setCheckedMaintenance,
       setMaintenanceExist,
       setPreparationPortalDialogVisible,
+      setFormFillingTipsDialog,
+      formFillingTipsVisible,
       isBase,
       setTheme,
       roomsMode,
@@ -592,6 +625,7 @@ const ShellWrapper = inject(
       userLoginEventId: userStore?.user?.loginEventId,
       isOwner: userStore?.user?.isOwner,
       isAdmin: userStore?.user?.isAdmin,
+      isGuest: userStore?.user?.isVisitor,
       registrationDate: userStore?.user?.registrationDate,
 
       currentDeviceType,
@@ -603,8 +637,10 @@ const ShellWrapper = inject(
       pagesWithoutNavMenu,
       isFrame,
       barTypeInFrame: frameConfig?.showHeaderBanner,
-      setShowGuestReleaseTip,
-      releaseDate: buildVersionInfo.releaseDate,
+      logoText,
+      setLogoText,
+      standalone,
+      setSocialAuthWelcomeDialogVisible,
     };
   },
 )(observer(Shell));

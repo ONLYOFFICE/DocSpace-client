@@ -1,0 +1,521 @@
+{
+  "key_path": "SaveOrChange",
+  "content": "Please eliminate the mismatch in the conflicting parameter to proceed or keep your active pricing plan.",
+  "content_en_sha1_hash": "e14f7d4dcf13a0d0425ac585f4cff62e9d7a024f",
+  "created_at": "2025-05-19T21:30:56.603Z",
+  "updated_at": "2025-05-24T13:08:12.373Z",
+  "comment": {
+    "text": "This translation key is used for a button that prompts users to resolve conflicts or discrepancies in their pricing plan settings. It appears on a dialog box that allows users to change their pricing plan and aims to encourage them to correct any issues before proceeding.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:33.484Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangePricingPlanDialog/index.js",
+      "line_number": 109,
+      "context": "{planUsersLimitations}\n <br />\n {storagePlanLimitations}\n \n <Text fontSize=\"13px\" className=\"save-or-change\">\n {t(\"SaveOrChange\")}\n </Text>\n </StyledBodyContent>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"التخلص من عدم التطابق\" (eliminate the mismatch) is a bit awkward and overly formal in this context. It doesn't flow naturally. A more natural phrasing would convey the intention of resolving the conflict.",
+          "suggestion": "يُرجى تصحيح التضارب في المعطيات أو الاحتفاظ بخطة التسعير النشطة الخاصة بك."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"المتغيرات\" (variables) is not the best fit here. \"المعطيات\" (data) or \"البيانات\" (data) would be more accurate depending on the specific context. \"المعطيات\" seems more suitable.",
+          "suggestion": "يُرجى تصحيح التضارب في المعطيات أو الاحتفاظ بخطة التسعير النشطة الخاصة بك."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'eliminate the mismatch' is not the most natural way to express the intended meaning in Azerbaijani. While technically correct, it sounds somewhat awkward. A more idiomatic translation would convey the idea of resolving or correcting the conflict.",
+          "suggestion": "Lütfən, ziddiyyətli parametrdəki münaqişi aradan qaldırın."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the repetitive use of 'lütfən' (please) feels slightly heavy. Consider revising for smoother flow.",
+          "suggestion": "Ziddiyyətli parametrdəki münaqişi aradan qaldırın və ya aktiv qiymət planınızı davam etdirin."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"eliminate the mismatch\" is not accurately translated. \"Елиминирайте разликите\" (Eliminate the differences) is a literal translation but doesn't capture the intent of resolving a conflict. A more suitable translation would imply resolving the conflicting parameters.",
+          "suggestion": "Моля, разрешете конфликтите в параметрите, за да продължите..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"keep your active pricing plan\" is awkwardly translated as \"изберете да активирате абонаментен план\" (choose to activate a subscription plan). It implies the user needs to *actively* re-activate a plan they already have.",
+          "suggestion": "или запазете текущия си абонаментен план."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"eliminate the mismatch\" is translated as \"odstraňte prosím nesoulad\". While technically correct, it sounds very formal and potentially confusing for a user in a dialog. A more user-friendly option might better convey the meaning of resolving a conflict.",
+          "suggestion": "Consider a more conversational alternative such as \"vyřešte prosím konflikt\" or \"opravte prosím konflikt\"."
+        },
+        {
+          "type": "formatting",
+          "description": "The Czech translation uses a formal tone throughout. The original English has a slightly more approachable tone, especially with the 'or keep your active pricing plan' part. Maintaining some level of this informality in the translation might improve user experience.",
+          "suggestion": "Re-evaluate the overall tone to align with the original. Perhaps softening some phrases to make them less technical."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"conflicting parameter\" is translated as \"widersprüchlichen Parametern\". While technically correct, it sounds very formal and potentially confusing for a user. A more user-friendly phrasing would be better.",
+          "suggestion": "Consider translating 'conflicting parameter' as 'inkompatiblen Parameter' or 'unterschiedlichen Einstellungen' depending on the specific context and the intended meaning."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"to proceed\" is translated as \"um fortzufahren\". This is grammatically correct, but \"um weiterzumachen\" or \"um fortzufahren\" could be more natural and accessible to a wider audience.",
+          "suggestion": "Consider translating 'to proceed' as 'um weiterzumachen' or 'um fortzufahren' for better clarity."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'conflicting parameter' is translated as 'αντικρουόμενη παράμετρο'. While technically correct, it's a bit clunky in Greek. A more natural phrasing might be 'παράμετρο που δημιουργεί σύγκρουση' or 'παράμετρο που προκαλεί σύγκρουση'.",
+          "suggestion": "Consider revising to 'παράμετρο που δημιουργεί σύγκρουση' or 'παράμετρο που προκαλεί σύγκρουση'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'eliminate' is translated as 'Εξαλείψτε'. While a direct translation, it might be perceived as overly formal and abrupt in this context. A softer approach might be better.",
+          "suggestion": "Consider using a more gentle wording like 'Διορθώστε' (correct) or 'Αντιμετωπίστε' (address)."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'eliminate the mismatch' is not the most natural way to convey the intended meaning in Spanish. It's a very literal translation and sounds awkward. The context suggests resolving or correcting a conflict.",
+          "suggestion": "Por favor, resuelva la inconsistencia en el parámetro para proceder o mantenga su plan de precios activo."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'coincidencia' (coincidence) in the translation does not accurately represent 'conflicting parameter'.  'Inconsistencia' (inconsistency) or 'discrepancia' would be better choices.",
+          "suggestion": "Consider using 'inconsistencia' or 'discrepancia' instead of 'coincidencia'."
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Ole hyvä ja poista ristiriitaisen parametrin yhteensopimattomuus\" is overly literal and doesn't convey the intended meaning clearly. It translates to 'Please remove the incompatibility of the conflicting parameter'.  A more natural Finnish phrasing would be needed.",
+          "suggestion": "Consider a more user-friendly alternative like \"Korjaa ristiriitainen tieto jatkaaksesi tai säilyttääksesi nykyisen tilauksesi.\" (Correct the conflicting information to proceed or keep your current subscription.) or \"Tarkista tiedot ja jatka tai pidä nykyinen tilauksesi.\" (Check the information and proceed or keep your current subscription.)."
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the sentence \"Ole hyvä ja poista ristiriitaisen parametrin yhteensopimattomuus jatkaaksesi tai säilyttääksesi aktiivinen tilauksesi.\" is somewhat cumbersome and formal for a dialog.",
+          "suggestion": "Using a more conversational tone would improve user experience. The suggestion in the previous issue addresses this."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"eliminate the mismatch\" is a bit clunky and doesn't quite capture the nuance of the English. While technically correct, it could be more natural in French.",
+          "suggestion": "Veuillez résoudre le conflit entre les paramètres afin de poursuivre ou de conserver votre plan tarifaire actif."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English uses 'active pricing plan.' The French uses 'plan tarifaire actif.' While both are acceptable, a more idiomatic rendering might be considered depending on context. 'Plan tarifaire actuel' could also be an option.",
+          "suggestion": "Veuillez résoudre le conflit entre les paramètres afin de poursuivre ou de conserver votre plan tarifaire actuel."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"eliminate the mismatch\" is not accurately reflected by \"վերացնել հակասական պարամետրի անհամապատասխանությունը\". A more natural translation would convey the need to resolve or reconcile the conflicting parameter, not simply eliminate the mismatch.",
+          "suggestion": "Consider rephrasing to something like \"Խնդրում ենք բարձրացրեք հակասական պարամետրի հարցը\" (Please address the issue of the conflicting parameter) or \"Խնդրում ենք համապարակել հակասական պարամետրերը\" (Please reconcile the conflicting parameters)."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is a bit long and could be broken down for better readability in Armenian. The phrase 'շարունակելու կամ ակտիվ գնային փաթեթը պահպանելու համար' is quite long.",
+          "suggestion": "Consider splitting into two sentences: 'Խնդրում ենք վերացնել հակասական պարամետրի անհամապատասխանությունը շարունակելու համար։ Կամ պահպանեք ձեր ակտիվ գնային փաթեթը:' (Please eliminate the mismatch to proceed. Or keep your active pricing plan)."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"mancata corrispondenza\" is overly literal and clunky for \"mismatch.\" It doesn't convey the intended meaning naturally in Italian. It translates to 'lack of correspondence' which is not the nuance required here.",
+          "suggestion": "Consider alternatives like \"discrepanza\", \"incongruenza\", or \"conflitto\" depending on the specific context. For example, \"Ti preghiamo di risolvere il conflitto nel parametro...\" or \"Ti preghiamo di eliminare l'incongruenza nel parametro...\""
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure is a bit awkward.  While grammatically correct, it lacks flow in Italian.",
+          "suggestion": "Consider restructuring the sentence for better readability. For example: \"Ti preghiamo di risolvere la discrepanza nel parametro in conflitto per procedere, oppure mantieni il tuo piano tariffario attivo.\""
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"競合するパラメーターの不一致を解消して、手続きを進めるか、有効な料金プランを維持してください\" is overly formal and complex for a dialog message.  'Proceed' is translated as '手続きを進める', which is accurate but sounds stilted. 'Eliminate the mismatch' is translated as '不一致を解消して' which is technically correct but creates a sense of technical jargon.",
+          "suggestion": "競合するパラメーターの矛盾を修正するか、現在の料金プランを維持してください。"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is a bit long and could be broken down for better readability in a dialog box.",
+          "suggestion": "競合するパラメーターの矛盾を修正するか、現在の料金プランを維持してください。"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"충돌하는 매개변수의 불일치를 제거해 주세요\" is a bit literal and complex. A more natural and user-friendly translation would focus on resolving the conflict.",
+          "suggestion": "계속 진행하려면 충돌하는 부분을 해결하거나 현재 요금제를 유지해 주세요."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term '매개변수' (parameter) might be too technical for the average user in this context. While technically correct, it can be confusing.",
+          "suggestion": "계속 진행하려면 충돌하는 항목을 해결하거나 현재 요금제를 유지해 주세요."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ຫຼຸດພາລາມິເຕີที่ต้องการ' (lud paramiter tee tongkan) translates to 'reduce the required parameter'. The English phrase 'eliminate the mismatch in the conflicting parameter' implies resolving a conflict, not just reducing something. A more accurate translation would convey resolution or correction of the conflict.",
+          "suggestion": "ປິດແກ້ໄຂຄວາມບໍ່ເຫງົາໃນຕົວແปรທີ່ຂັດแย້ງ"
+        },
+        {
+          "type": "formatting",
+          "description": "The Lao translation lacks proper punctuation. While Lao punctuation rules differ from English, adding a punctuation mark (like a comma or semicolon) could improve readability.",
+          "suggestion": "ຫຼຸດພາລາມິເຕີທີ່ຕ້ອງການ, ຫຼືຮັກສາແຜນລາຄາປັດຈຸບັນຂອງທ່ານ."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'conflicting parameter' is not accurately reflected by 'sprzecznym parametrze'. 'Sprzeczność' implies a contradiction, but 'conflicting' suggests a disagreement or incompatibility, which is a more precise nuance.",
+          "suggestion": "Wyeliminuj rozbieżność w niekompatybilnym parametrze, aby kontynuować lub zachowaj swój aktywny plan cenowy."
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the sentence structure is slightly awkward in Polish. The wording feels less natural than it could be.",
+          "suggestion": "Aby kontynuować, wyeliminuj rozbieżność w niekompatybilnym parametrze lub zachowaj swój aktywny plan cenowy."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"conflicting parameter\" is translated as \"parâmetro conflitante\". While technically correct, it's slightly awkward in Portuguese. A more natural phrasing might be \"parâmetro em conflito\" or \"parâmetro inconsistente\".",
+          "suggestion": "Consider 'parâmetro em conflito' or 'parâmetro inconsistente' for better flow."
+        },
+        {
+          "type": "formatting",
+          "description": "The original English phrasing uses the term \"active pricing plan\". While \"plano de preços ativo\" is accurate, using \"plano de preços vigente\" might sound more formal and professional, aligning better with a system dialogue.",
+          "suggestion": "Consider 'plano de preços vigente' instead of 'plano de preços ativo'."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'conflicting parameter' is translated literally as 'parâmetro conflitante'. While technically correct, a more natural phrasing in Brazilian Portuguese might be 'parâmetro conflitante' or 'parâmetro em conflito'. The current translation sounds slightly stilted.",
+          "suggestion": "Consider 'parâmetro em conflito' for a more natural flow."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'eliminate the mismatch' is translated as 'Elimine a incompatibilidade'. While technically accurate, a more user-friendly phrasing might be 'resolva a incompatibilidade' or 'corrija a incompatibilidade'. 'Elimine' can sound harsh in this context.",
+          "suggestion": "Consider 'Resolva a incompatibilidade' or 'Corrija a incompatibilidade'."
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"conflicting parameter\" is not accurately translated. \"Parametrul de conflict\" literally translates to \"conflict parameter,\" which doesn't convey the intended meaning of a parameter that is causing a conflict or mismatch.",
+          "suggestion": "Consider a more accurate translation like \"parametrul care generează conflict\" (parameter that generates a conflict) or \"parametrul divergent\" (divergent parameter)."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "“Keep your active pricing plan” is too literal. While understandable, it could be improved for flow and naturalness.",
+          "suggestion": "Consider a more natural phrasing like \"păstrați planul dumneavoastră de tarifare curent\" (keep your current pricing plan) or “mențineți planul actual” (keep the current plan)."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"conflicting parameter\" is translated as \"конфликтующем параметре.\" While technically correct, it's quite formal and could be softened for better user experience. A more natural phrasing might be 'параметре, который вызывает конфликт' or 'параметре, где есть противоречие'.",
+          "suggestion": "Consider rephrasing \"конфликтующем параметре\" to something like \"параметре, который вызывает конфликт\" or \"параметре, где есть противоречие\"."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is a bit clunky.  While grammatically correct, it might benefit from reordering to improve flow. For instance, separating the two options with 'либо'.",
+          "suggestion": "Consider reordering the sentence and using 'либо' to connect the two options: \"Пожалуйста, устраните несоответствие в параметре, который вызывает конфликт, либо сохраните ваш активный тарифный план.\""
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"conflicting parameter\" is not accurately translated. 'පරස්පර සැකසීම්' (paraspara sakaseem) literally translates to 'mutual adjustments' which doesn't convey the meaning of conflicting parameters. It's suggesting that the user needs to resolve conflicting values, not just mutual adjustments.",
+          "suggestion": "Consider a translation that conveys the idea of resolving conflicting or contradictory settings, such as 'මුරණ්ඩු සැකසීම් නිවැරදි කරන්න' (muranddu sakaseem niwaddari kiyanawa) or 'වැරදි සැකසීම් නිවැරදි කරන්න' (waraidi sakaseem niwaddari kiyanawa)."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a slightly formal tone, but the instruction \"කරුණාකර... කරන්න\" (karunaakar...kianawa) can be softened for better user experience. It's acceptable but could be improved.",
+          "suggestion": "Consider using a more conversational tone, such as 'ඔබේ සැකසීම්වලට වඩාත්ම සුදුසුතාවය කරුණාකර' (obae sakaseemwala baadhamotha sudusathava karunakar) or something along those lines."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'eliminate the mismatch in the conflicting parameter' is not accurately translated. 'Znížte požadovaný parameter' translates to 'Reduce the requested parameter,' which doesn't convey the original meaning of resolving a conflict or correcting a mismatch. It misses the nuance of the error correction.",
+          "suggestion": "Zrušte nezhodu v konfliktujúcom parametri alebo..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'keep your active pricing plan' is translated as 'zachovajte aktuálny cenový plán.' While technically correct, it lacks the nuance of 'keeping' - implying a conscious choice to remain with the current plan.",
+          "suggestion": "ponechajte si svoj aktuálny cenový plán."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"conflicting parameter\" is not accurately conveyed by \"problematičnem parametru.\" While \"problematičen\" can mean problematic, it doesn't fully capture the sense of conflicting parameters. A better translation might consider terms like \"protislovni parameter\" or something that specifically highlights the disagreement between parameters.",
+          "suggestion": "Consider 'Prosimo, da odpravite neujemanje pri protislovnem parametru, če želite nadaljevati ali ohraniti aktiven cenovni paket.'"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"keep your active pricing plan\" is somewhat awkwardly translated as \"ohraniti aktiven cenovni paket.\"  A more natural phrasing might be \"držati vaš trenutni cenovni paket\" or \"ostati pri vašem aktivnem cenovnem paketu\".",
+          "suggestion": "Consider 'Prosimo, da odpravite neujemanje pri protislovnem parametru, če želite nadaljevati ali ostati pri vašem aktivnem cenovnem paketu.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"eliminate the mismatch\" is too literal and awkward in Serbian. A more natural phrasing would convey the meaning of resolving the conflict.",
+          "suggestion": "Решите конфликт параметра (Reshite konflikt parametra - Resolve the parameter conflict)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'параметру' (parametru) is in the dative case.  It needs to be in the accusative case to be grammatically correct with the verb 'решите' (resite).",
+          "suggestion": "Решите конфликт параметра (Reshite konflikt parametra - Resolve the parameter conflict)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrasing \"задржите ваш активни план тарифирања\" ( zadržite vaš aktivni plan tarfiranja) is technically correct but could be more conversational.  'тарифни план' (tarifni plan) is more commonly used.",
+          "suggestion": "задржите ваш активан тарифни план (zadržite vaš aktivan tarifni plan - keep your active tariff plan)"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"conflicting parameter\" is not accurately translated. \"Konfliktnom parametru\" implies a parameter *in* conflict, not the conflict *itself*. A more accurate translation would be something like \"parametru koji je u konfliktu\" or a rephrasing to avoid the direct translation.",
+          "suggestion": "Consider rephrasing to something like: \"Molimo vas eliminišite problem sa parametrom koji je u konfliktu da biste nastavili ili zadržite vaš aktivni plan tarifiranja.\" or \"Molimo vas eliminišite razliku u parametru koji uzrokuje konflikt da biste nastavili ili zadržite vaš aktivni plan tarifiranja.\""
+        },
+        {
+          "type": "formatting",
+          "description": "The use of \"da biste\" is slightly verbose and could be simplified while maintaining clarity.",
+          "suggestion": "Consider changing \"da biste nastavili\" to \"da nastavite\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"eliminate the mismatch\" is overly formal and doesn't flow naturally in Turkish in this context. A more natural phrasing would be 'tutarsızlığı düzeltin' or 'çakışmayı giderin'.",
+          "suggestion": "Devam etmek veya aktif fiyatlandırma planınızı sürdürmek için lütfen çakışmayı giderin."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"uyuşmazlığı giderin\" is a bit too literal and clunky for a user-facing message. \"çakışmayı düzeltin\" or simply \"çakışmayı giderin\" are better.",
+          "suggestion": "Devam etmek veya aktif fiyatlandırma planınızı sürdürmek için lütfen çakışmayı düzeltin."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"eliminate the mismatch\" is not accurately translated. \"Усуньте невідповідність\" while technically correct, is a bit formal and potentially unclear for a user in a dialog flow. A more natural phrasing might convey the meaning of resolving the conflict more directly.",
+          "suggestion": "Розв'яжіть конфліктний параметр, щоб продовжити"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence is quite long and could be broken into two for better readability. This is especially important in a UI context.",
+          "suggestion": "Розв'яжіть конфліктний параметр, щоб продовжити, або збережіть свій активний тарифний план."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"conflicting parameter\" is not directly translatable in a way that retains the technical meaning and clarity in Vietnamese. 'Xung đột' implies a direct conflict, which might not be the precise nuance needed. It's better to convey the idea of inconsistency or incompatibility.",
+          "suggestion": "Consider a more precise translation like: \"Xin vui lòng loại bỏ sự không nhất quán trong tham số để tiếp tục hoặc duy trì gói dịch vụ có phí hiện tại của bạn.\" or \"Xin vui lòng giải quyết sự khác biệt trong tham số để tiếp tục hoặc duy trì gói dịch vụ có phí hiện tại của bạn.\""
+        },
+        {
+          "type": "formatting",
+          "description": "The translation includes \"Xin vui lòng\" which is polite but could be perceived as overly formal for some contexts. Consider if a more direct phrasing would be appropriate.",
+          "suggestion": "Consider alternatives like: \"Vui lòng loại bỏ...\" or simply \"Loại bỏ...\" depending on the desired tone."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation doesn't accurately convey the original meaning. The English sentence emphasizes resolving a conflict in parameters to proceed or retaining the existing pricing plan. The Chinese translation focuses solely on ensuring the plan matches the user's needs, missing the 'proceed' aspect and the option to keep the existing plan.",
+          "suggestion": "要继续使用当前定价方案或更改定价方案，请确认您的需求与该方案所提供的服务相符。"
+        },
+        {
+          "type": "missing_content",
+          "description": "The translated sentence does not include the option to 'keep your active pricing plan' as presented in the English version. This is a crucial choice for the user.",
+          "suggestion": "要继续使用当前的定价方案或更改目前的定价方案，请确认您的需求与该方案所提供的服务相符。"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

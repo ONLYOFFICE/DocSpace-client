@@ -1,0 +1,328 @@
+{
+  "key_path": "EmptyFieldError",
+  "content": "Empty field",
+  "content_en_sha1_hash": "9ea77181ac6a721f1181cacbc3707cd24c6a1b38",
+  "created_at": "2025-05-19T21:30:44.813Z",
+  "updated_at": "2025-08-11T18:11:59.236Z",
+  "comment": {
+    "text": "This translation key is used to display an error message when a field is empty. It appears on the \"Attribute Mapping\" page as part of a form, specifically under fields marked as required (e.g., FirstName).",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:36:31.015Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
+      "line_number": 135,
+      "context": "<div className=\"ldap_attribute-mapping\">\n <FieldContainer\n style={FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.firstName}\n labelText={t(\"Common:FirstName\")}\n isRequired\n dataTestId=\"first_name_field_container\"\n >",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
+      "line_number": 135,
+      "context": "<div className=\"ldap_attribute-mapping\">\n <FieldContainer\n style={FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.firstName}\n labelText={t(\"Common:FirstName\")}\n isRequired\n dataTestId=\"first_name_field_container\"\n >",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
+      "line_number": 135,
+      "context": "<div className=\"ldap_attribute-mapping\">\n <FieldContainer\n style={FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.firstName}\n labelText={t(\"Common:FirstName\")}\n isRequired\n dataTestId=\"first_name_field_container\"\n >",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AuthenticationContainer.js",
+      "line_number": 85,
+      "context": "</div>\n <div className=\"ldap_authentication\">\n <FieldContainer\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.login}\n labelText=\"Login\"\n tooltipContent={t(\"LdapLoginTooltip\")}\n inlineHelpButton\n isRequired",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AuthenticationContainer.js",
+      "line_number": 85,
+      "context": "</div>\n <div className=\"ldap_authentication\">\n <FieldContainer\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.login}\n labelText=\"Login\"\n tooltipContent={t(\"LdapLoginTooltip\")}\n inlineHelpButton\n isRequired",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/ConnectionSettings.js",
+      "line_number": 93,
+      "context": "<div>\n <FieldContainer\n style={FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.server}\n labelText={t(\"LdapServer\")}\n tooltipContent={t(\"LdapServerTooltip\")}\n inlineHelpButton\n isRequired",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/ConnectionSettings.js",
+      "line_number": 93,
+      "context": "<div>\n <FieldContainer\n style={FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.server}\n labelText={t(\"LdapServer\")}\n tooltipContent={t(\"LdapServerTooltip\")}\n inlineHelpButton\n isRequired",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/ConnectionSettings.js",
+      "line_number": 93,
+      "context": "<div>\n <FieldContainer\n style={FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.server}\n labelText={t(\"LdapServer\")}\n tooltipContent={t(\"LdapServerTooltip\")}\n inlineHelpButton\n isRequired",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/ConnectionSettings.js",
+      "line_number": 93,
+      "context": "<div>\n <FieldContainer\n style={FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.server}\n labelText={t(\"LdapServer\")}\n tooltipContent={t(\"LdapServerTooltip\")}\n inlineHelpButton\n isRequired",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/ConnectionSettings.js",
+      "line_number": 93,
+      "context": "<div>\n <FieldContainer\n style={FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.server}\n labelText={t(\"LdapServer\")}\n tooltipContent={t(\"LdapServerTooltip\")}\n inlineHelpButton\n isRequired",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/GroupMembership.js",
+      "line_number": 113,
+      "context": "<div className=\"group_membership-container\">\n <FieldContainer\n isVertical\n labelVisible\n style={FIELD_STYLE}\n errorMessage={t(\"Common:EmptyFieldError\")}\n labelText={t(\"LdapGroupDN\")}\n isRequired\n hasError={errors.groupDN}\n tooltipContent={t(\"LdapGroupDNTooltip\")}\n dataTestId=\"group_dn_field_container\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/GroupMembership.js",
+      "line_number": 113,
+      "context": "<div className=\"group_membership-container\">\n <FieldContainer\n isVertical\n labelVisible\n style={FIELD_STYLE}\n errorMessage={t(\"Common:EmptyFieldError\")}\n labelText={t(\"LdapGroupDN\")}\n isRequired\n hasError={errors.groupDN}\n tooltipContent={t(\"LdapGroupDNTooltip\")}\n dataTestId=\"group_dn_field_container\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/GroupMembership.js",
+      "line_number": 113,
+      "context": "<div className=\"group_membership-container\">\n <FieldContainer\n isVertical\n labelVisible\n style={FIELD_STYLE}\n errorMessage={t(\"Common:EmptyFieldError\")}\n labelText={t(\"LdapGroupDN\")}\n isRequired\n hasError={errors.groupDN}\n tooltipContent={t(\"LdapGroupDNTooltip\")}\n dataTestId=\"group_dn_field_container\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/GroupMembership.js",
+      "line_number": 113,
+      "context": "<div className=\"group_membership-container\">\n <FieldContainer\n isVertical\n labelVisible\n style={FIELD_STYLE}\n errorMessage={t(\"Common:EmptyFieldError\")}\n labelText={t(\"LdapGroupDN\")}\n isRequired\n hasError={errors.groupDN}\n tooltipContent={t(\"LdapGroupDNTooltip\")}\n dataTestId=\"group_dn_field_container\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/GroupMembership.js",
+      "line_number": 113,
+      "context": "<div className=\"group_membership-container\">\n <FieldContainer\n isVertical\n labelVisible\n style={FIELD_STYLE}\n errorMessage={t(\"Common:EmptyFieldError\")}\n labelText={t(\"LdapGroupDN\")}\n isRequired\n hasError={errors.groupDN}\n tooltipContent={t(\"LdapGroupDNTooltip\")}\n dataTestId=\"group_dn_field_container\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/SsoFormField.js",
+      "line_number": 51,
+      "context": "}) => {\n const { t } = useTranslation(\"Common\");\n \n return (\n <FieldContainer\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={hasError}\n inlineHelpButton\n isVertical\n labelText={labelText}\n place=\"top\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/pages/Branding/BrandName/index.tsx",
+      "line_number": 112,
+      "context": "const getErrorText = () => {\n if (!error) return \"\";\n \n switch (error) {\n case \"Empty\":\n return t(\"Common:EmptyFieldError\");\n case \"MinLength\":\n return t(\"Common:BrandNameLength\", {\n minLength: 2,\n maxLength: 40,\n });",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation '항목이 비어있습니다' literally translates to 'The item is empty'. While conveying the general idea of an empty field, it's a more formal and less direct phrasing than 'Empty field'. A more natural and concise translation would be '필수 항목을 입력해주세요' or '필수 입력 값 없음' depending on the context.",
+          "suggestion": "Consider '필수 항목을 입력해주세요' or '필수 입력 값 없음'."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ຊ່ອງວ່າງ\" literally translates to \"empty space\" or \"gap,\" it's not the most natural or commonly used translation for \"Empty field\" in a form/UI context.  It's too literal.",
+          "suggestion": "Consider using \"ບໍ່ເຕັມ\" (bòh têm) which means 'not full' or 'incomplete', or \"ບໍ່ມີຂໍ້ມູນ\" (bòh mii khôm moon) which means 'no information'."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'හිස් ක්‍ෂේත්‍රයකි' while literally meaning 'an empty field' doesn't quite convey the meaning of 'Empty field' in the context of a form or input field error. It sounds too formal and technical.",
+          "suggestion": "A more natural and appropriate translation would be 'පොඩි දෙනුයි' (Podii Denui) which roughly translates to 'Please fill this in' or 'Required field' or ' හිස්සක් ගෙනත් පුරින්' (Hissak Genna Purin) which means 'Please fill in the empty space'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation \"Prázdne \" is incomplete. It's missing the noun that \"prázdne\" (empty) is describing.  It should be something like \"Prázdne pole\" (Empty field).",
+          "suggestion": "Prázdne pole"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

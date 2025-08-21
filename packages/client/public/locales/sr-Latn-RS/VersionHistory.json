@@ -1,4 +1,6 @@
 {
+  "DeleteVersion": "Obriši verziju",
+  "DeleteVersionDescription": "Spremate se da obrišete verziju fajla. Više neće biti moguće videti je ili je vratiti. Da li ste sigurni da želite da nastavite?",
   "EditComment": "Uredi komentar",
   "Version": "Ver."
 }

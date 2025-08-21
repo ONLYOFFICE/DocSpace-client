@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -64,17 +64,22 @@ const RecalculateButton = (props) => {
         onClick={onRecalculateClick}
         isLoading={isRecalculating}
         isDisabled={isRecalculating}
+        testId="recalculate_quota_button"
       />
       <div className="text-container">
         <Text>{t("UpdatingStatistics")}</Text>
 
-        {!isRecalculating && lastRecalculateDate && (
-          <Text fontSize="12px" className="last-update">
+        {!isRecalculating && lastRecalculateDate ? (
+          <Text
+            fontSize="12px"
+            className="last-update"
+            dataTestId="last_recalculate_date"
+          >
             {t("LastUpdate", {
               date: moment(lastRecalculateDate).format("L LT"),
             })}
           </Text>
-        )}
+        ) : null}
       </div>
     </div>
   );

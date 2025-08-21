@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,6 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
-import { Box } from "@docspace/shared/components/box";
 import { StyledUsersInfoWrapper } from "../StyledDataImport";
 import { UsersInfoBlockProps } from "../types";
 
@@ -40,20 +39,21 @@ const UsersInfo = ({
   const { t } = useTranslation(["Settings"]);
 
   return (
+    quota &&
     quota.max && (
       <StyledUsersInfoWrapper
-        selectedUsers={totalUsedUsers}
-        totalLicenceLimit={quota.max}
+        selectedUsers={totalUsedUsers!}
+        totalLicenceLimit={quota!.max}
       >
-        {totalUsedUsers > quota.max && (
+        {totalUsedUsers! > quota!.max ? (
           <Text className="license-limit-warning">
             {t("Settings:UserLimitExceeded", {
               productName: t("Common:ProductName"),
             })}
           </Text>
-        )}
+        ) : null}
 
-        <Box className="users-info-wrapper">
+        <div className="users-info-wrapper">
           <Text className="selected-users-count" truncate>
             {t("Settings:SelectedUsersCounter", {
               selectedUsers: numberOfSelectedUsers,
@@ -67,6 +67,7 @@ const UsersInfo = ({
             </Text>
           </Text>
           <HelpButton
+            dataTestId="license_limit_help_button"
             place="right"
             offsetRight={0}
             tooltipContent={
@@ -78,7 +79,7 @@ const UsersInfo = ({
               </Text>
             }
           />
-        </Box>
+        </div>
       </StyledUsersInfoWrapper>
     )
   );

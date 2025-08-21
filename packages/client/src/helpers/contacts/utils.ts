@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -23,8 +23,8 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { matchPath } from "react-router-dom";
-import type { Location } from "@remix-run/router";
+import { matchPath } from "react-router";
+import type { Location as RouterLocation } from "react-router";
 
 import Filter from "@docspace/shared/api/people/filter";
 import GroupsFilter from "@docspace/shared/api/groups/filter";
@@ -34,6 +34,7 @@ import { EmployeeStatus, Events } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { TTranslation } from "@docspace/shared/types";
 import {
+  getLinkToShareGuest,
   resendInvitesAgain,
   resendUserInvites,
 } from "@docspace/shared/api/people";
@@ -42,7 +43,11 @@ import { toastr } from "@docspace/shared/components/toast";
 import type UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import config from "PACKAGE_FILE";
 
-import { showEmailActivationToast } from "../people-helpers";
+import { copyShareLink } from "@docspace/shared/utils/copy";
+import {
+  showEmailActivationToast,
+  showSuccessCopyContantLink,
+} from "../people-helpers";
 
 import {
   CONTACTS_ROUTE,
@@ -198,7 +203,7 @@ export const getContactsCheckboxItemLabel = (
     case "disabled":
       return t("PeopleTranslations:DisabledEmployeeStatus");
     case "all":
-      return t("All");
+      return t("Common:All");
     default:
       return "";
   }
@@ -250,7 +255,19 @@ export const onInviteMultipleAgain = (t: TTranslation) => {
     .catch((err) => toastr.error(err));
 };
 
-export const getContactsView = (location?: Location): TContactsTab => {
+export const shareGuest = (
+  item: ReturnType<UsersStore["getPeopleListItem"]>,
+  t: TTranslation,
+) => {
+  getLinkToShareGuest(item.id).then((link) => {
+    copyShareLink(link);
+    showSuccessCopyContantLink(t);
+  });
+};
+
+export const getContactsView = (
+  location?: Location | RouterLocation,
+): TContactsTab => {
   const { pathname } =
     location ??
     window.DocSpace?.location ??

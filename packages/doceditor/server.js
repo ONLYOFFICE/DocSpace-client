@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,11 +31,19 @@ const next = require("next");
 const config = require("./config/config.json");
 
 import("./logger.mjs").then(({ logger }) => {
-  const log = logger.child({ module: "server" });
   const dev = process.env.NODE_ENV === "development";
 
-  const port = config.PORT ?? 5013;
-  const hostname = config.HOSTNAME ?? "localhost";
+  const argv = (key) => {
+    if (process.argv.includes(`--${key}`)) return true;
+
+    return (
+      process.argv.find((arg) => arg.startsWith(`--${key}=`))?.split("=")[1] ||
+      null
+    );
+  };
+
+  const port = (argv("app.port") || config.PORT) ?? 5013;
+  const hostname = config.HOSTNAME ?? "0.0.0.0";
 
   // when using middleware `hostname` and `port` must be provided below
   const app = next({ dev, hostname, port });
@@ -50,25 +58,34 @@ import("./logger.mjs").then(({ logger }) => {
 
         await handle(req, res, parsedUrl);
       } catch (err) {
-        log.error({ url: req.url, error: err }, "Error occurred handling");
+        logger.error(`url: ${req.url}, error: ${err} Error occurred handling`);
         res.statusCode = 500;
         res.end("internal server error");
       }
     })
       .once("error", (err) => {
-        log.error(err);
+        logger.error(err);
         process.exit(1);
       })
       .listen(port, () => {
-        log.info(`Server is listening on port ${port}`);
+        logger.info(`Server is listening on port ${port}`);
       });
 
     process.on("unhandledRejection", (reason, process) => {
-      log.error({ process, reason }, "Unhandled rejection at");
+      logger.error(
+        `process: ${process}, reason: ${reason} Unhandled rejection at`,
+      );
     });
 
     process.on("uncaughtException", (error) => {
-      log.error({ error, stack: error.stack }, `Unhandled exception`);
+      logger.error(
+        `error: ${error}, stack: ${error.stack} Unhandled exception`,
+      );
+    });
+
+    process.on("SIGINT", function () {
+      console.log("\nGracefully shutting down from SIGINT (Ctrl-C)");
+      process.exit(0);
     });
   });
 });

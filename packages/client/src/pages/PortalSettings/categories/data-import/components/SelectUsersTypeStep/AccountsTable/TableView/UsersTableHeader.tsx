@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -120,13 +120,11 @@ const UsersTableHeader = (props: UsersTableHeaderProps) => {
 
   return (
     <TableHeader
-      checkboxSize="48px"
       containerRef={tableRef as { current: HTMLDivElement }}
       columns={columns}
       columnStorageName={columnStorageName}
       columnInfoPanelStorageName={columnInfoPanelStorageName}
-      sectionWidth={sectionWidth}
-      checkboxMargin="12px"
+      sectionWidth={sectionWidth!}
       showSettings={false}
       useReactWindow
       infoPanelVisible={false}

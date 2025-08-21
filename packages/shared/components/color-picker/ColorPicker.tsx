@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,20 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { HexColorPicker, HexColorInput } from "react-colorful";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import CrossIconSvgUrl from "PUBLIC_DIR/images/icons/16/cross.react.svg?url";
 
-import { Button } from "../button";
+import { Button, ButtonSize } from "../button";
 import { Text } from "../text";
 import { IconButton } from "../icon-button";
-
-import Wrapper from "./ColorPicker.styled";
-import { ColorPickerProps } from "./ColorPicker.types";
-import { ButtonSize } from "../button/Button.enums";
 import { globalColors } from "../../themes";
+
+import styles from "./ColorPicker.module.scss";
+import { ColorPickerProps } from "./ColorPicker.types";
 
 const ColorPicker = ({
   className,
@@ -50,89 +50,109 @@ const ColorPicker = ({
   isPickerOnly = false,
   handleChange,
   hexCodeLabel = "Hex code",
-  forwardedRef,
 }: ColorPickerProps) => {
-  const [color, setColor] = useState(
-    appliedColor || globalColors.lightBlueMain,
-  );
-
+  const [color, setColor] = useState(() => appliedColor);
   const { t } = useTranslation(["Common"]);
 
-  useEffect(() => {
-    if (!isPickerOnly && appliedColor && appliedColor !== color) {
-      setColor(appliedColor);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [appliedColor]);
+  // useEffect(() => {
+  //   setColor(appliedColor);
+  // }, [appliedColor]);
+
+  const onColorChange = (newColor: string) => {
+    setColor(newColor);
+    if (handleChange) handleChange(newColor);
+  };
 
   return (
-    <Wrapper
-      ref={forwardedRef}
-      isPickerOnly={isPickerOnly}
-      className={className}
+    <div
+      className={classNames(styles.wrapper, className)}
       id={id}
+      data-testid="color-picker"
+      role="dialog"
+      aria-label="Color picker"
     >
-      {isPickerOnly && (
-        <div className="hex-header">
-          <div className="hex-text">
-            <Text fontSize="16px" lineHeight="22px" fontWeight={700} truncate>
+      {isPickerOnly ? (
+        <div className={styles.hexHeader}>
+          <div className={styles.hexText}>
+            <Text
+              fontSize="16px"
+              lineHeight="22px"
+              fontWeight={700}
+              truncate
+              data-testid="color-picker-title"
+            >
               {t("Custom")}
             </Text>
           </div>
-          <div className="hex-close">
+          <div className={styles.hexClose}>
             <IconButton
-              className="table-header_icon-button"
+              className={styles.tableHeaderIconButton}
               size={16}
               onClick={onClose}
               iconName={CrossIconSvgUrl}
               isFill
+              data-testid="color-picker-close"
+              aria-label="Close color picker"
             />
           </div>
         </div>
-      )}
+      ) : null}
 
-      <div className="hex-color-picker">
-        {!isPickerOnly && (
-          <div className="hex-value-container">
-            <div className="hex-value-label">{hexCodeLabel}:</div>
-
-            <HexColorInput
-              className="hex-value"
-              prefixed
-              color={color.toUpperCase()}
-              onChange={setColor}
-            />
-          </div>
-        )}
-
+      <div className={styles.hexColorPicker} data-testid="color-picker-content">
         <HexColorPicker
-          color={
-            isPickerOnly ? appliedColor.toUpperCase() : color.toUpperCase()
-          }
-          onChange={isPickerOnly ? handleChange : setColor}
+          color={color}
+          onChange={onColorChange}
+          aria-label="Color selector"
         />
 
-        {!isPickerOnly && (
-          <div className="hex-button">
-            <Button
-              label={applyButtonLabel}
-              size={ButtonSize.small}
-              className="apply-button"
-              primary
-              scale
-              onClick={() => onApply(color)}
-            />
-            <Button
-              label={cancelButtonLabel}
-              className="cancel-button button"
-              size={ButtonSize.small}
-              scale
-              onClick={onClose}
+        {!isPickerOnly ? (
+          <div
+            className={styles.hexValueContainer}
+            data-testid="color-picker-hex-container"
+          >
+            <Text
+              className={styles.hexValueLabel}
+              data-testid="color-picker-hex-label"
+            >
+              {hexCodeLabel}:
+            </Text>
+            <HexColorInput
+              prefixed
+              color={color}
+              onChange={onColorChange}
+              className={styles.hexValue}
+              data-testid="color-picker-hex-input"
+              aria-label="Hex color value"
+              spellCheck="false"
             />
           </div>
-        )}
+        ) : null}
+
+        {!isPickerOnly ? (
+          <div className={styles.hexButton} data-testid="color-picker-buttons">
+            <Button
+              className={styles.applyButton}
+              primary
+              scale
+              size={ButtonSize.small}
+              label={applyButtonLabel}
+              onClick={() => onApply(color)}
+              testId="color-picker-apply"
+              aria-label={applyButtonLabel}
+            />
+            <Button
+              className={styles.cancelButton}
+              scale
+              size={ButtonSize.small}
+              label={cancelButtonLabel}
+              onClick={onClose}
+              testId="color-picker-cancel"
+              aria-label={cancelButtonLabel}
+            />
+          </div>
+        ) : null}
       </div>
-    </Wrapper>
+    </div>
   );
 };
 

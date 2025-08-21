@@ -1,0 +1,694 @@
+// (c) Copyright Ascensio System SIA 2009-2025
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+@use "../../styles/variables/colors";
+
+@use "../../styles/mixins";
+
+.header {
+  position: relative;
+  display: flex;
+
+  height: var(--section-header-height);
+  min-height: var(--section-header-height);
+
+  box-sizing: border-box;
+
+  display: grid;
+  align-items: center;
+
+  width: 100%;
+  max-width: 100%;
+
+  &.form-gallery {
+    @include mixins.tablet-and-below {
+      height: var(--section-header-height);
+      min-height: var(--section-header-height);
+    }
+  }
+
+  @include mixins.tablet-and-below {
+    height: var(--section-header-height-tablet);
+    min-height: var(--section-header-height-tablet);
+
+    :global {
+      .header-container {
+        margin-bottom: 1px;
+        -webkit-tap-highlight-color: #{colors.$tap-highlight};
+      }
+    }
+  }
+
+  @include mixins.mobile {
+    height: var(--section-header-height-mobile);
+    min-height: var(--section-header-height-mobile);
+    margin-inline-end: 0;
+  }
+
+  :global {
+    .header-container {
+      display: flex;
+    }
+  }
+}
+
+.footer {
+  margin-top: 40px;
+
+  @include mixins.mobile {
+    margin-top: 32px;
+  }
+}
+
+.scrollbar {
+  &.scrollLocked {
+    &:global(:first-child > .scroll-wrapper > .scroller) {
+      overflow: hidden !important;
+      margin-inline-end: -1px !important;
+    }
+  }
+
+  &.mobileOnly {
+    :global {
+      & .scroll-wrapper > .scroller {
+        padding-inline-end: 20px !important;
+        margin-inline-end: -21px !important;
+      }
+    }
+  }
+}
+
+.infoPanelWrapper {
+  height: auto;
+  width: auto;
+  background: var(--info-panel-blur-color);
+  z-index: 300;
+
+  @include mixins.tablet-and-below {
+    z-index: 309;
+    position: fixed;
+    inset: 0;
+  }
+}
+
+.infoPanel {
+  height: 100%;
+  width: 400px;
+  background-color: var(--info-panel-bg);
+  border-inline-start: 1px solid var(--info-panel-border);
+  display: flex;
+  flex-direction: column;
+
+  :global {
+    .scroll-body {
+      padding-bottom: 20px;
+    }
+  }
+
+  @include mixins.tablet-and-below {
+    position: absolute;
+    border: none;
+    inset-inline-end: 0;
+    width: 480px;
+    max-width: calc(100vw - 69px);
+  }
+
+  @include mixins.mobile {
+    bottom: 0;
+    height: calc(100% - 64px);
+    width: 100vw;
+    max-width: 100vw;
+  }
+}
+
+.spacer {
+  display: none;
+  min-height: 64px;
+
+  @include mixins.tablet-and-below {
+    display: block;
+  }
+}
+
+.submenu {
+  background: var(--section-header-bg);
+  width: 100%;
+  z-index: 1;
+
+  @include mixins.tablet-and-below {
+    width: calc(100% + 32px);
+    position: sticky;
+    top: var(--section-header-height-tablet);
+    margin: 0 -16px;
+    & > div {
+      padding: 0 16px;
+    }
+  }
+
+  @include mixins.mobile {
+    position: sticky;
+    top: var(--section-header-height-mobile);
+  }
+}
+
+@mixin settingsStudioStyles {
+  padding-block: 0 16px;
+  padding-inline: 20px 7px;
+}
+
+@mixin paddingStyles {
+  padding-block: 19px 16px;
+  padding-inline: 20px 3px;
+
+  outline: none;
+
+  @include mixins.tablet-and-below {
+    padding-block: 0 16px;
+    padding-inline: 24px 0;
+  }
+
+  @include mixins.mobile {
+    padding-inline: 24px 8px;
+  }
+}
+
+.common {
+  flex-grow: 1;
+  height: 100%;
+  border-inline: none;
+  border-top: none;
+
+  :global {
+    .section-wrapper {
+      height: 100%;
+    }
+
+    .section-wrapper-content {
+      flex: 1 0 auto;
+      outline: none;
+      @include paddingStyles;
+
+      .section-wrapper {
+        display: flex;
+        flex-direction: column;
+        min-height: 100%;
+      }
+
+      .files-tile-container {
+        @include mixins.desktop {
+          margin-top: 0px;
+        }
+      }
+
+      .people-row-container,
+      .files-row-container {
+        margin-top: 0px;
+      }
+    }
+  }
+
+  &.isDesktop {
+    height: auto;
+  }
+
+  &.withScroll {
+    height: 100%;
+  }
+
+  &.isStudio {
+    :global {
+      .section-wrapper-content {
+        @include settingsStudioStyles;
+      }
+    }
+  }
+
+  &.isSettingsView,
+  &.isProfileView {
+    :global {
+      .section-wrapper-content {
+        padding-top: 0;
+
+        @include mixins.tablet-and-below {
+          padding-top: 0;
+        }
+      }
+    }
+  }
+
+  &.isFormGallery {
+    :global {
+      @include mixins.tablet-and-below {
+        .section-wrapper-content {
+          padding-block: 0 20px !important;
+          padding-inline: 16px 0 !important;
+        }
+      }
+
+      @include mixins.mobile {
+        .section-wrapper-content {
+          padding: 0px 16px 16px !important;
+        }
+      }
+    }
+  }
+
+  &:not(.withScroll) {
+    :global {
+      .section-wrapper {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        box-sizing: border-box;
+
+        @include paddingStyles;
+      }
+    }
+
+    &.isStudio {
+      :global {
+        .section-wrapper {
+          @include settingsStudioStyles;
+        }
+      }
+    }
+  }
+}
+
+.dropzone {
+  max-width: 100vw !important;
+
+  :global {
+    .drag-and-drop {
+      width: 100%;
+
+      @include mixins.no-user-select;
+    }
+  }
+
+  &.withScroll {
+    margin-inline-start: var(--section-desktop-padding);
+
+    @include mixins.tablet-and-below {
+      margin-inline-start: var(--section-tablet-padding);
+    }
+  }
+}
+
+.sectionBody {
+  max-width: 100vw !important;
+
+  &.withScroll {
+    margin-inline-start: var(--section-desktop-padding);
+
+    @include mixins.tablet-and-below {
+      margin-inline-start: var(--section-tablet-padding);
+    }
+  }
+
+  &.isFormGallery {
+    @include mixins.tablet-and-below {
+      margin-block: 0;
+      margin-inline: -16px 0;
+      padding: 0;
+    }
+  }
+
+  &:not(.withScroll) {
+    height: 64px;
+  }
+}
+
+@mixin tabletView {
+  :global {
+    .section-body_header {
+      width: 100%;
+      position: sticky;
+      top: 0;
+      background: var(--section-header-bg);
+      padding-inline-end: 0;
+      z-index: 201;
+
+      @include mixins.mobile {
+        min-width: 100vw;
+        margin-inline-start: -16px;
+        padding-inline-end: 16px;
+        padding-inline-start: 16px;
+      }
+    }
+    .section-body_filter {
+      display: block;
+      margin: 0;
+    }
+  }
+}
+
+.filter {
+  user-select: none;
+}
+
+.isFixed {
+  position: sticky;
+  top: 61px;
+  background: var(--section-header-bg);
+  z-index: 200;
+  padding: 0 16px;
+  margin: 0 -16px !important;
+
+  @include mixins.mobile {
+    top: 53px;
+  }
+}
+
+.withTabs {
+  top: 114px;
+
+  @include mixins.mobile {
+    top: 106px;
+  }
+}
+
+.sectionContainer {
+  position: relative;
+
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 100%;
+
+  height: 100%;
+
+  @include mixins.tablet-and-below {
+    width: 100%;
+    max-width: 100vw !important;
+    @include tabletView;
+  }
+
+  &:not(.withBodyScroll) {
+    padding-inline-start: 20px;
+
+    @include mixins.tablet-and-below {
+      padding-inline-start: 16px;
+    }
+  }
+
+  @include mixins.mobile {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    padding-inline-start: 16px;
+  }
+
+  :global {
+    .section-scroll {
+      > .scroll-body {
+        display: flex;
+        flex-direction: column;
+        padding-inline-start: 20px !important;
+
+        @include mixins.tablet-and-below {
+          padding-inline-start: 16px !important;
+        }
+      }
+
+      > .resize-triggers {
+        direction: ltr;
+      }
+    }
+
+    .section-sticky-container {
+      position: sticky;
+      top: 0;
+      background: var(--section-header-bg);
+      z-index: 201;
+      padding-inline: 20px;
+      margin-inline: -20px -17px;
+
+      @include mixins.tablet-and-below {
+        padding-inline: 16px;
+        margin-inline: -16px;
+      }
+    }
+  }
+
+  &.withoutSectionHeader {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    box-sizing: border-box;
+  }
+}
+
+.progressBarContainer {
+  position: fixed;
+  inset-inline-end: 24px;
+  bottom: 24px;
+  z-index: 400;
+  opacity: 1;
+  transform: translateY(0);
+  animation: none;
+  transition:
+    opacity 0.3s ease-in-out,
+    transform 0.3s ease-in-out,
+    bottom 0.3s ease-in-out;
+
+  @keyframes hideButton {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(72px);
+    }
+  }
+
+  @include mixins.tablet-and-below {
+    z-index: 200;
+    bottom: 16px;
+
+    @keyframes hideButton {
+      from {
+        transform: translateY(0);
+      }
+      to {
+        transform: translateY(16px);
+      }
+    }
+
+    &.mainButtonVisible {
+      bottom: 88px;
+
+      @keyframes hideButton {
+        from {
+          transform: translateY(0);
+        }
+        to {
+          transform: translateY(64px);
+        }
+      }
+    }
+  }
+
+  @include mixins.mobile {
+    bottom: 16px;
+    inset-inline-end: 16px;
+
+    &.mainButtonVisible {
+      bottom: 80px;
+    }
+  }
+
+  &.autoHide {
+    animation: hideButton 0.3s ease-in-out 4s forwards;
+
+    &.laterHide {
+      animation-delay: 8s;
+    }
+
+    &.immidiateHide {
+      animation-delay: 1s;
+    }
+  }
+
+  &:not(.autoHide) {
+    opacity: 1;
+    transform: translateY(0);
+    animation: none;
+  }
+
+  .progressBarWrapper {
+    display: none;
+    align-items: center;
+    flex-wrap: wrap;
+
+    padding: 8px 16px;
+    background: var(--background-primary);
+    border-top: 1px solid var(--progress-bar-border);
+    border-bottom: 1px solid var(--progress-bar-border);
+
+    transition:
+      opacity 0.3s ease-out,
+      transform 0.3s ease-out;
+    opacity: 1;
+
+    &.fadeOut {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    &.isUploading {
+      display: flex;
+    }
+  }
+
+  .progressWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+    width: 100%;
+  }
+
+  .progressHeader {
+    color: var(--text-primary);
+    margin-right: 8px;
+
+    &.withClick {
+      cursor: pointer;
+    }
+  }
+
+  .progressInfoWrapper {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    svg {
+      path {
+        fill: var(--progress-bar-icon-color) !important;
+      }
+      &:hover {
+        cursor: pointer;
+        path {
+          fill: var(--progress-bar-hover-icon) !important;
+        }
+      }
+    }
+  }
+  .progressMainContainer {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    align-items: center;
+    div:first-child {
+      position: relative;
+    }
+
+    &.withClick {
+      cursor: pointer;
+    }
+  }
+
+  .progressLoader {
+    margin: auto;
+    width: 12px;
+    height: 12px;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    background-image: linear-gradient(rgb(85, 95, 101), rgb(85, 95, 101)),
+      conic-gradient(
+        from 0.25turn at 50% 30%,
+        rgb(85, 95, 101),
+        10deg,
+        rgb(85, 95, 101),
+        140deg,
+        white
+      );
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    animation: loader 1.3s linear infinite;
+  }
+
+  @keyframes loader {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .infoIcon {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    inset-inline-start: 20px;
+    top: -7px;
+    left: 9px;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    &.alert {
+      svg {
+        path {
+          fill: var(--status-icon-color-negative) !important;
+        }
+      }
+    }
+
+    &.complete {
+      svg {
+        path {
+          fill: var(--status-icon-color-positive) !important;
+        }
+      }
+    }
+  }
+
+  .labelWrapper {
+    display: flex;
+    align-items: baseline;
+  }
+
+  :global {
+    .layout-progress-bar_wrapper {
+      position: static;
+      width: fit-content;
+      height: fit-content;
+      display: flex;
+      grid-template-columns: 1fr 1fr;
+      flex-direction: row-reverse;
+      align-items: center;
+
+      .layout-progress-bar_close-icon {
+        position: static;
+        width: 24px;
+        height: 24px;
+        margin-inline-end: 8px;
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -66,21 +66,23 @@ const EmptyScreen = ({ t, theme, withUpload, onDrop }: PluginsEmptyScreen) => {
       headerText={t("NoPlugins")}
       descriptionText={
         <Text>
-          {withUpload &&
-            t("UploadDescription", { productName: t("Common:ProductName") })}
+          {withUpload
+            ? t("UploadDescription", { productName: t("Common:ProductName") })
+            : null}
         </Text>
       }
       style={{ gridColumnGap: "39px" }}
       buttonStyle={{ marginTop: "16px" }}
       imageSrc={imageSrc}
       buttons={
-        withUpload && (
+        withUpload ? (
           <Dropzone
             isDisabled={!withUpload}
             isLoading={false}
             onDrop={onDrop}
+            dataTestId="upload_plugin_dropzone"
           />
-        )
+        ) : null
       }
     />
   );

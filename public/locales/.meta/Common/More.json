@@ -1,0 +1,250 @@
+{
+  "key_path": "More",
+  "content": "More",
+  "content_en_sha1_hash": "4bab2d8fe13fa6ab57f80098b414f0f734c5dd25",
+  "created_at": "2025-05-19T21:30:46.613Z",
+  "updated_at": "2025-08-04T07:30:00.967Z",
+  "comment": {
+    "text": "This translation key is used for the label of a button that displays the word \"More\". It appears in a dropdown menu next to a main action button on an article page, allowing users to access additional options.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:27.879Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/Article/MainButton/index.js",
+      "line_number": 407,
+      "context": "// const moreActions = {\n //   id: \"actions_more-form\",\n //   className: \"main-button_drop-down\",\n //   icon: PluginMoreReactSvgUrl,\n //   label: t(\"Common:More\"),\n //   disabled: false,\n //   key: \"more-form\",\n //   items: [\n //     createNewFolder,\n //     {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/Article/MainButton/index.js",
+      "line_number": 407,
+      "context": "// const moreActions = {\n //   id: \"actions_more-form\",\n //   className: \"main-button_drop-down\",\n //   icon: PluginMoreReactSvgUrl,\n //   label: t(\"Common:More\"),\n //   disabled: false,\n //   key: \"more-form\",\n //   items: [\n //     createNewFolder,\n //     {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/Article/MainButton/index.js",
+      "line_number": 407,
+      "context": "// const moreActions = {\n //   id: \"actions_more-form\",\n //   className: \"main-button_drop-down\",\n //   icon: PluginMoreReactSvgUrl,\n //   label: t(\"Common:More\"),\n //   disabled: false,\n //   key: \"more-form\",\n //   items: [\n //     createNewFolder,\n //     {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 2681,
+      "context": "// const moreActions = {\n //   id: \"personal_more-form\",\n //   className: \"main-button_drop-down\",\n //   icon: PluginMoreReactSvgUrl,\n //   label: t(\"Common:More\"),\n //   disabled: false,\n //   key: \"more-form\",\n //   items: [\n //     createNewFolder,\n //     {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 2681,
+      "context": "// const moreActions = {\n //   id: \"personal_more-form\",\n //   className: \"main-button_drop-down\",\n //   icon: PluginMoreReactSvgUrl,\n //   label: t(\"Common:More\"),\n //   disabled: false,\n //   key: \"more-form\",\n //   items: [\n //     createNewFolder,\n //     {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation \"Více na\" doesn't accurately convey the meaning of \"More.\" \"Více na\" translates to \"More at\" and implies a link or further information located elsewhere, which is not the intended meaning of a simple \"More\".",
+          "suggestion": "A more accurate translation might be \"Více\" or \"Další\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Finnish translation 'Enemmmän' contains a spelling error. It appears to be an attempt at 'Enemmän'.",
+          "suggestion": "Enemmän"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Khác' is a valid translation of 'More' in certain contexts, but it's a general term for 'different' or 'other'. Depending on the specific context of 'More' (e.g., 'More information', 'More options'), a more accurate translation might be 'Thêm' (for additional) or something more specific. Without the context, 'Khác' could be misleading.",
+          "suggestion": "Consider the context and explore alternatives like 'Thêm' or a more specific term if 'Khác' isn't the best fit."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

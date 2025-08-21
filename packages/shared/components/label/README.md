@@ -1,12 +1,14 @@
 # Label
 
-Component displays the field name in the form
+A versatile label component for form fields that supports required indicators, error states, and various display options.
 
-### Usage
+## Usage
 
 ```js
 import { Label } from "@docspace/shared/components/label";
 ```
+
+### Basic Example
 
 ```jsx
 <Label
@@ -17,18 +19,39 @@ import { Label } from "@docspace/shared/components/label";
 />
 ```
 
-### Properties
+### With Custom Styling
 
-| Props        |      Type      | Required | Values | Default | Description                                                                 |
-| ------------ | :------------: | :------: | :----: | :-----: | --------------------------------------------------------------------------- |
-| `className`  |    `string`    |    -     |   -    |    -    | Class name                                                                  |
-| `display`    |    `string`    |    -     |   -    |    -    | Sets the 'display' property                                                 |
-| `error`      |     `bool`     |    -     |   -    |    -    | Indicates that the field to which the label is attached is incorrect        |
-| `htmlFor`    |    `string`    |    -     |   -    |    -    | The field ID to which the label is attached                                 |
-| `id`         |    `string`    |    -     |   -    |    -    | Accepts id                                                                  |
-| `isInline`   |     `bool`     |    -     |   -    | `false` | Sets the 'display: inline-block' property                                   |
-| `isRequired` |     `bool`     |    -     |   -    | `false` | Indicates that the field to which the label is attached is required to fill |
-| `style`      | `obj`, `array` |    -     |   -    |    -    | Accepts css style                                                           |
-| `text`       |    `string`    |    -     |   -    |    -    | Text                                                                        |
-| `title`      |    `string`    |    -     |   -    |    -    | Title                                                                       |
-| `truncate`   |     `bool`     |    -     |   -    | `false` | Disables word wrapping                                                      |
+```jsx
+<Label
+  text="Username"
+  isInline
+  style={{ fontWeight: 600, marginRight: "8px" }}
+  className="custom-label"
+/>
+```
+
+### With Children
+
+```jsx
+<Label text="Phone:">
+  <span style={{ color: "#666" }}>(optional)</span>
+</Label>
+```
+
+## Properties
+
+| Props             | Type                  | Required | Default | Description                               |
+| ----------------- | :-------------------- | :------: | :------ | :---------------------------------------- |
+| `text`            | `string \| ReactNode` |    -     | -       | Label's text content                      |
+| `htmlFor`         | `string`              |    -     | -       | Associates the label with a form control  |
+| `isRequired`      | `boolean`             |    -     | `false` | Shows required field indicator (\*)       |
+| `error`           | `boolean`             |    -     | `false` | Displays the label in error state         |
+| `isInline`        | `boolean`             |    -     | `false` | Sets the label to display inline-block    |
+| `title`           | `string`              |    -     | -       | Tooltip text shown on hover               |
+| `truncate`        | `boolean`             |    -     | `false` | Truncates overflowing text with ellipsis  |
+| `display`         | `string`              |    -     | -       | CSS display property value                |
+| `className`       | `string`              |    -     | -       | Additional CSS class names                |
+| `id`              | `string`              |    -     | -       | HTML id attribute                         |
+| `style`           | `React.CSSProperties` |    -     | -       | Custom CSS styles                         |
+| `children`        | `React.ReactNode`     |    -     | -       | Additional content to render inside label |
+| `tooltipMaxWidth` | `string`              |    -     | -       | Maximum width for the tooltip             |

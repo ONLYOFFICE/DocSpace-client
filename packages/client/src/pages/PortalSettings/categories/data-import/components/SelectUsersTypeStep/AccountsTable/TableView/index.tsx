@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,7 +32,6 @@ import styled from "styled-components";
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Link, LinkType } from "@docspace/shared/components/link";
-import { Box } from "@docspace/shared/components/box";
 import {
   TableGroupMenu,
   TableBody,
@@ -84,6 +83,12 @@ const UserSelectTableContainer = styled(StyledTableContainer).attrs(
       padding-inline: 28px 15px;
     }
   }
+
+  .buttons-box {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+  }
 `;
 
 const TABLE_VERSION = "6";
@@ -106,7 +111,7 @@ const TableView = (props: TypeSelectTableViewProps) => {
     setSearchValue,
     filteredUsers,
   } = props as InjectedTypeSelectTableViewProps;
-  const tableRef = useRef(null);
+  const tableRef = useRef<HTMLDivElement>(null);
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
@@ -127,7 +132,7 @@ const TableView = (props: TypeSelectTableViewProps) => {
       label: t("ChangeUserTypeDialog:ChangeUserTypeButton"),
       disabled: false,
       withDropDown: true,
-      options: typeOptions,
+      options: typeOptions as ContextMenuModel[],
       iconUrl: ChangeTypeReactSvgUrl,
       onClick: () => {},
       title: t("ChangeUserTypeDialog:ChangeUserTypeButton"),
@@ -135,11 +140,13 @@ const TableView = (props: TypeSelectTableViewProps) => {
   ];
 
   return (
-    <UserSelectTableContainer forwardedRef={tableRef} useReactWindow>
-      {checkedUsers.result.length > 0 && (
+    <UserSelectTableContainer
+      forwardedRef={tableRef as React.RefObject<HTMLDivElement>}
+      useReactWindow
+    >
+      {checkedUsers.result.length > 0 ? (
         <div className="table-group-menu">
           <TableGroupMenu
-            checkboxOptions={[]}
             headerMenu={headerMenu}
             withoutInfoPanelToggler
             withComboBox={false}
@@ -148,7 +155,7 @@ const TableView = (props: TypeSelectTableViewProps) => {
             onChange={toggleAll}
           />
         </div>
-      )}
+      ) : null}
       {accountsData.length > 0 ? (
         <>
           <UsersTableHeader
@@ -170,7 +177,7 @@ const TableView = (props: TypeSelectTableViewProps) => {
             filesLength={accountsData.length}
             hasMoreFiles={false}
             itemCount={accountsData.length}
-            fetchMoreFiles={() => {}}
+            fetchMoreFiles={async () => {}}
           >
             {accountsData.map((data) => (
               <UsersTableRow
@@ -193,7 +200,7 @@ const TableView = (props: TypeSelectTableViewProps) => {
           headerText={t("Common:NotFoundUsers")}
           descriptionText={t("Common:NotFoundUsersDescription")}
           buttons={
-            <Box displayProp="flex" alignItems="center">
+            <div className="buttons-box">
               <IconButton
                 className="clear-icon"
                 isFill
@@ -209,7 +216,7 @@ const TableView = (props: TypeSelectTableViewProps) => {
               >
                 {t("Common:ClearFilter")}
               </Link>
-            </Box>
+            </div>
           }
         />
       )}

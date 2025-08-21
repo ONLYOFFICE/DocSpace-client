@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,52 +26,97 @@
 
 import React from "react";
 import { useDropzone } from "react-dropzone";
+import classNames from "classnames";
 
 import { Loader, LoaderTypes } from "../loader";
-import { ColorTheme, ThemeId } from "../color-theme";
 
-import StyledDropzone from "./Dropzone.styled";
 import { DropzoneProps } from "./Dropzone.types";
+import styles from "./Dropzone.module.scss";
+import { Link } from "../link";
 
 const Dropzone = ({
   isLoading,
-  isDisabled,
+  isDisabled = false,
   onDrop,
   accept,
   maxFiles = 0,
   linkMainText,
   linkSecondaryText,
   exstsText,
+  dataTestId,
 }: DropzoneProps) => {
   const { getRootProps, getInputProps } = useDropzone({
     maxFiles,
     noClick: isDisabled,
     noKeyboard: isDisabled,
-    // maxSize: 1000000,
     accept,
     onDrop,
   });
 
   return (
-    <StyledDropzone $isLoading={isLoading}>
-      {isLoading && (
+    <div
+      className={classNames(styles.dropzoneWrapper, {
+        [styles.isLoading]: isLoading,
+      })}
+      data-testid={dataTestId ?? "dropzone"}
+      aria-busy={isLoading}
+      aria-disabled={isDisabled}
+    >
+      {isLoading ? (
         <Loader
-          className="dropzone_loader"
+          className={styles.dropzoneLoader}
           size="30px"
           type={LoaderTypes.track}
         />
-      )}
-      <div {...getRootProps({ className: "dropzone" })}>
-        <input {...getInputProps()} />
-        <div className="dropzone-link">
-          <ColorTheme className="dropzone-link-main" themeId={ThemeId.Link}>
-            {linkMainText}
-          </ColorTheme>
-          <span className="dropzone-link-secondary">{linkSecondaryText}</span>
+      ) : (
+        <div
+          {...getRootProps({
+            className: styles.dropzone,
+            "aria-label": "File upload area",
+            "data-testid": "dropzone-input-area",
+          })}
+        >
+          <input
+            disabled={isDisabled}
+            {...getInputProps({
+              "aria-label": "File input",
+              "data-testid": "dropzone-input",
+            })}
+          />
+          <div
+            className={styles.dropzoneLink}
+            data-testid="dropzone-text"
+            aria-live="polite"
+            aria-relevant="additions removals"
+          >
+            <Link
+              className={classNames(styles.dropzoneLink, {
+                [styles.main]: true,
+              })}
+              data-testid="dropzone-main-text"
+              color="accent"
+            >
+              {linkMainText}
+            </Link>
+            <span
+              className={classNames(styles.dropzoneLink, {
+                [styles.secondary]: true,
+              })}
+              data-testid="dropzone-secondary-text"
+            >
+              {linkSecondaryText}
+            </span>
+          </div>
+          <div
+            className={styles.dropzoneExsts}
+            data-testid="dropzone-file-types"
+            aria-label="Supported file types"
+          >
+            {exstsText}
+          </div>
         </div>
-        <div className="dropzone-exsts">{exstsText}</div>
-      </div>
-    </StyledDropzone>
+      )}
+    </div>
   );
 };
 

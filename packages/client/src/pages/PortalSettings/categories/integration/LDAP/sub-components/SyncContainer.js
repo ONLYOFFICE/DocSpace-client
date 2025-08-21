@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,6 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Cron, getNextSynchronization } from "@docspace/shared/components/cron";
@@ -36,7 +35,7 @@ import { toastr } from "@docspace/shared/components/toast";
 
 import { DeviceType, LDAPOperation } from "@docspace/shared/enums";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { isMobile, isDesktop } from "@docspace/shared/utils/device";
 import ProgressContainer from "./ProgressContainer";
 import ToggleAutoSync from "./ToggleAutoSync";
@@ -75,7 +74,7 @@ const SyncContainer = ({
 
   const onSaveClick = React.useCallback(() => {
     saveCronLdap()
-      .then(() => toastr.success(t("Settings:SuccessfullySaveSettingsMessage")))
+      .then(() => toastr.success(t("Common:SuccessfullySaveSettingsMessage")))
       .catch((e) => toastr.error(e));
   }, []);
 
@@ -90,23 +89,21 @@ const SyncContainer = ({
   }, [cron]);
 
   const renderBody = () => (
-    <Box className="ldap_sync-container">
-      {!isMobileView && (
+    <div className="ldap_sync-container">
+      {!isMobileView ? (
         <Text
           fontSize="16px"
           fontWeight={700}
           lineHeight="24px"
-          noSelect
           className="settings_unavailable"
         >
           {t("LdapSyncTitle")}
         </Text>
-      )}
+      ) : null}
       <Text
         fontSize="12px"
         fontWeight={400}
         lineHeight="16px"
-        noSelect
         className="settings_unavailable sync-description"
       >
         {t("LdapSyncDescription")}
@@ -120,13 +117,14 @@ const SyncContainer = ({
         onClick={onSync}
         label={t("LdapSyncButton")}
         isDisabled={!isLdapEnabledOnServer || isUIDisabled}
+        testId="manual_sync_button"
       />
 
       <ProgressContainer operation={LDAPOperation.Sync} />
 
       <ToggleAutoSync />
 
-      {cron && (
+      {cron ? (
         <>
           {" "}
           <Text
@@ -134,7 +132,6 @@ const SyncContainer = ({
             fontWeight={400}
             lineHeight="20px"
             className="ldap_cron-title"
-            noSelect
           >
             {t("LdapSyncCronTitle")}
           </Text>
@@ -143,9 +140,15 @@ const SyncContainer = ({
               value={cron}
               setValue={onChangeCron}
               isDisabled={!isLdapEnabledOnServer || isUIDisabled}
+              dataTestId="ldap_cron"
             />
           </div>
-          <Text fontSize="12px" fontWeight={600} lineHeight="16px" noSelect>
+          <Text
+            fontSize="12px"
+            fontWeight={600}
+            lineHeight="16px"
+            dataTestId="next_sync_date"
+          >
             {`${t("LdapNextSync")}: ${nextSyncDate?.toFormat("DDDD tt")} UTC`}
           </Text>
           <Button
@@ -158,10 +161,11 @@ const SyncContainer = ({
             isDisabled={
               !isLdapEnabledOnServer || isUIDisabled || cron === serverCron
             }
+            testId="auto_sync_save_button"
           />
         </>
-      )}
-    </Box>
+      ) : null}
+    </div>
   );
 
   if (isMobileView) {

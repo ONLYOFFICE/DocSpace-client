@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,7 @@
 import React from "react";
 
 import ListItemLoader from "./List.item";
-import { StyledList } from "./List.styled";
+import styles from "./List.module.scss";
 import type { ListLoaderProps } from "./List.types";
 
 const ListLoader = ({ count = 25, ...props }: ListLoaderProps) => {
@@ -36,7 +36,11 @@ const ListLoader = ({ count = 25, ...props }: ListLoaderProps) => {
   for (let i = 0; i < count; i += 1) {
     items.push(<ListItemLoader key={`list_loader_${i}`} {...props} />);
   }
-  return <StyledList className="list-loader-wrapper">{items}</StyledList>;
+  return (
+    <div className={styles.list} data-testid="list-loader">
+      {items}
+    </div>
+  );
 };
 
 export default ListLoader;

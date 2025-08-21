@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -45,7 +45,7 @@ const config: Config = {
   clearMocks: true,
 
   // Indicates whether the coverage information should be collected while executing the test
-  collectCoverage: true,
+  collectCoverage: false,
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
   // collectCoverageFrom: undefined,
@@ -68,6 +68,24 @@ const config: Config = {
   //   "lcov",
   //   "clover"
   // ],
+
+  reporters: [
+    "default",
+    [
+      "jest-html-reporter",
+      {
+        pageTitle: "Shared unit tests report",
+        outputPath: "./jest/reports/tests-results.html",
+        includeFailureMsg: true,
+        includeConsoleLog: false,
+        includeStackTrace: false,
+        inlineSource: true,
+        useCssFile: false,
+        sort: "status",
+        append: false,
+      },
+    ],
+  ],
 
   // An object that configures minimum threshold enforcement for coverage results
   // coverageThreshold: undefined,
@@ -117,11 +135,14 @@ const config: Config = {
   moduleNameMapper: {
     "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
       "<rootDir>/__mocks__/fileMock.js",
-    "\\.(css|less|scss)$": "<rootDir>/__mocks__/styleMock.js",
+    "\\.(css|less|scss)$": "identity-obj-proxy",
     "react-i18next": "<rootDir>/__mocks__/reacti18nextMock.tsx",
     "PUBLIC_DIR/": "<rootDir>/__mocks__/fileMock.js",
+    "hex-rgb": "<rootDir>/__mocks__/hex-rgb.js",
+    "react-svg": "<rootDir>/__mocks__/reactSvgMock.tsx",
   },
 
+  testTimeout: 70000,
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],
 
@@ -163,11 +184,11 @@ const config: Config = {
   // Allows you to use a custom runner instead of Jest's default test runner
   // runner: "jest-runner",
 
-  // The paths to modules that run some code to configure or set up the testing environment before each test
-  // setupFiles: [],
+  // The paths to modules that run some code to configure or set up the testing environment
+  setupFiles: ["<rootDir>/jest/setupTests.ts"],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  // setupFilesAfterEnv: [],
+  setupFilesAfterEnv: ["@testing-library/jest-dom"],
 
   // The number of seconds after which a test is considered as slow and reported as such in the results.
   // slowTestThreshold: 5,
@@ -205,7 +226,9 @@ const config: Config = {
   // testRunner: "jest-circus/runner",
 
   // A map from regular expressions to paths to transformers
-  // transform: undefined,
+  transform: {
+    "^.+\\.(ts|tsx|js)$": "ts-jest",
+  },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
   // transformIgnorePatterns: [

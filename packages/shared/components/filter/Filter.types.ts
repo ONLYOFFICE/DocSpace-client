@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,24 +25,27 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { DeviceType, FilterGroups } from "../../enums";
-import { TViewAs } from "../../types";
+import { TSortBy, TViewAs } from "../../types";
 
 import { TViewSelectorOption } from "../view-selector";
 import { TOption } from "../combobox";
 
 export type TSortDataItem = {
   id: string;
-  className: string;
+  className?: string;
   key: string;
-  isSelected: boolean;
+  isSelected?: boolean;
   label: string;
-  sortDirection: string;
-  sortId: string;
+  sortDirection?: string;
+  sortId?: string;
 };
 
 export type TGetSortData = () => TSortDataItem[];
 
-export type TGetSelectedSortData = () => TSortDataItem;
+export type TGetSelectedSortData = () => {
+  sortDirection: "asc" | "desc";
+  sortId: TSortBy;
+};
 
 export type TOnChangeViewAs = () => void;
 
@@ -50,30 +53,12 @@ export type TOnSort = (key: string, sortDirection: string) => void;
 
 export type TOnSortButtonClick = (value: boolean) => void;
 
-export interface SortButtonProps {
-  id: string;
-  getSortData: TGetSortData;
-  getSelectedSortData: TGetSelectedSortData;
-
-  onChangeViewAs: TOnChangeViewAs;
-  view: string;
-  viewAs: TViewAs;
-  viewSettings: TViewSelectorOption[];
-
-  onSort: TOnSort;
-  viewSelectorVisible: boolean;
-
-  onSortButtonClick: TOnSortButtonClick;
-  title: string;
-}
-
 export type TChangeFilterValue = (
   group: FilterGroups,
-  key: string | number | string[],
+  key: string,
   isSelected: boolean,
   label?: string,
   isMultiSelect?: boolean,
-  withOptions?: boolean,
 ) => void;
 
 export type TShowSelector = (selectorType: string, group: FilterGroups) => void;
@@ -161,18 +146,22 @@ export type TItem = {
   displaySelectorType?: string;
   isMultiSelect?: boolean;
   selectedLabel?: string;
+  isCheckbox?: boolean;
 };
 
 export type TGetFilterData = () => Promise<TItem[]>;
 export type TOnFilter = (value: TItem[] | TGroupItem[]) => void;
 
-export interface FilterBlockProps {
-  selectedFilterValue: TItem[];
-  filterHeader: string;
+export type FilterBlockProps = {
   getFilterData: TGetFilterData;
-  hideFilterBlock: () => void;
   onFilter: TOnFilter;
+
+  selectedFilterValue: Map<FilterGroups, Map<string | number, TItem>>;
+
+  filterHeader: string;
   selectorLabel: string;
+
+  hideFilterBlock: () => void;
   userId: string;
   isRooms: boolean;
   isContactsPage: boolean;
@@ -180,75 +169,72 @@ export interface FilterBlockProps {
   isContactsGroupsPage: boolean;
   isContactsInsideGroupPage: boolean;
   isContactsGuestsPage: boolean;
-  disableThirdParty?: boolean;
-}
 
-export interface FilterButtonProps {
-  onFilter: TOnFilter;
-  getFilterData: TGetFilterData;
-  selectedFilterValue: TItem[];
-  filterHeader: string;
-  selectorLabel: string;
-  isRooms: boolean;
-  isContactsPage: boolean;
-  isContactsPeoplePage: boolean;
-  isContactsGroupsPage: boolean;
-  isContactsInsideGroupPage: boolean;
-  isContactsGuestsPage: boolean;
+  isFlowsPage?: boolean;
+  disableThirdParty?: boolean;
+};
+
+export type FilterButtonProps = Omit<FilterBlockProps, "hideFilterBlock"> & {
   id: string;
   title: string;
-  userId: string;
-  disableThirdParty?: boolean;
-}
+};
 
-export interface FilterProps {
-  onFilter: TOnFilter;
-  getFilterData: TGetFilterData;
-  getSelectedFilterData: () => Promise<TItem[]>;
-  onSort: TOnSort;
+export type SortButtonProps = {
+  id: string;
+  title: string;
+
   getSortData: TGetSortData;
   getSelectedSortData: TGetSelectedSortData;
+
+  onChangeViewAs: TOnChangeViewAs;
   view: string;
   viewAs: TViewAs;
+  viewSettings: TViewSelectorOption[];
+
+  onSort: TOnSort;
   viewSelectorVisible: boolean;
-  getViewSettingsData: () => TViewSelectorOption[];
-  onChangeViewAs: TOnChangeViewAs;
-  placeholder: string;
+
+  onSortButtonClick: TOnSortButtonClick;
+};
+
+export type SearchInputProps = {
   onSearch: (value: string) => void;
-  getSelectedInputValue: () => string;
-
-  filterHeader: string;
-  selectorLabel: string;
-  clearAll: () => void;
-
-  isRecentFolder: boolean;
-  removeSelectedItem: ({
-    key,
-    group,
-  }: {
-    key: string;
-    group?: FilterGroups;
-  }) => void;
-
-  isRooms: boolean;
-  isContactsPage: boolean;
-  isContactsPeoplePage: boolean;
-  isContactsGroupsPage: boolean;
-  isContactsInsideGroupPage: boolean;
-  isContactsGuestsPage: boolean;
-  isIndexing: boolean;
-  isIndexEditingMode: boolean;
-
-  filterTitle: string;
-  sortByTitle: string;
+  onClearFilter: () => void;
 
   clearSearch: boolean;
   setClearSearch: (value: boolean) => void;
 
-  onSortButtonClick: TOnSortButtonClick;
-  onClearFilter: () => void;
-  currentDeviceType: DeviceType;
-  userId: string;
+  getSelectedInputValue: () => string;
 
-  disableThirdParty?: boolean;
-}
+  placeholder: string;
+
+  isIndexEditingMode: boolean;
+
+  initSearchValue?: string;
+};
+
+export type FilterProps = SearchInputProps &
+  Omit<SortButtonProps, "id" | "title" | "viewSettings"> &
+  Omit<FilterButtonProps, "id" | "title" | "selectedFilterValue"> & {
+    getSelectedFilterData: () => Promise<TItem[]> | TItem[];
+    getViewSettingsData: () => TViewSelectorOption[];
+
+    clearAll: () => void;
+
+    isRecentFolder: boolean;
+    removeSelectedItem: ({
+      key,
+      group,
+    }: {
+      key: string | number;
+      group?: FilterGroups;
+    }) => void;
+
+    isIndexing: boolean;
+
+    filterTitle: string;
+    sortByTitle: string;
+
+    currentDeviceType: DeviceType;
+    initSelectedFilterData?: TItem[];
+  };

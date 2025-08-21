@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,10 +29,10 @@ import styled, { css } from "styled-components";
 import { mobile, tablet } from "@docspace/shared/utils/device";
 import { isMobile } from "react-device-detect";
 
-import { Box } from "@docspace/shared/components/box";
 import { globalColors } from "@docspace/shared/themes";
 
-const SDKContainer = styled(Box)`
+const SDKContainer = styled.div`
+  box-sizing: border-box;
   @media ${tablet} {
     width: 100%;
   }
@@ -66,7 +66,8 @@ const CategoryHeader = styled.div`
   `}
 `;
 
-const CategoryDescription = styled(Box)`
+const CategoryDescription = styled.div`
+  box-sizing: border-box;
   margin-top: 2px;
   max-width: 700px;
   .sdk-description {

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -35,7 +35,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { Text } from "@docspace/shared/components/text";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import { Link } from "@docspace/shared/components/link";
 import { DeviceType } from "@docspace/shared/enums";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
@@ -231,7 +231,7 @@ const BruteForceProtection = (props) => {
         getBruteForceProtection();
         setShowReminder(false);
         setIsLoadingSave(false);
-        toastr.success(t("SuccessfullySaveSettingsMessage"));
+        toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
       })
       .catch((error) => {
         toastr.error(error);
@@ -248,22 +248,25 @@ const BruteForceProtection = (props) => {
     return <BruteForceProtectionLoader />;
 
   return (
-    <StyledBruteForceProtection>
+    <StyledBruteForceProtection withoutExternalLink={!bruteForceProtectionUrl}>
       <div className="description">
         <Text className="page-subtitle">
           {t("BruteForceProtectionDescription")}
         </Text>
 
-        <Link
-          className="link"
-          fontSize="13px"
-          target="_blank"
-          isHovered
-          href={bruteForceProtectionUrl}
-          color={currentColorScheme.main?.accent}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {bruteForceProtectionUrl ? (
+          <Link
+            className="link"
+            dataTestId="brute_force_protection_learn_more"
+            fontSize="13px"
+            target="_blank"
+            isHovered
+            href={bruteForceProtectionUrl}
+            color={currentColorScheme.main?.accent}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </div>
 
       <FieldContainer
@@ -277,6 +280,7 @@ const BruteForceProtection = (props) => {
       >
         <TextInput
           className="brute-force-protection-input"
+          testId="brute_force_protection_number_attempts_input"
           tabIndex={1}
           value={currentNumberAttempt}
           onChange={onChangeNumberAttempt}
@@ -297,6 +301,7 @@ const BruteForceProtection = (props) => {
       >
         <TextInput
           className="brute-force-protection-input"
+          testId="brute_force_protection_blocking_time_input"
           tabIndex={2}
           value={currentBlockingTime}
           onChange={onChangeBlockingTime}
@@ -317,6 +322,7 @@ const BruteForceProtection = (props) => {
       >
         <TextInput
           className="brute-force-protection-input"
+          testId="brute_force_protection_check_period_input"
           tabIndex={3}
           value={currentCheckPeriod}
           onChange={onChangeCheckPeriod}
@@ -339,6 +345,8 @@ const BruteForceProtection = (props) => {
         additionalClassCancelButton="brute-force-protection-cancel"
         isSaving={isLoadingSave}
         disableRestoreToDefault={isDefault}
+        saveButtonDataTestId="brute_force_protection_save_button"
+        cancelButtonDataTestId="brute_force_protection_cancel_button"
       />
     </StyledBruteForceProtection>
   );

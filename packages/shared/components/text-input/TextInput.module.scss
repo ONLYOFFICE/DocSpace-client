@@ -1,0 +1,42 @@
+@use "../../styles/mixins";
+@use "../../styles/variables/colors";
+
+.textInput {
+  @include mixins.common-input-styles;
+
+  &[type="search"]::-webkit-search-decoration,
+  &[type="search"]::-webkit-search-cancel-button,
+  &[type="search"]::-webkit-search-results-button,
+  &[type="search"]::-webkit-search-results-decoration {
+    -webkit-appearance: none !important;
+    margin: 0;
+    display: none;
+  }
+
+  &[type="search"]::-moz-search-cancel-button {
+    -webkit-appearance: none !important;
+    margin: 0;
+    display: none;
+  }
+
+  appearance: var(--text-input-appearance); // Standard property
+  -webkit-appearance: var(--text-input-appearance); // For Safari
+  -moz-appearance: var(--text-input-appearance); // For Firefox
+
+  display: var(--text-input-display);
+  flex: var(--text-input-flex);
+  outline: var(--text-input-outline);
+  overflow: var(--text-input-overflow);
+  opacity: var(--text-input-opacity);
+  transition: var(--text-input-transition);
+  box-shadow: var(--text-input-box-shadow);
+  font-weight: var(--text-input-font-weight);
+
+  &:disabled {
+    box-shadow: inset 0 0 0 30px var(--input-disabled-bg);
+  }
+
+  &[data-without-border="true"] {
+    border: none;
+  }
+}

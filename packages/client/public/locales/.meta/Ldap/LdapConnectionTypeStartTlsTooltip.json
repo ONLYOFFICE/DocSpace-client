@@ -1,0 +1,280 @@
+{
+  "key_path": "LdapConnectionTypeStartTlsTooltip",
+  "content": "StartTLS offers a way to upgrade a plain text connection to an encrypted (TLS or SSL) connection instead of using a separate port for encrypted communication.",
+  "content_en_sha1_hash": "85d8ba579364ce5a906c8a5f3d2798fa83eb7374",
+  "created_at": "2025-05-19T21:30:54.194Z",
+  "updated_at": "2025-08-11T18:11:59.240Z",
+  "comment": {
+    "text": "The translation key \"LdapConnectionTypeStartTlsTooltip\" is used to display a tooltip explaining how StartTLS works in LDAP connections. This message provides context for users who are unsure about the encryption process. It appears on a checkbox component in the PortalSettings categories integration.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:13.415Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/Checkboxes.js",
+      "line_number": 103,
+      "context": "isDisabled={!isLdapEnabled || isUIDisabled}\n label={t(\"LdapConnectionTypeStartTls\")}\n testId=\"type_starttls_radio_button\"\n />\n <HelpButton\n tooltipContent={t(\"LdapConnectionTypeStartTlsTooltip\")}\n dataTestId=\"type_starttls_help_button\"\n />\n </div>\n <div className=\"ldap_checkbox-header\">\n <RadioButton",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'əlaqə' is repeated multiple times and might sound repetitive. Consider using synonyms where appropriate to improve readability.",
+          "suggestion": "Consider replacing one or more instances of 'əlaqə' with a synonym like 'keçid', 'bağlantı' or 'ünvan'."
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the sentence structure feels slightly awkward. The flow could be improved.",
+          "suggestion": "Rephrase the sentence to enhance readability. For example: 'StartTLS, şifrələnmiş (TLS və ya SSL) kommunikasiya üçün ayrıca bir port istifadə etmədən, adi mətn bağlantısını şifrələnmiş bir keçidə yüksəltmək imkanı verir.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"կոդավորված հաղորդակցության համար\" (for encoded communication) is not the best translation for 'encrypted communication'. It implies encoding, which isn't precisely what StartTLS does. A more accurate term would convey encryption.",
+          "suggestion": "կոդավորված կապի փոխարեն (instead of encrypted connection) or գաղտնագրված հաղորդակցության համար (for encrypted communication) - although the latter is better."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation includes a colon after 'փոխարեն', which isn't stylistically common or necessary in Armenian sentences.",
+          "suggestion": "Remove the colon after 'փոխարեն'."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ແບ່ງກັນ' is used incorrectly. It implies a shared port, which isn't the intended meaning. The correct word to convey 'separate' or 'dedicated' would be more appropriate.",
+          "suggestion": "ແບ່ງປັນ or ໂດດດ່ຽວ might be more accurate depending on the intended nuance.  Consider researching the best Lao equivalent for 'separate port'."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'inlocuiește' (replaces) doesn't accurately convey the meaning of 'offers a way to upgrade'. It implies a direct replacement, while the English suggests a method or option.",
+          "suggestion": "StartTLS permite actualizarea unei conexiuni de text simplu la o conexiune sigură (TLS sau SSL) și permite evitarea folosirii unui port separat pentru asigurarea conexiunii criptate."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'pentru asigurarea conexiunii criptate' is slightly awkward. A more natural phrasing would be 'pentru criptarea conexiunii'.",
+          "suggestion": "StartTLS permite actualizarea unei conexiuni de text simplu la o conexiune sigură (TLS sau SSL) și permite evitarea folosirii unui port separat pentru criptarea conexiunii."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"සරල පෙළ සම්බන්ධතාවයක්\" (sarala pel sambandhawayak) translates to \"plain text connection\" but the nuance of 'plain text' is lost. A more accurate translation would convey the lack of encryption initially.",
+          "suggestion": "සරල පෙළ සම්බන්ධතාවයක් (sarala pel sambandhawayak) can be improved to something like 'සාමාන්‍ය පෙළ සම්බන්ධතාවයක්' (samaan pel sambandhawayak) - 'normal/ordinary text connection'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'උත්ශ්‍රේණි' (uthsreniyi) used for 'upgrade' is technically correct but sounds very formal and unnatural in this context. It can be replaced with a more common word.",
+          "suggestion": "Replace 'උත්ශ්‍රේණි' (uthsreniyi) with 'දියුණු' (diyunu) - meaning 'to improve' or 'enhance'. The sentence would then read: '...සරල පෙළ සම්බන්ධතාවයක් දියුණු කිරීමට StartTLS ක්‍රමයක් ඉදිරිපත් කරයි.'"
+        },
+        {
+          "type": "formatting",
+          "description": "The overall sentence structure is a bit convoluted. While grammatically correct, it could be rearranged for better readability in Sinhala.",
+          "suggestion": "Consider rearranging the sentence to flow more naturally. For instance: 'StartTLS ක්‍රමයක් ඉදිරිපත් කරයි, එය සාමාන්‍ය පෙළ සම්බන්ධතාවයක් සංකේතාත්මක (TLS හෝ SSL) සම්බන්ධතාවයකට දියුණු කිරීමට හැකි කරයි, වෙනම තොටක් භාවිතා කිරීම වෙනුවට.' (StartTLS offers a method that allows a normal text connection to be upgraded to an encrypted (TLS or SSL) connection instead of using a separate port.)"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'šifrovanie' is used twice. While technically correct, it might sound repetitive and less fluent. 'Šifrované' is better suited for the second instance as it describes the state of the connection.",
+          "suggestion": "StartTLS ponúka spôsob, ako vylepšiť obyčajné textové pripojenie na šifrované (TLS alebo SSL) namiesto používania samostatného portu na zabezpečenú komunikáciu."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'нуди' might be too formal or slightly awkward in this context. While technically correct, it could be improved.",
+          "suggestion": "Предлаже"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'обична текстуална веза' is grammatically correct, but 'обична текстова веза' might flow better and be more common.",
+          "suggestion": "обична текстова веза"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

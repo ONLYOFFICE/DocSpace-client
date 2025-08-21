@@ -6,17 +6,17 @@
   "DeleteGroupUsersSuccessMessage": "تم حذف المستخدمين بشكل دائم.",
   "DeleteGuest": "حذف الضيف",
   "DeleteGuests": "حذف الضيوف",
-  "DeleteMyDocumentsUser": "سيتم حذف كافة الملفات الشخصية والمجلدات في قسم مستنداتي لهذا المستخدم بشكل دائم.",
-  "DeletePersonalData": "سيتم حذف البيانات الشخصية وجميع الملفات والمجلدات الشخصية الموجودة في قسم المستندات والمهملات* للمستخدمين المحددين نهائيًا. ستبقى الملفات والمجلدات الخاصة بالمستخدمين المحددين والمحفوظة في الأقسام المشتركة* مثل الغرف في {{productName}}.",
   "DeletePersonalDataApplicable": "*ينطبق على المستخدمين المحددين الذين لديهم مثل هذه الملفات والمجلدات.",
-  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} سيتم إعادة التعيين بشكل تلقائي للغرف التي تم إنشاءها بواسطة هذا المستخدم والمستندات المخزنة في الغرف إلى المسئول الذي قام بعملية الحذف: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. قم بإعادة تعيين البيانات بشكل يدوي لإختيار وجهة أخرى لإعادة التعيين.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} سيتم إعادة التعيين بشكل تلقائي للغرف التي تم إنشاءها بواسطة هذا المستخدم والمستندات المخزنة في الغرف إلى المسئول الذي قام بعملية الحذف: <1>{{userPerformedDeletion}} ({{userYou}})</1>. قم بإعادة تعيين البيانات بشكل يدوي لإختيار وجهة أخرى لإعادة التعيين.",
   "DeleteReqassignDescriptionGuest": "سيتم حذف {{userCaption}} من جميع الغرف التي تم دعوتهم إليها. سيتم تلقائيًا إعادة تعيين المستندات التي أنشأها هذا {{userCaption}} في الغرف إلى مالكي الغرف.",
   "DeleteUser": "حذف المستخدم",
-  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> سيتم حذفه. سيتم حذف مستندات المستخدم الشخصية المتوفرة للآخرين. هل أنت متأكد أنك تريد المتابعة؟",
+  "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> سيتم حذفه. سيتم حذف مستندات المستخدم الشخصية المتوفرة للآخرين. هل أنت متأكد أنك تريد المتابعة؟",
   "DeletingUsers": " حذف مستخدمين",
+  "PersonalDataDeletionInfo": "البيانات الشخصية، جميع الملفات والمجلدات الشخصية في أقسام {{sectionNameFirst}} و {{sectionNameSecond}}* للمستخدمين المحددين سيتم حذفها نهائيًا. الملفات والمجلدات الخاصة بالمستخدمين المحددين المحفوظة في الأقسام المشتركة* مثل الغرف ستبقى في {{productName}}.",
   "PleaseNote": " يرجى الملاحظة:",
   "ReassignDataToAnotherUser": "إعادة تعيين البيانات لمستخدم آخر",
   "SuccessfullyDeleteGuestInfoMessage": "تم حذف الضيف بنجاح",
   "SuccessfullyDeleteUserInfoMessage": "تم حذف المستخدم بنجاح",
-  "ToBeAbleToReassignData": " لتتمكن من إعادة تعيين البيانات، قم بحذف مستخدم واحد في كل مرة."
+  "ToBeAbleToReassignData": " لتتمكن من إعادة تعيين البيانات، قم بحذف مستخدم واحد في كل مرة.",
+  "UserFilesRemovalScope": "البيانات الشخصية، جميع الملفات والمجلدات في أقسام {{sectionNameFirst}} و {{sectionNameSecond}} لهذا المستخدم سيتم حذفها نهائيًا."
 }

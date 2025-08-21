@@ -1,0 +1,63 @@
+@use "../../styles/mixins";
+
+@use "../../styles/variables/colors";
+
+.row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 22px 1fr 16px;
+  grid-template-rows: 1fr;
+  justify-items: center;
+  align-items: center;
+  margin-bottom: 22px;
+
+  &.withGap8 {
+    grid-column-gap: 8px;
+  }
+
+  &.withGap16 {
+    grid-column-gap: 16px;
+  }
+}
+
+.box1 {
+  .rectangleContent {
+    width: 32px;
+    height: 32px;
+  }
+
+  @include mixins.desktop {
+    .rectangleContent {
+      width: 22px;
+      height: 22px;
+    }
+  }
+}
+
+.box2 {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 16px;
+  grid-row-gap: 4px;
+  justify-items: start;
+  align-items: start;
+
+  .firstRowContentMobile {
+    width: 80%;
+  }
+
+  @include mixins.desktop {
+    grid-template-rows: 16px;
+    grid-row-gap: 0;
+
+    .firstRowContentMobile {
+      width: 100%;
+    }
+
+    .secondRowContentMobile {
+      width: 100%;
+      display: none;
+    }
+  }
+}

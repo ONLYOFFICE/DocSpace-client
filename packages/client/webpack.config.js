@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,28 +27,21 @@
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ModuleFederationPlugin =
-  require("webpack").container.ModuleFederationPlugin;
 const DefinePlugin = require("webpack").DefinePlugin;
 const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const BannerPlugin = require("webpack").BannerPlugin;
-const ESLintPlugin = require("eslint-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const ExternalTemplateRemotesPlugin = require("external-remotes-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 
 const minifyJson = require("@docspace/shared/utils/minifyJson");
 
-const sharedDeps = require("@docspace/shared/constants/sharedDependencies");
-//const fs = require("fs");
-//const { readdir } = require("fs").promises;
-
 const path = require("path");
 
 const pkg = require("./package.json");
 const runtime = require("../runtime.json");
-const deps = pkg.dependencies || {};
 const homepage = pkg.homepage;
 const title = pkg.title;
 const version = pkg.version;
@@ -116,6 +109,7 @@ const config = {
       SRC_DIR: path.resolve(__dirname, "./src"),
       PACKAGE_FILE: path.resolve(__dirname, "package.json"),
       COMMON_DIR: path.resolve(__dirname, "../common"),
+      "@docspace/shared": path.resolve(__dirname, "../shared"),
     },
   },
 
@@ -203,7 +197,17 @@ const config = {
             loader: "@svgr/webpack",
             options: {
               svgoConfig: {
-                plugins: [{ removeViewBox: false }],
+                plugins: [
+                  {
+                    name: "preset-default",
+                    params: {
+                      overrides: {
+                        removeViewBox: false,
+                        cleanupIds: false,
+                      },
+                    },
+                  },
+                ],
               },
             },
           },
@@ -218,33 +222,59 @@ const config = {
       },
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        use: [{ loader: "style-loader" }, { loader: "css-loader" }],
       },
       {
-        test: /\.s[ac]ss$/i,
+        test: /\.module\.s[ac]ss$/i,
         use: [
-          // Creates `style` nodes from JS strings
-          "style-loader",
-          // Translates CSS into CommonJS
+          MiniCssExtractPlugin.loader,
+
           {
             loader: "css-loader",
             options: {
-              url: {
-                filter: (url, resourcePath) => {
-                  // resourcePath - path to css file
-
-                  // Don't handle `/static` urls
-                  if (url.startsWith("/static") || url.startsWith("data:")) {
-                    return false;
-                  }
-
-                  return true;
-                },
+              modules: {
+                localIdentName: "[name]__[local]--[hash:base64:5]",
               },
             },
           },
-          // Compiles Sass to CSS
-          "sass-loader",
+          // Fix relative url() in fonts.css
+          "resolve-url-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              sourceMap: true,
+              implementation: require("sass"),
+              sassOptions: {
+                outputStyle: "compressed",
+              },
+            },
+          },
+        ],
+      },
+      // Regular SCSS files (non-modules)
+      {
+        test: /(?<!\.module)\.s[ac]ss$/i,
+        use: [
+          { loader: "style-loader" },
+          {
+            loader: "css-loader",
+            options: {
+              sourceMap: true,
+              importLoaders: 2,
+            },
+          },
+          // Fix relative url() in fonts.css
+          "resolve-url-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              sourceMap: true,
+              implementation: require("sass"),
+              sassOptions: {
+                outputStyle: "compressed",
+              },
+            },
+          },
         ],
       },
       {
@@ -261,12 +291,12 @@ const config = {
               ],
               plugins: [
                 "@babel/plugin-transform-runtime",
-                "@babel/plugin-proposal-class-properties",
+                "@babel/plugin-transform-class-properties",
                 "@babel/plugin-proposal-export-default-from",
               ],
             },
           },
-          "source-map-loader",
+          { loader: "source-map-loader" },
         ],
       },
     ],
@@ -274,24 +304,9 @@ const config = {
 
   plugins: [
     new CleanWebpackPlugin(),
-    new ESLintPlugin({
-      configType: "eslintrc",
-      cacheLocation: path.resolve(
-        __dirname,
-        "../../node_modules/.cache/.eslint-plugin-cache",
-      ),
-      context: path.resolve(__dirname, "src"),
-      extensions: [".js", ".jsx", ".ts", ".tsx"],
-      emitError: true,
-      emitWarning: true,
-      failOnError: true,
-      failOnWarning: false,
-      quiet: false,
-
-      outputReport: {
-        filePath: "eslint-report.json",
-        formatter: "json",
-      },
+    new MiniCssExtractPlugin({
+      filename: "static/styles/[name].[contenthash].css",
+      ignoreOrder: true,
     }),
     new ExternalTemplateRemotesPlugin(),
 
@@ -309,6 +324,20 @@ const config = {
       ],
     }),
   ],
+
+  // Extract css processed by MiniCssExtractPlugin in a single file
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        styles: {
+          name: "styles",
+          type: "css/mini-extract",
+          chunks: "all",
+          enforce: true,
+        },
+      },
+    },
+  },
 };
 
 const getBuildDate = () => {
@@ -324,66 +353,46 @@ const getBuildYear = () => {
 };
 
 module.exports = (env, argv) => {
-  config.devtool = "source-map";
+  const isProduction = argv.mode === "production";
+  const styleLoader = isProduction
+    ? MiniCssExtractPlugin.loader
+    : "style-loader";
 
-  if (argv.mode === "production") {
+  // Update CSS loaders based on mode
+  config.module.rules = config.module.rules.map((rule) => {
+    if (
+      rule.test?.toString().includes("css") ||
+      rule.test?.toString().includes("scss")
+    ) {
+      return {
+        ...rule,
+        use: rule.use.map((loader) =>
+          typeof loader === "string" && loader === "style-loader"
+            ? styleLoader
+            : loader,
+        ),
+      };
+    }
+    return rule;
+  });
+
+  if (isProduction) {
+    config.devtool = "source-map";
     config.mode = "production";
-    config.optimization = {
-      splitChunks: { chunks: "all" },
-      minimize: !env.minimize,
-      minimizer: [
-        new TerserPlugin({
-          terserOptions: {
-            format: {
-              comments: /\*\s*\(c\)\s+Copyright\s+Ascensio\s+System\s+SIA/i,
-            },
+    config.optimization.splitChunks.chunks = "all";
+    config.optimization.minimize = !env.minimize;
+    config.optimization.minimizer = [
+      new TerserPlugin({
+        terserOptions: {
+          format: {
+            comments: /\*\s*\(c\)\s+Copyright\s+Ascensio\s+System\s+SIA/i,
           },
-          extractComments: false,
-        }),
-      ],
-    };
+        },
+        extractComments: false,
+        parallel: false,
+      }),
+    ];
   }
-
-  config.plugins.push(
-    new ModuleFederationPlugin({
-      name: "client",
-      filename: "remoteEntry.js",
-      remotes: [],
-      exposes: {
-        "./shell": "./src/Shell",
-        "./store": "./src/store",
-        "./Layout": "./src/components/Layout",
-        "./Main": "./src/components/Main",
-        "./NavMenu": "./src/components/NavMenu",
-        "./PreparationPortalDialog":
-          "./src/components/dialogs/PreparationPortalDialog/PreparationPortalDialogWrapper.js",
-        "./utils": "./src/helpers/filesUtils.js",
-        "./BrandingPage":
-          "./src/pages/PortalSettings/categories/common/branding.js",
-        "./WhiteLabelPage":
-          "./src/pages/PortalSettings/categories/common/Branding/whitelabel.js",
-        "./AdditionalResPage":
-          "./src/pages/PortalSettings/categories/common/Branding/additionalResources.js",
-        "./CompanyInfoPage":
-          "./src/pages/PortalSettings/categories/common/Branding/companyInfoSettings.js",
-        "./BackupPage":
-          "./src/pages/PortalSettings/categories/data-management/backup/manual-backup",
-        "./AutoBackupPage":
-          "./src/pages/PortalSettings/categories/data-management/backup/auto-backup",
-        "./RestorePage":
-          "./src/pages/PortalSettings/categories/data-management/backup/restore-backup",
-        "./PaymentsPage": "./src/pages/PortalSettings/categories/payments",
-        "./BonusPage": "./src/pages/Bonus",
-        "./ChangeStorageQuotaDialog":
-          "./src/components/dialogs/ChangeStorageQuotaDialog",
-        "./ConnectDialog": "./src/components/dialogs/ConnectDialog",
-      },
-      shared: {
-        ...deps,
-        ...sharedDeps,
-      },
-    }),
-  );
 
   const htmlTemplate = {
     title: title,
@@ -415,6 +424,7 @@ module.exports = (env, argv) => {
     htmlTemplate.browserDetectorUrl = `/static/scripts/browserDetector.js?hash=${
       runtime.checksums["browserDetector.js"] || dateHash
     }`;
+
     htmlTemplate.configUrl = `/static/scripts/config.json?hash=${
       runtime.checksums["config.json"] || dateHash
     }`;

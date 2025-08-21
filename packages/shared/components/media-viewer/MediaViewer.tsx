@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,13 +30,14 @@ import React, {
   useMemo,
   useEffect,
   useRef,
+  type JSX,
 } from "react";
 
-import { isMobile as isMobileUtils, isTablet } from "@docspace/shared/utils";
-import { getFileExtension } from "@docspace/shared/utils/common";
-import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
-import { decodeTiff } from "@docspace/shared/utils/decodeTiff";
-import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
+import { isMobile as isMobileUtils, isTablet } from "../../utils";
+import { getFileExtension } from "../../utils/common";
+import { checkDialogsOpen } from "../../utils/checkDialogsOpen";
+import { decodeTiff } from "../../utils/decodeTiff";
+import { isNullOrUndefined } from "../../utils/typeGuards";
 
 import { ViewerWrapper } from "./sub-components/ViewerWrapper";
 
@@ -82,11 +83,11 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
     ...other
   } = props;
 
-  const TiffAbortSignalRef = useRef<AbortController>();
-  const HeicAbortSignalRef = useRef<AbortController>();
+  const TiffAbortSignalRef = useRef<AbortController>(undefined);
+  const HeicAbortSignalRef = useRef<AbortController>(undefined);
 
   const isWillUnmountRef = useRef(false);
-  const lastRemovedFileIdRefRef = useRef<number>();
+  const lastRemovedFileIdRefRef = useRef<number>(undefined);
 
   const [title, setTitle] = useState<string>("");
   const [fileUrl, setFileUrl] = useState<string | undefined>(() => {

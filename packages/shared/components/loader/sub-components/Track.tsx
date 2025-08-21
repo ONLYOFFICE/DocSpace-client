@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,27 +25,41 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useId } from "../../../utils";
-import TrackTheme from "../Loader.theme";
-import { LoaderProps } from "../Loader.types";
+import classNames from "classnames";
 
-const Track = React.forwardRef<
-  SVGSVGElement,
-  React.PropsWithChildren<LoaderProps>
->((props, ref) => {
-  const id = useId();
-  const { size, color = "", label, primary, isDisabled = false } = props;
+import { LoaderProps } from "../Loader.types";
+import styles from "../Loader.module.scss";
+
+const Track = ({
+  ref,
+  size,
+  color,
+  label,
+  id,
+  style,
+  primary,
+  isDisabled,
+}: LoaderProps) => {
+  const loaderClassNames = classNames(styles.loaderTrack, {
+    [styles.primary]: primary,
+    [styles.base]: !primary,
+    [styles.disabled]: isDisabled,
+  });
+
+  const customStyle = {
+    "--loader-size": size,
+    "--loader-color": color,
+  } as React.CSSProperties;
 
   return (
-    <TrackTheme
-      ref={ref}
+    <svg
+      className={loaderClassNames}
+      style={{ ...customStyle, ...style }}
       viewBox="-10 -10 220 220"
       xmlns="http://www.w3.org/2000/svg"
-      size={size}
-      color={color}
-      primary={primary}
       aria-label={label}
-      isDisabled={isDisabled}
+      ref={ref}
+      data-testid="track-loader"
     >
       <defs>
         <linearGradient
@@ -199,9 +213,10 @@ const Track = React.forwardRef<
           />
         </path>
       </g>
-    </TrackTheme>
+    </svg>
   );
-});
+};
 
 Track.displayName = "Track";
+
 export { Track };

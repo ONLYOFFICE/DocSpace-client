@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,7 @@
 
 import { ToastType } from "./Toast.enums";
 
-export interface ToastProps {
+export type ToastProps = {
   /** Accepts class  */
   className?: string;
   /** Accepts id */
@@ -38,14 +38,14 @@ export interface ToastProps {
   /** Sets the color and icon of the toast */
   type?: ToastType;
   /** Any components or data inside a toast */
-  data?: string;
+  data?: React.ReactNode | string;
   /** If false: toast disappeared after clicking on any area of toast. If true: toast disappeared after clicking on close button */
   withCross?: boolean;
   /** Time (in milliseconds) for showing your toast. Setting in 0 let you to show toast constantly until clicking on it */
   timeout?: number;
 
   isSSR?: boolean;
-}
+};
 
 export type TData = {
   response?: { data: { error: { message: string } } };

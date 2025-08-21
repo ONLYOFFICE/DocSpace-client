@@ -1,7 +1,6 @@
 {
   "DeleteAllGroupDescription": "Označene skupine bodo izbrisane. Uporabniki v skupinah ne bodo odstranjeni iz {{productName}}. Ste prepričani, da želite nadaljevati?",
   "DeleteAllGroupsTitle": "Izbriši skupine",
-  "DeleteFile": "Izbrisali boste to datoteko. ",
   "DeleteFolder": "To mapo boste izbrisali. ",
   "DeleteGroupDescription": "Skupina {{groupName}} bo izbrisana. Uporabniki v skupini ne bodo odstranjeni iz {{productName}}. Ste prepričani, da želite nadaljevati?",
   "DeleteGroupTitle": "Izbriši skupino",
@@ -10,11 +9,10 @@
   "DeleteRoom": "Izbrisali boste to sobo. Ne boste je mogli obnoviti.",
   "DeleteRooms": "Izbrisali boste te sobe. Ne boste jih mogli obnoviti.",
   "DeleteSharedNote": "Upoštevajte, da ne bo na voljo, če ste to dali v skupno rabo z nekom drugim.",
-  "FilePermanentlyDeleted": "Datoteka bo v 30 dneh trajno izbrisana.",
+  "DeleteTemplate": "Ali res želite izbrisati predlogo sobe <1>«{{templateName}}»</1>? Predloge ne bo mogoče obnoviti.",
+  "DeleteTemplates": "Ali res želite izbrisati izbrane predloge sob? Ne bo jih mogoče obnoviti.",
   "FolderPermanentlyDeleted": "Mapa bo v 30 dneh trajno izbrisana.",
   "ItemsPermanentlyDeleted": "Predmeti bodo v 30 dneh trajno izbrisani.",
-  "MoveToTrashButton": "Premakni v koš",
-  "MoveToTrashTitle": "Premakni v Koš?",
   "UnsubscribeButton": "Odjavi se",
   "UnsubscribeNote": "Ali ste prepričani, da se želite odjaviti od izbranih elementov iz seznama?",
   "UnsubscribeTitle": "Potrditev odjave"

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useContext } from "react";
+import React, { use } from "react";
 
 import { useTranslation } from "react-i18next";
 
@@ -32,28 +32,25 @@ import FolderSvgUrl from "PUBLIC_DIR/images/icons/32/folder.svg?url";
 
 import { getFolder, getFolderInfo } from "../../../api/files";
 import FilesFilter from "../../../api/files/filter";
-import {
-  ApplyFilterOption,
-  FilesSelectorFilterTypes,
-  FilterType,
-  FolderType,
-} from "../../../enums";
+import { FolderType } from "../../../enums";
 import { toastr } from "../../../components/toast";
 import { TSelectorItem } from "../../../components/selector";
 import { TData } from "../../../components/toast/Toast.type";
 import { TBreadCrumb } from "../../../components/selector/Selector.types";
 
-import { SettingsContext } from "../contexts/Settings";
-import { LoadersContext } from "../contexts/Loaders";
+import useInputItemHelper from "../../utils/hooks/useInputItemHelper";
+import { SettingsContext } from "../../utils/contexts/Settings";
+import { LoadersContext } from "../../utils/contexts/Loaders";
 
-import { PAGE_COUNT } from "../FilesSelector.constants";
+import { PAGE_COUNT } from "../../utils/constants";
 import { UseFilesHelpersProps } from "../FilesSelector.types";
 import {
   convertFilesToItems,
   convertFoldersToItems,
   getDefaultBreadCrumb,
-} from "../FilesSelector.utils";
-import useInputItemHelper from "./useInputItemHelper";
+} from "../../utils";
+
+import { configureFilterByFilterParam } from "../FilesSelector.utils";
 
 const useFilesHelper = ({
   setHasNextPage,
@@ -65,6 +62,7 @@ const useFilesHelper = ({
   setIsRoot,
   searchValue,
   disabledItems,
+  includedItems,
   setSelectedItemSecurity,
   isThirdParty,
   setSelectedTreeNode,
@@ -86,17 +84,19 @@ const useFilesHelper = ({
   setSelectedItemId,
   setSelectedItemType,
   shareKey,
+
+  applyFilterOption,
 }: UseFilesHelpersProps) => {
   const { t } = useTranslation(["Common"]);
+
   const {
     isFirstLoad,
     setIsFirstLoad,
     setIsNextPageLoading,
     setIsBreadCrumbsLoading,
-  } = useContext(LoadersContext);
+  } = use(LoadersContext);
 
-  const { getIcon, extsWebEdited, filesSettingsLoading } =
-    useContext(SettingsContext);
+  const { getIcon, extsWebEdited, filesSettingsLoading } = use(SettingsContext);
 
   const { addInputItem } = useInputItemHelper({
     withCreate,
@@ -146,77 +146,12 @@ const useFilesHelper = ({
       filter.applyFilterOption = null;
       filter.withSubfolders = false;
       if (filterParam) {
-        filter.applyFilterOption = ApplyFilterOption.Files;
-        switch (filterParam) {
-          case FilesSelectorFilterTypes.DOCX:
-            filter.extension = FilesSelectorFilterTypes.DOCX;
-            break;
-
-          case FilesSelectorFilterTypes.IMG:
-            filter.filterType = FilterType.ImagesOnly;
-            break;
-
-          case FilesSelectorFilterTypes.BackupOnly:
-            filter.extension = "gz,tar";
-            break;
-
-          case FilesSelectorFilterTypes.XLSX:
-            filter.filterType = FilterType.SpreadsheetsOnly;
-            break;
-
-          case FilesSelectorFilterTypes.PDF:
-            filter.filterType = FilterType.Pdf;
-            break;
-
-          case FilterType.DocumentsOnly:
-            filter.filterType = FilterType.DocumentsOnly;
-            break;
-
-          case FilterType.PDFForm:
-            filter.filterType = FilterType.PDFForm;
-            break;
-
-          case FilterType.PresentationsOnly:
-            filter.filterType = FilterType.PresentationsOnly;
-            break;
-
-          case FilterType.SpreadsheetsOnly:
-            filter.filterType = FilterType.SpreadsheetsOnly;
-            break;
-
-          case FilterType.ImagesOnly:
-            filter.filterType = FilterType.ImagesOnly;
-            break;
-
-          case FilterType.MediaOnly:
-            filter.filterType = FilterType.MediaOnly;
-            break;
-
-          case FilterType.ArchiveOnly:
-            filter.filterType = FilterType.ArchiveOnly;
-            break;
-
-          case FilterType.FoldersOnly:
-            filter.filterType = FilterType.FoldersOnly;
-            break;
-
-          case FilterType.FilesOnly:
-            filter.filterType = FilterType.FilesOnly;
-            break;
-
-          case FilesSelectorFilterTypes.ALL:
-            filter.applyFilterOption = ApplyFilterOption.All;
-            filter.filterType = FilterType.None;
-            break;
-
-          case "EditorSupportedTypes":
-            filter.extension = extsWebEdited
-              .map((extension) => extension.slice(1))
-              .join(",");
-            break;
-
-          default:
-        }
+        configureFilterByFilterParam(
+          filter,
+          filterParam,
+          extsWebEdited,
+          applyFilterOption,
+        );
       }
 
       const id = selectedItemId ?? (isUserOnly ? "@my" : "");
@@ -277,6 +212,7 @@ const useFilesHelper = ({
           files,
           getIcon,
           filterParam,
+          includedItems,
         );
 
         const itemList = [...foldersList, ...filesList];
@@ -322,6 +258,7 @@ const useFilesHelper = ({
                   roomsFolderId === id ||
                   (index === 0 && typeof nextItem?.roomType !== "undefined"),
                 roomType,
+                rootFolderType: current.rootFolderType,
               };
             },
           );
@@ -452,6 +389,8 @@ const useFilesHelper = ({
       setSelectedItemId,
       rootThirdPartyId,
       shareKey,
+      applyFilterOption,
+      includedItems,
     ],
   );
 

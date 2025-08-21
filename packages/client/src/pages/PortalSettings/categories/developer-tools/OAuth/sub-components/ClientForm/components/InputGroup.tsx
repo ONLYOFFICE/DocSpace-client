@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,7 +32,7 @@ import { FieldContainer } from "@docspace/shared/components/field-container";
 import { RectangleSkeleton } from "@docspace/shared/skeletons/rectangle";
 import { InputSize, InputType } from "@docspace/shared/components/text-input";
 
-import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
+import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 
 import { StyledInputGroup } from "../ClientForm.styled";
 
@@ -62,6 +62,7 @@ interface InputGroupProps {
   children?: React.ReactNode;
 
   onBlur?: (name: string) => void;
+  dataTestId?: string;
 }
 
 const InputGroup = ({
@@ -88,6 +89,7 @@ const InputGroup = ({
   isRequired,
   isError,
   children,
+  dataTestId,
 }: InputGroupProps) => {
   const [isRequestRunning, setIsRequestRunning] = React.useState(false);
 
@@ -113,6 +115,7 @@ const InputGroup = ({
         errorMessage={error}
         removeMargin
         hasError={isError}
+        dataTestId={dataTestId}
       >
         {children || (
           <>
@@ -139,16 +142,19 @@ const InputGroup = ({
                 type={isPassword ? InputType.password : InputType.text}
                 onBlur={() => onBlur?.(name)}
                 hasError={isError}
+                noIcon={!withCopy}
+                testId={`${dataTestId}_input`}
               />
             )}
-            {buttonLabel && (
+            {buttonLabel ? (
               <Button
                 label={buttonLabel}
                 size={ButtonSize.small}
                 onClick={onButtonClickAction}
                 isDisabled={isRequestRunning}
+                testId={`${dataTestId}_button`}
               />
-            )}
+            ) : null}
           </>
         )}
       </FieldContainer>

@@ -1,11 +1,17 @@
 {
+  "ChangeContactType": "Փոխել կոնտակտի տեսակը",
   "ChangeGuestsTypeMessage": "Հյուր <strong>{{userName}}</strong>-ը կտեղափոխվի {{membersSection}} բաժին և կնշանակվի Օգտատիրոջ տեսակը: Օգտատերերն ունեն իրենց սեփական {{documentsSection}} բաժինը, կարող են ստեղծել և խմբագրել ֆայլեր, բայց չեն կարողանում ստեղծել սենյակներ:",
   "ChangeGuestsTypeMessageMulti": "Ընտրված հյուրերը կտեղափոխվեն {{membersSection}} բաժին և կնշանակվի Օգտատիրոջ տեսակը: Օգտատերերն ունեն իրենց սեփական {{documentsSection}} բաժինը, կարող են ստեղծել և խմբագրել ֆայլեր, բայց չեն կարող ստեղծել սենյակներ:",
+  "ChangeGuestsTypeToAdmin": "Հյուր <strong>{{userName}}</strong> կտեղափոխվի {{membersSection}} բաժին և կստանա <strong>'{{ secondType }}'</strong> տեսակ: {{productName}} ադմինները կարող են մուտք գործել {{productName}} կարգավորումներ, կառավարել և արխիվացնել սենյակներ, հրավիրել նոր օգտատերեր և նշանակել իրենցից ցածր դերեր: {{productName}} ադմինները մուտք ունեն {{documentsSection}} բաժին:",
+  "ChangeGuestsTypeToAdminMulti": "Ընտրված հյուրերը կտեղափոխվեն {{membersSection}} բաժին և կստանան <strong>'{{ secondType }}'</strong> տեսակ: {{productName}} ադմինները կարող են մուտք գործել {{productName}} կարգավորումներ, կառավարել և արխիվացնել սենյակներ, հրավիրել նոր օգտատերեր և նշանակել իրենցից ցածր դերեր: {{productName}} ադմինները մուտք ունեն {{documentsSection}} բաժին:",
+  "ChangeGuestsTypeToManager": "Հյուր <strong>{{userName}}</strong> կտեղափոխվի {{membersSection}} բաժին և կստանա <strong>'{{ secondType }}'</strong> տեսակ: Սենյակի ադմինները կարող են ստեղծել և կառավարել իրենց վերագրված սենյակները, հրավիրել նոր օգտատերեր և նշանակել Սենյակի ադմին կամ ավելի ցածր դերեր: Սենյակի ադմինները մուտք ունեն {{documentsSection}} բաժին:",
+  "ChangeGuestsTypeToManagerMulti": "Ընտրված հյուրերը կտեղափոխվեն {{membersSection}} բաժին և կհատկացվեն <strong>'{{ secondType }}'</strong> տեսակը: Սենյակի ադմինիստրատորները կարող են ստեղծել և կառավարել հատկացված սենյակները, հրավիրել նոր օգտատերերի և հանձնարարել սենյակի ադմինիստրատորի և ավելի ցածր դերեր: Սենյակի ադմինիստրատորներին հասանելի է {{documentsSection}} բաժինը:",
   "ChangeUserTypeButton": "Փոխել տեսակը",
-  "ChangeUserTypeHeader": "Փոխել օգտվողի տեսակը",
   "ChangeUserTypeMessage": "<strong>'{{ firstType }}'</strong> տեսակի օգտատերերը կտեղափոխվեն <strong>'{{ secondType }}'</strong> տեսակի.",
-  "ChangeUserTypeMessageMulti": "Ընտրված օգտվողները կտեղափոխվեն <strong>'{{ secondType }}'</strong> տեսակի:",
-  "ChangeUserTypeMessageWarning": "Դուք չեք կարող փոխել տեսակը {{productName}}-ի ադմինիստրատորների և ձեզ համար",
+  "ChangeUserTypeNote": "<1>Նշում․</1> դուք չեք կարող փոխել տեսակը {{productName}} ադմինի և ձեր սեփական համար:",
+  "DataReassignmentInfo": "Այս օգտատիրոջ ստեղծած սենյակները վտոմատ կերպով նշանակվել է Ձեզ։ Եթե ցանկանում եք վերաբաշխել սենյակները մեկ այլ անձի, սեղմեք ստորև նշված համապատասխան հղումը:",
+  "DataReassignmentWithFilesDeletion": "Այս կոնտակտի կողմից ստեղծված բոլոր համօգտագործվող ֆայլերը <1>ավտոմատ կերպով կհատկացվեն ձեզ 30 օրից</1>: Սենյակները/համօգտագործվող ֆայլերը մեկ այլ անձի վերահանձնելու համար սեղմեք ստորև նշված համապատասխան հղումը:",
+  "PersonalDataDeletion": "Այս կոնտակտի {{sectionName}} բաժնի բոլոր ֆայլերն ու պանակները <1>ընդմիշտ կջնջվեն 30 օրից</1>:",
   "SuccessChangeGuestType": "Հյուրի տեսակը հաջողությամբ փոխվել է",
   "SuccessChangeUserType": "Օգտատիրոջ տեսակը հաջողությամբ փոխվել է"
 }

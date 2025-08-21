@@ -1,0 +1,513 @@
+{
+  "key_path": "IPSecuritySettingDescription",
+  "content": "Configure IP Security to restrict login possibility to select IP addresses. Use either exact IP addresses in the IPv4 format, IP range or CIDR masking. The IP security does not work for space owners, they can access the space from any IP address.",
+  "content_en_sha1_hash": "285f2427eec118d67b6d3cbbf9ebe80d3e4719d1",
+  "created_at": "2025-05-19T21:30:51.733Z",
+  "updated_at": "2025-08-04T07:30:01.545Z",
+  "comment": {
+    "text": "This translation key is used to describe the IP Security setting option, explaining its purpose and usage context. It appears in a security category page on the portal settings, guiding users on how to configure IP restrictions for secure login access.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:02.948Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
+      "line_number": 268,
+      "context": "<Text fontSize=\"16px\" fontWeight=\"700\">\n {t(\"IPSecurity\")}\n </Text>\n <div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"IPSecuritySettingDescription\")}\n </Text>\n \n {ipSettingsUrl ? (\n <Link\n className=\"link-learn-more\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
+      "line_number": 245,
+      "context": "return (\n <MainContainer>\n <LearnMoreWrapper withoutExternalLink={!ipSettingsUrl}>\n <Text className=\"page-subtitle\">\n {t(\"IPSecuritySettingDescription\")}\n </Text>\n {ipSettingsUrl ? (\n <Link\n className=\"link-learn-more\"\n dataTestId=\"ip_security_component_learn_more\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Arabic translation has line breaks that disrupt readability. The long sentence should be broken down for better flow.",
+          "suggestion": "تهيئة حماية IP لتقييد إمكانية تسجيل الدخول إلى عناوين IP محددة. يمكن استخدام عناوين IP بدقة بصيغة IPv4، أو نطاقات IP، أو باستخدام CIDR masking. حماية IP لا تنطبق على مالكي المساحات، ويمكنهم الوصول إلى المساحة من أي عنوان IP."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'نفس عناوين IP' is not the best translation for 'exact IP addresses'. It implies a duplication or repetition.",
+          "suggestion": "استخدم عناوين IP دقيقة"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'لا تعمل حماية IP' could be more naturally translated. It implies the security doesn't function at all.",
+          "suggestion": "لا تنطبق حماية IP"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"възможността за вписване\" (possibility of logging in) is a bit awkward. It would be more natural to use something like \"възможността за вход\" (possibility of entry/access).",
+          "suggestion": "Конфигурирайте IP Защитата, за да ограничите възможността за вход за избрани IP адреси."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"получат достъп до него\" (receive access to it) is a bit verbose. It could be simplified to \"имат достъп до него\" (have access to it).",
+          "suggestion": "IP защитата не работи за собствениците на пространството, те имат достъп до него от всеки IP адрес."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'IP security' is translated as 'Zabezpečení IP'. While understandable, 'IP zabezpečení' would be more consistent and natural in Czech, mirroring the English phrasing.",
+          "suggestion": "IP zabezpečení"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ti' is used to refer to space owners. While grammatically correct, it sounds a bit informal and lacks the formality expected in technical documentation. Using 'oni' would be more appropriate.",
+          "suggestion": "oni mohou do prostoru přistupovat"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses semicolons (;) instead of periods (.) at the end of sentences. This is not standard Greek punctuation.",
+          "suggestion": "Replace semicolons with periods throughout the text."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'space owners' is translated as 'ιδιοκτήτες του χώρου'. While technically correct, a more natural translation in this context might be 'διοικητές του χώρου' or 'υπεύθυνοι του χώρου'.",
+          "suggestion": "Consider translating 'space owners' as 'διοικητές του χώρου' or 'υπεύθυνοι του χώρου'."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"luokatonta reititystä\" translates to \"classless routing\" which, while technically correct, is jargon. A more user-friendly translation for CIDR masking would be something like \"CIDR-maskausta\" or \"CIDR-osoitteita\".",
+          "suggestion": "Määritä IP-suojaus rajoittamaan sisäänkirjautumismahdollisuutta IP-osoitteiden valinnassa. Käytä joko tarkkoja IP-osoitteita IPv4-muodossa, IP-alueella tai CIDR-maskausta."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the sentence structure feels a bit disjointed. The repetition of 'IP-osoitteita' makes it feel slightly awkward.",
+          "suggestion": "Määritä IP-suojaus rajoittamaan sisäänkirjautumista valittuihin IP-osoitteisiin. Käytä joko tarkkoja IP-osoitteita IPv4-muodossa, IP-alueella tai CIDR-maskausta."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"possibilités de connexion\" is a bit awkward. A more natural phrasing would be \"accès\".",
+          "suggestion": "Configurez la sécurité IP pour limiter l'accès aux adresses IP sélectionnées."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"masquage CIDR\" is less common than \"notation CIDR\" or simply \"CIDR\".",
+          "suggestion": "Configurez la sécurité IP pour limiter l'accès aux adresses IP sélectionnées. Utilisez des adresses IP exactes au format IPv4, une plage d'adresses IP ou la notation CIDR."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"restrict login possibility\" is not accurately translated. \"սահմանափակելու մուտքի հնարավորությունը\" literally translates to 'to limit the possibility of access'. A more natural translation would be something like 'սահմանափակելու մուտքը' (to limit access).",
+          "suggestion": "Կազմաձևեք IP անվտանգությունը՝ սահմանափակելու մուտքը"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"CIDR masking\" is awkwardly translated as \"CIDR քողարկմամբ\". \"Քողարկում\" implies concealment. A better translation might use a term that describes CIDR notation itself.",
+          "suggestion": "Կազմաձևեք IP անվտանգությունը՝ սահմանափակելու IP հասցեներ ընտրելու մուտքի հնարավորությունը: Օգտագործեք կամ ճշգրիտ IP հասցեներ IPv4 ձևաչափով, IP տիրույթում կամ CIDR նշանակումով:"
+        },
+        {
+          "type": "grammatical",
+          "description": "The phrasing \"տարածքի սեփականատերերի համար\" is slightly awkward. While grammatically correct, it could be improved for flow.",
+          "suggestion": "տարածքի սեփականատերերի համար"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"possibilità di accesso\" is a bit clunky. A more natural phrasing would be \"accesso\" or \"possibilità di effettuare l'accesso\".",
+          "suggestion": "Configurare la sicurezza IP per limitare l'accesso agli indirizzi IP selezionati."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"mascheramento CIDR\" is not as common or easily understood in Italian as it is in English. A more user-friendly translation would be \"notazione CIDR\".",
+          "suggestion": "Utilizza indirizzi IP esatti nel formato IPv4, intervallo IP o notazione CIDR."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Japanese translation lacks a period at the end of the first sentence.",
+          "suggestion": "IPセキュリティを設定して、選択したIPアドレスへのログインを制限します。."
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"선택된 IP 주소로 로그인 가능성을 제한하도록\" is a bit awkward and doesn't directly translate \"to restrict login possibility to select IP addresses.\" A more natural Korean phrasing would be something like \"특정 IP 주소로만 로그인을 제한하도록\".",
+          "suggestion": "특정 IP 주소로만 로그인을 제한하도록"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"IPv4 형식, IP 범위 또는 CIDR 마스킹의 정확한 IP 주소를 사용하세요\" is slightly verbose and could be simplified.  It implies there is something to 'use' IPs in, when the intent is to specify them.",
+          "suggestion": "IPv4 형식, IP 범위 또는 CIDR 마스킹을 사용하여 IP 주소를 지정하세요."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure could be improved for better readability. The current structure feels a bit long and complex.",
+          "suggestion": "IP 보안을 구성하여 특정 IP 주소로만 로그인을 제한할 수 있습니다. IPv4 형식, IP 범위 또는 CIDR 마스킹을 사용하여 IP 주소를 지정하세요. IP 보안은 공간 소유자에게는 적용되지 않으며, 공간 소유자는 어떤 IP 주소에서든 공간에 액세스할 수 있습니다."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ຄວາມເປັນໄປໄດ້ໃນການເຂົ້າສູ່ລະບົບເພື່ອເລືອກທີ່ຢູ່ IP\" is not the most natural translation of \"to restrict login possibility to select IP addresses\". It's a bit convoluted.",
+          "suggestion": "ຕັ້ງຄ່າຄວາມປອດໄພ IP ເພື່ອຈໍາກັດການເຂົ້າສູ່ລະບົບໃຫ້ເປັນທີ່ຢູ່ IP ທີ່ລະບຸໄວ້ເທົ່ານັ້ນ"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "“ເຂົາເຈົ້າສາມາດເຂົ້າເຖິງຊ່ອງຈາກທີ່ຢູ່ IP ໃດ” is too generic. It doesn't convey the meaning that space owners have unrestricted access.",
+          "suggestion": "ພວກເຂົາເຈົ້າສາມາດເຂົ້າເຖິງຊ່ອງຈາກທີ່ຢູ່ IP ໃດກໍຕາມໄດ້"
+        },
+        {
+          "type": "formatting",
+          "description": "The Lao translation maintains the English sentence structure, which can sometimes lead to unnatural phrasing. While not strictly incorrect, it could be improved for better flow.",
+          "suggestion": "Consider reordering clauses to align better with Lao sentence structure."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Latvian translation uses a semicolon (;) after \"IPv4 formātā\" which isn't standard Latvian punctuation in this context. A comma (,) is more appropriate.",
+          "suggestion": "Konfigurējiet IP drošību, lai ierobežotu pieteikšanās iespējas, izvēloties IP adreses. Izmantojiet precīzas IP adreses IPv4 formātā, IP diapazonu vai CIDR maskēšanu. IP drošība nedarbojas telpu īpašniekiem, viņi var piekļūt vietai no jebkuras IP adreses."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"restricting the possibility of login\" is overly verbose and unnatural in Portuguese. A more direct translation would improve readability.",
+          "suggestion": "Configure a Segurança IP para restringir o acesso por endereço IP. (Configure IP Security to restrict access by IP address.)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"selecionar endereços IP\" could be more accurately translated to reflect the intent of specifying allowed IPs.",
+          "suggestion": "para especificar endereços IP permitidos."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure in the first part is a little awkward. While technically correct, it could be improved for flow.",
+          "suggestion": "Configure a Segurança IP para restringir o acesso a endereços IP específicos."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"restricting the possibility of login\" is awkward in Portuguese. A more natural phrasing would be \"restringir o acesso\".",
+          "suggestion": "Configure a Segurança IP para restringir o acesso a endereços IP."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'mascaramento' (masking) can be technically correct, but 'notação CIDR' is more commonly understood in a Brazilian Portuguese context for CIDR notation.",
+          "suggestion": "Configure a Segurança IP para restringir o acesso a endereços IP. Use endereços IP exatos no formato IPv4, intervalo de IP ou notação CIDR."
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'accesul' (access) is repeated and slightly awkward. While technically correct, it could be phrased more naturally.",
+          "suggestion": "Configurați Securitatea IP pentru a restricționa login-ul la adresele IP selectate."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'login-ul' is a more accurate translation of 'login possibility' than 'accesul'.",
+          "suggestion": "Keep 'login-ul' as in the suggested correction above."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'mascare CIDR' is a direct translation of 'CIDR masking', but 'mască CIDR' is more common and natural in Romanian.",
+          "suggestion": "Folosiți fie adrese IP exacte în format IPv4, fie un interval de adrese IP, fie o mască CIDR."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"вход в систему\" (login to the system) is a bit too literal and formal. A more natural phrasing in this context would be something like \"доступ к пространству\" (access to the space) or \"доступ\" (access).",
+          "suggestion": "Настройте IP-безопасность для ограничения возможности доступа к пространству для выбранных IP-адресов."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"владельцев\" (owners) could be translated to 'владельцам' to more correctly express the possessive in this context.",
+          "suggestion": "IP-безопасность не работает для владельцев, они могут заходить в рабочее пространство с любого IP-адреса."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Use either exact IP addresses' is awkwardly translated as 'IPv4 ආකෘතියෙන් නිශ්චිත අ.ජා.කෙ. ලිපින'. It should convey the meaning of allowing exact IP addresses, not specifying the format.",
+          "suggestion": "තෝරාගත් නිශ්චිත අ.ජා.කෙ. ලිපින භාවිතා කරන්න."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The abbreviation 'CIDR' is translated as 'අන.ජා.' which is not standard or understandable. It should be translated more directly or the full term should be used.",
+          "suggestion": "CIDR මාස්ක් භාවිතා කරන්න."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'space owners' is translated as 'අවකාශයේ හිමිකරුවන්ට'. While technically correct, a more natural phrasing in Sinhala might be better. Consider if 'space හිමියන්' would be more appropriate.",
+          "suggestion": "space හිමියන්"
+        },
+        {
+          "type": "formatting",
+          "description": "There's a mix of Sinhala and English abbreviations. It would be more consistent to use Sinhala abbreviations throughout, or provide explanations for any English abbreviations used.",
+          "suggestion": "Consistent use of Sinhala abbreviations or explanation of English ones (e.g., 'අ.ජා.කෙ. (IP)')."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Nakonfigurujte' is not Slovak. It's a Serbian/Croatian word. The correct Slovak word for 'Configure' is 'Konfigurujte'.",
+          "suggestion": "Konfigurujte IP bezpečnosť, aby ste obmedzili možnosť prihlásenia na vybrané IP adresy."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'maskovanie' should be 'maskovanie CIDR'. While 'maskovanie' isn't inherently wrong, without CIDR, it's vague.",
+          "suggestion": "Konfigurujte IP bezpečnosť, aby ste obmedzili možnosť prihlásenia na vybrané IP adresy. Použite buď presné IP adresy vo formáte IPv4, rozsah IP alebo maskovanie CIDR."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Konfigurirajte varnost IP\" is a literal translation of \"Configure IP Security\" and sounds awkward in Slovenian. A more natural phrasing would be something like \"Nastavite varnost IP\" or \"Nastavite zaščito IP\".",
+          "suggestion": "Nastavite varnost IP"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"omejite možnost prijave za izbiro naslovov IP\" is overly verbose and a less awkward translation would be \"omejite prijavo na določene naslove IP\" or \"omejite dostop preko določenih naslovov IP\".",
+          "suggestion": "omejite prijavo na določene naslove IP"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the phrase \"obseg IP\" for \"IP range\" could be improved for clarity and flow. Consider \"razpon IP naslovov\".",
+          "suggestion": "razpon IP naslovov"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"IP безбедност\" (IP bezbednost) is a literal translation of \"IP Security\" but might not be the most natural or clear way to express it in Serbian. A more common and understandable term might be \"IP сигурност\" (IP sigurnost) or \"Поставке сигурности IP адреса\" (Settings for IP address security).",
+          "suggestion": "Consider replacing \"IP безбедност\" with \"IP сигурност\" or \"Поставке сигурности IP адреса\" for better clarity."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of capitalization in the translation is inconsistent with typical Serbian style for longer sentences. While proper nouns like \"IPv4\" are capitalized, the rest of the text should generally follow lower-case unless it's a sentence beginning.",
+          "suggestion": "Review capitalization throughout the translation, ensuring consistency with standard Serbian style. Lowercase most words unless beginning a sentence."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'maskiranje' might be better translated as 'masku'. While 'maskiranje' is technically correct as a process, 'masku' is more aligned with the English 'masking' in this context.",
+          "suggestion": "Koristite tačne IP adrese u IPv4 formatu, opseg IP adresa ili CIDR masku."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"to select IP addresses\" in the English content implies a selection process. The Turkish translation \"IP adreslerini seçmek üzere\" doesn't fully capture this. A more accurate translation might suggest limiting access *based on* specific IP addresses.",
+          "suggestion": "IP adreslerine göre erişimi kısıtlamak için IP Güvenliğini yapılandırın."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Use either exact IP addresses...\" could be better translated to reflect the options are all valid methods, not mutually exclusive. 'Use exact IP addresses, an IP range, or CIDR masking' is more nuanced.",
+          "suggestion": "Tam IP adreslerini, bir IP aralığını veya CIDR maskelemesini kullanabilirsiniz."
+        },
+        {
+          "type": "grammatical",
+          "description": "The sentence \"Alan sahipleri için IP güvenliği çalışmaz, alana herhangi bir IP adresinden erişebilirler.\" is a bit clunky. Joining the sentences is preferred.",
+          "suggestion": "Alan sahipleri için IP güvenliği çalışmaz, alana herhangi bir IP adresinden erişebilirler."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"để chọn địa chỉ IP\" is awkward and doesn't accurately convey the meaning of \"to select IP addresses.\" It suggests the user *chooses* the IP addresses to restrict, rather than defining restricted IPs.",
+          "suggestion": "Định cấu hình Bảo mật IP để hạn chế đăng nhập chỉ cho phép các địa chỉ IP."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Bảo mật IP không áp dụng đối với chủ sở hữu không gian\" is a bit clunky. It could be more clearly stated.",
+          "suggestion": "Bảo mật IP không áp dụng cho chủ không gian, họ có thể truy cập không gian từ bất kỳ địa chỉ IP nào."
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct, the sentence structure can be improved for better flow. Splitting the long sentence about IP formats might enhance readability.",
+          "suggestion": "Định cấu hình Bảo mật IP để hạn chế khả năng đăng nhập chỉ cho phép các địa chỉ IP. Có thể sử dụng địa chỉ IP chính xác ở định dạng IPv4, dải IP hoặc CIDR masking."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase \"IP 安全性不影响空间的所有者\" is a bit clunky. It would be more natural to say \"IP 安全性对空间所有者无效\" or similar.",
+          "suggestion": "IP 安全性对空间所有者无效"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

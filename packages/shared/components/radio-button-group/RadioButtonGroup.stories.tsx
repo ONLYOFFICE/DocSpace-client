@@ -27,25 +27,16 @@
 import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
 
-import { RadioButtonGroup } from "./RadioButtonGroup";
-import {
-  RadioButtonGroupProps,
-  TRadioButtonOption,
-} from "./RadioButtonGroup.types";
-
-// const disable = {
-//   table: {
-//     disable: true,
-//   },
-// };
+import { RadioButtonGroup } from ".";
 
 const meta = {
-  title: "Components/RadioButtonGroup",
+  title: "Form Controls/RadioButtonGroup",
   component: RadioButtonGroup,
   parameters: {
     docs: {
       description: {
-        component: "RadioButtonGroup allow you to add group radiobutton",
+        component:
+          "RadioButtonGroup allows you to create a group of radio buttons with various configurations including horizontal/vertical layouts, disabled states, and text labels.",
       },
     },
     design: {
@@ -53,65 +44,98 @@ const meta = {
       url: "https://www.figma.com/file/ZiW5KSwb4t7Tj6Nz5TducC/UI-Kit-DocSpace-1.0.0?type=design&node-id=556-3247&mode=design&t=TBNCKMQKQMxr44IZ-0",
     },
   },
+  argTypes: {
+    orientation: {
+      description: "Layout orientation of the radio buttons",
+      control: "radio",
+      options: ["horizontal", "vertical"],
+      defaultValue: "horizontal",
+    },
+    isDisabled: {
+      description: "Disable all radio buttons in the group",
+      control: "boolean",
+      defaultValue: false,
+    },
+    width: {
+      description: "Width of the radio button group container",
+      control: "text",
+    },
+    fontSize: {
+      description: "Font size for radio button labels",
+      control: "text",
+    },
+    fontWeight: {
+      description: "Font weight for radio button labels",
+      control: "text",
+    },
+    spacing: {
+      description: "Spacing between radio buttons",
+      control: "text",
+    },
+  },
 } satisfies Meta<typeof RadioButtonGroup>;
+
 type Story = StoryObj<typeof meta>;
 
 export default meta;
 
-const Template = ({
-  options,
-  onClick,
-
-  ...args
-}: RadioButtonGroupProps) => {
-  const values = ["first", "second", "third"];
-  const updateOptions = (newOptions: TRadioButtonOption[]) => {
-    const updatedOptions = newOptions.map((item: TRadioButtonOption) => {
-      switch (item.value) {
-        case "radio1":
-          return {
-            value: values[0],
-          };
-        case "radio2":
-          return {
-            value: values[1],
-          };
-        case "radio3":
-          return {
-            value: values[2],
-          };
-        default:
-          return { value: "Default" };
-      }
-    });
-
-    return updatedOptions;
-  };
-
-  const updatedOptions = updateOptions(options);
-
-  return (
-    <RadioButtonGroup
-      {...args}
-      options={updatedOptions}
-      selected={updatedOptions[0].value}
-      onClick={(e: React.ChangeEvent<HTMLInputElement>) => {
-        onClick(e);
-      }}
-    />
-  );
-};
+const baseOptions = [
+  { value: "option1", label: "Option 1" },
+  { value: "option2", label: "Option 2" },
+  { value: "option3", label: "Option 3" },
+];
 
 export const Default: Story = {
-  render: (args) => <Template {...args} />,
   args: {
+    options: baseOptions,
     orientation: "horizontal",
-    width: "100%",
-    isDisabled: false,
-    fontSize: "13px",
-    fontWeight: 400,
+    selected: "option1",
+    onClick: (e: React.ChangeEvent<HTMLInputElement>) =>
+      console.log("Selected:", e.target.value),
     spacing: "15px",
-    name: "group",
-    options: [{ value: "radio1" }, { value: "radio2" }, { value: "radio3" }],
+  },
+};
+
+export const VerticalLayout: Story = {
+  args: {
+    ...Default.args,
+    orientation: "vertical",
+  },
+};
+
+export const WithDisabledOption: Story = {
+  args: {
+    ...Default.args,
+    options: [
+      ...baseOptions,
+      { value: "option4", label: "Disabled Option", disabled: true },
+    ],
+  },
+};
+
+export const AllDisabled: Story = {
+  args: {
+    ...Default.args,
+    isDisabled: true,
+  },
+};
+
+export const WithTextLabel: Story = {
+  args: {
+    ...Default.args,
+    options: [
+      { type: "text", label: "Please select an option:", value: "" },
+      ...baseOptions,
+    ],
+  },
+};
+
+export const CustomStyling: Story = {
+  args: {
+    ...Default.args,
+    fontSize: "16px",
+    fontWeight: "600",
+    spacing: "20px",
+    width: "300px",
   },
 };

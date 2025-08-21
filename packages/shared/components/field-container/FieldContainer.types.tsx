@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,50 +24,54 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { ReactNode, CSSProperties } from "react";
 import { TTooltipPlace } from "../tooltip";
 
-export interface FieldContainerProps {
+export type FieldContainerProps = {
   /** Vertical or horizontal alignment */
   isVertical?: boolean;
   /** Remove default margin property */
   removeMargin?: boolean;
-  /** Accepts class */
+  /** CSS class name for custom styling */
   className?: string;
-  /** Indicates that the field is required to fill */
+  /** Indicates that the field is required */
   isRequired?: boolean;
-  /** Indicates that the field is incorrect */
+  /** Indicates that the field has an error state */
   hasError?: boolean;
-  /** Sets visibility of the field label section */
+  /** Controls visibility of the field label section */
   labelVisible?: boolean;
   /** Field label text or element */
-  labelText?: string | React.ReactNode;
-  /** Icon source */
+  labelText?: string | ReactNode;
+  /** Icon source URL */
   icon?: string;
-  /** Renders the help button inline instead of the separate div */
+  /** Renders the help button inline instead of in a separate div */
   inlineHelpButton?: boolean;
-  /** Children elements */
-  children: React.ReactNode;
-  /** Tooltip content */
-  tooltipContent?: string | React.ReactNode;
-  /** Sets the global position of the tooltip */
+  /** Child elements */
+  children: ReactNode;
+  /** Content to display in the tooltip */
+  tooltipContent?: string | ReactNode;
+  /** Global position of the tooltip */
   place?: TTooltipPlace;
-  /** Tooltip header content (tooltip opened in aside) */
+  /** Tooltip header content (displayed in aside) */
   helpButtonHeaderContent?: string;
-  /** Max label width in horizontal alignment */
+  /** Maximum label width in horizontal alignment (e.g., "110px") */
   maxLabelWidth?: string;
-  /** Error message text */
+  /** Error message to display when hasError is true */
   errorMessage?: string;
-  /** Error text color */
+  /** Custom color for error text */
   errorColor?: string;
-  /** Error text width */
+  /** Width of the error message container (e.g., "293px") */
   errorMessageWidth?: string;
-  /** Accepts id  */
+  /** HTML id attribute */
   id?: string;
-  /** Accepts css style */
-  style?: React.CSSProperties;
-  /** Specifies the offset */
+  /** Inline CSS styles */
+  style?: CSSProperties;
+  /** Right offset in pixels */
   offsetRight?: number;
-  /** Sets the maximum width of the tooltip  */
+  /** Maximum width of the tooltip */
   tooltipMaxWidth?: string;
+  /** Additional CSS class for tooltip */
   tooltipClass?: string;
-}
+
+  dataTestId?: string;
+};

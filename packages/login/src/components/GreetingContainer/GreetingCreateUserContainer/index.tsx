@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable @next/next/no-img-element */
-
 "use client";
 
 import { useContext } from "react";
@@ -44,8 +42,7 @@ import { GreetingContainer } from "./GreetingCreateUserContainer.styled";
 
 export const GreetingCreateUserContainer = ({
   type,
-  firstName,
-  lastName,
+  displayName,
   culture,
   hostName,
 }: GreetingCreateUserContainerProps) => {
@@ -63,7 +60,7 @@ export const GreetingCreateUserContainer = ({
   return (
     <GreetingContainer>
       <img src={logoUrl} className="portal-logo" alt="greeting-logo" />
-      {type === "LinkInvite" && (
+      {type === "LinkInvite" ? (
         <div className="tooltip">
           <Text fontSize="16px">
             {roomData.title ? (
@@ -73,14 +70,20 @@ export const GreetingCreateUserContainer = ({
                 ns="Common"
                 defaults={DEFAULT_ROOM_TEXT}
                 values={{
-                  firstName,
-                  lastName,
+                  displayName,
                   ...(roomData.title
                     ? { roomName: roomData.title }
                     : { spaceAddress: hostName }),
                 }}
                 components={{
-                  1: <Text fontWeight={600} as="strong" fontSize="16px" />,
+                  1: (
+                    <Text
+                      key="component_key"
+                      fontWeight={600}
+                      as="strong"
+                      fontSize="16px"
+                    />
+                  ),
                 }}
               />
             ) : (
@@ -90,21 +93,27 @@ export const GreetingCreateUserContainer = ({
                 ns="Common"
                 defaults={DEFAULT_PORTAL_TEXT}
                 values={{
-                  firstName,
-                  lastName,
+                  displayName,
                   productName: t("Common:ProductName"),
                   ...(roomData.title
                     ? { roomName: roomData.title }
                     : { spaceAddress: hostName }),
                 }}
                 components={{
-                  1: <Text fontWeight={600} as="strong" fontSize="16px" />,
+                  1: (
+                    <Text
+                      key="component_key"
+                      fontWeight={600}
+                      as="strong"
+                      fontSize="16px"
+                    />
+                  ),
                 }}
               />
             )}
           </Text>
         </div>
-      )}
+      ) : null}
     </GreetingContainer>
   );
 };

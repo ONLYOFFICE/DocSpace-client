@@ -1,0 +1,27 @@
+.searchInputBlock {
+  max-height: 32px;
+
+  &.scale {
+    width: 100%;
+  }
+
+  &.isFilled :global(svg path) {
+    fill: var(--search-input-filled-icon-fill) !important;
+  }
+
+  :global {
+    .input-block-icon {
+      border-radius: 0;
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+    }
+
+    .search-input-block > input {
+      font-weight: 600;
+    }
+
+    svg path {
+      fill: var(--search-input-default-icon-fill) !important;
+    }
+  }
+}

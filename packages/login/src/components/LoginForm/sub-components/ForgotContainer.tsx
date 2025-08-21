@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -69,7 +69,7 @@ const ForgotContainer = ({
     <div className="login-forgot-wrapper">
       <div className="login-checkbox-wrapper">
         <div className="remember-wrapper">
-          {!cookieSettingsEnabled && (
+          {!cookieSettingsEnabled ? (
             <Checkbox
               id="login_remember"
               className="login-checkbox"
@@ -86,10 +86,12 @@ const ForgotContainer = ({
                     <Text fontSize="12px">{t("RememberHelper")}</Text>
                   }
                   tooltipMaxWidth={isMobileOnly ? "240px" : "340px"}
+                  dataTestId="remember_help_button"
                 />
               }
+              dataTestId="remember_checkbox"
             />
-          )}
+          ) : null}
         </div>
 
         <Link
@@ -99,18 +101,19 @@ const ForgotContainer = ({
           isHovered={false}
           onClick={onClick}
           id="login_forgot-password-link"
+          dataTestId="forgot_password_link"
         >
           {t("ForgotPassword")}
         </Link>
       </div>
 
-      {isDialogVisible && (
+      {isDialogVisible ? (
         <ForgotPasswordModalDialog
           isVisible={isDialogVisible}
           userEmail={identifier}
           onDialogClose={onDialogClose}
         />
-      )}
+      ) : null}
     </div>
   );
 };

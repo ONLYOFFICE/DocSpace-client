@@ -1,0 +1,244 @@
+{
+  "key_path": "EmptyFolderDescriptionUser",
+  "content": "Files and folders uploaded by admins will appear here.",
+  "content_en_sha1_hash": "0767ecbe60b7c00919c415b7ad8511ac67cac67e",
+  "created_at": "2025-05-19T21:30:55.546Z",
+  "updated_at": "2025-05-24T12:20:09.193Z",
+  "comment": {
+    "text": "This translation key is used for a descriptive text that explains the purpose of an empty folder in a user interface. It is likely to appear as a tooltip or a message in a dialog when a user attempts to upload files into this empty folder. The text provides context for admins who uploaded files, indicating where those files will be stored.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:39:52.937Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/EmptyContainer.helper.ts",
+      "line_number": 102,
+      "context": "const translateDescriptionKey: Record<EmptyScreenTypeEnum, string> = {\n [EmptyScreenTypeEnum.Done]: t(\"EmptyFormFolderDoneDescriptionText\"),\n [EmptyScreenTypeEnum.InProgress]: t(\n \"EmptyFormFolderProgressDescriptionText\",\n ),\n [EmptyScreenTypeEnum.Default]: t(\"EmptyFolderDescriptionUser\"),\n [EmptyScreenTypeEnum.Corporate]: t(\"EmptyFolderDecription\"),\n [EmptyScreenTypeEnum.SubFolderDone]: t(\n \"EmptyFormSubFolderDoneDescriptionText\",\n ),\n [EmptyScreenTypeEnum.SubFolderinProgress]: t(",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Järjestelmänvalvojien lataamat tiedostot ja kansiot ilmestyvät tähän.\" is a bit literal and doesn't quite capture the natural flow of the English sentence. While technically correct, it sounds slightly awkward in Finnish.",
+          "suggestion": "Consider a more natural phrasing like: 'Tähän näkyvät järjestelmänvalvojien lisäämät tiedostot ja kansiot.' or 'Järjestelmänvalvojien lisäämät tiedostot ja kansiot tulevat näkyviin täällä.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Lao translation includes a space before the word 'ຈະ' which breaks the flow. It should be directly attached to the preceding word.",
+          "suggestion": "ໄຟລ໌ ແລະໂຟນເດີທີ່ອັບໂຫລດໂດຍຜູ້ເບິ່ງແຍງລະບົບຈະປາກົດ ຢູ່ບ່ອນນີ້"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Tukaj bodo prikazane datoteke in mape, ki so jih naložili skrbniki.' while grammatically correct, is a bit literal and less natural. A more idiomatic translation would be 'Datoteke in mape, ki jih naložijo skrbniki, se bodo pojavile tukaj.' or 'Tukaj se pojavijo datoteke in mape, ki jih naložijo skrbniki.'",
+          "suggestion": "Datoteke in mape, ki jih naložijo skrbniki, se bodo pojavile tukaj."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses a period (.) at the end of the sentence, which might not be consistent with the existing UI copy. The English version does not have a period.",
+          "suggestion": "Remove the period at the end: 'Датотеке и фолдери отпремљени од стране администратора ће се појавити овде'"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"će se pojaviti ovde\" is a bit literal and sounds unnatural in Serbian. A more natural phrasing would convey that the files will *be* present or *are* visible.",
+          "suggestion": "Datoteke i folderi otpremljeni od strane administratora biće prikazani ovde."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'з’являться' (z'yavlyat'sya) is grammatically correct, but might sound slightly formal in this context. A more natural phrasing might be preferable.",
+          "suggestion": "Consider 'появляться' (poyavlyat'sya) or 'будуть' (budut) + a form of 'appear' for a more conversational tone."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

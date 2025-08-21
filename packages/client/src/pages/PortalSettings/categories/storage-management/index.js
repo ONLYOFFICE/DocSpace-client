@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,12 +30,13 @@ import { useTranslation } from "react-i18next";
 import moment from "moment";
 
 import { SettingsStorageManagementSkeleton } from "@docspace/shared/skeletons/settings";
-import { setDocumentTitle } from "@docspace/client/src/helpers/utils";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 import QuotasComponent from "./Quotas";
 import StatisticsComponent from "./Statistics";
 import DiskSpaceUsedComponent from "./StorageSpaceUsed";
 import MainInfoComponent from "./MainInfo";
+import RegionComponent from "./Region";
 import { StyledBody } from "./StyledComponent";
 import StyledSettingsSeparator from "../../StyledSettingsSeparator";
 
@@ -44,6 +45,7 @@ const StorageManagement = ({
   language,
   init,
   clearIntervalCheckRecalculate,
+  standalone,
 }) => {
   useEffect(() => {
     moment.locale(language);
@@ -65,6 +67,7 @@ const StorageManagement = ({
   return (
     <StyledBody>
       <MainInfoComponent />
+      {!standalone ? <RegionComponent /> : null}
       <StyledSettingsSeparator />
       <DiskSpaceUsedComponent />
       <StyledSettingsSeparator />
@@ -75,13 +78,17 @@ const StorageManagement = ({
   );
 };
 
-export const Component = inject(({ authStore, storageManagement }) => {
-  const { language } = authStore;
-  const { init, isInit, clearIntervalCheckRecalculate } = storageManagement;
-  return {
-    isInit,
-    language,
-    init,
-    clearIntervalCheckRecalculate,
-  };
-})(observer(StorageManagement));
+export const Component = inject(
+  ({ authStore, storageManagement, settingsStore }) => {
+    const { language } = authStore;
+    const { init, isInit, clearIntervalCheckRecalculate } = storageManagement;
+    const { standalone } = settingsStore;
+    return {
+      isInit,
+      language,
+      init,
+      clearIntervalCheckRecalculate,
+      standalone,
+    };
+  },
+)(observer(StorageManagement));

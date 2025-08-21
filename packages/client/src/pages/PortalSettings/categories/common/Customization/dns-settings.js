@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,7 +32,7 @@ import { TextInput } from "@docspace/shared/components/text-input";
 import { Button } from "@docspace/shared/components/button";
 import { inject, observer } from "mobx-react";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { isMobileDevice } from "@docspace/shared/utils";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
@@ -54,6 +54,7 @@ const toggleStyle = {
 
 const textInputProps = {
   id: "textInputContainerDNSSettings",
+  testId: "customization_dns_settings_text_input",
   className: "dns-textarea",
   scale: true,
   tabIndex: 8,
@@ -62,6 +63,7 @@ const textInputProps = {
 const buttonProps = {
   tabIndex: 9,
   className: "save-cancel-buttons send-request-button",
+  testId: "customization_dns_settings_button",
   primary: true,
 };
 let timerId = null;
@@ -86,6 +88,7 @@ const DNSSettingsComponent = (props) => {
     isDefaultDNS,
     dnsSettingsUrl,
     currentDeviceType,
+    requestSupportUrl,
   } = props;
 
   const [hasScroll, setHasScroll] = useState(false);
@@ -143,7 +146,7 @@ const DNSSettingsComponent = (props) => {
   }, [isLoadedSetting]);
 
   const onSendRequest = () => {
-    window.open("https://helpdesk.onlyoffice.com/hc/en-us/requests/new");
+    window.open(requestSupportUrl);
   };
 
   const onSaveSettings = async () => {
@@ -157,7 +160,7 @@ const DNSSettingsComponent = (props) => {
       }, [200]);
 
       await saveDNSSettings();
-      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (e) {
       setIsError(true);
       toastr.error(e);
@@ -196,6 +199,7 @@ const DNSSettingsComponent = (props) => {
         <>
           <ToggleButton
             className="settings-dns_toggle-button"
+            dataTestId="customization_dns_settings_toggle_button"
             label={t("CustomDomainName")}
             onChange={onClickToggle}
             isChecked={enable ?? false}
@@ -210,17 +214,18 @@ const DNSSettingsComponent = (props) => {
             hasError={isError}
           />
           <div style={{ marginTop: "5px" }}>
-            {errorText &&
-              errorText.map((err) => (
-                <Text
-                  className="dns-error-text"
-                  key={err}
-                  fontSize="12px"
-                  fontWeight="400"
-                >
-                  {err}
-                </Text>
-              ))}
+            {errorText
+              ? errorText.map((err) => (
+                  <Text
+                    className="dns-error-text"
+                    key={err}
+                    fontSize="12px"
+                    fontWeight="400"
+                  >
+                    {err}
+                  </Text>
+                ))
+              : null}
           </div>
           <div style={{ marginTop: "3px" }}>
             <Text
@@ -241,7 +246,7 @@ const DNSSettingsComponent = (props) => {
           <FieldContainer
             id="fieldContainerDNSSettings"
             className="field-container-width settings_unavailable"
-            labelText={`${t("YourCurrentDomain")}`}
+            labelText={`${t("Common:YourCurrentDomain")}`}
             isVertical
           >
             <TextInput
@@ -282,11 +287,12 @@ const DNSSettingsComponent = (props) => {
       className="category-item-wrapper"
       isSettingPaid={isSettingPaid}
       standalone={standalone}
+      withoutExternalLink={!dnsSettingsUrl}
     >
-      {isCustomizationView && !isMobileView && (
+      {isCustomizationView && !isMobileView ? (
         <div className="category-item-heading">
           <div className="category-item-title">{t("DNSSettings")}</div>
-          {!isSettingPaid && !standalone && (
+          {!isSettingPaid && !standalone ? (
             <Badge
               className="paid-badge"
               fontWeight="700"
@@ -298,22 +304,25 @@ const DNSSettingsComponent = (props) => {
               label={t("Common:Paid")}
               isPaidBadge
             />
-          )}
+          ) : null}
         </div>
-      )}
+      ) : null}
       <div className="category-item-description">
         <Text fontSize="13px" fontWeight={400}>
           {t("DNSSettingsDescription")}
         </Text>
-        <Link
-          className="link-learn-more"
-          color={currentColorScheme.main?.accent}
-          target="_blank"
-          isHovered
-          href={dnsSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {dnsSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            color={currentColorScheme.main?.accent}
+            dataTestId="customization_dns_settings_learn_more"
+            target="_blank"
+            isHovered
+            href={dnsSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </div>
       {settingsBlock}
       <div className="send-request-container">{buttonContainer}</div>
@@ -324,11 +333,11 @@ const DNSSettingsComponent = (props) => {
 export const DNSSettings = inject(
   ({ settingsStore, common, currentQuotaStore }) => {
     const {
-      helpLink,
       currentColorScheme,
       standalone,
       dnsSettingsUrl,
       currentDeviceType,
+      requestSupportUrl,
     } = settingsStore;
     const {
       isLoaded,
@@ -353,7 +362,6 @@ export const DNSSettings = inject(
       setDNSName,
       isLoaded,
       setIsLoadedDNSSettings,
-      helpLink,
       initSettings,
       setIsLoaded,
       isSettingPaid: isCustomizationAvailable,
@@ -363,6 +371,7 @@ export const DNSSettings = inject(
       saveDNSSettings,
       dnsSettingsUrl,
       currentDeviceType,
+      requestSupportUrl,
     };
   },
 )(

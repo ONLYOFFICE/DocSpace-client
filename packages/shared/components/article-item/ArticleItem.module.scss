@@ -1,0 +1,422 @@
+// (c) Copyright Ascensio System SIA 2009-2025
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+@use "../../styles/variables";
+@use "../../styles/variables/colors";
+@use "../../styles/mixins";
+
+:global(.light) {
+  :local {
+    .articleItemText.active {
+      color: var(--color-scheme-main-accent);
+
+      &:hover {
+        color: var(--color-scheme-main-accent);
+      }
+    }
+
+    .articleItemImg.active {
+      svg {
+        path {
+          fill: var(--color-scheme-main-accent) !important;
+        }
+        circle {
+          fill: var(--color-scheme-main-accent) !important;
+        }
+      }
+
+      &:hover {
+        svg {
+          path {
+            fill: var(--color-scheme-main-accent) !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+.articleItemHeaderContainer {
+  width: 100%;
+  height: 24px;
+  padding: 7px 12px 4px;
+  box-sizing: border-box;
+  margin-top: 8px;
+
+  &.firstHeader {
+    margin-top: 0;
+  }
+
+  .articleItemHeaderText {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 11px;
+    line-height: 14px;
+    color: var(--article-item-header-color);
+  }
+
+  @include mixins.tablet-and-below {
+    padding: 4px 12px 19px;
+    margin-top: 16px;
+
+    &.showText {
+      padding: 0px 9px 12px;
+    }
+
+    &.firstHeader {
+      margin-top: 0;
+    }
+
+    &:not(.showText) {
+      display: flex;
+      justify-content: center;
+
+      .articleItemHeaderText {
+        width: 20px;
+        line-height: 1px;
+        height: 1px;
+        background: var(--article-item-header-bg-color);
+      }
+    }
+  }
+}
+
+.articleItemBadgeWrapper {
+  z-index: 3;
+  margin-inline-start: 8px;
+  margin-inline-end: -2px;
+
+  div {
+    display: flex;
+    align-items: center;
+  }
+
+  @include mixins.tablet-and-below {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+    margin-inline-end: -16px;
+  }
+
+  &:not(.showText) {
+    position: absolute;
+
+    top: -4px;
+    inset-inline-end: -4px;
+    border-radius: 1000px;
+
+    background-color: var(--article-item-badge-without-text-bg-color);
+
+    width: 8px !important;
+    min-width: 8px !important;
+    height: 8px !important;
+    min-height: 8px !important;
+
+    margin: 0 !important;
+  }
+
+  .articleItemBadge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 16px;
+    height: 16px;
+    min-height: 16px;
+
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      height: 16px;
+
+      p {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        line-height: 16px;
+      }
+    }
+  }
+}
+
+.articleItemInitialText {
+  position: absolute;
+  top: 2px;
+  inset-inline-start: 0;
+  text-align: center;
+  width: 16px;
+  line-height: 11px;
+  max-height: 11px;
+  color: var(--article-item-initial-text-color);
+  font-size: 11px;
+  font-weight: bold;
+  pointer-events: none;
+
+  @include mixins.tablet-and-below {
+    width: 20px;
+    line-height: 19px;
+    font-size: 11px;
+  }
+}
+
+.articleItemText {
+  width: 100%;
+
+  margin-inline-start: 8px !important;
+
+  line-height: 20px;
+
+  z-index: 1;
+
+  align-items: center;
+
+  pointer-events: none;
+
+  color: var(--article-item-text-color);
+
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &.active {
+    color: var(--article-item-text-active-color);
+  }
+
+  @include mixins.tablet-and-below {
+    margin-inline-start: 12px !important;
+    line-height: 20px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+}
+
+.articleItemImg {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 1;
+
+  pointer-events: none;
+
+  height: 16px;
+
+  .icon > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nodeIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+
+    @include mixins.tablet-and-below {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+    path,
+    circle {
+      fill: var(--article-item-img-svg-fill);
+    }
+  }
+
+  &.active {
+    svg {
+      path,
+      circle {
+        fill: var(--article-item-img-svg-active-fill);
+      }
+    }
+  }
+
+  @include mixins.tablet-and-below {
+    height: 20px;
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+.articleItemSibling {
+  position: absolute;
+  top: 0;
+  inset-inline-start: 0;
+
+  width: 100%;
+  height: 100%;
+
+  border-radius: 3px;
+
+  min-height: 36px;
+  max-height: 36px;
+
+  @include mixins.tablet-and-below {
+    min-height: 44px;
+    max-height: 44px;
+  }
+
+  &.active {
+    background-color: var(--article-item-sibling-active-bg-color);
+
+    // Animated progress background when animating
+    &.animatedProgress {
+      height: 100%;
+      width: 10%;
+
+      animation: progressWidth 2s ease-out forwards;
+    }
+
+    &.animatedFinish {
+      width: var(--end-width, 90%);
+      animation: progressWidthFinish 0.4s ease-out forwards;
+    }
+
+    // Show transparent background when ready for animation
+    &.animationReady {
+      background-color: transparent;
+    }
+  }
+
+  &:not(.mobileDevice) {
+    &:hover:not(.animationReady):not(.animatedProgress) {
+      background-color: var(--article-item-sibling-hover-bg-color);
+    }
+  }
+
+  &.dragging {
+    background: var(--article-item-dnd-bg-color) !important;
+
+    &:hover:not(.animationReady):not(.animatedProgress) {
+      background: var(--article-item-dnd-hover-bg-color) !important;
+    }
+  }
+
+  &.dragActive {
+    background: var(--article-item-dnd-hover-bg-color) !important;
+  }
+}
+
+.articleItemContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  min-width: 100%;
+  min-height: 36px;
+  max-height: 36px;
+
+  position: relative;
+  box-sizing: border-box;
+
+  cursor: pointer;
+
+  -webkit-tap-highlight-color: variables.$tap-highlight;
+
+  &.showText {
+    justify-content: space-between;
+    padding: 0 12px;
+  }
+
+  &.endOfBlock {
+    margin-bottom: 16px;
+  }
+
+  @include mixins.tablet-and-below {
+    min-height: 44px;
+    max-height: 44px;
+
+    &.showText {
+      padding: 0 12px;
+    }
+    &.endOfBlock {
+      margin-bottom: 24px;
+    }
+  }
+
+  .articleItemIcon {
+    display: none;
+  }
+
+  .articleItemIcon:target {
+    display: flex;
+  }
+
+  .articleItemIcon {
+    svg {
+      path {
+        fill: var(--article-item-trash-icon-fill);
+      }
+    }
+  }
+
+  &:hover {
+    .articleItemIcon {
+      display: flex;
+    }
+  }
+}
+
+.storyCatalogWrapper {
+  background-color: var(--story-wrapper-bg-color);
+  padding: 15px;
+}
+
+@keyframes progressWidth {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 90%;
+  }
+}
+
+@keyframes progressWidthFinish {
+  0% {
+    width: var(--end-width, 90%);
+  }
+  100% {
+    width: 100%;
+  }
+}

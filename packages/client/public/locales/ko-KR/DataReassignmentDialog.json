@@ -4,7 +4,6 @@
   "DataReassignment": "데이터 재할당",
   "DeleteProfileIsFinished": "재할당 완료 시 프로필 삭제",
   "DescriptionDataReassignment": "사용자가 생성한 방과 사용자의 방에 보관된 문서를 전송해 드립니다.",
-  "InProgress": "진행 중",
   "Interrupted": "중단되었습니다, 일부 데이터를 전송할 수 없습니다",
   "MoreAboutDataTransfer": "데이터 전송에 대해 더 보기",
   "NewDataOwner": "새로운 데이터 소유자",
@@ -14,6 +13,7 @@
   "ReassignData": "데이터 재할당",
   "ReassigningDataToAnother": "<0>{{fromUser}}</0> 사용자에서 <1>{{toUser}}</1> 사용자로의 데이터 재할당 프로세스가 시작되었습니다. 상당한 시간이 소요될 수 있으니 주의하시기 바랍니다.",
   "ReassigningDataToItself": "<0>{{fromUser}}</0> 사용자에서 <1>{{toUser}}</1> 사용자, <2>{{you}}</2>로의 데이터 재할당 프로세스가 시작되었습니다. 상당한 시간이 소요될 수 있으니 주의하시기 바랍니다.",
+  "RoomsOnlyReassignment": "연락처가 생성한 룸이 이전될 예정입니다.",
   "StartTransferAgain": "전송 다시 시작",
   "UserToWhomTheDataWillBeTransferred": "데이터를 이전 받을 사용자"
 }

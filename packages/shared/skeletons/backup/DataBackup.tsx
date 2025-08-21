@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,7 @@
 import React from "react";
 import { RectangleSkeleton } from "../rectangle";
 
-import { StyledDataBackup } from "./Backup.styled";
+import styles from "./Backup.module.scss";
 import type { BackupLoaderProps } from "./Backup.types";
 
 const DataBackupLoader = ({
@@ -48,7 +48,11 @@ const DataBackupLoader = ({
   } = rest;
 
   return (
-    <StyledDataBackup>
+    <div
+      className={styles.dataBackup}
+      data-testid="data-backup-loader"
+      style={style}
+    >
       <div className="data-backup-loader_main">
         <RectangleSkeleton
           className="data-backup-loader_title"
@@ -195,7 +199,7 @@ const DataBackupLoader = ({
           animate={animate}
         />
       </div>
-    </StyledDataBackup>
+    </div>
   );
 };
 

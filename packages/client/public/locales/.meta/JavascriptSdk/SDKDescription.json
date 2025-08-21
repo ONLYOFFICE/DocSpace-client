@@ -1,0 +1,686 @@
+{
+  "key_path": "SDKDescription",
+  "content": "JavaScript SDK allows you to embed the whole {{productName}} or its part into your web interface. Select ready-to-use modes with the pre-defined parameters or a custom one to configure it manually. To learn more about SDK, refer to the ",
+  "content_en_sha1_hash": "a1157dfcd63f4800fb7fd52598f037f5ecf88505",
+  "created_at": "2025-05-19T21:30:54.647Z",
+  "updated_at": "2025-05-24T08:57:36.248Z",
+  "comment": {
+    "text": "This translation key is used to describe the JavaScript SDK, explaining its functionality and purpose in embedding {{productName}} into a web interface. It appears on the Portal Settings page under developer tools, likely within a button or link that guides users to learn more about the SDK.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:24.078Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
+      "line_number": 160,
+      "context": "return (\n <SDKContainer>\n <CategoryDescription theme={theme}>\n <Text className=\"sdk-description\">\n {t(\"SDKDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <Link\n color={currentColorScheme?.main?.accent}\n fontSize=\"13px\"\n fontWeight=\"400\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"باستخدام (مجموعة أدوات تطوير البرمجيات) بلغة جافا سكربت\" is an overly literal and awkward translation of \"JavaScript SDK.\" It should be more concise and natural, such as \"تتيح لك JavaScript SDK\".",
+          "suggestion": "تتيح لك JavaScript SDK"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"embed the whole {{productName}} or its part\" as \"تضمين غرفة أو مجلد من اونلي يو اوفيس\" is inaccurate. It focuses on rooms and folders, which is not necessarily the intended meaning. It needs to reflect embedding 'the whole product or part of it'.",
+          "suggestion": "تضمين منتج OnlyU أو جزء منه"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"كإطار داخلي\" translates to 'as an internal frame'. This is not the typical or clear way to describe embedding an SDK. A better translation could be \"لتضمينه\" or \"لدمجه\".",
+          "suggestion": "لتضمينه"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"هنا ، يمكنك العثور على إعدادات لإنشاء نموذج إطار داخلي وتكوين سياسة أمان المحتوى\" is convoluted and doesn't accurately convey the meaning of the original English. It doesn't directly relate to the previous sentence.",
+          "suggestion": "يمكنك الاختيار من بين النماذج الجاهزة أو تكوينه بشكل يدوي."
+        },
+        {
+          "type": "missing_content",
+          "description": "The final phrase \"To learn more about SDK, refer to the\" has been truncated. The translated text ends abruptly.",
+          "suggestion": "لمزيد من المعلومات حول SDK ، يرجى الرجوع إلى"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"-dən otaq və ya qovluğu\" is awkward and doesn't accurately convey the meaning of 'embed the whole {{productName}} or its part'. It literally translates to something like '-from room or cavity'.",
+          "suggestion": "Consider a translation that conveys embedding, like \"-ı və ya onun hissəsini\" (its whole or its part)."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"burada nümunə iframe yaratmaq və CSP-ni konfiqurasiya etmək üçün parametrləri tapa bilərsiniz\" doesn't accurately reflect the original sentence.  The original refers to learning more about the SDK; this refers to creating an iframe and configuring CSP.",
+          "suggestion": "Replace this section with something like \"Daha çox məlumat üçün, SDK haqqında öyrənin\" (To learn more, learn about the SDK)."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation contains direct mentions of 'CSP' without any context or explanation for the Azerbaijani audience. This might be confusing.",
+          "suggestion": "If necessary, briefly explain CSP, or rephrase the sentence to avoid the term entirely."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation deviates from the original meaning. The English text refers to embedding the product or its part, while the Bulgarian translation specifically mentions embedding as an iframe. This limits the scope of the SDK's functionality.",
+          "suggestion": "Използвайки JavaScript SDK, можете да интегрирате {{productName}} или негова част във вашия уеб интерфейс. Изберете предварително зададени режими с параметри или персонализиран режим за ръчна конфигурация."
+        },
+        {
+          "type": "missing_content",
+          "description": "The English text mentions 'Select ready-to-use modes with the pre-defined parameters or a custom one to configure it manually'. This part is missing in the Bulgarian translation.",
+          "suggestion": "Използвайки JavaScript SDK, можете да интегрирате {{productName}} или негова част във вашия уеб интерфейс. Изберете готови за употреба режими с предварително зададени параметри или персонализиран режим за ръчна конфигурация. За повече информация за SDK, моля, вижте"
+        },
+        {
+          "type": "formatting",
+          "description": "The original text contains a closing quote mark at the end of the sentence. It's missing in the Bulgarian translation.",
+          "suggestion": "Използвайки JavaScript SDK, можете да интегрирате {{productName}} или негова част във вашия уеб интерфейс. Изберете готови за употреба режими с предварително зададени параметри или персонализиран режим за ръчна конфигурация. За повече информация за SDK, моля, вижте."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation doesn't accurately reflect the original meaning. The English text refers to embedding the product or part of it into a web interface. The Czech translation specifically mentions embedding as an iframe and introducing CSP settings which are not mentioned in the original.  The Czech also uses a phrasing that implies a 'sample iframe' which is not present in the source.",
+          "suggestion": "Pomocí JavaScript SDK můžete vložit celou {{productName}} nebo její část do svého webového rozhraní. Vyberte si předdefinované režimy s přednastavenými parametry nebo si ho nakonfigurujte ručně."
+        },
+        {
+          "type": "missing_content",
+          "description": "The original text mentions the option for a custom configuration, which is omitted from the Czech translation.",
+          "suggestion": "Pomocí JavaScript SDK můžete vložit celou {{productName}} nebo její část do svého webového rozhraní. Vyberte si předdefinované režimy s přednastavenými parametry nebo ho nakonfigurujte ručně."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Mit Hilfe des JavaScript SDK\" (With the help of the Javascript SDK) doesn't quite capture the 'allows you to embed' meaning. It sounds more like a tool to be used rather than a capability provided.",
+          "suggestion": "JavaScript SDK ermöglicht es Ihnen, einen Raum oder einen Ordner aus {{productName}} als iframe in Ihr Webinterface einzubetten."
+        },
+        {
+          "type": "missing_content",
+          "description": "The English text mentions 'Select ready-to-use modes with the pre-defined parameters or a custom one to configure it manually.' This information is missing in the German translation.",
+          "suggestion": "JavaScript SDK ermöglicht es Ihnen, einen Raum oder einen Ordner aus {{productName}} als iframe in Ihr Webinterface einzubetten. Wählen Sie vordefinierte Modi mit vorgegebenen Parametern oder konfigurieren Sie diese manuell."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Hier finden Sie Einstellungen für die Erstellung eines iframe-Beispiels und die Konfiguration von CSP\" is too specific. The English text implies a general overview, not immediately CSP configuration.",
+          "suggestion": "Weitere Informationen zur Verwendung des SDK finden Sie in der"
+        },
+        {
+          "type": "missing_content",
+          "description": "The English text includes \"To learn more about SDK, refer to the...\"  This call to action is missing in the German translation.",
+          "suggestion": "Weitere Informationen zur Verwendung des SDK finden Sie in der"
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek translation \"Χρησιμοποιώντας το JavaScript SDK, μπορείτε να ενσωματώσετε ένα δωμάτιο ή έναν φάκελο από το {{productName}} του στη διεπαφή ιστού σας ως iframe\" doesn't accurately reflect the original English content. The English mentions embedding the whole product or part of it. The Greek specifically refers to a room or folder as an iframe, which is a too specific interpretation.",
+          "suggestion": "Χρησιμοποιώντας το JavaScript SDK, μπορείτε να ενσωματώσετε ολόκληρο το {{productName}} ή μέρος αυτού στη διεπαφή ιστού σας."
+        },
+        {
+          "type": "missing_content",
+          "description": "The phrase \"Select ready-to-use modes with the pre-defined parameters or a custom one to configure it manually\" is missing from the Greek translation.",
+          "suggestion": "Προσθέστε κάτι σαν: Μπορείτε να επιλέξετε έτοιμους τρόπους λειτουργίας με προκαθορισμένες παραμέτρους ή να δημιουργήσετε μια προσαρμοσμένη ρύθμιση για χειροκίνητη διαμόρφωση."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The closing phrase \"To learn more about SDK, refer to the \" is not accurately translated.  \"Για να χρησιμοποιήσετε το πλήρες SDK, ανατρέξτε στη\" translates to \"To use the full SDK, refer to...\" which is not exactly the original meaning.",
+          "suggestion": "Για περισσότερες πληροφορίες σχετικά με το SDK, ανατρέξτε στη..."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Usando el SDK de JavaScript, puede insertar una sala o una carpeta de {{productName}} en su interfaz web como un iframe\" doesn't accurately reflect the English \"JavaScript SDK allows you to embed the whole {{productName}} or its part into your web interface.\" The original implies broader embedding capabilities, not just iframes.",
+          "suggestion": "Usando el SDK de JavaScript, puede integrar {{productName}} o una parte de él en su interfaz web."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Aquí puede encontrar los ajustes para crear un iframe de ejemplo y configurar CSP\" is not directly related to the English content about SDK selection and configuration.  It introduces a new topic not present in the original.",
+          "suggestion": "Seleccione los modos predefinidos con los parámetros configurados o configure el SDK de forma manual."
+        },
+        {
+          "type": "missing_content",
+          "description": "The original content mentions 'To learn more about SDK, refer to the ...'. This part is missing from the Spanish translation.",
+          "suggestion": "Para obtener más información sobre el SDK, consulte el ..."
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"upottaa huoneen tai kansion...iframe:ksi\" doesn't accurately reflect the original meaning of 'embed the whole {{productName}} or its part into your web interface'. 'Huoneen tai kansion' implies a room or folder, while the original refers to the product itself or parts of it.",
+          "suggestion": "Käyttäen JavaScript SDK:ta voit upottaa {{productName}}-tuotteen tai sen osan omaan käyttöliittymääsi."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Tästä löydät asetukset iframe:n mallin luomiseen ja CSP:n määrittämiseen\" is too technical and doesn't align with the original text which discusses pre-defined parameters and custom configuration.  It introduces concepts (CSP) not present in the English content.",
+          "suggestion": "Valitse valmiita toimintoja esivalituilla asetuksilla tai määritä ne manuaalisesti."
+        },
+        {
+          "type": "missing_content",
+          "description": "The original text refers to the option of choosing pre-defined or custom modes.  This is not reflected in the current translation.",
+          "suggestion": "Valitse valmiita toimintoja esivalituilla asetuksilla tai määritä ne manuaalisesti."
+        },
+        {
+          "type": "missing_content",
+          "description": "The end of the original sentence \"To learn more about SDK, refer to the \" is missing in the translation.  A reference to further documentation is necessary.",
+          "suggestion": "Lisätietoja SDK:sta löydät dokumentaatiosta."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'embed the whole {{productName}} or its part' is not accurately translated. The French translation 'intégrer une salle ou un dossier de {{productName}} dans votre interface web sous la forme d'une iframe' implies integration as an iframe, which is a specific implementation, not a general embedding.",
+          "suggestion": "Consider a more general phrasing for 'embed the whole {{productName}} or its part', such as 'intégrer {{productName}} dans son ensemble ou une partie de celui-ci' to reflect the original meaning."
+        },
+        {
+          "type": "missing_content",
+          "description": "The original English content mentions 'Select ready-to-use modes with the pre-defined parameters or a custom one to configure it manually.' This part is missing in the French translation.",
+          "suggestion": "Add the equivalent information about selectable modes and manual configuration to the French translation.  For example: 'Choisissez parmi des modes prédéfinis avec des paramètres configurés ou créez une configuration personnalisée.'"
+        },
+        {
+          "type": "formatting",
+          "description": "The English content ends with 'To learn more about SDK, refer to the '. The French translation abruptly ends with 'Pour utiliser le SDK complet, veuillez vous référer à'. It lacks a reference to something.",
+          "suggestion": "The sentence should be concluded with a clear reference, such as a document, link, or guide, mirroring the English version."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation uses the term \"սենյակ կամ թղթապանակ տեղադրել\" which translates to 'install a room or folder'. This is a misunderstanding of the English 'embed the whole {{productName}} or its part'. A more accurate translation would convey the idea of integration or inclusion, not installation.",
+          "suggestion": "Consider revising to something like:  «Օգտագործելով JavaScript SDK-ն՝ դուք կարող եք {{productName}}-ի մասնաշենք կամ դրա մասը ինտեգրել ձեր վեբ ինտերֆեյսի մեջ» (Using the JavaScript SDK, you can integrate a submodule or part of {{productName}} into your web interface)."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"օրինակելի iframe ստեղծելու և CSP-ի կազմաձևման համար\" translates to 'for creating example iframes and configuring CSP'. It's unclear what 'example iframes' refers to in this context. It seems like it's trying to convey options, but the wording is awkward.",
+          "suggestion": "Clarify the intention. Possible alternatives include: «որպես փոփոխությունների հավաքածու, կամ դիտարկելու համար CSP-ի կազմակերպմանը» (as a set of changes, or to consider CSP organization)."
+        },
+        {
+          "type": "missing_content",
+          "description": "The English content mentions 'Select ready-to-use modes with the pre-defined parameters or a custom one to configure it manually.' This information is completely missing in the Armenian translation.",
+          "suggestion": "Add a sentence in the Armenian translation describing the availability of pre-defined parameters or a custom mode for configuration. For example: «Դուք կարող եք ընտրել արդյունաբերական ծառայությունների մոդերը և դրանց նախապես սահմանված բնութագրերը կամ ստեղծել ձեր սեփական հատուկ ծառայության մոդը» (You can select ready-to-use modes with predefined parameters or create your own custom service mode)."
+        },
+        {
+          "type": "formatting",
+          "description": "The Armenian translation lacks smooth transition from the first sentence to the latter parts. It feels abrupt.",
+          "suggestion": "Consider adding a connecting phrase, such as \"Ի դեպ\" or \"Մեկ այլ տարբերակ է\" to smoothly connect sentences."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Utilizzando JavaScript SDK, puoi incorporare una stanza o una cartella da {{productName}} nella tua interfaccia web come iframe\" doesn't accurately reflect the original meaning. The English describes embedding the whole product or part of it, while the Italian focuses on rooms or folders as iframes. The English implies more flexibility.",
+          "suggestion": "Utilizzando JavaScript SDK, puoi integrare l'intera {{productName}} o una sua parte nella tua interfaccia web."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Qui puoi trovare le impostazioni per la creazione di un iframe di esempio e la configurazione di CSP\" appears to introduce content not present in the original English text (CSP and example iframe settings).",
+          "suggestion": "Riferimenti sull'utilizzo dell'SDK completo sono disponibili in seguito."
+        },
+        {
+          "type": "missing_content",
+          "description": "The final part of the English sentence \"To learn more about SDK, refer to the \" is missing from the Italian translation.",
+          "suggestion": "Utilizzando JavaScript SDK, puoi integrare l'intera {{productName}} o una sua parte nella tua interfaccia web. Per ulteriori informazioni sull'SDK, fai riferimento a..."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ルームやフォルダをiframeとして\" translates to \"rooms or folders as iframes,\" which is not a direct or accurate representation of the English content, which refers to embedding the whole product or part of it. The focus is on embedding functionality rather than just rooms or folders.",
+          "suggestion": "JavaScript SDKを使用すると、{{productName}}全体またはその一部をWebインターフェイスに埋め込むことができます。"
+        },
+        {
+          "type": "missing_content",
+          "description": "The original English mentions \"ready-to-use modes with the pre-defined parameters or a custom one to configure it manually.\" This information is missing in the Japanese translation.",
+          "suggestion": "JavaScript SDKを使用すると、{{productName}}全体またはその一部をWebインターフェイスに埋め込むことができます。定義済みのパラメータを使用した既製のモード、または手動で構成するためのカスタムモードを選択できます。"
+        },
+        {
+          "type": "missing_content",
+          "description": "The last part of the original English content, \"To learn more about SDK, refer to the...\", is missing. There is no reference to further documentation.",
+          "suggestion": "JavaScript SDKの詳細については、を参照してください。"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation \"방 또는 폴더를 웹 인터페이스에 iframe으로 임베드할 수 있습니다\" is not an accurate translation of \"embed the whole {{productName}} or its part\". The Korean phrase implies embedding rooms or folders within an iframe, which is a specific interpretation, while the English text is broader.",
+          "suggestion": "JavaScript SDK를 사용하면 {{productName}} 전체 또는 일부를 웹 인터페이스에 임베드할 수 있습니다."
+        },
+        {
+          "type": "missing_content",
+          "description": "The part of the English content mentioning pre-defined parameters or custom configuration is missing in the Korean translation.",
+          "suggestion": "JavaScript SDK를 사용하면 {{productName}} 전체 또는 일부를 웹 인터페이스에 임베드할 수 있습니다. 미리 정의된 매개변수 또는 사용자 정의 설정을 통해 구성할 수 있습니다."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"여기에서 샘플 iframe 생성 및 CSP 구성을 위한 설정을 찾을 수 있습니다\" is not a direct translation and introduces content not present in the original English.",
+          "suggestion": "SDK에 대해 자세히 알아보려면 (링크: API 라이브러리)를 참조하세요."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The sentence \"컴플리트 SDK를 사용하려면 (링크: API 라이브러리)를 참조하세요\" is a somewhat awkward translation and doesn't naturally flow. Also, the original English doesn't mention a link.",
+          "suggestion": "SDK에 대해 자세히 알아보려면 (링크: API 라이브러리)를 참조하세요."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"embed the whole {{productName}} or its part\" as \"ຝັງຫ້ອງຫຼືໂຟນເດີຈາກ {{productName}} ເຂົ້າໄປໃນສ່ວນຕິດຕໍ່ເວັບຂອງທ່ານເປັນ iframe\" is not accurate.  'ຫ້ອງຫຼືໂຟນເດີ' (room or phone) doesn't accurately convey the meaning of parts of a product. It should be something more general like 'ສິ່ງສ່ວນນ້ອຍ' (small part) or 'ສ່ວນປະກອບ' (component). The mention of iframe is also premature; the SDK can be used beyond just embedding in iframes.",
+          "suggestion": "ການນໍາໃຊ້ JavaScript SDK, ທ່ານສາມາດຝັງສ່ວນປະກອບຈາກ {{productName}} ຫຼືສ່ວນໜຶ່ງຂອງມັນເຂົ້າໄປໃນສ່ວນຕິດຕໍ່ເວັບຂອງທ່ານ"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ທີ່ນີ້, ທ່ານສາມາດຊອກຫາການຕັ້ງຄ່າສໍາລັບການສ້າງ iframe ຕົວຢ່າງແລະການຕັ້ງຄ່າ CSP\" doesn't align with the original sentence which mentions selecting modes and configuring manually. This sentence appears to introduce iframe and CSP which are not necessarily core concepts of the SDK itself.",
+          "suggestion": "ທ່ານສາມາດເລືອກໂຫມດທີ່ກຳນົດໄວ້ແລ້ວດ້ວຍພາຣາມິເຕີທີ່ກຳນົດໄວ້ ຫຼື ໂຫມດຕາມຄວາມຕ້ອງການເພື່ອຕັ້ງຄ່າດ້ວຍຕົວເອງ"
+        },
+        {
+          "type": "missing_content",
+          "description": "The original content mentions 'Select ready-to-use modes with the pre-defined parameters or a custom one to configure it manually'. This information is missing in the Lao translation.",
+          "suggestion": "ທ່ານສາມາດເລືອກໂຫມດທີ່ກຳນົດໄວ້ແລ້ວດ້ວຍພາຣາມິເຕີທີ່ກຳນົດໄວ້ ຫຼື ໂຫມດຕາມຄວາມຕ້ອງການເພື່ອຕັ້ງຄ່າດ້ວຍຕົວເອງ"
+        },
+        {
+          "type": "missing_content",
+          "description": "The phrase \"To learn more about SDK, refer to the \" is missing from the Lao translation.",
+          "suggestion": "ເພື່ອກໍານົດຂໍ້ມູນເພີ່ມເຕີມກ່ຽວກັບ SDK, ກະລຸນາເບິ່ງທີ່ "
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"iegult telpu vai mapi\" (embed space or map) doesn't accurately convey the meaning of \"embed the whole {{productName}} or its part\". It suggests a limited scope of integration. The English implies embedding either the entire product or a portion of it, not just 'space' or 'map'.",
+          "suggestion": "Izmantojot JavaScript SDK, varat iegult {{productName}} pilnu versiju vai tās daļu savā tīmekļa saskarnē."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Šeit varat atrast iestatījumus IFRAME parauga izveidei un CSP konfigurēšanai\" is not a direct or logical translation of the English. The English mentions pre-defined parameters and manual configuration, but the Latvian focuses on IFRAME creation and CSP configuration, which are not directly mentioned in the original.",
+          "suggestion": "Jūs varat izvēlēties iepriekš definētus parametrus vai konfigurēt SDK manuāli."
+        },
+        {
+          "type": "formatting",
+          "description": "The reference to the original English documentation/tutorial is cut off abruptly in the Latvian translation. It should be completed.",
+          "suggestion": "Lai izmantotu pilnu SDK, skatiet dokumentāciju/pamācību [link to documentation/tutorial]."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Dutch translation \"Met behulp van JavaScript SDK kunt u een ruimte of map van {{productName}} in uw webinterface insluiten als een iframe\" doesn't accurately reflect the English \"JavaScript SDK allows you to embed the whole {{productName}} or its part into your web interface.\" The Dutch implies embedding a space or folder as an iframe, while the English describes embedding the whole product or a part of it.",
+          "suggestion": "Met JavaScript SDK kunt u de volledige {{productName}} of een deel ervan in uw webinterface integreren."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Hier vindt u instellingen voor het maken van een voorbeeld iframe en het configureren van CSP' doesn't align with the English 'Select ready-to-use modes with the pre-defined parameters or a custom one to configure it manually'. It seems to be adding information not present in the source.",
+          "suggestion": "U kunt kiezen uit vooraf gedefinieerde instellingen of een aangepaste instelling configureren."
+        },
+        {
+          "type": "missing_content",
+          "description": "The English content includes a reference to 'To learn more about SDK, refer to the ...'. This is missing in the Dutch translation.",
+          "suggestion": "Voor meer informatie over de SDK, raadpleeg..."
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"embed the whole {{productName}} or its part\" is inaccurate. \"osadzić pokój lub katalog z {{productName}} w interfejsie swojej strony internetowej jako iframe\" implies embedding a room or catalog as an iframe, which isn't the intended meaning. It should convey embedding the product or a part of it.",
+          "suggestion": "Korzystając z zestawu SDK JavaScript możesz osadzić {{productName}} lub jego fragment w interfejsie swojej strony internetowej."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Tutaj znajdziesz ustawienia umożliwiające utworzenie przykładowej ramki iframe i konfigurację Zasad zabezpieczeń zawartości (CSP)\" doesn't align with the original meaning of describing available modes and custom configuration. It introduces a concept (creating a sample iframe) not present in the original.",
+          "suggestion": "Dostępne są gotowe tryby z predefiniowanymi parametrami lub możliwość konfiguracji ręcznej."
+        },
+        {
+          "type": "missing_content",
+          "description": "The original content includes \"Select ready-to-use modes with the pre-defined parameters or a custom one to configure it manually.\" This part is missing in the Polish translation.",
+          "suggestion": "Dostępne są gotowe tryby z predefiniowanymi parametrami lub możliwość konfiguracji ręcznej."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The original includes a reference to \"To learn more about SDK, refer to the \". The Polish translation ends abruptly, missing the reference to more information.",
+          "suggestion": "Aby dowiedzieć się więcej o SDK, zapoznaj się z dokumentacją."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ao utilizar o JavaScript SDK, é possível incorporar uma sala ou uma pasta do {{productName}} na sua interface web como um iframe' doesn't accurately reflect the original meaning. The English text implies embedding the *whole* product or *part* of it. The Portuguese suggests only rooms or folders are embeddable.",
+          "suggestion": "Ao utilizar o JavaScript SDK, é possível incorporar o {{productName}} completo ou parte dele na sua interface web."
+        },
+        {
+          "type": "missing_content",
+          "description": "The original English text mentions 'Select ready-to-use modes with the pre-defined parameters or a custom one to configure it manually.' This part is missing in the Portuguese translation.",
+          "suggestion": "Ao utilizar o JavaScript SDK, é possível incorporar o {{productName}} completo ou parte dele na sua interface web. Escolha entre modos pré-definidos com parâmetros prontos ou personalize-o manualmente."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Aqui, pode encontrar definições para criar um iframe de amostra e configurar o CSP' is not a direct or accurate translation of the English sentence indicating further information is available in the documentation.",
+          "suggestion": "Para saber mais sobre o SDK, consulte a"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation deviates significantly from the original meaning. The English content describes the SDK allowing embedding of the whole product or parts, while the Portuguese translation focuses solely on embedding as an iframe and mentions CSP configuration which isn't present in the original.",
+          "suggestion": "Consider a translation closer to: 'O JavaScript SDK permite incorporar o {{productName}} inteiro ou partes dele na sua interface web. Selecione modos prontos para uso com parâmetros pré-definidos ou um modo personalizado para configurá-lo manualmente. Para saber mais sobre o SDK, consulte o'"
+        },
+        {
+          "type": "missing_content",
+          "description": "The English content references pre-defined parameters or manual configuration. This detail is completely absent in the Portuguese translation.",
+          "suggestion": "Add back the concept of selectable modes with predefined parameters or manual configuration. For example: '... selecione modos pré-definidos com parâmetros ou configure-o manualmente.'"
+        },
+        {
+          "type": "formatting",
+          "description": "The Portuguese translation's sentence structure feels less fluent than the original, and doesn't reflect the natural flow of the original.",
+          "suggestion": "Rephrase the sentences to create a more natural flow, keeping the key information present."
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"o sală sau un folder\" doesn't accurately reflect the English \"the whole... or its part\". It suggests a room or folder, while the English implies a component or feature.",
+          "suggestion": "Cu ajutorul JavaScript SDK puteți încorpora întregul {{productName}} sau o parte din acesta în interfața site-ului dvs."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"prin codul iframe\" is redundant. The concept of embedding in an iframe is implied by the use of an iframe. It's more natural to just say 'în interfața site-ului dvs.'",
+          "suggestion": "în interfața site-ului dvs."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The sentence \"Aici puteti gasi setările pentru crearea unui model iframe și configurarea Furnizorului de soluții cloud\" is not found in the original English content. It's an addition that needs to be verified and potentially removed.",
+          "suggestion": "Remove this sentence as it's not present in the original."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Pentru a utiliza un SDK complet\" is a slightly awkward translation of \"To learn more about SDK\".",
+          "suggestion": "Pentru a afla mai multe despre SDK"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation introduces the concept of an iframe without being explicitly mentioned in the English source. The English text refers to embedding 'the whole {{productName}} or its part,' not specifically an iframe.",
+          "suggestion": "Измените фразу, чтобы более точно соответствовала исходному тексту, например: 'Используя JavaScript SDK, вы можете встроить {{productName}} или его часть в ваш веб-интерфейс'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Здесь вы найдете настройки для создания образца iframe и настройки CSP' is not present or implied in the English content.  It's adding functionality not mentioned.",
+          "suggestion": "Удалите эту фразу, так как она не соответствует оригинальному тексту."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The concluding phrase 'Чтобы использовать полный SDK, пожалуйста, перейдите в' is incomplete and doesn't specify where to go.  The English says 'To learn more about SDK, refer to the...'.",
+          "suggestion": "Замените фразу на 'Чтобы узнать больше о SDK, обратитесь к... [ссылка/раздел]'"
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'වින්‍යාස' is a bit awkward. It's a direct transliteration of 'configuration' and might not be the most natural Sinhala word choice here.",
+          "suggestion": "Consider using a more natural Sinhala term for 'configuration', such as ' සැකසීමට' (säkasa emita) or 'ආකෘති කිරීමට' (ākṛti emita)."
+        },
+        {
+          "type": "formatting",
+          "description": "The colon at the end of the last sentence should ideally be a period (full stop).",
+          "suggestion": "Change the colon (:) to a period (.)"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"embed the whole {{productName}} or its part\" is translated as \"vložiť miestnosť alebo priečinok z {{productName}}\".  This change significantly alters the meaning. 'Miestnosť' (room) and 'priečinok' (folder) are specific terms and don't convey the broader meaning of embedding the product or a part of it.  The Slovak translation is too narrow.",
+          "suggestion": "Pomocou JavaScript SDK môžete vložiť {{productName}} alebo jeho časť do svojho webového rozhrania."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"ready-to-use modes with the pre-defined parameters\" is not adequately translated. The Slovak translation introduces \"vytvorenie vzoru iframe a konfiguráciu CSP\" which is referencing iframe creation and CSP configuration, which is not what the original phrase conveyed.",
+          "suggestion": "Ponúka režimy pripravené na použitie s vopred definovanými parametrami alebo vlastný režim na manuálnu konfiguráciu."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English \"To learn more about SDK, refer to the \" is awkwardly translated to \"Ak chcete používať kompletnú sadu SDK, pozrite si\". It suggests usage rather than referring to the documentation.",
+          "suggestion": "Ďalšie informácie o SDK nájdete v dokumentácii."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovenian translation implies embedding the room or folder as an iframe. The English content indicates a more general embedding of the product or parts of it into a web interface. \"Vdelate sobo ali mapo iz... kot iframe\" is too specific.",
+          "suggestion": "Z uporabo JavaScript SDK lahko vdelate {{productName}} ali njegov del v svoj spletni vmesnik."
+        },
+        {
+          "type": "missing_content",
+          "description": "The English content refers to 'Select ready-to-use modes with the pre-defined parameters or a custom one to configure it manually.' This part is missing from the Slovenian translation.",
+          "suggestion": "Z uporabo JavaScript SDK lahko vdelate {{productName}} ali njegov del v svoj spletni vmesnik. Izberite prednastavljene načine uporabe ali pa ga nastavite ročno."
+        },
+        {
+          "type": "missing_content",
+          "description": "The final part of the English content 'To learn more about SDK, refer to the ' is missing in the Slovenian translation.",
+          "suggestion": "Če želite izvedeti več o SDK, glejte"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word \"омогуц́ава\" is a valid word but its spelling could be improved. A more common and readable form is \"омогућава\".",
+          "suggestion": "омогућава"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase \"са унапред дефинисаним параметрима или прилагођени\" could be more grammatically correct.  The second part suggests a 'custom' selection but needs a matching verb.",
+          "suggestion": "са унапред дефинисаним параметрима или прилагођени да бисте га користили/избрали."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word \"vam\" in \"JavaScript SDK vam omogućava\" is overly formal for this context. It's more appropriate to use \"ti\" or a more conversational form.",
+          "suggestion": "JavaScript SDK omogućava da ugradite..."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase \"režime spremne za upotrebu\" could be improved for clarity. \"Režimi koji su spremni za upotrebu\" is grammatically more correct.",
+          "suggestion": "režime koji su spremni za upotrebu"
+        },
+        {
+          "type": "formatting",
+          "description": "The word \"omogućava\" is hyphenated, while other words in the sentence are not.",
+          "suggestion": "JavaScript SDK omogućava da ugradite..."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation implies embedding via iframe, which isn't explicitly mentioned in the English content. The English text refers to embedding the whole product or a part of it, which is more general than just an iframe.",
+          "suggestion": "JavaScript SDK ile {{productName}}'in tamamını veya bir bölümünü web arayüzünüze entegre edebilirsiniz. Önceden tanımlanmış parametrelerle kullanıma hazır modları veya manuel olarak yapılandırabileceğiniz özel bir mod seçebilirsiniz."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'CSP'yi yapılandırmak için ayarları burada bulabilirsiniz' is contextually confusing and doesn't accurately reflect the English text's instruction to 'refer to...'.",
+          "suggestion": "Daha fazla bilgi edinmek için lütfen şuraya bakın."
+        },
+        {
+          "type": "missing_content",
+          "description": "The English text mentions the option to configure parameters manually, which is missing in the Turkish translation. This is a key feature of the SDK.",
+          "suggestion": "JavaScript SDK ile {{productName}}'in tamamını veya bir bölümünü web arayüzünüze entegre edebilirsiniz. Önceden tanımlanmış parametrelerle kullanıma hazır modları veya manuel olarak yapılandırabileceğiniz özel bir mod seçebilirsiniz. Daha fazla bilgi edinmek için lütfen şuraya bakın."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"embed the whole {{productName}} or its part\" as \"nhúng một phòng hoặc một thư mục từ {{productName}} vào giao diện web của bạn dưới dạng iframe\" is not accurate. The original implies embedding a component or functionality, not necessarily a room or folder as an iframe. \"Embed\" has a broader meaning than just 'nhúng' in this context.",
+          "suggestion": "Consider something like: \"tích hợp một phần hoặc toàn bộ chức năng của {{productName}} vào giao diện web của bạn\" or \"nhúng một thành phần hoặc toàn bộ hệ thống {{productName}} vào giao diện web của bạn\"."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Tại đây, bạn có thể tìm thấy cài đặt để tạo iframe mẫu và định cấu hình CSP\" doesn't directly correlate to the English \"Select ready-to-use modes with the pre-defined parameters or a custom one to configure it manually.\". It introduces 'CSP' (Content Security Policy) which is not mentioned in the source.",
+          "suggestion": "Remove the reference to CSP and instead try to translate the functionality described in the source, such as \"Chọn các chế độ có sẵn với các tham số được định nghĩa trước hoặc cấu hình thủ công.\""
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The final part, \"Để sử dụng SDK hoàn chỉnh, xin vui lòng tham khảo\" is a somewhat formal and indirect way of saying \"To learn more about SDK, refer to the \".",
+          "suggestion": "Consider a more direct translation like: \"Để biết thêm về SDK, xin vui lòng tham khảo\" or just \"Để biết thêm thông tin về SDK, xin vui lòng tham khảo\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

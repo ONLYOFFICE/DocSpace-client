@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -58,7 +58,7 @@ export const enum EmployeeActivationStatus {
  * Enum for employee status.
  * @readonly
  */
-export const enum EmployeeStatus {
+export enum EmployeeStatus {
   Active = 1,
   Disabled = 2,
   Pending = 4, // NEW STATUS from server
@@ -67,7 +67,7 @@ export const enum EmployeeStatus {
  * Enum for employee type.
  * @readonly
  */
-export const enum EmployeeType {
+export enum EmployeeType {
   RoomAdmin = 1,
   Guest = 2,
   Admin = 3,
@@ -78,7 +78,7 @@ export const enum EmployeeType {
  * Enum for user payments type.
  * @readonly
  */
-export const enum PaymentsType {
+export enum PaymentsType {
   Paid = "0",
   Free = "1",
 }
@@ -86,7 +86,7 @@ export const enum PaymentsType {
  * Enum for account login type.
  * @readonly
  */
-export const enum AccountLoginType {
+export enum AccountLoginType {
   SSO = "0",
   LDAP = "1",
   STANDART = "2",
@@ -95,7 +95,7 @@ export const enum AccountLoginType {
  * Enum for files selector filter.
  * @readonly
  */
-export const enum ApplyFilterOption {
+export enum ApplyFilterOption {
   All = "All",
   Files = "Files",
   Folder = "Folder",
@@ -126,7 +126,7 @@ export const enum FilterSubject {
  * Enum for filter type.
  * @readonly
  */
-export const enum FilterType {
+export enum FilterType {
   None = 0,
   FilesOnly = 1,
   FoldersOnly = 2,
@@ -148,6 +148,7 @@ export const enum FilterType {
   FormRooms = 21,
   Pdf = 22,
   PDFForm = 23,
+  DiagramsOnly = 25,
 }
 
 /**
@@ -166,6 +167,7 @@ export const enum FileType {
   OFormTemplate = 8,
   OForm = 9,
   PDF = 10,
+  Diagram = 11,
 }
 
 /**
@@ -192,6 +194,7 @@ export const enum RoomSearchArea {
   Any = "Any",
   Active = "Active",
   Archive = "Archive",
+  Templates = "Templates",
 }
 /**
  * Enum for file action.
@@ -200,6 +203,7 @@ export const enum RoomSearchArea {
 export const enum FileAction {
   Create = 0,
   Rename = 1,
+  RestoreVersion = 2,
 }
 
 /**
@@ -219,6 +223,7 @@ export const enum PageType {
   bonus = "bonus",
   dataImport = "dataImport",
   storageManagement = "storageManagement",
+  services = "services",
 }
 
 /**
@@ -250,6 +255,7 @@ export const enum FolderType {
   SubFolderDone = 27,
   SubFolderInProgress = 28,
   VirtualDataRoom = 29,
+  RoomTemplates = 30,
 }
 
 export const enum ShareAccessRights {
@@ -333,6 +339,7 @@ export const enum FileStatus {
 export const enum TenantStatus {
   PortalDeactivate = 1,
   PortalRestore = 4,
+  EncryptionProcess = 6,
 }
 
 /**
@@ -364,6 +371,7 @@ export const enum Events {
   CHANGE_QUOTA = "change_quota",
   CREATE_PLUGIN_FILE = "create_plugin_file",
   CREATE_PDF_FORM_FILE = "create_pdf_form_file",
+  SAVE_AS_TEMPLATE = "save_as_template",
   Share_PDF_Form = "share_pdf_form",
 }
 
@@ -409,6 +417,25 @@ export const enum TariffState {
 export const enum PortalFeaturesLimitations {
   Limitless = -1,
   Unavailable = 0,
+}
+
+/**
+ * Enum for payment method status.
+ * @readonly
+ */
+export const enum PaymentMethodStatus {
+  None = 0,
+  Set = 1,
+  Expired = 2,
+}
+
+/**
+ * Enum for quota state.
+ * @readonly
+ */
+export const enum QuotaState {
+  Active = 0,
+  Overdue = 1,
 }
 
 /**
@@ -471,7 +498,7 @@ export const enum FilterSelectorTypes {
   groups = "groups-selector",
 }
 
-export const enum DeviceType {
+export enum DeviceType {
   mobile = "mobile",
   tablet = "tablet",
   desktop = "desktop",
@@ -505,6 +532,7 @@ export const enum ErrorKeys {
 }
 
 export enum RoomsType {
+  // AIRoom = 9, //TODO: Restore when certs will be done
   PublicRoom = 6,
   FormRoom = 1,
   // FillingFormsRoom= 1, //TODO: Restore when certs will be done
@@ -554,6 +582,14 @@ export const enum WhiteLabelLogoType {
   LeftMenu = 6,
   AboutPage = 7,
   Notification = 8,
+  SpreadsheetEditor = 9,
+  SpreadsheetEditorEmbed = 10,
+  PresentationEditor = 11,
+  PresentationEditorEmbed = 12,
+  PdfEditor = 13,
+  PdfEditorEmbed = 14,
+  DiagramEditor = 15,
+  DiagramEditorEmbed = 16,
 }
 
 /**
@@ -652,4 +688,137 @@ export enum ValidationStatus {
   Password = 3,
   InvalidPassword = 4,
   ExternalAccessDenied = 5,
+}
+
+export enum FileFillingFormStatus {
+  None = 0,
+  Draft = 1,
+  YourTurn = 2,
+  InProgress = 3,
+  Completed = 4,
+  Stopped = 5,
+}
+
+export enum RoleStatus {
+  Waiting = "waiting",
+  YourTurn = "yourTurn",
+  Filling = "filling",
+  Filled = "filled",
+  Stopped = "stopped",
+}
+
+export enum StartFillingMode {
+  None,
+  ShareToFillOut,
+  StartFilling,
+}
+
+export enum FormFillingManageAction {
+  Stop,
+  Resume,
+}
+
+export enum FormFillingTipsState {
+  Starting = 1,
+  Sharing = 2,
+  Submitting = 3,
+  Complete = 4,
+  Uploading = 5,
+}
+
+export enum FillingFormStatusHistory {
+  OpenedAtDate = 0,
+  SubmissionDate = 1,
+  StopDate = 2,
+}
+
+export enum DeepLinkType {
+  Choice = 0,
+  Web = 1,
+  App = 2,
+}
+
+/**
+ * Enum for sort by field name
+ * @readonly
+ */
+export const enum SortByFieldName {
+  Name = "AZ",
+  ModifiedDate = "DateAndTime",
+  CreationDate = "DateAndTimeCreation",
+  Author = "Author",
+  Size = "Size",
+  Type = "Type",
+  Room = "Room",
+  Tags = "Tags",
+  RoomType = "roomType",
+  LastOpened = "LastOpened",
+  UsedSpace = "usedspace",
+}
+
+export enum EncryptionStatus {
+  Decrypted = 0,
+  EncryptionStarted = 1,
+  Encrypted = 2,
+  DecryptionStarted = 3,
+}
+
+/**
+ * Enum for webhook triggers
+ * @readonly
+ */
+export enum WebhookTriggers {
+  All = 0,
+  UserCreated = 1,
+  UserInvited = 2,
+  UserUpdated = 4,
+  UserDeleted = 8,
+  GroupCreated = 16,
+  GroupUpdated = 32,
+  GroupDeleted = 64,
+  FileCreated = 128,
+  FileUploaded = 256,
+  FileUpdated = 512,
+  FileTrashed = 1024,
+  FileDeleted = 2048,
+  FileRestored = 4096,
+  FileCopied = 8192,
+  FileMoved = 16384,
+  FolderCreated = 32768,
+  FolderUpdated = 65536,
+  FolderTrashed = 131072,
+  FolderDeleted = 262144,
+  FolderRestored = 524288,
+  FolderCopied = 1048576,
+  FolderMoved = 2097152,
+  RoomCreated = 4194304,
+  RoomUpdated = 8388608,
+  RoomArchived = 16777216,
+  RoomDeleted = 33554432,
+  RoomRestored = 67108864,
+  RoomCopied = 134217728,
+}
+
+export enum RoomSecurityError {
+  None,
+  FormRoleBlockingDeletion,
+}
+
+export enum BackupStorageLocalKey {
+  StorageType = "LocalCopyStorageType",
+  Folder = "LocalCopyFolder",
+  Storage = "LocalCopyStorage",
+  ThirdPartyStorageType = "LocalCopyThirdPartyStorageType",
+  ThirdPartyStorageValues = "LocalCopyThirdPartyStorageValues",
+}
+
+export enum ProvidersType {
+  Box = "Box",
+  DropBox = "DropBox",
+  GoogleDrive = "Google Drive",
+  kDrive = "kDrive",
+  OneDrive = "OneDrive",
+  SharePoint = "SharePoint",
+  WebDav = "WebDav",
+  Yandex = "Yandex",
 }

@@ -1,0 +1,48 @@
+@use "../../styles/mixins";
+
+.text {
+  outline: 0;
+  margin: 0;
+  font-weight: 400;
+  font-size: 13px;
+
+  &.inline {
+    display: inline-block;
+  }
+
+  &.italic {
+    font-style: italic;
+  }
+
+  &.bold {
+    font-weight: 700;
+  }
+
+  &.noSelect {
+    @include mixins.no-user-select;
+  }
+
+  &.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.autoDirSpan {
+  display: inherit;
+  white-space: inherit;
+  overflow: inherit;
+  text-overflow: inherit;
+  pointer-events: none;
+  width: inherit;
+  max-width: inherit;
+  -webkit-line-clamp: inherit;
+  -webkit-box-orient: inherit;
+
+  &.tile {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+}

@@ -1,0 +1,583 @@
+{
+  "key_path": "TwoFactorAuthMobileDescription",
+  "content": "Two-factor authentication is a more secure way for the users to enter the portal. After the credentials are entered, the user will have to enter the code from the SMS received to the mobile phone with the number which was specified at the first portal login or the code from an authentication application.",
+  "content_en_sha1_hash": "17442d3c8dced44f68862422d941606211c022f5",
+  "created_at": "2025-05-19T21:30:53.021Z",
+  "updated_at": "2025-06-08T12:02:32.826Z",
+  "comment": {
+    "text": "This translation key is used to describe the mobile verification process for two-factor authentication. The description will appear in a category title on a mobile view of access portal settings and explains how users receive a code via SMS or an authentication app to complete the login process.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:14.220Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
+      "line_number": 70,
+      "context": "onClickLink={onClickLink}\n />\n <MobileCategoryWrapper\n title={t(\"TwoFactorAuth\")}\n subtitle={\n <Trans i18nKey=\"TwoFactorAuthMobileDescription\" ns=\"Settings\" t={t} />\n }\n url=\"/portal-settings/security/access-portal/tfa\"\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"الرمز الموجود في تطبيق المصادقة\" translates to \"the code in the authentication application.\" While technically correct, a more natural and user-friendly translation would be something like \"رمز تطبيق المصادقة\" or \"رمز من تطبيق المصادقة\".",
+          "suggestion": "رمز تطبيق المصادقة"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The sentence \"سيطلب من المستخدم بعد إدخال الرموز السرية أن يدخل رمز\" is a bit clunky.  A more fluent wording would convey the same meaning more smoothly.",
+          "suggestion": "بعد إدخال بيانات الاعتماد، سيُطلب من المستخدم إدخال رمز"
+        },
+        {
+          "type": "formatting",
+          "description": "The Arabic text could benefit from consistent spacing after punctuation. This improves readability.",
+          "suggestion": "After periods and commas, add a space."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'more secure way' is translated as 'daha təhlükəsiz üsuldur'. While technically correct, a more natural phrasing in Azerbaijani would be 'daha etibarlı yol' (more reliable way).",
+          "suggestion": "daha etibarlı yol"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'authentication application' is translated as 'təsdiqləmə proqramından alınan kodu'. A more natural phrasing would be 'təsdiqləmə tətbiqi' or 'doğrulama proqramı'.",
+          "suggestion": "təsdiqləmə tətbiqi"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is somewhat convoluted. It could be rephrased for better readability.",
+          "suggestion": "İki mərhələli təsdiqləmə istifadəçilərin portala daxil olmaq üçün daha etibarlı bir yoludur. İstifadəçi məlumatlarını daxil etdikdən sonra, o, portala ilk dəfə daxil olarkən göstərilən nömrəyə göndərilən SMS-dəki kodu və ya təsdiqləmə tətbiqindən alınan kodu daxil etməlidir."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"credentials are entered\" is translated as \"идентификационните данни се въведат\". A more natural and accurate translation would be \"данните за вход се въведат\" or \"потребителските данни се въведат\".",
+          "suggestion": "данните за вход се въведат"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'authentication application' is translated as 'приложението за удостоверяване'. While technically correct, a more common and easily understood term would be 'приложение за потвърждаване'.",
+          "suggestion": "приложение за потвърждаване"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Po zadání přihlašovacích údajů\" is a bit clunky. A more natural translation for 'After the credentials are entered' might be 'Po zadání přihlašovacích údajů' or 'Po ověření přihlašovacích údajů'.",
+          "suggestion": "Po ověření přihlašovacích údajů"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'the user will have to enter the code' is a bit awkward in German. 'muss den Code eingeben' is accurate but lacks flow. A more natural phrasing would be 'Der Benutzer muss dann den Code eingeben'.",
+          "suggestion": "Der Benutzer muss dann den Code eingeben."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'with the number which was specified at the first portal login' is overly literal and complex in German. It's not the most natural way to express this. A simpler phrasing is needed.",
+          "suggestion": "mit der bei der ersten Anmeldung angegebenen Nummer"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is a bit long and complex. Splitting it into shorter sentences would improve readability.",
+          "suggestion": "Die Zwei-Faktor-Authentifizierung ist eine sicherere Methode für die Benutzer, um das Portal zu betreten. Nach der Eingabe der Anmeldedaten muss der Benutzer den Code aus der SMS eingeben, die er auf seinem Mobiltelefon erhält. Die Nummer dafür wurde bei der ersten Anmeldung am Portal angegeben. Alternativ kann der Code auch aus einer Authentifizierungs-App verwendet werden."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"the portal\" is translated as \"την πύλη\" which, while technically correct, sounds somewhat clunky in this context. A more natural translation would be something like \"στην πλατφόρμα\" (the platform) or \"στον ιστότοπο\" (the website).",
+          "suggestion": "Consider translating 'the portal' as 'στην πλατφόρμα' or 'στον ιστότοπο'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'authentication application' is translated as 'εφαρμογή ταυτοποίησης'. While understandable, a more common and clearer term in Greek would be 'εφαρμογή ελέγχου ταυτότητας'.",
+          "suggestion": "Translate 'authentication application' to 'εφαρμογή ελέγχου ταυτότητας'."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation reads a bit long and formal. Consider breaking it into shorter sentences for improved readability.",
+          "suggestion": "Consider splitting the text into two sentences: 'Ο έλεγχος ταυτότητας δύο παραγόντων είναι ένας πιο ασφαλής τρόπος για την είσοδο των χρηστών. Μετά την εισαγωγή των διαπιστευτηρίων, ο χρήστης θα πρέπει να εισάγει τον κωδικό...'."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'for the users to access the portal' is a somewhat awkward translation of 'for the users to enter the portal'. A more natural Spanish phrasing would be something like 'para que los usuarios accedan al portal'.",
+          "suggestion": "para que los usuarios accedan al portal"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'el número que se especificó' is grammatically correct, but slightly less fluid than other options. 'el número especificado' is more common.",
+          "suggestion": "el número especificado"
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'the code from the SMS received to the mobile phone' in the English source is awkwardly translated as 'tekstiviestillä saamansa koodi ja numero' in Finnish. It implies the number is received via SMS too, which is not accurate. The SMS contains just the code.",
+          "suggestion": "Kaksivaiheinen varmentaminen on käyttäjille turvallisempi tapa kirjautua portaaliin. Kun kirjautumistiedot on syötetty, käyttäjän tulee syöttää tekstiviestillä saatu koodi tai koodi todennussovelluksesta."
+        },
+        {
+          "type": "formatting",
+          "description": "The original English contains a 'or' to connect the two options, but the Finnish translation lacks a similar connector. This makes the sentence slightly less fluent.",
+          "suggestion": "Kaksivaiheinen varmentaminen on käyttäjille turvallisempi tapa kirjautua portaaliin. Kun kirjautumistiedot on syötetty, käyttäjän tulee syöttää tekstiviestillä saatu koodi tai koodi todennussovelluksesta."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"pour les utilisateurs d'accéder au portail\" is slightly awkward. 'd'accéder au portail' doesn't flow as naturally as simply 'au portail'.",
+          "suggestion": "pour accéder au portail"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence 'Une fois les informations d'identification saisies, l'utilisateur devra saisir le code du SMS...' could be slightly improved for readability. Consider splitting it into two sentences.",
+          "suggestion": "Une fois les informations d'identification saisies, l'utilisateur devra ensuite saisir le code du SMS..."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses a colon (:) after “Two-factor authentication” in the beginning, which doesn’t match the English original.",
+          "suggestion": "Remove the colon after “Երկգործոն նույնականացումը”."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'Հավատարմագրերը մուտքագրելուց հետո' sounds a bit clunky. It could be more fluid.",
+          "suggestion": "Consider rephrasing to something like 'Հավատարմագրերը մուտքագրելուց հետո' or 'Հավատարմագրերը մուտքագրելուց անմիջապես հետո'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English uses 'authentication application'. The Armenian translation uses 'նույնականացման հավելվածի կոդը', which translates directly as 'code of the authentication application'.  It might be more natural to say 'ծառայողական հավելվածի կոդը' (code of a service application) or 'փա՞ստանգման հավելվածի կոդը'.",
+          "suggestion": "Change 'նույնականացման հավելվածի կոդը' to 'ծառայողական հավելվածի կոդը' or 'փա՞ստանգման հավելվածի կոդը'."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"consentire agli utenti di accedere al portale\" is a bit awkward. It literally translates to \"allow users to access the portal.\" A more natural Italian phrasing would be \"per gli utenti di accedere al portale\" or \"per l'accesso degli utenti al portale\".",
+          "suggestion": "per gli utenti di accedere al portale"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The repetition of 'proveniente' is slightly redundant. While grammatically correct, it can be improved for fluency.",
+          "suggestion": "dall'SMS ricevuto sul cellulare...oppure il codice da un'applicazione di autenticazione."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"認証情報が入力された後\" (after the credentials are entered) is somewhat awkward in Japanese. A more natural phrasing would be something like \"ログイン情報を入力した後\" (after entering login information) or \"IDとパスワードを入力した後\" (after entering the ID and password).",
+          "suggestion": "ログイン情報を入力した後"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrasing \"最初のポータルログインで指定された番号の携帯電話に受信したSMSからコードを入力するか\" is a bit convoluted. It can be simplified.",
+          "suggestion": "最初のログイン時に登録した携帯電話に送信されたSMSからコードを入力するか"
+        },
+        {
+          "type": "formatting",
+          "description": "The Japanese sentence structure is a bit long and could be broken down for better readability. Consider using more periods to create shorter sentences.",
+          "suggestion": "二要素認証は、ユーザーがポータルに入るための、より安全な方法です。認証情報が入力された後、最初のログイン時に登録した携帯電話に送信されたSMSからコードを入力するか、または認証アプリケーションからコードを入力する必要があります。"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Korean translation uses a slightly long and complex sentence structure. It might be more user-friendly to break it down into two sentences.",
+          "suggestion": "이중 인증은 사용자가 포털에 보다 안전하게 입장할 수 있는 방법입니다. 사용자는 자격 증명을 입력한 후 최초 포털 로그인 시 지정한 휴대폰 번호로 수신한 SMS의 코드 또는 인증 애플리케이션의 코드를 입력해야 합니다. -> 이중 인증은 사용자가 포털에 보다 안전하게 로그인할 수 있는 방법입니다. 최초 포털 로그인 시 지정한 휴대폰 번호로 수신한 SMS의 코드 또는 인증 애플리케이션 코드를 추가로 입력해야 합니다."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'enter the portal' is translated as '입장할 수 있는 방법입니다.' which can be interpreted as 'can enter'. A better translation would convey 'logging in'.",
+          "suggestion": "'enter the portal' -> '로그인할 수 있는 방법입니다'"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ເຂົ້າໃນປະຕູ\" (into the door) is not the correct way to describe accessing a portal. It's a literal translation that doesn't convey the intended meaning. It should be something like \"ເຂົ້າສູ່ລະບົບ\" (access the system) or \"ເຂົ້າໃຊ້ບໍລິການ\" (access the service).",
+          "suggestion": "ເຂົ້າສູ່ລະບົບ"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ການກວດສອບຄວາມຖືກຕ້ອງ\" is overly formal and verbose for \"authentication application.\" A simpler term would be more suitable.",
+          "suggestion": "ແອັບຯຢັ້ງຢືນຕົວຕົນ"
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure regarding the code entry could be improved for clarity. It's a bit convoluted.",
+          "suggestion": "ຫຼັງຈາກການປ້ອນຂໍ້ມູນປະຈໍາຕົວ, ຜູ້ໃຊ້ຈະຕ້ອງໃສ່ລະຫັດຈາກ SMS ທີ່ໄດ້ຮັບ ຫຼືລະຫັດຈາກແອັບຯຢັ້ງຢືນຕົວຕົນ."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'akreditācijas' is not the correct translation for 'credentials'. 'Datu' is more appropriate here.",
+          "suggestion": "Datu ievadīšanas"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrasing 'pirmajā portāla pieteikšanās reizē' is a bit clunky. A simpler phrasing would be better.",
+          "suggestion": "pirmajā portāla reģistrācijas reizē"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'om de het portaal te gebruiken' is grammatically incorrect. 'de' is redundant.",
+          "suggestion": "om het portaal te gebruiken"
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence 'Nadat de inloggegevens zijn ingevoerd, moet de gebruiker de code invoeren van de sms die naar de mobiele telefoon is gestuurd...' is a bit clunky. 'invoeren' is repeated.",
+          "suggestion": "Nadat de inloggegevens zijn ingevoerd, moet de gebruiker de code invoeren die via sms naar de mobiele telefoon is gestuurd..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'After the credentials are entered' is translated literally. A more natural translation would focus on the flow of the process.",
+          "suggestion": "Na het invoeren van de inloggegevens"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'enter the portal' is translated as 'logowania dla użytkowników portalu'. While understandable, a more direct translation reflecting the action of entering would be better.  'Dostęp do portalu' or 'logowania do portalu' would be more accurate.",
+          "suggestion": "Weryfikacja dwuetapowa to bezpieczniejszy sposób logowania/dostępu do portalu."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'specified at the first portal login' is translated as 'wskazany podczas pierwszego logowania w portalu'. It's correct, but slightly verbose. A more concise option would improve readability.",
+          "suggestion": "podany przy pierwszym logowaniu do portalu"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'enter the portal' is translated as 'entrarem no portal.' While technically correct, it sounds slightly awkward in Portuguese. A more natural phrasing would be 'acessar o portal'.",
+          "suggestion": "acessar o portal"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'mobile phone' is translated as 'telemóvel'. While acceptable, 'celular' is a more common and modern term for mobile phone in Brazilian Portuguese, which is often the target audience for translations.",
+          "suggestion": "celular"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'authentication application' is translated as 'aplicação de autenticação'. It's correct, but a slightly more natural flow could be achieved by using 'app de autenticação'.",
+          "suggestion": "app de autenticação"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'os usuários entrarem no portal' is not the most natural Portuguese phrasing. It's overly literal from the English. A better phrasing would be 'acessarem o portal' or 'acessar o portal'.",
+          "suggestion": "A autenticação de dois fatores é uma forma mais segura para os usuários acessarem o portal."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'utilizador' is a Portuguese European Portuguese term. In Brazilian Portuguese, it's more appropriate to use 'usuário'.",
+          "suggestion": "A autenticação de dois fatores é uma forma mais segura para os usuários acessarem o portal. Depois de introduzidas as credenciais, o usuário terá que inserir o código do SMS recebido no telemóvel com o número que foi especificado no primeiro login no portal ou o código de uma aplicação de autenticação."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrasing 'Depois de introduzidas as credenciais' is slightly awkward. A more natural wording would be 'Após a inserção das credenciais' or 'Depois que as credenciais forem inseridas'.",
+          "suggestion": "A autenticação de dois fatores é uma forma mais segura para os usuários acessarem o portal. Após a inserção das credenciais, o usuário terá que inserir o código do SMS recebido no telemóvel com o número que foi especificado no primeiro login no portal ou o código de uma aplicação de autenticação."
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'the users to enter the portal' is awkwardly translated as 'pentru utilizatorii portalului'. A more natural translation would be 'în portal'.",
+          "suggestion": "Autentificare cu doi factori este o metodă de autentificare mai securizată pentru utilizatorii *în* portal."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'at the first portal login' is translated as 'la prima conectare la portalul'. It's a bit redundant.  'La prima logare' is more concise.",
+          "suggestion": "Autentificare cu doi factori este o metodă de autentificare mai securizată pentru utilizatorii portalului. După introducerea datelor de autentificare, utilizatorul va trebui să introducă codul primit prin SMS pe numărul de telefon mobil indicat la *prima logare* sau codul dintr-o aplicație de autentificare."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Номер телефона указывается при первом входе с помощью двухфакторной аутентификации\" is not accurate. The English states the number is specified at the *first portal login*, not when using two-factor authentication.",
+          "suggestion": "Номер телефона указывается при первой авторизации на портале."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"credentials are entered\" is not accurately translated. 'අක්තපත්‍ර ඇතුල් කිරීමෙන් පසු' literally translates to 'after entering documents'. The intended meaning is entering login details.",
+          "suggestion": "අක්තපත්‍ර ඇතුල් කිරීමෙන් පසු should be changed to 'පිවිසුම් තොරතුරු ඇතුල් කිරීමෙන් පසු' (pivisuṁ thoraṭuru athul kirimen passa) - after entering login details."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'SMS received' is not fully equivalent to 'කෙටි පණිවිඩය ලැබුණු'. While technically correct, it's more natural to use a term implying a security code SMS.",
+          "suggestion": "Consider replacing 'කෙටි පණිවිඩය ලැබුණු' with 'ආ ආරක්ෂිත කෙටි පණිවිඩය ලැබුණු' (a arkṣhiṭa keṭi paṇividaya lebaṇu)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'authentication application' is translated as 'සත්‍යාපන යෙදුම'. While understandable, a more common and precise term for an authenticator app would be preferable.",
+          "suggestion": "Consider replacing 'සත්‍යාපන යෙදුම' with 'ඇauthenticator යෙදුම' (authenticator yeduma) or a similar locally understood term for an authenticator application."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The sentence \"Po zadaní prihlasovacích údajov bude musieť používateľ zadať kód z SMS prijatej na mobilne číslo...\" is slightly awkward. It could be more natural to rephrase.",
+          "suggestion": "Po zadaní prihlasovacích údajov používateľ bude musieť zadať kód z SMS prijatej na mobilné číslo..."
+        },
+        {
+          "type": "formatting",
+          "description": "The word 'mobilne' should be 'mobilné' (with an accented 'e').",
+          "suggestion": "mobilné"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"credentials are entered\" is translated as \"vnosu poverilnic\". While technically correct, it sounds a bit awkward in Slovenian. A more natural phrasing would be 'ko uporabnik vnese poverilnice'.",
+          "suggestion": "ko uporabnik vnese poverilnice"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'authentication application' is translated as 'avtentikacijske aplikacije'. The singular 'avtentikacijska aplikacija' would be more appropriate, as it refers to *an* authentication application, not multiple ones.",
+          "suggestion": "avtentikacijska aplikacija"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses a hyphenated phrase 'SMS-ом' which might be less common or slightly awkward in Serbian. While technically correct, using 'путем SMS-а' or 'преко SMS-а' would sound more natural.",
+          "suggestion": "Двофакторска аутентификација је сигурнији начин за кориснике да приступе порталу. Након што унесу своје податке за пријаву, корисник ће морати да унесе код који је добио путем SMS-а на мобилни телефон са бројем који је био наведен приликом првог пријављивања на портал или код из апликације за аутентификацију."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses a semicolon (;) where a period (.) might be more appropriate, especially in Serbian.  While semicolons are acceptable, periods are generally preferred for sentence separation in formal writing.",
+          "suggestion": "Replace ';' with '.' in the sentence: 'Nakon što unesu svoje podatke za prijavu, korisnik će morati da unese kod koji je dobio SMS-om na mobilni telefon sa brojem koji je bio naveden prilikom prvog prijavljivanja na portal; ili kod iz aplikacije za autentifikaciju.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"portala ilk girişte belirtilen numarayla\" (with the number specified at the first portal login) is a bit clunky and doesn't perfectly capture the nuance of the English \"number which was specified at the first portal login\". It might be clearer to say something like \"portala ilk kaydolduğunda belirttiğin numarayla\".",
+          "suggestion": "portala ilk kaydolduğunda belirttiğin numarayla"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrasing \"bir kimlik doğrulama uygulamasından gelen kodu\" (the code from an authentication application) is slightly awkward. A more natural phrasing would be \"bir kimlik doğrulama uygulamasıyla\".",
+          "suggestion": "bir kimlik doğrulama uygulamasıyla"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"простору\" in \"під час першого входу до простору\" is not the best translation for \"portal login.\" \"Порталу\" would be more accurate and natural.",
+          "suggestion": "під час першого входу до порталу"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"cổng thông tin\" (information portal) is a bit too literal. A more natural phrasing would be something like \"tài khoản\" or \"nền tảng\" (platform) depending on the context. \"Cổng thông tin\" feels clunky here.",
+          "suggestion": "Xác thực hai yếu tố là một cách an toàn hơn để người dùng truy cập tài khoản. / Xác thực hai yếu tố là một cách an toàn hơn để người dùng truy cập nền tảng."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure \"Sau khi thông tin đăng nhập được nhập\" is grammatically correct but sounds a little formal. It could be made more conversational.",
+          "suggestion": "Sau khi người dùng nhập thông tin đăng nhập"
+        },
+        {
+          "type": "formatting",
+          "description": "The repetition of \"cổng thông tin\" is slightly awkward. While technically correct, it could be improved for readability.",
+          "suggestion": "Xác thực hai yếu tố là một cách an toàn hơn để người dùng truy cập tài khoản. Sau khi người dùng nhập thông tin đăng nhập, họ sẽ phải nhập mã từ SMS nhận được trên điện thoại di động với số điện thoại được chỉ định tại lần đăng nhập đầu tiên hoặc mã từ ứng dụng xác thực."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of 'Two-factor authentication is a more secure way for the users to enter the portal' is awkward.  The phrase '用户用户进入门户' (user user enter portal) is repetitive and doesn't convey the intended meaning.",
+          "suggestion": "双因素身份验证是用户访问门户的一种更安全的方式。"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase '首次登录门户时指定的号码收到的短信中的代码' is overly literal and clunky. It's not the most natural way to express this in Chinese.",
+          "suggestion": "首次登录时绑定的手机号码收到的短信验证码"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The use of '身份验证应用' is acceptable, but depending on the target audience, a more common term might be preferred.",
+          "suggestion": "验证应用 (if targeting a general audience) or 认证应用 (for a more technical audience)"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is a bit long and complex. Consider breaking it down for better readability.",
+          "suggestion": "输入凭据后，用户需要输入首次登录门户时绑定的手机号码收到的短信验证码，或验证应用中的验证码。"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

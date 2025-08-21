@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,9 +30,8 @@ import { Text } from "@docspace/shared/components/text";
 import { Textarea } from "@docspace/shared/components/textarea";
 import { inject, observer } from "mobx-react";
 
-import DangerIcon from "PUBLIC_DIR/images/danger.toast.react.svg?url";
 import { useTranslation } from "react-i18next";
-import { globalColors } from "@docspace/shared/themes";
+import StatusMessage from "@docspace/shared/components/status-message";
 import { isJSON } from "@docspace/shared/utils/json";
 
 const DetailsWrapper = styled.div`
@@ -54,40 +53,15 @@ const DetailsWrapper = styled.div`
     margin-bottom: 4px;
   }
 `;
-const ErrorMessageTooltip = styled.div`
-  box-sizing: border-box;
-
-  width: 100%;
-  max-width: 1200px;
-  padding: 8px 12px;
-  background: ${(props) =>
-    props.theme.client.settings.webhooks.toastBackground};
-
-  box-shadow: 0px 5px 20px ${globalColors.menuShadow};
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-
-  margin-bottom: 16px;
-
-  color: black;
-
-  img {
-    margin-inline-end: 8px;
-  }
-`;
 
 const RequestDetails = ({ eventDetails }) => {
   const { t } = useTranslation(["Webhooks"]);
 
   return (
     <DetailsWrapper>
-      {eventDetails.status === 0 && (
-        <ErrorMessageTooltip>
-          <img src={DangerIcon} alt="danger icon" />
-          {t("FailedToConnect")}
-        </ErrorMessageTooltip>
-      )}
+      {eventDetails.status === 0 ? (
+        <StatusMessage message={t("FailedToConnect")} />
+      ) : null}
       <Text as="h3" fontWeight={600} className="mb-4 mt-7">
         {t("RequestPostHeader")}
       </Text>

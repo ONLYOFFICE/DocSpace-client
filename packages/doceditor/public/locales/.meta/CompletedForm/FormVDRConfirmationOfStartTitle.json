@@ -1,0 +1,308 @@
+{
+  "key_path": "FormVDRConfirmationOfStartTitle",
+  "content": "Form is ready for filling in room",
+  "content_en_sha1_hash": "7e7a3ee89a17104067a57c00273fc1efdc5a7071",
+  "created_at": "2025-05-19T21:30:57.179Z",
+  "updated_at": "2025-06-30T12:20:31.648Z",
+  "comment": {
+    "text": "This translation key is used to display a confirmation title when starting to fill in a form. It appears on the screen of a completed form and indicates that it's ready for user input. The exact wording will vary depending on the state of the form (start filling or finalized).",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:12.615Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/doceditor/src/components/completed-form/CompletedVDRForm.tsx",
+      "line_number": 144,
+      "context": "return t(\"CompletedForm:LinkToForm\");\n }, [t, isStartFilling, completed]);\n \n const header = useMemo(() => {\n if (isStartFilling) {\n return t(\"CompletedForm:FormVDRConfirmationOfStartTitle\");\n }\n \n if (completed) return t(\"CompletedForm:FormFinalized\");\n \n return t(\"CompletedForm:FormSectionCompleted\");",
+      "module": "/packages/doceditor"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'otaqda doldurulmağa hazırdır' is grammatically awkward. While understandable, a more natural phrasing would be preferred.",
+          "suggestion": "Forma otaqda doldurulmaq üçün hazır və ya Forma otaqda doldurulması üçün hazırdır"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Lomake on huoneessa valmiina täytettäväksi' while technically correct, doesn't fully capture the nuance of 'Form is ready for filling in room.' It implies the form *is* in the room. A better translation would suggest readiness for use in the room.",
+          "suggestion": "Lomake on valmis täytettäväksi huoneessa"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Ձևաթուղթն արդեն պատրաստ է լրացման՝ սենյակում։\" doesn't quite capture the meaning of \"Form is ready for filling in room.\"  The word order is slightly awkward and \"սենյակում\" (in room) feels tacked on. It sounds like the form is *in* the room, not that it's ready to be filled *in* the room. A more natural phrasing would better convey the intended meaning.",
+          "suggestion": "Ձևաթուղթն արդեն պատրաստ է լրացնելու համար սենյակում։"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Form is ready for filling in room' is slightly awkward. A more natural English translation would be something like 'The form is ready to be filled out in the room' or 'The form is ready for completion in the room'. The Italian translation, while grammatically correct, doesn't quite capture the nuance of the original.",
+          "suggestion": "Consider a translation like 'Il modulo è pronto per essere compilato nella stanza' or 'Il modulo è pronto per la compilazione nella stanza' to better reflect the original meaning."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"フォームはルームで記入の準備ができています\" is not the most natural or accurate rendering of \"Form is ready for filling in room\". It translates to 'The form is ready to be filled in the room'. A more natural translation would focus on readiness for use rather than location.",
+          "suggestion": "フォームはルームで利用可能です"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'ルームで' implies the form is physically *in* the room. The English phrase is more general and implies the room is the intended location for filling it.",
+          "suggestion": "フォームはルームでの記入に対応できます"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '양식이 룸에서 작성될 준비가 되었습니다' doesn't fully capture the meaning of 'Form is ready for filling in room.' It implies the form will be filled *in* the room, rather than being ready *for* filling in the room.",
+          "suggestion": "양식이 룸에서 작성 가능하도록 준비되었습니다"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ແບບຟອມກຽມພ້ອມສໍາລັບການຕື່ມຂໍ້ມູນໃນຫ້ອງ' is a literal translation and doesn't quite capture the natural flow of 'Form is ready for filling in room'. It implies the room is for filling out the form, rather than the form being ready to be filled out *in* a room.",
+          "suggestion": "ແບບຟອມສາມາດຕື່ມຂໍ້ມູນໄດ້ແລ້ວໃນຫ້ອງ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Formularz jest gotowy do wypełnienia w pokoju' is too literal. A more natural and accurate translation would convey the form is ready to be used in a room.",
+          "suggestion": "Formularz jest gotowy do użycia w pokoju"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'O formulário está pronto a preencher na sala' doesn't fully capture the meaning of 'Form is ready for filling in room'. It implies the form is ready *to be filled in* in the room, not simply that it is ready for filling in a room context. A better translation would emphasize readiness for use in a room setting.",
+          "suggestion": "O formulário está pronto para uso na sala."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"කාමරය පිරවීම සඳහා පෝරමය සූදානම්\" doesn't accurately convey the meaning of \"Form is ready for filling in room\". It literally translates to \"The form is ready for filling in the room.\" A more appropriate translation would focus on the form being ready to be filled out.",
+          "suggestion": "කාමරයේ පෝරමය පුරවා ගැනීමට දැන් සුදානම්"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Образац је спреман за попуњавање у соби' doesn't accurately convey the meaning of 'Form is ready for filling in room'. 'Образац' translates to 'form' but the overall meaning is slightly off. The intent seems to be that a form is ready to be filled out within a specific room.",
+          "suggestion": "Форма је спремна за попуњавање у просторији"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Obrazac je spreman za popunjavanje u sobi' while understandable, doesn't fully capture the nuance of 'Form is ready for filling in room'. A more accurate translation would imply the form is ready to be used *within* a specific room or setting.",
+          "suggestion": "Obrazac je spreman za popunjavanje u prostoriji"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Form is ready for filling in room\" implies readiness for *being* filled in a room, not necessarily *in* a room. A more accurate translation would reflect that.",
+          "suggestion": "Form, odada doldurulmak üzere hazır."
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically acceptable, the translation sounds a little abrupt. Adding a slight softening would improve the flow.",
+          "suggestion": "Form, odada doldurulmak üzere hazır."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Biểu mẫu đã sẵn sàng để điền trong phòng\" is too literal and doesn't convey the intended meaning of 'Form is ready for filling in room'. It implies the form is ready *within* a room, rather than ready to be taken *into* a room to be filled.",
+          "suggestion": "Biểu mẫu đã sẵn sàng để điền trong phòng họp"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '表单已准备好，可在房间内进行填写' while understandable, is a bit literal and not the most natural way to express 'Form is ready for filling in room' in Chinese. It implies the form is *only* fillable in a room.",
+          "suggestion": "表单已准备就绪，可在房间内填写。"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

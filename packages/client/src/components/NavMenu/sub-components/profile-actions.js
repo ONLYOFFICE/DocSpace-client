@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,7 +34,10 @@ import { Link } from "@docspace/shared/components/link";
 import api from "@docspace/shared/api";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import { Button } from "@docspace/shared/components/button";
-import { getUserType } from "@docspace/shared/utils/common";
+import {
+  getUserAvatarRoleByType,
+  getUserType,
+} from "@docspace/shared/utils/common";
 import ProfileMenu from "./profile-menu";
 
 const StyledDiv = styled.div`
@@ -146,12 +149,13 @@ class ProfileActions extends React.PureComponent {
     const { userActions, isProduct } = this.props;
     const { user, opened, avatar } = this.state;
     const userRole = getUserType(user);
+    const avatarRole = getUserAvatarRoleByType(userRole);
 
     return (
       <StyledDiv isProduct={isProduct} ref={this.ref}>
         <Avatar
           onClick={this.onClick}
-          role={userRole}
+          role={avatarRole}
           size={AvatarSize.min}
           source={avatar}
           userName={user.displayName}
@@ -160,7 +164,7 @@ class ProfileActions extends React.PureComponent {
         />
         <ProfileMenu
           className="profile-menu"
-          avatarRole={userRole}
+          avatarRole={avatarRole}
           avatarSource={avatar}
           displayName={user.displayName}
           email={user.email}
@@ -169,29 +173,32 @@ class ProfileActions extends React.PureComponent {
           forwardedRef={this.ref}
         >
           <div style={{ paddingTop: "8px" }}>
-            {userActions.map(
-              (action) =>
-                action &&
-                (action?.isButton ? (
-                  <StyledButtonWrapper key={action.key}>
-                    <Button
-                      size="normal"
-                      scale
-                      label={action.label}
-                      onClick={action.onClick}
-                    />
-                  </StyledButtonWrapper>
-                ) : (
-                  <Link
-                    noHover
-                    key={action.key}
-                    href={action.url}
-                    onClick={this.onClickItemLink}
-                  >
-                    <StyledDropDownItem {...action} noHover />
-                  </Link>
-                )),
-            )}
+            {userActions.map(({ key, ...action }) => {
+              return (
+                <React.Fragment key={key}>
+                  {action ? (
+                    action?.isButton ? (
+                      <StyledButtonWrapper>
+                        <Button
+                          size="normal"
+                          scale
+                          label={action.label}
+                          onClick={action.onClick}
+                        />
+                      </StyledButtonWrapper>
+                    ) : (
+                      <Link
+                        noHover
+                        href={action.url}
+                        onClick={this.onClickItemLink}
+                      >
+                        <StyledDropDownItem {...action} noHover />
+                      </Link>
+                    )
+                  ) : null}
+                </React.Fragment>
+              );
+            })}
           </div>
         </ProfileMenu>
       </StyledDiv>

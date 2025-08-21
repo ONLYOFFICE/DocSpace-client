@@ -1,0 +1,475 @@
+{
+  "key_path": "PortalDeactivationHelper",
+  "content": "If you wish to deactivate this {{productName}}, your space and all information associated with it will be blocked so that no one has access to it for a particular period. To do that, click the Deactivate button. A link to confirm the operation will be sent to the email address of the space owner.\nIn case you want to come back to the space and continue using it, you will need to use the second link provided in the confirmation email. So, please, keep this email in a safe place.",
+  "content_en_sha1_hash": "9a1c4489d8b479bfef9c9f90a924b29e8ecfec2c",
+  "created_at": "2025-05-19T21:30:52.193Z",
+  "updated_at": "2025-05-24T04:37:18.763Z",
+  "comment": {
+    "text": "\"This translation key is used to describe the process of deactivating a portal and blocking access to its associated information. It will appear on the Deactivate button in the Portal Settings page, providing users with instructions and warnings about the impact of deactivation.\"",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:47.953Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/delete-data/portalDeactivation.js",
+      "line_number": 89,
+      "context": "<MainContainer>\n <Text fontSize=\"13px\" className=\"description\">\n {t(\"PortalDeactivationDescription\")}\n </Text>\n <Text className=\"helper\">\n {t(\"PortalDeactivationHelper\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <ButtonWrapper>\n <Button",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"استضافتك\" (istadafatuk) is translated as \"your space\" but in this context, it should be more accurately translated as \"your account\" or \"your subscription\" to reflect the user's access to the product. \"Space\" can be misleading.",
+          "suggestion": "Replace \"استضافتك\" with a term closer to \"حسابك\" (hisabuk - your account) or \"اشتراكك\" (ishtirakuk - your subscription)."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"القيام بذلك\" (al-qiyam bidhalik) is too formal and general. It translates to \"to do that\" but doesn't flow naturally in the context of instructing the user.",
+          "suggestion": "Replace \"القيام بذلك\" with a more direct instruction like \"للإلغاء\" (lil-ilgha' - to deactivate) or \"لتنفيذ ذلك\" (litanfidh dhalik - to execute that)."
+        },
+        {
+          "type": "formatting",
+          "description": "The presence of a newline character `\n` within the translation seems unnecessary and disrupts readability.",
+          "suggestion": "Remove the `\n` character from the string. The content should be formatted appropriately within the UI or application where it will be displayed."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "“Söndürmək” (to extinguish) is not the best translation for deactivate in this context. A more appropriate term would be 'dayandırmaq' or 'ləğv etmək'.",
+          "suggestion": "Bu {{productName}}-i dayandırmaq istəyirsinizsə..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "“Domen” (domain) is used instead of “məkan” (space). While 'domen' can be understood, 'məkan' aligns better with the English 'space' and maintains consistency.",
+          "suggestion": "Bu {{productName}}-i dayandırmaq istəyirsinizsə, məkanınız və onunla əlaqəli bütün məlumat bloklanacaq..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Bunu etmək üçün Deaktiv edin düyməsini sıxın' is somewhat awkward.  A more natural phrasing would be 'Bunu etmək üçün deaktiv etmə düyməsinə klikləyin.'",
+          "suggestion": "Bunu etmək üçün deaktiv etmə düyməsinə klikləyin."
+        },
+        {
+          "type": "formatting",
+          "description": "Inconsistency in casing. The word 'deaktiv' is sometimes lowercase and sometimes uppercase. It should be consistently lowercase.",
+          "suggestion": "Bu {{productName}}-i dayandırmaq istəyirsinizsə, məkanınız və onunla əlaqəli bütün məlumat bloklanacaq ki, heç kim müəyyən müddət ərzində ona daxil ola bilməsin. Bunu etmək üçün deaktiv etmə düyməsinə klikləyin. Fəaliyyəti təsdiqləmək üçün domen sahibinin e-poçt ünvanına keçid göndəriləcək. Domenə qayıtmaq və ondan istifadə etməyə davam etmək istədiyiniz halda, təsdiq e-məktubunda verilmiş ikinci keçiddən istifadə etməlisiniz. Buna görə də, lütfən, bu e-məktubu təhlükəsiz yerdə saxlayın."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase 'предоставяне в имейла' is awkward and not a natural phrasing in Bulgarian. It should be rephrased to sound more fluent.",
+          "suggestion": "предоставен в имейлa"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation maintains a somewhat formal tone which is consistent with the original English. However, consider softening the phrasing slightly for a more conversational and user-friendly feel.",
+          "suggestion": "While the formal tone is accurate, consider phrases like 'Pokud chcete deaktivovat tento prostor...' instead of 'Pokud si přejete tento prostor deaktivovat...' to be less formal and more approachable."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The last sentence \"Γι' αυτό, σας παρακαλούμε να αποθηκεύσετε αυτό το μήνυμα email.\" is slightly awkward. It's a bit too direct and lacks the smooth flow of the English original.",
+          "suggestion": "Εάν επιθυμείτε να επιστρέψετε στον χώρο και να συνεχίσετε να τον χρησιμοποιείτε, σας παρακαλούμε να αποθηκεύσετε αυτό το μήνυμα email σε ασφαλές μέρος."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation uses \"Deaktivoi-painiketta\". While technically correct, the word 'Deaktivoi' is not commonly used and may sound unnatural. A more natural Finnish word for 'deactivate' in this context would be 'poista' or 'sulje'.",
+          "suggestion": "Replace 'Deaktivoi-painiketta' with 'poista-painiketta' or 'sulje-painiketta'."
+        },
+        {
+          "type": "formatting",
+          "description": "The original English text uses a newline character ('\n') to break the paragraph. The Finnish translation also uses a newline, which is good. However, consider whether this is the most suitable formatting for the final user interface. Depending on the layout, it may be better to merge the paragraphs.",
+          "suggestion": "Evaluate whether the newline character is appropriate for the final UI layout. Consider merging the paragraphs if necessary."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The final sentence 'Joten, säilytä tämä sähköposti' translates to 'So, keep this email'. A more natural Finnish expression would be 'Säilytä tämä sähköposti turvallisessa paikassa' which translates to 'Keep this email in a safe place'. The original English text clarifies 'in a safe place'.",
+          "suggestion": "Replace 'Joten, säilytä tämä sähköposti' with 'Säilytä tämä sähköposti turvallisessa paikassa'."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Si vous souhaitez rejoindre l’espace\" should be \"Si vous souhaitez réactiver l’espace\" to accurately reflect the English \"If you want to come back to the space\". \"Rejoindre\" means to join, not reactivate.",
+          "suggestion": "Si vous souhaitez réactiver l’espace"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"特定の期間、誰もアクセスできないようにします\" translates more accurately to \"it will be blocked so that no one has access to it for a particular period\" but the wording could be smoother in Japanese. While technically correct, it's a bit clunky.",
+          "suggestion": "このスペースとそれに関連するすべての情報がブロックされ、特定の期間、アクセスできなくなります。"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"操作確認のためのリンク\" is technically correct but a more natural phrasing in Japanese would be \"確認のためのリンク\".",
+          "suggestion": "確認のためのリンク"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence \"万が一、このスペースに戻って引き続き使用したい場合は、確認メールに記載されている2番目のリンクを使用する必要がありますので、このメールは大切に保管しておいてください。」 is a very long sentence for Japanese. Breaking it into two shorter sentences would improve readability.",
+          "suggestion": "万が一、このスペースに戻って引き続き使用したい場合は、確認メールに記載されている2番目のリンクを使用してください。このメールは大切に保管しておいてください。"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase 'So, please, keep this email in a safe place' is slightly awkward and reads as overly polite in Korean. It lacks natural flow.",
+          "suggestion": "확인 이메일을 안전한 곳에 보관해 주세요."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'your space' is translated as '귀하의 스페이스'. While technically correct, '당신의 스페이스' or simply '스페이스' might sound more natural and less formal in this context.",
+          "suggestion": "귀하의 스페이스 대신 '당신의 스페이스' 또는 '스페이스'를 사용하는 것을 고려해 보세요."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase \"ຖ້າທ່ານຕ້ອງການປິດການນຳໃຊ້ {{productName}} ນີ້\" is a bit long and could be slightly more concise.  Consider breaking it up or rephrasing for readability.",
+          "suggestion": "ຖ້າທ່ານຕ້ອງການຢຸດການໃຊ້ງານ {{productName}} ນີ້"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ບລັອກ' (blocked) while technically correct, might not fully convey the intended meaning of deactivation.  'ປິດການໃຊ້ງານ' (disable) is often preferred for this context.",
+          "suggestion": "ຖ້າທ່ານຕ້ອງການປິດການໃຊ້ງານ {{productName}} ນີ້ , ພື້ນທີ່ ແລະຂໍ້ມູນທັງໝົດຂອງທ່ານທີ່ເຊື່ອມໂຍງກັບມັນຈະຖືກປິດການໃຊ້ງານໄວ້..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "“ການເຊື່ອມຕໍ່ທີສອງ” (the second link) is a bit literal. A more natural phrasing would focus on the purpose of the link.",
+          "suggestion": "ການເຊື່ອມຕໍ່ເພື່ອສືບຕໍ່ໃຊ້ມັນ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The sentence 'Als u wilt terugkeren naar de ruimte en deze verder wilt gebruiken' is a bit verbose. Consider a more concise phrasing.",
+          "suggestion": "Als u de ruimte later weer wilt gebruiken..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'de actie te bevestigen' is a bit clunky. A more natural translation would be 'de deactivatie te bevestigen'.",
+          "suggestion": "Een link om de deactivatie te bevestigen wordt naar het e-mailadres van de eigenaar van de ruimte gestuurd."
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The English content uses '{{productName}}' as a placeholder. The Polish translation also uses the same placeholder which is good, maintaining consistency.",
+          "suggestion": null
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'Jeśli zmienisz zdanie i zechcesz wrócić' is slightly awkward. 'Zechcesz' implies a desire, which isn't strictly necessary here. A more natural phrasing would be simply 'Jeśli zmienisz zdanie i będziesz chciał wrócić'.",
+          "suggestion": "Jeśli zmienisz zdanie i będziesz chciał wrócić"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase \"Para o fazer\" is a bit clunky and could be more natural. While grammatically correct, it feels slightly awkward in modern Portuguese.",
+          "suggestion": "Para isso, or simply remove the phrase and integrate it into the sentence."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'email address' is translated as 'endereço de correio eletrónico', which is technically correct but very formal and dated. It's unnecessarily verbose and not how most Portuguese speakers would express it.",
+          "suggestion": "endereço de email"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "“Portanto” is a bit stiff and can be replaced with something more conversational.",
+          "suggestion": "Logo, ou, então"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'desactivar' is a less common and somewhat archaic way to say 'desativar' in Brazilian Portuguese. It's generally best to use the more common 'desativar'.",
+          "suggestion": "Caso pretenda desativar este {{productName}}"
+        },
+        {
+          "type": "grammar",
+          "description": "The use of 'Então' at the beginning of the second paragraph feels abrupt and doesn't flow naturally. It's better to connect the sentences more seamlessly.",
+          "suggestion": "Caso pretenda voltar ao espaço e continuar a utilizá-lo, você precisará utilizar o segundo link fornecido no email de confirmação."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'você precisará utilizar' is a bit formal. A more natural phrasing would be 'você utilizará' or 'você precisará usar'.",
+          "suggestion": "Caso pretenda voltar ao espaço e continuar a utilizá-lo, você utilizará o segundo link fornecido no email de confirmação."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses both 'você' and 'você precisará'. Maintaining consistency in the pronoun usage would improve readability. Either consistently use 'você' or opt for a more formal construction without a direct pronoun.",
+          "suggestion": "Caso pretenda voltar ao espaço e continuar a utilizá-lo, precisará utilizar o segundo link fornecido no email de confirmação."
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The second paragraph starts with 'Dacă doriţi să reveniţi la spaţiu'. A more natural flow would be to introduce the topic of reactivation earlier. Consider combining the two paragraphs or rephrasing the second paragraph to be a continuation of the first.",
+          "suggestion": "Dacă doriţi să reveniţi la spaţiu şi să continuați să îl utilizaţi, trebuie să folosiţi cel de-al doilea link din email-ul de confirmare. Aşadar, vă rugăm să păstraţi acest email într-un loc sigur."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of 'so that no one has access to it' is 'astfel încât nimeni nu-l va accesa'. A more accurate and natural translation would be 'între a nu putea fi accesat de nimeni'.",
+          "suggestion": "Dacă doriţi să dezactivați acest {{productName}}, spaţiul dvs şi toate informaţiile asociate cu acesta vor fi blocate, astfel încât să fie inaccesibil pentru o anumită perioadă."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "'A fost trimis' translates to 'has been sent'. A more natural Romanian phrasing would be 'a fost trimis'.",
+          "suggestion": "Linkul de confirmare a operaţiei a fost trimis către adresa de email a proprietarului spaţiului."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'තැපැල්' is used repeatedly and appears to be a misspelling of 'තැපැළ'.",
+          "suggestion": "Replace all instances of 'තැපැල්' with 'තැපැළ'."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrasing 'මෙහෙයුම තහවුරු කිරීමට සබැඳියක් අවකාශයේ හිමිකරුගේ වි-තැපැල් ලිපිනයට යවනු ලැබේ.' could be improved for smoother reading.  The possessive ' හිමිකරුගේ' placement is somewhat awkward.",
+          "suggestion": "Consider rephrasing to: 'මෙහෙයුම තහවුරු කිරීමට සබැඳියක් අවකාශයේ හිමිකරුගේ තැපැළ ලිපිනයට යවනු ලැබේ.'"
+        },
+        {
+          "type": "formatting",
+          "description": "The paragraph breaks could be adjusted for better readability.  Consider breaking it up more to avoid long sentences.",
+          "suggestion": "Consider splitting the content into more sentences, each addressing a specific point. This would improve readability."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses a comma before 'Če želite vrniti' which is grammatically incorrect in Slovenian. It should be a period.",
+          "suggestion": "Če želite vrniti v prostor in ga še naprej uporabljati, boste morali uporabiti drugo povezavo v potrditvenem e-mail sporočilu."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "Inconsistency in capitalization. The word 'линк' (link) is sometimes capitalized and sometimes not. It should be consistently lowercase.",
+          "suggestion": "Replace all instances of 'Линк' with 'линк'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'confirmaциoном емаил-у' is a direct transliteration of 'confirmation email' and sounds unnatural in Serbian. A more natural translation would be 'потврдном е-мајлу'.",
+          "suggestion": "Replace 'конфирмационом емаил-у' with 'потврдном е-мајлу'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "Inconsistent capitalization. 'Dugme Deaktiviraj' should be 'Dugme Deaktiviraj' throughout for consistency.",
+          "suggestion": "Dugme Deaktiviraj"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Da biste to uradili' is a bit clunky. It's a literal translation of 'To do that' and doesn't flow naturally in Serbian.",
+          "suggestion": "Da biste to učinili"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'obezbeđen u konfirmacionom email-u' sounds a bit formal and less natural. A more common expression would be better.",
+          "suggestion": "priložen u potvrdi email-a"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translated text uses a combination of single and double quotes. It should be consistent. Using double quotes is preferable for consistency with English.",
+          "suggestion": "Replace single quotes with double quotes throughout the text (e.g., change «Деактивувати» to «Деактивувати»)"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Vietnamese translation uses a formal tone ('xin vui lòng') which might not be appropriate for a user-facing setting. It could be softened.",
+          "suggestion": "Consider replacing 'xin vui lòng' with a more casual phrase like 'hãy' or simply omitting it."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'So, please, keep this email in a safe place' is missing from the Chinese translation. This is a crucial part of the original text, advising users to keep the confirmation email.",
+          "suggestion": "如果您希望重新激活空间并继续使用，您需要使用确认电子邮件中提供的第二个链接。请将此电子邮件保存在安全的地方。"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of 'To do that, click the Deactivate button' could be more natural. While technically correct, it lacks fluency.",
+          "suggestion": "要停用此功能，请点击“停用”按钮。"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

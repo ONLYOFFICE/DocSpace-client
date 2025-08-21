@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -51,12 +51,12 @@ const RequestButtonContainer = ({ isDisabled, isLoading }) => {
 
   return (
     <StyledBody>
-      {isVisibleDialog && (
+      {isVisibleDialog ? (
         <SalesDepartmentRequestDialog
           visible={isVisibleDialog}
           onClose={onClose}
         />
-      )}
+      ) : null}
       <Button
         className="send-request-button"
         label={t("Common:SendRequest")}
@@ -65,6 +65,7 @@ const RequestButtonContainer = ({ isDisabled, isLoading }) => {
         isDisabled={isLoading || isDisabled}
         onClick={toDoRequest}
         isLoading={isLoading}
+        testId="sales_request_button"
       />
     </StyledBody>
   );

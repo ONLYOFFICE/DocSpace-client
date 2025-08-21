@@ -1,0 +1,346 @@
+{
+  "key_path": "ExpectUsers",
+  "content": "Expect users",
+  "content_en_sha1_hash": "a90ef1efac83c2fbe3c15d7bcf5318e2c517db33",
+  "created_at": "2025-05-19T21:30:54.775Z",
+  "updated_at": "2025-08-04T07:30:01.214Z",
+  "comment": {
+    "text": "\"Used as a title in an info panel, indicating user expectations. Appears when displaying expected members in the InfoPanelStore.\"",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:10.197Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/FilesView/hooks/useMembers.ts",
+      "line_number": 118,
+      "context": "label: t(\"Common:Guests\"),\n list: guests,\n },\n {\n key: TInfoPanelMemberType.guests,\n label: t(\"InfoPanel:ExpectUsers\"),\n list: expectedMembers,\n extra: { isExpect: true },\n },\n ];",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"مستخدمين متوقعين\" (mustakhreen mutawaqq'een) literally translates to 'expected users'. While understandable, it's not the most natural or idiomatic way to express 'Expect users' in Arabic. A more suitable translation would convey the idea of anticipation or planning for users.",
+          "suggestion": "Consider alternatives like \"نتوقع مستخدمين\" (natawaqqa' mustakhreen) - 'We expect users', or \"المستخدمين المطلوبين\" (al-mustakhreen al-matloobeen) - 'Required users' depending on the specific context."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'İstifadəçiləri gözləyin' literally translates to 'Wait for users.' The original meaning 'Expect users' implies anticipation or prediction, not just waiting. A more accurate translation would convey that expectation.",
+          "suggestion": "Consider 'İstifadəçiləri gözləyirik' (We expect users) or 'İstifadəçilər üçün gözləyin' (Expect for users - though this is less idiomatic and might require more context)."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Очаквай потребители' uses the imperative form (expect!). This likely doesn't match the intended meaning of 'Expect users' which implies a requirement or prediction. It should be a noun or a passive construction.",
+          "suggestion": "Possible suggestions include: 'Очаквани потребители' (Expected users - noun form), 'Потребители се очакват' (Users are expected - passive voice)"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Očekávejte, že uživatelé' is overly formal and doesn't accurately reflect the simple meaning of 'Expect users'. It implies an expectation *from* the users, rather than users being expected (as in, anticipating their presence or behavior).",
+          "suggestion": "A more accurate and natural translation would depend on the context, but possibilities include: 'Počítejte s uživateli', 'Počítáme s uživateli', or simply 'Uživatelé'."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Eingeladene Benutzer\" (invited users) doesn't fully capture the meaning of \"Expect users\". \"Expect users\" implies anticipation or a planned inclusion, which \"invited users\" doesn't necessarily convey. A more accurate translation might be \"Erwartete Benutzer\" or \"Geplante Benutzer\".",
+          "suggestion": "Erwartete Benutzer"
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Αναμονή χρηστών' literally translates to 'Waiting for users'. While understandable, it doesn't directly convey the meaning of 'Expect users', which implies anticipation or predicted presence. A more accurate translation would convey this expectation.",
+          "suggestion": "Αναμενόμενοι χρήστες"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Attendez les utilisateurs\" while literally meaning \"Wait for the users\", doesn't accurately convey the meaning of \"Expect users\" in the context of a user interface element likely indicating anticipated users or user load. A more appropriate translation would reflect anticipation or expectation.",
+          "suggestion": "Prévoyez les utilisateurs"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Սպասեք օգտատերերին' (Spasek ogtatererin) literally translates to 'Wait for users'. 'Expect users' implies anticipation or a projected number of users, not waiting for them. A more accurate translation would convey that meaning.",
+          "suggestion": "Consider alternatives like 'Արդենցրած օգտատերեր' (Ardenzrac ogtaterer - Projected users) or 'Արդենցրված օգտատերերի քանակ' (Ardenzrvac ogtatereri k’anak’ - Expected number of users)."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Italian translation 'Aspetta gli utenti' translates to 'Wait for the users', which doesn't accurately reflect the meaning of 'Expect users'. 'Expect users' implies anticipation or prediction of user activity.",
+          "suggestion": "Consider alternatives like 'Previdi gli utenti' (Predict the users) or 'Anticipa gli utenti' (Anticipate the users), or potentially a more contextual translation depending on the overall purpose of the InfoPanel."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '期待されているユーザー' implies 'users who are expected' or 'users who are being expected'. It doesn't directly translate the English phrase 'Expect users', which implies a desired number or type of users. A more accurate translation would convey the idea of anticipating a certain number of users.",
+          "suggestion": "Consider alternatives like '見込むユーザー数' (mirikomu yūzā sū) - 'expected number of users' or '想定されるユーザー' (sōtei sareru yūzā) - 'anticipated users'."
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '예상 사용자' while technically correct, doesn't fully capture the nuance of 'Expect users' in the context of an InfoPanel. It's more literal and lacks the implication of anticipating or planning for users. A more suitable translation might emphasize anticipation or planning for users.",
+          "suggestion": "Consider alternatives like '예상되는 사용자 수' (Expected number of users) or '사용자 예상' (User expectation/anticipation), depending on the specific intended meaning."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ຄາດຫວັງວ່າຜູ້ໃຊ້' literally translates to 'expect that users'. While not entirely wrong, 'Expect users' implies an expectation *of* users, rather than an expectation *that* users. A more accurate translation might be 'ຄາດວ່າຈະມີຜູ້ໃຊ້' (expect to have users) or 'ຄາດວ່າຜູ້ໃຊ້ຈະມີ' (expect users to be present).",
+          "suggestion": "ຄາດວ່າຈະມີຜູ້ໃຊ້"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Oczekiwanie na użytkowników' is a literal translation of 'Expecting users' but doesn't quite capture the intended meaning in this context. 'Expect users' often implies anticipation or a requirement.  A more accurate translation might be 'Oczekiwani użytkownicy' or 'Wymagani użytkownicy' depending on the precise context.",
+          "suggestion": "Oczekiwani użytkownicy"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Espere usuários' is grammatically correct but doesn't accurately convey the meaning of 'Expect users'. 'Expect' implies anticipation or prediction. 'Espere' means 'wait'. A better translation would convey the sense of expecting or anticipating users.",
+          "suggestion": "Considere 'Preveja usuários', 'Antecipe usuários', or 'Espere que os usuários' (wait for users)."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Esperar usuários\" is a literal translation and doesn't convey the intended meaning of 'Expect users'. It implies waiting for users, not anticipating or assuming their presence/actions.",
+          "suggestion": "Consider alternatives like \"Prever usuários\", \"Antecipar usuários\", or \"Considerar usuários\", depending on the specific context of 'Expect users'."
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Utilizatori în așteptare\" is understandable, it's not the most natural or accurate translation of \"Expect users.\" A better translation would convey the idea of anticipated or predicted users.",
+          "suggestion": "Potential alternatives: 'Utilizatori estimați', 'Utilizatori preconizați', 'Număr estimat de utilizatori'."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ожидайте пользователей' is technically correct but sounds overly formal and imperative for a user interface element like 'Expect users'. It implies a direct command. A more suitable translation would be more passive or descriptive of the system's behavior.",
+          "suggestion": "Consider alternatives like 'Пользователи ожидаются' (Users are expected) or 'Предполагаемые пользователи' (Expected users) depending on the context."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'අපේක්‍ෂිත පරිශ්‍රීලකයින්' while conveying a meaning close to 'expected users,' is a somewhat formal and less natural translation. A more natural and common phrasing would be something like 'පැයාරුවන්' or 'භාවිතකරුවන්'.",
+          "suggestion": "පැයාරුවන්"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Očakávané používatelia' is too literal and doesn't fully capture the meaning of 'Expect users'. It implies a set number of users expected, rather than the action of expecting them.",
+          "suggestion": "Consider alternatives like 'Predpokladaní používatelia', 'Počítame s používateľmi', or 'Očakávaný počet používateľov', depending on the context. Without the surrounding text, it's difficult to give a perfectly accurate suggestion."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Очекуј кориснике' is grammatically incorrect. It's missing the pronoun 'у' after 'Очекуј'. The correct verb form requires the accusative case.",
+          "suggestion": "Очекуј кориснике"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Beklenen kullanıcılar\" is technically correct but doesn't fully capture the nuance of \"Expect users.\" It implies 'expected users' as in, users who were anticipated. A more accurate translation might convey anticipation or expectation regarding user behavior or the number of users.",
+          "suggestion": "Consider alternatives like \"Beklenen kullanıcı sayısı\" (expected number of users) or \"Kullanıcıların beklentisi\" (user expectations) depending on the exact intended meaning in the context."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Người dùng được mong chờ \" is a literal translation that doesn't quite convey the intended meaning of \"Expect users.\" It implies users are awaited or anticipated, rather than just expected to be present or involved.",
+          "suggestion": "A more appropriate translation would depend on the context, but possibilities include \"Người dùng dự kiến\", \"Người dùng kỳ vọng\", or simply \"Người dùng\" if it implies users are expected to be present."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"等待用户\" (dài dài yòng hù) is understandable, it implies a passive waiting for users to appear. \"Expect users\" suggests anticipation or planning for users. A more accurate translation would convey this anticipation.",
+          "suggestion": "Consider alternatives like \"预期用户\" (yù qī yòng hù) which means 'anticipated users' or \"预计用户\" (yù jì yòng hù) which means 'estimated users'."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

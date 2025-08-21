@@ -1,0 +1,310 @@
+{
+  "key_path": "Rooms",
+  "content": "Rooms",
+  "content_en_sha1_hash": "3a28d6f078fd35a505195a0f8ec6f59e9801d7c2",
+  "created_at": "2025-05-19T21:30:48.236Z",
+  "updated_at": "2025-08-12T19:46:25.742Z",
+  "comment": {
+    "text": "The \"Rooms\" translation key is used to display the content \"Rooms\" in various parts of the user interface. This includes a file selector and a dialog box where it appears as a section title, providing context for users navigating room templates or reassigning data. It appears in UI elements such as buttons, text labels, and progress indicators.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:34:29.688Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/RoomNoAccessContainer.js",
+      "line_number": 47,
+      "context": "const RoomNoAccessContainer = (props) => {\n const { t, setIsLoading, theme, isFrame, userId } = props;\n \n const descriptionRoomNoAccess = t(\"RoomAccessRedirectNote\", {\n sectionName: t(\"Common:Rooms\"),\n });\n const titleRoomNoAccess = t(\"NoAccessRoomTitle\");\n \n const navigate = useNavigate();",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
+      "line_number": 208,
+      "context": "t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:MyFilesSection\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/RoomsSelectorInput/index.js",
+      "line_number": 73,
+      "context": "setIsDataReady,\n } = props;\n \n const [isPanelVisible, setIsPanelVisible] = useState(false);\n const BasePath = `${t(\"Common:ProductName\")} / ${t(\"Common:Rooms\")} `;\n const [path, setPath] = useState(\"\");\n \n const handleOnSubmit = (rooms) => {\n setPath(`${BasePath}/ ${rooms[0].label}`);\n onSubmit && onSubmit(rooms);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/RoomTypeList.js",
+      "line_number": 68,
+      "context": "const getTooltipContent = () => {\n return (\n <Text fontSize=\"12px\" noSelect>\n {t(\"Files:FormRoomCreationLimit\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n </Text>\n );\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Body/Progress.js",
+      "line_number": 202,
+      "context": "<StyledProgress>\n <div className=\"data-start\"> {reassigningDataStart}</div>\n <div className=\"progress-container\">\n <div className=\"progress-section\">\n {!noRooms ? (\n <Text className=\"progress-section-text\">{t(\"Common:Rooms\")}</Text>\n ) : null}\n {noRoomFilesToMove ? null : (\n <Text className=\"progress-section-text\">\n {t(\"Common:Documents\")}\n </Text>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Tabs/RoomTemplatesTabs/index.js",
+      "line_number": 54,
+      "context": "const [selectedTab, setSelectedTab] = React.useState(\"rooms\");\n \n const tabs = [\n {\n id: \"rooms\",\n name: t(\"Common:Rooms\"),\n },\n {\n id: \"templates\",\n name: t(\"Common:Templates\"),\n },",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
+      "line_number": 184,
+      "context": "<ImportSection\n isChecked={importOptions.importSharedFolders}\n onChange={(e) => onChange(e, \"importSharedFolders\")}\n sectionName={t(\"Settings:SharedFolders\")}\n description={t(\"Settings:FolderToRoomImportNote\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n exportSection={{\n sectionName: sharedFoldersExportDetails.name,\n workspace: serviceName,\n sectionIcon: sharedFoldersExportDetails.icon,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
+      "line_number": 184,
+      "context": "<ImportSection\n isChecked={importOptions.importSharedFolders}\n onChange={(e) => onChange(e, \"importSharedFolders\")}\n sectionName={t(\"Settings:SharedFolders\")}\n description={t(\"Settings:FolderToRoomImportNote\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n exportSection={{\n sectionName: sharedFoldersExportDetails.name,\n workspace: serviceName,\n sectionIcon: sharedFoldersExportDetails.icon,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
+      "line_number": 184,
+      "context": "<ImportSection\n isChecked={importOptions.importSharedFolders}\n onChange={(e) => onChange(e, \"importSharedFolders\")}\n sectionName={t(\"Settings:SharedFolders\")}\n description={t(\"Settings:FolderToRoomImportNote\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n exportSection={{\n sectionName: sharedFoldersExportDetails.name,\n workspace: serviceName,\n sectionIcon: sharedFoldersExportDetails.icon,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
+      "line_number": 184,
+      "context": "<ImportSection\n isChecked={importOptions.importSharedFolders}\n onChange={(e) => onChange(e, \"importSharedFolders\")}\n sectionName={t(\"Settings:SharedFolders\")}\n description={t(\"Settings:FolderToRoomImportNote\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n exportSection={{\n sectionName: sharedFoldersExportDetails.name,\n workspace: serviceName,\n sectionIcon: sharedFoldersExportDetails.icon,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
+      "line_number": 184,
+      "context": "<ImportSection\n isChecked={importOptions.importSharedFolders}\n onChange={(e) => onChange(e, \"importSharedFolders\")}\n sectionName={t(\"Settings:SharedFolders\")}\n description={t(\"Settings:FolderToRoomImportNote\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n exportSection={{\n sectionName: sharedFoldersExportDetails.name,\n workspace: serviceName,\n sectionIcon: sharedFoldersExportDetails.icon,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
+      "line_number": 184,
+      "context": "<ImportSection\n isChecked={importOptions.importSharedFolders}\n onChange={(e) => onChange(e, \"importSharedFolders\")}\n sectionName={t(\"Settings:SharedFolders\")}\n description={t(\"Settings:FolderToRoomImportNote\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n exportSection={{\n sectionName: sharedFoldersExportDetails.name,\n workspace: serviceName,\n sectionIcon: sharedFoldersExportDetails.icon,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActionsContainer.tsx",
+      "line_number": 76,
+      "context": "return (\n <div className=\"notification-container\">\n <div className=\"row\">\n <Text {...textProps} className=\"subscription-title\">\n {t(\"FileActivityNotify\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n </Text>\n <ToggleButton\n className=\"rooms-actions\"\n onChange={onChangeBadgeSubscription}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActivityContainer.tsx",
+      "line_number": 68,
+      "context": "return (\n <div className=\"notification-container\">\n <div className=\"row\">\n <Text {...textProps} className=\"subscription-title\">\n {t(\"RoomUpdateNotify\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n </Text>\n <ToggleButton\n className=\"rooms-activity toggle-btn\"\n onChange={onChangeEmailSubscription}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/TreeFoldersStore.js",
+      "line_number": 70,
+      "context": "switch (folder.rootFolderType) {\n case FolderType.USER:\n folder.title = i18n.t(\"Common:MyFilesSection\");\n break;\n case FolderType.Rooms:\n folder.title = i18n.t(\"Common:Rooms\");\n break;\n case FolderType.Archive:\n folder.title = i18n.t(\"Common:Archive\");\n break;\n case FolderType.TRASH:",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Miestností' is a valid Slovak word, it's the genitive plural form. 'Rooms' in English typically translates to 'izby' (nominative plural) or 'miestnosti' (nominative plural). The genitive form implies possession or relationship, which isn't suitable for a simple label like 'Rooms'.",
+          "suggestion": "miestnosti"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovenian translation 'Săli' is incorrect for 'Rooms'. The correct translation should be 'Sobě'. 'Săli' translates to 'Halls' or 'Rooms (as in meeting rooms)', whereas 'Sobě' is the general term for rooms.",
+          "suggestion": "Sobě"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"Собе\" is not an accurate translation of \"Rooms\". \"Собе\" translates to \"Rooms\" in the plural, but the English term \"Rooms\" can also be singular. A more accurate translation, depending on context, might be \"Соба\" (singular) or \"Комнате\" (plural, more formal).",
+          "suggestion": "Consider \"Соба\" (singular) or \"Комнате\" (plural) depending on context."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

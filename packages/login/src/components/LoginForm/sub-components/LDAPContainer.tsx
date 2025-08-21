@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -64,8 +64,10 @@ const LDAPContainer = ({
                 <Text fontSize="12px">{t("SignInLdapHelper")}</Text>
               }
               tooltipMaxWidth={isMobileOnly ? "240px" : "340px"}
+              dataTestId="ldap_login_help_button"
             />
           }
+          dataTestId="ldap_login_checkbox"
         />
       </div>
     </div>

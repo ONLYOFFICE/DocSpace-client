@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,6 @@ import React from "react";
 import { ReactSVG } from "react-svg";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
-import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { globalColors } from "@docspace/shared/themes";
 import { thirdpartiesLogo } from "@docspace/shared/utils/image-thirdparties";
@@ -44,9 +43,19 @@ const StyledItem = styled.div.attrs(injectDefaultTheme)`
         color: ${({ theme }) => theme.client.settings.integration.textColor};
       `}
   }
+
+  .item-box {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
 `;
 
-const StyledBox = styled(Box).attrs(injectDefaultTheme)`
+const StyledBox = styled.div.attrs(injectDefaultTheme)`
+  box-sizing: border-box;
+
   .consumer-icon {
     ${(props) =>
       !props.theme.isBase &&
@@ -92,35 +101,31 @@ const ConsumerItem = ({
 
   return (
     <StyledItem isThirdPartyAvailable={isThirdPartyAvailable} isSet={isSet}>
-      <Box
-        displayProp="flex"
-        justifyContent="space-between"
-        alignItems="center"
-        widthProp="100%"
-      >
+      <div className="item-box">
         <StyledBox
           canSet={consumer.canSet}
           isLinkedIn={consumer.name === "linkedin"}
           isThirdPartyAvailable={isThirdPartyAvailable}
         >
-          {logo && (
+          {logo ? (
             <ReactSVG
               src={logo}
               className="consumer-icon"
               alt={consumer.name}
             />
-          )}
+          ) : null}
         </StyledBox>
-        <Box onClick={setConsumer} data-consumer={consumer.name}>
+        <div onClick={setConsumer} data-consumer={consumer.name}>
           <ConsumerToggle
             consumer={consumer}
             onModalOpen={onModalOpen}
             updateConsumerProps={updateConsumerProps}
             t={t}
             isDisabled={!isThirdPartyAvailable}
+            dataTestId="consumer_toggle_button"
           />
-        </Box>
-      </Box>
+        </div>
+      </div>
 
       <Text className="consumer-description">{consumer.description}</Text>
     </StyledItem>

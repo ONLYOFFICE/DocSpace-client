@@ -1,0 +1,326 @@
+{
+  "key_path": "RedirectsURLSHelpButton",
+  "content": "After a user successfully authorizes an application, the authorization server will redirect the user back to the application with sensitive information.",
+  "content_en_sha1_hash": "afaa35bc3fc5ef0500f3ea3dbb1af9d5c894b1d2",
+  "created_at": "2025-05-19T21:30:53.988Z",
+  "updated_at": "2025-08-04T07:30:01.428Z",
+  "comment": {
+    "text": "This translation key is used for the help text on a form field that asks users to enter \"redirect URIs\" after authorizing an application. The text provides information about what redirect URLs are and why they're needed in this context. It appears as a button label in a form dialog.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:40.759Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/OAuthBlock.tsx",
+      "line_number": 73,
+      "context": "label={t(\"RedirectsURLS\")}\n placeholder={t(\"EnterURL\")}\n name=\"redirect_uris\"\n onAdd={changeValue}\n currentValue={redirectUrisValue}\n helpButtonText={t(\"RedirectsURLSHelpButton\")}\n isDisabled={isEdit}\n hasError={requiredErrorFields.includes(\"redirect_uris\")}\n dataTestId=\"redirect_uris\"\n />\n <MultiInputGroup",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"سيقوم خادم التفويض بتحويل المستخدم مرة أخرى إلى التطبيق\" is a bit literal and could be improved for flow and clarity in Arabic. A more natural phrasing would convey the redirect more smoothly.",
+          "suggestion": "بعد أن يوافق المستخدم على تطبيق، سيقوم خادم التفويض بإعادة توجيه المستخدم إلى التطبيق مع المعلومات الحساسة."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'authorize' (ترخيص) might not be the most precise translation for OAuth authorization in the context of application access. 'موافقة' (muwafaqah - agreement/approval) might be more appropriate.",
+          "suggestion": "استبدل 'ترخيص' بـ 'موافقة' ليكون أكثر دقة في سياق OAuth."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'avtorizasiya serveri' (authorization server) is technically correct, but in a user-facing context, using a more accessible term like 'razmeynliyin serveri' (distribution server) or a paraphrase would be more understandable for a non-technical user. While 'avtorizasiya serveri' is accurate, it might not resonate with the intended audience.",
+          "suggestion": "Consider rewording to use a more user-friendly term like 'razmeynliyin serveri' or simply rephrasing the sentence to avoid the technical term."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'yönləndirəcək' (will redirect) is accurate but sounds slightly formal. A more conversational phrasing might be better.",
+          "suggestion": "Consider using 'qayıdır' (returns) instead of 'yönləndirəcək' for a more natural flow."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'redirect the user back to the application' is slightly awkward in Spanish. While technically correct, it's not the most natural phrasing. 'Redirigirá al usuario a la aplicación' is more concise and common.",
+          "suggestion": "Después de que un usuario autorice con éxito una aplicación, el servidor de autorización redirigirá al usuario a la aplicación con información sensible."
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"autorisé avec succès\" is a bit awkward. A more natural phrasing in French would be something like \"a autorisé avec succès\" or simply \"a autorisé\".",
+          "suggestion": "Après qu'un utilisateur a autorisé une application avec succès..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"le serveur d'autorisation redirige l'utilisateur vers l'application\" could be improved for clarity and flow. A more idiomatic phrasing might be \"le serveur d'autorisation redirige l'utilisateur vers l'application, lui envoyant...\"",
+          "suggestion": "le serveur d'autorisation redirige l'utilisateur vers l'application, lui envoyant..."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"sensitive information\" is translated as \"կոնֆիդենցիալ ինֆորմացիայով\" which, while technically correct, sounds slightly awkward and less natural in Armenian. A more common and fluid phrasing would be \"ժողովածու տվյալներով\" or \"գաղտնի տվյալներով\".",
+          "suggestion": "Consider revising to: \"Այն բանից հետո, երբ օգտատերը հաջողությամբ լիազորում է հավելվածը, թույլտվության սերվերն օգտատիրոջը կվերահղի դեպի հավելված՝ ժողովածու տվյալներով:\" or \"Այն բանից հետո, երբ օգտատերը հաջողությամբ լիազորում է հավելվածը, թույլտվության սերվերն օգտատիրոջը կվերահղի դեպի հավելված՝ գաղտնի տվյալներով:\""
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"After a user successfully authorizes an application\" is slightly more nuanced than the Italian translation \"Dopo che un utente ha autorizzato un'applicazione.\" The English emphasizes the *successful* authorization, which is important context.  The Italian doesn't explicitly convey that success.",
+          "suggestion": "Dopo che un utente ha *autorizzato con successo* un'applicazione..."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"sensitive information\" is translated as \"機密情報\" (himitsu jōhō). While accurate, a more natural and commonly used term in this context would be \"認証コード\" (shōnin kōdo) or \"認可コード\" (ninka kōdo), referring to the authorization code.  '機密情報' implies highly confidential data, which isn't the primary meaning in this scenario.",
+          "suggestion": "ユーザーがアプリケーションの認証に成功すると、認証サーバーはユーザーを認証コードとともにアプリケーションにリダイレクトします。"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"sensitive information\" is translated as \"민감한 정보\" which is accurate but lacks nuance. Considering the context of OAuth, a more precise translation might emphasize the *authorization code* or *token*. The current translation could be misinterpreted.",
+          "suggestion": "사용자가 애플리케이션을 인증하면, 인증 서버는 권한 부여 코드 또는 토큰과 함께 해당 애플리케이션으로 다시 리디렉션합니다."
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct, the sentence structure could be slightly improved for better flow and readability in Korean. It's a bit long and could be broken up.",
+          "suggestion": "사용자가 애플리케이션 인증을 완료하면, 인증 서버는 해당 애플리케이션으로 사용자를 다시 리디렉션합니다. 이때 민감한 정보 (예: 권한 부여 코드 또는 토큰)가 함께 전달됩니다."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'redirect' is not accurately translated. 'ນໍາທາງ' (nam tang) generally means 'navigate' or 'guide', not 'redirect'. A more accurate translation would convey the specific meaning of being sent back to a URL.",
+          "suggestion": "ຫຼັງຈາກຜູ້ໃຊ້ໄດ້ຮັບອະນຸຍາດແອບພິເຄຊັນຢ່າງສໍາເລັດແລ້ວ, ຕົວຮັບອະນຸຍາດຈະສົ່ງຜູ້ໃຊ້ກັບຄືນໄປທີ່ແອບພິເຄຊັນ..."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'сервер авторизации перенаправит пользователя назад в приложение' is slightly awkward. A more natural phrasing would be 'сервер авторизации перенаправит пользователя обратно в приложение'. 'Назад в приложение' implies a return *to* the application, while 'обратно в приложение' more accurately conveys the redirection *back* to it.",
+          "suggestion": "После успешной авторизации приложения пользователем сервер авторизации перенаправит пользователя обратно в приложение с конфиденциальной информацией."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"පරිශීලකයෙකු අයදුම්පත්‍රයක් සඳහා සාර්ථකව බලය ලබා දීමෙන් පසු\" is a bit awkward and could be more accurately translated as \"අයදුම්පත්‍රයක් සඳහා පරිශීලකයා සාර්ථකව අවසර දුන් පසු\" or similar to convey 'after a user successfully authorizes an application'. The current wording is overly literal and feels unnatural.",
+          "suggestion": "අයදුම්පත්‍රයක් සඳහා පරිශීලකයා සාර්ථකව අවසර දුන් පසු"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"බලය ලබා දීමේ සේවාව\" is somewhat literal translation of 'authorization server'. A more natural phrasing would be \"අවසර පත්‍රය නිකුທ්තික කරන සේවාව\" or a simpler \"අවසර සේවාව\"",
+          "suggestion": "අවසර පත්‍රය නිකුທ්තික කරන සේවාව"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'sensitive information' is overly literal. A more understandable term for a Sinhala audience would be something akin to 'පුද්ගලික තොරතුරු' (personal information) or 'අත්‍යාවශ්‍ය තොරතුරු'.",
+          "suggestion": "පුද්ගලික තොරතුරු"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the sentence is quite long and can be split for improved readability. Consider breaking it down into two shorter sentences.",
+          "suggestion": "After a user successfully authorizes an application, the authorization server will redirect the user back to the application. This redirection will include sensitive information."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'authorize' is translated as 'ủy quyền'. While technically correct, a more natural and common phrasing in Vietnamese for this context would be 'đồng ý' (agree) or 'cho phép' (allow). 'Ủy quyền' has a more formal and legalistic connotation which might not be suitable for this user-facing explanation.",
+          "suggestion": "Sau khi người dùng đồng ý hoặc cho phép ứng dụng, máy chủ ủy quyền sẽ chuyển hướng người dùng trở lại ứng dụng với thông tin mật."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'sensitive information' is translated as 'thông tin mật'. While literally 'secret information', a more appropriate term in this context would be 'thông tin nhạy cảm' (sensitive information) or 'thông tin cá nhân' (personal information).  'Mật' carries a heavier security connotation.",
+          "suggestion": "Sau khi người dùng đồng ý hoặc cho phép ứng dụng, máy chủ ủy quyền sẽ chuyển hướng người dùng trở lại ứng dụng với thông tin nhạy cảm hoặc thông tin cá nhân."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"sensitive information\" is not adequately captured by the Chinese translation.  \"并附带敏感信息\" (bing fu dai min gan xin xi) literally translates to 'and attached sensitive information,' which isn't the nuance of redirection *with* sensitive information.  It sounds like the information is simply attached somewhere, not delivered via redirect.",
+          "suggestion": "用户成功授权应用后，授权服务器将把用户重定向回应用，并携带敏感信息。 (Yonghu cheng gong shouquan yingyong hou, shouquan fuwuyuan jiang ba yonghu zhongdiao hui yingyong, bing xiedai min gan xin xi.) - This translates to 'After a user successfully authorizes an application, the authorization server will redirect the user back to the application, and carry sensitive information.'"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

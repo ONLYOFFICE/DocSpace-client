@@ -1,0 +1,160 @@
+name: Frontend common tests
+
+on:
+  push:
+    branches: [develop, release/v*, hotfix/v*]
+    paths: [packages/**, common/**]
+  pull_request:
+    branches: [develop, release/v*, hotfix/v*]
+    paths: [packages/**, common/**]
+jobs:
+  playwright-login:
+    name: "Login e2e tests"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cleanup existing containers
+        run: docker ps -a --filter name=login-tests-ci -q | xargs -r docker rm -f
+      - uses: adambirds/docker-compose-action@v1.5.0
+        with:
+          compose-file: packages/login/compose.yaml
+          up-flags: --build --force-recreate --remove-orphans
+          down-flags: --volumes --remove-orphans
+          services: tests-ci
+          test-container: tests-ci
+          test-command: pnpm exec playwright test
+          environment: |
+            CI=true
+            GITHUB_WORKFLOW=${{ github.workflow }}
+            GITHUB_RUN_ID=${{ github.run_id }}
+            GITHUB_RUN_NUMBER=${{ github.run_number }}
+  playwright-sdk:
+    name: "SDK e2e tests"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cleanup existing containers
+        run: docker ps -a --filter name=sdk-tests-ci -q | xargs -r docker rm -f
+      - uses: adambirds/docker-compose-action@v1.5.0
+        with:
+          compose-file: packages/sdk/compose.yaml
+          up-flags: --build --force-recreate --remove-orphans
+          down-flags: --volumes --remove-orphans
+          services: tests-ci
+          test-container: tests-ci
+          test-command: pnpm exec playwright test
+          environment: |
+            CI=true
+            GITHUB_WORKFLOW=${{ github.workflow }}
+            GITHUB_RUN_ID=${{ github.run_id }}
+            GITHUB_RUN_NUMBER=${{ github.run_number }}
+  eslint:
+    name: "Lint tests"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.15.0
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: "pnpm"
+      - name: Install dependencies
+        run: pnpm install
+      - name: Lint clients
+        run: pnpm lint
+  tsc:
+    name: "TypeScript tests"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.15.0
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: "pnpm"
+      - name: Install dependencies
+        run: pnpm install
+      - name: Run tsc
+        run: pnpm tsc
+  unit-tests:
+    name: "Unit tests"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.15.0
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: "pnpm"
+      - name: Install dependencies
+        run: pnpm install
+      - name: Run unit tests
+        run: pnpm test
+  images:
+    name: "Images tests"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.x"
+      - name: Install dependencies
+        working-directory: ./common/tests
+        run: npm install
+      - name: Run common tests
+        working-directory: ./common/tests
+        run: npm run test:images
+  colors:
+    name: "Colors tests"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        working-directory: ./common/tests
+        run: npm install
+      - name: Run common tests
+        working-directory: ./common/tests
+        run: npm run test:colors
+  dependencies:
+    name: "Dependencies tests"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        working-directory: ./common/tests
+        run: npm install
+      - name: Run common tests
+        working-directory: ./common/tests
+        run: npm run test:dependencies
+  locales:
+    name: "Locales tests (skip base languages)"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        working-directory: ./common/tests
+        run: npm install
+      - name: Run common tests
+        working-directory: ./common/tests
+        run: npm run test:skip-base-languages

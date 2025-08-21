@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -36,13 +36,14 @@ const Body = ({
   showProgress,
   isReassignCurrentUser,
   user,
-  selectedUser,
+  targetUser,
   percent,
   currentColorScheme,
   isAbortTransfer,
   dataReassignmentUrl,
   onTogglePeopleSelector,
   onTerminate,
+  noRoomFilesToMove,
 }) => {
   if (!tReady) return <DialogReassignmentSkeleton />;
 
@@ -52,11 +53,10 @@ const Body = ({
         isReassignCurrentUser={isReassignCurrentUser}
         fromUser={user.displayName}
         toUser={
-          selectedUser.displayName
-            ? selectedUser.displayName
-            : selectedUser.label
+          targetUser.displayName ? targetUser.displayName : targetUser.label
         }
         noRooms={user.isCollaborator || user.isVisitor}
+        noRoomFilesToMove={noRoomFilesToMove}
         percent={percent}
         isAbortTransfer={isAbortTransfer}
         onTerminate={onTerminate}
@@ -68,11 +68,14 @@ const Body = ({
       <AccountInfo user={user} />
       <NewOwner
         t={t}
-        selectedUser={selectedUser}
+        targetUser={targetUser}
         currentColorScheme={currentColorScheme}
         onTogglePeopleSelector={onTogglePeopleSelector}
       />
-      <Description t={t} dataReassignmentUrl={dataReassignmentUrl} />
+      <Description
+        dataReassignmentUrl={dataReassignmentUrl}
+        noRoomFilesToMove={noRoomFilesToMove}
+      />
     </>
   );
 };

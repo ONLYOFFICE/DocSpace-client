@@ -1,0 +1,244 @@
+{
+  "key_path": "TargetId",
+  "content": "Target ID",
+  "content_en_sha1_hash": "00960a1596223da245b50ed57203e5563a5ae5a5",
+  "created_at": "2025-05-19T21:30:49.849Z",
+  "updated_at": "2025-08-04T07:30:01.471Z",
+  "comment": {
+    "text": "This translation key is used for \"Target ID\" to provide a label for an input field where users can enter or select a target ID. It appears in a labeled input component within a dialog, and its purpose is to guide users in entering the required information.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:49.989Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhookDialog.js",
+      "line_number": 258,
+      "context": "triggerAll={triggerAll}\n onChange={handleOnChangeTriggerAll}\n />\n <LabledInput\n id={`${additionalId}-target-id-input`}\n label={t(\"TargetId\")}\n placeholder={t(\"EnterTargetId\")}\n name=\"targetId\"\n value={webhookInfo.targetId}\n onChange={onInputChange}\n isDisabled={isLoading}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Նպատակի ID\" is a literal translation of \"Target ID\", it might sound slightly awkward or technical in Armenian depending on the context. A more natural translation might be \"Լուրջ ունակների ID\" or \"Վերգրաբերողների ID\" depending on what the 'target' refers to in this webhook context.",
+          "suggestion": "Consider alternatives like \"Լուրջ ունակների ID\" or \"Վերգրաբերողների ID\" for better readability, or confirm the intended meaning of 'Target ID' to select the most appropriate translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ID-ul de destinație' is understandable, it's a slightly literal translation and can be improved for natural Romanian. 'Target ID' often refers to a specific identifier, and a more common Romanian equivalent would be 'ID-ul țintă' or 'ID-ul obiectiv'.",
+          "suggestion": "ID-ul țintă"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ID цели\" while technically correct, is not the most natural or commonly used translation for \"Target ID\" in a technical context. \"ID цели\" translates literally to \"Target ID\". A more common and idiomatic translation would be something like \"Идентификатор цели\" or simply \"Целевой ID\".",
+          "suggestion": "Consider using \"Идентификатор цели\" or \"Целевой ID\" as a more natural and widely accepted translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'ලකුණු ID' literally translates to 'Score ID'. While 'Target ID' can sometimes relate to a score or point in certain contexts, it's not the standard or most accurate translation of 'Target ID'. It could be misinterpreted.",
+          "suggestion": "A more accurate translation would depend on the specific context. Possible alternatives include: 'අඩිතාල ID' (Adithala ID - Foundation ID), 'අනුශිඛ්ෂණ ID' (Anushikshana ID - Target ID), or simply 'ලක්ෂිත ID' (Lakshita ID - Targeted ID). Further context would be needed for the best translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Циљани ID\" while understandable, isn't the most natural or accurate translation of 'Target ID' in Serbian (Cyrillic). 'Циљани' implies 'targeted' as an adjective, but 'Target ID' refers to a specific identifier.",
+          "suggestion": "ИД циља"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ID đích\" is understandable, it's not the most natural or precise translation of \"Target ID\". \"ID mục tiêu\" is a more common and accurate translation in Vietnamese.",
+          "suggestion": "ID mục tiêu"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

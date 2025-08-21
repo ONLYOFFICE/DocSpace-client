@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -93,6 +93,7 @@ export const CreatedPDFFormDialog = inject<TStore>(
                 className="created-pdf__checkbox"
                 onChange={handleChangeCheckbox}
                 label={t("Common:DontShowAgain")}
+                dataTestId="created_pdf_form_dialog_dont_show_again"
               />
             </Wrapper>
           </ModalDialog.Body>
@@ -104,12 +105,14 @@ export const CreatedPDFFormDialog = inject<TStore>(
               size={ButtonSize.normal}
               label={primaryButtonLabel}
               onClick={onSubmit}
+              testId="created_pdf_form_dialog_copy_public_link"
             />
             <Button
               tabIndex={0}
               onClick={onClose}
               size={ButtonSize.normal}
               label={t("Common:Later")}
+              testId="created_pdf_form_dialog_later"
             />
           </ModalDialog.Footer>
         </ModalDialog>

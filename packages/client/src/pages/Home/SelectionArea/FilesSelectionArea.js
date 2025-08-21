@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,11 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useLayoutEffect } from "react";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { SelectionArea as SelectionAreaComponent } from "@docspace/shared/components/selection-area";
-import { getCountTilesInRow } from "SRC_DIR/helpers/filesUtils";
+import { getCountTilesInRow } from "@docspace/shared/utils";
 
 const SelectionArea = (props) => {
   const {
@@ -40,20 +40,23 @@ const SelectionArea = (props) => {
     filesLength,
     isInfoPanelVisible,
     isIndexEditingMode,
+    selectionAreaIsEnabled,
+    setWithContentSelection,
   } = props;
 
-  const [countTilesInRow, setCountTilesInRow] = useState(getCountTilesInRow());
+  const [countTilesInRow, setCountTilesInRow] = useState();
 
   const setTilesCount = () => {
-    const newCount = getCountTilesInRow();
-    setCountTilesInRow(newCount);
+    if (isRooms === undefined) return;
+    const newCount = getCountTilesInRow(isRooms);
+    if (countTilesInRow !== newCount) setCountTilesInRow(newCount);
   };
 
   const onResize = () => {
     setTilesCount();
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setTilesCount();
     window.addEventListener("resize", onResize);
 
@@ -83,12 +86,15 @@ const SelectionArea = (props) => {
     {
       type: "folder",
       rowCount: Math.ceil(foldersLength / countTilesInRow),
-      rowGap: 12,
+      rowGap: isRooms ? 14 : 12,
       countOfMissingTiles: getCountOfMissingFilesTiles(foldersLength),
     },
   ];
 
-  return isMobile || dragging || isIndexEditingMode ? null : (
+  const isEnabled =
+    selectionAreaIsEnabled && !isMobile && !dragging && !isIndexEditingMode;
+
+  return isEnabled ? (
     <SelectionAreaComponent
       containerClass="section-scroll"
       scrollClass="section-scroll"
@@ -102,16 +108,24 @@ const SelectionArea = (props) => {
       folderHeaderHeight={35}
       defaultHeaderHeight={46}
       arrayTypes={arrayTypes}
+      onMouseDown={() => setWithContentSelection(false)}
     />
-  );
+  ) : null;
 };
 
 export default inject(
-  ({ filesStore, treeFoldersStore, infoPanelStore, indexingStore }) => {
+  ({
+    filesStore,
+    treeFoldersStore,
+    infoPanelStore,
+    indexingStore,
+    hotkeyStore,
+  }) => {
     const { dragging, viewAs, setSelections, folders, files } = filesStore;
     const { isRoomsFolder, isArchiveFolder } = treeFoldersStore;
     const { isVisible: isInfoPanelVisible } = infoPanelStore;
     const { isIndexEditingMode } = indexingStore;
+    const { selectionAreaIsEnabled, setWithContentSelection } = hotkeyStore;
 
     const isRooms = isRoomsFolder || isArchiveFolder;
 
@@ -124,6 +138,8 @@ export default inject(
       filesLength: files.length,
       isInfoPanelVisible,
       isIndexEditingMode,
+      selectionAreaIsEnabled,
+      setWithContentSelection,
     };
   },
 )(observer(SelectionArea));

@@ -1,8 +1,4 @@
-function Compare(...fns: Array<Function>) {
-  return (arg: string) => {
-    return fns.reduce((composed, fn) => fn(composed), arg);
-  };
-}
+import { checkIsSSR } from "../../utils";
 
 function removeSpecialSymbol(text: string): string {
   return text.replace(/[-_[\]{}()*+!?.,&\\^$|#@%]/g, "");
@@ -22,9 +18,18 @@ function toUpperCase(text: string) {
   return text.toUpperCase();
 }
 
-export const getRoomTitle = Compare(
-  removeSpecialSymbol,
-  trim,
-  getFirstAndLastChar,
-  toUpperCase,
-);
+export const getRoomTitle = (title: string) => {
+  const removeSpecSymbol = removeSpecialSymbol(title);
+  const trimText = trim(removeSpecSymbol);
+  const firstAndLastChar = getFirstAndLastChar(trimText);
+
+  return toUpperCase(firstAndLastChar);
+};
+
+export const encodeToBase64 = (value: string) => {
+  if (checkIsSSR()) {
+    return Buffer.from(value).toString("base64");
+  }
+
+  return window.btoa(value);
+};

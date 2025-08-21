@@ -1,5 +1,4 @@
-import { AvatarRole } from "./../components/avatar/Avatar.enums";
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,7 +28,7 @@ import { AvatarRole } from "./../components/avatar/Avatar.enums";
 /* eslint-disable no-multi-str */
 /* eslint-disable no-plusplus */
 
-import type { Location } from "@remix-run/router";
+import type { Location } from "react-router";
 import find from "lodash/find";
 import moment from "moment-timezone";
 import { findWindows } from "windows-iana";
@@ -37,8 +36,6 @@ import { isMobile } from "react-device-detect";
 import { I18nextProviderProps } from "react-i18next";
 import sjcl from "sjcl";
 import resizeImage from "resize-image";
-
-import { flagsIcons } from "@docspace/shared/utils/image-flags";
 
 import LoginPageSvgUrl from "PUBLIC_DIR/images/logo/loginpage.svg?url";
 import DarkLoginPageSvgUrl from "PUBLIC_DIR/images/logo/dark_loginpage.svg?url";
@@ -48,6 +45,14 @@ import LightSmallSvgUrl from "PUBLIC_DIR/images/logo/lightsmall.svg?url";
 import DocsEditoRembedSvgUrl from "PUBLIC_DIR/images/logo/docseditorembed.svg?url";
 import DarkLightSmallSvgUrl from "PUBLIC_DIR/images/logo/dark_lightsmall.svg?url";
 import FaviconIco from "PUBLIC_DIR/images/logo/favicon.ico";
+import SpreadsheetEditorSvgUrl from "PUBLIC_DIR/images/logo/spreadsheeteditor.svg?url";
+import SpreadsheetEditorEmbedSvgUrl from "PUBLIC_DIR/images/logo/spreadsheeteditorembed.svg?url";
+import PresentationEditorSvgUrl from "PUBLIC_DIR/images/logo/presentationeditor.svg?url";
+import PresentationEditorEmbedSvgUrl from "PUBLIC_DIR/images/logo/presentationeditorembed.svg?url";
+import PDFEditorSvgUrl from "PUBLIC_DIR/images/logo/pdfeditor.svg?url";
+import PDFEditorEmbedSvgUrl from "PUBLIC_DIR/images/logo/pdfeditorembed.svg?url";
+import DiagramEditorSvgUrl from "PUBLIC_DIR/images/logo/diagrameditor.svg?url";
+import DiagramEditorEmbedSvgUrl from "PUBLIC_DIR/images/logo/diagrameditorembed.svg?url";
 
 import BackgroundPatternReactSvgUrl from "PUBLIC_DIR/images/background.pattern.react.svg?url";
 import BackgroundPatternOrangeReactSvgUrl from "PUBLIC_DIR/images/background.pattern.orange.react.svg?url";
@@ -56,29 +61,39 @@ import BackgroundPatternRedReactSvgUrl from "PUBLIC_DIR/images/background.patter
 import BackgroundPatternPurpleReactSvgUrl from "PUBLIC_DIR/images/background.pattern.purple.react.svg?url";
 import BackgroundPatternLightBlueReactSvgUrl from "PUBLIC_DIR/images/background.pattern.lightBlue.react.svg?url";
 import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.pattern.black.react.svg?url";
+
+import { AvatarRole } from "../components/avatar/Avatar.enums";
+
+import { flagsIcons } from "./image-flags";
+
 import { parseAddress } from "./email";
 
 import {
   FolderType,
   RoomsType,
-  ShareAccessRights,
   ThemeKeys,
   ErrorKeys,
   WhiteLabelLogoType,
   EmployeeType,
+  UrlActionType,
 } from "../enums";
 import {
   COOKIE_EXPIRATION_YEAR,
   LANGUAGE,
   PUBLIC_MEDIA_VIEW_URL,
   RTL_LANGUAGES,
+  TIMEZONE,
 } from "../constants";
 
 import { TI18n, TTranslation } from "../types";
 import { TUser } from "../api/people/types";
 import { TFolder, TFile, TGetFolder } from "../api/files/types";
 import { TRoom } from "../api/rooms/types";
-import { TPasswordHash, TTimeZone } from "../api/settings/types";
+import {
+  TDomainValidator,
+  TPasswordHash,
+  TTimeZone,
+} from "../api/settings/types";
 import TopLoaderService from "../components/top-loading-indicator";
 
 import { Encoder } from "./encoder";
@@ -86,6 +101,7 @@ import { combineUrl } from "./combineUrl";
 import { getCookie, setCookie } from "./cookie";
 import { checkIsSSR } from "./device";
 import { hasOwnProperty } from "./object";
+import { TFrameConfig } from "../types/Frame";
 
 export const desktopConstants = Object.freeze({
   domain: !checkIsSSR() && window.location.origin,
@@ -182,24 +198,24 @@ export const parseDomain = (
 
 export const validatePortalName = (
   value: string,
-  nameValidator: { minLength: number; maxLength: number; regex: RegExp },
+  nameValidator: TDomainValidator,
   setError: Function,
   t: TTranslation,
 ) => {
   const validName = new RegExp(nameValidator.regex);
   switch (true) {
     case value === "":
-      return setError(t("Settings:PortalNameEmpty"));
+      return setError(t("Common:PortalNameEmpty"));
     case value.length < nameValidator.minLength ||
       value.length > nameValidator.maxLength:
       return setError(
-        t("Settings:PortalNameLength", {
+        t("Common:PortalNameLength", {
           minLength: nameValidator.minLength.toString(),
           maxLength: nameValidator.maxLength.toString(),
         }),
       );
     case !validName.test(value):
-      return setError(t("Settings:PortalNameIncorrect"));
+      return setError(t("Common:PortalNameIncorrect"));
 
     default:
       setError(null);
@@ -453,6 +469,10 @@ export const isLanguageRtl = (lng: string) => {
   return RTL_LANGUAGES.includes(splittedLng[0]);
 };
 
+export const getDirectionByLanguage = (lng: string) => {
+  return isLanguageRtl(lng) ? "rtl" : "ltr";
+};
+
 // temporary function needed to replace rtl language in Editor to ltr
 export const getLtrLanguageForEditor = (
   userLng: string | undefined,
@@ -559,10 +579,11 @@ export function isElementInViewport(el: HTMLElement) {
 }
 
 export function assign(
-  obj: { [key: string]: {} },
+  objParam: { [key: string]: {} },
   keyPath: string[],
   value: {},
 ) {
+  let obj = objParam;
   const lastKeyIndex = keyPath.length - 1;
   for (let i = 0; i < lastKeyIndex; ++i) {
     const key = keyPath[i];
@@ -753,7 +774,8 @@ export const getDaysRemaining = (autoDelete: Date) => {
   return `${daysRemaining}`;
 };
 
-export const getFileExtension = (fileTitle: string) => {
+export const getFileExtension = (fileTitleParam: string) => {
+  let fileTitle = fileTitleParam;
   if (!fileTitle) {
     return "";
   }
@@ -858,7 +880,7 @@ export const decodeDisplayName = <T extends TFile | TFolder | TRoom>(
     if (!item) return item;
 
     if ("updatedBy" in item) {
-      const updatedBy = item.updatedBy as {};
+      const updatedBy = item.updatedBy;
       if (
         updatedBy &&
         "displayName" in updatedBy &&
@@ -869,7 +891,7 @@ export const decodeDisplayName = <T extends TFile | TFolder | TRoom>(
     }
 
     if ("createdBy" in item) {
-      const createdBy = item.createdBy as {};
+      const createdBy = item.createdBy;
       if (
         createdBy &&
         "displayName" in createdBy &&
@@ -1010,11 +1032,7 @@ export const getSystemTheme = () => {
   if (typeof window !== "undefined") {
     const isDesktopClient = window?.AscDesktopEditor !== undefined;
     const desktopClientTheme = window?.RendererProcessVariable?.theme;
-    const isDark =
-      desktopClientTheme?.id === "theme-dark" ||
-      desktopClientTheme?.id === "theme-contrast-dark" ||
-      (desktopClientTheme?.id === "theme-system" &&
-        desktopClientTheme?.system === "dark");
+    const isDark = desktopClientTheme?.type === "dark";
 
     return isDesktopClient
       ? isDark
@@ -1030,17 +1048,18 @@ export const getSystemTheme = () => {
 };
 
 export const getEditorTheme = (theme?: ThemeKeys) => {
+  const systemTheme =
+    getSystemTheme() === ThemeKeys.DarkStr ? "theme-night" : "theme-white";
+
   switch (theme) {
     case ThemeKeys.BaseStr:
-      return "default-light";
+      return "theme-white";
     case ThemeKeys.DarkStr:
-      return "default-dark";
-    case ThemeKeys.SystemStr: {
-      const uiTheme = getSystemTheme();
-      return uiTheme === ThemeKeys.DarkStr ? "default-dark" : "default-light";
-    }
+      return "theme-night";
+    case ThemeKeys.SystemStr:
+      return "theme-system";
     default:
-      return "default-dark";
+      return systemTheme;
   }
 };
 
@@ -1074,6 +1093,22 @@ export const getLogoFromPath = (path: string) => {
       return DocsEditoRembedSvgUrl;
     case "favicon.ico":
       return FaviconIco;
+    case "spreadsheeteditor.svg":
+      return SpreadsheetEditorSvgUrl;
+    case "spreadsheeteditorembed.svg":
+      return SpreadsheetEditorEmbedSvgUrl;
+    case "presentationeditor.svg":
+      return PresentationEditorSvgUrl;
+    case "presentationeditorembed.svg":
+      return PresentationEditorEmbedSvgUrl;
+    case "pdfeditor.svg":
+      return PDFEditorSvgUrl;
+    case "pdfeditorembed.svg":
+      return PDFEditorEmbedSvgUrl;
+    case "diagrameditor.svg":
+      return DiagramEditorSvgUrl;
+    case "diagrameditorembed.svg":
+      return DiagramEditorEmbedSvgUrl;
     default:
       break;
   }
@@ -1234,17 +1269,25 @@ export const getUserTypeDescription = (
   t: TTranslation,
 ) => {
   if (isPortalAdmin)
-    return t("Translations:RolePortalAdminDescription", {
+    return t("Common:RolePortalAdminDescription", {
       productName: t("Common:ProductName"),
+      sectionName: t("Common:MyFilesSection"),
     });
 
-  if (isRoomAdmin) return t("Translations:RoleRoomAdminDescription");
+  if (isRoomAdmin)
+    return t("Common:RoleRoomAdminDescription", {
+      sectionName: t("Common:MyFilesSection"),
+    });
 
-  if (isCollaborator) return t("Translations:RoleNewUserDescription");
+  if (isCollaborator) return t("Common:RoleNewUserDescription");
 
   return t("Translations:RoleGuestDescriprion");
 };
-export function setLanguageForUnauthorized(culture: string) {
+
+export function setLanguageForUnauthorized(
+  culture: string,
+  isReload: boolean = true,
+) {
   setCookie(LANGUAGE, culture, {
     "max-age": COOKIE_EXPIRATION_YEAR,
   });
@@ -1257,10 +1300,16 @@ export function setLanguageForUnauthorized(culture: string) {
   if (prevCulture) {
     const newUrl = window.location.href.replace(`&culture=${prevCulture}`, ``);
 
-    window.history.pushState("", "", newUrl);
+    window.history.pushState({}, "", newUrl);
   }
 
-  window.location.reload();
+  if (isReload) window.location.reload();
+}
+
+export function setTimezoneForUnauthorized(timezone: string) {
+  setCookie(TIMEZONE, timezone, {
+    "max-age": COOKIE_EXPIRATION_YEAR,
+  });
 }
 
 export const imageProcessing = async (file: File, maxSize?: number) => {
@@ -1271,10 +1320,9 @@ export const imageProcessing = async (file: File, maxSize?: number) => {
   const maxImageSize = maxSize ?? ONE_MEGABYTE;
   const imageBitMap = await createImageBitmap(file);
 
-  const width = imageBitMap.width;
-  const height = imageBitMap.height;
+  const { width } = imageBitMap;
+  const { height } = imageBitMap;
 
-  // @ts-expect-error imageBitMap
   const canvas = resizeImage.resize2Canvas(imageBitMap, width, height);
 
   async function resizeRecursiveAsync(
@@ -1283,7 +1331,6 @@ export const imageProcessing = async (file: File, maxSize?: number) => {
     depth = 0,
   ): Promise<unknown> {
     const data = resizeImage.resize(
-      // @ts-expect-error canvas
       canvas,
       img.width / compressionRatio,
       img.height / compressionRatio,
@@ -1325,3 +1372,141 @@ export const imageProcessing = async (file: File, maxSize?: number) => {
     file.size > maxImageSize ? COMPRESSION_RATIO : NO_COMPRESSION_RATIO,
   );
 };
+
+export const getBackupProgressInfo = (
+  opt: {
+    progress: number;
+    isCompleted?: boolean;
+    link?: string;
+    error?: string;
+  },
+  t: TTranslation,
+  setBackupProgress: (progress: number) => void,
+  setLink: (link: string) => void,
+) => {
+  const { isCompleted, link, error, progress } = opt;
+  setBackupProgress(progress);
+
+  if (isCompleted) {
+    if (error) {
+      setBackupProgress(100);
+      return { error };
+    }
+
+    if (link && link.slice(0, 1) === "/") {
+      setLink(link);
+    }
+
+    return { success: t("Common:BackupCreatedSuccess") };
+  }
+};
+
+type OpenUrlParams = {
+  url: string;
+  action: UrlActionType;
+  replace?: boolean;
+  isFrame?: boolean;
+  frameConfig?: TFrameConfig | null;
+};
+
+export const openUrl = ({
+  url,
+  action,
+  replace,
+  isFrame,
+  frameConfig,
+}: OpenUrlParams) => {
+  if (action === UrlActionType.Download) {
+    return isFrame &&
+      frameConfig?.downloadToEvent &&
+      frameConfig?.events?.onDownload
+      ? frameCallEvent({ event: "onDownload", data: url })
+      : replace
+        ? (window.location.href = url)
+        : window.open(url, "_self");
+  }
+};
+
+export const getSdkScriptUrl = (version: string) => {
+  return typeof window !== "undefined"
+    ? `${window.location.origin}/static/scripts/sdk/${version}/api.js`
+    : "";
+};
+
+export const calculateTotalPrice = (
+  quantity: number,
+  unitPrice: number,
+): number => {
+  return Number((quantity * unitPrice).toFixed(2));
+};
+
+export const truncateNumberToFraction = (
+  value: number,
+  digits: number = 2,
+): string => {
+  const [intPart, fracPart = ""] = value.toString().split(".");
+  const truncated = fracPart.slice(0, digits).padEnd(digits, "0");
+  return `${intPart}.${truncated}`;
+};
+
+export const formatCurrencyValue = (
+  language: string,
+  amount: number,
+  currency: string,
+  fractionDigits: number = 3,
+) => {
+  const truncatedStr = truncateNumberToFraction(amount, fractionDigits);
+  const truncated = Number(truncatedStr);
+
+  const formatter = new Intl.NumberFormat(language, {
+    style: "currency",
+    currency,
+    minimumFractionDigits: fractionDigits,
+    maximumFractionDigits: fractionDigits,
+  });
+
+  return formatter.format(truncated);
+};
+
+export const insertEditorPreloadFrame = (docServiceUrl: string) => {
+  if (
+    !docServiceUrl ||
+    typeof window === "undefined" ||
+    document.getElementById("editor-preload-frame")
+  ) {
+    return;
+  }
+
+  const iframe = document.createElement("iframe");
+
+  iframe.id = "editor-preload-frame";
+  iframe.style.cssText =
+    "position:absolute;width:0;height:0;border:0;opacity:0;pointer-events:none;visibility:hidden";
+  iframe.setAttribute("aria-hidden", "true");
+  iframe.setAttribute("tabindex", "-1");
+
+  const cleanup = () => iframe.remove();
+  const setupCleanup = () => setTimeout(cleanup, 3000);
+
+  iframe.addEventListener("load", setupCleanup, { once: true });
+  iframe.addEventListener("error", cleanup, { once: true });
+
+  const appendIframe = () => {
+    document.body.appendChild(iframe);
+    iframe.src = docServiceUrl;
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", appendIframe, { once: true });
+  } else {
+    appendIframe();
+  }
+};
+
+export function buildDataTestId(
+  dataTestId: string | undefined,
+  suffix: string,
+): string | undefined {
+  if (!dataTestId) return undefined;
+  return `${dataTestId}_${suffix}`;
+}

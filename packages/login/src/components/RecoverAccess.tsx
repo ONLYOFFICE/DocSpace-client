@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,7 +29,7 @@
 import { useTranslation } from "react-i18next";
 
 import { Link, LinkType } from "@docspace/shared/components/link";
-import RecoverAccessModalDialog from "@docspace/shared/components/recover-access-modal-dialog/RecoverAccessModalDialog";
+import RecoverAccessModalDialog from "@docspace/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog";
 
 import useRecoverDialog from "@/hooks/useRecoverDialog";
 
@@ -42,7 +42,7 @@ const RecoverAccess = () => {
     recoverDialogTextBody,
     openRecoverDialog,
     closeRecoverDialog,
-  } = useRecoverDialog({});
+  } = useRecoverDialog();
 
   return (
     <>
@@ -53,10 +53,11 @@ const RecoverAccess = () => {
         isHovered
         className="login-link recover-link"
         onClick={openRecoverDialog}
+        dataTestId="recover_access_link"
       >
         {t("RecoverAccess")}
       </Link>
-      {recoverDialogVisible && (
+      {recoverDialogVisible ? (
         <RecoverAccessModalDialog
           visible={recoverDialogVisible}
           onClose={closeRecoverDialog}
@@ -64,7 +65,7 @@ const RecoverAccess = () => {
           emailPlaceholderText={recoverDialogEmailPlaceholder}
           id="recover-access-modal"
         />
-      )}
+      ) : null}
     </>
   );
 };

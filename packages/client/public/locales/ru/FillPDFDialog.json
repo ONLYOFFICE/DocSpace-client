@@ -2,8 +2,5 @@
   "FillOutButtonLabel": "Заполнить",
   "FillOutDescription": "Заполните поля исходной формы в окне редактора.",
   "FillOutTitle": "Заполнить форму самостоятельно",
-  "FillPDFDialogTitle": "Заполнить как",
-  "ShareCollectButtonLabel": "Скопировать в комнату",
-  "ShareCollectDescription": "Поделитесь своей формой и соберите ответы через комнату заполнения форм.",
-  "ShareCollectTitle": "Предоставить доступ"
+  "FillPDFDialogTitle": "Заполнить как"
 }

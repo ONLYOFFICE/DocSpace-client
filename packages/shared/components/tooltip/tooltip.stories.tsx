@@ -29,23 +29,78 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Link } from "../link";
 import { Text } from "../text";
 import { Tooltip } from ".";
-
-// import TooltipDocs from "./Tooltip.mdx";
 import { globalColors } from "../../themes";
 
 const meta = {
-  title: "Components/Tooltip",
+  title: "Base UI Components/Tooltip",
   component: Tooltip,
   parameters: {
     docs: {
-      // page: TooltipDocs,
+      description: {
+        component: `
+A versatile tooltip component that provides contextual information or hints when hovering over or clicking on elements.
+
+## Features
+- Multiple placement options
+- Custom styling
+- Dynamic content
+- Click or hover trigger modes
+- Floating behavior
+- Arrow customization
+`,
+      },
     },
     design: {
       type: "figma",
       url: "https://www.figma.com/file/ZiW5KSwb4t7Tj6Nz5TducC/UI-Kit-DocSpace-1.0.0?node-id=649%3A4458&mode=dev",
     },
   },
+  argTypes: {
+    place: {
+      control: "select",
+      options: [
+        "top",
+        "top-start",
+        "top-end",
+        "right",
+        "right-start",
+        "right-end",
+        "bottom",
+        "bottom-start",
+        "bottom-end",
+        "left",
+        "left-start",
+        "left-end",
+      ],
+      description: "Position of the tooltip relative to the target element",
+    },
+    color: {
+      control: "color",
+      description: "Background color of the tooltip",
+    },
+    opacity: {
+      control: { type: "range", min: 0, max: 1, step: 0.1 },
+      description: "Opacity of the tooltip",
+    },
+    maxWidth: {
+      control: "text",
+      description: "Maximum width of the tooltip",
+    },
+    noArrow: {
+      control: "boolean",
+      description: "Whether to show the arrow pointer",
+    },
+    openOnClick: {
+      control: "boolean",
+      description: "Open tooltip on click instead of hover",
+    },
+    float: {
+      control: "boolean",
+      description: "Enable floating behavior",
+    },
+  },
 } satisfies Meta<typeof Tooltip>;
+
 type Story = StoryObj<typeof Tooltip>;
 
 export default meta;
@@ -57,24 +112,92 @@ export const Default: Story = {
     return (
       <div style={{ height: "240px" }}>
         <div style={{ ...bodyStyle, position: "absolute" }}>
-          <Link data-tooltip-id="link" data-tooltip-content="Bob Johnston">
-            Bob Johnston
+          <Link
+            data-tooltip-id="default-tooltip"
+            data-tooltip-content="Simple tooltip"
+          >
+            Hover me
           </Link>
         </div>
+        <Tooltip {...args} id="default-tooltip" />
+      </div>
+    );
+  },
+  args: {
+    float: true,
+    place: "top",
+  },
+};
 
+export const CustomStyling: Story = {
+  render: (args) => {
+    return (
+      <div style={{ height: "240px" }}>
+        <div style={{ ...bodyStyle, position: "absolute" }}>
+          <Link
+            data-tooltip-id="styled-tooltip"
+            data-tooltip-content="Styled tooltip"
+          >
+            Hover for styled tooltip
+          </Link>
+        </div>
+        <Tooltip {...args} id="styled-tooltip" />
+      </div>
+    );
+  },
+  args: {
+    color: "green",
+    opacity: 0.9,
+    maxWidth: "200px",
+    noArrow: false,
+  },
+};
+
+export const ClickToShow: Story = {
+  render: (args) => {
+    return (
+      <div style={{ height: "240px" }}>
+        <div style={{ ...bodyStyle, position: "absolute" }}>
+          <Link
+            data-tooltip-id="click-tooltip"
+            data-tooltip-content="Click-triggered tooltip"
+          >
+            Click me
+          </Link>
+        </div>
+        <Tooltip {...args} id="click-tooltip" />
+      </div>
+    );
+  },
+  args: {
+    openOnClick: true,
+    place: "right",
+  },
+};
+
+export const RichContent: Story = {
+  render: (args) => {
+    return (
+      <div style={{ height: "240px" }}>
+        <div style={{ ...bodyStyle, position: "absolute" }}>
+          <Link
+            data-tooltip-id="rich-tooltip"
+            data-tooltip-content="Bob Johnston"
+          >
+            Hover for rich content
+          </Link>
+        </div>
         <Tooltip
           {...args}
-          id="link"
+          id="rich-tooltip"
           getContent={({ content }) => (
             <div>
               <Text isBold fontSize="16px">
                 {content}
               </Text>
-
               <Text color={globalColors.gray} fontSize="13px">
                 BobJohnston@gmail.com
               </Text>
-
               <Text fontSize="13px">Developer</Text>
             </div>
           )}
@@ -82,103 +205,48 @@ export const Default: Story = {
       </div>
     );
   },
-  args: { float: true, place: "top" },
+  args: {
+    float: true,
+    place: "top",
+    maxWidth: "250px",
+  },
 };
 
-const arrayUsers = [
-  {
-    key: "user_1",
-    name: "Bob",
-    email: "Bob@gmail.com",
-    position: "developer",
-  },
-  {
-    key: "user_2",
-    name: "John",
-    email: "John@gmail.com",
-    position: "developer",
-  },
-  {
-    key: "user_3",
-    name: "Kevin",
-    email: "Kevin@gmail.com",
-    position: "developer",
-  },
-  {
-    key: "user_4",
-    name: "Alex",
-    email: "Alex@gmail.com",
-    position: "developer",
-  },
-  {
-    key: "user_5",
-    name: "Tomas",
-    email: "Tomas@gmail.com",
-    position: "developer",
-  },
-];
-
-export const AllTooltip: Story = {
+export const DynamicGroup: Story = {
   render: () => {
+    const users = [
+      { name: "Bob", email: "bob@example.com", position: "Developer" },
+      { name: "Alice", email: "alice@example.com", position: "Designer" },
+      { name: "Charlie", email: "charlie@example.com", position: "Manager" },
+    ];
+
     return (
-      <div>
-        <div>
-          <h5 style={{ marginInlineStart: -5 }}>Hover on me</h5>
-          <Link data-tooltip-id="link" data-tooltip-content="Bob Johnston">
-            Bob Johnston
-          </Link>
+      <div style={{ padding: "20px" }}>
+        <Text>Group of tooltips:</Text>
+        <div style={{ display: "flex", gap: "20px", marginTop: "10px" }}>
+          {users.map((user, index) => (
+            <Link
+              key={user.name}
+              data-tooltip-id="group-tooltip"
+              data-tooltip-content={index}
+            >
+              {user.name}
+            </Link>
+          ))}
         </div>
-        <Tooltip id="link" offset={0}>
-          <div>
-            <Text isBold fontSize="16px">
-              Bob Johnston
-            </Text>
-
-            <Text color={globalColors.gray} fontSize="13px">
-              BobJohnston@gmail.com
-            </Text>
-
-            <Text fontSize="13px">Developer</Text>
-          </div>
-        </Tooltip>
-
-        <div>
-          <h5 style={{ marginInlineStart: -5 }}>Hover group</h5>
-          <Link data-tooltip-id="group" data-tooltip-content={0}>
-            Bob
-          </Link>
-          <br />
-          <Link data-tooltip-id="group" data-tooltip-content={1}>
-            John
-          </Link>
-          <br />
-          <Link data-tooltip-id="group" data-tooltip-content={2}>
-            Kevin
-          </Link>
-          <br />
-          <Link data-tooltip-id="group" data-tooltip-content={3}>
-            Alex
-          </Link>
-          <br />
-          <Link data-tooltip-id="group" data-tooltip-content={4}>
-            Tomas
-          </Link>
-        </div>
-
         <Tooltip
-          id="group"
+          id="group-tooltip"
           getContent={({ content }) => {
-            return content && typeof content === "string" ? (
+            const user = users[Number(content)];
+            return user ? (
               <div>
                 <Text isBold fontSize="16px">
-                  {arrayUsers[+content].name}
+                  {user.name}
                 </Text>
-
                 <Text color={globalColors.gray} fontSize="13px">
-                  {arrayUsers[+content].email}
+                  {user.email}
                 </Text>
-
-                <Text fontSize="13px">{arrayUsers[+content].position}</Text>
+                <Text fontSize="13px">{user.position}</Text>
               </div>
             ) : null;
           }}

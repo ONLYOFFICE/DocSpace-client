@@ -1,8 +1,6 @@
 {
   "DeleteForeverButton": "Eliminar para sempre",
-  "DeleteForeverNote": "Todos os itens do Lixo serão eliminados para sempre. Não será capaz de restaurá-los.",
-  "DeleteForeverNoteArchive": "Todos os itens nos Arquivados serão eliminados para sempre. Não poderá restaurá-los.",
+  "DeleteForeverNote": "Todos os itens da secção {{sectionName}} serão eliminados para sempre. Não os poderá restaurar.",
   "DeleteForeverTitle": "Eliminar para sempre?",
-  "SuccessEmptyArchived": "Arquivo esvaziado",
-  "SuccessEmptyTrash": "Lixo esvaziado"
+  "SuccessEmptyAction": "{{sectionName}} Secção esvaziada"
 }

@@ -1,0 +1,78 @@
+@use "../../styles/mixins";
+
+@use "../../styles/variables/colors";
+
+.tile {
+  position: relative;
+  display: grid;
+  width: 100%;
+
+  @include mixins.mobile {
+    &:nth-of-type(n + 3) {
+      display: none;
+    }
+  }
+
+  @include mixins.tablet-and-below {
+    &:nth-of-type(n + 8) {
+      display: none;
+    }
+  }
+}
+
+.roomTile {
+  border-radius: 6px;
+  height: 120px;
+
+  border: var(--files-section-tiles-view-tile-border);
+}
+
+.roomTileTopContent {
+  display: grid;
+  grid-template-columns: 32px 1fr 24px;
+  gap: 8px;
+  align-items: center;
+  height: 61px;
+  border-bottom: var(--files-section-tiles-view-tile-border);
+  padding: 0 8px 0 16px;
+}
+
+.roomTileBottomContent {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  gap: 4px;
+}
+
+.tilesSkeleton {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(216px, 1fr));
+  grid-gap: 16px;
+
+  @include mixins.tablet-and-below {
+    grid-template-columns: repeat(auto-fill, minmax(216px, 1fr));
+  }
+
+  @include mixins.mobile {
+    grid-template-columns: repeat(auto-fill, minmax(216px, 1fr));
+  }
+
+  .tilesSkeletonRooms {
+    grid-template-columns: repeat(auto-fill, minmax(275mpx, 1fr));
+
+    @include mixins.tablet-and-below {
+      grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+    }
+
+    @include mixins.mobile {
+      grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+    }
+  }
+}
+
+.tilesWrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 16px;
+}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,9 +32,9 @@ import { CheckboxProps } from "@docspace/shared/components/checkbox/Checkbox.typ
 import { ToggleButtonProps } from "@docspace/shared/components/toggle-button/ToggleButton.types";
 import { TextareaProps } from "@docspace/shared/components/textarea/Textarea.types";
 import {
-  ComboboxProps,
+  TComboboxProps,
   TOption,
-} from "@docspace/shared/components/combobox/Combobox.types";
+} from "@docspace/shared/components/combobox/ComboBox.types";
 import { ToastProps } from "@docspace/shared/components/toast/Toast.type";
 import { ModalDialogProps } from "@docspace/shared/components/modal-dialog/ModalDialog.types";
 import { TextProps } from "@docspace/shared/components/text/Text.types";
@@ -108,7 +108,7 @@ export interface IMessage {
     | ToggleButtonProps
     | ButtonProps
     | TextareaProps
-    | ComboboxProps;
+    | TComboboxProps;
   toastProps?: ToastProps[];
   contextProps?: {
     name: string;
@@ -116,7 +116,7 @@ export interface IMessage {
       | BoxProps
       | ButtonProps
       | CheckboxProps
-      | ComboboxProps
+      | TComboboxProps
       | IFrame
       | IImage
       | TextInputProps

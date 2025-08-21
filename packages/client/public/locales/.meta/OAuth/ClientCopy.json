@@ -1,0 +1,321 @@
+{
+  "key_path": "ClientCopy",
+  "content": "Client ID successfully copied to clipboard",
+  "content_en_sha1_hash": "49dffc680fd02b354ebf3087f0826f4dec0a274f",
+  "created_at": "2025-05-19T21:30:53.834Z",
+  "updated_at": "2025-06-30T12:20:31.468Z",
+  "comment": {
+    "text": "The translation key \"ClientCopy\" is used to display a success message when a client ID is successfully copied to the clipboard in the OAuth settings form. This message appears as part of a button or dialog that triggers the copy action, indicating that the operation was successful.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:54.550Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/ClientBlock.tsx",
+      "line_number": 69,
+      "context": "const onChange = () => {};\n \n const onCopyClick = (name: string) => {\n if (name === \"id\") {\n copy(value[name]);\n toastr.success(t(\"ClientCopy\"));\n } else {\n copy(value[name]);\n toastr.success(t(\"SecretCopy\"));\n }\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Id klienta úspěšně zkopírováno do schránky' is a literal translation, but 'Client ID' is often referred to as 'Klientská ID' or 'ID klienta' in Czech, especially in technical contexts.  'Id' is a direct transliteration of 'ID' and might be perceived as less natural.",
+          "suggestion": "Klientská ID úspěšně zkopírováno do schránky"
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct, the passive voice ('...zkopírováno') might be slightly less direct. Consider active voice for a more user-friendly feel.",
+          "suggestion": "Klientská ID bylo úspěšně zkopírováno do schránky"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Client id onnistuneesti kopioitu leikepöydälle' is not ideal. 'Client ID' should be 'Asiakas-tunnus' for better understanding by Finnish users. 'leikepöydälle' could be more naturally phrased as 'leikepöydälle'.",
+          "suggestion": "Asiakas-tunnus onnistuneesti kopioitu leikepöydälle"
+        },
+        {
+          "type": "formatting",
+          "description": "Using hyphenated compound 'Asiakas-tunnus' is grammatically correct and improves readability in Finnish.  While 'Client id' is understandable, it's not the most natural phrasing.",
+          "suggestion": "Use 'Asiakas-tunnus' instead of 'Client id'."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ID cliente copiato con successo negli appunti' is a bit literal. A more natural Italian phrasing would be 'Client ID copiato con successo negli appunti' or 'L'ID cliente è stato copiato con successo negli appunti'. While understandable, the current translation feels slightly awkward.",
+          "suggestion": "Client ID copiato con successo negli appunti"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ສໍາເລັດ' is repeated. It means 'completed' or 'successful' and is redundant when used twice in a row.",
+          "suggestion": "ID ຂອງລູກຄ້າສໍາເນົາສູ່ແຜ່ນກ໊ານແລ້ວ"
+        },
+        {
+          "type": "grammar",
+          "description": "While understandable, the structure 'ສໍາເລັດສໍາເລັດການສໍາເນົາ' is slightly awkward. A more natural phrasing would be preferred.",
+          "suggestion": "ID ຂອງລູກຄ້າສໍາເນົາສູ່ແຜ່ນກ໊ານແລ້ວ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'klembord' is a less common and slightly dated term for clipboard. 'Kopieerbord' is more frequently used in modern Dutch.",
+          "suggestion": "Client ID succesvol gekopieerd naar kopieerbord"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase 'área de transferência' is commonly referred to as 'clipboard' in Portuguese when discussing software and applications. Using 'área de transferência' is technically correct but less natural in this context.",
+          "suggestion": "ID do cliente copiado com êxito para a área de cópia"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ID do cliente copiado com sucesso para a área de transferência' is a literal translation but could be improved for natural flow in Portuguese. 'Área de transferência' is technically correct but 'área de copiar e colar' or simply 'na área de transferência' sounds more natural.",
+          "suggestion": "ID do cliente copiado com sucesso na área de transferência"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ID client a fost copiat cu succes în clipboard' is not the most natural or accurate translation of \"Client ID successfully copied to clipboard\". A more accurate and idiomatic translation would be 'ID-ul clientului a fost copiat cu succes în clipboard'.",
+          "suggestion": "ID-ul clientului a fost copiat cu succes în clipboard"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the use of 'ID' instead of 'ID-ul' makes the sentence sound slightly less fluent in Romanian. Using 'ID-ul' is more common and natural.",
+          "suggestion": "ID-ul clientului a fost copiat cu succes în clipboard"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'පාරිභෝගික' is a less common and potentially ambiguous term. While technically correct, 'පාරිශුද්ධ' is more commonly used to refer to a client or customer in this context.",
+          "suggestion": "පාරිශුද්ධ"
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure 'පාරිභෝගික හැඳුනුම්පත සාර්ථකව ක්ලිප්බෝඩ් එකට පිටපත් කරන ලදී' is grammatically correct but can be slightly improved for natural flow. It could be rephrased to make it sound less formal.",
+          "suggestion": "පාරිභෝගික හැඳුනුම්පත ක්ලිප්බෝඩ් එකට සාර්ථකව පිටපත් කරන ලදී"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ID klienta úspešne skopírované do schránky' is a literal translation and sounds slightly unnatural in Slovak. The term 'schránka' is technically correct for clipboard, but in this context, a more natural phrasing would be preferred. \"Klient ID úspešne skopírované do výstrihu\" or \"ID klienta bolo úspešne skopírované do výstrihu\" would be better.",
+          "suggestion": "ID klienta bolo úspešne skopírované do výstrihu"
+        },
+        {
+          "type": "formatting",
+          "description": "There's a trailing space after the word 'schránky' in the original translation. This is a minor formatting issue.",
+          "suggestion": "ID klienta úspešne skopírované do schránky"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'odložišče' translates to 'clipboard' but is less common and less natural in this context. 'Shranjevalnik' is a more accurate and common term for clipboard.",
+          "suggestion": "ID odjemalca je bil uspešno kopiran v shranjevalnik"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'међумеморију' (memory) is an uncommon and potentially inaccurate translation for 'clipboard' in this context. It implies a more persistent storage area rather than a temporary holding space.",
+          "suggestion": "Клијентски ID успешно копиран у исправну плочу (Klјentski ID uspešno kopiran u ispravnu ploču)"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Đã sao chép id khách vào bộ nhớ tạm thành công\" is not an accurate translation of \"Client ID successfully copied to clipboard\". 'id khách' is not the correct term for 'Client ID'. It should be 'ID khách hàng' or simply 'ID khách'.",
+          "suggestion": "Đã sao chép ID khách hàng vào bộ nhớ tạm thành công"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, using a more natural phrasing might improve readability.",
+          "suggestion": "ID khách hàng đã được sao chép thành công vào bộ nhớ tạm"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

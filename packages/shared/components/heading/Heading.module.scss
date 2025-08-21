@@ -1,0 +1,58 @@
+@use "../../styles/variables";
+@use "../../styles/mixins";
+
+.heading {
+  @include mixins.common-text-styles;
+
+  font-weight: var(--heading-font-weight);
+  color: var(--heading-color);
+  margin: 0;
+
+  &.small {
+    font-size: var(--heading-font-size-small);
+  }
+
+  &.medium {
+    font-size: var(--heading-font-size-medium);
+  }
+
+  &.large {
+    font-size: var(--heading-font-size-large);
+  }
+
+  &.xlarge {
+    font-size: var(--heading-font-size-xlarge);
+  }
+
+  &.xsmall {
+    font-size: var(--heading-font-size-xsmall);
+  }
+
+  &.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &.inline {
+    display: inline;
+  }
+
+  &.content {
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 50px;
+  }
+
+  &.menu {
+    font-size: 23px;
+    font-weight: bold;
+    line-height: 50px;
+  }
+
+  &.header {
+    font-size: 28px;
+    font-weight: var(--heading-font-weight);
+    line-height: 50px;
+  }
+}

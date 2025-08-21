@@ -1,10 +1,8 @@
 {
   "ActiveSessions": "Aktívne relácie",
   "AutoDeleteTitle": "Všetky relácie staršie ako 60 dní sa automaticky odstránia.",
-  "ChangeEmailSuccess": "E-mail bol úspešne zmenený ",
   "ChangePasswordAfterLoggingOut": "Zmeniť heslo po odhlásení",
   "ConnectSocialNetworks": "Pripojte svoje sociálne siete",
-  "DarkTheme": "Tmavá téma",
   "DescriptionForSecurity": "Pre väčšiu bezpečnosť si musíte zmeniť heslo.",
   "DesktopTheme": "Synchronizácia s nastaveniami Editora pre počítač",
   "DesktopThemeDescription": "Automatické prepínanie medzi svetlými a tmavými témami v závislosti od aktuálnej témy editorov na počítači.",
@@ -13,7 +11,6 @@
   "ErrorAccountAlreadyUse": "Prepojený účet už používa iný používateľ",
   "FileManagement": "Spravovanie súborov",
   "InterfaceTheme": "Vzhľad prostredia",
-  "LightTheme": "Svetlá téma",
   "LogoutActiveConnection": "Odhlásiť sa z aktívneho pripojenia",
   "LogoutAllActiveSessionsDescription": "Budú odhlásené všetky aktívne pripojenia okrem tohto pripojenia, keďže sa práve používa.",
   "LogoutBtn": "Odhlásiť sa",

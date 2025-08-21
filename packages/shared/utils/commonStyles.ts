@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,13 +34,4 @@ export const NoUserSelect = css`
   user-select: none;
   -ms-user-select: none;
   -khtml-user-select: none;
-`;
-
-export const TextUserSelect = css`
-  -webkit-touch-callout: text;
-  -webkit-user-select: text;
-  -khtml-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
-  user-select: text;
 `;

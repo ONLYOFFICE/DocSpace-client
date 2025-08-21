@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -42,20 +42,19 @@ import { Text } from "@docspace/shared/components/text";
 import { updateRoomMemberRole } from "@docspace/shared/api/rooms";
 import { toastr } from "@docspace/shared/components/toast";
 import { HelpButton } from "@docspace/shared/components/help-button";
-import { EmployeeStatus } from "@docspace/shared/enums";
+import { EmployeeStatus, ShareAccessRights } from "@docspace/shared/enums";
 import {
   getUserAvatarRoleByType,
   getUserType,
   getUserTypeTranslation,
 } from "@docspace/shared/utils/common";
 import { TGroupMemberInvitedInRoom } from "@docspace/shared/api/groups/types";
-import { Box } from "@docspace/shared/components/box";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { getUserRoleOptions } from "@docspace/shared/utils/room-members/getUserRoleOptions";
+import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
-import { getAccessOptions } from "SRC_DIR/components/panels/InvitePanel/utils";
 import { filterPaidRoleOptions } from "SRC_DIR/helpers";
 
 import * as Styled from "./index.styled";
@@ -90,12 +89,20 @@ const GroupMember = ({
   const userRoleOptions =
     user.isAdmin || user.isOwner || user.isRoomAdmin
       ? fullRoomRoleOptions
-      : filterPaidRoleOptions(fullRoomRoleOptions);
+      : filterPaidRoleOptions(
+          fullRoomRoleOptions as {
+            access: ShareAccessRights;
+            key: string;
+            label: string;
+          }[],
+        );
 
   const userRole = member.owner
     ? getUserRoleOptions(t).portalAdmin
     : fullRoomRoleOptions.find(
-        (option) => option.access === (member.userAccess || member.groupAccess),
+        (option) =>
+          "access" in option &&
+          option.access === (member.userAccess || member.groupAccess),
       );
 
   const hasIndividualRightsInRoom =
@@ -142,7 +149,7 @@ const GroupMember = ({
 
       <div className="user_body-wrapper">
         <div className="info">
-          <Box displayProp="flex" alignItems="center" gapProp="8px">
+          <div className="info-box">
             <Text
               className="name"
               data-tooltip-id={`userTooltip_${Math.random()}`}
@@ -150,8 +157,8 @@ const GroupMember = ({
             >
               {decode(user.displayName)}
             </Text>
-            {isExpect && <StyledSendClockIcon />}
-          </Box>
+            {isExpect ? <StyledSendClockIcon /> : null}
+          </div>
           <Text className="email" noSelect>
             <span dir="auto">{typeLabel}</span> |{" "}
             <span dir="ltr">{user.email}</span>
@@ -160,7 +167,7 @@ const GroupMember = ({
       </div>
 
       <div className="individual-rights-tooltip">
-        {hasIndividualRightsInRoom && (
+        {hasIndividualRightsInRoom ? (
           <HelpButton
             place="left"
             offsetRight={0}
@@ -171,16 +178,16 @@ const GroupMember = ({
               </Text>
             }
           />
-        )}
+        ) : null}
       </div>
 
-      {userRole && userRoleOptions && (
+      {userRole && userRoleOptions ? (
         <div className="role-wrapper">
           {member.canEditAccess ? (
             <ComboBox
               className="role-combobox"
-              selectedOption={userRole}
-              options={userRoleOptions}
+              selectedOption={userRole as TOption}
+              options={userRoleOptions as TOption[]}
               scaled={false}
               withBackdrop={isMobile}
               size={ComboBoxSize.content}
@@ -200,11 +207,11 @@ const GroupMember = ({
               fontWeight={600}
               noSelect
             >
-              {userRole.label}
+              {"label" in userRole ? userRole.label : false}
             </Text>
           )}
         </div>
-      )}
+      ) : null}
     </Styled.GroupMember>
   );
 };

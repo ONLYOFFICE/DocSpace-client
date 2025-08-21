@@ -6,17 +6,17 @@
   "DeleteGroupUsersSuccessMessage": "Používatelia boli úspešne odstránení.",
   "DeleteGuest": "Odstrániť hosťa",
   "DeleteGuests": "Odstrániť hostí",
-  "DeleteMyDocumentsUser": "Všetky osobné súbory a priečinky v časti Dokumenty tohto používateľa budú natrvalo vymazané.",
-  "DeletePersonalData": "Osobné údaje, všetky osobné súbory a priečinky v častiach Dokumenty a Kôš* vybraných používateľov budú natrvalo vymazané. Súbory a priečinky vybraných používateľov uchovávané v spoločných častiach*, napríklad v miestnostiach, zostanú v {{productName}}.",
   "DeletePersonalDataApplicable": "*Platí pre vybraných používateľov, ktorí majú takéto súbory a priečinky.",
-  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Miestnosti vytvorené týmto používateľom a dokumenty uložené v týchto miestnostiach budú automaticky preradené administrátorovi, ktorý realizuje vymazávanie: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Ak chcete vybrať iného cieľového používateľa na opätovné priradenie, priraďte údaje ručne .",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Miestnosti vytvorené týmto používateľom a dokumenty uložené v týchto miestnostiach budú automaticky preradené administrátorovi, ktorý realizuje vymazávanie: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Ak chcete vybrať iného cieľového používateľa na opätovné priradenie, priraďte údaje ručne .",
   "DeleteReqassignDescriptionGuest": "{{userCaption}} bude odstránený zo všetkých miestností, do ktorých bol pozvaný. Dokumenty, ktoré {{userCaption}} vytvoril v miestnostiach, budú automaticky priradené vlastníkom miestností.",
   "DeleteUser": "Odstrániť používateľa",
-  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> bude vymazaný. Tento úkon sa nedá odvolať.",
+  "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> bude vymazaný. Tento úkon sa nedá odvolať.",
   "DeletingUsers": "Vymazávanie používateľov",
+  "PersonalDataDeletionInfo": "Osobné údaje, všetky osobné súbory a priečinky v sekciách {{sectionNameFirst}} a {{sectionNameSecond}}* vybraných používateľov budú trvalo odstránené. Súbory a priečinky vybraných používateľov uložené v spoločných sekciách* ako miestnosti zostanú v {{productName}}.",
   "PleaseNote": "Upozornenie:",
   "ReassignDataToAnotherUser": "Opätovné priradenie údajov inému používateľovi",
   "SuccessfullyDeleteGuestInfoMessage": "Hosť bol úspešne odstránený",
   "SuccessfullyDeleteUserInfoMessage": "Používateľ bol úspešne odstránený",
-  "ToBeAbleToReassignData": "Aby ste mohli opätovne priradiť údaje, vymazávajte vždy len po jednom používateľovi."
+  "ToBeAbleToReassignData": "Aby ste mohli opätovne priradiť údaje, vymazávajte vždy len po jednom používateľovi.",
+  "UserFilesRemovalScope": "Osobné údaje, všetky súbory a priečinky v sekciách {{sectionNameFirst}} a {{sectionNameSecond}} tohto používateľa budú trvalo odstránené."
 }

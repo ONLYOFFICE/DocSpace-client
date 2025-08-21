@@ -1,6 +1,4 @@
 {
   "ErrorEmptyResponse": "رد فارغ",
-  "ErrorUnavailableText": "{{productName}} غير متوفر",
-  "LinkDoesNotExist": "الرابط الذي تحاول فتحه غير موجود",
-  "LinkHasExpired": "انتهت صلاحية الرابط الذي تحاول فتحه"
+  "ErrorUnavailableText": "{{productName}} غير متوفر"
 }

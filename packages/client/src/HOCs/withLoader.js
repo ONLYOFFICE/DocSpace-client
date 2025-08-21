@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,22 +25,17 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { observer, inject } from "mobx-react";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import { TableSkeleton, RowsSkeleton } from "@docspace/shared/skeletons";
 import { TilesSkeleton } from "@docspace/shared/skeletons/tiles";
-
-const pathname = window.location.pathname.toLowerCase();
-const isEditor = pathname.indexOf("doceditor") !== -1;
-const isGallery = pathname.indexOf("form-gallery") !== -1;
 
 const withLoader = (WrappedComponent) => (Loader) => {
   const LoaderWrapper = (props) => {
     const {
       isInit,
       tReady,
-      firstLoad,
       isLoaded,
-
+      isRooms,
       viewAs,
       showBodyLoader,
       isLoadingFilesFind,
@@ -55,17 +50,16 @@ const withLoader = (WrappedComponent) => (Loader) => {
         ? accountsViewAs
         : viewAs;
 
-    const showLoader = window.ClientConfig.loaders.showLoader;
+    const showLoader = window?.ClientConfig?.loaders?.showLoader;
 
-    return (!isEditor && firstLoad && !isGallery) ||
-      !isLoaded ||
+    return !isLoaded ||
       showBodyLoader ||
       (isLoadingFilesFind && !Loader) ||
       !tReady ||
       !isInit ? (
       Loader ||
         (!showLoader ? null : currentViewAs === "tile" ? (
-          <TilesSkeleton />
+          <TilesSkeleton isRooms={isRooms} />
         ) : currentViewAs === "table" ? (
           <TableSkeleton />
         ) : (
@@ -80,20 +74,24 @@ const withLoader = (WrappedComponent) => (Loader) => {
     ({
       authStore,
       filesStore,
+      treeFoldersStore,
       peopleStore,
       clientLoadingStore,
       publicRoomStore,
       settingsStore,
     }) => {
       const { viewAs, isLoadingFilesFind, isInit } = filesStore;
+      const { isRoomsFolder, isArchiveFolder } = treeFoldersStore;
       const { viewAs: accountsViewAs } = peopleStore;
-
       const { firstLoad, isLoading, showBodyLoader } = clientLoadingStore;
 
       const { setIsBurgerLoading } = settingsStore;
       const { isPublicRoom } = publicRoomStore;
 
+      const isRooms = isRoomsFolder || isArchiveFolder;
+
       return {
+        isRooms,
         firstLoad: isPublicRoom ? false : firstLoad,
         isLoaded: isPublicRoom ? true : authStore.isLoaded,
         isLoading,

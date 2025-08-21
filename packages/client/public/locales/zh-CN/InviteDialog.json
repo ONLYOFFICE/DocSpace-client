@@ -1,18 +1,22 @@
 {
   "AddManually": "手动添加",
   "EmailErrorMessage": "邮件地址无效。您可双击邮件以进行编辑。",
+  "EmailErrorMessageUserNotFound": "未找到用户。您可以通过双击电子邮件地址进行编辑。",
   "GroupMaxAvailableRoleWarning": "可以将群组添加到房间，最大角色为{{roleName}}。但是，成功添加群组后，您可以更改群组中各个用户的角色。",
   "InvitationLanguage": "邀请语言",
   "InviteMembersManuallyDescription": "通过电子邮件亲自邀请新成员加入 {{productName}}",
   "InviteMembersSearchPlaceholder": "通过电子邮件邀请成员",
-  "InviteToRoomManuallyInfo": "添加现有的 {{productName}} 联系人。或通过电子邮件亲自邀请新用户。新用户将被添加到您的访客列表中。",
+  "InviteToRoomAddPlaceholder": "通过姓名或电子邮件添加用户",
+  "InviteToRoomManuallyInfoGuest": "添加现有的{{productName}}联系人，或通过电子邮件亲自邀请新用户。新用户将被添加到您的访客列表中。",
+  "InviteToRoomManuallyInfoMembers": "将现有的{{productName}}成员添加到房间中。",
   "InviteToRoomSearchPlaceholder": "搜索姓名或电子邮件并邀请",
   "InviteViaLink": "通过链接进行邀请",
   "InviteViaLinkDescriptionAccounts": "在{{productName}}中创建用于自我授权的通用链接",
-  "InviteViaLinkDescriptionRoom": "创建通用链接，在房间内实现自我授权。",
+  "InviteViaLinkDescriptionRoomGuest": "将现有的{{productName}}成员添加到房间中。",
+  "InviteViaLinkDescriptionRoomMembers": "为{{productName}}成员创建通用链接，以便在房间中进行自我授权。",
   "LinkCopySuccess": "链接已复制",
-  "ResetChange": "重置更改",
   "SendInvitation": "发送邀请",
   "UserMaxAvailableRoleWarning": "无法指定访客和用户为房间管理员。只有房间管理员和{{productName}}管理员可担任该角色。",
-  "UsersAlreadyAdded": "部分用户已添加过"
+  "UsersAlreadyAdded": "部分用户已添加过",
+  "UsersCannotBeAdded": "无法将禁用的联系人添加到房间。"
 }

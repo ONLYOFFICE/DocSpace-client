@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,14 +29,15 @@
 import styled from "styled-components";
 
 import { mobile, tablet } from "@docspace/shared/utils";
-import { Box } from "@docspace/shared/components/box";
 
-export const StyledForm = styled(Box)`
+export const StyledForm = styled.div`
+  box-sizing: border-box;
   display: flex;
   flex: 1fr 1fr;
   gap: 80px;
   flex-direction: row;
   justify-content: center;
+  margin-top: 24px;
 
   @media ${tablet} {
     display: flex;
@@ -54,6 +55,9 @@ export const StyledForm = styled(Box)`
   }
 
   .app-code-wrapper {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
     width: 100%;
 
     @media ${tablet} {
@@ -78,6 +82,8 @@ export const StyledForm = styled(Box)`
   }
 
   .set-app-description {
+    box-sizing: border-box;
+    margin: 0 0 32px 0;
     width: 100%;
     max-width: 480px;
 
@@ -89,9 +95,12 @@ export const StyledForm = styled(Box)`
   }
 
   .set-app-title {
-    margin-bottom: 8px;
+    margin-bottom: 4px;
   }
 
+  .set-app-subtitle {
+    margin-bottom: 20px;
+  }
   .set-app-text {
     margin-top: 8px;
   }
@@ -107,5 +116,49 @@ export const StyledForm = styled(Box)`
     @media ${mobile} {
       display: none;
     }
+  }
+
+  .app-code-input,
+  .app-code-continue-btn {
+    box-sizing: border-box;
+  }
+
+  .description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    .description-item {
+      display: flex;
+      gap: 12px;
+    }
+
+    .icon-container {
+      position: relative;
+      height: 32px;
+      padding: 0 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+    }
+
+    .icon-container::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--accent-main);
+      opacity: 0.1;
+      border-radius: 6px;
+      z-index: -1;
+    }
+  }
+
+  strong {
+    user-select: text;
   }
 `;

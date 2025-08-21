@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -49,14 +49,13 @@ export type DeleteProfileEvenerDialogComponentsProps = {
   usersToDelete: UsersStore["selection"];
   filter: UsersStore["filter"];
   contactsTab: UsersStore["contactsTab"];
-  getUsersList: UsersStore["getUsersList"];
   removeUsers: UsersStore["removeUsers"];
   setSelected: UsersStore["setSelected"];
 
   setDataReassignmentDialogVisible: DialogStore["setDataReassignmentDialogVisible"];
   setDeleteProfileDialogVisible: DialogStore["setDeleteProfileDialogVisible"];
   setDataReassignmentDeleteProfile: DialogStore["setDataReassignmentDeleteProfile"];
-  setIsDeletingUserWithReassignment: DialogStore["setIsDeletingUserWithReassignment"];
+
   setDialogData: DialogStore["setDialogData"];
 
   updateCurrentGroup: GroupsStore["updateCurrentGroup"];
@@ -66,6 +65,9 @@ export type DeleteProfileEvenerDialogComponentsProps = {
 
   deleteWithoutReassign: boolean;
   onlyOneUser: boolean;
+  dataReassignment?: boolean;
+  dataReassignmentProgress?: boolean;
+  dataReassignmentTerminate?: boolean;
 };
 
 const DeleteProfileEverDialogComponent = ({
@@ -73,7 +75,6 @@ const DeleteProfileEverDialogComponent = ({
   userIds,
   filter,
   contactsTab,
-  getUsersList,
   removeUsers,
   setSelected,
 
@@ -83,12 +84,15 @@ const DeleteProfileEverDialogComponent = ({
   setDataReassignmentDialogVisible,
   setDeleteProfileDialogVisible,
   setDataReassignmentDeleteProfile,
-  setIsDeletingUserWithReassignment,
+
   setDialogData,
   updateCurrentGroup,
 
   deleteWithoutReassign,
   onlyOneUser,
+  dataReassignment,
+  dataReassignmentProgress,
+  dataReassignmentTerminate,
 }: DeleteProfileEvenerDialogComponentsProps) => {
   const { t } = useTranslation([
     "DeleteProfileEverDialog",
@@ -120,9 +124,7 @@ const DeleteProfileEverDialogComponent = ({
       api.people
         .deleteUser(id)
         .then(async () => {
-          const actions: Promise<unknown>[] = [
-            getUsersList(filter, true, false),
-          ];
+          const actions: Promise<unknown>[] = [];
 
           if (isInsideGroup && filter.group)
             actions.push(updateCurrentGroup(filter.group));
@@ -145,7 +147,6 @@ const DeleteProfileEverDialogComponent = ({
     },
     [
       filter,
-      getUsersList,
       isGuests,
       isInsideGroup,
       isRequestRunning,
@@ -197,9 +198,14 @@ const DeleteProfileEverDialogComponent = ({
       return;
     }
 
-    setDialogData(usersToDelete[0]);
+    setDialogData({
+      user: usersToDelete[0],
+      reassignUserData: dataReassignment,
+      getReassignmentProgress: dataReassignmentProgress,
+      cancelReassignment: dataReassignmentTerminate,
+      currentUserAsDefault: true,
+    });
 
-    setIsDeletingUserWithReassignment(true);
     setDataReassignmentDialogVisible(true);
     setDataReassignmentDeleteProfile(true);
     setDeleteProfileDialogVisible(false);
@@ -214,13 +220,18 @@ const DeleteProfileEverDialogComponent = ({
     setDataReassignmentDialogVisible,
     setDeleteProfileDialogVisible,
     setDialogData,
-    setIsDeletingUserWithReassignment,
     userIds,
     usersToDelete,
   ]);
 
   const onClickReassignData = () => {
-    setDialogData(usersToDelete[0]);
+    setDialogData({
+      user: usersToDelete[0],
+      reassignUserData: dataReassignment,
+      getReassignmentProgress: dataReassignmentProgress,
+      cancelReassignment: dataReassignmentTerminate,
+      showDeleteProfileCheckbox: true,
+    });
 
     setDataReassignmentDialogVisible(true);
     setDataReassignmentDeleteProfile(true);
@@ -283,6 +294,7 @@ const DeleteProfileEverDialogComponent = ({
           scale
           onClick={onDeleteProfileEver}
           isLoading={isRequestRunning}
+          testId="dialog_delete_profile_button"
         />
         <Button
           className="cancel-button"
@@ -291,6 +303,7 @@ const DeleteProfileEverDialogComponent = ({
           scale
           isDisabled={isRequestRunning}
           onClick={onClose}
+          testId="dialog_delete_profile_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>
@@ -298,13 +311,15 @@ const DeleteProfileEverDialogComponent = ({
 };
 
 export default inject(
-  ({ peopleStore }: TStore, { users }: { users: UsersStore["selection"] }) => {
+  (
+    { peopleStore, setup, infoPanelStore }: TStore,
+    { users }: { users: UsersStore["selection"] },
+  ) => {
     const { dialogStore, usersStore, groupsStore } = peopleStore;
 
     const { updateCurrentGroup } = groupsStore!;
 
     const {
-      getUsersList,
       needResetUserSelection,
       filter,
       removeUsers,
@@ -314,13 +329,21 @@ export default inject(
       contactsTab,
     } = usersStore!;
 
+    const { isVisible: infoPanelVisible } = infoPanelStore;
+
     const {
       setDataReassignmentDialogVisible,
       setDeleteProfileDialogVisible,
       setDataReassignmentDeleteProfile,
-      setIsDeletingUserWithReassignment,
+
       setDialogData,
     } = dialogStore!;
+
+    const {
+      dataReassignment,
+      dataReassignmentProgress,
+      dataReassignmentTerminate,
+    } = setup;
 
     const usersToDelete = users.length ? users : selection;
 
@@ -336,19 +359,21 @@ export default inject(
       setDataReassignmentDialogVisible,
       setDeleteProfileDialogVisible,
       setDataReassignmentDeleteProfile,
-      setIsDeletingUserWithReassignment,
+
       setDialogData,
       setSelected,
       removeUsers,
-      needResetUserSelection,
+      needResetUserSelection: !infoPanelVisible || needResetUserSelection,
       filter,
       updateCurrentGroup,
-      getUsersList,
       deleteWithoutReassign,
       onlyOneUser,
       userIds,
       usersToDelete,
       contactsTab,
+      dataReassignment,
+      dataReassignmentProgress,
+      dataReassignmentTerminate,
     };
   },
 )(observer(DeleteProfileEverDialogComponent));

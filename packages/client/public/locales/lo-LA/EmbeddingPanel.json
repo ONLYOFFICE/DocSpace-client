@@ -1,4 +1,11 @@
 {
+  "CodeSuccessfullyCopied": "ລະຫັດທີ່ຈະໃສ່ສໍາເລັດແລ້ວຖືກສໍາເນົາເຂົ້າຄລິບບອດ",
+  "ContentRestricted": "ການສໍາເນົາເນື້ອຫາ, ການດາວໂຫຼດ ແລະການພິມເອກະສານແມ່ນຖືກຫ້າມ.",
+  "DisplaySettings": "ການ​ຕັ້ງຄ່າ​ການ​ສະແດງ",
+  "EmbeddingBarAllowList": "ເພີ່ມ URL ຂອງເວບໄຊ້ລົງໃນ <1>ລາຍການອະນຸຍາດ</1>",
+  "EmbeddingBarDescription": "ການຝັງຈະສາມາດໃຊ້ໄດ້ສໍາລັບ URL ທີ່ລະບຸໂດຍຜູ້ບໍລິຫານ {{productName}} ຢູ່ໃນການຕັ້ງຄ່າ JavaScript SDK ເທົ່ານັ້ນ.",
   "Height": "ລວງສູງ,ຄວາມສູງ",
-  "Width": "ລວງກວ້າງ ,ຄວາມກ້ວາງ"
+  "Link": "ເຊື່ອມຕໍ່",
+  "LinkProtectedWithPassword": "ເຊື່ອມຕໍ່ຖືກປົກປ້ອງດ້ວຍລະຫັດລັບ។",
+  "Width": "ຄວາມກວ້າງ"
 }

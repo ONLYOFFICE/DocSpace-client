@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,6 +27,7 @@
 import React from "react";
 
 import { TUser } from "@docspace/shared/api/people/types";
+import { TOnSubmit } from "@docspace/shared/components/selector/Selector.types";
 
 import { MembersSelector } from "../MembersSelector/MembersSelector";
 
@@ -35,7 +36,7 @@ type SelectMembersPanelProps = {
   onParentPanelClose: () => void;
   groupManager: TUser | null;
   groupMembers: TUser[];
-  addMembers: (members: TUser[]) => void;
+  addMembers: TOnSubmit;
 };
 
 export const SelectMembersPanel = ({
@@ -56,6 +57,7 @@ export const SelectMembersPanel = ({
     <MembersSelector
       onClose={onClose}
       onParentPanelClose={onParentPanelClose}
+      isVisible
       addMembers={addMembers}
       invitedUsers={invitedUsers}
     />

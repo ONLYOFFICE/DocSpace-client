@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -65,6 +65,7 @@ const Footer = ({
             modalRequestRunning,
             setSettingsModalRequestRunning: setModalRequestRunning,
             onCloseAction,
+            testId: "settings_plugin_save_button",
           },
         }}
         pluginName={pluginName}
@@ -75,6 +76,7 @@ const Footer = ({
         size="normal"
         onClick={onCloseAction}
         label={t("Common:CancelButton")}
+        testId="settings_plugin_cancel_button"
       />
     </StyledContainer>
   );

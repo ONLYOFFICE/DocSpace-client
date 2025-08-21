@@ -17,6 +17,7 @@ const RevokeDialog = ({
   selection,
   bufferSelection,
   currentDeviceType,
+  logoText,
 }: RevokeDialogProps) => {
   const { t } = useTranslation(["OAuth", "Common"]);
 
@@ -33,7 +34,7 @@ const RevokeDialog = ({
       ns="OAuth"
       values={{
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }}
     />
   ) : (
@@ -44,7 +45,7 @@ const RevokeDialog = ({
       values={{
         name,
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }}
     />
   );
@@ -55,7 +56,7 @@ const RevokeDialog = ({
       ns="OAuth"
       values={{
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }}
     />
   ) : (
@@ -66,7 +67,7 @@ const RevokeDialog = ({
       values={{
         name,
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }}
     />
   );
@@ -115,6 +116,7 @@ const RevokeDialog = ({
           size={ButtonSize.normal}
           isLoading={isRequestRunning}
           onClick={onRevokeAction}
+          testId="dialog_revoke_consent_button"
         />
         <Button
           label={t("Common:CancelButton")}
@@ -122,6 +124,7 @@ const RevokeDialog = ({
           size={ButtonSize.normal}
           isDisabled={isRequestRunning}
           onClick={onCloseAction}
+          testId="dialog_revoke_consent_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

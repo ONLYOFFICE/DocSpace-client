@@ -1,0 +1,371 @@
+{
+  "key_path": "CommonFilesDescription",
+  "content": "For the files in the Common section, a separate room will be created (Common room). Only {{productName}} admins will have access to this room. By default, the owner of the room will be the user initiating the import: {{user}} (You).",
+  "content_en_sha1_hash": "2f805a4d5fa533ff5afc2a707bd72f18ea11b2f1",
+  "created_at": "2025-05-19T21:30:50.927Z",
+  "updated_at": "2025-08-11T09:02:43.947Z",
+  "comment": {
+    "text": "\"For CommonFilesDescription, translate the text describing the behavior of importing common files into a separate room, accessible only to admins and containing information about the owner's identity.\"",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:31.822Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
+      "line_number": 203,
+      "context": "/>\n <ImportSection\n isChecked={importOptions.importCommonFiles}\n onChange={(e) => onChange(e, \"importCommonFiles\")}\n sectionName={t(\"Common:CommonFiles\")}\n description={t(\"Settings:CommonFilesDescription\", {\n user: user?.displayName,\n productName: t(\"Common:ProductName\"),\n })}\n exportSection={{\n sectionName: t(\"Common:Common\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
+      "line_number": 203,
+      "context": "/>\n <ImportSection\n isChecked={importOptions.importCommonFiles}\n onChange={(e) => onChange(e, \"importCommonFiles\")}\n sectionName={t(\"Common:CommonFiles\")}\n description={t(\"Settings:CommonFilesDescription\", {\n user: user?.displayName,\n productName: t(\"Common:ProductName\"),\n })}\n exportSection={{\n sectionName: t(\"Common:Common\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The term 'Defolt' is a misspelling of 'Default'.",
+          "suggestion": "Default"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The German translation includes parentheses around \"gemeinsamer Raum\", mirroring the English. While not strictly incorrect, it might feel slightly less natural in German. Consider removing the parentheses.",
+          "suggestion": "Für die Dateien im gemeinsamen Bereich wird ein separater Raum erstellt. (gemeinsamer Raum)."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase 'Yleistä-huone' is a literal translation of 'Common room' and might sound awkward in Finnish. While technically correct, it's not the most natural phrasing.",
+          "suggestion": "Consider a more natural phrasing like 'Yleinen huone' or 'Yleisten tiedostojen huone', depending on the desired level of formality and clarity."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of 'productName' as '{{productName}}-järjestelmänvalvojilla' is technically correct but a more idiomatic rendering might improve readability.  Using the Finnish word for 'admin' would be preferable if the context allows.",
+          "suggestion": "Consider translating 'productName' as 'Tuotteen' followed by a Finnish word for admin, like 'ylläpitäjillä'. Example: 'Vain Tuotteen ylläpitäjillä on oikeudet tähän huoneeseen.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'Ce sont uniquement' is grammatically awkward. It would be more natural to use 'Seulement' or 'Uniquement'.",
+          "suggestion": "Seulement les administrateurs {{productName}} qui auront l'accès à cette salle."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'qui auront l'accès' is a little clunky. It can be improved.",
+          "suggestion": "qui auront accès"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation maintains the English formatting style of using parentheses around (Salle Commune).  While not incorrect, it might be more idiomatic in French to use a dash or simply omit the clarification.",
+          "suggestion": "Salle Commune – or simply Salle Commune"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase 'Ընդհանուր սենյակ' appears twice in quick succession. This can be slightly jarring. Consider rephrasing the second instance.",
+          "suggestion": "Ընդհանուր բաժնի ֆայլերի համար կստեղծվի առանձին սենյակ: Այս սենյակ մուտք կունենան միայն {{productName}}-ի ադմինիստրատորները: Լռելյայնորեն, սենյակի սեփականատերը կլինի ներմուծումը նախաձեռնող օգտատերը՝ {{user}} (Դուք):"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase \"インポートを開始したユーザーです：\" is grammatically awkward. The colon feels unnecessary and disrupts the flow.",
+          "suggestion": "インポートを開始したユーザーがルームの所有者となります。"
+        },
+        {
+          "type": "formatting",
+          "description": "The repetition of \"です\" at the end of the sentence feels slightly unnatural and can be simplified. While technically not incorrect, it's not as fluent.",
+          "suggestion": "インポートを開始したユーザーがルームの所有者となります: {{user}}（あなた）。"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ພາກທົ່ວໄປ\" (pak thau pai) while literally meaning 'general section', doesn't quite capture the intended meaning of 'Common section' in this context. It sounds generic. A more accurate translation might be something that emphasizes shared or public access, like 'ເຂດສາທາລະນະ' (khet sathalahanan).",
+          "suggestion": "Consider translating 'Common section' as 'ເຂດສາທາລະນະ' (khet sathalahanan) or a similar term that emphasizes shared access."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ມີແຕ່ຜູ້ເບິ່ງແຍງ...ເທົ່ານັ້ນທີ່ຈະມີການເຂົ້າເຖິງ\" is a bit clunky. While technically correct, it could be more naturally expressed.  The phrase 'to have access' can be simplified.",
+          "suggestion": "Consider rephrasing to something like 'ຜູ້ເບິ່ງແຍງ...ຈະສາມາດເຂົ້າເຖິງ' (phu bengyaeng ... ja samat khao thing) which means '...will be able to access'."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of parentheses and the explanation '(ຫ້ອງທົ່ວໄປ)' feels a little unnecessary and disrupts the flow of the sentence. It's a bit like an aside.",
+          "suggestion": "Consider removing the parentheses and the explanation '(ຫ້ອງທົ່ວໄປ)'. The meaning should be clear from the preceding sentence."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses 'Algemene kamer' which is a literal translation of 'Common room'. While understandable, it may sound unnatural in Dutch. A more idiomatic translation might be preferred.",
+          "suggestion": "Consider using a more natural Dutch term for 'Common room', such as 'Gezamenlijke ruimte' or a similar phrasing depending on the specific context."
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Polish translation includes an unnecessary repetition of \"pokój\" (room). \"Pokój Wspólny\" is redundant after \"osobny pokój\".",
+          "suggestion": "Dla plików w sekcji Wspólne zostanie utworzony osobny pokój. Tylko administratorzy {{productName}} będą mieli dostęp do tego pokoju. Domyślnie, właścicielem pokoju będzie użytkownik inicjujący import: {{user}} (Ty)."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While not entirely wrong, \"pokój Wspólny\" could be improved.  A more natural-sounding Polish phrase might be used. 'Common room' doesn't always translate literally.",
+          "suggestion": "Dla plików w sekcji Wspólne zostanie utworzony osobny pokój (Pokój Wspólny). Tylko administratorzy {{productName}} będą mieli dostęp do tego pokoju. Domyślnie, właścicielem pokoju będzie użytkownik inicjujący import: {{user}} (Ty)."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"utilizatorul care poate iniția importul\" is a bit clunky and doesn't quite capture the meaning of 'initiating the import'. A more natural translation would be 'utilizatorul care inițiază importul'.",
+          "suggestion": "utilizatorul care inițiază importul"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'පරිශ්‍රීලකයා' (parishreelakayaa) is a less common and slightly formal way to say 'user'. A more common and accessible term would improve readability.",
+          "suggestion": "පරිශ්‍රීලකයා (parishreelakayaa) -> පරිශීලකයා (parishilakayaa) or යොස්තුවරයා (yosthuvarayaa)"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"For the files in the Common section\" is not perfectly captured by \"Pre súbory v Spoločnej časti\". A more accurate translation might be \"Pre súbory v sekcii Spoločná\".  While understandable, the current wording sounds slightly awkward.",
+          "suggestion": "Pre súbory v sekcii Spoločná"
+        },
+        {
+          "type": "formatting",
+          "description": "The English sentence \"Only {{productName}} admins will have access to this room.\" is translated to \"Prístup do tejto miestnosti budú mať len administrátori {{productName}}\". While technically correct, it's less natural in Slovak. It could be improved by stating who is an administrator.",
+          "suggestion": "Prístup do tejto miestnosti budú mať len administrátori produktu {{productName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Slovenian translation retains the English capitalization of 'Skupna soba' (Common room). It would be more natural in Slovenian to capitalize only the first word of the phrase.",
+          "suggestion": "Za datoteke v razdelku Skupno bo ustvarjena posebna soba (skupna soba). Samo skrbniki {{productName}} bodo imeli dostop do te sobe. Privzeto bo lastnik sobe uporabnik, ki začne uvoz: {{user}} (Vi)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The use of single quotes around 'Заједничко' is slightly unusual in this context. Double quotes would be more standard.",
+          "suggestion": "Replace single quotes with double quotes: “Заједничко”"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'администратори {{productName}}-а' is a bit awkward. A more natural phrasing would be 'администратори {{productName}}'.",
+          "suggestion": "Change 'администратори {{productName}}-а' to 'администратори {{productName}}'"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The use of single quotes around 'Zajedničko' is slightly unusual and could be improved for consistency with other similar phrases in Serbian. It's not strictly incorrect, but could be smoother.",
+          "suggestion": "Remove the single quotes: 'Za datoteke u odeljku Zajedničko...'"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Po podrazumevanim podešavanjima' is a bit verbose. A more natural translation of 'By default' would be 'Podrazumevano'.",
+          "suggestion": "Change 'Po podrazumevanim podešavanjima' to 'Podrazumevano'."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase \"кімната «Загальні»\" appears to be an attempt at formatting with quotes around \"Загальні\". This might not be the intended formatting for Ukrainian. It could be better to use either italics or a different phrasing.",
+          "suggestion": "Consider changing \"кімната «Загальні»\" to something like \"кімната 'Загальні'\" or \"кімната Загальні\" (perhaps italicized, depending on style guide)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Для файлів у розділі «Загальні»\" is grammatically correct, it might be more natural to say something like \"Для файлів у розділі 'Загальні'\" or 'У розділі 'Загальні'\" to indicate the section.",
+          "suggestion": "Consider rephrasing the initial part to: \"У розділі 'Загальні'\" or \"Для файлів у розділі 'Загальні'\""
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation includes parentheses around \"Phòng chung\" which duplicates the English parentheses around \"Common room\". This is redundant and breaks the flow of the Vietnamese.",
+          "suggestion": "Remove the parentheses around \"Phòng chung\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,8 +26,6 @@
 
 import { useState, ChangeEvent } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import { observer, inject } from "mobx-react";
 
 import {
   ModalDialog,
@@ -37,8 +35,7 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { createGroup } from "@docspace/shared/api/groups";
 import { TUser } from "@docspace/shared/api/people/types";
-import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
-import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
+import { TOnSubmit } from "@docspace/shared/components/selector/Selector.types";
 
 import { StyledBodyContent } from "./CreateEditGroupDialog.styled";
 import { GroupParams } from "./types";
@@ -51,15 +48,9 @@ import { SelectMembersPanel } from "./sub-components/create-components/SelectMem
 interface CreateGroupDialogProps {
   visible: boolean;
   onClose: () => void;
-  getGroups: () => void;
 }
 
-const CreateGroupDialog = ({
-  visible,
-  onClose,
-  getGroups,
-}: CreateGroupDialogProps) => {
-  const navigate = useNavigate();
+const CreateGroupDialog = ({ visible, onClose }: CreateGroupDialogProps) => {
   const { t } = useTranslation([
     "Common",
     "PeopleTranslations",
@@ -142,14 +133,14 @@ const CreateGroupDialog = ({
     const groupManagerId = groupParams.groupManager?.id || undefined;
     const groupMembersIds = groupParams.groupMembers.map((gm) => gm.id);
 
-    createGroup(groupParams.groupName, groupManagerId, groupMembersIds)
-      .then(() => getGroups())
-      .then(() => navigate("/accounts/groups/filter"))
-      .catch((err) => toastr.error(err.message))
-      .finally(() => {
-        setIsLoading(false);
-        onClose();
-      });
+    try {
+      await createGroup(groupParams.groupName, groupManagerId, groupMembersIds);
+    } catch (err) {
+      toastr.error((err as Error).message);
+    } finally {
+      setIsLoading(false);
+      onClose();
+    }
   };
 
   return (
@@ -189,6 +180,7 @@ const CreateGroupDialog = ({
         <ModalDialog.Footer>
           <Button
             id="create-group-modal_submit"
+            testId="create_edit_group_create_button"
             tabIndex={5}
             label={t("Common:Create")}
             size={ButtonSize.normal}
@@ -203,6 +195,7 @@ const CreateGroupDialog = ({
           />
           <Button
             id="create-group-modal_cancel"
+            testId="create_edit_group_cancel_button"
             tabIndex={5}
             label={t("Common:CancelButton")}
             size={ButtonSize.normal}
@@ -213,31 +206,25 @@ const CreateGroupDialog = ({
         </ModalDialog.Footer>
       </ModalDialog>
 
-      {selectGroupMangerPanelIsVisible && (
+      {selectGroupMangerPanelIsVisible ? (
         <SelectGroupManagerPanel
           onClose={onHideSelectGroupManagerPanel}
           onParentPanelClose={onClose}
           setGroupManager={setGroupManager}
         />
-      )}
+      ) : null}
 
-      {selectMembersPanelIsVisible && (
+      {selectMembersPanelIsVisible ? (
         <SelectMembersPanel
           onClose={onHideSelectMembersPanel}
           onParentPanelClose={onClose}
           groupManager={groupParams.groupManager}
           groupMembers={groupParams.groupMembers}
-          addMembers={addMembers}
+          addMembers={addMembers as unknown as TOnSubmit}
         />
-      )}
+      ) : null}
     </>
   );
 };
 
-export default inject<{ peopleStore: PeopleStore }>(({ peopleStore }) => {
-  const { getGroups } = peopleStore.groupsStore! as GroupsStore;
-
-  return {
-    getGroups,
-  };
-})(observer(CreateGroupDialog));
+export default CreateGroupDialog;

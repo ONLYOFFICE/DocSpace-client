@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,6 +27,7 @@
 import React from "react";
 
 export interface PublicRoomBarProps {
+  ref?: React.RefObject<HTMLDivElement | null>;
   headerText: string | React.ReactNode;
   bodyText: string | React.ReactNode;
   iconName?: string;
@@ -34,4 +35,5 @@ export interface PublicRoomBarProps {
   className?: string;
   style?: React.CSSProperties;
   barIsVisible?: boolean;
+  dataTestId?: string;
 }

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -56,11 +56,14 @@ const StyledTagInput = styled.div`
 
 const TagInput = ({
   t,
+  title,
   tagHandler,
   setIsScrollLocked,
   isDisabled,
+  tooltipLabel,
   onFocus,
   onBlur,
+  dataTestId,
 }) => {
   const inputRef = useRef();
   const [tagInput, setTagInput] = useState("");
@@ -94,12 +97,12 @@ const TagInput = ({
     if (text.trim().length > 0) {
       openDropdown();
     }
-    onFocus();
+    onFocus && onFocus();
   };
 
   const handleBlur = () => {
     closeDropdown();
-    onBlur();
+    onBlur && onBlur();
   };
 
   const handleKeyDown = (event) => {
@@ -121,7 +124,7 @@ const TagInput = ({
       <InputParam
         ref={inputRef}
         id="shared_tags-input"
-        title={`${t("Common:Tags")}:`}
+        title={title ? `${title}:` : `${t("Common:Tags")}:`}
         placeholder={t("TagsPlaceholder")}
         value={tagInput}
         onChange={onTagInputChange}
@@ -130,6 +133,8 @@ const TagInput = ({
         isDisabled={isDisabled}
         onKeyDown={handleKeyDown}
         name="tagInput"
+        tooltipLabel={tooltipLabel}
+        dataTestId={dataTestId}
       />
 
       <TagDropdown

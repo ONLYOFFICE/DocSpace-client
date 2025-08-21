@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -108,6 +108,7 @@ const PluginSDK = ({
           scale
           label={t("GoToRepo")}
           size="small"
+          testId={`${p.name}_go_to_repo_button`}
         />
       </div>
     ));
@@ -145,15 +146,16 @@ const PluginSDK = ({
         scale={isMobile}
         size={isMobile ? "normal" : "small"}
         onClick={() => window.open(apiPluginSDKLink, "_blank")}
+        testId="read_instructions_button"
       />
-      {!isEmptyList && list.length > 0 && (
+      {!isEmptyList && list.length > 0 ? (
         <>
           <Text fontSize="16px" fontWeight={700} lineHeight="22px">
             {t("PluginSamples")}
           </Text>
           <div className="plugin-list">{list}</div>
         </>
-      )}
+      ) : null}
     </StyledContainer>
   );
 };

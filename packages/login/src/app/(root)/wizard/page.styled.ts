@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -65,7 +65,7 @@ export const WizardContainer = styled.div`
   }
 
   .password-field-wrapper {
-    width: 100%;
+    width: 100% !important;
   }
 
   .wizard-field {
@@ -95,8 +95,11 @@ export const StyledLink = styled.div`
   }
 
   .icon-button_svg {
-    svg > g > path {
-      fill: ${(props) => props.theme.client.wizard.generatePasswordColor};
+    svg {
+      path {
+        fill: ${(props) =>
+          props.theme.client.wizard.generatePasswordColor} !important;
+      }
     }
   }
 `;

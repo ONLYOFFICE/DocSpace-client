@@ -1,0 +1,362 @@
+{
+  "key_path": "MakeForm",
+  "content": "Save as PDF form",
+  "content_en_sha1_hash": "a43317ae627c650dad0fca77c887e0530bc4974c",
+  "created_at": "2025-05-19T21:30:46.344Z",
+  "updated_at": "2025-08-04T07:30:01.076Z",
+  "comment": {
+    "text": "This translation key is used to display the label \"Make Form\" in a dialog window when converting a file. The translated text will be shown as a button or heading within this dialog, allowing users to create a new form based on an existing document.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:34.459Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ConvertPasswordDialog/index.js",
+      "line_number": 69,
+      "context": "const makeForm =\n formCreationInfo.fromExst === \".docxf\" &&\n formCreationInfo.toExst === \".oform\";\n \n const dialogHeading = makeForm\n ? t(\"Common:MakeForm\")\n : t(\"Common:CreateMasterFormFromFile\");\n \n const onClose = () => {\n setConvertPasswordDialogVisible(false);\n setFormCreationInfo(null);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 1810,
+      "context": "disabled: false,\n },\n {\n id: \"option_make-form\",\n key: \"make-form\",\n label: t(\"Common:MakeForm\"),\n icon: FormPlusReactSvgUrl,\n onClick: () => this.onClickMakeForm(item, t),\n disabled: false,\n },\n separator0,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"حفظ بصيغة اوفورم\" literally translates to 'Save in PDF form'. While understandable, it's not the most natural or accurate way to convey 'Save as PDF form' in Arabic. 'PDF' is often understood, and incorporating it more directly would improve clarity.",
+          "suggestion": "حفظ كملف PDF (Hifz ka malaf PDF)"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly an error, the transliteration 'اوفورم' may be unfamiliar to some users. Using the more recognized 'PDF' would enhance clarity and reduce potential confusion. ",
+          "suggestion": "حفظ كملف PDF (Hifz ka malaf PDF)"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Formanı yarat' does not accurately reflect the meaning of 'Save as PDF form'. It translates to 'Create your form' which is different.",
+          "suggestion": "A more accurate translation would be something like 'Formanı PDF kimi qeyd et' or 'Formanı PDF olaraq saxla'."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Αποθήκευση ως oform\" does not accurately reflect the meaning of \"Save as PDF form\".  'oform' is not a standard term for a PDF form in Greek. It appears to be a combination of 'ο' (the) and 'form'.",
+          "suggestion": "Αποθήκευση ως φόρμα PDF (Apotheukeusi os forma PDF) or Αποθήκευση ως PDF (Apotheukeusi os PDF)."
+        },
+        {
+          "type": "formatting",
+          "description": "While 'Αποθήκευση ως PDF' is a more accurate translation, retaining 'φόρμα' is more descriptive and could be beneficial if the context allows for more detail.",
+          "suggestion": "Consider using 'Αποθήκευση ως φόρμα PDF' for added clarity."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Tallenna nimellä PDF\" is a very literal translation. A more natural Finnish phrasing would be \"Lataa PDF-muodossa\" or \"Vienti PDF-muodossa\". \"Tallenna nimellä\" is more commonly used when saving a file with a new name.",
+          "suggestion": "Lataa PDF-muodossa"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Պահպանել որպես PDF-ի ձև\" is not the most natural or accurate translation of \"Save as PDF form\". The phrase \"PDF-ի ձև\" is a bit awkward. A more natural phrasing would be something like \"Պահպանել որպես PDF ձևաչափ\" or \"Պահպանել որպես PDF ֆորմատ\".",
+          "suggestion": "Պահպանել որպես PDF ձևաչափ"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '다른 이름으로 저장 oform' doesn't accurately convey the meaning of 'Save as PDF form'. 'oform' is not a standard Korean term related to PDF forms. It appears to be a misinterpretation or corruption of the original phrase.",
+          "suggestion": "PDF 양식으로 저장"
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase '다른 이름으로 저장 oform' is awkwardly phrased in Korean. The 'o' is visually jarring and doesn't belong.",
+          "suggestion": "PDF 양식으로 저장"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ບັນທຶກເປັນ oform\" does not accurately translate \"Save as PDF form.\" \"ບັນທຶກ\" means 'save' which is correct, but \"oform\" is not a recognizable term in Lao and doesn't represent \"PDF form.\"  It appears to be a transliteration error.",
+          "suggestion": "ບັນທຶກເປັນແບບຟອມ PDF (Banthik pen baep form PDF)"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation lacks proper spacing or punctuation that might be customary in Lao. Although minor, adding a space after 'ບັນທຶກເປັນ' would enhance readability.",
+          "suggestion": "ບັນທຶກເປັນ ແບບຟອມ PDF (Banthik pen baep form PDF)"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Saglabāt kā oform\" doesn't accurately convey the meaning of \"Save as PDF form\". \"Oform\" isn't a standard term related to forms or PDF documents in Latvian.",
+          "suggestion": "Saglabāt kā PDF veidne"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Dutch translation \"Opslaan als oform\" is an incorrect translation of \"Save as PDF form\". \"oform\" is not a recognized term in Dutch related to PDF forms.",
+          "suggestion": "Opslaan als PDF-formulier"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a lowercase 'o' instead of capitalized 'O' for the term 'form'. This is incorrect, because 'formulier' starts with a capital letter.",
+          "suggestion": "Opslaan als PDF-Formulier"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Polish translation 'Zapisz jako oform' is not a correct translation of 'Save as PDF form'. 'Oform' is not a recognized word in Polish and doesn't convey the meaning of a form.",
+          "suggestion": "A more accurate translation would be 'Zapisz jako formularz PDF' or 'Eksportuj jako formularz PDF'."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Salvar como PDF\" while technically correct, doesn't fully convey the meaning of \"Save as PDF form\". The original implies saving a *form* specifically as a PDF, while the translation is more generic.",
+          "suggestion": "Salvar como formulário PDF"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Salvar como formato PDF\" is a rather literal and somewhat awkward translation. A more natural Portuguese (Brazil) translation would be \"Salvar como PDF\" or \"Exportar para PDF\". 'Formato' is redundant here.",
+          "suggestion": "Salvar como PDF"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"OFORM ලෙස සුරකින්න\" doesn't accurately convey the meaning of \"Save as PDF form.\" \"OFORM\" seems to be an attempt at transliteration of 'Form,' but it's not a standard or understandable term in Sinhala for this context. It's unclear what 'OFORM' refers to.",
+          "suggestion": "The translation should accurately convey saving as a PDF document. A suggested translation would be something like \"PDF ආකාරයට සුරකින්න\" (PDF aakaraayata surakkinna) which means 'Save in PDF format' or a simpler, more understandable alternative."
+        },
+        {
+          "type": "spelling",
+          "description": "While 'සුරකින්න' is correctly spelled, its usage in this context requires a more specific term for 'PDF'.",
+          "suggestion": "Consider using a clearer term for 'PDF' that's commonly understood in Sinhala for document format specification."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation 'Uložiť ako oform' is not the most accurate translation of 'Save as PDF form'. 'Oform' is not a common or correct term for a PDF form. A better translation would be something like 'Uložiť ako vyplniteľný PDF formulár' or 'Uložiť ako PDF formulár'.",
+          "suggestion": "Uložiť ako vyplniteľný PDF formulár"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Shrani kot oform\" is not the most natural or accurate translation of \"Save as PDF form.\" \"Oform\" is a general term for a form, and doesn't specifically indicate a PDF form. A more accurate translation would incorporate the PDF aspect.",
+          "suggestion": "Shrani kot PDF obrazec"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Сачувај у PDF формату' while understandable, isn't the most natural way to express 'Save as PDF form' in Serbian. A more common and accurate translation would emphasize saving *the form* specifically.",
+          "suggestion": "Сачувај као PDF образац"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'oform olarak Kaydet' is not the best translation for 'Save as PDF form'. 'Oform' is a general term for form, and 'olarak' implies 'as'. The Turkish translation should clearly indicate saving *as* a PDF.",
+          "suggestion": "Kaydet PDF olarak"
+        },
+        {
+          "type": "grammar",
+          "description": "While 'Kaydet PDF olarak' is better, it's not the most natural flow. In Turkish, it's more typical to place the verb first. The word order should be adjusted.",
+          "suggestion": "PDF olarak Kaydet"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Lưu dưới dạng oform' is not an accurate translation of 'Save as PDF form'. 'oform' is not a recognized term or abbreviation. It seems like a corruption of 'form'.",
+          "suggestion": "Lưu dưới dạng PDF"
+        },
+        {
+          "type": "formatting",
+          "description": "While not a direct error, the sentence could be more naturally phrased in Vietnamese for better readability.",
+          "suggestion": "Lưu thành mẫu PDF"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

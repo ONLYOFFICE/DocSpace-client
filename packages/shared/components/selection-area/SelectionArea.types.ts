@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -40,17 +40,31 @@ export type TArrayTypes = {
   rowCount?: number;
 };
 
-export interface SelectionAreaProps {
+export type SelectionAreaProps = {
+  /** Class name for the container element */
   containerClass: string;
+  /** Class name for selectable elements */
   selectableClass: string;
+  /** Callback function when selection changes */
   onMove?: ({ added, removed, clear }: TOnMove) => void;
+  /** Class name for scrollable container */
   scrollClass: string;
+  /** View type */
   viewAs: TViewAs;
+  /** Class name for items container */
   itemsContainerClass: string;
+  /** Flag indicating if this is for rooms */
   isRooms?: boolean;
+  /** Height of folder header */
   folderHeaderHeight?: number;
-  countTilesInRow?: number;
-  defaultHeaderHeight?: number;
+  /** Array type configuration */
   arrayTypes?: TArrayTypes[];
+  /** Class name for item elements */
   itemClass: string;
-}
+  /** Number of tiles in a row */
+  countTilesInRow?: number;
+  /** Default height of header */
+  defaultHeaderHeight?: number;
+  /** Callback function for mouse down event */
+  onMouseDown?: (event: MouseEvent) => void;
+};

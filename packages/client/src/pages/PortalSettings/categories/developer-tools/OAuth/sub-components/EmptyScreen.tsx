@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,15 +30,20 @@ import { useTheme } from "styled-components";
 import { EmptyView } from "@docspace/shared/components/empty-view";
 import { Text } from "@docspace/shared/components/text";
 import { globalColors } from "@docspace/shared/themes";
-import { LinkTarget, LinkType } from "@docspace/shared/components/link";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 
 import EmptyScreenOauthLightSvg from "PUBLIC_DIR/images/emptyview/empty.oauth2.light.svg";
 import EmptyScreenOauthDarkSvg from "PUBLIC_DIR/images/emptyview/empty.oauth2.dark.svg";
 
 import RegisterNewButton from "./RegisterNewButton";
 
-const OAuthEmptyScreen = ({ apiOAuthLink }: { apiOAuthLink: string }) => {
+const OAuthEmptyScreen = ({
+  apiOAuthLink,
+  logoText,
+}: {
+  apiOAuthLink: string;
+  logoText: string;
+}) => {
   const { t } = useTranslation(["OAuth", "Common"]);
   const theme = useTheme();
 
@@ -55,7 +60,7 @@ const OAuthEmptyScreen = ({ apiOAuthLink }: { apiOAuthLink: string }) => {
       i18nKey="OAuthAppDescription"
       values={{
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }}
     />
   );
@@ -73,18 +78,21 @@ const OAuthEmptyScreen = ({ apiOAuthLink }: { apiOAuthLink: string }) => {
         {descText}
       </Text>
       <p>
-        <ColorTheme
-          target={LinkTarget.blank}
-          type={LinkType.page}
-          fontWeight={600}
-          isHovered
-          href={apiOAuthLink}
-          tag="a"
-          themeId={ThemeId.Link}
-          style={{ marginBottom: "20px" }}
-        >
-          {t("OAuth:OAuth")} {t("Common:Guide")}
-        </ColorTheme>
+        {apiOAuthLink ? (
+          <Link
+            target={LinkTarget.blank}
+            type={LinkType.page}
+            fontWeight={600}
+            isHovered
+            href={apiOAuthLink}
+            tag="a"
+            style={{ marginBottom: "20px" }}
+            color="accent"
+            dataTestId="oauth_guide_link"
+          >
+            {t("OAuth:OAuth")} {t("Common:Guide")}
+          </Link>
+        ) : null}
       </p>
 
       <RegisterNewButton />

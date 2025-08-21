@@ -1,6 +1,4 @@
 {
   "ErrorEmptyResponse": "ການຕອບສະຫນອງທີ່ວ່າງເປົ່າ",
-  "ErrorUnavailableText": "{{productName}} ບໍ່ສາມາດໃຊ້ໄດ້",
-  "LinkDoesNotExist": "ບໍ່ມີລິ້ງທີ່ເຈົ້າພະຍາຍາມເປີດ.",
-  "LinkHasExpired": "ລິ້ງທີ່ທ່ານຕິດຕາມໄດ້ໝົດອາຍຸແລ້ວ."
+  "ErrorUnavailableText": "{{productName}} ບໍ່ສາມາດໃຊ້ໄດ້"
 }

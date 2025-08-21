@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,6 +26,7 @@
 
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
+import { TFunction } from "i18next";
 
 import { SearchInput } from "@docspace/shared/components/search-input";
 import { InputSize } from "@docspace/shared/components/text-input";
@@ -117,9 +118,14 @@ const SelectUsersTypeStep = (props: TypeSelectProps) => {
     <Wrapper>
       {Buttons}
 
-      <UsersInfoBlock />
+      <UsersInfoBlock
+        quota={undefined}
+        totalUsedUsers={undefined}
+        numberOfSelectedUsers={undefined}
+        totalUsers={undefined}
+      />
 
-      {filteredUsers.length > 0 && (
+      {filteredUsers.length > 0 ? (
         <>
           <SearchInput
             id="search-checkedUsers-type-input"
@@ -134,20 +140,20 @@ const SelectUsersTypeStep = (props: TypeSelectProps) => {
 
           <AccountsTable accountsData={filteredAccounts} />
 
-          {filteredUsers.length > PAGE_SIZE && filteredAccounts.length > 0 && (
+          {filteredUsers.length > PAGE_SIZE && filteredAccounts.length > 0 ? (
             <AccountsPaging
-              t={t}
+              t={t as TFunction}
               numberOfItems={filteredUsers.length}
               setDataPortion={handleDataChange}
               pagesPerPage={PAGE_SIZE}
             />
-          )}
+          ) : null}
 
-          {filteredAccounts.length > 0 && Buttons}
+          {filteredAccounts.length > 0 ? Buttons : null}
         </>
-      )}
+      ) : null}
 
-      {cancelUploadDialogVisible && (
+      {cancelUploadDialogVisible ? (
         <CancelUploadDialog
           visible={cancelUploadDialogVisible}
           onClose={hideCancelDialog}
@@ -156,7 +162,7 @@ const SelectUsersTypeStep = (props: TypeSelectProps) => {
           isFifthStep={false}
           isSixthStep={false}
         />
-      )}
+      ) : null}
     </Wrapper>
   );
 };

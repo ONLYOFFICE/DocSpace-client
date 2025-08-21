@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,20 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect, useCallback } from "react";
+import classNames from "classnames";
+import { ReactSVG } from "react-svg";
 
 import { DropDownItem } from "../drop-down-item";
 import { Badge } from "../badge";
-import { TOption } from "../combobox";
+import { ComboBox, TOption } from "../combobox";
 import { toastr } from "../toast";
 
-import {
-  StyledItemTitle,
-  StyledItemContent,
-  StyledItemIcon,
-  StyledItemDescription,
-  StyledItem,
-  StyledWrapper,
-} from "./AccessRightSelect.styled";
+import styles from "./AccessRightSelect.module.scss";
 import { AccessRightSelectProps } from "./AccessRightSelect.types";
 
 export const AccessRightSelectPure = ({
@@ -51,6 +46,8 @@ export const AccessRightSelectPure = ({
   isSelectionDisabled,
   selectionErrorText,
   availableAccess,
+  isDisabled,
+  dataTestId,
   ...props
 }: AccessRightSelectProps) => {
   const [currentItem, setCurrentItem] = useState(selectedOption);
@@ -64,7 +61,7 @@ export const AccessRightSelectPure = ({
       if (option) {
         if (isSelectionDisabled) {
           let isError =
-            option.access && option.access !== selectedOption.access;
+            option.access && option.access !== selectedOption?.access;
 
           if (availableAccess && option.access) {
             isError = availableAccess.every((item) => item !== option.access);
@@ -80,11 +77,19 @@ export const AccessRightSelectPure = ({
         onSelect?.(option);
       }
     },
-    [onSelect],
+    [
+      availableAccess,
+      isSelectionDisabled,
+      onSelect,
+      selectedOption?.access,
+      selectionErrorText,
+    ],
   );
 
   const formatToAccessRightItem = (data: TOption[]) => {
     const items = data.map((item: TOption) => {
+      const isSelected = currentItem?.key === item?.key;
+
       return "isSeparator" in item && item.isSeparator ? (
         <DropDownItem key={item.key} isSeparator />
       ) : (
@@ -92,19 +97,24 @@ export const AccessRightSelectPure = ({
           className="access-right-item"
           key={item.key}
           data-key={item.key}
+          isSelected={isSelected}
+          isActive={isSelected}
           onClick={() => onSelectCurrentItem(item)}
+          testId={`access_right_option_${item.key.toString().toLowerCase()}`}
         >
-          <StyledItem>
-            {item.icon && (
-              <StyledItemIcon
+          <div className={styles.item}>
+            {item.icon && typeof item.icon === "string" ? (
+              <ReactSVG
+                className={classNames(styles.itemIcon, {
+                  [styles.isShortenIcon]: type === "onlyIcon",
+                })}
                 src={item.icon}
-                isShortenIcon={type === "onlyIcon"}
               />
-            )}
-            <StyledItemContent>
-              <StyledItemTitle>
+            ) : null}
+            <div className={styles.itemContent}>
+              <div className={styles.itemTitle}>
                 {item.label}
-                {item.quota && (
+                {item.quota ? (
                   <Badge
                     label={item.quota}
                     backgroundColor={item.color}
@@ -112,11 +122,11 @@ export const AccessRightSelectPure = ({
                     isPaidBadge
                     noHover
                   />
-                )}
-              </StyledItemTitle>
-              <StyledItemDescription>{item.description}</StyledItemDescription>
-            </StyledItemContent>
-          </StyledItem>
+                ) : null}
+              </div>
+              <div className={styles.itemDescription}>{item.description}</div>
+            </div>
+          </div>
         </DropDownItem>
       );
     });
@@ -130,9 +140,14 @@ export const AccessRightSelectPure = ({
   // console.log(formattedOptions);
 
   return (
-    <StyledWrapper
-      className={className}
+    <ComboBox
+      className={classNames(styles.wrapper, className, {
+        [styles.descriptive]: type === "descriptive",
+        [styles.onlyIcon]: type === "onlyIcon",
+        [styles.isDisabled]: isDisabled,
+      })}
       type={type}
+      isDisabled={isDisabled}
       advancedOptions={formattedOptions}
       onSelect={onSelectCurrentItem}
       options={[]}
@@ -146,6 +161,9 @@ export const AccessRightSelectPure = ({
         } as TOption
       }
       forceCloseClickOutside
+      dropDownClassName={styles.accessRightSelectDropdown}
+      dataTestId={dataTestId}
+      useImageIcon
       {...props}
     />
   );

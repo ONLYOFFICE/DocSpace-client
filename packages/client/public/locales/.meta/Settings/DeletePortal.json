@@ -1,0 +1,274 @@
+{
+  "key_path": "DeletePortal",
+  "content": "Delete {{productName}}",
+  "content_en_sha1_hash": "c9a087cf0ab00ea2fbdf46a5931658150f1b19eb",
+  "created_at": "2025-05-19T21:30:51.112Z",
+  "updated_at": "2025-06-30T12:20:31.232Z",
+  "comment": {
+    "text": "This translation key is used to display a message when deleting a portal, referencing the product name. It appears in a confirmation dialog prompt and is translated to the user's preferred language. The purpose of this text is to provide context for the deletion action.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:24.494Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeletePortalDialog/index.js",
+      "line_number": 32,
+      "context": "import { Trans, useTranslation } from \"react-i18next\";\n import { ModalDialog } from \"@docspace/shared/components/modal-dialog\";\n import { Button } from \"@docspace/shared/components/button\";\n import { toastr } from \"@docspace/shared/components/toast\";\n import { Link } from \"@docspace/shared/components/link\";\n import { sendDeletePortalEmail } from \"@docspace/shared/api/portal\";\n \n const DeletePortalDialog = (props) => {\n const { t, ready } = useTranslation(\"Settings\", \"Common\");\n const { visible, onClose, owner, stripeUrl } = props;",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/delete-data/index.js",
+      "line_number": 50,
+      "context": "const [isLoading, setIsLoading] = useState(false);\n \n const data = [\n {\n id: \"deletion\",\n name: t(\"DeletePortal\", { productName: t(\"Common:ProductName\") }),\n content: <PortalDeletionSection />,\n },\n {\n id: \"deactivation\",\n name: t(\"PortalDeactivation\", { productName: t(\"Common:ProductName\") }),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/delete-data/portalDeletion.js",
+      "line_number": 34,
+      "context": "import { inject } from \"mobx-react\";\n import { Text } from \"@docspace/shared/components/text\";\n import { Button } from \"@docspace/shared/components/button\";\n import { Link } from \"@docspace/shared/components/link\";\n import { setDocumentTitle } from \"SRC_DIR/helpers/utils\";\n import { DeletePortalDialog } from \"SRC_DIR/components/dialogs\";\n import { toastr } from \"@docspace/shared/components/toast\";\n import {\n getPaymentAccount,\n sendDeletePortalEmail,\n } from \"@docspace/shared/api/portal\";",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/management/src/dialogs/delete-portal/index.tsx",
+      "line_number": 108,
+      "context": "autoMaxHeight\n >\n <ModalDialog.Header>\n {isWizardCompleted\n ? t(\"SubmitDelete\")\n : t(\"Settings:DeletePortal\", {\n productName: t(\"Common:ProductName\"),\n })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n {isWizardCompleted ? (",
+      "module": "/packages/management"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"{{productName}}-i silin\" is not the most natural or accurate way to say 'Delete {{productName}}' in Azerbaijani. While technically correct, it sounds a bit stiff.  A more natural phrasing would be '{{productName}}-i sil'. The '-i' ending on 'silin' is a passive voice construction, and 'sil' is the direct verb.",
+          "suggestion": "{{productName}}-i sil"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Odstranění\" is a valid word for deletion, \"mazání\" might be more commonly used and sound more natural in this context. \"Odstranění\" implies a more permanent and official removal.",
+          "suggestion": "Mazání prostoru {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation 'Ջնջել {{productName}}-ը' is technically correct but sounds slightly unnatural. A more common and natural phrasing would be something like 'Մաքրել {{productName}}' or 'Հեռացնել {{productName}}'.",
+          "suggestion": "Consider using 'Մաքրել {{productName}}' or 'Հեռացնել {{productName}}' for a more natural feel."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"{{productName}}を解除する\" ({{productName}} o kaijo suru) translates to 'Release {{productName}}' or 'Deactivate {{productName}}', which doesn't accurately convey the meaning of 'Delete {{productName}}'.  'Delete' implies permanent removal.",
+          "suggestion": "Consider a more accurate translation such as \"{{productName}}を削除する\" ({{productName}} o sakujo suru) which means 'Delete {{productName}}'. Or \"{{productName}}を消去する\" ({{productName}} o shoukyaku suru) - 'Erase {{productName}}'"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ștergere {{productName}}' is a literal translation of 'Delete {{productName}}'. A more natural Romanian phrasing would be 'Eliminare {{productName}}' or 'Ștergerea {{productName}}'. While 'Ștergere' isn't *incorrect*, it's not the most idiomatic choice in this context.",
+          "suggestion": "Eliminare {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '{{productName}} මකන්න' while conveying the general meaning of 'Delete {{productName}}', is a bit literal. A more natural Sinhala phrasing would be '{{productName}} අයින් කරන්න' or '{{productName}} ඉවත් කරන්න'.  'මකන්න' generally means to erase or obliterate, which is not the most common way to express deletion in a user interface.",
+          "suggestion": "{{productName}} අයින් කරන්න"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Обриши {{productName}}\" uses the verb 'obriši' which translates to 'delete' or 'wipe out' but implies a more forceful or complete removal. A more appropriate translation might be something like 'Izbriši {{productName}}' which directly translates to 'Delete {{productName}}'.",
+          "suggestion": "Избриши {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Obriši {{productName}}' translates to 'Delete {{productName}}' which is technically correct, but 'Obriši' (Delete) is a more direct, informal command. Depending on the context and desired tone, a more polite or nuanced option might be preferable. Consider 'Izbriši {{productName}}' which is more formal.",
+          "suggestion": "Izbriši {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

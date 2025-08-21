@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -36,18 +36,19 @@ import {
   TSelectorSearch,
 } from "../../components/selector/Selector.types";
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
-import api from "../../api";
-import RoomsFilter from "../../api/rooms/filter";
-import { RoomsStorageFilter } from "../../enums";
 
 import { TTranslation } from "../../types";
 
+import useSocketHelper from "../utils/hooks/useSocketHelper";
+import useRoomsHelper from "../utils/hooks/useRoomsHelper";
 import { RoomSelectorProps } from "./RoomSelector.types";
 import { convertToItems } from "./RoomSelector.utils";
+import {
+  LoadersContext,
+  LoadersContextProvider,
+} from "../utils/contexts/Loaders";
 
-const PAGE_COUNT = 100;
-
-const RoomSelector = ({
+const RoomSelectorComponent = ({
   id,
   className,
   style,
@@ -73,23 +74,52 @@ const RoomSelector = ({
   onCancel,
 
   roomType,
+  searchArea,
 
   disableThirdParty,
+  emptyScreenHeader,
+  emptyScreenDescription,
+
+  createDefineRoomLabel,
+  createDefineRoomType,
+
+  withInit,
+  withCreate,
+  initItems,
+  initTotal,
+  initHasNextPage,
+  initSearchValue,
 }: RoomSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
-  const [searchValue, setSearchValue] = React.useState("");
-  const [hasNextPage, setHasNextPage] = React.useState(false);
-  const [isNextPageLoading, setIsNextPageLoading] = React.useState(false);
+  const { isFirstLoad, isNextPageLoading, setIsFirstLoad } =
+    React.useContext(LoadersContext);
+
+  const [searchValue, setSearchValue] = React.useState(() =>
+    withInit ? initSearchValue : "",
+  );
+  const [hasNextPage, setHasNextPage] = React.useState(() =>
+    withInit ? initHasNextPage : false,
+  );
   const [selectedItem, setSelectedItem] = React.useState<TSelectorItem | null>(
     null,
   );
-  const [total, setTotal] = React.useState(-1);
 
-  const [items, setItems] = React.useState<TSelectorItem[]>([]);
+  const [total, setTotal] = React.useState(() => (withInit ? initTotal : -1));
+  const [items, setItems] = React.useState<TSelectorItem[]>(
+    withInit
+      ? convertToItems(initItems).filter((x) =>
+          excludeItems ? !excludeItems.includes(x.id) : true,
+        )
+      : [],
+  );
 
-  const isFirstLoad = React.useRef(true);
+  const isInitRef = React.useRef<boolean>(!withInit);
   const afterSearch = React.useRef(false);
+
+  const setIsInit = React.useCallback((value: boolean) => {
+    isInitRef.current = value;
+  }, []);
 
   const onSelect = (
     item: TSelectorItem,
@@ -107,78 +137,58 @@ const RoomSelector = ({
   };
 
   useEffect(() => {
-    setIsDataReady?.(!isFirstLoad.current);
-  }, [setIsDataReady]);
+    setIsDataReady?.(!isFirstLoad);
+  }, [setIsDataReady, isFirstLoad]);
 
   const onSearchAction = React.useCallback(
     (value: string, callback?: VoidFunction) => {
-      isFirstLoad.current = true;
       afterSearch.current = true;
+      setIsFirstLoad(true);
       setSearchValue(() => {
         return value;
       });
       callback?.();
     },
-    [],
+    [setIsFirstLoad],
   );
 
-  const onClearSearchAction = React.useCallback((callback?: VoidFunction) => {
-    isFirstLoad.current = true;
-    afterSearch.current = true;
-    setSearchValue(() => {
-      return "";
-    });
-    callback?.();
-  }, []);
+  const { subscribe } = useSocketHelper({
+    withCreate,
+    setTotal,
+    setItems,
+    disabledItems: [],
+  });
 
-  const onLoadNextPage = React.useCallback(
-    async (startIndex: number) => {
-      setIsNextPageLoading(true);
-
-      const page = startIndex / PAGE_COUNT;
-
-      const filter = RoomsFilter.getDefault();
-
-      filter.page = page;
-      filter.pageCount = PAGE_COUNT;
-      filter.type = roomType as unknown as string | string[];
-      filter.filterValue = searchValue || null;
-
-      if (disableThirdParty)
-        filter.storageFilter = RoomsStorageFilter.internal as unknown as string;
-
-      const {
-        folders,
-        total: totalCount,
-        count,
-      } = await api.rooms.getRooms(filter);
-
-      const rooms = convertToItems(folders).filter((x) =>
-        excludeItems ? !excludeItems.includes(x.id) : true,
-      );
-
-      setHasNextPage(count === PAGE_COUNT);
-
-      if (isFirstLoad) {
-        setTotal(totalCount);
-
-        setItems([...rooms]);
-      } else {
-        setItems((prevItems) => {
-          const newItems = [...rooms];
-
-          return [...prevItems, ...newItems];
-        });
-      }
-
-      if (isFirstLoad.current) setIsDataReady?.(true);
-
-      isFirstLoad.current = false;
-
-      setIsNextPageLoading(false);
+  const onClearSearchAction = React.useCallback(
+    (callback?: VoidFunction) => {
+      setIsFirstLoad(true);
+      afterSearch.current = true;
+      setSearchValue(() => {
+        return "";
+      });
+      callback?.();
     },
-    [disableThirdParty, excludeItems, roomType, searchValue, setIsDataReady],
+    [setIsFirstLoad],
   );
+
+  const { getRoomList: onLoadNextPage } = useRoomsHelper({
+    withCreate,
+    isInit: isInitRef.current,
+    setIsInit,
+    createDefineRoomLabel,
+    createDefineRoomType,
+    excludeItems,
+    roomType,
+    searchValue,
+    isRoomsOnly: true,
+    setHasNextPage,
+    setTotal,
+    setItems,
+    withInit,
+    disableThirdParty,
+    searchArea,
+    subscribe,
+  });
 
   const headerSelectorProps: TSelectorHeader = withHeader
     ? {
@@ -206,8 +216,7 @@ const RoomSelector = ({
         onSearch: onSearchAction,
         onClearSearch: onClearSearchAction,
         searchLoader: <SearchLoader />,
-        isSearchLoading:
-          isFirstLoad.current && !searchValue && !afterSearch.current,
+        isSearchLoading: isFirstLoad && !searchValue && !afterSearch.current,
       }
     : {};
 
@@ -226,8 +235,10 @@ const RoomSelector = ({
       onSubmit={onSubmit}
       isMultiSelect={isMultiSelect}
       emptyScreenImage={EmptyScreenCorporateSvgUrl}
-      emptyScreenHeader={t("Common:EmptyRoomsHeader")}
-      emptyScreenDescription={t("Common:EmptyRoomsDescription")}
+      emptyScreenHeader={emptyScreenHeader ?? t("Common:EmptyRoomsHeader")}
+      emptyScreenDescription={
+        emptyScreenDescription ?? t("Common:EmptyRoomsDescription")
+      }
       searchEmptyScreenImage={EmptyScreenCorporateSvgUrl}
       searchEmptyScreenHeader={t("Common:NotFoundTitle")}
       searchEmptyScreenDescription={t("Common:SearchEmptyRoomsDescription")}
@@ -235,17 +246,29 @@ const RoomSelector = ({
       hasNextPage={hasNextPage}
       isNextPageLoading={isNextPageLoading}
       loadNextPage={onLoadNextPage}
-      isLoading={isFirstLoad.current}
+      isLoading={isFirstLoad}
       disableSubmitButton={!selectedItem}
       alwaysShowFooter={items.length !== 0 || Boolean(searchValue)}
       rowLoader={
         <RowLoader
           isMultiSelect={isMultiSelect}
-          isContainer={isFirstLoad.current}
+          isContainer={isFirstLoad}
           isUser={false}
         />
       }
+      isSSR={withInit}
+      dataTestId="room_selector"
     />
+  );
+};
+
+const RoomSelector = (props: RoomSelectorProps) => {
+  const { withInit } = props;
+
+  return (
+    <LoadersContextProvider withInit={withInit}>
+      <RoomSelectorComponent {...props} />
+    </LoadersContextProvider>
   );
 };
 

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,27 +24,27 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
-import { useTheme } from "styled-components";
 import { inject, observer } from "mobx-react";
 
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import { Text } from "@docspace/shared/components/text";
-
-import FilesActionStore from "SRC_DIR/store/FilesActionsStore";
 
 import { StyledRoomItem } from "../NewFilesBadge.styled";
 import { NewFilesPanelItemRoomProps } from "../NewFilesBadge.types";
 
 const NewFilesPanelItemRoomComponent = ({
   room,
-
+  getFolderInfo,
   openItemAction,
   onClose,
 }: NewFilesPanelItemRoomProps) => {
-  const theme = useTheme();
-
-  const onClick = () => {
-    openItemAction!({ ...room, isFolder: true });
+  const onClick = async () => {
+    const roomInfo = await getFolderInfo!(room.id);
+    openItemAction!({
+      ...roomInfo,
+      isFolder: true,
+      updatePublicKey: true,
+    });
     onClose();
   };
 
@@ -56,8 +56,7 @@ const NewFilesPanelItemRoomComponent = ({
         logo={room.logo}
         title={room.title}
         color={room.logo.color ?? ""}
-        showDefault={!room.logo.medium && !room.logo.cover}
-        currentColorScheme={theme.currentColorScheme!}
+        showDefault={!room.logo.medium ? !room.logo.cover : false}
         dropDownManualX="0"
         size="24px"
       />
@@ -75,10 +74,11 @@ const NewFilesPanelItemRoomComponent = ({
   );
 };
 
-export const NewFilesPanelItemRoom = inject(
-  ({ filesActionsStore }: { filesActionsStore: FilesActionStore }) => {
+export const NewFilesPanelItemRoom = inject<TStore>(
+  ({ filesActionsStore, filesStore }) => {
     const { openItemAction } = filesActionsStore;
+    const { getFolderInfo } = filesStore;
 
-    return { openItemAction };
+    return { openItemAction, getFolderInfo };
   },
 )(observer(NewFilesPanelItemRoomComponent));

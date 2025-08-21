@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -40,7 +40,7 @@ const EmailActivationHandler = () => {
 
   const { linkData } = useContext(ConfirmRouteContext);
 
-  const { email, uid = "", confirmHeader = "" } = linkData;
+  const { uid = "", confirmHeader = "" } = linkData;
 
   useEffect(() => {
     async function changeActivationStatus() {
@@ -51,9 +51,12 @@ const EmailActivationHandler = () => {
           confirmHeader,
         );
 
-        window.location.replace(`/login?confirmedEmail=${email}`);
-      } catch (error) {
-        const knownError = error as TError;
+        const base64Data = btoa(JSON.stringify(res[0]?.email));
+        sessionStorage.setItem("confirmedData", base64Data);
+
+        window.location.replace("/login");
+      } catch (e) {
+        const knownError = e as TError;
         let errorMessage: string;
 
         if (typeof knownError === "object") {
@@ -70,7 +73,7 @@ const EmailActivationHandler = () => {
     }
 
     changeActivationStatus();
-  }, [email, uid, confirmHeader]);
+  }, [uid, confirmHeader]);
 
   if (error) {
     console.error(error);

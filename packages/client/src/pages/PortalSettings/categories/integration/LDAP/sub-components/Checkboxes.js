@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,6 @@
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Box } from "@docspace/shared/components/box";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { RadioButton } from "@docspace/shared/components/radio-button";
 import { Text } from "@docspace/shared/components/text";
@@ -68,7 +67,7 @@ const Checkboxes = ({
   };
 
   return (
-    <Box className="ldap_checkbox-container">
+    <div className="ldap_checkbox-container">
       <div className="ldap_connection_type-text">
         <Text fontWeight={600} fontSize="14px">
           {t("LdapConnectionType")}
@@ -81,10 +80,11 @@ const Checkboxes = ({
             tabIndex={1}
             key={ConnectionType.Unencrypted}
             value={ConnectionType.Unencrypted}
-            isChecked={!isTlsEnabled && !isSslEnabled}
+            isChecked={!isTlsEnabled ? !isSslEnabled : null}
             onChange={onChangeUnencrypted}
             isDisabled={!isLdapEnabled || isUIDisabled}
             label={t("LdapConnectionTypeUnencrypted")}
+            testId="type_unencrypted_radio_button"
           />
         </div>
         <div className="ldap_checkbox-header">
@@ -97,8 +97,12 @@ const Checkboxes = ({
             onChange={onChangeTls}
             isDisabled={!isLdapEnabled || isUIDisabled}
             label={t("LdapConnectionTypeStartTls")}
+            testId="type_starttls_radio_button"
           />
-          <HelpButton tooltipContent={t("LdapConnectionTypeStartTlsTooltip")} />
+          <HelpButton
+            tooltipContent={t("LdapConnectionTypeStartTlsTooltip")}
+            dataTestId="type_starttls_help_button"
+          />
         </div>
         <div className="ldap_checkbox-header">
           <RadioButton
@@ -110,11 +114,15 @@ const Checkboxes = ({
             onChange={onChangeSsl}
             isDisabled={!isLdapEnabled || isUIDisabled}
             label={t("LdapConnectionTypeSSL")}
+            testId="type_ssl_radio_button"
           />
-          <HelpButton tooltipContent={t("LdapConnectionTypeSSLTooltip")} />
+          <HelpButton
+            tooltipContent={t("LdapConnectionTypeSSLTooltip")}
+            dataTestId="type_ssl_help_button"
+          />
         </div>
       </div>
-    </Box>
+    </div>
   );
 };
 

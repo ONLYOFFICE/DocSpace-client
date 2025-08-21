@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { StyledTrialComponent } from "./Payments.styled";
+import { RectangleSkeleton } from "../rectangle";
+import styles from "./Payments.module.scss";
 import { PaymentsLoaderProps } from "./Payments.types";
 
 const TrialLoader = ({ className, style, ...rest }: PaymentsLoaderProps) => {
@@ -42,7 +42,7 @@ const TrialLoader = ({ className, style, ...rest }: PaymentsLoaderProps) => {
   } = rest;
 
   return (
-    <StyledTrialComponent>
+    <div className={styles.trialComponent} data-testid="trial-loader">
       <RectangleSkeleton
         className="payments-loader_1"
         title={title}
@@ -173,7 +173,7 @@ const TrialLoader = ({ className, style, ...rest }: PaymentsLoaderProps) => {
         speed={speed}
         animate={animate}
       />
-    </StyledTrialComponent>
+    </div>
   );
 };
 export default TrialLoader;

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -71,6 +71,7 @@ export const SSLVerification = ({ onChange, value, isDisabled }) => {
           iconName={InfoReactSvgUrl}
           tooltipContent={<Text fontSize="12px">{t("SSLHint")}</Text>}
           place="bottom"
+          dataTestId="ssl_verification_help_button"
         />
       </Header>
       <RadioButtonGroup
@@ -83,11 +84,13 @@ export const SSLVerification = ({ onChange, value, isDisabled }) => {
             id: "enable-ssl",
             label: t("EnableSSL"),
             value: "true",
+            dataTestId: "enable_ssl_radio_button",
           },
           {
             id: "disable-ssl",
             label: t("DisableSSL"),
             value: "false",
+            dataTestId: "disable_ssl_radio_button",
           },
         ]}
         selected={value ? "true" : "false"}
@@ -95,6 +98,7 @@ export const SSLVerification = ({ onChange, value, isDisabled }) => {
         orientation="vertical"
         spacing="8px"
         isDisabled={isDisabled}
+        dataTestId="ssl_verification_radio_button_group"
       />
     </div>
   );

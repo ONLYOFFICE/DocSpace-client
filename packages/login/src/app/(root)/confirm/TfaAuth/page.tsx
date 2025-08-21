@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,40 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { logger } from "logger.mjs";
+
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
 import { GreetingContainer } from "@/components/GreetingContainer";
-import { getStringFromSearchParams } from "@/utils";
-import { getSettings, getUserFromConfirm } from "@/utils/actions";
 
 import TfaAuthForm from "./page.client";
 
-type TfaAuthProps = {
-  searchParams: { [key: string]: string };
-};
-
-async function Page({ searchParams }: TfaAuthProps) {
-  const confirmKey = getStringFromSearchParams(searchParams);
-  const uid = searchParams.uid;
-
-  const [settings, user] = await Promise.all([
-    getSettings(),
-    getUserFromConfirm(uid, confirmKey),
-  ]);
+async function Page() {
+  logger.info("TfaAuth page");
 
   return (
     <>
-      {settings && typeof settings !== "string" && (
-        <>
-          <GreetingContainer />
-          <FormWrapper id="tfa-auth-form">
-            <TfaAuthForm
-              passwordHash={settings.passwordHash}
-              userName={user?.userName}
-            />
-          </FormWrapper>
-        </>
-      )}
+      <GreetingContainer />
+      <FormWrapper id="tfa-auth-form">
+        <TfaAuthForm />
+      </FormWrapper>
     </>
   );
 }

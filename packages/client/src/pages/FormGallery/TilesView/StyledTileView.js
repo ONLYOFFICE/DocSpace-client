@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -217,6 +217,10 @@ const SimpleFilesTileContent = styled(TileContent)`
     align-self: flex-end;
   }
 
+  .item-file-name {
+    display: -webkit-box;
+  }
+
   .badge {
     margin-inline-end: 8px;
     cursor: pointer;
@@ -267,7 +271,7 @@ const paddingCss = css`
 
 const StyledGridWrapper = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(216px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
   width: 100%;
   margin-bottom: ${(props) => (props.isFolders ? "23px" : 0)};
   box-sizing: border-box;

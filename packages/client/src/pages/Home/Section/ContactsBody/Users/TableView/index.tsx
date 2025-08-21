@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,10 +26,9 @@
 
 import React, { useRef } from "react";
 import { inject, observer } from "mobx-react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 
 import { TableBody } from "@docspace/shared/components/table";
-import { Nullable } from "@docspace/shared/types";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import { TContactsViewAs } from "SRC_DIR/helpers/contacts";
@@ -82,6 +81,7 @@ const Table = ({
 
   columnStorageName,
   columnInfoPanelStorageName,
+  withContentSelection,
 }: TableViewProps) => {
   useViewEffect({
     view: viewAs!,
@@ -94,7 +94,7 @@ const Table = ({
   const location = useLocation();
 
   const [hideColumns, setHideColumns] = React.useState(false);
-  const ref = useRef<Nullable<React.ForwardedRef<HTMLDivElement>>>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   const getEnabledColumns = (): TableColumns => {
     if (contactsTab === "people") {
@@ -133,8 +133,10 @@ const Table = ({
 
   return !isUsersEmptyView ? (
     <StyledTableContainer
+      noSelect={!withContentSelection}
       useReactWindow
-      forwardedRef={ref as React.ForwardedRef<HTMLDivElement>}
+      forwardedRef={ref as React.RefObject<HTMLDivElement>}
+      data-testid="contacts_table_users_container"
     >
       <TableHeader
         // rewrite to component did update
@@ -174,7 +176,7 @@ const Table = ({
             setCurrentGroup={setCurrentGroup}
             {...enabledColumns}
             infoPanelVisible={infoPanelVisible}
-            isGuests={contactsTab === "guests"}
+            contactsTab={contactsTab}
           />
         ))}
       </TableBody>
@@ -193,7 +195,8 @@ export default inject(
     userStore,
     tableStore,
   }: TableViewStores) => {
-    const { usersStore, groupsStore, viewAs, setViewAs } = peopleStore;
+    const { usersStore, groupsStore, contactsHotkeysStore, viewAs, setViewAs } =
+      peopleStore;
 
     const { setCurrentGroup } = groupsStore!;
 
@@ -239,6 +242,8 @@ export default inject(
       columnInfoPanelStorageName,
     } = tableStore;
 
+    const { withContentSelection } = contactsHotkeysStore!;
+
     return {
       peopleList,
 
@@ -282,6 +287,8 @@ export default inject(
 
       columnStorageName,
       columnInfoPanelStorageName,
+
+      withContentSelection,
     };
   },
 )(observer(Table));

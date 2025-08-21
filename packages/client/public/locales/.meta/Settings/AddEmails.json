@@ -1,0 +1,277 @@
+{
+  "key_path": "AddEmails",
+  "content": "Add emails to incomplete accounts",
+  "content_en_sha1_hash": "ab85e01a86fcd93b7f8ff463ad6151d45e207b1e",
+  "created_at": "2025-05-19T21:30:50.326Z",
+  "updated_at": "2025-06-30T12:20:31.409Z",
+  "comment": {
+    "text": "This translation key is used to display a title for a setting that allows users to add emails to incomplete accounts. It appears in a UI component related to portal settings and data import, likely on a button or dialog window. Translators should focus on conveying a sense of enabling users to complete account information.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:56.121Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
+      "line_number": 71,
+      "context": "component: (\n <SelectUsersStep t={t} canDisable={false} shouldSetUsers={false} />\n ),\n },\n {\n title: t(\"Settings:AddEmails\"),\n description: t(\"Settings:AddEmailsDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: <AddEmailsStep t={t} />,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ajouter les adresses e-mail aux profils incomplets' is a bit too literal and doesn't quite capture the nuance of 'Add emails to incomplete accounts'. 'Profils' implies user profiles, whereas the English suggests a more general concept of accounts that are not fully completed.",
+          "suggestion": "Ajouter des adresses e-mail aux comptes non finalisés"
+        },
+        {
+          "type": "spelling",
+          "description": "While 'adresses' is correct, for clarity and naturalness in this context, it might be better to avoid the plural and use singular form 'adresse'.",
+          "suggestion": "Ajouter une adresse e-mail aux comptes non finalisés"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Ավելացրեք նամակներ անավարտ հաշիվներին\" is a literal translation and doesn't quite capture the intended meaning of 'Add emails to incomplete accounts'. It sounds slightly awkward in Armenian.",
+          "suggestion": "Consider a more natural phrasing like \"Ավելացրեք էլեկտրոնային հասցեներ անավարտ հաշիվներին\" (Add email addresses to incomplete accounts) or \"Նամակներ ավելացրեք անավարտ հաշիվներին\" (Add emails to incomplete accounts - slightly reordered for better flow)."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"E-pasta ziņojumu pievienošana nepilnīgiem kontiem\" is a literal translation that doesn't quite capture the intended meaning of 'Add emails to incomplete accounts'.  It sounds awkward in Latvian. A more natural translation would emphasize the action of sending emails.",
+          "suggestion": "Pievienot e-pastus kontiem, kuriem nepieciešama papildināšana"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'E-mails toevoegen aan onvolledige accounts' is a literal translation and doesn't quite capture the intended meaning. It lacks a crucial article before 'E-mails'. A more natural Dutch phrasing would include 'de'.",
+          "suggestion": "De e-mails toevoegen aan onvolledige accounts"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Adăugați adrese de e-mail la conturi cu date de profil necompletate' is too literal and slightly awkward. 'Incomplete accounts' implies a broader issue than just missing profile data. A more natural Romanian phrasing would be needed.",
+          "suggestion": "Adăugați adrese de e-mail la conturi incomplete."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'අසම්පූර්ණ ගිණුම් වලට වි-තැපැල් එක් කරන්න' is a literal translation but doesn't quite capture the intended meaning of 'Add emails to incomplete accounts'. A more natural and idiomatic Sinhala translation would be better.  'Add emails *for* incomplete accounts' would be closer.",
+          "suggestion": "Consider a phrasing like: 'අසම්පූර්ණ ගිණුම් සඳහා වි-තැපැල් එක් කරන්න' (Asampurna ginnum satha vi-tampel ek karna)"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'емаил-ове' is a somewhat informal and potentially incorrect transliteration of 'emails'. It's a combination of English and Serbian, and doesn't strictly adhere to standard Serbian orthography.",
+          "suggestion": "е-маил адресе"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While understandable, 'Додај емаил-ове непотпуним налозима' isn't the most natural or precise translation of 'Add emails to incomplete accounts'. The word order is a bit awkward.",
+          "suggestion": "Додајте е-маил адресе непотпуним налозима"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of a hyphen in 'емаил-ове' is not standard in Serbian.",
+          "suggestion": "Remove the hyphen: емаилове"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'email-ove' is not the standard way to pluralize 'email' in Serbian. The correct pluralization would be 'email adrese'.",
+          "suggestion": "Dodaj email adrese nepotpunim nalozima"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"将电子邮件添加至不完整的账号\" is a literal translation and sounds unnatural in Chinese. While technically correct, it's not how a native speaker would phrase this.",
+          "suggestion": "Consider a more natural phrasing such as \"为未完成的帐户添加电子邮件\" or \"向未完成的帐户添加电子邮件\"."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,7 +29,7 @@ import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import { inject, observer } from "mobx-react";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { withTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import config from "PACKAGE_FILE";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -81,12 +81,15 @@ const SectionHeaderContent = ({
 
     setIsLoading();
 
+    const state = { rootFolderType: folderInfo.rootFolderType };
+
     navigate(
       combineUrl(
         window.ClientConfig?.proxy?.url,
         config.homepage,
         `${url}?${filterParamsStr}`,
       ),
+      { state },
     );
   };
 
@@ -103,6 +106,7 @@ const SectionHeaderContent = ({
         isFill
         onClick={onNavigateBack}
         className="arrow-button"
+        dataTestId="form_gallery_header_back"
       />
       <StyledHeading
         className="oform-header"
@@ -114,19 +118,21 @@ const SectionHeaderContent = ({
         </StyledHeadline>
       </StyledHeading>
 
-      {!oformsLoadError && canSubmitToFormGallery() && (
+      {!oformsLoadError && canSubmitToFormGallery() ? (
         <StyledSubmitToGalleryButton
           primary
           size="small"
           onClick={onOpenSubmitToGalleryDialog}
           label={t("Common:SubmitToFormGallery")}
+          testId="form_gallery_header_submit_to_gallery"
         />
-      )}
+      ) : null}
 
-      {!oformsLoadError && (
+      {!oformsLoadError ? (
         <StyledInfoPanelToggleWrapper isInfoPanelVisible={isInfoPanelVisible}>
           <div className="info-panel-toggle-bg">
             <IconButton
+              dataTestId="form_gallery_header_info_panel"
               className="info-panel-toggle"
               iconName={PanelReactSvgUrl}
               size="16"
@@ -136,7 +142,7 @@ const SectionHeaderContent = ({
             />
           </div>
         </StyledInfoPanelToggleWrapper>
-      )}
+      ) : null}
     </StyledContainer>
   );
 };

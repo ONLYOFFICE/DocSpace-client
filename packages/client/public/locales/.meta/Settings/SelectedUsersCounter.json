@@ -1,0 +1,295 @@
+{
+  "key_path": "SelectedUsersCounter",
+  "content": "Selected: {{selectedUsers}}/{{totalUsers}} users",
+  "content_en_sha1_hash": "9b00a102a6fe3ea3e6ed152aa20c7df4a8d326dd",
+  "created_at": "2025-05-19T21:30:52.512Z",
+  "updated_at": "2025-06-30T12:20:31.426Z",
+  "comment": {
+    "text": "This translation key displays a counter showing the number of selected users out of total users. It is used in the Users Info Block component to provide a summary of user selection status on a Portal Settings page.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:34.557Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/sub-components/UsersInfoBlock.tsx",
+      "line_number": 58,
+      "context": "</Text>\n ) : null}\n \n <div className=\"users-info-wrapper\">\n <Text className=\"selected-users-count\" truncate>\n {t(\"Settings:SelectedUsersCounter\", {\n selectedUsers: numberOfSelectedUsers,\n totalUsers,\n })}\n </Text>\n <Text as=\"div\" className=\"selected-admins-count\" truncate>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'المُختار' (al-mukhtar) translates to 'the chosen' or 'the selected', but a more natural translation for 'Selected' in this context would be 'مُنتَخَب' (muntakhab) which means 'selected'.",
+          "suggestion": "مُنتَخَب: مستخدمين {{selectedUsers}}/{{totalUsers}}"
+        },
+        {
+          "type": "grammar",
+          "description": "While not strictly incorrect, the phrase 'مستخدمين' (mustakhdameen) doesn't need to be specified.  The word 'users' is implied by the context and makes the sentence slightly more verbose than necessary.  It's also more idiomatic to remove it.",
+          "suggestion": "مُنتَخَب: {{selectedUsers}}/{{totalUsers}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Azerbaijani translation uses 'istifadəçi' (user) in the singular, while the English uses 'users' (plural). The English template uses pluralization variables, and the Azerbaijani translation should reflect this.",
+          "suggestion": "Seçildi: {{selectedUsers}}/{{totalUsers}} istifadəçılar"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Selected' is better translated as 'Utilisateurs sélectionnés' in French to maintain the meaning of 'Selected users'. 'Sélection' is too generic and doesn't specifically refer to the selected users.",
+          "suggestion": "Utilisateurs sélectionnés: {{selectedUsers}}/{{totalUsers}} utilisateurs"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Armenian translation uses a colon (:) after \"Ընտրված է՝\" which might not be the most natural phrasing in this context. It feels a bit literal from the English.",
+          "suggestion": "Ընտրված է {{selectedUsers}}/{{totalUsers}} օգտվողներ"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word '사용자' (user) is technically correct but can sound slightly formal or technical in this context. A more natural and user-friendly translation might be '명' (meaning 'people' or 'individuals').",
+          "suggestion": "선택: {{selectedUsers}}/{{totalUsers}} 명"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ເລືອກແລ້ວ' (leuak laeo) which translates to 'Selected' is acceptable, however, 'ເລືອກ' (leuak) alone could be more concise and still convey the meaning of 'selected'.",
+          "suggestion": "Consider using just 'ເລືອກ' instead of 'ເລືອກແລ້ວ'."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"Selecționare\" translates more accurately to \"Selection\" rather than 'Settings'. The key name is 'Settings:SelectedUsersCounter', which implies the translation should reflect this context.",
+          "suggestion": "Setări: {{selectedUsers}}/{{totalUsers}} utilizatori"
+        },
+        {
+          "type": "formatting",
+          "description": "The Romanian word 'de' is grammatically correct but could be stylistically improved for a more natural flow.  It feels slightly clunky.",
+          "suggestion": "Setări: {{selectedUsers}}/{{totalUsers}} utilizatori"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'තෝරා ඇත: පරිශ්‍රීලකයින් {{selectedUsers}}/{{totalUsers}}' is not the most natural or accurate translation of 'Selected: {{selectedUsers}}/{{totalUsers}} users'. 'පරිශ්‍රීලකයින්' is a less common and somewhat formal term for 'users'.",
+          "suggestion": "තෝරාගත්: {{selectedUsers}}/{{totalUsers}} දෙනා"
+        },
+        {
+          "type": "formatting",
+          "description": "The term 'දෙනා' (dena) is added to make it grammatically correct and natural in Sinhala when referring to a count of people.  It's a common way to express 'people' in this context.",
+          "suggestion": "Ensure consistency with other user count phrases in the application. Consider 'භාවිතකරන්නන්' (bhavitakarnnan) for a more common alternative to 'පරිශ්‍රීලකයින්'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Turkish translation uses a colon (:) which is stylistically less common in this kind of user interface text. A dash (-) or no separator would be more standard.",
+          "suggestion": "Seçilenler {{selectedUsers}}/{{totalUsers}} kullanıcı"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The colon after 'Вибрано користувачів' is missing a space.",
+          "suggestion": "Вибрано користувачів: {{selectedUsers}}/{{totalUsers}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "Missing space after colon.",
+          "suggestion": "Đã chọn: {{selectedUsers}}/{{totalUsers}} người dùng"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Chinese translation includes the classifier '位' after 用户. While grammatically correct, it might sound slightly formal depending on the overall tone of the application. Consider removing it for a more casual feel, or keeping it for a more formal tone.",
+          "suggestion": "Consider removing '位' for a more casual tone: \"已选择：{{selectedUsers}}/{{totalUsers}} 用户\""
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

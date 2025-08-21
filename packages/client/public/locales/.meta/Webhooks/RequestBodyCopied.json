@@ -1,0 +1,331 @@
+{
+  "key_path": "RequestBodyCopied",
+  "content": "POST request body successfully copied to clipboard",
+  "content_en_sha1_hash": "4689b1eb5beec2b99c1ded7be635ae79b2e3c7bd",
+  "created_at": "2025-05-19T21:30:49.791Z",
+  "updated_at": "2025-05-24T02:18:33.089Z",
+  "comment": {
+    "text": "This translation key is used to display a message indicating that the request body has been successfully copied to the clipboard. It appears as a label on a button in the UI, informing users of the outcome of an action. Translators should focus on conveying a sense of confirmation and success.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:57.531Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/RequestDetails.js",
+      "line_number": 93,
+      "context": "value={eventDetails.requestPayload}\n isJSONField\n enableCopy\n hasNumeration\n isFullHeight\n copyInfoText={t(\"RequestBodyCopied\")}\n />\n ) : (\n <Textarea\n value={eventDetails.requestPayload}\n heightScale",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'تم نسخ نص طلب POST بنجاح إلى الحافظة' is overly literal and not the most natural way to express this in Arabic.  'نص طلب POST' is clunky. A better translation would focus on the action of copying the request body.",
+          "suggestion": "تم نسخ محتوى طلب POST بنجاح إلى الحافظة"
+        },
+        {
+          "type": "spelling",
+          "description": "While technically correct, 'الحافظة' is a more formal term for clipboard.  'المقصية' might be more commonly understood in some contexts, although 'الحافظة' is acceptable.",
+          "suggestion": "تم نسخ محتوى طلب POST بنجاح إلى المقصية"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'POST sorğusunun əsas hissəsi mübadilə buferinə uğurla nüsxələndi' is not a perfect equivalent to 'POST request body successfully copied to clipboard'. 'Əsas hissəsi' (essential part) is not precisely what 'body' means in this context. 'Body' refers to the complete content of the POST request.",
+          "suggestion": "POST sorğusunun bədəni mübadilə buferinə uğurla nüsxələndi"
+        },
+        {
+          "type": "spelling",
+          "description": "While 'mübadilə buferinə' is generally acceptable, 'keçid yaddaşina' could be a more precise translation for 'clipboard' in some technical contexts. However, 'mübadilə buferinə' is understandable.",
+          "suggestion": "POST sorğusunun bədəni keçid yaddaşina uğurla nüsxələndi"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'portapapele' is a misspelling of 'portapapeles'.",
+          "suggestion": "portapapeles"
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ຄລິບບອດ' is sometimes written as 'ຄລິບບອດ'. While both are understood, 'ຄລິບບອດ' is generally preferred and more common.",
+          "suggestion": "ຄລິບບອດ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'POST pieprasījuma pamatteksts ir veiksmīgi nokopēts starpliktuvē' is a bit literal and could be improved for naturalness in Latvian. 'Pamatteksts' is technically correct for 'body', but 'saturs' or a more conversational term might be preferred. The phrasing is also slightly clunky.",
+          "suggestion": "POST pieprasījuma saturs ir veiksmīgi nokopēts starpliktuvē"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly an error, the translation could be slightly more concise. Consider removing 'ir' for brevity.",
+          "suggestion": "POST pieprasījuma saturs veiksmīgi nokopēts starpliktuvē"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'POST-aanvraagtekst' is not the most natural or clear way to say 'POST request body'. 'POST request body' is better translated as 'Het body van de POST-aanvraag'.",
+          "suggestion": "Het body van de POST-aanvraag succesvol gekopieerd naar klembord"
+        },
+        {
+          "type": "formatting",
+          "description": "The hyphen in 'POST-aanvraagtekst' is not typical Dutch phrasing. It creates an awkward construction.",
+          "suggestion": "POST aanvraagtekst"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase 'área de transferência' is a bit formal for a UI notification. While technically correct, it might be better to use a more common term.",
+          "suggestion": "Corpo da solicitação POST copiado para a área de copiar e colar"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'POST ඉල්ලීමේ අන්තර්ගතය පසුරු පුවරුවට පිටපත් විය' is a literal translation and may not be the most natural way to express this in Sinhala. It's a bit clunky.",
+          "suggestion": "A more natural phrasing might be 'POST ඉල්ලුමේgetBody එක ක්ලිප්බෝඩ්ට පිටපත් වුණා' or 'POST ඉල්ලුමේgetBody ක්ලිප්බෝඩ්ට පිටුවහ'."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a mix of formal and informal language. While not strictly incorrect, maintaining consistency would be beneficial.  'ඉල්ලීමේ' vs. 'ඉල්ලුමේ'",
+          "suggestion": "Consider using a more consistent level of formality throughout the translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Telo zahteve POST je bilo uspešno kopirano v odložišče' is a literal translation but not the most natural sounding. 'Odložišče' directly translates to 'clipboard' but doesn't convey the user experience as well. A more natural phrasing would use a more general term for 'copying'.",
+          "suggestion": "Telo zahteve POST je bilo uspešno kopirano v spominek."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'spominek' is a better alternative than 'odložišče', it's still not ideal. A more user-friendly alternative could be to say something closer to 'kopiran je v režo za izrezkov' which clarifies the functionality.",
+          "suggestion": "Telo zahteve POST je bilo uspešno kopirano v režo za izrezkov."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'привремену меморију' (temporary memory) isn't the most natural way to refer to the clipboard in this context.  'Испомна таблица' (clipboard) would be more accurate and commonly understood.",
+          "suggestion": "Тело POST захтева успешно копирано у испевну таблицу."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Telo POST zahteva uspešno kopirano u privremenu memoriju' is not an accurate representation of \"POST request body successfully copied to clipboard.\" 'Privremena memorija' translates to 'temporary memory' or 'scratchpad', which isn't the intended meaning of a clipboard.",
+          "suggestion": "Telo POST zahteva uspešno kopirano u isečanje."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence is a bit clunky and could benefit from a more natural flow in Serbian.",
+          "suggestion": "Uspešno je kopirano telo POST zahteva u isečanje."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'скопійовано' (copied) is grammatically correct, but might sound slightly formal for a user-facing notification. Consider a more colloquial alternative.",
+          "suggestion": "скопійовано у буфер обміну"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, adding a period at the end would improve readability and adherence to standard sentence structure.",
+          "suggestion": "Тіло запиту POST успішно скопійовано до буфера обміну."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'POST request body' is too literal. A more natural Vietnamese phrasing would be more appropriate.",
+          "suggestion": "Đã sao chép nội dung POST request thành công vào bộ nhớ tạm"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, 'bộ nhớ tạm' is a bit formal for a user-facing message.  A more conversational option might improve usability.",
+          "suggestion": "Đã sao chép nội dung POST request thành công vào clipboard"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

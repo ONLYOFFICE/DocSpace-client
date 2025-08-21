@@ -1,0 +1,334 @@
+{
+  "key_path": "UsersAreRegistered",
+  "content": "You selected users registered in your {{productName}}, with the roles already set. Please proceed to the next step or go back to select more users.",
+  "content_en_sha1_hash": "104753af899631f4905c0728d34f77017a7fa816",
+  "created_at": "2025-05-19T21:30:53.146Z",
+  "updated_at": "2025-06-30T12:20:31.404Z",
+  "comment": {
+    "text": "This translation key is used for the description of a user registration confirmation message in a data import stepper, informing users that their roles are set and they have selected users registered in the product. It appears on a screen with multiple workspace options, providing context for translators to ensure the message is consistent across different platforms.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:09.210Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
+      "line_number": 73,
+      "context": "title: t(\"Settings:SelectUserTypes\"),\n description: isTypeSelectEmpty ? (\n <>\n <b>{t(\"Settings:RolesAreSet\")}</b>\n <div>\n {t(\"Settings:UsersAreRegistered\", {\n productName: t(\"Common:ProductName\"),\n })}\n </div>\n </>\n ) : (",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
+      "line_number": 83,
+      "context": "{\n title: t(\"Settings:SelectUserTypes\"),\n description: isTypeSelectEmpty ? (\n <>\n <b>{t(\"Settings:RolesAreSet\")}</b>\n <div>{t(\"Settings:UsersAreRegistered\")}</div>\n </>\n ) : (\n <>\n <Trans\n t={t}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/Stepper/index.tsx",
+      "line_number": 76,
+      "context": "{\n title: t(\"Settings:SelectUserTypes\"),\n description: isTypeSelectEmpty ? (\n <>\n <b>{t(\"Settings:RolesAreSet\")}</b>\n <div>{t(\"Settings:UsersAreRegistered\")}</div>\n </>\n ) : (\n <>\n <Trans\n t={t}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/getStepDescription.js",
+      "line_number": 47,
+      "context": "});\n case 3:\n return isTypeSelectEmpty ? (\n <>\n <b>{t(\"Settings:RolesAreSet\")}</b>\n <div>{t(\"Settings:UsersAreRegistered\")}</div>\n </>\n ) : (\n <>\n <Trans\n t={t}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/getStepDescription.js",
+      "line_number": 47,
+      "context": "});\n case 3:\n return isTypeSelectEmpty ? (\n <>\n <b>{t(\"Settings:RolesAreSet\")}</b>\n <div>{t(\"Settings:UsersAreRegistered\")}</div>\n </>\n ) : (\n <>\n <Trans\n t={t}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"الأدوار التي تم تعيينها بالفعل\" (roles that have already been set) is a bit literal and awkward in Arabic. It would be more natural to express it as something like \"بالأدوار المحددة\" (with the specified roles) or \"بالأدوار المحددة مسبقًا\" (with the predefined roles).",
+          "suggestion": "لقد حددت المستخدمين المسجلين في {{productName}}، بالأدوار المحددة بالفعل. يرجى المتابعة إلى الخطوة التالية أو العودة لتحديد المزيد من المستخدمين."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The use of \"-\" after \"productName\" in the Azerbaijani translation is unnecessary and disrupts the flow. It should be removed.",
+          "suggestion": "Siz {{productName}} -da qeydiyyatdan keçmiş istifadəçiləri seçmisiniz, onların rolları əvvəlcədən müəyyən edilmişdir. Növbəti addıma davam edin və ya daha çox istifadəçi seçmək üçün geri qayıdın."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"s již nastavenými rolemi\" (with roles already set) is a bit literal and could be more natural in Czech.  It implies the user actively set the roles, which might not be the case. A more accurate and natural translation might imply the roles were automatically assigned.",
+          "suggestion": "Vybrali jste uživatele registrované ve vašem {{productName}}. Role byly již nastaveny. Přejděte k dalšímu kroku nebo se vraťte zpět a vyberte další uživatele."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Přejděte k dalšímu kroku\" can sound slightly formal.  A more conversational tone would be preferable.",
+          "suggestion": "Pokračujte k dalšímu kroku"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"wobei die Rollen bereits festgelegt sind\" is a bit awkward in German. A more natural phrasing would convey that the roles are already assigned.",
+          "suggestion": "Sie haben Benutzer ausgewählt, die in Ihrem {{productName}} registriert sind und deren Rollen bereits zugewiesen wurden. Bitte fahren Sie mit dem nächsten Schritt fort oder gehen Sie zurück, um weitere Benutzer auszuwählen."
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the sentence structure feels a bit long and could be improved for readability.",
+          "suggestion": "Sie haben Benutzer ausgewählt, die in Ihrem {{productName}} registriert sind. Ihre Rollen sind bereits festgelegt. Bitte fahren Sie mit dem nächsten Schritt fort oder gehen Sie zurück, um weitere Benutzer auszuwählen."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"τους ρόλους που έχουν ήδη οριστεί\" is a bit clunky. A more natural Greek phrasing would be something like \"τους ρόλους τους, οι οποίοι έχουν ήδη οριστεί\" or simply \"τους ήδη ορισμένους ρόλους\".",
+          "suggestion": "Επιλέξατε χρήστες εγγεγραμμένους στο {{productName}}, με τους ήδη ορισμένους ρόλους. Προχωρήστε στο επόμενο βήμα ή επιστρέψτε για να επιλέξετε περισσότερους χρήστες."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"heile on jo valittu roolit\" is not the most natural way to express 'roles are already set'. A better translation would convey the meaning more clearly.",
+          "suggestion": "Valitsit käyttäjät, jotka on rekisteröity {{productName}}:een ja heidän roolinsa on jo määritetty."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence \"Valitsit käyttäjät, jotka on rekisteröity {{productName}}:een ja heidän roolinsa on jo määritetty.\" is a bit long and could be split into two sentences for better readability.",
+          "suggestion": "Valitsit käyttäjät, jotka on rekisteröity {{productName}}:een. Heidän roolinsa on jo määritetty."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"դերերն արդեն սահմանված են\" (derern arden sahmanavad e) translates to \"roles are already defined.\" While not entirely wrong, a more natural translation of \"roles already set\" would be something like \"դերերը նախապես սահմանված են\" (derere nahapes sahmanavad en) or \"դերերը արդեն սահմանված են եղել\" (derere arden sahmanavad egel).",
+          "suggestion": "Consider revising to: \"Դուք ընտրել եք ձեր {{productName}}-ում գրանցված օգտվողներին, որոնց դերերը նախապես սահմանված են:\" or \"Դուք ընտրել եք ձեր {{productName}}-ում գրանցված օգտվողներին, որոնց դերերը արդեն սահմանված են եղել:\""
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'with the roles already set' is awkwardly translated as 'ar jau iestatītajām lomām'. A more natural translation would be 'ar jau piešķirtajām lomām' or 'ar jau noteiktajām lomām'.",
+          "suggestion": "ar jau piešķirtajām lomām"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"la care roluri sunt atribuite\" is an awkward and not entirely accurate translation of \"with the roles already set.\" A more natural Romanian phrasing would be something like \"care au deja roluri definite\" or \"cărora li s-au atribuit deja roluri.\"  The current wording implies a passive action happening to the roles, rather than them already being assigned.",
+          "suggestion": "Ați selectat utilizatorii care sunt înregistrați în {{productName}} și care au deja roluri definite. Treceți la etapa următoare sau reveniți la selectarea utilizatorilor."
+        },
+        {
+          "type": "grammar",
+          "description": "While not strictly incorrect, the use of \"la care\" can sound slightly formal in this context. Using a more common preposition or avoiding it altogether would improve readability.",
+          "suggestion": "Ați selectat utilizatorii care sunt înregistrați în {{productName}}, cu rolurile deja setate. Treceți la etapa următoare sau reveniți la selectarea utilizatorilor."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'පරිශීලකයින්' (parishiilakayin) is a more formal term for 'users'. While not incorrect, 'පරිශීලකයින්' sounds a bit too formal for a user-friendly interface. Consider a more casual equivalent.",
+          "suggestion": "පරිශීලකයින් වෙනුවට 'භාවිතකරුවන්' (bhavitakaruwan) භාවිතා කරන්න. (Use 'bhavitakaruwan' instead of 'parishiilakayin')"
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure 'ඔබ ඔබේ {{productName}} හි ලියාපදිංචි පරිශීලකයින් තෝරාගෙන ඇති අතර...' could be improved for flow.  'ඔබ ඔබේ {{productName}} හි ලියාපදිංචි පරිශීලකයින් තෝරාගෙන ඇති, ' is a bit clumsy.",
+          "suggestion": "ඔබ {{productName}} සඳහා ලියාපදිංචි පරිශීලකයින් තෝරාගෙන ඇති, (You have selected registered users for {{productName}},)"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ktorí už majú nastavené roly\" is a somewhat literal translation of 'with the roles already set'. A more natural Slovak phrasing would better convey the intended meaning. It sounds slightly awkward in Slovak.",
+          "suggestion": "Consider rephrasing to something like 's už nastavenými úlohami' or 's už definovanými úlohami', or 'už majú pridelené roly'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"sayfanızda kayıtlı\" (registered in your page) is not the best translation for 'registered in your {{productName}}'. It sounds unnatural. A better translation would focus on the product itself.",
+          "suggestion": "Kayıtlı kullanıcıları seçtiniz, rolleri önceden ayarlanmış."
+        },
+        {
+          "type": "formatting",
+          "description": "The placement of the variable `{{productName}}` is slightly awkward and could be improved for better flow. It feels a bit forced in the sentence.",
+          "suggestion": "{{productName}}’ınızda kayıtlı ve rolleri önceden ayarlanmış kullanıcıları seçtiniz."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

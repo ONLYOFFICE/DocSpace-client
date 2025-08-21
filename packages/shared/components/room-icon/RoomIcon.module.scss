@@ -1,0 +1,337 @@
+@use "../../styles/variables/colors";
+@use "../../styles/mixins";
+
+.roomIcon {
+  display: flex;
+  z-index: 2;
+  justify-content: center;
+  align-items: center;
+
+  width: var(--room-icon-size);
+  height: var(--room-icon-size);
+
+  img {
+    max-width: 100%;
+    height: auto;
+    @include mixins.no-user-select;
+  }
+
+  :global {
+    .react-svg-icon {
+      :local {
+        border-radius: var(--room-icon-radius);
+      }
+    }
+
+    .room-background {
+      width: var(--room-icon-size);
+      height: var(--room-icon-size);
+      border-radius: var(--room-icon-radius);
+
+      vertical-align: middle;
+      background: var(--room-icon-color);
+      opacity: var(--room-icon-opacity);
+
+      position: absolute;
+    }
+
+    .template-icon-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: var(--room-icon-size);
+      height: var(--room-icon-size);
+
+      .template-icon-svg {
+        position: absolute;
+        width: var(--room-icon-size);
+        height: var(--room-icon-size);
+
+        svg {
+          width: var(--room-icon-size);
+          height: var(--room-icon-size);
+
+          path {
+            fill: var(--room-icon-color, var(--room-icon-button-color));
+          }
+        }
+      }
+
+      .template-icon-svg-icon {
+        div:first-child {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          :local {
+            width: var(--room-icon-size);
+            height: var(--room-icon-size);
+          }
+        }
+
+        svg path {
+          fill: var(--room-icon-color, var(--room-icon-button-color));
+        }
+      }
+
+      .room-image {
+        width: 24px;
+        height: 24px;
+        max-width: 24px;
+        max-height: 24px;
+        min-width: 24px;
+        min-height: 24px;
+      }
+
+      .room-title {
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 16px;
+
+        color: var(--room-icon-color);
+        position: relative;
+      }
+    }
+
+    .room-icon-empty {
+      svg {
+        width: 16px;
+        height: 16px;
+        path {
+          fill: var(--room-icon-button-color);
+        }
+      }
+    }
+  }
+
+  .roomIconCover {
+    z-index: 1;
+    svg {
+      opacity: 1;
+      transition: all 0.2s ease;
+
+      :local {
+        transform: scale(var(--room-icon-cover-size)) translateY(0);
+      }
+
+      path {
+        :local {
+          fill: var(--room-icon-text-color);
+        }
+      }
+    }
+
+    div:first-child {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      :local {
+        width: var(--room-icon-size);
+        height: var(--room-icon-size);
+      }
+    }
+  }
+
+  &.isArchive {
+    :global {
+      .room-background {
+        background: var(--room-icon-background-color-archive);
+      }
+    }
+  }
+}
+
+.editWrapper {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: -6px;
+  border-radius: 50%;
+  background-color: var(--accent-main);
+
+  &.isEditIcon {
+    background-color: var(--room-icon-edit-icon-background);
+  }
+
+  &.size20 {
+    width: 20px;
+    height: 20px;
+  }
+
+  &.size24 {
+    width: 24px;
+    height: 24px;
+  }
+
+  &.rtl {
+    left: -6px;
+  }
+
+  &:not(.rtl) {
+    right: -6px;
+  }
+
+  :global {
+    .open-plus-logo-icon {
+      svg {
+        path {
+          fill: var(--room-icon-fill);
+        }
+      }
+      &:hover {
+        svg {
+          path {
+            fill: var(--room-icon-fill) !important;
+          }
+        }
+      }
+    }
+
+    .open-edit-logo-icon,
+    .open-plus-logo-icon {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.withHover {
+  cursor: pointer;
+
+  &:hover {
+    .roomIconHover {
+      opacity: 1;
+      transform: translateY(-1px);
+    }
+
+    :global {
+      .hover-class {
+        filter: brightness(80%);
+      }
+
+      .template-hover {
+        background-color: var(--room-icon-background-color);
+        filter: brightness(80%);
+      }
+
+      .room-title {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      .room-icon-cover svg {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+    }
+  }
+}
+
+.roomIconHover {
+  z-index: 2;
+  position: absolute;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.2s ease;
+}
+
+.roomIconContainer {
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.roomIconBadge {
+  z-index: 2;
+  position: absolute;
+
+  margin-block: 24px 0;
+  margin-inline: 24px 0;
+
+  &.isBig {
+    margin-block: 80px 0;
+    margin-inline: 80px 0;
+  }
+
+  .roomIconButton {
+    svg {
+      path {
+        fill: var(--room-icon-background-color) !important;
+      }
+      rect {
+        stroke: var(--room-icon-background-color) !important;
+      }
+    }
+
+    :global {
+      .link {
+        path {
+          fill: var(--room-icon-link-icon-path) !important;
+        }
+
+        .link-background {
+          stroke: var(--room-icon-link-icon-background) !important;
+          fill: var(--room-icon-link-icon-background) !important;
+        }
+      }
+    }
+
+    &.isHovered {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .roomIconButton:has(svg:not(:global(.link))) {
+    width: 12px;
+    height: 12px;
+    border: 1px solid var(--room-icon-background-color);
+    border-radius: 50%;
+
+    &.isBig {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  &:has(.link) {
+    margin-block: 24px 0;
+    margin-inline: 24px 0;
+
+    &.isBig {
+      margin-block: 74px 0;
+      margin-inline: 74px 0;
+    }
+  }
+}
+
+.withEditing {
+  position: relative;
+  min-width: 64px;
+  cursor: pointer;
+}
+
+.isEmptyIcon {
+  position: relative;
+  box-sizing: border-box;
+
+  border: var(--room-icon-empty-border);
+  border-radius: 10px;
+  min-width: 64px;
+}
+
+.roomTitle {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 16px;
+  transition: all 0.2s ease;
+  opacity: 1;
+  transform: translateY(0);
+  position: relative;
+  color: var(--room-icon-text-color, #{colors.$black});
+}

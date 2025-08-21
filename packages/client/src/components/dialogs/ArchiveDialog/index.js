@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
@@ -42,21 +42,31 @@ const ArchiveDialogComponent = (props) => {
     setArchiveDialogVisible,
     setArchiveAction,
     items,
+    setSelection,
+    setBufferSelection,
   } = props;
 
+  const [isLoading, seIsLoading] = useState(false);
+
   const onClose = () => {
+    if (isLoading) return;
     setArchiveDialogVisible(false);
   };
 
-  const onAction = () => {
+  const onAction = async () => {
+    seIsLoading(true);
+    await setArchiveAction("archive", items, t);
+    seIsLoading(false);
     setArchiveDialogVisible(false);
-    setArchiveAction("archive", items, t);
+    setBufferSelection(null);
+    setSelection([]);
   };
 
   const onKeyPress = (e) => {
     if (e.key === "Escape") {
       onClose();
     }
+    if (e.key === "Enter") onAction();
   };
 
   useEffect(() => {
@@ -82,20 +92,25 @@ const ArchiveDialogComponent = (props) => {
       displayType="modal"
     >
       <ModalDialog.Header>
-        {t("ArchiveDialog:ArchiveHeader")}
+        {t("Common:SectionMoveConfirmation", {
+          sectionName: t("Common:Archive"),
+        })}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <Text noSelect>{description}</Text>
+        <Text>{description}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
           id="shared_move-to-archived-modal_submit"
-          key="OkButton"
+          key="OKButton"
           label={t("Common:OKButton")}
           size="normal"
           primary
           onClick={onAction}
           scale
+          isDisabled={isLoading}
+          isLoading={isLoading}
+          testId="move_to_archived_modal_submit"
         />
         <Button
           id="shared_move-to-archived-modal_cancel"
@@ -104,6 +119,8 @@ const ArchiveDialogComponent = (props) => {
           size="normal"
           onClick={onClose}
           scale
+          isDisabled={isLoading}
+          testId="move_to_archived_modal_cancel"
         />
       </ModalDialog.Footer>
     </ModalDialog>
@@ -116,7 +133,13 @@ const ArchiveDialog = withTranslation(["Files", "ArchiveDialog", "Common"])(
 
 export default inject(
   ({ filesStore, filesActionsStore, dialogsStore, selectedFolderStore }) => {
-    const { roomsForRestore, selection, bufferSelection } = filesStore;
+    const {
+      roomsForRestore,
+      selection,
+      bufferSelection,
+      setSelection,
+      setBufferSelection,
+    } = filesStore;
     const { setArchiveAction } = filesActionsStore;
 
     const {
@@ -139,6 +162,8 @@ export default inject(
       setArchiveDialogVisible,
       setArchiveAction,
       items,
+      setSelection,
+      setBufferSelection,
     };
   },
 )(observer(ArchiveDialog));

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -39,6 +39,7 @@ const LdapFieldComponent = (props) => {
     name,
     onChange,
     isPassword,
+    dataTestId,
     ...rest
   } = props;
 
@@ -68,11 +69,19 @@ const LdapFieldComponent = (props) => {
   };
 
   if (isTextArea)
-    return <Textarea name={name} onChange={onChangeFn} {...rest} />;
+    return (
+      <Textarea
+        dataTestId={dataTestId ? `${dataTestId}_textarea` : undefined}
+        name={name}
+        onChange={onChangeFn}
+        {...rest}
+      />
+    );
 
   if (isPassword) {
     return (
       <PasswordInput
+        testId={dataTestId ? `${dataTestId}_password_input` : undefined}
         inputName={name}
         inputValue={rest?.value || ""}
         onBlur={onBlur}
@@ -85,6 +94,7 @@ const LdapFieldComponent = (props) => {
 
   return (
     <TextInput
+      testId={dataTestId ? `${dataTestId}_input` : undefined}
       name={name}
       onBlur={onBlur}
       // onFocus={onFocus}

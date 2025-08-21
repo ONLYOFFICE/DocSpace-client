@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,7 @@
 
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
@@ -209,7 +209,7 @@ const SessionLifetime = (props) => {
 
     setSessionLifetimeSettings(sessionValue, type)
       .then(() => {
-        toastr.success(t("SuccessfullySaveSettingsMessage"));
+        toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
         saveToSessionStorage("defaultSessionLifetimeSettings", {
           lifetime: sessionValue?.toString(),
           type,
@@ -234,19 +234,22 @@ const SessionLifetime = (props) => {
 
   return (
     <MainContainer>
-      <LearnMoreWrapper>
+      <LearnMoreWrapper withoutExternalLink={!lifetimeSettingsUrl}>
         <Text className="learn-subtitle">
           {t("SessionLifetimeSettingDescription")}
         </Text>
-        <Link
-          className="link-learn-more"
-          color={currentColorScheme.main?.accent}
-          target="_blank"
-          isHovered
-          href={lifetimeSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {lifetimeSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            dataTestId="session_lifetime_component_learn_more"
+            color={currentColorScheme.main?.accent}
+            target="_blank"
+            isHovered
+            href={lifetimeSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </LearnMoreWrapper>
 
       <RadioButtonGroup
@@ -256,29 +259,33 @@ const SessionLifetime = (props) => {
         name="group"
         orientation="vertical"
         spacing="8px"
+        dataTestId="session_lifetime_radio_button_group"
         options={[
           {
             id: "session-lifetime-disabled",
             label: t("Common:Disabled"),
             value: "disabled",
+            dataTestId: "session_lifetime_disabled",
           },
           {
             id: "session-lifetime-enable",
             label: t("Common:Enable"),
             value: "enable",
+            dataTestId: "session_lifetime_enabled",
           },
         ]}
         selected={type ? "enable" : "disabled"}
         onClick={onSelectType}
       />
 
-      {type && (
+      {type ? (
         <>
           <Text className="lifetime" fontSize="15px" fontWeight="600">
             {t("Lifetime")}
           </Text>
           <TextInput
             className="lifetime-input"
+            testId="session_lifetime_input"
             maxLength={4}
             isAutoFocussed={false}
             value={sessionLifetime}
@@ -288,20 +295,22 @@ const SessionLifetime = (props) => {
             hasError={error}
           />
         </>
-      )}
+      ) : null}
 
       <SaveCancelButtons
         className="save-cancel-buttons"
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
-        reminderText={t("YouHaveUnsavedChanges")}
+        reminderText={t("Common:YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
         displaySettings
         hasScroll={false}
         additionalClassSaveButton="session-lifetime-save"
         additionalClassCancelButton="session-lifetime-cancel"
+        saveButtonDataTestId="session_lifetime_save_button"
+        cancelButtonDataTestId="session_lifetime_cancel_button"
       />
     </MainContainer>
   );

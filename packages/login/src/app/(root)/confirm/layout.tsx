@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,16 +29,19 @@ import { headers } from "next/headers";
 import ConfirmRoute from "@/components/ConfirmRoute";
 import { StyledBody } from "@/components/Confirm.styled";
 import { TConfirmLinkParams } from "@/types";
-import { checkConfirmLink, getSettings } from "@/utils/actions";
+import { checkConfirmLink, getSettings, getUser } from "@/utils/actions";
 import { ValidationResult } from "@/utils/enums";
 import { redirect } from "next/navigation";
+import { logger } from "logger.mjs";
 
 export default async function Layout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const hdrs = headers();
+  logger.info("Confirm layout");
+
+  const hdrs = await headers();
   const searchParams = hdrs.get("x-confirm-query") ?? "";
   const type = hdrs.get("x-confirm-type") ?? "";
   const hostName = hdrs.get("x-forwarded-host") ?? "";
@@ -48,15 +51,17 @@ export default async function Layout({
     new URLSearchParams(searchParams.toString()),
   ) as TConfirmLinkParams;
 
-  const confirmLinkParams: TConfirmLinkParams = Object.assign(
-    { type },
-    queryParams,
-  );
+  const confirmLinkParams: TConfirmLinkParams = {
+    type,
+    ...queryParams,
+  };
 
   const [settings, confirmLinkResult] = await Promise.all([
     getSettings(),
     checkConfirmLink(confirmLinkParams),
   ]);
+
+  const user = type === "GuestShareLink" ? await getUser() : undefined;
 
   const isUserExisted =
     confirmLinkResult?.result == ValidationResult.UserExisted;
@@ -69,20 +74,24 @@ export default async function Layout({
       ? `${proto}://${hostName}/rooms/shared/${confirmLinkResult?.roomId}/filter?folder=${confirmLinkResult?.roomId}`
       : objectSettings?.defaultPage;
 
+    logger.info("Confirm layout UserExisted");
+
     redirect(finalUrl ?? "/");
   }
 
   if (isUserExcluded) {
+    logger.info("Confirm layout UserExcluded");
+
     redirect(objectSettings?.defaultPage ?? "/");
   }
 
   return (
     <StyledBody id="confirm-body">
       <ConfirmRoute
-        defaultPage={objectSettings?.defaultPage}
         socketUrl={objectSettings?.socketUrl}
         confirmLinkResult={confirmLinkResult}
         confirmLinkParams={confirmLinkParams}
+        user={user}
       >
         {children}
       </ConfirmRoute>

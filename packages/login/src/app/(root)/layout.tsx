@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,17 +32,10 @@ import { getBgPattern } from "@docspace/shared/utils/common";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
 import SimpleNav from "@/components/SimpleNav";
-import { getColorTheme, getPortalCultures, getSettings } from "@/utils/actions";
 import { ContentWrapper, StyledPage } from "@/components/Layout.styled";
-import dynamic from "next/dynamic";
+import LanguageComboboxWrapper from "@/components/LanguageCombobox";
 import { TYPE_LINK_WITHOUT_LNG_COMBOBOX } from "@/utils/constants";
-
-const LanguageComboboxWrapper = dynamic(
-  () => import("@/components/LanguageCombobox"),
-  {
-    ssr: false,
-  },
-);
+import { getColorTheme, getPortalCultures, getSettings } from "@/utils/actions";
 
 export default async function Layout({
   children,
@@ -59,9 +52,9 @@ export default async function Layout({
   const objectSettings = typeof settings === "string" ? undefined : settings;
 
   const culture =
-    cookies().get("asc_language")?.value ?? objectSettings?.culture;
+    (await cookies()).get("asc_language")?.value ?? objectSettings?.culture;
 
-  const hdrs = headers();
+  const hdrs = await headers();
   const type = hdrs.get("x-confirm-type") ?? "";
 
   let isComboboxVisible = true;
@@ -87,9 +80,9 @@ export default async function Layout({
       <ContentWrapper id="content-wrapper" bgPattern={bgPattern}>
         <div className="bg-cover" />
         <Scrollbar id="customScrollBar">
-          {isComboboxVisible && (
+          {isComboboxVisible ? (
             <LanguageComboboxWrapper initialCultures={cultures} />
-          )}
+          ) : null}
 
           <StyledPage id="styled-page">{children}</StyledPage>
         </Scrollbar>

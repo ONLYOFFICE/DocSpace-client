@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -58,7 +58,6 @@ type GenerateDeveloperTokenDialogProps = {
 
 const GenerateDeveloperTokenDialog = ({
   client,
-
   setRevokeDeveloperTokenDialogVisible,
 }: GenerateDeveloperTokenDialogProps) => {
   const { t } = useTranslation(["OAuth", "Common"]);
@@ -66,7 +65,7 @@ const GenerateDeveloperTokenDialog = ({
   const [token, setToken] = React.useState("");
   const [isValidToken, setIsValidToken] = React.useState(false);
   const [tokenError, setTokenError] = React.useState("");
-
+  const [secret, setSecret] = React.useState("");
   const [requestRunning, setRequestRunning] = React.useState(false);
 
   const timerRef = React.useRef<null | NodeJS.Timeout>(null);
@@ -75,11 +74,11 @@ const GenerateDeveloperTokenDialog = ({
     if (!token || !isValidToken || !client || requestRunning) return;
 
     try {
-      const { clientId, clientSecret } = client;
+      const { clientId } = client;
 
       setRequestRunning(true);
 
-      await api.oauth.revokeDeveloperToken(token, clientId, clientSecret);
+      await api.oauth.revokeDeveloperToken(token, clientId, secret);
 
       setRequestRunning(false);
 
@@ -138,21 +137,30 @@ const GenerateDeveloperTokenDialog = ({
     setRevokeDeveloperTokenDialogVisible?.(false);
   };
 
+  React.useEffect(() => {
+    const fecthClient = async () => {
+      const { clientSecret } = await api.oauth.getClient(client!.clientId);
+
+      setSecret(clientSecret);
+    };
+
+    fecthClient();
+  }, [client?.clientId]);
+
   return (
     <ModalDialog
       visible
       onClose={onClose}
       displayType={ModalDialogType.modal}
       autoMaxHeight
-      scale
     >
       <ModalDialog.Header>{t("OAuth:RevokeDialogHeader")}</ModalDialog.Header>
       <ModalDialog.Body>
         <div>
-          <Text style={{ marginBottom: "16px" }} noSelect>
+          <Text style={{ marginBottom: "16px" }}>
             {t("OAuth:RevokeDialogDescription")}
           </Text>
-          <Text style={{ marginBottom: "16px" }} noSelect>
+          <Text style={{ marginBottom: "16px" }}>
             {t("OAuth:RevokeDialogEnterToken")}
           </Text>
           <FieldContainer
@@ -169,6 +177,7 @@ const GenerateDeveloperTokenDialog = ({
               onChange={onChange}
               maxLength={10000}
               hasError={!!tokenError}
+              testId="revoke_token_input"
             />
           </FieldContainer>
         </div>
@@ -179,9 +188,10 @@ const GenerateDeveloperTokenDialog = ({
           primary
           scale
           onClick={onRevoke}
-          isDisabled={!token || !isValidToken}
+          isDisabled={!token || !isValidToken || !secret}
           isLoading={requestRunning}
           size={ButtonSize.normal}
+          testId="revoke_token_button"
         />
         <Button
           label={t("Common:CancelButton")}
@@ -189,6 +199,7 @@ const GenerateDeveloperTokenDialog = ({
           onClick={onClose}
           size={ButtonSize.normal}
           isDisabled={requestRunning}
+          testId="revoke_token_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>
@@ -211,7 +222,6 @@ export default inject(
     return {
       setRevokeDeveloperTokenDialogVisible,
       client: bufferSelection,
-
       email: user?.email,
     };
   },

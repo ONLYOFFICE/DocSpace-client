@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,49 +25,38 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { TextProps } from "../text/Text.types";
 
-export interface BadgeProps {
-  /** Label */
+export type BadgeProps = TextProps & {
+  /** Ref to access the DOM element or React component instance */
+  ref?: React.RefObject<HTMLDivElement>;
+  /** Content to be displayed inside the badge. Can be a number (e.g., notification count) or text */
   label?: string | number;
-  /** CSS background-color */
-  backgroundColor?: string;
-  /** CSS color */
-  color?: string;
-  /** CSS font-size */
-  fontSize?: string;
-  /** CSS font-weight */
-  fontWeight?: number | string;
-  /** CSS border-radius */
+  /** Custom border radius to adjust badge corners. Accepts CSS size values */
   borderRadius?: string;
-  /** CSS padding */
+  /** Custom padding to adjust badge spacing. Accepts CSS padding values */
   padding?: string;
-  /** CSS max-width */
+  /** Maximum width of the badge. Useful for text truncation. Accepts CSS size values */
   maxWidth?: string;
-  /** CSS line-height */
-  lineHeight?: string;
-  /** onClick event */
-  onClick?: (e: React.MouseEvent) => void;
-  /** Accepts class */
-  className?: string;
-  /** Accepts id */
-  id?: string;
-  /** Accepts css style */
-  style?: React.CSSProperties;
-  /** Sets hovered state and link effects */
-  isHovered?: boolean;
-  /** Disables hover styles */
+  /** Mouse leave event handler */
+  onMouseLeave?: (e: React.MouseEvent) => void;
+  /** Mouse over event handler */
+  onMouseOver?: (e: React.MouseEvent) => void;
+  /** Disable hover effect */
   noHover?: boolean;
-  /** Type Badge */
+  /** Sets badge type to high priority. Changes visual appearance */
   type?: "high";
-  /** Compact badge */
-  compact?: boolean;
-  /** Border badge */
+  /** Custom border style for the badge. Accepts CSS border values */
   border?: string;
+  /** Custom height for the badge. Accepts CSS size values */
   height?: string;
+  /** When true, applies version badge specific styling. Used for displaying version numbers */
   isVersionBadge?: boolean;
+  /** When true, applies muted styling for less prominent notifications or inactive states */
   isMutedBadge?: boolean;
+  /** When true, applies special styling for paid/premium features */
   isPaidBadge?: boolean;
-
-  onMouseOver?: VoidFunction;
-  onMouseLeave?: VoidFunction;
-}
+  /** Handler for mouse over events. Used for hover state management and interactions */
+  /** When true, applies custom hover styles */
+  isHovered?: boolean;
+};

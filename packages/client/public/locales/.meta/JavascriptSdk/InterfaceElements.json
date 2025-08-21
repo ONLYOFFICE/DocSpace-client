@@ -1,0 +1,267 @@
+{
+  "key_path": "InterfaceElements",
+  "content": "Interface elements",
+  "content_en_sha1_hash": "664ca787f30b4553416fc2fd6e29813dbe80ffc7",
+  "created_at": "2025-05-19T21:30:54.535Z",
+  "updated_at": "2025-08-11T09:02:43.891Z",
+  "comment": {
+    "text": "This translation key is used to display the label \"Interface elements\" in various contexts throughout the application, including panel headers and checkbox labels. The translation will vary based on the language, providing a consistent user experience across different interfaces.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:34.906Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
+      "line_number": 515,
+      "context": "<Text\n className=\"embedding-panel_header-text\"\n fontSize=\"15px\"\n fontWeight={600}\n >\n {t(\"JavascriptSdk:InterfaceElements\")}\n </Text>\n \n <div className=\"embedding-panel_checkbox-container\">\n <CheckboxElement\n label={t(\"Common:Title\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Editor.js",
+      "line_number": 238,
+      "context": "t={t}\n defaultFrameId={config.frameId}\n setConfig={setConfig}\n />\n \n {/* <InterfaceElements>\n <Label className=\"label\">{t(\"InterfaceElements\")}</Label>\n <Checkbox\n className=\"checkbox\"\n label={t(\"RightPanelCollapsed\")}\n onChange={() => {}}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
+      "line_number": 370,
+      "context": "setConfig={setConfig}\n />\n </ControlsSection>\n \n <ControlsSection>\n <Label className=\"label\">{t(\"InterfaceElements\")}</Label>\n \n <LabelGroup>\n <Checkbox\n className=\"checkbox\"\n label={t(\"Subtitle\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
+      "line_number": 440,
+      "context": "setConfig={setConfig}\n />\n </ControlsSection>\n \n <ControlsSection>\n <CategorySubHeader>{t(\"InterfaceElements\")}</CategorySubHeader>\n \n <CheckboxGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector.js",
+      "line_number": 260,
+      "context": "setConfig={setConfig}\n />\n </ControlsSection>\n \n <ControlsSection>\n <Label className=\"label\">{t(\"InterfaceElements\")}</Label>\n <Checkbox\n className=\"checkbox\"\n label={t(\"Common:Search\")}\n onChange={toggleWithSearch}\n isChecked={config.withSearch}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
+      "line_number": 378,
+      "context": "setConfig={setConfig}\n />\n </ControlsSection>\n \n <ControlsSection>\n <CategorySubHeader>{t(\"InterfaceElements\")}</CategorySubHeader>\n \n <CheckboxGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Lao word 'ອົງປະກອບ' is correctly spelled, but it's important to confirm it's the most appropriate term in the context of 'interface elements' within Javascript SDK documentation. While it generally means 'component' or 'element,' a more specific term might be preferable depending on the technical nuance.",
+          "suggestion": "Consider if a more technical term like 'ຊຸດອົງປະກອບ' (set of elements) or a loanword from English might be more precise, but verify this with a Lao language expert familiar with software development terminology."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"අතුරුමුහුණතේ අංග\" is a literal translation, a more natural and common Sinhala term for 'interface elements' in a technical context might be \"අතුරුမျက်සුන සංඝඨක\" or \"අතුරු පරිශීලක අංග\". \"අංග\" is correct but the preceding term isn't as frequently used.",
+          "suggestion": "Consider \"අතුරුමුහුණතේ සංඝඨක\" or \"අතුරු පරිශීලක අංග\" for better clarity and natural flow."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Elementi interfejsa\" is not the most accurate or natural translation of \"Interface elements.\" While \"interfejs\" is the Serbian word for 'interface,' the use of the plural form 'elementi' directly translated as 'elements' sounds somewhat awkward. A more natural rendering would use a word that describes the components of an interface.",
+          "suggestion": "Consider 'Komponente interfejsa' or 'Delovi interfejsa'."
+        },
+        {
+          "type": "spelling",
+          "description": "While 'interfejsa' is technically acceptable in some contexts, the genitive case is not needed here.  The nominative case 'interfejs' is more appropriate.",
+          "suggestion": "Replace 'interfejsa' with 'interfejs'."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Các thành phần giao diện người dùng\" is technically correct, it's quite verbose and formal for a key name like 'Interface Elements' in a Javascript SDK. A more concise and common translation would be 'Phần tử giao diện' or 'Giao diện'.",
+          "suggestion": "Phần tử giao diện"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

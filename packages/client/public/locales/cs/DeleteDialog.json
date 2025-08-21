@@ -1,7 +1,6 @@
 {
   "DeleteAllGroupDescription": "Vybrané skupiny budou odstraněny. Uživatelé ve skupinách nebudou z {{productName}} odstraněni. Opravdu chcete pokračovat?",
   "DeleteAllGroupsTitle": "Odstranit skupiny",
-  "DeleteFile": "Chystáte se odstranit tento soubor.",
   "DeleteFolder": "Chystáte se odstranit tuto složku.",
   "DeleteGroupDescription": "Skupina {{groupName}} bude odstraněna. Uživatelé ve skupině nebudou z {{productName}} odstraněni. Jste si jisti, že chcete pokračovat?",
   "DeleteGroupTitle": "Smazat skupinu",
@@ -10,11 +9,10 @@
   "DeleteRoom": "Chystáte se odstranit tuto místnost. Nebudete ji moci obnovit.",
   "DeleteRooms": "Tyto místnosti se chystáte smazat. Nebudete je moci obnovit.",
   "DeleteSharedNote": "Upozorňujeme, že pokud jste jej s někým sdíleli, stane se nedostupným.",
-  "FilePermanentlyDeleted": "Soubor bude za 30 dní trvale smazán.",
+  "DeleteTemplate": "Opravdu chcete odstranit místnost šablony <1>\"{{templateName}}\"</1>? Šablonu nelze obnovit.",
+  "DeleteTemplates": "Opravdu chcete odstranit vybrané šablony místností? Nelze je obnovit.",
   "FolderPermanentlyDeleted": "Složka bude za 30 dní trvale odstraněna.",
   "ItemsPermanentlyDeleted": "Položky budou trvale odstraněny za 30 dní.",
-  "MoveToTrashButton": "Přesunout do koše",
-  "MoveToTrashTitle": "Přesunout do koše?",
   "UnsubscribeButton": "Zrušit odběr",
   "UnsubscribeNote": "Určitě chcete zrušit odběr vybraných položek ze seznamu?",
   "UnsubscribeTitle": "Potvrzení o odhlášení"

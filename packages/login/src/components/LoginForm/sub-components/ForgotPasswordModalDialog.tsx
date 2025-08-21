@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -38,7 +38,7 @@ import { FieldContainer } from "@docspace/shared/components/field-container";
 import { toastr } from "@docspace/shared/components/toast";
 import { sendInstructionsToChangePassword } from "@docspace/shared/api/people";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
-import { InputSize, InputType } from "@docspace/shared/components/text-input";
+import { InputSize } from "@docspace/shared/components/text-input";
 import { ButtonKeys } from "@docspace/shared/enums";
 
 import { ForgotPasswordModalDialogProps } from "@/types";
@@ -59,7 +59,7 @@ const ForgotPasswordModalDialog = ({
   const { t } = useTranslation(["Login", "Common"]);
 
   const onChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //console.log("onChangeEmail", event.target.value);
+    // console.log("onChangeEmail", event.target.value);
     setEmail(event.target.value);
     setEmailError(false);
     setIsShowError(false);
@@ -127,7 +127,6 @@ const ForgotPasswordModalDialog = ({
             className="text-body"
             isBold={false}
             fontSize="13px"
-            noSelect
           >
             {t("MessageSendPasswordRecoveryInstructionsOnEmail")}
           </Text>
@@ -136,19 +135,19 @@ const ForgotPasswordModalDialog = ({
             className="email-reg-field"
             key="e-mail"
             isVertical
-            hasError={isShowError && emailError}
+            hasError={isShowError ? emailError : undefined}
             labelVisible={false}
             errorMessage={
               errorText ? t(`Common:${errorText}`) : t("Common:RequiredField")
             }
+            dataTestId="email_input_field"
           >
             <EmailInput
-              hasError={isShowError && emailError}
+              hasError={isShowError ? emailError : undefined}
               placeholder={t("Common:RegistrationEmail")}
               isAutoFocussed
               id="forgot-password-modal_email"
               name="e-mail"
-              type={InputType.text}
               size={InputSize.base}
               scale
               tabIndex={2}
@@ -176,6 +175,7 @@ const ForgotPasswordModalDialog = ({
           isLoading={isLoading}
           isDisabled={isLoading}
           tabIndex={2}
+          testId="forgot_password_send_button"
         />
         <Button
           id="forgot-password-modal_cancel"
@@ -189,6 +189,7 @@ const ForgotPasswordModalDialog = ({
           // isLoading={isLoading}
           isDisabled={isLoading}
           tabIndex={2}
+          testId="forgot_password_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

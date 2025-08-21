@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,275 +26,179 @@
 
 import React from "react";
 import moment from "moment";
-
-import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-
+import { screen, render, fireEvent, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { DatePicker } from "./DatePicker";
-// import { Calendar } from "../calendar";
-// import { InputBlock } from "../input-block";
 
-const selectedDate = new Date("09/12/2019");
-const minDate = new Date("01/01/1970");
-const maxDate = new Date("01/01/2020");
+// Mock selector-add-button
+jest.mock("../selector-add-button", () => ({
+  SelectorAddButton: ({
+    children,
+    // ...props
+  }: {
+    children: React.ReactNode;
+  }) => <div data-testid="mock-selector-add-button">{children}</div>,
+}));
 
 describe("DatePicker tests", () => {
-  it("DatePicker renders without error", () => {
-    render(
-      <DatePicker
-        minDate={minDate}
-        maxDate={maxDate}
-        selectDateText="Select date"
-        initialDate={selectedDate}
-        onChange={() => {}}
-        locale="en"
-        openDate={moment()}
-      />,
-    );
-    expect(screen.getByTestId("date-picker")).toBeInTheDocument();
+  const defaultProps = {
+    maxDate: moment().add(10, "years").startOf("year").toDate(),
+    minDate: moment("1970-01-01").toDate(),
+    openDate: moment(),
+    locale: "en",
+    selectDateText: "Select date",
+    onChange: jest.fn(),
+  };
+
+  beforeEach(() => {
+    jest.clearAllMocks();
   });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("DatePicker disabled when isDisabled is passed", () => {
-  //   // @ts-expect-error TS(2322): Type '{ isDisabled: boolean; }' is not assignable ... Remove this comment to see the full error message
-  //   const wrapper = mount(<DatePicker isDisabled={true} />);
-  //   expect(wrapper.prop("isDisabled")).toEqual(true);
-  // });
+  it("renders without selected date", () => {
+    render(<DatePicker {...defaultProps} />);
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("DatePicker opened when inOpen is passed", () => {
-  //   // @ts-expect-error TS(2322): Type '{ inOpen: boolean; }' is not assignable to t... Remove this comment to see the full error message
-  //   const wrapper = mount(<DatePicker inOpen={true} />);
-  //   expect(wrapper.prop("inOpen")).toEqual(true);
-  // });
+    const datePicker = screen.getByTestId("date-picker");
+    const dateSelector = screen.getByTestId("date-selector");
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("DatePicker  has rendered content NewCalendar", () => {
-  //   // @ts-expect-error TS(2322): Type '{ inOpen: boolean; }' is not assignable to t... Remove this comment to see the full error message
-  //   const wrapper = mount(<DatePicker inOpen={true} />);
-  //   expect(wrapper).toExist(<NewCalendar />);
-  // });
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("DatePicker has rendered content InputBlock", () => {
-  //   const wrapper = mount(<DatePicker />);
-  //   expect(wrapper).toExist(<InputBlock />);
-  // });
+    expect(datePicker).toBeInTheDocument();
+    expect(dateSelector).toHaveAttribute("role", "button");
+    expect(dateSelector).toHaveAttribute("aria-label", "Select date");
+    expect(dateSelector).toHaveAttribute("aria-expanded", "false");
+    expect(screen.queryByTestId("selected-item")).not.toBeInTheDocument();
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("DatePicker hasError is passed", () => {
-  //   // @ts-expect-error TS(2322): Type '{ hasError: boolean; }' is not assignable to... Remove this comment to see the full error message
-  //   const wrapper = mount(<DatePicker hasError={true} />);
-  //   expect(wrapper.prop("hasError")).toEqual(true);
-  // });
+  it("renders with initial date", () => {
+    const initialDate = moment("2024-01-15");
+    render(
+      <DatePicker
+        initialDate={initialDate}
+        outerDate={initialDate}
+        showCalendarIcon={false}
+        {...defaultProps}
+      />,
+    );
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("DatePicker disabled when isReadOnly is passed", () => {
-  //   // @ts-expect-error TS(2322): Type '{ isReadOnly: boolean; }' is not assignable ... Remove this comment to see the full error message
-  //   const wrapper = mount(<DatePicker isReadOnly={true} />);
-  //   expect(wrapper.prop("isReadOnly")).toEqual(true);
-  // });
+    const selectedItem = screen.getByTestId("selected-item");
+    expect(selectedItem).toBeInTheDocument();
+    expect(selectedItem).toHaveTextContent("15 Jan 2024");
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("DatePicker minDate test", () => {
-  //   // @ts-expect-error TS(2741): Property 'onChange' is missing in type '{ minDate:... Remove this comment to see the full error message
-  //   const wrapper = mount(<DatePicker minDate={minDate} />);
-  //   expect(wrapper.props().minDate).toEqual(minDate);
-  // });
+  it("shows calendar icon when enabled", () => {
+    const initialDate = moment("2024-01-15");
+    render(
+      <DatePicker
+        initialDate={initialDate}
+        outerDate={initialDate}
+        showCalendarIcon
+        {...defaultProps}
+      />,
+    );
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("DatePicker maxDate test", () => {
-  //   // @ts-expect-error TS(2741): Property 'onChange' is missing in type '{ maxDate:... Remove this comment to see the full error message
-  //   const wrapper = mount(<DatePicker maxDate={maxDate} />);
-  //   expect(wrapper.props().maxDate).toEqual(maxDate);
-  // });
+    const calendarIcon = screen.getByTestId("calendar-icon");
+    const selectedLabel = screen.getByTestId("selected-label");
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("DatePicker selectedDate test", () => {
-  //   // @ts-expect-error TS(2322): Type '{ selectedDate: Date; }' is not assignable t... Remove this comment to see the full error message
-  //   const wrapper = mount(<DatePicker selectedDate={selectedDate} />);
-  //   expect(wrapper.props().selectedDate).toEqual(selectedDate);
-  // });
+    expect(calendarIcon).toBeInTheDocument();
+    expect(selectedLabel).toContainElement(calendarIcon);
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("DatePicker themeColor test", () => {
-  //   // @ts-expect-error TS(2322): Type '{ themeColor: string; }' is not assignable t... Remove this comment to see the full error message
-  //   const wrapper = mount(<DatePicker themeColor={""} />);
-  //   expect(wrapper.props().themeColor).toEqual("");
-  // });
+  it("opens calendar on click and handles date selection", async () => {
+    const onChange = jest.fn();
+    render(<DatePicker {...defaultProps} onChange={onChange} />);
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("DatePicker input mask test", () => {
-  //   const mask = [/\d/, /\d/, "/", /\d/, /\d/, "/", /\d/, /\d/, /\d/, /\d/];
-  //   // @ts-expect-error TS(2322): Type '{ mask: (string | RegExp)[]; }' is not assig... Remove this comment to see the full error message
-  //   const wrapper = mount(<InputBlock mask={mask} />);
-  //   expect(wrapper.props().mask).toBe(mask);
-  //   expect(wrapper.props().mask).toEqual(mask);
-  // });
+    const dateSelector = screen.getByTestId("date-selector");
+    expect(dateSelector).toHaveAttribute("aria-expanded", "false");
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("DatePicker locale test", () => {
-  //   // @ts-expect-error TS(2741): Property 'onChange' is missing in type '{ locale: ... Remove this comment to see the full error message
-  //   const wrapper = mount(<DatePicker locale={"en-GB"} />);
-  //   expect(wrapper.prop("locale")).toEqual("en-GB");
-  // });
+    // Open calendar
+    await userEvent.click(dateSelector);
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("DatePicker input value with locale test", () => {
-  //   moment.locale("ru");
-  //   const value = moment(selectedDate).format("L");
-  //   // @ts-expect-error TS(2322): Type '{ value: string; }' is not assignable to typ... Remove this comment to see the full error message
-  //   const wrapper = mount(<DatePicker value={value} />);
-  //   expect(wrapper.props().value).toEqual("12.09.2019");
-  // });
+    // Check if calendar is open
+    const calendar = screen.getByTestId("calendar");
+    expect(calendar).toBeInTheDocument();
+    expect(dateSelector).toHaveAttribute("aria-expanded", "true");
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("DatePicker check the onChange callback", () => {
-  //   // @ts-expect-error TS(2708): Cannot use namespace 'jest' as a value.
-  //   const onChange = jest.fn();
-  //   const props = {
-  //     value: "03/03/2000",
-  //     onChange,
-  //   };
-  //   const wrapper = mount(<DatePicker {...props} />).find("input");
-  //   wrapper.simulate("change", { target: { value: "09/09/2019" } });
-  //   expect(onChange).toHaveBeenCalledWith(new Date("09/09/2019"));
-  // });
+    // Close by clicking outside
+    fireEvent.mouseDown(document.body);
+    await waitFor(() => {
+      expect(screen.queryByTestId("calendar")).not.toBeInTheDocument();
+      expect(dateSelector).toHaveAttribute("aria-expanded", "false");
+    });
+  });
 
-  // /*it("check DatePicker popup open", () => {
-  //   const onFocus = jest.fn(() => true);
-  //   const wrapper = mount(<DatePicker onFocus={onFocus} isOpen={false} />);
-  //   const input = wrapper.find("input");
-  //   input.simulate("focus");
+  it("handles date deletion", async () => {
+    const onChange = jest.fn();
+    const initialDate = moment("2024-01-15");
+    const { rerender } = render(
+      <DatePicker
+        {...defaultProps}
+        initialDate={initialDate}
+        outerDate={initialDate}
+        onChange={onChange}
+      />,
+    );
 
-  //   const instance = wrapper.instance();
-  //   expect(instance.state.isOpen).toEqual(true);
-  // });*/
+    const selectedItem = screen.getByTestId("selected-item");
+    const closeButton = selectedItem.querySelector(".selected-tag-removed");
+    expect(closeButton).toBeInTheDocument();
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("DatePicker check the Calendar onChange callback", () => {
-  //   // @ts-expect-error TS(2708): Cannot use namespace 'jest' as a value.
-  //   const onChange = jest.fn();
-  //   const props = {
-  //     value: "03/03/2000",
-  //     isOpen: true,
-  //     onChange,
-  //   };
-  //   const wrapper = mount(<DatePicker {...props} />);
+    await userEvent.click(closeButton!);
 
-  //   const days = wrapper.find(".calendar-month");
+    expect(onChange).toHaveBeenCalledWith(null);
 
-  //   days.first().simulate("click", { target: { value: 1 } });
+    rerender(
+      <DatePicker
+        {...defaultProps}
+        initialDate={initialDate}
+        onChange={onChange}
+      />,
+    );
 
-  //   expect(onChange).toHaveBeenCalled();
-  // });
+    expect(screen.queryByTestId("selected-item")).not.toBeInTheDocument();
+    expect(screen.getByTestId("date-selector")).toBeInTheDocument();
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("DatePicker check Compare date function", () => {
-  //   const date = new Date();
-  //   const errorDate = new Date("01/01/3000");
-  //   const wrapper = shallow(<DatePicker />).instance();
-  //   expect(wrapper.compareDate(date)).toEqual(true);
-  //   expect(wrapper.compareDate(errorDate)).toEqual(false);
-  // });
+  it("updates date when outerDate prop changes", async () => {
+    const initialDate = moment("2024-01-15");
+    const { rerender } = render(
+      <DatePicker
+        {...defaultProps}
+        initialDate={initialDate}
+        outerDate={initialDate}
+        showCalendarIcon={false}
+      />,
+    );
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("DatePicker check Compare dates function", () => {
-  //   const date = new Date();
-  //   const wrapper = shallow(<DatePicker />).instance();
-  //   expect(wrapper.compareDates(date, date) === 0).toEqual(true);
-  //   expect(wrapper.compareDates(date, new Date("01/01/2000")) === 0).toEqual(
-  //     false,
-  //   );
-  // });
+    expect(screen.getByTestId("selected-item")).toHaveTextContent(
+      "15 Jan 2024",
+    );
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("DatePicker check is valid dates function", () => {
-  //   var date = new Date();
-  //   date.setFullYear(1);
-  //   const wrapper = shallow(<DatePicker />).instance();
-  //   expect(wrapper.isValidDate(selectedDate, maxDate, minDate, false)).toEqual(
-  //     false,
-  //   );
-  //   expect(wrapper.isValidDate(date, maxDate, minDate, false)).toEqual(true);
-  // });
+    const newInitialDate = moment("2024-02-01");
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("DatePicker componentDidUpdate() lifecycle test", () => {
-  //   const props = {
-  //     selectedDate: new Date(),
-  //     minDate: new Date("01/01/1970"),
-  //     maxDate: new Date("01/01/2030"),
-  //     isOpen: true,
-  //     isDisabled: false,
-  //     isReadOnly: false,
-  //     hasError: false,
-  //     locale: "en",
-  //   };
+    rerender(
+      <DatePicker
+        {...defaultProps}
+        initialDate={newInitialDate}
+        outerDate={newInitialDate}
+        showCalendarIcon={false}
+      />,
+    );
 
-  //   var date = new Date();
-  //   date.setFullYear(1);
+    await waitFor(() => {
+      const selectedItem = screen.getByTestId("selected-item");
+      expect(selectedItem).toHaveTextContent("01 Feb 2024");
+    });
+  });
 
-  //   // @ts-expect-error TS(2741): Property 'onChange' is missing in type '{ selected... Remove this comment to see the full error message
-  //   const wrapper = mount(<DatePicker {...props} />).instance();
-  //   wrapper.componentDidUpdate(wrapper.props, wrapper.state);
+  it("applies custom className and id", () => {
+    const customClass = "custom-date-picker";
+    const customId = "custom-date-picker-id";
 
-  //   expect(wrapper.props).toBe(wrapper.props);
-  //   expect(wrapper.state).toBe(wrapper.state);
+    render(
+      <DatePicker {...defaultProps} className={customClass} id={customId} />,
+    );
 
-  //   const wrapper2 = mount(
-  //     <DatePicker
-  //       {...props}
-  //       // @ts-expect-error TS(2322): Type '{ selectedDate: Date; hasError: boolean; siz... Remove this comment to see the full error message
-  //       selectedDate={date}
-  //       hasError={false}
-  //       size="big"
-  //       isDisabled={false}
-  //     />,
-  //   ).instance();
-
-  //   wrapper2.componentDidUpdate(wrapper2.props, wrapper2.state);
-
-  //   expect(wrapper2.props).toBe(wrapper2.props);
-  //   expect(wrapper2.state).toBe(wrapper2.state);
-  // });
-
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("componentWillUnmount() lifecycle  test", () => {
-  //   // @ts-expect-error TS(2322): Type '{ isOpen: boolean; }' is not assignable to t... Remove this comment to see the full error message
-  //   const wrapper = mount(<DatePicker isOpen={true} />);
-  //   // @ts-expect-error TS(2708): Cannot use namespace 'jest' as a value.
-  //   const componentWillUnmount = jest.spyOn(
-  //     wrapper.instance(),
-  //     "componentWillUnmount",
-  //   );
-
-  //   wrapper.unmount();
-  //   expect(componentWillUnmount).toHaveBeenCalled();
-  // });
-
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts id", () => {
-  //   // @ts-expect-error TS(2322): Type '{ isOpen: boolean; id: string; }' is not ass... Remove this comment to see the full error message
-  //   const wrapper = mount(<DatePicker isOpen={true} id="testId" />);
-
-  //   expect(wrapper.prop("id")).toEqual("testId");
-  // });
-
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts className", () => {
-  //   // @ts-expect-error TS(2322): Type '{ isOpen: boolean; className: string; }' is ... Remove this comment to see the full error message
-  //   const wrapper = mount(<DatePicker isOpen={true} className="test" />);
-
-  //   expect(wrapper.prop("className")).toEqual("test");
-  // });
-
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts style", () => {
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2322): Type '{ isOpen: boolean; style: { color: string; }... Remove this comment to see the full error message
-  //     <DatePicker isOpen={true} style={{ color: "red" }} />,
-  //   );
-
-  //   expect(wrapper.getDOMNode().style).toHaveProperty("color", "red");
-  // });
+    const datePicker = screen.getByTestId("date-picker");
+    expect(datePicker).toHaveClass(customClass);
+    expect(datePicker).toHaveAttribute("id", customId);
+  });
 });

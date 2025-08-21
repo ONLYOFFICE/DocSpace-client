@@ -1,0 +1,460 @@
+{
+  "key_path": "IPSecurityWarningHelper",
+  "content": "First, you need to specify your current IP or the IP range your current IP address belongs to, otherwise your space access will be blocked right after you save the settings. The space owner will have the space access from any IP address.",
+  "content_en_sha1_hash": "25490f5125cf44c29790cae04b3c1e1a30e87500",
+  "created_at": "2025-05-19T21:30:51.742Z",
+  "updated_at": "2025-08-04T07:30:01.549Z",
+  "comment": {
+    "text": "\"This translation key is used to display a warning message when setting up IP security access. It informs users that specifying their current IP or IP range is required to access the space, and that the space owner will have access from any IP address.\"",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:02.642Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
+      "line_number": 310,
+      "context": "<>\n <Text fontSize=\"16px\" fontWeight=\"700\" className=\"warning-text\">\n {t(\"Common:Warning\")}\n </Text>\n <Text className=\"ip-security_warning\">\n {t(\"IPSecurityWarningHelper\")}\n </Text>\n </>\n ) : null}\n \n <SaveCancelButtons",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"بروتوكول الانترنت\" (protocol of the internet) is repeated excessively and sounds unnatural. It should be simplified to just \"عنوان IP\" (IP address) or a more general term for IP.",
+          "suggestion": "أولاً، تحتاج إلى تحديد عنوان IP الحالي الخاص بك أو نطاق عناوين IP الذي ينتمي إليه عنوان IP الحالي الخاص بك، وإلا فسيتم حظر الوصول إلى الإستضافة الخاصة بك مباشرةً بعد حفظ الإعدادات. سيتمكن مالك الإٍستضافة من الوصول إلى الإٍستضافة من أي عنوان IP."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'الإستضافة' is used repeatedly. While technically correct, it can be simplified for better flow. 'مساحة' (space) from the original English is a more accurate representation of 'space'.",
+          "suggestion": "أولاً، تحتاج إلى تحديد عنوان IP الحالي الخاص بك أو نطاق عناوين IP الذي ينتمي إليه عنوان IP الحالي الخاص بك، وإلا فسيتم حظر الوصول إلى مساحتك مباشرةً بعد حفظ الإعدادات. سيتمكن مالك المساحة من الوصول إلى المساحة من أي عنوان IP."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is somewhat clunky. Breaking it into two sentences might improve readability.",
+          "suggestion": "أولاً، تحتاج إلى تحديد عنوان IP الحالي الخاص بك أو نطاق عناوين IP الذي ينتمي إليه عنوان IP الحالي الخاص بك. وإلا، فسيتم حظر الوصول إلى مساحتك مباشرةً بعد حفظ الإعدادات. سيتمكن مالك المساحة من الوصول إلى المساحة من أي عنوان IP."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'space access' is translated as 'domenə giriş'. While 'domen' can refer to a domain, in this context, 'space' likely refers to a specific area or workspace within a platform. Using 'məkan giriş' or 'məkan daxilolması' might be more accurate.",
+          "suggestion": "Consider translating 'space access' as 'məkan giriş' or 'məkan daxilolması'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'The space owner will have the space access from any IP address' is not entirely idiomatic in Azerbaijani. It translates literally but doesn't sound natural. A more natural phrasing would emphasize that the owner isn't restricted.",
+          "suggestion": "Consider revising to 'Domen sahibi istənilən IP ünvanından məkan daxilolmasına malik olacaq' or 'Domen sahibi hər hansı IP ünvanından məkan daxilolması aiddir.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'към който принадлежи текущият Ви IP адрес' is a bit clunky and could be improved for better readability. While grammatically correct, it's not the most natural way to phrase it in Bulgarian.",
+          "suggestion": "към който попада текущият Ви IP адрес"
+        },
+        {
+          "type": "formatting",
+          "description": "Consistency in using 'Ви' vs. 'ви' is needed. 'Ви' is the formal you, which is appropriate here, so maintain it throughout. Some instances use lowercase 'ви'.",
+          "suggestion": "Ensure consistent use of 'Ви' throughout the text."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Space' in the English content is translated as 'Bereich' in German. While 'Bereich' can mean 'area' or 'region', in the context of a digital workspace, 'Space' is often better translated as 'Raum' to maintain the intended meaning. Using 'Bereich' can be misleading.",
+          "suggestion": "Change 'Bereich' to 'Raum'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrasing 'Der Eigentümer des Bereichs' is a bit clunky.  A more natural translation of 'space owner' would be 'Der Space-Eigentümer' or 'Der Besitzer des Spaces'.",
+          "suggestion": "Change 'Der Eigentümer des Bereichs' to 'Der Space-Eigentümer' or 'Der Besitzer des Spaces'."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'IP range your current IP address belongs to' is a bit clunky. It could be more naturally expressed in Greek. The current translation focuses on a technical accuracy rather than a user-friendly clarity.",
+          "suggestion": "Εναλλακτικά, μπορείτε να καθορίσετε την τρέχουσα IP σας ή το εύρος διευθύνσεων IP στο οποίο ανήκει."
+        },
+        {
+          "type": "formatting",
+          "description": "The repeated use of 'IP' feels somewhat unnatural in Greek. While technically correct, it might be slightly improved by using a more varied language.",
+          "suggestion": "Consider using a shorter term or avoiding repetition when possible without sacrificing clarity."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"right after you save the settings\" is too literal and doesn't flow naturally in Spanish. A more natural translation would convey the immediacy of the block.",
+          "suggestion": "Immediately after saving the settings, your space access will be blocked."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'su' is repetitive. While grammatically correct, it could be rephrased for better flow. Consider using 'tu' for 'your' in some instances.",
+          "suggestion": "Consider rephrasing to use 'tu' occasionally to avoid repetition. Example: 'En primer lugar, debes especificar tu IP actual...'"
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"your space access will be blocked\" is a bit clunky. A more natural translation for 'space' would be 'tila'. While 'pääsysi tilaan estetään' is technically correct, it could be improved for readability. It also needs to make it clear that *user* access is blocked, not the space itself.",
+          "suggestion": "Ensin, sinun tulee määrittää nykyinen IP tai IP-alue, johon nykyinen IP-osoitteesi kuuluu, muuten käyttäjän pääsysi tilaan estetään heti asetusten tallentamisen jälkeen. Tilan omistajalla on pääsy tilaan mistä tahansa IP-osoitteesta."
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase \"right after you save the settings\" could be more concise and flow better. \"Asetusten tallentamisen jälkeen\" is a bit long.",
+          "suggestion": "asetusten tallentamisen jälkeen"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'space' is translated as 'domen'. While 'domen' can sometimes refer to a space, it's more commonly used for 'domain'. In this context, 'space' likely refers to a user's personal workspace or area within a larger platform, and a more accurate translation might be something like 'iş sahəsi' or 'fərdiyyət sahəsi', depending on the specific platform terminology. However, without more context, it's difficult to provide the perfect equivalent.",
+          "suggestion": "Consider if 'domen' is the correct term. Alternatives include 'iş sahəsi' or 'fərdiyyət sahəsi' or investigate the intended meaning of 'space'."
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'right after you save the settings' is a bit clunky. A more natural flow might improve readability.",
+          "suggestion": "Consider revising 'dərhal sonra' to 'parametrləri saxladıqdan sonra' for smoother reading."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"IPレンジ\" (IP range) while technically correct, sounds slightly unnatural in this context. A more natural phrasing would be \"IPアドレス範囲\" (IP address range).",
+          "suggestion": "現在のIPまたは現在のIPアドレスが属するIPアドレス範囲を指定する必要があります。"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, using full-width characters throughout the entire Japanese text would enhance readability and consistency with common Japanese style.",
+          "suggestion": "まず、現在のＩＰまたは現在のＩＰアドレスが属するＩＰアドレス範囲を指定する必要があります。そうしないと、設定を保存した直後にスペースへのアクセスがブロックされます。スペースの所有者は、どのＩＰアドレスからもスペースにアクセスできるようになります。"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"otherwise your space access will be blocked right after you save the settings\" is not perfectly conveyed. A more natural Korean phrasing would better reflect the urgency and consequence.",
+          "suggestion": "먼저 현재 IP 또는 현재 IP 주소가 속한 IP 범위를 지정해야 합니다. 그렇지 않으면 설정을 저장하자마자 스페이스 접근이 제한됩니다."
+        },
+        {
+          "type": "formatting",
+          "description": "While not incorrect, the term \"스페이스\" is used repeatedly. Using \"공간\" occasionally might improve readability and flow, though it is a minor point and not strictly necessary.",
+          "suggestion": "Consider occasional replacement of \"스페이스\" with \"공간\" for variety, e.g., '스페이스에 액세스할 수 있습니다' -> '공간에 액세스할 수 있습니다'."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'the IP range your current IP address belongs to' is not accurately translated. The Lao translation sounds awkward and doesn't clearly convey the meaning of specifying a range.",
+          "suggestion": "ກ່ອນອື່ນ ໝົດ, ທ່ານ ຈຳ ເປັນຕ້ອງລະບຸ IP ປະຈຸບັນຂອງທ່ານຫຼືຊ່ວງຂອງ IP ທີ່ IP ຂອງທ່ານຢູ່ພາຍໃຕ້."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'space owner will have the space access from any IP address' is not the best translation of the English. It's a little too literal and sounds unnatural in Lao. A more natural phrasing would be 'the space owner can access the space from any IP address'.",
+          "suggestion": "ເຈົ້າຂອງຊ່ອງສາມາດເຂົ້າເຖິງພື້ນທີ່ຈາກທີ່ຢູ່ IP ໃດໆໄດ້."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is a bit long and could benefit from being split for better readability in Lao. It makes it harder to parse quickly.",
+          "suggestion": "ກ່ອນອື່ນ ໝົດ, ທ່ານ ຈຳ ເປັນຕ້ອງລະບຸ IP ປະຈຸບັນຂອງທ່ານຫຼືຊ່ວງຂອງ IP ທີ່ IP ຂອງທ່ານຢູ່ພາຍໃຕ້. ຖ້າບໍ່ດັ່ງນັ້ນການເຂົ້າເຖິງພື້ນທີ່ຂອງທ່ານຈະຖືກບລັອກທັນທີຫຼັງຈາກທີ່ທ່ານບັນທຶກການຕັ້ງຄ່າ. ເຈົ້າຂອງຊ່ອງສາມາດເຂົ້າເຖິງພື້ນທີ່ຈາກທີ່ຢູ່ IP ໃດໆໄດ້."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'space access' is translated as 'dostęp do obszaru'. While technically correct, it might sound slightly unnatural in Polish. A more natural phrasing would be 'dostęp do przestrzeni'.",
+          "suggestion": "Replace 'dostęp do obszaru' with 'dostęp do przestrzeni'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'IP range' is translated as 'zakres IP'. It's grammatically correct, but 'zakres adresów IP' is more accurate and common in Polish when referring to an IP range.",
+          "suggestion": "Replace 'zakres IP' with 'zakres adresów IP'."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'gama de IP a que pertence o seu endereço IP atual' is overly verbose and not the most natural way to express the meaning. It repeats 'IP'.",
+          "suggestion": "Use a simpler phrase like 'o intervalo de IP que contém o seu IP atual' or 'o intervalo de IPs ao qual o seu IP pertence'."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence 'Primeiro, precisa de especificar...' is slightly awkward. 'Precisa de' could be improved.",
+          "suggestion": "Use 'Primeiro, você precisa especificar...' or 'Primeiro, é preciso especificar...'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'space access' is translated directly as 'acesso ao espaço.' While technically correct, a more nuanced translation might better convey the intended meaning depending on the context of 'space'. It might refer to a cloud space or a virtual workspace. More context would help refine this.",
+          "suggestion": "Consider 'acesso à sua área' or 'acesso ao seu ambiente', if the 'space' has a more specific meaning. Otherwise, keep 'acesso ao espaço'."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrasing 'din care face parte adresa dvs IP actuală' is a bit clunky. It can be simplified.",
+          "suggestion": "din care face parte IP-ul dvs."
+        },
+        {
+          "type": "formatting",
+          "description": "Inconsistency in using uppercase/lowercase for 'IP'. It should be consistent throughout.",
+          "suggestion": "Use either 'IP' or 'Ip' consistently. Recommend 'IP' for consistency with English."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'accesul la spaţiul dvs va fi blocat' can be improved for flow.",
+          "suggestion": "accesul dvs. la spațiu va fi blocat"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"в который входит ваш текущий IP\" is a slightly awkward translation of \"the IP range your current IP address belongs to.\" It's grammatically correct, but not the most natural way to express it in Russian.",
+          "suggestion": "Consider a more fluent option like \"включающий ваш текущий IP\" or \"в котором содержится ваш текущий IP\"."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'блокирован' is grammatically correct but sounds a bit formal and abrupt in this context. A softer phrasing would be better.",
+          "suggestion": "Replace 'вам будет заблокирован доступ' with 'вам будет ограничен доступ' or 'доступ вам будет закрыт'."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'අ.ජා.කෙ.' is repeated excessively and doesn't flow naturally in Sinhala. It's an abbreviation for IP address and should be used consistently or translated fully once.",
+          "suggestion": "Replace repeated 'අ.ජා.කෙ.' with 'IP ලිපිනය' or 'IP முகவரி' for better readability. Alternatively, expand the abbreviation the first time and use 'IP ලිපිනය' thereafter."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence 'මන්ද, නොඑසේ නම් ඔබ සැකසුම් සුරැකීමෙන් අනතුරුව අවකාශයට ප්‍රවේශය අවහිර වනු ඇත' is grammatically awkward. 'මන්ද' implies a reason, but the phrasing is not smooth.",
+          "suggestion": "Rephrase to something like: 'ඔබ සැකසුම් සුරැකීමේදී, ඔබගේ අවකාශයට ප්‍රවේශය අවහිර වනු ඇත.' (If you save the settings, your access to the space will be blocked.)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'space owner' is translated as 'අවකාශයේ හිමිකරු'. While technically correct, it can be more natural to use a term that implies responsibility or administration.",
+          "suggestion": "Consider using 'අවකාශයේ පරිපාලක' (space administrator) or 'අවකාශයේ භාරකරුවා' (space custodian) as alternatives to 'අවකාශයේ හිමිකරු', depending on the context."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of abbreviations like 'අ.ජා.කෙ.' throughout the text can make it harder to understand for readers unfamiliar with the abbreviation. While common in technical contexts, it might benefit from more explanation or full-term usage.",
+          "suggestion": "Consider expanding the abbreviation 'අ.ජා.කෙ.' (IP address) at least once in the text to improve clarity for a wider audience. Use the full term first, then introduce the abbreviation in parentheses."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'space' is translated as 'priestoru' which, while technically correct, doesn't quite capture the intended meaning of a collaborative workspace in a digital context. A more precise translation might be 'prostory' or a more descriptive alternative depending on the platform's terminology.",
+          "suggestion": "Consider translating 'space' as 'prostory' or using a term consistent with the platform's usage for similar contexts."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'right after you save the settings' is translated as 'ihneď po uložení nastavení'. While grammatically correct, it could be more natural-sounding.  'Hneď po uložení nastavení' sounds a bit abrupt.",
+          "suggestion": "Consider rephrasing to something like 'okamžite po uložení nastavení' or 'už po uložení nastavení'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ki mu pripada vaš trenutni naslov IP\" is a bit awkward. A more natural phrasing would be something like \"v katerega spada vaš trenutni IP naslov\" or \"v katerem se nahaja vaš trenutni IP naslov\".",
+          "suggestion": "Najprej morate specificirati vaš trenutni IP ali obseg IP naslovov, v katerem se nahaja vaš trenutni IP naslov, sicer bo vaš dostop do prostora blokiran takoj, ko boste shranili nastavitve. Lastnik prostora bo imel dostop do prostora iz katerega koli naslova IP."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"опсег IP адреса којем ваша тренутна IP адреса припада\" is a bit convoluted. A more natural and accurate translation of \"IP range your current IP address belongs to\" would be something like \"опсег IP адреса у којем се налази ваша тренутна IP адреса\" or \"опсег IP адреса који укључује вашу тренутну IP адресу\".",
+          "suggestion": "Прво морате навести вашу тренутну IP адресу или опсег IP адреса који укључује вашу тренутну IP адресу."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"right after you save the settings\" is translated as \"odmah nakon što sačuvate podešavanja.\" While technically correct, it's a bit clunky in Serbian. A more natural phrasing would be \"čim sačuvate podešavanja.\" or \"nakon što sačuvate podešavanja.\" ",
+          "suggestion": "čim sačuvate podešavanja"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"dải IP mà địa chỉ IP hiện tại của bạn thuộc về\" is a bit clunky. A more natural phrasing would be \"dải IP mà địa chỉ IP hiện tại của bạn nằm trong\".",
+          "suggestion": "Trước tiên, bạn cần chỉ định IP hiện tại hoặc dải IP mà địa chỉ IP hiện tại của bạn nằm trong, nếu không quyền truy cập không gian của bạn sẽ bị chặn ngay sau khi bạn lưu cài đặt. Chủ sở hữu không gian sẽ có quyền truy cập không gian từ bất kỳ địa chỉ IP nào."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"otherwise your space access will be blocked right after you save the settings\" is a bit abrupt and could be softened. The current translation \"否则在保存设置后将立即阻止您的空间访问权限\" is technically correct but sounds overly harsh.",
+          "suggestion": "Alternatively: \"否则，在保存设置后您的空间访问可能会受到限制。\" or \"否则，保存设置后您的空间访问权限可能会受到影响。\""
+        },
+        {
+          "type": "formatting",
+          "description": "The original sentence uses a comma after 'IP'. The translation does not consistently follow this.",
+          "suggestion": "Add a comma after '当前的 IP': '首先，您需要指定当前的 IP，或当前 IP 地址所属的 IP 范围，否则...' "
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

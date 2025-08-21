@@ -25,46 +25,148 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { Heading } from "./Heading";
-import { HeadingProps } from "./Heading.types";
+import { Heading } from ".";
 import { HeadingLevel, HeadingSize } from "./Heading.enums";
 
-const meta = {
-  title: "Components/Heading",
+const meta: Meta<typeof Heading> = {
+  title: "Base UI Components/Heading",
   component: Heading,
   argTypes: {
     color: { control: "color" },
+    level: {
+      control: { type: "select" },
+      options: Object.keys(HeadingLevel).filter((key) =>
+        Number.isNaN(Number(key)),
+      ),
+    },
+    size: {
+      control: { type: "select" },
+      options: Object.values(HeadingSize),
+    },
+    type: {
+      control: { type: "select" },
+      options: ["default", "header", "menu", "content"],
+    },
   },
   parameters: {
     docs: {
       description: {
-        component: "Heading text structured in levels",
+        component:
+          "Flexible Heading component with multiple configuration options",
       },
     },
   },
-} satisfies Meta<typeof Heading>;
-type Story = StoryObj<typeof Heading>;
+};
 
 export default meta;
 
-const Template = ({ ...args }: HeadingProps) => {
-  return (
-    <div style={{ margin: "7px" }}>
-      <Heading {...args}>Sample text Heading</Heading>
-    </div>
-  );
-};
+type Story = StoryObj<typeof Heading>;
 
 export const Default: Story = {
-  render: (args) => <Template {...args} />,
+  args: {
+    level: HeadingLevel.h1,
+    size: HeadingSize.large,
+    children: "Default Heading",
+  },
 };
 
-Default.args = {
-  level: HeadingLevel.h1,
-  title: "",
-  truncate: false,
-  isInline: false,
-  size: HeadingSize.large,
+export const HeadingLevels: Story = {
+  render: () => (
+    <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+      <Heading level={HeadingLevel.h1}>H1 Heading</Heading>
+      <Heading level={HeadingLevel.h2}>H2 Heading</Heading>
+      <Heading level={HeadingLevel.h3}>H3 Heading</Heading>
+      <Heading level={HeadingLevel.h4}>H4 Heading</Heading>
+      <Heading level={HeadingLevel.h5}>H5 Heading</Heading>
+      <Heading level={HeadingLevel.h6}>H6 Heading</Heading>
+    </div>
+  ),
+};
+
+export const HeadingSizes: Story = {
+  render: () => (
+    <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+      <Heading level={HeadingLevel.h1} size={HeadingSize.xsmall}>
+        XSmall Heading
+      </Heading>
+      <Heading level={HeadingLevel.h1} size={HeadingSize.small}>
+        Small Heading
+      </Heading>
+      <Heading level={HeadingLevel.h1} size={HeadingSize.medium}>
+        Medium Heading
+      </Heading>
+      <Heading level={HeadingLevel.h1} size={HeadingSize.large}>
+        Large Heading
+      </Heading>
+      <Heading level={HeadingLevel.h1} size={HeadingSize.xlarge}>
+        XLarge Heading
+      </Heading>
+    </div>
+  ),
+};
+
+export const HeadingTypes: Story = {
+  render: () => (
+    <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+      <Heading level={HeadingLevel.h1}>Default Type</Heading>
+      <Heading level={HeadingLevel.h1} type="header">
+        Header Type
+      </Heading>
+      <Heading level={HeadingLevel.h1} type="menu">
+        Menu Type
+      </Heading>
+      <Heading level={HeadingLevel.h1} type="content">
+        Content Type
+      </Heading>
+    </div>
+  ),
+};
+
+export const StyledHeadings: Story = {
+  render: () => (
+    <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+      <Heading level={HeadingLevel.h1} style={{ color: "blue" }}>
+        Blue Heading
+      </Heading>
+      <Heading level={HeadingLevel.h1} style={{ fontStyle: "italic" }}>
+        Italic Heading
+      </Heading>
+      <Heading level={HeadingLevel.h1} style={{ textDecoration: "underline" }}>
+        Underlined Heading
+      </Heading>
+    </div>
+  ),
+};
+
+export const AccessibilityHeadings: Story = {
+  render: () => (
+    <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+      <Heading
+        level={HeadingLevel.h1}
+        id="main-heading"
+        aria-label="Main heading"
+      >
+        Accessible Heading 1
+      </Heading>
+      <Heading
+        level={HeadingLevel.h2}
+        id="sub-heading"
+        aria-label="Sub heading"
+      >
+        Accessible Heading 2
+      </Heading>
+    </div>
+  ),
+};
+
+export const CustomDataAttributes: Story = {
+  render: () => (
+    <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+      <Heading level={HeadingLevel.h1} data-test-id="custom-heading">
+        Heading with Data Attribute
+      </Heading>
+    </div>
+  ),
 };

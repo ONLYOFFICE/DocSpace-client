@@ -1,0 +1,286 @@
+{
+  "key_path": "Search",
+  "content": "Search",
+  "content_en_sha1_hash": "bce06414177f72ab70e6387b6af9f8ceef0d6049",
+  "created_at": "2025-05-19T21:30:48.328Z",
+  "updated_at": "2025-08-11T09:02:43.906Z",
+  "comment": {
+    "text": "This translation key is used to display the label \"Search\" in various UI elements. It appears on a search input field and an icon button, inviting users to find specific items or content. The text should be translated as \"Search\" in English.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:34:26.255Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/FormGallery/Filter/SearchFilter/index.js",
+      "line_number": 59,
+      "context": "return (\n <SearchInput\n forwardedRef={ref}\n scale\n tabIndex={1}\n placeholder={t(\"Common:Search\")}\n value={value}\n onChange={onChangeValue}\n onClick={onInputClick}\n onClearSearch={onClear}\n />",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/ItemTitle/RoomsItemTitle.tsx",
+      "line_number": 246,
+      "context": "<div className=\"info_title-icons\">\n {isRoomMembersPanel ? (\n <IconButton\n id=\"info_search\"\n className=\"icon\"\n title={t(\"Common:Search\")}\n iconName={SearchIconReactSvgUrl}\n onClick={onSearchClick}\n size={16}\n />\n ) : null}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
+      "line_number": 1404,
+      "context": "getViewSettingsData={getViewSettingsData}\n onSearch={onSearch}\n onClearFilter={onClearFilter}\n getSelectedInputValue={getSelectedInputValue}\n filterHeader={t(\"Common:AdvancedFilter\")}\n placeholder={t(\"Common:Search\")}\n view={t(\"Common:View\")}\n isFavoritesFolder={isFavoritesFolder}\n isPersonalRoom={isPersonalRoom}\n isRooms={isRooms}\n removeSelectedItem={removeSelectedItem}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/index.tsx",
+      "line_number": 146,
+      "context": "<UsersInfoBlock />\n \n <SearchInput\n id=\"search-users-input\"\n placeholder={t(\"Common:Search\")}\n value={searchValue}\n onChange={onChangeInput}\n refreshTimeout={REFRESH_TIMEOUT}\n onClearSearch={onClearSearchInput}\n size={InputSize.base}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/index.tsx",
+      "line_number": 151,
+      "context": "<UsersInfoBlock />\n \n <SearchInput\n id=\"search-users-input\"\n placeholder={t(\"Common:Search\")}\n value={searchValue}\n onChange={onChangeInput}\n refreshTimeout={REFRESH_TIMEOUT}\n onClearSearch={onClearSearchInput}\n size={InputSize.base}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/index.tsx",
+      "line_number": 133,
+      "context": "{filteredUsers.length > 0 ? (\n <>\n <SearchInput\n id=\"search-checkedUsers-type-input\"\n className=\"importUsersSearch\"\n placeholder={t(\"Common:Search\")}\n value={searchValue}\n onChange={onChangeInput}\n refreshTimeout={REFRESH_TIMEOUT}\n onClearSearch={onClearSearchInput}\n size={InputSize.base}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
+      "line_number": 397,
+      "context": "/>\n </LabelGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"\n label={t(\"Common:Search\")}\n onChange={toggleWithSearch}\n isChecked={config.withSearch}\n dataTestId=\"search_checkbox\"\n />\n <HelpButton",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
+      "line_number": 397,
+      "context": "/>\n </LabelGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"\n label={t(\"Common:Search\")}\n onChange={toggleWithSearch}\n isChecked={config.withSearch}\n dataTestId=\"search_checkbox\"\n />\n <HelpButton",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector.js",
+      "line_number": 263,
+      "context": "<ControlsSection>\n <Label className=\"label\">{t(\"InterfaceElements\")}</Label>\n <Checkbox\n className=\"checkbox\"\n label={t(\"Common:Search\")}\n onChange={toggleWithSearch}\n isChecked={config.withSearch}\n dataTestId=\"search_checkbox\"\n />\n <SelectTextInput t={t} config={config} setConfig={setConfig} />",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/SearchTerm.js",
+      "line_number": 68,
+      "context": "<Label className=\"label\" text={t(\"SearchTerm\")} />\n <ColumnContainer>\n <TextInput\n scale\n onChange={onChangeSearch}\n placeholder={t(\"Common:Search\")}\n value={value}\n tabIndex={5}\n testId=\"search_term_text_input\"\n />\n <Checkbox",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/selectors/Files/hooks/useSelectorBody.tsx",
+      "line_number": 154,
+      "context": "const searchProps: TSelectorSearch = withSearch\n ? {\n withSearch,\n searchLoader: <SearchLoader />,\n searchPlaceholder: t(\"Common:Search\"),\n searchValue,\n isSearchLoading: showBreadCrumbsLoader,\n onSearch: onSearch!,\n onClearSearch: onClearSearch!,\n }",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/selectors/Groups/index.tsx",
+      "line_number": 158,
+      "context": "onCloseClick: () => {},\n headerLabel: headerProps?.headerLabel || t(\"Common:Groups\"),\n }}\n alwaysShowFooter={itemsList.length !== 0 || Boolean(searchValue)}\n withSearch\n searchPlaceholder={t(\"Common:Search\")}\n onSearch={onSearch}\n searchValue={searchValue}\n onClearSearch={onClearSearch}\n isSearchLoading={false}\n disableSubmitButton={!selectedItem}",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/selectors/People/index.tsx",
+      "line_number": 494,
+      "context": "}\n : ({} as TSelectorCancelButton);\n \n const searchSelectorProps: TSelectorSearch = {\n withSearch: true,\n searchPlaceholder: t(\"Common:Search\"),\n searchValue,\n onSearch,\n onClearSearch,\n searchLoader: <SearchLoader />,\n isSearchLoading:",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/selectors/Room/index.tsx",
+      "line_number": 214,
+      "context": ": {};\n \n const searchSelectorProps: TSelectorSearch = withSearch\n ? {\n withSearch: true,\n searchPlaceholder: t(\"Common:Search\"),\n searchValue,\n onSearch: onSearchAction,\n onClearSearch: onClearSearchAction,\n searchLoader: <SearchLoader />,\n isSearchLoading: isFirstLoad && !searchValue && !afterSearch.current,",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

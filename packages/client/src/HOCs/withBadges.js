@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,14 +31,19 @@ import { ShareAccessRights, FileStatus } from "@docspace/shared/enums";
 import config from "PACKAGE_FILE";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import { toastr } from "@docspace/shared/components/toast";
-import Badges from "../components/Badges";
+import Badges from "@docspace/shared/components/badges";
+
+import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
 
 export default function withBadges(WrappedComponent) {
   class WithBadges extends React.Component {
     constructor(props) {
       super(props);
 
-      this.state = { disableBadgeClick: false, disableUnpinClick: false };
+      this.state = {
+        disableBadgeClick: false,
+        disableUnpinClick: false,
+      };
     }
 
     onShowVersionHistory = () => {
@@ -144,6 +149,12 @@ export default function withBadges(WrappedComponent) {
       checkAndOpenLocationAction?.(file);
     };
 
+    onCreateRoom = () => {
+      const { item, onCreateRoomFromTemplate } = this.props;
+
+      onCreateRoomFromTemplate(item, true);
+    };
+
     render() {
       const {
         t,
@@ -161,6 +172,9 @@ export default function withBadges(WrappedComponent) {
         isArchiveFolder,
         isPublicRoom,
         isRecentTab,
+        isTemplatesFolder,
+        isExtsCustomFilter,
+        docspaceManagingRoomsHelpUrl,
       } = this.props;
       const { fileStatus, access, mute } = item;
 
@@ -202,6 +216,19 @@ export default function withBadges(WrappedComponent) {
           isArchiveFolder={isArchiveFolder}
           isRecentTab={isRecentTab}
           canEditing={canEditing}
+          onCreateRoom={this.onCreateRoom}
+          isTemplatesFolder={isTemplatesFolder}
+          isExtsCustomFilter={isExtsCustomFilter}
+          customFilterExternalLink={docspaceManagingRoomsHelpUrl}
+          newFilesBadge={
+            <NewFilesBadge
+              className="tablet-badge"
+              newFilesCount={newItems}
+              folderId={item.id}
+              mute={mute}
+              isRoom={item.isRoom}
+            />
+          }
         />
       );
 
@@ -223,6 +250,7 @@ export default function withBadges(WrappedComponent) {
         publicRoomStore,
         userStore,
         settingsStore,
+        filesSettingsStore,
       },
       { item },
     ) => {
@@ -232,14 +260,21 @@ export default function withBadges(WrappedComponent) {
         isArchiveFolderRoot,
         isArchiveFolder,
         isRecentTab,
+        isTemplatesFolder,
       } = treeFoldersStore;
       const {
         markAsRead,
         setPinAction,
         setMuteAction,
         checkAndOpenLocationAction,
+        onCreateRoomFromTemplate,
       } = filesActionsStore;
-      const { isTabletView, isDesktopClient, theme } = settingsStore;
+      const {
+        isTabletView,
+        isDesktopClient,
+        theme,
+        docspaceManagingRoomsHelpUrl,
+      } = settingsStore;
       const { setIsVerHistoryPanel, fetchFileVersions } = versionHistoryStore;
       const { setConvertDialogVisible, setConvertItem, setConvertDialogData } =
         dialogsStore;
@@ -249,6 +284,10 @@ export default function withBadges(WrappedComponent) {
 
       const isRoom = !!roomType;
       const isMutedBadge = isRoom ? mute : isMuteCurrentRoomNotifications;
+
+      const extsCustomFilter =
+        filesSettingsStore?.extsWebCustomFilterEditing || [];
+      const isExtsCustomFilter = extsCustomFilter.includes(item.fileExst);
 
       return {
         isArchiveFolderRoot,
@@ -275,6 +314,10 @@ export default function withBadges(WrappedComponent) {
         isPublicRoom: publicRoomStore.isPublicRoom,
         isRecentTab,
         checkAndOpenLocationAction,
+        isTemplatesFolder,
+        onCreateRoomFromTemplate,
+        isExtsCustomFilter,
+        docspaceManagingRoomsHelpUrl,
       };
     },
   )(observer(WithBadges));

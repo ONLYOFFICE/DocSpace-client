@@ -1,10 +1,8 @@
 {
   "ActiveSessions": "Aktiv Sessiyalar",
   "AutoDeleteTitle": "60 gündən köhnə bütün sessiyalar avtomatik silinəcək.",
-  "ChangeEmailSuccess": "Elektron poçt uğurla dəyişdirildi",
   "ChangePasswordAfterLoggingOut": "Çıxdıqdan sonra şifrəni dəyişdirin",
   "ConnectSocialNetworks": "Sosial şəbəkələrinizi əlaqələndirin",
-  "DarkTheme": "Qaranlıq tema",
   "DescriptionForSecurity": "Daha çox təhlükəsizlik üçün şifrəni dəyişdirməlisiniz.",
   "DesktopTheme": "Masaüstü Redaktor tənzimləmələri ilə sinxronizasiya edin",
   "DesktopThemeDescription": "Masa üstü redaktorların cari mövzusundan asılı olaraq açıq və qaranlıq mövzular arasında avtomatik keçid edin.",
@@ -13,7 +11,6 @@
   "ErrorAccountAlreadyUse": "Keçid olunan hesab artıq başqa istifadəçi tərəfindən istifadə olunur",
   "FileManagement": "Fayl idarəetməsi",
   "InterfaceTheme": "İnterfeys mövzusu",
-  "LightTheme": "İşıqlı tema",
   "LogoutActiveConnection": "Aktiv bağlantıdan çıxın",
   "LogoutAllActiveSessionsDescription": "Bundan başqa bütün aktiv bağlantılar hazırda istifadə edildiyi üçün sistemdən çıxacaq.",
   "LogoutBtn": "Çıxış",

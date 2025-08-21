@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,9 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { Row } from "@docspace/shared/components/row";
+import styled, { css } from "styled-components";
+import { Row } from "@docspace/shared/components/rows";
 import { injectDefaultTheme, tablet } from "@docspace/shared/utils";
+import { globalColors } from "@docspace/shared/themes";
 
 const StyledBody = styled.div`
   height: 100%;
@@ -44,6 +45,8 @@ const StyledBody = styled.div`
 `;
 
 const StyledVersionList = styled.div.attrs(injectDefaultTheme)`
+  visibility: ${(props) => (props.showRows ? "visible" : "hidden")};
+
   .row_context-menu-wrapper {
     .expandButton {
       ${(props) =>
@@ -151,6 +154,26 @@ const StyledVersionRow = styled(Row).attrs(injectDefaultTheme)`
     svg {
       ${({ theme }) =>
         theme.interfaceDirection === "rtl" && `transform: scaleX(-1);`}
+
+      ${(props) =>
+        props.versionDeleteRow &&
+        css`
+          path {
+            fill: ${({ theme }) =>
+              theme.filesVersionHistory.versionDisabled.fillDisabled};
+            stroke: ${({ theme }) =>
+              theme.filesVersionHistory.versionDisabled.fillDisabled};
+          }
+        `}
+    }
+
+    .version_badge-text {
+      ${(props) =>
+        props.versionDeleteRow &&
+        !props.theme.isBase &&
+        css`
+          color: ${globalColors.darkGrayDark} !important;
+        `}
     }
 
     @media ${tablet} {
@@ -162,6 +185,12 @@ const StyledVersionRow = styled(Row).attrs(injectDefaultTheme)`
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    ${(props) =>
+      props.versionDeleteRow &&
+      css`
+        color: ${({ theme }) => theme.filesVersionHistory.versionLink.color};
+      `}
   }
   .version-link-file:first-child {
     margin-bottom: 4px;
@@ -229,6 +258,8 @@ const StyledVersionRow = styled(Row).attrs(injectDefaultTheme)`
   }
 
   .version-comment-wrapper {
+    box-sizing: border-box;
+    display: flex;
     margin-inline-start: 72px;
     white-space: normal !important;
 
@@ -246,7 +277,7 @@ const StyledVersionRow = styled(Row).attrs(injectDefaultTheme)`
 
     .expandButton {
       ${(props) =>
-        props.isSavingComment &&
+        (props.isSavingComment || props.versionDeleteProcess) &&
         `
         touch-action: none;
         pointer-events: none;
@@ -259,6 +290,13 @@ const StyledVersionRow = styled(Row).attrs(injectDefaultTheme)`
               fill: ${({ theme }) =>
                 theme.filesVersionHistory.versionList.fill};
             `};
+
+          ${(props) =>
+            props.versionDeleteRow &&
+            css`
+              fill: ${({ theme }) =>
+                theme.filesVersionHistory.versionDisabled.fillDisabled};
+            `}
         }
       }
     }
@@ -276,6 +314,17 @@ const StyledVersionRow = styled(Row).attrs(injectDefaultTheme)`
           pointer-events: none;
         `}
     }
+
+    .version-link-file,
+    .version_text,
+    .versioned {
+      ${(props) =>
+        props.versionDeleteProcess &&
+        `
+          touch-action: none;
+          pointer-events: none;
+        `}
+    }
   }
 
   .modal-dialog-aside-footer {
@@ -287,10 +336,14 @@ const StyledVersionRow = styled(Row).attrs(injectDefaultTheme)`
   }
 
   .version_edit-comment-button-primary {
+    box-sizing: border-box;
+    display: inline-block;
     margin-inline-end: 8px;
     width: 87px;
   }
   .version_edit-comment-button-second {
+    box-sizing: border-box;
+    display: inline-block;
     width: 87px;
   }
   .version_modal-dialog .modal-dialog-aside-header {
@@ -301,7 +354,17 @@ const StyledVersionRow = styled(Row).attrs(injectDefaultTheme)`
   }
 
   .row-header {
+    box-sizing: border-box;
+    display: flex;
     max-width: 350px;
+
+    .version-link-box {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      margin: -2px 0 0 0;
+      width: 100%;
+    }
   }
 `;
 

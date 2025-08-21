@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,18 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TFile, TTranslation } from "@docspace/shared/api/files/types";
+import { TFile } from "@docspace/shared/api/files/types";
 import { frameCallCommand } from "@docspace/shared/utils/common";
+import { updateFile } from "@docspace/shared/api/files";
+import { TTranslation } from "@docspace/shared/types";
 
 import { convertDocumentUrl } from ".";
-import { updateFile } from "@docspace/shared/api/files";
 
 export type TInfoEvent = { data: { mode: string } };
 
 export const onSDKInfo = (event: object) => {
   const data = (event as TInfoEvent).data;
 
-  console.log("ONLYOFFICE Document Editor is opened in mode " + data.mode);
+  console.log(`ONLYOFFICE Document Editor is opened in mode ${data.mode}`);
 };
 
 export type TWarningEvent = {
@@ -46,10 +47,9 @@ export const onSDKWarning = (event: object) => {
   const data = (event as TWarningEvent).data;
   frameCallCommand("setIsLoaded");
   console.log(
-    "ONLYOFFICE Document Editor reports a warning: code " +
-      data.warningCode +
-      ", description " +
-      data.warningDescription,
+    `ONLYOFFICE Document Editor reports a warning: code ${
+      data.warningCode
+    }, description ${data.warningDescription}`,
   );
 };
 
@@ -61,10 +61,9 @@ export const onSDKError = (event: object) => {
   const data = (event as TErrorEvent).data;
   frameCallCommand("setIsLoaded");
   console.log(
-    "ONLYOFFICE Document Editor reports an error: code " +
-      data.errorCode +
-      ", description " +
-      data.errorDescription,
+    `ONLYOFFICE Document Editor reports an error: code ${
+      data.errorCode
+    }, description ${data.errorDescription}`,
   );
 };
 
@@ -115,7 +114,7 @@ export const onSDKRequestEditRights = async (
     ? stringURL.concat(`#message/${messageAfterConversion}`)
     : stringURL;
 
-  history.pushState({}, "", concatURL);
+  window.history.pushState({}, "", concatURL);
   document.location.reload();
 };
 

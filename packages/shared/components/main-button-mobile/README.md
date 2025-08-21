@@ -32,16 +32,6 @@ const buttonOptions = [
   },
 ];
 
-const progressOptions = [
-  {
-    key: "1",
-    label: "Uploads",
-    percent: 30,
-    status: `8/10`,
-    open: true,
-  },
-];
-
 <MainButtonMobile
   style={{
     top: "90%",
@@ -58,18 +48,17 @@ const progressOptions = [
 />;
 ```
 
-| Props             |      Type      | Required | Values | Default | Description                                                                                        |
-| ----------------- | :------------: | :------: | :----: | :-----: | -------------------------------------------------------------------------------------------------- |
-| `style`           | `obj`, `array` |    -     |   -    |    -    | Accepts css style                                                                                  |
-| `actionOptions`   |     `obj`      |    -     |   -    |    -    | Options for drop down items                                                                        |
-| `progressOptions` |     `obj`      |    -     |   -    |    -    | If you need display progress bar components                                                        |
-| `buttonOptions`   |     `obj`      |    -     |   -    |    -    | Menu that opens by clicking on the button                                                          |
-| `onUploadClick`   |     `func`     |    -     |   -    |    -    | The function that will be called after the button click                                            |
-| `withButton`      |     `bool`     |    -     |   -    |    -    | Show button inside drop down                                                                       |
-| `isOpenButton`    |     `bool`     |    -     |   -    |    -    | The parameter that is used with buttonOptions is needed to open the menu by clicking on the button |
-| `title`           |    `string`    |    -     |        |    -    | The name of the button in the drop down                                                            |
-| `percent`         |    `number`    |    -     |   -    |    -    | Loading indicator                                                                                  |
-| `manualWidth`     |    `string`    |    -     |   -    |    -    | Required if you need to specify the exact width of the drop down component                         |
-| `opened`          |     `bool`     |    -     |   -    |    -    | Tells when the dropdown should be opened                                                           |
-| `className`       |    `string`    |    -     |   -    |    -    | Accepts class                                                                                      |
-| `onClose`         |     `func`     |    -     |   -    |    -    | if you need close drop down                                                                        |
+| Props           |      Type      | Required | Values | Default | Description                                                                                        |
+| --------------- | :------------: | :------: | :----: | :-----: | -------------------------------------------------------------------------------------------------- |
+| `style`         | `obj`, `array` |    -     |   -    |    -    | Accepts css style                                                                                  |
+| `actionOptions` |     `obj`      |    -     |   -    |    -    | Options for drop down items                                                                        |
+| `buttonOptions` |     `obj`      |    -     |   -    |    -    | Menu that opens by clicking on the button                                                          |
+| `onUploadClick` |     `func`     |    -     |   -    |    -    | The function that will be called after the button click                                            |
+| `withButton`    |     `bool`     |    -     |   -    |    -    | Show button inside drop down                                                                       |
+| `isOpenButton`  |     `bool`     |    -     |   -    |    -    | The parameter that is used with buttonOptions is needed to open the menu by clicking on the button |
+| `title`         |    `string`    |    -     |        |    -    | The name of the button in the drop down                                                            |
+| `percent`       |    `number`    |    -     |   -    |    -    | Loading indicator                                                                                  |
+| `manualWidth`   |    `string`    |    -     |   -    |    -    | Required if you need to specify the exact width of the drop down component                         |
+| `opened`        |     `bool`     |    -     |   -    |    -    | Tells when the dropdown should be opened                                                           |
+| `className`     |    `string`    |    -     |   -    |    -    | Accepts class                                                                                      |
+| `onClose`       |     `func`     |    -     |   -    |    -    | if you need close drop down                                                                        |

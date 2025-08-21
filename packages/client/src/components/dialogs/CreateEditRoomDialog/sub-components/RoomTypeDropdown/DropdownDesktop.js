@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,19 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 
 import RoomType from "@docspace/shared/components/room-type";
 import { globalColors } from "@docspace/shared/themes";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
 import { injectDefaultTheme } from "@docspace/shared/utils";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
 const StyledDropdownDesktop = styled.div.attrs(injectDefaultTheme)`
   max-width: 100%;
   position: relative;
 
-  ${(props) => !props.isOpen && "display: none"};
+  ${(props) => (!props.isOpen || !props.heightReady) && "visibility: hidden"};
 
   .dropdown-content {
     background: ${(props) =>
@@ -62,19 +63,77 @@ const StyledDropdownDesktop = styled.div.attrs(injectDefaultTheme)`
 `;
 
 const DropdownDesktop = ({ t, open, chooseRoomType }) => {
+  const [heightList, setHeightList] = useState(null);
+  const dropdownRef = useRef(null);
+
+  const onHeightCalculation = () => {
+    const screenHeight = document.documentElement.clientHeight;
+    const elementHeight = dropdownRef.current.getBoundingClientRect().bottom;
+    const elementShadowHeight = 12;
+    const buttonHeight = 73;
+    const padding = 12;
+    const showElementFullHeight =
+      screenHeight -
+        elementHeight -
+        padding / 2 -
+        elementShadowHeight -
+        buttonHeight >=
+      0;
+
+    if (!showElementFullHeight) {
+      const newHeightList =
+        screenHeight -
+        dropdownRef.current.getBoundingClientRect().y -
+        elementShadowHeight -
+        buttonHeight -
+        padding;
+
+      setHeightList(newHeightList);
+    } else setHeightList(0);
+  };
+
+  useEffect(() => {
+    if (open) {
+      onHeightCalculation();
+      window.addEventListener("resize", onHeightCalculation);
+    } else if (typeof heightList === "number") setHeightList(null);
+
+    return () => {
+      window.removeEventListener("resize", onHeightCalculation);
+    };
+  }, [open, heightList]);
+
+  const roomTypes = RoomsTypeValues.map((roomType) => (
+    <RoomType
+      id={roomType}
+      t={t}
+      key={roomType}
+      roomType={roomType}
+      type="dropdownItem"
+      onClick={() => chooseRoomType(roomType)}
+    />
+  ));
+
+  const content = heightList ? (
+    <Scrollbar
+      paddingInlineEnd="0"
+      paddingAfterLastItem="0"
+      style={{ height: heightList, width: "100%" }}
+    >
+      {roomTypes}
+    </Scrollbar>
+  ) : (
+    roomTypes
+  );
+
   return (
-    <StyledDropdownDesktop className="dropdown-content-wrapper" isOpen={open}>
-      <div className="dropdown-content">
-        {RoomsTypeValues.map((roomType) => (
-          <RoomType
-            id={roomType}
-            t={t}
-            key={roomType}
-            roomType={roomType}
-            type="dropdownItem"
-            onClick={() => chooseRoomType(roomType)}
-          />
-        ))}
+    <StyledDropdownDesktop
+      className="dropdown-content-wrapper"
+      isOpen={open}
+      heightReady={typeof heightList === "number"}
+    >
+      <div className="dropdown-content" ref={dropdownRef}>
+        {content}
       </div>
     </StyledDropdownDesktop>
   );

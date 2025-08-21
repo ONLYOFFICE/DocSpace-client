@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,19 +27,15 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import { useDrag } from "@use-gesture/react";
-import { useSpring, config } from "@react-spring/web";
+import { useSpring, config, animated } from "@react-spring/web";
 
 import ViewTilesIcon from "PUBLIC_DIR/images/view-tiles.react.svg";
 import ViewRowsIcon from "PUBLIC_DIR/images/view-rows.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/icons/12/cross.react.svg";
+import classNames from "classnames";
 import { Bookmarks } from "../Bookmarks";
 
-import {
-  MobileDrawerContainer,
-  MobileDrawerHeader,
-  MobileDrawerWrapper,
-} from "./MobileDrawer.styled";
-import { Thumbnails } from "../SideBar/Sidebar.styled";
+import styles from "../../PDFViewer.module.scss";
 
 import MobileDrawerProps from "./MobileDrawer.props";
 
@@ -88,7 +84,7 @@ export const MobileDrawer = ({
   );
 
   const handleResize = useCallback(() => {
-    const innerHeight = window.innerHeight;
+    const { innerHeight } = window;
 
     setheight(innerHeight);
     if (isOpenMobileDrawer) {
@@ -179,29 +175,47 @@ export const MobileDrawer = ({
   const visibility = isOpenMobileDrawer ? "visible" : "hidden";
 
   return (
-    <MobileDrawerContainer ref={containerRef}>
-      <MobileDrawerWrapper
+    <section
+      ref={containerRef}
+      className={styles.container}
+      aria-label="Mobile drawer"
+      data-testid="mobile-drawer"
+    >
+      {/* @ts-expect-error - React Spring types issue with React 19 */}
+      <animated.div
+        className={styles.wrapper}
         style={{
           height,
           visibility,
           ...style,
         }}
+        data-testid="mobile-drawer-content"
       >
-        <MobileDrawerHeader {...bind()}>
-          {bookmarks.length > 0 &&
-            React.createElement(toggle ? ViewTilesIcon : ViewRowsIcon, {
-              onClick: handleToggle,
-            })}
+        <div className={styles.header} {...bind()}>
+          {bookmarks.length > 0
+            ? React.createElement(toggle ? ViewTilesIcon : ViewRowsIcon, {
+                onClick: handleToggle,
+              })
+            : null}
           <CrossIcon
             className="mobile-drawer_cross-icon"
             onClick={handleClose}
+            aria-label="Close drawer"
+            data-testid="close-drawer-button"
           />
-        </MobileDrawerHeader>
-        <div style={{ height: height * 0.8 - 64 }}>
-          {toggle && <Bookmarks bookmarks={bookmarks} navigate={navigate} />}
-          <Thumbnails id="viewer-thumbnail" visible={!toggle} />
         </div>
-      </MobileDrawerWrapper>
-    </MobileDrawerContainer>
+        <div style={{ height: height * 0.8 - 64 }} data-testid="drawer-content">
+          {toggle ? (
+            <Bookmarks bookmarks={bookmarks} navigate={navigate} />
+          ) : null}
+          <section
+            id="viewer-thumbnail"
+            className={classNames(styles.thumbnails, {
+              [styles.visible]: !toggle,
+            })}
+          />
+        </div>
+      </animated.div>
+    </section>
   );
 };

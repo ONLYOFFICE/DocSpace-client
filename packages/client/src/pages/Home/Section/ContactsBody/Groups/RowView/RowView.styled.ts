@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,11 +27,13 @@
 import styled, { css } from "styled-components";
 import { isMobile, isTablet } from "react-device-detect";
 
-import { RowContainer } from "@docspace/shared/components/row-container";
-import { Row } from "@docspace/shared/components/row";
+import {
+  RowContainer,
+  Row,
+  RowContent,
+} from "@docspace/shared/components/rows";
 import { globalColors } from "@docspace/shared/themes";
 import { tablet } from "@docspace/shared/utils/device";
-import { RowContent } from "@docspace/shared/components/row-content";
 
 const marginStyles = css`
   margin-inline: -24px;
@@ -121,80 +123,84 @@ const checkedStyle = css`
 `;
 
 export const GroupsRow = styled(Row)<{ checked?: boolean; isActive?: boolean }>`
-  ${({ checked, isActive }) => (checked || isActive) && checkedStyle};
+  &.group-row {
+    ${({ checked, isActive }) => (checked || isActive) && checkedStyle};
 
-  ${!isMobile &&
-  css`
-    &:hover {
-      ${checkedStyle}
+    ${!isMobile &&
+    css`
+      &:hover {
+        ${checkedStyle}
+      }
+    `}
+
+    .row_content {
+      height: 58px;
+      justify-content: center;
     }
-  `}
 
-  .row_content {
-    height: 58px;
-    justify-content: center;
-  }
+    height: 59px;
 
-  height: 59px;
+    border-top: ${(props) =>
+      `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+    border-bottom: ${(props) =>
+      `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
 
-  border-top: ${(props) =>
-    `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
-  border-bottom: ${(props) =>
-    `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+    box-sizing: border-box;
+    margin-top: -1px;
 
-  box-sizing: border-box;
-  margin-top: -1px;
+    position: unset;
 
-  position: unset;
-
-  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
-  .styled-element {
-    height: 32px;
-    margin-inline-end: 12px;
-  }
-  .group-row-element {
-    display: flex;
-    width: 32px;
-    height: 32px;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    font-weight: 700;
-    line-height: 16px;
-    background: ${(props) =>
-      props.theme.filesSection.tableView.row.backgroundGroup};
-    color: ${(props) => props.theme.filesSection.tableView.row.color};
-    border-radius: 50%;
+    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
+    .styled-element {
+      height: 32px;
+      margin-inline-end: 12px;
+    }
+    .group-row-element {
+      display: flex;
+      width: 32px;
+      height: 32px;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 16px;
+      background: ${(props) =>
+        props.theme.filesSection.tableView.row.backgroundGroup};
+      color: ${(props) => props.theme.filesSection.tableView.row.color};
+      border-radius: 50%;
+    }
   }
 `;
 
 export const GroupsRowContent = styled(RowContent)`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 2px;
+  &.group-row-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
 
-  ${isTablet &&
-  css`
-    .row-main-container-wrapper {
-      align-self: start;
-    }
-  `}
+    ${isTablet &&
+    css`
+      .row-main-container-wrapper {
+        align-self: start;
+      }
+    `}
 
-  @media ${tablet} {
-    .row-main-container-wrapper {
-      width: 100%;
-      display: flex;
-      -webkit-box-pack: justify;
-      justify-content: space-between;
-      max-width: inherit;
-      margin: 0;
-    }
+    @media ${tablet} {
+      .row-main-container-wrapper {
+        width: 100%;
+        display: flex;
+        -webkit-box-pack: justify;
+        justify-content: space-between;
+        max-width: inherit;
+        margin: 0;
+      }
 
-    .badges {
-      flex-direction: row-reverse;
-      margin-inline-end: 12px;
-      margin-top: -1px;
+      .badges {
+        flex-direction: row-reverse;
+        margin-inline-end: 12px;
+        margin-top: -1px;
+      }
     }
   }
 `;

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,18 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useContext } from "react";
+import React, { use } from "react";
 
+import { useTranslation } from "react-i18next";
 import { FolderType } from "../../../enums";
 import { getFoldersTree } from "../../../api/files";
 import { TFolder } from "../../../api/files/types";
 import { getCatalogIconUrlByType } from "../../../utils/catalogIconHelper";
 import { TSelectorItem } from "../../../components/selector";
+import { getDefaultBreadCrumb } from "../../utils";
+import { LoadersContext } from "../../utils/contexts/Loaders";
 
 import { UseRootHelperProps } from "../FilesSelector.types";
-import { getDefaultBreadCrumb } from "../FilesSelector.utils";
-import { LoadersContext } from "../contexts/Loaders";
-import { useTranslation } from "react-i18next";
 
 const useRootHelper = ({
   setBreadCrumbs,
@@ -51,7 +51,7 @@ const useRootHelper = ({
   const { t } = useTranslation(["Common"]);
 
   const { setIsBreadCrumbsLoading, setIsNextPageLoading, setIsFirstLoad } =
-    useContext(LoadersContext);
+    use(LoadersContext);
 
   const [isRoot, setIsRoot] = React.useState<boolean>(false);
   const requestRunning = React.useRef(false);

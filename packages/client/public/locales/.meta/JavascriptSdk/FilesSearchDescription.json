@@ -1,0 +1,324 @@
+{
+  "key_path": "FilesSearchDescription",
+  "content": "File search within the opened folder/room.",
+  "content_en_sha1_hash": "95f0c2077da6a6debdffb60f637b128300446cff",
+  "created_at": "2025-05-19T21:30:54.506Z",
+  "updated_at": "2025-08-04T07:30:01.390Z",
+  "comment": {
+    "text": "File search within the opened folder or room is used as a tooltip description to help users understand the purpose of the file selector tool in the PortalSettings page.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:38.271Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
+      "line_number": 409,
+      "context": "offsetRight={4}\n size={12}\n tooltipContent={\n <TooltipContent\n title={t(\"Common:Search\")}\n description={t(\"FilesSearchDescription\")}\n img={theme.isBase ? SearchUrl : SearchUrlDark}\n />\n }\n dataTestId=\"search_help_button\"\n />",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'البحث عن الملفات داخل المجلد/الغرفة المفتوحة' is a literal translation and sounds somewhat awkward in Arabic. A more natural phrasing would emphasize the search *within* the opened folder/room.",
+          "suggestion": "البحث عن الملفات في المجلد/الغرفة المفتوحة."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Açılmış qovluqda/otaqda fayllar axtarılır\" is a literal translation and doesn't convey the meaning of 'File search within the opened folder/room' as naturally in Azerbaijani. It translates to 'Files are being searched in the opened folder/room.' which is passive.",
+          "suggestion": "Consider a more active phrasing like \"Qovluq/otaqda fayl axtarışı\" or \"Qovluq/otaqda fayl axtarışı mümkündür\" which translates to 'File search in the folder/room' or 'File search is possible in the folder/room'."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'pokojích' (rooms) feels slightly awkward in this context. 'Prostory' (spaces) or removing the pluralization entirely might be a better fit, depending on the intended meaning of 'room'. 'Složka/prostor' or 'Složka/místnost' could be considered.",
+          "suggestion": "Vyhledávání souborů v otevřené složce/prostorech."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Dateisuche' is missing an umlaut. It should be 'DateiSuche'.",
+          "suggestion": "DateiSuche"
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Rechercher le fichier dans le dossier/la salle ouvert(e)' is too literal and doesn't quite capture the meaning of 'File search within the opened folder/room'. It implies searching *the* file within the opened location, rather than the ability to search files within it.",
+          "suggestion": "Recherche de fichiers dans le dossier/la salle ouvert(e)."
+        },
+        {
+          "type": "grammar",
+          "description": "The agreement of 'ouvert(e)' should be adjusted based on the gender of 'dossier' or 'salle'. If both are present, consider alternatives to maintain clarity.",
+          "suggestion": "Either 'ouvert' (if mostly referring to folders) or 'ouverte' (if mostly referring to rooms). A more elegant solution would be 'ouvert(s)' or 'ouverte(s)' to cover both cases, or restructuring the sentence."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Armenian translation includes a colon at the end of the sentence. This isn't standard for descriptions like this and may appear abrupt.",
+          "suggestion": "Remove the colon at the end of the sentence: Ֆայլի որոնում բացված թղթապանակում/սենյակում"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Ricerca di file all'interno della cartella/stanza aperta' sounds a bit clunky. 'Ricerca file nella cartella/stanza aperta' is more natural Italian.",
+          "suggestion": "Ricerca file nella cartella/stanza aperta"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ຄົ້ນຫາໄຟລ໌ພາຍໃນໂຟນເດີ / ຫ້ອງທີ່ເປີດ\" is overly literal and doesn't flow naturally in Lao.  'ພາຍໃນ' (within) is redundant and 'ທີ່ເປີດ' (that is opened) isn't necessary.",
+          "suggestion": "ຄົ້ນຫາໄຟລ໌ໃນໂຟນເດີ / ຫ້ອງທີ່ເປີດ"
+        },
+        {
+          "type": "formatting",
+          "description": "The slash '/' could potentially be replaced with 'ຫຼື' (or) for better readability in Lao, especially in user interfaces. However, maintaining the slash is also acceptable.",
+          "suggestion": "ຄົ້ນຫາໄຟລ໌ໃນໂຟນເດີຫຼືຫ້ອງທີ່ເປີດ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Pesquisa de arquivos na pasta/sala aberta\" could be improved for naturalness. 'Aberta' (open) implies a state rather than a context of a specific folder/room. A more natural translation would emphasize 'within'.",
+          "suggestion": "Pesquisa de arquivos dentro da pasta/sala aberta."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Pesquisa de arquivos na pasta/sala aberta' is slightly awkward. While technically correct, 'aberta' (open) doesn't quite convey the implication of an actively used or accessible folder/room. A more natural phrasing would be 'Pesquisa de arquivos na pasta/sala selecionada' (search for files in the selected folder/room) or 'Pesquisa de arquivos na pasta/sala atual' (search for files in the current folder/room).",
+          "suggestion": "Pesquisa de arquivos na pasta/sala selecionada."
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Căutarea fișierelor în folderul/sala deschisă' is not the most natural or accurate translation of 'File search within the opened folder/room'. It implies the search is happening *in* the opened folder/room, rather than a search *within* it.",
+          "suggestion": "Căutarea de fișiere în folderul/camera deschisă."
+        },
+        {
+          "type": "formatting",
+          "description": "While not incorrect, using 'camera' instead of 'folderul/sala' maintains consistency with commonly used terminology and improves readability.",
+          "suggestion": "Use 'camera' consistently."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'කාමරයේ' (kamaraneye) might be more accurately translated as 'මමරය' (mamara) depending on the specific context of 'room'. 'කාමරයේ' implies a room *of* something, while 'මමරය' is a more generic term for 'room'.",
+          "suggestion": "විවෘත කරන ලද බහාලුමේ/මමරයේ ගොනු සෙවීම."
+        },
+        {
+          "type": "grammar",
+          "description": "While technically correct, the phrasing 'විවෘත කරන ලද බහාලුමේ/මමරයේ ගොනු සෙවීම' can be slightly improved for smoother reading in Sinhala. Using a more natural sentence structure would enhance readability.",
+          "suggestion": "විවෘත කරන ලද බහාලුමේ හෝ කාමරයේ ගොනු සොයාගන්න."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Iskanje datotek v odprti mapi/sobi' is a literal translation but lacks the nuance of 'within'. It's not entirely inaccurate, but could be improved.",
+          "suggestion": "Iskanje datotek znotraj odprte mape/sobe."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'фолдера' is a genitive case, which is grammatically correct in this context, but could be simplified for better readability. 'folder' could be replaced with the nominative case 'фолдер'.",
+          "suggestion": "Претрага датотеке унутар отвореног фолдера/собе."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'folder' is accurately translated as 'folder'. However, 'room' is translated as 'sobe', which can be less specific. Depending on the application's context, 'prostorija' might be a more accurate translation for 'room' in this setting (a virtual room/space).",
+          "suggestion": "Consider 'Pretraga datoteke unutar otvorenog foldera/prostorije.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'opened folder/room' doesn't perfectly translate to 'thư mục/phòng đã mở'. While understandable, a more natural phrasing would convey the immediacy of the search being within the currently active folder/room.",
+          "suggestion": "Tìm kiếm tập tin trong thư mục/phòng hiện tại."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

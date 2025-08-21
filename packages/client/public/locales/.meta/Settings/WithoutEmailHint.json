@@ -1,0 +1,308 @@
+{
+  "key_path": "WithoutEmailHint",
+  "content": "You don’t have users without emails. Please proceed to the next step.",
+  "content_en_sha1_hash": "12a3fe47045d798f04cd05aa9c40ce724578493c",
+  "created_at": "2025-05-19T21:30:53.237Z",
+  "updated_at": "2025-08-11T09:02:43.944Z",
+  "comment": {
+    "text": "This translation key is used to display a hint message when users attempt to add emails without having any users. The purpose of this message is to inform users that they need to have at least one user before proceeding. It appears on the \"Add Emails Step\" page in the data import component.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:05.752Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/index.tsx",
+      "line_number": 169,
+      "context": ") : null}\n </>\n ) : (\n <>\n <Text fontWeight={600} lineHeight=\"20px\" className=\"mb-17\">\n {t(\"Settings:WithoutEmailHint\")}\n </Text>\n {Buttons}\n </>\n )}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'E-poçtu olmayan istifadəçiləriniz yoxdur' is a literal translation but sounds slightly unnatural in Azerbaijani. A more natural phrasing would emphasize the lack of users.",
+          "suggestion": "İstifadəçilərinizdən heç biri e-poçt ünvanı olmayanlar yoxdur. Növbəti addıma keçin."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Il n'y a aucun utilisateur sans l'adresse e-mail' is a bit too literal. A more natural and idiomatic translation would be 'Vous n'avez pas d'utilisateurs sans adresse e-mail'.",
+          "suggestion": "Vous n'avez pas d'utilisateurs sans adresse e-mail."
+        },
+        {
+          "type": "spelling",
+          "description": "While technically correct, 'adresse e-mail' is often shortened to 'email' in French, especially in technical contexts.",
+          "suggestion": "Vous n'avez pas d'utilisateurs sans email."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'էլփոստի' (elposti) is a slightly outdated or less common way to say 'email'. It's technically correct but 'էլեկտրոնային փոստի' (elektronayini posti) or simply 'էլեկտրոնային փոստ' (elektronayini post) would be more natural and widely understood in modern Armenian.",
+          "suggestion": "Consider using 'էլեկտրոնային փոստի' or 'էլեկտրոնային փոստ' instead of 'էլփոստի'."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Jums nav lietotāju bez e-pasta ziņojumiem' is a literal translation that doesn't quite convey the intended meaning of 'You don’t have users without emails.' A more natural translation would be something like 'Jums nav lietotāju bez e-pasta adresēm' or 'Nav lietotāju, kuriem nav e-pasta adrese'.",
+          "suggestion": "Jums nav lietotāju bez e-pasta adresēm"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ziņojumiem' (messages) is used where 'adresēm' (addresses) is required in the context of email addresses.",
+          "suggestion": "Use 'adresēm' instead of 'ziņojumiem'."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Polish translation uses a direct translation of 'You don’t have' which can sound awkward. A more natural phrasing would be 'Brak użytkowników...' or 'Nie znaleziono użytkowników...'",
+          "suggestion": "Brak użytkowników bez adresu e-mail. Przejdź do kolejnego kroku."
+        },
+        {
+          "type": "grammar",
+          "description": "The use of 'adresu e-mail' is grammatically correct, but 'e-mail' is often replaced with a Polish equivalent like 'poczty elektronicznej' or simply 'e-mail' is left as is. The choice depends on the desired tone.",
+          "suggestion": "Brak użytkowników bez e-mail. Przejdź do kolejnego kroku."
+        },
+        {
+          "type": "formatting",
+          "description": "While the period at the end of the sentence is grammatically correct, Polish often prefers a slightly more concise style. The period is optional here.",
+          "suggestion": "Brak użytkowników bez e-mail. Przejdź do kolejnego kroku"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ඔබට වි-තැපෑලක් රහිත පරිශ්‍රීලකයින් නැත' is not a natural or accurate translation of 'You don’t have users without emails.' A more natural translation would emphasize the lack of users *with* email addresses.",
+          "suggestion": "ඔබට තැපෑලක් නොමැති පරිශ්‍රීලකයින් කිසිවෙකු නොමැත. (Obata thapeelak nemathi pariseelakin kisivakunu nemat.) or ඔබට තැපැල් ලිපිනයක් නොමැති පරිශ්‍රීලකයින් කීපෙක්වත් නැත. (Obata thapeel lipinayak nemathi pariseelakin kipewak netha.)"
+        },
+        {
+          "type": "grammar",
+          "description": "The word order in 'ඔබට වි-තැපෑලක් රහිත පරිශ්‍රීලකයින් නැත' is a bit awkward in Sinhala. The phrasing sounds unnatural.",
+          "suggestion": "Reordering the sentence to flow more naturally is recommended (see suggestion in 'incorrect_translation')."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation \"Nemáte používateľov bez zadaného e-mailu\" is a bit too literal and slightly awkward. \"Zadaného\" implies a deliberate input, while the English suggests a lack of email rather than a failure to enter one.  A more natural translation would focus on the absence of an email address.",
+          "suggestion": "Nemáte používateľov s neúplnými e-mailmi. Pokračujte na ďalší krok."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"емаил-ова\" is an awkward transliteration of \"emails\" and doesn't sound natural in Serbian. A more appropriate translation would be 'e-mail adresa' or simply 'email adrese'.",
+          "suggestion": "Немате кориснике без емаил адреса."
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct, the sentence sounds slightly stiff.  A more conversational and natural flow is desirable.",
+          "suggestion": "Немојте кориснике без емаил адреса. Молимо пређите на следећи корак."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Vietnamese translation 'Bạn không có người dùng không có email' is a literal translation and sounds unnatural. It's redundant to repeat 'không có' (don't have).",
+          "suggestion": "Bạn không có người dùng chưa có email. Vui lòng chuyển sang bước tiếp theo."
+        },
+        {
+          "type": "grammar",
+          "description": "While technically correct, the sentence 'Bạn không có người dùng chưa có email' could be slightly improved for flow.",
+          "suggestion": "Không có người dùng nào chưa có email. Vui lòng chuyển sang bước tiếp theo."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '的用户全部拥有电子邮件' doesn't accurately reflect the English meaning \"You don’t have users without emails.\" It implies all users *do* have emails, which is the opposite of what the English sentence states.",
+          "suggestion": "请添加用户，或继续下一步。"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase '全部拥有' (all have) is too formal and somewhat unnatural in this context. While grammatically correct, it creates an awkward tone.",
+          "suggestion": "Use a simpler phrasing like '所有' (all) or omit the explicit 'have' altogether."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

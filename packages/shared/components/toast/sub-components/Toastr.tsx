@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,30 +27,38 @@
 "use client";
 
 import React from "react";
-import { Id, toast } from "react-toastify";
-import styled from "styled-components";
+import { Id, toast, ToastPosition } from "react-toastify";
+import classNames from "classnames";
 
 import CheckToastReactSvg from "PUBLIC_DIR/images/check.toast.react.svg";
 import DangerToastReactSvg from "PUBLIC_DIR/images/danger.toast.react.svg";
 import InfoToastReactSvg from "PUBLIC_DIR/images/info.toast.react.svg";
 import CrossIconReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 
-import commonIconsStyles, {
-  IconSizeType,
-} from "../../../utils/common-icons-style";
+import { IconSizeType } from "../../../utils/common-icons-style";
 import { getCookie } from "../../../utils/cookie";
 
 import { Text } from "../../text";
-import { Box } from "../../box";
+import { IconButton } from "../../icon-button";
 
-import {
-  StyledCloseWrapper,
-  StyledDiv,
-  IconWrapper,
-  StyledIconButton,
-} from "../Toast.styled";
 import { ToastType } from "../Toast.enums";
 import { TData } from "../Toast.type";
+import styles from "../Toast.module.scss";
+
+const DEFAULT_TIMEOUT = 5000;
+const MIN_TIMEOUT_THRESHOLD = 750;
+
+interface NotifyConfig {
+  type: ToastType;
+  defaultTitleKey: "Done" | "Warning" | "Alert" | "Info";
+}
+
+const TOAST_CONFIGS: Record<ToastType, NotifyConfig> = {
+  [ToastType.success]: { type: ToastType.success, defaultTitleKey: "Done" }, // t("Common:Done")
+  [ToastType.error]: { type: ToastType.error, defaultTitleKey: "Warning" }, // t("Common:Warning")
+  [ToastType.warning]: { type: ToastType.warning, defaultTitleKey: "Alert" }, // t("Common:Alert")
+  [ToastType.info]: { type: ToastType.info, defaultTitleKey: "Info" }, // t("Common:Info")
+};
 
 const getTitle = (type: "Done" | "Warning" | "Alert" | "Info") => {
   const cookieLang = getCookie("asc_language");
@@ -73,200 +81,160 @@ const getTitle = (type: "Done" | "Warning" | "Alert" | "Info") => {
   return title;
 };
 
-const StyledCheckToastIcon = styled(CheckToastReactSvg)`
-  ${commonIconsStyles}
-`;
-const StyledDangerToastIcon = styled(DangerToastReactSvg)`
-  ${commonIconsStyles}
-`;
-const StyledInfoToastIcon = styled(InfoToastReactSvg)`
-  ${commonIconsStyles}
-`;
+const Icon = ({ type, size }: { type: ToastType; size: IconSizeType }) => {
+  const iconMap = {
+    [ToastType.success]: (
+      <CheckToastReactSvg
+        data-size={size}
+        className="toastr_icon toastr_success"
+      />
+    ),
+    [ToastType.error]: (
+      <DangerToastReactSvg
+        data-size={size}
+        className={classNames(styles.toastrIcon, "toastr_icon toastr_error")}
+      />
+    ),
+    [ToastType.warning]: (
+      <DangerToastReactSvg
+        data-size={size}
+        className={classNames(styles.toastrIcon, "toastr_icon toastr_warning")}
+      />
+    ),
+    [ToastType.info]: (
+      <InfoToastReactSvg
+        data-size={size}
+        className={classNames(styles.toastrIcon, "toastr_icon toastr_info")}
+      />
+    ),
+  };
 
-// eslint-disable-next-line react/prop-types
-const Icon = ({ type, size }: { type: ToastType; size: IconSizeType }) =>
-  type === ToastType.success ? (
-    <StyledCheckToastIcon size={size} className="toastr_icon toastr_success" />
-  ) : type === ToastType.error ? (
-    <StyledDangerToastIcon size={size} className="toastr_icon toastr_error" />
-  ) : type === ToastType.warning ? (
-    <StyledDangerToastIcon size={size} className="toastr_icon toastr_warning" />
-  ) : (
-    <StyledInfoToastIcon size={size} className="toastr_icon toastr_info" />
-  );
+  return iconMap[type] || iconMap[ToastType.info];
+};
 
-const CloseButton = ({ closeToast }: { closeToast?: () => {} }) => (
-  <StyledCloseWrapper>
-    <StyledIconButton
-      className="closeButton"
-      onClick={closeToast}
-      iconName={CrossIconReactSvgUrl}
-      size={12}
-    />
-  </StyledCloseWrapper>
+const CloseButton = ({ closeToast }: { closeToast?: () => void }) => (
+  <IconButton
+    className={`${styles.iconButton} closeButton`}
+    onClick={closeToast}
+    iconName={CrossIconReactSvgUrl}
+    size={12}
+  />
 );
+
+const createToastContent = (
+  type: ToastType,
+  data: string | React.ReactNode,
+  title: string,
+) => (
+  <div className={styles.toastContent} data-type={type}>
+    <div className="icon-wrapper">
+      <Icon size={IconSizeType.medium} type={type} />
+    </div>
+    <div className="toast-text-container">
+      {title ? <Text className="toast-title">{title}</Text> : null}
+      {typeof data === "string"
+        ? data && <Text className="toast-text">{data}</Text>
+        : data}
+    </div>
+  </div>
+);
+
+const getToastOptions = (
+  type: ToastType,
+  data: string | React.ReactNode,
+  timeout: number,
+  withCross: boolean,
+  centerPosition: boolean,
+) => ({
+  data,
+  type,
+  closeOnClick: !withCross,
+  closeButton: withCross && <CloseButton />,
+  autoClose: (timeout === 0
+    ? false
+    : timeout < MIN_TIMEOUT_THRESHOLD
+      ? DEFAULT_TIMEOUT
+      : timeout || 5000) as number | false,
+  position: centerPosition ? ("top-center" as ToastPosition) : undefined,
+  containerId: "toast-container",
+});
 
 const notify = (
   type: ToastType,
   data: string | React.ReactNode,
   title: string,
-  timeout = 5000,
+  timeout = DEFAULT_TIMEOUT,
   withCross = false,
   centerPosition = false,
 ) => {
-  return toast(
-    <Box displayProp="flex" alignItems="center">
-      <IconWrapper>
-        <Icon size={IconSizeType.medium} type={type} />
-      </IconWrapper>
-
-      <StyledDiv type={type}>
-        {title && <Text className="toast-title">{title}</Text>}
-        {typeof data === "string"
-          ? data && <Text className="toast-text">{data}</Text>
-          : data}
-      </StyledDiv>
-    </Box>,
-    {
-      data,
-      type,
-      closeOnClick: !withCross,
-      closeButton: withCross && <CloseButton />,
-      autoClose: timeout === 0 ? false : timeout < 750 ? 5000 : timeout || 5000,
-      position: centerPosition ? "top-center" : undefined,
-      containerId: "toast-container",
-    },
-  );
-};
-
-function success(
-  data: string | React.ReactNode,
-  title?: string,
-  timeout?: number,
-  withCross?: boolean,
-  centerPosition?: boolean,
-) {
-  return notify(
-    ToastType.success,
+  const content = createToastContent(type, data, title);
+  const options = getToastOptions(
+    type,
     data,
-    title || getTitle("Done") || "",
-    timeout || 5000,
+    timeout,
     withCross,
     centerPosition,
   );
-}
+  return toast(content, options);
+};
 
-// function fatal(
-//   data: string | React.ReactNode | { statusText?: string; message?: string },
-//   title: string,
-//   timeout = 5000,
-//   withCross = false,
-//   centerPosition = false,
-// ) {
-//   const dataType = typeof data;
-
-//   const message =
-//     dataType === "string"
-//       ? data
-//       : dataType === "object" && "statusText" in data && data?.statusText
-//         ? data.statusText
-//         : dataType === "object" && "message" in data && data.message
-//           ? data.message
-//           : "";
-
-//   return notify(
-//     ToastType.error,
-//     message,
-//     title || getTitle("Error") || "",
-//     timeout || 5000,
-//     withCross,
-//     centerPosition,
-//   );
-// }
-
-function error(
+const processErrorData = (
   data: string | TData | React.ReactNode,
-  title?: string,
-  timeout?: number,
-  withCross?: boolean,
-  centerPosition?: boolean,
-) {
-  let message: string | React.ReactNode | undefined = "";
+): string | React.ReactNode => {
+  if (
+    typeof data === "string" ||
+    React.isValidElement(data) ||
+    Array.isArray(data)
+  ) {
+    return data;
+  }
 
-  if (typeof data === "string") {
-    message = data;
-  } else if (
+  if (
     data &&
     typeof data === "object" &&
     ("response" in data || "statusText" in data || "message" in data)
   ) {
-    message =
-      data?.response?.data?.error?.message || data?.statusText || data?.message;
-  } else if (React.isValidElement(data)) {
-    message = data;
+    return (
+      data?.response?.data?.error?.message ||
+      data?.statusText ||
+      data?.message ||
+      ""
+    );
   }
 
-  console.log(message);
+  return "";
+};
 
-  return notify(
-    ToastType.error,
-    message,
-    title || getTitle("Warning") || "",
-    timeout || 5000,
-    withCross,
-    centerPosition,
-  );
-}
+const createToastMethod =
+  (type: ToastType) =>
+  (
+    data: string | TData | React.ReactNode,
+    title?: string,
+    timeout?: number,
+    withCross?: boolean,
+    centerPosition?: boolean,
+  ) => {
+    const config = TOAST_CONFIGS[type];
+    const finalTitle = title || getTitle(config.defaultTitleKey) || "";
+    const message = processErrorData(data);
 
-function warning(
-  data: string | React.ReactNode,
-  title?: string,
-  timeout?: number,
-  withCross?: boolean,
-  centerPosition?: boolean,
-) {
-  return notify(
-    ToastType.warning,
-    data,
-    title || getTitle("Alert") || "",
-    timeout || 5000,
-    withCross,
-    centerPosition,
-  );
-}
-
-function info(
-  data: string | React.ReactNode,
-  title?: string,
-  timeout?: number,
-  withCross?: boolean,
-  centerPosition?: boolean,
-) {
-  return notify(
-    ToastType.info,
-    data,
-    title || getTitle("Info") || "",
-    timeout || 5000,
-    withCross,
-    centerPosition,
-  );
-}
-
-function clear() {
-  return toast.dismiss();
-}
-
-function isActive(id: Id) {
-  return toast.isActive(id);
-}
+    return notify(
+      type,
+      message,
+      finalTitle,
+      timeout ?? DEFAULT_TIMEOUT,
+      withCross,
+      centerPosition,
+    );
+  };
 
 const toastr = {
-  clear,
-  error,
-  info,
-  success,
-  warning,
-  isActive,
-};
+  success: createToastMethod(ToastType.success),
+  error: createToastMethod(ToastType.error),
+  warning: createToastMethod(ToastType.warning),
+  info: createToastMethod(ToastType.info),
+  clear: () => toast.dismiss(),
+  isActive: (id: Id) => toast.isActive(id),
+} as const;
 
 export { toastr };

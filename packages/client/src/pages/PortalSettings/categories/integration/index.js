@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,13 +26,12 @@
 
 import { useEffect } from "react";
 import { Tabs } from "@docspace/shared/components/tabs";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 
-import { Box } from "@docspace/shared/components/box";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 
 import SSO from "./SingleSignOn";
@@ -97,9 +96,9 @@ const IntegrationWrapper = (props) => {
 
   if (enablePlugins) {
     const pluginLabel = (
-      <Box displayProp="flex" style={{ gap: "8px" }}>
+      <div style={{ boxSizing: "border-box", display: "flex", gap: "8px" }}>
         {t("Common:Plugins")}
-      </Box>
+      </div>
     );
 
     data.splice(2, 0, {

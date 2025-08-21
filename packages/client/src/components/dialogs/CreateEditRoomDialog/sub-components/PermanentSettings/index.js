@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,7 @@
 import styled from "styled-components";
 import { Trans } from "react-i18next";
 
-import { connectedCloudsTypeTitleTranslation as getProviderTypeTitle } from "@docspace/client/src/helpers/filesUtils";
+import { connectedCloudsTypeTitleTranslation as getProviderTypeTitle } from "SRC_DIR/helpers/filesUtils";
 
 import PermanentSetting from "./PermanentSetting";
 
@@ -45,7 +45,7 @@ const PermanentSettings = ({ t, isThirdparty, storageLocation, isPrivate }) => {
 
   return (
     <StyledPermanentSettings displayNone={!(isPrivate || isThirdparty)}>
-      {isThirdparty && (
+      {isThirdparty ? (
         <PermanentSetting
           type="storageLocation"
           isFull={!isPrivate}
@@ -63,7 +63,7 @@ const PermanentSettings = ({ t, isThirdparty, storageLocation, isPrivate }) => {
             </Trans>
           }
         />
-      )}
+      ) : null}
       {/* {isPrivate && (
         <PermanentSetting
           type="privacy"

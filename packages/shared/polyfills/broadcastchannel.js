@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,17 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable no-restricted-globals */
 /* eslint-disable prefer-rest-params */
 /* eslint-disable prefer-spread */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/no-this-alias */
-(function (global) {
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-param-reassign */
+((globalScope) => {
   const channels = [];
+  const global = globalScope;
 
-  function BroadcastChannel(channel) {
+  function BroadcastChannel(channelParam) {
     const $this = this;
-    channel = String(channel);
+    const channel = String(channelParam);
 
     const id = `$BroadcastChannel$${channel}$`;
 
@@ -48,8 +50,8 @@
     this._mc.port1.start();
     this._mc.port2.start();
 
-    global.addEventListener("storage", function (e) {
-      if (e.storageArea !== global.localStorage) return;
+    globalScope.addEventListener("storage", (e) => {
+      if (e.storageArea !== globalScope.localStorage) return;
       if (e.newValue == null || e.newValue === "") return;
       if (e.key.substring(0, id.length) !== id) return;
       const data = JSON.parse(e.newValue);
@@ -73,13 +75,13 @@
 
       // Broadcast to other contexts via storage events...
       const key = `${this._id + String(Date.now())}$${String(Math.random())}`;
-      global.localStorage.setItem(key, value);
-      setTimeout(function () {
-        global.localStorage.removeItem(key);
+      globalScope.localStorage.setItem(key, value);
+      setTimeout(() => {
+        globalScope.localStorage.removeItem(key);
       }, 500);
 
       // Broadcast to current context via ports
-      channels[this._id].forEach(function (bc) {
+      channels[this._id].forEach((bc) => {
         if (bc === $this) return;
         bc._mc.port2.postMessage(JSON.parse(value));
       });

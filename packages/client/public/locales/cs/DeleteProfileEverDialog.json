@@ -6,17 +6,17 @@
   "DeleteGroupUsersSuccessMessage": "Uživatelé byli úspěšně odstraněni.",
   "DeleteGuest": "Odstranit hosta",
   "DeleteGuests": "Odstranění hostů",
-  "DeleteMyDocumentsUser": "Všechny osobní soubory a složky v sekci Dokumenty tohoto uživatele budou trvale odstraněny.",
-  "DeletePersonalData": "Osobní údaje, všechny osobní soubory a složky v sekcích Dokumenty a Koš* vybraných uživatelů budou trvale odstraněny. Soubory a složky vybraných uživatelů uložené ve společných sekcích*, jako jsou například místnosti, zůstanou v {{productName}}.",
   "DeletePersonalDataApplicable": "*Platí pro vybrané uživatele, kteří mají takové soubory a složky.",
-  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Místnosti vytvořené tímto uživatelem a dokumenty uložené v těchto místnostech budou automaticky přeřazeny na správce provádějícího mazání: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Ruční přeřazení dat pro výběr jiného cílového uživatele pro přeřazení.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Místnosti vytvořené tímto uživatelem a dokumenty uložené v těchto místnostech budou automaticky přeřazeny na správce provádějícího mazání: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Ruční přeřazení dat pro výběr jiného cílového uživatele pro přeřazení.",
   "DeleteReqassignDescriptionGuest": "{{userCaption}} bude smazán ze všech místností, do kterých byl pozván. Dokumenty vytvořené tímto {{userCaption}} v místnostech budou automaticky znovu přiřazeny vlastníkům místností.",
   "DeleteUser": "Smazat uživatele",
-  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> bude smazán. Tuto akci nelze vrátit zpět.",
+  "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> bude smazán. Tuto akci nelze vrátit zpět.",
   "DeletingUsers": "Odstranění uživatelů",
+  "PersonalDataDeletionInfo": "Osobní údaje, všechny osobní soubory a složky v sekcích {{sectionNameFirst}} a {{sectionNameSecond}}* vybraných uživatelů budou trvale odstraněny. Soubory a složky vybraných uživatelů uložené ve společných sekcích*, jako jsou místnosti, zůstanou v {{productName}}.",
   "PleaseNote": "Vezměte prosím na vědomí:",
   "ReassignDataToAnotherUser": "Přeřazení dat jinému uživateli",
   "SuccessfullyDeleteGuestInfoMessage": "Host byl úspěšně odstraněn",
   "SuccessfullyDeleteUserInfoMessage": "Uživatel byl úspěšně odstraněn",
-  "ToBeAbleToReassignData": "Abyste mohli data znovu přiřadit, odstraňte vždy jednoho uživatele."
+  "ToBeAbleToReassignData": "Abyste mohli data znovu přiřadit, odstraňte vždy jednoho uživatele.",
+  "UserFilesRemovalScope": "Osobní údaje, všechny soubory a složky v sekcích {{sectionNameFirst}} a {{sectionNameSecond}} tohoto uživatele budou trvale odstraněny."
 }

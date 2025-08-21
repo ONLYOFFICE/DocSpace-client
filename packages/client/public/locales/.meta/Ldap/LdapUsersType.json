@@ -1,0 +1,255 @@
+{
+  "key_path": "LdapUsersType",
+  "content": "Users type",
+  "content_en_sha1_hash": "06f3eb37b8e067964f5ab9325f6a9fcdb96ba946",
+  "created_at": "2025-05-19T21:30:54.338Z",
+  "updated_at": "2025-08-11T18:11:59.238Z",
+  "comment": {
+    "text": "The LdapUsersType translation key is used to display the label \"Users type\" in UI elements, such as title sections and input fields, related to LDAP user management settings. It appears in various contexts, including a settings page for portal integration and single sign-on configurations.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:54.939Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
+      "line_number": 265,
+      "context": "</div>\n <div className=\"ldap_users-type-box\">\n <div className=\"ldap_users-type-box-title\">\n <div className=\"ldap_users-type-title\">\n <Text fontWeight={600} fontSize=\"15px\" lineHeight=\"16px\">\n {t(\"LdapUsersType\")}\n </Text>\n </div>\n <Text fontWeight={400} fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"LdapUserTypeTooltip\", {\n productName: t(\"Common:ProductName\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/UsersType.tsx",
+      "line_number": 67,
+      "context": "gap: \"4px\",\n margin: \"0 0 8px 0\",\n }}\n >\n <Text fontWeight={600} fontSize=\"15px\" lineHeight=\"16px\">\n {t(\"LdapUsersType\")}\n </Text>\n </div>\n <StyledInputWrapper>\n <Text fontWeight={400} fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"LdapUserTypeTooltip\", {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Вид потребители' while understandable, is a more literal translation of 'type of users' rather than the more natural 'потребителски тип' or 'тип на потребителите'. It doesn't quite capture the nuance of 'Users type' within the context of LDAP configuration.",
+          "suggestion": "потребителски тип"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Käyttäjät-tyyppi' is a literal translation but sounds awkward in Finnish. A more natural phrasing would be 'Käyttäjätyyppi'.",
+          "suggestion": "Käyttäjätyyppi"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Օգտատիրոջ տեսակ\" is a literal translation of \"Users type,\" it's not the most natural or idiomatic phrasing in Armenian. A more natural translation might be \"Մեկինյաց տեսակ\" (Menyanac tesak) or \"Օգտագործողների տեսակ\" (Otagorgnerik tesak).",
+          "suggestion": "Consider 'Մեկինյաց տեսակ' or 'Օգտագործողների տեսակ'."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ນຳໃຊ້ພິມ\" does not accurately convey the meaning of \"Users type.\" \"ນຳໃຊ້\" means 'use' or 'utilized' and 'ພິມ' means 'print'. This is not the correct translation for 'Users type'.",
+          "suggestion": "A more accurate translation would be something like \"ປະເພດຜູ້ໃຊ້\" (prajat phu sai) which means 'user type' or \"ລັກສະນະຜູ້ໃຊ້\" (laksana phu sai) which means 'user characteristics'."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Type gebruiker' while understandable, is not the most natural or precise translation of 'Users type'. A more accurate translation would be 'Gebruikers type'.",
+          "suggestion": "Gebruikers type"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'පරිශීලකයෝ ටයිප් කරයි' literally translates to 'Users type'. This doesn't accurately convey the meaning of 'Users type' as a descriptor or category.",
+          "suggestion": "A more appropriate translation would be 'භාවිතරයා වර්ගය' (pavitaraya vargaaya) or 'පරිශීලක වර්ග' (parishilaka varga) depending on the specific context. It's crucial to understand the intended meaning within the larger LDAP schema."
+        },
+        {
+          "type": "grammar",
+          "description": "While not strictly incorrect, 'පරිශීලකයෝ ටයිප් කරයි' uses a verb ('type') that isn't necessary for a descriptive label. The translation is too active.",
+          "suggestion": "Avoid using verbs. A noun phrase like 'භාවිතරයා වර්ගය' is more suitable for describing a user type."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

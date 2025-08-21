@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,12 +33,7 @@ import { injectDefaultTheme } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
 
 import { useTranslation } from "react-i18next";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
-import { LinkTarget, LinkType } from "@docspace/shared/components/link";
-
-const InfoWrapper = styled.div`
-  margin-bottom: 25px;
-`;
+import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 
 const InfoText = styled(Text).attrs(injectDefaultTheme)`
   max-width: 660px;
@@ -50,36 +45,40 @@ const InfoText = styled(Text).attrs(injectDefaultTheme)`
 
 const WebhookInfo = (props) => {
   const { t } = useTranslation(["Webhooks"]);
-  const { webhooksGuideUrl } = props;
+  const { webhooksGuideUrl, logoText } = props;
 
   return (
-    <InfoWrapper>
+    <div>
       <InfoText as="p">
         {t("WebhooksInfo", {
           productName: t("Common:ProductName"),
-          organizationName: t("Common:OrganizationName"),
+          organizationName: logoText,
         })}
       </InfoText>
-      <ColorTheme
-        id="webhooks-info-link"
-        tag="a"
-        themeId={ThemeId.Link}
-        fontWeight={600}
-        href={webhooksGuideUrl}
-        target={LinkTarget.blank}
-        type={LinkType.page}
-        isHovered
-      >
-        {t("WebhooksGuide")}
-      </ColorTheme>
-    </InfoWrapper>
+      {webhooksGuideUrl ? (
+        <Link
+          id="webhooks-info-link"
+          tag="a"
+          fontWeight={600}
+          href={webhooksGuideUrl}
+          target={LinkTarget.blank}
+          type={LinkType.page}
+          isHovered
+          color="accent"
+          dataTestId="webhooks_info_link"
+        >
+          {t("WebhooksGuide")}
+        </Link>
+      ) : null}
+    </div>
   );
 };
 
 export default inject(({ settingsStore }) => {
-  const { webhooksGuideUrl } = settingsStore;
+  const { webhooksGuideUrl, logoText } = settingsStore;
 
   return {
     webhooksGuideUrl,
+    logoText,
   };
 })(observer(WebhookInfo));

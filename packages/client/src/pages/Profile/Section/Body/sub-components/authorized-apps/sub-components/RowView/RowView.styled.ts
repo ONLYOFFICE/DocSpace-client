@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
-import { RowContainer } from "@docspace/shared/components/row-container";
-import { RowContent } from "@docspace/shared/components/row-content";
+import { RowContainer, RowContent } from "@docspace/shared/components/rows";
 import { tablet } from "@docspace/shared/utils/device";
 
 export const StyledRowContainer = styled(RowContainer)`

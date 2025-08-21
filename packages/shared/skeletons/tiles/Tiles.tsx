@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,17 +25,19 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import { RectangleSkeleton } from "../rectangle";
 
 import { TileSkeleton } from "./Tile";
-import { StyledTilesSkeleton, StyledTilesWrapper } from "./Tiles.styled";
 import type { TilesSkeletonProps } from "./Tiles.types";
+import styles from "./Tiles.module.scss";
 
 export const TilesSkeleton = ({
   foldersCount = 2,
   filesCount = 8,
   withTitle = true,
+  isRooms = false,
   ...rest
 }: TilesSkeletonProps) => {
   const folders = [];
@@ -49,8 +51,12 @@ export const TilesSkeleton = ({
     files.push(<TileSkeleton key={`files-loader-${i}`} {...rest} />);
   }
 
+  const tilesClassNames = classNames(styles.tilesSkeleton, {
+    [styles.tilesSkeletonRooms]: isRooms,
+  });
+
   return (
-    <StyledTilesWrapper>
+    <div className={styles.tilesWrapper}>
       {foldersCount > 0 ? (
         <RectangleSkeleton
           height="22px"
@@ -60,7 +66,7 @@ export const TilesSkeleton = ({
           {...rest}
         />
       ) : null}
-      <StyledTilesSkeleton>{folders}</StyledTilesSkeleton>
+      <div className={tilesClassNames}>{folders}</div>
 
       {filesCount > 0
         ? withTitle && (
@@ -73,7 +79,7 @@ export const TilesSkeleton = ({
             />
           )
         : null}
-      <StyledTilesSkeleton>{files}</StyledTilesSkeleton>
-    </StyledTilesWrapper>
+      <div className={tilesClassNames}>{files}</div>
+    </div>
   );
 };

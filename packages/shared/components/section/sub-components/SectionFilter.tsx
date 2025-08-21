@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,14 +24,59 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import classNames from "classnames";
 
 import { SectionFilterProps } from "../Section.types";
-import { StyledSectionFilter } from "../Section.styled";
+import styles from "../Section.module.scss";
+import { isDesktop, isMobile } from "../../../utils/device";
 
-const SectionFilter = React.memo((props: SectionFilterProps) => {
-  return <StyledSectionFilter className="section-filter" {...props} />;
-});
+const SectionFilter = React.memo(
+  ({ className, children, withTabs }: SectionFilterProps) => {
+    const [scrollTop, setScrollTop] = useState(0);
+    const [isFixed, setIsFixed] = useState(false);
+
+    const onScroll = useCallback(
+      (e: Event) => {
+        const eventTarget = e.target as HTMLElement;
+        const currentScrollTop = eventTarget.scrollTop;
+
+        setScrollTop(currentScrollTop ?? 0);
+
+        const scrollShift = scrollTop - currentScrollTop;
+
+        if (scrollShift > 0) {
+          setIsFixed(true);
+        } else if (scrollShift <= 0) {
+          setIsFixed(false);
+        }
+      },
+      [scrollTop],
+    );
+
+    useEffect(() => {
+      const scroll = isMobile()
+        ? document.querySelector("#customScrollBar .scroll-wrapper > .scroller")
+        : document.querySelector("#sectionScroll .scroll-wrapper > .scroller");
+      scroll?.addEventListener("scroll", onScroll);
+
+      return () => {
+        scroll?.removeEventListener("scroll", onScroll);
+      };
+    }, [onScroll]);
+
+    return (
+      <div
+        className={classNames(styles.filter, "section-filter", className, {
+          [styles.isFixed]: !isDesktop() ? isFixed : false,
+          [styles.withTabs]: withTabs,
+        })}
+      >
+        {children}
+      </div>
+    );
+  },
+);
 
 SectionFilter.displayName = "SectionFilter";
 

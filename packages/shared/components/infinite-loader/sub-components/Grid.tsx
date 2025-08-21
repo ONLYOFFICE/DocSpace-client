@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,10 +26,13 @@
 
 import React, { useCallback, useEffect, useRef } from "react";
 import { InfiniteLoader, WindowScroller, List } from "react-virtualized";
-import { StyledItem, StyledList } from "../InfiniteLoader.styled";
-import { GridComponentProps } from "../InfiniteLoader.types";
+import classNames from "classnames";
+
 import { TileSkeleton } from "../../../skeletons/tiles";
-import { RectangleSkeleton } from "../../../skeletons";
+import { RectangleSkeleton } from "../../../skeletons/rectangle";
+
+import { GridComponentProps } from "../InfiniteLoader.types";
+import styles from "../InfiniteLoader.module.scss";
 
 const GridComponent = ({
   hasMoreFiles,
@@ -48,7 +51,7 @@ const GridComponent = ({
   const listRef = useRef<List | null>(null);
 
   const usePrevious = (value?: number | string) => {
-    const prevRef = useRef<number | string>();
+    const prevRef = useRef<number | string>(undefined);
 
     useEffect(() => {
       prevRef.current = value;
@@ -85,7 +88,7 @@ const GridComponent = ({
     isScrolling: boolean;
   }) => {
     const elem = children[index] as React.ReactElement;
-    const itemClassNames = elem.props?.className;
+    const itemClassNames = (elem.props as { className?: string })?.className;
 
     const isFolder = itemClassNames?.includes("isFolder");
     const isRoom = itemClassNames?.includes("isRoom");
@@ -100,9 +103,9 @@ const GridComponent = ({
       if (isHeader) {
         return (
           <div key={key} style={style}>
-            <StyledItem>
+            <div className={styles.item}>
               <RectangleSkeleton height="22px" width="100px" animate />
-            </StyledItem>
+            </div>
           </div>
         );
       }
@@ -120,7 +123,7 @@ const GridComponent = ({
 
       return (
         <div key={key} style={style}>
-          <StyledItem>{list.map((item) => item)}</StyledItem>
+          <div className={styles.item}>{list.map((item) => item)}</div>
         </div>
       );
     }
@@ -146,23 +149,31 @@ const GridComponent = ({
       const isFile = itemClassNames?.includes("isFile");
       const isFolder = itemClassNames?.includes("isFolder");
       const isRoom = itemClassNames?.includes("isRoom");
+      const isTemplate = itemClassNames?.includes("isTemplate");
       const isFolderHeader = itemClassNames?.includes("folder_header");
 
       const horizontalGap = 16;
       const verticalGap = 14;
+      const verticalRoomGap = 16;
       const headerMargin = 15;
 
       const folderHeight = 64 + verticalGap;
-      const roomHeight = 122 + verticalGap;
+      const roomHeight = 104 + verticalRoomGap;
       const fileHeight = 220 + horizontalGap;
+      const templateHeight = 126 + verticalRoomGap;
       const titleHeight = 20 + headerMargin + (isFolderHeader ? 0 : 11);
 
       if (isRoom) return roomHeight;
       if (isFolder) return folderHeight;
       if (isFile) return fileHeight;
+      if (isTemplate) return templateHeight;
       return titleHeight;
     }
+
+    return 0;
   };
+
+  const listClassName = classNames(styles.list, className, styles.tile);
 
   return (
     <InfiniteLoader
@@ -170,12 +181,14 @@ const GridComponent = ({
       rowCount={itemCount}
       loadMoreRows={loadMoreItems}
       ref={loaderRef}
+      data-testid="infinite-loader-container-grid"
     >
       {({ onRowsRendered, registerChild }) => (
         <WindowScroller scrollElement={scroll}>
           {({ height, isScrolling, onChildScroll, scrollTop }) => {
+            let newHeight = height;
             if (height === undefined && scroll instanceof Element) {
-              height = scroll.getBoundingClientRect().height;
+              newHeight = scroll.getBoundingClientRect().height;
             }
 
             const width =
@@ -183,9 +196,9 @@ const GridComponent = ({
                 .width ?? 0;
 
             return (
-              <StyledList
+              <List
                 autoHeight
-                height={height}
+                height={newHeight}
                 onRowsRendered={onRowsRendered}
                 ref={(ref: List | null) => {
                   listRef.current = ref;
@@ -195,12 +208,12 @@ const GridComponent = ({
                 rowHeight={getItemSize}
                 rowRenderer={renderTile}
                 width={width}
-                className={className}
                 isScrolling={isScrolling}
                 onChildScroll={onChildScroll}
                 scrollTop={scrollTop}
                 overscanRowCount={3}
                 onScroll={onScroll}
+                className={listClassName}
               />
             );
           }}

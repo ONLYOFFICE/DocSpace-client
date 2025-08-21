@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,8 +26,8 @@
 
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import MobileCategoryWrapper from "../../../../components/MobileCategoryWrapper";
+import { useNavigate } from "react-router";
+import { MobileCategoryWrapper } from "@docspace/shared/components/mobile-category-wrapper";
 
 const StyledWrapper = styled.div`
   margin-top: 24px;
@@ -55,6 +55,7 @@ const LdapMobileView = ({ isLdapEnabled, isLDAPAvailable }) => {
         badgeLabel={t("Common:Paid")}
         onClickLink={onClickLink}
         disabled={!isLdapEnabled}
+        dataTestId="ldap_settings"
       />
       <MobileCategoryWrapper
         title={t("Ldap:LdapSyncTitle")}
@@ -64,6 +65,7 @@ const LdapMobileView = ({ isLdapEnabled, isLDAPAvailable }) => {
         badgeLabel={t("Common:Paid")}
         onClickLink={onClickLink}
         disabled={!isLdapEnabled}
+        dataTestId="sync_data"
       />
     </StyledWrapper>
   );

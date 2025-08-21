@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,123 +24,99 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TColorScheme } from "../../themes";
 import { DeviceType } from "../../enums";
 import { TUser } from "../../api/people/types";
 import { TTranslation } from "../../types";
 
 import { ContextMenuModel } from "../context-menu";
 
-export interface ArticleBackdropProps {
-  onClick: (e: React.MouseEvent) => void;
-}
+export type TToggleArticleOpen = () => void;
 
-export interface ArticleHeaderProps {
+export type ArticleHeaderProps = {
   showText: boolean;
   children: React.ReactNode;
-  onClick?: () => void;
   onIconClick: () => void;
   onLogoClickAction?: () => void;
   isBurgerLoading: boolean;
   withCustomArticleHeader: boolean;
   currentDeviceType: DeviceType;
-}
+  showBackButton: boolean;
+};
 
-export type TToggleArticleOpen = () => void;
+export type ArticleAppsProps = {
+  showText: boolean;
+  withDevTools: boolean;
+  logoText: string;
+  downloaddesktopUrl: string;
+  officeforandroidUrl: string;
+  officeforiosUrl: string;
+};
 
-export interface ArticleProfileProps {
+export type ArticleHideMenuButtonProps = {
+  showText: boolean;
+  toggleShowText: VoidFunction;
+  hideProfileBlock: boolean;
+};
+
+export type ArticleDevToolsBarProps = {
+  showText: boolean;
+  articleOpen: boolean;
+  currentDeviceType: DeviceType;
+  toggleArticleOpen: TToggleArticleOpen;
+  path?: string;
+};
+
+export type ArticleZendeskProps = {
+  languageBaseName: string;
+  zendeskEmail: string;
+  chatDisplayName: string;
+  withMainButton?: boolean;
+  isMobileArticle: boolean;
+  zendeskKey: string;
+  showProgress: boolean;
+  isShowLiveChat: boolean;
+  isInfoPanelVisible?: boolean;
+};
+
+export type ArticleProfileProps = {
   user?: TUser;
   showText: boolean;
   getActions?: (t: TTranslation) => ContextMenuModel[];
   onProfileClick?: (obj: { originalEvent: React.MouseEvent }) => void;
   currentDeviceType: DeviceType;
-}
+};
 
-export interface ArticleZendeskProps {
-  languageBaseName: string;
-  email: string;
-  displayName: string;
-  currentColorScheme: TColorScheme;
-  withMainButton: boolean;
-  isMobileArticle: boolean;
-  zendeskKey: string;
-  showProgress: boolean;
-  isShowLiveChat: boolean;
-  isInfoPanelVisible?: boolean;
-}
+export type ArticleProps = ArticleProfileProps &
+  ArticleZendeskProps &
+  ArticleDevToolsBarProps &
+  ArticleHideMenuButtonProps &
+  Omit<ArticleHeaderProps, "children" | "onClick" | "onIconClick"> &
+  Omit<ArticleAppsProps, "withDevTools"> & {
+    setShowText: (value: boolean) => void;
+    setIsMobileArticle: (value: boolean) => void;
+    children: React.JSX.Element[];
 
-export interface ArticleAppsProps {
-  showText: boolean;
-  withDevTools: boolean;
-}
+    hideAppsBlock: boolean;
 
-export interface ArticleDevToolsBarProps {
-  showText: boolean;
-  articleOpen: boolean;
-  currentDeviceType: DeviceType;
-  toggleArticleOpen: TToggleArticleOpen;
-}
+    setArticleOpen: (value: boolean) => void;
+    withSendAgain: boolean;
+    mainBarVisible: boolean;
 
-export interface ArticleHideMenuButtonProps {
-  showText: boolean;
-  toggleShowText: () => void;
-  currentColorScheme: TColorScheme;
-  hideProfileBlock: boolean;
-}
+    isLiveChatAvailable: boolean;
 
-export interface ArticleProps {
-  showText: boolean;
-  setShowText: (value: boolean) => void;
-  articleOpen: boolean;
-  toggleShowText: () => void;
-  toggleArticleOpen: TToggleArticleOpen;
-  setIsMobileArticle: (value: boolean) => void;
-  children: React.JSX.Element[];
+    showArticleLoader?: boolean;
+    isAdmin: boolean;
 
-  withMainButton?: boolean;
+    isNonProfit?: boolean;
+    isGracePeriod?: boolean;
+    isFreeTariff?: boolean;
+    isPaymentPageAvailable?: boolean;
+    isLicenseExpiring?: boolean;
+    isLicenseDateExpired?: boolean;
+    isTrial?: boolean;
+    standalone?: boolean;
+    currentTariffPlanTitle?: string;
+    trialDaysLeft?: number;
 
-  hideProfileBlock: boolean;
-  hideAppsBlock: boolean;
-
-  currentColorScheme: TColorScheme;
-  setArticleOpen: (value: boolean) => void;
-  withSendAgain: boolean;
-  mainBarVisible: boolean;
-
-  isLiveChatAvailable: boolean;
-  isShowLiveChat: boolean;
-
-  isInfoPanelVisible?: boolean;
-
-  onLogoClickAction?: () => void;
-
-  currentDeviceType: DeviceType;
-  showArticleLoader?: boolean;
-  isAdmin: boolean;
-  withCustomArticleHeader: boolean;
-
-  onArticleHeaderClick?: () => void;
-  isBurgerLoading: boolean;
-
-  languageBaseName: string;
-  zendeskEmail: string;
-  chatDisplayName: string;
-  isMobileArticle: boolean;
-  zendeskKey: string;
-  showProgress: boolean;
-
-  user?: TUser;
-  getActions?: (t: TTranslation) => ContextMenuModel[];
-  onProfileClick?: () => void;
-
-  isNonProfit?: boolean;
-  isGracePeriod?: boolean;
-  isFreeTariff?: boolean;
-  isPaymentPageAvailable?: boolean;
-  isLicenseExpiring?: boolean;
-  isLicenseDateExpired?: boolean;
-  isTrial?: boolean;
-  standalone?: boolean;
-  currentTariffPlanTitle?: string;
-  trialDaysLeft?: number;
-}
+    limitedAccessDevToolsForUsers: boolean;
+  };

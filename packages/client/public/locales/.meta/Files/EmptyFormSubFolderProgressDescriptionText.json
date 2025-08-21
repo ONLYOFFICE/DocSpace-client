@@ -1,0 +1,403 @@
+{
+  "key_path": "EmptyFormSubFolderProgressDescriptionText",
+  "content": "Here you will find forms in progress, i.e., forms which users have started to fill out but haven't completed.",
+  "content_en_sha1_hash": "d498a603b53952062cba94e7d4b78a951bc91766",
+  "created_at": "2025-05-19T21:30:55.579Z",
+  "updated_at": "2025-05-26T07:57:32.146Z",
+  "comment": {
+    "text": "This translation key is used to display a description of the \"SubFolder in Progress\" empty form screen. It explains that this section shows forms that users have started but not completed, appearing on screens where progress is tracked or forms are being edited in a subfolder context.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:39:50.391Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/EmptyContainer.helper.ts",
+      "line_number": 108,
+      "context": "[EmptyScreenTypeEnum.Corporate]: t(\"EmptyFolderDecription\"),\n [EmptyScreenTypeEnum.SubFolderDone]: t(\n \"EmptyFormSubFolderDoneDescriptionText\",\n ),\n [EmptyScreenTypeEnum.SubFolderinProgress]: t(\n \"EmptyFormSubFolderProgressDescriptionText\",\n ),\n };\n \n return translateDescriptionKey[type];\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
+      "line_number": 136,
+      "context": ")\n .with([P._, FolderType.SubFolderDone, P._], () =>\n t(\"Files:EmptyFormSubFolderDoneDescriptionText\"),\n )\n .with([P._, FolderType.SubFolderInProgress, P._], () =>\n t(\"Files:EmptyFormSubFolderProgressDescriptionText\"),\n )\n .with(\n [\n FolderType.FormRoom,\n null,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"istifadəçilərin doldurmağa başladığı\" is a bit clunky. A more natural phrasing would improve readability.",
+          "suggestion": "istifadəçilər doldurmağa başladığı"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The use of 'tapa bilərsiniz' (you can find) isn't as direct as the English equivalent. While not strictly incorrect, it adds unnecessary words and softens the statement.",
+          "suggestion": "Burada davam edən formalar, yəni istifadəçilərin doldurmağa başladığı, lakin hələ tamamlamamış formalar var."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"mit deren Ausfüllen die Benutzer begonnen haben, die sie aber noch nicht abgeschlossen haben\" is overly complex and wordy. A more natural German phrasing would improve readability.",
+          "suggestion": "Hier finden Sie Formulare in Bearbeitung, d. h. Formulare, an deren Ausfüllen Benutzer begonnen, diese aber noch nicht beendet haben."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of \"d. h.\" is technically correct but can be slightly clunky in certain contexts. Consider a more fluent alternative.",
+          "suggestion": "Hier finden Sie Formulare in Bearbeitung, also Formulare, an deren Ausfüllen Benutzer begonnen, diese aber noch nicht beendet haben."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'φόρμες τις οποίες' is slightly awkward. It can be simplified for better flow.",
+          "suggestion": "φόρμες που"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase 'esim. lomakkeet, joita käyttäjät ovat aloittaneet täyttämään, mutta eivät ole saaneet valmiiksi' is a bit long and clunky. While technically correct, it could be more concise and flow better.",
+          "suggestion": "Tästä löydät keskeneräiset lomakkeet, eli lomakkeet jotka käyttäjät ovat aloittaneet, mutta eivät ole saaneet valmiiksi."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'esim.' is acceptable, using 'eli' (meaning 'that is') might be more natural and fluid in Finnish in this context.  'esim.' is more like 'for example'.",
+          "suggestion": "Replace 'esim.' with 'eli'."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'en cours d'élaboration' is not the most natural or accurate translation of 'in progress'. While technically correct, it suggests a drafting or development process rather than a form being actively filled out by a user.",
+          "suggestion": "Consider 'en cours de remplissage' or 'en cours de saisie' for a more accurate representation of a form being filled out."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The repetition of 'formulaires' is a bit clunky. While grammatically correct, it can be improved for readability.",
+          "suggestion": "Rephrase to avoid repetition: 'Vous y trouverez les formulaires en cours de remplissage, c'est-à-dire ceux que les utilisateurs ont commencé à remplir mais qu'ils n'ont pas encore terminés.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Here you will find\" is translated as \"Այստեղ դուք կգտնեք\". While technically correct, it sounds slightly formal for this type of notification. A more natural phrasing might be \"Դուք գտնեք այստեղ\" or \"Այստեղ կարող եք գտնել\".",
+          "suggestion": "Consider \"Դուք գտնեք այստեղ\" or \"Այստեղ կարող եք գտնել\""
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'i.e.' is translated as 'այսինքն՝'. While accurate, it might be perceived as overly technical for the target audience. A simpler alternative could improve clarity.",
+          "suggestion": "Consider replacing 'այսինքն՝' with a more colloquial equivalent, perhaps something like 'ոչ թե ավարտված': 'forms that users started to fill out, but haven't finished.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"in elaborazione\" (in processing) is not the most natural way to describe forms 'in progress'. It implies a technical processing rather than a user-initiated state.",
+          "suggestion": "Consider using a phrase like \"in corso di compilazione\" (being filled out) or \"in stato di compilazione\" (in filling-out state)."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"i.e., forms which users have started to fill out but haven't completed\" is not accurately conveyed. The Japanese translation uses \"記入中のフォーム\" which directly translates to \"forms in progress\" but loses the nuance of 'started to fill out but haven't completed'.",
+          "suggestion": "Consider a more detailed explanation in Japanese, such as: \"ユーザーが記入を開始したが、まだ完了していないフォームです\" (Forms that users have started filling out but have not completed yet.)"
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct, the Japanese translation could be more naturally phrased. The wording feels slightly stiff.",
+          "suggestion": "Rephrase to something like: 「ユーザーが途中まで記入した、未完了のフォームが表示されます。」 (Forms that have been partially filled out by users and are not yet complete will be displayed.)"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Korean translation includes parentheses around the explanation of the forms, which might disrupt the flow. Consider integrating the explanation more naturally into the sentence.",
+          "suggestion": "여기에서는 진행 중인 양식(사용자가 작성을 시작했지만 완성하지 않은 양식)을 찾을 수 있습니다. -> 여기에서는 사용자가 작성을 시작했지만 완성하지 않은 양식의 진행 중인 양식을 찾을 수 있습니다."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao phrase \"ຄວາມຄືບຫນ້າ\" (khop na) while technically meaning 'progress,' doesn't quite capture the nuance of 'in progress' in this context. It's a bit too formal and sounds less natural. A better phrasing might emphasize forms that are actively being worked on.",
+          "suggestion": "Consider \"ທີ່ນີ້ເຈົ້າຈະພົບເຫັນແບບຟອມທີ່ກຳລັງເຮັດຢູ່\" (ti ni chao cha phop hen bap form ti kam lang het yu) – 'Here you will find forms that are being worked on.'"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ໄດ້ເລີ່ມຕື່ມຂໍ້ມູນໃສ່\" (dai loem tuem khom sau) for 'started to fill out' is a bit awkward.  A more natural phrasing might be \"ເລີ່ມຕື່ມຂໍ້ມູນ\" (loem tuem khom).",
+          "suggestion": "Replace \"ໄດ້ເລີ່ມຕື່ມຂໍ້ມູນໃສ່\" with \"ເລີ່ມຕື່ມຂໍ້ມູນ\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"in behandeling zijn\" (are in processing/under consideration) doesn't quite capture the meaning of 'in progress' in this context. It implies an administrative process rather than the user's ongoing form filling.",
+          "suggestion": "Consider \"Hier vindt u formulieren die nog niet voltooid zijn, d.w.z. formulieren die gebruikers zijn begonnen in te vullen maar nog niet hebben voltooid.\" or \"Hier vindt u formulieren die de gebruiker bezig is in te vullen, d.w.z. formulieren die gebruikers zijn begonnen in te vullen maar nog niet hebben voltooid.\""
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'd.w.z.' feels slightly formal for this kind of user-facing text. While grammatically correct, it could be more conversational.",
+          "suggestion": "Consider replacing 'd.w.z.' with 'dat wil zeggen' or 'met andere woorden' for a more approachable tone. Alternatively, restructure the sentence to avoid the abbreviation entirely."
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Here you will find\" is translated as \"Здесь будут отображаться\". While not incorrect, \"Здесь находятся\" or \"Здесь есть\" would be more natural and conversational in this context.",
+          "suggestion": "Здесь находятся незавершенные формы, то есть формы, которые пользователи начали заполнять, но еще не закончили."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"පුරවමින් පවතින\" (puravamin pavatina) literally translates to 'being filled out' which is accurate, but could be improved for a more natural flow in Sinhala. A more common phrasing would emphasize the 'in progress' state.",
+          "suggestion": "පුරවමින් ඇති ආකෘතිපත්‍ර (puravamin athi akruthipatra) or දැනටමත් පුරවමින් ඇති ආකෘතිපත්‍ර (denata math puravamin athi akruthipatra) - 'forms being filled out' or 'forms currently being filled out'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'එනම්' (enam) means 'i.e.' or 'that is'. While technically correct, it can sound slightly formal and isn't always necessary. It could be omitted or replaced with a more conversational alternative.",
+          "suggestion": "Omit 'එනම්' or replace it with 'ඒ' (aye) - 'that is'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'පරිශ්‍රීලකයින්' (pariseelakayin) technically means 'users' but a more common and simpler word would be 'භාවිතකරුවන්' (bhavitakaruwan) or even just 'පරිශීලකයන්' (pariseelakayan).",
+          "suggestion": "Replace 'පරිශ්‍රීලකයින්' with 'භාවිතකරුවන්' or 'පරිශීලකයන්'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses a comma (,) before 'torej'. While not strictly incorrect, a semicolon (;) would be more common and stylistically preferable in this context, especially in technical documentation.",
+          "suggestion": "Replace ',' with ';': 'Tukaj boste našli obrazce v teku; torej obrazce, ki so jih uporabniki začeli izpolnjevati, a jih niso dokončali.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ц́ете' is archaic and uncommon in modern Serbian. It's better to use 'наћи' instead.",
+          "suggestion": "Овде ћете наћи обрасце у току, односно обрасце које су корисници почели да попуњавају, али нису завршили."
+        },
+        {
+          "type": "grammar",
+          "description": "While not strictly incorrect, the phrase 'обрасце у току' can be improved for clarity. A more natural phrasing would be 'обрасци у попуни' or 'обрасци који се попуњавају'.",
+          "suggestion": "Овде ћете наћи обрасце који се попуњавају, односно обрасце које су корисници почели да попуњавају, али нису завршили."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ćete' is a somewhat archaic or formal form. While grammatically correct, 'ćete' is less common in everyday Serbian. It might feel overly formal for this context.",
+          "suggestion": "Use 'videćete' instead of 'ćete'."
+        },
+        {
+          "type": "grammar",
+          "description": "While technically correct, the construction 'obrasce koje su korisnici počeli da popunjavaju' is a bit clunky. A more natural phrasing would improve readability.",
+          "suggestion": "Consider 'obrasce koje su korisnici počeli popunjavati' or 'obrasce sa kojima su korisnici počeli popunjavanje'."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence is a bit long and could be broken down for better readability, especially in a user interface.",
+          "suggestion": "Consider splitting the sentence into two: 'Ovde ćete pronaći obrasce u toku. To su obrasci koje su korisnici počeli da popunjavaju, ali nisu završili.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'i.e., forms which users have started to fill out but haven't completed' is overly literal and clunky in the Ukrainian translation. While technically correct, it doesn't read naturally.",
+          "suggestion": "Consider a more idiomatic translation like: 'Тут ви знайдете форми, які користувачі почали заповнювати, але не завершили' or 'Тут ви знайдете незавершені форми, які почали заповнювати користувачі'."
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'тобто такі, які...' is a bit wordy and can be simplified. While not strictly incorrect, it adds unnecessary length.",
+          "suggestion": "Remove 'тобто такі, які' and restructure the sentence for better flow."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"tiến hành\" in \"các biểu mẫu đang được tiến hành\" is not the most natural or accurate translation for \"in progress\" in this context. It implies a process being carried out on the forms, not that the forms themselves are being filled out.",
+          "suggestion": "Consider using \"đang điền\" or \"đang thực hiện\" instead of \"đang tiến hành\" to better reflect the meaning of 'in progress' referring to the form filling process."
+        },
+        {
+          "type": "grammatical",
+          "description": "While grammatically correct, the phrase \"tức là các biểu mẫu mà...\" is a bit clunky. It can be made more fluent.",
+          "suggestion": "Replace \"tức là các biểu mẫu mà...\" with \"tức là biểu mẫu...\" or simply remove it, as the meaning is clear without it."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"处理中的表单\" (chǔlǐ zhōng de biǎodān) translates to \"forms being processed\" which is not the exact meaning of \"forms in progress\". While close, 'in progress' emphasizes the user's work on the form, not just general processing.",
+          "suggestion": "您可以在此处看到正在进行的表单，即用户已开始填写但尚未完成的表单。"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

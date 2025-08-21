@@ -1,6 +1,5 @@
 {
   "AccountWillBeCreated": "{{productName}} nalog će biti kreiran za <1>{{email}}</1>. Molimo vas zavšite vašu registraciju:",
-  "ChangePasswordSuccess": "Lozinka je uspešno promenjena",
   "ConfirmOwnerPortalSuccessMessage": "Vlasnik {{productName}}-a je uspešno promenjen. Bićete preusmereni za 10 sekundi.",
   "ConfirmOwnerPortalTitle": "Molimo vas potvrdite da želite da promenite {{productName}} vlasnika na {{newOwner}}.",
   "CurrentNumber": "Vaš trenutni broj mobilnog telefona",
@@ -26,9 +25,6 @@
   "PortalRemoveTitle": "Potvrdite da želite da obrišete svoj {{productName}}.",
   "Reactivate": "Ponovo aktiviraj",
   "SetAppButton": "Poveži aplikaciju",
-  "SetAppDescription": "Dvofaktorska autentifikacija je omogućena. Konfigurišite svoju aplikaciju za autentifikaciju da biste nastavili sa radom u {{productName}}-u. Možete da koristite Google Autentifikator za <1>Android</1> i <4>iOS</4> ili Autentifikator za <8>Windows Phone</8>.",
-  "SetAppInstallDescription": "Da biste povezali aplikaciju, skenirajte QR kod ili ručno unesite svoj tajni ključ <1>{{ secretKey }}</1>, a zatim unesite šestocifreni kod iz aplikacije u polje ispod.",
-  "SetAppTitle": "Konfigurišite svoju autentifikator aplikaciju",
   "SignUp": "Registruj se",
   "SuccessDeactivate": "Vaš nalog je uspešno deaktiviran. Za 10 sekundi bićete preusmereni na <1>site</1>.",
   "SuccessReactivate": "Vaš nalog je uspešno ponovo aktiviran. Za 10 sekundi bićete preusmereni na <1>portal</1>.",

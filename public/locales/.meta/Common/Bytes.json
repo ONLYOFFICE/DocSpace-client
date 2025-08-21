@@ -1,0 +1,244 @@
+{
+  "key_path": "Bytes",
+  "content": "bytes",
+  "content_en_sha1_hash": "daf529a73101c2be626b99fc6938163e7a27620b",
+  "created_at": "2025-05-19T21:30:43.348Z",
+  "updated_at": "2025-08-11T09:02:44.082Z",
+  "comment": {
+    "text": "The \"Bytes\" translation key is used to display the unit \"byte\" in various parts of the application. It appears on a quota form, where users can select options such as kilobytes or gigabytes, indicating that this key is used for file size units in a UI context.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:37:11.137Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/quota-form/index.tsx",
+      "line_number": 78,
+      "context": "return 2;\n };\n \n const getOptions = (t: TTranslation) => [\n { key: 0, label: t(\"Common:Bytes\") },\n { key: 1, label: t(\"Common:Kilobyte\") },\n { key: 2, label: t(\"Common:Megabyte\") },\n { key: 3, label: t(\"Common:Gigabyte\") },\n { key: 4, label: t(\"Common:Terabyte\") },\n ];",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/utils/common.ts",
+      "line_number": 693,
+      "context": "export const getConvertedSize = (t: (key: string) => string, bytes: number) => {\n let power = 0;\n let resultSize = bytes;\n \n const sizeNames = [\n t(\"Common:Bytes\"),\n t(\"Common:Kilobyte\"),\n t(\"Common:Megabyte\"),\n t(\"Common:Gigabyte\"),\n t(\"Common:Terabyte\"),\n t(\"Common:Petabyte\"),",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/utils/common.ts",
+      "line_number": 693,
+      "context": "export const getConvertedSize = (t: (key: string) => string, bytes: number) => {\n let power = 0;\n let resultSize = bytes;\n \n const sizeNames = [\n t(\"Common:Bytes\"),\n t(\"Common:Kilobyte\"),\n t(\"Common:Megabyte\"),\n t(\"Common:Gigabyte\"),\n t(\"Common:Terabyte\"),\n t(\"Common:Petabyte\"),",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation 'bitit' translates to 'bits' in English, not 'bytes'. The correct translation for 'bytes' in Finnish is 'tavuja'.",
+          "suggestion": "tavuja"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The singular form \"байт\" (bajt) is provided for the English word \"bytes\" which is plural. The singular form of 'byte' is correct, but the provided translation doesn't account for the plural form.",
+          "suggestion": "байт(ы)"
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovenian translation \"bajtov\" is the genitive plural form of \"bajt.\"  The English word \"bytes\" is a plural noun, but the context is not provided to justify the genitive case. The nominative plural, \"baji\" or the singular \"bajt\" might be more appropriate depending on the intended meaning.",
+          "suggestion": "Consider \"baji\" (nominative plural) or \"bajt\" (singular) if the genitive case is not necessary. More context is needed to determine the correct translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Bajtovi\" is a plural form. The English content is a singular noun (\"bytes\"). While \"Bajtovi\" can be used in some contexts, a more accurate singular translation would be \"Bajt\".",
+          "suggestion": "Bajt"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

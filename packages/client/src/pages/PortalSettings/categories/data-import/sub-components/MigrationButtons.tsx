@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -133,8 +133,13 @@ export const MigrationButtons = ({
         additionalClassCancelButton={additionalClassCancelButton}
         saveButtonDisabled={saveButtonDisabled}
         getTopComponent={getTopComponent}
+        saveButtonDataTestId="next_step_button"
+        cancelButtonDataTestId="previos_step_button"
       />
-      <CancelMigrationButton onClick={onMigrationCancelClick}>
+      <CancelMigrationButton
+        data-testid="cancel_import_button"
+        onClick={onMigrationCancelClick}
+      >
         {migrationCancelLabel}
       </CancelMigrationButton>
     </MigrationButtonsWrapper>

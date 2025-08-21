@@ -1,4 +1,5 @@
 {
+  "ChangePasswordSuccess": "Wachtwoord is succesvol gewijzigd",
   "CodeTitle": "De code is naar u gemaild",
   "ErrorInvalidText": "Over 10 seconden wordt u doorverwezen naar de <1>{{productName}}</1>",
   "ForgotPassword": "Wachtwoord vergeten?",

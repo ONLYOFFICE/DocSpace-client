@@ -1,0 +1,237 @@
+{
+  "key_path": "ThirdPartyPropsActivated",
+  "content": "Updated successfully",
+  "content_en_sha1_hash": "6d518cb77f8fee6fb91d236f4b3c5be23b28d204",
+  "created_at": "2025-05-19T21:30:52.896Z",
+  "updated_at": "2025-08-11T18:11:59.269Z",
+  "comment": {
+    "text": "This translation key is used for success messages when a consumer's third-party properties are updated successfully. It appears in a modal dialog after updating the consumer's properties via a specific button action. Translators should provide a message that conveys a positive outcome of this update process.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:19.124Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/sub-components/consumerModalDialog.js",
+      "line_number": 163,
+      "context": "};\n updateConsumerProps(data)\n .then(() => {\n onChangeLoading(false);\n hideLoader();\n toastr.success(t(\"ThirdPartyPropsActivated\"));\n \n const channel = new BroadcastChannel(\"thirdpartyActivation\");\n channel.postMessage(true);\n })\n .catch((error) => {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The German translation 'Einstellungen wurde aktualisiert' is not the most natural or accurate translation of 'Updated successfully'. While technically correct, it lacks elegance and doesn't fully convey the sense of success. 'Einstellungen' is in the nominative case when it should be accusative.",
+          "suggestion": "Einstellungen wurden aktualisiert"
+        },
+        {
+          "type": "grammar",
+          "description": "The verb 'wurde' needs to agree with the subject (Einstellungen).",
+          "suggestion": "Einstellungen wurden aktualisiert"
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Настройки сервиса успешно обновлены' (Settings of the service were successfully updated) is too literal and verbose for a simple success message like 'Updated successfully'. It doesn't convey the same brevity.",
+          "suggestion": "Обновлено успешно"
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'යාවත්කාල කෙරිණි' while grammatically correct, doesn't fully convey the meaning of 'Updated successfully'. It translates to 'Updated' or 'Synchronized'.  'Successfully' is missing.",
+          "suggestion": "යාවත්කාල කෙරිණි සාර්ථකව (yāvatkāla kerīni sārtthaka), which translates to 'Updated successfully'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Ažurirano uspešno' is not the most natural or accurate translation of \"Updated successfully\". While understandable, 'Ažurirano uspešno' is somewhat literal and can sound clunky. A more natural translation would be something like 'Uspešno ažurirano' or 'Ažurirano bez greške'.",
+          "suggestion": "Uspešno ažurirano"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

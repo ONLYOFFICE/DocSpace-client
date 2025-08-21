@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,6 +27,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
+import { useSearchParams } from "react-router";
 import isEqual from "lodash/isEqual";
 
 import { Button } from "@docspace/shared/components/button";
@@ -77,6 +78,7 @@ const EditLinkPanel = (props) => {
   } = props;
 
   const roomAccessOptions = useMemo(() => getRoomAccessOptions(t), [t]);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const [selectedAccessOption, setSelectedAccessOption] = useState(() => {
     if (isFormRoom) {
@@ -162,7 +164,7 @@ const EditLinkPanel = (props) => {
     setIsLoading(true);
     editExternalLink(roomId, updatedLink)
       .then((response) => {
-        setExternalLink(response);
+        setExternalLink(response, searchParams, setSearchParams, isCustomRoom);
         setLinkParams({ link: response, roomId, isPublic, isFormRoom });
 
         if (isEdit) {
@@ -278,6 +280,7 @@ const EditLinkPanel = (props) => {
       zIndex={310}
       withBodyScroll
       withoutPadding
+      dataTestId="edit_link_panel_modal"
     >
       <ModalDialog.Header>
         {isEdit
@@ -290,7 +293,7 @@ const EditLinkPanel = (props) => {
       </ModalDialog.Header>
       <ModalDialog.Body>
         <StyledEditLinkBodyContent className="edit-link_body">
-          {!isFormRoom && (
+          {!isFormRoom ? (
             <RoleLinkBlock
               t={t}
               accessOptions={roomAccessOptions}
@@ -298,7 +301,7 @@ const EditLinkPanel = (props) => {
               currentDeviceType={currentDeviceType}
               onSelect={handleSelectAccessOption}
             />
-          )}
+          ) : null}
           <LinkBlock
             t={t}
             isEdit={isEdit}
@@ -324,15 +327,16 @@ const EditLinkPanel = (props) => {
             isPasswordErrorShow={isPasswordErrorShow}
             setIsPasswordErrorShow={setIsPasswordErrorShow}
           />
-          {!isFormRoom && (
+          {!isFormRoom ? (
             <ToggleBlock
               isLoading={isLoading}
               headerText={t("Files:DisableDownload")}
               bodyText={t("Files:PreventDownloadFilesAndFolders")}
               isChecked={denyDownload}
               onChange={onDenyDownloadChange}
+              dataTestId="edit_link_panel_deny_download_toggle"
             />
-          )}
+          ) : null}
 
           <LimitTimeBlock
             isExpired={isExpired}
@@ -355,6 +359,7 @@ const EditLinkPanel = (props) => {
           label={isEdit ? t("Common:SaveButton") : t("Common:Create")}
           isDisabled={isDisabledSaveButton}
           onClick={onSave}
+          testId="edit_link_panel_save_button"
         />
         <Button
           scale
@@ -362,6 +367,7 @@ const EditLinkPanel = (props) => {
           label={t("Common:CancelButton")}
           isDisabled={isLoading}
           onClick={onClose}
+          testId="edit_link_panel_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

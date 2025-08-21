@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -88,7 +88,11 @@ export const GroupMembersList = (props: GroupMembersListProps) => {
     return (
       <div key={key} style={style}>
         {item ? (
-          <GroupMemberRow groupMember={item} removeMember={removeMember} />
+          <GroupMemberRow
+            groupMember={item}
+            removeMember={removeMember}
+            dataTestId={`group_member_row_${index}`}
+          />
         ) : (
           <RowLoader
             className="group-member-row-loader"

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,7 +29,6 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Box } from "@docspace/shared/components/box";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { Text } from "@docspace/shared/components/text";
 
@@ -45,6 +44,13 @@ import {
 const PROVIDER_URL = "https://idpservice/idp";
 
 const StyledWrapper = styled.div`
+  .radio-button-box {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin: 5px 0;
+  }
   .radio-button-group {
     margin-inline-start: 24px;
   }
@@ -91,6 +97,7 @@ const IdpSettings = (props) => {
         tooltipClass="custom-entry-tooltip icon-button"
         value={spLoginLabel}
         hasError={spLoginLabelHasError}
+        dataTestId="sp_login_label"
       />
 
       <SsoFormField
@@ -102,6 +109,7 @@ const IdpSettings = (props) => {
         tooltipClass="provider-url-tooltip icon-button"
         value={entityId}
         hasError={entityIdHasError}
+        dataTestId="entity_id"
       />
 
       <SsoFormField
@@ -123,13 +131,9 @@ const IdpSettings = (props) => {
             ? ssoUrlPostHasError
             : ssoUrlRedirectHasError
         }
+        dataTestId="sso_endpoint_url"
       >
-        <Box
-          displayProp="flex"
-          alignItems="center"
-          flexDirection="row"
-          marginProp="5px 0"
-        >
+        <div className="radio-button-box">
           <Text fontSize="12px" fontWeight={400} noSelect>
             {t("Binding")}
           </Text>
@@ -143,8 +147,9 @@ const IdpSettings = (props) => {
             selected={ssoBinding}
             spacing="20px"
             tabIndex={6}
+            dataTestId="sso_binding"
           />
-        </Box>
+        </div>
       </SsoFormField>
 
       <SsoFormField
@@ -162,17 +167,13 @@ const IdpSettings = (props) => {
         tooltipClass="logout-endpoint-url-tooltip icon-button"
         value={sloBinding?.includes("POST") ? sloUrlPost : sloUrlRedirect}
         hasError={
-          ssoBinding?.includes("POST")
+          sloBinding?.includes("POST")
             ? sloUrlPostHasError
             : sloUrlRedirectHasError
         }
+        dataTestId="slo_endpoint_url"
       >
-        <Box
-          displayProp="flex"
-          alignItems="center"
-          flexDirection="row"
-          marginProp="5px 0"
-        >
+        <div className="radio-button-box">
           <Text fontSize="12px" fontWeight={400}>
             {t("Binding")}
           </Text>
@@ -187,7 +188,7 @@ const IdpSettings = (props) => {
             spacing="20px"
             tabIndex={8}
           />
-        </Box>
+        </div>
       </SsoFormField>
 
       <SsoComboBox
@@ -196,6 +197,7 @@ const IdpSettings = (props) => {
         name="nameIdFormat"
         options={nameIdOptions}
         tabIndex={8}
+        dataTestId="name_id_format_combobox"
       />
     </StyledWrapper>
   );

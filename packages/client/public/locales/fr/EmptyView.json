@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "Vos derniers documents consultés ou modifiés seront affichés dans cette section.",
   "EmptyRootRoomUserDescription": "La salle partagée apparaîtra ici.",
   "EmptyRootRoomUserTitle": "Il n'y a pas encore de salles ici",
+  "EmptyTemplatesDescription": "Vous pouvez créer un modèle à partir d'une salle dans la section Salle",
+  "EmptyTemplatesTitle": "Aucun modèle ici pour l'instant",
   "FormFolderDefaultDescription": "Déposez les formulaires PDF ici ou téléchargez-les à partir de {{productName}} ou d'un appareil.",
   "FormFolderDefaultTitle": "Aucun formulaire disponible",
   "FormFolderDefaultUserDescription": "Les formulaires téléchargés par les administrateurs apparaîtront ici.",
@@ -33,6 +35,7 @@
   "MigrationDataDescription": "Importez des données dans votre {{productName}} à partir de {{organizationName}} Workspace, Google Workspace ou Nextcloud.",
   "MigrationDataTitle": "Données de migration",
   "PublicRoomEmptyTitle": "Bienvenue dans la salle publique",
+  "SectionsUploadDescription": "Téléchargez n'importe quel type de fichiers à partir de {{sectionNameFirst}} ou {{sectionNameSecond}}",
   "SendInvitationLetter": "Envoyez une lettre d'invitation pour ajouter de nouveaux membres au portail",
   "ShareOptionDescription": "Copiez un lien d'accès public ou invitez d'autres utilisateurs dans la salle pour lancer le processus de remplissage du formulaire.",
   "ShareOptionTitle": "Partager une salle",
@@ -42,9 +45,7 @@
   "UploadDeviceOptionTitle": "Télécharger à partir de votre appareil",
   "UploadDevicePDFFormOptionDescription": "Téléchargez un formulaire PDF prêt à l'emploi dans la salle à partir de votre appareil.",
   "UploadDevicePDFFormOptionTitle": "Télécharger à partir de l'appareil",
-  "UploadFromPortalDescription": "Télécharger n'importe quel type de fichier à partir de Documents ou de salles",
   "UploadFromPortalTitle": "Télécharger à partir de {{productName}}",
   "UploadPDFFormOptionDescription": "Sélectionnez un formulaire PDF prêt à l'emploi disponible dans {{productName}} et téléchargez-le dans la salle.",
-  "UserEmptyDescription": "Les fichiers et dossiers téléchargés par les administrateurs apparaissent ici.",
   "VirtualDataRoomEmptyTitle": "Bienvenue dans la salle de données virtuelle"
 }

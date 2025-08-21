@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -56,6 +56,7 @@ const TrashRowDataComponent = (props) => {
     showHotkeyBorder,
     badgesComponent,
     tableStorageName,
+    index,
   } = props;
 
   const lastColumn = getLastColumn(tableStorageName);
@@ -64,6 +65,7 @@ const TrashRowDataComponent = (props) => {
     <>
       <TableCell
         {...dragStyles}
+        dataTestId={`trash-cell-name-${index}`}
         className={classNames(
           selectionProp?.className,
           "table-container_file-name-cell",
@@ -85,6 +87,7 @@ const TrashRowDataComponent = (props) => {
 
       {roomColumnIsEnabled ? (
         <TableCell
+          dataTestId={`trash-cell-room-${index}`}
           style={
             !roomColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
@@ -105,6 +108,7 @@ const TrashRowDataComponent = (props) => {
 
       {authorTrashColumnIsEnabled ? (
         <TableCell
+          dataTestId={`trash-cell-author-${index}`}
           style={
             !authorTrashColumnIsEnabled
               ? { background: "none" }
@@ -127,6 +131,7 @@ const TrashRowDataComponent = (props) => {
 
       {createdTrashColumnIsEnabled ? (
         <TableCell
+          dataTestId={`trash-cell-created-${index}`}
           style={
             !createdTrashColumnIsEnabled
               ? { background: "none !important" }
@@ -150,6 +155,7 @@ const TrashRowDataComponent = (props) => {
 
       {erasureColumnIsEnabled ? (
         <TableCell
+          dataTestId={`trash-cell-erasure-${index}`}
           style={
             !erasureColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
@@ -170,6 +176,7 @@ const TrashRowDataComponent = (props) => {
 
       {sizeTrashColumnIsEnabled ? (
         <TableCell
+          dataTestId={`trash-cell-size-${index}`}
           style={
             !sizeTrashColumnIsEnabled
               ? { background: "none" }
@@ -192,6 +199,7 @@ const TrashRowDataComponent = (props) => {
 
       {typeTrashColumnIsEnabled ? (
         <TableCell
+          dataTestId={`trash-cell-type-${index}`}
           style={
             !typeTrashColumnIsEnabled
               ? { background: "none !important" }

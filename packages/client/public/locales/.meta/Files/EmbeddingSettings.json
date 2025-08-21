@@ -1,0 +1,280 @@
+{
+  "key_path": "EmbeddingSettings",
+  "content": "Embedding settings",
+  "content_en_sha1_hash": "f68b03428551028203fbc50d7d234dd996565a65",
+  "created_at": "2025-05-19T21:30:55.532Z",
+  "updated_at": "2025-08-11T09:02:43.890Z",
+  "comment": {
+    "text": "This translation key is used for the label \"Files:EmbeddingSettings\" in a modal dialog, providing context to users when they access embedding settings within the application.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:39:53.902Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
+      "line_number": 410,
+      "context": "withBodyScroll\n displayType={ModalDialogType.aside}\n withoutPadding\n dataTestId=\"embedding_panel_modal\"\n >\n <ModalDialog.Header>{t(\"Files:EmbeddingSettings\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <StyledBody>\n {barIsVisible ? (\n <div className=\"embedding-panel_banner\">\n <Text fontSize=\"12px\" fontWeight={400}>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"اعدادات الدمج\" (I'adat al-damj) is a literal translation of \"Embedding settings,\" it might not be the most natural or readily understood term in a Saudi Arabian context. 'Embedding' in the tech context can sometimes be better conveyed with a term referencing 'integration' or 'inclusion' depending on the specific use case.",
+          "suggestion": "Consider alternatives like \"إعدادات التكامل\" (I'adat al-tamakeel - Integration Settings) or \"إعدادات الإدماج\" (I'adat al-idmaj - Inclusion Settings) depending on the specific technical context.  A more accurate translation would require understanding the function of the 'Embedding Settings'."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Yerləşdirmə parametrləri\" while technically accurate, doesn't perfectly capture the nuance of \"Embedding settings.\" \"Embedding\" in this context refers to a specific technique for representing data. A more precise translation might consider terms like \"Vektor təmsilçisi parametrləri\" or \"Daxil etmə parametrləri\" depending on the overall context of the software.",
+          "suggestion": "Consider alternatives like \"Vektor təmsilçisi parametrləri\" or \"Daxil etmə parametrləri\" to better convey the meaning of 'Embedding'."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Bulgarian translation \"Вграждане на настройки\" literally translates to 'Embedding of settings'. While not entirely wrong, a more natural and accurate translation of 'Embedding settings' would be something like 'Настройки за вграждане' or 'Параметри за вграждане'.  'Вграждане на настройки' implies the settings *themselves* are being embedded, not settings *related to* embedding.",
+          "suggestion": "Настройки за вграждане"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Einstellungen zum Einbetten\" is understandable, a more natural and precise translation of \"Embedding settings\" in a technical context might be \"Einbettungseinstellungen\". \"Einstellungen zum Einbetten\" sounds slightly clunky.",
+          "suggestion": "Einbettungseinstellungen"
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Ներկառուցման կարգավորումներ\" (Nerkarut'umyan kargavorumner) literally translates to \"Built-in settings\". While close, 'Embedding settings' refers to settings related to embeddings, which is a more specific technical term. A more accurate translation would reflect this specificity.",
+          "suggestion": "Consider a translation like \"Տեղաբաշկարանային կարգավորումներ\" (Tegabashkaranayin kargavorumner) which more accurately conveys the concept of 'embedding settings'."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Dutch translation \"Insluiten instellingen\" is not the most natural or accurate translation of \"Embedding settings.\" \"Insluiten\" implies enclosing or embedding something within something else, which is a component of embeddings, but not the setting itself. A more appropriate translation would be something like \"Inbeddings instellingen\" or \"Embeddings instellingen\".",
+          "suggestion": "Embeddings instellingen"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Parametri de încorporare' is understandable, it's not the most natural or accurate translation of 'Embedding settings'. 'Setări de încorporare' would be a closer and more common equivalent in Romanian.",
+          "suggestion": "Setări de încorporare"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"කාවැද්දීමේ සැකසුම්\" while attempting to convey 'Embedding settings', is not the most natural or accurate translation in Sinhala. 'කාවැද්දීම' (kāvadḍim) primarily means 'embedding' in the sense of inserting or fixing something firmly.  'සැකසුම්' (sękäsům) means 'settings'.  A more accurate and natural translation would focus on conveying 'settings' related to embedding.",
+          "suggestion": "Possible alternatives include: \"ඇමුණුම් සැකසුම්\" (aṁuṇum säkäsům - embedding settings), \"ඇමුණුම් පණිවිడి සැකසුම්\" (aṁuṇum paniwidī säkäsům - embedding configuration), or a more descriptive phrase depending on the specific context."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Nastavitve vdelave\" is a literal translation, \"vdelave\" is not the most natural or widely understood term for 'embedding' in this context. 'Vdelava' implies a deeper, more complex embedding than might be intended. A more common and understandable term would be 'vgrajevanja' or potentially 'povezav'.",
+          "suggestion": "Consider \"Nastavitve vgrajevanja\" or \"Nastavitve povezav\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Podešavanja ugrađivanja\" is not the most natural or accurate translation of \"Embedding settings\". \"Ugrađivanje\" refers to embedding something *into* something else. A more appropriate translation might be \"Postavke ugrađivanja\" or \"Opcije ugrađivanja\", or perhaps even a more descriptive phrase depending on the context.",
+          "suggestion": "Consider \"Postavke ugrađivanja\", \"Opcije ugrađivanja\", or a context-specific alternative."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Параметри вбудовування' is a possible translation, 'Налаштування вбудовування' might be more accurate and common in this context, signifying configurable settings.",
+          "suggestion": "Налаштування вбудовування"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Cài đặt nhúng\" is a literal translation of \"Embedding settings\". While technically correct, a more natural and commonly used term in Vietnamese for \"Embedding settings\" in a technical context might be \"Thiết lập nhúng\" or potentially \"Cấu hình nhúng\". \"Cài đặt\" generally refers to installation, which isn't quite the intended meaning.",
+          "suggestion": "Consider using \"Thiết lập nhúng\" or \"Cấu hình nhúng\" for a more natural and accurate translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

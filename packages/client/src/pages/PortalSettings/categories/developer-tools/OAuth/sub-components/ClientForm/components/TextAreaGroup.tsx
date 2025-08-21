@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -38,6 +38,7 @@ interface TextAreaProps {
   placeholder: string;
   increaseHeight: boolean;
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  dataTestId?: string;
 }
 
 const TextAreaGroup = ({
@@ -49,6 +50,7 @@ const TextAreaGroup = ({
   increaseHeight,
 
   onChange,
+  dataTestId,
 }: TextAreaProps) => {
   return (
     <StyledInputGroup>
@@ -61,7 +63,6 @@ const TextAreaGroup = ({
           tag=""
           as="p"
           color=""
-          textAlign=""
         >
           {label}
         </Text>
@@ -74,6 +75,7 @@ const TextAreaGroup = ({
         tabIndex={0}
         heightTextArea={increaseHeight ? 81 : 60}
         maxLength={255}
+        dataTestId={dataTestId}
       />
     </StyledInputGroup>
   );

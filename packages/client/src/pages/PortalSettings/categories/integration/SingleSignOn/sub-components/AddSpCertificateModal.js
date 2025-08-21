@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -76,7 +76,7 @@ const AddSpCertificateModal = (props) => {
           >
             {t("GenerateCertificate")}
           </Link>
-          <Text isBold className="text-area-label" noSelect>
+          <Text isBold className="text-area-label">
             {t("OpenCertificate")}
           </Text>
 
@@ -91,7 +91,7 @@ const AddSpCertificateModal = (props) => {
             heightTextArea="72px"
           />
 
-          <Text isBold className="text-area-label" noSelect>
+          <Text isBold className="text-area-label">
             {t("PrivateKey")}
           </Text>
 

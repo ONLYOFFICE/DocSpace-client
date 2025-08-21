@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,27 +26,38 @@
 
 import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
+import { useNavigate } from "react-router";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
 import { isManagement } from "@docspace/shared/utils/common";
 import { DeviceType } from "@docspace/shared/enums";
+import { MobileView } from "@docspace/shared/pages/Branding/MobileView";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+
 import { WhiteLabel } from "./Branding/whitelabel";
+import { BrandName } from "./Branding/brandName";
 import { CompanyInfoSettings } from "./Branding/companyInfoSettings";
 import { AdditionalResources } from "./Branding/additionalResources";
-import MobileView from "./Branding/MobileView";
 
-import LoaderBrandingDescription from "./sub-components/loaderBrandingDescription";
+import LoaderBrandingSubtitle from "./sub-components/loaderBrandingSubtitle";
 import { UnavailableStyles } from "../../utils/commonSettingsStyles";
+
+const baseUrl = "/portal-settings/customization";
 
 const StyledComponent = styled.div`
   max-width: 700px;
   width: 100%;
   font-weight: 400;
   font-size: 13px;
+
+  .category-description {
+    line-height: 20px;
+    color: ${(props) => props.theme.client.settings.common.descriptionColor};
+    margin-bottom: 20px;
+  }
 
   .header {
     font-weight: 700;
@@ -63,15 +74,8 @@ const StyledComponent = styled.div`
     max-width: 433px;
   }
 
-  .section-description {
-    color: ${(props) =>
-      props.theme.client.settings.common.brandingDescriptionColor};
-    line-height: 20px;
-    padding-bottom: 20px;
-  }
-
   hr {
-    margin: 24px 0;
+    margin: 20px 0;
     border: none;
     border-top: ${(props) => props.theme.client.settings.separatorBorder};
   }
@@ -81,62 +85,71 @@ const StyledComponent = styled.div`
 
 const Branding = ({
   t,
-  isLoadedCompanyInfoSettingsData,
+  isWhiteLabelLoaded,
+  isBrandNameLoaded,
   isSettingPaid,
   standalone,
   deviceType,
   portals,
   displayAbout,
 }) => {
+  const navigate = useNavigate();
   const isMobileView = deviceType === DeviceType.mobile;
 
   useEffect(() => {
-    setDocumentTitle(t("Branding"));
+    setDocumentTitle(t("Common:Branding"));
   }, []);
 
   const hideBlock = isManagement() ? false : portals?.length > 1;
 
   const showSettings = standalone && !hideBlock;
 
-  if (isMobileView)
+  const onClickLink = (e) => {
+    e.preventDefault();
+    navigate(e.target.pathname);
+  };
+
+  if (isMobileView) {
+    const mobileViewDisplayAbout = showSettings && displayAbout;
+
     return (
       <MobileView
         isSettingPaid={isSettingPaid || standalone}
-        showSettings={showSettings}
-        displayAbout={displayAbout}
+        displayAbout={mobileViewDisplayAbout}
+        displayAdditional={showSettings}
+        baseUrl={baseUrl}
+        onClickLink={onClickLink}
       />
     );
+  }
 
   return (
     <StyledComponent isSettingPaid={isSettingPaid}>
+      {!isWhiteLabelLoaded && !isBrandNameLoaded ? (
+        <LoaderBrandingSubtitle />
+      ) : (
+        <div className="category-description">
+          {t("Common:BrandingSubtitle")}
+        </div>
+      )}
+      <BrandName />
+      <hr />
       <WhiteLabel />
-      {showSettings && (
+      {showSettings ? (
         <>
           <hr />
-          {displayAbout ? (
-            <>
-              {isLoadedCompanyInfoSettingsData ? (
-                <div className="section-description settings_unavailable">
-                  {t("Settings:BrandingSectionDescription", {
-                    productName: t("Common:ProductName"),
-                  })}
-                </div>
-              ) : (
-                <LoaderBrandingDescription />
-              )}
-              <CompanyInfoSettings />
-            </>
-          ) : null}
+          <CompanyInfoSettings />
+          <hr />
           <AdditionalResources />
         </>
-      )}
+      ) : null}
     </StyledComponent>
   );
 };
 
 export default inject(({ settingsStore, currentQuotaStore, brandingStore }) => {
   const { isCustomizationAvailable } = currentQuotaStore;
-  const { isLoadedCompanyInfoSettingsData } = brandingStore;
+  const { isWhiteLabelLoaded, isBrandNameLoaded } = brandingStore;
   const {
     standalone,
     portals,
@@ -147,7 +160,8 @@ export default inject(({ settingsStore, currentQuotaStore, brandingStore }) => {
   const isSettingPaid = checkEnablePortalSettings(isCustomizationAvailable);
 
   return {
-    isLoadedCompanyInfoSettingsData,
+    isWhiteLabelLoaded,
+    isBrandNameLoaded,
     isSettingPaid,
     standalone,
     portals,

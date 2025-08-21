@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -36,11 +36,16 @@ import {
 } from "@docspace/shared/api/files/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import { TSettings } from "@docspace/shared/api/settings/types";
-import { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
-import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
 import {
+  HeaderProps,
+  TBreadCrumb,
+} from "@docspace/shared/components/selector/Selector.types";
+import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
+import type {
   ConflictResolveType,
   FilesSelectorFilterTypes,
+  RoomsType,
+  StartFillingMode,
 } from "@docspace/shared/enums";
 import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import { TTranslation } from "@docspace/shared/types";
@@ -59,17 +64,29 @@ export type TDocumentInfoSharingSettings = {
   user: string;
   permissions: string;
 };
+
+export type SdkSearchParams = {
+  locale?: string | null | undefined;
+  theme?: string | undefined;
+  editorGoBack?: boolean | "event";
+  is_file?: boolean;
+  isSDK?: boolean;
+};
+
 export type RootPageProps = {
-  searchParams: Partial<{
-    fileId: string;
-    fileid: string;
-    version: string;
-    doc: string;
-    action: ActionType;
-    share: string;
-    editorType: string;
-    error?: string;
-  }>;
+  searchParams: Promise<
+    Partial<{
+      fileId: string;
+      fileid: string;
+      version: string;
+      doc: string;
+      action: ActionType;
+      share: string;
+      editorType: string;
+      error?: string;
+    }> &
+      SdkSearchParams
+  >;
 };
 export type TDocumentInfo = {
   favorite: boolean;
@@ -103,6 +120,8 @@ export type TDocument = {
     fileKey: string;
     instanceId: string;
     key: string;
+    roomId: string;
+    canEditRoom: boolean;
   };
   title: string;
   token: string;
@@ -134,6 +153,14 @@ export type TEditorConfigCustomization = {
 
 export type TEditorConfigMode = "edit" | "view";
 
+export type TEditorConfigEmbedded = {
+  fullscreenUrl: string;
+  saveUrl: string;
+  toolbarDocked: string;
+  embedUrl?: string;
+  shareUrl?: string;
+};
+
 export type TEditorConfig = {
   callbackUrl: string;
   canCoAuthoring: boolean;
@@ -156,6 +183,7 @@ export type TEditorConfig = {
   canUseHistory: boolean;
   createUrl: string;
   customization: TEditorConfigCustomization;
+  embedded: TEditorConfigEmbedded;
   lang: string;
   mergeFolderUrl?: unknown;
   mode: TEditorConfigMode;
@@ -173,7 +201,7 @@ export interface IInitialConfig {
   document: TDocument;
   documentType: TDocumentType;
   editorConfig: TEditorConfig;
-  editorType: number;
+  editorType: string;
   editorUrl: string;
   file: TFile;
   token: string;
@@ -182,8 +210,9 @@ export interface IInitialConfig {
   errorMessage?: string;
   message?: undefined;
   startFilling?: boolean;
-
+  startFillingMode?: StartFillingMode;
   fillingSessionId?: string;
+  fillingStatus?: boolean;
 }
 
 export type TError = {
@@ -206,6 +235,8 @@ export type TResponse =
       fileId?: string;
       hash?: string;
       shareKey?: string;
+      deepLinkSettings?: number;
+      baseSdkConfig?: TFrameConfig;
     }
   | {
       error: TError;
@@ -219,6 +250,8 @@ export type TResponse =
       fileId?: string;
       hash?: string;
       shareKey?: string;
+      deepLinkSettings?: number;
+      baseSdkConfig?: TFrameConfig;
     };
 
 export type EditorProps = {
@@ -226,22 +259,27 @@ export type EditorProps = {
   successAuth?: boolean;
   user?: TUser;
   doc?: string;
-  documentserverUrl: string;
+  documentServerUrl: string;
   fileInfo?: TFile;
   sdkConfig?: TFrameConfig | null;
   isSharingAccess?: boolean;
   errorMessage?: string;
   isSkipError?: boolean;
   filesSettings?: TFilesSettings;
+  organizationName?: string;
+  shareKey?: string;
 
   onDownloadAs?: (obj: object) => void;
+  openShareFormDialog?: () => void;
   onSDKRequestSharingSettings?: () => void;
   onSDKRequestSaveAs?: (event: object) => void;
   onSDKRequestInsertImage?: (event: object) => void;
   onSDKRequestSelectSpreadsheet?: (event: object) => void;
   onSDKRequestSelectDocument?: (event: object) => void;
   onSDKRequestReferenceSource?: (event: object) => void;
-  onSDKRequestStartFilling?: (haederLabel: string) => void;
+  onStartFillingVDRPanel?: (roles: TFormRole[]) => void;
+  setFillingStatusDialogVisible?: React.Dispatch<React.SetStateAction<boolean>>;
+  onStartFilling?: VoidFunction;
 };
 
 export type TEventData = {
@@ -256,6 +294,7 @@ export type TEventData = {
   emails?: string[];
   c?: string;
   version?: number;
+  link?: string;
 };
 
 export type TEvent = {
@@ -298,6 +337,8 @@ export interface SelectFolderDialogProps {
   fileInfo: TFile;
   filesSettings: TFilesSettings;
   fileSaveAsExtension?: string;
+  organizationName: string;
+  selectedFolderId?: string | number;
 }
 
 export interface SelectFileDialogProps {
@@ -333,12 +374,14 @@ export interface SelectFileDialogProps {
   ) => Promise<void>;
   fileInfo: TFile;
   filesSettings: TFilesSettings;
+  selectedFolderId?: string | number;
 }
 
 export interface UseSocketHelperProps {
   socketUrl: string;
   user?: TUser;
   shareKey?: string;
+  standalone?: boolean;
 }
 
 export interface UseEventsProps {
@@ -353,6 +396,11 @@ export interface UseEventsProps {
   t: TTranslation;
 
   sdkConfig?: TFrameConfig | null;
+  organizationName: string;
+  shareKey?: string;
+  setFillingStatusDialogVisible?: React.Dispatch<React.SetStateAction<boolean>>;
+  openShareFormDialog?: VoidFunction;
+  onStartFillingVDRPanel?: (roles: TFormRole[]) => void;
 }
 
 export interface UseInitProps {
@@ -364,6 +412,7 @@ export interface UseInitProps {
 
   setDocTitle: (value: string) => void;
   documentReady: boolean;
+  organizationName: string;
 }
 
 export type THistoryData =
@@ -393,6 +442,7 @@ export type TDocEditor = {
   setActionLink: (link: string) => void;
   setUsers?: ({ c, users }: { c: string; users: TSharedUsers[] }) => void;
   startFilling?: VoidFunction;
+  requestRoles?: VoidFunction;
 };
 
 export type TCatchError =
@@ -411,11 +461,11 @@ export type TCatchError =
   | { message: string }
   | string;
 
-export type StartFillingSelectorDialogPprops = {
+export type StartFillingSelectorDialogProps = {
   fileInfo: TFile;
   isVisible: boolean;
   onClose: VoidFunction;
-  headerLabel: string;
+  header: HeaderProps;
 
   getIsDisabled: (
     isFirstLoad: boolean,
@@ -443,6 +493,7 @@ export type StartFillingSelectorDialogPprops = {
   ) => Promise<void>;
 
   filesSettings: TFilesSettings;
+  createDefineRoomType: RoomsType;
 };
 
 export type ConflictStateType = {
@@ -453,4 +504,9 @@ export type ConflictStateType = {
   reject: (reason?: any) => void;
   fileName: string;
   folderName: string;
+};
+
+export type TFormRole = {
+  name: string;
+  color: string;
 };

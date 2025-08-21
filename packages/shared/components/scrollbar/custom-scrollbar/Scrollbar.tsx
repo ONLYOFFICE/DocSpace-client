@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -223,7 +223,7 @@ export class Scrollbar extends React.Component<ScrollbarProps, ScrollbarState> {
   /**
    * @description Current ScrollState (cached)
    */
-  private scrollValues: ScrollState;
+  public scrollValues: ScrollState;
 
   private _scrollDetectionTO: number | null = null;
 
@@ -1028,10 +1028,9 @@ export class Scrollbar extends React.Component<ScrollbarProps, ScrollbarState> {
       style: styles.content,
       children: createContext ? (
         // eslint-disable-next-line react/jsx-no-constructed-context-values
-        <ScrollbarContext.Provider value={{ parentScrollbar: this }}>
-          {/* @ts-expect-error error from custom scrollbar */}
+        <ScrollbarContext value={{ parentScrollbar: this }}>
           {children}
-        </ScrollbarContext.Provider>
+        </ScrollbarContext>
       ) : (
         children
       ),

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -88,7 +88,7 @@ class Backend {
     loadUrlNamespaces,
     callback,
   ) {
-    let loadPath = this.options.loadPath;
+    let { loadPath } = this.options;
     if (typeof this.options.loadPath === "function") {
       loadPath = this.options.loadPath(languages, namespaces);
     }
@@ -199,16 +199,17 @@ class Backend {
     }
   }
 
-  create(languages, namespace, key, fallbackValue, callback) {
+  create(languagesParam, namespace, key, fallbackValue, callback) {
     // If there is a falsey addPath, then abort -- this has been disabled.
+    const languages =
+      typeof languagesParam === "string" ? [languagesParam] : languagesParam;
     if (!this.options.addPath) return;
-    if (typeof languages === "string") languages = [languages];
     const payload = this.options.parsePayload(namespace, key, fallbackValue);
     let finished = 0;
     const dataArray = [];
     const resArray = [];
     languages.forEach((lng) => {
-      let addPath = this.options.addPath;
+      let { addPath } = this.options;
       if (typeof this.options.addPath === "function") {
         addPath = this.options.addPath(lng, namespace);
       }

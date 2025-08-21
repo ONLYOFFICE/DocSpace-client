@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,7 +30,7 @@ import styled from "styled-components";
 
 import { TableRow, TableCell } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";
-import { convertTime } from "@docspace/shared/utils/convertTime";
+import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
 
 import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 
@@ -64,7 +64,7 @@ const StyledPeopleRow = styled(TableRow)`
 const PeopleTableRow = (props) => {
   const { item, contextOptionsProps, isSettingNotPaid, locale } = props;
   const { email, position } = item;
-  const dateStr = convertTime(item.date, locale);
+  const dateStr = getCorrectDate(locale, item.date);
 
   return (
     <StyledPeopleRow
@@ -102,7 +102,6 @@ const PeopleTableRow = (props) => {
           title={email}
           fontSize="12px"
           fontWeight={600}
-          isTextOverflow
           className="settings_unavailable"
         >
           {item.context}
@@ -115,7 +114,6 @@ const PeopleTableRow = (props) => {
           title={email}
           fontSize="12px"
           fontWeight={600}
-          isTextOverflow
           className="settings_unavailable"
         >
           {item.action}

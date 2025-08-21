@@ -1,14 +1,22 @@
 {
   "ActionCannotBeUndone": "ຜູ້ໃຊ້ພິການທີ່ເລືອກຈະຖືກລຶບອອກຈາກ {{productName}}. ຄຳສັ່ງນີ້ບໍ່ສາມາດຍົກເລີກໄດ້.",
+  "ActionCannotBeUndoneGuests": "ບັນຊີລາຍຊື່ຜູ້ຮັບບໍານານທີ່ຖືກເລືອກຈະຖືກລົບອອກຈາກ {{productName}} ດ້ວຍການກະ ທຳ ນີ້ບໍ່ສາມາດຍົກເລີກໄດ້.",
   "CannotReassignFiles": "ຖ້າ​ຫາກ​ທ່ານ​ລຶບ​ຜູ້​ໃຊ້​ຫຼາຍ​ຄົນ​ໃນ​ເວ​ລາ​ດຽວ​ກັນ​, ທ່ານ​ບໍ່​ສາ​ມາດ​ກໍາ​ນົດ​ໄຟລ​໌​ຂອງ​ເຂົາ​ເຈົ້າ​ກັບ​ຜູ້​ໃຊ້​ອື່ນໆ​.",
-  "DeleteGroupUsersSuccessMessage": "ຢູເຊີ້ນີ້ມີແລ້ວ.",
-  "DeleteMyDocumentsUser": "ໄຟລ໌ແລະໂຟນເດີ້ສ່ວນຕົວທັງໝົດຢູ່ໃນພາກສ່ວນເອກະສານຂອງຂ້ອຍຂອງຜູ້ໃຊ້ນີ້ຈະຖືກລຶບຢ່າງຖາວອນ.",
-  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} ຫ້ອງທີ່ສ້າງຂຶ້ນໂດຍຜູ້ໃຊ້ນີ້ ແລະເອກະສານທີ່ເກັບໄວ້ໃນຫ້ອງເຫຼົ່ານີ້ຈະຖືກມອບໝາຍຄືນໃໝ່ໂດຍອັດຕະໂນມັດໃຫ້ກັບຜູ້ເບິ່ງແຍງລະບົບທີ່ດຳເນີນການລຶບ: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. ມອບໝາຍຂໍ້ມູນຄືນໃໝ່ດ້ວຍຕົນເອງເພື່ອເລືອກຜູ້ໃຊ້ປາຍທາງອື່ນສຳລັບການມອບໝາຍຄືນໃໝ່.",
+  "DeleteGroupGuestsSuccessMessage": "ບັນຊີລາຍຊື່ຜູ້ເຂົ້າຊົມຖືກລົບອອກສຳເລັດແລ້ວ.",
+  "DeleteGroupUsersSuccessMessage": "ຜູ້ໃຊ້ໄດ້ຖືກລົບອອກຢ່າງສໍາເລັດແລ້ວ.",
+  "DeleteGuest": "ລົບລ້າງບັນຊີແຂກ",
+  "DeleteGuests": "ລົບລ້າງແຂກ",
+  "DeletePersonalDataApplicable": "* ໃຊ້ໄດ້ກັບຜູ້ໃຊ້ທີ່ເລືອກທີ່ມີໄຟລ໌ ແລະໂຟນເດີ້ດັ່ງກ່າວ.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} ຫ້ອງທີ່ສ້າງຂຶ້ນໂດຍຜູ້ໃຊ້ນີ້ ແລະເອກະສານທີ່ເກັບໄວ້ໃນຫ້ອງເຫຼົ່ານີ້ຈະຖືກມອບໝາຍຄືນໃໝ່ໂດຍອັດຕະໂນມັດໃຫ້ກັບຜູ້ເບິ່ງແຍງລະບົບທີ່ດຳເນີນການລຶບ: <1>{{userPerformedDeletion}} ({{userYou}})</1>. ມອບໝາຍຂໍ້ມູນຄືນໃໝ່ດ້ວຍຕົນເອງເພື່ອເລືອກຜູ້ໃຊ້ປາຍທາງອື່ນສຳລັບການມອບໝາຍຄືນໃໝ່.",
+  "DeleteReqassignDescriptionGuest": "ຄຳບັນນາານາມ {{userCaption}} ຈະຖືກລົບອອກຈາກຫ້ອງທັງໝົດທີ່ຖືກເຊີນເຂົ້າໄປ. ເອກະສານທີ່ສ້າງໂດຍ {{userCaption}} ພາຍໃນຫ້ອງຈະຖືກມອບໝາຍໃຫ້ເຈົ້າຂອງຫ້ອງໂດຍອັດຕະໂນມັດ.",
   "DeleteUser": "ລຶບຜູ້ໃຊ້",
-  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> ຈະຖືກລຶບອອກ. ຄຳສັ່ງນີ້ບໍ່ສາມາດຍົກເລີກໄດ້.",
+  "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> ຈະຖືກລຶບອອກ. ຄຳສັ່ງນີ້ບໍ່ສາມາດຍົກເລີກໄດ້.",
   "DeletingUsers": "ກຳລັງລຶບຜູ້ໃຊ້",
+  "PersonalDataDeletionInfo": "ຂໍ້ມູນສ່ວນຕົວ, ເອກະສານ ແລະ ໂຟນເດີທັງໝົດໃນພື້ນທີ່ {{sectionNameFirst}} ແລະ {{sectionNameSecond}}* ຂອງຜູ້ໃຊ້ທີ່ຖືກເລືອກຈະຖືກລົບຖິ້ມຖາວອນ. ເອກະສານ ແລະ ໂຟນເດີຂອງຜູ້ໃຊ້ທີ່ຖືກເລືອກທີ່ຖືກເກັບໄວ້ໃນພື້ນທີ່ສາທາະລຶກ* ຢ່າງເຊັ່ນຫ້ອງຈະຍັງຄົງຢູ່ໃນ {{productName}}.",
   "PleaseNote": "ກະ​ລຸ​ນາ​ບັນ​ທຶກ:",
   "ReassignDataToAnotherUser": "ມອບໝາຍຂໍ້ມູນຄືນໃໝ່ໃຫ້ຜູ້ໃຊ້ອື່ນ",
+  "SuccessfullyDeleteGuestInfoMessage": "ແຂກຖືກລົບອອກສຳເລັດແລ້ວ",
   "SuccessfullyDeleteUserInfoMessage": "ຜູ້ໃຊ້ຖືກລຶບອອກແລ້ວ",
-  "ToBeAbleToReassignData": "ເພື່ອສາມາດມອບໝາຍຂໍ້ມູນຄືນໃໝ່ໄດ້, ໃຫ້ລຶບຜູ້ໃຊ້ເທື່ອລະຄົນອອກ.\n"
+  "ToBeAbleToReassignData": "ເພື່ອສາມາດມອບໝາຍຂໍ້ມູນຄືນໃໝ່ໄດ້, ໃຫ້ລຶບຜູ້ໃຊ້ເທື່ອລະຄົນອອກ.\n",
+  "UserFilesRemovalScope": "ຂໍ້ມູນສ່ວນຕົວ, ເອກະສານ ແລະ ໂຟນເດີທັງໝົດໃນພື້ນທີ່ {{sectionNameFirst}} ແລະ {{sectionNameSecond}} ຂອງຜູ້ໃຊ້ນີ້ ຈະຖືກລົບຖິ້ມຖາວອນ."
 }

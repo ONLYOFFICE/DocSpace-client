@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,6 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
+
+import {
+  TFeedAction,
+  TFeedData,
+  RoomMember,
+} from "@docspace/shared/api/rooms/types";
+
 import HistoryUserList from "./UserList";
 import HistoryMainText from "./MainText";
 import HistoryItemList from "./ItemList";
@@ -33,7 +40,10 @@ import HistoryUserGroupRoleChange from "./UserGroupRoleChange";
 import HistoryRoomTagList from "./RoomTagList";
 import { getFeedInfo } from "../FeedInfo";
 
-import { HistoryBlockContentProps } from "./HistoryBlockContent.types";
+type HistoryBlockContentProps = {
+  feed: TFeedAction<TFeedData | RoomMember>;
+  historyWithFileList?: boolean;
+};
 
 const HistoryBlockContent = ({
   feed,
@@ -44,32 +54,41 @@ const HistoryBlockContent = ({
   return (
     <div className="info-panel_history-block">
       {(targetType === "user" || targetType === "group") &&
-        actionType === "update" && <HistoryUserGroupRoleChange feed={feed} />}
+      actionType === "update" ? (
+        <HistoryUserGroupRoleChange feed={feed as TFeedAction<RoomMember>} />
+      ) : null}
 
       <HistoryMainText feed={feed} />
 
       {(targetType === "file" || targetType === "folder") &&
-        (actionType === "rename" ||
-          historyWithFileList ||
-          actionType === "changeIndex") && (
-          <HistoryItemList
-            feed={feed}
-            actionType={actionType}
-            targetType={targetType}
-          />
-        )}
+      (actionType === "rename" ||
+        historyWithFileList ||
+        actionType === "changeIndex") ? (
+        <HistoryItemList
+          feed={feed as TFeedAction<TFeedData>}
+          actionType={actionType}
+          targetType={targetType}
+        />
+      ) : null}
 
       {feed.related.length > 0 &&
-        targetType === "group" &&
-        actionType !== "update" && <HistoryGroupList feed={feed} />}
+      targetType === "group" &&
+      actionType !== "update" ? (
+        <HistoryGroupList feed={feed as TFeedAction<TFeedData>} />
+      ) : null}
 
       {feed.related.length > 0 &&
-        targetType === "user" &&
-        actionType !== "update" && <HistoryUserList feed={feed} />}
+      targetType === "user" &&
+      actionType !== "update" ? (
+        <HistoryUserList feed={feed as TFeedAction<RoomMember>} />
+      ) : null}
 
-      {targetType === "roomTag" && (
-        <HistoryRoomTagList feed={feed} actionType={actionType} />
-      )}
+      {targetType === "roomTag" ? (
+        <HistoryRoomTagList
+          feed={feed as TFeedAction<TFeedData>}
+          actionType={actionType}
+        />
+      ) : null}
     </div>
   );
 };

@@ -1,0 +1,39 @@
+@use "../../styles/mixins";
+
+@use "../../styles/variables/colors";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+
+  .title {
+    padding-top: 20px;
+    padding-bottom: 12px;
+  }
+
+  .titleLink {
+    margin-bottom: 12px;
+    line-height: 16px;
+    color: #{colors.$gray};
+  }
+}
+
+.row {
+  padding: 16px 0;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-inline-start: auto;
+  }
+}

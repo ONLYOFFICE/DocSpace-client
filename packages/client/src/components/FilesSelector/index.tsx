@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -54,7 +54,7 @@ import FilesStore from "SRC_DIR/store/FilesStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 
 import { FilesSelectorProps } from "./FilesSelector.types";
-import { getAcceptButtonLabel, getHeaderLabel, getIsDisabled } from "./utils";
+import { getAcceptButtonLabel, getIsDisabled } from "./utils";
 
 let disabledItems: (string | number)[] = [];
 
@@ -144,6 +144,7 @@ const FilesSelectorWrapper = ({
   withCreate,
   folderIsShared,
   checkCreating,
+  logoText,
 }: FilesSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Files",
@@ -192,7 +193,7 @@ const FilesSelectorWrapper = ({
   const formProps = useMemo(() => {
     let isRoomFormAccessible = true;
 
-    if (isSelect) return;
+    if (isSelect || isFormRoom) return;
 
     if (isCopy || isMove)
       isRoomFormAccessible = selection.every(
@@ -208,9 +209,9 @@ const FilesSelectorWrapper = ({
       const several = selection.length > 1;
 
       // for backup
-      if (!selection.length) return t("Files:BackupNotAllowedInFormRoom");
+      if (!selection.length) return t("Common:BackupNotAllowedInFormRoom");
 
-      const option = { organizationName: t("Common:OrganizationName") };
+      const option = { organizationName: logoText };
 
       if (isCopy)
         return several
@@ -231,7 +232,7 @@ const FilesSelectorWrapper = ({
       message,
       isRoomFormAccessible,
     };
-  }, [selection, isCopy, isMove, t]);
+  }, [selection, isCopy, isMove, isFormRoom, t]);
 
   const onAccept = async (
     selectedItemId: string | number | undefined,
@@ -263,15 +264,17 @@ const FilesSelectorWrapper = ({
       if (folderIds.length || fileIds.length) {
         const operationData = {
           destFolderId: selectedItemId,
+          destFolderInfo: selectedTreeNode,
           folderIds,
           fileIds,
           deleteAfter: false,
           isCopy,
           folderTitle,
-          translations: {
-            copy: t("Common:CopyOperation"),
-            move: t("Common:MoveToOperation"),
-          },
+          itemsCount: selection.length,
+          ...(selection.length === 1 && {
+            title: selection[0].title,
+            isFolder: selection[0].isFolder,
+          }),
         };
 
         if (showMoveToPublicDialog) {
@@ -296,7 +299,12 @@ const FilesSelectorWrapper = ({
             const move = !isCopy;
             if (move) setMovingInProgress(move);
             sessionStorage.setItem("filesSelectorPath", `${selectedItemId}`);
-            await itemOperationToFolder(operationData);
+
+            try {
+              await itemOperationToFolder(operationData);
+            } catch (error) {
+              console.error(error);
+            }
           }
         } catch (e: unknown) {
           toastr.error(e as TData);
@@ -328,19 +336,19 @@ const FilesSelectorWrapper = ({
     }
   };
 
-  const headerLabel = getHeaderLabel(
-    t,
-    isEditorDialog,
-    isCopy,
-    isRestoreAll,
-    isMove,
-    isSelect,
-    filterParam,
-    isRestore,
-    isFormRoom,
-    isThirdParty,
-    isSelectFolder,
-  );
+  // const headerLabel = getHeaderLabel(
+  //   t,
+  //   isEditorDialog,
+  //   isCopy,
+  //   isRestoreAll,
+  //   isMove,
+  //   isSelect,
+  //   filterParam,
+  //   isRestore,
+  //   isFormRoom,
+  //   isThirdParty,
+  //   isSelectFolder,
+  // );
 
   const defaultAcceptButtonLabel = getAcceptButtonLabel(
     t,
@@ -413,7 +421,6 @@ const FilesSelectorWrapper = ({
       onSubmit={onAccept}
       getIsDisabled={getIsDisabledAction}
       withHeader={withHeader}
-      headerLabel={headerLabel}
       submitButtonLabel={acceptButtonLabel || defaultAcceptButtonLabel}
       withCancelButton={withCancelButton}
       isPanelVisible={isPanelVisible}
@@ -512,7 +519,7 @@ export default inject(
 
     const { setIsMobileHidden: setInfoPanelIsMobileHidden } = infoPanelStore;
 
-    const { currentDeviceType } = settingsStore;
+    const { currentDeviceType, logoText } = settingsStore;
 
     const {
       selection,
@@ -618,6 +625,7 @@ export default inject(
           : folderId || currentFolderIdProp,
       filesSettings,
       folderIsShared: shared,
+      logoText,
     };
   },
 )(observer(FilesSelectorWrapper));

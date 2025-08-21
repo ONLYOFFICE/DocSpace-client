@@ -1,10 +1,8 @@
 {
   "ActiveSessions": "Aktivne seje",
   "AutoDeleteTitle": "Vse seje, starejše od 60 dni, bodo samodejno izbrisane.",
-  "ChangeEmailSuccess": "E-mail naslov je bil uspešno spremenjen ",
   "ChangePasswordAfterLoggingOut": "Zamenjaj geslo po prijavi",
   "ConnectSocialNetworks": "Povežite svoja socialna omrežja",
-  "DarkTheme": "Temna tema",
   "DescriptionForSecurity": "Za večjo varnost morate spremeniti geslo.",
   "DesktopTheme": "Sinhronizacija z nastavitvami namiznega urejevalnika",
   "DesktopThemeDescription": "Samodejno preklapljajte med svetlimi in temnimi temami glede na trenutno temo namiznih urejevalnikov.",
@@ -13,7 +11,6 @@
   "ErrorAccountAlreadyUse": "Povezani račun že uporablja drug uporabnik",
   "FileManagement": "Upravljanje datotek",
   "InterfaceTheme": "Tema vmesnika",
-  "LightTheme": "Svetla tema",
   "LogoutActiveConnection": "Odjava iz aktivne povezave",
   "LogoutAllActiveSessionsDescription": "Vse aktivne povezave bodo odjavljene, razen te, ki je trenutno v uporabi.",
   "LogoutBtn": "Odjava",

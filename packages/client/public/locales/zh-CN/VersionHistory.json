@@ -1,4 +1,6 @@
 {
+  "DeleteVersion": "删除版本",
+  "DeleteVersionDescription": "您即将删除文件版本，将无法再查看或恢复。确定要继续吗？",
   "EditComment": "编辑批注",
   "Version": "版本"
 }

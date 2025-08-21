@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -50,6 +50,7 @@ const UserContent = ({
   standalone,
 
   isRoomAdmin: isRoomAdminUser,
+  itemIndex,
 }: UserContentProps) => {
   const { t } = useTranslation(["People", "Common"]);
   const theme = useTheme();
@@ -69,6 +70,7 @@ const UserContent = ({
   } = item;
 
   const isGuests = contactsTab === "guests";
+  const prefix = isGuests ? "contacts_guests" : "contacts_users";
 
   const isPending = statusType === "pending";
   const isDisabled = statusType === "disabled";
@@ -109,6 +111,8 @@ const UserContent = ({
         color={nameColor}
         isTextOverflow
         noHover
+        truncate
+        dataTestId={`${prefix}_name_link_${itemIndex}`}
       >
         {statusType === "pending"
           ? email
@@ -129,10 +133,11 @@ const UserContent = ({
         fontWeight={400}
         color={sideInfoColor}
         isTextOverflow
+        dataTestId={`${prefix}_role_or_email_link_${itemIndex}`}
       >
         {isGuests ? email : roleLabel}
       </Link>
-      {(!isRoomAdminUser || !isGuests) && (
+      {!isRoomAdminUser || !isGuests ? (
         <Link
           type={LinkType.page}
           title={email}
@@ -140,11 +145,14 @@ const UserContent = ({
           fontWeight={400}
           color={sideInfoColor}
           isTextOverflow
+          dataTestId={`${prefix}_created_by_or_email_link_${itemIndex}`}
         >
           {isGuests ? item.createdBy?.displayName : email}
         </Link>
+      ) : (
+        <div />
       )}
-      {isGuests && !isRoomAdminUser && !isPending && !isDisabled && (
+      {isGuests && !isRoomAdminUser && !isPending && !isDisabled ? (
         <Link
           type={LinkType.page}
           title={email}
@@ -152,20 +160,26 @@ const UserContent = ({
           fontWeight={400}
           color={sideInfoColor}
           isTextOverflow
+          dataTestId={`${prefix}_registration_date_link_${itemIndex}`}
         >
           {item.registrationDate}
         </Link>
+      ) : (
+        <div />
       )}
-      {showStorageInfo && !isGuests && (
+      {showStorageInfo && !isGuests ? (
         <Link
           type={LinkType.page}
           fontSize="12px"
           fontWeight={400}
           color={sideInfoColor}
           isTextOverflow
+          dataTestId={`${prefix}_space_quota_link_${itemIndex}`}
         >
           {spaceQuota}
         </Link>
+      ) : (
+        <div />
       )}
     </StyledRowContent>
   );

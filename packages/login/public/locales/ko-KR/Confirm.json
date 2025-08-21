@@ -1,6 +1,5 @@
 {
   "AccountWillBeCreated": "<1>{{email}}</1>에 대한 {{productName}} 계정이 생성됩니다. 등록을 완료해 주세요:",
-  "ChangePasswordSuccess": "비밀번호가 성공적으로 변경되었습니다",
   "ConfirmOwnerPortalSuccessMessage": "{{productName}} 소유자가 성공적으로 변경되었습니다. 10초 후에 리디렉션됩니다.",
   "ConfirmOwnerPortalTitle": "{{productName}} 소유자를 {{newOwner}}님으로 변경할 것인지 확인해주세요.",
   "CurrentNumber": "사용 중인 휴대폰 번호",
@@ -26,9 +25,6 @@
   "PortalRemoveTitle": "{{productName}}를 삭제할 것인지 확인해주세요.",
   "Reactivate": "다시 활성화",
   "SetAppButton": "앱 연결",
-  "SetAppDescription": "이중 인증이 활성화되었습니다. {{productName}}에서 작업을 계속하시려면 인증 앱을 구성하세요. <1>Android</1> 및 <4>iOS</4>의 경우 Google Authenticator, <8>Windows Phone</8>의 경우 Authenticator를 사용하실 수 있습니다.",
-  "SetAppInstallDescription": "앱에 연결하시려면, QR 코드를 스캔하거나 비밀 키 <1>{{ secretKey }}</1>를 직접 입력한 뒤, 앱에서 생성한 6자리 코드를 아래에 입력해주세요.",
-  "SetAppTitle": "인증 애플리케이션 구성",
   "SignUp": "가입하기",
   "SuccessDeactivate": "계정이 성공적으로 비활성화되었습니다. 10초 후에 <1>사이트</1>로 리디렉션됩니다.",
   "SuccessReactivate": "계정이 성공적으로 재활성화되었습니다. 10초 후에 <1>{{productName}}</1>로 리디렉션됩니다.",

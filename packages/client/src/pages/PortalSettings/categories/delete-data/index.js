@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,7 @@
 
 import React, { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import { Tabs } from "@docspace/shared/components/tabs";
 import { inject, observer } from "mobx-react";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -60,7 +60,7 @@ const DeleteData = (props) => {
   useEffect(() => {
     const path = location.pathname;
     const currentTab = data.find((item) => path.includes(item.id));
-    if (currentTab !== -1 && data.length) setCurrentTabId(currentTab.id);
+    if (currentTab && data.length) setCurrentTabId(currentTab.id);
 
     setIsLoading(true);
   }, [location.pathname]);

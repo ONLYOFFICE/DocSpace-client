@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,9 +27,9 @@
 import styled from "styled-components";
 
 import { tablet, mobile } from "@docspace/shared/utils";
-import Headline from "@docspace/shared/components/headline/Headline";
+import { Heading } from "@docspace/shared/components/heading";
 
-const StyledHeadline = styled(Headline)`
+const StyledHeadline = styled(Heading)`
   font-weight: 700;
   font-size: 18px;
   line-height: 24px;

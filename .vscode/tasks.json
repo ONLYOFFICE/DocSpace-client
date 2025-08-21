@@ -3,6 +3,19 @@
   "problemMatcher": [],
   "tasks": [
     {
+      "label": "Build DocEditor Translations",
+      "type": "shell",
+      "command": "node ./scripts/buildTranslations.js",
+      "options": {
+        "cwd": "${workspaceFolder}/packages/doceditor"
+      },
+      "group": "build",
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared"
+      }
+    },
+    {
       "label": "Backend | build CE",
       "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py",
       "type": "shell",
@@ -335,7 +348,7 @@
     {
       "label": "Frontend | install",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn install",
+      "command": "cd ${workspaceFolder} ; pnpm install",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -348,9 +361,9 @@
       }
     },
     {
-      "label": "Frontend | update yarn.lock",
+      "label": "Frontend | update pnpm-lock.yaml",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn wipe ; yarn install",
+      "command": "cd ${workspaceFolder} ; pnpm run wipe ; pnpm install",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -365,7 +378,22 @@
     {
       "label": "Frontend | build",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn build",
+      "command": "cd ${workspaceFolder} ; pnpm run build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | build:lite",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm run build:lite",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -380,7 +408,22 @@
     {
       "label": "Frontend | start",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn start",
+      "command": "cd ${workspaceFolder} ; pnpm run start",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | start:lite",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm run start:lite",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -395,7 +438,7 @@
     {
       "label": "Frontend | start-prod",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn start-prod",
+      "command": "cd ${workspaceFolder} ; pnpm run start-prod",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -408,9 +451,9 @@
       }
     },
     {
-      "label": "Frontend | start:internal",
+      "label": "Frontend | start-prod:lite",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn start:internal",
+      "command": "cd ${workspaceFolder} ; pnpm run start-prod:lite",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -423,24 +466,9 @@
       }
     },
     {
-      "label": "Frontend | start-prod:internal",
+      "label": "Frontend | deploy",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn start-prod:internal",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Frontend | build-and-start-prod",
-      "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn build ; yarn start-prod",
+      "command": "cd ${workspaceFolder} ; pnpm run deploy",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -455,7 +483,7 @@
     {
       "label": "Frontend | storybook",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn storybook",
+      "command": "cd ${workspaceFolder} ; pnpm run storybook",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -470,7 +498,7 @@
     {
       "label": "Frontend | storybook prod",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn storybook-build ; yarn storybook-serve",
+      "command": "cd ${workspaceFolder} ; pnpm run storybook-serve",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -485,7 +513,7 @@
     {
       "label": "Test | Jest:common",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test ; open reports/tests-results.html",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test ; npm run open-report",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -500,7 +528,7 @@
     {
       "label": "Test | Jest:translations",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:locales ; open reports/tests-results.html",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:locales ; npm run open-report",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -515,7 +543,7 @@
     {
       "label": "Test | Jest:images",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:images ; open reports/tests-results.html",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:images ; npm run open-report",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -530,7 +558,22 @@
     {
       "label": "Test | Jest:colors",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:colors ; open reports/tests-results.html",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:colors ; npm run open-report",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Jest:dependencies",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:dependencies ; npm run open-report",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -545,37 +588,7 @@
     {
       "label": "Test | Jest:unit",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn test ; ",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Frontend | Eslint",
-      "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn lint ; ",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Frontend | Eslint:fix",
-      "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn lint:fix ; ",
+      "command": "cd ${workspaceFolder} ; pnpm test",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -590,47 +603,92 @@
     {
       "label": "Test | Test e2e docker build",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn test:e2e:docker:build ; ",
+      "command": "cd ${workspaceFolder} ; pnpm test:e2e:docker:build",
       "group": {
-         "kind": "build",
-         "isDefault": true
+        "kind": "build",
+        "isDefault": true
       },
       "presentation": {
-         "reveal": "always",
-         "panel": "new",
-         "focus": true,
-         "close": false
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
       }
     },
     {
       "label": "Test | Test e2e docker start",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn test:e2e:docker:start ; ",
+      "command": "cd ${workspaceFolder} ; pnpm test:e2e:docker:start",
       "group": {
-         "kind": "build",
-         "isDefault": true
+        "kind": "build",
+        "isDefault": true
       },
       "presentation": {
-         "reveal": "always",
-         "panel": "new",
-         "focus": true,
-         "close": false
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
       }
     },
     {
       "label": "Test | Test e2e docker clear",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn test:e2e:docker:clear ; ",
+      "command": "cd ${workspaceFolder} ; pnpm test:e2e:docker:clear",
       "group": {
-          "kind": "build",
-          "isDefault": true
+        "kind": "build",
+        "isDefault": true
       },
       "presentation": {
-          "reveal": "always",
-          "panel": "new",
-          "focus": true,
-          "close": false
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
       }
+    },
+    {
+      "label": "Test | ESLint",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm lint",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
       }
+    },
+    {
+      "label": "Test | ESLint:fix",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm lint:fix",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Tsc",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm tsc",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    }
   ]
 }

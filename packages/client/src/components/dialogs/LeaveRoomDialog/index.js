@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -40,7 +40,6 @@ const LeaveRoomDialog = (props) => {
     setChangeRoomOwnerIsVisible,
     isRoomOwner,
     onLeaveRoomAction,
-    updateInfoPanelSelection,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -54,8 +53,8 @@ const LeaveRoomDialog = (props) => {
     } else {
       setIsLoading(true);
       await onLeaveRoomAction(t, isRoomOwner);
+
       setIsLoading(false);
-      updateInfoPanelSelection();
       onClose();
     }
   };
@@ -78,7 +77,7 @@ const LeaveRoomDialog = (props) => {
       <ModalDialog.Header>{t("Files:LeaveTheRoom")}</ModalDialog.Header>
       <ModalDialog.Body>
         <div className="modal-dialog-content-body">
-          <Text noSelect>
+          <Text>
             {isRoomOwner
               ? t("Files:LeaveRoomDescription")
               : t("Files:WantLeaveRoom")}
@@ -87,13 +86,14 @@ const LeaveRoomDialog = (props) => {
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
-          key="OkButton"
+          key="OKButton"
           label={isRoomOwner ? t("Files:AssignOwner") : t("Common:OKButton")}
           size="normal"
           primary
           scale
           onClick={onLeaveRoom}
           isDisabled={isLoading}
+          testId="leave_room_modal_submit"
         />
         <Button
           key="CancelButton"
@@ -102,6 +102,7 @@ const LeaveRoomDialog = (props) => {
           scale
           onClick={onClose}
           isDisabled={isLoading}
+          testId="leave_room_modal_cancel"
         />
       </ModalDialog.Footer>
     </ModalDialog>
@@ -115,7 +116,6 @@ export default inject(
     filesStore,
     selectedFolderStore,
     filesActionsStore,
-    infoPanelStore,
   }) => {
     const {
       leaveRoomDialogVisible: visible,
@@ -124,7 +124,6 @@ export default inject(
     } = dialogsStore;
     const { user } = userStore;
     const { selection, bufferSelection } = filesStore;
-    const { updateInfoPanelSelection } = infoPanelStore;
 
     const selections = selection.length ? selection : [bufferSelection];
     const folderItem = selections[0] ? selections[0] : selectedFolderStore;
@@ -137,7 +136,6 @@ export default inject(
       setChangeRoomOwnerIsVisible,
       isRoomOwner,
       onLeaveRoomAction: filesActionsStore.onLeaveRoom,
-      updateInfoPanelSelection,
     };
   },
 )(observer(withTranslation(["Common", "Files"])(LeaveRoomDialog)));

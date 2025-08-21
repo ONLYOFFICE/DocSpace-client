@@ -25,40 +25,55 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect } from "react";
-
 import { Meta, StoryObj } from "@storybook/react";
-
 import { InputSize, InputType, TextInput } from "../text-input";
-
-import { PasswordInput } from "./PasswordInput";
-
-// import PasswordInputDocs from "./PasswordInput.mdx";
+import { PasswordInput } from ".";
 import { PasswordInputProps, TPasswordValidation } from "./PasswordInput.types";
 
-// const disable = {
-//   table: {
-//     disable: true,
-//   },
-// };
-
 const meta = {
-  title: "Components/PasswordInput",
+  title: "Form Controls/PasswordInput",
   component: PasswordInput,
   parameters: {
     docs: {
       description: {
-        component: "Paging is used to navigate med content pages",
+        component:
+          "PasswordInput is a specialized input component for password entry with built-in validation, strength indicators, and customizable requirements.",
       },
-      // page: PasswordInputDocs,
     },
   },
   argTypes: {
-    // settingMinLength: disable,
-    // settingsUpperCase: disable,
-    // settingsDigits: disable,
-    // settingsSpecSymbols: disable,
+    size: {
+      control: "select",
+      options: Object.values(InputSize),
+      description: "Size of the input field",
+    },
+    simpleView: {
+      control: "boolean",
+      description: "Toggle between simple and advanced view with validation",
+    },
+    isDisabled: {
+      control: "boolean",
+      description: "Disable the input field",
+    },
+    isDisableTooltip: {
+      control: "boolean",
+      description: "Disable the validation tooltip",
+    },
+    maxLength: {
+      control: "number",
+      description: "Maximum length of the password",
+    },
+    inputWidth: {
+      control: "text",
+      description: "Custom width of the input field",
+    },
+    scale: {
+      control: "boolean",
+      description: "Enable scaling of the input field",
+    },
   },
 } satisfies Meta<typeof PasswordInput>;
+
 type Story = StoryObj<typeof PasswordInput>;
 
 export default meta;
@@ -67,7 +82,6 @@ const Template = ({
   tooltipPasswordLength,
   onChange,
   onValidateInput,
-  onCopyToClipboard,
   passwordSettings,
   ...args
 }: PasswordInputProps) => {
@@ -81,7 +95,7 @@ const Template = ({
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange?.(e);
-    setValue(e.currentTarget.value);
+    setValue(e.currentTarget?.value);
   };
 
   const onValidateInputHandler = (
@@ -93,46 +107,53 @@ const Template = ({
 
   return (
     <div style={{ height: "110px", display: "grid", gridGap: "24px" }}>
-      <TextInput
-        name="demoEmailInput"
-        type={InputType.email}
-        size={InputSize.base}
-        isDisabled={args.isDisabled}
-        isReadOnly
-        value="demo@gmail.com"
-      />
+      <div style={{ backgroundColor: "transparent", width: "fit-content" }}>
+        <TextInput
+          name="demoEmailInput"
+          type={InputType.email}
+          size={InputSize.base}
+          isDisabled={args.isDisabled}
+          isReadOnly
+          value="demo@gmail.com"
+          style={{ width: "166px" }}
+        />
+      </div>
 
-      <PasswordInput
-        {...args}
-        inputValue={value}
-        onChange={onChangeHandler}
-        tooltipPasswordLength={`${tooltipPasswordLength} ${passwordSettings?.minLength}`}
-        passwordSettings={fakeSettings}
-        onValidateInput={onValidateInputHandler}
-      />
+      <div style={{ backgroundColor: "transparent", width: "fit-content" }}>
+        <PasswordInput
+          size={InputSize.base}
+          {...args}
+          inputValue={value}
+          onChange={onChangeHandler}
+          tooltipPasswordLength={`${tooltipPasswordLength} ${passwordSettings?.minLength}`}
+          passwordSettings={fakeSettings}
+          onValidateInput={onValidateInputHandler}
+        />
+      </div>
     </div>
   );
+};
+
+// Base configuration for password settings
+const basePasswordSettings = {
+  minLength: 6,
+  upperCase: true,
+  digits: true,
+  specSymbols: true,
+  digitsRegexStr: "(?=.*\\d)",
+  upperCaseRegexStr: "(?=.*[A-Z])",
+  specSymbolsRegexStr: "(?=.*[\\x21-\\x2F\\x3A-\\x40\\x5B-\\x60\\x7B-\\x7E])",
 };
 
 export const Default: Story = {
   render: (args) => <Template {...args} />,
   args: {
     isDisabled: false,
-    passwordSettings: {
-      minLength: 6,
-      upperCase: true,
-      digits: true,
-      specSymbols: true,
-      digitsRegexStr: "(?=.*\\d)",
-      upperCaseRegexStr: "(?=.*[A-Z])",
-      specSymbolsRegexStr:
-        "(?=.*[\\x21-\\x2F\\x3A-\\x40\\x5B-\\x60\\x7B-\\x7E])",
-    },
+    passwordSettings: basePasswordSettings,
     simpleView: false,
-    inputName: "demoPasswordInput",
+    inputName: "demoPasswordInput-default",
     emailInputName: "demoEmailInput",
     isDisableTooltip: false,
-    isTextTooltipVisible: false,
     tooltipPasswordTitle: "Password must contain:",
     tooltipPasswordLength: "minimum length: ",
     tooltipPasswordDigits: "digits",
@@ -142,5 +163,109 @@ export const Default: Story = {
     placeholder: "password",
     maxLength: 30,
     size: InputSize.base,
+  },
+};
+
+export const SimpleView: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    ...Default.args,
+    simpleView: true,
+    inputName: "demoPasswordInput-simple",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Simple view mode without validation indicators, suitable for login forms",
+      },
+    },
+  },
+};
+
+export const CustomValidation: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    ...Default.args,
+    passwordSettings: {
+      ...basePasswordSettings,
+      minLength: 8,
+      upperCase: true,
+      digits: true,
+      specSymbols: false,
+    },
+    inputName: "demoPasswordInput-custom",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Custom validation requirements: minimum 8 characters, uppercase, and digits required",
+      },
+    },
+  },
+};
+
+export const WithCustomWidth: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    ...Default.args,
+    inputWidth: "400px",
+    inputName: "demoPasswordInput-width",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Password input with custom width",
+      },
+    },
+  },
+};
+
+export const Large: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    ...Default.args,
+    size: InputSize.large,
+    inputName: "demoPasswordInput-large",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Large-sized password input",
+      },
+    },
+  },
+};
+
+export const Disabled: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    ...Default.args,
+    isDisabled: true,
+    inputName: "demoPasswordInput-disabled",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Disabled password input state",
+      },
+    },
+  },
+};
+
+export const WithError: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    ...Default.args,
+    hasError: true,
+    inputName: "demoPasswordInput-error",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Password input with error state",
+      },
+    },
   },
 };

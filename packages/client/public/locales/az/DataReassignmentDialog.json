@@ -4,7 +4,6 @@
   "DataReassignment": "Məlumatların yenidən təyin edilməsi",
   "DeleteProfileIsFinished": "Yenidən təyinat tamamlandıqda profili silin",
   "DescriptionDataReassignment": "İstifadəçi tərəfindən yaradılmış otaqları və istifadəçi otaqlarında saxlanılan sənədləri köçürəcəyik.",
-  "InProgress": "Davam edir",
   "Interrupted": "Bağlantı kəsildi, bəzi məlumatlar ötürülə bilmədi",
   "MoreAboutDataTransfer": "Məlumat ötürülməsi haqqında ətraflı məlumat",
   "NewDataOwner": "Yeni məlumat sahibi",
@@ -14,6 +13,7 @@
   "ReassignData": "Məlumatı yenidən təyin edin",
   "ReassigningDataToAnother": "Məlumatın <0>{{fromUser}}</0> istifadəçisindən <1>{{toUser}}</1> istifadəçisinə yenidən təyin edilməsi prosesi başlayıb. Nəzərə alın ki, bu, xeyli vaxt tələb edə bilər.",
   "ReassigningDataToItself": "<0>{{fromUser}}</0> istifadəçisindən <1>{{toUser}}</1> <2>{{you}}</2> istifadəçisinə verilənlərin yenidən təyin edilməsi prosesi başlayıb. Nəzərə alın ki, bu xeyli vaxt apara bilər.",
+  "RoomsOnlyReassignment": "Sizinlə əlaqə saxlayıb yaratdığınız otaqları köçürəcəyik.",
   "StartTransferAgain": "Yenidən köçürməyə başlayın",
   "UserToWhomTheDataWillBeTransferred": "Məlumatların ötürüləcəyi istifadəçi"
 }

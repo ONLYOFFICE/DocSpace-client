@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,14 +25,17 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { Trans, withTranslation } from "react-i18next";
+import { useNavigate } from "react-router";
+import { Trans } from "react-i18next";
+
+import { MobileCategoryWrapper } from "@docspace/shared/components/mobile-category-wrapper";
+
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+
 import { MainContainer } from "../StyledSecurity";
-import MobileCategoryWrapper from "../../../components/MobileCategoryWrapper";
 
 const MobileView = (props) => {
-  const { t } = props;
+  const { t, withoutExternalLink } = props;
 
   const navigate = useNavigate();
 
@@ -48,7 +51,7 @@ const MobileView = (props) => {
   };
 
   return (
-    <MainContainer>
+    <MainContainer withoutExternalLink={withoutExternalLink}>
       <MobileCategoryWrapper
         title={t("SettingPasswordTittle")}
         subtitle={
@@ -75,6 +78,31 @@ const MobileView = (props) => {
           <Trans i18nKey="TrustedMailMobileDescription" ns="Settings" t={t} />
         }
         url="/portal-settings/security/access-portal/trusted-mail"
+        onClickLink={onClickLink}
+      />
+      <MobileCategoryWrapper
+        title={t("DeveloperToolsAccess")}
+        subtitle={
+          <Trans
+            i18nKey="DeveloperToolsAccessMobileDescription"
+            ns="Settings"
+            t={t}
+          />
+        }
+        url="/portal-settings/security/access-portal/access-dev-tools"
+        onClickLink={onClickLink}
+      />
+      <MobileCategoryWrapper
+        title={t("InvitationSettings")}
+        subtitle={
+          <Trans
+            i18nKey="InvitationSettingsMobile"
+            ns="Settings"
+            t={t}
+            values={{ productName: t("Common:ProductName") }}
+          />
+        }
+        url="/portal-settings/security/access-portal/invitation-settings"
         onClickLink={onClickLink}
       />
       <MobileCategoryWrapper
@@ -111,4 +139,4 @@ const MobileView = (props) => {
   );
 };
 
-export default withTranslation("Settings")(MobileView);
+export default MobileView;

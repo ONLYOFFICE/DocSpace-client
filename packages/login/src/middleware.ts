@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,13 +33,12 @@ export function middleware(request: NextRequest) {
   const requestHeaders = new Headers(request.headers);
 
   const host = request.headers.get("x-forwarded-host");
+
   const proto = request.headers.get("x-forwarded-proto");
 
   const redirectUrl = `${proto}://${host}`;
 
   if (request.nextUrl.pathname === "/health") {
-    console.log("Get login health check for portal: ", redirectUrl);
-
     requestHeaders.set("x-health-check", "true");
 
     return NextResponse.json(
@@ -52,7 +51,7 @@ export function middleware(request: NextRequest) {
     const searchParams = new URLSearchParams(request.nextUrl.searchParams);
     const queryType = searchParams.get("type") ?? "";
     const posSeparator = request.nextUrl.pathname.lastIndexOf("/");
-    const type = !!posSeparator
+    const type = posSeparator
       ? request.nextUrl.pathname?.slice(posSeparator + 1)
       : queryType;
 
@@ -88,7 +87,6 @@ export function middleware(request: NextRequest) {
       return NextResponse.redirect(`${redirectUrl}/login/error`);
 
     const error = request.nextUrl.searchParams.get("error");
-
     if (error && error !== OAuth2ErrorKey.missing_asc_cookie_error) {
       return NextResponse.redirect(
         `${redirectUrl}/login/error?oauthMessageKey=${error}`,
@@ -103,7 +101,6 @@ export function middleware(request: NextRequest) {
   } else {
     const url = request.nextUrl.clone();
     url.pathname = "/";
-    const searchParams = new URLSearchParams(request.nextUrl.searchParams);
 
     if (isAuth && redirectUrl) return NextResponse.redirect(redirectUrl);
   }

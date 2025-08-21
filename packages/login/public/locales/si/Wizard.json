@@ -1,6 +1,7 @@
 {
   "Desc": "කරුණාකර {{productName}} ලියාපදිංචි දත්ත පිහිටුවන්න.",
   "ErrorEmail": "වලංගු නොවන වි-තැපෑලකි",
+  "ErrorInstanceId": "වලංගු නොවන අවස්ථා ID",
   "ErrorLicenseBody": "බලපත්‍රය වලංගු නොවේ. නිවැරදි ගොනුව තේරීමට වග බලා ගන්න.",
   "ErrorPassword": "මුරපදය අවශ්‍යතා සපුරාලන්නේ නැත",
   "ErrorUploadLicenseFile": "බලපත්‍ර ගොනුවක් තෝරන්න",

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import type { JSX } from "react";
 import { TDirectionX, TDirectionY } from "../../types";
-import { TTheme } from "../../themes";
 
 export interface DropDownProps {
   /** Children elements */
@@ -44,9 +44,9 @@ export interface DropDownProps {
   id?: string;
   /** Required for specifying the exact width of the component; for example; 100% */
   manualWidth?: string;
-  /** Required for specifying the exact distance from the parent component */
+  /** (Non portal only) Required for specifying the exact distance from the parent component */
   manualX?: string;
-  /** Required for specifying the exact distance from the parent component */
+  /** (Non portal only) Required for specifying the exact distance from the parent component */
   manualY?: string;
   /** Required if the scrollbar is displayed */
   maxHeight?: number;
@@ -60,20 +60,18 @@ export interface DropDownProps {
   columnCount?: number;
   /** Sets the disabled items to display */
   showDisabledItems?: boolean;
-  forwardedRef?: React.MutableRefObject<HTMLDivElement | null>;
+  forwardedRef?: React.RefObject<HTMLElement | null>;
   /** Sets the operation mode of the component. The default option is set to portal mode */
   isDefaultMode?: boolean;
-  /** Used to open people and group selectors correctly when the section width is small */
-  smallSectionWidth?: boolean;
   /** Disables check position. Used to set the direction explicitly */
   fixedDirection?: boolean;
   /** Enables blur for backdrop */
   withBlur?: boolean;
-  /** Specifies the offset */
-  offsetLeft?: number;
+  /** (Portal only) Specifies the horizontal offset */
+  offsetX?: number;
+  /** Test id */
+  dataTestId?: string;
 
-  right?: string;
-  top?: string;
   isMobileView?: boolean;
   isNoFixedHeightOptions?: boolean;
   enableKeyboardEvents?: boolean;
@@ -87,33 +85,50 @@ export interface DropDownProps {
   topSpace?: number;
   usePortalBackdrop?: boolean;
   backDrop?: JSX.Element | null;
+  shouldShowBackdrop?: boolean;
 }
 
 export interface VirtualListProps {
+  /** Width of the list */
   width: number;
-  theme: TTheme;
+  /** Whether the dropdown is open */
   isOpen: boolean;
+  /** Number of items in the list */
   itemCount: number;
+  /** Maximum height of the list */
   maxHeight?: number;
+  /** Calculated height based on items and maxHeight */
   calculatedHeight: number;
+  /** Whether to use fixed height options */
   isNoFixedHeightOptions: boolean;
+  /** Clean children elements */
   cleanChildren?: React.ReactNode;
+  /** Children elements */
   children: React.ReactElement | React.ReactNode;
+  /** Row component */
   Row: React.MemoExoticComponent<
     ({ data, index, style }: RowProps) => JSX.Element
   >;
+  /** Whether to enable keyboard events */
   enableKeyboardEvents: boolean;
+  /** Function to get item size */
   getItemSize: (index: number) => number;
 }
 
 export interface RowProps {
+  /** Row data */
   data: {
+    /** Children elements */
     children?: React.ReactNode;
-    theme: TTheme;
+    /** Currently active index */
     activeIndex?: number;
+    /** Currently selected index */
     activedescendant?: number;
+    /** Mouse move handler */
     handleMouseMove?: (index: number) => void;
   };
+  /** Row index */
   index: number;
+  /** Row style */
   style: React.CSSProperties;
 }

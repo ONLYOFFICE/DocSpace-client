@@ -1,11 +1,17 @@
 {
+  "ChangeContactType": "تغيير نوع جهة الاتصال",
   "ChangeGuestsTypeMessage": "سيتم نقل الضيف <strong>{{userName}}</strong> إلى قسم {{membersSection}} وتعيينه كنوع مستخدم. يمكن للمستخدمين الوصول إلى قسم {{documentsSection}} الخاص بهم، وإنشاء وتعديل الملفات، ولكن لا يمكنهم إنشاء غرف.",
   "ChangeGuestsTypeMessageMulti": "سيتم نقل الضيوف المحددين إلى قسم {{membersSection}} وتعيينهم كنوع مستخدم. يمكن للمستخدمين الوصول إلى قسم {{documentsSection}} الخاص بهم، وإنشاء وتعديل الملفات، ولكن لا يمكنهم إنشاء غرف.",
+  "ChangeGuestsTypeToAdmin": "سيتم نقل الضيف <strong>{{userName}}</strong> إلى قسم {{membersSection}} وتعيين النوع <strong>‏'{{ secondType }}'</strong> له. يمكن لمسؤولي {{productName}} الوصول إلى إعدادات {{productName}}، إدارة الغرف وأرشفتها، دعوة مستخدمين جدد، وتعيين أدوار أقل من مستواهم. يمكن لمسؤولي {{productName}} الوصول إلى قسم {{documentsSection}}.",
+  "ChangeGuestsTypeToAdminMulti": "سيتم نقل الضيوف المحددين إلى قسم {{membersSection}} وتعيين النوع <strong>‏'{{ secondType }}'</strong> لهم. يمكن لمسؤولي {{productName}} الوصول إلى إعدادات {{productName}}، إدارة الغرف وأرشفتها، دعوة مستخدمين جدد، وتعيين أدوار أقل من مستواهم. يمكن لمسؤولي {{productName}} الوصول إلى قسم {{documentsSection}}.",
+  "ChangeGuestsTypeToManager": "سيتم نقل الضيف <strong>{{userName}}</strong> إلى قسم {{membersSection}} وتعيين النوع <strong>‏'{{ secondType }}'</strong> له. يمكن لمسؤولي الغرف إنشاء الغرف المخصصة لهم وإدارتها، دعوة مستخدمين جدد، وتعيين أدوار بمستوى مسؤول الغرفة أو أدنى. كما يملكون صلاحية الوصول إلى قسم {{documentsSection}}.",
+  "ChangeGuestsTypeToManagerMulti": "سيتم نقل الضيوف المحددين إلى قسم {{membersSection}} وتعيين النوع <strong>‏'{{ secondType }}'</strong> لهم. يمكن لمسؤولي الغرف إنشاء الغرف المخصصة لهم وإدارتها، دعوة مستخدمين جدد، وتعيين أدوار بمستوى مسؤول الغرفة أو أدنى. كما يملكون صلاحية الوصول إلى قسم {{documentsSection}}.",
   "ChangeUserTypeButton": "تغيير النوع",
-  "ChangeUserTypeHeader": "تغيير نوع المستخدم",
   "ChangeUserTypeMessage": "سيتم نقل المستخدمين من النوع <strong>\"{{ firstType }}\"</strong> إلى النوع <strong>'{{ secondType }}'</strong>.",
-  "ChangeUserTypeMessageMulti": "سيتم نقل المستخدمين المحددين إلى النوع <strong>\"{{ secondType }}\"</strong>.",
-  "ChangeUserTypeMessageWarning": "لا يمكنك تغيير نوع مسؤولي {{productName}} ولنفسك.",
+  "ChangeUserTypeNote": "<1>ملاحظة:</1> لا يمكنكم تغيير نوع المستخدم لمسؤول {{productName}} أو لأنفسكم.",
+  "DataReassignmentInfo": "سيتم تعيين الغرف التي أنشأها هذا المستخدم لكم تلقائيًا. لإعادة تعيين الغرف لشخص آخر، اضغطوا على الرابط المناسب أدناه.",
+  "DataReassignmentWithFilesDeletion": "جميع الملفات المشتركة التي أنشأها هذا المستخدم <1>سيتم تعيينها لكم تلقائيًا خلال 30 يومًا</1>. لإعادة تعيين الغرف أو الملفات المشتركة لشخص آخر، اضغطوا على الرابط المناسب أدناه.",
+  "PersonalDataDeletion": "جميع الملفات والمجلدات الموجودة في قسم {{sectionName}} التابع لهذا المستخدم <1>سيتم حذفها نهائيًا خلال 30 يومًا.</1>",
   "SuccessChangeGuestType": "تم تغيير نوع الضيف بنجاح",
   "SuccessChangeUserType": "تم تغيير نوع المستخدم بنجاح"
 }

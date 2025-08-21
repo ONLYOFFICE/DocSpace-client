@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,7 @@
 import React from "react";
 import { RectangleSkeleton } from "../rectangle";
 
-import { StyledPaymentsLoader } from "./Payments.styled";
+import styles from "./Payments.module.scss";
 import type { PaymentsLoaderProps } from "./Payments.types";
 
 export { PaymentsStandaloneLoader } from "./Payments.standalone";
@@ -45,7 +45,7 @@ const PaymentsLoader = (props: PaymentsLoaderProps) => {
   } = props;
 
   return (
-    <StyledPaymentsLoader>
+    <div className={styles.paymentsLoader} data-testid="payments-loader">
       <RectangleSkeleton
         className="payments-loader_title"
         title={title}
@@ -158,7 +158,7 @@ const PaymentsLoader = (props: PaymentsLoaderProps) => {
           animate={animate}
         />
       </div>
-    </StyledPaymentsLoader>
+    </div>
   );
 };
 

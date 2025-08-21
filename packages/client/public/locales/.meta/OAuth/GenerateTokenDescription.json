@@ -1,0 +1,422 @@
+{
+  "key_path": "GenerateTokenDescription",
+  "content": "By generating a developer access token, you will be able to make API calls for your account without authorization. To obtain access tokens for other users, apply the standard OAuth flow.",
+  "content_en_sha1_hash": "8025e3f821f5c8e8eb092d82df15284a90b33b51",
+  "created_at": "2025-05-19T21:30:53.895Z",
+  "updated_at": "2025-08-12T19:46:26.141Z",
+  "comment": {
+    "text": "This translation key is used to display a message explaining the benefits of generating a developer access token, informing users that they will be able to make API calls without authorization. It appears in a modal dialog in the OAuth flow, guiding users on the purpose of this action.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:47.174Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/GenerateDeveloperTokenDialog.tsx",
+      "line_number": 192,
+      "context": "<ModalDialog.Body>\n <StyledGenerateDevelopTokenContainer>\n {!token ? (\n <>\n <Text style={{ marginBottom: \"16px\" }}>\n {t(\"OAuth:GenerateTokenDescription\")}\n </Text>\n <Text style={{ marginBottom: \"16px\" }}>\n {t(\"OAuth:GenerateTokenScope\")}\n </Text>{\" \"}\n <Text>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"without authorization\" is not accurately translated. \"İcazə olmadan\" literally means \"without permission.\"  The intended meaning is more along the lines of \"unauthenticated\" or \"without needing to prompt for user credentials\".",
+          "suggestion": "Tərtibatçı giriş tokeni yaratmaqla, hesabınız üçün autentifikasiya etmədən API zəngləri edə biləcəksiniz."
+        },
+        {
+          "type": "formatting",
+          "description": "While not incorrect, 'OAuth axınına əməl edin' feels slightly clunky. A smoother phrasing would improve readability.",
+          "suggestion": "Digər istifadəçilər üçün giriş tokenlərini əldə etmək üçün standart OAuth prosedurunu izləyin."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"for your account\" is translated as \"за вашия профил\". While technically correct, 'акаунт' would be more commonly used in a technical context referring to a user account, especially in relation to APIs.",
+          "suggestion": "Чрез генериране на токен за програмен достъп ще можете да правите API повиквания за вашия акаунт без разрешение."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is slightly awkward.  While grammatically correct, it could be smoother.",
+          "suggestion": "Чрез генериране на токен за програмен достъп ще можете да правите API повиквания без оторизация за вашия акаунт. За да получите токени за достъп за други потребители, следвайте стандартния OAuth поток."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'developer access token' is not perfectly captured by 'kehittäjän käyttöoikeustunnuksen'. A more direct translation might emphasize the 'developer' aspect more clearly, potentially using a phrase like 'kehittäjien käyttöoikeustunnus' or 'kehityskäyttöoikeustunnus'.",
+          "suggestion": "Consider using 'kehittäjien käyttöoikeustunnus' or 'kehityskäyttöoikeustunnus' for a more accurate representation of 'developer access token'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'OAuth flow' is translated as 'OAuth-kulkua'. While technically correct, it might be more understandable for a Finnish audience to use a more descriptive phrase. 'OAuth-todennusprosessi' (OAuth authentication process) or 'OAuth-työnkulku' (OAuth workflow) could be more approachable.",
+          "suggestion": "Consider using 'OAuth-todennusprosessi' or 'OAuth-työnkulku' for better clarity."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'token' is transliterated as 'token-նները'. While understandable, using 'tokenներ' would be more standard and natural in Armenian.",
+          "suggestion": "Replace 'token-նները' with 'tokenներ'."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'Այլ օգտատերերի համար մուտքի token-նները ստանալու համար' is somewhat clunky. It can be improved for better flow.",
+          "suggestion": "Replace with 'Այլ օգտատերերի համար մուտքի tokenներ ստանալու համար' or 'Եթե դրանք ստանալու համար օգտատերերի համար մուտքի tokenներ էք ցանկանում, կիրառեք ստանդարտ OAuth հոսքը:'"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The use of 'si' in 'si potranno effettuare' is slightly awkward and less direct in Italian. It's an impersonal 'one will be able to' rather than 'you will be able to'.",
+          "suggestion": "Potrai effettuare chiamate API per il tuo account senza autorizzazione."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'for your account' is translated as 'per il proprio account'. While technically correct, it's more natural in Italian to use 'per il tuo account' when referring to the user's own account, especially in this context.",
+          "suggestion": "Per il tuo account"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'without authorization' is translated as '인증 없이' which, while technically correct, can be interpreted as 'without authentication' which is slightly different from the intended meaning of 'without requiring user interaction for authorization'. A more nuanced translation might better convey the meaning.",
+          "suggestion": "개발자 액세스 토큰을 생성하면 계정에 API 호출을 할 수 있으며, 사용자 인증 과정을 거치지 않아도 됩니다."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure could be improved for better readability. The two sentences are connected with '그리고' which, while not incorrect, could be more elegantly connected.",
+          "suggestion": "개발자 액세스 토큰을 생성하면 계정에 API 호출을 할 수 있으며, 다른 사용자를 위한 액세스 토큰을 얻으려면 표준 OAuth 플로우를 적용해야 합니다."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"ຕົວລະບຸໂຕ້ອນຮັບ\" (tualadubtoonrap) is a literal translation of 'token' and doesn't accurately convey the meaning of an 'access token' in the OAuth context. It sounds awkward and might confuse users. A more appropriate term would be something like 'ສັນຍາເລຂະນິດເຂົ້າໃຊ້' (sanya lakhanik khao sai) or a localized alternative depending on the intended audience's understanding of OAuth.",
+          "suggestion": "Consider using a more technically accurate term like 'ສັນຍາເລຂະນິດເຂົ້າໃຊ້' (sanya lakhanik khao sai) or a localized alternative."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'ກະແສມົນລະນະລັກການ' (krea monlarnalakan) is a rather formal and somewhat confusing translation of 'standard OAuth flow'. It’s overly literary for this context.",
+          "suggestion": "Replace with a simpler term such as 'ວິທີການນໍາໃຊ້ OAuth ທີ່ເປັນມາດຕະຖານ' (witi kan nam sai OAuth thi pen mattathan) or 'ການນໍາໃຊ້ OAuth ຕາມແບບຢ່າງທີ່ເປັນມາດຕະຖານ' (kan nam sai OAuth tam lap yang thi pen mattathan)."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"without authorization\" is translated as \"zonder autorisatie.\" While technically correct, it's stiff and less natural in Dutch. A more fluent translation would convey the meaning of 'unauthorized access' or 'without needing to ask for permission each time'.",
+          "suggestion": "Door een toegangstoken voor ontwikkelaars te genereren, kunt u API calls doen voor uw account zonder steeds toestemming te hoeven vragen."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a period (.) after \"stroom\" where a comma (,) would be more appropriate, aligning with Dutch sentence structure and flow.",
+          "suggestion": "Door een toegangstoken voor ontwikkelaars te genereren, kunt u API calls doen voor uw account zonder autorisatie. Om toegangstokens voor andere gebruikers te krijgen, past u de standaard OAuth stroom, toe."
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'for your account' is too literal and doesn't fully convey the intended meaning in Polish. It should be more naturally expressed.",
+          "suggestion": "Generując token dostępu dla programisty, będziesz mógł/mogła wywoływać API w swoim imieniu bez autoryzacji."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'developer' is translated as 'programisty' which is correct but might not be the most accessible term for a non-technical user. Depending on the context, a broader term like 'aplikacji' (application) might be better.",
+          "suggestion": "Generując token dostępu dla aplikacji, będziesz mógł/mogła wywoływać API w swoim imieniu bez autoryzacji."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"without authorization\" is too literal and doesn't convey the intended meaning in the context of developer access tokens. It implies a lack of any permission, which isn't what's meant.  The intention is to make calls *without requiring user interaction/login*.",
+          "suggestion": "Ao gerar um token de acesso de desenvolvedor, você poderá fazer chamadas de API para sua conta sem precisar de autenticação."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"utilizadors\" is a misspelling of \"utilizadores\".",
+          "suggestion": "utilizadores"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"make API calls for your account\" is somewhat awkward. A more natural Romanian phrasing would be better.",
+          "suggestion": "face apeluri API pentru contul dumneavoastră"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"apply the standard OAuth flow\" is a bit formal. A more accessible translation might be preferable, especially considering the target audience is developers.",
+          "suggestion": "folosiți fluxul OAuth standard"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"without authorization\" in the English content is not accurately translated. 'ඔබගේ ගිණුම සඳහා API ඇමතුම් ලබා ගැනීමට හැකි වනු ඇත. අවසරයකින් තොරව' translates literally to 'to obtain API calls for your account without authorization'. It should convey the meaning of calling APIs without needing explicit user consent/approval.",
+          "suggestion": "සංවර්ධක ප්‍රවේශ ටෝකනයක් ජනනය කිරීමෙන්, ඔබට අවසර ලබා ගැනීමකින් තොරව ඔබගේ ගිණුම සඳහා API ඇමතුම් ලබා ගැනීමට හැකි වනු ඇත."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'standard OAuth flow' is translated as 'සම්මත OAuth ප්‍රවාහය යොදන්න'. While technically correct, it lacks context and clarity for the target audience. A more user-friendly translation would clarify what that entails.",
+          "suggestion": "අනෙකුත් පරිශීලකයින් සඳහා ප්‍රවේශ ටෝකන ලබා ගැනීමට, සම්මත OAuth ක්‍රියාවලිය භාවිතා කරන්න. (or) අනෙකුත් පරිශීලකයින් සඳහා ප්‍රවේශ ටෝකන ලබා ගැනීමට, OAuth ක්‍රියාවලිය අනුගමනය කරන්න."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"By generating a developer access token\" is not perfectly captured by \"Po vygenerovaní tokenu prístupu pre vývojárov\". While understandable, it's slightly awkward. A more natural phrasing might be \"Po vygenerovaní prístupového tokenu pre vývojára...\" or \"Po získaní prístupového tokenu pre vývojárov...\"",
+          "suggestion": "Po získaní prístupového tokenu pre vývojárov"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The wording 'without authorization' is too literal and can be improved. A more user-friendly phrasing would better convey the meaning of bypassing the normal authentication process.",
+          "suggestion": "bez nutnosti overenia"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'without authorization' is translated as 'brez avtorizacije'. While technically correct, a more natural phrasing in Slovenian would be 'neposredno' or 'brez dodatne avtorizacije' to better convey the meaning of being able to make API calls directly.",
+          "suggestion": "Če ustvarite žeton za dostop razvijalca, boste lahko neposredno opravljali klice API-ja za svoj račun."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure 'To obtain access tokens for other users, apply the standard OAuth flow' is a bit clunky. A more natural flow might involve rephrasing it.",
+          "suggestion": "Za pridobitev žetonov za dostop za druge uporabnike, uporabite standardni OAuth postopek."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'developer access token' is translated as 'токена за приступ програмера'. While understandable, a more natural and accurate translation would be 'токен за приступ развојних програма' or 'токен за приступ програмера'.",
+          "suggestion": "токен за приступ развојних програма"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The sentence 'To obtain access tokens for other users, apply the standard OAuth flow' is translated as 'Да бисте добили токене за приступ других корисника, примените стандардни OAuth ток'.  The word 'ток' is a shortened/incorrect form of 'ток процес'.",
+          "suggestion": "Да бисте добили токене за приступ других корисника, примените стандардни OAuth процес."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure and flow could be improved for better readability in Serbian. A more natural flow might separate the two instructions into two more distinct sentences.",
+          "suggestion": "Генерисањем токена за приступ програмера, моћи ћете да правите API позиве за свој налог без ауторизације. За добијање токена за приступ других корисника, примените стандардни OAuth процес."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"tokena za pristup programera\" is an awkward translation of \"developer access token\". It's too literal. A more natural translation would be something like \"token pristupa za programere\" or \"programerskog pristupa\".",
+          "suggestion": "token pristupa za programere"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The sentence \"Da biste dobili tokene za pristup drugih korisnika, primenite standardni OAuth tok.\" is grammatically correct but lacks flow. \"OAuth tok\" is also a literal translation and feels unnatural. It should be \"standardni OAuth proces\" or similar.",
+          "suggestion": "Da biste dobili tokene za pristup drugih korisnika, primenite standardni OAuth proces."
+        },
+        {
+          "type": "formatting",
+          "description": "The Serbian translation uses a period after \"autorizacije\" and another after \"proces\". While technically correct, using a semicolon (;) after both would be more standard for longer sentences in formal writing.",
+          "suggestion": "Use semicolons instead of periods at the end of both sentences. E.g., Generisanjem tokena za pristup programera, moći ćete da pravite API pozive za svoj nalog bez autorizacije; Da biste dobili tokene za pristup drugih korisnika, primenite standardni OAuth proces."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"yetkilendirme olmadan\" (without authorization) is a bit literal and doesn't flow naturally in Turkish. A more natural phrasing would convey the idea of direct access.",
+          "suggestion": "Bir geliştirici erişim belirteci oluşturarak, hesabınız için doğrudan API çağrıları yapabileceksiniz."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"access tokens\" as \"erişim tokenleri\" is technically correct but can be improved.  The standard Turkish terminology for API access tokens is 'erişim jetonları'.",
+          "suggestion": "Diğer kullanıcılar için erişim jetonları almak için standart OAuth akışını uygulayın."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"without authorization\" is translated as \"mà không cần ủy quyền.\" While technically correct, it's a bit formal and clunky in Vietnamese. A more natural translation would convey the meaning of not needing to repeatedly authenticate.",
+          "suggestion": "Consider using a phrasing like \"mà không cần xác thực lặp đi lặp lại\" or \"mà không cần đăng nhập mỗi lần\" for a more fluent translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"对您的帐户进行 API 调用\" is a bit awkward. It's literally 'make API calls to your account.' A more natural phrasing would be '对您的帐户调用 API' or '调用您帐户的 API'.",
+          "suggestion": "对您的帐户调用 API 或 调用您帐户的 API"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"应用标准 OAuth 流程\" is correct, but a bit formal. Considering the context of developer access tokens, a simpler, more direct translation like “使用标准的 OAuth 流程” might be preferable.",
+          "suggestion": "使用标准的 OAuth 流程"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

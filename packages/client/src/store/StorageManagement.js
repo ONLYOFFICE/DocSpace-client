@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -38,8 +38,7 @@ import {
 } from "@docspace/shared/api/settings";
 import { getRooms } from "@docspace/shared/api/rooms";
 import { getUserList } from "@docspace/shared/api/people";
-import { SortByFieldName } from "SRC_DIR/helpers/constants";
-import { RoomsProviderType } from "@docspace/shared/enums";
+import { SortByFieldName, RoomsProviderType } from "@docspace/shared/enums";
 
 const FILTER_COUNT = 6;
 

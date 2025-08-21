@@ -1,8 +1,6 @@
 {
-  "CancelUpload": "Sťahovanie bolo prerušené. Niektoré súbory neboli načítane.",
-  "EnterPassword": "Zadajte heslo",
   "HideInput": "Skryť",
   "Ready": "Hotovo",
-  "UploadAndConvert": "Nahrať a konvertovať súbory",
-  "Uploads": "Nahrané súbory"
+  "UploadingAndConversion": "Nahrávanie a konverzia",
+  "UploadingError": "Chyba pri nahrávaní"
 }

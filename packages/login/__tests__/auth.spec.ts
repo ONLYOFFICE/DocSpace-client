@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -41,8 +41,8 @@ const QUERY_PARAMS = [
     value: "123",
   },
   {
-    name: "email",
-    value: "mail@mail.com",
+    name: "encemail",
+    value: "b5COc6kRm3veeYqA72sOfA&uid=66faa6e4-f133-11ea-b126-00ffeec8b4ef",
   },
 ];
 

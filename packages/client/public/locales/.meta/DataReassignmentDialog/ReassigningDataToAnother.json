@@ -1,0 +1,323 @@
+{
+  "key_path": "ReassigningDataToAnother",
+  "content": "The process of data reassignment from user <0>{{fromUser}}</0> to user <1>{{toUser}}</1> has started. Please note that it may take a considerable time.",
+  "content_en_sha1_hash": "0768bba0a79f1a717b7b0f99e5d910c7fed76dcf",
+  "created_at": "2025-05-19T21:30:56.755Z",
+  "updated_at": "2025-05-24T13:34:29.985Z",
+  "comment": {
+    "text": "This translation key is used for a dialog message indicating that data reassignment from one user to another has started. It provides context for users viewing the progress of the reassignment process, appearing in a Data Reassignment Dialog component.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:15.051Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Body/Progress.js",
+      "line_number": 185,
+      "context": "<div className=\"user\"> {{ toUser }}</div>\n <div className=\"user\"> {{ you }}</div>\n </Trans>\n ) : (\n <Trans\n i18nKey=\"ReassigningDataToAnother\"\n ns=\"DataReassignmentDialog\"\n t={t}\n fromUser={fromUser}\n toUser={toUser}\n you={you}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The user tags `<0>` and `</0>` are inconsistent with the English. The English uses `<0>{{fromUser}}</0>` and `<1>{{toUser}}</1>`, while the Azerbaijani uses `<0>{{fromUser}}</0>` and `<1>{{toUser}}</1>`.  This inconsistency might cause parsing issues.",
+          "suggestion": "Ensure consistent tag formatting in Azerbaijani translation: `<0>{{fromUser}}</0>` and `<1>{{toUser}}</1>`"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The tags <0> and </0> are inconsistent with <1> and </1>.  They should be consistent.",
+          "suggestion": "Change </1> to </0> to match the preceding tag."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets around the placeholders are inconsistent. The first user has closing bracket `</0>` while the second has `</1>`. This likely indicates an error in the translation process or template application.",
+          "suggestion": "Ensure consistency in angle bracket closing tags for both placeholders.  Both should be either `</0>` or `</1>` based on the English template."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets and placeholders are not consistently formatted. The English uses `<0>` and `<1>`, while the Japanese uses `<0>` and `<1>`.",
+          "suggestion": "Ensure consistent use of angle brackets and placeholders. Either use `<0>` and `<1>` or `<2>` and `<3>` etc. for consistency."
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets around the variables {{fromUser}} and {{toUser}} are inconsistent. The English version uses <0> and <1> while the Korean uses angle brackets without numbers.",
+          "suggestion": "Ensure consistency in the angle bracket notation. Either change the English to use angle brackets without numbers (e.g., <fromUser> and <toUser>) or modify the Korean to use <0> and <1>."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ຄືນໃໝ່' (khuen mai) in 'ຂັ້ນຕອນການມອບໝາຍຂໍ້ມູນຄືນໃໝ່' could be simplified or rephrased for better readability and natural flow in Lao. While technically correct, it can sound slightly awkward.",
+          "suggestion": "Consider using 'ມອບໝາຍຂໍ້ມູນໃໝ່' (mop mai khomun mai) - 'new data assignment'."
+        },
+        {
+          "type": "formatting",
+          "description": "While the tags <0>{{fromUser}}</0> and <1>{{toUser}}</1> are preserved, it's good to confirm whether this tagging system is standard practice and expected in the Lao language and target system. They might need adjustments to match the specific platform.",
+          "suggestion": "Verify if the tag format is acceptable and conforms to the required system specifications."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets `<0>` and `</0>` are inconsistent with the English content. English uses `<0>{{fromUser}}</0>`, while Dutch uses `<0>{{fromUser}}</0> and `<1>{{toUser}}</1>`. This should be consistent.",
+          "suggestion": "Change `<1>{{toUser}}</1>` to `<1>{{toUser}}</0>`"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Polish translation retains the HTML-like tags `<0>` and `</0>` which are not part of the standard Polish sentence structure and are unnecessary. They should be removed.",
+          "suggestion": "Remove the `<0>` and `</0>` tags. The translation should read: \"Rozpoczęto proces przypisywania danych użytkownika {{fromUser}} użytkownikowi {{toUser}}. Może to zająć trochę czasu.\""
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'przypisywania' is technically correct, 'przenoszenia' or 'przekazywania' might be more natural translations of 'reassigning' in this context. 'Przypisywania' suggests assigning something new, whereas 'reassigning' implies transferring something already assigned.",
+          "suggestion": "Consider using 'Rozpoczęto proces przenoszenia danych użytkownika {{fromUser}} użytkownikowi {{toUser}}. Może to zająć trochę czasu.' or 'Rozpoczęto proces przekazywania danych użytkownika {{fromUser}} użytkownikowi {{toUser}}. Może to zająć trochę czasu.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The user tags `<0>` and `</0>` are inconsistent.  `<0>` should be `</0>` and `</1>` should be `</1>`.",
+          "suggestion": "Change `<0>{{fromUser}}</0>` to `<0>{{fromUser}}</1>` and `<1>{{toUser}}</1>` to `<1>{{toUser}}</1>`."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'කරුණාවෙන්' (karunawen) translates to 'kindly' or 'please'. While not incorrect, it might sound slightly formal or stiff in this context.  Consider a more natural alternative.",
+          "suggestion": "Consider replacing 'කරුණාවෙන් සලකන්න' with a more conversational equivalent like 'සැලකිය යුතු කාලයක් ගත විය හැකි බව සඟවා ඇත' (sagalavita kalayakama gata viyaabaki bavata sagvaathavata)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The curly brace placement in the Slovak translation is inconsistent with the English source. The English uses `<0>{{fromUser}}</0>` and `<1>{{toUser}}</1>`, while the Slovak uses `{{{fromUser}}</0> and {{{toUser}}</1>`. The extra curly brace before `fromUser` and `toUser` should be removed.",
+          "suggestion": "Začal sa proces opätovného priradenia údajov od používateľa <0>{{fromUser}}</0> k používateľovi <1>{{toUser}}</1>. Upozorňujeme, že to môže trvať dlhšie."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Slovenian translation retains the angle brackets `<0>` and `<1>` which were present in the English original. These are typically removed in translations unless explicitly required for technical reasons.",
+          "suggestion": "Remove the angle brackets: `Postopek prerazporeditve podatkov uporabnika {{fromUser}} na uporabnika {{toUser}} se je začel. Upoštevajte, da lahko traja nekaj časa.`"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"поновне доделе\" is an awkward and potentially inaccurate translation of \"reassignment.\"  \"Reassignment\" implies a transfer or redirection, and \"поновне доделе\" suggests a repeated allocation, which isn't the intended meaning.  A better translation would convey the idea of transferring data.",
+          "suggestion": "Процес пребацивања података корисника <0>{{fromUser}}</0> кориснику <1>{{toUser}}</1> је започео."
+        },
+        {
+          "type": "formatting",
+          "description": "The `<0>` and `<1>` tags are inconsistent with the English. The English uses `{{}}` while the Serbian translation uses `<>`. This inconsistency can cause parsing issues.",
+          "suggestion": "Modify the tags to match the English: Процес поновне доделе података корисника {{fromUser}} кориснику {{toUser}} је започео."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word \"dodele\" is not the most natural or common way to express 'reassignment' in Serbian. It's technically correct, but sounds slightly awkward.",
+          "suggestion": "Ponovna raspodela podataka"
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the sentence structure could be improved for better flow. The direct translation sounds slightly clunky.",
+          "suggestion": "Započeo je proces ponovne raspodele podataka korisnika <0>{{fromUser}}</0> korisniku <1>{{toUser}}</1>. Imajte na umu da može potrajati značajno vreme."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets `<0>` and `</0>` and `<1>` and `</1>` are inconsistent in the Turkish translation. They should be `<0>` and `</0>` for both user references.",
+          "suggestion": "Change `<1>` to `<0>` and `</1>` to `</0>`."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"chuyển giao lại\" (chuyển giao lại) is somewhat redundant. 'Chuyển giao' alone would be more natural and concise.",
+          "suggestion": "Quá trình chuyển giao dữ liệu từ người dùng <0>{{fromUser}}</0> sang người dùng <1>{{toUser}}</1> đã bắt đầu."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

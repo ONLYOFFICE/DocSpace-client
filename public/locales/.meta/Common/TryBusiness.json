@@ -1,0 +1,362 @@
+{
+  "key_path": "TryBusiness",
+  "content": "Try Business",
+  "content_en_sha1_hash": "1355ceed14169abd7406ec07f2a5ad9a56c2c888",
+  "created_at": "2025-05-19T21:30:49.352Z",
+  "updated_at": "2025-05-28T09:30:02.173Z",
+  "comment": {
+    "text": "This translation key is used for the label on a tariff-related component. It displays \"Try Business\" when applicable and indicates whether a user can try a free business tariff or not, depending on the page context.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T08:37:20.335Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/TariffBar/helpers.js",
+      "line_number": 41,
+      "context": "isFreeTariff,\n isGracePeriod,\n ) => {\n if (isPaymentPageAvailable) {\n if (isFreeTariff && !isNonProfit)\n return { label: t(\"Common:TryBusiness\"), color: ORANGE };\n if (isGracePeriod) return { label: t(\"Common:LatePayment\"), color: RED };\n }\n };\n \n export const getEnterpriseBar = (",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Biznesi yoxlayın' is a literal translation of 'Try Business' but doesn't convey the intended meaning. 'Try Business' typically means 'Test Business', 'Experience Business', or 'Give Business a Try'.",
+          "suggestion": "Consider alternatives like 'Biznesi sınayın', 'Biznesi təcrübə edin', or 'Biznesə başlayın.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Zkuste podnikat\" is a literal translation of \"Try Business,\" it lacks the nuance of encouraging a trial or experience. 'Try' in this context implies a short-term or experimental engagement, which isn't fully captured by \"Zkuste podnikat\". A better translation might convey a sense of 'experience' or 'test out' a business.",
+          "suggestion": "Consider alternatives like \"Vyzkoušejte podnikání\" (Test out entrepreneurship) or \"Zažijte podnikání\" (Experience entrepreneurship)."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The German translation \"Mit Business testieren\" is not an accurate or natural translation of \"Try Business\". \"Testieren\" is not a standard verb and doesn't convey the intended meaning of trying out a business or business idea.",
+          "suggestion": "Possible alternatives include: \"Business ausprobieren\", \"Business testen\", \"Ein Business testen\" or \"Business erproben\" depending on the specific nuance desired."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Δοκιμή Business' is a literal translation of 'Try Business' but doesn't convey the intended meaning naturally in Greek. 'Δοκιμή' implies a test or experiment, whereas 'Try Business' suggests an opportunity to experience or explore a business venture. A more appropriate translation would convey the concept of trying out or exploring a business.",
+          "suggestion": "Εξερεύνηση Επιχείρησης"
+        },
+        {
+          "type": "formatting",
+          "description": "The word 'Business' is left in English. While common to see loanwords, translating it would be more consistent and accessible.",
+          "suggestion": "Επιχείρηση"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Probar Business' is a literal translation and doesn't convey the intended meaning of 'Try Business'. 'Probar' generally means 'to test' rather than 'to attempt' or 'to experience'.",
+          "suggestion": "Consider alternatives like 'Experimentar Business', 'Iniciar Business', 'Probar el mundo empresarial', or 'Empezar un negocio' depending on the precise context."
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Kokeile Businesstä' is not the most natural or idiomatic translation of 'Try Business' in Finnish. While technically understandable, it's overly literal and uses the allative case (-stä) which isn't always the best choice in this context. A more natural translation would emphasize experimentation or testing.",
+          "suggestion": "Consider alternatives like 'Testaa yritystoimintaa' (Test business operations) or 'Kokeile yritystä' (Try the business)."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation includes a capitalized 'Business' while the original is not. This creates a stylistic inconsistency.",
+          "suggestion": "Ensure capitalization matches the original, or standardize capitalization within the translated content."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Essayer le plan Business\" is not the most natural or accurate translation of \"Try Business\". While it literally translates to 'Try the Business plan', the intended meaning of 'Try Business' (likely meaning to test or experience running a business) is not conveyed.",
+          "suggestion": "Consider a translation like \"Démarrez votre business\" (Start your business) or \"Testez votre business\" (Test your business), or potentially \"Lancez-vous dans le business\" (Dive into the business) depending on the specific context."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Փորձել Բիզնես տարբերակը\" (Porzel biznes tarberaki) literally translates to \"Try Business variant/option\". While understandable, it's not the most natural or idiomatic way to convey 'Try Business' in Armenian. It implies trying a specific *version* of a business, rather than just 'trying' the business itself.",
+          "suggestion": "Consider a more direct translation like \"Փորձիր ธุรกิจ\" (Porzir biznes) which means 'Try Business' or \"Սովորիր ธุรกิจ\" (Sovorir biznes) which means 'Learn Business' depending on the intended meaning of the English phrase.  The best option depends on context."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Prova il piano Business\" deviates from the original meaning \"Try Business\". While \"Prova\" means \"Try\", \"il piano Business\" translates to \"the Business plan\" and doesn't directly convey the action of trying a business.",
+          "suggestion": "Consider alternatives like \"Prova l'attività\" or \"Avvia un'attività\" to better reflect the English meaning. A more literal, though potentially less natural, option could be \"Prova l'attività commerciale\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"BUSINESSを試す\" is a literal translation and doesn't quite capture the nuance of 'Try Business'. It implies trying a business as a test, rather than exploring or experiencing it. A more natural translation might emphasize exploration or a trial period.",
+          "suggestion": "ビジネスを体験する (Bijinesu o taiken suru - Experience Business) or ビジネスを試してみる (Bijinesu o tameshite miru - Try out Business)"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation \"비즈니스를 이용해 보세요\" translates to \"Try using the business\" or \"Give the business a try.\" While not entirely wrong, it's a bit more formal and less direct than the English \"Try Business.\" A more natural and closer translation might be \"비즈니스를 시작해 보세요\" (Try starting a business) or \"비즈니스를 경험해 보세요\" (Try experiencing the business).",
+          "suggestion": "비즈니스를 시작해 보세요"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ລອງທຸລະກິດ (Business)\" directly translates 'Try' as 'ລອງ' and then adds '(Business)' which is redundant. While technically not incorrect, it's an awkward and unnecessary addition.  A more natural Lao translation would be simply 'ທຸລະກິດຕົວຢ່າງ' or 'ທຸລະກິດຕົວຈິງ' depending on the intended meaning.",
+          "suggestion": "Consider 'ທຸລະກິດຕົວຢ່າງ' (example business) or 'ທຸລະກິດຕົວຈິງ' (actual business) for a more natural and concise translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Izmēģināt uzņēmumumdarbību\" is not the most natural or accurate translation of \"Try Business\". While technically correct, it's a bit clunky.",
+          "suggestion": "Consider \"Izmēģināt biznesu\" or \"Izmēģināt uzņēmējdarbību\" for a more fluent and idiomatic translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Probeer' is a valid translation of 'Try', 'Zakelijk' is a more literal translation of 'Business' and doesn't capture the nuance of 'Try Business' which implies an attempt or trial period for a business. A more natural translation would consider alternatives like 'Probeer het zakelijk' or 'Start een bedrijf'.",
+          "suggestion": "Consider 'Probeer het zakelijk' or 'Start een bedrijf' for a more natural and accurate translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Wypróbuj plan Biznes\" translates more accurately to \"Try Business Plan\" rather than just \"Try Business\". The word 'plan' is missing from the English phrase, which limits the meaning.",
+          "suggestion": "Wypróbuj plan biznesowy"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Încercați pachetul Business' translates to 'Try the Business package', which is a more specific interpretation than the original 'Try Business'. It implies a package or bundle, which might not be intended. The original phrase is more general.",
+          "suggestion": "Încercați Business"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Попробуйте Business\" is a literal translation of 'Try Business' and doesn't sound natural in Russian. The word 'Business' is often used in English loanwords and may not require translation, but 'Попробуйте' followed directly by 'Business' feels awkward. A more natural translation would involve a more contextual adaptation, like 'Оцените Business' or 'Познакомьтесь с Business'.",
+          "suggestion": "Consider a more contextual translation such as 'Оцените Business' or 'Познакомьтесь с Business'."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'ව්‍යාපාර සැලසුම බලන්න' translates to 'View Business Plan', which isn't a direct equivalent to 'Try Business'. 'Try Business' implies a trial or experiment, whereas the translation suggests a review of an existing plan.",
+          "suggestion": "Consider alternatives like 'ව්‍යාපාරය අත්කරන්න' (Vyaparaya athkaranna - Try the business), 'ව්‍යාපාරය පරීක්ෂා කරන්න' (Vyaparaya pariksha karanna - Try/Test the business), or 'ව්‍යාපාරය ආරම්භ කර බලන්න' (Vyaparaya arambakara balanna - Try starting a business)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Skúste Business' is a literal translation of 'Try Business' and doesn't quite convey the intended meaning in a natural Slovak way. 'Skúste' implies a trial or attempt, but 'Business' often refers to a company or venture. A more appropriate translation would depend on the context.",
+          "suggestion": "Consider alternatives like 'Vyskúšajte podnik', 'Začnite podnikanie', or 'Spustite podnikanie' depending on the precise meaning of 'Try Business'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Испробај Пословни план\" is too literal and doesn't fully capture the meaning of \"Try Business.\" It translates to \"Try Business Plan,\" which isn't the intended meaning. \"Try Business\" implies trying out a business venture or platform.",
+          "suggestion": "Consider a more idiomatic translation such as \"Оспробуј пословну прилику\" (Try a business opportunity) or \"Покрени посао\" (Start a business)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Isprobaj Poslovni plan\" translates to 'Try Business Plan', not just 'Try Business'. While 'Poslovni plan' is relevant, it adds information not present in the original English phrase.",
+          "suggestion": "Consider 'Isprobaj Biznis' or 'Testiraj Biznis' for a more direct translation of 'Try Business'."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Спробуйте Business' directly translates 'Try Business' but keeps the English word 'Business'. While understandable, it's not ideal. A more natural Ukrainian translation would replace 'Business' with a relevant Ukrainian term.",
+          "suggestion": "Спробуйте бізнес"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Thử gói Doanh Nghiệp Business' includes the English word 'Business' after the Vietnamese translation of 'Business'. This is redundant and unnatural. 'Doanh Nghiệp' already implies 'Business'.",
+          "suggestion": "Thử gói Doanh Nghiệp"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"试用专业版\" while literally meaning \"Try Professional Version\", doesn't fully convey the meaning of 'Try Business'. It implies a trial specifically for a professional version, which might be a specific product and not the general concept of trying out a business service.",
+          "suggestion": "Consider alternatives like \"体验商业版\" (Experience Business Version) or \"试用商业功能\" (Try Business Features) to better reflect the original meaning.  The most accurate translation depends on the context of 'Try Business'."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

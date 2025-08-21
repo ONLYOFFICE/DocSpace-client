@@ -1,0 +1,117 @@
+// (c) Copyright Ascensio System SIA 2009-2025
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+@use "../../styles/variables/colors";
+
+:global(.dark) {
+  :local {
+    .tooltip {
+      --tooltip-bg-color: #{colors.$black};
+      --tooltip-text-color: #{colors.$white};
+      --tooltip-max-width: 320px;
+    }
+  }
+}
+
+.tooltip {
+  --tooltip-bg-color: #{colors.$white};
+  --tooltip-text-color: #{colors.$black};
+  --tooltip-max-width: 320px;
+
+  &.noUserSelect {
+    user-select: none;
+  }
+
+  :global(.__react_component_tooltip) {
+    background-color: var(--tooltip-bg-color);
+    border-radius: 6px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    padding: 8px 12px;
+    max-width: min(100vw, var(--tooltip-max-width));
+    color: var(--tooltip-text-color);
+    z-index: 999;
+    box-sizing: border-box;
+
+    p,
+    div,
+    span {
+      color: var(--tooltip-text-color);
+    }
+
+    &:before {
+      border: 1px solid var(--tooltip-bg-color);
+    }
+
+    &:after {
+      border: 1px solid var(--tooltip-bg-color);
+      background-color: var(--tooltip-bg-color) !important;
+    }
+
+    &.place-left {
+      &::after {
+        border-inline-start: none !important;
+        display: none;
+      }
+      &::before {
+        background: none !important;
+      }
+    }
+
+    &.place-right {
+      &::after {
+        border-inline-end: none !important;
+        display: none;
+      }
+      &::before {
+        background: none !important;
+      }
+    }
+
+    &.place-top {
+      &::after {
+        border-top: none !important;
+        display: none;
+      }
+      &::before {
+        background: none !important;
+      }
+    }
+
+    &.place-bottom {
+      &::after {
+        border-bottom: none !important;
+        display: none;
+      }
+      &::before {
+        background: none !important;
+      }
+    }
+  }
+}

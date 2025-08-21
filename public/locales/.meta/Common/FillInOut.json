@@ -1,0 +1,388 @@
+{
+  "key_path": "FillInOut",
+  "content": "fill in out",
+  "content_en_sha1_hash": "fb5d9da8831a6634fe60fa2a638695478b55f6a3",
+  "created_at": "2025-05-19T21:30:45.388Z",
+  "updated_at": "2025-06-02T10:20:51.582Z",
+  "comment": {
+    "text": "This translation key is used to display a comment indicating that a user can fill out a form. It appears in the UI when interacting with share settings, specifically when selecting \"Form Filling\" as a share access right.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:36:10.077Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
+      "line_number": 264,
+      "context": "case ShareAccessRights.Comment:\n return t(\"Common:Comment\");\n case ShareAccessRights.ReadOnly:\n return t(\"Common:ReadOnly\");\n case ShareAccessRights.FormFilling:\n return t(\"Common:FillInOut\");\n default:\n return \"\";\n }\n };",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"fill in out\" is nonsensical and likely a typo or incomplete phrase. The Arabic translation \"املء\" (imla') which means \"fill\" doesn't accurately reflect the intended meaning of the original, unclear English.",
+          "suggestion": "More context is needed to accurately translate the intended meaning of 'fill in out'.  Possible intended phrases include 'fill out' (meaning complete a form) or 'fill in' (meaning fill a space).  If 'fill out' was intended, the Arabic translation should be \"املأ\" (imla'). If 'fill in' was intended, the Arabic translation is appropriate as \"املء\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"fill in out\" is nonsensical and likely a typo. Assuming the intended meaning was either \"fill in\" or \"fill out\", the Azerbaijani translation \"doldurun\" is generally suitable for \"fill out\", but not for \"fill in\". It's unclear what the original English meant, so the translation is potentially inaccurate.",
+          "suggestion": "If the English meant \"fill in\", a more accurate translation might be \"doldur\". If it meant \"fill out\", \"doldurun\" is acceptable. Clarification of the original English is needed."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"fill in out\" is nonsensical. It's likely a fragment or error. \"fill in out\" doesn't have a direct, accurate translation into Bulgarian. \"Попълни\" means \"fill\" or \"complete,\" which could be a relevant translation if the original English was meant to imply completing something.",
+          "suggestion": "Without further context, it's difficult to suggest a better translation. Possible alternatives depending on the intended meaning could include: 'запълни' (zapylni - fill), 'допълни' (dopylni - supplement), or a more complete phrase describing the action. If the English phrase is an error, the Bulgarian should reflect the intended meaning."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"fill in out\" is nonsensical and likely a typo or incomplete phrase. \"vyplnit\" is a suitable translation if the intended English was \"fill\". However, without knowing the original intent, it's difficult to confirm the accuracy of the translation.",
+          "suggestion": "Clarify the intended English phrase. Possible corrections depending on the intent: 'fill' -> 'vyplnit', 'fill out' -> 'vyplnit'."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"fill in out\" is not grammatically correct. It's likely a misunderstanding or a combination of \"fill in\" and \"fill out\". The German translation \"ausfüllen\" accurately translates the intended meaning of \"fill out\".",
+          "suggestion": "Consider the original English phrase and clarify the intended meaning. If it was intended to mean \"fill out\", then \"ausfüllen\" is accurate. If it was meant to be something else, a different translation may be required."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"fill in out\" is nonsensical and doesn't have a direct translation in Greek. \"συμπληρώστε\" means \"fill in\" or \"complete.\" The original English phrase requires clarification of its intended meaning to provide an accurate Greek translation.",
+          "suggestion": "The suggested Greek translation depends on the intended meaning of 'fill in out'. Possible alternatives include: \n- If it means 'fill everything out': \"συμπληρώστε τα πάντα\" \n- If it means 'fill and take out': \"συμπληρώστε και αφαιρέστε\""
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"fill in out\" is not grammatically correct and lacks clear meaning. A direct translation of \"rellenar\" (to fill) is not the most appropriate response without understanding the intended meaning of the original phrase.",
+          "suggestion": "Without context, it's difficult to provide an accurate translation. Possible translations depending on the intended meaning could be: 'completar' (to complete), 'llenar' (to fill - more literal), or require clarification on the original meaning."
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "\"fill in out\" is an uncommon and grammatically incorrect phrase in English. It's likely a misunderstanding or incomplete phrase. \"Täyttää\" means 'to fill' in Finnish, which is a reasonable translation *if* the intended meaning of the English phrase was 'to fill'. However, without knowing the original intended meaning, it's difficult to confirm its correctness.  A more accurate translation would depend on the context of 'fill in out'.",
+          "suggestion": "Without further context, it's impossible to provide a definitive alternative. Possible interpretations and translations include 'to fill in', 'to fill', 'to complete' or 'to output', depending on what 'fill in out' was meant to convey."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"fill in out\" is nonsensical. A direct translation of \"fill in\" could be \"remplir\", but the overall meaning of the original phrase is unclear. \"remplir\" alone is a reasonable translation if assuming it's intended to mean \"fill\".",
+          "suggestion": "Consider the intended meaning of 'fill in out'. Possible alternatives: 'remplir' (if meaning 'fill'), or re-evaluate the source English to provide a more accurate translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"fill in out\" is nonsensical. It's likely a fragment or typo.  The Armenian translation \"լրացնել\" (lracnel) means \"to fill in\" or \"to complete.\"  Without knowing the intended meaning of the original English, it's impossible to definitively say if the translation is correct, but it seems to address a possible meaning, not a literal translation of the illogical phrase.",
+          "suggestion": "Determine the intended meaning of 'fill in out' to provide a more accurate Armenian translation. Possible alternatives might include 'հանել' (hanel - to take out) if 'out' was intended in that sense, or a completely different phrase depending on context."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"fill in out\" is nonsensical and likely a transcription error or incomplete phrase. \"compila\" (Italian for 'fill') is a reasonable translation if the intended meaning was simply 'fill'. However, without context, a more accurate translation is difficult to determine. A direct translation of the nonsensical English is not possible.",
+          "suggestion": "Determine the original intended English phrase. If it was meant to be 'fill in', the Italian translation 'compila' is acceptable. If it was a different phrase, a different Italian translation is required. Without further context, it's impossible to provide a perfect alternative."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"fill in out\" is nonsensical. A likely intended meaning was either \"fill out\" or \"fill in\". \"記入\" (kajuan) translates to \"to fill in\", \"to write in\", or \"to enter\", which is a possible but not definitive translation depending on the context. The literal translation of \"fill in out\" doesn't have a direct equivalent.",
+          "suggestion": "Requires clarification of the original English phrase's intended meaning. If the intention was \"fill out\", a more suitable Japanese translation might be \"記入する\" (kajuan suru) or a more specific term depending on what is being filled out (e.g., a form)."
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"fill in out\" is nonsensical and likely a mistranslation or incomplete phrase. \"Fill in\" alone is common, but \"fill in out\" doesn't have a standard meaning. \"채우기\" (chaeu-gi) means 'filling' or 'to fill'. While it is a reasonable translation *if* \"fill in\" was the intended English meaning, it doesn't account for the 'out' part.  A proper translation depends on the intended meaning of the original phrase.",
+          "suggestion": "Without context, it's difficult to provide a definitive suggestion. Possible correct translations of \"fill in\" could be '채우다' (chaeu-da) or '기입하다' (gi-ip-ha-da), depending on the context. If \"out\" was part of the intended phrase, please provide more context so a more accurate translation can be provided. If 'fill out' was intended, the korean translation should be '기입하다'."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"fill in out\" is nonsensical. It's likely a misunderstanding or incomplete phrase.  'Fill in out' doesn't have a direct Lao equivalent.  'ຕື່ມຂໍ້ມູນໃສ່' (teum khomnai sai) translates to 'fill in' but misses the 'out' component. The intended English phrase is unclear, making a perfect translation difficult.",
+          "suggestion": "Unable to provide a suggestion without knowing the intended English phrase. Possible scenarios and suggested Lao translations:\n* If the intent is 'fill out a form': 'ເຕີມແບບຟອນ' (teum baepfon)\n* If the intent is 'to fill outwards': This is highly unusual and requires further clarification. It might be 'ເຕີມຂໍ້ມູນອອກ' (teum khomnai ok), but this depends entirely on the context."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"fill in out\" is not a standard or meaningful phrase. It likely represents an error or incomplete thought. \"aizpildīt\" translates to 'fill' or 'complete', but without context, it's difficult to determine the intended meaning of the original English.",
+          "suggestion": "Without further context for the original English phrase 'fill in out', it is not possible to provide an accurate translation. It would need to be clarified or corrected before a translation can be verified. Possible interpretations could lead to translations like 'fill out' (aizpildīt), or 'fill completely' (pilnībā aizpildīt)."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"fill in out\" is nonsensical. It's likely a typo or incomplete phrase. The Dutch translation \"invullen\" is appropriate for \"fill in\" but doesn't reflect the meaning of the original English (which is likely intended to mean something like 'fill out').",
+          "suggestion": "Unable to provide a specific suggestion without knowing the intended meaning of \"fill in out\". If the intended meaning was 'fill out' (e.g., a form), the Dutch translation should be 'aanvullen' or 'invullen' depending on the context."
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"fill in out\" is not standard English and likely a misunderstanding or incomplete phrase. \"Wypełnij\" (Polish for 'fill') doesn't fully capture the intended meaning without knowing the original context. It's possible 'fill out' was meant, which translates to 'wypełnij'.",
+          "suggestion": "Determine the original English phrase intended. If 'fill out' was meant, the translation is acceptable, but clarification is needed."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"fill in out\" is not a standard phrase and lacks clear meaning. \"preenchimento\" (Portuguese for \"filling\" or \"filling in\") is a possible interpretation, but the translation doesn't accurately reflect the original unclear phrase. The intended meaning of 'fill in out' is unknown, so a definitive accurate translation is impossible without more context.",
+          "suggestion": "Unable to suggest a better translation without understanding the intended meaning of 'fill in out'."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "\"fill in out\" is an unusual phrase in English. It likely intends \"fill out\". \"Preencher\" is a reasonable translation of \"fill out\", but not \"fill in out\".",
+          "suggestion": "Consider translating the intended meaning, which is likely \"fill out\", as \"preencher\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"fill in out\" is not a standard or easily understood phrase. It likely refers to 'fill out'. The Romanian translation 'completare' means 'completion' or 'to complete', which is a possible interpretation of 'fill out', but not a direct translation. A more accurate translation would depend on the context of the original phrase.",
+          "suggestion": "Consider the context. If the intent is to 'fill out' a form, a better translation might be 'a completa' (to fill out). If 'completare' is the closest appropriate term based on the surrounding text, it may be acceptable."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"fill in out\" is nonsensical and likely a typo or incomplete thought. Assuming the intended meaning was something like \"fill out\", the Russian translation \"заполнить\" is a reasonable, but not complete, translation. It means \"to fill\". A more accurate translation would depend on the intended context of \"fill in out\".",
+          "suggestion": "Without further context, it's difficult to provide a precise suggestion. Possible alternatives depend on the original meaning. For example, if referring to filling out a form, 'заполнить форму' (zapolnit' formu) is more appropriate."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"fill in out\" is nonsensical. A more accurate translation depends on the intended meaning. \"fill in out\" isn't a standard phrase, so a direct translation is difficult. \"පිරවීම\" (piravimu) translates to \"filling\" which is related but may not fully capture the intended meaning without further context.",
+          "suggestion": "Requires clarification of the English phrase's intended meaning to provide a more accurate Sinhala translation. Possible alternatives based on potential meanings include: 'ඉක්මිට අතට ගන්න' (ikmita ataata ganne) - to get to the point, or 'ඉවතට දමා' (iwatata dama) - to discard/throw out, or a more general \"ගබඩා කිරීම\" (gabada kirima) - storing if context is about filling a container."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"fill in out\" is nonsensical and likely a mistranscription or misunderstanding. \"Fill in\" typically means to complete a form or document. \"Out\" doesn't combine meaningfully with it. The Slovak translation \"vyplniť\" means \"to fill in\" and is a reasonable translation of the intended meaning of 'fill in', but given the original English is flawed, the translation can't be fully verified.  It depends on what the intended English was.",
+          "suggestion": "Determine the intended meaning of 'fill in out'. If the intent was 'fill in', the translation 'vyplniť' is appropriate. If it was something else, a different translation is required."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"fill in out\" is not standard English. It's likely a misunderstanding or incomplete phrase. \"Fill in out\" doesn't have a direct equivalent in Slovenian. \"Izpolni\" translates to 'fill in', which is a possible interpretation depending on the intended meaning of the original English, but it doesn't encompass the combined 'fill in out'.",
+          "suggestion": "More context is needed to provide an accurate translation. Possible alternatives for 'fill in out' depending on the intended meaning could include: 'izpolni in izpusti' (fill in and release), 'dopiši' (complete/finish writing), or 'dodaj' (add).  Without context, a definitive accurate Slovenian translation is impossible."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Попунити\" does not accurately convey the meaning of \"fill in out.\" \"Fill in out\" is not a standard English phrase. Assuming it was meant to be a colloquial or potentially mistyped version of \"fill out,\" the appropriate Serbian translation would be \"испунити\" (ispuniti).  \"Попунити\" generally means 'to populate' or 'to fill with people'.",
+          "suggestion": "испунити"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"fill in out\" is nonsensical and likely a misunderstanding or typo. It's difficult to provide an accurate Serbian translation without knowing the intended meaning. 'Popuniti' generally means 'to fill in' or 'to complete', but its appropriateness depends entirely on the original context.",
+          "suggestion": "Please provide the correct English phrase for accurate translation. If \"fill in out\" is a typo, correct it first."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"fill in out\" is nonsensical. It's likely a misunderstanding or incomplete instruction. \"doldurun\" is the Turkish verb 'to fill' but doesn't properly translate the original English.",
+          "suggestion": "Without context, providing an accurate translation is impossible. It's crucial to understand the intended meaning of \"fill in out\". Possible alternatives depend on the context. Some options include: 'tamamlayin' (complete), 'doldurunuz' (fill - more formal), 'ekleyin' (add)."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"fill in out\" is nonsensical and doesn't have a direct equivalent in Ukrainian. The translation \"заповнити\" (zavpynyt') means \"to fill\" or \"to complete\", but it doesn't capture the original meaning which seems to be a malformed phrase. Without knowing the intended meaning of 'fill in out', providing an accurate translation is impossible.",
+          "suggestion": "Unable to provide a suggestion without clarifying the intended meaning of the English phrase 'fill in out'."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"fill in out\" is nonsensical. It's likely a misunderstanding or a truncated phrase. \"điền vào\" (fill in) is a reasonable translation for the intended meaning of 'fill in', but without the original context, it's difficult to guarantee complete accuracy.  A more precise translation would require understanding the original English sentence's complete meaning.",
+          "suggestion": "Unable to provide a better suggestion without knowing the original English context."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"fill in out\" is not standard English and likely a misunderstanding or incomplete phrase. A more appropriate English phrase would be 'fill out'. The Chinese translation '填写' generally translates to 'fill in' or 'complete', which is closer to the intended meaning than the literal 'fill in out'. However, the original English is problematic.",
+          "suggestion": "Review the original English context to determine the intended meaning. If the intent is to fill out a form, consider translating to '填写表格' (tiánxiě biǎogè) which translates to 'fill out a form'. If the intent is unclear, further context is needed."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

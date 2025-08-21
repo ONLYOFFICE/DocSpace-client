@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -23,12 +23,14 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React, { useMemo } from "react";
-import { useTranslation } from "react-i18next";
 
+import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
+import classNames from "classnames";
+import { TOption, ComboBoxSize, ComboBox } from "../combobox";
 import { mapCulturesToArray } from "../../utils/common";
-import { StyledComboBox } from "./LanguageCombobox.styled";
 import { TCulture, ComboboxProps } from "./LanguageCombobox.types";
+import styles from "./LanguageCombobox.module.scss";
 
 const LanguageCombobox = (props: ComboboxProps) => {
   const {
@@ -38,6 +40,11 @@ const LanguageCombobox = (props: ComboboxProps) => {
     className,
     withBorder = true,
     isMobileView = false,
+    dataTestId,
+    directionY = "both",
+    fixedDirection = false,
+    isDefaultMode = true,
+    manualWidth = "42px",
   } = props;
 
   const { i18n } = useTranslation(["Common"]);
@@ -51,7 +58,8 @@ const LanguageCombobox = (props: ComboboxProps) => {
     (item) => item.key === selectedCulture,
   );
 
-  const onSelect = (culture: TCulture) => {
+  const onSelect = (option: TOption) => {
+    const culture = option as TCulture;
     if (culture.key === selectedCulture) return;
 
     onSelectLanguage(culture);
@@ -60,29 +68,43 @@ const LanguageCombobox = (props: ComboboxProps) => {
   if (!currentCulture) return null;
 
   return (
-    <StyledComboBox
-      className={`language-combo-box ${className}`}
-      directionY="both"
+    <ComboBox
+      className={classNames(
+        styles.comboBox,
+        {
+          [styles.withBorder]: withBorder,
+          [styles.withoutBorder]: !withBorder,
+        },
+        className,
+        "language-combo-box",
+      )}
+      directionY={directionY}
+      fixedDirection={fixedDirection}
+      isDefaultMode={isDefaultMode}
       options={cultureNames}
       selectedOption={currentCulture}
       onSelect={onSelect}
       isDisabled={false}
       scaled={false}
       scaledOptions={false}
-      size="content"
+      size={ComboBoxSize.content}
       showDisabledItems
       dropDownMaxHeight={300}
       fillIcon={false}
       displaySelectedOption
-      manualWidth="42px"
+      manualWidth={manualWidth}
       noBorder={false}
       type="onlyIcon"
       optionStyle={{ padding: "0 8px" }}
-      style={{ padding: "6px 0px" }}
       isMobileView={isMobileView}
       withBlur={isMobileView}
-      withBorder={withBorder}
       withLabel={!!withLabel}
+      dataTestId={dataTestId ?? "language-combobox"}
+      role="combobox"
+      aria-label="Select language"
+      aria-expanded="false"
+      aria-haspopup="listbox"
+      aria-controls="language-options"
     />
   );
 };

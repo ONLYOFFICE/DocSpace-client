@@ -2,8 +2,5 @@
   "FillOutButtonLabel": "Remplir",
   "FillOutDescription": "Remplissez les champs du formulaire original dans la fenêtre de l'éditeur.",
   "FillOutTitle": "Remplir le formulaire soi-même",
-  "FillPDFDialogTitle": "Remplir en tant que",
-  "ShareCollectButtonLabel": "Copier dans la salle",
-  "ShareCollectDescription": "Partagez votre formulaire et collectez les réponses via une salle de remplissage de formulaires.",
-  "ShareCollectTitle": "Partager"
+  "FillPDFDialogTitle": "Remplir en tant que"
 }

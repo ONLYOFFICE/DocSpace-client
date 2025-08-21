@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Navigate } from "react-router-dom";
+import { Navigate } from "react-router";
 
 import Error404 from "@docspace/shared/components/errors/Error404";
 import componentLoader from "@docspace/shared/utils/component-loader";
@@ -66,6 +66,19 @@ const PortalSettingsRoutes = {
         ),
     },
     {
+      path: "customization/branding/brand-name",
+      async lazy() {
+        const { BrandName } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/common/Branding/brandName"
+            ),
+        );
+
+        return { Component: BrandName };
+      },
+    },
+    {
       path: "customization/branding/white-label",
       async lazy() {
         const { WhiteLabel } = await componentLoader(
@@ -79,7 +92,7 @@ const PortalSettingsRoutes = {
       },
     },
     {
-      path: "customization/branding/company-info-settings",
+      path: "customization/branding/company-info",
       async lazy() {
         const { CompanyInfoSettings } = await componentLoader(
           () =>
@@ -157,6 +170,32 @@ const PortalSettingsRoutes = {
       },
     },
     {
+      path: "customization/general/configure-deep-link",
+      async lazy() {
+        const { ConfigureDeepLink } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/common/Customization/configure-deep-link"
+            ),
+        );
+
+        return { Component: ConfigureDeepLink };
+      },
+    },
+    {
+      path: "customization/general/ad-management",
+      async lazy() {
+        const { AdManagement } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/common/Customization/ad-management"
+            ),
+        );
+
+        return { Component: AdManagement };
+      },
+    },
+    {
       path: "security",
       element: <Navigate to="security/access-portal" replace />,
     },
@@ -218,6 +257,32 @@ const PortalSettingsRoutes = {
         );
 
         return { Component: TrustedMailSection };
+      },
+    },
+    {
+      path: "security/access-portal/access-dev-tools",
+      async lazy() {
+        const { DevToolsAccessSection } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/security/access-portal/devToolsAccess"
+            ),
+        );
+
+        return { Component: DevToolsAccessSection };
+      },
+    },
+    {
+      path: "security/access-portal/invitation-settings",
+      async lazy() {
+        const { InvitationSettingsSection } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/security/access-portal/invitationSettings"
+            ),
+        );
+
+        return { Component: InvitationSettingsSection };
       },
     },
     {
@@ -385,6 +450,20 @@ const PortalSettingsRoutes = {
         ),
     },
     {
+      path: "payments/wallet",
+      lazy: () =>
+        componentLoader(
+          () => import("SRC_DIR/pages/PortalSettings/categories/payments"),
+        ),
+    },
+    {
+      path: "services",
+      lazy: () =>
+        componentLoader(
+          () => import("SRC_DIR/pages/PortalSettings/categories/services"),
+        ),
+    },
+    {
       path: "management/disk-space",
       lazy: () =>
         componentLoader(
@@ -421,164 +500,10 @@ const PortalSettingsRoutes = {
       },
     },
     {
-      path: "developer-tools",
-      element: <Navigate to="javascript-sdk" replace />,
-    },
-    {
-      path: "developer-tools/api",
-      lazy: () =>
-        componentLoader(
-          () =>
-            import("SRC_DIR/pages/PortalSettings/categories/developer-tools"),
-        ),
-    },
-    {
-      path: "developer-tools/javascript-sdk",
-      lazy: () =>
-        componentLoader(
-          () =>
-            import("SRC_DIR/pages/PortalSettings/categories/developer-tools"),
-        ),
-    },
-    {
       path: "data-import",
       lazy: () =>
         componentLoader(
           () => import("SRC_DIR/pages/PortalSettings/categories/data-import"),
-        ),
-    },
-    {
-      path: "developer-tools/javascript-sdk/docspace",
-      lazy: () =>
-        componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/DocSpace"
-            ),
-        ),
-    },
-    {
-      path: "developer-tools/javascript-sdk/public-room",
-      lazy: () =>
-        componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom"
-            ),
-        ),
-    },
-    {
-      path: "developer-tools/javascript-sdk/custom",
-      lazy: () =>
-        componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager"
-            ),
-        ),
-    },
-    {
-      path: "developer-tools/javascript-sdk/room-selector",
-      lazy: () =>
-        componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector"
-            ),
-        ),
-    },
-    {
-      path: "developer-tools/javascript-sdk/file-selector",
-      lazy: () =>
-        componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector"
-            ),
-        ),
-    },
-    {
-      path: "developer-tools/javascript-sdk/editor",
-      lazy: () =>
-        componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Editor"
-            ),
-        ),
-    },
-    {
-      path: "developer-tools/javascript-sdk/viewer",
-      lazy: () =>
-        componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Viewer"
-            ),
-        ),
-    },
-    {
-      path: "developer-tools/plugin-sdk",
-      lazy: () =>
-        componentLoader(
-          () =>
-            import("SRC_DIR/pages/PortalSettings/categories/developer-tools"),
-        ),
-    },
-    {
-      path: "developer-tools/webhooks",
-      lazy: () =>
-        componentLoader(
-          () =>
-            import("SRC_DIR/pages/PortalSettings/categories/developer-tools"),
-        ),
-    },
-    {
-      path: "developer-tools/webhooks/:id",
-      lazy: () =>
-        componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory"
-            ),
-        ),
-    },
-    {
-      path: "developer-tools/webhooks/:id/:eventId",
-      lazy: () =>
-        componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails"
-            ),
-        ),
-    },
-    {
-      path: "developer-tools/oauth",
-      lazy: () =>
-        componentLoader(
-          () =>
-            import("SRC_DIR/pages/PortalSettings/categories/developer-tools"),
-        ),
-    },
-    {
-      path: "developer-tools/oauth/create",
-      lazy: () =>
-        componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/developer-tools/OAuth/OAuthCreatePage"
-            ),
-        ),
-    },
-    {
-      path: "developer-tools/oauth/:id",
-      lazy: () =>
-        componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/developer-tools/OAuth/OAuthEditPage"
-            ),
         ),
     },
     {
@@ -626,12 +551,13 @@ const PortalSettingsRoutes = {
     {
       path: "restore/restore-backup",
       lazy: () =>
-        componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/data-management/backup/restore-backup"
-            ),
-        ),
+        componentLoader(async () => {
+          const RestoreBackup = await import(
+            "SRC_DIR/pages/PortalSettings/categories/data-management/backup/restore-backup"
+          );
+
+          return { Component: RestoreBackup.default };
+        }),
     },
     {
       path: "bonus",

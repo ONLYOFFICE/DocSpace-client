@@ -1,5 +1,4 @@
 {
-  "ActivationRequired": "potrebna aktivacija",
   "AddStaticText": "Dodajte statični tekst",
   "AddWatermarkElements": "Dodajte elemente vodenih žigova",
   "AddWatermarksToDocuments": "Dodajte vodene žigove dokumentima",
@@ -33,7 +32,6 @@
   "StorageDescription": "Kvota skladišta postavljena po sobi. Možete promeniti ovu vrednost ili isključiti ograničenje skladišta.",
   "TagsPlaceholder": "Dodaj tag",
   "ThirdPartyStorageComboBoxPlaceholder": "Odaberi skladište",
-  "ThirdPartyStorageDescription": "Koristite usluge trećih strana kao skladište podataka za ovu prostoriju. Nova fascikla za čuvanje podataka ove sobe biće kreirana u povezanom skladištu.",
   "ThirdPartyStorageNoStorageAlert": "Pre toga, potrebno je da povežete odgovarajuću uslugu u odeljku „Integracija“. U suprotnom, veza neće biti moguća.",
   "ThirdPartyStoragePermanentSettingDescription": "Datoteke se čuvaju u skladištu treće strane {{thirdpartyTitle}} u \"{{thirdpartyFolderName}}\" folderu.\n<strong>{{thirdpartyPath}}</strong>",
   "ThirdPartyStorageRoomAdminNoStorageAlert": "Da biste povezali skladište treće strane, potrebno je da dodate odgovarajuću uslugu u odeljku Integracija u podešavanjima {{productName}}-a. Kontaktirajte vlasnika ili administratora {{productName}}-a da biste omogućili integraciju.",

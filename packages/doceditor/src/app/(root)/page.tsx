@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,28 +26,24 @@
 
 import { cookies, headers } from "next/headers";
 import Script from "next/script";
-import dynamic from "next/dynamic";
-
-import "pino-roll";
-import "pino-pretty";
 
 import { getSelectorsByUserAgent } from "react-device-detect";
 
 import { ValidationStatus } from "@docspace/shared/enums";
 
-import { getData, validatePublicRoomKey } from "@/utils/actions";
+import {
+  getData,
+  validatePublicRoomKey,
+  getDeepLinkSettings,
+} from "@/utils/actions";
 import { logger } from "@/../logger.mjs";
 
 import { RootPageProps } from "@/types";
 import Root from "@/components/Root";
+import FilePassword from "@/components/file-password";
+import { TFrameConfig } from "@docspace/shared/types/Frame";
 
-const FilePassword = dynamic(() => import("@/components/file-password"), {
-  ssr: false,
-});
-
-const log = logger.child({ module: "Doceditor page" });
-
-const initialSearchParams: RootPageProps["searchParams"] = {
+const initialSearchParams: Awaited<RootPageProps["searchParams"]> = {
   fileId: undefined,
   fileid: undefined,
   version: undefined,
@@ -57,27 +53,47 @@ const initialSearchParams: RootPageProps["searchParams"] = {
   editorType: undefined,
 };
 
-async function Page({ searchParams }: RootPageProps) {
-  const { fileId, fileid, version, doc, action, share, editorType, error } =
-    searchParams ?? initialSearchParams;
+async function Page(props: RootPageProps) {
+  const { searchParams: sp } = props;
+  const searchParams = await sp;
+  const {
+    fileId,
+    fileid,
+    version,
+    doc,
+    action,
+    share,
+    editorType,
+    error,
+    locale,
+    theme,
+    is_file,
+    editorGoBack,
+    isSDK,
+  } = searchParams ?? initialSearchParams;
 
-  const cookieStore = cookies();
-  const hdrs = headers();
+  const baseSdkConfig: TFrameConfig & { is_file?: boolean; isSDK?: boolean } = {
+    frameId: "",
+    mode: "",
+    src: "",
+    editorCustomization: { uiTheme: theme },
+    editorGoBack,
+    editorType,
+    id: fileId,
+    locale,
+    requestToken: share,
+    theme,
+    is_file,
+    isSDK,
+  };
+
+  const cookieStore = await cookies();
+  const hdrs = await headers();
 
   const hostname = hdrs.get("x-forwarded-host");
 
-  log.info(
-    {
-      fileId: fileId ?? fileid,
-      action: action ?? "not set",
-      isShare: !!share,
-      isAuth: !!cookieStore.get("asc_auth_key")?.value,
-      version: version ?? "not set",
-      editorType: editorType ?? "not set",
-      doc: doc ?? "not set",
-      url: hostname,
-    },
-    "Start open file at edit",
+  logger.info(
+    `fileId: ${fileId ?? fileid}, action: ${action ?? "not set"}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, version: ${version ?? "not set"}, editorType: ${editorType ?? "not set"}, doc: ${doc ?? "not set"}, url: ${hostname} Start open file at edit`,
   );
 
   let type = editorType;
@@ -89,53 +105,16 @@ async function Page({ searchParams }: RootPageProps) {
     if (isMobile) {
       type = "mobile";
 
-      log.debug(
-        {
-          file: fileId ?? fileid,
-          isShare: !!share,
-          isAuth: !!cookieStore.get("asc_auth_key")?.value,
-        },
-        "Open mobile view",
+      logger.debug(
+        `file: ${fileId ?? fileid}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, Open mobile view`,
       );
     }
   }
 
-  if (share) {
-    const roomData = await validatePublicRoomKey(share, fileId ?? fileid ?? "");
-    if (!roomData) {
-      log.error(
-        {
-          fileId: fileId ?? fileid,
-          isShare: !!share,
-          isAuth: !!cookieStore.get("asc_auth_key")?.value,
-        },
-        "Wrong share key",
-      );
-      return;
-    }
-    const { status } = roomData.response;
-
-    if (status === ValidationStatus.Password) {
-      log.debug(
-        {
-          fileId: fileId ?? fileid,
-          isShare: !!share,
-          isAuth: !!cookieStore.get("asc_auth_key")?.value,
-        },
-        "Open file password component",
-      );
-      return <FilePassword {...roomData.response} shareKey={share} />;
-    }
-  }
-
-  log.debug(
-    {
-      fileId: fileId ?? fileid,
-      isShare: !!share,
-      isAuth: !!cookieStore.get("asc_auth_key")?.value,
-    },
-    "Start get data for open file",
+  logger.debug(
+    `fileId: ${fileId ?? fileid}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, Start get data for open file`,
   );
+
   const data = await getData(
     fileId ?? fileid ?? "",
     version,
@@ -144,6 +123,26 @@ async function Page({ searchParams }: RootPageProps) {
     share,
     type,
   );
+
+  if (data.error?.status === "access-denied" && share) {
+    const roomData = await validatePublicRoomKey(share, fileId ?? fileid ?? "");
+    if (!roomData) {
+      logger.error(
+        `fileId: ${fileId ?? fileid}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, Wrong share key`,
+      );
+      return;
+    }
+    const { status } = roomData.response;
+
+    if (status === ValidationStatus.Password) {
+      logger.debug(
+        `fileId: ${fileId ?? fileid}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, Open file password component`,
+      );
+      return <FilePassword {...roomData.response} shareKey={share} />;
+    }
+  }
+
+  const deepLinkSettings = isSDK ? null : await getDeepLinkSettings();
 
   if (data.error?.status === "not-found" && error) {
     data.error.message = error;
@@ -157,6 +156,11 @@ async function Page({ searchParams }: RootPageProps) {
 
   const docApiUrl = `${url}web-apps/apps/api/documents/api.js${urlQuery}`;
 
+  if (isSDK) {
+    delete data.config?.editorConfig?.embedded?.embedUrl;
+    delete data.config?.editorConfig?.embedded?.shareUrl;
+  }
+
   if (urlQuery) {
     if (data.config?.editorUrl) {
       data.config.editorUrl = data.config?.editorUrl.replace(urlQuery, "");
@@ -167,23 +171,25 @@ async function Page({ searchParams }: RootPageProps) {
     }
   }
 
-  log.debug(
-    {
-      fileId: fileId ?? fileid,
-      isShare: !!share,
-      isAuth: !!cookieStore.get("asc_auth_key")?.value,
-      docApiUrl,
-      url: hostname,
-    },
-    "Open file",
+  logger.debug(
+    `fileId: ${fileId ?? fileid}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, docApiUrl: ${docApiUrl}, url: ${hostname} Open file`,
   );
 
   return (
     <>
-      <Root {...data} shareKey={share} />
-      {url && (
-        <Script id="editor-api" strategy="beforeInteractive" src={docApiUrl} />
-      )}
+      {url ? (
+        <Script
+          id="onlyoffice-api-script"
+          strategy="beforeInteractive"
+          src={docApiUrl}
+        />
+      ) : null}
+      <Root
+        {...data}
+        shareKey={share}
+        baseSdkConfig={baseSdkConfig}
+        deepLinkSettings={deepLinkSettings?.handlingMode}
+      />
     </>
   );
 }

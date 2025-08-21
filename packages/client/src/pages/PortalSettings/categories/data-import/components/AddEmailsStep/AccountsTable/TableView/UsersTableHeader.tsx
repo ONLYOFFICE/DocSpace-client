@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -101,7 +101,7 @@ const UsersTableHeader = (props: UsersTableHeaderProps) => {
       checkbox: {
         value: isChecked,
         isIndeterminate,
-        onChange: toggleAll,
+        onChange: toggleAll!,
       },
       onChange: onColumnChange,
     },
@@ -124,7 +124,7 @@ const UsersTableHeader = (props: UsersTableHeaderProps) => {
       columns={columns}
       columnStorageName={columnStorageName}
       columnInfoPanelStorageName={columnInfoPanelStorageName}
-      sectionWidth={sectionWidth}
+      sectionWidth={sectionWidth!}
       showSettings={false}
       useReactWindow
       infoPanelVisible={false}

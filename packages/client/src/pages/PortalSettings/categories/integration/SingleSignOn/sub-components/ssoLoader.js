@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -53,12 +53,12 @@ const SSOLoader = (props) => {
   const { isToggleSSO } = props;
   return (
     <StyledLoader>
-      {!isToggleSSO && (
+      {!isToggleSSO ? (
         <div className="submenu">
           <RectangleSkeleton className="item" height="28px" />
           <RectangleSkeleton className="item" height="28px" />
         </div>
-      )}
+      ) : null}
       <RectangleSkeleton className="description" height="60px" />
       <RectangleSkeleton height="64px" />
 

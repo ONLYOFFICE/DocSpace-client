@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,8 +29,8 @@ import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
-import { RowContent } from "@docspace/shared/components/row-content";
-import { convertTime } from "@docspace/shared/utils/convertTime";
+import { RowContent } from "@docspace/shared/components/rows";
+import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
 
 import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 
@@ -63,7 +63,7 @@ const AuditContent = ({
   locale,
   theme,
 }) => {
-  const dateStr = convertTime(item.date, locale);
+  const dateStr = getCorrectDate(locale, item.date);
 
   return (
     <StyledRowContent
@@ -73,12 +73,7 @@ const AuditContent = ({
       isSettingNotPaid={isSettingNotPaid}
     >
       <div className="user-container-wrapper">
-        <Text
-          fontWeight={600}
-          fontSize="14px"
-          isTextOverflow
-          className="settings_unavailable"
-        >
+        <Text fontWeight={600} fontSize="14px" className="settings_unavailable">
           {item.user}
         </Text>
       </div>

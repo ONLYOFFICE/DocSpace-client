@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -35,6 +35,11 @@ declare module "*.svg" {
 declare module "*.svg?url" {
   const SVGUrl: string;
   export default SVGUrl;
+}
+
+declare module "*.gif" {
+  const content: string;
+  export default content;
 }
 
 declare global {

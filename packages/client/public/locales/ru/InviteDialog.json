@@ -1,18 +1,22 @@
 {
   "AddManually": "Добавить вручную",
   "EmailErrorMessage": "Адрес электронной почты недействителен. Вы можете отредактировать адрес, дважды щелкнув по нему.",
+  "EmailErrorMessageUserNotFound": "Пользователь не найден. Вы можете изменить email, дважды кликнув по нему.",
   "GroupMaxAvailableRoleWarning": "Группы можно добавлять в комнату с максимальной ролью {{roleName}}. Однако вы можете изменить роли отдельных пользователей в группе после ее успешного добавления.",
   "InvitationLanguage": "Язык приглашения",
   "InviteMembersManuallyDescription": "Приглашайте новых участников в {{productName}} лично по электронной почте",
   "InviteMembersSearchPlaceholder": "Пригласить участников по электронной почте",
-  "InviteToRoomManuallyInfo": "Добавьте существующие контакты {{productName}}. Или пригласите новых гостей лично по электронной почте. Новые гости будут добавлены в ваш список гостей.",
+  "InviteToRoomAddPlaceholder": "Добавьте людей по имени или email",
+  "InviteToRoomManuallyInfoGuest": "Добавьте существующие контакты {{productName}}. Или пригласите новых пользователей по email. Новые пользователи будут добавлены в ваш список гостей.",
+  "InviteToRoomManuallyInfoMembers": "Добавьте существующих участников {{productName}} в комнату.",
   "InviteToRoomSearchPlaceholder": "Поиск и приглашение по имени или адресу электронной почты",
   "InviteViaLink": "Пригласить по ссылке",
   "InviteViaLinkDescriptionAccounts": "Создать универсальную ссылку для самостоятельной авторизации в {{productName}}",
-  "InviteViaLinkDescriptionRoom": "Создать универсальную ссылку для самостоятельной авторизации в комнате",
+  "InviteViaLinkDescriptionRoomGuest": "Создайте универсальную ссылку для самостоятельной авторизации в комнате в качестве гостя.",
+  "InviteViaLinkDescriptionRoomMembers": "Создайте универсальную ссылку для участников {{productName}} для самостоятельной авторизации в комнате.",
   "LinkCopySuccess": "Ссылка скопирована",
-  "ResetChange": "Сбросить изменения",
   "SendInvitation": "Выслать приглашение",
   "UserMaxAvailableRoleWarning": "Гости и Пользователи не могут быть назначены Менеджерами комнат. Указанную роль могут выполнять только администраторы комнат и {{productName}}.",
-  "UsersAlreadyAdded": "Некоторые пользователи уже добавлены"
+  "UsersAlreadyAdded": "Некоторые пользователи уже добавлены",
+  "UsersCannotBeAdded": "Отключенные контакты не могут быть добавлены в комнату"
 }

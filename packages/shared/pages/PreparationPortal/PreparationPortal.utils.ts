@@ -1,4 +1,5 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+/* eslint-disable no-param-reassign */
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,10 +25,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { getRestoreProgress } from "../../api/portal";
-
-let prevProgress: number = 0;
-
 export const clearLocalStorage = () => {
   [
     "LocalCopyStorageType",
@@ -42,43 +39,4 @@ export const returnToPortal = () => {
   setTimeout(() => {
     window.location.replace("/");
   }, 5000);
-};
-export const clearAllIntervals = (
-  timerId: ReturnType<typeof setInterval> | null,
-) => {
-  if (timerId) clearInterval(timerId);
-
-  timerId = null;
-};
-export const getIntervalProgress = async (
-  setMessage: (err?: unknown) => void,
-  setPercent: (progress: number) => void,
-  timerId: ReturnType<typeof setInterval> | null,
-) => {
-  try {
-    const response = await getRestoreProgress();
-
-    if (!response || response.error) {
-      if (response?.error) setMessage(response.error);
-      else setMessage();
-
-      clearAllIntervals(timerId);
-      return;
-    }
-
-    const currProgress = response.progress;
-
-    if (prevProgress !== currProgress) setPercent(currProgress);
-
-    prevProgress = currProgress;
-
-    if (currProgress === 100) {
-      clearAllIntervals(timerId);
-      clearLocalStorage();
-      returnToPortal();
-    }
-  } catch (err: unknown) {
-    clearAllIntervals(timerId);
-    setMessage(err);
-  }
 };

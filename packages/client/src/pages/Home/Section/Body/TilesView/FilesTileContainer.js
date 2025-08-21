@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,27 +30,38 @@ import React, {
   useCallback,
   useState,
   useMemo,
-  useContext,
+  use,
 } from "react";
-import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
 import { Context } from "@docspace/shared/utils";
+import { TileContainer } from "@docspace/shared/components/tiles";
 
 import FileTile from "./FileTile";
 import { FileTileProvider } from "./FileTile.provider";
 import { elementResizeDetector } from "./FileTile.utils";
 
-import TileContainer from "./sub-components/TileContainer";
+import InfiniteGrid from "./sub-components/InfiniteGrid";
+import withContainer from "../../../../../HOCs/withContainer";
 
-const FilesTileContainer = ({ filesList }) => {
+const FilesTileContainer = ({
+  list,
+  isTutorialEnabled,
+  isDesc,
+  selectedFolderTitle,
+  setDropTargetPreview,
+  disableDrag,
+  canCreateSecurity,
+  withContentSelection,
+}) => {
   const tileRef = useRef(null);
   const timerRef = useRef(null);
   const isMountedRef = useRef(true);
-  const [thumbSize, setThumbSize] = useState("");
+  const [thumbSize, setThumbSize] = useState(null);
   const [columnCount, setColumnCount] = useState(null);
 
-  const { sectionWidth } = useContext(Context);
+  const { sectionWidth } = use(Context);
 
   const { t } = useTranslation(["Translations"]);
 
@@ -65,48 +76,46 @@ const FilesTileContainer = ({ filesList }) => {
 
   const onResize = useCallback(
     (node) => {
-      if (!node || !isMountedRef.current) return;
+      if (!node?.getBoundingClientRect || !isMountedRef.current) return;
 
-      const { width } = node.getBoundingClientRect();
+      try {
+        const { width } = node.getBoundingClientRect();
 
-      if (width === 0) return;
+        if (width === 0) return;
 
-      const size = "1280x720";
+        const size = "1280x720";
+        const widthWithoutPadding = width - 32;
+        const columns = Math.floor(widthWithoutPadding / 80);
 
-      const widthWithoutPadding = width - 32;
-
-      const columns = Math.floor(widthWithoutPadding / 80);
-
-      if (columns != columnCount) setColumnCount(columns);
-
-      // console.log(
-      //   `Body width: ${document.body.clientWidth} Tile width: ${width} ThumbSize: ${size}`
-      // );
-
-      if (size === thumbSize) return;
-
-      setThumbSize(size);
+        if (columns !== columnCount) setColumnCount(columns);
+        if (size !== thumbSize) setThumbSize(size);
+      } catch (err) {
+        console.error("Error measuring tile container:", err);
+      }
     },
     [columnCount, thumbSize],
   );
 
-  const onSetTileRef = React.useCallback((node) => {
-    if (node) {
+  const onSetTileRef = useCallback(
+    (node) => {
+      if (!node) return;
+
       clearTimeout(timerRef.current);
       timerRef.current = setTimeout(() => {
-        onResize(node);
-
-        if (tileRef?.current) elementResizeDetector.uninstall(tileRef.current);
+        if (tileRef.current) {
+          elementResizeDetector.uninstall(tileRef.current);
+        }
 
         tileRef.current = node;
-
+        onResize(node);
         elementResizeDetector.listenTo(node, onResize);
       }, 100);
-    }
-  }, []);
+    },
+    [onResize],
+  );
 
   const filesListNode = useMemo(() => {
-    return filesList.map((item, index) => {
+    return list.map((item, index) => {
       return index % 11 == 0 ? (
         <FileTile
           id={`${item?.isFolder ? "folder" : "file"}_${item.id}`}
@@ -117,6 +126,12 @@ const FilesTileContainer = ({ filesList }) => {
           itemIndex={index}
           selectableRef={onSetTileRef}
           withRef
+          dataTestId={`tile_${index}`}
+          selectedFolderTitle={selectedFolderTitle}
+          setDropTargetPreview={setDropTargetPreview}
+          disableDrag={disableDrag}
+          canCreateSecurity={canCreateSecurity}
+          documentTitle={item.title}
         />
       ) : (
         <FileTile
@@ -126,19 +141,27 @@ const FilesTileContainer = ({ filesList }) => {
           }
           item={item}
           itemIndex={index}
+          dataTestId={`tile_${index}`}
+          selectedFolderTitle={selectedFolderTitle}
+          setDropTargetPreview={setDropTargetPreview}
+          disableDrag={disableDrag}
+          canCreateSecurity={canCreateSecurity}
+          documentTitle={item.title}
         />
       );
     });
-  }, [filesList, onSetTileRef, sectionWidth]);
+  }, [list, onSetTileRef, sectionWidth, isTutorialEnabled]);
 
   return (
     <FileTileProvider columnCount={columnCount} thumbSize={thumbSize}>
       <TileContainer
+        isDesc={isDesc}
         className="tile-container"
-        draggable
         useReactWindow
-        headingFolders={t("Translations:Folders")}
-        headingFiles={t("Translations:Files")}
+        infiniteGrid={InfiniteGrid}
+        headingFolders={t("Common:Folders")}
+        headingFiles={t("Common:Files")}
+        noSelect={!withContentSelection}
       >
         {filesListNode}
       </TileContainer>
@@ -146,10 +169,27 @@ const FilesTileContainer = ({ filesList }) => {
   );
 };
 
-export default inject(({ filesStore }) => {
-  const { filesList } = filesStore;
+export default inject(
+  ({ filesStore, uploadDataStore, selectedFolderStore, hotkeyStore }) => {
+    const { filesList, disableDrag } = filesStore;
+    const { filter } = filesStore;
+    const { withContentSelection } = hotkeyStore;
 
-  return {
-    filesList,
-  };
-})(observer(FilesTileContainer));
+    const isDesc = filter?.sortOrder === "desc";
+
+    const { primaryProgressDataStore } = uploadDataStore;
+    const { setDropTargetPreview } = primaryProgressDataStore;
+    const { title: selectedFolderTitle, security: canCreateSecurity } =
+      selectedFolderStore;
+
+    return {
+      filesList,
+      isDesc,
+      withContentSelection,
+      setDropTargetPreview,
+      selectedFolderTitle,
+      disableDrag,
+      canCreateSecurity,
+    };
+  },
+)(withContainer(observer(FilesTileContainer)));

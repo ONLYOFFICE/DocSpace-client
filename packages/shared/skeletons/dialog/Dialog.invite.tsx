@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -23,76 +23,11 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { useState, useEffect } from "react";
-import styled from "styled-components";
-import { isMobile } from "@docspace/shared/utils";
 
-export const InvitePanelLoaderWrapper = styled.div`
-  .dialog-loader-header {
-    padding: 12px 16px;
-    height: 53px;
-    border-bottom: ${(props) =>
-      `1px solid ${props.theme.modalDialog.headerBorderColor}`};
-    box-sizing: border-box;
-  }
-
-  .dialog-loader-footer {
-    padding: 12px 16px;
-    position: fixed;
-    bottom: 0;
-
-    height: 71px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-
-    box-sizing: border-box;
-
-    border-top: ${(props) =>
-      `1px solid ${props.theme.modalDialog.headerBorderColor}`};
-  }
-`;
-
-export const ExternalLinksLoaderWrapper = styled.div`
-  padding: 20px 16px 16px;
-  border-bottom: ${(props) => props.theme.filesPanels.sharing.borderBottom};
-
-  .external-links-loader {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 8px;
-  }
-
-  .check-box {
-    padding-top: 3px;
-  }
-`;
-
-export const InviteInputLoaderWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-
-  padding: 20px 16px;
-`;
-
-export const InviteInputLoaderHeaderWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-export const InviteInputLoaderFooterWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-
-  margin-top: 8px;
-`;
+import { isMobile } from "../../utils";
+import { RectangleSkeleton } from "../rectangle";
+import styles from "./Dialog.module.scss";
 
 export const DialogInvitePanelSkeleton = () => {
   const [isMobileView, setIsMobileView] = useState(isMobile());
@@ -106,12 +41,15 @@ export const DialogInvitePanelSkeleton = () => {
   }, []);
 
   return (
-    <InvitePanelLoaderWrapper>
+    <div
+      className={styles.dialogInviteLoader}
+      data-testid="dialog-invite-panel-skeleton"
+    >
       <div className="dialog-loader-header">
         <RectangleSkeleton height="29px" />
       </div>
 
-      <ExternalLinksLoaderWrapper>
+      <div className={styles.externalLinksLoader}>
         <div className="external-links-loader">
           <RectangleSkeleton width="177px" height="22px" />
           <RectangleSkeleton className="check-box" width="28px" height="16px" />
@@ -122,10 +60,10 @@ export const DialogInvitePanelSkeleton = () => {
           width="320px"
           height="16px"
         />
-      </ExternalLinksLoaderWrapper>
+      </div>
 
-      <InviteInputLoaderWrapper>
-        <InviteInputLoaderHeaderWrapper>
+      <div className={styles.inviteInputLoader}>
+        <div className={styles.invitePanelLoaderHeader}>
           <RectangleSkeleton
             width={isMobileView ? "156px" : "212px"}
             height="22px"
@@ -134,21 +72,21 @@ export const DialogInvitePanelSkeleton = () => {
             width={isMobileView ? "79px" : "122px"}
             height="19px"
           />
-        </InviteInputLoaderHeaderWrapper>
+        </div>
         <RectangleSkeleton width="100%" height="32px" />
-        <InviteInputLoaderFooterWrapper>
+        <div className={styles.invitePanelLoaderFooter}>
           <RectangleSkeleton
             height="32px"
             width={isMobileView ? "237px" : "342px"}
           />
           <RectangleSkeleton width="98px" height="32px" />
-        </InviteInputLoaderFooterWrapper>
-      </InviteInputLoaderWrapper>
+        </div>
+      </div>
 
       <div className="dialog-loader-footer">
         <RectangleSkeleton height="40px" />
         <RectangleSkeleton height="40px" />
       </div>
-    </InvitePanelLoaderWrapper>
+    </div>
   );
 };

@@ -1,10 +1,8 @@
 {
   "ActiveSessions": "Aktive Sitzungen",
   "AutoDeleteTitle": "Alle Sitzungen, die älter als 60 Tage sind, werden automatisch gelöscht.",
-  "ChangeEmailSuccess": "E-Mail wurde erfolgreich geändert",
   "ChangePasswordAfterLoggingOut": "Passwort nach Abmeldung ändern",
   "ConnectSocialNetworks": "Verbinden Sie Ihre sozialen Netzwerke",
-  "DarkTheme": "Dunkelmodus",
   "DescriptionForSecurity": "Um die Sicherheit zu erhöhen, müssen Sie Ihr Passwort ändern.",
   "DesktopTheme": "Mit den Einstellungen des Desktop-Editors synchronisieren",
   "DesktopThemeDescription": "Automatisches Umschalten zwischen hellen und dunklen Themen je nach dem aktuellen Thema der Desktop-Editoren.",
@@ -13,7 +11,6 @@
   "ErrorAccountAlreadyUse": "Verknüpftes Konto, das bereits von einem anderen Benutzer verwendet wird",
   "FileManagement": "Dateiverwaltung",
   "InterfaceTheme": "Thema der Benutzeroberfläche",
-  "LightTheme": "Heller Modus",
   "LogoutActiveConnection": "Abmelden von der aktiven Verbindung",
   "LogoutAllActiveSessionsDescription": "Alle aktiven Verbindungen mit Ausnahme dieser Verbindung werden abgemeldet, da sie gerade in Gebrauch ist.",
   "LogoutBtn": "Abmelden",

@@ -1,11 +1,17 @@
 {
+  "ChangeContactType": "연락처 유형 변경",
   "ChangeGuestsTypeMessage": "<strong>{{userName}}</strong> 게스트가 {{membersSection}} 섹션으로 이동되고 사용자 유형이 할당됩니다. 사용자는 자신의 {{documentsSection}} 섹션을 갖게 되고 파일을 만들고 편집할 수 있지만, 룸을 만들 수는 없습니다.",
   "ChangeGuestsTypeMessageMulti": "선택된 게스트가 {{membersSection}} 섹션으로 이동되고 사용자 유형이 할당됩니다. 사용자는 자신의 {{documentsSection}} 섹션을 갖게 되고 파일을 만들고 편집할 수 있지만, 룸을 만들 수는 없습니다.",
+  "ChangeGuestsTypeToAdmin": "<strong>{{userName}}</strong> 게스트가 {{membersSection}} 섹션으로 이동되고 <strong>'{{ secondType }}'</strong> 유형이 할당됩니다. {{productName}} 관리자는 {{productName}} 설정에 액세스하고, 룸을 관리 및 아카이브하고, 새로운 사용자를 초대하고, 자신의 레벨보다 낮은 역할을 할당할 수 있습니다. {{productName}} 관리자는 {{documentsSection}} 섹션에 액세스할 수 있습니다.",
+  "ChangeGuestsTypeToAdminMulti": "선택된 게스트가 {{membersSection}} 섹션으로 이동되고 <strong>'{{ secondType }}'</strong> 유형이 할당됩니다. {{productName}} 관리자는 {{productName}} 설정에 액세스하고, 룸을 관리 및 아카이브하고, 새로운 사용자를 초대하고, 자신의 레벨보다 낮은 역할을 할당할 수 있습니다. {{productName}} 관리자는 {{documentsSection}} 섹션에 액세스할 수 있습니다.",
+  "ChangeGuestsTypeToManager": "<strong>{{userName}}</strong> 게스트가 {{membersSection}} 섹션으로 이동되고 <strong>'{{ secondType }}'</strong> 유형이 할당됩니다. 룸 관리자는 할당된 룸을 생성 및 관리하고, 새로운 사용자를 초대하고, 룸 관리자 이하의 역할을 할당할 수 있습니다. 룸 관리자는 {{documentsSection}} 섹션에 액세스할 수 있습니다.",
+  "ChangeGuestsTypeToManagerMulti": "선택된 게스트가 {{membersSection}} 섹션으로 이동되고 <strong>'{{ secondType }}'</strong> 유형이 할당됩니다. 룸 관리자는 할당된 룸을 생성 및 관리하고, 새로운 사용자를 초대하고, 룸 관리자 이하의 역할을 할당할 수 있습니다. 룸 관리자는 {{documentsSection}} 섹션에 액세스할 수 있습니다.",
   "ChangeUserTypeButton": "유형 변경",
-  "ChangeUserTypeHeader": "사용자 유형 변경",
   "ChangeUserTypeMessage": "<strong>'{{ firstType }}'</strong> 유형 사용자가 <strong>'{{ secondType }}'</strong> 유형으로 이동됩니다.",
-  "ChangeUserTypeMessageMulti": "선택한 사용자가 <strong>'{{ secondType }}'</strong> 유형으로 이동됩니다.",
-  "ChangeUserTypeMessageWarning": "{{productName}}관리자 및 자신의 유형을 변경할 수 없습니다.",
+  "ChangeUserTypeNote": "<1>참고:</1> {{productName}} 관리자와 본인에 대한 유형은 변경할 수 없습니다.",
+  "DataReassignmentInfo": "이 사용자가 생성한 룸은 자동으로 고객님에게 할당됩니다. 해당 룸을 다른 사람에게 다시 할당하려면 아래에서 해당 링크를 클릭하세요. ",
+  "DataReassignmentWithFilesDeletion": "이 연락처가 생성한 모든 공유 파일은 <1>30일 후에 자동으로 고객님에게 할당됩니다</1>. 해당 룸/공유 파일을 다른 사람에게 다시 할당하려면 아래에서 해당 링크를 클릭하세요. ",
+  "PersonalDataDeletion": "이 연락처의 {{sectionName}} 섹션의 모든 파일 및 폴더는 <1>30일 후에 영구적으로 삭제됩니다</1>.",
   "SuccessChangeGuestType": "게스트 유형이 변경되었습니다",
   "SuccessChangeUserType": "사용자 유형이 성공적으로 변경되었습니다"
 }

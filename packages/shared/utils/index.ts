@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,6 +27,7 @@
 "use client";
 
 import moment from "moment-timezone";
+import { TTranslation } from "../types";
 
 import { isArrayEqual } from "./array";
 import * as email from "./email";
@@ -42,6 +43,7 @@ import { trimSeparator } from "./trimSeparator";
 import getCorrectDate from "./getCorrectDate";
 import { handleAnyClick } from "./event";
 import { getTextColor } from "./getTextColor";
+import { getFormFillingTipsStorageName } from "./getFormFillingTipsStorageName";
 
 import DomHelpers from "./domHelpers";
 import ObjectUtils from "./objectUtils";
@@ -62,12 +64,14 @@ import {
 } from "./device";
 import { getCookie } from "./cookie";
 import { Context, Provider, Consumer } from "./context";
-import commonIconsStyles, { IconSizeType } from "./common-icons-style";
+import commonIconsStyles, {
+  IconSizeType,
+  isIconSizeType,
+} from "./common-icons-style";
 import { classNames } from "./classNames";
 import { getBannerAttribute, getLanguage } from "./banner";
-import { NoUserSelect, TextUserSelect } from "./commonStyles";
+import { NoUserSelect } from "./commonStyles";
 import { commonInputStyles } from "./commonInputStyles";
-import { commonTextStyles } from "./commonTextStyles";
 import {
   RoomsTypeValues,
   RoomsTypes,
@@ -77,13 +81,25 @@ import {
   isBetaLanguage,
   getLogoUrl,
 } from "./common";
-import { DeviceType } from "../enums";
+import {
+  DeviceType,
+  FilterType,
+  RoomsType,
+  FileFillingFormStatus,
+  FolderType,
+} from "../enums";
 import { TFile } from "../api/files/types";
 import { onEdgeScrolling, clearEdgeScrollingTimer } from "./edgeScrolling";
 import type { TRoom } from "../api/rooms/types";
 import { injectDefaultTheme } from "./injectDefaultTheme";
 import { getFromSessionStorage } from "./getFromSessionStorage";
 import { saveToSessionStorage } from "./saveToSessionStorage";
+import { getFromLocalStorage } from "./getFromLocalStorage";
+import { fakeFormFillingList } from "./formFillingTourData";
+import { getCountTilesInRow } from "./getCountTilesInRow";
+import { getSelectFormatTranslation } from "./getSelectFormatTranslation";
+import * as userFilterUtils from "./userFilterUtils";
+import * as filterConstants from "./filterConstants";
 
 export {
   isBetaLanguage,
@@ -95,9 +111,7 @@ export {
   parseAddresses,
   getParts,
   NoUserSelect,
-  TextUserSelect,
   commonInputStyles,
-  commonTextStyles,
   INFO_PANEL_WIDTH,
   EmailSettings,
   parseAddress,
@@ -109,6 +123,7 @@ export {
   classNames,
   commonIconsStyles,
   IconSizeType,
+  isIconSizeType,
   Context,
   Provider,
   Consumer,
@@ -141,6 +156,13 @@ export {
   getTextColor,
   getFromSessionStorage,
   saveToSessionStorage,
+  getFromLocalStorage,
+  getFormFillingTipsStorageName,
+  fakeFormFillingList,
+  getCountTilesInRow,
+  getSelectFormatTranslation,
+  userFilterUtils,
+  filterConstants,
 };
 
 export const getModalType = () => {
@@ -226,7 +248,7 @@ export const isLockedSharedRoom = (item?: TRoom) => {
 };
 
 export const addLog = (log: string, category: "socket") => {
-  if (!window.ClientConfig?.logs.enableLogs) return;
+  if (!window.ClientConfig?.logs?.enableLogs) return;
 
   if (window.ClientConfig.logs.logsToConsole) console.log(log);
   else {
@@ -236,4 +258,134 @@ export const addLog = (log: string, category: "socket") => {
 
     window.logs[category].push(log);
   }
+};
+
+export const getFillingStatusLabel = (
+  status: FileFillingFormStatus | undefined,
+  t: TTranslation,
+) => {
+  switch (status) {
+    case FileFillingFormStatus.Draft:
+      return t("Common:BadgeMyDraftTitle");
+    case FileFillingFormStatus.YourTurn:
+      return t("Common:YourTurn");
+    case FileFillingFormStatus.InProgress:
+      return t("Common:InProgress");
+    case FileFillingFormStatus.Stopped:
+      return t("Common:Stopped");
+    case FileFillingFormStatus.Completed:
+      return t("Common:Complete");
+    default:
+      return "";
+  }
+};
+export const getFillingStatusTitle = (
+  status: FileFillingFormStatus | undefined,
+  t: TTranslation,
+) => {
+  switch (status) {
+    case FileFillingFormStatus.Draft:
+      return t("Common:BadgeDraftTitle");
+    case FileFillingFormStatus.YourTurn:
+      return t("Common:BadgeYourTurnTitle");
+    case FileFillingFormStatus.InProgress:
+      return t("Common:BadgeInProgressTitle");
+    case FileFillingFormStatus.Stopped:
+      return t("Common:BadgeStoppedTitle");
+    case FileFillingFormStatus.Completed:
+      return t("Common:BadgeCompletedTitle");
+    default:
+      return "";
+  }
+};
+
+export const getCheckboxItemId = (key: string | FilterType | RoomsType) => {
+  switch (key) {
+    case "all":
+      return "selected-all";
+    case FilterType.FoldersOnly:
+      return "selected-only-folders";
+    case FilterType.DocumentsOnly:
+      return "selected-only-documents";
+    case FilterType.PresentationsOnly:
+      return "selected-only-presentations";
+    case FilterType.SpreadsheetsOnly:
+      return "selected-only-spreadsheets";
+    case FilterType.DiagramsOnly:
+      return "selected-only-diagrams";
+    case FilterType.ImagesOnly:
+      return "selected-only-images";
+    case FilterType.MediaOnly:
+      return "selected-only-media";
+    case FilterType.ArchiveOnly:
+      return "selected-only-archives";
+    case FilterType.FilesOnly:
+      return "selected-only-files";
+
+    case `room-${RoomsType.CustomRoom}`:
+      return "selected-only-custom-room";
+    case `room-${RoomsType.EditingRoom}`:
+      return "selected-only-collaboration-rooms";
+
+    case `room-${RoomsType.PublicRoom}`:
+      return "selected-only-public-rooms";
+    case `room-${RoomsType.VirtualDataRoom}`:
+      return "selected-only-vdr-rooms";
+
+    default:
+      return "";
+  }
+};
+
+export const getCheckboxItemLabel = (
+  t: TTranslation,
+  key: FilterType | RoomsType | string,
+) => {
+  switch (key) {
+    case "all":
+      return t("Common:All");
+    case FilterType.FoldersOnly:
+      return t("Common:Folders");
+    case FilterType.DocumentsOnly:
+      return t("Common:Documents");
+    case FilterType.PresentationsOnly:
+      return t("Common:Presentations");
+    case FilterType.SpreadsheetsOnly:
+      return t("Common:Spreadsheets");
+    case FilterType.ImagesOnly:
+      return t("Common:Images");
+    case FilterType.MediaOnly:
+      return t("Common:Media");
+    case FilterType.ArchiveOnly:
+      return t("Common:Archives");
+    case FilterType.FilesOnly:
+      return t("Common:Files");
+    case FilterType.DiagramsOnly:
+      return t("Common:Diagrams");
+
+    case `room-${RoomsType.CustomRoom}`:
+      return t("Common:CustomRooms");
+    case `room-${RoomsType.EditingRoom}`:
+      return t("Common:CollaborationRooms");
+
+    case `room-${RoomsType.FormRoom}`:
+      return t("Common:FormRoom");
+
+    case `room-${RoomsType.PublicRoom}`:
+      return t("Common:PublicRoomLabel");
+    case `room-${RoomsType.VirtualDataRoom}`:
+      return t("Common:VirtualDataRoom");
+
+    default:
+      return "";
+  }
+};
+
+export const isSystemFolder = (folderType: FolderType) => {
+  return (
+    folderType === FolderType.InProgress ||
+    folderType === FolderType.Done ||
+    folderType === FolderType.SubFolderDone ||
+    folderType === FolderType.SubFolderInProgress
+  );
 };

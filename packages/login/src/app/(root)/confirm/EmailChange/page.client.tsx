@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -37,16 +37,17 @@ import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 const EmailChangeHandler = () => {
   const [error, setError] = useState<string>();
 
-  const { linkData } = useContext(ConfirmRouteContext);
-  const { email = "", uid = "", key = "" } = linkData;
+  const { linkData, confirmLinkResult } = useContext(ConfirmRouteContext);
+  const { uid = "", key = "", encemail = "" } = linkData;
+  const { email = "" } = confirmLinkResult;
 
   useEffect(() => {
     async function emailChange() {
       try {
-        await changeEmail(uid, email, key);
-        window.location.replace(`/profile?email_change=success`);
-      } catch (error) {
-        const knownError = error as TError;
+        await changeEmail(uid, email, encemail, key);
+        window.location.replace(`/profile/login?email_change=success`);
+      } catch (e) {
+        const knownError = e as TError;
         let errorMessage: string;
 
         if (typeof knownError === "object") {

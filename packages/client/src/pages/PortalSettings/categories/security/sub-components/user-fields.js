@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,10 +31,14 @@ import {
   injectDefaultTheme,
   mobile,
 } from "@docspace/shared/utils";
-import TrashIcon from "PUBLIC_DIR/images/trash.react.svg";
+import TrashIcon from "PUBLIC_DIR/images/icons/16/trash.react.svg";
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg";
 import { Link } from "@docspace/shared/components/link";
-import { TextInput } from "@docspace/shared/components/text-input";
+import {
+  TextInput,
+  InputSize,
+  InputType,
+} from "@docspace/shared/components/text-input";
 
 const StyledPlusIcon = styled(PlusIcon).attrs(injectDefaultTheme)`
   ${commonIconsStyles}
@@ -93,6 +97,9 @@ const UserFields = (props) => {
     regexp,
     classNameAdditional,
     isAutoFocussed = false,
+    inputDataTestId,
+    deleteIconDataTestId,
+    addButtonDataTestId,
   } = props;
 
   const [errors, setErrors] = useState(new Array(inputs.length).fill(false));
@@ -141,21 +148,27 @@ const UserFields = (props) => {
               : !regexp.test(input);
 
             return (
-              <StyledInputWrapper key={`user-input-${input}`}>
+              <StyledInputWrapper key={`user-input-${inputs.length - index}`}>
                 <TextInput
+                  type={InputType.text}
+                  size={InputSize.base}
+                  tabIndex={index}
                   className={`${classNameAdditional}-input`}
                   id={`user-input-${input}`}
                   isAutoFocussed={isAutoFocussed}
+                  keepCharPositions
                   value={input}
                   onChange={(e) => onChangeInput(e, index)}
                   onBlur={() => onBlur(index)}
                   onFocus={() => onFocus(index)}
-                  hasError={errors[index] && error}
+                  hasError={errors[index] ? error : null}
+                  testId={inputDataTestId}
                 />
                 <StyledTrashIcon
                   className={`${classNameAdditional}-delete-icon`}
                   size="medium"
                   onClick={() => onDelete(index)}
+                  data-testid={deleteIconDataTestId}
                 />
               </StyledInputWrapper>
             );
@@ -166,6 +179,7 @@ const UserFields = (props) => {
         className={classNameAdditional}
         onClick={onClickAdd}
         inputsLength={inputs.length}
+        data-testid={addButtonDataTestId}
       >
         <StyledPlusIcon size="small" />
         <Link type="action" isHovered fontWeight={600}>

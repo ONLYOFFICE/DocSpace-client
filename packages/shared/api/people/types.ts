@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,6 +27,7 @@
 import {
   EmployeeActivationStatus,
   EmployeeStatus,
+  EmployeeType,
   ThemeKeys,
 } from "../../enums";
 import { TCreatedBy } from "../../types";
@@ -92,6 +93,10 @@ export type TUser = {
   title?: string;
   registrationDate?: string;
   createdBy?: TCreatedBy;
+  hasPersonalFolder?: boolean;
+  isAnonim: boolean;
+  tfaAppEnabled?: boolean;
+  sharedTo?: object;
 };
 
 export type TGetUserList = {
@@ -101,4 +106,37 @@ export type TGetUserList = {
 
 export type TChangeTheme = {
   theme: ThemeKeys;
+};
+
+export type TPeopleListItem = {
+  id: string;
+  status: EmployeeStatus;
+  activationStatus: number;
+  statusType: string;
+  role: EmployeeType;
+  isOwner: boolean;
+  isAdmin: boolean;
+  isCollaborator: boolean;
+  isRoomAdmin: boolean;
+  isVisitor: boolean;
+  displayName: string;
+  avatar: string;
+  avatarMax: string | undefined;
+  hasAvatar: boolean;
+  email: string;
+  userName: string;
+  mobilePhone: string | undefined;
+  options: string[] | undefined;
+  // groups: any[] | undefined; // TODO: fix type
+  position: string | undefined;
+  firstName: string | undefined;
+  lastName: string | undefined;
+  isSSO: boolean;
+  isLDAP: boolean;
+  quotaLimit: number | undefined;
+  usedSpace: number | undefined;
+  isCustomQuota: boolean | string | undefined;
+  // createdBy: any; // TODO: fix type
+  registrationDate: string | undefined;
+  tfaAppEnabled: boolean | undefined;
 };

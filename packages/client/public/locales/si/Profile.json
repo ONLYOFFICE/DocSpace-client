@@ -1,9 +1,8 @@
 {
   "ActiveSessions": "සක්‍රිය වාර",
-  "ChangeEmailSuccess": "වි-තැපෑල සාර්ථකව වෙනස් කර ඇත",
+  "AutoDeleteTitle": "සියලුම සැසි 60 දිනට වඩා පැරණි නම්, ඒවා ස්වයංක්‍රීයව මකා දමනු ලැබේ.",
   "ChangePasswordAfterLoggingOut": "නික්මීමෙන් පසු මුරපදය වෙනස් කරන්න",
   "ConnectSocialNetworks": "ඔබගේ සමාජ ජාල සබඳින්න",
-  "DarkTheme": "අඳුරු තේමාව",
   "DescriptionForSecurity": "වඩාත් හොඳ ආරක්‍ෂාකවකට, ඔබගේ මුරපදය වෙනස් කළ යුතුය.",
   "DesktopTheme": "වැඩතල සංස්කරකයේ සැකසුම් සමමුහූර්ත කරන්න",
   "DesktopThemeDescription": "වැඩතල සංස්කරක වල වත්මන් තේමාව අනුව දීප්ත සහ අඳුරු තේමා අතර ස්වයංක්‍රීයව මාරු වන්න.",
@@ -12,7 +11,6 @@
   "ErrorAccountAlreadyUse": "සබැඳි ගිණුම දැනටමත් වෙනත් අයෙක් භාවිතා කරයි",
   "FileManagement": "ගොනු කළමනාකරණය",
   "InterfaceTheme": "අතුරු මුහුණතේ තේමාව",
-  "LightTheme": "දීප්ත තේමාව",
   "LogoutActiveConnection": "සක්‍රිය සම්බන්ධතාවයෙන් නික්මෙන්න",
   "LogoutAllActiveSessionsDescription": "මෙම සම්බන්ධතාවය හැර අනෙකුත් සියළුම සක්‍රිය සම්බන්ධතා නික්මවනු ඇත.",
   "LogoutBtn": "නික්මෙන්න",
@@ -26,5 +24,6 @@
   "SuccessLogout": "සක්‍රිය සම්බන්ධතාවය නික්ම ගොස් ඇත: {{platform}}, {{browser}}",
   "SystemTheme": "පද්ධතියේ තේමාව යොදාගන්න",
   "SystemThemeDescription": "ඔබගේ පද්ධතියේ වෙනස් වන පරිදි දීප්ත සහ අඳුරු තේමා අතර ස්වයංක්‍රීයව මාරු වන්න.",
+  "TerminateAllSessions": "වත්මන් සැසිය හැර අනෙකුත් සියළු සැසියන් අවසන් කරන්න.",
   "TwoFactorDescription": "පරිපාලකගේ අභිමතයට අනුව සියළුම පරිශ්‍රීලකයින් සඳහා කේත උත්පාදනය කරන යෙදුමක් හරහා ද්වි-සාධක තහවුරුව සබල කර ඇත."
 }

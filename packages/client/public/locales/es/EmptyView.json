@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "Sus últimos documentos vistos o editados se mostrarán en esta sección.",
   "EmptyRootRoomUserDescription": "La sala compartida aparecerá aquí.",
   "EmptyRootRoomUserTitle": "Todavía no hay salas aquí",
+  "EmptyTemplatesDescription": "Puede crear una plantilla a partir de una sala en la sección Salas",
+  "EmptyTemplatesTitle": "Aún no hay plantillas aquí",
   "FormFolderDefaultDescription": "Coloque formularios PDF aquí o cárguelos desde {{productName}} o dispositivo.",
   "FormFolderDefaultTitle": "Todavía no hay formularios aquí",
   "FormFolderDefaultUserDescription": "Los formularios cargados por los administradores aparecerán aquí.",
@@ -33,6 +35,7 @@
   "MigrationDataDescription": "Importe datos a su {{productName}} desde {{organizationName}} Workspace, Google Workspace o Nextcloud.",
   "MigrationDataTitle": "Datos de migración",
   "PublicRoomEmptyTitle": "Bienvenido/a a la Sala pública",
+  "SectionsUploadDescription": "Suba cualquier tipo de archivo desde {{sectionNameFirst}} o {{sectionNameSecond}}",
   "SendInvitationLetter": "Enviar una carta de invitación para añadir nuevos miembros al portal",
   "ShareOptionDescription": "Copie un enlace de acceso público o invite a otros usuarios a la sala para iniciar el proceso de rellemado de formularios.",
   "ShareOptionTitle": "Compartir una sala",
@@ -42,9 +45,7 @@
   "UploadDeviceOptionTitle": "Sube desde tu dispositivo",
   "UploadDevicePDFFormOptionDescription": "Cargue un formulario PDF listo a la sala desde su dispositivo.",
   "UploadDevicePDFFormOptionTitle": "Subir desde el dispositivo",
-  "UploadFromPortalDescription": "Cargue cualquier tipo de archivos desde Documentos o Salas",
   "UploadFromPortalTitle": "Subir desde {{productName}}",
   "UploadPDFFormOptionDescription": "Seleccione un formulario PDF listo disponible en {{productName}} y cárguelo en la sala.",
-  "UserEmptyDescription": "Los archivos y carpetas cargados por los administradores aparecerán aquí.",
   "VirtualDataRoomEmptyTitle": "Bienvenido/a a la Sala de datos virtuales"
 }

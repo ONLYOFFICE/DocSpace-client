@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,8 +27,12 @@
 import { thirdPartyLogin } from "@docspace/shared/utils/loginUtils";
 import { Nullable, TTranslation } from "@docspace/shared/types";
 
-import { MessageKey, OAuth2ErrorKey } from "./enums";
 import { parseURL } from "@docspace/shared/utils/common";
+import { getCookie } from "@docspace/shared/utils";
+
+import { getAvailablePortals as getAvailablePortalsServer } from "./actions";
+
+import { MessageKey, OAuth2ErrorKey } from "./enums";
 
 export async function oAuthLogin(profile: string) {
   let isSuccess = false;
@@ -175,11 +179,104 @@ export const getConfirmDataFromInvitation = (
 export const getStringFromSearchParams = (searchParams: {
   [key: string]: string;
 }): string => {
-  let stringSearchParams = "";
-
-  for (const [key, value] of Object.entries(searchParams)) {
-    stringSearchParams += `&${key}=${value}`;
-  }
+  const stringSearchParams = Object.entries(searchParams).reduce(
+    (acc, [key, value]) => `${acc}&${key}=${value}`,
+    "",
+  );
 
   return stringSearchParams.slice(1);
 };
+
+export const getRedirectURL = () => {
+  const redirect_url = getCookie("x-redirect-authorization-uri");
+
+  if (!redirect_url) {
+    const scopes = getCookie("x-scopes");
+    const url = getCookie("x-url");
+
+    let redirectUrl = url;
+
+    if (scopes) redirectUrl += `&scope=${scopes?.split(";").join("%20")}`;
+
+    return redirectUrl!;
+  }
+
+  const decodedRedirectUrl = window.atob(
+    redirect_url.replace(/-/g, "+").replace(/_/g, "/"),
+  );
+
+  return decodedRedirectUrl;
+};
+
+export const encodeParams = (str: string) => {
+  return str
+    .split("&")
+    .map((pair) => {
+      const [key, value] = pair.split("=");
+      const encodedValue = encodeURIComponent(value);
+      return `${key}=${encodedValue}`;
+    })
+    .join("&");
+};
+
+export async function getAvailablePortals(data: {
+  Email: string;
+  PasswordHash: string;
+  recaptchaResponse?: string | null | undefined;
+  recaptchaType?: unknown | undefined;
+}) {
+  const config = window.ClientConfig;
+
+  const path = `/portal/signin`;
+
+  if (config?.oauth2?.apiSystem.length) {
+    const urls: string[] = config.oauth2.apiSystem.map(
+      (url: string) => `https://${url}/apisystem${path}`,
+    );
+
+    const actions = await Promise.allSettled(
+      urls.map((url: string) =>
+        fetch(url, {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }),
+      ),
+    );
+
+    const fullFiledActions = actions.filter(
+      (action) => action.status === "fulfilled",
+    );
+
+    if (fullFiledActions.length) {
+      const portalsRes = fullFiledActions
+        .filter((action) => {
+          return action.value.ok;
+        })
+        .map((action) => action.value);
+
+      if (!portalsRes.length) {
+        const portals = await fullFiledActions[0].value.json();
+
+        return { ...portals, status: fullFiledActions[0].status };
+      }
+
+      const portals = (await Promise.all(portalsRes.map((res) => res.json())))
+        .map(
+          (p: { tenants: { portalLink: string; portalName: string }[] }) =>
+            p.tenants,
+        )
+        .flat();
+
+      return portals;
+    }
+  }
+
+  const portalsRes = await getAvailablePortalsServer(data);
+
+  if (portalsRes.error) return portalsRes;
+
+  return portalsRes as { portalLink: string; portalName: string }[];
+}

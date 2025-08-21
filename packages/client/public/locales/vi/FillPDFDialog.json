@@ -2,8 +2,5 @@
   "FillOutButtonLabel": "Điền vào",
   "FillOutDescription": "Điền vào các trường của biểu mẫu gốc trong cửa sổ trình chỉnh sửa.",
   "FillOutTitle": "Tự điền vào biểu mẫu",
-  "FillPDFDialogTitle": "Điền vào dưới dạng",
-  "ShareCollectButtonLabel": "Sao chép vào phòng",
-  "ShareCollectDescription": "Để chia sẻ biểu mẫu của bạn và thu thập câu trả lời, xin vui lòng tạo phòng Điền biểu mẫu.",
-  "ShareCollectTitle": "Chia sẻ"
+  "FillPDFDialogTitle": "Điền vào dưới dạng"
 }

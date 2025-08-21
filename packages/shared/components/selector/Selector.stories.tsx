@@ -24,8 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import React from "react";
-import styled from "styled-components";
 import { Meta, StoryObj } from "@storybook/react";
 
 import ArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
@@ -36,46 +38,21 @@ import { RoomsTypeValues } from "../../utils";
 
 import RoomType from "../room-type";
 import { AvatarRole } from "../avatar";
+import {
+  BreadCrumbsLoader,
+  RowLoader,
+  SearchLoader,
+} from "../../skeletons/selector";
 
 import { Selector } from "./Selector";
 import { SelectorProps, TSelectorItem } from "./Selector.types";
 import { globalColors } from "../../themes";
-
-const StyledRowLoader = styled.div`
-  width: 100%;
-  height: 48px;
-`;
-
-const StyledSearchLoader = styled.div`
-  width: 100%;
-  height: 32px;
-  background: black;
-`;
-
-const StyledBreadCrumbsLoader = styled.div`
-  width: 100%;
-  height: 54px;
-  background: black;
-`;
+import { EmployeeStatus, EmployeeType } from "../../enums";
 
 const meta = {
   title: "Components/Selector",
   component: Selector,
-  parameters: {
-    docs: {
-      description: {
-        component:
-          "Selector for displaying items list of people or room selector",
-      },
-    },
-  },
-  // argTypes: {
-  //   height: {
-  //     table: {
-  //       disable: true,
-  //     },
-  //   },
-  // },
+  parameters: {},
 } satisfies Meta<typeof Selector>;
 type Story = StoryObj<typeof meta>;
 
@@ -142,6 +119,8 @@ const getItems = (count: number) => {
       avatar: "",
       role: AvatarRole.owner,
       hasAvatar: false,
+      userType: EmployeeType.Admin,
+      status: EmployeeStatus.Active,
     });
   }
 
@@ -197,22 +176,62 @@ const renderedItems = items.slice(0, 100);
 const totalItems = items.length;
 
 const Template = (args: SelectorProps) => {
+  const { isMultiSelect } = args;
+
   const [rendItems, setRendItems] = React.useState(renderedItems);
+  const wrapperRef = React.useRef<HTMLDivElement | null>(null);
 
   const loadNextPage = React.useCallback(async (index: number) => {
     setRendItems((val) => [...val, ...items.slice(index, index + 100)]);
   }, []);
 
-  const rowLoader = <StyledRowLoader />;
-  const searchLoader = <StyledSearchLoader className="search-loader" />;
+  React.useEffect(() => {
+    // Ensure initial scroll is at top with minimal interference and no jumps.
+    const raf = requestAnimationFrame(() => {
+      const root = wrapperRef.current;
+      if (!root) return;
+
+      const setTop = (node: unknown) => {
+        try {
+          if (
+            node &&
+            typeof node.scrollTop === "number" &&
+            node.scrollTop > 0
+          ) {
+            node.scrollTo?.(0, 0);
+            node.scrollTop = 0;
+          }
+        } catch (e) {
+          console.log(e);
+        }
+      };
+
+      const pageEl = (document.scrollingElement ||
+        document.documentElement) as unknown as HTMLElement;
+      setTop(pageEl);
+
+      // Story-local scroll containers
+      const scrollRoot = root.querySelector(
+        ".selector-body-scroll",
+      ) as HTMLElement | null;
+      const scrollContent = root.querySelector(
+        ".selector-body-scroll .scrollbar__content",
+      ) as HTMLElement | null;
+      [scrollRoot, scrollContent].forEach(setTop);
+    });
+    return () => cancelAnimationFrame(raf);
+  }, []);
 
   return (
     <div
+      ref={wrapperRef}
       style={{
         width: "480px",
         height: "485px",
         border: `1px solid ${globalColors.grayLightMid}`,
         margin: "auto",
+        overflow: "hidden",
+        boxSizing: "border-box",
       }}
     >
       {/* @ts-expect-error args is good */}
@@ -220,8 +239,8 @@ const Template = (args: SelectorProps) => {
         {...args}
         items={rendItems}
         loadNextPage={loadNextPage}
-        searchLoader={searchLoader}
-        rowLoader={rowLoader}
+        searchLoader={<SearchLoader />}
+        rowLoader={<RowLoader isUser={false} isMultiSelect={isMultiSelect} />}
       />
     </div>
   );
@@ -240,8 +259,8 @@ export const Default: Story = {
     onSelect: () => {},
     isMultiSelect: false,
     selectedItems,
-    acceptButtonLabel: "Add",
-    onAccept: () => {},
+    submitButtonLabel: "Add",
+    onSubmit: () => {},
     withSelectAll: false,
     selectAllLabel: "All accounts",
     selectAllIcon: ArchiveSvgUrl,
@@ -268,12 +287,12 @@ export const Default: Story = {
     withBreadCrumbs: false,
     breadCrumbs: [],
     onSelectBreadCrumb: () => {},
-    breadCrumbsLoader: <StyledBreadCrumbsLoader />,
+    breadCrumbsLoader: <BreadCrumbsLoader />,
     withoutBackButton: false,
     withSearch: false,
     isBreadCrumbsLoading: false,
     alwaysShowFooter: false,
-    disableAcceptButton: false,
+    disableSubmitButton: false,
     descriptionText: "",
   },
 };
@@ -289,8 +308,8 @@ export const BreadCrumbs: Story = {
     onSelect: () => {},
     isMultiSelect: false,
     selectedItems,
-    acceptButtonLabel: "Add",
-    onAccept: () => {},
+    submitButtonLabel: "Add",
+    onSubmit: () => {},
     withSelectAll: false,
     selectAllLabel: "All accounts",
     selectAllIcon: ArchiveSvgUrl,
@@ -323,7 +342,7 @@ export const BreadCrumbs: Story = {
       { id: 5, label: "4222222222222222222222222222222222222" },
     ],
     onSelectBreadCrumb: () => {},
-    breadCrumbsLoader: <StyledBreadCrumbsLoader />,
+    breadCrumbsLoader: <BreadCrumbsLoader />,
     withoutBackButton: false,
     withSearch: false,
     isBreadCrumbsLoading: false,
@@ -332,7 +351,7 @@ export const BreadCrumbs: Story = {
     footerCheckboxLabel: "",
     currentFooterInputValue: "",
     alwaysShowFooter: false,
-    disableAcceptButton: false,
+    disableSubmitButton: false,
     descriptionText: "",
   },
 };
@@ -348,8 +367,8 @@ export const NewName: Story = {
     onSelect: () => {},
     isMultiSelect: false,
     selectedItems,
-    acceptButtonLabel: "Add",
-    onAccept: () => {},
+    submitButtonLabel: "Add",
+    onSubmit: () => {},
     withSelectAll: false,
     selectAllLabel: "All accounts",
     selectAllIcon: ArchiveSvgUrl,
@@ -380,7 +399,7 @@ export const NewName: Story = {
       { id: 3, label: "21222222222" },
     ],
     onSelectBreadCrumb: () => {},
-    breadCrumbsLoader: <StyledBreadCrumbsLoader />,
+    breadCrumbsLoader: <BreadCrumbsLoader />,
     withoutBackButton: false,
     withSearch: false,
     isBreadCrumbsLoading: false,
@@ -389,7 +408,7 @@ export const NewName: Story = {
     footerCheckboxLabel: "Open saved document in new tab",
     currentFooterInputValue: "OldFIleName.docx",
     alwaysShowFooter: false,
-    disableAcceptButton: false,
+    disableSubmitButton: false,
     descriptionText: "",
   },
 };

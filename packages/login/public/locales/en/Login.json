@@ -1,4 +1,5 @@
 {
+  "ChangePasswordSuccess": "Password has been successfully changed",
   "CodeTitle": "The code was emailed to you",
   "ErrorInvalidText": "In 10 seconds you will be redirected to the <1>{{productName}}</1>",
   "ForgotPassword": "Forgot your password?",
@@ -18,5 +19,7 @@
   "RememberHelper": "The default session lifetime is 20 minutes. Check this option to set it to 1 year. To set your own value, go to Settings.",
   "SignInLDAP": "Sign in to: {{ldap_domain}}",
   "SignInLdapHelper": "Use credentials for the corporate domain",
-  "UserIsAlreadyRegistered": "User <1>{{email}}</1> is already registered in this {{productName}}, enter your password or go back to continue with another email."
+  "UserIsAlreadyRegistered": "User <1>{{email}}</1> is already registered in this {{productName}}, enter your password or go back to continue with another email.",
+  "ConfirmEmailChange": "Confirm your email change",
+  "ConfirmEmailChangeText": "You’ve requested to change the email address on your {{productName}} account. To proceed, please sign in using your current credentials."
 }

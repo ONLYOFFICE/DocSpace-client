@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,26 +27,39 @@
 import { LoaderTypes } from "./Loader.enums";
 import { TColorScheme } from "../../themes";
 
-export interface LoaderProps {
-  /** Font color */
+export type LoaderProps = {
+  /** Ref to access the DOM element or React component instance */
+  ref?: React.RefObject<SVGSVGElement>;
+  /** Custom color for the loader. Can be any valid CSS color value */
   color?: string;
-  /** Type loader */
+  /**
+   * Type of loader animation to display. Available types:
+   * - base: Simple circular spinner
+   * - oval: Oval-shaped loading animation
+   * - dual-ring: Two concentric rotating rings
+   * - rombs: Diamond-shaped loading animation
+   * - track: Circular track with rotating segment
+   */
   type?: LoaderTypes;
-  /** Font size  */
+  /** Size of the loader in valid CSS units (px, rem, em, etc.) */
   size?: string;
-  /** Text label */
+  /** Optional text to display below the loader */
   label?: string;
-  /** Class name */
+  /** Additional CSS class name for custom styling */
   className?: string;
-  /** Accepts id  */
+  /** Unique identifier for the loader component */
   id?: string;
-  /** Accepts css style */
+  /** Custom inline CSS styles */
   style?: React.CSSProperties;
+  /** If true, uses primary color from theme */
   primary?: boolean;
+  /** If true, loader will appear in a disabled state */
   isDisabled?: boolean;
-}
+};
 
-export interface LoaderThemeProps extends LoaderProps {
+export type LoaderThemeProps = LoaderProps & {
   ref: SVGSVGElement;
   $currentColorScheme?: TColorScheme;
-}
+  viewBox?: string;
+  xmlns?: string;
+};

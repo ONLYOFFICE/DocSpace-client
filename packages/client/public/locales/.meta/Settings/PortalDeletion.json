@@ -1,0 +1,298 @@
+{
+  "key_path": "PortalDeletion",
+  "content": "{{productName}} Deletion",
+  "content_en_sha1_hash": "693540a2e226ddffcbfa72d1c31476a39f461691",
+  "created_at": "2025-05-19T21:30:52.200Z",
+  "updated_at": "2025-08-04T07:30:01.281Z",
+  "comment": {
+    "text": "The translation key \"PortalDeletion\" is used to display a message indicating that an artifact will be deleted. In the UI, it appears in a portal settings page as part of a deletion confirmation dialog. The phrase should refer to the specific product or application being deleted, using the product name provided by the user.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:47.622Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
+      "line_number": 228,
+      "context": "return t(\"Ldap:LdapSettings\");\n case \"LdapSyncTitle\":\n return t(\"Ldap:LdapSyncTitle\");\n case \"Common:RestoreBackup\":\n return t(\"Common:RestoreBackup\");\n case \"PortalDeletion\":\n return t(\"PortalDeletion\", { productName: t(\"Common:ProductName\") });\n case \"Common:DeveloperTools\":\n return t(\"Common:DeveloperTools\");\n case \"Common:Bonus\":\n return t(\"Common:Bonus\");",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 566,
+      "context": "{\n id: \"portal-settings_catalog-delete\",\n key: \"8\",\n type: PageType.portalDeletion,\n link: \"delete-data\",\n tKey: \"PortalDeletion\",\n isHeader: true,\n children: [\n {\n key: \"8-0\",\n icon: \"\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 566,
+      "context": "{\n id: \"portal-settings_catalog-delete\",\n key: \"8\",\n type: PageType.portalDeletion,\n link: \"delete-data\",\n tKey: \"PortalDeletion\",\n isHeader: true,\n children: [\n {\n key: \"8-0\",\n icon: \"\",",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"حذف {{productName}}\" literally translates to 'Deletion {{productName}}'. It lacks the article 'of' to correctly reflect '{{productName}} Deletion'. A more accurate translation would incorporate that.",
+          "suggestion": "حذف {{productName}} "
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The hyphen in the German translation seems unnecessary. While acceptable, it's not standard German usage for compound nouns in this context.",
+          "suggestion": "{{productName}} Löschung"
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Διαγραφή {{productName}}\" literally translates to \"Deletion {{productName}}\". While understandable, it lacks the article 'of' which would make it more natural in Greek.  A more accurate translation would incorporate 'του/της/του' depending on the gender of productName.",
+          "suggestion": "Διαγραφή {{productName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ການລົບລ້າງ' is more accurately translated as 'revocation' or 'annulment' rather than 'deletion'.  'Deletion' would be 'ການລຶບ' in Lao.",
+          "suggestion": "ການລຶບ {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ștergere spațiu {{productName}}' doesn't accurately convey the meaning of 'Deletion'. 'Ștergere' means 'deletion' or 'erasing', but 'spațiu' means 'space'.  A more accurate translation might focus on the portal itself being deleted, not just the space it occupies.",
+          "suggestion": "Ștergere Portal {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"මැකීම\" is a generally accepted translation for \"deletion\", but in the context of a portal, a more precise translation might be \"ප්‍රතිකාරණය කිරීම\" (pratikaranaya karima) which means \"removal\" or \"disposal\". While \"මැකීම\" isn't wrong, it's less specific.",
+          "suggestion": "{{productName}} ප්‍රතිකාරණය කිරීම"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Vymazanie\" is a bit too literal. A more natural translation for 'Deletion' in this context might be 'Zmazanie' or 'Odstránenie'. \"Vymazanie\" implies more of a wiping clean.",
+          "suggestion": "Zmazanie {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Izbris {{productName}}\" is too literal. A more natural and user-friendly translation would be \"Odstranitev {{productName}}\" or \"Pooboljšanje {{productName}}\". \"Izbris\" implies a forceful deletion, which might not be the intended nuance.",
+          "suggestion": "Odstranitev {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Брисање {{productName}}-а\" implies deletion of a masculine noun. While grammatically correct, it doesn't account for cases where {{productName}} might refer to a feminine or neuter product. A more general translation would be needed to handle all genders.",
+          "suggestion": "Брисање {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Brisanje {{productName}}-a' uses the genitive case ('-a') which may not be the most natural or accurate translation for 'Deletion' in this context. A more common and arguably more accurate translation would be in the nominative case, or a rephrased version.",
+          "suggestion": "Consider '{{productName}} brisanje' or 'Izbrisanje {{productName}}-a' (more formal)."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Ukrainian translation includes a colon (:) at the end, which might be unnecessary or stylistically different from the English version. It might be more consistent to omit the colon.",
+          "suggestion": "Видалення {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English \"Deletion\" is better translated as \"Xóa bỏ\" to convey the action of deleting something completely, instead of just \"Xóa\". \"Xóa\" alone can mean 'remove' or 'delete', but doesn't have the finality implied by 'Deletion'.",
+          "suggestion": "Xóa bỏ {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"删除{{productName}}\" literally translates to \"Delete {{productName}}\". While technically correct, it lacks the context of the English '{{productName}} Deletion', which implies a process or action related to deletion. A more accurate translation might include a verb indicating the action of deleting.",
+          "suggestion": "考虑使用更具描述性的翻译，例如“{{productName}} 删除流程” ({{productName}} Deletion Process) 或“{{productName}} 删除操作” ({{productName}} Deletion Action)."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

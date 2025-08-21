@@ -1,0 +1,232 @@
+{
+  "key_path": "LdapUserFilter",
+  "content": "User Filter",
+  "content_en_sha1_hash": "2bd6f4fb71dfc1df3cd10c33278ff414bed11062",
+  "created_at": "2025-05-19T21:30:54.330Z",
+  "updated_at": "2025-08-11T18:11:59.243Z",
+  "comment": {
+    "text": "LdapUserFilter is a filter field used to set conditions for LDAP user authentication. It appears on the Connection Settings page and allows users to define specific filters for LDAP users.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:55.781Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/ConnectionSettings.js",
+      "line_number": 191,
+      "context": "style={LAST_FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.userFilter}\n labelText={t(\"LdapUserFilter\")}\n tooltipContent={t(\"LdapUserFilterTooltip\")}\n inlineHelpButton\n isRequired\n dataTestId=\"user_filter_field_container\"\n >",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'تصفية المستخدم' (Tasfiya Al-Mustakhdim) is a literal translation of 'User Filter', it doesn't convey the intended meaning as a filter used in LDAP configurations. A more accurate and idiomatic translation would better reflect the technical context.",
+          "suggestion": "مرشح المستخدم (Marashah Al-Mustakhdim) - This term aligns more closely with 'filter' in a technical context."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Օգտատիրոջ զտիչ' while technically conveying 'User Filter', doesn't sound natural or commonly used in Armenian for this context. 'զտիչ' implies a filter in a more technical, mechanical sense. A more natural translation would be something like 'Օգտահարոջ ֆիլտր' (Ogtaharoij filter) or 'Օգտատերմինի փնտրող' (Ogtatermini phtroxogh).",
+          "suggestion": "Consider 'Օգտահարոջ ֆիլտր' (Ogtaharoij filter) or 'Օգտատերմինի փնտրող' (Ogtatermini phtroxogh)."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ຕົວປ່ຽນແກ້ໄຂຜູ້ໃຊ້' (tua bpen aek phu sai) translates to 'User Modifier' or 'User Editor', not 'User Filter'.  While technically related, it doesn't accurately convey the meaning of 'User Filter'.",
+          "suggestion": "Consider 'ຕົວກັ່ນຕອງຜູ້ໃຊ້' (tua kan tong phu sai) which more closely translates to 'User Filter'."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"පරිශීලක පෙරහන\" while containing relevant terms, doesn't quite capture the precise meaning of \"User Filter\" in a technical context within LDAP. \"පරිශීලක\" (parishilaka) generally means 'enthusiast' or 'devotee,' which isn't accurate for a filter. \"පෙරහන\" (perahana) means 'filter' but the overall phrase feels awkward.",
+          "suggestion": "A more accurate translation might be \"කාර්ය මූලික පෙරහන\" (kaarya moolika perahana), where 'kaarya moolika' means 'functional' or 'operational' implying a filter used to select users based on defined criteria. Another option is \"භාවිතර පෙරහන\" (bhavitara perahana), which translates to 'user filter', using a more direct translation for user."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

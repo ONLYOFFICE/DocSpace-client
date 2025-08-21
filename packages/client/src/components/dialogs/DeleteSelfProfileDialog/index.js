@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,13 +28,13 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import PropTypes from "prop-types";
 
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { withTranslation } from "react-i18next";
 import { sendInstructionsToDelete } from "@docspace/shared/api/people";
+import { Link } from "@docspace/shared/components/link";
 
 class DeleteSelfProfileDialogComponent extends React.Component {
   constructor(props) {
@@ -76,16 +76,17 @@ class DeleteSelfProfileDialogComponent extends React.Component {
         <ModalDialog.Body>
           <Text fontSize="13px">
             {t("DeleteProfileInfo")}{" "}
-            <ColorTheme
+            <Link
               type="page"
               href={`mailto:${email}`}
               noHover
-              themeId={ThemeId.Link}
               title={email}
               tag="a"
+              color="accent"
+              dataTestId="dialog_self_email_link"
             >
               {email}
-            </ColorTheme>
+            </Link>
           </Text>
         </ModalDialog.Body>
         <ModalDialog.Footer>
@@ -97,6 +98,7 @@ class DeleteSelfProfileDialogComponent extends React.Component {
             primary
             onClick={this.onDeleteSelfProfileInstructions}
             isLoading={isRequestRunning}
+            testId="dialog_delete_self_button"
           />
           <Button
             key="CloseBtn"
@@ -105,6 +107,7 @@ class DeleteSelfProfileDialogComponent extends React.Component {
             scale
             onClick={onClose}
             isDisabled={isRequestRunning}
+            testId="dialog_delete_self_cancel_button"
           />
         </ModalDialog.Footer>
       </ModalDialog>

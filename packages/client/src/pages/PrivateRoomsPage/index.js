@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,7 @@
 
 import DarkGeneralPngUrl from "PUBLIC_DIR/images/dark_general.png";
 import { useState } from "react";
-import { observer } from "mobx-react";
+import { observer, inject } from "mobx-react";
 import styled from "styled-components";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
@@ -36,7 +36,7 @@ import Section from "@docspace/shared/components/section";
 import SectionWrapper from "SRC_DIR/components/Section";
 import { injectDefaultTheme, mobile, tablet } from "@docspace/shared/utils";
 import { Trans, withTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import { isMobile } from "react-device-detect";
 import { toastr } from "@docspace/shared/components/toast";
 import { checkProtocol } from "../../helpers/files-helpers";
@@ -121,7 +121,7 @@ const StyledPrivacyPage = styled.div.attrs(injectDefaultTheme)`
   }
 `;
 
-const PrivacyPageComponent = ({ t, tReady }) => {
+const PrivacyPageComponent = ({ t, tReady, logoText, desktopUrl }) => {
   const [isDisabled, setIsDisabled] = useState(false);
 
   const location = useLocation();
@@ -167,7 +167,7 @@ const PrivacyPageComponent = ({ t, tReady }) => {
             i18nKey="PrivacyClick"
             ns="PrivacyPage"
             values={{
-              organizationName: t("Common:OrganizationName"),
+              organizationName: logoText,
             }}
             components={{
               1: <strong />,
@@ -189,7 +189,7 @@ const PrivacyPageComponent = ({ t, tReady }) => {
           primary
           isDisabled={isDisabled}
           label={t("PrivacyButton", {
-            organizationName: t("Common:OrganizationName"),
+            organizationName: logoText,
           })}
         />
 
@@ -202,7 +202,7 @@ const PrivacyPageComponent = ({ t, tReady }) => {
             fontWeight={300}
           >
             {t("PrivacyEditors", {
-              organizationName: t("Common:OrganizationName"),
+              organizationName: logoText,
             })}
             ?
           </Text>
@@ -210,7 +210,7 @@ const PrivacyPageComponent = ({ t, tReady }) => {
             className="privacy-rooms-link privacy-rooms-install-text"
             fontSize="16px"
             isHovered
-            href="https://www.onlyoffice.com/desktop.aspx"
+            href={desktopUrl}
           >
             {t("PrivacyInstall")}
           </Link>
@@ -224,7 +224,7 @@ const PrivacyPageComponent = ({ t, tReady }) => {
         >
           <p>
             {t("PrivacyDescriptionEditors", {
-              organizationName: t("Common:OrganizationName"),
+              organizationName: logoText,
             })}
             .
           </p>
@@ -249,4 +249,11 @@ const PrivacyPage = (props) => {
   );
 };
 
-export default observer(PrivacyPage);
+export default inject(({ settingsStore }) => {
+  const { logoText, desktopUrl } = settingsStore;
+
+  return {
+    logoText,
+    desktopUrl,
+  };
+})(observer(PrivacyPage));

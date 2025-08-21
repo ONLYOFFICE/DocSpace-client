@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,12 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 /* eslint-disable react/prop-types */
-import React from "react";
-import { Navigate, useLocation } from "react-router-dom";
 
-import { TenantStatus } from "@docspace/shared/enums";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { isPublicPreview, isPublicRoom } from "@docspace/shared/utils/common";
+import { Navigate, useLocation } from "react-router";
+
+import { TenantStatus } from "../enums";
+import { combineUrl } from "../utils/combineUrl";
+import { isPublicPreview, isPublicRoom } from "../utils/common";
 
 import type { PublicRouteProps } from "./Routers.types";
 
@@ -50,7 +50,9 @@ export const PublicRoute = (props: PublicRouteProps) => {
     const isPreparationPortalUrl = location.pathname === "/preparation-portal";
     const isDeactivationPortalUrl = location.pathname === "/unavailable";
     const isPortalRestriction = location.pathname === "/access-restricted";
+    const isEncryptionPortalUrl = location.pathname === "/encryption-portal";
     const isPortalRestoring = tenantStatus === TenantStatus.PortalRestore;
+    const isPortalEncryption = tenantStatus === TenantStatus.EncryptionProcess;
 
     // if (!isLoaded) {
     //   return <AppLoader />;
@@ -82,6 +84,16 @@ export const PublicRoute = (props: PublicRouteProps) => {
         />
       );
     }
+
+    if (isAuthenticated && isPortalEncryption && !isEncryptionPortalUrl) {
+      return (
+        <Navigate
+          replace
+          to={combineUrl(window.ClientConfig?.proxy?.url, "/encryption-portal")}
+        />
+      );
+    }
+
     if (isAuthenticated && isPortalDeactivate && !isDeactivationPortalUrl) {
       return (
         <Navigate
@@ -132,7 +144,9 @@ export const PublicRoute = (props: PublicRouteProps) => {
       wizardCompleted &&
       !isAuthenticated &&
       !isPortalRestoring &&
-      !isPortalDeactivate
+      !isPortalDeactivate &&
+      !isPortalDeactivate &&
+      !isPortalEncryption
     ) {
       window.location.replace(
         combineUrl(window.ClientConfig?.proxy?.url, "/login"),

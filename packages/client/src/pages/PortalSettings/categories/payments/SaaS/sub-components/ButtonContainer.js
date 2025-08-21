@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -45,26 +45,26 @@ const ButtonContainer = ({
   t,
   isNotPaidPeriod,
   isGracePeriod,
-  accountLink,
-  isFreeAfterPaidPeriod,
+  paymentLink,
 }) => {
-  const goToStripeAccount = () => {
-    accountLink
-      ? window.open(accountLink, "_blank")
+  const goToStripePortal = () => {
+    paymentLink
+      ? window.open(paymentLink, "_blank")
       : toastr.error(t("ErrorNotification"));
   };
 
   return (
     <StyledBody>
-      {isNotPaidPeriod || isGracePeriod || isFreeAfterPaidPeriod ? (
+      {isNotPaidPeriod || isGracePeriod ? (
         <Button
           className="pay-button"
           label={t("Pay")}
           size="medium"
           primary
           isDisabled={isLoading || isDisabled}
-          onClick={goToStripeAccount}
+          onClick={goToStripePortal}
           isLoading={isLoading}
+          testId="pay_button"
         />
       ) : isNeedRequest ? (
         <RequestButtonContainer isDisabled={isDisabled} t={t} />
@@ -76,7 +76,7 @@ const ButtonContainer = ({
 };
 
 export default inject(({ currentTariffStatusStore, paymentStore }) => {
-  const { isNeedRequest, isLoading, accountLink } = paymentStore;
+  const { isNeedRequest, isLoading, accountLink, paymentLink } = paymentStore;
   const { isNotPaidPeriod, isGracePeriod } = currentTariffStatusStore;
 
   return {
@@ -85,5 +85,6 @@ export default inject(({ currentTariffStatusStore, paymentStore }) => {
     isNotPaidPeriod,
     isGracePeriod,
     accountLink,
+    paymentLink,
   };
 })(observer(ButtonContainer));

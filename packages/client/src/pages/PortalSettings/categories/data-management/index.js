@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useTheme } from "styled-components";
@@ -35,14 +35,19 @@ import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 import { Tabs } from "@docspace/shared/components/tabs";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
-import { Box } from "@docspace/shared/components/box";
 import { HelpButton } from "@docspace/shared/components/help-button";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import { DeviceType } from "@docspace/shared/enums";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { isManagement } from "@docspace/shared/utils/common";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
+import SocketHelper, {
+  SocketCommands,
+  SocketEvents,
+} from "@docspace/shared/utils/socket";
+
 import config from "../../../../../package.json";
+
 import ManualBackup from "./backup/manual-backup";
 import AutoBackup from "./backup/auto-backup";
 
@@ -55,6 +60,7 @@ const DataManagementWrapper = (props) => {
 
     isNotPaidPeriod,
     currentDeviceType,
+    standalone,
   } = props;
 
   const navigate = useNavigate();
@@ -82,18 +88,20 @@ const DataManagementWrapper = (props) => {
             <Trans t={t} i18nKey={`${helpInfo}`} ns="Settings">
               {helpInfo}
             </Trans>
-            <Box as="span" marginProp="10px 0 0">
-              <Link
-                id="link-tooltip"
-                fontSize="13px"
-                href={isAutoBackupPage ? automaticBackupUrl : dataBackupUrl}
-                target="_blank"
-                isBold
-                isHovered
-              >
-                {t("Common:LearnMore")}
-              </Link>
-            </Box>
+            <span style={{ margin: "10px 0 0" }}>
+              {(isAutoBackupPage ? automaticBackupUrl : dataBackupUrl) ? (
+                <Link
+                  id="link-tooltip"
+                  fontSize="13px"
+                  href={isAutoBackupPage ? automaticBackupUrl : dataBackupUrl}
+                  target="_blank"
+                  isBold
+                  isHovered
+                >
+                  {t("Common:LearnMore")}
+                </Link>
+              ) : null}
+            </span>
           </Text>
         }
       />
@@ -103,14 +111,14 @@ const DataManagementWrapper = (props) => {
   const data = [
     {
       id: "data-backup",
-      name: t("DataBackup"),
+      name: t("Common:DataBackup"),
       content: (
         <ManualBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />
       ),
     },
     {
       id: "auto-backup",
-      name: t("AutoBackup"),
+      name: t("Common:AutoBackup"),
       content: (
         <AutoBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />
       ),
@@ -120,18 +128,54 @@ const DataManagementWrapper = (props) => {
   useEffect(() => {
     const path = location.pathname;
     const currentTab = data.find((item) => path.includes(item.id));
-    if (currentTab !== -1 && data.length) setCurrentTabId(currentTab.id);
+    if (currentTab && data.length) setCurrentTabId(currentTab.id);
 
     setIsLoaded(true);
   }, [location.pathname]);
 
+  useEffect(() => {
+    const { socketSubscribers } = SocketHelper;
+
+    if (!socketSubscribers.has("backup")) {
+      if (!isManagement()) {
+        SocketHelper.emit(SocketCommands.Subscribe, {
+          roomParts: "backup",
+        });
+      }
+
+      if (standalone && isManagement()) {
+        SocketHelper?.emit(SocketCommands.SubscribeInSpaces, {
+          roomParts: "backup",
+        });
+      }
+    }
+
+    return () => {
+      SocketHelper.off(SocketEvents.BackupProgress);
+
+      if (!isManagement()) {
+        SocketHelper.emit(SocketCommands.Unsubscribe, {
+          roomParts: "backup",
+        });
+      }
+
+      if (standalone && isManagement()) {
+        SocketHelper?.emit(SocketCommands.UnsubscribeInSpaces, {
+          roomParts: "backup",
+        });
+      }
+    };
+  }, []);
   const onSelect = (e) => {
     const url = isManagement()
       ? `/management/settings/backup/${e.id}`
       : `/portal-settings/backup/${e.id}`;
+
     navigate(
       combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, url),
     );
+
+    setIsLoaded(false);
   };
 
   if (!isLoaded) return null;
@@ -160,6 +204,7 @@ export const Component = inject(
 
       currentColorScheme,
       currentDeviceType,
+      standalone,
     } = settingsStore;
 
     const buttonSize =
@@ -174,6 +219,7 @@ export const Component = inject(
       isNotPaidPeriod,
       currentColorScheme,
       currentDeviceType,
+      standalone,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(DataManagementWrapper)));

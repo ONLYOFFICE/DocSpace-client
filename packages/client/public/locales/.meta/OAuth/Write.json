@@ -1,0 +1,268 @@
+{
+  "key_path": "Write",
+  "content": "Write",
+  "content_en_sha1_hash": "4a48932789d199bbed709777e2d743ca2bafdc6c",
+  "created_at": "2025-05-19T21:30:54.069Z",
+  "updated_at": "2025-08-04T07:30:01.360Z",
+  "comment": {
+    "text": "The translation key \"Write\" is used to display the label for an OAuth scope setting that grants write permissions. It appears in a UI component where users can select available scopes for API keys or client forms.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:30.777Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
+      "line_number": 209,
+      "context": "</Text>\n <Text\n className=\"api-key_permission-container-text separator\"\n fontWeight={600}\n >\n {t(\"OAuth:Write\")}\n </Text>\n \n {permissionsList.map((item) => {\n return item;\n })}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/ScopesBlock.tsx",
+      "line_number": 89,
+      "context": "type: ScopeType,\n name: string = \"\",\n ) => {\n const isChecked = checkedScopes.includes(name);\n \n const isWrite = type === \"write\";\n \n if (!isChecked) {\n setFilteredScopes((val) => {\n val[group].isChecked = true;\n val[group].checkedType = type;",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Yazın\" can mean \"write\", it's the imperative form (write!).  For a key name like 'OAuth:Write', a more neutral form, like the infinitive \"Yazma\" (writing) or a noun form (\"Yazılış\" - writing/creation) would likely be more appropriate, depending on the intended meaning within the OAuth context.",
+          "suggestion": "Consider \"Yazma\" or \"Yazılış\" depending on the intended meaning."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation \"Napište na\" does not accurately convey the meaning of \"Write\" in the context of OAuth. It literally translates to \"Write on\" and implies writing something *onto* something, not simply writing.",
+          "suggestion": "A more appropriate translation, depending on the specific function within OAuth, could be \"Zapsat\" (to write/record), \"Vytvořit\" (to create), or potentially a more contextual translation if the exact functionality is known. Without additional context, \"Zapsat\" is likely the closest."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek translation \"Γράψτε\" is the imperative form (command) of \"write.\"  For a key name like \"OAuth:Write,\" a more suitable translation would be a noun form, like 'εγγραφή' (egrafí - registration) or 'κείμενο' (keimeno - text).  \"Γράψτε\" implies an action, while the key name likely refers to a concept or permission.",
+          "suggestion": "Consider 'εγγραφή' (egrafí - registration) or 'κείμενο' (keimeno - text) instead of 'Γράψτε'."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Italian translation \"Scrivi\" is the imperative form of the verb 'to write' (singular 'you'). While it can be interpreted as 'Write', it lacks the nuance of the English 'Write' which functions as a noun in this context (e.g., 'OAuth:Write'). A more appropriate translation, depending on the intended meaning, could be 'Scrittura' (writing) or 'Autorizzazione di scrittura'.",
+          "suggestion": "Consider 'Scrittura' or 'Autorizzazione di scrittura' for greater accuracy."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation \"Scriere\" for \"Write\" is technically correct but not the most natural or common translation in this context. \"Scriere\" is a more formal or abstract noun form. In the context of OAuth, a more common and user-friendly translation would be \"Scris\" (written) or possibly \"Creare\" (creation).",
+          "suggestion": "Consider using \"Scris\" or \"Creare\" as a more natural translation depending on the intended meaning within the OAuth context."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation \"යතුරුහරපය\" (yathuru harapaya) translates to \"key\" or \"lever\", not \"write\". It doesn't accurately represent the meaning of \"Write\" in the context of OAuth.",
+          "suggestion": "A more appropriate translation would depend on the specific context within OAuth. Potential suggestions include: ලිවීමේ (liwime), ලේඛනය කිරීම (lekhanaya kirima), or a transliteration like රයිට් (rait) if a direct equivalent is unavailable."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Пиши\" is the imperative form of the verb \"писати\" (to write). While it conveys the general concept of writing, it's not a direct translation of \"Write\" as a noun or a function.  A more accurate translation for a key name would be something like \"Упис\" (Upis) or \"Запис\" (Zapis), which imply recording or writing down.",
+          "suggestion": "Consider using \"Упис\" (Upis) or \"Запис\" (Zapis) for a more accurate representation of 'Write' as a key name."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Piši\" translates to \"Write\" in the imperative form (command). The intended meaning is likely the ability to write, not the act of writing. A more appropriate translation would convey the concept of 'write' as a capability or permission.",
+          "suggestion": "Pisanje"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Yaz\" is a verb in the imperative form (\"Write!\"). While it *can* mean 'write', it lacks the nuance of 'Write' which functions as a noun or a capability. A more accurate translation might be \"Yazma\" (writing) or \"Yazabilme\" (ability to write).",
+          "suggestion": "Yazma"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

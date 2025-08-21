@@ -1,0 +1,28 @@
+{
+  "key_path": "ExtraStorage",
+  "content": "Additional storage ({{storageUnit}})",
+  "content_en_sha1_hash": "a727757e8fc179328701e82adfe0ac5cf53e1c1e",
+  "created_at": "2025-06-03T20:59:26.734Z",
+  "updated_at": "2025-07-01T15:57:36.318Z",
+  "comment": {
+    "text": "This translation key is used to display a descriptive text for an \"Extra Storage\" feature in a storage plan upgrade process. It appears as part of a dropdown or radio button selection and provides the user with information about the available extra storage ({{storageUnit}}).",
+    "is_auto": true,
+    "updated_at": "2025-06-03T21:00:44.890Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/SelectionAmount.tsx",
+      "line_number": 181,
+      "context": "<QuantityPicker\n value={amount}\n minValue={100}\n maxValue={maxStorageLimit}\n step={1}\n title={t(\"ExtraStorage\", { storageUnit: t(\"Common:Gigabyte\") })}\n showPlusSign\n onChange={onChangeNumber}\n isDisabled={hasScheduledStorageChange || isLoading}\n items={amountTabs()}\n withoutContorls={hasScheduledStorageChange}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

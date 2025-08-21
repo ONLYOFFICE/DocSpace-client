@@ -1,0 +1,20 @@
+@use "../../styles/variables/colors";
+@use "../../styles/theme.scss";
+
+$font-size: 13px;
+
+html,
+body {
+  margin: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-size: 13px;
+}
+
+* {
+  font-family: var(--font-family);
+}
+
+body {
+  direction: var(--interface-direction);
+}

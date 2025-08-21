@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,7 @@
 
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
@@ -62,6 +62,7 @@ const TwoFactorAuth = (props) => {
     appAvailable,
     tfaSettings,
     getTfaType,
+    onSettingsSkeletonNotShown,
   } = props;
 
   const [type, setType] = useState("none");
@@ -95,6 +96,12 @@ const TwoFactorAuth = (props) => {
     }
     setIsLoading(true);
   };
+
+  useEffect(() => {
+    if (!onSettingsSkeletonNotShown) return;
+    if (!(currentDeviceType !== DeviceType.desktop && !isLoading))
+      onSettingsSkeletonNotShown("Tfa");
+  }, [currentDeviceType, isLoading]);
 
   useEffect(() => {
     checkWidth();
@@ -147,7 +154,7 @@ const TwoFactorAuth = (props) => {
       setShowReminder(false);
       saveToSessionStorage("defaultTfaSettings", type);
       saveToSessionStorage("currentTfaSettings", type);
-      toastr.success(t("SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
 
       if (res) {
         setIsInit(false);
@@ -173,21 +180,24 @@ const TwoFactorAuth = (props) => {
 
   return (
     <MainContainer>
-      <LearnMoreWrapper>
+      <LearnMoreWrapper withoutExternalLink={!tfaSettingsUrl}>
         <Text fontSize="13px" fontWeight="400">
           {t("TwoFactorAuthEnableDescription", {
             productName: t("Common:ProductName"),
           })}
         </Text>
-        <Link
-          className="link-learn-more"
-          color={currentColorScheme.main?.accent}
-          target="_blank"
-          isHovered
-          href={tfaSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {tfaSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            color={currentColorScheme.main?.accent}
+            target="_blank"
+            isHovered
+            href={tfaSettingsUrl}
+            dataTestId="tfa_component_learn_more"
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </LearnMoreWrapper>
 
       <RadioButtonGroup
@@ -197,11 +207,13 @@ const TwoFactorAuth = (props) => {
         name="group"
         orientation="vertical"
         spacing="8px"
+        dataTestId="tfa_radio_button_group"
         options={[
           {
             id: "tfa-disabled",
             label: t("Common:Disabled"),
             value: "none",
+            dataTestId: "tfa_radio_button_disabled",
           },
           // TODO: hide while 2fa by sms is not working
           /* {
@@ -215,6 +227,7 @@ const TwoFactorAuth = (props) => {
             label: t("ByApp"),
             value: "app",
             disabled: !appAvailable,
+            dataTestId: "tfa_radio_button_app",
           },
         ]}
         selected={type}
@@ -226,7 +239,7 @@ const TwoFactorAuth = (props) => {
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
-        reminderText={t("YouHaveUnsavedChanges")}
+        reminderText={t("Common:YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
         displaySettings
@@ -234,6 +247,8 @@ const TwoFactorAuth = (props) => {
         isSaving={isSaving}
         additionalClassSaveButton="two-factor-auth-save"
         additionalClassCancelButton="two-factor-auth-cancel"
+        saveButtonDataTestId="tfa_save_button"
+        cancelButtonDataTestId="tfa_cancel_button"
       />
     </MainContainer>
   );

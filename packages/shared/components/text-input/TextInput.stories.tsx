@@ -26,18 +26,18 @@
 
 import React, { useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
-
-import { TextInputPure } from "./TextInput";
-import { TextInputProps } from "./TextInput.types";
+import { TextInput } from ".";
 import { InputSize, InputType } from "./TextInput.enums";
+import type { TextInputProps } from "./TextInput.types";
 
 const meta = {
-  title: "Components/TextInput",
-  component: TextInputPure,
+  title: "Form Controls/TextInput",
+  component: TextInput,
   parameters: {
     docs: {
       description: {
-        component: "Input field for single-line strings",
+        component:
+          "Input field for single-line strings with various styling options and features including masking, scaling, and different states.",
       },
     },
     design: {
@@ -46,27 +46,65 @@ const meta = {
     },
   },
   argTypes: {
-    onBlur: { action: "onBlur" },
-    onFocus: { action: "onFocus" },
-    onChange: { action: "onChange" },
-    scale: { description: "Indicates that the input field has scaled" },
+    size: {
+      description: "Size variant of the input",
+      control: "select",
+      options: Object.values(InputSize),
+    },
+    type: {
+      control: "select",
+      options: Object.values(InputType),
+    },
   },
-} satisfies Meta<typeof TextInputPure>;
-type Story = StoryObj<typeof TextInputPure>;
+} satisfies Meta<typeof TextInput>;
+
+type Story = StoryObj<typeof TextInput>;
 
 export default meta;
 
-const Template = ({ onChange, value, ...args }: TextInputProps) => {
+const Template = ({
+  onChange,
+  value,
+  type,
+  placeholder,
+  size,
+  isDisabled,
+  isReadOnly,
+  hasError,
+  hasWarning,
+  scale,
+  withBorder,
+  maxLength,
+  autoComplete,
+  tabIndex,
+  mask,
+  guide,
+  keepCharPositions,
+}: TextInputProps) => {
   const [val, setValue] = useState(value);
 
   return (
-    <TextInputPure
-      {...args}
+    <TextInput
+      type={type || InputType.text}
+      placeholder={placeholder || "Enter text here"}
       value={val}
       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value);
         onChange?.(e);
       }}
+      size={size}
+      isDisabled={isDisabled}
+      isReadOnly={isReadOnly}
+      hasError={hasError}
+      hasWarning={hasWarning}
+      scale={scale}
+      withBorder={withBorder}
+      maxLength={maxLength}
+      autoComplete={autoComplete}
+      tabIndex={tabIndex}
+      mask={mask}
+      guide={guide}
+      keepCharPositions={keepCharPositions}
     />
   );
 };
@@ -74,9 +112,7 @@ const Template = ({ onChange, value, ...args }: TextInputProps) => {
 export const Default: Story = {
   render: (args) => <Template {...args} />,
   args: {
-    id: "",
-    name: "",
-    placeholder: "This is placeholder",
+    placeholder: "Enter text here",
     maxLength: 255,
     size: InputSize.base,
     type: InputType.text,
@@ -89,7 +125,80 @@ export const Default: Story = {
     autoComplete: "off",
     tabIndex: 1,
     withBorder: true,
-    mask: undefined,
     value: "",
+  },
+};
+
+export const WithMask: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    ...Default.args,
+    mask: [/\d/, /\d/, "/", /\d/, /\d/, "/", /\d/, /\d/, /\d/, /\d/],
+    placeholder: "DD/MM/YYYY",
+    guide: true,
+    keepCharPositions: true,
+  },
+};
+
+export const WithError: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    ...Default.args,
+    hasError: true,
+    value: "Invalid input",
+  },
+};
+
+export const WithWarning: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    ...Default.args,
+    hasWarning: true,
+    value: "Warning state",
+  },
+};
+
+export const Disabled: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    ...Default.args,
+    isDisabled: true,
+    value: "Disabled input",
+  },
+};
+
+export const ReadOnly: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    ...Default.args,
+    isReadOnly: true,
+    value: "Read only input",
+  },
+};
+
+export const Password: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    ...Default.args,
+    type: InputType.password,
+    placeholder: "Enter password",
+  },
+};
+
+export const Scaled: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    ...Default.args,
+    scale: true,
+    value: "Scaled input",
+  },
+};
+
+export const Large: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    ...Default.args,
+    size: InputSize.large,
+    placeholder: "Large input",
   },
 };

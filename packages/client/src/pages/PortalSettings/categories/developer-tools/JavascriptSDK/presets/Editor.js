@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,14 +26,14 @@
 
 import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import { Box } from "@docspace/shared/components/box";
 import { Label } from "@docspace/shared/components/label";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { inject, observer } from "mobx-react";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import SDK from "@onlyoffice/docspace-sdk-js";
 
-import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
+import { loadScript, getSdkScriptUrl } from "@docspace/shared/utils/common";
+
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import api from "@docspace/shared/api";
 import EmptyIframeContainer from "../sub-components/EmptyIframeContainer";
@@ -43,9 +43,16 @@ import { HeightSetter } from "../sub-components/HeightSetter";
 import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { PreviewBlock } from "../sub-components/PreviewBlock";
-import { Integration } from "../sub-components/Integration";
+import Integration from "../sub-components/Integration";
+import { VersionSelector } from "../sub-components/VersionSelector";
 
-import { dimensionsModel, defaultSize, defaultDimension } from "../constants";
+import {
+  dimensionsModel,
+  defaultSize,
+  defaultDimension,
+  sdkVersion,
+  sdkSource,
+} from "../constants";
 
 import {
   Controls,
@@ -59,9 +66,13 @@ import {
 } from "./StyledPresets";
 
 const Editor = (props) => {
-  const { t, theme, currentColorScheme } = props;
+  const { t, theme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
+
+  const [version, onSetVersion] = useState(sdkVersion[210]);
+
+  const [source, onSetSource] = useState(sdkSource.Package);
 
   const [config, setConfig] = useState({
     src: window.location.origin,
@@ -72,19 +83,44 @@ const Editor = (props) => {
     init: false,
   });
 
-  const sdk = new SDK();
+  const fromPackage = source === sdkSource.Package;
+
+  const sdkScriptUrl = getSdkScriptUrl(version);
+
+  const sdk = fromPackage ? new SDK() : window.DocSpace.SDK;
 
   const destroyFrame = () => {
-    sdk.frames[config.frameId]?.destroyFrame();
+    sdk?.frames[config.frameId]?.destroyFrame();
   };
 
   const initFrame = () => {
-    setTimeout(() => sdk.init(config), 10);
+    setTimeout(() => sdk?.init(config), 0);
   };
 
   useEffect(() => {
+    const script = document.getElementById("sdk-script");
+
+    if (script) {
+      script.remove();
+      destroyFrame();
+    }
+
+    if (!fromPackage) {
+      loadScript(sdkScriptUrl, "sdk-script");
+    }
+
+    return () => {
+      destroyFrame();
+      setTimeout(() => script?.remove(), 10);
+    };
+  }, [source, version]);
+
+  useEffect(() => {
     initFrame();
-    return () => destroyFrame();
+
+    return () => {
+      destroyFrame();
+    };
   });
 
   useEffect(() => {
@@ -128,7 +164,7 @@ const Editor = (props) => {
       targetId={config.frameId}
     >
       {config.id !== undefined ? (
-        <Box id={config.frameId} />
+        <div id={config.frameId} />
       ) : (
         <EmptyIframeContainer
           text={t("FilePreview")}
@@ -146,16 +182,20 @@ const Editor = (props) => {
     >
       <Container>
         <PreviewBlock
-          t={t}
           loadCurrentFrame={initFrame}
           preview={preview}
           theme={theme}
           frameId={config.frameId}
-          scriptUrl={SDK_SCRIPT_URL}
+          scriptUrl={sdkScriptUrl}
           config={config}
           isDisabled={config?.id === undefined}
         />
         <Controls>
+          <VersionSelector
+            t={t}
+            onSetSource={onSetSource}
+            onSetVersion={onSetVersion}
+          />
           <ControlsSection>
             <CategorySubHeader>{t("FileId")}</CategorySubHeader>
             <ControlsGroup>
@@ -229,31 +269,20 @@ const Editor = (props) => {
           </ControlsGroup> */}
           </ControlsSection>
 
-          <Integration
-            className="integration-examples"
-            t={t}
-            theme={theme}
-            currentColorScheme={currentColorScheme}
-          />
+          <Integration className="integration-examples" />
         </Controls>
       </Container>
 
-      <Integration
-        className="integration-examples integration-examples-bottom"
-        t={t}
-        theme={theme}
-        currentColorScheme={currentColorScheme}
-      />
+      <Integration className="integration-examples integration-examples-bottom" />
     </PresetWrapper>
   );
 };
 
 export const Component = inject(({ settingsStore }) => {
-  const { theme, currentColorScheme } = settingsStore;
+  const { theme } = settingsStore;
 
   return {
     theme,
-    currentColorScheme,
   };
 })(
   withTranslation(["JavascriptSdk", "Files", "EmbeddingPanel", "Common"])(

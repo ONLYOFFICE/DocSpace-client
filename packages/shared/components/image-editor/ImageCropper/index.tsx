@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,7 @@ import React, { useEffect } from "react";
 import { ReactSVG } from "react-svg";
 import throttle from "lodash/throttle";
 import AvatarEditor, { Position } from "react-avatar-editor";
-import { useTheme } from "styled-components";
+import classNames from "classnames";
 
 import ZoomMinusReactSvgUrl from "PUBLIC_DIR/images/zoom-minus.react.svg?url";
 import ZoomPlusReactSvgUrl from "PUBLIC_DIR/images/zoom-plus.react.svg?url";
@@ -36,8 +36,12 @@ import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url
 
 import { Slider } from "../../slider";
 import { IconButton } from "../../icon-button";
-import { StyledImageCropper } from "../ImageEditor.styled";
+
+import { useTheme } from "../../../hooks/useTheme";
+
 import { ImageCropperProps } from "../ImageEditor.types";
+
+import styles from "./ImageCropper.module.scss";
 
 const ImageCropper = ({
   t,
@@ -51,9 +55,11 @@ const ImageCropper = ({
   editorBorderRadius,
 }: ImageCropperProps) => {
   const editorRef = React.useRef<null | AvatarEditor>(null);
-  const inputFilesElement = React.useRef(null);
-  const setEditorRef = (editor: AvatarEditor) => (editorRef.current = editor);
-  const theme = useTheme();
+  const inputFilesElement = React.useRef<HTMLInputElement>(null);
+  const setEditorRef = (editor: AvatarEditor | null) => {
+    editorRef.current = editor;
+  };
+  const { isBase } = useTheme();
 
   const handlePositionChange = (position: Position) => {
     if (isDisabled || disableImageRescaling) return;
@@ -84,14 +90,14 @@ const ImageCropper = ({
     handleSliderChange(undefined, image.zoom >= 1.5 ? image.zoom - 0.5 : 1);
   };
 
-  const handleChangeImage = (e) => {
+  const handleChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (isDisabled) return;
     onChangeFile(e);
   };
 
   const onInputClick = () => {
     if (inputFilesElement.current) {
-      inputFilesElement.current.value = null;
+      inputFilesElement.current.value = "";
     }
   };
 
@@ -115,20 +121,23 @@ const ImageCropper = ({
   }, [handleImageChange, image, setPreviewImage]);
 
   return (
-    <StyledImageCropper
-      className="icon_cropper"
-      disableImageRescaling={disableImageRescaling}
+    <div
+      className={classNames(styles.imageCropperWrapper, "icon_cropper")}
+      data-testid="image-cropper"
+      aria-disabled={isDisabled}
     >
-      <div className="icon_cropper-crop_area">
+      <div className={styles.iconCropperCropArea}>
         <AvatarEditor
-          className="icon_cropper-avatar-editor"
+          className={
+            disableImageRescaling ? styles.iconCropperAvatarEditor : ""
+          }
           ref={setEditorRef}
           image={uploadedFile}
           width={648}
           height={648}
           position={{ x: image.x, y: image.y }}
           scale={image.zoom}
-          color={theme.isBase ? [6, 22, 38, 0.2] : [20, 20, 20, 0.8]}
+          color={isBase ? [6, 22, 38, 0.2] : [20, 20, 20, 0.8]}
           border={0}
           rotate={0}
           borderRadius={editorBorderRadius}
@@ -140,12 +149,13 @@ const ImageCropper = ({
         />
       </div>
       <div
-        className="icon_cropper-change_button"
-        onClick={() => inputFilesElement.current.click()}
+        className={styles.iconCropperChangeButton}
+        onClick={() => inputFilesElement.current?.click()}
         title={t("Common:ChooseAnother")}
+        data-testid="change_image_button"
       >
         <ReactSVG src={RefreshReactSvgUrl} />
-        <div className="icon_cropper-change_button-text">
+        <div className={styles.iconCropperChangeButtonText}>
           {t("Common:ChooseAnother")}
         </div>
         <input
@@ -161,40 +171,42 @@ const ImageCropper = ({
       </div>
 
       {typeof uploadedFile !== "string" &&
-        uploadedFile?.name &&
-        !disableImageRescaling && (
-          <div className="icon_cropper-zoom-container">
-            <IconButton
-              className="icon_cropper-zoom-container-button"
-              size={20}
-              onClick={handleZoomOutClick}
-              iconName={ZoomMinusReactSvgUrl}
-              isFill
-              isClickable={false}
-              isDisabled={isDisabled}
-            />
+      uploadedFile?.name &&
+      !disableImageRescaling ? (
+        <div className={styles.iconCropperZoomContainer}>
+          <IconButton
+            className={styles.iconCropperZoomContainerButton}
+            size={20}
+            onClick={handleZoomOutClick}
+            iconName={ZoomMinusReactSvgUrl}
+            isFill
+            isClickable={false}
+            isDisabled={isDisabled}
+            dataTestId="zoom_out_icon_button"
+          />
 
-            <Slider
-              className="icon_cropper-zoom-container-slider"
-              max={5}
-              min={1}
-              onChange={handleSliderChange}
-              step={0.01}
-              value={image.zoom}
-              isDisabled={isDisabled}
-            />
-            <IconButton
-              className="icon_cropper-zoom-container-button"
-              size={20}
-              onClick={handleZoomInClick}
-              iconName={ZoomPlusReactSvgUrl}
-              isFill
-              isClickable={false}
-              isDisabled={isDisabled}
-            />
-          </div>
-        )}
-    </StyledImageCropper>
+          <Slider
+            className={styles.slider}
+            max={5}
+            min={1}
+            onChange={handleSliderChange}
+            step={0.01}
+            value={image.zoom}
+            isDisabled={isDisabled}
+          />
+          <IconButton
+            className={styles.button}
+            size={20}
+            onClick={handleZoomInClick}
+            iconName={ZoomPlusReactSvgUrl}
+            isFill
+            isClickable={false}
+            isDisabled={isDisabled}
+            dataTestId="zoom_in_icon_button"
+          />
+        </div>
+      ) : null}
+    </div>
   );
 };
 

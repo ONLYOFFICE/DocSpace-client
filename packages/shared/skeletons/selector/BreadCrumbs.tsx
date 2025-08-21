@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,21 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
 import { RectangleSkeleton, RectangleSkeletonProps } from "../rectangle";
-
-const StyledContainer = styled.div`
-  width: 100%;
-
-  display: flex;
-  align-items: center;
-
-  padding: 0 16px;
-
-  margin-bottom: 16px;
-
-  gap: 8px;
-`;
+import styles from "./BreadCrumbs.module.scss";
 
 interface BreadCrumbsProps extends RectangleSkeletonProps {
   id?: string;
@@ -51,11 +38,10 @@ const BreadCrumbsLoader = ({
   id,
   className,
   style,
-
   ...rest
 }: BreadCrumbsProps) => {
   return (
-    <StyledContainer>
+    <div className={styles.container} data-testid="bread-crumbs-loader">
       <RectangleSkeleton
         width="80px"
         height="22px"
@@ -86,7 +72,7 @@ const BreadCrumbsLoader = ({
         style={{ ...style }}
         {...rest}
       />
-    </StyledContainer>
+    </div>
   );
 };
 

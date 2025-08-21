@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,7 +30,6 @@ import { inject, observer } from "mobx-react";
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Link, LinkType } from "@docspace/shared/components/link";
-import { Box } from "@docspace/shared/components/box";
 import { TableBody } from "@docspace/shared/components/table";
 import EmptyScreenUserReactSvgUrl from "PUBLIC_DIR/images/empty_screen_user.react.svg?url";
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
@@ -60,15 +59,15 @@ const TableView = (props: TableViewProps) => {
     setSearchValue,
   } = props as AddEmailTableProps;
   const [openedEmailKey, setOpenedEmailKey] = useState<string>("");
-  const tableRef = useRef(null);
+  const tableRef = useRef<HTMLDivElement | null>(null);
 
   const usersWithFilledEmails = users.withoutEmail.filter(
     (user) => user.email && user.email.length > 0,
   );
 
-  const toggleAll = (e: React.ChangeEvent<HTMLInputElement>) =>
+  const toggleAll = (e?: React.ChangeEvent<HTMLInputElement>) =>
     toggleAllAccounts(
-      e.target.checked,
+      e?.target.checked ?? false,
       usersWithFilledEmails,
       checkedAccountType,
     );
@@ -85,7 +84,10 @@ const TableView = (props: TableViewProps) => {
     checkedUsers.withoutEmail.length !== usersWithFilledEmails.length;
 
   return (
-    <StyledTableContainer forwardedRef={tableRef} useReactWindow>
+    <StyledTableContainer
+      forwardedRef={tableRef as React.RefObject<HTMLDivElement>}
+      useReactWindow
+    >
       {accountsData.length > 0 ? (
         <>
           <UsersTableHeader
@@ -96,8 +98,10 @@ const TableView = (props: TableViewProps) => {
             columnInfoPanelStorageName={columnInfoPanelStorageName}
             isIndeterminate={isIndeterminate}
             isChecked={
-              usersWithFilledEmails.length > 0 &&
-              checkedUsers.withoutEmail.length === usersWithFilledEmails.length
+              usersWithFilledEmails.length > 0
+                ? checkedUsers.withoutEmail.length ===
+                  usersWithFilledEmails.length
+                : false
             }
             toggleAll={toggleAll}
           />
@@ -110,7 +114,7 @@ const TableView = (props: TableViewProps) => {
             filesLength={accountsData.length}
             hasMoreFiles={false}
             itemCount={accountsData.length}
-            fetchMoreFiles={() => {}}
+            fetchMoreFiles={async () => {}}
           >
             {accountsData.map((data) => (
               <UsersTableRow
@@ -134,7 +138,7 @@ const TableView = (props: TableViewProps) => {
           headerText={t("Common:NotFoundUsers")}
           descriptionText={t("Common:NotFoundUsersDescription")}
           buttons={
-            <Box displayProp="flex" alignItems="center">
+            <div className="buttons-box">
               <IconButton
                 className="clear-icon"
                 isFill
@@ -150,7 +154,7 @@ const TableView = (props: TableViewProps) => {
               >
                 {t("Common:ClearFilter")}
               </Link>
-            </Box>
+            </div>
           }
         />
       )}

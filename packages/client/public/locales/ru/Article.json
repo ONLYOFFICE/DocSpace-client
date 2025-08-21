@@ -1,6 +1,4 @@
 {
-  "FilesNotLoaded": "Не загружено файлов: {{count}}",
-  "FilesUploaded": "Файлы загружены",
   "Upload": "Загрузить",
   "UploadFiles": "Загрузить файлы",
   "UploadFolder": "Загрузить папку"

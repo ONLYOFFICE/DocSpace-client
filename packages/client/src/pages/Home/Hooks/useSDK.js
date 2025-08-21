@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -140,7 +140,12 @@ const useSDK = ({
             refreshFiles();
             break;
           case "createTag":
-            res = await createTag(data);
+            {
+              const { name } = data;
+              const tagName = typeof data === "string" ? data : name;
+
+              res = await createTag(tagName);
+            }
             break;
           case "addTagsToRoom":
             {
@@ -155,7 +160,12 @@ const useSDK = ({
             }
             break;
           case "setListView":
-            setViewAs(data);
+            {
+              const { viewType } = data;
+              const type = typeof data === "string" ? data : viewType;
+
+              res = await setViewAs(type);
+            }
             break;
           case "createHash":
             {

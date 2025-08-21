@@ -1,4 +1,11 @@
 {
+  "CodeSuccessfullyCopied": "ඇතුළු කිරීමට ඇති කේතය සාර්ථකව පසුරු පුවරුවට පිටපත් කරන ලදී.",
+  "ContentRestricted": "අන්තර්ගත පිටපත් කිරීම, ගොනු බාගත කිරීම සහ මුද්‍රණය කිරීම සීමා කර ඇත.",
+  "DisplaySettings": "ප්‍රදර්ශන සැකසුම්",
+  "EmbeddingBarAllowList": "<1>අනුමැත ලැදිස්තුවට</1> වෙබ් අඩවිය URL එක ඇතුළත් කරන්න.",
+  "EmbeddingBarDescription": "{{productName}} පරිපාලකයා විසින් JavaScript SDK සැකසුම්වල දක්වන ලද URL සඳහා පමණක් අන්තර්ගත කිරීම ක්‍රියාත්මක වනු ඇත.",
   "Height": "උස",
+  "Link": "ලිංකිය",
+  "LinkProtectedWithPassword": "මුළු සබැඳියාවම මුරපදයකින් ආරක්ෂා කර ඇත.",
   "Width": "පළල"
 }

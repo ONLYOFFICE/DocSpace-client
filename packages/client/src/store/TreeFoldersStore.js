@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,6 +29,8 @@ import { getFoldersTree, getSubfolders } from "@docspace/shared/api/files";
 import { FolderType } from "@docspace/shared/enums";
 import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 
+import i18n from "../i18n";
+
 class TreeFoldersStore {
   selectedFolderStore;
 
@@ -58,6 +60,26 @@ class TreeFoldersStore {
     if (this.publicRoomStore.isPublicRoom) return;
 
     const treeFolders = await getFoldersTree();
+
+    treeFolders.forEach((folder) => {
+      switch (folder.rootFolderType) {
+        case FolderType.USER:
+          folder.title = i18n.t("Common:MyFilesSection");
+          break;
+        case FolderType.Rooms:
+          folder.title = i18n.t("Common:Rooms");
+          break;
+        case FolderType.Archive:
+          folder.title = i18n.t("Common:Archive");
+          break;
+        case FolderType.TRASH:
+          folder.title = i18n.t("Common:TrashSection");
+          break;
+        default:
+          break;
+      }
+    });
+
     this.setRootFoldersTitles(treeFolders);
     this.setTreeFolders(treeFolders);
     this.listenTreeFolders(treeFolders);
@@ -119,8 +141,7 @@ class TreeFoldersStore {
   setRootFoldersTitles = (treeFolders) => {
     treeFolders.forEach((elem) => {
       this.rootFoldersTitles[elem.rootFolderType] = {
-        id: elem.id,
-        title: elem.title,
+        ...elem,
       };
     });
   };
@@ -182,6 +203,22 @@ class TreeFoldersStore {
     return this.rootFoldersTitles[FolderType.Archive]?.id;
   }
 
+  get trashFolderInfo() {
+    return this.rootFoldersTitles[FolderType.TRASH];
+  }
+
+  get personalFolderId() {
+    return this.rootFoldersTitles[FolderType.USER]?.id;
+  }
+
+  get isPersonalReadOnly() {
+    return (
+      this.isPersonalRoom &&
+      this.rootFoldersTitles[FolderType.USER]?.security?.Read &&
+      !this.rootFoldersTitles[FolderType.USER]?.security?.Create
+    );
+  }
+
   /**
    * @type {import("@docspace/shared/api/files/types").TFolder=}
    */
@@ -213,6 +250,12 @@ class TreeFoldersStore {
   get archiveFolder() {
     return this.treeFolders.find(
       (x) => x.rootFolderType === FolderType.Archive,
+    );
+  }
+
+  get templatesFolder() {
+    return this.treeFolders.find(
+      (x) => x.rootFolderType === FolderType.Templates,
     );
   }
 
@@ -323,6 +366,21 @@ class TreeFoldersStore {
       this.archiveFolder &&
       this.selectedFolderStore.id === this.archiveFolder.id
     );
+  }
+
+  get isTemplatesFolderRoot() {
+    return FolderType.RoomTemplates === this.selectedFolderStore.rootFolderType;
+  }
+
+  get isTemplatesFolder() {
+    return (
+      FolderType.RoomTemplates === this.selectedFolderStore.rootFolderType &&
+      this.selectedFolderStore.isRootFolder
+    );
+  }
+
+  get isRoomsFolderRoot() {
+    return FolderType.Rooms === this.selectedFolderStore.rootFolderType;
   }
 
   get isArchiveFolderRoot() {

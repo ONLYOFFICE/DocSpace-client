@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { NavigateFunction, Location } from "react-router-dom";
+import { NavigateFunction, Location } from "react-router";
 
 import { TableHeader, TTableColumn } from "@docspace/shared/components/table";
 import { Events } from "@docspace/shared/enums";
@@ -64,9 +64,7 @@ type GroupsTableHeaderProps = {
   navigate: NavigateFunction;
   location: Location;
 
-  containerRef: React.MutableRefObject<
-    Nullable<React.ForwardedRef<HTMLDivElement>>
-  >;
+  containerRef: React.RefObject<Nullable<React.ForwardedRef<HTMLDivElement>>>;
 };
 
 type GroupTableHeaderState = { columns: TableHeaderColumn[] };
@@ -78,12 +76,43 @@ class GroupsTableHeader extends React.Component<
   constructor(props: GroupsTableHeaderProps) {
     super(props);
 
-    const {
-      t,
-      peopleGroupsColumnIsEnabled,
-      managerGroupsColumnIsEnabled,
-      getColumns,
-    } = props;
+    const { getColumns } = props;
+
+    const defaultColumns = this.getDefaultColumns();
+    const columns: TableHeaderColumn[] = getColumns!(defaultColumns);
+
+    const tableColumns = columns.map((c) => c.enable && c.key);
+
+    this.setTableColumns(tableColumns as string[]);
+
+    this.state = { columns };
+  }
+
+  componentDidUpdate(prevProps: GroupsTableHeaderProps) {
+    const { columnStorageName, columnInfoPanelStorageName } = this.props;
+    if (
+      columnStorageName !== prevProps.columnStorageName ||
+      columnInfoPanelStorageName !== prevProps.columnInfoPanelStorageName
+    ) {
+      return this.updateTableColumns();
+    }
+  }
+
+  updateTableColumns = () => {
+    const { getColumns } = this.props;
+    const defaultColumns = this.getDefaultColumns();
+    const columns: TableHeaderColumn[] = getColumns!(defaultColumns);
+
+    const tableColumns = columns.map((c) => c.enable && c.key);
+
+    this.setTableColumns(tableColumns as string[]);
+
+    this.setState({ columns });
+  };
+
+  getDefaultColumns = () => {
+    const { t, peopleGroupsColumnIsEnabled, managerGroupsColumnIsEnabled } =
+      this.props;
 
     const defaultColumns = [
       {
@@ -116,14 +145,8 @@ class GroupsTableHeader extends React.Component<
       },
     ];
 
-    const columns: TableHeaderColumn[] = getColumns!(defaultColumns);
-
-    const tableColumns = columns.map((c) => c.enable && c.key);
-
-    this.setTableColumns(tableColumns as string[]);
-
-    this.state = { columns };
-  }
+    return defaultColumns;
+  };
 
   onColumnChange = (key: string) => {
     const { columns } = this.state;
@@ -180,7 +203,6 @@ class GroupsTableHeader extends React.Component<
       infoPanelVisible,
       columnStorageName,
       columnInfoPanelStorageName,
-      tableStorageName,
     } = this.props;
 
     const sortBy = filter!.sortBy === "displayname" ? "AZ" : filter!.sortBy;
@@ -194,7 +216,6 @@ class GroupsTableHeader extends React.Component<
         columns={columns as TTableColumn[]}
         columnStorageName={columnStorageName!}
         columnInfoPanelStorageName={columnInfoPanelStorageName!}
-        tableStorageName={tableStorageName!}
         sectionWidth={sectionWidth}
         infoPanelVisible={infoPanelVisible}
         useReactWindow

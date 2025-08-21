@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,29 +24,36 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useTranslation } from "react-i18next";
+
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
+
 import { StyledAvailableList } from "../../../ChangePortalOwnerDialog/StyledDialog";
 
-const Description = ({ t, dataReassignmentUrl }) => {
+const Description = ({ dataReassignmentUrl, noRoomFilesToMove }) => {
+  const { t } = useTranslation("DataReassignmentDialog");
+
   return (
     <StyledAvailableList className="list-container">
-      <Text className="list-item" noSelect>
-        {t("DataReassignmentDialog:DescriptionDataReassignment")}
+      <Text className="list-item">
+        {noRoomFilesToMove
+          ? t("RoomsOnlyReassignment")
+          : t("DescriptionDataReassignment")}
       </Text>
-      <Text className="list-item" noSelect>
-        {t("DataReassignmentDialog:NoteDataReassignment")}
-      </Text>
+      <Text className="list-item">{t("NoteDataReassignment")}</Text>
 
-      <Link
-        target="_blank"
-        isHovered
-        fontWeight={600}
-        style={{ textDecoration: "underline" }}
-        href={dataReassignmentUrl}
-      >
-        {t("DataReassignmentDialog:MoreAboutDataTransfer")}
-      </Link>
+      {dataReassignmentUrl ? (
+        <Link
+          target="_blank"
+          isHovered
+          fontWeight={600}
+          style={{ textDecoration: "underline" }}
+          href={dataReassignmentUrl}
+        >
+          {t("MoreAboutDataTransfer")}
+        </Link>
+      ) : null}
     </StyledAvailableList>
   );
 };

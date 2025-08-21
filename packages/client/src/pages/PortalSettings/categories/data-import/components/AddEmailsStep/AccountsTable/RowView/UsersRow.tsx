@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState, useRef } from "react";
-import { Row } from "@docspace/shared/components/row";
+import { Row } from "@docspace/shared/components/rows";
 import UsersRowContent from "./UsersRowContent";
 import { AddEmailUsersRowProps } from "../../../../types";
 
@@ -46,11 +46,11 @@ const UsersRow = (props: AddEmailUsersRowProps) => {
     data.email?.length > 0,
   );
 
-  const handleAccountToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleAccountToggle = (e: React.MouseEvent) => {
     if (
       isPrevEmailValid &&
-      !emailInputRef.current?.contains(e.target) &&
-      !emailTextRef.current?.contains(e.target)
+      !emailInputRef.current?.contains(e.target as Node) &&
+      !emailTextRef.current?.contains(e.target as Node)
     ) {
       toggleAccount();
     }

@@ -1,0 +1,298 @@
+{
+  "key_path": "ProviderSuccessfullyDisconnected",
+  "content": "Provider successfully disconnected",
+  "content_en_sha1_hash": "7e19e2606519e4f26445f6a151a930a854841fd1",
+  "created_at": "2025-05-19T21:30:53.375Z",
+  "updated_at": "2025-08-11T18:11:59.300Z",
+  "comment": {
+    "text": "The \"ProviderSuccessfullyDisconnected\" translation key is used to display a success message when a user disconnects from an OAuth provider. This message is shown as a toast notification in the UI, confirming that the disconnection was successful and providing feedback to the user.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:50.204Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/login/social-networks/index.tsx",
+      "line_number": 99,
+      "context": "const unlinkAccount = (providerName: string) => {\n unlinkOAuth(providerName)?.then(() => {\n getAuthProviders().then((providersAuth) => {\n setProviders?.(providersAuth);\n toastr.success(t(\"ProviderSuccessfullyDisconnected\"));\n });\n });\n };\n \n const loginCallback = (profile: unknown) => {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Provayderin əlaqəsi müvəffəqiyyətlə kəsildi' while conveying the general meaning, is a bit too literal and could be improved for a more natural flow in Azerbaijani. 'Provider' is transliterated, but the sentence structure is not as common.",
+          "suggestion": "Tedarikçinin bağlantısı uğurla kəsildi"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While grammatically correct, 'Връзката с доставчика беше прекъсната успешно' is a more literal and less natural translation of 'Provider successfully disconnected'. A more idiomatic translation would be closer to 'Доставчикът беше успешно премахнат' or 'Доставчикът успешно се отсвърна'.",
+          "suggestion": "Доставчикът беше успешно премахнат"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Poskytovatel úspěšně odpojen' while technically correct, sounds slightly awkward and less natural in Czech. 'Odpojen' implies a passive disconnection. A more natural phrasing would indicate the provider *initiated* the disconnection.",
+          "suggestion": "Poskytovatel se úspěšně odpojil"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Yhteys palveluntarjoajaan katkaistu\" is grammatically correct, it's a more literal translation of \"connection to the provider has been disconnected.\"  \"Provider successfully disconnected\" implies a completed action initiated by the provider, which \"Yhteys palveluntarjoajaan katkaistu\" doesn't fully convey. It lacks the sense of success.",
+          "suggestion": "Palveluntarjoaja irrottautui onnistuneesti"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Le fournisseur est déconnecté avec succès' is a literal translation but not the most natural phrasing in French. A more idiomatic translation would convey the same meaning.",
+          "suggestion": "Le fournisseur s'est déconnecté avec succès"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '공급자 연결 해제에 성공했습니다' is a bit literal. A more natural and concise translation for 'Provider successfully disconnected' would be '제공자 연결 해제 완료' or '공급자 연결 해제 성공'.",
+          "suggestion": "제공자 연결 해제 완료"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation is understandable, \"ຕັດການເຊື່ອມຕໍ່\" (tat gaan seuam tor) literally means 'cut off the connection'. A more accurate and natural translation would use phrasing more aligned with 'disconnected'.",
+          "suggestion": "Consider using a more nuanced translation like \"ຜູ້ໃຫ້ບໍລິການຖອນຕົວອອກສຳເລັດແລ້ວ\" (phu hai borikan thon tua ok sam ret laew) which translates to 'Provider successfully withdrew/disconnected'."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'desligada' can mean disconnected, in the context of a provider (likely internet or service), 'desconectada' would be a more accurate and commonly used translation of 'disconnected'. 'Desligada' implies being switched off entirely, which might not be the intended meaning.",
+          "suggestion": "Operadora desconectada com êxito"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Provedor desconectado com sucesso' is a literal translation and while understandable, it's not the most natural phrasing in Brazilian Portuguese. A more common and idiomatic way to express 'Provider successfully disconnected' would be something like 'Provedor desconectado com êxito' or 'O provedor foi desconectado com sucesso'.",
+          "suggestion": "Provedor desconectado com êxito"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Furnizorul a fost deconectat cu succes' is a literal translation but doesn't fully capture the nuance of 'Provider successfully disconnected' in this context. 'Deconectat' implies the provider *was* disconnected, whereas 'successfully disconnected' often implies a process completed successfully.",
+          "suggestion": "Consider a more active phrasing like 'Furnizorul s-a deconectat cu succes' or 'Deconectarea furnizorului a avut succes'."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'සාර්ථකව' (saarthakava) is correctly spelled but could be more naturally phrased. While technically correct, it feels slightly formal for a user-facing message.",
+          "suggestion": "ප්‍රතිපාදකdisconnect වි Erfolg"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Ponudnik je bil uspešno odklopljen\" literally translates to \"The provider was successfully disconnected.\" While understandable, it's not the most natural or idiomatic way to express the meaning of \"Provider successfully disconnected\" in Slovenian. It implies a passive action on the provider.",
+          "suggestion": "Consider \"Ponudnik je uspešno izklopljen\" or \"Ponudnik je bil uspešno prekine\" for a more accurate and natural translation. \"Ponudnik uspešno odključen\" could also be considered but might sound slightly technical."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Провајдер успешно прекинут' doesn't accurately reflect the English meaning of 'Provider successfully disconnected'. 'Прекинут' implies the provider was terminated or ceased operation, while 'disconnected' implies a temporary or voluntary disconnection. A more accurate translation would convey the sense of a voluntary disconnection.",
+          "suggestion": "Провајдер успешно одјављен"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Provajder uspešno prekinut' is not the most natural or accurate translation of 'Provider successfully disconnected'. 'Prekinut' implies a more abrupt or forceful disconnection. A more accurate and natural translation would convey a clean disconnection.",
+          "suggestion": "Provajder je uspešno odpojen"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Đã ngắt kết nối nhà cung cấp thành công' is a literal translation, but a more natural and common phrasing in Vietnamese would be 'Nhà cung cấp đã được ngắt kết nối thành công' or 'Đã ngắt kết nối thành công với nhà cung cấp'.",
+          "suggestion": "Nhà cung cấp đã được ngắt kết nối thành công"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

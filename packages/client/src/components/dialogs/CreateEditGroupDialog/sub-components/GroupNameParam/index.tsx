@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -75,6 +75,7 @@ const GroupNameParam = ({
           // onKeyUp={onKeyUp}
           // onKeyDown={onKeyDown}
           maxLength={170}
+          testId="create_edit_group_name"
         />
       </FieldContainer>
     </Styled.GroupNameParam>

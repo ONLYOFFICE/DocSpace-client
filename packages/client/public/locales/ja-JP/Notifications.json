@@ -5,8 +5,6 @@
   "DailyFeedDescription": "{{productName}}のニュースやイベントのダイジェストを毎日お届けします。",
   "ManageNotifications": "管理",
   "Notifications": "通知",
-  "RoomsActions": "ルームで行われたファイルのアクション",
-  "RoomsActivity": "ルームのアクティビティ",
   "RoomsActivityDescription": "1時間ごとに通知：ルームの全アクティビティを知らせます。",
   "UsefulTips": "{{productName}}の使い方やヒント",
   "UsefulTipsDescription": "{{productName}}に関するお役立ちガイドをゲット"

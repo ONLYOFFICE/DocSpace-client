@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,11 +28,11 @@
 
 import { useTranslation, Trans } from "react-i18next";
 
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Text } from "@docspace/shared/components/text";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.left.react.svg?url";
+import { Link } from "@docspace/shared/components/link";
 
 const DEFAULT_CREATION_TEXT =
   "A {{productName}} account will be created for {{email}}. Please, complete your registration:";
@@ -55,16 +55,25 @@ export const GreetingUserContainer = ({
   return (
     <div className="invitation-info-container">
       <div className="sign-in-container">
-        {type === "LinkInvite" && !emailFromLink && (
+        {type === "LinkInvite" && !emailFromLink ? (
           <div className="back-title">
-            <IconButton size={16} iconName={ArrowIcon} onClick={onClickBack} />
-            <Text fontWeight={600} onClick={onClickBack}>
+            <IconButton
+              size={16}
+              iconName={ArrowIcon}
+              onClick={onClickBack}
+              dataTestId="greeting_back_icon_button"
+            />
+            <Text
+              fontWeight={600}
+              onClick={onClickBack}
+              dataTestId="greeting_back_text"
+            >
               {t("Common:Back")}
             </Text>
           </div>
-        )}
+        ) : null}
 
-        <Text fontWeight={600} fontSize={"16px"}>
+        <Text fontWeight={600} fontSize="16px">
           {t("SignUp")}
         </Text>
       </div>
@@ -79,7 +88,15 @@ export const GreetingUserContainer = ({
             productName: t("Common:ProductName"),
           }}
           components={{
-            1: <ColorTheme tag="a" themeId={ThemeId.Link} isHovered={false} />,
+            1: (
+              <Link
+                key="component_key"
+                tag="a"
+                isHovered={false}
+                color="accent"
+                dataTestId="confirm_registration_link"
+              />
+            ),
           }}
         />
       </Text>

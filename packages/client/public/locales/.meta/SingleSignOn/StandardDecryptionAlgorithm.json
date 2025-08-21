@@ -1,0 +1,296 @@
+{
+  "key_path": "StandardDecryptionAlgorithm",
+  "content": "Default Decrypt Algorithm",
+  "content_en_sha1_hash": "619446c4bdadbe754814d7355bf5c6666d7bac32",
+  "created_at": "2025-05-19T21:30:50.187Z",
+  "updated_at": "2025-08-11T18:11:59.255Z",
+  "comment": {
+    "text": "The translation key \"StandardDecryptionAlgorithm\" is used to display the default decryption algorithm name as a label in the Single Sign-On certificate settings page. It appears in a dropdown list and is typically used by users to select or review the encryption method. This term should be translated accordingly to provide consistency across different languages.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:02.150Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/Certificates.js",
+      "line_number": 217,
+      "context": "dataTestId=\"sp_signing_combobox\"\n />\n \n <SsoComboBox\n isDisabled={isDisabledSpEncrypt}\n labelText={t(\"StandardDecryptionAlgorithm\")}\n name=\"spEncryptAlgorithm\"\n options={decryptAlgorithmsOptions}\n tabIndex={15}\n value={spEncryptAlgorithm}\n dataTestId=\"sp_decryption_combobox\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'خوارزمية فك التشفير الافتراضية' is a literal translation of 'Default Decrypt Algorithm', it sounds somewhat formal and less natural in common usage. 'Default' often implies a simpler meaning.",
+          "suggestion": "Consider a more colloquial translation such as 'الخوارزمية الافتراضية لفك التشفير' or 'خوارزمية فك التشفير الأساسية' for a more natural feel."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Default' is misspelled as 'Defolt'.",
+          "suggestion": "Default"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Şifrə Açma Alqoritmi' translates to 'Decryption Algorithm,' 'Default' is better translated to 'Standart' or 'Əsas'. 'Defolt Şifrə Açma Alqoritmi' sounds unnatural.",
+          "suggestion": "Standart Şifrə Açma Alqoritmi"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Стандартно зададен алгоритъм за декриптиране\" is too literal and doesn't accurately convey the meaning of \"Default Decrypt Algorithm\". \"StandardDecryptionAlgorithm\" implies a pre-configured or default setting, which \"Стандартно зададен алгоритъм за декриптиране\" doesn't fully capture.",
+          "suggestion": "Consider alternatives like \"Подсигурен алгоритъм за декриптиране по подразбиране\" or \"Алгоритъм за декриптиране по подразбиране\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Վերծանել լռելյայն ալգորիթմը' is a literal translation of 'Decrypt Default Algorithm' and doesn't convey the intended meaning of 'Default Decrypt Algorithm'. It sounds awkward and might confuse users. A more natural translation would consider the context of a default setting.",
+          "suggestion": "A better translation would be something like 'Սանդարտ թողարկման ապաքողարկման ալգորիթմ' (Standard Release Decryption Algorithm) or 'Արձակման ընտրյալ ապաքողարկման ալգորիթմ' (Default Decryption Algorithm)."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ສູດການຖອດລະຫັດເລີ່ມຕົ້ນ\" while technically meaning 'starting decryption algorithm', doesn't fully capture the nuance of 'Default Decrypt Algorithm'. 'Default' implies a pre-configured or standard setting, which isn't directly conveyed. A better translation would emphasize the 'default' aspect.",
+          "suggestion": "ສູດຖອດລະຫັດຕາມພື້ນຖານ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Standaard Ontcijferen Algoritme' is a literal translation, it doesn't fully capture the nuance of 'Default Decrypt Algorithm'. 'Ontcijferen' implies a more complex decryption process. 'Default' in this context often refers to a pre-configured or standard option.",
+          "suggestion": "Standaard Decryptie Algoritme"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Algoritm de decriptare implicit' is a literal translation of 'Default Decrypt Algorithm'. While understandable, 'implicit' implies a hidden or assumed default, which may not be the intended meaning. 'Standard' might be better translated to something like 'standard' or 'principal'.",
+          "suggestion": "Algoritm de decriptare standard"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Стандартный алгоритм расшифровки:\" is too literal. While technically correct, it lacks the conciseness and natural flow of the English \"Default Decrypt Algorithm.\" The colon is also unnecessary and breaks the flow.",
+          "suggestion": "Стандартный алгоритм дешифрования"
+        },
+        {
+          "type": "formatting",
+          "description": "The colon at the end of the translated text is not present in the English original, which creates an unnecessary formality and doesn't align with standard practice in similar configuration keys.",
+          "suggestion": "Remove the colon."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'පෙරනිමි විසංකේතන ඇල්ගොරිතමය' is a literal translation but doesn't convey the meaning of 'Default Decrypt Algorithm' naturally in Sinhala. 'පෙරනිමි' (peranimī) implies something outdated or obsolete, which is not the intended meaning of 'default'.",
+          "suggestion": "Consider 'මුල් ක්‍රීප්තකරණ අල්ගොරිතමය' (mul krīpakaraṇa algōritamaya) which translates to 'Initial/Primary Decryption Algorithm' or 'සාමාන්‍ය ක්‍රීප්තකරණ අල්ගොරිතමය' (sāmānya krīpakaraṇa algōritamaya) which means 'Standard/Common Decryption Algorithm'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Privzeti algoritem za dešifriranje\" is technically correct, it's a bit literal. \"Default Decrypt Algorithm\" often implies a standard or pre-selected option. A more natural and idiomatic Slovenian translation might be \"Standardni algoritem za dešifriranje\" or \"Privzeti standardni algoritem za dešifriranje\".",
+          "suggestion": "Standardni algoritem za dešifriranje"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Подразумевани Алгоритам за декрипцију\" is a bit literal. A more natural translation of \"Default Decrypt Algorithm\" would be something like \"Основни Алгоритам за декрипцију\" or \"Стандардни Алгоритам за декрипцију\". \"Подразумевани\" implies something implied or assumed, which might not be the intended meaning of 'default'.",
+          "suggestion": "Основни Алгоритам за декрипцију"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Podrazumevani Algoritam za dekripciju' while generally correct, could be more aligned with the English 'Default Decrypt Algorithm'. 'Podrazumevani' leans more towards 'implied' or 'assumed', while 'Default' implies a setting or configuration.",
+          "suggestion": "Algoritam po podrazumevanu postavku"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Varsayılan Şifre Çözme Algoritması\" is a literal translation, \"Şifre Çözme\" is a broader term than 'Decrypt'. A more accurate translation focusing on the specific 'algorithm' aspect might be more appropriate.",
+          "suggestion": "Varsayılan Şifreleme Algoritması"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

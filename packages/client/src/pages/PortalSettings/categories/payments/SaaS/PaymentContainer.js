@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -39,7 +39,7 @@ import CurrentTariffContainer from "./CurrentTariffContainer";
 import PriceCalculation from "./PriceCalculation";
 import BenefitsContainer from "./BenefitsContainer";
 import ContactContainer from "./ContactContainer";
-import PayerInformationContainer from "./PayerInformationContainer";
+import PayerInformation from "../PayerInformation";
 
 const StyledBody = styled.div`
   max-width: 660px;
@@ -112,9 +112,7 @@ const PaymentContainer = (props) => {
     isGracePeriod,
     theme,
     isNotPaidPeriod,
-    payerEmail,
     isPaidPeriod,
-    currencySymbol,
     startValue,
     currentTariffPlanTitle,
     tariffPlanTitle,
@@ -127,6 +125,9 @@ const PaymentContainer = (props) => {
     t,
     isNonProfit,
     isPaymentDateValid,
+    isYearTariff,
+    cardLinkedOnFreeTariff,
+    formatPaymentCurrency,
   } = props;
   const renderTooltip = () => {
     return (
@@ -153,6 +154,7 @@ const PaymentContainer = (props) => {
             <Text>{t("RoomManagerDescription")}</Text>
           </>
         }
+        dataTestId="admin_accounts_help_button"
       />
     );
   };
@@ -160,7 +162,7 @@ const PaymentContainer = (props) => {
   const currentPlanTitle = () => {
     if (isFreeTariff) {
       return (
-        <Text noSelect fontSize="16px" isBold>
+        <Text fontSize="16px" isBold>
           <Trans t={t} i18nKey="StartupTitle" ns="Payments">
             {{ planName: currentTariffPlanTitle }}
           </Trans>
@@ -170,7 +172,7 @@ const PaymentContainer = (props) => {
 
     if (isPaidPeriod || isGracePeriod) {
       return (
-        <Text noSelect fontSize="16px" isBold>
+        <Text fontSize="16px" isBold>
           <Trans t={t} i18nKey="BusinessTitle" ns="Payments">
             {{ planName: currentTariffPlanTitle }}
           </Trans>
@@ -182,10 +184,10 @@ const PaymentContainer = (props) => {
   const expiredTitleSubscriptionWarning = () => {
     return (
       <Text
-        noSelect
         fontSize="16px"
         isBold
         color={theme.client.settings.payment.warningColor}
+        dataTestId="expired_subscription_text"
       >
         <Trans t={t} i18nKey="BusinessExpired" ns="Payments">
           {{ date: gracePeriodEndDate }} {{ planName: tariffPlanTitle }}
@@ -197,12 +199,7 @@ const PaymentContainer = (props) => {
   const planSuggestion = () => {
     if (isFreeTariff && !isNonProfit) {
       return (
-        <Text
-          noSelect
-          fontSize="16px"
-          isBold
-          className="payment-info_suggestion"
-        >
+        <Text fontSize="16px" isBold className="payment-info_suggestion">
           <Trans t={t} i18nKey="StartupSuggestion" ns="Payments">
             {{ planName: tariffPlanTitle }}
           </Trans>
@@ -212,12 +209,7 @@ const PaymentContainer = (props) => {
 
     if (isPaidPeriod && !isNonProfit) {
       return (
-        <Text
-          noSelect
-          fontSize="16px"
-          isBold
-          className="payment-info_suggestion"
-        >
+        <Text fontSize="16px" isBold className="payment-info_suggestion">
           <Trans t={t} i18nKey="BusinessSuggestion" ns="Payments">
             {{ planName: tariffPlanTitle }}
           </Trans>
@@ -227,12 +219,7 @@ const PaymentContainer = (props) => {
 
     if (isNotPaidPeriod) {
       return (
-        <Text
-          noSelect
-          fontSize="16px"
-          isBold
-          className="payment-info_suggestion"
-        >
+        <Text fontSize="16px" isBold className="payment-info_suggestion">
           <Trans t={t} i18nKey="RenewSubscription" ns="Payments">
             {{ planName: tariffPlanTitle }}
           </Trans>
@@ -243,7 +230,6 @@ const PaymentContainer = (props) => {
     if (isGracePeriod) {
       return (
         <Text
-          noSelect
           fontSize="16px"
           isBold
           className="payment-info_grace-period"
@@ -262,7 +248,7 @@ const PaymentContainer = (props) => {
 
     if (isGracePeriod)
       return (
-        <Text noSelect fontSize="14px" lineHeight="16px">
+        <Text fontSize="14px" lineHeight="16px">
           <Trans t={t} i18nKey="GracePeriodActivatedInfo" ns="Payments">
             Grace period activated
             <strong>
@@ -282,7 +268,6 @@ const PaymentContainer = (props) => {
     if (isPaidPeriod && isPaymentDateValid && !isNonProfit)
       return (
         <Text
-          noSelect
           fontSize="14px"
           lineHeight="16px"
           className="payment-info_managers-price"
@@ -294,57 +279,59 @@ const PaymentContainer = (props) => {
       );
   };
 
-  const isFreeAfterPaidPeriod = isFreeTariff && payerEmail?.length !== 0;
-
   return (
     <Consumer>
       {(context) => (
         <StyledBody
-          isChangeView={context.sectionWidth <= size.mobile && expandArticle}
+          isChangeView={
+            context.sectionWidth <= size.mobile ? expandArticle : null
+          }
         >
           {isNotPaidPeriod
             ? expiredTitleSubscriptionWarning()
             : currentPlanTitle()}
 
-          {!isNonProfit && isAlreadyPaid && (
-            <PayerInformationContainer
-              isFreeAfterPaidPeriod={isFreeAfterPaidPeriod}
-            />
-          )}
+          {!isNonProfit && (isAlreadyPaid || cardLinkedOnFreeTariff) ? (
+            <PayerInformation />
+          ) : null}
 
           <CurrentTariffContainer />
 
           {planSuggestion()}
           {planDescription()}
 
-          {!isNonProfit &&
-            !isGracePeriod &&
-            !isNotPaidPeriod &&
-            !isFreeAfterPaidPeriod && (
-              <div className="payment-info_wrapper">
-                <Text
-                  noSelect
-                  fontWeight={600}
-                  fontSize="14px"
-                  className="payment-info_managers-price"
-                >
-                  <Trans t={t} i18nKey="PerUserMonth" ns="Common">
-                    From {{ currencySymbol }}
-                    {{ price: startValue }} per admin/month
-                  </Trans>
-                </Text>
+          {!isNonProfit && !isGracePeriod && !isNotPaidPeriod ? (
+            <div className="payment-info_wrapper">
+              <Text
+                fontWeight={600}
+                fontSize="14px"
+                className="payment-info_managers-price"
+              >
+                {isYearTariff ? (
+                  <Trans
+                    t={t}
+                    i18nKey="PerUserYear"
+                    ns="Common"
+                    values={{ price: formatPaymentCurrency(startValue) }}
+                    components={{ 1: <span /> }}
+                  />
+                ) : (
+                  <Trans
+                    t={t}
+                    i18nKey="PerUserMonth"
+                    ns="Common"
+                    values={{ price: formatPaymentCurrency(startValue) }}
+                    components={{ 1: <span /> }}
+                  />
+                )}
+              </Text>
 
-                {renderTooltip()}
-              </div>
-            )}
+              {renderTooltip()}
+            </div>
+          ) : null}
 
           <div className="payment-info">
-            {!isNonProfit && (
-              <PriceCalculation
-                t={t}
-                isFreeAfterPaidPeriod={isFreeAfterPaidPeriod}
-              />
-            )}
+            {!isNonProfit ? <PriceCalculation t={t} /> : null}
 
             <BenefitsContainer t={t} />
           </div>
@@ -365,7 +352,7 @@ export default inject(
   }) => {
     const { showText: expandArticle, theme } = settingsStore;
 
-    const { isFreeTariff, currentTariffPlanTitle, isNonProfit } =
+    const { isFreeTariff, currentTariffPlanTitle, isNonProfit, isYearTariff } =
       currentQuotaStore;
 
     const {
@@ -383,7 +370,8 @@ export default inject(
     const { planCost, tariffPlanTitle, portalPaymentQuotas } =
       paymentQuotasStore;
 
-    const { isAlreadyPaid } = paymentStore;
+    const { isAlreadyPaid, cardLinkedOnFreeTariff, formatPaymentCurrency } =
+      paymentStore;
 
     return {
       paymentDate,
@@ -398,7 +386,7 @@ export default inject(
 
       isGracePeriod,
       theme,
-      currencySymbol: planCost.currencySymbol,
+      formatPaymentCurrency,
       startValue: planCost.value,
       isNotPaidPeriod,
       payerEmail: customerId,
@@ -409,6 +397,8 @@ export default inject(
       portalPaymentQuotas,
       isNonProfit,
       isPaymentDateValid,
+      isYearTariff,
+      cardLinkedOnFreeTariff,
     };
   },
 )(observer(PaymentContainer));

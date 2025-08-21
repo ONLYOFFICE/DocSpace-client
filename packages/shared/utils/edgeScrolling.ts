@@ -7,7 +7,7 @@ export const clearEdgeScrollingTimer = () => {
   if (timer) clearTimeout(timer);
 };
 
-export const onEdgeScrolling = (e: React.MouseEvent) => {
+export const onEdgeScrolling = (e: MouseEvent) => {
   const bodyScroll = document.querySelector(".section-scroll");
 
   if (bodyScroll) {

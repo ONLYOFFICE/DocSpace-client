@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -79,19 +79,22 @@ const TileContainer = styled.div.attrs(injectDefaultTheme)`
 `;
 
 const PresetTile = (props) => {
-  const { t, title, description, image, handleOnClick } = props;
+  const { t, title, description, image, handleOnClick, dataTestId } = props;
 
   return (
-    <TileContainer onClick={handleOnClick}>
+    <TileContainer onClick={handleOnClick} data-testid={dataTestId}>
       <div className="tileContent">
-        <Text fontSize="16px" lineHeight="22px" fontWeight={700}>
+        <Text fontSize="16px" lineHeight="22px" fontWeight={700} noSelect>
           {title}
         </Text>
         <ReactSVG src={image} />
-        <Text lineHeight="20px">{description}</Text>
+        <Text noSelect lineHeight="20px">
+          {description}
+        </Text>
       </div>
 
       <Button
+        testId={`sdk_preset_${title}_button`}
         className="navigationButton"
         label={t("SetUp")}
         icon={<ArrowIcon />}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,74 +24,76 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import ArSAReactSvgUrl from "PUBLIC_DIR/images/flags/ar-SA.react.svg?url";
-import AzReactSvgUrl from "PUBLIC_DIR/images/flags/az.react.svg?url";
-import BgReactSvgUrl from "PUBLIC_DIR/images/flags/bg.react.svg?url";
-import CsReactSvgUrl from "PUBLIC_DIR/images/flags/cs.react.svg?url";
-import DeATReactSvgUrl from "PUBLIC_DIR/images/flags/de-AT.react.svg?url";
-import DeCHReactSvgUrl from "PUBLIC_DIR/images/flags/de-CH.react.svg?url";
-import DeReactSvgUrl from "PUBLIC_DIR/images/flags/de.react.svg?url";
-import ElGRReactSvgUrl from "PUBLIC_DIR/images/flags/el-GR.react.svg?url";
-import EnGBReactSvgUrl from "PUBLIC_DIR/images/flags/en-GB.react.svg?url";
-import EnUSReactSvgUrl from "PUBLIC_DIR/images/flags/en-US.react.svg?url";
-import EsMXReactSvgUrl from "PUBLIC_DIR/images/flags/es-MX.react.svg?url";
-import EsReactSvgUrl from "PUBLIC_DIR/images/flags/es.react.svg?url";
-import FiReactSvgUrl from "PUBLIC_DIR/images/flags/fi.react.svg?url";
-import FrReactSvgUrl from "PUBLIC_DIR/images/flags/fr.react.svg?url";
-import HyAMReactSvgUrl from "PUBLIC_DIR/images/flags/hy-AM.react.svg?url";
-import ItReactSvgUrl from "PUBLIC_DIR/images/flags/it.react.svg?url";
-import JaJPReactSvgUrl from "PUBLIC_DIR/images/flags/ja-JP.react.svg?url";
-import KoKRReactSvgUrl from "PUBLIC_DIR/images/flags/ko-KR.react.svg?url";
-import LoLAReactSvgUrl from "PUBLIC_DIR/images/flags/lo-LA.react.svg?url";
-import LvReactSvgUrl from "PUBLIC_DIR/images/flags/lv.react.svg?url";
-import NlReactSvgUrl from "PUBLIC_DIR/images/flags/nl.react.svg?url";
-import PlReactSvgUrl from "PUBLIC_DIR/images/flags/pl.react.svg?url";
-import PtBRReactSvgUrl from "PUBLIC_DIR/images/flags/pt-BR.react.svg?url";
-import PtReactSvgUrl from "PUBLIC_DIR/images/flags/pt.react.svg?url";
-import RoReactSvgUrl from "PUBLIC_DIR/images/flags/ro.react.svg?url";
-import RuReactSvgUrl from "PUBLIC_DIR/images/flags/ru.react.svg?url";
-import SkReactSvgUrl from "PUBLIC_DIR/images/flags/sk.react.svg?url";
-import SlReactSvgUrl from "PUBLIC_DIR/images/flags/sl.react.svg?url";
-import SiReactSvgUrl from "PUBLIC_DIR/images/flags/si.react.svg?url";
-import SrReactSvgUrl from "PUBLIC_DIR/images/flags/sr.react.svg?url";
-import TrReactSvgUrl from "PUBLIC_DIR/images/flags/tr.react.svg?url";
-import UkUAReactSvgUrl from "PUBLIC_DIR/images/flags/uk-UA.react.svg?url";
-import ViReactSvgUrl from "PUBLIC_DIR/images/flags/vi.react.svg?url";
-import ZhCNReactSvgUrl from "PUBLIC_DIR/images/flags/zh-CN.react.svg?url";
+import ArSAReactSvg from "PUBLIC_DIR/images/flags/ar-SA.react.svg";
+import AzReactSvg from "PUBLIC_DIR/images/flags/az.react.svg";
+import BgReactSvg from "PUBLIC_DIR/images/flags/bg.react.svg";
+import CsReactSvg from "PUBLIC_DIR/images/flags/cs.react.svg";
+import DeATReactSvg from "PUBLIC_DIR/images/flags/de-AT.react.svg";
+import DeCHReactSvg from "PUBLIC_DIR/images/flags/de-CH.react.svg";
+import DeReactSvg from "PUBLIC_DIR/images/flags/de.react.svg";
+import ElGRReactSvg from "PUBLIC_DIR/images/flags/el-GR.react.svg";
+import EnGBReactSvg from "PUBLIC_DIR/images/flags/en-GB.react.svg";
+import EnUSReactSvg from "PUBLIC_DIR/images/flags/en-US.react.svg";
+import EsMXReactSvg from "PUBLIC_DIR/images/flags/es-MX.react.svg";
+import EsReactSvg from "PUBLIC_DIR/images/flags/es.react.svg";
+import FiReactSvg from "PUBLIC_DIR/images/flags/fi.react.svg";
+import FrReactSvg from "PUBLIC_DIR/images/flags/fr.react.svg";
+import HyAMReactSvg from "PUBLIC_DIR/images/flags/hy-AM.react.svg";
+import ItReactSvg from "PUBLIC_DIR/images/flags/it.react.svg";
+import JaJPReactSvg from "PUBLIC_DIR/images/flags/ja-JP.react.svg";
+import KoKRReactSvg from "PUBLIC_DIR/images/flags/ko-KR.react.svg";
+import LoLAReactSvg from "PUBLIC_DIR/images/flags/lo-LA.react.svg";
+import LvReactSvg from "PUBLIC_DIR/images/flags/lv.react.svg";
+import NlReactSvg from "PUBLIC_DIR/images/flags/nl.react.svg";
+import PlReactSvg from "PUBLIC_DIR/images/flags/pl.react.svg";
+import PtBRReactSvg from "PUBLIC_DIR/images/flags/pt-BR.react.svg";
+import PtReactSvg from "PUBLIC_DIR/images/flags/pt.react.svg";
+import RoReactSvg from "PUBLIC_DIR/images/flags/ro.react.svg";
+import RuReactSvg from "PUBLIC_DIR/images/flags/ru.react.svg";
+import SkReactSvg from "PUBLIC_DIR/images/flags/sk.react.svg";
+import SlReactSvg from "PUBLIC_DIR/images/flags/sl.react.svg";
+import SiReactSvg from "PUBLIC_DIR/images/flags/si.react.svg";
+import SrReactSvg from "PUBLIC_DIR/images/flags/sr.react.svg";
+import SqALReactSvg from "PUBLIC_DIR/images/flags/sq-AL.react.svg";
+import TrReactSvg from "PUBLIC_DIR/images/flags/tr.react.svg";
+import UkUAReactSvg from "PUBLIC_DIR/images/flags/uk-UA.react.svg";
+import ViReactSvg from "PUBLIC_DIR/images/flags/vi.react.svg";
+import ZhCNReactSvg from "PUBLIC_DIR/images/flags/zh-CN.react.svg";
 
 export const flagsIcons = new Map([
-  ["ar-SA.react.svg", ArSAReactSvgUrl],
-  ["az.react.svg", AzReactSvgUrl],
-  ["bg.react.svg", BgReactSvgUrl],
-  ["cs.react.svg", CsReactSvgUrl],
-  ["de-AT.react.svg", DeATReactSvgUrl],
-  ["de-CH.react.svg", DeCHReactSvgUrl],
-  ["de.react.svg", DeReactSvgUrl],
-  ["el-GR.react.svg", ElGRReactSvgUrl],
-  ["en-GB.react.svg", EnGBReactSvgUrl],
-  ["en-US.react.svg", EnUSReactSvgUrl],
-  ["es-MX.react.svg", EsMXReactSvgUrl],
-  ["es.react.svg", EsReactSvgUrl],
-  ["fi.react.svg", FiReactSvgUrl],
-  ["fr.react.svg", FrReactSvgUrl],
-  ["hy-AM.react.svg", HyAMReactSvgUrl],
-  ["it.react.svg", ItReactSvgUrl],
-  ["ja-JP.react.svg", JaJPReactSvgUrl],
-  ["ko-KR.react.svg", KoKRReactSvgUrl],
-  ["lo-LA.react.svg", LoLAReactSvgUrl],
-  ["lv.react.svg", LvReactSvgUrl],
-  ["nl.react.svg", NlReactSvgUrl],
-  ["pl.react.svg", PlReactSvgUrl],
-  ["pt-BR.react.svg", PtBRReactSvgUrl],
-  ["pt.react.svg", PtReactSvgUrl],
-  ["ro.react.svg", RoReactSvgUrl],
-  ["ru.react.svg", RuReactSvgUrl],
-  ["sk.react.svg", SkReactSvgUrl],
-  ["sl.react.svg", SlReactSvgUrl],
-  ["si.react.svg", SiReactSvgUrl],
-  ["sr.react.svg", SrReactSvgUrl],
-  ["tr.react.svg", TrReactSvgUrl],
-  ["uk-UA.react.svg", UkUAReactSvgUrl],
-  ["vi.react.svg", ViReactSvgUrl],
-  ["zh-CN.react.svg", ZhCNReactSvgUrl],
+  ["ar-SA.react.svg", ArSAReactSvg],
+  ["az.react.svg", AzReactSvg],
+  ["bg.react.svg", BgReactSvg],
+  ["cs.react.svg", CsReactSvg],
+  ["de-AT.react.svg", DeATReactSvg],
+  ["de-CH.react.svg", DeCHReactSvg],
+  ["de.react.svg", DeReactSvg],
+  ["el-GR.react.svg", ElGRReactSvg],
+  ["en-GB.react.svg", EnGBReactSvg],
+  ["en-US.react.svg", EnUSReactSvg],
+  ["es-MX.react.svg", EsMXReactSvg],
+  ["es.react.svg", EsReactSvg],
+  ["fi.react.svg", FiReactSvg],
+  ["fr.react.svg", FrReactSvg],
+  ["hy-AM.react.svg", HyAMReactSvg],
+  ["it.react.svg", ItReactSvg],
+  ["ja-JP.react.svg", JaJPReactSvg],
+  ["ko-KR.react.svg", KoKRReactSvg],
+  ["lo-LA.react.svg", LoLAReactSvg],
+  ["lv.react.svg", LvReactSvg],
+  ["nl.react.svg", NlReactSvg],
+  ["pl.react.svg", PlReactSvg],
+  ["pt-BR.react.svg", PtBRReactSvg],
+  ["pt.react.svg", PtReactSvg],
+  ["ro.react.svg", RoReactSvg],
+  ["ru.react.svg", RuReactSvg],
+  ["sk.react.svg", SkReactSvg],
+  ["sl.react.svg", SlReactSvg],
+  ["si.react.svg", SiReactSvg],
+  ["sr.react.svg", SrReactSvg], // Assuming 'sr' is used for both Cyrillic and Latin scripts
+  ["sq-AL.react.svg", SqALReactSvg],
+  ["tr.react.svg", TrReactSvg],
+  ["uk-UA.react.svg", UkUAReactSvg],
+  ["vi.react.svg", ViReactSvg],
+  ["zh-CN.react.svg", ZhCNReactSvg],
 ]);

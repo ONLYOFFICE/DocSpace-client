@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,6 +28,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 
 import { Badge } from "@docspace/shared/components/badge";
+import { globalColors } from "@docspace/shared/themes";
 import { Nullable } from "@docspace/shared/types";
 import { isMobile } from "@docspace/shared/utils";
 
@@ -383,25 +384,25 @@ const NewFilesBadge = ({
   return (
     <>
       <Badge
-        ref={badgeRef}
-        lineHeight="16px"
+        ref={badgeRef as React.RefObject<HTMLDivElement>}
         fontSize="11px"
         fontWeight={600}
         className={`new-items${className ? ` ${className}` : ""}`}
         label={label}
+        color={globalColors.white}
         onClick={onBadgeClickAction}
         onMouseOver={onMouseOver}
         onMouseLeave={onMouseLeave}
         isMutedBadge={mute}
       />
-      {showPanel && (
+      {showPanel ? (
         <NewFilesPanel
           position={panelPosition}
           folderId={folderId}
           isRoom={isRoom}
           onClose={onPanelHide}
         />
-      )}
+      ) : null}
     </>
   );
 };

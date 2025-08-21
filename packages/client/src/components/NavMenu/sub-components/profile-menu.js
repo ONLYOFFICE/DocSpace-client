@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -63,6 +63,7 @@ const StyledDropDown = styled(DropDown)`
     border: none !important;
 
     border-radius: 6px 6px 0px 0px !important;
+    padding: 0 !important;
   }
 `;
 
@@ -111,7 +112,6 @@ export const StyledProfileMenu = styled(DropDownItem)`
   padding: 0px;
   cursor: pointer;
   display: inline-block;
-  margin-top: -6px;
   max-width: 600px;
 `;
 

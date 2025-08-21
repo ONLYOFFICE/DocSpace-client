@@ -1,0 +1,255 @@
+{
+  "key_path": "LinkHasExpired",
+  "content": "The link you followed has expired.",
+  "content_en_sha1_hash": "6adda4f7fd5f80e95e77211ab0f5b7ab26d04a11",
+  "created_at": "2025-05-19T21:30:46.189Z",
+  "updated_at": "2025-07-10T11:11:07.155Z",
+  "comment": {
+    "text": "This translation key is used for displaying a message when a shared link has expired. It appears on an error page and is selected as the fallback option if another error message is not applicable. Translators should provide a clear and concise phrase to convey this status in their native language.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:39.944Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/pages/PublicRoom/PublicRoomError/index.tsx",
+      "line_number": 44,
+      "context": "const headerText = isInvalid\n ? t(\"Common:InvalidLink\")\n : t(\"Common:ExpiredLink\");\n const bodyText = isInvalid\n ? t(\"Common:LinkDoesNotExist\")\n : t(\"Common:LinkHasExpired\");\n \n useEffect(() => {\n frameCallCommand(\"setIsLoaded\");\n frameCallEvent({ event: isInvalid ? \"onNotFound\" : \"onNoAccess\" });\n }, [isInvalid]);",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'انتهت صلاحية الرابط الذي تحاول فتحه' literally translates to 'The validity of the link you are trying to open has expired.' While understandable, it's less natural than a more direct equivalent. A more natural phrasing would convey that the link itself has expired, not just that the user is trying to open it.",
+          "suggestion": "انتهت صلاحية الرابط."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While grammatically correct, the translation \"El enlace que usted ha seguido ha expirado\" is overly formal for a user-facing message. Using \"usted\" is not common in many Spanish-speaking regions and creates a distance between the message and the user.",
+          "suggestion": "El enlace que seguiste ha expirado."
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, the translation 'Ձեր հետևած հղումը ժամկետանց է:' is a bit literal and sounds somewhat formal for a typical user-facing message. A more natural-sounding translation would better reflect the English's clarity and user-friendliness.",
+          "suggestion": "Ձեր սեղմած հղումը դադարել է գործողությունից: (Tser segmad hghumu dadarel et grodotsn): - 'The link you clicked has expired.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Saitei, kurai sekojāt, ir beidzies derīguma termiņš' is a bit too literal and formal for a user-facing message. It conveys the meaning, but it doesn't sound natural in Latvian in this context. 'Derīguma termiņš' refers more to a product's expiration date, not a temporary link.",
+          "suggestion": "Saite, kurai sekojāt, vairs nav derīga."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The use of 'sekojāt' implies the user actively followed the link. While technically correct, a simpler phrasing might be more user-friendly.",
+          "suggestion": "Saite, kuru izmantojāt, vairs nav derīga."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Dany link wygasł' is grammatically correct, a more natural and commonly used translation for 'The link you followed has expired' would be 'Ten link wygasł.' 'Dany' implies a specific, previously mentioned link, which isn't necessarily the case.",
+          "suggestion": "Ten link wygasł."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation 'Odkaz, ktorý používate, je neplatný' doesn't accurately convey the meaning of 'The link you followed has expired.' While 'neplatný' (invalid) is close, 'expired' implies a time limit, which isn't explicitly communicated. A better translation would convey the sense of time passing and the link no longer being active.",
+          "suggestion": "Odkaz, ktorý ste sledovali, vypršal."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"您关注的链接已过期\" emphasizes 'you followed' ('您关注的'), which doesn't directly convey the meaning of 'expired' as in the original English. A more accurate translation would focus on the link's state of expiration.",
+          "suggestion": "您点击的链接已过期。"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

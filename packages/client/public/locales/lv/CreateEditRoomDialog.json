@@ -1,5 +1,4 @@
 {
-  "ActivationRequired": "nepieciešams aktivizācijas kods",
   "AddStaticText": "Pievienot statisku tekstu",
   "AddWatermarkElements": "Pievienojiet ūdenszīmes elementus",
   "AddWatermarksToDocuments": "Pievienot ūdenszīmes dokumentiem",
@@ -33,7 +32,6 @@
   "StorageDescription": "Katrai telpai ir noteikta uzglabāšanas kvota. Varat mainīt šo vērtību vai izslēgt krātuves ierobežojumu.",
   "TagsPlaceholder": "Pievienot atzīmi",
   "ThirdPartyStorageComboBoxPlaceholder": "Izvēlieties krātuvi",
-  "ThirdPartyStorageDescription": "Izmantojiet trešās puses pakalpojumus kā šīs telpas datu krātuvi. Pievienotajā krātuvē tiks izveidota jauna mape šīs telpas datu glabāšanai.",
   "ThirdPartyStorageNoStorageAlert": "Vispirms attiecīgais pakalpojums ir jāpievieno sadaļā Integrācija (Integration). Pretējā gadījumā savienojums nebūs iespējams.",
   "ThirdPartyStoragePermanentSettingDescription": "Files are stored in a third-party {{thirdpartyTitle}} storage in the \"{{thirdpartyFolderName}}\" folder.\n<strong>{{thirdpartyPath}}</strong>",
   "ThirdPartyStorageRoomAdminNoStorageAlert": "Lai pievienotu trešās puses krātuvi, jums ir jāpievieno atbilstošais pakalpojums {{productName}} iestatījumu sadaļā Integrācija. Lai iespējotu integrāciju, sazinieties ar {{productName}} īpašnieku vai administratoru.",

@@ -1,0 +1,333 @@
+{
+  "key_path": "EmailErrorMessage",
+  "content": "Email address not valid. You can edit the email by double-clicking on it.",
+  "content_en_sha1_hash": "c3b76d1a9c93105e923664b7b759f4e5e023e836",
+  "created_at": "2025-05-19T21:30:54.716Z",
+  "updated_at": "2025-08-12T19:46:25.988Z",
+  "comment": {
+    "text": "This translation key is used to display a message indicating that an email address is invalid. It appears as a tooltip on a help button in an invite panel component. Translators should provide a descriptive error message to guide users when editing an invalid email address.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:16.950Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/Item.js",
+      "line_number": 349,
+      "context": "iconName={InfoEditReactSvgUrl}\n displayType=\"auto\"\n offsetRight={0}\n tooltipContent={\n hasNotFoundEmail\n ? t(\"EmailErrorMessageUserNotFound\")\n : t(\"EmailErrorMessage\")\n }\n openOnClick={false}\n size={16}\n color={theme.infoPanel.errorColor}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'عنوان البريد الإلكتروني غير صالح. بإمكانك تعديل البريد الإلكتروني بالنقر المزدوج عليه.' is a literal translation but doesn't flow naturally in Arabic. A more natural phrasing would be preferred for user experience.",
+          "suggestion": "عنوان البريد الإلكتروني غير صحيح. يمكنك تعديل البريد الإلكتروني بالنقر عليه نقرًا مزدوجًا."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'üzərinə' is spelled incorrectly. The correct spelling is 'üstünə'.",
+          "suggestion": "üstünə"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The sentence structure 'E-mailovou adresu můžete upravit že na něj dvakrát kliknete' is grammatically incorrect. 'že' is not appropriate here.",
+          "suggestion": "E-mailovou adresu můžete upravit tak, že na ni dvakrát kliknete."
+        },
+        {
+          "type": "grammar",
+          "description": "The word 'na něj' should be 'na ni' to agree with 'E-mailovou adresu'.",
+          "suggestion": "E-mailovou adresu můžete upravit tak, že na ni dvakrát kliknete."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Sähköpostiosoite ei ole olemassa' translates to 'Email address does not exist'. The English original says 'not valid'. While similar, 'not valid' implies a format or technical issue, while 'does not exist' implies the address isn't registered. This subtle difference can alter the user's understanding.",
+          "suggestion": "Sähköpostiosoite on virheellinen. Voit muokata sähköpostia kaksoisnapsauttamalla sitä."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'email' is translated as 'նամակը' which means 'letter'. While functionally related, 'email' should be translated more accurately, perhaps as 'էլփոստային հասցեն'.",
+          "suggestion": "Էլփոստի հասցեն վավեր չէ: Դուք կարող եք խմբագրել էլփոստային հասցեն՝ կրկնակի սեղմելով դրա վրա:"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ຄລິກສອງຄັ້ງໃສ່ມັນ' could be improved for clarity and naturalness.",
+          "suggestion": "ຄລິກສອງຄັ້ງທີ່ອີເມວ"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'ຄລິກສອງຄັ້ງໃສ່ມັນ' feels less natural than a more idiomatic expression for 'double-clicking on it' in Lao.",
+          "suggestion": "ຄລິກສອງຄັ້ງເພື່ອແກ້ໄຂອີເມວ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Polish translation uses 'klikając go dwukrotnie' which is technically correct, but a more natural and common phrasing would be 'klikając go dwa razy'.",
+          "suggestion": "klikając go dwa razy"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'You can edit the email by double-clicking on it' is not perfectly conveyed by 'Pode editar o email ao clicar duas vezes sobre ele.' A more natural translation would use a slightly different phrasing to improve readability and clarity. The word 'ao' can sound a bit formal in this context.",
+          "suggestion": "Pode editar o email clicando duas vezes nele."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase 'clicando duas vezes nele' is a bit clunky. A more natural phrasing would be 'clicando duas vezes no campo' or 'clicando duas vezes sobre ele'.",
+          "suggestion": "clicando duas vezes no campo"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The pronoun 'acesta' (this) refers to 'adresa de email' (email address). Using 'o' (her) would be more appropriate as 'adresa' is feminine.",
+          "suggestion": "Adresa de email nu este valabilă. Puteţi modifica adresa de email făcând dublu clic pe aceasta."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"You can edit the email by double-clicking on it\" is a bit awkward and indirect in Sinhala. A more natural phrasing would convey the same meaning more clearly.",
+          "suggestion": "ඔබ එය ක්ලික් කිරීමෙන් සංස්කරණය කළ හැකිය (Oba eya click karamun eka sanskaranya kala yiyath)"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the Sinhala sentence could benefit from a slightly more natural flow. Separating the explanation of the issue from the solution slightly improves readability.",
+          "suggestion": "වි-තැපැල් ලිපිනය වලංගු නොවේ. එය ක්ලික් කිරීමෙන් සංස්කරණය කළ හැකිය."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'naň' is archaic and sounds unnatural in modern Slovak. It's a reflexive pronoun referring back to 'e-mail'.",
+          "suggestion": "Email môžete upraviť dvojitým kliknutím na ňu."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of 'You can edit the email by double-clicking on it' is not ideal. 'E-mail sporočilo lahko uredite tako, da dvokliknete nanj' is a bit verbose and not the most natural way to express this in Slovenian. It literally translates to 'Email message can be edited so that you double-click on it.'",
+          "suggestion": "E-poštni naslov ni veljaven. Za urejanje ga dvakrat kliknite."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the use of 'E-mail' is inconsistent with common Slovenian usage, which usually uses 'E-pošta'.",
+          "suggestion": "Replace 'E-mail' with 'E-pošta' throughout the text."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"Email address\" is not precise. \"Емаил адреса\" literally translates to \"Email address,\" but it should be more naturally phrased in Serbian.",
+          "suggestion": "Неважећи емаил адрес (Nevažeći email adres) or Невалидан емаил адрес (Nevalidan email adres)"
+        },
+        {
+          "type": "spelling",
+          "description": "The word \"Емаил\" is a transliteration and not a standard Serbian word. While commonly understood, it is not the preferred terminology.",
+          "suggestion": "Email"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Можете уредити емаил двоструким кликом на њега\" is a literal translation of \"You can edit the email by double-clicking on it\" and is not the most natural way to express this in Serbian. It sounds awkward.",
+          "suggestion": "Можете га уредити двоструким кликом. (Mozete ga urediti dvostrukim klikom.) - You can edit it with a double click."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Địa chỉ Email không hợp lệ. Iu chan chỉnh sửa email sẽ tăng gấp đôi trên đó.' does not accurately convey the meaning of the English content. The phrase 'Iu chan chỉnh sửa email sẽ tăng gấp đôi trên đó' is nonsensical. It seems to be a misunderstanding or an attempt to incorporate some unknown element into the translation.",
+          "suggestion": "Địa chỉ Email không hợp lệ. Bạn có thể chỉnh sửa địa chỉ email bằng cách nhấp đúp vào đó."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'iu' appears to be a typo and doesn't contribute to the meaning of the sentence. It seems like it might be an incorrect attempt to type a Vietnamese word, but it's unclear what it's supposed to be.",
+          "suggestion": "Remove 'iu' from the translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

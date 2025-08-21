@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,9 +27,9 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
 
-import { Row } from "@docspace/shared/components/row";
+import { Row } from "@docspace/shared/components/rows";
 import { retryWebhook } from "@docspace/shared/api/settings";
 
 import RetryIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";

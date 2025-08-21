@@ -1,0 +1,22 @@
+@use "../../styles/variables/colors";
+
+.loaderContainer {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--app-loader-background-color);
+  z-index: 5000;
+  position: fixed;
+  top: 0;
+  inset-inline-start: 0;
+
+  .pageLoader {
+    position: fixed;
+    inset-inline-start: calc(50% - 20px);
+    top: 35%;
+  }
+}

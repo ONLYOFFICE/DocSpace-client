@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,13 +26,13 @@
 
 export type TCulture = {
   key: string;
-  icon: string;
+  icon: string | React.ReactElement;
   label?: string;
   index?: number;
 };
 
 export type TCultures = TCulture[];
-export interface ComboboxProps {
+export type ComboboxProps = {
   selectedCulture: string;
   cultures: string[];
   onSelectLanguage: (culture: TCulture) => void;
@@ -43,4 +43,13 @@ export interface ComboboxProps {
   /** Indicates that component contain border */
   withBorder?: boolean;
   isMobileView?: boolean;
-}
+  /** Direction of dropdown opening (top, bottom, both) */
+  directionY?: "top" | "bottom" | "both";
+  /** Fix dropdown direction regardless of available space */
+  fixedDirection?: boolean;
+  /** Use default mode for dropdown positioning */
+  isDefaultMode?: boolean;
+  /** Manual width for dropdown */
+  manualWidth?: string;
+  dataTestId?: string;
+};

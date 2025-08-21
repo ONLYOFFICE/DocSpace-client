@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,8 +32,9 @@ import { Button, ButtonSize } from "../../components/button";
 import { Text } from "../../components/text";
 import { ConflictResolveType } from "../../enums";
 
-import { StyledBodyContent } from "./ConflictResolve.styled";
 import { ConflictResolveProps } from "./ConflictResolve.types";
+
+import styles from "./ConflictResolve.module.scss";
 
 const ConflictResolve = (props: ConflictResolveProps) => {
   const {
@@ -59,7 +60,7 @@ const ConflictResolve = (props: ConflictResolveProps) => {
   );
 
   const onSelectResolveType = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const target = e.target;
+    const { target } = e;
 
     const type = Number(target.value) as ConflictResolveType;
     setResolveType(type);
@@ -114,40 +115,62 @@ const ConflictResolve = (props: ConflictResolveProps) => {
       visible={visible}
       isLoading={isLoading}
       displayType={ModalDialogType.modal}
+      data-test-id="conflict-resolve-dialog"
+      aria-labelledby="conflict-resolve-header"
     >
-      <ModalDialog.Header>{headerLabel}</ModalDialog.Header>
+      <ModalDialog.Header data-test-id="conflict-resolve-header">
+        {headerLabel}
+      </ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledBodyContent>
-          <Text truncate className="message conflict-resolve_file-name ">
+        <div
+          className={styles.conflictResolveBodyContent}
+          data-test-id="conflict-resolve-body"
+        >
+          <Text
+            truncate
+            className={styles.conflictResolveFileName}
+            data-test-id="conflict-resolve-filename"
+          >
             {messageText}
           </Text>
-          <Text className="select-action">{selectActionText}</Text>
+          <Text
+            className={styles.selectAction}
+            data-test-id="conflict-resolve-select-action"
+          >
+            {selectActionText}
+          </Text>
           <RadioButtonGroup
-            className="conflict-resolve-radio-button"
+            className={styles.conflictResolveRadioButton}
             orientation="vertical"
             fontSize="13px"
             fontWeight={400}
             name="group"
             onClick={onSelectResolveType}
             options={radioOptions}
-            selected={ConflictResolveType.Overwrite as unknown as string}
+            selected={resolveType as unknown as string}
+            data-test-id="conflict-resolve-options"
+            aria-label="Conflict resolution options"
           />
-        </StyledBodyContent>
+        </div>
       </ModalDialog.Body>
-      <ModalDialog.Footer>
+      <ModalDialog.Footer data-test-id="conflict-resolve-footer">
         <Button
-          key="OkButton"
+          key="OKButton"
           label={submitButtonLabel}
           size={ButtonSize.normal}
           primary
           type="submit"
           onClick={onSubmitAction}
+          data-test-id="conflict-resolve-submit-button"
+          aria-label={submitButtonLabel}
         />
         <Button
           key="CancelButton"
           label={cancelButtonLabel}
           size={ButtonSize.normal}
           onClick={onClose}
+          data-test-id="conflict-resolve-cancel-button"
+          aria-label={cancelButtonLabel}
         />
       </ModalDialog.Footer>
     </ModalDialog>

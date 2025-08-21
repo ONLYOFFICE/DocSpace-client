@@ -1,8 +1,6 @@
 {
   "DeleteForeverButton": "永久删除",
-  "DeleteForeverNote": "垃圾箱中的所有项目都将被永久性删除。您将无法使其恢复。",
-  "DeleteForeverNoteArchive": "存档中的所有项目都将被永久性删除。您将无法使其恢复。",
+  "DeleteForeverNote": "{{sectionName}}部分中的所有项目将被永久删除且不可恢复。",
   "DeleteForeverTitle": "永久删除？",
-  "SuccessEmptyArchived": "存档已清空",
-  "SuccessEmptyTrash": "回收站已清空"
+  "SuccessEmptyAction": "{{sectionName}}部分已清空"
 }

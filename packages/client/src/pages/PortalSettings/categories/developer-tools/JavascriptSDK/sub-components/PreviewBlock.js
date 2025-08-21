@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,8 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { objectToGetParams } from "@docspace/shared/utils/common";
 import { Tabs, TabsTypes } from "@docspace/shared/components/tabs";
+
+import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
+import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 
 import { CodeToInsert } from "./CodeToInsert";
 import { GetCodeBlock } from "./GetCodeBlock";
@@ -35,7 +39,6 @@ import { Preview } from "../presets/StyledPresets";
 import { showPreviewThreshold } from "../constants";
 
 export const PreviewBlock = ({
-  t,
   loadCurrentFrame,
   preview,
   theme,
@@ -44,6 +47,16 @@ export const PreviewBlock = ({
   config,
   isDisabled = false,
 }) => {
+  const { t, ready } = useTranslation([
+    "JavascriptSdk",
+    "Files",
+    "EmbeddingPanel",
+    "Common",
+    "Translations",
+    "SharingPanel",
+    "CreateEditRoomDialog",
+  ]);
+
   const [showPreview, setShowPreview] = useState(
     window.innerWidth > showPreviewThreshold,
   );
@@ -52,20 +65,31 @@ export const PreviewBlock = ({
   const codeBlock = `<div id="${frameId}">Fallback text</div>\n<script src="${scriptUrl}${params}"></script>`;
 
   const code = (
-    <CodeToInsert t={t} codeBlock={codeBlock} config={config} theme={theme} />
+    <CodeToInsert
+      t={t}
+      tReady={ready}
+      codeBlock={codeBlock}
+      scriptUrl={scriptUrl}
+      config={config}
+      theme={theme}
+    />
   );
   const dataTabs = [
     {
       id: "preview",
       name: t("Common:Preview"),
       content: preview,
+      iconName: EyeReactSvgUrl,
     },
     {
       id: "code",
       name: t("Code"),
       content: code,
+      iconName: CodeReactSvgUrl,
     },
   ];
+
+  const [selectedItemId, setSelectedItemId] = useState(dataTabs[0].id);
 
   const onResize = () => {
     const isEnoughWidthForPreview = window.innerWidth > showPreviewThreshold;
@@ -83,10 +107,16 @@ export const PreviewBlock = ({
   return showPreview ? (
     <Preview>
       <Tabs
+        layoutId="preview"
+        hotkeysId="preview"
         type={TabsTypes.Secondary}
-        onSelect={loadCurrentFrame}
+        onSelect={(e) => {
+          setSelectedItemId(e.id);
+          loadCurrentFrame(e);
+        }}
         items={dataTabs}
-        isDisabled={isDisabled}
+        isLoading={!ready}
+        selectedItemId={selectedItemId}
       />
     </Preview>
   ) : (

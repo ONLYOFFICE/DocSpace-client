@@ -1,0 +1,382 @@
+{
+  "key_path": "LdapMobileSyncDescription",
+  "content": "Specify your company information, add links to external resources, and email addresses displayed within the online office interface.",
+  "content_en_sha1_hash": "db911289c0b4e88a03b617d34244ece86530d80e",
+  "created_at": "2025-05-19T21:30:54.243Z",
+  "updated_at": "2025-08-11T18:11:59.248Z",
+  "comment": {
+    "text": "This translation key is used to describe the purpose and content of a button or link that allows users to specify their company information, add external resources, and manage email addresses within an online office interface, typically found in portal settings categories.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:07.024Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/LdapMobileView.js",
+      "line_number": 62,
+      "context": "disabled={!isLdapEnabled}\n dataTestId=\"ldap_settings\"\n />\n <MobileCategoryWrapper\n title={t(\"Ldap:LdapSyncTitle\")}\n subtitle={t(\"LdapMobileSyncDescription\")}\n url=\"/portal-settings/integration/ldap/sync-data\"\n withPaidBadge={!isLDAPAvailable}\n badgeLabel={t(\"Common:Paid\")}\n onClickLink={onClickLink}\n disabled={!isLdapEnabled}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Specify your company information\" is not accurately reflected in \"Şirkət məlumatlarınızı dəqiqləşdirin\". \"Dəqiqləşdirin\" means 'clarify' or 'refine,' implying the information already exists. A more accurate translation would convey the meaning of providing or entering information.",
+          "suggestion": "Şirkət məlumatlarınızı göstərin/daxil edin"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a mix of capitalization styles. It's preferable to be consistent.",
+          "suggestion": "Şirkət məlumatlarınızı göstərin/daxil edin, xarici resurslara keçidlər əlavə edin və onlayn ofis interfeysində göstərilən e-poçt ünvanlarını daxil edin."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'online office interface' is translated as 'online rozhraní kanceláře'. While technically correct, 'online rozhraní kanceláře' sounds slightly clunky in Czech. A more natural phrasing might be 'online pracovní prostředí' or 'online platforma'.",
+          "suggestion": "Consider translating 'online office interface' as 'online pracovní prostředí' or 'online platforma'."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'displayed within the online office interface' is not perfectly captured. 'in der Benutzeroberfläche angezeigt werden' is literal but could be improved for naturalness in German. A more fluent translation might involve a phrase like 'die in der Online-Oberfläche sichtbar sind' or 'die in der Web-Oberfläche angezeigt werden'.",
+          "suggestion": "die in der Online-Oberfläche sichtbar sind"
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'online office' is translated as 'online officen'. 'Officen' is a genitive case which is grammatically incorrect in this context. It should be 'online-toimistossa' or simply 'online-toimistossa'.",
+          "suggestion": "Määrittele yrityksesi tiedot, lisää linkkejä ulkoisiin resursseihin ja sähköpostiosoitteet, jotka näytetään online-toimistossa."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation contains a hyphen in 'online-toimistossa'. While not strictly incorrect, consider using a space for better readability: 'online toimistossa'.",
+          "suggestion": "Määrittele yrityksesi tiedot, lisää linkkejä ulkoisiin resursseihin ja sähköpostiosoitteet, jotka näytetään online toimistossa."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'email addresses' is not accurately translated. While 'էլեկտրոնային գրասենյակի հասցեները' literally translates to 'email addresses of the electronic office,' the intended meaning is more akin to 'email addresses to be displayed'.",
+          "suggestion": "Նշեք ձեր ընկերության տեղեկատվությունը, ավելացրեք հղումներ դեպի արտաքին ռեսուրսներ և էլեկտրոնային հասցեները, որոնք ցուցադրվում են առցանց գրասենյակի ինտերֆեյսում:"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is a bit convoluted and could be improved for readability. While grammatically correct, it could be more fluid.",
+          "suggestion": "Նշեք ձեր ընկերության տեղեկատվությունը, ավելացրեք արտաքին ռեսուրսների հղումներ և էլեկտրոնային հասցեներ, որոնք ցուցադրվում են առցանց գրասենյակի ինտերֆեյսում:"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"email addresses\" is translated as \"indirizzi e-mail\". While technically correct, a more natural and common Italian phrasing would be \"indirizzi email\".",
+          "suggestion": "indirizzi email"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Specify your company information\" is too broad and could be more accurately translated. \"Specify\" can sound overly formal. A more natural Japanese phrasing might be closer to '設定する' (setting) or '入力する' (entering).",
+          "suggestion": "会社情報を設定または入力します。"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"displayed within the online office interface\" could be more precisely translated to indicate the context of display.  The current translation, while understandable, lacks nuance.",
+          "suggestion": "オンラインオフィスのインターフェイスに表示されるメールアドレスです。"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Specify your company information\" is not accurately reflected. \"지정하고\" (jijeunghago) implies assigning or designating, not necessarily specifying. A more accurate translation would convey the act of providing or defining.",
+          "suggestion": "회사 정보를 제공하고 (hwasa jeongbo-reul jegonghago)"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is a bit long and could be improved for readability in Korean. Combining multiple actions with \"하고\" can sometimes feel clunky.",
+          "suggestion": "회사 정보를 제공하고, 외부 리소스 링크를 추가하고, 온라인 오피스 인터페이스에 표시되는 이메일 주소를 추가하세요."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Lao translation uses a comma (,) instead of a period (.) after 'ບໍລິສັດຂອງທ່ານ'. While commas are sometimes used, a period is more standard in formal Lao writing.",
+          "suggestion": "Replace the comma after 'ບໍລິສັດຂອງທ່ານ' with a period: 'ບໍລິສັດຂອງທ່ານ.'"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ພາຍນອກ' is generally used to mean 'outside' or 'external'. While technically correct, 'ຕ່າງປະເທດ' might be a more natural sounding translation in this context, implying 'external resources'.",
+          "suggestion": "Consider replacing 'ພາຍນອກ' with 'ຕ່າງປະເທດ'."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Specify' is better translated as 'Vul in' or 'Geef aan' in this context. 'Specificeer' sounds overly formal and technical for a user-facing description.",
+          "suggestion": "Vul in uw bedrijfsinformatie, voeg links toe naar externe bronnen en e-mailadressen die in de online office interface worden weergegeven."
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Specify your company information' is not accurately translated. 'Udostępnij informacje na temat swojej firmy' is more akin to 'Share information about your company' rather than 'Specify'.",
+          "suggestion": "Określ dane swojej firmy"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'online office interface' is a direct translation, but it sounds awkward in Portuguese. 'Interface do escritório online' is technically correct but not the most natural phrasing. It would be more common to say 'interface online' or 'ambiente de trabalho online'.",
+          "suggestion": "Consider rephrasing 'interface do escritório online' to 'interface online' or 'ambiente de trabalho online' for a more natural flow."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"add links to external resources\" is not accurately conveyed. The Sinhala translation \"පිටත සම්පත් සඳහා වූ සම්බන්ධතා\" translates more literally to 'connections for external resources' which is not the intended meaning. It should indicate links or references to external resources.",
+          "suggestion": "ඔබේ සමාගමේ තොරතුරු සඳහාව, පිටත සම්පත් සඳහා වූ සබැඳි (links) හා මාර්ගගත කාර්යාල අතුරුමුහුණත තුළ ප්‍රදර්ශනය වන විද්‍යුත් ලිපිනයන් දක්වන්න."
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct, the Sinhala sentence is quite long and might benefit from being broken down for improved readability. Consider restructuring for a more natural flow.",
+          "suggestion": "ඔබේ සමාගමේ තොරතුරු සඳහාව. පිටත සම්පත් සඳහා වූ සබැඳි (links) හා මාර්ගගත කාර්යාල අතුරුමුහුණත තුළ ප්‍රදර්ශනය වන විද්‍යුත් ලිපිනයන් ද දක්වන්න."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Specify your company information\" is better translated as something more precise than \"Določi podatke o svojem podjetju\". While technically correct, it's a bit formal and could be misinterpreted. A more natural and accurate translation might be 'Vnesite podatke o podjetju' or 'Navedite podatke o podjetju'.",
+          "suggestion": "Vnesite podatke o podjetju"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"links to external resources\" is translated as \"povezave do zunanjih virov.\" While acceptable,  a more common and slightly more idiomatic phrasing in this context could be 'povezave na zunanje vire' or 'zunanje povezave'.",
+          "suggestion": "povezave na zunanje vire"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Наведите информације о вашој компанији\" is a very literal translation of \"Specify your company information\". A more natural and idiomatic Serbian (Cyrillic) translation would be something like \"Унесите информације о вашој компанији\" or \"Попуните информације о вашој компанији\".",
+          "suggestion": "Унесите информације о вашој компанији"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"емаил\" is a direct transliteration of \"email\" and not a native Serbian term. The correct Serbian word for email is 'email' or 'е-маил'.",
+          "suggestion": "е-маил адресе"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'onlajn' is a transliteration of 'online' and is not the standard Serbian word. The correct word is 'onlajn kancelarije'.",
+          "suggestion": "onlajn kancelarije"
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'email adrese' could be better styled as 'e-mail adrese' to be more consistent with common Serbian usage.",
+          "suggestion": "e-mail adrese"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Specify your company information\" is better translated as something more specific to the context, rather than just \"belirleyin.\" A more accurate translation might be \"Şirket bilgilerini yapılandırın\" or \"Şirket bilgilerini ayarlayın\".",
+          "suggestion": "Şirket bilgilerini yapılandırın"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ekleyin' is repeated and a little clunky. While technically correct, it could be improved for flow.",
+          "suggestion": "Şirket bilgilerini yapılandırın, harici kaynaklara bağlantılar ekleyin ve çevrimiçi ofis arayüzünde görünen e-posta adreslerini belirtin."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'displayed within the online office interface' is not accurately reflected in the Ukrainian translation. 'Які будуть показані в онлайн-інтерфейсі офісу' implies a future action of showing rather than a description of what is currently displayed.",
+          "suggestion": "Укажіть інформацію про свою компанію, додайте посилання на зовнішні ресурси, які відображаються в онлайн-інтерфейсі офісу."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Specify your company information' is not accurately translated. 'Nêu rõ' is a bit too formal and doesn't quite capture the meaning of 'Specify'.",
+          "suggestion": "Cung cấp thông tin công ty của bạn"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'giao diện văn phòng trực tuyến' is technically correct for 'online office interface', a more natural and common Vietnamese term would be better.",
+          "suggestion": "giao diện ứng dụng trực tuyến"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

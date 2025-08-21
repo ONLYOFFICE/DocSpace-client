@@ -1,6 +1,5 @@
 {
   "AccountWillBeCreated": "Un compte {{productName}} sera créé pour <1>{{email}}</1>. Veuillez terminer votre inscription :",
-  "ChangePasswordSuccess": "Le mot de passe a bien été modifié",
   "ConfirmOwnerPortalSuccessMessage": "Le propriétaire de {{productName}} a été changé avec succès. Dans 10 secondes, vous serez redirigé.",
   "ConfirmOwnerPortalTitle": "Veuillez confirmer le changement de propriétaire de {{productName}}. Nouveau propriétaire : {{newOwner}}.",
   "CurrentNumber": "Votre numéro de téléphone mobile actuel",
@@ -26,9 +25,6 @@
   "PortalRemoveTitle": "Veuillez confirmer que vous souhaitez supprimer votre {{productName}}.",
   "Reactivate": "Réactiver",
   "SetAppButton": "Connecter l'application",
-  "SetAppDescription": "L'authentification à deux facteurs est activée. Configurez votre application d'authentification pour continuer à travailler dans {{productName}}. Vous pouvez utiliser Google Authenticator pour <1>Android</1> et <4>iOS</4> ou Authenticator pour <8>Windows Phone</8>.",
-  "SetAppInstallDescription": "Pour connecter l'app, scannez le code QR ou saisissez manuellement votre clé secrète <1>{{ secretKey }}</1>, puis saisissez un code à 6 chiffres de votre app dans le champ ci-dessous.",
-  "SetAppTitle": "Configurez votre application d'authentification",
   "SignUp": "S'inscrire",
   "SuccessDeactivate": "Votre compte a été désactivé avec succès. Dans 10 secondes, vous serez redirigé vers le <1>site</1>.",
   "SuccessReactivate": "Votre compte a été réactivé avec succès. Dans 10 secondes, vous serez redirigé vers le <1>portail</1>.",

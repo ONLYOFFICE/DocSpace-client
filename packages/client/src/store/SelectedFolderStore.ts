@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -121,6 +121,8 @@ class SelectedFolderStore {
 
   isRoom = false;
 
+  isTemplate = false;
+
   isArchive = false;
 
   logo: TLogo | null = null;
@@ -199,6 +201,7 @@ class SelectedFolderStore {
       roomType: this.roomType,
       pinned: this.pinned,
       isRoom: this.isRoom,
+      isTemplate: this.isTemplate,
       logo: this.logo,
       tags: this.tags,
       rootFolderId: this.rootFolderId,
@@ -222,6 +225,8 @@ class SelectedFolderStore {
       watermark: this.watermark,
       passwordProtected: this.passwordProtected,
       external: this.external,
+      changeDocumentsTabs: this.changeDocumentsTabs,
+      isIndexedFolder: this.isIndexedFolder,
     };
   };
 
@@ -257,6 +262,7 @@ class SelectedFolderStore {
     this.roomType = null;
     this.pinned = false;
     this.isRoom = false;
+    this.isTemplate = false;
     this.logo = null;
     this.tags = [];
     this.rootFolderId = 0;

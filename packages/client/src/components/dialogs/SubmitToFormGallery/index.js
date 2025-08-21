@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,7 +31,7 @@ import { useState, useRef, useEffect } from "react";
 import { observer, inject } from "mobx-react";
 import { Trans, withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
-import FilesSelector from "@docspace/client/src/components/FilesSelector";
+import FilesSelector from "SRC_DIR/components/FilesSelector";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 
@@ -165,6 +165,7 @@ const SubmitToFormGallery = ({
               target="_blank"
               isBold
               isHovered
+              dataTestId="submit_to_gallery_guide_link"
             >
               guide
             </Link>
@@ -172,7 +173,7 @@ const SubmitToFormGallery = ({
           </Trans>
         </div>
 
-        {formItem && (
+        {formItem ? (
           <Styled.FormItem>
             <ReactSVG className="icon" src={getIcon(32, formItem.fileExst)} />
             <div className="item-title">
@@ -192,7 +193,7 @@ const SubmitToFormGallery = ({
               )}
             </div>
           </Styled.FormItem>
-        )}
+        ) : null}
       </ModalDialog.Body>
       <ModalDialog.Footer>
         {!formItem ? (
@@ -202,6 +203,7 @@ const SubmitToFormGallery = ({
             label={t("FormGallery:SelectForm")}
             onClick={onOpenFormSelector}
             scale
+            testId="submit_to_gallery_select_form_button"
           />
         ) : (
           <Button
@@ -211,6 +213,7 @@ const SubmitToFormGallery = ({
             onClick={onSubmitToGallery}
             isLoading={isSubmitting}
             scale
+            testId="submit_to_gallery_apply_button"
           />
         )}
         <Button
@@ -218,6 +221,7 @@ const SubmitToFormGallery = ({
           label={t("Common:CancelButton")}
           onClick={onClose}
           scale
+          testId="submit_to_gallery_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

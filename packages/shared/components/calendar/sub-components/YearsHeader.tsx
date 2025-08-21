@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,9 +26,10 @@
 
 import React from "react";
 import moment from "moment";
-import { HeaderActionIcon, HeaderContainer, Title } from "../Calendar.styled";
+import classNames from "classnames";
 import { HeaderButtons } from "./HeaderButtons";
 import { YearsHeaderProps } from "../Calendar.types";
+import styles from "../Calendar.module.scss";
 
 export const YearsHeader = ({
   observedDate,
@@ -57,12 +58,16 @@ export const YearsHeader = ({
   const isRightDisabled = moment(`${firstYear + 10}`) > maxDate;
 
   return (
-    <HeaderContainer>
-      <Title disabled className="years-header" isMobile={isMobile}>
+    <div className={styles.headerContainer}>
+      <h2
+        className={classNames(styles.title, "years-header", {
+          [styles.disabled]: true,
+        })}
+      >
         {moment(firstYear, "YYYY").format("YYYY")}-
         {moment(firstYear + 9, "YYYY").format("YYYY")}
-        <HeaderActionIcon isMobile={isMobile} />
-      </Title>
+        <span className={styles.headerActionIcon} />
+      </h2>
       <HeaderButtons
         onLeftClick={onLeftClick}
         onRightClick={onRightClick}
@@ -70,6 +75,6 @@ export const YearsHeader = ({
         isRightDisabled={isRightDisabled}
         isMobile={isMobile}
       />
-    </HeaderContainer>
+    </div>
   );
 };

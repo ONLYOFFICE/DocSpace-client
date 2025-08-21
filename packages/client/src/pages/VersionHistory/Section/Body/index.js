@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -35,12 +35,14 @@ import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
 import VersionRow from "./VersionRow";
 import { StyledBody, StyledVersionList } from "./StyledVersionHistory";
 
-const VirtualScroll = (props) => (
+const VirtualScroll = ({ ref, ...props }) => (
   <CustomScrollbarsVirtualListWithAutoFocus
     {...props}
+    ref={ref}
     paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
   />
 );
+VirtualScroll.displayName = "VirtualScroll";
 
 class SectionBodyContent extends React.Component {
   constructor(props) {
@@ -48,6 +50,7 @@ class SectionBodyContent extends React.Component {
     this.state = {
       isRestoreProcess: false,
       rowSizes: {},
+      showRows: false,
     };
 
     this.listRef = React.createRef();
@@ -101,6 +104,10 @@ class SectionBodyContent extends React.Component {
         [i]: itemHeight + 27, // composed of itemHeight = clientHeight of div and padding-top = 13px and padding-bottom = 12px
       },
     }));
+
+    this.setState({
+      showRows: true,
+    });
   };
 
   getSize = (i) => {
@@ -130,6 +137,7 @@ class SectionBodyContent extends React.Component {
           culture={culture}
           onSetRestoreProcess={this.onSetRestoreProcess}
           onUpdateHeight={this.onUpdateHeight}
+          dataTestId={`version_row_${index}`}
         />
       </div>
     );
@@ -137,10 +145,13 @@ class SectionBodyContent extends React.Component {
 
   render() {
     const { versions, isLoading } = this.props;
-    const { isRestoreProcess } = this.state;
+    const { isRestoreProcess, showRows } = this.state;
 
     const renderList = ({ height, width }) => (
-      <StyledVersionList isRestoreProcess={isRestoreProcess}>
+      <StyledVersionList
+        isRestoreProcess={isRestoreProcess}
+        showRows={showRows}
+      >
         <List
           ref={this.listRef}
           className="List"

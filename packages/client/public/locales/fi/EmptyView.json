@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "Viimeksi katsomasi tai muokkaamasi asiakirjat näytetään tässä osiossa.",
   "EmptyRootRoomUserDescription": "Jaettu huone ilmestyy tähän.",
   "EmptyRootRoomUserTitle": "Tässä ei ole vielä huoneita",
+  "EmptyTemplatesDescription": "Voit luoda mallin huoneesta Huone-osiossa",
+  "EmptyTemplatesTitle": "Täällä ei ole vielä malleja",
   "FormFolderDefaultDescription": "Pudota PDF-lomakkeet tähän tai lataa {{productName}}:sta tai laitteelta.",
   "FormFolderDefaultTitle": "Täällä ei ole vielä lomakkeita",
   "FormFolderDefaultUserDescription": "Pääkäyttäjien lataamat lomakkeet ilmestyvät tänne.",
@@ -33,6 +35,7 @@
   "MigrationDataDescription": "Tuo tiedot {{productName}}:een {{organizationName}} työtilasta, Googlen työtilasta tai Nextcloudista.",
   "MigrationDataTitle": "Siirtotiedot",
   "PublicRoomEmptyTitle": "Tervetuloa julkiseen huoneeseen.",
+  "SectionsUploadDescription": "Lataa mitä tahansa tiedostotyyppejä {{sectionNameFirst}}- tai {{sectionNameSecond}}-osiosta",
   "SendInvitationLetter": "Lähetä kutsukirje lisätäksesi portaaliin uusia jäseniä.",
   "ShareOptionDescription": "Kopioi julkinen pääsylinkki tai kutsu muita käyttäjiä huoneeseen aloittaaksesi lomakkeen täyttöprosessi.",
   "ShareOptionTitle": "Jaa huone",
@@ -42,9 +45,7 @@
   "UploadDeviceOptionTitle": "Lataa laitteestasi",
   "UploadDevicePDFFormOptionDescription": "Lataa huoneeseen valmis PDF-lomake laitteestasi.",
   "UploadDevicePDFFormOptionTitle": "Lataa laitteesta",
-  "UploadFromPortalDescription": "Lataa minkä tahansa tyyppisiä tiedostoja Asiakirjoista tai Huoneista",
   "UploadFromPortalTitle": "Lataa {{productName}}:sta",
   "UploadPDFFormOptionDescription": "Valitse valmis PDF-lomake, joka on {{productName}}:ssa ja lataa se huoneeseen.",
-  "UserEmptyDescription": "Pääkäyttäjien lataamat tiedostot ja kansiot ilmestyvät tänne.",
   "VirtualDataRoomEmptyTitle": "Tervetuloa Virtuaalisen datan huoneeseen."
 }

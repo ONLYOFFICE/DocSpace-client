@@ -2,8 +2,5 @@
   "FillOutButtonLabel": "Vyplniť",
   "FillOutDescription": "Vyplniť polia pôvodného formulára v okne redaktora.",
   "FillOutTitle": "Vyplniť formulár samostatne",
-  "FillPDFDialogTitle": "Vyplniť ako",
-  "ShareCollectButtonLabel": "Skopírovať do miestnosti",
-  "ShareCollectDescription": "Zdieľajte svoj formulár a zbierajte odpovede prostredníctvom miestnosti na vyplnenie formulárov.",
-  "ShareCollectTitle": "Zdieľať"
+  "FillPDFDialogTitle": "Vyplniť ako"
 }

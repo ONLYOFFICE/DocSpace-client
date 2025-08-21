@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,19 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useRef } from "react";
+import { classNames } from "../../../utils";
 
 import { Button, ButtonSize } from "../../button";
 import { TextInput, InputSize, InputType } from "../../text-input";
 import { Checkbox } from "../../checkbox";
+import styles from "../Selector.module.scss";
 
-import {
-  StyledFooter,
-  StyledButtonContainer,
-  StyledNewNameContainer,
-  StyledNewNameHeader,
-} from "../Selector.styled";
 import { FooterProps } from "../Selector.types";
 import AccessSelector from "./AccessSelector";
+import { Text } from "../../text";
 
 const Footer = React.memo(
   ({
@@ -55,8 +52,8 @@ const Footer = React.memo(
     onAccessRightsChange,
     accessRightsMode,
 
-    withFooterInput,
     withFooterCheckbox,
+    withFooterInput,
     footerInputHeader,
     footerCheckboxLabel,
     currentFooterInputValue,
@@ -76,7 +73,7 @@ const Footer = React.memo(
         : submitButtonLabel;
 
     const onChangeFileName = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const value = e.target.value;
+      const { value } = e.target;
       setNewFooterInputValue?.(value);
     };
 
@@ -85,53 +82,57 @@ const Footer = React.memo(
     };
 
     return (
-      <StyledFooter
+      <div
         ref={ref}
-        withFooterInput={withFooterInput}
-        withFooterCheckbox={withFooterCheckbox}
-        className="selector_footer"
+        className={classNames(styles.footer, "selector-footer", {
+          [styles.withFooterCheckbox]: withFooterCheckbox && !withFooterInput,
+          [styles.withFooterInput]: !withFooterCheckbox && withFooterInput,
+          [styles.defaultHeight]: !withFooterCheckbox && !withFooterInput,
+        })}
       >
-        {withFooterInput && (
-          <StyledNewNameContainer>
-            <StyledNewNameHeader
+        {withFooterInput ? (
+          <div className={styles.newNameContainer}>
+            <Text
+              className={styles.newNameHeader}
               lineHeight="20px"
               fontWeight={600}
               fontSize="13px"
-              noSelect
             >
               {footerInputHeader}
-            </StyledNewNameHeader>
+            </Text>
             <TextInput
               type={InputType.text}
               size={InputSize.base}
-              className="new-file-input"
+              className={styles.newFileInput}
               value={currentFooterInputValue || ""}
               scale
               onChange={onChangeFileName}
+              testId="selector_footer_input"
             />
-            {withFooterCheckbox && (
+            {withFooterCheckbox ? (
               <Checkbox
                 label={footerCheckboxLabel}
                 isChecked={isChecked}
                 onChange={onChangeCheckbox}
               />
-            )}
-          </StyledNewNameContainer>
-        )}
+            ) : null}
+          </div>
+        ) : null}
 
-        {withFooterCheckbox && !withFooterInput && (
+        {withFooterCheckbox && !withFooterInput ? (
           <Checkbox
             label={footerCheckboxLabel}
             isChecked={isChecked}
             onChange={onChangeCheckbox}
             className="selector_footer-checkbox"
+            dataTestId="selector_footer_checkbox"
           />
-        )}
+        ) : null}
 
-        <StyledButtonContainer>
+        <div className={styles.buttonContainer}>
           <Button
             id={submitButtonId}
-            className="button accept-button"
+            className={styles.button}
             label={label}
             primary
             scale
@@ -143,9 +144,10 @@ const Footer = React.memo(
                 : disableSubmitButton || !currentFooterInputValue.trim()
             }
             onClick={onSubmit}
+            testId="selector_submit_button"
           />
 
-          {withAccessRights && (
+          {withAccessRights ? (
             <AccessSelector
               accessRights={accessRights}
               selectedAccessRight={selectedAccessRight}
@@ -153,21 +155,22 @@ const Footer = React.memo(
               footerRef={ref}
               accessRightsMode={accessRightsMode}
             />
-          )}
+          ) : null}
 
-          {withCancelButton && (
+          {withCancelButton ? (
             <Button
+              className={styles.button}
               id={cancelButtonId}
-              className="button cancel-button"
               label={cancelButtonLabel || ""}
               scale
               size={ButtonSize.normal}
               onClick={onCancel}
               isDisabled={requestRunning}
+              testId="selector_cancel_button"
             />
-          )}
-        </StyledButtonContainer>
-      </StyledFooter>
+          ) : null}
+        </div>
+      </div>
     );
   },
 );

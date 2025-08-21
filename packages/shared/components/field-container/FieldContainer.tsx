@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,13 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import { Label } from "../label";
 import { HelpButton } from "../help-button";
 import { Text } from "../text";
 
-import Container from "./FieldContainer.styled";
 import { FieldContainerProps } from "./FieldContainer.types";
+import styles from "./FieldContainer.module.scss";
 
 const displayInlineBlock = { display: "inline-block" };
 
@@ -50,78 +51,103 @@ const FieldContainer = ({
   tooltipMaxWidth,
   tooltipContent,
   tooltipClass,
-  //   helpButtonHeaderContent,
   place = "bottom",
   hasError,
   children,
   errorMessage,
   errorColor,
+  dataTestId,
 }: FieldContainerProps) => {
+  const containerStyle = {
+    ...style,
+    "--label-width": maxLabelWidth,
+  } as React.CSSProperties;
+
+  const errorContainerStyle = {
+    ...style,
+    "--error-width": errorMessageWidth,
+    "--error-color": errorColor,
+  } as React.CSSProperties;
+
   return (
-    <Container
-      vertical={isVertical}
-      labelWidth={maxLabelWidth}
-      className={className}
+    <div
+      className={classNames(
+        styles.container,
+        {
+          [styles.vertical]: isVertical,
+          [styles.horizontal]: !isVertical,
+          [styles.noMargin]: removeMargin,
+        },
+        className,
+      )}
       id={id}
-      style={style}
-      maxwidth={errorMessageWidth}
-      removeMargin={removeMargin}
-      data-testid="field-container"
+      style={containerStyle}
+      data-testid={dataTestId ?? "field-container"}
+      data-vertical={isVertical}
+      data-label-width={maxLabelWidth}
     >
-      {labelVisible &&
-        (!inlineHelpButton ? (
-          <div className="field-label-icon">
+      {labelVisible ? (
+        !inlineHelpButton ? (
+          <div className={styles.fieldLabelIcon}>
             <Label
               isRequired={isRequired}
-              // error={hasError}
               text={labelText}
               truncate
-              className="field-label"
+              className={styles.fieldLabel}
               tooltipMaxWidth={tooltipMaxWidth}
               htmlFor=""
             />
-            {tooltipContent && (
+            {tooltipContent ? (
               <HelpButton
-                className={tooltipClass}
+                className={classNames(styles.iconButton, tooltipClass)}
                 tooltipContent={tooltipContent}
                 place={place}
-                // helpButtonHeaderContent={helpButtonHeaderContent}
+                dataTestId={
+                  dataTestId ? `${dataTestId}_help_button` : undefined
+                }
               />
-            )}
+            ) : null}
           </div>
         ) : (
-          <div className="field-label-icon">
+          <div className={styles.fieldLabelIcon}>
             <Label
               isRequired={isRequired}
               htmlFor=""
-              // error={hasError}
               text={labelText}
               truncate
-              className="field-label"
+              className={styles.fieldLabel}
             >
-              {tooltipContent && (
+              {tooltipContent ? (
                 <HelpButton
-                  className={tooltipClass}
+                  className={classNames(styles.iconButton, tooltipClass)}
                   tooltipContent={tooltipContent}
                   place={place}
-                  //   helpButtonHeaderContent={helpButtonHeaderContent}
                   style={displayInlineBlock}
                   offsetRight={0}
+                  dataTestId={
+                    dataTestId ? `${dataTestId}_help_button` : undefined
+                  }
                 />
-              )}
+              ) : null}
             </Label>
           </div>
-        ))}
+        )
+      ) : null}
 
-      <div className="field-body">
+      <div className={`${styles.fieldBody} field-body`}>
         {children}
         {hasError && errorMessage ? (
-          <Text className="error-label" fontSize="12px" color={errorColor}>
+          <Text
+            className={styles.errorContainer}
+            style={errorContainerStyle}
+            fontSize="12px"
+            color={errorColor}
+          >
             {errorMessage}
           </Text>
         ) : null}
       </div>
-    </Container>
+    </div>
   );
 };
 

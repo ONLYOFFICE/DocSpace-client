@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
+import { useLocation } from "react-router";
 
 import Section, { SectionProps } from "@docspace/shared/components/section";
 
@@ -33,7 +34,12 @@ const SectionWrapper = ({
 
   ...rest
 }: SectionProps) => {
-  return <Section {...rest}>{children}</Section>;
+  const location = useLocation();
+  return (
+    <Section {...rest} pathname={location.pathname}>
+      {children}
+    </Section>
+  );
 };
 
 export default inject(
@@ -47,6 +53,9 @@ export default inject(
     dialogsStore: any;
     infoPanelStore: any;
     indexingStore: any;
+    filesSettingsStore: any;
+    selectedFolderStore: any;
+    userStore: any;
   }) => {
     const {
       isDesktopClient: isDesktop,

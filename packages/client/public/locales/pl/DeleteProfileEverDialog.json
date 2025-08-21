@@ -6,17 +6,17 @@
   "DeleteGroupUsersSuccessMessage": "Użytkownicy zostali pomyślnie usunięci.",
   "DeleteGuest": "Usuń gościa",
   "DeleteGuests": "Usuń gości",
-  "DeleteMyDocumentsUser": "Wszystkie osobiste pliki i katalogi w sekcji Dokumenty tego użytkownika zostaną trwale usunięte.",
-  "DeletePersonalData": "Wszystkie dane osobowe, osobiste pliki oraz katalogi w sekcjach Dokumenty i Kosz* wybranych użytkowników zostaną trwale usunięte. Pliki i katalogi wybranych użytkowników przechowywane we wspólnych sekcjach* takich jak pokoje pozostaną w {{productName}}.",
   "DeletePersonalDataApplicable": "*Dotyczy wybranych użytkowników, którzy mają takie pliki i katalogi.",
-  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Pokoje utworzone przez tego użytkownika oraz przechowywane w nich dokumenty zostaną automatycznie przypisane administratorowi, który dokonał usunięcia: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Przypisz dane ręcznie, aby wybrać innego użytkownika docelowego do ponownego przypisania.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Pokoje utworzone przez tego użytkownika oraz przechowywane w nich dokumenty zostaną automatycznie przypisane administratorowi, który dokonał usunięcia: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Przypisz dane ręcznie, aby wybrać innego użytkownika docelowego do ponownego przypisania.",
   "DeleteReqassignDescriptionGuest": "Użytkownik {{userCaption}} zostanie usunięty ze wszystkich pokoi, do których został zaproszony. Dokumenty utworzone przez użytkownika {{userCaption}} w pokojach zostaną automatycznie przypisane właścicielom pokoi.",
   "DeleteUser": "Usuń użytkownika",
-  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> zostanie usunięty. Nie można cofnąć tej czynności.",
+  "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> zostanie usunięty. Nie można cofnąć tej czynności.",
   "DeletingUsers": "Usuwanie użytkowników",
+  "PersonalDataDeletionInfo": "Dane osobowe, wszystkie pliki i foldery osobiste w sekcjach {{sectionNameFirst}} i {{sectionNameSecond}}* wybranych użytkowników zostaną trwale usunięte. Pliki i foldery wybranych użytkowników przechowywane w sekcjach wspólnych* takich jak pokoje pozostaną w {{productName}}.",
   "PleaseNote": "Uwaga:",
   "ReassignDataToAnotherUser": "Przypisz dane innemu użytkownikowi",
   "SuccessfullyDeleteGuestInfoMessage": "Gość został pomyślnie usunięty",
   "SuccessfullyDeleteUserInfoMessage": "Użytkownik został pomyślnie usunięty",
-  "ToBeAbleToReassignData": "Aby móc ponownie przypisać dane, należy usuwać po jednym użytkowniku na raz."
+  "ToBeAbleToReassignData": "Aby móc ponownie przypisać dane, należy usuwać po jednym użytkowniku na raz.",
+  "UserFilesRemovalScope": "Dane osobowe, wszystkie pliki i foldery w sekcjach {{sectionNameFirst}} i {{sectionNameSecond}} tego użytkownika zostaną trwale usunięte."
 }

@@ -1,0 +1,313 @@
+{
+  "key_path": "TwoFactorDescription",
+  "content": "Two-factor authentication via a code-generating app was enabled for all users by the admin.",
+  "content_en_sha1_hash": "135c56c81388f3c625d431c75ce2a727e277b481",
+  "created_at": "2025-05-19T21:30:53.402Z",
+  "updated_at": "2025-08-11T18:11:59.300Z",
+  "comment": {
+    "text": "This translation key is used to display a description explaining two-factor authentication. It appears as a brief text in a UI element, specifically a button or section header, providing context for users about an enabled security feature, likely in a settings or profile page.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:48.080Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/login/login-settings/index.tsx",
+      "line_number": 79,
+      "context": "<StyledWrapper>\n <div className=\"header\">\n <Text fontSize=\"16px\" fontWeight={700} lineHeight=\"22px\">\n {t(\"Settings:TwoFactorAuth\")}\n </Text>\n <Text className=\"description\">{t(\"TwoFactorDescription\")}</Text>\n </div>\n <div className=\"actions\">\n <Button\n className=\"button\"\n label={t(\"ShowBackupCodes\")}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'code-generating app' is not accurately reflected. 'Kod generasiyası ilə' is a literal translation, but doesn't fully convey the meaning of an authenticator app.",
+          "suggestion": "Bütün istifadəçilər üçün inzibatçı tərəfindən iki faktorlu təsdiqləmə (təsdiqləmə proqramı vasitəsilə) aktivləşdirilib."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'enabled' is translated as 'yanırıldı', which more accurately means 'was lit/burned'. This is not the correct verb to use for enabling a feature.",
+          "suggestion": "Bütün istifadəçilər üçün inzibatçı tərəfindən iki faktorlu təsdiqləmə aktivləşdirilib."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, 'ikili autentifikasiya' is a less common phrasing. 'İki faktorlu təsdiqləmə' is preferred.",
+          "suggestion": "Bütün istifadəçilər üçün iki faktorlu təsdiqləmə (təsdiqləmə proqramı vasitəsilə) inzibatçı tərəfindən aktivləşdirilib."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'was enabled for all users by the admin' is not fully captured in the German translation. It implies an administrative action.",
+          "suggestion": "Zwei-Faktor-Authentifizierung über eine App für Generierung von Codes wurde vom Administrator für alle Benutzer aktiviert."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation lacks proper sentence structure flow that aligns with English.",
+          "suggestion": "Zwei-Faktor-Authentifizierung für alle Benutzer wurde durch den Administrator über eine App zur Code-Generierung aktiviert."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Two-factor authentication' is translated as 'kaksivaiheisen todennuksen'. While technically correct, 'kahden vaiheen tunnistautuminen' is a more natural and commonly used phrasing in Finnish for two-factor authentication.",
+          "suggestion": "Replace 'kaksivaiheisen todennuksen' with 'kahden vaiheen tunnistautumisen'."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Two-factor authentication\" is not directly translated. While \"իսկորոշման նույնականացումը\" is a possible translation, it's not the most common or easily understood term for \"two-factor authentication.\" A more direct and widely understood translation would be better.",
+          "suggestion": "Consider using a more direct translation like \"փոքրասերիֆիկացիայի երկու ֆակտոր\" or a phrasing that explains two-factor authentication clearly."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure is slightly awkward. \"Ադմինիստրատորի կողմից բոլոր օգտատերերի համար միացվել է...\" could be restructured for better flow.",
+          "suggestion": "Consider restructuring the sentence to something like: \"Բոլոր օգտատերերի համար իսկորոշման նույնականացումը միացվել է ադմինիստրատորի կողմից...\" or \"Ադմինիստրատորը միացրել է բոլոր օգտատերերի համար...\""
+        },
+        {
+          "type": "spelling",
+          "description": "While 'ադմինիստրատոր' is technically correct, the more common and natural spelling is 'ադմինիստրատոր' (with a softer 'մ').",
+          "suggestion": "Use 'ադմինիստրատոր'."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '활성화됩니다' (hwalseongdoebnida) implies a continuous or habitual action. The English sentence describes a one-time action taken by the admin. A more appropriate tense would indicate a completed action.",
+          "suggestion": "관리자에 의해 코드 생성 앱을 통한 이중 인증이 모든 사용자에 대해 활성화되었습니다."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrasing 'ຖືກເປີດໂດຍ Admin' is awkward. 'เปิดใช้งาน' (open/activate) would be a more natural translation of 'enabled'.",
+          "suggestion": "ການຢືນຢັນຕົວຕົນສອງຂັ້ນຕອນຜ່ານແອັບພລິເຄຊັນທີ່ສ້າງລະຫັດໄດ້ຖືກເປີດใช้งานໂດຍ Admin."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English sentence indicates the admin enabled 2FA *for* all users. The Latvian translation implies the admin *did* the enabling, which changes the nuance slightly. A more accurate translation would emphasize the enablement on behalf of the users.",
+          "suggestion": "Administrators ir aktivizējis divu faktoru autentifikāciju ar kodu ģenerējošu lietotni visiem lietotājiem."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"via a code-generating app\" is not accurately reflected in the Sinhala translation. \"කේත උත්පාදනය කරන යෙදුමක් හරහා\" literally translates to 'through an app that generates codes' which is correct, but lacks the nuance of 'via'. It doesn't convey the method of authentication as clearly as the English.",
+          "suggestion": "Consider rephrasing to something like \"කේත පණින යෙදුමක් භාවිතයෙන්\" (using a code-generating app) or \"කේත පණින යෙදුමක් ඔස්සේ\" (through a code-generating app)."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrasing \"පරිපාලකගේ අභිමතයට අනුව\" (according to the admin's wish) is a bit awkward and formal. While technically correct, it's not the most natural way to express the admin's action.",
+          "suggestion": "Consider a simpler phrasing like \"පරිපාලක විසින්\" (by the admin) or \"පරිපාලකයා විසින්\" (by the admin)."
+        },
+        {
+          "type": "formatting",
+          "description": "The Sinhala sentence could benefit from a slight restructuring to improve readability. It's quite long.",
+          "suggestion": "Break the sentence into two if possible, for example: \"පරිපාලකයා විසින් සියළුම පරිශ්‍රීලකයින් සඳහා ද්වි-සාධක තහවුරුව සබල කර ඇත. එය කේත උත්පාදනය කරන යෙදුමක් හරහා සිදු කර ඇත.\" (The admin enabled two-factor authentication for all users. It was done through a code-generating app.)"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"via a code-generating app\" is not perfectly translated. While \"kod üreten bir uygulama aracılığıyla\" conveys the meaning, a more natural Turkish phrasing would be \"kod üreten bir uygulama ile\".",
+          "suggestion": "Tüm kullanıcılar için kod üreten bir uygulama ile iki faktörlü kimlik doğrulama yönetici tarafından etkinleştirildi."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a slightly passive voice ('was enabled') which can be less direct in Turkish. Consider restructuring for a more active voice.",
+          "suggestion": "Tüm kullanıcılar için kod üreten bir uygulama ile yönetici iki faktörlü kimlik doğrulamayı etkinleştirdi."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'code-generating app' is not perfectly conveyed by '代码生成应用'. While understandable, it's a bit clunky. A more natural phrasing could be considered.",
+          "suggestion": "代码验证应用 (daima yanzheng yingyong) - Code verification app"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Two-factor authentication' is translated as '双因素身份认证'. While technically correct, '双因素认证' (shuang yinsu renzheng) is a more commonly used and natural-sounding translation in this context.",
+          "suggestion": "双因素认证 (shuang yinsu renzheng)"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
+import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 import styled from "styled-components";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
@@ -64,6 +64,7 @@ const MetadataUrlField = ({
   placeholder,
   tooltipContent,
   tooltipClass,
+  dataTestId,
 }) => {
   const { t } = useTranslation("Translations");
 
@@ -81,6 +82,7 @@ const MetadataUrlField = ({
           offsetRight={0}
           tooltipContent={tooltipContent}
           className={tooltipClass}
+          dataTestId={dataTestId ? `${dataTestId}_help_button` : undefined}
         />
       </Text>
       <InputBlock
@@ -92,6 +94,7 @@ const MetadataUrlField = ({
         iconName={CopyReactSvgUrl}
         iconSize={16}
         onIconClick={onCopyClick}
+        testId={dataTestId ? `${dataTestId}_input` : undefined}
       />
     </StyledWrapper>
   );

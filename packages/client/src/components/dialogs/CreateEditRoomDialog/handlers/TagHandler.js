@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -23,7 +23,8 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-const { createRandomTagId } = "@docspace/shared/utils/random";
+
+import { createRandomTagId } from "@docspace/shared/utils/random";
 
 class TagHandler {
   constructor(tags, setTags, fetchedTags) {
@@ -51,7 +52,7 @@ class TagHandler {
     }
 
     newTags.push({
-      id: this.createRandomTagId(),
+      id: createRandomTagId(),
       name,
     });
     this.setTags(newTags);
@@ -75,7 +76,7 @@ class TagHandler {
     }
 
     newTags.push({
-      id: this.createRandomTagId(),
+      id: createRandomTagId(),
       isNew: this.isNew(name),
       name,
     });

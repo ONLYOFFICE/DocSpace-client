@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,6 +31,7 @@ import { DeviceType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
 import { isMobile } from "react-device-detect";
+import { OPERATIONS_NAME } from "@docspace/shared/constants";
 
 export default function withFileActions(WrappedFileItem) {
   class WithFileActions extends React.Component {
@@ -64,14 +65,16 @@ export default function withFileActions(WrappedFileItem) {
       const { t, dragging, setDragging, startUpload, createFoldersTree } =
         this.props;
 
+      const dragged = dragging;
+
       dragging && setDragging(false);
 
-      createFoldersTree(t, files, uploadToFolder)
+      createFoldersTree(t, files, uploadToFolder, dragged)
         .then((f) => {
           if (f.length > 0) startUpload(f, null, t);
         })
         .catch((err) => {
-          toastr.error(err);
+          toastr.error(err, null, 0, true);
         });
     };
 
@@ -104,7 +107,10 @@ export default function withFileActions(WrappedFileItem) {
         canDrag,
         viewAs,
         isIndexEditingMode,
+        withContentSelection,
       } = this.props;
+
+      if (withContentSelection) return;
 
       if (isIndexEditingMode) {
         if (
@@ -143,10 +149,11 @@ export default function withFileActions(WrappedFileItem) {
       const mouseButton = e.which
         ? e.which !== 1
         : e.button
-          ? e.button !== 0
+          ? e.button !== 0 && e.button !== 2
           : false;
       const label = e.currentTarget.getAttribute("label");
       if (mouseButton || e.currentTarget.tagName !== "DIV" || label) {
+        if (item.isPlugin) return this.onFilesClick(e);
         return e;
       }
 
@@ -161,7 +168,15 @@ export default function withFileActions(WrappedFileItem) {
     };
 
     onMouseClick = (e) => {
-      const { viewAs, withCtrlSelect, withShiftSelect, item } = this.props;
+      const {
+        viewAs,
+        withCtrlSelect,
+        withShiftSelect,
+        item,
+        withContentSelection,
+      } = this.props;
+
+      if (withContentSelection) return;
 
       if (e.ctrlKey || e.metaKey) {
         withCtrlSelect(item);
@@ -336,6 +351,7 @@ export default function withFileActions(WrappedFileItem) {
           className={className}
           isDragging={isDragging}
           value={value}
+          documentTitle={item.title}
           displayShareButton={displayShareButton}
           isPrivacy={isPrivacy}
           isIndexUpdated={isIndexUpdated}
@@ -365,6 +381,7 @@ export default function withFileActions(WrappedFileItem) {
         uploadDataStore,
         contextOptionsStore,
         indexingStore,
+        hotkeyStore,
       },
       { item, t },
     ) => {
@@ -384,6 +401,7 @@ export default function withFileActions(WrappedFileItem) {
         isRecycleBinFolder,
         isRoomsFolder,
         isArchiveFolder,
+        isTemplatesFolder,
         isRecentTab,
       } = treeFoldersStore;
       const {
@@ -407,7 +425,9 @@ export default function withFileActions(WrappedFileItem) {
         withShiftSelect,
       } = filesStore;
       const { id } = selectedFolderStore;
-      const { startUpload } = uploadDataStore;
+      const { startUpload, secondaryProgressDataStore } = uploadDataStore;
+      const { withContentSelection } = hotkeyStore;
+      const { findOperationById } = secondaryProgressDataStore;
 
       const selectedItem = selection.find(
         (x) => x.id === item.id && x.fileExst === item.fileExst,
@@ -449,11 +469,23 @@ export default function withFileActions(WrappedFileItem) {
 
       const inProgress = isFileProgress || isFolderProgress;
 
+      let isBlockingOperation = inProgress;
+
+      if (inProgress && activeFolderIndex !== -1) {
+        const operationInfo = findOperationById(item.id);
+        const { operation } = operationInfo;
+        isBlockingOperation =
+          operation !== OPERATIONS_NAME.duplicate &&
+          operation !== OPERATIONS_NAME.download &&
+          operation !== OPERATIONS_NAME.copy;
+      }
+
       const dragIsDisabled =
         isPrivacyFolder ||
         isRecycleBinFolder ||
         isRoomsFolder ||
         isArchiveFolder ||
+        isTemplatesFolder ||
         settingsStore.currentDeviceType !== DeviceType.desktop ||
         inProgress;
 
@@ -481,6 +513,7 @@ export default function withFileActions(WrappedFileItem) {
         isPrivacy: isPrivacyFolder,
         isRoomsFolder,
         isArchiveFolder,
+        isTemplatesFolder,
         dragging,
         setDragging,
         startUpload,
@@ -518,6 +551,9 @@ export default function withFileActions(WrappedFileItem) {
 
         canDrag: !dragIsDisabled,
         isIndexEditingMode,
+        isBlockingOperation,
+
+        withContentSelection,
       };
     },
   )(observer(WithFileActions));

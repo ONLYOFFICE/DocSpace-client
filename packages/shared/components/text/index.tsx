@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,4 +24,95 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export { Text } from "./Text";
+import React from "react";
+import classNames from "classnames";
+import styles from "./Text.module.scss";
+import type { TextProps } from "./Text.types";
+
+const TextPure = ({
+  ref,
+  title,
+  tag,
+  as,
+  fontSize,
+  fontWeight,
+  color,
+  textAlign,
+  onClick,
+  dir,
+  children,
+  view,
+  isInline,
+  isBold,
+  isItalic,
+  lineHeight,
+  noSelect,
+  backgroundColor,
+  truncate,
+  className,
+  style,
+  containerWidth,
+  containerMinWidth,
+  dataTestId,
+  ...rest
+}: TextProps) => {
+  const elementType = !as && tag ? tag : as;
+  const isAutoDir = dir === "auto";
+  const dirProps = isAutoDir ? {} : { dir };
+
+  const textStyles = {
+    fontSize,
+    fontWeight: isBold ? 700 : fontWeight,
+    color,
+    textAlign,
+    lineHeight,
+    backgroundColor,
+    ...style,
+  };
+
+  const textClassName = classNames(
+    styles.text,
+    {
+      [styles.inline]: isInline,
+      [styles.italic]: isItalic,
+      [styles.bold]: isBold,
+      [styles.noSelect]: noSelect,
+      [styles.truncate]: truncate,
+    },
+    className,
+  );
+
+  const Element = elementType || "p";
+
+  return (
+    <Element
+      ref={ref}
+      title={title}
+      data-testid={dataTestId ?? "text"}
+      onClick={onClick}
+      className={textClassName}
+      style={textStyles}
+      {...dirProps}
+      {...rest}
+    >
+      {isAutoDir ? (
+        <span
+          className={classNames(styles.autoDirSpan, {
+            [styles.tile]: view === "tile",
+          })}
+          dir="auto"
+        >
+          {children}
+        </span>
+      ) : (
+        children
+      )}
+    </Element>
+  );
+};
+
+TextPure.displayName = "TextPure";
+
+const Text = React.memo(TextPure);
+
+export { Text };

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,9 +30,9 @@ import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { QuotaForm } from "@docspace/shared/components/quota-form";
 
 import { StyledBaseQuotaComponent } from "../StyledComponent";
-import QuotaForm from "../../../../../components/QuotaForm";
 
 let timerId = null;
 const QuotaPerItemComponent = (props) => {
@@ -48,6 +48,7 @@ const QuotaPerItemComponent = (props) => {
     type,
 
     tabIndex,
+    dataTestId,
   } = props;
 
   const { t } = useTranslation("Settings");
@@ -103,15 +104,19 @@ const QuotaPerItemComponent = (props) => {
           onChange={onToggleChange}
           isChecked={isToggleChecked}
           isDisabled={isDisabled || isLoading}
+          dataTestId={dataTestId ? `${dataTestId}_button` : undefined}
         />
         <Text className="toggle_label" fontSize="12px">
           {type === "user"
-            ? t("SetDefaultUserQuota", { productName: t("Common:ProductName") })
+            ? t("UserDefaultQuotaDescription", {
+                productName: t("Common:ProductName"),
+                sectionName: t("Common:MyFilesSection"),
+              })
             : t("SetDefaultRoomQuota", {
                 productName: t("Common:ProductName"),
               })}
         </Text>
-        {isToggleChecked && (
+        {isToggleChecked ? (
           <QuotaForm
             isButtonsEnable
             label={formLabel}
@@ -122,8 +127,9 @@ const QuotaPerItemComponent = (props) => {
             onCancel={onCancel}
             initialSize={initialSize}
             tabIndex={tabIndex}
+            dataTestId={dataTestId ? `${dataTestId}_form` : undefined}
           />
-        )}
+        ) : null}
       </div>
     </StyledBaseQuotaComponent>
   );

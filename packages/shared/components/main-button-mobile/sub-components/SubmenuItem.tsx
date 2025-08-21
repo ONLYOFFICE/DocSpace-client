@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,10 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useLayoutEffect, useEffect, useState } from "react";
-
-import { StyledDropDownItem } from "../MainButtonMobile.styled";
+import React, { useEffect, useLayoutEffect, useState } from "react";
+import { DropDownItem } from "../../drop-down-item";
 import { ActionOption, SubmenuItemProps } from "../MainButtonMobile.types";
+import styles from "../MainButtonMobile.module.scss";
+import { classNames } from "../../../utils";
 
 const SubmenuItem = ({
   option,
@@ -46,7 +47,6 @@ const SubmenuItem = ({
 
   useEffect(() => {
     if (openedSubmenuKey === option.key) return;
-
     setIsOpenSubMenu(false);
   }, [openedSubmenuKey, option.key]);
 
@@ -55,7 +55,7 @@ const SubmenuItem = ({
       setOpenedSubmenuKey(option.key);
       setIsOpenSubMenu(true);
     }
-  }, []);
+  }, [openByDefault, option.key, setOpenedSubmenuKey]);
 
   const onClick = () => {
     setOpenedSubmenuKey(option.key);
@@ -64,40 +64,47 @@ const SubmenuItem = ({
 
   return (
     <div key={`mobile-submenu-${option.key}`}>
-      <StyledDropDownItem
+      <DropDownItem
         id={option.id}
         key={option.key}
         label={option.label}
-        className={`${option.className} ${
-          option.isSeparator && "is-separator"
-        }`}
+        className={classNames(styles.dropDownItem, option.className, {
+          "is-separator": option.isSeparator,
+          "main-button_drop-down": !option.isSeparator,
+        })}
         onClick={onClick}
-        icon={option.icon ? option.icon : ""}
+        icon={option.icon}
         isActive={isOpenSubMenu}
         isSubMenu
         noHover={noHover}
       />
-      {isOpenSubMenu &&
-        option.items?.map((item: ActionOption) => {
-          const subMenuOnClickAction = () => {
-            toggle(false);
-            setIsOpenSubMenu(false);
-            item.onClick?.({ action: item.action });
-          };
+      {isOpenSubMenu
+        ? option.items?.map((suboption: ActionOption) => {
+            const subMenuOnClickAction = () => {
+              toggle(false);
+              setIsOpenSubMenu(false);
+              suboption.onClick?.({ action: suboption.action });
+            };
 
-          return (
-            <StyledDropDownItem
-              id={item.id}
-              key={item.key}
-              label={item.label}
-              className={`${item.className} sublevel`}
-              onClick={subMenuOnClickAction}
-              icon={item.icon ? item.icon : ""}
-              withoutIcon={item.withoutIcon}
-              noHover={noHover}
-            />
-          );
-        })}
+            return (
+              <DropDownItem
+                id={suboption.id}
+                key={suboption.key}
+                label={suboption.label}
+                className={classNames(
+                  styles.dropDownItem,
+                  styles.sublevel,
+                  suboption.className,
+                  "main-button_drop-down",
+                )}
+                onClick={subMenuOnClickAction}
+                icon={suboption.icon}
+                withoutIcon={suboption.withoutIcon}
+                noHover={noHover}
+              />
+            );
+          })
+        : null}
     </div>
   );
 };

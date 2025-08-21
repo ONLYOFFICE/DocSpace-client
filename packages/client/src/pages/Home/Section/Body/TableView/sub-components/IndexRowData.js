@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,9 +27,8 @@
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { TableCell } from "@docspace/shared/components/table";
+import { IndexIconButtons } from "@docspace/shared/components/index-icon-buttons";
 import { classNames, getLastColumn } from "@docspace/shared/utils";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
-import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow2.react.svg?url";
 import { VDRIndexingAction } from "@docspace/shared/enums";
 import FileNameCell from "./FileNameCell";
 import TypeCell from "./TypeCell";
@@ -67,6 +66,7 @@ const IndexRowDataComponent = (props) => {
     isIndexEditingMode,
     changeIndex,
     isIndexedFolder,
+    index,
   } = props;
 
   const [lastColumn, setLastColumn] = useState(
@@ -96,29 +96,17 @@ const IndexRowDataComponent = (props) => {
   );
 
   const indexComponentNode = (
-    <div
-      className="index-arrows-container"
+    <IndexIconButtons
+      containerClassName="index-arrows-container"
       style={
         lastColumn === "Name"
-          ? { display: "flex", justifyContent: "flex-end", flexGrow: "1" }
-          : { display: "flex" }
+          ? { justifyContent: "flex-end", flexGrow: "1" }
+          : {}
       }
-    >
-      <ColorTheme
-        themeId={ThemeId.IndexIconButton}
-        iconName={ArrowReactSvgUrl}
-        className="index-up-icon change-index_icon"
-        size="small"
-        onClick={(e) => changeIndex(e, VDRIndexingAction.HigherIndex)}
-      />
-      <ColorTheme
-        themeId={ThemeId.IndexIconButton}
-        iconName={ArrowReactSvgUrl}
-        className="index-down-icon change-index_icon"
-        size="small"
-        onClick={(e) => changeIndex(e, VDRIndexingAction.LowerIndex)}
-      />
-    </div>
+      commonIconClassName="change-index_icon"
+      onUpIndexClick={(e) => changeIndex(e, VDRIndexingAction.HigherIndex)}
+      onDownIndexClick={(e) => changeIndex(e, VDRIndexingAction.LowerIndex)}
+    />
   );
 
   const lastColumnContent = isIndexEditingMode
@@ -134,6 +122,7 @@ const IndexRowDataComponent = (props) => {
         )}
         style={dragStyles.style}
         value={value}
+        dataTestId={`index_cell_order_${index}`}
       >
         <IndexCell
           sideColor={theme.filesSection.tableView.row.sideColor}
@@ -151,6 +140,7 @@ const IndexRowDataComponent = (props) => {
             : "",
         )}
         value={value}
+        dataTestId={`index_cell_name_${index}`}
       >
         <FileNameCell
           theme={theme}
@@ -177,6 +167,7 @@ const IndexRowDataComponent = (props) => {
               ? "index-buttons"
               : "",
           )}
+          dataTestId={`index_cell_author_${index}`}
         >
           <AuthorCell
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -199,6 +190,7 @@ const IndexRowDataComponent = (props) => {
               ? "index-buttons"
               : "",
           )}
+          dataTestId={`index_cell_created_${index}`}
         >
           <DateCell
             create
@@ -222,6 +214,7 @@ const IndexRowDataComponent = (props) => {
               ? "index-buttons"
               : "",
           )}
+          dataTestId={`index_cell_modified_${index}`}
         >
           <DateCell
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -244,6 +237,7 @@ const IndexRowDataComponent = (props) => {
               ? "index-buttons"
               : "",
           )}
+          dataTestId={`index_cell_size_${index}`}
         >
           <SizeCell
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -266,6 +260,7 @@ const IndexRowDataComponent = (props) => {
               ? "index-buttons"
               : "",
           )}
+          dataTestId={`index_cell_type_${index}`}
         >
           <TypeCell
             sideColor={theme.filesSection.tableView.row.sideColor}

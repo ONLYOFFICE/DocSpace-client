@@ -1,0 +1,214 @@
+{
+  "key_path": "BrandName",
+  "content": "Brand name",
+  "content_en_sha1_hash": "6b4b8b5df0e218b10da0dadc07407d9783d4e3ad",
+  "created_at": "2025-05-26T07:15:41.010Z",
+  "updated_at": "2025-08-04T07:30:01.570Z",
+  "comment": {
+    "text": "This translation key is used to display the brand name as a label in various UI elements, such as mobile category titles and branding settings. It appears on screens like the Branding mobile view, where it's displayed next to an icon. Translators should provide the actual brand name for this text.",
+    "is_auto": true,
+    "updated_at": "2025-05-26T08:07:07.186Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 110,
+      "context": "{\n id: \"portal-settings_catalog-brand-name\",\n key: \"0-1-0\",\n icon: \"\",\n link: \"brand-name\",\n tKey: \"Common:BrandName\",\n },\n {\n id: \"portal-settings_catalog-white-label\",\n key: \"0-1-1\",\n icon: \"\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/pages/Branding/BrandName/index.tsx",
+      "line_number": 49,
+      "context": "import { useTheme } from \"../../../hooks/useTheme\";\n \n import { NotAvailable } from \"../WhiteLabel/NotAvailable\";\n import { IWhiteLabelData } from \"../WhiteLabel/WhiteLabel.types\";\n \n import { IBrandNameProps } from \"./BrandName.types\";\n import styles from \"./BrandName.module.scss\";\n \n export const BrandName = ({\n showNotAvailable,\n isSettingPaid,",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/pages/Branding/MobileView/index.tsx",
+      "line_number": 52,
+      "context": "const { t } = useTranslation(\"Common\");\n \n return (\n <div className={styles.mobileView}>\n <MobileCategoryWrapper\n title={t(\"BrandName\")}\n subtitle={t(\"BrandNameSubtitleMobile\")}\n url={`${baseUrl}/branding/brand-name`}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Paid\")}\n onClickLink={onClickLink}",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/management/src/lib/index.ts",
+      "line_number": 67,
+      "context": "case \"company-info\":\n return { key: t(\"Common:CompanyInfoSettings\"), isSubPage: true };\n case \"additional-resources\":\n return { key: t(\"Common:AdditionalResources\"), isSubPage: true };\n case \"brand-name\":\n return { key: t(\"Common:BrandName\"), isSubPage: true };\n case \"bonus\":\n return { key: t(\"Common:Bonus\"), isSubPage: false };\n default:\n return { key: t(\"Common:Spaces\"), isSubPage: false };\n }",
+      "module": "/packages/management"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

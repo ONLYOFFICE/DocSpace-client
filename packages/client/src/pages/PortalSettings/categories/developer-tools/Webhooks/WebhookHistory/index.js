@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,7 +29,7 @@ import moment from "moment-timezone";
 import styled from "styled-components";
 
 import { inject, observer } from "mobx-react";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import { formatFilters } from "SRC_DIR/helpers/webhooks";
 import HistoryFilterHeader from "./sub-components/HistoryFilterHeader";
 import WebhookHistoryTable from "./sub-components/WebhookHistoryTable";

@@ -1,6 +1,4 @@
 {
   "ErrorEmptyResponse": "Tukša atbilde",
-  "ErrorUnavailableText": "{{productName}} nav pieejams",
-  "LinkDoesNotExist": "Saite, kuru mēģināt atvērt, neeksistē.",
-  "LinkHasExpired": "Saitei, kurai sekojāt, ir beidzies derīguma termiņš."
+  "ErrorUnavailableText": "{{productName}} nav pieejams"
 }

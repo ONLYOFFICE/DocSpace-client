@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,84 +25,131 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen, render } from "@testing-library/react";
+import { screen, render, cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import userEvent from "@testing-library/user-event";
 
-import { ViewSelector } from "./ViewSelector";
+import { ViewSelector } from ".";
+import { TViewSelectorOption } from "./ViewSelector.types";
 
-const baseProps = {
+jest.mock("react-svg", () => ({
+  ReactSVG: () => <div data-testid="mocked-svg" />,
+}));
+
+const mockViewSettings: TViewSelectorOption[] = [
+  {
+    value: "row",
+    icon: "rowIcon.svg",
+    id: "row-view",
+  },
+  {
+    value: "tile",
+    icon: "tileIcon.svg",
+    id: "tile-view",
+  },
+  {
+    value: "compact",
+    icon: "compactIcon.svg",
+    id: "compact-view",
+  },
+];
+
+const defaultProps = {
   isDisabled: false,
   isFilter: false,
   onChangeView: jest.fn(),
   viewAs: "row",
-  viewSettings: [
-    {
-      value: "row",
-      icon: "",
-    },
-    {
-      value: "tile",
-      icon: "",
-    },
-    {
-      value: "some",
-      icon: "",
-    },
-  ],
+  viewSettings: mockViewSettings,
 };
 
 describe("<ViewSelector />", () => {
-  it("renders without error", () => {
-    render(<ViewSelector {...baseProps} />);
+  afterEach(() => {
+    jest.clearAllMocks();
+    cleanup();
+  });
 
+  it("renders without error", () => {
+    render(<ViewSelector {...defaultProps} />);
     expect(screen.getByTestId("view-selector")).toBeInTheDocument();
   });
 
-  // it("render with disabled", () => {
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2322): Type '{ isDisabled: true; isFilter: boolean; onCha... Remove this comment to see the full error message
-  //     <ViewSelector onClick={jest.fn()} {...baseProps} isDisabled={true} />,
-  //   );
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper).toExist();
-  // });
+  it("renders all view options", () => {
+    render(<ViewSelector {...defaultProps} />);
+    const icons = screen.getAllByTestId("view-selector-icon");
+    expect(icons).toHaveLength(mockViewSettings.length);
+  });
 
-  // it("id, className, style is exist", () => {
-  //   const wrapper = mount(
-  //     <ViewSelector
-  //       {...baseProps}
-  //       // @ts-expect-error TS(2322): Type '{ id: string; className: string; style: { co... Remove this comment to see the full error message
-  //       id="testId"
-  //       className="test"
-  //       style={{ color: "red" }}
-  //     />,
-  //   );
+  it("calls onChangeView when clicking a view option", async () => {
+    const onChangeView = jest.fn();
+    render(<ViewSelector {...defaultProps} onChangeView={onChangeView} />);
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("id")).toEqual("testId");
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("className")).toEqual("test");
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.getDOMNode().style).toHaveProperty("color", "red");
-  // });
+    const icons = screen.getAllByTestId("view-selector-icon");
+    const tileIcon = icons.find(
+      (icon) => icon.getAttribute("data-view") === "tile",
+    );
+    await userEvent.click(tileIcon!);
 
-  // it("accepts isDisabled", () => {
-  //   const wrapper = mount(<ViewSelector {...baseProps} isDisabled />);
+    expect(onChangeView).toHaveBeenCalledWith("tile");
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("isDisabled")).toEqual(true);
-  // });
+  it("does not call onChangeView when disabled", async () => {
+    const onChangeView = jest.fn();
+    render(
+      <ViewSelector {...defaultProps} onChangeView={onChangeView} isDisabled />,
+    );
 
-  // it("accepts isFilter", () => {
-  //   const wrapper = mount(<ViewSelector {...baseProps} isFilter />);
+    const icons = screen.getAllByTestId("view-selector-icon");
+    const tileIcon = icons.find(
+      (icon) => icon.getAttribute("data-view") === "tile",
+    );
+    await userEvent.click(tileIcon!);
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("isFilter")).toEqual(true);
-  // });
+    expect(onChangeView).not.toHaveBeenCalled();
+  });
 
-  // it("accepts viewAs", () => {
-  //   const wrapper = mount(<ViewSelector {...baseProps} viewAs="tile" />);
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("viewAs")).toEqual("tile");
-  // });
+  it("applies custom className and style", () => {
+    const customStyle = { backgroundColor: "red" };
+    render(
+      <ViewSelector
+        {...defaultProps}
+        className="custom-class"
+        style={customStyle}
+      />,
+    );
+
+    const viewSelector = screen.getByTestId("view-selector");
+    expect(viewSelector).toHaveClass("custom-class");
+    expect(viewSelector).toHaveStyle(customStyle);
+  });
+
+  it("renders only one icon when isFilter is true", () => {
+    render(<ViewSelector {...defaultProps} viewAs="row" isFilter />);
+
+    const icons = screen.getAllByTestId("view-selector-icon");
+    expect(icons).toHaveLength(1);
+  });
+
+  it("executes callback function when provided in viewSettings", async () => {
+    const callback = jest.fn();
+    const settingsWithCallback = [
+      { ...mockViewSettings[0], callback },
+      mockViewSettings[1],
+    ];
+
+    render(
+      <ViewSelector
+        {...defaultProps}
+        viewAs="tile"
+        viewSettings={settingsWithCallback}
+      />,
+    );
+
+    const icons = screen.getAllByTestId("view-selector-icon");
+    const rowIcon = icons.find(
+      (icon) => icon.getAttribute("data-view") === "row",
+    );
+    await userEvent.click(rowIcon!);
+
+    expect(callback).toHaveBeenCalled();
+  });
 });

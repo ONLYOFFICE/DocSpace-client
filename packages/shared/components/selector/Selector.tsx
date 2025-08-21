@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,6 +28,8 @@
 
 import React from "react";
 
+import { classNames } from "../../utils";
+
 import { ButtonKeys } from "../../enums";
 
 import { Aside } from "../aside";
@@ -36,8 +38,8 @@ import { Backdrop } from "../backdrop";
 import { Header } from "./sub-components/Header";
 import { Body } from "./sub-components/Body";
 import { Footer } from "./sub-components/Footer";
+import styles from "./Selector.module.scss";
 
-import { StyledSelector } from "./Selector.styled";
 import {
   TAccessRight,
   SelectorProps,
@@ -52,12 +54,7 @@ import {
   TSelectorSearch,
   TSelectorCancelButton,
 } from "./Selector.types";
-import { EmptyScreenProvider } from "./contexts/EmptyScreen";
-import { SearchProvider } from "./contexts/Search";
-import { BreadCrumbsProvider } from "./contexts/BreadCrumbs";
-import { TabsProvider } from "./contexts/Tabs";
-import { SelectAllProvider } from "./contexts/SelectAll";
-import { InfoBarProvider } from "./contexts/InfoBar";
+import { Providers } from "./contexts";
 
 const Selector = ({
   id,
@@ -152,6 +149,12 @@ const Selector = ({
   onClose,
   withBlur,
   withoutBackground,
+  withInfoBadge,
+  injectedElement,
+
+  isSSR,
+  selectedItem: selectedItemProp,
+  dataTestId,
 }: SelectorProps) => {
   const [footerVisible, setFooterVisible] = React.useState<boolean>(false);
 
@@ -179,23 +182,29 @@ const Selector = ({
 
   const [inputItemVisible, setInputItemVisible] = React.useState(false);
 
-  const [requestRunning, setRequestRunning] = React.useState<boolean>(false);
+  const [requestRunning, setRequestRunning] = React.useState(false);
 
-  const onSubmitAction = async (
-    item?: TSelectorItem | React.MouseEvent,
-    fromCallback?: boolean,
-  ) => {
-    setRequestRunning(true);
+  const onSubmitAction = React.useCallback(
+    async (item?: TSelectorItem | React.MouseEvent, fromCallback?: boolean) => {
+      setRequestRunning(true);
 
-    await onSubmit(
-      fromCallback && item && "label" in item ? [item] : newSelectedItems,
-      selectedAccess,
-      newFooterInputValue,
+      await onSubmit(
+        fromCallback && item && "label" in item ? [item] : newSelectedItems,
+        selectedAccess,
+        newFooterInputValue,
+        isFooterCheckboxChecked,
+      );
+
+      setRequestRunning(false);
+    },
+    [
       isFooterCheckboxChecked,
-    );
-
-    setRequestRunning(false);
-  };
+      newFooterInputValue,
+      newSelectedItems,
+      onSubmit,
+      selectedAccess,
+    ],
+  );
 
   const onSelectAction = (item: TSelectorItem, isDoubleClick: boolean) => {
     onSelect?.(
@@ -242,7 +251,8 @@ const Selector = ({
           });
         }
       }
-      setRenderedItems((value) => {
+      setRenderedItems((valueProp) => {
+        const value = [...valueProp];
         const idx = value.findIndex((x) => item.id === x.id);
 
         if (idx === -1) return value;
@@ -301,7 +311,6 @@ const Selector = ({
 
         return cloneRenderedItems;
       });
-      // setNewSelectedItems(cloneItems);
       if (activeTabId) {
         setSelectedTabItems((value) => {
           const newValue = { ...value };
@@ -323,7 +332,6 @@ const Selector = ({
 
         return cloneRenderedItems;
       });
-      // setNewSelectedItems([]);
 
       if (activeTabId) {
         setSelectedTabItems((value) => {
@@ -454,7 +462,10 @@ const Selector = ({
         (selectedItems && selectedItems.length === 0) ||
         !isMultiSelect
       ) {
-        const cloneItems = items.map((x) => ({ ...x, isSelected: false }));
+        const cloneItems = items.map((x) => ({
+          ...x,
+          isSelected: Boolean(selectedItemProp && selectedItemProp.id === x.id),
+        }));
 
         return setRenderedItems(cloneItems);
       }
@@ -474,7 +485,7 @@ const Selector = ({
       setRenderedItems(newItems);
       setNewSelectedItems(cloneSelectedItems);
     }
-  }, [items, selectedItems, isMultiSelect]);
+  }, [items, selectedItems, isMultiSelect, selectedItemProp]);
 
   const breadCrumbsProps: TSelectorBreadCrumbs = withBreadCrumbs
     ? {
@@ -483,6 +494,7 @@ const Selector = ({
         onSelectBreadCrumb,
         breadCrumbsLoader,
         isBreadCrumbsLoading,
+        bodyIsLoading: isLoading,
       }
     : {};
 
@@ -567,6 +579,7 @@ const Selector = ({
     ? {
         withInfo,
         infoText,
+        withInfoBadge,
       }
     : {};
 
@@ -604,79 +617,89 @@ const Selector = ({
     });
   }, [tabsData]);
 
+  const bodyItems =
+    isSSR && renderedItems.length === 0
+      ? items.map((x) => ({ ...x, isSelected: false }))
+      : [...renderedItems];
+
+  const separator = { id: "separator", isSeparator: true };
+
+  if (bodyItems.findIndex((x) => x.isSystem) > -1) {
+    bodyItems.splice(1, 0, separator as TSelectorItem);
+  }
+
   const selectorComponent = (
-    <StyledSelector
+    <div
       id={id}
-      className={className}
+      className={classNames(styles.selector, className)}
       style={style}
-      data-testid="selector"
+      data-testid={dataTestId || "selector"}
     >
-      <EmptyScreenProvider
-        emptyScreenImage={emptyScreenImage}
-        emptyScreenHeader={emptyScreenHeader}
-        emptyScreenDescription={emptyScreenDescription}
-        searchEmptyScreenImage={searchEmptyScreenImage}
-        searchEmptyScreenHeader={searchEmptyScreenHeader}
-        searchEmptyScreenDescription={searchEmptyScreenDescription}
+      <Providers
+        emptyScreenProps={{
+          emptyScreenImage,
+          emptyScreenHeader,
+          emptyScreenDescription,
+          searchEmptyScreenImage,
+          searchEmptyScreenHeader,
+          searchEmptyScreenDescription,
+        }}
+        infoBarProps={infoBarProps}
+        searchProps={searchProps}
+        tabsProps={tabsProps}
+        breadCrumbsProps={breadCrumbsProps}
+        selectAllProps={{
+          ...onSelectAllProps,
+          isAllChecked,
+          isAllIndeterminate,
+        }}
       >
-        <InfoBarProvider {...infoBarProps}>
-          <SearchProvider {...searchProps}>
-            <BreadCrumbsProvider {...breadCrumbsProps}>
-              <TabsProvider {...tabsProps}>
-                <SelectAllProvider
-                  {...onSelectAllProps}
-                  isAllChecked={isAllChecked}
-                  isAllIndeterminate={isAllIndeterminate}
-                >
-                  {withHeader && <Header {...headerProps} />}
-                  <Body
-                    withHeader={withHeader}
-                    withPadding={withPadding}
-                    footerVisible={footerVisible || !!alwaysShowFooter}
-                    items={[...renderedItems]}
-                    isMultiSelect={isMultiSelect}
-                    onSelect={onSelectAction}
-                    hasNextPage={hasNextPage}
-                    isNextPageLoading={isNextPageLoading}
-                    loadMoreItems={loadMoreItems}
-                    renderCustomItem={renderCustomItem}
-                    totalItems={totalItems || 0}
-                    isLoading={isLoading}
-                    rowLoader={rowLoader}
-                    withFooterInput={withFooterInput}
-                    withFooterCheckbox={withFooterCheckbox}
-                    descriptionText={descriptionText}
-                    inputItemVisible={inputItemVisible}
-                    setInputItemVisible={setInputItemVisible}
-                    // info
-                    {...infoProps}
-                  />
-                  {(footerVisible || alwaysShowFooter) && (
-                    <Footer
-                      isMultiSelect={isMultiSelect}
-                      selectedItemsCount={newSelectedItems.length}
-                      onSubmit={onSubmitAction}
-                      submitButtonLabel={submitButtonLabel}
-                      disableSubmitButton={disableSubmitButton}
-                      submitButtonId={submitButtonId}
-                      requestRunning={requestRunning}
-                      // cancel button
-                      {...cancelButtonProps}
-                      // access rights
-                      {...accessRightsProps}
-                      // input
-                      {...inputProps}
-                      // checkbox
-                      {...checkboxProps}
-                    />
-                  )}
-                </SelectAllProvider>
-              </TabsProvider>
-            </BreadCrumbsProvider>
-          </SearchProvider>
-        </InfoBarProvider>
-      </EmptyScreenProvider>
-    </StyledSelector>
+        {withHeader ? <Header {...headerProps} /> : null}
+        <Body
+          withHeader={withHeader}
+          withPadding={withPadding}
+          footerVisible={footerVisible || !!alwaysShowFooter}
+          items={bodyItems}
+          isMultiSelect={isMultiSelect}
+          onSelect={onSelectAction}
+          hasNextPage={hasNextPage}
+          isNextPageLoading={isNextPageLoading}
+          loadMoreItems={loadMoreItems}
+          renderCustomItem={renderCustomItem}
+          totalItems={totalItems || 0}
+          isLoading={isLoading}
+          rowLoader={rowLoader}
+          withFooterInput={withFooterInput}
+          withFooterCheckbox={withFooterCheckbox}
+          descriptionText={descriptionText}
+          inputItemVisible={inputItemVisible}
+          setInputItemVisible={setInputItemVisible}
+          injectedElement={injectedElement}
+          isSSR={isSSR}
+          // info
+          {...infoProps}
+        />
+        {footerVisible || alwaysShowFooter ? (
+          <Footer
+            isMultiSelect={isMultiSelect}
+            selectedItemsCount={newSelectedItems.length}
+            onSubmit={onSubmitAction}
+            submitButtonLabel={submitButtonLabel}
+            disableSubmitButton={disableSubmitButton}
+            submitButtonId={submitButtonId}
+            requestRunning={requestRunning}
+            // cancel button
+            {...cancelButtonProps}
+            // access rights
+            {...accessRightsProps}
+            // input
+            {...inputProps}
+            // checkbox
+            {...checkboxProps}
+          />
+        ) : null}
+      </Providers>
+    </div>
   );
 
   return useAside ? (

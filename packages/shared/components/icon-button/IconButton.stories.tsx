@@ -36,22 +36,60 @@ import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 import PersonReactSvg from "PUBLIC_DIR/images/person.react.svg?url";
 import QuestionReactSvg from "PUBLIC_DIR/images/question.react.svg?url";
 import SettingsReactSvg from "PUBLIC_DIR/images/settings.react.svg?url";
-
 import { IconButton } from ".";
 
 const meta = {
-  title: "Components/IconButton",
+  title: "Interactive Elements/IconButton",
   component: IconButton,
   parameters: {
     docs: {
-      description: { component: "IconButton is used for a action on a page" },
+      description: {
+        component: `
+IconButton is a versatile button component that displays an icon and handles various interaction states.
+
+Features:
+- Supports hover and click states with different icons and colors
+- Customizable size and colors
+- Can be disabled
+- Supports custom icon nodes
+- Handles mouse events (click, hover, down, up)
+        `,
+      },
     },
   },
   argTypes: {
-    color: { control: "color" },
-    clickColor: { control: "color" },
-    hoverColor: { control: "color" },
-    onClick: { action: "onClick" },
+    color: {
+      control: "color",
+      description: "The default color of the icon",
+    },
+    clickColor: {
+      control: "color",
+      description: "The color of the icon when clicked",
+    },
+    hoverColor: {
+      control: "color",
+      description: "The color of the icon when hovered",
+    },
+    onClick: {
+      action: "onClick",
+      description: "Function called when the button is clicked",
+    },
+    size: {
+      control: { type: "number", min: 12, max: 50 },
+      description: "Size of the icon button in pixels",
+    },
+    isDisabled: {
+      control: "boolean",
+      description: "Whether the button is disabled",
+    },
+    isFill: {
+      control: "boolean",
+      description: "Whether to fill the icon",
+    },
+    isStroke: {
+      control: "boolean",
+      description: "Whether to apply stroke to the icon",
+    },
     iconName: {
       control: {
         type: "select",
@@ -67,9 +105,45 @@ const meta = {
         QuestionReactSvg,
         SettingsReactSvg,
       ],
+      description: "The main icon to display",
+    },
+    iconHoverName: {
+      control: {
+        type: "select",
+      },
+      options: [
+        SearchReactSvgUrl,
+        EyeReactSvgUrl,
+        InfoReactSvgUrl,
+        MailReactSvgUrl,
+        CatalogPinReactSvgUrl,
+        CrossReactSvgUrl,
+        PersonReactSvg,
+        QuestionReactSvg,
+        SettingsReactSvg,
+      ],
+      description: "The icon to display on hover",
+    },
+    iconClickName: {
+      control: {
+        type: "select",
+      },
+      options: [
+        SearchReactSvgUrl,
+        EyeReactSvgUrl,
+        InfoReactSvgUrl,
+        MailReactSvgUrl,
+        CatalogPinReactSvgUrl,
+        CrossReactSvgUrl,
+        PersonReactSvg,
+        QuestionReactSvg,
+        SettingsReactSvg,
+      ],
+      description: "The icon to display when clicked",
     },
   },
 } satisfies Meta<typeof IconButton>;
+
 type Story = StoryObj<typeof IconButton>;
 export default meta;
 
@@ -80,5 +154,79 @@ export const Default: Story = {
     iconName: SearchReactSvgUrl,
     isFill: true,
     isDisabled: false,
+  },
+};
+
+export const WithHoverState: Story = {
+  args: {
+    ...Default.args,
+    iconHoverName: EyeReactSvgUrl,
+    hoverColor: "#333",
+  },
+};
+
+export const WithClickState: Story = {
+  args: {
+    ...Default.args,
+    iconClickName: InfoReactSvgUrl,
+    clickColor: "green",
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    ...Default.args,
+    isDisabled: true,
+  },
+};
+
+export const CustomSize: Story = {
+  args: {
+    ...Default.args,
+    size: 40,
+  },
+};
+
+export const WithStroke: Story = {
+  args: {
+    ...Default.args,
+    isStroke: true,
+    isFill: false,
+  },
+};
+
+export const WithCustomNode: Story = {
+  args: {
+    ...Default.args,
+    // Example of passing a custom React node instead of an SVG icon
+    iconNode: (
+      <div
+        style={{
+          width: 28,
+          height: 28,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          borderRadius: 6,
+          fontSize: 12,
+          fontWeight: 700,
+          color: "#fff",
+          background:
+            "linear-gradient(135deg, rgba(106,17,203,1) 0%, rgba(37,117,252,1) 100%)",
+          boxShadow: "0 1px 2px rgba(0,0,0,0.15)",
+        }}
+        title="Custom node"
+      >
+        IC
+      </div>
+    ),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Demonstrates using the `iconNode` prop to pass any custom React node (e.g., avatar/initials) instead of an SVG icon. In this example, we render a small 'JD' avatar tile.",
+      },
+    },
   },
 };

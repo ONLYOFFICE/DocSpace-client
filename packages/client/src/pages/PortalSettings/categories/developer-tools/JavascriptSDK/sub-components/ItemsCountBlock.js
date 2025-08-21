@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -61,6 +61,7 @@ export const ItemsCountBlock = ({ t, count, setConfig }) => {
           tooltipContent={
             <Text fontSize="12px">{t("ItemsCountDescription")}</Text>
           }
+          dataTestId="items_count_help_button"
         />
       </LabelGroup>
       <TextInput
@@ -69,6 +70,7 @@ export const ItemsCountBlock = ({ t, count, setConfig }) => {
         placeholder={t("EnterCount")}
         value={value}
         tabIndex={6}
+        testId="items_count_input"
       />
     </ControlsGroup>
   );

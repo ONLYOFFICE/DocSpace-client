@@ -1,0 +1,286 @@
+{
+  "key_path": "IncorrectLocalPart",
+  "content": "Incorrect local part",
+  "content_en_sha1_hash": "f295e102907935b47152a237d618a71a6cfb0930",
+  "created_at": "2025-05-19T21:30:45.882Z",
+  "updated_at": "2025-08-11T09:02:43.843Z",
+  "comment": {
+    "text": "This translation key is used to display an error message when a local part of an email address contains incorrect formatting. It appears in dialog boxes where users can change their email addresses. Translators should provide a clear and concise error message that informs users about the issue with their local part.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:52.161Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangeEmailDialog/index.js",
+      "line_number": 144,
+      "context": "case ErrorKeys.PunycodeDomain:\n return t(\"Common:PunycodeDomain\");\n case ErrorKeys.PunycodeLocalPart:\n return t(\"Common:PunycodeLocalPart\");\n case ErrorKeys.IncorrectLocalPart:\n return t(\"Common:IncorrectLocalPart\");\n case ErrorKeys.SpacesInLocalPart:\n return t(\"Common:SpacesInLocalPart\");\n case ErrorKeys.MaxLengthExceeded:\n return t(\"Common:MaxLengthExceeded\");\n case ErrorKeys.IncorrectEmail:",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/SalesDepartmentRequestDialog/index.js",
+      "line_number": 127,
+      "context": "case ErrorKeys.PunycodeDomain:\n return t(\"Common:PunycodeDomain\");\n case ErrorKeys.PunycodeLocalPart:\n return t(\"Common:PunycodeLocalPart\");\n case ErrorKeys.IncorrectLocalPart:\n return t(\"Common:IncorrectLocalPart\");\n case ErrorKeys.SpacesInLocalPart:\n return t(\"Common:SpacesInLocalPart\");\n case ErrorKeys.MaxLengthExceeded:\n return t(\"Common:MaxLengthExceeded\");\n case ErrorKeys.IncorrectEmail:",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/utils/common.ts",
+      "line_number": 183,
+      "context": "case ErrorKeys.PunycodeDomain:\n return t(\"Common:PunycodeDomain\");\n case ErrorKeys.PunycodeLocalPart:\n return t(\"Common:PunycodeLocalPart\");\n case ErrorKeys.IncorrectLocalPart:\n return t(\"Common:IncorrectLocalPart\");\n case ErrorKeys.SpacesInLocalPart:\n return t(\"Common:SpacesInLocalPart\");\n case ErrorKeys.MaxLengthExceeded:\n return t(\"Common:MaxLengthExceeded\");\n default:",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"الجزء المحلي غير صحيح\" is a very literal translation and may sound awkward in Arabic. A more natural phrasing would convey the same meaning with better flow.",
+          "suggestion": "قد يكون \"الجزء المحلي خاطئ\" or \"هناك خطأ في الجزء المحلي\" more natural and idiomatic alternatives."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Yanlış lokal yol\" is not the most accurate or natural translation of \"Incorrect local part\". While \"Yanlış\" correctly translates to \"Incorrect\", \"lokal yol\" is a literal translation of \"local part\" that isn't idiomatic in Azerbaijani. A more accurate and natural translation would be something like \"Yanlış yerel hissə\" or \"Yanlış yerel bölüm\".",
+          "suggestion": "Yanlış yerel hissə"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Pièce locale incorrecte' doesn't fully capture the meaning of 'Incorrect local part'. 'Pièce' translates to 'part' or 'piece' but might be too literal. A more accurate translation might convey the idea of an invalid or improperly formatted local part.",
+          "suggestion": "Partie locale incorrecte"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"不適切な\" (fukatekina) can mean 'inappropriate,' a more direct and technically accurate translation of 'Incorrect' in this context might be something like \"誤った\" (ayamatta) or \"不備な\" (fubina). '不適切な' implies a judgment of inappropriateness, which isn't necessarily the intent.",
+          "suggestion": "Consider using \"誤ったローカルパート\" (ayamatta ro-karu pa-to) or \"不備なローカルパート\" (fubina ro-karu pa-to)"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation '유효하지 않은 로컬 파트입니다' translates more accurately to 'Invalid local part' rather than 'Incorrect local part'. While technically understandable, it's not the most natural or precise rendering of the English phrase.",
+          "suggestion": "Consider '잘못된 로컬 파트입니다' which directly translates to 'Incorrect local part', or '유효하지 않은 로컬 파트입니다' which translates to 'Invalid local part'."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ທ້ອງຖິ່ນບໍ່ຖືກຕ້ອງ\" while literally meaning \"local not correct\", doesn't fully capture the nuance of \"Incorrect local part\". It's a bit too literal and might be confusing to a Lao speaker. A more accurate translation would convey the idea of an invalid or flawed local part.",
+          "suggestion": "Consider using a translation like \"ສ່ວນທ້ອງຖິ່ນບໍ່ຖືກຕ້ອງ\" (suan thongthin bor thukthong) - meaning 'the local part is incorrect' or \"ສ່ວນທ້ອງຖິ່ນບໍ່ຖືກຕ້ອງຕາມກົດ” (suan thongthin bor thukthong tam kod) - meaning 'the local part is incorrect according to the rules'."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Nepareiza lokālā daļa' is a literal translation of 'Incorrect local part', it sounds awkward and unnatural in Latvian. 'Lokālā daļa' isn't commonly used in this context. A more natural translation would be 'Nepareizā adrese' or 'Nepareizais nosaukums' depending on the context of 'local part'.",
+          "suggestion": "Consider 'Nepareizā adrese' or 'Nepareizais nosaukums' depending on the context. Further context is needed for the best translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Niepoprawny identyfikator użytkownika' is understandable, it's a more literal and broader translation than 'Incorrect local part'. 'Local part' specifically refers to the portion of an email address before the '@' symbol. A more accurate translation would focus on that specific meaning.",
+          "suggestion": "Błędna część lokalna"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Некорректное имя почтового ящика' (Incorrect mailbox name) is a functional equivalent, but not a direct translation of 'Incorrect local part'. 'Local part' refers specifically to the part of an email address before the @ symbol. 'Имя почтового ящика' is broader and refers to the entire mailbox name.",
+          "suggestion": "Некорректная часть имени"
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"වැරදි ස්ථානීය තොටකි\" while containing the word for \"incorrect\" (වැරදි), doesn't fully capture the meaning of \"local part.\" \"Local part\" refers to the part of an email address before the @ symbol. The provided translation is overly technical and doesn't convey this common usage.",
+          "suggestion": "A more accurate translation might be \"දේශීය කොටස\" (deshiya kotasa) or \"දේශීය ප‍්‍රදේශය\" (deshiya pradeshiya), depending on the specific context.  \"දේශීය” (deshiya) means local or regional."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Tên miền cục bộ không chính xác\" literally translates to \"Incorrect local domain name.\" While it conveys a similar meaning, the original phrase \"Incorrect local part\" implies a section *within* something, not the domain name itself. A more accurate translation would reflect this nuance.",
+          "suggestion": "Phần cục bộ không chính xác"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,12 +27,7 @@
 import React, { memo, useEffect, useRef, useState } from "react";
 import { isMobileOnly } from "react-device-detect";
 
-import {
-  DropDown,
-  DropDownItem,
-  SpeedControlWrapper,
-  ToastSpeed,
-} from "./PlayerSpeedControl.styled";
+import styles from "./PlayerSpeedControl.module.scss";
 
 import { PlayerSpeedControlProps } from "./PlayerSpeedControl.props";
 
@@ -48,8 +43,7 @@ import {
 const PlayerSpeedControl = memo(
   ({ handleSpeedChange, onMouseLeave, src }: PlayerSpeedControlProps) => {
     const ref = useRef<HTMLDivElement>(null);
-
-    const timerRef = useRef<NodeJS.Timeout>();
+    const timerRef = useRef<NodeJS.Timeout>(undefined);
 
     const [currentIndexSpeed, setCurrentIndexSpeed] =
       useState<number>(DefaultIndexSpeed);
@@ -66,7 +60,6 @@ const PlayerSpeedControl = memo(
         if (!ref.current || ref.current.contains(event.target as Node)) {
           return;
         }
-
         setIsOpenSpeedContextMenu(false);
       };
       document.addEventListener("mousedown", listener);
@@ -79,16 +72,11 @@ const PlayerSpeedControl = memo(
     const toggle = () => {
       if (isMobileOnly) {
         const nextIndexSpeed = getNextIndexSpeed(currentIndexSpeed);
-
         setCurrentIndexSpeed(nextIndexSpeed);
-
         const newSpeed = speedRecord[speeds[nextIndexSpeed]];
-
         handleSpeedChange(newSpeed);
-
         setSpeedToastVisible(true);
         clearTimeout(timerRef.current);
-
         timerRef.current = setTimeout(() => {
           setSpeedToastVisible(false);
         }, MillisecondShowSpeedToast);
@@ -99,17 +87,32 @@ const PlayerSpeedControl = memo(
 
     return (
       <>
-        {speedToastVisible && (
-          <ToastSpeed>{speedIcons[currentIndexSpeed]}</ToastSpeed>
-        )}
-        <SpeedControlWrapper ref={ref} onClick={toggle}>
+        {speedToastVisible ? (
+          <div className={styles.toast}>{speedIcons[currentIndexSpeed]}</div>
+        ) : null}
+        <div
+          className={styles.wrapper}
+          ref={ref}
+          onClick={toggle}
+          data-testid="speed-control"
+          aria-expanded={isOpenSpeedContextMenu}
+          aria-haspopup="listbox"
+        >
           {speedIcons[currentIndexSpeed]}
 
-          {isOpenSpeedContextMenu && (
-            <DropDown onMouseLeave={onMouseLeave}>
+          {isOpenSpeedContextMenu ? (
+            <div
+              className={styles.dropdown}
+              onMouseLeave={onMouseLeave}
+              data-testid="speed-menu"
+              aria-label="Select playback speed"
+            >
               {speeds.map((speed, index) => (
-                <DropDownItem
+                <div
                   key={speed}
+                  className={styles.dropdownItem}
+                  data-testid={`speed-option-${speed}`}
+                  aria-selected={index === currentIndexSpeed}
                   onClick={() => {
                     setCurrentIndexSpeed(index);
                     handleSpeedChange(speedRecord[speed]);
@@ -117,11 +120,11 @@ const PlayerSpeedControl = memo(
                   }}
                 >
                   {speed}
-                </DropDownItem>
+                </div>
               ))}
-            </DropDown>
-          )}
-        </SpeedControlWrapper>
+            </div>
+          ) : null}
+        </div>
       </>
     );
   },

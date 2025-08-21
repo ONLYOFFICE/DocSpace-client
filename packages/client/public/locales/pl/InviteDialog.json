@@ -1,18 +1,22 @@
 {
   "AddManually": "Dodaj ręcznie",
   "EmailErrorMessage": "Niepoprawny adres e-mail. Możesz poprawić adres e-mail klikając go dwukrotnie.",
+  "EmailErrorMessageUserNotFound": "Użytkownik nie znaleziony. Możesz edytować e-mail, klikając go dwukrotnie.",
   "GroupMaxAvailableRoleWarning": "Grupy mogą zostać dodane do pokoju z maksymalną rolą {{roleName}}. Możesz jednak zmienić role poszczególnych użytkowników w grupie po jej pomyślnym dodaniu.",
   "InvitationLanguage": "Język zaproszenia",
   "InviteMembersManuallyDescription": "Osobiście zaproś nowych członków do {{productName}} za pośrednictwem poczty e-mail.",
   "InviteMembersSearchPlaceholder": "Zaproś przez e-mail",
-  "InviteToRoomManuallyInfo": "Dodaj istniejące kontakty {{productName}}. Osobiście zaproś nowych gości za pośrednictwem poczty e-mail. Nowi goście zostaną dodani do Twojej listy gości.",
+  "InviteToRoomAddPlaceholder": "Dodawaj osoby po imieniu lub adresie e-mail.",
+  "InviteToRoomManuallyInfoGuest": "Dodaj istniejące kontakty {{productName}}. Lub zapros nowych użytkowników osobiście drogą e-mail. Nowi użytkownicy zostaną dodani do Twojej listy Gości.",
+  "InviteToRoomManuallyInfoMembers": "Dodaj istniejących członków {{productName}} do pokoju.",
   "InviteToRoomSearchPlaceholder": "Wyszukaj i zaproś według nazwy użytkownika lub adresu e-mail",
   "InviteViaLink": "Zaproś poprzez link",
   "InviteViaLinkDescriptionAccounts": "Utwórz uniwersalny link do samodzielnej autoryzacji w {{productName}}",
-  "InviteViaLinkDescriptionRoom": "Stwórz uniwersalny link do samodzielnej autoryzacji w pokoju",
+  "InviteViaLinkDescriptionRoomGuest": "Utwórz uniwersalny link do autoryzacji własnej w pokoju jako gość.",
+  "InviteViaLinkDescriptionRoomMembers": "Utwórz uniwersalny link dla członków {{productName}} w celu samodzielnego uwierzytelnienia w pokoju.",
   "LinkCopySuccess": "Link został skopiowany",
-  "ResetChange": "Zresetuj zmianę",
   "SendInvitation": "Wyślij zaproszenie",
   "UserMaxAvailableRoleWarning": "Nie można przypisać roli menedżera pokoju gościom ani użytkownikom. Tylko administratorzy pokoi i  {{productName}} mogą przyjąć daną rolę.",
-  "UsersAlreadyAdded": "Niektórzy użytkownicy zostali już dodani"
+  "UsersAlreadyAdded": "Niektórzy użytkownicy zostali już dodani",
+  "UsersCannotBeAdded": "Wyłączone kontakty nie mogą być dodane do pokoju"
 }

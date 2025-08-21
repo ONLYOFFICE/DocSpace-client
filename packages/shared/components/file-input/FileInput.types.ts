@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,7 @@ import React from "react";
 
 import { InputSize } from "../text-input";
 
-export interface FileInputProps {
+export type FileInputProps = {
   /** Accepts css style */
   style?: React.CSSProperties;
   /** Placeholder text for the input */
@@ -52,7 +52,7 @@ export interface FileInputProps {
   /** Used as HTML `name` property */
   name?: string;
   /** Called when a file is selected */
-  onInput: (file: File | File[]) => void;
+  onInput?: (file: File | File[]) => void;
   /** Specifies the files visible for upload */
   accept?: string[];
   /** Specifies the label for the upload button */
@@ -65,4 +65,10 @@ export interface FileInputProps {
   fromStorage?: boolean;
   /** Indicates that the input may contain multiple files. */
   isMultiple?: boolean;
-}
+  /** ARIA label for the file input button */
+  "aria-label"?: string;
+  /** ARIA description for the file input */
+  "aria-description"?: string;
+  /** Data attributes for testing */
+  "data-test-id"?: string;
+};

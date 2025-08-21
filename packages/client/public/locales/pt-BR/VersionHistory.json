@@ -1,4 +1,6 @@
 {
+  "DeleteVersion": "Excluir versão",
+  "DeleteVersionDescription": "Você está prestes a excluir uma versão do arquivo. Não será mais possível vê-lo ou restaurá-lo. Tem certeza de que deseja continuar?",
   "EditComment": "Editar comentário",
   "Version": "Ver."
 }

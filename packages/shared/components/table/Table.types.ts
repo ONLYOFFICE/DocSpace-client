@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,15 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
 import { IndexRange } from "react-virtualized";
 
 import { ContextMenuModel } from "../context-menu";
-import { TTheme } from "../../themes";
 
 export interface TableContainerProps {
-  forwardedRef: React.ForwardedRef<HTMLDivElement>;
+  forwardedRef: React.Ref<HTMLDivElement>;
+  noSelect?: boolean;
   useReactWindow: boolean;
   children?: React.ReactNode;
+  className?: string;
 }
 
 export type TTableColumn = {
@@ -64,7 +66,6 @@ export interface TableHeaderProps {
   sortBy?: string;
   sorted?: boolean;
   columnStorageName: string;
-  tableStorageName: string;
   sectionWidth: number;
   onClick?: () => void;
   resetColumnsSize?: boolean;
@@ -79,7 +80,9 @@ export interface TableHeaderProps {
   tagRef?:
     | React.ForwardedRef<HTMLDivElement>
     | ((node: HTMLDivElement) => void);
-  theme: TTheme;
+  isIndexEditingMode?: boolean;
+  withoutWideColumn?: boolean;
+  style?: React.CSSProperties;
 }
 
 export interface TableHeaderCellProps {
@@ -94,11 +97,12 @@ export interface TableHeaderCellProps {
   tagRef?:
     | React.ForwardedRef<HTMLDivElement>
     | ((node: HTMLDivElement) => void);
+  testId?: string;
 }
 
 export interface TableSettingsProps {
   columns: TTableColumn[];
-  disableSettings: boolean;
+  disableSettings?: boolean;
 }
 
 export interface TableBodyProps {
@@ -113,7 +117,7 @@ export interface TableBodyProps {
   useReactWindow: boolean;
   onScroll?: () => void;
   infoPanelVisible?: boolean;
-  isIndexEditingMode: boolean;
+  isIndexEditingMode?: boolean;
 }
 
 export interface TableRowProps {
@@ -121,23 +125,35 @@ export interface TableRowProps {
   children: React.ReactNode;
   contextOptions?: ContextMenuModel[];
   onHideContextMenu?: () => void;
-  selectionProp?: { className: string };
+  selectionProp?: { className?: string; value?: string };
   className?: string;
   style?: React.CSSProperties;
+  contextMenuCellStyle?: React.CSSProperties;
   title?: string;
-  getContextModel: () => ContextMenuModel[];
-  badgeUrl: string;
-  isIndexEditingMode: boolean;
+  getContextModel?: () => ContextMenuModel[];
+  badgeUrl?: string;
+  isIndexEditingMode?: boolean;
   onClick?: (e: React.MouseEvent) => void;
+  onDoubleClick?: (e: React.MouseEvent) => void;
+  forwardedRef?: React.ForwardedRef<HTMLDivElement>;
+  hideColumns?: boolean;
+  isActive?: boolean;
+  checked?: boolean;
+  dragging?: boolean;
+  dataTestId?: string;
+  contextMenuTestId?: string;
 }
 
 export interface TableCellProps {
-  className: string;
+  className?: string;
   hasAccess?: boolean;
   checked?: boolean;
   forwardedRef?: React.ForwardedRef<HTMLDivElement>;
   style?: React.CSSProperties;
   children?: React.ReactNode;
+  value?: string;
+  dataTestId?: string;
+  documentTitle?: string;
 }
 
 export type TGroupMenuItem = {
@@ -146,30 +162,30 @@ export type TGroupMenuItem = {
   onClick: (e: React.MouseEvent) => void;
   iconUrl: string;
   title: string;
-  withDropDown: boolean;
-  options: ContextMenuModel[];
+  withDropDown?: boolean;
+  options?: ContextMenuModel[];
   id: string;
 };
 
-interface TableGroupmenuBased {
+interface TableGroupMenuBased {
   isChecked: boolean;
   isIndeterminate: boolean;
   headerMenu: TGroupMenuItem[];
-  checkboxOptions: React.ReactNode[];
-  onClick: () => void;
+  checkboxOptions?: React.ReactElement<{ children?: React.ReactNode }>;
+  onClick?: () => void;
   onChange: (isChecked: boolean) => void;
-  checkboxMargin: string;
+  checkboxMargin?: string;
   withoutInfoPanelToggler: boolean;
   isInfoPanelVisible?: boolean;
   isMobileView?: boolean;
   isBlocked?: boolean;
-  toggleInfoPanel: () => void;
+  toggleInfoPanel?: () => void;
   withComboBox?: boolean;
   headerLabel?: string;
 }
 export type TableGroupMenuProps =
-  | (TableGroupmenuBased & {
+  | (TableGroupMenuBased & {
       isCloseable?: undefined;
       onCloseClick?: undefined;
     })
-  | (TableGroupmenuBased & { isCloseable: boolean; onCloseClick: () => void });
+  | (TableGroupMenuBased & { isCloseable: boolean; onCloseClick: () => void });

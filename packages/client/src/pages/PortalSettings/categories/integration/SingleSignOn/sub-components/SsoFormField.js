@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -42,6 +42,7 @@ const SsoFormField = ({
   value,
   hasError,
   tooltipClass,
+  dataTestId,
 }) => {
   const { t } = useTranslation("Common");
 
@@ -57,6 +58,7 @@ const SsoFormField = ({
       tooltipClass={tooltipClass}
       labelVisible={!!labelText}
       isRequired
+      dataTestId={dataTestId}
     >
       {children}
       <SsoTextInput
@@ -65,6 +67,7 @@ const SsoFormField = ({
         placeholder={placeholder}
         tabIndex={tabIndex}
         value={value}
+        dataTestId={dataTestId ? `${dataTestId}_input` : undefined}
       />
     </FieldContainer>
   );

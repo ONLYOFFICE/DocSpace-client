@@ -1,0 +1,242 @@
+{
+  "key_path": "ErrorAccountAlreadyUse",
+  "content": "Linked account already in use by another user",
+  "content_en_sha1_hash": "4e4c39c9fbea715e2732c4ecb8ffabab1dba1fed",
+  "created_at": "2025-05-19T21:30:53.356Z",
+  "updated_at": "2025-08-11T18:11:59.301Z",
+  "comment": {
+    "text": "This translation key is used to display an error message when a user tries to link an account that is already in use by another user. It appears in the client-side UI, likely on a social networking page or profile section.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:53.640Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/login/social-networks/index.tsx",
+      "line_number": 115,
+      "context": "});\n })\n .catch((error) => {\n const message = error?.response?.data?.error?.message;\n const data =\n message === \"ErrorAccountAlreadyUse\"\n ? t(\"ErrorAccountAlreadyUse\")\n : message;\n toastr.error(data);\n });\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is technically correct but sounds unnatural in German. 'Verknüpftes Konto, das bereits von einem anderen Benutzer verwendet wird' is a bit clunky. A more natural phrasing would emphasize the 'already linked' aspect.",
+          "suggestion": "Verknüpftes Konto ist bereits in Verwendung durch einen anderen Benutzer."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"他のユーザーが使用中のリンクアカウント\" is a literal translation but doesn't convey the meaning of \"Linked account already in use by another user\" naturally in Japanese. It's a bit clunky and doesn't sound idiomatic.",
+          "suggestion": "アカウントは別のユーザーがすでに紐づけています"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The use of \"リンクアカウント\" (rinku akkaunto) might be a bit too technical for the context. It's not necessarily incorrect, but a more general term might be better.",
+          "suggestion": "アカウント"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '연결된 계정은 다른 사용자가 이미 사용 중인 계정입니다' is a bit too literal and slightly awkward in Korean. It repeats '계정' (account).",
+          "suggestion": "연결된 계정은 이미 다른 사용자가 사용 중입니다"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Повезани налог већ користи други корисник\" while understandable, isn't the most natural or precise translation of \"Linked account already in use by another user\". A more accurate rendering would emphasize the account *being* used, not just that it is being used.",
+          "suggestion": "Повезани рачун је већ у употреби од стране другог корисника"
+        },
+        {
+          "type": "spelling",
+          "description": "While \"налог\" and \"рачун\" are both valid words for 'account', 'рачун' is generally preferred in this context.",
+          "suggestion": "Consider using 'рачун' instead of 'налог' for increased clarity and naturalness."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

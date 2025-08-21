@@ -1,0 +1,24 @@
+@use "../../styles/variables/colors";
+
+.outer {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  -webkit-tap-highlight-color: #{colors.$tap-highlight};
+
+  &.displayIconBorder {
+    border: var(--context-menu-button-border);
+    width: 32px;
+    height: 32px;
+    box-sizing: border-box;
+    border-radius: 3px;
+
+    svg {
+      padding: 6px 7px;
+    }
+
+    &:hover {
+      border-color: var(--context-menu-button-hover-border);
+    }
+  }
+}

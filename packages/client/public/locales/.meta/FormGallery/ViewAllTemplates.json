@@ -1,0 +1,250 @@
+{
+  "key_path": "ViewAllTemplates",
+  "content": "View all templates",
+  "content_en_sha1_hash": "3a859c9aaad47200c7553fa022222df53e96715a",
+  "created_at": "2025-05-19T21:30:55.125Z",
+  "updated_at": "2025-08-11T18:11:59.174Z",
+  "comment": {
+    "text": "The \"ViewAllTemplates\" translation key is used to display a label that shows all templates. It appears as a dropdown item in a category filter on desktop views and mobile view of the same page, allowing users to select all available templates.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:22.615Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/FormGallery/Filter/CategoryFilter/DesktopView/index.js",
+      "line_number": 99,
+      "context": "advancedOptions={\n <>\n <Styled.CategoryFilterItem\n id=\"ViewAllTemplates\"\n key=\"ViewAllTemplates\"\n title={t(\"FormGallery:ViewAllTemplates\")}\n className=\"dropdown-item\"\n label={t(\"FormGallery:ViewAllTemplates\")}\n onClick={onViewAllTemplates}\n onMouseEnter={() => setHoveredSub(null)}\n />",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/FormGallery/Filter/CategoryFilter/DesktopView/index.js",
+      "line_number": 99,
+      "context": "advancedOptions={\n <>\n <Styled.CategoryFilterItem\n id=\"ViewAllTemplates\"\n key=\"ViewAllTemplates\"\n title={t(\"FormGallery:ViewAllTemplates\")}\n className=\"dropdown-item\"\n label={t(\"FormGallery:ViewAllTemplates\")}\n onClick={onViewAllTemplates}\n onMouseEnter={() => setHoveredSub(null)}\n />",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/FormGallery/Filter/CategoryFilter/MobileView/index.js",
+      "line_number": 146,
+      "context": "{!openedMenuItem\n ? [\n <Styled.CategoryFilterItemMobile\n key=\"view-all\"\n className=\"dropdown-item\"\n label={t(\"FormGallery:ViewAllTemplates\")}\n onClick={onViewAllTemplates}\n style={{ paddingLeft: \"0\" }}\n />,\n <DropDownItem\n isSeparator",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"إظهار كافة القوالب\" is understandable, a more natural and common translation for \"View all templates\" would be \"عرض جميع القوالب\" or \"رؤية جميع القوالب\". \"إظهار\" (ʾiẓhār) implies 'displaying' something that wasn't previously visible, whereas 'عرض' (ʿarḍ) or 'رؤية' (ruʾya) are more general for showing or viewing.",
+          "suggestion": "عرض جميع القوالب"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'templates' is translated as 'formulaires'. While 'formulaires' can mean forms, 'templates' implies a pre-designed structure or framework, which is not perfectly conveyed by 'formulaires'. A more accurate translation might be 'modèles' or 'patrons'.",
+          "suggestion": "Consider using 'modèles' or 'patrons' instead of 'formulaires'."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Visualizzare' can mean 'View', in this context, 'Vedere' would be a more natural and common translation for 'View'. 'Visualizzare' often implies a more complex process like visualizing data or a complex image.",
+          "suggestion": "Vedere tutti i modelli"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"සියලුම අච්චු පෙන්වන්න\" is a literal translation of 'all molds show'. While understandable, it's not the most natural or idiomatic way to say 'View all templates' in Sinhala. \"Templates\" often refers to pre-designed layouts or formats.",
+          "suggestion": "Possible better translations include: \"සියලුම සාම්පල බලන්න\" (Siyaalluma saampala balanna - View all samples), \"සියලුම නිර්මාණ බලන්න\" (Siyaalluma nirmaana balaanna - View all designs) or \"සියලුම ආකර බලන්න\" (Siyaalluma aakara balaanna - View all formats)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"查看模板大全\" is understandable, a more natural and direct translation of 'View all templates' would be '查看所有模板'. '模板大全' implies a comprehensive collection, which isn't necessarily the meaning of 'all templates'.",
+          "suggestion": "查看所有模板"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

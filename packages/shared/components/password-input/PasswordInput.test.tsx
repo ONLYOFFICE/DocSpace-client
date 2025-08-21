@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,38 +24,54 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+/* eslint-disable class-methods-use-this */
+
 import React from "react";
 import { screen, render } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 
 import { InputSize, InputType } from "../text-input";
-import { PasswordInput } from "./PasswordInput";
+import { PasswordInput } from ".";
 
-// const basePasswordSettings = {
-//   minLength: 6,
-//   upperCase: false,
-//   digits: false,
-//   specSymbols: false,
-// };
+// Mock ResizeObserver
+class ResizeObserverMock {
+  observe() {}
 
-// const baseProps = {
-//   inputName: "demoPasswordInput",
-//   emailInputName: "demoEmailInput",
-//   inputValue: "",
-//   tooltipPasswordTitle: "Password must contain:",
-//   tooltipPasswordLength: "from 6 to 30 characters",
-//   tooltipPasswordDigits: "digits",
-//   tooltipPasswordCapital: "capital letters",
-//   tooltipPasswordSpecial: "special characters (!@#$%^&*)",
-//   generatorSpecial: "!@#$%^&*",
-//   passwordSettings: basePasswordSettings,
-//   isDisabled: false,
-//   placeholder: "password",
+  unobserve() {}
 
-//   onChange: jest.fn(),
+  disconnect() {}
+}
 
-//   onValidateInput: jest.fn(),
-// };
+global.ResizeObserver = ResizeObserverMock;
+
+const basePasswordSettings = {
+  minLength: 6,
+  upperCase: false,
+  digits: false,
+  specSymbols: false,
+  digitsRegexStr: "(?=.*\\d)",
+  upperCaseRegexStr: "(?=.*[A-Z])",
+  specSymbolsRegexStr: "(?=.*[\\x21-\\x2F\\x3A-\\x40\\x5B-\\x60\\x7B-\\x7E])",
+};
+
+const baseProps = {
+  inputName: "demoPasswordInput",
+  emailInputName: "demoEmailInput",
+  inputValue: "",
+  size: InputSize.base,
+  tooltipPasswordTitle: "Password must contain:",
+  tooltipPasswordLength: "from 6 to 30 characters",
+  tooltipPasswordDigits: "digits",
+  tooltipPasswordCapital: "capital letters",
+  tooltipPasswordSpecial: "special characters (!@#$%^&*)",
+  generatorSpecial: "!@#$%^&*",
+  passwordSettings: basePasswordSettings,
+  isDisabled: false,
+  placeholder: "password",
+  onChange: jest.fn(),
+  onValidateInput: jest.fn(),
+};
 
 describe("<PasswordInput />", () => {
   it("renders without error", () => {
@@ -66,284 +82,344 @@ describe("<PasswordInput />", () => {
     expect(screen.getByTestId("password-input")).toBeInTheDocument();
   });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("render password input", () => {
-  //   const wrapper = mount(<PasswordInput {...baseProps} />);
+  it("renders with correct input type and name", () => {
+    render(<PasswordInput {...baseProps} />);
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.find("input").prop("type")).toEqual("password");
-  // });
+    const input = screen.getByTestId("password-input").querySelector("input");
+    expect(input).toHaveAttribute("type", "password");
+    expect(input).toHaveAttribute("name", "demoPasswordInput");
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("have an HTML name", () => {
-  //   const wrapper = mount(<PasswordInput {...baseProps} />);
+  it("handles input value changes", async () => {
+    const onChange = jest.fn();
+    const user = userEvent.setup();
+    render(<PasswordInput {...baseProps} onChange={onChange} />);
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.find("input").prop("name")).toEqual("demoPasswordInput");
-  // });
+    const input = screen.getByTestId("password-input").querySelector("input");
+    await user.type(input!, "testpassword");
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("forward passed value", () => {
-  //   // @ts-expect-error TS(2322): Type '{ inputValue: string; inputName: string; ema... Remove this comment to see the full error message
-  //   const wrapper = mount(<PasswordInput {...baseProps} inputValue="demo" />);
+    expect(onChange).toHaveBeenCalled();
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.props().inputValue).toEqual("demo");
-  // });
+  it("toggles password visibility", async () => {
+    const user = userEvent.setup();
+    render(<PasswordInput {...baseProps} />);
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("call onChange when changing value", () => {
-  //   // @ts-expect-error TS(2708): Cannot use namespace 'jest' as a value.
-  //   const onChange = jest.fn((event: any) => {
-  //     // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //     expect(event.target.id).toEqual("demoPasswordInput");
-  //     // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //     expect(event.target.name).toEqual("demoPasswordInput");
-  //     // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //     expect(event.target.value).toEqual("demo");
-  //   });
+    const input = screen.getByTestId("password-input").querySelector("input");
+    const toggleButton = screen.getByTestId("icon-button");
 
-  //   const wrapper = mount(
-  //     <PasswordInput
-  //       {...baseProps}
-  //       // @ts-expect-error TS(2322): Type '{ id: string; name: string; onChange: any; i... Remove this comment to see the full error message
-  //       id="demoPasswordInput"
-  //       name="demoPasswordInput"
-  //       onChange={onChange}
-  //     />,
-  //   );
+    expect(input).toHaveAttribute("type", "password");
 
-  //   const event = { target: { value: "demo" } };
+    await user.click(toggleButton);
+    expect(input).toHaveAttribute("type", "text");
 
-  //   wrapper.simulate("change", event);
-  // });
+    await user.click(toggleButton);
+    expect(input).toHaveAttribute("type", "password");
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("call onFocus when input is focused", () => {
-  //   // @ts-expect-error TS(2708): Cannot use namespace 'jest' as a value.
-  //   const onFocus = jest.fn((event: any) => {
-  //     // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //     expect(event.target.id).toEqual("demoPasswordInput");
-  //     // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //     expect(event.target.name).toEqual("demoPasswordInput");
-  //   });
+  it("shows tooltip with password requirements on focus", async () => {
+    const user = userEvent.setup();
+    render(
+      <PasswordInput
+        {...baseProps}
+        passwordSettings={{
+          ...basePasswordSettings,
+          minLength: 8,
+          upperCase: true,
+          digits: true,
+          specSymbols: true,
+        }}
+      />,
+    );
 
-  //   const wrapper = mount(
-  //     <PasswordInput
-  //       {...baseProps}
-  //       // @ts-expect-error TS(2322): Type '{ id: string; name: string; onFocus: any; in... Remove this comment to see the full error message
-  //       id="demoPasswordInput"
-  //       name="demoPasswordInput"
-  //       onFocus={onFocus}
-  //     />,
-  //   );
+    const input = screen.getByTestId("password-input").querySelector("input");
+    await user.click(input!);
 
-  //   wrapper.simulate("focus");
-  // });
+    expect(screen.getByText("Password must contain:")).toBeInTheDocument();
+    expect(screen.getByText("from 6 to 30 characters")).toBeInTheDocument();
+    expect(screen.getByText("digits")).toBeInTheDocument();
+    expect(screen.getByText("capital letters")).toBeInTheDocument();
+    expect(
+      screen.getByText("special characters (!@#$%^&*)"),
+    ).toBeInTheDocument();
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("call onBlur when input loses focus", () => {
-  //   // @ts-expect-error TS(2708): Cannot use namespace 'jest' as a value.
-  //   const onBlur = jest.fn((event: any) => {
-  //     // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //     expect(event.target.id).toEqual("demoPasswordInput");
-  //     // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //     expect(event.target.name).toEqual("demoPasswordInput");
-  //   });
+  it("handles disabled state correctly", () => {
+    render(<PasswordInput {...baseProps} isDisabled />);
 
-  //   const wrapper = mount(
-  //     <PasswordInput
-  //       {...baseProps}
-  //       // @ts-expect-error TS(2322): Type '{ id: string; name: string; onBlur: any; inp... Remove this comment to see the full error message
-  //       id="demoPasswordInput"
-  //       name="demoPasswordInput"
-  //       onBlur={onBlur}
-  //     />,
-  //   );
+    const input = screen.getByTestId("password-input").querySelector("input");
+    expect(input).toBeDisabled();
+  });
 
-  //   wrapper.simulate("blur");
-  // });
+  it("validates password requirements", async () => {
+    const onValidateInput = jest.fn();
+    const user = userEvent.setup();
+    render(
+      <PasswordInput
+        {...baseProps}
+        passwordSettings={{
+          ...basePasswordSettings,
+          minLength: 8,
+          upperCase: true,
+          digits: true,
+          specSymbols: true,
+        }}
+        onValidateInput={onValidateInput}
+      />,
+    );
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("disabled when isDisabled is passed", () => {
-  //   // @ts-expect-error TS(2322): Type '{ isDisabled: boolean; inputName: string; em... Remove this comment to see the full error message
-  //   const wrapper = mount(<PasswordInput {...baseProps} isDisabled={true} />);
+    const input = screen.getByTestId("password-input").querySelector("input");
+    await user.type(input!, "Test123!@#");
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("isDisabled")).toEqual(true);
-  // });
+    expect(onValidateInput).toHaveBeenCalled();
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("not re-render test", () => {
-  //   const wrapper = shallow(<PasswordInput {...baseProps} />).instance();
+  it("handles blur event correctly", async () => {
+    const onBlur = jest.fn();
+    const user = userEvent.setup();
+    render(<PasswordInput {...baseProps} onBlur={onBlur} />);
 
-  //   const shouldUpdate = wrapper.shouldComponentUpdate(
-  //     wrapper.props,
-  //     wrapper.state,
-  //   );
+    const input = screen.getByTestId("password-input").querySelector("input");
+    await user.click(input!);
+    await user.tab();
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(shouldUpdate).toBe(false);
-  // });
+    expect(onBlur).toHaveBeenCalled();
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("re-render test", () => {
-  //   const wrapper = shallow(<PasswordInput {...baseProps} />).instance();
+  it("simulates password typing when isSimulateType is true", async () => {
+    const user = userEvent.setup();
+    render(<PasswordInput {...baseProps} isSimulateType simulateSymbol="*" />);
 
-  //   const shouldUpdate = wrapper.shouldComponentUpdate(
-  //     {
-  //       inputName: "demoPasswordInput",
-  //       emailInputName: "demoEmailInput",
-  //       inputValue: "",
-  //       tooltipPasswordTitle: "Password must contain:",
-  //       tooltipPasswordLength: "from 6 to 30 characters",
-  //       tooltipPasswordDigits: "digits",
-  //       tooltipPasswordCapital: "capital letters",
-  //       tooltipPasswordSpecial: "special characters (!@#$%^&*)",
-  //       generatorSpecial: "!@#$%^&*",
-  //       passwordSettings: {
-  //         minLength: 8,
-  //         upperCase: false,
-  //         digits: false,
-  //         specSymbols: false,
-  //       },
-  //       isDisabled: false,
-  //       placeholder: "password",
-  //       // @ts-expect-error TS(2708): Cannot use namespace 'jest' as a value.
-  //       onChange: () => jest.fn(),
-  //       // @ts-expect-error TS(2708): Cannot use namespace 'jest' as a value.
-  //       onValidateInput: () => jest.fn(),
-  //     },
-  //     wrapper.state,
-  //   );
+    const input = screen.getByTestId("password-input").querySelector("input");
+    await user.type(input!, "test");
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(shouldUpdate).toBe(true);
-  // });
+    expect(input).toHaveValue("****");
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("generate password with props: 10 , false , false , false", () => {
-  //   const newPasswordSettings = {
-  //     minLength: 10,
-  //     upperCase: false,
-  //     digits: false,
-  //     specSymbols: false,
-  //   };
+  it("applies custom style and className", () => {
+    const customStyle = { width: "300px" };
+    const customClass = "custom-password-input";
 
-  //   const wrapper = shallow(
-  //     // @ts-expect-error TS(2322): Type '{ passwordSettings: { minLength: number; upp... Remove this comment to see the full error message
-  //     <PasswordInput {...baseProps} passwordSettings={newPasswordSettings} />,
-  //   );
-  //   const instance = wrapper.instance();
+    render(
+      <PasswordInput
+        {...baseProps}
+        style={customStyle}
+        className={customClass}
+      />,
+    );
 
-  //   instance.onGeneratePassword();
+    const wrapper = screen.getByTestId("password-input");
+    expect(wrapper).toHaveClass(customClass);
+    expect(wrapper).toHaveStyle(customStyle);
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.state("type")).toBe("text");
-  // });
+  // Additional test coverage
+  it("handles keyDown events", async () => {
+    const onKeyDown = jest.fn();
+    const user = userEvent.setup();
+    render(<PasswordInput {...baseProps} onKeyDown={onKeyDown} />);
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("generate password with props: 10 , true , false , false", () => {
-  //   const newPasswordSettings = {
-  //     minLength: 10,
-  //     upperCase: true,
-  //     digits: false,
-  //     specSymbols: false,
-  //   };
+    const input = screen.getByTestId("password-input").querySelector("input");
+    await user.type(input!, "{enter}");
 
-  //   const wrapper = shallow(
-  //     // @ts-expect-error TS(2322): Type '{ passwordSettings: { minLength: number; upp... Remove this comment to see the full error message
-  //     <PasswordInput {...baseProps} passwordSettings={newPasswordSettings} />,
-  //   );
-  //   const instance = wrapper.instance();
+    expect(onKeyDown).toHaveBeenCalled();
+  });
 
-  //   instance.onGeneratePassword();
+  it("displays error state correctly", () => {
+    render(<PasswordInput {...baseProps} hasError />);
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.state("type")).toBe("text");
-  // });
+    const input = screen.getByTestId("password-input");
+    expect(input).toHaveAttribute("data-error", "true");
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("generate password with props: 10 , true , true , false", () => {
-  //   const newPasswordSettings = {
-  //     minLength: 10,
-  //     upperCase: true,
-  //     digits: true,
-  //     specSymbols: false,
-  //   };
+  it("displays warning state correctly", () => {
+    render(<PasswordInput {...baseProps} hasWarning />);
 
-  //   const wrapper = shallow(
-  //     // @ts-expect-error TS(2322): Type '{ passwordSettings: { minLength: number; upp... Remove this comment to see the full error message
-  //     <PasswordInput {...baseProps} passwordSettings={newPasswordSettings} />,
-  //   );
-  //   const instance = wrapper.instance();
+    const input = screen.getByTestId("password-input");
+    expect(input).toHaveAttribute("data-warning", "true");
+  });
 
-  //   instance.onGeneratePassword();
+  it("handles auto-focus", () => {
+    render(<PasswordInput {...baseProps} isAutoFocussed />);
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.state("type")).toBe("text");
-  // });
+    const input = screen.getByTestId("password-input").querySelector("input");
+    expect(input).toHaveFocus();
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("generate password with props: 10 , true , true , true", () => {
-  //   const newPasswordSettings = {
-  //     minLength: 10,
-  //     upperCase: true,
-  //     digits: true,
-  //     specSymbols: true,
-  //   };
+  it("renders in simple view mode", () => {
+    render(<PasswordInput {...baseProps} simpleView />);
 
-  //   const wrapper = shallow(
-  //     // @ts-expect-error TS(2322): Type '{ passwordSettings: { minLength: number; upp... Remove this comment to see the full error message
-  //     <PasswordInput {...baseProps} passwordSettings={newPasswordSettings} />,
-  //   );
-  //   const instance = wrapper.instance();
+    // In simple view, certain elements should not be present
+    expect(screen.queryByTestId("password-progress")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("copy-button")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("generate-password")).not.toBeInTheDocument();
+  });
 
-  //   instance.onGeneratePassword();
+  it("applies full width when isFullWidth is true", () => {
+    render(<PasswordInput {...baseProps} isFullWidth />);
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.state("type")).toBe("text");
-  // });
+    const wrapper = screen.getByTestId("password-input");
+    expect(wrapper).toHaveStyle({ display: "block" });
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts style", () => {
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2322): Type '{ style: { color: string; }; inputName: stri... Remove this comment to see the full error message
-  //     <PasswordInput {...baseProps} style={{ color: "red" }} />,
-  //   );
+  it("handles different input sizes", () => {
+    render(<PasswordInput {...baseProps} size={InputSize.large} />);
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.getDOMNode().style).toHaveProperty("color", "red");
-  // });
+    const input = screen.getByTestId("password-input").querySelector("input");
+    expect(input).toHaveAttribute("data-size", "large");
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts className", () => {
-  //   // @ts-expect-error TS(2322): Type '{ className: string; inputName: string; emai... Remove this comment to see the full error message
-  //   const wrapper = mount(<PasswordInput {...baseProps} className="test" />);
+  it("disables tooltip when isDisableTooltip is true", async () => {
+    const user = userEvent.setup();
+    render(
+      <PasswordInput
+        {...baseProps}
+        isDisableTooltip
+        passwordSettings={{
+          ...basePasswordSettings,
+          minLength: 8,
+          upperCase: true,
+          digits: true,
+          specSymbols: true,
+        }}
+      />,
+    );
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("className")).toEqual("test");
-  // });
+    const input = screen.getByTestId("password-input").querySelector("input");
+    await user.click(input!);
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("Tooltip disabled when isDisableTooltip is true", () => {
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2322): Type '{ isDisableTooltip: boolean; inputName: stri... Remove this comment to see the full error message
-  //     <PasswordInput {...baseProps} isDisableTooltip={true} />,
-  //   );
+    expect(
+      screen.queryByText("Password must contain:"),
+    ).not.toBeInTheDocument();
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("isDisableTooltip")).toEqual(true);
-  // });
+  it("handles custom autocomplete attribute", () => {
+    render(<PasswordInput {...baseProps} autoComplete="current-password" />);
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("TextTooltip shown when isTextTooltipVisible is true", () => {
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2322): Type '{ isTextTooltipVisible: boolean; inputName: ... Remove this comment to see the full error message
-  //     <PasswordInput {...baseProps} isTextTooltipVisible={true} />,
-  //   );
+    const input = screen.getByTestId("password-input").querySelector("input");
+    expect(input).toHaveAttribute("autocomplete", "current-password");
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("isTextTooltipVisible")).toEqual(true);
-  // });
+  describe("Password Validation", () => {
+    it("validates minimum length requirement", async () => {
+      const onValidateInput = jest.fn();
+      const user = userEvent.setup();
+      render(
+        <PasswordInput
+          {...baseProps}
+          passwordSettings={{
+            ...basePasswordSettings,
+            minLength: 8,
+          }}
+          onValidateInput={onValidateInput}
+        />,
+      );
+
+      const input = screen.getByTestId("password-input").querySelector("input");
+      await user.type(input!, "short");
+
+      expect(onValidateInput).toHaveBeenCalledWith(
+        false,
+        expect.objectContaining({ length: false }),
+      );
+
+      await user.type(input!, "longenough");
+      expect(onValidateInput).toHaveBeenCalledWith(
+        true,
+        expect.objectContaining({ length: true }),
+      );
+    });
+
+    it("validates special characters requirement", async () => {
+      const onValidateInput = jest.fn();
+      const user = userEvent.setup();
+      render(
+        <PasswordInput
+          {...baseProps}
+          passwordSettings={{
+            ...basePasswordSettings,
+            specSymbols: true,
+          }}
+          onValidateInput={onValidateInput}
+        />,
+      );
+
+      const input = screen.getByTestId("password-input").querySelector("input");
+      await user.type(input!, "nospecial");
+
+      expect(onValidateInput).toHaveBeenCalledWith(
+        false,
+        expect.objectContaining({ special: false }),
+      );
+
+      await user.clear(input!);
+      await user.type(input!, "with!@#special");
+      expect(onValidateInput).toHaveBeenCalledWith(
+        true,
+        expect.objectContaining({ special: true }),
+      );
+    });
+  });
+
+  describe("Input Behavior", () => {
+    it("handles paste event correctly", async () => {
+      const onChange = jest.fn();
+      const user = userEvent.setup();
+      render(<PasswordInput {...baseProps} onChange={onChange} />);
+
+      const input = screen.getByTestId("password-input").querySelector("input");
+      await user.click(input!);
+      await user.paste("pasted-password");
+
+      expect(onChange).toHaveBeenCalled();
+    });
+
+    it("handles input with maxLength and simulated typing", async () => {
+      const user = userEvent.setup();
+      render(
+        <PasswordInput
+          {...baseProps}
+          maxLength={5}
+          isSimulateType
+          simulateSymbol="*"
+        />,
+      );
+
+      const input = screen.getByTestId("password-input").querySelector("input");
+      await user.type(input!, "123456");
+
+      expect(input).toHaveValue("*****");
+    });
+  });
+
+  describe("Accessibility", () => {
+    it("handles tab navigation correctly", async () => {
+      const user = userEvent.setup();
+      render(<PasswordInput {...baseProps} tabIndex={1} />);
+
+      const input = screen.getByTestId("password-input").querySelector("input");
+      expect(input).toHaveAttribute("tabindex", "1");
+
+      await user.tab();
+      expect(input).toHaveFocus();
+    });
+  });
+
+  describe("Style and Layout", () => {
+    it("applies custom width", () => {
+      render(
+        <PasswordInput {...baseProps} simpleView={false} inputWidth="300px" />,
+      );
+
+      const wrapper = screen.getByTestId("tooltipContent");
+      expect(wrapper).toHaveStyle({ width: "300px" });
+    });
+
+    it("applies scale property correctly", () => {
+      render(<PasswordInput {...baseProps} scale />);
+
+      const wrapper = screen.getByTestId("password-input");
+      expect(wrapper).toHaveAttribute("data-scale", "true");
+    });
+  });
 });

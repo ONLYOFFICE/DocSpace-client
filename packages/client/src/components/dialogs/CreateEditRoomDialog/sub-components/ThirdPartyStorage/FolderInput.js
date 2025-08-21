@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -142,7 +142,6 @@ const FolderInput = ({
     setIsDialogOpen(true);
   };
   const onClose = () => {
-    console.log("call close");
     setIsDialogOpen(false);
   };
 
@@ -186,18 +185,18 @@ const FolderInput = ({
             {createNewFolderIsChecked || path ? "/" : t("RootFolderLabel")}
           </span>
           <span className="path">{path}</span>
-          {createNewFolderIsChecked && (
+          {createNewFolderIsChecked ? (
             <span className="room_title">
               {(path ? "/" : "") + (roomTitle || t("Common:NewRoom"))}
             </span>
-          )}
+          ) : null}
         </div>
         <div title={t("Common:SelectFolder")} className="icon-wrapper">
           <IconButton size={16} iconName={FolderReactSvgUrl} isClickable />
         </div>
       </StyledFolderInput>
 
-      {isDialogOpen && (
+      {isDialogOpen ? (
         <FilesSelector
           isPanelVisible={isDialogOpen}
           onClose={onClose}
@@ -207,7 +206,7 @@ const FolderInput = ({
           passedFoldersTree={[thirdpartyAccount]}
           currentFolderId={treeNode ? treeNode.id : thirdpartyAccount.id}
         />
-      )}
+      ) : null}
     </>
   );
 };

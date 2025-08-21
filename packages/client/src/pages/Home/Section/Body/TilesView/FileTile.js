@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,15 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useContext } from "react";
+import { use, useRef, useEffect, useState } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
+import { useNavigate } from "react-router";
+import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
+import { FolderType } from "@docspace/shared/enums";
+import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 
-import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
-// import { Context } from "@docspace/shared/utils";
+import {
+  FileTile as FileTileComponent,
+  FolderTile,
+  RoomTile,
+  TemplateTile,
+} from "@docspace/shared/components/tiles";
+import SpaceQuota from "SRC_DIR/components/SpaceQuota";
+import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
 
-import Tile from "./sub-components/Tile";
 import FilesTileContent from "./FilesTileContent";
 import { FileTileContext } from "./FileTile.provider";
 
@@ -42,7 +51,7 @@ import ItemIcon from "../../../../../components/ItemIcon";
 import withBadges from "../../../../../HOCs/withBadges";
 
 const StyledDragAndDrop = styled(DragAndDrop)`
-  border-radius: 6px;
+  border-radius: 12px;
 `;
 
 const FileTile = (props) => {
@@ -56,12 +65,9 @@ const FileTile = (props) => {
     className,
     isDragging,
     value,
-    displayShareButton,
-    isPrivacy,
     checkedProps,
     getIcon,
     onFilesClick,
-    onDoubleClick,
 
     isActive,
     isEdit,
@@ -72,27 +78,38 @@ const FileTile = (props) => {
     t,
     getContextModel,
     onHideContextMenu,
-    // thumbSize,
     setSelection,
     id,
     onSelectTag,
     onSelectOption,
-    // columnCount,
-    isRooms,
     withCtrlSelect,
     withShiftSelect,
     isHighlight,
     onDragOver,
     onDragLeave,
     badgeUrl,
-    icon,
-    isDownload,
     selectableRef,
+    openUser,
+    isBlockingOperation,
+    showStorageInfo,
+    setRefMap,
+    deleteRefMap,
+    dataTestId,
+    setDropTargetPreview,
+    selectedFolderTitle,
+    disableDrag,
+    canCreateSecurity,
+    documentTitle,
   } = props;
+
+  const navigate = useNavigate();
 
   // const { sectionWidth } = useContext(Context);
 
-  const { columnCount, thumbSize } = useContext(FileTileContext);
+  const tileRef = useRef(null);
+  const [isDragActive, setIsDragActive] = useState(false);
+
+  const { columnCount, thumbSize } = use(FileTileContext);
 
   const temporaryExtension =
     item.id === -1 ? `.${item.fileExst}` : item.fileExst;
@@ -105,6 +122,41 @@ const FileTile = (props) => {
   );
 
   const { thumbnailUrl } = item;
+  const isDragDisabled = dragging && !isDragging;
+
+  useEffect(() => {
+    if (!tileRef?.current) return;
+
+    if (item?.isPDF) {
+      setRefMap(GuidanceRefKey.Pdf, tileRef);
+    }
+    if (item?.type === FolderType.Done) {
+      setRefMap(GuidanceRefKey.Ready, tileRef);
+    }
+
+    return () => {
+      deleteRefMap(GuidanceRefKey.Pdf);
+      deleteRefMap(GuidanceRefKey.Ready);
+    };
+  }, [setRefMap, deleteRefMap]);
+
+  useEffect(() => {
+    if (dragging) {
+      if (isDragging) {
+        if (isDragActive) setDropTargetPreview(item.title);
+      } else if (!disableDrag && canCreateSecurity) {
+        setDropTargetPreview(selectedFolderTitle);
+      } else {
+        setDropTargetPreview(null);
+      }
+    }
+  }, [
+    dragging,
+    isDragging,
+    isDragActive,
+    selectedFolderTitle,
+    setDropTargetPreview,
+  ]);
 
   const element = (
     <ItemIcon
@@ -113,87 +165,130 @@ const FileTile = (props) => {
       fileExst={item.fileExst}
       isRoom={item.isRoom}
       showDefault={
-        !(!!item?.logo?.cover || !!item?.logo?.medium) && item.isRoom
+        !(!!item?.logo?.cover || !!item?.logo?.medium) ? item.isRoom : null
       }
       title={item.title}
       logo={item.logo}
       color={item.logo?.color}
       isArchive={item.isArchive}
+      isTemplate={item.isTemplate}
       badgeUrl={badgeUrl}
     />
   );
 
   const activeClass = checkedProps || isActive ? "tile-selected" : "";
 
-  const onDragOverEvent = (_, e) => {
+  const onDragOverEvent = (dragActive, e) => {
     onDragOver && onDragOver(e);
+
+    if (dragActive !== isDragActive) {
+      setIsDragActive(dragActive);
+    }
   };
 
   const onDragLeaveEvent = (e) => {
     onDragLeave && onDragLeave(e);
+    setDropTargetPreview(null);
+    setIsDragActive(false);
   };
+
+  const onOpenUser = () => {
+    openUser(item.createdBy, navigate);
+  };
+
+  const tileContent = (
+    <FilesTileContent t={t} item={item} onFilesClick={onFilesClick} />
+  );
+
+  const commonProps = {
+    item,
+    element,
+    onSelect: onContentFileSelect,
+    tileContextClick: fileContextClick,
+    isDragging: dragging,
+    dragging: dragging ? isDragging : null,
+    checked: checkedProps,
+    contextOptions: item.contextOptions,
+    isActive,
+    inProgress,
+    isBlockingOperation,
+    isEdit,
+    getContextModel,
+    hideContextMenu: onHideContextMenu,
+    showHotkeyBorder,
+    setSelection,
+    withCtrlSelect,
+    withShiftSelect,
+    isHighlight,
+    badges: badgesComponent,
+    children: tileContent,
+    forwardRef: tileRef,
+    dataTestId,
+  };
+
+  const fileTile = (
+    <FileTileComponent
+      {...commonProps}
+      key={item.id}
+      temporaryIcon={temporaryIcon}
+      thumbnail={thumbnailUrl}
+      thumbSize={thumbSize}
+      contentElement={quickButtonsComponent}
+      thumbnailClick={onFilesClick}
+    />
+  );
+
+  const folderTile = (
+    <FolderTile {...commonProps} temporaryIcon={temporaryIcon} />
+  );
+
+  const roomTile = (
+    <RoomTile
+      {...commonProps}
+      key={item.id}
+      selectTag={onSelectTag}
+      selectOption={onSelectOption}
+      columnCount={columnCount}
+      thumbnailClick={onFilesClick}
+      getRoomTypeName={getRoomTypeName}
+    />
+  );
+
+  const remplateTile = (
+    <TemplateTile
+      {...commonProps}
+      key={item.id}
+      thumbnailClick={onFilesClick}
+      openUser={onOpenUser}
+      showStorageInfo={showStorageInfo}
+      SpaceQuotaComponent={SpaceQuota}
+    />
+  );
+
+  const renderTile = () => {
+    if (item.isTemplate) return remplateTile;
+    if (item.isRoom) return roomTile;
+    if (item.isFolder) return folderTile;
+    return fileTile;
+  };
+
+  const droppableClassName = isDragging ? "droppable" : "";
 
   return (
     <div ref={selectableRef} id={id}>
       <StyledDragAndDrop
         data-title={item.title}
         value={value}
-        className={`files-item ${className} ${activeClass} ${item.id}_${item.fileExst}`}
+        className={`files-item ${className} ${activeClass} ${item.id}_${item.fileExst} ${droppableClassName}`}
         onDrop={onDrop}
         onMouseDown={onMouseDown}
-        dragging={dragging && isDragging}
+        dragging={dragging ? isDragging : null}
         onDragOver={onDragOverEvent}
         onDragLeave={onDragLeaveEvent}
-        contextOptions={item.contextOptions}
+        isDragDisabled={isDragDisabled}
+        data-document-title={documentTitle}
       >
-        <Tile
-          key={item.id}
-          item={item}
-          temporaryIcon={temporaryIcon}
-          thumbnail={
-            thumbnailUrl && thumbSize
-              ? `${thumbnailUrl}&size=${thumbSize}`
-              : thumbnailUrl
-          }
-          element={element}
-          // sectionWidth={sectionWidth}
-          contentElement={quickButtonsComponent}
-          onSelect={onContentFileSelect}
-          tileContextClick={fileContextClick}
-          isPrivacy={isPrivacy}
-          isDragging={dragging}
-          dragging={dragging && isDragging}
-          // onClick={onMouseClick}
-          thumbnailClick={onFilesClick}
-          onDoubleClick={onDoubleClick}
-          checked={checkedProps}
-          contextOptions={item.contextOptions}
-          contextButtonSpacerWidth={displayShareButton}
-          isActive={isActive}
-          inProgress={inProgress}
-          isEdit={isEdit}
-          getContextModel={getContextModel}
-          hideContextMenu={onHideContextMenu}
-          t={t}
-          showHotkeyBorder={showHotkeyBorder}
-          setSelection={setSelection}
-          selectTag={onSelectTag}
-          selectOption={onSelectOption}
-          columnCount={columnCount}
-          isRooms={isRooms}
-          withCtrlSelect={withCtrlSelect}
-          withShiftSelect={withShiftSelect}
-          isHighlight={isHighlight}
-          iconProgress={icon}
-          isDownload={isDownload}
-        >
-          <FilesTileContent
-            item={item}
-            // sectionWidth={sectionWidth}
-            onFilesClick={onFilesClick}
-          />
-          {badgesComponent}
-        </Tile>
+        {renderTile()}
       </StyledDragAndDrop>
     </div>
   );
@@ -201,20 +296,31 @@ const FileTile = (props) => {
 
 export default inject(
   (
-    { filesSettingsStore, filesStore, treeFoldersStore, uploadDataStore },
+    {
+      filesSettingsStore,
+      filesStore,
+      treeFoldersStore,
+      infoPanelStore,
+      guidanceStore,
+      currentQuotaStore,
+    },
     { item },
   ) => {
     const { getIcon } = filesSettingsStore;
     const { setSelection, withCtrlSelect, withShiftSelect, highlightFile } =
       filesStore;
-    const { icon, isDownload } = uploadDataStore.secondaryProgressDataStore;
+
+    const { setRefMap, deleteRefMap } = guidanceStore;
 
     const isHighlight =
       highlightFile.id == item?.id && highlightFile.isExst === !item?.fileExst;
 
-    const { isRoomsFolder, isArchiveFolder } = treeFoldersStore;
+    const { isRoomsFolder, isArchiveFolder, isTemplatesFolder } =
+      treeFoldersStore;
 
-    const isRooms = isRoomsFolder || isArchiveFolder;
+    const { showStorageInfo } = currentQuotaStore;
+
+    const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
 
     return {
       getIcon,
@@ -223,8 +329,10 @@ export default inject(
       withCtrlSelect,
       withShiftSelect,
       isHighlight,
-      icon,
-      isDownload,
+      setRefMap,
+      deleteRefMap,
+      openUser: infoPanelStore.openUser,
+      showStorageInfo,
     };
   },
 )(

@@ -1,0 +1,261 @@
+{
+  "key_path": "ManagerSearchBlockDescription",
+  "content": "You can disable the search, filter and sort options.",
+  "content_en_sha1_hash": "ffa1350e38a35df0eb49fef9d98511c60ac9d833",
+  "created_at": "2025-05-19T21:30:54.569Z",
+  "updated_at": "2025-08-11T09:02:43.893Z",
+  "comment": {
+    "text": "\"This translation key describes the text used to inform users that they can disable search, filter and sort options in a UI component.\"",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:31.811Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
+      "line_number": 536,
+      "context": "isChecked={embeddingConfig.showFilter}\n img={theme.isBase ? SearchUrl : SearchDarkUrl}\n title={t(\"JavascriptSdk:SearchBlock\")}\n dataTestId=\"show_filter\"\n description={t(\n \"JavascriptSdk:ManagerSearchBlockDescription\",\n )}\n />\n </div>\n </>\n ) : null}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
+      "line_number": 547,
+      "context": "offsetRight={4}\n size={12}\n tooltipContent={\n <TooltipContent\n title={t(\"SearchBlock\")}\n description={t(\"ManagerSearchBlockDescription\")}\n img={theme.isBase ? SearchUrl : SearchDarkUrl}\n />\n }\n dataTestId=\"show_filter_help_button\"\n />",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
+      "line_number": 419,
+      "context": "size={12}\n dataTestId=\"filter_help_button\"\n tooltipContent={\n <TooltipContent\n title={t(\"SearchBlock\")}\n description={t(\"ManagerSearchBlockDescription\")}\n img={theme.isBase ? SearchUrl : SearchDarkUrl}\n />\n }\n />\n </LabelGroup>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Axtarış, filtr və çeşidləmə seçimlərini söndürə bilərsiniz' implies a capability to turn off the options, rather than the ability to disable them. 'Disable' is a more accurate representation of the original English.",
+          "suggestion": "Axtarış, filtr və çeşidləmə seçimini deaktiv edə bilərsiniz."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"You can disable\" is better translated as \"You have the option to disable\" or a more concise equivalent in Armenian. The current translation 'Դուք կարող եք անջատել' (You can disable) is grammatically correct but not as natural-sounding for this context. It implies an ability, rather than an option.",
+          "suggestion": "Consider 'Մալուց կարող եք անջատել...' (You have the option to disable...) or a more idiomatic Armenian equivalent conveying the same meaning of a setting or choice."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'disable' is best translated as something more nuanced than simply '無効にすることができます' (muukou ni suru koto ga dekimasu). While technically correct, it sounds a bit formal and indirect for user interface text. A more natural phrasing would emphasize the ability to turn off the functions.",
+          "suggestion": "検索、フィルター、並べ替えオプションはオフにすることができます。"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ຄັດເລືອກ' (kat lueak) which translates to 'selection' or 'sort' is not the most accurate translation of 'sort' in this context. It implies a process of choosing rather than arranging.",
+          "suggestion": "Consider using a term more closely aligned with 'sorting,' like 'ການຈັດລຽງ' (gan jat liang)."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'disable' is best translated as 'අයින් කිරීම' (ain karima) or 'අවසන් කිරීම' (awasankara karama) instead of 'අබල කිරීම' (abala karima). While 'අබල කිරීම' can mean to disable, it's not the most natural or precise translation in this context.",
+          "suggestion": "ඔබට සෙවුම, පෙරහන සහ වර්ගන විකල්ප අයින් කිරීමට/අවසන් කිරීමට හැකිය."
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct, the sentence could be slightly more fluent by rephrasing. The current wording feels a bit stiff.",
+          "suggestion": "ඔබට සෙවුම, පෙරහන සහ වර්ග කිරීමට හැකි විකල්ප අයින් කිරීමට හැකිය."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'филтер' is a transliteration and not a proper Serbian word. The correct term is 'филтар'.",
+          "suggestion": "филтар"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

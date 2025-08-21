@@ -1,0 +1,280 @@
+{
+  "key_path": "MobilePhoneChangeTitle",
+  "content": "Change mobile phone",
+  "content_en_sha1_hash": "e7bdb793e871f330d24dd0b1c18fcb0e91b3e5c2",
+  "created_at": "2025-05-19T21:30:57.009Z",
+  "updated_at": "2025-05-24T14:25:10.573Z",
+  "comment": {
+    "text": "This translation key is used for the title of a mobile phone change dialog. It appears on top of a modal dialog that prompts users to make changes to their mobile phone settings. The text should translate to \"Change mobile phone\".",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:37:38.648Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangePhoneDialog/index.js",
+      "line_number": 63,
+      "context": "const { t, tReady, visible, onClose } = this.props;\n const { isRequestRunning } = this.state;\n \n return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"MobilePhoneChangeTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{t(\"MobilePhoneEraseDescription\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Mobil telefon nömrəsini dəyiş\" is a literal translation of 'Change mobile phone' and is grammatically correct. However, a more natural phrasing in Azerbaijani would be 'Telefon nömrəmi dəyiş' or 'Telefon nömrəsini dəyişmək'. The current translation sounds slightly formal and less conversational.",
+          "suggestion": "Telefon nömrəmi dəyiş"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Changer le téléphone mobile\" is a literal translation and sounds unnatural in French. A more natural and common phrasing would be \"Modifier le numéro de téléphone\" or \"Changer de numéro de téléphone\".",
+          "suggestion": "Changer de numéro de téléphone"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Modifica telefono cellulare\" is understandable, a more natural and idiomatic Italian translation for \"Change mobile phone\" would be \"Cambia numero di telefono\" or \"Modifica numero di telefono\". \"Modifica telefono cellulare\" is a bit literal and sounds slightly awkward.",
+          "suggestion": "Cambia numero di telefono"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation '모바일 전화 변경' is a literal translation of 'mobile phone change' but isn't the most natural way to express this in Korean. A more idiomatic translation would be more appropriate.",
+          "suggestion": "휴대폰 변경 (Hyu-dae-pon byeon-gyeong) - which means 'Mobile phone change/replacement'."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Verander mobiele telefoon' is a very literal translation and sounds unnatural in Dutch. A more idiomatic translation would be 'Wijzig mobiele telefoon' or 'Nieuw mobiel nummer'.",
+          "suggestion": "Wijzig mobiele telefoon"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Alterar telemóvel\" is technically correct, a more natural and commonly used translation for \"Change mobile phone\" in Portuguese would be \"Mudar de número de telemóvel\" or simply \"Mudar o número do telemóvel\". \"Alterar telemóvel\" sounds slightly awkward.",
+          "suggestion": "Mudar de número de telemóvel"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Alterar celular\" is understandable, a more accurate and natural-sounding translation would be \"Mudar de celular\" or \"Trocar de celular\". \"Alterar celular\" sounds a bit formal and less common in this context.",
+          "suggestion": "Mudar de celular"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Modificare telefon mobil\" is understandable, a more natural and idiomatic Romanian translation for \"Change mobile phone\" would be \"Schimbă telefonul mobil\" or \"Modifică numărul de telefon mobil\". \"Modificare\" implies a more complex modification than just changing it.",
+          "suggestion": "Schimbă telefonul mobil"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"දුරකථනය සංශෝධනය\" (durakathana sanshodhana) literally translates to 'telephone modification'. While understandable, it's not the most natural or idiomatic way to say 'Change mobile phone' in Sinhala. It sounds overly formal and technical.",
+          "suggestion": "A more natural translation would be \"දුරකථනය වෙනස් කරන්න\" (durakathana venas karanna) which means 'change mobile phone'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Промени мобилни телефон' is not grammatically correct and doesn't accurately convey the meaning of 'Change mobile phone'. The correct translation would involve the genitive case of 'mobile phone'.",
+          "suggestion": "Измените мобилни телефон"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While grammatically correct, \"Promeni mobilni telefon\" is a very literal translation and sounds unnatural in Serbian. A more idiomatic and natural phrasing would be \"Izmeni mobilni telefon\" or \"Promeni broj telefona\".",
+          "suggestion": "Izmeni mobilni telefon"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"更改手机号码\" (Gēnggǎi shǒujī hàomǎ) literally translates to \"Change phone number.\" While technically correct, \"Change mobile phone\" implies a broader change, possibly including related settings or preferences.  \"更改手机\" (Gēnggǎi shǒujī) would be a more concise and natural translation.",
+          "suggestion": "更改手机 (Gēnggǎi shǒujī)"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

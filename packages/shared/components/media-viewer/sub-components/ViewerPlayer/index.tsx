@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -41,7 +41,8 @@ import React, {
   useState,
 } from "react";
 
-import { includesMethod } from "@docspace/shared/utils/typeGuards";
+import classNames from "classnames";
+import { includesMethod } from "../../../../utils/typeGuards";
 
 import type { Point } from "../../MediaViewer.types";
 import { KeyboardEventKeys } from "../../MediaViewer.enums";
@@ -50,7 +51,7 @@ import { calculateAdjustImageUtil } from "../../MediaViewer.utils";
 import { PlayerBigPlayButton } from "../PlayerBigPlayButton";
 import { ViewerLoader } from "../ViewerLoader";
 import { PlayerPlayButton } from "../PlayerPlayButton";
-import { PlayerDuration } from "../PlayerDuration/inxed";
+import { PlayerDuration } from "../PlayerDuration";
 import { PlayerVolumeControl } from "../PlayerVolumeControl";
 import { PlayerTimeline } from "../PlayerTimeline";
 import { PlayerSpeedControl } from "../PlayerSpeedControl";
@@ -61,19 +62,14 @@ import { MessageError } from "../MessageError";
 import type { PlayerTimelineRef } from "../PlayerTimeline/PlayerTimeline.props";
 
 import type ViewerPlayerProps from "./ViewerPlayer.props";
-import {
-  ContainerPlayer,
-  ControlContainer,
-  PlayerControlsWrapper,
-  StyledPlayerControls,
-  VideoWrapper,
-} from "./ViewerPlayer.styled";
+
 import {
   VolumeLocalStorageKey,
   audioHeight,
   audioWidth,
   defaultVolume,
 } from "./ViewerPlayer.constants";
+import styles from "./ViewerPlayer.module.scss";
 
 export const ViewerPlayer = ({
   src,
@@ -161,8 +157,9 @@ export const ViewerPlayer = ({
       onDrag: ({ offset: [dx, dy], movement: [mdx, mdy], memo, first }) => {
         if (isDesktop) return;
 
+        let memoLet = memo;
         if (first) {
-          memo = style.y.get();
+          memoLet = style.y.get();
         }
 
         api.start({
@@ -170,12 +167,12 @@ export const ViewerPlayer = ({
             (isFistImage && mdx > 0) || (isLastImage && mdx < 0) || isFullScreen
               ? style.x.get()
               : dx,
-          y: dy >= memo ? dy : style.y.get(),
+          y: dy >= memoLet ? dy : style.y.get(),
           opacity: mdy > 0 ? Math.max(1 - mdy / 120, 0) : style.opacity.get(),
           immediate: true,
         });
 
-        return memo;
+        return memoLet;
       },
       onDragEnd: ({ movement: [mdx, mdy] }) => {
         if (isDesktop) return;
@@ -629,56 +626,69 @@ export const ViewerPlayer = ({
     };
   }, [onKeyDown]);
 
-  const posterUrl = thumbnailSrc ? `${thumbnailSrc}&size=1280x720` : undefined;
+  const posterUrl = thumbnailSrc ? `${thumbnailSrc}` : undefined;
 
   return (
     <>
-      {isMobile && panelVisible && mobileDetails}
-      <ContainerPlayer ref={containerRef} $isFullScreen={isFullScreen}>
-        <VideoWrapper
-          $visible={!isLoading}
+      {isMobile && panelVisible ? mobileDetails : null}
+      <div
+        className={classNames(styles.containerPlayer, {
+          [styles.isFullScreen]: isFullScreen,
+        })}
+        ref={containerRef}
+      >
+        {/* @ts-expect-error - React Spring types issue with React 19 */}
+        <animated.div
+          className={classNames(styles.videoWrapper, {
+            [styles.visible]: !isLoading,
+          })}
           style={style}
           ref={playerWrapperRef}
         >
           <animated.video
-            playsInline
-            ref={videoRef}
-            hidden={isAudio}
-            autoPlay={autoPlay}
-            preload="metadata"
-            style={omit(style, ["x", "y"])}
-            src={thumbnailSrc ? src : `${src}#t=0.001`}
-            poster={posterUrl}
-            onError={hadleError}
-            onClick={handleClickVideo}
-            onEnded={handleVideoEnded}
-            onProgress={handleProgress}
-            onTimeUpdate={handleTimeUpdate}
-            onWaiting={() => setIsWaiting(true)}
-            onPlaying={() => setIsWaiting(false)}
-            onDurationChange={handleDurationChange}
-            onLoadedMetadata={handleLoadedMetaDataVideo}
-            onPlay={() => setIsPlaying(true)}
-            onContextMenu={(event) => event.preventDefault()}
+            {...({
+              playsInline: true,
+              ref: videoRef,
+              hidden: isAudio,
+              autoPlay,
+              preload: "metadata",
+              style: omit(style, ["x", "y"]),
+              src: thumbnailSrc ? src : `${src}#t=0.001`,
+              poster: posterUrl,
+              onError: hadleError,
+              onClick: handleClickVideo,
+              onEnded: handleVideoEnded,
+              onProgress: handleProgress,
+              onTimeUpdate: handleTimeUpdate,
+              onWaiting: () => setIsWaiting(true),
+              onPlaying: () => setIsWaiting(false),
+              onDurationChange: handleDurationChange,
+              onLoadedMetadata: handleLoadedMetaDataVideo,
+              onPlay: () => setIsPlaying(true),
+              onContextMenu: (event: MouseEvent) => event.preventDefault(),
+              "aria-label": isAudio ? "Audio player" : "Video player",
+              "data-testid": "media-player",
+            } as unknown as React.VideoHTMLAttributes<HTMLVideoElement>)}
           />
+
           <PlayerBigPlayButton
             onClick={handleBigPlayButtonClick}
-            visible={!isPlaying && isVideo && !isError}
+            visible={!isPlaying && isVideo ? !isError : false}
           />
-          {isAudio && !isError && (
-            <div className="audio-container">
+          {isAudio && !isError ? (
+            <div className={styles.audioContainer}>
               <img src={audioIcon} alt="" />
             </div>
-          )}
+          ) : null}
           <ViewerLoader
             isError={isError}
             onClick={handleClickVideo}
-            withBackground={isWaiting && isPlaying}
+            withBackground={isWaiting ? isPlaying : false}
             isLoading={isLoading || (isWaiting && isPlaying)}
           />
-        </VideoWrapper>
+        </animated.div>
         <ViewerLoader isError={isError} isLoading={isLoading} />
-      </ContainerPlayer>
+      </div>
       {isError ? (
         <MessageError
           model={model}
@@ -687,13 +697,18 @@ export const ViewerPlayer = ({
           isMobile={isMobile}
         />
       ) : (
-        <StyledPlayerControls
-          $isShow={panelVisible && !isLoading}
+        <div
+          className={classNames(styles.playerControls, {
+            [styles.show]: panelVisible ? !isLoading : false,
+          })}
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onClick={handleClickVideo}
         >
-          <PlayerControlsWrapper onClick={stopPropagation}>
+          <div
+            className={styles.playerControlsWrapper}
+            onClick={stopPropagation}
+          >
             <PlayerTimeline
               value={timeline}
               ref={timelineRef}
@@ -702,25 +717,25 @@ export const ViewerPlayer = ({
               onMouseEnter={onMouseEnter}
               onMouseLeave={onMouseLeave}
             />
-            <ControlContainer>
+            <div className={styles.controlContainer}>
               <div
-                className="player_left-control"
+                className={styles.playerLeftControl}
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
               >
                 <PlayerPlayButton isPlaying={isPlaying} onClick={togglePlay} />
                 <PlayerDuration currentTime={currentTime} duration={duration} />
-                {!isMobile && (
+                {!isMobile ? (
                   <PlayerVolumeControl
                     volume={volume}
                     isMuted={isMuted}
                     onChange={handleVolumeChange}
                     toggleVolumeMute={toggleVolumeMute}
                   />
-                )}
+                ) : null}
               </div>
               <div
-                className="player_right-control"
+                className={styles.playerRightControl}
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
               >
@@ -734,7 +749,7 @@ export const ViewerPlayer = ({
                   isFullScreen={isFullScreen}
                   onClick={toggleVideoFullscreen}
                 />
-                {isDesktop && (
+                {isDesktop ? (
                   <PlayerDesktopContextMenu
                     canDownload={canDownload}
                     isPreviewFile={isPreviewFile}
@@ -742,11 +757,11 @@ export const ViewerPlayer = ({
                     onDownloadClick={onDownloadClick}
                     generateContextMenu={generateContextMenu}
                   />
-                )}
+                ) : null}
               </div>
-            </ControlContainer>
-          </PlayerControlsWrapper>
-        </StyledPlayerControls>
+            </div>
+          </div>
+        </div>
       )}
     </>
   );

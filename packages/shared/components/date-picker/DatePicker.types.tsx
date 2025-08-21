@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,7 @@
 
 import moment from "moment";
 
-export interface DatePickerProps {
+export type DatePickerProps = {
   /** Allows to change select date text */
   selectDateText?: string;
   /** Selected date */
@@ -50,4 +50,8 @@ export interface DatePickerProps {
   /** Allows to set first shown date in calendar */
   openDate: moment.Moment;
   isMobile?: boolean;
-}
+  hideCross?: boolean;
+  /** Automatically positions the calendar based on available space */
+  autoPosition?: boolean;
+  testId?: string;
+};

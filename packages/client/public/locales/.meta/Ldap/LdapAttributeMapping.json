@@ -1,0 +1,244 @@
+{
+  "key_path": "LdapAttributeMapping",
+  "content": "Attribute mapping",
+  "content_en_sha1_hash": "27eab1836ffd4c37244c32f6e2d3186e58553f97",
+  "created_at": "2025-05-19T21:30:54.168Z",
+  "updated_at": "2025-08-11T18:11:59.236Z",
+  "comment": {
+    "text": "The \"LdapAttributeMapping\" translation key refers to the label for an attribute mapping component in a LDAP integration settings page. It is used to display a descriptive title for this setting, likely appearing as a header or section title within a dialog or settings panel.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:16.540Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
+      "line_number": 123,
+      "context": "return (\n <>\n <div className=\"ldap_attribute-mapping-text\">\n <Text fontWeight={600} fontSize=\"14px\">\n {t(\"LdapAttributeMapping\")}\n </Text>\n <HelpButton\n dataTestId=\"attribute_mapping_help_button\"\n tooltipContent={t(\"LdapAdvancedSettingsTooltip\")}\n />",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'تعيين الميزات' while technically meaning 'attribute assignment/mapping', doesn't fully capture the nuance of 'Attribute mapping' in a technical context. It implies a general assignment of features, whereas 'Attribute mapping' specifically refers to the process of associating attributes from one system to another.",
+          "suggestion": "تخطيط السمات"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ການຖອດຄ່າສັດທະລັດ\" (kan thot kha satthalat) literally translates to 'attribute decoding'. While 'decoding' might be conceptually related to mapping in some contexts, 'attribute mapping' generally refers to a direct correspondence or assignment, not a process of decoding. A more appropriate translation would capture the idea of correspondence or association.",
+          "suggestion": "Consider \"ການຕິດຄ່າລັກສະນະ\" (kan tit kha lak sane) which means 'attribute association' or \"ການກຳນົດຄ່າສັດທະລັດ\" (kan kamnot kha satthalat) which means 'attribute assignment'."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Polish translation \"Mapowanie atrybutów DOS\" includes \"DOS,\" which is likely an unnecessary and inaccurate addition. \"DOS\" refers to a specific operating system and doesn't belong in the translation of 'Attribute mapping'.",
+          "suggestion": "Mapowanie atrybutów"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Mapare atribute\" is understandable, it's not the most natural or precise translation of \"Attribute mapping.\" It literally translates to \"Mapping attributes.\" A more accurate and common translation would be \"Asocierea atributelor\" or \"Corespondența atributelor\".",
+          "suggestion": "Asocierea atributelor"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ගුණාංග සිතුවීම' while containing relevant words, doesn't fully capture the meaning of 'Attribute mapping'. 'Attribute mapping' implies a process or relationship, while 'ගුණාංග සිතුවීම' primarily means 'attribute thinking' or 'quality thinking'. A more suitable translation would emphasize the 'mapping' aspect, suggesting a relationship or correspondence.",
+          "suggestion": "Consider translations like 'විශේෂතා ඇමිණුම' (Vishishtaama anum) which more closely represents 'attribute mapping' by focusing on the connection or association."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Мапирање Атрибута' is a literal transliteration of 'Attribute Mapping'. While understandable, a more natural Serbian (Cyrillic) translation would be 'Упоредба атрибута' or 'Додељивање атрибута'. 'Мапирање' is a borrowed word and sounds slightly awkward in this context.",
+          "suggestion": "Упоредба атрибута"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

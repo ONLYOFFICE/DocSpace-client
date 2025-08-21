@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,6 +27,7 @@
 "use client";
 
 import React from "react";
+import dynamic from "next/dynamic";
 
 type CreateFileErrorProps = {
   error: Error;
@@ -62,4 +63,4 @@ const CreateFileError = ({
   return null;
 };
 
-export default CreateFileError;
+export default dynamic(() => Promise.resolve(CreateFileError), { ssr: false });

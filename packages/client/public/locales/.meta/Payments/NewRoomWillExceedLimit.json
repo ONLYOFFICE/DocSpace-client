@@ -1,0 +1,236 @@
+{
+  "key_path": "NewRoomWillExceedLimit",
+  "content": "Creating this room is not possible since the limit is reached for the number of rooms included in your current plan.",
+  "content_en_sha1_hash": "a04a1156e2e2826b884b0b81d56586ced44b5f15",
+  "created_at": "2025-05-19T21:30:53.704Z",
+  "updated_at": "2025-05-24T06:48:15.205Z",
+  "comment": {
+    "text": "This translation key is used to display a message when creating a new room exceeds the limit of rooms included in a user's current plan. It appears as part of an alert dialog warning the user that their plan has reached its room capacity. The message aims to inform users of this constraint and encourage them to choose a new plan if needed.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:09.502Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/sub-components/RoomsContent.tsx",
+      "line_number": 71,
+      "context": "</Text>\n <br />\n <Text>\n {isArchiveFolderRoot\n ? t(\"NotPossibleRoomRestoring\")\n : t(\"NewRoomWillExceedLimit\")}\n </Text>\n <br />\n {chooseNewPlan}\n </>\n );",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is accurate in conveying the meaning, but could be slightly more natural sounding in Sinhala. The phrasing 'මෙම කාමරය නිර්මාණය කිරීමේ හැකියාවක් නැත' (this room cannot be created) feels a bit formal.",
+          "suggestion": "ඔබේ වත්මන් සැලැස්මේ කාමර සංඛ්‍යාව අවමحدිතය. එම නිසා මෙම කාමරය නිර්මාණය කිරීමට නොහැකිය."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation includes a somewhat long sentence. Breaking it into two sentences might improve readability.",
+          "suggestion": "ඔබේ වත්මන් සැලැස්මේ ඇතුළත් කර ඇති කාමර සංඛ්‍යාව සඳහා සීමාව ළඟා වී ඇත. එම නිසා මෙම කාමරය නිර්මාණය කිරීමට හැකියාවක් නැත."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'просторије' is technically correct but can sound a bit formal or archaic in this context. 'Соби' would be a more natural and commonly used term for 'rooms' in this situation.",
+          "suggestion": "Креирање ове собе није могуће јер је достигнут лимит за број соба укључених у ваш тренутни план."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '由于当前费用版本的房间数量已达上限' is a bit too formal and technical for a user-facing error message. '费用版本' (fee version) is not a typical term users understand. A simpler phrasing would be more user-friendly.",
+          "suggestion": "由于您当前的套餐已达到房间数量上限，因此无法创建该房间。"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is slightly clunky. While grammatically correct, it could flow better.",
+          "suggestion": "由于您当前的套餐已达到房间数量上限，因此无法创建该房间。"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

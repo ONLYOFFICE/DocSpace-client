@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,150 +24,146 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useContext } from "react";
-import { useTheme } from "styled-components";
+"use client";
+
+import React, { use } from "react";
 import { useTranslation } from "react-i18next";
 
-import EmptyScreenFilterAltSvgUrl from "PUBLIC_DIR/images/empty_screen_filter_alt.svg?url";
-import EmptyScreenFilterAltDarkSvgUrl from "PUBLIC_DIR/images/empty_screen_filter_alt_dark.svg?url";
-import EmptyScreenAltSvgUrl from "PUBLIC_DIR/images/empty_screen_alt.svg?url";
-import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_alt_dark.svg?url";
+import { createFile, deleteFile } from "../../api/files";
 
-import { TRoomSecurity } from "../../api/rooms/types";
-import { TFileSecurity, TFolder, TFolderSecurity } from "../../api/files/types";
+import { FolderType, RoomsType, DeviceType, RoomSearchArea } from "../../enums";
 
-import { FolderType, RoomsType, DeviceType } from "../../enums";
-
-import { Selector, TSelectorItem } from "../../components/selector";
+import { TSelectorItem } from "../../components/selector";
 import { Aside } from "../../components/aside";
 import { Backdrop } from "../../components/backdrop";
 import { Portal } from "../../components/portal";
 import { toastr } from "../../components/toast";
-import {
-  RowLoader,
-  SearchLoader,
-  BreadCrumbsLoader,
-} from "../../skeletons/selector";
-import {
-  TBreadCrumb,
-  TSelectorBreadCrumbs,
-  TSelectorCancelButton,
-  TSelectorCheckbox,
-  TSelectorHeader,
-  TSelectorInput,
-  TSelectorSearch,
-  TSelectorSubmitButton,
-} from "../../components/selector/Selector.types";
+import { TBreadCrumb } from "../../components/selector/Selector.types";
+
+import useRoomsHelper from "../utils/hooks/useRoomsHelper";
+import useSocketHelper from "../utils/hooks/useSocketHelper";
 
 import useFilesHelper from "./hooks/useFilesHelper";
-import useRoomsHelper from "./hooks/useRoomsHelper";
 import useRootHelper from "./hooks/useRootHelper";
-import useSocketHelper from "./hooks/useSocketHelper";
+import useSelectorBody from "./hooks/useSelectorBody";
+import useSelectorState from "./hooks/useSelectorState";
 
 import { FilesSelectorProps } from "./FilesSelector.types";
-import { SettingsContextProvider } from "./contexts/Settings";
-import { LoadersContext, LoadersContextProvider } from "./contexts/Loaders";
-import { createFolder, deleteFolder } from "../../api/files";
+import { SettingsContextProvider } from "../utils/contexts/Settings";
+import {
+  LoadersContext,
+  LoadersContextProvider,
+} from "../utils/contexts/Loaders";
+import { getDefaultBreadCrumb } from "../utils";
 
-const FilesSelectorComponent = ({
-  disabledItems,
-  filterParam,
-
-  treeFolders,
-  onSetBaseFolderPath,
-  isUserOnly,
-  isRoomsOnly,
-  openRoot,
-  isThirdParty,
-  rootThirdPartyId,
-  roomsFolderId,
-  currentFolderId,
-  parentId,
-  rootFolderType,
-  onSubmit,
-  onCancel,
-  getIsDisabled,
-  withHeader,
-  headerLabel,
-  submitButtonLabel,
-  withCancelButton,
-  withFooterInput,
-  withFooterCheckbox,
-  footerInputHeader,
-  currentFooterInputValue,
-  footerCheckboxLabel,
-  descriptionText,
-  submitButtonId,
-  cancelButtonId,
-  embedded,
-  isPanelVisible,
-  currentDeviceType,
-  getFilesArchiveError,
-  setIsDataReady,
-  withSearch: withSearchProp,
-  withBreadCrumbs: withBreadCrumbsProp,
-
-  cancelButtonLabel,
-
-  withCreate,
-  createDefineRoomLabel,
-  createDefineRoomType,
-  withInfoBar,
-  infoBarData,
-  headerProps,
-  shareKey,
-  formProps,
-
-  withPadding,
-  folderIsShared,
-  checkCreating,
-}: FilesSelectorProps) => {
-  const theme = useTheme();
-  const { t } = useTranslation(["Common"]);
+const FilesSelectorComponent = (props: FilesSelectorProps) => {
   const {
-    isFirstLoad,
-    setIsFirstLoad,
-    showLoader,
-    showBreadCrumbsLoader,
-    isNextPageLoading,
-  } = useContext(LoadersContext);
+    disabledItems,
+    includedItems,
+    filterParam,
 
-  const [breadCrumbs, setBreadCrumbs] = React.useState<TBreadCrumb[]>([]);
-  const [items, setItems] = React.useState<TSelectorItem[]>([]);
+    treeFolders,
+    onSetBaseFolderPath,
+    roomType,
+    isUserOnly,
+    isRoomsOnly,
+    openRoot,
+    isThirdParty,
+    rootThirdPartyId,
+    roomsFolderId,
+    currentFolderId,
+    parentId,
+    rootFolderType,
+    onSubmit,
+    onCancel,
+    getIsDisabled,
 
-  const [selectedItemType, setSelectedItemType] = React.useState<
-    "rooms" | "files" | undefined
-  >(undefined);
-  const [selectedItemId, setSelectedItemId] = React.useState<
-    number | string | undefined
-  >(undefined);
-  const [selectedItemSecurity, setSelectedItemSecurity] = React.useState<
-    TRoomSecurity | TFolderSecurity | TFileSecurity | undefined
-  >(undefined);
-  const [selectedTreeNode, setSelectedTreeNode] = React.useState({} as TFolder);
-  const [selectedFileInfo, setSelectedFileInfo] = React.useState<{
-    id: number | string;
-    title: string;
-    path?: string[];
-    fileExst?: string;
-    viewUrl?: string;
-    inPublic?: boolean;
-  } | null>(null);
-  const [total, setTotal] = React.useState<number>(0);
-  const [hasNextPage, setHasNextPage] = React.useState<boolean>(false);
-  const [isSelectedParentFolder, setIsSelectedParentFolder] =
-    React.useState<boolean>(false);
-  const [searchValue, setSearchValue] = React.useState<string>("");
-  const [isDisabledFolder, setIsDisabledFolder] = React.useState<
-    boolean | undefined
-  >(checkCreating);
+    embedded,
+    isPanelVisible,
+    currentDeviceType,
+    getFilesArchiveError,
+    setIsDataReady,
+    withSearch: withSearchProp,
 
-  const afterSearch = React.useRef(false);
+    withCreate,
+    createDefineRoomLabel,
+    createDefineRoomType,
+
+    shareKey,
+    formProps,
+
+    folderIsShared,
+    checkCreating,
+
+    withInit,
+    initItems,
+    initBreadCrumbs,
+    initSelectedItemType,
+    initSelectedItemId,
+    initSearchValue,
+    initTotal,
+    initHasNextPage,
+
+    applyFilterOption,
+    onSelectItem,
+  } = props;
+  const { t } = useTranslation(["Common"]);
+  const { isFirstLoad, setIsFirstLoad, showLoader } = use(LoadersContext);
+
   const currentSelectedItemId = React.useRef<undefined | number | string>(
     undefined,
   );
+  const afterSearch = React.useRef(false);
+  const ssrRendered = React.useRef(false);
+  const ssrTypeRendered = React.useRef(false);
 
-  const [isInit, setIsInit] = React.useState(true);
+  const withInitProps = withInit
+    ? {
+        withInit,
+        initItems,
+        initBreadCrumbs: [getDefaultBreadCrumb(t), ...initBreadCrumbs],
+        initSelectedItemType,
+        initSelectedItemId,
+        initSearchValue,
+        initTotal,
+        initHasNextPage,
+      }
+    : {};
+
+  const {
+    breadCrumbs,
+    setBreadCrumbs,
+    searchValue,
+    setSearchValue,
+    items,
+    setItems,
+    selectedItemType,
+    setSelectedItemType,
+    selectedItemId,
+    setSelectedItemId,
+    selectedItemSecurity,
+    setSelectedItemSecurity,
+    selectedTreeNode,
+    setSelectedTreeNode,
+    selectedFileInfo,
+    setSelectedFileInfo,
+    total,
+    setTotal,
+    hasNextPage,
+    setHasNextPage,
+    isSelectedParentFolder,
+    setIsSelectedParentFolder,
+    isDisabledFolder,
+    setIsDisabledFolder,
+    isInit,
+    setIsInit,
+  } = useSelectorState({
+    checkCreating,
+    disabledItems,
+    filterParam,
+    withCreate,
+    ...withInitProps,
+  });
 
   const { subscribe, unsubscribe } = useSocketHelper({
     disabledItems,
@@ -189,6 +185,17 @@ const FilesSelectorComponent = ({
     setIsInit,
   });
 
+  let rootFolderTypeItem;
+  const rootFolderTypeIndex = breadCrumbs.findIndex((tp) => tp.rootFolderType);
+  if (rootFolderTypeIndex > -1) {
+    rootFolderTypeItem = breadCrumbs[rootFolderTypeIndex].rootFolderType;
+  }
+
+  let searchArea;
+  if ((rootFolderType ?? rootFolderTypeItem) === FolderType.RoomTemplates) {
+    searchArea = RoomSearchArea.Templates;
+  }
+
   const { getRoomList } = useRoomsHelper({
     setBreadCrumbs,
     setHasNextPage,
@@ -203,11 +210,15 @@ const FilesSelectorComponent = ({
     setSelectedItemSecurity,
 
     searchValue,
+    roomType,
     isRoomsOnly,
     isInit,
     withCreate,
     createDefineRoomLabel,
     createDefineRoomType,
+    searchArea,
+
+    withInit,
   });
 
   const { getFileList } = useFilesHelper({
@@ -230,6 +241,7 @@ const FilesSelectorComponent = ({
     selectedItemId,
     searchValue,
     disabledItems,
+    includedItems,
     isThirdParty,
     filterParam,
     isRoomsOnly,
@@ -239,6 +251,9 @@ const FilesSelectorComponent = ({
     isInit,
     withCreate,
     shareKey,
+
+    withInit,
+    applyFilterOption,
   });
 
   const onClickBreadCrumb = React.useCallback(
@@ -252,8 +267,6 @@ const FilesSelectorComponent = ({
           setSelectedItemType(undefined);
           getRootData();
         } else {
-          // setItems([]);
-
           setBreadCrumbs((bc) => {
             const idx = bc.findIndex(
               (value) => value.id.toString() === item.id.toString(),
@@ -304,11 +317,16 @@ const FilesSelectorComponent = ({
       getRootData,
       isFirstLoad,
       isSelectedParentFolder,
+      setBreadCrumbs,
       setIsFirstLoad,
+      setIsSelectedParentFolder,
+      setSearchValue,
+      setSelectedFileInfo,
+      setSelectedItemId,
+      setSelectedItemSecurity,
+      setSelectedItemType,
     ],
   );
-
-  const translation = t("Common:NewFolder");
 
   const onSelectAction = React.useCallback(
     async (
@@ -316,6 +334,7 @@ const FilesSelectorComponent = ({
       isDoubleClick: boolean,
       doubleClickCallback: () => Promise<void>,
     ) => {
+      onSelectItem?.(item);
       if (item.isFolder) {
         if (isDoubleClick) return;
 
@@ -326,7 +345,6 @@ const FilesSelectorComponent = ({
 
         setIsFirstLoad(true);
 
-        // setItems([]);
         setBreadCrumbs((value) => [
           ...value,
           {
@@ -348,12 +366,13 @@ const FilesSelectorComponent = ({
           setSelectedItemType("files");
         }
 
-        if (checkCreating && breadCrumbs.length === 1 && item.id) {
+        if (checkCreating && item.id) {
           try {
-            const folderInfo = await createFolder(item.id, translation);
-            await deleteFolder(folderInfo.id, true, true);
+            const fileInfo = await createFile(item.id, t("Common:NewDocument"));
+            await deleteFile(fileInfo.id, true, true);
             setIsDisabledFolder(false);
           } catch (e) {
+            console.log(e);
             setIsDisabledFolder(true);
           }
         }
@@ -370,6 +389,7 @@ const FilesSelectorComponent = ({
           id: item.id,
           title: item.label,
           fileExst: item.fileExst,
+          fileType: item.fileType,
           viewUrl: item.viewUrl,
           inPublic,
         });
@@ -380,12 +400,19 @@ const FilesSelectorComponent = ({
       }
     },
     [
-      breadCrumbs,
-      setIsFirstLoad,
       formProps?.isRoomFormAccessible,
       formProps?.message,
-      translation,
+      setIsFirstLoad,
+      setBreadCrumbs,
+      setSelectedItemId,
+      setSearchValue,
+      setSelectedFileInfo,
       checkCreating,
+      breadCrumbs,
+      setSelectedItemType,
+      t,
+      setIsDisabledFolder,
+      onSelectItem,
     ],
   );
 
@@ -397,10 +424,17 @@ const FilesSelectorComponent = ({
   }, [selectedItemId, isRoot, unsubscribe, subscribe]);
 
   React.useEffect(() => {
+    if (initSelectedItemId === currentFolderId) return;
+
     setSelectedItemId(currentFolderId);
-  }, [currentFolderId]);
+  }, [currentFolderId, initSelectedItemId, setSelectedItemId]);
 
   React.useEffect(() => {
+    if (withInit && !ssrTypeRendered.current) {
+      ssrTypeRendered.current = true;
+      return;
+    }
+
     setIsFirstLoad(true);
 
     const needRoomList = isRoomsOnly && !currentFolderId;
@@ -414,7 +448,6 @@ const FilesSelectorComponent = ({
       setSelectedItemType("rooms");
       return;
     }
-    // setSelectedItemId(currentFolderId);
 
     if (
       needRoomList ||
@@ -437,6 +470,8 @@ const FilesSelectorComponent = ({
     rootFolderType,
     openRoot,
     setIsFirstLoad,
+    setSelectedItemType,
+    withInit,
   ]);
 
   React.useEffect(() => {
@@ -445,6 +480,7 @@ const FilesSelectorComponent = ({
 
   const onSearchAction = (value: string, callback?: VoidFunction) => {
     if (selectedItemId !== currentSelectedItemId.current) {
+      setSearchValue("");
       return;
     }
     setSearchValue(value);
@@ -460,7 +496,7 @@ const FilesSelectorComponent = ({
       setIsFirstLoad(true);
       setItems([]);
     }
-  }, [searchValue, selectedItemType, setIsFirstLoad]);
+  }, [searchValue, selectedItemType, setIsFirstLoad, setItems]);
 
   const onClearSearchAction = React.useCallback(
     (callback?: VoidFunction) => {
@@ -473,7 +509,7 @@ const FilesSelectorComponent = ({
       callback?.();
       afterSearch.current = true;
     },
-    [searchValue, setIsFirstLoad],
+    [searchValue, setIsFirstLoad, setItems, setSearchValue],
   );
 
   React.useEffect(() => {
@@ -514,6 +550,11 @@ const FilesSelectorComponent = ({
   );
 
   React.useEffect(() => {
+    if (withInit && !ssrRendered.current) {
+      ssrRendered.current = true;
+      return;
+    }
+
     if (selectedItemType === "rooms") {
       getRoomList(0);
       return;
@@ -533,18 +574,8 @@ const FilesSelectorComponent = ({
     getRootData,
     openRoot,
     isUserOnly,
+    withInit,
   ]);
-
-  const headerSelectorProps: TSelectorHeader = withHeader
-    ? {
-        withHeader,
-        headerProps: {
-          ...headerProps,
-          headerLabel,
-          onCloseClick: onCancel,
-        },
-      }
-    : {};
 
   const withSearch = withSearchProp
     ? isRoot
@@ -556,22 +587,15 @@ const FilesSelectorComponent = ({
           : afterSearch.current || !!items.length
     : false;
 
-  const searchProps: TSelectorSearch = withSearch
-    ? {
-        withSearch,
-        searchLoader: <SearchLoader />,
-        searchPlaceholder: t("Common:Search"),
-        searchValue,
-        isSearchLoading: showBreadCrumbsLoader,
-        onSearch: onSearchAction,
-        onClearSearch: onClearSearchAction,
-      }
-    : {};
+  const SelectorBody = useSelectorBody({
+    ...props,
 
-  const submitButtonProps: TSelectorSubmitButton = {
+    withSearch,
+    searchValue,
+    onSearch: onSearchAction,
+    onClearSearch: onClearSearchAction,
+
     onSubmit: onSubmitAction,
-    submitButtonLabel,
-    submitButtonId,
     disableSubmitButton: getIsDisabled(
       isFirstLoad && showLoader,
       isSelectedParentFolder,
@@ -582,93 +606,24 @@ const FilesSelectorComponent = ({
       selectedFileInfo,
       isDisabledFolder,
     ),
-  };
 
-  const cancelButtonProps: TSelectorCancelButton = withCancelButton
-    ? {
-        withCancelButton,
-        cancelButtonLabel: cancelButtonLabel || t("Common:CancelButton"),
-        cancelButtonId,
-        onCancel,
-      }
-    : {};
+    breadCrumbs,
+    onSelectBreadCrumb: onClickBreadCrumb,
 
-  const footerInputProps: TSelectorInput = withFooterInput
-    ? {
-        withFooterInput,
-        footerInputHeader,
-        currentFooterInputValue,
-      }
-    : {};
+    loadNextPage: isRoot
+      ? async () => {}
+      : selectedItemType === "rooms"
+        ? getRoomList
+        : getFileList,
 
-  const footerCheckboxProps: TSelectorCheckbox = withFooterCheckbox
-    ? {
-        withFooterCheckbox,
-        footerCheckboxLabel,
-        isChecked: false,
-      }
-    : {};
+    items,
+    onSelect: onSelectAction,
 
-  const breadCrumbsProps: TSelectorBreadCrumbs = withBreadCrumbsProp
-    ? {
-        breadCrumbs,
-        breadCrumbsLoader: <BreadCrumbsLoader />,
-        isBreadCrumbsLoading: showBreadCrumbsLoader,
-        withBreadCrumbs: true,
-        onSelectBreadCrumb: onClickBreadCrumb,
-      }
-    : {};
+    hasNextPage,
+    totalItems: total,
 
-  const SelectorBody = (
-    <Selector
-      {...headerSelectorProps}
-      {...searchProps}
-      {...submitButtonProps}
-      {...cancelButtonProps}
-      {...footerInputProps}
-      {...footerCheckboxProps}
-      {...breadCrumbsProps}
-      isMultiSelect={false}
-      items={items}
-      onSelect={onSelectAction}
-      emptyScreenImage={
-        theme?.isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl
-      }
-      emptyScreenHeader={t("Common:SelectorEmptyScreenHeader")}
-      emptyScreenDescription=""
-      searchEmptyScreenImage={
-        theme?.isBase
-          ? EmptyScreenFilterAltSvgUrl
-          : EmptyScreenFilterAltDarkSvgUrl
-      }
-      searchEmptyScreenHeader={t("Common:NotFoundTitle")}
-      searchEmptyScreenDescription={t("Common:EmptyFilterDescriptionText")}
-      isLoading={showLoader}
-      rowLoader={
-        <RowLoader
-          isMultiSelect={false}
-          isUser={isRoot}
-          isContainer={showLoader}
-        />
-      }
-      alwaysShowFooter
-      isNextPageLoading={isNextPageLoading}
-      hasNextPage={hasNextPage}
-      totalItems={total}
-      loadNextPage={
-        isRoot
-          ? async () => {}
-          : selectedItemType === "rooms"
-            ? getRoomList
-            : getFileList
-      }
-      descriptionText={descriptionText}
-      disableFirstFetch
-      withInfoBar={withInfoBar}
-      infoBarData={infoBarData}
-      withPadding={withPadding}
-    />
-  );
+    isRoot,
+  });
 
   const selectorComponent = embedded ? (
     SelectorBody
@@ -701,9 +656,10 @@ const FilesSelectorComponent = ({
 };
 
 const FilesSelector = (props: FilesSelectorProps) => {
-  const { filesSettings, getIcon } = props;
+  const { filesSettings, getIcon, withInit } = props;
+
   return (
-    <LoadersContextProvider>
+    <LoadersContextProvider withInit={withInit}>
       <SettingsContextProvider settings={filesSettings} getIcon={getIcon}>
         <FilesSelectorComponent {...props} />
       </SettingsContextProvider>

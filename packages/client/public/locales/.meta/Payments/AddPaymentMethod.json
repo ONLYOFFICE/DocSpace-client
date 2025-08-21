@@ -1,0 +1,46 @@
+{
+  "key_path": "AddPaymentMethod",
+  "content": "Add payment method",
+  "content_en_sha1_hash": "0b2386ed404bc961486196ff481a3604415e357f",
+  "created_at": "2025-05-28T09:33:06.617Z",
+  "updated_at": "2025-08-11T18:11:59.277Z",
+  "comment": {
+    "text": "This translation key is used for the label \"Add payment method\" that appears on a button component in a portal settings category, prompting users to add a new payment method.",
+    "is_auto": true,
+    "updated_at": "2025-05-28T09:38:33.364Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/sub-components/UpdatePlanButtonContainer.js",
+      "line_number": 170,
+      "context": "onClick={goLinkCard}\n fontWeight={600}\n style={{ textDecoration: \"underline\" }}\n data-testid=\"add_payment_method_link\"\n >\n {t(\"AddPaymentMethod\")}\n </a>\n </>\n ) : (\n t(\"ErrorNotification\")\n );",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/WalletContainer.tsx",
+      "line_number": 294,
+      "context": "as=\"span\"\n onClick={goLinkCard}\n fontWeight={600}\n textDecoration=\"underline\"\n >\n {t(\"AddPaymentMethod\")}\n </Link>\n ) : null}\n </div>\n ) : (\n <AutoPaymentInfo onOpen={onOpenLink} />",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/PaymentMethod.tsx",
+      "line_number": 111,
+      "context": "}\n textDecoration=\"underline dashed\"\n dataTestId=\"payment_method_link\"\n >\n {walletCustomerStatusNotActive\n ? t(\"AddPaymentMethod\")\n : t(\"GoToStripe\")}\n </Link>\n </div>\n ) : (\n <div className={styles.addPaymentMethodContainer} onClick={goLinkCard}>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/PaymentMethod.tsx",
+      "line_number": 111,
+      "context": "}\n textDecoration=\"underline dashed\"\n dataTestId=\"payment_method_link\"\n >\n {walletCustomerStatusNotActive\n ? t(\"AddPaymentMethod\")\n : t(\"GoToStripe\")}\n </Link>\n </div>\n ) : (\n <div className={styles.addPaymentMethodContainer} onClick={goLinkCard}>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

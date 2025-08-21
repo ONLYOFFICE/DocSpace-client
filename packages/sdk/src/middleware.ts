@@ -1,0 +1,130 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+
+import {
+  FILTER_HEADER,
+  LOCALE_HEADER,
+  SHARE_KEY_HEADER,
+  THEME_HEADER,
+} from "@/utils/constants";
+import { handlePublicRoomValidation } from "@/utils/middleware/handlePublicRoomValidation";
+
+// This function can be marked `async` if using `await` inside
+export async function middleware(request: NextRequest) {
+  const host = request.headers.get("x-forwarded-host");
+  const proto = request.headers.get("x-forwarded-proto");
+
+  const requestHeaders = new Headers(request.headers);
+
+  const redirectUrl = `${proto}://${host}`;
+
+  if (request.nextUrl.pathname === "/health") {
+    console.log("Get sdk health check for portal: ", redirectUrl);
+
+    requestHeaders.set("x-health-check", "true");
+
+    return NextResponse.json(
+      { status: "healthy" },
+      { status: 200, headers: requestHeaders },
+    );
+  }
+
+  if (request.nextUrl.pathname.includes("sdk")) {
+    return NextResponse.redirect(`${redirectUrl}/sdk${request.nextUrl.search}`);
+  }
+
+  const searchParams = new URLSearchParams(request.nextUrl.searchParams);
+
+  let theme = searchParams.get("theme");
+  const locale = searchParams.get("locale");
+  const shareKey = searchParams.get("key");
+
+  if (theme) {
+    const firstChar = theme[0].toUpperCase();
+    const rest = theme.slice(1).toLowerCase();
+
+    theme = `${firstChar}${rest}`;
+  }
+
+  requestHeaders.set(THEME_HEADER, theme ?? "");
+  requestHeaders.set(LOCALE_HEADER, locale ?? "");
+  requestHeaders.set(SHARE_KEY_HEADER, shareKey ?? "");
+
+  if (request.nextUrl.pathname.includes("public-room")) {
+    const validationResult = await handlePublicRoomValidation(
+      request,
+      requestHeaders,
+      shareKey || "",
+    );
+
+    if (validationResult?.redirect) {
+      return NextResponse.rewrite(
+        new URL(validationResult.redirect, request.url),
+        {
+          headers: requestHeaders,
+        },
+      );
+    }
+
+    requestHeaders.set(FILTER_HEADER, searchParams.toString());
+
+    const response = NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      },
+    });
+
+    if (validationResult?.anonymousSessionKeyCookie) {
+      response.headers.append(
+        "Set-Cookie",
+        validationResult.anonymousSessionKeyCookie,
+      );
+    }
+
+    return response;
+  }
+
+  return NextResponse.next({
+    request: {
+      headers: requestHeaders,
+    },
+  });
+}
+
+// See "Matching Paths" below to learn more
+export const config = {
+  matcher: [
+    "/health",
+    "/sdk",
+    "/room-selector",
+    "/file-selector",
+    "/public-room",
+    "/public-room/password",
+  ],
+};

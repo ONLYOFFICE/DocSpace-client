@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,13 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import { CircleSkeleton } from "../circle";
 import { RectangleSkeleton } from "../rectangle";
 
-import { StyledHeader, StyledSpacer } from "./NavMenu.styled";
 import type { NavMenuHeaderLoaderProps } from "./NavMenu.types";
 import { globalColors } from "../../themes";
+import styles from "./NavMenu.module.scss";
 
 export const NavMenuHeaderLoader = ({
   id,
@@ -51,7 +52,7 @@ export const NavMenuHeaderLoader = ({
   } = rest;
 
   return (
-    <StyledHeader id={id} className={className} style={style}>
+    <div id={id} className={classNames(styles.header, className)} style={style}>
       <RectangleSkeleton
         title={title}
         width="208"
@@ -64,7 +65,7 @@ export const NavMenuHeaderLoader = ({
         speed={speed}
         animate={animate}
       />
-      <StyledSpacer />
+      <div />
       <CircleSkeleton
         x="18"
         y="18"
@@ -76,6 +77,6 @@ export const NavMenuHeaderLoader = ({
         backgroundOpacity={backgroundOpacity}
         foregroundOpacity={foregroundOpacity}
       />
-    </StyledHeader>
+    </div>
   );
 };

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import axios from "axios";
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 
 import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
@@ -36,6 +36,7 @@ import { CategoryType, LinkType } from "SRC_DIR/helpers/constants";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
 import { ValidationStatus } from "@docspace/shared/enums";
+import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
 
 class PublicRoomStore {
   externalLinks = [];
@@ -54,10 +55,15 @@ class PublicRoomStore {
 
   isLoading = false;
 
+  windowIsOpen = false;
+
   clientLoadingStore;
 
-  constructor(clientLoadingStore) {
+  filesStore;
+
+  constructor(clientLoadingStore, filesStore) {
     this.clientLoadingStore = clientLoadingStore;
+    this.filesStore = filesStore;
     makeAutoObservable(this);
   }
 
@@ -170,7 +176,11 @@ class PublicRoomStore {
     this.externalLinks = externalLinks;
   };
 
-  setExternalLink = (link) => {
+  setPublicRoomKey = (key) => {
+    this.publicRoomKey = key;
+  };
+
+  setExternalLink = (link, searchParams, setSearchParams, isCustomRoom) => {
     const linkIndex = this.externalLinks.findIndex(
       (l) => l.sharedTo.id === link.sharedTo.id,
     );
@@ -181,6 +191,10 @@ class PublicRoomStore {
       this.externalLinks = externalLinks;
     } else {
       externalLinks[linkIndex] = link;
+    }
+
+    if (isCustomRoom && searchParams && setSearchParams) {
+      this.updateUrlKeyForCustomRoom(searchParams, setSearchParams);
     }
   };
 
@@ -227,15 +241,22 @@ class PublicRoomStore {
     api.rooms
       .validatePublicRoomKey(key)
       .then((res) => {
-        if (res?.shared) {
-          return this.gotoFolder(res);
-        }
+        runInAction(() => {
+          this.publicRoomKey = key;
+        });
 
-        if (res?.isAuthenticated) {
+        const needPassword = res.status === ValidationStatus.Password;
+
+        const currentUrl = window.location.href;
+
+        if (
+          !needPassword &&
+          (res?.shared || res?.isAuthenticated) &&
+          !currentUrl.includes("/rooms/shared")
+        ) {
           return this.gotoFolder(res, key);
         }
 
-        this.publicRoomKey = key;
         this.setRoomData(res);
       })
       .finally(() => this.setIsLoading(false));
@@ -243,6 +264,69 @@ class PublicRoomStore {
 
   validatePublicRoomPassword = (key, passwordHash) => {
     return api.rooms.validatePublicRoomPassword(key, passwordHash);
+  };
+
+  getAuthWindow = () => {
+    return new Promise((res, rej) => {
+      try {
+        const path = combineUrl(
+          window.ClientConfig?.proxy?.url,
+          "/login?publicAuth=true",
+        );
+
+        const authModal = window.open(path, "_blank", "height=800, width=866");
+
+        const checkConnect = setInterval(() => {
+          if (!authModal || !authModal.closed) {
+            return;
+          }
+
+          clearInterval(checkConnect);
+
+          res(authModal);
+        }, 500);
+      } catch (error) {
+        rej(error);
+      }
+    });
+  };
+
+  onOpenSignInWindow = async () => {
+    if (this.windowIsOpen) return;
+
+    this.windowIsOpen = true;
+    await this.getAuthWindow();
+    this.windowIsOpen = false;
+
+    const isAuth = localStorage.getItem(PUBLIC_STORAGE_KEY);
+
+    if (isAuth) {
+      localStorage.removeItem(PUBLIC_STORAGE_KEY);
+      window.location.reload();
+    }
+  };
+
+  updateUrlKeyForCustomRoom = (searchParams, setSearchParams) => {
+    const primaryLink = this.primaryLink;
+
+    if (primaryLink) {
+      this.setPublicRoomKey(primaryLink.sharedTo.requestToken);
+      setSearchParams((prev) => {
+        prev.set("key", primaryLink.sharedTo.requestToken);
+        return prev;
+      });
+    } else if (this.roomLinks.length > 0) {
+      const firstAvailableLink = this.roomLinks[0];
+      this.setPublicRoomKey(firstAvailableLink.sharedTo.requestToken);
+      setSearchParams((prev) => {
+        prev.set("key", firstAvailableLink.sharedTo.requestToken);
+        return prev;
+      });
+    } else {
+      this.setPublicRoomKey(null);
+      searchParams.delete("key");
+      setSearchParams(searchParams);
+    }
   };
 
   get isPublicRoom() {

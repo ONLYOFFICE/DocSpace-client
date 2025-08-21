@@ -3,10 +3,8 @@
   "DocumentsFileType": "Sənədlər",
   "ErrorConnectionLost": "Bağlantı itdi",
   "FileLocation": "Faylın yerləşdiyi yeri açın",
-  "FileName": "Fayl adı",
   "ImageFileType": "Şəkillər",
   "MailMergeFileType": "XLSX formatlı faylı seçin",
-  "OpenSavedDocument": "Yadda saxlanmış sənədi yeni tabda açın",
   "SelectFilesType": "Bu növ faylları seçin: {{fileType}}",
   "UsersWithoutAccess": "Qeyd etmək istədiyiniz bəzi istifadəçilərin otağa girişi yoxdur: {{users}}"
 }

@@ -29,11 +29,11 @@ import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
 
 import { CheckboxProps } from "./Checkbox.types";
-import { CheckboxPure } from "./Checkbox";
+import { Checkbox } from ".";
 
 const meta = {
-  title: "Components/Checkbox",
-  component: CheckboxPure,
+  title: "Form Controls/Checkbox",
+  component: Checkbox,
   parameters: {
     docs: {
       description: { component: "Custom checkbox input" },
@@ -43,43 +43,65 @@ const meta = {
     onChange: {
       action: "onChange",
     },
+    isChecked: {
+      control: { type: "boolean" },
+    },
+    isDisabled: {
+      control: { type: "boolean" },
+    },
+    isIndeterminate: {
+      control: { type: "boolean" },
+    },
+    label: {
+      control: { type: "text" },
+    },
+    hasError: {
+      control: { type: "boolean" },
+    },
   },
-} satisfies Meta<typeof CheckboxPure>;
+} satisfies Meta<typeof Checkbox>;
 
-type Story = StoryObj<typeof CheckboxPure>;
+type Story = StoryObj<typeof Checkbox>;
 export default meta;
 
-const AllCheckboxesTemplate = (args: CheckboxProps) => {
-  const { onChange } = args;
-  return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat( auto-fill, minmax(120px, 1fr) )",
-        gridGap: "16px",
-        alignItems: "center",
-      }}
-    >
-      <CheckboxPure onChange={onChange} />
-
-      <CheckboxPure isChecked onChange={onChange} />
-
-      <CheckboxPure isDisabled onChange={onChange} />
-
-      <CheckboxPure isIndeterminate onChange={onChange} />
-
-      <CheckboxPure label="Some label" onChange={onChange} />
-    </div>
-  );
-};
+const CheckboxTemplate = (args: CheckboxProps) => <Checkbox {...args} />;
 
 export const Default: Story = {
-  render: (args: CheckboxProps) => <CheckboxPure {...args} />,
+  render: CheckboxTemplate,
   args: {
-    label: "Checkbox label",
+    label: "Checkbox",
   },
 };
 
-export const AllCheckboxStates: Story = {
-  render: () => <AllCheckboxesTemplate />,
+export const Checked: Story = {
+  render: CheckboxTemplate,
+  args: {
+    isChecked: true,
+    label: "Checked Checkbox",
+  },
+};
+
+export const Disabled: Story = {
+  render: CheckboxTemplate,
+  args: {
+    isDisabled: true,
+    label: "Disabled Checkbox",
+  },
+};
+
+export const Indeterminate: Story = {
+  render: CheckboxTemplate,
+  args: {
+    isIndeterminate: true,
+    label: "Indeterminate Checkbox",
+  },
+};
+
+export const CheckboxWithError: Story = {
+  render: CheckboxTemplate,
+  args: {
+    label: "Checkbox with Error",
+    isChecked: true,
+    hasError: true,
+  },
 };

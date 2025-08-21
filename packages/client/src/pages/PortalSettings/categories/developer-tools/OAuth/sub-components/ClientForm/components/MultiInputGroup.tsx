@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -59,6 +59,8 @@ interface MultiInputGroupProps {
   helpButtonText?: string;
 
   isDisabled?: boolean;
+
+  dataTestId?: string;
 }
 
 const MultiInputGroup = ({
@@ -71,6 +73,7 @@ const MultiInputGroup = ({
   hasError,
   helpButtonText,
   isDisabled,
+  dataTestId,
 }: MultiInputGroupProps) => {
   const [value, setValue] = React.useState("");
 
@@ -182,6 +185,7 @@ const MultiInputGroup = ({
         }
         isRequired
         isError={isError || hasError}
+        dataTestId={dataTestId ? `${dataTestId}_input_group` : undefined}
       >
         <StyledInputRow>
           <InputBlock
@@ -198,13 +202,21 @@ const MultiInputGroup = ({
             hasError={isError || hasError}
             size={InputSize.base}
             type={InputType.text}
+            noIcon
+            testId={`${dataTestId}_input`}
           />
           <StyledInputAddBlock ref={addRef} onClick={onAddAction}>
             <Text fontSize="13px" fontWeight={600} lineHeight="20px" truncate>
               {value}
             </Text>
             <div className="add-block">
-              <Text fontSize="13px" fontWeight={400} lineHeight="20px" truncate>
+              <Text
+                dataTestId={dataTestId ? `${dataTestId}_add_button` : undefined}
+                fontSize="13px"
+                fontWeight={400}
+                lineHeight="20px"
+                truncate
+              >
                 {t("Common:AddButton")}
               </Text>
               <ArrowIcon />
@@ -213,12 +225,15 @@ const MultiInputGroup = ({
           <SelectorAddButton
             onClick={onAddAction}
             isDisabled={isDisabled || isError}
+            testId={
+              dataTestId ? `${dataTestId}_selector_add_button` : undefined
+            }
           />
         </StyledInputRow>
       </InputGroup>
 
       <StyledChipsContainer>
-        {currentValue.map((v) => (
+        {currentValue.map((v, i) => (
           <SelectedItem
             key={`${v}`}
             propKey={v}
@@ -229,6 +244,9 @@ const MultiInputGroup = ({
             onClose={() => {
               if (!isDisabled) onAdd(name as keyof IClientReqDTO, v, true);
             }}
+            dataTestId={
+              dataTestId ? `${dataTestId}_selected_item_${i}` : undefined
+            }
           />
         ))}
       </StyledChipsContainer>

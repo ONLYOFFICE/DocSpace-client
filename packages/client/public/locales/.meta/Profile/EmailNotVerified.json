@@ -1,0 +1,237 @@
+{
+  "key_path": "EmailNotVerified",
+  "content": "Email is not verified",
+  "content_en_sha1_hash": "7aa3f602be968a5b4cba5393057ed4f0013e45a4",
+  "created_at": "2025-05-19T21:30:53.354Z",
+  "updated_at": "2025-08-11T18:11:59.301Z",
+  "comment": {
+    "text": "This translation key is used to display a message indicating that an email address has not been verified. It appears in a UI component for editing or managing user emails. The translator should provide a localized version of this phrase to be displayed to users when their email verification status is unknown or invalid.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:54.003Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
+      "line_number": 431,
+      "context": "<StyledLabel as=\"div\">{t(\"Common:Email\")}</StyledLabel>\n <div className=\"email-container\">\n <div className=\"email-edit-container\">\n <Text\n data-tooltip-id=\"emailTooltip\"\n data-tooltip-content={t(\"EmailNotVerified\")}\n as=\"div\"\n className=\"email-text-container\"\n fontWeight={600}\n truncate\n >",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
+      "line_number": 431,
+      "context": "<StyledLabel as=\"div\">{t(\"Common:Email\")}</StyledLabel>\n <div className=\"email-container\">\n <div className=\"email-edit-container\">\n <Text\n data-tooltip-id=\"emailTooltip\"\n data-tooltip-content={t(\"EmailNotVerified\")}\n as=\"div\"\n className=\"email-text-container\"\n fontWeight={600}\n truncate\n >",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Էլփոստը հաստատված չէ\" is a literal translation of 'Email is not verified'. While understandable, a more natural and common Armenian phrasing would be 'Հասցեն էլփոստը չի հաստատվել' or 'Էլփոստի հաստատումը չկայացած է'.",
+          "suggestion": "Հասցեն էլփոստը չի հաստատվել"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Adres e-mail nie został jeszcze zweryfikowany' is a bit verbose and formal for a simple 'Email is not verified'. While technically correct, it's not ideal for user-facing text.",
+          "suggestion": "E-mail nie został zweryfikowany"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation includes a hyphenated word ('nie został'). Consider if breaking it could improve readability, although this is a minor point and depends on the overall design.",
+          "suggestion": "E-mail nie jest zweryfikowany"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'වි-තැපෑල සත්‍යාපනය කර නැත' while understandable, is not the most natural or common way to express 'Email is not verified' in Sinhala. A more idiomatic translation would be closer to 'විද්යුත් ලිපිනය සත්‍යාපනය කර නැත' or 'වි-තැපැල් ලිපිනය සත්‍යාපනය කර නැත'.",
+          "suggestion": "විද්යුත් ලිපිනය සත්‍යාපනය කර නැත"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

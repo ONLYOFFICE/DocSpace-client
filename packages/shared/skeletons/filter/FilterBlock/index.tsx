@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,8 +28,8 @@ import React from "react";
 import { RoomsType } from "../../../enums";
 import { RectangleSkeleton } from "../../rectangle";
 
-import { StyledBlock, StyledContainer } from "./FilterBlock.styled";
 import { FilterBlockProps } from "./FilterBlock.types";
+import styles from "../Filter.module.scss";
 
 const FilterBlockLoader = ({
   id,
@@ -41,7 +41,6 @@ const FilterBlockLoader = ({
   isContactsGroupsPage,
   isContactsInsideGroupPage,
   isContactsGuestsPage,
-
   ...rest
 }: FilterBlockProps) => {
   const roomTypeLoader = isRooms ? (
@@ -64,9 +63,15 @@ const FilterBlockLoader = ({
   ) : null;
 
   return (
-    <StyledContainer id={id} className={className} style={style} {...rest}>
-      {!isRooms && !isContactsPage && (
-        <StyledBlock>
+    <div
+      id={id}
+      className={`${styles.filterContainer} ${className || ""}`}
+      style={style}
+      {...rest}
+      data-testid="filter-block-loader"
+    >
+      {!isRooms && !isContactsPage ? (
+        <div className={styles.filterBlock} data-is-last="false">
           <RectangleSkeleton
             width="50"
             height="16"
@@ -93,11 +98,11 @@ const FilterBlockLoader = ({
               className="loader-item"
             />
           </div>
-        </StyledBlock>
-      )}
+        </div>
+      ) : null}
 
-      {!isContactsInsideGroupPage && (
-        <StyledBlock isLast={isContactsGroupsPage}>
+      {!isContactsInsideGroupPage ? (
+        <div className={styles.filterBlock} data-is-last="true">
           <RectangleSkeleton
             width="51"
             height="16"
@@ -118,7 +123,7 @@ const FilterBlockLoader = ({
               className="loader-item"
             />
           </div>
-          {(isRooms || isContactsGroupsPage) && (
+          {isRooms || isContactsGroupsPage ? (
             <div className="row-loader">
               <RectangleSkeleton
                 width="16"
@@ -133,12 +138,12 @@ const FilterBlockLoader = ({
                 className="loader-item"
               />
             </div>
-          )}
-        </StyledBlock>
-      )}
+          ) : null}
+        </div>
+      ) : null}
 
-      {(isRooms || isContactsPeoplePage || isContactsInsideGroupPage) && (
-        <StyledBlock>
+      {isRooms || isContactsPeoplePage || isContactsInsideGroupPage ? (
+        <div className={styles.filterBlock} data-is-last="false">
           <RectangleSkeleton
             width="50"
             height="16"
@@ -171,13 +176,13 @@ const FilterBlockLoader = ({
               roomTypeLoader
             ) : null}
           </div>
-        </StyledBlock>
-      )}
+        </div>
+      ) : null}
 
-      {(isContactsPeoplePage ||
-        isContactsGuestsPage ||
-        isContactsInsideGroupPage) && (
-        <StyledBlock>
+      {isContactsPeoplePage ||
+      isContactsGuestsPage ||
+      isContactsInsideGroupPage ? (
+        <div className={styles.filterBlock} data-is-last="false">
           <RectangleSkeleton
             width="50"
             height="16"
@@ -210,11 +215,11 @@ const FilterBlockLoader = ({
               className="loader-item tag-item"
             />
           </div>
-        </StyledBlock>
-      )}
+        </div>
+      ) : null}
 
-      {!isContactsGroupsPage && (
-        <StyledBlock isLast>
+      {!isContactsGroupsPage ? (
+        <div className={styles.filterBlock} data-is-last="true">
           <RectangleSkeleton
             width="50"
             height="16"
@@ -335,9 +340,9 @@ const FilterBlockLoader = ({
               </>
             )}
           </div>
-        </StyledBlock>
-      )}
-    </StyledContainer>
+        </div>
+      ) : null}
+    </div>
   );
 };
 

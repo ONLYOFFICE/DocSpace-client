@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
 import find from "lodash/find";
 import result from "lodash/result";
 
@@ -45,6 +45,7 @@ import {
   FilterGroups,
   FilterKeys,
   PaymentsType,
+  SortByFieldName,
 } from "@docspace/shared/enums";
 import { TFilterSortBy, TSortOrder } from "@docspace/shared/api/people/types";
 import { TTranslation } from "@docspace/shared/types";
@@ -52,7 +53,6 @@ import { TTranslation } from "@docspace/shared/types";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
 import { TContactsTab, getContactsUrl } from "SRC_DIR/helpers/contacts";
-import { SortByFieldName } from "SRC_DIR/helpers/constants";
 import { getUserTypeTranslation } from "@docspace/shared/utils/common";
 
 type TFilterValues = (TGroupItem | TItem)[];
@@ -224,26 +224,20 @@ export const useContactsFilter = ({
           newFilter.area = "people";
         }
 
-        if (groupId) {
-          newFilter.group = groupId;
-        }
+        newFilter.group = groupId || null;
 
-        if (quota) {
-          newFilter.quotaFilter = quota;
-        }
+        newFilter.quotaFilter = quota;
+
         newFilter.page = 0;
 
-        if (status) newFilter.employeeStatus = status;
+        newFilter.employeeStatus = status;
 
-        if (role) newFilter.role = role;
-        if (payments) newFilter.payments = payments;
-        if (accountLoginType) newFilter.accountLoginType = accountLoginType;
-        if (withoutGroup) newFilter.withoutGroup = withoutGroup;
-        if (group) newFilter.group = group;
-        if (inviterId) {
-          newFilter.inviterId =
-            inviterId === FilterKeys.me ? userId : inviterId;
-        }
+        newFilter.role = role;
+        newFilter.payments = payments;
+        newFilter.accountLoginType = accountLoginType;
+        newFilter.withoutGroup = withoutGroup;
+        newFilter.group = group;
+        newFilter.inviterId = inviterId === FilterKeys.me ? userId : inviterId;
 
         const url = getContactsUrl(contactsTab, group ?? undefined);
 
@@ -380,7 +374,7 @@ export const useContactsFilter = ({
       }
 
       if (usersFilter.quotaFilter) {
-        const key = usersFilter.quotaFilter as unknown as FilterKeys;
+        const key = usersFilter.quotaFilter.toString();
 
         const label =
           key === FilterKeys.customQuota
@@ -598,7 +592,7 @@ export const useContactsFilter = ({
           {
             key: "filter-account",
             group: "filter-account",
-            label: t("ConnectDialog:Account"),
+            label: t("Common:Account"),
             isHeader: true,
             isLast: false,
           },

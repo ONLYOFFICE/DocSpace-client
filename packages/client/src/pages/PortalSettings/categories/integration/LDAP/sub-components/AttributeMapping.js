@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,9 +27,8 @@
 import React, { useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { Trans, useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
-import { Box } from "@docspace/shared/components/box";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
@@ -123,9 +122,12 @@ const AttributeMapping = (props) => {
         <Text fontWeight={600} fontSize="14px">
           {t("LdapAttributeMapping")}
         </Text>
-        <HelpButton tooltipContent={t("LdapAdvancedSettingsTooltip")} />
+        <HelpButton
+          dataTestId="attribute_mapping_help_button"
+          tooltipContent={t("LdapAdvancedSettingsTooltip")}
+        />
       </div>
-      <Box className="ldap_attribute-mapping">
+      <div className="ldap_attribute-mapping">
         <FieldContainer
           style={FIELD_STYLE}
           isVertical
@@ -134,6 +136,7 @@ const AttributeMapping = (props) => {
           hasError={errors.firstName}
           labelText={t("Common:FirstName")}
           isRequired
+          dataTestId="first_name_field_container"
         >
           <LdapFieldComponent
             name={FIRST_NAME}
@@ -143,6 +146,7 @@ const AttributeMapping = (props) => {
             scale
             isDisabled={!isLdapEnabled || isUIDisabled}
             tabIndex={7}
+            dataTestId="first_name_field"
           />
         </FieldContainer>
 
@@ -154,6 +158,7 @@ const AttributeMapping = (props) => {
           hasError={errors.secondName}
           labelText={t("LdapSecondName")}
           isRequired
+          dataTestId="second_name_field_container"
         >
           <LdapFieldComponent
             name={SECOND_NAME}
@@ -163,6 +168,7 @@ const AttributeMapping = (props) => {
             scale
             isDisabled={!isLdapEnabled || isUIDisabled}
             tabIndex={8}
+            dataTestId="second_name_field"
           />
         </FieldContainer>
 
@@ -174,6 +180,7 @@ const AttributeMapping = (props) => {
           hasError={errors.mail}
           labelText={t("LdapMail")}
           isRequired
+          dataTestId="mail_field_container"
         >
           <LdapFieldComponent
             name={MAIL}
@@ -183,6 +190,7 @@ const AttributeMapping = (props) => {
             scale
             isDisabled={!isLdapEnabled || isUIDisabled}
             tabIndex={9}
+            dataTestId="mail_field"
           />
         </FieldContainer>
 
@@ -192,6 +200,7 @@ const AttributeMapping = (props) => {
           labelVisible
           hasError={errors.avatarAttribute}
           labelText={t("LdapAvatar")}
+          dataTestId="avatar_field_container"
         >
           <TextInput
             name={AVATAR}
@@ -201,6 +210,7 @@ const AttributeMapping = (props) => {
             scale
             isDisabled={!isLdapEnabled || isUIDisabled}
             tabIndex={10}
+            testId="avatar_field"
           />
         </FieldContainer>
 
@@ -214,6 +224,7 @@ const AttributeMapping = (props) => {
             contactsName: t("Common:Contacts"),
           })}
           inlineHelpButton
+          dataTestId="quota_field_container"
         >
           <TextInput
             name={QUOTA}
@@ -225,8 +236,9 @@ const AttributeMapping = (props) => {
               !isDefaultUsersQuotaSet || !isLdapEnabled || isUIDisabled
             }
             tabIndex={11}
+            testId="quota_limit_input"
           />
-          {!isDefaultUsersQuotaSet && (
+          {!isDefaultUsersQuotaSet ? (
             <Text as="span" fontWeight={400} fontSize="12px" lineHeight="16px">
               <Trans
                 t={t}
@@ -238,32 +250,28 @@ const AttributeMapping = (props) => {
                     type="action"
                     color={currentColorScheme.main.accent}
                     onClick={goToStarageManagement}
+                    dataTestId="storage_management_link"
                   />,
                 ]}
               />
             </Text>
-          )}
+          ) : null}
         </FieldContainer>
-      </Box>
-      <Box marginProp="24px 0 24px 0">
-        <Box
-          displayProp="flex"
-          flexDirection="column"
-          gapProp="8px"
-          marginProp="0 0 12px 0"
-        >
-          <Box displayProp="flex" flexDirection="row" gapProp="4px">
+      </div>
+      <div className="ldap_users-type-box">
+        <div className="ldap_users-type-box-title">
+          <div className="ldap_users-type-title">
             <Text fontWeight={600} fontSize="15px" lineHeight="16px">
               {t("LdapUsersType")}
             </Text>
-          </Box>
+          </div>
           <Text fontWeight={400} fontSize="12px" lineHeight="16px">
             {t("LdapUserTypeTooltip", {
               productName: t("Common:ProductName"),
             })}
           </Text>
-        </Box>
-        <Box className="access-selector-wrapper">
+        </div>
+        <div className="access-selector-wrapper">
           <AccessSelector
             className="add-manually-access"
             t={t}
@@ -281,8 +289,8 @@ const AttributeMapping = (props) => {
             scaledOptions={!isMobile()}
           />
           <div />
-        </Box>
-      </Box>
+        </div>
+      </div>
     </>
   );
 };

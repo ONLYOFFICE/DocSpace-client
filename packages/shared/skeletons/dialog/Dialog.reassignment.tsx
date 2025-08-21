@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,12 +26,14 @@
 
 import { CircleSkeleton } from "../circle";
 import { RectangleSkeleton } from "../rectangle";
-
-import { StyledDataReassignmentLoader } from "./Dialog.styled";
+import styles from "./Dialog.module.scss";
 
 export const DialogReassignmentSkeleton = () => {
   return (
-    <StyledDataReassignmentLoader>
+    <div
+      className={styles.dataReassignmentLoader}
+      data-testid="dialog-reassignment-skeleton"
+    >
       <div className="user">
         <CircleSkeleton className="avatar" radius="40" x="40" y="40" />
 
@@ -58,6 +60,6 @@ export const DialogReassignmentSkeleton = () => {
         <RectangleSkeleton width="223" height="20" />
         <RectangleSkeleton width="160" height="20" />
       </div>
-    </StyledDataReassignmentLoader>
+    </div>
   );
 };

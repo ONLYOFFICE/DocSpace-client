@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,6 +26,7 @@
 
 import React from "react";
 import { Trans } from "react-i18next";
+import { TFunction } from "i18next";
 import copy from "copy-to-clipboard";
 
 import { toastr } from "@docspace/shared/components/toast";
@@ -72,7 +73,9 @@ const ClientBlock = ({
     }
   };
 
-  const helpButtonText = <Trans t={t} i18nKey="ClientHelpButton" ns="OAuth" />;
+  const helpButtonText = (
+    <Trans t={t as TFunction} i18nKey="ClientHelpButton" ns="OAuth" />
+  );
 
   return (
     <StyledBlock>
@@ -86,6 +89,7 @@ const ClientBlock = ({
           onChange={onChange}
           withCopy
           onCopyClick={() => onCopyClick("id")}
+          dataTestId="id_input_group"
         />
         <InputGroup
           label={t("Secret")}
@@ -98,6 +102,7 @@ const ClientBlock = ({
           buttonLabel={t("Reset")}
           onButtonClick={onResetClick}
           onCopyClick={() => onCopyClick("secret")}
+          dataTestId="secret_input_group"
         />
       </StyledInputBlock>
     </StyledBlock>

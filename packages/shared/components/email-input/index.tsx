@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,6 +24,87 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export type { TValidate } from "./EmailInput.types";
+import React from "react";
+import { isIOS, isMobile } from "react-device-detect";
+import { parseAddress } from "../../utils";
+import { InputType, TextInput } from "../text-input";
+import type { EmailInputProps, TValidate } from "./EmailInput.types";
+import styles from "./EmailInput.module.scss";
 
-export { EmailInput } from "./EmailInput";
+export type { EmailInputProps, TValidate };
+
+export const EmailInput = ({
+  onValidateInput,
+  customValidate,
+  emailSettings,
+  value = "",
+  isAutoFocussed,
+  autoComplete = "email",
+  hasError,
+  handleAnimationStart,
+  onChange,
+  onBlur,
+  dataTestId,
+  ...rest
+}: EmailInputProps) => {
+  const [inputValue, setInputValue] = React.useState(value);
+  const [validationState, setValidationState] = React.useState<TValidate>({
+    value: "",
+    isValid: true,
+    errors: [],
+  });
+
+  const validateEmail = React.useCallback(
+    (emailValue: string): TValidate => {
+      if (customValidate) return customValidate(emailValue);
+
+      const emailObj = parseAddress(emailValue, emailSettings);
+      const isValid = emailObj.isValid();
+      const errors =
+        emailObj.parseErrors?.map(
+          (error: { errorKey: string }) => error.errorKey,
+        ) ?? [];
+
+      return { value: emailValue, isValid, errors };
+    },
+    [customValidate, emailSettings],
+  );
+
+  const handleChange = React.useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const newValue = e.target.value;
+      const validation = validateEmail(newValue);
+
+      setInputValue(newValue);
+      setValidationState(validation);
+
+      onChange?.(e);
+      onValidateInput?.(validation);
+    },
+    [onChange, onValidateInput, validateEmail],
+  );
+
+  React.useEffect(() => {
+    setInputValue(value);
+    setValidationState(validateEmail(value));
+  }, [value, validateEmail]);
+
+  const computedHasError =
+    hasError ?? Boolean(inputValue && !validationState.isValid);
+
+  return (
+    <TextInput
+      {...rest}
+      className={styles.emailInput}
+      type={InputType.text}
+      value={inputValue}
+      hasError={computedHasError}
+      autoComplete={autoComplete}
+      isAutoFocussed={isMobile && isIOS ? false : isAutoFocussed}
+      onChange={handleChange}
+      onBlur={onBlur}
+      onAnimationStart={handleAnimationStart}
+      testId={dataTestId ?? "email-input"}
+    />
+  );
+};

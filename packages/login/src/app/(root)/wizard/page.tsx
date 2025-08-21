@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
 import {
@@ -38,16 +38,20 @@ import {
   getPortalCultures,
 } from "@/utils/actions";
 
-import WizardForm from "./page.client";
 import WizardGreeting from "@/components/WizardGreeting/index.client";
+import { LoginContainer } from "@/components/LoginContainer";
+
+import { getUserTimezone } from "@docspace/shared/utils/common";
+import { LANGUAGE, TIMEZONE } from "@docspace/shared/constants";
+import { logger } from "logger.mjs";
+import WizardForm from "./page.client";
 
 async function Page() {
-  console.log("start wizzard requests");
+  logger.info("Wizard page");
+
   const settings = await getSettings();
 
   const objectSettings = typeof settings === "string" ? undefined : settings;
-
-  console.log("wizzard token", objectSettings?.wizardToken);
 
   if (!objectSettings || !objectSettings.wizardToken) {
     redirect("/");
@@ -67,10 +71,21 @@ async function Page() {
     getPortalCultures(),
   ]);
 
+  const commonResources = objectSettings?.externalResources?.common?.entries;
+  const forumLinkUrl = objectSettings?.externalResources?.forum?.domain;
+
+  const cookieStore = await cookies();
+  const timezoneCookie = cookieStore.get(TIMEZONE);
+  const userTimezone = timezoneCookie
+    ? timezoneCookie.value
+    : getUserTimezone();
+
+  const culture = cookieStore.get(LANGUAGE)?.value ?? objectSettings?.culture;
+
   return (
-    <ColorTheme themeId={ThemeId.LinkForgotPassword}>
+    <LoginContainer>
       <>
-        <WizardGreeting />
+        <WizardGreeting culture={culture} />
         <FormWrapper id="wizard-form">
           <WizardForm
             passwordSettings={passwordSettings}
@@ -78,17 +93,17 @@ async function Page() {
             isRequiredLicense={isRequiredLicense}
             portalCultures={portalCultures}
             portalTimeZones={portalTimeZones}
-            licenseUrl={objectSettings?.licenseUrl}
-            culture={objectSettings?.culture}
-            forumLink={objectSettings?.forumLink}
+            licenseUrl={commonResources.license}
+            forumLinkUrl={forumLinkUrl}
             wizardToken={objectSettings?.wizardToken}
             passwordHash={objectSettings?.passwordHash}
-            documentationEmail={objectSettings?.documentationEmail}
+            documentationEmail={commonResources.documentationemail}
             isAmi={objectSettings?.isAmi}
+            userTimeZone={userTimezone}
           />
         </FormWrapper>
       </>
-    </ColorTheme>
+    </LoginContainer>
   );
 }
 

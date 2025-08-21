@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,23 +31,17 @@ import { DropDownItem } from "../../drop-down-item";
 import { RowProps } from "../DropDown.types";
 
 const Row = memo(({ data, index, style }: RowProps) => {
-  const { children, theme, activedescendant, handleMouseMove } = data;
+  const { children, activedescendant, handleMouseMove } = data;
 
   const option = Array.isArray(children) ? children[index] : null;
 
-  const separator = option?.props?.isSeparator
-    ? { width: `calc(100% - 32px)`, height: `1px` }
-    : {};
+  const optionStyle = option?.props?.style ?? {};
 
-  const optionStyle = option?.props.style ?? {};
-
-  const newStyle = { ...style, ...separator, ...optionStyle };
+  const newStyle = { ...style, ...optionStyle };
 
   return (
     <DropDownItem
-      theme={theme}
       {...option?.props}
-      noHover
       style={newStyle}
       onMouseMove={() => {
         handleMouseMove?.(index);

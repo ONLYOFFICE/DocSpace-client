@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,9 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter } from "react-router";
 
 import Error404 from "@docspace/shared/components/errors/Error404";
+import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
 import routes from "./routes";
 
 import Root from "./Shell";
@@ -37,6 +38,9 @@ const router = createBrowserRouter([
     path: "/",
     element: <Root />,
     errorElement: <Error404 />,
+    hydrateFallbackElement: (
+      <Loader className="pageLoader" type={LoaderTypes.rombs} size="40px" />
+    ),
     children: [...routes],
   },
 ]);

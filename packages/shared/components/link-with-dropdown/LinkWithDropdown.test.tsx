@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,288 +24,146 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// import React from "react";
-// // @ts-expect-error TS(7016): Could not find a declaration file for module 'enzy... Remove this comment to see the full error message
-// import { mount, shallow } from "enzyme";
-// import LinkWithDropdown from ".";
+import "@testing-library/jest-dom";
+import { render, screen, fireEvent } from "@testing-library/react";
+import { LinkWithDropdown } from "./LinkWithDropdown";
 
-// const data = [
-//   {
-//     key: "key1",
-//     label: "Button 1",
-//     onClick: () => console.log("Button1 action"),
-//   },
-//   {
-//     key: "key2",
-//     label: "Button 2",
-//     onClick: () => console.log("Button2 action"),
-//   },
-//   {
-//     key: "key3",
-//     isSeparator: true,
-//   },
-//   {
-//     key: "key4",
-//     label: "Button 3",
-//     onClick: () => console.log("Button3 action"),
-//   },
-// ];
+const mockData = [
+  {
+    key: "key1",
+    label: "Button 1",
+    onClick: jest.fn(),
+  },
+  {
+    key: "key2",
+    label: "Button 2",
+    onClick: jest.fn(),
+  },
+  {
+    key: "key3",
+    isSeparator: true,
+  },
+  {
+    key: "key4",
+    label: "Button 3",
+    onClick: jest.fn(),
+  },
+];
 
-describe("<LinkWithDropdown />", () => {
+describe("LinkWithDropdown", () => {
   it("renders without error", () => {
-    // const wrapper = mount(
-    //   <LinkWithDropdown isBold={true} data={[]}>
-    //     Link with dropdown
-    //   </LinkWithDropdown>
-    // );
-    // // @ts-expect-error TS(2304): Cannot find name 'expect'.
-    // expect(wrapper).toExist();
+    render(
+      <LinkWithDropdown isBold data={[]}>
+        Link with dropdown
+      </LinkWithDropdown>,
+    );
+
+    const button = screen.getByRole("button", { name: "Link with dropdown" });
+    expect(button).toBeInTheDocument();
+    expect(button).toHaveAttribute("aria-haspopup", "true");
+    expect(button).toHaveAttribute("aria-expanded", "false");
   });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("re-render test", () => {
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2322): Type '{ children: string; color: string; isBold: b... Remove this comment to see the full error message
-  //     <LinkWithDropdown isBold={true} data={data}>
-  //       Link with dropdown
-  //     </LinkWithDropdown>
-  //   );
+  it("renders with dropdown items", () => {
+    render(
+      <LinkWithDropdown isBold data={mockData} id="test-dropdown">
+        Link with dropdown
+      </LinkWithDropdown>,
+    );
 
-  //   const instance = wrapper.instance();
-  //   const shouldUpdate = instance.shouldComponentUpdate(
-  //     {
-  //       isBold: false,
-  //     },
-  //     wrapper.state
-  //   );
+    const trigger = screen.getByRole("button", { name: "Link with dropdown" });
+    expect(trigger).toHaveAttribute("aria-expanded", "false");
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(shouldUpdate).toBe(true);
-  // });
+    // Open dropdown
+    fireEvent.click(trigger);
+    expect(trigger).toHaveAttribute("aria-expanded", "true");
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("re-render after changing color", () => {
-  //   const wrapper = shallow(
-  //     // @ts-expect-error TS(2322): Type '{ children: string; color: string; isBold: b... Remove this comment to see the full error message
-  //     <LinkWithDropdown isBold={true} data={data}>
-  //       Link with dropdown
-  //     </LinkWithDropdown>
-  //   );
-  //   const instance = wrapper.instance();
+    // Check dropdown container
+    const dropdown = screen.getByTestId("dropdown");
+    expect(dropdown).toBeInTheDocument();
+    expect(dropdown).toHaveAttribute("role", "listbox");
 
-  //   const shouldUpdate = instance.shouldComponentUpdate(
-  //     {
-  //       color: "",
-  //     },
-  //     instance.state
-  //   );
+    // Check if dropdown items are rendered
+    const items = screen.getAllByTestId((testId) =>
+      testId.startsWith("link_with_drop_down_"),
+    );
+    expect(items).toHaveLength(4); // Including separator
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(shouldUpdate).toBe(true);
-  // });
+    // Verify menu items text content (excluding separator)
+    expect(items[0]).toHaveTextContent("Button 1");
+    expect(items[1]).toHaveTextContent("Button 2");
+    expect(items[3]).toHaveTextContent("Button 3");
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("re-render after changing dropdownType and isOpen prop", () => {
-  //   const wrapper = shallow(
-  //     // @ts-expect-error TS(2322): Type '{ children: string; color: string; isBold: b... Remove this comment to see the full error message
-  //     <LinkWithDropdown isBold={true} data={data}>
-  //       Link with dropdown
-  //     </LinkWithDropdown>
-  //   );
-  //   const instance = wrapper.instance();
+    // Verify menu item structure
+    items.forEach((item) => {
+      expect(item).toHaveClass("drop-down-item");
+    });
 
-  //   const shouldUpdate = instance.shouldComponentUpdate(
-  //     {
-  //       isOpen: true,
-  //       dropdownType: "appearDashedAfterHover",
-  //     },
-  //     instance.state
-  //   );
+    // Verify separator - check that the separator is present in the DOM
+    const separator = screen.getByRole("separator");
+    expect(separator).toBeInTheDocument();
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(shouldUpdate).toBe(true);
-  // });
+  it("handles click events on dropdown items", () => {
+    render(
+      <LinkWithDropdown isBold data={mockData}>
+        Link with dropdown
+      </LinkWithDropdown>,
+    );
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("re-render after changing isOpen prop", () => {
-  //   const wrapper = shallow(
-  //     // @ts-expect-error TS(2322): Type '{ children: string; color: string; isBold: b... Remove this comment to see the full error message
-  //     <LinkWithDropdown isBold={true} data={data}>
-  //       Link with dropdown
-  //     </LinkWithDropdown>
-  //   );
-  //   const instance = wrapper.instance();
+    // Open dropdown
+    const trigger = screen.getByRole("button", { name: "Link with dropdown" });
+    fireEvent.click(trigger);
 
-  //   const shouldUpdate = instance.shouldComponentUpdate(
-  //     {
-  //       isOpen: true,
-  //     },
-  //     instance.state
-  //   );
+    // Click first button
+    const firstMenuItem = screen.getByText("Button 1");
+    fireEvent.click(firstMenuItem);
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(shouldUpdate).toBe(true);
-  // });
+    // Check that the onClick handler was called
+    expect(mockData[0].onClick).toHaveBeenCalled();
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("not re-render", () => {
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2322): Type '{ children: string; color: string; isBold: b... Remove this comment to see the full error message
-  //     <LinkWithDropdown isBold={true} data={data}>
-  //       Link with dropdown
-  //     </LinkWithDropdown>
-  //   );
+    // Check that the dropdown closes after clicking
+    expect(trigger).toHaveAttribute("aria-expanded", "false");
+  });
 
-  //   const instance = wrapper.instance();
-  //   const shouldUpdate = instance.shouldComponentUpdate(
-  //     instance.props,
-  //     instance.state
-  //   );
+  it("renders with custom styles", () => {
+    render(
+      <LinkWithDropdown
+        isBold
+        data={mockData}
+        color="red"
+        fontSize="16px"
+        isSemitransparent
+      >
+        Link with dropdown
+      </LinkWithDropdown>,
+    );
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(shouldUpdate).toBe(false);
-  // });
+    const button = screen.getByRole("button", { name: "Link with dropdown" });
+    expect(button).toHaveStyle({ color: "red" });
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts id", () => {
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2322): Type '{ children: string; color: string; isBold: b... Remove this comment to see the full error message
-  //     <LinkWithDropdown isBold={true} data={[]} id="testId">
-  //       Link with dropdown
-  //     </LinkWithDropdown>
-  //   );
+  it("handles disabled state", () => {
+    render(
+      <LinkWithDropdown isBold data={mockData} isDisabled>
+        Link with dropdown
+      </LinkWithDropdown>,
+    );
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("id")).toEqual("testId");
-  // });
+    const button = screen.getByRole("button", { name: "Link with dropdown" });
+    expect(button).toHaveAttribute("aria-disabled", "true");
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts className", () => {
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2322): Type '{ children: string; color: string; isBold: b... Remove this comment to see the full error message
-  //     <LinkWithDropdown
-  //       isBold={true}
-  //       data={[]}
-  //       className="test"
-  //     >
-  //       Link with dropdown
-  //     </LinkWithDropdown>
-  //   );
+  it("handles text overflow", () => {
+    const title = "Full text of the dropdown";
+    render(
+      <LinkWithDropdown isBold data={mockData} isTextOverflow title={title}>
+        Link with dropdown
+      </LinkWithDropdown>,
+    );
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("className")).toEqual("test");
-  // });
-
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts style", () => {
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2322): Type '{ children: string; color: string; isBold: b... Remove this comment to see the full error message
-  //     <LinkWithDropdown
-  //       isBold={true}
-  //       data={[]}
-  //       style={{ color: "red" }}
-  //     >
-  //       Link with dropdown
-  //     </LinkWithDropdown>
-  //   );
-
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.getDOMNode().style).toHaveProperty("color", "red");
-  // });
-
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("componentDidUpdate() state lifecycle test", () => {
-  //   const wrapper = shallow(
-  //     // @ts-expect-error TS(2322): Type '{ children: string; color: string; isBold: b... Remove this comment to see the full error message
-  //     <LinkWithDropdown
-  //       isBold={true}
-  //       data={[]}
-  //       style={{ color: "red" }}
-  //     >
-  //       Link with dropdown
-  //     </LinkWithDropdown>
-  //   );
-  //   const instance = wrapper.instance();
-
-  //   wrapper.setState({ isOpen: false });
-
-  //   instance.componentDidUpdate(wrapper.props(), wrapper.state());
-
-  //   wrapper.setState({ isOpen: true });
-
-  //   instance.componentDidUpdate(wrapper.props(), wrapper.state());
-
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.state()).toBe(wrapper.state());
-  // });
-
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("componentDidUpdate() prop lifecycle test", () => {
-  //   const wrapper = shallow(
-  //     // @ts-expect-error TS(2322): Type '{ children: string; color: string; isBold: b... Remove this comment to see the full error message
-  //     <LinkWithDropdown
-  //       isBold={true}
-  //       data={[]}
-  //       style={{ color: "red" }}
-  //     >
-  //       Link with dropdown
-  //     </LinkWithDropdown>
-  //   );
-  //   const instance = wrapper.instance();
-
-  //   instance.componentDidUpdate(
-  //     { isOpen: true, dropdownType: "appearDashedAfterHover" },
-  //     wrapper.state()
-  //   );
-
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.state()).toBe(wrapper.state());
-  // });
-
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts prop dropdownType", () => {
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2322): Type '{ children: string; color: string; isBold: b... Remove this comment to see the full error message
-  //     <LinkWithDropdown
-  //       isBold={true}
-  //       data={[]}
-  //       dropdownType="appearDashedAfterHover"
-  //     >
-  //       Link with dropdown
-  //     </LinkWithDropdown>
-  //   );
-
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("dropdownType")).toEqual("appearDashedAfterHover");
-  // });
-
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts prop isOpen", () => {
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2322): Type '{ children: string; color: string; isBold: b... Remove this comment to see the full error message
-  //     <LinkWithDropdown isBold={true} data={[]} isOpen>
-  //       Link with dropdown
-  //     </LinkWithDropdown>
-  //   );
-
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("isOpen")).toEqual(true);
-  // });
-
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts prop isSemitransparent", () => {
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2322): Type '{ children: string; color: string; isBold: b... Remove this comment to see the full error message
-  //     <LinkWithDropdown
-  //       isBold={true}
-  //       data={[]}
-  //       isSemitransparent
-  //     >
-  //       Link with dropdown
-  //     </LinkWithDropdown>
-  //   );
-
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("isSemitransparent")).toEqual(true);
-  // });
+    const textElement = screen.getByText("Link with dropdown");
+    expect(textElement).toHaveClass("textOverflow");
+    expect(textElement).toHaveAttribute("title", title);
+  });
 });

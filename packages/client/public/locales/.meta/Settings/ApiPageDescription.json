@@ -1,0 +1,289 @@
+{
+  "key_path": "ApiPageDescription",
+  "content": "Create your own productivity platform based on {{organizationName}} {{productName}} and collaborate on documents with teams, clients, and partners.",
+  "content_en_sha1_hash": "2fec16a0e87329b3160f8c9bb2a7319e6a6493ae",
+  "created_at": "2025-05-19T21:30:50.568Z",
+  "updated_at": "2025-08-04T07:30:01.330Z",
+  "comment": {
+    "text": "This translation key is used for a page description that will appear on a portal settings button. It describes a productivity platform based on {{organizationName}} {{productName}}, and is translated to be displayed in different languages.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:46.153Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Api/index.js",
+      "line_number": 85,
+      "context": "testId=\"learn_more_button\"\n onClick={() => window.open(apiBasicLink, \"_blank\")}\n scale={currentDeviceType === DeviceType.mobile}\n />\n }\n descriptionText={t(\"ApiPageDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n })}\n headerText={t(\"ApiPageHeader\")}\n imageAlt={t(\"ApiPageHeader\")}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Create your own productivity platform based on' is translated as 'Δημιουργήστε τη δική σας πλατφόρμα παραγωγικότητας με βάση το'. While technically correct, it's less natural in Greek. A more fluent translation would be 'Δημιουργήστε μια πλατφόρμα παραγωγικότητας δική σας, βασισμένη στο...'",
+          "suggestion": "Δημιουργήστε μια πλατφόρμα παραγωγικότητας δική σας, βασισμένη στο..."
+        },
+        {
+          "type": "formatting",
+          "description": "The order of 'organizationName' and 'productName' seems flipped compared to the English original. It should ideally follow the same order.",
+          "suggestion": "Ελέγξτε τη σειρά των {{organizationName}} και {{productName}} για να αντιστοιχεί στο πρωτότυπο."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The colon after {{productName}} appears unnecessary and potentially incorrect in Finnish. It should be consistent with the English template.",
+          "suggestion": "Luo oma tuottavuusalusta perustuen {{organizationName}} {{productName}} ja tee yhteistyötä asiakirjoilla tiimien, asiakkaiden ja kumppaneiden kanssa."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'à la base d’' (literally 'at the base of') is not the most natural way to express 'based on' in this context. It sounds somewhat awkward in French.",
+          "suggestion": "Créez votre plateforme de productivité en utilisant {{organizationName}} {{productName}} et collaborez sur des documents avec votre équipe, vos clients et partenaires."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Armenian translation lacks consistent use of spaces around the ellipsis in the English content's template variables. While technically correct, it may look slightly less polished.  Consider adding a space after {{organizationName}} and before {{productName}} to match English conventions.",
+          "suggestion": "Ստեղծեք ձեր սեփական արտադրողականության հարթակը {{organizationName}} {{productName}}-ի վրա և փաստաթղթերի շուրջ համագործակցեք թիմերի, հաճախորդների և գործընկերների հետ:"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Lao translation retains the English format of using `{{organizationName}} {{productName}}`. It's recommended to assess if this formatting is appropriate and readable in Lao. Consider whether to adapt it for better flow.",
+          "suggestion": "Evaluate and potentially rephrase the variable placeholders for better Lao readability. For example, consider using a Lao equivalent or incorporating the information more naturally within the sentence."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'sadarbojieties ar dokumentiem' is too literal. A more natural translation would be 'sadarbojieties pie dokumentiem' or 'strādājiet ar dokumentiem'. 'Ar dokumentiem' implies working *on* the documents rather than simply interacting with them.",
+          "suggestion": "Izveidojiet savu produktivitātes platformu, pamatojoties uz {{organizationName}} {{productName}}, un sadarbojieties pie dokumentiem ar komandām, klientiem un partneriem."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'effective' (эффективная) doesn't quite capture the meaning of 'productivity' in the English source. While 'effective' is not wrong, it's a less accurate reflection of the intended meaning.",
+          "suggestion": "Consider using a more direct translation for 'productivity', such as 'продуктивную' (produktivnuyu)."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'ඵලදායීතාවය වේදිකාව' (phaladaayithaavaya vedaikaavaya) is a somewhat unnatural phrasing for 'productivity platform'. A more natural translation would be 'ඵලදායී වේදිකාව' (phaladaayee vedaikaavaya).",
+          "suggestion": "ඔබේ {{organizationName}} {{productName}} මත පදනම් වූ ඔබේම ඵලදායී වේදිකාව නිර්මාණය කරමින්..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'ලේඛනවලට සහයෝගීව වැඩ කරන්න' (lekhana wala sahayogiyawa werda karanawa) can be improved. While technically correct, it's a bit clunky. A more fluent translation would use a verb implying collaboration.",
+          "suggestion": "ඔබේ {{organizationName}} {{productName}} මත පදනම් වූ ඔබේම ඵලදායී වේදිකාව නිර්මාණය කරමින් කණ්ඩායම්, ගනුදෙනස්කරුවන් සහ හවුල්කරුවන් සමඟ ලේඛනවල gemeinsam වැඩ කරන්න."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The hyphen after {{productName}} appears unnecessary and disrupts the flow of the sentence. It's likely intended to connect it to the following word, but it doesn't need a hyphen.",
+          "suggestion": "Remove the hyphen after {{productName}}.  Replace '{{productName}}-у' with '{{productName}}'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Serbian translation includes a hyphenated form of the product name '{{productName}}-u'. This might be unnecessary and stylistically awkward. Consider if this is the intended usage.",
+          "suggestion": "Review the Serbian style guide to determine the correct way to incorporate foreign names/products. Possible corrections: '{{productName}}' or '{{productName}}' in Serbian."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"nền tảng làm việc hiệu suất của riêng bạn\" is a bit clunky and literal. A more natural translation for 'productivity platform' would be something like 'nền tảng năng suất' or 'nền tảng hỗ trợ năng suất'.",
+          "suggestion": "Tạo nền tảng năng suất của riêng bạn dựa trên..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'cộng tác trên các tài liệu' is somewhat generic. A more descriptive translation, considering the context of a productivity platform, could be 'cộng tác trên các tài liệu dự án' or 'cộng tác trên các tài liệu làm việc'.",
+          "suggestion": "Tạo nền tảng năng suất của riêng bạn dựa trên... và cộng tác trên các tài liệu làm việc với..."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

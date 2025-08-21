@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,5 +24,130 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export { ViewSelector } from "./ViewSelector";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { ReactSVG } from "react-svg";
+import classNames from "classnames";
+
+import { TViewSelectorOption, ViewSelectorProps } from "./ViewSelector.types";
+import styles from "./ViewSelector.module.scss";
+
+const ViewSelector = ({
+  isDisabled,
+  isFilter,
+  viewSettings,
+  viewAs,
+  onChangeView,
+  className,
+  style,
+  ...rest
+}: ViewSelectorProps) => {
+  const { t } = useTranslation("Common");
+  const onChangeViewHandler = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (isDisabled) return;
+
+    const target = e.target as HTMLDivElement;
+
+    const el = target.closest(`.${styles.iconWrapper}`) as HTMLDivElement;
+    if (!el) return;
+
+    const view = el.dataset?.view;
+
+    if (view !== viewAs && view) {
+      const option = viewSettings.find(
+        (setting: TViewSelectorOption) => view === setting.value,
+      );
+      if (option) option.callback?.();
+      onChangeView(view);
+    }
+  };
+
+  const lastIndx = viewSettings && viewSettings.length - 1;
+
+  const renderFewIconView = () => {
+    return viewSettings.map((el: TViewSelectorOption, indx: number) => {
+      const { value, icon, id } = el;
+
+      return (
+        <div
+          className={classNames(styles.iconWrapper, {
+            "view-selector-icon": true,
+            [styles.disabled]: isDisabled,
+            [styles.checked]: viewAs === value,
+            [styles.firstItem]: indx === 0,
+            [styles.lastItem]: indx === lastIndx,
+          })}
+          id={id}
+          key={value}
+          data-view={value}
+          title={
+            value === "row"
+              ? t("Common:SwitchViewToCompact")
+              : t("Common:SwitchToThumbnails")
+          }
+          data-testid="view-selector-icon"
+        >
+          {typeof icon === "string" ? <ReactSVG src={icon} /> : icon}
+        </div>
+      );
+    });
+  };
+
+  const renderOneIconView = () => {
+    const element = viewSettings.find(
+      (el: TViewSelectorOption) => el.value !== viewAs,
+    );
+
+    if (element) {
+      const { value, icon } = element;
+
+      return (
+        <div
+          className={classNames(styles.iconWrapper, {
+            [styles.disabled]: isDisabled,
+            [styles.filter]: isFilter,
+          })}
+          key={value}
+          data-view={value}
+          title={
+            value === "row"
+              ? t("Common:SwitchViewToCompact")
+              : t("Common:SwitchToThumbnails")
+          }
+          data-testid="view-selector-icon"
+        >
+          {typeof icon === "string" ? <ReactSVG src={icon} /> : icon}
+        </div>
+      );
+    }
+
+    return null;
+  };
+
+  return (
+    <div
+      style={
+        {
+          "--view-selector-items-count": viewSettings.length,
+          ...style,
+        } as React.CSSProperties
+      }
+      className={classNames(styles.viewSelector, className, {
+        [styles.filter]: isFilter,
+        [styles.countItemsMoreThan2]: viewSettings.length > 2,
+      })}
+      {...rest}
+      onClick={onChangeViewHandler}
+      data-testid="view-selector"
+    >
+      {viewSettings
+        ? isFilter
+          ? renderOneIconView()
+          : renderFewIconView()
+        : null}
+    </div>
+  );
+};
+
+export { ViewSelector };
 export type { TViewSelectorOption } from "./ViewSelector.types";

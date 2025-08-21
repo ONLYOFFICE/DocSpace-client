@@ -24,66 +24,101 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { DropDownItem } from "../drop-down-item";
-
 import { DropDown } from ".";
-import { DropDownProps } from "./DropDown.types";
+import type { DropDownProps } from "./DropDown.types";
+import { Button } from "../button";
 
 const meta = {
-  title: "Components/DropDown",
+  title: "Drop down components/DropDown",
   component: DropDown,
-  // subcomponents: { DropDownItem },
-  // argTypes: {
-  //   onClick: { action: "onClickItem", table: { disable: true } },
-  // },
   parameters: {
     docs: {
       description: {
-        component: `Is a dropdown with any number of action
-        By default, it is used with DropDownItem elements in role of children.
+        component: `A flexible dropdown component that can contain any content, typically used with DropDownItem elements.
 
-If you want to display something custom, you can put it in children, but take into account that all stylization is assigned to the implemented component.
+Key features:
+- Supports custom positioning (top, bottom, left, right)
+- Backdrop option for modal-like behavior
+- Click outside handling
+- Custom width and z-index
+- Supports virtual list for large datasets
+- Responsive positioning based on viewport
 
-When using component, it should be noted that parent must have CSS property _position: relative_. Otherwise, DropDown will appear outside parent's border.
-`,
+Note: Parent element must have \`position: relative\` for proper positioning.`,
       },
+    },
+    layout: "centered",
+  },
+  argTypes: {
+    directionX: {
+      control: "select",
+      options: ["left", "right"],
+      description: "Horizontal direction of the dropdown",
+    },
+    directionY: {
+      control: "select",
+      options: ["top", "bottom"],
+      description: "Vertical direction of the dropdown",
+    },
+    backDrop: {
+      control: "boolean",
+      description: "Show a backdrop behind the dropdown",
+    },
+    manualWidth: {
+      control: "text",
+      description: "Custom width for the dropdown",
+    },
+    zIndex: {
+      control: "number",
+      description: "Custom z-index for the dropdown",
+    },
+    offsetX: {
+      control: "number",
+      description: "Custom offset for the dropdown in the horizontal direction",
     },
   },
 } satisfies Meta<typeof DropDown>;
+
 type Story = StoryObj<typeof DropDown>;
 
 export default meta;
 
-const Template = (args: DropDownProps) => {
-  const { open } = args;
+const ToggleDropDownTemplate = (args: DropDownProps) => {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const parentRef = React.useRef<HTMLButtonElement>(null);
 
   return (
-    <div style={{ height: "200px", position: "relative", padding: "20px" }}>
+    <div style={{ height: "100px", position: "relative", padding: "20px" }}>
+      <Button
+        ref={parentRef}
+        label="Toggle Dropdown"
+        onClick={() => setIsOpen(true)}
+        style={{ marginBottom: "8px" }}
+      />
       <DropDown
         {...args}
-        open={open}
-        isDefaultMode={false}
-        clickOutsideAction={() => {}}
-        style={{ top: "20px" }}
+        open={isOpen}
+        forwardedRef={parentRef}
+        clickOutsideAction={() => setIsOpen(false)}
       >
-        <DropDownItem isHeader label="Category 1" />
-
-        <DropDownItem label="Button 1" onClick={() => {}} />
-        <DropDownItem label="Button 2" onClick={() => {}} />
-        <DropDownItem label="Button 3" onClick={() => {}} />
-        <DropDownItem label="Button 4" onClick={() => {}} disabled />
-        <DropDownItem isSeparator />
-        <DropDownItem label="Button 5" onClick={() => {}} />
-        <DropDownItem label="Button 6" onClick={() => {}} />
+        <DropDownItem isHeader label="Menu" />
+        <DropDownItem label="Option 1" onClick={() => {}} />
+        <DropDownItem label="Option 2" onClick={() => {}} />
+        <DropDownItem label="Option 3" onClick={() => {}} />
+        <DropDownItem label="Disabled Option" onClick={() => {}} disabled />
       </DropDown>
     </div>
   );
 };
 
-export const Default: Story = {
-  render: (args) => <Template {...args} />,
+export const ToggleDropDown: Story = {
+  render: ToggleDropDownTemplate,
   args: {
-    open: true,
+    directionX: "right",
+    directionY: "bottom",
+    showDisabledItems: true,
   },
 };

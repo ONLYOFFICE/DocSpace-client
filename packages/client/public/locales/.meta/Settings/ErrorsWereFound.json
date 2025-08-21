@@ -1,0 +1,325 @@
+{
+  "key_path": "ErrorsWereFound",
+  "content": "{{errors}} errors were found",
+  "content_en_sha1_hash": "11d153f3db1683b3e3c58c3ddd299e7ff10894bf",
+  "created_at": "2025-05-19T21:30:51.557Z",
+  "updated_at": "2025-05-26T07:57:32.521Z",
+  "comment": {
+    "text": "This translation key is used to display a message indicating that errors were found during data import, typically when importing failed users. It appears on screen in the case of an import failure, providing context to the user about what went wrong.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:09.975Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportCompleteStep.tsx",
+      "line_number": 147,
+      "context": "})}\n </InfoText>\n \n {importResult.failedUsers > 0 ? (\n <ErrorText>\n {t(\"Settings:ErrorsWereFound\", {\n errors: importResult.failedUsers,\n })}\n </ErrorText>\n ) : null}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation is understandable, 'xətalar tapıldı' is a more literal translation of 'errors were found'. A more natural Azerbaijani phrasing would be 'tapıldı {{errors}} xətə'.",
+          "suggestion": "tapıldı {{errors}} xətə"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'errors were found' is not perfectly translated. A more natural Czech phrasing would be 'zjištěno bylo {{errors}} chyb' or 'nalezeno bylo {{errors}} chyb'. While 'nalezeno bylo {{errors}} chyb' is acceptable, it's slightly less fluid.",
+          "suggestion": "zjištěno bylo {{errors}} chyb"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Greek translation contains an unexpected space before 'σφάλματα'.",
+          "suggestion": "Βρέθηκαν {{errors}} σφάλματα"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '{{errors}} Գտնվել են սխալներ' is a literal translation and doesn't flow naturally in Armenian. A more natural phrasing would be 'գտնվել են {{errors}} սխալներ' or 'կարողացել ենք գտնել {{errors}} սխալներ'.",
+          "suggestion": "գտնվել են {{errors}} սխալներ"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'errors were found' is translated as 'エラーが見つかりました' which is a literal translation. While understandable, a more natural Japanese phrasing would be 'エラーが検出されました' or 'エラーが見つかりました'. The current translation isn't *wrong*, but not ideal for a user-facing message.",
+          "suggestion": "エラーが検出されました"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ພົບ {{errors}} ຂໍ້ຜິດພາດ' translates to 'Found {{errors}} errors'. While understandable, a more natural Lao phrasing would be something like 'ພົບຂໍ້ຜິດພາດ {{errors}} ຢ່າງໃດນຶ່ງ' or 'ມີຂໍ້ຜິດພາດ {{errors}} ຢ່າງໃດນຶ່ງ'. The word order 'ພົບ' (found) followed by the number of errors is less common.",
+          "suggestion": "Consider rephrasing to 'ມີຂໍ້ຜິດພາດ {{errors}} ຢ່າງໃດນຶ່ງ' or 'ພົບຂໍ້ຜິດພາດ {{errors}} ຢ່າງໃດນຶ່ງ'."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Latvian translation \"tika atrasta (-s){{errors}} kļūda (-s)\" uses \"tika atrasta\" (were found) which implies a passive voice. It's more natural to use an active voice construct. Furthermore, the gender agreement (-s) appears incorrect without context; it should agree with the number of errors, not be a default suffix. Also, the placement of the plural marker can be problematic depending on the number of errors.",
+          "suggestion": "Consider alternatives like \"ir atrasta(s){{errors}} kļūda(s)\" (there is/are found) or restructure the sentence for clarity, such as \"Atrodama(s) ir {{errors}} kļūda(s)\" (There are found {{errors}} errors)."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of parentheses to denote gender agreement is not standard Latvian formatting. It's ambiguous and unreadable.",
+          "suggestion": "Remove the parentheses. Proper gender agreement requires context to determine the correct form. For example: If `{{errors}}` is 1, use singular form; if more than one, use plural form."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Polish translation includes a suffix (-ów) which might not be appropriate depending on the number of errors. The suffix should be dynamic based on the value of '{{errors}}'.",
+          "suggestion": "The suffix should be dynamically adjusted based on the number of errors. For example: If '{{errors}}' is 1, use 'błąd'. If it's greater than 1, use 'błędy'."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'de erori au fost găsite' is not the most natural or accurate rendering of 'errors were found'. A more common and accurate translation would be 's-au găsit erori'.",
+          "suggestion": "s-au găsit erori"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"errors were found\" is not accurately translated. A more natural Sinhala phrasing would be \"දුරුවල හමු විය\" (duruwala hamu viya). The current translation literally translates \"errors {{errors}} was found,\" which isn't idiomatic.",
+          "suggestion": "දෝෂ දුරුවල හමු විය"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation \"{{errors}} chýb nájdených\" is not a natural or accurate translation of \"{{errors}} errors were found.\"  'Nájdených' implies a passive state. A better phrasing would be more active and convey the meaning of 'were found'.",
+          "suggestion": "{{errors}} zistených chýb"
+        },
+        {
+          "type": "grammar",
+          "description": "While 'zistených chýb' is grammatically correct, a more fluent translation could consider the word order.",
+          "suggestion": "{{errors}} chýb bolo zistených"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Najdenih je bilo {{errors}} napak\" is technically correct but could be more natural. A more idiomatic translation might be \"Odkrili smo {{errors}} napak\" or \"Ugotovili smo {{errors}} napak\". \"Najdenih je bilo\" implies a passive discovery, while \"Odkrili smo\" or \"Ugotovili smo\" convey a more active process of finding the errors.",
+          "suggestion": "Consider \"Odkrili smo {{errors}} napak\" or \"Ugotovili smo {{errors}} napak\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"{{errors}} грешке су пронађене\" is not grammatically correct and doesn't accurately convey the meaning of \"{{errors}} errors were found\". The correct translation should reflect that the errors were *discovered* or *detected*, not that they are in a state of being found.",
+          "suggestion": "{{errors}} грешака су откривене"
+        },
+        {
+          "type": "grammar",
+          "description": "The Serbian translation uses the nominative case ('грешке') when the accusative case ('грешака') is needed after the number of errors.",
+          "suggestion": "Change 'грешке' to 'грешака'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'errors were found' translates more accurately as 'hata(lar) bulundu' to reflect the plural nature of 'errors'. Using 'bulundu' implies a single error was found.",
+          "suggestion": "{{errors}} hata(lar) bulundu"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The colon after 'помилок' appears to be inconsistent with standard English formatting for displaying error counts. While acceptable in Ukrainian, it's worth noting for potential localization considerations if the UI is shared with English users.",
+          "suggestion": "Consider removing the colon if visual consistency with English is paramount, but this is a minor stylistic point."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'đã tìm thấy {{errors}} lỗi' while understandable, doesn't perfectly convey the nuance of 'were found'. A more natural phrasing in Vietnamese would be 'có {{errors}} lỗi được tìm thấy' or 'người ta tìm thấy {{errors}} lỗi'.",
+          "suggestion": "có {{errors}} lỗi được tìm thấy"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"errors were found\" is not perfectly translated. A more natural and accurate translation would be \"检测到 {{errors}} 个错误\" or \"发现 {{errors}} 个错误提示\" or simply \"发现 {{errors}} 个错误\". The current translation, while understandable, sounds a bit literal.",
+          "suggestion": "发现 {{errors}} 个错误提示"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

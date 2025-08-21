@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,27 +24,142 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useState } from "react";
 import { Textarea } from "@docspace/shared/components/textarea";
 import { Text } from "@docspace/shared/components/text";
+import { Tabs, TabsTypes } from "@docspace/shared/components/tabs";
 import CodeBlock from "./CodeBlock";
 
 import { CategorySubHeader, CodeWrapper } from "../presets/StyledPresets";
 
-export const CodeToInsert = ({ t, codeBlock, config, theme }) => (
-  <CodeWrapper height="fit-content">
-    <CategorySubHeader className="copy-window-code">
-      {`HTML ${t("CodeTitle")}`}
-    </CategorySubHeader>
-    <Text lineHeight="20px" className="preview-description">
-      {t("HtmlCodeDescription", { productName: t("Common:ProductName") })}
-    </Text>
-    <Textarea value={codeBlock} heightTextArea={153} isReadOnly enableCopy />
-    <CategorySubHeader className="copy-window-code">
-      {`JavaScript ${t("CodeTitle")}`}
-    </CategorySubHeader>
-    <Text lineHeight="20px" className="preview-description">
-      {t("JavaScriptCodeDescription", { productName: t("Common:ProductName") })}
-    </Text>
-    <CodeBlock config={config} theme={theme} />
-  </CodeWrapper>
-);
+export const CodeToInsert = ({
+  t,
+  tReady,
+  codeBlock,
+  config,
+  theme,
+  scriptUrl,
+}) => {
+  const html = (
+    <CodeWrapper height="fit-content">
+      <CategorySubHeader className="copy-window-code">
+        {`HTML ${t("CodeTitle")}`}
+      </CategorySubHeader>
+      <Text lineHeight="20px" className="preview-description">
+        {t("HtmlCodeDescription", { productName: t("Common:ProductName") })}
+      </Text>
+      <Textarea value={codeBlock} heightTextArea={153} isReadOnly enableCopy />
+    </CodeWrapper>
+  );
+  const js = (
+    <CodeWrapper height="fit-content">
+      <CategorySubHeader className="copy-window-code">
+        {`JavaScript ${t("CodeTitle")}`}
+      </CategorySubHeader>
+      <Text lineHeight="20px" className="preview-description">
+        {t("JavaScriptCodeDescription", {
+          productName: t("Common:ProductName"),
+        })}
+      </Text>
+      <CodeBlock config={config} scriptUrl={scriptUrl} theme={theme} />
+    </CodeWrapper>
+  );
+
+  const npm = (
+    <CodeWrapper height="fit-content">
+      <CategorySubHeader className="copy-window-code">NPM</CategorySubHeader>
+      <Text lineHeight="20px" className="preview-description">
+        {t("NPMCodeDescription")}
+      </Text>
+      <Text lineHeight="20px" className="preview-description">
+        {t("NPMCodeInstallStep")}
+      </Text>
+      <Textarea
+        value="npm install --save @onlyoffice/docspace-sdk-js"
+        heightTextArea={32}
+        isReadOnly
+        enableCopy
+      />
+      <Text lineHeight="20px" className="preview-description">
+        {t("NPMCodeImportStep")}
+      </Text>
+      <Textarea
+        value="import SDK from '@onlyoffice/docspace-sdk-js';"
+        heightTextArea={32}
+        isReadOnly
+        enableCopy
+      />
+      <Text lineHeight="20px" className="preview-description">
+        {t("NPMCodeConfigStep")}
+      </Text>
+      <Textarea
+        value={JSON.stringify(config)}
+        heightTextArea={118}
+        isReadOnly
+        enableCopy
+        isJSONField
+      />
+      <Text lineHeight="20px" className="preview-description">
+        {t("NPMCodeCreateStep")}
+      </Text>
+      <Textarea
+        value={`const container = document.createElement('div');
+        container.id = '${config.frameId}';
+        document.body.appendChild(container);`}
+        heightTextArea={68}
+        isReadOnly
+        enableCopy
+      />
+      <Text lineHeight="20px" className="preview-description">
+        {t("NPMCodeInitStep")}
+      </Text>
+      <Textarea
+        value="const sdk = new SDK();"
+        heightTextArea={32}
+        isReadOnly
+        enableCopy
+      />
+      <Text lineHeight="20px" className="preview-description">
+        {t("NPMCodeUsageStep")}
+      </Text>
+      <Textarea
+        value="sdk.init(config);"
+        heightTextArea={32}
+        isReadOnly
+        enableCopy
+      />
+    </CodeWrapper>
+  );
+
+  const tabs = [
+    {
+      id: "html",
+      name: "HTML",
+      content: html,
+    },
+    {
+      id: "js",
+      name: "JavaScript",
+      content: js,
+    },
+    {
+      id: "npm",
+      name: "NPM",
+      content: npm,
+    },
+  ];
+
+  const [selectedItemId, setSelectedItemId] = useState(tabs[0].id);
+
+  return (
+    <Tabs
+      layoutId="codeToInsert"
+      hotkeysId="codeToInsert"
+      type={TabsTypes.Secondary}
+      items={tabs}
+      selectedItemId={selectedItemId}
+      onSelect={(e) => setSelectedItemId(e.id)}
+      isLoading={!tReady}
+    />
+  );
+};

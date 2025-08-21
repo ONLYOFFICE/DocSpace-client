@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -39,7 +39,7 @@ import {
   TGroup,
   TGroupMemberInvitedInRoom,
 } from "@docspace/shared/api/groups/types";
-import { MIN_LOADER_TIMER } from "@docspace/shared/selectors/Files/FilesSelector.constants";
+import { MIN_LOADER_TIMER } from "@docspace/shared/selectors/utils/constants";
 
 import EmptyContainer from "./EmptyContainer";
 import GroupMembersList from "./sub-components/GroupMembersList/GroupMembersList";
@@ -136,13 +136,7 @@ const EditGroupMembers = ({
       withoutPadding
     >
       <ModalDialog.Header>
-        <StyledHeaderText
-          fontSize="21px"
-          fontWeight={700}
-          dir="auto"
-          truncate
-          noSelect
-        >
+        <StyledHeaderText fontSize="21px" fontWeight={700} dir="auto" truncate>
           {group.name}
         </StyledHeaderText>
       </ModalDialog.Header>

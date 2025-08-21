@@ -25,14 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { Meta, StoryObj } from "@storybook/react";
-import { Tabs } from "./Tabs";
-
+import { useState } from "react";
+import { Tabs } from ".";
 import { data } from "./data";
-import { TabsProps } from "./Tabs.types";
+import { TabsProps, TTabItem } from "./Tabs.types";
 import { TabsTypes } from "./Tabs.enums";
 
 const meta = {
-  title: "Components/Tabs",
+  title: "Data display/Tabs",
   component: Tabs,
 } satisfies Meta<typeof Tabs>;
 type Story = StoryObj<typeof meta>;
@@ -49,11 +49,24 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => (
   </div>
 );
 
-const Template = (args: TabsProps) => (
-  <Wrapper>
-    <Tabs {...args} />
-  </Wrapper>
-);
+const Template = (args: TabsProps) => {
+  const { onSelect, selectedItemId, ...rest } = args;
+  const [selectedId, setSelectedId] = useState(selectedItemId);
+
+  const handleSelect = (item: TTabItem) => {
+    setSelectedId(item.id);
+    onSelect?.(item);
+  };
+
+  return (
+    <Wrapper>
+      <Tabs {...rest} selectedItemId={selectedId} onSelect={handleSelect} />
+      <div style={{ marginTop: "20px" }}>
+        Selected tab: {data.find((item) => item.id === selectedId)?.name}
+      </div>
+    </Wrapper>
+  );
+};
 
 export const Default: Story = {
   render: (args) => <Template {...args} />,

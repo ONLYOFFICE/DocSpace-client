@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -43,24 +43,4 @@ describe("<SelectedItem />", () => {
 
     expect(screen.getByTestId("selected-item")).toBeInTheDocument();
   });
-
-  // it("accepts id", () => {
-  //   const wrapper = mount(<SelectedItem {...baseProps} id="testId" />);
-
-  //   expect(wrapper.prop("id")).toEqual("testId");
-  // });
-
-  // it("accepts className", () => {
-  //   const wrapper = mount(<SelectedItem {...baseProps} className="test" />);
-
-  //   expect(wrapper.prop("className")).toEqual("test");
-  // });
-
-  // it("accepts style", () => {
-  //   const wrapper = mount(
-  //     <SelectedItem {...baseProps} style={{ color: "red" }} />,
-  //   );
-
-  //   expect(wrapper.getDOMNode().style).toHaveProperty("color", "red");
-  // });
 });

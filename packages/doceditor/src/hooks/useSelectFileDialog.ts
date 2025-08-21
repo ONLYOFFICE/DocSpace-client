@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useCallback } from "react";
 
 import {
   TFileSecurity,
@@ -58,105 +58,124 @@ const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
 
   const requestRunning = React.useRef(false);
 
-  const onSDKRequestSelectDocument = (event: object) => {
+  const onSDKRequestSelectDocument = useCallback((event: object) => {
     // console.log("onSDKRequestSelectDocument", { event });
     setActionEvent(event as TEvent);
     setFilesType(compareFilesAction);
     setIsVisible(true);
-  };
+  }, []);
 
-  const onSDKRequestSelectSpreadsheet = (event: object) => {
+  const onSDKRequestSelectSpreadsheet = useCallback((event: object) => {
     // console.log("onSDKRequestSelectSpreadsheet", { event });
     setActionEvent(event as TEvent);
     setFilesType(mailMergeAction);
     setIsVisible(true);
-  };
+  }, []);
 
-  const onSDKRequestInsertImage = (event: object) => {
+  const onSDKRequestInsertImage = useCallback((event: object) => {
     // console.log("onSDKRequestInsertImage", { event });
     setActionEvent(event as TEvent);
     setFilesType(insertImageAction);
     setIsVisible(true);
-  };
+  }, []);
 
-  const onSDKRequestReferenceSource = (event: object) => {
+  const onSDKRequestReferenceSource = useCallback((event: object) => {
     // console.log("onSDKRequestReferenceSource", { event });
     setActionEvent(event as TEvent);
     setFilesType(setReferenceSourceAction);
     setIsVisible(true);
-  };
+  }, []);
 
-  const insertImage = (link: TPresignedUri) => {
-    const token = link.token;
+  const insertImage = useCallback(
+    (link: TPresignedUri) => {
+      const token = link.token;
 
-    const docEditor =
-      typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
+      const docEditor =
+        typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
 
-    docEditor?.insertImage({
-      ...actionEvent.data,
-      fileType: link.filetype,
-      ...(token && { token }),
-      url: link.url,
-    });
-  };
+      docEditor?.insertImage({
+        ...actionEvent.data,
+        fileType: link.filetype,
+        ...(token && { token }),
+        url: link.url,
+      });
+    },
+    [actionEvent],
+  );
 
-  const mailMerge = (link: TPresignedUri) => {
-    const token = link.token;
+  const mailMerge = useCallback(
+    (link: TPresignedUri) => {
+      const token = link.token;
 
-    const docEditor =
-      typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
+      const docEditor =
+        typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
 
-    docEditor?.setRequestedSpreadsheet({
-      ...actionEvent.data,
-      fileType: link.filetype,
-      ...(token && { token }),
-      url: link.url,
-    });
-  };
+      docEditor?.setRequestedSpreadsheet({
+        ...actionEvent.data,
+        fileType: link.filetype,
+        ...(token && { token }),
+        url: link.url,
+      });
+    },
+    [actionEvent],
+  );
 
-  const compareFiles = (link: TPresignedUri) => {
-    const token = link.token;
+  const compareFiles = useCallback(
+    (link: TPresignedUri) => {
+      const token = link.token;
 
-    const docEditor =
-      typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
+      const docEditor =
+        typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
 
-    docEditor?.setRequestedDocument({
-      ...actionEvent.data,
-      fileType: link.filetype,
-      ...(token && { token }),
-      url: link.url,
-    });
-  };
+      docEditor?.setRequestedDocument({
+        ...actionEvent.data,
+        fileType: link.filetype,
+        ...(token && { token }),
+        url: link.url,
+      });
+    },
+    [actionEvent],
+  );
 
-  const setReferenceSource = (data: TGetReferenceDataRequest) => {
+  const setReferenceSource = useCallback((data: TGetReferenceDataRequest) => {
     const docEditor =
       typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
 
     docEditor?.setReferenceSource(data);
-  };
+  }, []);
 
-  const onSelectFile = async (file: TSelectedFileInfo) => {
-    try {
-      if (!file) return;
+  const onSelectFile = useCallback(
+    async (file: TSelectedFileInfo) => {
+      try {
+        if (!file) return;
 
-      if (filesType === setReferenceSourceAction) {
-        const data = await getReferenceData({
-          fileKey: file.id,
-          instanceId,
-        });
+        if (filesType === setReferenceSourceAction) {
+          const data = await getReferenceData({
+            fileKey: file.id,
+            instanceId,
+          });
 
-        setReferenceSource(data);
-      } else {
-        const link = await getPresignedUri(file.id);
+          setReferenceSource(data);
+        } else {
+          const link = await getPresignedUri(file.id);
 
-        if (filesType === insertImageAction) insertImage(link);
-        if (filesType === mailMergeAction) mailMerge(link);
-        if (filesType === compareFilesAction) compareFiles(link);
+          if (filesType === insertImageAction) insertImage(link);
+          if (filesType === mailMergeAction) mailMerge(link);
+          if (filesType === compareFilesAction) compareFiles(link);
+        }
+      } catch (e) {
+        console.error(e);
       }
-    } catch (e) {
-      console.error(e);
-    }
-  };
+    },
+    [
+      filesType,
+      instanceId,
+      setReferenceSource,
+      insertImage,
+      mailMerge,
+      compareFiles,
+    ],
+  );
 
   const getFileTypeDetection = React.useCallback(() => {
     if (filesType === insertImageAction) {
@@ -195,47 +214,53 @@ const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
     setFileTypeDetection(typeDet);
   }, [filesType, getFileTypeDetection]);
 
-  const onClose = () => {
+  const onClose = useCallback(() => {
     if (requestRunning.current) return;
     setIsVisible(false);
     setActionEvent({} as TEvent);
-  };
+  }, []);
 
-  const onSubmit = async (
-    selectedItemId: string | number | undefined,
-    folderTitle: string,
-    isPublic: boolean,
-    breadCrumbs: TBreadCrumb[],
-    fileName: string,
-    isChecked: boolean,
-    selectedTreeNode: TFolder,
-    selectedFileInfo: TSelectedFileInfo,
-  ) => {
-    requestRunning.current = true;
-    await onSelectFile(selectedFileInfo);
-    requestRunning.current = false;
-    onClose();
-  };
+  const onSubmit = useCallback(
+    async (
+      selectedItemId: string | number | undefined,
+      folderTitle: string,
+      isPublic: boolean,
+      breadCrumbs: TBreadCrumb[],
+      fileName: string,
+      isChecked: boolean,
+      selectedTreeNode: TFolder,
+      selectedFileInfo: TSelectedFileInfo,
+    ) => {
+      requestRunning.current = true;
+      await onSelectFile(selectedFileInfo);
+      requestRunning.current = false;
+      onClose();
+    },
+    [onClose, onSelectFile],
+  );
 
-  const getIsDisabled = (
-    isFirstLoad: boolean,
-    isSelectedParentFolder: boolean,
-    selectedItemId: string | number | undefined,
-    selectedItemType: "rooms" | "files" | undefined,
-    isRoot: boolean,
-    selectedItemSecurity:
-      | TFileSecurity
-      | TFolderSecurity
-      | TRoomSecurity
-      | undefined,
-    selectedFileInfo: TSelectedFileInfo,
-  ) => {
-    if (isFirstLoad) return true;
-    if (requestRunning.current) return true;
-    if (!selectedFileInfo) return true;
+  const getIsDisabled = useCallback(
+    (
+      isFirstLoad: boolean,
+      isSelectedParentFolder: boolean,
+      selectedItemId: string | number | undefined,
+      selectedItemType: "rooms" | "files" | undefined,
+      isRoot: boolean,
+      selectedItemSecurity:
+        | TFileSecurity
+        | TFolderSecurity
+        | TRoomSecurity
+        | undefined,
+      selectedFileInfo: TSelectedFileInfo,
+    ) => {
+      if (isFirstLoad) return true;
+      if (requestRunning.current) return true;
+      if (!selectedFileInfo) return true;
 
-    return false;
-  };
+      return false;
+    },
+    [],
+  );
 
   return {
     onSDKRequestSelectDocument,

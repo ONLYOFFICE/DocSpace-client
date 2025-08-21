@@ -1,12 +1,22 @@
 {
   "AddManually": "ເພີ່ມດ້ວຍຕົນເອງ",
   "EmailErrorMessage": "ທີ່ຢູ່ອີເມວບໍ່ຖືກຕ້ອງ. ທ່ານສາມາດແກ້ໄຂອີເມວໂດຍການຄລິກສອງຄັ້ງໃສ່ມັນ.",
+  "EmailErrorMessageUserNotFound": "ບໍ່ພົບຜູ້ໃຊ້។ ທ່ານສາມາດແກ້ໄຂອີເມນໄດ້ໂດຍການຄລິກສອງຄັ້ງໃສ່ມັນ។",
+  "GroupMaxAvailableRoleWarning": "ກຸ່ມສາມາດເພີ່ມເຂົ້າໃນຫ້ອງໄດ້ດ້ວຍບົດບາດ {{roleName}} ທີ່ສູງສຸດເທົ່ານັ້ນ ຢ່າງໃດກໍຕາມ ທ່ານສາມາດປ່ຽນບົດບາດຂອງຜູ້ໃຊ້ແຕ່ລະຄົນໃນກຸ່ມໄດ້ຫຼັງຈາກທີ່ເພີ່ມເຂົ້າຢ່າງສໍາເລັດແລ້ວ",
   "InvitationLanguage": "ພາສາເຊີນ",
+  "InviteMembersManuallyDescription": "ເຊີນສະມາຊິກ​ໃໝ່ເຂົ້າສູ່ {{productName}} ດ້ວຍອີເມລ໌ໂດຍສ່ວນຕົວ",
+  "InviteMembersSearchPlaceholder": "ເຊີນສະມາຊິກທາງອີເມລ໌",
+  "InviteToRoomAddPlaceholder": "ເພີ່ມຄົນໂດຍຊື່ຫຼືອີເມລ໌",
+  "InviteToRoomManuallyInfoGuest": "ເພີ່ມຕິດຕໍ່ {{productName}} ທີ່ມີຢູ່ແລ້ວ ຫລືເຊີນຜູ້ໃຊ້​ໃໝ່​ໂດຍສ່ວນຕົວຜ່ານອີເມລ໌​ໄດ້​ເລີຍ​។ ຜູ້ໃຊ້​ໃໝ່​ຈະຖືກເພີ່ມເຂົ້າໃນລາຍການແຂກຂອງທ່ານ​។",
+  "InviteToRoomManuallyInfoMembers": "ເພີ່ມສະມາຊິກ {{productName}} ທີ່ມີຢູ່ແລ້ວເຂົ້າໃນຫ້ອງ។",
+  "InviteToRoomSearchPlaceholder": "ຄົ້ນຫາ ແລະເຊີນໂດຍຊື່ຫຼືອີເມນ໌",
   "InviteViaLink": "ເຊີນຜ່ານລິ້ງ",
   "InviteViaLinkDescriptionAccounts": "ສ້າງການເຊື່ອມຕໍ່ທົ່ວໄປສໍາລັບການອະນຸຍາດຕົນເອງໃນ {{productName}}",
-  "InviteViaLinkDescriptionRoom": "ສ້າງການເຊື່ອມຕໍ່ທົ່ວໄປສໍາລັບການອະນຸຍາດຕົນເອງໃນຫ້ອງ",
+  "InviteViaLinkDescriptionRoomGuest": "ສ້າງລິ້ງທົ່ວໄປສໍາລັບການອະນຸມັດດ້ວຍຕົນເອງໃນຫ້ອງເປັນແຂກ.",
+  "InviteViaLinkDescriptionRoomMembers": "ສ້າງລິ້ງທົ່ວໄປສໍາລັບສະມາຊິກ {{productName}} ເພື່ອການອະນຸມັດດ້ວຍຕົນເອງໃນຫ້ອງ.",
   "LinkCopySuccess": "ລິ້ງຖືກຄັດລອກແລ້ວ",
-  "ResetChange": "ຣີເຊັດການປ່ຽນແປງ",
   "SendInvitation": "ສົ່ງຄຳເຊີນ",
-  "UsersAlreadyAdded": "ຜູ້ໃຊ້ບາງຄົນໄດ້ຖືກເພີ່ມແລ້ວ"
+  "UserMaxAvailableRoleWarning": "แขກ ແລະຜູ້ໃຊ້ບໍ່ສາມາດຖືກມອບຫມາຍເປັນຜູ້ຈັດການຫ້ອງໄດ້ ພຽງແຕ່ຜູ້ບໍລິຫານຫ້ອງ ແລະ {{productName}} ເທົ່ານັ້ນທີ່ຈະຖືກຕ້ອງສໍາລັບບົດບາດທີ່ກໍາຫນົດໄວ້.",
+  "UsersAlreadyAdded": "ຜູ້ໃຊ້ບາງຄົນໄດ້ຖືກເພີ່ມແລ້ວ",
+  "UsersCannotBeAdded": "ຜູ້ຕິດຕໍ່ທີ່ຖືກປິດການໃຊ້ງານ ບໍ່ສາມາດເພີ່ມເຂົ້າຫ້ອງໄດ້"
 }

@@ -1,0 +1,352 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import React, { useState } from "react";
+import { Meta, StoryObj } from "@storybook/react";
+
+import { Button, ButtonSize } from "../button";
+
+import { BackdropProps } from "./Backdrop.types";
+import { Backdrop } from ".";
+
+const meta = {
+  title: "Base UI Components/Backdrop",
+  component: Backdrop,
+  parameters: {
+    docs: {
+      description: {
+        component: `
+A flexible backdrop component that provides a customizable overlay for modals, dialogs, and aside components.
+
+## Features
+- 🎨 Customizable background and blur effects
+- 📱 Responsive design with mobile/tablet support
+- 🔝 Configurable z-index for proper stacking
+- 🔄 Multiple backdrop support for aside components
+- 🖱️ Touch event handling for mobile devices
+
+## Usage
+The Backdrop component is designed to be highly flexible and can be used in various scenarios:
+- Modal dialogs
+- Side panels
+- Loading overlays
+- Multiple layer management
+        `,
+      },
+    },
+  },
+  argTypes: {
+    visible: {
+      description: "Sets visible or hidden",
+      control: "boolean",
+      defaultValue: false,
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: "" },
+      },
+    },
+    zIndex: {
+      description: "Sets the z-index CSS property for stacking context",
+      control: "number",
+      defaultValue: 203,
+      table: {
+        type: { summary: "string" },
+        defaultValue: { summary: "203" },
+      },
+    },
+    className: {
+      description: "Custom CSS class name(s) to apply to the backdrop",
+      control: "text",
+      table: {
+        type: { summary: "string | string[]" },
+      },
+    },
+    id: {
+      description: "HTML id attribute for the backdrop element",
+      control: "text",
+      table: {
+        type: { summary: "string" },
+      },
+    },
+    style: {
+      description: "Custom inline styles to apply to the backdrop",
+      control: "object",
+      table: {
+        type: { summary: "React.CSSProperties" },
+      },
+    },
+    withBackground: {
+      description:
+        "Enables background visibility for the backdrop. Note: Background is not displayed if viewport width > 1024px",
+      control: "boolean",
+      defaultValue: false,
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+      },
+    },
+    isAside: {
+      description:
+        "Indicates if the backdrop is being used with an Aside component. Affects backdrop stacking and background behavior",
+      control: "boolean",
+      defaultValue: false,
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+      },
+    },
+    withoutBlur: {
+      description:
+        "Disables the blur effect, typically used with context menus",
+      control: "boolean",
+      defaultValue: false,
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+      },
+    },
+    withoutBackground: {
+      description:
+        "Forces the backdrop to render without a background. Takes precedence over withBackground",
+      control: "boolean",
+      defaultValue: false,
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+      },
+    },
+    isModalDialog: {
+      description:
+        "Indicates if the backdrop is being used with a modal dialog. Affects touch event handling",
+      control: "boolean",
+      defaultValue: false,
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+      },
+    },
+    onClick: {
+      description: "Click event handler for the backdrop",
+      action: "clicked",
+      table: {
+        type: { summary: "(e: React.MouseEvent) => void" },
+      },
+    },
+  },
+  tags: ["autodocs"],
+} satisfies Meta<typeof Backdrop>;
+
+type Story = StoryObj<typeof Backdrop>;
+
+export default meta;
+
+// Basic backdrop with toggle button
+const Template = (args: BackdropProps) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const toggleVisible = () => setIsVisible(!isVisible);
+
+  const isDarkTheme = document.body.classList.contains("dark");
+
+  return (
+    <div style={{ height: "200px" }}>
+      <Button
+        label="Toggle Backdrop"
+        primary
+        size={ButtonSize.medium}
+        onClick={toggleVisible}
+      />
+      <Backdrop {...args} visible={isVisible} onClick={toggleVisible} />
+      {isVisible ? (
+        <div
+          onClick={toggleVisible}
+          style={{
+            position: "fixed",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            color: isDarkTheme ? "#fff" : "#333",
+            backgroundColor: isDarkTheme
+              ? "rgba(32, 32, 32, 0.8)"
+              : "rgba(255, 255, 255, 0.8)",
+            padding: "10px 16px",
+            borderRadius: "6px",
+            fontSize: "16px",
+            zIndex: 204,
+          }}
+        >
+          Click anywhere to close
+        </div>
+      ) : null}
+    </div>
+  );
+};
+
+// Multiple backdrops with aside example
+const MultipleBackdropsTemplate = (args: BackdropProps) => {
+  const [isFirstVisible, setFirstVisible] = useState(false);
+  const [isSecondVisible, setSecondVisible] = useState(false);
+
+  return (
+    <div style={{ display: "flex", gap: "1rem" }}>
+      <Button
+        label="First Backdrop"
+        primary
+        size={ButtonSize.medium}
+        onClick={() => setFirstVisible(!isFirstVisible)}
+      />
+      <Button
+        label="Second Backdrop"
+        primary
+        size={ButtonSize.medium}
+        onClick={() => setSecondVisible(!isSecondVisible)}
+      />
+      <Backdrop
+        {...args}
+        visible={isFirstVisible}
+        isAside
+        onClick={() => setFirstVisible(false)}
+      />
+      <Backdrop
+        {...args}
+        visible={isSecondVisible}
+        isAside
+        onClick={() => setSecondVisible(false)}
+      />
+    </div>
+  );
+};
+
+// Modal dialog example
+const ModalTemplate = (args: BackdropProps) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const toggleVisible = () => setIsVisible(!isVisible);
+
+  const isDarkTheme = document.body.classList.contains("dark");
+
+  return (
+    <div style={{ height: "300px" }}>
+      <Button
+        label="Show Modal"
+        primary
+        size={ButtonSize.medium}
+        onClick={toggleVisible}
+      />
+      <Backdrop
+        {...args}
+        visible={isVisible}
+        isModalDialog
+        onClick={toggleVisible}
+      />
+      {isVisible ? (
+        <div
+          onClick={toggleVisible}
+          style={{
+            position: "fixed",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            background: isDarkTheme ? "#333" : "white",
+            color: isDarkTheme ? "#fff" : "#333",
+            padding: "2rem",
+            borderRadius: "8px",
+            zIndex: 204,
+            boxShadow: isDarkTheme
+              ? "0 4px 12px rgba(0, 0, 0, 0.5)"
+              : "0 4px 12px rgba(0, 0, 0, 0.15)",
+          }}
+        >
+          <h2 style={{ color: isDarkTheme ? "#fff" : "#333" }}>
+            Modal Content
+          </h2>
+          <p style={{ color: isDarkTheme ? "#ccc" : "#666" }}>
+            Click outside to close
+          </p>
+        </div>
+      ) : null}
+    </div>
+  );
+};
+
+export const Default: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    withBackground: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Basic backdrop with a toggle button. The backdrop appears with a background when visible.",
+      },
+    },
+  },
+};
+
+export const WithoutBackground: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    withoutBackground: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Backdrop without a background. Useful when you want the backdrop to be invisible but still capture clicks.",
+      },
+    },
+  },
+};
+
+export const MultipleBackdrops: Story = {
+  render: (args) => <MultipleBackdropsTemplate {...args} />,
+  args: {
+    withBackground: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Example showing multiple backdrops using the isAside prop. Up to two backdrops can be displayed simultaneously.",
+      },
+    },
+  },
+};
+
+export const ModalDialog: Story = {
+  render: (args) => <ModalTemplate {...args} />,
+  args: {
+    withBackground: true,
+    isModalDialog: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Example showing the backdrop used with a modal dialog. The isModalDialog prop modifies touch event handling.",
+      },
+    },
+  },
+};

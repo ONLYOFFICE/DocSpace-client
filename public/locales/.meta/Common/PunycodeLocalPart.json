@@ -1,0 +1,286 @@
+{
+  "key_path": "PunycodeLocalPart",
+  "content": "Punycode local part is not supported",
+  "content_en_sha1_hash": "527a2aa6c62b234fef95360c6517ee1bcfa5a635",
+  "created_at": "2025-05-19T21:30:47.687Z",
+  "updated_at": "2025-08-11T09:02:43.843Z",
+  "comment": {
+    "text": "The translation key \"PunycodeLocalPart\" indicates an error message that is used when a local part of an email address cannot be converted to Punycode. This error typically appears in UI elements such as dialog boxes or input fields where email addresses are entered. The phrase translates to the user-friendly error description \"Punycode local part is not supported\".",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:34:49.852Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangeEmailDialog/index.js",
+      "line_number": 142,
+      "context": "case ErrorKeys.DomainIpAddress:\n return t(\"Common:DomainIpAddress\");\n case ErrorKeys.PunycodeDomain:\n return t(\"Common:PunycodeDomain\");\n case ErrorKeys.PunycodeLocalPart:\n return t(\"Common:PunycodeLocalPart\");\n case ErrorKeys.IncorrectLocalPart:\n return t(\"Common:IncorrectLocalPart\");\n case ErrorKeys.SpacesInLocalPart:\n return t(\"Common:SpacesInLocalPart\");\n case ErrorKeys.MaxLengthExceeded:",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/SalesDepartmentRequestDialog/index.js",
+      "line_number": 125,
+      "context": "case ErrorKeys.DomainIpAddress:\n return t(\"Common:DomainIpAddress\");\n case ErrorKeys.PunycodeDomain:\n return t(\"Common:PunycodeDomain\");\n case ErrorKeys.PunycodeLocalPart:\n return t(\"Common:PunycodeLocalPart\");\n case ErrorKeys.IncorrectLocalPart:\n return t(\"Common:IncorrectLocalPart\");\n case ErrorKeys.SpacesInLocalPart:\n return t(\"Common:SpacesInLocalPart\");\n case ErrorKeys.MaxLengthExceeded:",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/utils/common.ts",
+      "line_number": 181,
+      "context": "case ErrorKeys.DomainIpAddress:\n return t(\"Common:DomainIpAddress\");\n case ErrorKeys.PunycodeDomain:\n return t(\"Common:PunycodeDomain\");\n case ErrorKeys.PunycodeLocalPart:\n return t(\"Common:PunycodeLocalPart\");\n case ErrorKeys.IncorrectLocalPart:\n return t(\"Common:IncorrectLocalPart\");\n case ErrorKeys.SpacesInLocalPart:\n return t(\"Common:SpacesInLocalPart\");\n case ErrorKeys.MaxLengthExceeded:",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"الجزء المحلي للبانيكود غير مدعومة\" is a literal translation and might not convey the intended meaning clearly to a Saudi Arabian audience. 'Punycode local part' is a technical term. A more natural phrasing might be needed. It is also possible 'غير مدعومة' is not the best way to phrase the lack of support.",
+          "suggestion": "Consider alternatives like \"لا يتم دعم الجزء المحلي للبانيكود\" (The local part of Punycode is not supported) or \"لا تتوفر دعم للجزء المحلي للبانيكود\" (Support for the local part of Punycode is not available)."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Lokal yolda icazə verilməyən simvollardan istifadə olunur\" does not accurately convey the meaning of \"Punycode local part is not supported.\" It translates to something like 'Using unsupported symbols in the local path is not allowed'.  The key concept of Punycode is missing.",
+          "suggestion": "A more accurate translation would be something like \"Punycode yerli hissəsi dəstəklənmir\" or \"Punycode yerli hissəsi qeyri-dəstəkli\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Punycode wird beim lokalen Teil nicht unterstützt' is somewhat awkward. While technically correct, it doesn't flow naturally in German. A more idiomatic translation would better convey the meaning.",
+          "suggestion": "Punycode-Komponente wird nicht unterstützt"
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Punycode-verkkotunnuksia ei tueta' is technically correct but somewhat verbose and not the most natural way to express the meaning of 'Punycode local part is not supported' in Finnish. A more concise and natural translation might be 'Punycode-osaa ei tueta'.",
+          "suggestion": "Punycode-osaa ei tueta"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"지원되지 않는 퓨니코드 로컬 파트입니다\" is a literal translation but sounds unnatural in Korean. While technically correct, a more natural phrasing would be better.",
+          "suggestion": "지원되지 않는 퓨니코드 로컬 부분입니다"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ພື້ນທີ່ບໍ່ຮອງຮັບ Punycode\" translates to 'Area does not support Punycode.' This isn't a direct or accurate translation of 'Punycode local part is not supported'. It misses the nuance of 'local part'.",
+          "suggestion": "Consider a translation that more accurately reflects \"Punycode local part\", such as \"ສ່ວນພື້ນທີ່ Punycode ບໍ່ຮອງຮັບ\" (Punycode local part is not supported) or \"ສ່ວນຂອງ Punycode ບໍ່ຮອງຮັບ\" (Punycode part is not supported)."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Identyfikator użytkownika Punycode nie jest obsługiwany' doesn't accurately convey the meaning of 'Punycode local part is not supported.' 'Identyfikator użytkownika' (user identifier) is not the same as 'local part'. The focus should be on the 'local part' itself, not the user.",
+          "suggestion": "Część lokalna Punycode nie jest obsługiwana"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'A peça local Punycode não é suportada' is not the most natural or accurate translation of 'Punycode local part is not supported'. 'Peça' (piece) isn't the best fit for 'part' in this context. It implies a physical component.",
+          "suggestion": "A parte local Punycode não é suportada"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"A peça local Punycode não é suportada\" is not the most natural or accurate translation of 'Punycode local part is not supported'. 'Peça' translates to 'piece' or 'part' in a physical sense, which isn't appropriate for Punycode. A better translation would focus on the functionality being unavailable.",
+          "suggestion": "O suporte para a parte local Punycode não está disponível"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Russian translation \"Имя почтового ящика содержит запрещенные символы\" translates to \"The mailbox name contains forbidden characters.\" This is not an accurate translation of \"Punycode local part is not supported.\" It describes a different problem.",
+          "suggestion": "A more accurate translation would be something along the lines of \"Поддержка Punycode локальной части не поддерживается\" or \"Punycode локальная часть не поддерживается\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ස්ථානීය කොටසට අන්තර්ජාතික කේත සහාය නොදක්වයි' does not accurately convey the meaning of 'Punycode local part is not supported'. 'අන්තර්ජාතික කේත' (international code) is not directly related to the Punycode concept. A more accurate translation would focus on the lack of support for the local part of a Punycode encoded domain.",
+          "suggestion": "A better translation could be something like 'පුනියකෝඩ් ප්‍රදේශීය කොටස සඳහා සහාය ලබා නොදක්වයි' (Punycode local part is not supported)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

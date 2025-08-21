@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,10 +30,9 @@ import { useTranslation } from "react-i18next";
 import { ChangeEvent, useContext, useState } from "react";
 
 import { validateTfaCode } from "@docspace/shared/api/settings";
-import { checkConfirmLink, loginWithTfaCode } from "@docspace/shared/api/user";
+import { checkConfirmLink } from "@docspace/shared/api/user";
 
 import { toastr } from "@docspace/shared/components/toast";
-import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import {
@@ -42,7 +41,6 @@ import {
   TextInput,
 } from "@docspace/shared/components/text-input";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { TPasswordHash } from "@docspace/shared/api/settings/types";
 import { ButtonKeys } from "@docspace/shared/enums";
 
 import { TError } from "@/types";
@@ -51,16 +49,10 @@ import { useSearchParams } from "next/navigation";
 import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
 
 type TfaAuthFormProps = {
-  passwordHash: TPasswordHash;
-  userName?: string;
   defaultPage?: string;
 };
 
-const TfaAuthForm = ({
-  passwordHash,
-  userName,
-  defaultPage = "/",
-}: TfaAuthFormProps) => {
+const TfaAuthForm = ({ defaultPage = "/" }: TfaAuthFormProps) => {
   const { linkData } = useContext(ConfirmRouteContext);
   const { t } = useTranslation(["Confirm", "Common"]);
 
@@ -72,18 +64,14 @@ const TfaAuthForm = ({
 
   const { confirmHeader = null } = linkData;
 
-  const linkUrlData = searchParams.get("linkData");
-  const isPublicAuth = searchParams.get("publicAuth");
+  const linkUrlData = searchParams?.get("linkData");
+  const isPublicAuth = searchParams?.get("publicAuth");
 
   const onSubmit = async () => {
     try {
       setIsLoading(true);
 
-      if (userName && passwordHash) {
-        await loginWithTfaCode(userName, passwordHash, code);
-      } else {
-        await validateTfaCode(code, confirmHeader);
-      }
+      await validateTfaCode(code, confirmHeader);
 
       let confirmData = "";
       try {
@@ -110,8 +98,8 @@ const TfaAuthForm = ({
       }
 
       window.location.replace(referenceUrl || defaultPage);
-    } catch (error) {
-      const knownError = error as TError;
+    } catch (e) {
+      const knownError = e as TError;
       let errorMessage: string;
 
       if (typeof knownError === "object") {
@@ -126,7 +114,6 @@ const TfaAuthForm = ({
 
       setError(errorMessage);
       toastr.error(errorMessage);
-    } finally {
       setIsLoading(false);
     }
   };
@@ -146,21 +133,17 @@ const TfaAuthForm = ({
 
   return (
     <>
-      <Box className="app-code-description" marginProp="0 0 32px 0">
+      <div className="app-code-description">
         <Text isBold fontSize="14px" className="app-code-text">
           {t("EnterAppCodeTitle")}
         </Text>
         <Text>{t("EnterAppCodeDescription")}</Text>
-      </Box>
-      <Box
-        displayProp="flex"
-        flexDirection="column"
-        className="app-code-wrapper"
-      >
-        <Box className="app-code-input">
+      </div>
+      <div className="app-code-wrapper">
+        <div className="app-code-input">
           <FieldContainer
             labelVisible={false}
-            hasError={error ? true : false}
+            hasError={!!error}
             errorMessage={error}
           >
             <TextInput
@@ -176,12 +159,13 @@ const TfaAuthForm = ({
               maxLength={6}
               onChange={onChangeInput}
               value={code}
-              hasError={error ? true : false}
+              hasError={!!error}
               onKeyDown={onKeyPress}
+              testId="app_code_input"
             />
           </FieldContainer>
-        </Box>
-        <Box className="app-code-continue-btn">
+        </div>
+        <div className="app-code-continue-btn">
           <Button
             scale
             primary
@@ -195,9 +179,10 @@ const TfaAuthForm = ({
             isDisabled={!code.length || isLoading}
             isLoading={isLoading}
             onClick={onSubmit}
+            testId="app_code_continue_button"
           />
-        </Box>
-      </Box>
+        </div>
+      </div>
     </>
   );
 };

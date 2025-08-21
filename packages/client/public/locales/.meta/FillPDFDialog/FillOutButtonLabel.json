@@ -1,0 +1,232 @@
+{
+  "key_path": "FillOutButtonLabel",
+  "content": "Fill in",
+  "content_en_sha1_hash": "d20fc7ca1f2cd76352a54a4eafef3df897d87c84",
+  "created_at": "2025-05-19T21:30:55.156Z",
+  "updated_at": "2025-05-26T07:57:32.307Z",
+  "comment": {
+    "text": "The translation key \"FillOutButtonLabel\" is used to display the label on a button that prompts users to fill in information. In this case, it appears as part of a dialog titled \"FillPDFDialog\", where the user is prompted to fill in data.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:18.208Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/FillPDFDialog/FillPDFDialog.tsx",
+      "line_number": 108,
+      "context": "const cards = [\n {\n id: \"form-yourself\",\n title: t(\"FillPDFDialog:FillOutTitle\"),\n description: t(\"FillPDFDialog:FillOutDescription\"),\n buttonLabel: t(\"FillPDFDialog:FillOutButtonLabel\"),\n onClick: openEditorFill,\n icon: <FillOutYourselfIcon />,\n },\n {\n id: \"form-data-collection\",",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"작성: \" does not accurately convey the meaning of \"Fill in\". \"작성: \" translates to \"Writing:\" or \"Compose:\". \"Fill in\" implies completing a form, not necessarily writing something from scratch.",
+          "suggestion": "Consider alternatives like \"채우기\" (chaeugi - to fill) or \"작성하기\" (jaksyeonghagi - to write/compose\") depending on the specific context, or \"입력:\" (ipnyeok - input) to align better with form filling."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Completare' is a valid Romanian word, it doesn't perfectly capture the nuance of 'Fill in' in this context (specifically referring to filling out a form). It's more literal and less idiomatic.",
+          "suggestion": "Consider 'Completează' or 'Introdu datele' which are more commonly used for filling out forms."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Попуни' doesn't accurately convey the meaning of \"Fill in\". While it literally means 'fill up', in the context of a form, 'Fill in' implies completing the fields. A more appropriate translation would be 'Испуни' (Ispuni) or 'Унеси' (Unesi).",
+          "suggestion": "Испуни"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Popuni' can mean 'fill in', it's not the most natural or common translation of 'Fill in' in the context of a button label for a PDF form. A more accurate and user-friendly translation would be 'Ispuni'.",
+          "suggestion": "Ispuni"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

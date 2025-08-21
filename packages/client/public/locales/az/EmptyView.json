@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "Bu bölmədə son zamanlarda baxdığınız və ya redaktə etdiyiniz sənədlər göstəriləcək.",
   "EmptyRootRoomUserDescription": "Paylaşılan otaq burada görünəcək.",
   "EmptyRootRoomUserTitle": "Burada hələ otaq yoxdur",
+  "EmptyTemplatesDescription": "Otaq bölməsində otaqdan şablon yarada bilərsiniz",
+  "EmptyTemplatesTitle": "EmptyView:EmptyTemplatesTitle",
   "FormFolderDefaultDescription": "PDF formalarını bura yerləşdirin və ya {{productName}} dan və ya cihazdan yükləyin.",
   "FormFolderDefaultTitle": "Burada hələ forma yoxdur",
   "FormFolderDefaultUserDescription": "Administratorlar tərəfindən yüklənmiş formalar burada görünəcək.",
@@ -33,6 +35,7 @@
   "MigrationDataDescription": "{{organizationName}} Workspace, Google Workspace və ya Nextcloud-dan məlumatı {{productName}}-ə idxal edin.",
   "MigrationDataTitle": "Köçürülmə Məlumatları",
   "PublicRoomEmptyTitle": "Ümumi otağa xoş gəlmisiniz",
+  "SectionsUploadDescription": "{{sectionNameFirst}} və ya {{sectionNameSecond}} bölmələrindən istənilən tipdə faylları yükləyin",
   "SendInvitationLetter": "Portala yeni üzvlər əlavə etmək üçün dəvət məktubu göndərin",
   "ShareOptionDescription": "Ümumi giriş linkini kopyalayın və ya formanı doldurmağa başlamaq üçün digər istifadəçiləri otağa dəvət edin.",
   "ShareOptionTitle": "Otağı paylaşın",
@@ -42,9 +45,7 @@
   "UploadDeviceOptionTitle": "Cihazınızdan yükləyin",
   "UploadDevicePDFFormOptionDescription": "Hazır PDF formasını cihazınızdan otağa yükləyin.",
   "UploadDevicePDFFormOptionTitle": "Cihazdan yükləyin",
-  "UploadFromPortalDescription": "Sənədlər və ya Otaqlardan istənilən növ faylı yükləyin",
   "UploadFromPortalTitle": "{{productName}} dan yükləyin",
   "UploadPDFFormOptionDescription": "{{productName}}-də mövcud olan hazır PDF formasını seçin və onu otağa yükləyin.",
-  "UserEmptyDescription": "Administratorlar tərəfindən yüklənmiş fayl və qovluqlar burada görünəcək.",
   "VirtualDataRoomEmptyTitle": "Virtual Məlumat Otağına xoş gəlmisiniz"
 }

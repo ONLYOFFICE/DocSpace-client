@@ -1,0 +1,272 @@
+{
+  "key_path": "SingleSignOn",
+  "content": "Single Sign-On",
+  "content_en_sha1_hash": "9cd5b7eb1680d90f18ef828206965ff742d88dda",
+  "created_at": "2025-05-19T21:30:52.736Z",
+  "updated_at": "2025-08-04T07:30:01.502Z",
+  "comment": {
+    "text": "This translation key is used to display a custom label for a single sign-on entry button. It appears in an IDP settings page and is used as a placeholder until a custom value is set. Translators should provide a clear and concise text that will be displayed on the UI.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:25.900Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/IdpSettings.js",
+      "line_number": 94,
+      "context": "<UploadXML />\n \n <SsoFormField\n labelText={t(\"CustomEntryButton\")}\n name=\"spLoginLabel\"\n placeholder={t(\"Settings:SingleSignOn\")}\n tabIndex={4}\n tooltipContent={<Text fontSize=\"12px\">{t(\"CustomEntryTooltip\")}</Text>}\n tooltipClass=\"custom-entry-tooltip icon-button\"\n value={spLoginLabel}\n hasError={spLoginLabelHasError}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/index.js",
+      "line_number": 66,
+      "context": "useEffect(() => {\n isSSOAvailable && !isInit && init();\n }, []);\n \n useEffect(() => {\n if (ready) setDocumentTitle(t(\"Settings:SingleSignOn\"));\n }, [ready]);\n \n if (!isInit && !isMobileView && isSSOAvailable) return <SSOLoader />;\n \n return (",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/index.js",
+      "line_number": 37,
+      "context": "import { combineUrl } from \"@docspace/shared/utils/combineUrl\";\n import config from \"PACKAGE_FILE\";\n \n import { SECTION_HEADER_HEIGHT } from \"@docspace/shared/components/section/Section.constants\";\n \n import SSO from \"./SingleSignOn\";\n import LDAP from \"./LDAP\";\n import ThirdParty from \"./ThirdPartyServicesSettings\";\n \n import SMTPSettings from \"./SMTPSettings\";\n import DocumentService from \"./DocumentService\";",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 357,
+      "context": "{\n id: \"portal-settings_catalog-sso\",\n key: \"4-2\",\n icon: \"\",\n link: \"sso\",\n tKey: \"SingleSignOn\",\n isCategory: true,\n children: [\n {\n id: \"portal-settings_catalog-sso-settings\",\n key: \"4-2-0\",",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation 'シングルサインオン' is a transliteration of 'Single Sign-On' and lacks a true translation of the meaning. While acceptable in some contexts, a more descriptive translation might be preferred.",
+          "suggestion": "シングルサインイン (Singuru Sainin) - This translates to 'Single Sign-in' and conveys a similar meaning. Alternatively, depending on the intended nuance, consider a more descriptive explanation."
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation \"싱글 사인온\" is a direct transliteration of \"Single Sign-On\" rather than a proper Korean equivalent. While understandable, it's not idiomatic and doesn't reflect how this concept would typically be expressed in Korean. A more accurate and natural translation would involve explaining the functionality rather than simply transliterating the English terms.",
+          "suggestion": "Consider using a more descriptive translation such as \"단일 로그인\" (dan-il lo-gin) which means 'single login', or a phrase explaining the concept, depending on the context."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Logowanie jednokrotne' is a literal translation of 'Single Sign-On', it might not be the most common or readily understood term by Polish users. A more natural and widely recognized translation could be 'Logowanie pojedyncze' or 'Połączone logowanie'.",
+          "suggestion": "Consider 'Logowanie pojedyncze' or 'Połączone logowanie' for better user understanding."
+        },
+        {
+          "type": "formatting",
+          "description": "The inclusion of '(SSO)' is technically correct as it preserves the abbreviation, but it might feel slightly jarring in Polish text. It's more common in Polish to explain acronyms in the initial usage, rather than immediately adding the abbreviation.",
+          "suggestion": "If the abbreviation 'SSO' is important to include, consider a phrase like 'Logowanie jednokrotne (SSO - Single Sign-On)' upon the first mention. Otherwise, consider omitting it."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Início de Sessão Único' is a literal translation, a more common and natural-sounding equivalent for 'Single Sign-On' in Portuguese is 'Logon Único' or 'Acesso Único'. 'Início de Sessão Único' is grammatically correct but sounds less idiomatic.",
+          "suggestion": "Logon Único"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Једнократна пријава\" is a literal translation of \"Single Sign-On,\" it might not be the most natural or commonly used term in Serbian IT contexts. \"Једнократна аутентификација\" or \"Појединачна пријава\" might be more appropriate depending on the specific platform and audience. \"Једнократна пријава\" is understandable but slightly awkward.",
+          "suggestion": "Consider \"Једнократна аутентификација\" or \"Појединачна пријава\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Đăng nhập một lần (SSO)' is a common and understandable translation, a more formal and accurate translation of 'Single Sign-On' would be 'Xác thực một lần' or 'Đăng nhập duy nhất'. Using 'Đăng nhập một lần' implies only one login attempt, not the broader concept of using a single authentication for multiple applications.",
+          "suggestion": "Consider 'Xác thực một lần' or 'Đăng nhập duy nhất' for greater accuracy."
+        },
+        {
+          "type": "formatting",
+          "description": "The addition of the abbreviation '(SSO)' in parentheses is acceptable as it clarifies the English term, but ensure consistency in abbreviation usage throughout the application.",
+          "suggestion": "Maintain consistent use of abbreviations throughout the application; if used here, use it elsewhere."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

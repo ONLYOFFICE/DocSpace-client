@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,22 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import MediaDownloadReactSvgUrl from "PUBLIC_DIR/images/media.download.react.svg?url";
-import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
-import React, { useState, useRef, useCallback } from "react";
+// import MediaDownloadReactSvgUrl from "PUBLIC_DIR/images/media.download.react.svg?url";
+import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
+import React, { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
 
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import { toastr } from "@docspace/shared/components/toast";
-import { objectToGetParams } from "@docspace/shared/utils/common";
+// import { objectToGetParams } from "@docspace/shared/utils/common";
 
 import { InputBlock } from "@docspace/shared/components/input-block";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { DropDown } from "@docspace/shared/components/drop-down";
-import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+// import { IconButton } from "@docspace/shared/components/icon-button";
+// import { DropDown } from "@docspace/shared/components/drop-down";
+// import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
+import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
-import { globalColors } from "@docspace/shared/themes";
+// import { globalColors } from "@docspace/shared/themes";
 import { filterPaidRoleOptions } from "SRC_DIR/helpers";
 import api from "@docspace/shared/api";
 import AccessSelector from "../../../AccessSelector";
@@ -53,11 +54,7 @@ import {
   StyledExternalLink,
 } from "../StyledInvitePanel";
 
-import {
-  getAccessOptions,
-  getFreeUsersRoleArray,
-  getFreeUsersTypeArray,
-} from "../utils";
+import { getFreeUsersRoleArray, getFreeUsersTypeArray } from "../utils";
 
 const ExternalLinks = ({
   t,
@@ -76,10 +73,11 @@ const ExternalLinks = ({
   getPortalInviteLink,
   isUserTariffLimit,
   standalone,
+  allowInvitingGuests,
 }) => {
   const [isLinksToggling, setIsLinksToggling] = useState(false);
 
-  const [actionLinksVisible, setActionLinksVisible] = useState(false);
+  // const [actionLinksVisible, setActionLinksVisible] = useState(false);
 
   const inputsRef = useRef();
 
@@ -179,46 +177,46 @@ const ExternalLinks = ({
 
   const onCopyLink = () => copyLink(activeLink.shareLink);
 
-  const toggleActionLinks = () => {
-    setActionLinksVisible(!actionLinksVisible);
-  };
+  // const toggleActionLinks = () => {
+  //   setActionLinksVisible(!actionLinksVisible);
+  // };
 
-  const closeActionLinks = () => {
-    setActionLinksVisible(false);
-  };
+  // const closeActionLinks = () => {
+  //   setActionLinksVisible(false);
+  // };
 
-  const shareEmail = useCallback(
-    (link) => {
-      const { title, shareLink } = link;
-      const subject = t("SharingPanel:ShareEmailSubject", { title });
-      const body = t("SharingPanel:ShareEmailBody", { title, shareLink });
+  // const shareEmail = useCallback(
+  //   (link) => {
+  //     const { title, shareLink } = link;
+  //     const subject = t("SharingPanel:ShareEmailSubject", { title });
+  //     const body = t("SharingPanel:ShareEmailBody", { title, shareLink });
 
-      const mailtoLink = `mailto:${objectToGetParams({
-        subject,
-        body,
-      })}`;
+  //     const mailtoLink = `mailto:${objectToGetParams({
+  //       subject,
+  //       body,
+  //     })}`;
 
-      window.open(mailtoLink, "_self");
+  //     window.open(mailtoLink, "_self");
 
-      closeActionLinks();
-    },
-    [closeActionLinks, t],
-  );
+  //     closeActionLinks();
+  //   },
+  //   [closeActionLinks, t],
+  // );
 
-  const shareTwitter = useCallback(
-    (link) => {
-      const { shareLink } = link;
+  // const shareTwitter = useCallback(
+  //   (link) => {
+  //     const { shareLink } = link;
 
-      const twitterLink = `https://twitter.com/intent/tweet${objectToGetParams({
-        text: shareLink,
-      })}`;
+  //     const twitterLink = `https://twitter.com/intent/tweet${objectToGetParams({
+  //       text: shareLink,
+  //     })}`;
 
-      window.open(twitterLink, "", "width=1000,height=670");
+  //     window.open(twitterLink, "", "width=1000,height=670");
 
-      closeActionLinks();
-    },
-    [closeActionLinks],
-  );
+  //     closeActionLinks();
+  //   },
+  //   [closeActionLinks],
+  // );
 
   const availableAccess =
     roomId === -1 ? getFreeUsersTypeArray() : getFreeUsersRoleArray();
@@ -238,9 +236,9 @@ const ExternalLinks = ({
 
   return (
     <StyledExternalLink noPadding ref={inputsRef}>
-      <StyledSubHeader inline>
+      <StyledSubHeader $inline>
         {t("InviteViaLink")}
-        {false && ( // TODO: Change to linksVisible after added link information from backend
+        {/* {false ? (
           <div style={{ position: "relative" }}>
             <IconButton
               size={16}
@@ -266,22 +264,27 @@ const ExternalLinks = ({
               />
             </DropDown>
           </div>
-        )}
+        ) : null} */}
         <StyledToggleButton
           className="invite-via-link"
           isChecked={externalLinksVisible}
           onChange={toggleLinks}
           isDisabled={isLinksToggling}
+          dataTestId="invite_panel_external_links_toggle"
         />
       </StyledSubHeader>
-      <StyledDescription noSelect>
+      <StyledDescription>
         {roomId === -1
           ? t("InviteViaLinkDescriptionAccounts", {
               productName: t("Common:ProductName"),
             })
-          : t("InviteViaLinkDescriptionRoom")}
+          : !allowInvitingGuests
+            ? t("InviteViaLinkDescriptionRoomMembers", {
+                productName: t("Common:ProductName"),
+              })
+            : t("InviteViaLinkDescriptionRoomGuest")}
       </StyledDescription>
-      {externalLinksVisible && (
+      {externalLinksVisible ? (
         <StyledInviteInputContainer key={activeLink.id}>
           <StyledInviteInput isShowCross>
             <InputBlock
@@ -293,6 +296,7 @@ const ExternalLinks = ({
               isReadOnly
               iconName={CopyReactSvgUrl}
               onIconClick={onCopyLink}
+              dataTestId="invite_panel_external_link_input"
             />
           </StyledInviteInput>
           <AccessSelector
@@ -308,9 +312,10 @@ const ExternalLinks = ({
             selectionErrorText={<PaidQuotaLimitError />}
             filteredAccesses={filteredAccesses}
             availableAccess={availableAccess}
+            dataTestId="invite_panel_external_link_access"
           />
         </StyledInviteInputContainer>
-      )}
+      ) : null}
     </StyledExternalLink>
   );
 };
@@ -328,7 +333,7 @@ export default inject(
     const { roomId, hideSelector, defaultAccess } = invitePanelOptions;
     const { getPortalInviteLink } = peopleStore.inviteLinksStore;
     const { isUserTariffLimit } = currentQuotaStore;
-    const { standalone } = settingsStore;
+    const { standalone, allowInvitingGuests } = settingsStore;
 
     return {
       roomId,
@@ -339,6 +344,7 @@ export default inject(
       getPortalInviteLink,
       isUserTariffLimit,
       standalone,
+      allowInvitingGuests,
     };
   },
 )(observer(ExternalLinks));

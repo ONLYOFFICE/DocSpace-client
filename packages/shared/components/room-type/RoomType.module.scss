@@ -1,0 +1,180 @@
+// (c) Copyright Ascensio System SIA 2009-2025
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+@use "../../styles/variables/colors";
+
+:global(.rtl) {
+  :local {
+    .roomType {
+      :global {
+        .choose_room-forward_btn {
+          transform: scaleX(-1);
+        }
+      }
+    }
+  }
+}
+
+.roomType {
+  cursor: pointer;
+  outline: 0;
+
+  padding: 16px;
+  width: 100%;
+  box-sizing: border-box;
+
+  display: flex;
+  gap: 12px;
+  align-items: center;
+
+  :global {
+    .choose_room-logo_wrapper {
+      width: 32px;
+      margin-bottom: auto;
+    }
+
+    .choose_room-info_wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      .choose_room-title {
+        display: flex;
+        flex-direction: row;
+        gap: 6px;
+        align-items: center;
+        .choose_room-title-text {
+          font-weight: 600;
+          font-size: 14px;
+          line-height: 16px;
+        }
+      }
+      .choose_room-description {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 16px;
+      }
+    }
+
+    .choose_room-forward_btn {
+      margin-inline-start: auto;
+      max-width: 17px;
+      max-height: 17px;
+      min-width: 17px;
+      min-height: 17px;
+    }
+  }
+}
+
+.listItem {
+  background-color: var(--room-type-list-item-background);
+  border: 1px solid var(--room-type-list-item-border);
+  border-radius: 6px;
+
+  &:hover:not(:active) {
+    background-color: var(--room-type-list-item-hover-background);
+  }
+
+  &:active {
+    border-color: var(--current-color-scheme-main-accent);
+  }
+
+  :global {
+    .choose_room-description {
+      color: var(--room-type-list-item-description-text);
+    }
+  }
+}
+
+.dropDownButton {
+  background-color: var(--room-type-dropdown-button-background);
+  border-radius: 6px;
+  border: 1px solid var(--room-type-dropdown-button-border);
+
+  &:not(.isOpen):hover:not(:active) {
+    background-color: var(--room-type-dropdown-button-hover-background);
+  }
+
+  &.isOpen,
+  &:active {
+    border-color: var(--accent-main);
+  }
+
+  :global {
+    .choose_room-description {
+      color: var(--room-type-dropdown-button-description-text);
+    }
+
+    .choose_room-forward_btn {
+      &.dropdown-button {
+        transform: rotate(90deg);
+      }
+    }
+  }
+
+  &.isOpen {
+    :global {
+      .choose_room-forward_btn {
+        &.dropdown-button {
+          transform: rotate(-90deg);
+        }
+      }
+    }
+  }
+}
+
+.dropDownItem {
+  background-color: var(--room-type-dropdown-item-background);
+
+  &:hover {
+    background-color: var(--room-type-dropdown-item-hover-background);
+  }
+
+  :global {
+    .choose_room-description {
+      color: var(--room-type-dropdown-item-description-text);
+    }
+
+    .choose_room-forward_btn {
+      display: none;
+    }
+  }
+}
+
+.displayItem {
+  cursor: default;
+  background-color: var(--room-type-display-item-background);
+  border: 1px solid var(--room-type-display-item-border);
+  border-radius: 6px;
+
+  :global {
+    .choose_room-description {
+      color: var(--room-type-display-item-description-text);
+    }
+
+    .choose_room-forward_btn {
+      display: none;
+    }
+  }
+}

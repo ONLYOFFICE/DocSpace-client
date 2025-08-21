@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -91,10 +91,8 @@ export const WarningQuotaDialog = ({
     >
       <ModalDialog.Header>{t("Common:Warning")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text noSelect style={{ marginBottom: "16px" }}>
-          {getWarningDescription()}
-        </Text>
-        <Text noSelect>{t("Settings:WantToContinue")}</Text>
+        <Text style={{ marginBottom: "16px" }}>{getWarningDescription()}</Text>
+        <Text>{t("Settings:WantToContinue")}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -103,12 +101,14 @@ export const WarningQuotaDialog = ({
           primary
           onClick={onClickRedirect}
           scale
+          testId="continue_change_quota_button"
         />
         <Button
           label={t("Common:ContinueButton")}
           size={ButtonSize.normal}
           onClick={onCloseDialog}
           scale
+          testId="cancel_continue_change_quota_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

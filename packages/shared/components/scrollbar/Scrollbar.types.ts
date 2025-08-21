@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,38 +24,39 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ScrollbarType } from "./Scrollbar.enums";
+import {
+  ScrollbarProps as ScrollbarLibraryProps,
+  Scrollbar as CustomScrollbar,
+} from "./custom-scrollbar";
 
-export type ScrollbarProps = {
-  /** Accepts class */
-  className?: string;
+type PickedScrollbarLibraryProps = Pick<
+  ScrollbarLibraryProps,
+  "id" | "className" | "style" | "noScrollY" | "noScrollX" | "createContext"
+>;
+
+export type ScrollbarProps = PickedScrollbarLibraryProps & {
+  /** Ref to access the DOM element or React component instance */
+  ref?: React.Ref<CustomScrollbar | null>;
   /** This class will be placed on scroller element */
   scrollClass?: string;
-  /** Accepts id  */
-  id?: string;
-  /** Accepts css style  */
-  style?: React.CSSProperties;
+  /** This class will be placed on scroller body element */
+  scrollBodyClassName?: string;
   /** Enable tracks auto hiding.  */
   autoHide?: boolean;
   /** Fix scrollbar size. */
   fixedSize?: boolean;
-  /** Disable vertical scrolling. */
-  noScrollY?: boolean;
-  /** Disable horizontal scrolling. */
-  noScrollX?: boolean;
-  /** Wrap children in context that contains scrollbar instance */
-  createContext?: boolean;
   /** Set focus on scroll content element after first render */
   autoFocus?: boolean;
   /** Set scroll body tabindex */
   tabIndex?: number | null;
   /** Add padding bottom to scroll-body */
   paddingAfterLastItem?: string;
-
+  /** Add custom padding-inline-end to scroll-body. */
+  paddingInlineEnd?: string;
+  /** Add onScroll handler */
   onScroll?: React.UIEventHandler<HTMLDivElement>;
+  /** Add children */
   children?: React.ReactNode;
-
-  bodyPadding?: string;
 };
 
 export type CustomScrollbarsVirtualListProps = Pick<
@@ -69,6 +70,5 @@ export type CustomScrollbarsVirtualListProps = Pick<
   | "paddingAfterLastItem"
 > & {
   forwardedRef?: React.ForwardedRef<unknown>;
-  contentRef?: React.MutableRefObject<HTMLDivElement | null>;
-  stype?: ScrollbarType;
+  contentRef?: React.RefObject<HTMLDivElement | null>;
 };

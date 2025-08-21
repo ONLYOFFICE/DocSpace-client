@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,10 +31,8 @@ import styled from "styled-components";
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Link, LinkType } from "@docspace/shared/components/link";
-import { Box } from "@docspace/shared/components/box";
 import { Checkbox } from "@docspace/shared/components/checkbox";
-import { RowContainer } from "@docspace/shared/components/row-container";
-import { Row } from "@docspace/shared/components/row";
+import { RowContainer, Row } from "@docspace/shared/components/rows";
 import { Text } from "@docspace/shared/components/text";
 import EmptyScreenUserReactSvgUrl from "PUBLIC_DIR/images/empty_screen_user.react.svg?url";
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
@@ -94,6 +92,12 @@ const StyledRowContainer = styled(RowContainer)`
     @media ${tablet} {
       margin: 0;
     }
+  }
+
+  .buttons-box {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
   }
 `;
 
@@ -156,13 +160,13 @@ const RowView = (props: RowViewProps) => {
         <>
           <StyledRow>
             <div className="row-header-item">
-              {checkedUsers.withEmail.length > 0 && (
+              {checkedUsers.withEmail.length > 0 ? (
                 <Checkbox
                   isIndeterminate={isIndeterminate}
                   isChecked={isChecked}
                   onChange={toggleAll}
                 />
-              )}
+              ) : null}
               <Text className="row-header-title">{t("Common:Name")}</Text>
             </div>
           </StyledRow>
@@ -185,7 +189,7 @@ const RowView = (props: RowViewProps) => {
           headerText={t("Common:NotFoundUsers")}
           descriptionText={t("Common:NotFoundUsersDescription")}
           buttons={
-            <Box displayProp="flex" alignItems="center">
+            <div className="buttons-box">
               <IconButton
                 className="clear-icon"
                 isFill
@@ -201,10 +205,11 @@ const RowView = (props: RowViewProps) => {
               >
                 {t("Common:ClearFilter")}
               </Link>
-            </Box>
+            </div>
           }
         />
       )}
+      <div />
     </StyledRowContainer>
   );
 };

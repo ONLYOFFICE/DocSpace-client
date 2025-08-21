@@ -1,5 +1,4 @@
-import { i18n } from "i18next";
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +25,6 @@ import { i18n } from "i18next";
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { match, P } from "ts-pattern";
 
 import { Base, Dark, TColorScheme, TTheme } from "@docspace/shared/themes";
 import { getEditorTheme, getSystemTheme } from "@docspace/shared/utils";
@@ -36,17 +34,17 @@ import { TGetColorTheme } from "@docspace/shared/api/settings/types";
 import { setCookie } from "@docspace/shared/utils/cookie";
 import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 import { TUser } from "@docspace/shared/api/people/types";
-
-type MatchType = [ThemeKeys | undefined, ThemeKeys | undefined];
+import { getDirectionByLanguage } from "@docspace/shared/utils/common";
+import { getFontFamilyDependingOnLanguage } from "@docspace/shared/utils/rtlUtils";
 
 export interface UseThemeProps {
   user?: TUser;
   colorTheme?: TGetColorTheme;
   systemTheme?: ThemeKeys;
-  i18n: i18n;
+  lang?: string;
 }
 
-const useTheme = ({ user, colorTheme, systemTheme, i18n }: UseThemeProps) => {
+const useTheme = ({ user, colorTheme, systemTheme, lang }: UseThemeProps) => {
   const [currentColorTheme, setCurrentColorTheme] =
     React.useState<TColorScheme>(() => {
       if (!colorTheme) return {} as TColorScheme;
@@ -58,9 +56,11 @@ const useTheme = ({ user, colorTheme, systemTheme, i18n }: UseThemeProps) => {
     });
 
   const [theme, setTheme] = React.useState<TTheme>(() => {
+    const interfaceDirection = getDirectionByLanguage(lang || "en");
+
     const currColorTheme = colorTheme
-      ? colorTheme.themes.find((theme) => theme.id === colorTheme.selected) ??
-        ({} as TColorScheme)
+      ? (colorTheme.themes.find((t) => t.id === colorTheme.selected) ??
+        ({} as TColorScheme))
       : ({} as TColorScheme);
 
     let newTheme;
@@ -93,6 +93,8 @@ const useTheme = ({ user, colorTheme, systemTheme, i18n }: UseThemeProps) => {
     return {
       ...(newTheme ?? Base),
       currentColorScheme: currColorTheme,
+      interfaceDirection,
+      fontFamily: getFontFamilyDependingOnLanguage(lang ?? "en"),
     };
   });
 
@@ -101,7 +103,7 @@ const useTheme = ({ user, colorTheme, systemTheme, i18n }: UseThemeProps) => {
   const getCurrentColorTheme = React.useCallback(async () => {
     if (isRequestRunning.current) return;
     isRequestRunning.current = true;
-    const colorThemes = colorTheme ? colorTheme : await getAppearanceTheme();
+    const colorThemes = colorTheme || (await getAppearanceTheme());
 
     const currColorTheme = colorThemes.themes.find(
       (t) => t.id === colorThemes.selected,
@@ -114,17 +116,18 @@ const useTheme = ({ user, colorTheme, systemTheme, i18n }: UseThemeProps) => {
   const getUserTheme = React.useCallback(() => {
     const SYSTEM_THEME = getSystemTheme();
 
-    let theme = user?.theme ?? SYSTEM_THEME;
-    const interfaceDirection = i18n?.dir ? i18n.dir() : "ltr";
+    let curTheme = user?.theme ?? SYSTEM_THEME;
+    const interfaceDirection = getDirectionByLanguage(lang || "en");
 
-    if (user?.theme === ThemeKeys.SystemStr) theme = SYSTEM_THEME;
+    if (user?.theme === ThemeKeys.SystemStr) curTheme = SYSTEM_THEME;
 
-    const isBaseTheme = theme === ThemeKeys.BaseStr;
+    const isBaseTheme = curTheme === ThemeKeys.BaseStr;
 
     setTheme({
       ...(isBaseTheme ? Base : Dark),
       currentColorScheme: currentColorTheme,
       interfaceDirection,
+      fontFamily: getFontFamilyDependingOnLanguage(lang ?? "en"),
     });
     setCookie(SYSTEM_THEME_KEY, SYSTEM_THEME);
 
@@ -135,7 +138,7 @@ const useTheme = ({ user, colorTheme, systemTheme, i18n }: UseThemeProps) => {
 
       window.AscDesktopEditor.execCommand("portal:uitheme", editorTheme);
     }
-  }, [user?.theme, currentColorTheme, i18n]);
+  }, [user?.theme, currentColorTheme, lang]);
 
   React.useEffect(() => {
     getCurrentColorTheme();

@@ -1,0 +1,363 @@
+{
+  "key_path": "SelectFileDescriptionNextcloud",
+  "content": "Select the Nextcloud backup file to start the data import. Only one file can be selected. Once the data upload and analysis are complete, the next step will be initiated automatically.",
+  "content_en_sha1_hash": "fc06e392d6c5103ceb16fdfcca11cd91b7a9faac",
+  "created_at": "2025-05-19T21:30:52.528Z",
+  "updated_at": "2025-06-30T12:20:31.408Z",
+  "comment": {
+    "text": "\"This text is used to describe the selection process for Nextcloud backup files during data import in a step-by-step interface.\"",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:33.984Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
+      "line_number": 50,
+      "context": "logoText: string,\n ) => {\n return [\n {\n title: t(\"Common:SelectFile\"),\n description: t(\"Settings:SelectFileDescriptionNextcloud\"),\n component: (\n <SelectFileStep\n t={t}\n isMultipleUpload={false}\n migratorName=\"Nextcloud\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ehtiyat' is a generally accepted translation for 'backup', but in this context, 'safə' (safe) or 'qaynaq' (source) could be more appropriate for a more technical and user-friendly feel. While 'ehtiyat' isn't *wrong*, it's not the most natural choice for a software interface.",
+          "suggestion": "Consider using 'safə' or 'qaynaq' instead of 'ehtiyat'."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure 'Məlumatların yüklənməsi və təhlili tamamlandıqdan sonra...' is grammatically correct, but can be slightly more streamlined for better readability in a user interface.  While functional, it is a bit wordy.",
+          "suggestion": "Consider 'Məlumat yüklənib təhlil edildikdən sonra...'"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"входирането на данни\" (vhodireneto na danni) is not the most natural or accurate translation of 'data import'. It's a somewhat awkward phrasing.",
+          "suggestion": "Consider using something like \"внос на данни\" (vnos na danni) or \"зареждане на данни\" (zaredvane na danni) which are more common and easily understood translations for 'data import'."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the sentence structure feels a bit clunky. It could benefit from slight restructuring for better flow.",
+          "suggestion": "Consider: 'Изберете файл за архивиране от Nextcloud, за да започнете зареждането/вноса на данни. Може да бъде избран само един файл. След като зареждането/вносът на данните и анализът приключат, следващата стъпка ще стартира автоматично.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Select the Nextcloud backup file\" is not accurately conveyed by \"Výběrem záložního souboru Nextcloud\". While understandable, a more direct translation would improve clarity.  'Vyberte záložní soubor Nextcloud...' would be more accurate.",
+          "suggestion": "Vyberte záložní soubor Nextcloud..."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation starts with a verb in the imperative. While grammatically correct, it might feel abrupt to some users. Consider adding a softening phrase like 'Pro zahájení importu dat, vyberte...' (To start data import, select...) to align better with the English tone.",
+          "suggestion": "Pro zahájení importu dat, vyberte záložní soubor Nextcloud..."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Select the Nextcloud backup file to start the data import\" is not accurately reflected in the Finnish translation. 'Valitse Nextcloud-varmuuskopiotiedostoa aloittaaksesi tietojen siirto' translates more literally to 'Select a Nextcloud backup file to start the data transfer'. The original implies selecting *one* file.",
+          "suggestion": "Valitse Nextcloud-varmuuskopiotiedosto aloittaaksesi tietojen siirron. Vain yksi tiedosto voidaan valita."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure in the second part of the Finnish translation is a bit awkward. It's grammatically correct, but reads less naturally.",
+          "suggestion": "Seuraava vaihe aloitetaan automaattisesti tietojen latauksen ja analysoinnin valmistuttua."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'Sélectionnez les fichier' is grammatically incorrect. 'fichier' is masculine plural, requiring 'les fichiers'.",
+          "suggestion": "Sélectionnez les fichiers"
+        },
+        {
+          "type": "grammar",
+          "description": "The verb 'est lancé' should be 'sera lancée' to agree in gender with 'étape'.",
+          "suggestion": "sera lancée"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"կրկնօրինակ ֆայլը\" (krrknorinnak faylu) literally translates to 'duplicate file'.  'Backup file' is the intended meaning. A more accurate translation would be 'պաշտպանության ֆայլը' (pashtpanut'yan faylu) or 'ժողովածու ֆայլը' (zhoghovatsdu faylu).",
+          "suggestion": "Ընտրեք Nextcloud պաշտպանության ֆայլը՝ տվյալների ներմուծումը սկսելու համար:"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence \"Տվյալների վերբեռնման և վերլուծության ավարտից հետո հաջորդ քայլը կսկսվի ավտոմատ կերպով:\" is not properly formatted with a colon (:) after the explanation.",
+          "suggestion": "Տվյալների վերբեռնման և վերլուծության ավարտից հետո հաջորդ քայլը կսկսվի ավտոմատ կերպով:"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ເອກະລາດ' is used unnecessarily and appears to be a typo. It doesn't fit the context of the sentence.",
+          "suggestion": "Remove 'ເອກະລາດ'. The sentence should read: 'ເລືອກໄຟລ໌ສໍາຮອງຂໍ້ມູນ Nextcloud ເພື່ອເລີ່ມຕົ້ນການນໍາເຂົ້າຂໍ້ມູນ. ສາມາດເລືອກໄຟລ໌ດຽວເທົ່ານັ້ນ. ເມື່ອການອັບໂຫລດຂໍ້ມູນ ແລະການວິເຄາະສຳເລັດແລ້ວ, ຂັ້ນຕອນຕໍ່ໄປຈະຖືກເລີ່ມຕົ້ນໂດຍອັດຕະໂນມັດ.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Select the Nextcloud backup file\" is translated as \"Selectați fișierele de rezervă Nextcloud\". 'Fișierele' implies multiple files, while the English states only one file can be selected. The Romanian should reflect the single file constraint.",
+          "suggestion": "Selectați fișierul de rezervă Nextcloud"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'උපස්ථ' (upasth) is used for 'backup'. While understandable, a more common and clearer term for 'backup' in this context would be 'බාකප්' (backup) transliterated.",
+          "suggestion": "Replace 'උපස්ථ' with 'බාකප්'."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'දත්ත උඩුගත වී විශ්ලේෂණය අවසන් වූ පසු' (data udhugata vee visleshanaya avasan vunu passu) can be improved for smoother flow. The word order could be adjusted.",
+          "suggestion": "Replace with 'දත්ත උඩුගත වී විශ්ලේෂණය අවසන් වූ විට'."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly an error, consider adding a slightly more formal punctuation after 'බාකප්' (backup), like a period or colon, depending on the overall style guide.",
+          "suggestion": "Add a period or colon after 'බාකප්'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"spustite import údajov\" is a bit awkward. While technically correct, it's not the most natural way to say 'start the data import' in Slovak. A more fluent phrasing would be 'začnite import údajov'.",
+          "suggestion": "Vyberte záložný súbor služby Nextcloud a začnite import údajov."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The sentence 'Након што се заврши отпремање и анализа података, следећи корак ће се аутоматски покренути.' is a bit long and could be broken down for better readability.  While grammatically correct, it feels less natural than it could be.",
+          "suggestion": "Након завршетка отпремања и анализе података, следећи корак ће се аутоматски покренути."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Select the Nextcloud backup file' is translated as 'Izaberite Nextcloud datoteku za rezervnu kopiju'. While technically correct, 'za rezervnu kopiju' (for backup) is redundant since the context implies it's a backup file. A more concise translation would be better.",
+          "suggestion": "Izaberite Nextcloud datoteku."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Once the data upload and analysis are complete' is translated as 'Nakon što se završi otpremanje i analiza podataka'. 'Otpremanje' is a less common and slightly formal word for 'upload'. A more common and approachable translation would be better.",
+          "suggestion": "Nakon što se podaci uploaduju i analiziraju"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Select the Nextcloud backup file' is too literal. A more natural Turkish phrasing would be 'Nextcloud yedekleme dosyanızı seçin'.",
+          "suggestion": "Nextcloud yedekleme dosyanızı seçin."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'to start the data import' is slightly awkward. A more natural phrasing would be 'veri aktarımını başlatmak için'.",
+          "suggestion": "veri aktarımını başlatmak için"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The sentence 'Only one file can be selected' translates directly but 'Sadece bir dosya seçilebilir' is a bit formal. A more conversational phrasing is 'Sadece bir dosya seçilebilir/kullanılabilir'.",
+          "suggestion": "Sadece bir dosya seçilebilir/kullanılabilir"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Once the data upload and analysis are complete' is a bit formal and can be simplified.  'Veri yükleme ve analiz tamamlandığında' is correct but 'Veri yüklendikten ve analiz yapıldıktan sonra' is more conversational.",
+          "suggestion": "Veri yüklendikten ve analiz yapıldıktan sonra"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English text specifies 'only one file can be selected,' but the Ukrainian translation states 'Можна вибрати декілька файлів' (You can select several files). This contradicts the original meaning.",
+          "suggestion": "Знайдіть файл резервної копії Nextcloud, щоб почати імпорт даних. Можна вибрати лише один файл."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"您只能选择一个文件\" is a bit stiff and overly formal for this context. A more natural phrasing would convey the same meaning in a more user-friendly way.",
+          "suggestion": "您可以仅选择一个文件 (You can only select one file)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"next step\" as \"下一步\" is accurate, but the surrounding sentence structure could be improved for better flow.",
+          "suggestion": "数据上传和分析完成后，会自动进入下一步 (After data upload and analysis, it will automatically enter the next step)."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

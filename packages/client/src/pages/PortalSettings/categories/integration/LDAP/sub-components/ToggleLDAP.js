@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -98,6 +98,7 @@ const ToggleLDAP = ({
         isChecked={isLdapEnabled}
         onChange={onChangeToggle}
         isDisabled={isUIDisabled}
+        dataTestId="ldap_toggle_button"
       />
 
       <div className="toggle-caption">
@@ -110,7 +111,7 @@ const ToggleLDAP = ({
           >
             {t("LdapToggle")}
           </Text>
-          {!isLdapAvailable && (
+          {!isLdapAvailable ? (
             <Badge
               backgroundColor={
                 theme.isBase
@@ -121,14 +122,13 @@ const ToggleLDAP = ({
               className="toggle-caption_title_badge"
               isPaidBadge
             />
-          )}
+          ) : null}
         </div>
         <Text
           fontSize="12px"
           fontWeight={400}
           lineHeight="16px"
           className="settings_unavailable"
-          noSelect
         >
           {t("LdapToggleDescription", {
             productName: t("Common:ProductName"),

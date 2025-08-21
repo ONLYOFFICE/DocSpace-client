@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -49,6 +49,7 @@ const PeopleRowContainer = ({
   showStorageInfo,
   isDefaultUsersQuotaSet,
   isRoomAdmin,
+  withContentSelection,
 }: RowViewProps) => {
   useViewEffect({
     view: viewAs!,
@@ -68,6 +69,7 @@ const PeopleRowContainer = ({
       filesLength={peopleList!.length}
       itemHeight={58}
       onScroll={() => {}}
+      noSelect={!withContentSelection}
     >
       {peopleList!.map((item, index) => (
         <SimpleUserRow
@@ -94,7 +96,7 @@ export default inject(
     currentQuotaStore,
     userStore,
   }: RowViewStores) => {
-    const { usersStore, viewAs, setViewAs } = peopleStore;
+    const { usersStore, viewAs, setViewAs, contactsHotkeysStore } = peopleStore;
 
     const {
       peopleList,
@@ -113,6 +115,7 @@ export default inject(
     const { showStorageInfo, isDefaultUsersQuotaSet } = currentQuotaStore;
 
     const { isRoomAdmin } = userStore.user!;
+    const { withContentSelection } = contactsHotkeysStore!;
 
     return {
       viewAs,
@@ -129,6 +132,7 @@ export default inject(
       showStorageInfo,
       isDefaultUsersQuotaSet,
       isRoomAdmin,
+      withContentSelection,
     };
   },
 )(observer(PeopleRowContainer));

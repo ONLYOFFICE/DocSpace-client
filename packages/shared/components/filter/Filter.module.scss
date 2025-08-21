@@ -1,0 +1,548 @@
+// (c) Copyright Ascensio System SIA 2009-2025
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+@use "../../styles/mixins";
+@use "../../styles/variables/colors";
+
+.filterInput {
+  width: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  margin: 0;
+  padding: 0;
+
+  :global {
+    .filter-input_filter-row {
+      width: 100%;
+      height: 32px;
+
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      margin-bottom: 8px;
+    }
+
+    .filter-input_selected-row {
+      width: 100%;
+      min-height: 32px;
+
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      flex-wrap: wrap;
+
+      margin-bottom: 8px;
+
+      .clear-all-link {
+        margin-inline-start: 12px;
+      }
+    }
+  }
+}
+
+.button {
+  width: 32px;
+  min-width: 32px;
+  max-width: 32px;
+  height: 32px;
+
+  position: relative;
+
+  border-radius: 3px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+  padding: 0;
+
+  margin-inline-start: 8px;
+
+  cursor: pointer;
+
+  border: var(--filter-button-border);
+
+  &:hover {
+    border: var(--filter-button-hover-border);
+    svg {
+      path {
+        fill: var(--icon-button-hover-color);
+      }
+    }
+  }
+
+  div {
+    cursor: pointer;
+  }
+
+  &.isOpen {
+    background: var(--filter-button-open-background);
+    pointer-events: none;
+    svg {
+      path {
+        fill: var(--filter-button-open-fill);
+      }
+    }
+
+    :global {
+      .dropdown-container {
+        margin-top: 5px;
+        min-width: 200px;
+        width: 200px;
+      }
+    }
+  }
+
+  --webkit-tap-highlight-color: #{colors.$tap-highlight};
+}
+
+.indicator {
+  border-radius: 50%;
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  top: 25px;
+
+  inset-inline-start: 25px;
+
+  z-index: 10;
+
+  background: var(--accent-main);
+
+  &:hover {
+    background: var(--accent-main);
+  }
+}
+
+.filterBlock {
+  position: fixed;
+  top: 0;
+
+  inset-inline-end: 0;
+
+  width: 480px;
+  height: 100%;
+
+  z-index: 400;
+
+  display: flex;
+  flex-direction: column;
+
+  background: var(--filter-block-background);
+
+  @include mixins.tablet-and-below {
+    max-width: 100%;
+  }
+
+  @include mixins.mobile {
+    bottom: 0;
+    top: unset;
+    height: 100%;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  :global {
+    .people-selector {
+      height: 100%;
+      width: 100%;
+
+      .selector-wrapper,
+      .column-options {
+        width: 100%;
+      }
+    }
+
+    .filter-body {
+      height: calc(100% - 125px);
+
+      .combo-item {
+        padding: 0;
+      }
+
+      .combo-button {
+        justify-content: space-between;
+        .combo-button-label {
+          font-size: 13px;
+          font-weight: 400;
+          line-height: 20px;
+        }
+      }
+    }
+  }
+}
+
+.filterBlockItem {
+  padding-inline: 0 16px;
+  max-width: 100%;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  margin: 16px 0 0;
+
+  &.isFirst {
+    margin: 12px 0 0;
+  }
+
+  &.withoutHeader {
+    margin: 0;
+  }
+}
+
+.filterBlockItemHeader {
+  height: 16px;
+  line-height: 16px;
+  margin-inline-end: -16px;
+
+  display: flex;
+  align-items: center;
+}
+
+.filterBlockItemContent {
+  margin-block: 12px 16px;
+
+  margin-inline: 0 -16px;
+  height: fit-content;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  &.withMultiItems {
+    margin-block: 12px 8px;
+  }
+
+  &.withoutSeparator {
+    margin-block: 12px 0;
+  }
+}
+
+.filterBlockItemSelector {
+  height: 32px;
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.filterBlockItemSelectorText {
+  color: var(--filter-block-item-color);
+  cursor: pointer;
+  margin-inline-start: 8px;
+}
+
+.filterBlockItemTagText {
+  height: 20px;
+
+  &.selected {
+    font-weight: 600;
+    color: var(--filter-block-selected-item-color);
+  }
+}
+
+.filterBlockItemTagIcon {
+  margin-inline-start: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  svg {
+    path {
+      fill: var(--filter-block-selected-item-color);
+    }
+  }
+}
+
+.filterBlockItemToggle {
+  width: 100%;
+  height: 36px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filterBlockHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  :global {
+    .additional-icons-container {
+      margin-inline: 16px;
+    }
+  }
+}
+
+.filterBlockItemToggleButton {
+  position: static;
+
+  grid-gap: 0px;
+}
+
+.filterBlockItemCheckboxContainer {
+  :global {
+    .checkbox {
+      margin-inline-end: 8px !important;
+    }
+
+    .checkbox-text {
+      line-height: 20px;
+    }
+  }
+}
+
+.filterBlockItemSeparator {
+  height: 1px;
+  width: calc(100% + 16px);
+  margin-inline-end: 16px;
+
+  background: var(--filter-block-item-separator-background);
+}
+
+.filterBlockItemTag {
+  height: 28px;
+  max-height: 28px;
+
+  max-width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  border: var(--filter-block-item-tag-border);
+  border-radius: 16px;
+
+  box-sizing: border-box;
+
+  padding: 4px 15px;
+
+  cursor: pointer;
+
+  &[data-selected="true"] {
+    background: var(--filter-block-selected-backgroud-color);
+    border-color: var(--filter-block-selected-backgroud-color);
+
+    &:hover {
+      background: var(--filter-block-selected-backgroud-color);
+      border-color: var(--filter-block-selected-backgroud-color);
+    }
+  }
+
+  --webkit-tap-highlight-color: #{colors.$tap-highlight};
+}
+
+.sortButton {
+  :global {
+    .combo-button {
+      background: var(--filter-sort-button-background);
+      padding-inline: 4px !important;
+      width: 32px;
+      height: 32px;
+
+      .icon-button_svg {
+        cursor: pointer;
+      }
+
+      &:hover {
+        border-color: var(--icon-button-hover-color);
+        .optionalBlock .icon-button_svg svg {
+          path {
+            fill: var(--icon-button-hover-color);
+          }
+        }
+      }
+    }
+
+    .sort-combo-box {
+      width: 32px;
+      height: 32px;
+      max-width: 32px;
+
+      margin-inline-start: 8px;
+
+      .dropdown-container {
+        top: 102%;
+        bottom: auto;
+        min-width: 200px;
+        margin-top: 3px;
+        width: auto;
+
+        .view-selector-item {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          cursor: auto;
+
+          .view-selector {
+            width: 44px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            cursor: auto;
+
+            .view-selector-icon {
+              border: none;
+              background: transparent;
+              padding: 0;
+
+              div {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              }
+            }
+          }
+        }
+
+        .option-item {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+          min-width: 200px;
+
+          svg {
+            width: 16px;
+            height: 16px;
+          }
+
+          .option-item__icon {
+            display: flex;
+            visibility: hidden;
+            cursor: pointer;
+
+            path {
+              fill: var(--filter-sort-button-sort-fill);
+            }
+          }
+          &:hover {
+            .option-item__icon {
+              visibility: visible;
+            }
+          }
+        }
+
+        .selected-option-item {
+          background: var(--filter-sort-button-selected-background);
+          cursor: pointer;
+
+          .selected-option-item__icon {
+            visibility: visible;
+          }
+        }
+      }
+
+      .optionalBlock {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        margin-inline-end: 0;
+      }
+
+      .combo-buttons_arrow-icon {
+        display: none;
+      }
+
+      .backdrop-active {
+        display: none;
+      }
+    }
+  }
+
+  &[data-row-view="true"] {
+    :global {
+      .view-selector-icon:nth-child(1) {
+        svg {
+          path {
+            fill: var(--filter-sort-button-selected-icon);
+          }
+        }
+      }
+
+      .view-selector-icon:nth-child(2) {
+        svg {
+          path {
+            fill: var(--filter-sort-button-unselected-icon);
+          }
+        }
+      }
+    }
+  }
+
+  &[data-row-view="false"] {
+    :global {
+      .view-selector-icon:nth-child(1) {
+        svg {
+          path {
+            fill: var(--filter-sort-button-unselected-icon);
+          }
+        }
+      }
+
+      .view-selector-icon:nth-child(2) {
+        svg {
+          path {
+            fill: var(--filter-sort-button-selected-icon);
+          }
+        }
+      }
+    }
+  }
+
+  &[data-desc="false"] {
+    :global {
+      .option-item__icon {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}
+
+.viewSelector {
+  @include mixins.tablet-and-below {
+    display: none;
+  }
+}

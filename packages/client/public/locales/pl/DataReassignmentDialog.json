@@ -4,7 +4,6 @@
   "DataReassignment": "Ponowne przypisanie danych",
   "DeleteProfileIsFinished": "Usuń profil po przypisaniu danych do innego użytkownika",
   "DescriptionDataReassignment": "Wszystkie pokoje utworzone przez użytkownika oraz znajdujące się w nich dane zostaną przekazane innej osobie.",
-  "InProgress": "W toku",
   "Interrupted": "Przerwano, niektóre dane nie mogły zostać przekazane",
   "MoreAboutDataTransfer": "Więcej na temat transferu danych",
   "NewDataOwner": "Nowy właściciel danych",
@@ -14,6 +13,7 @@
   "ReassignData": "Ponownie przypisz dane",
   "ReassigningDataToAnother": "Rozpoczęto proces przypisywania danych użytkownika <0>{{fromUser}}</0> użytkownikowi <1>{{toUser}}</1>. Może to zająć trochę czasu.",
   "ReassigningDataToItself": "Rozpoczęto proces przypisywania danych użytkownika <0>{{fromUser}}</0> użytkownikowi <1>{{toUser}}</1> <2>{{you}}</2>. Może to zająć trochę czasu.",
+  "RoomsOnlyReassignment": "Przeniesiemy pokoje utworzone przez kontakt.",
   "StartTransferAgain": "Rozpocznij transfer ponownie",
   "UserToWhomTheDataWillBeTransferred": "Użytkownik, któremu zostaną przekazane dane"
 }

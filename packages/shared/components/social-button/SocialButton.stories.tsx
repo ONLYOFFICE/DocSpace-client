@@ -28,6 +28,8 @@ import { Meta, StoryObj } from "@storybook/react";
 
 import ShareGoogleReactSvgUrl from "PUBLIC_DIR/images/share.google.react.svg?url";
 import ShareLinkedinReactSvgUrl from "PUBLIC_DIR/images/share.linkedin.react.svg?url";
+import GoogleIcon from "PUBLIC_DIR/images/share.google.react.svg";
+import LinkedinIcon from "PUBLIC_DIR/images/share.linkedin.react.svg";
 
 import { SocialButton } from "./SocialButton";
 
@@ -40,18 +42,61 @@ const meta: Meta<SocialButtonType> = {
   parameters: {
     docs: {
       description: {
-        component: "Button is used for sign up with help social networks",
+        component:
+          "Button component for social network authentication and sharing. Supports different social providers, sizes, and states.",
       },
     },
   },
   argTypes: {
-    onClick: { action: "onClick" },
+    onClick: {
+      action: "onClick",
+      description: "Callback function triggered when the button is clicked",
+    },
     iconName: {
       control: {
         type: "select",
+        options: [ShareGoogleReactSvgUrl, ShareLinkedinReactSvgUrl],
       },
-      options: [ShareGoogleReactSvgUrl, ShareLinkedinReactSvgUrl],
+      description: "URL of the social network icon to display",
     },
+    size: {
+      control: {
+        type: "radio",
+        options: ["base", "small"],
+      },
+      description:
+        "Size of the social button. 'base' for normal size, 'small' for compact version",
+    },
+    label: {
+      control: "text",
+      description:
+        "Text label displayed next to the social icon (e.g., 'Continue with Google')",
+    },
+    isConnect: {
+      control: "boolean",
+      description: "Indicates if the button is in a connected state",
+    },
+    isDisabled: {
+      control: "boolean",
+      description: "Disables the button and prevents user interaction",
+    },
+    noHover: {
+      control: "boolean",
+      description: "Disables hover effects on the button",
+    },
+    $iconOptions: {
+      control: "object",
+      description:
+        "Additional options for customizing the icon appearance (e.g., size, color)",
+    },
+  },
+  args: {
+    label: "Continue with Google",
+    size: "base",
+    isConnect: false,
+    isDisabled: false,
+    noHover: false,
+    tabIndex: 0,
   },
 };
 
@@ -59,9 +104,57 @@ export default meta;
 
 export const Default: Story = {
   args: {
-    label: "Base SocialButton",
-    iconName: ShareGoogleReactSvgUrl,
-    isDisabled: false,
-    style: { maxWidth: "250px" },
+    IconComponent: GoogleIcon,
+  },
+};
+
+export const Small: Story = {
+  args: {
+    IconComponent: GoogleIcon,
+    size: "small",
+  },
+};
+
+export const Connected: Story = {
+  args: {
+    IconComponent: GoogleIcon,
+    isConnect: true,
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    IconComponent: GoogleIcon,
+    isDisabled: true,
+  },
+};
+
+export const CustomIconColor: Story = {
+  args: {
+    IconComponent: GoogleIcon,
+    $iconOptions: {
+      color: "#FF0000",
+    },
+  },
+};
+
+export const NoHover: Story = {
+  args: {
+    IconComponent: GoogleIcon,
+    noHover: true,
+  },
+};
+
+export const WithLinkedin: Story = {
+  args: {
+    IconComponent: LinkedinIcon,
+    label: "Continue with LinkedIn",
+  },
+};
+
+export const IconOnly: Story = {
+  args: {
+    IconComponent: GoogleIcon,
+    label: "",
   },
 };

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,9 +26,9 @@
 
 import React from "react";
 
-import StyledFilter from "./Filter.styled";
 import { RectangleSkeleton } from "../../rectangle";
 import { FilterLoaderProps } from "./Filter.types";
+import styles from "../Filter.module.scss";
 
 const FilterLoader = ({ id, className, style, ...rest }: FilterLoaderProps) => {
   const {
@@ -44,7 +44,12 @@ const FilterLoader = ({ id, className, style, ...rest }: FilterLoaderProps) => {
   } = rest;
 
   return (
-    <StyledFilter id={id} className={className} style={style}>
+    <div
+      id={id}
+      className={`${styles.filterLoader} ${className || ""}`}
+      style={style}
+      data-testid="filter-loader"
+    >
       <RectangleSkeleton
         title={title}
         height={height}
@@ -67,7 +72,7 @@ const FilterLoader = ({ id, className, style, ...rest }: FilterLoaderProps) => {
         speed={speed}
         animate={animate}
       />
-    </StyledFilter>
+    </div>
   );
 };
 

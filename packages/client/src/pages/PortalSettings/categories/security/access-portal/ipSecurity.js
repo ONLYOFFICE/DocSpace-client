@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,7 @@
 
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { Text } from "@docspace/shared/components/text";
@@ -219,7 +219,7 @@ const IpSecurity = (props) => {
         ips: newIps,
       });
       setShowReminder(false);
-      toastr.success(t("SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error);
     }
@@ -240,19 +240,22 @@ const IpSecurity = (props) => {
 
   return (
     <MainContainer>
-      <LearnMoreWrapper>
+      <LearnMoreWrapper withoutExternalLink={!ipSettingsUrl}>
         <Text className="page-subtitle">
           {t("IPSecuritySettingDescription")}
         </Text>
-        <Link
-          className="link-learn-more"
-          color={currentColorScheme.main?.accent}
-          target="_blank"
-          isHovered
-          href={ipSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {ipSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            dataTestId="ip_security_component_learn_more"
+            color={currentColorScheme.main?.accent}
+            target="_blank"
+            isHovered
+            href={ipSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </LearnMoreWrapper>
 
       <RadioButtonGroup
@@ -262,23 +265,26 @@ const IpSecurity = (props) => {
         name="group"
         orientation="vertical"
         spacing="8px"
+        dataTestId="ip_security_radio_button_group"
         options={[
           {
             id: "ip-security-disabled",
             label: t("Common:Disabled"),
             value: "disabled",
+            dataTestId: "ip_security_disabled",
           },
           {
             id: "ip-security-enable",
             label: t("Common:Enable"),
             value: "enable",
+            dataTestId: "ip_security_enabled",
           },
         ]}
         selected={enable ? "enable" : "disabled"}
         onClick={onSelectType}
       />
 
-      {enable && (
+      {enable ? (
         <UserFields
           className="user-fields"
           inputs={ips}
@@ -289,10 +295,13 @@ const IpSecurity = (props) => {
           regexp={regexp}
           classNameAdditional="add-allowed-ip-address"
           isAutoFocussed={autoFocus}
+          inputDataTestId="ip_security_ip_input"
+          deleteIconDataTestId="ip_security_delete_ip_icon"
+          addButtonDataTestId="ip_security_add_ip_button"
         />
-      )}
+      ) : null}
 
-      {enable && (
+      {enable ? (
         <>
           <Text fontSize="16px" fontWeight="700" className="warning-text">
             {t("Common:Warning")}
@@ -301,14 +310,14 @@ const IpSecurity = (props) => {
             {t("IPSecurityWarningHelper")}
           </Text>
         </>
-      )}
+      ) : null}
 
       <SaveCancelButtons
         className="save-cancel-buttons"
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
-        reminderText={t("YouHaveUnsavedChanges")}
+        reminderText={t("Common:YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
         displaySettings
@@ -316,6 +325,8 @@ const IpSecurity = (props) => {
         isSaving={isSaving}
         additionalClassSaveButton="ip-security-save"
         additionalClassCancelButton="ip-security-cancel"
+        saveButtonDataTestId="ip_security_save_button"
+        cancelButtonDataTestId="ip_security_cancel_button"
       />
     </MainContainer>
   );

@@ -31,15 +31,26 @@ import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import { AvatarPure, AvatarRole, AvatarSize } from ".";
 
 const meta = {
-  title: "Components/Avatar",
+  title: "Base UI Components/Avatar",
   component: AvatarPure,
   argTypes: {
     editAction: { action: "editAction" },
+    onClick: { action: "onClick" },
+    onChangeFile: { action: "onChangeFile" },
+    role: {
+      control: "select",
+      options: Object.values(AvatarRole),
+    },
+    size: {
+      control: "select",
+      options: Object.values(AvatarSize),
+    },
   },
   parameters: {
     docs: {
       description: {
-        component: "Used to display an avatar or brand.",
+        component:
+          "Avatar component is used to display user or group avatars with various sizes, roles, and states. It can show images, initials, or icons, and supports features like role indicators, tooltips, and editing functionality.",
       },
     },
     design: {
@@ -65,21 +76,21 @@ export const Default: Story = {
   },
 };
 
-export const Picture: Story = {
+export const WithPicture: Story = {
   args: {
     size: AvatarSize.max,
     role: AvatarRole.admin,
     source:
       "https://images.unsplash.com/photo-1623949444573-4811dfc64771?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
-    userName: "",
+    userName: "John Smith",
     editing: false,
     hideRoleIcon: false,
-    tooltipContent: "",
-    withTooltip: false,
+    tooltipContent: "John Smith - Administrator",
+    withTooltip: true,
   },
 };
 
-export const Initials: Story = {
+export const WithInitials: Story = {
   args: {
     size: AvatarSize.max,
     role: AvatarRole.guest,
@@ -87,12 +98,12 @@ export const Initials: Story = {
     userName: "John Doe",
     editing: false,
     hideRoleIcon: false,
-    tooltipContent: "",
-    withTooltip: false,
+    tooltipContent: "John Doe - Guest",
+    withTooltip: true,
   },
 };
 
-export const Icon: Story = {
+export const WithIcon: Story = {
   args: {
     size: AvatarSize.max,
     role: AvatarRole.user,
@@ -102,5 +113,71 @@ export const Icon: Story = {
     hideRoleIcon: false,
     tooltipContent: "",
     withTooltip: false,
+  },
+};
+
+export const Small: Story = {
+  args: {
+    size: AvatarSize.min,
+    role: AvatarRole.user,
+    source: "",
+    userName: "Alex Brown",
+    editing: false,
+    hideRoleIcon: true,
+  },
+};
+
+export const Medium: Story = {
+  args: {
+    size: AvatarSize.base,
+    role: AvatarRole.user,
+    source: "",
+    userName: "Alex Brown",
+    editing: false,
+    hideRoleIcon: false,
+  },
+};
+
+export const EditingState: Story = {
+  args: {
+    size: AvatarSize.max,
+    role: AvatarRole.owner,
+    source: "",
+    userName: "Jane Smith",
+    editing: true,
+    hideRoleIcon: false,
+  },
+};
+
+export const GroupAvatar: Story = {
+  args: {
+    size: AvatarSize.max,
+    role: AvatarRole.user,
+    source: "",
+    userName: "Project Team",
+    isGroup: true,
+    hideRoleIcon: true,
+    tooltipContent: "Project Team Group",
+    withTooltip: true,
+  },
+};
+
+export const WithCustomRoleIcon: Story = {
+  args: {
+    size: AvatarSize.max,
+    role: AvatarRole.admin,
+    source: "",
+    userName: "Custom Role",
+    roleIcon: (
+      <div
+        style={{
+          width: 16,
+          height: 16,
+          background: "#333",
+          borderRadius: "50%",
+        }}
+      />
+    ),
+    hideRoleIcon: false,
   },
 };

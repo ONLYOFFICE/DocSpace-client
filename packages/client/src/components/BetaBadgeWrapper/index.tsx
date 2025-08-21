@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,8 +27,10 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import BetaBadge from "@docspace/shared/components/beta-badge/BetaBadge";
-import type BetaBadgeProps from "@docspace/shared/components/beta-badge/BetaBadge.props";
+import {
+  BetaBadge,
+  type BetaBadgeProps,
+} from "@docspace/shared/components/beta-badge";
 
 const BetaBadgeWrapper = (props: BetaBadgeProps) => {
   return <BetaBadge {...props} />;
@@ -36,7 +38,7 @@ const BetaBadgeWrapper = (props: BetaBadgeProps) => {
 
 export default inject<TStore>(({ settingsStore }) => {
   const {
-    forumLink,
+    forumLinkUrl,
     currentColorScheme,
     documentationEmail,
     currentDeviceType,
@@ -46,6 +48,6 @@ export default inject<TStore>(({ settingsStore }) => {
     documentationEmail,
     currentColorScheme,
     currentDeviceType,
-    forumLink,
+    forumLinkUrl,
   };
 })(observer(BetaBadgeWrapper));

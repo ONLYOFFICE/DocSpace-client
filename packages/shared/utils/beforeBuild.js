@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,6 +28,9 @@
 /* eslint-disable no-console */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable global-require */
+/* eslint-disable import/no-unresolved */
+
 const path = require("path");
 const fs = require("fs");
 const { readdir } = require("fs").promises;
@@ -36,7 +39,13 @@ let appSettings = null;
 
 try {
   // @ts-expect-error path is correct
-  appSettings = require("../../../../buildtools/config/appsettings.json");
+  const appSettingsPath = path.resolve(
+    __dirname,
+    "../../../../buildtools/config/appsettings.json",
+  );
+  appSettings = fs.existsSync(appSettingsPath)
+    ? require("../../../../buildtools/config/appsettings.json")
+    : null;
 } catch (e) {
   console.log(e);
 }
@@ -86,7 +95,12 @@ const beforeBuild = async (
       }
     }
 
-    return files;
+    return files.filter(
+      (f) =>
+        !f.path.endsWith(".DS_Store") &&
+        !f.path.includes("locales/.meta") &&
+        !f.path.includes("locales\\.meta"),
+    );
   };
 
   const localesFiles = await getLocalesFiles();
@@ -101,7 +115,7 @@ const beforeBuild = async (
   localesFiles.forEach((file) => {
     const splitPath = file.path.split(path.sep);
 
-    const length = splitPath.length;
+    const { length } = splitPath;
 
     const url = [
       splitPath[length - 3],
@@ -115,14 +129,14 @@ const beforeBuild = async (
 
     let language = lng === "en-US" || lng === "en-GB" ? "en" : lng;
 
-    if (cultures.indexOf(language) === -1) {
+    if (cultures.includes(language) === -1) {
       return;
     }
 
     const splitted = lng.split("-");
 
     if (splitted.length === 2 && splitted[0] === splitted[1].toLowerCase()) {
-      language = splitted[0];
+      [language] = splitted;
     }
 
     truthLng.set(language, language.replaceAll("-", ""));

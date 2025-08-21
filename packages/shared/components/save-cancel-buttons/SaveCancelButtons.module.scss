@@ -1,0 +1,157 @@
+// (c) Copyright Ascensio System SIA 2009-2025
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+@use "../../styles/variables/colors";
+
+@use "../../styles/mixins";
+
+.saveCancelButtons {
+  display: flex;
+  position: absolute;
+  justify-content: space-between;
+  box-sizing: border-box;
+  align-items: center;
+  bottom: 0;
+  width: 100%;
+  inset-inline-start: 0;
+
+  .reminderText {
+    color: var(--save-cancel-reminder-color);
+  }
+
+  &.displaySettings {
+    position: absolute;
+    display: block;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+
+    &.hasScroll:not(.showReminder):not(.hideBorder) {
+      border-top: 1px solid var(--save-cancel-border-color);
+    }
+
+    &.hasScroll {
+      bottom: auto;
+    }
+
+    .buttonsContainer {
+      display: flex;
+      width: 100%;
+      box-sizing: border-box;
+      gap: 8px;
+    }
+
+    .reminderText {
+      position: absolute;
+      padding: 16px 0;
+      font-size: 12px;
+      font-weight: 600;
+      width: calc(100% - 32px);
+      bottom: 56px;
+      background-color: var(--background-color);
+    }
+
+    @include mixins.not-mobile {
+      .reminderText {
+        border-top: none;
+        position: static;
+        padding: 0;
+        margin-bottom: 0;
+        margin-inline-start: 8px;
+      }
+    }
+
+    &.showReminder.hasScroll {
+      .reminderText {
+        border-top: 1px solid var(--save-cancel-border-color);
+        width: calc(100% - 16px);
+        inset-inline-start: 0;
+        padding-inline-start: 16px;
+
+        @include mixins.not-mobile {
+          border-top: none;
+          position: static;
+          padding: 0;
+          margin-bottom: 0;
+          margin-inline-start: 8px;
+        }
+      }
+    }
+  }
+
+  @include mixins.mobile {
+    &.showReminder {
+      .reminderText {
+        padding-top: 30px;
+      }
+    }
+
+    &.displaySettings {
+      position: fixed;
+      inset-inline: 0;
+      bottom: 0 !important;
+      background-color: var(--background-color);
+
+      .buttonsContainer {
+        padding: 16px;
+        bottom: 0;
+      }
+
+      .reminderText {
+        padding-inline-start: 16px;
+      }
+    }
+  }
+
+  @include mixins.not-mobile {
+    &.displaySettings {
+      position: static;
+      display: flex;
+      max-width: none;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      border-top: none;
+
+      .buttonsContainer {
+        width: auto;
+      }
+    }
+  }
+}
+
+.button {
+  height: 32px !important;
+  font-size: 13px !important;
+  line-height: 20px !important;
+  padding: 0 28px;
+
+  @include mixins.tablet {
+    height: 40px !important;
+    font-size: 14px !important;
+    line-height: 16px !important;
+    padding: 0 28px;
+  }
+}

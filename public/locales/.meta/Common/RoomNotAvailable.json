@@ -1,0 +1,244 @@
+{
+  "key_path": "RoomNotAvailable",
+  "content": "Room not available",
+  "content_en_sha1_hash": "9133dc18fe95f3b8f20a7849bdab1ce0384389ce",
+  "created_at": "2025-05-19T21:30:48.227Z",
+  "updated_at": "2025-08-11T18:11:59.176Z",
+  "comment": {
+    "text": "The \"RoomNotAvailable\" translation key is used to display a message indicating that a room is not available, typically appearing in error messages or notifications on expired shared links. This message aims to inform users of the room's unavailability. It is used within error handling contexts, such as in error messages or password entry dialogs.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:34:30.117Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/NoItem/ExpiredItem.tsx",
+      "line_number": 85,
+      "context": "<Heading\n className=\"expired-title\"\n level={HeadingLevel.h3}\n size={HeadingSize.xsmall}\n >\n {t(\"Common:RoomNotAvailable\")}\n </Heading>\n <Text className=\"expired-text\" textAlign=\"center\">\n {t(\"Common:RoomLinkExpired\")}\n </Text>\n </div>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 252,
+      "context": "const { isExpiredLinkAsync } = this.filesActionsStore;\n \n if (item.external && (item.expired || (await isExpiredLinkAsync(item))))\n return toastr.error(\n t(\"Common:RoomLinkExpired\"),\n t(\"Common:RoomNotAvailable\"),\n );\n \n if (isLockedSharedRoom(item))\n return this.dialogsStore.setPasswordEntryDialog(true, item);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 252,
+      "context": "const { isExpiredLinkAsync } = this.filesActionsStore;\n \n if (item.external && (item.expired || (await isExpiredLinkAsync(item))))\n return toastr.error(\n t(\"Common:RoomLinkExpired\"),\n t(\"Common:RoomNotAvailable\"),\n );\n \n if (isLockedSharedRoom(item))\n return this.dialogsStore.setPasswordEntryDialog(true, item);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/FilesActionsStore.js",
+      "line_number": 2619,
+      "context": "item.external &&\n (item.expired || (await this.isExpiredLinkAsync(item)))\n )\n return toastr.error(\n t(\"Common:RoomLinkExpired\"),\n t(\"Common:RoomNotAvailable\"),\n );\n \n if (isLockedSharedRoom(item))\n return this.dialogsStore.setPasswordEntryDialog(true, item);",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'متاحة' (mutaaha) should be 'متوفرة' (mutawaffira) for a more natural and accurate translation of 'available' in this context.  'متاحة' is more appropriate for things like 'available for use' but 'متوفرة' better reflects a room not being offered.",
+          "suggestion": "الغرفة غير متوفرة"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'කාමරය නොමැත' while literally meaning 'room not exists', doesn't convey the intended meaning of 'Room not available'. A more appropriate translation would emphasize the room's unavailability.",
+          "suggestion": "කාමරය అందుబాటులో లేదు (Kamara anduvaloo leedu) - Room is not available"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"Соба није доступна\" incorrectly translates 'Room'. It should be 'Собе' (Sobе). 'Соба' means 'room' in singular form, while 'Собе' is the correct plural form based on the English phrase 'Room not available'.",
+          "suggestion": "Собе није доступна"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

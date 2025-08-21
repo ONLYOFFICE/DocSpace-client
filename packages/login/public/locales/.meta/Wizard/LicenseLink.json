@@ -1,0 +1,262 @@
+{
+  "key_path": "LicenseLink",
+  "content": "License agreements",
+  "content_en_sha1_hash": "0c2142b5106f197867d2f54212f8b6cae2613465",
+  "created_at": "2025-05-19T21:30:57.219Z",
+  "updated_at": "2025-08-11T09:02:44.071Z",
+  "comment": {
+    "text": "The \"LicenseLink\" translation key represents a link to license agreements, used as a label on a button in a wizard-style login process. It appears as a clickable element on the screen and serves to direct users to access licensing information for their account.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:49.714Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/login/src/app/(root)/wizard/page.client.tsx",
+      "line_number": 540,
+      "context": "}\n fontSize=\"13px\"\n target={LinkTarget.blank}\n href={licenseUrl}\n >\n {t(\"LicenseLink\")}\n </Link>\n </StyledAcceptTerms>\n \n <Button\n size={ButtonSize.medium}",
+      "module": "/packages/login"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Lisenziya razılaşmalarınız\" is too literal and implies possession ('your license agreements'). The English 'License agreements' refers to the agreements themselves, not agreements belonging to a specific user. A more accurate translation would convey this general meaning.",
+          "suggestion": "Lisenziya sazişləri"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The German translation 'Lizenzvereinbarung ' has a trailing space.",
+          "suggestion": "Lizenzvereinbarung"
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Accordi della licenza\" is technically correct but could be improved for fluency and naturalness in Italian. \"Accordi di licenza\" is a more common and preferred phrasing.",
+          "suggestion": "Accordi di licenza"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ຂໍ້ຕົກລົງການອະນຸຍາດ' is a literal translation of 'license agreements,' it might sound overly formal or technical in Lao. A more natural phrasing could be considered.",
+          "suggestion": "Consider alternatives like 'ສັນຍາການໃຊ້ງານ' or 'ຂໍ້ກຳນົດການໃຊ້ງານ' depending on the specific context."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Licences līgumi\" is a literal translation, \"License agreements\" more naturally translates to \"Lizenču līgumi\" in Latvian. \"Licences\" implies a plural possessive which isn't the intended meaning here.",
+          "suggestion": "Lizenču līgumi"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'බලපත්‍ර ගිවිසුම්' (balapatra givisum) is a literal translation of 'License agreements,' it might sound slightly formal or less natural in common usage. A more common and slightly more colloquial translation could be considered.",
+          "suggestion": "Consider 'අជ្ញាបත්‍ර ගිවිසුම්' (ajyapatra givisum) or a phrase like 'ලියකියවිත් බලය' (liyakiwita balaya) depending on the specific context and desired level of formality."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation \"Licenčná dohoda\" translates to \"License Agreement\" (singular). The English content \"License agreements\" (plural) implies multiple license agreements. A more accurate translation would reflect the plural form.",
+          "suggestion": "Licenčné dohody"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"Уговори лиценце\" doesn't accurately translate \"License agreements\". It literally translates to 'License agreements' (plural form agreement). A more appropriate translation would be something like 'Лиценцирани споразуми' or 'Уговори о лиценцама'.",
+          "suggestion": "Лиценцирани споразуми"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Ugovori licence\" is understandable, a more accurate and natural translation of \"License agreements\" would be \"Licencni ugovori\". \"Ugovori licence\" implies agreements *of* licenses, rather than license agreements themselves.",
+          "suggestion": "Licencni ugovori"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

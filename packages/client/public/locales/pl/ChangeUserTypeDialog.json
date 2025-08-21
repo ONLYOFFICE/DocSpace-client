@@ -1,11 +1,17 @@
 {
+  "ChangeContactType": "Zmień rodzaj kontaktu",
   "ChangeGuestsTypeMessage": "Gość <strong>{{userName}}</strong> zostanie przeniesiony do sekcji {{membersSection}} i zostanie mu przypisany Rodzaj użytkownika. Użytkownicy mają własną sekcję {{documentsSection}}, mogą tworzyć i edytować pliki, ale nie mogą tworzyć pokoi.",
   "ChangeGuestsTypeMessageMulti": "Wybrani goście zostaną przeniesieni do sekcji {{membersSection}} i zostanie im przypisany Rodzaj użytkownika. Użytkownicy mają własną sekcję {{documentsSection}}, mogą tworzyć i edytować pliki, ale nie mogą tworzyć pokoi.",
+  "ChangeGuestsTypeToAdmin": "Gość <strong>{{userName}}</strong> zostanie przeniesiony do sekcji {{membersSection}} i zostanie mu przypisany rodzaj <strong>'{{ secondType }}'</strong>. Administratorzy {{productName}} mogą uzyskać dostęp do ustawień {{productName}}, zarządzać pokojami i archiwizować je, zapraszać nowych użytkowników oraz przypisywać im role poniżej swojego poziomu. Administratorzy {{productName}} mają dostęp do sekcji {{documentsSection}}.",
+  "ChangeGuestsTypeToAdminMulti": "Wybrani goście zostaną przeniesieni do sekcji {{membersSection}} i zostanie im przypisany rodzaj <strong>'{{ secondType }}'</strong>. Administratorzy {{productName}} mogą uzyskać dostęp do ustawień {{productName}}, zarządzać pokojami i archiwizować je, zapraszać nowych użytkowników oraz przypisywać im role poniżej swojego poziomu. Administratorzy {{productName}} mają dostęp do sekcji {{documentsSection}}.",
+  "ChangeGuestsTypeToManager": "Gość <strong>{{userName}}</strong> zostanie przeniesiony do sekcji {{membersSection}} i zostanie mu przypisany rodzaj <strong>'{{ secondType }}'</strong>. Administratorzy pokoi mogą tworzyć pokoje i zarządzać nimi, zapraszać nowych użytkowników oraz przypisywać im rolę administratora lub niższą. Administratorzy pokoi mają dostęp do sekcji {{documentsSection}}.",
+  "ChangeGuestsTypeToManagerMulti": "Wybrani goście zostaną przeniesieni do sekcji {{membersSection}} i zostanie im przypisany rodzaj <strong>'{{ secondType }}'</strong>. Administratorzy pokoi mogą tworzyć pokoje i zarządzać nimi, zapraszać nowych użytkowników oraz przypisywać im rolę administratora lub niższą. Administratorzy pokoi mają dostęp do sekcji {{documentsSection}}.",
   "ChangeUserTypeButton": "Zmień rodzaj",
-  "ChangeUserTypeHeader": "Zmień rodzaj użytkownika",
   "ChangeUserTypeMessage": "Użytkownicy o rodzaju<strong>'{{ firstType }}'</strong> zostaną przeniesieni do rodzaju <strong>'{{ secondType }}'</strong>.",
-  "ChangeUserTypeMessageMulti": "Wybrani użytkownicy zostaną przeniesieni do rodzaju <strong>'{{ secondType }}'</strong>.",
-  "ChangeUserTypeMessageWarning": "Nie możesz zmienić swojego rodzaju, ani rodzaju administratorów {{productName}}.",
+  "ChangeUserTypeNote": "<1>Uwaga:</1> nie można zmienić rodzaju dla administratora {{productName}} ani dla siebie.",
+  "DataReassignmentInfo": "Pokoje utworzone przez tego użytkownika zostaną automatycznie przypisane Tobie. Aby przypisać pokoje innej osobie, kliknij odpowiedni link poniżej.",
+  "DataReassignmentWithFilesDeletion": "Wszystkie udostępnione pliki utworzone przez ten kontakt zostaną <1>automatycznie przypisane Tobie za 30 dni</1>. Aby przypisać pokoje/udostępnione pliki innej osobie, kliknij odpowiedni link poniżej.",
+  "PersonalDataDeletion": "Wszystkie pliki i katalogi w sekcji {{sectionName}} tego kontaktu zostaną <1>trwale usunięte za 30 dni</1>.",
   "SuccessChangeGuestType": "Rodzaj gościa został pomyślnie zmieniony",
   "SuccessChangeUserType": "Rodzaj użytkownika został pomyślnie zmieniony"
 }

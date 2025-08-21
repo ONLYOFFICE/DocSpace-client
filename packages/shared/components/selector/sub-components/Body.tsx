@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,11 +26,11 @@
 
 import React, { useLayoutEffect, useRef, useState } from "react";
 import InfiniteLoader from "react-window-infinite-loader";
-import { FixedSizeList as List } from "react-window";
-
+import { VariableSizeList as List } from "react-window";
+import { classNames } from "../../../utils";
 import { RoomsType } from "../../../enums";
 import { Nullable } from "../../../types";
-
+import styles from "../Selector.module.scss";
 import { Scrollbar } from "../../scrollbar";
 import { Text } from "../../text";
 
@@ -40,7 +40,6 @@ import { TabsContext } from "../contexts/Tabs";
 import { SelectAllContext } from "../contexts/SelectAll";
 import { InfoBarContext } from "../contexts/InfoBar";
 
-import { StyledBody, StyledTabs } from "../Selector.styled";
 import { BodyProps } from "../Selector.types";
 
 import { InfoBar } from "./InfoBar";
@@ -51,6 +50,8 @@ import { BreadCrumbs } from "./BreadCrumbs";
 import { Item } from "./Item";
 import { Info } from "./Info";
 import { VirtualScroll } from "./VirtualScroll";
+import { Tabs } from "../../tabs";
+import InputItem from "./InputItem";
 
 const CONTAINER_PADDING = 16;
 const HEADER_HEIGHT = 54;
@@ -87,21 +88,28 @@ const Body = ({
 
   withInfo,
   infoText,
+  withInfoBadge,
   setInputItemVisible,
   inputItemVisible,
+  injectedElement,
+
+  isSSR,
 }: BodyProps) => {
   const infoBarRef = useRef<HTMLDivElement>(null);
+  const injectedElementRef = useRef<HTMLElement>(null);
   const [infoBarHeight, setInfoBarHeight] = useState(0);
+  const [injectedElementHeight, setInjectedElementHeight] = useState(0);
 
-  const { withSearch } = React.useContext(SearchContext);
-  const isSearch = React.useContext(SearchValueContext);
-  const { withInfoBar } = React.useContext(InfoBarContext);
+  const { withSearch } = React.use(SearchContext);
+  const isSearch = React.use(SearchValueContext);
+  const { withInfoBar } = React.use(InfoBarContext);
 
-  const { withBreadCrumbs } = React.useContext(BreadCrumbsContext);
+  const { withBreadCrumbs, isBreadCrumbsLoading } =
+    React.useContext(BreadCrumbsContext);
 
-  const { withTabs, tabsData, activeTabId } = React.useContext(TabsContext);
+  const { withTabs, tabsData, activeTabId } = React.use(TabsContext);
 
-  const { withSelectAll } = React.useContext(SelectAllContext);
+  const { withSelectAll } = React.use(SelectAllContext);
 
   const [bodyHeight, setBodyHeight] = React.useState(0);
   const [savedInputValue, setSavedInputValue] =
@@ -123,6 +131,15 @@ const Body = ({
       : isEmptyInput
         ? 1
         : items.length;
+
+  const isShareFormEmpty =
+    itemsCount === 0 &&
+    !isSearch &&
+    Boolean(items?.[0]?.isRoomsOnly) &&
+    (Boolean(items?.[0]?.createDefineRoomType === RoomsType.FormRoom) ||
+      Boolean(items?.[0]?.createDefineRoomType === RoomsType.VirtualDataRoom));
+
+  const visibleInfoBar = !isShareFormEmpty && !isBreadCrumbsLoading;
 
   const resetCache = React.useCallback(() => {
     if (listOptionsRef && listOptionsRef.current) {
@@ -200,14 +217,30 @@ const Body = ({
         setInfoBarHeight(height + CONTAINER_PADDING);
       }
     }
-  }, [withInfoBar, itemsCount]);
+  }, [withInfoBar, itemsCount, visibleInfoBar]);
+  useLayoutEffect(() => {
+    if (injectedElement) {
+      const element = injectedElementRef.current;
 
-  let listHeight = bodyHeight - CONTAINER_PADDING - infoBarHeight;
+      if (element) {
+        const { height } = element.getBoundingClientRect();
+        setInjectedElementHeight(height);
+      }
+    }
+  }, [injectedElement, itemsCount]);
+
+  let listHeight = bodyHeight - infoBarHeight - injectedElementHeight;
 
   const showSearch = withSearch && (isSearch || itemsCount > 0);
   const showSelectAll = (isMultiSelect && withSelectAll && !isSearch) || false;
 
-  if (showSearch) listHeight -= SEARCH_HEIGHT;
+  if (withPadding) {
+    listHeight -= CONTAINER_PADDING;
+  }
+
+  if (showSearch) {
+    listHeight -= SEARCH_HEIGHT;
+  }
   if (withTabs) listHeight -= TABS_HEIGHT;
   if (withInfo) {
     const infoEl = document.getElementById("selector-info-text");
@@ -223,46 +256,74 @@ const Body = ({
 
   if (descriptionText) listHeight -= BODY_DESCRIPTION_TEXT_HEIGHT;
 
-  const isShareFormEmpty =
-    itemsCount === 0 &&
-    Boolean(items?.[0]?.isRoomsOnly) &&
-    Boolean(items?.[0]?.createDefineRoomType === RoomsType.FormRoom);
+  const getFooterHeight = () => {
+    if (withFooterCheckbox) return FOOTER_WITH_CHECKBOX_HEIGHT;
+    if (withFooterInput) return FOOTER_WITH_NEW_NAME_HEIGHT;
+    return FOOTER_HEIGHT;
+  };
+
+  const getHeaderHeight = () => {
+    if (withTabs) return HEADER_HEIGHT;
+    return HEADER_HEIGHT + CONTAINER_PADDING;
+  };
+
+  const cloneProps = { ref: injectedElementRef };
+
+  const getItemSize = (index: number): number => {
+    if (items[index]?.isSeparator) {
+      return 16;
+    }
+
+    return 48;
+  };
 
   return (
-    <StyledBody
+    <div
       ref={bodyRef}
-      footerHeight={
-        withFooterCheckbox
-          ? FOOTER_WITH_CHECKBOX_HEIGHT
-          : withFooterInput
-            ? FOOTER_WITH_NEW_NAME_HEIGHT
-            : FOOTER_HEIGHT
+      className={classNames(
+        styles.body,
+        {
+          [styles.withHeaderAndFooter]: footerVisible && withHeader,
+          [styles.withFooterOnly]: footerVisible && !withHeader,
+          [styles.withHeaderOnly]: !footerVisible && withHeader,
+          [styles.noHeaderFooter]: !footerVisible && !withHeader,
+          [styles.withPadding]: !withTabs && withPadding,
+        },
+        "selector_body",
+      )}
+      style={
+        {
+          "--footer-height": `${getFooterHeight()}px`,
+          "--header-height": `${getHeaderHeight()}px`,
+        } as React.CSSProperties
       }
-      className="selector_body"
-      headerHeight={
-        withTabs ? HEADER_HEIGHT : HEADER_HEIGHT + CONTAINER_PADDING
-      }
-      footerVisible={footerVisible}
-      withHeader={withHeader}
-      withTabs={withTabs}
-      withPadding={withPadding}
     >
-      <InfoBar ref={infoBarRef} visible={itemsCount !== 0} />
+      <InfoBar
+        ref={infoBarRef}
+        visible={visibleInfoBar}
+        className={styles.selectorInfoBar}
+      />
       <BreadCrumbs visible={!isShareFormEmpty} />
 
-      {withTabs && tabsData && (
-        <StyledTabs
+      {injectedElement ? React.cloneElement(injectedElement, cloneProps) : null}
+
+      {withTabs && tabsData ? (
+        <Tabs
           items={tabsData}
           selectedItemId={activeTabId}
-          className="selector_body_tabs"
+          className={classNames(styles.tabs, "selector_body_tabs")}
         />
-      )}
+      ) : null}
 
       <Search isSearch={itemsCount > 0 || isSearch} />
 
-      {withInfo && !isLoading && (
-        <Info withInfo={withInfo} infoText={infoText} />
-      )}
+      {withInfo && !isLoading ? (
+        <Info
+          withInfo={withInfo}
+          infoText={infoText}
+          withInfoBadge={withInfoBadge}
+        />
+      ) : null}
 
       {isLoading ? (
         <Scrollbar style={{ height: listHeight }}>{rowLoader}</Scrollbar>
@@ -274,9 +335,11 @@ const Body = ({
         />
       ) : (
         <>
-          {!!descriptionText && (
-            <Text className="body-description-text">{descriptionText}</Text>
-          )}
+          {descriptionText ? (
+            <Text className={styles.bodyDescriptionText}>
+              {descriptionText}
+            </Text>
+          ) : null}
 
           <SelectAll
             show={showSelectAll}
@@ -284,7 +347,61 @@ const Body = ({
             rowLoader={rowLoader}
           />
 
-          {bodyHeight && (
+          {isSSR && !bodyHeight ? (
+            <Scrollbar
+              style={
+                {
+                  height: `calc(100% - ${Math.abs(listHeight + CONTAINER_PADDING)}px)`,
+                  overflow: "hidden",
+                  "--scrollbar-padding-inline-end": 0,
+                  "--scrollbar-padding-inline-end-mobile": 0,
+                } as React.CSSProperties
+              }
+            >
+              {items.map((item, index) => (
+                <div
+                  key={item.id}
+                  style={{
+                    height: 48,
+                    display: "flex",
+                    alignItems: "stretch",
+                  }}
+                >
+                  <Item
+                    index={index}
+                    style={{ flexGrow: 1 }}
+                    data={{
+                      items,
+                      onSelect,
+                      isMultiSelect: isMultiSelect || false,
+                      rowLoader,
+                      isItemLoaded,
+                      renderCustomItem,
+                      setInputItemVisible,
+                      inputItemVisible,
+                      savedInputValue,
+                      setSavedInputValue,
+                      listHeight,
+                    }}
+                  />
+                </div>
+              ))}
+            </Scrollbar>
+          ) : items.length === 2 && items[1]?.isInputItem ? (
+            <InputItem
+              defaultInputValue={savedInputValue ?? items[1].defaultInputValue}
+              onAcceptInput={items[1].onAcceptInput}
+              onCancelInput={items[1].onCancelInput}
+              style={{}}
+              color={items[1].color}
+              roomType={items[1].roomType}
+              cover={items[1].cover}
+              icon={items[1].icon}
+              setInputItemVisible={setInputItemVisible}
+              setSavedInputValue={setSavedInputValue}
+              placeholder={items[1].placeholder}
+            />
+          ) : (
             <InfiniteLoader
               ref={listOptionsRef}
               isItemLoaded={isItemLoaded}
@@ -310,7 +427,7 @@ const Body = ({
                     setSavedInputValue,
                     listHeight,
                   }}
-                  itemSize={48}
+                  itemSize={getItemSize}
                   onItemsRendered={onItemsRendered}
                   ref={ref}
                   outerElementType={VirtualScroll}
@@ -322,7 +439,7 @@ const Body = ({
           )}
         </>
       )}
-    </StyledBody>
+    </div>
   );
 };
 

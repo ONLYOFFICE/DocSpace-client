@@ -1,0 +1,23 @@
+{
+  "ErrorConfirmURLError": "Email i pavlefshëm ose lidhje e skaduar",
+  "ErrorExpiredActivationLink": "Lidhja ka skaduar",
+  "ErrorInvalidActivationLink": "Lidhje e pavlefshme aktivizimi",
+  "ErrorNotAllowedOption": "Plani juaj i çmimeve nuk e mbështet këtë opsion",
+  "ErrorUserNotFound": "Përdoruesi nuk mund të gjendej",
+  "InvalidUsernameOrPassword": "Emër përdoruesi ose fjalëkalimi i pavlefshëm",
+  "LoginWithAccountNotFound": "Nuk mund të gjendet llogaria e palës së tretë e lidhur. Së pari duhet të lidhni llogarinë tuaj të rrjeteve sociale në faqen e redaktimit të profilit.",
+  "LoginWithBruteForce": "Autorizimi u bllokua përkohësisht",
+  "LoginWithBruteForceCaptcha": "Konfirmoni që nuk jeni robot",
+  "OAuthApplicationDisabled": "Ky aplikacion është i çaktivizuar",
+  "OAuthApplicationEmpty": "Aplikacioni nuk mund të gjendej",
+  "OAuthClientEmpty": "ID-ja e klientit nuk u gjet",
+  "RecaptchaInvalid": "Recaptcha e pavlefshme",
+  "SsoAttributesNotFound": "Autentifikimi dështoi (atributet e pohimit nuk u gjetën)",
+  "SsoAuthFailed": "Autentifikimi dështoi",
+  "SsoError": "Gabim i brendshëm i serverit",
+  "SsoSettingsCantCreateUser": "Përdoruesi nuk mund të krijohej me këtë shenjë vërtetimi",
+  "SsoSettingsDisabled": "Identifikimi i vetëm është i çaktivizuar",
+  "SsoSettingsEmptyToken": "Shenja e vërtetimit nuk mund të gjendej",
+  "SsoSettingsNotValidToken": "Shenja e vërtetimit e pavlefshme",
+  "SsoSettingsUserTerminated": "Ky përdorues është i çaktivizuar"
+}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,28 +29,35 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-interface PortalProps {
-  visible?: boolean;
+/**
+ * Props for the Portal component
+ */
+type PortalProps = {
+  /** The React node to be rendered inside the portal */
   element: React.ReactNode;
+
+  /** Whether the portal content should be visible. Defaults to true */
+  visible?: boolean;
+
+  /** The DOM element to append the portal to. Defaults to document.body */
   appendTo?: HTMLElement | null;
-}
+};
 
-const Portal = ({ visible = false, element, appendTo = null }: PortalProps) => {
-  const [mounted, setMounted] = React.useState(visible);
+const Portal = ({ visible = true, element, appendTo = null }: PortalProps) => {
+  const [mounted, setMounted] = React.useState(false);
 
-  const domExist = React.useCallback(() => {
-    return !!(
+  React.useEffect(() => {
+    const domExists = !!(
       typeof window !== "undefined" &&
+      typeof document !== "undefined" &&
       window.document &&
       window.document.createElement
     );
-  }, []);
 
-  React.useEffect(() => {
-    if (domExist() && !mounted) {
+    if (domExists && !mounted && visible) {
       setMounted(true);
     }
-  }, [domExist, mounted]);
+  }, [mounted, visible]);
 
   return element && mounted
     ? ReactDOM.createPortal(element, appendTo || document.body)

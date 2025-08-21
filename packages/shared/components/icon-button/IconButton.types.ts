@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,15 +26,15 @@
 
 import { IconSizeType } from "../../utils";
 
-export interface IconButtonProps {
+export type IconButtonProps = {
   /** Sets component class */
   className?: string;
   /** Icon color */
-  color?: string;
+  color?: "accent" | (string & {});
   /** Icon color on hover action */
-  hoverColor?: string;
+  hoverColor?: "accent" | (string & {});
   /** Icon color on click action */
-  clickColor?: string;
+  clickColor?: "accent" | (string & {});
   /** Button height and width value */
   size?: number | IconSizeType;
   /** Determines if icon fill is needed */
@@ -71,4 +71,9 @@ export interface IconButtonProps {
   dataTip?: string;
   /** Data when user hover on icon */
   title?: string;
-}
+  /** Id for testing */
+  dataTestId?: string;
+
+  tooltipId?: string;
+  tooltipContent?: string;
+};

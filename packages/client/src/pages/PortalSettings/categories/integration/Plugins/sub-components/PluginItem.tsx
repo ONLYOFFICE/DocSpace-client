@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -23,6 +23,8 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import { useTranslation } from "react-i18next";
 
 import { Heading } from "@docspace/shared/components/heading";
 import { IconButton } from "@docspace/shared/components/icon-button";
@@ -53,13 +55,16 @@ const PluginItem = ({
 
   image,
   url,
+  dataTestId,
 }: PluginItemProps) => {
+  const { t } = useTranslation(["Common"]);
+
   const imgSrc = image ? getPluginUrl(url, `/assets/${image}`) : null;
 
   const withSettings = scopes.includes(PluginScopes.Settings);
 
   const onChangeStatus = () => {
-    updatePlugin?.(name, !enabled);
+    updatePlugin?.(name, !enabled, undefined, t);
   };
 
   const onOpenSettingsDialog = () => {
@@ -67,27 +72,30 @@ const PluginItem = ({
   };
 
   return (
-    <StyledPluginItem description={description}>
+    <StyledPluginItem description={description} data-testid={dataTestId}>
       <img
         className="plugin-logo"
         src={imgSrc || PluginDefaultLogoUrl}
         alt="Plugin logo"
+        data-testid="plugin_logo"
       />
       <div className="plugin-info">
         <StyledPluginHeader>
           <Heading className="plugin-name">{name}</Heading>
           <div className="plugin-controls">
-            {withSettings && (
+            {withSettings ? (
               <IconButton
                 iconName={PluginSettingsIconUrl}
                 size={16}
                 onClick={onOpenSettingsDialog}
+                data-testid="open_settings_icon_button"
               />
-            )}
+            ) : null}
             <ToggleButton
               className="plugin-toggle-button"
               onChange={onChangeStatus}
               isChecked={enabled}
+              dataTestId="enable_plugin_toggle_button"
             />
           </div>
         </StyledPluginHeader>
@@ -100,7 +108,7 @@ const PluginItem = ({
           backgroundColor={globalColors.mainGreen}
         />
 
-        {imgSrc && description && (
+        {imgSrc && description ? (
           <Text
             className="plugin-description"
             fontWeight={400}
@@ -109,7 +117,7 @@ const PluginItem = ({
           >
             {description}
           </Text>
-        )}
+        ) : null}
       </div>
     </StyledPluginItem>
   );

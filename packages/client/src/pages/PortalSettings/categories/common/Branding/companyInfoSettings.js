@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,16 +33,19 @@ import {
   restoreCompanyInfoSettings,
 } from "@docspace/shared/api/settings";
 import { toastr } from "@docspace/shared/components/toast";
+import { useResponsiveNavigation } from "@docspace/shared/hooks/useResponsiveNavigation";
 import { CompanyInfo } from "@docspace/shared/pages/Branding/CompanyInfo";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import LoaderCompanyInfoSettings from "../sub-components/loaderCompanyInfoSettings";
-import AboutDialog from "../../../../About/AboutDialog";
+import { brandingRedirectUrl } from "./constants";
 
 const CompanyInfoSettingsComponent = (props) => {
   const {
     t,
     isSettingPaid,
+    isBrandingAvailable,
+    displayAbout,
     companyInfoSettingsIsDefault,
     companyInfoSettingsData,
     tReady,
@@ -51,10 +54,18 @@ const CompanyInfoSettingsComponent = (props) => {
     buildVersionInfo,
     deviceType,
     getCompanyInfoSettings,
+    standalone,
+    licenseAgreementsUrl,
+    isEnterprise,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+
+  useResponsiveNavigation({
+    redirectUrl: brandingRedirectUrl,
+    currentLocation: "company-info",
+    deviceType,
+  });
 
   useEffect(() => {
     if (!(companyInfoSettingsData && tReady)) return;
@@ -63,13 +74,20 @@ const CompanyInfoSettingsComponent = (props) => {
   }, [companyInfoSettingsData, tReady]);
 
   const onSave = useCallback(
-    async (address, companyName, email, phone, site) => {
+    async (address, companyName, email, phone, site, hideAbout) => {
       setIsLoading(true);
 
       try {
-        await setCompanyInfoSettings(address, companyName, email, phone, site);
+        await setCompanyInfoSettings(
+          address,
+          companyName,
+          email,
+          phone,
+          site,
+          hideAbout,
+        );
         await getCompanyInfoSettings();
-        toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+        toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
       } catch (error) {
         toastr.error(error);
       } finally {
@@ -85,7 +103,7 @@ const CompanyInfoSettingsComponent = (props) => {
     try {
       await restoreCompanyInfoSettings();
       await getCompanyInfoSettings();
-      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error);
     } finally {
@@ -93,43 +111,34 @@ const CompanyInfoSettingsComponent = (props) => {
     }
   }, [setIsLoading]);
 
-  const onShowExample = () => {
-    if (!isSettingPaid) return;
-
-    setShowModal(true);
-  };
-
-  const onCloseModal = () => {
-    setShowModal(false);
-  };
-
   if (!isLoadedCompanyInfoSettingsData) return <LoaderCompanyInfoSettings />;
 
   return (
-    <>
-      <AboutDialog
-        visible={showModal}
-        onClose={onCloseModal}
-        buildVersionInfo={buildVersionInfo}
-        previewData={companyInfoSettingsData}
-      />
-      <CompanyInfo
-        t={t}
-        isSettingPaid={isSettingPaid}
-        onShowExample={onShowExample}
-        companySettings={companyInfoSettingsData}
-        onSave={onSave}
-        onRestore={onRestore}
-        isLoading={isLoading}
-        companyInfoSettingsIsDefault={companyInfoSettingsIsDefault}
-        deviceType={deviceType}
-      />
-    </>
+    <CompanyInfo
+      t={t}
+      isSettingPaid={isSettingPaid}
+      companySettings={companyInfoSettingsData}
+      onSave={onSave}
+      onRestore={onRestore}
+      isLoading={isLoading}
+      companyInfoSettingsIsDefault={companyInfoSettingsIsDefault}
+      buildVersionInfo={buildVersionInfo}
+      standalone={standalone}
+      licenseAgreementsUrl={licenseAgreementsUrl}
+      isBrandingAvailable={isBrandingAvailable}
+      displayAbout={displayAbout}
+      isEnterprise={isEnterprise}
+    />
   );
 };
 
 export const CompanyInfoSettings = inject(
-  ({ settingsStore, brandingStore, currentQuotaStore }) => {
+  ({
+    settingsStore,
+    brandingStore,
+    currentQuotaStore,
+    currentTariffStatusStore,
+  }) => {
     const {
       setIsLoadedCompanyInfoSettingsData,
       isLoadedCompanyInfoSettingsData,
@@ -142,9 +151,15 @@ export const CompanyInfoSettings = inject(
       checkEnablePortalSettings,
       deviceType,
       getCompanyInfoSettings,
+      displayAbout,
+      standalone,
+      licenseAgreementsUrl,
     } = settingsStore;
 
-    const { isCustomizationAvailable } = currentQuotaStore;
+    const { isCustomizationAvailable, isBrandingAvailable } = currentQuotaStore;
+
+    const { isEnterprise } = currentTariffStatusStore;
+
     const isSettingPaid = checkEnablePortalSettings(isCustomizationAvailable);
 
     return {
@@ -154,8 +169,13 @@ export const CompanyInfoSettings = inject(
       isLoadedCompanyInfoSettingsData,
       buildVersionInfo,
       isSettingPaid,
+      isBrandingAvailable,
       deviceType,
+      displayAbout,
       getCompanyInfoSettings,
+      standalone,
+      licenseAgreementsUrl,
+      isEnterprise,
     };
   },
 )(

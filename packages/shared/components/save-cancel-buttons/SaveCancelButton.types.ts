@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,41 +24,71 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface SaveCancelButtonProps {
-  /** Accepts css id */
+import { ReactNode } from "react";
+
+export type SaveCancelButtonProps = {
+  /** HTML id attribute */
   id?: string;
-  /** Accepts css class */
+
+  /** Additional CSS class names */
   className?: string;
-  /** Message text that notifies of the unsaved changes */
+
+  /** Text displayed to notify users of unsaved changes */
   reminderText?: string;
-  /** Save button label */
+
+  /** Label for the save button */
   saveButtonLabel?: string;
-  /** Cancel button label  */
+
+  /** Label for the cancel button */
   cancelButtonLabel?: string;
-  /** Sets a callback function that is triggered when the save button is clicked */
+
+  /** Callback function triggered when the save button is clicked */
   onSaveClick?: () => void;
-  /** Sets a callback function that is triggered when the cancel button is clicked */
+
+  /** Callback function triggered when the cancel button is clicked */
   onCancelClick?: () => void;
-  /** Reminder message that notifies of the unsaved changes (Only shown on desktops) */
+
+  /** Controls visibility of the reminder message (desktop only) */
   showReminder?: boolean;
-  /** Sets save and cancel buttons block to 'position: static' instead of absolute */
+
+  /** When true, buttons use static positioning instead of absolute */
   displaySettings?: boolean;
-  /** Displays the scrollbar */
+
+  /** Controls scrollbar visibility */
   hasScroll?: boolean;
-  /** Sets the min width of the button */
+
+  /** Minimum width for the buttons */
   minwidth?: string;
-  /** Sets the Cancel button disabled by default */
+
+  /** Disables the restore to default functionality */
   disableRestoreToDefault?: boolean;
-  /** Sets the button to present a disabled state while executing an operation after clicking the save button */
+
+  /** Shows loading state on save button during async operations */
   isSaving?: boolean;
-  /** Activates the disabled button */
+
+  /** Explicitly enables the cancel button regardless of other states */
   cancelEnable?: boolean;
-  /** Accepts css tab-index */
+
+  /** Tab index for keyboard navigation */
   tabIndex?: number;
-  /** Hide top border */
+
+  /** When true, hides the top border */
   hideBorder?: boolean;
+
+  /** Additional CSS class for the save button */
   additionalClassSaveButton?: string;
+
+  /** Additional CSS class for the cancel button */
   additionalClassCancelButton?: string;
+
+  /** Disables the save button */
   saveButtonDisabled?: boolean;
-  getTopComponent?: () => React.ReactNode;
-}
+
+  /** Function that returns a component to be rendered above the buttons */
+  getTopComponent?: () => ReactNode;
+
+  /** Save button data-testid */
+  saveButtonDataTestId?: string;
+  /** Canbel button data-testid */
+  cancelButtonDataTestId?: string;
+};

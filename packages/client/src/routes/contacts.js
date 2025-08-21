@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,9 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Navigate } from "react-router-dom";
-
-import componentLoader from "@docspace/shared/utils/component-loader";
+import { Navigate } from "react-router";
 
 import {
   GUESTS_ROUTE,
@@ -39,6 +37,9 @@ import {
   PEOPLE_ROUTE_WITH_FILTER,
   CONTACTS_ROUTE,
 } from "SRC_DIR/helpers/contacts";
+
+import { ViewComponent } from "SRC_DIR/pages/Home/View";
+
 import PrivateRoute from "../components/PrivateRouteWrapper";
 
 export const contanctsRoutes = [
@@ -80,21 +81,11 @@ export const contanctsRoutes = [
   },
   {
     path: PEOPLE_ROUTE_WITH_FILTER,
-    async lazy() {
-      const { ContactsView } = await componentLoader(
-        () => import("SRC_DIR/pages/Home/View/Contacts"),
-      );
-
-      const Component = () => {
-        return (
-          <PrivateRoute restricted withManager>
-            <ContactsView />
-          </PrivateRoute>
-        );
-      };
-
-      return { Component };
-    },
+    element: (
+      <PrivateRoute restricted withManager>
+        <ViewComponent />
+      </PrivateRoute>
+    ),
   },
   {
     path: GROUPS_ROUTE,
@@ -106,21 +97,11 @@ export const contanctsRoutes = [
   },
   {
     path: GROUPS_ROUTE_WITH_FILTER,
-    async lazy() {
-      const { ContactsView } = await componentLoader(
-        () => import("SRC_DIR/pages/Home/View/Contacts"),
-      );
-
-      const Component = () => {
-        return (
-          <PrivateRoute restricted withManager>
-            <ContactsView />
-          </PrivateRoute>
-        );
-      };
-
-      return { Component };
-    },
+    element: (
+      <PrivateRoute restricted withManager>
+        <ViewComponent />
+      </PrivateRoute>
+    ),
   },
   {
     path: INSIDE_GROUP_ROUTE,
@@ -132,21 +113,11 @@ export const contanctsRoutes = [
   },
   {
     path: INSIDE_GROUP_ROUTE_WITH_FILTER,
-    async lazy() {
-      const { ContactsView } = await componentLoader(
-        () => import("SRC_DIR/pages/Home/View/Contacts"),
-      );
-
-      const Component = () => {
-        return (
-          <PrivateRoute restricted withManager>
-            <ContactsView />
-          </PrivateRoute>
-        );
-      };
-
-      return { Component };
-    },
+    element: (
+      <PrivateRoute restricted withManager>
+        <ViewComponent />
+      </PrivateRoute>
+    ),
   },
   {
     path: GUESTS_ROUTE,
@@ -158,20 +129,10 @@ export const contanctsRoutes = [
   },
   {
     path: GUESTS_ROUTE_WITH_FILTER,
-    async lazy() {
-      const { ContactsView } = await componentLoader(
-        () => import("SRC_DIR/pages/Home/View/Contacts"),
-      );
-
-      const Component = () => {
-        return (
-          <PrivateRoute restricted withManager>
-            <ContactsView />
-          </PrivateRoute>
-        );
-      };
-
-      return { Component };
-    },
+    element: (
+      <PrivateRoute restricted withManager>
+        <ViewComponent />
+      </PrivateRoute>
+    ),
   },
 ];

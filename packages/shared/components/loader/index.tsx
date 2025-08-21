@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -36,6 +36,7 @@ import { LoaderProps } from "./Loader.types";
 import { LoaderTypes } from "./Loader.enums";
 
 export { LoaderTypes };
+
 const Loader = ({ ...props }: LoaderProps) => {
   const { type, color, size, label, className, style, id } = props;
 

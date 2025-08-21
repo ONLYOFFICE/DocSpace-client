@@ -1,11 +1,17 @@
 {
+  "ChangeContactType": "Contacttype wijzigen",
   "ChangeGuestsTypeMessage": "Gast <strong>{{userName}}</strong> wordt verplaatst naar de {{membersSection}} sectie en krijgt het type Gebruiker toegewezen. Gebruikers hebben hun eigen {{documentsSection}} sectie, kunnen bestanden maken en bewerken, maar kunnen geen kamers maken.",
-  "ChangeGuestsTypeMessageMulti": "De geselecteerde gasten worden verplaatst naar de {{membersSection}} sectie en krijgen het type Gebruiker toegewezen. Gebruikers hebben hun eigen {{membersSection}} sectie, kunnen bestanden maken en bewerken, maar kunnen geen kamers maken.",
+  "ChangeGuestsTypeMessageMulti": "De geselecteerde gasten worden verplaatst naar de {{membersSection}} sectie en krijgen het type Gebruiker toegewezen. Gebruikers hebben hun eigen {{documentsSection}} sectie, kunnen bestanden maken en bewerken, maar kunnen geen kamers maken.",
+  "ChangeGuestsTypeToAdmin": "Gasten <strong>{{userName}}</strong> worden verplaatst naar de {{membersSection}} sectie en krijgen het <strong>'{{ secondType }}'</strong> type toegewezen. {{productName}} beheerders hebben toegang tot {{productName}} instellingen, beheren en archiveren kamers, nodigen nieuwe gebruikers uit en wijzen rollen onder hun niveau toe. {{productName}} beheerders hebben toegang tot de {{documentsSection}} sectie.",
+  "ChangeGuestsTypeToAdminMulti": "De geselecteerde gasten worden verplaatst naar de {{membersSection}} sectie en krijgen het <strong>'{{ secondType }}'</strong> type toegewezen. {{productName}} beheerders hebben toegang tot {{productName}} instellingen, beheren en archiveren kamers, nodigen nieuwe gebruikers uit en wijzen rollen onder hun niveau toe. {{productName}} beheerders hebben toegang tot de {{documentsSection}} sectie.",
+  "ChangeGuestsTypeToManager": "Gast <strong>{{userName}}</strong> wordt verplaatst naar de {{membersSection}} sectie en krijgt het <strong>'{{ secondType }}'</strong> type. Kamerbeheerders kunnen de toegewezen kamers aanmaken en beheren, nieuwe gebruikers uitnodigen en rollen van Kamerbeheerder en onder hun niveau toewijzen. Kamerbeheerders hebben toegang tot de {{documentsSection}} sectie.",
+  "ChangeGuestsTypeToManagerMulti": "De geselecteerde gasten worden verplaatst naar de {{membersSection}} sectie en krijgen het <strong>'{{ secondType }}'</strong> type.c Kamerbeheerders kunnen de toegewezen kamers aanmaken en beheren, nieuwe gebruikers uitnodigen en rollen van Kamerbeheerder en onder hun niveau toewijzen. Kamerbeheerders hebben toegang tot de {{documentsSection}} sectie.",
   "ChangeUserTypeButton": "Wijzig type",
-  "ChangeUserTypeHeader": "Wijzig gebruiker type",
   "ChangeUserTypeMessage": "Gebruikers met de <strong>'{{ firstType }}'</strong> type worden verplaatst naar <strong>'{{ secondType }}'</strong> type.",
-  "ChangeUserTypeMessageMulti": "De geselecteerde gebruikers worden verplaatst naar het type <strong>'{{ secondType }}'</strong>.",
-  "ChangeUserTypeMessageWarning": "U kunt het type niet veranderen voor de {{productName}}-beheerders en voor uzelf.",
+  "ChangeUserTypeNote": "<1>Let op:</1> u kunt het type niet wijzigen voor de {{productName}} beheerder en voor uzelf.",
+  "DataReassignmentInfo": "Kamers die door deze gebruiker zijn aangemaakt, worden automatisch aan u toegewezen. Om de kamers aan een andere persoon toe te wijzen, klikt u op de bijbehorende link hieronder.",
+  "DataReassignmentWithFilesDeletion": "Alle gedeelde bestanden die door deze contactpersoon zijn aangemaakt, worden <1>automatisch binnen 30 dagen aan u toegewezen</1>. Om de kamers/gedeelde bestanden opnieuw toe te wijzen aan een andere persoon, klikt u op de bijbehorende link hieronder.",
+  "PersonalDataDeletion": "Alle bestanden en mappen in de {{sectionName}} sectie van dit contact worden <1>definitief verwijderd binnen 30 dagen</1>.",
   "SuccessChangeGuestType": "Het gasttype is succesvol gewijzigd",
   "SuccessChangeUserType": "Het gebruikerstype werd met succes gewijzigd"
 }

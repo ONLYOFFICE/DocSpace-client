@@ -2,8 +2,5 @@
   "FillOutButtonLabel": "Compila",
   "FillOutDescription": "Compila i campi del modulo originale nella finestra dell'editor.",
   "FillOutTitle": "Compila il modulo tu stesso",
-  "FillPDFDialogTitle": "Compila come",
-  "ShareCollectButtonLabel": "Copia nella stanza",
-  "ShareCollectDescription": "Condividi il tuo modulo e raccogli le risposte tramite una Stanza di compilazione dei moduli.",
-  "ShareCollectTitle": "Condividi"
+  "FillPDFDialogTitle": "Compila come"
 }

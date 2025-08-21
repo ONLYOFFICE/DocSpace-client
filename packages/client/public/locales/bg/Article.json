@@ -1,6 +1,4 @@
 {
-  "FilesNotLoaded": "Файловете не са заредени: {{count}}",
-  "FilesUploaded": "Файлове, качени",
   "Upload": "Качи",
   "UploadFiles": "Качи файлове",
   "UploadFolder": "Качи папка"

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,27 +30,44 @@ import { inject, observer } from "mobx-react";
 import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
 import { PluginComponents } from "SRC_DIR/helpers/plugins/enums";
 
-const Plugin = ({ boxProps, pluginName }) => {
+const Plugin = ({ boxProps, pluginName, plugin, selection }) => {
+  React.useEffect(() => {
+    if (!selection) return;
+
+    plugin.subMenu.onClick(selection.id ? +selection.id : 0);
+  }, [selection.id]);
+
   return (
-    <WrappedComponent
-      pluginName={pluginName}
-      component={{ component: PluginComponents.box, props: boxProps }}
-    />
+    <div
+      data-testid={`info_panel_plugin_${pluginName?.toLowerCase().replace(/\s+/g, "_")}`}
+    >
+      <WrappedComponent
+        pluginName={pluginName}
+        component={{ component: PluginComponents.box, props: boxProps }}
+      />
+    </div>
   );
 };
 
-export default inject(({ pluginStore }, { isRooms, fileView, roomsView }) => {
-  const { infoPanelItemsList } = pluginStore;
+export default inject(
+  ({ pluginStore, infoPanelStore }, { isRooms, fileView, roomsView }) => {
+    const { infoPanelItemsList } = pluginStore;
 
-  const currentView = isRooms ? roomsView : fileView;
+    const currentView = isRooms ? roomsView : fileView;
 
-  const itemKey = currentView.replace("info_plugin-", "");
+    const itemKey = currentView.replace("info_plugin-", "");
 
-  const { value } = infoPanelItemsList.find((i) => i.key === itemKey);
+    const { value } = infoPanelItemsList.find((i) => i.key === itemKey);
 
-  return {
-    boxProps: value.body,
+    const { infoPanelSelection } = infoPanelStore;
 
-    pluginName: value.name,
-  };
-})(observer(Plugin));
+    return {
+      boxProps: value.body,
+
+      pluginName: value.name,
+
+      plugin: value,
+      selection: infoPanelSelection,
+    };
+  },
+)(observer(Plugin));

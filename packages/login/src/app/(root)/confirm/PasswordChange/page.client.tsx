@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,7 +29,6 @@
 import { ChangeEvent, KeyboardEvent, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { login } from "@docspace/shared/api/user";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { PasswordInput } from "@docspace/shared/components/password-input";
@@ -65,7 +64,7 @@ const PasswordChangeForm = ({
   const [isPasswordErrorShow, setIsPasswordErrorShow] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { email = "", uid, confirmHeader } = linkData;
+  const { uid, confirmHeader } = linkData;
 
   const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
@@ -96,22 +95,8 @@ const PasswordChangeForm = ({
 
       await changePassword(uid, hash, confirmHeader);
       setIsLoading(false);
-      toastr.success(t("ChangePasswordSuccess"));
 
-      if (!email || !hash) return;
-
-      const res = await login(email, hash);
-
-      const isConfirm = typeof res === "string" && res.includes("confirm");
-      const redirectPath = sessionStorage.getItem("referenceUrl");
-      if (redirectPath && !isConfirm) {
-        sessionStorage.removeItem("referenceUrl");
-        window.location.href = redirectPath;
-        return;
-      }
-
-      if (typeof res === "string") window.location.replace(res);
-      else window.location.replace("/");
+      window.location.replace("/login?passwordChanged=true");
     } catch (error) {
       const knownError = error as TError;
       let errorMessage: string;
@@ -149,10 +134,11 @@ const PasswordChangeForm = ({
           {t("PassworResetTitle")}
         </Text>
         <FieldContainer
-          isVertical={true}
+          isVertical
           labelVisible={false}
-          hasError={isPasswordErrorShow && !passwordValid}
+          hasError={isPasswordErrorShow ? !passwordValid : undefined}
           errorMessage={t("Common:IncorrectPassword")}
+          dataTestId="password_field"
         >
           <PasswordInput
             simpleView={false}
@@ -161,7 +147,7 @@ const PasswordChangeForm = ({
             inputName="password"
             placeholder={t("Common:Password")}
             inputValue={password}
-            hasError={isPasswordErrorShow && !passwordValid}
+            hasError={isPasswordErrorShow ? !passwordValid : undefined}
             inputType={InputType.password}
             size={InputSize.large}
             scale
@@ -182,7 +168,7 @@ const PasswordChangeForm = ({
             )}`}
             generatePasswordTitle={t("Common:GeneratePassword")}
             tooltipAllowedCharacters={`${t("Common:AllowedCharacters")}: ${ALLOWED_PASSWORD_CHARACTERS}`}
-            isAutoFocussed={true}
+            isAutoFocussed
           />
         </FieldContainer>
       </div>
@@ -195,6 +181,7 @@ const PasswordChangeForm = ({
         tabIndex={5}
         onClick={onSubmit}
         isDisabled={isLoading}
+        testId="create_password_button"
       />
     </>
   );

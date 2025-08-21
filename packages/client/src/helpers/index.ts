@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,7 @@
 
 import { ShareAccessRights } from "@docspace/shared/enums";
 
-export const checkIfAccessPaid = (access: ShareAccessRights) => {
+export const checkIfAccessPaid = (access?: ShareAccessRights) => {
   return (
     access === ShareAccessRights.FullAccess ||
     access === ShareAccessRights.RoomManager
@@ -34,9 +34,18 @@ export const checkIfAccessPaid = (access: ShareAccessRights) => {
 };
 
 export const filterPaidRoleOptions = (
-  options: { access: ShareAccessRights; key: string }[],
+  options: {
+    access?: ShareAccessRights;
+    key: string;
+    label?: string;
+    type?: string;
+    isSepearator?: boolean;
+  }[],
 ) => {
   if (!options) return options;
 
-  return options.filter((o) => !checkIfAccessPaid(+o.access) && o.key !== "s1");
+  return options.filter(
+    (o) =>
+      !checkIfAccessPaid(o.access ? +o.access : undefined) && o.key !== "s1",
+  );
 };

@@ -1,14 +1,22 @@
 {
   "ActionCannotBeUndone": "තෝරාගත් අබල කළ පරිශ්‍රීලකයින් {{productName}} වෙතින් ඉවත් කරනු ලැබේ. මෙම ක්‍රියාමාර්ගය අප්‍රතිවර්ත්‍යයි.",
+  "ActionCannotBeUndoneGuests": "පහත දැක්වුණු ආබාධ සහිත අමුත්තන් {{productName}} වෙතින් ඉවත් කරනු ලැබේ. මෙම ක්‍රියාව අහෝසි කළ නොහැකි වනු ඇත.",
   "CannotReassignFiles": "ඔබ එකවර පරිශ්‍රීලකයින් කිහිප දෙනෙක් මකා දැමුවහොත්, ඔබට ඔවුන්ගේ ගොනු වෙනත් පරිශ්‍රීලකයින්ට යළි පැවරීමට නොහැකිය.",
+  "DeleteGroupGuestsSuccessMessage": "අමුත්තන් සාර්ථකව මකා දමා ඇත.",
   "DeleteGroupUsersSuccessMessage": "පරිශ්‍රීලකයින් සාර්ථකව මැකිණි.",
-  "DeleteMyDocumentsUser": "මෙම පරිශ්‍රීලකයාගේ මාගේ ලේඛන කොටසේ තිබෙන සියලුම පෞද්ගලික ගොනු සහ බහාලුම් සදහටම මැකෙනු ඇත.",
-  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} මෙම පරිශ්‍රීලකයා සාදන ලද කාමර සහ ගබඩා කර තිබෙන ලේඛන මකා දමන පරිපාලකයෙකු වෙත ස්වයංක්‍රීයව යළි පවරනු ලැබේ: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. දත්ත යළි පැවරීමට වෙනත් පරිශ්‍රීලකයෙක් තෝරා ගැනීම සඳහා අතින් පවරන්න.",
+  "DeleteGuest": "ආගන්තුකයෙකු මකන්න",
+  "DeleteGuests": "ආගන්තුකයින් ඉවත් කරන්න",
+  "DeletePersonalDataApplicable": "*තෝරාගත් පරිශීලකයින් සඳහා අදාළ වන අතර ඔවුන් එවැනි ෆයිල් සහ ෆෝල්ඩර් තිබේ නම්.*",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} මෙම පරිශ්‍රීලකයා සාදන ලද කාමර සහ ගබඩා කර තිබෙන ලේඛන මකා දමන පරිපාලකයෙකු වෙත ස්වයංක්‍රීයව යළි පවරනු ලැබේ: <1>{{userPerformedDeletion}} ({{userYou}})</1>. දත්ත යළි පැවරීමට වෙනත් පරිශ්‍රීලකයෙක් තෝරා ගැනීම සඳහා අතින් පවරන්න.",
+  "DeleteReqassignDescriptionGuest": "{{userCaption}} යොදවන ලද සියලු කාමර වලින් ඉවත් කරනු ලැබේ. කාමර තුළ මෙම {{userCaption}} විසින් සාදන ලද ලේඛන කාමර හිමියන්ට ස්වයංක්‍රීයව නැවත පවරනු ලැබේ.",
   "DeleteUser": "පරිශ්‍රීලකයා මක්නන",
-  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> මකා දැමෙනු ඇත. මෙම ක්‍රියාමාර්ගය අප්‍රතිවර්ත්‍යයි.",
+  "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> මකා දැමෙනු ඇත. මෙම ක්‍රියාමාර්ගය අප්‍රතිවර්ත්‍යයි.",
   "DeletingUsers": "පරිශ්‍රීලකයින් මැකෙමින්",
+  "PersonalDataDeletionInfo": "පුද්ගත තොරතුරු, තෝරාගත් පරිශීලකයින්ගේ {{sectionNameFirst}} සහ {{sectionNameSecond}} කොටස් වල ඇති සියලු පුද්ගත ගොනු සහ ෆෝල්ඩර්* ස්ථිරවම මකා දැමෙනු ඇත. {{productName}} හි පොදු කොටස්* වන කාමරයන් වැනි ස්ථානවල තෝරාගත් පරිශීලකයින්ගේ ගොනු සහ ෆෝල්ඩර් නොවෙනස්ව පවතී.",
   "PleaseNote": "සටහන:",
   "ReassignDataToAnotherUser": "වෙනත් පරිශ්‍රීලකයෙක්ට දත්ත පවරන්න",
+  "SuccessfullyDeleteGuestInfoMessage": "ආගන්තුකයෙකු සාර්ථකව මකා දමා ඇත",
   "SuccessfullyDeleteUserInfoMessage": "පරිශ්‍රීලකයා සාර්ථකව මකන ලදි",
-  "ToBeAbleToReassignData": "වරකට එක් පරිශ්‍රීලකයෙක් බැගින් මැකීමෙන් දත්ත යළි පැවරීමට හැකි වේ."
+  "ToBeAbleToReassignData": "වරකට එක් පරිශ්‍රීලකයෙක් බැගින් මැකීමෙන් දත්ත යළි පැවරීමට හැකි වේ.",
+  "UserFilesRemovalScope": "මෙම පරිශීලකයාගේ {{sectionNameFirst}} සහ {{sectionNameSecond}} කොටස් වල ඇති සියලු පුද්ගලික දත්ත, සියලු ගොනු සහ ෆෝල්ඩර් ස්ථිරවම මකා දැමෙනු ඇත."
 }

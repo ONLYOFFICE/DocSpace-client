@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -43,6 +43,7 @@ const SsoComboBox = (props) => {
     enableSso,
     isLoadingXml,
     isDisabled,
+    dataTestId,
   } = props;
 
   const currentOption =
@@ -70,6 +71,8 @@ const SsoComboBox = (props) => {
           manualWidth="100%"
           directionY="both"
           textOverflow
+          dataTestId={dataTestId}
+          dropDownTestId={dataTestId ? `${dataTestId}_dropdown` : undefined}
         />
       </StyledInputWrapper>
     </FieldContainer>

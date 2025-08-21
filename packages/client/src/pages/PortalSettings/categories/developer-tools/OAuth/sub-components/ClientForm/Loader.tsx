@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -114,7 +114,7 @@ const ClientFormLoader = ({
           </StyledInputGroup>
         </StyledInputBlock>
       </StyledBlock>
-      {isEdit && (
+      {isEdit ? (
         <StyledBlock>
           <StyledHeaderRow>
             <RectangleSkeleton width="47px" height="22px" />
@@ -144,7 +144,7 @@ const ClientFormLoader = ({
             </StyledInputGroup>
           </StyledInputBlock>
         </StyledBlock>
-      )}
+      ) : null}
       <StyledBlock>
         <StyledHeaderRow>
           <RectangleSkeleton width="96px" height="22px" />

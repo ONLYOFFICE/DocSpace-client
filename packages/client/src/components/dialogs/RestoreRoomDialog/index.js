@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -98,17 +98,18 @@ const RestoreRoomDialogComponent = (props) => {
     >
       <ModalDialog.Header>{t("Common:Restore")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text noSelect>{description}</Text>
+        <Text>{description}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
           id="restore-all_submit"
-          key="OkButton"
+          key="OKButton"
           label={t("Common:Restore")}
           size="normal"
           primary
           onClick={onAction}
           scale
+          testId="restore_room_dialog_submit"
         />
         <Button
           id="restore-all_cancel"
@@ -117,6 +118,7 @@ const RestoreRoomDialogComponent = (props) => {
           size="normal"
           onClick={onClose}
           scale
+          testId="restore_room_dialog_cancel"
         />
       </ModalDialog.Footer>
     </ModalDialog>

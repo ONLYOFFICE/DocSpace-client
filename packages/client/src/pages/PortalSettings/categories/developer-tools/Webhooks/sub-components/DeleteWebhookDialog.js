@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -84,12 +84,14 @@ export const DeleteWebhookDialog = ({
             size="normal"
             primary
             onClick={handleDeleteClick}
+            testId="delete_webhook_button"
           />
           <Button
             id="cancel-button"
             label={t("Common:CancelButton")}
             size="normal"
             onClick={onClose}
+            testId="delete_webhook_cancel_button"
           />
         </Footer>
       </ModalDialog.Footer>

@@ -1,5 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -49,6 +48,13 @@ const StyledSimpleNav = styled.div.attrs(injectDefaultTheme)`
     height: 24px;
   }
 
+  .modile-combobox {
+    .combo-button {
+      border-width: 0;
+      background: transparent;
+    }
+  }
+
   @media ${mobile} {
     display: flex;
 
@@ -77,7 +83,7 @@ const SimpleNav = ({
 }: SimpleNavProps) => {
   const theme = useTheme();
 
-  const isDark = !theme.isBase;
+  const isDark = !theme?.isBase;
 
   const logoUrl = getLogoUrl(
     WhiteLabelLogoType.LightSmall,
@@ -89,9 +95,12 @@ const SimpleNav = ({
   return (
     <StyledSimpleNav id="login-header">
       <img className="logo" src={logoUrl} alt="logo-url" />
-      {isLanguageComboboxVisible && (
-        <LanguageComboboxWrapper initialCultures={initialCultures} />
-      )}
+      {isLanguageComboboxVisible ? (
+        <LanguageComboboxWrapper
+          className="modile-combobox"
+          initialCultures={initialCultures}
+        />
+      ) : null}
     </StyledSimpleNav>
   );
 };

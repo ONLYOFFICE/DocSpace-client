@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -83,6 +83,7 @@ const ToggleSSO = ({ enableSso, ssoToggle, isSSOAvailable }) => {
         isChecked={enableSso}
         onChange={onChangeToggle}
         isDisabled={!isSSOAvailable}
+        dataTestId="enable_sso_toggle_button"
       />
 
       <div className="toggle-caption">
@@ -95,7 +96,7 @@ const ToggleSSO = ({ enableSso, ssoToggle, isSSOAvailable }) => {
           >
             {t("TurnOnSSO")}
           </Text>
-          {!isSSOAvailable && (
+          {!isSSOAvailable ? (
             <Badge
               backgroundColor={
                 theme.isBase
@@ -107,14 +108,13 @@ const ToggleSSO = ({ enableSso, ssoToggle, isSSOAvailable }) => {
               className="toggle-caption_title_badge"
               isPaidBadge
             />
-          )}
+          ) : null}
         </div>
         <Text
           fontSize="12px"
           fontWeight={400}
           lineHeight="16px"
           className="settings_unavailable"
-          noSelect
         >
           {t("TurnOnSSOCaption")}
         </Text>

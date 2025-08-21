@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,12 +26,14 @@
 
 import React from "react";
 
-import { Text } from "../../text";
+import { classNames } from "../../../utils";
 import { SelectorAddButton } from "../../selector-add-button";
 
-import { StyledItem } from "../Selector.styled";
 import NewItemDropDown from "./NewItemDropDown";
 import useCreateDropDown from "../hooks/useCreateDropDown";
+import { NewItemProps } from "../Selector.types";
+
+import styles from "../Selector.module.scss";
 
 const NewItem = ({
   label,
@@ -41,15 +43,7 @@ const NewItem = ({
   hotkey,
   inputItemVisible,
   listHeight,
-}: {
-  label: string;
-  style: React.CSSProperties;
-  dropDownItems?: React.ReactElement[];
-  onCreateClick?: VoidFunction;
-  hotkey?: string;
-  inputItemVisible?: boolean;
-  listHeight: number;
-}) => {
+}: NewItemProps) => {
   const { isOpenDropDown, onCloseDropDown, setIsOpenDropDown } =
     useCreateDropDown();
 
@@ -90,34 +84,30 @@ const NewItem = ({
   }, [hotkey, onCreateClickAction, onKeyDown]);
 
   return (
-    <StyledItem
+    <div
       key="create-new-item"
       style={style}
-      isSelected={false}
-      isMultiSelect={false}
-      noHover
+      className={classNames(styles.selectorItem, styles.hoverable)}
+      onClick={onCreateClickAction}
     >
-      <SelectorAddButton onClick={onCreateClickAction} isAction />
-      <Text
-        className="label label-disabled clicked-label"
-        fontWeight={600}
+      <SelectorAddButton
+        isAction
+        label={label}
+        titleText={label}
         fontSize="14px"
+        lineHeight="18px"
         noSelect
-        truncate
         dir="auto"
-        onClick={onCreateClickAction}
-        title={label}
-      >
-        {label}
-      </Text>
-      {isOpenDropDown && dropDownItems && dropDownItems.length > 0 && (
+        truncate
+      />
+      {isOpenDropDown && dropDownItems && dropDownItems.length > 0 ? (
         <NewItemDropDown
           dropDownItems={dropDownItems}
           onCloseDropDown={onCloseDropDown}
           listHeight={listHeight}
         />
-      )}
-    </StyledItem>
+      ) : null}
+    </div>
   );
 };
 

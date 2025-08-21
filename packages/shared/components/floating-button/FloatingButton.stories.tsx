@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 // (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
@@ -25,15 +26,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-
 import { Meta, StoryObj } from "@storybook/react";
-
-import { FloatingButton } from "./FloatingButton";
-import { FloatingButtonProps } from "./FloatingButton.types";
+import { FloatingButton } from ".";
 import { FloatingButtonIcons } from "./FloatingButton.enums";
 
 const meta = {
-  title: "components/FloatingButton",
+  title: "Interactive Elements/FloatingButton",
   component: FloatingButton,
   parameters: {
     design: {
@@ -41,32 +39,66 @@ const meta = {
       url: "https://www.figma.com/file/ZiW5KSwb4t7Tj6Nz5TducC/UI-Kit-DocSpace-1.0.0?type=design&node-id=1053-45015&mode=design&t=TBNCKMQKQMxr44IZ-0",
     },
   },
+  argTypes: {
+    icon: {
+      control: "select",
+      options: Object.values(FloatingButtonIcons),
+      description: "The icon to display in the button",
+    },
+    alert: {
+      control: "boolean",
+      description: "Show alert indicator",
+    },
+    color: {
+      control: "color",
+      description: "Custom background color",
+    },
+  },
+  decorators: [
+    (Story) => (
+      <div
+        style={{
+          height: "70px",
+          width: "100px",
+          display: "flex",
+          justifyContent: "flex-start",
+          position: "relative",
+          padding: "20px",
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
 } satisfies Meta<typeof FloatingButton>;
-type Story = StoryObj<typeof meta>;
 
 export default meta;
-
-const Template = (args: FloatingButtonProps) => (
-  <div
-    style={{
-      height: "600px",
-      display: "flex",
-      justifyContent: "flex-start",
-      position: "relative",
-    }}
-  >
-    <FloatingButton {...args} />
-  </div>
-);
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  render: (args) => <Template {...args} />,
   args: {
-    id: undefined,
-    className: undefined,
-    style: undefined,
     icon: FloatingButtonIcons.upload,
-    alert: false,
-    percent: 0,
+  },
+};
+
+export const WithProgress: Story = {
+  args: {
+    icon: FloatingButtonIcons.upload,
+    percent: 45,
+  },
+};
+
+export const WithAlert: Story = {
+  args: {
+    icon: FloatingButtonIcons.upload,
+    alert: true,
+  },
+};
+
+export const Completed: Story = {
+  args: {
+    icon: FloatingButtonIcons.upload,
+    completed: true,
+    percent: 100,
   },
 };

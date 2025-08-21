@@ -1,0 +1,281 @@
+{
+  "key_path": "RoomRenamed",
+  "content": "Room <1>«{{oldRoomTitle}}»</1> renamed to <2>«{{roomTitle}}»</2>",
+  "content_en_sha1_hash": "6577c913cb505335f78dd2df81da5de99e766f6a",
+  "created_at": "2025-05-19T21:30:54.945Z",
+  "updated_at": "2025-08-04T07:30:01.240Z",
+  "comment": {
+    "text": "This translation key is used to display a message when a room's name changes. It updates an old room title with the new one, indicating the renaming action occurred. This appears in the UI as part of a history or log entry.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:44.983Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 171,
+      "context": "components={{\n 1: <strong title={(feed.data as TFeedData).title} />,\n }}\n />\n );\n case FeedActionKeys.RoomRenamed:\n return (\n <Trans\n t={t}\n ns=\"InfoPanel\"\n i18nKey=\"RoomRenamed\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
+      "line_number": 161,
+      "context": "i18nKey=\"HistoryRoomCopied\"\n values={{ roomTitle: feed.data.title }}\n components={{ 1: <strong title={feed.data.title} /> }}\n />\n );\n case FeedActionKeys.RoomRenamed:\n return (\n <Trans\n t={t as TFunction}\n ns=\"InfoPanel\"\n i18nKey=\"RoomRenamed\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"renamed to\" is not accurately reflected in the Azerbaijani translation. \"olaraq dəyişdirildi\" translates to \"changed to\" which is a bit vague. A more accurate translation of \"renamed to\" would be something like \"yenidən adlandırıldı\".",
+          "suggestion": "Otağın <1>«{{oldRoomTitle}}»</1> adı <2>«{{roomTitle}}»</2> yenidən adlandırıldı"
+        },
+        {
+          "type": "formatting",
+          "description": "The numbering (1 and 2) is present in both the English and Azerbaijani versions. This is good, but consider if the numbering style should be adjusted for Azerbaijani conventions.",
+          "suggestion": "No change needed, but review potential Azerbaijani numbering conventions."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English word 'renamed' is translated as 'ha cambiado de nombre'. While technically correct, a more natural and direct translation would be 'se ha renombrado' or 'fue renombrada'.",
+          "suggestion": "La sala <1>«{{oldRoomTitle}}»</1> se ha renombrado a <2>«{{roomTitle}}»</2>"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'sala' is used, which means 'room' but might be more appropriate to use 'habitación' or keep 'sala' depending on the context and type of room. Consider the audience and the type of room being referred to.",
+          "suggestion": "Consider using 'habitación' or keeping 'sala' depending on context."
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"renamed to\" is not accurately translated. \"に変更されました\" literally means \"changed to was done\". A more natural translation would incorporate an active voice or more direct phrasing.",
+          "suggestion": "ルーム名«{{oldRoomTitle}}»を«{{roomTitle}}»に変更しました。(Room «{{oldRoomTitle}}» was changed to «{{roomTitle}}».)"
+        },
+        {
+          "type": "formatting",
+          "description": "The original English uses angle brackets to denote placeholders. The Japanese translation also uses angle brackets. While technically correct, the use of Japanese angle brackets (《》) or just regular parentheses ( ) might be more natural depending on the specific UI design conventions of the application.",
+          "suggestion": "ルーム名《{{oldRoomTitle}}》を《{{roomTitle}}》に変更されました。"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"renamed to\" is translated as \"이름이 ... 로 변경되었습니다\" which means 'name has been changed to'. While technically correct, it's a bit verbose and less direct than a more literal translation of 'renamed to'. A more natural translation might involve phrasing like '로 변경되었습니다' after the new room title.",
+          "suggestion": "Consider a more concise translation such as: «{{oldRoomTitle}}» 룸이 «{{roomTitle}}» 룸으로 이름이 변경되었습니다"
+        },
+        {
+          "type": "formatting",
+          "description": "The English template uses angle brackets for the placeholders, while the Korean translation uses Korean characters and spacing before the placeholders, breaking the assumed formatting consistency.  The '1' and '2' also seems unusual in the Korean translation and potentially unnecessary.",
+          "suggestion": "Maintain the angle bracket format for consistency, or remove the '1' and '2' as they aren't required by the Korean grammar."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"renamed to\" is translated as \"pārdēvēta par\". While not strictly wrong, \"pārdēvēta uz\" would be a more natural and accurate translation in Latvian, especially in this context of renaming.",
+          "suggestion": "Telpa ir <1>«{{oldRoomTitle}}»</1> pārdēvēta uz <2>«{{roomTitle}}»</2>"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The closing angle bracket and slash are missing after 'Kamer' in the Dutch translation.",
+          "suggestion": "Kamer <1>«{{oldRoomTitle}}»</1> hernoemd naar <2>«{{roomTitle}}»</2>"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"renamed to\" is not accurately translated. \"ලෙස නැවත නම් කරන ලදී\" literally translates to 'was renamed as'. A more natural translation would convey the action of renaming. ",
+          "suggestion": "කාමරය <1>«{{oldRoomTitle}}»</1>  <2>«{{roomTitle}}»</2> ලෙස නම් විය"
+        },
+        {
+          "type": "formatting",
+          "description": "The spaces around the angle brackets are inconsistent. The English has spaces, the Sinhala does not.",
+          "suggestion": "කාමරය <1>«{{oldRoomTitle}}»</1>  <2>«{{roomTitle}}»</2> ලෙස නම් විය"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,50 +25,53 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { Badge } from "../../badge";
 
-import {
-  StyledArrowIcon,
-  StyledExpanderDownIcon,
-  StyledExpanderDownIconRotate,
-  StyledHeading,
-  StyledTextContainer,
-} from "../Navigation.styled";
+import styles from "../Navigation.module.scss";
+import { TTextProps } from "../Navigation.types";
 
-import { ITextProps } from "../Navigation.types";
+import ArrowIcon from "./ArrowIcon";
+import Heading from "./Heading";
+import ExpanderIcon from "./ExpanderIcon";
 
 const Text = ({
   title,
-  isRootFolder,
   isOpen,
+  isRootFolder,
   isRootFolderTitle,
   onClick,
+  badgeLabel,
+  className,
   ...rest
-}: ITextProps) => {
+}: TTextProps) => {
   return (
-    <StyledTextContainer
-      isRootFolder={isRootFolder}
+    <div
+      className={`${className} ${styles.textContainer}`}
       onClick={onClick}
-      isRootFolderTitle={isRootFolderTitle}
+      data-root-folder={isRootFolder}
+      data-root-folder-title={isRootFolderTitle}
       {...rest}
     >
-      <StyledHeading
-        title={title}
-        truncate
-        isRootFolderTitle={isRootFolderTitle}
-      >
+      <Heading title={title} truncate isRootFolderTitle={isRootFolderTitle}>
         {title}
-      </StyledHeading>
-
-      {isRootFolderTitle && <StyledArrowIcon />}
-
-      {!isRootFolderTitle && !isRootFolder ? (
-        isOpen ? (
-          <StyledExpanderDownIconRotate />
-        ) : (
-          <StyledExpanderDownIcon />
-        )
+      </Heading>
+      {badgeLabel ? (
+        <Badge
+          className={`${styles.titleBlockBadge} ${isRootFolderTitle ? styles.rootFolderTitle : ""}`}
+          label={badgeLabel}
+          fontSize="9px"
+          padding="2px 5px"
+          fontWeight={700}
+          borderRadius="50px"
+          noHover
+          isHovered={false}
+        />
       ) : null}
-    </StyledTextContainer>
+      {isRootFolderTitle ? <ArrowIcon /> : null}
+      {!isRootFolderTitle && !isRootFolder ? (
+        <ExpanderIcon isRotated={isOpen} />
+      ) : null}
+    </div>
   );
 };
 

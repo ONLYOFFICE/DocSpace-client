@@ -1,0 +1,322 @@
+{
+  "key_path": "HotkeysZoomOut",
+  "content": "Zoom out",
+  "content_en_sha1_hash": "a4ae4b24a1f5369c2bff61abdbc221170e4b27d8",
+  "created_at": "2025-05-19T21:30:55.105Z",
+  "updated_at": "2025-05-24T10:29:06.413Z",
+  "comment": {
+    "text": "This translation key is used for the \"Zoom out\" button in a user interface. It appears in an action block within a preview panel and provides visual feedback to users when the zoom level is reduced.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:25.935Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/HotkeysPanel/PreviewActionsBlock.js",
+      "line_number": 54,
+      "context": "<Text {...keyTextStyles}>+ {t(\"Common:Or\")} =</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysZoomOut\")}</Text>\n <Text {...keyTextStyles}>-</Text>\n </>\n </Row>\n </>\n );",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'تصغير' generally means 'to shrink' or 'to reduce in size'. While 'zoom out' implies a reduction in view, 'تصغير' isn't the most natural or precise translation. A more accurate translation might be 'تكبير للخارج' (Takbeer lil kharej) or 'تباعد' (Taba'ud).",
+          "suggestion": "Consider 'تباعد' (Taba'ud) or 'تكبير للخارج' (Takbeer lil kharej) for a more accurate translation of 'Zoom out'."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Uzaqlaşdırın\" is a possible translation for 'Zoom out,' it's quite formal and a direct imperative. A more natural and common translation in this context might be something more approachable, especially for a user interface.",
+          "suggestion": "Consider alternatives like \"Çeynəyin\" (cheynəyin - to zoom) or a more descriptive phrase like \"Şəkli böyüt\" (increase the image) depending on the UI style. 'Uzaqlaşdır' (uzaglasdir - to zoom out) could also be an option, if the intention is for a more formal tone."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Отдалечи\" is a literal translation of \"Zoom out\", it may not be the most natural or common way to express this action in a UI context in Bulgarian. A more natural phrasing might be \"Намали мащаба\" or \"Разшири гледката\" (depending on the overall UI terminology).",
+          "suggestion": "Consider \"Намали мащаба\" or \"Разшири гледката\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation 'Zvětšení' translates to 'Enlargement' or 'Increase', not 'Zoom out'. 'Zoom out' requires a translation conveying the action of decreasing zoom level.",
+          "suggestion": "Odzoomování"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Verkleinern' can mean 'zoom out' in a general sense (shrinking something), it's not the most accurate translation for a zoom function in a user interface.  'Hinauszoomen' or 'Vergrößerung reduzieren' would be more precise.",
+          "suggestion": "Hinauszoomen"
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Σμίκρυνση\" while literally meaning 'shrinking' or 'reduction,' doesn't convey the meaning of 'Zoom out' in the context of a hotkey. It implies making something smaller, not moving away from it.",
+          "suggestion": "Αποζουμ"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Փոքրացնել' (Pokragnel) can mean 'reduce' or 'shrink', in the context of zooming, 'Zoom out' is better translated as 'զում դուրս' (zoom durs) or 'հեռացնել' (heracnel). 'Փոքրացնել' implies making something smaller in general, not specifically zooming out.",
+          "suggestion": "Consider 'զում դուրս' (zoom durs) or 'հեռացնել' (heracnel) for a more accurate translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Rimpiccolire' is a valid Italian word, it doesn't perfectly convey the meaning of 'Zoom out' in the context of a hotkey. 'Zoom out' implies decreasing the visible area, and 'Rimpiccolire' more directly means 'to make smaller'. A more appropriate translation would be 'Ingrandimento - Esci' or 'Zoom indietro'.",
+          "suggestion": "Ingrandimento - Esci"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"縮小\" (shōsetsu) generally means \"reduce\" or \"shrink,\" which is a more general concept than \"zoom out.\" While conceptually related, it's not the most accurate translation for 'Zoom out' in the context of a hotkey.",
+          "suggestion": "Consider alternatives like \"拡大縮小解除\" (kakudai shūshō kaijo - zoom out/reset), \"ズームアウト\" (zūmu auto - a transliteration of 'zoom out'), or \"引き伸ばし解除\" (hikishimagashai kaijo - similar to zoom out)"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation \"축소\" translates to \"reduce\" or \"shrink\" which doesn't accurately convey the meaning of \"Zoom out\" in a visual context. \"Zoom out\" implies moving away from a zoomed-in view, not necessarily reducing the size of something.",
+          "suggestion": "Consider alternatives like \"확대 해제\" (expand release), \"나가기\" (exit), or \"줌 아웃\" (transliteration of 'zoom out')"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Pomniejsz' while conveying a sense of reducing size, is not the most natural or precise translation of \"Zoom out\". It's more literally 'reduce' or 'make smaller'. A better translation would be 'Oddal' or 'Zmniejsz widok'.",
+          "suggestion": "Oddal"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Menos Zoom' is a literal translation of 'Less Zoom' and doesn't convey the intended meaning of 'Zoom out' in the context of a hotkey. A more natural and accurate translation would be something like 'Diminuir Zoom' or 'Reduzir Zoom'.",
+          "suggestion": "Diminuir Zoom"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Micșorare\" is a valid Romanian word, it directly translates to \"decrease\" or \"reduction.\" \"Zoom out\" implies a visual action and a more appropriate translation would reflect that. A better option would consider terms related to 'expanding the view' or 'moving away'.",
+          "suggestion": "Consider \"Mărire (vedere)\" (Increase (view)), \"Depărtare (vedere)\" (Moving away (view)), or \"Dezoom\" (a loanword from English, increasingly common)."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Уменьшить' literally means 'reduce' or 'decrease', the intended meaning of 'Zoom out' in a UI context is 'move further away', 'zoom out'. 'Уменьшить' doesn't convey that specific action.",
+          "suggestion": "Раскрутить / Отдалить (Raskrutit' / Otelit') - These convey the action of zooming out."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'කුඩාලනය' (kudaalanaya) doesn't accurately convey the meaning of 'Zoom out'. 'කුඩාලනය' translates to something like 'decrease' or 'reduction', not the specific action of zooming out. A more appropriate translation would be something that conveys the action of moving away or reducing the view.",
+          "suggestion": "Possible suggestions include: 'ඈත් කිරීම' (aath karima - moving away), 'දුරුවට කිරීම' (duruwato karima - making distant), or a more literal but perhaps less natural, ' විශාලනය අඩු කිරීම' (vishalaayanadu kurima - reducing magnification)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Зумирај напоље' is understandable, it's not the most natural or commonly used translation for 'Zoom out' in Serbian (Cyrillic). A more typical and accurate translation would be 'Одзумирај' or 'Приближи оддалеком'.",
+          "suggestion": "Одзумирај"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Zumiraj napolje\" does not accurately convey the meaning of \"Zoom out\". \"Zumiraj napolje\" literally translates to \"Zoom out\" but in the context of hotkeys, a more appropriate translation would be something that describes the action of zooming out.",
+          "suggestion": "Odmakni"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Зменшити\" literally translates to 'reduce' or 'decrease', the English 'Zoom out' implies an action related to magnification. A more accurate translation for 'Zoom out' in this context would be something that directly conveys the action of zooming out.",
+          "suggestion": "Віддалити"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Zoom out' refers to reducing the scale of a view, which is more accurately translated as 'Rút ra' or 'Xoay ngược'. 'Thu nhỏ' typically means to physically make something smaller.",
+          "suggestion": "Rút ra"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

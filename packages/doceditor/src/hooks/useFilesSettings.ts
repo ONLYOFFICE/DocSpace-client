@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,7 +29,7 @@ import React from "react";
 import { getSettingsFiles } from "@docspace/shared/api/files";
 import { TFilesSettings } from "@docspace/shared/api/files/types";
 
-const useFilesSettings = ({}) => {
+const useFilesSettings = () => {
   const [settings, setSettings] = React.useState<TFilesSettings>(
     {} as TFilesSettings,
   );

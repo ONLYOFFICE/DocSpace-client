@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,7 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import FilesSelector from "@docspace/client/src/components/FilesSelector";
+import FilesSelector from "SRC_DIR/components/FilesSelector";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { SubmitToFormGallery } from "../../../components/dialogs";
 // import SelectFileDialog from "src/components/panels/SelectFileDialog";

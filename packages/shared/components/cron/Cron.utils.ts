@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,15 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import capitalize from "lodash/capitalize";
+import type { TFunction } from "i18next";
 import { DateTime, Info } from "luxon";
 
-import {
-  Options,
-  PeriodOptionType,
-  PeriodType,
-  TFunction,
-  Unit,
-} from "./Cron.types";
+import { Options, PeriodOptionType, PeriodType, Unit } from "./Cron.types";
 
 export const parseNumber = (value: unknown) => {
   if (typeof value === "string") {
@@ -120,7 +115,8 @@ export const fixFormatValue = (value: number, local: string) => {
   return result;
 };
 
-const replaceAlternatives = (str: string, unit: Unit) => {
+const replaceAlternatives = (strProp: string, unit: Unit) => {
+  let str = strProp;
   if (unit.alt) {
     str = str.toUpperCase();
     for (let i = 0; i < unit.alt.length; i += 1) {
@@ -133,7 +129,9 @@ const replaceAlternatives = (str: string, unit: Unit) => {
 const getError = (error: string, unit: Unit) =>
   new Error(`${error} for ${unit.name}`);
 
-const fixSunday = (values: number[], unit: Unit) => {
+const fixSunday = (valuesProp: number[], unit: Unit) => {
+  let values = valuesProp;
+
   if (unit.name === "weekday") {
     values = values.map((value) => {
       if (value === 7) {
@@ -259,7 +257,8 @@ const parseStep = (step: string, unit: Unit) => {
   return 0;
 };
 
-const applyInterval = (values: number[], step: number) => {
+const applyInterval = (valuesProp: number[], step: number) => {
+  let values = [...valuesProp];
   if (step) {
     const minVal = values[0];
     values = values.filter(
@@ -377,14 +376,17 @@ export const stringToArrayPart = (str: string, unit: Unit, full = false) => {
   return values;
 };
 
-const shiftMonth = (arr: number[][], date: DateTime) => {
+const shiftMonth = (arr: number[][], dateProp: DateTime) => {
+  let date = dateProp;
+
   while (arr[3].indexOf(date.month) === -1) {
     date = date.plus({ months: 1 }).startOf("month");
   }
   return date;
 };
 
-const shiftDay = (arr: number[][], date: DateTime): [DateTime, boolean] => {
+const shiftDay = (arr: number[][], dateProp: DateTime): [DateTime, boolean] => {
+  let date = dateProp;
   const currentMonth = date.month;
   while (
     arr[2].indexOf(date.day) === -1 ||
@@ -399,7 +401,12 @@ const shiftDay = (arr: number[][], date: DateTime): [DateTime, boolean] => {
   return [date, false];
 };
 
-const shiftHour = (arr: number[][], date: DateTime): [DateTime, boolean] => {
+const shiftHour = (
+  arr: number[][],
+  dateProp: DateTime,
+): [DateTime, boolean] => {
+  let date = dateProp;
+
   const currentDay = date.day;
   while (arr[1].indexOf(date.hour) === -1) {
     date = date.plus({ hours: 1 }).startOf("hour");
@@ -410,7 +417,12 @@ const shiftHour = (arr: number[][], date: DateTime): [DateTime, boolean] => {
   return [date, false];
 };
 
-const shiftMinute = (arr: number[][], date: DateTime): [DateTime, boolean] => {
+const shiftMinute = (
+  arr: number[][],
+  dateProp: DateTime,
+): [DateTime, boolean] => {
+  let date = dateProp;
+
   const currentHour = date.hour;
   while (arr[0].indexOf(date.minute) === -1) {
     date = date.plus({ minutes: 1 }).startOf("minute");
@@ -421,11 +433,12 @@ const shiftMinute = (arr: number[][], date: DateTime): [DateTime, boolean] => {
   return [date, false];
 };
 
-export const findDate = (arr: number[][], date: DateTime) => {
+export const findDate = (arr: number[][], dateProp: DateTime) => {
   let retry = 24;
   let monthChanged: boolean;
   let dayChanged: boolean;
   let hourChanged: boolean;
+  let date = dateProp;
 
   // eslint-disable-next-line no-plusplus
   while (--retry) {

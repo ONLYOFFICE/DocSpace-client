@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,7 +29,7 @@ import { useTranslation } from "react-i18next";
 
 import { LoginDispatchContext } from "@/components/Login";
 
-const useRecoverDialog = ({}) => {
+const useRecoverDialog = () => {
   const [recoverDialogVisible, setRecoverDialogVisible] = useState(false);
 
   const { setIsModalOpen } = useContext(LoginDispatchContext);

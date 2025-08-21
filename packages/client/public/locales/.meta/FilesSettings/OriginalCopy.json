@@ -1,0 +1,319 @@
+{
+  "key_path": "OriginalCopy",
+  "content": "Save the file copy in the original format as well",
+  "content_en_sha1_hash": "590aa54a4acb697b9b402769bb231a09e8ad806a",
+  "created_at": "2025-05-19T21:30:55.182Z",
+  "updated_at": "2025-08-11T18:11:59.295Z",
+  "comment": {
+    "text": "Save file copy in original format. This text is used as a confirmation message when a user decides to save a file copy that maintains its original formatting. It appears on a dialog box within the file management section of the profile settings page.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:15.830Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/index.tsx",
+      "line_number": 84,
+      "context": "hideConfirmCancelOperation,\n setHideConfirmCancelOperation,\n }: FileManagementProps) => {\n const { t } = useTranslation([\"FilesSettings\", \"Common\"]);\n \n const onChangeOriginalCopy = React.useCallback(() => {\n setStoreOriginal?.(!storeOriginalFiles, \"storeOriginalFiles\");\n }, [setStoreOriginal, storeOriginalFiles]);\n \n const onChangeDeleteConfirm = React.useCallback(() => {\n setConfirmDelete?.(!confirmDelete, \"confirmDelete\");",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Save the file copy in the original format as well\" implies preserving the original file format during the copy process. The Azerbaijani translation \"Faylın nüsxəsini orijinal formatda da yadda saxla\" translates more literally to 'Save the file copy in the original format also,' which isn't quite the intended meaning. It might suggest saving *another* copy in the original format.",
+          "suggestion": "Consider a translation like \"Faylın nüsxəsini orijinal formatda saxla\" or \"Faylın nüsxəsini ilk formatında da saxla\" to better convey preserving the original format during the copying."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Запази копието на файла и в оригиналния формат' is a bit literal and could be improved for naturalness. While technically correct, it's not the most fluent Bulgarian.",
+          "suggestion": "Consider alternatives like 'Съхрани копие на файла в оригиналния формат' or 'Запази и копие на файла в оригиналния формат.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Dateikopie auch im Originalformat speichern\" while generally understandable, doesn't perfectly capture the nuance of 'Save the file copy in the original format as well.' The phrase 'as well' implies an addition to a previous action.  'Auch' captures 'as well' but the overall flow could be improved.",
+          "suggestion": "Dateikopie ebenfalls im Originalformat speichern"
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Αποθηκεύστε το αντίγραφο του αρχείου και στην αρχική μορφή' is a bit literal and could be improved for natural flow. 'Save the file copy in the original format as well' implies saving *in addition to* other possible formats. The Greek phrasing doesn't quite capture this.",
+          "suggestion": "Αποθηκεύστε το αντίγραφο του αρχείου στην αρχική μορφή επίσης"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Salva anche la copia del file in formato originale' is a literal translation and doesn't quite capture the nuance of 'as well'. It sounds slightly awkward in Italian. A more natural phrasing would better convey the meaning of 'in addition to other saving options'.",
+          "suggestion": "Salva anche una copia del file nel formato originale."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"コピーしたファイルをオリジナルの形式にも保存する\" while understandable, doesn't perfectly capture the nuance of \"Save the file copy in the original format as well.\" It implies saving *in addition* to somewhere else, whereas the original suggests maintaining the original format during the copy process. A more accurate translation would emphasize preserving the original format during the copy.",
+          "suggestion": "コピーしたファイルを元の形式で保存する"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses 'も' (mo), which, while grammatically correct, can sometimes sound slightly less natural in this context. It slightly emphasizes the addition, which isn't the primary meaning.",
+          "suggestion": "コピーしたファイルを元の形式で保存します"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"as well\" is not adequately conveyed in the Korean translation. \"원본 형식으로도 저장\" implies saving *to* the original format, but the original English means 'also save the copy in the original format'.",
+          "suggestion": "파일 복사본을 원본 형식으로도 함께 저장"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ບັນທຶກໄຟລ໌ສຳເນົາໄວ້ໃນຮູບແບບຕົ້ນສະບັບເຊັ່ນດຽວກັນ\" while understandable, is a bit wordy and doesn't convey the concise nature of the English \"Save the file copy in the original format as well\".  \"ເຊັ່ນດຽວກັນ\" (as well) feels redundant.",
+          "suggestion": "ບັນທຶກໄຟລ໌ສຳເນົາໄວ້ໃນຮູບແບບຕົ້ນສະບັບ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Save the file copy in the original format as well' implies a secondary action. 'Guardar a cópia do ficheiro também no formato original' while technically correct, doesn't fully capture the 'as well' part, which suggests it's in addition to another saving action. A better translation might incorporate this nuance.",
+          "suggestion": "Consider alternatives like 'Salvar também uma cópia do ficheiro no formato original' or 'Salvar também uma cópia no formato original'."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Salvează copia și în formatul original' doesn't fully capture the meaning of 'Save the file copy in the original format as well'. The 'as well' implies an addition to a previous action, which is missing in the Romanian translation. A better translation would convey this addition.",
+          "suggestion": "Salvează copia și în formatul original, de asemenea."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'මුල් ආකෘතියෙන් ද ගොනුවේ පිටපතක් සුරකින්න' while understandable, doesn't fully capture the nuance of 'Save the file copy in the original format as well'. It focuses on saving a copy, but 'as well' implies it's in addition to a default saving process, which isn't explicitly conveyed.",
+          "suggestion": "මුල් ආකෘතියේද ගොනුවේ පිටපතක් සුරකින්න."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The use of 'ද' (da) at the end, while grammatically correct, creates a slightly formal tone. For user interface text, a more neutral phrasing might be preferable.",
+          "suggestion": "Consider removing 'ද' or restructuring to avoid it, based on the desired tone.  For example: 'මුල් ආකෘතියේ ගොනුවේ පිටපතක් සුරකින්න' (Save a file copy in the original format)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Kopijo datoteke shranite tudi v izvirni obliki' doesn't fully capture the nuance of 'Save the file copy in the original format as well.' It reads more like a direct instruction. A more natural phrasing would emphasize the 'as well' aspect.",
+          "suggestion": "Kopijo datoteke shranite tudi v izvirni obliki, kot je."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Save the file copy in the original format as well\" implies saving a copy *while* preserving the original format. The Serbian translation \"Сачувај копију датотеке у оригиналном формату такође\" could be interpreted as simply saving a copy *in* the original format, which might not convey the intended meaning of preserving the original file itself.",
+          "suggestion": "Сачувај копију датотеке, задржећи оригинални формат."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Dosya kopyasını da orijinal türünde kaydet' doesn't fully capture the nuance of 'Save the file copy in the original format as well'. While 'orijinal türünde' (original type) is somewhat accurate, 'format' implies more than just file type. It could refer to encoding, compression, etc. A more accurate translation would consider preserving the original format comprehensively.",
+          "suggestion": "Dosya kopyasını da orijinal formatında kaydet"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, using 'formatında' instead of 'türünde' for 'format' is more natural and commonly used in Turkish.",
+          "suggestion": "Dosya kopyasını da orijinal formatında kaydet"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Lưu cả bản sao của tệp ở định dạng gốc\" while understandable, doesn't fully capture the nuance of 'as well'. It implies saving a copy, but the original English conveys that the copy should maintain the original format in addition to being a copy.",
+          "suggestion": "Lưu bản sao của tệp ở định dạng gốc như bản gốc"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '以原始格式保存文件副本' while technically correct, doesn't fully capture the nuance of \"Save the file copy in the original format as well.\"  The English implies saving a *copy* of the file *and* retaining the original format, whereas the Chinese could be interpreted as just saving a file in the original format, not necessarily a copy.",
+          "suggestion": "以原始格式保存文件副本，并保留原始格式"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

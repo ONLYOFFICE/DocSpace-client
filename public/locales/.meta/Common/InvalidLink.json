@@ -1,0 +1,238 @@
+{
+  "key_path": "InvalidLink",
+  "content": "Invalid link",
+  "content_en_sha1_hash": "3aaeaeb6ec3f8154506ce18b333531c275dcb035",
+  "created_at": "2025-05-19T21:30:45.936Z",
+  "updated_at": "2025-08-04T07:30:01.631Z",
+  "comment": {
+    "text": "This translation key is used to display an error message when a link provided is invalid. It appears as a message shown by the docEditor component, typically in response to user interactions such as clicking on a button or attempting to load content.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:49.904Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/doceditor/src/hooks/useEditorEvents.ts",
+      "line_number": 197,
+      "context": "docEditor = window.DocEditor.instances[EDITOR_ID];\n \n fixSize();\n \n if (errorMessage || isSkipError)\n return docEditor?.showMessage?.(errorMessage || t(\"Common:InvalidLink\"));\n \n console.log(\"ONLYOFFICE Document Editor is ready\", docEditor);\n const url = window.location.href;\n \n const index = url.indexOf(\"#message/\");",
+      "module": "/packages/doceditor"
+    },
+    {
+      "file_path": "/packages/login/src/components/ConfirmRoute.tsx",
+      "line_number": 95,
+      "context": "case ValidationResult.Invalid:\n console.error(\"invalid link\", {\n confirmLinkParams,\n validationResult: confirmLinkResult.result,\n });\n throw new Error(t(\"Common:InvalidLink\"));\n case ValidationResult.Expired:\n console.error(\"expired link\", {\n confirmLinkParams,\n validationResult: confirmLinkResult.result,\n });",
+      "module": "/packages/login"
+    },
+    {
+      "file_path": "/packages/login/src/utils/index.ts",
+      "line_number": 108,
+      "context": "case \"SsoAttributesNotFound\":\n return t(\"Errors:SsoAttributesNotFound\");\n case \"QuotaPaidUserLimitError\":\n return t(\"Common:QuotaPaidUserLimitError\");\n case \"InvalidLink\":\n return t(\"Common:InvalidLink\");\n default:\n return t(\"Common:Error\");\n }\n };",
+      "module": "/packages/login"
+    },
+    {
+      "file_path": "/packages/shared/components/errors/ErrorInvalidLink.tsx",
+      "line_number": 36,
+      "context": "export const ErrorInvalidLink = () => {\n const { t, ready } = useTranslation([\"Errors\", \"Common\"]);\n \n return ready ? (\n <ErrorContainer\n headerText={t(\"Common:InvalidLink\")}\n bodyText={t(\"Common:LinkDoesNotExist\")}\n />\n ) : null;\n };",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/pages/PublicRoom/PublicRoomError/index.tsx",
+      "line_number": 40,
+      "context": "import ErrorContainer from \"../../../components/error-container/ErrorContainer\";\n \n const PublicRoomError = ({ isInvalid }: { isInvalid?: boolean }) => {\n const { t, ready } = useTranslation([\"Errors\", \"Common\"]);\n const headerText = isInvalid\n ? t(\"Common:InvalidLink\")\n : t(\"Common:ExpiredLink\");\n const bodyText = isInvalid\n ? t(\"Common:LinkDoesNotExist\")\n : t(\"Common:LinkHasExpired\");",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'සබැඳිය' is sometimes spelled 'සබැඳුම'. While 'සබැඳිය' isn't technically incorrect, 'සබැඳුම' is more common and might be preferred for greater clarity.",
+          "suggestion": "Consider using 'සබැඳුම' instead of 'සබැඳිය'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

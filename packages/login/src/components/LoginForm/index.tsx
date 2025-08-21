@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -53,16 +53,17 @@ import { login } from "@docspace/shared/utils/loginUtils";
 import { toastr } from "@docspace/shared/components/toast";
 import { thirdPartyLogin, checkConfirmLink } from "@docspace/shared/api/user";
 import { setWithCredentialsStatus } from "@docspace/shared/api/client";
-import { deletePortal } from "@docspace/shared/api/management";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
 import { ButtonKeys, RecaptchaType } from "@docspace/shared/enums";
 import { getCookie } from "@docspace/shared/utils";
-import { deleteCookie } from "@docspace/shared/utils/cookie";
 import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
 
 import { LoginFormProps } from "@/types";
-import { getAvailablePortals } from "@/utils/actions";
-import { getEmailFromInvitation } from "@/utils";
+import {
+  getAvailablePortals,
+  getEmailFromInvitation,
+  getRedirectURL,
+} from "@/utils";
 
 import EmailContainer from "./sub-components/EmailContainer";
 import PasswordContainer from "./sub-components/PasswordContainer";
@@ -80,7 +81,6 @@ const LoginForm = ({
   reCaptchaPublicKey,
   clientId,
   client,
-  oauthUrl,
   reCaptchaType,
   ldapDomain,
   ldapEnabled,
@@ -88,7 +88,9 @@ const LoginForm = ({
 }: LoginFormProps) => {
   const { isLoading, isModalOpen } = useContext(LoginValueContext);
   const { setIsLoading } = useContext(LoginDispatchContext);
-  const toastId = useRef<Id>();
+
+  const emailConfirmedToastShown = useRef<boolean>(false);
+  const passwordChangedToastShown = useRef<boolean>(false);
   const authToastId = useRef<Id>("");
 
   const searchParams = useSearchParams();
@@ -99,16 +101,16 @@ const LoginForm = ({
   const { t, ready, i18n } = useTranslation(["Login", "Common"]);
   const currentCulture = i18n.language;
 
-  const message = searchParams.get("message");
-  const confirmedEmail = searchParams.get("confirmedEmail");
-  const authError = searchParams.get("authError");
-  const referenceUrl = searchParams.get("referenceUrl");
-  const loginData = searchParams.get("loginData");
-  const linkData = searchParams.get("linkData");
-  const isPublicAuth = searchParams.get("publicAuth");
+  const message = searchParams?.get("message");
+  const authError = searchParams?.get("authError");
+  const referenceUrl = searchParams?.get("referenceUrl");
+  const loginData = searchParams?.get("loginData") ?? null;
+  const linkData = searchParams?.get("linkData");
+  const isPublicAuth = searchParams?.get("publicAuth");
+  const passwordChanged = searchParams?.get("passwordChanged");
 
   const isDesktop =
-    typeof window !== "undefined" && window["AscDesktopEditor"] !== undefined;
+    typeof window !== "undefined" && window.AscDesktopEditor !== undefined;
 
   const [emailFromInvitation, setEmailFromInvitation] = useState(
     getEmailFromInvitation(loginData),
@@ -217,34 +219,45 @@ const LoginForm = ({
 
   useEffect(() => {
     message && setErrorText(message);
-    confirmedEmail && setIdentifier(confirmedEmail);
+    const confirmedData = sessionStorage?.getItem("confirmedData");
+    let email;
 
-    const messageEmailConfirmed = t("MessageEmailConfirmed");
-    const messageAuthorize = t("MessageAuthorize");
+    if (confirmedData) {
+      email = JSON.parse(atob(confirmedData));
+      setIdentifier(email);
+      sessionStorage.removeItem("confirmedData");
+    }
 
-    const text = `${messageEmailConfirmed} ${messageAuthorize}`;
+    if (email && ready && !emailConfirmedToastShown.current) {
+      const messageEmailConfirmed = t("MessageEmailConfirmed");
+      const messageAuthorize = t("MessageAuthorize");
+      const text = `${messageEmailConfirmed} ${messageAuthorize}`;
 
-    if (
-      confirmedEmail &&
-      ready &&
-      !toastr.isActive(toastId.current || "confirm-email-toast")
-    )
-      toastId.current = toastr.success(text);
-  }, [message, confirmedEmail, t, ready, authCallback]);
+      toastr.success(text);
+      emailConfirmedToastShown.current = true;
+    }
+  }, [message, t, ready, authCallback]);
 
-  const onChangeLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //console.log("onChangeLogin", e.target.value);
-    setIdentifier(e.target.value);
-    setIsEmailErrorShow(false);
-    onClearErrors();
-  };
+  useEffect(() => {
+    if (passwordChanged && ready && !passwordChangedToastShown.current) {
+      toastr.success(t("ChangePasswordSuccess"));
+      passwordChangedToastShown.current = true;
+    }
+  }, [passwordChanged, t, ready]);
 
   const onClearErrors = () => {
     if (!passwordValid) setPasswordValid(true);
   };
 
+  const onChangeLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // console.log("onChangeLogin", e.target.value);
+    setIdentifier(e.target.value);
+    setIsEmailErrorShow(false);
+    onClearErrors();
+  };
+
   const onSubmit = useCallback(async () => {
-    //errorText && setErrorText("");
+    // errorText && setErrorText("");
     let captchaToken: string | undefined | null = "";
 
     if (reCaptchaPublicKey && isCaptcha) {
@@ -259,7 +272,8 @@ const LoginForm = ({
 
     let hasError = false;
 
-    const user = identifier.trim();
+    const user =
+      typeof identifier === "string" ? identifier.trim() : identifier[0].trim();
 
     if (!user) {
       hasError = true;
@@ -302,22 +316,16 @@ const LoginForm = ({
     const session = !isChecked;
 
     if (client?.isPublic && hash) {
-      const region = oauthUrl?.replace("identity", "");
-      console.log(region);
-      const portals = await getAvailablePortals(
-        {
-          Email: user,
-          PasswordHash: hash,
-          recaptchaResponse: captchaToken,
-          recaptchaType: reCaptchaType,
-        },
-        region,
-      );
+      const portals = await getAvailablePortals({
+        Email: user,
+        PasswordHash: hash,
+        recaptchaResponse: captchaToken,
+        recaptchaType: reCaptchaType,
+      });
 
       if (portals.error) {
         const error = portals;
 
-        console.log(error);
         let errorMessage = "";
         if (typeof error === "object") {
           errorMessage =
@@ -354,7 +362,7 @@ const LoginForm = ({
             ? portals[0].portalName
             : `${portals[0].portalName}.${baseDomain}`;
 
-        let redirectUrl = getCookie("x-redirect-authorization-uri");
+        let redirectUrl = getRedirectURL();
         let portalLink = portals[0].portalLink;
 
         const isLocalhost = name === "http://localhost";
@@ -372,15 +380,15 @@ const LoginForm = ({
         return;
       }
 
-      const searchParams = new URLSearchParams();
+      const newSearchParams = new URLSearchParams();
 
       const portalsString = JSON.stringify({ portals });
 
-      searchParams.set("clientId", client.clientId);
+      newSearchParams.set("clientId", client.clientId);
 
       sessionStorage.setItem("tenant-list", portalsString);
 
-      router.push(`/tenant-list?${searchParams.toString()}`);
+      router.push(`/tenant-list?${newSearchParams.toString()}`);
 
       setIsLoading(false);
       return;
@@ -388,8 +396,12 @@ const LoginForm = ({
 
     login(user, hash, pwd, session, captchaToken, currentCulture, reCaptchaType)
       .then(async (res: string | object) => {
-        const redirectUrl = getCookie("x-redirect-authorization-uri");
+        let redirectUrl = getCookie("x-redirect-authorization-uri");
         if (clientId && redirectUrl) {
+          redirectUrl = window.atob(
+            redirectUrl!.replace(/-/g, "+").replace(/_/g, "/"),
+          );
+
           window.location.replace(redirectUrl);
 
           return;
@@ -404,7 +416,8 @@ const LoginForm = ({
         return res;
       })
       .then(async (res: string | object | undefined) => {
-        const tfaIsEnabled = typeof res === "string" ? true : res?.tfa;
+        const tfaIsEnabled =
+          typeof res === "string" ? true : (res as { tfa?: boolean })?.tfa;
 
         if (isPublicAuth && !tfaIsEnabled) {
           localStorage.setItem(PUBLIC_STORAGE_KEY, "true");
@@ -429,11 +442,19 @@ const LoginForm = ({
           return;
         }
 
-        if (typeof res === "string")
-          window.location.replace(
-            `${res}&linkData=${linkData}&publicAuth=${isPublicAuth}`,
-          );
-        else window.location.replace("/"); //TODO: save { user, hash } for tfa
+        if (typeof res === "string") {
+          let redirectUrl = `${res}`;
+
+          if (linkData) {
+            redirectUrl += `&linkData=${linkData}`;
+          }
+
+          if (isPublicAuth) {
+            redirectUrl += `&publicAuth=${isPublicAuth}`;
+          }
+
+          window.location.replace(redirectUrl);
+        } else window.location.replace("/"); // TODO: save { user, hash } for tfa
       })
       .catch((error) => {
         let errorMessage = "";
@@ -477,7 +498,6 @@ const LoginForm = ({
     reCaptchaType,
     isCaptchaSuccessful,
     linkData,
-    oauthUrl,
     router,
     baseDomain,
     clientId,
@@ -516,7 +536,7 @@ const LoginForm = ({
       return t("Common:RequiredField");
     }
     if (emailFromInvitation) {
-      return errorText ? t(`Common:${errorText}`) : t("Common:RequiredField");
+      return errorText || t("Common:RequiredField");
     }
   };
 
@@ -543,29 +563,33 @@ const LoginForm = ({
     }
   };
 
-  const passwordErrorMessage = errorMessage();
+  const passwordErrorMessage = errorMessage() || "";
 
   return (
     <form className="auth-form-container">
-      {!emailFromInvitation && !client && (
+      {!emailFromInvitation && !client ? (
         <Text fontSize="16px" fontWeight="600" className="sign-in-subtitle">
           {t("Common:LoginButton")}
         </Text>
-      )}
+      ) : null}
 
-      {client && (
+      {client ? (
         <OAuthClientInfo
           name={client.name}
           logo={client.logo}
           websiteUrl={client.websiteUrl}
         />
-      )}
+      ) : null}
 
       <EmailContainer
-        emailFromInvitation={emailFromInvitation}
+        emailFromInvitation={
+          typeof emailFromInvitation === "string"
+            ? emailFromInvitation
+            : emailFromInvitation[0]
+        }
         isEmailErrorShow={isEmailErrorShow}
         errorText={errorText}
-        identifier={identifier}
+        identifier={typeof identifier === "string" ? identifier : identifier[0]}
         isLoading={isLoading}
         onChangeLogin={onChangeLogin}
         onBlurEmail={onBlurEmail}
@@ -576,7 +600,11 @@ const LoginForm = ({
       />
       <PasswordContainer
         isLoading={isLoading}
-        emailFromInvitation={emailFromInvitation}
+        emailFromInvitation={
+          typeof emailFromInvitation === "string"
+            ? emailFromInvitation
+            : emailFromInvitation[0]
+        }
         passwordValid={passwordValid}
         passwordErrorMessage={passwordErrorMessage}
         password={password}
@@ -585,19 +613,19 @@ const LoginForm = ({
       <ForgotContainer
         cookieSettingsEnabled={cookieSettingsEnabled}
         isChecked={isChecked}
-        identifier={identifier}
+        identifier={typeof identifier === "string" ? identifier : identifier[0]}
         onChangeCheckbox={onChangeCheckbox}
       />
 
-      {ldapDomain && ldapEnabled && (
+      {ldapDomain && ldapEnabled ? (
         <LDAPContainer
           ldapDomain={ldapDomain}
           isLdapLoginChecked={isLdapLoginChecked}
           onChangeLdapLoginCheckbox={onChangeLdapLoginCheckbox}
         />
-      )}
+      ) : null}
 
-      {reCaptchaPublicKey && isCaptcha && (
+      {reCaptchaPublicKey && isCaptcha ? (
         <StyledCaptcha isCaptchaError={isCaptchaError}>
           <div className="captcha-wrapper">
             {reCaptchaType === RecaptchaType.hCaptcha ? (
@@ -617,11 +645,11 @@ const LoginForm = ({
               />
             )}
           </div>
-          {isCaptchaError && (
+          {isCaptchaError ? (
             <Text>{t("Errors:LoginWithBruteForceCaptcha")}</Text>
-          )}
+          ) : null}
         </StyledCaptcha>
-      )}
+      ) : null}
       <Button
         id="login_submit"
         className="login-button"
@@ -635,6 +663,7 @@ const LoginForm = ({
         isDisabled={isLoading}
         isLoading={isLoading}
         onClick={onSubmit}
+        testId="login_button"
       />
     </form>
   );

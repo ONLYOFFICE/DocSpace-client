@@ -1,0 +1,70 @@
+@use "../../../styles/mixins";
+
+.container {
+  margin: 0;
+  max-width: 210px;
+  padding-block: 0;
+  padding-inline: 0 20px;
+
+  @include mixins.tablet-and-below {
+    padding-block: 0;
+    padding-inline: 16px;
+    box-sizing: border-box;
+    width: 240px;
+
+    &[data-show-text="false"] {
+      width: 52px;
+      padding-block: 10px;
+      padding-inline: 12px 16px;
+    }
+  }
+
+  @include mixins.mobile {
+    width: 100%;
+    padding: 0 16px;
+    box-sizing: border-box;
+  }
+}
+
+.block {
+  margin: 0;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+
+  @include mixins.tablet-and-below {
+    margin-bottom: 24px;
+  }
+
+  :global(.article-folder-loader) {
+    @include mixins.tablet-and-below {
+      width: 200px;
+    }
+  }
+
+  &[data-show-text="false"] {
+    :global(.article-folder-loader) {
+      @include mixins.tablet-and-below {
+        width: 20px;
+      }
+    }
+  }
+}
+
+.rectangle {
+  height: 20px;
+  width: 210px;
+  padding: 0 0 16px;
+
+  @include mixins.tablet-and-below {
+    height: 20px;
+    padding: 0 0 24px;
+  }
+
+  @include mixins.mobile {
+    width: 100%;
+    padding: 0 0 24px;
+  }
+}

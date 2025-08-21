@@ -1,0 +1,274 @@
+{
+  "key_path": "CustomDomains",
+  "content": "Custom domains",
+  "content_en_sha1_hash": "b18c921ec5318c9e2ce5dfcd1e4ec6b536183c22",
+  "created_at": "2025-05-19T21:30:50.996Z",
+  "updated_at": "2025-08-04T07:30:01.555Z",
+  "comment": {
+    "text": "This translation key controls the label and value displayed for custom domain options on a portal settings page. It appears as a dropdown or select field in the UI where users can choose between \"All Domains\" or \"Custom Domains\".",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:29.161Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/trustedMail.js",
+      "line_number": 270,
+      "context": "value: \"2\",\n dataTestId: \"trusted_mail_any_domains\",\n },\n {\n id: \"custom-domains\",\n label: t(\"CustomDomains\"),\n value: \"1\",\n dataTestId: \"trusted_mail_custom_domains\",\n },\n ]}\n selected={type}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"İstifadəçi domenləri\" while technically meaning 'user domains', doesn't accurately convey the meaning of 'Custom domains'. 'Custom domains' implies domains configured by the user, not just any user domain. A more appropriate translation would capture the 'custom' aspect.",
+          "suggestion": "Xüsusi domenlər"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Προσαρμοσμένα domain\" while technically understandable, isn't the most natural or accurate translation of \"Custom domains\". \"Προσαρμοσμένα domain\" is a direct translation and sounds a bit clunky. A more idiomatic translation might be \"Δυναμικά domains\" or \"Εξατομικευμένα domains\".",
+          "suggestion": "Consider using \"Δυναμικά domains\" or \"Εξατομικευμένα domains\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation \"Käytössä\" translates to \"In use\" or \"Enabled,\" not \"Custom domains.\" It doesn't accurately reflect the English meaning.",
+          "suggestion": "A more accurate translation for \"Custom domains\" would be something like \"Mukautetut verkkotunnukset\" or \"Omat verkkotunnukset\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Domaines autorisés' is a literal translation, but it doesn't fully capture the meaning of 'Custom Domains' in a technical context. 'Domaines personnalisés' would be a more accurate translation, or 'Domaines définis par l'utilisateur'. 'Autorisés' implies a permission granted, whereas 'custom' implies a user-defined configuration.",
+          "suggestion": "Domaines personnalisés"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Հարմարեցնել տիրույթները' while literally meaning 'Adapt domains' doesn't accurately convey the meaning of 'Custom domains' which refers to user-defined domains. A better translation would emphasize user control or personalization.",
+          "suggestion": "Possible alternatives include: Թույլտվություն տված դոմեիններ (Authorized domains), Պատվաստված դոմեիններ (Registered domains), Կազմավորված դոմեիններ (Configured domains), or Օգտագործողի դոմեիններ (User domains)."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ກຳນົດເອງ ໂດເມນ\" is a literal translation of \"custom domains\" and doesn't convey the intended meaning. 'ກຳນົດເອງ' means 'defined by oneself' or 'customized' which doesn't accurately reflect the concept of custom domains used in a technical context.",
+          "suggestion": "A more accurate translation would be something along the lines of \"ໂດເມນທີ່ກຳນົດໄວ້\" (domains that are specified) or \"ໂດເມນຕາມຄວາມຕ້ອງການ\" (domains according to requirements)."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Pielāgota domēnu' is not grammatically correct in Latvian. 'Pielāgoti domēni' would be the correct plural form.",
+          "suggestion": "Pielāgoti domēni"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Domeniu particularizat\" is a possible translation, it's not the most common or natural rendering of 'Custom domains' in Romanian. 'Domenii personalizate' would be a more accurate and idiomatic translation.",
+          "suggestion": "Domenii personalizate"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"අභිරුචි වසම්\" does not accurately convey the meaning of \"Custom domains\". \"අභිරුචි\" means \"custom\" or \"personalized\", but \"වසම්\" is not the correct term for \"domains\". It seems to be a combination of words and not a standard Sinhala term.",
+          "suggestion": "A more accurate translation would be something like \"ප්‍රවේශක ඩොමේනුවන්\" (Pravesaka Domenaun) or \"අපේක්ෂිත ඩොමේනුවන්\" (Apekshitha Domenaun), but ideally, a review with a localization expert is recommended for the best fit."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Прилагођени домени' while understandable, isn't the most natural or commonly used translation for 'Custom domains' in Serbian (Cyrillic). A better translation would be 'Кориснички домени'.",
+          "suggestion": "Кориснички домени"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Ukrainian translation \"Дозволити вхід з довірених доменів\" translates to \"Allow access from trusted domains\". This is not a direct or accurate translation of \"Custom domains\". It describes a function, not the term itself.",
+          "suggestion": "A more accurate translation would be something closer to \"Власні домени\" or \"Користувацькі домени\", or \"Налаштування доменів\" depending on the context."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

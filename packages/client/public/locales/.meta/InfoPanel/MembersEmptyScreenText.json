@@ -1,0 +1,255 @@
+{
+  "key_path": "MembersEmptyScreenText",
+  "content": "See members details here",
+  "content_en_sha1_hash": "23f43b022112800cc997699f5494d86bfa2edabc",
+  "created_at": "2025-05-19T21:30:54.894Z",
+  "updated_at": "2025-08-04T07:30:01.204Z",
+  "comment": {
+    "text": "This translation key is used to display a message when there are no members to show on an empty screen. It appears as a centered text in the \"No Contacts Item\" component, providing users with guidance on what they can see.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:52.653Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/NoItem/NoContactsItem.tsx",
+      "line_number": 61,
+      "context": "<Text className=\"no-item-text\" textAlign=\"center\">\n {isGuests\n ? t(\"InfoPanel:GuestsEmptyScreenText\")\n : isGroups\n ? t(\"InfoPanel:GroupsEmptyScreenText\")\n : t(\"InfoPanel:MembersEmptyScreenText\")}\n </Text>\n </div>\n );\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Üzvlərin məlumatlarına burada baxın' is a literal translation but sounds unnatural in Azerbaijani. A more natural phrasing would be closer to 'Burada üzvlərin məlumatlarını görə bilərsiniz' or 'Üzvlərin məlumatları burada yerləşdirilib'.",
+          "suggestion": "Burada üzvlərin məlumatlarını görə bilərsiniz"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is overly verbose and not idiomatic for a button/link text. \"をクリックしてご覧ください\" (click here to see) is clunky and not how a native speaker would phrase it for this context.",
+          "suggestion": "メンバー詳細はこちら"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation includes a full sentence with punctuation, which might not be ideal for a compact UI element like a button or link. A shorter, more concise phrase is preferable.",
+          "suggestion": "メンバー詳細はこちら"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'members' is translated as 'hóspedes', which means 'guests'. 'Members' refers to people who are part of a group or organization, not necessarily guests.",
+          "suggestion": "Consider a more accurate translation like 'Veja os detalhes dos membros aqui' or 'Consulte os detalhes dos participantes aqui'."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Detaliile membrilor aici' is a literal translation and sounds unnatural in Romanian. A more natural phrasing would be 'Vezi detaliile membrilor' or 'Aici găsești detalii despre membri'.",
+          "suggestion": "Vezi detaliile membrilor"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Здесь будут представлены подробности об участниках\" is a bit too formal for a screen displaying an empty state. It implies a future action rather than describing the current state. The English 'See members details here' is simpler and more direct.",
+          "suggestion": "Consider a more direct translation like \"Здесь будут участники\" or \"Здесь появятся участники\" (Here will be members/Here members will appear), or \"Пока здесь нет участников\" (Currently there are no members here)."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'මෙසේ සාමාජික විස්තර බලන්න:' is a literal translation that doesn't quite convey the intended meaning of \"See members details here.\" A more natural Sinhala phrasing would be more appropriate. 'මෙසේ' (mese) means 'this way' which is not the intended meaning in the context of an empty list.",
+          "suggestion": "Consider a more natural phrasing like ' සාමාජිකයන් මෙහි ඇතිවන විට බලන්න' (Samaajikayan meh eathi wethawa danne watune bailanna) - meaning 'See details when members are available here'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Tu nájdete podrobnosti o členoch' is a literal translation, but it doesn't convey the same meaning as 'See members details here'. It sounds more formal and less inviting. A more natural and user-friendly translation would be something like 'Pozrite si detaily členov' or 'Zobraziť detaily členov'.",
+          "suggestion": "Pozrite si detaily členov"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

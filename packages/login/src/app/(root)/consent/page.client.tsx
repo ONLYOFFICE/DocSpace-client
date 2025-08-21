@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,7 +31,7 @@ import styled from "styled-components";
 import { useTranslation, Trans } from "react-i18next";
 import { useRouter } from "next/navigation";
 
-import ScopeList from "@docspace/shared/utils/oauth/ScopeList";
+import { ScopeList } from "@docspace/shared/utils/oauth/scope-list";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
@@ -40,12 +40,21 @@ import {
   AvatarRole,
   AvatarSize,
 } from "@docspace/shared/components/avatar";
-import { deleteCookie } from "@docspace/shared/utils/cookie";
+import {
+  getOAuthJWTSignature,
+  setOAuthJWTSignature,
+} from "@docspace/shared/api/oauth";
+import {
+  getCookie,
+  deleteCookie,
+  setCookie,
+} from "@docspace/shared/utils/cookie";
 import { IClientProps, TScope } from "@docspace/shared/utils/oauth/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import api from "@docspace/shared/api";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
+import { getRedirectURL } from "@/utils";
 import OAuthClientInfo from "../../../components/ConsentInfo";
 
 const StyledButtonContainer = styled.div`
@@ -99,6 +108,44 @@ const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
   const [isAllowRunning, setIsAllowRunning] = React.useState(false);
   const [isDenyRunning, setIsDenyRunning] = React.useState(false);
 
+  React.useEffect(() => {
+    const redirect_url = getCookie("x-redirect-authorization-uri");
+    if (!redirect_url) return;
+
+    // Your cookie processing logic here
+    const decodedRedirectUrl = window.atob(
+      redirect_url.replace(/-/g, "+").replace(/_/g, "/"),
+    );
+
+    deleteCookie("x-redirect-authorization-uri");
+    const splitedURL = decodedRedirectUrl.split("&scope=");
+    if (splitedURL[1])
+      setCookie("x-scopes", splitedURL[1].split("%20").join(";"));
+    setCookie("x-url", splitedURL[0]);
+  }, []);
+
+  React.useEffect(() => {
+    const validateToken = async () => {
+      if (!user.id) return;
+
+      const token = getOAuthJWTSignature(user.id);
+
+      if (token) return;
+
+      await setOAuthJWTSignature(user.id);
+
+      const redirect_url = getRedirectURL();
+
+      if (!redirect_url) {
+        return;
+      }
+
+      window.location.replace(redirect_url);
+    };
+
+    validateToken();
+  }, [user.id]);
+
   const onAllowClick = async () => {
     if (!("clientId" in client)) return;
 
@@ -119,7 +166,7 @@ const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
         clientState = c.replace("client_state=", "").trim();
     });
 
-    await api.oauth.onOAuthSubmit(clientId, clientState, scope);
+    await api.oauth.onOAuthSubmit(clientId, clientState, scope, user.id);
 
     setIsAllowRunning(false);
   };
@@ -144,7 +191,7 @@ const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
 
     deleteCookie("client_state");
 
-    await api.oauth.onOAuthCancel(clientId, clientState);
+    await api.oauth.onOAuthCancel(clientId, clientState, user.id);
 
     setIsDenyRunning(false);
   };
@@ -187,6 +234,7 @@ const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
           primary
           isDisabled={isDenyRunning}
           isLoading={isAllowRunning}
+          testId="consent_allow_button"
         />
         <Button
           onClick={onDenyClick}
@@ -195,31 +243,34 @@ const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
           scale
           isDisabled={isAllowRunning}
           isLoading={isDenyRunning}
+          testId="consent_deny_button"
         />
       </StyledButtonContainer>
       <StyledDescriptionContainer>
-        <Text fontWeight={400} fontSize={"13px"} lineHeight={"20px"}>
+        <Text fontWeight={400} fontSize="13px" lineHeight="20px">
           <Trans t={t} i18nKey="ConsentDescription" ns="Consent">
             Data shared with {{ displayName: user.displayName }} will be
             governed by {{ nameApp: client.name }}
             <Link
-              className={"login-link"}
+              className="login-link"
               type={LinkType.page}
               isHovered={false}
               href={client.policyUrl}
               target={LinkTarget.blank}
               noHover
+              dataTestId="privacy_policy_link"
             >
               privacy policy
             </Link>
             and
             <Link
-              className={"login-link"}
+              className="login-link"
               type={LinkType.page}
               isHovered={false}
               href={client.termsUrl}
               target={LinkTarget.blank}
               noHover
+              dataTestId="terms_of_service_link"
             >
               terms of service
             </Link>
@@ -236,16 +287,17 @@ const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
             source={user.avatarSmall || ""}
           />
           <div className="user-info">
-            <Text lineHeight={"20px"}>
+            <Text lineHeight="20px">
               {t("SignedInAs")} {user.email}
             </Text>
             <Link
-              className={"login-link"}
+              className="login-link"
               type={LinkType.action}
               isHovered={false}
               noHover
-              lineHeight={"20px"}
+              lineHeight="20px"
               onClick={onChangeUserClick}
+              dataTestId="not_you_link"
             >
               {t("NotYou")}
             </Link>

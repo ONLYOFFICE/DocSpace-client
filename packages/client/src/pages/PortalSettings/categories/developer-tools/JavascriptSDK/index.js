@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { withTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 import { inject, observer } from "mobx-react";
 
@@ -49,7 +49,7 @@ import EditorImgDark from "PUBLIC_DIR/images/sdk-presets_editor_dark.react.svg?u
 import ViewerImgDark from "PUBLIC_DIR/images/sdk-presets_viewer_dark.react.svg?url";
 import CustomImgDark from "PUBLIC_DIR/images/sdk-presets_custom_dark.react.svg?url";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import { Integration } from "./sub-components/Integration";
+import Integration from "./sub-components/Integration";
 import PresetTile from "./sub-components/PresetTile";
 import CSP from "./sub-components/csp";
 
@@ -111,13 +111,13 @@ const PortalIntegration = (props) => {
       handleOnClick: navigateToViewer,
     },
     {
-      title: t("RoomSelector"),
+      title: t("Common:RoomSelector"),
       description: t("RoomSelectorDescription"),
       image: theme.isBase ? RoomSelectorImg : RoomSelectorImgDark,
       handleOnClick: navigateToRoomSelector,
     },
     {
-      title: t("FileSelector"),
+      title: t("Common:FileSelector"),
       description: t("FileSelectorDescription"),
       image: theme.isBase ? FileSelectorImg : FileSelectorImgDark,
       handleOnClick: navigateToFileSelector,
@@ -163,6 +163,7 @@ const PortalIntegration = (props) => {
           color={currentColorScheme?.main?.accent}
           fontSize="13px"
           fontWeight="400"
+          dataTestId="sdk_api_library_link"
           onClick={() => window.open(sdkLink, "_blank")}
         >
           {" "}
@@ -185,14 +186,11 @@ const PortalIntegration = (props) => {
             description={data.description}
             image={data.image}
             handleOnClick={data.handleOnClick}
+            dataTestId={`sdk_preset_${data.title}_container`}
           />
         ))}
       </PresetsContainer>
-      <Integration
-        t={t}
-        theme={theme}
-        currentColorScheme={currentColorScheme}
-      />
+      <Integration />
     </SDKContainer>
   );
 };

@@ -1,0 +1,226 @@
+{
+  "key_path": "ProviderLoginError",
+  "content": "Authorization error",
+  "content_en_sha1_hash": "14a7e84261230bbb4b1ed8b2fc1a0afddf92688d",
+  "created_at": "2025-05-19T21:30:47.577Z",
+  "updated_at": "2025-06-30T12:20:31.674Z",
+  "comment": {
+    "text": "The \"ProviderLoginError\" translation key is used to display an error message when a user attempts to log in through a provider that has failed authorization. This error message appears on screen after an invalid login attempt and informs the user of the issue. It is displayed in a notification dialog box, typically triggered by an error caught during the login process.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:34:53.992Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/login/src/components/LoginForm/index.tsx",
+      "line_number": 198,
+      "context": "window.location.replace(\"/\");\n }\n } catch (e) {\n toastr.error(\n t(\"Common:ProviderNotConnected\"),\n t(\"Common:ProviderLoginError\"),\n );\n }\n },\n [t, referenceUrl, currentCulture, isPublicAuth],\n );",
+      "module": "/packages/login"
+    },
+    {
+      "file_path": "/packages/login/src/components/LoginForm/index.tsx",
+      "line_number": 198,
+      "context": "window.location.replace(\"/\");\n }\n } catch (e) {\n toastr.error(\n t(\"Common:ProviderNotConnected\"),\n t(\"Common:ProviderLoginError\"),\n );\n }\n },\n [t, referenceUrl, currentCulture, isPublicAuth],\n );",
+      "module": "/packages/login"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'බලය දීමේ දෝෂයකි' (balaya dime doyayakiki) is a literal translation of 'Authorization error,' it's not the most natural or commonly used phrasing in Sinhala. A more suitable translation would convey the meaning more clearly and accurately for a user experience.",
+          "suggestion": "සරල ක්‍රියාදායකයාකමැරියාවකි (sarala kriyadakayakameariyawakiki) - This translates to 'Simple action failure' or 'Basic action error' and is more commonly used in technical contexts. Alternatively, 'අවසරයකමැරියාවකි' (awasayakameariyawakiki) - 'Authorization failure' can be used which is more direct."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Greška u ovlašćenju\" is a literal translation of 'Authorization error,' it's not the most natural or idiomatic phrasing in Serbian. A more common and clearer translation would be 'Greška u autorizaciji' or 'Problem sa autorizacijom'.",
+          "suggestion": "Greška u autorizaciji"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

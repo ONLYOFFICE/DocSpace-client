@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,15 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import FilterReactSvrUrl from "PUBLIC_DIR/images/filter.react.svg?url";
-
-import { IconButton } from "../../icon-button";
-import { ColorTheme, ThemeId } from "../../color-theme";
 
 import { FilterButtonProps } from "../Filter.types";
-import { StyledButton } from "../Filter.styled";
 
 import FilterBlock from "./FilterBlock";
+import FilterIcon from "./FilterIcon";
 
 const FilterButton = ({
   onFilter,
@@ -60,19 +56,16 @@ const FilterButton = ({
 
   return (
     <>
-      <StyledButton
+      <FilterIcon
         id={id}
-        isOpen={showFilterBlock}
-        onClick={changeShowFilterBlock}
         title={title}
-      >
-        <IconButton iconName={FilterReactSvrUrl} size={16} />
-        {selectedFilterValue && selectedFilterValue.length > 0 && (
-          <ColorTheme themeId={ThemeId.IndicatorFilterButton} />
-        )}
-      </StyledButton>
-
-      {showFilterBlock && (
+        onClick={changeShowFilterBlock}
+        isOpen={showFilterBlock}
+        isShowIndicator={
+          selectedFilterValue ? selectedFilterValue.size > 0 : false
+        }
+      />
+      {showFilterBlock ? (
         <FilterBlock
           filterHeader={filterHeader}
           selectedFilterValue={selectedFilterValue}
@@ -89,7 +82,7 @@ const FilterButton = ({
           userId={userId}
           disableThirdParty={disableThirdParty}
         />
-      )}
+      ) : null}
     </>
   );
 };

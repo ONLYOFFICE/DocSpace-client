@@ -1,7 +1,6 @@
 {
   "DeleteAllGroupDescription": "Atlasītās grupas tiks izdzēstas. Grupu lietotāji netiks noņemti no {{productName}}. Vai tiešām vēlaties turpināt?",
   "DeleteAllGroupsTitle": "Izdzēst grupas",
-  "DeleteFile": "Jūs gatavojaties izdzēst šo failu. ",
   "DeleteFolder": "Jūs gatavojaties izdzēst šo mapi. ",
   "DeleteGroupDescription": "Grupa {{groupName}} tiks izdzēsta. Grupu lietotāji netiks noņemti no {{productName}}. Vai tiešām vēlaties turpināt?",
   "DeleteGroupTitle": "Izdzēst grupu",
@@ -10,11 +9,10 @@
   "DeleteRoom": "Jūs gatavojaties izdzēst šo telpu. Jūs nevarēsiet to atjaunot.",
   "DeleteRooms": "Jūs gatavojaties izdzēst šīs telpas. Jūs nevarēsiet tos atjaunot.",
   "DeleteSharedNote": "Ņemiet vērā: ja tos kopīgojāt ar kādu, tas kļūs nepieejams.",
-  "FilePermanentlyDeleted": "Fails tiks neatgriezeniski izdzēsts 30 dienu laikā.",
+  "DeleteTemplate": "Vai tiešām vēlaties dzēst veidnes telpu <1>«{{templateName}}»</1>? Veidni nevar atjaunot.",
+  "DeleteTemplates": "Vai tiešām vēlaties dzēst atlasītās telpu veidnes? Tās nevar atjaunot.",
   "FolderPermanentlyDeleted": "Mape tiks neatgriezeniski izdzēsta 30 dienu laikā.",
   "ItemsPermanentlyDeleted": "Vienumi tiks neatgriezeniski izdzēsti 30 dienu laikā.",
-  "MoveToTrashButton": "Pārvietot uz miskasti",
-  "MoveToTrashTitle": "Izdzēst?",
   "UnsubscribeButton": "Anulēt abonementu",
   "UnsubscribeNote": "Vai tiešām vēlaties atteikties no sarakstā atlasīto vienumu abonēšanas?",
   "UnsubscribeTitle": "Abonēšanas atcelšanas apstiprinājums"

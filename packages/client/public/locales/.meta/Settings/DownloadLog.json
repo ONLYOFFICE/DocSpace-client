@@ -1,0 +1,339 @@
+{
+  "key_path": "DownloadLog",
+  "content": "Download log",
+  "content_en_sha1_hash": "97b1248a2147299746e5cc6dae4da0ceebc6b304",
+  "created_at": "2025-05-19T21:30:51.443Z",
+  "updated_at": "2025-08-11T09:02:43.945Z",
+  "comment": {
+    "text": "This translation key is used to describe the \"Download Log\" button in a file import completion step, prompting users to download log data. It appears on a cancel button and is meant to provide visual clarity for translators to ensure accurate rendering of this specific label.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:14.585Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportCompleteStep.tsx",
+      "line_number": 180,
+      "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onFinishClick}\n onCancelClick={onDownloadLog}\n saveButtonLabel={t(\"Common:Finish\")}\n cancelButtonLabel={t(\"Settings:DownloadLog\")}\n displaySettings\n showReminder\n saveButtonDataTestId=\"finish_import_button\"\n cancelButtonDataTestId=\"download_log_button\"\n />",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Gündəliyi endirin\" doesn't accurately reflect \"Download log\". \"Gündəliyi\" means \"the diary\" or \"the journal\", and \"endirin\" means \"download it\". The correct translation should convey the meaning of a log file related to downloads.",
+          "suggestion": "Yükləmə qeydləri"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Stáhnout protokol\" literally translates to \"Download protocol\". \"Download log\" typically refers to a record of downloads, not the act of downloading a protocol. A more accurate translation would capture the meaning of a 'log file' related to downloads.",
+          "suggestion": "Stáhnout záznamy"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Log herunterladen' literally means 'Download log'. While understandable, it doesn't accurately convey the meaning of 'Download log' which refers to a record of downloads. A more accurate translation would be something like 'Download-Protokoll' or 'Herunterladeprotokoll'.",
+          "suggestion": "Download-Protokoll"
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Λήψη αρχείου καταγραφής\" is too literal and verbose. \"Download log\" generally refers to a record of downloads, not the act of downloading a log file. A more accurate and natural translation would be something like \"Καταγραφή λήψεων\" or \"Αρχείο λήψεων\".",
+          "suggestion": "Καταγραφή λήψεων"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Descargar registro\" is not the most natural or accurate translation of \"Download log\". \"Registro de descargas\" or \"Registro de descarga\" would be more appropriate.",
+          "suggestion": "Registro de descargas"
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Lataa loki' is understandable, a more accurate and idiomatic translation of 'Download log' would be 'Latausloki'. 'Loki' in this context refers to the log file itself, and combining 'lataus' (download) with 'loki' creates a natural compound word.",
+          "suggestion": "Latausloki"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Télécharger le journal\" literally translates to \"Download the log.\" While understandable, it's not the most natural or accurate translation of 'Download log' in a settings context.  It implies downloading *a* log, rather than referring to the log itself.",
+          "suggestion": "Journal de téléchargement"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Ներբեռնման մատյան\" is a literal translation of \"Download log,\" it might not be the most natural or idiomatic way to express the concept in Armenian. \"Մատյան\" often implies a physical ledger or book. A more common term for a log file might be \"ներբեռնումների գրանցում\" or \"ներբեռնման գրանցում\" which translates to 'downloads record'.",
+          "suggestion": "Consider using \"ներբեռնումների գրանցում\" or \"ներբեռնման գրանցում\" for a more natural translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Scarica registro\" is not the most accurate or natural-sounding translation of \"Download log\". \"Download\" is better translated as \"Download\" or \"Scaricamento\". \"Registro\" is acceptable, but \"log\" can also be translated as \"registro\", \"diario\", or \"registro\".",
+          "suggestion": "Consider \"Registro Download\" or \"Scaricamento registro\" or \"Registro di download\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation \"로그 다운로드\" literally translates to \"download log\" but the conventional and more natural phrasing for a setting label related to downloading logs would be \"다운로드 기록\" or \"다운로드 기록 보기\". \"로그 다운로드\" sounds awkward and unnatural.",
+          "suggestion": "다운로드 기록"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Rejestr pobranych plików\" is technically correct, it's a bit literal and verbose for a setting label. \"Download log\" typically refers to a record of downloads, not necessarily a list of files themselves. A more natural Polish translation would be \"Dziennik pobierania\" or \"Log pobierania\".",
+          "suggestion": "Dziennik pobierania"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Baixar registro\" is not the most natural or accurate translation of \"Download log\". \"Download\" directly translates to \"Download\" or potentially \"Fazer Download\". \"Registro\" is a valid word, but \"log\" in this context refers to a record or list of events. A more accurate translation would be \"Registro de download\" or \"Log de download\".",
+          "suggestion": "Registro de download"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Baixar registro\" is not the most natural or accurate translation of \"Download log\". \"Baixar\" implies downloading something, while \"registro\" is a general term for record. A more accurate translation would convey the concept of a log file.",
+          "suggestion": "Registro de downloads"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Descărcare jurnal' is not the most natural or accurate translation of 'Download log'. 'Jurnal' implies a diary or notebook. A more appropriate translation would be 'Log descărcări' or 'Jurnal descărcări', though the former is generally preferred.",
+          "suggestion": "Log descărcări"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Скачать журнал' is not an accurate translation of 'Download log'. 'Скачать' means 'to download,' which isn't the main point of a download log. A log is a record, not something that is downloaded.",
+          "suggestion": "A more accurate translation would be 'Журнал загрузок' (Zhurnal zagruzok) which means 'Download log' or 'Log of downloads'."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'සටහන බාගන්න' literally translates to 'get note' or 'download note'. While it conveys the general idea, 'Download log' refers to a record of downloads, which isn't accurately represented.  A more appropriate translation would incorporate the concept of 'record' or 'history'.",
+          "suggestion": "කාන්සන් බාගන්න වාර්තාව"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Stiahnuť log' is a literal translation and doesn't accurately convey the meaning of 'Download log' in this context. 'Stiahnuť' means 'to download' and while technically correct, it's not the most natural phrasing for a setting label. It sounds too active.",
+          "suggestion": "Záznamy sťahovania"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "A more natural and commonly used translation would be 'Záznam sťahovania' or 'Sťahovací záznam', depending on the overall style guide.",
+          "suggestion": "Záznam sťahovania"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Преузми лог\" is not an accurate translation of \"Download log.\" \"Преузми\" means \"download\" but \"лог\" simply means \"log\" and doesn't convey the sense of a 'download log'. A more accurate translation would include a word indicating the log *of* the downloads.",
+          "suggestion": "Преузми лог за преузимања"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Preuzmi log\" is a literal translation of 'Download log' but doesn't convey the intended meaning accurately in Serbian. 'Download log' refers to a record of downloads, not the act of downloading itself.  'Preuzmi' means 'to download'.",
+          "suggestion": "A more accurate translation would be 'Evidencija preuzimanja' or 'Log preuzimanja'."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Завантажити журнал\" literally translates to \"Download journal\". The correct translation for \"Download log\" should be closer to \"Журнал завантажень\" or \"Завантажувальний журнал\". \"Завантажити журнал\" implies a user initiates a download of a journal, not a log file generated by a system.",
+          "suggestion": "Журнал завантажень"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Tải log\" is too literal and doesn't convey the full meaning of \"Download log\" in a natural Vietnamese way. It lacks context and doesn't quite represent the purpose of a download log.",
+          "suggestion": "Nhật ký tải xuống"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

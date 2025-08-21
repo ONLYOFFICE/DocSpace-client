@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,7 @@
 
 import { makeAutoObservable, runInAction } from "mobx";
 import api from "@docspace/shared/api";
-import { FileStatus } from "@docspace/shared/enums";
+import { FileStatus, FileAction } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
 
@@ -47,9 +47,16 @@ class VersionHistoryStore {
 
   isEditing = false;
 
-  constructor(filesStore) {
+  deleteVersionDialogVisible = false;
+
+  versionSelectedForDeletion = null;
+
+  versionDeletionProcess = false;
+
+  constructor(filesStore, filesActionsStore) {
     makeAutoObservable(this);
     this.filesStore = filesStore;
+    this.filesActionsStore = filesActionsStore;
 
     if (this.versions) {
       // TODO: Files store in not initialized on versionHistory page. Need socket.
@@ -103,6 +110,14 @@ class VersionHistoryStore {
     this.versions = versions;
   };
 
+  setVersionSelectedForDeletion = (version) => {
+    this.versionSelectedForDeletion = version;
+  };
+
+  setVersionDeletionProcess = (process) => {
+    this.versionDeletionProcess = process;
+  };
+
   // setFileVersions
   setVerHistoryFileVersions = (versions) => {
     const file = this.filesStore.files.find((item) => item.id == this.fileId);
@@ -131,10 +146,12 @@ class VersionHistoryStore {
     this.versions = versions;
   };
 
-  fetchFileVersions = (fileId, access, requestToken) => {
-    if (this.fileId !== fileId || !this.versions) {
-      this.setVerHistoryFileId(fileId);
-      this.setVerHistoryFileSecurity(access);
+  fetchFileVersions = (fileId, access, requestToken, update) => {
+    if (this.fileId !== fileId || !this.versions || update) {
+      if (!update) {
+        this.setVerHistoryFileId(fileId);
+        this.setVerHistoryFileSecurity(access);
+      }
 
       return api.files
         .getFileVersionInfo(fileId, requestToken)
@@ -150,6 +167,8 @@ class VersionHistoryStore {
   };
 
   restoreVersion = (id, version) => {
+    const { completeAction } = this.filesActionsStore;
+
     this.timerId = setTimeout(() => this.setShowProgressBar(true), 100);
 
     return api.files
@@ -158,6 +177,12 @@ class VersionHistoryStore {
         const updatedVersions = this.versions.slice();
         updatedVersions.unshift(newVersion);
         this.setVerHistoryFileVersions(updatedVersions);
+      })
+      .then(() => {
+        const file = this.filesStore.files.find((x) => x.id === +this.fileId);
+        if (file) {
+          completeAction(file, FileAction.RestoreVersion);
+        }
       })
       .catch((e) => toastr.error(e))
       .finally(() => {
@@ -184,6 +209,10 @@ class VersionHistoryStore {
 
   setShowProgressBar = (show) => {
     this.showProgressBar = show;
+  };
+
+  onSetDeleteVersionDialogVisible = (deleteVersionDialogVisible) => {
+    this.deleteVersionDialogVisible = deleteVersionDialogVisible;
   };
 }
 

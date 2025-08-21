@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -38,68 +38,88 @@ import {
   getSettings,
   getThirdPartyProviders,
   getUserFromConfirm,
+  getInvitationSettings,
+  getUserByEmail,
+  checkConfirmLink,
 } from "@/utils/actions";
+import { logger } from "logger.mjs";
+import { TConfirmLinkParams } from "@/types";
 import CreateUserForm from "./page.client";
 
 type LinkInviteProps = {
-  searchParams: { [key: string]: string };
-  params: { Invite: string };
+  searchParams: Promise<{ [key: string]: string }>;
+  params: Promise<{ Invite: string }>;
 };
 
-async function Page({ searchParams, params }: LinkInviteProps) {
-  if (params.Invite !== "LinkInvite" && params.Invite !== "EmpInvite")
+async function Page(props: LinkInviteProps) {
+  logger.info("Invite page");
+  const { searchParams: sp, params: p } = props;
+  const searchParams = (await sp) as TConfirmLinkParams;
+  const params = await p;
+  if (params.Invite !== "LinkInvite" && params.Invite !== "EmpInvite") {
+    logger.info(`Invite page notFound params.Invite: ${params.Invite}`);
     return notFound();
+  }
 
-  const type = searchParams.type;
+  const type = searchParams.type ?? "";
   const uid = searchParams.uid;
   const confirmKey = getStringFromSearchParams(searchParams);
 
-  const headersList = headers();
+  const headersList = await headers();
   const hostName = headersList.get("x-forwarded-host") ?? "";
 
-  const [settings, user, thirdParty, capabilities, passwordSettings] =
-    await Promise.all([
-      getSettings(),
-      getUserFromConfirm(uid, confirmKey),
-      getThirdPartyProviders(),
-      getCapabilities(),
-      getPortalPasswordSettings(confirmKey),
-    ]);
+  const result = await checkConfirmLink(searchParams);
+
+  const [
+    user,
+    settings,
+    thirdParty,
+    capabilities,
+    passwordSettings,
+    invitationSettings,
+  ] = await Promise.all([
+    uid
+      ? getUserFromConfirm(uid, confirmKey)
+      : result?.email
+        ? getUserByEmail(result?.email, confirmKey)
+        : undefined,
+    getSettings(),
+    getThirdPartyProviders(true),
+    getCapabilities(),
+    getPortalPasswordSettings(confirmKey),
+    getInvitationSettings(),
+  ]);
 
   const settingsCulture =
     typeof settings === "string" ? undefined : settings?.culture;
 
-  const culture = cookies().get(LANGUAGE)?.value ?? settingsCulture;
+  const culture = (await cookies()).get(LANGUAGE)?.value ?? settingsCulture;
 
-  return (
+  return settings && typeof settings !== "string" ? (
     <>
-      {settings && typeof settings !== "string" && (
-        <>
-          <GreetingCreateUserContainer
-            type={type}
-            firstName={user?.firstName}
-            lastName={user?.lastName}
-            culture={culture}
-            hostName={hostName}
-          />
-          <FormWrapper id="invite-form">
-            <CreateUserForm
-              userNameRegex={settings.userNameRegex}
-              passwordHash={settings.passwordHash}
-              firstName={user?.firstName}
-              lastName={user?.lastName}
-              passwordSettings={passwordSettings}
-              capabilities={capabilities}
-              thirdPartyProviders={thirdParty}
-              legalTerms={settings.legalTerms}
-              licenseUrl={settings.licenseUrl}
-              isStandalone={settings.standalone}
-            />
-          </FormWrapper>
-        </>
-      )}
+      <GreetingCreateUserContainer
+        type={type}
+        displayName={user?.displayName}
+        culture={culture}
+        hostName={hostName}
+      />
+      <FormWrapper id="invite-form">
+        <CreateUserForm
+          userNameRegex={settings.userNameRegex}
+          passwordHash={settings.passwordHash}
+          displayName={user?.displayName}
+          passwordSettings={passwordSettings}
+          capabilities={capabilities}
+          thirdPartyProviders={thirdParty}
+          legalTerms={settings.externalResources?.common?.entries?.legalterms}
+          licenseUrl={settings.externalResources?.common?.entries?.license}
+          isStandalone={settings.standalone}
+          logoText={settings.logoText}
+          invitationSettings={invitationSettings}
+        />
+      </FormWrapper>
     </>
-  );
+  ) : null;
 }
 
 export default Page;

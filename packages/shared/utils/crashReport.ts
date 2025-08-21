@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,7 @@
 
 import saveAs from "file-saver";
 import { deviceDetect } from "react-device-detect";
-import type FirebaseHelper from "@docspace/shared/utils/firebase";
+import type FirebaseHelper from "./firebase";
 
 export const getCrashReport = (
   userId: string,
@@ -49,7 +49,7 @@ export const getCrashReport = (
     errorStack: error?.stack,
     localStorage: lsObject,
     reportTime,
-    deviceInfo: deviceDetect(),
+    deviceInfo: deviceDetect(window.navigator.userAgent),
     errorUrl: window.location.href,
   };
 

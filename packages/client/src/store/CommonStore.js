@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -65,6 +65,8 @@ class CommonStore {
 
   greetingSettingsIsDefault = true;
 
+  deepLinkSettings = null;
+
   constructor(settingsStore) {
     this.settingsStore = settingsStore;
     makeAutoObservable(this);
@@ -99,7 +101,9 @@ class CommonStore {
             requests.push(this.getDNSSettings());
           }
           break;
-
+        case "configure-deep-link":
+          requests.push(this.getDeepLinkSettings());
+          break;
         default:
           break;
       }
@@ -109,6 +113,7 @@ class CommonStore {
           requests.push(
             this.settingsStore.getPortalTimezones(),
             this.settingsStore.getPortalCultures(),
+            this.getDeepLinkSettings(),
           );
 
           if (standalone) {
@@ -225,6 +230,11 @@ class CommonStore {
 
   setIsLoaded = (isLoaded) => {
     this.isLoaded = isLoaded;
+  };
+
+  getDeepLinkSettings = async () => {
+    const res = await api.settings.getDeepLinkSettings();
+    this.deepLinkSettings = res?.handlingMode;
   };
 }
 

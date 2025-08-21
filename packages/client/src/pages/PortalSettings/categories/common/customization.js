@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -36,6 +36,8 @@ import { LanguageAndTimeZoneSettings } from "./Customization/language-and-time-z
 import { WelcomePageSettings } from "./Customization/welcome-page-settings";
 import { PortalRenaming } from "./Customization/portal-renaming";
 import { DNSSettings } from "./Customization/dns-settings";
+import { ConfigureDeepLink } from "./Customization/configure-deep-link";
+import { AdManagement } from "./Customization/ad-management";
 import CustomizationNavbar from "./customization-navbar";
 import LoaderDescriptionCustomization from "./sub-components/loaderDescriptionCustomization";
 
@@ -95,6 +97,7 @@ const Customization = (props) => {
     isSettingPaid,
     enablePortalRename,
     resetIsInit,
+    isEnterprise,
   } = props;
 
   const isLoadedSetting = isLoaded && tReady;
@@ -133,28 +136,40 @@ const Customization = (props) => {
       <StyledSettingsSeparator />
       <DNSSettings isMobileView={viewMobile} />
 
-      {enablePortalRename && (
+      {enablePortalRename ? (
         <>
           <StyledSettingsSeparator />
           <PortalRenaming isMobileView={viewMobile} />
         </>
-      )}
+      ) : null}
+      <StyledSettingsSeparator />
+      <ConfigureDeepLink />
+      {isEnterprise ? (
+        <>
+          <StyledSettingsSeparator />
+          <AdManagement />
+        </>
+      ) : null}
     </StyledComponent>
   );
 };
 
-export default inject(({ settingsStore, common, currentQuotaStore }) => {
-  const { enablePortalRename } = settingsStore;
-  const { isCustomizationAvailable } = currentQuotaStore;
-  const { isLoaded, setIsLoadedCustomization, resetIsInit } = common;
+export default inject(
+  ({ settingsStore, common, currentQuotaStore, currentTariffStatusStore }) => {
+    const { enablePortalRename } = settingsStore;
+    const { isCustomizationAvailable } = currentQuotaStore;
+    const { isLoaded, setIsLoadedCustomization, resetIsInit } = common;
+    const { isEnterprise } = currentTariffStatusStore;
 
-  return {
-    isLoaded,
-    setIsLoadedCustomization,
-    isSettingPaid: isCustomizationAvailable,
-    enablePortalRename,
-    resetIsInit,
-  };
-})(
+    return {
+      isLoaded,
+      setIsLoadedCustomization,
+      isSettingPaid: isCustomizationAvailable,
+      enablePortalRename,
+      resetIsInit,
+      isEnterprise,
+    };
+  },
+)(
   withLoading(withTranslation(["Settings", "Common"])(observer(Customization))),
 );

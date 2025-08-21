@@ -1,8 +1,6 @@
 {
-  "CancelUpload": "Передавання перервано. Деякі файли не передано.",
-  "EnterPassword": "Введіть пароль",
   "HideInput": "Сховати",
   "Ready": "Готово",
-  "UploadAndConvert": "Передати та конвертувати файли",
-  "Uploads": "Передавання"
+  "UploadingAndConversion": "Передавання та перетворення",
+  "UploadingError": "Помилка передавання"
 }

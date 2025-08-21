@@ -26,16 +26,18 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 
-import { Badge } from "./Badge";
 import { globalColors } from "../../themes";
 
+import { Badge } from ".";
+
 const meta = {
-  title: "Components/Badge",
+  title: "Data Display/Badge",
   component: Badge,
   parameters: {
     docs: {
       description: {
-        component: "Used for buttons, numbers or status markers next to icons.",
+        component:
+          "A versatile badge component used for displaying notifications, status markers, or interactive elements. Supports accessibility features and various display modes.",
       },
     },
     design: {
@@ -43,7 +45,48 @@ const meta = {
       url: "https://www.figma.com/file/ZiW5KSwb4t7Tj6Nz5TducC/UI-Kit-DocSpace-1.0.0?type=design&node-id=6057-171831&mode=design&t=TBNCKMQKQMxr44IZ-0",
     },
   },
+  argTypes: {
+    label: {
+      description:
+        "The content to display in the badge. Can be a number or text.",
+      control: "text",
+    },
+    type: {
+      description: "High priority badge type",
+      control: "radio",
+      options: ["high"],
+    },
+    backgroundColor: {
+      description: "Custom background color",
+      control: "color",
+    },
+    color: {
+      description: "Custom text color",
+      control: "color",
+    },
+    onClick: {
+      description: "Click handler that makes the badge interactive",
+      action: "clicked",
+    },
+    fontSize: {
+      description: "Custom font size",
+      control: "text",
+    },
+    fontWeight: {
+      description: "Custom font weight",
+      control: "number",
+    },
+    maxWidth: {
+      description: "Maximum width of the badge",
+      control: "text",
+    },
+    noHover: {
+      description: "Disable hover effects",
+      control: "boolean",
+    },
+  },
 } satisfies Meta<typeof Badge>;
+
 type Story = StoryObj<typeof Badge>;
 
 export default meta;
@@ -53,12 +96,18 @@ export const Default: Story = {
     label: 24,
   },
 };
+
 export const NumberBadge: Story = {
   args: {
     label: 3,
   },
-  argTypes: {
-    label: { control: "number" },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Simple numeric badge, commonly used for notifications or counts.",
+      },
+    },
   },
 };
 
@@ -66,17 +115,28 @@ export const TextBadge: Story = {
   args: {
     label: "New",
   },
-  argTypes: {
-    label: { control: "text" },
+  parameters: {
+    docs: {
+      description: {
+        story: "Text badge for status or informational display.",
+      },
+    },
   },
 };
 
-export const MixedTemplate: Story = {
+export const InteractiveBadge: Story = {
   args: {
-    label: "Ver.2",
+    label: "Click me",
+    // eslint-disable-next-line no-alert
+    onClick: () => alert("click"),
   },
-  argTypes: {
-    label: { control: "text" },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Interactive badge that responds to clicks. Note the role changes to 'button' when onClick is provided.",
+      },
+    },
   },
 };
 
@@ -86,7 +146,58 @@ export const HighBadge: Story = {
     label: "High",
     backgroundColor: globalColors.mainRed,
   },
-  argTypes: {
-    type: { control: "radio" },
+  parameters: {
+    docs: {
+      description: {
+        story: "High priority badge with emphasis styling.",
+      },
+    },
+  },
+};
+
+export const CustomStyledBadge: Story = {
+  args: {
+    label: "Custom",
+    backgroundColor: "#335EA3",
+    color: "#FFFFFF",
+    fontSize: "14px",
+    fontWeight: 600,
+    borderRadius: "8px",
+    padding: "4px 12px",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Badge with custom styling applied through style props.",
+      },
+    },
+  },
+};
+
+export const MutedBadge: Story = {
+  args: {
+    label: "Muted",
+    isMutedBadge: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Badge with muted styling for less prominent notifications.",
+      },
+    },
+  },
+};
+
+export const NoHoverBadge: Story = {
+  args: {
+    label: "Static",
+    noHover: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Badge without hover effects, useful for static display.",
+      },
+    },
   },
 };

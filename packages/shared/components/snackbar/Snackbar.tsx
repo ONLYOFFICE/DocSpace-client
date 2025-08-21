@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,21 +25,22 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 /* eslint-disable jsx-a11y/control-has-associated-label */
+/* eslint-disable jsx-a11y/iframe-has-title */
 /* eslint-disable react/no-danger */
+import CrossReactSvg from "PUBLIC_DIR/images/icons/12/cross.react.svg";
+import InfoReactSvg from "PUBLIC_DIR/images/danger.toast.react.svg";
+
 import React from "react";
 import ReactDOM from "react-dom/client";
 import Countdown, { zeroPad } from "react-countdown";
-import { IconSizeType } from "../../utils";
+import classNames from "classnames";
 
-import { Box } from "../box";
 import { Heading, HeadingSize } from "../heading";
 import { Text } from "../text";
 
 import { BarConfig, SnackbarProps } from "./Snackbar.types";
-import { StyledAction, StyledSnackBar, StyledIframe } from "./Snackbar.styled";
-import StyledCrossIcon from "./SnackbarAction.styled";
-import StyledLogoIcon from "./SnackbarLogo.styled.ts";
 import { globalColors } from "../../themes";
+import styles from "./snacknar.module.scss";
 
 class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
   static show(barConfig: BarConfig) {
@@ -141,103 +142,130 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
       onAction,
       sectionWidth,
       backgroundColor = globalColors.lightToastAlert,
+      opacity,
+      backgroundImg,
       ...rest
     } = this.props;
 
     const headerStyles = headerText ? {} : { display: "none" };
 
+    const snackbarStyle = {
+      "--opacity": opacity,
+      "--background-color": backgroundColor,
+      "--background-image": backgroundImg,
+      ...style,
+    } as React.CSSProperties;
+
     const { isLoaded } = this.state;
 
     return isCampaigns ? (
       <div id="bar-banner" style={{ position: "relative" }}>
-        <StyledIframe
+        <iframe
           id="bar-frame"
+          data-testid="snackbar-iframe"
+          className={styles.iframe}
+          style={{ "--section-width": sectionWidth } as React.CSSProperties}
           src={htmlContent}
           scrolling="no"
-          sectionWidth={sectionWidth}
           onLoad={() => {
             this.setState({ isLoaded: true });
           }}
         />
-        {isLoaded && (
-          <StyledAction className="action" onClick={this.onActionClick}>
-            <StyledCrossIcon size={IconSizeType.medium} />
-          </StyledAction>
-        )}
+        {isLoaded ? (
+          <div
+            className={classNames(styles.actionWrapper, styles.action)}
+            onClick={this.onActionClick}
+          >
+            <CrossReactSvg className={styles.crossIcon} />
+          </div>
+        ) : null}
       </div>
     ) : (
-      <StyledSnackBar
+      <div
         {...rest}
+        data-testid="snackbar-container"
         id="snackbar-container"
-        style={style}
-        backgroundColor={backgroundColor}
+        style={snackbarStyle}
+        className={styles.snackbar}
       >
         {htmlContent ? (
           <div
+            className={styles.iframe}
+            style={{ "--section-width": sectionWidth } as React.CSSProperties}
+            data-testid="snackbar-html-content"
             dangerouslySetInnerHTML={{
               __html: htmlContent,
             }}
           />
         ) : (
-          <div className="text-container">
-            <div className="header-body" style={{ textAlign }}>
-              {showIcon && (
-                <Box className="logo">
-                  <StyledLogoIcon
-                    size={IconSizeType.medium}
-                    color={textColor}
+          <div
+            className={styles.textContainer}
+            style={{ "--text-align": textAlign } as React.CSSProperties}
+          >
+            <div className={styles.headerBody} style={{ textAlign }}>
+              {showIcon ? (
+                <div className="logo">
+                  <InfoReactSvg
+                    className={styles.infoIcon}
+                    style={{ "--color": textColor } as React.CSSProperties}
+                    data-testid="snackbar-icon"
                   />
-                </Box>
-              )}
+                </div>
+              ) : null}
 
               <Heading
                 size={HeadingSize.xsmall}
                 isInline
-                className="text-header"
+                className={styles.textHeader}
                 style={headerStyles}
                 color={textColor}
+                data-testid="snackbar-header"
               >
                 {headerText}
               </Heading>
             </div>
-            <div className="text-body">
+            <div className={styles.textBody}>
               <Text
                 as="p"
-                className="text"
+                className={styles.text}
                 color={textColor}
                 fontSize={fontSize}
                 fontWeight={fontWeight}
-                noSelect
+                data-testid="snackbar-message"
               >
                 {text}
               </Text>
 
-              {btnText && (
+              {btnText ? (
                 <Text
                   color={textColor}
-                  className="button"
+                  className={styles.button}
                   onClick={this.onActionClick}
                 >
                   {btnText}
                 </Text>
-              )}
+              ) : null}
 
-              {countDownTime > -1 && (
+              {countDownTime > -1 ? (
                 <Countdown
                   date={Date.now() + countDownTime}
                   renderer={this.countDownRenderer}
                   onComplete={this.onActionClick}
                 />
-              )}
+              ) : null}
             </div>
           </div>
         )}
-        {!btnText && (
-          <button className="action" type="submit" onClick={this.onActionClick}>
-            <StyledCrossIcon size={IconSizeType.small} />
+        {!btnText ? (
+          <button
+            className={styles.action}
+            type="submit"
+            onClick={this.onActionClick}
+          >
+            <CrossReactSvg className={styles.crossIcon} />
           </button>
-        )}
-      </StyledSnackBar>
+        ) : null}
+      </div>
     );
   }
 }

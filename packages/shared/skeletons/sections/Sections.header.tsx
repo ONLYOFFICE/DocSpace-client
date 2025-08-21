@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,12 +28,7 @@ import React from "react";
 
 import { RectangleSkeleton } from "../rectangle";
 
-import {
-  StyledHeaderContainer,
-  StyledHeaderBox1,
-  StyledHeaderBox2,
-  StyledHeaderSpacer,
-} from "./Sections.styled";
+import styles from "./Sections.module.scss";
 import type { SectionHeaderSkeloton } from "./Sections.types";
 
 export const SectionHeaderSkeleton = ({
@@ -54,8 +49,13 @@ export const SectionHeaderSkeleton = ({
   } = rest;
 
   return (
-    <StyledHeaderContainer id={id} className={className} style={style}>
-      <StyledHeaderBox1>
+    <div
+      id={id}
+      className={`${className || ""} ${styles.headerContainer}`}
+      style={style}
+      data-testid="section-header-skeleton"
+    >
+      <div className={styles.headerBox1} data-testid="header-box-1">
         <RectangleSkeleton
           title={title}
           width="100%"
@@ -68,9 +68,9 @@ export const SectionHeaderSkeleton = ({
           speed={speed}
           animate={animate}
         />
-      </StyledHeaderBox1>
-      <StyledHeaderSpacer />
-      <StyledHeaderBox2>
+      </div>
+      <div className={styles.headerSpacer} data-testid="header-spacer" />
+      <div className={styles.headerBox2} data-testid="header-box-2">
         <RectangleSkeleton
           title={title}
           width="17"
@@ -83,7 +83,7 @@ export const SectionHeaderSkeleton = ({
           speed={speed}
           animate={animate}
         />
-      </StyledHeaderBox2>
-    </StyledHeaderContainer>
+      </div>
+    </div>
   );
 };

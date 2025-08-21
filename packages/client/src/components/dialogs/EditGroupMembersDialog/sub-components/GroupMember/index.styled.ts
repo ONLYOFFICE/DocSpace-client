@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,7 @@
 
 import styled from "styled-components";
 
-import { injectDefaultTheme, TextUserSelect } from "@docspace/shared/utils";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
 export const GroupMember = styled.div.attrs(injectDefaultTheme)<{
   isExpect: boolean;
@@ -43,7 +43,6 @@ export const GroupMember = styled.div.attrs(injectDefaultTheme)<{
 
   .user_body-wrapper {
     overflow: auto;
-    ${TextUserSelect}
   }
 
   .info,
@@ -53,6 +52,13 @@ export const GroupMember = styled.div.attrs(injectDefaultTheme)<{
 
   .info {
     flex-direction: column;
+
+    .info-box {
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
   }
 
   .name {

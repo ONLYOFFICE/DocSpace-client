@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,6 +29,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { toastr } from "@docspace/shared/components/toast";
+import api from "@docspace/shared/api";
 
 import { ChangeQuotaDialog } from "../dialogs";
 
@@ -41,16 +42,11 @@ const ChangeQuotaEvent = (props) => {
     bodyDescription,
     headerTitle,
     onClose,
-    setCustomUserQuota,
     setCustomRoomQuota,
     successCallback,
     abortCallback,
 
     inRoom,
-    setNewInfoPanelSelection,
-    needResetSelection,
-    getPeopleListItem,
-    setInfoPanelSelection,
   } = props;
 
   const { t } = useTranslation("Common");
@@ -62,10 +58,10 @@ const ChangeQuotaEvent = (props) => {
     setSize(value);
   };
 
-  const updateFunction = (sizeValue) => {
+  const updateFunction = () => {
     return type === "user"
-      ? setCustomUserQuota(sizeValue, ids)
-      : setCustomRoomQuota(sizeValue, ids, inRoom);
+      ? api.people.setCustomUserQuota(ids, size)
+      : setCustomRoomQuota(ids, size, inRoom);
   };
 
   const onSaveClick = async () => {
@@ -82,16 +78,6 @@ const ChangeQuotaEvent = (props) => {
       toastr.success(t("Common:StorageQuotaSet"));
 
       successCallback && successCallback(items);
-
-      if (!needResetSelection) {
-        if (type === "user") {
-          const user = getPeopleListItem(items[0]);
-
-          setInfoPanelSelection(user);
-        } else {
-          setNewInfoPanelSelection();
-        }
-      }
     } catch (e) {
       toastr.error(e);
 
@@ -131,30 +117,27 @@ const ChangeQuotaEvent = (props) => {
 };
 
 export default inject(
-  ({ peopleStore, filesStore, infoPanelStore }, { type }) => {
+  (
+    { peopleStore, filesStore, infoPanelStore, selectedFolderStore },
+    { type },
+  ) => {
     const { usersStore } = peopleStore;
-    const { setCustomUserQuota, getPeopleListItem, needResetUserSelection } =
-      usersStore;
+    const { getPeopleListItem, needResetUserSelection } = usersStore;
     const { setCustomRoomQuota, needResetFilesSelection } = filesStore;
 
-    const {
-      infoPanelSelection,
-      setNewInfoPanelSelection,
-      setInfoPanelSelection,
-    } = infoPanelStore;
+    const { isVisible: infoPanelVisible } = infoPanelStore;
 
-    const inRoom = !!infoPanelSelection?.navigationPath;
+    const inRoom = !!selectedFolderStore?.navigationPath;
     const needResetSelection =
-      type === "user" ? needResetUserSelection : needResetFilesSelection;
+      type === "user"
+        ? !infoPanelVisible || needResetUserSelection
+        : needResetFilesSelection;
 
     return {
-      setCustomUserQuota,
       setCustomRoomQuota,
       inRoom,
-      setNewInfoPanelSelection,
       getPeopleListItem,
       needResetSelection,
-      setInfoPanelSelection,
     };
   },
 )(observer(ChangeQuotaEvent));

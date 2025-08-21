@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,175 +26,172 @@
 
 import React from "react";
 
-import {
-  StyledControlButtonContainer,
-  StyledTariffWrapper,
-} from "../Navigation.styled";
-import { IControlButtonProps } from "../Navigation.types";
+import { isTablet } from "../../../utils";
+import { Button, ButtonSize } from "../../button";
+
+import styles from "../Navigation.module.scss";
+
+import { TControlButtonProps } from "../Navigation.types";
 
 import ToggleInfoPanelButton from "./ToggleInfoPanelBtn";
 import PlusButton from "./PlusBtn";
 import ContextButton from "./ContextBtn";
-import TrashWarning from "./TrashWarning";
-import { Button, ButtonSize } from "../../button";
-import { isTablet } from "../../../utils";
+import WarningComponent from "./WarningComponent";
 
 const ControlButtons = ({
   isRootFolder,
-  canCreate,
-  getContextOptionsFolder,
-  getContextOptionsPlus,
-  isEmptyFilesList,
   isInfoPanelVisible,
   toggleInfoPanel,
   toggleDropBox,
-  isDesktop,
   titles,
+
+  // Plus button props
+  canCreate,
+  getContextOptionsPlus,
   withMenu,
   onPlusClick,
   isFrame,
-  isPublicRoom,
+  onCloseDropBox,
+
+  // Context button props
+  getContextOptionsFolder,
   isTrashFolder,
   isMobile,
-  showTitle,
+  onContextOptionsClick,
+  isPublicRoom,
+
+  // Navigation button props
   navigationButtonLabel,
   onNavigationButtonClick,
+
+  // Visibility controls
+  isDesktop,
+  showTitle,
+
+  // Tariff bar
   tariffBar,
   title,
-  isEmptyPage,
-  onCloseDropBox,
-  onContextOptionsClick,
-}: IControlButtonProps) => {
+
+  // Guidance props
+  addButtonRef,
+  buttonRef,
+  contextButtonAnimation,
+  guidAnimationVisible,
+  setGuidAnimationVisible,
+  isContextButtonVisible,
+
+  isPlusButtonVisible,
+}: TControlButtonProps) => {
   const toggleInfoPanelAction = () => {
     toggleInfoPanel?.();
     toggleDropBox?.();
   };
 
-  const navigationButtonBlock =
-    navigationButtonLabel && !isFrame && !isRootFolder ? (
+  const isTabletView = isTablet();
+  const contextOptionsFolder = getContextOptionsFolder();
+  const containVisible = contextOptionsFolder.some((item) => !item.disabled);
+
+  const renderNavigationButton = () => {
+    if (!navigationButtonLabel || isFrame || isRootFolder) return null;
+
+    return (
       <Button
+        ref={buttonRef}
         className="navigation_button"
         label={navigationButtonLabel}
         size={ButtonSize.extraSmall}
         onClick={onNavigationButtonClick}
       />
-    ) : null;
-  const children =
-    tariffBar && !isFrame ? React.cloneElement(tariffBar, { title }) : null;
-  const isTabletView = isTablet();
+    );
+  };
 
-  const contextOptionsFolder = getContextOptionsFolder();
-  const containVisible = contextOptionsFolder.some(
-    (item) => item.disabled === false,
-  );
+  const renderTariffBar = () => {
+    if (!tariffBar || isFrame) return null;
+
+    const cloneProps = { title };
+
+    return (
+      <div className={styles.tariffWrapper}>
+        {React.cloneElement(tariffBar, cloneProps)}
+      </div>
+    );
+  };
+
+  const renderPlusButton = () => {
+    if ((isMobile && !isFrame) || !canCreate) return null;
+
+    return (
+      <PlusButton
+        forwardedRef={addButtonRef}
+        id="header_add-button"
+        className="add-button"
+        getData={getContextOptionsPlus}
+        withMenu={withMenu}
+        onPlusClick={onPlusClick}
+        isFrame={isFrame}
+        title={titles?.actions}
+        onCloseDropBox={onCloseDropBox}
+      />
+    );
+  };
+
+  const renderContextButton = (visible: boolean) => {
+    // console.log(visible);
+
+    if (!visible || isFrame) return null;
+
+    return (
+      <ContextButton
+        id="header_optional-button"
+        className="option-button"
+        getData={getContextOptionsFolder}
+        withMenu={withMenu}
+        title={titles?.actions}
+        isTrashFolder={isTrashFolder}
+        isMobile={isMobile || false}
+        onCloseDropBox={onCloseDropBox}
+        onContextOptionsClick={onContextOptionsClick}
+        contextButtonAnimation={contextButtonAnimation}
+        guidAnimationVisible={guidAnimationVisible}
+        setGuidAnimationVisible={setGuidAnimationVisible}
+      />
+    );
+  };
+
+  const renderToggleInfoPanel = () => {
+    if (isDesktop) return null;
+
+    return (
+      <ToggleInfoPanelButton
+        isRootFolder={isRootFolder}
+        isInfoPanelVisible={isInfoPanelVisible}
+        toggleInfoPanel={toggleInfoPanelAction}
+        titles={titles}
+      />
+    );
+  };
+
+  const renderWarning = () => {
+    if (!isDesktop || !titles?.warningText) return null;
+
+    return <WarningComponent title={titles?.warningText} />;
+  };
 
   return (
-    <StyledControlButtonContainer isFrame={isFrame} showTitle={showTitle}>
-      {!isRootFolder || (isTrashFolder && !isEmptyFilesList) ? (
-        <>
-          {!isMobile && canCreate && (
-            <PlusButton
-              className="add-button"
-              getData={getContextOptionsPlus}
-              withMenu={withMenu}
-              onPlusClick={onPlusClick}
-              isFrame={isFrame}
-              title={titles?.actions}
-              onCloseDropBox={onCloseDropBox}
-            />
-          )}
-
-          {/* <ContextMenuButton
-            id="header_optional-button"
-            zIndex={402}
-            className="option-button"
-            directionX="right"
-            iconName={VerticalDotsReactSvgUrl}
-            size={15}
-            isFill
-            getData={getContextOptionsFolder}
-            isDisabled={false}
-            title={titles?.contextMenu}
-          /> */}
-
-          <ContextButton
-            id="header_optional-button"
-            className="option-button"
-            getData={getContextOptionsFolder}
-            withMenu={withMenu}
-            // onPlusClick={onPlusClick}
-            title={titles?.actions}
-            isTrashFolder={isTrashFolder}
-            isMobile={isMobile || false}
-            onCloseDropBox={onCloseDropBox}
-            onContextOptionsClick={onContextOptionsClick}
-          />
-
-          {!isDesktop && (
-            <ToggleInfoPanelButton
-              isRootFolder={isRootFolder}
-              isInfoPanelVisible={isInfoPanelVisible}
-              toggleInfoPanel={toggleInfoPanelAction}
-              titles={titles}
-            />
-          )}
-        </>
-      ) : canCreate ? (
-        <>
-          {!isMobile && (
-            <PlusButton
-              id="header_add-button"
-              className="add-button"
-              getData={getContextOptionsPlus}
-              withMenu={withMenu}
-              onPlusClick={onPlusClick}
-              isFrame={isFrame}
-              title={titles?.actions}
-              onCloseDropBox={onCloseDropBox}
-            />
-          )}
-          {!isDesktop && (
-            <ToggleInfoPanelButton
-              isRootFolder={isRootFolder}
-              isInfoPanelVisible={isInfoPanelVisible}
-              toggleInfoPanel={toggleInfoPanelAction}
-              titles={titles}
-            />
-          )}
-        </>
-      ) : (
-        <>
-          {!isDesktop && (
-            <ToggleInfoPanelButton
-              isRootFolder={isRootFolder}
-              isInfoPanelVisible={isInfoPanelVisible}
-              toggleInfoPanel={toggleInfoPanelAction}
-              titles={titles}
-            />
-          )}
-
-          {isPublicRoom && containVisible && (
-            <ContextButton
-              id="header_optional-button"
-              className="option-button"
-              getData={getContextOptionsFolder}
-              withMenu={withMenu}
-              title={titles?.contextMenu}
-              isTrashFolder={isTrashFolder}
-              isMobile={isMobile || false}
-              onCloseDropBox={onCloseDropBox}
-              onContextOptionsClick={onContextOptionsClick}
-            />
-          )}
-        </>
-      )}
-      {isDesktop && isTrashFolder && !isEmptyPage && (
-        <TrashWarning title={titles?.trashWarning} />
-      )}
-      {navigationButtonLabel && !isTabletView && navigationButtonBlock}
-      <StyledTariffWrapper>{children && children}</StyledTariffWrapper>
-      {navigationButtonLabel && isTabletView && navigationButtonBlock}
-    </StyledControlButtonContainer>
+    <div
+      className={styles.controlButtonContainer}
+      data-is-frame={isFrame}
+      data-show-title={showTitle}
+    >
+      {isPlusButtonVisible ? renderPlusButton() : null}
+      {renderContextButton((isContextButtonVisible && !isPublicRoom) ?? false)}
+      {renderToggleInfoPanel()}
+      {renderContextButton((isPublicRoom && containVisible) ?? false)}
+      {renderWarning()}
+      {!isTabletView ? renderNavigationButton() : null}
+      {renderTariffBar()}
+      {isTabletView ? renderNavigationButton() : null}
+    </div>
   );
 };
 

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,7 +32,7 @@ import {
 } from "@docspace/shared/constants";
 
 import { toastr } from "@docspace/shared/components/toast";
-import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-files-from-event";
+import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 
 import resizeImage from "resize-image";
 import api from "@docspace/shared/api";
@@ -50,12 +50,11 @@ class AvatarEditorDialogStore {
 
   avatarEditorDialogVisible = false;
 
-  constructor(filesStore, settingsStore, infoPanelStore) {
+  constructor(filesStore, settingsStore) {
     makeAutoObservable(this);
 
     this.filesStore = filesStore;
     this.settingsStore = settingsStore;
-    this.infoPanelStore = infoPanelStore;
   }
 
   setAvatarEditorDialogVisible = (visible) => {
@@ -117,7 +116,6 @@ class AvatarEditorDialogStore {
         }
 
         needUpdate && updateRoom(item, room);
-        needUpdate && this.infoPanelStore.updateInfoPanelSelection(room);
         URL.revokeObjectURL(img.src);
         setActiveFolders([]);
         resolve();

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,10 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
 
-import Headline from "@docspace/shared/components/headline/Headline";
+import { Heading } from "@docspace/shared/components/heading";
 import { IconButton } from "@docspace/shared/components/icon-button";
 
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
@@ -42,9 +42,13 @@ const OAuthSectionHeader = ({ isEdit }: { isEdit: boolean }) => {
   const { t, ready } = useTranslation(["OAuth"]);
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const onBack = () => {
-    navigate("/portal-settings/developer-tools/oauth");
+    const path = location.pathname.includes("/portal-settings")
+      ? "/portal-settings"
+      : "";
+    navigate(`${path}/developer-tools/oauth`);
   };
 
   if (!ready) return <LoaderSectionHeader />;
@@ -52,7 +56,7 @@ const OAuthSectionHeader = ({ isEdit }: { isEdit: boolean }) => {
   return (
     <StyledContainer>
       <HeaderContainer>
-        <Headline type="content" truncate>
+        <Heading type="content" truncate>
           <div className="settings-section_header">
             <IconButton
               iconName={ArrowPathReactSvgUrl}
@@ -60,11 +64,12 @@ const OAuthSectionHeader = ({ isEdit }: { isEdit: boolean }) => {
               isFill
               onClick={onBack}
               className="arrow-button"
+              dataTestId="arrow_back_button"
             />
 
             {isEdit ? t("EditApp") : t("NewApp")}
           </div>
-        </Headline>
+        </Heading>
       </HeaderContainer>
     </StyledContainer>
   );

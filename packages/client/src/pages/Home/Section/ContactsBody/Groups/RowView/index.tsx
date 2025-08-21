@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,6 +31,7 @@ import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
+import ContactsHotkeysStore from "SRC_DIR/store/contacts/ContactsHotkeysStore";
 import { TContactsViewAs } from "SRC_DIR/helpers/contacts";
 
 import EmptyScreenGroups from "../../EmptyScreenGroups";
@@ -51,6 +52,7 @@ type RowViewProps = {
   setViewAs?: PeopleStore["setViewAs"];
 
   currentDeviceType?: SettingsStore["currentDeviceType"];
+  withContentSelection?: ContactsHotkeysStore["withContentSelection"];
 };
 
 const RowView = ({
@@ -62,6 +64,7 @@ const RowView = ({
   fetchMoreGroups,
   filterTotal,
   currentDeviceType,
+  withContentSelection,
 }: RowViewProps) => {
   useViewEffect({
     view: viewAs as string,
@@ -83,9 +86,15 @@ const RowView = ({
       filesLength={groups!.length}
       itemHeight={58}
       onScroll={() => {}}
+      noSelect={!withContentSelection}
     >
-      {groups!.map((item) => (
-        <GroupsRow key={item.id} item={item} sectionWidth={sectionWidth!} />
+      {groups!.map((item, index) => (
+        <GroupsRow
+          key={item.id}
+          item={item}
+          sectionWidth={sectionWidth!}
+          itemIndex={index}
+        />
       ))}
     </GroupsRowContainer>
   );
@@ -100,4 +109,5 @@ export default inject(({ peopleStore, settingsStore }: TStore) => ({
   filterTotal: peopleStore.groupsStore!.groupsFilterTotal,
   isFiltered: peopleStore.groupsStore!.groupsIsFiltered,
   currentDeviceType: settingsStore.currentDeviceType,
+  withContentSelection: peopleStore.contactsHotkeysStore!.withContentSelection,
 }))(observer(RowView));

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,10 +25,21 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { render, screen } from "@testing-library/react";
-
+import { screen, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
+
 import { Link, LinkType } from ".";
+
+// Mock CSS modules
+jest.mock("./Link.module.scss", () => ({
+  link: "link",
+  semitransparent: "semitransparent",
+  isHovered: "isHovered",
+  textOverflow: "textOverflow",
+  noHover: "noHover",
+  enableUserSelect: "enableUserSelect",
+  page: "page",
+}));
 
 const baseProps = {
   type: LinkType.page,
@@ -39,63 +50,152 @@ const baseProps = {
 describe("<Link />", () => {
   it("renders without error", () => {
     render(<Link {...baseProps}>link</Link>);
-
     expect(screen.queryByTestId("link")).toBeInTheDocument();
   });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("with isBold prop", () => {
-  //   const wrapper = mount(<Link {...baseProps} isBold />);
+  it("renders with custom data-testid", () => {
+    render(
+      <Link {...baseProps} dataTestId="custom-link">
+        link
+      </Link>,
+    );
+    expect(screen.queryByTestId("custom-link")).toBeInTheDocument();
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("isBold")).toEqual(true);
-  // });
+  it("renders with isBold prop", () => {
+    render(
+      <Link {...baseProps} isBold>
+        link
+      </Link>,
+    );
+    const link = screen.getByTestId("link");
+    expect(link).toHaveStyle({ fontWeight: "700" });
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("with isHovered prop", () => {
-  //   const wrapper = mount(<Link {...baseProps} isHovered />);
+  it("renders with isHovered prop", () => {
+    render(
+      <Link {...baseProps} isHovered>
+        link
+      </Link>,
+    );
+    const link = screen.getByTestId("link");
+    expect(link).toHaveClass("isHovered");
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("isHovered")).toEqual(true);
-  // });
+  it("renders with isSemitransparent prop", () => {
+    render(
+      <Link {...baseProps} isSemitransparent>
+        link
+      </Link>,
+    );
+    const link = screen.getByTestId("link");
+    expect(link).toHaveClass("semitransparent");
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("with isSemitransparent prop", () => {
-  //   const wrapper = mount(<Link {...baseProps} isSemitransparent />);
+  it("renders with isTextOverflow prop", () => {
+    render(
+      <Link {...baseProps} isTextOverflow>
+        link
+      </Link>,
+    );
+    const link = screen.getByTestId("link");
+    expect(link).toHaveClass("textOverflow");
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("isSemitransparent")).toEqual(true);
-  // });
+  it("renders with noHover prop", () => {
+    render(
+      <Link {...baseProps} noHover>
+        link
+      </Link>,
+    );
+    const link = screen.getByTestId("link");
+    expect(link).toHaveClass("noHover");
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("with type prop action", () => {
-  //   const wrapper = mount(<Link {...baseProps} type="action" />);
+  it("renders with enableUserSelect prop", () => {
+    render(
+      <Link {...baseProps} enableUserSelect>
+        link
+      </Link>,
+    );
+    const link = screen.getByTestId("link");
+    expect(link).toHaveClass("enableUserSelect");
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("type")).toEqual("action");
-  // });
+  it("renders with type prop action", () => {
+    render(
+      <Link {...baseProps} type={LinkType.action}>
+        link
+      </Link>,
+    );
+    const link = screen.getByTestId("link");
+    expect(link).not.toHaveClass("page");
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts id", () => {
-  //   const wrapper = mount(<Link {...baseProps} id="testId" />);
+  it("renders with custom fontSize and lineHeight", () => {
+    render(
+      <Link {...baseProps} fontSize="16px" lineHeight="24px">
+        link
+      </Link>,
+    );
+    const link = screen.getByTestId("link");
+    expect(link).toHaveStyle({ fontSize: "16px", lineHeight: "24px" });
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("id")).toEqual("testId");
-  // });
+  it("accepts id", () => {
+    render(
+      <Link {...baseProps} id="testId">
+        link
+      </Link>,
+    );
+    const link = screen.getByTestId("link");
+    expect(link).toHaveAttribute("id", "testId");
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts className", () => {
-  //   const wrapper = mount(<Link {...baseProps} className="test" />);
+  it("accepts className", () => {
+    const className = "custom-class";
+    render(
+      <Link {...baseProps} className={className}>
+        link
+      </Link>,
+    );
+    const link = screen.getByTestId("link");
+    expect(link).toHaveClass(className);
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("className")).toEqual("test");
-  // });
+  it("sets aria-label", () => {
+    render(
+      <Link {...baseProps} ariaLabel="Custom label">
+        link
+      </Link>,
+    );
+    const link = screen.getByTestId("link");
+    expect(link).toHaveAttribute("aria-label", "Custom label");
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts style", () => {
-  //   const wrapper = mount(<Link {...baseProps} style={{ color: "red" }} />);
+  it("uses children as aria-label when ariaLabel prop is not provided", () => {
+    render(<Link {...baseProps}>Custom text</Link>);
+    const link = screen.getByTestId("link");
+    expect(link).toHaveAttribute("aria-label", "Custom text");
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.getDOMNode().style).toHaveProperty("color", "red");
-  // });
+  it("renders with custom rel attribute", () => {
+    render(
+      <Link {...baseProps} rel="noopener">
+        link
+      </Link>,
+    );
+    const link = screen.getByTestId("link");
+    expect(link).toHaveAttribute("rel", "noopener");
+  });
+
+  it("renders with custom tabIndex", () => {
+    render(
+      <Link {...baseProps} tabIndex={-1}>
+        link
+      </Link>,
+    );
+    const link = screen.getByTestId("link");
+    expect(link).toHaveAttribute("tabindex", "-1");
+  });
 });

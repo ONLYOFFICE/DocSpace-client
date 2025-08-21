@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,6 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import isEmpty from "lodash/isEmpty";
 
 import { RoomSearchArea } from "../../enums";
@@ -32,7 +35,15 @@ import {
   toUrlParams,
   tryParseArray,
 } from "../../utils/common";
+import {
+  FILTER_ARCHIVE_ROOM,
+  FILTER_SHARED_ROOM,
+  FILTER_TEMPLATES_ROOM,
+} from "../../utils/filterConstants";
+import { getUserFilter, setUserFilter } from "../../utils/userFilterUtils";
 import { TSortOrder, TSortBy, Nullable } from "../../types";
+import { validateAndFixObject } from "../../utils/filterValidator";
+import { typeDefinition } from "./typeDefinition";
 
 const DEFAULT_EXCLUDE_SUBJECT: Nullable<string | boolean> = false;
 const DEFAULT_FILTER_VALUE: Nullable<string> = null;
@@ -71,21 +82,6 @@ const TAGS = "tags";
 const TYPE = "type";
 const WITHOUT_TAGS = "withoutTags";
 const START_INDEX = "startIndex";
-
-export const toJSON = (filter: RoomsFilter) => {
-  const filterObject = Object.entries(filter).reduce(
-    (result, [key, value]) => {
-      if (typeof value === "function" || value === null || value === false) {
-        return result;
-      }
-      result[key] = value;
-      return result;
-    },
-    {} as Record<string, string | number | boolean>,
-  );
-
-  return JSON.stringify(filterObject);
-};
 
 class RoomsFilter {
   page: number;
@@ -136,16 +132,16 @@ class RoomsFilter {
     if (userId) {
       const storageKey =
         defaultFilter.searchArea === RoomSearchArea.Active
-          ? `UserRoomsSharedFilter=${userId}`
-          : `UserRoomsArchivedFilter=${userId}`;
+          ? `${FILTER_SHARED_ROOM}=${userId}`
+          : defaultFilter.searchArea === RoomSearchArea.Archive
+            ? `${FILTER_ARCHIVE_ROOM}=${userId}`
+            : defaultFilter.searchArea === RoomSearchArea.Templates
+              ? `${FILTER_TEMPLATES_ROOM}=${userId}`
+              : "";
 
       try {
-        const filterStorageItem = JSON.parse(
-          localStorage.getItem(storageKey) || "{}",
-        );
-        if (filterStorageItem) {
-          Object.assign(defaultFilter, filterStorageItem);
-        }
+        const filterStorageItem = getUserFilter(storageKey);
+        Object.assign(defaultFilter, filterStorageItem);
       } catch (e) {
         // console.log(e);
       }
@@ -304,6 +300,8 @@ class RoomsFilter {
   };
 
   toApiUrlParams = () => {
+    const fixedValidObject = validateAndFixObject(this, typeDefinition);
+
     const {
       page,
       pageCount,
@@ -322,12 +320,13 @@ class RoomsFilter {
       subjectFilter,
       quotaFilter,
       storageFilter,
-    } = this;
+      startIndex,
+    } = fixedValidObject;
 
     const dtoFilter = {
       [PAGE]: page,
       [PAGE_COUNT]: pageCount,
-      [START_INDEX]: this.getStartIndex(),
+      [START_INDEX]: startIndex || this.getStartIndex(),
       [FILTER_VALUE]: (filterValue ?? "").trim(),
       [PROVIDER]: provider,
       [TYPE]: type,
@@ -349,6 +348,8 @@ class RoomsFilter {
   };
 
   toUrlParams = (userId?: string, withLocalStorage?: boolean) => {
+    const fixedValidObject = validateAndFixObject(this, typeDefinition);
+
     const {
       page,
       pageCount,
@@ -367,7 +368,7 @@ class RoomsFilter {
       subjectFilter,
       quotaFilter,
       storageFilter,
-    } = this;
+    } = fixedValidObject;
 
     const dtoFilter: Record<string, unknown> = {
       ...(filterValue && { [FILTER_VALUE]: filterValue }),
@@ -391,19 +392,18 @@ class RoomsFilter {
       [SEARCH_TYPE]: withSubfolders,
     };
 
-    const archivedFilterKey = `UserRoomsArchivedFilter=${userId}`;
-    const sharedFilterKey = `UserRoomsSharedFilter=${userId}`;
+    const archivedFilterKey = `${FILTER_ARCHIVE_ROOM}=${userId}`;
+    const sharedFilterKey = `${FILTER_SHARED_ROOM}=${userId}`;
+    const templatesFilterKey = `${FILTER_TEMPLATES_ROOM}=${userId}`;
 
     let archivedStorageFilter = null;
     let sharedStorageFilter = null;
+    let templatesStorageFilter = null;
 
     try {
-      archivedStorageFilter = JSON.parse(
-        localStorage.getItem(archivedFilterKey) || "{}",
-      );
-      sharedStorageFilter = JSON.parse(
-        localStorage.getItem(sharedFilterKey) || "{}",
-      );
+      archivedStorageFilter = getUserFilter(archivedFilterKey);
+      sharedStorageFilter = getUserFilter(sharedFilterKey);
+      templatesStorageFilter = getUserFilter(templatesFilterKey);
     } catch (e) {
       // console.log(e);
     }
@@ -414,23 +414,31 @@ class RoomsFilter {
       DEFAULT_TOTAL,
     );
 
-    const filterJSON = toJSON(dtoFilter as unknown as RoomsFilter);
-
     if (isEmpty(sharedStorageFilter) && userId) {
-      localStorage.setItem(sharedFilterKey, toJSON(defaultFilter));
-      sharedStorageFilter = filterJSON;
+      setUserFilter(sharedFilterKey, defaultFilter);
+      sharedStorageFilter = dtoFilter;
     }
 
     if (isEmpty(archivedStorageFilter) && userId) {
       defaultFilter.searchArea = RoomSearchArea.Archive;
-      localStorage.setItem(archivedFilterKey, toJSON(defaultFilter));
-      archivedStorageFilter = filterJSON;
+      setUserFilter(archivedFilterKey, defaultFilter);
+      archivedStorageFilter = dtoFilter;
+    }
+
+    if (isEmpty(templatesStorageFilter) && userId) {
+      defaultFilter.searchArea = RoomSearchArea.Templates;
+      setUserFilter(templatesFilterKey, defaultFilter);
+      templatesStorageFilter = dtoFilter;
     }
 
     const currentStorageFilter =
       dtoFilter.searchArea === RoomSearchArea.Active
         ? sharedStorageFilter
-        : archivedStorageFilter;
+        : dtoFilter.searchArea === RoomSearchArea.Archive
+          ? archivedStorageFilter
+          : dtoFilter.searchArea === RoomSearchArea.Templates
+            ? templatesStorageFilter
+            : "";
 
     const urlParams =
       withLocalStorage && currentStorageFilter
@@ -439,9 +447,11 @@ class RoomsFilter {
 
     if (userId && !withLocalStorage) {
       if (dtoFilter.searchArea === RoomSearchArea.Active) {
-        localStorage.setItem(sharedFilterKey, filterJSON);
-      } else {
-        localStorage.setItem(archivedFilterKey, filterJSON);
+        setUserFilter(sharedFilterKey, dtoFilter);
+      } else if (dtoFilter.searchArea === RoomSearchArea.Archive) {
+        setUserFilter(archivedFilterKey, dtoFilter);
+      } else if (dtoFilter.searchArea === RoomSearchArea.Templates) {
+        setUserFilter(templatesFilterKey, dtoFilter);
       }
     }
 

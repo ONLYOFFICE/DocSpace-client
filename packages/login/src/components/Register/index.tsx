@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -137,7 +137,7 @@ const Register = (props: RegisterProps) => {
         </Text>
       </StyledRegister>
 
-      {visible && (
+      {visible ? (
         <RegisterModalDialog
           visible={visible}
           loading={loading}
@@ -154,11 +154,9 @@ const Register = (props: RegisterProps) => {
           errorText={errorText}
           isShowError={isShowError}
         />
-      )}
+      ) : null}
     </>
-  ) : (
-    <></>
-  );
+  ) : null;
 };
 
 export default Register;

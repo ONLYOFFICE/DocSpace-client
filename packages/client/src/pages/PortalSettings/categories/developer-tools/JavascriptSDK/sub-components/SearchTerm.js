@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -68,12 +68,14 @@ export const SearchTerm = ({ t, config, setConfig }) => {
           placeholder={t("Common:Search")}
           value={value}
           tabIndex={5}
+          testId="search_term_text_input"
         />
         <Checkbox
           className="checkbox"
-          label={t("Files:WithSubfolders")}
+          label={t("Common:WithSubfolders")}
           onChange={onChangeWithSubfolders}
           isChecked={config.withSubfolders}
+          dataTestId="with_subfolders_checkbox"
         />
       </ColumnContainer>
     </>

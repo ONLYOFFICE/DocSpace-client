@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export type TextType = "primary" | "secondary";
-
-export interface TextProps {
+export type TextProps = {
+  /** Ref to access the DOM element or React component instance */
+  ref?: React.RefObject<HTMLDivElement>;
   /** Sets the tag through which the component is rendered */
   as?: React.ElementType;
   /** Accepts the tag id */
@@ -43,37 +43,73 @@ export interface TextProps {
   fontWeight?: number | string;
   /** Sets font weight value to bold */
   isBold?: boolean;
-  /** Sets the 'display?: inline-block' property */
+  /** Sets the 'display: inline-block' property */
   isInline?: boolean;
-  /** Sets the font style */
+  /** Sets the font style to italic */
   isItalic?: boolean;
   /** Sets the line height */
   lineHeight?: string;
   /** Disables text selection */
   noSelect?: boolean;
   /** Sets the 'text-align' property */
-  textAlign?: string;
-  /** Title */
+  textAlign?: "left" | "center" | "right" | "justify";
+  /** Title attribute for hover tooltip */
   title?: string;
   /** Sets the class name */
   className?: string;
   /** Disables word wrapping */
   truncate?: boolean;
+  /** HTML id attribute */
   id?: string;
+  /** Additional inline styles */
   style?: React.CSSProperties;
-  dir?: string;
+  /** Text direction */
+  dir?: "ltr" | "rtl" | "auto";
+  /** Child elements */
   children?: React.ReactNode;
+  /** Click event handler */
   onClick?: (e: React.MouseEvent<Element>) => void;
+  /** For label association */
   htmlFor?: string;
+  /** Visual style variant */
   view?: string;
-  textType?: TextType;
-}
+  /** Link href */
+  href?: string;
+  /** Used as HTML `rel` property */
+  rel?: string;
+  /** Used as HTML `tabindex` property */
+  tabIndex?: number;
+  /** Used in container component */
+  containerWidth?: string;
+  /** Used in container component */
+  containerMinWidth?: string;
+  /** Test id */
+  dataTestId?: string;
+};
 
-export interface StyledTextProps {
+export type StyledTextProps = {
+  /** Font size property */
   fontSizeProp?: string;
-  fontWeightProp?: string;
+  /** Font weight property */
+  fontWeightProp?: string | number;
+  /** Text color property */
   colorProp?: string;
+  /** Text alignment */
   textAlign?: string;
+  /** Visual style variant */
   view?: string;
-  textType?: TextType;
-}
+  /** Background color */
+  backgroundColor?: string;
+  /** Inline display mode */
+  isInline?: boolean;
+  /** Line height */
+  lineHeight?: string;
+  /** Disable text selection */
+  noSelect?: boolean;
+  /** Italic style */
+  isItalic?: boolean;
+  /** Bold style */
+  isBold?: boolean;
+  /** Truncate text */
+  truncate?: boolean;
+};

@@ -1,0 +1,318 @@
+{
+  "key_path": "InstanceId",
+  "content": "Type your instance ID",
+  "content_en_sha1_hash": "0a9bd3f683637f50a1e728a0092dab4ffd8d11fa",
+  "created_at": "2025-05-19T21:30:45.927Z",
+  "updated_at": "2025-08-11T09:02:44.069Z",
+  "comment": {
+    "text": "This translation key is used for a placeholder text in an input field that asks users to enter their instance ID. It appears in a login wizard page and will be displayed when the instance ID field is empty or not yet populated. The purpose of this text is to guide users by providing a clear instruction on what value they should enter.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:50.311Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/login/src/app/(root)/wizard/page.client.tsx",
+      "line_number": 415,
+      "context": "name=\"instance-id\"\n type={InputType.text}\n size={InputSize.large}\n hasError={hasErrorInstanceId}\n value={instanceId}\n placeholder={t(\"Common:InstanceId\")}\n scale\n tabIndex={3}\n isDisabled={isCreated}\n onChange={onChangeInstanceId}\n />",
+      "module": "/packages/login"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'أدخل معرف المثيل الخاص بك' is a literal translation but sounds slightly unnatural in Arabic. A more natural phrasing would be 'أدخل رقم تعريف المثيل' or 'يرجى إدخال رقم تعريف المثيل'.",
+          "suggestion": "يرجى إدخال رقم تعريف المثيل"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Въведете вашия ID на екземпляра' is not the most natural or accurate translation of 'Type your instance ID'. While technically correct, it's a very literal translation. A more idiomatic translation would be something like 'Въведете идентификатора на инстанцията'.",
+          "suggestion": "Въведете идентификатора на инстанцията"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Kirjoita esiintymätunnuksesi' is a literal translation that is not idiomatic. 'Esiintymätunnus' is a less common and slightly awkward term for 'instance ID'.",
+          "suggestion": "Kirjoita tunnuksesi"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Մուտքագրեք ձեր օրինակի ID-ն' literally translates to 'Enter your example ID'. While understandable, 'instance' has a more specific technical meaning. A more accurate translation would convey the meaning of a server or virtual machine instance.",
+          "suggestion": "Մուտքագրեք ձեր ինստանսի ID-ն"
+        },
+        {
+          "type": "formatting",
+          "description": "The inclusion of 'ID-ն' is a grammatical suffix indicating definiteness. While correct, the English 'ID' is commonly used in technical contexts without the definite article.  Consider if this level of formality is appropriate for the target audience.",
+          "suggestion": "Մուտքագրեք ձեր ինստանսի ID"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Inserisci l’istanza del tuo ID' is not an accurate translation of 'Type your instance ID'. It literally translates to 'Insert the instance of your ID', which is grammatically incorrect and doesn't convey the intended meaning.",
+          "suggestion": "Inserisci il tuo ID istanza"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'del tuo ID' is slightly awkward in Italian. While not strictly incorrect, it's not the most natural way to express possession in this context.",
+          "suggestion": "Inserisci il tuo ID istanza"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ຕົວຢ່າງ' (tua yang) is a reasonable translation for 'instance', but 'ຕົວຢ່າງ' can also mean 'example'. Depending on the context, 'ເຄື່ອງມື' (kreung mu) which means 'tool' or 'instrument' might be a better fit for 'instance' in a technical context.",
+          "suggestion": "Consider 'ພິມ ID ເຄື່ອງມືຂອງທ່ານ' if 'instance' refers to a computing instance or similar technical term."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Typ uw instance ID' is a direct transliteration of the English phrase. A more natural and idiomatic Dutch translation would be 'Voer uw instance ID in' or 'Vul uw instance ID in'.",
+          "suggestion": "Voer uw instance ID in"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Напечатайте ID вашего экземпляра' is technically correct but sounds somewhat unnatural. 'Напечатайте' implies printing, which isn't the intended action. A more natural phrasing would suggest typing or entering.",
+          "suggestion": "Введите ID вашего экземпляра"
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ඔබගේ උදාහරණ හැඳුනුම්පත ටයිප් කරන්න\" is a literal translation that may not be the most natural phrasing in Sinhala. A more natural translation would be something along the lines of \"ඔබේ උදාහරණ ID එක ටයිප් කරන්න\" or \"උදාහරණ ID එක ටයිප් කරන්න\" which is more concise and aligns with common usage for technical terms.",
+          "suggestion": "උදාහරණ ID එක ටයිප් කරන්න"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Zadajte svoje instance ID' is not the most natural or accurate translation of 'Type your instance ID'. 'Instance ID' should be treated as a compound term, and 'zadajte' could be more accurately represented as 'Vložte' or 'Prosím, vložte'. 'Svoje' is also slightly awkward here.  A better translation would reflect that it's a specific ID to be entered.",
+          "suggestion": "Vložte ID inštancie"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the presence of the English term 'ID' after the Slovak 'instance' feels clunky. Keeping it as just 'inštancie' would improve flow.",
+          "suggestion": "Vložte ID inštancie"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Napiši svoj ID instance' is not the most natural or accurate translation of 'Type your instance ID'. While technically understandable, 'Napiši' (Write) is less common than 'Vnesite' (Enter) or 'Upiši' (Enter/Input) in this context. 'ID instance' is also a direct transliteration and could be improved.",
+          "suggestion": "Vnesite/Upiši svoj ID instance"
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'ID instance' is a direct transliteration. It's beneficial to check if a Slovenian equivalent exists or to use a more natural phrasing if a direct translation isn't preferable.",
+          "suggestion": "Identifikacijska številka instance"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Унесите свој ID инстанце\" sounds slightly awkward in Serbian. A more natural phrasing would be \"Унесите ID инстанце\" or \"Помоћу унесите ID инстанце\". The possessive 'свој' (your) isn't necessary and creates a slight clunkiness.",
+          "suggestion": "Унесите ID инстанце"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While grammatically correct, \"Unesite svoj ID instance\" is a less natural translation. 'Svoj' implies possession and isn't necessary. A more direct and common translation would omit it.",
+          "suggestion": "Unesite ID instance"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Örnek kimliğinizi yazın' is understandable, a more natural and precise translation of 'Type your instance ID' would be 'Örnek kimliğinizi girin'. 'Yazın' (write) implies physically writing, whereas 'Girin' (enter) is more appropriate for digital input.",
+          "suggestion": "Örnek kimliğinizi girin"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Nhập mã phiên bản của bạn' is not the most accurate translation of 'Type your instance ID'. 'Phiên bản' refers to 'version', while 'instance ID' refers to a specific identifier.",
+          "suggestion": "Nhập ID phiên bản của bạn"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

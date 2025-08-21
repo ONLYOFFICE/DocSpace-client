@@ -1,0 +1,272 @@
+{
+  "key_path": "InviteMembersManuallyDescription",
+  "content": "Invite new members to {{productName}} personally via email",
+  "content_en_sha1_hash": "ef1f3846a0dd7e2a42b3803beac9dd6d39eb70c9",
+  "created_at": "2025-05-19T21:30:54.724Z",
+  "updated_at": "2025-08-12T19:46:25.985Z",
+  "comment": {
+    "text": "This translation key is used to display a message inviting users to manually invite new members to the product via email. It appears in the UI as part of an input field, likely on a panel or dialog where users can manually enter room IDs.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:15.955Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
+      "line_number": 600,
+      "context": "</StyledSubHeader>\n <StyledDescription\n noAllowInvitingGuests={roomId !== -1 ? !allowInvitingGuests : null}\n >\n {roomId === -1\n ? t(\"InviteMembersManuallyDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : !allowInvitingGuests\n ? t(\"InviteToRoomManuallyInfoMembers\", {\n productName: t(\"Common:ProductName\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'məhsuluna' (to product) doesn't quite fit the context of inviting members to a platform. A more appropriate term would imply joining or accessing the platform.",
+          "suggestion": "E-poçt vasitəsilə {{productName}} platformasına yeni üzvləri şəxsən dəvət edin"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the word order feels slightly unnatural in Azerbaijani. The action of inviting should come before the method.",
+          "suggestion": "E-poçt vasitəsilə yeni üzvləri şəxsən {{productName}} platformasına dəvət edin"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The colon in '{{productName}} :een' is unnecessary and breaks the flow of the sentence.  It creates a less natural phrasing.",
+          "suggestion": "Kutsu uusia jäseniä {{productName}} henkilökohtaisesti sähköpostilla"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Անձամբ էլ․փոստի միջոցով\" is a slightly awkward translation of \"personally via email\".  \"Անձամբ\" already implies personal interaction, so adding \"էլ․փոստի միջոցով\" feels redundant.  It can be interpreted as 'personally, as well as by email'.",
+          "suggestion": "Հրավիրեք նոր անդամների {{productName}} անձամբ էլ․փոստի միջոցով"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"新しいメンバーを個人的に招待するには、{{productName}} からメールを送信してください\" is a bit literal and could be improved to sound more natural in Japanese. The phrase 'からメールを送信してください' (from {productName} send email) is awkward. It implies sending *from* the product, which isn't the intended meaning.",
+          "suggestion": "新しいメンバーを {{productName}} からメールで直接招待します。"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ඊමේල්' (email) is spelled correctly, but the correct spelling should be 'විද්‍යුත් ලිපිනය' for a more formal and accurate translation.",
+          "suggestion": "විද්‍යුත් ලිපිනය"
+        },
+        {
+          "type": "grammatical",
+          "description": "While understandable, the sentence structure 'ඊමේල් ඔස්සේ {{productName}} වෙත නව සාමාජිකයන් පෞද්ගලිකව ආරාධනා කරන්න' could be slightly improved for better flow and naturalness in Sinhala.  It's a bit direct.",
+          "suggestion": "{{productName}} වෙත නව සාමාජිකයන් පෞද්ගලිකව ඊමේල් ඔස්සේ ආරාධනා කරන්න."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Po e-mailu osebno\" is not the most natural way to express \"personally via email\" in Slovenian. A more natural phrasing would be \"Osebno preko e-pošte\" or \"Iz e-pošte osebno\".",
+          "suggestion": "Osebno preko e-pošte"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'лично' (lično) translates to 'personally' or 'in person'. While not strictly wrong, it might be better to convey the meaning of directly inviting via email. The context implies a more direct, email-based invitation.",
+          "suggestion": "Позовите нове чланове у {{productName}} директно путем е-поште"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'personally' is not accurately translated by 'lično'. 'Lično' implies in person, which is different from inviting via email. A better translation would be 'direktno' or 'izravno'.",
+          "suggestion": "Pozovite nove članove u {{productName}} direktno/izravno putem e-pošte"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ürününe' (to the product) isn't the most natural phrasing. It implies the invitation is *to* the product, rather than *to* join the product's environment or group. A better phrasing would indicate joining or being invited to use the product.",
+          "suggestion": "Yeni üyeleri {{productName}}'e e-posta yoluyla kişisel olarak davet edin"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

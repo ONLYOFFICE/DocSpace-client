@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,17 +26,75 @@
 
 import React from "react";
 import { render, screen } from "@testing-library/react";
-
 import "@testing-library/jest-dom";
 
 import { Aside } from ".";
 
-test("<Aside />: render without error", () => {
-  render(
-    <Aside visible onClose={() => {}}>
-      test
-    </Aside>,
-  );
+describe("Aside Component", () => {
+  const mockOnClose = jest.fn();
 
-  expect(screen.queryByTestId("aside")).toBeInTheDocument();
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  test("renders without error when visible", () => {
+    render(
+      <Aside visible onClose={mockOnClose}>
+        test content
+      </Aside>,
+    );
+
+    expect(screen.getByTestId("aside")).toBeInTheDocument();
+    expect(screen.getByText("test content")).toBeInTheDocument();
+  });
+
+  test("renders with custom styling props", () => {
+    render(
+      <Aside
+        visible
+        onClose={mockOnClose}
+        scale
+        zIndex={500}
+        className="custom-class"
+      >
+        test content
+      </Aside>,
+    );
+
+    const aside = screen.getByTestId("aside");
+    expect(aside).toHaveClass("custom-class");
+    expect(aside).toHaveStyle({ zIndex: 500 });
+  });
+
+  test("renders without header when withoutHeader is true", () => {
+    render(
+      <Aside visible onClose={mockOnClose} withoutHeader>
+        test content
+      </Aside>,
+    );
+
+    expect(screen.queryByTestId("aside-header")).not.toBeInTheDocument();
+  });
+
+  test("renders with scrollbar when content overflows", () => {
+    const longContent = "a".repeat(1000);
+    render(
+      <Aside visible onClose={mockOnClose}>
+        {longContent}
+      </Aside>,
+    );
+
+    expect(screen.getByTestId("scrollbar")).toBeInTheDocument();
+  });
+
+  test("renders with withoutBodyScroll prop", () => {
+    render(
+      <Aside visible onClose={mockOnClose} withoutBodyScroll>
+        test content
+      </Aside>,
+    );
+
+    const aside = screen.getByTestId("aside");
+    expect(aside).toBeInTheDocument();
+  });
 });

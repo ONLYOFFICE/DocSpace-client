@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -39,7 +39,7 @@ export function getLanguage(lng: string) {
     const splitted = lng.split("-");
 
     if (splitted.length === 2 && splitted[0] === splitted[1].toLowerCase()) {
-      language = splitted[0];
+      [language] = splitted;
     }
 
     return language;

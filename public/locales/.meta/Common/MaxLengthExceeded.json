@@ -1,0 +1,255 @@
+{
+  "key_path": "MaxLengthExceeded",
+  "content": "The maximum length of a user name or another local part is 64 characters.",
+  "content_en_sha1_hash": "ba7b9b65a0fda5b91b2999cd6da74cf668a5cc1d",
+  "created_at": "2025-05-19T21:30:46.386Z",
+  "updated_at": "2025-08-11T09:02:43.844Z",
+  "comment": {
+    "text": "\"This translation key is used to display an error message when a user name exceeds the maximum allowed length of 64 characters. It appears in dialogs where users are prompted to update their email address or local part.\"",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:33.120Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangeEmailDialog/index.js",
+      "line_number": 148,
+      "context": "case ErrorKeys.IncorrectLocalPart:\n return t(\"Common:IncorrectLocalPart\");\n case ErrorKeys.SpacesInLocalPart:\n return t(\"Common:SpacesInLocalPart\");\n case ErrorKeys.MaxLengthExceeded:\n return t(\"Common:MaxLengthExceeded\");\n case ErrorKeys.IncorrectEmail:\n return t(\"Common:IncorrectEmail\");\n case ErrorKeys.ManyEmails:\n return t(\"Common:ManyEmails\");\n case ErrorKeys.EmptyEmail:",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/SalesDepartmentRequestDialog/index.js",
+      "line_number": 131,
+      "context": "case ErrorKeys.IncorrectLocalPart:\n return t(\"Common:IncorrectLocalPart\");\n case ErrorKeys.SpacesInLocalPart:\n return t(\"Common:SpacesInLocalPart\");\n case ErrorKeys.MaxLengthExceeded:\n return t(\"Common:MaxLengthExceeded\");\n case ErrorKeys.IncorrectEmail:\n return t(\"Common:IncorrectEmail\");\n case ErrorKeys.ManyEmails:\n return t(\"Common:ManyEmails\");\n case ErrorKeys.EmptyEmail:",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/utils/common.ts",
+      "line_number": 187,
+      "context": "case ErrorKeys.IncorrectLocalPart:\n return t(\"Common:IncorrectLocalPart\");\n case ErrorKeys.SpacesInLocalPart:\n return t(\"Common:SpacesInLocalPart\");\n case ErrorKeys.MaxLengthExceeded:\n return t(\"Common:MaxLengthExceeded\");\n default:\n return t(\"Common:IncorrectDomain\");\n }\n });",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Elektron poçtun maksimal uzunluğu 64 simvoldur' translates to 'The maximum length of an email is 64 characters.' The English content refers to usernames or another 'local part,' not specifically email.  This is a mistranslation of the scope.",
+          "suggestion": "Istifadəçi adı və ya yerli hissənin maksimal uzunluğu 64 simvoldur."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'characters' (as in, letters and numbers) is translated as 'Symbole'. 'Symbole' translates to 'symbols' which is a more general term and doesn't specifically refer to characters in a username. This can lead to confusion.",
+          "suggestion": "Die maximale Länge für den Benutzernamen oder anderen lokalen Teil beträgt 64 Zeichen."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation uses \"identyfikatora użytkownika\" which translates to \"user identifier\". The original sentence refers to a username or any 'local part'. 'Local part' is a more precise technical term here, which doesn't have a direct equivalent in Polish and requires more context. \"identyfikatora użytkownika\" is too specific.",
+          "suggestion": "Consider rephrasing to something like \"Maksymalna długość nazwy użytkownika lub innego fragmentu adresu wynosi 64 znaków.\" or \"Maksymalna długość segmentu identyfikującego użytkownika wynosi 64 znaki.\" depending on the intended audience."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the translation could benefit from punctuation consistency. Polish often uses a slightly different punctuation style.",
+          "suggestion": "Consider adding a comma after \"Maksymalna długość\" for better readability. E.g., \"Maksymalna długość, identyfikatora użytkownika...\""
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation uses \"имя почтового ящика\" (mailbox name) which is not equivalent to \"user name or another local part\". It's a more specific term.",
+          "suggestion": "Максимальная длина имени пользователя или другой локальной части - 64 символов."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'අකුරු' (akuru) means 'letters' and while technically correct, it's more natural to use a term implying characters or length. The original English emphasizes 'characters'.",
+          "suggestion": "පරිශ්‍රීලක නාමයක හෝ වෙනත් ස්ථානීය කොටසක උපරිම දිග 64 අක්ෂර කි."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

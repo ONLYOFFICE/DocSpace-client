@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
@@ -95,13 +95,14 @@ const RoomsListComponent = (props) => {
         </Text>
         {roomsList}
 
-        {roomsListLength > 5 && (
+        {roomsListLength > 5 ? (
           <Button
             {...buttonProps}
             label={t("Common:ShowMore")}
             onClick={onClickRooms}
+            testId="show_more_rooms_button"
           />
-        )}
+        ) : null}
       </div>
     </StyledStatistics>
   );

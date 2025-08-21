@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,25 +24,53 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface ColorPickerProps {
-  /** Class name */
+export type ColorPickerProps = {
+  /** Optional CSS class name for custom styling */
   className?: string;
-  /** Used as HTML `id` property  */
+
+  /** HTML id attribute for the component */
   id?: string;
-  /** Triggers function on color picker close */
-  onClose: () => void;
-  /** Hides controls */
+
+  /** Callback function triggered when the color picker is closed
+   * @returns void
+   */
+  onClose?: () => void;
+
+  /** If true, displays only the color picker without hex input and control buttons
+   * @default false
+   */
   isPickerOnly: boolean;
-  /** Triggers function on color apply */
-  onApply: (color: string) => void;
-  /** Selected color */
+
+  /** Callback function triggered when the color is applied
+   * @param color - The selected color in hex format
+   * @returns void
+   */
+  onApply?: (color: string) => void;
+
+  /** The currently selected color in hex format */
   appliedColor: string;
-  /** Apply button text */
-  applyButtonLabel: string;
-  /** Cancel button text */
-  cancelButtonLabel: string;
-  /** Allows handling the changing values of the component */
+
+  /** Custom label for the apply button
+   * @default "Apply"
+   */
+  applyButtonLabel?: string;
+
+  /** Custom label for the cancel button
+   * @default "Cancel"
+   */
+  cancelButtonLabel?: string;
+
+  /** Callback function triggered on every color change
+   * @param color - The current color in hex format
+   * @returns void
+   */
   handleChange?: (color: string) => void;
-  /** Hex code text */
+
+  /** Custom label for the hex code input field
+   * @default "Hex code"
+   */
   hexCodeLabel?: string;
-}
+
+  /** React ref object for the component's root div element */
+  forwardedRef?: React.RefObject<HTMLDivElement | null>;
+};

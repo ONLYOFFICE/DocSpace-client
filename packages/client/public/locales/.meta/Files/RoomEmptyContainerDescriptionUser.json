@@ -1,0 +1,296 @@
+{
+  "key_path": "RoomEmptyContainerDescriptionUser",
+  "content": "Rooms shared with you will appear here.",
+  "content_en_sha1_hash": "2af30b0da9ba4acdb37ac4e3a52189aaa6147f87",
+  "created_at": "2025-05-19T21:30:56.091Z",
+  "updated_at": "2025-06-02T10:20:51.018Z",
+  "comment": {
+    "text": "This translation key is used to display a message that explains how shared rooms will be displayed on the user's device. It appears in the UI as part of an empty container when rooms are being shared between users and is intended for collaborative or visitor contexts. The goal is to provide clarity on what the user should expect when receiving shared content.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:39:14.860Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
+      "line_number": 115,
+      "context": "<>\n <div>{t(\"Common:RoomEmptyAtTheMoment\")}</div>\n <div>{t(\"Common:FilesWillAppearHere\")}</div>\n </>\n ) : isVisitor || isCollaborator ? (\n t(\"RoomEmptyContainerDescriptionUser\")\n ) : (\n t(\"RoomEmptyContainerDescription\")\n );\n \n const archiveRoomsDescription =",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ستظهر هنا الغرف المشتركة معك' literally translates to 'The shared rooms will appear here with you'. While understandable, it's not the most natural or idiomatic way to express 'Rooms shared with you will appear here' in Arabic. It implies a direct association with the user that isn't necessary.",
+          "suggestion": "ستظهر الغرف المشتركة معك هنا. (Stathhar al-ghuraf al-mushtaraka ma'ak huna.) or الغرف المشتركة معك ستظهر هنا. (Al-ghuraf al-mushtaraka ma'ak satathhar huna.) - both more natural phrasing."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Zde se zobrazí pokoje, které s vámi sdílíte' is not a direct or ideal translation of 'Rooms shared with you will appear here.' It implies the rooms share something *with* the user, rather than being shared *to* the user. A better translation would convey that the rooms are accessible *to* the user.",
+          "suggestion": "Zde se zobrazí pokoje, které jsou se sdíleny s vámi."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Τα δωμάτια που μοιράζονται μαζί σας θα εμφανίζονται εδώ' is a literal translation that sounds unnatural in Greek. A more natural phrasing would convey the intended meaning of 'Rooms shared with you will appear here.' The phrase 'μοιράζονται μαζί σας' is a bit clunky.",
+          "suggestion": "Τα δωμάτια που έχετε πρόσβαση θα εμφανίζονται εδώ."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is technically correct but lacks the natural flow of Finnish. A more idiomatic translation would better convey the meaning of 'Rooms shared with you will appear here'. The current translation is very literal.",
+          "suggestion": "Huoneet, jotka on jaettu kanssasi, näkyvät tässä."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Šeit tiks parādītas ar jums koplietotas telpas\" is a literal translation that doesn't convey the natural flow of the English sentence. A more natural and accurate translation would be something like \"Tava kopsaimniekošanas telpas būs redzamas šeit\" or \"Šeit redzēs telpas, kurām ir kopīga lietošana ar jums\".",
+          "suggestion": "Tava kopsaimniekošanas telpas būs redzamas šeit"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Met u gedeelde kamers verschijnen hier\" is not the most natural or accurate translation of \"Rooms shared with you will appear here.\" It is grammatically correct but sounds a bit awkward in Dutch.  A more natural rendering would convey the sense of 'rooms that have been shared *with* you'.",
+          "suggestion": "De met u gedeelde kamers worden hier weergegeven."
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Pokoje, do których masz dostęp będą widoczne tutaj' is not a direct or natural translation of 'Rooms shared with you will appear here.' While technically correct, it's a bit clunky and literal. A more natural translation would emphasize that these are rooms *granted* to the user.",
+          "suggestion": "Pokoje, do których masz dostęp, zostaną tutaj wyświetlone."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of a comma after 'dostęp' can make the sentence feel slightly disjointed. Consider removing it for better flow.",
+          "suggestion": "Pokoje do których masz dostęp będą widoczne tutaj."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ඔබ සමඟ බෙදාගත් කාමර මෙහි දිස්වේ.' while understandable, doesn't fully capture the meaning of 'Rooms shared with you will appear here.' A more natural translation would emphasize that these are rooms *accessible* to the user, rather than simply 'shared'.",
+          "suggestion": "ඔබ සමඟ බෙදාගත් කාමර මෙහි පෙනේ."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Tu sa zobrazia miestnosti, ktoré s vami niekto zdieľa' is a bit literal and doesn't flow naturally in Slovak. A more natural phrasing would be something like 'Zobrazia sa tu miestnosti zdieľané s vami' or 'Tu uvidíte miestnosti zdieľané s vami'.",
+          "suggestion": "Zobrazia sa tu miestnosti zdieľané s vami"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Tukaj bodo prikazane sobe, ki so v skupni rabi z vami' is a bit literal and clunky. A more natural Slovenian phrasing would be better.",
+          "suggestion": "Tukaj bodo naštete sobe, ki jih delite."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Собе дељене са вама ће се појавити овде' is a literal translation but doesn't quite convey the intended meaning of 'Rooms shared with you will appear here'. A more natural Serbian translation would be something along the lines of 'Просторије које су вам дељене ће се појавити овде' or 'Соби које су вам доступне ће се појавити овде'.",
+          "suggestion": "Просторије које су вам дељене ће се појавити овде"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Sobe deljene sa vama će se pojaviti ovde' doesn't accurately reflect the meaning of 'Rooms shared with you will appear here.' The word 'sobe' (rooms) is correct, but 'deljene sa vama' is an awkward and overly formal way to say 'shared with you'.",
+          "suggestion": "Prostorije koje su sa vama podeljene će se pojaviti ovde."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation includes 'će' which introduces a future tense. While grammatically correct, it may sound slightly less natural in this context. Consider a more direct present tense.",
+          "suggestion": "Prostorije koje su sa vama podeljene pojavljuju se ovde."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Тут з’являться кімнати, до яких вам надали доступ' is too literal and doesn't flow naturally in Ukrainian. It emphasizes that someone 'gave' access, which isn't the primary meaning in the English context. The English phrase 'Rooms shared with you' implies they're accessible to you.",
+          "suggestion": "A more natural translation would be: 'Тут будуть кімнати, якими ви поділилися' or 'Тут будуть кімнати, доступні вам' or simply 'Тут будуть ваші кімнати'."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

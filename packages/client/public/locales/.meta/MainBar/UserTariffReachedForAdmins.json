@@ -1,0 +1,377 @@
+{
+  "key_path": "UserTariffReachedForAdmins",
+  "content": "All users will be added with User permissions only. To be able to add further admins, <1>click here</1> to upgrade your tariff plan.",
+  "content_en_sha1_hash": "f52118031145b1b303d8cb66d6ba78031074a132",
+  "created_at": "2025-05-19T21:30:54.154Z",
+  "updated_at": "2025-05-24T07:52:21.823Z",
+  "comment": {
+    "text": "This translation key is used to display a message to non-admin users informing them that they have reached their tariff plan limit and can upgrade to add admin permissions. The message appears as a button in the UI, allowing users to click \"here\" to upgrade their plan.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:17.724Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
+      "line_number": 107,
+      "context": "if (!isAdmin) return t(\"UserTariffReached\");\n \n return (\n <Trans\n t={t}\n i18nKey=\"UserTariffReachedForAdmins\"\n values={{\n productName: t(\"Common:ProductName\"),\n }}\n components={{\n 1: (",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are inconsistent. They appear to be intended to highlight a link, but the tag names are different.",
+          "suggestion": "Ensure consistent HTML tag usage. Use either `<1>` and `</1>` or `<a href=\"#\">` and `</a>` depending on the intended functionality."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"To be able to add further admins\" is not accurately translated. The Azerbaijani translation \"Daha çox administrator əlavə etmək üçün\" literally translates to \"To add more administrators.\" A more accurate translation would convey the purpose of the click, which is to upgrade the tariff plan to enable adding more admins.",
+          "suggestion": "Daha çox administrator əlavə etmək üçün tarif planınızı təkmilləşdirin."
+        },
+        {
+          "type": "formatting",
+          "description": "The `<1>` tag is not properly localized. It should be translated to the local equivalent if a different tag is preferred.",
+          "suggestion": "Consider using a locally preferred tag if applicable. Otherwise, confirm consistency with other instances of the tag."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tag `<1>` is inconsistent with typical HTML usage. It appears to be used as a placeholder. It should ideally be replaced with a more standard HTML tag or removed.",
+          "suggestion": "Review the intended purpose of the `<1>` tags and replace them with appropriate HTML or remove them."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"To be able to add further admins\" is not perfectly translated.  A more natural and accurate translation would be something like \"Pro přidávání dalších administrátorů\" or \"Abyste mohli přidat další administrátory\". The current translation, while understandable, is slightly awkward.",
+          "suggestion": "Abyste mohli přidat další administrátory"
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags `<1>` and `</1>` are unusual and potentially incorrect. The original English uses the same tags, but they are not standard HTML. Assuming they are meant to indicate a hyperlink, they should be replaced with `<a>` and `</a>` tags.",
+          "suggestion": "<a href=\"[link]\">klikněte zde</a>"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"to be able to add further admins\" is not accurately translated. \"Voidaksesi lisätä pääkäyttäjiä\" literally translates to 'To be able to add administrators'. While technically correct, it's a bit clunky. A more natural Finnish phrasing would convey the meaning better.",
+          "suggestion": "Consider rephrasing to something like 'Lisätäksesi lisää pääkäyttäjiä' or 'Jotta voit lisätä lisää pääkäyttäjiä'."
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags `<1>` and `</1>` are inconsistent with the English content and may cause display issues. The English version uses `click here`, while the Finnish translation maintains the HTML tag around 'klikkaa tästä'.",
+          "suggestion": "Ensure the HTML tags around the link phrase match the English version (e.g., use `<1>click here</1>` or `<1>klikkaa tästä</1>` consistently)."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'upgrade your tariff plan' is translated as 'päivittääksesi tilauksesi'. 'Tilaus' primarily refers to a subscription, not a tariff plan. While understandable, it’s not the most precise translation.",
+          "suggestion": "Consider using 'päivittääksesi liittymäsi' or 'päivittääksesi hinnoittelusi' to more accurately convey 'upgrade your tariff plan'."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'To be able to add further admins' is translated as 'Այլ ադմիններ ավելացնելու համար'. While technically correct, it's slightly awkward. A more natural phrasing might be 'եթե ցանկանում եք ավելացնել ավելին ադմիններ'.",
+          "suggestion": "եթե ցանկանում եք ավելացնել ավելին ադմիններ"
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1>click here</1> are inconsistent with the English. The English uses <1>click here</1> while the Armenian translation uses the same without any apparent modification.",
+          "suggestion": "Ensure the formatting matches the English counterpart. Consider changing to `<1>սեղմեք այստեղ</1>`"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'to upgrade your tariff plan' is a bit literal and could be improved for natural Italian flow. 'effettuare l'upgrade del piano tariffario' is grammatically correct but slightly clunky.",
+          "suggestion": "Consider a more natural phrasing like 'per aggiornare il piano tariffario' or 'per passare a un piano superiore'."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags `<1>` and `</1>` are inconsistent between the English and Japanese versions. The English version uses 'click here', while the Japanese uses 'こちら'.  The HTML tags are likely intended to mark the clickable element, but the content inside the tags is different.",
+          "suggestion": "Ensure the HTML tags consistently surround the intended clickable text ('click here' in English, 'こちら' in Japanese) and are semantically correct for the platform being used."
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets `<1>` are present in the Korean translation, mirroring the English, but their purpose isn't clear and might be unnecessary or confusing for the Korean audience. The bracket tag should be removed.",
+          "suggestion": "Remove the angle brackets: 요금제를 업그레이드하세요."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tag `<1>` is inconsistent with standard practices. It should be replaced with a standard link tag.",
+          "suggestion": "Replace `<1>click here</1>` with `<a href=\"[link]\">click here</a>` (assuming a link target exists, replace [link] with the actual URL)."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation is understandable, 'ກົດບ່ອນນີ້' (got bon ni) is a very literal translation of 'click here'.  A more natural Lao phrasing could improve the user experience.",
+          "suggestion": "Consider a more natural phrasing like 'ກົດທີ່ນີ້' (got thi ni) or 'ກົດບ່ອນນີ້ເພື່ອ...' (got bon ni phua...)"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tag `<1>` is present in both the English and Polish versions, but its purpose isn't clear without context. Assuming it's a hyperlink wrapper, a more standard HTML tag like `<a>` should be considered for better semantics.",
+          "suggestion": "Consider replacing `<1>...</1>` with `<a href=\"[link]\">kliknij tutaj</a>` (replace [link] with the actual URL)."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'To be able to add further admins' is not perfectly translated to 'Pentru a adăuga administratori în continuare'. A more accurate translation would be something like 'Pentru a putea adăuga alți administratori'.",
+          "suggestion": "Pentru a putea adăuga alți administratori"
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are not standard for simple links. They should be replaced with standard <a> tags.",
+          "suggestion": "Replace <1>click here</1> with <a href=\"#\">click here</a>"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'click here' is translated as 'මෙතැන ක්ලික් කරන්න'. While technically correct, a more natural and user-friendly translation would be something like 'තවත් පරිපාලකයන් යොවත් කිරීම සඳහා, මෙන්න ක්ලික් කරන්න' or 'තවත් පරිපාලකයන් යොවත් කිරීමට, මෙන්න ක්ලික් කරන්න'.",
+          "suggestion": "තවත් පරිපාලකයන් යොවත් කිරීමට, මෙන්න ක්ලික් කරන්න"
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are inconsistent with the English version. While preserving them isn't inherently wrong, it's likely intended to be a hyperlink.  This should be clarified.",
+          "suggestion": "Ensure consistent HTML tag usage. Consider using <a> tags for a proper hyperlink."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'upgrade your tariff plan' is translated as 'aktualizujte svoj tarifný plán'. While 'aktualizovať' (to update) is a possible translation, 'navýšiť' (to increase/upgrade) would be more accurate in the context of a tariff plan.",
+          "suggestion": "Všetci používatelia budú pridávaní len s povolením používateľa. Ak chcete mať možnosť pridávať ďalších administrátorov, <1>kliknite sem</1> a navýšte svoj tarifný plán."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"To be able to add further admins\" is somewhat clunky. A more natural Serbian translation would be \"Da biste mogli da dodelite više administratora\".",
+          "suggestion": "Da biste mogli da dodelite više administratora"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"admine\" is an incorrect Anglicism. The correct Serbian term for 'admins' is 'administratori'.",
+          "suggestion": "administratori"
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags `<1>` and `</1>` are likely incorrect and indicate a problem with the tag placement or purpose. These are not standard HTML tags.",
+          "suggestion": "Investigate and correct the intended HTML tags. Likely, these should be `<a>` or similar."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'click here' is translated as 'buraya tıklayın'. While technically correct, a more natural and user-friendly translation would be 'yükseltmek için tıklayın' or 'güncellemek için tıklayın'.",
+          "suggestion": "yükseltmek için tıklayın"
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags `<1>` and `</1>` seem like a placeholder for a hyperlink. Ensure the closing tag is properly rendered as `</a>` and the opening tag includes the `href` attribute pointing to the tariff upgrade page.",
+          "suggestion": "Check and correct the HTML tag format and add href attribute."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tag `<1>` appears to be used as a placeholder and should be replaced with the actual link tag or removed if the functionality is implemented differently.",
+          "suggestion": "Replace `<1>` with the appropriate HTML link tag (e.g., `<a href=\"upgrade-url\">Натисніть тут</a>`) or remove it if the link functionality is implemented elsewhere."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are present in both the English and Vietnamese content. These tags likely represent some sort of highlighting or link formatting, and should be verified for correct application within the target system. The tags themselves are technically correct, but their intended function requires further investigation.",
+          "suggestion": "Verify the intended behavior and correct application of the <1> and </1> tags within the system displaying this text. Ensure they function as expected and are consistent with the design."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are inconsistent. The English uses `<1>` and `</1>`, but the Chinese translation uses <1> and </1>. This needs to be standardized.",
+          "suggestion": "Change the closing tag from </1> to </1>."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

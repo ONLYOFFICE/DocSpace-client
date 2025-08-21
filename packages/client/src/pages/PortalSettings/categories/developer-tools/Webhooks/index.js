@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -37,6 +37,7 @@ import { useTranslation } from "react-i18next";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import { EmptyServerErrorContainer } from "SRC_DIR/components/EmptyContainer/EmptyServerErrorContainer";
 import { DeleteWebhookDialog } from "./sub-components/DeleteWebhookDialog";
 import { WebhookConfigsLoader } from "./sub-components/Loaders";
 import WebhooksTable from "./sub-components/WebhooksTable";
@@ -71,6 +72,10 @@ const StyledCreateButton = styled(Button)`
   width: calc(100% - 32px);
 `;
 
+const WebhookInfoWrapper = styled.div`
+  margin-bottom: ${(props) => (props.withEmptyScreen ? "0px" : "25px")};
+`;
+
 const Webhooks = (props) => {
   const {
     loadWebhooks,
@@ -79,11 +84,13 @@ const Webhooks = (props) => {
     currentWebhook,
     editWebhook,
     deleteWebhook,
+    errorWebhooks,
   } = props;
 
   const { t, ready } = useTranslation(["Webhooks", "Common"]);
 
   const [, startTranslation] = useTransition();
+  const [isLoading, setIsLoading] = useState(true);
 
   setDocumentTitle(t("Webhooks"));
 
@@ -112,37 +119,61 @@ const Webhooks = (props) => {
   };
 
   useEffect(() => {
-    ready && startTranslation(loadWebhooks);
+    if (ready) {
+      setIsLoading(true);
+      startTranslation(async () => {
+        try {
+          await loadWebhooks();
+        } finally {
+          setIsLoading(false);
+        }
+      });
+    }
   }, [ready]);
 
   return (
     <Suspense fallback={<WebhookConfigsLoader />}>
       <MainWrapper>
-        <WebhookInfo />
-        {isMobile() ? (
-          <ButtonSeating>
-            <StyledCreateButton
-              label={t("CreateWebhook")}
-              primary
-              size="normal"
-              onClick={openCreateModal}
-            />
-          </ButtonSeating>
-        ) : (
-          <Button
-            id="create-webhook-button"
-            label={t("CreateWebhook")}
-            primary
-            size="small"
-            onClick={openCreateModal}
-          />
-        )}
+        <WebhookInfoWrapper withEmptyScreen={errorWebhooks}>
+          <WebhookInfo />
+        </WebhookInfoWrapper>
 
-        {!isWebhooksEmpty && (
-          <WebhooksTable
-            openSettingsModal={openSettingsModal}
-            openDeleteModal={openDeleteModal}
-          />
+        {errorWebhooks ? (
+          <EmptyServerErrorContainer />
+        ) : (
+          <>
+            {isMobile() ? (
+              <ButtonSeating>
+                <StyledCreateButton
+                  label={t("CreateWebhook")}
+                  primary
+                  size="normal"
+                  onClick={openCreateModal}
+                  isDisabled={isLoading}
+                  testId="create_webhook_button"
+                />
+              </ButtonSeating>
+            ) : (
+              <Button
+                id="create-webhook-button"
+                label={t("CreateWebhook")}
+                primary
+                size="small"
+                onClick={openCreateModal}
+                isDisabled={isLoading}
+                testId="create_webhook_button"
+              />
+            )}
+
+            {!isLoading ? (
+              !isWebhooksEmpty ? (
+                <WebhooksTable
+                  openSettingsModal={openSettingsModal}
+                  openDeleteModal={openDeleteModal}
+                />
+              ) : null
+            ) : null}
+          </>
         )}
         <WebhookDialog
           visible={isCreateOpened}
@@ -181,6 +212,7 @@ export default inject(({ webhooksStore }) => {
     currentWebhook,
     editWebhook,
     deleteWebhook,
+    errorWebhooks,
   } = webhooksStore;
 
   return {
@@ -191,5 +223,6 @@ export default inject(({ webhooksStore }) => {
     currentWebhook,
     editWebhook,
     deleteWebhook,
+    errorWebhooks,
   };
 })(observer(Webhooks));

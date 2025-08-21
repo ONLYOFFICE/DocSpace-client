@@ -1,4 +1,6 @@
 {
+  "DeleteVersion": "Supprimer la version",
+  "DeleteVersionDescription": "Vous êtes sur le point de supprimer une version de fichier. Il ne sera plus possible de le voir ou de le restaurer. Voulez-vous vraiment continuer ?",
   "EditComment": "Modifier le commentaire",
   "Version": "Ver."
 }

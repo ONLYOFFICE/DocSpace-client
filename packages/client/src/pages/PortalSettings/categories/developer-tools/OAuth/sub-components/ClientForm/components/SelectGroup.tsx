@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -41,6 +41,8 @@ interface SelectGroupProps {
   description: string;
 
   onSelect: (e: React.ChangeEvent<HTMLInputElement>) => void;
+
+  dataTestId?: string;
 }
 
 const SelectGroup = ({
@@ -52,6 +54,7 @@ const SelectGroup = ({
   description,
 
   onSelect,
+  dataTestId,
 }: SelectGroupProps) => {
   const inputRef = React.useRef<HTMLInputElement | null>(null);
 
@@ -70,7 +73,7 @@ const SelectGroup = ({
   };
 
   return (
-    <StyledInputGroup>
+    <StyledInputGroup data-testid={dataTestId}>
       <div className="label">
         <Text
           fontSize="13px"
@@ -79,7 +82,6 @@ const SelectGroup = ({
           tag=""
           as="p"
           color=""
-          textAlign=""
         >
           {label}{" "}
           <span style={{ color: globalColors.lightErrorStatus }}> *</span>
@@ -92,18 +94,7 @@ const SelectGroup = ({
           alt="img"
           src={value}
         />
-        <SelectorAddButton onClick={onClick} />
-        <Text
-          fontSize="13px"
-          fontWeight={600}
-          lineHeight="20px"
-          tag=""
-          as="p"
-          color=""
-          textAlign=""
-        >
-          {selectLabel}
-        </Text>
+        <SelectorAddButton onClick={onClick} label={selectLabel} />
       </div>
       <Text
         fontSize="12px"
@@ -112,7 +103,6 @@ const SelectGroup = ({
         tag=""
         as="p"
         color=""
-        textAlign=""
         className="description"
       >
         {description}

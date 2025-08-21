@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,9 +28,9 @@ import React, { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 import difference from "lodash/difference";
 import { withTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
-import { ADS_TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
+import { ADS_TIMEOUT } from "SRC_DIR/helpers/filesConstants";
 
 import { getConvertedSize } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -305,7 +305,7 @@ const Bar = (props) => {
 
   useEffect(() => {
     const updateTimeout = setTimeout(() => updateBanner(), 1000);
-    const updateInterval = setInterval(updateBanner, ADS_TIMEOUT);
+    const updateInterval = setInterval(() => updateBanner(), ADS_TIMEOUT);
     return () => {
       clearTimeout(updateTimeout);
       clearInterval(updateInterval);

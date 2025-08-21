@@ -31,15 +31,9 @@ import { RoomsType } from "../../enums";
 import RoomType from ".";
 
 const meta = {
-  title: "Components/RoomType",
+  title: "Base UI components/RoomType",
   component: RoomType,
   parameters: {},
-  // argTypes: {
-  //   type: {
-  //     options: ["Editing Room", "Custom Room"],
-  //     control: { type: "select" },
-  //   },
-  // },
 } satisfies Meta<typeof RoomType>;
 type Story = StoryObj<typeof meta>;
 

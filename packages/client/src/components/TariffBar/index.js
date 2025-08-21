@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,7 @@
 
 import { useEffect } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -120,6 +120,8 @@ const TariffBar = ({
         color={tariffBar.color}
         onClick={onClick}
         truncate
+        dataTestId="tariff_bar_text"
+        noSelect
       >
         {tariffBar.label}
       </Text>

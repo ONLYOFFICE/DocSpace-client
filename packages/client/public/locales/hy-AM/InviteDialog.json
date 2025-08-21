@@ -1,18 +1,22 @@
 {
   "AddManually": "Ավելացնել ձեռքով",
   "EmailErrorMessage": "Էլփոստի հասցեն վավեր չէ: Դուք կարող եք խմբագրել նամակը՝ կրկնակի սեղմելով դրա վրա:",
+  "EmailErrorMessageUserNotFound": "Օգտատերը չի գտնվել: Կարող եք խմբագրել էլ. նամակը՝ կրկնակի սեղմելով դրա վրա:",
   "GroupMaxAvailableRoleWarning": "Խմբերը կարող են ավելացվել սենյակում, որտեղ առավելագույնը {{roleName}} դերն է: Այնուամենայնիվ, դուք կարող եք փոխել առանձին օգտատերերի դերը խմբում այն ​​հաջողությամբ ավելացնելուց հետո:",
   "InvitationLanguage": "Հրավերների լեզու",
   "InviteMembersManuallyDescription": "Անձամբ էլ․փոստի միջոցով հրավիրեք նոր անդամների {{productName}}",
   "InviteMembersSearchPlaceholder": "Հրավիրեք անդամներին էլեկտրոնային փոստով",
-  "InviteToRoomManuallyInfo": "Ավելացնել գոյություն ունեցող {{productName}} կոնտակտներ: Կամ էլ․փոստով անձամբ հրավիրեք նոր օգտատերերի: Նոր օգտատերերը կավելացվեն ձեր հյուրերի ցանկում:",
+  "InviteToRoomAddPlaceholder": "Ավելացնել մարդկանց անունով կամ էլ․ փոստով",
+  "InviteToRoomManuallyInfoGuest": "Ավելացրեք {{productName}}-ի առկա կոնտակտները։ Կամ հրավիրեք նոր օգտատերերի անձամբ էլ. փոստով։ Նոր օգտատերերը կավելացվեն ձեր հյուրերի ցուցակում։",
+  "InviteToRoomManuallyInfoMembers": "Ավելացրեք {{productName}}-ի առկա անդամներին սենյակում։",
   "InviteToRoomSearchPlaceholder": "Որոնեք և հրավիրեք անունով կամ էլ․հասցեով",
   "InviteViaLink": "Հրավիրեք հղման միջոցով",
   "InviteViaLinkDescriptionAccounts": "Ստեղծեք ունիվերսալ հղում {{productName}}-ում ինքնալիազորման համար",
-  "InviteViaLinkDescriptionRoom": "Ստեղծեք համընդհանուր հղում սենյակում ինքնալիազորման համար",
+  "InviteViaLinkDescriptionRoomGuest": "Ստեղծեք ունիվերսալ հղում սենյակում որպես հյուր ինքնալիազորման համար։",
+  "InviteViaLinkDescriptionRoomMembers": "Ստեղծեք ունիվերսալ հղում {{productName}} անդամների համար՝ սենյակում ինքնահավաստագրման համար։",
   "LinkCopySuccess": "Հղումը պատճենվել է",
-  "ResetChange": "Վերականգնել փոփոխությունը",
   "SendInvitation": "Ուղարկել հրավոր",
   "UserMaxAvailableRoleWarning": "Հյուրերը և օգտատերերը չեն կարող նշանակվել որպես Սենյակի մենեջերներ: Նշված դերի համար հարմար են միայն Սենյակի և {{productName}} ադմինիստրատորները:",
-  "UsersAlreadyAdded": "Որոշ օգտվողներ արդեն ավելացվել են"
+  "UsersAlreadyAdded": "Որոշ օգտվողներ արդեն ավելացվել են",
+  "UsersCannotBeAdded": "Անջրկված կոնտակտները չեն կարող ավելացվել դրանցում։"
 }

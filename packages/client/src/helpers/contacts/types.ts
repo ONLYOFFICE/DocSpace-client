@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -46,13 +46,60 @@ export type TContactsViewAs = "table" | "row";
 
 export type TContactsMenuItemdId = "active" | "pending" | "disabled" | "all";
 
+export type TPeopleListItem = {
+  id: string;
+  status: EmployeeStatus;
+  activationStatus: number;
+  statusType: string;
+  role: EmployeeType;
+  isOwner: boolean;
+  isAdmin: boolean;
+  isCollaborator: boolean;
+  isRoomAdmin: boolean;
+  isVisitor: boolean;
+  displayName: string;
+  avatar: string;
+  avatarMax: string | undefined;
+  hasAvatar: boolean;
+  email: string;
+  userName: string;
+  mobilePhone: string | undefined;
+  options: string[] | undefined;
+  groups: any[] | undefined;
+  position: string | undefined;
+  firstName: string | undefined;
+  lastName: string | undefined;
+  isSSO: boolean;
+  isLDAP: boolean;
+  quotaLimit: number | undefined;
+  usedSpace: number | undefined;
+  isCustomQuota: boolean | string | undefined;
+  createdBy: any;
+  registrationDate: string | undefined;
+  tfaAppEnabled: boolean | undefined;
+};
+
 export type TChangeUserTypeDialogData = {
   toType: EmployeeType;
   fromType: EmployeeType[];
   userIDs: string[];
   userNames: string[];
+  user?: {
+    id: string;
+    status: EmployeeStatus;
+    activationStatus: number;
+    statusType: string;
+    role: EmployeeType;
+    displayName?: string;
+  };
   successCallback?: (users?: TUser[]) => void;
   abortCallback?: VoidFunction;
+  getReassignmentProgress?: () => Promise<number>;
+  reassignUserData?: boolean;
+  cancelReassignment?: VoidFunction;
+  showDeleteProfileCheckbox?: boolean;
+  needReassignData?: boolean;
+  noRoomFilesToMove?: boolean;
 };
 
 export type TChangeUserStatusDialogData = {

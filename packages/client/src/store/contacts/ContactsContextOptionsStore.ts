@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -50,7 +50,7 @@ import FolderReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
 import EnableReactSvgUrl from "PUBLIC_DIR/images/enable.react.svg?url";
 import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import DelDataReactSvgUrl from "PUBLIC_DIR/images/del_data.react.svg?url";
-import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
+import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import RestoreAuthReactSvgUrl from "PUBLIC_DIR/images/restore.auth.react.svg?url";
 import DisableReactSvgUrl from "PUBLIC_DIR/images/disable.react.svg?url";
@@ -64,7 +64,9 @@ import PersonAdminReactSvgUrl from "PUBLIC_DIR/images/person.admin.react.svg?url
 import PersonManagerReactSvgUrl from "PUBLIC_DIR/images/person.manager.react.svg?url";
 import PersonDefaultReactSvgUrl from "PUBLIC_DIR/images/person.default.react.svg?url";
 import PersonUserReactSvgUrl from "PUBLIC_DIR/images/person.user.react.svg?url";
+import PersonShareReactSvgUrl from "PUBLIC_DIR/images/person.share.react.svg?url";
 import GroupReactSvgUrl from "PUBLIC_DIR/images/group.react.svg?url";
+import CatalogUserReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.user.react.svg?url";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
@@ -73,11 +75,14 @@ import {
   onDeletePersonalDataClick,
   onInviteAgainClick,
   onInviteMultipleAgain,
+  shareGuest,
 } from "SRC_DIR/helpers/contacts";
 
-import InfoPanelStore from "../InfoPanelStore";
+import { getInfoPanelOpen, showInfoPanel } from "SRC_DIR/helpers/info-panel";
+
 import ProfileActionsStore from "../ProfileActionsStore";
 import DialogsStore from "../DialogsStore";
+import SettingsSetupStore from "../SettingsSetupStore";
 
 import UsersStore from "./UsersStore";
 import DialogStore from "./DialogStore";
@@ -90,7 +95,6 @@ type TItem = ReturnType<UsersStore["getPeopleListItem"]>;
 class ContactsConextOptionsStore {
   constructor(
     public profileActionsStore: ProfileActionsStore,
-    public infoPanelStore: InfoPanelStore,
     public userStore: UserStore,
     public tfaStore: TfaStore,
     public settingsStore: SettingsStore,
@@ -99,9 +103,9 @@ class ContactsConextOptionsStore {
     public targetUserStore: TargetUserStore,
     public dialogsStore: DialogsStore,
     public currentQuotaStore: CurrentQuotasStore,
+    public setup: SettingsSetupStore,
   ) {
     this.settingsStore = settingsStore;
-    this.infoPanelStore = infoPanelStore;
     this.profileActionsStore = profileActionsStore;
     this.userStore = userStore;
     this.tfaStore = tfaStore;
@@ -110,7 +114,7 @@ class ContactsConextOptionsStore {
     this.targetUserStore = targetUserStore;
     this.dialogsStore = dialogsStore;
     this.currentQuotaStore = currentQuotaStore;
-
+    this.setup = setup;
     makeAutoObservable(this);
   }
 
@@ -152,11 +156,17 @@ class ContactsConextOptionsStore {
   };
 
   getUserContextOptions = (t: TTranslation, options: string[], item: TItem) => {
+    const { contactsTab } = this.usersStore;
+    const isGuests = contactsTab === "guests";
+    const { isRoomAdmin } = this.userStore.user!;
+
     const contextMenu = options.map((option) => {
       switch (option) {
         case "separator-1":
           return { key: option, isSeparator: true };
         case "separator-2":
+          return { key: option, isSeparator: true };
+        case "separator-3":
           return { key: option, isSeparator: true };
 
         case "profile":
@@ -260,13 +270,15 @@ class ContactsConextOptionsStore {
           };
 
         case "invite-again":
-          return {
-            id: "option_invite-again",
-            key: option,
-            icon: InviteAgainReactSvgUrl,
-            label: t("LblInviteAgain"),
-            onClick: () => onInviteAgainClick(item, t),
-          };
+          return !this.settingsStore.allowInvitingMembers
+            ? null
+            : {
+                id: "option_invite-again",
+                key: option,
+                icon: InviteAgainReactSvgUrl,
+                label: t("LblInviteAgain"),
+                onClick: () => onInviteAgainClick(item, t),
+              };
         case "reset-auth":
           return {
             id: "option_reset-auth",
@@ -274,7 +286,15 @@ class ContactsConextOptionsStore {
             icon: RestoreAuthReactSvgUrl,
             label: t("PeopleTranslations:ResetAuth"),
             onClick: () => this.onResetAuth(item),
-            disabled: this.tfaStore.tfaSettings !== "app",
+            disabled: !item.tfaAppEnabled,
+          };
+        case "share-guest":
+          return {
+            id: "option_share-guest",
+            key: option,
+            icon: PersonShareReactSvgUrl,
+            label: t("PeopleTranslations:ShareGuest"),
+            onClick: () => shareGuest(item, t),
           };
         case "change-type":
           return {
@@ -282,11 +302,16 @@ class ContactsConextOptionsStore {
             key: option,
             icon: ChangeToEmployeeReactSvgUrl,
             label: t("ChangeUserTypeDialog:ChangeUserTypeButton"),
-            onClick: () =>
-              this.usersStore.changeType(
-                EmployeeType.User,
-                this.usersStore.getUsersToMakeEmployees,
-              ),
+            onClick:
+              isGuests && isRoomAdmin
+                ? () =>
+                    this.usersStore.changeType(
+                      EmployeeType.User,
+                      this.usersStore.getUsersToMakeEmployees,
+                    )
+                : null,
+            withDropDown: !isRoomAdmin,
+            items: isRoomAdmin ? null : this.getUsersChangeTypeOptions(t, item),
           };
         case "remove-guest":
           return {
@@ -310,11 +335,15 @@ class ContactsConextOptionsStore {
     t: TTranslation,
     item?: ReturnType<UsersStore["getPeopleListItem"]>,
   ) => {
-    const { userSelectionRole, selectionUsersRights } = this.usersStore;
+    const { userSelectionRole, selectionUsersRights, contactsTab } =
+      this.usersStore;
+
+    const isGuests = contactsTab === "guests";
 
     const { isOwner: isUserOwner, isAdmin: isUserAdmin } = this.userStore.user!;
+    const { standalone, allowInvitingGuests } = this.settingsStore;
 
-    const { isCollaborator, isRoomAdmin, isAdmin } =
+    const { isCollaborator, isRoomAdmin, isAdmin, isVisitor } =
       item ?? selectionUsersRights;
 
     const options = [];
@@ -324,6 +353,9 @@ class ContactsConextOptionsStore {
       className: "group-menu_drop-down",
       label: getUserTypeTranslation(EmployeeType.Admin, t),
       title: getUserTypeTranslation(EmployeeType.Admin, t),
+      icon: isGuests ? PersonAdminReactSvgUrl : null,
+      badgeLabel: isGuests ? t("Common:Paid") : undefined,
+      isPaidBadge: !standalone,
       onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
       "data-action": EmployeeType.Admin,
       action: EmployeeType.Admin,
@@ -336,6 +368,9 @@ class ContactsConextOptionsStore {
       className: "group-menu_drop-down",
       label: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
       title: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
+      icon: isGuests ? PersonManagerReactSvgUrl : null,
+      badgeLabel: isGuests ? t("Common:Paid") : undefined,
+      isPaidBadge: !standalone,
       onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
       "data-action": EmployeeType.RoomAdmin,
       action: EmployeeType.RoomAdmin,
@@ -350,22 +385,33 @@ class ContactsConextOptionsStore {
       key: EmployeeType.User,
       label: getUserTypeTranslation(EmployeeType.User, t),
       title: getUserTypeTranslation(EmployeeType.User, t),
+      icon: isGuests ? CatalogUserReactSvgUrl : null,
       "data-action": EmployeeType.User,
       action: EmployeeType.User,
       onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
       isActive: item ? isCollaborator : userSelectionRole === EmployeeType.User,
     };
 
-    if ((isRoomAdmin || isCollaborator || isAdmin) && isUserOwner) {
-      options.push(adminOption);
+    const guestOption = {
+      id: "menu_change-guest",
+      key: EmployeeType.Guest,
+      label: getUserTypeTranslation(EmployeeType.Guest, t),
+      title: getUserTypeTranslation(EmployeeType.Guest, t),
+      "data-action": EmployeeType.Guest,
+      action: EmployeeType.Guest,
+      onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
+      isActive: item ? isVisitor : userSelectionRole === EmployeeType.Guest,
+    };
 
-      if ((isAdmin || isRoomAdmin) && !isCollaborator)
-        options.push(roomAdminOption);
-    }
+    if (isUserAdmin) {
+      if (isUserOwner) {
+        options.push(adminOption);
+      }
 
-    if (isCollaborator && isUserAdmin) {
       options.push(roomAdminOption);
       options.push(userOption);
+
+      if (!isVisitor && allowInvitingGuests) options.push(guestOption);
     }
 
     return options;
@@ -392,8 +438,6 @@ class ContactsConextOptionsStore {
 
     const { isRoomAdmin } = this.userStore.user!;
 
-    const { setIsVisible, isVisible } = this.infoPanelStore;
-
     const options = this.getUsersChangeTypeOptions(t);
 
     const menu = [
@@ -402,20 +446,22 @@ class ContactsConextOptionsStore {
         label: t("ChangeUserTypeDialog:ChangeUserTypeButton"),
         disabled: !hasUsersToMakeEmployees,
         icon: ChangeToEmployeeReactSvgUrl,
-        onClick: isGuests
-          ? () =>
-              this.usersStore.changeType(
-                EmployeeType.User,
-                this.usersStore.getUsersToMakeEmployees,
-              )
-          : null,
-        items: isGuests ? null : options,
+        onClick:
+          isGuests && isRoomAdmin
+            ? () =>
+                this.usersStore.changeType(
+                  EmployeeType.User,
+                  this.usersStore.getUsersToMakeEmployees,
+                )
+            : null,
+        withDropDown: !isRoomAdmin,
+        items: isRoomAdmin ? null : options,
       },
       {
         key: "cm-info",
         label: t("Common:Info"),
-        disabled: isVisible,
-        onClick: () => setIsVisible(true),
+        disabled: getInfoPanelOpen(),
+        onClick: showInfoPanel,
         icon: InfoOutlineReactSvgUrl,
       },
       {
@@ -540,6 +586,15 @@ class ContactsConextOptionsStore {
   toggleDataReassignmentDialog = (item: TItem) => {
     const { setDialogData, setDataReassignmentDialogVisible, closeDialogs } =
       this.dialogStore;
+
+    if (!this.setup) return;
+
+    const {
+      dataReassignment,
+      dataReassignmentProgress,
+      dataReassignmentTerminate,
+    } = this.setup;
+
     const {
       id,
       displayName,
@@ -553,23 +608,28 @@ class ContactsConextOptionsStore {
     closeDialogs();
 
     setDialogData({
-      id,
-      avatar,
-      displayName,
-      statusType,
-      userName,
-      isCollaborator,
-      isVisitor,
+      user: {
+        id,
+        avatar,
+        displayName,
+        statusType,
+        userName,
+        isCollaborator,
+        isVisitor,
+      },
+      reassignUserData: dataReassignment,
+      getReassignmentProgress: dataReassignmentProgress,
+      cancelReassignment: dataReassignmentTerminate,
+      showDeleteProfileCheckbox: true,
     });
 
     setDataReassignmentDialogVisible(true);
   };
 
   onDetailsClick = (item: TItem) => {
-    const { setIsVisible } = this.infoPanelStore;
     const { setBufferSelection } = this.usersStore;
     setBufferSelection(item);
-    setIsVisible(true);
+    showInfoPanel();
   };
 
   onResetAuth = (item: TItem) => {
@@ -669,7 +729,15 @@ class ContactsConextOptionsStore {
       },
     ];
 
-    return isRoomAdmin ? accountsUserOptions : accountsFullOptions;
+    // Delete Invite
+    if (!this.settingsStore.allowInvitingMembers)
+      accountsFullOptions.splice(0, 1);
+
+    return isRoomAdmin
+      ? !this.settingsStore.allowInvitingMembers
+        ? []
+        : accountsUserOptions
+      : accountsFullOptions;
   };
 
   inviteUser = (userType: EmployeeType) => {

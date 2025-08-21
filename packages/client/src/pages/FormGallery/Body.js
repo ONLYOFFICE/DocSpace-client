@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -81,7 +81,8 @@ const SectionBodyContent = ({
       e.target.closest(".scroll-body") &&
       !e.target.closest(".files-item") &&
       !e.target.closest(".not-selectable") &&
-      !e.target.closest(".info-panel")
+      !e.target.closest(".info-panel") &&
+      !e.target.closest(".info-panel-toggle-bg")
     ) {
       setGallerySelected(null);
     }
@@ -136,11 +137,15 @@ const SectionBodyContent = ({
     />
   ) : (
     <TileContainer className="tile-container">
-      {submitToGalleryTileIsVisible && canSubmitToFormGallery() && (
+      {submitToGalleryTileIsVisible && canSubmitToFormGallery() ? (
         <SubmitToGalleryTile />
-      )}
-      {oformFiles.map((item) => (
-        <FileTile key={item.id} item={item} />
+      ) : null}
+      {oformFiles.map((item, index) => (
+        <FileTile
+          key={item.id}
+          item={item}
+          dataTestId={`form_gallery_tile_${index}`}
+        />
       ))}
     </TileContainer>
   );

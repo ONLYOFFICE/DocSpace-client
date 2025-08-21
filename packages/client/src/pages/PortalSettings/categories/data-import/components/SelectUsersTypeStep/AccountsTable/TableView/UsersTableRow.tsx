@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -130,7 +130,7 @@ const UsersTableRow = (props: TypeSelectTableRowProps) => {
   };
 
   return (
-    <StyledTableRow checked={isChecked} onClick={handleAccountToggle}>
+    <StyledTableRow>
       <TableCell className="checkboxWrapper">
         <Checkbox isChecked={isChecked} onChange={handleAccountToggle} />
         <Text className="username" truncate>
@@ -150,6 +150,7 @@ const UsersTableRow = (props: TypeSelectTableRowProps) => {
             displaySelectedOption
             modernView
             manualWidth="auto"
+            dataTestId="user_type_combobox"
           />
         </div>
       </TableCell>

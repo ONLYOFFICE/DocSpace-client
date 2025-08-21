@@ -1,0 +1,253 @@
+{
+  "key_path": "PortalCreatedDate",
+  "content": "Portal Created date: {{date}}",
+  "content_en_sha1_hash": "0c0be7c4225b3b15fff1a9c616f27bd20a672258",
+  "created_at": "2025-05-19T21:30:52.170Z",
+  "updated_at": "2025-08-11T09:02:44.041Z",
+  "comment": {
+    "text": "This translation key displays the date a portal was created. It is used on a page displaying information about portal settings and appears as a label next to a specific field in the MainInfo component of the PortalSettings page.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:48.815Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/MainInfo.js",
+      "line_number": 44,
+      "context": "const creationDate = moment(portalInfo.creationDateTime).format(\"L\");\n \n return (\n <StyledMainInfo>\n <Text fontSize=\"14px\" fontWeight={400} dataTestId=\"portal_created_date\">\n {t(\"PortalCreatedDate\", { date: creationDate })}\n </Text>\n <Text fontSize=\"14px\" fontWeight={400}>\n {t(\"NumberOfActiveEmployees\", { count: activeUsersCount })}\n </Text>\n </StyledMainInfo>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"Created\" is inaccurate. \"Aangemaakt\" implies something was created or constructed, which isn't quite the same as 'created' in the context of a portal being established.",
+          "suggestion": "Portal Opgericht datum: {{date}}"
+        },
+        {
+          "type": "formatting",
+          "description": "The colon after 'datum' feels somewhat abrupt. While not strictly incorrect, it's not as natural as other options.",
+          "suggestion": "Portal Opgericht op: {{date}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Portal a fost creat la data de: {{date}}' is not the most natural or concise way to express 'Portal Created date: {{date}}'. 'La data de' is a bit verbose. A more fluent translation would be 'Data creării portalului: {{date}}' or 'Data creării: {{date}}'.",
+          "suggestion": "Data creării portalului: {{date}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ද්වාරය' (dvaaraya) which translates to 'portal' is correct. However, depending on the context, 'වේබ් ාවතාරය' (web aavaataraya) might be more accurate and understandable to some users.",
+          "suggestion": "Consider using 'වේබ් ාවතාරය' (web aavaataraya) for 'portal' if it better suits the target audience."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of '{{date}}' is consistent with the English original. Verify this placeholder is correctly handled in the Sinhala implementation.",
+          "suggestion": "Ensure the '{{date}}' placeholder is properly rendered and replaced with the date value in the Sinhala implementation."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Портал креиран датум: {{date}}' is not the most accurate translation of 'Portal Created date: {{date}}'. 'Креиран' means 'created' in the passive voice. A more accurate translation would be 'Датум креирања портала: {{date}}' (Date of portal creation).",
+          "suggestion": "Датум креирања портала: {{date}}"
+        },
+        {
+          "type": "formatting",
+          "description": "The colon after 'дата' is slightly unusual in Serbian.  While not incorrect, it's less common than placing the colon after the noun.",
+          "suggestion": "Датум креирања портала: {{date}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Portal kreiran datum:' is not the most natural way to express 'Portal Created date:'. A more accurate and idiomatic translation would be 'Datum kreiranja portala:'.",
+          "suggestion": "Datum kreiranja portala:"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

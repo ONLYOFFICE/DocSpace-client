@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -23,6 +23,9 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 
 import axios, { AxiosRequestConfig } from "axios";
 
@@ -54,6 +57,8 @@ import {
   TMigrationData,
   TSendWelcomeEmailData,
   TPortalCultures,
+  TStorageBackup,
+  TEncryptionSettings,
 } from "./types";
 
 export async function getSettings(withPassword = false, headers = null) {
@@ -312,15 +317,6 @@ export function deleteAppearanceTheme(id) {
   });
 }
 
-export function getLogoText(isManagement: boolean = false) {
-  const url = "/settings/whitelabel/logotext";
-
-  return request({
-    method: "get",
-    url: isManagement ? `${url}?isDefault=true` : url,
-  });
-}
-
 export async function getLogoUrls(
   headers = null,
   isManagement: boolean = false,
@@ -341,8 +337,26 @@ export async function getLogoUrls(
   return res;
 }
 
-export function setWhiteLabelSettings(data, isManagement: boolean = false) {
-  const url = "/settings/whitelabel/save";
+export function getIsDefaultWhiteLabelLogos(isManagement: boolean = false) {
+  const url = "/settings/whitelabel/logos/isdefault";
+
+  return request({
+    method: "get",
+    url: isManagement ? `${url}?isDefault=true` : url,
+  });
+}
+
+export function restoreWhiteLabelLogos(isManagement: boolean = false) {
+  const url = "/settings/whitelabel/logos/restore";
+
+  return request({
+    method: "put",
+    url: isManagement ? `${url}?isDefault=true` : url,
+  });
+}
+
+export function setWhiteLabelLogos(data, isManagement: boolean = false) {
+  const url = "/settings/whitelabel/logos/save";
 
   const options = {
     method: "post",
@@ -353,20 +367,23 @@ export function setWhiteLabelSettings(data, isManagement: boolean = false) {
   return request(options);
 }
 
-export function getIsDefaultWhiteLabel(isManagement: boolean = false) {
-  const url = "/settings/whitelabel/logos/isdefault";
+export function setBrandName(data, isManagement: boolean = false) {
+  const url = "/settings/whitelabel/logotext/save";
+
+  const options = {
+    method: "post",
+    url: isManagement ? `${url}?isDefault=true` : url,
+    data,
+  };
+
+  return request(options);
+}
+
+export function getBrandName(isManagement: boolean = false) {
+  const url = "/settings/whitelabel/logotext";
 
   return request({
     method: "get",
-    url: isManagement ? `${url}?isDefault=true` : url,
-  });
-}
-
-export function restoreWhiteLabelSettings(isManagement: boolean = false) {
-  const url = "/settings/whitelabel/restore";
-
-  return request({
-    method: "put",
     url: isManagement ? `${url}?isDefault=true` : url,
   });
 }
@@ -377,9 +394,10 @@ export function setCompanyInfoSettings(
   email,
   phone,
   site,
+  hideAbout,
 ) {
   const data = {
-    settings: { address, companyName, email, phone, site },
+    settings: { address, companyName, email, phone, site, hideAbout },
   };
 
   return request({
@@ -611,7 +629,7 @@ export async function getIsLicenseRequired() {
   return res;
 }
 
-export async function setLicense(confirmKey: string, data: FormData) {
+export async function setLicense(confirmKey: string | null, data: FormData) {
   const options: AxiosRequestConfig = {
     method: "post",
     url: `/settings/license`,
@@ -754,7 +772,7 @@ export function getBackupStorage(dump: boolean = false) {
       dump,
     },
   };
-  return request(options);
+  return request<TStorageBackup[]>(options);
 }
 
 export async function getBuildVersion(headers = null) {
@@ -961,11 +979,11 @@ export function getQuotaSettings() {
   });
 }
 
-export function createWebhook(name, uri, secretKey, ssl) {
+export function createWebhook(name, uri, secretKey, ssl, triggers, targetId) {
   return request({
     method: "post",
     url: `/settings/webhook`,
-    data: { name, uri, secretKey, ssl },
+    data: { name, uri, secretKey, enabled: true, ssl, triggers, targetId },
   });
 }
 
@@ -976,23 +994,30 @@ export function getAllWebhooks() {
   });
 }
 
-export function updateWebhook(id, name, uri, secretKey, ssl) {
+export function updateWebhook(
+  id,
+  name,
+  uri,
+  secretKey,
+  ssl,
+  triggers,
+  targetId,
+) {
   return request({
     method: "put",
     url: `/settings/webhook`,
-    data: { id, name, uri, secretKey, ssl },
+    data: { id, name, uri, secretKey, enabled: true, ssl, triggers, targetId },
   });
 }
 
 export function toggleEnabledWebhook(webhook) {
   return request({
     method: "put",
-    url: `/settings/webhook`,
+    url: `/settings/webhook/enable`,
     data: {
       id: webhook.id,
       name: webhook.name,
       uri: webhook.uri,
-      secretKey: webhook.secretKey,
       enabled: !webhook.enabled,
     },
   });
@@ -1212,7 +1237,7 @@ export function setTenantQuotaSettings(data) {
     data,
   };
 
-  return request(options);
+  return request(options) as TPaymentQuota;
 }
 
 export function getLdapStatus() {
@@ -1259,4 +1284,95 @@ export function getCronLdap() {
   };
 
   return request(options);
+}
+
+export function setLimitedAccessForUsers(enable: boolean) {
+  const data = { limitedAccessForUsers: enable };
+  const options = {
+    method: "post",
+    url: "/settings/devtoolsaccess",
+    data,
+  };
+
+  return request(options);
+}
+
+export function getDeepLinkSettings() {
+  const options = {
+    method: "get",
+    url: "/settings/deeplink",
+  };
+
+  return request(options);
+}
+
+export function saveDeepLinkSettings(handlingMode: number) {
+  const options = {
+    method: "post",
+    url: "/settings/deeplink",
+    data: { deepLinkSettings: { handlingMode } },
+  };
+
+  return request(options);
+}
+
+export function startEncryption(notifyUsers) {
+  const options = {
+    method: "post",
+    url: "/settings/encryption/start",
+    data: { notifyUsers },
+  };
+
+  return request(options);
+}
+
+export function getEncryptionProgress() {
+  const options = {
+    method: "get",
+    url: "/settings/encryption/progress",
+  };
+
+  return request(options);
+}
+
+export function getEncryptionSettings() {
+  const options = {
+    method: "get",
+    url: "/settings/encryption/settings",
+  };
+
+  return request(options) as TEncryptionSettings;
+}
+
+export async function getInvitationSettings() {
+  const res = (await request({
+    method: "get",
+    url: "/settings/invitationsettings",
+  })) as TInvitationSettings;
+
+  return res;
+}
+
+export async function setInvitationSettings(data: {
+  allowInvitingGuests: boolean;
+  allowInvitingMembers: boolean;
+}) {
+  const res = (await request({
+    method: "put",
+    url: "/settings/invitationsettings",
+    data,
+  })) as TInvitationSettings;
+
+  return res;
+}
+
+export async function setAdManagement(hidden: boolean) {
+  const data = { hidden };
+  const res = await request({
+    method: "post",
+    url: "/settings/banner",
+    data,
+  });
+
+  return res;
 }

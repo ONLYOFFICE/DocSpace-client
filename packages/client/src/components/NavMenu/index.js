@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,7 +33,7 @@ import { Backdrop } from "@docspace/shared/components/backdrop";
 import { Aside } from "@docspace/shared/components/aside";
 
 import { withTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 
 import { NavMenuHeaderLoader } from "@docspace/shared/skeletons/nav-menu";
 
@@ -96,6 +96,8 @@ const NavMenu = (props) => {
     isNavOpened: isNavOpenedProp = false,
     isNavHoverEnabled: isNavHoverEnabledProp = true,
     isBackdropVisible: isBackdropVisibleProp = false,
+
+    isPublicRoom,
   } = props;
 
   const timeout = React.useRef(null);
@@ -172,12 +174,12 @@ const NavMenu = (props) => {
         withBlur
       />
 
-      {!hideHeader &&
-        (isLoaded && isAuthenticated ? (
+      {!hideHeader ? (
+        isLoaded && isAuthenticated && !isPublicRoom ? (
           <>
-            {!isPreparationPortal && (
+            {!isPreparationPortal ? (
               <HeaderNav hideProfileMenu={hideProfileMenu} />
-            )}
+            ) : null}
             <Header
               customHeader={customHeader}
               isPreparationPortal={isPreparationPortal}
@@ -189,17 +191,18 @@ const NavMenu = (props) => {
               backdropClick={backdropClick}
             />
           </>
-        ) : !isLoaded && isAuthenticated ? (
+        ) : !isLoaded && isAuthenticated && !isPublicRoom ? (
           <NavMenuHeaderLoader />
         ) : (
           <HeaderUnAuth />
-        ))}
+        )
+      ) : null}
 
-      {isAsideAvailable && (
+      {isAsideAvailable ? (
         <Aside visible={isAsideVisible} onClick={backdropClick}>
           {asideContent}
         </Aside>
-      )}
+      ) : null}
     </StyledContainer>
   );
 };
@@ -219,26 +222,31 @@ NavMenu.propTypes = {
   isLoaded: PropTypes.bool,
 };
 
-const NavMenuWrapper = inject(({ authStore, settingsStore }) => {
-  const { isAuthenticated, isLoaded, language } = authStore;
-  const {
-    isDesktopClient: isDesktop,
-    frameConfig,
-    isFrame,
-    currentDeviceType,
-  } = settingsStore;
+const NavMenuWrapper = inject(
+  ({ authStore, settingsStore, publicRoomStore }) => {
+    const { isAuthenticated, isLoaded, language } = authStore;
+    const {
+      isDesktopClient: isDesktop,
+      frameConfig,
+      isFrame,
+      currentDeviceType,
+    } = settingsStore;
+    const { isPublicRoom } = publicRoomStore;
 
-  return {
-    isAuthenticated,
-    isLoaded,
-    isDesktop,
-    language,
+    return {
+      isAuthenticated,
+      isLoaded,
+      isDesktop,
+      language,
 
-    showHeader: frameConfig?.showHeader,
-    isFrame,
-    currentDeviceType,
-  };
-})(observer(withTranslation(["Common"])(NavMenu)));
+      showHeader: frameConfig?.showHeader,
+      isFrame,
+      currentDeviceType,
+
+      isPublicRoom,
+    };
+  },
+)(observer(withTranslation(["Common"])(NavMenu)));
 
 const NavMenuComponent = ({ ...props }) => <NavMenuWrapper {...props} />;
 NavMenuComponent.displayName = "NavMenuComponent";

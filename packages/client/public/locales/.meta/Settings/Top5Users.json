@@ -1,0 +1,267 @@
+{
+  "key_path": "Top5Users",
+  "content": "Top 5 users by storage usage:",
+  "content_en_sha1_hash": "8934cd3fcb13cb31a45f771b3cbaf5c669d8b86a",
+  "created_at": "2025-05-19T21:30:52.966Z",
+  "updated_at": "2025-07-10T11:11:07.072Z",
+  "comment": {
+    "text": "\"This translation key refers to the text 'Top 5 users by storage usage', used as a label in a UI component displaying statistics about top-performing users. It appears on a button that displays a list of top users.\"",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:16.226Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/UsersList.js",
+      "line_number": 88,
+      "context": "});\n \n return (\n <StyledStatistics>\n <Text fontWeight={600} className=\"item-statistic\">\n {t(\"Top5Users\")}\n </Text>\n {usersList}\n \n {peopleListLength > 5 ? (\n <Button",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"5 nejčastějších uživatelů podle využití úložiště:\" doesn't accurately convey the meaning of \"Top 5 users by storage usage.\" 'Nejčastějších' means 'most frequent' which isn't the intended meaning. It should indicate users using the most storage.",
+          "suggestion": "5 uživatelů s největší spotřebou úložiště:"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The term 'αποθ. χώρου' is an abbreviation and might not be clear to all users. While technically correct, a more complete spelling would improve clarity.",
+          "suggestion": "αποθηκευτικού χώρου"
+        },
+        {
+          "type": "formatting",
+          "description": "The colon at the end of the sentence could be problematic depending on the surrounding text in the UI. It's better to confirm its necessity in context.",
+          "suggestion": "Consider removing the colon if it causes layout issues."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Cinq utilisateurs qui utilisent le plus d'espace de stockage:' is a literal translation and doesn't quite capture the concise nature of \"Top 5 users by storage usage:\" A more natural French equivalent might be something like \"Les 5 meilleurs utilisateurs par utilisation de l'espace de stockage:\" or \"Top 5 des utilisateurs par utilisation de l'espace de stockage:\" (using the English term 'Top').",
+          "suggestion": "Les 5 meilleurs utilisateurs par utilisation de l'espace de stockage:"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ストレージ使用量上位5人のユーザー:\" is technically correct but could be more natural. A more idiomatic translation would be something like \"ストレージ使用量が多い上位5ユーザー\" or \"ストレージ使用量トップ5のユーザー\". The current phrasing, while understandable, reads a bit stiff.",
+          "suggestion": "ストレージ使用量が多い上位5ユーザー"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Lao translation uses a colon at the end, mirroring the English. While not strictly incorrect, it's stylistically unusual in Lao and might be better without it depending on the overall text style.",
+          "suggestion": "Consider removing the colon at the end: '5 ຜູ້​ໃຊ້​ສູງ​ສຸດ​ໂດຍ​ການ​ນໍາ​ໃຊ້​ການ​ເກັບ​ຮັກ​ສາ'"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'sali' is incorrect in this context. It appears to be a mistranslation of 'users'. The intended meaning is 'Top 5 users'.",
+          "suggestion": "Top 5 utilizatori după utilizarea spațiului de stocare:"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ආචයන භාවිතය වැඩිම පරිශ්‍රීලකයින් 5:' does not accurately convey 'Top 5 users by storage usage:'. 'ආචයන භාවිතය' translates to 'device usage' rather than 'storage usage'. The rest of the phrase seems to be a reasonable attempt to represent 'Top 5 users'.",
+          "suggestion": "භාවිතය වැඩිම පරිශ්‍රීලකයින් 5 (Using 'භාවිතය' to refer to general usage, rather than device usage, is more appropriate in this context)"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word \"складишта\" should likely be \"коришћења складишта\" for better accuracy and natural flow. \"Складишта\" literally translates to 'storage(s)' and doesn't convey the sense of 'storage usage'.",
+          "suggestion": "Топ 5 корисника по коришћењу складишта:"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Depolama kullanımına göre ilk 5 kullanıcı:' is a reasonable translation, but 'ilk 5 kullanıcı' could be more naturally phrased as 'en çok depolama kullanan ilk 5 kullanıcı' for a more accurate and idiomatic rendering of 'Top 5 users'.",
+          "suggestion": "En çok depolama kullanan ilk 5 kullanıcı:"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

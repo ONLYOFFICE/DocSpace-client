@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,11 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable react/prop-types */
+/* eslint-disable no-param-reassign */
 import React from "react";
-import { ScrollbarComponent } from "../Scrollbar";
+import { Scrollbar } from "../Scrollbar";
 import { CustomScrollbarsVirtualListProps } from "../Scrollbar.types";
-import { Scrollbar } from "../custom-scrollbar";
+import { Scrollbar as CustomScrollbar } from "../custom-scrollbar";
 
 const CustomScrollbars = ({
   onScroll,
@@ -42,7 +42,7 @@ const CustomScrollbars = ({
   paddingAfterLastItem,
 }: CustomScrollbarsVirtualListProps) => {
   const refSetter = (
-    scrollbarsRef: React.RefObject<Scrollbar>,
+    scrollbarsRef: React.RefObject<CustomScrollbar | null>,
     forwardedRefArg: unknown,
   ) => {
     // @ts-expect-error Don`t know how fix it
@@ -59,11 +59,11 @@ const CustomScrollbars = ({
     }
   };
   return (
-    <ScrollbarComponent
+    <Scrollbar
       // @ts-expect-error error from custom scrollbar
-      ref={(scrollbarsRef: React.RefObject<Scrollbar>) =>
-        refSetter(scrollbarsRef, forwardedRef)
-      }
+      ref={(scrollbarsRef: React.RefObject<Scrollbar | null>) => {
+        refSetter(scrollbarsRef, forwardedRef);
+      }}
       style={{ ...style, overflow: "hidden" }}
       onScroll={onScroll}
       className={className}
@@ -73,21 +73,23 @@ const CustomScrollbars = ({
     >
       {children}
       <div className="additional-scroll-height" />
-    </ScrollbarComponent>
+    </Scrollbar>
   );
 };
 
-const CustomScrollbarsVirtualList = React.forwardRef(
-  (props: CustomScrollbarsVirtualListProps, ref) => (
-    <CustomScrollbars {...props} forwardedRef={ref} />
-  ),
-);
+const CustomScrollbarsVirtualList = ({
+  ref,
+  ...props
+}: CustomScrollbarsVirtualListProps & {
+  ref?: React.RefObject<unknown>;
+}) => <CustomScrollbars {...props} forwardedRef={ref} />;
 
-const CustomScrollbarsVirtualListWithAutoFocus = React.forwardRef(
-  (props: CustomScrollbarsVirtualListProps, ref) => (
-    <CustomScrollbars {...props} forwardedRef={ref} autoFocus />
-  ),
-);
+const CustomScrollbarsVirtualListWithAutoFocus = ({
+  ref,
+  ...props
+}: CustomScrollbarsVirtualListProps & {
+  ref?: React.RefObject<unknown>;
+}) => <CustomScrollbars {...props} forwardedRef={ref} autoFocus />;
 
 export {
   CustomScrollbarsVirtualList,

@@ -4,7 +4,6 @@
   "DataReassignment": "Preusmeravanje podataka",
   "DeleteProfileIsFinished": "Obrišite profil kada se dodeljivanje završi",
   "DescriptionDataReassignment": "Prebacićemo sobe kreirane od strane korisnika i dokumenta uskladištena u sobama korisnika.",
-  "InProgress": "U toku",
   "Interrupted": "Prekinuto, neki podaci nisu prebačeni",
   "MoreAboutDataTransfer": "Više o prenosu podataka",
   "NewDataOwner": "Novi vlasnik podataka",
@@ -14,6 +13,7 @@
   "ReassignData": "Dodeli podatke ponovo",
   "ReassigningDataToAnother": "Proces ponovne dodele podataka korisnika <0>{{fromUser}}</0> korisniku <1>{{toUser}}</1> je započeo. Imajte na umu da može potrajati značajno vreme.",
   "ReassigningDataToItself": "Proces ponovne dodele podataka korisnika <0>{{fromUser}}</0> korisniku <1>{{toUser}}</1> <2>{{you}}</2> je započeo. Imajte na umu da može potrajati značajno vreme.",
+  "RoomsOnlyReassignment": "Prenosimo sobe koje je kreirao kontakt.",
   "StartTransferAgain": "Započni prenos ponovo",
   "UserToWhomTheDataWillBeTransferred": "Korisnik kojem će podaci biti prebačeni"
 }

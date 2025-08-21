@@ -24,6 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/no-unescaped-entities */
 import React from "react";
@@ -53,12 +56,11 @@ import { FieldContainer } from "../field-container";
 import { Heading, HeadingSize } from "../heading";
 import { Link, LinkType } from "../link";
 import { Loader, LoaderTypes } from "../loader";
-import { Row } from "../row";
+import { Row, RowProps } from "../rows";
 import { Scrollbar } from "../scrollbar";
 import { Tabs, TabsTypes } from "../tabs";
 import { Text } from "../text";
 import { Toast, toastr } from "../toast";
-import { ToggleContent } from "../toggle-content";
 import { Tooltip } from "../tooltip";
 import { globalColors } from "../../themes";
 
@@ -172,6 +174,7 @@ const rowContent = (
   <Row
     {...checkedProps}
     {...elementProps}
+    isIndexEditingMode={false}
     onRowClick={() => {}}
     contextOptions={[
       {
@@ -191,7 +194,7 @@ const rowContent = (
 );
 
 let rowCount = 5;
-const rowArray: React.ReactElement[] = [];
+const rowArray: React.ReactElement<RowProps>[] = [];
 while (rowCount !== 0) {
   rowArray.push(rowContent);
   rowCount -= 1;
@@ -521,11 +524,6 @@ const Template = () => (
           onSelect={() => {}}
           selectedItemId={arrayItems[0].id}
         />
-      </div>
-      <div style={{ padding: "16px 0" }}>
-        <ToggleContent label="ToggleContent" isOpen={false}>
-          <span>Toggle content text</span>
-        </ToggleContent>
       </div>
     </div>
   </div>

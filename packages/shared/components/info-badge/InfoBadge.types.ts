@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,17 +26,19 @@
 
 import type { PlacesType } from "react-tooltip";
 
-interface InfoBadgeProps {
+type InfoBadgeProps = {
   /** badge Label */
   label: string;
   /** Global tooltip placement */
   place: PlacesType;
   /** tooltip header */
-  tooltipTitle: React.ReactNode;
+  tooltipTitle?: React.ReactNode;
   /** tooltip body */
-  tooltipDescription: React.ReactNode;
+  tooltipDescription?: React.ReactNode;
   /** Space between the tooltip element and anchor element (arrow not included in calculation) */
   offset: number;
-}
+  /** dataTestId */
+  dataTestId?: string;
+};
 
 export default InfoBadgeProps;

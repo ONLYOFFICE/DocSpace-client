@@ -1,0 +1,244 @@
+{
+  "key_path": "RestoreRooms",
+  "content": "Are you sure you want to restore rooms?",
+  "content_en_sha1_hash": "7af07531b9775b705e2ba1b5184a2bf685879a24",
+  "created_at": "2025-05-19T21:30:57.063Z",
+  "updated_at": "2025-05-26T07:57:32.326Z",
+  "comment": {
+    "text": "The translation key \"RestoreRooms\" is used to display a confirmation message when restoring multiple rooms. It appears in a restore room dialog and informs the user that their actions will affect all selected items.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:37:32.280Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/RestoreRoomDialog/index.js",
+      "line_number": 86,
+      "context": "}\n \n if (restoreAll) return t(\"ArchiveDialog:RestoreAllRooms\");\n \n return items.length > 1\n ? t(\"ArchiveDialog:RestoreRooms\")\n : t(\"ArchiveDialog:RestoreRoom\");\n };\n \n const description = getDescription();",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'このままルームの復元を続けますか？' while understandable, is a bit formal and not the most natural way to ask 'Are you sure you want to restore rooms?' A more natural phrasing would use a softer tone. 'ルームの復元を本当に進めますか？' or 'ルームの復元を実行しますか？' would be more appropriate depending on the desired level of formality.",
+          "suggestion": "ルームの復元を実行しますか？"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການກູ້ຫ້ອງ?' while understandable, is a slightly literal translation. A more natural phrasing would be closer to \"Do you want to restore the rooms?\" or \"Are you certain you want to restore the rooms?\"",
+          "suggestion": "ທ່ານຕ້ອງການກູ້ຫ້ອງແດ່ບໍ?"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Sigur doriţi să restaurați sălile?' is a literal translation but slightly awkward in Romanian. A more natural phrasing would be 'Sigur doriți să restaurați camerele?' or 'Doriți să restaurați camerele?'. The word 'sălile' is generally used for halls, not rooms.",
+          "suggestion": "Sigur doriți să restaurați camerele?"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ඔබට කාමර ප්‍රත්‍යර්පණයට වුවමනාද?' while containing related words, doesn't accurately convey the meaning of 'Are you sure you want to restore rooms?' The phrasing 'ප්‍රත්‍යර්පණයට වුවමනාද' implies a desire *for* the restoration process itself, rather than confirmation of wanting to restore rooms. A more accurate translation would emphasize confirmation.",
+          "suggestion": "ඔබ කාමරයන් නැවත ස්ථානගත කිරීමට සුරක්ෂිතද? (Oba kamarayan natheva sthanagamanamaya surakshithada?)"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Да ли сте сигурни да желите да повратите собе?' is not the most natural or accurate translation of 'Are you sure you want to restore rooms?'. 'Повратите' is a less common and somewhat awkward way to say 'restore' in this context. A more natural translation would use a verb like 'вратите' or 'обновите'.",
+          "suggestion": "Да ли сте сигурни да желите да вратите собе?"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Da li ste sigurni da želite da povratite sobe?' is not the most natural or preferred way to say 'Are you sure you want to restore rooms?' in Serbian (Latin). 'Povratiti' is a valid word but 'vraćati' or 'resetovati' would be more common in this context.",
+          "suggestion": "Da li ste sigurni da želite da vratite sobe?"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

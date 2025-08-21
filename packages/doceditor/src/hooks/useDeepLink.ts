@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,6 +29,7 @@ import { isMobile } from "react-device-detect";
 
 import { TFile } from "@docspace/shared/api/files/types";
 import { TSettings } from "@docspace/shared/api/settings/types";
+import { DeepLinkType } from "@docspace/shared/enums";
 
 import { getDeepLink } from "../components/deep-link/DeepLink.helper";
 
@@ -36,9 +37,15 @@ export interface UseDeepLinkProps {
   settings?: TSettings;
   fileInfo?: TFile;
   email?: string;
+  deepLinkSettings?: number;
 }
 
-const useDeepLink = ({ settings, fileInfo, email }: UseDeepLinkProps) => {
+const useDeepLink = ({
+  settings,
+  fileInfo,
+  email,
+  deepLinkSettings,
+}: UseDeepLinkProps) => {
   const [isShowDeepLink, setIsShowDeepLink] = React.useState(false);
 
   React.useEffect(() => {
@@ -51,32 +58,37 @@ const useDeepLink = ({ settings, fileInfo, email }: UseDeepLinkProps) => {
     const defaultOpenDocument = localStorage.getItem("defaultOpenDocument");
     const params = new URLSearchParams(window.location.search);
     const withoutRedirect = params.get("without_redirect");
+    const isSDK = params.get("isSDK");
+    const isOpenOnlyApp =
+      defaultOpenDocument === "app" || deepLinkSettings === DeepLinkType.App;
 
     if (
+      !isSDK &&
       isMobile &&
       !defaultOpenDocument &&
       androidID &&
       iOSId &&
       deepLinkUrl &&
       !withoutRedirect &&
-      !isAndroidWebView
+      !isAndroidWebView &&
+      deepLinkSettings !== DeepLinkType.Web
     ) {
       setIsShowDeepLink(true);
     }
 
-    if (isMobile && defaultOpenDocument === "app") {
+    if (!isSDK && isMobile && isOpenOnlyApp) {
       getDeepLink(
         window.location.origin,
         email || "",
         fileInfo,
         settings?.deepLink,
         window.location.href,
+        isOpenOnlyApp,
       );
     }
-  }, [fileInfo, settings?.deepLink, email]);
+  }, [fileInfo, settings?.deepLink, email, deepLinkSettings]);
 
   return { isShowDeepLink, setIsShowDeepLink };
 };
 
 export default useDeepLink;
-

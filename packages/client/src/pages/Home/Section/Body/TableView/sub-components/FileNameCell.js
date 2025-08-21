@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,6 +29,7 @@ import { Checkbox } from "@docspace/shared/components/checkbox";
 import { classNames } from "@docspace/shared/utils";
 import { TableCell } from "@docspace/shared/components/table";
 import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
+import { createPluginFileHandlers } from "@docspace/shared/utils/plugin-file-utils";
 
 const FileNameCell = ({
   item,
@@ -50,7 +51,8 @@ const FileNameCell = ({
   };
 
   const indexingClass = isIndexEditingMode ? "item-file-name-index" : "";
-  const linkProps = isIndexEditingMode ? null : { ...linkStyles };
+  const baseProps = isIndexEditingMode ? null : { ...linkStyles };
+  const linkProps = createPluginFileHandlers(item, baseProps);
 
   return (
     <>
@@ -72,14 +74,14 @@ const FileNameCell = ({
         >
           <div className="table-container_element-container">
             <div className="table-container_element">{element}</div>
-            {!isIndexEditingMode && (
+            {!isIndexEditingMode ? (
               <Checkbox
                 className="table-container_row-checkbox"
                 onChange={onChange}
                 isChecked={checked}
                 title={t("Common:TitleSelectFile")}
               />
-            )}
+            ) : null}
           </div>
         </TableCell>
       )}
@@ -93,11 +95,12 @@ const FileNameCell = ({
         {...linkProps}
         className={`item-file-name ${indexingClass}`}
         dir="auto"
+        truncate
       >
         {titleWithoutExt}
-        {displayFileExtension && (
+        {displayFileExtension ? (
           <span className="item-file-exst">{fileExst}</span>
-        )}
+        ) : null}
       </Link>
     </>
   );

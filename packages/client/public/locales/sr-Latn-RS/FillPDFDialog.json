@@ -2,8 +2,5 @@
   "FillOutButtonLabel": "Popuni",
   "FillOutDescription": "Popunite polja originalnog formulara u prozoru za uređivanje.",
   "FillOutTitle": "Popuni formular sam",
-  "FillPDFDialogTitle": "Popuni kao",
-  "ShareCollectButtonLabel": "Kopiraj u prostoriju",
-  "ShareCollectDescription": "Podelite svoj formular i prikupite odgovore preko Prostorije za popunjavanje formulara.",
-  "ShareCollectTitle": "Podeli"
+  "FillPDFDialogTitle": "Popuni kao"
 }

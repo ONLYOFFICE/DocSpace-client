@@ -6,17 +6,17 @@
   "DeleteGroupUsersSuccessMessage": "用户已成功删除。",
   "DeleteGuest": "删除访客",
   "DeleteGuests": "删除多个访客",
-  "DeleteMyDocumentsUser": "该用户“我的文档”板块中的所有个人文件和文件夹将被永久删除。",
-  "DeletePersonalData": "选定用户的“文档”和“垃圾箱”部分*中的个人数据、所有个人文件和文件夹将被永久删除。选定用户保存在公共部分*（如房间）中的文件和文件夹将保留在{{productName}}中。",
   "DeletePersonalDataApplicable": "*适用于拥有此类文件和文件夹的选定用户。",
-  "DeleteReassignDescriptionUser": "此用户创建的 {{warningMessageMyDocuments}} 房间及存储在房间中的文档将被自动转让给执行删除操作的管理员：<strong>{{userPerformedDeletion}} ({{userYou}})</strong>。您可以手动转让数据，选择其他转让目标用户。",
+  "DeleteReassignDescriptionUser": "此用户创建的 {{warningMessageMyDocuments}} 房间及存储在房间中的文档将被自动转让给执行删除操作的管理员：<1>{{userPerformedDeletion}} ({{userYou}})</1>。您可以手动转让数据，选择其他转让目标用户。",
   "DeleteReqassignDescriptionGuest": "该{{userCaption}}将从其受邀加入的所有房间中删除。该{{userCaption}}在房间中创建的文档将自动重新分配给房间所有者。",
   "DeleteUser": "删除用户",
-  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> 将被删除。此操作无法撤消。",
+  "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> 将被删除。此操作无法撤消。",
   "DeletingUsers": "删除用户",
+  "PersonalDataDeletionInfo": "个人数据，即所选用户在{{sectionNameFirst}}和{{sectionNameSecond}}部分*中的所有个人文件和文件夹将被永久删除。所选用户在公共部分*（例如房间）中的文件和文件夹将保留在{{productName}}中。",
   "PleaseNote": "请注意：",
   "ReassignDataToAnotherUser": "将数据转让给其他用户",
   "SuccessfullyDeleteGuestInfoMessage": "该访客已成功删除",
   "SuccessfullyDeleteUserInfoMessage": "用户已成功删除。",
-  "ToBeAbleToReassignData": "为了能够重新分配数据，请一次删除一个用户。"
+  "ToBeAbleToReassignData": "为了能够重新分配数据，请一次删除一个用户。",
+  "UserFilesRemovalScope": "个人数据，即此用户在{{sectionNameFirst}}和{{sectionNameSecond}}部分中的所有文件和文件夹将被永久删除。"
 }

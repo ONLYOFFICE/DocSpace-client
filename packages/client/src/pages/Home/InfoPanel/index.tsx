@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,3 +26,4 @@
 
 export { default as InfoPanelHeaderContent } from "./Header";
 export { default as InfoPanelBodyContent } from "./Body";
+export { default as InfoPanelActions } from "./Actions";

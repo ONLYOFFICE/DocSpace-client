@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,14 +26,19 @@
 
 import React from "react";
 import { RectangleSkeleton } from "../rectangle";
-import { StyledDialogLoader } from "./Dialog.styled";
+import styles from "./Dialog.module.scss";
 import { DialogSkeletonProps } from "./Dialog.types";
 import { DialogAsideSkeleton } from "./Dialog.aside";
 import { DialogReassignmentSkeleton } from "./Dialog.reassignment";
 
 const DialogSkeleton = ({ isLarge, withFooterBorder }: DialogSkeletonProps) => {
   return (
-    <StyledDialogLoader withFooterBorder={withFooterBorder} isLarge={isLarge}>
+    <div
+      className={styles.dialogLoader}
+      data-is-large={isLarge ? "true" : "false"}
+      data-with-footer-border={withFooterBorder ? "true" : "false"}
+      data-testid="dialog-skeleton"
+    >
       <div className="dialog-loader-header">
         <RectangleSkeleton height="29px" />
       </div>
@@ -44,7 +49,7 @@ const DialogSkeleton = ({ isLarge, withFooterBorder }: DialogSkeletonProps) => {
         <RectangleSkeleton height="40px" />
         <RectangleSkeleton height="40px" />
       </div>
-    </StyledDialogLoader>
+    </div>
   );
 };
 

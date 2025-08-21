@@ -1,0 +1,426 @@
+{
+  "key_path": "PersonalDataDeletionInfo",
+  "content": "Personal data, all personal files and folders in the {{sectionNameFirst}} and {{sectionNameSecond}} sections* of the selected users will be permanently deleted. Files and folders of the selected users kept in common sections* such as rooms will remain in {{productName}}.",
+  "content_en_sha1_hash": "82efe26f171e64da1f9a5952e525fc023af5ef30",
+  "created_at": "2025-05-19T21:30:56.673Z",
+  "updated_at": "2025-06-30T12:20:31.237Z",
+  "comment": {
+    "text": "This translation key is used for a warning message informing users that their personal data will be permanently deleted from specific sections of their account, while files in common sections remain intact. It appears in a dialog box prompting users to delete their profile. The content describes the scope and consequences of deleting personal data.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:27.113Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
+      "line_number": 121,
+      "context": "productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Text className=\"text-warning\">{t(\"PleaseNote\")}</Text>\n <Text className=\"text-delete-description\">\n {t(\"PersonalDataDeletionInfo\", {\n productName: t(\"Common:ProductName\"),\n sectionNameFirst: t(\"Common:MyFilesSection\"),\n sectionNameSecond: t(\"Common:TrashSection\"),\n })}\n </Text>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The asterisk (*) after 'أقسام {{sectionNameFirst}} و {{sectionNameSecond}}' looks awkward in Arabic. It's better to maintain consistency with the English version by placing it after both section names if it refers to a note about both.",
+          "suggestion": "أقسام {{sectionNameFirst}} و {{sectionNameSecond}}* (ملاحظة:..."
+        },
+        {
+          "type": "formatting",
+          "description": "Similarly, the asterisk (*) after 'الأقسام المشتركة' looks awkward in Arabic. Consider placing it after both instances of the term if it’s meant to indicate a note or disclaimer.",
+          "suggestion": "الأقسام المشتركة* (ملاحظة:..."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The word 'bölmələrdə' has an unnecessary asterisk after it. This asterisk doesn't appear in the English version.",
+          "suggestion": "Remove the asterisk after 'bölmələrdə'."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The asterisk (*) after \"{{sectionNameFirst}}\" and \"{{sectionNameSecond}}\" is not consistently applied in the Czech translation compared to the English source.",
+          "suggestion": "Ensure consistent use of the asterisk (*) after the placeholders to maintain visual consistency with the English source.  For example: \"Osobní údaje, všechny osobní soubory a složky v sekcích {{sectionNameFirst}}* a {{sectionNameSecond}}*...\""
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The term '*' appears after 'sections' in both the English and Greek versions, but it is technically part of the 'sections' word and should not have a separate space before it. This may appear as a visual issue.",
+          "suggestion": "Remove the space before the asterisk. For example: 'enότητες{{sectionNameFirst}}* και {{sectionNameSecond}}*'"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The asterisk after 'secciones' in 'secciones*' needs to be checked against the original English. It is possible that the Spanish translation is too literal.",
+          "suggestion": "Review the necessity of the asterisk. If it's solely for mirroring the English, consider removing it or adjusting the phrasing for natural Spanish flow."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'así como' is slightly redundant. While not strictly incorrect, it can be streamlined.",
+          "suggestion": "Replace 'así como' with a more concise connector, or remove it entirely.  For example: 'Los datos personales, todos los archivos...' or 'Los datos personales y todos los archivos...'"
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The ellipsis (… or ...) is missing after 'sections*' in both English and Finnish.  While the asterisk is present, the implied continuation is missing.",
+          "suggestion": "Add an ellipsis after 'sections*' in both English and Finnish. Example: 'sections*...' "
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The asterisk (*) is missing after \"common sections\" in the Armenian translation. It was present in the English source.",
+          "suggestion": "Ընտրված օգտատերերի ֆայլերն ու թղթապանակները, որոնք պահվում են ընդհանուր բաժիններում* օրինակ՝ սենյակներում, կմնան {{productName}}-ում:"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The asterisk (*) after 'sezioni {{sectionNameFirst}} e {{sectionNameSecond}}' and 'sezioni comuni' lacks consistent spacing.  It is directly touching the closing quote, which is not ideal for readability.",
+          "suggestion": "Add a space between the closing quote and the asterisk. Example: 'sezioni {{sectionNameFirst}} e {{sectionNameSecond}}* ' "
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'in common sections such as rooms' is translated as '채팅방과 같은 공용 섹션'. While '채팅방' (chat rooms) is understandable, it's too specific and might not cover all 'common sections'. The translation loses the generality of the original English.",
+          "suggestion": "개인 데이터, 선택한 사용자의 {{sectionNameFirst}} 및 {{sectionNameSecond}} 섹션에 있는 모든 개인 파일 및 폴더가 영구적으로 삭제됩니다. 공유 섹션에 저장된 선택한 사용자의 파일 및 폴더는 {{productName}}에 남아 있습니다."
+        },
+        {
+          "type": "formatting",
+          "description": "There's a potential formatting issue. The Korean translation uses a space before and after the section name variables ({{sectionNameFirst}} and {{sectionNameSecond}}). This spacing might be inconsistent with other parts of the interface and could be adjusted to match.",
+          "suggestion": "개인 데이터, 선택한 사용자의 {{sectionNameFirst}}및 {{sectionNameSecond}} 섹션에 있는 모든 개인 파일 및 폴더가 영구적으로 삭제됩니다."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'sections' is translated as 'ພື້ນທີ່'. While technically correct, 'ພື້ນທີ່' can also mean 'area' and might be misinterpreted. A more precise translation might consider using a term closer to 'zones' or 'categories', depending on the context.",
+          "suggestion": "Consider translating 'sections' as something more specific to the application's terminology, such as 'ເຂດ' (khet) or 'ໝວດ' (muat)."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'common sections' is translated as 'ພື້ນທີ່ສາທາະລຶກ'. This translation is awkward and doesn't clearly convey the meaning of 'common areas' shared by multiple users. It might be misinterpreted.",
+          "suggestion": "Translate 'common sections' as 'ເຂດຮ່ວມ' (khet ruam) or 'ເຂດສາທາະລຶກ' (khet sataralik) depending on the specific nuance needed. Clarification is key."
+        },
+        {
+          "type": "formatting",
+          "description": "The Lao translation retains the English variable placeholders like {{sectionNameFirst}} and {{sectionNameSecond}}. While acceptable if these placeholders are actually used in the Lao version, it would be better to fully resolve them if they are meant to be replaced with localized text.",
+          "suggestion": "If possible, replace the placeholders with localized text within the translation. Otherwise, confirm if these are placeholders for the Lao version to render correctly."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The asterisk character '*' appears after '{{sectionNameSecond}}' and should be moved to the end of the sentence to correctly reflect the original English formatting.",
+          "suggestion": "Personas dati, visi personīgie faili un mapes izvēlēto lietotāju sadaļās {{sectionNameFirst}} un {{sectionNameSecond}}* tiks neatgriezeniski dzēsti."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'sadaļās' (in sections) is a correct translation, but its usage slightly changes the emphasis. The original English implies a specific 'section' rather than general 'sections'.",
+          "suggestion": "Personas dati, visi personīgie faili un mapes izvēlēto lietotāju konkrētās sadaļās {{sectionNameFirst}} un {{sectionNameSecond}}* tiks neatgriezeniski dzēsti."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The asterisk (*) after 'selections {{sectionNameFirst}} and {{sectionNameSecond}}' is not properly formatted. It should be rendered as a footnote marker, not a plain asterisk.",
+          "suggestion": "Re-evaluate how the asterisk is handled to ensure proper footnote rendering.  This might involve using HTML entities or a specific markdown syntax, depending on the platform."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'selections {{sectionNameFirst}} and {{sectionNameSecond}}' is translated as 'selections {{sectionNameFirst}} and {{sectionNameSecond}}'. While technically correct, it could be more naturally translated as 'sections {{sectionNameFirst}} and {{sectionNameSecond}}' to better align with the original English meaning.",
+          "suggestion": "Change 'selections' to 'sekcje'."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The word 'seções' is broken across two lines in the Portuguese translation. This can make it look awkward.",
+          "suggestion": "Ensure 'seções {{sectionNameFirst}} e {{sectionNameSecond}}' is on a single line."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'armazenados' should ideally be 'armazenadas' to agree with 'pastas' which is feminine plural.",
+          "suggestion": "Change 'armazenados' to 'armazenadas'."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase \"folderele ai utilizatorilor selectate\" is grammatically incorrect. It should be \"folderele utilizatorilor selectați\" (folders of the selected users).",
+          "suggestion": "folderele utilizatorilor selectați"
+        },
+        {
+          "type": "spelling",
+          "description": "There's an unnecessary space before \"vor\".",
+          "suggestion": "vor"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"පුද්ගත තොරතුරු\" (pudgata thorathuru) is a less common and slightly awkward translation for \"Personal data.\" A more natural translation would be \"පුද්ගලික තොරතුරු\" (puggilika thorathuru).",
+          "suggestion": "පුද්ගලික තොරතුරු"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"වන\" used after \"කාමරයන් වැනි ස්ථානවල\" sounds slightly unnatural and can be removed.  It translates to 'such as' which is already implied.",
+          "suggestion": "කාමරයන් වැනි ස්ථානවල තෝරාගත් පරිශීලකයින්ගේ ගොනු සහ ෆෝල්ඩර් නොවෙනස්ව පවතී."
+        },
+        {
+          "type": "formatting",
+          "description": "The asterisk (*) is used consistently in the English and Sinhala text, which is good for indicating notes. However, it's essential that this formatting is maintained consistently across the whole product/interface.",
+          "suggestion": "Ensure the asterisk (*) formatting is consistent throughout the product."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The asterisk (*) after 'sekciách' and 'miestnosti' appears awkwardly in the Slovak translation. It's unclear if it should be a footnote or part of the phrase. The English uses a more integrated approach, so replicating the Slovak asterisk disrupts the flow.",
+          "suggestion": "Consider rephrasing the sentence to avoid the asterisk or adopting a more standard footnote style if the asterisk is essential to convey the intended meaning."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Slovenian translation uses a non-breaking space ( ) between 'oddelkih' and 'in'. While technically correct, it's more standard to use a regular space.",
+          "suggestion": "Replace 'oddelkih in' with 'oddelkih in'"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase '* of the selected users' is translated as '* izbranih uporabnikov'. While technically correct, it might be more natural in Slovenian to use a slightly different phrasing to avoid direct repetition.",
+          "suggestion": "Consider rephrasing '* izbranih uporabnikov' to something like '* pri izbranih uporabnikih' or simply removing it if the context makes it clear."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English word 'folders' is translated as 'фасцикле' (fascikle) in Serbian. While technically correct, 'директорије' (direktorije) is a more common and natural translation for 'folders' in a technical context like this.",
+          "suggestion": "Replace 'фасцикле' with 'директорије'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English word 'directories' is mistranslated as 'директоријуми'. While understandable, 'директорије' is the more common and precise term for directories in this context.",
+          "suggestion": "Replace 'директоријуми' with 'директорије'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English term 'folders' is translated as 'fascikle'. While technically correct, 'direktorijumi' might be a more natural and common term for 'folders' in this context, especially in technical documentation.",
+          "suggestion": "Consider translating 'folders' as 'direktorijumi'."
+        },
+        {
+          "type": "formatting",
+          "description": "The asterisk after 'sectionNameFirst' and 'sectionNameSecond' is inconsistent with the English version's formatting. It's unclear what the asterisk is meant to represent; if it's a footnote or clarification, ensure the same functionality and visual cue are present in the Serbian translation.",
+          "suggestion": "Ensure the asterisk's purpose and visual cue are replicated accurately in the Serbian translation. If it is a footnote, the footnote should be present."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The asterisk (*) is not consistently formatted. It's used after \"bölümlerindeki*\" but not after \"ortak bölümlerde*\". It should be consistent.",
+          "suggestion": "Ensure consistent formatting of asterisks. For example, \"Odalar gibi ortak bölümlerde* saklanan\""
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The word 'обраних' appears twice and might be stylistically repetitive. Consider rephrasing for better flow.",
+          "suggestion": "Особисті дані, усі особисті файли та папки у розділах {{sectionNameFirst}} та {{sectionNameSecond}}* користувачів будуть видалені назавжди. Файли та папки користувачів, що зберігаються у спільних розділах* (наприклад, кімнатах), залишаться у {{productName}}."
+        },
+        {
+          "type": "formatting",
+          "description": "Using a semicolon instead of a conjunction may improve readability.",
+          "suggestion": "Особисті дані, усі особисті файли та папки у розділах {{sectionNameFirst}} та {{sectionNameSecond}}* обраних користувачів будуть видалені назавжди; файли та папки обраних користувачів, що зберігаються у спільних розділах* (наприклад, кімнатах), залишаться у {{productName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The asterisk (*) after 'sectionNameFirst' and 'sectionNameSecond' appears odd in the Vietnamese translation. It seems like a literal translation from the English and might not be standard practice in Vietnamese. The meaning should be conveyed naturally.",
+          "suggestion": "Consider removing the asterisk or rephrasing the sentence to avoid it. For example, 'Dữ liệu cá nhân, tất cả các tệp và thư mục cá nhân trong các mục {{sectionNameFirst}} và {{sectionNameSecond}} của người dùng đã chọn...' (Personal data, all personal files and folders in the {{sectionNameFirst}} and {{sectionNameSecond}} sections of the selected users...)"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The asterisk (*) after 'sections' in both the English and Chinese versions of the text doesn't consistently indicate a footnote or clarification. It's unclear what the asterisk is meant to signify.",
+          "suggestion": "Consider adding a footnote or clarifying the purpose of the asterisk, or removing it if it's unnecessary."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase '即' (jí) meaning 'that is' or 'namely' is a bit clunky in this context after 'Personal data'. It disrupts the flow of the sentence.",
+          "suggestion": "Consider removing '即' and rephrasing the beginning of the sentence for better flow. For example: '所选用户在{{sectionNameFirst}}和{{sectionNameSecond}}部分中的个人数据...' "
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

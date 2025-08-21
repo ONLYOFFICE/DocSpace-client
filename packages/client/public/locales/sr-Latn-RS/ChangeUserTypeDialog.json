@@ -1,11 +1,17 @@
 {
+  "ChangeContactType": "Promeni tip kontakta",
   "ChangeGuestsTypeMessage": "Gost <strong>{{userName}}</strong> će biti premešten u odeljak {{membersSection}} i dobiće tip Korisnika. Korisnici imaju sopstveni odeljak za {{documentsSection}} , mogu kreirati i uređivati fajlove, ali ne mogu kreirati sobe.",
   "ChangeGuestsTypeMessageMulti": "Izabrani gosti će biti premešteni u odeljak {{membersSection}} i dobiće tip Korisnika. Korisnici imaju sopstveni odeljak za {{documentsSection}}, mogu kreirati i uređivati fajlove, ali ne mogu kreirati sobe.",
+  "ChangeGuestsTypeToAdmin": "Gost <strong>{{userName}}</strong> biće premesten u {{membersSection}} sekciju i dodeljen <strong>'{{ secondType }}'</strong> tip. {{productName}} administratori mogu pristupiti {{productName}} podešavanjima, upravljati i arhivirati sobe, pozivati nove korisnike i dodeljivati uloge ispod njihovog nivoa. {{productName}} administratori imaju pristup {{documentsSection}} sekciji.",
+  "ChangeGuestsTypeToAdminMulti": "Izabrani gosti biće premešteni u {{membersSection}} sekciju i dodeljeni <strong>'{{ secondType }}'</strong> tip. {{productName}} administratori mogu pristupiti {{productName}} podešavanjima, upravljati i arhivirati sobe, pozivati nove korisnike i dodeljivati uloge ispod njihovog nivoa. {{productName}} administratori imaju pristup {{documentsSection}} sekciji.",
+  "ChangeGuestsTypeToManager": "Gost <strong>{{userName}}</strong> biće premesten u {{membersSection}} sekciju i dodeljen <strong>'{{ secondType }}'</strong> tip. Administratori sobe mogu kreirati i upravljati dodeljenim sobama, pozivati nove korisnike i dodeljivati uloge administratora sobe i niže. Administratori sobe imaju pristup {{documentsSection}} sekciji.",
+  "ChangeGuestsTypeToManagerMulti": "Izabrani gosti biće premešteni u {{membersSection}} sekciju i dodeljeni <strong>'{{ secondType }}'</strong> tip. Administratori sobe mogu kreirati i upravljati dodeljenim sobama, pozivati nove korisnike i dodeljivati uloge administratora sobe i niže. Administratori sobe imaju pristup {{documentsSection}} sekciji.",
   "ChangeUserTypeButton": "Promeni tip",
-  "ChangeUserTypeHeader": "Promeni tip korisnika",
   "ChangeUserTypeMessage": "Korisnici sa tipom <strong>'{{ firstType }}'</strong> biće premešteni u tip <strong>'{{ secondType }}'</strong>.",
-  "ChangeUserTypeMessageMulti": "Odabrani korisnici će biti premešteni u <strong>'{{ secondType }}'</strong> tip.",
-  "ChangeUserTypeMessageWarning": "Ne možete promeniti tip za {{productName}} administratore i za sebe.",
+  "ChangeUserTypeNote": "<1>Napomena:</1> ne možete promeniti tip za {{productName}} administratora i za sebe.",
+  "DataReassignmentInfo": "Sobe koje je kreirao ovaj korisnik biće automatski dodeljene vama. Da biste ponovo dodelili sobe drugoj osobi, kliknite odgovarajući link ispod.",
+  "DataReassignmentWithFilesDeletion": "Svi deljeni fajlovi koje je kreirao ovaj kontakt biće <1>automatski dodeljeni vama za 30 dana</1>. Da biste dodelili sobe/deljene fajlove drugoj osobi, kliknite na odgovarajući link ispod.",
+  "PersonalDataDeletion": "Svi fajlovi i folderi u odeljku {{sectionName}} ovog kontakta biće <1>trajno izbrisani za 30 dana</1>.",
   "SuccessChangeGuestType": "Tip gosta je uspešno promenjen.",
   "SuccessChangeUserType": "Korisnički tip je uspešno promenjen"
 }

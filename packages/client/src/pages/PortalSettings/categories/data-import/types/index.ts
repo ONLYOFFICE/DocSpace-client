@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { useTranslation } from "react-i18next";
+import React, { type JSX } from "react";
+
 import {
   TEnhancedMigrationUser,
   TWorkspaceService,
@@ -36,7 +36,8 @@ import { TOption } from "@docspace/shared/components/combobox";
 import { SaveCancelButtonProps } from "@docspace/shared/components/save-cancel-buttons/SaveCancelButton.types";
 import { TTranslation } from "@docspace/shared/types";
 
-export type TFunciton = ReturnType<typeof useTranslation>["t"];
+import type { TFunction } from "i18next";
+import { TUser } from "@docspace/shared/api/people/types";
 
 export interface ProvidersProps {}
 
@@ -46,10 +47,11 @@ export interface InjectedProvidersProps extends ProvidersProps {
   setServices: TStore["importAccountsStore"]["setServices"];
   getMigrationList: TStore["importAccountsStore"]["getMigrationList"];
   setWorkspace: TStore["importAccountsStore"]["setWorkspace"];
+  logoText: TStore["settingsStore"]["logoText"];
 }
 
 export interface SelectFileStepProps {
-  t: TFunciton;
+  t: TFunction;
   isMultipleUpload?: boolean;
   acceptedExtensions: string[];
   migratorName: TWorkspaceService;
@@ -109,16 +111,18 @@ export interface InjectedWorkspaceProps extends WorkspaceProps {
   migrationPhase: TStore["importAccountsStore"]["migrationPhase"];
   isMigrationInit: TStore["importAccountsStore"]["isMigrationInit"];
   setIsMigrationInit: TStore["importAccountsStore"]["setIsMigrationInit"];
+  logoText: TStore["settingsStore"]["logoText"];
 }
 
 export interface LayoutProps {
-  t: TFunciton;
+  t: TFunction;
   theme: TStore["settingsStore"]["theme"];
   step: number;
   totalSteps: number;
   title: string;
   description: string;
   component: JSX.Element;
+  logoText: string;
 }
 
 export type TQuota = TPaymentFeature;
@@ -153,7 +157,7 @@ export interface InjectedSelectUsersStepProps extends SelectUsersStepProps {
 }
 
 export interface AccountsTableProps {
-  t?: TFunciton;
+  t?: TFunction;
   accountsData: TStore["importAccountsStore"]["withEmailUsers"];
 }
 
@@ -162,7 +166,7 @@ export interface InjectedAccountsTableProps extends AccountsTableProps {
 }
 
 export interface TableViewProps {
-  t: TFunciton;
+  t: TFunction;
   sectionWidth?: number;
   accountsData: TStore["importAccountsStore"]["withEmailUsers"];
 }
@@ -186,29 +190,31 @@ export interface SelectUserTableProps extends InjectedTableViewProps {
 }
 
 export interface UsersTableHeaderProps {
-  t: TFunciton;
+  t: TFunction;
   sectionWidth?: number;
 
   userId?: string;
-  tableRef: React.RefObject<HTMLDivElement>;
+  tableRef: React.RefObject<HTMLDivElement | null>;
   columnStorageName: string;
   columnInfoPanelStorageName: string;
   isIndeterminate: boolean;
   isChecked: boolean;
-  toggleAll?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  toggleAll?: (e?: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface UsersTableRowProps {
-  t: TFunciton;
+  t: TFunction;
   displayName: string;
   email: string;
   isDuplicate: boolean;
   isChecked: boolean;
-  toggleAccount: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  toggleAccount: (
+    e: React.MouseEvent<Element> | React.ChangeEvent<HTMLInputElement>,
+  ) => void;
 }
 
 export interface RowViewProps {
-  t: TFunciton;
+  t: TFunction;
   sectionWidth?: number;
   accountsData: TStore["importAccountsStore"]["withEmailUsers"];
 }
@@ -233,7 +239,7 @@ export interface AddEmailRowProps extends RowViewProps {
 }
 
 export interface UsersRowProps {
-  t: TFunciton;
+  t: TFunction;
   data: TEnhancedMigrationUser;
   sectionWidth?: number;
   isChecked: boolean;
@@ -246,7 +252,7 @@ export interface AddEmailUsersRowProps extends UsersRowProps {
 }
 
 export interface UsersRowContentProps {
-  t: TFunciton;
+  t: TFunction;
   data: TEnhancedMigrationUser;
   sectionWidth?: number;
   displayName: string;
@@ -282,7 +288,7 @@ export interface InjectedAddEmailsStepProps extends AddEmailsStepProps {
 }
 
 export interface AddEmailTableRowProps {
-  t: TFunciton;
+  t: TFunction;
   displayName: string;
   email: string;
   isChecked: boolean;
@@ -301,8 +307,8 @@ export interface AddEmailRowContentProps {
   sectionWidth: number | undefined;
   displayName: string;
   email: string;
-  emailInputRef: React.RefObject<HTMLDivElement>;
-  emailTextRef: React.RefObject<HTMLSpanElement>;
+  emailInputRef: React.RefObject<HTMLDivElement | null>;
+  emailTextRef: React.RefObject<HTMLSpanElement | null>;
   isChecked: boolean;
   isEmailOpen: boolean;
   setOpenedEmailKey: React.Dispatch<React.SetStateAction<string>>;
@@ -342,11 +348,11 @@ export interface InjectedTypeSelectTableProps extends AccountsTableProps {
   changeGroupType: TStore["importAccountsStore"]["changeGroupType"];
   UserTypes: TStore["importAccountsStore"]["UserTypes"];
   toggleAllAccounts: TStore["importAccountsStore"]["toggleAllAccounts"];
-  isOwner: TStore["userStore"]["user"]["isOwner"];
+  isOwner: TUser["isOwner"];
 }
 
 export interface TypeSelectTableViewProps {
-  t: TFunciton;
+  t: TFunction;
   sectionWidth?: number;
   accountsData: TEnhancedMigrationUser[];
   typeOptions: TOption[];
@@ -378,7 +384,7 @@ export interface InjectedTypeSelectTableRowProps
 }
 
 export interface TypeSelectRowViewProps {
-  t: TFunciton;
+  t: TFunction;
   sectionWidth?: number;
   accountsData: TEnhancedMigrationUser[];
   typeOptions: TOption[];
@@ -407,7 +413,7 @@ export interface TypeSelectRowContentProps {
   displayName: string;
   email: string;
   typeOptions: TOption[];
-  roleSelectorRef: React.RefObject<HTMLDivElement>;
+  roleSelectorRef: React.RefObject<HTMLDivElement | null>;
   type: string;
 }
 
@@ -417,7 +423,7 @@ export interface InjectedTypeSelectRowContentProps
 }
 
 export interface AccountsPagingProps {
-  t: TFunciton;
+  t: TFunction;
   numberOfItems: number;
   setDataPortion: (leftBoundary: number, rightBoundary: number) => void;
   pagesPerPage?: number;
@@ -438,24 +444,25 @@ export interface ImportSectionProps {
   description: string;
   exportSection: Omit<ImportItemProps, "isChecked">;
   importSection: Omit<ImportItemProps, "isChecked">;
+  dataTestId?: string;
 }
 
 export interface NoEmailUsersProps {
-  t: TFunciton;
+  t: TFunction;
   users: number;
 }
 
 export interface UsersInfoBlockProps {
-  quota: { max: number };
-  totalUsedUsers: number;
-  numberOfSelectedUsers: number;
-  totalUsers: number;
+  quota?: { max: number };
+  totalUsedUsers?: number;
+  numberOfSelectedUsers?: number;
+  totalUsers?: number;
 }
 
 type TExportDetails = { name: string; icon?: string };
 
 export interface ImportStepProps {
-  t: TFunciton;
+  t: TFunction;
   serviceName: string;
   usersExportDetails: TExportDetails;
   personalExportDetails: TExportDetails;
@@ -484,7 +491,7 @@ export interface InjectedImportStepProps extends ImportStepProps {
 }
 
 export interface ImportProcessingStepProps {
-  t: TFunciton;
+  t: TFunction;
   migratorName: TWorkspaceService;
 }
 
@@ -497,7 +504,7 @@ export interface InjectedImportProcessingStepProps
 }
 
 export interface ImportCompleteStepProps {
-  t: TFunciton;
+  t: TFunction;
 }
 
 export interface InjectedImportCompleteStepProps

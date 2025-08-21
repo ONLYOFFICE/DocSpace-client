@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Tabs } from "@docspace/shared/components/tabs";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router";
 import { withTranslation } from "react-i18next";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
@@ -51,7 +51,10 @@ const TabsCommon = (props) => {
     isMobileView,
     isCommunity,
   } = props;
+  const location = useLocation();
   const navigate = useNavigate();
+
+  const [currentTabId, setCurrentTabId] = useState();
 
   const data = [
     {
@@ -69,24 +72,26 @@ const TabsCommon = (props) => {
   if (!isCommunity) {
     data.splice(1, 0, {
       id: "branding",
-      name: t("Branding"),
+      name: t("Common:Branding"),
       content: <Branding />,
     });
   }
 
   const getCurrentTabId = () => {
-    const path = window.location.pathname;
+    const path = location.pathname;
     const currentTab = data.find((item) => path.includes(item.id));
     return currentTab && data.length ? currentTab.id : data[0].id;
   };
 
   const load = async () => {
-    const currentTabId = getCurrentTabId();
+    const tabId = getCurrentTabId();
+    setCurrentTabId(tabId);
+
     await loadBaseInfo(
       !isMobileView
-        ? currentTabId === "general"
+        ? tabId === "general"
           ? "customization"
-          : currentTabId === "branding"
+          : tabId === "branding"
             ? "branding"
             : "appearance"
         : "customization",
@@ -114,6 +119,7 @@ const TabsCommon = (props) => {
         `/portal-settings/customization/${e.id}`,
       ),
     );
+    setCurrentTabId(e.id);
   };
 
   if (!isLoadedSubmenu) return <LoaderTabs />;
@@ -121,8 +127,8 @@ const TabsCommon = (props) => {
   return (
     <Tabs
       items={data}
-      selectedItemId={getCurrentTabId()}
-      onSelect={(e) => onSelect(e)}
+      selectedItemId={currentTabId}
+      onSelect={onSelect}
       stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
     />
   );

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,22 +24,45 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useTranslation } from "react-i18next";
+import moment from "moment";
+
 import { Text } from "@docspace/shared/components/text";
-import { classNames } from "@docspace/shared/utils";
-import { useFeedTranslation } from "../useFeedTranslation";
-import { getDateTime } from "../../../helpers/HistoryHelper";
+import { classNames, getCookie } from "@docspace/shared/utils";
+import {
+  TFeedAction,
+  TFeedData,
+  RoomMember,
+} from "@docspace/shared/api/rooms/types";
+import { LANGUAGE } from "@docspace/shared/constants";
+
+import { useFeedTranslation } from "../hooks/useFeedTranslation";
+
 import { getFeedInfo } from "../FeedInfo";
 import HistoryUserList from "./UserList";
 import HistoryGroupList from "./GroupList";
 import HistoryRoomExternalLink from "./RoomExternalLink";
 import HistoryMainTextFolderInfo from "./MainTextFolderInfo";
 
-import { HistoryBlockContentProps } from "./HistoryBlockContent.types";
+const getDateTime = (date: Date | string) => {
+  moment.locale(getCookie(LANGUAGE));
 
-const HistoryTitleBlock = ({ t, feed }: HistoryBlockContentProps) => {
+  const given = moment(date);
+  return given.format("LT");
+};
+
+const HistoryTitleBlock = ({
+  feed,
+}: {
+  feed: TFeedAction<TFeedData | RoomMember>;
+}) => {
+  const { t } = useTranslation(["InfoPanel", "Common", "Translations"]);
+
   const { actionType, targetType } = getFeedInfo(feed);
 
   const hasRelatedItems = feed.related.length > 0;
+
+  const { getFeedTranslation } = useFeedTranslation(feed, hasRelatedItems);
 
   const isDisplayFolderInfo =
     ((targetType === "file" || targetType === "folder") &&
@@ -52,16 +75,16 @@ const HistoryTitleBlock = ({ t, feed }: HistoryBlockContentProps) => {
         "without-break": targetType === "group",
       })}
     >
-      {targetType === "user" && actionType === "update" && (
-        <HistoryUserList feed={feed} />
-      )}
+      {targetType === "user" && actionType === "update" ? (
+        <HistoryUserList feed={feed as TFeedAction<RoomMember>} />
+      ) : null}
 
-      {targetType === "group" && actionType === "update" && (
+      {targetType === "group" && actionType === "update" ? (
         <>
           {t("Common:Group")}
-          <HistoryGroupList feed={feed} />
+          <HistoryGroupList feed={feed as TFeedAction<TFeedData>} />
         </>
-      )}
+      ) : null}
 
       <div className="action-title">
         <Text
@@ -74,30 +97,34 @@ const HistoryTitleBlock = ({ t, feed }: HistoryBlockContentProps) => {
               (targetType === "roomExternalLink" && actionType === "create"),
           })}
         >
-          {useFeedTranslation(t, feed, hasRelatedItems)}
+          {getFeedTranslation()}
         </Text>
-        {hasRelatedItems && (
-          <Text as="span" className="users-counter">
-            {`(${feed.related.length + 1}).`}
-          </Text>
-        )}
-        {isDisplayFolderInfo && (
+        {isDisplayFolderInfo ? (
           <HistoryMainTextFolderInfo feed={feed} actionType={actionType} />
-        )}
+        ) : null}
         {feed.related.length === 0 &&
-          targetType === "group" &&
-          actionType !== "update" && (
-            <HistoryGroupList feed={feed} withWrapping />
-          )}
+        targetType === "group" &&
+        actionType !== "update" ? (
+          <HistoryGroupList
+            feed={feed as TFeedAction<TFeedData>}
+            withWrapping
+          />
+        ) : null}
 
         {feed.related.length === 0 &&
-          targetType === "user" &&
-          actionType !== "update" && (
-            <HistoryUserList feed={feed} withWrapping />
-          )}
-        {targetType === "roomExternalLink" && actionType === "create" && (
-          <HistoryRoomExternalLink feedData={feed.data} withWrapping />
-        )}
+        targetType === "user" &&
+        actionType !== "update" ? (
+          <HistoryUserList
+            feed={feed as TFeedAction<RoomMember>}
+            withWrapping
+          />
+        ) : null}
+        {targetType === "roomExternalLink" && actionType === "create" ? (
+          <HistoryRoomExternalLink
+            feedData={feed.data as TFeedData}
+            withWrapping
+          />
+        ) : null}
       </div>
 
       <Text className="date">{getDateTime(feed.date)}</Text>

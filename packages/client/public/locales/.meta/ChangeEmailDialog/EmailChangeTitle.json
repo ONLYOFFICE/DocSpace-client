@@ -1,0 +1,291 @@
+{
+  "key_path": "EmailChangeTitle",
+  "content": "Change email",
+  "content_en_sha1_hash": "8f1514b56ee016d4c49a8b4e2e98348f023dc82e",
+  "created_at": "2025-05-19T21:30:57.024Z",
+  "updated_at": "2025-08-11T18:11:59.122Z",
+  "comment": {
+    "text": "This translation key is used for the title displayed in a modal dialog when changing email. It appears in the header of a modal that prompts users to update their email address, providing a clear label for the action being performed.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:37:37.200Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangeEmailDialog/index.js",
+      "line_number": 191,
+      "context": "isLoading={!tReady}\n visible={visible}\n onClose={this.onClose}\n displayType=\"modal\"\n >\n <ModalDialog.Header>{t(\"EmailChangeTitle\")}</ModalDialog.Header>\n <ModalDialog.Body className=\"email-dialog-body\">\n <StyledBodyContent>\n <Text className=\"text-body\">{t(\"EmailActivationDescription\")}</Text>\n <FieldContainer\n isVertical",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Elektron poçtun dəyişdirilməsi\" is technically correct, it's quite formal and lengthy for a dialog title. A more natural and user-friendly translation would be preferred.",
+          "suggestion": "E-poçtü dəyiş"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Änderung der E-Mail-Adresse' is too literal. A more natural German translation for 'Change email' would be something like 'E-Mail ändern' or 'E-Mail-Adresse ändern'.",
+          "suggestion": "E-Mail ändern"
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically understandable, the Greek translation 'Αλλαγή email' is a direct transliteration of 'Change email'. A more natural and idiomatic Greek translation would be 'Αλλαγή διεύθυνσης email' or 'Αλλαγή email διεύθυνσης'.",
+          "suggestion": "Αλλαγή διεύθυνσης email"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Sähköpostin muuttaminen\" is grammatically correct, it's a bit literal and verbose for a dialog title. A more natural and concise translation would be preferred for a user interface element.",
+          "suggestion": "Vaihda sähköposti"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Changement d'adresse email' is technically correct but not the most natural or concise phrasing for a title. 'Changer l'email' or 'Modification de l'adresse email' would be more common and idiomatic for a change email dialog title.",
+          "suggestion": "Changer l'email"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"էլփոստի փոփոխություն\" (elposti popoxutyun) literally translates to 'email change'. While understandable, a more natural and idiomatic Armenian translation for 'Change email' would be something like 'Փոփոխել էլփոստը' (Popoxcel elposty).",
+          "suggestion": "Փոփոխել էլփոստը"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'E-mail wijziging' is a literal translation but doesn't quite convey the natural flow of 'Change email' in Dutch. It's understandable, but not idiomatic.",
+          "suggestion": "E-mailadres wijzigen"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Изменение адреса электронной почты\" is a very literal and somewhat formal translation of \"Change email.\" A more natural and user-friendly translation would be something like \"Сменить электронную почту\" or \"Изменить почту\".",
+          "suggestion": "Сменить электронную почту"
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'වි-තැපෑල සංශෝධනය' is not a natural or accurate translation of 'Change email'. 'වි-තැපෑල' means 'e-mail' and 'සංශෝධනය' means 'modification' or 'amendment'. While technically correct, it sounds overly formal and awkward. A more natural translation would focus on the action of changing the email.",
+          "suggestion": "Consider alternatives like 'ඊමේල් වෙනස් කරන්න' (E-mail venas karanna - 'Change email') or 'ඊමේල් අලුතින් සකසන්න' (E-mail aluthin sakasanna - 'Redo the email')."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'sprememba Email' is not a correct or idiomatic translation of 'Change email'. 'Email' should be translated to 'e-pošta'. 'sprememba' is a valid word but the entire phrase is awkward.",
+          "suggestion": "sprememba e-pošte"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a mix of lowercase and uppercase. Slovenian typically capitalizes nouns.",
+          "suggestion": "Sprememba e-pošte"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation 'Промени емаил' is a transliteration of 'Change email' and not a proper translation. The correct translation should use Serbian vocabulary.",
+          "suggestion": "Измени е-маил"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Promeni email' is not the most natural or accurate translation of 'Change email' in Serbian (Latin). While 'promeniti' is a valid verb for 'to change,' it sounds somewhat awkward in this context. A better translation would be 'Izmeni e-mail' or 'Promeni e-mail adresa'.",
+          "suggestion": "Izmeni e-mail"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '邮箱变更' while technically correct, doesn't convey the same nuance as 'Change email'. 'Change email' implies a process or dialog about changing an email address. '邮箱变更' is a more general term for 'email change'.",
+          "suggestion": "Consider a more descriptive translation like '修改邮箱' (Xiūgǎi yóuxiāng) which translates to 'Modify email' or 'Change email'."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

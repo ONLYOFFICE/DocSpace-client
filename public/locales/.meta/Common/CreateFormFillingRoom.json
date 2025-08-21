@@ -1,0 +1,283 @@
+{
+  "key_path": "CreateFormFillingRoom",
+  "content": "Create Form filling room",
+  "content_en_sha1_hash": "2c00eeebf71b5e09d7795d3137d22acce6f3542a",
+  "created_at": "2025-05-19T21:30:43.893Z",
+  "updated_at": "2025-05-26T07:57:32.198Z",
+  "comment": {
+    "text": "The translation key \"CreateFormFillingRoom\" is used to display the label for a button that allows users to create a new form filling room. It appears in a dialog and has been translated from English as \"Create Form filling room\". This translation key is part of a set of labels for different types of rooms, with this one specifically referring to a space for filling out forms.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:36:51.542Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/ShareCollectSelector/ShareCollectSelector.tsx",
+      "line_number": 263,
+      "context": "onClose: onCloseInfoBar,\n };\n \n const createDefineRoomLabels: Partial<Record<RoomsType, string>> = {\n [RoomsType.VirtualDataRoom]: t(\"Common:CreateVirtualDataRoom\"),\n [RoomsType.FormRoom]: t(\"Common:CreateFormFillingRoom\"),\n };\n \n return (\n <FilesSelectorWrapper\n withCreate",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/doceditor/src/components/StartFillingSelectDialog.tsx",
+      "line_number": 74,
+      "context": "onClose: onCloseInfoBar,\n };\n \n const createDefineRoomLabels: Partial<Record<RoomsType, string>> = {\n [RoomsType.VirtualDataRoom]: t(\"Common:CreateVirtualDataRoom\"),\n [RoomsType.FormRoom]: t(\"Common:CreateFormFillingRoom\"),\n };\n \n return (\n <FilesSelectorWrapper\n withCreate",
+      "module": "/packages/doceditor"
+    },
+    {
+      "file_path": "/packages/shared/components/selector/sub-components/EmptySreen/EmptyScreenFormRoom.tsx",
+      "line_number": 62,
+      "context": "? t(\"Common:SelectorFormRoomEmptyScreenDescription\")\n : t(\"Common:SelectorVDREmptyScreenDescription\");\n \n const buttonLabel =\n createDefineRoomType === RoomsType.FormRoom\n ? t(\"Common:CreateFormFillingRoom\")\n : t(\"Common:CreateVirtualDataRoom\");\n \n return (\n <section className={styles.newEmptyScreen}>\n <img",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Forma doldurma otağı yaradın\" literally translates to \"You created form filling room.\" It should reflect the action of creating a form filling room, not that the user created it.  A more accurate translation would convey the 'create' action itself.",
+          "suggestion": "Forma doldurma otağı yarat"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Greek translation lacks a space after the colon.",
+          "suggestion": "Δημιουργία: δωματίου συμπλήρωσης φορμών "
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Stanza' should be 'Sala' for a more accurate translation of 'room' in this context.",
+          "suggestion": "Crea una Sala di compilazione dei moduli"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"양식 작성 룸 생성 \" is a literal translation but doesn't flow naturally in Korean. \"룸\" (room) feels out of place. A more natural phrasing would use a Korean equivalent for 'room' in this context, or omit it entirely if the context makes it obvious.",
+          "suggestion": "Consider alternatives like \"양식 작성 공간 생성\" (Form filling space creation) or \"양식 작성실 생성\" (Form filling room creation, using '실' for a dedicated space)."
+        },
+        {
+          "type": "formatting",
+          "description": "Spacing between words could be adjusted for better readability. Korean often benefits from more deliberate spacing.",
+          "suggestion": "Consider adding a space after 각 word: \"양식 작성 공간 생성\" or \"양식 작성실 생성\""
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Creare Sală Completare formular' is not idiomatic Romanian. 'Completare formular' is a literal translation of 'Form filling'.",
+          "suggestion": "Creare sală de completare formulare"
+        },
+        {
+          "type": "formatting",
+          "description": "There is a space missing between 'Creare' and 'sală' in the suggested correction.",
+          "suggestion": "Creare sală de completare formulare"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Креирај Просторију за попуњавање формулара' is a literal translation but sounds unnatural in Serbian. 'Form filling room' implies a designated space, not an action of creating a room *for* filling forms.",
+          "suggestion": "Consider a translation like 'Направи просторију за попуњавање образаца' or 'Просторија за попуњавање образаца' depending on the intended nuance (create/room)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Kreiraj Prostoriju za popunjavanje formulara' is overly formal. 'Prostorija' implies a dedicated room, which might not always be the case. A more natural translation would reflect this flexibility.",
+          "suggestion": "Kreiraj sobu za popunjavanje formulara"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Kreiraj' is correct for 'Create', the entire phrase sounds less natural than a more colloquial option.",
+          "suggestion": "Napravi prostor za popunjavanje formulara"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Tạo phòng Điền biểu mẫu\" is not the most natural way to say \"Create Form filling room\" in Vietnamese. While technically correct, it's a bit literal.",
+          "suggestion": "Tạo phòng làm biểu mẫu"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

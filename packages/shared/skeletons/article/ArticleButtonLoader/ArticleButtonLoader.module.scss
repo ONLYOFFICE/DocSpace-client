@@ -1,0 +1,10 @@
+@use "../../../styles/mixins";
+
+.container {
+  width: 211px;
+  margin: 0;
+
+  @include mixins.tablet-and-below {
+    display: none;
+  }
+}

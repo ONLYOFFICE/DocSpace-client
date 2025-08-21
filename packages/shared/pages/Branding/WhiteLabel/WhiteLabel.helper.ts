@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,6 +31,7 @@ import {
   IUploadedDimensions,
   IUploadLogoResponse,
 } from "./WhiteLabel.types";
+import { WhiteLabelLogoType } from "../../../enums";
 
 export const generateLogo = (
   width: number,
@@ -127,6 +128,87 @@ export const getLogoOptions = (
         width,
         height,
       };
+    case 7:
+      return {
+        fontSize,
+        text,
+        width,
+        height,
+        alignCenter: false,
+        isEditor: true,
+      };
+    case 8:
+      return {
+        fontSize,
+        text,
+        width,
+        height,
+        alignCenter: false,
+        isEditor: true,
+      };
+    case 9:
+      return {
+        fontSize,
+        text,
+        width,
+        height,
+        alignCenter: false,
+        isEditor: true,
+      };
+    case 10:
+      return {
+        fontSize,
+        text,
+        width,
+        height,
+        alignCenter: false,
+        isEditor: true,
+      };
+    case 11:
+      return {
+        fontSize,
+        text,
+        width,
+        height,
+        alignCenter: false,
+        isEditor: true,
+      };
+    case 12:
+      return {
+        fontSize,
+        text,
+        width,
+        height,
+        alignCenter: false,
+        isEditor: true,
+      };
+    case 13:
+      return {
+        fontSize,
+        text,
+        width,
+        height,
+        alignCenter: false,
+        isEditor: true,
+      };
+    case 14:
+      return {
+        fontSize,
+        text,
+        width,
+        height,
+        alignCenter: false,
+        isEditor: true,
+      };
+    case 15:
+      return {
+        fontSize,
+        text,
+        width,
+        height,
+        alignCenter: false,
+        isEditor: true,
+      };
     default:
       return { fontSize: 32, text, width: 422, height: 48 };
   }
@@ -148,7 +230,7 @@ const getUploadedFileDimensions = (file: File): Promise<IUploadedDimensions> =>
 
       img.src = window.URL.createObjectURL(file);
     } catch (exception) {
-      return reject(exception);
+      reject(exception);
     }
   });
 
@@ -166,10 +248,33 @@ export const uploadLogo = async (
     data.append("logotype", type);
 
     return await axios.post(
-      `${window.ClientConfig?.proxy?.url}/logoUploader.ashx`,
+      `${window.location.origin}/logoUploader.ashx`,
       data,
     );
   } catch (error) {
     console.error(error);
   }
 };
+
+export const toDataUrl = (f: File) =>
+  new Promise<string>((resolve, reject) => {
+    try {
+      const reader = new FileReader();
+      reader.onload = () => resolve(String(reader.result));
+      reader.onerror = (err) => reject(err);
+      reader.readAsDataURL(f);
+    } catch (err) {
+      reject(err);
+    }
+  });
+
+export const hiddenEditorTypes = [
+  WhiteLabelLogoType.SpreadsheetEditor,
+  WhiteLabelLogoType.SpreadsheetEditorEmbed,
+  WhiteLabelLogoType.PresentationEditor,
+  WhiteLabelLogoType.PresentationEditorEmbed,
+  WhiteLabelLogoType.PdfEditor,
+  WhiteLabelLogoType.PdfEditorEmbed,
+  WhiteLabelLogoType.DiagramEditor,
+  WhiteLabelLogoType.DiagramEditorEmbed,
+];

@@ -1,0 +1,280 @@
+{
+  "key_path": "RoleBasedFilling",
+  "content": "Role-based filling",
+  "content_en_sha1_hash": "13a611456fd9e82242a25e30e2640282094938c7",
+  "created_at": "2025-05-19T21:30:47.965Z",
+  "updated_at": "2025-06-30T12:20:31.244Z",
+  "comment": {
+    "text": "\"Role-based filling is a feature that allows users to share and access PDF files within specific rooms or virtual data rooms. This translation key is used in various UI elements, such as buttons and dialogs, where it appears alongside an icon and a label. Translators should provide a description that accurately conveys the purpose of this feature.\"",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:34:39.719Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/FillPDFDialog/FillPDFDialog.tsx",
+      "line_number": 122,
+      "context": "onClick: () => openSelector(RoomsType.FormRoom),\n icon: <FormDataCollectionIcon />,\n },\n {\n id: \"role-based-filling\",\n title: t(\"Common:RoleBasedFilling\"),\n description: t(\"Common:RoleBasedFillingDescription\"),\n buttonLabel: t(\"Common:ShareInTheRoom\"),\n onClick: () => openSelector(RoomsType.VirtualDataRoom),\n icon: <RoleBasedFillingIcon />,\n },",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/panels/ShareFormPanel/index.js",
+      "line_number": 103,
+      "context": "onClick: onClickFormRoom,\n icon: <FormDataCollectionIcon />,\n },\n {\n id: \"role-based-filling\",\n title: t(\"Common:RoleBasedFilling\"),\n description: t(\"Common:RoleBasedFillingDescription\"),\n buttonLabel: t(\"Common:ShareInTheRoom\"),\n onClick: onClickVirtualDataRoom,\n icon: <RoleBasedFillingIcon />,\n },",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/doceditor/src/components/ShareFormDialog.tsx",
+      "line_number": 171,
+      "context": "onClick: onClickFormRoom,\n icon: <FormDataCollectionIcon />,\n },\n {\n id: \"virtual-data-room\",\n title: t(\"Common:RoleBasedFilling\"),\n description: t(\"Common:RoleBasedFillingDescription\"),\n buttonLabel: t(\"Common:ShareInTheRoom\"),\n onClick: onClickVirtualDataRoom,\n icon: <RoleBasedFillingIcon />,\n },",
+      "module": "/packages/doceditor"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"التعبئة على أساس الدور\" literally translates to 'Filling based on role.' While understandable, it doesn't fully capture the nuance of 'Role-based filling,' which implies assigning or populating based on roles, not just physical filling. A more accurate translation would consider the context.",
+          "suggestion": "Consider a translation like \"توزيع وفقًا للأدوار\" (Tawzee' wifqan lil'adwaar) - 'Distribution according to roles' or \"ملء الأدوار\" (Mal' al-Adwaar) - 'Populating roles'."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Попълване на базата на роли\" is a literal translation, it doesn't fully capture the nuance of 'role-based filling'. It implies filling something *with* roles, rather than a process that operates based on roles. A more accurate translation would convey the concept of applying or assigning based on roles.",
+          "suggestion": "Consider alternatives like \"Запълване според роли\" or \"Работа на базата на роли\" depending on the specific context.  A deeper understanding of the original content is needed to offer the best translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Βάση ρόλων συμπλήρωση' is a literal translation, it doesn't fully capture the nuance of 'Role-based filling.' 'Role-based' implies a process or system.",
+          "suggestion": "Εναλλακτικές επιλογές: 'Συμπλήρωση με βάση ρόλους', 'Εξατομικευμένη συμπλήρωση βάσει ρόλων', 'Συμπλήρωση ανά ρόλο'"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Դերի վրա հիմնված լրացում\" is a very literal translation of \"Role-based filling\". A more natural and idiomatic Armenian translation would be something like \"Դերի հիմքով լրացում\" or \"Ռոլային լրացում\" (using the loanword 'role'). The current translation sounds clunky and unnatural in Armenian.",
+          "suggestion": "Consider alternatives like \"Դերի հիմքով լրացում\" or \"Ռոլային լրացում\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ການຈັດຕັ້ງປະຕິບັດຕາມບົດບາດ\" (kan jat tong pati bat tam bot bat) translates to 'implementation according to role' which isn't a direct equivalent to 'role-based filling'. While related, it lacks the nuance of 'filling' or assigning tasks based on roles. A more accurate translation would convey the action of assigning or distributing tasks/information based on roles.",
+          "suggestion": "Consider alternatives like \"ການຈັດການຕາມບົດບາດ\" (kan jat ngan tam bot bat) - 'management according to role', or \"ການມອບຫມາຍງານຕາມບົດບາດ\" (kan mop mai ngan tam bot bat) - 'task assignment according to role'."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Completare bazată pe roluri\" is a literal translation, it's not the most natural or idiomatic way to express \"Role-based filling\" in Romanian. It sounds somewhat clunky. A more natural translation would consider the context of 'filling' - is it filling a form, a position, etc.",
+          "suggestion": "Consider alternatives like \"Completare în funcție de roluri\" or \"Alocare bazată pe roluri\" depending on the specific context."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'භූමිකාව මත පදනම් වූ පිරවීම' while technically accurate, doesn't fully capture the nuanced meaning of 'Role-based filling'. 'භූමිකාව මත පදනම් වූ' accurately translates 'Role-based,' but 'පිරවීම' (pirivimu) literally means 'filling' and may not convey the intended process or application.  It's quite generic.",
+          "suggestion": "Consider a translation that implies a more structured or automated process, e.g., 'භූමිකා-आधारිත පිරවන ක්‍රියාවලිය' (bhūmikā-ādharita pirivana kriyāvaliya) which translates to 'Role-based filling process' or 'භූමිකා-आधारිත සුදුසුකම්' (bhūmikā-ādharita sudusukama) which means 'Role-based suitability/qualification'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation \"Základné vyplňovanie na základe rolí\" doesn't accurately reflect the meaning of \"Role-based filling.\" \"Základné\" implies basic or fundamental, which isn't the intended nuance. It suggests a simplistic or introductory form of role-based filling rather than the concept of filling roles.",
+          "suggestion": "Consider alternatives like \"Vyplňovanie rolí na základe rolí\" or \"Priradenie rolí podľa rolí\" or \"Prihlásenie rolí podľa rolí\". A more contextual translation might be necessary depending on the specific application of 'Role-based filling'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovenian translation \"Uporabniško določeno izpolnjevanje\" does not accurately convey the meaning of \"Role-based filling\". \"Role-based\" implies filling based on assigned roles, which isn't reflected in the translation. \"Uporabniško določeno\" suggests user-defined, not role-based.",
+          "suggestion": "A more accurate translation might be \"Izpolnjevanje glede na vloge\" or \"Izpolnjevanje po vlogah\", depending on the specific context."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Điền dựa trên vai trò\" is understandable, it's not the most natural or accurate translation of \"Role-based filling.\" It conveys the action of filling *based on* a role, rather than the concept of filling roles themselves. A more suitable translation would better capture the idea of assigning roles or filling predefined positions.",
+          "suggestion": "Consider alternatives such as \"Phân bổ vai trò\", \"Tuyển dụng dựa trên vai trò\", or \"Đóng vai trò\" depending on the precise context of 'Role-based filling'."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

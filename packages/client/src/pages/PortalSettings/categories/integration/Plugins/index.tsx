@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -100,7 +100,7 @@ const PluginPage = ({
            
             withUpload={withUpload}
           /> */}
-      {withUpload && (
+      {withUpload ? (
         <>
           <Text>
             {t("UploadDescription", { productName: t("Common:ProductName") })}
@@ -109,15 +109,17 @@ const PluginPage = ({
             onDrop={onDrop}
             isDisabled={!withUpload}
             isLoading={false}
+            dataTestId="upload_plugin_dropzone"
           />
         </>
-      )}
+      ) : null}
       <PluginListContainer>
         {pluginList.map((plugin) => (
           <PluginItem
             key={`plugin-${plugin.name}-${plugin.version}`}
             openSettingsDialog={openSettingsDialog}
             updatePlugin={updatePlugin}
+            dataTestId={`plugin_${plugin.name}`}
             {...plugin}
           />
         ))}

@@ -1,0 +1,323 @@
+{
+  "key_path": "EmptyTemplatesDescription",
+  "content": "You can create a template from a room in the Room section",
+  "content_en_sha1_hash": "3ae0630d6f2123e351bffec005e5b0541a21b4dd",
+  "created_at": "2025-05-19T21:30:56.500Z",
+  "updated_at": "2025-05-26T07:57:32.165Z",
+  "comment": {
+    "text": "This translation key describes the text that will be displayed when creating a template from an empty room in the Room section. It explains how to proceed with the process and provides context for users navigating the Room templates page.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:47.426Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
+      "line_number": 186,
+      "context": ")\n .with([FolderType.Rooms, ShareAccessRights.DenyAccess], () =>\n t(\"EmptyView:EmptyRootRoomUserDescription\"),\n )\n .with([FolderType.RoomTemplates, P._], () =>\n t(\"EmptyView:EmptyTemplatesDescription\"),\n )\n .with([FolderType.Rooms, P.when(() => isPublicRoom)], () => (\n <>\n <span>{t(\"Common:RoomEmptyAtTheMoment\")}</span>\n <br />",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, the translation \"يمكنكم إنشاء قالب من غرفة موجودة ضمن قسم الغرف\" is a bit wordy and formal for typical user interface text. A more natural and concise translation would improve user experience.",
+          "suggestion": "يمكنك إنشاء قالب من غرفة في قسم الغرف."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Otaq bölməsində otaqdan şablon yarada bilərsiniz\" is not the most natural or accurate rendering of \"You can create a template from a room in the Room section.\" It's overly literal and a bit clunky. 'Room section' is also not properly conveyed.",
+          "suggestion": "Yenə bir otaqdan şablon yaratmaq üçün Otaqlar bölməsinə keçin."
+        },
+        {
+          "type": "grammar",
+          "description": "While technically correct, the repeated use of 'otaq' (room) makes the sentence sound awkward in Azerbaijani. Avoiding repetition enhances readability.",
+          "suggestion": "Yenə bir otaqdan şablon yaratmaq üçün Otaqlar bölməsinə keçin."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'a partir de una sala' sounds slightly awkward. A more natural translation would be 'desde una sala'.",
+          "suggestion": "Puede crear una plantilla desde una sala en la sección Salas"
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Vous pouvez créer un modèle à partir d'une salle dans la section Salle' is overly literal and slightly awkward. 'Salle' is repeated unnecessarily.  A more natural translation would imply the section is also about rooms.",
+          "suggestion": "Vous pouvez créer un modèle à partir d'une pièce dans la section Pièces."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation 'Դուք կարող եք սենյակից ստեղծել կաղապար «Սենյակներ» բաժնում։' is a literal translation but slightly awkward. A more natural phrasing would be 'Դուք կարող եք ստեղծել կաղապար սենյակից՝ «Սենյակներ» բաժնում։' or 'Դուք կարող եք սենյակից ստեղծել կաղապար, «Սենյակներ» բաժնում։'",
+          "suggestion": "Դուք կարող եք ստեղծել կաղապար սենյակից՝ «Սենյակներ» բաժնում։"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is technically correct but sounds unnatural in Japanese. The phrasing 'ルームセクションのルームから' is redundant. 'ルームセクション' already implies rooms.",
+          "suggestion": "ルームセクションからテンプレートを作成できます"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ທ່ານສາມາດສ້າງແມ່ແບບຈາກຫ້ອງໃນພື້ນທີ່ຫ້ອງໄດ້' is slightly awkward. 'ພື້ນທີ່ຫ້ອງ' literally translates to 'room area' which is redundant. The English 'Room section' implies a specific area or tab within a system, not just the physical space.",
+          "suggestion": "ທ່ານສາມາດສ້າງແມ່ແບບຈາກຫ້ອງໃນສ່ວນຫ້ອງໄດ້"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Kamer sectie' is slightly awkward. While technically correct, 'Kamers' (plural) would be more natural in this context, as users would typically create templates from multiple rooms.",
+          "suggestion": "U kunt een sjabloon maken van een kamer in de Kamers sectie"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Pode criar um templates a partir de uma sala na secção Sala' is not a direct and accurate translation of 'You can create a template from a room in the Room section'. The use of 'templates' is incorrect; it should be 'modelo' or 'template' (loanword). The repetition of 'Sala' is also awkward.  'secção Sala' could be simplified to just 'Sala'.",
+          "suggestion": "Pode criar um modelo a partir de uma sala na seção Sala."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'templates' is misspelled. It should be 'template' or 'modelo'.",
+          "suggestion": "modelo or template"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Você pode criar um modelo de uma sala na seção Sala' is too literal and somewhat awkward in Portuguese. 'Sala' appears twice, which isn't ideal. A better phrasing would focus on creating a template *based on* a room.",
+          "suggestion": "Você pode criar um modelo a partir de uma sala na seção Quartos."
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation \"Puteți crea șablonul de sală în secțiunea Sală\" is too literal and doesn't flow naturally. 'Șablonul de sală' is awkward. It directly translates 'template of room'.",
+          "suggestion": "Puteți crea un șablon din camera din secțiunea Sală."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'sală' is repeated and sounds unnatural. The original English uses 'room' and 'Room' to distinguish between the generic and specific section.",
+          "suggestion": "Puteți crea un șablon dintr-o cameră din secțiunea 'Sală'."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ඔබ' (oba) which means 'you' is unnecessary and can be removed. It's overly formal and not needed in this context.  The sentence flows better without it.",
+          "suggestion": "කාමරයකින් අච්චුවක් නිර්මාණය කළ හැකිය."
+        },
+        {
+          "type": "spelling",
+          "description": "While 'අච්චුවක්' is technically correct, 'වීදියක්' is more commonly used when describing templates in a room setting, although 'අච්චුවක්' is acceptable. Using the more common term will improve naturalness.",
+          "suggestion": "කාමරයකින් වීදියක් නිර්මාණය කළ හැකිය."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Predlogo lahko ustvarite iz sobe v razdelku Soba' is slightly awkward. A more natural phrasing would be 'Predlogo lahko ustvarite iz sobe v odseku Soba' or 'Ustvarite predlogo iz sobe v razdelku Soba'.",
+          "suggestion": "Ustvarite predlogo iz sobe v razdelku Soba"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Можете креирати шаблон из собе у одељку Собе' is not the most natural or accurate translation of 'You can create a template from a room in the Room section'. 'Kreirati' is a more formal word than is typically used in this context.",
+          "suggestion": "Можете направити шаблон из собе у одељку 'Соби'."
+        },
+        {
+          "type": "formatting",
+          "description": "The word 'Соби' should be in single quotes to denote it's a section name.",
+          "suggestion": "Можете направити шаблон из собе у одељку 'Соби'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Serbian translation uses lowercase for 'Sobe' which should be capitalized as it is a section name.",
+          "suggestion": "Možete kreirati šablon iz sobe u odeljku Sobe."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

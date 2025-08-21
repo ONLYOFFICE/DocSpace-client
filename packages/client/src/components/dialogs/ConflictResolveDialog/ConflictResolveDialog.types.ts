@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,9 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TFile, TFolder } from "@docspace/shared/api/files/types";
-import { ConflictResolveType } from "@docspace/shared/enums";
-import { TTranslation } from "@docspace/shared/types";
+import type {
+  TFile,
+  TFolder,
+  TOperation,
+} from "@docspace/shared/api/files/types";
+import type { ConflictResolveType, RoomsType } from "@docspace/shared/enums";
+import type { TTranslation } from "@docspace/shared/types";
 
 export type TConflictResolveDialogData = {
   destFolderId: number;
@@ -44,6 +48,9 @@ export type TConflictResolveDialogData = {
 
   selectedFolder?: TFolder;
   fromShareCollectSelector?: boolean;
+  createDefineRoomType?: RoomsType;
+  destFolderInfo: unknown;
+  toFillOut?: boolean;
 };
 
 export type TActiveItem = TFile | TFolder;
@@ -63,7 +70,8 @@ export interface ConflictResolveDialogProps {
     translations: {
       [key: string]: string;
     };
-  }) => Promise<void>;
+    toFillOut?: boolean;
+  }) => Promise<TOperation>;
   activeFiles: TActiveItem[];
   activeFolders: TActiveItem[];
   setActiveFiles: (items: TActiveItem[]) => void;
@@ -76,8 +84,9 @@ export interface ConflictResolveDialogProps {
   setCopyPanelVisible: (value: boolean) => void;
   setRestoreAllPanelVisible: (value: boolean) => void;
   setMoveToPublicRoomVisible: (value: boolean) => void;
-  setShareCollectSelector: TStore["dialogsStore"]["setShareCollectSelector"];
   openFileAction: TStore["filesActionsStore"]["openFileAction"];
+  setFillPDFDialogData: TStore["dialogsStore"]["setFillPDFDialogData"];
+  setIsShareFormData: TStore["dialogsStore"]["setIsShareFormData"];
   conflictDialogUploadHandler: (
     data: {
       files: {
@@ -96,4 +105,6 @@ export interface ConflictResolveDialogProps {
   files: TFile[];
   folders: TFolder[];
   cancelUploadAction: () => void;
+
+  setAssignRolesDialogData: TStore["dialogsStore"]["setAssignRolesDialogData"];
 }

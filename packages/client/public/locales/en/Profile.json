@@ -1,10 +1,8 @@
 {
   "ActiveSessions": "Active Sessions",
   "AutoDeleteTitle": "All the sessions older than 60 days will be automatically deleted.",
-  "ChangeEmailSuccess": "Email has been changed successfully",
   "ChangePasswordAfterLoggingOut": "Change password after logging out",
   "ConnectSocialNetworks": "Connect your social networks",
-  "DarkTheme": "Dark theme",
   "DescriptionForSecurity": "For more security, you need to change your password.",
   "DesktopTheme": "Sync with Desktop Editor settings",
   "DesktopThemeDescription": "Automatically switch between light and dark themes depending on the current theme of Desktop Editors.",
@@ -13,7 +11,6 @@
   "ErrorAccountAlreadyUse": "Linked account already in use by another user",
   "FileManagement": "File management",
   "InterfaceTheme": "Interface theme",
-  "LightTheme": "Light theme",
   "LogoutActiveConnection": "Log out from active connection",
   "LogoutAllActiveSessionsDescription": "All active connections except this connection will be logged out, as it is currently in use.",
   "LogoutBtn": "Log out",
@@ -28,5 +25,6 @@
   "SystemTheme": "Use system theme",
   "SystemThemeDescription": "Automatically switch between light and dark themes when your system does.",
   "TerminateAllSessions": "Terminate all sessions except the current one",
-  "TwoFactorDescription": "Two-factor authentication via a code-generating app was enabled for all users by the admin."
+  "TwoFactorDescription": "Two-factor authentication via a code-generating app was enabled for all users by the admin.",
+  "EmailChangeSuccess": "Your email has been successfully changed."
 }

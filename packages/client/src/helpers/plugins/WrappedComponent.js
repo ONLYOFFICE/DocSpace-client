@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,7 +29,6 @@ import { inject, observer } from "mobx-react";
 
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Textarea } from "@docspace/shared/components/textarea";
@@ -106,7 +105,7 @@ export const PluginComponent = inject(({ pluginStore }) => {
         isRequestRunning,
         setIsRequestRunning,
         setModalRequestRunning,
-      } = React.useContext(PropsContext);
+      } = React.use(PropsContext);
 
       React.useEffect(() => {
         if (
@@ -125,6 +124,35 @@ export const PluginComponent = inject(({ pluginStore }) => {
       const getElement = () => {
         const componentName = component.component;
 
+        let elementStyles = {};
+        if (elementProps) {
+          const {
+            widthProp,
+            paddingProp,
+            displayProp,
+            borderProp,
+            backgroundProp,
+            flexProp,
+            heightProp,
+            marginProp,
+            overflowProp,
+            ...elementRest
+          } = elementProps;
+
+          elementStyles = {
+            width: widthProp,
+            height: heightProp,
+            padding: paddingProp,
+            margin: marginProp,
+            display: displayProp,
+            border: borderProp,
+            background: backgroundProp,
+            flex: flexProp,
+            overflow: overflowProp,
+            ...elementRest,
+          };
+        }
+
         switch (componentName) {
           case PluginComponents.box: {
             const childrenComponents = elementProps?.children?.map((item) => (
@@ -135,7 +163,7 @@ export const PluginComponent = inject(({ pluginStore }) => {
               />
             ));
 
-            return <Box {...elementProps}>{childrenComponents}</Box>;
+            return <div style={elementStyles}>{childrenComponents}</div>;
           }
 
           case PluginComponents.text: {
@@ -440,9 +468,9 @@ const WrappedComponent = ({
   );
 
   return (
-    <PropsContext.Provider value={contextValue}>
+    <PropsContext value={contextValue}>
       <PluginComponent component={component} pluginName={pluginName} />
-    </PropsContext.Provider>
+    </PropsContext>
   );
 };
 

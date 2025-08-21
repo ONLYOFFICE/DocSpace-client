@@ -4,7 +4,6 @@
   "DataReassignment": "Verilerin yeniden atanması",
   "DeleteProfileIsFinished": "Yeniden atama tamamlandığında profili sil",
   "DescriptionDataReassignment": "Kullanıcı tarafından oluşturulan odaları ve kullanıcı odalarında saklanan belgeleri aktaracağız.",
-  "InProgress": "Devam ediyor",
   "Interrupted": "Kesinti oldu, bazı veriler aktarılamadı",
   "MoreAboutDataTransfer": "Veri aktarımı hakkında daha fazla bilgi",
   "NewDataOwner": "Yeni veri sahibi",
@@ -14,6 +13,7 @@
   "ReassignData": "Verileri yeniden ata",
   "ReassigningDataToAnother": "Verilerin <0>{{fromUser}}</0> kullanıcısından <1>{{toUser}}</1> kullanıcısına yeniden atanması süreci başladı. Bunun uzun sürebileceğini lütfen unutmayın.",
   "ReassigningDataToItself": "<0>{{fromUser}}</0> kullanıcısından <1>{{toUser}}</1> <2>{{you}}</2> kullanıcısına yeniden veri atama işlemi başladı. Bunun uzun sürebileceğini lütfen unutmayın.",
+  "RoomsOnlyReassignment": "Konuk tarafından oluşturulan odaları aktaracağız.  ",
   "StartTransferAgain": "Aktarımı tekrar başlat",
   "UserToWhomTheDataWillBeTransferred": "Verilerin aktarılacağı kullanıcı"
 }

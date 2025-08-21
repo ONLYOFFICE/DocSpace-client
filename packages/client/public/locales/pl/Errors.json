@@ -1,6 +1,4 @@
 {
   "ErrorEmptyResponse": "Pusta odpowiedź",
-  "ErrorUnavailableText": "Oprogramowanie {{productName}} jest niedostępne",
-  "LinkDoesNotExist": "Link, który próbujesz otworzyć, nie istnieje.",
-  "LinkHasExpired": "Dany link wygasł."
+  "ErrorUnavailableText": "Oprogramowanie {{productName}} jest niedostępne"
 }

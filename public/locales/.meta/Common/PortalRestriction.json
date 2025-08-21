@@ -1,0 +1,322 @@
+{
+  "key_path": "PortalRestriction",
+  "content": "Your IP address is not included in the list of allowed IP addresses to access this {{productName}}. Turn off a VPN if it's enabled and reload the page, or use another IP address to log in.",
+  "content_en_sha1_hash": "7757cc59017d043dfa9a644e5a686d93b5f7d6da",
+  "created_at": "2025-05-19T21:30:47.430Z",
+  "updated_at": "2025-05-26T07:57:32.901Z",
+  "comment": {
+    "text": "This translation key is used to display an error message when a user attempts to access a product with an IP address not in the list of allowed IP addresses. The message informs the user to turn off their VPN and reload the page or use another IP address to log in. It appears on an Access Restricted screen.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:34:59.598Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/errors/AccessRestricted.tsx",
+      "line_number": 45,
+      "context": "return (\n ready && (\n <div className={styles.accessRestrictedWrapper}>\n <ErrorContainer\n headerText={t(\"AccessDenied\")}\n bodyText={t(\"PortalRestriction\", {\n productName: t(\"Common:ProductName\"),\n })}\n />\n </div>\n )",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'daxil olmağa icazə verilən' is a bit clunky. It could be improved for better flow.",
+          "suggestion": "İcazə verilən IP ünvanlarının siyahısına daxil deyil"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'başqa IP ünvanından istifadə edin' is grammatically correct but could be slightly more natural.",
+          "suggestion": "başqa bir IP ünvanı ilə giriş edin"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'впишете' (vpishiete) translates to 'log in' or 'enter'. A more accurate translation for 'log in' in this context would be 'влезте' (vlezte).",
+          "suggestion": "Change 'влезте' to 'впишете'."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'αν είναι κάποιο ενεργοποιημένο' is slightly awkward. While technically correct, it's not the most natural phrasing in Greek.",
+          "suggestion": "αν είναι ενεργοποιημένο"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Armenian translation maintains the English formatting of using {{productName}}, which might not be the best practice for Armenian text flow. Consider integrating the product name more naturally within the sentence.",
+          "suggestion": "Ձեր IP հասցեն ներառված չէ այս [productName]-ի մուտք գործելու համար թույլատրված IP հասցեների ցանկում:"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Korean translation maintains the English formatting of including the `{{productName}}` variable. While technically correct, it might be more natural to integrate this more seamlessly into the Korean sentence. Consider rephrasing to avoid a direct translation of the English construction.",
+          "suggestion": "이 {{productName}}에 접속하려면 허용된 IP 주소 목록에 포함되어야 합니다. VPN이 켜져 있는 경우 VPN을 끄고 페이지를 다시 로드하거나, 다른 IP 주소를 사용하여 로그인하세요."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Lao translation includes a space before the parenthesis in '{{productName}}'. While not strictly incorrect, it's stylistically inconsistent and may look odd.  Consider removing it for better alignment with English style.",
+          "suggestion": "ທີ່​ຢູ່ IP ຂອງ​ທ່ານ​ບໍ່​ໄດ້​ລວມ​ເຂົ້າ​ໃນ​ລາຍ​ຊື່​ຂອງ​ທີ່​ຢູ່ IP ທີ່​ອະ​ນຸ​ຍາດ​ໃຫ້​ເຂົ້າ​ເຖິງ {{productName}} ນີ້ ."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Latvian translation uses parentheses around 'interneta protokola (IP)'. While not incorrect, it's more common to use a hyphen for abbreviations like this in Latvian: interneta protokola (IP).",
+          "suggestion": "interneta protokola - IP"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'obszaru' (area) doesn't quite capture the meaning of 'productName' in this context. It sounds like a physical area, not a product.",
+          "suggestion": "Use a more appropriate term like 'serwisu' (service), 'aplikacji' (application), or potentially rephrase the sentence to avoid the need for direct translation of 'productName'."
+        },
+        {
+          "type": "formatting",
+          "description": "While functionally correct, the phrase 'Jeśli masz włączony VPN, wyłącz go...' could be more fluent. A slight reordering might improve readability.",
+          "suggestion": "Consider 'Jeśli masz włączony VPN, wyłącz go i...' or 'W przypadku włączonego VPN, wyłącz go...'"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The repetition of 'VPN' in the Romanian translation is awkward. It should be consistent in case usage.",
+          "suggestion": "Adresa IP al dvs nu este inclusă în lista adreselor IP cu permisiuni de acces la acest spațiu {{productName}}. Dacă utilizați un VPN, dezactivați-l și reîncărcați pagina sau vă conectați cu o altă adresă IP."
+        },
+        {
+          "type": "grammar",
+          "description": "While technically correct, 'al dvs' is a bit formal for this context. A more natural phrasing would be 'a ta'.",
+          "suggestion": "Adresa IP a ta nu este inclusă în lista adreselor IP cu permisiuni de acces la acest spațiu {{productName}}. Dacă utilizați un VPN, dezactivați-l și reîncărcați pagina sau vă conectați cu o altă adresă IP."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The abbreviation 'අ.ජා.කෙ.' appears multiple times and likely stands for IP address. While understandable in context, it's an abbreviation and might be confusing to some users. The full term 'IP ලිපිනය' is used later, which is preferable for clarity.",
+          "suggestion": "Replace all instances of 'අ.ජා.කෙ.' with 'IP ලිපිනය' for consistent terminology."
+        },
+        {
+          "type": "formatting",
+          "description": "The abbreviation 'අ.පෞ.ජා.' is used for VPN. It is unclear what it stands for, and may confuse the user. It would be clearer to use the term 'VPN' directly.",
+          "suggestion": "Replace 'අ.පෞ.ජා.' with 'VPN'."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'පිවිසීමට' (pivisimok) is slightly awkward in this context. A more natural phrasing would better convey the meaning of accessing or logging in.",
+          "suggestion": "Consider replacing 'පිවිසීමට' with a more appropriate verb like 'ඇතුළු වීමට' (athuva vok) or simply omit it and rephrase the sentence. For example, 'IP ලිපිනයක් භාවිතා කරන්න' (use an IP address)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'this space' ('tento priestor') doesn't accurately reflect 'this {{productName}}'. It implies a physical space rather than a product.",
+          "suggestion": "Vaša IP adresa nie je uvedená v zozname povolených IP adries pre prístup do tohto {{productName}}. "
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure 'Vypnite VPN, ak je zapnuté...' is slightly awkward in Slovak. A more natural phrasing would place 'ak je zapnuté' closer to the verb.",
+          "suggestion": "Vypnite VPN, ak je zapnutá, a znovu načítajte stránku..."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'prostor' (space) is not the correct translation for 'product'. It implies a physical space instead of a product or service.",
+          "suggestion": "Use a more accurate translation for 'product', such as 'izdelka' or 'storitev'.  Consider context to determine the best fit. For example, 'Vaš naslov IP ni vključen na seznam dovoljenih naslovov IP za dostop do tega izdelka {{productName}}.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word \"улогујете\" is an outdated and less common way to say \"log in\". It's better to use a more modern term.",
+          "suggestion": "улогували"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The dash in '{{productName}}-u' appears unnecessary and stylistically awkward in Serbian. It's more natural to omit it.",
+          "suggestion": "Vaša IP adresa nije uključena u listu dozvoljenih IP adresa da biste pristupili ovom {{productName}}. Ako je VPN omogućen, isključite ga i osvežite stranicu, ili koristite drugu IP adresu da se ulogujete."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

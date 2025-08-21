@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-
 import { Meta, StoryObj } from "@storybook/react";
+import moment from "moment";
 
 import { TimePicker } from "./TimePicker";
 import { TimePickerProps } from "./TimePicker.types";
@@ -35,28 +35,70 @@ const meta = {
   title: "Components/TimePicker",
   component: TimePicker,
   argTypes: {
-    hasError: { control: "boolean" },
-    onChange: { action: "onChange" },
+    initialTime: {
+      control: "date",
+      description: "Initial time value in the picker (Moment object)",
+    },
+    hasError: {
+      control: "boolean",
+      description: "Indicates if the picker is in an error state",
+    },
+    onChange: {
+      action: "onChange",
+      description:
+        "Callback function called when the time changes. Receives a Moment object or null",
+    },
+    tabIndex: {
+      control: "number",
+      description: "Tab index for the time picker input",
+    },
+    focusOnRender: {
+      control: "boolean",
+      description:
+        "Whether to automatically focus the input when the component renders",
+    },
+    className: {
+      control: "text",
+      description: "Additional CSS class for the time picker container",
+    },
+    classNameInput: {
+      control: "text",
+      description: "Additional CSS class for the time picker input element",
+    },
   },
   parameters: {
     docs: {
       description: {
-        component: "Time input",
+        component:
+          "Time input component that allows users to select or input time in HH:mm format. Supports keyboard input and validation.",
       },
     },
   },
 } satisfies Meta<typeof TimePicker>;
+
 type Story = StoryObj<typeof meta>;
 export default meta;
 
-const Template = ({ ...args }: TimePickerProps) => {
-  return <TimePicker hasError={false} {...args} />;
+const Template = (args: TimePickerProps) => {
+  return <TimePicker {...args} />;
 };
 
 export const Default: Story = {
-  render: (args) => <Template {...args} />,
+  render: Template,
   args: {
-    initialTime: {},
-    onChange: () => {},
+    initialTime: moment("2025-01-27T10:30:00"),
+    hasError: false,
+    onChange: (time) => console.log("Time changed:", time?.format("HH:mm")),
+    tabIndex: 0,
+    focusOnRender: false,
+    className: "",
+  },
+};
+
+export const WithError: Story = {
+  render: Template,
+  args: {
+    ...Default.args,
+    hasError: true,
   },
 };

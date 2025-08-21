@@ -1,4 +1,6 @@
 {
+  "DeleteVersion": "Versie verwijderen",
+  "DeleteVersionDescription": "U staat op het punt een bestandsversie te verwijderen. Het zal niet meer mogelijk zijn om het te zien of te herstellen. Weet u zeker dat u door wilt gaan?",
   "EditComment": "Bewerk opmerking",
   "Version": "Ver."
 }

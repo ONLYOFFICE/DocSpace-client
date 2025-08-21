@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useEffect, useState } from "react";
-import { toastr } from "@docspace/shared/components/toast";
 import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
@@ -93,8 +92,7 @@ const MoveToPublicRoomComponent = (props) => {
           await itemOperationToFolder(moveToPublicRoomData);
         }
       })
-      .catch((e) => {
-        toastr.error(e);
+      .catch(() => {
         setIsLoading(false);
         clearActiveOperations(fileIds, folderIds);
       })
@@ -130,13 +128,13 @@ const MoveToPublicRoomComponent = (props) => {
       </ModalDialog.Header>
       <ModalDialog.Body>
         <div className="modal-dialog-content-body">
-          <Text noSelect>{t("Files:MoveToPublicRoom")}</Text>
+          <Text>{t("Common:MoveToPublicRoom")}</Text>
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
           id="delete-file-modal_submit"
-          key="OkButton"
+          key="OKButton"
           label={t("Common:OKButton")}
           size="normal"
           primary

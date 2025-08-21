@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,46 +24,52 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import PropTypes from "prop-types";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { useTranslation } from "react-i18next";
-import AboutContent from "./AboutContent";
-import StyledBodyContent from "./ModalDialogContainer";
+import React from "react";
+import { inject, observer } from "mobx-react";
+
+import { AboutDialog as AboutDialogComponent } from "@docspace/shared/components/about-dialog";
 
 const AboutDialog = (props) => {
-  const { visible, onClose, buildVersionInfo, previewData } = props;
-  const { t, ready } = useTranslation(["About", "Common"]);
-
+  const {
+    visible,
+    onClose,
+    buildVersionInfo,
+    previewData,
+    companyInfoSettingsData,
+    standalone,
+    licenseAgreementsUrl,
+    isEnterprise,
+    logoText,
+  } = props;
   return (
-    <ModalDialog
-      isLoading={!ready}
+    <AboutDialogComponent
       visible={visible}
       onClose={onClose}
-      displayType="modal"
-      isLarge
-    >
-      <ModalDialog.Header>{t("AboutHeader")}</ModalDialog.Header>
-      <ModalDialog.Body>
-        <StyledBodyContent>
-          <AboutContent
-            buildVersionInfo={buildVersionInfo}
-            previewData={previewData}
-          />
-        </StyledBodyContent>
-      </ModalDialog.Body>
-    </ModalDialog>
+      buildVersionInfo={buildVersionInfo}
+      previewData={previewData}
+      companyInfoSettingsData={companyInfoSettingsData}
+      standalone={standalone}
+      licenseAgreementsUrl={licenseAgreementsUrl}
+      isEnterprise={isEnterprise}
+      logoText={logoText}
+    />
   );
 };
 
-AboutDialog.propTypes = {
-  visible: PropTypes.bool,
-  onClose: PropTypes.func,
-  buildVersionInfo: PropTypes.object,
-  previewData: PropTypes.object,
-};
+export default inject(({ settingsStore, currentTariffStatusStore }) => {
+  const {
+    companyInfoSettingsData,
+    standalone,
+    licenseAgreementsUrl,
+    logoText,
+  } = settingsStore;
+  const { isEnterprise } = currentTariffStatusStore;
 
-const AboutDialogWrapper = (props) => {
-  return <AboutDialog {...props} />;
-};
-
-export default AboutDialogWrapper;
+  return {
+    companyInfoSettingsData,
+    standalone,
+    licenseAgreementsUrl,
+    isEnterprise,
+    logoText,
+  };
+})(observer(AboutDialog));

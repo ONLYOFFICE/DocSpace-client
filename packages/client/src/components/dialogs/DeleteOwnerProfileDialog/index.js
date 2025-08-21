@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -63,6 +63,7 @@ class DeleteOwnerProfileDialogComponent extends React.Component {
             scale
             primary
             onClick={this.onClick}
+            testId="dialog_owner_change_button"
           />
           <Button
             key="CloseBtn"
@@ -70,6 +71,7 @@ class DeleteOwnerProfileDialogComponent extends React.Component {
             size="normal"
             scale
             onClick={onClose}
+            testId="dialog_cancel_button"
           />
         </ModalDialog.Footer>
       </ModalDialog>

@@ -1,0 +1,260 @@
+{
+  "key_path": "MoveToFolderMessage",
+  "content": "You can't move the folder to its subfolder",
+  "content_en_sha1_hash": "506393764de44f23f65ce73e264a120055299986",
+  "created_at": "2025-05-19T21:30:46.641Z",
+  "updated_at": "2025-08-12T19:46:25.757Z",
+  "comment": {
+    "text": "This translation key is used for displaying an error message when attempting to move a folder into its own subfolder in the FilesSelector component. The message appears as an alert after selecting a file or folder.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:26.807Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FilesSelector/index.tsx",
+      "line_number": 258,
+      "context": "(\"fileExst\" in item && item.fileExst) ||\n (\"contentLength\" in item && item.contentLength)\n ) {\n fileIds.push(item.id);\n } else if (item.id === selectedItemId) {\n toastr.error(t(\"Common:MoveToFolderMessage\"));\n } else {\n folderIds.push(item.id);\n }\n }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/HotkeyStore.js",
+      "line_number": 661,
+      "context": "const fileInAction = activeFiles.includes(item.id);\n if (!fileInAction) {\n fileIds.push(item.id);\n }\n } else if (item.id === selectedItemId) {\n toastr.error(t(\"Common:MoveToFolderMessage\"));\n } else {\n const folderInAction = activeFolders.includes(item.id);\n \n if (!folderInAction) {\n folderIds.push(item.id);",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Qovluğu alt qovluğuna köçürə bilməzsiniz' is technically correct but could be improved for natural flow and clarity. 'Köçürə' implies a move but 'alt qovluğuna' can be slightly awkward. A more natural phrasing might be 'Qovluğu öz alt qovluğuna köçürə bilməzsiniz' or 'Qovluğu öz içərisindəki bir qovluğuna köçürə bilməzsiniz'.",
+          "suggestion": "Qovluğu öz alt qovluğuna köçürə bilməzsiniz"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ordner können nicht in Unterordner verschoben werden' is a generally correct translation, but a more natural and precise phrasing would be 'Der Ordner kann nicht in einen Unterordner verschoben werden'. The original English sentence implies a specific folder, whereas the German translation implies folders in general.",
+          "suggestion": "Der Ordner kann nicht in einen Unterordner verschoben werden"
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Դուք չեք կարող պանակը տեղափոխել իր ենթաթղթապանակ\" is a literal translation and may not be the most natural-sounding in Armenian. A more fluent translation might be \"Դուք չեք կարող տեղափոխել պանակը իր ենթաթղթապանակի մեջ\" or similar.",
+          "suggestion": "Consider rephrasing to a more idiomatic Armenian expression, such as \"Դուք չեք կարող տեղափոխել պանակը իր ենթաթղթապանակի մեջ\" or similar."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The term 'ໂຟຣເດີ' appears multiple times. It's likely a transliteration of 'folder.' While acceptable, ensuring consistency with Lao terminology or a more accurate translation might improve readability.",
+          "suggestion": "Consider if there's a more established Lao term for 'folder' to ensure clarity and consistency. Alternatively, retain 'ໂຟຣເດີ' but ensure it's used consistently throughout the application."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'උප' (upa) is a valid term for 'sub', but using 'අතුරු' (atharu) might be more natural in this context for 'sub' referring to a folder.",
+          "suggestion": "Replace 'උප' with 'අතුරු'."
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the sentence structure 'බහාලුමක් එහි උප/අතුරු බහාලුමකට ගෙන යාමට නොහැකිය' can feel a bit clunky. A more natural phrasing might improve readability.",
+          "suggestion": "Consider restructuring the sentence to 'බහාලුමකට එහි උප/අතුරු බහාලුමට ගෙන යා නොහැකිය' or 'එහි උප/අතුරු බහාලුමට බහාලුමක් ගෙන යාමට හැකියාවක් නැ'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Не можете померити фолдер у његов подфолдер' uses 'померити' which means 'to move' in a transitive sense (move *something*). The English phrase describes an action that is not transitive.  A more accurate translation would use a reflexive verb indicating moving *to* a location.",
+          "suggestion": "Не можете пребацити фолдер у његов подфолдер"
+        },
+        {
+          "type": "spelling",
+          "description": "While 'фолдер' is acceptable for 'folder', it's an anglicism and a more natural Serbian word would be used.",
+          "suggestion": "Не можете пребацити директоријум у његов поддиректоријум"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

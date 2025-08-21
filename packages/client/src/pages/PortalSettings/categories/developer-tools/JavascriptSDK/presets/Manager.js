@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,22 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
+
 import { withTranslation } from "react-i18next";
-import { Box } from "@docspace/shared/components/box";
-import { Label } from "@docspace/shared/components/label";
-import { Text } from "@docspace/shared/components/text";
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { ComboBox } from "@docspace/shared/components/combobox";
-import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
-import { SelectedItem } from "@docspace/shared/components/selected-item";
-import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { inject, observer } from "mobx-react";
+
 import SDK from "@onlyoffice/docspace-sdk-js";
-
-import { HelpButton } from "@docspace/shared/components/help-button";
-
-import { useNavigate } from "react-router-dom";
-import FilesFilter from "@docspace/shared/api/files/filter";
 
 import LeftMenuUrl from "PUBLIC_DIR/images/sdk-presets_left-menu.react.svg?url";
 import TitleUrl from "PUBLIC_DIR/images/sdk-presets_title.react.svg?url";
@@ -55,7 +45,17 @@ import ActionButtonDarkUrl from "PUBLIC_DIR/images/sdk-presets_action-button_dar
 import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png?url";
 import HeaderDarkUrl from "PUBLIC_DIR/images/sdk-presets_header_dark.png?url";
 
-import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import { Label } from "@docspace/shared/components/label";
+import { Text } from "@docspace/shared/components/text";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { ComboBox } from "@docspace/shared/components/combobox";
+import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
+import { SelectedItem } from "@docspace/shared/components/selected-item";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { loadScript, getSdkScriptUrl } from "@docspace/shared/utils/common";
+
+import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { FilterBlock } from "../sub-components/FilterBlock";
 import { WidthSetter } from "../sub-components/WidthSetter";
@@ -67,8 +67,17 @@ import { SearchTerm } from "../sub-components/SearchTerm";
 import { ItemsCountBlock } from "../sub-components/ItemsCountBlock";
 import { DisplayPageBlock } from "../sub-components/DisplayPageBlock";
 import { PreviewBlock } from "../sub-components/PreviewBlock";
+import { VersionSelector } from "../sub-components/VersionSelector";
+import Integration from "../sub-components/Integration";
+import { TooltipContent } from "../sub-components/TooltipContent";
 
-import { dimensionsModel, defaultSize, defaultDimension } from "../constants";
+import {
+  dimensionsModel,
+  defaultSize,
+  defaultDimension,
+  sdkSource,
+  sdkVersion,
+} from "../constants";
 
 import {
   Controls,
@@ -83,8 +92,6 @@ import {
   SelectedItemsContainer,
   CheckboxGroup,
 } from "./StyledPresets";
-import { Integration } from "../sub-components/Integration";
-import { TooltipContent } from "../sub-components/TooltipContent";
 
 const Manager = (props) => {
   const { t, fetchExternalLinks, theme, currentColorScheme } = props;
@@ -107,14 +114,22 @@ const Manager = (props) => {
   ];
 
   const columnDisplayOptions = [
-    { value: "default", label: t("DefaultColumnsOption") },
-    { value: "custom", label: t("SetItUp") },
+    {
+      value: "default",
+      label: t("DefaultColumnsOption"),
+      dataTestId: "default_radio_button",
+    },
+    { value: "custom", label: t("SetItUp"), dataTestId: "custom_radio_button" },
   ];
 
   const [columnsOptions, setColumnsOptions] = useState([
     { key: "Owner", label: t("Common:Owner") },
     { key: "Activity", label: t("Files:LastActivity") },
   ]);
+
+  const [version, onSetVersion] = useState(sdkVersion[210]);
+
+  const [source, onSetSource] = useState(sdkSource.Package);
 
   const [sortBy, setSortBy] = useState(dataSortBy[0]);
   const [sortOrder, setSortOrder] = useState(dataSortOrder[0]);
@@ -155,19 +170,44 @@ const Manager = (props) => {
     },
   });
 
-  const sdk = new SDK();
+  const fromPackage = source === sdkSource.Package;
+
+  const sdkScriptUrl = getSdkScriptUrl(version);
+
+  const sdk = fromPackage ? new SDK() : window.DocSpace.SDK;
 
   const destroyFrame = () => {
-    sdk.frames[config.frameId]?.destroyFrame();
+    sdk?.frames[config.frameId]?.destroyFrame();
   };
 
   const initFrame = () => {
-    setTimeout(() => sdk.init(config), 10);
+    setTimeout(() => sdk?.init(config), 0);
   };
 
   useEffect(() => {
+    const script = document.getElementById("sdk-script");
+
+    if (script) {
+      script.remove();
+      destroyFrame();
+    }
+
+    if (!fromPackage) {
+      loadScript(sdkScriptUrl, "sdk-script");
+    }
+
+    return () => {
+      destroyFrame();
+      setTimeout(() => script?.remove(), 10);
+    };
+  }, [source, version]);
+
+  useEffect(() => {
     initFrame();
-    return () => destroyFrame();
+
+    return () => {
+      destroyFrame();
+    };
   });
 
   useEffect(() => {
@@ -212,6 +252,7 @@ const Manager = (props) => {
 
       newConfig.requestToken = links[0].sharedTo?.requestToken;
       newConfig.rootPath = "/rooms/share";
+      newConfig.mode = "public-room";
     } else {
       setSelectedLink(null);
       setSharedLinks(null);
@@ -346,7 +387,7 @@ const Manager = (props) => {
       height={config.height.includes("px") ? config.height : undefined}
       targetId={config.frameId}
     >
-      <Box id={config.frameId} />
+      <div id={config.frameId} />
     </Frame>
   );
 
@@ -359,15 +400,19 @@ const Manager = (props) => {
     >
       <Container>
         <PreviewBlock
-          t={t}
           loadCurrentFrame={initFrame}
           preview={preview}
           theme={theme}
           frameId={config.frameId}
-          scriptUrl={SDK_SCRIPT_URL}
+          scriptUrl={sdkScriptUrl}
           config={config}
         />
         <Controls>
+          <VersionSelector
+            t={t}
+            onSetSource={onSetSource}
+            onSetVersion={onSetVersion}
+          />
           <ControlsSection>
             <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
             <WidthSetter
@@ -401,6 +446,7 @@ const Manager = (props) => {
                   label={t("Menu")}
                   onChange={onChangeShowMenu}
                   isChecked={config.showMenu}
+                  dataTestId="show_menu_checkbox"
                 />
                 <HelpButton
                   place="right"
@@ -413,6 +459,7 @@ const Manager = (props) => {
                       img={theme.isBase ? LeftMenuUrl : LeftMenuDarkUrl}
                     />
                   }
+                  dataTestId="show_menu_help_button"
                 />
               </LabelGroup>
 
@@ -422,6 +469,7 @@ const Manager = (props) => {
                   label={t("Common:Title")}
                   onChange={onChangeShowTitle}
                   isChecked={config.showTitle}
+                  dataTestId="show_title_checkbox"
                 />
                 <HelpButton
                   place="right"
@@ -434,6 +482,7 @@ const Manager = (props) => {
                       img={theme.isBase ? TitleUrl : TitleDarkUrl}
                     />
                   }
+                  dataTestId="show_title_help_button"
                 />
               </LabelGroup>
               <LabelGroup>
@@ -442,6 +491,7 @@ const Manager = (props) => {
                   label={t("SettingUpColumns")}
                   onChange={toggleShowSettings}
                   isChecked={config.showSettings}
+                  dataTestId="show_settings_checkbox"
                 />
                 <HelpButton
                   place="right"
@@ -454,6 +504,7 @@ const Manager = (props) => {
                       img={theme.isBase ? ColumnsUrl : ColumnsDarkUrl}
                     />
                   }
+                  dataTestId="show_settings_help_button"
                 />
               </LabelGroup>
               <LabelGroup>
@@ -462,6 +513,7 @@ const Manager = (props) => {
                   label={t("ActionButton")}
                   onChange={toggleActionButton}
                   isChecked={!config.disableActionButton}
+                  dataTestId="action_button_checkbox"
                 />
                 <HelpButton
                   place="right"
@@ -474,6 +526,7 @@ const Manager = (props) => {
                       img={theme.isBase ? ActionButtonUrl : ActionButtonDarkUrl}
                     />
                   }
+                  dataTestId="action_button_help_button"
                 />
               </LabelGroup>
               <LabelGroup>
@@ -482,6 +535,7 @@ const Manager = (props) => {
                   label={t("SearchFilterAndSort")}
                   onChange={onChangeShowFilter}
                   isChecked={config.showFilter}
+                  dataTestId="show_filter_checkbox"
                 />
                 <HelpButton
                   place="right"
@@ -494,6 +548,7 @@ const Manager = (props) => {
                       img={theme.isBase ? SearchUrl : SearchDarkUrl}
                     />
                   }
+                  dataTestId="show_filter_help_button"
                 />
               </LabelGroup>
               <LabelGroup>
@@ -502,6 +557,7 @@ const Manager = (props) => {
                   label={t("Header")}
                   onChange={onChangeShowHeader}
                   isChecked={config.showHeader}
+                  dataTestId="show_header_checkbox"
                 />
                 <Text color="gray">{`(${t("MobileOnly")})`}</Text>
                 <HelpButton
@@ -517,6 +573,7 @@ const Manager = (props) => {
                       img={theme.isBase ? HeaderUrl : HeaderDarkUrl}
                     />
                   }
+                  dataTestId="show_header_help_button"
                 />
               </LabelGroup>
             </CheckboxGroup>
@@ -532,6 +589,7 @@ const Manager = (props) => {
                   tooltipContent={
                     <Text fontSize="12px">{t("RoomOrFolderDescription")}</Text>
                   }
+                  dataTestId="room_or_folder_help_button"
                 />
               </LabelGroup>
               <FilesSelectorInputWrapper>
@@ -541,7 +599,7 @@ const Manager = (props) => {
                 />
               </FilesSelectorInputWrapper>
             </ControlsGroup>
-            {sharedLinks && (
+            {sharedLinks ? (
               <ControlsGroup>
                 <LabelGroup>
                   <Label
@@ -563,18 +621,20 @@ const Manager = (props) => {
                   selectedOption={selectedLink}
                   displaySelectedOption
                   directionY="bottom"
+                  dataTestId="shared_link_combobox"
+                  dropDownTestId="shared_link_dropdown"
                 />
 
-                {selectedLink && (
+                {selectedLink ? (
                   <SharedLinkHint
                     t={t}
                     linkSettings={selectedLink.settings}
                     redirectToSelectedRoom={redirectToSelectedRoom}
                     currentColorScheme={currentColorScheme}
                   />
-                )}
+                ) : null}
               </ControlsGroup>
-            )}
+            ) : null}
           </ControlsSection>
           <ControlsSection>
             <CategorySubHeader>{t("AdvancedDisplay")}</CategorySubHeader>
@@ -593,6 +653,8 @@ const Manager = (props) => {
                 selectedOption={sortBy}
                 displaySelectedOption
                 directionY="top"
+                dataTestId="sort_by_combobox"
+                dropDownTestId="sort_by_dropdown"
               />
             </ControlsGroup>
             <ControlsGroup>
@@ -604,6 +666,8 @@ const Manager = (props) => {
                 selectedOption={sortOrder}
                 displaySelectedOption
                 directionY="top"
+                dataTestId="sort_order_combobox"
+                dropDownTestId="sort_order_dropdown"
               />
             </ControlsGroup>
             <ItemsCountBlock
@@ -620,8 +684,9 @@ const Manager = (props) => {
               selected={columnDisplay}
               onClick={changeColumnsOption}
               spacing="8px"
+              dataTestId="columns_display_radiobutton_group"
             />
-            {columnDisplay === "custom" && (
+            {columnDisplay === "custom" ? (
               <ControlsGroup>
                 <ComboBox
                   onSelect={onColumnSelect}
@@ -637,6 +702,8 @@ const Manager = (props) => {
                     key: "Select",
                     label: t("Common:SelectAction"),
                   }}
+                  dataTestId="columns_combobox"
+                  dropDownTestId="columns_dropdown"
                 />
 
                 <SelectedItemsContainer>
@@ -653,24 +720,14 @@ const Manager = (props) => {
                   ))}
                 </SelectedItemsContainer>
               </ControlsGroup>
-            )}
+            ) : null}
           </ControlsSection>
 
-          <Integration
-            className="integration-examples"
-            t={t}
-            theme={theme}
-            currentColorScheme={currentColorScheme}
-          />
+          <Integration className="integration-examples" />
         </Controls>
       </Container>
 
-      <Integration
-        className="integration-examples integration-examples-bottom"
-        t={t}
-        theme={theme}
-        currentColorScheme={currentColorScheme}
-      />
+      <Integration className="integration-examples integration-examples-bottom" />
     </PresetWrapper>
   );
 };

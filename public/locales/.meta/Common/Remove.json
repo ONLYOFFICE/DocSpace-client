@@ -1,0 +1,280 @@
+{
+  "key_path": "Remove",
+  "content": "Remove",
+  "content_en_sha1_hash": "e963907dac5cd5c017869b4c96c18021c9bd058b",
+  "created_at": "2025-05-19T21:30:47.809Z",
+  "updated_at": "2025-08-04T07:30:01.135Z",
+  "comment": {
+    "text": "This translation key is used for the text \"Remove\" in buttons and dialogs to provide a clear and consistent label for removing or deleting content. It appears on buttons such as \"Change User Type Modal Submit\", \"Delete File Modal Submit\", and labels for a list of options in a dialog, helping users understand the action being performed.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:34:45.439Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/RemoveGuest/index.tsx",
+      "line_number": 135,
+      "context": "</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"change-user-type-modal_submit\"\n label={t(\"Common:Remove\")}\n size={ButtonSize.normal}\n scale\n primary\n onClick={onRemove}\n isLoading={isRequestRunning}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/RemoveUserConfirmationDialog/index.tsx",
+      "line_number": 89,
+      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"delete-file-modal_submit\"\n key=\"OKButton\"\n label={t(\"Common:Remove\")}\n size={ButtonSize.normal}\n primary\n scale\n onClick={onDelete}\n isLoading={isLoading}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/Members.utils.ts",
+      "line_number": 98,
+      "context": "const deleteOption = canChangeUserRole\n ? [\n { key: \"s2\", isSeparator: true },\n {\n key: \"remove\",\n label: this.t(\"Common:Remove\"),\n access: ShareAccessRights.None,\n },\n ]\n : [];",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
+      "line_number": 320,
+      "context": "};\n case \"remove-guest\":\n return {\n id: \"option_remove-guests\",\n key: option,\n label: t(\"Common:Remove\"),\n onClick: () => this.dialogStore.setRemoveGuestDialogVisible(true),\n icon: DisableReactSvgUrl,\n };\n default:\n break;",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
+      "line_number": 320,
+      "context": "};\n case \"remove-guest\":\n return {\n id: \"option_remove-guests\",\n key: option,\n label: t(\"Common:Remove\"),\n onClick: () => this.dialogStore.setRemoveGuestDialogVisible(true),\n icon: DisableReactSvgUrl,\n };\n default:\n break;",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/contacts/HeaderMenuStore.ts",
+      "line_number": 239,
+      "context": "onClick: () => toggleDeleteProfileEverDialog(selection),\n iconUrl: DeleteReactSvgUrl,\n },\n {\n key: \"menu-remove\",\n label: t(\"Common:Remove\"),\n disabled: !isGuests || !isRoomAdmin,\n onClick: () => setRemoveGuestDialogVisible(true),\n iconUrl: DisableReactSvgUrl,\n },\n ];",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
+      "line_number": 82,
+      "context": "},\n available?.None && {\n key: \"remove\",\n internal: true,\n access: ShareAccessRights.None,\n label: t(\"Common:Remove\"),\n },\n ];\n };\n \n export const getAccessOptions = (",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
+      "line_number": 82,
+      "context": "},\n available?.None && {\n key: \"remove\",\n internal: true,\n access: ShareAccessRights.None,\n label: t(\"Common:Remove\"),\n },\n ];\n };\n \n export const getAccessOptions = (",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/utils/getAccessOptions.ts",
+      "line_number": 284,
+      "context": "key: \"s2\",\n isSeparator: true,\n },\n {\n key: \"remove\",\n label: t(\"Common:Remove\"),\n },\n ];\n \n return withRemove ? [...options, ...removeOption] : options;\n };",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/utils/room-members/getUserRoleOptionsByRoomType.ts",
+      "line_number": 45,
+      "context": "const deleteOption = canChangeUserRole\n ? [\n { key: \"s2\", isSeparator: true },\n {\n key: \"remove\",\n label: t(\"Common:Remove\"),\n access: ShareAccessRights.None,\n },\n ]\n : [];",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation \"Tiedostot poistettu\" translates to \"Files removed\" which is a passive construction. The English \"Remove\" is an imperative and should be an imperative in Finnish as well. \"Poista\" would be a more accurate translation.",
+          "suggestion": "Poista"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Уклони' translates to 'evade' or 'dodge', not 'remove'. It doesn't accurately convey the meaning of 'remove'.",
+          "suggestion": "Consider using 'Удаљи', 'Скини', or 'Оклони' which more closely aligns with the meaning of 'remove'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Ukloni' translates to 'bows' or 'obeisances' in Serbian, not 'remove'.",
+          "suggestion": "Consider 'Ukloni' if the context is about bowing or showing respect.  A more appropriate translation for 'remove' would likely be 'Uklonite', 'Skinite', or 'Izbriši', depending on the specific context."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

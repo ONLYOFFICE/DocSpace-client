@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,13 +27,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { Box } from "@docspace/shared/components/box";
+import { useNavigate } from "react-router";
 import { inject, observer } from "mobx-react";
 import { globalColors } from "@docspace/shared/themes";
 import { mobile, getLogoUrl, injectDefaultTheme } from "@docspace/shared/utils";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { LanguageCombobox } from "@docspace/shared/components/language-combobox";
 import { setLanguageForUnauthorized } from "@docspace/shared/utils/common";
+import { Button } from "@docspace/shared/components/button";
+
+import PersonDefaultReactSvg from "PUBLIC_DIR/images/person.default.react.svg";
 
 import i18n from "../../../i18n";
 
@@ -47,6 +50,10 @@ const Header = styled.header.attrs(injectDefaultTheme)`
 
   .header-items-wrapper {
     width: 960px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
     @media ${mobile} {
       width: 475px;
@@ -85,13 +92,29 @@ const Header = styled.header.attrs(injectDefaultTheme)`
   }
 `;
 
+const StyledButton = styled(Button)`
+  position: absolute;
+  inset-inline-end: 8px;
+  top: 8px;
+  svg path {
+    fill: ${globalColors.white};
+  }
+`;
+
 const HeaderUnAuth = ({
   wizardToken,
   isAuthenticated,
   isLoaded,
   theme,
   cultures,
+  isPublicRoom,
+  moveToPublicRoom,
+  rootFolderId,
+  isFrame,
+  onOpenSignInWindow,
+  windowIsOpen,
 }) => {
+  const navigate = useNavigate();
   const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
 
   const currentCultureName = i18n.language;
@@ -101,24 +124,38 @@ const HeaderUnAuth = ({
     setLanguageForUnauthorized(key, i18n);
   };
 
+  const showSignInButton = !isFrame && isPublicRoom && !isAuthenticated;
+
   return (
     <Header isLoaded={isLoaded} className="navMenuHeaderUnAuth">
-      <Box
-        displayProp="flex"
-        justifyContent="space-between"
-        alignItems="center"
-        className="header-items-wrapper"
-      >
-        {!isAuthenticated && isLoaded ? (
+      <div className="header-items-wrapper">
+        {(!isAuthenticated || isPublicRoom) && isLoaded ? (
           <div>
-            <a className="header-logo-wrapper" href="/">
+            <a
+              className="header-logo-wrapper"
+              onClick={() => {
+                if (isPublicRoom) moveToPublicRoom(rootFolderId);
+                else navigate("/");
+              }}
+            >
               <img className="header-logo-icon" src={logo} alt="Logo" />
             </a>
           </div>
         ) : null}
-      </Box>
+      </div>
+      {showSignInButton ? (
+        <StyledButton
+          className="header-mobile-sign-in"
+          primary
+          style={{ minWidth: "32px", padding: 0 }}
+          size="small"
+          icon={<PersonDefaultReactSvg />}
+          onClick={() => onOpenSignInWindow()}
+          isDisabled={windowIsOpen}
+        />
+      ) : null}
 
-      {!wizardToken && (
+      {!wizardToken ? (
         <LanguageCombobox
           className="language-combo-box"
           onSelectLanguage={onSelect}
@@ -127,7 +164,7 @@ const HeaderUnAuth = ({
           withBorder={false}
           isMobileView
         />
-      )}
+      ) : null}
     </Header>
   );
 };
@@ -140,16 +177,38 @@ HeaderUnAuth.propTypes = {
   isLoaded: PropTypes.bool,
 };
 
-export default inject(({ authStore, settingsStore }) => {
-  const { isAuthenticated, isLoaded } = authStore;
-  const { enableAdmMess, wizardToken, theme, cultures } = settingsStore;
+export default inject(
+  ({
+    authStore,
+    settingsStore,
+    publicRoomStore,
+    filesActionsStore,
+    selectedFolderStore,
+  }) => {
+    const { isAuthenticated } = authStore;
+    const { enableAdmMess, wizardToken, theme, cultures, isFrame } =
+      settingsStore;
+    const { isPublicRoom, onOpenSignInWindow, windowIsOpen } = publicRoomStore;
+    const { moveToPublicRoom } = filesActionsStore;
+    const { navigationPath, id } = selectedFolderStore;
 
-  return {
-    enableAdmMess,
-    wizardToken,
-    isAuthenticated,
-    isLoaded,
-    theme,
-    cultures,
-  };
-})(observer(HeaderUnAuth));
+    const rootFolderId = navigationPath.length
+      ? navigationPath[navigationPath.length - 1]?.id
+      : id;
+
+    return {
+      enableAdmMess,
+      wizardToken,
+      isAuthenticated,
+      isLoaded: true,
+      theme,
+      cultures,
+      isPublicRoom,
+      moveToPublicRoom,
+      rootFolderId,
+      isFrame,
+      onOpenSignInWindow,
+      windowIsOpen,
+    };
+  },
+)(observer(HeaderUnAuth));

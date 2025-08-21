@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useEffect, useCallback, useState } from "react";
+import merge from "lodash/merge";
 
 import {
   frameCallbackData,
@@ -33,8 +34,11 @@ import {
 import { EDITOR_ID } from "@docspace/shared/constants";
 import { TFrameConfig } from "@docspace/shared/types/Frame";
 
-const useSDK = () => {
-  const [sdkConfig, setSdkConfig] = useState<TFrameConfig | null>(null);
+const useSDK = (baseSdkConfig?: TFrameConfig) => {
+  const [sdkConfig, setSdkConfig] = useState<TFrameConfig | undefined>(
+    baseSdkConfig,
+  );
+
   const handleMessage = useCallback(
     (e: MessageEvent) => {
       const eventData =
@@ -49,25 +53,42 @@ const useSDK = () => {
 
         try {
           switch (methodName) {
-            case "setConfig":
-              setSdkConfig(data);
-              res = data;
+            case "setConfig": {
+              const newConfig = merge(baseSdkConfig, data);
+              setSdkConfig(newConfig);
+              res = newConfig;
               break;
-            case "getEditorInstance":
+            }
+            case "executeInEditor": {
               const instance = window.DocEditor?.instances[EDITOR_ID];
-              res = { instance, asc: window.Asc };
+              const asc = window.Asc;
+
+              try {
+                const cFn = new Function(
+                  "instance",
+                  "asc",
+                  "data",
+                  `const c = ${data.callback}; c(instance, asc, data);`,
+                );
+
+                cFn(instance, asc, data.data);
+              } catch (err) {
+                console.error("Error executing editor callback:", err);
+              }
+
               break;
+            }
             default:
               res = "Wrong method for this mode";
           }
-        } catch (e) {
-          res = e;
+        } catch (err) {
+          res = err as Error;
         }
 
         frameCallbackData(res);
       }
     },
-    [setSdkConfig],
+    [setSdkConfig, baseSdkConfig],
   );
 
   useEffect(() => {
@@ -88,7 +109,7 @@ const useSDK = () => {
     }
   }, [sdkConfig?.frameId, callSetConfig]);
 
-  return { sdkFrameConfig: sdkConfig };
+  return { sdkConfig };
 };
 
 export default useSDK;

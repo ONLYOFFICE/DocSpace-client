@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,7 +31,7 @@ import { inject, observer } from "mobx-react";
 import ConflictResolve from "@docspace/shared/dialogs/conflict-resolve";
 import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
-import { ConflictResolveType } from "@docspace/shared/enums";
+import { ConflictResolveType, RoomsType } from "@docspace/shared/enums";
 import type { TFile } from "@docspace/shared/api/files/types";
 
 import {
@@ -59,13 +59,15 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
     setRestoreAllPanelVisible,
     setMoveToPublicRoomVisible,
     conflictDialogUploadHandler,
-    setShareCollectSelector,
     openFileAction,
     isFileDialog,
     isFolderDialog,
     files,
     folders,
     cancelUploadAction,
+    setFillPDFDialogData,
+    setIsShareFormData,
+    setAssignRolesDialogData,
   } = props;
 
   const { t, ready } = useTranslation(["Common"]);
@@ -80,6 +82,9 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
     isUploadConflict,
     selectedFolder,
     fromShareCollectSelector,
+    createDefineRoomType,
+    destFolderInfo,
+    toFillOut,
   } = conflictResolveDialogData;
 
   const onClose = () => {
@@ -93,7 +98,8 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
     setCopyPanelVisible(false);
     setRestoreAllPanelVisible(false);
     setMoveToPublicRoomVisible(false);
-    setShareCollectSelector(false);
+    setFillPDFDialogData(false);
+    setIsShareFormData({ visible: false });
   };
 
   const differenceArray = (
@@ -145,12 +151,19 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
 
     const data = {
       destFolderId,
+      destFolderInfo,
       folderIds,
       fileIds: newFileIds,
       conflictResolveType,
       deleteAfter,
       isCopy,
       translations,
+      itemsCount: items.length,
+      ...(items.length === 1 && {
+        title: items[0].title,
+        isFolder: items[0].isFolder,
+      }),
+      toFillOut,
     };
 
     setSelected("none");
@@ -161,12 +174,20 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
       }
 
       sessionStorage.setItem("filesSelectorPath", `${destFolderId}`);
-      await itemOperationToFolder(data);
+      const result = await itemOperationToFolder(data);
+
+      if (
+        result &&
+        selectedFolder &&
+        fromShareCollectSelector &&
+        result.files?.length === 1 &&
+        createDefineRoomType === RoomsType.VirtualDataRoom
+      ) {
+        const [resultFile] = result.files;
+        setAssignRolesDialogData(true, selectedFolder.title, resultFile);
+      }
     } catch (error: unknown) {
-      const message = (error as { message: string }).message
-        ? ((error as { message: string }).message as TData)
-        : (error as string);
-      toastr.error(message);
+      console.error(error);
     }
   };
 
@@ -330,7 +351,9 @@ export default inject<TStore>(
       setRestoreAllPanelVisible,
       setCopyPanelVisible,
       setMoveToPublicRoomVisible,
-      setShareCollectSelector,
+      setFillPDFDialogData,
+      setIsShareFormData,
+      setAssignRolesDialogData,
     } = dialogsStore;
 
     const { openFileAction } = filesActionsStore;
@@ -351,12 +374,12 @@ export default inject<TStore>(
     } = filesStore;
 
     const files = items
-      ? items.filter((f: TFile) => {
+      ? (items as TFile[]).filter((f: TFile) => {
           return f.isFile || f.fileExst || f.contentLength;
         })
       : [];
     const folders = items
-      ? items.filter((f: TFile) => {
+      ? (items as TFile[]).filter((f: TFile) => {
           return !f.fileExst && !f.contentLength && !f.isFile;
         })
       : [];
@@ -380,13 +403,15 @@ export default inject<TStore>(
       setCopyPanelVisible,
       setMoveToPublicRoomVisible,
       conflictDialogUploadHandler,
-      setShareCollectSelector,
       openFileAction,
       files,
       folders,
       isFileDialog: !folders.length,
       isFolderDialog: !files.length,
       cancelUploadAction,
+      setFillPDFDialogData,
+      setIsShareFormData,
+      setAssignRolesDialogData,
     };
   },
 )(observer(ConflictResolveDialog));

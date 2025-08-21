@@ -1,0 +1,304 @@
+{
+  "key_path": "OAuthOpenidName",
+  "content": "Open ID",
+  "content_en_sha1_hash": "7e9214361af45339a0429beffb174514a8d73f3e",
+  "created_at": "2025-05-19T21:30:47.019Z",
+  "updated_at": "2025-05-26T07:57:33.000Z",
+  "comment": {
+    "text": "This translation key displays the label \"Open ID\" in the application, likely used as a profile or identity type within OAuth settings. It may appear in UI elements such as profiles or room settings dialogs.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:13.208Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/utils/oauth/index.ts",
+      "line_number": 149,
+      "context": "case ScopeGroup.profiles:\n return t(\"Common:OAuthProfilesName\");\n case ScopeGroup.rooms:\n return t(\"Common:OAuthRoomsName\");\n case ScopeGroup.openid:\n return t(\"Common:OAuthOpenidName\");\n default:\n return \"\";\n }\n };",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani translation \"Açıq ID\" is a literal translation of \"Open ID.\" While understandable, a more idiomatic or commonly used translation might be preferable. 'Açıq' directly translates to 'open,' but in the context of OpenID, a more nuanced translation might exist.",
+          "suggestion": "Research common Azerbaijani usage for 'Open ID' and consider alternatives like potentially a transliteration or a more descriptive phrase that conveys the concept of a federated identity."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Bulgarian translation \"Отворете ID\" literally translates to \"Open ID\" but doesn't convey the intended meaning of \"Open ID\" (as in OpenID Connect or similar). It sounds like an instruction rather than a term.",
+          "suggestion": "The correct translation should be something like \"OpenID\" (transliterated), or a more descriptive phrase like \"OpenID удостоверение\" (OpenID certificate) depending on context, if a more understandable version is needed."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Άνοιγμα αναγνωριστικού' while literally meaning 'Opening of Identifier', doesn't accurately convey the meaning of 'Open ID'. 'Open ID' is a specific, well-understood term referring to a decentralized authentication system.",
+          "suggestion": "A more accurate translation would be something like 'Ανοιχτό Αναγνωριστικό' (Anoichto Anagnoristikó) or 'Open ID' (transliterated) to preserve the established term. Alternatively, 'Σύστημα Ανοιχτού Αναγνωριστικού' (Systima Anoichtou Anagnoristikou) could be used if a descriptive approach is desired."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ID abierto' is a literal translation, it's not the standard or most natural way to refer to \"Open ID\" in Spanish.  'ID abierto' sounds somewhat awkward. The term 'OpenID' is often used directly in Spanish, or more accurately translated as 'Identidad Abierta'.",
+          "suggestion": "Consider using 'OpenID' directly, or 'Identidad Abierta'."
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Ouvrir l'ID\" is a literal translation of \"Open ID\" and doesn't accurately convey the meaning. \"OpenID\" is a specific protocol and should be translated as a term, not a verb-noun combination.  The correct translation should reflect that it is a term and not an action.",
+          "suggestion": "OpenID"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Բացել ID-ն\" literally translates to \"Open the ID.\" While understandable, it doesn't accurately convey the meaning of \"Open ID\" which is a specific authentication protocol. A more accurate translation would depend on the context, but a direct equivalent isn't readily available in Armenian and requires a descriptive phrase rather than a literal translation.",
+          "suggestion": "Consider a descriptive translation such as \"Հասարակության ապացույցի ծառայություն\" (Public Authentication Service) or a transliteration like \"Օպեն ԻԴ\" followed by a brief explanation."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Italian translation \"Apri ID\" is a literal translation of \"Open ID\" and doesn't convey the intended meaning. \"OpenID\" is commonly translated as \"ID Aperto\" or simply \"OpenID\" in Italian, preserving the English term.",
+          "suggestion": "ID Aperto or OpenID"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ເປີດ ID' is a direct transliteration of 'Open ID' and doesn't convey the intended meaning. 'Open ID' refers to a specific authentication protocol, and a more accurate translation would consider that context.",
+          "suggestion": "A more accurate translation could be something like 'ລະບົບການຢັ້ງຢືນຕົວຕົນແບບເປີດ' (rabop kan yang yen tua ton laep perdt) - 'Open Authentication System' or a similar phrase that explains the function."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Portuguese translation 'ID aberto' is a literal translation of 'Open ID'. While understandable, a more idiomatic and accurate translation would be 'ID Aberto' or 'Identidade Aberta'. 'Open ID' often refers to a specific authentication protocol, and the translation doesn't quite capture that nuance.",
+          "suggestion": "ID Aberto or Identidade Aberta"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Portuguese translation \"Abrir ID\" is a literal translation of \"Open ID\" and is not the standard or accepted term in Brazilian Portuguese. It doesn't convey the intended meaning of an OpenID.",
+          "suggestion": "The correct translation for \"Open ID\" in Brazilian Portuguese is \"Identificador Aberto\" or \"ID Aberto\". The most common and appropriate translation is likely \"ID Aberto\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Deschidere ID' is a literal translation of 'Open ID' and doesn't accurately convey the intended meaning in a Romanian context. 'OpenID' is often used as a standardized term, and a direct translation isn't always the best approach. A more suitable translation would reflect the concept of a decentralized identity.",
+          "suggestion": "Consider using 'Identitate Deschisă' or 'ID Deschis' as alternatives. Research common Romanian usage of 'OpenID' to determine the most appropriate term."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'ප්රවේශකය ID' while literally translating to 'Access ID' isn't the most accurate representation of 'Open ID'. 'Open ID' refers to a specific authentication protocol, and a more accurate translation might consider conveying that meaning.",
+          "suggestion": "A more appropriate translation could be 'විවර ID' (Vivar ID), which more closely represents the concept of 'Open' in this context. Alternatively, a longer explanation may be necessary depending on the purpose of the translation (e.g., 'විවර සම්මත ID' - Open Standard ID)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Odpri ID' doesn't accurately convey the meaning of 'Open ID'. 'Odpri' means 'open' in the sense of 'to open something'. 'Open ID' refers to a specific authentication protocol.",
+          "suggestion": "The most accurate translation would depend on the specific context. Potential suggestions include 'OpenID' (using the English term directly), 'ID odprtega tipa' (ID of an open type), or a more descriptive phrase if the intended meaning is clarification for a general audience."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"Отвори ID\" literally translates to \"Open ID\" but doesn't accurately convey the meaning of \"Open ID\" as a standard for authentication.  It implies an action (opening) rather than a technology/identity provider.",
+          "suggestion": "Consider a more accurate translation that reflects the concept of OpenID, such as \"OpenID идентификатор\" (OpenID identifier) or \"OpenID профил\" (OpenID profile). The best option depends on the context of its use."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Otvori ID\" literally translates to \"Open ID\" in English, but in the context of OpenID authentication, a more accurate and commonly used translation would be something like \"OpenID\" or \"Identitet preko otvorenog standarda\". \"Otvori ID\" suggests opening an ID, which is not the intended meaning.",
+          "suggestion": "Consider using \"OpenID\" (as a loanword) or a phrase like \"Identitet preko otvorenog standarda\" to better convey the intended meaning."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"打开 ID\" is a literal translation of \"Open ID\" and does not accurately convey the meaning of \"OpenID,\" which refers to a specific authentication protocol. It sounds awkward and doesn't reflect the technical term's intent.",
+          "suggestion": "身份验证器ID"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -47,6 +47,7 @@ import CatalogSettingsDeveloperReactSvgUrl from "PUBLIC_DIR/images/icons/16/cata
 import CatalogSettingsPaymentReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-payment.svg?url";
 import CatalogSettingsGiftReactSvgUrl from "PUBLIC_DIR/images/gift.react.svg?url";
 import CatalogSettingsStorageManagementReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-storage-management.svg?url";
+import CatalogSettingsServicesReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-services.svg?url";
 
 import CatalogFolder20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.folder.react.svg?url";
 import CatalogDocuments20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.documents.react.svg?url";
@@ -70,6 +71,7 @@ import CatalogSettingsDeveloper20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/ca
 import CatalogSettingsPayment20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-payment.svg?url";
 import CatalogSettingsGift20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-gift.svg?url";
 import CatalogSettingsStorageManagement20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-storage-management.svg?url";
+import CatalogSettingsServices20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-services.svg?url";
 
 import { FolderType, PageType } from "../enums";
 import { isMobile, isTablet } from "./device";
@@ -110,6 +112,7 @@ const icons: Record<SizeType, Partial<Record<PageUnionType, string>>> = {
     [PageType.developerTools]: CatalogSettingsDeveloperReactSvgUrl,
     [PageType.portalDeletion]: CatalogTrashReactSvgUrl,
     [PageType.payments]: CatalogSettingsPaymentReactSvgUrl,
+    [PageType.services]: CatalogSettingsServicesReactSvgUrl,
     [PageType.bonus]: CatalogSettingsGiftReactSvgUrl,
     [PageType.storageManagement]: CatalogSettingsStorageManagementReactSvgUrl,
   },
@@ -134,6 +137,7 @@ const icons: Record<SizeType, Partial<Record<PageUnionType, string>>> = {
     [PageType.developerTools]: CatalogSettingsDeveloper20ReactSvgUrl,
     [PageType.portalDeletion]: CatalogTrash20ReactSvgUrl,
     [PageType.payments]: CatalogSettingsPayment20ReactSvgUrl,
+    [PageType.services]: CatalogSettingsServices20ReactSvgUrl,
     [PageType.bonus]: CatalogSettingsGift20ReactSvgUrl,
     [PageType.storageManagement]: CatalogSettingsStorageManagement20ReactSvgUrl,
   },

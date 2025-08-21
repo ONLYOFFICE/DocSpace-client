@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,8 @@
 
 import { SETTINGS_SIZE } from "./Table.constants";
 
-export const getSubstring = (str: string) => +str.substring(0, str.length - 2);
+export const getSubstring = (str: string) =>
+  str ? +str.substring(0, str.length - 2) : 0;
 
 export const checkingForUnfixedSize = (
   item: string,

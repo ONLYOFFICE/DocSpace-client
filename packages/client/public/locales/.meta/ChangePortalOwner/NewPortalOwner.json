@@ -1,0 +1,250 @@
+{
+  "key_path": "NewPortalOwner",
+  "content": "New {{productName}} owner",
+  "content_en_sha1_hash": "1dbd9dfcd68022a3ab1a7bcc8a0dea635c19ff3c",
+  "created_at": "2025-05-19T21:30:56.996Z",
+  "updated_at": "2025-08-12T19:46:25.809Z",
+  "comment": {
+    "text": "This translation key is used to display a notification message indicating a change in portal ownership. It appears in a dialog box, specifically in the \"New Portal Owner\" section, and is displayed when a user selects a new owner for a portal. The phrase will be replaced with the actual product name, as indicated by the productName variable.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:37:40.008Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
+      "line_number": 181,
+      "context": "</Text>\n </div>\n </StyledOwnerInfo>\n \n <StyledPeopleSelectorInfo>\n <Text className=\"new-owner\" title={t(\"NewPortalOwner\")}>\n {t(\"NewPortalOwner\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <Text className=\"description\" title={t(\"ChangeInstruction\")}>\n {t(\"ChangeInstruction\", { productName: t(\"Common:ProductName\") })}\n </Text>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
+      "line_number": 181,
+      "context": "</Text>\n </div>\n </StyledOwnerInfo>\n \n <StyledPeopleSelectorInfo>\n <Text className=\"new-owner\" title={t(\"NewPortalOwner\")}>\n {t(\"NewPortalOwner\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <Text className=\"description\" title={t(\"ChangeInstruction\")}>\n {t(\"ChangeInstruction\", { productName: t(\"Common:ProductName\") })}\n </Text>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'New {{productName}} owner' is better translated as 'صاحب {{productName}} الجديد' (Sahib {{productName}} al-Jadeed) to better convey ownership and newness in a natural Arabic flow.",
+          "suggestion": "صاحب {{productName}} الجديد"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'New {{productName}} owner' implies a fresh owner of a product. The Greek translation 'Νέος ιδιοκτήτης {{productName}}' directly translates to 'New owner {{productName}}'. While not strictly wrong, it loses the sense of recency or freshness implied by 'New'.",
+          "suggestion": "Consider a more nuanced translation that captures the 'New' aspect. Possible suggestions include: 'Ο νέος ιδιοκτήτης του {{productName}}' (The new owner of {{productName}}) or 'Οριακός ιδιοκτήτης {{productName}}' (Starting owner {{productName}}) - the latter being more figurative and depending on the context. However, without further context, the current translation is understandable."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation '{{productName}}-ի նոր սեփականատեր' literally translates to 'New owner of {{productName}}'. While understandable, it's less natural than 'New {{productName}} owner' in Armenian. A more idiomatic translation would be '{{productName}}-ի նոր տեր'.",
+          "suggestion": "{{productName}}-ի նոր տեր"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Proprietarul nou al {{productName}}' is a literal translation but sounds awkward in Romanian. A more natural phrasing would be 'Noul proprietar al {{productName}}'.",
+          "suggestion": "Noul proprietar al {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian word 'власник' (vlasnik) translates to 'owner' but in this context, a more natural translation would be 'корисник' (korisnik) which means 'user' or 'customer'. While 'власник' isn't *incorrect*, it sounds less idiomatic.",
+          "suggestion": "Нови {{productName}} корисник"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '新{{productName}}所有者' while technically correct, doesn't flow naturally in Chinese. '所有者' (all owner) sounds formal and slightly awkward in this context. A more natural phrasing would convey ownership more smoothly.",
+          "suggestion": "新{{productName}}拥有者 (Xīn {{productName}} yǒngzhě)"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

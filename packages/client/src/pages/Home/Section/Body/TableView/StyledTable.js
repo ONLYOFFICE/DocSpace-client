@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,7 @@
 import styled, { css } from "styled-components";
 import { globalColors } from "@docspace/shared/themes";
 import { TableRow } from "@docspace/shared/components/table";
-import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
+import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
 import CursorPalmSvgUrl from "PUBLIC_DIR/images/cursor.palm.react.svg?url";
 import { injectDefaultTheme } from "@docspace/shared/utils";
 
@@ -205,7 +205,7 @@ const StyledTableRow = styled(TableRow)`
       `url(${CursorPalmSvgUrl}) 8 0, auto !important`};
 
     ${(props) =>
-      props.inProgress &&
+      props.isBlockingOperation &&
       css`
         pointer-events: none;
         /* cursor: wait; */
@@ -278,6 +278,7 @@ const StyledTableRow = styled(TableRow)`
 
   .table-container_file-name-cell,
   .table-container_index-cell {
+    ${(props) => props.dragging && rowCheckboxDraggingStyle};
     ${(props) =>
       props.showHotkeyBorder &&
       css`
@@ -286,7 +287,6 @@ const StyledTableRow = styled(TableRow)`
 
         ${hotkeyBorderStyle}
       `};
-    ${(props) => props.dragging && rowCheckboxDraggingStyle};
   }
 
   .table-container_element-wrapper {
@@ -429,7 +429,8 @@ const StyledBadgesContainer = styled.div`
   }
 
   .row-copy-link,
-  .tablet-row-copy-link {
+  .tablet-row-copy-link,
+  .tablet-row-create-room {
     display: none;
   }
 

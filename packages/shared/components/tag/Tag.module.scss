@@ -1,0 +1,141 @@
+@use "../../styles/variables/colors";
+
+.tag {
+  position: relative;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 1px 7px;
+  margin-inline-end: 4px;
+  background: var(--tag-background);
+
+  border-radius: var(--tag-border-radius);
+  border: var(--tag-border);
+
+  &.thirdPartyTag {
+    padding: 0;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    height: 28px;
+    inset-block: -3px;
+    inset-inline: -3px;
+  }
+
+  .thirdPartyTag {
+    padding: 4px 12px;
+    width: 16px;
+    height: 16px;
+
+    [data-theme="dark"] & {
+      svg {
+        path[fill] {
+          fill: colors.$white;
+        }
+
+        path[stroke] {
+          stroke: colors.$white;
+        }
+      }
+    }
+  }
+
+  &:active {
+    border-color: transparent;
+    background: var(--tag-active-background);
+  }
+
+  &.isNewTag {
+    background: var(--tag-new-background);
+    border-color: transparent;
+  }
+
+  &.isDeleted {
+    border-color: var(--tag-deleted-border);
+
+    .tagText {
+      text-decoration: line-through;
+      color: var(--tag-deleted-color);
+    }
+  }
+
+  &.isDisabled {
+    border: var(--tag-disabled-border);
+    pointer-events: none;
+
+    .tagText {
+      color: var(--tag-disabled-color);
+    }
+  }
+
+  &.isLast {
+    margin-inline-end: 0;
+  }
+
+  &.isClickable:not(.isDisabled):not(.isDeleted) {
+    cursor: pointer;
+
+    &:hover {
+      background: var(--tag-hover-background);
+      border-color: transparent;
+
+      &.isNewTag {
+        background: var(--tag-new-hover-background);
+      }
+    }
+  }
+}
+
+.tagText {
+  color: var(--tag-color);
+  line-height: var(--tag-text-line-height);
+  pointer-events: none;
+  font-size: var(--tag-font-size);
+
+  &.isDefault {
+    color: var(--tag-default-color);
+  }
+}
+
+.tagIcon {
+  margin-inline-start: var(--tag-icon-margin-start);
+  cursor: pointer;
+  z-index: 1;
+}
+
+.dropdownIcon {
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+
+  [dir="rtl"] & {
+    transform: scaleX(-1);
+  }
+
+  svg {
+    path:first-child {
+      stroke: var(--tag-color);
+    }
+    path:last-child {
+      fill: var(--tag-color);
+    }
+  }
+}
+
+.dropdownText {
+  line-height: var(--tag-dropdown-text-line-height);
+  display: block;
+  pointer-events: none;
+
+  &:not(.removeTagIcon) {
+    [dir="rtl"] & {
+      margin-right: var(--tag-dropdown-text-margin) !important;
+    }
+    [dir="ltr"] & {
+      margin-left: var(--tag-dropdown-text-margin) !important;
+    }
+  }
+}

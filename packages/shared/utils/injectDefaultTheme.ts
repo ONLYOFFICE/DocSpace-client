@@ -1,4 +1,5 @@
 import { DefaultTheme } from "styled-components";
+import isEmpty from "lodash/isEmpty";
 
 import { Base } from "../themes";
 
@@ -9,6 +10,6 @@ interface PropsWithTheme {
 /**
  * pass this to styled component's attrs to set Base theme as default prop
  * */
-export const injectDefaultTheme = (props: PropsWithTheme) => ({
-  theme: props.theme || Base,
+export const injectDefaultTheme = ({ theme }: PropsWithTheme) => ({
+  theme: theme && !isEmpty(theme) ? theme : Base,
 });

@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "Τα έγγραφα που είδατε ή επεξεργαστήκατε τελευταία φορά θα εμφανίζονται σε αυτήν την ενότητα.",
   "EmptyRootRoomUserDescription": "Το κοινόχρηστο δωμάτιο θα εμφανίζεται εδώ.",
   "EmptyRootRoomUserTitle": "Δεν υπάρχουν ακόμη δωμάτια εδώ",
+  "EmptyTemplatesDescription": "Μπορείτε να δημιουργήσετε ένα πρότυπο από ένα δωμάτιο στην ενότητα Δωμάτιο",
+  "EmptyTemplatesTitle": "Δεν υπάρχουν ακόμη πρότυπα εδώ",
   "FormFolderDefaultDescription": "Αποθέστε φόρμες PDF εδώ ή μεταφορτώστε από {{productName}} ή τη συσκευή.",
   "FormFolderDefaultTitle": "Δεν υπάρχουν ακόμα φόρμες εδώ",
   "FormFolderDefaultUserDescription": "Οι φόρμες που έχουν ανεβάσει οι διαχειριστές θα εμφανιστούν εδώ.",
@@ -33,6 +35,7 @@
   "MigrationDataDescription": "Εισαγωγή δεδομένων στο {{productName}} σας από το Workspace, το Google Workspace ή το Nextcloud της {{organizationName}}.",
   "MigrationDataTitle": "Δεδομένα μετάβασης",
   "PublicRoomEmptyTitle": "Καλώς ήρθατε στο Δημόσιο δωμάτιο",
+  "SectionsUploadDescription": "Ανεβάστε αρχεία οποιουδήποτε τύπου από το {{sectionNameFirst}} ή το {{sectionNameSecond}}",
   "SendInvitationLetter": "Αποστολή επιστολής πρόσκλησης για την προσθήκη νέων μελών στην πύλη",
   "ShareOptionDescription": "Αντιγράψτε έναν σύνδεσμο δημόσιας πρόσβασης ή προσκαλέστε άλλους χρήστες στο δωμάτιο για να ξεκινήσει η διαδικασία συμπλήρωσης φορμών.",
   "ShareOptionTitle": "Κοινή χρήση δωματίου",
@@ -42,9 +45,7 @@
   "UploadDeviceOptionTitle": "Μεταφόρτωση από τη συσκευή σας",
   "UploadDevicePDFFormOptionDescription": "Μεταφορτώστε μια έτοιμη φόρμα PDF στο δωμάτιο από τη συσκευή σας.",
   "UploadDevicePDFFormOptionTitle": "Μεταφόρτωση από τη συσκευή",
-  "UploadFromPortalDescription": "Μεταφορτώστε αρχεία οποιουδήποτε τύπου από τα Έγγραφα ή τα Δωμάτια",
   "UploadFromPortalTitle": "Μεταφόρτωση από {{productName}}",
   "UploadPDFFormOptionDescription": "Επιλέξτε μια έτοιμη φόρμα PDF που είναι διαθέσιμη στο {{productName}} και μεταφορτώστε την στο δωμάτιο.",
-  "UserEmptyDescription": "Τα αρχεία και οι φάκελοι που έχουν μεταφορτωθεί από τους διαχειριστές θα εμφανίζονται εδώ.",
   "VirtualDataRoomEmptyTitle": "Καλώς ήρθατε στο Εικονικό Δωμάτιο Δεδομένων"
 }

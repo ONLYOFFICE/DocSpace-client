@@ -1,0 +1,385 @@
+@use "../../styles/variables/colors";
+
+@use "../../styles/mixins";
+
+.contextMenu {
+  :global(.rtl) {
+    --context-menu-header-text-margin: 0 8px 0 0;
+    --context-menu-submenu-list-margin: -4px;
+
+    --context-menu-submenu-transoform: scaleX(-1);
+    --context-menu-submenu-transoform-box: content-box;
+  }
+
+  :global {
+    .p-contextmenu {
+      position: absolute;
+      background: var(--context-menu-background);
+      border: var(--context-menu-border);
+      border-radius: 6px;
+      -moz-border-radius: 6px;
+      -webkit-border-radius: 6px;
+      box-shadow: var(--context-menu-box-shadow);
+      -moz-box-shadow: var(--context-menu-box-shadow);
+      -webkit-box-shadow: var(--context-menu-box-shadow);
+
+      .scroll-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-inline-end: 0 !important;
+      }
+    }
+
+    .contextmenu-header {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 55px;
+      max-height: 55px;
+
+      border-bottom: var(--context-menu-header-border);
+
+      margin: 0;
+      margin-bottom: 6px;
+      padding: 6px 16px;
+
+      cursor: default;
+
+      box-sizing: border-box;
+      background: none;
+      outline: 0 !important;
+
+      -webkit-tap-highlight-color: #{colors.$tap-highlight};
+
+      .icon-wrapper {
+        display: flex;
+        align-items: center;
+        width: auto;
+        min-width: auto;
+        height: auto;
+        min-height: auto;
+
+        .drop-down-item_icon {
+          display: flex;
+          align-items: center;
+          border-radius: 6px;
+        }
+      }
+
+      .avatar-wrapper {
+        min-width: 32px;
+        box-sizing: border-box;
+        margin-inline-end: 8px;
+      }
+
+      .text {
+        width: 100%;
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--context-menu-header-text-color);
+        text-align: var(--input-text-align);
+        text-transform: none;
+        text-decoration: none;
+
+        @include mixins.no-user-select;
+      }
+    }
+
+    .p-contextmenu ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .p-contextmenu .p-submenu-list {
+      position: absolute;
+
+      background: var(--context-menu-background);
+      border: var(--context-menu-border);
+      border-radius: 6px;
+      -moz-border-radius: 6px;
+      -webkit-border-radius: 6px;
+      box-shadow: var(--context-menu-box-shadow);
+      -moz-box-shadow: var(--context-menu-box-shadow);
+      -webkit-box-shadow: var(--context-menu-box-shadow);
+
+      @include mixins.truncate;
+
+      margin-top: -4px;
+
+      margin-left: var(--context-menu-submenu-list-margin);
+    }
+
+    .p-contextmenu .p-menuitem-link {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      overflow: hidden;
+      position: relative;
+      border: 0px;
+      margin: 0px;
+      padding: 0 16px;
+      background: none;
+
+      @include mixins.no-user-select;
+
+      outline: 0 !important;
+
+      -webkit-tap-highlight-color: #{colors.$tap-highlight};
+
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--context-menu-header-text-color);
+
+      text-transform: none;
+
+      -webkit-touch-callout: none;
+
+      &:hover {
+        background-color: var(--sub-menu-item-hover-background-color);
+      }
+
+      &.p-disabled {
+        color: var(--sub-menu-item-disabled-color);
+
+        &:hover {
+          cursor: default;
+          background-color: var(--sub-menu-item-disabled-background-color);
+        }
+      }
+    }
+
+    .p-contextmenu .p-menuitem-text {
+      line-height: 36px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .p-contextmenu .p-menu-separator {
+      cursor: default !important;
+      height: 1px !important;
+      margin: 6px 16px !important;
+      border-bottom: var(--context-menu-header-border) !important;
+
+      &:hover {
+        cursor: default !important;
+      }
+    }
+
+    .p-contextmenu .p-menuitem {
+      position: relative;
+      margin: 0px;
+
+      max-width: calc(100vw - 32px);
+      width: fit-content;
+      min-width: inherit;
+
+      @include mixins.truncate;
+    }
+
+    .p-contextmenu .scroll-body .p-menuitem {
+      margin-inline-end: -17px !important;
+
+      @include mixins.mobile {
+        margin-inline-end: -8px !important;
+      }
+    }
+
+    .p-menuitem-icon {
+      max-height: 32px;
+
+      width: 16px;
+      height: 16px;
+
+      & svg {
+        height: 16px;
+        width: 16px;
+      }
+
+      &.p-disabled {
+        path[fill] {
+          fill: var(--context-menu-header-text-color) !important;
+        }
+        path[stroke] {
+          stroke: var(--context-menu-header-text-color) !important;
+        }
+      }
+      margin-inline-end: 8px;
+    }
+
+    .p-portal-icon {
+      cursor: pointer;
+      margin-inline-start: 12px;
+      margin-inline-end: 0px;
+    }
+
+    .p-contextmenu-enter {
+      opacity: 0;
+    }
+
+    .p-contextmenu-enter-active {
+      opacity: 1;
+      transition: opacity 250ms;
+    }
+
+    .p-submenu-icon {
+      margin-inline-start: auto;
+      padding-inline-start: 8px;
+
+      transform-box: var(--context-menu-submenu-transoform-box, unset);
+      transform: var(--context-menu-submenu-transoform, unset);
+
+      path[fill] {
+        fill: var(--context-menu-header-text-color);
+      }
+
+      path[stroke] {
+        stroke: var(--context-menu-header-text-color);
+      }
+    }
+
+    .p-contextmenu {
+      @include mixins.not-mobile {
+        max-width: calc(100vw - 32px);
+      }
+    }
+
+    .p-contextmenu ul {
+      @include mixins.not-mobile {
+        max-width: calc(100vw - 32px);
+      }
+    }
+  }
+
+  &.fillIcon {
+    :global {
+      .p-menuitem-icon {
+        & svg {
+          path[fill],
+          circle[fill],
+          rect[fill] {
+            fill: var(--context-menu-header-text-color);
+          }
+
+          path[stroke],
+          circle[stroke],
+          rect[stroke] {
+            stroke: var(--context-menu-header-text-color);
+          }
+        }
+      }
+    }
+  }
+
+  &.isIconExist {
+    :global {
+      .contextmenu-header {
+        .text {
+          margin: var(--context-menu-header-text-margin);
+        }
+      }
+    }
+  }
+
+  &.isRoom {
+    :global {
+      .contextmenu-header {
+        .icon-wrapper {
+          width: 32px;
+          min-width: 32px;
+          height: 32px;
+          min-height: 32px;
+
+          .drop-down-item_icon {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  &:not(.coverExist) {
+    :global {
+      .contextmenu-header {
+        .icon-wrapper {
+          svg {
+            &:not(:root) {
+              width: 100%;
+              height: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.changeView {
+    :global {
+      .p-contextmenu {
+        @include mixins.mobile {
+          position: fixed;
+          width: 100vw;
+          max-width: 100vw;
+          max-height: calc(100vh - 64px);
+          inset-inline-start: 0px;
+          bottom: 0px;
+          border-radius: 6px 6px 0 0;
+        }
+      }
+    }
+  }
+}
+
+.styledList {
+  & > :first-child {
+    :global {
+      .scroll-body {
+        :local {
+          height: var(--list-height);
+        }
+      }
+    }
+  }
+
+  &.withSubMenu {
+    & > :nth-child(1) {
+      :global {
+        .p-menuitem {
+          :local {
+            max-width: var(--submenu-width);
+          }
+        }
+      }
+    }
+  }
+}
+
+.subMenuItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & > div {
+    margin-inline-end: 12px;
+  }
+
+  & label {
+    position: static;
+  }
+
+  & > a {
+    flex-grow: 1;
+  }
+
+  &:not(.noHover):hover {
+    background-color: var(--sub-menu-item-hover-background-color);
+  }
+
+  &.noHover:hover {
+    background-color: var(--sub-menu-item-background-color);
+  }
+}

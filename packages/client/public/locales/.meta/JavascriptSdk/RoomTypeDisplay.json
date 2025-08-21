@@ -1,0 +1,238 @@
+{
+  "key_path": "RoomTypeDisplay",
+  "content": "Room type display",
+  "content_en_sha1_hash": "165bb5ec5f6e4fb29f2448e73ad35a8267ef1fe0",
+  "created_at": "2025-05-19T21:30:54.639Z",
+  "updated_at": "2025-08-04T07:30:01.399Z",
+  "comment": {
+    "text": "The \"RoomTypeDisplay\" translation key is used to display the room type selection label in a dropdown menu. It appears in the Room Selector category of the developer tools page and provides context for translators to translate this text into different languages.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:25.057Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector.js",
+      "line_number": 275,
+      "context": "</ControlsSection>\n \n <ControlsSection>\n <CategorySubHeader>{t(\"AdvancedDisplay\")}</CategorySubHeader>\n \n <Label className=\"label\" text={t(\"RoomTypeDisplay\")} />\n <ComboBox\n onSelect={changeRoomType}\n options={roomTypeOptions}\n scaled\n selectedOption={roomType}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Otaq növü görüntüsü\" is not the most natural or accurate translation of \"Room type display.\" \"Görüntüsü\" implies an image or visual representation, whereas \"display\" suggests a presentation or indication of the room type.",
+          "suggestion": "Otaq növü göstərişi"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"displejs\" is a valid word meaning 'display,' it's a somewhat technical term. A more natural and user-friendly translation for 'Room type display' in a general context would be something like 'Istabu tipu attēls' or 'Istabu veidu displejs'.",
+          "suggestion": "Istabu tipu attēls"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Отобразить тип комнаты\" literally translates to \"Display room type\". While not entirely wrong, it's not the most natural or idiomatic translation of \"Room type display\". It suggests an action rather than a description of a feature or element. A more accurate translation would describe the display itself, not the action of displaying it.",
+          "suggestion": "Возможные варианты: \"Отображение типа комнаты\", \"Тип комнаты: отображение\", \"Вид отображения типа комнаты\" - depending on the specific context and what 'Room type display' refers to. Further context is needed for the best translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"Тип приказа собе\" does not accurately convey the meaning of \"Room type display\". \"Приказа\" is related to 'display' but 'типа' (type) should be more closely aligned. The word 'собе' (rooms) is also incorrect in this context. It seems to be interpreting 'display' as 'order/request'.",
+          "suggestion": "A more accurate translation would be something like \"Приказ типа собе\" or \"Тип просторије/амбијента\" depending on the specific context. \"Приказ типа просторије\" is a good starting point."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Tip prikaza sobe' is not the most natural or accurate translation of 'Room type display'. While 'Tip' (tip) implies a display, 'prikaza' (of display) is clunky. A more idiomatic translation would consider phrasing like 'Izgled sobe' (Room appearance) or 'Vrsta sobe' (Room type).",
+          "suggestion": "Consider 'Izgled sobe' or 'Vrsta sobe'."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

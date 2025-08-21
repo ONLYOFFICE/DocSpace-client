@@ -1,10 +1,8 @@
 {
   "ActiveSessions": "活动会话",
   "AutoDeleteTitle": "所有超过 60 天的会话将被自动删除。",
-  "ChangeEmailSuccess": "邮箱已成功更改",
   "ChangePasswordAfterLoggingOut": "登出后变更密码",
   "ConnectSocialNetworks": "连接您的社交媒体",
-  "DarkTheme": "深色主题",
   "DescriptionForSecurity": "如需进一步的安全性，您需要更改密码。",
   "DesktopTheme": "与桌面编辑器的设置同步",
   "DesktopThemeDescription": "根据桌面编辑器的当前主题，自动在浅色和深色主题之间切换。",
@@ -13,7 +11,6 @@
   "ErrorAccountAlreadyUse": "关联帐户已被其他用户使用",
   "FileManagement": "文件管理",
   "InterfaceTheme": "界面主题",
-  "LightTheme": "浅色主题",
   "LogoutActiveConnection": "从活动连接中注销",
   "LogoutAllActiveSessionsDescription": "由于此连接当前正在使用，故除此之外的所有活动连接都将被注销。",
   "LogoutBtn": "注销",

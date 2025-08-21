@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,18 +26,22 @@
 
 "use client";
 
-import React from "react";
-import { useSearchParams } from "next/navigation";
+import React, { useMemo } from "react";
+import dynamic from "next/dynamic";
 import { useTranslation } from "react-i18next";
+import {
+  DocumentEditor,
+  type IConfig,
+} from "@onlyoffice/document-editor-react";
 
-import { DocumentEditor } from "@onlyoffice/document-editor-react";
-import IConfig from "@onlyoffice/document-editor-react/dist/esm/types/model/config";
-
-import { FolderType, ThemeKeys } from "@docspace/shared/enums";
+import { ThemeKeys } from "@docspace/shared/enums";
 import { getEditorTheme } from "@docspace/shared/utils";
 import { EDITOR_ID } from "@docspace/shared/constants";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 
-import { getBackUrl } from "@/utils";
+import UserAvatarBaseSvgUrl from "PUBLIC_DIR/images/avatar.editor.base.svg?url";
+import UserAvatarDarkSvgUrl from "PUBLIC_DIR/images/avatar.editor.dark.svg?url";
+
 import { IS_DESKTOP_EDITOR, IS_ZOOM, SHOW_CLOSE } from "@/utils/constants";
 import { EditorProps, TGoBack } from "@/types";
 import {
@@ -47,22 +51,11 @@ import {
   onSDKWarning,
   onSDKError,
   onSDKRequestRename,
-  onOutdatedVersion,
+  // onOutdatedVersion,
 } from "@/utils/events";
 import useInit from "@/hooks/useInit";
 import useEditorEvents from "@/hooks/useEditorEvents";
-
-type IConfigType = IConfig & {
-  events?: {
-    onRequestStartFilling?: (event: object) => void;
-    onSubmit?: (event: object) => void;
-  };
-  editorConfig?: {
-    customization?: {
-      close?: Record<string, unknown>;
-    };
-  };
-};
+import { isPDFDocument } from "@/utils";
 
 const Editor = ({
   config,
@@ -70,15 +63,17 @@ const Editor = ({
   user,
 
   doc,
-  documentserverUrl,
+  documentServerUrl,
   fileInfo,
   isSharingAccess,
   errorMessage,
   isSkipError,
 
   sdkConfig,
-
+  organizationName = "",
   filesSettings,
+
+  shareKey,
 
   onDownloadAs,
   onSDKRequestSharingSettings,
@@ -87,11 +82,13 @@ const Editor = ({
   onSDKRequestSelectSpreadsheet,
   onSDKRequestSelectDocument,
   onSDKRequestReferenceSource,
-  onSDKRequestStartFilling,
+  onStartFillingVDRPanel,
+  setFillingStatusDialogVisible,
+  openShareFormDialog,
+  onStartFilling,
 }: EditorProps) => {
   const { t, i18n } = useTranslation(["Common", "Editor", "DeepLink"]);
-
-  const searchParams = useSearchParams();
+  const { isBase } = useTheme();
 
   const openOnNewPage = IS_ZOOM ? false : !filesSettings?.openEditorInSameTab;
 
@@ -113,7 +110,14 @@ const Editor = ({
     // onRequestStartFilling,
     documentReady,
 
+    onUserActionRequired,
+
     setDocTitle,
+    onSubmit,
+    onRequestFillingStatus,
+    onRequestStartFilling,
+
+    onRequestRefreshFile,
   } = useEditorEvents({
     user,
     successAuth,
@@ -125,6 +129,11 @@ const Editor = ({
     openOnNewPage,
     t,
     sdkConfig,
+    organizationName,
+    setFillingStatusDialogVisible,
+    openShareFormDialog,
+    onStartFillingVDRPanel,
+    shareKey,
   });
 
   useInit({
@@ -135,43 +144,42 @@ const Editor = ({
     documentReady,
     setDocTitle,
     t,
+    organizationName,
   });
 
-  const newConfig: IConfigType = config
-    ? {
-        document: config.document,
-        documentType: config.documentType,
-        token: config.token,
-        type: config.type,
-      }
-    : {};
+  const newConfig: IConfig = useMemo(() => {
+    return config
+      ? {
+          document: config.document,
+          documentType: config.documentType,
+          token: config.token,
+          type: config.type,
+          editorConfig: { ...config.editorConfig },
+        }
+      : {};
+  }, [config]);
 
-  if (config) newConfig.editorConfig = { ...config.editorConfig };
+  // if (config) newConfig.editorConfig = { ...config.editorConfig };
 
-  const search = typeof window !== "undefined" ? window.location.search : "";
-
-  //if (view && newConfig.editorConfig) newConfig.editorConfig.mode = "view";
+  // if (view && newConfig.editorConfig) newConfig.editorConfig.mode = "view";
 
   let goBack: TGoBack = {} as TGoBack;
 
   if (fileInfo) {
     const editorGoBack = sdkConfig?.editorGoBack;
+
     const openFileLocationText = (
       (
         i18n.getDataByLanguage(i18n.language) as unknown as {
           Editor: { [key: string]: string };
         }
-      )?.["Editor"] as {
+      )?.Editor as {
         [key: string]: string;
       }
-    )?.["FileLocation"]; // t("FileLocation");
+    )?.FileLocation; // t("FileLocation");
 
-    if (
-      editorGoBack === "false" ||
-      editorGoBack === false ||
-      user?.isVisitor ||
-      !user
-    ) {
+    if (editorGoBack === false || user?.isVisitor || !user) {
+      console.log("goBack", goBack);
     } else if (editorGoBack === "event") {
       goBack = {
         requestClose: true,
@@ -191,7 +199,7 @@ const Editor = ({
         typeof window !== "undefined" &&
         !window.ClientConfig?.editor?.requestClose
       ) {
-        goBack.url = getBackUrl(fileInfo.rootFolderType, fileInfo.folderId);
+        goBack.url = newConfig.editorConfig?.customization?.goback?.url;
       }
     }
   }
@@ -210,7 +218,7 @@ const Editor = ({
       uiTheme: getEditorTheme(theme as ThemeKeys),
     };
 
-    if (SHOW_CLOSE) {
+    if (SHOW_CLOSE && !sdkConfig?.isSDK) {
       newConfig.editorConfig.customization.close = {
         visible: SHOW_CLOSE,
         text: t("Common:CloseButton"),
@@ -218,20 +226,24 @@ const Editor = ({
     }
   }
 
-  //if (newConfig.document && newConfig.document.info)
-  //  newConfig.document.info.favorite = false;
+  try {
+    // if (newConfig.document && newConfig.document.info)
+    //  newConfig.document.info.favorite = false;
+    const url = typeof window !== "undefined" ? window.location.href : "";
 
-  // const url = window.location.href;
+    if (url.indexOf("anchor") !== -1) {
+      const splitUrl = url.split("anchor=");
+      const decodeURI = decodeURIComponent(splitUrl[1]);
+      const obj = JSON.parse(decodeURI);
 
-  // if (url.indexOf("anchor") !== -1) {
-  //   const splitUrl = url.split("anchor=");
-  //   const decodeURI = decodeURIComponent(splitUrl[1]);
-  //   const obj = JSON.parse(decodeURI);
-
-  //   config.editorConfig.actionLink = {
-  //     action: obj.action,
-  //   };
-  // }
+      if (newConfig.editorConfig)
+        newConfig.editorConfig.actionLink = {
+          action: obj.action,
+        };
+    }
+  } catch (error) {
+    console.error(error);
+  }
 
   newConfig.events = {
     onDocumentReady,
@@ -246,25 +258,34 @@ const Editor = ({
     onDocumentStateChange,
     onMetaChange,
     onMakeActionLink,
-    onOutdatedVersion,
+    // onOutdatedVersion,
     onDownloadAs,
+    onUserActionRequired,
+    onSubmit,
+    onRequestRefreshFile,
   };
 
+  if (
+    typeof window !== "undefined" &&
+    newConfig.editorConfig?.user &&
+    newConfig.editorConfig.user.image?.includes(
+      "default_user_photo_size_48-48.png",
+    )
+  ) {
+    newConfig.editorConfig.user.image = isBase
+      ? `${window.location.origin}${UserAvatarBaseSvgUrl}`
+      : `${window.location.origin}${UserAvatarDarkSvgUrl}`;
+  }
+
   if (successAuth) {
-    if (
-      fileInfo?.rootFolderType !== FolderType.USER &&
-      fileInfo?.rootFolderType !== FolderType.SHARE &&
-      fileInfo?.rootFolderType !== FolderType.Recent
-    ) {
-      //TODO: remove condition for share in my
-      newConfig.events.onRequestUsers = onSDKRequestUsers;
-      newConfig.events.onRequestSendNotify = onSDKRequestSendNotify;
-    }
+    newConfig.events.onRequestUsers = onSDKRequestUsers;
+    newConfig.events.onRequestSendNotify = onSDKRequestSendNotify;
+
     if (!user?.isVisitor) {
       newConfig.events.onRequestSaveAs = onSDKRequestSaveAs;
       if (
-        IS_DESKTOP_EDITOR ||
-        (typeof window !== "undefined" && !openOnNewPage)
+        !isPDFDocument(fileInfo) &&
+        (IS_DESKTOP_EDITOR || (typeof window !== "undefined" && !openOnNewPage))
       ) {
         newConfig.events.onRequestCreateNew = onSDKRequestCreateNew;
       }
@@ -276,11 +297,11 @@ const Editor = ({
     newConfig.events.onRequestReferenceSource = onSDKRequestReferenceSource;
   }
 
-  if (isSharingAccess) {
+  if (isSharingAccess && !config?.startFilling) {
     newConfig.events.onRequestSharingSettings = onSDKRequestSharingSettings;
   }
 
-  if (!fileInfo?.providerKey) {
+  if (!fileInfo?.providerKey && user) {
     newConfig.events.onRequestReferenceData = onSDKRequestReferenceData;
 
     if (!IS_ZOOM) {
@@ -311,32 +332,18 @@ const Editor = ({
   }
 
   if (config?.startFilling && !IS_ZOOM) {
-    newConfig.events.onRequestStartFilling = () =>
-      onSDKRequestStartFilling?.(t("Common:ShareAndCollect"));
+    newConfig.events.onRequestStartFilling = onRequestStartFilling;
+    newConfig.events.onStartFilling = onStartFilling;
   }
 
-  newConfig.events.onSubmit = () => {
-    const origin = window.location.origin;
-
-    const otherSearchParams = new URLSearchParams();
-
-    if (config?.fillingSessionId)
-      otherSearchParams.append("fillingSessionId", config.fillingSessionId);
-
-    const combinedSearchParams = new URLSearchParams({
-      ...Object.fromEntries(searchParams),
-      ...Object.fromEntries(otherSearchParams),
-    });
-
-    window.location.replace(
-      `${origin}/doceditor/completed-form?${combinedSearchParams.toString()}`,
-    );
-  };
+  if (config?.fillingStatus) {
+    newConfig.events.onRequestFillingStatus = onRequestFillingStatus;
+  }
 
   return (
     <DocumentEditor
       id={EDITOR_ID}
-      documentServerUrl={documentserverUrl}
+      documentServerUrl={documentServerUrl}
       config={
         errorMessage || isSkipError
           ? {
@@ -353,4 +360,4 @@ const Editor = ({
   );
 };
 
-export default Editor;
+export default dynamic(() => Promise.resolve(Editor), { ssr: false });

@@ -1,0 +1,375 @@
+{
+  "key_path": "BusinessRequestDescription",
+  "content": "The pricing plans with more {{peopleNumber}} admins are available upon request only.",
+  "content_en_sha1_hash": "55e0fa870af75f04c44b2449bd583a48a3d1adcf",
+  "created_at": "2025-05-19T21:30:53.659Z",
+  "updated_at": "2025-08-12T19:46:26.225Z",
+  "comment": {
+    "text": "This translation key is used to display a message indicating that pricing plans with more administrators are available upon request only. It appears in the UI as a descriptive text within a payment settings category. The goal of this text is to provide clarity on what happens when selecting certain payment tiers, helping users understand the implications of choosing those options.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:16.099Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/sub-components/TotalTariffContainer.js",
+      "line_number": 99,
+      "context": "fontSize=\"14\"\n textAlign=\"center\"\n fontWeight={600}\n className=\"total-tariff_description\"\n >\n <Trans t={t} i18nKey=\"BusinessRequestDescription\" ns=\"Payments\">\n {{ peopleNumber: maxAvailableManagersCount }}\n </Trans>\n </Text>\n ) : (\n <Text fontWeight={600} fontSize=\"16px\">",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'admins' is translated as 'مشرفين' which is generally correct, but might be overly formal depending on the context. A slightly less formal alternative might be preferable for broader appeal.",
+          "suggestion": "Consider 'مديرين' (managers) or a more contextually appropriate alternative based on the exact role of the 'admins'."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'available upon request only' is not accurately translated. 'Mümkündür' implies possibility, not necessarily that it requires a request. A more accurate translation would convey the exclusivity or requirement of a request.",
+          "suggestion": "Daha çox {{peopleNumber}} admin olan qiymət planları xüsusi sorğu ilə təmin edilir."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'more {{peopleNumber}} admins' is translated as 'more than {{peopleNumber}} administrators'. While technically correct, 'administrators' is more formal than 'admins' which matches the original phrasing's tone. The original is more conversational.",
+          "suggestion": "Ценовите планове с повече {{peopleNumber}} администратори са достъпни само при заявка."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'more {{peopleNumber}} admins' is translated as 'περισσότεροι από {{peopleNumber}} διαχειριστές'. While technically correct, it sounds slightly less natural in Greek. A more idiomatic translation might be '{{peopleNumber}} ή και περισσότεροι διαχειριστές'.",
+          "suggestion": "{{peopleNumber}} ή και περισσότεροι διαχειριστές"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'available upon request only' is not perfectly captured by 'solo están disponibles bajo solicitud.' A more natural Spanish translation would be 'solo están disponibles por solicitud' or 'solo están disponibles si se solicitan'. 'Bajo solicitud' implies a formal request process which isn't necessarily the intended meaning.",
+          "suggestion": "solo están disponibles por solicitud"
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'joilla sisältävät' is slightly awkward. A more natural phrasing would be 'joissa on'.",
+          "suggestion": "Hinnoitteluohjelmat, joissa on enemmän {{peopleNumber}} ylläpitäjät ovat saatavilla vain pyynnöstä."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'administrateurs' for 'admins' is technically correct but 'administrateurs' sounds more formal and less natural in this context. 'Administrateurs' is accurate, but 'gestionnaires' might be a slightly better fit for a more conversational tone.",
+          "suggestion": "Les plans tarifaires avec plus de gestionnaires {{peopleNumber}} sont disponibles sur demande uniquement."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"are available upon request only\" is not accurately conveyed by \"հասանելի են միայն ըստ պահանջի\". A more accurate translation might be something like \"կազմվում են ըստ ցանկության\" or \"տրամադրվում են ըստ ցանկության\". The current translation emphasizes 'according to demand' which is less fitting than 'available on request'.",
+          "suggestion": "Consider \"կազմվում են ըստ ցանկության\" or \"տրամադրվում են ըստ ցանկության\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"available upon request only\" is not perfectly captured by \"요청 시에만 제공됩니다.\" While it conveys the general idea, a more precise translation might be \"요청에 따라 제공됩니다\" or \"요청 시 제공 가능합니다.\" The current translation has a slightly awkward feel.",
+          "suggestion": "요청에 따라 제공됩니다"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ພື້ນເຮືອນການລາຄາທີ່ມີ {{peopleNumber}} admins ເພີ່ມເຕີມ\" is not the most natural way to express 'pricing plans with more {{peopleNumber}} admins'. A more accurate translation would be something like 'ແຜນການຈ່າຍເງິນທີ່ມີ {{peopleNumber}} ຄົນບໍລິຫານເພີ່ມເຕີມ' or 'ແຜນການລາຄາທີ່ມີ {{peopleNumber}} ຄົນບໍລິຫານຕື່ມອີກ'.",
+          "suggestion": "ແຜນການຈ່າຍເງິນທີ່ມີ {{peopleNumber}} ຄົນບໍລິຫານເພີ່ມເຕີມ"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ເພີ່ມເຕີມ' is correct, but depending on the context, 'ຕື່ມອີກ' might sound more natural. While 'ເພີ່ມເຕີມ' means 'additional' or 'more', 'ຕື່ມອີກ' can imply 'further' or 'in addition'.",
+          "suggestion": "ແຜນການຈ່າຍເງິນທີ່ມີ {{peopleNumber}} ຄົນບໍລິຫານຕື່ມອີກ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'pricing plans' doesn't directly translate to 'Cenu plāni'. While 'Cenu plāni' is understandable, a more accurate translation might be 'cenas' or 'cenas pakoti'. 'Cenu plāni' implies a very structured, formal plan which isn't necessarily conveyed in the English original.",
+          "suggestion": "Consider 'Cenas' or 'Cenas pakoti' for a more accurate translation of 'pricing plans'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'administratoriem' is a valid translation for 'admins', it carries a slightly more formal connotation. A slightly more colloquial (but potentially more appropriate depending on the target audience) translation could be 'vadītājiem'.",
+          "suggestion": "Consider 'vadītājiem' as an alternative to 'administratoriem'."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"more {{peopleNumber}} admins\" is translated as \"większą liczbą administratorów (ponad {{peopleNumber}})\". While technically correct, \"ponad\" (over) implies a minimum, while the English suggests the possibility of having more than the specified number. A more accurate translation might better reflect this nuance.",
+          "suggestion": "Plany cenowe z większą liczbą administratorów ({{peopleNumber}} lub więcej) są dostępne wyłącznie na życzenie."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of parentheses around the `{{peopleNumber}}` is slightly less common in Polish compared to English. While not incorrect, it might read less naturally.",
+          "suggestion": "Plany cenowe z większą liczbą administratorów {{peopleNumber}} są dostępne wyłącznie na życzenie."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'available upon request only' is not perfectly captured by 'só estão disponíveis sob pedido'. A more natural translation would be 'disponíveis apenas mediante solicitação' or 'disponíveis somente mediante solicitação'. 'Sob pedido' implies a direct order, while the English suggests a simple request.",
+          "suggestion": "disponíveis apenas mediante solicitação"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'more than {{peopleNumber}} administrators' is a bit literal. A more natural Russian phrasing might be 'с {{peopleNumber}} и более администраторов' or 'для {{peopleNumber}} и более администраторов'. The current translation isn't *wrong*, but less idiomatic.",
+          "suggestion": "Тарифные планы для {{peopleNumber}} и более администраторов доступны только по запросу."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'available upon request only' is not accurately conveyed.  'ඉල්ලීම මත පමණක් ලබාගත හැකිය' translates more literally to 'can be obtained only on request,' which is acceptable but could be improved for a more natural flow. A better translation for 'available upon request only' might be something along the lines of 'ඉල්ලුම් කිරීමෙන් ලබාගත හැකි'.",
+          "suggestion": "Replace 'ඉල්ලීම මත පමණක් ලබාගත හැකිය' with 'ඉල්ලුම් කිරීමෙන් ලබාගත හැකි' or similar phrasing that conveys 'available upon request'."
+        },
+        {
+          "type": "formatting",
+          "description": "The variable `{{peopleNumber}}` is correctly placed, indicating consistent formatting.",
+          "suggestion": null
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'more {{peopleNumber}} admins' is translated as 'viac ako {{peopleNumber}} administrátormi'. While technically correct, a more natural Slovak phrasing would be '{{peopleNumber}} a viac administrátorov' or '{{peopleNumber}} administrátorov a viac'. The current translation sounds slightly awkward.",
+          "suggestion": "Cenové plány s {{peopleNumber}} administrátormi a viac sú dostupné len na požiadanie."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'admins' is translated as 'skrbniki'. While 'skrbniki' can mean 'caretakers' or 'managers', 'admins' in this context refers to administrative users. A more accurate translation might be 'administratorji' or 'upravljalci'.",
+          "suggestion": "Cenovni paket z več {{peopleNumber}} administratorji je na voljo le na zahtevo."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'administrators' is translated as 'администратора'. While grammatically correct, it is more natural to use the plural form 'администратори' to match the quantity indicated by 'more'.",
+          "suggestion": "Планови цена са више администратори ({{peopleNumber}}) доступни су само на захтев."
+        },
+        {
+          "type": "formatting",
+          "description": "The parenthesis around '{{peopleNumber}}' seems correct, but it's worth checking the consistency of this formatting across all translations to ensure it matches the English source.",
+          "suggestion": "No change needed, but check consistency."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'admins' is translated as 'administratora' which is the genitive plural form. It should be translated as 'administratori' (nominative plural) to agree with the verb 'dostupni'.",
+          "suggestion": "Planovi cena sa više administratori ({{peopleNumber}}) dostupni su samo na zahtev."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"more {{peopleNumber}} admins\" is not accurately reflected in the translation. \"{{peopleNumber}} yönetici sayısından daha fazlasını\" translates to \"more than {{peopleNumber}} administrators,\" which implies a quantity greater than the number indicated in `peopleNumber`, not the plans *with* that number of admins. The intended meaning is for plans *containing* or *for* a specific number of admins.",
+          "suggestion": "{{peopleNumber}} yöneticiye kadar olan fiyatlandırma planları yalnızca istek üzerine sunulur."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Các gói dịch vụ với thêm {{peopleNumber}} quản trị viên chỉ có theo yêu cầu' doesn't fully convey the meaning of 'The pricing plans with more {{peopleNumber}} admins are available upon request only.'. 'Thêm' (added) isn't the best translation of 'more'.",
+          "suggestion": "Các gói dịch vụ với {{peopleNumber}} quản trị viên trở lên chỉ có theo yêu cầu."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'trên' conveys the meaning of 'or more' which better aligns with the English.",
+          "suggestion": null
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'available upon request only' is not perfectly conveyed by '仅在请求时提供'. A more natural and accurate translation would incorporate the idea of being exclusive or reserved.",
+          "suggestion": "拥有更多{{peopleNumber}}名管理员的定价计划仅为特殊请求提供。"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of '名' after '管理员' is technically correct but might sound slightly formal for some contexts. A slightly more conversational tone could be considered.",
+          "suggestion": "拥有更多{{peopleNumber}}位管理员的定价计划仅为特殊请求提供。"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

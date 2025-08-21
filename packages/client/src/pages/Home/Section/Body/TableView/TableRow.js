@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,9 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { classNames } from "@docspace/shared/utils";
+import { FolderType } from "@docspace/shared/enums";
+import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 import withContent from "../../../../../HOCs/withContent";
 import withBadges from "../../../../../HOCs/withBadges";
 import withQuickButtons from "../../../../../HOCs/withQuickButtons";
@@ -36,6 +38,7 @@ import RoomsRowDataComponent from "./sub-components/RoomsRowData";
 import TrashRowDataComponent from "./sub-components/TrashRowData";
 import RecentRowDataComponent from "./sub-components/RecentRowData";
 import IndexRowDataComponent from "./sub-components/IndexRowData";
+import TemplatesRowData from "./sub-components/TemplatesRowData";
 import RowDataComponent from "./sub-components/RowData";
 import { StyledTableRow, StyledDragAndDrop } from "./StyledTable";
 
@@ -47,6 +50,7 @@ const FilesTableRow = (props) => {
     checkedProps,
     className,
     value,
+    documentTitle,
     onMouseClick,
     dragging,
     isDragging,
@@ -64,6 +68,7 @@ const FilesTableRow = (props) => {
     showHotkeyBorder,
     id,
     isRooms,
+    isTemplates,
     isTrashFolder,
     isIndexEditingMode,
     isIndexing,
@@ -77,11 +82,20 @@ const FilesTableRow = (props) => {
     onEditIndex,
     isIndexUpdated,
     displayFileExtension,
-    icon,
-    isDownload,
+    isBlockingOperation,
+
+    isTutorialEnabled,
+    setRefMap,
+    deleteRefMap,
+    setDropTargetPreview,
+    selectedFolderTitle,
+    canCreateSecurity,
+    disableDrag,
   } = props;
 
   const { acceptBackground, background } = theme.dragAndDrop;
+
+  const rowRef = React.useRef();
 
   const element = (
     <ItemIcon
@@ -91,11 +105,12 @@ const FilesTableRow = (props) => {
       isRoom={item.isRoom}
       title={item.title}
       showDefault={
-        !(!!item?.logo?.cover || !!item?.logo?.medium) && item.isRoom
+        !(!!item?.logo?.cover || !!item?.logo?.medium) ? item.isRoom : null
       }
       logo={item.logo}
       color={item.logo?.color}
       isArchive={item.isArchive}
+      isTemplate={item.isTemplate}
       badgeUrl={badgeUrl}
       className={classNames({
         "icon-with-index-column": isIndexing,
@@ -106,9 +121,12 @@ const FilesTableRow = (props) => {
   const selectionProp = {
     className: `files-item ${className} ${value}`,
     value,
+    documentTitle,
   };
 
   const [isDragActive, setIsDragActive] = useState(false);
+
+  const isDragDisabled = dragging && !isDragging;
 
   const dragStyles = {
     style: {
@@ -118,6 +136,7 @@ const FilesTableRow = (props) => {
             ? acceptBackground
             : background
           : "none",
+      opacity: isDragDisabled ? 0.4 : 1,
     },
   };
 
@@ -136,23 +155,59 @@ const FilesTableRow = (props) => {
   const onDragLeaveEvent = (e) => {
     onDragLeave && onDragLeave(e);
 
+    setDropTargetPreview(null);
     setIsDragActive(false);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (index === 0) {
       if (checkedProps || isActive) {
         setFirsElemChecked(true);
       } else {
         setFirsElemChecked(false);
       }
-      if (showHotkeyBorder) {
+      if (showHotkeyBorder && !isTutorialEnabled) {
         setHeaderBorder(true);
       } else {
         setHeaderBorder(false);
       }
     }
-  }, [checkedProps, isActive, showHotkeyBorder]);
+  }, [checkedProps, isActive, showHotkeyBorder, isTutorialEnabled]);
+
+  useEffect(() => {
+    if (!rowRef?.current) return;
+
+    if (item?.isPDF) {
+      setRefMap(GuidanceRefKey.Pdf, rowRef, "firstChildOffset");
+    }
+    if (item?.type === FolderType.Done) {
+      setRefMap(GuidanceRefKey.Ready, rowRef, "firstChildOffset");
+    }
+
+    return () => {
+      deleteRefMap(GuidanceRefKey.Pdf);
+      deleteRefMap(GuidanceRefKey.Ready);
+    };
+  }, [deleteRefMap, setRefMap]);
+
+  useEffect(() => {
+    if (dragging) {
+      if (isDragging) {
+        if (isDragActive) setDropTargetPreview(item.title);
+      } else if (!disableDrag && canCreateSecurity) {
+        setDropTargetPreview(selectedFolderTitle);
+      } else {
+        setDropTargetPreview(null);
+      }
+    }
+  }, [
+    dragging,
+    isDragging,
+    isDragActive,
+    selectedFolderTitle,
+    setDropTargetPreview,
+    disableDrag,
+  ]);
 
   const idWithFileExst = item.fileExst
     ? `${item.id}_${item.fileExst}`
@@ -181,26 +236,26 @@ const FilesTableRow = (props) => {
       })}
       onDrop={onDrop}
       onMouseDown={onMouseDown}
-      dragging={dragging && isDragging}
+      dragging={dragging ? isDragging : null}
       onDragOver={onDragOverEvent}
       onDragLeave={onDragLeaveEvent}
+      isDragDisabled={isDragDisabled}
     >
       <StyledTableRow
-        className="table-row"
-        {...dragStyles}
-        isDragging={dragging}
-        dragging={dragging && isDragging}
-        selectionProp={selectionProp}
         key={item.id}
+        className="table-row"
+        forwardedRef={rowRef}
+        contextMenuCellStyle={dragStyles.style}
+        dataTestId={`table-row-${index}`}
+        isDragging={dragging}
+        dragging={dragging ? isDragging : null}
+        selectionProp={selectionProp}
         fileContextClick={fileContextClick}
         onClick={isIndexEditingMode ? () => {} : onMouseClick}
         isActive={isActive}
         isIndexEditingMode={isIndexEditingMode}
-        inProgress={
-          inProgress && item.isFolder
-            ? icon !== "duplicate" && icon !== "duplicate-room" && !isDownload
-            : inProgress
-        }
+        isBlockingOperation={isBlockingOperation}
+        inProgress={inProgress}
         isFolder={item.isFolder}
         onHideContextMenu={onHideContextMenu}
         isThirdPartyFolder={item.isThirdPartyFolder}
@@ -208,7 +263,7 @@ const FilesTableRow = (props) => {
         checked={checkedProps || isIndexUpdated}
         isIndexing={isIndexing}
         isIndexUpdated={isIndexUpdated}
-        showHotkeyBorder={showHotkeyBorder}
+        showHotkeyBorder={showHotkeyBorder ? !isTutorialEnabled : false}
         displayFileExtension={displayFileExtension}
         title={
           item.isFolder
@@ -222,7 +277,14 @@ const FilesTableRow = (props) => {
         canDrag={canDrag}
         {...contextOptionProps}
       >
-        {isRooms ? (
+        {isTemplates ? (
+          <TemplatesRowData
+            t={t}
+            element={element}
+            dragStyles={dragStyles}
+            {...props}
+          />
+        ) : isRooms ? (
           <RoomsRowDataComponent
             element={element}
             dragStyles={dragStyles}

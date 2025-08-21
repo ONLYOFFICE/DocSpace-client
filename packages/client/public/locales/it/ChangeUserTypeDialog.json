@@ -1,11 +1,17 @@
 {
+  "ChangeContactType": "Cambia tipo di contatto",
   "ChangeGuestsTypeMessage": "L'ospite <strong>{{userName}}</strong> verrà spostato nella sezione {{membersSection}} e gli verrà assegnato il tipo Utente. Gli utenti hanno una propria sezione {{documentsSection}}, possono creare e modificare i file, ma non possono creare stanze.",
   "ChangeGuestsTypeMessageMulti": "Gli ospiti selezionati saranno spostati nella sezione {{membersSection}} e assegnati al tipo di utente. Gli utenti hanno una propria sezione {{documentsSection}}, possono creare e modificare file, ma non possono creare stanze.",
+  "ChangeGuestsTypeToAdmin": "L'ospite <strong>{{userName}}</strong> verrà spostato nella sezione {{membersSection}} e assegnato al tipo <strong>'{{ secondType }}'</strong>. Gli amministratori di {{productName}} possono accedere alle impostazioni di {{productName}}, gestire e archiviare stanze, invitare nuovi utenti e assegnare ruoli di livello inferiore. Gli amministratori di {{productName}} hanno accesso alla sezione {{documentsSection}}.",
+  "ChangeGuestsTypeToAdminMulti": "Gli ospiti selezionati verranno spostati nella sezione {{membersSection}} e assegnati al tipo <strong>'{{ secondType }}'</strong>. Gli amministratori di {{productName}} possono accedere alle impostazioni di {{productName}}, gestire e archiviare stanze, invitare nuovi utenti e assegnare ruoli di livello inferiore. Gli amministratori di {{productName}} hanno accesso alla sezione {{documentsSection}}.",
+  "ChangeGuestsTypeToManager": "L'ospite <strong>{{userName}}</strong> verrà spostato nella sezione {{membersSection}} e assegnato al tipo <strong>'{{ secondType }}'</strong>. Gli amministratori della stanza possono creare e gestire le stanze assegnate, invitare nuovi utenti e assegnare ruoli di Amministratore della stanza e inferiori. Gli amministratori della stanza hanno accesso alla sezione {{documentsSection}}.",
+  "ChangeGuestsTypeToManagerMulti": "Gli ospiti selezionati verranno spostati nella sezione {{membersSection}} e assegnati al tipo <strong>'{{ secondType }}'</strong>. Gli amministratori della stanza possono creare e gestire le stanze assegnate, invitare nuovi utenti e assegnare ruoli di Amministratore della stanza e inferiori. Gli amministratori della stanza hanno accesso alla sezione {{documentsSection}}.",
   "ChangeUserTypeButton": "Cambia tipo",
-  "ChangeUserTypeHeader": "Cambia tipo di utente",
   "ChangeUserTypeMessage": "Gli utenti con il tipo <strong>'{{ firstType }}'</strong> verranno spostati nel tipo <strong>'{{ secondType }}'</strong>.",
-  "ChangeUserTypeMessageMulti": "Gli utenti selezionati verranno spostati nel tipo <strong>'{{ secondType }}'</strong>.",
-  "ChangeUserTypeMessageWarning": "Non puoi modificare il tipo per gli amministratori di {{productName}} e per te stesso.",
+  "ChangeUserTypeNote": "<1>Nota:</1> non puoi cambiare il tipo per l'amministratore di {{productName}} né per te stesso.",
+  "DataReassignmentInfo": "Le stanze create da questo utente verranno automaticamente assegnate a te. Per riassegnare le stanze a un'altra persona, fai clic sul link corrispondente qui sotto.",
+  "DataReassignmentWithFilesDeletion": "Tutti i file condivisi creati da questo contatto saranno <1>automaticamente assegnati a te tra 30 giorni</1>. Per riassegnare le stanze o i file condivisi a un'altra persona, fai clic sul link corrispondente qui sotto.",
+  "PersonalDataDeletion": "Tutti i file e le cartelle nella sezione {{sectionName}} di questo contatto saranno <1>eliminati definitivamente tra 30 giorni</1>.",
   "SuccessChangeGuestType": "Il tipo di ospite è stato modificato con successo",
   "SuccessChangeUserType": "Il tipo di utente è stato cambiato con successo"
 }

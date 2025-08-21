@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -35,5 +35,16 @@ export const defaultSize = {
   width: "100",
   height: "100",
 };
+
+export const sdkVersion = {
+  "101": "1.0.1",
+  "200": "2.0.0",
+  "210": "2.1.0",
+} as const;
+
+export const sdkSource = {
+  Package: "package",
+  Script: "script",
+} as const;
 
 export const defaultDimension = dimensionsModel[0];

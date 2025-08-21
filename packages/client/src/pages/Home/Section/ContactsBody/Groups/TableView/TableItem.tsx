@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -40,6 +40,7 @@ import { globalColors } from "@docspace/shared/themes";
 import { TGroup } from "@docspace/shared/api/groups/types";
 
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
+import ContactsHotkeysStore from "SRC_DIR/store/contacts/ContactsHotkeysStore";
 
 import Badges from "../../Badges";
 
@@ -59,6 +60,7 @@ type GroupsTableItemProps = {
   selectRow?: GroupsStore["selectRow"];
   changeGroupSelection?: GroupsStore["changeGroupSelection"];
   changeGroupContextSelection?: GroupsStore["changeGroupContextSelection"];
+  withContentSelection?: ContactsHotkeysStore["withContentSelection"];
 };
 
 const GroupsTableItem = ({
@@ -75,6 +77,7 @@ const GroupsTableItem = ({
   changeGroupContextSelection,
   selectRow,
   isChecked,
+  withContentSelection,
 }: GroupsTableItemProps) => {
   const { t } = useTranslation(["People", "Common", "PeopleTranslations"]);
   const theme = useTheme();
@@ -93,6 +96,7 @@ const GroupsTableItem = ({
   };
 
   const onRowClick = (e: React.MouseEvent<Element>) => {
+    if (withContentSelection) return;
     const target = e.target as Element;
     if (
       target?.tagName === "SPAN" ||
@@ -116,6 +120,7 @@ const GroupsTableItem = ({
         (isChecked || isActive) && "table-row-selected"
       } ${item.id}`}
       value={value}
+      data-testid={`contacts_table_groups_row_${itemIndex}`}
     >
       <GroupsRow
         key={item.id}
@@ -130,8 +135,12 @@ const GroupsTableItem = ({
         getContextModel={getContextModel!}
         badgeUrl=""
         isIndexEditingMode={false}
+        dataTestId={`contacts_groups_row_${itemIndex}`}
       >
-        <TableCell className="table-container_group-title-cell">
+        <TableCell
+          className="table-container_group-title-cell"
+          dataTestId={`contacts_table_groups_title_cell_${itemIndex}`}
+        >
           <TableCell
             hasAccess
             className="table-container_row-checkbox-wrapper"
@@ -145,12 +154,14 @@ const GroupsTableItem = ({
                 isGroup
                 role={AvatarRole.user}
                 source=""
+                dataTestId={`contacts_table_groups_avatar_${itemIndex}`}
               />
             </div>
             <Checkbox
               className="table-container_row-checkbox"
               onChange={onChange}
               isChecked={isChecked}
+              dataTestId={`contacts_table_groups_checkbox_${itemIndex}`}
             />
           </TableCell>
 
@@ -158,9 +169,11 @@ const GroupsTableItem = ({
             onClick={onOpenGroup}
             title={item.name}
             fontWeight="600"
-            fontSize="12px"
+            fontSize="13px"
             isTextOverflow
             className="table-cell_group-manager"
+            truncate
+            dataTestId={`contacts_table_groups_name_link_${itemIndex}`}
           >
             {item.name}
           </Link>
@@ -169,7 +182,10 @@ const GroupsTableItem = ({
         </TableCell>
 
         {peopleGroupsColumnIsEnabled ? (
-          <TableCell className="table-container_group-people">
+          <TableCell
+            className="table-container_group-people"
+            dataTestId={`contacts_table_groups_members_count_cell_${itemIndex}`}
+          >
             <Text
               title={item.membersCount.toString()}
               fontWeight="600"
@@ -185,7 +201,10 @@ const GroupsTableItem = ({
         )}
 
         {managerGroupsColumnIsEnabled ? (
-          <TableCell className="table-container_group-manager">
+          <TableCell
+            className="table-container_group-manager"
+            dataTestId={`contacts_table_groups_manager_cell_${itemIndex}`}
+          >
             <Text
               title={item.manager?.displayName}
               fontWeight="600"
@@ -193,6 +212,7 @@ const GroupsTableItem = ({
               className="table-cell_group-manager"
               color={globalColors.gray}
               dir="auto"
+              truncate
             >
               {item.manager?.displayName}
             </Text>
@@ -214,4 +234,5 @@ export default inject(({ peopleStore }: TStore) => ({
   changeGroupContextSelection:
     peopleStore.groupsStore!.changeGroupContextSelection,
   selectRow: peopleStore.groupsStore!.selectRow,
+  withContentSelection: peopleStore.contactsHotkeysStore!.withContentSelection,
 }))(observer(GroupsTableItem));

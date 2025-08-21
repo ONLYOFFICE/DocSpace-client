@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,37 +32,35 @@ import ArticleHideMenuReactSvgUrl from "PUBLIC_DIR/images/article-hide-menu.reac
 import ArticleShowMenuReactSvgUrl from "PUBLIC_DIR/images/article-show-menu.react.svg?url";
 
 import { Text } from "../../text";
+
+import styles from "../Article.module.scss";
 import { ArticleHideMenuButtonProps } from "../Article.types";
-import { StyledHideArticleMenuButton } from "../Article.styled";
 
 const HideArticleMenuButton = ({
   showText,
-  toggleShowText,
-  currentColorScheme,
   hideProfileBlock,
+  toggleShowText,
 }: ArticleHideMenuButtonProps) => {
-  const { t } = useTranslation("Common");
+  const { t } = useTranslation(["Common"]);
 
   return (
-    <StyledHideArticleMenuButton
-      showText={showText}
+    <div
+      className={styles.hideArticleMenuButton}
       onClick={toggleShowText}
-      currentColorScheme={currentColorScheme}
-      hideProfileBlock={hideProfileBlock}
+      data-show-text={showText ? "true" : "false"}
+      data-hide-profile-block={hideProfileBlock ? "true" : "false"}
     >
       {showText ? (
-        <div
-          className="article-hide-menu-container"
-          id="document_catalog-hide-menu"
-        >
+        <div className="article-hide-menu-container">
           <ReactSVG
-            className="article-hide-menu-icon_svg"
             src={ArticleHideMenuReactSvgUrl}
+            className="article-hide-menu-icon_svg"
           />
           <Text
             className="article-hide-menu-text"
             fontWeight={600}
-            fontSize="12px"
+            fontSize="15px"
+            lineHeight="16px"
             noSelect
             truncate
           >
@@ -75,12 +73,12 @@ const HideArticleMenuButton = ({
           id="document_catalog-show-menu"
         >
           <ReactSVG
-            className="article-show-menu-icon_svg"
             src={ArticleShowMenuReactSvgUrl}
+            className="article-show-menu-icon_svg"
           />
         </div>
       )}
-    </StyledHideArticleMenuButton>
+    </div>
   );
 };
 

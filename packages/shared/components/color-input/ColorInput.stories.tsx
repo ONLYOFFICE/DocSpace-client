@@ -26,7 +26,6 @@
 
 /* eslint-disable no-console */
 import React from "react";
-import styled from "styled-components";
 import { Meta, StoryObj } from "@storybook/react";
 
 import { ColorInput } from "./ColorInput";
@@ -34,45 +33,58 @@ import { ColorInputProps } from "./ColorInput.types";
 import { InputSize } from "../text-input/TextInput.enums";
 import { globalColors } from "../../themes";
 
-const ColorInputContainer = styled.div`
-  height: 300px;
-`;
-
 const meta = {
   title: "Components/ColorInput",
   component: ColorInput,
-  argTypes: {
-    size: {
-      controls: "multi-select",
-      options: [
-        InputSize.base,
-        InputSize.middle,
-        InputSize.big,
-        InputSize.huge,
-        InputSize.large,
-      ],
-    },
-    scale: { controls: "boolean" },
-    isDisabled: { controls: "boolean" },
-    hasError: { controls: "boolean" },
-    hasWarning: { controls: "boolean" },
-  },
   parameters: {
     docs: {
       description: {
-        component: "Color input",
+        component:
+          "A color input component that allows users to enter and select colors using a hex value or color picker.",
       },
     },
   },
+  argTypes: {
+    defaultColor: {
+      control: "color",
+      description: "Initial color value",
+    },
+    size: {
+      control: "select",
+      options: Object.values(InputSize),
+      description: "Size of the input field",
+    },
+    scale: {
+      control: "boolean",
+      description: "Whether the input field has scale",
+    },
+    isDisabled: {
+      control: "boolean",
+      description: "Disables the input field",
+    },
+    hasError: {
+      control: "boolean",
+      description: "Shows error state",
+    },
+    hasWarning: {
+      control: "boolean",
+      description: "Shows warning state",
+    },
+    handleChange: {
+      description: "Callback when color changes",
+    },
+  },
 } satisfies Meta<typeof ColorInput>;
-type Story = StoryObj<typeof meta>;
+
+type Story = StoryObj<typeof ColorInput>;
+
 export default meta;
 
 const Template = ({ ...args }: ColorInputProps) => {
   return (
-    <ColorInputContainer>
+    <div style={{ height: "410px" }}>
       <ColorInput {...args} />
-    </ColorInputContainer>
+    </div>
   );
 };
 
@@ -80,13 +92,65 @@ export const Default: Story = {
   render: (args) => <Template {...args} />,
   args: {
     defaultColor: globalColors.lightBlueMain,
-    handleChange: (color) => {
-      console.log(color);
-    },
+    handleChange: (color) => console.log("Color changed:", color),
     size: InputSize.base,
     scale: false,
     isDisabled: false,
     hasError: false,
     hasWarning: false,
   },
+};
+
+export const WithScale: Story = {
+  args: {
+    ...Default.args,
+    scale: true,
+  },
+  render: (args) => <Template {...args} />,
+};
+
+export const Disabled: Story = {
+  args: {
+    ...Default.args,
+    isDisabled: true,
+  },
+  render: (args) => <Template {...args} />,
+};
+
+export const WithError: Story = {
+  args: {
+    ...Default.args,
+    hasError: true,
+  },
+  render: (args) => <Template {...args} />,
+};
+
+export const WithWarning: Story = {
+  args: {
+    ...Default.args,
+    hasWarning: true,
+  },
+  render: (args) => <Template {...args} />,
+};
+
+export const DifferentSizes: Story = {
+  render: () => (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "1rem",
+        height: "600px",
+      }}
+    >
+      {Object.values(InputSize).map((size) => (
+        <ColorInput
+          key={size}
+          defaultColor={globalColors.lightBlueMain}
+          size={size}
+          handleChange={(color) => console.log(`${size} color changed:`, color)}
+        />
+      ))}
+    </div>
+  ),
 };

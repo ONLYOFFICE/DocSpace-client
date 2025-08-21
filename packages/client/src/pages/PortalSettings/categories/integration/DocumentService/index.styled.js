@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -50,6 +50,17 @@ export const LocationHeader = styled.div`
   }
 `;
 
+export const LocationSubheader = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 22px;
+`;
+
 export const LocationForm = styled.form`
   display: flex;
   flex-direction: column;
@@ -72,13 +83,49 @@ export const LocationForm = styled.form`
       flex-direction: column;
       gap: 4px;
 
+      label {
+        line-height: 20px;
+      }
+
       .icon-button {
         display: none;
       }
+
+      .password-input {
+        .icon-button {
+          background-color: ${(props) => props.theme.input.backgroundColor};
+          display: block;
+          margin: -5px;
+          padding: 5px;
+        }
+      }
+    }
+
+    .checkbox {
+      margin-top: 4px;
+
+      svg {
+        margin-inline-end: 8px;
+      }
+    }
+
+    .password-field-wrapper {
+      width: 100%;
+    }
+
+    .group-label {
+      display: flex;
+      gap: 4px;
+      line-height: 20px;
+    }
+
+    .label-subtitle {
+      color: ${(props) => props.theme.client.settings.common.descriptionColor};
     }
 
     .subtitle {
-      color: ${(props) => props.theme.client.settings.common.descriptionColor};
+      color: ${(props) => props.theme.client.settings.integration.textColor};
+      font-size: 12px;
     }
   }
 `;

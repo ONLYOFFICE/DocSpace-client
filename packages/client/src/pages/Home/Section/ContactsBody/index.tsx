@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,8 +26,10 @@
 
 import { useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import { withTranslation } from "react-i18next";
+
+import { TfaStore } from "@docspace/shared/store/TfaStore";
 
 import withLoader from "SRC_DIR/HOCs/withLoader";
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
@@ -36,7 +38,6 @@ import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
 import DialogStore from "SRC_DIR/store/contacts/DialogStore";
 import ContactsHotkeysStore from "SRC_DIR/store/contacts/ContactsHotkeysStore";
-import { getContactsView } from "SRC_DIR/helpers/contacts";
 
 import { useAccountsHotkeys } from "../../Hooks";
 
@@ -44,6 +45,7 @@ import Users from "./Users";
 import Groups from "./Groups";
 
 type SectionBodyContentProps = {
+  currentView: string;
   isUsersLoading?: UsersStore["isUsersLoading"];
   selectUser?: UsersStore["selectUser"];
   setPeopleSelection?: UsersStore["setSelection"];
@@ -61,10 +63,16 @@ type SectionBodyContentProps = {
   deselectAll?: ContactsHotkeysStore["deselectAll"];
   openItem?: ContactsHotkeysStore["openItem"];
   onClickBack?: FilesActionStore["onClickBack"];
+  getTfaType?: TfaStore["getTfaType"];
+  enableSelection: ContactsHotkeysStore["enableSelection"];
+  viewAs: PeopleStore["viewAs"];
+  membersSelection: UsersStore["selection"];
+  groupsSelection: GroupsStore["selection"];
 };
 
 const SectionBodyContent = (props: SectionBodyContentProps) => {
   const {
+    currentView,
     setPeopleSelection,
     setGroupsSelection,
     setPeopleBufferSelection,
@@ -82,11 +90,17 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     deselectAll,
     openItem,
     onClickBack,
+    getTfaType,
+    enableSelection,
+    viewAs,
+    membersSelection,
+    groupsSelection,
   } = props;
 
   const location = useLocation();
 
-  const contactsTab = getContactsView(location);
+  const selection =
+    currentView !== "groups" ? membersSelection : groupsSelection;
 
   useAccountsHotkeys({
     enabledHotkeys: enabledHotkeys!,
@@ -98,6 +112,9 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     deselectAll: deselectAll!,
     openItem: openItem!,
     onClickBack: onClickBack!,
+    enableSelection,
+    viewAs,
+    selection,
   });
 
   const onMouseDown = useCallback(
@@ -149,21 +166,24 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
   ]);
 
   useEffect(() => {
+    getTfaType && getTfaType();
     window.addEventListener("mousedown", onMouseDown);
 
     return () => window.removeEventListener("mousedown", onMouseDown);
-  }, [onMouseDown]);
+  }, [onMouseDown, getTfaType]);
 
-  return contactsTab !== "groups" ? <Users /> : <Groups />;
+  return currentView !== "groups" ? <Users /> : <Groups />;
 };
 
 export default inject(
   ({
     peopleStore,
     filesActionsStore,
+    tfaStore,
   }: {
     peopleStore: PeopleStore;
     filesActionsStore: FilesActionStore;
+    tfaStore: TfaStore;
   }) => {
     const {
       usersStore,
@@ -172,6 +192,7 @@ export default inject(
       contactsHotkeysStore,
 
       enabledHotkeys,
+      viewAs,
     } = peopleStore;
     const {
       isFiltered,
@@ -180,11 +201,13 @@ export default inject(
       selectUser,
       setSelection: setPeopleSelection,
       setBufferSelection: setPeopleBufferSelection,
+      selection: membersSelection,
     } = usersStore!;
 
     const {
       setSelection: setGroupsSelection,
       setBufferSelection: setGroupsBufferSelection,
+      selection: groupsSelection,
     } = groupsStore!;
 
     const { setChangeOwnerDialogVisible } = dialogStore!;
@@ -199,9 +222,13 @@ export default inject(
       selectAll,
       deselectAll,
       openItem,
+
+      enableSelection,
     } = contactsHotkeysStore!;
 
     const { onClickBack } = filesActionsStore;
+
+    const { getTfaType } = tfaStore;
 
     return {
       isFiltered,
@@ -223,6 +250,13 @@ export default inject(
       deselectAll,
       openItem,
       onClickBack,
+
+      getTfaType,
+
+      enableSelection,
+      viewAs,
+      membersSelection,
+      groupsSelection,
     };
   },
 )(

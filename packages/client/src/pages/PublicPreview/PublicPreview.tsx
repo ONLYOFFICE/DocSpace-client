@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { observer, inject } from "mobx-react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router";
 
 import api from "@docspace/shared/api";
 import { UrlActionType, ValidationStatus } from "@docspace/shared/enums";
@@ -132,7 +132,7 @@ const PublicPreview = ({
 
   return (
     <div>
-      {playlist.length > 0 && (
+      {playlist.length > 0 ? (
         <MediaViewer
           t={t}
           visible
@@ -146,7 +146,7 @@ const PublicPreview = ({
           extsImagePreviewed={extsImagePreviewed ?? DEFAULT_EXTS_IMAGE}
           onDownload={onDownloadMediaFile}
         />
-      )}
+      ) : null}
     </div>
   );
 };

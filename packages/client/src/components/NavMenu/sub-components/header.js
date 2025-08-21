@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,7 @@ import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { Link as LinkWithoutRedirect, useLocation } from "react-router-dom";
+import { Link as LinkWithoutRedirect, useLocation } from "react-router";
 import {
   isDesktop,
   NoUserSelect,
@@ -175,12 +175,10 @@ const HeaderComponent = ({
         needNavMenu={false}
         isDesktopView={isDesktopView}
       >
-        {currentProductId !== "home" && !isFormGallery && (
+        {currentProductId !== "home" && !isFormGallery ? (
           <HeaderCatalogBurger onClick={toggleArticleOpen} />
-        )}
-        {customHeader ? (
-          { customHeader }
-        ) : (
+        ) : null}
+        {customHeader || (
           <LinkWithoutRedirect className="header-logo-wrapper" to={defaultPage}>
             <img alt="logo" src={logo} className="header-logo-icon" />
           </LinkWithoutRedirect>

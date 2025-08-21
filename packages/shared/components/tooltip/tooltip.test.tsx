@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,11 +26,10 @@
 
 import React from "react";
 import { render, screen } from "@testing-library/react";
-
+import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 
 import { Text } from "../text";
-
 import { Tooltip } from ".";
 
 describe("<Tooltip />", () => {
@@ -41,38 +40,92 @@ describe("<Tooltip />", () => {
       </Tooltip>,
     );
 
-    expect(screen.queryByTestId("tooltip")).toBeInTheDocument();
+    expect(screen.getByTestId("tooltip")).toBeInTheDocument();
   });
 
-  // it("Tooltip componentDidUpdate() lifecycle test", () => {
-  //   const wrapper = mount(
-  //     <Tooltip>{<Text>You tooltip text</Text>}</Tooltip>,
-  //   ).instance();
-  //   wrapper.componentDidUpdate(wrapper.props, wrapper.state);
+  it("accepts custom className and style", () => {
+    render(
+      <Tooltip className="custom-tooltip" style={{ color: "red" }}>
+        <Text>Tooltip with custom styling</Text>
+      </Tooltip>,
+    );
 
-  //   expect(wrapper.props).toBe(wrapper.props);
-  // });
+    const tooltip = screen.getByTestId("tooltip");
+    expect(tooltip).toHaveClass("custom-tooltip");
+    expect(tooltip).toHaveStyle({ color: "red" });
+  });
 
-  // it("Tooltip componentDidUpdate() lifecycle test", () => {
-  //   const wrapper = mount(
-  //     <Tooltip>{<Text>You tooltip text</Text>}</Tooltip>,
-  //   ).instance();
-  //   wrapper.componentDidUpdate(wrapper.props, wrapper.state);
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.props).toBe(wrapper.props);
-  // });
+  it("renders with custom placement", () => {
+    render(
+      <Tooltip place="bottom">
+        <Text>Bottom placed tooltip</Text>
+      </Tooltip>,
+    );
 
-  // it("accepts className", () => {
-  //   const wrapper = mount(<Tooltip className="test" />);
+    const tooltip = screen.getByTestId("tooltip");
+    expect(tooltip).toBeInTheDocument();
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("className")).toEqual("test");
-  // });
+  it("renders with custom maxWidth", () => {
+    render(
+      <Tooltip maxWidth="300px">
+        <Text>Tooltip with custom width</Text>
+      </Tooltip>,
+    );
 
-  // it("accepts style", () => {
-  //   const wrapper = mount(<Tooltip style={{ color: "red" }} />);
+    const tooltip = screen.getByTestId("tooltip");
+    expect(tooltip).toBeInTheDocument();
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.getDOMNode().style).toHaveProperty("color", "red");
-  // });
+  it("handles click events when openOnClick is true", async () => {
+    const user = userEvent.setup();
+    render(
+      <div>
+        <div>
+          <div
+            data-tooltip-id="click-tooltip"
+            data-tooltip-content="Click-triggered tooltip"
+          >
+            Click me
+          </div>
+        </div>
+        <Tooltip id="click-tooltip" openOnClick />
+      </div>,
+    );
+
+    const tooltipTrigger = screen.getByText("Click me");
+
+    // Verify tooltip doesn't exist before click
+    expect(
+      screen.queryByText("Click-triggered tooltip"),
+    ).not.toBeInTheDocument();
+
+    await user.click(tooltipTrigger);
+
+    const tooltip = await screen.findByText("Click-triggered tooltip");
+    expect(tooltip).toBeInTheDocument();
+  });
+
+  it("renders with custom content using getContent", () => {
+    const getContent = () => "Dynamic content";
+    render(
+      <Tooltip getContent={getContent}>
+        <Text>Tooltip with dynamic content</Text>
+      </Tooltip>,
+    );
+
+    const tooltip = screen.getByTestId("tooltip");
+    expect(tooltip).toBeInTheDocument();
+  });
+
+  it("renders without arrow when noArrow is true", () => {
+    render(
+      <Tooltip noArrow>
+        <Text>Tooltip without arrow</Text>
+      </Tooltip>,
+    );
+
+    const tooltip = screen.getByTestId("tooltip");
+    expect(tooltip).toBeInTheDocument();
+  });
 });

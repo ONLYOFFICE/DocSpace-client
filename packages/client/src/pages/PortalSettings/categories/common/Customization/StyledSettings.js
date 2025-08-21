@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -138,6 +138,16 @@ const StyledSettingsComponent = styled.div`
     @media ${mobile} {
       padding-inline-end: 8px;
     }
+
+    ${(props) =>
+      props.withoutExternalLink &&
+      css`
+        padding-bottom: 16px;
+
+        @media ${mobile} {
+          padding-inline-end: 16px;
+        }
+      `};
   }
 
   @media ${mobile} {

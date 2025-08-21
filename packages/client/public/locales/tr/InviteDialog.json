@@ -1,18 +1,22 @@
 {
   "AddManually": "Manuel olarak ekle",
   "EmailErrorMessage": "E-posta adresi geçerli değil. E-postayı çift tıklayarak düzenleyebilirsiniz.",
+  "EmailErrorMessageUserNotFound": "Kullanıcı bulunamadı. E-postayı çift tıklayarak düzenleyebilirsiniz.",
   "GroupMaxAvailableRoleWarning": "Gruplar bir odaya en fazla {{roleName}} rolü ile eklenebilir. Fakat başarılı bir şekilde eklendikten sonra gruptaki bireysel kullanıcıların rolünü değiştirebilirsiniz.",
   "InvitationLanguage": "Davet dili",
   "InviteMembersManuallyDescription": "Yeni üyeleri {{productName}} ürününe e-posta yoluyla kişisel olarak davet edin",
   "InviteMembersSearchPlaceholder": "Üyeleri e-posta yoluyla davet edin",
-  "InviteToRoomManuallyInfo": "Mevcut {{productName}} kişilerini ekleyin. Veya yeni kullanıcıları e-posta yoluyla şahsen davet edin. Yeni kullanıcılar Konuklar listenize eklenecektir.",
+  "InviteToRoomAddPlaceholder": "İsim veya e-posta ile insanları ekleyin.",
+  "InviteToRoomManuallyInfoGuest": "Mevcut {{productName}} kişilerini ekleyin. Veya yeni kullanıcıları e-posta yoluyla bireysel olarak davet edin. Yeni kullanıcılar Misafirler listenize eklenecektir.",
+  "InviteToRoomManuallyInfoMembers": "Mevcut {{productName}} üyelerini odaya ekleyin.",
   "InviteToRoomSearchPlaceholder": "İsim veya e-postaya ile ara ve davet et",
   "InviteViaLink": "Bağlantı yoluyla davet et",
   "InviteViaLinkDescriptionAccounts": "{{productName}}'te kendi kendine yetkilendirme için evrensel bir bağlantı oluştur",
-  "InviteViaLinkDescriptionRoom": "Odada kendi kendine yetkilendirme için evrensel bir bağlantı oluştur",
+  "InviteViaLinkDescriptionRoomGuest": "Oda içinde misafir olarak kendi yetkilendirmesi için evrensel bir bağlantı oluşturun.",
+  "InviteViaLinkDescriptionRoomMembers": "{{productName}} üyeleri için odada kendi yetkilendirmesi için evrensel bir bağlantı oluşturun.",
   "LinkCopySuccess": "Bağlantı kopyalandı",
-  "ResetChange": "Değişikliği sıfırla",
   "SendInvitation": "Davetiye gönder",
   "UserMaxAvailableRoleWarning": "Konuklar ve Kullanıcılar Oda yöneticisi olarak atanamaz. Belirtilen rol için yalnızca Oda ve {{productName}} yöneticileri uygundur.",
-  "UsersAlreadyAdded": "Bazı kullanıcılar zaten eklenmiş"
+  "UsersAlreadyAdded": "Bazı kullanıcılar zaten eklenmiş",
+  "UsersCannotBeAdded": "Devre dışı bırakılmış kişiler bir odaya eklenemez."
 }

@@ -1,0 +1,268 @@
+{
+  "key_path": "BackToSignIn",
+  "content": "Back to sign in",
+  "content_en_sha1_hash": "4da821676b2feab814a3b5cd6368c0d609a84c02",
+  "created_at": "2025-05-19T21:30:57.226Z",
+  "updated_at": "2025-05-24T14:57:00.200Z",
+  "comment": {
+    "text": "This translation key is used for the label of a button that directs users to sign in. It appears on-screen when clicking the \"Back to sign in\" button in a tenant list interface.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:48.488Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/login/src/app/(root)/tenant-list/page.client.tsx",
+      "line_number": 68,
+      "context": "<Item portal={item} key={item.portalName} baseDomain={baseDomain} />\n ))}\n </div>\n <Button\n onClick={goToLogin}\n label={t(\"BackToSignIn\")}\n className=\"back-button\"\n />\n </StyledTenantList>\n );\n };",
+      "module": "/packages/login"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Daxil olmaq üçün geri qayıdın' is a literal translation but sounds unnatural in Azerbaijani. A more natural phrasing would be 'Giriş etmək üçün geri qayıdın' or 'Daxil olmaq üçün geri dönün'.",
+          "suggestion": "Giriş etmək üçün geri qayıdın"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Retour à la page de connexion\" is a bit too literal and formal for a 'Back to sign in' button. While technically correct, it doesn't convey the same level of casualness as the English original.",
+          "suggestion": "Retour à la connexion"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Վերադառնալ մուտք գործելու համար\" is a bit verbose for a button label. A more concise and natural translation would be better.",
+          "suggestion": "Վերադառնալ մուտք"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Atpakaļ uz pierakstīties lapu' is a literal translation and not the most natural way to express 'Back to sign in' in Latvian. It sounds somewhat awkward.",
+          "suggestion": "Atpakaļ uz pieteikšanās lapu"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Terug naar aanmelden' isn't the most natural or accurate translation for 'Back to sign in'. 'Aanmelden' implies registering, while 'sign in' refers to logging back into an existing account.  A more suitable translation would convey the action of returning to a login screen.",
+          "suggestion": "Terug naar inloggen"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Powrót do strony logowania\" is a bit verbose and formal for a 'Back to sign in' button. It translates to 'Return to the login page'. A more natural and concise option would be preferable.",
+          "suggestion": "Powrót do logowania"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"පුරනය වීමට ආපසු\" (puranaya vimite apasuu) doesn't accurately convey the meaning of \"Back to sign in\". It translates to something like 'To return to the old/ancient'.",
+          "suggestion": "A more accurate translation would be \"ඇSignIn කිරීමට తిరిగి\" (Ashin karamkuru thiriyata) or \"SignIn කිරීමට නැවත\" (SignIn karamkuru naewatha)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Назад на пријаву\" is understandable, a more natural and common translation of 'Back to sign in' in Serbian (Cyrillic) would be 'Vrati se na prijavu'.  'Назад на пријаву' sounds a little literal and less idiomatic.",
+          "suggestion": "Vrati se na prijavu"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Nazad na prijavu\" is understandable, a more natural and accurate translation of \"Back to sign in\" would be \"Vrati se na prijavu\". \"Nazad\" implies going back to a previous location, while \"Vrati se\" more accurately conveys returning to the sign-in process.",
+          "suggestion": "Vrati se na prijavu"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation 'Oturum açmaya geri dön' is a literal translation of 'Back to sign in' but doesn't quite capture the natural flow in Turkish. A more idiomatic translation would be something like 'Giriş yapmaya geri dön' or 'Tekrar giriş yap'.",
+          "suggestion": "Giriş yapmaya geri dön"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

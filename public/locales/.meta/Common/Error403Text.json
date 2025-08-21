@@ -1,0 +1,232 @@
+{
+  "key_path": "Error403Text",
+  "content": "Sorry, access denied.",
+  "content_en_sha1_hash": "23a068696696d114560f0f6f48110a50081a9811",
+  "created_at": "2025-05-19T21:30:45.045Z",
+  "updated_at": "2025-05-26T07:57:32.902Z",
+  "comment": {
+    "text": "The Error403Text translation key is used to display a generic \"access denied\" message when user access is restricted in UI components, such as error dialogs or container headers. It appears on an individual basis depending on the context where it's rendered. Translators should provide alternative translations that convey a similar meaning in their respective languages.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:36:22.561Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/errors/Error403.tsx",
+      "line_number": 35,
+      "context": "import ErrorContainer from \"../error-container/ErrorContainer\";\n \n export const Error403 = () => {\n const { t } = useTranslation(\"Common\");\n \n return <ErrorContainer headerText={t(\"Error403Text\")} />;\n };",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Съжаляваме, достъпът отказан.\" is a literal translation that sounds unnatural in Bulgarian. A more natural and common phrasing for 'Sorry, access denied' would be something like 'Достъпът е отказан.' or 'Нямате право на достъп.'",
+          "suggestion": "Consider 'Достъпът е отказан.' or 'Нямате право на достъп.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Ներողություն, մատչումն արգելված է.\" is a literal translation but doesn't convey the politeness of 'Sorry'.  'Access denied' is more accurately conveyed with a phrase that includes the concept of prohibition or lack of permission.",
+          "suggestion": "Consider alternatives like \"Ցավոք, մերժվել է.\" (Unfortunately, rejected) or \"Մերժված է հասանելիությունը.\" (Access is denied)."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Lao word 'ປະຕິເສດ' is sometimes written as 'ປະຕິເສດ'. While both are understandable, 'ປະຕິເສດ' is more common.",
+          "suggestion": "ຂໍ້ອະໄພ.ການເຂົ້າເຖິງຖືກປະຕິເສດ → ຂໍ້ອະໄພ.ການເຂົ້າເຖິງຖືກປະຕິເສດ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'ප්‍රවේශය ප්‍රතික්‍ෂේපිතයි.' while technically correct (meaning 'access rejected'), is a formal and somewhat stiff phrasing for a simple 'Sorry, access denied.'  A more natural and user-friendly translation would be preferable for a typical error message.",
+          "suggestion": "Consider a more colloquial and user-friendly translation, such as 'අවසර නැහැ.' (avasar nae - No permission) or 'ඔයාට අවසර නැහැ.' (oyata avasar nae - You don't have permission)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

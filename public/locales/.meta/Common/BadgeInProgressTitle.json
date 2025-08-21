@@ -1,0 +1,461 @@
+{
+  "key_path": "BadgeInProgressTitle",
+  "content": "Your completion is recorded, keep follow up of form.",
+  "content_en_sha1_hash": "746e00295cb7d1b12dcf1d38f3f1f442025f74ce",
+  "created_at": "2025-05-19T21:30:43.207Z",
+  "updated_at": "2025-08-12T19:46:26.405Z",
+  "comment": {
+    "text": "This translation key is used for the \"In Progress\" status badge in a file filling form. It appears on the form's status indicator and displays when the form is currently being processed. The translated text will be shown to users indicating that their completion has been recorded and they should follow up with the form.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:37:16.161Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/utils/index.ts",
+      "line_number": 294,
+      "context": "case FileFillingFormStatus.Draft:\n return t(\"Common:BadgeDraftTitle\");\n case FileFillingFormStatus.YourTurn:\n return t(\"Common:BadgeYourTurnTitle\");\n case FileFillingFormStatus.InProgress:\n return t(\"Common:BadgeInProgressTitle\");\n case FileFillingFormStatus.Stopped:\n return t(\"Common:BadgeStoppedTitle\");\n case FileFillingFormStatus.Completed:\n return t(\"Common:BadgeCompletedTitle\");\n default:",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'keep follow up of form' is not accurately translated. 'Keep follow up' is awkward and 'form' is generic. A more natural translation would convey the idea of checking the form's status or progress.",
+          "suggestion": "تم تسجيل إكمالكم، يُرجى التحقق من حالة النموذج."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'keep follow up of form' is not accurately translated. 'Keep follow up' is awkward phrasing. It should be something like 'dəvamin ol' or 'yenidən baxın' depending on the intended meaning.",
+          "suggestion": "Tamamlamağınız qeydə alınır, formaya yenidən baxın."
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct, the translation sounds a little abrupt. Consider adding a more polite connective.",
+          "suggestion": "Tamamlamağınız qeydə alınır, lakin formanı izləməyi unutmayın."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Your completion is recorded' is not perfectly captured by 'Завършването ви се записва'. A more accurate translation might be 'Вашето завършване е записано' or 'Резултатите Ви са записани'. The current translation implies a continuous action, whereas 'recorded' suggests a one-time action.",
+          "suggestion": "Вашето завършване е записано"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "'keep follow up of form' is an awkward phrasing. 'keep follow up' isn't idiomatic English. A more natural translation would be 'продължете да следите формуляра'. While the provided translation isn't *wrong*, it's not the most natural way to convey the intended meaning.",
+          "suggestion": "продължете да следите формуляра"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Your completion is recorded, keep follow up of form\" is somewhat awkward and doesn't quite convey the intended meaning naturally. A more natural English equivalent would be something like \"Your progress is saved, please continue following the form.\" The Czech translation, while grammatically correct, doesn't capture the nuance of encouragement implied in the original English. \"Sledujte formulář\" is literal but doesn't have the same feeling of guidance.",
+          "suggestion": "Consider revising the English to 'Your progress is saved, please continue following the form.' and then re-translate to Czech. Alternatively, a more idiomatic Czech translation might be 'Vaše vyplnění je uloženo, pokračujte s formulářem.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Das Ausfüllen des Formulars wird aufgezeichnet. Behalten Sie den Überblick über das Formular.' doesn't accurately convey the meaning of 'Your completion is recorded, keep follow up of form.'  'Ausfüllen' implies 'filling out,' while 'completion' is a more general state. 'Behalten Sie den Überblick über das Formular' is a bit clunky and doesn't capture the 'follow up' aspect.",
+          "suggestion": "Eine präzisere Übersetzung wäre: 'Ihre Fertigstellung wird aufgezeichnet. Bitte behalten Sie den Fortschritt im Auge.' or 'Ihre Fertigstellung wird erfasst. Bitte verfolgen Sie den Status des Formulars weiter.'"
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, 'Behalten Sie den Überblick über das Formular' sounds slightly formal and could be simplified for better user experience.",
+          "suggestion": "Consider a more conversational phrasing like 'Bitte behalten Sie den Fortschritt im Auge.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"keep follow up of form\" is not accurately translated. \"Follow up of form\" is awkward English. A more natural translation would convey the meaning of monitoring or checking on the form’s progress.",
+          "suggestion": "Η συμπλήρωσή σας καταγράφεται, παρακολουθήστε την εξέλιξη της φόρμας."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Your completion is recorded\" could be better translated to imply the progress or status of the submission.",
+          "suggestion": "Η υποβολή σας έχει καταγραφεί, παρακολουθήστε την εξέλιξη της φόρμας."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Your completion is recorded' is more accurately conveyed as 'Your progress is recorded' or 'Your submission has been recorded'. 'Finalización' implies a finished product, while the English suggests ongoing progress.",
+          "suggestion": "Su progreso ha sido registrado"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'keep follow up of form' is awkward. A more natural Spanish equivalent would be 'haga el seguimiento del formulario' or 'revise el formulario'.",
+          "suggestion": "haga el seguimiento del formulario"
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Suorituksesi tallennetaan, seuraa lomaketta' doesn't fully capture the meaning of 'Your completion is recorded, keep follow up of form.' The English phrasing suggests a continuation of the process or a need to track progress. 'Seuraa lomaketta' (follow the form) is too literal and doesn't convey the idea of ongoing follow-up.",
+          "suggestion": "Suorituksesi on tallennettu, pidä kirjaa lomakkeesta."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Your completion is recorded' is better translated as 'Votre accomplissement est enregistré' or 'Votre progression est enregistrée' in French, rather than 'Votre participation est enregistrée'. 'Participation' implies involvement, not necessarily completion.",
+          "suggestion": "Votre accomplissement est enregistré, continuez à suivre le formulaire."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'keep follow up of form' is not idiomatic in French. A better translation would be 'suivre l'état d'avancement du formulaire' or simply 'suivre le formulaire'.",
+          "suggestion": "continuez à suivre le formulaire."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ձեր լրացրած ձևը պահպանված է։ Շարունակեք հետևել' doesn't fully convey the original meaning 'Your completion is recorded, keep follow up of form.'. It translates 'form' as 'ձև', which is correct, but the phrase 'keep follow up of form' is not naturally expressed. It sounds a bit literal.",
+          "suggestion": "Ձեր լրացրած ձևը պահպանվել է։ Հետևեք ձևին։ (Your completed form has been saved. Follow the form.) Alternatively: Ձեր լրացրած ձևը պահպանվել է։ Ապահովեք ձևի հետագծում։ (Your completed form has been saved. Ensure form follow-up.)"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Il tuo completamento è stato registrato, tieni traccia del modulo' is a literal translation, but doesn't quite capture the nuance of 'Your completion is recorded, keep follow up of form.' A more natural Italian phrasing would be 'La tua compilazione è stata registrata, tieni traccia del modulo' or 'Abbiamo registrato la tua compilazione, tieni traccia del modulo.' 'Compilazione' is a better fit for 'completion' in this context.",
+          "suggestion": "La tua compilazione è stata registrata, tieni traccia del modulo."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"keep follow up of form\" is awkward and not idiomatic. A more natural translation would be something like \"continue to check the form\" or \"please continue to monitor the form.\"",
+          "suggestion": "提出が記録されました。フォームの進捗状況をご確認ください。"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, using a more polite phrasing for a user notification is preferable. The current phrasing can feel slightly abrupt.",
+          "suggestion": "提出が記録されました。フォームのフォローアップにつきましては、引き続きご確認ください。"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'keep follow up of form' is awkward. A more natural translation would be 'continue to follow up on the form' or 'continue to track the form'. The current translation, while understandable, isn't idiomatic.",
+          "suggestion": "완료가 기록되었습니다. 양식의 진행 상황을 계속 확인하세요."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Your completion is recorded\" is not accurately reflected in the Lao translation. A more accurate translation would emphasize that the progress is being tracked or saved.",
+          "suggestion": "ການບັນທຶກຄວາມຄືບໜ້າຂອງທ່ານ"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"keep follow up of form\" is not idiomatic Lao. It's too literal a translation of the English.",
+          "suggestion": "ກະລຸນາຕິດຕາມແບບຟອມ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Your completion is recorded, keep follow up of form\" is not accurately translated. The original implies that the system is tracking the user's progress. \"Aizpildīšana no jūsu puses ir reģistrēta, sekojiet līdzi veidlapas aizpildīšanas statusam\" literally translates to 'Your filling is registered, follow the status of the form filling.' This isn't as natural or informative as the original.",
+          "suggestion": "Considering the intent of the original English, a better translation might be something like: 'Jūsu pildījums ir reģistrēts, lūdzu, sekojiet statusam.' or 'Jūsu darbība ir reģistrēta, lūdzu, sekojiet statusam.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'keep follow up of form' is not accurately translated. 'Keep follow up of form' implies an active tracking or monitoring.  The Dutch 'houd het formulier in de gaten' is closer to 'keep an eye on the form' which conveys a similar meaning, but could be more precisely translated to convey the sense of 'tracking' or 'monitoring'.",
+          "suggestion": "Het door u ingevulde formulier wordt geregistreerd, volg de voortgang van het formulier."
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ukończenie przez Ciebie wypełniania jest rejestrowane, monitoruj formularz' is not a natural or accurate rendering of 'Your completion is recorded, keep follow up of form.'.  The phrase 'Ukończenie przez Ciebie wypełniania' is overly literal and awkward.",
+          "suggestion": "A more natural translation would be something like 'Rejestrujemy Twoje postępy, śledź formularz' or 'Twój postęp jest rejestrowany, śledź formularz.'"
+        },
+        {
+          "type": "grammar",
+          "description": "The use of 'Ukończenie przez Ciebie wypełniania' is grammatically complex and potentially confusing to a Polish speaker.",
+          "suggestion": "Simplify the sentence structure.  Consider alternatives like 'Rejestrujemy Twoje postępy...' or 'Twój postęp jest rejestrowany...'"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Your completion is recorded, keep follow up of form\" is a bit awkward. A more natural translation would convey the idea that the user's progress is being tracked and they should continue to monitor the form.",
+          "suggestion": "A sua conclusão foi registada, continue a acompanhar o formulário."
+        },
+        {
+          "type": "grammar",
+          "description": "While 'registada' is grammatically correct, 'registado' (masculine) might be more appropriate depending on the context of 'formulário'. It is advisable to match the gender of the verbs and nouns.",
+          "suggestion": "A sua conclusão foi registado, continue a acompanhar o formulário."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ceea ce ați completat s-a salvat, urmăriți starea de completare a formularului' is not a direct or natural translation of 'Your completion is recorded, keep follow up of form.'  'Urmăriți starea de completare a formularului' is overly literal and complex. It doesn't convey the simple instruction to 'keep following up'.",
+          "suggestion": "Consider a more natural and concise translation like: 'Completarea ta a fost înregistrată, te rugăm să verifici stadiul formularului' or 'Completarea ta a fost salvată, verifică stadiul formularului.'"
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, 'starea de completare a formularului' is a bit clunky. It's a more complex phrasing than necessary.",
+          "suggestion": "Simplify to 'stadiul formularului' or 'statusul formularului' (using the English loanword is acceptable and common in Romanian for technical terms)."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Your completion is recorded' is not accurately conveyed by 'Ваше заполнение сохранено'. 'Заполнение' implies filling out, not the completion itself. A more accurate translation would emphasize completion or submission.",
+          "suggestion": "Ваш ответ сохранен"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'keep follow up of form' is awkwardly translated as 'продолжить отслеживание формы'. A more natural and precise translation would emphasize monitoring or checking the form's status.",
+          "suggestion": "Продолжайте проверять статус формы"
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content 'Your completion is recorded, keep follow up of form.' implies that the system is tracking the user's progress and they should continue to monitor it. The Slovak translation 'Vaše vyplnenie formulára bolo zaznamenané. Sledujte formulár ďalej.' literally translates to 'Your form filling has been recorded. Follow the form further.' which doesn't convey the same sense of progress tracking and ongoing monitoring. A better translation would emphasize the system's tracking and the user's need to keep an eye on it.",
+          "suggestion": "Vaše vyplnenie bolo zaznamenané. Sledujte stav formulára."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Vaša izpolnitev je zabeležena, še naprej spremljajte obrazec.' is not an accurate reflection of the English 'Your completion is recorded, keep follow up of form.'.  'Izpolnitev' implies filling out, not completion. 'Spremljajte' is a bit formal. The phrase 'keep follow up of' is awkward in English.",
+          "suggestion": "Vaš napredek je zabeležen, nadaljujte z izpolnjevanjem obrazca."
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the use of 'še naprej' feels slightly unnatural in this context.  'Nadaljujte' flows better.",
+          "suggestion": "Use 'nadaljujte' instead of 'še naprej'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Your completion is recorded, keep follow up of form.\" implies that the user's progress is being tracked and they should continue monitoring the form. The Serbian translation \"Ваше попуњавање је забележено, пратите образац.\" literally translates to 'Your filling is recorded, follow the form.' It doesn't convey the sense of ongoing progress or the need for continued monitoring.  'Popunjavanje' is more about the act of filling, rather than the state of completion.",
+          "suggestion": "Ваше попуњавање је забележено, наставите да пратите образац."
+        },
+        {
+          "type": "spelling",
+          "description": "While 'образац' is technically correct, 'образац' could be improved in a more natural-sounding sentence.",
+          "suggestion": "Наставите са праћењем обрасца."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Your completion is recorded\" is not accurately translated by \"Vaše popunjavanje je zabeleženo.\"  \"Completion\" implies finishing something, whereas \"popunjavanje\" can mean filling out or completing. While not strictly wrong, it's not the best equivalent.",
+          "suggestion": "Vaš unos je zabeležen, pratite obrazac."
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct, the Serbian sentence sounds slightly awkward due to the direct translation. A more natural flow would be better.",
+          "suggestion": "Vaš unos je zabeležen. Pratite obrazac."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content 'Your completion is recorded, keep follow up of form' is not perfectly captured by 'Formun tamamlanması kaydedildi, formun takibini yapmaya devam edin.'. A more accurate translation would emphasize the user's responsibility for ongoing monitoring, as the original suggests. The current translation emphasizes the recording of completion, but not the continued follow-up.",
+          "suggestion": "Formun tamamlanması kaydedildi, lütfen formun takibini yapmaya devam edin."
+        },
+        {
+          "type": "formatting",
+          "description": "The Turkish translation uses repetition of 'formun'. While grammatically correct, it can be slightly clunky.  Improving flow might enhance user experience.",
+          "suggestion": "Formun tamamlanması kaydedildi, lütfen formun takibini yapmaya devam edin."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'keep follow up of form' is awkwardly translated. 'Keep follow up' doesn't directly translate to a natural Ukrainian expression.",
+          "suggestion": "Ваші відповіді записані, перевіряйте подальші оновлення у формі."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'у формі' feels slightly less natural than alternatives. While not incorrect, other options might read better.",
+          "suggestion": "Ваші відповіді записані, перевіряйте подальші оновлення форми."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'keep follow up of form' is awkwardly translated. 'Follow up of' isn't idiomatic Vietnamese. A more natural translation would be 'theo dõi' or 'kiểm tra' (check).",
+          "suggestion": "Việc hoàn thành của bạn đã được ghi lại, hãy tiếp tục theo dõi/kiểm tra biểu mẫu."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'keep follow up of form' is not accurately translated. 'Follow up' should be '跟进' (gēn jìn) but 'of form' isn't explicitly represented. A more natural translation would incorporate the object being followed up on.",
+          "suggestion": "您的完成情况已被记录，请持续跟进表单进度。"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

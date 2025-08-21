@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,65 +25,64 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { ContextMenuModel } from "../context-menu";
-import { TDirectionY } from "../../types";
+import { type TDirectionX, TDirectionY } from "../../types";
 
 export type TDropdownType = "alwaysDashed" | "appearDashedAfterHover";
 
-export interface SimpleLinkWithDropdownProps {
+export type SimpleLinkWithDropdownProps = {
+  /** Sets font weight to bold */
   isBold?: boolean;
-  fontSize?: string;
-  fontWeight?: number;
-  isTextOverflow?: boolean;
-  isHovered?: boolean;
-  isSemitransparent?: boolean;
-  color?: string;
-  title?: string;
-  isDisabled?: boolean;
-  dropdownType?: TDropdownType;
-  data?: ContextMenuModel[];
-  children?: React.ReactNode;
-}
-
-export interface LinkWithDropDownProps {
-  /** Link color in all states - hover, active, visited */
-  color?: string;
-  /** Array of objects, each can contain `<DropDownItem />` props */
-  data?: ContextMenuModel[];
-  /** Dropdown type 'alwaysDashed' always displays a dotted style and an arrow icon,
-   * appearDashedAfterHover displays a dotted style and icon arrow only  on hover */
-  dropdownType?: TDropdownType;
-  /** Displays the expander */
-  withExpander?: boolean;
   /** Link font size */
   fontSize?: string;
   /** Link font weight */
   fontWeight?: number;
-  /** Sets font weight */
-  isBold?: boolean;
-  /** Sets css-property 'opacity' to 0.5. Usually applied for the users with "pending" status */
-  isSemitransparent?: boolean;
-  /** Activates or deactivates _text-overflow_ CSS property with ellipsis (' … ') value */
+  /** Activates text-overflow with ellipsis */
   isTextOverflow?: boolean;
-  /** Link title */
-  title?: string;
-  /** Sets open prop */
-  isOpen?: boolean;
-  /** Children element */
-  children?: React.ReactNode;
-  /** Accepts css class */
-  className?: string;
-  /** Sets the classNaame of the drop down */
-  dropDownClassName?: string;
-  /** Accepts id */
-  id?: string;
-  /** Accepts css style */
-  style?: React.CSSProperties;
-  /** Sets disabled view */
-  isDisabled?: boolean;
-  /** Sets the opening direction relative to the parent */
-  directionY?: TDirectionY;
-  /** Displays the scrollbar */
-  hasScroll?: boolean;
+  /** Indicates if the link is in hover state */
   isHovered?: boolean;
-  manualWidth?: string | undefined;
-}
+  /** Sets opacity to 0.5 for pending status */
+  isSemitransparent?: boolean;
+  /** Link color */
+  color?: string;
+  /** Link title attribute */
+  title?: string;
+  /** Disables the link */
+  isDisabled?: boolean;
+  /** Dropdown display type */
+  dropdownType?: TDropdownType;
+  /** Dropdown menu items */
+  data?: ContextMenuModel[];
+  /** Link content */
+  children?: React.ReactNode;
+};
+
+export type LinkWithDropDownProps = SimpleLinkWithDropdownProps & {
+  /** Displays the expander icon */
+  withExpander?: boolean;
+  /** Controls dropdown visibility */
+  isOpen?: boolean;
+  /** Additional CSS class for the link */
+  className?: string;
+  /** Additional CSS class for the dropdown */
+  dropDownClassName?: string;
+  /** HTML id attribute */
+  id?: string;
+  /** Additional inline styles */
+  style?: React.CSSProperties;
+  /** Sets the dropdown opening horizontal direction */
+  directionX?: TDirectionX;
+  /** Sets the dropdown opening vertical direction */
+  directionY?: TDirectionY;
+  /** Enables scrollbar in dropdown */
+  hasScroll?: boolean;
+  /** Manual width for the dropdown */
+  manualWidth?: string;
+  /** Is aside */
+  isAside?: boolean;
+  /** Without blur background */
+  withoutBackground?: boolean;
+  /** Fix dropdown direction regardless of available space */
+  fixedDirection?: boolean;
+  /** Use default mode for dropdown positioning */
+  isDefaultMode?: boolean;
+};

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,8 +28,7 @@ import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
-import { Box } from "@docspace/shared/components/box";
-import { RowContent } from "@docspace/shared/components/row-content";
+import { RowContent } from "@docspace/shared/components/rows";
 import {
   ComboBox,
   ComboBoxSize,
@@ -51,6 +50,12 @@ const StyledRowContent = styled(RowContent)`
   .rowMainContainer {
     height: 100%;
     width: 100%;
+  }
+
+  .content-data-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .username {
@@ -115,16 +120,11 @@ const UsersRowContent = (props: TypeSelectRowContentProps) => {
   ) || { key: "", label: "" };
 
   const contentData = [
-    <Box
-      key={id}
-      displayProp="flex"
-      justifyContent="space-between"
-      alignItems="center"
-    >
-      <Box>
+    <div className="content-data-box" key={id}>
+      <div>
         <Text className="username">{displayName}</Text>
         <Text className="user-email">{email}</Text>
-      </Box>
+      </div>
 
       <div ref={roleSelectorRef}>
         <ComboBox
@@ -137,9 +137,10 @@ const UsersRowContent = (props: TypeSelectRowContentProps) => {
           displaySelectedOption
           modernView
           manualWidth="auto"
+          dataTestId="user_type_combobox"
         />
       </div>
-    </Box>,
+    </div>,
   ];
 
   return (

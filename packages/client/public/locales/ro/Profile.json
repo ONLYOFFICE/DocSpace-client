@@ -1,10 +1,8 @@
 {
   "ActiveSessions": "Sesiuni active",
   "AutoDeleteTitle": "Toate sesiunile vor fi șterse automat în termen de 60 de zile.",
-  "ChangeEmailSuccess": "Adresa e-mail a fost modificată cu succes",
   "ChangePasswordAfterLoggingOut": "Modificare parolă după deconectare",
   "ConnectSocialNetworks": "Conectați-vă reţelele sociale",
-  "DarkTheme": "Tema întunecată",
   "DescriptionForSecurity": "Schimbaţi-vă parola pentru mai multă siguranţă.",
   "DesktopTheme": "Sincronizarea cu parametrii editorului pentru desktop",
   "DesktopThemeDescription": "Comutați automat între tema luminoasă şi întunecată în funcție de tema actuală a editorului pentru desktop.",
@@ -13,7 +11,6 @@
   "ErrorAccountAlreadyUse": "Contul asociat este deja utilizat de un alt utilizator",
   "FileManagement": "Gestionarea fișierelor",
   "InterfaceTheme": "Tema interfeței",
-  "LightTheme": "Tema luminoasă",
   "LogoutActiveConnection": "Deconectează conexiunea activă",
   "LogoutAllActiveSessionsDescription": "Toate conexiunile active vor fi deconectate, cu excepţia acestei conexiuni, deoarece ea este în curs de utilizare.",
   "LogoutBtn": "Deconectare",

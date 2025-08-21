@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,7 @@
 
 import styled from "styled-components";
 
-import { Row } from "@docspace/shared/components/row";
+import { Row } from "@docspace/shared/components/rows";
 import { Text } from "@docspace/shared/components/text";
 import { mobile } from "@docspace/shared/utils";
 
@@ -93,9 +93,7 @@ const StyledDiscSpaceUsedComponent = styled.div`
   .disk-space_content {
     display: grid;
     grid-template-columns: 1fr 16px;
-    background: ${(props) =>
-      props.theme.client.settings.payment.backgroundColor};
-    padding: 12px 16px;
+
     border-radius: 6px;
 
     .disk-space_size-info {
@@ -125,7 +123,8 @@ const StyledDiagramComponent = styled.div`
     display: flex;
     background: ${(props) =>
       props.theme.client.settings.payment.backgroundColor};
-    border-radius: 29px;
+    border-radius: 46px;
+    overflow: hidden;
   }
   .diagram_description {
     display: flex;
@@ -155,11 +154,6 @@ const StyledFolderTagSection = styled.div`
     `border-inline-end: 1px solid ${props.theme.client.settings.payment.backgroundColor}`};
   background: ${(props) => props.color};
   width: ${(props) => `${props.width}%`};
-
-  &:first-of-type {
-    border-start-start-radius: 46px;
-    border-end-start-radius: 46px;
-  }
 `;
 
 const StyledFolderTagColor = styled.div`
@@ -230,12 +224,12 @@ const StyledSimpleFilesRow = styled(Row)`
 const StyledMainInfo = styled.div`
   display: flex;
   flex-wrap: wrap;
-  background: ${(props) => props.theme.client.settings.payment.backgroundColor};
+
   border-radius: 6px;
 
   column-gap: 24px;
   row-gap: 12px;
-  padding: 12px;
+  padding-right: 12px;
   p {
     color: ${(props) =>
       props.theme.client.settings.storageManagement.grayBackgroundText};

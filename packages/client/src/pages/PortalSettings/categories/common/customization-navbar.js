@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { withTranslation } from "react-i18next";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
@@ -33,8 +33,9 @@ import { inject, observer } from "mobx-react";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 
 import { injectDefaultTheme } from "@docspace/shared/utils";
+import { MobileCategoryWrapper } from "@docspace/shared/components/mobile-category-wrapper";
+
 import LoaderCustomizationNavbar from "./sub-components/loaderCustomizationNavbar";
-import MobileCategoryWrapper from "../../components/MobileCategoryWrapper";
 
 const StyledComponent = styled.div.attrs(injectDefaultTheme)`
   .combo-button-label {
@@ -49,6 +50,7 @@ const CustomizationNavbar = ({
   isLoadedPage,
   isSettingPaid,
   enablePortalRename,
+  isEnterprise,
 }) => {
   const isLoadedSetting = tReady;
   const navigate = useNavigate();
@@ -86,24 +88,42 @@ const CustomizationNavbar = ({
         withPaidBadge={!isSettingPaid}
         badgeLabel={t("Common:Paid")}
       />
-      {enablePortalRename && (
+      {enablePortalRename ? (
         <MobileCategoryWrapper
           title={t("PortalRenaming")}
           subtitle={t("PortalRenamingNavDescription")}
           url="/portal-settings/customization/general/portal-renaming"
           onClickLink={onClickLink}
+          withPaidBadge={!isSettingPaid}
+          badgeLabel={t("Common:Paid")}
         />
-      )}
+      ) : null}
+      <MobileCategoryWrapper
+        title={t("ConfigureDeepLink")}
+        subtitle={t("ConfigureDeepLinkDescription")}
+        url="/portal-settings/customization/general/configure-deep-link"
+        onClickLink={onClickLink}
+      />
+      {isEnterprise ? (
+        <MobileCategoryWrapper
+          title={t("AdManagement")}
+          subtitle={t("AdManagementDescription")}
+          url="/portal-settings/customization/general/ad-management"
+          onClickLink={onClickLink}
+        />
+      ) : null}
     </StyledComponent>
   );
 };
 
-export default inject(({ common, settingsStore }) => {
+export default inject(({ common, settingsStore, currentTariffStatusStore }) => {
   const { enablePortalRename } = settingsStore;
   const { setIsLoadedCustomizationNavbar } = common;
+  const { isEnterprise } = currentTariffStatusStore;
   return {
     setIsLoadedCustomizationNavbar,
     enablePortalRename,
+    isEnterprise,
   };
 })(
   withCultureNames(

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -47,7 +47,7 @@ const openDeepLink = (
 ) => {
   const time = isSafari ? 3000 : 1000;
   let timeout: NodeJS.Timeout;
-  let interval: NodeJS.Timer;
+  let interval: NodeJS.Timeout;
   let visible: DocumentVisibilityState = "visible";
 
   const handleOpen = () => {
@@ -56,7 +56,7 @@ const openDeepLink = (
   };
   const handleResponse = () => {
     if (visible === "visible") return options?.onFail?.();
-    clearInterval(interval);
+    if (interval) clearInterval(interval);
     handleOpen();
   };
 
@@ -80,16 +80,28 @@ const openDeepLink = (
   }
 };
 
+export const redirectToStore = (deepLinkConfig?: TDeepLinkConfig) => {
+  const nav = navigator.userAgent;
+  const isIOS = nav.includes("iPhone;") || nav.includes("iPad;");
+
+  const storeUrl = isIOS
+    ? `https://apps.apple.com/app/id${deepLinkConfig?.iosPackageId}`
+    : `https://play.google.com/store/apps/details?id=${deepLinkConfig?.androidPackageName}`;
+
+  window.location.replace(storeUrl);
+};
+
 export const getDeepLink = (
   location: string,
   email: string,
   file?: TFile,
   deepLinkConfig?: TDeepLinkConfig,
   originalUrl?: string,
+  isOpenOnlyApp?: boolean,
 ) => {
   const jsonData = {
     portal: location,
-    email: email,
+    email,
     file: {
       id: file?.id,
       title: file?.title,
@@ -100,7 +112,7 @@ export const getDeepLink = (
       parentId: file?.rootFolderId,
       rootFolderType: file?.rootFolderType,
     },
-    originalUrl: originalUrl,
+    originalUrl,
   };
   const stringifyData = JSON.stringify(jsonData);
   const deepLinkData = bytesToBase64(
@@ -110,17 +122,6 @@ export const getDeepLink = (
   openDeepLink(`${deepLinkConfig?.url}?data=${deepLinkData}`, {
     onOpen: () =>
       (window.location.href = `${deepLinkConfig?.url}?data=${deepLinkData}`),
-    onFail: () => redirectToStore(deepLinkConfig),
+    onFail: isOpenOnlyApp ? undefined : () => redirectToStore(deepLinkConfig),
   });
-};
-
-const redirectToStore = (deepLinkConfig?: TDeepLinkConfig) => {
-  const nav = navigator.userAgent;
-  const isIOS = nav.includes("iPhone;") || nav.includes("iPad;");
-
-  const storeUrl = isIOS
-    ? `https://apps.apple.com/app/id${deepLinkConfig?.iosPackageId}`
-    : `https://play.google.com/store/apps/details?id=${deepLinkConfig?.androidPackageName}`;
-
-  window.location.replace(storeUrl);
 };

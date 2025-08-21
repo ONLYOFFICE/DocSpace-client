@@ -1,0 +1,328 @@
+{
+  "key_path": "WantLeaveRoom",
+  "content": "Do you really want to leave this room? You will be able to join it again via new invitation by a room admin.",
+  "content_en_sha1_hash": "13519137916019126edd61d57af7ca5d5cc99ed0",
+  "created_at": "2025-05-19T21:30:56.317Z",
+  "updated_at": "2025-08-12T19:46:25.927Z",
+  "comment": {
+    "text": "This translation key is used for a confirmation message that appears when a user attempts to leave a room. The message informs them they will be able to rejoin via a new invitation by an admin. It is displayed in a dialog box within the Leave Room Dialog component.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:58.459Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/LeaveRoomDialog/index.js",
+      "line_number": 83,
+      "context": "<ModalDialog.Body>\n <div className=\"modal-dialog-content-body\">\n <Text>\n {isRoomOwner\n ? t(\"Files:LeaveRoomDescription\")\n : t(\"Files:WantLeaveRoom\")}\n </Text>\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"You will be able to join it again\" is translated as \"سيمكنك الانضمام مجدداً\". While technically correct, a more natural and idiomatic translation would be something like \"ستتمكن من العودة\" (Satatamakkan min al-'awdah) - \"You will be able to return\". \"الانضمام مجدداً\" implies joining anew, which isn't quite the intended meaning.",
+          "suggestion": "ستتمكن من العودة للغرفة من خلال دعوة جديدة من مسئول الغرفة."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"You will be able to join it again via new invitation by a room admin\" is not perfectly captured by \"Otaq administratorunun yeni dəvəti ilə yenidən qoşula biləcəksiniz\". A more natural and accurate translation would emphasize the action of the admin issuing the invitation.",
+          "suggestion": "Otaq administratoru sizi yenidən dəvət edə biləcəkdir."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"You will be able to join it again via new invitation by a room admin\" is translated as \"Du kannst ihn wieder betreten, wenn du eine neue Einladung von einem Raumadministrator erhältst.\" While technically correct, it sounds a little stiff and verbose in German. A more natural phrasing would be something like 'Du kannst ihn mit einer neuen Einladung eines Raumadministrators wieder beitreten'.",
+          "suggestion": "Du kannst ihn mit einer neuen Einladung eines Raumadministrators wieder beitreten."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses a full stop at the end of the first sentence. While grammatically correct, it's common in UI text to omit full stops for a more concise and user-friendly experience.",
+          "suggestion": "Remove the full stop at the end of the first sentence: 'Θέλετε πραγματικά να φύγετε από αυτό το δωμάτιο Θα μπορέσετε να ξαναμπείτε σε αυτό μέσω νέας πρόσκλησης από έναν διαχειριστή του δωματίου.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'room admin' is translated as 'huoneen järjestelmänvalvojan'. While technically correct, a more natural and common Finnish term for 'room admin' would be 'huoneen ylläpitäjän'.",
+          "suggestion": "Change 'huoneen järjestelmänvalvojan' to 'huoneen ylläpitäjän'."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"You will be able to join it again\" is too literal. A more natural Italian phrasing would be \"Potrai rientrare\".",
+          "suggestion": "Potrai rientrare tramite un nuovo invito da parte di un amministratore della sala."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"このまま退室の手続きしてもよろしいですか？\" is too formal and doesn't directly convey the urgency or confirmation request implied by \"Do you really want to leave this room?\" A more natural translation for that part would be something like \"部屋から出ることを希望しますか？\" or \"部屋から出してもよろしいですか？\"",
+          "suggestion": "部屋から出してもよろしいですか？"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"ルーム管理者による新たな招待で再び参加することができます\" is a bit clunky.  It doesn't flow naturally. A smoother translation would be something like \"ルーム管理者の新しい招待で再度参加できます\" or \"ルーム管理者の新しい招待で再び参加できます\"",
+          "suggestion": "ルーム管理者の新しい招待で再度参加できます"
+        },
+        {
+          "type": "formatting",
+          "description": "The Japanese translation is grammatically correct, but it could benefit from a slight stylistic refinement to improve readability and flow. Combining the two sentences could make it feel more natural.",
+          "suggestion": "部屋から出してもよろしいですか？ルーム管理者の新しい招待で再度参加できます。"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'You will be able to join it again' is overly formal for this context. A more natural Lao phrasing would be better.",
+          "suggestion": "ທ່ານສາມາດເຂົ້າຮ່ວມໄດ້ອີກໂດຍການເຊີນໃຫມ່ຈາກຜູ້ປົກຄອງຫ້ອງ"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ຜູ້ເບິ່ງແຍງ' (pheu beng yaeng) translates to 'supervisor' or 'overseer' which isn't the correct term for a room admin.  'ຜູ້ປົກຄອງ' (pheu pok khong) is a better translation for 'admin'.",
+          "suggestion": "ຜູ້ປົກຄອງຫ້ອງ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"You will be able to join it again\" is a bit awkward in Latvian. A more natural phrasing would be \"Jūs varēsiet atkal pievienoties\" or \"Jūs varēsiet vēlreiz pievienoties\".",
+          "suggestion": "Jūs varēsiet atkal pievienoties"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'You will be able to join it again' is a bit awkward. A more natural translation would be 'Você poderá entrar novamente'.",
+          "suggestion": "Você poderá entrar novamente"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure could be slightly improved for better flow. Splitting it into two sentences improves readability.",
+          "suggestion": "Você realmente quer sair desta sala? Você poderá entrar novamente por meio de um novo convite de um administrador da sala."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'You will be able to join it again via new invitation by a room admin' is not perfectly conveyed. 'ඔබට මෙම කාමරය හැර යාමට වුවමනාද? කාමරයේ පරිපාලකගේ නව ආරාධනයකින් නැවත එක් වීමට හැකි වනු ඇත.' translates closer to 'Do you want to leave this room? It will be possible to rejoin with a new invitation from a room admin.'  The original emphasizes 'really want', which is lost.",
+          "suggestion": "Consider rephrasing the Sinhala to more accurately reflect the original's emphasis on 'really want'. Perhaps something like: 'ඔබට මෙම කාමරය හැර යන්නට ඇත්තෙන්ම කැමතියි? කාමරයේ පරිපාලකගේ නව ආරාධනයකින් නැවත සම්බන්ධ විය හැකියි.' (Do you *really* want to leave this room? You can reconnect with a new invitation from the room admin.)"
+        },
+        {
+          "type": "formatting",
+          "description": "The Sinhala translation does not include any capitalization. While capitalization conventions differ across languages, it's worth considering whether any words should be capitalized for clarity or formality.",
+          "suggestion": "Review the translation for capitalization opportunities, potentially capitalizing the first word of the sentence ('ඔබට') or other key nouns."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'sobo' is potentially incorrect. It should likely be 'prostor'. While 'soba' means 'room', 'prostor' is more commonly used in a digital context.",
+          "suggestion": "Ali res želite zapustiti to sobo/prostor? Ponovno se ji boste lahko pridružili z novim povabilom skrbnika sobe."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"You will be able to join it again\" is a bit awkward in Serbian. A more natural phrasing would be \"Моћи ћете поново да јој се придружите\" or \"Моћи ћете да се поново придружите\".",
+          "suggestion": "Моћи ћете поново да јој се придружите"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'join it again' is slightly awkward. A more natural Serbian translation would be 'pridružiti se ponovo'.",
+          "suggestion": "Moći ćete da se pridružite ponovo putem nove pozivnice od administratora sobe."
+        },
+        {
+          "type": "formatting",
+          "description": "While not a major issue, adding a period at the end of the sentence improves readability.",
+          "suggestion": "Da li zaista želite da napustite ovu sobu? Moći ćete da se pridružite ponovo putem nove pozivnice od administratora sobe."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"You will be able to join it again via new invitation by a room admin\" is not perfectly conveyed.  A more natural and common phrasing in Chinese would emphasize the process of receiving an invitation rather than just 'via an invitation'.",
+          "suggestion": "您可以通过房间管理员发送的新邀请再次加入。"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

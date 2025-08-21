@@ -1,0 +1,297 @@
+{
+  "key_path": "FormRoom",
+  "content": "Form room",
+  "content_en_sha1_hash": "d52d36abd86c722b352cf2a1f855ae5a1408dd21",
+  "created_at": "2025-05-19T21:30:45.520Z",
+  "updated_at": "2025-08-12T19:46:25.994Z",
+  "comment": {
+    "text": "The translation key \"Common:FormRoom\" is used to display the label \"Form room\" in the UI, likely on a filter selection button or dropdown option. This text helps distinguish between different types of rooms, such as form rooms, public rooms, and collaboration rooms, in the application.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:36:05.565Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/filesUtils.js",
+      "line_number": 66,
+      "context": "case RoomsType.VirtualDataRoom:\n return t(\"Common:VirtualDataRoom\");\n \n case RoomsType.FormRoom:\n return t(\"Common:FormRoom\");\n default:\n break;\n }\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
+      "line_number": 824,
+      "context": "case RoomsType.FormRoom:\n return {\n id: \"filter_type-form\",\n key: RoomsType.FormRoom,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:FormRoom\"),\n };\n case RoomsType.PublicRoom:\n return {\n id: \"filter_type-public\",\n key: RoomsType.PublicRoom,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/utils/index.ts",
+      "line_number": 374,
+      "context": "return t(\"Common:CustomRooms\");\n case `room-${RoomsType.EditingRoom}`:\n return t(\"Common:CollaborationRooms\");\n \n case `room-${RoomsType.FormRoom}`:\n return t(\"Common:FormRoom\");\n \n case `room-${RoomsType.PublicRoom}`:\n return t(\"Common:PublicRoomLabel\");\n case `room-${RoomsType.VirtualDataRoom}`:\n return t(\"Common:VirtualDataRoom\");",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Δωμάτιο φορμών\" is literally \"room of forms\", it doesn't convey the meaning of \"form room\" which typically refers to a room where forms are kept or completed. A more appropriate translation would depend on the context, but 'χώρος αιτήσεων' (space for applications) or 'γραφείο αιτήσεων' (applications office) might be better alternatives.",
+          "suggestion": "Consider 'χώρος αιτήσεων' or 'γραφείο αιτήσεων' depending on the context."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Salles de remplissages de formulaires\" is overly literal and clunky. \"Remplissages de formulaires\" is not a standard French expression.",
+          "suggestion": "A more natural translation would be \"Salle de formulaires\" or \"Bureau de formulaires\" or \"Local de formulaires\"."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation is a long phrase and may benefit from better formatting for readability if this appears in a UI.",
+          "suggestion": "Consider breaking it up or using a shorter, more understandable phrase."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Ձևի սենյակ\" is a literal translation of \"Form room,\" it doesn't convey the specific meaning of a room dedicated to forms or paperwork. It translates to 'Form's room' or 'Shape's room', which is not accurate in context.",
+          "suggestion": "Consider a translation that better reflects the function of a form room, such as \"դիմումների համար նախատեսված սենյակ\" (dedicated room for applications) or \"տեղեկությունների սենյակ\" (information room), depending on the specific usage.  A more context-dependent translation is preferred."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation '양식 방' literally translates to 'form room' as in a room containing forms. However, 'Form room' in this context is likely referring to a 'dormitory' or 'student room'.",
+          "suggestion": "Consider translating to '기숙사' (gishuksa) for dormitory, or '학생 방' (haksaeng bang) for student room, depending on the specific meaning."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Formulier kamer\" is a literal translation, it's not the most natural or common way to refer to a 'form room' in Dutch. A more appropriate translation would consider the function of the room.",
+          "suggestion": "Consider alternatives like \"formuleerverzameling\" (form collection), \"lokalen voor formulieren\" (room for forms), or a more context-specific term depending on the purpose of the room."
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Pokój z formularzami\" literally means \"Room with forms.\" While technically correct, it's not the most natural or idiomatic translation of \"Form room.\" A more appropriate translation would depend on the context, but options like \"Sala formularzy\" or even a more descriptive phrase might be better.",
+          "suggestion": "Consider alternatives like \"Sala formularzy\" or a more context-specific translation (e.g., \"Kompletacja formularzy\")"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Sala de formulário' is a literal translation and doesn't fully convey the meaning of \"Form room\". A 'Form room' usually refers to a room where forms are stored or filled out. A more appropriate translation would depend on the specific context.",
+          "suggestion": "Consider alternatives like 'Sala de preenchimento de formulários' (room for filling out forms), 'Sala de formulários' (room for forms - slightly better than the current translation), or a phrase that describes the room's specific function."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Sala de formulário' is a literal translation, it's not the most natural or idiomatic way to refer to a \"form room\" in Portuguese (Brazil). A more common and understandable translation would be 'Sala de Reuniões' (meeting room) or 'Sala de Processamento de Documentos' depending on the function of the room.",
+          "suggestion": "Consider 'Sala de Reuniões' or 'Sala de Processamento de Documentos' if the function of the room fits. If it's specifically for distributing and collecting forms, 'Sala para Formulários' might be an option."
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ආකෘතිපත්‍ර කාමරය\" (aakruthipatraya kamaraya) is a very literal and somewhat awkward translation of \"form room\". It translates to 'form document room'. While understandable, a more natural and common translation would be something like \"ආකාර යටත් කිරීමේ කාමරය\" (akaara yataath karimaya) which implies a room for filling out forms or a room dedicated to forms.",
+          "suggestion": "Consider \"ආකාර යටත් කිරීමේ කාමරය\" (akaara yataath karimaya) or a similar phrase conveying the intended meaning of a room dedicated to forms or for form submission."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation 'Образац соба' is an incorrect translation of 'Form room'. 'Образац' means 'form' or 'template' and 'соба' means 'dog'. This doesn't convey the meaning of a 'form room'.",
+          "suggestion": "A more accurate translation would depend on the specific meaning of 'Form room'. Possible options include 'Просторија за обрасце' (room for forms), 'Формулациони простор' (forms space), or 'Соба за формуларе' (room for forms)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Obrazac soba\" is not the most accurate translation of \"Form room\". \"Form room\" typically refers to a room where forms are filled out or processed. A more accurate translation would be \"soba za obrazce\" or \"prostorija za obrazce\".",
+          "suggestion": "soba za obrazce"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"表单房间\" (biǎo dān fáng jiān) literally translates to 'form room'. While understandable, it's not the most natural or common phrasing in Chinese. Depending on the context, a more appropriate translation might be something like \"登记室\" (dēng jì shì) which means 'registration room' or 'records room', or simply \"表单区\" (biǎo dān qū) meaning 'form area'.",
+          "suggestion": "Consider \"登记室\" (dēng jì shì) or \"表单区\" (biǎo dān qū) based on the intended meaning and context."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

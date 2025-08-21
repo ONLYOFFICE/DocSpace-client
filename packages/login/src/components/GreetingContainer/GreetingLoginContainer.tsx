@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,38 +24,38 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable @next/next/no-img-element */
-
 "use client";
 
 import React, { useLayoutEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useTheme } from "styled-components";
-import { useSearchParams } from "next/navigation";
 import { Text } from "@docspace/shared/components/text";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { getLogoUrl } from "@docspace/shared/utils/common";
 
-import { GreetingContainersProps } from "@/types";
 import { DEFAULT_PORTAL_TEXT, DEFAULT_ROOM_TEXT } from "@/utils/constants";
 import { getInvitationLinkData } from "@/utils";
 
 export const GreetingLoginContainer = ({
   greetingSettings,
   culture,
-}: GreetingContainersProps) => {
+}: {
+  greetingSettings: string;
+  culture?: string;
+}) => {
   const { t } = useTranslation(["Login", "Wizard", "TenantList"]);
   const theme = useTheme();
 
   const logoUrl = getLogoUrl(
     WhiteLabelLogoType.LoginPage,
-    !theme.isBase,
+    !theme?.isBase,
     false,
     culture,
   );
   const searchParams = useSearchParams();
-  const loginData = searchParams?.get("loginData");
+  const loginData = searchParams?.get("loginData") || null;
+  const emailChange = searchParams?.get("emailChange") || null;
 
   const pathname = usePathname();
 
@@ -63,8 +63,7 @@ export const GreetingLoginContainer = ({
     getInvitationLinkData(loginData) || {
       email: "",
       roomName: "",
-      firstName: "",
-      lastName: "",
+      displayName: "",
       type: "",
       spaceAddress: "",
     },
@@ -80,46 +79,95 @@ export const GreetingLoginContainer = ({
     setInvitationLinkData(queryParams);
   }, [loginData]);
 
-  const { type, roomName, firstName, lastName, spaceAddress } =
-    invitationLinkData;
+  const { type, roomName, displayName, spaceAddress } = invitationLinkData;
+
+  const keyProp = roomName
+    ? { tKey: "InvitationToRoom" }
+    : { tKey: "InvitationToPortal" };
+
+  const renderEmailChangeContent = () => {
+    if (!(emailChange && type !== "invitation")) return null;
+
+    return (
+      <div className="greeting-container">
+        <Text
+          fontSize="21px"
+          fontWeight={700}
+          textAlign="center"
+          className="greeting-title confirm-email-change"
+        >
+          {t("Login:ConfirmEmailChange")}
+        </Text>
+
+        <Text fontSize="13px" fontWeight={400} className="confirm-email-change">
+          <Trans
+            t={t}
+            i18nKey="ConfirmEmailChangeText"
+            ns="Login"
+            values={{
+              productName: t("Common:ProductName"),
+            }}
+          />
+        </Text>
+      </div>
+    );
+  };
+
+  const renderGreetingTitle = () => {
+    if (!(type !== "invitation" && !emailChange)) return null;
+
+    return (
+      <Text
+        fontSize="23px"
+        fontWeight={700}
+        textAlign="center"
+        className="greeting-title"
+      >
+        {pathname === "/tenant-list"
+          ? t("TenantList:ChoosePortal")
+          : greetingSettings}
+      </Text>
+    );
+  };
+
+  const renderInvitationContent = () => {
+    if (type !== "invitation") return null;
+
+    return (
+      <div className="greeting-container">
+        <Text fontSize="16px">
+          <Trans
+            t={t}
+            i18nKey={keyProp.tKey}
+            ns="Common"
+            defaults={roomName ? DEFAULT_ROOM_TEXT : DEFAULT_PORTAL_TEXT}
+            values={{
+              displayName,
+              productName: t("Common:ProductName"),
+              ...(roomName ? { roomName } : { spaceAddress }),
+            }}
+            components={{
+              1: (
+                <Text
+                  key="component_key"
+                  fontWeight={600}
+                  as="strong"
+                  fontSize="16px"
+                />
+              ),
+            }}
+          />
+        </Text>
+      </div>
+    );
+  };
 
   return (
     <>
       <img src={logoUrl} className="logo-wrapper" alt="greeting-logo" />
-      {type !== "invitation" && (
-        <Text
-          fontSize="23px"
-          fontWeight={700}
-          textAlign="center"
-          className="greeting-title"
-        >
-          {pathname === "/tenant-list"
-            ? t("TenantList:ChoosePortal")
-            : greetingSettings}
-        </Text>
-      )}
-
-      {type === "invitation" && (
-        <div className="greeting-container">
-          <Text fontSize="16px">
-            <Trans
-              t={t}
-              i18nKey={roomName ? "InvitationToRoom" : "InvitationToPortal"}
-              ns="Common"
-              defaults={roomName ? DEFAULT_ROOM_TEXT : DEFAULT_PORTAL_TEXT}
-              values={{
-                firstName,
-                lastName,
-                productName: t("Common:ProductName"),
-                ...(roomName ? { roomName } : { spaceAddress }),
-              }}
-              components={{
-                1: <Text fontWeight={600} as="strong" fontSize="16px" />,
-              }}
-            />
-          </Text>
-        </div>
-      )}
+      {renderEmailChangeContent()}
+      {renderGreetingTitle()}
+      {renderInvitationContent()}
     </>
   );
 };

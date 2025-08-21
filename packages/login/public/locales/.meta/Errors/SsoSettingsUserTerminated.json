@@ -1,0 +1,261 @@
+{
+  "key_path": "SsoSettingsUserTerminated",
+  "content": "This user is disabled",
+  "content_en_sha1_hash": "0e9c3deb45147da572671a87a2d7616bd6ae6b14",
+  "created_at": "2025-05-19T21:30:57.313Z",
+  "updated_at": "2025-05-26T07:57:32.885Z",
+  "comment": {
+    "text": "\"This translation key is used for displaying a message indicating that a user has been terminated or disabled. It is typically displayed in error messages related to SSO settings and appears in UI contexts where errors or invalidations occur.\"",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:34.471Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/login/src/utils/index.ts",
+      "line_number": 98,
+      "context": "case \"SsoSettingsNotValidToken\":\n return t(\"Errors:SsoSettingsNotValidToken\");\n case \"SsoSettingsCantCreateUser\":\n return t(\"Errors:SsoSettingsCantCreateUser\");\n case \"SsoSettingsUserTerminated\":\n return t(\"Errors:SsoSettingsUserTerminated\");\n case \"SsoError\":\n return t(\"Errors:SsoError\");\n case \"SsoAuthFailed\":\n return t(\"Errors:SsoAuthFailed\");\n case \"SsoAttributesNotFound\":",
+      "module": "/packages/login"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'هذا المستخدم غير مفعل' while technically meaning 'This user is deactivated/not activated' isn't a perfect match for 'disabled'. 'Disabled' implies a different level of restriction than 'deactivated'.",
+          "suggestion": "Consider 'تم تعطيل هذا المستخدم' (Tam ta'til hatha al-mustakhdim) which more accurately translates to 'This user is disabled'."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Tämä käyttäjä ei ole aktivoitu' while technically correct, doesn't convey the exact meaning of 'disabled' in the context of user accounts. 'Disabled' implies a user account is deactivated or inaccessible, not simply not 'activated'. 'Poistettu käytöstä' or 'Deaktivioitu' would be more accurate.",
+          "suggestion": "Tämä käyttäjä on poistettu käytöstä"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ユーザーは無効ようにされた\" is not the most natural or accurate translation of \"This user is disabled.\" It implies the user was actively made inactive by someone else. A more appropriate translation would convey the state of being disabled.",
+          "suggestion": "ユーザーが無効になっています (User is disabled) or ユーザーは停止されています (User has been stopped)"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase '無効ようにされた' uses a passive voice construction that is less common and less direct than other options.  It’s grammatically correct but stylistically awkward.",
+          "suggestion": "ユーザーが無効になっています (User is disabled - present progressive) or ユーザーは無効です (User is disabled - declarative)"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'geblokkeerd' (blocked) conveys a sense of restriction, 'disabled' in the English context typically refers to a user account being deactivated, not necessarily blocked. A more accurate translation would be 'Deze gebruiker is uitgeschakeld'.",
+          "suggestion": "Deze gebruiker is uitgeschakeld"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"заблокирован\" can mean \"disabled,\" in the context of user accounts, \"отключен\" would be a more accurate and commonly used translation for 'disabled'. \"Заблокирован\" typically implies a blocked or restricted access due to security reasons, which isn't necessarily the intended meaning here.",
+          "suggestion": "Этот пользователь отключен"
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"මෙම පරිශ්‍රීලකයා අබලයි\" doesn't accurately convey the meaning of 'This user is disabled'. 'අබලයි' typically means 'useless' or 'worthless' and doesn't align with the intended meaning of a disabled user account.",
+          "suggestion": "මෙම පරිශ්‍රීලකයා නිශ්චල කර ඇත (This user has been deactivated) or මෙම පරිශ්‍රීලකයා අයින් කර ඇත (This user has been removed)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Bu kullanıcı etkisiz kılınmış\" is grammatically correct, it's a bit formal and technical for a user-facing message. \"Disabled\" implies a temporary or easily reversible state, while \"etkisiz kılınmış\" suggests a more permanent disabling.",
+          "suggestion": "Bu kullanıcı devre dışı bırakıldı"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Người dùng này không hoạt động' literally translates to 'This user is inactive'. While close in meaning, 'disabled' implies a more specific state of being prevented from accessing the system. 'Inactive' is a broader term.",
+          "suggestion": "Người dùng này đã bị vô hiệu hóa"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

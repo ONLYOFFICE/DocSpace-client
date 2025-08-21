@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -47,8 +47,8 @@ const QUERY_PARAMS = [
     value: "123",
   },
   {
-    name: "email",
-    value: "mail@mail.com",
+    name: "encemail",
+    value: "b5COc6kRm3veeYqA72sOfA&uid=66faa6e4-f133-11ea-b126-00ffeec8b4ef",
   },
   {
     name: "uid",
@@ -89,11 +89,8 @@ test("activation success", async ({ page, mockRequest }) => {
   ]);
   await page.goto(URL_WITH_PARAMS);
 
-  await page
-    .getByTestId("input-block")
-    .getByTestId("text-input")
-    .fill("qwerty123");
-  await page.getByTestId("icon-button").getByRole("img").click();
+  await page.fill("[name='password']", "qwerty123");
+  await page.getByTestId("password_input_eye_off_icon").click();
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -101,7 +98,7 @@ test("activation success", async ({ page, mockRequest }) => {
     "activation-success.png",
   ]);
 
-  await page.getByTestId("button").click();
+  await page.getByTestId("signup_button").click();
 
   await page.waitForURL("/", { waitUntil: "load" });
 
@@ -117,9 +114,9 @@ test("activation error", async ({ page }) => {
 
   await page.fill("[name='name']", "");
   await page.fill("[name='surname']", "");
-  await page.getByTestId("input-block").getByTestId("text-input").fill("123");
+  await page.fill("[name='password']", "123");
 
-  await page.getByTestId("button").click();
+  await page.getByTestId("signup_button").click();
 
   await expect(page).toHaveScreenshot([
     "desktop",

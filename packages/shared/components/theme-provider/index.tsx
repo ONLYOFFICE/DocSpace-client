@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,6 +24,89 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import ThemeProvider from "./ThemeProvider";
+"use client";
 
-export { ThemeProvider };
+import React, { useEffect } from "react";
+import { ThemeProvider as Provider } from "styled-components";
+
+import { InterfaceDirectionProvider } from "../../context/InterfaceDirectionContext";
+import { ThemeProvider as CustomThemeProvider } from "../../context/ThemeContext";
+
+import type { ThemeProviderProps } from "./ThemeProvider.types";
+import "./ThemeProvider.scss";
+
+export const ThemeProvider = ({
+  theme,
+  currentColorScheme,
+  children,
+}: ThemeProviderProps) => {
+  useEffect(() => {
+    const root = document.documentElement;
+
+    const themeStr = theme.isBase ? "light" : "dark";
+    const dir = theme.interfaceDirection;
+
+    root.setAttribute("data-theme", themeStr);
+    root.setAttribute("data-dir", dir);
+    root.style.setProperty("--interface-direction", dir);
+
+    const body = document.body;
+    body.classList.remove("light", "dark");
+    body.classList.remove("ltr", "rtl");
+    body.classList.add(themeStr);
+    body.classList.add(dir);
+    body.style.setProperty("--font-family", theme.fontFamily);
+  }, [theme.isBase, theme.interfaceDirection, theme.fontFamily]);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const body = document.body;
+
+    if (currentColorScheme && currentColorScheme.main) {
+      root.style.setProperty(
+        "--color-scheme-main-accent",
+        currentColorScheme.main.accent,
+      );
+      root.style.setProperty(
+        "--color-scheme-text-accent",
+        currentColorScheme.text.accent,
+      );
+      root.style.setProperty(
+        "--color-scheme-main-buttons",
+        currentColorScheme.main.buttons,
+      );
+      root.style.setProperty(
+        "--color-scheme-text-buttons",
+        currentColorScheme.text.buttons,
+      );
+
+      body.style.setProperty(
+        "--color-scheme-main-accent",
+        currentColorScheme.main.accent,
+      );
+      body.style.setProperty(
+        "--color-scheme-text-accent",
+        currentColorScheme.text.accent,
+      );
+      body.style.setProperty(
+        "--color-scheme-main-buttons",
+        currentColorScheme.main.buttons,
+      );
+      body.style.setProperty(
+        "--color-scheme-text-buttons",
+        currentColorScheme.text.buttons,
+      );
+    }
+  }, [currentColorScheme]);
+
+  return (
+    <InterfaceDirectionProvider interfaceDirection={theme.interfaceDirection}>
+      <CustomThemeProvider
+        theme={theme.isBase ? "Base" : "Dark"}
+        currentColorScheme={currentColorScheme}
+      >
+        <Provider theme={{ ...theme, currentColorScheme }}>{children}</Provider>
+      </CustomThemeProvider>
+    </InterfaceDirectionProvider>
+  );
+};

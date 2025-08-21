@@ -1,8 +1,6 @@
 {
   "DeleteForeverButton": "Обриши заувек",
-  "DeleteForeverNote": "Све ставке из Отпад ће бити заувек обрисане. Нећете моћи да их повратите.",
-  "DeleteForeverNoteArchive": "Све ставке из Архивирано ће бити заувек обрисане. Нећете моћи да их повратите.",
+  "DeleteForeverNote": "Сви елементи из одељка {{sectionName}} биће трајно избрисани. Нећете моћи да их вратите.",
   "DeleteForeverTitle": "Обрисати заувек?",
-  "SuccessEmptyArchived": "Архива испражњена",
-  "SuccessEmptyTrash": "Отпад испражњен"
+  "SuccessEmptyAction": "Одељак {{sectionName}} је испражњен"
 }

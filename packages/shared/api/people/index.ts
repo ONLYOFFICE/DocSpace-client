@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,6 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { AxiosRequestConfig } from "axios";
 
 import { Encoder } from "../../utils/encoder";
@@ -43,6 +46,7 @@ import { request } from "../client";
 
 import Filter from "./filter";
 import { TChangeTheme, TGetUserList, TUser } from "./types";
+import { TOperation } from "../files/filter";
 
 export async function getUserList(
   filter = Filter.getDefault(),
@@ -107,10 +111,15 @@ export async function getUser(userName = null, headers = null) {
 export async function getUserByEmail(
   userEmail: string,
   confirmKey: Nullable<string> = null,
+  culture?: string,
 ) {
+  const urlEmail = `/people/email?email=${userEmail}`;
+
+  const url = culture ? `${urlEmail}&culture=${culture}` : urlEmail;
+
   const options = {
     method: "get",
-    url: `/people/email?email=${userEmail}`,
+    url,
   };
 
   if (confirmKey) options.headers = { confirm: confirmKey };
@@ -157,6 +166,22 @@ export function getUserPhoto(userId) {
   });
 }
 
+export async function startEmptyPersonal() {
+  const res = (await request({
+    method: "post",
+    url: "/people/delete/personal/start",
+  })) as TOperation[];
+  return res;
+}
+
+export async function getEmptyPersonalProgress() {
+  const res = (await request({
+    method: "get",
+    url: "/people/delete/personal/progress",
+  })) as TOperation[];
+  return res;
+}
+
 export function createUser(data, confirmKey: Nullable<string> = null) {
   const options = {
     method: "post",
@@ -191,8 +216,13 @@ export function changePassword(userId, passwordHash, key) {
   });
 }
 
-export async function changeEmail(userId: string, email: string, key: string) {
-  const data = { email };
+export async function changeEmail(
+  userId: string,
+  email: string,
+  encemail: string,
+  key: string,
+) {
+  const data = encemail ? { encemail } : { email };
 
   const res = (await request({
     method: "put",
@@ -214,7 +244,7 @@ export async function updateActivationStatus(
     url: `/people/activationstatus/${activationStatus}`,
     data: { userIds: [userId] },
     headers: { confirm: key },
-  })) as TUser;
+  })) as TUser[];
 
   return res;
 }
@@ -294,6 +324,15 @@ export async function getUserById(userId: string) {
     method: "get",
     url: `/people/${userId}`,
   })) as TUser;
+
+  res.displayName = Encoder.htmlDecode(res.displayName);
+
+  if (res.createdBy?.displayName) {
+    res.createdBy = {
+      ...res.createdBy,
+      displayName: Encoder.htmlDecode(res.createdBy.displayName),
+    };
+  }
 
   return res;
 }
@@ -416,9 +455,46 @@ export async function updateUserType(type: EmployeeType, userIds: string[]) {
     return user;
   });
 
-  return users;
+  return res;
 }
 
+export async function downgradeUserType(
+  type: EmployeeType,
+  userId: number | string,
+  reassignUserId?: number | string,
+) {
+  return request({
+    method: "post",
+    url: "people/type",
+    data: { type, userId, reassignUserId },
+  });
+}
+
+export async function getReassignmentProgress(userId: number | string) {
+  return request({
+    method: "get",
+    url: `people/type/progress/${userId}`,
+  });
+}
+
+export async function terminateReassignment(userId: number | string) {
+  return request({
+    method: "put",
+    url: `people/type/terminate`,
+    data: { userId },
+  });
+}
+
+export async function reassignmentNecessary(
+  userId: number | string,
+  type: EmployeeType,
+) {
+  return request({
+    method: "get",
+    url: "people/reassign/necessary",
+    params: { userId, type },
+  });
+}
 export function linkOAuth(serializedProfile) {
   return request({
     method: "put",
@@ -427,7 +503,10 @@ export function linkOAuth(serializedProfile) {
   });
 }
 
-export function signupOAuth(signupAccount, confirmKey = null) {
+export function signupOAuth(
+  signupAccount,
+  confirmKey: Nullable<string> = null,
+) {
   const options = {
     method: "post",
     url: "people/thirdparty/signup",
@@ -476,6 +555,32 @@ export async function deleteGuests(userIds: string[]) {
   });
 }
 
+export async function getLinkToShareGuest(userId: string) {
+  const link = (await request({
+    method: "get",
+    url: `people/guests/${userId}/share`,
+  })) as string;
+
+  return link;
+}
+
+export async function addGuest(
+  email: string,
+  confirmKey: Nullable<string> = null,
+) {
+  const options = {
+    method: "post",
+    url: `/people/guests/share/approve`,
+    data: { email },
+  };
+
+  if (confirmKey) options.headers = { confirm: confirmKey };
+
+  const res = await request(options);
+
+  return res;
+}
+
 export function deleteUsers(userIds: string[]) {
   return request({
     method: "put",
@@ -514,6 +619,7 @@ export async function getMembersList(
   searchArea: AccountsSearchArea,
   roomId: string | number,
   filter = Filter.getDefault(),
+  signal?: AbortSignal,
 ) {
   let params = "";
 
@@ -547,6 +653,7 @@ export async function getMembersList(
   const res = (await request({
     method: "get",
     url,
+    signal,
   })) as { items: (TUser | TGroup)[]; total: number };
 
   res.items = res.items.map((member) => {
@@ -570,10 +677,13 @@ export async function getMembersList(
   return res;
 }
 
-export async function setCustomUserQuota(userIds: string[], quota: number) {
+export async function setCustomUserQuota(
+  userIds: string[],
+  quota: string | number,
+) {
   const data = {
     userIds,
-    quota,
+    quota: +quota,
   };
   const options: AxiosRequestConfig = {
     method: "put",
@@ -585,6 +695,7 @@ export async function setCustomUserQuota(userIds: string[], quota: number) {
 
   return users;
 }
+
 export async function resetUserQuota(userIds: string[]) {
   const data = {
     userIds,

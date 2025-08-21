@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -151,11 +151,61 @@ export const StyledBody = styled.div`
   }
 
   .app-code-wrapper {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
     width: 100%;
+  }
+
+  .app-code-description {
+    box-sizing: border-box;
+    margin: 0 0 32px 0;
+  }
+
+  .app-code-input,
+  .app-code-continue-btn {
+    box-sizing: border-box;
   }
 
   .app-code-text {
     margin-bottom: 8px;
+  }
+
+  .guest-avatar {
+    margin-bottom: 8px;
+  }
+
+  .guest-info-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+
+    margin-bottom: 16px;
+  }
+
+  .guest-email {
+    color: ${(props) => props.theme.login.orTextColor};
+  }
+
+  .guest-info {
+    text-align: center;
+    margin-top: 24px;
+    line-height: 16px;
+  }
+
+  .user-info-wrapper {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+    padding: 8px 0;
+
+    margin-bottom: 8px;
+  }
+
+  .user-email {
+    color: ${(props) => props.theme.login.textColor};
   }
 `;
 
@@ -164,4 +214,8 @@ export const ButtonsWrapper = styled.div`
   flex-direction: row;
   gap: 16px;
   width: 100%;
+
+  &.buttons-guest {
+    gap: 8px;
+  }
 `;

@@ -1,0 +1,500 @@
+{
+  "key_path": "DeleteProfileConfirmationInfo",
+  "content": "By clicking \"Disable my account\" you agree with our <1>Privacy policy.</1>",
+  "content_en_sha1_hash": "9a8408d029b9d65fcd00960edd1f41137c81c3ef",
+  "created_at": "2025-05-19T21:30:57.348Z",
+  "updated_at": "2025-05-24T15:33:27.582Z",
+  "comment": {
+    "text": "This translation key is used to display a message related to the user's agreement with privacy policy when disabling their account. It appears in a UI element where users are confirming the deletion of their profile.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:30.211Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/login/src/app/(root)/confirm/ProfileRemove/page.client.tsx",
+      "line_number": 132,
+      "context": "className=\"delete-profile-confirm\"\n >\n {t(\"DeleteProfileConfirmation\")}\n </Text>\n <Text>\n <Trans i18nKey=\"DeleteProfileConfirmationInfo\" ns=\"Confirm\" t={t}>\n By clicking &quot;Disable my account&quot; you agree with our\n Privacy policy\n <Link\n type={LinkType.page}\n href={legalTerms}",
+      "module": "/packages/login"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Disable my account\" is translated as \"حذف حسابي\" (Delete my account). While deletion is a possible outcome of disabling, 'disable' implies a temporary state, which 'delete' does not convey. A more accurate translation might be \"تعطيل حسابي\" (Deactivate my account).",
+          "suggestion": "بالنقر فوق \"تعطيل حسابي\" ، فإنك توافق على <1> سياسة الخصوصية الخاصة بنا. </ 1>"
+        },
+        {
+          "type": "formatting",
+          "description": "The English content uses angle brackets `<1>` and `</1>` to denote a reference. This should be maintained in the Arabic translation for consistency and to indicate the same reference.",
+          "suggestion": "No change needed, the formatting is preserved."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Disable my account' is translated as 'Hesabımı silin' which means 'Delete my account'. While functionally similar, 'Disable' has a slightly different connotation and 'Delete' might be too strong.",
+          "suggestion": "Consider 'Hesabımı deaktivə et' to more accurately reflect 'Disable'."
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are preserved in the translation. This is generally not desirable.",
+          "suggestion": "Remove the HTML tags. The content should be plain text."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content uses \"Disable my account\" while the Bulgarian translation uses \"Изтрий профила ми\" (Delete my profile). These aren't direct equivalents and might cause user confusion. Disabling and deleting have different connotations.",
+          "suggestion": "Consider translating \"Disable my account\" to something more accurately reflecting the action, perhaps \"Деактивирай акаунта ми\" (Deactivate my account)."
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are consistent between the English and Bulgarian content, indicating correct preservation of formatting.",
+          "suggestion": "N/A"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English text uses 'Disable my account' while the Czech translation uses 'Smazat můj účet' (Delete my account). The meaning is slightly different, as disabling an account often implies it can be re-enabled, whereas deleting implies permanent removal. This may be a significant difference in user understanding.",
+          "suggestion": "Consider whether 'Deaktivovat můj účet' (Disable my account) would be a more accurate translation to maintain consistency with the English phrasing, if the functionality is truly account disabling and not deletion."
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags are correctly applied, but the overall consistency and clarity could be improved. Consider if a simpler HTML structure would be preferable.",
+          "suggestion": "Evaluate if the HTML tags <1> and </1> are necessary and contribute to readability or functionality. They might be simplified if they don't serve a specific purpose."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Disable my account\" is translated as \"Mein Konto löschen\" (Delete my account). While both convey a similar action, \"Disable\" implies a temporary state, whereas \"Delete\" suggests permanent removal.  A more accurate translation might be something like \"Mein Konto deaktivieren\" to reflect the original meaning.",
+          "suggestion": "Mein Konto deaktivieren"
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags `<1>...</1>` are consistent between the English and German versions, which is good. No changes needed here.",
+          "suggestion": null
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Disable my account\" is translated as \"Διαγραφή του λογαριασμού μου\" which means \"Delete my account\". While deletion and disabling are related, they are not the same. Disabling typically implies a temporary state, whereas deletion is permanent. This could lead to user confusion.",
+          "suggestion": "Consider translating \"Disable my account\" as something like \"Απενεργοποίηση του λογαριασμού μου\" which more accurately reflects the English meaning of 'disable'."
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> appear to be used for some formatting purpose, but their meaning is unclear. It's crucial to ensure the equivalent formatting is correct in the Greek translation and consistent with the platform's requirements.",
+          "suggestion": "Verify that the Greek translation's HTML tags <1> and </1> are consistent with the intended formatting and are valid within the target platform."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content refers to 'Disable my account' which has been translated to 'Eliminar mi cuenta' (Delete my account). While deletion and disabling have similarities, they aren't identical in this context.  'Deshabilitar mi cuenta' would be a more accurate translation.",
+          "suggestion": "Al hacer clic en \"Deshabilitar mi cuenta\", usted acepta <1>nuestra política de privacidad.</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Disable my account' is translated as 'Poista tilini' which means 'Delete my account'. 'Disable' implies a temporary action, while 'delete' suggests a permanent one. A more accurate translation might be something like 'Sulje tilini' (close my account).",
+          "suggestion": "Sulje tilini"
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1>...</1> are consistent between the English and Finnish versions.",
+          "suggestion": null
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Disable my account\" is translated as \"Supprimer mon compte\" which means \"Delete my account\".  The original phrasing implies deactivation, not deletion.",
+          "suggestion": "Consider a more accurate translation like \"En cliquant sur \"Désactiver mon compte\", vous acceptez notre <1>politique de confidentialité.</1>\" or \"En cliquant sur \"Suspendre mon compte\", vous acceptez notre <1>politique de confidentialité.</1>\""
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags `<1>` are preserved in the translation. While not technically incorrect, consistency is important.  It is assumed this is intentional for preserving formatting but should be verified.",
+          "suggestion": "Confirm that the `<1>` tags are intentionally preserved and consistently used throughout the localization project. If not, remove them."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Disable my account\" is translated as \"Ջնջել իմ հաշիվը\" which means \"Delete my account\". \"Disable\" and \"Delete\" have different meanings. The Armenian translation should reflect the English intent of disabling, not deleting.",
+          "suggestion": "Consider using a phrase like \"Անգործացնել իմ հաշիվը\" which translates to \"Disable my account\"."
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are not standard and might not render correctly.  It's better to use more standard HTML or simply ensure consistency with any existing styling.",
+          "suggestion": "Review and standardize the HTML tags. Consider using consistent tags (e.g., <span> or <div>) for styling."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Disable my account\" is translated as \"Elimina il mio account\", which means \"Delete my account\". While functionally similar, \"Disable\" implies a temporary state, whereas \"Delete\" suggests permanent removal. This could be a source of user confusion.",
+          "suggestion": "Consider translating \"Disable my account\" as \"Disabilita il mio account\" or \"Mettere in pausa il mio account\" to more accurately reflect the English meaning. The best option depends on the precise functionality offered."
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags `<1>` and `</1>` are inconsistent with the English content and potentially indicate an error in the translation process. They should be investigated to ensure correct formatting.",
+          "suggestion": "Verify that the HTML tags are properly inserted and correspond to the intended functionality. If the tags aren't intended, remove them."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"By clicking \"Disable my account\"\" is translated as \"Delete my account\" in Japanese. While functionally similar, \"Disable\" conveys a more temporary action, while \"Delete\" suggests permanent removal. The nuance is slightly altered.",
+          "suggestion": "Consider translating as \"アカウントを無効にする\" をクリックすると、"
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tag <1> is consistent in both the English and Japanese content. However, the surrounding text in Japanese would benefit from more careful consideration of how the HTML tag integrates with the natural flow of the Japanese language for better readability.",
+          "suggestion": "Review the placement of <1>プライバシーポリシー</1> within the Japanese sentence to ensure natural flow. Consider alternatives if the direct translation feels awkward."
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Disable my account\" is translated as \"ລຶບບັນຊີຂອງຂ້ອຍ\" which means \"Delete my account.\"  \"Disable\" implies a temporary state, while \"Delete\" implies permanent removal.  A more appropriate translation might be something like \"ປິດບັນຊີຂອງຂ້ອຍ\" (Close my account).",
+          "suggestion": "ປິດບັນຊີຂອງຂ້ອຍ"
+        },
+        {
+          "type": "formatting",
+          "description": "The Lao translation uses \"ຫູືບໍ່\" at the end. This is an informal way to ask a yes/no question and does not fit the tone of a formal agreement. It also breaks the consistency of the English and Lao content referencing the privacy policy.",
+          "suggestion": " "
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation of \"Privacy policy\" is a literal translation. While understandable, a more natural rendering might consider the intended meaning and target audience.",
+          "suggestion": "ນະໂຍບາຍຄວາມສ່ວນຕົວຂອງພວກເຮົາ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Disable my account\" is translated as \"Dzēst manu kontu\" which means \"Delete my account\". While 'Disable' and 'Delete' can sometimes be used interchangeably, in this context, 'Disable' is a more accurate reflection of the intended meaning. A more accurate translation would be something along the lines of 'Atspējot manu kontu'.",
+          "suggestion": "Consider translating \"Disable my account\" as \"Atspējot manu kontu\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Disable my account' is translated as 'Mijn account verwijderen' (Delete my account). While functionally similar, 'Disable' implies a temporary action, while 'Delete' implies a permanent action. This could be misleading.",
+          "suggestion": "Consider translating 'Disable my account' to something more accurately reflecting the intended action, such as 'Mijn account uitschakelen' (My account disable)."
+        },
+        {
+          "type": "formatting",
+          "description": "The formatting tags <1> and </1> are inconsistent between the English and Dutch versions.  The English uses “Privacy policy.” The Dutch uses “Privacybeleid.”. This inconsistency should be addressed.",
+          "suggestion": "Ensure consistent formatting for the reference tag in both English and Dutch versions.  The Dutch should follow the English example if the reference is the same."
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Disable my account\" is translated as \"Usuń moje konto\" (Delete my account) in Polish. The English text refers to disabling, not deleting, the account. This is a significant difference in meaning.",
+          "suggestion": "Consider translating \"Disable my account\" as something more accurately reflecting the English meaning, such as \"Wyłącz moje konto\" or \"Zablokuj moje konto\"."
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tag `<1>` and `</1>` are present in both the English and Polish versions. This suggests a templating issue that needs to be addressed outside of the translation itself. The tags themselves are not inherently a translation error, but indicate potential inconsistencies in content management.",
+          "suggestion": "Review the content management system or template used to render this text and ensure the `<1>` tags are handled correctly and consistently."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Disable my account\" is translated as \"Eliminar a minha conta,\" which means \"Delete my account.\" \"Disable\" implies a temporary action, while \"Eliminar\" suggests permanent deletion. This could be misleading to the user.",
+          "suggestion": "Consider translating \"Disable my account\" to something like \"Desativar a minha conta\" which more accurately conveys the meaning of disabling."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Disable my account\" is translated as \"Apagar minha conta\" (Delete my account). While technically similar, 'disable' implies a temporary action, while 'delete' suggests permanent removal. This might mislead the user.",
+          "suggestion": "Consider translating \"Disable my account\" to something like \"Desativar minha conta\" which more closely reflects the intended meaning of temporarily suspending access."
+        },
+        {
+          "type": "formatting",
+          "description": "The formatting tags (<1>...</1>) are consistent between the English and Portuguese versions. However, it's worth confirming that this specific tagging system is compatible with the target platform/system where this text will be displayed.",
+          "suggestion": "Verify the compatibility of the <1>...</1> tags with the display system."
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"By clicking \"Disable my account\"\" is translated as \"Apăsând Șterge contul meu\". \"Disable my account\" should be translated to something closer to \"Dezactivarea contului meu\" or \"Dezactivare contul meu\". \"Șterge contul meu\" translates to \"Delete my account\".",
+          "suggestion": "Apăsând \"Dezactivarea contului meu\""
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"you agree with\" is awkwardly translated as \"acceptați că sunteți de acord cu\". It's more natural to simply use \"sunteți de acord cu\".",
+          "suggestion": "sunteți de acord cu"
+        },
+        {
+          "type": "formatting",
+          "description": "The formatting of the HTML tag <1> is not consistent with the English version. It's a minor issue, but should be addressed for consistency.",
+          "suggestion": "Ensure the <1> tags enclose the entire phrase \"Politica de confidențialitate a companiei.\""
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Disable my account\" is translated as \"Vymazať môj účet\" which means 'Delete my account'.  'Disable' suggests a temporary action, while 'Vymazať' implies permanent deletion. This shift in meaning may be misleading.",
+          "suggestion": "Consider translating \"Disable my account\" as something like \"Deaktivovať môj účet\" which aligns better with the intended temporary action."
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tag <1>...</1> seems intended to be consistent with the English content. However, 'Ochrana súkromia' is a more formal term than 'Privacy policy' in the source text. If consistency in the tag is critical, adjust the tag's content accordingly.",
+          "suggestion": "If possible, review the purpose of the tags to ensure consistency. If it's just for reference, make sure to review other translations using the same pattern."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Disable my account\" has been translated as \"izbriši moj račun\" (delete my account) instead of a more accurate translation of \"Disable my account\". While \"izbriši\" can imply disabling, it's more direct and potentially misleading.",
+          "suggestion": "Consider a more nuanced translation like \"Onemogoči moj račun\" (Disable my account) or \"Ustavim moj račun\" (Pause/Suspend my account), depending on the exact functionality."
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are maintained in the Slovenian translation, mirroring the English source. While this is consistent, it's important to ensure this is the desired formatting for the final output and doesn't negatively impact the visual presentation in the Slovenian version.",
+          "suggestion": "Review the intended use of the <1> tags and ensure they are appropriate for the Slovenian context and output medium.  It might be more appropriate to use a different tag or remove them entirely if they are just identifiers."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Disable my account\" has been translated as \"Делете мy аццоунт\". This appears to be a direct transliteration of \"Delete my account\", which isn't the intended meaning. \"Disable\" should be reflected in the translation.",
+          "suggestion": "Consider translating \"Disable my account\" as something like \"Деактивирај мy аццоунт\" (Deaktiviraj my account) or \"Искључи мy аццоунт\" (Isključi my account)."
+        },
+        {
+          "type": "spelling",
+          "description": "The word \"аццоунт\" is a transliteration and should be translated to Serbian equivalent.",
+          "suggestion": "Consider using \"налога\" instead of \"аццоунт\"."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The verb 'slazete se' ('you agree') doesn't fully capture the nuance of accepting a condition.  It is more passive than a click and agreement.",
+          "suggestion": "Consider a phrasing like 'прихватате' ('you accept')."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Disable my account\" is translated as \"Delete my account\". While both actions might result in similar outcomes, the wording should ideally reflect the original phrasing to maintain consistency.",
+          "suggestion": "Klikom na \"Disable my account\" slažete se sa našim <1>Privacy policy.</1>"
+        },
+        {
+          "type": "formatting",
+          "description": "The <1> tag is present in both the English and Serbian versions. It's good that it's maintained.",
+          "suggestion": null
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Disable my account\" is translated as \"Hesabımı sil\". While \"sil\" means 'delete', \"Disable my account\" implies a temporary suspension, not a permanent deletion. A more accurate translation might be \"Hesabımı devre dışı bırak\".",
+          "suggestion": "Hesabımı devre dışı bırak"
+        },
+        {
+          "type": "formatting",
+          "description": "The formatting tags <1> and </1> are identical in both the English and Turkish versions. This indicates consistency which is good.",
+          "suggestion": null
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Disable my account\" is translated as \"Видалити мій обліковий запис\" which means \"Delete my account\".  \"Disable\" is a more accurate representation of the intended action.",
+          "suggestion": "Натискаючи \"Деактивувати мій обліковий запис\", ви погоджуєтесь із <1>Політикою конфіденційності.</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Disable my account' should be translated to something more accurate than 'Xóa tài khoản của tôi' (delete my account). 'Tắt tài khoản của tôi' (Turn off my account) would be more appropriate, reflecting the 'disable' functionality.",
+          "suggestion": "Với việc nhấp vào \"Tắt tài khoản của tôi\" bạn đồng ý với <1>Chính sách Bảo mật của chúng tôi.</1>"
+        },
+        {
+          "type": "formatting",
+          "description": "The Vietnamese translation uses double quotes for the button label. While acceptable, it's recommended to match the English use of single quotes if the platform consistently uses them. This improves visual consistency.",
+          "suggestion": "With việc nhấp vào 'Tắt tài khoản của tôi' bạn đồng ý với <1>Chính sách Bảo mật của chúng tôi.</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Disable my account\" is translated as \"删除我的账户\" which means \"Delete my account\". \"Disable\" implies a temporary action, while \"Delete\" implies permanent removal. This significantly alters the meaning.",
+          "suggestion": "Consider a translation that better reflects the meaning of 'Disable', such as \"禁用我的账户\" or \"暂停我的账户\"."
+        },
+        {
+          "type": "formatting",
+          "description": "The original English content uses angle brackets `<1>...</1>` for tagging. The Chinese translation also uses the same brackets, which is unusual and might look out of place. While technically not incorrect, it's an inconsistency.",
+          "suggestion": "Consider removing or modifying the angle brackets to align with standard Chinese formatting practices. This could mean using different tags or no tags at all."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

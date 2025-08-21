@@ -1,10 +1,8 @@
 {
   "ActiveSessions": "Actieve Sessies",
   "AutoDeleteTitle": "Alle sessies die ouder zijn dan 60 dagen worden automatisch verwijderd.",
-  "ChangeEmailSuccess": "E-mail is met succes gewijzigd ",
   "ChangePasswordAfterLoggingOut": "Wachtwoord wijzigen na uitloggen",
   "ConnectSocialNetworks": "Sluit uw sociale netwerken aan",
-  "DarkTheme": "Donker thema",
   "DescriptionForSecurity": "Voor meer veiligheid moet u uw wachtwoord wijzigen.",
   "DesktopTheme": "Synchroniseren met desktop Editor instellingen",
   "DesktopThemeDescription": "Schakel automatisch tussen lichte en donkere thema's, afhankelijk van het huidige thema van de desktop editors.",
@@ -13,7 +11,6 @@
   "ErrorAccountAlreadyUse": "Gekoppelde account al in gebruik door een andere gebruiker",
   "FileManagement": "Bestandsbeheer",
   "InterfaceTheme": "Interface thema",
-  "LightTheme": "Licht thema",
   "LogoutActiveConnection": "Uitloggen van actieve verbinding",
   "LogoutAllActiveSessionsDescription": "Alle actieve verbindingen behalve deze verbinding worden uitgelogd, omdat deze momenteel in gebruik is.",
   "LogoutBtn": "Uitloggen",

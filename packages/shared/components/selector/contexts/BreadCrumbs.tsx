@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,9 +34,5 @@ export const BreadCrumbsProvider = ({
   children,
   ...rest
 }: TSelectorBreadCrumbs & { children: ReactNode }) => {
-  return (
-    <BreadCrumbsContext.Provider value={rest}>
-      {children}
-    </BreadCrumbsContext.Provider>
-  );
+  return <BreadCrumbsContext value={rest}>{children}</BreadCrumbsContext>;
 };

@@ -1,6 +1,19 @@
 # LinkWithDropdown
 
-Link with dropdown
+A versatile React component that combines a clickable link with a customizable dropdown menu. The component supports two display modes through `dropdownType`:
+- `alwaysDashed`: Shows a dotted underline and dropdown arrow permanently
+- `appearDashedAfterHover`: Reveals the dotted underline and dropdown arrow only on hover
+
+The component is mobile-responsive and provides extensive styling options including custom colors, font sizes, and weights. It can be used for navigation menus, action menus, or any interface element requiring a combination of a link and dropdown functionality.
+
+Key features:
+- Customizable link appearance (color, weight, size)
+- Mobile-friendly with orientation support
+- Optional scrollable dropdown content
+- Support for disabled state
+- Controlled and uncontrolled dropdown states
+- Custom width configuration
+- Semi-transparent mode for overlay contexts
 
 ### Usage
 

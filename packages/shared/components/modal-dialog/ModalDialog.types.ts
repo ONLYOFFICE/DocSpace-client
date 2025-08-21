@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { AsideHeaderProps } from "../aside/Aside.types";
+import { AsideHeaderProps } from "../aside-header";
+
 import { ModalDialogType } from "./ModalDialog.enums";
 
 export type ModalDialogTypeDetailed = {
@@ -33,145 +34,100 @@ export type ModalDialogTypeDetailed = {
   desktop: ModalDialogType;
 };
 
-export interface ModalDialogProps {
-  /** Accepts id */
+export type ModalSubComponentsProps = AsideHeaderProps & {
+  /** Unique identifier for the modal */
   id?: string;
-  /** Accepts class */
-  className?: string;
-  /** CSS z-index   */
-  zIndex?: number;
-  /** Accepts css */
+  /** Custom styles for the modal */
   style?: React.CSSProperties;
-  /** Displays the child elements */
-  children: React.ReactElement[] | React.ReactElement;
-  /** Sets the dialog to display */
-  visible?: boolean;
-  /** Sets a callback function that is triggered when the close button is clicked */
-  onClose?: () => void;
-  /** Displays type */
-  displayType: ModalDialogType;
-  /** Detailed display type for each dimension */
-  displayTypeDetailed?: ModalDialogTypeDetailed;
+  /** Additional CSS classes */
+  className?: string;
+  /** Current display type of the modal (modal or aside) */
+  currentDisplayType: ModalDialogType;
+  /** **`ASIDE-ONLY`** Enables body scroll */
+  withBodyScroll?: boolean;
+  /** **`ASIDE-ONLY`** Locks the scroll in body section */
+  isScrollLocked?: boolean;
+  /** **`MODAL-ONLY`** Sets width: 520px and max-height: 400px */
+  isLarge: boolean;
+  /** **`MODAL-ONLY`** Sets predefined huge size */
+  isHuge: boolean;
+  /** CSS z-index for modal layering */
+  zIndex?: number;
+  /** **`MODAL-ONLY`** Sets max-height: auto */
+  autoMaxHeight?: boolean;
+  /** **`MODAL-ONLY`** Sets max-width: auto */
+  autoMaxWidth?: boolean;
+  /** Callback function when modal is closed */
+  onClose: () => void;
   /** Shows loader in body */
   isLoading?: boolean;
+  /** Content for the modal header */
+  header?: React.ReactNode;
+  /** Content for the modal body */
+  body?: React.ReactNode;
+  /** Content for the modal footer */
+  footer?: React.ReactNode;
+  /** Container content for aside mode */
+  container?: React.ReactNode;
+  /** Controls modal visibility */
+  visible?: boolean;
+  /** **`MODAL-ONLY`** Displays border between body and footer */
+  withFooterBorder: boolean;
+  /** Offset for modal swipe animation */
+  modalSwipeOffset?: number;
+  /** **`ASIDE-ONLY`** Allows embedding modal as aside dialog inside parent container */
+  containerVisible?: boolean;
+  /** Displays double line in footer */
+  isDoubleFooterLine?: boolean;
   /** Sets the displayed dialog to be closed or open */
   isCloseable?: boolean;
-
-  /** **`MODAL-ONLY`**
-  Sets `width: 520px` and `max-height: 400px` */
-  isLarge?: boolean;
-  isHuge?: boolean;
-
-  /** **`MODAL-ONLY`**
-  Sets `max-width: auto` */
-  autoMaxWidth?: boolean;
-  /** **`MODAL-ONLY`**
-  Sets `max-height: auto` */
-  autoMaxHeight?: boolean;
-
-  /** **`MODAL-ONLY`**
-  Displays border betweeen body and footer` */
-  withFooterBorder?: boolean;
-
-  /** **`ASIDE-ONLY`**
-  Enables Body scroll */
-  withBodyScroll?: boolean;
-
-  /** **`ASIDE-ONLY`**
-  Enables body scroll */
-  isScrollLocked?: boolean;
-
-  /** **`ASIDE-ONLY`**
-  Sets modal dialog size equal to window */
-  scale?: boolean;
-
-  /** **`ASIDE-ONLY`**
-  Allows you to embed a modal window as an aside dialog inside the parent container without applying a dialog layout to it */
-  containerVisible?: boolean;
-
-  isDoubleFooterLine?: boolean;
+  /** Enables embedded mode */
   embedded?: boolean;
+  /** Wraps content in form element */
   withForm?: boolean;
-  withoutPadding?: boolean;
-  hideContent?: boolean;
-  blur?: number;
-  isInvitePanelLoader?: boolean;
+  /** Form submit handler */
   onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
+  /** Removes default padding from body */
+  withoutPadding?: boolean;
+  /** Hides modal content */
+  hideContent?: boolean;
+  /** Sets backdrop blur value */
+  blur?: number;
+  /** Shows invite panel loader */
+  isInvitePanelLoader?: boolean;
+  /** Forces body scroll regardless of display type */
   withBodyScrollForcibly?: boolean;
-}
 
-export interface ModalProps {
-  id?: string;
-  className?: string;
-  zIndex?: number;
-  style?: React.CSSProperties;
-  onClose: () => void;
-  visible: boolean;
-  modalSwipeOffset?: number;
+  withBorder?: boolean;
+  /** Test id */
+  dataTestId?: string;
+};
 
-  isLoading?: boolean;
-  modalLoaderBodyHeight?: string;
+export type ModalDialogProps = Partial<
+  Omit<
+    ModalSubComponentsProps,
+    "currentDisplayType" | "header" | "body" | "footer" | "container"
+  >
+> & {
+  /** Displays the child elements */
+  children: (React.ReactElement | null)[] | React.ReactElement;
+  /** Displays type */
+  displayType?: ModalDialogType;
+  /** Detailed display type for each dimension */
+  displayTypeDetailed?: ModalDialogTypeDetailed;
+  /** Test id */
+  dataTestId?: string;
+};
 
-  currentDisplayType?: ModalDialogType;
-  isLarge?: boolean;
-
-  header?: object;
-  body?: object;
-  footer?: object;
-}
-
-export interface ModalDialogCloseButtonProps {
-  currentDisplayType: ModalDialogType;
-
-  onClick: () => void;
-}
-
-export interface ModalDialogFormWrapperProps {
+export type ModalDialogFormWrapperProps = {
   withForm: boolean;
   className?: string;
   children?: React.ReactNode;
   onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
-}
+};
 
-export interface ModalDialogBackdropProps {
-  id?: string;
+export type ModalDialogBackdropProps = {
   className?: string;
   children: React.ReactNode | React.ReactElement[] | React.ReactElement;
   zIndex?: number;
-  visible?: boolean;
-  modalSwipeOffset?: number;
-}
-
-export type ModalSubComponentsProps = AsideHeaderProps & {
-  id?: string;
-  style?: React.CSSProperties;
-  className?: string;
-  currentDisplayType: ModalDialogType;
-  withBodyScroll?: boolean;
-  isScrollLocked?: boolean;
-  isLarge: boolean;
-  isHuge: boolean;
-  zIndex?: number;
-  autoMaxHeight?: boolean;
-  autoMaxWidth?: boolean;
-  onClose: () => void;
-  isLoading?: boolean;
-  header?: React.ReactNode;
-  body?: React.ReactNode;
-  footer?: React.ReactNode;
-  container?: React.ReactNode;
-  visible?: boolean;
-  withFooterBorder: boolean;
-  modalSwipeOffset?: number;
-  containerVisible?: boolean;
-  isDoubleFooterLine?: boolean;
-  isCloseable?: boolean;
-  embedded?: boolean;
-  withForm?: boolean;
-  onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
-  withoutPadding?: boolean;
-  hideContent?: boolean;
-  blur?: number;
-  isInvitePanelLoader?: boolean;
-  withBodyScrollForcibly?: boolean;
 };

@@ -4,7 +4,6 @@
   "DataReassignment": "දත්ත යළි පැවරීම",
   "DeleteProfileIsFinished": "යළි පැවරීම අවසන් වූ විට පැතිකඩ මකන්න",
   "DescriptionDataReassignment": "පරිශ්‍රීලකයා සාදන ලද කාමර සහ ගබඩා කර තිබෙන ලේඛන මාරු කෙරෙනු ඇත.",
-  "InProgress": "සිදු වෙමින්",
   "Interrupted": "බාධා විය, සමහර දත්ත මාරු නොවිණි",
   "MoreAboutDataTransfer": "දත්ත හුවමාරුව පිළිබඳ වැඩි විස්තර",
   "NewDataOwner": "නව දත්ත හිමිකරු",
@@ -14,6 +13,7 @@
   "ReassignData": "දත්ත යළි පැවරීම",
   "ReassigningDataToAnother": "<0>{{fromUser}}</0> පරිශ්‍රීලකයාගෙන් <1>{{toUser}}</1> වෙත දත්ත යළි පැවරීමේ ක්‍රියාවලිය ආරම්භ වී ඇත. එයට සැලකිය යුතු කාලයක් ගත විය හැකි බව කරුණාවෙන් සලකන්න.",
   "ReassigningDataToItself": "<0>{{fromUser}}</0> පරිශ්‍රීලකයාගෙන් <1>{{toUser}}</1> <2>{{you}}</2> වෙත දත්ත යළි පැවරීමේ ක්‍රියාවලිය ආරම්භ වී ඇත. එයට සැලකිය යුතු කාලයක් ගත විය හැකි බව කරුණාවෙන් සලකන්න.",
+  "RoomsOnlyReassignment": "අපි සම්බන්ධතාවයෙන් සාදන ලද කාමරයන් මාරු කරමු.",
   "StartTransferAgain": "මාරුව නැවත අරඹන්න",
   "UserToWhomTheDataWillBeTransferred": "පරිශ්‍රීලකයාගෙන් දත්ත ලබන්නා "
 }

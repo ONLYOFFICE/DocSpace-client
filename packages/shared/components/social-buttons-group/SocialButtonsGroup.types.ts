@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,14 +29,14 @@ import type { PROVIDERS_DATA } from "../../constants";
 
 export type ProvidersDataType = typeof PROVIDERS_DATA;
 
-interface IProvider {
+type Provider = {
   linked: boolean;
   provider: string;
   url: string;
-}
+};
 
-export interface SocialButtonProps {
-  providers: IProvider[] | undefined;
+export type SocialButtonProps = {
+  providers: Provider[] | undefined;
   ssoLabel?: string;
   ssoUrl?: string;
   ssoSVG?: string;
@@ -46,4 +46,4 @@ export interface SocialButtonProps {
   onMoreAuthToggle?: (value: boolean) => void;
   /** Sets the button to present a disabled state */
   isDisabled: boolean;
-}
+};

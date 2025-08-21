@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -62,6 +62,7 @@ export type FilesSelectorProps = TSelectorHeader & {
   isMove?: boolean;
   isCopy?: boolean;
   isRestore: boolean;
+  isTemplate: boolean;
   isRestoreAll?: boolean;
   isSelect?: boolean;
   isFormRoom?: boolean;
@@ -152,4 +153,5 @@ export type FilesSelectorProps = TSelectorHeader & {
 
   withCreate?: boolean;
   checkCreating?: boolean;
+  logoText: string;
 };

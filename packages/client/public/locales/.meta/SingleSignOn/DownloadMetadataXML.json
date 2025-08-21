@@ -1,0 +1,331 @@
+{
+  "key_path": "DownloadMetadataXML",
+  "content": "Download SP metadata XML",
+  "content_en_sha1_hash": "69cdbb542da10c910280c5a6dd9347606d5ba14e",
+  "created_at": "2025-05-19T21:30:50.077Z",
+  "updated_at": "2025-08-11T18:11:59.263Z",
+  "comment": {
+    "text": "This translation key is used to display the label for a button that allows users to download SP metadata XML. It appears on the \"Download\" button in a portal settings category.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:17.436Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/ProviderMetadata.js",
+      "line_number": 114,
+      "context": "/>\n \n <div className=\"button-wrapper\">\n <Button\n id=\"download-metadata-xml\"\n label={t(\"DownloadMetadataXML\")}\n primary\n scale={isMobileView}\n size={isMobileView ? \"normal\" : \"small\"}\n tabIndex={25}\n onClick={downloadMetadata}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"تنزيل ملف بيانات المزوّد\" while generally understandable, could be more precise. \"SP\" stands for Service Provider, and a more accurate translation might include that.",
+          "suggestion": "تنزيل ملف بيانات مزود الخدمة (Tanzil malaff bayanat muzawwid al-khidmah)"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'SP metadata XML-ni endirin' is a literal translation but doesn't flow naturally in Azerbaijani. 'Endirin' implies downloading a file. A more natural phrasing would use a verb that signifies obtaining or accessing metadata.",
+          "suggestion": "Consider alternatives like 'SP metadata XML-i əldə edin' (obtain SP metadata XML) or 'SP metadata XML-ə daxil olun' (access SP metadata XML)."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Изтеглете XML с метаданните на доставчика на услуги\" is a bit too literal and verbose. While technically correct, it lacks the conciseness of the English \"Download SP metadata XML\".  'Доставчика на услуги' translates to 'service provider,' which isn't always necessary to specify.",
+          "suggestion": "Изтеглете XML с метаданни"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"παρόχου υπηρεσιών\" (provider of services) is a bit verbose and formal for the context of SP metadata. A more natural and concise translation would be \"εφαρμογής\" (application) or \"συνεργάτη\" (partner).",
+          "suggestion": "Λήψη μεταδεδομένων εφαρμογής XML"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Descargar XML de metadatos SP' is a very literal translation and might not be the most natural phrasing in Spanish.  'SP' is likely Service Provider, and the Spanish equivalent might be better conveyed.",
+          "suggestion": "Descargar XML de metadatos del Proveedor de Servicios"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses 'SP' without explanation. While technically understandable within a context where SP is known, it's generally better practice to fully spell out acronyms the first time they're used or provide a brief explanation.",
+          "suggestion": "Consider adding a parenthetical explanation: 'Descargar XML de metadatos SP (Service Provider)'"
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'fichier XML des métadonnées SP' is a bit literal and could be more naturally phrased. 'Télécharger les métadonnées SP au format XML' or 'Télécharger les métadonnées SP en XML' would be more common and fluid.",
+          "suggestion": "Télécharger les métadonnées SP au format XML"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The term 'XML-ը' could be more clearly spelled as 'XML-ը'.",
+          "suggestion": "XML-ը"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Scarica SP file XML per metadati' is not the most natural or precise translation of 'Download SP metadata XML'. While technically correct, it sounds a bit clunky. 'Scarica il file XML dei metadati SP' or 'Scarica il file XML con i metadati SP' would be more idiomatic.",
+          "suggestion": "Scarica il file XML dei metadati SP"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"SPメタデータXMLのダウンロード\" is a very literal translation. A more natural and user-friendly translation would consider the context of a software feature or button label. It sounds a bit stiff.",
+          "suggestion": "Consider a more conversational alternative like \"SPメタデータXMLをダウンロード\" or \"SPメタデータXMLの取得\" depending on the exact function."
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation is a direct transliteration of the English and doesn't convey the meaning 'Download SP metadata XML' effectively for a Lao speaker. It lacks proper Lao phrasing for 'Download'.",
+          "suggestion": "ດາວໂຫລດໄຟລ໌ metadata XML ຂອງ SP"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Pobierz XML z metadanymi usługodawcy' while generally understandable, is not the most natural or precise translation of 'Download SP metadata XML'.  'Usługodawcy' (service provider) can be slightly awkward phrasing. A more fluent translation might focus on the 'identity provider' or directly specify the 'SP metadata'.",
+          "suggestion": "Pobierz XML z metadanymi SP"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Transferir\" is a valid translation for \"Download,\" it implies a more active transfer initiated by the user. \"Download\" suggests receiving data, which \"Transferir\" doesn't fully convey. A more accurate translation might be \"Descarregar\" or \"Obter\".",
+          "suggestion": "Consider using \"Descarregar a metadata do SP XML\" or \"Obter a metadata do SP XML\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Descărcare fişier de metadate XML a furnizorului de servicii\" is overly verbose and technically accurate, but doesn't capture the brevity and clarity of \"Download SP metadata XML\". \"Furnizorului de servicii\" translates to 'service provider' which isn't necessarily needed.  It's more concise to shorten it.",
+          "suggestion": "Descărcare metadate XML SP"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Скачать XML-файл метаданных поставщика сервиса\" is overly literal and somewhat clunky. 'Single Sign-On' context implies a more concise and natural phrasing would be preferred.",
+          "suggestion": "Скачать XML метаданных SP"
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"SP පාරදත්ත XML බාගන්න\" is understandable, a more accurate and natural translation of 'Download SP metadata XML' would be something like \"SP metadata XML ගබඩා කරන්න\" or \"SP metadata XML ලබා ගන්න\". \"බාගන්න\" often implies downloading something tangible, while metadata is more abstract. Using 'ලැබ ගන්න' (obtain) or 'ගබඩා කරන්න' (save/store) is more suitable.",
+          "suggestion": "SP metadata XML ලබා ගන්න"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation 'Načítať SP metadáta XML' implies 'to load' or 'to read' instead of 'to download'. 'Download' specifically refers to receiving a file from a remote source.",
+          "suggestion": "Stiahnuť SP metadáta XML"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Завантажити XML-файл метаданих постачальника сервісу' is overly literal and somewhat verbose. While technically correct, it's not the most natural phrasing in Ukrainian. 'Постачальника сервісу' (Service Provider) is acceptable but a more common or concise term might be preferred.",
+          "suggestion": "Завантажити XML з метаданими SP"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a hyphenated XML-файл which isn't standard Ukrainian formatting. While understandable, it's not ideal.",
+          "suggestion": "XML файл"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation includes the key words, \"Tải\" (Download) is somewhat literal and could be improved for clarity and naturalness in Vietnamese. \"Lấy\" or \"Xuất\" might be more appropriate depending on the context of the software.",
+          "suggestion": "Lấy siêu dữ liệu SP metadata XML"
+        },
+        {
+          "type": "formatting",
+          "description": "The repetition of \"metadata\" feels slightly awkward.  While technically correct, it could be simplified for better readability.",
+          "suggestion": "Tải siêu dữ liệu SP XML"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

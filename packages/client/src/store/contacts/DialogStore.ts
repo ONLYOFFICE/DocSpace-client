@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -47,8 +47,6 @@ class DialogStore {
 
   dataReassignmentDeleteProfile = false;
 
-  isDeletingUserWithReassignment = false;
-
   changeEmailVisible = false;
 
   deleteGroupDialogVisible = false;
@@ -67,12 +65,6 @@ class DialogStore {
     dataReassignmentDeleteProfile: boolean,
   ) => {
     this.dataReassignmentDeleteProfile = dataReassignmentDeleteProfile;
-  };
-
-  setIsDeletingUserWithReassignment = (
-    isDeletingUserWithReassignment: boolean,
-  ) => {
-    this.isDeletingUserWithReassignment = isDeletingUserWithReassignment;
   };
 
   setChangeOwnerDialogVisible = (visible: boolean) => {

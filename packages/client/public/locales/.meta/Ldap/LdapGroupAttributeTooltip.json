@@ -1,0 +1,292 @@
+{
+  "key_path": "LdapGroupAttributeTooltip",
+  "content": "Enter the group object attribute which specifies what users this group includes.",
+  "content_en_sha1_hash": "5b3d1b4bb763948324a201aba42a863bc2eb8189",
+  "created_at": "2025-05-19T21:30:54.204Z",
+  "updated_at": "2025-08-11T18:11:59.246Z",
+  "comment": {
+    "text": "Enter the group object attribute that specifies which users are included in this group. This tooltip is used to provide context and guidance while filling out the Group Attribute field on the Portal Settings page.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:11.949Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/GroupMembership.js",
+      "line_number": 210,
+      "context": "labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.groupAttribute}\n labelText={t(\"LdapGroupAttribute\")}\n isRequired\n tooltipContent={t(\"LdapGroupAttributeTooltip\")}\n dataTestId=\"group_attribute_field_container\"\n >\n <LdapFieldComponent\n className=\"field-input\"\n onChange={onChange}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'أدخل ميزة هدف المجموعة التي تحدد المستخدمين الذين تتضمنهم هذه المجموعة.' is a literal translation and doesn't flow naturally in Arabic. The term 'ميزة هدف المجموعة' (feature of the group object) is clunky and not idiomatic.",
+          "suggestion": "أدخل السمة الخاصة بالمجموعة التي تحدد المستخدمين الأعضاء فيها."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'الذين تتضمنهم هذه المجموعة' (who this group includes) is grammatically correct but sounds unnatural. It can be simplified for better flow.",
+          "suggestion": "الأعضاء فيها."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is overly literal and doesn't flow naturally in Azerbaijani. The English phrase 'what users this group includes' is awkwardly translated as 'hansı istifadəçiləri ehtiva etdiyini'. A more natural phrasing would be something like 'bu qrupın üzvlərini göstərən'.",
+          "suggestion": "Bu qrupun üzvlərini göstərən qrup obyekti xüsusiyyətini daxil edin."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the phrasing 'qrup obyekti xüsusiyyətini' could be shortened and improved for better readability. Consider rephrasing to avoid repetition.",
+          "suggestion": "Bu qrupun üzvlərini göstərən xüsusiyyətini daxil edin."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'օգտվողներ' is spelled incorrectly. The correct spelling is 'օգտվողներ'",
+          "suggestion": "օգտվողներ"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'որը նշում է, թե ինչ օգտվողներ է ներառում այս խումբը' could be phrased more naturally. While technically correct, it's slightly awkward.",
+          "suggestion": "որոշում է ում է ընդգրկում այս խումբը"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'che specifica quali utenti include questo gruppo' is slightly awkward. While grammatically correct, it could be phrased more naturally.",
+          "suggestion": "Inserisci l'attributo dell'oggetto del gruppo che indica quali utenti sono inclusi in questo gruppo."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ຄຸ່ມ' appears to be a typo. It should likely be 'ກຸ່ມ' (group).",
+          "suggestion": "ໃສ່ຄຸນລັກສະນະຂອງວັດຖຸກຸ່ມທີ່ລະບຸວ່າຄົນໃຊ້ກຸ່ມນີ້ປະກອບມີໃຜແດ່។"
+        },
+        {
+          "type": "grammar",
+          "description": "While understandable, the sentence structure could be improved for better flow and naturalness.  The phrase 'ປະກອບມີໃຜແດ່' could be refined.",
+          "suggestion": "ໃສ່ຄຸນລັກສະນະຂອງວັດຖຸກຸ່ມທີ່ລະບຸວ່າກຸ່ມນີ້ປະກອບດ້ວຍຜູ້ໃຊ້ໃຜบ้าง។"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Introduceți atributul obiectului de grup care indică utilizatorii din acest grup' is a literal translation but doesn't quite capture the nuance of the English phrase. It sounds a bit clunky in Romanian. A more natural translation would be something like 'Introduceți atributul obiectului de grup care definește membrii acestuia.'",
+          "suggestion": "Introduceți atributul obiectului de grup care definește membrii acestuia."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'නියෝගිත කාණ්ඩයේ ගුණාංගය ඇතුළු කරන්න, එය මෙම කාණ්ඩයට අයත් පරිශීලකයින් දක්වනවා.' doesn't accurately convey the meaning of 'Enter the group object attribute which specifies what users this group includes.' The current translation is more like 'Enter the attribute of the designated group, it indicates the consumers belonging to this group.' It misses the core concept of the attribute *specifying* the users.",
+          "suggestion": "පරිශීලකයින්ගේ ලැයිස්තුවක් අඩංගු වන කාණ්ඩයේ ගුණාංගය ඇතුළු කරන්න."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'මෙම කාණ්ඩයට අයත් පරිශීලකයින් දක්වනවා' is slightly awkward. While understandable, it could be phrased more naturally.",
+          "suggestion": "මෙම කාණ්ඩයට අයත් පරිශීලකයින් හඳුනාගන්න."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'grupe' appears twice and should be consistently capitalized or not capitalized depending on the style guide.",
+          "suggestion": "Consider whether 'grupe' should be capitalized in both instances or remain lowercase."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Nhập thuộc tính đối tượng nhóm chỉ định những người dùng được bao gồm trong nhóm này' is a literal translation but sounds slightly awkward in Vietnamese. A more natural phrasing would convey the same meaning.",
+          "suggestion": "Nhập thuộc tính đối tượng nhóm để xác định những người dùng thuộc nhóm này."
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'được bao gồm trong nhóm này' is a little repetitive. The suggested correction aims for conciseness.",
+          "suggestion": "Nhập thuộc tính đối tượng nhóm để xác định những người dùng thuộc nhóm này."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

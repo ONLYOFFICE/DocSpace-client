@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,7 +30,6 @@ import { inject, observer } from "mobx-react";
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Link, LinkType } from "@docspace/shared/components/link";
-import { Box } from "@docspace/shared/components/box";
 import { TableBody } from "@docspace/shared/components/table";
 import EmptyScreenUserReactSvgUrl from "PUBLIC_DIR/images/empty_screen_user.react.svg?url";
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
@@ -61,11 +60,15 @@ const TableView = (props: TableViewProps) => {
   } = props as SelectUserTableProps;
   const tableRef = useRef<HTMLDivElement>(null);
 
-  const toggleAll = (e: React.ChangeEvent<HTMLInputElement>) =>
-    toggleAllAccounts(e.target.checked, withEmailUsers, checkedAccountType);
+  const toggleAll = (e?: React.ChangeEvent<HTMLInputElement>) =>
+    toggleAllAccounts(
+      e?.target?.checked ?? false,
+      withEmailUsers,
+      checkedAccountType,
+    );
 
   const handleToggle = (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: React.MouseEvent<Element> | React.ChangeEvent<HTMLInputElement>,
     user: TEnhancedMigrationUser,
   ) => {
     e.stopPropagation();
@@ -84,7 +87,10 @@ const TableView = (props: TableViewProps) => {
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
   return (
-    <StyledTableContainer forwardedRef={tableRef} useReactWindow>
+    <StyledTableContainer
+      forwardedRef={tableRef as React.RefObject<HTMLDivElement>}
+      useReactWindow
+    >
       {accountsData.length > 0 ? (
         <>
           <UsersTableHeader
@@ -107,7 +113,7 @@ const TableView = (props: TableViewProps) => {
             filesLength={accountsData.length}
             hasMoreFiles={false}
             itemCount={accountsData.length}
-            fetchMoreFiles={() => {}}
+            fetchMoreFiles={async () => {}}
           >
             {accountsData.map((data) => (
               <UsersTableRow
@@ -117,9 +123,11 @@ const TableView = (props: TableViewProps) => {
                 email={data.email}
                 isDuplicate={data.isDuplicate}
                 isChecked={isAccountChecked(data.key, checkedAccountType)}
-                toggleAccount={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  handleToggle(e, data)
-                }
+                toggleAccount={(
+                  e:
+                    | React.MouseEvent<Element>
+                    | React.ChangeEvent<HTMLInputElement>,
+                ) => handleToggle(e, data)}
               />
             ))}
           </TableBody>
@@ -131,7 +139,7 @@ const TableView = (props: TableViewProps) => {
           headerText={t("Common:NotFoundUsers")}
           descriptionText={t("Common:NotFoundUsersDescription")}
           buttons={
-            <Box displayProp="flex" alignItems="center">
+            <div className="buttons-box">
               <IconButton
                 className="clear-icon"
                 isFill
@@ -147,7 +155,7 @@ const TableView = (props: TableViewProps) => {
               >
                 {t("Common:ClearFilter")}
               </Link>
-            </Box>
+            </div>
           }
         />
       )}

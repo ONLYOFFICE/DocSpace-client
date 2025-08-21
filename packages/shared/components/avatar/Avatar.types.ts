@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,16 +25,28 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { AvatarRole, AvatarSize } from "./Avatar.enums";
-import { TColorScheme } from "../../themes";
+import { Nullable } from "../../types";
 
-export interface AvatarProps {
+import { AvatarRole, AvatarSize } from "./Avatar.enums";
+
+export type TAvatarModel = { label: string; icon: string } & (
+  | {
+      key: string;
+      onClick: () => void;
+    }
+  | {
+      key: "upload";
+      onClick: (ref?: React.RefObject<Nullable<HTMLDivElement>>) => void;
+    }
+);
+
+export type AvatarProps = {
   /** Size of avatar */
   size: AvatarSize;
   /** Adds a table of user roles */
   role: AvatarRole;
   /** Displays as `Picture` in case the url is specified and as `Icon` in case the path to the .svg file is specified */
-  source: string;
+  source?: string;
   /** Allows to display a user name as initials when `source` is set to blank */
   userName?: string;
   /** Enables avatar editing */
@@ -63,5 +75,9 @@ export interface AvatarProps {
   noClick?: boolean;
   hasAvatar?: boolean;
   onChangeFile?: () => void;
-  currentColorScheme?: TColorScheme;
-}
+
+  model?: TAvatarModel[];
+  isNotIcon?: boolean;
+  imgClassName?: string;
+  dataTestId?: string;
+};

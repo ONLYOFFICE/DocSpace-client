@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,40 +25,90 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-
+import classNames from "classnames";
 import { Loader, LoaderTypes } from "../loader";
-
 import { ButtonProps } from "./Button.types";
-import ButtonTheme from "./Button.theme";
 import { ButtonSize } from "./Button.enums";
+import styles from "./Button.module.scss";
 
-export { ButtonSize };
+export const Button = (props: React.PropsWithChildren<ButtonProps>) => {
+  const {
+    ref,
+    label,
+    primary,
+    size = ButtonSize.normal,
+    scale,
+    icon,
+    isDisabled,
+    isLoading,
+    isHovered,
+    isClicked,
+    className,
+    testId = "button",
+    type,
+    id,
+    minWidth,
+    style,
+    ...rest
+  } = props;
 
-const Button = React.forwardRef<
-  HTMLButtonElement,
-  React.PropsWithChildren<ButtonProps>
->((props, ref) => {
-  const { isLoading, icon, label, primary, isDisabled } = props;
+  const buttonClasses = classNames(
+    styles.button,
+    {
+      [styles.primary]: primary,
+      [styles.scale]: scale,
+      [styles[size]]: size,
+      [styles.isLoading]: isLoading,
+      [styles.isHovered]: isHovered,
+      [styles.isClicked]: isClicked,
+      [styles.isDisabled]: isDisabled,
+    },
+    className,
+  );
+
+  const contentClasses = classNames(styles.buttonContent, {
+    [styles.loading]: isLoading,
+    "button-content": true,
+  });
+
+  const buttonStyle = minWidth ? { ...style, minWidth } : style;
+
   return (
-    <ButtonTheme {...props} ref={ref} data-testid="button">
-      {isLoading && (
+    <button
+      {...rest}
+      id={id}
+      ref={ref}
+      type={type === "submit" ? "submit" : "button"}
+      className={buttonClasses}
+      disabled={isDisabled || isLoading}
+      data-testid={testId}
+      data-size={size}
+      aria-label={label}
+      aria-disabled={isDisabled ? "true" : undefined}
+      aria-busy={isLoading ? "true" : undefined}
+      style={buttonStyle}
+    >
+      {isLoading ? (
         <Loader
-          className="loader"
-          color=""
+          id={id}
+          className={classNames(styles.loader, "loader", {
+            [styles.primary]: primary,
+          })}
           size="20px"
           type={LoaderTypes.track}
           label={label}
-          primary={primary || false}
-          isDisabled={isDisabled || false}
+          primary={primary}
+          isDisabled={isDisabled}
         />
-      )}
-      <div className="button-content not-selectable">
-        {icon && <div className="icon">{icon}</div>}
+      ) : null}
+      <div className={contentClasses}>
+        {icon ? (
+          <div className={classNames(styles.icon, "icon")}>{icon}</div>
+        ) : null}
         {label}
       </div>
-    </ButtonTheme>
+    </button>
   );
-});
+};
 
 Button.displayName = "Button";
-export { Button };

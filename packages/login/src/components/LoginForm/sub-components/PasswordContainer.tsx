@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -64,7 +64,8 @@ const PasswordContainer = ({
       isVertical
       labelVisible={false}
       hasError={!passwordValid}
-      errorMessage={passwordErrorMessage} //TODO: Add wrong password server error
+      errorMessage={passwordErrorMessage} // TODO: Add wrong password server error
+      dataTestId="password_field_container"
     >
       <PasswordInput
         className="password-input"

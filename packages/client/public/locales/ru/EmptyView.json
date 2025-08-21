@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "В этом разделе будут отображаться последние просмотренные или отредактированные документы.",
   "EmptyRootRoomUserDescription": "Здесь появится комната, к которой предоставлен доступ.",
   "EmptyRootRoomUserTitle": "Здесь пока нет комнат",
+  "EmptyTemplatesDescription": "Вы можете создать шаблон из комнаты в разделе Комнаты",
+  "EmptyTemplatesTitle": "Здесь пока нет шаблонов",
   "FormFolderDefaultDescription": "Перетащите PDF-формы сюда или загрузите их с {{productName}} или устройства.",
   "FormFolderDefaultTitle": "Здесь пока нет форм",
   "FormFolderDefaultUserDescription": "Здесь будут находиться формы, загруженные администраторами.",
@@ -33,6 +35,7 @@
   "MigrationDataDescription": "Импортируйте данные в {{productName}} из {{organizationName}} Workspace, Google Workspace или Nextcloud.",
   "MigrationDataTitle": "Данные о миграции",
   "PublicRoomEmptyTitle": "Добро пожаловать в Публичную комнату",
+  "SectionsUploadDescription": "Загрузите файлы любого типа из {{sectionNameFirst}} или {{sectionNameSecond}}",
   "SendInvitationLetter": "Отправьте приглашение для добавления новых участников на портал",
   "ShareOptionDescription": "Скопируйте ссылку публичного доступа или пригласите других пользователей в комнату, чтобы начать процесс заполнения формы.",
   "ShareOptionTitle": "Предоставить доступ к комнате",
@@ -42,9 +45,7 @@
   "UploadDeviceOptionTitle": "Загрузить с вашего устройства",
   "UploadDevicePDFFormOptionDescription": "Загрузите готовую PDF-форму в комнату со своего устройства",
   "UploadDevicePDFFormOptionTitle": "Загрузить с устройства",
-  "UploadFromPortalDescription": "Загружайте файлы любого типа из раздела Документы или Комнат.",
   "UploadFromPortalTitle": "Загрузить из {{productName}}",
   "UploadPDFFormOptionDescription": "Выберите готовую PDF-форму, доступную в {{productName}}, и загрузите ее в комнату.",
-  "UserEmptyDescription": "Здесь будут находиться файлы и папки, загруженные администраторами.",
   "VirtualDataRoomEmptyTitle": "Добро пожаловать в Виртуальную комнату данных"
 }

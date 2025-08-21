@@ -214,7 +214,7 @@ Scenario("Filter block ", ({ I }) => {
     // clear filter
     I.click({
       react: "IconButton",
-      props: { iconName: "/static/images/clear.react.svg" },
+      props: { iconName: "/static/images/icons/17/clear.react.svg" },
     });
 
     if (!isModel) {

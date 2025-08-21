@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,13 +26,19 @@
 
 import { useTranslation } from "react-i18next";
 import { useState, useEffect } from "react";
+import classNames from "classnames";
+import { useTheme } from "styled-components";
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
 import UniverseIcon from "PUBLIC_DIR/images/universe.react.svg?url";
 import PeopleIcon from "PUBLIC_DIR/images/people.react.svg?url";
-import CopyIcon from "PUBLIC_DIR/images/copy.react.svg?url";
+import CopyIcon from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
+import CopyIconLight from "PUBLIC_DIR/images/icons/16/copy-light.react.svg?url";
+import CopyIconLightHovered from "PUBLIC_DIR/images/icons/16/copy-light-hovered.react.svg?url";
+import CopyIconDark from "PUBLIC_DIR/images/icons/16/copy-dark.react.svg?url";
+import CopyIconDarkHovered from "PUBLIC_DIR/images/icons/16/copy-dark-hovered.react.svg?url";
 import LockedReactSvg from "PUBLIC_DIR/images/icons/12/locked.react.svg";
 
-import { isMobile } from "@docspace/shared/utils";
+import { isMobile } from "../../../utils";
 import { RowSkeleton } from "../../../skeletons/share";
 import { TFileLink } from "../../../api/files/types";
 import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
@@ -42,7 +48,6 @@ import { IconButton } from "../../icon-button";
 import { Loader, LoaderTypes } from "../../loader";
 import { Text } from "../../text";
 
-import { StyledLinkRow, StyledSquare } from "../Share.styled";
 import {
   getShareOptions,
   getAccessOptions,
@@ -56,6 +61,8 @@ import ExpiredComboBox from "./ExpiredComboBox";
 
 import { AccessRightSelect } from "../../access-right-select";
 import { ContextMenuButton } from "../../context-menu-button";
+
+import styles from "../Share.module.scss";
 
 const LinkRow = ({
   onAddClick,
@@ -75,8 +82,11 @@ const LinkRow = ({
   removedExpiredLink,
   isFormRoom,
 }: LinkRowProps) => {
-  const { t } = useTranslation(["Common", "Translations"]);
+  const theme = useTheme();
+
+  const { t } = useTranslation("Common");
   const [isMobileViewLink, setIsMobileViewLink] = useState(isMobile());
+  const [copyIconIsHovered, setCopyIconIsHovered] = useState(false);
 
   const shareOptions = getShareOptions(t, availableExternalRights) as TOption[];
   const accessOptions = availableExternalRights
@@ -106,14 +116,18 @@ const LinkRow = ({
   };
 
   return !links?.length ? (
-    <StyledLinkRow onClick={onAddClick}>
-      <StyledSquare>
+    <div
+      className={styles.linkRow}
+      onClick={onAddClick}
+      data-testid="info_panel_share_create_and_copy_link"
+    >
+      <div className={styles.square}>
         <IconButton size={12} iconName={PlusIcon} isDisabled />
-      </StyledSquare>
-      <Link className="create-and-copy_link" noHover fontWeight={600}>
+      </div>
+      <Link className={styles.createAndCopyLink} noHover fontWeight={600}>
         {t("Common:CreateAndCopy")}
       </Link>
-    </StyledLinkRow>
+    </div>
   ) : (
     links.map((link, index) => {
       if (("isLoaded" in link && link.isLoaded) || "isLoaded" in link)
@@ -140,14 +154,28 @@ const LinkRow = ({
 
       const isLoaded = loadingLinks.includes(link.sharedTo.id);
 
+      const copyImage = theme.isBase
+        ? copyIconIsHovered
+          ? CopyIconLightHovered
+          : CopyIconLight
+        : copyIconIsHovered
+          ? CopyIconDarkHovered
+          : CopyIconDark;
+
       return (
-        <StyledLinkRow
-          isExpired={isExpiredLink}
+        <div
+          className={classNames(styles.linkRow, {
+            [styles.isDisabled]: isArchiveFolder,
+          })}
           key={`share-link-row-${index * 5}`}
-          isDisabled={isArchiveFolder}
+          data-testid={`info_panel_share_link_row_${index}`}
         >
           {isLoaded ? (
-            <Loader className="loader" size="20px" type={LoaderTypes.track} />
+            <Loader
+              className={styles.loader}
+              size="20px"
+              type={LoaderTypes.track}
+            />
           ) : (
             <Avatar
               size={AvatarSize.min}
@@ -157,21 +185,27 @@ const LinkRow = ({
               noClick
             />
           )}
-          <div className="link-options">
+          <div className={styles.linkOptions}>
             {isRoomsLink ? (
               <Text
-                className="link-options_title link-options-title-room"
+                className={classNames(
+                  styles.linkOptionsTitle,
+                  styles.linkOptionsTitleRoom,
+                  {
+                    [styles.isExpired]: isExpiredLink,
+                  },
+                )}
                 truncate
               >
                 {linkTitle}
               </Text>
             ) : !isExpiredLink ? (
               <ComboBox
-                className="internal-combobox"
+                className={styles.internalCombobox}
                 directionY="both"
                 options={shareOptions}
                 selectedOption={shareOption ?? ({} as TOption)}
-                onSelect={(item) => changeShareOption(item, link)}
+                onSelect={(item) => changeShareOption?.(item, link)}
                 scaled={false}
                 scaledOptions={false}
                 showDisabledItems
@@ -182,49 +216,67 @@ const LinkRow = ({
                 isDisabled={isLoaded}
               />
             ) : (
-              <Text className="link-options_title">{shareOption?.label}</Text>
+              <Text
+                className={classNames(styles.linkOptionsTitle, {
+                  [styles.isExpired]: isExpiredLink,
+                })}
+              >
+                {shareOption?.label}
+              </Text>
             )}
             {isPrimaryLink ? (
               <Text
                 fontSize="12px"
                 fontWeight="400"
                 lineHeight="16px"
-                className="link-time-info"
+                className={styles.linkTimeInfo}
               >
                 {t("Common:NoTimeLimit")}
               </Text>
             ) : (
               <ExpiredComboBox
                 link={link}
-                availableExternalRights={availableExternalRights}
+                availableExternalRights={availableExternalRights!}
                 changeExpirationOption={changeExpirationOption}
                 isDisabled={isLoaded || isArchiveFolder}
                 isRoomsLink={isRoomsLink}
-                changeAccessOption={changeAccessOption}
+                changeAccessOption={changeAccessOption!}
                 removedExpiredLink={removedExpiredLink}
               />
             )}
           </div>
-          <div className="link-actions">
-            {!isArchiveFolder && (
-              <IconButton
-                className="link-actions_copy-icon"
-                size={16}
-                iconName={CopyIcon}
-                onClick={() => onCopyLink(link)}
-                title={t("Common:CreateAndCopy")}
-                isDisabled={isExpiredLink || isLoaded}
-              />
-            )}
+          <div className={styles.linkActions}>
+            {!isArchiveFolder ? (
+              isRoomsLink ? (
+                <img
+                  className={styles.linkActionsCopyIcon}
+                  src={copyImage}
+                  onMouseEnter={() => setCopyIconIsHovered(true)}
+                  onMouseLeave={() => setCopyIconIsHovered(false)}
+                  onClick={() => onCopyLink(link)}
+                  alt={link.sharedTo.shareLink}
+                  title={t("Common:CopySharedLink")}
+                />
+              ) : (
+                <IconButton
+                  className={styles.linkActionsCopyIcon}
+                  size={16}
+                  iconName={CopyIcon}
+                  onClick={() => onCopyLink(link)}
+                  title={t("Common:CopySharedLink")}
+                  isDisabled={isExpiredLink || isLoaded}
+                  dataTestId={`info_panel_share_copy_link_button_${index}`}
+                />
+              )
+            ) : null}
             {isRoomsLink ? (
               <>
-                {!isFormRoom && (
+                {!isFormRoom ? (
                   <AccessRightSelect
                     selectedOption={roomSelectedOptions ?? ({} as TOption)}
                     onSelect={onAccessRightsSelect}
                     accessOptions={roomAccessOptions}
                     modernView
-                    directionX="right"
                     directionY="both"
                     type="onlyIcon"
                     manualWidth="300px"
@@ -234,10 +286,12 @@ const LinkRow = ({
                     fixedDirection={isMobileViewLink}
                     isAside={isMobileViewLink}
                     topSpace={16}
-                    usePortalBackdrop={isMobileViewLink}
+                    usePortalBackdrop
+                    shouldShowBackdrop={isMobileViewLink}
+                    dataTestId={`info_panel_share_access_right_select_${index}`}
                   />
-                )}
-                {!isArchiveFolder && (
+                ) : null}
+                {!isArchiveFolder ? (
                   <ContextMenuButton
                     getData={getData}
                     title={t("Files:ShowLinkActions")}
@@ -246,14 +300,14 @@ const LinkRow = ({
                     onClose={onCloseContextMenu}
                     isDisabled={isExpiredLink || isLoaded}
                   />
-                )}
+                ) : null}
               </>
             ) : (
               <ComboBox
                 directionY="both"
                 options={accessOptions}
                 selectedOption={accessOption ?? ({} as TOption)}
-                onSelect={(item) => changeAccessOption(item, link)}
+                onSelect={(item) => changeAccessOption?.(item, link)}
                 scaled={false}
                 scaledOptions={false}
                 showDisabledItems
@@ -267,7 +321,7 @@ const LinkRow = ({
               />
             )}
           </div>
-        </StyledLinkRow>
+        </div>
       );
     })
   );

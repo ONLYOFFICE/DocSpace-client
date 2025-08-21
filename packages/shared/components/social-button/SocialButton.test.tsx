@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,109 +26,100 @@
 
 import React from "react";
 import "@testing-library/jest-dom";
-import { render, screen } from "@testing-library/react";
+import { screen, fireEvent, render } from "@testing-library/react";
 
-import ShareGoogleReactSvgUrl from "PUBLIC_DIR/images/share.google.react.svg?url";
+import GoogleIcon from "PUBLIC_DIR/images/share.google.react.svg";
 
 import { SocialButton } from "./SocialButton";
 
 describe("<SocialButton />", () => {
-  it("renders without error", () => {
-    render(<SocialButton iconName={ShareGoogleReactSvgUrl} />);
+  const defaultProps = {
+    label: "Continue with Google",
+    IconComponent: GoogleIcon,
+  };
 
-    expect(screen.getByTestId("social-button"));
+  it("renders without error", () => {
+    render(<SocialButton {...defaultProps} />);
+
+    expect(screen.getByTestId("social-button")).toBeInTheDocument();
+    expect(screen.getByText("Continue with Google")).toBeInTheDocument();
   });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("not re-render test", () => {
-  //   // const onClick= () => alert('SocialButton clicked');
+  it("renders with custom icon color", () => {
+    const customColor = "#FF0000";
+    render(
+      <SocialButton
+        {...defaultProps}
+        $iconOptions={{ color: customColor }}
+        style={
+          {
+            "--social-button-custom-icon-color": customColor,
+          } as React.CSSProperties
+        }
+      />,
+    );
 
-  //   const wrapper = shallow(
-  //     // @ts-expect-error TS(2769): No overload matches this call.
-  //     <SocialButton iconName={ShareGoogleReactSvgUrl} label={"Test Caption"} />,
-  //   ).instance();
+    expect(screen.getByTestId("social-button")).toBeInTheDocument();
+  });
 
-  //   const shouldUpdate = wrapper.shouldComponentUpdate(wrapper.props);
+  it("handles click events", () => {
+    const handleClick = jest.fn();
+    render(<SocialButton {...defaultProps} onClick={handleClick} />);
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(shouldUpdate).toBe(false);
-  // });
+    fireEvent.click(screen.getByTestId("social-button"));
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("disabled click test", () => {
-  //   // @ts-expect-error TS(2708): Cannot use namespace 'jest' as a value.
-  //   const testClick = jest.fn();
+  it("renders in disabled state", () => {
+    render(<SocialButton {...defaultProps} isDisabled />);
 
-  //   const wrapper = mount(
-  //     <SocialButton
-  //       // @ts-expect-error TS(2769): No overload matches this call.
-  //       iconName={ShareGoogleReactSvgUrl}
-  //       label={"Test Caption"}
-  //       onClick={testClick}
-  //       isDisabled={true}
-  //     />,
-  //   );
+    const button = screen.getByTestId("social-button");
+    expect(button).toBeDisabled();
+    expect(button).toHaveClass("disabled");
+  });
 
-  //   wrapper.simulate("click");
+  it("renders in small size", () => {
+    render(<SocialButton {...defaultProps} size="small" />);
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(testClick).toHaveBeenCalledTimes(0);
-  // });
+    expect(screen.getByTestId("social-button")).toHaveClass("small");
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("click test", () => {
-  //   // @ts-expect-error TS(2708): Cannot use namespace 'jest' as a value.
-  //   const testClick = jest.fn();
+  it("renders in connected state", () => {
+    render(<SocialButton {...defaultProps} isConnect />);
 
-  //   const wrapper = mount(
-  //     <SocialButton
-  //       // @ts-expect-error TS(2769): No overload matches this call.
-  //       iconName={ShareGoogleReactSvgUrl}
-  //       label={"Test Caption"}
-  //       onClick={testClick}
-  //       isDisabled={false}
-  //     />,
-  //   );
+    expect(screen.getByTestId("social-button")).toHaveClass("isConnect");
+  });
 
-  //   wrapper.simulate("click");
+  it("renders without hover effects", () => {
+    render(<SocialButton {...defaultProps} noHover />);
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(testClick).toHaveBeenCalledTimes(1);
-  // });
+    expect(screen.getByTestId("social-button")).toHaveClass("noHover");
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts id", () => {
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2769): No overload matches this call.
-  //     <SocialButton iconName={ShareGoogleReactSvgUrl} id="testId" />,
-  //   );
+  it("renders with custom data attributes", () => {
+    const dataUrl = "https://example.com";
+    const dataProvider = "google";
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("id")).toEqual("testId");
-  // });
+    render(
+      <SocialButton
+        {...defaultProps}
+        data-url={dataUrl}
+        data-providername={dataProvider}
+      />,
+    );
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts className", () => {
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2769): No overload matches this call.
-  //     <SocialButton iconName={ShareGoogleReactSvgUrl} className="test" />,
-  //   );
+    const container = screen
+      .getByTestId("social-button")
+      .querySelector("[data-url]");
+    expect(container).toHaveAttribute("data-url", dataUrl);
+    expect(container).toHaveAttribute("data-providername", dataProvider);
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("className")).toEqual("test");
-  // });
+  it("renders without label", () => {
+    render(<SocialButton IconComponent={GoogleIcon} />);
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts style", () => {
-  //   const wrapper = mount(
-  //     <SocialButton
-  //       // @ts-expect-error TS(2769): No overload matches this call.
-  //       iconName={ShareGoogleReactSvgUrl}
-  //       style={{ color: "red" }}
-  //     />,
-  //   );
-
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.getDOMNode().style).toHaveProperty("color", "red");
-  // });
+    expect(
+      screen.queryByRole("div", { name: /Continue with Google/i }),
+    ).not.toBeInTheDocument();
+  });
 });

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,11 +27,13 @@
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
 
 import { getConvertedQuota } from "@docspace/shared/utils/common";
 import { Text } from "@docspace/shared/components/text";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { toastr } from "@docspace/shared/components/toast";
+import api from "@docspace/shared/api";
 
 import { connectedCloudsTypeTitleTranslation } from "SRC_DIR/helpers/filesUtils";
 import { changeUserQuota } from "SRC_DIR/helpers/contacts";
@@ -89,16 +91,21 @@ const SpaceQuota = (props) => {
     needResetSelection,
     setSelected,
     inRoom,
+    dataTestId,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation(["Common"]);
+
+  const theme = useTheme();
 
   const usedQuota = getConvertedQuota(t, item?.usedSpace);
   const spaceLimited = getConvertedQuota(t, item?.quotaLimit);
   const defaultQuotaSize = getConvertedQuota(t, defaultSize);
 
   const options = getOptions(t, item, spaceLimited);
+
+  const sideInfoColor = theme.peopleTableRow.sideInfoColor;
 
   const successCallback = (users) => {
     onSuccess && onSuccess(users);
@@ -125,7 +132,7 @@ const SpaceQuota = (props) => {
 
     if (action === "no-quota") {
       try {
-        const items = await updateQuota(-1, [item.id], inRoom);
+        const items = await updateQuota([item.id], -1, inRoom);
 
         options.forEach((o) => {
           if (o.key === "no-quota") o.label = t("Common:Unlimited");
@@ -170,7 +177,7 @@ const SpaceQuota = (props) => {
 
   if (withoutLimitQuota || item?.quotaLimit === undefined) {
     return (
-      <StyledText fontWeight={600} withoutLimitQuota>
+      <StyledText fontWeight={600} $withoutLimitQuota color={sideInfoColor}>
         {usedQuota}
       </StyledText>
     );
@@ -178,14 +185,19 @@ const SpaceQuota = (props) => {
 
   if (isReadOnly) {
     return (
-      <StyledText fontWeight={600} isReadOnly>
+      <StyledText fontWeight={600} $isReadOnly color={sideInfoColor}>
         {usedQuota} / {spaceLimited}
       </StyledText>
     );
   }
 
   return (
-    <StyledBody hideColumns={hideColumns} className={className}>
+    <StyledBody
+      hideColumns={hideColumns}
+      className={className}
+      isLoading={isLoading}
+      data-testid={dataTestId}
+    >
       <Text fontWeight={600}>{usedQuota} / </Text>
 
       <ComboBox
@@ -216,12 +228,8 @@ export default inject(
     { type },
   ) => {
     const { usersStore } = peopleStore;
-    const {
-      setCustomUserQuota,
-      resetUserQuota,
-      needResetUserSelection,
-      setSelected: setUsersSelected,
-    } = usersStore;
+    const { needResetUserSelection, setSelected: setUsersSelected } =
+      usersStore;
     const { changeRoomQuota } = filesActionsStore;
     const {
       setCustomRoomQuota,
@@ -237,14 +245,15 @@ export default inject(
       defaultRoomsQuota,
     } = currentQuotaStore;
 
-    const { infoPanelSelection } = infoPanelStore;
+    const { infoPanelSelection, isVisible: infoPanelVisible } = infoPanelStore;
     const inRoom = !!infoPanelSelection?.navigationPath;
 
     const changeQuota = type === "user" ? changeUserQuota : changeRoomQuota;
     const updateQuota =
-      type === "user" ? setCustomUserQuota : setCustomRoomQuota;
+      type === "user" ? api.people.setCustomUserQuota : setCustomRoomQuota;
 
-    const resetQuota = type === "user" ? resetUserQuota : resetRoomQuota;
+    const resetQuota =
+      type === "user" ? api.people.resetUserQuota : resetRoomQuota;
 
     const withoutLimitQuota =
       type === "user" ? !isDefaultUsersQuotaSet : !isDefaultRoomsQuotaSet;
@@ -263,7 +272,7 @@ export default inject(
       updateQuota,
       resetQuota,
       defaultSize,
-      needResetSelection,
+      needResetSelection: !infoPanelVisible || needResetSelection,
       inRoom,
     };
   },

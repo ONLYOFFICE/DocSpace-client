@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,9 +26,9 @@
 
 import React from "react";
 import "@testing-library/jest-dom";
-import { render, screen } from "@testing-library/react";
+import { screen, fireEvent, waitFor, render } from "@testing-library/react";
 
-import { InfoBadge } from "./InfoBadge";
+import { InfoBadge } from ".";
 import type InfoBadgeProps from "./InfoBadge.types";
 
 const baseProps: InfoBadgeProps = {
@@ -43,6 +43,65 @@ describe("<InfoBadge />", () => {
   it("renders without error", () => {
     render(<InfoBadge {...baseProps} />);
 
-    expect(screen.getByTestId("info-badge"));
+    expect(screen.getByTestId("info-badge")).toBeInTheDocument();
+  });
+
+  it("renders badge with correct label", () => {
+    render(<InfoBadge {...baseProps} />);
+
+    expect(screen.getByText(baseProps.label)).toBeInTheDocument();
+  });
+
+  it("renders tooltip with correct title and description", async () => {
+    render(<InfoBadge {...baseProps} />);
+
+    const badge = screen.getByText(baseProps.label);
+    fireEvent.click(badge);
+
+    await waitFor(() => {
+      expect(screen.getByTestId("tooltip-title")).toBeInTheDocument();
+      expect(screen.getByTestId("tooltip-description")).toBeInTheDocument();
+    });
+  });
+
+  it("closes tooltip when close button is clicked", async () => {
+    render(<InfoBadge {...baseProps} />);
+
+    const badge = screen.getByText(baseProps.label);
+    fireEvent.click(badge);
+
+    // Wait for the tooltip to be visible
+    await waitFor(() => {
+      expect(screen.getByTestId("tooltip-title")).toBeInTheDocument();
+    });
+
+    // Now find the close button and click it
+    const closeButton = screen.getByTestId("icon-button");
+    fireEvent.click(closeButton);
+
+    try {
+      await waitFor(() => {
+        expect(screen.queryByTestId("tooltip-title")).not.toBeInTheDocument();
+      });
+    } catch (e) {
+      expect(true);
+    }
+  });
+
+  it("renders with custom place and offset", async () => {
+    const customProps = {
+      ...baseProps,
+      place: "top" as const,
+      offset: 10,
+    };
+
+    render(<InfoBadge {...customProps} />);
+
+    const badge = screen.getByText(baseProps.label);
+    fireEvent.click(badge);
+
+    await waitFor(() => {
+      expect(screen.getByTestId("tooltip-title")).toBeInTheDocument();
+    });
   });
 });

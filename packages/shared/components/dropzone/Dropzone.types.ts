@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,18 +24,32 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface DropzoneProps {
+import { ReactNode } from "react";
+
+type BaseDropzoneProps = {
+  /** Shows loading state of the dropzone */
   isLoading: boolean;
+  /** Disables the dropzone */
   isDisabled?: boolean;
-
+  /** Main text displayed in the dropzone */
   linkMainText: string;
+  /** Secondary text displayed in the dropzone */
   linkSecondaryText: string;
+  /** Text displaying supported file types */
   exstsText: string;
-
-  accept: string[];
+  /** Maximum number of files allowed (0 for unlimited) */
   maxFiles?: number;
+  /** Optional children elements */
+  children?: ReactNode;
+};
 
-  onDrop?: <T extends File>(acceptedFiles: T[]) => void;
+type FileDropHandler<T extends File = File> = (acceptedFiles: T[]) => void;
 
-  children?: React.ReactNode;
-}
+export type DropzoneProps = BaseDropzoneProps & {
+  /** Accepted file types (string[]) */
+  accept: string | string[];
+  /** Callback when files are dropped */
+  onDrop?: FileDropHandler;
+  /** Data test id */
+  dataTestId?: string;
+};

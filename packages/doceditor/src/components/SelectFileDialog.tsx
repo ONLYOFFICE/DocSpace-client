@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -42,6 +42,7 @@ const SelectFileDialog = ({
   fileInfo,
   filesSettings,
   shareKey,
+  selectedFolderId,
 }: SelectFileDialogProps) => {
   const { t } = useTranslation();
 
@@ -89,10 +90,10 @@ const SelectFileDialog = ({
       onSubmit={onSubmit}
       isRoomsOnly={false}
       isThirdParty={false}
-      currentFolderId={openRoot ? "" : fileInfo.folderId}
+      currentFolderId={openRoot ? "" : selectedFolderId!}
       rootFolderType={fileInfo.rootFolderType}
       withHeader
-      headerLabel={headerLabel}
+      headerProps={{ headerLabel, onCloseClick: onClose }}
       embedded={false}
       withFooterInput={false}
       withFooterCheckbox={false}

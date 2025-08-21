@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,14 +29,15 @@ import { useTranslation } from "react-i18next";
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
 import FilesSelectorWrapper from "@docspace/shared/selectors/Files";
-import { DeviceType, RoomsType } from "@docspace/shared/enums";
+import { RoomsType } from "@docspace/shared/enums";
 import { useSelectorInfoBar } from "@docspace/shared/hooks/useSelectorInfoBar";
 import {
   TInfoBarData,
   TSelectorCancelButton,
 } from "@docspace/shared/components/selector/Selector.types";
 
-import { StartFillingSelectorDialogPprops } from "@/types";
+import { StartFillingSelectorDialogProps } from "@/types";
+import useDeviceType from "@/hooks/useDeviceType";
 
 function StartFillingSelectorDialog({
   fileInfo,
@@ -45,10 +46,12 @@ function StartFillingSelectorDialog({
   onClose,
   onSubmit,
   filesSettings,
-  headerLabel,
-}: StartFillingSelectorDialogPprops) {
+  header,
+  createDefineRoomType,
+}: StartFillingSelectorDialogProps) {
   const { t } = useTranslation(["Common", "Editor"]);
   const [withInfoBar, onCloseInfoBar] = useSelectorInfoBar();
+  const { currentDeviceType } = useDeviceType();
 
   const cancelButtonProps: TSelectorCancelButton = {
     withCancelButton: true,
@@ -58,27 +61,35 @@ function StartFillingSelectorDialog({
   };
   const infoBarData: TInfoBarData = {
     title: t("Common:SelectorInfoBarTitle"),
-    description: t("Common:SelectorInfoBarDescription"),
+    description:
+      createDefineRoomType === RoomsType.FormRoom
+        ? t("Common:SelectorInfoBarDescription")
+        : t("Common:SelectorInfoBarVDRDescription"),
     icon: InfoIcon,
     onClose: onCloseInfoBar,
+  };
+
+  const createDefineRoomLabels: Partial<Record<RoomsType, string>> = {
+    [RoomsType.VirtualDataRoom]: t("Common:CreateVirtualDataRoom"),
+    [RoomsType.FormRoom]: t("Common:CreateFormFillingRoom"),
   };
 
   return (
     <FilesSelectorWrapper
       withCreate
       withHeader
+      headerProps={header}
       withSearch
       isRoomsOnly
       withBreadCrumbs
-      withoutBackButton
+      withoutBackButton={false}
       currentFolderId=""
       rootFolderType={fileInfo.rootFolderType}
-      createDefineRoomLabel={t("Common:CreateFormFillingRoom")}
-      createDefineRoomType={RoomsType.FormRoom}
+      createDefineRoomLabel={createDefineRoomLabels[createDefineRoomType]}
+      createDefineRoomType={createDefineRoomType}
       isPanelVisible={isVisible}
       filesSettings={filesSettings}
-      currentDeviceType={DeviceType.desktop}
-      headerLabel={headerLabel}
+      currentDeviceType={currentDeviceType}
       submitButtonLabel={t("Common:CopyHere")}
       onSubmit={onSubmit}
       getIsDisabled={getIsDisabled}

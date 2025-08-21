@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,15 +26,9 @@
 
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import elementResizeDetectorMaker from "element-resize-detector";
-import React, {
-  useEffect,
-  useRef,
-  useCallback,
-  useMemo,
-  useContext,
-} from "react";
+import React, { useEffect, useRef, useCallback, useMemo, use } from "react";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
@@ -43,6 +37,7 @@ import { Context, injectDefaultTheme } from "@docspace/shared/utils";
 
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
+import withContainer from "../../../../../HOCs/withContainer";
 
 const fileNameCss = css`
   margin-inline-start: -24px;
@@ -127,7 +122,7 @@ const elementResizeDetector = elementResizeDetectorMaker({
 });
 
 const Table = ({
-  filesList,
+  list,
   viewAs,
   setViewAs,
   setFirsElemChecked,
@@ -140,19 +135,26 @@ const Table = ({
   isRooms,
   isTrashFolder,
   isIndexEditingMode,
+  isTemplatesFolder,
   columnStorageName,
   columnInfoPanelStorageName,
   highlightFile,
   currentDeviceType,
   onEditIndex,
   isIndexing,
-  icon,
-  isDownload,
+  isTutorialEnabled,
+  setRefMap,
+  deleteRefMap,
+  selectedFolderTitle,
+  canCreateSecurity,
+  setDropTargetPreview,
+  disableDrag,
+  withContentSelection,
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
   const [hideColumns, setHideColumns] = React.useState(false);
 
-  const { sectionWidth } = useContext(Context);
+  const { sectionWidth } = use(Context);
 
   const ref = useRef(null);
   const tagRef = useRef(null);
@@ -203,7 +205,7 @@ const Table = ({
   }, [isRooms]);
 
   const filesListNode = useMemo(() => {
-    return filesList.map((item, index) => (
+    return list.map((item, index) => (
       <TableRow
         id={`${item?.isFolder ? "folder" : "file"}_${item.id}`}
         key={
@@ -220,17 +222,25 @@ const Table = ({
         theme={theme}
         tagCount={tagCount}
         isRooms={isRooms}
+        isTemplates={isTemplatesFolder}
         isTrashFolder={isTrashFolder}
         hideColumns={hideColumns}
         isHighlight={
-          highlightFile.id == item.id && highlightFile.isExst === !item.fileExst
+          highlightFile.id == item.id
+            ? highlightFile.isExst === !item.fileExst
+            : null
         }
-        icon={icon}
-        isDownload={isDownload}
+        isTutorialEnabled={isTutorialEnabled}
+        setRefMap={setRefMap}
+        deleteRefMap={deleteRefMap}
+        selectedFolderTitle={selectedFolderTitle}
+        canCreateSecurity={canCreateSecurity}
+        setDropTargetPreview={setDropTargetPreview}
+        disableDrag={disableDrag}
       />
     ));
   }, [
-    filesList,
+    list,
     setFirsElemChecked,
     setHeaderBorder,
     theme,
@@ -242,12 +252,15 @@ const Table = ({
     isTrashFolder,
     isIndexEditingMode,
     isIndexing,
-    icon,
-    isDownload,
+    isTutorialEnabled,
+    setRefMap,
+    deleteRefMap,
+    disableDrag,
   ]);
 
   return (
     <StyledTableContainer
+      noSelect={!withContentSelection}
       useReactWindow
       forwardedRef={ref}
       isIndexEditingMode={isIndexEditingMode}
@@ -261,13 +274,13 @@ const Table = ({
         location={location}
         isRooms={isRooms}
         isIndexing={isIndexing}
-        filesList={filesList}
+        filesList={list}
       />
 
       <TableBody
         fetchMoreFiles={fetchMoreFiles}
         columnStorageName={columnStorageName}
-        filesLength={filesList.length}
+        filesLength={list.length}
         hasMoreFiles={hasMoreFiles}
         itemCount={filterTotal}
         useReactWindow
@@ -287,27 +300,25 @@ export default inject(
     filesStore,
     infoPanelStore,
     treeFoldersStore,
-
     tableStore,
     userStore,
     settingsStore,
-
+    guidanceStore,
     indexingStore,
     filesActionsStore,
     selectedFolderStore,
     uploadDataStore,
+    hotkeyStore,
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
-    const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
-    const isRooms = isRoomsFolder || isArchiveFolder;
+    const { isRoomsFolder, isArchiveFolder, isTrashFolder, isTemplatesFolder } =
+      treeFoldersStore;
+    const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
 
     const { columnStorageName, columnInfoPanelStorageName } = tableStore;
 
-    const { icon, isDownload } = uploadDataStore.secondaryProgressDataStore;
-
     const {
-      filesList,
       viewAs,
       setViewAs,
       setFirsElemChecked,
@@ -317,15 +328,26 @@ export default inject(
       roomsFilter,
       highlightFile,
       filter,
+      disableDrag,
     } = filesStore;
 
     const { isIndexEditingMode } = indexingStore;
     const { changeIndex } = filesActionsStore;
-    const { isIndexedFolder } = selectedFolderStore;
+    const {
+      isIndexedFolder,
+      title: selectedFolderTitle,
+      security,
+    } = selectedFolderStore;
     const { theme, currentDeviceType } = settingsStore;
+    const { setRefMap, deleteRefMap } = guidanceStore;
+    const { withContentSelection } = hotkeyStore;
+
+    const { primaryProgressDataStore } = uploadDataStore;
+    const { setDropTargetPreview } = primaryProgressDataStore;
+
+    const canCreateSecurity = security?.Create;
 
     return {
-      filesList,
       viewAs,
       setViewAs,
       setFirsElemChecked,
@@ -340,13 +362,19 @@ export default inject(
       isTrashFolder,
       isIndexEditingMode,
       isIndexing: isIndexedFolder,
+      isTemplatesFolder,
       columnStorageName,
       columnInfoPanelStorageName,
       highlightFile,
       currentDeviceType,
       onEditIndex: changeIndex,
-      icon,
-      isDownload,
+      setRefMap,
+      deleteRefMap,
+      selectedFolderTitle,
+      canCreateSecurity,
+      setDropTargetPreview,
+      disableDrag,
+      withContentSelection,
     };
   },
-)(observer(Table));
+)(withContainer(observer(Table)));

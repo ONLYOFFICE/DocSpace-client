@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -124,8 +124,9 @@ const SelectedDateTime = ({
         onClose={deleteSelectedDate}
         label={filters.deliveryDate.format("DD MMM YYYY") + formattedTime}
         onClick={toggleCalendar}
+        dataTestId="selected_delivery_date"
       />
-      {isCalendarOpen && (
+      {isCalendarOpen ? (
         <CalendarElement
           filters={filters}
           onDateSet={onDateSet}
@@ -133,7 +134,7 @@ const SelectedDateTime = ({
           calendarRef={calendarRef}
           i18n={i18n}
         />
-      )}
+      ) : null}
     </div>
   );
 };
@@ -260,11 +261,11 @@ const DeliveryDatePicker = ({
             selectDateText={t("Common:SelectDate")}
             showCalendarIcon={false}
             locale={i18n.language}
+            dataTestId="delivery_date_picker"
           />
         )}
-        {filters.deliveryDate !== null &&
-          isDefaultTime &&
-          (isTimeOpen && !isApplied ? (
+        {filters.deliveryDate !== null && isDefaultTime ? (
+          isTimeOpen && !isApplied ? (
             <TimePickerCell>
               <span className="timePickerItem">
                 <Text
@@ -282,6 +283,7 @@ const DeliveryDatePicker = ({
                   tabIndex={1}
                   locale={i18n.language}
                   initialTime={filters.deliveryFrom}
+                  dataTestId="delivery_time_picker_from"
                 />
               </span>
 
@@ -301,6 +303,7 @@ const DeliveryDatePicker = ({
                 tabIndex={2}
                 locale={i18n.language}
                 initialTime={filters.deliveryTo}
+                dataTestId="delivery_time_picker_to"
               />
             </TimePickerCell>
           ) : (
@@ -309,12 +312,11 @@ const DeliveryDatePicker = ({
                 title={t("Common:AddButton")}
                 onClick={showTimePicker}
                 className="mr-8 add-delivery-time-button"
+                label={t("SelectDeliveryTime")}
               />
-              <Text isInline fontWeight={600} color={globalColors.gray}>
-                {t("SelectDeliveryTime")}
-              </Text>
             </TimePickerCell>
-          ))}
+          )
+        ) : null}
       </Selectors>
     </>
   );

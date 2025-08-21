@@ -1,0 +1,250 @@
+{
+  "key_path": "ReassignDataToAnotherUser",
+  "content": "Reassign data to another user",
+  "content_en_sha1_hash": "2bf522106a72613d54369c00781f888c09915907",
+  "created_at": "2025-05-19T21:30:56.676Z",
+  "updated_at": "2025-08-11T18:11:59.130Z",
+  "comment": {
+    "text": "Reassign data to another user is a button label used in change user type dialogs. The translated version of this key will be displayed as the text on the \"Reassign Data\" button, which allows users to transfer their data to another account or user.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:26.445Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangeUserTypeDialog/index.tsx",
+      "line_number": 200,
+      "context": "fontSize=\"13px\"\n fontWeight={600}\n isHovered\n onClick={() => onClickReassignData()}\n >\n {t(\"DeleteProfileEverDialog:ReassignDataToAnotherUser\")}\n </Link>\n ) : null}\n </>\n );\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
+      "line_number": 176,
+      "context": "fontWeight={600}\n isHovered\n onClick={onClickReassignData}\n dataTestId=\"dialog_reassign_data_link\"\n >\n {t(\"DeleteProfileEverDialog:ReassignDataToAnotherUser\")}\n </Link>\n ) : null}\n </>\n );\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Məlumatı başqa istifadəçiyə təyin edin' literally translates to 'Assign data to another user.' While understandable, 'Reassign' implies moving data already assigned, which isn't conveyed. A more accurate translation considering the 'Reassign' context would be 'Məlumatı başqa istifadəçiyə köçürün' (Move data to another user) or 'Məlumatı digər istifadəçiyə verin' (Give data to another user).",
+          "suggestion": "Məlumatı başqa istifadəçiyə köçürün"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ມອບໝາຍຂໍ້ມູນຄືນໃໝ່ໃຫ້ຜູ້ໃຊ້ອື່ນ' literally translates to 'reassign data again to another user'. The 'ຄືນໃໝ່' (again) is unnecessary and changes the intended meaning.  It implies the data has already been reassigned before.",
+          "suggestion": "ມອບຂໍ້ມູນໃຫ້ຜູ້ໃຊ້ອື່ນ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'වෙනත් පරිශ්‍රීලකයෙක්ට දත්ත පවරන්න' while understandable, isn't the most natural or accurate translation of 'Reassign data to another user'.  'පවරන්න' implies giving away. 'Reassign' implies transferring ownership or responsibility, not simply handing over.",
+          "suggestion": "Consider 'වෙනත් පරිශ්‍රීලකයෙක්ට දත්ත නැවත පත් කරන්න' or 'වෙනත් පරිශ්‍රීලකයෙක්ට දත්ත යටපත් කරන්න'.  Alternatively, 'වෙනත් පරිශ්‍රීලකයකුට දත්ත පවරන්න' is acceptable, although carries a slightly different nuance. More context is needed to choose the most accurate option."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Поново додели податке другом кориснику\" is a bit clunky and not the most natural way to express 'Reassign data to another user' in Serbian. It implies a 're-' assignment. A more fluent translation would be preferred.",
+          "suggestion": "Пребаци податке другом кориснику"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Ponovo dodeli podatke drugom korisniku' is a bit clunky. 'Ponovo' (again) isn't necessary here. A more natural translation would imply reassignment.",
+          "suggestion": "Dodeli podatke drugom korisniku"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Verileri başka bir kullanıcıya yeniden ata' while technically correct, isn't the most natural or common phrasing for 'Reassign data to another user' in Turkish. 'Reassign' implies a move or transfer. 'Yeniden ata' implies re-assigning something already assigned.",
+          "suggestion": "Verileri başka bir kullanıcıya aktar"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,212 @@
+@use "../../styles/variables/colors";
+@use "../../styles/mixins";
+
+.dialogLoader {
+  height: auto;
+
+  width: 400px;
+
+  &[data-is-large="true"] {
+    width: 520px;
+  }
+
+  @include mixins.mobile {
+    width: 100%;
+  }
+
+  :global {
+    .dialog-loader-header {
+      border-bottom: 1px solid var(--modal-dialog-header-border-color);
+      padding: 12px 16px;
+    }
+
+    .dialog-loader-body {
+      padding: 12px 16px 8px;
+    }
+
+    .dialog-loader-footer {
+      display: flex;
+      gap: 10px;
+      padding: 16px;
+    }
+  }
+
+  &[data-with-footer-border="true"] {
+    :global {
+      .dialog-loader-footer {
+        border-top: 1px solid var(--modal-dialog-header-border-color);
+      }
+    }
+  }
+}
+
+.dialogAsideLoader {
+  :global {
+    .dialog-loader-header {
+      border-bottom: 1px solid var(--modal-dialog-header-border-color);
+      padding: 12px 16px;
+    }
+    .dialog-loader-body {
+      padding: 16px;
+    }
+
+    .dialog-loader-footer {
+      padding: 16px;
+      position: fixed;
+      bottom: 0;
+      width: calc(100% - 32px);
+    }
+  }
+
+  &[data-with-footer-border="true"] {
+    :global {
+      .dialog-loader-footer {
+        border-top: 1px solid var(--modal-dialog-header-border-color);
+      }
+    }
+  }
+
+  &[data-is-panel="true"] {
+    :global {
+      .dialog-loader-header {
+        padding: 12px 16px;
+        height: 53px;
+        border-bottom: 1px solid var(--modal-dialog-header-border-color);
+        box-sizing: border-box;
+      }
+
+      .dialog-loader-body {
+        padding: 16px;
+      }
+
+      .dialog-loader-footer {
+        padding: 12px 16px;
+        position: fixed;
+        bottom: 0;
+
+        height: 71px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+
+        box-sizing: border-box;
+
+        border-top: 1px solid var(--modal-dialog-header-border-color);
+      }
+    }
+  }
+}
+
+.dataReassignmentLoader {
+  :global {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    .user {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .name {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+    }
+
+    .new-owner_header {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding-bottom: 12px;
+    }
+
+    .new-owner_add {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .description {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+  }
+}
+
+.dialogInviteLoader {
+  :global {
+    .dialog-loader-header {
+      padding: 12px 16px;
+      height: 53px;
+      border-bottom: 1px solid var(--modal-dialog-header-border-color);
+      box-sizing: border-box;
+    }
+
+    .dialog-loader-footer {
+      padding: 12px 16px;
+      position: fixed;
+      bottom: 0;
+
+      height: 71px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+
+      box-sizing: border-box;
+
+      border-top: 1px solid var(--modal-dialog-header-border-color);
+    }
+  }
+}
+
+.externalLinksLoader {
+  padding: 20px 16px 16px;
+  border-bottom: 1px solid var(--modal-dialog-header-border-color);
+
+  :global {
+    .external-links-loader {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .check-box {
+      padding-top: 3px;
+    }
+  }
+}
+
+.inviteInputLoader {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  padding: 20px 16px;
+}
+
+.invitePanelLoaderHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.invitePanelLoaderFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+
+  margin-top: 8px;
+}

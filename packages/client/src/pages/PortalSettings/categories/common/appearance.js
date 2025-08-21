@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,6 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import CheckWhiteSvgUrl from "PUBLIC_DIR/images/check.white.svg?url";
+import LightSvgUrl from "PUBLIC_DIR/images/icons/16/light.svg?url";
+import DarkSvgUrl from "PUBLIC_DIR/images/icons/16/dark.svg?url";
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { withTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
@@ -36,6 +38,9 @@ import { Tabs, TabsTypes } from "@docspace/shared/components/tabs";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { DropDown } from "@docspace/shared/components/drop-down";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { Link } from "@docspace/shared/components/link";
+
 import api from "@docspace/shared/api";
 
 import { ReactSVG } from "react-svg";
@@ -67,6 +72,8 @@ const Appearance = (props) => {
     t,
     currentDeviceType,
     resetIsInit,
+
+    appearanceBlockHelpUrl,
   } = props;
 
   const defaultAppliedColorAccent = currentColorScheme.main?.accent;
@@ -140,7 +147,7 @@ const Appearance = (props) => {
     () => [
       {
         id: "light-theme",
-        name: t("Profile:LightTheme"),
+        name: t("Common:LightTheme"),
         content: (
           <Preview
             appliedColorAccent={appliedColorAccent}
@@ -150,10 +157,11 @@ const Appearance = (props) => {
             themePreview="Light"
           />
         ),
+        iconName: LightSvgUrl,
       },
       {
         id: "dark-theme",
-        name: t("Profile:DarkTheme"),
+        name: t("Common:DarkTheme"),
         content: (
           <Preview
             appliedColorAccent={appliedColorAccent}
@@ -163,10 +171,13 @@ const Appearance = (props) => {
             themePreview="Dark"
           />
         ),
+        iconName: DarkSvgUrl,
       },
     ],
     [previewAccent, selectThemeId, colorCheckImg, tReady],
   );
+
+  const [selectedItemId, setSelectedItemId] = useState(arrayItems[0].id);
 
   // const getSettings = () => {
   //   const selectColorId = getFromSessionStorage("selectColorId");
@@ -181,7 +192,7 @@ const Appearance = (props) => {
 
   useEffect(() => {
     // getSettings();
-    setDocumentTitle(t("Common:Appearance"));
+    setDocumentTitle(t("Settings:Appearance"));
   }, []);
 
   useEffect(() => {
@@ -336,7 +347,7 @@ const Appearance = (props) => {
     try {
       await api.settings.sendAppearanceTheme({ selected: selectThemeId });
       await getAppearanceTheme();
-      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error);
     }
@@ -384,7 +395,7 @@ const Appearance = (props) => {
 
       onCloseDialogDelete();
 
-      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error);
     }
@@ -498,7 +509,7 @@ const Appearance = (props) => {
         await api.settings.sendAppearanceTheme({ theme: newTheme });
         await getAppearanceTheme();
 
-        toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+        toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
       } catch (error) {
         toastr.error(error);
       }
@@ -513,7 +524,7 @@ const Appearance = (props) => {
         await getAppearanceTheme();
         setPreviewAccent(editTheme.main?.accent);
 
-        toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+        toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
       } catch (error) {
         toastr.error(error);
       }
@@ -596,7 +607,7 @@ const Appearance = (props) => {
     </ModalDialog>
   ) : (
     <DropDown
-      directionX="right"
+      directionX="left"
       manualY="62px"
       withBackdrop={false}
       isDefaultMode={false}
@@ -639,7 +650,7 @@ const Appearance = (props) => {
     </ModalDialog>
   ) : (
     <DropDown
-      directionX="right"
+      directionX="left"
       manualY="62px"
       withBackdrop={false}
       isDefaultMode={false}
@@ -700,12 +711,13 @@ const Appearance = (props) => {
                   style={{ background: item.main?.accent }}
                   onClick={onColorSelection}
                   onMouseOver={onColorCheckImgHover}
+                  data-testid={`appearance_standard_theme_${item.id}`}
                 >
-                  {selectThemeId === item.id && (
+                  {selectThemeId === item.id ? (
                     <ReactSVG className="check-img" src={CheckWhiteSvgUrl} />
-                  )}
+                  ) : null}
 
-                  {selectThemeId !== item.id && checkImgHover}
+                  {selectThemeId !== item.id ? checkImgHover : null}
                 </StyledTheme>
               );
             })}
@@ -727,11 +739,12 @@ const Appearance = (props) => {
                     colorCheckImgHover={colorCheckImgHover}
                     onClick={onColorSelection}
                     onMouseOver={onColorCheckImgHover}
+                    data-testid={`appearance_custom_theme_${item.id}`}
                   >
-                    {selectThemeId === item.id && (
+                    {selectThemeId === item.id ? (
                       <ReactSVG className="check-img" src={CheckWhiteSvgUrl} />
-                    )}
-                    {selectThemeId !== item.id && checkImgHover}
+                    ) : null}
+                    {selectThemeId !== item.id ? checkImgHover : null}
                   </StyledTheme>
                 );
               })}
@@ -741,9 +754,10 @@ const Appearance = (props) => {
               data-tooltip-id="theme-add"
               data-tip="tooltip"
               className="theme-add"
+              data-testid="appearance_add_theme"
               onClick={onAddTheme}
             />
-            {!abilityAddTheme && (
+            {!abilityAddTheme ? (
               <Tooltip
                 id="theme-add"
                 offsetBottom={0}
@@ -752,7 +766,7 @@ const Appearance = (props) => {
                 getContent={textTooltip}
                 maxWidth="300px"
               />
-            )}
+            ) : null}
           </div>
         </div>
 
@@ -771,8 +785,37 @@ const Appearance = (props) => {
           showSaveButtonDialog={showSaveButtonDialog}
           onSaveColorSchemeDialog={onSaveColorSchemeDialog}
         />
-        <div className="header preview-header">{t("Common:Preview")}</div>
-        <Tabs items={arrayItems} type={TabsTypes.Secondary} />
+        <div className="header preview-header">
+          {t("Common:Preview")}
+          <HelpButton
+            place="right"
+            dataTestId="appearance_preview_help_button"
+            tooltipContent={
+              <div>
+                <Text fontSize="12px" fontWeight={400}>
+                  {t("Settings:PreviewTooltipDescription")}
+                </Text>
+                <Link
+                  isHovered
+                  type="page"
+                  href={appearanceBlockHelpUrl}
+                  target="_blank"
+                  dataTestId="appearance_preview_help_button_link"
+                >
+                  {t("Common:LearnMore")}
+                </Link>
+              </div>
+            }
+          />
+        </div>
+        <Tabs
+          items={arrayItems}
+          type={TabsTypes.Secondary}
+          onSelect={(e) => setSelectedItemId(e.id)}
+          selectedItemId={selectedItemId}
+          isLoading={!tReady}
+          scaled
+        />
 
         <div className="buttons-container">
           <Button
@@ -782,6 +825,7 @@ const Appearance = (props) => {
             primary
             size={buttonSize}
             isDisabled={isDisabledSaveButton}
+            testId="appearance_save_button"
           />
 
           <Button
@@ -790,16 +834,18 @@ const Appearance = (props) => {
             onClick={onClickEdit}
             size={buttonSize}
             isDisabled={isDisabledEditButton}
+            testId="appearance_edit_button"
           />
-          {isShowDeleteButton && (
+          {isShowDeleteButton ? (
             <Button
               className="delete-theme button"
               label={t("Settings:DeleteTheme")}
               onClick={onOpenDialogDelete}
               size={buttonSize}
               isDisabled={isDisabledDeleteButton}
+              testId="appearance_delete_button"
             />
-          )}
+          ) : null}
         </div>
       </StyledComponent>
     </>
@@ -816,6 +862,8 @@ export default inject(({ settingsStore, common }) => {
 
     theme,
     currentDeviceType,
+
+    appearanceBlockHelpUrl,
   } = settingsStore;
 
   const { resetIsInit } = common;
@@ -830,5 +878,7 @@ export default inject(({ settingsStore, common }) => {
     currentDeviceType,
     theme,
     resetIsInit,
+
+    appearanceBlockHelpUrl,
   };
 })(withTranslation(["Profile", "Common", "Settings"])(observer(Appearance)));

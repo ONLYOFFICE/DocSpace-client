@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,35 +27,53 @@
 import { cookies } from "next/headers";
 
 import { IClientProps } from "@docspace/shared/utils/oauth/types";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { LANGUAGE } from "@docspace/shared/constants";
 
 import {
   getConfig,
   getOAuthClient,
+  getOauthJWTToken,
   getScopeList,
   getSettings,
   getUser,
 } from "@/utils/actions";
 import { GreetingLoginContainer } from "@/components/GreetingContainer";
+import { LoginContainer } from "@/components/LoginContainer";
 
+import { logger } from "logger.mjs";
 import Consent from "./page.client";
 
-async function Page({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string };
+async function Page(props: {
+  searchParams: Promise<{ [key: string]: string }>;
 }) {
+  logger.info("Consent page");
+
+  const { searchParams: sp } = props;
+  const searchParams = await sp;
   const clientId = searchParams.clientId ?? searchParams.client_id;
-  const [oauthData, scopes, user, settings, config] = await Promise.all([
-    getOAuthClient(clientId),
-    getScopeList(),
+
+  const [user, settings, config] = await Promise.all([
     getUser(),
     getSettings(),
     getConfig(),
   ]);
 
-  const client = oauthData?.client;
+  const cookieStore = await cookies();
+
+  const token = cookieStore.get(`x-signature-${user!.id}`)?.value;
+  let new_token = "";
+
+  if (!token) {
+    logger.info("Consent page missing token");
+    new_token = await getOauthJWTToken();
+  }
+
+  const [data, scopes] = await Promise.all([
+    getOAuthClient(clientId),
+    getScopeList(new_token),
+  ]);
+
+  const client = data?.client as IClientProps;
 
   if (!client || (client && !("clientId" in client)) || !scopes || !user)
     return "";
@@ -66,31 +84,24 @@ async function Page({
   const settingsCulture =
     typeof settings === "string" ? undefined : settings?.culture;
 
-  const culture = cookies().get(LANGUAGE)?.value ?? settingsCulture;
+  const culture = cookieStore.get(LANGUAGE)?.value ?? settingsCulture;
 
-  return (
-    <>
-      {settings && typeof settings !== "string" && (
-        <ColorTheme
-          themeId={ThemeId.LinkForgotPassword}
-          isRegisterContainerVisible={isRegisterContainerVisible}
-        >
-          <>
-            <GreetingLoginContainer
-              greetingSettings={settings?.greetingSettings}
-              culture={culture}
-            />
-            <Consent
-              client={client as IClientProps}
-              scopes={scopes}
-              user={user}
-              baseUrl={config?.oauth2?.origin}
-            />
-          </>
-        </ColorTheme>
-      )}
-    </>
-  );
+  return settings && typeof settings !== "string" ? (
+    <LoginContainer isRegisterContainerVisible={isRegisterContainerVisible}>
+      <>
+        <GreetingLoginContainer
+          greetingSettings={settings?.greetingSettings}
+          culture={culture}
+        />
+        <Consent
+          client={client}
+          scopes={scopes}
+          user={user}
+          baseUrl={config?.oauth2?.origin}
+        />
+      </>
+    </LoginContainer>
+  ) : null;
 }
 
 export default Page;

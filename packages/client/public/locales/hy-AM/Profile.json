@@ -1,10 +1,8 @@
 {
   "ActiveSessions": "Ակտիվ սեսիաներ",
   "AutoDeleteTitle": "60 օրից բոլոր հին սեանսները ինքնաբերաբար կջնջվեն։",
-  "ChangeEmailSuccess": "Էլփոստը հաջողությամբ փոխվել է",
   "ChangePasswordAfterLoggingOut": "Դուրս գալուց հետո փոխեք գաղտնաբառը",
   "ConnectSocialNetworks": "Միացրեք ձեր սոցիալական ցանցերը",
-  "DarkTheme": "Մուգ ոճ",
   "DescriptionForSecurity": "Ավելի լավ անվտանգության համար դուք պետք է փոխեք ձեր գաղտնաբառը:",
   "DesktopTheme": "Համաժամեցրեք աշխատասեղանի խմբագրիչի կարգավորումների հետ",
   "DesktopThemeDescription": "Ավտոմատ կերպով անցում կատարեք բաց և մուգ թեմաների միջև՝ կախված աշխատասեղանի խմբագիրների ընթացիկ թեմայից:",
@@ -13,7 +11,6 @@
   "ErrorAccountAlreadyUse": "Կապված հաշիվն արդեն օգտագործվում է մեկ այլ օգտվողի կողմից",
   "FileManagement": "Ֆայլերի կառավարում",
   "InterfaceTheme": "Միջերեսի ոճ",
-  "LightTheme": "Բաց ոճ",
   "LogoutActiveConnection": "Դուրս եկեք ակտիվ կապից",
   "LogoutAllActiveSessionsDescription": "Բոլոր ակտիվ կապերը, բացի այս կապից, դուրս կգրվեն, քանի որ այն ներկայումս օգտագործվում է:",
   "LogoutBtn": "Դուրս գալ",

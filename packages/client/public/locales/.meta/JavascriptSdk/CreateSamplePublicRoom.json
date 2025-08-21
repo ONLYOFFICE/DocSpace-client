@@ -1,0 +1,429 @@
+{
+  "key_path": "CreateSamplePublicRoom",
+  "content": "Create sample Public room embed",
+  "content_en_sha1_hash": "1b93783d2de58b201928a571c81e9ce53f4ce3b9",
+  "created_at": "2025-05-19T21:30:54.403Z",
+  "updated_at": "2025-08-04T07:30:01.400Z",
+  "comment": {
+    "text": "This translation key is used for the button header that creates a sample public room embed. It appears in a preset settings page and is used to provide a descriptive text for the button that triggers this action.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:48.124Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
+      "line_number": 275,
+      "context": ");\n \n return (\n <PresetWrapper\n description={t(\"JavascriptSdk:PublicRoomPresetInfo\")}\n header={t(\"CreateSamplePublicRoom\")}\n >\n <Container>\n <PreviewBlock\n loadCurrentFrame={initFrame}\n preview={preview}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"قم بإنشاء نموذج لتضمين الغرفة العامة\" is not the most natural or accurate translation of \"Create sample Public room embed\".  While technically correct, it's a bit clunky.  'نموذج' implies a template or example, but 'sample' is more of a demonstration.",
+          "suggestion": "قم بإنشاء غرفة عامة تجريبية"
+        },
+        {
+          "type": "formatting",
+          "description": "While not a major issue, using a more fluent Arabic phrasing would improve the user experience.",
+          "suggestion": "Consider rephrasing for better flow, potentially incorporating a more modern Arabic style."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ümumi otaq yerləşdirmə nümunəsi yaradın' is a bit literal and doesn't flow naturally. 'Yerləşdirmə' (embedding) feels clunky in this context.",
+          "suggestion": "Consider a more natural phrasing like 'Ümumi otaq üçün nümunəvi tərzin yaradın' or 'Ümumi otağın nümunəvi tərzini yaradın'."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Създайте примерно вграждане на Обществена стая\" doesn't fully capture the meaning of 'Create sample Public room embed'. 'Embed' is not directly translated. It implies a code snippet or iframe being integrated, which is missing in the translation.",
+          "suggestion": "Създайте примерно Обществена стая за вграждане"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Vytvořit vzorové vložení veřejné místnosti' doesn't accurately convey the meaning of 'Create sample Public room embed'. 'Vložení' (embedding/insertion) isn't the core functionality being described. It's the *creation* of a public room.",
+          "suggestion": "Vytvořit ukázkovou veřejnou místnost"
+        },
+        {
+          "type": "spelling",
+          "description": "While 'veřejné' is correct for 'public', the usage of 'ukázkovou' rather than 'vzorové' might sound more natural in this context, implying a demonstrative or example room rather than a template.",
+          "suggestion": "Consider replacing 'vzorové' with 'ukázkovou' for a more fluent sound."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Δημιουργία δείγματος ενσωμάτωσης Δημόσιου δωματίου' doesn't fully capture the meaning of 'Create sample Public room embed'. The word 'embed' is lost. 'Ενσωμάτωση' translates to 'integration', but 'embed' implies a specific type of integration within a larger context.",
+          "suggestion": "Δημιουργία δείγματος Δημόσιου δωματίου για ενσωμάτωση (Create sample Public room for embedding)"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Crear ejemplo de la incrustación de sala púplica' doesn't accurately convey the meaning of 'Create sample Public room embed'. 'Incrustación' refers to an embed, but the phrasing is awkward. The intended meaning is likely to create a sample public room.",
+          "suggestion": "Crear sala pública de ejemplo"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'púplica' is misspelled. It should be 'pública'.",
+          "suggestion": "pública"
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Luo esimerkki Julkinen huone-upotuksesta' is not the most natural or accurate translation of 'Create sample Public room embed'.  'Huone-upotuksesta' sounds quite literal and clunky.  'Embed' doesn't translate directly into a single Finnish word in this context.",
+          "suggestion": "Consider alternatives like 'Luo esimerkkihuone julkista käyttöä varten' (Create sample room for public use) or 'Luo julkisen huoneen esimerkkikoodi' (Create sample code for a public room)."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Créer un exemple d'intégration d'une salle publique\" doesn't fully capture the meaning of \"Create sample Public room embed\". 'Embed' is lost. It translates to 'Create an example of integrating a public room'.",
+          "suggestion": "Créer un exemple d'intégration d'une salle publique"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ստեղծեք Հանրային սենյակի ներկառուցման նմուշ' translates to 'Create Public room embed sample'. While technically correct, it doesn't flow naturally. 'Embed' is used for the code snippet and not the room itself. A better translation would convey creating a sample public room.",
+          "suggestion": "Ստեղծեք Հանրային սենյակի նմուշ"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Crea un campione di incorporamento della Stanza pubblica' doesn't quite capture the meaning of 'Create sample Public room embed'. 'Incorporamento' translates to 'embedding' which isn't the core meaning.  It's better to convey the creation of a sample *room* itself, not just an embed.",
+          "suggestion": "Crea una stanza pubblica di esempio"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a capital 'S' for 'Stanza'. While technically acceptable in Italian, a lowercase 's' would be more common in this context.",
+          "suggestion": "Crea un campione di incorporamento della stanza pubblica"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '埋め込みパブリックルームのサンプルを作成する' is a literal translation and doesn't quite capture the concise meaning of 'Create sample Public room embed'. It's a bit verbose.",
+          "suggestion": "パブリックルームのサンプル埋め込みを作成する"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the phrase 'パブリックルームのサンプル埋め込みを作成する' sounds slightly unnatural in Japanese. The order 'sample' and 'embed' could be improved.",
+          "suggestion": "サンプルパブリックルーム埋め込みを作成する"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ສາທາລະນະ' (sathalanan) is the correct spelling for 'public' in this context, but the original English 'embed' is not directly translated. While understandable, it's not ideal.",
+          "suggestion": "Consider a more descriptive translation for 'embed' like 'ຝັງຮູບແບບ' (fang roopbaep) or 'ປະກອບຮູບແບບ' (krob rupeab roopbaep). Alternatively, if the technical term 'ຝັງ' (fang) is acceptable, it could be left as is, but the description might need clarifying elsewhere."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Izveidot publiskās telpas iegulšanas paraugu\" is a literal translation that doesn't quite convey the meaning of 'Create sample Public room embed'. 'Embed' implies code or a snippet, which isn't reflected in the Latvian.",
+          "suggestion": "Izveidot publiskās telpas parauga ieguldīšanas kodu"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the sentence structure feels a bit clunky. It could be improved for better flow in Latvian.",
+          "suggestion": "Izveidot parauga kodu publiskajai telpai"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Maak voorbeeld Openbare ruimte insluiten' doesn't accurately convey the meaning of 'Create sample Public room embed'. 'Insluiten' suggests enclosing or embedding, but 'Create' implies a new creation. The 'embed' portion is particularly problematic as it isn't clearly translated.",
+          "suggestion": "A better translation might be 'Maak voorbeeld Openbare ruimte' (Create sample Public room) or 'Creëer een voorbeeld van een Openbare ruimte' (Create an example of a Public room). Further context may determine the best option."
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Utwórz próbne osadzenie Pokoju publicznego' is not the most natural or accurate rendering of 'Create sample Public room embed'. 'Osadzenie' implies an embedding or widget, not necessarily the creation of a room itself.  It's translating 'embed' directly instead of conveying the meaning of creating a room.",
+          "suggestion": "Utwórz próbny Pokój publiczny"
+        },
+        {
+          "type": "formatting",
+          "description": "The Polish translation uses lowercase 'pokój' (room) which is grammatically correct but might be more appropriate to capitalize it as 'Pokój' to reflect the importance of the term, especially in a technical context.",
+          "suggestion": "Utwórz próbny Pokój publiczny"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Criar amostra de incorporação de sala pública' is not the most natural or accurate rendering of 'Create sample Public room embed'. 'Embed' implies integration, and a more accurate translation would convey that.",
+          "suggestion": "Criar amostra de incorporação de sala pública (or 'Criar exemplo de incorporação de sala pública' or 'Criar demonstração de incorporação de sala pública')"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Criar amostra de incorporação de sala pública\" is not the most natural or accurate rendering of \"Create sample Public room embed\". 'Embed' doesn't directly translate to 'incorporação'. A better translation would convey the idea of embedding or integrating a public room.",
+          "suggestion": "Criar uma demonstração de sala pública (para incorporação)"
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'para incorporação' is tacked on at the end and feels disconnected. A more integrated phrasing would be preferable.",
+          "suggestion": "Criar uma demonstração de sala pública embarcada"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Creare exemplu Sală publică pentru încorporare\" is not the most natural or accurate rendering of \"Create sample Public room embed\". \"exemplu\" translates to 'example', which is technically correct, but less idiomatic. A more appropriate translation would use terms suggesting a demonstration or test room.",
+          "suggestion": "Creare Sală publică demonstrativă pentru încorporare"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a lowercase 's' for 'Sală'. It should be capitalized.",
+          "suggestion": "Creare Sală publică demonstrativă pentru încorporare"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Создать образец встраивания Публичной комнаты' is too literal and doesn't accurately convey the meaning of 'Create sample Public room embed'. 'Embed' is a technical term, and the translation lacks nuance. A better translation would capture the action of creating a public room for embedding purposes.",
+          "suggestion": "Consider alternatives like 'Создать демонстрационную Публичную комнату для встраивания' or 'Создать пример Публичной комнаты для встраивания'."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of capitalized 'Публичной' may be stylistically incorrect depending on the context. Generally, room names are not capitalized in Russian unless they are proper nouns.",
+          "suggestion": "Consider using 'Публичная комната' instead of 'Публичной комнаты'."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'කාවද්දන ආදර්ශ පොදු කාමරය සාදන්න' implies 'creating a guided sample public room'. The English phrase 'Create sample Public room embed' refers to the creation of a sample public room, with the 'embed' aspect referring to its integration or display capability, not the act of guiding someone through the creation process. The word 'කාවද්දන' (kawaddana) means 'guiding' or 'teaching'.",
+          "suggestion": "A more accurate translation would be something like 'ආදර්ශ පොදු කාමරය සාදන්න' (aadarsiya podu kaamaraaya saaddanna) which translates to 'Create a sample public room'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Vytvoriť vzor vloženia pre Verejnú miestnosť\" doesn't accurately convey the meaning of \"Create sample Public room embed.\" \"Vloženia\" (embedding) is technically correct but feels clunky and less natural in this context. The intent seems to be a pre-built or example public room, not a way to embed one.",
+          "suggestion": "Vytvoriť ukážkovú Verejnú miestnosť"
+        },
+        {
+          "type": "formatting",
+          "description": "The Slovak translation uses a capitalized 'V' for 'Verejnú'. While sometimes acceptable for proper nouns, it would read better if consistently lowercased.",
+          "suggestion": "Vytvoriť ukážkovú verejnú miestnosť"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Направи пример уградње Јавне собе' doesn't accurately convey the meaning of 'Create sample Public room embed'. 'уградње' (installation/embedding) isn't the best fit for 'embed' in this context. It implies a technical installation rather than a simplified creation or example.",
+          "suggestion": "Направи пример Јавне собе за уграђивање"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Create sample Public room embed\" implies embedding a room, which is not accurately reflected by \"Napravi primer ugradnje Javne sobe\". 'Ugradnje' translates to 'installation' which isn't the intended meaning. It needs to convey the creation of a sample room, not the embedding of it.",
+          "suggestion": "Napravi uzorak Javne sobe"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, Serbian often prefers capitalization for the first word of a phrase, and sometimes after colons.",
+          "suggestion": "Napravi Uzorak Javne sobe"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Örnek Genel oda yerleştirmesi oluştur' doesn't fully capture the meaning of 'Create sample Public room embed'. 'Embed' implies integrating something into a larger context, which isn't explicitly conveyed. 'Yerleştirmesi' suggests a placement, not an embed.",
+          "suggestion": "Örnek Genel oda gömülü alanı oluştur"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Створити зразок вбудовування загальнодоступної кімнати' is a bit literal and doesn't quite capture the meaning of 'Create sample Public room embed'. It focuses on the 'embedding' aspect rather than the room creation itself. The original English implies creating a sample *public room*, not creating an embed *of* a public room.",
+          "suggestion": "Розмістити тестову загальнодоступну кімнату"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a long sentence structure. While grammatically correct, it could be improved for readability in a UI context.",
+          "suggestion": "Створити тестову загальнодоступну кімнату"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Tạo mẫu nhúng Phòng công cộng' doesn't fully convey the meaning of 'Create sample Public room embed'. 'Embed' implies a code snippet or widget, which is missing from the translation. 'Phòng công cộng' is a correct translation of 'Public room', but the 'embed' aspect is lost.",
+          "suggestion": "Tạo mẫu nhúng Phòng công cộng mẫu"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

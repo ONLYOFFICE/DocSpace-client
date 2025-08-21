@@ -1,11 +1,17 @@
 {
+  "ChangeContactType": "İletişim türünü değiştir  ",
   "ChangeGuestsTypeMessage": "Konuk <strong>{{userName}}</strong>, {{membersSection}} bölümüne taşınacak ve Kullanıcı türüne atanacaktır. Kullanıcıların kendi «{{documentsSection}} » bölümü vardır, dosya oluşturabilir ve düzenleyebilirler fakat oda oluşturamazlar.",
   "ChangeGuestsTypeMessageMulti": "Seçilen konuklar {{membersSection}} bölümüne taşınacak ve Kullanıcı türü atanacaktır. Kullanıcıların kendi {{documentsSection}} bölümü vardır, dosya oluşturabilir ve düzenleyebilirler fakat oda oluşturamazlar.",
+  "ChangeGuestsTypeToAdmin": "Konuk <strong>{{userName}}</strong>, {{membersSection}} bölümüne taşınacak ve <strong>'{{ secondType }}'</strong> türüne atanacaktır. {{productName}} yöneticileri, {{productName}} ayarlarına erişebilir, odaları yönetebilir ve arşivleyebilir, yeni kullanıcılar davet edebilir ve kendi seviyelerinin altındaki rolleri atayabilir. {{productName}} yöneticileri, {{documentsSection}} bölümüne erişebilir.",
+  "ChangeGuestsTypeToAdminMulti": "Seçilen konuklar, {{membersSection}} bölümüne taşınacak ve <strong>'{{ secondType }}'</strong> türüne atanacaktır. {{productName}} yöneticileri, {{productName}} ayarlarına erişebilir, odaları yönetebilir ve arşivleyebilir, yeni kullanıcılar davet edebilir ve kendi seviyelerinin altındaki rolleri atayabilir. {{productName}} yöneticileri, {{documentsSection}} bölümüne erişebilir.",
+  "ChangeGuestsTypeToManager": "Konuk <strong>{{userName}}</strong>, {{membersSection}} bölümüne taşınacak ve <strong>'{{ secondType }}'</strong> türüne atanacaktır. Oda yöneticileri, kendilerine atanmış odaları oluşturabilir ve yönetebilir, yeni kullanıcılar davet edebilir ve Oda yöneticisi veya daha alt düzeyde roller atayabilir. Oda yöneticileri, {{documentsSection}} bölümüne erişebilir.",
+  "ChangeGuestsTypeToManagerMulti": "Seçilen konuklar, {{membersSection}} bölümüne taşınacak ve <strong>'{{ secondType }}'</strong> türüne atanacaktır. Oda yöneticileri, kendilerine atanmış odaları oluşturabilir ve yönetebilir, yeni kullanıcılar davet edebilir ve Oda yöneticisi veya daha alt düzeyde roller atayabilir. Oda yöneticileri, {{documentsSection}} bölümüne erişebilir.",
   "ChangeUserTypeButton": "Türü değiştir",
-  "ChangeUserTypeHeader": "Kullanıcı türünü değiştir",
   "ChangeUserTypeMessage": "<strong>'{{ firstType }}'</strong> türündeki kullanıcılar <strong>'{{ secondType }}'</strong> türüne taşınacaktır.",
-  "ChangeUserTypeMessageMulti": "Seçilen kullanıcılar <strong>'{{ secondType }}'</strong> türüne taşınacaktır.",
-  "ChangeUserTypeMessageWarning": "{{productName}} yöneticileri ve kendiniz için türü değiştiremezsiniz.",
+  "ChangeUserTypeNote": "<1>Not:</1> {{productName}} yöneticisi ve kendiniz için tür değişikliği yapamazsınız.",
+  "DataReassignmentInfo": "Bu kullanıcı tarafından oluşturulan odalar otomatik olarak size atanacaktır. Odaları başka bir kişiye atamak için aşağıdaki ilgili bağlantıya tıklayın.",
+  "DataReassignmentWithFilesDeletion": "Bu konuk tarafından oluşturulan tüm paylaşılan dosyalar <1>30 gün içinde otomatik olarak size atanacaktır</1>. Odaları/paylaşılan dosyaları başka bir kişiye atamak için aşağıdaki ilgili bağlantıya tıklayın.",
+  "PersonalDataDeletion": "Bu konuğun {{sectionName}} bölümündeki tüm dosya ve klasörler <1>30 gün içinde kalıcı olarak silinecektir</1>.",
   "SuccessChangeGuestType": "Konuk türü başarıyla değiştirildi",
   "SuccessChangeUserType": "Kullanıcı türü başarıyla değiştirildi"
 }

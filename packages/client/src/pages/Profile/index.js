@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import PropTypes from "prop-types";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
@@ -42,70 +41,21 @@ import { SectionHeaderContent, SectionBodyContent } from "./Section";
 class Profile extends React.Component {
   componentDidMount() {
     const {
-      fetchProfile,
-      profile,
       t,
-
-      setIsEditTargetUser,
 
       isVisitor,
       selectedTreeNode,
       setSelectedNode,
-      setIsProfileLoaded,
       getTfaType,
     } = this.props;
-
-    const userId = "@self";
-
-    setIsEditTargetUser(false);
 
     isVisitor
       ? !selectedTreeNode.length && setSelectedNode(["@rooms"])
       : setSelectedNode(["accounts"]);
 
     setDocumentTitle(t("Common:Profile"));
-    this.documentElement = document.getElementsByClassName("hidingHeader");
-    // const queryString = ((location && location.search) || "").slice(1);
-    // const queryParams = queryString.split("&");
-    // const arrayOfQueryParams = queryParams.map((queryParam) =>
-    //   queryParam.split("=")
-    // );
-    // const linkParams = Object.fromEntries(arrayOfQueryParams);
-
-    // if (linkParams.email_change && linkParams.email_change === "success") {
-    //   toastr.success(t("ChangeEmailSuccess"));
-    // }
 
     getTfaType();
-
-    if (!profile || profile.userName !== userId) {
-      fetchProfile(userId).finally(() => {
-        setIsProfileLoaded(true);
-      });
-    }
-
-    if (!profile && this.documentElement) {
-      for (let i = 0; i < this.documentElement.length; i++) {
-        this.documentElement[i].style.transition = "none";
-      }
-    }
-  }
-
-  componentDidUpdate() {
-    const { profile } = this.props;
-    // const { userId } = match.params;
-    // const prevUserId = prevProps.match.params.userId;
-
-    // if (userId !== undefined && userId !== prevUserId) {
-
-    //   fetchProfile(userId);
-    // }
-
-    if (profile && this.documentElement) {
-      for (let i = 0; i < this.documentElement.length; i++) {
-        this.documentElement[i].style.transition = "";
-      }
-    }
   }
 
   render() {
@@ -133,16 +83,10 @@ class Profile extends React.Component {
   }
 }
 
-Profile.propTypes = {
-  fetchProfile: PropTypes.func.isRequired,
-  profile: PropTypes.object,
-};
-
 const ComponentPure = inject(
   ({
     authStore,
     settingsStore,
-    peopleStore,
     userStore,
     clientLoadingStore,
     tfaStore,
@@ -163,13 +107,7 @@ const ComponentPure = inject(
       setIsSectionBodyLoading(true, false);
     };
 
-    const { targetUserStore } = peopleStore;
-    const {
-      getTargetUser: fetchProfile,
-      targetUser: profile,
-      isEditTargetUser,
-      setIsEditTargetUser,
-    } = targetUserStore;
+    const { user: profile } = userStore;
 
     const { selectedTreeNode, setSelectedNode } = treeFoldersStore;
 
@@ -177,11 +115,7 @@ const ComponentPure = inject(
 
     return {
       language,
-      fetchProfile,
       profile,
-
-      isEditTargetUser,
-      setIsEditTargetUser,
 
       showCatalog: settingsStore.showCatalog,
 

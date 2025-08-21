@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,57 +25,30 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { Mask } from "react-text-mask";
-import { InputSize, InputType } from "../text-input";
+import type { TextInputProps } from "../text-input/TextInput.types";
 
-export interface InputBlockProps {
+type CommonProps = {
   /** Used as HTML `id` property */
   id?: string;
+  /** Children elements */
+  children?: React.ReactNode;
+  /** Component class name */
+  className?: string;
+  /** Component style */
+  style?: React.CSSProperties;
+  /** Data test id for testing */
+  dataTestId?: string;
+
   /** Forwarded ref */
   forwardedRef?: React.Ref<HTMLInputElement>;
-  /** Used as HTML `name` property */
-  name?: string;
-  /** Supported type of the input fields.  */
-  type: InputType.text | InputType.password;
-  /** Defines max length of value */
-  maxLength?: number;
-  /** Placeholder text for the input */
-  placeholder?: string;
-  /** Accepts css tab-index */
-  tabIndex?: number;
-  /** input text mask */
-  mask?: Mask | ((value: string) => Mask);
-  /** Allows to add or delete characters without changing the positions of the existing characters. */
-  keepCharPositions?: boolean;
-  /** Supported size of the input fields. */
-  size: InputSize;
-  /** Indicates that the input field has scale */
-  scale?: boolean;
-  /** The callback function that is required when the input is not read only. The function is called with the new value. Parent should pass it back as `value` */
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  /** The callback function that is called when the field is blurred  */
-  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
-  /** The callback function that is called when the field is focused  */
-  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
-  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-  onClick?: (e: React.MouseEvent<HTMLInputElement>) => void;
-  /** Focuses on the input field on initial render */
-  isAutoFocussed?: boolean;
-  /** Indicates that the field cannot be used (e.g not authorised, or changes not saved) */
-  isDisabled?: boolean;
-  /** Indicates that the field is displaying read-only content  */
-  isReadOnly?: boolean;
-  /** Indicates the input field has an error */
-  hasError?: boolean;
-  /** Indicates the input field has a warning */
-  hasWarning?: boolean;
-  /** Used as HTML `autocomplete` */
-  autoComplete?: string;
-  /** Value of the input */
-  value: string;
+};
+
+type InputProps = Omit<TextInputProps, keyof CommonProps>;
+
+type IconProps = {
   /** Path to icon */
   iconName?: string;
-  /** Specifies the icon color  */
+  /** Specifies the icon color */
   iconColor?: string;
   /** Icon color on hover action */
   hoverColor?: string;
@@ -83,15 +56,13 @@ export interface InputBlockProps {
   iconSize?: number;
   /** Determines if icon fill is needed */
   isIconFill?: boolean;
+  /** Icon node */
+  iconNode?: React.ReactNode;
   /** The callback function that is triggered when the icon is clicked */
   onIconClick?: (e: React.MouseEvent) => void;
-
-  children?: React.ReactNode;
-  /** Accepts class */
-  className?: string;
-  /** Accepts css style  */
-  style?: React.CSSProperties;
-  /** Sets the classNaame of the icon button */
+  /** Icon button class name */
   iconButtonClassName?: string;
-  iconNode?: React.ReactNode;
-}
+  noIcon?: boolean;
+};
+
+export type InputBlockProps = InputProps & IconProps & CommonProps;

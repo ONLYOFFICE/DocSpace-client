@@ -1,0 +1,262 @@
+{
+  "key_path": "FolderMoved",
+  "content": "Folders moved.",
+  "content_en_sha1_hash": "95d3399265d8232c4895fbd790a035ba8ae0057d",
+  "created_at": "2025-05-19T21:30:54.849Z",
+  "updated_at": "2025-08-04T07:30:01.234Z",
+  "comment": {
+    "text": "This translation key displays a message indicating that a folder has been moved, likely appearing as a notification or confirmation in the user interface.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:59.436Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 122,
+      "context": "return t(\"InfoPanel:FolderCreated\");\n case FeedActionKeys.FolderRenamed:\n return t(\"InfoPanel:FolderRenamed\");\n case FeedActionKeys.FolderMoved:\n if (hasRelatedItems)\n return t(\"InfoPanel:FolderMovedCount\", {\n count,\n });\n return t(\"InfoPanel:FolderMoved\");\n case FeedActionKeys.FolderMovedToTrash:\n if (hasRelatedItems)",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
+      "line_number": 116,
+      "context": "return t(\"InfoPanel:FolderCreated\");\n case FeedActionKeys.FolderRenamed:\n return t(\"InfoPanel:FolderRenamed\");\n case FeedActionKeys.FolderMoved:\n if (hasRelatedItems)\n return t(\"InfoPanel:FolderMovedCount\", {\n count,\n });\n return t(\"InfoPanel:FolderMoved\");\n case FeedActionKeys.FolderMovedToTrash:\n if (hasRelatedItems)",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/Webhooks.helpers.ts",
+      "line_number": 74,
+      "context": "return t(\"FolderDeleted\");\n case WebhookTriggers.FolderRestored:\n return t(\"FolderRestored\");\n case WebhookTriggers.FolderCopied:\n return t(\"FolderCopied\");\n case WebhookTriggers.FolderMoved:\n return t(\"FolderMoved\");\n case WebhookTriggers.RoomCreated:\n return t(\"Files:RoomCreated\");\n case WebhookTriggers.RoomUpdated:\n return t(\"RoomUpdated\");",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ໄຟລ໌ຖືກຍ້າຍແລ້ວ' literally translates to 'Files have been moved'. The English phrase 'Folders moved' refers to a plural collection of folders, not individual files. The translation doesn't accurately convey the meaning.",
+          "suggestion": "ໄຟລ໌ໂຟນເດີຖືກຍ້າຍແລ້ວ (File folders have been moved)"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ෆෝල්ඩර්ස් ගෙනයන ලදි.' does not accurately convey the meaning of \"Folders moved.\"  'ගෙනයන ලදි' implies 'being moved' or 'in the process of being moved'. The English phrase indicates a completed action.",
+          "suggestion": "ෆෝල්ඩර්ස් යටාහකි."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation 'Priečinky presunuté' is grammatically correct but doesn't fully convey the nuance of 'Folders moved.' It translates to 'Folders moved' as a statement, not an action completed. A more appropriate translation might be 'Preložili sme priečinky.' (We moved the folders) or 'Priečinky boli presunuté.' (Folders were moved).",
+          "suggestion": "Priečinky boli presunuté."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Фолдери су померени' while understandable, is a direct transliteration and not the most natural Serbian (Cyrillic) phrasing. A more natural translation would be 'Премештени фасцикле'.",
+          "suggestion": "Премештени фасцикле"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Serbian translation 'Folderi su pomereni' uses the plural form 'Folderi' (folders) while the English says 'Folders moved', which implies a single folder in some contexts. While grammatically correct, it might be more accurate to reflect the singular form in Serbian.",
+          "suggestion": "Moguće je razmotriti alternativu: 'Folder je pomeren.' (A folder was moved.) - depending on context.  If it is definitively about multiple folders, the current translation is acceptable."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Ukrainian translation \"Папки переміщено.\" uses the neuter plural past tense, implying the folders were moved *by something*. The message should convey that the folders *were* moved (action taken).",
+          "suggestion": "Папки переміщено (або Папки було переміщено)."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Đã di chuyểncác thư mục' is not the most natural or common way to express 'Folders moved' in Vietnamese. While technically correct, it sounds slightly awkward. A better translation would prioritize flow and clarity.",
+          "suggestion": "Các thư mục đã được di chuyển."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

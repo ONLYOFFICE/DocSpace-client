@@ -1,0 +1,281 @@
+{
+  "key_path": "UserNotFound",
+  "content": "User <1>{{email}}</1> is not found.",
+  "content_en_sha1_hash": "772f17ec424c1e5db4a8d90482df8ddb476f0619",
+  "created_at": "2025-05-19T21:30:53.746Z",
+  "updated_at": "2025-08-11T18:11:59.272Z",
+  "comment": {
+    "text": "This translation key is used for a notification message when a user is not found. The message will appear in a UI element displaying an error or exception related to a payer's information, likely on a SaaS payment settings page.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:03.569Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/PayerInformation.js",
+      "line_number": 120,
+      "context": "dataTestId=\"payer_info_help_button\"\n />\n );\n \n const unknownPayerDescription = () => {\n const userNotFound = `${t(\"UserNotFoundMatchingEmail\")} `;\n \n let invalidEmailDescription = user.isOwner\n ? t(\"InvalidEmailWithActiveSubscription\", {\n productName: t(\"Common:ProductName\"),\n })",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"غير موجود\" (not found) is a literal translation but might sound unnatural in a user-facing message in Arabic. A more natural phrasing would be something along the lines of 'غير مسجل' (not registered) or 'غير موجود في النظام' (not found in the system).",
+          "suggestion": "Consider 'غير مسجل' or 'غير موجود في النظام' instead of 'غير موجود'."
+        },
+        {
+          "type": "formatting",
+          "description": "The formatting tags `<1>` and `</1>` are the same as in the English content, which is generally acceptable, but could be reviewed for consistency with other translations.",
+          "suggestion": "Ensure consistent use of formatting tags across all translations."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Armenian translation includes a colon (:) at the end of the sentence. The English version does not. While not strictly incorrect, it alters the feel and should ideally match the original.",
+          "suggestion": "<1>{{email}}</1> օգտվողը չգտնվեց:"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Japanese translation includes the variable {{email}} within HTML tags <1> and </1>, mirroring the English format. While technically correct, this might be unnecessary and affect readability for Japanese users. It's better to remove the tags or use a standard format depending on the platform’s needs.",
+          "suggestion": "ユーザー {{email}} は見つかりません。"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The email placeholder {{email}} is correctly placed within the Korean translation, mirroring the English version.",
+          "suggestion": "No change needed."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While generally correct, the phrasing \"찾지 못했습니다\" (chajji mothaesseumnida) is a bit formal for a user-facing error message. A more natural and user-friendly alternative might be preferable.",
+          "suggestion": "Consider using a more conversational phrase like \"을(를) 찾을 수 없습니다\" (eul(reul) chajeul su eopseumnida) or \"찾을 수 없습니다\" (chajeul su eopseumnida)."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'O <1>{{email}}</1> do utilizador não foi encontrado.' is not the most natural or accurate translation. 'Utilizador' means 'user' and saying 'of the user' is redundant. A more accurate and natural translation would focus on the email address not belonging to a found user.",
+          "suggestion": "O endereço de email <1>{{email}}</1> não foi encontrado."
+        },
+        {
+          "type": "formatting",
+          "description": "The angle brackets `<1>` and `</1>` are maintained in the Portuguese translation. While they are placeholders, maintaining them might not be necessary and may not be standard in the target locale.",
+          "suggestion": "Consider removing the angle brackets if they are simply placeholders and not functional in the target system."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'පරිශ්‍රීලකයා හමු නොවිණි' is a literal translation and doesn't flow naturally in Sinhala for a user-facing message. It sounds overly formal and technical. A more natural translation would convey that the user was not found.",
+          "suggestion": "වියලි නොවූ පරිශ්‍රීලකයා."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"<1>{{email}}</1> kullanıcısı bulunamad.\" is not the most natural or idiomatic way to express 'User <1>{{email}}</1> is not found.' A more natural phrasing would be '{{email}} kullanıcısı bulunamad.' or '{{email}} e-posta adresine sahip kullanıcı bulunamad.'",
+          "suggestion": "{{email}} kullanıcısı bulunamad."
+        },
+        {
+          "type": "formatting",
+          "description": "The original format uses `<1>` and `</1>`. The Turkish translation also uses `<1>` and `</1>`, but it's not consistently applied. While maintaining the original format may be required, it's worth considering whether it's necessary or if a simpler format would be preferred.",
+          "suggestion": "Consider simplifying the format to match the original."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Không tìm thấy người dùng<1>{{email}}</1>.\" is a literal translation but sounds unnatural in Vietnamese. A more natural phrasing would be 'Không tìm thấy người dùng với email <1>{{email}}</1>' or 'Không tìm thấy người dùng có email <1>{{email}}</1>'.",
+          "suggestion": "Không tìm thấy người dùng với email <1>{{email}}</1>"
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> seem to be misplaced. It's unclear what their purpose is and they disrupt the flow of the sentence in Vietnamese.",
+          "suggestion": "Remove the HTML tags or ensure they are correctly used according to their intended purpose. If the intent is to highlight 'email', consider a more appropriate styling method."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -45,6 +45,7 @@ import { DropDown } from "@docspace/shared/components/drop-down";
 import { Text } from "@docspace/shared/components/text";
 
 import { injectDefaultTheme } from "@docspace/shared/utils";
+import { getManyPDFTitle } from "@docspace/shared/utils/getPDFTite";
 
 const UserInputContainer = styled.div`
   position: relative;
@@ -133,8 +134,13 @@ export const FilterBlock = ({ t, config, setConfig }) => {
 
   const filterOptions = [
     {
+      key: "filter-type-folders",
+      label: t("Common:Folders"),
+      typeKey: FilterType.FoldersOnly,
+    },
+    {
       key: "filter-type-all",
-      label: t("Translations:Files"),
+      label: t("Common:Files"),
       typeKey: FilterType.FilesOnly,
     },
     {
@@ -143,39 +149,44 @@ export const FilterBlock = ({ t, config, setConfig }) => {
       typeKey: FilterType.DocumentsOnly,
     },
     {
-      key: "filter-type-folders",
-      label: t("Translations:Folders"),
-      typeKey: FilterType.FoldersOnly,
-    },
-    {
       key: "filter-type-spreadsheets",
-      label: t("Translations:Spreadsheets"),
+      label: t("Common:Spreadsheets"),
       typeKey: FilterType.SpreadsheetsOnly,
     },
     {
-      key: "filter-type-archives",
-      label: t("Files:Archives"),
-      typeKey: FilterType.ArchiveOnly,
-    },
-    {
       key: "filter-type-presentations",
-      label: t("Translations:Presentations"),
+      label: t("Common:Presentations"),
       typeKey: FilterType.PresentationsOnly,
     },
     {
+      key: "filter-type-pdf",
+      label: getManyPDFTitle(t, false),
+      typeKey: FilterType.Pdf,
+    },
+    {
+      key: "filter-type-forms",
+      label: getManyPDFTitle(t, true),
+      typeKey: FilterType.PDFForm,
+    },
+    {
+      key: "filter-type-diagrams",
+      label: t("Common:Diagrams"),
+      typeKey: FilterType.DiagramsOnly,
+    },
+    {
+      key: "filter-type-archives",
+      label: t("Common:Archives"),
+      typeKey: FilterType.ArchiveOnly,
+    },
+    {
       key: "filter-type-images",
-      label: t("Filse:Images"),
+      label: t("Common:Images"),
       typeKey: FilterType.ImagesOnly,
     },
     {
       key: "filter-type-media",
-      label: t("Files:Media"),
+      label: t("Common:Media"),
       typeKey: FilterType.MediaOnly,
-    },
-    {
-      key: "filter-type-forms",
-      label: t("Files:Forms"),
-      typeKey: FilterType.Pdf,
     },
   ];
 
@@ -382,9 +393,10 @@ export const FilterBlock = ({ t, config, setConfig }) => {
         onChange={toggleAuthor}
         isChecked={isUserFilterSet}
         isDisabled={!!config.requestToken}
+        dataTestId="files_author_toggle_button"
       />
-      {isUserFilterSet &&
-        ("authorType" in config.filter ? (
+      {isUserFilterSet ? (
+        "authorType" in config.filter ? (
           <SelectedItem
             onClick={clearAuthorType}
             onClose={() => {}}
@@ -402,9 +414,10 @@ export const FilterBlock = ({ t, config, setConfig }) => {
                 isAutoFocussed
                 onKeyDown={onKeyDown}
                 tabIndex={5}
+                testId="files_author_text_input"
               />
             </UserInput>
-            {author.length >= minSearchValue && (
+            {author.length >= minSearchValue ? (
               <StyledDropDown
                 width={searchRef?.current?.offsetWidth}
                 isDefaultMode={false}
@@ -414,21 +427,24 @@ export const FilterBlock = ({ t, config, setConfig }) => {
                 clickOutsideAction={closeInviteInputPanel}
                 eventTypes="click"
                 {...dropDownMaxHeight}
+                dataTestId="files_author_dropdown"
               >
                 {usersList.length ? foundUsers : ""}
               </StyledDropDown>
-            )}
+            ) : null}
           </UserInputContainer>
-        ))}
+        )
+      ) : null}
       <ToggleButton
         className="toggle"
         label={t("Common:Type")}
         onChange={toggleFilterType}
         isChecked={isTypeFilterSet}
         isDisabled={!!config.requestToken}
+        dataTestId="filter_type_toggle_button"
       />
-      {isTypeFilterSet &&
-        ("filterType" in config.filter ? (
+      {isTypeFilterSet ? (
+        "filterType" in config.filter ? (
           <SelectedItem
             onClick={clearFilterType}
             onClose={() => {}}
@@ -442,8 +458,11 @@ export const FilterBlock = ({ t, config, setConfig }) => {
             selectedOption={filterBy}
             displaySelectedOption
             directionY="top"
+            dataTestId="filter_type_combobox"
+            dropDownTestId="filter_type_dropdown"
           />
-        ))}
+        )
+      ) : null}
     </>
   ) : (
     <>
@@ -453,8 +472,9 @@ export const FilterBlock = ({ t, config, setConfig }) => {
         label={t("Common:Member")}
         onChange={toggleMembers}
         isChecked={isUserFilterSet}
+        dataTestId="member_toggle_button"
       />
-      {isUserFilterSet && (
+      {isUserFilterSet ? (
         <>
           {"subjectId" in config.filter ? (
             <SelectedItem
@@ -474,9 +494,10 @@ export const FilterBlock = ({ t, config, setConfig }) => {
                   isAutoFocussed
                   onKeyDown={onKeyDown}
                   tabIndex={5}
+                  testId="author_text_input"
                 />
               </UserInput>
-              {author.length >= minSearchValue && (
+              {author.length >= minSearchValue ? (
                 <StyledDropDown
                   width={searchRef?.current?.offsetWidth}
                   isDefaultMode={false}
@@ -485,11 +506,12 @@ export const FilterBlock = ({ t, config, setConfig }) => {
                   showDisabledItems
                   clickOutsideAction={closeInviteInputPanel}
                   eventTypes="click"
+                  dataTestId="author_dropdown"
                   {...dropDownMaxHeight}
                 >
                   {usersList.length ? foundUsers : ""}
                 </StyledDropDown>
-              )}
+              ) : null}
             </UserInputContainer>
           )}
 
@@ -498,17 +520,19 @@ export const FilterBlock = ({ t, config, setConfig }) => {
             label={t("Translations:SearchByOwner")}
             onChange={toggleSubjectFilter}
             isChecked={false}
+            dataTestId="subject_filter_checkbox"
           />
         </>
-      )}
+      ) : null}
       <ToggleButton
         className="toggle"
         label={t("Common:Type")}
         onChange={toggleType}
         isChecked={isTypeFilterSet}
+        dataTestId="room_type_toggle_button"
       />
-      {isTypeFilterSet &&
-        ("type" in config.filter ? (
+      {isTypeFilterSet ? (
+        "type" in config.filter ? (
           <SelectedItem
             onClick={clearType}
             onClose={() => {}}
@@ -522,8 +546,11 @@ export const FilterBlock = ({ t, config, setConfig }) => {
             selectedOption={filterBy}
             displaySelectedOption
             directionY="top"
+            dataTestId="room_type_combobox"
+            dropDownTestId="room_type_dropdown"
           />
-        ))}
+        )
+      ) : null}
     </>
   );
 };

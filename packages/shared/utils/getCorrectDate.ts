@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,20 +24,36 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import moment from "moment-timezone";
+import moment, { Moment } from "moment-timezone";
+import "moment/locale/en-gb";
 
 export default function getCorrectDate(
   locale: string,
-  date: string | Date,
+  date: string | Date | Moment,
   dateFormat = "L",
   timeFormat = "LT",
+  tz?: string,
 ) {
   if (!date || date === "0001-01-01T00:00:00.0000000Z") return "—";
 
-  const timezone = window.timezone;
+  moment.locale(locale);
 
-  const curDate = moment(date).locale(locale).tz(timezone).format(dateFormat);
-  const curTime = moment(date).locale(locale).tz(timezone).format(timeFormat);
+  let curDate: Moment | string = moment(date).locale(locale);
+  let curTime: Moment | string = moment(date).locale(locale);
+
+  if (tz) {
+    curDate = curDate.tz(tz).format(dateFormat);
+    curTime = curTime.tz(tz).format(timeFormat);
+
+    const correctDate = `${curDate} ${curTime}`;
+
+    return correctDate;
+  }
+
+  const { timezone } = window;
+
+  curDate = curDate.tz(timezone).format(dateFormat);
+  curTime = curTime.tz(timezone).format(timeFormat);
 
   const correctDate = `${curDate} ${curTime}`;
 

@@ -1,0 +1,15 @@
+{
+  "AuthViaNTLM": "Auth përmes NTLM",
+  "EnableSSL": "Aktivizoni SSL",
+  "EnterDomain": "Futni domenin",
+  "EnterEmail": "Futni email-in",
+  "EnterLogin": "Futni hyrjen",
+  "EnterPort": "Futni portin",
+  "Host": "Pritës",
+  "HostLogin": "Identifikimi i pritësit",
+  "HostPassword": "Fjalëkalimi i pritësit",
+  "Port": "Port",
+  "SenderDisplayName": "Emri i shfaqur i dërguesit",
+  "SenderEmailAddress": "Adresa e emailit të dërguesit",
+  "SendTestMail": "Dërgoni Mail Test"
+}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,19 +24,27 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-
+import { ReactSVG } from "react-svg";
+import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import { Text } from "../../text";
 
 import { TSelectorInfo } from "../Selector.types";
-import { StyledInfo } from "../Selector.styled";
+import styles from "../Selector.module.scss";
 
-export const Info = ({ infoText }: TSelectorInfo) => {
+export const Info = ({ infoText, withInfoBadge }: TSelectorInfo) => {
   return (
-    <StyledInfo id="selector-info-text">
-      <Text fontSize="12px" fontWeight={400} lineHeight="16px" className="text">
-        {infoText}
-      </Text>
-    </StyledInfo>
+    <div className={styles.info} id="selector-info-text">
+      <div className={styles.infoTextWrapper}>
+        {withInfoBadge ? <ReactSVG src={InfoIcon} /> : null}
+        <Text
+          fontSize="12px"
+          fontWeight={400}
+          lineHeight="16px"
+          className={styles.text}
+        >
+          {infoText}
+        </Text>
+      </div>
+    </div>
   );
 };

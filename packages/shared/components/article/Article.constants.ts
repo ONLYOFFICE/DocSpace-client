@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,16 +27,3 @@
 export const HEADER_NAME = "Header";
 export const MAIN_BUTTON_NAME = "MainButton";
 export const BODY_NAME = "Body";
-export const SUPPORTED_LANGUAGES = [
-  "en",
-  "fr",
-  "de",
-  "es",
-  "pt",
-  "it",
-  "cs",
-  "nl",
-  "ja",
-  "zh",
-  "ru",
-];

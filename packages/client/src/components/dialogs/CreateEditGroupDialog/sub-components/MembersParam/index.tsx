@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -69,11 +69,16 @@ const MembersParam = ({
 
   return (
     <div>
-      <Styled.Header>{t("Common:Members")}</Styled.Header>
+      <Styled.Header className="membersHeader">
+        {t("Common:Members")}
+      </Styled.Header>
 
       <Styled.AddMembersButton onClick={onShowSelectMembersPanel}>
-        <SelectorAddButton iconName={PlusSvgUrl} />
-        <div className="label">{t("PeopleTranslations:AddMembers")}</div>
+        <SelectorAddButton
+          iconName={PlusSvgUrl}
+          label={t("PeopleTranslations:AddMembers")}
+          testId="select_members"
+        />
       </Styled.AddMembersButton>
 
       {groupMembers ? (
@@ -88,11 +93,12 @@ const MembersParam = ({
         ) : (
           groupMembers
             .filter((member) => member.id !== groupManager?.id)
-            .map((member) => (
+            .map((member, index) => (
               <GroupMemberRow
                 key={member.id}
                 groupMember={member}
                 removeMember={removeMember}
+                dataTestId={`group_member_row_${index}`}
               />
             ))
         )

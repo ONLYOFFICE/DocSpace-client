@@ -2,8 +2,5 @@
   "FillOutButtonLabel": "Fill in",
   "FillOutDescription": "Fill in the fields of the original form in the editor window.",
   "FillOutTitle": "Fill out the form yourself",
-  "FillPDFDialogTitle": "Fill in as",
-  "ShareCollectButtonLabel": "Copy to room",
-  "ShareCollectDescription": "Share your form and collect responses via a Form filling room.",
-  "ShareCollectTitle": "Share"
+  "FillPDFDialogTitle": "Fill in as"
 }

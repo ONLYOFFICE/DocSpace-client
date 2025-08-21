@@ -1,0 +1,297 @@
+@use "../../styles/mixins";
+@use "../../styles/variables/colors";
+
+.floatingButton {
+  position: relative;
+  z-index: 1010;
+  background: var(--main-button-mobile-button-color);
+  -webkit-tap-highlight-color: #{colors.$tap-highlight};
+
+  :global {
+    .circle__background {
+      background: var(--main-button-mobile-button-color);
+    }
+
+    .circle__mask + div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      div {
+        padding-top: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    .circle__mask .circle__fill {
+      background-color: var(--main-button-mobile-circle-background);
+    }
+
+    svg {
+      fill: var(--main-button-mobile-icon-fill);
+    }
+  }
+}
+
+.hideLoading {
+  :global {
+    .circle__mask {
+      clip: none;
+
+      .circle__fill {
+        animation: none;
+        transform: none;
+        background: none !important;
+      }
+    }
+  }
+}
+
+.dropDown {
+  position: var(--main-button-mobile-dropdown-position);
+  width: var(--main-button-mobile-dropdown-width) !important;
+  max-width: calc(100vw - 48px);
+  inset-inline-end: var(--main-button-mobile-dropdown-right) !important;
+  bottom: var(--main-button-mobile-dropdown-bottom) !important;
+  z-index: var(--main-button-mobile-dropdown-z-index);
+  height: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0;
+
+  @include mixins.tablet {
+    height: var(--height-prop);
+  }
+
+  @include mixins.mobile {
+    width: var(--main-button-mobile-dropdown-mobile-width) !important;
+    inset-inline-end: var(
+      --main-button-mobile-dropdown-mobile-right
+    ) !important;
+    bottom: var(--main-button-mobile-dropdown-mobile-bottom) !important;
+
+    :global {
+      .dialog-background-scroll {
+        background: var(--background-color) !important;
+      }
+    }
+  }
+
+  :global {
+    .section-scroll,
+    .scroll-body {
+      padding-inline-end: 0 !important;
+    }
+
+    .separator-wrapper {
+      padding: 12px 24px;
+    }
+
+    .is-separator {
+      height: 1px !important;
+      width: calc(100% - 48px);
+      padding: 0 !important;
+      margin: 12px 24px !important;
+      background-color: var(--main-button-mobile-dropdown-separator-background);
+    }
+
+    .drop-down-item-button {
+      color: var(--main-button-mobile-dropdown-button-color);
+
+      svg {
+        path[fill] {
+          fill: var(--main-button-mobile-dropdown-button-color);
+        }
+
+        path[stroke] {
+          stroke: var(--main-button-mobile-dropdown-button-color);
+        }
+      }
+
+      &:hover {
+        background-color: var(--main-button-mobile-dropdown-hover-button-color);
+      }
+    }
+
+    .action-mobile-button {
+      width: 100%;
+      background-color: var(
+        --main-button-mobile-dropdown-background-action-mobile
+      );
+      border-radius: 3px;
+      font-size: 13px;
+      display: block;
+    }
+  }
+}
+
+.dropDownItem {
+  padding: 6px 23px;
+
+  :global {
+    .drop-down-icon {
+      height: 22px;
+    }
+  }
+}
+
+.buttonOptions {
+  padding: 16px 0;
+  background-color: var(--main-button-mobile-button-options-background-color);
+  color: var(--main-button-mobile-button-options-color);
+
+  &.withoutButton {
+    background-color: var(--main-button-mobile-button-wrapper-background);
+  }
+
+  :global {
+    .main-button_drop-down {
+      color: var(--main-button-mobile-dropdown-button-color);
+
+      svg {
+        path[fill] {
+          fill: var(--main-button-mobile-dropdown-button-color);
+        }
+
+        path[stroke] {
+          stroke: var(--main-button-mobile-dropdown-button-color);
+        }
+      }
+
+      background-color: transparent;
+
+      @media (hover: hover) {
+        &:hover {
+          background-color: var(
+            --main-button-mobile-dropdown-hover-button-color
+          );
+        }
+      }
+    }
+  }
+}
+
+.containerAction {
+  padding: 16px 0px;
+
+  .sublevel {
+    padding-inline-start: 48px;
+  }
+}
+
+.progressContainer {
+  display: none;
+  align-items: center;
+  flex-direction: column;
+  cursor: default;
+  padding: 0 24px 34px;
+  background-color: var(--main-button-mobile-button-wrapper-background);
+
+  &.isUploading {
+    display: flex;
+    background-color: var(
+      --main-button-mobile-button-wrapper-uploading-background
+    );
+  }
+}
+
+.wrapperAlertIcon {
+  position: absolute;
+  z-index: 1010;
+  width: 12px;
+  height: 12px;
+  top: 10px;
+  inset-inline-end: 10px;
+}
+
+.alertIcon {
+  cursor: pointer;
+  vertical-align: top !important;
+
+  @include mixins.common-icons-style;
+}
+
+// ProgressBar styles
+.progressBarContainer {
+  display: none;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  box-sizing: border-box;
+  height: 60px;
+  padding-top: 26px;
+
+  &.isUploading {
+    display: flex;
+  }
+}
+
+.progressWrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .progressHeader {
+    width: 40%;
+    line-height: 16px;
+    color: var(--main-button-mobile-text-color);
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .progressInfoWrapper {
+    width: 60%;
+    display: flex;
+    align-items: center;
+
+    .progressCount {
+      width: calc(100% - 26px);
+      line-height: 16px;
+      color: var(--main-button-mobile-text-color);
+      text-align: right;
+      margin-inline-end: 12px;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .progressIcon {
+      svg {
+        path {
+          fill: var(--main-button-mobile-bar-icon);
+        }
+      }
+
+      &.error {
+        svg {
+          path {
+            fill: var(--status-warning);
+          }
+        }
+      }
+    }
+  }
+}
+
+.mobileProgressBar {
+  width: 100%;
+  height: 4px;
+  background-color: var(--main-button-mobile-mobile-progress-bar-background);
+  border-radius: 2px;
+  margin-top: 14px;
+}
+
+.progressBar {
+  width: var(--upload-percent);
+  height: 4px;
+  opacity: 1;
+  background: var(--main-button-mobile-progress-bar-color);
+  &.error {
+    background: var(--status-warning);
+  }
+}

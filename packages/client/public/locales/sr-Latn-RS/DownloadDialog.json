@@ -1,7 +1,0 @@
-{
-  "ChooseFormatText": "Izaberite format za svaku datoteku koju želite da preuzmete",
-  "ConvertMessage": "Ako odaberete da konvertujete datoteku u format koji se razlikuje od prvobitnog, neki podaci mogu biti izgubljeni.",
-  "ConvertToZip": "Datoteke će biti kompresovane u <strong>.zip datoteku</strong>.",
-  "CustomFormat": "Prilagođeni format",
-  "OriginalFormat": "Originalni format"
-}

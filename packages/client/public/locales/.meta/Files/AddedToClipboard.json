@@ -1,0 +1,368 @@
+{
+  "key_path": "AddedToClipboard",
+  "content": "Items added to clipboard",
+  "content_en_sha1_hash": "ec9189ec885c2481ccbf1eaee77e1a3ada301a5f",
+  "created_at": "2025-05-19T21:30:55.207Z",
+  "updated_at": "2025-08-12T19:46:26.292Z",
+  "comment": {
+    "text": "The translation key \"AddedToClipboard\" displays a message indicating that items have been successfully copied or moved to the clipboard. This text is used in the UI to provide feedback to users after they copy or move selected files, and it appears as a toast notification when the action completes.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:14.213Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/HotkeyStore.js",
+      "line_number": 623,
+      "context": "if (!canCopy || (isCut && !canMove) || !selection.length) return;\n \n setHotkeysClipboard();\n this.hotkeysClipboardAction = isCut ? \"move\" : \"copy\";\n \n const copyText = `${t(\"AddedToClipboard\")}: ${selection.length}`;\n toastr.success(copyText);\n };\n \n moveFilesFromClipboard = (t) => {\n const fileIds = [];",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Elementlər mübadilə buferinə əlavə edildi' is a literal translation that doesn't quite convey the meaning of 'Items added to clipboard'. 'Mübadilə buferinə' literally means 'exchange buffer', which is not the common understanding of a clipboard. A more natural translation would reflect the concept of copying to the clipboard.",
+          "suggestion": "Dərhal köçürülən fayllar"
+        },
+        {
+          "type": "spelling",
+          "description": "While 'Elementlər' is technically correct, 'Fayllar' (files) is more appropriate given the key name 'Files:AddedToClipboard'.",
+          "suggestion": "Fayllar"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Елементите са добавени към клипборда\" is a literal translation but doesn't quite capture the meaning of 'Items added to clipboard' in a user interface context. It sounds slightly awkward and formal.",
+          "suggestion": "A more natural and idiomatic translation might be something like \"Добавени елементи в клипборда\" or \"Елементи в клипборда\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Objekte in der Zwischenablage hinzugefügt' is too literal and doesn't flow naturally in German. 'Added to clipboard' implies something was *copied* to the clipboard.",
+          "suggestion": "Einfügen in die Zwischenablage"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Objekte' can sound a bit formal. A more common phrasing might be more appropriate depending on context.",
+          "suggestion": "Dateien"
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Kohteet lisätty leikepöydälle\" is technically correct, it's a rather literal and slightly awkward translation. A more natural Finnish phrasing would be preferable.",
+          "suggestion": "Tiedostot lisätty leikepöydälle"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Kohteet' (items) is less commonly used in this context than 'Tiedostot' (files). Since the key name 'Files:AddedToClipboard' implies files specifically, 'Tiedostot' is a better fit.",
+          "suggestion": "Tiedostot lisätty leikepöydälle"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Տարրերն ավելացվել են սեղմատախտակին\" (Tarrerin avelyacvel en slegmatakh takin) literally translates to 'Items have been added to the clipboard'. While technically correct, it's a bit passive and less natural. A more natural phrasing would be 'Ավելացված է սեղմատախտակին' (Avelacvac e slegmatakh takin) - 'Added to the clipboard'.",
+          "suggestion": "Ավելացված է սեղմատախտակին"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Elementi aggiunti agli appunti\" is understandable, a more accurate translation of 'Items added to clipboard' would be 'Elementi copiati negli appunti'. 'Copiati' (copied) better reflects the action of adding items to the clipboard.",
+          "suggestion": "Elementi copiati negli appunti"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '項目は、クリップボードに追加されました' literally translates to 'Items were added to the clipboard'. While understandable, it's not the most natural phrasing in Japanese for this context. A more natural phrasing would convey the action of adding items *to* the clipboard, rather than the clipboard receiving them.",
+          "suggestion": "項目がクリップボードに追加されました (Koumoku ga kuripubōdo ni tsuika saremashita)"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'は' (wa) followed by 'に追加されました' (ni tsuika saremashita) feels slightly formal for a UI message. A more conversational tone might be better.",
+          "suggestion": "項目がクリップボードに追加 (Koumoku ga kuripubōdo ni tsuika)"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '클립보드에 항목이 추가되었습니다' literally translates to 'Items have been added to the clipboard.' While technically correct, it's a bit more formal than the English 'Items added to clipboard.' A more natural and concise translation would be preferred.",
+          "suggestion": "클립보드에 추가된 항목들"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ເພີ່ມລາຍການໃສ່ຄລິບບອດແລ້ວ\" literally translates to \"Items added to clipboard already.\" The 'already' isn't present or implied in the English source. While understandable, it adds unnecessary information.",
+          "suggestion": "ເພີ່ມລາຍການໃສ່ຄລິບບອດ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Vienumi pievienoti starpliktuvē' is a literal translation but doesn't quite capture the natural flow of the English phrase 'Items added to clipboard.' While technically correct, it sounds slightly awkward in Latvian. A more idiomatic translation would be better.",
+          "suggestion": "Faili pievienoti starpliktuvē"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Pozycje zostały dodane do schowka\" is not the most natural or precise translation of \"Items added to clipboard.\" \"Pozycje\" (items) is acceptable, but \"zostały dodane\" (were added) is a bit passive and formal. A more natural phrasing would convey that items *were copied* to the clipboard.",
+          "suggestion": "Przedmioty skopiowano do schowka"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Portuguese translation \"Criar novo link\" (Create new link) does not accurately reflect the English meaning \"Items added to clipboard\". It's a completely different concept.",
+          "suggestion": "A more accurate translation would be something like \"Itens copiados para a área de transferência\" or \"Itens adicionados à área de transferência\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Elementele sunt adăugate la clipboard\" is not the most natural or accurate translation of \"Items added to clipboard\". \"Elementele\" implies individual items, but \"Items\" is more general. \"Clipboard\" is often used directly in Romanian.",
+          "suggestion": "Fișiere adăugate la clipboard"
+        },
+        {
+          "type": "formatting",
+          "description": "The translated phrase uses lower case while the English is title case. Consistency is important for UI strings.",
+          "suggestion": "Fișiere Adăugate la Clipboard"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'අථක පසුරු පුවරුවට එක් කෙරිණි' doesn't accurately convey the meaning of 'Items added to clipboard'.  'අථක' doesn't fit the context, and the sentence structure is awkward. A more accurate translation would describe items being copied to the clipboard.",
+          "suggestion": "Consider alternatives like 'පසුරු පුවරුවට එක් කරන ලද දේ' (things added to the clipboard) or 'පසුරු පුවරුවට පිටපත් කරන ලද දේ' (things copied to the clipboard)."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure 'අථක පසුරු පුවරුවට එක් කෙරිණි' is not the most natural way to express this in Sinhala.  It reads a bit formally and less conversational.",
+          "suggestion": "Re-structure the sentence for better flow in Sinhala, ensuring it sounds natural."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Elementi dodani v odložišče\" is technically correct, it's a bit formal and literal. \"Items added to clipboard\" often refers to a visual indication or notification that something was copied. A more natural Slovenian phrasing would better reflect that.",
+          "suggestion": "Raziskava možnosti kot 'Elementi kopirani' or 'Kopirani elementi' for a more user-friendly feel, depending on the context and desired nuance."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ставке додате у привремену меморију' while understandable, isn't the most natural or precise translation for 'Items added to clipboard'. 'Привремену меморију' is a rather formal way to say 'clipboard'.",
+          "suggestion": "Предмети додани у измени (Predmeti dodani u izmeni)"
+        },
+        {
+          "type": "formatting",
+          "description": "The Serbian language typically utilizes a more concise phrasing where possible.  While grammatically correct, the translation could be streamlined.",
+          "suggestion": "Предмети у измени (Predmeti u izmeni)"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Stavke dodate u privremenu memoriju' is a literal translation and doesn't fully convey the meaning of 'Items added to clipboard' in a natural, user-friendly way in the context of a software interface. 'Privremena memorija' is a more technical term.",
+          "suggestion": "A better translation would be something like 'Kopirane stavke' or 'Dodate u isečanje' (added to the clip)."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Елементи додано до буфера обміну\" is a rather literal translation. A more natural Ukrainian phrasing would be something like \"Предмети скопійовані в буфер обміну\" or \"Елементи скопійовано в буфер обміну\".  The current phrasing sounds a bit stiff.",
+          "suggestion": "Предмети скопійовані в буфер обміну"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Đã thêm các mục vào bộ nhớ tạm\" is not the most natural or accurate translation of \"Items added to clipboard\". \"Bộ nhớ tạm\" literally translates to 'temporary memory,' which is not the best way to describe a clipboard.",
+          "suggestion": "Các mục đã được thêm vào bảng tạm | Các mục đã thêm vào bảng nhớ"
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct, the translation is a bit clunky. The sentence could be more concise.",
+          "suggestion": "Các mục đã thêm vào bảng tạm"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '已将项目添加到剪贴板中' is a bit literal and slightly awkward in Chinese. While technically correct, it doesn't flow as naturally as it could.",
+          "suggestion": "Consider a more natural phrasing like '已复制项目到剪贴板' or '项目已复制到剪贴板' ."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

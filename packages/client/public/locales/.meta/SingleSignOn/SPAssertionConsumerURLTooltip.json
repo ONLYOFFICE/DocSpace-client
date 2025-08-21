@@ -1,0 +1,452 @@
+{
+  "key_path": "SPAssertionConsumerURLTooltip",
+  "content": "The Service provider URL address where it receives and processes assertions from the Identity provider",
+  "content_en_sha1_hash": "072ba9de955680a2e39b73145841fa918389b237",
+  "created_at": "2025-05-19T21:30:50.151Z",
+  "updated_at": "2025-08-11T18:11:59.262Z",
+  "comment": {
+    "text": "The translation key \"SPAssertionConsumerURLTooltip\" is used to describe the Service provider URL address field in a Single Sign-On setup. It provides a tooltip explanation for users when hovering over the field, indicating where assertions from an Identity provider are received and processed.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:07.420Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/ProviderMetadata.js",
+      "line_number": 94,
+      "context": "<MetadataUrlField\n labelText={t(\"SPAssertionConsumerURL\")}\n name=\"spAssertionConsumerUrl\"\n placeholder={`${url}/sso/acs`}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"SPAssertionConsumerURLTooltip\")}</Text>\n }\n tooltipClass=\"sp-assertion-consumer-url-tooltip icon-button\"\n dataTestId=\"sp_assertion_consumer_url\"\n />",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"عنوان رابط لمقدم الخدمة حيث يتلقى التأكيدات ويعالجها من مزود الهوية\" is a bit literal and doesn't flow naturally in Arabic. It uses 'عنوان رابط' (address link) which isn't the most elegant phrasing. The meaning is conveyed but can be improved.",
+          "suggestion": "عنوان URL لمقدم الخدمة حيث يستقبل التأكيدات ويعالجها من مزود الهوية"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the passive voice construction in both English and Arabic ('receives and processes') could be more active and concise. This often improves readability.",
+          "suggestion": "عنوان URL لمقدم الخدمة حيث يعالج التأكيدات المستلمة من مزود الهوية"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'emall' appears to be a misspelling of 'emali'.",
+          "suggestion": "Şəxsiyyət provayderindən iddiaları qəbul etdiyi və emali etdiyi xidmət provayderinin URL ünvanı"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'където те получават и обработват твърдения' is a literal translation that doesn't quite capture the intended meaning of 'receives and processes assertions'. It's a bit clunky in Bulgarian. A more natural phrasing would convey the action performed *on* the assertions.",
+          "suggestion": "URL адресът на доставчика на услуги, където се получават и обработват твърдения от доставчика на самоличност."
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the sentence is a bit long and could be improved for readability. Breaking it into two sentences might be more natural in Bulgarian.",
+          "suggestion": "URL адресът на доставчика на услуги. Там се получават и обработват твърдения от доставчика на самоличност."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The sentence structure in the German translation could be improved for better flow. 'an der er Zusicherungen empfängt' is a bit clunky. It would be more natural to say 'an die er...' ",
+          "suggestion": "Die URL-Adresse des Dienstanbieters, an die er Zusicherungen vom Identitätsanbieter empfängt und verarbeitet"
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Palveluntarjoajan URL-osoite, jossa se vastaanottaa ja käsittelee palveluntarjoajan väitteitä' is slightly redundant. The phrase 'palveluntarjoajan väitteitä' (assertions from the service provider) repeats 'service provider'. The original English doesn't repeat 'service provider'.",
+          "suggestion": "Palveluntarjoajan URL-osoite, jossa se vastaanottaa ja käsittelee väitteitä."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word \"ծառայությունների\" (tsarayiut'yiner) is misspelled. It should be \"ծառայությունների\" (tsarayiut'yiner).",
+          "suggestion": "ծառայությունների"
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure is slightly awkward. \"որտեղ նա ստանում և մշակում է\" (qort'eq nya stanum ev mshakum e) can be improved.",
+          "suggestion": "որտեղ էլ ստանում և մշակում է"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "“Assertion” is better translated as “հաստատում” rather than “պնդումներ”. The latter has connotations that are not accurate to the original English term.",
+          "suggestion": "հաստատումներ"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'L’indirizzo URL del fornitore di servizi in cui riceve ed elabora le asserzioni dal provider di identità' is a literal translation but could be more natural in Italian. 'Service provider' is often rendered as 'Fornitore di Servizi' consistently, and the phrase 'riceve ed elabora' can be improved.",
+          "suggestion": "L’indirizzo URL del fornitore di servizi dove riceve e gestisce le asserzioni dal provider di identità."
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'riceve ed elabora' uses 'ed' which can sometimes be replaced with 'e' for a more flowing read depending on the context. It's a minor style choice, but recommended.",
+          "suggestion": "riceve e elabora"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase 'Identity プロバイダ' should consistently use full-width katakana, matching 'サービスプロバイダ'.",
+          "suggestion": "サービスプロバイダは、Identityプロバイダからアサーションを受信し処理する URL アドレス"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'Service provider URL address where it receives and processes assertions' can be more naturally translated.  'where it receives and processes' is a bit awkward in Japanese. Consider rephrasing for fluency.",
+          "suggestion": "サービスプロバイダがIdentityプロバイダからアサーションを受信し、処理を行うURLアドレス"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '어설션을 수신하고 처리하는' is a literal translation of 'receives and processes assertions'. A more natural and accurate translation would be '인증 요청을 받아 처리하는'. 'Assertion' doesn't have a direct, commonly used Korean equivalent in this context.",
+          "suggestion": "ID 제공자로부터 인증 요청을 받아 처리하는 서비스 제공자 URL 주소"
+        },
+        {
+          "type": "formatting",
+          "description": "While not a critical error, Korean typically uses slightly different sentence structure for clarity.  A slight reordering can improve readability.",
+          "suggestion": "인증 요청을 받아 처리하는 서비스 제공자 URL 주소입니다. ID 제공자로부터 받습니다."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ທີ່ຢູ່ URL ຜູ້ໃຫ້ບໍລິການທີ່ມັນໄດ້ຮັບແລະດໍາເນີນການຢືນຢັນຈາກຜູ້ໃຫ້ບໍລິການ Identity' is a literal translation and doesn't quite convey the intended meaning clearly. The phrase 'ມັນໄດ້ຮັບແລະດໍາເນີນການຢືນຢັນ' is slightly awkward. A more natural phrasing would improve readability.",
+          "suggestion": "ທີ່ຢູ່ URL ຂອງຜູ້ໃຫ້ບໍລິການທີ່ຮັບປະກວດ ແລະຈັດການຂໍ້ມູນยืนยันจากผู้ให้บริการ Identity"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ຢືນຢັນ' is used repeatedly. While correct, it could be varied for better flow.",
+          "suggestion": "Consider using synonyms like 'ຂໍ້ມູນ' or 'ການยืนยัน' depending on the context, to avoid repetition."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'vietrāža' is not the most natural word choice for 'Service provider URL address' in this context. 'Pakalpojumu sniedzēja URL adrese' is more common and understandable.",
+          "suggestion": "Pakalpojumu sniedzēja URL adrese"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation uses \"hij\" (he) to refer to the service provider. Service providers are inanimate objects and should be referred to with a neutral pronoun. The phrase \"waar hij de verklaringen...\" is grammatically awkward in this context.",
+          "suggestion": "Het URL-adres van de dienstverlener waar de verklaringen van de Identity provider worden ontvangen en verwerkt"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'asercje' is a direct transliteration and might not be the most natural or clear term in Polish for 'assertions'. While technically correct, a more common term could be more user-friendly.",
+          "suggestion": "Consider 'potwierdzenia' or 'twierdzenia' as alternatives to 'asercje', depending on the context."
+        },
+        {
+          "type": "grammar",
+          "description": "While technically grammatical, the sentence 'Adres URL usługodawcy, pod którym otrzymuje i przetwarza asercje od dostawcy tożsamości' is a bit long and could be made more fluid. The phrase 'pod którym' can be rephrased to improve readability.",
+          "suggestion": "Consider restructuring the sentence to something like: 'Adres URL usługodawcy, na który dostawca tożsamości przesyła i przetwarza potwierdzenia/twierdzenia.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Fornecedor de serviços' is a literal translation of 'Service provider'. While technically correct, 'Provedor de Serviços' is a more standard and natural phrasing in Portuguese.",
+          "suggestion": "Provedor de Serviços"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Fornecedor de identidade' is a literal translation of 'Identity provider'. While technically correct, 'Provedor de Identidade' is a more standard and natural phrasing in Portuguese.",
+          "suggestion": "Provedor de Identidade"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"spre care sunt îndreptate şi unde sunt procesate\" is a bit verbose and not a direct translation of \"where it receives and processes\". A more concise and accurate translation would be better.",
+          "suggestion": "Adresa URL a furnizorului de servicii unde sunt primite şi procesate aserţiunile de la furnizorul de identitate"
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct, the sentence could benefit from slightly improved flow. Consider restructuring to improve readability.",
+          "suggestion": "Adresa URL a furnizorului de servicii unde furnizorul de identitate trimite şi procesează aserţiunile."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is technically correct, but \"поставщика учетных записей\" (identity provider) is a bit verbose and less common than a more concise equivalent. A better translation for 'Identity provider' would be 'провайдера удостоверений' or 'идентификатора'.",
+          "suggestion": "URL-адрес поставщика сервиса, по которому он получает и обрабатывает утверждения от провайдера удостоверений"
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'අනන්‍යතා ප්‍රතිපාදකගෙන් ප්‍රකාශන ලබන සහ සකසන සේවා ප්‍රතිපාදකයාගේ ඒ.ස.නි. ලිපිනය' is a literal translation and doesn't quite convey the meaning clearly. It's a bit clunky and could be improved for readability in Sinhala. Specifically, 'සකසන' (processes) is a bit awkward in this context.",
+          "suggestion": "අනන්‍යතා ප්‍රතිපාදකයා වෙතින් ලැබෙන ප්‍රකාශන ක්‍රියාවලිය කරන සේවා ප්‍රතිපාදකයාගේ URL ලිපිනය"
+        },
+        {
+          "type": "formatting",
+          "description": "The abbreviation 'URL' is not translated or expanded. While accepted in Sinhala, considering the audience, providing the full translation might be more accessible.",
+          "suggestion": "අනන්‍යතා ප්‍රතිපාදකයා වෙතින් ලැබෙන ප්‍රකාශන ක්‍රියාවලිය කරන සේවා ප්‍රතිපාදකයාගේ අන්තර්ජාල ලිපිනය"
+        },
+        {
+          "type": "spelling",
+          "description": "While technically correct, consider whether 'ඒ.ස.නි.' is the most common and recognizable abbreviation for URL in Sinhala. It might be better to use a more widely understood equivalent or the full word.",
+          "suggestion": "The abbreviation should be reviewed for common usage, potentially replaced with 'අන්තර්ජාල ලිපිනය'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'URL naslov ponudnika storitev' is a bit literal and could be improved for clarity. 'Service provider' is better conveyed as 'ponudnik storitev' but the overall flow could be more natural.",
+          "suggestion": "URL-ja ponudnika storitev, kjer prejema in obdeluje potrdila s strani ponudnika identitete"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'assertions' is translated as 'potrdila'. While 'potrdila' is a possible translation, 'trditve' might be closer to the meaning of 'assertions' in this technical context.",
+          "suggestion": "URL naslov ponudnika storitev, kjer prejema in obdeluje trditve s strani ponudnika identitete"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'assertion' is best translated as 'потврда' rather than 'тврдње'. While 'тврдње' is technically correct, 'потврда' is more commonly used and accurately reflects the technical meaning in this context.",
+          "suggestion": "Адреса URL пружаоца услуга где он прима и обрађује потврде од идентитетског пружаоца."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'где он прима и обрађује' is slightly awkward.  It can be improved for better flow.",
+          "suggestion": "где прима и обрађује"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'assertations' (tvrdnje) is not the most accurate translation of 'assertions' in this context. While technically correct, it carries a slightly different connotation. A more precise translation would be 'izjave'.",
+          "suggestion": "Adresa URL pružaoca usluga gde on prima i obrađuje izjave od identitetskog pružaoca."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure 'gde on prima i obrađuje' is a bit clunky in Serbian. It's more natural to combine the actions into a single verb phrase.",
+          "suggestion": "Adresa URL pružaoca usluga gde prima i obrađuje izjave od identitetskog pružaoca."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Kimlik sağlayıcıdan bildirimleri aldığı ve işlediği Hizmet sağlayıcı URL adresi' is overly literal and could be improved for better readability in Turkish. A more natural phrasing would emphasize the *destination* of the assertions rather than just the action.",
+          "suggestion": "Kimlik sağlayıcısından bildirimleri kabul edip işlediği hizmet sağlayıcı URL'si"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of an apostrophe in 'URL'si is technically correct but 'URL'si is generally preferred in modern Turkish.",
+          "suggestion": "URL'si"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"де він отримує та обробляє твердження від постачальника посвідчень\" is a bit literal and could be improved for clarity and natural flow in Ukrainian. 'Assertion' is best translated as 'заявлення' rather than 'твердження' in this context.",
+          "suggestion": "URL-адреса постачальника сервісу, де він отримує та обробляє заявлення від постачальника ідентифікації."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'постачальника посвідчень' is understandable, 'постачальника ідентифікації' or 'постачальника автентифікації' would be more accurate and commonly used terms in Ukrainian for 'Identity provider'.",
+          "suggestion": "URL-адреса постачальника сервісу, де він отримує та обробляє заявлення від постачальника ідентифікації."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'nơi nó nhận và xử lý' is a bit awkward. The 'it' refers to the Service provider, which isn't explicitly mentioned.  A more natural phrasing would avoid the pronoun.",
+          "suggestion": "Địa chỉ URL của nhà cung cấp dịch vụ, nơi nhà cung cấp dịch vụ nhận và xử lý các xác nhận từ nhà cung cấp danh tính"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the sentence is long and can be broken down for better readability. Consider rephrasing for clarity.",
+          "suggestion": "Đây là địa chỉ URL của nhà cung cấp dịch vụ, nơi nhận và xử lý các xác nhận từ nhà cung cấp danh tính."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase '断言' (duàn yàn) while technically meaning 'assertion', can be overly technical and potentially confusing for a general user in this context. A more user-friendly term might be preferable.",
+          "suggestion": "Consider using a more accessible term like '身份验证信息' (shēn fèn yàn zhèng xìn xī) or '认证信息' (rèn zhèng xìn xī) to replace '断言'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The sentence structure is a bit clunky. The meaning is clear, but it could be more fluent.",
+          "suggestion": "Consider rephrasing to: '服务供应商 URL 地址，用于接收并处理来自身份供应商的身份验证信息' (Fúwù gōngyíngshēng URL dìzhǐ, yòng yú jiēshōu bìng chǔlǐ láizì shēnfèn gōngyíngshēng de shēnfèn yànzhèng xìn xī)."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

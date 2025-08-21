@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -23,38 +23,51 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { TextProps } from "../text/Text.types";
 
-export interface RadioButtonProps {
-  /** Used as HTML `checked` property for each `<input>` tag */
+export type RadioButtonOrientation = "horizontal" | "vertical";
+
+type PickedTextProps = Pick<TextProps, "fontSize" | "fontWeight">;
+type PickedInputProps = Pick<
+  React.ComponentProps<"input">,
+  "name" | "value" | "autoFocus" | "onChange"
+>;
+type PickedLabelProps = Pick<
+  React.ComponentProps<"label">,
+  "id" | "className" | "style"
+>;
+
+export type RadioButtonProps = {
+  /** Used as HTML `checked` property for the `<input>` tag */
   isChecked?: boolean;
-  /** Used as HTML `disabled` property for each `<input>` tag */
+
+  /** Used as HTML `disabled` property for the `<input>` tag */
   isDisabled?: boolean;
-  /** Radiobutton name. In case the name is not stated, `value` is used */
+
+  /** Label text or node to display next to the radio button.
+   * If not provided, value will be used as label */
   label?: React.ReactNode | string;
-  /** Link font size */
-  fontSize?: string;
-  /** Link font weight */
-  fontWeight?: number;
-  /** Used as HTML `name` property for `<input>` tag. */
-  name: string;
-  /** Allows handling the changing events of the component  */
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  /** Allows handling component clicking events */
-  onClick?: (e: React.MouseEvent<HTMLInputElement>) => void;
-  /** Used as HTML `value` property for `<input>` tag. Facilitates identification of each radiobutton  */
-  value: string;
-  /** Sets margin between radiobuttons. In case the orientation is `horizontal`,
-   * `margin-left` is applied for all radiobuttons, except the first one.
-   * In case the orientation is `vertical`, `margin-bottom` is applied for all radiobuttons, except the last one */
+
+  /** Callback fired when radio button is clicked */
+  onClick?: (
+    e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement>,
+  ) => void;
+
+  /** Sets margin between radio buttons.
+   * For horizontal orientation, sets margin-inline-start.
+   * For vertical orientation, sets margin-block-end.
+   * @default "15px" */
   spacing?: string;
-  /** Accepts class  */
-  className?: string;
-  /** Accepts id */
-  id?: string;
-  /** Accepts css style  */
-  style?: React.CSSProperties;
-  /** Position of radiobuttons */
-  orientation?: "horizontal" | "vertical";
+
+  /** Layout orientation of radio buttons when used in a group
+   * @default "vertical" */
+  orientation?: RadioButtonOrientation;
+
+  /** Additional CSS class for the input element */
   classNameInput?: string;
-  autoFocus?: boolean;
-}
+
+  /** Test ID for the radio button component */
+  testId?: string;
+} & PickedTextProps &
+  PickedInputProps &
+  PickedLabelProps;

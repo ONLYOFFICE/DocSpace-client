@@ -1,11 +1,17 @@
 {
+  "ChangeContactType": "Schimbați tipul de contact",
   "ChangeGuestsTypeMessage": "Invitatul <strong>{{userName}}</strong> va fi deplasat în secțiunea {{membersSection}} și îi se va stabili tip de utilizator. Utilizatorii au propria lor secțiunea {{documentsSection}} , pot crea și modifica fișiere, dar nu pot crea săli.",
   "ChangeGuestsTypeMessageMulti": "Invitații selectați vor fi deplasați în secțiunea {{membersSection}} și li se vor stabili tip de utilizator. Utilizatorii au propria lor secțiunea {{documentsSection}}, pot crea și modifica fișiere, dar nu pot crea săli.",
+  "ChangeGuestsTypeToAdmin": "Invitatul <strong>{{userName}}</strong> va fi deplasat în secțiunea {{membersSection}} și îi se va stabili tipul <strong>'{{ secondType }}'</strong>. Administratorii {{productName}} pot accesa setările {{productName}}, gestiona și arhiva săli, invita noi utilizatori și atribui roluri în funcție de nivelul lor. Administratorii {{productName}} pot accesa secţiunea {{documentsSection}} .",
+  "ChangeGuestsTypeToAdminMulti": "Invitații selectați vor fi deplasați în secțiunea {{membersSection}} și li se va stabili tipul <strong>'{{ secondType }}'</strong>. Administratorii {{productName}}pot accesa setările {{productName}}, gestiona și arhiva săli, invita noi utilizatori și atribui roluri în funcţie de nivelul lor. Administratorii {{productName}} pot accesa secţiunea {{documentsSection}} .",
+  "ChangeGuestsTypeToManager": "Invitatul <strong>{{userName}}</strong> va fi deplasat în secțiunea {{membersSection}} și îi se va stabili tipul <strong>'{{ secondType }}'</strong>. Administratorii sălii pot crea şi gestiona sălile atribuite, invita noi utilizatori şi atribui roluri de Administrator sală și de nivel inferior. Administratorii sălii pot accesa secţiunea {{documentsSection}}.",
+  "ChangeGuestsTypeToManagerMulti": "Invitații selectați vor fi deplasați în secțiunea {{membersSection}} și li se va stabili tipul <strong>'{{ secondType }}'</strong>. Administratorii sălii pot crea şi gestiona sălile atribuite, invita noi utilizatori şi atribui roluri de Administrator sală și de nivel inferior. Administratorii sălii pot accesa secţiunea {{documentsSection}}.",
   "ChangeUserTypeButton": "Modificare tip",
-  "ChangeUserTypeHeader": "Schimbați tipul utilizatorului",
   "ChangeUserTypeMessage": "Utilizatorii de tipul <strong>'{{ firstType }}'</strong> vor fi transferați la tipul <strong>'{{ secondType }}'</strong>.",
-  "ChangeUserTypeMessageMulti": "Utilizatorii pe care le-aţi selectat vor fi trecuţi la categoria <strong>'{{ secondType }}'</strong>.",
-  "ChangeUserTypeMessageWarning": "Nu puteți schimba tipul administratorului de {{productName}} și nici al dumneavoastră.",
+  "ChangeUserTypeNote": "<1>Menţiune:</1> nu puteți schimba tipul pentru administratorul {{productName}} și pentru dvs.",
+  "DataReassignmentInfo": "Sălile create de acest utilizator vor fi reatribuite contului dvs. Pentru a reatribui sălile unei alte persoane, faceți clic pe link-ul corespunzător de mai jos.",
+  "DataReassignmentWithFilesDeletion": "Toate fișierele care au fost partajate de acest utilizator  vor fi <1>atribuite automat contului dvs în 30 de zile</1>. Pentru a reatribui sălile/fișierele partajate unei alte persoane, faceți clic pe link-ul corespunzător de mai jos.",
+  "PersonalDataDeletion": "Toate fișierele și dosarele din secțiunea {{sectionName}} a acestui utilizator vor fi  <1>şterse definitiv după 30 de zile</1>.",
   "SuccessChangeGuestType": "Tip de invitat a fost modificat cu succes",
   "SuccessChangeUserType": "Tipul utilizatorului a fost modificat cu succes"
 }

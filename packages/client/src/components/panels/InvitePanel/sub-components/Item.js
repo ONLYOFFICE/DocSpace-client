@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -47,12 +47,12 @@ import {
   RoomsType,
 } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
+import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 import { filterPaidRoleOptions } from "SRC_DIR/helpers";
 
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import Filter from "@docspace/shared/api/people/filter";
-import { Box } from "@docspace/shared/components/box";
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 import AccessSelector from "../../../AccessSelector";
 import {
@@ -67,7 +67,6 @@ import {
   StyledRow,
 } from "../StyledInvitePanel";
 import {
-  getAccessOptions,
   getFreeUsersRoleArray,
   getFreeUsersTypeArray,
   getTopFreeRole,
@@ -77,6 +76,7 @@ import {
 const Item = ({
   t,
   item,
+  index,
   theme,
   setInviteItems,
   inviteItems,
@@ -92,6 +92,7 @@ const Item = ({
   isUserTariffLimit,
   roomId,
   style,
+  allowInvitingGuests,
 }) => {
   const {
     avatar,
@@ -124,6 +125,7 @@ const Item = ({
 
   const [searchRequestRunning, setSearchRequestRunning] = useState(false);
   const [isSharedUser, setIsSharedUser] = useState(false);
+  const [userExistsOnPortal, setUserExistsOnPortal] = useState(null);
 
   const searchByQuery = async (value) => {
     if (!value) {
@@ -153,6 +155,8 @@ const Item = ({
     const user = users.items.find((userItem) => userItem.email === value);
 
     setIsSharedUser(user && (roomId === -1 || user?.shared));
+
+    roomId !== -1 && setUserExistsOnPortal(user);
   };
 
   const debouncedSearch = useCallback(
@@ -208,7 +212,14 @@ const Item = ({
 
   const errorsInList = () => {
     const hasErrors = inviteItems.some((elm) => !!elm.errors?.length);
-    setHasErrors(hasErrors);
+    const needRemoveGuests = !allowInvitingGuests
+      ? inviteItems.some(
+          (inviteItem) =>
+            inviteItem.userType === EmployeeType.Guest && !inviteItem.status,
+        )
+      : false;
+
+    setHasErrors(hasErrors || needRemoveGuests);
   };
 
   const onEdit = (e) => {
@@ -230,9 +241,18 @@ const Item = ({
     const currentErrors = validationErrors.length ? validationErrors : [];
 
     setParseErrors(currentErrors);
-    changeInviteItem({ id, email: value, errors: currentErrors, access }).then(
-      () => errorsInList(),
-    );
+
+    const newValue = userExistsOnPortal || {
+      id,
+      email: value,
+      errors: currentErrors,
+      access,
+    };
+
+    const addExisting = !!userExistsOnPortal;
+    const oldId = addExisting ? id : null;
+
+    changeInviteItem(newValue, addExisting, oldId).then(() => errorsInList());
   };
 
   const saveEdit = async () => {
@@ -290,41 +310,45 @@ const Item = ({
   const availableAccess =
     roomId === -1 ? getFreeUsersTypeArray() : getFreeUsersRoleArray();
 
+  const hasNotFoundEmail = isGroup
+    ? false
+    : !allowInvitingGuests && type === EmployeeType.Guest && !status;
+
   const displayBody = (
     <>
       <StyledInviteUserBody>
-        <Box
-          displayProp="flex"
-          alignItems="center"
-          gapProp="8px"
-          className={isGroup && "group-name"}
+        <div
+          className={isGroup ? "invite-user-box group-name" : "invite-user-box"}
         >
-          <Text {...textProps} truncate noSelect>
+          <Text {...textProps} truncate>
             {inputValue}
           </Text>
-          {status === EmployeeStatus.Pending && <StyledSendClockIcon />}
-        </Box>
+          {status === EmployeeStatus.Pending ? <StyledSendClockIcon /> : null}
+        </div>
 
-        {!isGroup && (
+        {!isGroup ? (
           <Text
             className="label about-label"
             fontWeight={400}
             fontSize="12px"
-            noSelect
             truncate
           >
             {`${typeLabel} | ${email}`}
           </Text>
-        )}
+        ) : null}
       </StyledInviteUserBody>
 
-      {hasError ? (
+      {hasError || hasNotFoundEmail ? (
         <ErrorWrapper>
           <StyledHelpButton
             iconName={InfoEditReactSvgUrl}
             displayType="auto"
             offsetRight={0}
-            tooltipContent={t("EmailErrorMessage")}
+            tooltipContent={
+              hasNotFoundEmail
+                ? t("EmailErrorMessageUserNotFound")
+                : t("EmailErrorMessage")
+            }
             openOnClick={false}
             size={16}
             color={theme.infoPanel.errorColor}
@@ -333,16 +357,12 @@ const Item = ({
             className="delete-icon"
             size="medium"
             onClick={removeItem}
+            dataTestId="invite_panel_item_delete_button"
           />
         </ErrorWrapper>
       ) : (
-        <Box
-          displayProp="flex"
-          alignItems="right"
-          gapProp="8px"
-          className="role-access"
-        >
-          {warning && (
+        <div className="role-access">
+          {warning ? (
             <div className="role-warning">
               <StyledHelpButton
                 tooltipContent={warning}
@@ -350,7 +370,7 @@ const Item = ({
                 size={16}
               />
             </div>
-          )}
+          ) : null}
           <AccessSelector
             className="user-access"
             t={t}
@@ -364,13 +384,14 @@ const Item = ({
             setIsOpenItemAccess={setIsOpenItemAccess}
             isMobileView={isMobileView}
             noBorder
+            dataTestId="invite_panel_item_access_selector"
             {...((roomId === -1 || !avatar || isVisitor) && {
               isSelectionDisabled: isUserTariffLimit,
               selectionErrorText: <PaidQuotaLimitError />,
               availableAccess,
             })}
           />
-        </Box>
+        </div>
       )}
     </>
   );
@@ -380,13 +401,23 @@ const Item = ({
 
   const editBody = (
     <>
-      <StyledEditInput value={inputValue} onChange={changeValue} />
+      <StyledEditInput
+        value={inputValue}
+        onChange={changeValue}
+        scale
+        dataTestId="invite_panel_item_edit_input"
+      />
       <StyledEditButton
         icon={okIcon}
         onClick={saveEdit}
         isDisabled={searchRequestRunning}
+        dataTestId="invite_panel_item_save_button"
       />
-      <StyledEditButton icon={cancelIcon} onClick={cancelEdit} />
+      <StyledEditButton
+        icon={cancelIcon}
+        onClick={cancelEdit}
+        dataTestId="invite_panel_item_cancel_button"
+      />
     </>
   );
 
@@ -397,6 +428,7 @@ const Item = ({
       className="row-item"
       hasWarning={!!item.warning}
       edit={edit}
+      dataTestId={`invite_panel_item_${index}`}
     >
       <Avatar
         size="min"
@@ -404,6 +436,7 @@ const Item = ({
         source={source}
         isGroup={isGroup}
         userName={groupName}
+        dataTestId={`invite_panel_item_avatar_${index}`}
       />
       {edit ? editBody : displayBody}
     </StyledRow>

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -35,14 +35,14 @@ export interface SelectedItemProps {
   isInline?: boolean;
   /** Sets a callback function that is triggered when the cross icon is clicked */
   onClose: (
-    propKey: string,
+    propKey: string | number,
     label: TLabel,
     group?: string | FilterGroups,
     e?: React.MouseEvent,
   ) => void;
   /** Sets a callback function that is triggered when the selected item is clicked */
   onClick?: (
-    propKey: string,
+    propKey: string | number,
     label: TLabel,
     group?: string | FilterGroups,
     e?: React.MouseEvent<HTMLDivElement>,
@@ -56,12 +56,13 @@ export interface SelectedItemProps {
   /** Accepts css style */
   style?: React.CSSProperties;
   /** Accepts key to remove item */
-  propKey: string;
+  propKey: string | number;
   /** Accepts group key to remove item */
   group?: string;
   /** Passes ref to component */
-  forwardedRef?: React.RefObject<HTMLDivElement>;
+  forwardedRef?: React.RefObject<HTMLDivElement | null>;
   classNameCloseButton?: string;
   hideCross?: boolean;
   title?: string;
+  dataTestId?: string;
 }

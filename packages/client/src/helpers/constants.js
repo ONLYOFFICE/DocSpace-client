@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -74,6 +74,7 @@ export const CategoryType = Object.freeze({
   Settings: 8,
   Accounts: 9,
   PublicRoom: 10,
+  Flows: 11,
 });
 
 /**

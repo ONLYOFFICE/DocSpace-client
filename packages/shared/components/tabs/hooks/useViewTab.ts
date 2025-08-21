@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,12 +29,12 @@ import { useEffect, useState, useRef, RefObject } from "react";
 import { Scrollbar as ScrollbarType } from "../../scrollbar/custom-scrollbar";
 
 export const useViewTab = (
-  containerRef: RefObject<ScrollbarType>,
-  tabRef: RefObject<HTMLDivElement>,
+  containerRef: RefObject<ScrollbarType | null>,
+  tabRef: RefObject<HTMLDivElement | null>,
   index: number,
 ) => {
   const [isViewTab, setIsViewTab] = useState<boolean>(true);
-  const observerRef = useRef<IntersectionObserver>();
+  const observerRef = useRef<IntersectionObserver>(undefined);
 
   useEffect(() => {
     const container = containerRef.current?.scrollerElement;

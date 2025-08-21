@@ -1,0 +1,15 @@
+{
+  "DescriptionUploading": "在{{productName}}（例如{{sectionName}}部分）中创建 PDF 表单，并将制作好的表单上传到房间。推荐使用内置的模板库，直接从众多现成的 PDF 模板中进行选择。",
+  "HeaderComplete": "方便分析收集到的回答",
+  "HeaderSharing": "快速共享",
+  "HeaderStarting": "开始填写表单进程",
+  "HeaderSubmitting": "提交回答",
+  "HeaderUploading": "轻松上传表单",
+  "TitleComplete": "检查已填写的表单并分析自动收集到电子表格中的数据，所有操作均可在同一房间内完成。",
+  "TitleSharing": "邀请其他{{productName}}成员加入房间，填写已上传的 PDF 表单。复制公共访问链接与外部用户共享房间。",
+  "TitleStarting": "打开表单进行填写时，系统将自动为每位填写者创建单独的副本，并保存至“正在处理中”文件夹。这表示表单已开始但未完成填写。",
+  "TitleSubmitting": "点击表单副本中的“完成并提交”按钮后，副本将移至“完成”文件夹。",
+  "WelcomeDescription": "在这里，您可以高效组织 PDF 表单填写，轻松收集并分析反馈数据。准备好开始了吗？",
+  "WelcomeFillingForm": "欢迎来到表单填写房间！",
+  "WelcomeStartTutorial": "进行简短浏览"
+}

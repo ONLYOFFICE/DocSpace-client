@@ -1,0 +1,232 @@
+{
+  "key_path": "FeedLocationRoomLabel",
+  "content": "Room «{{folderTitle}}»",
+  "content_en_sha1_hash": "60abd312bf4a00aa9ee7d366c372357f1866c4bf",
+  "created_at": "2025-05-19T21:30:54.784Z",
+  "updated_at": "2025-08-04T07:30:01.217Z",
+  "comment": {
+    "text": "This translation key is used to display the label \"Room «{{folderTitle}}»\" in various sections of an application, likely in a folder or room information panel. It appears on a page displaying historical data and is part of a larger system for organizing and navigating content, possibly within a client-side interface.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:08.948Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/HistoryBlockContent/MainTextFolderInfo.tsx",
+      "line_number": 89,
+      "context": "? t(\"FeedLocationLabel\", {\n folderTitle: isReorderFolder ? title! : parentTitle,\n })\n : isSection\n ? t(\"FeedLocationSectionLabel\", { folderTitle: parentTitle })\n : t(\"FeedLocationRoomLabel\", { folderTitle: parentTitle });\n \n const sourceDestination = isFromFolder\n ? t(\"FeedLocationLabelFrom\", { folderTitle: fromParentTitle })\n : t(\"FeedLocationRoomLabel\", { folderTitle: parentTitle });",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/HistoryBlockContent/MainTextFolderInfo.tsx",
+      "line_number": 89,
+      "context": "? t(\"FeedLocationLabel\", {\n folderTitle: isReorderFolder ? title! : parentTitle,\n })\n : isSection\n ? t(\"FeedLocationSectionLabel\", { folderTitle: parentTitle })\n : t(\"FeedLocationRoomLabel\", { folderTitle: parentTitle });\n \n const sourceDestination = isFromFolder\n ? t(\"FeedLocationLabelFrom\", { folderTitle: fromParentTitle })\n : t(\"FeedLocationRoomLabel\", { folderTitle: parentTitle });",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'කාමරය «{{folderTitle}}»' is a literal translation of \"Room\". While understandable, it's a bit clunky in Sinhala. A more natural phrasing might be something like \"මාලිගය «{{folderTitle}}»\" (Maligaya) or \"បន្ទប់ «{{folderTitle}}»\" (Danthaya). The best choice depends on the context of 'folderTitle'.",
+          "suggestion": "Consider alternatives like \"මාලිගය «{{folderTitle}}»\" or \"បន្ទប់ «{{folderTitle}}»\" for a more natural sound, depending on the context."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Просторија «{{folderTitle}}»\" is a literal translation of 'Room' as 'Просторија'. While technically correct, 'Соба' would be a more natural and commonly used word for 'Room' in this context (especially within a UI).",
+          "suggestion": "Просторија should be replaced with Соба."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Room' (English) is translated as 'Prostorija' in Serbian. While 'Prostorija' can mean room, a more natural and common translation for 'Room' in this context, especially when referring to a folder or location within a system, would be 'Soba'.",
+          "suggestion": "Soba «{{folderTitle}}»"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

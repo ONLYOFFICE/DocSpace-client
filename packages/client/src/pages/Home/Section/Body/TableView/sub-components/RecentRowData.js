@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -55,6 +55,7 @@ const RecentRowDataComponent = (props) => {
     showHotkeyBorder,
     badgesComponent,
     tableStorageName,
+    index,
   } = props;
 
   const lastColumn = getLastColumn(tableStorageName);
@@ -63,6 +64,7 @@ const RecentRowDataComponent = (props) => {
     <>
       <TableCell
         {...dragStyles}
+        dataTestId={`recent-cell-name-${index}`}
         className={classNames(
           selectionProp?.className,
           "table-container_file-name-cell",
@@ -84,6 +86,7 @@ const RecentRowDataComponent = (props) => {
 
       {authorRecentColumnIsEnabled ? (
         <TableCell
+          dataTestId={`recent-cell-author-${index}`}
           style={
             !authorRecentColumnIsEnabled
               ? { background: "none" }
@@ -106,6 +109,7 @@ const RecentRowDataComponent = (props) => {
 
       {createdRecentColumnIsEnabled ? (
         <TableCell
+          dataTestId={`recent-cell-created-${index}`}
           style={
             !createdRecentColumnIsEnabled
               ? { background: "none !important" }
@@ -129,6 +133,7 @@ const RecentRowDataComponent = (props) => {
 
       {lastOpenedColumnIsEnabled ? (
         <TableCell
+          dataTestId={`recent-cell-lastopened-${index}`}
           style={
             !lastOpenedColumnIsEnabled
               ? { background: "none" }
@@ -151,6 +156,7 @@ const RecentRowDataComponent = (props) => {
 
       {modifiedRecentColumnIsEnabled ? (
         <TableCell
+          dataTestId={`recent-cell-modified-${index}`}
           style={
             !modifiedRecentColumnIsEnabled
               ? { background: "none" }
@@ -173,6 +179,7 @@ const RecentRowDataComponent = (props) => {
 
       {sizeRecentColumnIsEnabled ? (
         <TableCell
+          dataTestId={`recent-cell-size-${index}`}
           style={
             !sizeRecentColumnIsEnabled
               ? { background: "none" }
@@ -195,6 +202,7 @@ const RecentRowDataComponent = (props) => {
 
       {typeRecentColumnIsEnabled ? (
         <TableCell
+          dataTestId={`recent-cell-type-${index}`}
           style={
             !typeRecentColumnIsEnabled
               ? { background: "none !important" }
@@ -225,7 +233,6 @@ export default inject(({ tableStore }) => {
     modifiedRecentColumnIsEnabled,
     sizeRecentColumnIsEnabled,
     typeRecentColumnIsEnabled,
-    quickButtonsColumnIsEnabled,
     lastOpenedColumnIsEnabled,
     tableStorageName,
   } = tableStore;
@@ -236,7 +243,6 @@ export default inject(({ tableStore }) => {
     modifiedRecentColumnIsEnabled,
     sizeRecentColumnIsEnabled,
     typeRecentColumnIsEnabled,
-    quickButtonsColumnIsEnabled,
     lastOpenedColumnIsEnabled,
     tableStorageName,
   };

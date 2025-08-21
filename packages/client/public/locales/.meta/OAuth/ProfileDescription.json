@@ -1,0 +1,315 @@
+{
+  "key_path": "ProfileDescription",
+  "content": "Here you can check the apps info to which you have granted the auth access, and revoke consent if needed.",
+  "content_en_sha1_hash": "dcca0e452a98870510105db47286029b6900db85",
+  "created_at": "2025-05-19T21:30:53.978Z",
+  "updated_at": "2025-08-11T18:11:59.294Z",
+  "comment": {
+    "text": "This translation key is used to display a message explaining what authorized apps are and allowing users to revoke consent. It appears on an empty screen when there are no granted auth access apps.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:41.594Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/authorized-apps/index.tsx",
+      "line_number": 49,
+      "context": "return (\n <StyledContainer>\n {consents && consents?.length > 0 ? (\n <>\n <Text fontSize=\"12px\" fontWeight=\"400\" lineHeight=\"16px\">\n {t(\"ProfileDescription\")}\n </Text>\n \n <Consumer>\n {(context) =>\n viewAs === \"table\" ? (",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/authorized-apps/sub-components/EmptyScreen.tsx",
+      "line_number": 12,
+      "context": "return (\n <EmptyScreenContainer\n imageSrc={EmptyScreenPersonsSvgUrl}\n imageAlt=\"Empty apps list\"\n headerText={t(\"NoAuthorizedApps\")}\n descriptionText={t(\"ProfileDescription\")}\n />\n );\n };\n \n export default EmptyScreen;",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"auth access\" is translated as \"autentifikasiya girişi\". While understandable, a more precise translation would be \"izin\" or \"qeyd\" (record/entry) in this context, referring to the granted authorization.",
+          "suggestion": "Burada siz autentifikasiya *izinini* (or *qeydini*) verdiyiniz tətbiqlərin məlumatlarını yoxlaya və lazım olduqda icazəni ləğv edə bilərsiniz."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"granted the auth access\" is awkwardly translated. \"autorizaci\" doesn't perfectly capture the nuance of 'auth access'. A more natural phrasing would be preferable.",
+          "suggestion": "Zde můžete zkontrolovat informace o aplikacích, kterým jste udělili oprávnění."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the phrasing \"v případě potřeby souhlas odvolat\" is a bit clunky. It could be improved for flow.",
+          "suggestion": "Zde můžete zkontrolovat informace o aplikacích, kterým jste udělili oprávnění, a případně souhlas odvolat."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'auth access' is translated literally as 'Auth-Zugriff'. While understandable, a more natural translation would be 'Autorisierungszugriff' or 'Zugriffsberechtigungen'.",
+          "suggestion": "Hier können Sie die Informationen der Apps überprüfen, denen Sie den Autorisierungszugriff gewährt haben, und gegebenenfalls die Zustimmung widerrufen."
+        },
+        {
+          "type": "formatting",
+          "description": "The word 'Auth' is capitalized in the English original, but it's not consistently applied in the German translation. Maintaining consistency would improve readability.",
+          "suggestion": "Hier können Sie die Informationen der Apps überprüfen, denen Sie den Auth-Zugriff gewährt haben, und gegebenenfalls die Zustimmung widerrufen."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'apps info' is translated as 'հավելվածների տեղեկությունները'. While technically correct, a more natural phrasing in Armenian would be 'ծրագրերի տեղեկությունները' or 'հավելվածների տեղեկություններ'. 'Ծրագրերի' or 'հավելվածների' sound more fluent in this context.",
+          "suggestion": "Ծրագրերի տեղեկությունները"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'auth' is not naturally translated. While understandable in context, it's better to avoid jargon.",
+          "suggestion": "Qui è possibile controllare le informazioni sulle app a cui hai concesso l'accesso e revocare il consenso, se necessario."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "Using 'hai' instead of 'è stato' creates a more direct and user-friendly tone. 'è stato' implies a passive action.",
+          "suggestion": "Qui è possibile controllare le informazioni sulle app a cui hai concesso l'accesso e revocare il consenso, se necessario."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'auth access' is not naturally translated. While technically correct, it's clunky. 'Auth' is also not commonly used in Dutch in this context.",
+          "suggestion": "Hier kunt u de informatie van de apps controleren waaraan u toegang heeft verleend, en indien nodig de toestemming intrekken."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the use of 'waaraan' is a bit formal for this context. A slightly more conversational alternative might improve readability.",
+          "suggestion": "Hier kunt u de info van de apps controleren waar u toegang toe heeft verleend, en indien nodig de toestemming intrekken."
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'auth access' is not accurately translated. 'Auth access' likely refers to authentication access. A more accurate translation would be 'acesso de autenticação' or potentially 'acesso de autorização' depending on the precise intended meaning.",
+          "suggestion": "Consider 'acesso de autenticação' or 'acesso de autorização'."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'auth access' is translated as 'acesso de autenticação'. While technically correct, it's a bit clunky. A more natural phrasing would be 'acesso via autenticação' or simply 'acesso de autenticação'.",
+          "suggestion": "Acesso via autenticação"
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'se necessário' could be improved for flow. It sounds slightly abrupt.",
+          "suggestion": "caso seja necessário"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"revoke\" is directly transliterated. A more natural Sinhala equivalent for \"revoke consent\" would be \"අවසර අවලංගු කිරීම\" (awasaya awalangu kirima).",
+          "suggestion": "ඔබ බලපත්‍ර ප්‍රවේශය හිමි කර ඇති යෙදුම් තොරතුරු මෙහි පරීක්ෂා කර අවශ්‍ය නම් අවසර අවලංගු කිරීම් කර හැක."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase \"හිමි කර ඇති\" can be more naturally phrased as \"ලබා ඇති\" or \"ලබාගත්\".",
+          "suggestion": "ඔබ බලපත්‍ර ප්‍රවේශය ලබාගත් යෙදුම් තොරතුරු මෙහි පරීක්ෂා කර අවශ්‍ය නම් අවසර අවලංගු කිරීම් කර හැක."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'granted the auth access' is not accurately translated. 'Auth access' is too literal. A more natural phrasing in Serbian would be 'овластили' (ovlastili) or 'доделили дозволу' (dodelili dozvolu).",
+          "suggestion": "Овде можете проверити информације о апликацијама којима сте овластили приступ или доделили дозволу и, ако је потребно, опозвати пристанак."
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the use of 'и, ако је потребно' can be slightly more fluent. Combining the sentences improves readability.",
+          "suggestion": "Овде можете проверити информације о апликацијама којима сте овластили приступ и опозвати пристанак ако је потребно."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'odobriti' should be 'odobriti'",
+          "suggestion": "odobriti"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,12 +34,13 @@ import { SettingsStore } from "./SettingsStore";
 
 export const userStore = new UserStore();
 export const tfaStore = new TfaStore();
-export const paymentQuotasStore = new PaymentQuotasStore();
-export const currentTariffStatusStore = new CurrentTariffStatusStore();
+
+export const currentTariffStatusStore = new CurrentTariffStatusStore(userStore);
 export const currentQuotaStore = new CurrentQuotasStore(
   userStore,
   currentTariffStatusStore,
 );
+export const paymentQuotasStore = new PaymentQuotasStore(currentQuotaStore);
 export const settingsStore = new SettingsStore();
 export const authStore = new AuthStore(
   userStore,

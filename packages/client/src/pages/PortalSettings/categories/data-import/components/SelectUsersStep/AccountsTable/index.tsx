@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,6 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
+import { TFunction } from "i18next";
+
 import { Consumer } from "@docspace/shared/utils/context";
 
 import TableView from "./TableView";
@@ -40,13 +42,13 @@ const AccountsTable = (props: AccountsTableProps) => {
       {(context) =>
         viewAs === "table" ? (
           <TableView
-            t={t}
+            t={t as TFunction}
             sectionWidth={context.sectionWidth}
             accountsData={accountsData}
           />
         ) : (
           <RowView
-            t={t}
+            t={t as TFunction}
             sectionWidth={context.sectionWidth}
             accountsData={accountsData}
           />

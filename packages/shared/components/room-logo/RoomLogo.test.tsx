@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,13 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { RoomsType } from "../../enums";
-
 import { RoomLogo } from "./RoomLogo";
+
+// Mock react-device-detect
+jest.mock("react-device-detect", () => ({
+  isMobile: false,
+}));
 
 const baseProps = {
   type: RoomsType.CustomRoom,
@@ -42,47 +45,76 @@ const baseProps = {
 describe("<RoomLogo />", () => {
   it("renders without error", () => {
     render(<RoomLogo {...baseProps} />);
-
     expect(screen.getByTestId("room-logo")).toBeInTheDocument();
   });
 
-  // it("accepts id", () => {
-  //   // @ts-expect-error TS(2322): Type '{ id: string; type: string; isPrivacy: boole... Remove this comment to see the full error message
-  //   const wrapper = mount(<RoomLogo {...baseProps} id="testId" />);
+  it("renders with custom props", () => {
+    render(
+      <RoomLogo
+        {...baseProps}
+        id="testId"
+        className="test-class"
+        style={{ color: "red" }}
+      />,
+    );
+    const logo = screen.getByTestId("room-logo");
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("id")).toEqual("testId");
-  // });
+    expect(logo).toHaveAttribute("id", "testId");
+    expect(logo).toHaveClass("test-class");
+    expect(logo).toHaveStyle({ color: "red" });
+  });
 
-  // it("accepts className", () => {
-  //   // @ts-expect-error TS(2322): Type '{ className: string; type: string; isPrivacy... Remove this comment to see the full error message
-  //   const wrapper = mount(<RoomLogo {...baseProps} className="test" />);
+  describe("Checkbox functionality", () => {
+    it("handles checkbox change", () => {
+      const onChangeMock = jest.fn();
+      render(
+        <RoomLogo
+          {...baseProps}
+          withCheckbox
+          isChecked={false}
+          onChange={onChangeMock}
+        />,
+      );
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("className")).toEqual("test");
-  // });
+      const checkbox = screen.getByRole("checkbox");
+      fireEvent.click(checkbox);
 
-  // it("accepts style", () => {
-  //   // @ts-expect-error TS(2322): Type '{ style: { color: string; }; type: string; i... Remove this comment to see the full error message
-  //   const wrapper = mount(<RoomLogo {...baseProps} style={{ color: "red" }} />);
+      expect(onChangeMock).toHaveBeenCalled();
+    });
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.getDOMNode().style).toHaveProperty("color", "red");
-  // });
+  describe("Room Types", () => {
+    const testRoomType = (type: RoomsType, expectedIconUrl: string) => {
+      it(`renders correct icon for ${RoomsType[type]} type`, () => {
+        render(<RoomLogo {...baseProps} type={type} />);
 
-  // it("accepts isPrivacy prop", () => {
-  //   // @ts-expect-error TS(2322): Type '{ isPrivacy: true; type: string; isArchive: ... Remove this comment to see the full error message
-  //   const wrapper = mount(<RoomLogo {...baseProps} isPrivacy={true} />);
+        const icon = screen.getByAltText("room-logo") as HTMLImageElement;
+        expect(icon.src).toContain(expectedIconUrl);
+      });
+    };
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("isPrivacy")).toEqual(true);
-  // });
+    testRoomType(RoomsType.EditingRoom, "http://localhost/test-file-stub");
+    testRoomType(RoomsType.CustomRoom, "http://localhost/test-file-stub");
+    testRoomType(RoomsType.PublicRoom, "http://localhost/test-file-stub");
+    testRoomType(RoomsType.FormRoom, "http://localhost/test-file-stub");
+    testRoomType(RoomsType.VirtualDataRoom, "http://localhost/test-file-stub");
+  });
 
-  // it("accepts isPrivacy prop", () => {
-  //   // @ts-expect-error TS(2322): Type '{ isArchive: true; type: string; isPrivacy: ... Remove this comment to see the full error message
-  //   const wrapper = mount(<RoomLogo {...baseProps} isArchive={true} />);
+  describe("Special States", () => {
+    it("renders archive icon when isArchive is true", () => {
+      render(<RoomLogo {...baseProps} isArchive />);
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("isArchive")).toEqual(true);
-  // });
+      const icon = screen.getByAltText("room-logo") as HTMLImageElement;
+      expect(icon.src).toContain("http://localhost/test-file-stub");
+    });
+
+    it("prioritizes archive over room type icon", () => {
+      render(
+        <RoomLogo {...baseProps} isArchive type={RoomsType.EditingRoom} />,
+      );
+
+      const icon = screen.getByAltText("room-logo") as HTMLImageElement;
+      expect(icon.src).toContain("http://localhost/test-file-stub");
+    });
+  });
 });

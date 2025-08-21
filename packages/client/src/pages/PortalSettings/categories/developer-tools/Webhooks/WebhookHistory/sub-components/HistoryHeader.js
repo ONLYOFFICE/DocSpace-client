@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,13 +27,13 @@
 import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router";
 import { inject, observer } from "mobx-react";
 
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import RetryIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
-import Headline from "@docspace/shared/components/headline/Headline";
+import { Heading } from "@docspace/shared/components/heading";
 import { IconButton } from "@docspace/shared/components/icon-button";
 // import { Hint } from "../../styled-components";
 
@@ -151,9 +151,9 @@ const NavigationHeader = ({ t, onBack }) => (
       onClick={onBack}
       className="arrow-button"
     />
-    <Headline type="content" truncate className="headline">
+    <Heading type="content" truncate className="headline">
       {t("InfoPanel:SubmenuHistory")}
-    </Headline>
+    </Heading>
   </>
 );
 
@@ -192,8 +192,13 @@ const HistoryHeader = (props) => {
     setRetryPendingTrue,
   } = props;
   const navigate = useNavigate();
+  const location = useLocation();
+
   const onBack = () => {
-    navigate("/portal-settings/developer-tools/webhooks");
+    const path = location.pathname.includes("/portal-settings")
+      ? "/portal-settings"
+      : "";
+    navigate(`${path}/developer-tools/webhooks`);
   };
   const { t } = useTranslation(["Webhooks", "Common", "InfoPanel"]);
   const { id } = useParams();
@@ -276,7 +281,7 @@ const HistoryHeader = (props) => {
     <HeaderContainer isDisabled={isRetryPending}>
       {isMobile() ? (
         <>
-          {isGroupMenuVisible && (
+          {isGroupMenuVisible ? (
             <GroupMenu
               menuItems={menuItems}
               handleGroupSelection={handleGroupSelection}
@@ -285,7 +290,7 @@ const HistoryHeader = (props) => {
               isIndeterminate={isIndeterminate}
               isRetryPending={isRetryPending}
             />
-          )}
+          ) : null}
           <NavigationHeader t={t} onBack={onBack} />
         </>
       ) : isGroupMenuVisible ? (
@@ -301,8 +306,9 @@ const HistoryHeader = (props) => {
         <NavigationHeader t={t} onBack={onBack} />
       )}
 
-      {isPendingVisible &&
-        createPortal(<FloatingButton icon="refresh" />, document.body)}
+      {isPendingVisible
+        ? createPortal(<FloatingButton icon="refresh" />, document.body)
+        : null}
     </HeaderContainer>
   );
 };

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,10 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { render, screen } from "@testing-library/react";
-
+import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-
 import { Avatar } from ".";
 import { AvatarRole, AvatarSize } from "./Avatar.enums";
 
@@ -39,129 +37,67 @@ const baseProps = {
   editLabel: "Edit",
   userName: "Demo User",
   editing: false,
-
-  editAction: () => jest.fn(),
+  editAction: jest.fn(),
 };
 
 describe("<Avatar />", () => {
-  test("correct render", () => {
-    render(<Avatar {...baseProps} />);
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
-    expect(screen.queryByTestId("avatar")).toBeInTheDocument();
+  test("renders avatar with default props", () => {
+    render(<Avatar {...baseProps} />);
+    expect(screen.getByTestId("avatar")).toBeInTheDocument();
+    expect(screen.getByText("DU")).toBeInTheDocument(); // Initials
+  });
+
+  test("renders different avatar sizes", () => {
+    const sizes = [
+      AvatarSize.max,
+      AvatarSize.big,
+      AvatarSize.medium,
+      AvatarSize.base,
+      AvatarSize.small,
+      AvatarSize.min,
+    ];
+    sizes.forEach((size) => {
+      const { container } = render(<Avatar {...baseProps} size={size} />);
+      expect(container.firstChild).toHaveAttribute("data-size", size);
+    });
+  });
+
+  test("displays image when source is provided", () => {
+    const source = "https://example.com/avatar.jpg";
+    render(<Avatar {...baseProps} source={source} />);
+    const img = screen.getByRole("img");
+    expect(img).toHaveAttribute("src", source);
+  });
+
+  test("shows edit button when editing and hasAvatar are true", () => {
+    render(<Avatar {...baseProps} editing hasAvatar />);
+    const editButton = screen.getByTestId("edit_avatar_icon_button");
+    expect(editButton).toBeInTheDocument();
+  });
+
+  test("handles click events when onClick is provided", () => {
+    const onClick = jest.fn();
+    render(<Avatar {...baseProps} onClick={onClick} />);
+    const avatar = screen.getByTestId("avatar");
+    fireEvent.click(avatar);
+    expect(onClick).toHaveBeenCalled();
+  });
+
+  test("displays correct initials for group avatar", () => {
+    render(<Avatar {...baseProps} isGroup userName="Project Team" />);
+    expect(screen.getByText("PT")).toBeInTheDocument();
+  });
+
+  test("handles file change when onChangeFile is provided", () => {
+    const onChangeFile = jest.fn();
+    render(<Avatar {...baseProps} editing onChangeFile={onChangeFile} />);
+    const fileInput = screen.getByTestId("file-input");
+    const file = new File(["test"], "test.png", { type: "image/png" });
+    fireEvent.change(fileInput, { target: { files: [file] } });
+    expect(onChangeFile).toHaveBeenCalled();
   });
 });
-
-// // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-// it("render owner avatar", () => {
-//   const wrapper = mount(<Avatar {...baseProps} role="owner" />);
-
-//   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-//   expect(wrapper.prop("role")).toEqual("owner");
-// });
-
-// // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-// it("render guest avatar", () => {
-//   const wrapper = mount(<Avatar {...baseProps} role="guest" />);
-
-//   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-//   expect(wrapper.prop("role")).toEqual("guest");
-// });
-
-// // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-// it("render big avatar", () => {
-//   const wrapper = mount(<Avatar {...baseProps} size="big" />);
-
-//   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-//   expect(wrapper.prop("size")).toEqual("big");
-// });
-
-// // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-// it("render medium avatar", () => {
-//   const wrapper = mount(<Avatar {...baseProps} size="medium" />);
-
-//   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-//   expect(wrapper.prop("size")).toEqual("medium");
-// });
-
-// // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-// it("render small avatar", () => {
-//   const wrapper = mount(<Avatar {...baseProps} size="small" />);
-
-//   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-//   expect(wrapper.prop("size")).toEqual("small");
-// });
-
-// // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-// it("render min avatar", () => {
-//   const wrapper = mount(<Avatar {...baseProps} size="min" />);
-
-//   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-//   expect(wrapper.prop("size")).toEqual("min");
-// });
-
-// // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-// it("render empty avatar", () => {
-//   const wrapper = mount(<Avatar {...baseProps} userName="" source="" />);
-
-//   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-//   expect(wrapper.prop("userName")).toEqual("");
-//   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-//   expect(wrapper.prop("source")).toEqual("");
-// });
-
-// // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-// it("render source avatar", () => {
-//   const wrapper = mount(
-//     <Avatar {...baseProps} userName="Demo User" source="demo" />,
-//   );
-
-//   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-//   expect(wrapper.prop("userName")).toEqual("Demo User");
-//   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-//   expect(wrapper.prop("source")).toEqual("demo");
-// });
-
-// // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-// it("render initials avatar", () => {
-//   const wrapper = mount(
-//     <Avatar {...baseProps} userName="Demo User" source="" />,
-//   );
-
-//   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-//   expect(wrapper.prop("userName")).toEqual("Demo User");
-//   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-//   expect(wrapper.prop("source")).toEqual("");
-// });
-
-// // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-// it("render editing avatar", () => {
-//   const wrapper = mount(<Avatar {...baseProps} editing />);
-
-//   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-//   expect(wrapper.prop("editing")).toEqual(true);
-// });
-
-// // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-// it("accepts id", () => {
-//   const wrapper = mount(<Avatar {...baseProps} id="testId" />);
-
-//   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-//   expect(wrapper.prop("id")).toEqual("testId");
-// });
-
-// // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-// it("accepts className", () => {
-//   const wrapper = mount(<Avatar {...baseProps} className="test" />);
-
-//   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-//   expect(wrapper.prop("className")).toEqual("test");
-// });
-
-// // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-// it("accepts style", () => {
-//   const wrapper = mount(<Avatar {...baseProps} style={{ width: "100px" }} />);
-
-//   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-//   expect(wrapper.getDOMNode().style).toHaveProperty("width", "100px");
-// });
-// });

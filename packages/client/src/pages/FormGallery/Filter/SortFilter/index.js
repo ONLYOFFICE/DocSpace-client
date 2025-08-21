@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -83,7 +83,7 @@ const SortFilter = ({ t, oformsFilter, sortOforms }) => {
           opened={isOpen}
           onToggle={onToggleCombobox}
           className="sort-combo-box"
-          directionX="right"
+          directionX="left"
           directionY="both"
           scaled
           size="content"
@@ -97,6 +97,7 @@ const SortFilter = ({ t, oformsFilter, sortOforms }) => {
           options={[]}
           selectedOption={{}}
           manualWidth="auto"
+          dataTestId="form_gallery_sort_filter"
           advancedOptions={sortData?.map((item) => (
             <Styled.SortDropdownItem
               id={item.id}
@@ -104,7 +105,7 @@ const SortFilter = ({ t, oformsFilter, sortOforms }) => {
               key={item.key}
               data-value={item.key}
               isSelected={oformsFilter.sortBy === item.key}
-              isDescending={oformsFilter.sortOrder === "desc"}
+              $isDescending={oformsFilter.sortOrder === "desc"}
             >
               <Text fontWeight={600}>{item.label}</Text>
               <SortDesc className="sortorder-arrow" />

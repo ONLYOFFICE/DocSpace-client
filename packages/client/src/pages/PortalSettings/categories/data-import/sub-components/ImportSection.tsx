@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -164,9 +164,9 @@ const ImportItem = ({
         {workspace}
       </Text>
       <div className="importSection">
-        {sectionIcon && (
+        {sectionIcon ? (
           <ReactSVG className="importSectionIcon" src={sectionIcon} />
-        )}
+        ) : null}
         {sectionName}
       </div>
     </ImportItemWrapper>
@@ -181,14 +181,16 @@ const ImportSection = ({
   description,
   exportSection,
   importSection,
+  dataTestId,
 }: ImportSectionProps) => {
   return (
-    <SectionWrapper isChecked={isChecked}>
+    <SectionWrapper data-testid={dataTestId} isChecked={isChecked}>
       <ToggleButton
         isChecked={isChecked}
         onChange={onChange || (() => {})}
         className="toggleButton"
         isDisabled={isDisabled}
+        dataTestId="enable_import_section_button"
       />
       <div>
         <Text lineHeight="20px" fontWeight={600} className="section-title">

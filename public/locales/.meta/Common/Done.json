@@ -1,0 +1,262 @@
+{
+  "key_path": "Done",
+  "content": "Done",
+  "content_en_sha1_hash": "e9b450d14bc2363d292c84f17cfad5cfbd58a458",
+  "created_at": "2025-05-19T21:30:44.608Z",
+  "updated_at": "2025-08-12T19:46:26.102Z",
+  "comment": {
+    "text": "This translation key is used to display the phrase \"Done\" in various contexts throughout the application, typically as a confirmation message or label. It appears on buttons, such as the OK button and navigation headers, where it indicates completion or success of an action. Translators should provide a complete and accurate translation that maintains consistency across these different UI elements.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:36:38.758Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
+      "line_number": 530,
+      "context": ");\n \n const keyFooter = (\n <Button\n key=\"OKButton\"\n label={t(\"Common:Done\")}\n size={ButtonSize.normal}\n primary\n onClick={onClose}\n scale\n testId=\"secret_key_done_button\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/DetailsNavigationHeader.js",
+      "line_number": 118,
+      "context": "navigate(`${path}/developer-tools/webhooks/${id}`);\n };\n \n const handleRetryEvent = async () => {\n await retryWebhook(eventId);\n toastr.success(t(\"WebhookRedilivered\"), <b>{t(\"Common:Done\")}</b>);\n };\n \n return (\n <HeaderContainer>\n <div className=\"headerNavigation\">",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/HistoryHeader.js",
+      "line_number": 229,
+      "context": "...(historyFilters ? formatFilters(historyFilters) : {}),\n configId: id,\n });\n toastr.success(\n `${t(\"WebhookRedilivered\")}: ${checkedEventIds.length}`,\n <b>{t(\"Common:Done\")}</b>,\n );\n } catch (error) {\n console.error(error);\n toastr.error(error);\n } finally {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/WebhookHistoryTable/HistoryRowView/HistoryRow.js",
+      "line_number": 66,
+      "context": "await retryWebhook(historyItem.id);\n await fetchHistoryItems({\n ...(historyFilters ? formatFilters(historyFilters) : {}),\n configId: id,\n });\n toastr.success(t(\"WebhookRedilivered\"), <b>{t(\"Common:Done\")}</b>);\n };\n const handleOnSelect = () => toggleEventId(historyItem.id);\n const handleRowClick = (e) => {\n if (\n e.target.closest(\".checkbox\") ||",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/WebhookHistoryTable/HistoryTableView/HistoryTableRow.js",
+      "line_number": 107,
+      "context": "await retryWebhook(item.id);\n await fetchHistoryItems({\n ...(historyFilters ? formatFilters(historyFilters) : {}),\n configId: id,\n });\n toastr.success(t(\"WebhookRedilivered\"), <b>{t(\"Common:Done\")}</b>);\n };\n \n const contextOptions = [\n {\n id: \"webhook-details\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/components/toast/sub-components/Toastr.tsx",
+      "line_number": 57,
+      "context": "type: ToastType;\n defaultTitleKey: \"Done\" | \"Warning\" | \"Alert\" | \"Info\";\n }\n \n const TOAST_CONFIGS: Record<ToastType, NotifyConfig> = {\n [ToastType.success]: { type: ToastType.success, defaultTitleKey: \"Done\" }, // t(\"Common:Done\")\n [ToastType.error]: { type: ToastType.error, defaultTitleKey: \"Warning\" }, // t(\"Common:Warning\")\n [ToastType.warning]: { type: ToastType.warning, defaultTitleKey: \"Alert\" }, // t(\"Common:Alert\")\n [ToastType.info]: { type: ToastType.info, defaultTitleKey: \"Info\" }, // t(\"Common:Info\")\n };",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani translation \"İcra edildi\" while technically meaning 'executed' or 'carried out,' doesn't quite capture the simple meaning of 'Done'. It's too formal and suggests completion of a complex task.",
+          "suggestion": "Consider alternatives like \"Tamam\" or \"Bitdi\" which are more direct and commonly used translations for 'Done'."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Τέλος' generally translates to 'end' or 'finish,' not 'done.' While it can sometimes be used in a similar context, it's not the most accurate translation for 'Done.' A more appropriate translation might be 'Γέμισε' (Gemise - completed) or 'Ολοκληρώθηκε' (Oloκληρωthike - completed).",
+          "suggestion": "Consider 'Γέμισε' or 'Ολοκληρώθηκε' for a more accurate translation of 'Done'."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Russian translation \"Успешно\" while meaning 'successfully' or 'successfully completed', is not the most direct or common translation for \"Done\".  'Done' often implies completion or finality, which \"Успешно\" doesn't fully capture.  A more appropriate translation might be \"Готово\" or \"Завершено\".",
+          "suggestion": "Consider \"Готово\" or \"Завершено\" as a more accurate translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation \"අහවරයි\" (ahawarayai) does not accurately convey the meaning of \"Done\". It translates to something like 'It's boundless' or 'It's infinite', which is not related to the original English word.",
+          "suggestion": "The appropriate translation for \"Done\" in Sinhala would depend on the context. Common options include: අවසානය (awasana) - meaning 'finished', සිදු (sidu) - meaning 'achieved', or සකස් (sakas) - meaning 'ready'. More context would be needed for the best translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

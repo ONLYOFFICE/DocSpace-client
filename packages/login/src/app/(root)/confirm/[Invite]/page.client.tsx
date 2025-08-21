@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -44,6 +44,7 @@ import {
   TPasswordHash,
   TPasswordSettings,
   TThirdPartyProvider,
+  TInvitationSettings,
 } from "@docspace/shared/api/settings/types";
 import { toastr } from "@docspace/shared/components/toast";
 import {
@@ -63,7 +64,7 @@ import { TValidate } from "@docspace/shared/components/email-input";
 import { TCreateUserData, TError } from "@/types";
 import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
 import { Text } from "@docspace/shared/components/text";
-import { login } from "@docspace/shared/api/user";
+import { login, thirdPartyLogin } from "@docspace/shared/api/user";
 import {
   createUser,
   getUserByEmail,
@@ -74,9 +75,9 @@ import SsoReactSvg from "PUBLIC_DIR/images/sso.react.svg";
 
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import { RegisterContainer } from "@/components/RegisterContainer.styled";
+import { globalColors } from "@docspace/shared/themes";
 import EmailInputForm from "./_sub-components/EmailInputForm";
 import RegistrationForm from "./_sub-components/RegistrationForm";
-import { globalColors } from "@docspace/shared/themes";
 
 export type CreateUserFormProps = {
   userNameRegex: string;
@@ -87,9 +88,10 @@ export type CreateUserFormProps = {
   passwordSettings?: TPasswordSettings;
   capabilities?: TCapabilities;
   thirdPartyProviders?: TThirdPartyProvider[];
-  firstName?: string;
-  lastName?: string;
+  displayName?: string;
   isStandalone: boolean;
+  logoText: string;
+  invitationSettings?: TInvitationSettings;
 };
 
 const CreateUserForm = (props: CreateUserFormProps) => {
@@ -100,21 +102,27 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     passwordSettings,
     capabilities,
     thirdPartyProviders,
-    firstName,
-    lastName,
+    displayName,
     licenseUrl,
     legalTerms,
     isStandalone,
+    logoText,
+    invitationSettings,
   } = props;
-  const { linkData, roomData } = useContext(ConfirmRouteContext);
+
+  const { linkData, roomData, confirmLinkResult } =
+    useContext(ConfirmRouteContext);
   const { t, i18n } = useTranslation(["Confirm", "Common"]);
+
   const router = useRouter();
+
+  const organizationName = logoText || t("Common:OrganizationName");
 
   const currentCultureName = i18n.language;
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const emailFromLink = linkData?.email ? linkData.email : "";
+  const emailFromLink = confirmLinkResult?.email ? confirmLinkResult.email : "";
   const roomName = roomData?.title;
   const roomId = roomData?.roomId;
 
@@ -152,22 +160,51 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     async (profile: string) => {
       const signupAccount: { [key: string]: string | undefined } = {
         EmployeeType: linkData.emplType,
-        Email: linkData.email,
+        Email: confirmLinkResult.email,
         Key: linkData.key,
         SerializedProfile: profile,
         culture: currentCultureName,
       };
 
+      setIsLoading(true);
+
       const confirmKey = linkData.confirmHeader;
 
       try {
-        await signupOAuth(signupAccount, confirmKey);
+        const user = await signupOAuth(signupAccount, confirmKey);
 
-        const url = roomData.roomId
+        if (!user) {
+          toastr.error(t("Common:SomethingWentWrong"));
+          return;
+        }
+
+        const response = (await thirdPartyLogin(
+          profile,
+          currentCultureName,
+        )) as {
+          confirmUrl: string;
+          token: unknown;
+        };
+
+        if (
+          !response ||
+          (response && !response.token && !response.confirmUrl)
+        ) {
+          throw new Error("Empty API response");
+        }
+
+        const finalUrl = roomData.roomId
           ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}`
           : defaultPage;
-        window.location.replace(url);
+
+        if (response.confirmUrl) {
+          sessionStorage.setItem("referenceUrl", finalUrl);
+          return window.location.replace(response.confirmUrl);
+        }
+
+        window.location.replace(finalUrl);
       } catch (error) {
+        setIsLoading(false);
         const knownError = error as TError;
         let errorMessage: string;
 
@@ -186,7 +223,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     [
       currentCultureName,
       defaultPage,
-      linkData.email,
+      confirmLinkResult.email,
       linkData.emplType,
       linkData.key,
       roomData.roomId,
@@ -215,7 +252,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     const headerKey = linkData?.confirmHeader ?? null;
 
     try {
-      await getUserByEmail(email, headerKey);
+      await getUserByEmail(email, headerKey, currentCultureName);
 
       setCookie(LANGUAGE, currentCultureName, {
         "max-age": COOKIE_EXPIRATION_YEAR,
@@ -234,8 +271,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
           type: "invitation",
           email,
           roomName,
-          firstName,
-          lastName,
+          displayName,
           spaceAddress: window.location.host,
         },
         true,
@@ -253,7 +289,19 @@ const CreateUserForm = (props: CreateUserFormProps) => {
         typeof knownError === "object" ? knownError?.response?.status : "";
       const isNotExistUser = status === 404;
 
-      if (isNotExistUser) {
+      const forbiddenInviteUsersPortal = roomData.roomId
+        ? !invitationSettings?.allowInvitingGuests
+        : !invitationSettings?.allowInvitingMembers;
+
+      if (forbiddenInviteUsersPortal) {
+        setEmailValid(false);
+
+        const errorInvite =
+          typeof knownError === "object"
+            ? knownError?.response?.data?.error?.message
+            : "";
+        setEmailErrorText(errorInvite);
+      } else if (isNotExistUser) {
         setRegistrationForm(true);
       }
     }
@@ -261,8 +309,34 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     setIsLoading(false);
   };
 
+  const createConfirmUser = async (
+    confirmUserData: TCreateUserData,
+    key: string,
+  ) => {
+    await createUser(confirmUserData, key);
+
+    const { userName, passwordHash: ph } = confirmUserData;
+    const res = await login(userName, ph);
+
+    if (res && res.tfa && res.confirmUrl) {
+      return window.location.replace(res.confirmUrl);
+    }
+
+    const finalUrl = roomData.roomId
+      ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}`
+      : defaultPage;
+
+    const isConfirm = typeof res === "string" && res.includes("confirm");
+    if (isConfirm) {
+      sessionStorage.setItem("referenceUrl", finalUrl);
+      return window.location.replace(typeof res === "string" ? res : "/");
+    }
+
+    window.location.replace(finalUrl);
+  };
+
   const onSubmit = async () => {
-    const type = parseInt(linkData?.emplType ?? "");
+    const type = parseInt(linkData?.emplType ?? "", 10);
 
     setIsLoading(true);
     setErrorText("");
@@ -292,10 +366,9 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
     const hash = createPasswordHash(password, passwordHash);
 
-    const fromInviteLink =
+    const fromInviteLink = !!(
       linkData.type === "LinkInvite" || linkData.type === "EmpInvite"
-        ? true
-        : false;
+    );
 
     const confirmUser: TCreateUserData = {
       fromInviteLink,
@@ -303,18 +376,18 @@ const CreateUserForm = (props: CreateUserFormProps) => {
       passwordHash: hash,
       firstName: fname.trim(),
       lastName: sname.trim(),
-      email: email,
+      email,
       cultureName: currentCultureName,
       spam: isChecked,
     };
 
     confirmUser.fromInviteLink = fromInviteLink;
 
-    if (!!type) {
+    if (type) {
       confirmUser.type = type;
     }
 
-    if (!!linkData.key) {
+    if (linkData.key) {
       confirmUser.key = linkData.key;
     }
 
@@ -343,32 +416,6 @@ const CreateUserForm = (props: CreateUserFormProps) => {
       setEmailValid(false);
       setIsLoading(false);
     }
-  };
-
-  const createConfirmUser = async (
-    confirmUserData: TCreateUserData,
-    key: string,
-  ) => {
-    await createUser(confirmUserData, key);
-
-    const { userName, passwordHash } = confirmUserData;
-    const res = await login(userName, passwordHash);
-
-    if (res && res.tfa && res.confirmUrl) {
-      return window.location.replace(res.confirmUrl);
-    }
-
-    const finalUrl = roomData.roomId
-      ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}`
-      : defaultPage;
-
-    const isConfirm = typeof res === "string" && res.includes("confirm");
-    if (isConfirm) {
-      sessionStorage.setItem("referenceUrl", finalUrl);
-      return window.location.replace(typeof res === "string" ? res : "/");
-    }
-
-    window.location.replace(finalUrl);
   };
 
   const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
@@ -428,7 +475,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     let url = targetElement.dataset.url || "";
 
     try {
-      //Lifehack for Twitter
+      // Lifehack for Twitter
       if (providerName == "twitter") {
         url += "authCallback";
       }
@@ -464,9 +511,13 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
     let existProviders = 0;
     thirdPartyProviders && thirdPartyProviders.length > 0;
-    thirdPartyProviders?.map((item) => {
-      let key = item.provider as keyof typeof PROVIDERS_DATA;
-      if (PROVIDERS_DATA.hasOwnProperty(key) && !PROVIDERS_DATA[key]) return;
+    thirdPartyProviders?.forEach((item) => {
+      const key = item.provider as keyof typeof PROVIDERS_DATA;
+      if (
+        Object.prototype.hasOwnProperty.call(PROVIDERS_DATA, key) &&
+        !PROVIDERS_DATA[key]
+      )
+        return;
       existProviders++;
     });
 
@@ -475,7 +526,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
   const ssoExists = () => {
     if (capabilities?.ssoUrl) return true;
-    else return false;
+    return false;
   };
 
   const onValidateEmail = (result: TValidate): undefined => {
@@ -512,7 +563,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
           onBlur={onBlurEmail}
           onKeyPress={onKeyPress}
         />
-        {registrationForm && (
+        {registrationForm ? (
           <RegistrationForm
             isLoading={isLoading}
             email={email}
@@ -539,11 +590,12 @@ const CreateUserForm = (props: CreateUserFormProps) => {
             onClickBack={onClickBack}
             onSubmit={onSubmit}
             isStandalone={isStandalone}
+            organizationName={organizationName}
           />
-        )}
+        ) : null}
       </div>
 
-      {!emailFromLink && (oauthDataExists() || ssoExists()) && (
+      {!emailFromLink && (oauthDataExists() || ssoExists()) ? (
         <>
           <div className="line">
             <Text color={globalColors.gray} className="or-label">
@@ -558,7 +610,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
             {...ssoProps}
           />
         </>
-      )}
+      ) : null}
     </RegisterContainer>
   );
 };

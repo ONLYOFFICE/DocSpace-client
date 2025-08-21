@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,9 +26,9 @@
 
 import React from "react";
 
-import { InputSize } from "components/text-input";
+import { InputSize } from "../text-input";
 
-export interface SearchInputProps {
+export type SearchInputProps = {
   /** Used as HTML `id` property */
   id?: string;
   /** Forwarded ref */
@@ -64,4 +64,8 @@ export interface SearchInputProps {
   style?: React.CSSProperties;
   /** The callback function that is called when the field is focused  */
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
-}
+  /** Determines whether the input should reset to the original value when focus is lost */
+  resetOnBlur?: boolean;
+  /** Added data-testid for testing  */
+  dataTestId?: string;
+};

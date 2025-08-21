@@ -1,10 +1,12 @@
 {
   "AppointAdmin": "ແຕ່ງຕັ້ງຜູ້ບໍລິຫານ",
+  "BackupPortal": "ຮັກສາຂໍ້ມູນ {{productName}}",
   "ChangeInstruction": "ເພື່ອປ່ຽນ ເຈົ້າຂອງ {{productName}} , ກະລຸນາເລືອກຊື່ເຈົ້າຂອງໃໝ່ຂ້າງລຸ່ມນີ້.",
   "ChangeOwner": "ປ່ຽນ ເຈົ້າຂອງ {{productName}}",
   "ChangeUser": "ປ່ຽນຜູ້ໃຊ້",
   "DeactivateOrDeletePortal": "ປິດໃຊ້ງານ ຫຼືລຶບ {{productName}}",
   "DoTheSame": "ເຮັດເຊັ່ນດຽວກັນກັບຜູ້ບໍລິຫານ",
+  "ManagePortal": "ຄຸ້ມບານການຕັ້ງຄ່າ {{productName}}",
   "ManageUser": "ຈັດການບັນຊີຜູ້ໃຊ້ ",
   "NewPortalOwner": "ເຈົ້າຂອງ {{productName}} ໃໝ່",
   "PortalOwnerCan": "ເຈົ້າຂອງ {{productName}} ສາມາດ:",

@@ -1,0 +1,237 @@
+{
+  "key_path": "ApplicationsDisabledSuccessfully",
+  "content": "Applications disabled successfully",
+  "content_en_sha1_hash": "3973762d1a46d2cdb20ace836d486fbc344b3913",
+  "created_at": "2025-05-19T21:30:53.807Z",
+  "updated_at": "2025-05-26T07:57:32.658Z",
+  "comment": {
+    "text": "This translation key is used for a success message when an OAuth application is disabled successfully. It is displayed in a dialog window and also shown in a toast notification to confirm that the operation was completed without errors.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:57.814Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/DisableDialog.tsx",
+      "line_number": 61,
+      "context": "await onDisable?.();\n \n setIsRequestRunning(true);\n toastr.success(\n isGroup\n ? t(\"OAuth:ApplicationsDisabledSuccessfully\")\n : t(\"OAuth:ApplicationDisabledSuccessfully\"),\n );\n onClose?.();\n } catch (error: unknown) {\n const e = error as TData;",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '애플리케이션이 비활성화되었습니다' translates to 'Applications have been deactivated'. While similar to 'disabled', 'deactivated' carries a slightly different connotation. 'Disabled' implies a temporary or reversible state, while 'deactivated' can imply a more permanent action.  Given the context of 'successfully', '비활성화되었습니다' might not perfectly capture the intended meaning.",
+          "suggestion": "애플리케이션이 비활성 상태로 전환되었습니다"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Candidaturas' is a less common and slightly less accurate translation for 'Applications' in this context. 'Aplicações' is a more direct and standard translation.",
+          "suggestion": "Aplicações desativadas com sucesso"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Застосунки успішно деактивовано' uses the diminutive form 'Застосунки' which might not be appropriate for an official notification. It implies a casual or friendly tone. A more formal and precise translation is needed.",
+          "suggestion": "Застосунки успішно вимкнено"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The verb 'деактивовано' (deactivated) is accurate but 'вимкнено' (turned off/disabled) is a more common and natural phrasing in this context.",
+          "suggestion": "Застосунки успішно вимкнено"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"多个应用已禁用\" (Duō ge yìngyòng yǐ jíbīn) translates to 'Multiple applications have been disabled'. While conveying a similar meaning, it doesn't directly translate 'Applications disabled successfully'. The original emphasizes the success of the action, which isn't fully captured.",
+          "suggestion": "Consider a translation that more accurately reflects the 'successfully' aspect, such as '应用禁用成功' (Yìngyòng jíbīn chénggōng) - 'Applications disabled successfully'."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

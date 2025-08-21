@@ -1,0 +1,243 @@
+{
+  "key_path": "ResetAuth",
+  "content": "Reset authentication",
+  "content_en_sha1_hash": "b433426988dd4bcf376fbbd983df57e4b0ffc1f5",
+  "created_at": "2025-05-19T21:30:53.508Z",
+  "updated_at": "2025-08-04T07:30:01.626Z",
+  "comment": {
+    "text": "This translation key is used to display the text \"Reset authentication\" in various contexts, such as button labels or dialog headers. It is likely used when the user needs to reset their authentication settings, and it appears on screens related to account management or security options.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:36.347Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
+      "line_number": 287,
+      "context": "case \"reset-auth\":\n return {\n id: \"option_reset-auth\",\n key: option,\n icon: RestoreAuthReactSvgUrl,\n label: t(\"PeopleTranslations:ResetAuth\"),\n onClick: () => this.onResetAuth(item),\n disabled: !item.tfaAppEnabled,\n };\n case \"share-guest\":\n return {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Doğrulamanı sıfırlayın\" is overly familiar. \"Doğrulamanı\" implies speaking directly to one person. A more formal and accurate translation for \"Reset authentication\" would be something like \"Doğrulama sıfırlayın\" or \"Hesabınızın doğrulaması sıfırlayın\".",
+          "suggestion": "Doğrulama sıfırlayın"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation 'Վերականգնել նույնականացումը' while technically correct, isn't the most natural or common way to say 'Reset authentication'. A more common and idiomatic translation might be 'դիմել ծառայության հետ վերականգնմանը' or something similar.",
+          "suggestion": "Consider 'դիմել ծառայության հետ վերականգնմանը' or a similar phrasing that feels more natural in Armenian."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ຣີເຊັດການພິສູດຢືນຢັນ' is a literal translation and may not be the most natural or idiomatic way to express \"Reset authentication\" in Lao. While technically correct, it sounds somewhat stiff.",
+          "suggestion": "Consider 'ຣີເຊັດລະບົບຮັບຮອງຕົວຕົນ' or 'ຣີເຊັດການຢັ້ງຢືນຕົວຕົນ' for a more natural phrasing. The best option would depend on the specific context."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'තහවුරුව යළි සකසන්න' while containing some correct elements (යළි සකසන්න - reset), 'තහවුරුව' (thahawurawa) doesn't perfectly align with 'authentication'. It translates more closely to 'verification'. A more accurate translation would convey the meaning of 'authentication'.",
+          "suggestion": "පහසුරුව ප්‍රතිස්ථාපනය කරන්න (pahasuuruwa pratisthapana karanna) - This translates to 're-establish authentication' or 'reset authentication' and is more accurate."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Ресетуј аутентификацију\" is a transliteration of \"Reset authentication\" and doesn't convey the meaning accurately in natural Serbian. \"Reset\" is often translated as \"poništi\" or \"vratiti na početak\".",
+          "suggestion": "Поништи аутентификацију"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While \"аутентификацију\" is a correct term, it's quite formal.  A more user-friendly alternative, depending on the context, might be preferable.",
+          "suggestion": "Поништи пријаву"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

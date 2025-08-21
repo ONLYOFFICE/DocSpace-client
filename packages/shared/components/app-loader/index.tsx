@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,13 +28,18 @@
 
 import React from "react";
 import { Loader, LoaderTypes } from "../loader";
+import styles from "./AppLoader.module.scss";
 
-import { StyledContainer } from "./AppLoader.styled";
-
-const AppLoader = () => (
-  <StyledContainer>
-    <Loader className="pageLoader" type={LoaderTypes.rombs} size="40px" />
-  </StyledContainer>
-);
+const AppLoader = () => {
+  return (
+    <div className={styles.loaderContainer} data-testid="app-loader">
+      <Loader
+        className={styles.pageLoader}
+        type={LoaderTypes.rombs}
+        size="40px"
+      />
+    </div>
+  );
+};
 
 export default AppLoader;

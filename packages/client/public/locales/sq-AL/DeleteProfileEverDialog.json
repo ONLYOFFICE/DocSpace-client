@@ -1,0 +1,22 @@
+{
+  "ActionCannotBeUndone": "Përdoruesit e selektuar me aftësi të kufizuara do të hiqen nga {{productName}}. Ky veprim nuk mund të zhbëhet.",
+  "ActionCannotBeUndoneGuests": "Mysafirët e selektuar me aftësi të kufizuara do të hiqen nga {{productName}}. Ky veprim nuk mund të zhbëhet.",
+  "CannotReassignFiles": "Në qoftë se fshini disa përdorues njëherësh, nuk mund t'i ricaktoni skedarët e tyre përdoruesve të tjerë.",
+  "DeleteGroupGuestsSuccessMessage": "Mysafirët janë fshirë me sukses.",
+  "DeleteGroupUsersSuccessMessage": "Përdoruesit janë fshirë me sukses.",
+  "DeleteGuest": "Fshini mysafirin",
+  "DeleteGuests": "Fshini mysafirët",
+  "DeletePersonalDataApplicable": "*Zbatohet për përdoruesit e selektuar që kanë skedarë dhe dosje të tilla.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Dhomat e krijuara nga ky përdorues dhe dokumentet e ruajtura në këto dhoma do t'i ricaktohen automatikisht një administratori që kryen fshirjen: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Ricaktoni të dhënat manualisht për të zgjedhur një përdorues tjetër destinacioni për ricaktim.",
+  "DeleteReqassignDescriptionGuest": "The {{userCaption}} do të fshihet nga të gjitha dhomat në të cilat ata janë ftuar. Dokumentet e krijuara nga ky {{userCaption}} në dhoma do t'u ricaktohen automatikisht pronarëve të dhomës.",
+  "DeleteUser": "Fshini përdoruesin",
+  "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> do të fshihet. Ky veprim nuk mund të zhbëhet.",
+  "DeletingUsers": "Përdoruesit duke u fshirë",
+  "PersonalDataDeletionInfo": "Të dhënat personale, të gjithë skedarët dhe dosjet personale në seksionet {{sectionNameFirst}} dhe {{sectionNameSecond}}* të përdoruesve të zgjedhur do të fshihen përgjithmonë. Skedarët dhe dosjet e përdoruesve të zgjedhur të mbajtur në seksione të zakonshme* si dhomat do të mbeten në {{productName}}.",
+  "PleaseNote": "Ju lutem shënoni:",
+  "ReassignDataToAnotherUser": "Ricaktoni të dhënat tek një përdorues tjetër",
+  "SuccessfullyDeleteGuestInfoMessage": "Mysafiri është fshirë me sukses",
+  "SuccessfullyDeleteUserInfoMessage": "Përdoruesi është fshirë me sukses",
+  "ToBeAbleToReassignData": "Për të qenë në gjendje të ricaktoni të dhëna, fshini një përdorues në të njëjtën kohë.",
+  "UserFilesRemovalScope": "Të dhënat personale, të gjithë skedarët dhe dosjet në seksionet {{sectionNameFirst}} dhe {{sectionNameSecond}} të këtij përdoruesi do të fshihen përgjithmonë."
+}

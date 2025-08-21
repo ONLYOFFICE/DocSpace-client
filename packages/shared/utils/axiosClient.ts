@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -94,13 +94,6 @@ class AxiosClient {
       };
     }
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const publicRoomKey = urlParams.get("key") || urlParams.get("share");
-
-    if (publicRoomKey) {
-      headers = { ...headers, "Request-Token": publicRoomKey };
-    }
-
     const apiBaseURL = combineUrl(origin, proxy, prefix);
     const paymentsURL = combineUrl(
       proxy,
@@ -128,9 +121,24 @@ class AxiosClient {
     });
 
     this.client = axios.create(apxiosConfig);
+
+    this.client.interceptors.request.use((config) => {
+      if (typeof window === "undefined") return null;
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const publicRoomKey = urlParams.get("key") || urlParams.get("share");
+
+      if (publicRoomKey) {
+        config.headers = config.headers || {};
+        config.headers["Request-Token"] = publicRoomKey;
+      }
+
+      return config;
+    });
   };
 
-  initSSR = (headers: Record<string, string>) => {
+  initSSR = (headersParam: Record<string, string>) => {
+    const headers = headersParam;
     this.isSSR = true;
 
     const proto = headers["x-forwarded-proto"]?.split(",").shift();
@@ -221,7 +229,8 @@ class AxiosClient {
       return response.data.response;
     };
 
-    const onError = (error: TError) => {
+    const onError = (errorParam: TError) => {
+      let error = errorParam;
       console.log("Request Failed:", { error });
 
       // let errorText = error.response
@@ -267,7 +276,7 @@ class AxiosClient {
             }
             break;
           case 403: {
-            const pathname = window.location.pathname;
+            const { pathname } = window.location;
 
             const isArchived = pathname.indexOf("/rooms/archived") !== -1;
 

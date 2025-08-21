@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,6 @@ import styled, { css } from "styled-components";
 import { Heading } from "@docspace/shared/components/heading";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { ComboBox } from "@docspace/shared/components/combobox";
-import { Box } from "@docspace/shared/components/box";
 import { DropDown } from "@docspace/shared/components/drop-down";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
@@ -91,7 +90,9 @@ const StyledInvitePanel = styled.div`
   }
 `;
 
-const ScrollList = styled.div`
+const ScrollList = styled.div.attrs((props) => ({
+  "data-testid": props.dataTestId,
+}))`
   position: absolute;
 
   width: 100%;
@@ -115,6 +116,13 @@ const StyledInviteUserBody = styled.div`
   flex-direction: column;
   overflow: auto;
 
+  .invite-user-box {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
   .group-name {
     padding-top: 8px;
   }
@@ -125,12 +133,12 @@ const StyledInviteUserBody = styled.div`
 `;
 
 const StyledSubHeader = styled(Heading)`
-  font-weight: 700;
-  font-size: 16px;
+  font-weight: 700 !important;
+  font-size: 16px !important;
   margin: 16px 0 8px;
 
   ${(props) =>
-    props.inline &&
+    props.$inline &&
     css`
       display: inline-flex;
       align-items: center;
@@ -146,9 +154,17 @@ const StyledDescription = styled(Text).attrs(injectDefaultTheme)`
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
+
+  ${(props) =>
+    props.noAllowInvitingGuests &&
+    css`
+      margin-bottom: 12px;
+    `};
 `;
 
-const StyledRow = styled.div`
+const StyledRow = styled.div.attrs((props) => ({
+  "data-testid": props.dataTestId,
+}))`
   display: grid;
   grid-template-columns: ${(props) =>
     props.edit ? "32px 1fr 32px 32px" : "32px 1fr auto"};
@@ -177,6 +193,11 @@ const StyledRow = styled.div`
   }
 
   .role-access {
+    box-sizing: border-box;
+    display: flex;
+    align-items: right;
+    gap: 8px;
+
     .role-warning {
       padding-top: 4px;
     }
@@ -237,8 +258,9 @@ const StyledInviteInput = styled.div`
   }
 `;
 
-const StyledEditInput = styled(TextInput)`
-  width: 100%;
+const StyledEditInput = styled(TextInput).attrs((props) => ({
+  "data-testid": props.dataTestId,
+}))`
   height: 32px;
 `;
 
@@ -330,9 +352,26 @@ const StyledDropDown = styled(DropDown)`
     gap: 8px;
     height: 53px;
 
+    .item-avatar {
+      svg path {
+        fill: var(--info-panel-role-color);
+      }
+    }
+
+    .avatar-disabled {
+      opacity: 0.5;
+    }
+
     .list-item_content {
       text-overflow: ellipsis;
       overflow: hidden;
+
+      .list-item_content-box {
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
     }
 
     .email-list_avatar {
@@ -374,6 +413,12 @@ const StyledDropDown = styled(DropDown)`
       }
     }
   }
+
+  .no-users-list {
+    height: 23px;
+    padding-left: 8px;
+    padding-top: 2px;
+  }
 `;
 
 const SearchItemText = styled(Text).attrs(injectDefaultTheme)`
@@ -382,20 +427,22 @@ const SearchItemText = styled(Text).attrs(injectDefaultTheme)`
   text-overflow: ellipsis;
   overflow: hidden;
   font-size: ${(props) =>
-    props.primary ? "14px" : props.info ? "11px" : "12px"};
-  font-weight: ${(props) => (props.primary || props.info ? "600" : "400")};
+    props.$primary ? "14px" : props.$info ? "11px" : "12px"};
+  font-weight: ${(props) => (props.$primary || props.$info ? "600" : "400")};
 
   color: ${(props) =>
-    (props.primary && !props.disabled) || props.info
+    (props.$primary && !props.disabled) || props.$info
       ? props.theme.text.color
       : props.theme.text.emailColor};
   ${(props) => props.info && `margin-inline-start: auto`}
 `;
 
-const StyledEditButton = styled(Button)`
-  width: 32px;
-  height: 32px;
-  padding: 0px;
+const StyledEditButton = styled(Button).attrs((props) => ({
+  "data-testid": props.dataTestId,
+}))`
+  width: 32px !important;
+  height: 32px !important;
+  padding: 0px !important;
 `;
 
 const iconStyles = css`
@@ -416,7 +463,10 @@ const StyledCrossIcon = styled(CrossIcon).attrs(injectDefaultTheme)`
   ${iconStyles}
 `;
 
-const StyledDeleteIcon = styled(DeleteIcon).attrs(injectDefaultTheme)`
+const StyledDeleteIcon = styled(DeleteIcon).attrs((props) => ({
+  ...injectDefaultTheme(props),
+  "data-testid": props.dataTestId,
+}))`
   cursor: pointer;
 
   ${iconStyles}
@@ -426,7 +476,8 @@ const StyledHelpButton = styled(HelpButton)`
   margin-inline-start: 8px;
 `;
 
-const StyledButtons = styled(Box).attrs(injectDefaultTheme)`
+const StyledButtons = styled.div.attrs(injectDefaultTheme)`
+  box-sizing: border-box;
   padding: 16px;
   display: flex;
   align-items: center;
@@ -439,18 +490,10 @@ const StyledButtons = styled(Box).attrs(injectDefaultTheme)`
   border-top: ${(props) => props.theme.filesPanels.sharing.borderTop};
 `;
 
-const StyledLink = styled(Link)`
+const StyledLink = styled(Link).attrs((props) => ({
+  "data-testid": props.dataTestId,
+}))`
   float: inline-end;
-`;
-
-const ResetLink = styled(Link)`
-  float: inline-start;
-  padding: 0 16px;
-  margin-bottom: 16px;
-  font-size: 13px;
-  color: ${(props) => props.theme.createEditRoomDialog.commonParam.textColor};
-  font-style: normal;
-  line-height: 15px;
 `;
 
 const StyledToggleButton = styled(ToggleButton)`
@@ -536,7 +579,6 @@ export {
   StyledDeleteIcon,
   StyledButtons,
   StyledLink,
-  ResetLink,
   ScrollList,
   StyledToggleButton,
   StyledDescription,

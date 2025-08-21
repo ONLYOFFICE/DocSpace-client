@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,67 +24,79 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { memo } from "react";
 import MaskedInput from "react-text-mask";
 
 import { TextInputProps } from "../TextInput.types";
 import { InputType } from "../TextInput.enums";
 
-const Input = ({
-  isAutoFocussed,
-  isDisabled,
-  isReadOnly,
-  fontWeight,
-  forwardedRef,
-  className,
-  dir = "auto",
-  mask,
+type InputComponentProps = TextInputProps & {
+  className?: string;
+};
+
+const InputComponent = ({
+  // Required props
   type = InputType.text,
-  placeholder = " ",
   value = "",
+
+  // Optional props with defaults
+  isAutoFocussed = false,
+  isDisabled = false,
+  isReadOnly = false,
   maxLength = 255,
-  scale,
   tabIndex = -1,
+  autoComplete = "off",
+  placeholder = " ",
+  dir = "auto",
+  guide = false,
+  className = "",
+
+  // Optional props without defaults
+  mask,
+  forwardedRef,
+  keepCharPositions,
   hasError,
   hasWarning,
-  autoComplete = "off",
+  scale,
   withBorder,
-  keepCharPositions,
-  guide = "false",
+  fontWeight,
   isBold,
   size,
+
+  // Rest of props
   ...props
-}: TextInputProps) => {
-  const rest = {
+}: InputComponentProps) => {
+  const baseClassName = `${className} input-component not-selectable`;
+
+  const commonProps = {
+    type,
+    placeholder,
+    className: baseClassName,
+    disabled: isDisabled,
+    readOnly: isReadOnly,
     autoFocus: isAutoFocussed,
-    ref: forwardedRef || null,
     value,
     maxLength,
     tabIndex,
     autoComplete,
-    guide,
+    dir,
+    ...props,
   };
 
-  return mask ? (
-    <MaskedInput
-      className={`${className} input-component not-selectable`}
-      keepCharPositions
-      guide={false}
-      mask={mask}
-      type={type}
-      placeholder={placeholder}
-      {...props}
-    />
-  ) : (
-    <input
-      className={`${className} input-component not-selectable`}
-      dir={dir}
-      type={type}
-      placeholder={placeholder}
-      {...props}
-      {...rest}
-    />
-  );
+  if (mask) {
+    return (
+      <MaskedInput
+        {...commonProps}
+        mask={mask}
+        guide={guide}
+        keepCharPositions={keepCharPositions}
+      />
+    );
+  }
+
+  return <input {...commonProps} ref={forwardedRef} />;
 };
 
-export { Input };
+export const Input = memo(InputComponent);
+
+export type { InputComponentProps };

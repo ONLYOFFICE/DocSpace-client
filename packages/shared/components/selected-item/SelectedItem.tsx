@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,11 +26,9 @@
 
 import React from "react";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
-
 import { IconButton } from "../icon-button";
-
 import { SelectedItemProps } from "./SelectedItem.types";
-import { StyledSelectedItem, StyledLabel } from "./SelectedItem.styled";
+import styles from "./SelectedItem.module.scss";
 
 export const SelectedItemPure = (props: SelectedItemProps) => {
   const {
@@ -47,6 +45,7 @@ export const SelectedItemPure = (props: SelectedItemProps) => {
     classNameCloseButton,
     hideCross,
     title,
+    dataTestId,
   } = props;
   if (!label) return null;
 
@@ -61,25 +60,34 @@ export const SelectedItemPure = (props: SelectedItemProps) => {
       onClick?.(propKey, label, group, e);
   };
 
+  const selectedItemClassNames = [
+    styles.selectedItem,
+    isInline && styles.isInline,
+    isDisabled && styles.disabled,
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  const labelClassNames = [
+    styles.label,
+    "selected-item_label",
+    isDisabled && styles.disabled,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
-    <StyledSelectedItem
+    <div
       onClick={handleOnClick}
-      isInline={isInline}
-      className={className}
-      isDisabled={isDisabled}
+      className={selectedItemClassNames}
       id={id}
       ref={forwardedRef}
-      data-testid="selected-item"
+      data-testid={dataTestId ?? "selected-item"}
       title={title}
     >
-      <StyledLabel
-        className="selected-item_label"
-        truncate
-        isDisabled={isDisabled}
-      >
-        {label}
-      </StyledLabel>
-      {!hideCross && (
+      <div className={labelClassNames}>{label}</div>
+      {!hideCross ? (
         <IconButton
           className={`selected-tag-removed ${classNameCloseButton}`}
           iconName={CrossReactSvgUrl}
@@ -88,8 +96,8 @@ export const SelectedItemPure = (props: SelectedItemProps) => {
           isFill
           isDisabled={isDisabled}
         />
-      )}
-    </StyledSelectedItem>
+      ) : null}
+    </div>
   );
 };
 

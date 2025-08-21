@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -84,11 +84,12 @@ const PriceCalculation = ({
   isGracePeriod,
   isNotPaidPeriod,
   priceManagerPerMonth,
-  currencySymbol,
+  formatPaymentCurrency,
   isAlreadyPaid,
-  isFreeAfterPaidPeriod,
+
   managersCount,
   getPaymentLink,
+  isYearTariff,
 }) => {
   const didMountRef = useRef(false);
 
@@ -129,35 +130,29 @@ const PriceCalculation = ({
   const priceInfoPerManager = (
     <div className="payment_price_user">
       <Text
-        noSelect
-        fontSize="13px"
         color={
           isDisabled
             ? theme.client.settings.payment.priceContainer.disablePriceColor
             : theme.client.settings.payment.priceColor
         }
-        fontWeight={600}
       >
-        <Trans t={t} i18nKey="PerUserMonth" ns="Common">
-          ""
-          <Text
-            fontSize="16px"
-            isBold
-            as="span"
-            fontWeight={600}
-            color={
-              isDisabled
-                ? theme.client.settings.payment.priceContainer.disablePriceColor
-                : theme.client.settings.payment.priceColor
-            }
-          >
-            {{ currencySymbol }}
-          </Text>
-          <Text fontSize="16px" isBold as="span" fontWeight={600}>
-            {{ price: priceManagerPerMonth }}
-          </Text>
-          per manager/month
-        </Trans>
+        {isYearTariff ? (
+          <Trans
+            t={t}
+            i18nKey="PerUserYear"
+            ns="Common"
+            values={{ price: formatPaymentCurrency(priceManagerPerMonth) }}
+            components={{ 1: <strong style={{ fontSize: "16px" }} /> }}
+          />
+        ) : (
+          <Trans
+            t={t}
+            i18nKey="PerUserMonth"
+            ns="Common"
+            values={{ price: formatPaymentCurrency(priceManagerPerMonth) }}
+            components={{ 1: <strong style={{ fontSize: "16px" }} /> }}
+          />
+        )}
       </Text>
     </div>
   );
@@ -166,17 +161,12 @@ const PriceCalculation = ({
 
   return (
     <StyledBody className="price-calculation-container" isDisabled={isDisabled}>
-      <Text
-        fontSize="16px"
-        fontWeight={600}
-        noSelect
-        className="payment_main-title"
-      >
-        {isGracePeriod || isNotPaidPeriod || isFreeAfterPaidPeriod
+      <Text fontSize="16px" fontWeight={600} className="payment_main-title">
+        {isGracePeriod || isNotPaidPeriod
           ? t("YourPrice")
           : t("PriceCalculation")}
       </Text>
-      {isGracePeriod || isNotPaidPeriod || isFreeAfterPaidPeriod ? (
+      {isGracePeriod || isNotPaidPeriod ? (
         <CurrentUsersCountContainer
           isNeedPlusSign={isNeedPlusSign}
           t={t}
@@ -192,11 +182,7 @@ const PriceCalculation = ({
       {priceInfoPerManager}
 
       <TotalTariffContainer t={t} isDisabled={isDisabled} />
-      <ButtonContainer
-        isDisabled={isDisabled}
-        t={t}
-        isFreeAfterPaidPeriod={isFreeAfterPaidPeriod}
-      />
+      <ButtonContainer isDisabled={isDisabled} t={t} />
     </StyledBody>
   );
 };
@@ -207,6 +193,7 @@ export default inject(
     paymentStore,
     paymentQuotasStore,
     currentTariffStatusStore,
+    currentQuotaStore,
   }) => {
     const {
       tariffsInfo,
@@ -218,11 +205,13 @@ export default inject(
       isAlreadyPaid,
       getPaymentLink,
       canUpdateTariff,
+      formatPaymentCurrency,
     } = paymentStore;
     const { theme } = settingsStore;
 
     const { planCost } = paymentQuotasStore;
     const { isNotPaidPeriod, isGracePeriod } = currentTariffStatusStore;
+    const { isYearTariff } = currentQuotaStore;
 
     return {
       canUpdateTariff,
@@ -239,8 +228,9 @@ export default inject(
       isNotPaidPeriod,
 
       priceManagerPerMonth: planCost.value,
-      currencySymbol: planCost.currencySymbol,
+      formatPaymentCurrency,
       getPaymentLink,
+      isYearTariff,
     };
   },
 )(observer(PriceCalculation));

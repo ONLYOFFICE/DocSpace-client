@@ -1,66 +1,124 @@
 {
   "name": "@docspace/management",
-  "version": "3.0.1",
+  "version": "3.3.0",
   "private": true,
-  "homepage": "/management",
   "scripts": {
-    "build": "yarn build:translations && NODE_OPTIONS=--openssl-legacy-provider webpack --mode production",
     "build:translations": "node scripts/buildTranslations.js",
-    "clean": "shx rm -rf dist",
-    "deploy": "shx --silent mkdir -p ../../../publish/web/management && shx cp -r dist/* ../../../publish/web/management",
-    "start": "yarn build && yarn build:translations && NODE_OPTIONS=--openssl-legacy-provider webpack-cli serve",
-    "start-prod": "ws --port 5015 --directory dist --spa index.html",
-    "start:internal": "yarn build && yarn build:translations && NODE_OPTIONS=--openssl-legacy-provider webpack-cli serve",
-    "start-prod:internal": "ws --port 5015 --directory dist --spa index.html"
+    "build": "next build",
+    "build:deploy": "cross-env DEPLOY=true next build",
+    "start": "cross-env NODE_ENV=development PORT=5015 node server.js",
+    "start-prod": "cross-env NODE_ENV=production node server.js",
+    "lint": "eslint ./src --max-warnings=0",
+    "lint:fix": "eslint ./src --fix",
+    "tsc": "tsc",
+    "clean": "shx rm -rf .next",
+    "deploy": "shx --silent mkdir -p ../../../publish/web/management && shx cp -r .next/standalone/* ../../../publish/web/management && shx --silent mkdir -p ../../../publish/web/management/packages/management/.next/static && shx cp -r .next/static/* ../../../publish/web/management/packages/management/.next/static && shx cp -f server.prod.js ../../../publish/web/management/server.js"
+  },
+  "dependencies": {
+    "@aws-sdk/client-cloudwatch-logs": "3.816.0",
+    "@babel/runtime": "7.25.7",
+    "@docspace/shared": "workspace:*",
+    "axios": "0.22.0",
+    "classnames": "2.5.1",
+    "csvjson-json_beautifier": "5.0.4",
+    "date-and-time": "3.6.0",
+    "hex-rgb": "5.0.0",
+    "i18next": "23.7.19",
+    "lodash": "4.17.21",
+    "mobx": "6.13.5",
+    "mobx-react": "7.6.0",
+    "moment-timezone": "0.5.46",
+    "nconf": "0.12.1",
+    "next": "15.3.2",
+    "react": "19.1.0",
+    "react-device-detect": "2.2.3",
+    "react-dom": "19.1.0",
+    "react-i18next": "14.0.1",
+    "react-svg": "16.1.34",
+    "resize-image": "0.1.0",
+    "sass": "1.79.5",
+    "socket.io-client": "4.8.0",
+    "styled-components": "5.3.11",
+    "ts-pattern": "5.5.0",
+    "windows-iana": "5.1.0",
+    "winston": "3.17.0",
+    "winston-cloudwatch": "6.3.0",
+    "winston-daily-rotate-file": "5.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.25.8",
-    "@babel/plugin-proposal-class-properties": "^7.18.6",
-    "@babel/plugin-proposal-export-default-from": "^7.25.8",
-    "@babel/plugin-transform-runtime": "^7.25.7",
-    "@babel/preset-env": "^7.25.8",
-    "@babel/preset-react": "^7.25.7",
-    "@babel/preset-typescript": "^7.25.7",
-    "@svgr/webpack": "^5.5.0",
-    "@types/accept-language-parser": "^1.5.6",
-    "@types/compression": "^1.7.5",
-    "@types/cookie-parser": "^1.4.7",
-    "@types/express": "^4.17.21",
-    "@types/i18next-fs-backend": "^1.1.5",
-    "@types/morgan": "^1.9.9",
-    "@types/node": "^18.19.55",
-    "@types/react": "^18.3.11",
-    "@types/react-dom": "^18.3.1",
-    "@types/styled-components": "^5.1.34",
-    "@types/winston": "^2.4.4",
-    "babel-loader": "^8.4.1",
-    "clean-webpack-plugin": "^4.0.0",
-    "copy-webpack-plugin": "^9.1.0",
-    "css-loader": "^6.11.0",
-    "external-remotes-plugin": "^1.0.0",
-    "file-loader": "^6.2.0",
-    "html-webpack-plugin": "5.6.0",
-    "json-loader": "^0.5.7",
-    "local-web-server": "^5.4.0",
-    "mocha": "^9.2.2",
-    "mocha-junit-reporter": "^2.2.1",
-    "mocha-multi": "^1.1.7",
-    "mochawesome": "^7.1.3",
-    "nodemon": "^2.0.22",
-    "npm-run-all": "^4.1.5",
-    "sass": "^1.79.5",
-    "sass-loader": "^12.6.0",
-    "shx": "^0.3.4",
-    "source-map-loader": "^3.0.2",
+    "@babel/core": "7.25.8",
+    "@babel/plugin-proposal-export-default-from": "7.25.8",
+    "@babel/plugin-transform-class-properties": "7.25.9",
+    "@babel/plugin-transform-runtime": "7.25.7",
+    "@babel/preset-env": "7.25.8",
+    "@babel/preset-react": "7.25.7",
+    "@babel/preset-typescript": "7.25.7",
+    "@svgr/webpack": "8.1.0",
+    "@types/lodash": "4.17.10",
+    "@types/nconf": "0.10.7",
+    "@types/node": "22.7.5",
+    "@types/react": "19.1.4",
+    "@types/react-dom": "19.1.5",
+    "@types/styled-components": "5.1.34",
+    "cross-env": "^7.0.3",
+    "css-loader": "6.11.0",
+    "eslint": "8.57.1",
+    "eslint-config-next": "15.3.2",
+    "local-web-server": "5.4.0",
+    "prettier": "3.3.3",
+    "sass": "1.79.5",
+    "sass-loader": "16.0.5",
+    "shx": "0.3.4",
     "style-loader": "3.3.4",
-    "terser-webpack-plugin": "^5.3.10",
+    "terser-webpack-plugin": "5.3.10",
     "typescript": "5.6.3",
-    "webpack": "5.95.0",
-    "webpack-cli": "4.10.0",
-    "webpack-dev-server": "4.15.2",
-    "webpack-filter-warnings-plugin": "^1.2.1",
-    "webpack-manifest-plugin": "^5.0.0",
-    "webpack-merge": "^5.10.0"
+    "webpack": "5.95.0"
   },
-  "title": "ONLYOFFICE"
+  "title": "ONLYOFFICE",
+  "nx": {
+    "targets": {
+      "build": {
+        "dependsOn": [
+          "build:translations"
+        ]
+      },
+      "build:deploy": {
+        "dependsOn": [
+          "build:translations"
+        ]
+      },
+      "start": {
+        "continuous": true,
+        "dependsOn": [
+          "build:translations"
+        ]
+      },
+      "start-prod": {
+        "continuous": true,
+        "dependsOn": [
+          "build"
+        ]
+      },
+      "lint": {
+        "dependsOn": [
+          "build:translations"
+        ]
+      },
+      "lint:fix": {
+        "dependsOn": [
+          "build:translations"
+        ]
+      },
+      "tsc": {
+        "dependsOn": [
+          "build:translations"
+        ]
+      },
+      "deploy": {
+        "dependsOn": [
+          "build:deploy"
+        ]
+      }
+    }
+  }
 }

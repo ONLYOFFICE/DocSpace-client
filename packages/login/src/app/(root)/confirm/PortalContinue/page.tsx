@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,23 +29,22 @@ import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { GreetingContainer } from "@/components/GreetingContainer";
 import { getSettings } from "@/utils/actions";
 
+import { logger } from "logger.mjs";
 import ContinuePortalForm from "./page.client";
 
 async function Page() {
+  logger.info("PortalContinue page");
+
   const settings = await getSettings();
 
-  return (
+  return settings && typeof settings !== "string" ? (
     <>
-      {settings && typeof settings !== "string" && (
-        <>
-          <GreetingContainer greetingText={settings?.greetingSettings} />
-          <FormWrapper id="portal-continue-form">
-            <ContinuePortalForm />
-          </FormWrapper>
-        </>
-      )}
+      <GreetingContainer greetingText={settings?.greetingSettings} />
+      <FormWrapper id="portal-continue-form">
+        <ContinuePortalForm />
+      </FormWrapper>
     </>
-  );
+  ) : null;
 }
 
 export default Page;

@@ -1,0 +1,361 @@
+{
+  "key_path": "PayloadUrl",
+  "content": "Payload URL",
+  "content_en_sha1_hash": "a097fab3ebda07ac0c8349da3156f6eb4496cb07",
+  "created_at": "2025-05-19T21:30:49.784Z",
+  "updated_at": "2025-08-04T07:30:01.470Z",
+  "comment": {
+    "text": "The \"PayloadUrl\" translation key is used to display a label for entering or selecting a URL. In the context of a Webhook Dialog component, this text appears as a placeholder and label for an input field where users can enter or select a payload URL.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:58.642Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhookDialog.js",
+      "line_number": 222,
+      "context": "required\n dataTestId=\"webhook_name_input\"\n />\n <LabledInput\n id={`${additionalId}-payload-url-input`}\n label={t(\"PayloadUrl\")}\n placeholder={t(\"EnterUrl\")}\n name=\"uri\"\n value={webhookInfo.uri}\n onChange={onInputChange}\n hasError={!isValid.uri}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'رابط الحمولة' is a literal translation of 'Payload URL', it might not be the most natural or commonly used term in a technical context in Saudi Arabia. 'Payload' can be translated in multiple ways depending on the desired nuance.",
+          "suggestion": "Consider alternatives such as 'عنوان URL للحمولة' or 'عنوان URL للبيانات المرسلة' depending on the specific context and audience. A more context-aware translation might be 'رابط الإرسال' if the payload is associated with sending data."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani translation \"URL məlumat yükü \" does not accurately convey the meaning of \"Payload URL\". \"Məlumat yükü\" translates to \"information load\" or \"data load\", which is not the intended meaning. \"Payload\" refers to the data sent within the webhook.",
+          "suggestion": "A more accurate translation would be something like \"Ödəniş yükləməsi\" (Payment load) or \"Veri yükləməsi\" (Data load), but a more direct and common phrasing would be simply \"Yükləmə URL\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"URL адрес на Полезния товар\" is overly literal and not idiomatic. While technically correct, \"Полезен товар\" is a less common and somewhat awkward phrasing for \"Payload\" in the context of webhooks. A more natural translation would convey the purpose of the URL, which is to receive data.",
+          "suggestion": "Consider alternative translations like \"URL за получаване на данни\" or \"Приемащ URL адрес\" (Receiving URL Address) depending on the overall tone and style guide. A simpler option could also be just \"URL адрес\" if the context makes the purpose clear."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Adresa URL nákladu\" is a literal translation of \"Payload URL\" and doesn't quite convey the meaning accurately in a technical context. \"Náklad\" can imply cargo or load, which isn't the intended meaning here. A more appropriate translation would be something that directly refers to a URL for receiving data.",
+          "suggestion": "Cílová URL"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'URL φορτίου' is understandable, a more natural and accurate translation of 'Payload URL' in Greek would be 'Διεύθυνση URL Φορτίου' or 'URL Φορτίου Δεδομένων'. 'Φορτίου' is grammatically correct but sounds a bit awkward in this context.",
+          "suggestion": "Διεύθυνση URL Φορτίου"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'carga útil' is a literal translation of 'payload,' in the context of webhooks, a more common and natural-sounding translation would be 'pago' or 'datos'. 'Carga útil' sounds somewhat technical and less user-friendly.",
+          "suggestion": "URL de pago"
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Tietosisällön URL' doesn't accurately convey the meaning of 'Payload URL'. 'Payload' refers to the data being sent, not just the content. A more accurate translation would emphasize the data aspect.",
+          "suggestion": "Data-URL or Viestin URL"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The French translation 'URL de la charge' is not the most accurate or idiomatic translation of 'Payload URL'. 'Charge' often implies a loading or carrying action, which doesn't quite align with the technical meaning of 'Payload' in this context (data sent with a webhook).",
+          "suggestion": "URL de la charge utile"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Ուժային բեռի URL\" is a literal translation of 'Payload URL' which isn't the most natural or easily understood way to express it in Armenian in a technical context. 'Payload' in this case refers to the data being sent, not the physical load. A more appropriate translation might convey that meaning.",
+          "suggestion": "Consider alternatives like \"Դատվողության URL\" (Data URL) or \"Պատճառների URL\" (Reasons URL) or \"Հաղորդագրության URL\" (Message URL) depending on the specific usage."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'URL del carico utile' is a literal translation of 'Payload URL'. While technically correct, 'carico utile' can sound a bit technical and less user-friendly in this context. A more natural and common translation would be 'URL del payload' or 'URL del messaggio'.",
+          "suggestion": "URL del payload"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Lietderīgās slodzes vietrādis URL\" is overly literal and doesn't flow naturally in Latvian. \"Lietderīgā slodze\" translates to \"Payload\", but using \"vietrādis\" for \"URL\" is uncommon and sounds awkward.",
+          "suggestion": "Consider a more natural translation like \"Webhooku datu URL\" or \"Webhooku datu adrese\"."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a complex noun phrase, which might be hard to parse for users. Consider simpler language.",
+          "suggestion": "Break down the phrase for better readability. E.g., \"Webhooku datu URL\" is more accessible."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Polish translation \"URL danych właściwych\" is not the most natural or accurate translation of \"Payload URL\". While it conveys a sense of 'data URL', it lacks the specific connotation of a URL that carries a payload.",
+          "suggestion": "Consider alternatives like \"Adres URL danych\" or \"URL danych\" for a more direct and idiomatic translation.  \"Adres URL do danych\" would be even more precise."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'URL de carga útil' is a literal translation, 'Payload URL' often refers to a specific endpoint for receiving data. A more natural and accurate translation would be 'URL de webhook' or 'URL de recebimento de dados'. 'Carga útil' can sound overly technical or confusing in this context.",
+          "suggestion": "URL de webhook"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"URL de carga útil\" is a literal translation, it's not the most natural or common way to express \"Payload URL\" in Portuguese (Brazil). \"Payload\" often translates to \"caminho de dados\" or \"payload\". \"URL de payload\" would be a better translation.",
+          "suggestion": "URL de payload"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation \"Adresa URL a sarcinii\" translates to \"Address URL of the task\". It doesn't accurately convey the meaning of \"Payload URL\". Payload refers to the data being sent, not the address itself.",
+          "suggestion": "A more accurate translation would be something like \"URL-ul încărcăturii\" or \"URL-ul datelor\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'URL полезной нагрузки' is technically correct but sounds very formal and clunky in Russian. 'Полезная нагрузка' is a highly technical term. For a more natural and user-friendly translation, a simpler alternative is preferable.",
+          "suggestion": "URL веб-передачи"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, it's common practice to keep the English term 'URL' in parentheses after the Russian translation for clarity, especially in technical documentation.",
+          "suggestion": "URL (URL веб-передачи)"
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'payload ඒ.ස.නි.' is not an accurate translation of 'Payload URL'. 'ඒ.ස.නි.' typically refers to 'unit' or 'element' and doesn't convey the meaning of a URL.",
+          "suggestion": "A more accurate translation would need to capture the concept of a URL. Possible suggestions include: 'payload අන්තර්ජාල ලිපිනය' (payload internet lipinaya - payload internet address), 'payload URL ලිපිනය' (payload URL lipinaya - payload URL address), or a more descriptive phrase depending on the specific context."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Adresa URL dátového obsahu' is overly literal and not the most natural way to express 'Payload URL' in Slovak. 'Payload' refers to the data being sent, not just the content of the URL.",
+          "suggestion": "Consider alternatives like 'URL pre prijatie dát', 'URL pre prijatie platby' (if relevant to webhooks), or 'Webhook URL'."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the phrase is quite long.  Shorter and more concise options are preferable for UI elements.",
+          "suggestion": "Prioritize a shorter and more understandable phrasing as suggested above."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"URL uporabnih podatkov\" is a literal translation, \"Payload URL\" often refers to a specific URL designed to receive data. A more natural and accurate translation might be something like \"URL za prejem podatkov\" or \"URL za prenos podatkov\". \"Uporabnih podatkov\" is a bit clunky in this context.",
+          "suggestion": "URL za prejem podatkov"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"Паyлоад URL\" is a transliteration, not a translation.  It doesn't convey the meaning of 'Payload URL'. A more appropriate translation would consider the context and potentially use terms like 'Адреса за пријем података' or 'Урл за слање података'.",
+          "suggestion": "Consider a translation that explains the function of the URL, e.g., 'Адреса за пријем података' (Address to receive data) or 'Урл за слање података' (URL for sending data)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'URL-адреса корисного навантаження' is a literal translation and while technically correct, it's not the most natural or commonly used phrasing in Ukrainian. 'Payload' often implies a meaning beyond just the URL.",
+          "suggestion": "Consider 'URL для передачі даних' or 'Адреса для передачі даних' for a more idiomatic translation, depending on the specific context."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Vietnamese translation \"URL payload\" is a literal translation that doesn't convey the meaning of 'Payload URL' in Vietnamese. It's not a natural or idiomatic way to express the concept.",
+          "suggestion": "A better translation would be something like \"URL chứa dữ liệu\" (URL containing data), \"Đường dẫn payload\" (Payload URL - keeping the English term is acceptable in technical contexts), or \"Địa chỉ payload\" (Payload address)."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Payload' has a more nuanced meaning in this context (referring to the data sent in a webhook). '负载' primarily means 'load' or 'burden'. A more accurate translation would capture this meaning.",
+          "suggestion": "数据 URL (Shùjù URL) - 'Data URL' or Webhook 数据 URL (Webhook Shùjù URL) - 'Webhook Data URL'"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

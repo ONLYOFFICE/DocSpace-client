@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,16 +27,19 @@
 "use client";
 
 import React, { useState } from "react";
-import { useTheme } from "styled-components";
+import { isMobileOnly } from "react-device-detect";
+import lightSmall from "PUBLIC_DIR/images/logo/lightsmall.svg?url";
 
-import { classNames, getLogoUrl } from "@docspace/shared/utils";
+import { classNames, getLogoUrl, size as deviceSize } from "../../utils";
 import { WhiteLabelLogoType } from "../../enums";
-import { size as deviceSize } from "../../utils";
-import { StyledWrapper } from "./PortalLogo.styled";
+import { useTheme } from "../../hooks/useTheme";
 import type { PortalLogoProps } from "./PortalLogo.types";
+import styles from "./PortalLogo.module.scss";
 
 const PortalLogo = ({ className, isResizable = false }: PortalLogoProps) => {
-  const theme = useTheme();
+  const [isError, setIsError] = useState(false);
+
+  const { isBase } = useTheme();
 
   const [size, setSize] = useState(
     typeof window !== "undefined" ? window.innerWidth : 0,
@@ -61,18 +64,35 @@ const PortalLogo = ({ className, isResizable = false }: PortalLogoProps) => {
       ? WhiteLabelLogoType.LightSmall
       : WhiteLabelLogoType.LoginPage;
 
-  const logo = getLogoUrl(logoSize, !theme.isBase);
+  const logo = getLogoUrl(logoSize, !isBase);
+
+  const wrapperClassName = classNames(styles.wrapper, {
+    [styles.mobile]: isMobile,
+    [styles.resizable]: isResizable,
+    "not-mobile": !isMobileOnly,
+  });
+
+  if (isError) {
+    return (
+      <img
+        className={classNames("logo-wrapper", className)}
+        alt="portal logo"
+        src={lightSmall}
+      />
+    );
+  }
 
   return (
-    <StyledWrapper isMobile={isMobile} isResizable={isResizable}>
-      {logo && (
+    <div className={wrapperClassName}>
+      {logo ? (
         <img
           src={logo}
           className={classNames("logo-wrapper", className)}
-          alt=""
+          alt="portal logo"
+          onError={() => setIsError(true)}
         />
-      )}
-    </StyledWrapper>
+      ) : null}
+    </div>
   );
 };
 

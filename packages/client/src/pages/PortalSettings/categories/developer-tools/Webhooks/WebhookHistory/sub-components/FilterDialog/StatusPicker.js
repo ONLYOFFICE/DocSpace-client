@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -60,6 +60,7 @@ const StatusBadgeSelector = ({
   return (
     <RoundedButton
       id={id}
+      testId={`status_badge_${id}_button`}
       label={label}
       onClick={handleOnClick}
       primary={isStatusSelected(statusCode)}

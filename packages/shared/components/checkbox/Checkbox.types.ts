@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,35 +26,35 @@
 
 import React from "react";
 
-export interface CheckboxProps {
-  /** Used as HTML id property */
-  id?: string;
-  /** Used as HTML `name` property */
-  name?: string;
-  /** Value of the input */
-  value?: string;
-  /** Label of the input */
-  label?: string;
-  /** Sets the checked state of the checkbox */
-  isChecked?: boolean;
-  /** The state is displayed as a rectangle in the checkbox when set to true */
-  isIndeterminate?: boolean;
-  /** Disables the Checkbox input */
-  isDisabled?: boolean;
-  /** Is triggered whenever the CheckboxInput is clicked */
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  /** Accepts class */
-  className?: string;
-  /** Accepts css style */
-  style?: React.CSSProperties;
-  /** Title */
-  title?: string;
-  /** Disables word wrapping */
-  truncate?: boolean;
-  /** Renders the help button */
-  helpButton?: React.ReactNode;
-  /** Checkbox tab index */
-  tabIndex?: number;
-  /** Notifies if the error occurs */
-  hasError?: boolean;
-}
+import type { TextProps } from "../text/Text.types";
+
+type PickedTextProps = Pick<TextProps, "title" | "truncate">;
+
+type PickedInputProps = Pick<
+  React.ComponentPropsWithoutRef<"input">,
+  "name" | "value" | "tabIndex" | "onChange"
+>;
+
+type PickedLabelProps = Pick<
+  React.LabelHTMLAttributes<HTMLLabelElement>,
+  "id" | "style" | "className"
+>;
+
+export type CheckboxProps = PickedTextProps &
+  PickedInputProps &
+  PickedLabelProps & {
+    /** Label of the input */
+    label?: string;
+    /** Sets the checked state of the checkbox */
+    isChecked?: boolean;
+    /** The state is displayed as a rectangle in the checkbox when set to true */
+    isIndeterminate?: boolean;
+    /** Disables the Checkbox input */
+    isDisabled?: boolean;
+    /** Renders the help button */
+    helpButton?: React.ReactNode;
+    /** Notifies if the error occurs */
+    hasError?: boolean;
+    /** Test id for the checkbox */
+    dataTestId?: string;
+  };

@@ -1,0 +1,45 @@
+@use "../../styles/variables";
+@use "../../styles/mixins";
+
+.link {
+  text-decoration: var(--link-text-decoration);
+  text-underline-offset: 2px;
+  cursor: var(--link-cursor);
+  color: var(--link-color);
+  line-height: var(--link-line-height);
+
+  &.semitransparent {
+    opacity: var(--link-opacity);
+  }
+
+  &.textOverflow {
+    display: var(--link-display);
+    max-width: 100%;
+  }
+
+  &.enableUserSelect {
+    user-select: text;
+  }
+
+  &:not(.enableUserSelect) {
+    @include mixins.no-user-select;
+  }
+
+  &:hover:not(.noHover) {
+    text-decoration: var(--link-hover-text-decoration);
+  }
+
+  &.isHovered:not(.noHover) {
+    text-decoration: var(--link-hover-text-decoration);
+  }
+
+  &.page {
+    &:hover:not(.noHover) {
+      text-decoration: var(--link-hover-page-text-decoration);
+    }
+
+    &.isHovered:not(.noHover) {
+      text-decoration: var(--link-hover-page-text-decoration);
+    }
+  }
+}

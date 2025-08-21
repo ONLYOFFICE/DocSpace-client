@@ -1,6 +1,6 @@
 {
+  "CancellaionNotification": "Không hiển thị lại thông báo hủy",
   "DisplayFileExtension": "Hiển thị phần mở rộng tập tin bên cạnh tên tập tin",
-  "DisplayNotification": "Hiển thị thông báo khi chuyển các mục vào Thùng rác",
   "OpenSameTab": "Mở trình chỉnh sửa {{organizationName}} trong cùng một tab",
   "OriginalCopy": "Lưu cả bản sao của tệp ở định dạng gốc"
 }

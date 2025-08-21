@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,145 +25,144 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React, { useEffect, useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
-import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
-
-import { StyledPreparationPortal } from "./PreparationPortal.styled";
+import ErrorContainer from "../../components/error-container/ErrorContainer";
 import { Text } from "../../components/text";
-
-import { ColorTheme, ThemeId } from "../../components/color-theme";
-import { IPreparationPortal } from "./PreparationPortal.types";
+import SocketHelper, { SocketEvents } from "../../utils/socket";
 import { getRestoreProgress } from "../../api/portal";
-import {
-  clearAllIntervals,
-  clearLocalStorage,
-  getIntervalProgress,
-  returnToPortal,
-} from "./PreparationPortal.utils";
+import PreparationPortalLoader from "../../skeletons/preparation-portal";
+import { PreparationPortalProgress } from "../../components/preparation-portal-progress";
+
+import { clearLocalStorage, returnToPortal } from "./PreparationPortal.utils";
+import { IPreparationPortal } from "./PreparationPortal.types";
+import styles from "./PreparationPortal.module.scss";
 
 let requestsCount = 0;
 
-let timerId: ReturnType<typeof setInterval> | null;
-
 export const PreparationPortal = (props: IPreparationPortal) => {
-  const { withoutHeader, style, isDialog } = props;
+  const { withoutHeader, isDialog, style } = props;
 
-  const { t } = useTranslation(["PreparationPortal", "Common"]);
+  const { t, ready } = useTranslation(["PreparationPortal", "Common"]);
 
   const errorInternalServer = t("Common:ErrorInternalServer");
 
   const [percent, setPercent] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const setMessage = useCallback(
-    (error?: unknown) => {
-      const errorText = error ?? errorInternalServer;
+  const getRecoveryProgress = useCallback(async () => {
+    const setMessage = (error?: unknown) => {
+      const errorText = (error as string) ?? errorInternalServer;
 
       setErrorMessage(errorText);
-    },
-    [errorInternalServer],
-  );
+    };
+
+    try {
+      const response = await getRestoreProgress();
+
+      if (!response) {
+        setMessage();
+        return;
+      }
+
+      const { progress, error } = response;
+
+      if (error) {
+        setMessage(error);
+        return;
+      }
+
+      setPercent(progress);
+
+      if (progress === 100) {
+        returnToPortal();
+        clearLocalStorage();
+      }
+    } catch (err: unknown) {
+      const knownError = err as {
+        response?: { status: number; data: { error: { message: string } } };
+        statusText?: string;
+        message?: string;
+      };
+
+      const status = knownError?.response?.status;
+      const needCreationTableTime = status === 404;
+
+      if (needCreationTableTime && requestsCount < 3) {
+        requestsCount += 1;
+
+        getRecoveryProgress();
+
+        return;
+      }
+
+      const message =
+        typeof err !== "object"
+          ? err
+          : knownError?.response?.data?.error?.message ||
+            knownError?.statusText ||
+            knownError?.message;
+
+      setMessage(message);
+    }
+  }, [errorInternalServer]);
 
   useEffect(() => {
-    const getRecoveryProgress = async () => {
-      try {
-        const response = await getRestoreProgress();
+    SocketHelper?.on(SocketEvents.RestoreProgress, (opt) => {
+      const { progress, isCompleted, error } = opt;
 
-        if (!response) {
-          setMessage();
-          return;
-        }
+      setPercent(progress);
 
-        const { progress, error } = response;
-
+      if (isCompleted) {
         if (error) {
-          setMessage(error);
-          return;
-        }
-
-        setPercent(progress);
-
-        if (progress === 100) {
-          returnToPortal();
-          clearLocalStorage();
+          setErrorMessage(error);
 
           return;
         }
 
-        timerId = setInterval(
-          () => getIntervalProgress(setMessage, setPercent, timerId),
-          1000,
-        );
-      } catch (err: unknown) {
-        const knownError = err as {
-          response?: { status: number; data: { error: { message: string } } };
-          statusText?: string;
-          message?: string;
-        };
-
-        const status = knownError?.response?.status;
-        const needCreationTableTime = status === 404;
-
-        if (needCreationTableTime && requestsCount < 3) {
-          requestsCount += 1;
-
-          getRecoveryProgress();
-
-          return;
-        }
-
-        const message =
-          typeof err !== "object"
-            ? err
-            : knownError?.response?.data?.error?.message ||
-              knownError?.statusText ||
-              knownError?.message ||
-              errorInternalServer;
-
-        setMessage(message);
+        returnToPortal();
+        clearLocalStorage();
       }
-    };
+    });
+  }, [getRecoveryProgress]);
 
-    setTimeout(() => {
-      getRecoveryProgress();
-    }, 6000);
+  useEffect(() => {
+    if (!ready) return;
 
-    return () => {
-      clearAllIntervals(timerId);
-    };
-  }, [errorInternalServer, setMessage]);
+    if (!isDialog) getRecoveryProgress();
+  }, [ready, getRecoveryProgress, isDialog]);
 
   const headerText = errorMessage
     ? t("Common:Error")
     : t("Common:PreparationPortalTitle");
 
+  const componentBody = errorMessage ? (
+    <Text className={styles.preparationPortalError}>{`${errorMessage}`}</Text>
+  ) : (
+    <PreparationPortalProgress
+      text={t("PreparationPortal:PreparationPortalDescription", {
+        productName: t("Common:ProductName"),
+      })}
+      percent={percent}
+    />
+  );
   return (
-    <StyledPreparationPortal errorMessage={!!errorMessage} isDialog={isDialog}>
+    <div
+      className={classNames(styles.preparationPortal, {
+        [styles.isDialog]: isDialog,
+        [styles.errorMessage]: !!errorMessage,
+      })}
+    >
       <ErrorContainer
-        headerText={withoutHeader ? "" : headerText}
+        {...(ready && { headerText: withoutHeader ? "" : headerText })}
         style={style}
-        className="restoring-portal"
+        className={styles.restoringPortal}
+        hideLogo
       >
-        <div className="preparation-portal_body-wrapper">
-          {errorMessage ? (
-            <Text className="preparation-portal_error">{`${errorMessage}`}</Text>
-          ) : (
-            <ColorTheme themeId={ThemeId.Progress} percent={percent}>
-              <div className="preparation-portal_progress">
-                <div className="preparation-portal_progress-bar">
-                  <div className="preparation-portal_progress-line" />
-                </div>
-                <Text className="preparation-portal_percent">{`${percent} %`}</Text>
-              </div>
-              <Text className="preparation-portal_text">
-                {t("PreparationPortalDescription", {
-                  productName: t("Common:ProductName"),
-                })}
-              </Text>
-            </ColorTheme>
-          )}
+        <div className={styles.preparationPortalBodyWrapper}>
+          {!ready ? <PreparationPortalLoader /> : componentBody}
         </div>
       </ErrorContainer>
-    </StyledPreparationPortal>
+    </div>
   );
 };

@@ -24,85 +24,145 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
-
 import { EmailSettings } from "../../utils";
 import { InputSize } from "../text-input";
-
-import { EmailInput } from "./EmailInput";
-import { EmailInputProps, TValidate } from "./EmailInput.types";
-
-// const disable = {
-//   table: {
-//     disable: true,
-//   },
-// };
+import { EmailInput } from ".";
+import type { EmailInputProps, TValidate } from "./EmailInput.types";
 
 const meta = {
-  title: "Components/EmailInput",
+  title: "Form Controls/EmailInput",
   component: EmailInput,
+  parameters: {
+    docs: {
+      description: {
+        component: "Email input field with validation",
+      },
+    },
+  },
+  tags: ["autodocs"],
   argTypes: {
-    // allowDomainPunycode: disable,
-    // allowLocalPartPunycode: disable,
-    // allowDomainIp: disable,
-    // allowStrictLocalPart: disable,
-    // allowSpaces: disable,
-    // allowName: disable,
-    // allowLocalDomainName: disable,
+    size: {
+      control: "select",
+      options: Object.values(InputSize),
+    },
+    isDisabled: { control: "boolean" },
+    isReadOnly: { control: "boolean" },
+    hasError: { control: "boolean" },
+    scale: { control: "boolean" },
   },
 } satisfies Meta<typeof EmailInput>;
-type Story = StoryObj<typeof EmailInput>;
 
 export default meta;
+type Story = StoryObj<typeof EmailInput>;
 
-const Template = ({ ...rest }: EmailInputProps) => {
-  const [emailValue, setEmailValue] = useState("");
+const Template = ({
+  value: initialValue,
+  size,
+  isDisabled,
+  isReadOnly,
+  hasError,
+  scale,
+  placeholder,
+}: EmailInputProps) => {
+  const [value, setValue] = useState(initialValue || "");
+  const [validationState, setValidationState] = useState<TValidate>();
 
-  const onChangeHandler = (value: string) => {
-    setEmailValue(value);
-  };
   const settings = EmailSettings.parse({
     allowDomainPunycode: false,
     allowLocalPartPunycode: false,
     allowDomainIp: false,
-    allowStrictLocalPart: false,
+    allowStrictLocalPart: true,
     allowSpaces: false,
     allowName: false,
     allowLocalDomainName: false,
   });
 
-  useEffect(() => {
-    setEmailValue(rest.value);
-  }, [rest.value]);
-
   return (
-    <div style={{ margin: "7px" }}>
+    <div style={{ width: "320px" }}>
       <EmailInput
-        {...rest}
-        value={emailValue}
+        placeholder={placeholder || "Enter email address"}
+        value={value}
         emailSettings={settings}
-        onValidateInput={(data: TValidate) => rest.onValidateInput?.(data)}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          rest.onChange(e);
-          onChangeHandler(e.target.value);
-        }}
+        onChange={(e) => setValue(e.target.value)}
+        onValidateInput={(data) => setValidationState(data)}
+        size={size}
+        isDisabled={isDisabled}
+        isReadOnly={isReadOnly}
+        hasError={hasError}
+        scale={scale}
       />
+      {validationState ? (
+        <div style={{ marginTop: "8px", fontSize: "12px" }}>
+          <div>Valid: {validationState.isValid ? "Yes" : "No"}</div>
+          {(validationState.errors ?? []).length > 0 ? (
+            <div>Errors: {validationState.errors?.join(", ")}</div>
+          ) : null}
+        </div>
+      ) : null}
     </div>
   );
 };
 
 export const Default: Story = {
-  render: (args) => <Template {...args} />,
+  render: Template,
   args: {
-    // allowDomainPunycode: false,
-    // allowLocalPartPunycode: false,
-    // allowDomainIp: false,
-    // allowSpaces: false,
-    // allowName: false,
-    // allowLocalDomainName: false,
-    // allowStrictLocalPart: true,
-    placeholder: "Input email",
+    placeholder: "Enter email address",
     size: InputSize.base,
+    isDisabled: false,
+    isReadOnly: false,
+    hasError: false,
+    scale: false,
+    value: "",
+  },
+};
+
+export const WithInitialValue: Story = {
+  render: Template,
+  args: {
+    ...Default.args,
+    value: "test@example.com",
+  },
+};
+
+export const WithCustomValidation: Story = {
+  render: Template,
+  args: {
+    ...Default.args,
+    scale: true,
+    placeholder: "Enter @custom-domain.com email",
+    customValidate: (value) => ({
+      value,
+      isValid: value.endsWith("@custom-domain.com"),
+      errors: value ? ["Must be @custom-domain.com email"] : [],
+    }),
+  },
+};
+
+export const Disabled: Story = {
+  render: Template,
+  args: {
+    ...Default.args,
+    isDisabled: true,
+    value: "disabled@example.com",
+  },
+};
+
+export const ReadOnly: Story = {
+  render: Template,
+  args: {
+    ...Default.args,
+    isReadOnly: true,
+    value: "readonly@example.com",
+  },
+};
+
+export const WithError: Story = {
+  render: Template,
+  args: {
+    ...Default.args,
+    hasError: true,
+    value: "invalid-email",
   },
 };

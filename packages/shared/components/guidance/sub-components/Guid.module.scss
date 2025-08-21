@@ -1,0 +1,155 @@
+@use "../../../styles/variables";
+@use "../../../styles/variables/colors";
+@use "../../../styles/mixins";
+
+.content {
+  box-sizing: border-box;
+  position: relative;
+
+  background-color: var(--modal-dialog-bg-color);
+  color: var(--modal-dialog-text-color);
+  padding: 0 0 -16px;
+
+  &.displayTypeModal {
+    padding: 0;
+    height: auto;
+    max-height: 280px;
+    width: 430px;
+    border-radius: 11px;
+
+    &.autoMaxHeight {
+      max-height: unset;
+    }
+
+    @include mixins.mobile {
+      transform: translateY(100%);
+      transition: transform 0.3s ease-in-out;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: auto;
+      border-radius: 6px 6px 0 0;
+
+      &.visible {
+        transform: translateY(0);
+      }
+    }
+  }
+}
+
+.dialog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 430px;
+  margin: 0 auto;
+  min-height: auto;
+  position: absolute;
+}
+
+:global {
+  .guidance-dialog {
+    z-index: 1000;
+    .modal-header {
+      margin: 20px 20px 12px 20px;
+      height: auto;
+      min-height: auto;
+      align-items: start;
+
+      &::after {
+        border: none !important;
+      }
+
+      p {
+        font-size: 16px !important;
+        white-space: normal;
+      }
+    }
+
+    .modal-body {
+      padding: 0px 20px 0px;
+    }
+
+    .modal-footer {
+      justify-content: space-between;
+      margin-bottom: 0px !important;
+      padding: 12px 20px 20px;
+    }
+
+    .button-container {
+      gap: 8px;
+      display: flex;
+    }
+
+    .circle-container {
+      margin-inline-start: 2px;
+      align-items: center;
+      display: flex;
+      gap: 10px;
+    }
+
+    .icon-button {
+      position: relative;
+      right: -5px;
+      bottom: 3px;
+      width: 14px;
+      height: 14px;
+    }
+  }
+}
+
+.guidance {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.guidElement {
+  position: absolute;
+  border-radius: 7px;
+  z-index: 1;
+
+  &.smallBorderRadius {
+    border-radius: 4px;
+  }
+
+  &.iosBackdrop {
+    -webkit-backdrop-filter: var(--backdrop-filter-value);
+    backdrop-filter: var(--backdrop-filter-value);
+    z-index: 1000;
+  }
+}
+
+.guidBackdrop {
+  display: block;
+  height: 100%;
+  min-height: fill-available;
+  max-height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 999;
+  background-color: var(--backdrop-background-color);
+  transition: opacity 0.2s;
+  opacity: 1;
+
+  @include mixins.mobile {
+    position: absolute;
+  }
+}
+
+.tipsCircle {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--form-filling-tips-circle-background-color);
+
+  &.isSelected {
+    width: 6px;
+    height: 6px;
+    border: var(--form-filling-tips-circle-border);
+    background-color: var(--form-filling-tips-circle-selected-background-color);
+  }
+}

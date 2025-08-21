@@ -2,8 +2,5 @@
   "FillOutButtonLabel": "Լրացնել",
   "FillOutDescription": "Խմբագրի պատուհանում լրացրեք բնօրինակ ձևի դաշտերը: ",
   "FillOutTitle": "Լրացրեք ձևը ինքներդ",
-  "FillPDFDialogTitle": "Լրացրել որպես",
-  "ShareCollectButtonLabel": "Պատճենել սենյակում",
-  "ShareCollectDescription": "Կիսվեք ձեր ձևով և հավաքեք պատասխանները Ձևաթղթերի լրացման սենյակի միջոցով:",
-  "ShareCollectTitle": "Կիսվել"
+  "FillPDFDialogTitle": "Լրացրել որպես"
 }

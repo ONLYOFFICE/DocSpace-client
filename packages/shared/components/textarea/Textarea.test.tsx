@@ -1,24 +1,21 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
 // of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
+// Foundation and is available at http://www.gnu.org/licenses/agpl-3.0.html
 //
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+// The AGPL license is supplemented with a special exception.
+// For full license information see LICENSE.txt.
 //
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+// All rights reserved.
 //
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+// For any additional rights information, please contact Ascensio System SIA at 20A-12 Ernesta Birznieka-Upisha
+// street, Riga, Latvia, EU, LV-1050.
 //
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
+// You may obtain a further copy of the GNU Affero General Public License at
+//
+//     http://www.gnu.org/licenses/agpl-3.0.html
 //
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
@@ -26,116 +23,93 @@
 
 import React from "react";
 import { screen, render } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 
-import { Textarea } from "./Textarea";
+import { Textarea } from ".";
 
 describe("<Textarea />", () => {
-  it("renders without error", () => {
-    render(
-      <Textarea placeholder="Add comment" onChange={jest.fn()} value="value" />,
-    );
+  const defaultProps = {
+    placeholder: "Add comment",
+    onChange: jest.fn(),
+    value: "test value",
+  };
 
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it("renders without error", () => {
+    render(<Textarea {...defaultProps} />);
     expect(screen.getByTestId("textarea")).toBeInTheDocument();
   });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts className", () => {
-  //   const wrapper = mount(
-  //     <Textarea
-  //       placeholder="Add comment"
-  //       // @ts-expect-error TS(2708): Cannot use namespace 'jest' as a value.
-  //       onChange={jest.fn()}
-  //       value="value"
-  //       className="test"
-  //     />
-  //   );
+  it("accepts className and style props", () => {
+    const { container } = render(
+      <Textarea
+        {...defaultProps}
+        className="test-class"
+        style={{ color: "red" }}
+      />,
+    );
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("className")).toEqual("test");
-  // });
+    const textarea = container.querySelector(".test-class");
+    expect(textarea).toBeInTheDocument();
+    expect(textarea).toHaveStyle({ color: "red" });
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts style", () => {
-  //   const wrapper = mount(
-  //     <Textarea
-  //       placeholder="Add comment"
-  //       // @ts-expect-error TS(2708): Cannot use namespace 'jest' as a value.
-  //       onChange={jest.fn()}
-  //       value="value"
-  //       style={{ color: "red" }}
-  //     />
-  //   );
+  it("handles value changes", async () => {
+    const handleChange = jest.fn();
+    render(<Textarea {...defaultProps} onChange={handleChange} />);
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.getDOMNode().style).toHaveProperty("color", "red");
-  // });
+    const textarea = screen.getByTestId("textarea");
+    await userEvent.type(textarea, " additional text");
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts fontSize", () => {
-  //   const wrapper = mount(
-  //     <Textarea
-  //       placeholder="Add comment"
-  //       // @ts-expect-error TS(2708): Cannot use namespace 'jest' as a value.
-  //       onChange={jest.fn()}
-  //       value="value"
-  //       className="test"
-  //       fontSize={12}
-  //     />
-  //   );
+    expect(handleChange).toHaveBeenCalled();
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("fontSize")).toEqual(12);
-  // });
+  it("displays placeholder correctly", () => {
+    render(
+      <Textarea {...defaultProps} value="" placeholder="Test placeholder" />,
+    );
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts heightTextArea", () => {
-  //   const wrapper = mount(
-  //     <Textarea
-  //       placeholder="Add comment"
-  //       // @ts-expect-error TS(2708): Cannot use namespace 'jest' as a value.
-  //       onChange={jest.fn()}
-  //       value="value"
-  //       className="test"
-  //       heightTextArea="54px"
-  //     />
-  //   );
+    expect(screen.getByPlaceholderText("Test placeholder")).toBeInTheDocument();
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("heightTextArea")).toEqual("54px");
-  // });
+  it("handles disabled state", () => {
+    render(<Textarea {...defaultProps} isDisabled />);
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts copyInfoText", () => {
-  //   const wrapper = mount(
-  //     <Textarea
-  //       placeholder="Add comment"
-  //       // @ts-expect-error TS(2708): Cannot use namespace 'jest' as a value.
-  //       onChange={jest.fn()}
-  //       value="value"
-  //       className="test"
-  //       copyInfoText='text was copied'
-  //     />
-  //   );
+    const textarea = screen.getByTestId("textarea");
+    expect(textarea).toBeDisabled();
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("copyInfoText")).toEqual('text was copied');
-  // });
+  it("handles readonly state", () => {
+    render(<Textarea {...defaultProps} isReadOnly />);
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts isJSONField", () => {
-  //   const wrapper = mount(
-  //     <Textarea
-  //       placeholder="Add comment"
-  //       // @ts-expect-error TS(2708): Cannot use namespace 'jest' as a value.
-  //       onChange={jest.fn()}
-  //       value="value"
-  //       className="test"
-  //       isJSONField={true}
-  //     />
-  //   );
+    const textarea = screen.getByTestId("textarea");
+    expect(textarea).toHaveAttribute("readonly");
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("isJSONField")).toEqual(true);
-  // });
+  it("shows copy icon when enableCopy is true", () => {
+    render(<Textarea {...defaultProps} enableCopy />);
+
+    const copyIcon = screen.getByTestId("icon-button");
+    expect(copyIcon).toBeInTheDocument();
+  });
+
+  it("handles JSON formatting when isJSONField is true", () => {
+    const jsonValue = JSON.stringify({ test: "value" });
+    render(<Textarea {...defaultProps} value={jsonValue} isJSONField />);
+
+    const textarea = screen.getByTestId("textarea");
+    const expectedValue = JSON.stringify({ test: "value" }, null, 2);
+    expect(textarea).toHaveValue(expectedValue);
+  });
+
+  it("applies custom font size", () => {
+    const { container } = render(<Textarea {...defaultProps} fontSize={16} />);
+
+    const textarea = container.querySelector("[data-testid='textarea']");
+    expect(textarea).toHaveStyle({ fontSize: "16px" });
+  });
 });

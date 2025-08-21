@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,7 +33,6 @@ import { TextInput } from "@docspace/shared/components/text-input";
 import { Button } from "@docspace/shared/components/button";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { Checkbox } from "@docspace/shared/components/checkbox";
-import { Box } from "@docspace/shared/components/box";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 
 import { removeEmojiCharacters } from "SRC_DIR/helpers/utils";
@@ -62,6 +61,12 @@ const Dialog = ({
   const [isDisabled, setIsDisabled] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
+
+  // Generate test ID prefix based on dialog title
+  const getTestIdPrefix = useCallback(() => {
+    if (!title) return "dialog";
+    return title.toLowerCase().replace(/\s+/g, "_");
+  }, [title]);
 
   const onCancelAction = useCallback(
     (e) => {
@@ -157,7 +162,7 @@ const Dialog = ({
           hasError={isError}
           labelVisible={false}
           errorMessageWidth="100%"
-          errorMessage={t("Files:ContainsSpecCharacter")}
+          errorMessage={t("Common:ContainsSpecCharacter")}
           removeMargin
         >
           <TextInput
@@ -172,27 +177,37 @@ const Dialog = ({
             onFocus={onFocus}
             isDisabled={isDisabled}
             maxLength={165}
+            testId={`${getTestIdPrefix()}_text_input`}
           />
         </FieldContainer>
-        {isCreateDialog && extension && (
-          <Box displayProp="flex" alignItems="center" paddingProp="16px 0 0">
+        {isCreateDialog && extension ? (
+          <div
+            style={{
+              boxSizing: "border-box",
+              display: "flex",
+              alignItems: "center",
+              padding: "16px 0 0",
+            }}
+          >
             <Checkbox
               className="dont-ask-again"
               label={t("Common:DontAskAgain")}
               isChecked={isChecked}
               onChange={onChangeCheckbox}
+              dataTestId={`${getTestIdPrefix()}_dont_ask_again`}
             />
-          </Box>
-        )}
+          </div>
+        ) : null}
 
-        {options && (
+        {options ? (
           <ComboBox
             style={{ marginTop: "16px" }}
             options={options}
             selectedOption={selectedOption}
             onSelect={onSelect}
+            dataTestId={`${getTestIdPrefix()}_combobox`}
           />
-        )}
+        ) : null}
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -206,6 +221,7 @@ const Dialog = ({
           isLoading={isDisabled}
           isDisabled={isDisabled || isError}
           onClick={onSaveAction}
+          testId={`${getTestIdPrefix()}_save_button`}
         />
         <Button
           className="cancel-button"
@@ -215,6 +231,7 @@ const Dialog = ({
           scale
           isDisabled={isDisabled}
           onClick={onCancelAction}
+          testId={`${getTestIdPrefix()}_cancel_button`}
         />
       </ModalDialog.Footer>
     </ModalDialog>

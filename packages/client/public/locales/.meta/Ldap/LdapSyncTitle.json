@@ -1,0 +1,250 @@
+{
+  "key_path": "LdapSyncTitle",
+  "content": "Sync LDAP data",
+  "content_en_sha1_hash": "eacc43f7e59fe313e63f3f6f031fcc75dac16efb",
+  "created_at": "2025-05-19T21:30:54.316Z",
+  "updated_at": "2025-08-11T18:11:59.196Z",
+  "comment": {
+    "text": "This translation key is used for the title \"Sync LDAP data\" and appears as a page title in the Portal Settings. It provides context for users navigating to the synchronization settings within LDAP integration.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:57.662Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
+      "line_number": 225,
+      "context": "case \"ManagementCategoryDataManagement\":\n return t(\"ManagementCategoryDataManagement\");\n case \"LdapSettings\":\n return t(\"Ldap:LdapSettings\");\n case \"LdapSyncTitle\":\n return t(\"Ldap:LdapSyncTitle\");\n case \"Common:RestoreBackup\":\n return t(\"Common:RestoreBackup\");\n case \"PortalDeletion\":\n return t(\"PortalDeletion\", { productName: t(\"Common:ProductName\") });\n case \"Common:DeveloperTools\":",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/LdapMobileView.js",
+      "line_number": 61,
+      "context": "onClickLink={onClickLink}\n disabled={!isLdapEnabled}\n dataTestId=\"ldap_settings\"\n />\n <MobileCategoryWrapper\n title={t(\"Ldap:LdapSyncTitle\")}\n subtitle={t(\"LdapMobileSyncDescription\")}\n url=\"/portal-settings/integration/ldap/sync-data\"\n withPaidBadge={!isLDAPAvailable}\n badgeLabel={t(\"Common:Paid\")}\n onClickLink={onClickLink}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/SyncContainer.js",
+      "line_number": 68,
+      "context": "if (newUrl) navigate(newUrl);\n }\n };\n \n React.useEffect(() => {\n isMobileView && setDocumentTitle(t(\"Ldap:LdapSyncTitle\"));\n onCheckView();\n window.addEventListener(\"resize\", onCheckView);\n \n return () => window.removeEventListener(\"resize\", onCheckView);\n }, []);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/SyncContainer.js",
+      "line_number": 68,
+      "context": "if (newUrl) navigate(newUrl);\n }\n };\n \n React.useEffect(() => {\n isMobileView && setDocumentTitle(t(\"Ldap:LdapSyncTitle\"));\n onCheckView();\n window.addEventListener(\"resize\", onCheckView);\n \n return () => window.removeEventListener(\"resize\", onCheckView);\n }, []);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 340,
+      "context": "{\n id: \"portal-settings_catalog-ldap-sync-data\",\n key: \"4-0-1\",\n icon: \"\",\n link: \"sync-data\",\n tKey: \"Ldap:LdapSyncTitle\",\n },\n ],\n },\n {\n id: \"portal-settings_catalog-third-party-services\",",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'LDAP məlumatlarını sinxronizasiya edin' is a very literal translation. A more natural and idiomatic translation would be 'LDAP məlumatlarını yeniləyin' or 'LDAP məlumatlarını uyğunlaşdırın'. The term 'sinkronizasiya edin' feels somewhat formal and less commonly used in this context.",
+          "suggestion": "LDAP məlumatlarını yeniləyin"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ຊິງຂໍ້ມູນ LDAP' is a literal transliteration of 'Sync data LDAP' and doesn't accurately convey the meaning of 'Sync LDAP data'. 'ຊິງ' implies taking or grabbing, which isn't the intended action. A more accurate translation would focus on synchronization.",
+          "suggestion": "ອັບເດດຂໍ້ມູນ LDAP"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Sinhala word 'සමමුහුර්ත' (samamuhuwrta) is technically correct but a more natural and common term for 'sync' in this context might be 'අsynchronize' (asinkronize) or 'එකතු කිරීම' (ekathu kirima).",
+          "suggestion": "Consider using 'එල්ඩීඒපී දත්ත එකතු කිරීම' (Ldap data ekathu kirima) or 'එල්ඩීඒපී දත්ත අsynchronize කිරීම'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

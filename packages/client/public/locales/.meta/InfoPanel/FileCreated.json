@@ -1,0 +1,261 @@
+{
+  "key_path": "FileCreated",
+  "content": "File created.",
+  "content_en_sha1_hash": "1cbf9d9e44da87617f2a6b43738a8655e9a3d7fb",
+  "created_at": "2025-05-19T21:30:54.798Z",
+  "updated_at": "2025-08-04T07:30:01.218Z",
+  "comment": {
+    "text": "The \"FileCreated\" translation key is used to display a message indicating when a file has been created. It appears in various contexts throughout the application, such as on buttons and dialogues related to file management. Translators should focus on localizing this phrase to provide a clear and intuitive experience for users.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:06.848Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 51,
+      "context": "const count = feed.related.length + 1;\n \n const getFeedTranslation = (): React.ReactNode => {\n switch (feed.action.key) {\n case FeedActionKeys.FileCreated:\n return t(\"InfoPanel:FileCreated\");\n case FeedActionKeys.FileUploaded:\n if (hasRelatedItems)\n return t(\"InfoPanel:FileUploadedCount\", {\n count,\n });",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
+      "line_number": 45,
+      "context": ") => {\n const count = feed.related.length + 1;\n \n switch (feed.action.key) {\n case FeedActionKeys.FileCreated:\n return t(\"InfoPanel:FileCreated\");\n case FeedActionKeys.FileUploaded:\n if (hasRelatedItems)\n return t(\"InfoPanel:FileUploadedCount\", {\n count,\n });",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/Webhooks.helpers.ts",
+      "line_number": 46,
+      "context": "return t(\"GroupCreated\");\n case WebhookTriggers.GroupUpdated:\n return t(\"GroupUpdated\");\n case WebhookTriggers.GroupDeleted:\n return t(\"GroupDeleted\");\n case WebhookTriggers.FileCreated:\n return t(\"FileCreated\");\n case WebhookTriggers.FileUploaded:\n return t(\"FileUploaded\");\n case WebhookTriggers.FileUpdated:\n return t(\"FileUpdated\");",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Fails ir izveidots.' is grammatically correct but lacks the nuance of the English 'File created.' A more natural and commonly used translation would be 'Fails izveidēts.'",
+          "suggestion": "Fails izveidēts."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Fişier a fost creat.\" is a literal translation and doesn't sound natural in Romanian. The correct and more natural phrasing would be \"Fișierul a fost creat.\"",
+          "suggestion": "Fișierul a fost creat."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'ගොනුව සාදා ගන්නා ලදි' is too verbose and doesn't accurately reflect the simplicity of 'File created.'. It implies a continuous or ongoing creation process, which is not intended.",
+          "suggestion": "ගොනුව නිර්මාණය කරන ලදි."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "A more direct and concise translation would be preferred.",
+          "suggestion": "ගොනුව නිර්මිතයි."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Súbor vytvorený' is a literal translation, but a more natural Slovak phrasing would be 'Vytvorený súbor.' or 'Nový súbor vytvorený.'  'Súbor vytvorený' sounds slightly awkward.",
+          "suggestion": "Vytvorený súbor."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Датотека је креирана.' is a literal translation of 'File is created'. A more natural and idiomatic Serbian (Cyrillic) translation would be 'Направљена је датотека.' or 'Датотека је снимљена.'.",
+          "suggestion": "Направљена је датотека."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Đã tạo các tập tin' (Created the files) is too general. The English 'File created' refers to a single file being created, not multiple.",
+          "suggestion": "Đã tạo tập tin."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

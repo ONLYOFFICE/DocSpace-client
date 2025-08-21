@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useCallback, useRef } from "react";
-import { useTheme } from "styled-components";
+import axios from "axios";
+import React, { useState, useCallback, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
@@ -53,11 +53,13 @@ import { TUser } from "../../api/people/types";
 import { TGroup } from "../../api/groups/types";
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
 import { Text } from "../../components/text";
-import { Box } from "../../components/box";
 import { globalColors } from "../../themes";
+import { isNextImage } from "../../utils/typeGuards";
+import { toastr } from "../../components/toast";
+import { useTheme } from "../../hooks/useTheme";
 
 import { PeopleSelectorProps } from "./PeopleSelector.types";
-import { StyledSendClockIcon } from "./PeopleSelector.styled";
+import StyledSendClockIcon from "./components/SendClockIcon";
 
 const PEOPLE_TAB_ID = "0";
 const GROUP_TAB_ID = "1";
@@ -91,7 +93,11 @@ const toListItem = (
 
     const role = getUserType(item);
 
-    const userAvatar = hasAvatar ? avatar : DefaultUserPhoto;
+    const defaultUserPhotoURL = isNextImage(DefaultUserPhoto)
+      ? DefaultUserPhoto.src
+      : DefaultUserPhoto;
+
+    const userAvatar = hasAvatar ? avatar : defaultUserPhotoURL;
 
     const isInvited = checkIfUserInvited
       ? checkIfUserInvited(item)
@@ -137,6 +143,7 @@ const toListItem = (
 
     name: groupName,
     shared,
+    isSystem,
   } = item;
 
   const isInvited = disableInvitedUsers?.includes(id) || (isRoom && shared);
@@ -149,6 +156,7 @@ const toListItem = (
     label: groupName,
     disabledText,
     isDisabled: isInvited,
+    isSystem,
   };
 };
 
@@ -172,6 +180,11 @@ const PeopleSelector = ({
 
   filterUserId,
   currentUserId,
+
+  // Accessibility attributes
+  "aria-label": ariaLabel,
+  "data-selector-type": dataSelectorType,
+  "data-test-id": dataTestId,
   withOutCurrentAuthorizedUser,
 
   withFooterCheckbox,
@@ -211,10 +224,14 @@ const PeopleSelector = ({
   onClose,
   withoutBackground,
   withBlur,
+  setActiveTab,
+  injectedElement,
+  alwaysShowFooter = false,
+  onlyRoomMembers,
 }: PeopleSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
   const [activeTabId, setActiveTabId] = useState<string>(
     isGuestsOnly ? GUESTS_TAB_ID : isGroupsOnly ? GROUP_TAB_ID : PEOPLE_TAB_ID,
@@ -225,21 +242,28 @@ const PeopleSelector = ({
   const [total, setTotal] = useState<number>(-1);
   const [hasNextPage, setHasNextPage] = useState(true);
   const [isNextPageLoading, setIsNextPageLoading] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<TSelectorItem | null>(null);
+  const [selectedItems, setSelectedItems] = useState<TSelectorItem[]>([]);
   const isFirstLoadRef = useRef(true);
   const afterSearch = useRef(false);
   const totalRef = useRef(0);
   const searchTab = useRef(PEOPLE_TAB_ID);
+  const abortControllerRef = useRef(new AbortController());
+
+  useEffect(() => () => abortControllerRef.current.abort(), []);
 
   const onSelect = (
     item: TSelectorItem,
     isDoubleClick: boolean,
     doubleClickCallback: () => void,
   ) => {
-    setSelectedItem((el) => {
-      if (el?.id === item.id) return null;
+    setSelectedItems((prevItems) => {
+      if (!isMultiSelect) {
+        return item.isSelected ? [] : [item];
+      }
 
-      return item;
+      return item.isSelected
+        ? prevItems.filter((p) => p.id !== item.id)
+        : [...prevItems, item];
     });
     if (isDoubleClick) {
       doubleClickCallback();
@@ -276,95 +300,119 @@ const PeopleSelector = ({
 
   const loadNextPage = useCallback(
     async (startIndex: number) => {
-      if (searchTab.current !== activeTabId && searchValue) {
-        setSearchValue("");
-        searchTab.current = activeTabId;
-        return;
-      }
-      const pageCount = 100;
+      try {
+        if (searchTab.current !== activeTabId && searchValue) {
+          setSearchValue("");
+          searchTab.current = activeTabId;
+          return;
+        }
+        const pageCount = 100;
 
-      setIsNextPageLoading(true);
+        setIsNextPageLoading(true);
 
-      let searchArea = AccountsSearchArea.People;
+        let searchArea = AccountsSearchArea.People;
 
-      if (withGroups || withGuests) {
-        searchArea =
-          activeTabId !== GROUP_TAB_ID
-            ? AccountsSearchArea.People
-            : AccountsSearchArea.Groups;
-      }
+        if (withGroups || withGuests) {
+          searchArea =
+            activeTabId !== GROUP_TAB_ID
+              ? AccountsSearchArea.People
+              : AccountsSearchArea.Groups;
+        }
 
-      const currentFilter: Filter =
-        typeof filter === "function"
-          ? filter()
-          : (filter ?? Filter.getDefault());
+        const currentFilter: Filter =
+          typeof filter === "function"
+            ? filter()
+            : (filter ?? Filter.getDefault());
 
-      currentFilter.page = startIndex / pageCount;
-      currentFilter.pageCount = pageCount;
+        currentFilter.page = startIndex / pageCount;
+        currentFilter.pageCount = pageCount;
 
-      currentFilter.search = searchValue || "";
+        currentFilter.search = searchValue || "";
 
-      if (activeTabId === GUESTS_TAB_ID) {
-        currentFilter.area = "guests";
-      } else if (activeTabId === PEOPLE_TAB_ID) {
-        currentFilter.area = "people";
-      }
+        if (activeTabId === GUESTS_TAB_ID) {
+          currentFilter.area = "guests";
+        } else if (activeTabId === PEOPLE_TAB_ID) {
+          currentFilter.area = "people";
+        }
 
-      const response = !roomId
-        ? await getUserList(currentFilter)
-        : await getMembersList(searchArea, roomId, currentFilter);
+        if (onlyRoomMembers) {
+          currentFilter.includeShared = true;
+        }
 
-      let totalDifferent = startIndex ? response.total - totalRef.current : 0;
+        abortControllerRef.current.abort();
+        abortControllerRef.current = new AbortController();
 
-      const data = response.items
-        .filter((item) => {
-          if (excludeItems && excludeItems.includes(item.id)) {
-            totalDifferent += 1;
-            return false;
-          }
-          return true;
-        })
-        .map((item) =>
-          toListItem(
-            item,
-            t,
-            disableDisabledUsers,
-            disableInvitedUsers,
-            !!roomId,
-            checkIfUserInvited,
-          ),
-        );
+        const response = !roomId
+          ? await getUserList(currentFilter, abortControllerRef.current?.signal)
+          : await getMembersList(
+              searchArea,
+              roomId,
+              currentFilter,
+              abortControllerRef.current?.signal,
+            );
 
-      const newTotal = withOutCurrentAuthorizedUser
-        ? response.total - totalDifferent - 1
-        : response.total - totalDifferent;
+        let totalDifferent = startIndex ? response.total - totalRef.current : 0;
 
-      if (isFirstLoadRef.current) {
-        const newItems = withOutCurrentAuthorizedUser
-          ? removeCurrentUserFromList(data)
-          : moveCurrentUserToTopOfList(data);
+        const data = response.items
+          .filter((item) => {
+            if (excludeItems && excludeItems.includes(item.id)) {
+              totalDifferent += 1;
+              return false;
+            }
+            return true;
+          })
+          .map((item) =>
+            toListItem(
+              item,
+              t,
+              disableDisabledUsers,
+              disableInvitedUsers,
+              !!roomId,
+              checkIfUserInvited,
+            ),
+          );
 
-        setHasNextPage(newItems.length < newTotal);
-        setItemsList(newItems);
-      } else {
-        setItemsList((i) => {
-          const tempItems = [...i, ...data];
+        const newTotal = withOutCurrentAuthorizedUser
+          ? response.total - totalDifferent - 1
+          : response.total - totalDifferent;
 
+        if (isFirstLoadRef.current) {
           const newItems = withOutCurrentAuthorizedUser
-            ? removeCurrentUserFromList(tempItems)
-            : moveCurrentUserToTopOfList(tempItems);
+            ? removeCurrentUserFromList(data)
+            : moveCurrentUserToTopOfList(data);
 
           setHasNextPage(newItems.length < newTotal);
+          setItemsList(newItems);
+        } else {
+          setItemsList((i) => {
+            const tempItems = [...i, ...data];
 
-          return newItems;
-        });
+            const ids = new Set();
+            const filteredTempItems = tempItems.filter(
+              (item) => !ids.has(item.id) && ids.add(item.id),
+            );
+
+            const newItems = withOutCurrentAuthorizedUser
+              ? removeCurrentUserFromList(filteredTempItems)
+              : moveCurrentUserToTopOfList(filteredTempItems);
+
+            setHasNextPage(newItems.length < newTotal);
+
+            return newItems;
+          });
+        }
+
+        setTotal(newTotal);
+        totalRef.current = newTotal;
+
+        setIsNextPageLoading(false);
+        isFirstLoadRef.current = false;
+      } catch (error) {
+        if (axios.isCancel(error)) return;
+
+        console.error(error);
+        toastr.error(error as Error);
       }
-
-      setTotal(newTotal);
-      totalRef.current = newTotal;
-
-      setIsNextPageLoading(false);
-      isFirstLoadRef.current = false;
     },
     [
       activeTabId,
@@ -381,6 +429,7 @@ const PeopleSelector = ({
       withGroups,
       withGuests,
       withOutCurrentAuthorizedUser,
+      onlyRoomMembers,
     ],
   );
 
@@ -418,7 +467,7 @@ const PeopleSelector = ({
     [resetSelectorList],
   );
 
-  const emptyScreenImage = theme.isBase
+  const emptyScreenImage = isBase
     ? EmptyScreenPersonsSvgUrl
     : EmptyScreenPersonsSvgDarkUrl;
 
@@ -476,24 +525,34 @@ const PeopleSelector = ({
     return (
       <div
         style={{ width: "100%", overflow: "hidden", marginInlineEnd: "16px" }}
+        aria-label={`${isGroup ? "Group" : "User"}: ${label}${email ? `, ${email}` : ""}`}
       >
-        <Box displayProp="flex" alignItems="center" gapProp="8px">
+        <div
+          style={{
+            display: "flex",
+            boxSizing: "border-box",
+            alignItems: "center",
+            gap: "8px",
+          }}
+        >
           <Text
-            className="label"
+            className="selector-item_label"
             fontWeight={600}
             fontSize="14px"
             noSelect
             truncate
+            title={label}
+            aria-label={label}
             dir="auto"
           >
             {label}
           </Text>
-          {status === EmployeeStatus.Pending && <StyledSendClockIcon />}
-        </Box>
-        {!isGroup && (
+          {status === EmployeeStatus.Pending ? <StyledSendClockIcon /> : null}
+        </div>
+        {!isGroup ? (
           <div style={{ display: "flex" }}>
             <Text
-              className="label"
+              className="selector-item_label"
               fontWeight={400}
               fontSize="12px"
               noSelect
@@ -504,18 +563,19 @@ const PeopleSelector = ({
               {`${userType} | ${email}`}
             </Text>
           </div>
-        )}
+        ) : null}
       </div>
     );
   };
 
   const changeActiveTab = useCallback(
     (tab: number | string) => {
+      if (setActiveTab) setActiveTab(`${tab}`);
       setActiveTabId(`${tab}`);
       onSearch("");
       resetSelectorList();
     },
-    [onSearch, resetSelectorList],
+    [onSearch, resetSelectorList, setActiveTab],
   );
 
   const withTabsProps: TSelectorTabs =
@@ -577,14 +637,21 @@ const PeopleSelector = ({
       {...withAccessRightsProps}
       {...withAside}
       id={id}
-      alwaysShowFooter={itemsList.length !== 0 || Boolean(searchValue)}
+      injectedElement={injectedElement}
+      alwaysShowFooter={
+        itemsList.length !== 0 || Boolean(searchValue) || alwaysShowFooter
+      }
       className={className}
       style={style}
       renderCustomItem={renderCustomItem}
+      aria-label={ariaLabel || "People Selector"}
+      data-selector-type={dataSelectorType || "people"}
+      dataTestId={dataTestId || "people-selector"}
       items={itemsList}
       submitButtonLabel={submitButtonLabel || t("Common:SelectAction")}
       onSubmit={onSubmit}
-      disableSubmitButton={disableSubmitButton || !selectedItem}
+      disableSubmitButton={disableSubmitButton || !selectedItems.length}
+      selectedItem={isMultiSelect ? null : selectedItems[0]}
       submitButtonId={submitButtonId}
       emptyScreenImage={emptyScreenImage}
       emptyScreenHeader={

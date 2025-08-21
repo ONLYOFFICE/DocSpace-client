@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,12 +28,13 @@ import { useLayoutEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
+import type { TFunction } from "i18next";
 import { getStepsData } from "./Stepper";
 
 import SelectFileLoader from "../sub-components/SelectFileLoader";
 import StepLayout from "../sub-components/StepLayout";
 
-import { InjectedWorkspaceProps, WorkspaceProps, TFunciton } from "../types";
+import { InjectedWorkspaceProps, WorkspaceProps } from "../types";
 
 const OnlyofficeWorkspace = (props: WorkspaceProps) => {
   const {
@@ -45,15 +46,16 @@ const OnlyofficeWorkspace = (props: WorkspaceProps) => {
     migrationPhase,
     isMigrationInit,
     setIsMigrationInit,
+    logoText,
   } = props as InjectedWorkspaceProps;
 
-  const { t, ready }: { t: TFunciton; ready: boolean } = useTranslation([
+  const { t, ready }: { t: TFunction; ready: boolean } = useTranslation([
     "Common",
     "SMTPSettings",
     "Settings",
   ]);
 
-  const StepsData = getStepsData(t, filteredUsers.length === 0);
+  const StepsData = getStepsData(t, filteredUsers.length === 0, logoText);
 
   useLayoutEffect(() => {
     if (migratingWorkspace === "Workspace" && !isMigrationInit) {
@@ -78,8 +80,9 @@ const OnlyofficeWorkspace = (props: WorkspaceProps) => {
       step={step}
       totalSteps={StepsData.length}
       title={StepsData[step - 1].title}
-      description={StepsData[step - 1].description}
+      description={StepsData[step - 1].description as string}
       component={StepsData[step - 1].component}
+      logoText={logoText}
     />
   );
 };
@@ -96,7 +99,7 @@ export const Component = inject<TStore>(
       isMigrationInit,
       setIsMigrationInit,
     } = importAccountsStore;
-    const { theme } = settingsStore;
+    const { theme, logoText } = settingsStore;
 
     return {
       theme,
@@ -108,6 +111,7 @@ export const Component = inject<TStore>(
       migratingWorkspace,
       isMigrationInit,
       setIsMigrationInit,
+      logoText,
     };
   },
 )(observer(OnlyofficeWorkspace));

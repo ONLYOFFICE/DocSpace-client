@@ -1,0 +1,283 @@
+{
+  "key_path": "DeleteWebhookForeverQuestion",
+  "content": "Delete Webhook forever?",
+  "content_en_sha1_hash": "057bacee5b2c677fca9becbc05530edc658ca25d",
+  "created_at": "2025-05-19T21:30:49.685Z",
+  "updated_at": "2025-08-04T07:30:01.465Z",
+  "comment": {
+    "text": "The \"DeleteWebhookForeverQuestion\" translation key is used to provide a notification before deleting a webhook permanently. This message appears in a dialog box as a prompt to confirm deletion of the webhook and asks if they wish to delete it forever.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:08.242Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/index.js",
+      "line_number": 198,
+      "context": "additionalId=\"settings-webhook\"\n />\n <DeleteWebhookDialog\n visible={isDeleteOpened}\n onClose={closeDeleteModal}\n header={t(\"DeleteWebhookForeverQuestion\")}\n handleSubmit={handleWebhookDelete}\n />\n </MainWrapper>\n </Suspense>\n );",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Οριστική διαγραφή Webhook;' while understandable, is a bit literal and doesn't flow naturally in Greek. 'Οριστική' strongly implies finality, which might not be the intended nuance.",
+          "suggestion": "Διαγραφή Webhook;"
+        },
+        {
+          "type": "formatting",
+          "description": "The semicolon at the end of the translation feels slightly unnatural in this context. It's more common to end questions with a question mark in Greek.",
+          "suggestion": "Διαγραφή Webhook;"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ջնջե՞լ Webhook-ը ընդմիշտ:' while conveying the general meaning, is a bit literal. A more natural and common phrasing would be something like 'Մշտական ջնջել Webhook-ը?' or 'Ջնջել Webhook-ը հավերժականորեն?'",
+          "suggestion": "Մշտական ջնջել Webhook-ը?"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The term 'Webhook' is capitalized, but the Lao translation doesn't consistently reflect that capitalization. While not strictly incorrect, maintaining consistency would improve professionalism.",
+          "suggestion": "Consider capitalizing 'Webhook' in the Lao translation: 'ລຶບ Webhook ອອກຖາວອນບໍ?' or alternatively, adapting the language to use a Lao equivalent for 'Webhook' if appropriate for the context."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Vai neatgriezeniski izdzēst tīmekļa aizķeri?' is not a natural or accurate translation of 'Delete Webhook forever?'. 'Tīmekļa aizķeri' literally translates to 'web lock' or 'web barrier,' which is not what a webhook is.",
+          "suggestion": "Vai vēlaties neatgriezeniski izdzēst tīmekļa funkciju?"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'neatgriezeniski' (irreversibly) while technically correct, sounds overly formal and technical for this context.  A more user-friendly phrasing would improve clarity.",
+          "suggestion": "Vai vēlaties izdzēst tīmekļa funkciju?"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Na pewno chcesz usunąć webhook na zawsze?\" is a more verbose and slightly less direct translation of \"Delete Webhook forever?\". A more literal and concise translation would better reflect the original intent.",
+          "suggestion": "Usuń webhook na zawsze?"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Doriți să ștergeți Webhook-ul pentru totdeauna?\" is a bit too formal for a confirmation prompt. 'Webhook-ul' is technically correct, but using just 'Webhook' would be more natural in this context. Also, 'Doriți' is too formal; 'Vrei' would be more appropriate.",
+          "suggestion": "Vrei să ștergi Webhook-ul definitiv?"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'webhook' is misspelled. It should be 'వెబ్‌హుక్' (webhook in Sinhala script).",
+          "suggestion": "Replace 'webhook' with 'వెబ్‌హుక్'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'forever' is not accurately translated. 'sadahtama makanna' implies deleting completely or entirely, but 'forever' has a stronger sense of permanence. A more accurate translation might consider a term like 'kalapriya' (permanently) or phrasing the question differently to convey the intended meaning.",
+          "suggestion": "Consider using 'kalapriya' or rephrase the question.  Example: 'webhook kalapriya makanna?'"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Обриши webhook заувек?\" while understandable, doesn't perfectly capture the nuance of \"Delete Webhook forever?\". \"Обриши\" implies a forceful deletion, while \"Delete\" is more neutral. A more accurate translation might emphasize the permanence.",
+          "suggestion": "Избриши webhook засекад?"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"zauvek\" translates to \"forever\", a more natural and common phrasing in Serbian for a confirmation question like this would be \"trajno\" (permanent). \"Obriši webhook trajno?\" sounds more conversational and aligns better with the tone of a confirmation dialog.",
+          "suggestion": "Obriši webhook trajno?"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Bạn muốn xóa webhook vĩnh viễn?\" is too literal and could be improved for naturalness. While technically correct, it sounds slightly awkward in Vietnamese. A more natural phrasing would be something like \"Bạn có chắc chắn muốn xóa webhook này vĩnh viễn?\" or \"Bạn muốn xóa webhook này vĩnh viễn?\"",
+          "suggestion": "Bạn có chắc chắn muốn xóa webhook này vĩnh viễn?"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

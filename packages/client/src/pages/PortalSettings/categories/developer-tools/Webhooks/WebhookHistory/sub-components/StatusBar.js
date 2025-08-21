@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -140,9 +140,9 @@ const StatusBar = (props) => {
         ""
       )}
       {SelectedStatuses}
-      {((historyFilters.deliveryDate !== null &&
+      {(historyFilters.deliveryDate !== null &&
         historyFilters.status.length > 0) ||
-        historyFilters.status.length > 1) && (
+      historyFilters.status.length > 1 ? (
         <Link
           type="action"
           fontWeight={600}
@@ -153,7 +153,7 @@ const StatusBar = (props) => {
         >
           Clear all
         </Link>
-      )}
+      ) : null}
     </StatusBarWrapper>
   );
 };

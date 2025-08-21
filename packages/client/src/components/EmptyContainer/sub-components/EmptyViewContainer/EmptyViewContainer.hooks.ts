@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,8 +26,10 @@
 
 import { useTheme } from "styled-components";
 import { useMemo, useCallback } from "react";
-import { useNavigate, LinkProps } from "react-router-dom";
+import { useNavigate, LinkProps } from "react-router";
+import { isMobile } from "react-device-detect";
 
+import { toastr } from "@docspace/shared/components/toast";
 import {
   Events,
   FileExtensions,
@@ -41,9 +43,8 @@ import type { TTranslation } from "@docspace/shared/types";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
+import { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
 
-import { isMobile } from "react-device-detect";
-import { toastr } from "@docspace/shared/components/toast";
 import {
   getDescription,
   getIcon,
@@ -69,6 +70,7 @@ export const useEmptyView = (
     isArchiveFolderRoot,
     rootFolderType,
     isPublicRoom,
+    security,
   }: EmptyViewContainerProps,
   t: TTranslation,
 ) => {
@@ -86,6 +88,7 @@ export const useEmptyView = (
       isRootEmptyPage,
       rootFolderType,
       isPublicRoom,
+      security,
     );
     const title = getTitle(
       type,
@@ -155,6 +158,7 @@ export const useOptions = (
     inviteUser: inviteRootUser,
     isVisitor,
     isFrame,
+    logoText,
   }: EmptyViewContainerProps,
   t: TTranslation,
 ) => {
@@ -216,7 +220,7 @@ export const useOptions = (
   const openInfoPanel = useCallback(() => {
     if (!isVisibleInfoPanel) setVisibleInfoPanel?.(true);
 
-    setViewInfoPanel?.("info_members");
+    setViewInfoPanel?.(InfoPanelView.infoMembers);
   }, [setViewInfoPanel, setVisibleInfoPanel, isVisibleInfoPanel]);
 
   const onUploadAction = useCallback((uploadType: UploadType) => {
@@ -251,7 +255,7 @@ export const useOptions = (
       const edit = extension === FileExtensions.PDF;
 
       if (isMobile && edit && t) {
-        toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+        toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
         return;
       }
 
@@ -300,6 +304,7 @@ export const useOptions = (
           onGoToPersonal,
           onGoToShared,
         },
+        logoText,
         isVisitor,
         isFrame,
       ),
@@ -327,6 +332,7 @@ export const useOptions = (
       onGoToShared,
       isVisitor,
       isFrame,
+      logoText,
     ],
   );
 

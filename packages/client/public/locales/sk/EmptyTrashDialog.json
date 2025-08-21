@@ -1,8 +1,6 @@
 {
   "DeleteForeverButton": "Odstrániť navždy",
-  "DeleteForeverNote": "Všetky položky z koša budú navždy odstránené. Nebudete ich môcť obnoviť .",
-  "DeleteForeverNoteArchive": "Všetky položky z priečinku Archivované budú navždy vymazané. Nebudete ich môcť obnoviť.",
+  "DeleteForeverNote": "Všetky položky z časti {{sectionName}} budú navždy vymazané. Nebude možné ich obnoviť.",
   "DeleteForeverTitle": "Odstrániť navždy?",
-  "SuccessEmptyArchived": "Priečinok Archivované bol vyprázdnený",
-  "SuccessEmptyTrash": "Kôš bol vyprázdnený"
+  "SuccessEmptyAction": "Časť {{sectionName}} bola vyprázdnená"
 }

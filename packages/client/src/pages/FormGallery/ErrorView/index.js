@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,7 +29,7 @@ import ErrorImageSvgUrl from "PUBLIC_DIR/images/errors/error500.svg?url";
 import { isMobile as isMobileUtils } from "@docspace/shared/utils";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import config from "PACKAGE_FILE";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -78,6 +78,7 @@ const ErrorView = ({
           scale={isMobile}
           size={!isMobile ? "small" : "normal"}
           onClick={onGoBack}
+          testId="form_gallery_error_view_back_button"
         />
       }
     />

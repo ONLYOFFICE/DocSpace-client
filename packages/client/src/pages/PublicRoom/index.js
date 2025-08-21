@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,16 +26,16 @@
 
 import React, { useEffect } from "react";
 import { observer, inject } from "mobx-react";
-import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
+import { useNavigate, useLocation, useSearchParams } from "react-router";
 import Section from "@docspace/shared/components/section";
 import { Loader } from "@docspace/shared/components/loader";
 import { ValidationStatus } from "@docspace/shared/enums";
 import SectionWrapper from "SRC_DIR/components/Section";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import RoomPassword from "./sub-components/RoomPassword";
-import RoomErrors from "./sub-components/RoomErrors";
+import { PublicRoomError } from "@docspace/shared/pages/PublicRoom";
 
 import PublicRoomPage from "./PublicRoomPage";
+import RoomPassword from "./sub-components/RoomPassword";
 
 const PublicRoom = (props) => {
   const {
@@ -68,14 +68,15 @@ const PublicRoom = (props) => {
     const filterObj = FilesFilter.getFilter(window.location);
 
     if (filterObj?.folder && filterObj?.folder !== "@my") {
-      const url = `${location.pathname}?key=${key}&${filterObj.toUrlParams()}`;
+      const url = `${location.pathname}?${filterObj.toUrlParams()}`;
 
       navigate(url);
     } else {
       const newFilter = FilesFilter.getDefault();
       newFilter.folder = roomId;
+      newFilter.key = key;
 
-      const url = `${location.pathname}?key=${key}&${newFilter.toUrlParams()}`;
+      const url = `${location.pathname}?${newFilter.toUrlParams()}`;
 
       navigate(url);
     }
@@ -95,23 +96,25 @@ const PublicRoom = (props) => {
     );
   };
 
-  const renderPage = () => {
+  useEffect(() => {
     if (
       roomStatus === ValidationStatus.Invalid ||
       roomStatus === ValidationStatus.Expired
-    )
+    ) {
       setClientError(true);
+    }
+  }, [roomStatus, setClientError]);
 
+  const renderPage = () => {
     switch (roomStatus) {
       case ValidationStatus.Ok:
         return <PublicRoomPage />;
       case ValidationStatus.Invalid:
-        return <RoomErrors isInvalid />;
+        return <PublicRoomError isInvalid />;
       case ValidationStatus.Expired:
-        return <RoomErrors />;
+        return <PublicRoomError />;
       case ValidationStatus.Password:
         return <RoomPassword roomKey={key} />;
-
       default:
         return renderLoader();
     }

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,26 +25,31 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { isDesktop as isDesktopUtils } from "@docspace/shared/utils";
+import { isDesktop as isDesktopUtils } from "../../../utils";
 
 import { RectangleSkeleton } from "../../rectangle";
 
-import { StyledInfoPanelHeader } from "./Header.styled";
+import styles from "./Header.module.scss";
 
 const InfoPanelHeaderLoader = () => {
   const isTablet = !isDesktopUtils();
 
   return (
-    <StyledInfoPanelHeader isTablet={isTablet} withSubmenu={false}>
+    <div
+      className={styles.header}
+      data-is-tablet={isTablet ? "true" : "false"}
+      data-with-submenu="false"
+      data-testid="info-panel-header-loader"
+    >
       <div className="main">
         <RectangleSkeleton width="120px" height="24px" borderRadius="3px" />
-        {!isTablet && (
+        {!isTablet ? (
           <div className="info-panel-toggle-bg">
             <RectangleSkeleton width="32px" height="32px" borderRadius="50%" />
           </div>
-        )}
+        ) : null}
       </div>
-    </StyledInfoPanelHeader>
+    </div>
   );
 };
 

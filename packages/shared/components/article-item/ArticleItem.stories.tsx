@@ -25,20 +25,22 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
-import { BrowserRouter } from "react-router-dom";
 import { Meta, StoryObj } from "@storybook/react";
+import { BrowserRouter } from "react-router";
 
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
-import CatalogGuestReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.user.solid.react.svg?url";
 import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
 
-import { ArticleItemPure } from "./ArticleItem";
-import { ArticleItemProps } from "./ArticleItem.types";
-import { injectDefaultTheme } from "../../utils";
+import { ArticleItemPure } from ".";
+import styles from "./ArticleItem.module.scss";
+
+const defaultLinkData = {
+  path: "",
+  state: {},
+};
 
 const meta = {
-  title: "Components/ArticleItem",
+  title: "Base UI Components/ArticleItem",
   component: ArticleItemPure,
   parameters: {
     docs: {
@@ -55,151 +57,117 @@ const meta = {
   decorators: [
     (Story) => (
       <BrowserRouter>
-        <Story />
+        <div className={styles.storyCatalogWrapper} style={{ width: "250px" }}>
+          <Story />
+        </div>
       </BrowserRouter>
     ),
   ],
-} satisfies Meta<typeof ArticleItemPure>;
-type Story = StoryObj<typeof ArticleItemPure>;
-
-export default meta;
-
-const CatalogWrapper = styled.div.attrs(injectDefaultTheme)`
-  background-color: ${(props) => props.theme.catalogItem.container.background};
-  padding: 15px;
-`;
-
-const Template = (args: ArticleItemProps) => {
-  return (
-    <CatalogWrapper style={{ width: "250px" }}>
-      <ArticleItemPure {...args} onClick={() => {}} onClickBadge={() => {}} />
-    </CatalogWrapper>
-  );
-};
-
-export const Default: Story = {
-  render: (args) => <Template {...args} />,
   args: {
     icon: CatalogFolderReactSvgUrl,
     text: "Documents",
     showText: true,
+    linkData: defaultLinkData,
+  },
+  argTypes: {
+    showText: { control: "boolean" },
+    showBadge: { control: "boolean" },
+    isActive: { control: "boolean" },
+    isDragging: { control: "boolean" },
+    isDragActive: { control: "boolean" },
+    isHeader: { control: "boolean" },
+    isFirstHeader: { control: "boolean", if: { arg: "isHeader" } },
+    isEndOfBlock: { control: "boolean" },
+    showInitial: { control: "boolean" },
+    labelBadge: { control: "text" },
+    text: { control: "text" },
+  },
+} satisfies Meta<typeof ArticleItemPure>;
+
+type Story = StoryObj<typeof ArticleItemPure>;
+
+export default meta;
+
+export const Default: Story = {
+  args: {},
+};
+
+export const IconOnly: Story = {
+  args: {
+    showText: false,
+    showBadge: false,
+  },
+  decorators: [
+    (Story) => (
+      <div className={styles.storyCatalogWrapper} style={{ width: "52px" }}>
+        <Story />
+      </div>
+    ),
+  ],
+};
+
+export const WithBadge: Story = {
+  args: {
     showBadge: true,
-    isEndOfBlock: false,
-    labelBadge: "2",
+    labelBadge: "42",
   },
 };
 
-const OnlyIcon = () => {
-  return (
-    <CatalogWrapper style={{ width: "52px" }}>
-      <ArticleItemPure
-        icon={CatalogFolderReactSvgUrl}
-        text="My documents"
-        showText={false}
-        showBadge={false}
-        linkData={{
-          path: "",
-          state: {},
-        }}
-      />
-    </CatalogWrapper>
-  );
+export const WithCustomBadge: Story = {
+  args: {
+    showBadge: true,
+    iconBadge: CatalogTrashReactSvgUrl,
+  },
 };
 
-export const IconWithoutBadge: Story = { render: () => <OnlyIcon /> };
-
-const OnlyIconWithBadge = () => {
-  return (
-    <CatalogWrapper style={{ width: "52px" }}>
-      <ArticleItemPure
-        icon={CatalogGuestReactSvgUrl}
-        text="My documents"
-        showText={false}
-        showBadge
-        linkData={{
-          path: "",
-          state: {},
-        }}
-      />
-    </CatalogWrapper>
-  );
+export const Active: Story = {
+  args: {
+    isActive: true,
+    showBadge: true,
+    labelBadge: "New",
+  },
 };
 
-export const IconWithBadge: Story = { render: () => <OnlyIconWithBadge /> };
-
-const InitialIcon = () => {
-  return (
-    <CatalogWrapper style={{ width: "52px" }}>
-      <ArticleItemPure
-        icon={CatalogFolderReactSvgUrl}
-        text="Documents"
-        showText={false}
-        showBadge={false}
-        showInitial
-        onClick={() => {}}
-        linkData={{
-          path: "",
-          state: {},
-        }}
-      />
-    </CatalogWrapper>
-  );
+export const Dragging: Story = {
+  args: {
+    isDragging: true,
+  },
 };
 
-export const IconWithInitialText: Story = { render: () => <InitialIcon /> };
+export const DragTarget: Story = {
+  args: {
+    isDragActive: true,
+  },
+};
 
-const WithBadgeIcon = () => {
-  return (
-    <CatalogWrapper style={{ width: "250px" }}>
+export const Header: Story = {
+  args: {
+    text: "RECENT",
+    isHeader: true,
+    showText: true,
+  },
+};
+
+export const EndOfBlock: Story = {
+  render: () => (
+    <>
       <ArticleItemPure
         icon={CatalogFolderReactSvgUrl}
-        text="My documents"
+        text="First Item"
         showText
         showBadge
-        iconBadge={CatalogTrashReactSvgUrl}
-        linkData={{
-          path: "",
-          state: {},
-        }}
-      />
-    </CatalogWrapper>
-  );
-};
-
-export const ItemWithBadgeIcon: Story = { render: () => <WithBadgeIcon /> };
-
-const TwoItem = () => {
-  return (
-    <CatalogWrapper style={{ width: "250px" }}>
-      <ArticleItemPure
-        icon={CatalogFolderReactSvgUrl}
-        text="My documents"
-        showText
-        showBadge
-        onClick={() => {}}
         isEndOfBlock
-        labelBadge={3}
-        onClickBadge={() => {}}
-        linkData={{
-          path: "",
-          state: {},
-        }}
+        labelBadge="3"
+        linkData={defaultLinkData}
       />
       <ArticleItemPure
         icon={CatalogFolderReactSvgUrl}
-        text="Some text"
+        text="Second Item"
         showText
         showBadge
-        onClick={() => {}}
         iconBadge={CatalogTrashReactSvgUrl}
-        onClickBadge={() => {}}
-        linkData={{
-          path: "",
-          state: {},
-        }}
+        linkData={defaultLinkData}
       />
-    </CatalogWrapper>
-  );
+    </>
+  ),
 };
-
-export const ItemIsEndOfBlock: Story = { render: () => <TwoItem /> };

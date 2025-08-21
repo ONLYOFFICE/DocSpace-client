@@ -1,8 +1,6 @@
 {
   "DeleteForeverButton": "Izbriši za vedno",
-  "DeleteForeverNote": "Vsi elementi iz koša bodo za vedno izbrisani. Ne boste jih mogli obnoviti.",
-  "DeleteForeverNoteArchive": "Vsi elementi iz Arhivirano bodo za vedno izbrisani. Ne boste jih mogli več obnoviti.",
+  "DeleteForeverNote": "Vsi elementi iz razdelka {{sectionName}} bodo za vedno izbrisani. Ne boste jih mogli obnoviti.",
   "DeleteForeverTitle": "Izbriši za vedno?",
-  "SuccessEmptyArchived": "Arhivirano je izpraznjeno",
-  "SuccessEmptyTrash": "Koš izpraznjen"
+  "SuccessEmptyAction": "Razdelek {{sectionName}} je izpraznjen"
 }

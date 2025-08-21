@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -23,7 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { ICover } from "api/rooms/types";
+import { TLogo } from "../../api/rooms/types";
 
 export type ContextMenuRefType = {
   show: (e: React.MouseEvent | MouseEvent) => void;
@@ -77,11 +77,14 @@ export type ContextMenuType = {
   isLoader?: boolean;
   isHeader?: boolean;
   onLoad?: () => Promise<ContextMenuModel[]>;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  template?: any;
+  template?: unknown;
   isOutsideLink?: boolean;
   withToggle?: boolean;
   checked?: boolean;
+  badgeLabel?: string;
+  isPaidBadge?: boolean;
+  preventNewTab?: boolean;
+  dataTestId?: string;
 };
 
 export type SeparatorType = {
@@ -92,16 +95,18 @@ export type SeparatorType = {
   className?: string;
   disableColor?: string;
   isLoader?: boolean;
+  style?: React.CSSProperties;
+  dataTestId?: string;
 };
 
-export type HeaderType = {
-  title: string;
-  icon?: string;
-  avatar?: string;
-  color?: string;
-  cover?: ICover;
-  logo?: string;
-};
+export type HeaderType =
+  | (TLogo & {
+      title: string;
+      avatar?: string;
+      logo?: string;
+      icon?: string;
+    })
+  | { title: string; icon: string };
 
 export type ContextMenuModel = ContextMenuType | SeparatorType;
 
@@ -147,7 +152,7 @@ export interface ContextMenuProps {
       | React.ChangeEvent<HTMLInputElement>,
   ) => void;
   /** Displays a reference to another component */
-  containerRef?: React.MutableRefObject<HTMLDivElement | null>;
+  containerRef?: React.RefObject<HTMLDivElement | null>;
   /** Scales width by the container component */
   scaled?: boolean;
   /** Fills the icons with default colors */
@@ -159,8 +164,10 @@ export interface ContextMenuProps {
   rightOffset?: number;
   isRoom?: boolean;
   isArchive?: boolean;
-  ref?: React.RefObject<HTMLDivElement>;
+  ref?: React.RefObject<ContextMenuRefType | null>;
   badgeUrl?: string;
+  headerOnlyMobile?: boolean;
+  dataTestId?: string;
 }
 
 export type TContextMenuRef = {

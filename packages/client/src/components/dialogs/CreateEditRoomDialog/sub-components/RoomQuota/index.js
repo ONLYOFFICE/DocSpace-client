@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,11 +28,17 @@ import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import QuotaForm from "SRC_DIR/components/QuotaForm";
+import { QuotaForm } from "@docspace/shared/components/quota-form";
 
 const RoomQuota = (props) => {
-  const { setRoomParams, roomParams, defaultRoomsQuota, isEdit, isLoading } =
-    props;
+  const {
+    setRoomParams,
+    roomParams,
+    defaultRoomsQuota,
+    isEdit,
+    isTemplate,
+    isLoading,
+  } = props;
 
   const { t } = useTranslation(["CreateEditRoomDialog", "Common"]);
 
@@ -48,7 +54,9 @@ const RoomQuota = (props) => {
       description={t("StorageDescription")}
       checkboxLabel={t("DisableRoomQuota")}
       onSetQuotaBytesSize={onSetQuotaBytesSize}
-      initialSize={isEdit ? defaultValue.current : defaultRoomsQuota}
+      initialSize={
+        isEdit || isTemplate ? defaultValue.current : defaultRoomsQuota
+      }
       isDisabled={isLoading || roomParams.storageLocation.isThirdparty}
     />
   );

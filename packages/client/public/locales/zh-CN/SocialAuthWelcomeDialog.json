@@ -1,0 +1,8 @@
+{
+  "ChangeData": "更改数据和密码",
+  "ClickButtonBelow": "如需使用电子邮件登录，请先设置密码。<br />准备就绪后，请点击下方按钮。",
+  "ContinueToProduct": "继续前往{{productName}}",
+  "GeneratedPassword": "生成的密码",
+  "ProductNameDetail": "{{productName}}名称",
+  "ReviewAccountDetails": "请仔细核对您的账户信息："
+}

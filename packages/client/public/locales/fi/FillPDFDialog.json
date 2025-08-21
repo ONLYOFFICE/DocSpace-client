@@ -2,8 +2,5 @@
   "FillOutButtonLabel": "Täytä",
   "FillOutDescription": "Täytä alkuperäisen lomakkeen kentät muokkausikkunassa.",
   "FillOutTitle": "Täytä lomake itse",
-  "FillPDFDialogTitle": "Täytä",
-  "ShareCollectButtonLabel": "Kopioi huoneeseen",
-  "ShareCollectDescription": "Jaa lomakkeesi ja kerää vastauksia Lomakkeen täyttöhuoneen kautta.",
-  "ShareCollectTitle": "Jaa"
+  "FillPDFDialogTitle": "Täytä"
 }

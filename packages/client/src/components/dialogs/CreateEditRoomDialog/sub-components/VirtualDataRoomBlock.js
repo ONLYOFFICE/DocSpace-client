@@ -40,11 +40,12 @@ const Block = ({
   isDisabled,
   isChecked,
   children,
+  dataTestId,
 }) => {
   return (
-    <div className="virtual-data-room-block">
+    <div className="virtual-data-room-block" data-testid={dataTestId}>
       <div className="virtual-data-room-block_header">
-        <Text noSelect fontWeight={600} fontSize="13px">
+        <Text fontWeight={600} fontSize="13px">
           {headerText}
         </Text>
         <ToggleButton
@@ -52,25 +53,32 @@ const Block = ({
           isChecked={isChecked}
           onChange={onChange}
           className="virtual-data-room-block_toggle"
+          dataTestId={dataTestId ? `${dataTestId}_toggle` : undefined}
         />
       </div>
       <Text
         fontWeight={400}
         fontSize="12px"
         className="virtual-data-room-block_description"
-        noSelect
       >
         {bodyText}
       </Text>
-      {isChecked && (
+      {isChecked ? (
         <div className="virtual-data-room-block_content">{children}</div>
-      )}
+      ) : null}
     </div>
   );
 };
 
-const VirtualDataRoomBlock = ({ t, roomParams, setRoomParams, isEdit }) => {
-  const role = t("Translations:RoleViewer");
+const VirtualDataRoomBlock = ({
+  t,
+  roomParams,
+  setRoomParams,
+  isEdit,
+  showLifetimeDialog,
+  setLifetimeDialogVisible,
+}) => {
+  const role = t("Common:RoleViewer");
 
   const initialInfo = useRef(null);
 
@@ -105,8 +113,16 @@ const VirtualDataRoomBlock = ({ t, roomParams, setRoomParams, isEdit }) => {
   };
 
   const onChangeFileLifetime = () => {
-    if (fileLifetimeChecked) setRoomParams({ ...roomParams, lifetime: null });
-    setFileLifetimeChecked(!fileLifetimeChecked);
+    if (fileLifetimeChecked) {
+      setRoomParams({ ...roomParams, lifetime: null });
+      setFileLifetimeChecked(!fileLifetimeChecked);
+    } else if (isEdit && showLifetimeDialog) {
+      setLifetimeDialogVisible(true, () =>
+        setFileLifetimeChecked(!fileLifetimeChecked),
+      );
+    } else {
+      setFileLifetimeChecked(!fileLifetimeChecked);
+    }
   };
 
   const onChangeRestrictCopyAndDownload = () => {
@@ -123,6 +139,7 @@ const VirtualDataRoomBlock = ({ t, roomParams, setRoomParams, isEdit }) => {
         onChange={onChangeAutomaticIndexing}
         isDisabled={false}
         isChecked={roomParams.indexing}
+        dataTestId="virtual_data_room_automatic_indexing"
       />
       <Block
         headerText={t("FileLifetime")}
@@ -130,6 +147,8 @@ const VirtualDataRoomBlock = ({ t, roomParams, setRoomParams, isEdit }) => {
         onChange={onChangeFileLifetime}
         isDisabled={false}
         isChecked={fileLifetimeChecked}
+        setLifetimeDialogVisible={setLifetimeDialogVisible}
+        dataTestId="virtual_data_room_file_lifetime"
       >
         <FileLifetime
           t={t}
@@ -148,6 +167,7 @@ const VirtualDataRoomBlock = ({ t, roomParams, setRoomParams, isEdit }) => {
         onChange={onChangeRestrictCopyAndDownload}
         isDisabled={false}
         isChecked={copyAndDownloadChecked}
+        dataTestId="virtual_data_room_restrict_copy_download"
       />
 
       <Block
@@ -156,6 +176,7 @@ const VirtualDataRoomBlock = ({ t, roomParams, setRoomParams, isEdit }) => {
         onChange={onChangeAddWatermarksToDocuments}
         isDisabled={false}
         isChecked={watermarksChecked}
+        dataTestId="virtual_data_room_add_watermarks"
       >
         <Watermarks
           isEdit={isEdit}

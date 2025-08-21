@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -140,6 +140,13 @@ const StyledFooterWrapper = styled.div.attrs(injectDefaultTheme)`
     flex-direction: row;
 
     gap: 8px;
+  }
+
+  .delete-profile-container {
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 16px;
   }
 `;
 

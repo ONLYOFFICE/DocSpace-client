@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -105,8 +105,6 @@ const {
   lightScroll,
   lightScrollHover,
   lightScrollActive,
-  silver,
-  highlandGray,
 
   blurLight,
   lightBlueAction,
@@ -813,19 +811,6 @@ export const getBaseTheme = () => {
       hoverIconColor: grayStrong,
     },
 
-    inputPhone: {
-      activeBorderColor: lightSecondMain,
-      inactiveBorderColor: grayStrong,
-      errorBorderColor: lightErrorStatus,
-      backgroundColor: white,
-      color: black,
-      scrollBackground: gray,
-      placeholderColor: gray,
-      dialCodeColor: gray,
-      width: "320px",
-      height: "44px",
-    },
-
     textInput: {
       fontWeight: "normal",
       placeholderColor: gray,
@@ -1456,26 +1441,6 @@ export const getBaseTheme = () => {
       borderRadius: "50%",
     },
 
-    rombsLoader: {
-      blue: {
-        colorStep_1: "#F2CBBF",
-        colorStep_2: white,
-        colorStep_3: "#E6E4E4",
-        colorStep_4: "#D2D2D2",
-      },
-      red: {
-        colorStep_1: "#BFE8F8",
-        colorStep_2: white,
-        colorStep_3: "#EFEFEF",
-      },
-      green: {
-        colorStep_1: "#CBE0AC",
-        colorStep_2: white,
-        colorStep_3: "#EFEFEF",
-        colorStep_4: "#E6E4E4",
-      },
-    },
-
     dialogLoader: {
       borderBottom: `1px solid ${loaderLight}`,
     },
@@ -1505,9 +1470,9 @@ export const getBaseTheme = () => {
         heightWithBorder: "30px",
         heightModernView: "28px",
 
-        paddingLeft: "16px",
+        paddingLeft: "8px",
         paddingRightNoArrow: "16px",
-        paddingRight: "8px",
+        paddingRight: "4px",
 
         selectPaddingLeft: "8px",
         selectPaddingRightNoArrow: "14px",
@@ -1862,6 +1827,7 @@ export const getBaseTheme = () => {
         iconColor: lightIcons,
         iconErrorColor: lightErrorStatus,
         primaryColor: grayText,
+        barIconColor: lightGrayDark,
       },
 
       members: {
@@ -2117,9 +2083,16 @@ export const getBaseTheme = () => {
           backgroundColorTop: white,
         },
 
+        tag: {
+          backgroundColor: white,
+          hoverBackgroundColor: grayStrong,
+          activeBackgroundColor: grayLight,
+        },
+
         sideColor: black,
         color: black,
         textColor: gray,
+        subTextColor: "#657077",
       },
 
       animationColor: lightSecondMain,
@@ -2182,45 +2155,6 @@ export const getBaseTheme = () => {
       alert: {
         fill: "",
         path: "",
-      },
-    },
-
-    mediaViewer: {
-      color: grayStrong,
-      backgroundColor: highlandGray,
-      fill: white,
-      titleColor: white,
-      iconColor: white,
-
-      controlBtn: {
-        backgroundColor: silver,
-      },
-
-      imageViewer: {
-        backgroundColor: silver,
-        inactiveBackgroundColor: highlandGray,
-        fill: white,
-      },
-
-      progressBar: {
-        background: grayStrong,
-        backgroundColor: silver,
-      },
-
-      scrollButton: {
-        backgroundColor: highlandGray,
-        background: silver,
-        border: `solid ${white}`,
-      },
-
-      videoViewer: {
-        fill: white,
-        stroke: white,
-        color: grayStrong,
-        colorError: white,
-        backgroundColorError: darkBlack,
-        backgroundColor: highlandGray,
-        background: silver,
       },
     },
 
@@ -2314,6 +2248,7 @@ export const getBaseTheme = () => {
           borderColor: grayLight,
           hoverBorderColor: lightGrayHover,
           color: grayText,
+          hoverColor: grayText,
           iconColor: lightGrayDark,
         },
       },
@@ -2501,7 +2436,8 @@ export const getBaseTheme = () => {
         color: gray,
         tooltipColor: lightToastInfo,
         iconColor: lightErrorStatus,
-
+        positiveStatusColor: lightStatusPositive,
+        progressColor: lightGrayDark,
         shareButton: {
           color: gray,
           sharedColor: lightGrayDark,
@@ -2510,6 +2446,8 @@ export const getBaseTheme = () => {
         loadingButton: {
           color: lightSecondMain,
           background: white,
+          defaultBackground: gray,
+          hoverColor: lightGrayDark,
         },
       },
       invite: {
@@ -2664,6 +2602,14 @@ export const getBaseTheme = () => {
         fill: grayStrong,
         stroke: grayStrong,
         color: grayStrong,
+      },
+
+      versionDisabled: {
+        fillDisabled: grayStrong,
+      },
+
+      versionLink: {
+        color: gray,
       },
       commentColor: gray,
     },
@@ -2967,7 +2913,7 @@ export const getBaseTheme = () => {
           background: grayLight,
         },
         storageManagement: {
-          grayBackgroundText: grayText,
+          grayBackgroundText: black,
           descriptionColor: lightGrayDark,
           dividerColor: grayLightMid,
         },
@@ -2983,7 +2929,7 @@ export const getBaseTheme = () => {
           linkColor: link,
           spanBackground: lightBlueMain,
           filterBorder: `1px solid ${grayStrong}`,
-          toastBackground: lightToastWarning,
+
           background: grayLight,
         },
       },
@@ -2993,6 +2939,10 @@ export const getBaseTheme = () => {
         generatePasswordColor: lightGrayDark,
         textColor: gray,
       },
+    },
+
+    statusMessage: {
+      toastBackground: lightToastWarning,
     },
 
     tileLoader: {
@@ -3094,17 +3044,6 @@ export const getBaseTheme = () => {
       colorPercentBig: white,
       errorTextColor: lightErrorStatus,
       descriptionTextColor: gray,
-    },
-
-    codeInput: {
-      background: white,
-      border: `1px solid ${grayStrong}`,
-      color: black,
-      lineColor: grayStrong,
-      disabledBackground: grayLight,
-      disabledBorder: `1px solid ${grayLightMid}`,
-      disabledColor: gray,
-      focusBorder: `1px solid ${lightSecondMain}`,
     },
 
     accessRightSelect: {
@@ -3277,6 +3216,16 @@ export const getBaseTheme = () => {
       selectedBorderColor: grayLightMid,
       backgroundColor: white,
       borderColor: grayLightMid,
+    },
+
+    formFillingTips: {
+      circleColor: grayLightMid,
+      selectedColor: white,
+      circleBorder: `3px solid ${lightSecondMain}`,
+    },
+
+    socialAuthDialog: {
+      accountDetailsBackground: grayLight,
     },
   };
 };

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,15 +31,22 @@ import SharedLinkSvgUrl from "PUBLIC_DIR/images/icons/16/shared.link.svg?url";
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg?url";
 
 import React from "react";
+import classnames from "classnames";
+
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import styled, { css } from "styled-components";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router";
+
 import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
 import Navigation from "@docspace/shared/components/navigation";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { tablet, mobile, Consumer, getLogoUrl } from "@docspace/shared/utils";
+import {
+  Consumer,
+  getLogoUrl,
+  getCheckboxItemId,
+  getCheckboxItemLabel,
+} from "@docspace/shared/utils";
 import { TableGroupMenu } from "@docspace/shared/components/table";
 import {
   RoomsType,
@@ -49,131 +56,20 @@ import {
 } from "@docspace/shared/enums";
 
 import { CategoryType } from "SRC_DIR/helpers/constants";
-import { getContactsView } from "SRC_DIR/helpers/contacts";
 import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import TariffBar from "SRC_DIR/components/TariffBar";
 import { getLifetimePeriodTranslation } from "@docspace/shared/utils/common";
-import { globalColors } from "@docspace/shared/themes";
-import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-files-from-event";
+import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
+import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import { toastr } from "@docspace/shared/components/toast";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import {
-  getCheckboxItemId,
-  getCheckboxItemLabel,
-} from "SRC_DIR/helpers/filesUtils";
-import { hasOwnProperty } from "@docspace/shared/utils/object";
+import styles from "@docspace/shared/styles/SectionHeader.module.scss";
+import useProfileHeader from "SRC_DIR/pages/Profile/Section/Header/useProfileHeader";
+
 import { useContactsHeader } from "./useContacts";
-
-const StyledContainer = styled.div`
-  width: 100%;
-  min-height: 33px;
-
-  .table-container_group-menu {
-    margin-block: 0;
-    margin-inline: -20px 0;
-    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
-
-    width: calc(100% + 40px);
-    height: 68px;
-
-    @media ${tablet} {
-      height: 61px;
-      margin-block: 0;
-      margin-inline: -16px 0;
-      width: calc(100% + 32px);
-    }
-
-    @media ${mobile} {
-      height: 52px !important;
-      margin-block: 0;
-      margin-inline: -16px 0;
-      width: calc(100% + 32px);
-    }
-  }
-
-  .header-container {
-    min-height: 33px;
-    align-items: center;
-
-    @media ${tablet} {
-      height: 61px;
-    }
-
-    @media ${mobile} {
-      height: 53px;
-    }
-
-    .navigation_button {
-      display: block;
-      margin: 0 16px;
-      overflow: visible;
-      min-width: 50px;
-
-      .button-content {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-
-        display: block;
-        padding-top: 3px;
-      }
-
-      @media ${tablet} {
-        display: ${({ isInfoPanelVisible }) =>
-          isInfoPanelVisible ? "none" : "block"};
-      }
-
-      @media ${mobile} {
-        display: none;
-      }
-    }
-
-    .title-icon {
-      svg {
-        path {
-          fill: ${({ theme, isExternalFolder }) =>
-            isExternalFolder
-              ? theme.roomIcon.linkIcon.path
-              : theme.backgroundColor};
-        }
-        rect {
-          stroke: ${(props) => props.theme.backgroundColor};
-        }
-      }
-    }
-
-    .header_sign-in-button {
-      margin-inline-start: auto;
-      display: block;
-
-      @media ${tablet} {
-        margin-inline-start: 16px;
-      }
-
-      @media ${mobile} {
-        display: none;
-      }
-    }
-  }
-
-  ${(props) =>
-    props.isLifetimeEnabled &&
-    css`
-      .title-icon {
-        svg {
-          path {
-            fill: ${({ theme }) =>
-              theme.navigation.lifetimeIconFill} !important;
-            stroke: ${({ theme }) =>
-              theme.navigation.lifetimeIconStroke} !important;
-          }
-        }
-      }
-    `}
-`;
 
 const SectionHeaderContent = (props) => {
   const {
@@ -236,7 +132,6 @@ const SectionHeaderContent = (props) => {
     categoryType,
     isPublicRoom,
     theme,
-    isVirtualDataRoomType,
 
     moveToPublicRoom,
     currentDeviceType,
@@ -268,16 +163,52 @@ const SectionHeaderContent = (props) => {
     getIndexingArray,
     setCloseEditIndexDialogVisible,
     rootFolderId,
+    guidAnimationVisible,
+    setGuidAnimationVisible,
+    setRefMap,
+    deleteRefMap,
+    isPersonalReadOnly,
+    showTemplateBadge,
+    allowInvitingMembers,
+    contactsTab,
+    currentClientView,
+    profile,
+    profileClicked,
+    enabledHotkeys,
+
+    setDialogData,
+    setChangeEmailVisible,
+    setChangePasswordVisible,
+    setChangeAvatarVisible,
+    setChangeNameVisible,
   } = props;
 
   const location = useLocation();
-  const { groupId } = useParams();
 
-  const contactsView = getContactsView(location);
-  const isContactsPage = !!contactsView;
-  const isContactsGroupsPage = contactsView === "groups";
-  const isContactsInsideGroupPage =
-    contactsView === "inside_group" && !!groupId;
+  const contactsView =
+    currentClientView === "users" || currentClientView === "groups";
+  const isContactsPage = contactsView;
+  const isContactsGroupsPage = contactsTab === "groups";
+  const isContactsInsideGroupPage = contactsTab === "inside_group";
+  const isProfile = currentClientView === "profile";
+
+  const addButtonRefCallback = React.useCallback(
+    (ref) => {
+      if (ref) {
+        setRefMap(GuidanceRefKey.Uploading, ref);
+      }
+    },
+    [setRefMap],
+  );
+
+  const buttonRefCallback = React.useCallback(
+    (ref) => {
+      if (ref) {
+        setRefMap(GuidanceRefKey.Share, ref);
+      }
+    },
+    [setRefMap],
+  );
 
   const { getContactsMenuItems, onContactsChange } = useContactsHeader({
     setUsersSelected,
@@ -287,6 +218,22 @@ const SectionHeaderContent = (props) => {
     t,
 
     isContactsGroupsPage,
+  });
+
+  const {
+    profileDialogs,
+    getUserContextOptions,
+    onClickBack: onClickBackProfile,
+  } = useProfileHeader({
+    profile,
+    profileClicked,
+    enabledHotkeys,
+
+    setDialogData,
+    setChangeEmailVisible,
+    setChangePasswordVisible,
+    setChangeAvatarVisible,
+    setChangeNameVisible,
   });
 
   const isSettingsPage = location.pathname.includes("/settings");
@@ -300,7 +247,7 @@ const SectionHeaderContent = (props) => {
           if (f.length > 0) startUpload(f, null, t);
         })
         .catch((err) => {
-          toastr.error(err);
+          toastr.error(err, null, 0, true);
         });
     },
     [startUpload, t],
@@ -312,7 +259,27 @@ const SectionHeaderContent = (props) => {
     setIsInfoPanelVisible(!isInfoPanelVisible);
   };
 
+  const contextButtonAnimation = (setAnimationClasses) => {
+    setAnimationClasses(["guid-animation-after"]);
+
+    const beforeTimer = setTimeout(() => {
+      setAnimationClasses(["guid-animation-after", "guid-animation-before"]);
+    }, 1000);
+
+    const removeTimer = setTimeout(() => {
+      setAnimationClasses([]);
+      setGuidAnimationVisible(false);
+    }, 3000);
+
+    return () => {
+      clearTimeout(beforeTimer);
+      clearTimeout(removeTimer);
+    };
+  };
+
   const getContextOptionsFolder = () => {
+    if (isProfile) return getUserContextOptions();
+
     if (isContactsInsideGroupPage) {
       return getGroupContextOptions(t, currentGroup, false, true);
     }
@@ -321,9 +288,8 @@ const SectionHeaderContent = (props) => {
   };
 
   const onContextOptionsClick = () => {
-    isContactsInsideGroupPage
-      ? setGroupsBufferSelection(currentGroup)
-      : setBufferSelection(selectedFolder);
+    if (isContactsInsideGroupPage) setGroupsBufferSelection(currentGroup);
+    else if (!isContactsPage) setBufferSelection(selectedFolder);
   };
 
   const onSelect = (e) => {
@@ -361,17 +327,19 @@ const SectionHeaderContent = (props) => {
   };
 
   const onChange = (checked) => {
+    if (isProfile) return;
+
     isContactsPage
       ? onContactsChange(checked)
       : setSelected(checked ? "all" : "none");
   };
 
-  const onClickFolder = async (id, isRootRoom) => {
+  const onClickFolder = async (id, isRootRoom, isRootTemplates) => {
     if (isPublicRoom) {
       return moveToPublicRoom(id);
     }
 
-    if (isRootRoom) {
+    if (isRootRoom || isRootTemplates) {
       return moveToRoomsPage();
     }
 
@@ -444,28 +412,15 @@ const SectionHeaderContent = (props) => {
     setIsIndexEditingMode(false);
   };
 
-  const stateTitle = location?.state?.title;
-  const stateCanCreate = location?.state?.canCreate;
-  const stateIsRoot = location?.state?.isRoot;
-  const stateIsRoom = location?.state?.isRoom;
-  const stateRootRoomTitle = location?.state?.rootRoomTitle;
-  const stateIsShared = location?.state?.isShared;
-  const stateIsExternal = location?.state?.isExternal;
-  const stateIsLifetimeEnabled = location?.state?.isLifetimeEnabled;
-
-  const isRoot =
-    isLoading && typeof stateIsRoot === "boolean"
-      ? stateIsRoot
-      : isRootFolder || isContactsPage || isSettingsPage;
+  const isRoot = isRootFolder || isContactsPage || isSettingsPage || isProfile;
 
   const isLifetimeEnabled = Boolean(
-    !isRoot &&
-      (selectedFolder?.lifetime ||
-        infoPanelRoom?.lifetime ||
-        (isLoading && stateIsLifetimeEnabled)),
+    !isRoot && (selectedFolder?.lifetime || infoPanelRoom?.lifetime),
   );
 
-  const navigationButtonIsVisible = !!(showNavigationButton || stateIsShared);
+  const navigationButtonIsVisible = !!(
+    showNavigationButton || location.state?.isShared
+  );
 
   const getInsideGroupTitle = () => {
     return isLoading && insideGroupTempTitle
@@ -473,14 +428,35 @@ const SectionHeaderContent = (props) => {
       : currentGroup?.name;
   };
 
+  const lifetime = selectedFolder?.lifetime || infoPanelRoom?.lifetime;
+  const sharedType = location.state?.isExternal && !isPublicRoom;
+
   const getTitleIcon = () => {
-    if (stateIsExternal && !isPublicRoom) return SharedLinkSvgUrl;
+    if (sharedType) return SharedLinkSvgUrl;
 
     if (navigationButtonIsVisible && !isPublicRoom) return PublicRoomIconUrl;
 
     if (isLifetimeEnabled) return LifetimeRoomIconUrl;
 
     return "";
+  };
+
+  const getTitleIconTooltip = () => {
+    if (sharedType) return t("Files:RecentlyOpenedTooltip");
+
+    if (lifetime)
+      return `${t("Files:RoomFilesLifetime", {
+        days: lifetime.value,
+        period: getLifetimePeriodTranslation(lifetime.period, t),
+      })}. ${
+        lifetime.deletePermanently
+          ? t("Files:AfterFilesWillBeDeletedPermanently")
+          : t("Files:FilesMovedToTrashNotice", {
+              sectionName: t("Common:TrashSection"),
+            })
+      }`;
+
+    return null;
   };
 
   const onLogoClick = () => {
@@ -541,27 +517,22 @@ const SectionHeaderContent = (props) => {
       isIndexEditingMode || isPublicRoom;
   }
 
-  const currentTitle = isSettingsPage
-    ? t("Common:Settings")
-    : isContactsPage
-      ? isContactsInsideGroupPage
-        ? getInsideGroupTitle()
-        : t("Common:Contacts")
-      : isLoading && stateTitle
-        ? stateTitle
+  const currentTitle = isProfile
+    ? t("Profile:MyProfile")
+    : isSettingsPage
+      ? t("Common:Settings")
+      : isContactsPage
+        ? isContactsInsideGroupPage
+          ? getInsideGroupTitle()
+          : t("Common:Contacts")
         : title;
 
-  const currentCanCreate =
-    isLoading && hasOwnProperty(location?.state, "canCreate")
-      ? stateCanCreate
-      : security?.Create;
+  const currentCanCreate = security?.Create;
 
   const currentRootRoomTitle =
-    isLoading && stateRootRoomTitle
-      ? stateRootRoomTitle
-      : navigationPath &&
-        navigationPath.length > 1 &&
-        navigationPath[navigationPath.length - 2].title;
+    navigationPath &&
+    navigationPath.length > 1 &&
+    navigationPath[navigationPath.length - 2].title;
 
   const accountsNavigationPath = isContactsInsideGroupPage && [
     {
@@ -572,8 +543,14 @@ const SectionHeaderContent = (props) => {
     },
   ];
 
-  const isCurrentRoom =
-    isLoading && typeof stateIsRoom === "boolean" ? stateIsRoom : isRoom;
+  React.useEffect(() => {
+    return () => {
+      deleteRefMap(GuidanceRefKey.Share);
+      deleteRefMap(GuidanceRefKey.Uploading);
+    };
+  }, [deleteRefMap]);
+
+  const isCurrentRoom = isRoom;
 
   if (showHeaderLoader) return <SectionHeaderSkeleton />;
 
@@ -587,18 +564,7 @@ const SectionHeaderContent = (props) => {
 
   const titleIcon = getTitleIcon();
 
-  const lifetime = selectedFolder?.lifetime || infoPanelRoom?.lifetime;
-
-  const titleIconTooltip = lifetime
-    ? `${t("Files:RoomFilesLifetime", {
-        days: lifetime.value,
-        period: getLifetimePeriodTranslation(lifetime.period, t),
-      })}. ${
-        lifetime.deletePermanently
-          ? t("Files:AfterFilesWillBeDeletedPermanently")
-          : t("Files:AfterFilesWillBeMovedToTrash")
-      }`
-    : null;
+  const titleIconTooltip = getTitleIconTooltip();
 
   const navigationButtonLabel = showNavigationButton
     ? t("Files:ShareRoom")
@@ -612,18 +578,52 @@ const SectionHeaderContent = (props) => {
     ? { isCloseable: true, onCloseClick: onCloseIndexMenu }
     : {};
 
+  const badgeLabel = showTemplateBadge ? t("Files:Template") : "";
+
+  const warningText = isRecycleBinFolder
+    ? t("TrashAutoDeleteWarning", {
+        sectionName: t("Common:TrashSection"),
+      })
+    : isPersonalReadOnly
+      ? t("PersonalFolderErasureWarning")
+      : "";
+
+  const isContextButtonVisible = () => {
+    if (isProfile) return true;
+
+    if (isContactsPage && !isContactsInsideGroupPage) {
+      return false;
+    }
+
+    if (isPersonalReadOnly) {
+      return isRootFolder;
+    }
+
+    return (isRecycleBinFolder && !isEmptyFilesList) || !isRootFolder;
+  };
+
+  const isPlusButtonVisible = () => {
+    if (!isContactsPage || isContactsInsideGroupPage) return true;
+
+    const lengthList = getContextOptionsPlus()?.length;
+    if (lengthList === 0) return false;
+
+    return true;
+  };
+
   return (
     <Consumer key="header">
       {(context) => (
-        <StyledContainer
-          isExternalFolder={stateIsExternal}
-          isRecycleBinFolder={isRecycleBinFolder}
-          isVirtualDataRoomType={isVirtualDataRoomType}
-          isLifetimeEnabled={isLifetimeEnabled}
+        <div
+          className={classnames(styles.headerContainer, {
+            [styles.infoPanelVisible]: isInfoPanelVisible,
+            [styles.isExternalFolder]: location.state?.isExternal,
+            [styles.isLifetimeEnabled]: isLifetimeEnabled,
+          })}
         >
           {tableGroupMenuVisible ? (
             <TableGroupMenu
-              withComboBox={!isIndexEditingMode && !!menuItems}
+              withComboBox={!isIndexEditingMode ? !!menuItems : null}
               {...tableGroupMenuProps}
               {...headerProps}
               {...closeProps}
@@ -633,11 +633,13 @@ const SectionHeaderContent = (props) => {
               <Navigation
                 sectionWidth={context.sectionWidth}
                 showText={showText}
-                isRootFolder={isRoot && !isContactsInsideGroupPage}
+                isRootFolder={isRoot ? !isContactsInsideGroupPage : null}
                 canCreate={
                   (currentCanCreate || (isContactsPage && contactsCanCreate)) &&
                   !isSettingsPage &&
-                  !isPublicRoom
+                  !isProfile
+                    ? !isPublicRoom
+                    : null
                 }
                 rootRoomTitle={currentRootRoomTitle}
                 title={currentTitle}
@@ -659,12 +661,13 @@ const SectionHeaderContent = (props) => {
                   isArchiveFolder ? isEmptyArchive : isEmptyFilesList
                 }
                 clearTrash={onEmptyTrashAction}
-                onBackToParentFolder={onClickBack}
-                toggleInfoPanel={onToggleInfoPanel}
-                isInfoPanelVisible={isInfoPanelVisible}
+                onBackToParentFolder={
+                  isProfile ? onClickBackProfile : onClickBack
+                }
+                toggleInfoPanel={isProfile ? undefined : onToggleInfoPanel}
+                isInfoPanelVisible={isProfile ? false : isInfoPanelVisible}
                 titles={{
-                  trash: t("EmptyRecycleBin"),
-                  trashWarning: t("TrashErasureWarning"),
+                  warningText,
                   actions: isRoomsFolder
                     ? t("Common:NewRoom")
                     : t("Common:Actions"),
@@ -674,15 +677,19 @@ const SectionHeaderContent = (props) => {
                 withMenu={!isRoomsFolder}
                 onPlusClick={onCreateRoom}
                 isEmptyPage={isEmptyPage}
-                isRoom={isCurrentRoom || isContactsPage}
-                hideInfoPanel={hideInfoPanel || isSettingsPage || isPublicRoom}
+                isRoom={isCurrentRoom || isContactsPage || isProfile}
+                hideInfoPanel={
+                  hideInfoPanel || isSettingsPage || isPublicRoom || isProfile
+                }
                 withLogo={
-                  (isPublicRoom || (isFrame && !showMenu && displayAbout)) &&
-                  logo
+                  isPublicRoom || (isFrame && !showMenu && displayAbout)
+                    ? logo
+                    : null
                 }
                 burgerLogo={
-                  (isPublicRoom || (isFrame && !showMenu && displayAbout)) &&
-                  burgerLogo
+                  isPublicRoom || (isFrame && !showMenu && displayAbout)
+                    ? burgerLogo
+                    : null
                 }
                 isPublicRoom={isPublicRoom}
                 titleIcon={titleIcon}
@@ -695,10 +702,21 @@ const SectionHeaderContent = (props) => {
                 onNavigationButtonClick={onNavigationButtonClick}
                 tariffBar={<TariffBar />}
                 showNavigationButton={!!showNavigationButton}
+                badgeLabel={badgeLabel}
                 onContextOptionsClick={onContextOptionsClick}
                 onLogoClick={onLogoClick}
+                buttonRef={buttonRefCallback}
+                addButtonRef={addButtonRefCallback}
+                contextButtonAnimation={contextButtonAnimation}
+                guidAnimationVisible={guidAnimationVisible}
+                setGuidAnimationVisible={setGuidAnimationVisible}
+                isContextButtonVisible={isContextButtonVisible()}
+                isPlusButtonVisible={
+                  !allowInvitingMembers ? isPlusButtonVisible() : true
+                }
+                showBackButton={isProfile}
               />
-              {showSignInButton && (
+              {showSignInButton ? (
                 <Button
                   className="header_sign-in-button"
                   label={t("Common:LoginButton")}
@@ -707,10 +725,10 @@ const SectionHeaderContent = (props) => {
                   isDisabled={signInButtonIsDisabled}
                   primary
                 />
-              )}
+              ) : null}
             </div>
           )}
-          {isFrame && (
+          {isFrame ? (
             <>
               <input
                 id="customFileInput"
@@ -732,8 +750,9 @@ const SectionHeaderContent = (props) => {
                 onClick={onInputClick}
               />
             </>
-          )}
-        </StyledContainer>
+          ) : null}
+          {isProfile ? profileDialogs : null}
+        </div>
       )}
     </Consumer>
   );
@@ -755,6 +774,9 @@ export default inject(
     uploadDataStore,
     indexingStore,
     dialogsStore,
+    guidanceStore,
+    profileActionsStore,
+    mediaViewerDataStore,
   }) => {
     const { startUpload } = uploadDataStore;
 
@@ -779,22 +801,35 @@ export default inject(
       setBufferSelection,
     } = filesStore;
 
+    const { setRefMap, deleteRefMap } = guidanceStore;
+
     const {
       setIsSectionBodyLoading,
       showHeaderLoader,
 
       isLoading,
+
+      currentClientView,
     } = clientLoadingStore;
 
     const setIsLoading = (param) => {
       setIsSectionBodyLoading(param);
     };
 
-    const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
-      treeFoldersStore;
+    const {
+      isRecycleBinFolder,
+      isRoomsFolder,
+      isArchiveFolder,
+      isPersonalReadOnly,
+    } = treeFoldersStore;
 
-    const { setReorderDialogVisible, setCloseEditIndexDialogVisible } =
-      dialogsStore;
+    const {
+      setReorderDialogVisible,
+      setCloseEditIndexDialogVisible,
+      welcomeFormFillingTipsVisible,
+      setGuidAnimationVisible,
+      guidAnimationVisible,
+    } = dialogsStore;
 
     const {
       getHeaderMenu,
@@ -808,7 +843,7 @@ export default inject(
       getPublicKey,
     } = filesActionsStore;
 
-    const { setIsVisible, isVisible, infoPanelRoom } = infoPanelStore;
+    const { setIsVisible, isVisible, infoPanelRoomSelection } = infoPanelStore;
 
     const {
       title,
@@ -822,13 +857,22 @@ export default inject(
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
 
-    const { theme, frameConfig, isFrame, currentDeviceType, displayAbout } =
-      settingsStore;
+    const {
+      theme,
+      frameConfig,
+      isFrame,
+      currentDeviceType,
+      displayAbout,
+      allowInvitingMembers,
+    } = settingsStore;
 
     const isRoom = !!roomType;
-    const isVirtualDataRoomType = roomType === RoomsType.VirtualDataRoom;
 
     const {
+      onClickEditRoom,
+      onClickInviteUsers,
+      onClickArchive,
+      onCopyLink,
       onCreateAndCopySharedLink,
       getFolderModel,
       onCreateRoom,
@@ -842,7 +886,13 @@ export default inject(
 
     const isEmptyArchive = !canRestoreAll && !canDeleteAll;
 
-    const { usersStore, groupsStore, headerMenuStore } = peopleStore;
+    const {
+      usersStore,
+      groupsStore,
+      headerMenuStore,
+      dialogStore,
+      targetUserStore,
+    } = peopleStore;
 
     const {
       currentGroup,
@@ -868,7 +918,7 @@ export default inject(
     const { getContactsModel, contactsCanCreate } =
       peopleStore.contextOptionsStore;
 
-    const { setSelected: setUsersSelected } = usersStore;
+    const { setSelected: setUsersSelected, contactsTab } = usersStore;
 
     const { isIndexEditingMode, setIsIndexEditingMode, getIndexingArray } =
       indexingStore;
@@ -886,6 +936,7 @@ export default inject(
         : pathParts?.length === 1;
 
     const isArchive = rootFolderType === FolderType.Archive;
+    const isTemplate = rootFolderType === FolderType.RoomTemplates;
 
     const isShared = shared || navigationPath.find((r) => r.shared);
 
@@ -898,7 +949,23 @@ export default inject(
       ? navigationPath[navigationPath.length - 1]?.id
       : selectedFolder.id;
 
+    const { setDialogData, setChangeEmailVisible } = dialogStore;
+    const {
+      setChangePasswordVisible,
+      setChangeAvatarVisible,
+      setChangeNameVisible,
+    } = targetUserStore;
+
+    const { profileClicked } = profileActionsStore;
+
+    const { visible: mediaViewerIsVisible } = mediaViewerDataStore;
+
+    const { showProfileLoader } = clientLoadingStore;
+
+    const { enabledHotkeys } = filesStore;
+
     return {
+      currentClientView,
       showText: settingsStore.showText,
       isDesktop: settingsStore.isDesktopClient,
       showHeaderLoader,
@@ -926,6 +993,7 @@ export default inject(
       getHeaderMenu,
 
       isRecycleBinFolder,
+      isPersonalReadOnly,
       isEmptyFilesList,
       isEmptyArchive,
       isArchiveFolder,
@@ -936,11 +1004,15 @@ export default inject(
 
       selectedFolder,
 
+      onClickEditRoom,
+      onClickInviteUsers,
+      onClickArchive,
+      onCopyLink,
+
       isGroupMenuBlocked,
 
       moveToRoomsPage,
       onClickBack,
-      isVirtualDataRoomType,
       isPublicRoom,
 
       moveToPublicRoom,
@@ -962,7 +1034,7 @@ export default inject(
       theme,
       isFrame,
       showTitle: frameConfig?.showTitle,
-      hideInfoPanel: isFrame && !frameConfig?.infoPanelVisible,
+      hideInfoPanel: isFrame,
       showMenu: frameConfig?.showMenu,
       currentDeviceType,
       insideGroupTempTitle,
@@ -986,10 +1058,29 @@ export default inject(
 
       rootFolderId,
       displayAbout,
-      infoPanelRoom,
+      infoPanelRoom: infoPanelRoomSelection,
       getPublicKey,
       getIndexingArray,
       setCloseEditIndexDialogVisible,
+      welcomeFormFillingTipsVisible,
+      guidAnimationVisible,
+      setGuidAnimationVisible,
+      setRefMap,
+      deleteRefMap,
+      showTemplateBadge: isTemplate && !isRoot,
+      allowInvitingMembers,
+      contactsTab,
+
+      profile: userStore.user,
+      profileClicked,
+      enabledHotkeys:
+        enabledHotkeys && !mediaViewerIsVisible && !showProfileLoader,
+
+      setDialogData,
+      setChangeEmailVisible,
+      setChangePasswordVisible,
+      setChangeAvatarVisible,
+      setChangeNameVisible,
     };
   },
 )(
@@ -1004,5 +1095,6 @@ export default inject(
     "PeopleTranslations",
     "ChangeUserTypeDialog",
     "Notifications",
+    "Profile",
   ])(observer(SectionHeaderContent)),
 );

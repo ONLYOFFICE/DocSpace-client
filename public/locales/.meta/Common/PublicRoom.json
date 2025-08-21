@@ -1,0 +1,244 @@
+{
+  "key_path": "PublicRoom",
+  "content": "Public room",
+  "content_en_sha1_hash": "02f21f2d4127882b2b2ef75e41181154716ce237",
+  "created_at": "2025-05-19T21:30:47.651Z",
+  "updated_at": "2025-08-11T09:02:43.902Z",
+  "comment": {
+    "text": "This translation key is used to display the label \"Public room\" in various UI elements, such as a filter option and a button. It appears in different contexts within the application, including file browsing and portal settings, and its purpose is to provide a clear indication of the selected room type.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:34:51.197Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/filesUtils.js",
+      "line_number": 60,
+      "context": "case RoomsType.ReadOnlyRoom:\n return t(\"Common:ViewOnlyRooms\");\n \n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoom\");\n \n case RoomsType.VirtualDataRoom:\n return t(\"Common:VirtualDataRoom\");\n \n case RoomsType.FormRoom:",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
+      "line_number": 831,
+      "context": "case RoomsType.PublicRoom:\n return {\n id: \"filter_type-public\",\n key: RoomsType.PublicRoom,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:PublicRoom\"),\n };\n case RoomsType.VirtualDataRoom:\n return {\n id: \"filter_type-virtual-data\",\n key: RoomsType.VirtualDataRoom,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
+      "line_number": 96,
+      "context": "}),\n image: theme.isBase ? PortalImg : PortalImgDark,\n handleOnClick: navigateToPortal,\n },\n {\n title: t(\"Common:PublicRoom\"),\n description: t(\"JavascriptSdk:PublicRoomPresetInfo\"),\n image: theme.isBase ? PublicRoomImg : PublicRoomImgDark,\n handleOnClick: navigateToPublicRoom,\n },\n {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector.js",
+      "line_number": 95,
+      "context": "roomType: RoomsType.EditingRoom,\n // dataTestId: \"room_type_editing_option\",\n },\n {\n key: \"room-type-public\",\n label: t(\"Common:PublicRoom\"),\n roomType: RoomsType.PublicRoom,\n // dataTestId: \"room_type_public_option\",\n },\n {\n key: \"room-type-custom\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
+      "line_number": 125,
+      "context": "label: t(\"Common:CollaborationRoomTitle\"),\n roomType: RoomsType.EditingRoom,\n },\n {\n key: \"room-type-public\",\n label: t(\"Common:PublicRoom\"),\n roomType: RoomsType.PublicRoom,\n },\n {\n key: \"room-type-custom\",\n label: t(\"Common:CustomRoomTitle\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 481,
+      "context": "{\n id: \"portal-settings_catalog-javascript-sdk_public-room\",\n key: \"7-1-0\",\n icon: \"\",\n link: \"public-room\",\n tKey: \"Common:PublicRoom\",\n },\n {\n id: \"portal-settings_catalog-javascript-sdk_custom\",\n key: \"7-1-1\",\n icon: \"\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
+      "line_number": 20,
+      "context": "return t(\"Common:VirtualDataRoom\");\n case RoomsType.CustomRoom:\n return t(\"Common:CustomRoomTitle\");\n \n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoom\");\n case RoomsType.FormRoom:\n return t(\"Common:FormFilingRoomTitle\");\n default:\n return \"\";\n }",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

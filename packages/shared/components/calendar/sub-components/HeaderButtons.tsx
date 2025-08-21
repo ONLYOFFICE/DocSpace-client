@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,14 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTheme } from "styled-components";
-
-import {
-  StyledRoundButtonTheme,
-  ButtonsContainer,
-  ArrowIcon,
-} from "../Calendar.styled";
+import classNames from "classnames";
 import { HeaderButtonsProps } from "../Calendar.types";
+import styles from "../Calendar.module.scss";
 
 export const HeaderButtons = ({
   onLeftClick,
@@ -41,30 +36,38 @@ export const HeaderButtons = ({
   isRightDisabled,
   isMobile,
 }: HeaderButtonsProps) => {
-  const theme = useTheme();
   const marginSize = isMobile ? "12px" : "8px";
+
   return (
-    <ButtonsContainer>
-      <StyledRoundButtonTheme
-        className="arrow-previous"
+    <div className={styles.buttonsContainer}>
+      <button
+        type="button"
+        className={classNames(styles.roundButton, "arrow-previous", {
+          [styles.disabled]: isLeftDisabled,
+        })}
         style={{ marginInlineEnd: marginSize }}
         onClick={onLeftClick}
         disabled={isLeftDisabled}
-        isMobile={isMobile}
-        $currentColorScheme={theme?.currentColorScheme}
+        aria-label="Previous"
       >
-        <ArrowIcon previous isMobile={isMobile} />
-      </StyledRoundButtonTheme>
+        <span
+          className={classNames(styles.arrowIcon, { [styles.prev]: true })}
+        />
+      </button>
 
-      <StyledRoundButtonTheme
-        className="arrow-next"
+      <button
+        type="button"
+        className={classNames(styles.roundButton, "arrow-next", {
+          [styles.disabled]: isRightDisabled,
+        })}
         onClick={onRightClick}
         disabled={isRightDisabled}
-        isMobile={isMobile}
-        $currentColorScheme={theme?.currentColorScheme}
+        aria-label="Next"
       >
-        <ArrowIcon next isMobile={isMobile} />
-      </StyledRoundButtonTheme>
-    </ButtonsContainer>
+        <span
+          className={classNames(styles.arrowIcon, { [styles.next]: true })}
+        />
+      </button>
+    </div>
   );
 };

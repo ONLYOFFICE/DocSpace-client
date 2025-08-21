@@ -1,0 +1,298 @@
+{
+  "key_path": "NewInRooms",
+  "content": "New in rooms",
+  "content_en_sha1_hash": "35539a6e5b3dcf8e30c6ae6f55d001db21c969b3",
+  "created_at": "2025-05-19T21:30:55.894Z",
+  "updated_at": "2025-06-26T19:00:18.130Z",
+  "comment": {
+    "text": "This translation key is used to display a message indicating that new files have been added to a room. It appears in a modal dialog as a header, typically when viewing an \"aside\" type of dialog with a file list or other related content.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:39:28.554Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/NewFilesBadge/sub-components/NewFilesPanel.tsx",
+      "line_number": 219,
+      "context": "displayType={ModalDialogType.aside}\n withFooterBorder\n withBodyScroll\n >\n <ModalDialog.Header>\n {isRooms ? t(\"NewInRooms\") : isRoom ? t(\"NewInRoom\") : t(\"NewInFolder\")}\n </ModalDialog.Header>\n <ModalDialog.Body>{content}</ModalDialog.Body>\n <ModalDialog.Footer>{markAsReadButton}</ModalDialog.Footer>\n </ModalDialog>\n );",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani translation 'Otaqlarda yeni' is a literal translation and doesn't quite capture the nuance of 'New in rooms'. It could be interpreted as 'new things in rooms' rather than 'new additions to rooms'. A more accurate translation would be something like 'Yeni əlavə olunanlar otaqlarda' or 'Otaqlarda yeniliklər'.",
+          "suggestion": "Consider 'Otaqlarda yeniliklər' or 'Yeni əlavə olunanlar otaqlarda'."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Bulgarian translation \"Нов в стаи\" is not an accurate translation of \"New in rooms.\" It literally translates to \"New in rooms\" but doesn't convey the intended meaning. A more accurate translation would convey the meaning of 'New Arrivals in Rooms' or 'New Features in Rooms' depending on the context.",
+          "suggestion": "Consider \"Нови в стаите\" (New in the rooms) or \"Нови функции в стаите\" (New features in rooms) depending on context."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Nouveau dans les salles\" isn't the most natural or idiomatic translation for \"New in rooms.\" It sounds a bit literal. A more common and natural translation would be \"Nouveautés dans les salles\" or \"Nouveaux arrivages dans les salles\".",
+          "suggestion": "Nouveautés dans les salles"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Նոր է սենյակներում\" (Nor e senyaknerum) literally translates to \"New is in rooms\". While understandable, it's not the most natural or accurate rendering of \"New in rooms\". A more idiomatic Armenian translation would be something like \"Նոր սենյակներում\" (Nor senyaknerum), meaning \"New rooms\".",
+          "suggestion": "Նոր սենյակներում (Nor senyaknerum)"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ルームに新しい項目' while understandable, is not the most natural or accurate translation of \"New in rooms\". It literally translates to \"New items in rooms\".  A more natural and idiomatic translation would convey the sense of 'New features/things/content in rooms'.",
+          "suggestion": "ルームの新機能 (Ruum no shin kinou) - New features in rooms, or ルームの最新情報 (Ruum no saishin jouhou) - Latest information in rooms"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"룸의 새 항목\" doesn't perfectly capture the nuance of \"New in rooms\". \"새 항목\" translates to 'new items,' which is literal but may not be the best fit for the context of what's new within rooms (e.g., features, updates).",
+          "suggestion": "Consider \"방에서 새로 추가된 기능\" (Features newly added in rooms) or \"방에서 새롭게 변경된 사항\" (Newly changed items in rooms) for a more accurate translation depending on the intended meaning."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation \"Jauns telpās\" doesn't accurately convey the meaning of \"New in rooms.\" \"Telpās\" means \"in rooms\" but \"Jauns\" (new) implies something has been added or is present. A more accurate translation might incorporate a verb implying addition or arrival.",
+          "suggestion": "Consider a translation like \"Jaunumi telpās\" (News in rooms) or \"Ko jauna telpās\" (What's new in rooms)."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Novo nas salas\" is a literal translation and doesn't convey the intended meaning of 'New in rooms'. It sounds awkward in Portuguese. A more natural translation would be something like 'Novidades nos quartos' or 'O que há de novo nos quartos'.",
+          "suggestion": "Novidades nos quartos"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Nou în săli\" doesn't fully capture the meaning of \"New in rooms\". While \"Nou\" is correct for 'New', 'în săli' translates to 'in halls/rooms'. The phrase can be interpreted as 'New to the rooms' rather than 'New within the rooms' or 'New arrivals in rooms'. A more accurate translation could depend on the context.  Consider 'Noi în camere' or 'Lucruri noi în camere' as alternatives.",
+          "suggestion": "Consider 'Noi în camere' or 'Lucruri noi în camere' depending on the context."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'අක්ෂවලට නවතම අලුතින් එක්වූවන්' doesn't accurately convey the meaning of 'New in rooms'. It translates to something like 'Those newly joined to the rooms'. The phrase 'New in rooms' typically refers to new features, items, or additions within rooms, not necessarily people who joined them.",
+          "suggestion": "A more appropriate translation might be something like 'කාමරවලට අලුත්' (Kamarawala aluth) which means 'New to the rooms' or 'New in rooms' more generally, or perhaps 'කාමර තුළ නව්‍යතා' (Kamarawala nawyatha) meaning 'New innovations in rooms' depending on the context."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Нови у собама\" literally translates to \"New in rooms,\" which is grammatically correct, but may not be the most natural or idiomatic phrasing in Serbian. A more natural translation might depend on the context, but \"Ново у собама\" or \"Нови садржаји у собама\" (New content in rooms) could be preferable.",
+          "suggestion": "Consider 'Ново у собама' or 'Нови садржаји у собама' depending on context."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Novi u sobama\" is not the best translation for \"New in rooms.\" It implies something *new* is *inside* rooms, rather than *new things* that are *located in* rooms. A more accurate translation would consider the context and possibly use a phrase like \"Novo u prostorijama\" or \"Noviteti u sobama\".",
+          "suggestion": "Novo u prostorijama"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Odalarda yeni' is literally 'New in rooms', it doesn't fully capture the nuance of 'New in rooms' which often implies new arrivals or additions to the rooms. A more accurate translation would convey that.",
+          "suggestion": "Yeni gelenler odalarda"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Mới trong các phòng\" literally translates to \"New in the rooms\" which isn't as natural as other options. A more appropriate translation would be 'Cái mới trong phòng' or 'Sản phẩm mới trong phòng' depending on the context.",
+          "suggestion": "Cái mới trong phòng"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"多个房间中新建\" does not accurately convey the meaning of \"New in rooms.\" It implies 'newly created within multiple rooms' rather than highlighting new additions or features in rooms.  It's too literal and doesn't capture the intended sense of showcasing what's new.",
+          "suggestion": "Consider alternatives like \"新增房间\" (Zēngxīn fángjiān - Newly added rooms) or \"房间新功能\" (Fángjiān xīn gōngnéng - New features in rooms) depending on the exact context. A more general and potentially better translation is \"房间更新\" (Fángjiān gēngxīn - Room updates)."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

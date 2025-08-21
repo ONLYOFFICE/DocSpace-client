@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -70,6 +70,7 @@ export const HeightSetter = (props) => {
           placeholder={t("EnterHeight")}
           value={height}
           tabIndex={3}
+          testId="height_dimension_input"
         />
         <ComboBox
           size="content"
@@ -80,6 +81,8 @@ export const HeightSetter = (props) => {
           selectedOption={heightDimension}
           displaySelectedOption
           directionY="bottom"
+          dataTestId="height_dimension_combobox"
+          dropDownTestId="height_dimension_dropdown"
         />
       </RowContainer>
     </ControlsGroup>

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,7 @@
 import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation, Trans } from "react-i18next";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import moment from "moment-timezone";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
@@ -104,13 +104,13 @@ const InviteQuotaWarningDialog = (props) => {
 
   const contentForGracePeriod = (
     <>
-      <Text fontWeight={700} noSelect>
+      <Text fontWeight={700}>
         {t("BusinessPlanPaymentOverdue", {
           planName: currentTariffPlanTitle,
         })}
       </Text>
       <br />
-      <Text noSelect as="div">
+      <Text as="div">
         <Trans t={t} i18nKey="GracePeriodActivatedInfo" ns="Payments">
           Grace period activated
           <strong>
@@ -145,7 +145,7 @@ const InviteQuotaWarningDialog = (props) => {
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
-          key="OkButton"
+          key="OKButton"
           label={
             isPaymentPageAvailable ? t("UpgradePlan") : t("Common:OKButton")
           }

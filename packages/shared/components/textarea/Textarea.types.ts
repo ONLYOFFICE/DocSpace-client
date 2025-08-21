@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,11 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { ChangeEvent } from "react";
-import { TColorScheme } from "themes";
 
-export interface TextareaProps {
+export type TextareaProps = {
   /** Class name */
   className?: string;
+  /** Wrapper class name */
+  wrapperClassName?: string;
   /** Used as HTML `id` property  */
   id?: string;
   /** Indicates that the field cannot be used */
@@ -81,11 +82,7 @@ export interface TextareaProps {
 
   classNameCopyIcon?: string;
   paddingLeftProp?: string;
-}
 
-export interface TextareaThemeProps extends TextareaProps {
-  ref: React.LegacyRef<HTMLTextAreaElement>;
-  heightTextAreaProp?: string;
-  $currentColorScheme?: TColorScheme;
-  interfaceDirection?: string;
-}
+  isChatMode?: boolean;
+  dataTestId?: string;
+};

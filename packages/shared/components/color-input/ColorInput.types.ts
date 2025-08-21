@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,7 @@
 
 import { InputSize } from "../text-input/TextInput.enums";
 
-export interface ColorInputProps {
+export type ColorInputProps = {
   /** Class name */
   className?: string;
   /** Used as HTML `id` property  */
@@ -45,4 +45,6 @@ export interface ColorInputProps {
   hasError?: boolean;
   /** Indicates the input field has a warning */
   hasWarning?: boolean;
-}
+  /** Test id for the color input */
+  dataTestId?: string;
+};

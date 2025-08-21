@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,26 +24,31 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface EmptyScreenContainerProps {
-  /** Image url source */
+import { CSSProperties, ReactNode } from "react";
+
+export type EmptyScreenContainerProps = {
+  /** URL source for the empty state image */
   imageSrc: string;
-  /** Alternative image text */
+  /** Alternative text for the image for accessibility */
   imageAlt: string;
-  /** Header text */
+  /** Main header text displayed below the image */
   headerText: string;
-  /** Subheading text */
+  /** Optional subheading text displayed below the header */
   subheadingText?: string;
-  /** Description text */
-  descriptionText?: string | React.ReactNode;
-  /** Content of EmptyContentButtonsContainer */
-  buttons?: React.ReactNode;
-  /** Accepts class */
+  /** Optional description text or React node displayed below the subheading */
+  descriptionText?: string | ReactNode;
+  /** Optional buttons or other interactive elements */
+  buttons?: ReactNode;
+  /** Additional CSS class name */
   className?: string;
-  /** Accepts id */
+  /** HTML id attribute */
   id?: string;
-  /** Accepts css style */
-  style?: React.CSSProperties;
-  imageStyle?: React.CSSProperties;
-  buttonStyle?: React.CSSProperties;
+  /** Custom CSS styles for the container */
+  style?: CSSProperties;
+  /** Custom CSS styles for the image */
+  imageStyle?: CSSProperties;
+  /** Custom CSS styles for the buttons container */
+  buttonStyle?: CSSProperties;
+  /** Whether to display without filter styling */
   withoutFilter?: boolean;
-}
+};

@@ -1,0 +1,382 @@
+{
+  "key_path": "SystemThemeDescription",
+  "content": "Automatically switch between light and dark themes when your system does.",
+  "content_en_sha1_hash": "c63fc79ca86878cd4320587abf222c6e63118c5c",
+  "created_at": "2025-05-19T21:30:53.390Z",
+  "updated_at": "2025-08-11T18:11:59.298Z",
+  "comment": {
+    "text": "The SystemThemeDescription translation key is used to display a description of automatically switching between light and dark themes when the system does. It appears in a profile section of a desktop client application. Translators should provide a clear and concise explanation of this feature to help users understand its functionality.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:48.618Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/interface-theme/index.tsx",
+      "line_number": 112,
+      "context": "const systemThemeLabel = isDesktopClient\n ? t(\"Profile:DesktopTheme\")\n : t(\"Profile:SystemTheme\");\n const systemThemeDescriptionLabel = isDesktopClient\n ? t(\"Profile:DesktopThemeDescription\")\n : t(\"Profile:SystemThemeDescription\");\n \n return (\n <StyledWrapperInterfaceTheme>\n <div>\n <Checkbox",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'قم بالتبديل تلقائيًا بين القوالب الفاتحة والداكنة عندما يقوم نظامك بذلك' is a literal translation that doesn't convey the intended meaning as smoothly. 'قوالب' (templates) isn't the best word choice for 'themes' in this context. It implies a customizable design, rather than a system-wide theme.",
+          "suggestion": "قم بالتبديل تلقائيًا بين الوضعين الفاتح والداكن تبعًا لإعدادات النظام."
+        },
+        {
+          "type": "spelling",
+          "description": "While technically correct, the Arabic word 'الداكنة' (al-dakina) for 'dark' can be perceived as slightly formal in this context. A more conversational option might be preferable.",
+          "suggestion": "قم بالتبديل تلقائيًا بين الوضعين الفاتح والداكن تبعًا لإعدادات النظام."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Sisteminiz bunu etdikdə açıq və qaranlıq temalar arasında avtomatik keçid edin' is a rather literal and awkward translation. It doesn't flow naturally in Azerbaijani. The phrasing 'bunu etdikdə' (when it does this) is unclear and doesn't directly convey the automatic switching action.",
+          "suggestion": "Sisteminizlə eyni zamanda açıq və qaranlıq temalar arasında avtomatik keçid edilə bilər."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The wording 'bunu etdikdə' is ambiguous.  It's not immediately clear what 'it' refers to.",
+          "suggestion": "Replacing 'bunu etdikdə' with a more descriptive phrase is crucial for clarity. Suggesting 'Sisteminizlə eyni zamanda' achieves this."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Автоматично превключване между светли и тъмни теми, в съответствие със системата ви\" while understandable, isn't the most natural or precise translation of 'Automatically switch between light and dark themes when your system does.' The phrase 'в съответствие със системата ви' (in accordance with your system) implies a more formal or complex relationship than the original English implies.",
+          "suggestion": "Автоматично превключване между светли и тъмни теми според настройките на системата ви."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Automatické přepínání mezi světlými a tmavými motivy v souladu s vaším systémem' is a bit literal and can be improved for better flow. 'V souladu s vaším systémem' (in accordance with your system) is slightly awkward.",
+          "suggestion": "Automatické přepínání mezi světlými a tmavými motivy podle nastavení vašeho systému."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is overly directive. The English phrase 'Automatically switch...' implies a passive action by the system. The German 'Wechseln Sie automatisch...' directly addresses the user and implies they need to take action, which contradicts the original meaning.",
+          "suggestion": "Das System wechselt automatisch zwischen hellen und dunklen Themen, je nach Systemeinstellungen."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Cambie automáticamente entre los temas claros y oscuros cuando lo haga su sistema' is a bit literal and sounds unnatural in Spanish. A more natural phrasing would convey the intended meaning more effectively.",
+          "suggestion": "Cambie automáticamente entre los temas claro y oscuro según la configuración de su sistema."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'oscuro' should be lowercase following 'tema'.",
+          "suggestion": "Cambie automáticamente entre los temas claro y oscuro según la configuración de su sistema."
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation \"Vaihda automaattisesti vaalean ja tumman teeman välillä, kun systeemisi tekee niin.\" is a literal translation that doesn't quite capture the intended meaning of 'automatically switches'. It sounds unnatural in Finnish.",
+          "suggestion": "Vaihda automaattisesti vaalean ja tumman teeman välille järjestelmän asetusten mukaisesti."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Passage automatique d’un thème clair à un thème sombre lorsque votre système le fait' is a bit literal and could be more natural. 'Passage' is clunky. A more fluent option would express the automatic switching more directly.",
+          "suggestion": "Commutation automatique entre les thèmes clair et sombre selon les paramètres de votre système."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ավտոմատ կերպով անցեք բաց և մուգ ոճերի միջև, երբ ձեր համակարգը դա անում է:' is a literal translation and a bit awkward. It implies the user *actively* switches. The original English 'automatically switch' implies a passive process. A more natural phrasing would be something closer to 'Automatically adjust to your system's theme'.",
+          "suggestion": "Ավտոմատ կերպով համապատասխանել ձեր համակարգի թեմային։ (Automat k'erpov hamapatasxanel dzer hamakargi themayin.)"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Italian translation 'quando lo fa il tuo sistema' is a literal translation of 'when your system does' which doesn't flow naturally in Italian. It implies the system is *doing* something. The intended meaning is that the system dictates the theme change.",
+          "suggestion": "Passare automaticamente dal tema chiaro a quello scuro in base alle impostazioni del tuo sistema."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '시스템이 전환할 때 라이트 테마와 다크 테마 간이 자동으로 전환됩니다' is a bit awkward. The '시스템이 전환할 때' part implies the system is actively changing something, which isn't the intended meaning. It should convey that the theme switches *based on* the system's setting, not that the system is initiating the switch.",
+          "suggestion": "시스템 설정에 따라 라이트 테마와 다크 테마가 자동으로 전환됩니다."
+        },
+        {
+          "type": "grammatical",
+          "description": "While technically grammatical, the structure '라이트 테마와 다크 테마 간이' is not the most natural phrasing in Korean.  It’s a bit clunky.",
+          "suggestion": "라이트 테마와 다크 테마가"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ມືດ' (dark) is misspelled. The correct spelling is 'ເຂື້ອມ'.",
+          "suggestion": "ເຂື້ອມ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Automātiski pārslēdzieties starp gaišiem un tumšiem dizainiem, kad to dara sistēma' is not the most natural or precise translation of 'Automatically switch between light and dark themes when your system does.' The phrase 'kad to dara sistēma' (when the system does) is a bit awkward and doesn't directly convey the intended meaning.",
+          "suggestion": "Automātiski pārslēdzieties starp gaišiem un tumšiem tēmām, kad sistēma to dara."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'dizainiem' can mean 'themes', in this context, 'tēmām' (themes) would be more accurate and idiomatic for describing UI themes.",
+          "suggestion": "Automātiski pārslēdzieties starp gaišiem un tumšiem tēmām, kad sistēma to dara."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Automatycznie przełączaj się między jasnym i ciemnym motywem, kiedy robi to Twój system' is slightly awkward. A more natural phrasing would better convey the intended meaning.",
+          "suggestion": "Automatycznie przełączaj się między jasnym a ciemnym motywem, zgodnie z ustawieniami systemowymi."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Comutați automat între tema luminoasă şi întunecată în funcţie de setări sistem.\" doesn't perfectly convey the meaning of \"Automatically switch between light and dark themes when your system does.\" Specifically, 'when your system does' is lost. The phrase 'in funcţie de setări sistem' implies it's based on *system settings*, but doesn't directly state it mirrors the system's behavior.",
+          "suggestion": "Comutați automat între tema luminoasă și cea întunecată, urmând setările sistemului."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'şi' instead of 'și' is a spelling difference. While both are valid, 'și' is the standard in modern Romanian.",
+          "suggestion": "Comutați automat între tema luminoasă și cea întunecată în funcţie de setări sistem."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Автоматически переключайтесь между светлой и темной темами, когда это делает ваша система.\" uses the imperative mood (\"переключайтесь\"), which implies a direct command. The English sentence describes an automated process. A more accurate translation would convey the automatic nature of the switch.",
+          "suggestion": "Автоматически переключайте темы между светлой и темной в соответствии с настройками вашей системы."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Prepínajte medzi svetlými a tmavými témami automaticky, keď tak urobí váš systém' is not a direct or ideal translation of 'Automatically switch between light and dark themes when your system does.' It implies a command or instruction to the user, whereas the original sentence describes an automatic behavior. A better translation would describe the system's action.",
+          "suggestion": "Automaticky sa prepínajte medzi svetlými a tmavými témami, keď to váš systém robí."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Samodejno preklapljajte med svetlimi in temnimi temami, ko to počne vaš sistem' is a literal translation, but doesn't convey the intended meaning as naturally in Slovenian. It sounds somewhat awkward.",
+          "suggestion": "Samodejno se preklaplja med svetlo in temno temo, glede na nastavitve sistema."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'светлих' should be 'светле'.",
+          "suggestion": "Аутоматски мењај између светле и тамних тема када твој систем то ради."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Automatski menjaj između svetlih i tamnih tema kada tvoj sistem to radi' is a bit literal and could be more natural. 'kada tvoj sistem to radi' is slightly awkward.",
+          "suggestion": "Automatski prelažite između svetle i tamne teme u skladu sa podešavanjima sistema."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation is a command rather than a description. It doesn't accurately reflect the passive nature of the English sentence. The intended meaning of 'automatically switch' is lost.",
+          "suggestion": "Sisteminizde açık ve koyu temalar arasında otomatik geçiş yapılsın."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Автоматично перемикайтеся між світлою та темною темами, коли це робить ваша система.' is a literal translation that doesn't quite capture the intended meaning. It sounds awkward in Ukrainian. A more natural phrasing would be something along the lines of 'Автоматично перемикайтеся між світлою та темною темами, відповідно до вашої системи' or 'Автоматично перемикайтеся між світлою та темною темами залежно від налаштувань вашої системи'.",
+          "suggestion": "Автоматично перемикайтеся між світлою та темною темами відповідно до вашої системи."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'when your system does' is too literal and doesn't convey the intended meaning clearly in Vietnamese. It implies the system is performing an action.",
+          "suggestion": "Tự động chuyển đổi giữa các chế độ sáng và tối theo cài đặt hệ thống."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"根据系统状态切换浅色和深色主题\" implies a direct state-based switch. The original English suggests automatic switching based on the system's *behavior* (e.g., time of day, user preference). It doesn't necessarily mean the system directly reports a 'state'.",
+          "suggestion": "根据系统设置自动切换浅色和深色主题。"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

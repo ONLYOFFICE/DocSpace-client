@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -157,10 +157,11 @@ const ColorSchemeDialog = (props) => {
             <div
               id="accent"
               className="modal-add-theme accent-box"
+              data-testid="color_scheme_dialog_accent"
               onClick={onClickColor}
             />
 
-            {!viewMobile && nodeHexColorPickerAccent}
+            {!viewMobile ? nodeHexColorPickerAccent : null}
           </div>
 
           <div className="flex relative">
@@ -168,10 +169,11 @@ const ColorSchemeDialog = (props) => {
             <div
               id="buttons"
               className="modal-add-theme buttons-box"
+              data-testid="color_scheme_dialog_buttons"
               onClick={onClickColor}
             />
 
-            {!viewMobile && nodeHexColorPickerButtons}
+            {!viewMobile ? nodeHexColorPickerButtons : null}
           </div>
         </StyledBodyContent>
       </ModalDialog.Body>
@@ -185,6 +187,7 @@ const ColorSchemeDialog = (props) => {
           scale
           onClick={onSaveColorSchemeDialog}
           isDisabled={!showSaveButtonDialog}
+          testId="color_scheme_dialog_save"
         />
         <Button
           className="cancel-button"
@@ -192,6 +195,7 @@ const ColorSchemeDialog = (props) => {
           size="normal"
           scale
           onClick={onClose}
+          testId="color_scheme_dialog_cancel"
         />
       </ModalDialog.Footer>
     </ModalDialog>

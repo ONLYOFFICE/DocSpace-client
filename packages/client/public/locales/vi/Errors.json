@@ -1,6 +1,4 @@
 {
   "ErrorEmptyResponse": "Không có hồi đáp",
-  "ErrorUnavailableText": "{{productName}} không khả dụng",
-  "LinkDoesNotExist": "Liên kết bạn đang cố gắng mở không tồn tại.",
-  "LinkHasExpired": "Liên kết bạn theo dõi đã hết hạn."
+  "ErrorUnavailableText": "{{productName}} không khả dụng"
 }

@@ -1,5 +1,0 @@
-{
-  "DisconnectCloudMessage": "Да ли сте сигурни да желите да уклоните {{service}}? Ово неће утицати на ваш {{account}} налог на било који начин.",
-  "DisconnectCloudTitle": "Искључи облак",
-  "SuccessDeleteThirdParty": "Трећа страна {{service}} је обрисана"
-}

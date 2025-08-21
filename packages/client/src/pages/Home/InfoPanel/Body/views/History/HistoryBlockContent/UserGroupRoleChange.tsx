@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,21 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { StyledHistoryBlockMessage } from "../../../styles/history";
-import { Feed } from "./HistoryBlockContent.types";
+import classNames from "classnames";
+
+import { TFeedAction, RoomMember } from "@docspace/shared/api/rooms/types";
+
+import styles from "../History.module.scss";
 
 interface HistoryUserRoleChangeProps {
-  feed: Feed;
+  feed: TFeedAction<RoomMember>;
 }
 
 const HistoryUserGroupRoleChange = ({ feed }: HistoryUserRoleChangeProps) => {
   return (
-    <StyledHistoryBlockMessage className="message">
+    <span className={classNames("message", styles.historyBlockMessage)}>
       <span className="main-message">
         <strong>«{feed.data.access}»</strong>
       </span>{" "}
       <span className="old-role">«{feed.data.oldAccess}»</span>
-    </StyledHistoryBlockMessage>
+    </span>
   );
 };
 

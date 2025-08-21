@@ -1,0 +1,14 @@
+services:
+  tests-ci:
+    image: sdk-tests
+    build:
+      context: ../..
+      dockerfile: packages/sdk/Dockerfile
+  tests-local:
+    image: sdk-tests
+    ports:
+      - "5112:5112"
+    volumes:
+      - ./__tests__:/app/packages/sdk/__tests__
+      - ./playwright.config.ts:/app/packages/sdk/playwright.config.ts
+      - ../../playwright-report/sdk:/app/playwright-report/sdk

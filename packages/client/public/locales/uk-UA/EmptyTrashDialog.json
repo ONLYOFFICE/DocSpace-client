@@ -1,8 +1,6 @@
 {
   "DeleteForeverButton": "Видалити назавжди",
-  "DeleteForeverNote": "Усі елементи в кошику будуть видалені назавжди. Ви не зможете їх відновити.",
-  "DeleteForeverNoteArchive": "Усі архівовані елементи буде видалено назавжди. Ви не зможете їх відновити.",
+  "DeleteForeverNote": "Усі елементи розділу {{sectionName}} буде видалено назавжди. Ви не зможете їх відновити.",
   "DeleteForeverTitle": "Видалити назавжди?",
-  "SuccessEmptyArchived": "Архів очищено",
-  "SuccessEmptyTrash": "Кошик очищено"
+  "SuccessEmptyAction": "Розділ {{sectionName}} спорожнено"
 }

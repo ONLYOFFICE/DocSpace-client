@@ -6,17 +6,17 @@
   "DeleteGroupUsersSuccessMessage": "Uporabniki so bili uspešno izbrisani.",
   "DeleteGuest": "Izbriši gosta",
   "DeleteGuests": "Izbriši goste",
-  "DeleteMyDocumentsUser": "Vse osebne datoteke in mape v razdelku Dokumenti tega uporabnika bodo trajno izbrisane.",
-  "DeletePersonalData": "Osebni podatki, vse osebne datoteke in mape v razdelkih Dokumenti in Koš* izbranih uporabnikov bodo trajno izbrisani. Datoteke in mape izbranih uporabnikov, shranjene v skupnih razdelkih*, kot so sobe, bodo ostale v {{productName}}.",
   "DeletePersonalDataApplicable": "*Velja za izbrane uporabnike, ki imajo takšne datoteke in mape.",
-  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Sobe, ki jih je ustvaril ta uporabnik, in dokumenti, shranjeni v teh sobah, bodo samodejno dodeljeni skrbniku, ki izvede brisanje: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Podatke znova dodelite ročno, da izberete drugega ciljnega uporabnika za ponovno dodelitev.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Sobe, ki jih je ustvaril ta uporabnik, in dokumenti, shranjeni v teh sobah, bodo samodejno dodeljeni skrbniku, ki izvede brisanje: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Podatke znova dodelite ročno, da izberete drugega ciljnega uporabnika za ponovno dodelitev.",
   "DeleteReqassignDescriptionGuest": "{{userCaption}} bo izbrisan iz vseh sob, v katere je bil povabljen. Dokumenti, ki jih je {{userCaption}} ustvaril v sobah, bodo samodejno dodeljeni lastnikom sobe.",
   "DeleteUser": "Izbriši uporabnika",
-  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> bo izbrisan. Tega dejanja ni mogoče razveljaviti.",
+  "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> bo izbrisan. Tega dejanja ni mogoče razveljaviti.",
   "DeletingUsers": "Brisanje uporabnikov",
+  "PersonalDataDeletionInfo": "Osebni podatki, vse osebne datoteke in mape v oddelkih {{sectionNameFirst}} in {{sectionNameSecond}}* izbranih uporabnikov bodo trajno izbrisane. Datoteke in mape izbranih uporabnikov v skupnih oddelkih* (kot so sobe) bodo ostale v {{productName}}.",
   "PleaseNote": "Prosimo, upoštevajte:",
   "ReassignDataToAnotherUser": "Ponovno dodelite podatke drugemu uporabniku",
   "SuccessfullyDeleteGuestInfoMessage": "Gost je bil uspešno izbrisan",
   "SuccessfullyDeleteUserInfoMessage": "Uporabnik je bil uspešno izbrisan",
-  "ToBeAbleToReassignData": "Če želite znova dodeliti podatke, izbrišite le enega uporabnika naenkrat."
+  "ToBeAbleToReassignData": "Če želite znova dodeliti podatke, izbrišite le enega uporabnika naenkrat.",
+  "UserFilesRemovalScope": "Osebni podatki, vse datoteke in mape v oddelkih {{sectionNameFirst}} in {{sectionNameSecond}} tega uporabnika bodo trajno izbrisane."
 }

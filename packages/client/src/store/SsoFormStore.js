@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -145,7 +145,9 @@ class SsoFormStore {
 
   hideAuthPage = false;
 
+  disableEmailVerification = false;
   // sp metadata
+
   spEntityId = "";
 
   spAssertionConsumerUrl = "";
@@ -436,6 +438,7 @@ class SsoFormStore {
         phone: this.phone,
       },
       hideAuthPage: this.hideAuthPage,
+      disableEmailVerification: this.disableEmailVerification,
       usersType: this.usersType,
     };
   };
@@ -450,7 +453,7 @@ class SsoFormStore {
 
     try {
       await submitSsoForm(data);
-      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
       this.isSubmitLoading = false;
       this.load();
     } catch (err) {
@@ -484,6 +487,7 @@ class SsoFormStore {
       spCertificateAdvanced,
       fieldMapping,
       hideAuthPage,
+      disableEmailVerification,
       usersType,
     } = config;
     const { entityId, ssoBinding, sloBinding, nameIdFormat } = idpSettings;
@@ -556,6 +560,7 @@ class SsoFormStore {
     this.phone = phone;
 
     this.hideAuthPage = hideAuthPage;
+    this.disableEmailVerification = disableEmailVerification;
     this.usersType = usersType || EmployeeType.User;
   };
 

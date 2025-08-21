@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ThemeKeys } from "../enums";
+import { RoomsType, ThemeKeys } from "../enums";
 
 export type TFrameType = "desktop" | "mobile";
 
@@ -105,10 +105,14 @@ export type TFrameEvents = {
   onNotFound?: null | (() => void);
   onSelectCallback?: null | ((e: Event | object) => void);
   onSignOut?: null | (() => void);
+  onEditorOpen?: null | ((e: Event | object) => void);
+  onFileManagerClick?: null | ((e: Event | object) => void);
 };
 
 export type TFrameConfig = {
+  acceptButtonLabel?: string;
   buttonColor?: string;
+  cancelButtonLabel?: string;
   checkCSP?: boolean;
   destroyText?: string;
   disableActionButton?: boolean;
@@ -124,10 +128,12 @@ export type TFrameConfig = {
   id?: string | number | null;
   infoPanelVisible?: boolean;
   init?: boolean | null;
+  isSDK?: boolean;
   locale?: string | null;
   mode: TFrameMode | string;
   name?: string;
   requestToken?: string | null;
+  roomType?: RoomsType | RoomsType[];
   rootPath?: string;
   selectorType?: TFrameSelectorType;
   showFilter?: boolean;

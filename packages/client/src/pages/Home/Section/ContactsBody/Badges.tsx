@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,7 @@
 import { inject, observer } from "mobx-react";
 import styled, { css, useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 
 import Filter from "@docspace/shared/api/people/filter";
 import { PaymentsType, AccountLoginType } from "@docspace/shared/enums";
@@ -118,7 +118,7 @@ const Badges = ({
       className="badges additional-badges"
       infoPanelVisible={infoPanelVisible}
     >
-      {isLDAP && (
+      {isLDAP ? (
         <Badge
           className="accounts-badge"
           label={t("Common:LDAP")}
@@ -131,11 +131,10 @@ const Badges = ({
           fontSize="9px"
           fontWeight={800}
           noHover
-          lineHeight="13px"
           onClick={onLDAPClick}
         />
-      )}
-      {isSSO && (
+      ) : null}
+      {isSSO ? (
         <Badge
           className="accounts-badge"
           label={t("SSO")}
@@ -148,11 +147,10 @@ const Badges = ({
           fontSize="9px"
           fontWeight={800}
           noHover
-          lineHeight="13px"
           onClick={onSSOClick}
         />
-      )}
-      {!withoutPaid && isPaid && (
+      ) : null}
+      {!withoutPaid && isPaid ? (
         <StyledPaidBadge
           className="paid-badge accounts-badge"
           label={t("Paid")}
@@ -163,25 +161,24 @@ const Badges = ({
           }
           fontSize="9px"
           fontWeight={800}
-          lineHeight="13px"
           noHover
           onClick={onClickPaid}
           isPaidBadge
           maxWidth="65px"
         />
-      )}
-      {statusType === "pending" && (
+      ) : null}
+      {statusType === "pending" ? (
         <StyledSendClockIcon
           className="pending-badge accounts-badge"
           size={IconSizeType.small}
         />
-      )}
-      {statusType === "disabled" && (
+      ) : null}
+      {statusType === "disabled" ? (
         <StyledCatalogSpamIcon
           className="disabled-badge accounts-badge"
           size={IconSizeType.small}
         />
-      )}
+      ) : null}
     </StyledBadgesContainer>
   );
 };

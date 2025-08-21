@@ -1,0 +1,238 @@
+{
+  "key_path": "ChoosePortal",
+  "content": "Choose your portal",
+  "content_en_sha1_hash": "baf622427618ef645a2014b502083b1cd768db08",
+  "created_at": "2025-05-19T21:30:57.231Z",
+  "updated_at": "2025-06-30T12:20:31.673Z",
+  "comment": {
+    "text": "The \"ChoosePortal\" translation key is used to display a title when choosing an authentication portal. It appears as a central heading in a login or greeting component, indicating that the user needs to select their preferred portal for authentication.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:48.240Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/login/src/components/GreetingContainer/GreetingLoginContainer.tsx",
+      "line_number": 98,
+      "context": "fontWeight={700}\n textAlign=\"center\"\n className=\"greeting-title\"\n >\n {pathname === \"/tenant-list\"\n ? t(\"TenantList:ChoosePortal\")\n : greetingSettings}\n </Text>\n ) : null}\n \n {type === \"invitation\" ? (",
+      "module": "/packages/login"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '他のを選択してください' (Hoka no o sentaku shite kudasai) translates to 'Please select another'. While technically conveying a choice, it doesn't directly translate to 'Choose your portal'. It implies choosing *another* option, which isn't the intended meaning.",
+          "suggestion": "Consider a translation like 'ポータルを選択してください' (Po-ta-ru o sentaku shite kudasai), which directly translates to 'Choose your portal'."
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ເລືອກປະຕູທາງຂອງທ່ານ\" is a literal translation, \"Choose your portal\" implies a specific online platform or access point.  \"ປະຕູທາງ\" (doorway) might be too literal and less clear in this context. A better translation would convey the idea of selecting a platform or access point.",
+          "suggestion": "ເລືອກເວທີຂອງທ່ານ (Leuak weti khong khun) - This translates to 'Choose your platform'."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Alegeți portalul dvs' is a slightly unnatural phrasing. 'Alegeți portalul dumneavoastră' would be more common and formal, which aligns better with the likely context of a user interface element.",
+          "suggestion": "Alegeți portalul dumneavoastră"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ඔබේ ද්වාරය තෝරන්න\" (obae dvaaraya thoranna) literally translates to 'Choose your door'. While 'portal' and 'door' can sometimes be used metaphorically, 'portal' typically implies a gateway to online services or a specific platform. A more accurate translation would capture this meaning.",
+          "suggestion": "Consider a translation like \"ඔබේ පිවිසුම තෝරන්න\" (obae pivisuma thoranna) which translates to 'Choose your access/entry' or \"ඔබේ වේදිකාව තෝරන්න\" (obae vedikaawa thoranna) which translates to 'Choose your platform'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"选择另一个\" (xuǎn zé lìng yī gè) translates to \"Choose another\" which doesn't accurately convey the meaning of \"Choose your portal.\" It implies choosing something different rather than selecting a portal.",
+          "suggestion": "选择门户 (xuǎn zé mén hú) - This translates to \"Choose portal\" which is a more accurate reflection of the English source."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

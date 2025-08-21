@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,9 +33,10 @@ import RootTabletIcon from "PUBLIC_DIR/images/root.tablet.react.svg";
 
 import { DeviceType } from "../../../enums";
 
-import { ColorTheme, ThemeId } from "../../color-theme";
-import { StyledItem, StyledText } from "../Navigation.styled";
-import { INavigationItemProps } from "../Navigation.types";
+import { Text } from "../../text";
+
+import styles from "../Navigation.module.scss";
+import { TNavigationItemProps } from "../Navigation.types";
 
 const Item = ({
   id,
@@ -45,21 +46,23 @@ const Item = ({
   onClick,
   withLogo,
   currentDeviceType,
+  isRootTemplates,
   ...rest
-}: INavigationItemProps) => {
+}: TNavigationItemProps) => {
   const onClickAvailable = () => {
-    onClick?.(id, isRootRoom);
+    onClick?.(id, isRootRoom, isRootTemplates);
   };
 
   return (
-    <StyledItem
+    <div
       id={`${id}`}
-      isRoot={isRoot}
+      className={styles.item}
       onClick={onClickAvailable}
-      withLogo={!!withLogo}
+      data-root={isRoot ? "true" : "false"}
+      data-with-logo={withLogo ? "true" : "false"}
       {...rest}
     >
-      <ColorTheme isRoot={isRoot} themeId={ThemeId.IconWrapper}>
+      <div className={styles.itemWrapper}>
         {currentDeviceType !== DeviceType.desktop ? (
           isRoot ? (
             <RootTabletIcon />
@@ -71,18 +74,20 @@ const Item = ({
         ) : (
           <DefaultIcon />
         )}
-      </ColorTheme>
+      </div>
 
-      <StyledText
-        isRoot={isRoot}
+      <Text
         fontWeight={isRoot ? "600" : "400"}
         fontSize="15px"
         truncate
         title={title}
+        className={styles.text}
+        data-root={isRoot ? "true" : "false"}
+        noSelect
       >
         {title}
-      </StyledText>
-    </StyledItem>
+      </Text>
+    </div>
   );
 };
 

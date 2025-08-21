@@ -1,6 +1,5 @@
 {
   "AccountWillBeCreated": "سيتم إنشاء حساب {{productName}} لـ <1>{{email}}</1> يرجى إكمال التسجيل:",
-  "ChangePasswordSuccess": "تم تغيير كلمة المرور بنجاح",
   "ConfirmOwnerPortalSuccessMessage": "تم تغيير مالك {{productName}} بنجاح. ستتم إعادة توجيهك في غضون 10 ثوانٍ.",
   "ConfirmOwnerPortalTitle": "الرجاء تأكيد أنك تريد تغيير مالك {{productName}} إلى {{newOwner}}.",
   "CurrentNumber": "رقم هاتفك المحمول الحالي",
@@ -26,9 +25,6 @@
   "PortalRemoveTitle": "يرجى تأكيد رغبتك في حذف {{productName}} الخاص بك.",
   "Reactivate": "اعادة تفعيل",
   "SetAppButton": "ربط التطبيق",
-  "SetAppDescription": "تم تمكين المصادقة ذات العاملين. قم بتكوين تطبيق المصادقة لمتابعة العمل في {{productName}}. يمكنك استخدام مصادقة جوجل لنظام تشغيل <1> أندرويد</1> و <4> iOS </4> أو مصادقة لـ <8> هاتف ويندوز </8>.",
-  "SetAppInstallDescription": "للربط بالتطبيق، امسح الرمز أو أدخل الرمز السري يدويًا <1>{{ secretKey }}</1>، ثم أدخل رمزًا مكونًا من 6 أرقام من تطبيقك في الحقل أدناه.",
-  "SetAppTitle": "ضبط تطبيق المصادقة الخاص بك",
   "SignUp": "اشتراك",
   "SuccessDeactivate": "تم إلغاء تنشيط حسابك بنجاح. في غضون 10 ثوانٍ، ستتم إعادة توجيهك إلى <1>site</1>.",
   "SuccessReactivate": "تم إعادة تنشيط حسابك بنجاح. في غضون 10 ثوانٍ، ستتم إعادة توجيهك إلى <1>portal</1>.",

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -276,11 +276,11 @@ const EditingWrapperComponent = (props) => {
   return (
     <EditingWrapper
       viewAs={viewAs}
-      isUpdatingRowItem={isUpdatingRowItem && !isTable}
+      isUpdatingRowItem={isUpdatingRowItem ? !isTable : null}
       isFolder={isFolder}
       isDisabled={isLoading}
     >
-      {isTable && elementIcon}
+      {isTable ? elementIcon : null}
       {isUpdatingRowItem && !isTable ? (
         <Text className="edit-text">{itemTitle}</Text>
       ) : (
@@ -302,7 +302,7 @@ const EditingWrapperComponent = (props) => {
           forwardedRef={inputRef}
         />
       )}
-      {!isUpdatingRowItem && (
+      {!isUpdatingRowItem ? (
         <>
           <Button
             className="edit-button not-selectable"
@@ -332,7 +332,7 @@ const EditingWrapperComponent = (props) => {
             title=""
           />
         </>
-      )}
+      ) : null}
     </EditingWrapper>
   );
 };

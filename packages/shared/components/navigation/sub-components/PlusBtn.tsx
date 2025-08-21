@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,8 +29,9 @@ import React, { useState, useRef } from "react";
 import PlusReactSvgUrl from "PUBLIC_DIR/images/icons/17/plus.svg?url";
 
 import { IconButton } from "../../icon-button";
-import { ContextMenu, TContextMenuRef } from "../../context-menu";
-import { IPlusButtonProps } from "../Navigation.types";
+import { ContextMenu, ContextMenuRefType } from "../../context-menu";
+import { TPlusButtonProps } from "../Navigation.types";
+import { isMobile } from "../../../utils";
 
 const PlusButton = ({
   className,
@@ -40,11 +41,11 @@ const PlusButton = ({
   isFrame,
   id,
   onCloseDropBox,
+  forwardedRef,
   ...rest
-}: IPlusButtonProps) => {
+}: TPlusButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const ref = useRef<HTMLDivElement | null>(null);
-  const menuRef = useRef<TContextMenuRef | null>(null);
+  const menuRef = useRef<ContextMenuRefType>(null);
 
   const toggle = (e: React.MouseEvent<HTMLDivElement>, open: boolean) => {
     if (open) {
@@ -69,7 +70,12 @@ const PlusButton = ({
   const model = getData();
 
   return (
-    <div ref={ref} className={className} {...rest}>
+    <div
+      ref={forwardedRef}
+      className={className}
+      {...rest}
+      data-testid="plus-button"
+    >
       <IconButton
         onClick={onClick}
         iconName={PlusReactSvgUrl}
@@ -79,12 +85,14 @@ const PlusButton = ({
       />
       <ContextMenu
         model={model}
-        containerRef={ref}
+        containerRef={forwardedRef}
         ref={menuRef}
         onHide={onHide}
         scaled={false}
-        // directionX="right"
         leftOffset={isFrame ? 190 : 150}
+        headerOnlyMobile
+        ignoreChangeView
+        withBackdrop={isMobile()}
       />
     </div>
   );

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,72 +24,90 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
-import { Box } from "@docspace/shared/components/box";
-import { Label } from "@docspace/shared/components/label";
-import { Text } from "@docspace/shared/components/text";
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { ComboBox } from "@docspace/shared/components/combobox";
-import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
-import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { inject, observer } from "mobx-react";
+
 import SDK from "@onlyoffice/docspace-sdk-js";
 
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { ComboBox } from "@docspace/shared/components/combobox";
 import { HelpButton } from "@docspace/shared/components/help-button";
+import { Label } from "@docspace/shared/components/label";
+import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
+import { Text } from "@docspace/shared/components/text";
 import { FilterType, FilesSelectorFilterTypes } from "@docspace/shared/enums";
+import { getSdkScriptUrl, loadScript } from "@docspace/shared/utils/common";
 
-import SubtitleUrl from "PUBLIC_DIR/images/sdk-presets_subtitle.react.svg?url";
-import SearchUrl from "PUBLIC_DIR/images/sdk-presets_files-search.react.svg?url";
-import SubtitleUrlDark from "PUBLIC_DIR/images/sdk-presets_subtitle_dark.png?url";
-import SearchUrlDark from "PUBLIC_DIR/images/sdk-presets_files-search_dark.png?url";
-import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
+import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import { TooltipContent } from "../sub-components/TooltipContent";
-import { Integration } from "../sub-components/Integration";
+import { getManyPDFTitle } from "@docspace/shared/utils/getPDFTite";
 
-import { WidthSetter } from "../sub-components/WidthSetter";
-import { HeightSetter } from "../sub-components/HeightSetter";
-import { FrameIdSetter } from "../sub-components/FrameIdSetter";
-import { PresetWrapper } from "../sub-components/PresetWrapper";
-import { SelectTextInput } from "../sub-components/SelectTextInput";
-import { CancelTextInput } from "../sub-components/CancelTextInput";
-import { MainElementParameter } from "../sub-components/MainElementParameter";
-import { PreviewBlock } from "../sub-components/PreviewBlock";
-
-import { dimensionsModel, defaultSize, defaultDimension } from "../constants";
+import SearchUrl from "PUBLIC_DIR/images/sdk-presets_files-search.react.svg?url";
+import SearchUrlDark from "PUBLIC_DIR/images/sdk-presets_files-search_dark.png?url";
+import SubtitleUrl from "PUBLIC_DIR/images/sdk-presets_subtitle.react.svg?url";
+import SubtitleUrlDark from "PUBLIC_DIR/images/sdk-presets_subtitle_dark.png?url";
 
 import {
-  Controls,
+  defaultDimension,
+  defaultSize,
+  dimensionsModel,
+  sdkSource,
+  sdkVersion,
+} from "../constants";
+
+import { CancelTextInput } from "../sub-components/CancelTextInput";
+import { FrameIdSetter } from "../sub-components/FrameIdSetter";
+import { HeightSetter } from "../sub-components/HeightSetter";
+import Integration from "../sub-components/Integration";
+import { MainElementParameter } from "../sub-components/MainElementParameter";
+import { PresetWrapper } from "../sub-components/PresetWrapper";
+import { PreviewBlock } from "../sub-components/PreviewBlock";
+import { SelectTextInput } from "../sub-components/SelectTextInput";
+import { TooltipContent } from "../sub-components/TooltipContent";
+import { VersionSelector } from "../sub-components/VersionSelector";
+import { WidthSetter } from "../sub-components/WidthSetter";
+
+import {
   CategorySubHeader,
-  ControlsGroup,
-  LabelGroup,
-  ControlsSection,
-  Frame,
   Container,
+  Controls,
+  ControlsGroup,
+  ControlsSection,
   FilesSelectorInputWrapper,
+  Frame,
+  LabelGroup,
 } from "./StyledPresets";
 
 const FileSelector = (props) => {
-  const { t, fetchExternalLinks, theme, currentColorScheme } = props;
+  const { t, fetchExternalLinks, theme, logoText } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
   const fileTypeDisplay = [
-    { value: FilesSelectorFilterTypes.ALL, label: t("AllTypes") },
+    {
+      value: FilesSelectorFilterTypes.ALL,
+      label: t("AllTypes"),
+      dataTestId: "all_types_radio_button",
+    },
     {
       value: "EditorSupportedTypes",
       label: t("AllTypesSupportedByEditor", {
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }),
+      dataTestId: "editor_radio_button",
     },
-    { value: "SelectorTypes", label: t("SelectTypes") },
+    {
+      value: "SelectorTypes",
+      label: t("SelectTypes"),
+      dataTestId: "selector_radio_button",
+    },
   ];
 
   const fileOptions = [
     {
       key: FilterType.FoldersOnly,
-      label: t(`Translations:Folders`),
+      label: t(`Common:Folders`),
     },
     {
       key: FilterType.DocumentsOnly,
@@ -97,33 +115,45 @@ const FileSelector = (props) => {
     },
     {
       key: FilterType.PresentationsOnly,
-      label: t(`Translations:Presentations`),
+      label: t(`Common:Presentations`),
     },
     {
       key: FilterType.SpreadsheetsOnly,
-      label: t(`Translations:Spreadsheets`),
+      label: t(`Common:Spreadsheets`),
+    },
+    {
+      key: FilterType.PDFForm,
+      label: getManyPDFTitle(t, true),
     },
     {
       key: FilterType.Pdf,
-      label: t(`Files:Forms`),
+      label: getManyPDFTitle(t, false),
+    },
+    {
+      key: FilterType.DiagramsOnly,
+      label: t(`Common:Diagrams`),
     },
     {
       key: FilterType.ArchiveOnly,
-      label: t(`Files:Archives`),
+      label: t(`Common:Archives`),
     },
     {
       key: FilterType.ImagesOnly,
-      label: t(`Files:Images`),
+      label: t(`Common:Images`),
     },
     {
       key: FilterType.MediaOnly,
-      label: t(`Files:Media`),
+      label: t(`Common:Media`),
     },
     {
       key: FilterType.FilesOnly,
-      label: t(`Translations:Files`),
+      label: t(`Common:Files`),
     },
   ];
+
+  const [version, onSetVersion] = useState(sdkVersion[210]);
+
+  const [source, onSetSource] = useState(sdkSource.Package);
 
   const [sharedLinks, setSharedLinks] = useState(null);
   const [typeDisplay, setTypeDisplay] = useState(fileTypeDisplay[0].value);
@@ -158,19 +188,44 @@ const FileSelector = (props) => {
     },
   });
 
-  const sdk = new SDK();
+  const fromPackage = source === sdkSource.Package;
+
+  const sdkScriptUrl = getSdkScriptUrl(version);
+
+  const sdk = fromPackage ? new SDK() : window.DocSpace.SDK;
 
   const destroyFrame = () => {
-    sdk.frames[config.frameId]?.destroyFrame();
+    sdk?.frames[config.frameId]?.destroyFrame();
   };
 
   const initFrame = () => {
-    setTimeout(() => sdk.init(config), 10);
+    setTimeout(() => sdk?.init(config), 0);
   };
 
   useEffect(() => {
+    const script = document.getElementById("sdk-script");
+
+    if (script) {
+      script.remove();
+      destroyFrame();
+    }
+
+    if (!fromPackage) {
+      loadScript(sdkScriptUrl, "sdk-script");
+    }
+
+    return () => {
+      destroyFrame();
+      setTimeout(() => script?.remove(), 10);
+    };
+  }, [source, version]);
+
+  useEffect(() => {
     initFrame();
-    return () => destroyFrame();
+
+    return () => {
+      destroyFrame();
+    };
   });
 
   useEffect(() => {
@@ -257,7 +312,7 @@ const FileSelector = (props) => {
       height={config.height.includes("px") ? config.height : undefined}
       targetId={config.frameId}
     >
-      <Box id={config.frameId} />
+      <div id={config.frameId} />
     </Frame>
   );
 
@@ -268,15 +323,19 @@ const FileSelector = (props) => {
     >
       <Container>
         <PreviewBlock
-          t={t}
           loadCurrentFrame={initFrame}
           preview={preview}
           theme={theme}
           frameId={config.frameId}
-          scriptUrl={SDK_SCRIPT_URL}
+          scriptUrl={sdkScriptUrl}
           config={config}
         />
         <Controls>
+          <VersionSelector
+            t={t}
+            onSetSource={onSetSource}
+            onSetVersion={onSetVersion}
+          />
           <MainElementParameter
             t={t}
             config={config}
@@ -316,6 +375,7 @@ const FileSelector = (props) => {
                 label={t("Subtitle")}
                 onChange={toggleWithSubtitle}
                 isChecked={config.withSubtitle}
+                dataTestId="subtitle_checkbox"
               />
               <HelpButton
                 place="right"
@@ -328,6 +388,7 @@ const FileSelector = (props) => {
                     img={theme.isBase ? SubtitleUrl : SubtitleUrlDark}
                   />
                 }
+                dataTestId="subtitle_help_button"
               />
             </LabelGroup>
             <LabelGroup>
@@ -336,6 +397,7 @@ const FileSelector = (props) => {
                 label={t("Common:Search")}
                 onChange={toggleWithSearch}
                 isChecked={config.withSearch}
+                dataTestId="search_checkbox"
               />
               <HelpButton
                 place="right"
@@ -348,6 +410,7 @@ const FileSelector = (props) => {
                     img={theme.isBase ? SearchUrl : SearchUrlDark}
                   />
                 }
+                dataTestId="search_help_button"
               />
             </LabelGroup>
             <SelectTextInput t={t} config={config} setConfig={setConfig} />
@@ -365,6 +428,7 @@ const FileSelector = (props) => {
                   tooltipContent={
                     <Text fontSize="12px">{t("RoomOrFolderDescription")}</Text>
                   }
+                  dataTestId="room_or_folder_help_button"
                 />
               </LabelGroup>
               <FilesSelectorInputWrapper>
@@ -374,7 +438,7 @@ const FileSelector = (props) => {
                 />
               </FilesSelectorInputWrapper>
             </ControlsGroup>
-            {sharedLinks && (
+            {sharedLinks ? (
               <ControlsGroup>
                 <LabelGroup>
                   <Label
@@ -387,6 +451,7 @@ const FileSelector = (props) => {
                     tooltipContent={
                       <Text fontSize="12px">{t("Common:PublicRoomInfo")}</Text>
                     }
+                    dataTestId="external_link_help_button"
                   />
                 </LabelGroup>
                 <ComboBox
@@ -396,9 +461,10 @@ const FileSelector = (props) => {
                   selectedOption={sharedLinks[0]}
                   displaySelectedOption
                   directionY="bottom"
+                  dataTestId="external_link_combobox"
                 />
               </ControlsGroup>
-            )}
+            ) : null}
           </ControlsSection>
 
           <ControlsSection>
@@ -411,8 +477,9 @@ const FileSelector = (props) => {
               selected={typeDisplay}
               onClick={changeColumnsOption}
               spacing="8px"
+              dataTestId="file_type_display_radiobutton_group"
             />
-            {typeDisplay === "SelectorTypes" && (
+            {typeDisplay === "SelectorTypes" ? (
               <ComboBox
                 onSelect={onTypeSelect}
                 options={
@@ -424,37 +491,29 @@ const FileSelector = (props) => {
                 scaled
                 directionY="top"
                 selectedOption={selectedType}
+                dataTestId="file_type_combobox"
+                dropDownTestId="file_type_dropdown"
               />
-            )}
+            ) : null}
           </ControlsSection>
 
-          <Integration
-            className="integration-examples"
-            t={t}
-            theme={theme}
-            currentColorScheme={currentColorScheme}
-          />
+          <Integration className="integration-examples" />
         </Controls>
       </Container>
 
-      <Integration
-        className="integration-examples integration-examples-bottom"
-        t={t}
-        theme={theme}
-        currentColorScheme={currentColorScheme}
-      />
+      <Integration className="integration-examples integration-examples-bottom" />
     </PresetWrapper>
   );
 };
 
 export const Component = inject(({ settingsStore, publicRoomStore }) => {
-  const { theme, currentColorScheme } = settingsStore;
+  const { theme, logoText } = settingsStore;
   const { fetchExternalLinks } = publicRoomStore;
 
   return {
     theme,
-    currentColorScheme,
     fetchExternalLinks,
+    logoText,
   };
 })(
   withTranslation([

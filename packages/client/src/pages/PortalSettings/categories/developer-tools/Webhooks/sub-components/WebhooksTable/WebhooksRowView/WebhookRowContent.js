@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
-import { RowContent } from "@docspace/shared/components/row-content";
+import { RowContent } from "@docspace/shared/components/rows";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 
 import { isMobile, tablet } from "@docspace/shared/utils";
@@ -79,6 +79,7 @@ export const WebhookRowContent = ({
   sectionWidth,
   webhook,
   isChecked,
+  isDisabled,
   handleToggleEnabled,
 }) => {
   return (
@@ -95,18 +96,20 @@ export const WebhookRowContent = ({
           <StatusBadge status={webhook.status} />
         </FlexWrapper>
 
-        {!isMobile() && (
+        {!isMobile() ? (
           <Text fontWeight={600} fontSize="12px" color={globalColors.gray}>
             {webhook.uri}
           </Text>
-        )}
+        ) : null}
       </ContentWrapper>
 
       <ToggleButtonWrapper>
         <ToggleButton
+          dataTestId={`toggle_button_${webhook.name}`}
           className="toggle toggleButton"
           id="toggle id"
           isChecked={isChecked}
+          isDisabled={isDisabled}
           onChange={handleToggleEnabled}
         />
       </ToggleButtonWrapper>

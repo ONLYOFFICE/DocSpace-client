@@ -6,17 +6,17 @@
   "DeleteGroupUsersSuccessMessage": "사용자가 성공적으로 삭제되었습니다.",
   "DeleteGuest": "게스트 삭제",
   "DeleteGuests": "게스트 삭제",
-  "DeleteMyDocumentsUser": "이 사용자의 내 문서 섹션에 있는 모든 개인 파일 및 폴더가 영구적으로 삭제됩니다.",
-  "DeletePersonalData": "개인 데이터, 선택한 사용자의 문서 및 휴지통 섹션*에 있는 모든 개인 파일 및 폴더가 영구적으로 삭제됩니다. 룸과 같은 공통 섹션*에 보관된 선택한 사용자의 파일 및 폴더는 {{productName}}에 그대로 유지됩니다. ",
   "DeletePersonalDataApplicable": "*해당 파일 및 폴더를 보유하고 있는 선택한 사용자에게 적용됩니다.",
-  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} 이 사용자가 생성한 방과 해당 방에 저장된 문서는 삭제를 수행하는 관리자에게 자동으로 재할당됩니다: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. 재할당을 위해 다른 대상 사용자를 선택하려면 데이터를 수동으로 재할당하세요.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} 이 사용자가 생성한 방과 해당 방에 저장된 문서는 삭제를 수행하는 관리자에게 자동으로 재할당됩니다: <1>{{userPerformedDeletion}} ({{userYou}})</1>. 재할당을 위해 다른 대상 사용자를 선택하려면 데이터를 수동으로 재할당하세요.",
   "DeleteReqassignDescriptionGuest": "{{userCaption}}이/가 초대된 모든 룸에서 삭제됩니다. 룸에서 이 {{userCaption}}이/가 만든 문서는 자동으로 룸 소유자에게 재할당됩니다.",
   "DeleteUser": "사용자 삭제",
-  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> 님이 삭제됩니다. 이 작업은 취소할 수 없습니다.",
+  "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> 님이 삭제됩니다. 이 작업은 취소할 수 없습니다.",
   "DeletingUsers": "사용자 삭제",
+  "PersonalDataDeletionInfo": "개인 데이터, 선택한 사용자의 {{sectionNameFirst}} 및 {{sectionNameSecond}} 섹션에 있는 모든 개인 파일 및 폴더가 영구적으로 삭제됩니다. 채팅방과 같은 공용 섹션에 저장된 선택한 사용자의 파일 및 폴더는 {{productName}}에 남아 있습니다.",
   "PleaseNote": "참고:",
   "ReassignDataToAnotherUser": "다른 사용자에게 데이터 재할당",
   "SuccessfullyDeleteGuestInfoMessage": "해당 게스트가 삭제되었습니다",
   "SuccessfullyDeleteUserInfoMessage": "사용자가 성공적으로 삭제되었습니다",
-  "ToBeAbleToReassignData": "데이터를 다시 할당하려면 한 번에 한 명의 사용자를 삭제하세요."
+  "ToBeAbleToReassignData": "데이터를 다시 할당하려면 한 번에 한 명의 사용자를 삭제하세요.",
+  "UserFilesRemovalScope": "개인 데이터, 이 사용자의 {{sectionNameFirst}} 및 {{sectionNameSecond}} 섹션에 있는 모든 파일 및 폴더가 영구적으로 삭제됩니다."
 }

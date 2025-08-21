@@ -1,0 +1,521 @@
+{
+  "key_path": "SPEntityIdTooltip",
+  "content": "The Service provider XML URL address which can be downloaded and used by the Identity provider to unequivocally identify the SP",
+  "content_en_sha1_hash": "7e16034dafb05ab76e9dff0e286b4ab633a7939f",
+  "created_at": "2025-05-19T21:30:50.165Z",
+  "updated_at": "2025-08-11T18:11:59.261Z",
+  "comment": {
+    "text": "The \"SPEntityIdTooltip\" translation key provides a tooltip to help users understand that the metadata URL address is used to uniquely identify a Service Provider in the Single Sign-On process. This tooltip appears on the MetadataUrlField component in the PortalSettings page and helps clarify its purpose.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:05.497Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/ProviderMetadata.js",
+      "line_number": 84,
+      "context": "<StyledWrapper>\n <MetadataUrlField\n labelText={t(\"SPEntityId\")}\n name=\"spEntityId\"\n placeholder={`${url}/sso/metadata`}\n tooltipContent={<Text fontSize=\"12px\">{t(\"SPEntityIdTooltip\")}</Text>}\n tooltipClass=\"sp-entity-id-tooltip icon-button\"\n dataTestId=\"sp_entity_id\"\n />\n \n <MetadataUrlField",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'لغة التوصيف الموسعة' (language of extended description) doesn't accurately convey 'SPEntityIdTooltip'. It's a technical term and a more accurate rendering would be needed.",
+          "suggestion": "Consider using a more technical term or explanation of what an Entity ID represents in this context, perhaps something like 'معرف الكيان' or 'عنوان معرف الكيان'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrasing 'بشكل لا لبس فيه' (in an unequivocal way) is grammatically correct, but slightly formal for this context.  It can be simplified for better readability.",
+          "suggestion": "Consider using a simpler phrase like 'بدقة' (accurately) or 'بوضوح' (clearly)."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation is long and could benefit from being broken down into shorter sentences or rephrased for better clarity and flow, especially when displayed as a tooltip.",
+          "suggestion": "Rephrase the sentence into two shorter sentences, focusing on clarity and brevity. For example: 'هذا هو عنوان رابط موفر الخدمة، والذي يمكن تنزيله بواسطة موفر الهوية. يستخدم هذا العنوان لتعريف مقدم الخدمة بدقة.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'SP-ni aydın şəkildə müəyyən etmək üçün şəxsiyyət provayderi tərəfindən endirilə və istifadə edilə bilər' is a bit clunky and doesn't fully capture the nuance of 'used by the Identity provider to unequivocally identify the SP'. 'Unequivocally' is lost in translation. A more accurate phrasing would emphasize the certainty of identification.",
+          "suggestion": "Xidmət təminatçısı XML URL ünvanı, şəxsiyyət provayderi tərəfindən SP-ni dəqiq şəkildə müəyyən etmək üçün yüklənib istifadə edilə bilər."
+        },
+        {
+          "type": "formatting",
+          "description": "While not critical, the sentence structure could be improved for better readability in Azerbaijani. Splitting it into two sentences might be better.",
+          "suggestion": "Xidmət təminatçısı XML URL ünvanı, SP-ni aydın şəkildə müəyyən etmək üçün şəxsiyyət provayderi tərəfindən endirilə bilər. Bu ünvan istifadə edilə bilər."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Bulgarian translation uses a comma instead of a dash to separate the two parts of the sentence. In technical documentation, a dash is preferred for clarity.",
+          "suggestion": "URL адресът на XML-а на доставчика на услуги, който може да бъде изтеглен и използван от доставчика на идентичност за недвусмислено идентифициране на доставчика на услуги –"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Czech translation lacks proper capitalization at the beginning of the sentence. It should begin with an uppercase letter.",
+          "suggestion": "Adresa URL poskytovatele služeb XML, kterou může poskytovatel identit stáhnout a použít k jednoznačné identifikaci SP"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Η διεύθυνση URL XML του παρόχου υπηρεσιών που μπορεί να ληφθεί και να χρησιμοποιηθεί από τον πάροχο ταυτότητας για την αδιαμφισβήτητη ταυτοποίηση του παρόχου υπηρεσιών\" is overly literal and slightly awkward in Greek. The phrase 'αδιαμφισβήτητη ταυτοποίηση' (unequivocal identification) could be simplified for better readability.",
+          "suggestion": "Η διεύθυνση URL XML του παρόχου υπηρεσιών, η οποία μπορεί να ληφθεί και να χρησιμοποιηθεί από τον πάροχο ταυτότητας για την ταυτοποίηση του."
+        },
+        {
+          "type": "formatting",
+          "description": "The repetition of 'παρόχου υπηρεσιών' (service provider) makes the sentence feel clunky. While technically correct, it could be improved for stylistic flow.",
+          "suggestion": "Consider replacing the second 'παρόχου υπηρεσιών' with a pronoun or a more concise phrase depending on the context."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses 'proveedor de servicios' repeatedly which can be slightly verbose. Consider streamlining for better readability.",
+          "suggestion": "La dirección URL del XML del proveedor de servicios que el proveedor de identidades puede descargar y utilizar para identificar inequívocamente al SP."
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The French word 'qui' is repeated. While grammatically correct, it's slightly awkward.",
+          "suggestion": "L’adresse URL XML du fournisseur de services, laquelle peut être téléchargée et utilisée par le fournisseur d’identité pour identifier sans équivoque le fournisseur de services."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Ծառայությունների մատակարարի XML URL հասցեն\" is a bit clunky. A more natural phrasing might be something like \"Ծառայություն մատակարարի XML URL-ը\" or \"Ծառայությունների մատակարարի XML URL-ի հասցեն\".",
+          "suggestion": "Ծառայություն մատակարարի XML URL-ը"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of 'Service provider' as 'Ծառայությունների մատակարարի' is technically correct but can be simplified to 'Ծառայություն մատակարար'. The inclusion of the plural marker ('ների') isn't necessary in this context.",
+          "suggestion": "Ծառայություն մատակարարի XML URL-ի հասցեն"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The usage of ' միանշանակ նույնականացնելու համար' is a bit verbose. A more concise option would be 'ներկայացնելու համար' or 'չափանակապես իդենտիֆիկացնելու համար'.",
+          "suggestion": "ներկայացնելու համար"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses \"SP\" without explanation. While technically correct within the context, it might be clearer to define it or use the full term 'Service Provider' at least once.",
+          "suggestion": "Consider adding a brief explanation or using the full term 'Service Provider' initially, e.g., 'L’indirizzo URL XML del fornitore di servizi (Service Provider) che può essere scaricato...' or 'L’indirizzo URL XML del fornitore di servizi, conosciuto come Service Provider, che può essere scaricato...'"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Japanese translation lacks proper punctuation. A period or similar punctuation mark should be added at the end of the sentence.",
+          "suggestion": "ID プロバイダがダウンロードし、SP を明確に識別するために使用できるサービスプロバイダ XML の URL アドレス。"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'SP를 명확하게 식별하기 위해 ID 공급자가 다운로드하고 사용할 수 있는 서비스 공급자 XML URL 주소' is a bit literal and could be improved for natural flow in Korean. The English phrase 'unequivocally identify' carries a strong meaning of definitive identification, which isn't fully captured.  It also uses passive voice which sounds less natural.",
+          "suggestion": "SP를 확실하게 식별할 수 있도록 ID 공급자가 다운로드하여 사용하는 서비스 공급자 XML URL 주소"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the Korean translation could benefit from more consistent use of honorifics depending on the intended audience. The current phrasing leans towards more casual tone, which might be inappropriate for technical documentation.",
+          "suggestion": "Consider using more formal language if the context requires it. For example, replacing '사용할 수 있는' with '활용할 수 있는' or a more formal alternative."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ຢ່າງຈະແຈ້ງ' (yang chaeng) translates to 'clearly' or 'distinctly', but in this context, it should convey 'unambiguously' or 'uniquely'.  The original English emphasizes unique identification.",
+          "suggestion": "ຜູ້ໃຫ້ບໍລິການ Identity ເພື່ອລະบุຕົວຕົນ SP ຢ່າງບໍ່ສ້າງຄວາມສັບສົງ"
+        },
+        {
+          "type": "grammar",
+          "description": "While technically correct, the phrase 'ສາມາດໄດ້ຮັບການດາວໂຫຼດແລະນໍາໃຊ້' is a bit verbose. A more concise phrasing would improve readability.",
+          "suggestion": "ສາມາດດາວໂຫຼດແລະໃຊ້"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"vietrāža\" is not the best translation for 'URL address' in this context. It implies a more complex location or path. 'URL adrese' or simply 'URL' would be more accurate.",
+          "suggestion": "Pakalpojumu sniedzēja URL adrese"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the phrasing 'ko identitātes nodrošinātājs var lejupielādēt un izmantot' is a bit verbose.  A more concise and natural phrasing would improve readability.",
+          "suggestion": "ko identitātes nodrošinātājs var lejupielādēt, lai nepārprotami identificētu SP"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Dutch translation contains a space before the colon in 'XML URL-adres'. It should be a hyphen.",
+          "suggestion": "Het XML-URL-adres van de dienstverlener..."
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation lacks a consistent capitalization style. \"usługodawcy\" appears multiple times and the capitalization varies.",
+          "suggestion": "Maintain consistent capitalization for 'usługodawcy'.  Consider capitalizing it each time, or lowering it if that is the desired style."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, the phrase 'który może być pobrany' sounds slightly awkward in Polish. A more natural phrasing would improve readability.",
+          "suggestion": "Consider replacing 'który może być pobrany' with 'który można pobrać' or 'do pobrania'."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'SP' (Service Provider) is not consistently translated. The English uses 'SP' while the Portuguese uses 'PS'. While 'PS' can be an acceptable abbreviation in Portuguese, maintaining consistency with the English term would improve clarity for users familiar with the English terminology.  'Fornecedor de Serviços' is a good translation of 'Service Provider', but using 'PS' instead of 'SP' introduces confusion.",
+          "suggestion": "Replace 'PS' with 'SP' throughout the translation. Alternatively, consistently use 'Fornecedor de Serviços' to avoid any abbreviations."
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase \"inequivocamente o PS\" could be improved for readability. Although grammatically correct, it feels slightly awkward.",
+          "suggestion": "Consider rephrasing to \"identificar o SP de forma inequívoca\" or similar for better flow."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'O endereço XML do provedor de serviços...' is too literal and could be improved for clarity in Portuguese. 'Service provider XML URL address' isn't a common phrase structure in Portuguese. 'URL address' is redundant, as URL inherently implies an address.",
+          "suggestion": "O endereço XML do provedor de serviços, que pode ser baixado e usado pelo provedor de identidade para identificar inequivocamente o SP."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'identificar inequivocamente o SP' can be improved. 'Inevocably identify' feels unnecessarily formal.",
+          "suggestion": "identificar de forma inequívoca o SP"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is a bit long and could benefit from a slight rephrasing for better readability in Portuguese. It reads a bit clunky.",
+          "suggestion": "O endereço XML do provedor de serviços, disponível para download, permite ao provedor de identidade identificar de forma inequívoca o SP."
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'furnizorul' is repeated excessively. While technically correct, it sounds clunky in Romanian. Consider varying the phrasing.",
+          "suggestion": "Adresa URL a fișierului XML al furnizorului de servicii, care poate fi descărcat și utilizat de către furnizorul de identitate pentru identificarea fără echivoc a acestuia."
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'descărcat şi utilizat' could benefit from a more fluent flow. While the use of 'şi' is correct, connecting it to 'utilizat' feels slightly disjointed.",
+          "suggestion": "descărcat și utilizat de către furnizorul de identitate"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'поставщиком учетных записей' for 'Identity provider' is not the most accurate. 'Identity provider' typically translates to 'поставщик удостоверений' or 'поставщик идентификации'.",
+          "suggestion": "URL-адрес XML-файла поставщика сервиса. Файл можно скачать, и он будет использоваться поставщиком удостоверений, чтобы однозначно идентифицировать поставщика сервиса"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation is a single sentence and could benefit from a more complex sentence structure to improve readability. While not strictly an error, it can be improved.",
+          "suggestion": "URL-адрес XML-файла поставщика сервиса, который можно скачать и использовать поставщику удостоверений для однозначной идентификации поставщика сервиса."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is overly literal and lacks clarity. 'නිශ්චිතව SP හඳුනා ගැනීමට' could be more naturally expressed. The phrase 'unequivocally identify the SP' is key and doesn't fully translate.",
+          "suggestion": "අනන්‍යතා ප්‍රතිපාදකයා SP වෙසෙසින් හඳුනා ගැනීම සඳහා අවශ්‍ය XML ලිපිනය."
+        },
+        {
+          "type": "formatting",
+          "description": "The abbreviation 'SP' is not defined for the Sinhala audience. While likely understandable in a technical context, explaining it adds clarity.",
+          "suggestion": "අනන්‍යතා ප්‍රතිපාදකයා (Identity Provider) SP (Service Provider) වෙසෙසින් හඳුනා ගැනීම සඳහා අවශ්‍ය XML ලිපිනය."
+        },
+        {
+          "type": "grammatical",
+          "description": "The sentence structure 'කියවන්නට හා භාවිතා කිරීමට හැකිය' can be improved for flow. It's a bit clunky.",
+          "suggestion": "බාගත කර භාවිතා කළ හැකිය."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Slovak translation uses a long sentence structure which could be improved for readability. While grammatically correct, breaking it down might enhance clarity.",
+          "suggestion": "Adresa URL vo formáte XML, ktorú poskytovateľ identity potrebuje na stiahnutie a použitie na jednoznačnú identifikáciu SP."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English uses the term 'Service provider XML URL address.' The Slovak translation uses 'Adresa URL vo formáte XML'. While generally correct, 'Service provider' could be clarified for a broader audience.  Consider expanding it for better understanding.",
+          "suggestion": "Adresa XML URL pre poskytovateľa služby"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"URL naslov XML ponudnika storitev\" is somewhat literal and could be improved for clarity and natural flow in Slovenian.  'Service provider XML URL address' is a bit clunky.  A more natural phrasing might focus on the function/purpose.",
+          "suggestion": "URL-jem XML datoteke ponudnika storitev"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"za nedvoumno identifikacijo SP\" is technically correct but could be more easily understood.  'Nedvoumno' is a strong word and might not be the most accessible choice.",
+          "suggestion": "za jasno identifikacijo SP"
+        },
+        {
+          "type": "formatting",
+          "description": "The combination of 'URL' and subsequent Slovenian words looks a little awkward. Consider adding a hyphen after 'URL' to make it 'URL-jem' for better readability.",
+          "suggestion": "URL-jem XML datoteke ponudnika storitev"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The term 'пружаоца' should be 'провајдера' to align with standard terminology for 'provider' in Serbian IT contexts.",
+          "suggestion": "Адреса URL XML-а пружаоца услуга која може бити преузета и коришћена од стране идентитетског провајдера како би недвосмислено идентификовао SP."
+        },
+        {
+          "type": "formatting",
+          "description": "The repeated use of 'пружаоца' is slightly awkward. Consider restructuring the sentence for better flow.",
+          "suggestion": "Адреса URL XML-а пружаоца услуге, коју може да преузме и користи идентитетски провајдер, да би недвосмислено идентификовао SP."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'pružaoca' is misspelled. The correct spelling is 'pružalaca'.",
+          "suggestion": "pružalaca"
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure is slightly awkward. Using 'korišćena od strane identitetskog pružaoca' is not the most natural way to phrase it.",
+          "suggestion": "koju može da preuzme i koristi identitetski pružalac da bi nedvosmisleno identifikovao SP."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'unequivocally identify' isn't perfectly captured by 'nedvosmisleno identifikovao'.  While not *wrong*, a more precise translation of unequivocally might be 'precizno' or 'bez dileme'.",
+          "suggestion": "precizno identifikovao"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation is a very long sentence. It would be more readable if broken into shorter sentences.",
+          "suggestion": "Kimlik sağlayıcı tarafından kesin olarak SP'yi tanımlamak için kullanılabilen Hizmet Sağlayıcı XML URL adresidir. Bu adres indirilerek kullanılabilir."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'unequivocally identify' is translated as 'kesin bir surette tanımlamak'. While technically correct, 'kesin olarak tanımlamak' is more natural and common in Turkish.",
+          "suggestion": "Kimlik sağlayıcı tarafından kesin olarak SP'yi tanımlamak için indirilebilen ve kullanılabilen Hizmet sağlayıcı XML URL adresi"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses a hyphenated phrase 'постачальника посвідчень' which can be improved for readability. It's slightly awkward.",
+          "suggestion": "постачальника ідентифікації"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'постачальника посвідчень' (Identity provider) feels a bit literal and could be rephrased for better flow. It doesn't quite capture the nuance of 'Identity provider' in this context. A more natural translation might consider a more general term for an Identity provider.",
+          "suggestion": "Система аутентифікації"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Địa chỉ URL XML của nhà cung cấp dịch vụ có thể được tải xuống và sử dụng bởi nhà cung cấp danh tính để xác định rõ ràng SP' is not a perfect translation of 'The Service provider XML URL address which can be downloaded and used by the Identity provider to unequivocally identify the SP'.  'Unequivocally' is not directly translated, and the flow is slightly awkward. A more natural flow could improve readability.",
+          "suggestion": "Địa chỉ URL XML của nhà cung cấp dịch vụ, có thể tải xuống và sử dụng bởi nhà cung cấp danh tính để xác định SP một cách chính xác."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'chính xác' (accurate) is suggested as a closer translation for 'unequivocally'.",
+          "suggestion": null
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"Service provider\" is not accurate. \"服务供应商\" (fu wu gong ying shang) is a literal translation but doesn't convey the intended technical meaning. It should be more accurately translated as \"服务提供商\" (fu wu ti gong shang) or, even better, kept as \"服务商\" (fu wu shang), which is common in technical documentation.",
+          "suggestion": "服务商"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"克由\" (ke you) doesn't make sense in this context. It seems to be a mistranslation of 'which can be'.",
+          "suggestion": "可以"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"明确识别 SP\" (ming que shi bing SP) is overly formal and somewhat clunky. A more natural translation of \"unequivocally identify the SP\" would be something like \"唯一标识 SP\" (wei yi bing zhi SP) or “清楚地识别 SP” (qing chu de shi bing SP).",
+          "suggestion": "唯一标识 SP"
+        },
+        {
+          "type": "formatting",
+          "description": "The Chinese translation reads a bit awkwardly. While not strictly wrong, the sentence order could be improved for better flow and readability. A more natural flow would be placing the 'SP' identification phrase near the end of the sentence.",
+          "suggestion": "身份供应商可以下载并使用该 XML URL 地址，以唯一标识 SP。"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

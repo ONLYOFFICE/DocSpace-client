@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -41,6 +41,7 @@ import {
 } from "@docspace/shared/components/combobox";
 import { ContextMenuModel } from "@docspace/shared/components/context-menu";
 import { getUserTypeTranslation } from "@docspace/shared/utils/common";
+import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
 
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
@@ -82,8 +83,11 @@ const PeopleTableRow = ({
   inviterColumnIsEnabled,
   storageColumnIsEnabled,
 
-  isGuests,
+  contactsTab,
   isRoomAdmin,
+  inProgress,
+  itemIndex,
+  withContentSelection,
 }: TableRowProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["People", "Common", "Settings"]);
@@ -103,6 +107,8 @@ const PeopleTableRow = ({
     isLDAP,
   } = item;
 
+  const isGuests = contactsTab === "guests";
+  const isInsideGroup = contactsTab === "inside_group";
   const isPending = statusType === "pending" || statusType === "disabled";
 
   const nameColor = isPending
@@ -126,25 +132,26 @@ const PeopleTableRow = ({
 
   const onTypeChange = React.useCallback(
     (option: TOption) => {
-      if (option.action) {
-        setIsLoading(true);
-        if (
-          !changeUserType(
-            option.action as EmployeeType,
-            [item],
-            onSuccess,
-            onAbort,
-          )
-        ) {
-          setIsLoading(false);
-        }
+      if (!option.action || option.key === role) return;
+
+      setIsLoading(true);
+      if (
+        !changeUserType(
+          option.action as EmployeeType,
+          [item],
+          onSuccess,
+          onAbort,
+        )
+      ) {
+        setIsLoading(false);
       }
     },
     [item, changeUserType],
   );
 
   const onOpenGroupClick = React.useCallback(
-    ({ action, title }: TOption) => onOpenGroup!(action as string, true, title),
+    ({ action, title }: TOption) =>
+      onOpenGroup!(action as string, !isInsideGroup, title),
     [onOpenGroup],
   );
 
@@ -196,6 +203,7 @@ const PeopleTableRow = ({
           color={sideInfoColor}
           onClick={() => onOpenGroupClick({ action: groups[0].id } as TOption)}
           isTextOverflow
+          truncate
         >
           {groups[0].name}
         </Link>
@@ -258,7 +266,10 @@ const PeopleTableRow = ({
     [item, onUserContextClick],
   );
 
-  const onRowClick = (e: React.MouseEvent) => onContentRowClick?.(e, item);
+  const onRowClick = (e: React.MouseEvent) => {
+    if (withContentSelection) return;
+    onContentRowClick?.(e, item);
+  };
 
   const isPaidUser = !standalone && !isVisitor && !isCollaborator;
 
@@ -281,19 +292,38 @@ const PeopleTableRow = ({
         getContextModel={getContextModel!}
         isIndexEditingMode={false}
         badgeUrl=""
+        dataTestId={
+          isGuests
+            ? `contacts_guests_row_${itemIndex}`
+            : `contacts_users_row_${itemIndex}`
+        }
       >
-        <TableCell className="table-container_user-name-cell">
+        <TableCell
+          className="table-container_user-name-cell"
+          dataTestId={`contacts_name_cell_${itemIndex}`}
+        >
           <TableCell
             hasAccess
             className="table-container_row-checkbox-wrapper"
             checked={isChecked}
+            dataTestId={`contacts_users_checkbox_cell_${itemIndex}`}
           >
-            <div className="table-container_element">{element}</div>
-            <Checkbox
-              className="table-container_row-checkbox"
-              onChange={onChange}
-              isChecked={isChecked}
-            />
+            {inProgress ? (
+              <Loader
+                className="table-container_row-loader"
+                size="20px"
+                type={LoaderTypes.track}
+              />
+            ) : (
+              <>
+                <div className="table-container_element">{element}</div>
+                <Checkbox
+                  className="table-container_row-checkbox"
+                  onChange={onChange}
+                  isChecked={isChecked}
+                />
+              </>
+            )}
           </TableCell>
 
           <Text
@@ -304,6 +334,7 @@ const PeopleTableRow = ({
             className="table-cell_username"
             dir="auto"
             truncate
+            data-testid="contacts_users_username_text"
           >
             {statusType === "pending"
               ? email
@@ -320,13 +351,21 @@ const PeopleTableRow = ({
         </TableCell>
 
         {isGuests ? null : typeColumnIsEnabled ? (
-          <TableCell className="table-cell_type">{typeCell}</TableCell>
+          <TableCell
+            className="table-cell_type"
+            dataTestId={`contacts_type_cell_${itemIndex}`}
+          >
+            {typeCell}
+          </TableCell>
         ) : (
           <div />
         )}
 
         {isGuests ? null : groupColumnIsEnabled ? (
-          <TableCell className="table-cell_groups">
+          <TableCell
+            className="table-cell_groups"
+            dataTestId={`contacts_groups_cell_${itemIndex}`}
+          >
             {renderGroupsCell()}
           </TableCell>
         ) : (
@@ -334,7 +373,10 @@ const PeopleTableRow = ({
         )}
 
         {emailColumnIsEnabled ? (
-          <TableCell className="table-cell_email">
+          <TableCell
+            className="table-cell_email"
+            dataTestId={`contacts_email_cell_${itemIndex}`}
+          >
             <Link
               type={LinkType.page}
               title={email}
@@ -344,6 +386,8 @@ const PeopleTableRow = ({
               onClick={onEmailClick}
               isTextOverflow
               enableUserSelect
+              truncate
+              dataTestId="contacts_email_link"
             >
               {email}
             </Link>
@@ -354,7 +398,10 @@ const PeopleTableRow = ({
 
         {isGuests && !isRoomAdmin ? (
           inviterColumnIsEnabled ? (
-            <TableCell className="table-cell_inviter">
+            <TableCell
+              className="table-cell_inviter"
+              dataTestId={`contacts_inviter_cell_${itemIndex}`}
+            >
               <Text
                 title={item.createdBy?.displayName}
                 fontSize="13px"
@@ -374,7 +421,10 @@ const PeopleTableRow = ({
 
         {isGuests && !isRoomAdmin ? (
           invitedDateColumnIsEnabled ? (
-            <TableCell className="table-cell_invited-date">
+            <TableCell
+              className="table-cell_invited-date"
+              dataTestId={`contacts_invited_date_cell_${itemIndex}`}
+            >
               <Text
                 title={item.registrationDate}
                 fontSize="13px"
@@ -396,7 +446,10 @@ const PeopleTableRow = ({
           ? null
           : showStorageInfo &&
             (storageColumnIsEnabled ? (
-              <TableCell className="table-cell_Storage/Quota">
+              <TableCell
+                className="table-cell_Storage/Quota"
+                dataTestId={`contacts_storage_cell_${itemIndex}`}
+              >
                 <SpaceQuota hideColumns={hideColumns} item={item} type="user" />
               </TableCell>
             ) : (
@@ -412,12 +465,14 @@ export default inject(
     const { showStorageInfo } = currentQuotaStore;
 
     const { getUsersChangeTypeOptions } = peopleStore.contextOptionsStore!;
+    const { withContentSelection } = peopleStore.contactsHotkeysStore!;
 
     return {
       showStorageInfo,
       getUsersChangeTypeOptions,
 
       isRoomAdmin: userStore.user?.isRoomAdmin,
+      withContentSelection,
     };
   },
 )(withContent(observer(PeopleTableRow)));

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,66 +25,98 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import { HelpButton } from ".";
 
-import { HelpButton } from "./HelpButton";
-
-const tooltipContent = "You tooltip content";
 describe("<HelpButton />", () => {
-  it("HelpButton renders without error", () => {
+  const tooltipContent = "Your tooltip content";
+
+  it("renders without error", () => {
     render(<HelpButton tooltipContent={tooltipContent} />);
     expect(screen.getByTestId("help-button")).toBeInTheDocument();
   });
 
-  // it("HelpButton componentWillUnmount  test", () => {
-  //   const wrapper = mount(<HelpButton tooltipContent={tooltipContent} />);
-  //   // @ts-expect-error TS(2708): Cannot use namespace 'jest' as a value.
-  //   const componentWillUnmount = jest.spyOn(
-  //     wrapper.instance(),
-  //     "componentWillUnmount",
-  //   );
-  //   wrapper.unmount();
-  //   expect(componentWillUnmount).toHaveBeenCalled();
-  // });
+  it("renders with custom className", () => {
+    render(
+      <HelpButton tooltipContent={tooltipContent} className="custom-class" />,
+    );
+    expect(screen.getByTestId("icon-button")).toHaveClass("custom-class");
+  });
 
-  // it("HelpButton test afterHide function", () => {
-  //   const wrapper = shallow(
-  //     <HelpButton tooltipContent={tooltipContent} />,
-  //   ).instance();
-  //   wrapper.afterHide();
-  //   expect(wrapper.state.hideTooltip).toEqual(false);
+  it("renders with custom id", () => {
+    render(<HelpButton tooltipContent={tooltipContent} id="custom-id" />);
+    expect(screen.getByTestId("icon-button")).toHaveAttribute(
+      "id",
+      "custom-id",
+    );
+  });
 
-  //   wrapper.setState({ hideTooltip: false });
-  //   wrapper.afterHide();
-  //   expect(wrapper.state.hideTooltip).toEqual(false);
-  // });
+  it("renders with custom style", () => {
+    const customStyle = { backgroundColor: "red" };
+    render(<HelpButton tooltipContent={tooltipContent} style={customStyle} />);
+    expect(screen.getByTestId("help-button")).toHaveStyle(customStyle);
+  });
 
-  // it("accepts id", () => {
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2322): Type '{ tooltipContent: string; id: string; }' is ... Remove this comment to see the full error message
-  //     <HelpButton tooltipContent={tooltipContent} id="testId" />,
-  //   );
+  it("renders with custom size", () => {
+    render(<HelpButton tooltipContent={tooltipContent} size={24} />);
+    const button = screen.getByTestId("icon-button");
+    expect(button).toHaveStyle({ "--icon-button-size": "24px" });
+  });
 
-  //   expect(wrapper.prop("id")).toEqual("testId");
-  // });
+  it("renders with custom color", () => {
+    render(<HelpButton tooltipContent={tooltipContent} color="#ff0000" />);
+    const button = screen.getByTestId("icon-button");
+    expect(button).toHaveStyle({ "--icon-button-color": "#ff0000" });
+  });
 
-  // it("accepts className", () => {
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2322): Type '{ tooltipContent: string; className: string;... Remove this comment to see the full error message
-  //     <HelpButton tooltipContent={tooltipContent} className="test" />,
-  //   );
+  it("renders as non-clickable when isClickable is false", () => {
+    render(<HelpButton tooltipContent={tooltipContent} isClickable={false} />);
+    const button = screen.getByTestId("icon-button");
+    expect(button).toHaveClass("notClickable");
+  });
 
-  //   expect(wrapper.prop("className")).toEqual("test");
-  // });
+  it("renders with getContent function", () => {
+    const getContent = () => "Dynamic content";
+    render(<HelpButton getContent={getContent} />);
+    expect(screen.getByTestId("help-button")).toBeInTheDocument();
+  });
 
-  // it("accepts style", () => {
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2322): Type '{ tooltipContent: string; style: { color: st... Remove this comment to see the full error message
-  //     <HelpButton tooltipContent={tooltipContent} style={{ color: "red" }} />,
-  //   );
+  it("renders with custom place", () => {
+    render(<HelpButton tooltipContent={tooltipContent} place="bottom" />);
+    expect(screen.getByTestId("help-button")).toBeInTheDocument();
+  });
 
-  //   expect(wrapper.getDOMNode().style).toHaveProperty("color", "red");
-  // });
+  it("renders with custom offset", () => {
+    render(<HelpButton tooltipContent={tooltipContent} offset={10} />);
+    expect(screen.getByTestId("help-button")).toBeInTheDocument();
+  });
+
+  it("renders with afterShow callback", () => {
+    const afterShow = jest.fn();
+    render(
+      <HelpButton tooltipContent={tooltipContent} afterShow={afterShow} />,
+    );
+    expect(screen.getByTestId("help-button")).toBeInTheDocument();
+  });
+
+  it("renders with afterHide callback", () => {
+    const afterHide = jest.fn();
+    render(
+      <HelpButton tooltipContent={tooltipContent} afterHide={afterHide} />,
+    );
+    expect(screen.getByTestId("help-button")).toBeInTheDocument();
+  });
+
+  it("renders with custom tooltipMaxWidth", () => {
+    render(
+      <HelpButton tooltipContent={tooltipContent} tooltipMaxWidth="300px" />,
+    );
+    expect(screen.getByTestId("help-button")).toBeInTheDocument();
+  });
+
+  it("renders with openOnClick set to false", () => {
+    render(<HelpButton tooltipContent={tooltipContent} openOnClick={false} />);
+    expect(screen.getByTestId("help-button")).toBeInTheDocument();
+  });
 });

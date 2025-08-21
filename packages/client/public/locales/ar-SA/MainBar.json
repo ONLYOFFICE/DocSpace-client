@@ -2,7 +2,7 @@
   "ArchivedRoomsOrContact": "يمكنك أرشفة الغرف غير الضرورية أو الاتصال بمسؤول {{productName}} لترقية خطة التعريف.",
   "ClickToUpgradeTariff": "<1>انقر هنا</1> لترقية خطة التعريف الخاصة بك.",
   "ConfirmEmailDescription": "استخدم الرابط الموجود في البريد الإلكتروني للتفعيل. لم تستلم بريدًا إلكترونيًا يحتوي على رابط التفعيل؟",
-  "ConfirmEmailHeader": "يرجى تنشيط بريدك الإلكتروني ({{email}}) للوصول إلى ميزات {{productName}}",
+  "ConfirmEmailHeader": "يرجى تنشيط بريدك الإلكتروني ({{ email }}) للوصول إلى ميزات {{productName}}",
   "ContactToUpgradeTariff": "اتصل بمسؤول {{productName}} لترقية خطة التعريف.",
   "PersonalQuotaHeader": "لقد تجاوزت حصة التخزين الشخصية الخاصة بك",
   "PersonalQuotaHeaderForAdmins": "تم تجاوز حصة التخزين لكل مستخدم",

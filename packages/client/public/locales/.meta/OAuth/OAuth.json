@@ -1,0 +1,244 @@
+{
+  "key_path": "OAuth",
+  "content": "OAuth 2.0",
+  "content_en_sha1_hash": "11ff1c5f1bf611e663f09de411b0c9a4d410b907",
+  "created_at": "2025-05-19T21:30:53.924Z",
+  "updated_at": "2025-08-04T07:30:01.420Z",
+  "comment": {
+    "text": "OAuth 2.0 is a translation key used to display the English content \"OAuth 2.0\" in various UI contexts throughout the application, primarily for title settings and button labels, such as on create and edit pages of OAuth-related settings.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:43.654Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/OAuthCreatePage/index.tsx",
+      "line_number": 35,
+      "context": "import { setDocumentTitle } from \"SRC_DIR/helpers/utils\";\n \n import ClientForm from \"../sub-components/ClientForm\";\n \n const Component = () => {\n const { t } = useTranslation([\"OAuth\"]);\n \n React.useEffect(() => {\n setDocumentTitle(t(\"OAuth\"));\n }, [t]);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/OAuthEditPage/index.tsx",
+      "line_number": 38,
+      "context": "import ClientForm from \"../sub-components/ClientForm\";\n \n const Component = () => {\n const { id } = useParams();\n \n const { t } = useTranslation([\"OAuth\"]);\n \n React.useEffect(() => {\n setDocumentTitle(t(\"OAuth\"));\n }, [t]);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/index.tsx",
+      "line_number": 34,
+      "context": "import { useTranslation } from \"react-i18next\";\n \n import { SettingsStore } from \"@docspace/shared/store/SettingsStore\";\n \n import useViewEffect from \"SRC_DIR/Hooks/useViewEffect\";\n import OAuthStore from \"SRC_DIR/store/OAuthStore\";\n import { setDocumentTitle } from \"SRC_DIR/helpers/utils\";\n \n import { OAuthContainer } from \"./OAuth.styled\";\n import { OAuthProps } from \"./OAuth.types\";",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/EmptyScreen.tsx",
+      "line_number": 93,
+      "context": "tag=\"a\"\n style={{ marginBottom: \"20px\" }}\n color=\"accent\"\n dataTestId=\"oauth_guide_link\"\n >\n {t(\"OAuth:OAuth\")} {t(\"Common:Guide\")}\n </Link>\n ) : null}\n </p>\n \n <RegisterNewButton />",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/List/index.tsx",
+      "line_number": 100,
+      "context": "href={apiOAuthLink}\n tag=\"a\"\n style={isError ? undefined : { marginBottom: \"20px\" }}\n color=\"accent\"\n >\n {t(\"OAuth:OAuth\")} {t(\"Common:Guide\")}\n </Link>\n ) : null}\n \n {isError ? (\n <EmptyServerErrorContainer />",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/index.js",
+      "line_number": 82,
+      "context": ");\n \n const oauthData = identityServerEnabled\n ? {\n id: \"oauth\",\n name: t(\"OAuth:OAuth\"),\n content: <OAuth />,\n }\n : {};\n \n const data = [",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 548,
+      "context": "{\n id: \"portal-settings_catalog-oauth\",\n key: \"7-4\",\n icon: \"\",\n link: \"oauth\",\n tKey: \"OAuth:OAuth\",\n isCategory: true,\n },\n {\n id: \"portal-settings_catalog-api-keys\",\n key: \"7-5\",",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

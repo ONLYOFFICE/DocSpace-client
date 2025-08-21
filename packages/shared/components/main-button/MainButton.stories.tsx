@@ -24,23 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Meta, StoryObj } from "@storybook/react";
-
+import React from "react";
+import { Meta, StoryFn } from "@storybook/react";
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 
-import { MainButton } from "./MainButton";
+import { MainButton } from ".";
+import { MainButtonProps } from "./MainButton.types";
 
-const meta = {
-  title: "Components/MainButton",
+export default {
+  title: "Interactive Elements/MainButton",
   component: MainButton,
-  parameters: { docs: { description: { component: "Components/MainButton" } } },
-  // onAction: { action: "onAction" },
-  // clickItem: { action: "clickItem", table: { disable: true } },
-} satisfies Meta<typeof MainButton>;
-
-type Story = StoryObj<typeof meta>;
-
-export default meta;
+  parameters: {
+    docs: {
+      description: {
+        component: "Main button component with optional dropdown menu",
+      },
+    },
+  },
+} as Meta;
 
 const itemsModel = [
   {
@@ -89,14 +90,45 @@ const itemsModel = [
   },
 ];
 
-export const Default: Story = {
-  args: {
-    isDisabled: false,
-    isDropdown: true,
-    text: "Actions",
-    model: itemsModel,
-    style: {
-      maxWidth: "210px",
-    },
+const Template: StoryFn<MainButtonProps> = (args) => <MainButton {...args} />;
+
+export const Default = Template.bind({});
+Default.args = {
+  text: "Main Button",
+  model: itemsModel,
+  style: {
+    maxWidth: "210px",
   },
+};
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+  text: "Disabled Button",
+  isDisabled: true,
+  isDropdown: false,
+  style: {
+    maxWidth: "210px",
+  },
+};
+
+export const DisabledWithDropdown = Template.bind({});
+DisabledWithDropdown.args = {
+  text: "Disabled Button with Dropdown",
+  isDropdown: true,
+  isDisabled: true,
+  model: itemsModel,
+  style: {
+    maxWidth: "310px",
+  },
+};
+
+export const WithAction = Template.bind({});
+WithAction.args = {
+  text: "Click Me",
+  isDropdown: false,
+  style: {
+    maxWidth: "210px",
+  },
+  // eslint-disable-next-line no-alert
+  onAction: () => alert("Button clicked"),
 };

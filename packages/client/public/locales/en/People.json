@@ -1,5 +1,7 @@
 {
   "LblInviteAgain": "Invite again",
   "MessageEmailActivationInstuctionsSentOnEmail": "The email activation instructions have been sent to the <1>{{email}}</1> email address.",
+  "RemoveUser": "Remove user",
+  "RemoveUserConfirmationText": "You are about to remove a user from the room. Please note that this user is actively participating in form completion. If you proceed, any forms they are involved in will be halted at their step.",
   "UserStatus": "Status"
 }

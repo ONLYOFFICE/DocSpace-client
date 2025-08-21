@@ -1,0 +1,280 @@
+{
+  "key_path": "FileDeletedCount",
+  "content": "Files removed ({{count}}).",
+  "content_en_sha1_hash": "042a8b55f4b0f4f8ec5ac79191e404ed05a3b7a0",
+  "created_at": "2025-05-19T21:30:54.807Z",
+  "updated_at": "2025-08-04T07:30:01.223Z",
+  "comment": {
+    "text": "This translation key displays a message indicating the number of files removed, typically appearing as a count after deleting multiple files. It is used to provide visual feedback and context in a UI component that handles file deletion or history views.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:05.487Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 97,
+      "context": "count,\n });\n return t(\"InfoPanel:FileCopied\");\n case FeedActionKeys.FileDeleted:\n if (hasRelatedItems)\n return t(\"InfoPanel:FileDeletedCount\", {\n count,\n });\n return t(\"InfoPanel:FileDeleted\");\n case FeedActionKeys.FileLocked:\n return `${t(\"Translations:FileLocked\")}.`;",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
+      "line_number": 91,
+      "context": "count,\n });\n return t(\"InfoPanel:FileCopied\");\n case FeedActionKeys.FileDeleted:\n if (hasRelatedItems)\n return t(\"InfoPanel:FileDeletedCount\", {\n count,\n });\n return t(\"InfoPanel:FileDeleted\");\n case FeedActionKeys.FileLocked:\n return `${t(\"Translations:FileLocked\")}.`;",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Dateien entfernt' is a literal translation of 'Files removed' but doesn't convey the full meaning in a natural way in German. 'Entfernt' implies removal, but a more idiomatic expression would be something like 'Gelöschte Dateien' (Deleted files) or 'Entfernte Dateien' (Removed files, more formally).",
+          "suggestion": "Gelöschte Dateien ({{count}})."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ֆայլերը հեռացվել են ({{count}}):' is a literal translation of 'Files removed ({{count}}).'. A more natural Armenian phrasing would be 'Հեռացվել է ֆայլ {{count}} հատ:' or 'Հեռացվել է {{count}} ֆայլ:'",
+          "suggestion": "Հեռացվել է ֆայլ {{count}} հատ:"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Files removed' translates more accurately to 'Archivi rimossi' or 'File eliminati' in Italian, rather than 'File rimossi'. 'Rimossi' implies a removal, but 'eliminati' or 'archivi rimossi' are more common and accurate in this context.",
+          "suggestion": "Archivi rimossi ({{count}})."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ファイルが削除されました ({{count}})。' is technically correct but sounds very formal and passive for a UI element like this. A more natural and conversational translation would be preferable.  '削除されたファイル ({{count}})' or 'ファイル: 削除しました ({{count}})' would be better.",
+          "suggestion": "ファイル: 削除しました ({{count}})"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '파일 제거됨 ({{count}}).' while technically correct, is a bit passive. A more natural and user-friendly phrasing would be '제거된 파일 ({{count}}).' or '삭제된 파일 ({{count}}).' depending on the desired tone. '제거됨' feels overly formal in this context.",
+          "suggestion": "제거된 파일 ({{count}})."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ເອກະສານຖືກລົບອອກແລ້ວ ({{count}}).' while understandable, is not the most natural way to express 'Files removed'. A more idiomatic translation would be something like 'ລົບເອກະສານ ({{count}}).' or 'ເອກະສານລົບອອກແລ້ວ ({{count}}).' The current phrasing sounds a bit awkward.",
+          "suggestion": "Consider 'ລົບເອກະສານ ({{count}}).' or 'ເອກະສານລົບອອກແລ້ວ ({{count}}).' "
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Romanian translation 'Fişiere au fost eliminate ({{count}}).' is grammatically incorrect. 'Fişiere' is plural and requires a plural verb agreement.  'Fişierele au fost eliminate...' would be more accurate.",
+          "suggestion": "Fişierele au fost eliminate ({{count}})."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ගොනු ඉවත් කරණ ලදි ({{count}}).' is a bit awkward. A more natural phrasing would be 'ඉවත් කරන ලද ගොනු ({{count}}).' or '{{count}} ගොනු ඉවත් කරන ලදි'. The current translation sounds like 'files were removed by someone'.",
+          "suggestion": "Consider 'ඉවත් කරන ලද ගොනු ({{count}}).' or '{{count}} ගොනු ඉවත් කරන ලදි'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Súbory odstránené ({{count}}).' is not the most natural or accurate translation of 'Files removed ({{count}}).' A better translation would convey the action of removing files, not just stating they are removed.",
+          "suggestion": "Súbory vymazané ({{count}})."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Датотеке су уклоњене ({{count}}).' is not the most natural or accurate translation of \"Files removed ({{count}})\". A more natural translation would be something like 'Уклоњено датотека ({{count}}).' or 'Оbrisano ({{count}}) datoteke.'",
+          "suggestion": "Уклоњено датотека ({{count}})."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Datoteke su uklonjene ({{count}})' is not the most natural or idiomatic translation of 'Files removed ({{count}})' in Serbian (Latin). A more accurate and common translation would be 'Obrisane datoteke ({{count}})' or 'Izbrisane datoteke ({{count}})' which directly translates to 'Deleted files ({{count}})'.",
+          "suggestion": "Obrisane datoteke ({{count}})"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

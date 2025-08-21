@@ -68,13 +68,14 @@ const NameCell = ({
         >
           <StyledContainer className="table-container_element-container">
             <div className="table-container_element">
-              {icon && <StyledImage src={icon} alt="App icon" />}
+              {icon ? <StyledImage src={icon} alt="App icon" /> : null}
             </div>
             <Checkbox
               className="table-container_row-checkbox"
               onChange={onChange}
               isChecked={isChecked}
               title={name}
+              dataTestId="row_selection_checkbox"
             />
           </StyledContainer>
         </TableCell>

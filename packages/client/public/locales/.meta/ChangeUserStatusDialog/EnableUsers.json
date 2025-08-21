@@ -1,0 +1,244 @@
+{
+  "key_path": "EnableUsers",
+  "content": "Enable users",
+  "content_en_sha1_hash": "17c615111e9de5f0bb43739d228fa20668b04a5e",
+  "created_at": "2025-05-19T21:30:56.973Z",
+  "updated_at": "2025-08-04T07:30:01.065Z",
+  "comment": {
+    "text": "This translation key is used to display the text \"Enable users\" in a change user status dialog, indicating a user's permission level. It appears on a button or similar UI element, allowing users to enable or disable their permissions. The key should be translated for use with non-English products and platforms.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:37:43.374Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
+      "line_number": 195,
+      "context": "? isGuests\n ? t(\"EnableGuest\")\n : t(\"EnableUser\")\n : isGuests\n ? t(\"EnableGuests\")\n : t(\"EnableUsers\");\n \n bodyText = onlyOneUser\n ? isGuests\n ? t(\"EnableGuestDescription\", { productName: t(\"Common:ProductName\") })\n : t(\"EnableUserDescription\", { productName: t(\"Common:ProductName\") })",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Ota käyttäjät takaisin käyttöön' is understandable, it's a more verbose and slightly awkward translation of 'Enable users'. A more direct and natural translation would be 'Ota käyttäjät käyttöön'.",
+          "suggestion": "Ota käyttäjät käyttöön"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Միացնել օգտվողներին\" is a literal translation of \"Enable users\" but may not be the most natural or idiomatic way to express the concept in Armenian. It could be interpreted as \"Connect users\". A more suitable translation might depend on the specific context of the user interface.",
+          "suggestion": "Consider alternative translations such as \"Ակտիվացնել օգտվողներին\" (Activate users) or \"Միացվածություն ապահովել օգտվողներին\" (Ensure users are enabled) depending on the specific functionality."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Iespējot lietotājus\" is a literal translation of \"Enable users\" but doesn't convey the intended meaning clearly in Latvian. 'Lietotājus' refers to users, but the verb 'Iespējot' might not be the most natural way to express 'enable' in this context.",
+          "suggestion": "Consider alternatives like 'Atļaut lietotājus' (Allow users) or 'Aktivizēt lietotājus' (Activate users), depending on the specific functionality."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Омогући кориснике\" while technically meaning 'Enable users', sounds unnatural and is not the typical way to express this in Serbian. A more natural translation would be \"Активирај кориснике\" or \"Укључи кориснике\".",
+          "suggestion": "Активирај кориснике"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Omogući korisnike\" is grammatically correct, it's a less natural phrasing. A more common and fluent translation would be \"Aktiviraj korisnike\" or \"Uključi korisnike\". \"Omogući\" implies allowing something, whereas \"aktiviraj\" or \"uključi\" better conveys the meaning of enabling a user account.",
+          "suggestion": "Aktiviraj korisnike"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Увімкнути користувачів' is a literal translation of 'Enable users' but sounds unnatural in Ukrainian. It implies enabling multiple users at once, which might not be the intended meaning. A more accurate and natural translation would depend on the context, but a better option would likely involve a singular form.",
+          "suggestion": "Consider alternatives like 'Увімкнути користувача' (Enable user) or 'Активувати користувачів' (Activate users) depending on the intended meaning and context."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

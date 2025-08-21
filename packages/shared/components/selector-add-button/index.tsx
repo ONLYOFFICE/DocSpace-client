@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,4 +24,112 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export { SelectorAddButton } from "./SelectorAddButton";
+import React from "react";
+import classNames from "classnames";
+import ActionsHeaderTouchReactSvgUrl from "PUBLIC_DIR/images/actions.header.touch.react.svg?url";
+
+import { useTheme } from "../../hooks/useTheme";
+import { Text } from "../text";
+import { IconButton } from "../icon-button";
+import styles from "./SelectorAddButton.module.scss";
+import { SelectorAddButtonProps } from "./SelectorAddButton.types";
+
+const SelectorAddButton = (props: SelectorAddButtonProps) => {
+  const {
+    isDisabled = false,
+    isAction,
+    title,
+    className,
+    id,
+    style,
+    iconName = ActionsHeaderTouchReactSvgUrl,
+    onClick,
+    iconSize = 12,
+    size,
+
+    label,
+    titleText,
+    fontSize = "13px",
+    lineHeight = "20px",
+    noSelect,
+    dir,
+    truncate,
+
+    testId = "selector-add-button",
+
+    ...rest
+  } = props;
+
+  const { currentColorScheme } = useTheme();
+  const mainAccentColor = currentColorScheme?.main?.accent;
+
+  const onClickAction = (e: React.MouseEvent) => {
+    if (!isDisabled) onClick?.(e);
+  };
+
+  const buttonClassName = classNames(styles.selectorButton, {
+    [styles.isAction]: isAction,
+    [styles.isDisabled]: isDisabled,
+    // [styles.isSize]: !!size,
+  });
+
+  const containerClassName = classNames(
+    styles.container,
+    {
+      [styles.isDisabled]: isDisabled,
+      [styles.truncate]: truncate,
+    },
+    className,
+  );
+
+  const buttonStyle = mainAccentColor
+    ? ({
+        ...style,
+        "--main-accent-button": `${mainAccentColor}1A`,
+        "--selector-add-button-size": size,
+      } as React.CSSProperties)
+    : style;
+
+  return (
+    <div
+      data-testid="selector-add-button-container"
+      className={containerClassName}
+    >
+      <div
+        {...rest}
+        id={id}
+        style={buttonStyle}
+        title={title}
+        className={buttonClassName}
+        onClick={onClickAction}
+        data-testid={testId}
+      >
+        <IconButton
+          size={iconSize}
+          iconName={iconName}
+          isFill
+          isDisabled={isDisabled}
+          isClickable={!isDisabled}
+        />
+      </div>
+
+      {label ? (
+        <Text
+          className={styles.selectorText}
+          fontWeight={600}
+          lineHeight={lineHeight}
+          onClick={onClickAction}
+          title={titleText}
+          fontSize={fontSize}
+          noSelect={noSelect}
+          dir={dir}
+          truncate={truncate}
+        >
+          {label}
+        </Text>
+      ) : null}
+    </div>
+  );
+};
+
+export { SelectorAddButton };

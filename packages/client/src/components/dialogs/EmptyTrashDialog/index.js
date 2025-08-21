@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -42,18 +42,30 @@ const EmptyTrashDialogComponent = (props) => {
     emptyArchive,
 
     isArchiveFolder,
+    emptyPersonalRoom,
+    isPersonalReadOnly,
   } = props;
 
   const onClose = () => setEmptyTrashDialogVisible(false);
 
+  const sectionName = isArchiveFolder
+    ? t("Common:Archive")
+    : isPersonalReadOnly
+      ? t("Common:MyFilesSection")
+      : t("Common:TrashSection");
+
   const onEmptyTrash = () => {
     onClose();
+
     const translations = {
-      deleteOperation: t("Translations:DeleteOperation"),
-      successOperation: isArchiveFolder
-        ? t("SuccessEmptyArchived")
-        : t("SuccessEmptyTrash"),
+      successOperation: t("SuccessEmptyAction", { sectionName }),
     };
+
+    if (isPersonalReadOnly) {
+      emptyPersonalRoom(translations);
+
+      return;
+    }
 
     if (isArchiveFolder) {
       emptyArchive(translations);
@@ -74,6 +86,8 @@ const EmptyTrashDialogComponent = (props) => {
     return () => window.removeEventListener("keydown", onKeyPress);
   }, []);
 
+  const description = t("DeleteForeverNote", { sectionName });
+
   return (
     <ModalDialog
       isLoading={!tReady}
@@ -83,16 +97,12 @@ const EmptyTrashDialogComponent = (props) => {
     >
       <ModalDialog.Header>{t("DeleteForeverTitle")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text noSelect>
-          {isArchiveFolder
-            ? t("DeleteForeverNoteArchive")
-            : t("DeleteForeverNote")}
-        </Text>
+        <Text>{description}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
           id="empty-archive_delete-submit"
-          key="OkButton"
+          key="OKButton"
           label={t("DeleteForeverButton")}
           size="normal"
           primary
@@ -123,9 +133,9 @@ const EmptyTrashDialog = withTranslation([
 export default inject(
   ({ filesStore, filesActionsStore, treeFoldersStore, dialogsStore }) => {
     const { isLoading } = filesStore;
-    const { emptyTrash, emptyArchive } = filesActionsStore;
+    const { emptyTrash, emptyArchive, emptyPersonalRoom } = filesActionsStore;
 
-    const { isArchiveFolder } = treeFoldersStore;
+    const { isArchiveFolder, isPersonalReadOnly } = treeFoldersStore;
 
     const { emptyTrashDialogVisible: visible, setEmptyTrashDialogVisible } =
       dialogsStore;
@@ -140,6 +150,8 @@ export default inject(
       emptyArchive,
 
       isArchiveFolder,
+      isPersonalReadOnly,
+      emptyPersonalRoom,
     };
   },
 )(observer(EmptyTrashDialog));

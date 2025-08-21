@@ -1,0 +1,153 @@
+@use "../../styles/variables/colors";
+
+.container {
+  display: flex;
+  align-items: center;
+
+  .selectorText {
+    padding-inline-start: 8px;
+    cursor: pointer;
+  }
+
+  &.isDisabled {
+    .selectorText {
+      color: var(--selector-add-button-text-disabled);
+      cursor: default;
+    }
+  }
+
+  &.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.selectorButton {
+  display: inline-block;
+  background: var(--selector-add-button-background);
+  border: var(--selector-add-button-border);
+  box-sizing: var(--selector-add-button-box-sizing);
+  border-radius: var(--selector-add-button-border-radius);
+  height: var(--selector-add-button-height);
+  width: var(--selector-add-button-width);
+  padding: var(--selector-add-button-padding);
+  cursor: pointer;
+
+  :global(.icon-button_svg) {
+    svg {
+      path {
+        fill: var(--selector-add-button-icon-color);
+      }
+    }
+  }
+
+  &:hover {
+    background: var(--selector-add-button-hover-background);
+
+    :global(.icon-button_svg) {
+      svg {
+        path {
+          fill: var(--selector-add-button-icon-color-hover);
+        }
+      }
+    }
+  }
+
+  &:active {
+    background: var(--selector-add-button-active-background);
+
+    :global(.icon-button_svg) {
+      svg {
+        path {
+          fill: var(--selector-add-button-icon-color-active);
+        }
+      }
+    }
+  }
+
+  -webkit-tap-highlight-color: #{colors.$tap-highlight};
+
+  &.isDisabled {
+    cursor: default;
+
+    :global(.icon-button_svg) {
+      svg {
+        path {
+          fill: var(--selector-add-button-icon-color);
+        }
+      }
+    }
+
+    &:hover {
+      background: var(--selector-add-button-background);
+
+      svg path {
+        fill: var(--selector-add-button-icon-color);
+      }
+    }
+
+    &:active {
+      background: var(--selector-add-button-background);
+
+      svg path {
+        fill: var(--selector-add-button-icon-color);
+      }
+    }
+  }
+
+  &.isAction {
+    background-color: var(--main-accent-button) !important;
+
+    :global(.icon-button_svg) {
+      svg {
+        path {
+          fill: var(--accent-main);
+        }
+      }
+    }
+
+    &:hover {
+      background-color: var(--main-accent-button);
+
+      &:not(.disabled) {
+        :global(.icon-button_svg) {
+          svg {
+            path {
+              fill: var(--accent-main);
+              opacity: 0.85;
+            }
+          }
+        }
+      }
+    }
+
+    &:active {
+      background-color: var(--main-accent-button);
+
+      :global(.icon-button_svg) {
+        svg {
+          path {
+            fill: var(--accent-main);
+            opacity: 1;
+            filter: brightness(90%);
+          }
+        }
+      }
+    }
+
+    div {
+      opacity: 1;
+    }
+  }
+
+  &.isDisabled {
+    cursor: default;
+
+    background: var(--selector-add-button-disabled-background) !important;
+
+    svg path {
+      fill: var(--selector-add-button-icon-color-disabled) !important;
+    }
+  }
+}

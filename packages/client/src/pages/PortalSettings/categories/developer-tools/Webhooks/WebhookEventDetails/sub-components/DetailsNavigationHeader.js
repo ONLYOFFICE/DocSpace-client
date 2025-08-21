@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,12 +31,12 @@ import { retryWebhook } from "@docspace/shared/api/settings";
 
 import { toastr } from "@docspace/shared/components/toast";
 
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router";
 
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import RetryIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
-import Headline from "@docspace/shared/components/headline/Headline";
+import { Heading } from "@docspace/shared/components/heading";
 import { IconButton } from "@docspace/shared/components/icon-button";
 
 import { tablet, mobile } from "@docspace/shared/utils";
@@ -100,13 +100,19 @@ const HeaderContainer = styled.div`
 `;
 
 const DetailsNavigationHeader = () => {
-  const { eventId } = useParams();
+  const { id, eventId } = useParams();
 
   const { t } = useTranslation(["Webhooks", "Common"]);
   const navigate = useNavigate();
+  const location = useLocation();
+
   const onBack = () => {
-    navigate(-1);
+    const path = location.pathname.includes("/portal-settings")
+      ? "/portal-settings"
+      : "";
+    navigate(`${path}/developer-tools/webhooks/${id}`);
   };
+
   const handleRetryEvent = async () => {
     await retryWebhook(eventId);
     toastr.success(t("WebhookRedilivered"), <b>{t("Common:Done")}</b>);
@@ -122,9 +128,9 @@ const DetailsNavigationHeader = () => {
           onClick={onBack}
           className="arrow-button"
         />
-        <Headline type="content" truncate className="headline">
+        <Heading type="content" truncate className="headline">
           {t("WebhookDetails")}
-        </Headline>
+        </Heading>
       </div>
 
       <IconButton

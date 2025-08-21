@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,20 +25,23 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import styles from "./CreateEditRoom.module.scss";
 import { RectangleSkeleton } from "../rectangle";
-import { StyledSetRoomParamsLoader } from "./CreateEditRoom.styled";
 
 const SetRoomParamsLoader = () => {
   return (
-    <StyledSetRoomParamsLoader>
+    <div
+      className={styles.setRoomParamsLoader}
+      data-testid="set-room-params-loader"
+    >
       <RectangleSkeleton width="100%" height="86" borderRadius="6" />
       <RectangleSkeleton width="100%" height="53.6" borderRadius="6" />
-      <div className="tag_input">
+      <div className={styles.tag_input}>
         <RectangleSkeleton width="100%" height="53.6" borderRadius="6" />
         <RectangleSkeleton width="84" height="32" borderRadius="3" />
       </div>
       <RectangleSkeleton width="100%" height="146" borderRadius="4" />
-    </StyledSetRoomParamsLoader>
+    </div>
   );
 };
 export default SetRoomParamsLoader;

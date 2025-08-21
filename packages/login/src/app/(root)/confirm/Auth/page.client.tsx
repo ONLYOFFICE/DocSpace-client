@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,13 +26,15 @@
 
 "use client";
 
-import { usePathname, useSearchParams } from "next/navigation";
-import { useContext, useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useContext, useLayoutEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { toastr } from "@docspace/shared/components/toast";
-import { getCookie } from "@docspace/shared/utils";
-import { deleteCookie } from "@docspace/shared/utils/cookie";
+import {
+  getOAuthJWTSignature,
+  setOAuthJWTSignature,
+} from "@docspace/shared/api/oauth";
 import AppLoader from "@docspace/shared/components/app-loader";
 import { frameCallEvent } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -41,25 +43,35 @@ import OperationContainer from "@docspace/shared/components/operation-container"
 
 import { TError } from "@/types";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
+import { getUser } from "@docspace/shared/api/people";
 
 const AuthHandler = () => {
-  let searchParams = useSearchParams();
+  const searchParams = useSearchParams();
   const { t } = useTranslation(["Common"]);
 
   const [authorized, setAuthorized] = useState(false);
 
-  const { linkData } = useContext(ConfirmRouteContext);
-  const { email = "", key = "" } = linkData;
+  const { linkData, confirmLinkResult } = useContext(ConfirmRouteContext);
+  const { key = "" } = linkData;
+  const { email = "" } = confirmLinkResult;
 
-  const referenceUrl = searchParams.get("referenceUrl");
+  const referenceUrl = searchParams?.get("referenceUrl");
   const isFileHandler =
     referenceUrl && referenceUrl.indexOf("filehandler.ashx") !== -1;
   const isExternalDownloading =
     referenceUrl && referenceUrl.indexOf("action=download") !== -1;
 
-  useEffect(() => {
+  const replaced = useRef(false);
+
+  useLayoutEffect(() => {
+    if (!email || !key) return;
+
     async function loginWithKey() {
       try {
+        if (replaced.current) return;
+
+        replaced.current = true;
+
         const res = await loginWithConfirmKey({
           ConfirmData: {
             Email: email,
@@ -67,34 +79,43 @@ const AuthHandler = () => {
           },
         });
 
-        //console.log("Login with confirm key success", res);
         frameCallEvent({ event: "onAuthSuccess" });
 
-        // const redirectUrl = getCookie("x-redirect-authorization-uri");
+        const wizard = searchParams?.get("wizard");
 
-        // // deleteCookie("x-redirect-authorization-uri");
-
-        // if (redirectUrl) {
-        //   window.location.replace(redirectUrl);
-        //   return;
-        // }
+        if (wizard === "true") {
+          localStorage.setItem("showSocialAuthWelcomeDialog", "true");
+        }
 
         if (referenceUrl && referenceUrl.includes("oauth2")) {
-          const newUrl = location.search.split("referenceUrl=")[1];
+          const user = await getUser();
+
+          if (!user) {
+            replaced.current = false;
+            return;
+          }
+
+          const newUrl = window.location.search.split("referenceUrl=")[1];
+
+          const token = getOAuthJWTSignature(user.id);
+
+          if (!token) {
+            await setOAuthJWTSignature(user.id);
+          }
 
           window.location.replace(newUrl);
+
           return;
         }
 
         if (referenceUrl) {
           try {
-            new URL(referenceUrl);
+            const url = new URL(referenceUrl);
             if (isFileHandler && isExternalDownloading) {
               setAuthorized(true);
               return;
-            } else {
-              return window.location.replace(referenceUrl);
             }
+            return window.location.replace(url.toString());
           } catch {
             return window.location.replace(
               combineUrl(window.location.origin, referenceUrl),
@@ -105,6 +126,7 @@ const AuthHandler = () => {
         if (typeof res === "string") window.location.replace(res);
         else window.location.replace("/");
       } catch (error) {
+        console.log(error);
         const knownError = error as TError;
         let errorMessage: string;
 
@@ -119,12 +141,20 @@ const AuthHandler = () => {
         }
 
         frameCallEvent({ event: "onAppError", data: error });
+        replaced.current = false;
         toastr.error(errorMessage);
       }
     }
 
     loginWithKey();
-  });
+  }, [
+    email,
+    key,
+    referenceUrl,
+    isFileHandler,
+    isExternalDownloading,
+    searchParams,
+  ]);
 
   return isFileHandler && isExternalDownloading ? (
     <OperationContainer

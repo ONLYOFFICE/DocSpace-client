@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,25 +25,24 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow.react.svg?url";
 
 import { RoomsType } from "../../enums";
+
 import { RoomLogo } from "../room-logo";
 import { IconButton } from "../icon-button";
 import { Text } from "../text";
+import { Badge } from "../badge";
 
 import {
   getRoomTypeDescriptionTranslation,
   getRoomTypeTitleTranslation,
 } from "./RoomType.utils";
-import {
-  StyledListItem,
-  StyledDropdownButton,
-  StyledDropdownItem,
-  StyledDisplayItem,
-} from "./RoomType.styled";
+import styles from "./RoomType.module.scss";
 import { RoomTypeProps } from "./RoomType.types";
+import { globalColors } from "../../themes";
 
 const RoomType = ({
   roomType,
@@ -53,13 +52,15 @@ const RoomType = ({
   id,
   selectedId,
   disabledFormRoom,
+  isTemplate,
+  isTemplateRoom,
 }: RoomTypeProps) => {
   const { t } = useTranslation(["Common"]);
 
   const room = {
     type: roomType,
-    title: getRoomTypeTitleTranslation(t, roomType),
-    description: getRoomTypeDescriptionTranslation(t, roomType),
+    title: getRoomTypeTitleTranslation(t, roomType, isTemplate),
+    description: getRoomTypeDescriptionTranslation(t, roomType, isTemplate),
   };
 
   const isFormRoom = roomType === RoomsType.FormRoom;
@@ -76,18 +77,29 @@ const RoomType = ({
   const content = (
     <>
       <div className="choose_room-logo_wrapper">
-        <RoomLogo type={room.type} />
+        <RoomLogo
+          type={room.type}
+          isTemplate={isTemplate}
+          isTemplateRoom={isTemplateRoom}
+        />
       </div>
 
       <div className="choose_room-info_wrapper">
         <div className="choose_room-title">
-          <Text noSelect className="choose_room-title-text">
-            {t(room.title)}
-          </Text>
+          <Text className="choose_room-title-text">{t(room.title)}</Text>
+          {isTemplate ? (
+            <Badge
+              label={t("Common:New")}
+              backgroundColor={globalColors.lightBlueMain}
+              fontSize="9px"
+              fontWeight={700}
+              borderRadius="50px"
+              noHover
+              isHovered={false}
+            />
+          ) : null}
         </div>
-        <Text noSelect className="choose_room-description">
-          {t(room.description)}
-        </Text>
+        <Text className="choose_room-description">{t(room.description)}</Text>
       </div>
 
       <IconButton
@@ -100,42 +112,56 @@ const RoomType = ({
   );
 
   return type === "listItem" ? (
-    <StyledListItem
+    <div
+      className={classNames(styles.roomType, styles.listItem, {
+        [styles.isOpen]: isOpen,
+      })}
       id={id}
       title={disabled ? "" : t(room.title)}
       onClick={onClick}
-      isOpen={isOpen}
       data-tooltip-id={disabled ? "create-room-tooltip" : ""}
+      data-testid="room-type-list-item"
+      data-selected-id={selectedId}
     >
       {content}
-    </StyledListItem>
+    </div>
   ) : type === "dropdownButton" ? (
-    <StyledDropdownButton
+    <div
       id={id}
       title={t(room.title)}
       onClick={onClick}
-      isOpen={isOpen}
+      className={classNames(styles.roomType, styles.dropDownButton, {
+        [styles.isOpen]: isOpen,
+      })}
       data-selected-id={selectedId}
+      data-testid="room-type-dropdown-button"
     >
       {content}
-    </StyledDropdownButton>
+    </div>
   ) : type === "dropdownItem" ? (
-    <StyledDropdownItem
+    <div
       id={id}
       title={t(room.title)}
       onClick={onClick}
       data-selected-id={selectedId}
+      className={classNames(styles.roomType, styles.dropDownItem, {
+        [styles.isOpen]: isOpen,
+      })}
+      data-testid="room-type-dropdown-item"
     >
       {content}
-    </StyledDropdownItem>
+    </div>
   ) : (
-    <StyledDisplayItem
+    <div
       id={id}
       title={t(room.title)}
       data-selected-id={selectedId}
+      className={classNames(styles.roomType, styles.displayItem, {
+        [styles.isOpen]: isOpen,
+      })}
     >
       {content}
-    </StyledDisplayItem>
+    </div>
   );
 };
 

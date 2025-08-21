@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,15 +26,14 @@
 
 /* eslint-disable no-console */
 import React, { useEffect, useState } from "react";
-import { useTheme } from "styled-components";
 import moment from "moment";
-
-import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import classNames from "classnames";
+import { Scrollbar } from "../scrollbar";
 import { Days, Months, Years } from "./sub-components";
 
 import { getValidDates } from "./utils";
 import { CalendarProps } from "./Calendar.types";
-import { StyledContainerTheme } from "./Calendar.styled";
+import styles from "./Calendar.module.scss";
 
 const Calendar = ({
   locale = "en",
@@ -50,10 +49,9 @@ const Calendar = ({
   isMobile,
   forwardedRef,
   isScroll = false,
+  dataTestId,
 }: CalendarProps) => {
   moment.locale(locale);
-
-  const theme = useTheme();
 
   const handleDateChange = (date: moment.Moment) => {
     const formattedDate = moment(
@@ -150,18 +148,17 @@ const Calendar = ({
   );
 
   return (
-    <StyledContainerTheme
+    <div
       id={id}
-      className={className}
+      className={classNames(styles.container, className, {
+        [styles.isScroll]: isScroll,
+      })}
       style={style}
-      isMobile={isMobile}
       ref={forwardedRef}
-      $currentColorScheme={theme?.currentColorScheme}
-      data-testid="calendar"
-      isScroll={isScroll}
+      data-testid={dataTestId ?? "calendar"}
     >
       {CalendarNode}
-    </StyledContainerTheme>
+    </div>
   );
 };
 

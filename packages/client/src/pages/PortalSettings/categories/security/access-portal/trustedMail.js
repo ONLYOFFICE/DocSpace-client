@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,7 @@
 
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { Text } from "@docspace/shared/components/text";
@@ -66,6 +66,7 @@ const TrustedMail = (props) => {
     currentColorScheme,
     trustedMailDomainSettingsUrl,
     currentDeviceType,
+    onSettingsSkeletonNotShown,
   } = props;
 
   const navigate = useNavigate();
@@ -112,6 +113,12 @@ const TrustedMail = (props) => {
     }
     setIsLoading(true);
   };
+
+  useEffect(() => {
+    if (!onSettingsSkeletonNotShown) return;
+    if (!(currentDeviceType !== DeviceType.desktop && !isLoading))
+      onSettingsSkeletonNotShown("TrustedMail");
+  }, [currentDeviceType, isLoading]);
 
   useEffect(() => {
     checkWidth();
@@ -195,7 +202,7 @@ const TrustedMail = (props) => {
         domains,
       });
       setShowReminder(false);
-      toastr.success(t("SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error);
     }
@@ -217,22 +224,25 @@ const TrustedMail = (props) => {
 
   return (
     <MainContainer>
-      <LearnMoreWrapper>
+      <LearnMoreWrapper withoutExternalLink={!trustedMailDomainSettingsUrl}>
         <Text fontSize="13px" fontWeight="400">
           {t("TrustedMailSettingDescription")}
         </Text>
         <Text fontSize="13px" fontWeight="400" className="learn-subtitle">
           <Trans t={t} i18nKey="SaveToApply" />
         </Text>
-        <Link
-          className="link-learn-more"
-          color={currentColorScheme.main?.accent}
-          target="_blank"
-          isHovered
-          href={trustedMailDomainSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {trustedMailDomainSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            dataTestId="trusted_mail_component_learn_more"
+            color={currentColorScheme.main?.accent}
+            target="_blank"
+            isHovered
+            href={trustedMailDomainSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </LearnMoreWrapper>
 
       <RadioButtonGroup
@@ -247,23 +257,26 @@ const TrustedMail = (props) => {
             id: "trusted-mail-disabled",
             label: t("Common:Disabled"),
             value: "0",
+            dataTestId: "trusted_mail_disabled",
           },
           {
             id: "any-domains",
             label: t("AllDomains"),
             value: "2",
+            dataTestId: "trusted_mail_any_domains",
           },
           {
             id: "custom-domains",
             label: t("CustomDomains"),
             value: "1",
+            dataTestId: "trusted_mail_custom_domains",
           },
         ]}
         selected={type}
         onClick={onSelectDomainType}
       />
 
-      {type === "1" && (
+      {type === "1" ? (
         <UserFields
           inputs={domains}
           buttonLabel={t("AddTrustedDomain")}
@@ -272,15 +285,18 @@ const TrustedMail = (props) => {
           onClickAdd={onClickAdd}
           regexp={regexp}
           classNameAdditional="add-trusted-domain"
+          inputDataTestId="trusted_mail_domain_input"
+          deleteIconDataTestId="trusted_mail_delete_domain_icon"
+          addButtonDataTestId="trusted_mail_add_domain_button"
         />
-      )}
+      ) : null}
 
       <SaveCancelButtons
         className="save-cancel-buttons"
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
-        reminderText={t("YouHaveUnsavedChanges")}
+        reminderText={t("Common:YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
         displaySettings
@@ -288,6 +304,8 @@ const TrustedMail = (props) => {
         isSaving={isSaving}
         additionalClassSaveButton="trusted-mail-save"
         additionalClassCancelButton="trusted-mail-cancel"
+        cancelButtonDataTestId="trusted_mail_cancel_button"
+        saveButtonDataTestId="trusted_mail_save_button"
       />
     </MainContainer>
   );
@@ -298,7 +316,6 @@ export const TrustedMailSection = inject(({ settingsStore }) => {
     trustedDomainsType,
     trustedDomains,
     setMailDomainSettings,
-    helpLink,
     currentColorScheme,
     trustedMailDomainSettingsUrl,
     currentDeviceType,
@@ -308,7 +325,6 @@ export const TrustedMailSection = inject(({ settingsStore }) => {
     trustedDomainsType,
     trustedDomains,
     setMailDomainSettings,
-    helpLink,
     currentColorScheme,
     trustedMailDomainSettingsUrl,
     currentDeviceType,

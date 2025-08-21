@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,6 +30,9 @@ import styled from "styled-components";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { Label } from "@docspace/shared/components/label";
 import { TextInput } from "@docspace/shared/components/text-input";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { Text } from "@docspace/shared/components/text";
+
 import { StyledParam } from "./StyledParam";
 
 const StyledInputParam = styled(StyledParam)`
@@ -37,35 +40,40 @@ const StyledInputParam = styled(StyledParam)`
   gap: 4px;
   max-height: 54px;
 
-  .input-label {
-    cursor: pointer;
-    user-select: none;
+  .input-label-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    .input-label {
+      cursor: pointer;
+    }
   }
 `;
 
-const InputParam = React.forwardRef(
-  (
-    {
-      id,
-      title,
-      placeholder,
-      value,
-      onChange,
-      onFocus,
-      onBlur,
-      isDisabled,
-      isValidTitle = true,
-      isWrongTitle,
-      errorMessage,
-      isAutoFocussed,
-      onKeyUp,
-      onKeyDown,
-      name,
-    },
-    ref,
-  ) => {
-    return (
-      <StyledInputParam>
+const InputParam = ({
+  ref,
+  id,
+  title,
+  placeholder,
+  value,
+  onChange,
+  onFocus,
+  onBlur,
+  isDisabled,
+  isValidTitle = true,
+  isWrongTitle,
+  errorMessage,
+  isAutoFocussed,
+  onKeyUp,
+  onKeyDown,
+  name,
+  tooltipLabel,
+  dataTestId,
+}) => {
+  return (
+    <StyledInputParam>
+      <div className="input-label-wrapper">
         <Label
           title={title}
           className="input-label"
@@ -73,37 +81,48 @@ const InputParam = React.forwardRef(
           htmlFor={id}
           text={title}
         />
-
-        <FieldContainer
-          isVertical
-          labelVisible={false}
-          hasError={!isValidTitle || isWrongTitle}
-          errorMessage={errorMessage}
-          errorMessageWidth="100%"
-        >
-          <TextInput
-            forwardedRef={ref}
-            id={id}
-            value={value}
-            onChange={onChange}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            scale
-            placeholder={placeholder}
-            tabIndex={2}
-            isDisabled={isDisabled}
-            hasError={!isValidTitle}
-            isAutoFocussed={isAutoFocussed}
-            onKeyUp={onKeyUp}
-            onKeyDown={onKeyDown}
-            maxLength={170}
-            name={name}
+        {tooltipLabel ? (
+          <HelpButton
+            place="right"
+            tooltipContent={
+              <Text fontSize="12px" fontWeight={400}>
+                {tooltipLabel}
+              </Text>
+            }
           />
-        </FieldContainer>
-      </StyledInputParam>
-    );
-  },
-);
+        ) : null}
+      </div>
+
+      <FieldContainer
+        isVertical
+        labelVisible={false}
+        hasError={!isValidTitle || isWrongTitle}
+        errorMessage={errorMessage}
+        errorMessageWidth="100%"
+      >
+        <TextInput
+          forwardedRef={ref}
+          id={id}
+          value={value}
+          onChange={onChange}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          scale
+          placeholder={placeholder}
+          tabIndex={2}
+          isDisabled={isDisabled}
+          hasError={!isValidTitle}
+          isAutoFocussed={isAutoFocussed}
+          onKeyUp={onKeyUp}
+          onKeyDown={onKeyDown}
+          maxLength={170}
+          name={name}
+          testId={dataTestId}
+        />
+      </FieldContainer>
+    </StyledInputParam>
+  );
+};
 
 InputParam.displayName = "InputParam";
 

@@ -1,0 +1,232 @@
+{
+  "key_path": "UserQuotaEnabled",
+  "content": "User quota has been successfully enabled.",
+  "content_en_sha1_hash": "54f6f93690a1ebe93c7db897adb749e9da5be3c2",
+  "created_at": "2025-05-19T21:30:53.138Z",
+  "updated_at": "2025-06-30T12:20:31.739Z",
+  "comment": {
+    "text": "The \"UserQuotaEnabled\" translation key is used to display a success message when user quota has been successfully enabled. It is typically displayed as a toast notification in an application, providing confirmation to users that their quotas have been set up correctly after enabling it.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:09.532Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/store/CurrentQuotaStore.ts",
+      "line_number": 456,
+      "context": "const isEnable = +quota !== -1;\n \n try {\n await setDefaultUserQuota(isEnable, +quota);\n const toastrText = isEnable\n ? t(\"UserQuotaEnabled\")\n : t(\"UserQuotaDisabled\");\n \n toastr.success(toastrText);\n } catch (e: unknown) {\n toastr.error(e as TData);",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ກວ່ານິຍົມຂອງຜູ້ໃຊ້ໄດ້ຖືກເປີດໃຊ້ງານຢ່າງສໍາເລັດແລ້ວ' is a literal translation and doesn't flow naturally in Lao. While technically correct, it sounds overly formal and complex for a simple confirmation message.",
+          "suggestion": "Consider a more natural phrasing such as 'ໄດ້ເປີດໃຊ້ງານກຳນົດການໃຊ້ງານຂອງຜູ້ໃຊ້ແລ້ວ' or 'ກຳນົດການໃຊ້ງານຂອງຜູ້ໃຊ້ໄດ້ຖືກເປີດໃຊ້ງານແລ້ວ.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Limit użytkowników został włączony.\" doesn't accurately convey the meaning of \"User quota has been successfully enabled.\" \"Limit użytkowników\" translates to 'user limit,' whereas 'quota' implies a specific allowance or allocation.",
+          "suggestion": "Ustawienie limitu użytkowników zostało włączone."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation is understandable, 'Cotă de stocare pentru utilizator' is a bit verbose and less natural than alternatives. 'Cotă utilizator' or 'Limita de stocare pentru utilizator' would be more concise and commonly used.",
+          "suggestion": "Cotă utilizator a fost activată cu succes."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Квота пользователя успешно подключена\" uses the verb 'подключена' (podkluchena) which implies 'connected'.  'Enabled' in this context means activated or turned on, not connected. A more accurate translation would use a verb implying activation.",
+          "suggestion": "Квота пользователя успешно включена."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

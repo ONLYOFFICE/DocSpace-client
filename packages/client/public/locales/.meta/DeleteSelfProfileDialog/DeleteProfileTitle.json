@@ -1,0 +1,346 @@
+{
+  "key_path": "DeleteProfileTitle",
+  "content": "Disable account",
+  "content_en_sha1_hash": "198562d776cf89feb842e248f463dff4797e7cd5",
+  "created_at": "2025-05-19T21:30:56.638Z",
+  "updated_at": "2025-05-26T07:57:32.296Z",
+  "comment": {
+    "text": "The \"DeleteProfileTitle\" translation key is used to display the text \"Disable account\" in a modal dialog, specifically in the header section of the DeleteOwnerProfileDialog and DeleteSelfProfileDialog components. This text prompts the user to delete their profile.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:31.485Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteOwnerProfileDialog/index.js",
+      "line_number": 50,
+      "context": "console.log(\"DeleteOwnerProfileDialog render\");\n const { t, tReady, visible, onClose } = this.props;\n \n return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"DeleteProfileTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\">\n {t(\"DeleteOwnerRestrictionText\", {\n productName: t(\"Common:ProductName\"),\n })}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteSelfProfileDialog/index.js",
+      "line_number": 75,
+      "context": "const { t, tReady, visible, email, onClose } = this.props;\n const { isRequestRunning } = this.state;\n \n return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"DeleteProfileTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\">\n {t(\"DeleteProfileInfo\")}{\" \"}\n <Link\n type=\"page\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Arabic translation \"حذف الملف الشخصي\" translates to \"Delete Profile\" which is not equivalent to the English \"Disable account\". 'Disable' implies a temporary action, while 'Delete' is permanent.",
+          "suggestion": "تعطيل الحساب (Ta'til al-Hisab) - This translates to 'Disable Account' and is a more accurate representation of the English meaning."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Profil dialoqunun silinməsi\" does not accurately reflect the meaning of \"Disable account\". It translates to something like \"Deleting profile dialog\". It needs to convey the action of disabling an account, not the deletion of a dialog about deleting a profile.",
+          "suggestion": "Hesabımı deaktiv et"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Bulgarian translation \"Изтрий профилен диалог\" translates to \"Delete profile dialog\" which doesn't accurately reflect the English \"Disable account\". It's a literal translation of parts of the English phrase, not the intended meaning.",
+          "suggestion": "Изтриване на акаунт"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation 'Dialogové okno pro odstranění profilu' (Dialog window for deleting profile) does not accurately convey the meaning of 'Disable account'. It's a literal translation of a broader concept rather than the intended meaning.",
+          "suggestion": "Zakaž účet"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek translation \"Διάλογος διαγραφής προφίλ\" translates to \"Profile deletion dialog\" which doesn't accurately reflect the English \"Disable account\". The English refers to disabling an account, not a dialog about deleting it.",
+          "suggestion": "Απενεργοποίηση λογαριασμού"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation \"Poista profiilin valintaikkuna\" literally translates to \"Delete profile window\". This is not an accurate translation of \"Disable account\". \"Disable account\" implies preventing further use or access, whereas the translation implies merely deselecting a profile. The intended meaning of \"Disable account\" is not conveyed.",
+          "suggestion": "Poista tili"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Ջնջել պրոֆիլի երկխոսությունը\" translates to \"Delete profile dialog\" which is not the intended meaning of \"Disable account\". It translates the title, not the meaning.",
+          "suggestion": "ՄՀատՑնել հաշիվ"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation \"프로필 다이얼로그 삭제\" does not accurately translate \"Disable account\". It literally translates to \"Profile dialog delete\". This is not the intended meaning.",
+          "suggestion": "정확한 번역은 \"계정 비활성화\" 또는 \"계정 삭제\" (account deletion) 입니다. The most accurate translation would be \"계정 비활성화\" (account deactivation) or \"계정 삭제\" (account deletion)."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ລົບໂປຣໄຟລ໌ສົນທະນາ\" translates to 'Delete conversation profile'.  The English 'Disable account' implies deactivating, not deleting, an account. 'Delete' is too strong.",
+          "suggestion": "ອານຸຍາດບັນຊີ (Anuyat banchee) - 'Allow account', ປິດບັນຊີ (Pit banchee) - 'Close account', or ສະນິເດດບັນຊີ (Sanidet banchee) - 'Deactivate account' would be more accurate."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation \"Profila dzēšanas dialoglodziņš\" translates to \"Profile deletion dialog box\", which is not equivalent to the English \"Disable account\". It describes the dialog itself, not the action being taken.",
+          "suggestion": "Vesela konta atslēgšana"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Dutch translation \"Verwijder profiel dialoog\" does not accurately convey the meaning of \"Disable account.\" It translates to \"Delete profile dialog.\"  'Disable account' refers to deactivating, not deleting, a user's account.",
+          "suggestion": "Account uitschakelen"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Disable account\" implies temporarily deactivating an account, whereas \"Usuń profil\" translates to \"Delete profile.\" These are distinct actions.",
+          "suggestion": "Consider a translation like \"Wyłącz konto\" which aligns more closely with \"Disable account\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Portuguese translation \"Eliminar diálogo do perfil\" does not accurately convey the meaning of \"Disable account\". It literally translates to \"Delete profile dialog\". The intended meaning is to deactivate or disable the user's account, not delete the profile dialog itself.",
+          "suggestion": "Desativar conta"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word \"Отключениие\" is misspelled. It should be \"Отключение\"",
+          "suggestion": "Отключение"
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"පැතිකඩ මක්නන\" does not accurately convey the meaning of \"Disable account\". \"පැතිකඩ\" refers to a profile or record, and \"මක්නන\" means to destroy or remove. \"Disable\" implies a temporary state, not deletion.",
+          "suggestion": "A more accurate translation might be \"ගිණුම අයින් කිරීම\" (ginuma ain karima) which means \"account removal\" or \"ගිණුම නිಷ್ක්‍රීය කිරීම\" (ginuma nishkriya kirima) which means \"account deactivation\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation 'Odstrániť dialógové okno profilu' does not accurately reflect the meaning of 'Disable account'. It literally translates to 'Remove profile dialog window'.",
+          "suggestion": "The correct translation should convey the meaning of deactivating or disabling an account, for example, 'Deaktivovať účet' or 'Zrušiť účet'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovenian translation \"Pogovorno okno za brisanje profila\" translates to \"Profile deletion dialog box\" which is not equivalent to the English \"Disable account\". The translation should reflect the meaning of disabling or deleting an account.",
+          "suggestion": "Izbris računa"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Обриши профил' (Delete profile) doesn't accurately convey the meaning of 'Disable account'. 'Disable' implies a temporary suspension, while 'Delete' implies permanent removal. A more accurate translation would be something like 'Деактивирај налог' (Deactivate account).",
+          "suggestion": "Деактивирај налог"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Obriši profil\" directly translates to \"Delete profile\". The English source text \"Disable account\" means to deactivate or suspend an account, not permanently delete it. \"Obriši profil\" implies permanent deletion.",
+          "suggestion": "Isključi nalog"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation 'Profil iletisini sil' does not accurately reflect the meaning of 'Disable account'. It translates to 'Delete profile message', which is not the intended meaning. 'Disable account' refers to deactivating or suspending an account, not deleting a message.",
+          "suggestion": "Hesabı devre dışı bırak"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Діалогове вікно видалення профілю\" (Dialogue window for deleting a profile) does not accurately reflect the English meaning of \"Disable account\". It describes the title of a dialog, not the action itself.",
+          "suggestion": "Вимкнути обліковий запис"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Vietnamese translation \"Xóa hộp thoại hồ sơ\" translates to \"Delete profile dialog\" which does not accurately reflect the English meaning of \"Disable account\". It describes the dialog itself, not the action being taken.",
+          "suggestion": "Vô hiệu hóa tài khoản"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,53 +25,158 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable } from "mobx";
+import { getOperationsProgressTitle } from "SRC_DIR/helpers/filesUtils";
 
 class PrimaryProgressDataStore {
-  percent = 0;
-
-  label = "";
-
-  visible = false;
-
-  icon = "upload";
-
-  alert = false;
-
-  loadingFile = null;
-
-  errors = 0;
-
   disableUploadPanelOpen = false;
 
-  constructor() {
+  needErrorChecking = [];
+
+  primaryOperationsArray = [];
+
+  dropTargetPreview = null;
+
+  startDropPreview = true;
+
+  constructor(filesStore, selectedFolderStore) {
+    this.filesStore = filesStore;
+    this.selectedFolderStore = selectedFolderStore;
+
     makeAutoObservable(this);
   }
 
+  get isErrorChecking() {
+    return this.needErrorChecking.length > 0;
+  }
+
+  get isPrimaryProgressVisbile() {
+    return this.primaryOperationsArray.length > 0;
+  }
+
   setPrimaryProgressBarData = (primaryProgressData) => {
-    const progressDataItems = Object.keys(primaryProgressData);
-    progressDataItems.forEach((key) => {
-      this[key] = primaryProgressData[key];
-    });
+    const { operation, ...progressInfo } = primaryProgressData;
+
+    const operationIndex = this.primaryOperationsArray.findIndex(
+      (object) => object.operation === operation,
+    );
+
+    if (operationIndex !== -1) {
+      const operationObject = this.primaryOperationsArray[operationIndex];
+
+      if (progressInfo.alert) {
+        this.setNeedErrorChecking(true, operation);
+      }
+      if (progressInfo.percent > 0 && !progressInfo.completed) {
+        progressInfo.label = getOperationsProgressTitle(
+          operation,
+          Math.trunc(progressInfo.percent),
+        );
+      }
+
+      if (progressInfo.completed && progressInfo.percent > 0) {
+        progressInfo.label = getOperationsProgressTitle(operation);
+      }
+
+      this.primaryOperationsArray[operationIndex] = {
+        ...operationObject,
+        ...progressInfo,
+      };
+    } else {
+      const progress = {
+        operation,
+        items: [progressInfo],
+        label: getOperationsProgressTitle(operation),
+        ...progressInfo,
+      };
+
+      this.primaryOperationsArray = [...this.primaryOperationsArray, progress];
+    }
   };
 
-  clearPrimaryProgressData = () => {
-    this.setPrimaryProgressBarData({
-      visible: false,
-      percent: 0,
-      label: "",
-      icon: "",
-      alert: false,
-      errors: 0,
-      disableUploadPanelOpen: false,
-    });
+  clearPrimaryProgressData = (operation) => {
+    this.setNeedErrorChecking(false);
+
+    if (!operation) {
+      const incompleteOperations = this.primaryOperationsArray.filter(
+        (item) => !item.completed,
+      );
+
+      this.primaryOperationsArray.splice(
+        0,
+        this.primaryOperationsArray.length,
+        ...incompleteOperations,
+      );
+
+      // console.log("clearPrimaryProgressData", this.primaryOperationsArray);
+      return;
+    }
+
+    const operationIndex = this.primaryOperationsArray.findIndex(
+      (obj) => obj.operation === operation,
+    );
+
+    if (operationIndex === -1) return;
+
+    this.primaryOperationsArray.splice(operationIndex, 1);
+
+    console.log("clearPrimaryProgressData", this.primaryOperationsArray);
   };
 
-  setPrimaryProgressBarShowError = (error) => {
-    this.alert = error;
+  clearDropPreviewLocation = () => {
+    // console.log("clearDropPreviewLocation");
+
+    this.setStartDropPreview(false);
+    this.dropTargetPreview = null;
   };
 
-  setPrimaryProgressBarErrors = (errors) => {
-    this.errors = errors;
+  get primaryOperationsCompleted() {
+    return (
+      this.primaryOperationsArray.length > 0 &&
+      this.primaryOperationsArray.every((op) => op.completed)
+    );
+  }
+
+  get primaryOperationsAlert() {
+    return this.primaryOperationsArray.some((op) => op.alert);
+  }
+
+  setNeedErrorChecking = (needErrorChecking, operation) => {
+    if (operation) {
+      const existingErrorIndex = this.needErrorChecking.findIndex(
+        (err) => err === operation,
+      );
+
+      if (needErrorChecking && existingErrorIndex === -1) {
+        this.needErrorChecking.push(operation);
+      }
+
+      if (!needErrorChecking && existingErrorIndex !== -1) {
+        this.needErrorChecking.splice(existingErrorIndex, 1);
+      }
+    } else {
+      this.needErrorChecking = [];
+    }
+  };
+
+  setStartDropPreview = (visible) => {
+    if (this.startDropPreview === visible) return;
+
+    this.startDropPreview = visible;
+  };
+
+  setDropTargetPreview = (title) => {
+    if (this.filesStore.startDrag && title === this.selectedFolderStore.title) {
+      this.dropTargetPreview = null;
+      return;
+    }
+
+    if (!title && !this.startDropPreview) return;
+
+    if (this.dropTargetPreview === title) return;
+
+    this.setStartDropPreview(true);
+
+    this.dropTargetPreview = title;
   };
 }
 

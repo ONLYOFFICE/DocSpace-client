@@ -1,11 +1,17 @@
 {
+  "ChangeContactType": "Změna typu kontaktu",
   "ChangeGuestsTypeMessage": "Host <strong>{{userName}}</strong> bude přesunut do sekce {{membersSection}} a bude mu přiřazen typ Uživatel. Uživatelé mají vlastní sekci {{documentsSection}}, mohou vytvářet a upravovat soubory, ale nemohou vytvářet místnosti.",
   "ChangeGuestsTypeMessageMulti": "Vybraní hosté budou přesunuti do sekce {{membersSection}} a bude jim přiřazen typ Uživatel. Uživatelé mají vlastní sekci {{documentsSection}}, mohou vytvářet a upravovat soubory, ale nemohou vytvářet místnosti.",
+  "ChangeGuestsTypeToAdmin": "Host <strong>{{userName}}</strong> bude přesunut do sekce {{membersSection}} a bude mu přiřazen typ <strong>'{{ secondType }}'</strong>. Správci {{productName}}  mají přístup k nastavení {{productName}}, mohou spravovat a archivovat místnosti, zvát nové uživatele a přidělovat role pod svou úrovní. Administrátoři s názvem {{productName}} mají přístup do sekce {{documentsSection}}.",
+  "ChangeGuestsTypeToAdminMulti": "Vybraní hosté budou přesunuti do sekce {{membersSection}} a bude jim přiřazen typ <strong>'{{ secondType }}'</strong>. Správci {{productName}} mohou přistupovat k nastavení {{productName}}, spravovat a archivovat místnosti, zvát nové uživatele a přidělovat role pod svou úrovní. Správci {{productName}} mají přístup do sekce {{documentsSection}}.",
+  "ChangeGuestsTypeToManager": "Host <strong>{{userName}}</strong> bude přesunut do sekce {{membersSection}} a bude mu přiřazen typ <strong>'{{ secondType }}'</strong>. Správci místností mohou vytvářet a spravovat přidělené místnosti, zvát nové uživatele a přidělovat role správce místnosti a nižší. Správci místností mají přístup do sekce {{documentsSection}}.",
+  "ChangeGuestsTypeToManagerMulti": "Vybraní hosté budou přesunuti do sekce {{membersSection}} a bude jim přiřazen typ <strong>'{{ secondType }}'</strong>. Správci místností mohou vytvářet stránky a spravovat přiřazené místnosti, zvát nové uživatele a přidělovat role správce místnosti a nižší. Správci místností mají přístup do sekce {{documentsSection}}.",
   "ChangeUserTypeButton": "Změnit typ",
-  "ChangeUserTypeHeader": "Změnit typ uživatele",
   "ChangeUserTypeMessage": "Uživatelé s typem <strong>'{{ firstType }}'</strong> budou přesunuti na typ <strong>'{{ secondType }}'</strong>.",
-  "ChangeUserTypeMessageMulti": "Vybraní uživatelé budou přesunuti do typu <strong>'{{ secondType }}'</strong>.",
-  "ChangeUserTypeMessageWarning": "Nemůžete změnit typ pro správce {{productName}} a pro sebe.",
+  "ChangeUserTypeNote": "<1>Poznámka:</1> typ nemůžete změnit pro správce {{productName}} ani pro sebe.",
+  "DataReassignmentInfo": "Místnosti vytvořené tímto uživatelem vám budou automaticky přiřazeny. Chcete-li místnosti znovu přiřadit jiné osobě, klikněte na příslušný odkaz níže.",
+  "DataReassignmentWithFilesDeletion": "Všechny sdílené soubory vytvořené tímto kontaktem vám budou <1>automaticky přiřazeny do 30 dnů</1>. Chcete-li místnosti/sdílené soubory znovu přiřadit jiné osobě, klikněte na příslušný odkaz níže.",
+  "PersonalDataDeletion": "Všechny soubory a složky v sekci {{sectionName}} tohoto kontaktu budou <1>trvale odstraněny za 30 dní</1>.",
   "SuccessChangeGuestType": "Typ hosta byl úspěšně změněn",
   "SuccessChangeUserType": "Typ uživatele byl úspěšně změněn"
 }

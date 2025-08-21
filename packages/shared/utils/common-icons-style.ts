@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,7 @@
 
 import { css } from "styled-components";
 
-export const enum IconSizeType {
+export enum IconSizeType {
   extraSmall = "extraSmall",
   small = "small",
   medium = "medium",
@@ -106,5 +106,12 @@ const commonIconsStyles = css<{ size?: IconSizeType | number }>`
   vertical-align: middle;
   ${(props) => getSizeStyle(props.size)};
 `;
+
+export const isIconSizeType = (size: unknown): size is IconSizeType => {
+  return (
+    typeof size === "string" &&
+    Object.values(IconSizeType).includes(size as IconSizeType)
+  );
+};
 
 export default commonIconsStyles;

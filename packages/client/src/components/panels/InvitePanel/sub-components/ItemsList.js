@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -37,13 +37,13 @@ import { ScrollList } from "../StyledInvitePanel";
 
 const USER_ITEM_HEIGHT = 48;
 
-const VirtualScroll = React.forwardRef((props, ref) => (
+const VirtualScroll = ({ ref, ...props }) => (
   <CustomScrollbarsVirtualList
     {...props}
     ref={ref}
     paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
   />
-));
+);
 
 VirtualScroll.displayName = "VirtualScroll";
 
@@ -61,6 +61,7 @@ const Row = memo(({ data, index, style }) => {
     setIsOpenItemAccess,
     isMobileView,
     standalone,
+    allowInvitingGuests,
   } = data;
 
   const theme = useTheme();
@@ -73,6 +74,7 @@ const Row = memo(({ data, index, style }) => {
     <Item
       t={t}
       item={item}
+      index={index}
       key={item.id}
       style={style}
       theme={theme}
@@ -87,6 +89,7 @@ const Row = memo(({ data, index, style }) => {
       setIsOpenItemAccess={setIsOpenItemAccess}
       isMobileView={isMobileView}
       standalone={standalone}
+      allowInvitingGuests={allowInvitingGuests}
     />
   );
 });
@@ -108,6 +111,7 @@ const ItemsList = ({
   invitePanelBodyRef,
   isMobileView,
   standalone,
+  allowInvitingGuests,
 }) => {
   const [bodyHeight, setBodyHeight] = useState(0);
   const [offsetTop, setOffsetTop] = useState(0);
@@ -177,6 +181,7 @@ const ItemsList = ({
       ref={bodyRef}
       scrollAllPanelContent={scrollAllPanelContent}
       isTotalListHeight={isTotalListHeight}
+      dataTestId="invite_panel_items_scroll_list"
     >
       <List
         style={{ overflow: overflowStyle, willChange: willChangeStyle }}
@@ -198,8 +203,10 @@ const ItemsList = ({
           isMobileView,
           t,
           standalone,
+          allowInvitingGuests,
         }}
-        outerElementType={!scrollAllPanelContent && VirtualScroll}
+        outerElementType={!scrollAllPanelContent ? VirtualScroll : null}
+        data-testid="invite_panel_items_list"
       >
         {Row}
       </List>
@@ -210,7 +217,7 @@ const ItemsList = ({
 export default inject(({ userStore, dialogsStore, settingsStore }) => {
   const { setInviteItems, inviteItems, changeInviteItem } = dialogsStore;
   const { isOwner, isAdmin } = userStore.user;
-  const { standalone } = settingsStore;
+  const { standalone, allowInvitingGuests } = settingsStore;
 
   return {
     setInviteItems,
@@ -219,5 +226,6 @@ export default inject(({ userStore, dialogsStore, settingsStore }) => {
     isOwner,
     isAdmin,
     standalone,
+    allowInvitingGuests,
   };
 })(observer(ItemsList));

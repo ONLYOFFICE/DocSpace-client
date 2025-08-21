@@ -2,28 +2,32 @@
   "folders": [
     {
       "name": "🌐 root",
-      "path": ".",
+      "path": "."
     },
     {
       "name": "🚀 @docspace/client",
-      "path": "packages/client",
+      "path": "packages/client"
     },
     {
       "name": "🔑 @docspace/login",
-      "path": "packages/login",
+      "path": "packages/login"
     },
     {
       "name": "📄 @docspace/doceditor",
-      "path": "packages/doceditor",
+      "path": "packages/doceditor"
+    },
+    {
+      "name": "📚 @docspace/sdk",
+      "path": "packages/sdk"
     },
     {
       "name": "🗂 @docspace/management",
-      "path": "packages/management",
+      "path": "packages/management"
     },
     {
       "name": "📦 @docspace/shared",
-      "path": "packages/shared",
-    },
+      "path": "packages/shared"
+    }
   ],
   "settings": {
     "window.zoomLevel": 0,
@@ -38,10 +42,10 @@
       "🚀 @docspace/client",
       "📄 @docspace/editor",
       "📦 @docspace/common",
-      "🗂 @docspace/management",
+      "🗂 @docspace/management"
     ],
     "[javascript]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "VsCodeTaskButtons.tasks": [
       {
@@ -50,115 +54,115 @@
           {
             "label": "Docker : Build-CE",
             "task": "Backend | build CE",
-            "tooltip": "🛠️ Start the \"backend docker build CE\" task",
+            "tooltip": "🛠️ Start the \"backend docker build CE\" task"
           },
           {
             "label": "Docker : Run-CE (skip build)",
             "task": "Backend | run CE",
-            "tooltip": "🛠️ Start the \"backend docker run CE\" task",
+            "tooltip": "🛠️ Start the \"backend docker run CE\" task"
           },
           {
             "label": "Docker : Build-EE",
             "task": "Backend | build EE",
-            "tooltip": "🛠️ Start the \"backend docker build EE\" task",
+            "tooltip": "🛠️ Start the \"backend docker build EE\" task"
           },
           {
             "label": "Docker : Run-EE (skip build)",
             "task": "Backend | run EE",
-            "tooltip": "🛠️ Start the \"backend docker run EE\" task",
+            "tooltip": "🛠️ Start the \"backend docker run EE\" task"
           },
           {
             "label": "Docker : ReBuild-EE",
             "task": "Backend | rebuild EE",
-            "tooltip": "🛠️ Start the \"backend docker rebuild EE\" task",
+            "tooltip": "🛠️ Start the \"backend docker rebuild EE\" task"
           },
           {
             "label": "Docker : Build-EE + dnsmasq",
             "task": "Backend | build EE + dnsmasq",
-            "tooltip": "🛠️ Start the \"backend docker build EE + dnsmasq\" task",
+            "tooltip": "🛠️ Start the \"backend docker build EE + dnsmasq\" task"
           },
           {
             "label": "Docker : Build-EE + identity",
             "task": "Backend | build EE + identity",
-            "tooltip": "🛠️ Start the \"backend docker build EE + identity\" task",
+            "tooltip": "🛠️ Start the \"backend docker build EE + identity\" task"
           },
           {
             "label": "Docker : Build-EE + dnsmasq + identity",
             "task": "Backend | build EE + dnsmasq + identity",
-            "tooltip": "🛠️ Start the \"backend docker build EE + dnsmasq + identity\" task",
+            "tooltip": "🛠️ Start the \"backend docker build EE + dnsmasq + identity\" task"
           },
           {
             "label": "Docker : Build-DE",
             "task": "Backend | build DE",
-            "tooltip": "🛠️ Start the \"backend docker build DE\" task",
+            "tooltip": "🛠️ Start the \"backend docker build DE\" task"
           },
           {
             "label": "Docker : Run-DE (skip build)",
             "task": "Backend | run DE",
-            "tooltip": "🛠️ Start the \"backend docker build DE\" task",
+            "tooltip": "🛠️ Start the \"backend docker build DE\" task"
           },
           {
             "label": "Docker : ReBuild-DE",
             "task": "Backend | rebuild DE",
-            "tooltip": "🛠️ Start the \"backend docker rebuild DE\" task",
+            "tooltip": "🛠️ Start the \"backend docker rebuild DE\" task"
           },
           {
             "label": "Docker : Build-DE + dnsmasq",
             "task": "Backend | build DE + dnsmasq",
-            "tooltip": "🛠️ Start the \"backend docker build DE + dnsmasq\" task",
+            "tooltip": "🛠️ Start the \"backend docker build DE + dnsmasq\" task"
           },
           {
             "label": "Docker : Build-DE + identity",
             "task": "Backend | build DE + identity",
-            "tooltip": "🛠️ Start the \"backend docker build DE + identity\" task",
+            "tooltip": "🛠️ Start the \"backend docker build DE + identity\" task"
           },
           {
             "label": "Docker : Build-DE + dnsmasq + identity",
             "task": "Backend | build DE + dnsmasq + identity",
-            "tooltip": "🛠️ Start the \"backend docker build DE + dnsmasq + identity\" task",
+            "tooltip": "🛠️ Start the \"backend docker build DE + dnsmasq + identity\" task"
           },
           {
             "label": "Docker : Build-SAAS + dnsmasq",
             "task": "Backend | build SAAS + dnsmasq",
-            "tooltip": "🛠️ Start the \"backend docker build SAAS + dnsmasq\" task",
+            "tooltip": "🛠️ Start the \"backend docker build SAAS + dnsmasq\" task"
           },
           {
             "label": "Docker : Run-SAAS + dnsmasq (skip build)",
             "task": "Backend | run SAAS + dnsmasq",
-            "tooltip": "🛠️ Start the \"backend docker build SAAS + dnsmasq\" task",
+            "tooltip": "🛠️ Start the \"backend docker build SAAS + dnsmasq\" task"
           },
           {
             "label": "Docker : Build-SAAS + dnsmasq + identity",
             "task": "Backend | build SAAS + dnsmasq + identity",
-            "tooltip": "🛠️ Start the \"backend docker build SAAS + dnsmasq + identity\" task",
+            "tooltip": "🛠️ Start the \"backend docker build SAAS + dnsmasq + identity\" task"
           },
           {
             "label": "Docker : ReBuild-SAAS + dnsmasq",
             "task": "Backend | rebuild SAAS + dnsmasq",
-            "tooltip": "🛠️ Start the \"backend docker rebuild SAAS + dnsmasq\" task",
+            "tooltip": "🛠️ Start the \"backend docker rebuild SAAS + dnsmasq\" task"
           },
           {
             "label": "Docker : Clear",
             "task": "Backend | clear",
-            "tooltip": "🛠️ Start the \"backend docker clear\" task",
+            "tooltip": "🛠️ Start the \"backend docker clear\" task"
           },
           {
             "label": "Docker : Stop",
             "task": "Backend | stop",
-            "tooltip": "🛠️ Start the \"backend docker stop\" task",
+            "tooltip": "🛠️ Start the \"backend docker stop\" task"
           },
           {
             "label": "Docker : Start",
             "task": "Backend | start",
-            "tooltip": "🛠️ Start the \"backend docker start\" task",
+            "tooltip": "🛠️ Start the \"backend docker start\" task"
           },
           {
             "label": "Docker : Restart",
             "task": "Backend | restart",
-            "tooltip": "🛠️ Start the \"backend docker restart\" task",
-          },
+            "tooltip": "🛠️ Start the \"backend docker restart\" task"
+          }
         ],
-        "tooltip": "🛠️ Server tasks",
+        "tooltip": "🛠️ Server tasks"
       },
       {
         "label": "Client",
@@ -166,112 +170,128 @@
           {
             "label": "Install",
             "task": "Frontend | install",
-            "tooltip": "🛠️ Start the \"frontend install packages\" task",
+            "tooltip": "🛠️ Start the \"frontend install packages\" task"
           },
           {
-            "label": "Update yarn.lock",
-            "task": "Frontend | update yarn.lock",
-            "tooltip": "🛠️ Start the \"frontend update yarn.lock\" task",
+            "label": "Update dependencies",
+            "task": "Frontend | update dependencies",
+            "tooltip": "🛠️ Start the \"frontend update dependencies\" task"
           },
           {
             "label": "Build",
             "task": "Frontend | build",
-            "tooltip": "🛠️ Start the \"frontend build\" task",
+            "tooltip": "🛠️ Start the \"frontend build\" task"
           },
           {
-            "label": "Build and start prod",
-            "task": "Frontend | build-and-start-prod",
-            "tooltip": "🛠️ Start the \"frontend build and start production\" task",
+            "label": "Build:lite",
+            "task": "Frontend | build:lite",
+            "tooltip": "🛠️ Start the \"frontend build:lite (client, login, doceditor)\" task"
           },
           {
             "label": "Start",
             "task": "Frontend | start",
-            "tooltip": "🛠️ Start the \"frontend start\" task",
+            "tooltip": "🛠️ Start the \"frontend start\" task"
+          },
+          {
+            "label": "Start:lite",
+            "task": "Frontend | start:lite",
+            "tooltip": "🛠️ Start the \"frontend start\" task"
           },
           {
             "label": "Start prod",
             "task": "Frontend | start-prod",
-            "tooltip": "🛠️ Start the \"frontend start production\" task",
+            "tooltip": "🛠️ Start the \"frontend start production\" task"
           },
           {
-            "label": "Start:internal",
-            "task": "Frontend | start:internal",
-            "tooltip": "🛠️ Start the \"frontend start internal\" task",
+            "label": "Start prod:lite",
+            "task": "Frontend | start-prod:lite",
+            "tooltip": "🛠️ Start the \"frontend start production\" task"
           },
+          ,
           {
-            "label": "Start prod:internal",
-            "task": "Frontend | start-prod:internal",
-            "tooltip": "🛠️ Start the \"frontend start production internal\" task",
+            "label": "Deploy",
+            "task": "Frontend | deploy",
+            "tooltip": "🛠️ Start the \"frontend deploy\" task"
           },
           {
             "label": "Start storybook",
             "task": "Frontend | storybook",
-            "tooltip": "🛠️ Start the \"frontend start storybook\" task",
+            "tooltip": "🛠️ Start the \"frontend start storybook\" task"
           },
           {
             "label": "Start storybook prod",
             "task": "Frontend | storybook prod",
-            "tooltip": "🛠️ Start the \"frontend start storybook\" task",
-          },
-          {
-            "label": "Lint",
-            "task": "Frontend | Eslint",
-            "tooltip": "🛠️ Start the \"frontend start storybook\" task",
-          },
-          {
-            "label": "Lint:fix",
-            "task": "Frontend | Eslint:fix",
-            "tooltip": "🛠️ Start the \"frontend start storybook\" task",
-          },
+            "tooltip": "🛠️ Start the \"frontend start storybook\" task"
+          }
         ],
-        "tooltip": "🛠️ Client tasks",
+        "tooltip": "🛠️ Client tasks"
       },
       {
         "label": "Tests",
         "tasks": [
           {
-            "label": "common",
+            "label": "Test all common tests",
             "task": "Test | Jest:common",
-            "tooltip": "🛠️ Start the \"Test | Jest:common\" task",
+            "tooltip": "🛠️ Start the \"Test | Jest:common\" task"
           },
           {
-            "label": "translations",
+            "label": "Test translations",
             "task": "Test | Jest:translations",
-            "tooltip": "🛠️ Start the \"Test | Jest:translations\" task",
+            "tooltip": "🛠️ Start the \"Test | Jest:translations\" task"
           },
           {
-            "label": "images",
+            "label": "Test images",
             "task": "Test | Jest:images",
-            "tooltip": "🛠️ Start the \"Test | Jest:images\" task",
+            "tooltip": "🛠️ Start the \"Test | Jest:images\" task"
           },
           {
-            "label": "colors",
+            "label": "Test colors",
             "task": "Test | Jest:colors",
-            "tooltip": "🛠️ Start the \"Test | Jest:colors\" task",
+            "tooltip": "🛠️ Start the \"Test | Jest:colors\" task"
           },
           {
-            "label": "unit",
+            "label": "Test dependencies",
+            "task": "Test | Jest:dependencies",
+            "tooltip": "🛠️ Start the \"Test | Jest:dependencies\" task"
+          },
+          {
+            "label": "Test unit",
             "task": "Test | Jest:unit",
-            "tooltip": "🛠️ Start the \"Test | Jest:unit\" task",
+            "tooltip": "🛠️ Start the \"Test | Jest:unit\" task"
           },
           {
-            "label": "e2e docker build",
+            "label": "Docker E2E build",
             "task": "Test | Test e2e docker build",
-            "tooltip": "🛠️ Start the \"test build in docker\" task",
+            "tooltip": "🛠️ Start the \"test build in docker\" task"
           },
           {
-            "label": "e2e docker start",
+            "label": "Docker E2E start",
             "task": "Test | Test e2e docker start",
-            "tooltip": "🛠️ Start the \"local frontend e2e tests in docker\" task",
+            "tooltip": "🛠️ Start the \"local frontend e2e tests in docker\" task"
           },
           {
-            "label": "e2e docker clear",
+            "label": "Docker E2E clear",
             "task": "Test | Test e2e docker clear",
-            "tooltip": "🛠️ Start the \"remove image for running e2e tests\" task",
+            "tooltip": "🛠️ Start the \"remove image for running e2e tests\" task"
           },
+          {
+            "label": "Lint",
+            "task": "Test | ESLint",
+            "tooltip": "🛠️ Start the \"eslint\" task"
+          },
+          {
+            "label": "Lint:fix",
+            "task": "Test | ESLint:fix",
+            "tooltip": "🛠️ Start the \"eslint (autofix)\" task"
+          },
+          {
+            "label": "Typescript issues (tsc)",
+            "task": "Test | Tsc",
+            "tooltip": "🛠️ Start the \"tsc\" task"
+          }
         ],
-        "tooltip": "🛠️ Client tests tasks",
-      },
+        "tooltip": "🛠️ Client tests tasks"
+      }
     ],
     "licenser.author": "Ascensio System SIA",
     "licenser.customHeader": "(c) Copyright @AUTHOR@ 2009-@YEAR@\\n\\nThis program is a free software product.\\nYou can redistribute it and/or modify it under the terms\\nof the GNU Affero General Public License (AGPL) version 3 as published by the Free Software\\nFoundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended\\nto the effect that @AUTHOR@ expressly excludes the warranty of non-infringement of\\nany third-party rights.\\n\\nThis program is distributed WITHOUT ANY WARRANTY, without even the implied warranty\\nof MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see\\nthe GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html\\n\\nYou can contact @AUTHOR@ at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.\\n\\nThe  interactive user interfaces in modified source and object code versions of the Program must\\ndisplay Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.\\n\\nPursuant to Section 7(b) of the License you must retain the original Product logo when\\ndistributing the program. Pursuant to Section 7(e) we decline to grant you any rights under\\ntrademark law for use of our trademarks.\\n\\nAll the Product's GUI elements, including illustrations and icon sets, as well as technical writing\\ncontent are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0\\nInternational. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode",
@@ -319,7 +339,8 @@
       "xls",
       "xlsx",
       "yaml",
-      "yml",
+      "yml"
     ],
-  },
+    "pnpmCatalogLens.enabled": true
+  }
 }

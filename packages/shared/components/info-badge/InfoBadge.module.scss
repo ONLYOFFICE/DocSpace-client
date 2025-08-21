@@ -1,0 +1,54 @@
+@use "../../styles/variables";
+@use "../../styles/mixins";
+
+.tooltip {
+  :global {
+    .__react_component_tooltip {
+      padding: 16px;
+      box-shadow: 0px 12px 40px 0px var(--beta-badge-tooltip-box-shadow-color);
+      max-width: 240px;
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+
+      @include mixins.mobile {
+        max-width: calc(100vw - 32px);
+      }
+    }
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+
+  .close {
+    height: 16px;
+    width: 16px;
+    cursor: pointer;
+  }
+}
+
+.title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22px;
+  color: var(--tooltip-text-color);
+}
+
+.description {
+  margin: 0;
+  font-size: 12px;
+  line-height: 16px;
+
+  a {
+    font-size: 12px;
+  }
+}

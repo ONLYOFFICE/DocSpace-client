@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -41,20 +41,20 @@ const DialogsWrapper = (props) => {
 
   return (
     <>
-      {isAboutDialogVisible && (
+      {isAboutDialogVisible ? (
         <AboutDialog
           t={t}
           visible={isAboutDialogVisible}
           onClose={() => setIsAboutDialogVisible(false)}
           buildVersionInfo={buildVersionInfo}
         />
-      )}
-      {isDebugDialogVisible && (
+      ) : null}
+      {isDebugDialogVisible ? (
         <DebugInfoDialog
           visible={isDebugDialogVisible}
           onClose={() => setIsDebugDialogVisible(false)}
         />
-      )}
+      ) : null}
     </>
   );
 };

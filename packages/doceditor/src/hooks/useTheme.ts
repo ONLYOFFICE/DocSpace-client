@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { i18n } from "i18next";
+import { i18n as i18nType } from "i18next";
 import { match, P } from "ts-pattern";
 
 import { Base, Dark, TColorScheme, TTheme } from "@docspace/shared/themes";
@@ -36,21 +36,20 @@ import { getAppearanceTheme } from "@docspace/shared/api/settings";
 import { getFontFamilyDependingOnLanguage } from "@docspace/shared/utils/rtlUtils";
 import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 
-import type { TUser } from "@docspace/shared/api/people/types";
 import type { TGetColorTheme } from "@docspace/shared/api/settings/types";
 
 type MatchType = [ThemeKeys | undefined, ThemeKeys | undefined];
 
 export interface UseThemeProps {
-  user?: TUser;
-  i18n?: i18n;
+  initialTheme?: ThemeKeys;
+  i18n?: i18nType;
   systemTheme?: ThemeKeys;
   colorTheme?: TGetColorTheme;
   lang?: string;
 }
 
 const useTheme = ({
-  user,
+  initialTheme,
   i18n,
   systemTheme,
   colorTheme,
@@ -69,7 +68,7 @@ const useTheme = ({
   const [theme, setTheme] = React.useState<TTheme>(() => {
     const interfaceDirection = i18n?.dir ? i18n.dir(lang) : "ltr";
 
-    const newTheme = match<MatchType>([user?.theme, systemTheme])
+    const newTheme = match<MatchType>([initialTheme, systemTheme])
       .returnType<TTheme>()
       .with([ThemeKeys.DarkStr, P._], () => Dark)
       .with([ThemeKeys.BaseStr, P._], () => Base)
@@ -105,14 +104,14 @@ const useTheme = ({
   const getUserTheme = React.useCallback(() => {
     const SYSTEM_THEME = getSystemTheme();
 
-    let theme = user?.theme ?? SYSTEM_THEME;
+    let themeNew = initialTheme ?? SYSTEM_THEME;
     const interfaceDirection = i18n?.dir ? i18n.dir(lang) : "ltr";
 
-    if (user?.theme === ThemeKeys.SystemStr) theme = SYSTEM_THEME;
+    if (initialTheme === ThemeKeys.SystemStr) themeNew = SYSTEM_THEME;
 
     const fontFamily = getFontFamilyDependingOnLanguage(i18n?.language ?? "en");
 
-    const isBaseTheme = theme === ThemeKeys.BaseStr;
+    const isBaseTheme = themeNew === ThemeKeys.BaseStr;
     const themeCookie = isBaseTheme ? ThemeKeys.BaseStr : ThemeKeys.DarkStr;
 
     setTheme({
@@ -123,7 +122,7 @@ const useTheme = ({
     });
 
     setCookie(SYSTEM_THEME_KEY, themeCookie);
-  }, [user?.theme, i18n, currentColorTheme, lang]);
+  }, [initialTheme, i18n, currentColorTheme, lang]);
 
   React.useEffect(() => {
     getCurrentColorTheme();

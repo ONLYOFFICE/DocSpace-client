@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,6 +26,7 @@
 
 import {
   endpoints,
+  HEADER_CONFIRM_WITHOUT_EMAIL,
   HEADER_NO_STANDALONE_SETTINGS,
 } from "@docspace/shared/__mocks__/e2e";
 
@@ -62,6 +63,9 @@ const NEXT_REQUEST_URL_WITH_PARAMS = getUrlWithQueryParams(
 );
 
 test("link invite email render", async ({ page, mockRequest }) => {
+  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
+    HEADER_CONFIRM_WITHOUT_EMAIL,
+  ]);
   await mockRequest.router([endpoints.getUserByEmail]);
   await page.goto(URL_WITH_PARAMS);
 
@@ -73,11 +77,14 @@ test("link invite email render", async ({ page, mockRequest }) => {
 });
 
 test("link invite login render", async ({ page, mockRequest }) => {
+  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
+    HEADER_CONFIRM_WITHOUT_EMAIL,
+  ]);
   await mockRequest.router([endpoints.getUserByEmail]);
   await page.goto(URL_WITH_PARAMS);
 
   await page.getByTestId("email-input").fill("mail@mail.com");
-  await page.getByTestId("button").click();
+  await page.getByTestId("email_continue_button").click();
 
   await page.waitForURL("/login?loginData**", { waitUntil: "load" });
 
@@ -88,11 +95,17 @@ test("link invite login render", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("link invite registration render standalone", async ({ page }) => {
+test("link invite registration render standalone", async ({
+  page,
+  mockRequest,
+}) => {
+  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
+    HEADER_CONFIRM_WITHOUT_EMAIL,
+  ]);
   await page.goto(URL_WITH_PARAMS);
 
   await page.getByTestId("email-input").fill("mail@mail.com");
-  await page.getByTestId("button").click();
+  await page.getByTestId("email_continue_button").click();
 
   await page
     .locator("p")
@@ -112,12 +125,13 @@ test("link invite registration render no standalone", async ({
 }) => {
   await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
     HEADER_NO_STANDALONE_SETTINGS,
+    HEADER_CONFIRM_WITHOUT_EMAIL,
   ]);
 
   await page.goto(URL_WITH_PARAMS);
 
   await page.getByTestId("email-input").fill("mail@mail.com");
-  await page.getByTestId("button").click();
+  await page.getByTestId("email_continue_button").click();
 
   await page
     .locator("p")
@@ -132,11 +146,14 @@ test("link invite registration render no standalone", async ({
 });
 
 test("link invite email error", async ({ page, mockRequest }) => {
+  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
+    HEADER_CONFIRM_WITHOUT_EMAIL,
+  ]);
   await mockRequest.router([endpoints.getUserByEmail]);
   await page.goto(URL_WITH_PARAMS);
 
   await page.getByTestId("email-input").fill("mail.com");
-  await page.getByTestId("button").click();
+  await page.getByTestId("email_continue_button").click();
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -146,6 +163,9 @@ test("link invite email error", async ({ page, mockRequest }) => {
 });
 
 test("link invite login success", async ({ page, mockRequest }) => {
+  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
+    HEADER_CONFIRM_WITHOUT_EMAIL,
+  ]);
   await mockRequest.router([
     endpoints.getUserByEmail,
     endpoints.checkConfirmLink,
@@ -155,12 +175,12 @@ test("link invite login success", async ({ page, mockRequest }) => {
   await page.goto(URL_WITH_PARAMS);
 
   await page.getByTestId("email-input").fill("mail@mail.com");
-  await page.getByTestId("button").click();
+  await page.getByTestId("email_continue_button").click();
 
   await page.waitForURL("/login?loginData**", { waitUntil: "load" });
 
-  await page.getByTestId("text-input").fill("qwerty123");
-  await page.getByTestId("input-block").getByRole("img").click();
+  await page.fill("[name='password']", "qwerty123");
+  await page.getByTestId("password_input_eye_off_icon").click();
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -168,7 +188,7 @@ test("link invite login success", async ({ page, mockRequest }) => {
     "link-invite-login-success.png",
   ]);
 
-  await page.getByTestId("button").click();
+  await page.getByTestId("login_button").click();
   await page.waitForURL("/", { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
@@ -179,17 +199,21 @@ test("link invite login success", async ({ page, mockRequest }) => {
 });
 
 test("link invite login error", async ({ page, mockRequest }) => {
+  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
+    HEADER_CONFIRM_WITHOUT_EMAIL,
+  ]);
   await mockRequest.router([endpoints.getUserByEmail]);
 
   await page.goto(URL_WITH_PARAMS);
 
   await page.getByTestId("email-input").fill("mail@mail.com");
-  await page.getByTestId("button").click();
+  await page.getByTestId("email_continue_button").click();
 
   await page.waitForURL("/login?loginData**", { waitUntil: "load" });
 
-  await page.getByTestId("text-input").fill("123");
-  await page.getByTestId("button").click();
+  await page.fill("[name='password']", "123");
+
+  await page.getByTestId("login_button").click();
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -202,19 +226,19 @@ test("link invite registration success standalone", async ({
   page,
   mockRequest,
 }) => {
+  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
+    HEADER_CONFIRM_WITHOUT_EMAIL,
+  ]);
   await mockRequest.router([endpoints.createUser, endpoints.login]);
   await page.goto(URL_WITH_PARAMS);
 
   await page.getByTestId("email-input").fill("mail@mail.com");
-  await page.getByTestId("button").click();
+  await page.getByTestId("email_continue_button").click();
 
   await page.fill("[name='first-name']", "firstName");
   await page.fill("[name='last-name']", "lastName");
-  await page
-    .getByTestId("input-block")
-    .getByTestId("text-input")
-    .fill("qwerty123");
-  await page.getByTestId("input-block").getByRole("img").click();
+  await page.fill("[name='password']", "qwerty123");
+  await page.getByTestId("password_input_eye_off_icon").click();
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -222,7 +246,7 @@ test("link invite registration success standalone", async ({
     "link-invite-registration-success-standalone.png",
   ]);
 
-  await page.getByRole("button", { name: "Sign up" }).click();
+  await page.getByTestId("signup_button").click();
   await page.waitForURL("/", { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
@@ -238,24 +262,22 @@ test("link invite registration success no standalone", async ({
 }) => {
   await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
     HEADER_NO_STANDALONE_SETTINGS,
+    HEADER_CONFIRM_WITHOUT_EMAIL,
   ]);
 
   await mockRequest.router([endpoints.createUser, endpoints.login]);
   await page.goto(URL_WITH_PARAMS);
 
   await page.getByTestId("email-input").fill("mail@mail.com");
-  await page.getByTestId("button").click();
+  await page.getByTestId("email_continue_button").click();
 
   await page.fill("[name='first-name']", "firstName");
   await page.fill("[name='last-name']", "lastName");
-  await page
-    .getByTestId("input-block")
-    .getByTestId("text-input")
-    .fill("qwerty123");
+  await page.fill("[name='password']", "qwerty123");
 
-  await page.getByTestId("checkbox").click();
+  await page.getByTestId("news_checkbox").click();
 
-  await page.getByTestId("input-block").getByRole("img").click();
+  await page.getByTestId("password_input_eye_off_icon").click();
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -263,7 +285,7 @@ test("link invite registration success no standalone", async ({
     "link-invite-registration-success-no-standalone.png",
   ]);
 
-  await page.getByRole("button", { name: "Sign up" }).click();
+  await page.getByTestId("signup_button").click();
   await page.waitForURL("/", { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
@@ -273,16 +295,22 @@ test("link invite registration success no standalone", async ({
   ]);
 });
 
-test("link invite registration error standalone", async ({ page }) => {
+test("link invite registration error standalone", async ({
+  page,
+  mockRequest,
+}) => {
+  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
+    HEADER_CONFIRM_WITHOUT_EMAIL,
+  ]);
   await page.goto(URL_WITH_PARAMS);
 
   await page.getByTestId("email-input").fill("mail@mail.com");
-  await page.getByTestId("button").click();
+  await page.getByTestId("email_continue_button").click();
+  await page.fill("[name='password']", "123");
 
-  await page.getByTestId("input-block").getByTestId("text-input").fill("123");
-  await page.getByTestId("input-block").getByRole("img").click();
+  await page.getByTestId("password_input_eye_off_icon").click();
 
-  await page.getByRole("button", { name: "Sign up" }).click();
+  await page.getByTestId("signup_button").click();
 
   await expect(page).toHaveScreenshot(
     ["desktop", "link-invite", "link-invite-registration-error-standalone.png"],
@@ -296,17 +324,19 @@ test("link invite registration error no standalone", async ({
 }) => {
   await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
     HEADER_NO_STANDALONE_SETTINGS,
+    HEADER_CONFIRM_WITHOUT_EMAIL,
   ]);
 
   await page.goto(URL_WITH_PARAMS);
 
   await page.getByTestId("email-input").fill("mail@mail.com");
-  await page.getByTestId("button").click();
+  await page.getByTestId("email_continue_button").click();
 
-  await page.getByTestId("input-block").getByTestId("text-input").fill("123");
-  await page.getByTestId("input-block").getByRole("img").click();
+  await page.fill("[name='password']", "123");
 
-  await page.getByRole("button", { name: "Sign up" }).click();
+  await page.getByTestId("password_input_eye_off_icon").click();
+
+  await page.getByTestId("signup_button").click();
 
   await expect(page).toHaveScreenshot(
     [

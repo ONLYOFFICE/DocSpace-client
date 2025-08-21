@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -39,10 +39,14 @@ export interface CampaignsBannerProps {
   campaignTranslate: ITranslate;
   /** Config */
   campaignConfig: IConfig;
+  /** Disable text fitting */
+  disableFitText?: boolean;
   /** Button/Link action */
   onAction(type?: string, url?: string): void;
   /** Close action */
   onClose(): void;
+  /** Action icon */
+  actionIcon?: string;
 }
 
 interface ITranslate {
@@ -57,6 +61,7 @@ interface IStyle {
   color?: string;
   fontSize?: string;
   fontWeight?: string;
+  lineHeight?: string;
 }
 
 interface IAction {

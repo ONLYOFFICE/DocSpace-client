@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,71 +29,109 @@ import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { FieldContainer } from "@docspace/shared/components/field-container";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
+import { HelpButton } from "@docspace/shared/components/help-button";
 
 interface InjectedProps {
   hideAuthPage: boolean;
+  disableEmailVerification: boolean;
   enableSso: boolean;
   isLoadingXml: boolean;
   setCheckbox: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const StyledWrapper = styled.div`
-  .advanced-block {
-    margin: 24px 0;
+  margin: 24px 0;
 
-    .field-label {
-      font-size: 15px;
-      font-weight: 600;
+  .advanced-title {
+    margin-bottom: 16px;
+  }
+
+  .advanced-block {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: baseline;
+
+    .help-icon {
+      position: relative;
+      bottom: 2px;
     }
   }
 
   .checkbox-input {
     width: fit-content;
-    margin-block: 10px 6px;
-    margin-inline: 0 8px;
+    margin-inline: 0 4px;
   }
 `;
 
 const AdvancedSettings = (props: InjectedProps) => {
-  const { hideAuthPage, enableSso, isLoadingXml, setCheckbox } = props;
-  const { t } = useTranslation("SingleSignOn");
+  const {
+    hideAuthPage,
+    disableEmailVerification,
+    enableSso,
+    isLoadingXml,
+    setCheckbox,
+  } = props;
+  const { t } = useTranslation(["SingleSignOn", "Settings", "Common"]);
   return (
     <StyledWrapper>
-      <FieldContainer
-        className="advanced-block"
-        inlineHelpButton
-        isVertical
-        labelText={t("AdvancedSettings")}
-        place="top"
-        tooltipContent={
-          <Text fontSize="12px">{t("AdvancedSettingsTooltip")}</Text>
-        }
-        tooltipClass="advanced-settings-tooltip icon-button"
-        labelVisible
-      >
+      <Text className="advanced-title" fontWeight={600} fontSize="14px">
+        {t("AdvancedSettings")}
+      </Text>
+
+      <div className="advanced-block">
         <Checkbox
           id="hide-auth-page"
           className="checkbox-input"
           label={t("HideAuthPage")}
           name="hideAuthPage"
-          tabIndex={22}
           isChecked={hideAuthPage}
           isDisabled={!enableSso || isLoadingXml}
           onChange={setCheckbox}
+          dataTestId="hide_auth_page_checkbox"
         />
-      </FieldContainer>
+        <HelpButton
+          tooltipContent={t("AdvancedSettingsTooltip")}
+          dataTestId="hide_auth_page_help_button"
+        />
+      </div>
+
+      <div className="advanced-block">
+        <Checkbox
+          id="disable-email-verification"
+          className="checkbox-input"
+          label={t("Settings:DisableEmailVerification")}
+          name="disableEmailVerification"
+          isChecked={disableEmailVerification}
+          isDisabled={!enableSso || isLoadingXml}
+          onChange={setCheckbox}
+          dataTestId="disable_email_verification_checkbox"
+        />
+        <HelpButton
+          tooltipContent={t("Settings:DisableEmailDescription", {
+            sectionName: t("Common:SSO"),
+            productName: t("Common:ProductName"),
+          })}
+          dataTestId="disable_email_verification_help_button"
+        />
+      </div>
     </StyledWrapper>
   );
 };
 
-export default inject(({ ssoStore }) => {
-  const { hideAuthPage, enableSso, isLoadingXml, setCheckbox } = ssoStore;
+export default inject<TStore>(({ ssoStore }) => {
+  const {
+    hideAuthPage,
+    disableEmailVerification,
+    enableSso,
+    isLoadingXml,
+    setCheckbox,
+  } = ssoStore;
 
   return {
     hideAuthPage,
+    disableEmailVerification,
     enableSso,
     isLoadingXml,
     setCheckbox,

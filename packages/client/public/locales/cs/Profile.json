@@ -1,10 +1,8 @@
 {
   "ActiveSessions": "Aktivní relace",
   "AutoDeleteTitle": "Všechny relace starší než 60 dní budou automaticky odstraněny.",
-  "ChangeEmailSuccess": "E-mail byl úspěšně změněn ",
   "ChangePasswordAfterLoggingOut": "Změna hesla po odhlášení",
   "ConnectSocialNetworks": "Připojte své sociální sítě",
-  "DarkTheme": "Tmavý motiv",
   "DescriptionForSecurity": "Pro větší bezpečnost je třeba změnit heslo.",
   "DesktopTheme": "Synchronizace s nastavením desktopového editoru",
   "DesktopThemeDescription": "Automatické přepínání mezi světlými a tmavými motivy v závislosti na aktuálním motivu editorů plochy.",
@@ -13,7 +11,6 @@
   "ErrorAccountAlreadyUse": "Propojený účet již používaný jiným uživatelem",
   "FileManagement": "Správa souborů",
   "InterfaceTheme": "Vzhled prostředí",
-  "LightTheme": "Světlý motiv",
   "LogoutActiveConnection": "Odhlášení z aktivního připojení",
   "LogoutAllActiveSessionsDescription": "Všechna aktivní připojení kromě tohoto připojení budou odhlášena, protože jsou právě používána.",
   "LogoutBtn": "Odhlášení",

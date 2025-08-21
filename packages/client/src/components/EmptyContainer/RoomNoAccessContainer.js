@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,7 +31,7 @@ import ManageAccessRightsLightIcon from "PUBLIC_DIR/images/emptyview/empty.acces
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 import { RoomSearchArea } from "@docspace/shared/enums";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
@@ -43,7 +43,9 @@ import { CategoryType } from "SRC_DIR/helpers/constants";
 const RoomNoAccessContainer = (props) => {
   const { t, setIsLoading, theme, isFrame, userId } = props;
 
-  const descriptionRoomNoAccess = t("NoAccessRoomDescription");
+  const descriptionRoomNoAccess = t("RoomAccessRedirectNote", {
+    sectionName: t("Common:Rooms"),
+  });
   const titleRoomNoAccess = t("NoAccessRoomTitle");
 
   const navigate = useNavigate();

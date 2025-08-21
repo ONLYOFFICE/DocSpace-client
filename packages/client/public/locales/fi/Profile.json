@@ -1,10 +1,8 @@
 {
   "ActiveSessions": "Aktiiviset istunnot",
   "AutoDeleteTitle": "Kaikki yli 60 päivää vanhat istunnot poistetaan automaattisesti.",
-  "ChangeEmailSuccess": "Sähköpostin vaihtaminen onnistui ",
   "ChangePasswordAfterLoggingOut": "Vaihda salasana uloskirjautumisen jälkeen",
   "ConnectSocialNetworks": "Yhdistä sosiaaliset verkostosi",
-  "DarkTheme": "Tumma teema",
   "DescriptionForSecurity": "Vaihda salasanasi lisätäksesi turvallisuutta.",
   "DesktopTheme": "Synkronoi työpöytäeditorin asetusten kanssa",
   "DesktopThemeDescription": "Vaihda automaattisesti vaaleiden ja tummien teemojen välillä työpöytäeditorien nykyisen teeman mukaan.",
@@ -13,7 +11,6 @@
   "ErrorAccountAlreadyUse": "Linkitetty tili on jo toisen käyttäjän käytössä",
   "FileManagement": "Tiedostojen hallinta",
   "InterfaceTheme": "Käyttöliittymän teema",
-  "LightTheme": "Kevyt teema",
   "LogoutActiveConnection": "Kirjaudu ulos aktiivisesta yhteydestä",
   "LogoutAllActiveSessionsDescription": "Kaikki aktiiviset yhteydet paitsi tämä yhteys kirjataan ulos, koska se on tällä hetkellä käytössä oleva.",
   "LogoutBtn": "Kirjaudu ulos",

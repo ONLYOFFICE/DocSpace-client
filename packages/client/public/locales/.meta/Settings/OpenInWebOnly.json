@@ -1,0 +1,274 @@
+{
+  "key_path": "OpenInWebOnly",
+  "content": "Open in web only",
+  "content_en_sha1_hash": "caf9fca0de7a5b1f6294fbe7075e3be24b469aa3",
+  "created_at": "2025-05-19T21:30:52.127Z",
+  "updated_at": "2025-08-04T07:30:01.286Z",
+  "comment": {
+    "text": "This translation key is used to display a label on a settings page that determines whether an app link opens in the web browser or within the app. It appears as a radio button option in the Portal Settings configuration dialog.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:50.497Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/configure-deep-link.tsx",
+      "line_number": 171,
+      "context": "value: 0,\n dataTestId: \"deep_link_provide-a-choice\",\n },\n {\n id: \"by-web\",\n label: t(\"OpenInWebOnly\"),\n value: 1,\n dataTestId: \"deep_link_by-web\",\n },\n {\n id: \"by-app\",",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"الفتح فقط في الويب\" literally translates to \"The opening only in the web.\" While understandable, it's not the most natural or idiomatic way to express \"Open in web only\" in Arabic. It sounds a bit clunky.",
+          "suggestion": "A more natural translation could be \"عرض في الويب فقط\" (ʿarḍ fī al-web faqaṭ) which translates to \"View in web only\" or \"Display in web only\". Alternatively, \"الفتح عبر الويب فقط\" (al-fatḥ ʿabra al-web faqaṭ) meaning \"Opening via web only\" could also be considered."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Yalnız vebdə açın\" is a literal translation but sounds slightly unnatural in Azerbaijani. A more idiomatic and natural phrasing would be better.",
+          "suggestion": "Açılan səhifələr yalnız vebdə göstər"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Отвори само в уеб версия' is a literal translation but may not convey the intended meaning of 'Open in web only' within a settings context. 'Web only' implies a restriction; a better translation might reflect that.",
+          "suggestion": "Отвори само в уебсайт"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Բացել միայն կայքում\" while understandable, isn't the most natural way to express \"Open in web only\" in Armenian. It literally translates to \"Open only in website\". A more idiomatic translation might be \"Միայն կայքում բացել\" or \"Բացել միայն վեբում\" (the latter uses a loanword).",
+          "suggestion": "Consider \"Միայն կայքում բացել\" or \"Բացել միայն վեբում\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Alleen openen in web\" is technically correct but could be more natural in Dutch. \"Alleen in web openen\" or \"Slechts in web openen\" would be more idiomatic.",
+          "suggestion": "Slechts in web openen"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Открыть только в вебе\" while understandable, isn't the most natural or idiomatic way to say 'Open in web only' in Russian. It sounds slightly literal and clunky.",
+          "suggestion": "Consider alternatives like \"Только в веб-версии\" or \"Открывать только в браузере\" for a more fluid and natural-sounding translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"වෙබ් අඩවියේ පමණක් විවෘත කරන්න\" is a literal translation that isn't the most natural phrasing in Sinhala for a UI element. It conveys the meaning but sounds somewhat clunky.",
+          "suggestion": "වෙබ් අනුව ය පමණක් විවෘත කරන්න (Veb aniva yā pamaṇak vivruta karanna) - This offers a more natural and concise phrasing, implying 'Open only in the web version'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Otvárať len na webe6' includes an extra number '6' which is not present in the original English text. This appears to be an artifact of the translation process.",
+          "suggestion": "Otvárať len na webe"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Отвори само у прегледачу\" while understandable, doesn't perfectly capture the nuance of 'Open in web only'. A more precise translation would emphasize the restriction to web browsers and not native applications.",
+          "suggestion": "Отвори само у веб прегледачу"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Yalnızca web'de aç\" is a literal translation and sounds unnatural in Turkish. A more idiomatic and natural-sounding translation would be something along the lines of 'Sadece web'de aç' or 'Web'de sadece aç'.",
+          "suggestion": "Sadece web'de aç"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Chỉ mở bằng web\" is technically correct but could be more natural. \"Chỉ mở trên web\" or \"Chỉ mở trên trình duyệt web\" are better alternatives.",
+          "suggestion": "Chỉ mở trên web"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

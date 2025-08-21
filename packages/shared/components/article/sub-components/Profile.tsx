@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,24 +25,21 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useRef } from "react";
-import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 
 import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
 import DefaultUserPhotoPngUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 
 import { DeviceType } from "../../../enums";
+import { Nullable } from "../../../types";
+import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
 
 import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
 import { Text } from "../../text";
 import { IconButton } from "../../icon-button";
-import { ContextMenu, TContextMenuRef } from "../../context-menu";
+import { ContextMenu, ContextMenuRefType } from "../../context-menu";
 
-import {
-  StyledArticleProfile,
-  StyledUserName,
-  StyledProfileWrapper,
-} from "../Article.styled";
+import styles from "../Article.module.scss";
 import { ArticleProfileProps } from "../Article.types";
 
 const ArticleProfile = (props: ArticleProfileProps) => {
@@ -58,8 +55,9 @@ const ArticleProfile = (props: ArticleProfileProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef(null);
   const iconRef = useRef(null);
-  const buttonMenuRef = useRef<TContextMenuRef | null>(null);
-  const menuRef = useRef<TContextMenuRef | null>(null);
+  const buttonMenuRef = useRef<ContextMenuRefType>(null);
+  const menuRef = useRef<ContextMenuRefType>(null);
+  const { isRTL } = useInterfaceDirection();
 
   const isTabletView = currentDeviceType === DeviceType.tablet;
   const avatarSize = isTabletView ? AvatarSize.min : AvatarSize.base;
@@ -67,9 +65,9 @@ const ArticleProfile = (props: ArticleProfileProps) => {
   const toggle = (
     e: React.MouseEvent,
     open: boolean,
-    currentRef: React.MutableRefObject<TContextMenuRef | null>,
+    currentRef: React.RefObject<Nullable<ContextMenuRefType>>,
   ) => {
-    if (!currentRef.current) return;
+    if (!currentRef?.current) return;
     if (open) currentRef.current.show(e);
     else currentRef.current.hide(e);
     setIsOpen(open);
@@ -100,32 +98,18 @@ const ArticleProfile = (props: ArticleProfileProps) => {
 
   const model = getActions?.(t);
 
-  const firstName = user?.firstName
-    .split(" ")
-    .filter((name) => name.trim().length > 0)
-    .join(" ");
-  const lastName = user?.lastName
-    .split(" ")
-    .filter((name) => name.trim().length > 0)
-    .join(" ");
-
   const displayName = user?.displayName;
 
-  const [firstTerm, secondTerm] =
-    displayName &&
-    displayName.indexOf(user.firstName) > displayName.indexOf(user.lastName)
-      ? [lastName, firstName]
-      : [firstName, lastName];
-
-  const { interfaceDirection } = useTheme();
-  const isRtl = interfaceDirection === "rtl";
   const userAvatar = user?.hasAvatar ? user.avatar : DefaultUserPhotoPngUrl;
 
   if (currentDeviceType === DeviceType.mobile) return null;
 
   return (
-    <StyledProfileWrapper showText={showText}>
-      <StyledArticleProfile>
+    <div
+      className={styles.profileWrapper}
+      data-show-text={showText ? "true" : "false"}
+    >
+      <div className={styles.articleProfile}>
         <div ref={ref}>
           <Avatar
             className="profile-avatar"
@@ -137,30 +121,26 @@ const ArticleProfile = (props: ArticleProfileProps) => {
             onClick={onAvatarClick}
           />
           <ContextMenu
-            model={model || []}
+            model={model ?? []}
             containerRef={ref}
             ref={menuRef}
             onHide={onHide}
             scaled={false}
-            leftOffset={Number(!isRtl && -50)}
-            rightOffset={Number(isRtl && 54)}
+            leftOffset={Number(!isRTL && -50)}
+            rightOffset={Number(isRTL && 54)}
           />
         </div>
-        {(!isTabletView || showText) && (
+        {!isTabletView || showText ? (
           <>
-            <StyledUserName
+            <div
+              className={styles.userName}
               onMouseDown={onNameMouseDownClick}
               onClick={onNameClick}
             >
               <Text fontWeight={600} noSelect truncate dir="auto">
-                {firstTerm}
-                &nbsp;
+                {displayName}
               </Text>
-              <Text fontWeight={600} noSelect truncate dir="auto">
-                {secondTerm}
-                &nbsp;
-              </Text>
-            </StyledUserName>
+            </div>
             <div ref={iconRef} className="option-button">
               <IconButton
                 className="option-button-icon"
@@ -176,13 +156,12 @@ const ArticleProfile = (props: ArticleProfileProps) => {
                 onHide={onHide}
                 scaled={false}
                 leftOffset={10}
-                // topOffset={15}
               />
             </div>
           </>
-        )}
-      </StyledArticleProfile>
-    </StyledProfileWrapper>
+        ) : null}
+      </div>
+    </div>
   );
 };
 

@@ -1,6 +1,4 @@
 {
   "ErrorEmptyResponse": "Κενή απάντηση",
-  "ErrorUnavailableText": "{{productName}} μη διαθέσιμο",
-  "LinkDoesNotExist": "Ο σύνδεσμος που προσπαθείτε να ανοίξετε δεν υπάρχει.",
-  "LinkHasExpired": "Ο σύνδεσμος που ακολουθήσατε έχει λήξει."
+  "ErrorUnavailableText": "{{productName}} μη διαθέσιμο"
 }

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -40,10 +40,12 @@ const options = (t) => [
   {
     label: t("ViewerInfo"),
     value: viewerInfoWatermark,
+    dataTestId: "virtual_data_room_watermarks_radio_viewer_info",
   },
   {
     label: t("Common:Image"),
     value: imageWatermark,
+    dataTestId: "virtual_data_room_watermarks_radio_image",
   },
 ];
 
@@ -95,6 +97,7 @@ const Watermarks = ({
         options={typeOptions}
         selected={type}
         onClick={onSelectType}
+        dataTestId="virtual_data_room_watermarks_radio_group"
       />
       {type === imageWatermark ? (
         <ImageWatermark

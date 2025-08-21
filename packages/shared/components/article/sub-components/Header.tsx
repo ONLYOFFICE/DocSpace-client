@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,51 +25,58 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { useTheme } from "styled-components";
+import { useNavigate, Link } from "react-router";
 
 import { getLogoUrl } from "../../../utils";
 import { DeviceType, WhiteLabelLogoType } from "../../../enums";
 import { ArticleHeaderLoader } from "../../../skeletons/article";
-import {
-  StyledArticleHeader,
-  StyledHeading,
-  StyledIconBox,
-} from "../Article.styled";
+import { useTheme } from "../../../hooks/useTheme";
+
+import { AsideHeader } from "../../aside-header";
+import BackButton from "./BackButton";
+
+import styles from "../Article.module.scss";
+
 import { ArticleHeaderProps } from "../Article.types";
-import { AsideHeader } from "../../aside/AsideHeader";
 
 const ArticleHeader = ({
   showText,
   children,
-  onClick,
   onLogoClickAction,
   isBurgerLoading,
 
   withCustomArticleHeader,
   currentDeviceType,
   onIconClick,
-
+  showBackButton,
   ...rest
 }: ArticleHeaderProps) => {
   const navigate = useNavigate();
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
   const onLogoClick = () => {
     onLogoClickAction?.();
     navigate("/");
   };
 
-  const burgerLogo = getLogoUrl(WhiteLabelLogoType.LeftMenu, !theme.isBase);
-  const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
+  const burgerLogo = getLogoUrl(WhiteLabelLogoType.LeftMenu, !isBase);
+  const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !isBase);
 
   if (currentDeviceType === DeviceType.mobile)
     return (
       <AsideHeader
-        headerHeight="49px"
+        headerHeight={showBackButton ? "76px" : "49px"}
         isCloseable
         withoutBorder
         onCloseClick={onIconClick}
+        headerComponent={
+          showBackButton ? (
+            <BackButton
+              showText={showText}
+              currentDeviceType={currentDeviceType}
+            />
+          ) : null
+        }
       />
     );
 
@@ -86,17 +93,23 @@ const ArticleHeader = ({
 
   const mainComponent = (
     <>
-      {currentDeviceType === DeviceType.tablet && (
-        <StyledIconBox showText={showText}>
+      {currentDeviceType === DeviceType.tablet ? (
+        <div
+          className={styles.iconBox}
+          data-show-text={showText ? "true" : "false"}
+        >
           <img
             src={burgerLogo}
             className="burger-logo"
             alt="burger-logo"
             onClick={onLogoClick}
           />
-        </StyledIconBox>
-      )}
-      <StyledHeading showText={showText}>
+        </div>
+      ) : null}
+      <div
+        className={styles.heading}
+        data-show-text={showText ? "true" : "false"}
+      >
         {currentDeviceType === DeviceType.tablet ? (
           <img
             className="logo-icon_svg"
@@ -109,18 +122,22 @@ const ArticleHeader = ({
             <img className="logo-icon_svg" alt="burger-logo" src={logo} />
           </Link>
         )}
-      </StyledHeading>
+      </div>
     </>
   );
 
   return (
-    <StyledArticleHeader showText={showText} {...rest}>
+    <div
+      className={styles.articleHeader}
+      data-show-text={showText ? "true" : "false"}
+      {...rest}
+    >
       {withCustomArticleHeader && children
         ? children
         : isBurgerLoading
           ? isLoadingComponent
           : mainComponent}
-    </StyledArticleHeader>
+    </div>
   );
 };
 

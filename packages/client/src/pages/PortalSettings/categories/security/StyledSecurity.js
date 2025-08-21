@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { injectDefaultTheme, mobile } from "@docspace/shared/utils";
 
@@ -62,6 +62,12 @@ export const MainContainer = styled.div.attrs(injectDefaultTheme)`
     @media ${mobile} {
       padding-inline-end: 8px;
     }
+
+    ${(props) =>
+      props.withoutExternalLink &&
+      css`
+        padding-bottom: 16px;
+      `};
   }
 `;
 
@@ -106,6 +112,20 @@ export const LearnMoreWrapper = styled.div`
   .learn-subtitle {
     margin-bottom: 10px;
   }
+
+  ${(props) =>
+    props.withoutExternalLink &&
+    css`
+      @media ${mobile} {
+        .learn-subtitle {
+          margin-bottom: 0;
+        }
+
+        .page-subtitle {
+          margin-bottom: 0 !important;
+        }
+      }
+    `};
 `;
 
 export const StyledBruteForceProtection = styled.div`
@@ -143,6 +163,12 @@ export const StyledBruteForceProtection = styled.div`
       color: ${(props) =>
         props.theme.client.settings.security.descriptionColor};
       padding-bottom: 7px;
+
+      ${(props) =>
+        props.withoutExternalLink &&
+        css`
+          padding-bottom: 0;
+        `};
     }
 
     .link {

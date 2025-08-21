@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,80 +24,110 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface BoxProps {
-  /** Sets the tag through which to render the component */
-  as?: React.ElementType;
-  /** Sets the distribution of space between and around content items
-   * along a flexbox's cross-axis or a grid's block axis */
-  alignContent?: string;
-  /** Sets the align-self value on all direct children as a group.
-   * In Flexbox, it controls the alignment of items on the Cross Axis.
-   * In Grid Layout, it controls the alignment of items on the Block Axis
-   * within their grid area.  */
-  alignItems?: string;
-  /** Overrides a grid or flex item's align-items value. In Grid,
-   * it aligns the item inside the grid area. In Flexbox, it aligns
-   * the item on the cross axis. */
-  alignSelf?: string;
-  /** Sets all background style properties at once, such as color,
-   * image, origin and size, or repeat method.  */
-  backgroundProp?: string;
-  /** Sets the element's border. It sets the values of border-width,
-   * border-style, and border-color. */
-  borderProp?:
-    | string
-    | { style: string; width: string; color: string; radius?: string };
-  /** Sets whether the element is treated as a block or inline element and
-   * the layout used for its children, such as flow layout, grid or flex. */
-  displayProp?: string;
-  /** Sets the initial main size of the flex item. It sets the size of the content
-   * box unless otherwise set with box-sizing. */
-  flexBasis?: string;
-  /** Sets how flex items are placed in the flex container defining the main axis and
-   * the direction (normal or reversed) */
-  flexDirection?: string;
-  /** Sets how the flex item will grow or shrink to fit the space available in its
-   * flex container. It is a shorthand for flex-grow, flex-shrink, and flex-basis. */
-  flexProp?: string;
-  /** Sets whether flex items are forced onto one line or can wrap onto multiple lines.
-   * If wrapping is allowed, it sets the direction that lines are stacked. */
-  flexWrap?: string;
-  /** Is a shorthand property for grid-row-start, grid-column-start, grid-row-end and
-   * grid-column-end, specifying the size of the grid item and location within the grid by
-   * contributing a line, a span, or nothing (automatic) to its grid placement,
-   * Thereby specifying the edges of its grid area. */
-  gridArea?: string;
-  /** Defines the height of the border of the element area. */
-  heightProp?: string;
-  /** Defines how the browser distributes space between and around content items along
-   * the main-axis of a flex container, and the inline axis of a grid container */
-  justifyContent?: string;
-  /** Defines the default justify-self for all items of the box, giving them all
-   * a default way of justifying each box along the appropriate axis. */
-  justifyItems?: string;
-  /** Sets the way the box is justified inside its alignment container along the appropriate axis. */
-  justifySelf?: string;
-  /** Sets the margin area on all four sides of an element. It is a shorthand for margin-top,
-   * margin-right, margin-bottom, and margin-left. */
-  marginProp?: string;
-  /** Sets what to do when an element's content is too big to fit in its block formatting context. */
-  overflowProp?: string;
-  /** Sets the padding area on all four sides of the element. It is a shorthand for padding-top,
-   * padding-right, padding-bottom, and padding-left */
-  paddingProp?: string;
-  /** Sets the horizontal alignment of a block element or table-cell box.
-   * This means it works like vertical-align but in the horizontal direction  */
-  textAlign?: string;
-  /** Defines the border width of the element area. */
-  widthProp?: string;
+/** CSS display property values */
+type DisplayValue =
+  | "block"
+  | "inline"
+  | "flex"
+  | "grid"
+  | "none"
+  | "inline-block";
 
-  /** Sets gap to flex, and grid containers. */
+/** CSS flex direction values */
+type FlexDirectionValue = "row" | "column" | "row-reverse" | "column-reverse";
+
+/** CSS align and justify values */
+type AlignValue =
+  | "flex-start"
+  | "flex-end"
+  | "center"
+  | "stretch"
+  | "baseline"
+  | "space-between"
+  | "space-around"
+  | "start"
+  | "end";
+
+/** CSS text align values */
+export type TextAlignValue =
+  | "left"
+  | "right"
+  | "center"
+  | "justify"
+  | "start"
+  | "end";
+
+/** CSS flex wrap values */
+type FlexWrapValue = "nowrap" | "wrap" | "wrap-reverse";
+
+/** CSS overflow values */
+type OverflowValue = "visible" | "hidden" | "scroll" | "auto";
+
+/** Border properties object type */
+type BorderPropObject = {
+  style: string;
+  width: string;
+  color: string;
+  radius?: string;
+};
+
+/** ARIA boolean attribute values */
+type AriaBoolean = boolean | "true" | "false";
+
+/** Main Box component props */
+export type BoxProps = Omit<React.HTMLAttributes<HTMLElement>, "children"> & {
+  /** Element type to render as */
+  as?: React.ElementType;
+
+  /** Layout props */
+  displayProp?: DisplayValue;
+  flexDirection?: FlexDirectionValue;
+  flexBasis?: string;
+  flexProp?: string;
+  flexWrap?: FlexWrapValue;
+  gridArea?: string;
+
+  /** Alignment props */
+  alignContent?: AlignValue;
+  alignItems?: AlignValue;
+  alignSelf?: AlignValue;
+  justifyContent?: AlignValue;
+  justifyItems?: AlignValue;
+  justifySelf?: AlignValue;
+
+  /** Spacing props */
+  marginProp?: string;
+  paddingProp?: string;
   gapProp?: string;
 
+  /** Dimension props */
+  widthProp?: string;
+  heightProp?: string;
+
+  /** Style props */
+  backgroundProp?: string;
+  borderProp?: string | BorderPropObject;
+  overflowProp?: OverflowValue;
+  textAlign?: TextAlignValue;
+
+  /** React props */
   children?: React.ReactNode;
   className?: string;
   id?: string;
   style?: React.CSSProperties;
-
   onClick?: () => void;
-}
+
+  /** Accessibility props */
+  role?: string;
+  tabIndex?: number;
+  "aria-label"?: string;
+  "aria-expanded"?: AriaBoolean;
+  "aria-hidden"?: AriaBoolean;
+  "aria-controls"?: string;
+  "aria-describedby"?: string;
+  "aria-labelledby"?: string;
+  "aria-modal"?: AriaBoolean;
+
+  /** Allow any data-* attributes */
+  [key: `data-${string}`]: string | number | boolean;
+};

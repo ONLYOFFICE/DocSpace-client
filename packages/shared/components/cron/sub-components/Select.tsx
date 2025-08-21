@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,9 +31,9 @@ import { useTranslation } from "react-i18next";
 import { ComboBox, ComboBoxSize, TOption } from "../../combobox";
 
 import { fixFormatValue } from "../Cron.utils";
-import { SelectWrapper } from "../Cron.styled";
 
 import type { SelectProps } from "../Cron.types";
+import styles from "../Cron.module.scss";
 
 export const Select = ({
   unit,
@@ -43,6 +43,7 @@ export const Select = ({
   prefix,
   dropDownMaxHeight,
   isDisabled,
+  dataTestId,
 }: SelectProps) => {
   const { i18n } = useTranslation();
 
@@ -104,8 +105,8 @@ export const Select = ({
   };
 
   return (
-    <SelectWrapper>
-      {prefix && <span>{prefix}</span>}
+    <div className={styles.selectWrapper}>
+      {prefix ? <span>{prefix}</span> : null}
       <ComboBox
         scaled
         scaledOptions
@@ -119,7 +120,9 @@ export const Select = ({
         dropDownMaxHeight={dropDownMaxHeight}
         isDisabled={isDisabled}
         directionY="both"
+        dataTestId={dataTestId}
+        dropDownTestId={dataTestId ? `${dataTestId}_dropdown` : undefined}
       />
-    </SelectWrapper>
+    </div>
   );
 };

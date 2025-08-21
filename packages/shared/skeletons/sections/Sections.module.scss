@@ -1,0 +1,53 @@
+@use "../../styles/mixins";
+
+.headerContainer {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 140px 0fr 17px;
+  grid-template-rows: 1fr;
+  grid-column-gap: 8px;
+  margin-top: 22px;
+  margin-bottom: 23px;
+  align-items: center;
+
+  @include mixins.tablet-and-below {
+    margin-top: 16px;
+    margin-bottom: 25px;
+    grid-template-columns: 163px 1fr 17px;
+  }
+
+  @include mixins.mobile {
+    margin-top: 14px;
+    margin-bottom: 23px;
+    grid-template-columns: 140px 1fr 17px;
+  }
+}
+
+.headerBox1 {
+  width: 140px;
+  height: 24px;
+
+  @include mixins.tablet-and-below {
+    width: 163px;
+    height: 28px;
+  }
+
+  @include mixins.mobile {
+    width: 140px;
+    height: 24px;
+  }
+}
+
+.headerBox2 {
+  display: grid;
+  grid-template-columns: 17px 17px;
+  grid-template-rows: 1fr;
+}
+
+.submenu {
+  width: 100%;
+  height: 32px;
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}

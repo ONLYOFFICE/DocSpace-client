@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -37,6 +37,7 @@ import { TUser } from "@docspace/shared/api/people/types";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
+import api from "@docspace/shared/api";
 
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import EnableReactSvgUrl from "PUBLIC_DIR/images/enable.react.svg?url";
@@ -48,7 +49,7 @@ import ChangQuotaReactSvgUrl from "PUBLIC_DIR/images/change.quota.react.svg?url"
 import DisableQuotaReactSvgUrl from "PUBLIC_DIR/images/disable.quota.react.svg?url";
 import DefaultQuotaReactSvgUrl from "PUBLIC_DIR/images/default.quota.react.svg?url";
 
-import InfoPanelStore from "../InfoPanelStore";
+import { getInfoPanelOpen, showInfoPanel } from "SRC_DIR/helpers/info-panel";
 
 import GroupsStore from "./GroupsStore";
 import UsersStore from "./UsersStore";
@@ -61,7 +62,6 @@ class HeaderMenuStore {
     public usersStore: UsersStore,
     public dialogStore: DialogStore,
     public contextOptionsStore: AccountsContextOptionsStore,
-    public infoPanelStore: InfoPanelStore,
     public userStore: UserStore,
   ) {
     this.groupsStore = groupsStore;
@@ -78,28 +78,13 @@ class HeaderMenuStore {
     setDeleteGroupDialogVisible(true);
   };
 
-  onOpenInfoPanel = () => {
-    const { setIsVisible } = this.infoPanelStore;
-
-    setIsVisible(true);
-  };
-
   resetUserQuota = async (users: (TUser | string)[], t: TTranslation) => {
-    const { resetUserQuota, getPeopleListItem } = this.usersStore;
-    const { setInfoPanelSelection } = this.infoPanelStore;
-
     const userIDs = users.map((user) => {
       return typeof user === "string" ? user : user.id;
     });
 
     try {
-      const items = await resetUserQuota(userIDs);
-
-      if (items.length === 1) {
-        setInfoPanelSelection(getPeopleListItem(items[0]));
-      } else {
-        setInfoPanelSelection(items);
-      }
+      await api.people.resetUserQuota(userIDs);
 
       toastr.success(t("Common:StorageQuotaReset"));
     } catch (e) {
@@ -108,21 +93,12 @@ class HeaderMenuStore {
   };
 
   disableUserQuota = async (users: (TUser | string)[], t: TTranslation) => {
-    const { setCustomUserQuota, getPeopleListItem } = this.usersStore!;
-    const { setInfoPanelSelection } = this.infoPanelStore;
-
     const userIDs = users.map((user) => {
       return typeof user === "string" ? user : user.id;
     });
 
     try {
-      const items = await setCustomUserQuota(-1, userIDs);
-
-      if (items.length === 1) {
-        setInfoPanelSelection(getPeopleListItem(items[0]));
-      } else {
-        setInfoPanelSelection(items);
-      }
+      await api.people.setCustomUserQuota(userIDs, "-1");
 
       toastr.success(t("Common:StorageQuotaDisabled"));
     } catch (e) {
@@ -147,9 +123,11 @@ class HeaderMenuStore {
     } = this.usersStore!;
     const { setSendInviteDialogVisible, setRemoveGuestDialogVisible } =
       this.dialogStore;
-    const { toggleDeleteProfileEverDialog } = this.contextOptionsStore;
-    const { isVisible } = this.infoPanelStore;
+    const { toggleDeleteProfileEverDialog, settingsStore } =
+      this.contextOptionsStore;
     const { isRoomAdmin, isCollaborator } = this.userStore.user!;
+
+    const isInfoPanelVisible = getInfoPanelOpen();
 
     const isGuests = contactsTab === "guests";
 
@@ -173,27 +151,28 @@ class HeaderMenuStore {
         label: t("ChangeUserTypeDialog:ChangeUserTypeButton"),
         disabled: isGuests ? !hasUsersToMakeEmployees : !hasUsersToChangeType,
         iconUrl: ChangeToEmployeeReactSvgUrl,
-        onClick: isGuests
-          ? () =>
-              this.usersStore.changeType(
-                EmployeeType.User,
-                getUsersToMakeEmployees,
-              )
-          : () => {},
-        withDropDown: !isGuests,
-        options: !isGuests
-          ? this.contextOptionsStore.getUsersChangeTypeOptions(t)
-          : [],
+        onClick:
+          isGuests && isRoomAdmin
+            ? () =>
+                this.usersStore.changeType(
+                  EmployeeType.User,
+                  getUsersToMakeEmployees,
+                )
+            : null,
+        withDropDown: !isRoomAdmin,
+        options: isRoomAdmin
+          ? null
+          : this.contextOptionsStore.getUsersChangeTypeOptions(t),
       },
       {
         id: "menu-info",
         key: "info",
         label: t("Common:Info"),
         disabled:
-          isVisible ||
+          isInfoPanelVisible ||
           !(isTablet() || isMobile() || !isDesktop()) ||
           selection.length > 1,
-        onClick: this.onOpenInfoPanel,
+        onClick: showInfoPanel,
         iconUrl: InfoReactSvgUrl,
       },
       {
@@ -263,6 +242,13 @@ class HeaderMenuStore {
         iconUrl: DisableReactSvgUrl,
       },
     ];
+
+    if (!settingsStore.allowInvitingMembers) {
+      const indexInvite = headerMenu.findIndex(
+        (item) => item.id === "menu-invite",
+      );
+      headerMenu.splice(indexInvite, 1);
+    }
 
     return headerMenu;
   };

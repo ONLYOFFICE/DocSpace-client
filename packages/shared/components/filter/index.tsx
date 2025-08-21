@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,20 +27,24 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { isTablet, isIOS } from "react-device-detect";
-
 import { DeviceType, FilterGroups } from "../../enums";
 
 import { TViewSelectorOption, ViewSelector } from "../view-selector";
 import { Link, LinkType } from "../link";
 import { SelectedItem } from "../selected-item";
-import { InputSize } from "../text-input";
 
 import FilterButton from "./sub-components/FilterButton";
 import SortButton from "./sub-components/SortButton";
 
-import { StyledFilterInput, StyledSearchInput } from "./Filter.styled";
+import useSearch from "./hooks/useSearch";
+
+import styles from "./Filter.module.scss";
 import { FilterProps, TItem } from "./Filter.types";
+import {
+  convertFilterDataToSelectedFilterValues,
+  convertFilterDataToSelectedItems,
+  replaceEqualFilterValuesWithPrev,
+} from "./Filter.utils";
 
 const FilterInput = React.memo(
   ({
@@ -71,6 +75,7 @@ const FilterInput = React.memo(
     isContactsGroupsPage,
     isContactsInsideGroupPage,
     isContactsGuestsPage,
+    isFlowsPage,
     isIndexing,
     isIndexEditingMode,
 
@@ -86,21 +91,45 @@ const FilterInput = React.memo(
     userId,
 
     disableThirdParty,
+
+    initSearchValue,
+    initSelectedFilterData,
   }: FilterProps) => {
+    const { searchComponent } = useSearch({
+      onSearch,
+      onClearFilter,
+      clearSearch,
+      setClearSearch,
+      getSelectedInputValue,
+      placeholder,
+      isIndexEditingMode,
+      initSearchValue,
+    });
+
     const [viewSettings, setViewSettings] = React.useState<
       TViewSelectorOption[]
-    >([]);
-    const [inputValue, setInputValue] = React.useState("");
+    >(getViewSettingsData());
     const [selectedFilterValue, setSelectedFilterValue] = React.useState<
-      TItem[]
-    >([]);
-    const [selectedItems, setSelectedItems] = React.useState<TItem[]>([]);
+      Map<FilterGroups, Map<string | number, TItem>>
+    >(() =>
+      initSelectedFilterData
+        ? convertFilterDataToSelectedFilterValues(initSelectedFilterData)
+        : new Map(),
+    );
+    const [selectedItems, setSelectedItems] = React.useState<TItem[]>(() =>
+      initSelectedFilterData
+        ? convertFilterDataToSelectedItems(initSelectedFilterData)
+        : [],
+    );
+    const currentSelectedFilterDataRef = React.useRef<TItem[] | null>(
+      initSelectedFilterData || null,
+    );
 
     const { t } = useTranslation(["Common"]);
 
     const mountRef = React.useRef(true);
 
-    const searchRef = React.useRef<HTMLInputElement | null>(null);
+    const isFirstRenderRef = React.useRef(true);
 
     React.useEffect(() => {
       const value = getViewSettingsData?.();
@@ -108,64 +137,37 @@ const FilterInput = React.memo(
       if (value) setViewSettings(value);
     }, [getViewSettingsData]);
 
-    React.useEffect(() => {
-      if (clearSearch) {
-        setInputValue("");
-        onClearFilter?.();
-        setClearSearch(false);
-      }
-    }, [clearSearch, onClearFilter, setClearSearch]);
-
-    React.useEffect(() => {
-      const value = getSelectedInputValue?.();
-
-      if (value) searchRef.current?.focus();
-
-      setInputValue(value);
-    }, [getSelectedInputValue]);
-
     const getSelectedFilterDataAction = React.useCallback(async () => {
-      const value = await getSelectedFilterData();
+      const newSelectedFilterData = await getSelectedFilterData();
+      const processedFilterData = replaceEqualFilterValuesWithPrev(
+        currentSelectedFilterDataRef.current,
+        newSelectedFilterData,
+      );
+
+      currentSelectedFilterDataRef.current = processedFilterData;
 
       if (!mountRef.current) return;
-      setSelectedFilterValue(value);
 
-      const newSelectedItems: TItem[] = [];
+      const newSelectedValue =
+        convertFilterDataToSelectedFilterValues(processedFilterData);
+      const newSelectedItems =
+        convertFilterDataToSelectedItems(processedFilterData);
 
-      value.forEach((item) => {
-        if (item.isMultiSelect && Array.isArray(item.key)) {
-          const newKeys = item.key.map((oldKey: string | {}) => ({
-            key:
-              typeof oldKey !== "string" && "key" in oldKey && oldKey.key
-                ? (oldKey.key as string)
-                : (oldKey as string),
-            group: item.group,
-            label:
-              typeof oldKey !== "string" && "label" in oldKey && oldKey.label
-                ? (oldKey.label as string)
-                : (oldKey as string),
-          }));
-
-          return newSelectedItems.push(...newKeys);
-        }
-
-        return newSelectedItems.push({ ...item });
-      });
-
+      setSelectedFilterValue(newSelectedValue);
       setSelectedItems(newSelectedItems);
     }, [getSelectedFilterData]);
 
     React.useEffect(() => {
-      getSelectedFilterDataAction();
-    }, [getSelectedFilterDataAction, getSelectedFilterData]);
+      if (isFirstRenderRef.current && currentSelectedFilterDataRef.current) {
+        return;
+      }
 
-    const onClearSearch = React.useCallback(() => {
-      onSearch?.("");
-    }, [onSearch]);
+      getSelectedFilterDataAction();
+    }, [getSelectedFilterDataAction]);
 
     const removeSelectedItemAction = React.useCallback(
       (
-        key: string,
+        key: string | number,
         label: string | React.ReactNode,
         group?: string | FilterGroups,
       ) => {
@@ -182,40 +184,23 @@ const FilterInput = React.memo(
       [selectedItems, removeSelectedItem],
     );
 
-    const onInputFocus = (e: React.FocusEvent<HTMLInputElement>) => {
-      if (isTablet && isIOS) {
-        const scrollEvent = () => {
-          e.preventDefault();
-          e.stopPropagation();
-          window.scrollTo(0, 0);
-          window.onscroll = () => {};
-        };
-
-        window.onscroll = scrollEvent;
-      }
-    };
-
     React.useEffect(() => {
+      mountRef.current = true;
+
       return () => {
         mountRef.current = false;
       };
     }, []);
 
+    React.useEffect(() => {
+      isFirstRenderRef.current = false;
+    }, []);
+
     return (
-      <StyledFilterInput>
+      <div className={styles.filterInput} data-testid="filter_container">
         <div className="filter-input_filter-row">
-          <StyledSearchInput
-            forwardedRef={searchRef}
-            placeholder={placeholder}
-            value={inputValue}
-            onChange={onSearch}
-            onClearSearch={onClearSearch}
-            id="filter_search-input"
-            size={InputSize.base}
-            isDisabled={isIndexEditingMode}
-            onFocus={onInputFocus}
-          />
-          {!isIndexEditingMode && (
+          {searchComponent}
+          {!isIndexEditingMode && !isFlowsPage ? (
             <FilterButton
               id="filter-button"
               onFilter={onFilter}
@@ -233,9 +218,9 @@ const FilterInput = React.memo(
               userId={userId}
               disableThirdParty={disableThirdParty}
             />
-          )}
+          ) : null}
 
-          {!isIndexing && (
+          {!isIndexing && !isFlowsPage ? (
             <SortButton
               id="sort-by-button"
               onSort={onSort}
@@ -247,30 +232,30 @@ const FilterInput = React.memo(
               onChangeViewAs={onChangeViewAs}
               onSortButtonClick={onSortButtonClick}
               viewSelectorVisible={
-                viewSettings &&
-                viewSelectorVisible &&
-                currentDeviceType !== DeviceType.desktop
+                viewSettings && viewSelectorVisible
+                  ? currentDeviceType !== DeviceType.desktop
+                  : false
               }
               title={sortByTitle}
             />
-          )}
+          ) : null}
           {viewSettings &&
-            !isIndexing &&
-            currentDeviceType === DeviceType.desktop &&
-            viewSelectorVisible && (
-              <ViewSelector
-                id={
-                  viewAs === "tile" ? "view-switch--row" : "view-switch--tile"
-                }
-                style={{ marginInlineStart: "8px" }}
-                viewAs={viewAs === "table" ? "row" : viewAs}
-                viewSettings={viewSettings}
-                onChangeView={onChangeViewAs}
-                isFilter
-              />
-            )}
+          !isIndexing &&
+          !isFlowsPage &&
+          currentDeviceType === DeviceType.desktop &&
+          viewSelectorVisible ? (
+            <ViewSelector
+              id={viewAs === "tile" ? "view-switch--row" : "view-switch--tile"}
+              className={styles.viewSelector}
+              style={{ marginInlineStart: "8px" }}
+              viewAs={viewAs === "table" ? "row" : viewAs}
+              viewSettings={viewSettings}
+              onChangeView={onChangeViewAs}
+              isFilter
+            />
+          ) : null}
         </div>
-        {selectedItems && selectedItems.length > 0 && (
+        {selectedItems && selectedItems.length > 0 ? (
           <div className="filter-input_selected-row">
             {selectedItems.map((item) => (
               <SelectedItem
@@ -280,9 +265,10 @@ const FilterInput = React.memo(
                 group={item.group}
                 onClose={removeSelectedItemAction}
                 onClick={removeSelectedItemAction}
+                dataTestId={`filter_selected_item_${Array.isArray(item.key) ? item.key[0] : item.key}`}
               />
             ))}
-            {selectedItems.filter((item) => item.label).length > 1 && (
+            {selectedItems.filter((item) => item.label).length > 1 ? (
               <Link
                 className="clear-all-link"
                 isHovered
@@ -290,13 +276,14 @@ const FilterInput = React.memo(
                 isSemitransparent
                 type={LinkType.action}
                 onClick={clearAll}
+                dataTestId="filter_clear_all_link"
               >
                 {t("Common:ClearAll")}
               </Link>
-            )}
+            ) : null}
           </div>
-        )}
-      </StyledFilterInput>
+        ) : null}
+      </div>
     );
   },
 );

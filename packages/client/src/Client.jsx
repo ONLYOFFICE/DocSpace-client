@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,15 +26,11 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { useLocation, Outlet } from "react-router-dom";
+import { useLocation, Outlet } from "react-router";
 import { withTranslation } from "react-i18next";
 
 import Article from "@docspace/shared/components/article";
-import {
-  updateTempContent,
-  showLoader,
-  hideLoader,
-} from "@docspace/shared/utils/common";
+import { updateTempContent } from "@docspace/shared/utils/common";
 import { regDesktop } from "@docspace/shared/utils/desktop";
 
 import { toastr } from "@docspace/shared/components/toast";
@@ -91,7 +87,6 @@ const ClientContent = (props) => {
     withMainButton,
     t,
 
-    isLoading,
     setIsFilterLoading,
     setIsHeaderLoading,
     isDesktopClientInit,
@@ -143,13 +138,13 @@ const ClientContent = (props) => {
     isDesktop,
   ]);
 
-  React.useEffect(() => {
-    if (isLoading) {
-      showLoader();
-    } else {
-      hideLoader();
-    }
-  }, [isLoading]);
+  // React.useEffect(() => {
+  //   if (isLoading) {
+  //     showLoader();
+  //   } else {
+  //     hideLoader();
+  //   }
+  // }, [isLoading]);
 
   return (
     <>

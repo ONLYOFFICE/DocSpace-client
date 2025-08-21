@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,13 +34,14 @@ const Footer = ({
   showProgress,
   isDeleteProfile,
   onToggleDeleteProfile,
-  selectedUser,
+  targetUser,
   onReassign,
   percent,
   isAbortTransfer,
   onClose,
   onTerminate,
   onStartAgain,
+  showDeleteProfileCheckbox,
 }) => {
   if (showProgress) {
     return (
@@ -51,7 +52,7 @@ const Footer = ({
               isAbortTransfer && percent !== 100
                 ? t("DataReassignmentDialog:StartTransferAgain")
                 : percent === 100
-                  ? t("Common:OkButton")
+                  ? t("Common:OKButton")
                   : t("DataReassignmentDialog:AbortTransfer")
             }
             size="normal"
@@ -71,24 +72,25 @@ const Footer = ({
 
   return (
     <StyledFooterWrapper>
-      <div className="delete-profile-container">
-        <Checkbox
-          className="delete-profile-checkbox"
-          isChecked={isDeleteProfile}
-          onClick={onToggleDeleteProfile}
-        />
-        <Text className="info" noSelect>
-          {t("DataReassignmentDialog:DeleteProfileIsFinished")}
-        </Text>
-      </div>
-
+      {showDeleteProfileCheckbox ? (
+        <div className="delete-profile-container">
+          <Checkbox
+            className="delete-profile-checkbox"
+            isChecked={isDeleteProfile}
+            onClick={onToggleDeleteProfile}
+          />
+          <Text fontSize="13px" fontWeight="400" lineHeight="20px" noSelect>
+            {t("DataReassignmentDialog:DeleteProfileIsFinished")}
+          </Text>
+        </div>
+      ) : null}
       <div className="button-wrapper">
         <Button
           label={t("DataReassignmentDialog:Reassign")}
           size="normal"
           primary
           scale
-          isDisabled={!selectedUser}
+          isDisabled={!targetUser}
           onClick={onReassign}
         />
 

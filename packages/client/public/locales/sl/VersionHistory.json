@@ -1,4 +1,6 @@
 {
+  "DeleteVersion": "Izbriši verzijo",
+  "DeleteVersionDescription": "Izbrisali boste različico datoteke. Ne bo je več mogoče videti ali obnoviti. Ste prepričani, da želite nadaljevati?",
   "EditComment": "Uredi komentar",
   "Version": "Ver."
 }

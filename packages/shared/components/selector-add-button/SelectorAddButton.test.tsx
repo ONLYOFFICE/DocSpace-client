@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,11 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-
-import { render, screen } from "@testing-library/react";
+import { screen, fireEvent, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import { SelectorAddButton } from "./SelectorAddButton";
+import { SelectorAddButton } from ".";
 
 const baseProps = {
   title: "Add item",
@@ -43,25 +42,76 @@ describe("<SelectorAddButton />", () => {
     expect(screen.getByTestId("selector-add-button")).toBeInTheDocument();
   });
 
-  // it("accepts id", () => {
-  //   const wrapper = mount(<SelectorAddButton {...baseProps} id="testId" />);
+  it("renders with title", () => {
+    render(<SelectorAddButton {...baseProps} />);
 
-  //   expect(wrapper.prop("id")).toEqual("testId");
-  // });
+    expect(screen.getByTestId("selector-add-button")).toHaveAttribute(
+      "title",
+      "Add item",
+    );
+  });
 
-  // it("accepts className", () => {
-  //   const wrapper = mount(
-  //     <SelectorAddButton {...baseProps} className="test" />,
-  //   );
+  it("accepts id", () => {
+    render(<SelectorAddButton {...baseProps} id="testId" />);
 
-  //   expect(wrapper.prop("className")).toEqual("test");
-  // });
+    expect(screen.getByTestId("selector-add-button")).toHaveAttribute(
+      "id",
+      "testId",
+    );
+  });
 
-  // it("accepts style", () => {
-  //   const wrapper = mount(
-  //     <SelectorAddButton {...baseProps} style={{ color: "red" }} />,
-  //   );
+  it("accepts className", () => {
+    render(<SelectorAddButton {...baseProps} className="test-class" />);
 
-  //   expect(wrapper.getDOMNode().style).toHaveProperty("color", "red");
-  // });
+    expect(screen.getByTestId("selector-add-button-container")).toHaveClass(
+      "test-class",
+    );
+  });
+
+  it("accepts style", () => {
+    render(<SelectorAddButton {...baseProps} style={{ color: "red" }} />);
+
+    expect(screen.getByTestId("selector-add-button")).toHaveStyle({
+      color: "red",
+    });
+  });
+
+  it("handles click when not disabled", () => {
+    const onClick = jest.fn();
+    render(<SelectorAddButton {...baseProps} onClick={onClick} />);
+
+    fireEvent.click(screen.getByTestId("selector-add-button"));
+    expect(onClick).toHaveBeenCalled();
+  });
+
+  it("doesn't handle click when disabled", () => {
+    const onClick = jest.fn();
+    render(<SelectorAddButton {...baseProps} isDisabled onClick={onClick} />);
+
+    fireEvent.click(screen.getByTestId("selector-add-button"));
+    expect(onClick).not.toHaveBeenCalled();
+  });
+
+  it("applies isDisabled class when disabled", () => {
+    render(<SelectorAddButton {...baseProps} isDisabled />);
+
+    const button = screen.getByTestId("selector-add-button");
+    expect(button).toHaveClass("isDisabled");
+  });
+
+  it("applies isAction class when isAction prop is true", () => {
+    render(<SelectorAddButton {...baseProps} isAction />);
+
+    const button = screen.getByTestId("selector-add-button");
+    expect(button).toHaveClass("isAction");
+  });
+
+  it("renders IconButton with correct props", () => {
+    const iconSize = 16;
+    render(<SelectorAddButton {...baseProps} iconSize={iconSize} isDisabled />);
+
+    const iconButton = screen.getByTestId("icon-button");
+    expect(iconButton).toBeInTheDocument();
+    expect(iconButton).toHaveClass("disabled");
+  });
 });

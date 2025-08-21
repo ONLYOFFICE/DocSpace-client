@@ -1,0 +1,73 @@
+@use "../../../styles/variables";
+@use "../../../styles/variables/colors";
+@use "../../../styles/mixins";
+
+.common {
+  margin: var(--row-content-margin);
+  font-family: var(--row-content-font-family);
+  font-size: var(--row-content-font-size);
+  font-style: var(--row-content-font-style);
+  font-weight: var(--row-content-font-weight);
+}
+
+.rowContent {
+  width: 100%;
+  display: block;
+}
+
+.mainContainerWrapper {
+  @extend .common;
+  display: flex;
+  align-self: center;
+  margin-inline-start: 0;
+  margin-inline-end: auto;
+  width: var(--main-container-width);
+  min-width: 140px;
+
+  min-width: var(--row-content-main-wrapper-min-width);
+  margin-top: var(--row-content-main-wrapper-margin-top);
+  width: var(--row-content-main-wrapper-width);
+  margin-inline-end: var(--row-content-main-wrapper-margin-right);
+}
+
+.mainContainer {
+  height: 20px;
+  max-width: 100%;
+  margin-inline-end: 8px;
+
+  @include mixins.truncate;
+  max-width: var(--row-content-max-width);
+
+  @include mixins.tablet {
+    @include mixins.truncate;
+    max-width: var(--row-content-max-width);
+  }
+}
+
+.mainIcons {
+  height: var(--row-content-icons-height);
+  align-self: center;
+  white-space: nowrap;
+}
+
+.sideContainerWrapper {
+  @extend .common;
+  @include mixins.truncate;
+
+  align-self: center;
+  align-items: center;
+  display: none;
+
+  @include mixins.tablet {
+    @include mixins.truncate;
+  }
+
+  > a {
+    vertical-align: middle;
+  }
+}
+
+.tabletSideInfo {
+  display: block;
+  @include mixins.truncate;
+}

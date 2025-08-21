@@ -1,0 +1,274 @@
+{
+  "key_path": "MarkRead",
+  "content": "Mark as read",
+  "content_en_sha1_hash": "c1ee860bc3a94be1ae96eaa05833713b79c6634b",
+  "created_at": "2025-05-19T21:30:55.828Z",
+  "updated_at": "2025-08-04T07:30:01.025Z",
+  "comment": {
+    "text": "This translation key is used to display the phrase \"Mark as read\" on a button that allows users to update the read status of a file. The button appears in a file listing interface, likely as part of a task or action menu.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:39:33.631Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/NewFilesBadge/sub-components/NewFilesPanel.tsx",
+      "line_number": 170,
+      "context": "const markAsReadButton = (\n <Button\n className=\"mark-as-read-button\"\n scale\n label={t(\"MarkRead\")}\n size={isMobileDevice ? ButtonSize.normal : ButtonSize.small}\n onClick={markAsReadAction}\n isLoading={isMarkAsReadRunning}\n />\n );",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 842,
+      "context": "} else {\n openShareTab();\n }\n };\n \n onClickMarkRead = (item) => {\n const { markAsRead } = this.filesActionsStore;\n \n item.fileExst\n ? markAsRead([], [item.id], item)\n : markAsRead([item.id], [], item);",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ضع إشارة مقروء\" doesn't accurately convey the meaning of \"Mark as read.\" It literally translates to \"Place a readable mark,\" which is not the intended function. A more appropriate translation would focus on the action of marking something as read.",
+          "suggestion": "تَمّت القراءة (Tammat al-qira'ah) - Meaning 'Marked as read' or قُم بوضع علامة قراءة (Qum bi wadh' alamat qira'ah) - Meaning 'Place a read mark' are better options."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Oxunmuş kimi işarələ' doesn't perfectly capture the meaning of 'Mark as read'. While it conveys a similar idea, a more accurate and natural translation would be 'Qeyd et'",
+          "suggestion": "Qeyd et"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The French translation \"Marquer comme lu(s)\" is grammatically questionable. \"lu(s)\" is a plural form and should be \"lu\" to match the singular \"Marquer\".  The phrase implies marking multiple files as read, but the English is singular.",
+          "suggestion": "Marquer comme lu"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation 'Նշել որպես ընթերցված' is understandable, a more natural and common phrasing for 'Mark as read' in Armenian would be 'Մարկել որպես կարդացած' or 'Մարկել կարդացած էլի'.",
+          "suggestion": "Մարկել որպես կարդացած"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation \"읽은 것으로 표시\" literally translates to \"Mark as read/marked as read.\" While understandable, it's a bit clunky and not the most natural way to express 'Mark as read' in Korean. A more natural phrasing would be something like \"읽음으로 표시\" or \"읽음 처리\" or just \"읽음\".",
+          "suggestion": "Consider \"읽음으로 표시\" or \"읽음 처리\" or \"읽음\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ເຮັດເຄື່ອງໝາຍໄວ້ອ່ານ' while understandable, is a somewhat literal translation. A more natural and idiomatic translation for 'Mark as read' would be something like 'ກຳມາຍອ່ານ' (kam mai an) or 'ສະຫຼາກວ່າອ່ານແລ້ວ' (sà-làk wâa an láew).",
+          "suggestion": "Consider 'ກຳມາຍອ່ານ' (kam mai an) or 'ສະຫຼາກວ່າອ່ານແລ້ວ' (sà-làk wâa an láew)."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Marcar como lido\" is understandable, a more natural and accurate translation of \"Mark as read\" in Portuguese (Brazil) would be \"Marcar como lido\" or \"Marcar como leu\". \"Lido\" implies something has been read and processed, which aligns better with the English meaning in this context.",
+          "suggestion": "Marcar como lido"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Marchează ca citit' is not the best translation for 'Mark as read'. 'Marchează' is Romanian for 'Marks', which is not ideal. It's more accurately 'Bifează ca citit' or 'Marquează drept citit'.",
+          "suggestion": "Bifează ca citit"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'කියවූ බව යොදන්න' doesn't accurately convey the meaning of 'Mark as read'. It translates to something like 'Add as read' or 'Indicate as read,' which isn't the same action as marking something as read.",
+          "suggestion": "A more accurate translation would be something like 'කියවූවන් ලෙස සලකුණු කරන්න' (kiyawaun lehas salakunu karanne) which translates to 'Mark as read'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Позначити як прочитані\" implies marking *multiple* files as read. \"Mark as read\" typically refers to a single file. A more precise translation would consider the singular form.",
+          "suggestion": "Позначити як прочитаний"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

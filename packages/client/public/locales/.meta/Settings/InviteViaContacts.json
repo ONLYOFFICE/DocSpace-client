@@ -1,0 +1,28 @@
+{
+  "key_path": "InviteViaContacts",
+  "content": "Invite {{productName}} members via {{sectionName}}",
+  "content_en_sha1_hash": "765a98edeba63516946d5c30ad36a3a47d6a5736",
+  "created_at": "2025-06-02T10:19:19.698Z",
+  "updated_at": "2025-08-12T19:46:26.242Z",
+  "comment": {
+    "text": "This translation key is used for an invitation button that allows users to invite members via contacts. The button appears on a settings page and displays a dynamic text based on product name and section name.",
+    "is_auto": true,
+    "updated_at": "2025-06-02T10:22:13.748Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
+      "line_number": 247,
+      "context": "fontWeight=\"600\"\n lineHeight=\"20px\"\n onClick={onChangeContacts}\n noSelect\n >\n {t(\"InviteViaContacts\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Contacts\"),\n })}\n </Text>\n </div>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

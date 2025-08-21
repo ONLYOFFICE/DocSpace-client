@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,6 @@
 
 import { useCallback, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
 
 import EmptyScreenGroupSvgUrl from "PUBLIC_DIR/images/empty_screen_groups_75-75.svg?url";
 import EmptyScreenGroupSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_groups_dark_75-75.svg?url";
@@ -34,6 +33,7 @@ import EmptyScreenGroupSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_groups_da
 import api from "../../api";
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
 import { Selector, TSelectorItem } from "../../components/selector";
+import { useTheme } from "../../hooks/useTheme";
 
 import { GroupsSelectorProps } from "./GroupsSelector.types";
 
@@ -48,7 +48,7 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
   } = props;
 
   const { t } = useTranslation(["Common"]);
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
   const [searchValue, setSearchValue] = useState("");
   const [hasNextPage, setHasNextPage] = useState(false);
@@ -60,7 +60,7 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
   const afterSearch = useRef(false);
   const totalRef = useRef(0);
 
-  const emptyScreenImg = theme.isBase
+  const emptyScreenImg = isBase
     ? EmptyScreenGroupSvgUrl
     : EmptyScreenGroupSvgDarkUrl;
 
@@ -150,6 +150,7 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
       withHeader
       headerProps={{
         ...headerProps,
+        onCloseClick: () => {},
         headerLabel: headerProps?.headerLabel || t("Common:Groups"),
       }}
       alwaysShowFooter={itemsList.length !== 0 || Boolean(searchValue)}
@@ -164,7 +165,6 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
       items={itemsList}
       submitButtonLabel={t("Common:SelectAction")}
       onSubmit={onSubmitAction}
-      cancelButtonLabel={t("Common:CancelButton")}
       emptyScreenImage={emptyScreenImg}
       emptyScreenHeader={t("Common:NotFoundGroups")}
       emptyScreenDescription={t("Common:GroupsNotFoundDescription")}
@@ -185,6 +185,7 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
           isUser={false}
         />
       }
+      dataTestId="groups_selector"
     />
   );
 };

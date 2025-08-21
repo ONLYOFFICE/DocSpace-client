@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -76,19 +76,28 @@ const EmailContainer = ({
 
   if (emailFromInvitation) {
     const onClickBack = () => {
-      history.go(-1);
+      window.history.go(-1);
     };
 
     return (
       <div className="invitation-info-container">
         <div className="sign-in-container">
           <div className="back-title">
-            <IconButton size={16} iconName={ArrowIcon} onClick={onClickBack} />
-            <Text fontWeight={600} onClick={onClickBack}>
+            <IconButton
+              size={16}
+              iconName={ArrowIcon}
+              onClick={onClickBack}
+              dataTestId="email_invitation_back_button"
+            />
+            <Text
+              fontWeight={600}
+              onClick={onClickBack}
+              dataTestId="email_invitation_back_text"
+            >
               {t("Common:Back")}
             </Text>
           </div>
-          <Text fontWeight={600} fontSize={"16px"}>
+          <Text fontWeight={600} fontSize="16px">
             {t("Common:LoginButton")}
           </Text>
         </div>
@@ -105,6 +114,7 @@ const EmailContainer = ({
             components={{
               1: (
                 <Link
+                  key="component_key"
                   fontWeight={600}
                   className="login-link"
                   type={LinkType.page}
@@ -120,12 +130,15 @@ const EmailContainer = ({
 
   return (
     <FieldContainer
-      isVertical={true}
+      isVertical
       labelVisible={false}
       hasError={isEmailErrorShow}
       errorMessage={
-        errorText ? t(`Common:${errorText}`) : t("Common:RequiredField")
-      } //TODO: Add wrong login server error
+        errorText
+          ? t(`Common:${errorText}`, errorText)
+          : t("Common:RequiredField")
+      } // TODO: Add wrong login server error
+      dataTestId="email_field"
     >
       {isLdapLogin ? (
         <TextInput
@@ -138,25 +151,25 @@ const EmailContainer = ({
             ldap_domain: ldapDomain,
           })}
           size={InputSize.large}
-          scale={true}
-          isAutoFocussed={true}
+          scale
+          isAutoFocussed
           tabIndex={1}
           isDisabled={isLoading}
           autoComplete="off"
           onChange={onChangeLogin}
           onBlur={onBlurEmail}
+          testId="ldap_username_input"
         />
       ) : (
         <EmailInput
           id="login_username"
           name="login"
-          type={InputType.email}
           hasError={isEmailErrorShow}
           value={identifier}
           placeholder={t("RegistrationEmailWatermark")}
           size={InputSize.large}
-          scale={true}
-          isAutoFocussed={true}
+          scale
+          isAutoFocussed
           tabIndex={1}
           isDisabled={isLoading}
           autoComplete="username"

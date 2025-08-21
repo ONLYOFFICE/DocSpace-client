@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,36 +33,11 @@ import CloudServicesYandexReactSvgUrl from "PUBLIC_DIR/images/cloud.services.yan
 import CloudServicesNextcloudReactSvgUrl from "PUBLIC_DIR/images/cloud.services.nextcloud.react.svg?url";
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 import CloudServicesWebdavReactSvgUrl from "PUBLIC_DIR/images/cloud.services.webdav.react.svg?url";
-import { FileType, FilterType, RoomsType } from "@docspace/shared/enums";
+import { RoomsType } from "@docspace/shared/enums";
 
-import { isDesktop, isMobile } from "@docspace/shared/utils";
+import { OPERATIONS_NAME } from "@docspace/shared/constants";
+
 import i18n from "../i18n";
-
-export const getFileTypeName = (fileType) => {
-  switch (fileType) {
-    case FileType.Unknown:
-      return i18n.t("Common:Unknown");
-    case FileType.Archive:
-      return i18n.t("Common:Archive");
-    case FileType.Video:
-      return i18n.t("Common:Video");
-    case FileType.Audio:
-      return i18n.t("Common:Audio");
-    case FileType.Image:
-      return i18n.t("Common:Image");
-    case FileType.Spreadsheet:
-      return i18n.t("Files:Spreadsheet");
-    case FileType.Presentation:
-      return i18n.t("Files:Presentation");
-    case FileType.Document:
-    case FileType.OFormTemplate:
-    case FileType.OForm:
-    case FileType.PDF:
-      return i18n.t("Files:Document");
-    default:
-      return i18n.t("Files:Folder");
-  }
-};
 
 export const getRoomTypeName = (room, t) => {
   switch (room) {
@@ -153,31 +128,31 @@ export const connectedCloudsTypeTitleTranslation = (key, t) => {
   switch (key) {
     case "Box":
     case "BoxNet":
-      return t("Translations:TypeTitleBoxNet");
+      return t("Common:TypeTitleBoxNet");
 
     case "DropBox":
     case "DropboxV2":
-      return t("Translations:TypeTitleDropBox");
+      return t("Common:TypeTitleDropBox");
 
     case "DocuSign":
-      return t("Translations:TypeTitleDocuSign");
+      return t("Common:TypeTitleDocuSign");
 
     case "Google":
     case "GoogleDrive":
-      return t("Translations:TypeTitleGoogle");
+      return t("Common:TypeTitleGoogle");
 
     case "OneDrive":
     case "SkyDrive":
-      return t("Translations:TypeTitleSkyDrive");
+      return t("Common:TypeTitleSkyDrive");
 
     case "SharePoint":
-      return t("Translations:TypeTitleSharePoint");
+      return t("Common:TypeTitleSharePoint");
     case "WebDav":
-      return t("Translations:TypeTitleWebDav");
+      return t("Common:TypeTitleWebDav");
     case "kDrive":
-      return t("Translations:TypeTitlekDrive");
+      return t("Common:TypeTitlekDrive");
     case "Yandex":
-      return t("Translations:TypeTitleYandex");
+      return t("Common:TypeTitleYandex");
 
     default:
       return key;
@@ -207,120 +182,6 @@ export const connectedCloudsTypeIcon = (key) => {
     case "WebDav":
       return CloudServicesWebdavReactSvgUrl;
     default:
-  }
-};
-
-// Used to update the number of tiles in a row after the window is resized.
-export const getCountTilesInRow = () => {
-  const isDesktopView = isDesktop();
-  const isMobileView = isMobile();
-  const tileGap = isDesktopView ? 16 : 14;
-  const minTileWidth = 216 + tileGap;
-
-  const elem = document.getElementsByClassName("section-wrapper-content")[0];
-  let containerWidth = 0;
-  if (elem) {
-    const elemPadding = window
-      .getComputedStyle(elem)
-      ?.getPropertyValue("padding");
-
-    if (elemPadding) {
-      const paddingValues = elemPadding.split("px");
-      if (paddingValues.length >= 4) {
-        containerWidth =
-          (elem.clientWidth || 0) -
-          parseInt(paddingValues[1], 10) -
-          parseInt(paddingValues[3], 10);
-      }
-    }
-  }
-
-  containerWidth += tileGap;
-  if (!isMobileView) containerWidth -= 1;
-  if (!isDesktopView) containerWidth += 3; // tablet tile margin -3px (TileContainer.js)
-
-  return Math.floor(containerWidth / minTileWidth);
-};
-
-export const getCheckboxItemId = (key) => {
-  switch (key) {
-    case "all":
-      return "selected-all";
-    case FilterType.FoldersOnly:
-      return "selected-only-folders";
-    case FilterType.DocumentsOnly:
-      return "selected-only-documents";
-    case FilterType.PresentationsOnly:
-      return "selected-only-presentations";
-    case FilterType.SpreadsheetsOnly:
-      return "selected-only-spreadsheets";
-    case FilterType.ImagesOnly:
-      return "selected-only-images";
-    case FilterType.MediaOnly:
-      return "selected-only-media";
-    case FilterType.ArchiveOnly:
-      return "selected-only-archives";
-    case FilterType.FilesOnly:
-      return "selected-only-files";
-    case `room-${RoomsType.FillingFormsRoom}`:
-      return "selected-only-filling-form-rooms";
-    case `room-${RoomsType.CustomRoom}`:
-      return "selected-only-custom-room";
-    case `room-${RoomsType.EditingRoom}`:
-      return "selected-only-collaboration-rooms";
-    case `room-${RoomsType.ReviewRoom}`:
-      return "selected-only-review-rooms";
-    case `room-${RoomsType.ReadOnlyRoom}`:
-      return "selected-only-view-rooms";
-    case `room-${RoomsType.PublicRoom}`:
-      return "selected-only-public-rooms";
-    case `room-${RoomsType.VirtualDataRoom}`:
-      return "selected-only-vdr-rooms";
-
-    default:
-      return "";
-  }
-};
-
-export const getCheckboxItemLabel = (t, key) => {
-  switch (key) {
-    case "all":
-      return t("All");
-    case FilterType.FoldersOnly:
-      return t("Translations:Folders");
-    case FilterType.DocumentsOnly:
-      return t("Common:Documents");
-    case FilterType.PresentationsOnly:
-      return t("Translations:Presentations");
-    case FilterType.SpreadsheetsOnly:
-      return t("Translations:Spreadsheets");
-    case FilterType.ImagesOnly:
-      return t("Images");
-    case FilterType.MediaOnly:
-      return t("Media");
-    case FilterType.ArchiveOnly:
-      return t("Archives");
-    case FilterType.FilesOnly:
-      return t("Translations:Files");
-    case `room-${RoomsType.FillingFormsRoom}`:
-      return t("Common:FillingFormRooms");
-    case `room-${RoomsType.CustomRoom}`:
-      return t("Common:CustomRooms");
-    case `room-${RoomsType.EditingRoom}`:
-      return t("Common:CollaborationRooms");
-    case `room-${RoomsType.ReviewRoom}`:
-      return t("Common:Review");
-    case `room-${RoomsType.FormRoom}`:
-      return t("Common:FormRoom");
-    case `room-${RoomsType.ReadOnlyRoom}`:
-      return t("Common:ViewOnlyRooms");
-    case `room-${RoomsType.PublicRoom}`:
-      return t("Common:PublicRoomLabel");
-    case `room-${RoomsType.VirtualDataRoom}`:
-      return t("Common:VirtualDataRoom");
-
-    default:
-      return "";
   }
 };
 
@@ -382,4 +243,49 @@ export const mappingActiveItems = (items, destFolderId) => {
         },
   );
   return arrayFormation;
+};
+
+export const getOperationsProgressTitle = (type, progress) => {
+  const {
+    trash,
+    move,
+    copy,
+    download,
+    duplicate,
+    exportIndex,
+    markAsRead,
+    deletePermanently,
+    upload,
+    convert,
+    deleteVersionFile,
+  } = OPERATIONS_NAME;
+  switch (type) {
+    case trash:
+      return i18n.t("Files:MovingToTrash");
+    case move:
+      return i18n.t("Common:MoveToOperation");
+    case copy:
+      return i18n.t("Common:CopyOperation");
+    case download:
+      return i18n.t("Files:Downloading");
+    case duplicate:
+      return i18n.t("Files:Duplicating");
+    case exportIndex:
+      return i18n.t("Files:ExportingIndex");
+    case markAsRead:
+      return i18n.t("Files:MarkingRead");
+    case deletePermanently:
+      return i18n.t("Files:DeletingPermanently");
+    case upload:
+      if (progress > 0 && progress < 100)
+        return i18n.t("Files:UploadingProgress", { progress });
+      return i18n.t("Files:Uploading");
+    case convert:
+      return i18n.t("Files:Converting");
+    case deleteVersionFile:
+      return i18n.t("Files:DeletingVersion");
+
+    default:
+      return i18n.t("Files:OtherProcesses");
+  }
 };

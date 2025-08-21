@@ -3,10 +3,8 @@
   "DocumentsFileType": "tài liệu",
   "ErrorConnectionLost": "Mất kết nối",
   "FileLocation": "Đi tới Tài liệu",
-  "FileName": "Tên file",
   "ImageFileType": "hình ảnh",
   "MailMergeFileType": "Chọn tệp tin trong định dạng XLSX",
-  "OpenSavedDocument": "Mở tài liệu đã lưu trong tab mới",
   "SelectFilesType": "Chọn tệp tin loại: {{fileType}}",
   "UsersWithoutAccess": "Một số người dùng mà bạn muốn đề cập đến không có quyền truy cập vào phòng: {{users}}"
 }

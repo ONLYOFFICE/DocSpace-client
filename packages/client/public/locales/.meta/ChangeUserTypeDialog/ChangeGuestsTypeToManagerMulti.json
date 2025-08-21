@@ -1,0 +1,405 @@
+{
+  "key_path": "ChangeGuestsTypeToManagerMulti",
+  "content": "The selected guests will be moved to the {{membersSection}} section and assigned the <strong>'{{ secondType }}'</strong> type. Room admins can create and manage the assigned rooms, invite new users, and assign roles of Room admin and lower. Room admins have access to the {{documentsSection}} section.",
+  "content_en_sha1_hash": "8b3004e57c56c64e36caab1cb0081b68cdc7f081",
+  "created_at": "2025-05-19T21:30:56.924Z",
+  "updated_at": "2025-05-24T14:06:11.049Z",
+  "comment": {
+    "text": "This translation key is used for a button label that explains changes made to selected guests when they are assigned as room managers. When guests are moved to this type, they will be redirected to the {{membersSection}} section and have specific roles and access to certain sections. This appears in a dialog or settings page where user types can be adjusted.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:37:51.050Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangeUserTypeDialog/getChangeTypeKey.ts",
+      "line_number": 32,
+      "context": "[EmployeeType.User]: `${t(\"ChangeGuestsTypeMessage\", values)}`,\n [EmployeeType.Guest]: \"\",\n [EmployeeType.Owner]: \"\",\n },\n multiple: {\n [EmployeeType.RoomAdmin]: `${t(\"ChangeGuestsTypeToManagerMulti\", values)}`,\n [EmployeeType.Admin]: `${t(\"ChangeGuestsTypeToAdminMulti\", values)}`,\n [EmployeeType.User]: `${t(\"ChangeGuestsTypeMessageMulti\", values)}`,\n [EmployeeType.Guest]: \"\",\n [EmployeeType.Owner]: \"\",\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Arabic translation uses a space before the single quote in `‏'{{ secondType }}'`. While not strictly incorrect, it's uncommon and deviates from standard formatting.",
+          "suggestion": "Remove the space before the single quote: `‏'{{ secondType }}'` -> `‏{{ secondType }}'`"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The strong tag formatting is preserved correctly, matching the English content.",
+          "suggestion": null
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Room admins' is translated as 'Администраторите на стаята'. While technically correct, it is somewhat repetitive and could be more concisely translated as 'Ръководителите на стая' or 'Потребителите с права на ръководител'.",
+          "suggestion": "Ръководителите на стая"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'assign roles of Room admin and lower' is translated as 'да назначават роли на администратор на стаята и по-ниски'. A more natural and accurate translation would emphasize the hierarchy. The literal translation 'and lower' isn't commonly used.",
+          "suggestion": "и роли с по-ниски права"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"create and manage the assigned rooms\" is translated as \"vytvářet stránky a spravovat přiřazené místnosti\". \"Stránky\" means \"pages\" which isn't the intended meaning.  It should convey the ability to manage rooms.",
+          "suggestion": "Vybraní hosté budou přesunuti do sekce {{membersSection}} a bude jim přiřazen typ <strong>'{{ secondType }}'</strong>. Správci místností mohou spravovat přiřazené místnosti, zvát nové uživatele a přidělovat role správce místnosti a nižší. Správci místností mají přístup do sekce {{documentsSection}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Room admins' is translated as 'Raumadministratoren'. While technically correct, it's a bit clunky. A more natural phrasing might be 'Raumbetreuer' or 'Bereichsverantwortliche' depending on the context.",
+          "suggestion": "Consider using 'Raumbetreuer' or 'Bereichsverantwortliche' for 'Room admins' to improve the flow and naturalness of the German text."
+        },
+        {
+          "type": "formatting",
+          "description": "The emphasis tags `<strong>` are correctly placed, maintaining the formatting of the English content.",
+          "suggestion": "N/A - Formatting is correct."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The strong tag is correctly used in both English and Greek versions.",
+          "suggestion": null
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence 'Οι διαχειριστές δωματίων μπορούν να δημιουργούν και να διαχειρίζονται τα εκχωρημένα δωμάτια' could be improved. While grammatically correct, 'εκχωρημένα' (assigned) feels slightly awkward. A more natural phrasing would be 'τα δωμάτια που τους έχουν ανατεθεί' (the rooms that have been assigned to them).",
+          "suggestion": "Οι διαχειριστές δωματίων μπορούν να δημιουργούν και να διαχειρίζονται τα δωμάτια που τους έχουν ανατεθεί."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Room admins' is translated as 'Huoneen pääkäyttäjät'. While accurate, 'Huoneen ylläpitäjät' might be a more natural and commonly used term for 'Room admins' in Finnish, depending on the context. It implies more responsibility and control.",
+          "suggestion": "Consider using 'Huoneen ylläpitäjät' instead of 'Huoneen pääkäyttäjät' for a more idiomatic translation."
+        },
+        {
+          "type": "formatting",
+          "description": "The English content uses `<strong>` tags. The Finnish translation also uses them. While technically correct, consider if a different emphasis style (e.g., bold font in the application itself) would be more appropriate for the Finnish context.",
+          "suggestion": "Review the application's styling conventions to see if using HTML tags is necessary or if the visual emphasis can be achieved through other means."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'assign roles of Room admin and lower' is not accurately translated. 'and lower' implies a hierarchy, which isn't clearly conveyed in the Armenian translation. A more precise translation would better reflect this hierarchical relationship.",
+          "suggestion": "Consider a phrasing that emphasizes the hierarchical nature, such as 'և ցածր կարգի դերեր' (and roles of lower rank) or something similar to better convey the meaning."
+        },
+        {
+          "type": "formatting",
+          "description": "The strong tag is correctly placed, but it's worth ensuring it's consistently applied across all similar instances in the larger document for visual consistency.",
+          "suggestion": "Double-check that the `<strong>` tag is used consistently for similar emphasized text throughout the larger text."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The strong tag is used correctly, indicating the type being assigned, but consistent formatting would be to ensure it's used around the *section* names as well for better readability.",
+          "suggestion": "Consider applying the strong tag around `{{membersSection}}` and `{{documentsSection}}` to maintain consistency."
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ຕ່ຳກວ່າ' (tam kwa) is slightly awkward and could be improved.",
+          "suggestion": "ຕ່ຳກວ່າສາມາດປ່ຽນເປັນ 'ຂັ້ນຕ່ຳກວ່າ' ຫຼື 'ຂັ້ນນ້ອຍກວ່າ' ເພື່ອຄວາມຊັດເຈນຫຼາຍຂຶ້ນ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The original English uses bolding to highlight 'Manager'. The Latvian translation retains this format, which is appropriate.",
+          "suggestion": null
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Kamerbeheerders' appears multiple times and is likely a compound word that should be checked for correct capitalization and spacing. It might be 'Kamerbeheerders' or 'Kamerbeheerder'.",
+          "suggestion": "Verify the correct capitalization and spacing for 'Kamerbeheerder(s)' - based on context, the plural 'Kamerbeheerders' is likely correct."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'en onder hun niveau toewijzen' can be improved for better flow and clarity. The use of 'onder' is a little awkward.",
+          "suggestion": "Consider rewording to 'en rollen van Kamerbeheerder en lagere niveaus toewijzen' or 'en rollen van Kamerbeheerder en daaronder toewijzen'."
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Room admins' is translated as 'Administratorzy pokoi' which is correct but lacks the nuance that it refers to users who *are* administrators of rooms, not necessarily *managing* the administrator role itself. While technically correct, a more natural phrasing might be 'Osoby zarządzające pokojami' or similar.",
+          "suggestion": "Consider rephrasing 'Administratorzy pokoi' to 'Osoby zarządzające pokojami' for greater clarity. Assess if the target audience will understand the more literal translation."
+        },
+        {
+          "type": "formatting",
+          "description": "The English uses `<strong >'{{ secondType }}'</strong>` to highlight the type. The Polish translation mirrors this correctly, but consistency with other translations should be checked to avoid jarring differences in formatting.",
+          "suggestion": "Verify consistent use of strong tags across all translated content."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'will be assigned' (ser-lhes-á atribuído) is somewhat awkward and less natural in Portuguese. A more natural phrasing would be 'terão o tipo atribuído' or 'receberão o tipo'.",
+          "suggestion": "Os convidados selecionados serão movidos para a secção {{membersSection}} e terão o tipo atribuído <strong>'{{ secondType }}'</strong>."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'assign roles of Room admin and lower' is not accurately translated. 'Назначать роли ниже своего уровня' implies a hierarchical ordering that isn't quite the intended meaning of 'lower' in this context, which refers to roles with less privilege than Room admin.",
+          "suggestion": "Назначать роли не выше роли администратора комнаты"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'bude mu priradený typ' is grammatically awkward. 'Mu' implies a masculine singular subject, which isn't clear from the context. It should be 'budú mať priradený typ' to agree with 'Vybraní hostia' (plural).",
+          "suggestion": "Vybraní hostia budú premiestnení do časti {{membersSection}} a budú mať priradený typ"
+        },
+        {
+          "type": "formatting",
+          "description": "The strong tag should be consistent with the English. While correct, it might be helpful to double check it matches expectations.",
+          "suggestion": "Verify consistency in strong tag usage. No change needed if intentional."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Room admins' is translated as 'Skrbniki sobe'. While technically correct, 'Upravljalci sob' would be a more natural and common translation for 'Room admins' in this context. 'Skrbniki sobe' might imply more of a caretaker role rather than an administrator.",
+          "suggestion": "Consider translating 'Room admins' to 'Upravljalci sob'."
+        },
+        {
+          "type": "formatting",
+          "description": "The strong tag formatting for '{{ secondType }}' is correctly replicated in the Slovenian translation. No changes are needed.",
+          "suggestion": null
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The strong tags around '{{ secondType }}' are inconsistent with the English. While present in both, the context suggests they might be purely formatting and should be evaluated for visual consistency.",
+          "suggestion": "Review the use of <strong> tags to ensure visual consistency with the English version. Consider if they are necessary for clarity."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Oda yöneticisi veya daha alt düzeyde roller atayabilir' could be improved to better reflect 'and assign roles of Room admin and lower'. A more literal and accurate translation would enhance clarity.",
+          "suggestion": "Consider revising to something like 'Oda yöneticisi veya daha düşük seviyeli roller atayabilir.' or 'Oda yöneticisi ve daha düşük seviyeli rolleri atayabilir.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The strong tags are correctly placed but the emphasis might be lost in the Ukrainian context. Consider if italicizing is more appropriate.",
+          "suggestion": "Review use of <strong> tags and consider using <em> instead."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Vietnamese translation consistently uses the same formatting (`<strong>` tags) for the placeholder variables. While the English source uses strong tags, consider if the equivalent formatting should be applied in the Vietnamese version, as it may look odd or unnecessary.",
+          "suggestion": "Review whether the use of `<strong>` tags is appropriate and consistent with Vietnamese UI conventions. It might be better to remove them or use a different formatting style."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"选定的访客\" (selected guests) might be too formal or inaccurate. It could be misinterpreted as only referring to guests who have been actively selected, rather than all guests targeted for the change.",
+          "suggestion": "Consider a more general term like \"受影响的访客\" (affected guests) or \"目标访客\" (targeted guests) to convey the intended meaning."
+        },
+        {
+          "type": "formatting",
+          "description": "The strong tag formatting is consistent in both the English and Chinese, but it's important to ensure consistent formatting throughout the interface if the UI uses bolding.",
+          "suggestion": "Confirm consistent implementation of the strong tag in the UI to ensure intended visual emphasis."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Room admins can create and manage the assigned rooms' is translated as 'කාමර පරිපාලකයින් පත්කරන ලද කාමර සාදාගෙන ඒවා කළමණාකරණය කරමින්'. This implies 'appointed' rooms are being created and managed. A more accurate translation would convey the ability to create new rooms, not just manage pre-existing ones.",
+          "suggestion": "කාමර පරිපාලකයින් පත්කරන ලද කාමරවලට අමතරව, නව කාමර සාදාගෙන ඒවා කළමණාකරණය කරමින්"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'assign roles of Room admin and lower' is translated as 'කාමර පරිපාලක සහ පහත තනතුරු පත්කරනු ලැබේ'. While technically correct, it’s a bit awkward. A more natural Sinhala phrasing would improve readability.",
+          "suggestion": "කාමර පරිපාලක හා එමගින් පහත තනතුරු පත්කරනු ලැබේ."
+        },
+        {
+          "type": "formatting",
+          "description": "The strong tag formatting appears to be maintained correctly for the '{{ secondType }}' placeholders, but consistency in applying similar formatting for other key phrases might improve readability.",
+          "suggestion": "Consider applying bolding to key terms like 'කාමර පරිපාලක' (Room admin) for improved visual emphasis."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

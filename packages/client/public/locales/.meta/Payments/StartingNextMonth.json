@@ -1,0 +1,28 @@
+{
+  "key_path": "StartingNextMonth",
+  "content": "Starting next month",
+  "content_en_sha1_hash": "af894004270c6e8acca3d466a06aa532b602b385",
+  "created_at": "2025-05-29T12:12:54.520Z",
+  "updated_at": "2025-06-03T21:00:28.596Z",
+  "comment": {
+    "text": "This translation key is used for a button or label that indicates a transition to a new payment cycle, starting next month. It appears in a UI related to storage subscriptions and payments. The translator should replace \"StartingNextMonth\" with a localized phrase indicating when the new cycle begins.",
+    "is_auto": true,
+    "updated_at": "2025-06-03T21:00:28.596Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/StorageSummary.tsx",
+      "line_number": 77,
+      "context": "if (hasScheduledStorageChange) return t(\"ChangeShedule\");\n \n return t(\"YourCurrentPayment\");\n }\n \n if (hasStorageSubscription) return t(\"StartingNextMonth\");\n \n return t(\"Total\");\n };\n \n const getDescription = () => {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

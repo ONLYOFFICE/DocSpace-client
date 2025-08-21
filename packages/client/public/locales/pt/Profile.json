@@ -1,10 +1,8 @@
 {
   "ActiveSessions": "Sessões Ativas",
   "AutoDeleteTitle": "Todas as sessões com mais de 60 dias serão excluídas automaticamente.",
-  "ChangeEmailSuccess": "O e-mail foi alterado com êxito",
   "ChangePasswordAfterLoggingOut": "Alterar palavra-passe após terminar a sessão",
   "ConnectSocialNetworks": "Associar as suas redes sociais",
-  "DarkTheme": "Tema escuro",
   "DescriptionForSecurity": "Para que seja mais seguro, tem de mudar a sua palavra-chave.",
   "DesktopTheme": "Sincronizar com as configurações do editor de desktop",
   "DesktopThemeDescription": "Alterne automaticamente entre temas claros e escuros dependendo do tema atual dos editores de desktop.",
@@ -13,7 +11,6 @@
   "ErrorAccountAlreadyUse": "Conta vinculada já em uso por outro usuário",
   "FileManagement": "Gerenciamento de arquivos",
   "InterfaceTheme": "Tema da interface",
-  "LightTheme": "Tema claro",
   "LogoutActiveConnection": "Terminar a sessão na conexão ativa",
   "LogoutAllActiveSessionsDescription": "Todas as ligações ativas exceto esta ligação terão a sua sessão terminada, tal como está configurado atualmente.",
   "LogoutBtn": "Terminar sessão",

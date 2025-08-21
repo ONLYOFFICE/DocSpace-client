@@ -1,0 +1,274 @@
+{
+  "key_path": "StudioTimeLanguageSettings",
+  "content": "Language and Time Zone Settings",
+  "content_en_sha1_hash": "392b7f827b97606957ef5bc78968a32a3ca7ad0b",
+  "created_at": "2025-05-19T21:30:52.811Z",
+  "updated_at": "2025-08-04T07:30:01.277Z",
+  "comment": {
+    "text": "This translation key is used to display the title of a page that controls language and time zone settings, commonly found in portal settings or customization sections. It appears as a document title, typically displayed at the top of a page or dialog, guiding users to this specific configuration section.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:22.974Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
+      "line_number": 200,
+      "context": "return t(\"Common:AccessRights\");\n case \"Customization\":\n return t(\"Customization\");\n case \"SettingsGeneral\":\n return t(\"SettingsGeneral\");\n case \"StudioTimeLanguageSettings\":\n return t(\"StudioTimeLanguageSettings\");\n case \"CustomTitlesWelcome\":\n return t(\"CustomTitlesWelcome\");\n case \"ManagementCategorySecurity\":\n return t(\"ManagementCategorySecurity\");",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/language-and-time-zone.js",
+      "line_number": 177,
+      "context": "getFromSessionStorage(\"languageDefault\");\n timezoneFromSessionStorage = getFromSessionStorage(\"timezone\");\n timezoneDefaultFromSessionStorage =\n getFromSessionStorage(\"timezoneDefault\");\n \n setDocumentTitle(t(\"StudioTimeLanguageSettings\"));\n \n if (!isLoaded) {\n const page = isMobileView ? \"language-and-time-zone\" : \"general\";\n initSettings(page).then(() => setIsLoaded(true));\n }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/language-and-time-zone.js",
+      "line_number": 177,
+      "context": "getFromSessionStorage(\"languageDefault\");\n timezoneFromSessionStorage = getFromSessionStorage(\"timezone\");\n timezoneDefaultFromSessionStorage =\n getFromSessionStorage(\"timezoneDefault\");\n \n setDocumentTitle(t(\"StudioTimeLanguageSettings\"));\n \n if (!isLoaded) {\n const page = isMobileView ? \"language-and-time-zone\" : \"general\";\n initSettings(page).then(() => setIsLoaded(true));\n }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization-navbar.js",
+      "line_number": 72,
+      "context": "return !isLoadedPage ? (\n <LoaderCustomizationNavbar />\n ) : (\n <StyledComponent>\n <MobileCategoryWrapper\n title={t(\"StudioTimeLanguageSettings\")}\n subtitle={t(\"LanguageAndTimeZoneSettingsNavDescription\")}\n url=\"/portal-settings/customization/general/language-and-time-zone\"\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 58,
+      "context": "{\n id: \"portal-settings_catalog-language-and-time-zone\",\n key: \"0-0-0\",\n icon: \"\",\n link: \"language-and-time-zone\",\n tKey: \"StudioTimeLanguageSettings\",\n },\n {\n id: \"portal-settings_catalog-welcome-page-settings\",\n key: \"0-0-1\",\n icon: \"\",",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Dil və Saat Qurşağı Ayarları' doesn't fully capture the meaning of 'Language and Time Zone Settings'. 'Qurşağı' translates to 'belt' or 'zone' but doesn't convey 'settings' directly. It's technically correct, but a more accurate and natural translation would better reflect the original meaning.",
+          "suggestion": "Dil və Saat Dilimi Parametrləri"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ພາສາ ແລະ ເຂດເວລາ\" translates to 'Language and Time Zone' but doesn't fully capture the meaning of 'Settings'. The Lao translation lacks the 'Settings' component of the English content.",
+          "suggestion": "ພາສາ ແລະ ເຂດເວລາ (ການຕັ້ງຄ່າ)"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Setări limbă și fus orar' is a literal translation but doesn't quite capture the nuance of 'Language and Time Zone Settings'. It's understandable but could be improved for better flow and user understanding.",
+          "suggestion": "Consider 'Setări pentru limbă și fus orar' or 'Configurarea limbii și a fusului orar'.  The first option keeps the 'Setări' and adds 'pentru' which often sounds more natural. The second option uses 'Configurarea' which implies settings configuration."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'භාෂාව සහ වේලා කලාපයේ සැකසුම්' while literally translating to 'Language and Time Zone Settings', can be improved for better flow and naturalness in Sinhala. 'වේලා කලාපයේ' is a bit clunky. A more idiomatic translation would incorporate a more direct phrasing for 'Time Zone'.",
+          "suggestion": "භාෂාව සහ කාලස zona සැකසුම් (Language and Time Zone Settings)"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Nastavi jezik in časovni pas\" is too literal and doesn't fully convey the meaning of 'Language and Time Zone Settings'. It translates to 'Set language and time zone'. A more natural Slovenian phrasing would be closer to 'Jezik in nastavitve časovnega pasu' or 'Nastavitve jezika in časovne cone'.",
+          "suggestion": "Jezik in nastavitve časovnega pasu"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Језик и временска зона подешавања\" is a literal translation of \"Language and Time Zone Settings\" but it sounds awkward and unnatural in Serbian. A more natural phrasing would be \"Подешавања језика и временске зоне\" or \"Поставке језика и временске зоне\". \"Подешавања\" (settings) is generally used, but \"поставке\" is also acceptable.",
+          "suggestion": "Подешавања језика и временске зоне"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Cài đặt ngôn ngữ và múi giờ\" is a literal translation but doesn't fully capture the meaning of \"Language and Time Zone Settings\". A more natural translation might be \"Cài đặt ngôn ngữ và thời gian\".",
+          "suggestion": "Cài đặt ngôn ngữ và thời gian"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

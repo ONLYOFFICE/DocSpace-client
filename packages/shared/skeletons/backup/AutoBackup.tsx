@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,7 @@
 import React from "react";
 import { RectangleSkeleton } from "../rectangle";
 
-import { StyledAutoBackup } from "./Backup.styled";
+import styles from "./Backup.module.scss";
 import type { BackupLoaderProps } from "./Backup.types";
 
 const AutoBackupLoader = ({
@@ -48,7 +48,11 @@ const AutoBackupLoader = ({
   } = rest;
 
   return (
-    <StyledAutoBackup>
+    <div
+      className={styles.autoBackup}
+      data-testid="auto-backup-loader"
+      style={style}
+    >
       <div className="auto-backup-loader_main">
         <RectangleSkeleton
           className="auto-backup-loader_title"
@@ -176,7 +180,7 @@ const AutoBackupLoader = ({
           animate={animate}
         />
       </div>
-    </StyledAutoBackup>
+    </div>
   );
 };
 

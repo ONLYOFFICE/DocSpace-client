@@ -1,0 +1,249 @@
+{
+  "key_path": "BusinessUpdated",
+  "content": "{{planName}} plan updated",
+  "content_en_sha1_hash": "d072992aaddc06db95b3109b8a055ea6d40dc9e2",
+  "created_at": "2025-05-19T21:30:53.665Z",
+  "updated_at": "2025-06-26T19:00:18.240Z",
+  "comment": {
+    "text": "This translation key is used to display a success message when a SaaS plan update is completed. It will appear as a toast notification when the update process is successful in an UI component.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:15.123Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/sub-components/UpdatePlanButtonContainer.js",
+      "line_number": 91,
+      "context": "useState(false);\n \n const resetIntervalSuccess = () => {\n intervalId &&\n toastr.success(\n t(\"BusinessUpdated\", { planName: currentTariffPlanTitle }),\n );\n clearInterval(intervalId);\n intervalId = null;\n setIsLoading(false);\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Tarif' is a valid translation for 'plan', it sounds somewhat formal and might not be the most natural choice in this context. A more common and friendly alternative would be 'Předplatné'.",
+          "suggestion": "Předplatné {{planName}} aktualizován"
+        },
+        {
+          "type": "formatting",
+          "description": "It's important to check the overall tone and style of the translation in relation to the original English to make sure it feels native.",
+          "suggestion": "Consider the surrounding context and overall brand voice to ensure consistency."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The German translation includes a hyphen between the plan name and 'Plan'. While not strictly incorrect, it's stylistically less common in German and would be more natural without the hyphen.",
+          "suggestion": "{{planName}} Plan aktualisiert"
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ohjelma' can mean 'plan', in the context of a subscription or payment plan, 'tilaus' or 'suunnitelma' would be more accurate. 'Ohjelma' implies a software program, not a subscription plan.",
+          "suggestion": "Use '{{planName}} tilaus päivitetty' or '{{planName}} suunnitelma päivitetty'."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '{{planName}} සැලසුම යාවත්කාල විය' is a literal translation and doesn't quite capture the natural flow of the English phrase '{{planName}} plan updated'. A more natural translation would emphasize the update action related to the plan.",
+          "suggestion": "{{planName}} සැලසුම යාවත්කාලisasi කරන ලදි"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'ажуриран' while technically meaning 'updated', sounds awkward and less natural in this context. A more common and natural way to express 'updated' in Serbian when referring to a plan would be 'изменљен' or 'освежен'.",
+          "suggestion": "Consider translating to: \"{{planName}} план измењен\" or \"{{planName}} план освежен\""
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '{{planName}}版本已更新' while generally conveying the meaning of '{{planName}} plan updated', doesn't precisely capture the original's implication of a 'plan' being updated. '版本' translates to 'version' which implies a change in a product's version rather than the entire plan.",
+          "suggestion": "Consider alternatives like '{{planName}}方案已更新' ({{planName}} scheme updated) or '{{planName}}计划已更新' ({{planName}} plan updated) for a more accurate translation, depending on the specific context of 'plan'."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

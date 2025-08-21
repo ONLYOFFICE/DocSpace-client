@@ -1,0 +1,284 @@
+{
+  "key_path": "AllDomains",
+  "content": "Any domains",
+  "content_en_sha1_hash": "6c09447a43e7477b8bac50862ab834d1e732e621",
+  "created_at": "2025-05-19T21:30:50.411Z",
+  "updated_at": "2025-08-04T07:30:01.554Z",
+  "comment": {
+    "text": "This translation key is used to display the label \"Any domains\" in a security settings page, likely as an option for users to select. It appears on a portal settings category and may be associated with a button or other interactive element that allows users to configure access to trusted mail.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:52.574Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/trustedMail.js",
+      "line_number": 264,
+      "context": "value: \"0\",\n dataTestId: \"trusted_mail_disabled\",\n },\n {\n id: \"any-domains\",\n label: t(\"AllDomains\"),\n value: \"2\",\n dataTestId: \"trusted_mail_any_domains\",\n },\n {\n id: \"custom-domains\",",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Hər hansı bir domen adı' is too literal and doesn't quite capture the meaning of 'Any domains'. While technically correct, it sounds slightly awkward in Azerbaijani. A more natural phrasing would be better.",
+          "suggestion": "Bütün domenlər"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Οποιοιδήποτε domain' is not the most natural or accurate translation of 'Any domains'. 'Οποιοιδήποτε' implies 'any whatsoever' which is overly formal and doesn't quite capture the simple meaning of 'any'.",
+          "suggestion": "Δυνατά domain"
+        },
+        {
+          "type": "formatting",
+          "description": "The word 'domain' is English and should ideally be transliterated or replaced with a Greek equivalent where possible.",
+          "suggestion": "Δυνατά τομείς"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Cualquier dominios' is not grammatically correct. 'Dominio' is masculine, so it should be pluralized as 'dominios'. 'Cualquier' agrees in number, so it's technically correct in usage, but the entire phrase doesn't flow naturally.",
+          "suggestion": "Cualquier dominio"
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Kaikki verkkotunnukset\" is a literal translation of \"All domains\", it might be too technical for a user-facing setting. \"Any domains\" implies a broader range of possibilities, possibly including wildcard domains or the absence of specific domains. A more appropriate translation might consider this nuance.",
+          "suggestion": "Consider alternatives like \"Mitä tahansa verkkotunnuksia\" or \"Kaikki mahdolliset verkkotunnukset\" to better convey the meaning of 'Any domains'."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ອັນໃດ ໂດເມນ' does not accurately convey the meaning of \"Any domains.\" It translates more literally to 'What domains?' or 'Which domains?' which is a question, not a statement of 'any'.",
+          "suggestion": "ອັນໃດນຶ່ງຂອງໂດເມນ"
+        },
+        {
+          "type": "spelling",
+          "description": "While not strictly incorrect, the Lao word 'ໂດເມນ' is a transliteration and may not be the most natural or preferred term. A more suitable translation might exist depending on the context.",
+          "suggestion": "Consider a Lao equivalent for 'domains' if one exists and is appropriate."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ඕනෑම වසමක්' while literally meaning 'any domain', doesn't fully capture the nuance of 'Any domains' in the context of settings. It's a bit too literal and could be more natural.",
+          "suggestion": "A more natural translation might be 'සියළු වසම්' (Siyaḷu vasam) or 'ඕනෑම පරිශ්‍රයක්' (Onā’ma parishrayak) depending on the exact intended meaning within the setting."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovenian translation 'Kakršna koli domena' doesn't perfectly capture the meaning of 'Any domains'. While literally it means 'Whatever domain', it's a bit awkward and less natural in this context.  'Vsaka domena' would be a more accurate and idiomatic translation, aligning more closely with the concept of 'Any domains'.",
+          "suggestion": "Vsaka domena"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Било који домени' is not the most natural or accurate translation of 'Any domains'. While technically correct, it sounds a bit awkward in Serbian. A better translation would convey the sense of 'all' or 'every' domain.",
+          "suggestion": "Све домене"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Bilo koji domeni\" is not the most accurate or natural translation of \"Any domains\". While literally it means 'Any domains', a more idiomatic Serbian (Latin) translation would be something like 'Svi domeni' or 'Svaki domen'.",
+          "suggestion": "Svi domeni"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Tên miền bất kỳ\" while technically correct, doesn't fully capture the meaning of \"Any domains\". It implies 'any domain names', but 'Any domains' refers to the whole concept of domains without specific names.",
+          "suggestion": "Bất kỳ tên miền nào"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"任意域\" while technically meaning 'any domains', doesn't quite capture the nuance of 'Any domains' in a settings context. It sounds more technical and less user-friendly. 'Any domains' typically implies a list or selection of domains where something applies.",
+          "suggestion": "考虑使用更自然和用户友好的表达方式，例如“所有域名” (suǒyǒu míngyú) which translates to 'all domains' or “全部域名” (quánbù míngyú) also meaning 'all domains'. The best choice would depend on the overall tone and style of the settings menu."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

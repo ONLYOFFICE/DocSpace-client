@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -39,7 +39,13 @@ import { isDesktop } from "@docspace/shared/utils";
 const StyledBodyContent = styled.div`
   .backup-codes-counter {
     margin-top: 16px;
+    margin-bottom: 4px;
     color: ${(props) => props.theme.client.settings.security.tfa.textColor};
+  }
+
+  .backup-codes-code {
+    font-weight: 600;
+    line-height: 20px;
   }
 `;
 
@@ -97,28 +103,43 @@ class BackupCodesDialogComponent extends React.Component {
         <ModalDialog.Header>{t("BackupCodesTitle")}</ModalDialog.Header>
         <ModalDialog.Body>
           <StyledBodyContent id="backup-codes-print-content">
-            <Text className="backup-codes-description-one">
+            <Text className="backup-codes-description-one" lineHeight="20px">
               {t("BackupCodesDescription")}
             </Text>
-            <Text className="backup-codes-description-two">
+            <Text className="backup-codes-description-two" lineHeight="20px">
               {t("BackupCodesSecondDescription")}
             </Text>
 
-            <Text className="backup-codes-counter" fontWeight={600}>
+            <Text
+              className="backup-codes-counter"
+              fontWeight={600}
+              lineHeight="20px"
+            >
               {backupCodesCount} {t("CodesCounter")}
             </Text>
 
-            <Text className="backup-codes-codes" isBold>
-              {backupCodes.length > 0 &&
-                backupCodes.forEach((item) => {
-                  if (!item.isUsed) {
-                    return (
-                      <strong key={item.code} dir="auto">
-                        {item.code} <br />
-                      </strong>
-                    );
-                  }
-                })}
+            <Text
+              className="backup-codes-codes"
+              isBold
+              dataTestId="backup_codes_container"
+            >
+              {backupCodes.length > 0
+                ? backupCodes.map((item, index) => {
+                    if (!item.isUsed) {
+                      return (
+                        <strong
+                          key={item.code}
+                          className="backup-codes-code"
+                          data-testid={`backup_code_${index}`}
+                          dir="auto"
+                        >
+                          {item.code} <br />
+                        </strong>
+                      );
+                    }
+                    return null;
+                  })
+                : null}
             </Text>
           </StyledBodyContent>
         </ModalDialog.Body>
@@ -130,14 +151,16 @@ class BackupCodesDialogComponent extends React.Component {
               size="normal"
               primary
               onClick={this.getNewBackupCodes}
+              testId="request_new_backup_codes_button"
             />
             <Button
               key="PrintBtn"
               label={t("Common:CancelButton")}
               size="normal"
               onClick={onClose}
+              testId="backup_codes_cancel_button"
             />
-            {isDesktop() && (
+            {isDesktop() ? (
               <div className="backup-codes-print-link-wrapper">
                 <Link
                   type="action"
@@ -145,11 +168,12 @@ class BackupCodesDialogComponent extends React.Component {
                   fontWeight={600}
                   isHovered
                   onClick={this.printPage}
+                  dataTestId="print_backup_codes_link"
                 >
                   {t("PrintButton")}
                 </Link>
               </div>
-            )}
+            ) : null}
           </StyledFooterContent>
         </ModalDialog.Footer>
       </ModalDialog>

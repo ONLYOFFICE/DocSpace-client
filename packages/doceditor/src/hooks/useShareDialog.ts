@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,23 +25,23 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTranslation } from "react-i18next";
 
 import type { IInitialConfig } from "@/types";
+import { FolderType } from "@docspace/shared/enums";
 
 const useShareDialog = (
   config: IInitialConfig | undefined,
-  onSDKRequestStartFilling: (headerLabel: string) => void,
+  openShareFormDialog: () => void,
+  rootFolderType?: FolderType,
 ) => {
-  const { t } = useTranslation(["Common"]);
   const [isVisible, setIsVisible] = React.useState(false);
 
   const onSDKRequestSharingSettings = React.useCallback(() => {
-    if (config?.startFilling)
-      return onSDKRequestStartFilling(t("Common:ShareToFillOut"));
+    if (config?.startFilling && rootFolderType !== FolderType.USER)
+      return openShareFormDialog();
 
     setIsVisible(true);
-  }, [config?.startFilling, onSDKRequestStartFilling, t]);
+  }, [config?.startFilling, openShareFormDialog, rootFolderType]);
 
   const onClose = React.useCallback(() => {
     setIsVisible(false);

@@ -1,0 +1,231 @@
+{
+  "key_path": "ErrorEmptyList",
+  "content": "The list of entities has been changed. Please check the contents and try again.",
+  "content_en_sha1_hash": "5fcafe5e752386800be3676175e2dc663d211f5b",
+  "created_at": "2025-05-19T21:30:45.073Z",
+  "updated_at": "2025-08-12T19:46:25.757Z",
+  "comment": {
+    "text": "This translation key is used for an error message that occurs when a user attempts to perform an operation on an empty list of entities. It displays a generic error message instructing the user to review and try again. This message appears in a toast notification after clicking a button or navigating to an action, prompting the user to investigate why the list is empty.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:36:21.447Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FilesSelector/index.tsx",
+      "line_number": 315,
+      "context": "toastr.error(e as TData);\n setIsRequestRunning(false);\n clearActiveOperations(fileIds, folderIds);\n }\n } else {\n toastr.error(t(\"Common:ErrorEmptyList\"));\n }\n } else {\n if (isRoomBackup && showMoveToPublicDialog) {\n setBackupToPublicRoomVisible(true, {\n selectedItemId,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/HotkeyStore.js",
+      "line_number": 713,
+      "context": "})\n .finally(() => {\n this.filesStore.setHotkeysClipboard([]);\n });\n } else {\n toastr.error(t(\"Common:ErrorEmptyList\"));\n }\n };\n \n uploadClipboardFiles = async (t, event) => {\n const { createFoldersTree } = this.filesActionsStore;",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ස්ථීති ලැයිස්තුව\" (sthithi laisithuwa) for \"list of entities\" is not the most natural or accurate rendering in Sinhala. \"entities\" often refers to objects or items. A more suitable translation might be something like \"ආකාරණ ලැයිස්තුව\" (akaran laisithuwa) or \"ප්‍රතිස්ථාන ලැයිස්තුව\" (prathistaan laisithuwa).",
+          "suggestion": "Consider using \"ආකාරණ ලැයිස්තුව\" (akaran laisithuwa) or \"ප්‍රතිස්ථාන ලැයිස්තුව\" (prathistaan laisithuwa) for \"list of entities\"."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'අන්තර්ගතය' (antharagataya) for 'contents' is grammatically correct, but a more conversational and direct translation might be 'එකතු' (ekathu) or 'අඩුවල'.",
+          "suggestion": "Consider using 'එකතු' (ekathu) or 'අඩුවල' (aduwala) for 'contents' to make the translation more natural."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"entities\" is translated as \"ентитета\". While technically correct, a more natural and commonly used translation in this context would be \"областа\" (oblasti) or potentially \"стварања\" (stvaranja), depending on the specific meaning of 'entities'. \" ентитета\" sounds overly formal and potentially confusing to a Serbian speaker.",
+          "suggestion": "Consider using \"областа\" (oblasti) or \"стварања\" (stvaranja) instead of \"ентитета\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -91,19 +91,21 @@ const RoomsContent = ({
   );
 };
 
-export default inject(({ currentQuotaStore, authStore, treeFoldersStore }) => {
-  const { isRoomsTariffLimit, maxCountRoomsByQuota, usedRoomsCount } =
-    currentQuotaStore;
+export default inject(
+  ({ currentQuotaStore, authStore, treeFoldersStore }: TStore) => {
+    const { isRoomsTariffLimit, maxCountRoomsByQuota, usedRoomsCount } =
+      currentQuotaStore;
 
-  const { isPaymentPageAvailable } = authStore;
+    const { isPaymentPageAvailable } = authStore;
 
-  const { isArchiveFolderRoot } = treeFoldersStore;
+    const { isArchiveFolderRoot } = treeFoldersStore;
 
-  return {
-    isRoomsTariffLimit,
-    maxCountRoomsByQuota,
-    usedRoomsCount,
-    isPaymentPageAvailable,
-    isArchiveFolderRoot,
-  };
-})(observer(RoomsContent));
+    return {
+      isRoomsTariffLimit,
+      maxCountRoomsByQuota,
+      usedRoomsCount,
+      isPaymentPageAvailable,
+      isArchiveFolderRoot,
+    };
+  },
+)(observer(RoomsContent));

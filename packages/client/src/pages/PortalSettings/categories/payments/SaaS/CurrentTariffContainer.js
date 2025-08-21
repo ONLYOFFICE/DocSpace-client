@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -89,8 +89,8 @@ const CurrentTariffContainer = ({ style, quotaCharacteristics }) => {
           item.type === "size" ? getConvertedSize(t, usedValue) : usedValue;
 
         return (
-          <div key={maxValue}>
-            <Text isBold noSelect fontSize="14px">
+          <div key={item.used.title}>
+            <Text isBold fontSize="14px">
               {item.used.title}
               <Text
                 className="current-tariff_count"

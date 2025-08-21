@@ -1,8 +1,6 @@
 {
   "DeleteForeverButton": "සදහටම මකන්න",
-  "DeleteForeverNote": "කුණු කූඩයේ තිබෙන සියළුම අථක සදහටම මකනු ඇත. ඔබට ඒවා ප්‍රත්‍යර්පණයට නොහැකි වනු ඇත.",
-  "DeleteForeverNoteArchive": "සංරක්‍ෂිතයේ තිබෙන සියළුම අථක සදහටම මකනු ඇත. ඔබට ඒවා ප්‍රත්‍යර්පණයට නොහැකි වනු ඇත.",
+  "DeleteForeverNote": "{{sectionName}} කොටසින් සියලුම අයිතමයන් සදහටම මකා දමනු ලැබේ. ඒවා ප්‍රතිෂ්ඨාපනය කිරීමට ඔබට හැකියාවක් නොවනු ඇත.",
   "DeleteForeverTitle": "සදහටම මකන්නද?",
-  "SuccessEmptyArchived": "සංරක්‍ෂිතය හිස් කෙරිණි",
-  "SuccessEmptyTrash": "කුණුකූඩය හිස් කෙරිණි"
+  "SuccessEmptyAction": "{{sectionName}} කොටස හිස් විය"
 }

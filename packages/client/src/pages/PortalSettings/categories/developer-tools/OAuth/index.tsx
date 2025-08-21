@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -43,14 +43,12 @@ import GenerateDeveloperTokenDialog from "./sub-components/GenerateDeveloperToke
 import RevokeDeveloperTokenDialog from "./sub-components/RevokeDeveloperTokenDialog";
 import DisableDialog from "./sub-components/DisableDialog";
 import DeleteDialog from "./sub-components/DeleteDialog";
-import OAuthLoader from "./sub-components/List/Loader";
-import OAuthEmptyScreen from "./sub-components/EmptyScreen";
+
 import List from "./sub-components/List";
 
-const MIN_LOADER_TIME = 500;
+const MIN_LOADER_TIME = 0;
 
 const OAuth = ({
-  isEmptyClientList,
   clientList,
   viewAs,
 
@@ -70,26 +68,32 @@ const OAuth = ({
   generateDeveloperTokenDialogVisible,
   revokeDeveloperTokenDialogVisible,
   apiOAuthLink,
+  logoText,
 }: OAuthProps) => {
   const { t } = useTranslation(["OAuth"]);
 
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
+  const [error, setError] = React.useState<null | Error>(null);
 
   const startLoadingRef = React.useRef<null | Date>(null);
 
   const getData = React.useCallback(async () => {
     if (startLoadingRef.current) return;
-    const actions = [];
+    const actions: Promise<void>[] = [];
 
-    if (!isInit) {
-      actions.push(fetchScopes());
+    try {
+      if (!isInit) {
+        actions.push(fetchScopes());
+      }
+
+      actions.push(fetchClients());
+
+      startLoadingRef.current = new Date();
+
+      await Promise.all(actions);
+    } catch (e) {
+      setError(e as Error);
     }
-
-    actions.push(fetchClients());
-
-    await Promise.all(actions);
-
-    startLoadingRef.current = new Date();
 
     if (startLoadingRef.current) {
       const currentDate = new Date();
@@ -128,25 +132,32 @@ const OAuth = ({
 
   return (
     <OAuthContainer>
-      {isLoading ? (
+      {/* {false ? (
         <OAuthLoader viewAs={viewAs} currentDeviceType={currentDeviceType} />
       ) : isEmptyClientList ? (
-        <OAuthEmptyScreen apiOAuthLink={apiOAuthLink} />
-      ) : (
-        <List
-          clients={clientList}
-          viewAs={viewAs}
-          currentDeviceType={currentDeviceType}
-          apiOAuthLink={apiOAuthLink}
-        />
-      )}
-
-      {infoDialogVisible && <InfoDialog visible={infoDialogVisible} />}
-      {disableDialogVisible && <DisableDialog />}
-      {previewDialogVisible && <PreviewDialog visible={previewDialogVisible} />}
-      {deleteDialogVisible && <DeleteDialog />}
-      {generateDeveloperTokenDialogVisible && <GenerateDeveloperTokenDialog />}
-      {revokeDeveloperTokenDialogVisible && <RevokeDeveloperTokenDialog />}
+        <OAuthEmptyScreen apiOAuthLink={apiOAuthLink} logoText={logoText} />
+      ) : ( */}
+      <List
+        clients={clientList}
+        viewAs={viewAs}
+        currentDeviceType={currentDeviceType}
+        apiOAuthLink={apiOAuthLink}
+        logoText={logoText}
+        isLoading={isLoading}
+        isError={!!error}
+      />
+      {infoDialogVisible ? <InfoDialog visible={infoDialogVisible} /> : null}
+      {disableDialogVisible ? <DisableDialog /> : null}
+      {previewDialogVisible ? (
+        <PreviewDialog visible={previewDialogVisible} />
+      ) : null}
+      {deleteDialogVisible ? <DeleteDialog /> : null}
+      {generateDeveloperTokenDialogVisible ? (
+        <GenerateDeveloperTokenDialog />
+      ) : null}
+      {revokeDeveloperTokenDialogVisible ? (
+        <RevokeDeveloperTokenDialog />
+      ) : null}
     </OAuthContainer>
   );
 };
@@ -159,7 +170,7 @@ export default inject(
     oauthStore: OAuthStore;
     settingsStore: SettingsStore;
   }) => {
-    const { currentDeviceType, apiOAuthLink } = settingsStore;
+    const { currentDeviceType, apiOAuthLink, logoText } = settingsStore;
     const {
       isEmptyClientList,
       clientList,
@@ -200,6 +211,7 @@ export default inject(
       generateDeveloperTokenDialogVisible,
       revokeDeveloperTokenDialogVisible,
       apiOAuthLink,
+      logoText,
     };
   },
 )(observer(OAuth));

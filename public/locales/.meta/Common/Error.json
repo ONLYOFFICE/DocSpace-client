@@ -1,0 +1,250 @@
+{
+  "key_path": "Error",
+  "content": "Error",
+  "content_en_sha1_hash": "7f2f6a15cf8da2b27e5a4af47b58e7ad71c0b3d9",
+  "created_at": "2025-05-19T21:30:45.027Z",
+  "updated_at": "2025-08-04T07:30:01.628Z",
+  "comment": {
+    "text": "This translation key is used to display an \"Error\" message in the app, indicating a specific type of error occurred. It appears as part of error messages in various UI elements, such as confirm routes and error containers, providing context for users when an unexpected issue arises.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:36:23.247Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/doceditor/src/components/Root.tsx",
+      "line_number": 327,
+      "context": "setIsShowDeepLink={setIsShowDeepLink}\n deepLinkSettings={deepLinkSettings ?? 0}\n />\n ) : error && error.message === \"restore-backup\" && !isSkipError ? (\n <ErrorContainer\n headerText={t(\"Common:Error\")}\n customizedBodyText={getErrorMessage()}\n isEditor\n />\n ) : (\n <div style={{ width: \"100%\", height: \"100%\" }}>",
+      "module": "/packages/doceditor"
+    },
+    {
+      "file_path": "/packages/login/src/components/ConfirmRoute.tsx",
+      "line_number": 113,
+      "context": "case ValidationResult.QuotaFailed:\n console.error(\"access below quota\", {\n confirmLinkParams,\n validationResult: confirmLinkResult.result,\n });\n throw new Error(t(\"Common:Error\"));\n default:\n console.error(\"unknown link\", {\n confirmLinkParams,\n validationResult: confirmLinkResult.result,\n });",
+      "module": "/packages/login"
+    },
+    {
+      "file_path": "/packages/login/src/utils/index.ts",
+      "line_number": 66,
+      "context": "};\n \n export const getMessageKeyTranslate = (t: TTranslation, message: string) => {\n switch (message) {\n case \"Error\":\n return t(\"Common:Error\");\n case \"None\":\n return t(\"Common:UnknownError\");\n case \"ErrorUserNotFound\":\n return t(\"Errors:ErrorUserNotFound\");\n case \"ErrorExpiredActivationLink\":",
+      "module": "/packages/login"
+    },
+    {
+      "file_path": "/packages/login/src/utils/index.ts",
+      "line_number": 66,
+      "context": "};\n \n export const getMessageKeyTranslate = (t: TTranslation, message: string) => {\n switch (message) {\n case \"Error\":\n return t(\"Common:Error\");\n case \"None\":\n return t(\"Common:UnknownError\");\n case \"ErrorUserNotFound\":\n return t(\"Errors:ErrorUserNotFound\");\n case \"ErrorExpiredActivationLink\":",
+      "module": "/packages/login"
+    },
+    {
+      "file_path": "/packages/login/src/utils/index.ts",
+      "line_number": 66,
+      "context": "};\n \n export const getMessageKeyTranslate = (t: TTranslation, message: string) => {\n switch (message) {\n case \"Error\":\n return t(\"Common:Error\");\n case \"None\":\n return t(\"Common:UnknownError\");\n case \"ErrorUserNotFound\":\n return t(\"Errors:ErrorUserNotFound\");\n case \"ErrorExpiredActivationLink\":",
+      "module": "/packages/login"
+    },
+    {
+      "file_path": "/packages/shared/pages/Branding/BrandName/index.tsx",
+      "line_number": 121,
+      "context": "maxLength: 40,\n });\n case \"SpecSymbols\":\n return t(\"Common:BrandNameForbidden\");\n default:\n return t(\"Common:Error\");\n }\n };\n \n return (\n <div className={styles.brandName}>",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/pages/EncryptionPortal/index.tsx",
+      "line_number": 34,
+      "context": "import classNames from \"classnames\";\n \n import { Text } from \"../../components/text\";\n import { PreparationPortalProgress } from \"../../components/preparation-portal-progress\";\n import ErrorContainer from \"../../components/error-container/ErrorContainer\";\n import PreparationPortalLoader from \"../../skeletons/preparation-portal\";\n \n import { EncryptionStatus } from \"../../enums\";\n \n import {",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/pages/PreparationPortal/index.tsx",
+      "line_number": 48,
+      "context": "export const PreparationPortal = (props: IPreparationPortal) => {\n const { withoutHeader, isDialog, style } = props;\n \n const { t, ready } = useTranslation([\"PreparationPortal\", \"Common\"]);\n \n const errorInternalServer = t(\"Common:ErrorInternalServer\");\n \n const [percent, setPercent] = useState(0);\n const [errorMessage, setErrorMessage] = useState(\"\");\n \n const getRecoveryProgress = useCallback(async () => {",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

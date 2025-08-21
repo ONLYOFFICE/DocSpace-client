@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -43,9 +43,7 @@ const StyledCatalogSpamIcon = styled(CatalogSpamIcon)`
 
 const AccountInfo = ({ user }) => {
   const StatusNode = (
-    <Text className="status" noSelect>
-      {capitalize(user.statusType)}
-    </Text>
+    <Text className="status">{capitalize(user.statusType)}</Text>
   );
 
   return (
@@ -59,12 +57,12 @@ const AccountInfo = ({ user }) => {
       />
       <div className="info">
         <div className="avatar-name">
-          <Text className="display-name" noSelect title={user.displayName}>
+          <Text className="display-name" title={user.displayName}>
             {user.displayName}
           </Text>
-          {user.statusType === "disabled" && (
+          {user.statusType === "disabled" ? (
             <StyledCatalogSpamIcon size="small" />
-          )}
+          ) : null}
         </div>
 
         {StatusNode}

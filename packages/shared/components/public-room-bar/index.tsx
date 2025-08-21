@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,61 +24,78 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { ForwardedRef, forwardRef } from "react";
+import React from "react";
 import { ReactSVG } from "react-svg";
 import PeopleIcon from "PUBLIC_DIR/images/people.react.svg?url";
 import CrossReactSvg from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
+import classNames from "classnames";
 
 import { Text } from "../text";
 import { IconButton } from "../icon-button";
 
-import { StyledPublicRoomBar } from "./PublicRoomBar.styled";
+import styles from "./PublicRoomBar.module.scss";
 import { PublicRoomBarProps } from "./PublicRoomBar.types";
 
-const PublicRoomBar = forwardRef(
-  (props: PublicRoomBarProps, ref: ForwardedRef<HTMLDivElement>) => {
-    const { headerText, bodyText, iconName, onClose, ...rest } = props;
+const PublicRoomBar = (props: PublicRoomBarProps) => {
+  const {
+    ref,
+    headerText,
+    bodyText,
+    iconName,
+    onClose,
+    barIsVisible,
+    className,
+    dataTestId,
+    ...rest
+  } = props;
 
-    const headerAs = typeof headerText !== "string" ? "div" : undefined;
-    const bodyAs = typeof bodyText !== "string" ? "div" : undefined;
+  const headerAs = typeof headerText !== "string" ? "div" : undefined;
+  const bodyAs = typeof bodyText !== "string" ? "div" : undefined;
 
-    return (
-      <StyledPublicRoomBar {...rest} ref={ref}>
-        <div className="text-container">
-          <div className="header-body">
-            <div className="header-icon">
-              <ReactSVG src={iconName || PeopleIcon} />
-            </div>
-            <Text
-              className="text-container_header"
-              fontWeight={600}
-              as={headerAs}
-            >
-              {headerText}
-            </Text>
+  return (
+    <div
+      className={classNames(
+        "public-room-bar",
+        styles.container,
+        {
+          [styles.barVisible]: barIsVisible,
+        },
+        className,
+      )}
+      {...rest}
+      ref={ref}
+      data-testid={dataTestId ?? "public_room_bar"}
+    >
+      <div className={styles.textContainer}>
+        <div className={styles.headerBody}>
+          <div className={styles.headerIcon}>
+            <ReactSVG src={iconName || PeopleIcon} />
           </div>
-          <Text
-            className="text-container_body"
-            fontSize="12px"
-            fontWeight={400}
-            as={bodyAs}
-          >
-            {bodyText}
+          <Text className={styles.header} fontWeight={600} as={headerAs}>
+            {headerText}
           </Text>
         </div>
+        <Text
+          className={styles.body}
+          fontSize="12px"
+          fontWeight={400}
+          as={bodyAs}
+        >
+          {bodyText}
+        </Text>
+      </div>
 
-        {onClose && (
-          <IconButton
-            className="close-icon"
-            size={12}
-            iconName={CrossReactSvg}
-            onClick={onClose}
-          />
-        )}
-      </StyledPublicRoomBar>
-    );
-  },
-);
+      {onClose ? (
+        <IconButton
+          className={styles.closeIcon}
+          size={12}
+          iconName={CrossReactSvg}
+          onClick={onClose}
+        />
+      ) : null}
+    </div>
+  );
+};
 PublicRoomBar.displayName = "PublicRoomBar";
 
 export default PublicRoomBar;

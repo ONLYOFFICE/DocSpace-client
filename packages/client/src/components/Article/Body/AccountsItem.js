@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,7 +31,7 @@ import { withTranslation } from "react-i18next";
 import { PageType } from "@docspace/shared/enums";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 
-import { ArticleItem } from "@docspace/shared/components/article-item";
+import { ArticleItem } from "@docspace/shared/components/article-item/ArticleItemWrapper";
 
 const PureAccountsItem = ({
   showText,
@@ -40,14 +40,10 @@ const PureAccountsItem = ({
   t,
   currentColorScheme,
   getLinkData,
-
-  setContactsTab,
 }) => {
   const onClickAction = React.useCallback(
     (e) => {
       onClick && onClick(e, "accounts");
-
-      setContactsTab("people");
     },
     [onClick],
   );
@@ -70,21 +66,27 @@ const PureAccountsItem = ({
       isActive={isActive}
       folderId="document_catalog-accounts"
       $currentColorScheme={currentColorScheme}
+      withAnimation
     />
   );
 };
 
 const AccountsItem = withTranslation(["Common"])(PureAccountsItem);
 
-export default inject(({ settingsStore, peopleStore }) => {
+export default inject(({ settingsStore, filesStore, peopleStore }) => {
   const { showText, currentColorScheme } = settingsStore;
 
   const { setContactsTab } = peopleStore.usersStore;
+
+  const { filesController, roomsController } = filesStore;
 
   return {
     showText,
     currentColorScheme,
 
     setContactsTab,
+
+    filesController,
+    roomsController,
   };
 })(observer(AccountsItem));

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,6 +26,7 @@
 
 import { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
+import { TFunction } from "i18next";
 
 import { SearchInput } from "@docspace/shared/components/search-input";
 import { Text } from "@docspace/shared/components/text";
@@ -125,9 +126,12 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
       showReminder
       displaySettings
       saveButtonDisabled={
-        canDisable &&
-        (areCheckedUsersEmpty ||
-          (quota.max ? totalUsedUsers > quota.max : false))
+        canDisable
+          ? areCheckedUsersEmpty ||
+            (quota.max && typeof quota.max === "number"
+              ? totalUsedUsers > quota.max
+              : false)
+          : false
       }
       migrationCancelLabel={t("Settings:CancelImport")}
       onMigrationCancelClick={showCancelDialog}
@@ -150,18 +154,19 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
             refreshTimeout={REFRESH_TIMEOUT}
             onClearSearch={onClearSearchInput}
             size={InputSize.base}
+            dataTestId="search_users_input"
           />
 
-          <AccountsTable t={t} accountsData={filteredAccounts} />
+          <AccountsTable t={t as TFunction} accountsData={filteredAccounts} />
 
-          {withEmailUsers.length > PAGE_SIZE && filteredAccounts.length > 0 && (
+          {withEmailUsers.length > PAGE_SIZE && filteredAccounts.length > 0 ? (
             <AccountsPaging
-              t={t}
+              t={t as TFunction}
               numberOfItems={withEmailUsers.length}
               setDataPortion={handleDataChange}
               pagesPerPage={PAGE_SIZE}
             />
-          )}
+          ) : null}
         </>
       ) : (
         <>
@@ -172,9 +177,9 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
         </>
       )}
 
-      {filteredAccounts.length > 0 && Buttons}
+      {filteredAccounts.length > 0 ? Buttons : null}
 
-      {cancelUploadDialogVisible && (
+      {cancelUploadDialogVisible ? (
         <CancelUploadDialog
           visible={cancelUploadDialogVisible}
           onClose={hideCancelDialog}
@@ -183,7 +188,7 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
           isFifthStep={false}
           isSixthStep={false}
         />
-      )}
+      ) : null}
     </Wrapper>
   );
 };

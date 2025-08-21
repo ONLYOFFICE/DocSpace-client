@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -104,8 +104,6 @@ const {
   darkScroll,
   darkScrollHover,
   darkScrollActive,
-  silver,
-  highlandGray,
 
   blurDark,
   darkGreyAction,
@@ -417,7 +415,7 @@ const Dark: TTheme = {
     float: "left",
     height: "19px",
     overflow: "hidden",
-    padding: "0px",
+    padding: "",
 
     separator: {
       border: `1px solid ${grayDarkStrong}`,
@@ -808,18 +806,6 @@ const Dark: TTheme = {
     hoverIconColor: grayDark,
   },
 
-  inputPhone: {
-    activeBorderColor: lightSecondMain,
-    inactiveBorderColor: grayDarkStrong,
-    errorBorderColor: darkErrorStatus,
-    backgroundColor: black,
-    color: white,
-    scrollBackground: grayDark,
-    placeholderColor: grayDark,
-    dialCodeColor: grayDark,
-    width: "320px",
-    height: "44px",
-  },
   textInput: {
     fontWeight: "normal",
     placeholderColor: grayDark,
@@ -1446,25 +1432,7 @@ const Dark: TTheme = {
     marginRight: "2px",
     borderRadius: "50%",
   },
-  rombsLoader: {
-    blue: {
-      colorStep_1: black,
-      colorStep_2: black,
-      colorStep_3: "#323032",
-      colorStep_4: "#323032",
-    },
-    red: {
-      colorStep_1: black,
-      colorStep_2: black,
-      colorStep_3: "#323032",
-    },
-    green: {
-      colorStep_1: black,
-      colorStep_2: black,
-      colorStep_3: "#323032",
-      colorStep_4: "#323032",
-    },
-  },
+
   dialogLoader: {
     borderBottom: `1px solid ${black}`,
   },
@@ -1494,9 +1462,9 @@ const Dark: TTheme = {
       heightWithBorder: "30px",
       heightModernView: "28px",
 
-      paddingLeft: "16px",
+      paddingLeft: "8px",
       paddingRightNoArrow: "16px",
-      paddingRight: "8px",
+      paddingRight: "4px",
 
       selectPaddingLeft: "8px",
       selectPaddingRightNoArrow: "14px",
@@ -1854,6 +1822,7 @@ const Dark: TTheme = {
       iconColor: grayDark,
       iconErrorColor: darkErrorStatus,
       primaryColor: darkGrayDark,
+      barIconColor: darkGrayDark,
     },
 
     members: {
@@ -2095,10 +2064,10 @@ const Dark: TTheme = {
         draggingColor: dndDarkColor,
         draggingHoverColor: dndDarkHover,
         checkedColor: lightDarkGrayHover,
-        roomsCheckedColor: black,
+        roomsCheckedColor: lightDarkGrayHover,
         border: `1px solid ${grayDarkStrong}`,
         backgroundBadgeColor: black,
-        backgroundColor: darkGrayLight,
+        backgroundColor: black,
         borderRadius: "6px",
         roomsBorderRadius: "12px",
         bottomBorderRadius: "0 0 6px 6px",
@@ -2108,9 +2077,16 @@ const Dark: TTheme = {
         backgroundColorTop: black,
       },
 
+      tag: {
+        backgroundColor: black,
+        hoverBackgroundColor: grayStrong,
+        activeBackgroundColor: grayLight,
+      },
+
       sideColor: white,
       color: white,
       textColor: grayDark,
+      subTextColor: "#858585",
     },
 
     animationColor: lightSecondMain,
@@ -2172,45 +2148,6 @@ const Dark: TTheme = {
     alert: {
       fill: mainOrange,
       path: black,
-    },
-  },
-
-  mediaViewer: {
-    color: grayDarkStrong,
-    backgroundColor: highlandGray,
-    fill: white,
-    titleColor: white,
-    iconColor: white,
-
-    controlBtn: {
-      backgroundColor: silver,
-    },
-
-    imageViewer: {
-      backgroundColor: silver,
-      inactiveBackgroundColor: highlandGray,
-      fill: white,
-    },
-
-    progressBar: {
-      background: grayDarkStrong,
-      backgroundColor: silver,
-    },
-
-    scrollButton: {
-      backgroundColor: highlandGray,
-      background: silver,
-      border: `solid ${white}`,
-    },
-
-    videoViewer: {
-      fill: white,
-      stroke: white,
-      color: grayDarkStrong,
-      colorError: white,
-      backgroundColorError: darkBlack,
-      backgroundColor: highlandGray,
-      background: silver,
     },
   },
 
@@ -2304,7 +2241,7 @@ const Dark: TTheme = {
         borderColor: gray,
         hoverBorderColor: lightDarkGrayHover,
         hoverColor: white,
-        color: darkGrayDark,
+        color: white,
         iconColor: darkGrayDark,
       },
     },
@@ -2492,7 +2429,8 @@ const Dark: TTheme = {
       color: white,
       tooltipColor: darkToastInfo,
       iconColor: darkErrorStatus,
-
+      positiveStatusColor: darkStatusPositive,
+      progressColor: grayDark,
       shareButton: {
         color: gray,
         sharedColor: lightGrayDark,
@@ -2501,6 +2439,8 @@ const Dark: TTheme = {
       loadingButton: {
         color: white,
         background: black,
+        defaultBackground: grayDark,
+        hoverColor: white,
       },
     },
     invite: {
@@ -2656,6 +2596,15 @@ const Dark: TTheme = {
       stroke: white,
       color: white,
     },
+
+    versionDisabled: {
+      fillDisabled: grayDarkStrong,
+    },
+
+    versionLink: {
+      color: grayDark,
+    },
+
     commentColor: grayDark,
   },
 
@@ -2896,7 +2845,7 @@ const Dark: TTheme = {
         priceColor: darkGrayDark,
         storageSizeTitle: gray,
 
-        backgroundColor: darkGrayLight,
+        backgroundColor: lightDarkGrayHover,
         linkColor: link,
         tariffText: grayDark,
         border: `1px solid ${grayDarkStrong}`,
@@ -2955,7 +2904,7 @@ const Dark: TTheme = {
         background: darkGrayLight,
       },
       storageManagement: {
-        grayBackgroundText: grayDark,
+        grayBackgroundText: white,
         descriptionColor: darkGrayDark,
         dividerColor: grayDarkMid,
       },
@@ -2970,8 +2919,7 @@ const Dark: TTheme = {
         color: grayDark,
         linkColor: lightBlueMain,
         spanBackground: lightBlueMain,
-        filterBorder: `1px solid ${black}`,
-        toastBackground: darkToastWarning,
+        filterBorder: `1px solid ${grayDarkStrong}`,
         background: darkGrayLight,
       },
     },
@@ -2981,6 +2929,10 @@ const Dark: TTheme = {
       generatePasswordColor: darkGrayDark,
       textColor: grayDark,
     },
+  },
+
+  statusMessage: {
+    toastBackground: darkToastWarning,
   },
 
   tileLoader: {
@@ -3082,17 +3034,6 @@ const Dark: TTheme = {
     colorPercentBig: black,
     errorTextColor: darkErrorStatus,
     descriptionTextColor: grayDark,
-  },
-
-  codeInput: {
-    background: darkGrayLight,
-    border: `1px solid ${grayDarkStrong}`,
-    color: white,
-    lineColor: grayDark,
-    disabledBackground: grayDarkStrong,
-    disabledBorder: `1px solid ${grayDarkStrong}`,
-    disabledColor: grayDark,
-    focusBorder: `1px solid ${lightSecondMain}`,
   },
 
   accessRightSelect: {
@@ -3265,6 +3206,16 @@ const Dark: TTheme = {
     selectedBorderColor: grayDarkMid,
     backgroundColor: black,
     borderColor: grayDarkStrong,
+  },
+
+  formFillingTips: {
+    circleColor: grayDarkMid,
+    selectedColor: black,
+    circleBorder: `3px solid ${lightSecondMain}`,
+  },
+
+  socialAuthDialog: {
+    accountDetailsBackground: lightDarkGrayHover,
   },
 };
 

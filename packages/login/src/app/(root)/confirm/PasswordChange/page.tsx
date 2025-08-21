@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,13 +30,18 @@ import { GreetingContainer } from "@/components/GreetingContainer";
 import { getPortalPasswordSettings, getSettings } from "@/utils/actions";
 import { getStringFromSearchParams } from "@/utils";
 
+import { logger } from "logger.mjs";
 import PasswordChangeForm from "./page.client";
 
 type PasswordChangeProps = {
-  searchParams: { [key: string]: string };
+  searchParams: Promise<{ [key: string]: string }>;
 };
 
-async function Page({ searchParams }: PasswordChangeProps) {
+async function Page(props: PasswordChangeProps) {
+  logger.info("PasswordChange page");
+
+  const { searchParams: sp } = props;
+  const searchParams = await sp;
   const confirmKey = getStringFromSearchParams(searchParams);
 
   const [settings, passwordSettings] = await Promise.all([
@@ -44,21 +49,17 @@ async function Page({ searchParams }: PasswordChangeProps) {
     getPortalPasswordSettings(confirmKey),
   ]);
 
-  return (
+  return settings && typeof settings !== "string" ? (
     <>
-      {settings && typeof settings !== "string" && (
-        <>
-          <GreetingContainer greetingText={settings?.greetingSettings} />
-          <FormWrapper id="password-change-form">
-            <PasswordChangeForm
-              passwordHash={settings.passwordHash}
-              passwordSettings={passwordSettings}
-            />
-          </FormWrapper>
-        </>
-      )}
+      <GreetingContainer greetingText={settings?.greetingSettings} />
+      <FormWrapper id="password-change-form">
+        <PasswordChangeForm
+          passwordHash={settings.passwordHash}
+          passwordSettings={passwordSettings}
+        />
+      </FormWrapper>
     </>
-  );
+  ) : null;
 }
 
 export default Page;

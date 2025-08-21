@@ -1,0 +1,21 @@
+{
+  "key_path": "ActionCannotBeUndone",
+  "content": "<1>Please note:</1> this action cannot be undone.",
+  "content_en_sha1_hash": "398e91015f190497d3d1b1eadbe6808fe54cd96d",
+  "created_at": "2025-06-08T12:02:19.201Z",
+  "updated_at": "2025-06-08T12:02:19.201Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

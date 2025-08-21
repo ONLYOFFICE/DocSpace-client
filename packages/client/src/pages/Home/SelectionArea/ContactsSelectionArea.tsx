@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 
@@ -32,6 +32,7 @@ import { SelectionArea as SelectionAreaComponent } from "@docspace/shared/compon
 import { TOnMove } from "@docspace/shared/components/selection-area/SelectionArea.types";
 
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
+import ContactsHotkeysStore from "SRC_DIR/store/contacts/ContactsHotkeysStore";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
@@ -40,12 +41,16 @@ type SelectionAreaProps = {
   viewAs: PeopleStore["viewAs"];
   setSelectionsPeople: UsersStore["setSelections"];
   setSelectionsGroups: GroupsStore["setSelections"];
+  selectionAreaIsEnabled: ContactsHotkeysStore["selectionAreaIsEnabled"];
+  setWithContentSelection: ContactsHotkeysStore["setWithContentSelection"];
 };
 
 const SelectionArea = ({
   viewAs,
   setSelectionsPeople,
   setSelectionsGroups,
+  selectionAreaIsEnabled,
+  setWithContentSelection,
 }: SelectionAreaProps) => {
   const location = useLocation();
 
@@ -56,7 +61,7 @@ const SelectionArea = ({
     else setSelectionsGroups(added, removed, clear);
   };
 
-  return isMobile ? null : (
+  return isMobile || !selectionAreaIsEnabled ? null : (
     <SelectionAreaComponent
       containerClass="section-scroll"
       scrollClass="section-scroll"
@@ -65,20 +70,24 @@ const SelectionArea = ({
       itemClass={isPeopleSelections ? "user-item" : "group-item"}
       onMove={onMove}
       viewAs={viewAs}
+      onMouseDown={() => setWithContentSelection(false)}
     />
   );
 };
 
 export default inject(({ peopleStore }: { peopleStore: PeopleStore }) => {
-  const { viewAs, usersStore, groupsStore } = peopleStore;
+  const { viewAs, usersStore, groupsStore, contactsHotkeysStore } = peopleStore;
 
   const { setSelections: setSelectionsPeople } = usersStore!;
-
   const { setSelections: setSelectionsGroups } = groupsStore!;
+  const { selectionAreaIsEnabled, setWithContentSelection } =
+    contactsHotkeysStore!;
 
   return {
     viewAs,
     setSelectionsPeople,
     setSelectionsGroups,
+    selectionAreaIsEnabled,
+    setWithContentSelection,
   };
 })(observer(SelectionArea));

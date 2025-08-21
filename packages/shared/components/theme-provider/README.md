@@ -11,19 +11,35 @@ You can change the CSS styles in the theme, and they will be applied to all chil
 
 ### Usage
 
-```js
-import ThemeProvider from "@docspace/shared/components";
-import { Base } from "@docspace/shared/themes";
-```
+```tsx
+import ThemeProvider from "@docspace/shared/components/theme-provider";
+import { Base, Dark } from "@docspace/shared/themes";
 
-```jsx
-const newTheme = {...Base, color: "red"}
+// Basic usage with default theme
+const App = () => (
+  <ThemeProvider theme={Base}>
+    <YourApp />
+  </ThemeProvider>
+);
 
-<ThemeProvider theme={newTheme}>
-  <Box>
-    <Text>Base theme</Text>
-  </Box>
-</ThemeProvider>;
+// Using dark theme with custom color scheme
+const AppWithColorScheme = () => (
+  <ThemeProvider
+    theme={Dark}
+    currentColorScheme={{
+      main: {
+        accent: "#333333",
+        buttons: "#0F4071",
+      },
+      text: {
+        accent: "#333333",
+        buttons: "#FFFFFF",
+      },
+    }}
+  >
+    <YourApp />
+  </ThemeProvider>
+);
 ```
 
 ### ThemeProvider Properties

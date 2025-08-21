@@ -1,0 +1,15 @@
+{
+  "DescriptionUploading": "Vytvářejte PDF formuláře v {{productName}}, například ve vaší {{sectionName}}, a nahrávejte hotové do místnosti. Využijte integrovanou knihovnu šablon a vybírejte z mnoha připravených PDF šablon.",
+  "HeaderComplete": "Pohodlná analýza získaných odpovědí",
+  "HeaderSharing": "Rychlé sdílení",
+  "HeaderStarting": "Zahájení procesu vyplňování formuláře",
+  "HeaderSubmitting": "Odesílání odpovědí",
+  "HeaderUploading": "Snadné nahrávání formulářů",
+  "TitleComplete": "Zkontrolujte vyplněné formuláře a analyzujte automaticky shromážděná data do tabulky. Vše - v jedné místnosti.",
+  "TitleSharing": "Pozvěte ostatní členy {{productName}} do místnosti, aby vyplnili nahrané formuláře ve formátu PDF. Zkopírujte odkaz pro veřejný přístup a sdílejte místnost s externími uživateli.",
+  "TitleStarting": "Po otevření formuláře k vyplnění se automaticky vytvoří individuální kopie pro každého respondenta a uloží se do složky In Progress (Probíhající). To znamená, že formulář byl zahájen, ale ještě nebyl dokončen.",
+  "TitleSubmitting": "Po kliknutí na tlačítko Dokončit a odeslat v otevřené kopii formuláře se formulář přesune do složky Dokončeno.",
+  "WelcomeDescription": "Zde můžete organizovat jednoduché vyplňování formulářů PDF, snadno shromažďovat a analyzovat odpovědi. Jste připraveni začít?",
+  "WelcomeFillingForm": "Vítejte v místnosti pro vyplňování formulářů!",
+  "WelcomeStartTutorial": "Krátká prohlídka"
+}

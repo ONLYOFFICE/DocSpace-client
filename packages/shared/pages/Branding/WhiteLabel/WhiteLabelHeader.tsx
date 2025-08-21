@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,7 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { isMobile } from "react-device-detect";
+import { useTranslation } from "react-i18next";
+import classNames from "classnames";
+
+import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
+
+import { globalColors } from "../../../themes";
 
 import { Text } from "../../../components/text";
 import { Badge } from "../../../components/badge";
@@ -37,87 +42,118 @@ import {
   InputSize,
 } from "../../../components/text-input";
 import { Button, ButtonSize } from "../../../components/button";
+import { useTheme } from "../../../hooks/useTheme";
 
 import { NotAvailable } from "./NotAvailable";
-import { StyledHeader } from "./WhiteLabel.styled";
 import { IHeaderProps } from "./WhiteLabel.types";
+import styles from "./WhiteLabel.module.scss";
 
 export const WhiteLabelHeader = ({
-  t,
   showNotAvailable,
   isSettingPaid,
   standalone,
   onUseTextAsLogo,
   isEmpty,
   logoTextWhiteLabel,
-  onChangeCompanyName,
+  onChange,
+  onClear,
 }: IHeaderProps) => {
+  const { t } = useTranslation("Common");
+  const { isBase } = useTheme();
+
   return (
-    <StyledHeader>
-      <Text className="subtitle">{t("BrandingSubtitle")}</Text>
-      {showNotAvailable && <NotAvailable t={t} />}
-      <div className="header-container">
+    <div className={styles.header}>
+      {showNotAvailable ? <NotAvailable /> : null}
+      <div className={classNames(styles.headerContainer, "header-container")}>
         <Text fontSize="16px" fontWeight="700">
           {t("WhiteLabel")}
         </Text>
-        {!isSettingPaid && !standalone && (
+
+        {!isSettingPaid && !standalone ? (
           <Badge
-            className="paid-badge"
+            className={classNames(styles.paidBadge, "paid-badge")}
             fontWeight="700"
             label={t("Common:Paid")}
             isPaidBadge
+            backgroundColor={
+              isBase
+                ? globalColors.favoritesStatus
+                : globalColors.favoriteStatusDark
+            }
           />
-        )}
+        ) : null}
       </div>
-      <Text className="wl-subtitle settings_unavailable" fontSize="12px">
-        {t("WhiteLabelSubtitle")}
-      </Text>
 
-      <div className="wl-helper">
-        <Text className="wl-helper-label settings_unavailable" as="div">
-          {t("WhiteLabelHelper")}
+      <div className={classNames(styles.wlHelper, "wl-helper")}>
+        <Text
+          as="div"
+          className={classNames(
+            styles.wlSubtitle,
+            styles.wlHelperLabel,
+            "wl-helper-label settings_unavailable",
+          )}
+          fontSize="13px"
+        >
+          {t("WhiteLabelSubtitle")}
           <HelpButton
             tooltipContent={
-              <Text fontSize="12px">{t("WhiteLabelTooltip")}</Text>
+              <Text fontSize="12px">{t("Common:WhiteLabelTooltip")}</Text>
             }
             place="right"
             offsetRight={0}
             className="settings_unavailable"
+            dataTestId="white_label_helper_button"
           />
         </Text>
       </div>
+
       <div className="settings-block">
         <FieldContainer
-          id="fieldContainerCompanyName"
-          labelText={t("Common:CompanyName")}
+          id="fieldContainerGenerateLogo"
+          labelText={t("GenerateLogoLabel")}
           isVertical
-          className="settings_unavailable"
-          hasError={isEmpty}
+          className="settings_unavailable field-container"
           labelVisible
         >
-          <TextInput
-            className="company-name input"
-            value={logoTextWhiteLabel}
-            onChange={onChangeCompanyName}
-            isDisabled={!isSettingPaid}
-            isReadOnly={!isSettingPaid}
-            scale
-            isAutoFocussed={!isMobile}
-            maxLength={30}
-            hasError={isEmpty}
-            type={InputType.text}
-            size={InputSize.base}
-          />
+          <div
+            className={classNames(styles.whiteLabelInput, {
+              [styles.showCross]: !!logoTextWhiteLabel,
+            })}
+          >
+            <TextInput
+              testId="logo-text-input"
+              className={classNames(styles.input, "input")}
+              placeholder={t("YourLogo")}
+              value={logoTextWhiteLabel}
+              onChange={onChange}
+              isDisabled={!isSettingPaid}
+              isReadOnly={!isSettingPaid}
+              scale
+              maxLength={10}
+              type={InputType.text}
+              size={InputSize.base}
+              withBorder={false}
+            />
+
+            <div
+              className={styles.append}
+              onClick={onClear}
+              data-testid="white_label_input_clear"
+            >
+              <CrossIcon />
+            </div>
+          </div>
           <Button
-            id="btnUseAsLogo"
-            className="use-as-logo"
+            testId="generate-logo-button"
+            id="btnGenerateLogo"
+            className={styles.generateLogo}
             size={ButtonSize.small}
-            label={t("UseAsLogoButton")}
+            label={t("GenerateLogoButton")}
             onClick={onUseTextAsLogo}
-            isDisabled={!isSettingPaid}
+            isDisabled={!isSettingPaid || isEmpty}
           />
         </FieldContainer>
       </div>
-    </StyledHeader>
+    </div>
   );
 };

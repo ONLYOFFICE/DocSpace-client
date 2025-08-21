@@ -3,7 +3,7 @@
   "content": "Stopped",
   "content_en_sha1_hash": "51e9111b87116e60566740d13ba1c1eddb042333",
   "created_at": "2025-05-19T21:30:49.083Z",
-  "updated_at": "2025-08-12T19:46:26.346Z",
+  "updated_at": "2025-08-21T11:22:39.952Z",
   "comment": {
     "text": "This translation key displays a message indicating that a file is stopped in a filling process. It appears as part of a status indicator component, used to display the current status of a filing form. The translated content should reflect whether the file is being processed (YourTurn), has started but not completed (InProgress), or has been completely stopped.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 277,
+      "line_number": 275,
       "context": "case FileFillingFormStatus.YourTurn:\n return t(\"Common:YourTurn\");\n case FileFillingFormStatus.InProgress:\n return t(\"Common:InProgress\");\n case FileFillingFormStatus.Stopped:\n return t(\"Common:Stopped\");\n case FileFillingFormStatus.Completed:\n return t(\"Common:Complete\");\n default:\n return \"\";\n }",
       "module": "/packages/shared"
     }

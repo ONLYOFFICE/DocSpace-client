@@ -3,7 +3,7 @@
   "content": "Back",
   "content_en_sha1_hash": "b52b36b7269fbfc58ec24bb724691951a3decbe8",
   "created_at": "2025-05-19T21:30:43.167Z",
-  "updated_at": "2025-08-12T19:46:26.083Z",
+  "updated_at": "2025-08-21T11:22:39.865Z",
   "comment": {
     "text": "The translation key \"Back\" is used to display a label that navigates users back to a previous step or screen in a data import process. It appears as the label of a cancel button on forms such as the \"Add Emails Step\", allowing users to exit and return to their previous step.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 287,
+      "line_number": 248,
       "context": "<MigrationButtons\n className=\"save-cancel-buttons\"\n onSaveClick={incrementStep}\n onCancelClick={decrementStep}\n saveButtonLabel={t(\"Settings:NextStep\")}\n cancelButtonLabel={t(\"Common:Back\")}\n displaySettings\n showReminder\n migrationCancelLabel={t(\"Settings:CancelImport\")}\n onMigrationCancelClick={showCancelDialog}\n />",
       "module": "/packages/client"
     },
@@ -48,14 +48,14 @@
     },
     {
       "file_path": "/packages/login/src/components/GreetingContainer/GreetingUserContainer.tsx",
-      "line_number": 62,
-      "context": "<div className=\"sign-in-container\">\n {type === \"LinkInvite\" && !emailFromLink ? (\n <div className=\"back-title\">\n <IconButton size={16} iconName={ArrowIcon} onClick={onClickBack} />\n <Text fontWeight={600} onClick={onClickBack}>\n {t(\"Common:Back\")}\n </Text>\n </div>\n ) : null}\n \n <Text fontWeight={600} fontSize=\"16px\">",
+      "line_number": 71,
+      "context": "<Text\n fontWeight={600}\n onClick={onClickBack}\n dataTestId=\"greeting_back_text\"\n >\n {t(\"Common:Back\")}\n </Text>\n </div>\n ) : null}\n \n <Text fontWeight={600} fontSize=\"16px\">",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/components/LoginForm/sub-components/EmailContainer.tsx",
-      "line_number": 88,
-      "context": "<div className=\"invitation-info-container\">\n <div className=\"sign-in-container\">\n <div className=\"back-title\">\n <IconButton size={16} iconName={ArrowIcon} onClick={onClickBack} />\n <Text fontWeight={600} onClick={onClickBack}>\n {t(\"Common:Back\")}\n </Text>\n </div>\n <Text fontWeight={600} fontSize=\"16px\">\n {t(\"Common:LoginButton\")}\n </Text>",
+      "line_number": 97,
+      "context": "<Text\n fontWeight={600}\n onClick={onClickBack}\n dataTestId=\"email_invitation_back_text\"\n >\n {t(\"Common:Back\")}\n </Text>\n </div>\n <Text fontWeight={600} fontSize=\"16px\">\n {t(\"Common:LoginButton\")}\n </Text>",
       "module": "/packages/login"
     },
     {

@@ -242,7 +242,14 @@ const Services: React.FC<ServicesProps> = ({
     changeServiceState(confirmActionType);
 
     try {
-      await setServiceState(raw);
+      const result = await setServiceState(raw);
+
+      if (!result) {
+        toastr.error(t("Common:UnexpectedError"));
+        changeServiceState(confirmActionType);
+        return;
+      }
+
       toastr.success(t("Services:BackupServiceEnabled"));
     } catch (error) {
       toastr.error(t("Common:UnexpectedError"));

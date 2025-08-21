@@ -300,7 +300,7 @@ export default inject<
       setIsInited,
     } = backup;
 
-    const isEnableAuto = backupPageEnable;
+    const isEnableAuto = backupPageEnable ?? false;
 
     const defaultRegion =
       defaultFormSettings && "region" in defaultFormSettings

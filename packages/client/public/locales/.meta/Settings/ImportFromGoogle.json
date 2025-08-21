@@ -3,7 +3,7 @@
   "content": "Import from Google Workspace",
   "content_en_sha1_hash": "3e8c6ed520af16193ff43a67f65b78870ac079ec",
   "created_at": "2025-05-19T21:30:51.657Z",
-  "updated_at": "2025-07-10T11:11:06.900Z",
+  "updated_at": "2025-08-21T14:45:44.001Z",
   "comment": {
     "text": "This translation key is used to display the label \"Import from Google Workspace\" in the portal settings UI. It appears as a header in a dialog or section where users can configure their workspace imports.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Section/Header/index.js",
-      "line_number": 317,
+      "line_number": 345,
       "context": "];\n \n const translatedHeader =\n header === IMPORT_HEADER_CONST\n ? workspace === \"GoogleWorkspace\"\n ? t(\"ImportFromGoogle\")\n : workspace === \"Nextcloud\"\n ? t(\"ImportFromNextcloud\")\n : workspace === \"Workspace\"\n ? t(\"ImportFromPortal\", {\n organizationName: logoText,",
       "module": "/packages/client"
     }

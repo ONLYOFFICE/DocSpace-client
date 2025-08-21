@@ -1,0 +1,28 @@
+{
+  "key_path": "ConnectService",
+  "content": "Connect the service <1>here</1> to enable backup features",
+  "content_en_sha1_hash": "4f70addb1e5b28c5f79a86578b607f9737e90c75",
+  "created_at": "2025-08-21T14:45:38.901Z",
+  "updated_at": "2025-08-21T14:48:42.965Z",
+  "comment": {
+    "text": "This text instructs the user to connect a service to enable backup features. It appears within a warning component, likely as a link prompting connection. Translators should ensure the phrasing clearly conveys the action needed to activate backup functionality.",
+    "is_auto": true,
+    "updated_at": "2025-08-21T14:48:42.965Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/Layout/WarningComponent/index.tsx",
+      "line_number": 82,
+      "context": "const setWarningTextFunc = () => {\n const connectServiceLink = (\n <Trans\n t={t}\n i18nKey=\"ConnectService\"\n ns=\"Services\"\n components={{\n 1: (\n <Link\n key=\"connect-service-link\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

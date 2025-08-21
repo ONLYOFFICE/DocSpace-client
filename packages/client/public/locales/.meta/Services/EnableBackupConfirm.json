@@ -1,0 +1,28 @@
+{
+  "key_path": "EnableBackupConfirm",
+  "content": "Enabling the Backup service will allow all {{productName}} administrators to create backups anytime, as long as the wallet balance is sufficient. Are you sure you want to continue?",
+  "content_en_sha1_hash": "30f47a8085a7a1bf1f7bbd806bf81f5a52c764c0",
+  "created_at": "2025-08-21T14:45:38.902Z",
+  "updated_at": "2025-08-21T14:48:23.555Z",
+  "comment": {
+    "text": "This key displays a confirmation dialog message when enabling the Backup service. It informs administrators that enabling backups allows them to create backups as long as the wallet balance is sufficient, and asks for confirmation. The message includes the product name for localization.",
+    "is_auto": true,
+    "updated_at": "2025-08-21T14:48:23.555Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/index.tsx",
+      "line_number": 138,
+      "context": "}, []);\n \n const confirmationDialogContent = {\n backup: {\n title: t(\"Common:Backup\"),\n body: t(\"Services:EnableBackupConfirm\", {\n productName: t(\"Common:ProductName\"),\n }),\n },\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

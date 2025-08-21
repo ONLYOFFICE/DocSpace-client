@@ -237,3 +237,14 @@ export type TAutoTopUpSettings = {
   upToBalance: number;
   currency: string | null;
 };
+
+export type TransactionHistoryReport = {
+  id: string;
+  error: string;
+  percentage: number;
+  isCompleted: boolean;
+  status: number;
+  resultFileId: number;
+  resultFileName: string;
+  resultFileUrl: string;
+};

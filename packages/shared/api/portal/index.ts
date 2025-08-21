@@ -473,9 +473,9 @@ export async function getTransactionHistory(
   endDate: string,
   credit: boolean = true,
   withdrawal: boolean = true,
-  participantName?: string = "",
-  offset?: number = 0,
-  limit?: number = 25,
+  participantName: string = "",
+  offset: number = 0,
+  limit: number = 25,
 ) {
   const params = {
     startDate,
@@ -535,7 +535,7 @@ export async function updateAutoTopUpSettings(
   return request(options);
 }
 
-export async function getTransactionHistoryReport(
+export async function startTransactionHistoryReport(
   startDate: string,
   endDate: string,
   credit: boolean,
@@ -551,7 +551,17 @@ export async function getTransactionHistoryReport(
       withdrawal,
     },
   };
-  const res = (await request(options)) as string;
+  const res = (await request(options)) as TransactionHistoryReport;
+
+  return res;
+}
+
+export async function checkTransactionHistoryReport() {
+  const options = {
+    method: "get",
+    url: "/portal/payment/customer/operationsreport",
+  };
+  const res = (await request(options)) as TransactionHistoryReport;
 
   return res;
 }

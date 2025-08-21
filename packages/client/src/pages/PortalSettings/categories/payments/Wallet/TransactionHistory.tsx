@@ -39,7 +39,11 @@ import {
 } from "@docspace/shared/components/combobox";
 import { DatePicker } from "@docspace/shared/components/date-picker";
 import { toastr } from "@docspace/shared/components/toast";
-import { getTransactionHistoryReport } from "@docspace/shared/api/portal";
+import {
+  checkTransactionHistoryReport,
+  getTransactionHistoryReport,
+  startTransactionHistoryReport,
+} from "@docspace/shared/api/portal";
 import {
   DeviceType,
   EmployeeStatus,
@@ -313,17 +317,49 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
     const isDebit = selectedType.key !== "credit";
 
     try {
-      const editorLink = await getTransactionHistoryReport(
+      await startTransactionHistoryReport(
         formatDate!(startDate),
         formatDate!(endDate),
         isCredit,
         isDebit,
       );
 
-      if (!editorLink) return;
+      const result = await new Promise<any>((resolve, reject) => {
+        const checkStatus = async () => {
+          try {
+            const response = await checkTransactionHistoryReport();
+
+            if (!response) {
+              reject(new Error(t("Common:UnexpectedError")));
+              return;
+            }
+
+            if (response.error) {
+              reject(new Error(response.error));
+              return;
+            }
+
+            if (response.isCompleted) {
+              resolve(response);
+              return;
+            }
+
+            setTimeout(checkStatus, 1000);
+          } catch (err) {
+            reject(err);
+          }
+        };
+
+        checkStatus();
+      });
+
+      if (!result || !result.resultFileUrl) {
+        throw new Error(t("Common:UnexpectedError"));
+      }
 
       setTimeout(
-        () => window.open(editorLink, openOnNewPage ? "_blank" : "_self"),
+        () =>
+          window.open(result.resultFileUrl, openOnNewPage ? "_blank" : "_self"),
         100,
       );
     } catch (e) {
@@ -343,6 +379,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         components={{
           1: (
             <DatePicker
+              key="start-date-picker"
               initialDate={startDate}
               onChange={onStartDateChange}
               selectDateText={t("Common:SelectDate")}
@@ -358,6 +395,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
           ),
           2: (
             <DatePicker
+              key="end-date-picker"
               initialDate={endDate}
               onChange={onEndDateChange}
               selectDateText={t("Common:SelectDate")}

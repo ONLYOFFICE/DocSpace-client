@@ -91,7 +91,7 @@ export type TConfirmRouteContext = {
     confirmHeader?: string;
     key?: string;
     emplType?: string;
-    email?: string;
+    encemail?: string;
     uid?: string;
     type?: string;
     first?: string;
@@ -103,12 +103,16 @@ export type TConfirmRouteContext = {
     roomId?: string;
     title?: string;
   };
+  confirmLinkResult: {
+    result?: ValidationResult;
+    email?: string;
+  };
 };
 
 export type TConfirmLinkParams = {
   key: string;
   emplType?: string;
-  email: string;
+  encemail: string;
   uid?: string;
   type?: string;
   first?: string;
@@ -121,6 +125,7 @@ export type TConfirmLinkResult = {
   result: ValidationResult;
   roomId?: string;
   title?: string;
+  email?: string;
 };
 
 export type TCreateUserData = {

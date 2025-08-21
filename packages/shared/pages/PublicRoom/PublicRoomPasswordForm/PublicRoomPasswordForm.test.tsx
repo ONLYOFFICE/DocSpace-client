@@ -84,8 +84,10 @@ describe("PublicRoomPassword", () => {
   it("renders correctly", () => {
     render(<PublicRoomPassword {...defaultProps} />);
 
-    expect(screen.getByText("Common:EnterPassword")).toBeInTheDocument();
-    expect(screen.getByText("Common:NeedPassword:")).toBeInTheDocument();
+    expect(screen.getByText("Common:PasswordRequired")).toBeInTheDocument();
+    expect(
+      screen.getByText("Common:PasswordProtectedRoomFolder:"),
+    ).toBeInTheDocument();
     expect(screen.getByText("Test Room")).toBeInTheDocument();
     expect(screen.getByPlaceholderText("Common:Password")).toBeInTheDocument();
     expect(

@@ -217,6 +217,9 @@ export type TTransactionCollection = {
   withdrawal: number;
   currency: string;
   description: string;
+  details: string;
+  participantName?: string;
+  participantDisplayName?: string;
 };
 
 export type TTransactionHistory = {

@@ -80,8 +80,23 @@ const TransactionRow: React.FC<TransactionRowProps> = ({
         </Text>
       </TableCell>
       <TableCell>
-        <Text fontWeight={600} fontSize="11px">
+        <Text fontWeight={600} fontSize="11px" as="span">
           {transaction.description}
+        </Text>
+        {transaction.details ? (
+          <Text
+            fontWeight={600}
+            fontSize="11px"
+            as="span"
+            className={styles.transactionRowDetails}
+          >
+            ({transaction.details})
+          </Text>
+        ) : null}
+      </TableCell>
+      <TableCell>
+        <Text fontWeight={600} fontSize="11px">
+          {transaction.participantDisplayName || "—"}
         </Text>
       </TableCell>
       <TableCell>

@@ -96,9 +96,21 @@ const TransactionRowView: React.FC<TransactionRowViewProps> = ({
         sideColor={theme?.filesSection?.rowView?.sideColor || ""}
         sectionWidth={sectionWidth}
       >
-        <Text fontWeight={600} fontSize="15px">
-          {transaction.description}
-        </Text>
+        <div>
+          <Text fontWeight={600} fontSize="15px" as="span">
+            {transaction.description}
+          </Text>
+          {transaction.details ? (
+            <Text
+              fontWeight={600}
+              fontSize="11px"
+              as="span"
+              className={styles.transactionRowDetails}
+            >
+              ({transaction.details})
+            </Text>
+          ) : null}
+        </div>
         <div />
 
         <Text fontWeight={600} fontSize="11px" dataTestId="transaction_date">

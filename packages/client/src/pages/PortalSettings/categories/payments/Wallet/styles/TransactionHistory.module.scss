@@ -263,3 +263,8 @@
     transform: translateX(100%);
   }
 }
+
+.transactionRowDetails {
+  color: var(--payment-dialog-text);
+  margin-inline-start: 4px;
+}

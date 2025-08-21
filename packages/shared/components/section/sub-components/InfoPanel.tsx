@@ -24,11 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 
 import { DeviceType } from "../../../enums";
 import { Portal } from "../../portal";
+import { isMobile } from "../../../utils";
 
 import { InfoPanelProps } from "../Section.types";
 import styles from "../Section.module.scss";
@@ -45,8 +46,14 @@ const InfoPanel = ({
   asideInfoPanel,
 }: InfoPanelProps) => {
   const infoPanelRef = useRef<null | HTMLDivElement>(null);
+  const [viewMobile, setViewMobile] = useState(false);
+
+  const onCheckView = () => setViewMobile(isMobile());
 
   useEffect(() => {
+    onCheckView();
+    window.addEventListener("resize", onCheckView);
+
     const onMouseDown = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (target?.id === "InfoPanelWrapper") setIsVisible?.(false);
@@ -60,20 +67,23 @@ const InfoPanel = ({
         setIsVisible?.(false);
     };
 
-    return () => document.removeEventListener("mousedown", onMouseDown);
+    return () => {
+      document.removeEventListener("mousedown", onMouseDown);
+      window.removeEventListener("resize", onCheckView);
+    };
   }, [currentDeviceType, isVisible, setIsVisible, viewAs]);
 
   const infoPanelComponent = (
     <div
       className={classNames("info-panel", styles.infoPanelWrapper, {
-        [styles.asideInfoPanel]: asideInfoPanel,
+        [styles.asideInfoPanel]: asideInfoPanel && !viewMobile,
       })}
       id="InfoPanelWrapper"
       ref={infoPanelRef}
     >
       <div
         className={classNames(styles.infoPanel, {
-          [styles.asideInfoPanel]: asideInfoPanel,
+          [styles.asideInfoPanel]: asideInfoPanel && !viewMobile,
         })}
       >
         {children}
@@ -102,7 +112,7 @@ const InfoPanel = ({
     (anotherDialogOpen && currentDeviceType !== DeviceType.desktop) ||
     (currentDeviceType !== DeviceType.desktop && isMobileHidden)
     ? null
-    : isMobileView || asideInfoPanel
+    : isMobileView || (asideInfoPanel && !viewMobile)
       ? renderPortalInfoPanel()
       : infoPanelComponent;
 };

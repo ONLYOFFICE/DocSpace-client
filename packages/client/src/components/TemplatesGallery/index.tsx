@@ -43,17 +43,15 @@ interface FormComponentProps {
 
 const FormComponent = Form as React.ComponentType<FormComponentProps>;
 
-const TemplatesGallery = (props: { templatesGalleryVisible: boolean }) => {
-  const { templatesGalleryVisible } = props;
+const TemplatesGallery = (props: {
+  templatesGalleryVisible: boolean;
+  setCurrentExtensionGallery: (extension: string) => void;
+}) => {
+  const { templatesGalleryVisible, setCurrentExtensionGallery } = props;
   const [viewMobile, setViewMobile] = useState(false);
-  const [currentTabId, setCurrentTabId] = useState("forms");
+  const [currentTabId, setCurrentTabId] = useState("documents");
 
   const tabs = [
-    {
-      id: "forms",
-      name: "Forms",
-      content: <FormComponent />,
-    },
     {
       id: "documents",
       name: "Documents",
@@ -68,6 +66,11 @@ const TemplatesGallery = (props: { templatesGalleryVisible: boolean }) => {
       id: "presentation",
       name: "Presentation",
       content: <FormComponent tabPresentation />,
+    },
+    {
+      id: "forms",
+      name: "Forms",
+      content: <FormComponent />,
     },
   ];
 
@@ -88,6 +91,17 @@ const TemplatesGallery = (props: { templatesGalleryVisible: boolean }) => {
 
   const onSelect = (e: { id: SetStateAction<string> }) => {
     setCurrentTabId(e.id);
+    const fileExtension =
+      e.id === "forms"
+        ? ".pdf"
+        : e.id === "documents"
+          ? ".docx"
+          : e.id === "spreadsheet"
+            ? ".xlsx"
+            : e.id === "presentation"
+              ? ".pptx"
+              : "";
+    setCurrentExtensionGallery(fileExtension);
   };
 
   const nodeTemplatesGallery = (
@@ -135,10 +149,10 @@ const TemplatesGallery = (props: { templatesGalleryVisible: boolean }) => {
 };
 
 export default inject<TStore>(({ oformsStore }) => {
-  const { setTemplatesGalleryVisible, templatesGalleryVisible } = oformsStore;
+  const { templatesGalleryVisible, setCurrentExtensionGallery } = oformsStore;
 
   return {
-    setTemplatesGalleryVisible,
     templatesGalleryVisible,
+    setCurrentExtensionGallery,
   };
 })(observer(TemplatesGallery));

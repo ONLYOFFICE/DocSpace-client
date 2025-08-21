@@ -68,13 +68,7 @@ const Form: FC<FormProps> = ({
 
   const [viewMobile, setViewMobile] = useState(false);
 
-  const onCheckView = () => {
-    if (isMobile()) {
-      setViewMobile(true);
-    } else {
-      setViewMobile(false);
-    }
-  };
+  const onCheckView = () => setViewMobile(isMobile());
 
   useEffect(() => {
     onCheckView();

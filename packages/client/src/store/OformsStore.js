@@ -79,6 +79,8 @@ class OformsStore {
 
   templatesGalleryVisible = false;
 
+  currentExtensionGallery = ".docx";
+
   submitToGalleryTileIsVisible = !localStorage.getItem(
     "submitToGalleryTileIsHidden",
   );
@@ -374,6 +376,10 @@ class OformsStore {
   setTemplatesGalleryVisible = (templatesGalleryVisible) => {
     console.log("setTemplatesGalleryVisible", templatesGalleryVisible);
     this.templatesGalleryVisible = templatesGalleryVisible;
+  };
+
+  setCurrentExtensionGallery = (extension) => {
+    this.currentExtensionGallery = extension;
   };
 
   get hasGalleryFiles() {

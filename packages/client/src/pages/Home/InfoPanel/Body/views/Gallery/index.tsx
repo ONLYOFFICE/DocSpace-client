@@ -46,11 +46,11 @@ import ItemTitle from "./ItemTitle";
 
 type GalleryProps = {
   gallerySelected?: OformsStore["gallerySelected"] | any;
-  getIcon?: FilesSettingsStore["getIcon"];
+
   culture?: string;
 };
 
-const Gallery = ({ gallerySelected, getIcon, culture }: GalleryProps) => {
+const Gallery = ({ gallerySelected, culture }: GalleryProps) => {
   const { t } = useTranslation([
     "InfoPanel",
     "FormGallery",
@@ -60,43 +60,24 @@ const Gallery = ({ gallerySelected, getIcon, culture }: GalleryProps) => {
 
   if (!gallerySelected) return <NoItem isGallery />;
 
-  const thumbnailBlank = getIcon?.(96, ".pdf");
   const thumbnailUrl =
-    gallerySelected?.attributes?.template_image?.data?.attributes?.formats
-      ?.small?.url;
-
+    gallerySelected?.attributes.card_prewiew.data?.attributes.url;
   const formTitle = gallerySelected?.attributes?.name_form;
 
   return (
     <div data-testid="info_panel_gallery_container">
       <ItemTitle gallerySelected={gallerySelected} />
-      {thumbnailUrl ? (
-        <div
-          className={styles.galleryThumbnail}
-          data-testid="info_panel_gallery_thumbnail"
-        >
-          <img
-            className={styles.galleryImg}
-            src={thumbnailUrl}
-            alt=""
-            data-testid="info_panel_gallery_image"
-          />
-        </div>
-      ) : (
-        <div
-          className={classNames(
-            styles.galleryNoThumbnail,
-            "no-thumbnail-img-wrapper",
-          )}
-          data-testid="info_panel_gallery_no_thumbnail"
-        >
-          <ReactSVG
-            className={styles.noThumbnailImg}
-            src={thumbnailBlank ?? ""}
-            data-testid="info_panel_gallery_no_thumbnail_icon"
-          />
-        </div>
-      )}
+      <div
+        className={styles.galleryThumbnail}
+        data-testid="info_panel_gallery_thumbnail"
+      >
+        <img
+          className={styles.galleryImg}
+          src={thumbnailUrl}
+          alt=""
+          data-testid="info_panel_gallery_image"
+        />
+      </div>
 
       <div
         className={commonStyles.link}
@@ -114,7 +95,6 @@ const Gallery = ({ gallerySelected, getIcon, culture }: GalleryProps) => {
           {t("FormGallery:SuggestChanges")}
         </Link>
       </div>
-
       <div
         className={commonStyles.subtitle}
         data-testid="info_panel_gallery_description_header"
@@ -123,7 +103,6 @@ const Gallery = ({ gallerySelected, getIcon, culture }: GalleryProps) => {
           {t("Description")}
         </Text>
       </div>
-
       <Text
         className={styles.galleryFormDescription}
         fontSize="13px"
@@ -134,7 +113,6 @@ const Gallery = ({ gallerySelected, getIcon, culture }: GalleryProps) => {
         {gallerySelected?.attributes?.template_desc ||
           gallerySelected?.attributes?.description_card}
       </Text>
-
       <div
         className={commonStyles.subtitle}
         data-testid="info_panel_gallery_properties_header"
@@ -143,7 +121,6 @@ const Gallery = ({ gallerySelected, getIcon, culture }: GalleryProps) => {
           {t("Properties")}
         </Text>
       </div>
-
       <div
         className={commonStyles.properties}
         data-testid="info_panel_gallery_properties"
@@ -165,19 +142,13 @@ const Gallery = ({ gallerySelected, getIcon, culture }: GalleryProps) => {
   );
 };
 
-export default inject(
-  ({ settingsStore, filesSettingsStore, oformsStore }: TStore) => {
-    const { culture } = settingsStore;
+export default inject(({ settingsStore, oformsStore }: TStore) => {
+  const { culture } = settingsStore;
 
-    const { gallerySelected } = oformsStore;
+  const { gallerySelected } = oformsStore;
 
-    const { getIcon } = filesSettingsStore;
-
-    return {
-      getIcon,
-
-      gallerySelected,
-      culture,
-    };
-  },
-)(observer(Gallery));
+  return {
+    gallerySelected,
+    culture,
+  };
+})(observer(Gallery));

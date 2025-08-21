@@ -62,6 +62,7 @@ const ItemTitle = ({
   currentColorScheme,
 
   getFormGalleryContextOptions,
+  currentExtensionGallery,
 }: ItemTitleProps) => {
   const { t } = useTranslation(["FormGallery", "Common"]);
 
@@ -88,7 +89,10 @@ const ItemTitle = ({
       ref={itemTitleRef}
       data-testid="info_panel_gallery_item_title"
     >
-      <ReactSVG className="icon" src={getIcon?.(32, ".pdf") ?? ""} />
+      <ReactSVG
+        className="icon"
+        src={getIcon?.(32, currentExtensionGallery) ?? ""}
+      />
       <Text className="text">{gallerySelected?.attributes?.name_form}</Text>
 
       <Text color={currentColorScheme?.main?.accent} className="free-label">
@@ -123,10 +127,16 @@ const ItemTitle = ({
 };
 
 export default inject(
-  ({ contextOptionsStore, settingsStore, filesSettingsStore }: TStore) => ({
+  ({
+    contextOptionsStore,
+    settingsStore,
+    filesSettingsStore,
+    oformsStore,
+  }: TStore) => ({
     getFormGalleryContextOptions:
       contextOptionsStore.getFormGalleryContextOptions,
     currentColorScheme: settingsStore.currentColorScheme,
     getIcon: filesSettingsStore.getIcon,
+    currentExtensionGallery: oformsStore.currentExtensionGallery,
   }),
 )(observer(ItemTitle));

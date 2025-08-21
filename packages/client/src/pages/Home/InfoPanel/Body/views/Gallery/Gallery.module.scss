@@ -33,12 +33,20 @@
   overflow: hidden;
   border-radius: 6px;
   -webkit-tap-highlight-color: #{$tap-highlight};
-  height: 346px;
-  border: var(--info-panel-gallery-border-color);
+  height: 340px;
+  border: 1px solid var(--info-panel-gallery-border-color);
+
+  padding: 18px 20px;
 
   .galleryImg {
     display: block;
     margin: 0 auto;
+
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
   }
 
   @include mixins.mobile {

@@ -56,7 +56,7 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 10.14.0
+          version: 10.15.0
       - name: Use Node.js 22.x
         uses: actions/setup-node@v4
         with:
@@ -74,7 +74,7 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 10.14.0
+          version: 10.15.0
       - name: Use Node.js 22.x
         uses: actions/setup-node@v4
         with:
@@ -85,23 +85,23 @@ jobs:
       - name: Run tsc
         run: pnpm tsc
   unit-tests:
-     name: "Unit tests"
-     runs-on: ubuntu-latest
-     steps:
-       - uses: actions/checkout@v4
-       - name: Install pnpm
-         uses: pnpm/action-setup@v4
-         with:
-           version: 10.14.0
-       - name: Use Node.js 22.x
-         uses: actions/setup-node@v4
-         with:
-           node-version: 22.x
-           cache: "pnpm"
-       - name: Install dependencies
-         run: pnpm install
-       - name: Run unit tests
-         run: pnpm test
+    name: "Unit tests"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.15.0
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: "pnpm"
+      - name: Install dependencies
+        run: pnpm install
+      - name: Run unit tests
+        run: pnpm test
   images:
     name: "Images tests"
     runs-on: ubuntu-latest

@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { TTranslation } from "@docspace/shared/types";
 import { truncateNumberToFraction } from "@docspace/shared/utils/common";
 
 export const formattedBalanceTokens = (
@@ -69,7 +70,7 @@ export const accountingLedgersFormat = (
 export const getServiceQuantity = (
   quantity: number,
   serviceUnit: string,
-  t,
+  t: TTranslation,
 ) => {
   if (!serviceUnit) return "—";
   return t("UnitCount", { unit: serviceUnit, count: quantity });

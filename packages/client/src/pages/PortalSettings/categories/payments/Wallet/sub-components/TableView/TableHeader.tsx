@@ -60,7 +60,7 @@ const TransactionHistoryTableHeader = (props: TableHeaderProps) => {
     },
     {
       key: "Contact",
-      title: t("Common:Contact"),
+      title: t("Payments:Contact"),
       enable: true,
       resizable: true,
       minWidth: 120,

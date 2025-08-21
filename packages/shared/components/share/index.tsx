@@ -395,6 +395,8 @@ const Share = (props: ShareProps) => {
   };
 
   const onCopyLink = (link: TFileLink) => {
+    if (link.sharedTo?.isExpired) return;
+
     copyShareLink(infoPanelSelection, link, t);
   };
 

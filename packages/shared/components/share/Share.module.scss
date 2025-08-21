@@ -247,7 +247,9 @@
   align-items: center;
   gap: 8px;
 
-  cursor: pointer;
+  .linkOptionsTitle:not(.isExpired) {
+    cursor: pointer;
+  }
 
   .linkActionsCopyIcon {
     width: 12px;

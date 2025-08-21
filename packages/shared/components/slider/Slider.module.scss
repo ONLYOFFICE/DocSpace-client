@@ -42,6 +42,11 @@
     background-image: var(--slider-background-image);
     background-size: var(--size-prop) 100%;
     background-repeat: no-repeat;
+    background-position: left center;
+
+    [dir="rtl"] & {
+      background-position: right center;
+    }
 
     &.disabled {
       opacity: 0.32;

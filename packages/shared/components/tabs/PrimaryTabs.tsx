@@ -190,7 +190,9 @@ const PrimaryTabs = (props: TabsProps) => {
             }}
             data-testid={`${item.id}_tab`}
           >
-            <span className={styles.tabText}>{item.name}</span>
+            <span className={styles.tabText} suppressHydrationWarning>
+              {item.name}
+            </span>
             <div
               className={classNames(
                 styles.tabSubLine,
@@ -220,7 +222,9 @@ const PrimaryTabs = (props: TabsProps) => {
             </div>
 
             {item.badge ? (
-              <span className={styles.tabBadge}>{item.badge}</span>
+              <span className={styles.tabBadge} suppressHydrationWarning>
+                {item.badge}
+              </span>
             ) : null}
           </div>
         );

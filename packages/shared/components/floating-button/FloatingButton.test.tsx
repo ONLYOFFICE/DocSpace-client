@@ -25,12 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen, fireEvent } from "@testing-library/react";
+import { screen, fireEvent, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { FloatingButton } from ".";
 import { FloatingButtonIcons } from "./FloatingButton.enums";
-import { renderWithTheme } from "../../utils/render-with-theme";
-import { Base } from "../../themes";
 
 describe("FloatingButton", () => {
   const defaultProps = {
@@ -38,12 +36,8 @@ describe("FloatingButton", () => {
     percent: 5,
   };
 
-  const theme = {
-    ...Base,
-  };
-
   const renderComponent = (ui: React.ReactNode) => {
-    return renderWithTheme(ui, theme);
+    return render(ui);
   };
 
   it("renders without crashing", () => {
@@ -89,19 +83,19 @@ describe("FloatingButton", () => {
 
   it("renders different icons correctly", () => {
     Object.values(FloatingButtonIcons).forEach((icon) => {
-      const { container } = renderComponent(
-        <FloatingButton {...defaultProps} icon={icon} />,
-      );
-      const iconElement = container.querySelector(`[data-icon="${icon}"]`);
+      renderComponent(<FloatingButton {...defaultProps} icon={icon} />);
+
+      const iconElement = screen.getByTestId(`icon-${icon}`);
       expect(iconElement).toBeInTheDocument();
     });
   });
 
-  it("clears upload history when clearUploadedFilesHistory is called", () => {
+  it("calls clearUploadedFilesHistory after close icon click", () => {
     const clearUploadedFilesHistory = jest.fn();
     renderComponent(
       <FloatingButton
         {...defaultProps}
+        showCancelButton
         clearUploadedFilesHistory={clearUploadedFilesHistory}
       />,
     );

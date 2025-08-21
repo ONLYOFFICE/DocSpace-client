@@ -25,13 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen, fireEvent } from "@testing-library/react";
+import { screen, fireEvent, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 
 import SearchReactSvgUrl from "PUBLIC_DIR/images/search.react.svg?url";
 
-import { renderWithTheme } from "../../utils/render-with-theme";
 import { Base } from "../../themes";
 
 import { IconButtonProps } from "./IconButton.types";
@@ -47,32 +46,32 @@ const baseProps: IconButtonProps = {
 
 describe("<IconButton />", () => {
   it("renders without error", () => {
-    renderWithTheme(<IconButton {...baseProps} />);
+    render(<IconButton {...baseProps} />);
     expect(screen.getByTestId("icon-button")).toBeInTheDocument();
     expect(screen.getByTestId("icon-button-svg")).toBeInTheDocument();
   });
 
   it("accepts and applies id prop", () => {
     const testId = "test-id";
-    renderWithTheme(<IconButton {...baseProps} id={testId} />);
+    render(<IconButton {...baseProps} id={testId} />);
     expect(screen.getByTestId("icon-button")).toHaveAttribute("id", testId);
   });
 
   it("accepts and applies className prop", () => {
     const testClass = "test-class";
-    renderWithTheme(<IconButton {...baseProps} className={testClass} />);
+    render(<IconButton {...baseProps} className={testClass} />);
     expect(screen.getByTestId("icon-button")).toHaveClass(testClass);
   });
 
   it("accepts and applies style prop", () => {
     const testStyle = { backgroundColor: "red" };
-    renderWithTheme(<IconButton {...baseProps} style={testStyle} />);
+    render(<IconButton {...baseProps} style={testStyle} />);
     expect(screen.getByTestId("icon-button")).toHaveStyle(testStyle);
   });
 
   it("handles click events", async () => {
     const handleClick = jest.fn();
-    renderWithTheme(<IconButton {...baseProps} onClick={handleClick} />);
+    render(<IconButton {...baseProps} onClick={handleClick} />);
 
     const button = screen.getByTestId("icon-button");
     await userEvent.click(button);
@@ -82,9 +81,7 @@ describe("<IconButton />", () => {
 
   it("prevents click events when disabled", async () => {
     const handleClick = jest.fn();
-    renderWithTheme(
-      <IconButton {...baseProps} onClick={handleClick} isDisabled />,
-    );
+    render(<IconButton {...baseProps} onClick={handleClick} isDisabled />);
 
     const button = screen.getByTestId("icon-button");
     await userEvent.click(button);
@@ -97,7 +94,7 @@ describe("<IconButton />", () => {
     const clickColor = "blue";
     const handleMouseDown = jest.fn();
 
-    renderWithTheme(
+    render(
       <IconButton
         {...baseProps}
         iconClickName={clickIconName}
@@ -117,7 +114,7 @@ describe("<IconButton />", () => {
     const handleMouseUp = jest.fn();
     const hoverIconName = "hover-icon.svg";
 
-    renderWithTheme(
+    render(
       <IconButton
         {...baseProps}
         iconHoverName={hoverIconName}
@@ -135,7 +132,7 @@ describe("<IconButton />", () => {
   it("handles right click mouse up", () => {
     const handleMouseUp = jest.fn();
 
-    renderWithTheme(<IconButton {...baseProps} onMouseUp={handleMouseUp} />);
+    render(<IconButton {...baseProps} onMouseUp={handleMouseUp} />);
 
     const button = screen.getByTestId("icon-button");
     fireEvent.mouseUp(button, { button: 2 });
@@ -145,13 +142,13 @@ describe("<IconButton />", () => {
 
   it("renders custom icon node when provided", () => {
     const CustomIcon = () => <div data-testid="custom-icon">Custom Icon</div>;
-    renderWithTheme(<IconButton {...baseProps} iconNode={<CustomIcon />} />);
+    render(<IconButton {...baseProps} iconNode={<CustomIcon />} />);
 
     expect(screen.getByTestId("custom-icon")).toBeInTheDocument();
   });
 
   it("updates icon on iconName prop change", () => {
-    const { rerender } = renderWithTheme(<IconButton {...baseProps} />);
+    const { rerender } = render(<IconButton {...baseProps} />);
 
     const newIconName = "new-icon.svg";
     rerender(
@@ -166,7 +163,7 @@ describe("<IconButton />", () => {
 
   it("applies correct size", () => {
     const customSize = 40;
-    renderWithTheme(<IconButton {...baseProps} size={customSize} />);
+    render(<IconButton {...baseProps} size={customSize} />);
     expect(screen.getByTestId("icon-button")).toHaveStyle({
       "--icon-button-size": `${customSize}px`,
     });
@@ -174,13 +171,13 @@ describe("<IconButton />", () => {
 
   it("displays title when provided", () => {
     const title = "Button Title";
-    renderWithTheme(<IconButton {...baseProps} title={title} />);
+    render(<IconButton {...baseProps} title={title} />);
     expect(screen.getByTitle(title)).toBeInTheDocument();
   });
 
   it("handles data-tip attribute", () => {
     const dataTip = "tooltip text";
-    renderWithTheme(<IconButton {...baseProps} dataTip={dataTip} />);
+    render(<IconButton {...baseProps} dataTip={dataTip} />);
     expect(screen.getByTestId("icon-button")).toHaveAttribute(
       "data-tip",
       dataTip,
@@ -189,9 +186,7 @@ describe("<IconButton />", () => {
 
   it("resets to default icon on mouse leave", async () => {
     const hoverIconName = "hover-icon.svg";
-    renderWithTheme(
-      <IconButton {...baseProps} iconHoverName={hoverIconName} />,
-    );
+    render(<IconButton {...baseProps} iconHoverName={hoverIconName} />);
 
     const button = screen.getByTestId("icon-button");
     fireEvent.mouseEnter(button);
@@ -201,5 +196,46 @@ describe("<IconButton />", () => {
     fireEvent.mouseLeave(button);
     await screen.findByTestId("icon-button");
     expect(button).toHaveAttribute("data-iconname", baseProps.iconName);
+  });
+
+  it("Apply color correctly", () => {
+    render(<IconButton color="rgb(255, 0, 0)" />);
+    const button = screen.getByTestId("icon-button");
+
+    const colorVar = window
+      .getComputedStyle(button)
+      .getPropertyValue("--icon-button-color");
+
+    expect(colorVar).toBe("rgb(255, 0, 0)");
+  });
+
+  it("applies CSS variable color with and without var correctly", () => {
+    const { rerender } = render(<IconButton color="--custom-color" />);
+    const button = screen.getByTestId("icon-button");
+
+    const colorVar = window
+      .getComputedStyle(button)
+      .getPropertyValue("--icon-button-color");
+
+    expect(colorVar).toBe("var(--custom-color)");
+
+    rerender(<IconButton color="var(--custom-color-2)" />);
+
+    const colorVar2 = window
+      .getComputedStyle(button)
+      .getPropertyValue("--icon-button-color");
+
+    expect(colorVar2).toBe("var(--custom-color-2)");
+  });
+
+  it("maps accent color correctly", () => {
+    render(<IconButton color="accent" />);
+    const button = screen.getByTestId("icon-button");
+
+    const colorVar = window
+      .getComputedStyle(button)
+      .getPropertyValue("--icon-button-color");
+
+    expect(colorVar).toBe("var(--accent-main)");
   });
 });

@@ -1,6 +1,5 @@
 @use "../../styles/variables/colors";
 @use "../../styles/mixins";
-@use "../../styles/common-input-styles";
 
 .copyIconWrapper {
   position: absolute;
@@ -69,7 +68,7 @@
 }
 
 .textarea {
-  @include common-input-styles.common-input-color-styles;
+  @include mixins.common-input-color-styles;
 
   width: 100%;
   height: 100%;
@@ -100,7 +99,7 @@
 }
 
 .scrollbar {
-  @include common-input-styles.common-input-styles;
+  @include mixins.common-input-styles;
   -webkit-background-clip: unset !important;
 
   width: 100% !important;

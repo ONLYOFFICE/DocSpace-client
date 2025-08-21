@@ -84,22 +84,18 @@ describe("LinkWithDropdown", () => {
     expect(dropdown).toHaveAttribute("role", "listbox");
 
     // Check if dropdown items are rendered
-    const item1 = screen.getByTestId("link_with_drop_down_key1");
-    const item2 = screen.getByTestId("link_with_drop_down_key2");
-    const item4 = screen.getByTestId("link_with_drop_down_key4");
+    const items = screen.getAllByTestId((testId) =>
+      testId.startsWith("link_with_drop_down_"),
+    );
+    expect(items).toHaveLength(4); // Including separator
 
-    // Verify menu items are in the document
-    expect(item1).toBeInTheDocument();
-    expect(item2).toBeInTheDocument();
-    expect(item4).toBeInTheDocument();
-
-    // Verify menu items text content
-    expect(item1).toHaveTextContent("Button 1");
-    expect(item2).toHaveTextContent("Button 2");
-    expect(item4).toHaveTextContent("Button 3");
+    // Verify menu items text content (excluding separator)
+    expect(items[0]).toHaveTextContent("Button 1");
+    expect(items[1]).toHaveTextContent("Button 2");
+    expect(items[3]).toHaveTextContent("Button 3");
 
     // Verify menu item structure
-    [item1, item2, item4].forEach((item) => {
+    items.forEach((item) => {
       expect(item).toHaveClass("drop-down-item");
     });
 

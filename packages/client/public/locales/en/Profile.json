@@ -30,5 +30,6 @@
   "TelegramAccountDisconnect": "Disconnect Telegram",
   "TelegramAccountDisconnectDescription": "Your @{{username}} account is connected for telegram notifications. You can disconnect from this account. In this case, you will not receive notifications.",
   "TerminateAllSessions": "Terminate all sessions except the current one",
-  "TwoFactorDescription": "Two-factor authentication via a code-generating app was enabled for all users by the admin."
+  "TwoFactorDescription": "Two-factor authentication via a code-generating app was enabled for all users by the admin.",
+  "EmailChangeSuccess": "Your email has been successfully changed."
 }

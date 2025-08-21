@@ -26,10 +26,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen, fireEvent } from "@testing-library/react";
+import { screen, fireEvent, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { DropDown } from ".";
-import { renderWithTheme } from "../../utils/render-with-theme";
 
 const baseProps = {
   open: false,
@@ -41,11 +40,11 @@ const baseProps = {
 
 describe("<DropDown />", () => {
   it("renders without error", () => {
-    renderWithTheme(<DropDown {...baseProps} />);
+    render(<DropDown {...baseProps} />);
   });
 
   it("renders children when open", () => {
-    renderWithTheme(
+    render(
       <DropDown {...baseProps} open>
         <div data-testid="child">Test Content</div>
       </DropDown>,
@@ -56,7 +55,7 @@ describe("<DropDown />", () => {
   });
 
   it("applies correct directional classes", () => {
-    renderWithTheme(
+    render(
       <DropDown {...baseProps} open directionY="top" directionX="right">
         <div>Content</div>
       </DropDown>,
@@ -70,7 +69,7 @@ describe("<DropDown />", () => {
   });
 
   it("applies mobile view class when isMobileView is true", () => {
-    renderWithTheme(
+    render(
       <DropDown {...baseProps} open isMobileView>
         <div>Content</div>
       </DropDown>,
@@ -81,7 +80,7 @@ describe("<DropDown />", () => {
   });
 
   it("applies maxHeight class when maxHeight prop is provided", () => {
-    renderWithTheme(
+    render(
       <DropDown {...baseProps} open maxHeight={200}>
         <div>Content</div>
       </DropDown>,
@@ -92,7 +91,7 @@ describe("<DropDown />", () => {
   });
 
   it("applies withManualWidth class when manualWidth is provided", () => {
-    renderWithTheme(
+    render(
       <DropDown {...baseProps} open manualWidth="200px">
         <div>Content</div>
       </DropDown>,
@@ -103,7 +102,7 @@ describe("<DropDown />", () => {
   });
 
   it("applies notReady class before dropdown is ready", () => {
-    renderWithTheme(
+    render(
       <DropDown {...baseProps} open>
         <div>Content</div>
       </DropDown>,
@@ -115,7 +114,7 @@ describe("<DropDown />", () => {
 
   it("doesn't handle click outside when enableOnClickOutside is false", () => {
     const onClose = jest.fn();
-    renderWithTheme(
+    render(
       <div>
         <div data-testid="outside">Outside</div>
         <DropDown {...baseProps} open clickOutsideAction={onClose}>
@@ -129,7 +128,7 @@ describe("<DropDown />", () => {
   });
 
   it("applies custom styles correctly", () => {
-    renderWithTheme(
+    render(
       <DropDown
         {...baseProps}
         open
@@ -155,7 +154,7 @@ describe("<DropDown />", () => {
 
   it("doesn't handle keyboard events when enableKeyboardEvents is false", () => {
     const onClose = jest.fn();
-    renderWithTheme(
+    render(
       <DropDown
         {...baseProps}
         open
@@ -172,7 +171,7 @@ describe("<DropDown />", () => {
 
   it("renders with custom class name", () => {
     const customClass = "custom-dropdown";
-    renderWithTheme(
+    render(
       <DropDown {...baseProps} open className={customClass}>
         <div>Content</div>
       </DropDown>,
@@ -183,7 +182,7 @@ describe("<DropDown />", () => {
   });
 
   it("applies directionX styles when not disabled", () => {
-    renderWithTheme(
+    render(
       <DropDown {...baseProps} open directionX="right">
         <div>Content</div>
       </DropDown>,
@@ -199,7 +198,7 @@ describe("<DropDown />", () => {
       { id: 2, label: "Item 2" },
     ];
 
-    renderWithTheme(
+    render(
       <DropDown {...baseProps} open>
         {items.map((item) => (
           <div key={item.id}>{item.label}</div>
@@ -214,7 +213,7 @@ describe("<DropDown />", () => {
   });
 
   it("handles fixed direction prop correctly", () => {
-    renderWithTheme(
+    render(
       <DropDown {...baseProps} open fixedDirection>
         <div>Content</div>
       </DropDown>,
@@ -227,7 +226,7 @@ describe("<DropDown />", () => {
 
   it("updates maxHeight based on calculatedHeight", () => {
     const maxHeight = 200;
-    renderWithTheme(
+    render(
       <DropDown {...baseProps} open maxHeight={maxHeight}>
         <div style={{ height: "300px" }}>Content</div>
       </DropDown>,
@@ -239,7 +238,7 @@ describe("<DropDown />", () => {
 
   describe("backdrop behavior", () => {
     it("doesn't render backdrop when backDrop is false", () => {
-      renderWithTheme(
+      render(
         <DropDown {...baseProps} open withBackdrop={false}>
           <div>Content</div>
         </DropDown>,
@@ -312,7 +311,7 @@ describe("<DropDown />", () => {
     it("calculates correct position for bottom-left alignment", () => {
       const cleanup = mockViewport(1000, 800);
 
-      renderWithTheme(
+      render(
         <DropDown {...baseProps} open directionY="bottom" directionX="left">
           <div>Content</div>
         </DropDown>,
@@ -328,7 +327,7 @@ describe("<DropDown />", () => {
     it("maintains fixed direction when fixedDirection is true", () => {
       const cleanup = mockViewport(1000, 300); // Small viewport height
 
-      renderWithTheme(
+      render(
         <DropDown
           {...baseProps}
           open
@@ -348,7 +347,7 @@ describe("<DropDown />", () => {
     });
 
     it("applies manual positioning when provided", () => {
-      renderWithTheme(
+      render(
         <DropDown {...baseProps} open manualX="100px" manualY="200px">
           <div>Content</div>
         </DropDown>,

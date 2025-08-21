@@ -25,9 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen, fireEvent } from "@testing-library/react";
+import { screen, fireEvent, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { renderWithTheme } from "../../utils/render-with-theme";
 
 import AmazonSettings from "./AmazonSettings";
 import {
@@ -75,7 +74,7 @@ describe("AmazonSettings", () => {
   });
 
   it("renders all UI elements correctly", () => {
-    renderWithTheme(<AmazonSettings {...defaultProps} />);
+    render(<AmazonSettings {...defaultProps} />);
 
     expect(screen.getByTestId("amazon-settings-wrapper")).toBeInTheDocument();
 
@@ -102,7 +101,7 @@ describe("AmazonSettings", () => {
   });
 
   it("initializes with required form settings", () => {
-    renderWithTheme(<AmazonSettings {...defaultProps} />);
+    render(<AmazonSettings {...defaultProps} />);
 
     expect(mockSetRequiredFormSettings).toHaveBeenCalledWith([
       bucket,
@@ -112,9 +111,7 @@ describe("AmazonSettings", () => {
   });
 
   it("initializes without file path when isNeedFilePath is false", () => {
-    renderWithTheme(
-      <AmazonSettings {...defaultProps} isNeedFilePath={false} />,
-    );
+    render(<AmazonSettings {...defaultProps} isNeedFilePath={false} />);
 
     expect(mockSetRequiredFormSettings).toHaveBeenCalledWith([bucket]);
     expect(
@@ -123,7 +120,7 @@ describe("AmazonSettings", () => {
   });
 
   it("handles bucket input change", async () => {
-    renderWithTheme(<AmazonSettings {...defaultProps} />);
+    render(<AmazonSettings {...defaultProps} />);
 
     const bucketInput = screen.getByTestId("amazon-bucket-input");
     fireEvent.change(bucketInput, { target: { value: "bucket text1234" } });
@@ -136,7 +133,7 @@ describe("AmazonSettings", () => {
   });
 
   it("handles service URL input change", async () => {
-    renderWithTheme(<AmazonSettings {...defaultProps} />);
+    render(<AmazonSettings {...defaultProps} />);
 
     const serviceUrlInput = screen.getByTestId("amazon-service-url-input");
     fireEvent.change(serviceUrlInput, {
@@ -151,7 +148,7 @@ describe("AmazonSettings", () => {
   });
 
   it("handles force path style checkbox change", async () => {
-    renderWithTheme(<AmazonSettings {...defaultProps} />);
+    render(<AmazonSettings {...defaultProps} />);
 
     const checkbox = screen.getByTestId("amazon-force-path-style-checkbox");
     fireEvent.click(checkbox);
@@ -164,7 +161,7 @@ describe("AmazonSettings", () => {
   });
 
   it("handles use HTTP checkbox change", async () => {
-    renderWithTheme(<AmazonSettings {...defaultProps} />);
+    render(<AmazonSettings {...defaultProps} />);
 
     const checkbox = screen.getByTestId("amazon-use-http-checkbox");
     fireEvent.click(checkbox);
@@ -179,9 +176,7 @@ describe("AmazonSettings", () => {
       isSet: false,
     };
 
-    renderWithTheme(
-      <AmazonSettings {...defaultProps} selectedStorage={unsetStorage} />,
-    );
+    render(<AmazonSettings {...defaultProps} selectedStorage={unsetStorage} />);
 
     expect(screen.getByTestId("amazon-bucket-input")).toBeDisabled();
     expect(screen.getByTestId("amazon-service-url-input")).toBeDisabled();
@@ -193,7 +188,7 @@ describe("AmazonSettings", () => {
   });
 
   it("disables inputs when loading", () => {
-    renderWithTheme(<AmazonSettings {...defaultProps} isLoading />);
+    render(<AmazonSettings {...defaultProps} isLoading />);
 
     expect(screen.getByTestId("amazon-bucket-input")).toBeDisabled();
     expect(screen.getByTestId("amazon-service-url-input")).toBeDisabled();
@@ -201,7 +196,7 @@ describe("AmazonSettings", () => {
   });
 
   it("disables inputs when loading data", () => {
-    renderWithTheme(<AmazonSettings {...defaultProps} isLoadingData />);
+    render(<AmazonSettings {...defaultProps} isLoadingData />);
 
     expect(screen.getByTestId("amazon-bucket-input")).toBeDisabled();
     expect(screen.getByTestId("amazon-service-url-input")).toBeDisabled();
@@ -214,7 +209,7 @@ describe("AmazonSettings", () => {
       [bucket]: true,
     };
 
-    renderWithTheme(
+    render(
       <AmazonSettings
         {...defaultProps}
         errorsFieldsBeforeSafe={errorsWithBucketError}
@@ -226,7 +221,7 @@ describe("AmazonSettings", () => {
   });
 
   it("handles SSE method selection", async () => {
-    renderWithTheme(<AmazonSettings {...defaultProps} />);
+    render(<AmazonSettings {...defaultProps} />);
 
     const sseMethodSelect = screen.getByTestId("amazon-settings-wrapper");
     expect(sseMethodSelect).toBeInTheDocument();
@@ -238,7 +233,7 @@ describe("AmazonSettings", () => {
       [SSE]: SSE_S3,
     };
 
-    renderWithTheme(
+    render(
       <AmazonSettings {...defaultProps} formSettings={formSettingsWithSSE} />,
     );
 
@@ -252,7 +247,7 @@ describe("AmazonSettings", () => {
       [SSE]: SSE_S3,
     };
 
-    renderWithTheme(
+    render(
       <AmazonSettings {...defaultProps} formSettings={formSettingsWithSSE} />,
     );
 

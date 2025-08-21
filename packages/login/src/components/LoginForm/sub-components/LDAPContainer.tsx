@@ -64,8 +64,10 @@ const LDAPContainer = ({
                 <Text fontSize="12px">{t("SignInLdapHelper")}</Text>
               }
               tooltipMaxWidth={isMobileOnly ? "240px" : "340px"}
+              dataTestId="ldap_login_help_button"
             />
           }
+          dataTestId="ldap_login_checkbox"
         />
       </div>
     </div>

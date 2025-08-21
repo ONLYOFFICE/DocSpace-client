@@ -42,6 +42,11 @@ const Tags: FC<TagsProps> = ({
   removeTagIcon,
   onMouseEnter,
   onMouseLeave,
+  isDefaultMode = false,
+  directionY,
+  fixedDirection,
+  manualY,
+  manualX,
 }) => {
   const [renderedTags, setRenderedTags] = React.useState<TagType[]>([]);
 
@@ -191,6 +196,11 @@ const Tags: FC<TagsProps> = ({
                 roomType={tag.roomType}
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
+                isDefaultMode={isDefaultMode}
+                directionY={directionY}
+                fixedDirection={fixedDirection}
+                manualY={manualY}
+                manualX={manualX}
               />
             );
           })

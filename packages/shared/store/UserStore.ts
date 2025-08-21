@@ -89,10 +89,15 @@ class UserStore {
     this.user = user;
   };
 
-  changeEmail = async (userId: string, email: string, key: string) => {
+  changeEmail = async (
+    userId: string,
+    email: string,
+    encemail: string,
+    key: string,
+  ) => {
     this.setIsLoading(true);
 
-    const user = await api.people.changeEmail(userId, email, key);
+    const user = await api.people.changeEmail(userId, email, encemail, key);
 
     this.setUser(user);
     this.setIsLoading(false);
@@ -105,13 +110,13 @@ class UserStore {
   ) => {
     this.setIsLoading(true);
 
-    const user = await api.people.updateActivationStatus(
+    const users = await api.people.updateActivationStatus(
       activationStatus,
       userId,
       key,
     );
 
-    this.setUser(user);
+    this.setUser(users[0]);
     this.setIsLoading(false);
   };
 

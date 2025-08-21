@@ -28,11 +28,13 @@ import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router";
 import { TFunction } from "i18next";
+import { useEffect } from "react";
 
 import { ProfileViewLoader } from "@docspace/shared/skeletons/profile";
 import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
 import { DeviceType } from "@docspace/shared/enums";
 import { tablet, mobile } from "@docspace/shared/utils";
+import { toastr } from "@docspace/shared/components/toast";
 
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 import { TfaStore } from "@docspace/shared/store/TfaStore";
@@ -117,6 +119,22 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     getTfaType,
   } = props;
   const navigate = useNavigate();
+
+  const checkEmailChangeParam = () => {
+    const search = window.location.search;
+    const urlParams = new URLSearchParams(search);
+
+    if (urlParams.get("email_change") === "success") {
+      toastr.success(t?.("Profile:EmailChangeSuccess"));
+
+      const pathname = window.location.pathname;
+      window.history.replaceState({}, document.title, pathname);
+    }
+  };
+
+  useEffect(() => {
+    checkEmailChangeParam();
+  }, []);
 
   const {
     tfaOn,

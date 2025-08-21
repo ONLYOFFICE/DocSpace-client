@@ -40,18 +40,21 @@ const EmailActivationHandler = () => {
 
   const { linkData } = useContext(ConfirmRouteContext);
 
-  const { email, uid = "", confirmHeader = "" } = linkData;
+  const { uid = "", confirmHeader = "" } = linkData;
 
   useEffect(() => {
     async function changeActivationStatus() {
       try {
-        await updateActivationStatus(
+        const res = await updateActivationStatus(
           EmployeeActivationStatus.Activated,
           uid,
           confirmHeader,
         );
 
-        window.location.replace(`/login?confirmedEmail=${email}`);
+        const base64Data = btoa(JSON.stringify(res[0]?.email));
+        sessionStorage.setItem("confirmedData", base64Data);
+
+        window.location.replace("/login");
       } catch (e) {
         const knownError = e as TError;
         let errorMessage: string;
@@ -70,7 +73,7 @@ const EmailActivationHandler = () => {
     }
 
     changeActivationStatus();
-  }, [email, uid, confirmHeader]);
+  }, [uid, confirmHeader]);
 
   if (error) {
     console.error(error);

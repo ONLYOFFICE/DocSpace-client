@@ -25,15 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen } from "@testing-library/react";
+import { screen, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import { renderWithTheme } from "../../utils/render-with-theme";
 import { CircleSkeleton } from ".";
 
 describe("<CircleSkeleton />", () => {
   it("renders without error", () => {
-    renderWithTheme(<CircleSkeleton />);
+    render(<CircleSkeleton />);
     expect(screen.getByTestId("circle-skeleton")).toBeInTheDocument();
   });
 });

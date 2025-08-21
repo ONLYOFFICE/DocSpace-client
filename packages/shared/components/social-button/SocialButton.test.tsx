@@ -26,10 +26,9 @@
 
 import React from "react";
 import "@testing-library/jest-dom";
-import { screen, fireEvent } from "@testing-library/react";
+import { screen, fireEvent, render } from "@testing-library/react";
 
 import GoogleIcon from "PUBLIC_DIR/images/share.google.react.svg";
-import { renderWithTheme } from "../../utils/render-with-theme";
 
 import { SocialButton } from "./SocialButton";
 
@@ -40,7 +39,7 @@ describe("<SocialButton />", () => {
   };
 
   it("renders without error", () => {
-    renderWithTheme(<SocialButton {...defaultProps} />);
+    render(<SocialButton {...defaultProps} />);
 
     expect(screen.getByTestId("social-button")).toBeInTheDocument();
     expect(screen.getByText("Continue with Google")).toBeInTheDocument();
@@ -48,7 +47,7 @@ describe("<SocialButton />", () => {
 
   it("renders with custom icon color", () => {
     const customColor = "#FF0000";
-    renderWithTheme(
+    render(
       <SocialButton
         {...defaultProps}
         $iconOptions={{ color: customColor }}
@@ -65,14 +64,14 @@ describe("<SocialButton />", () => {
 
   it("handles click events", () => {
     const handleClick = jest.fn();
-    renderWithTheme(<SocialButton {...defaultProps} onClick={handleClick} />);
+    render(<SocialButton {...defaultProps} onClick={handleClick} />);
 
     fireEvent.click(screen.getByTestId("social-button"));
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
 
   it("renders in disabled state", () => {
-    renderWithTheme(<SocialButton {...defaultProps} isDisabled />);
+    render(<SocialButton {...defaultProps} isDisabled />);
 
     const button = screen.getByTestId("social-button");
     expect(button).toBeDisabled();
@@ -80,19 +79,19 @@ describe("<SocialButton />", () => {
   });
 
   it("renders in small size", () => {
-    renderWithTheme(<SocialButton {...defaultProps} size="small" />);
+    render(<SocialButton {...defaultProps} size="small" />);
 
     expect(screen.getByTestId("social-button")).toHaveClass("small");
   });
 
   it("renders in connected state", () => {
-    renderWithTheme(<SocialButton {...defaultProps} isConnect />);
+    render(<SocialButton {...defaultProps} isConnect />);
 
     expect(screen.getByTestId("social-button")).toHaveClass("isConnect");
   });
 
   it("renders without hover effects", () => {
-    renderWithTheme(<SocialButton {...defaultProps} noHover />);
+    render(<SocialButton {...defaultProps} noHover />);
 
     expect(screen.getByTestId("social-button")).toHaveClass("noHover");
   });
@@ -101,7 +100,7 @@ describe("<SocialButton />", () => {
     const dataUrl = "https://example.com";
     const dataProvider = "google";
 
-    renderWithTheme(
+    render(
       <SocialButton
         {...defaultProps}
         data-url={dataUrl}
@@ -117,7 +116,7 @@ describe("<SocialButton />", () => {
   });
 
   it("renders without label", () => {
-    renderWithTheme(<SocialButton IconComponent={GoogleIcon} />);
+    render(<SocialButton IconComponent={GoogleIcon} />);
 
     expect(
       screen.queryByRole("div", { name: /Continue with Google/i }),

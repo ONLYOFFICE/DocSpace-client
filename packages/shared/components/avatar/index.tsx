@@ -107,7 +107,7 @@ const AvatarPure = ({
         src={source}
         className={`${styles.image}${imgClassName ? ` ${imgClassName}` : ""}`}
         data-is-default={isDefault}
-        alt=""
+        alt="avatar"
         style={
           {
             "--avatar-default-image": `url(${isBase ? AvatarBaseReactSvgUrl : AvatarDarkReactSvgUrl})`,
@@ -121,7 +121,7 @@ const AvatarPure = ({
     <img
       className={styles.image}
       data-is-default="true"
-      alt=""
+      alt="avatar"
       style={
         {
           "--avatar-default-image": `url(${isBase ? AvatarBaseReactSvgUrl : AvatarDarkReactSvgUrl})`,

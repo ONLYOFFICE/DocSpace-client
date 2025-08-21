@@ -3,7 +3,7 @@
   "content": "Join",
   "content_en_sha1_hash": "e0d73143de80d17e82de2e017ac156ca3b9c4e01",
   "created_at": "2025-05-19T21:30:57.370Z",
-  "updated_at": "2025-05-24T15:27:09.046Z",
+  "updated_at": "2025-08-21T11:22:39.929Z",
   "comment": {
     "text": "This translation key \"LoginRegistryButton\" is used to display a button label that invites users to join or activate their account in a confirmation page. The translated content will be shown on a button element in a form.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/Activation/page.client.tsx",
-      "line_number": 289,
-      "context": "<Button\n scale\n className=\"confirm-button\"\n primary\n size={ButtonSize.medium}\n label={t(\"LoginRegistryButton\")}\n tabIndex={5}\n onClick={onSubmit}\n isDisabled={isLoading}\n />\n </form>",
+      "line_number": 294,
+      "context": "<Button\n scale\n className=\"confirm-button\"\n primary\n size={ButtonSize.medium}\n label={t(\"LoginRegistryButton\")}\n tabIndex={5}\n onClick={onSubmit}\n isDisabled={isLoading}\n testId=\"signup_button\"\n />",
       "module": "/packages/login"
     }
   ],

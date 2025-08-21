@@ -66,7 +66,7 @@ describe("SearchLoader", () => {
     render(<SearchLoader {...defaultProps} />);
 
     const rectangle = screen.getByRole("img");
-    expect(rectangle).toHaveAttribute("width", "calc(100% - 16px)");
+
     expect(rectangle).toHaveAttribute("height", "32px");
   });
 

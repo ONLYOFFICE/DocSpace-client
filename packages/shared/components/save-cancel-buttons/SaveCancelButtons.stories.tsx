@@ -31,25 +31,21 @@ import { SaveCancelButtons } from ".";
 import { SaveCancelButtonProps } from "./SaveCancelButton.types";
 import styles from "./SaveCancelButtons.stories.module.scss";
 
+/**
+ * Save and cancel buttons component with reminder text for unsaved changes.
+ *
+ * Features:
+ * - Customizable save and cancel button labels
+ * - Optional reminder text for unsaved changes
+ * - Loading state for save button
+ * - Keyboard navigation support (Enter to save, Escape to cancel)
+ * - Full accessibility support with ARIA attributes
+ * - Responsive design with mobile support
+ */
 const meta = {
   title: "Components/SaveCancelButtons",
   component: SaveCancelButtons,
   parameters: {
-    docs: {
-      description: {
-        component: `
-          Save and cancel buttons component with reminder text for unsaved changes.
-          
-          Features:
-          - Customizable save and cancel button labels
-          - Optional reminder text for unsaved changes
-          - Loading state for save button
-          - Keyboard navigation support (Enter to save, Escape to cancel)
-          - Full accessibility support with ARIA attributes
-          - Responsive design with mobile support
-        `,
-      },
-    },
     a11y: {
       config: {
         rules: [

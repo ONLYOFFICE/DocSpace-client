@@ -25,16 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen, fireEvent } from "@testing-library/react";
+import { screen, fireEvent, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import { renderWithTheme } from "../../utils/render-with-theme";
-import { Base, globalColors } from "../../themes";
 import styles from "./Text.module.scss";
 
 import { Text } from ".";
 
-// Mock CSS modules
+// Mock CSS modulesy
 jest.mock("./Text.module.scss", () => ({
   text: "text",
   inline: "inline",
@@ -49,106 +47,71 @@ jest.mock("./Text.module.scss", () => ({
 describe("Text Component", () => {
   describe("Basic Rendering", () => {
     test("renders text content", () => {
-      renderWithTheme(<Text>Hello World</Text>);
+      render(<Text>Hello World</Text>);
       expect(screen.getByText("Hello World")).toBeInTheDocument();
     });
 
     test("renders with default props", () => {
-      renderWithTheme(<Text>Default Text</Text>);
+      render(<Text>Default Text</Text>);
       const text = screen.getByTestId("text");
       expect(text).toBeInTheDocument();
       expect(text).toHaveClass(styles.text);
     });
 
     test("accepts custom className", () => {
-      renderWithTheme(<Text className="custom-text">Text with class</Text>);
+      render(<Text className="custom-text">Text with class</Text>);
       const text = screen.getByTestId("text");
       expect(text).toHaveClass(styles.text, "custom-text");
     });
 
     test("accepts custom id", () => {
-      renderWithTheme(<Text id="custom-id">Text with ID</Text>);
+      render(<Text id="custom-id">Text with ID</Text>);
       expect(screen.getByTestId("text")).toHaveAttribute("id", "custom-id");
     });
   });
 
   describe("Styling Props", () => {
     test("applies custom fontSize", () => {
-      renderWithTheme(<Text fontSize="16px">Large Text</Text>);
+      render(<Text fontSize="16px">Large Text</Text>);
       expect(screen.getByTestId("text")).toHaveStyle({ fontSize: "16px" });
     });
 
     test("applies custom color", () => {
-      renderWithTheme(<Text color="#FF0000">Red Text</Text>);
+      render(<Text color="#FF0000">Red Text</Text>);
       expect(screen.getByTestId("text")).toHaveStyle({ color: "#FF0000" });
     });
 
-    test("applies theme color", () => {
-      renderWithTheme(<Text color={globalColors.white}>Theme Text</Text>);
-      expect(screen.getByTestId("text")).toHaveStyle({
-        color: globalColors.white,
-      });
-    });
-
     test("applies custom fontWeight", () => {
-      renderWithTheme(<Text fontWeight={700}>Bold Text</Text>);
+      render(<Text fontWeight={700}>Bold Text</Text>);
       expect(screen.getByTestId("text")).toHaveStyle({ fontWeight: 700 });
     });
 
     test("applies custom textAlign", () => {
-      renderWithTheme(<Text textAlign="center">Centered Text</Text>);
+      render(<Text textAlign="center">Centered Text</Text>);
       expect(screen.getByTestId("text")).toHaveStyle({ textAlign: "center" });
     });
 
     test("applies custom backgroundColor", () => {
-      renderWithTheme(
-        <Text backgroundColor="#F0F0F0">Text with background</Text>,
-      );
+      render(<Text backgroundColor="#F0F0F0">Text with background</Text>);
       expect(screen.getByTestId("text")).toHaveStyle({
         backgroundColor: "#F0F0F0",
       });
     });
   });
 
-  describe("Theme Integration", () => {
-    test("uses light theme colors", () => {
-      renderWithTheme(
-        <Text color={globalColors.white}>Light Theme Text</Text>,
-        Base,
-      );
-      expect(screen.getByTestId("text")).toHaveStyle({
-        color: globalColors.white,
-      });
-    });
-
-    test("uses dark theme colors", () => {
-      const darkTheme = {
-        ...Base,
-        isBase: false,
-      };
-      renderWithTheme(
-        <Text color={globalColors.white}>Dark Theme Text</Text>,
-        darkTheme,
-      );
-      expect(screen.getByTestId("text")).toHaveStyle({
-        color: globalColors.white,
-      });
-    });
-  });
-
   describe("Element Type and Tag", () => {
     test("renders as different HTML elements using 'as' prop", () => {
-      renderWithTheme(<Text as="h1">Heading Text</Text>);
+      render(<Text as="h1">Heading Text</Text>);
       expect(screen.getByTestId("text").tagName).toBe("H1");
     });
 
     test("renders with custom tag", () => {
-      renderWithTheme(<Text tag="span">Span Text</Text>);
+      render(<Text tag="span">Span Text</Text>);
       expect(screen.getByTestId("text").tagName).toBe("SPAN");
     });
 
     test("prefers 'as' prop over 'tag' prop", () => {
-      renderWithTheme(
+      render(
         <Text as="h2" tag="span">
           Mixed Props Text
         </Text>,
@@ -160,7 +123,7 @@ describe("Text Component", () => {
   describe("Interactive Features", () => {
     test("handles click events", () => {
       const handleClick = jest.fn();
-      renderWithTheme(<Text onClick={handleClick}>Clickable Text</Text>);
+      render(<Text onClick={handleClick}>Clickable Text</Text>);
 
       fireEvent.click(screen.getByText("Clickable Text"));
       expect(handleClick).toHaveBeenCalledTimes(1);
@@ -168,45 +131,45 @@ describe("Text Component", () => {
 
     test("renders with title attribute", () => {
       const title = "Text Title";
-      renderWithTheme(<Text title={title}>Hover Text</Text>);
+      render(<Text title={title}>Hover Text</Text>);
       expect(screen.getByTestId("text")).toHaveAttribute("title", title);
     });
   });
 
   describe("CSS Module Classes", () => {
     test("applies inline display class", () => {
-      renderWithTheme(<Text isInline>Inline Text</Text>);
+      render(<Text isInline>Inline Text</Text>);
       expect(screen.getByTestId("text")).toHaveClass(styles.inline);
     });
 
     test("applies bold class", () => {
-      renderWithTheme(<Text isBold>Bold Text</Text>);
+      render(<Text isBold>Bold Text</Text>);
       expect(screen.getByTestId("text")).toHaveClass(styles.bold);
     });
 
     test("applies italic class", () => {
-      renderWithTheme(<Text isItalic>Italic Text</Text>);
+      render(<Text isItalic>Italic Text</Text>);
       expect(screen.getByTestId("text")).toHaveClass(styles.italic);
     });
 
     test("applies noSelect class", () => {
-      renderWithTheme(<Text noSelect>Non-selectable Text</Text>);
+      render(<Text noSelect>Non-selectable Text</Text>);
       expect(screen.getByTestId("text")).toHaveClass(styles.noSelect);
     });
 
     test("applies truncate class", () => {
-      renderWithTheme(<Text truncate>Truncated Text</Text>);
+      render(<Text truncate>Truncated Text</Text>);
       expect(screen.getByTestId("text")).toHaveClass(styles.truncate);
     });
 
     test("applies autoDirSpan class for auto direction", () => {
-      renderWithTheme(<Text dir="auto">Auto Direction Text</Text>);
+      render(<Text dir="auto">Auto Direction Text</Text>);
       const span = screen.getByText("Auto Direction Text");
       expect(span).toHaveClass(styles.autoDirSpan);
     });
 
     test("applies tile class for tile view", () => {
-      renderWithTheme(
+      render(
         <Text dir="auto" view="tile">
           Tile View Text
         </Text>,
@@ -218,7 +181,7 @@ describe("Text Component", () => {
 
   describe("Style Combinations", () => {
     test("combines multiple CSS module classes", () => {
-      renderWithTheme(
+      render(
         <Text isInline isBold isItalic noSelect>
           Multi-styled Text
         </Text>,
@@ -234,7 +197,7 @@ describe("Text Component", () => {
     });
 
     test("combines CSS module classes with custom className", () => {
-      renderWithTheme(
+      render(
         <Text isInline isBold className="custom-class">
           Combined Classes Text
         </Text>,

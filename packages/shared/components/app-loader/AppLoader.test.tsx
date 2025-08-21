@@ -24,16 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
-import { screen } from "@testing-library/react";
+import { screen, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
-
-import { renderWithTheme } from "../../utils/render-with-theme";
 
 import AppLoader from "./index";
 
 describe("AppLoader", () => {
   it("renders loader with correct props", () => {
-    renderWithTheme(<AppLoader />);
+    render(<AppLoader />);
 
     const loader = screen.getByTestId("app-loader");
     expect(loader).toBeInTheDocument();

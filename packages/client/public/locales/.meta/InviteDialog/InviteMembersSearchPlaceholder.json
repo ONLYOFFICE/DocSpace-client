@@ -3,7 +3,7 @@
   "content": "Invite members by email",
   "content_en_sha1_hash": "25be32bc4914ade0794cba6ad711881458da0fcf",
   "created_at": "2025-05-19T21:30:54.725Z",
-  "updated_at": "2025-08-11T09:02:43.898Z",
+  "updated_at": "2025-08-12T19:46:25.986Z",
   "comment": {
     "text": "This translation key is used as a placeholder text for an input field that allows users to search and invite members by email in an invitation panel. It appears when creating or editing an invite, indicating its purpose. Translators should provide a corresponding text to make the invitation process accessible across languages.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
-      "line_number": 661,
+      "line_number": 660,
       "context": "className=\"invite-input\"\n scale\n onChange={onChange}\n placeholder={\n roomId === -1\n ? t(\"InviteMembersSearchPlaceholder\")\n : !allowInvitingGuests\n ? t(\"InviteToRoomAddPlaceholder\")\n : t(\"InviteToRoomSearchPlaceholder\")\n }\n value={inputValue}",
       "module": "/packages/client"
     }

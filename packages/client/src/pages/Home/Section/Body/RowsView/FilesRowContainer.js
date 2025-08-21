@@ -56,6 +56,7 @@ const FilesRowContainer = ({
   setDropTargetPreview,
   disableDrag,
   canCreateSecurity,
+  withContentSelection,
 }) => {
   const { sectionWidth } = use(Context);
 
@@ -112,6 +113,7 @@ const FilesRowContainer = ({
       hasMoreFiles={hasMoreFiles}
       draggable
       useReactWindow
+      noSelect={!withContentSelection}
       itemHeight={58}
     >
       {filesListNode}
@@ -130,6 +132,7 @@ export default inject(
     guidanceStore,
     selectedFolderStore,
     uploadDataStore,
+    hotkeyStore,
   }) => {
     const {
       viewAs,
@@ -148,6 +151,7 @@ export default inject(
     const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
     const { currentDeviceType } = settingsStore;
     const { isIndexEditingMode } = indexingStore;
+    const { withContentSelection } = hotkeyStore;
 
     const { primaryProgressDataStore } = uploadDataStore;
     const { setDropTargetPreview } = primaryProgressDataStore;
@@ -174,6 +178,7 @@ export default inject(
       setDropTargetPreview,
       disableDrag,
       canCreateSecurity,
+      withContentSelection,
     };
   },
 )(withContainer(observer(FilesRowContainer)));

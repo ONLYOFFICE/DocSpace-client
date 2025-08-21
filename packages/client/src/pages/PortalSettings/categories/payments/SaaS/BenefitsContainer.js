@@ -130,12 +130,7 @@ const BenefitsContainer = ({ t, features }) => {
 
   return (
     <StyledBody className="benefits-container">
-      <Text
-        fontSize="16px"
-        fontWeight="600"
-        className="payment-benefits_text"
-        noSelect
-      >
+      <Text fontSize="16px" fontWeight="600" className="payment-benefits_text">
         {t("Benefits")}
       </Text>
       {Array.from(features.values()).map((item) => {

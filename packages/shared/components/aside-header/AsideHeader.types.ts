@@ -52,4 +52,5 @@ export type AsideHeaderProps = PickedDivProps & {
   isBackButton?: boolean;
   /** Click handler for the back button */
   onBackClick?: () => void;
+  dataTestId?: string;
 };

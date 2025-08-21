@@ -71,7 +71,10 @@ export const Providers = ({
   const expectedPathName = `/${redirectURL}`;
 
   React.useEffect(() => {
-    if (redirectURL && confirmType === "GuestShareLink") {
+    if (
+      redirectURL &&
+      (confirmType === "GuestShareLink" || confirmType === "EmailChange")
+    ) {
       sessionStorage.setItem(
         "referenceUrl",
         `/confirm/${confirmType}?${searchParams?.toString()}`,

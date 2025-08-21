@@ -136,13 +136,7 @@ const EditGroupMembers = ({
       withoutPadding
     >
       <ModalDialog.Header>
-        <StyledHeaderText
-          fontSize="21px"
-          fontWeight={700}
-          dir="auto"
-          truncate
-          noSelect
-        >
+        <StyledHeaderText fontSize="21px" fontWeight={700} dir="auto" truncate>
           {group.name}
         </StyledHeaderText>
       </ModalDialog.Header>

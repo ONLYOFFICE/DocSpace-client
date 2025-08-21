@@ -74,7 +74,6 @@ export const NewFilesPanelItemDate = ({
       lineHeight="16px"
       fontWeight={600}
       color={theme.isBase ? globalColors.gray : globalColors.grayDark}
-      noSelect
     >
       {title}
     </Text>

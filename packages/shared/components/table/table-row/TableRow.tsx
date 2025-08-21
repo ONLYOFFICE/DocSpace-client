@@ -88,6 +88,7 @@ const TableRow = (props: TableRowProps) => {
     styles.tableRow,
     className,
     "table-container_row",
+    checked ? "checked" : "",
     {
       [styles.isIndexEditingMode]: isIndexEditingMode,
       [styles.isActive]: isActive,
@@ -105,7 +106,7 @@ const TableRow = (props: TableRowProps) => {
       style={style}
       onClick={onClick}
       onDoubleClick={onDoubleClick}
-      data-testid={dataTestId}
+      data-testid={dataTestId ?? "table-row"}
     >
       {children}
       {isIndexEditingMode ? null : (

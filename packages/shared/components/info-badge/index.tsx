@@ -43,6 +43,7 @@ const InfoBadge: FC<InfoBadgeProps> = ({
   place = "bottom",
   tooltipDescription,
   tooltipTitle,
+  dataTestId,
 }) => {
   const id = useId();
 
@@ -53,7 +54,7 @@ const InfoBadge: FC<InfoBadgeProps> = ({
   }, []);
 
   return (
-    <div data-testid="info-badge">
+    <div data-testid={dataTestId ?? "info-badge"}>
       <Badge
         noHover
         fontSize="9px"

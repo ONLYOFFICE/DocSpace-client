@@ -300,6 +300,7 @@ const User = ({
               isMobileView={isMobileOnly}
               directionY="both"
               displaySelectedOption
+              noSelect={false}
               dataTestId="info_panel_members_user_role_combobox"
             />
           ) : (

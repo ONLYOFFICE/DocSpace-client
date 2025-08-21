@@ -3,7 +3,7 @@
   "content": "{{productName}} will become unavailable during the restore process. After the restore is complete all the changes made after the date of the selected restore point will be lost.",
   "content_en_sha1_hash": "95f4959d72ad296d2309ba5ebff78078d35592ae",
   "created_at": "2025-05-26T07:15:46.930Z",
-  "updated_at": "2025-08-11T09:02:44.097Z",
+  "updated_at": "2025-08-12T19:46:26.386Z",
   "comment": {
     "text": "This translation key is used for a warning message that informs users about potential data loss during the restore process of their {productName}. It appears in a UI component that displays settings or options related to file restoration.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/index.tsx",
-      "line_number": 370,
-      "context": "styles.settingsUnavailable,\n \"restore-backup_warning-description settings_unavailable\",\n )}\n noSelect\n >\n {t(\"Common:RestoreBackupWarningText\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {!standalone ? (\n <Text",
+      "line_number": 368,
+      "context": "styles.restoreBackupWarningDescription,\n styles.settingsUnavailable,\n \"restore-backup_warning-description settings_unavailable\",\n )}\n >\n {t(\"Common:RestoreBackupWarningText\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {!standalone ? (\n <Text",
       "module": "/packages/shared"
     },
     {

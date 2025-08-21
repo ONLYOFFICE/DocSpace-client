@@ -35,7 +35,7 @@ export type TValidate = {
 
 export type EmailInputProps = Omit<
   TextInputProps,
-  "type" | "onAnimationStart"
+  "type" | "onAnimationStart" | "testId"
 > & {
   /** Email validation specific props */
   customValidate?: (value: string) => TValidate;

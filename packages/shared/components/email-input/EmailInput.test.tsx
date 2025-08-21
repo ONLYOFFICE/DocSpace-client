@@ -50,7 +50,7 @@ const defaultProps: EmailInputProps = {
   onValidateInput: jest.fn(),
   handleAnimationStart: jest.fn(),
   onBlur: jest.fn(),
-  testId: "email-input",
+  dataTestId: "email-input",
 };
 
 describe("<EmailInput />", () => {

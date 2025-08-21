@@ -873,5 +873,6 @@
   "YourLogo": "あなたのロゴ",
   "YourTurn": "あなたの番です",
   "LogoForEditors": "{{editorName}}エディタ用のロゴ",
-  "LogoForViewer": "{{diagramViewer}}用のロゴ"
+  "LogoForViewer": "{{diagramViewer}}用のロゴ",
+  "LogoDocsEditor": "エディターズヘッダーのロゴ"
 }

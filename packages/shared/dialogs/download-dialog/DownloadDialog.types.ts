@@ -59,6 +59,7 @@ export type DownloadRowProps = {
   isOther: boolean;
   isChecked?: boolean;
   getItemIcon: (item: TDownloadedFile) => React.ReactNode;
+  dataTestId?: string;
 };
 
 export type DownloadContentProps = {
@@ -73,6 +74,7 @@ export type DownloadContentProps = {
   isChecked?: boolean;
   isIndeterminate: boolean;
   getItemIcon: (item: TDownloadedFile) => React.ReactNode;
+  dataTestId?: string;
 };
 
 export type PasswordRowProps = {

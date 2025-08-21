@@ -115,7 +115,6 @@ const ToggleSSO = ({ enableSso, ssoToggle, isSSOAvailable }) => {
           fontWeight={400}
           lineHeight="16px"
           className="settings_unavailable"
-          noSelect
         >
           {t("TurnOnSSOCaption")}
         </Text>

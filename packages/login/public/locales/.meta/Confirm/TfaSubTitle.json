@@ -1,0 +1,28 @@
+{
+  "key_path": "TfaSubTitle",
+  "content": "Follow simple steps to continue working in this {{productName}}:",
+  "content_en_sha1_hash": "7f4b242d52ae31e62caa8fd3ce001f686ae2e82f",
+  "created_at": "2025-08-12T19:46:18.442Z",
+  "updated_at": "2025-08-12T19:52:07.006Z",
+  "comment": {
+    "text": "This text provides a brief instruction to the user, guiding them on how to proceed after enabling two-factor authentication. It appears as a subtitle below the main title on the Two-Factor Authentication Activation page, offering a simple explanation of the next steps within the {{productName}} application. Translators should ensure the instruction remains clear and actionable.",
+    "is_auto": true,
+    "updated_at": "2025-08-12T19:52:07.006Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/login/src/app/(root)/confirm/TfaActivation/page.client.tsx",
+      "line_number": 152,
+      "context": "<div className=\"set-app-description\">\n <Text isBold fontSize=\"18px\" className=\"set-app-title\">\n {t(\"TfaTitle\")}\n </Text>\n <Text className=\"set-app-subtitle\">\n {t(\"TfaSubTitle\", { productName: t(\"Common:ProductName\") })}\n </Text>\n \n <div className=\"description\">\n <div className=\"description-item\">\n <div className=\"icon-container\">",
+      "module": "/packages/login"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

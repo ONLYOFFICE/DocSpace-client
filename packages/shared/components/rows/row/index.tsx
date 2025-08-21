@@ -165,6 +165,7 @@ const Row = (props: RowProps) => {
       onContextMenu={onContextMenu}
       className={classNames(
         styles.row,
+        checked ? "checked" : "",
         {
           [styles.withoutBorder]: withoutBorder,
           [styles.modern]: mode === "modern",

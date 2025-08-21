@@ -35,7 +35,7 @@ pre-push:
       follow: true
       skip_on_fail: false
     unit-tests:
-      run: pnpm test
+      run: pnpm run test
       skip_empty: true
       follow: true
       skip_on_fail: false

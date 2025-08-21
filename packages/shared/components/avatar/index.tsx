@@ -50,6 +50,7 @@ import { AvatarProps } from "./Avatar.types";
 import { AvatarRole, AvatarSize } from "./Avatar.enums";
 import { getRoleIcon, Initials, EmptyIcon } from "./Avatar.utils";
 
+// test commit
 const AvatarPure = ({
   size,
   source,

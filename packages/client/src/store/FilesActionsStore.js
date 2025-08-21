@@ -2681,6 +2681,21 @@ class FilesActionStore {
         return;
       }
 
+      if (fileItemsList && enablePlugins) {
+        let currPluginItem = null;
+
+        fileItemsList.forEach((i) => {
+          if (i.key === item.fileExst) currPluginItem = i.value;
+        });
+
+        if (currPluginItem) {
+          const correctDevice = currPluginItem.devices
+            ? currPluginItem.devices.includes(currentDeviceType)
+            : true;
+          if (correctDevice) return currPluginItem.onClick(item);
+        }
+      }
+
       if (canConvert) {
         setConvertItem({ ...item, isOpen: true });
         setConvertDialogData({
@@ -2720,21 +2735,6 @@ class FilesActionStore {
         window.history.pushState("", "", url);
 
         return;
-      }
-
-      if (fileItemsList && enablePlugins) {
-        let currPluginItem = null;
-
-        fileItemsList.forEach((i) => {
-          if (i.key === item.fileExst) currPluginItem = i.value;
-        });
-
-        if (currPluginItem) {
-          const correctDevice = currPluginItem.devices
-            ? currPluginItem.devices.includes(currentDeviceType)
-            : true;
-          if (correctDevice) return currPluginItem.onClick(item);
-        }
       }
 
       if (!item.security.Download) {

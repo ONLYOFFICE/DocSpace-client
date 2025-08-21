@@ -1,8 +1,7 @@
 import React from "react";
-import { screen, fireEvent } from "@testing-library/react";
+import { screen, fireEvent, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import { renderWithTheme } from "../../utils/render-with-theme";
 import { MobileCategoryWrapper } from "./index";
 
 jest.mock("../../utils/common", () => ({
@@ -29,7 +28,7 @@ describe("MobileCategoryWrapper", () => {
   });
 
   it("renders with default props", () => {
-    renderWithTheme(<MobileCategoryWrapper {...defaultProps} />);
+    render(<MobileCategoryWrapper {...defaultProps} />);
 
     expect(screen.getByText(defaultProps.title)).toBeInTheDocument();
     expect(screen.getByText(defaultProps.subtitle)).toBeInTheDocument();
@@ -37,13 +36,13 @@ describe("MobileCategoryWrapper", () => {
   });
 
   it("renders with paid badge when withPaidBadge is true", () => {
-    renderWithTheme(<MobileCategoryWrapper {...defaultProps} withPaidBadge />);
+    render(<MobileCategoryWrapper {...defaultProps} withPaidBadge />);
 
     expect(screen.getByText(defaultProps.badgeLabel)).toBeInTheDocument();
   });
 
   it("handles click events when not disabled", () => {
-    renderWithTheme(<MobileCategoryWrapper {...defaultProps} />);
+    render(<MobileCategoryWrapper {...defaultProps} />);
 
     const link = screen.getByText(defaultProps.title);
     fireEvent.click(link);
@@ -52,7 +51,7 @@ describe("MobileCategoryWrapper", () => {
   });
 
   it("does not handle click events when disabled", () => {
-    renderWithTheme(<MobileCategoryWrapper {...defaultProps} isDisabled />);
+    render(<MobileCategoryWrapper {...defaultProps} isDisabled />);
 
     const link = screen.getByText(defaultProps.title);
     fireEvent.click(link);

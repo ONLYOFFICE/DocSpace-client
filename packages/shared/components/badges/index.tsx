@@ -264,6 +264,7 @@ const Badges = ({
 
   return fileExst ? (
     <div
+      data-testid="badges"
       className={classNames(
         wrapperCommonClasses,
         "additional-badges file__badges",
@@ -413,6 +414,7 @@ const Badges = ({
     </div>
   ) : (
     <div
+      data-testid="badges"
       className={classNames(wrapperCommonClasses, {
         folder__badges: isFolder && !isRoom,
         room__badges: isRoom,

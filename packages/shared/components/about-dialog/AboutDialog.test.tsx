@@ -24,10 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { fireEvent, screen } from "@testing-library/react";
+import { fireEvent, screen, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
-
-import { renderWithTheme } from "../../utils/render-with-theme";
 
 import {
   mockBuildInfo,
@@ -57,25 +55,25 @@ describe("AboutDialog", () => {
   });
 
   it("renders without errors", () => {
-    renderWithTheme(<AboutDialog {...testProps} />);
+    render(<AboutDialog {...testProps} />);
     expect(screen.getByText("AboutHeader")).toBeInTheDocument();
   });
 
   it("calls onClose callback when dialog is closed", () => {
-    renderWithTheme(<AboutDialog {...testProps} />);
+    render(<AboutDialog {...testProps} />);
     const closeButton = screen.getByLabelText("close");
     fireEvent.click(closeButton);
     expect(testProps.onClose).toHaveBeenCalled();
   });
 
   it("displays correct version information", () => {
-    renderWithTheme(<AboutDialog {...testProps} />);
+    render(<AboutDialog {...testProps} />);
     expect(screen.getByText(mockBuildInfo.documentServer)).toBeInTheDocument();
     expect(screen.getByText(mockBuildInfo.docSpace)).toBeInTheDocument();
   });
 
   it("displays company information", () => {
-    renderWithTheme(<AboutDialog {...testProps} />);
+    render(<AboutDialog {...testProps} />);
     expect(screen.getByText(mockCompanyInfo.email)).toBeInTheDocument();
     expect(screen.getByText(mockCompanyInfo.phone)).toBeInTheDocument();
     expect(screen.getByText(mockCompanyInfo.address)).toBeInTheDocument();
@@ -88,7 +86,7 @@ describe("AboutDialog", () => {
       isEnterprise: false,
     };
 
-    renderWithTheme(<AboutDialog {...standaloneProps} />);
+    render(<AboutDialog {...standaloneProps} />);
     expect(screen.getByText("AGPL-3.0")).toBeInTheDocument();
   });
 
@@ -98,7 +96,7 @@ describe("AboutDialog", () => {
       previewData: mockPreviewCompanyInfo,
     };
 
-    renderWithTheme(<AboutDialog {...previewProps} />);
+    render(<AboutDialog {...previewProps} />);
     expect(screen.getByText("preview@example.com")).toBeInTheDocument();
     expect(
       screen.getByText("456 Preview Ave, Preview City, USA"),

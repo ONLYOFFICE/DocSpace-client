@@ -39,6 +39,7 @@ import { ConfirmRouteProps, TConfirmRouteContext } from "@/types";
 export const ConfirmRouteContext = createContext<TConfirmRouteContext>({
   linkData: {},
   roomData: {},
+  confirmLinkResult: {},
 });
 
 function ConfirmRoute(props: ConfirmRouteProps) {
@@ -84,7 +85,12 @@ function ConfirmRoute(props: ConfirmRouteProps) {
           roomId: confirmLinkResult?.roomId,
           title: confirmLinkResult?.title,
         };
-        setStateData((val) => ({ ...val, linkData, roomData }));
+        setStateData((val) => ({
+          ...val,
+          linkData,
+          roomData,
+          confirmLinkResult,
+        }));
         break;
       }
       case ValidationResult.Invalid:
@@ -123,9 +129,10 @@ function ConfirmRoute(props: ConfirmRouteProps) {
   const value = useMemo(
     () => ({
       linkData: stateData?.linkData ?? {},
+      confirmLinkResult: stateData?.confirmLinkResult ?? {},
       roomData: stateData?.roomData ?? {},
     }),
-    [stateData?.linkData, stateData?.roomData],
+    [stateData?.linkData, stateData?.roomData, stateData?.confirmLinkResult],
   );
 
   return (

@@ -75,7 +75,7 @@ const Template: StoryFn<DragAndDropProps> = (args) => {
 
   const textStyle: React.CSSProperties = {
     margin: 0,
-    color: "#333",
+    color: "var(--text-color)",
     textAlign: "center",
   };
 

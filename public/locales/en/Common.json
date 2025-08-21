@@ -862,6 +862,7 @@
   "UTC": "UTC",
   "Version": "Version",
   "VersionBadge": "V.{{version}}",
+  "ViaLink": "Via link",
   "Video": "Video",
   "View": "View",
   "ViewOnly": "view-only",

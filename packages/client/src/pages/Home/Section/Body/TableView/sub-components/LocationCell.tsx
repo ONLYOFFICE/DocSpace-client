@@ -23,23 +23,35 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { useTranslation } from "react-i18next";
+
+import type { TFile } from "@docspace/shared/api/files/types";
 
 import PathCellBase from "./PathCellBase";
 
-const RoomCell = ({ sideColor, item }) => {
-  const { originRoomTitle, originId, originTitle } = item;
+type LocationCellProps = {
+  sideColor?: string;
+  item: TFile;
+};
 
-  const title = originRoomTitle || originTitle;
+const LocationCell = ({ sideColor, item }: LocationCellProps) => {
+  const { t } = useTranslation("Common");
+
+  const { originRoomTitle, originId, originTitle } = item;
+  const title = item.requestToken
+    ? t("Common:ViaLink")
+    : originRoomTitle || originTitle;
+  const withTooltip = item.requestToken ? false : !!title;
 
   return (
     <PathCellBase
       itemId={item.id}
       sideColor={sideColor}
-      withTooltip={!!title}
-      originId={originId}
+      withTooltip={withTooltip}
       title={title}
+      originId={originId}
     />
   );
 };
 
-export default RoomCell;
+export default LocationCell;

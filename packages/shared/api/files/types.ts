@@ -136,6 +136,10 @@ export type TFile = {
   hasDraft?: boolean;
   order?: string;
   lockedBy?: string;
+  originId?: number;
+  originRoomTitle?: string;
+  originTitle?: string;
+  requestToken?: string;
 };
 
 export type TOpenEditRequest = {

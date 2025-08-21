@@ -390,7 +390,7 @@ class FilesTableHeader extends React.Component {
     const {
       t,
       nameColumnIsEnabled,
-      roomRecentColumnIsEnabled,
+      locationRecentColumnIsEnabled,
       lastOpenedRecentColumnIsEnabled,
       authorRecentColumnIsEnabled,
       sizeRecentColumnIsEnabled,
@@ -414,9 +414,9 @@ class FilesTableHeader extends React.Component {
         onChange: this.onColumnChange,
       },
       {
-        key: "RoomRecent",
-        title: t("Common:Room"),
-        enable: roomRecentColumnIsEnabled,
+        key: "LocationRecent",
+        title: t("Common:Location"),
+        enable: locationRecentColumnIsEnabled,
         resizable: true,
         onChange: this.onColumnChange,
       },
@@ -879,7 +879,7 @@ export default inject(
       roomColumnActivityIsEnabled,
       roomQuotaColumnIsEnable,
 
-      roomRecentColumnIsEnabled,
+      locationRecentColumnIsEnabled,
       lastOpenedRecentColumnIsEnabled,
       authorRecentColumnIsEnabled,
       sizeRecentColumnIsEnabled,
@@ -955,7 +955,7 @@ export default inject(
       roomColumnActivityIsEnabled,
       roomQuotaColumnIsEnable,
 
-      roomRecentColumnIsEnabled,
+      locationRecentColumnIsEnabled,
       lastOpenedRecentColumnIsEnabled,
       authorRecentColumnIsEnabled,
       sizeRecentColumnIsEnabled,

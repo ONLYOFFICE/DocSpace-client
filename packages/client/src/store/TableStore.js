@@ -102,7 +102,7 @@ class TableStore {
 
   typeColumnIsEnabled = false;
 
-  roomRecentColumnIsEnabled = true;
+  locationRecentColumnIsEnabled = true;
 
   authorRecentColumnIsEnabled = true;
 
@@ -224,8 +224,8 @@ class TableStore {
     this.authorColumnIsEnabled = enable;
   };
 
-  setRoomRecentColumn = (enable) => {
-    this.roomRecentColumnIsEnabled = enable;
+  setLocationRecentColumn = (enable) => {
+    this.locationRecentColumnIsEnabled = enable;
   };
 
   setAuthorRecentColumn = (enable) => {
@@ -439,7 +439,7 @@ class TableStore {
       }
 
       if (isRecentFolder) {
-        this.setRoomRecentColumn(splitColumns.includes("RoomRecent"));
+        this.setLocationRecentColumn(splitColumns.includes("LocationRecent"));
         this.setAuthorRecentColumn(splitColumns.includes("AuthorRecent"));
         this.setLastOpenedRecentColumn(
           splitColumns.includes("LastOpenedRecent"),
@@ -487,8 +487,8 @@ class TableStore {
       case "Room":
         this.setRoomColumn(!this.roomColumnIsEnabled);
         return;
-      case "RoomRecent":
-        this.setRoomRecentColumn(!this.roomRecentColumnIsEnabled);
+      case "LocationRecent":
+        this.setLocationRecentColumn(!this.locationRecentColumnIsEnabled);
         return;
       case "Author":
         this.setAuthorColumn(!this.authorColumnIsEnabled);

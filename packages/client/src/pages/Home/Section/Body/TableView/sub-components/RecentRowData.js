@@ -36,11 +36,11 @@ import TypeCell from "./TypeCell";
 import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
 import SizeCell from "./SizeCell";
-import RoomCell from "./RoomCell";
+import LocationCell from "./LocationCell";
 
 const RecentRowDataComponent = (props) => {
   const {
-    roomRecentColumnIsEnabled,
+    locationRecentColumnIsEnabled,
     authorRecentColumnIsEnabled,
     sizeRecentColumnIsEnabled,
     typeRecentColumnIsEnabled,
@@ -110,11 +110,11 @@ const RecentRowDataComponent = (props) => {
         <div />
       )}
 
-      {roomRecentColumnIsEnabled ? (
+      {locationRecentColumnIsEnabled ? (
         <TableCell
-          dataTestId={`recent-cell-room-${index}`}
+          dataTestId={`recent-cell-location-${index}`}
           style={
-            !roomRecentColumnIsEnabled
+            !locationRecentColumnIsEnabled
               ? { background: "none" }
               : dragStyles.style
           }
@@ -124,7 +124,7 @@ const RecentRowDataComponent = (props) => {
             lastColumn === "AuthorRecent" ? "no-extra-space" : "",
           )}
         >
-          <RoomCell
+          <LocationCell
             item={item}
             sideColor={theme.filesSection.tableView.row.sideColor}
           />
@@ -207,7 +207,7 @@ const RecentRowDataComponent = (props) => {
 
 export default inject(({ tableStore }) => {
   const {
-    roomRecentColumnIsEnabled,
+    locationRecentColumnIsEnabled,
     authorRecentColumnIsEnabled,
     sizeRecentColumnIsEnabled,
     typeRecentColumnIsEnabled,
@@ -216,7 +216,7 @@ export default inject(({ tableStore }) => {
   } = tableStore;
 
   return {
-    roomRecentColumnIsEnabled,
+    locationRecentColumnIsEnabled,
     authorRecentColumnIsEnabled,
     sizeRecentColumnIsEnabled,
     typeRecentColumnIsEnabled,

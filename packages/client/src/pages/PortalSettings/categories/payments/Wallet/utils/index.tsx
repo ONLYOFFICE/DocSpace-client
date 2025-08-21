@@ -65,3 +65,12 @@ export const accountingLedgersFormat = (
   const value = formatter.format(truncated);
   return `${isCredit ? "+" : "-"}${value}`;
 };
+
+export const getServiceQuantity = (
+  quantity: number,
+  serviceUnit: string,
+  t,
+) => {
+  if (!serviceUnit) return "—";
+  return t("UnitCount", { unit: serviceUnit, count: quantity });
+};

@@ -473,20 +473,27 @@ export async function getTransactionHistory(
   endDate: string,
   credit: boolean = true,
   withdrawal: boolean = true,
-  offset: number = 0,
-  limit: number = 25,
+  participantName?: string = "",
+  offset?: number = 0,
+  limit?: number = 25,
 ) {
+  const params = {
+    startDate,
+    endDate,
+    credit,
+    withdrawal,
+    offset,
+    limit,
+  };
+
+  if (participantName) {
+    params.participantName = participantName;
+  }
+
   const options = {
     method: "get",
     url: "/portal/payment/customer/operations",
-    params: {
-      startDate,
-      endDate,
-      credit,
-      withdrawal,
-      offset,
-      limit,
-    },
+    params,
   };
   const res = (await request(options)) as TCustomerOperation;
 

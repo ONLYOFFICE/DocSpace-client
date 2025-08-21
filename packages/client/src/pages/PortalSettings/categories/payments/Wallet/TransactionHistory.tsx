@@ -40,13 +40,24 @@ import {
 import { DatePicker } from "@docspace/shared/components/date-picker";
 import { toastr } from "@docspace/shared/components/toast";
 import { getTransactionHistoryReport } from "@docspace/shared/api/portal";
-import { DeviceType } from "@docspace/shared/enums";
+import {
+  DeviceType,
+  EmployeeStatus,
+  EmployeeType,
+} from "@docspace/shared/enums";
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import FilterIcon from "@docspace/shared/components/filter/sub-components/FilterIcon";
+import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
+import { SelectedItemPure } from "@docspace/shared/components/selected-item/SelectedItem";
+import { TSelectorItem } from "@docspace/shared/components/selector";
+import { TUser } from "@docspace/shared/api/people/types";
+import PeopleSelector from "@docspace/shared/selectors/People";
+import Filter from "@docspace/shared/api/people/filter";
 
+import FilterPanel from "./sub-components/FilterPanel";
 import TransactionBody from "./sub-components/TransactionBody";
 import styles from "./styles/TransactionHistory.module.scss";
 import TableLoader from "./sub-components/TableLoader";
@@ -68,6 +79,13 @@ const getTransactionType = (key: string) => {
     isCredit: key !== "debit",
     isDebit: key !== "credit",
   };
+};
+
+const filter = () => {
+  const newFilter = Filter.getDefault();
+  newFilter.role = [EmployeeType.Admin];
+  newFilter.employeeStatus = EmployeeStatus.Active;
+  return newFilter;
 };
 
 const TransactionHistory = (props: TransactionHistoryProps) => {
@@ -103,6 +121,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
     },
   ];
 
+  const [isSelectorVisible, setIsSelectorVisible] = useState(false);
   const [selectedType, setSelectedType] = useState<TOption>(typeOfHistoty[0]);
   const [startDate, setStartDate] = useState<moment.Moment>(
     moment(getStartTransactionDate!()),
@@ -110,6 +129,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
   const [endDate, setEndDate] = useState<moment.Moment>(
     moment(getEndTransactionDate!()),
   );
+  const [selectedContact, setSelectedContact] = useState<TUser | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [hasAppliedDateFilter, setHasAppliedDateFilter] = useState(false);
   const [isFormationHistory, setIsFormationHistory] = useState(false);
@@ -252,6 +272,58 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
       toastr.error(e as Error);
     }
   };
+  const onSubmitContactSelector = async (contacts: TSelectorItem[]) => {
+    const timerId = setTimeout(() => setIsLoading(true), 500);
+
+    const { isCredit, isDebit } = getTransactionType(
+      selectedType.key as string,
+    );
+
+    setIsSelectorVisible(false);
+    setSelectedContact(contacts[0] as unknown as TUser);
+
+    try {
+      await fetchTransactionHistory(
+        startDate,
+        endDate,
+        isCredit,
+        isDebit,
+        contacts[0].id,
+      );
+
+      setIsLoading(false);
+      clearTimeout(timerId);
+    } catch (e) {
+      toastr.error(e as Error);
+    }
+  };
+
+  const onSelectorAddButtonClick = () => {
+    setIsSelectorVisible(true);
+  };
+
+  const onCloseSelectedContact = async () => {
+    setSelectedContact(null);
+
+    const timerId = setTimeout(() => setIsLoading(true), 500);
+
+    const { isCredit, isDebit } = getTransactionType(
+      selectedType.key as string,
+    );
+
+    try {
+      await fetchTransactionHistory(startDate, endDate, isCredit, isDebit);
+
+      setIsLoading(false);
+      clearTimeout(timerId);
+    } catch (e) {
+      toastr.error(e as Error);
+    }
+  };
+
+  const onCloseContactSelector = () => {
+    setIsSelectorVisible(false);
+  };
 
   const datesComponent = (
     <div className={styles.transactionDates}>
@@ -295,6 +367,20 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
     </div>
   );
 
+  const contactSelector = !selectedContact ? (
+    <SelectorAddButton
+      label={t("SelectContact")}
+      onClick={onSelectorAddButtonClick}
+    />
+  ) : (
+    <SelectedItemPure
+      key={`${selectedContact}`}
+      propKey={selectedContact?.id}
+      label={selectedContact.displayName}
+      onClose={onCloseSelectedContact}
+    />
+  );
+
   const filterCombobox = (
     <div className={styles.transactionHistoryCombobox}>
       <ComboBox
@@ -312,6 +398,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         dropDownTestId="transaction_type_dropdown"
       />
       {datesComponent}
+      {contactSelector}
     </div>
   );
 
@@ -326,6 +413,32 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
       />
     </div>
   );
+
+  const selectorComponent = isSelectorVisible ? (
+    <PeopleSelector
+      withCancelButton
+      onCancel={onCloseContactSelector}
+      cancelButtonLabel=""
+      disableSubmitButton={false}
+      submitButtonLabel={t("Common:SelectAction")}
+      onSubmit={onSubmitContactSelector}
+      withHeader
+      headerProps={{
+        onCloseClick: onCloseContactSelector,
+        isCloseable: true,
+        headerLabel: t("ListContacts"),
+      }}
+      filter={filter}
+      withInfo
+      infoText={t("OnlyPortalAdminsShown", {
+        productName: t("Common:ProductName"),
+      })}
+      emptyScreenHeader={t("Common:NotFoundMembers")}
+      emptyScreenDescription={t("CreateEditRoomDialog:PeopleSelectorInfo", {
+        productName: t("Common:ProductName"),
+      })}
+    />
+  ) : null;
 
   return (
     <>
@@ -383,60 +496,29 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
       ) : null}
 
       {isFilterDialogVisible ? (
+        <FilterPanel
+          isFilterDialogVisible={isFilterDialogVisible}
+          closeFilterDialog={closeFilterDialog}
+          isSelectorVisible={isSelectorVisible}
+          selectorComponent={selectorComponent}
+          datesComponent={datesComponent}
+          contactSelector={contactSelector}
+          typeOfHistoty={typeOfHistoty}
+          selectedType={selectedType}
+          onSelectType={onSelectType}
+          onApplyFilter={onApplyFilter}
+          isChanged={isChanged}
+        />
+      ) : null}
+
+      {isSelectorVisible ? (
         <ModalDialog
-          visible={isFilterDialogVisible}
-          onClose={closeFilterDialog}
+          visible={isSelectorVisible}
+          onClose={onCloseContactSelector}
           displayType={ModalDialogType.aside}
-          className={styles.filterDialog}
+          withoutPadding
         >
-          <ModalDialog.Header>{t("Filter")}</ModalDialog.Header>
-          <ModalDialog.Body>
-            <div className={styles.filterDialogContent}>
-              <div className={styles.filterDialogSection}>
-                <Text fontWeight={600} fontSize="15px">
-                  {t("Common:Type")}
-                </Text>
-                <ComboBox
-                  options={typeOfHistoty}
-                  selectedOption={selectedType}
-                  onSelect={onSelectType}
-                  directionY="both"
-                  noBorder={false}
-                  dropDownMaxHeight={300}
-                  showDisabledItems
-                  size={ComboBoxSize.content}
-                  scaled
-                  testId="transaction_type_combobox"
-                  dropDownTestId="transaction_type_dropdown"
-                />
-              </div>
-              <div className={styles.filterDialogDivider} />
-              <div className={styles.filterDialogSection}>
-                <Text fontWeight={600} fontSize="15px">
-                  {t("TransactionPeriod")}
-                </Text>
-                <div>{datesComponent}</div>
-              </div>
-            </div>
-          </ModalDialog.Body>
-          <ModalDialog.Footer>
-            <Button
-              onClick={onApplyFilter}
-              size={ButtonSize.medium}
-              label={t("Common:ApplyButton")}
-              isDisabled={!isChanged}
-              primary
-              scale
-              testId="apply_filter_button"
-            />
-            <Button
-              onClick={closeFilterDialog}
-              size={ButtonSize.medium}
-              label={t("Common:CancelButton")}
-              scale
-              testId="cancel_filter_button"
-            />
-          </ModalDialog.Footer>
+          <ModalDialog.Body>{selectorComponent}</ModalDialog.Body>
         </ModalDialog>
       ) : null}
     </>

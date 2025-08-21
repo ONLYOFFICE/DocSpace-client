@@ -35,7 +35,7 @@ import { TTransactionCollection } from "@docspace/shared/api/portal/types";
 
 import { getCorrectDate } from "@docspace/shared/utils";
 import styles from "../../styles/TransactionHistory.module.scss";
-import { accountingLedgersFormat } from "../../utils";
+import { accountingLedgersFormat, getServiceQuantity } from "../../utils";
 
 interface TransactionRowProps {
   transaction: TTransactionCollection;
@@ -57,21 +57,8 @@ const TransactionRow: React.FC<TransactionRowProps> = ({
     currency,
   );
 
-  const getServiceQuantity = (quantity: number, service: string) => {
-    let serviceName = service;
-
-    if (service != null && service.includes("disk-storage")) {
-      serviceName = "disk-storage";
-    }
-
-    switch (serviceName) {
-      case "disk-storage":
-        return `${quantity} ${t("Common:Gigabyte")}`;
-      default:
-        return "—";
-    }
-  };
   const correctDate = getCorrectDate(language, transaction.date);
+
   return (
     <TableRow>
       <TableCell>
@@ -101,7 +88,11 @@ const TransactionRow: React.FC<TransactionRowProps> = ({
       </TableCell>
       <TableCell>
         <Text fontWeight={600} fontSize="11px">
-          {getServiceQuantity(transaction.quantity, transaction.service!)}
+          {getServiceQuantity(
+            transaction.quantity,
+            transaction.serviceUnit!,
+            t,
+          )}
         </Text>
       </TableCell>
       <TableCell>

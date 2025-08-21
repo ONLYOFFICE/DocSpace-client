@@ -250,7 +250,7 @@ class CurrentQuotasStore {
   }
 
   get currentTariffPlanTitle() {
-    return this.currentPortalQuota?.title;
+    return this.currentPortalQuota?.title ?? "";
   }
 
   get quotaCharacteristics() {

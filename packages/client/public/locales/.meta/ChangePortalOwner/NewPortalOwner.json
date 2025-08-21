@@ -3,7 +3,7 @@
   "content": "New {{productName}} owner",
   "content_en_sha1_hash": "1dbd9dfcd68022a3ab1a7bcc8a0dea635c19ff3c",
   "created_at": "2025-05-19T21:30:56.996Z",
-  "updated_at": "2025-08-12T19:46:25.809Z",
+  "updated_at": "2025-08-21T11:22:39.798Z",
   "comment": {
     "text": "This translation key is used to display a notification message indicating a change in portal ownership. It appears in a dialog box, specifically in the \"New Portal Owner\" section, and is displayed when a user selects a new owner for a portal. The phrase will be replaced with the actual product name, as indicated by the productName variable.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
-      "line_number": 181,
+      "line_number": 182,
       "context": "</Text>\n </div>\n </StyledOwnerInfo>\n \n <StyledPeopleSelectorInfo>\n <Text className=\"new-owner\" title={t(\"NewPortalOwner\")}>\n {t(\"NewPortalOwner\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <Text className=\"description\" title={t(\"ChangeInstruction\")}>\n {t(\"ChangeInstruction\", { productName: t(\"Common:ProductName\") })}\n </Text>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
-      "line_number": 181,
+      "line_number": 182,
       "context": "</Text>\n </div>\n </StyledOwnerInfo>\n \n <StyledPeopleSelectorInfo>\n <Text className=\"new-owner\" title={t(\"NewPortalOwner\")}>\n {t(\"NewPortalOwner\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <Text className=\"description\" title={t(\"ChangeInstruction\")}>\n {t(\"ChangeInstruction\", { productName: t(\"Common:ProductName\") })}\n </Text>",
       "module": "/packages/client"
     }

@@ -2678,6 +2678,11 @@ class FilesActionStore {
 
       window.DocSpace.navigate(url, { state });
     } else {
+      if (isFrame && frameConfig?.events?.onFileManagerClick) {
+        frameCallEvent({ event: "onFileManagerClick", data: item });
+        return;
+      }
+
       if (fileItemsList && enablePlugins) {
         let currPluginItem = null;
 
@@ -2691,11 +2696,6 @@ class FilesActionStore {
             : true;
           if (correctDevice) return currPluginItem.onClick(item);
         }
-      }
-
-      if (isFrame && frameConfig?.events?.onFileManagerClick) {
-        frameCallEvent({ event: "onFileManagerClick", data: item });
-        return;
       }
 
       if (canConvert) {

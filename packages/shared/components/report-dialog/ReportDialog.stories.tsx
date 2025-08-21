@@ -35,7 +35,7 @@ import type { ReportDialogProps } from "./ReportDialog.types";
 import FirebaseHelper from "../../utils/firebase";
 
 const meta: Meta<typeof ReportDialog> = {
-  title: "Components/ReportDialog",
+  title: "Dialogs/ReportDialog",
   component: ReportDialog,
   tags: ["autodocs"],
   parameters: {
@@ -136,13 +136,5 @@ export const Default: Story = {
     version: "1.0.0",
     firebaseHelper: mockFirebaseHelper as unknown as FirebaseHelper,
     currentDeviceType: DeviceType.desktop,
-  },
-};
-
-export const Mobile: Story = {
-  render: (args) => <DialogWithToggleButton {...args} />,
-  args: {
-    ...Default.args,
-    currentDeviceType: DeviceType.mobile,
   },
 };

@@ -64,6 +64,8 @@ const LinkWithDropdown = ({
   manualWidth,
   isAside,
   withoutBackground,
+  fixedDirection = false,
+  isDefaultMode = true,
   ...rest
 }: LinkWithDropDownProps) => {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -225,6 +227,8 @@ const LinkWithDropdown = ({
           manualWidth || (showScroll ? onCheckManualWidth() : undefined)
         }
         open={state.isOpen}
+        fixedDirection={fixedDirection}
+        isDefaultMode={isDefaultMode}
         forwardedRef={ref}
         directionX={directionX}
         directionY={directionY}

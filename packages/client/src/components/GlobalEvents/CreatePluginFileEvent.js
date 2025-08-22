@@ -37,6 +37,8 @@ const CreatePluginFile = ({
   title,
   startValue,
   onSave,
+  onChange,
+  onError,
   onCancel,
   onClose,
   isCreateDialog,
@@ -45,6 +47,7 @@ const CreatePluginFile = ({
   onSelect,
   extension,
   pluginName,
+  errorText,
   updatePluginStatus,
   setCurrentSettingsDialogPlugin,
   setSettingsPluginDialogVisible,
@@ -67,7 +70,53 @@ const CreatePluginFile = ({
   const onSaveAction = async (e, value) => {
     if (!onSave) return onCloseAction();
 
-    const message = await onSave(e, value);
+    try {
+      const message = await onSave(e, value);
+
+      messageActions(
+        message,
+        null,
+        pluginName,
+        setSettingsPluginDialogVisible,
+        setCurrentSettingsDialogPlugin,
+        updatePluginStatus,
+        null,
+        setPluginDialogVisible,
+        setPluginDialogProps,
+        updateContextMenuItems,
+        updateInfoPanelItems,
+        updateMainButtonItems,
+        updateProfileMenuItems,
+        updateEventListenerItems,
+        updateFileItems,
+      );
+      !message.createDialogProps?.errorText && onCloseAction();
+    } catch (error) {
+      const message = onError(error);
+
+      messageActions(
+        message,
+        null,
+        pluginName,
+        setSettingsPluginDialogVisible,
+        setCurrentSettingsDialogPlugin,
+        updatePluginStatus,
+        null,
+        setPluginDialogVisible,
+        setPluginDialogProps,
+        updateContextMenuItems,
+        updateInfoPanelItems,
+        updateMainButtonItems,
+        updateProfileMenuItems,
+        updateEventListenerItems,
+        updateFileItems,
+      );
+    }
+  };
+
+  const onSelectAction = (option) => {
+    if (!onSelect) return;
+    const message = onSelect(option);
 
     messageActions(
       message,
@@ -86,12 +135,11 @@ const CreatePluginFile = ({
       updateEventListenerItems,
       updateFileItems,
     );
-    onCloseAction();
   };
 
-  const onSelectAction = (option) => {
-    if (!onSelect) return;
-    const message = onSelect(option);
+  const onChangeAction = (value) => {
+    if (!onChange) return;
+    const message = onChange(value);
 
     messageActions(
       message,
@@ -119,6 +167,7 @@ const CreatePluginFile = ({
       title={title}
       startValue={startValue}
       onSave={onSaveAction}
+      onChange={onChangeAction}
       onCancel={onCloseAction}
       onClose={onCloseAction}
       isCreateDialog={isCreateDialog}
@@ -126,6 +175,7 @@ const CreatePluginFile = ({
       selectedOption={selectedOption}
       onSelect={onSelectAction}
       extension={extension}
+      errorText={errorText}
     />
   );
 };

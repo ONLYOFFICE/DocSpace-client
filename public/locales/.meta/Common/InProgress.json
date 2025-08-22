@@ -3,7 +3,7 @@
   "content": "In progress",
   "content_en_sha1_hash": "b6bd42e4e7302e5e9a15930c8fcdb73fc2c0cf18",
   "created_at": "2025-05-19T21:30:45.918Z",
-  "updated_at": "2025-08-12T19:46:25.890Z",
+  "updated_at": "2025-08-21T11:22:39.811Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"In progress\" in a file management application. It appears on a status bar in a data reassignment dialog, indicating the current state of the file.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 275,
+      "line_number": 273,
       "context": "case FileFillingFormStatus.Draft:\n return t(\"Common:BadgeMyDraftTitle\");\n case FileFillingFormStatus.YourTurn:\n return t(\"Common:YourTurn\");\n case FileFillingFormStatus.InProgress:\n return t(\"Common:InProgress\");\n case FileFillingFormStatus.Stopped:\n return t(\"Common:Stopped\");\n case FileFillingFormStatus.Completed:\n return t(\"Common:Complete\");\n default:",
       "module": "/packages/shared"
     }

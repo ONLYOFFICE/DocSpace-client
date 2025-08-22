@@ -3,7 +3,7 @@
   "content": "Several roles are specified in this form. Forms with multiple roles are not available for filling in this type of room",
   "content_en_sha1_hash": "c77d18eca5a33e5263ab898522d85d5125198a95",
   "created_at": "2025-05-19T21:30:43.177Z",
-  "updated_at": "2025-08-11T09:02:44.078Z",
+  "updated_at": "2025-08-21T11:22:39.949Z",
   "comment": {
     "text": "This translation key is used to display a message explaining that forms with multiple roles are not available for filling in certain types of rooms. It appears as a tooltip on a button in a UI component. Translators should provide a clear explanation of this restriction to help users understand the functionality of the form.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 385,
+      "line_number": 386,
       "context": "<BadgeWrapper isTile={isTile}>\n <HelpButton\n place=\"bottom\"\n size={isViewTable ? 12 : 16}\n className=\"bagde_alert icons-group\"\n tooltipContent={t(\"Common:BadgeAlertDescription\")}\n />\n </BadgeWrapper>\n )} */}\n \n {customFilterEnabled && !isRoom && isExtsCustomFilter ? (",
       "module": "/packages/shared"
     }

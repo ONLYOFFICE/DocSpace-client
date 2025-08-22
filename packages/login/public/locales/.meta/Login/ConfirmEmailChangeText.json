@@ -1,0 +1,28 @@
+{
+  "key_path": "ConfirmEmailChangeText",
+  "content": "You’ve requested to change the email address on your {{productName}} account. To proceed, please sign in using your current credentials.",
+  "content_en_sha1_hash": "e28564336f7dda214bf88016fcbee169a1e100dd",
+  "created_at": "2025-08-21T11:22:38.899Z",
+  "updated_at": "2025-08-21T11:23:04.563Z",
+  "comment": {
+    "text": "This text is displayed to users who have requested to change the email address associated with their {{productName}} account. It instructs them to sign in using their current credentials to proceed with the email change process. It appears within the login flow.",
+    "is_auto": true,
+    "updated_at": "2025-08-21T11:23:04.563Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/login/src/components/GreetingContainer/GreetingLoginContainer.tsx",
+      "line_number": 105,
+      "context": "</Text>\n \n <Text fontSize=\"13px\" fontWeight={400} className=\"confirm-email-change\">\n <Trans\n t={t}\n i18nKey=\"ConfirmEmailChangeText\"\n ns=\"Login\"\n values={{\n productName: t(\"Common:ProductName\"),\n }}\n />",
+      "module": "/packages/login"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

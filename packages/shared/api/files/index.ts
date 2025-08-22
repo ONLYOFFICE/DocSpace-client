@@ -850,10 +850,11 @@ export async function moveToFolder(
   return res;
 }
 
-export async function getFileVersionInfo(fileId: number) {
+export async function getFileVersionInfo(fileId: number, shareKey?: string) {
   const res = (await request({
     method: "get",
     url: `/files/file/${fileId}/history`,
+    params: { share: shareKey },
   })) as TFile[];
   return res;
 }

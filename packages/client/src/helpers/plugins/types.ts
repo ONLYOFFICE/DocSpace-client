@@ -90,6 +90,7 @@ export interface ICreateDialog {
   isCreateDialog: boolean;
   extension?: string;
   errorText?: string;
+  isAutoFocusOnError?: boolean;
 }
 
 export interface IImage {
@@ -129,7 +130,7 @@ export interface IMessage {
       | ToggleButtonProps;
   }[];
   createDialogProps?: ICreateDialog;
-  updateDialogProps?: Partial<ICreateDialog>;
+  updateCreateDialogProps?: Partial<ICreateDialog>;
   modalDialogProps?: ModalDialogProps;
   postMessage?: IPostMessage;
   settings?: string;

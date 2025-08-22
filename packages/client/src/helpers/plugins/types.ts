@@ -86,8 +86,10 @@ export interface ICreateDialog {
   ) => Promise<IMessage> | Promise<void> | IMessage | void;
   onCancel?: (e: unknown) => void;
   onClose?: (e: unknown) => void;
+  onChange?: (value: string) => void;
   isCreateDialog: boolean;
   extension?: string;
+  errorText?: string;
 }
 
 export interface IImage {
@@ -127,6 +129,7 @@ export interface IMessage {
       | ToggleButtonProps;
   }[];
   createDialogProps?: ICreateDialog;
+  updateDialogProps?: Partial<ICreateDialog>;
   modalDialogProps?: ModalDialogProps;
   postMessage?: IPostMessage;
   settings?: string;

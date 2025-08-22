@@ -89,8 +89,12 @@ const Dialog = ({
   const onSaveAction = useCallback(
     async (e) => {
       setIsLoading(true);
-      isCreateDialog && isChecked && (await setKeepNewFileName(isChecked));
-      onSave && (await onSave(e, value));
+      const keepNewFileNamePromise =
+        isCreateDialog && isChecked && setKeepNewFileName(isChecked);
+
+      const savePromise = onSave && onSave(e, value);
+
+      await Promise.all([keepNewFileNamePromise, savePromise]);
       setIsLoading(false);
     },
     [onSave, isCreateDialog, value, isChecked, setKeepNewFileName],

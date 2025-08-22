@@ -4095,8 +4095,15 @@ class FilesStore {
   }
 
   get hasMoreFiles() {
-    const { isRoomsFolder, isArchiveFolder, isTemplatesFolder } =
-      this.treeFoldersStore;
+    const {
+      isRoomsFolder,
+      isArchiveFolder,
+      isTemplatesFolder,
+      isRecentFolder,
+    } = this.treeFoldersStore;
+
+    // Only 100 files on recent page should be shown
+    if (isRecentFolder) return false;
 
     const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
     const filterTotal = isRooms ? this.roomsFilter.total : this.filter.total;

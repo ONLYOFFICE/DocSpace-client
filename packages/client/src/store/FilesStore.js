@@ -654,6 +654,17 @@ class FilesStore {
   };
 
   wsModifyFolderDelete = (opt) => {
+    const { recentFolderId } = this.treeFoldersStore;
+    const data = opt?.data && JSON.parse(opt.data);
+
+    // Skip when removing in recent but selected folder is not recent
+    if (
+      data?.folderId === recentFolderId &&
+      this.selectedFolderStore.id !== recentFolderId
+    ) {
+      return;
+    }
+
     if (opt?.type === "file" && opt?.id) {
       const foundIndex = this.files.findIndex((x) => x.id === opt?.id);
       if (foundIndex == -1) return;

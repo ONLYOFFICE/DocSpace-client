@@ -447,8 +447,8 @@ importers:
         specifier: workspace:*
         version: link:../shared
       '@onlyoffice/document-editor-react':
-        specifier: file:./onlyoffice-document-editor-react-1.6.2.tgz
-        version: file:packages/doceditor/onlyoffice-document-editor-react-1.6.2.tgz(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        specifier: file:./onlyoffice-document-editor-react-2.1.1.tgz
+        version: file:packages/doceditor/onlyoffice-document-editor-react-2.1.1.tgz(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       classnames:
         specifier: 2.5.1
         version: 2.5.1
@@ -3170,9 +3170,9 @@ packages:
     resolution: {integrity: sha512-Oqppiv0+1+81fkKCOLAoBcjN80TEJGb+a5GoOBKalkxgy4I4KSqPRiKuOnN+vSGn2nHNyO5787MGXoulLQqBNg==}
     engines: {node: '>=22', pnpm: '>=9'}
 
-  '@onlyoffice/document-editor-react@file:packages/doceditor/onlyoffice-document-editor-react-1.6.2.tgz':
-    resolution: {integrity: sha512-95RC1j6utxY2wiMLtwIdZrWM4E77ZTQK0XRtHApKIi/5SGlfrrsk69wA5eJT+VeUgxmCQtCRRUeXJBzAP+HD6Q==, tarball: file:packages/doceditor/onlyoffice-document-editor-react-1.6.2.tgz}
-    version: 1.6.2
+  '@onlyoffice/document-editor-react@file:packages/doceditor/onlyoffice-document-editor-react-2.1.1.tgz':
+    resolution: {integrity: sha512-jKCmFpp6qTRhZTdc8xaYSBg9A5eHMKKJDensDSvIlrfLOflxt1Fc536fPq5c8NciAFqB1pRp4EjwpRLrph1aBQ==, tarball: file:packages/doceditor/onlyoffice-document-editor-react-2.1.1.tgz}
+    version: 2.1.1
     peerDependencies:
       react: ^16.9.0 || ^17 || ^18 || ^19
       react-dom: ^16.9.0 || ^17 || ^18 || ^19
@@ -12817,7 +12817,7 @@ snapshots:
     dependencies:
       pnpm: 9.15.4
 
-  '@onlyoffice/document-editor-react@file:packages/doceditor/onlyoffice-document-editor-react-1.6.2.tgz(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+  '@onlyoffice/document-editor-react@file:packages/doceditor/onlyoffice-document-editor-react-2.1.1.tgz(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
       lodash: 4.17.21
       react: 19.1.0
@@ -16214,7 +16214,7 @@ snapshots:
       '@typescript-eslint/parser': 7.1.0(eslint@8.57.1)(typescript@5.6.3)
       eslint: 8.57.1
       eslint-import-resolver-node: 0.3.9
-      eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.31.0)(eslint@8.57.1)
+      eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.31.0(@typescript-eslint/parser@7.1.0(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1))(eslint@8.57.1)
       eslint-plugin-import: 2.31.0(@typescript-eslint/parser@7.1.0(eslint@8.57.1)(typescript@5.6.3))(eslint-import-resolver-typescript@3.10.1)(eslint@8.57.1)
       eslint-plugin-jsx-a11y: 6.10.0(eslint@8.57.1)
       eslint-plugin-react: 7.37.1(eslint@8.57.1)
@@ -16238,7 +16238,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.31.0)(eslint@8.57.1):
+  eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.31.0(@typescript-eslint/parser@7.1.0(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1))(eslint@8.57.1):
     dependencies:
       '@nolyfill/is-core-module': 1.0.39
       debug: 4.4.1(supports-color@5.5.0)
@@ -16285,14 +16285,14 @@ snapshots:
       terminal-link: 3.0.0
       yargs: 17.7.2
 
-  eslint-module-utils@2.12.1(@typescript-eslint/parser@7.1.0(eslint@8.57.1)(typescript@5.6.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1)(eslint@8.57.1):
+  eslint-module-utils@2.12.1(@typescript-eslint/parser@7.1.0(eslint@8.57.1)(typescript@5.6.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.31.0(@typescript-eslint/parser@7.1.0(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1))(eslint@8.57.1))(eslint@8.57.1):
     dependencies:
       debug: 3.2.7
     optionalDependencies:
       '@typescript-eslint/parser': 7.1.0(eslint@8.57.1)(typescript@5.6.3)
       eslint: 8.57.1
       eslint-import-resolver-node: 0.3.9
-      eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.31.0)(eslint@8.57.1)
+      eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.31.0(@typescript-eslint/parser@7.1.0(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1))(eslint@8.57.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -16318,7 +16318,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 8.57.1
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.12.1(@typescript-eslint/parser@7.1.0(eslint@8.57.1)(typescript@5.6.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1)(eslint@8.57.1)
+      eslint-module-utils: 2.12.1(@typescript-eslint/parser@7.1.0(eslint@8.57.1)(typescript@5.6.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.31.0(@typescript-eslint/parser@7.1.0(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1))(eslint@8.57.1))(eslint@8.57.1)
       hasown: 2.0.2
       is-core-module: 2.16.1
       is-glob: 4.0.3

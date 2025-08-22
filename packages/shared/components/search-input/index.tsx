@@ -159,7 +159,7 @@ const SearchInput = ({
           !!inputValue || showClearButton ? "search-cross" : "search-loupe"
         }
         isIconFill
-        iconSize={16}
+        iconSize={15}
         onIconClick={
           !!inputValue || showClearButton ? handleClearSearch : undefined
         }

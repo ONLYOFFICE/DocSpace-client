@@ -77,7 +77,6 @@ type WalletProps = {
   fetchBalance?: () => Promise<void>;
   fetchTransactionHistory?: () => Promise<void>;
   canUpdateTariff: VoidFunction;
-  setVisibleWalletSetting?: (value: boolean) => void;
   isNotPaidPeriod?: boolean;
   isMobile?: boolean;
   walletCustomerStatusNotActive?: boolean;
@@ -108,7 +107,6 @@ const Wallet = (props: WalletProps) => {
     fetchBalance,
     fetchTransactionHistory,
     canUpdateTariff,
-    setVisibleWalletSetting,
     isNotPaidPeriod,
     isMobile,
     walletCustomerStatusNotActive,
@@ -134,7 +132,6 @@ const Wallet = (props: WalletProps) => {
 
   const onClose = () => {
     setVisible(false);
-    if (isVisibleWalletSettings) setVisibleWalletSetting?.(false);
   };
 
   const onOpen = () => {
@@ -334,7 +331,6 @@ export default inject(
       fetchBalance,
       fetchTransactionHistory,
       canUpdateTariff,
-      setVisibleWalletSetting,
       isCardLinkedToPortal,
     } = paymentStore;
     const { isFreeTariff } = currentQuotaStore;
@@ -359,7 +355,6 @@ export default inject(
       fetchBalance,
       fetchTransactionHistory,
       canUpdateTariff,
-      setVisibleWalletSetting,
       isCardLinkedToPortal,
       isNotPaidPeriod,
       isMobile,

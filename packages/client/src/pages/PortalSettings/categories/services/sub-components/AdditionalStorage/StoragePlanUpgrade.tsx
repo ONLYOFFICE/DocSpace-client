@@ -60,7 +60,6 @@ type StorageDialogProps = {
   ) => Promise<{ walletQuotas: { quantity: number; nextQuantity?: number }[] }>;
   fetchBalance?: () => Promise<void>;
   isVisibleWalletSettings?: boolean;
-  setVisibleWalletSetting?: (value: boolean) => void;
   partialUpgradeFee?: number;
   featureCountData?: number;
   setPartialUpgradeFee?: (value: number) => void;
@@ -80,7 +79,6 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   fetchBalance,
   storagePriceIncrement,
   isVisibleWalletSettings,
-  setVisibleWalletSetting,
   partialUpgradeFee,
   featureCountData = 0,
   setPartialUpgradeFee,
@@ -279,7 +277,6 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
 
   const onCloseTopUpModal = () => {
     setIsVisibleContainer(false);
-    if (isVisibleWalletSettings) setVisibleWalletSetting!(false);
   };
 
   const container = isVisibleContainer ? (
@@ -382,7 +379,6 @@ export default inject(
     const { fetchBalance, storagePriceIncrement } = paymentStore;
     const {
       isVisibleWalletSettings,
-      setVisibleWalletSetting,
       partialUpgradeFee,
       featureCountData,
       setPartialUpgradeFee,
@@ -394,7 +390,6 @@ export default inject(
       fetchPortalTariff,
       fetchBalance,
       storagePriceIncrement,
-      setVisibleWalletSetting,
       isVisibleWalletSettings,
       partialUpgradeFee,
       featureCountData,

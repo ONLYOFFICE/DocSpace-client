@@ -42,17 +42,21 @@ const Wallet = (props) => {
     isInitWalletPage,
     isShowStorageTariffDeactivatedModal,
     language,
+    setVisibleWalletSetting,
   } = props;
 
   const { t, ready } = useTranslation(["Payments", "Common"]);
 
+  const errorText = t("Common:UnexpectedError");
   const [showLoader, setShowLoader] = useState(false);
 
   const shouldShowLoader = !isInitWalletPage || !ready;
 
   useEffect(() => {
-    walletInit(t);
-  }, []);
+    if (!ready) return;
+
+    walletInit(errorText);
+  }, [errorText, ready]);
 
   useEffect(() => {
     moment.locale(language);
@@ -61,10 +65,11 @@ const Wallet = (props) => {
   useEffect(() => {
     timerId = setTimeout(() => {
       setShowLoader(true);
-    }, 200);
+    }, 500);
 
     return () => {
       clearTimeout(timerId);
+      setVisibleWalletSetting(false);
     };
   }, []);
 
@@ -85,8 +90,12 @@ const Wallet = (props) => {
 };
 
 export default inject(({ paymentStore, authStore }) => {
-  const { walletInit, isInitWalletPage, isShowStorageTariffDeactivatedModal } =
-    paymentStore;
+  const {
+    walletInit,
+    isInitWalletPage,
+    isShowStorageTariffDeactivatedModal,
+    setVisibleWalletSetting,
+  } = paymentStore;
   const { language } = authStore;
 
   return {
@@ -94,5 +103,6 @@ export default inject(({ paymentStore, authStore }) => {
     isInitWalletPage,
     isShowStorageTariffDeactivatedModal,
     language,
+    setVisibleWalletSetting,
   };
 })(observer(Wallet));

@@ -56,6 +56,7 @@ type ServicesProps = {
   isCardLinkedToPortal: boolean;
   setConfirmActionType: (value: string) => void;
   confirmActionType: string | null;
+  setIsInitServicesPage: (value: boolean) => void;
 };
 
 let timerId: NodeJS.Timeout | null = null;
@@ -71,6 +72,7 @@ const Services: React.FC<ServicesProps> = ({
   isCardLinkedToPortal,
   setConfirmActionType,
   confirmActionType,
+  setIsInitServicesPage,
 }) => {
   const { t, ready } = useTranslation(["Payments", "Services", "Common"]);
   const [isStorageVisible, setIsStorageVisible] = useState(false);
@@ -105,14 +107,14 @@ const Services: React.FC<ServicesProps> = ({
   }, [servicesInit]);
 
   useEffect(() => {
-    if (!isVisibleWalletSettings) return;
+    if (!isVisibleWalletSettings || !isInitServicesPage) return;
 
     if (confirmActionType === TOTAL_SIZE) {
       setIsStorageVisible(isVisibleWalletSettings);
     } else {
       setIsTopUpBalanceVisible(true);
     }
-  }, [isVisibleWalletSettings, confirmActionType]);
+  }, [isVisibleWalletSettings, confirmActionType, isInitServicesPage]);
 
   useEffect(() => {
     if (openDialog) {
@@ -125,10 +127,11 @@ const Services: React.FC<ServicesProps> = ({
   useEffect(() => {
     timerId = setTimeout(() => {
       setShowLoader(true);
-    }, 200);
+    }, 500);
 
     return () => {
       if (timerId) clearTimeout(timerId);
+      setIsInitServicesPage(false);
     };
   }, []);
 
@@ -324,16 +327,21 @@ const Services: React.FC<ServicesProps> = ({
 
 export const Component = inject(
   ({ servicesStore, currentTariffStatusStore, paymentStore }: TStore) => {
-    const { servicesInit, isInitServicesPage, isVisibleWalletSettings } =
-      servicesStore;
+    const {
+      servicesInit,
+      isInitServicesPage,
+      isVisibleWalletSettings,
+      setConfirmActionType,
+      confirmActionType,
+      setIsInitServicesPage,
+    } = servicesStore;
     const { isGracePeriod, previousStoragePlanSize } = currentTariffStatusStore;
     const {
       isShowStorageTariffDeactivatedModal,
       changeServiceState,
       isCardLinkedToPortal,
-      setConfirmActionType,
-      confirmActionType,
     } = paymentStore;
+
     return {
       servicesInit,
       isInitServicesPage,
@@ -345,6 +353,7 @@ export const Component = inject(
       isCardLinkedToPortal,
       setConfirmActionType,
       confirmActionType,
+      setIsInitServicesPage,
     };
   },
 )(observer(Services));

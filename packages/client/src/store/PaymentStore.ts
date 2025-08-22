@@ -159,8 +159,6 @@ class PaymentStore {
 
   isShowStorageTariffDeactivatedModal = false;
 
-  confirmActionType: string | null = null;
-
   constructor(
     userStore: UserStore,
     currentTariffStatusStore: CurrentTariffStatusStore,
@@ -261,10 +259,6 @@ class PaymentStore {
       (!isNonProfit && !isFreeTariff)
     );
   }
-
-  setConfirmActionType = (value: string) => {
-    this.confirmActionType = value;
-  };
 
   setIsInitPaymentPage = (value: boolean) => {
     this.isInitPaymentPage = value;
@@ -623,8 +617,6 @@ class PaymentStore {
   walletInit = async (t: TTranslation) => {
     const isRefresh = window.location.href.includes("complete=true");
     if (!this.currentTariffStatusStore) return;
-
-    this.setVisibleWalletSetting(false);
 
     const { fetchPortalTariff, walletCustomerStatusNotActive } =
       this.currentTariffStatusStore;

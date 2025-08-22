@@ -55,6 +55,8 @@ class ServicesStore {
 
   featureCountData: number = 0;
 
+  confirmActionType: string | null = null;
+
   constructor(
     currentTariffStatusStore: CurrentTariffStatusStore,
     paymentStore: PaymentStore,
@@ -112,6 +114,10 @@ class ServicesStore {
   //   return res;
   // };
 
+  setConfirmActionType = (value: string) => {
+    this.confirmActionType = value;
+  };
+
   setReccomendedAmount = (amount: number) => {
     this.reccomendedAmount = amount;
   };
@@ -123,14 +129,16 @@ class ServicesStore {
   servicesInit = async (t: TTranslation) => {
     const isRefresh = window.location.href.includes("complete=true");
 
+    if (!isRefresh) {
+      if (this.isVisibleWalletSettings) this.setVisibleWalletSetting(false);
+    }
+
     const {
       fetchAutoPayments,
       fetchCardLinked,
       setPaymentAccount,
-      isAlreadyPaid,
       initWalletPayerAndBalance,
       handleServicesQuotas,
-      setConfirmActionType,
     } = this.paymentStore!;
 
     const { fetchPortalTariff, walletCustomerStatusNotActive } =
@@ -147,7 +155,7 @@ class ServicesStore {
 
       if (!quotas) throw new Error();
 
-      if (isAlreadyPaid) {
+      if (this.paymentStore!.isAlreadyPaid) {
         if (this.paymentStore!.isStripePortalAvailable) {
           requests.push(setPaymentAccount());
 
@@ -185,7 +193,7 @@ class ServicesStore {
         }
 
         if (actionTypeParam) {
-          setConfirmActionType(actionTypeParam);
+          this.setConfirmActionType(actionTypeParam);
           this.setVisibleWalletSetting(true);
         }
 

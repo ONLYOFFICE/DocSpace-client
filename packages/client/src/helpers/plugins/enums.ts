@@ -40,6 +40,7 @@ export const enum PluginEvents {
   CHANGE_COLUMN = "change_column",
   CHANGE_USER_TYPE = "change_user_type",
   CREATE_PLUGIN_FILE = "create_plugin_file",
+  UPDATE_PLUGIN_FILE = "update_plugin_file",
 }
 
 export const enum PluginScopes {
@@ -70,6 +71,7 @@ export const enum PluginActions {
   // closeSettingsModal= "close-settings-modal",
 
   showCreateDialogModal = "show-create-dialog-modal",
+  updateCreateDialogModal = "update-create-dialog-modal",
 
   showModal = "show-modal",
   closeModal = "close-modal",

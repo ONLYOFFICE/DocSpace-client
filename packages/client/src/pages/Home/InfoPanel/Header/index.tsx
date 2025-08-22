@@ -200,6 +200,7 @@ const InfoPanelHeaderContent = ({
         withoutBorder
         className="header-text"
         isCloseable
+        dataTestId="info_panel_aside_header"
       />
 
       {withTabs ? (

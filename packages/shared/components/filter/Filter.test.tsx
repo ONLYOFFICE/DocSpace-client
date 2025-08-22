@@ -26,9 +26,9 @@
 
 import React from "react";
 import "@testing-library/jest-dom";
+import { act, render } from "@testing-library/react";
 
 import { DeviceType } from "../../enums";
-import { renderWithTheme } from "../../utils/render-with-theme";
 import Filter from ".";
 import { TGetSelectedSortData, TSortDataItem } from "./Filter.types";
 import { TViewAs } from "../../types";
@@ -122,18 +122,20 @@ describe("Filter Component", () => {
   });
 
   const renderComponent = (props = {}) => {
-    return renderWithTheme(<Filter {...baseProps} {...props} />);
+    return render(<Filter {...baseProps} {...props} />);
   };
 
   describe("Search Input", () => {
-    it("clears search when clearSearch prop is true", () => {
+    it("clears search when clearSearch prop is true", async () => {
       const onClearFilter = jest.fn();
       const setClearSearch = jest.fn();
 
-      renderComponent({
-        clearSearch: true,
-        onClearFilter,
-        setClearSearch,
+      await act(async () => {
+        renderComponent({
+          clearSearch: true,
+          onClearFilter,
+          setClearSearch,
+        });
       });
 
       expect(onClearFilter).toHaveBeenCalled();

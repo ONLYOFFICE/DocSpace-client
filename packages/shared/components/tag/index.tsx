@@ -60,6 +60,11 @@ const TagPure = ({
   dataTestId,
   onMouseEnter,
   onMouseLeave,
+  isDefaultMode = true,
+  directionY,
+  fixedDirection,
+  manualY,
+  manualX,
 }: TagProps) => {
   const [openDropdown, setOpenDropdown] = React.useState(false);
 
@@ -148,7 +153,11 @@ const TagPure = ({
         open={openDropdown}
         forwardedRef={tagRef}
         clickOutsideAction={onClickOutside}
-        manualY="4px"
+        isDefaultMode={isDefaultMode}
+        manualY={manualY}
+        manualX={manualX}
+        directionY={directionY}
+        fixedDirection={fixedDirection}
       >
         {advancedOptions.map((t, index) => (
           <DropDownItem

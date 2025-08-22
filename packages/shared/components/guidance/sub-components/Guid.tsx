@@ -32,13 +32,13 @@ import React, {
   useCallback,
 } from "react";
 
-import { useTheme } from "styled-components";
 import { isIOS } from "react-device-detect";
 
 import { Button, ButtonSize } from "../../button";
 import { Text } from "../../text";
 import { isMobile, classNames } from "../../../utils";
 import { AsideHeader } from "../../aside-header";
+import { useTheme } from "../../../hooks/useTheme";
 
 import styles from "./Guid.module.scss";
 import modalStyles from "../../modal-dialog/ModalDialog.module.scss";
@@ -149,7 +149,7 @@ const Guid = ({
   guidanceConfig,
   t,
 }: GuidProps) => {
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
   const modalRef = useRef<HTMLDivElement>(null);
   const [modalWidth, setModalWidth] = useState(0);
@@ -187,7 +187,7 @@ const Guid = ({
     () =>
       positions.map((position) => ({
         style: {
-          ["--backdrop-filter-value" as string]: theme.isBase
+          ["--backdrop-filter-value" as string]: isBase
             ? "contrast(200%)"
             : "contrast(0.72)",
           width: position.width
@@ -199,7 +199,7 @@ const Guid = ({
           right: `${position.right}px`,
         },
       })),
-    [positions, theme.isBase, sectionWidth],
+    [positions, isBase, sectionWidth],
   );
 
   const renderClippedElements = useCallback(() => {

@@ -43,6 +43,10 @@ const isTouchDevice = () => "ontouchstart" in document.documentElement;
 const getColor = (color: IconButtonProps["color"]): string => {
   if (!color) return "";
 
+  if (color.startsWith("--")) {
+    return `var(${color})`;
+  }
+
   return color === "accent" ? "var(--accent-main)" : color;
 };
 

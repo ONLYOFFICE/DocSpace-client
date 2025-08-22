@@ -107,23 +107,29 @@ const Template = ({
 
   return (
     <div style={{ height: "110px", display: "grid", gridGap: "24px" }}>
-      <TextInput
-        name="demoEmailInput"
-        type={InputType.email}
-        size={InputSize.base}
-        isDisabled={args.isDisabled}
-        isReadOnly
-        value="demo@gmail.com"
-      />
+      <div style={{ backgroundColor: "transparent", width: "fit-content" }}>
+        <TextInput
+          name="demoEmailInput"
+          type={InputType.email}
+          size={InputSize.base}
+          isDisabled={args.isDisabled}
+          isReadOnly
+          value="demo@gmail.com"
+          style={{ width: "166px" }}
+        />
+      </div>
 
-      <PasswordInput
-        {...args}
-        inputValue={value}
-        onChange={onChangeHandler}
-        tooltipPasswordLength={`${tooltipPasswordLength} ${passwordSettings?.minLength}`}
-        passwordSettings={fakeSettings}
-        onValidateInput={onValidateInputHandler}
-      />
+      <div style={{ backgroundColor: "transparent", width: "fit-content" }}>
+        <PasswordInput
+          size={InputSize.base}
+          {...args}
+          inputValue={value}
+          onChange={onChangeHandler}
+          tooltipPasswordLength={`${tooltipPasswordLength} ${passwordSettings?.minLength}`}
+          passwordSettings={fakeSettings}
+          onValidateInput={onValidateInputHandler}
+        />
+      </div>
     </div>
   );
 };
@@ -145,7 +151,7 @@ export const Default: Story = {
     isDisabled: false,
     passwordSettings: basePasswordSettings,
     simpleView: false,
-    inputName: "demoPasswordInput",
+    inputName: "demoPasswordInput-default",
     emailInputName: "demoEmailInput",
     isDisableTooltip: false,
     tooltipPasswordTitle: "Password must contain:",
@@ -165,6 +171,7 @@ export const SimpleView: Story = {
   args: {
     ...Default.args,
     simpleView: true,
+    inputName: "demoPasswordInput-simple",
   },
   parameters: {
     docs: {
@@ -187,6 +194,7 @@ export const CustomValidation: Story = {
       digits: true,
       specSymbols: false,
     },
+    inputName: "demoPasswordInput-custom",
   },
   parameters: {
     docs: {
@@ -203,6 +211,7 @@ export const WithCustomWidth: Story = {
   args: {
     ...Default.args,
     inputWidth: "400px",
+    inputName: "demoPasswordInput-width",
   },
   parameters: {
     docs: {
@@ -213,26 +222,12 @@ export const WithCustomWidth: Story = {
   },
 };
 
-export const Small: Story = {
-  render: (args) => <Template {...args} />,
-  args: {
-    ...Default.args,
-    size: InputSize.base,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "Small-sized password input",
-      },
-    },
-  },
-};
-
 export const Large: Story = {
   render: (args) => <Template {...args} />,
   args: {
     ...Default.args,
     size: InputSize.large,
+    inputName: "demoPasswordInput-large",
   },
   parameters: {
     docs: {
@@ -248,6 +243,7 @@ export const Disabled: Story = {
   args: {
     ...Default.args,
     isDisabled: true,
+    inputName: "demoPasswordInput-disabled",
   },
   parameters: {
     docs: {
@@ -263,41 +259,12 @@ export const WithError: Story = {
   args: {
     ...Default.args,
     hasError: true,
+    inputName: "demoPasswordInput-error",
   },
   parameters: {
     docs: {
       description: {
         story: "Password input with error state",
-      },
-    },
-  },
-};
-
-export const WithWarning: Story = {
-  render: (args) => <Template {...args} />,
-  args: {
-    ...Default.args,
-    hasWarning: true,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "Password input with warning state",
-      },
-    },
-  },
-};
-
-export const WithScale: Story = {
-  render: (args) => <Template {...args} />,
-  args: {
-    ...Default.args,
-    scale: true,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "Password input with scaling enabled",
       },
     },
   },

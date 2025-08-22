@@ -25,12 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen } from "@testing-library/react";
+import { screen, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { Link, LinkType } from ".";
-
-import { renderWithTheme } from "../../utils/render-with-theme";
 
 // Mock CSS modules
 jest.mock("./Link.module.scss", () => ({
@@ -51,12 +49,12 @@ const baseProps = {
 
 describe("<Link />", () => {
   it("renders without error", () => {
-    renderWithTheme(<Link {...baseProps}>link</Link>);
+    render(<Link {...baseProps}>link</Link>);
     expect(screen.queryByTestId("link")).toBeInTheDocument();
   });
 
   it("renders with custom data-testid", () => {
-    renderWithTheme(
+    render(
       <Link {...baseProps} dataTestId="custom-link">
         link
       </Link>,
@@ -65,7 +63,7 @@ describe("<Link />", () => {
   });
 
   it("renders with isBold prop", () => {
-    renderWithTheme(
+    render(
       <Link {...baseProps} isBold>
         link
       </Link>,
@@ -75,7 +73,7 @@ describe("<Link />", () => {
   });
 
   it("renders with isHovered prop", () => {
-    renderWithTheme(
+    render(
       <Link {...baseProps} isHovered>
         link
       </Link>,
@@ -85,7 +83,7 @@ describe("<Link />", () => {
   });
 
   it("renders with isSemitransparent prop", () => {
-    renderWithTheme(
+    render(
       <Link {...baseProps} isSemitransparent>
         link
       </Link>,
@@ -95,7 +93,7 @@ describe("<Link />", () => {
   });
 
   it("renders with isTextOverflow prop", () => {
-    renderWithTheme(
+    render(
       <Link {...baseProps} isTextOverflow>
         link
       </Link>,
@@ -105,7 +103,7 @@ describe("<Link />", () => {
   });
 
   it("renders with noHover prop", () => {
-    renderWithTheme(
+    render(
       <Link {...baseProps} noHover>
         link
       </Link>,
@@ -115,7 +113,7 @@ describe("<Link />", () => {
   });
 
   it("renders with enableUserSelect prop", () => {
-    renderWithTheme(
+    render(
       <Link {...baseProps} enableUserSelect>
         link
       </Link>,
@@ -125,7 +123,7 @@ describe("<Link />", () => {
   });
 
   it("renders with type prop action", () => {
-    renderWithTheme(
+    render(
       <Link {...baseProps} type={LinkType.action}>
         link
       </Link>,
@@ -135,7 +133,7 @@ describe("<Link />", () => {
   });
 
   it("renders with custom fontSize and lineHeight", () => {
-    renderWithTheme(
+    render(
       <Link {...baseProps} fontSize="16px" lineHeight="24px">
         link
       </Link>,
@@ -145,7 +143,7 @@ describe("<Link />", () => {
   });
 
   it("accepts id", () => {
-    renderWithTheme(
+    render(
       <Link {...baseProps} id="testId">
         link
       </Link>,
@@ -156,7 +154,7 @@ describe("<Link />", () => {
 
   it("accepts className", () => {
     const className = "custom-class";
-    renderWithTheme(
+    render(
       <Link {...baseProps} className={className}>
         link
       </Link>,
@@ -166,7 +164,7 @@ describe("<Link />", () => {
   });
 
   it("sets aria-label", () => {
-    renderWithTheme(
+    render(
       <Link {...baseProps} ariaLabel="Custom label">
         link
       </Link>,
@@ -176,13 +174,13 @@ describe("<Link />", () => {
   });
 
   it("uses children as aria-label when ariaLabel prop is not provided", () => {
-    renderWithTheme(<Link {...baseProps}>Custom text</Link>);
+    render(<Link {...baseProps}>Custom text</Link>);
     const link = screen.getByTestId("link");
     expect(link).toHaveAttribute("aria-label", "Custom text");
   });
 
   it("renders with custom rel attribute", () => {
-    renderWithTheme(
+    render(
       <Link {...baseProps} rel="noopener">
         link
       </Link>,
@@ -192,7 +190,7 @@ describe("<Link />", () => {
   });
 
   it("renders with custom tabIndex", () => {
-    renderWithTheme(
+    render(
       <Link {...baseProps} tabIndex={-1}>
         link
       </Link>,

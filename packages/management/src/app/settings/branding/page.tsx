@@ -25,6 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { redirect } from "next/navigation";
+import { headers } from "next/headers";
+import { deviceDetect } from "react-device-detect";
+
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 
 import {
@@ -93,6 +96,9 @@ async function Page() {
 
   const isDefaultWhiteLabel = getIsDefaultWhiteLabel(whiteLabelIsDefault);
 
+  const ua = (await headers()).get("user-agent") || "";
+  const { isMobile } = deviceDetect(ua);
+
   return (
     <BrandingPage
       whiteLabelLogos={whiteLabelLogos}
@@ -108,6 +114,7 @@ async function Page() {
       licenseAgreementsUrl={licenseAgreementsUrl!}
       isEnterprise={enterprise}
       logoText={logoText}
+      isMobile={isMobile}
     />
   );
 }

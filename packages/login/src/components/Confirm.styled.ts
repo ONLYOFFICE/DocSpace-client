@@ -193,6 +193,20 @@ export const StyledBody = styled.div`
     margin-top: 24px;
     line-height: 16px;
   }
+
+  .user-info-wrapper {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+    padding: 8px 0;
+
+    margin-bottom: 8px;
+  }
+
+  .user-email {
+    color: ${(props) => props.theme.login.textColor};
+  }
 `;
 
 export const ButtonsWrapper = styled.div`

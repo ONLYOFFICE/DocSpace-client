@@ -102,7 +102,6 @@ const LoginForm = ({
   const currentCulture = i18n.language;
 
   const message = searchParams?.get("message");
-  const confirmedEmail = searchParams?.get("confirmedEmail");
   const authError = searchParams?.get("authError");
   const referenceUrl = searchParams?.get("referenceUrl");
   const loginData = searchParams?.get("loginData") ?? null;
@@ -220,9 +219,16 @@ const LoginForm = ({
 
   useEffect(() => {
     message && setErrorText(message);
-    confirmedEmail && setIdentifier(confirmedEmail);
+    const confirmedData = sessionStorage?.getItem("confirmedData");
+    let email;
 
-    if (confirmedEmail && ready && !emailConfirmedToastShown.current) {
+    if (confirmedData) {
+      email = JSON.parse(atob(confirmedData));
+      setIdentifier(email);
+      sessionStorage.removeItem("confirmedData");
+    }
+
+    if (email && ready && !emailConfirmedToastShown.current) {
       const messageEmailConfirmed = t("MessageEmailConfirmed");
       const messageAuthorize = t("MessageAuthorize");
       const text = `${messageEmailConfirmed} ${messageAuthorize}`;
@@ -230,7 +236,7 @@ const LoginForm = ({
       toastr.success(text);
       emailConfirmedToastShown.current = true;
     }
-  }, [message, confirmedEmail, t, ready, authCallback]);
+  }, [message, t, ready, authCallback]);
 
   useEffect(() => {
     if (passwordChanged && ready && !passwordChangedToastShown.current) {

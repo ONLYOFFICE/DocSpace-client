@@ -3,7 +3,7 @@
   "content": "Search",
   "content_en_sha1_hash": "bce06414177f72ab70e6387b6af9f8ceef0d6049",
   "created_at": "2025-05-19T21:30:48.328Z",
-  "updated_at": "2025-08-11T09:02:43.906Z",
+  "updated_at": "2025-08-21T11:22:39.841Z",
   "comment": {
     "text": "This translation key is used to display the label \"Search\" in various UI elements. It appears on a search input field and an icon button, inviting users to find specific items or content. The text should be translated as \"Search\" in English.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/FormGallery/Filter/SearchFilter/index.js",
       "line_number": 59,
-      "context": "return (\n <SearchInput\n forwardedRef={ref}\n scale\n tabIndex={1}\n placeholder={t(\"Common:Search\")}\n value={value}\n onChange={onChangeValue}\n onClick={onInputClick}\n onClearSearch={onClear}\n />",
+      "context": "return (\n <SearchInput\n forwardedRef={ref}\n scale\n tabIndex={1}\n placeholder={t(\"Common:Search\")}\n value={value}\n onChange={onChangeValue}\n onClick={onInputClick}\n onClearSearch={onClear}\n dataTestId=\"form_gallery_search_filter\"",
       "module": "/packages/client"
     },
     {

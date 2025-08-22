@@ -133,7 +133,10 @@ const useProfileBody = ({
     try {
       actions.push(getAuthProviders?.(), getCapabilities?.());
 
-      if (tfaOn) {
+      const currentTfaType = tfaSettings ?? (await getTfaType?.());
+      const isTfaOn = Boolean(currentTfaType && currentTfaType !== "none");
+
+      if (isTfaOn) {
         actions.push(getTfaBackupCodes?.());
       }
 
@@ -152,12 +155,14 @@ const useProfileBody = ({
       console.error(e);
     }
   }, [
-    tfaOn,
+    tfaSettings,
+    getTfaType,
     getAuthProviders,
     getCapabilities,
     getTfaBackupCodes,
     getSessions,
     setBackupCodes,
+    setProviders,
   ]);
 
   const initialLoad = React.useCallback(async () => {
@@ -167,10 +172,10 @@ const useProfileBody = ({
       setIsSectionHeaderLoading?.(false);
     };
 
-    await Promise.all([getProfile(), getTfaType?.()]);
+    await Promise.all([getProfile()]);
 
     setDocumentTitle?.(t?.("Common:Profile"));
-  }, [setIsProfileLoaded, getTfaType, t]);
+  }, [setIsProfileLoaded, t]);
 
   const getProfileInitialValue = React.useCallback(async () => {
     const actions = [initialLoad()];

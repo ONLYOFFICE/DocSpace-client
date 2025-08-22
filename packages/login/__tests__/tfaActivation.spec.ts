@@ -39,10 +39,9 @@ const QUERY_PARAMS = [
     name: "type",
     value: "TfaActivation",
   },
-
   {
-    name: "email",
-    value: "mail@mail.com",
+    name: "encemail",
+    value: "b5COc6kRm3veeYqA72sOfA&uid=66faa6e4-f133-11ea-b126-00ffeec8b4ef",
   },
 ];
 

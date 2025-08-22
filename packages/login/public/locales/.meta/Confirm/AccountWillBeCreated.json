@@ -3,7 +3,7 @@
   "content": "A {{productName}} account will be created for <1>{{email}}</1>. Please complete your registration:",
   "content_en_sha1_hash": "3f6f73d8114801f9916e2149b49a336075d95113",
   "created_at": "2025-05-19T21:30:57.333Z",
-  "updated_at": "2025-05-24T15:37:10.831Z",
+  "updated_at": "2025-08-21T11:22:39.941Z",
   "comment": {
     "text": "This translation key is used to display a greeting message when an account is created. It indicates that a user's account has been successfully created and provides details about the newly created account, such as the email address. This message appears in the UI after successful registration, prompting the user to complete their registration process.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/components/GreetingContainer/GreetingUserContainer.tsx",
-      "line_number": 74,
+      "line_number": 83,
       "context": "</Text>\n </div>\n <Text>\n <Trans\n t={t}\n i18nKey=\"AccountWillBeCreated\"\n ns=\"Confirm\"\n defaults={DEFAULT_CREATION_TEXT}\n values={{\n email,\n productName: t(\"Common:ProductName\"),",
       "module": "/packages/login"
     }

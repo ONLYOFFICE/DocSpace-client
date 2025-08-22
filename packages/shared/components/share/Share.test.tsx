@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen, waitFor } from "@testing-library/react";
+import { screen, waitFor, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import {
   FileStatus,
@@ -34,7 +34,6 @@ import {
   ShareAccessRights,
 } from "../../enums";
 import Share from "./index";
-import { renderWithTheme } from "../../utils/render-with-theme";
 
 // Mock the API client
 jest.mock("../../api/client", () => ({
@@ -144,7 +143,7 @@ describe("Share component", () => {
 
   it("shows sharing status when file is shared", async () => {
     const props = createProps(false);
-    renderWithTheme(<Share {...props} />);
+    render(<Share {...props} />);
     await waitFor(() => {
       expect(screen.getByTestId("shared-links")).toBeInTheDocument();
     });

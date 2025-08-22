@@ -3,7 +3,7 @@
   "content": "Use credentials for the corporate domain",
   "content_en_sha1_hash": "68b9eafe633009711261edd8962190d4eacd9c39",
   "created_at": "2025-05-19T21:30:57.269Z",
-  "updated_at": "2025-05-24T14:58:20.723Z",
+  "updated_at": "2025-08-21T11:22:39.944Z",
   "comment": {
     "text": "\"This is a hint text used to inform users that their credentials should be for the corporate domain. It appears as a tooltip in the login form's LDAP container.\"",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/login/src/components/LoginForm/sub-components/LDAPContainer.tsx",
       "line_number": 64,
-      "context": "<HelpButton\n id=\"login_ldap-hint\"\n className=\"help-button\"\n offsetRight={0}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"SignInLdapHelper\")}</Text>\n }\n tooltipMaxWidth={isMobileOnly ? \"240px\" : \"340px\"}\n />\n }\n />",
+      "context": "<HelpButton\n id=\"login_ldap-hint\"\n className=\"help-button\"\n offsetRight={0}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"SignInLdapHelper\")}</Text>\n }\n tooltipMaxWidth={isMobileOnly ? \"240px\" : \"340px\"}\n dataTestId=\"ldap_login_help_button\"\n />\n }",
       "module": "/packages/login"
     }
   ],

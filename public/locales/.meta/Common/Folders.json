@@ -3,7 +3,7 @@
   "content": "Folders",
   "content_en_sha1_hash": "19adc47be34bed86af37b8e8dc882af424402561",
   "created_at": "2025-05-19T21:30:45.434Z",
-  "updated_at": "2025-08-12T19:46:26.020Z",
+  "updated_at": "2025-08-21T11:22:39.845Z",
   "comment": {
     "text": "The translation key \"Folders\" is used to display a heading or label for folders in the user interface. It appears in various places, such as tiles and filters, to provide clear identification of folder-related content. Translators should focus on conveying a consistent meaning across different contexts.",
     "is_auto": true,
@@ -48,7 +48,7 @@
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 350,
+      "line_number": 348,
       "context": ") => {\n switch (key) {\n case \"all\":\n return t(\"Common:All\");\n case FilterType.FoldersOnly:\n return t(\"Common:Folders\");\n case FilterType.DocumentsOnly:\n return t(\"Common:Documents\");\n case FilterType.PresentationsOnly:\n return t(\"Common:Presentations\");\n case FilterType.SpreadsheetsOnly:",
       "module": "/packages/shared"
     }

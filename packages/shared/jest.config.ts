@@ -139,6 +139,7 @@ const config: Config = {
     "react-i18next": "<rootDir>/__mocks__/reacti18nextMock.tsx",
     "PUBLIC_DIR/": "<rootDir>/__mocks__/fileMock.js",
     "hex-rgb": "<rootDir>/__mocks__/hex-rgb.js",
+    "react-svg": "<rootDir>/__mocks__/reactSvgMock.tsx",
   },
 
   testTimeout: 70000,

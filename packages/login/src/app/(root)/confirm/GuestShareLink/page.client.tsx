@@ -54,8 +54,9 @@ const GuestShareLinkForm = ({
   guestDisplayName,
   guestAvatar,
 }: GuestShareLinkFormProps) => {
-  const { linkData } = useContext(ConfirmRouteContext);
-  const { confirmHeader = "", email = "" } = linkData;
+  const { linkData, confirmLinkResult } = useContext(ConfirmRouteContext);
+  const { confirmHeader = "" } = linkData;
+  const { email = "" } = confirmLinkResult;
   const { t } = useTranslation(["Confirm", "Common"]);
 
   const [isLoading, setIsLoading] = useState(false);

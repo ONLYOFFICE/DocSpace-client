@@ -49,7 +49,8 @@ const InfoBadge: FC<InfoBadgeProps> = ({
 
   const tooltipRef = useRef<TooltipRefProps>(null);
 
-  const onClose = useCallback(() => {
+  const onClose = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
     tooltipRef.current?.close();
   }, []);
 

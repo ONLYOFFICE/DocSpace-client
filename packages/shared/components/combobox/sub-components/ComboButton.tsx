@@ -166,7 +166,6 @@ export const ComboButton: React.FC<TComboButtonProps> = ({
           color={selectedOption.color}
           backgroundColor={selectedOption.backgroundColor}
           border={`2px solid ${selectedOption.border}`}
-          compact={!!selectedOption.border}
           data-test-id="combo-button-badge"
         />
       ) : type === "descriptive" ? (

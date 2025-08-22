@@ -412,7 +412,7 @@ const PasswordInput = ({
             place="top"
             clickable
             openOnClick
-            anchorSelect="div[id='tooltipContent'] input"
+            anchorSelect={`div[id='tooltipContent-${id || inputName}'] input`}
             ref={refTooltip}
             imperativeModeOnly
           >
@@ -450,7 +450,7 @@ const PasswordInput = ({
         <>
           <div className="password-field-wrapper">
             <div
-              id="tooltipContent"
+              id={`tooltipContent-${id || inputName}`}
               data-testid="tooltipContent"
               ref={refProgress}
               className={classNames(styles.passwordProgress, {

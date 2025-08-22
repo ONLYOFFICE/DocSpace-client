@@ -46,6 +46,7 @@ const Dialog = ({
   options,
   selectedOption,
   onSelect,
+  onChange,
   onSave,
   onCancel,
   onClose,
@@ -54,13 +55,16 @@ const Dialog = ({
   keepNewFileName,
   setKeepNewFileName,
   withForm,
+  errorText,
 }) => {
   const [value, setValue] = useState("");
 
   const [isError, setIsError] = useState(false);
-  const [isDisabled, setIsDisabled] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
+
+  const hasError = Boolean(errorText) || isError;
 
   // Generate test ID prefix based on dialog title
   const getTestIdPrefix = useCallback(() => {
@@ -83,10 +87,11 @@ const Dialog = ({
   );
 
   const onSaveAction = useCallback(
-    (e) => {
-      setIsDisabled(true);
-      isCreateDialog && isChecked && setKeepNewFileName(isChecked);
-      onSave && onSave(e, value);
+    async (e) => {
+      setIsLoading(true);
+      isCreateDialog && isChecked && (await setKeepNewFileName(isChecked));
+      onSave && (await onSave(e, value));
+      setIsLoading(false);
     },
     [onSave, isCreateDialog, value, isChecked, setKeepNewFileName],
   );
@@ -95,9 +100,10 @@ const Dialog = ({
     (e) => {
       if (e.keyCode === 27) onCancelAction(e);
 
-      if (e.keyCode === 13 && !withForm && !isError) onSaveAction(e);
+      if (e.keyCode === 13 && !withForm && !hasError && !isLoading)
+        onSaveAction(e);
     },
-    [onCancelAction, onSaveAction, withForm, isError],
+    [onCancelAction, onSaveAction, withForm, hasError, isLoading],
   );
 
   useEffect(() => {
@@ -122,11 +128,12 @@ const Dialog = ({
     };
   }, [onKeyUpHandler]);
 
-  const onChange = useCallback(
+  const onChangeAction = useCallback(
     (e) => {
       let newValue = e.target.value;
 
       newValue = removeEmojiCharacters(newValue);
+      onChange?.(newValue);
       if (newValue.match(folderFormValidation)) {
         setIsError(true);
       } else {
@@ -159,10 +166,10 @@ const Dialog = ({
       <ModalDialog.Header>{title}</ModalDialog.Header>
       <ModalDialog.Body>
         <FieldContainer
-          hasError={isError}
+          hasError={hasError}
           labelVisible={false}
           errorMessageWidth="100%"
-          errorMessage={t("Common:ContainsSpecCharacter")}
+          errorMessage={errorText || t("Common:ContainsSpecCharacter")}
           removeMargin
         >
           <TextInput
@@ -173,9 +180,9 @@ const Dialog = ({
             value={value}
             isAutoFocussed
             tabIndex={1}
-            onChange={onChange}
+            onChange={onChangeAction}
             onFocus={onFocus}
-            isDisabled={isDisabled}
+            isDisabled={isLoading}
             maxLength={165}
             testId={`${getTestIdPrefix()}_text_input`}
           />
@@ -218,8 +225,8 @@ const Dialog = ({
           type="submit"
           scale
           primary
-          isLoading={isDisabled}
-          isDisabled={isDisabled || isError}
+          isLoading={isLoading}
+          isDisabled={isLoading || hasError}
           onClick={onSaveAction}
           testId={`${getTestIdPrefix()}_save_button`}
         />
@@ -229,7 +236,7 @@ const Dialog = ({
           label={t("Common:CancelButton")}
           size="normal"
           scale
-          isDisabled={isDisabled}
+          isDisabled={isLoading}
           onClick={onCancelAction}
           testId={`${getTestIdPrefix()}_cancel_button`}
         />

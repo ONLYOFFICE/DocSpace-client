@@ -162,7 +162,8 @@ const PaymentMethod = (props: PaymentMethodProps) => {
   );
 };
 
-export default inject(({ paymentStore }: TStore) => {
-  const { confirmActionType, fetchCardLinked } = paymentStore;
+export default inject(({ paymentStore, servicesStore }: TStore) => {
+  const { fetchCardLinked } = paymentStore;
+  const { confirmActionType } = servicesStore;
   return { confirmActionType, fetchCardLinked };
 })(observer(PaymentMethod));

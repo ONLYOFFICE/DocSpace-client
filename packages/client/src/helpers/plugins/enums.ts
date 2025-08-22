@@ -40,7 +40,6 @@ export const enum PluginEvents {
   CHANGE_COLUMN = "change_column",
   CHANGE_USER_TYPE = "change_user_type",
   CREATE_PLUGIN_FILE = "create_plugin_file",
-  UPDATE_PLUGIN_FILE = "update_plugin_file",
 }
 
 export const enum PluginScopes {

@@ -147,6 +147,8 @@ const Editor = ({
     organizationName,
   });
 
+  console.log("test");
+
   const newConfig: IConfig = useMemo(() => {
     return config
       ? {

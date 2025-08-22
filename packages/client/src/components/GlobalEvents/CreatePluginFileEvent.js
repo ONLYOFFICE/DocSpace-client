@@ -48,6 +48,7 @@ const CreatePluginFile = ({
   extension,
   pluginName,
   errorText,
+  isAutoFocusOnError,
   updatePluginStatus,
   setCurrentSettingsDialogPlugin,
   setSettingsPluginDialogVisible,
@@ -59,6 +60,7 @@ const CreatePluginFile = ({
   updateProfileMenuItems,
   updateEventListenerItems,
   updateFileItems,
+  updateCreatePluginFileProps,
 }) => {
   const { t } = useTranslation(["Translations", "Common", "Files"]);
 
@@ -89,6 +91,7 @@ const CreatePluginFile = ({
         updateProfileMenuItems,
         updateEventListenerItems,
         updateFileItems,
+        updateCreatePluginFileProps,
       );
       !message.createDialogProps?.errorText && onCloseAction();
     } catch (error) {
@@ -110,6 +113,7 @@ const CreatePluginFile = ({
         updateProfileMenuItems,
         updateEventListenerItems,
         updateFileItems,
+        updateCreatePluginFileProps,
       );
     }
   };
@@ -134,6 +138,7 @@ const CreatePluginFile = ({
       updateProfileMenuItems,
       updateEventListenerItems,
       updateFileItems,
+      updateCreatePluginFileProps,
     );
   };
 
@@ -157,6 +162,7 @@ const CreatePluginFile = ({
       updateProfileMenuItems,
       updateEventListenerItems,
       updateFileItems,
+      updateCreatePluginFileProps,
     );
   };
 
@@ -176,6 +182,7 @@ const CreatePluginFile = ({
       onSelect={onSelectAction}
       extension={extension}
       errorText={errorText}
+      isAutoFocusOnError={isAutoFocusOnError}
     />
   );
 };

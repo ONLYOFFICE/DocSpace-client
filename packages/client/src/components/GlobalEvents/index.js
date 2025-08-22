@@ -247,21 +247,13 @@ const GlobalEvents = ({
           payload.onClose && payload.onClose();
           setCreatePluginFileProps({ visible: false, onClose: null });
         },
+        updateCreatePluginFileProps: (newProps) => {
+          setCreatePluginFileProps((prevProps) => ({
+            ...prevProps,
+            ...newProps,
+          }));
+        },
       });
-    },
-    [enablePlugins],
-  );
-
-  const onUpdatePluginFileDialog = useCallback(
-    (e) => {
-      if (!enablePlugins) return;
-
-      const { payload: newProps } = e;
-
-      setCreatePluginFileProps((prevProps) => ({
-        ...prevProps,
-        ...newProps,
-      }));
     },
     [enablePlugins],
   );
@@ -380,10 +372,6 @@ const GlobalEvents = ({
         Events.CREATE_PLUGIN_FILE,
         onCreatePluginFileDialog,
       );
-      window.addEventListener(
-        Events.UPDATE_PLUGIN_FILE,
-        onUpdatePluginFileDialog,
-      );
 
       if (eventListenerItemsList) {
         eventListenerItemsList.forEach((item) => {
@@ -413,10 +401,6 @@ const GlobalEvents = ({
           Events.CREATE_PLUGIN_FILE,
           onCreatePluginFileDialog,
         );
-        window.removeEventListener(
-          Events.UPDATE_PLUGIN_FILE,
-          onUpdatePluginFileDialog,
-        );
 
         if (eventListenerItemsList) {
           eventListenerItemsList.forEach((item, index) => {
@@ -437,7 +421,6 @@ const GlobalEvents = ({
     onEditGroup,
     onChangeUserType,
     onCreatePluginFileDialog,
-    onUpdatePluginFileDialog,
     enablePlugins,
   ]);
 

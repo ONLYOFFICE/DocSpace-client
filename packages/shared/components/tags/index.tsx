@@ -42,7 +42,7 @@ const Tags: FC<TagsProps> = ({
   removeTagIcon,
   onMouseEnter,
   onMouseLeave,
-  isDefaultMode = false,
+  isDefaultMode = true,
   directionY,
   fixedDirection,
   manualY,

@@ -3293,7 +3293,7 @@ class FilesStore {
     return this.filter.search;
   }
 
-  getItemUrl = (id, isFolder, needConvert, canOpenPlayer) => {
+  getItemUrl = (id, isFolder, needConvert, canOpenPlayer, shareKey) => {
     const proxyURL = window.ClientConfig?.proxy?.url || window.location.origin;
 
     const url = getCategoryUrl(this.categoryType, id);
@@ -3326,7 +3326,7 @@ class FilesStore {
     const newUrl = combineUrl(
       proxyURL,
       config.homepage,
-      `/doceditor?fileId=${id}${needConvert ? "&action=view" : ""}`,
+      `/doceditor?fileId=${id}${needConvert ? "&action=view" : ""}${shareKey ? `&share=${shareKey}` : ""}`,
     );
 
     return newUrl;
@@ -3444,7 +3444,9 @@ class FilesStore {
       const folderUrl = isFolder && this.getItemUrl(id, isFolder, false, false);
 
       const docUrl =
-        !canOpenPlayer && !isFolder && this.getItemUrl(id, false, needConvert);
+        !canOpenPlayer &&
+        !isFolder &&
+        this.getItemUrl(id, false, needConvert, false, requestToken);
 
       const href = isRecycleBinFolder
         ? null

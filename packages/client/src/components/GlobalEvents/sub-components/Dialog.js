@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useCallback, useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { isMobile, isIOS } from "react-device-detect";
 
@@ -56,6 +56,7 @@ const Dialog = ({
   setKeepNewFileName,
   withForm,
   errorText,
+  isAutoFocusOnError,
 }) => {
   const [value, setValue] = useState("");
 
@@ -157,6 +158,17 @@ const Dialog = ({
   const onChangeCheckbox = () => {
     isCreateDialog && setIsChecked((val) => !val);
   };
+
+  useEffect(() => {
+    if (hasError && isAutoFocusOnError) {
+      setTimeout(() => {
+        const input = document?.getElementById("create-text-input");
+        if (input) {
+          input.focus();
+        }
+      }, 50);
+    }
+  }, [hasError, isAutoFocusOnError]);
 
   return (
     <ModalDialog

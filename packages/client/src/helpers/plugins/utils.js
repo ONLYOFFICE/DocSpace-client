@@ -51,6 +51,7 @@ export const messageActions = (
   updateProfileMenuItems,
   updateEventListenerItems,
   updateFileItems,
+  updateCreateDialogProps,
 
   updatePlugin,
 ) => {
@@ -133,17 +134,8 @@ export const messageActions = (
 
       case PluginActions.updateCreateDialogModal:
         if (message.createDialogProps) {
-          const payload = {
-            ...message.createDialogProps,
-
-            pluginName,
-          };
-
-          const event = new Event(Events.UPDATE_PLUGIN_FILE);
-
-          event.payload = payload;
-
-          window.dispatchEvent(event);
+          updateCreateDialogProps &&
+            updateCreateDialogProps(message.createDialogProps);
         }
         break;
 

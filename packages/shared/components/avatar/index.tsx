@@ -72,6 +72,8 @@ const AvatarPure = ({
   imgClassName = "",
   dataTestId,
 }: AvatarProps) => {
+  // test commit
+
   const { isRTL } = useInterfaceDirection();
   const { isBase } = useTheme();
 

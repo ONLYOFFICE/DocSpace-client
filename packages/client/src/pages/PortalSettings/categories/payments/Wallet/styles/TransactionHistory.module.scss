@@ -267,5 +267,8 @@
 
 .transactionRowDetails {
   color: var(--payment-dialog-text);
-  margin-inline-start: 4px;
+}
+
+.transactionRowDescription {
+  margin-inline-end: 4px;
 }

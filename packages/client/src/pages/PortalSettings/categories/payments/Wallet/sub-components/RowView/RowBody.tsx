@@ -64,6 +64,53 @@ const TransactionRowView: React.FC<TransactionRowViewProps> = ({
 
   const correctDate = getCorrectDate(language, transaction.date);
 
+  const getRowChildren = () => {
+    const children = [
+      <div key="description">
+        <Text
+          fontWeight={600}
+          fontSize="14px"
+          as="span"
+          className={styles.transactionRowDescription}
+        >
+          {transaction.description}
+        </Text>
+        {transaction.details ? (
+          <Text fontWeight={600} fontSize="14px" as="span">
+            ({transaction.details})
+          </Text>
+        ) : null}
+      </div>,
+      <div key="spacer" />,
+      <Text
+        key="date"
+        fontWeight={600}
+        fontSize="11px"
+        dataTestId="transaction_date"
+      >
+        {correctDate}
+      </Text>,
+    ];
+
+    if (transaction.participantDisplayName) {
+      children.push(
+        <Text key="participant" fontWeight={600} fontSize="11px">
+          {transaction.participantDisplayName}
+        </Text>,
+      );
+    }
+
+    if (transaction.serviceUnit) {
+      children.push(
+        <Text key="quantity" fontWeight={600} fontSize="11px">
+          {getServiceQuantity(t, transaction.quantity, transaction.serviceUnit)}
+        </Text>,
+      );
+    }
+
+    return children;
+  };
+
   return (
     <Row
       className={styles.transactionRow}
@@ -83,34 +130,7 @@ const TransactionRowView: React.FC<TransactionRowViewProps> = ({
         sideColor={theme?.filesSection?.rowView?.sideColor || ""}
         sectionWidth={sectionWidth}
       >
-        <div>
-          <Text fontWeight={600} fontSize="15px" as="span">
-            {transaction.description}
-          </Text>
-          {transaction.details ? (
-            <Text
-              fontWeight={600}
-              fontSize="15px"
-              as="span"
-              className={styles.transactionRowDetails}
-            >
-              ({transaction.details})
-            </Text>
-          ) : null}
-        </div>
-        <div />
-
-        <Text fontWeight={600} fontSize="11px" dataTestId="transaction_date">
-          {correctDate}
-        </Text>
-
-        <Text fontWeight={600} fontSize="11px">
-          {getServiceQuantity(
-            transaction.quantity,
-            transaction.serviceUnit!,
-            t,
-          )}
-        </Text>
+        {getRowChildren()}
       </RowContent>
     </Row>
   );

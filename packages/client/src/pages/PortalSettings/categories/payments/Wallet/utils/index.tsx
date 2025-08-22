@@ -68,9 +68,9 @@ export const accountingLedgersFormat = (
 };
 
 export const getServiceQuantity = (
-  quantity: number,
-  serviceUnit: string,
   t: TTranslation,
+  quantity: number,
+  serviceUnit?: string,
 ) => {
   if (!serviceUnit) return "—";
   return t("UnitCount", { unit: serviceUnit, count: quantity });

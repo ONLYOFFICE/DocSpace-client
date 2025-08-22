@@ -67,7 +67,12 @@ const TransactionRow: React.FC<TransactionRowProps> = ({
         </Text>
       </TableCell>
       <TableCell>
-        <Text fontWeight={600} fontSize="11px" as="span">
+        <Text
+          fontWeight={600}
+          fontSize="11px"
+          as="span"
+          className={styles.transactionRowDescription}
+        >
           {transaction.description}
         </Text>
         {transaction.details ? (
@@ -88,11 +93,7 @@ const TransactionRow: React.FC<TransactionRowProps> = ({
       </TableCell>
       <TableCell>
         <Text fontWeight={600} fontSize="11px">
-          {getServiceQuantity(
-            transaction.quantity,
-            transaction.serviceUnit!,
-            t,
-          )}
+          {getServiceQuantity(t, transaction.quantity, transaction.serviceUnit)}
         </Text>
       </TableCell>
       <TableCell>

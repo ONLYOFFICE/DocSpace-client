@@ -174,7 +174,7 @@ const InputBlock = React.memo(
               data-size={size}
             >
               <IconButton
-                size={iconSize}
+                size={iconSize || size}
                 iconNode={iconNode}
                 iconName={iconName}
                 className="input-block-icon"

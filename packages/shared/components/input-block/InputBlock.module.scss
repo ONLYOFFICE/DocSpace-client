@@ -50,10 +50,20 @@
 
   display: flex;
   align-items: center;
+  -webkit-background-clip: padding-box !important;
+  background-clip: padding-box;
 
   :global {
     .append {
       background: inherit;
+      -webkit-background-clip: padding-box !important;
+      background-clip: padding-box;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-block-icon {
+      background-color: inherit;
     }
   }
 

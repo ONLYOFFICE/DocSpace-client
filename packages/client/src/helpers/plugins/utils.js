@@ -131,6 +131,22 @@ export const messageActions = (
         }
         break;
 
+      case PluginActions.updateCreateDialogModal:
+        if (message.createDialogProps) {
+          const payload = {
+            ...message.createDialogProps,
+
+            pluginName,
+          };
+
+          const event = new Event(Events.UPDATE_PLUGIN_FILE);
+
+          event.payload = payload;
+
+          window.dispatchEvent(event);
+        }
+        break;
+
       case PluginActions.showModal:
         if (message.modalDialogProps) {
           setPluginDialogVisible && setPluginDialogVisible(true);

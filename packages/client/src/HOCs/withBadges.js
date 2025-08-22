@@ -171,7 +171,6 @@ export default function withBadges(WrappedComponent) {
         isArchiveFolderRoot,
         isArchiveFolder,
         isPublicRoom,
-        isRecentFolder,
         isTemplatesFolder,
         isExtsCustomFilter,
         docspaceManagingRoomsHelpUrl,
@@ -186,8 +185,6 @@ export default function withBadges(WrappedComponent) {
       const accessToEdit =
         access === ShareAccessRights.FullAccess ||
         access === ShareAccessRights.None; // TODO: fix access type for owner (now - None)
-
-      const canEditing = access === ShareAccessRights.Editing;
 
       const badgesComponent = (
         <Badges
@@ -214,8 +211,6 @@ export default function withBadges(WrappedComponent) {
           isMutedBadge={isMutedBadge}
           onCopyPrimaryLink={this.onCopyPrimaryLink}
           isArchiveFolder={isArchiveFolder}
-          isRecentFolder={isRecentFolder}
-          canEditing={canEditing}
           onCreateRoom={this.onCreateRoom}
           isTemplatesFolder={isTemplatesFolder}
           isExtsCustomFilter={isExtsCustomFilter}
@@ -259,7 +254,6 @@ export default function withBadges(WrappedComponent) {
         isPrivacyFolder,
         isArchiveFolderRoot,
         isArchiveFolder,
-        isRecentFolder,
         isTemplatesFolder,
       } = treeFoldersStore;
       const {
@@ -312,7 +306,6 @@ export default function withBadges(WrappedComponent) {
         getPrimaryLink,
         isArchiveFolder,
         isPublicRoom: publicRoomStore.isPublicRoom,
-        isRecentFolder,
         checkAndOpenLocationAction,
         isTemplatesFolder,
         onCreateRoomFromTemplate,

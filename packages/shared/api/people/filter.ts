@@ -63,6 +63,7 @@ const DEFAULT_INVITED_BY_ME = false;
 const DEFAULT_AREA = null;
 const DEFAULT_INCLUDE_STRANGERS = false;
 const DEFAULT_INCLUDE_SHARED = null;
+const DEFAULT_SELECT_USER_ID = null;
 
 const ACTIVE_EMPLOYEE_STATUS = EmployeeStatus.Active;
 
@@ -132,6 +133,7 @@ class Filter {
       DEFAULT_AREA,
       DEFAULT_INCLUDE_STRANGERS,
       DEFAULT_INCLUDE_SHARED,
+      DEFAULT_SELECT_USER_ID,
     );
   }
 
@@ -222,6 +224,7 @@ class Filter {
       inviterId,
       area,
       includeStrangers,
+      DEFAULT_SELECT_USER_ID,
     );
 
     return newFilter;
@@ -250,6 +253,7 @@ class Filter {
     public area: Nullable<TFilterArea> = DEFAULT_AREA,
     public includeStrangers: boolean = DEFAULT_INCLUDE_STRANGERS,
     public includeShared: Nullable<boolean> = DEFAULT_INCLUDE_SHARED,
+    public selectUserId: Nullable<string | number> = DEFAULT_SELECT_USER_ID,
   ) {
     this.page = page;
     this.pageCount = pageCount;
@@ -270,6 +274,7 @@ class Filter {
     this.inviterId = inviterId;
     this.area = area;
     this.includeStrangers = includeStrangers;
+    this.selectUserId = selectUserId;
   }
 
   getStartIndex = () => {
@@ -455,6 +460,7 @@ class Filter {
           this.area,
           this.includeStrangers,
           this.includeShared,
+          this.selectUserId,
         );
   }
 

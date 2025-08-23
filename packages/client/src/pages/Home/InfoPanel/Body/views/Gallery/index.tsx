@@ -26,15 +26,12 @@
 
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { ReactSVG } from "react-svg";
-import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
 import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 
 import { getCorrectDate } from "@docspace/shared/utils";
 
-import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 import OformsStore from "SRC_DIR/store/OformsStore";
 
 import commonStyles from "../../helpers/Common.module.scss";

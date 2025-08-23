@@ -31,5 +31,8 @@
       "inputs": ["{workspaceRoot}/packages/shared/**/*"]
     }
   },
-  "defaultBase": "develop"
+  "defaultBase": "develop",
+  "tui": {
+    "enabled": false
+  }
 }

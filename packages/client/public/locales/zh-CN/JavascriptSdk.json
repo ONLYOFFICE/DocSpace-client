@@ -116,6 +116,5 @@
   "Subtitle": "副标题",
   "SubtitleDescription": "包含当前目录的附加注释或描述的副标题。",
   "TabPlugins": "选项卡插件",
-  "Viewer": "可查看",
   "ViewerDescription": "嵌入查看器，让用户能够从对应的房间打开文件并进行查看。"
 }

@@ -24,24 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
-import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import styled from "styled-components";
+
+import { Scrollbar } from "../../components/scrollbar";
 
 const StyledEditLinkBodyContent = styled.div`
-  padding: 4px 0px 0px;
+  padding: 20px 0px 0px;
+
+  margin-inline-end: -16px;
+  width: calc(100% + 16px);
 
   .edit-link_link-block {
-    padding: 16px 16px 20px;
+    padding: 0px 16px 20px;
 
     .edit-link-text {
       display: inline-flex;
       margin-bottom: 8px;
-    }
-
-    .edit-link_required-icon {
-      display: inline-flex;
-      color: ${(props) => props.theme.editLink.requiredColor};
-      margin-inline-start: 2px;
     }
 
     .edit-link_link-input {
@@ -127,11 +125,6 @@ const StyledEditLinkBodyContent = styled.div`
 
   .public-room_date-picker {
     padding-top: 8px;
-    ${({ isExpired }) =>
-      isExpired &&
-      css`
-        color: ${({ theme }) => theme.datePicker.errorColor};
-      `};
   }
 `;
 

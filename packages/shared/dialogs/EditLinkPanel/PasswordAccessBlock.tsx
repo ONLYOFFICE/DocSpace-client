@@ -24,39 +24,45 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useRef } from "react";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { Link } from "@docspace/shared/components/link";
-import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
-import { FieldContainer } from "@docspace/shared/components/field-container";
+import { useRef, type FC } from "react";
 import copy from "copy-to-clipboard";
-import { toastr } from "@docspace/shared/components/toast";
-import { ALLOWED_PASSWORD_CHARACTERS } from "@docspace/shared/constants";
-import { PasswordInput } from "@docspace/shared/components/password-input";
+
+import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
+
+import { Link, LinkType } from "../../components/link";
+import { toastr } from "../../components/toast";
+import { IconButton } from "../../components/icon-button";
+import { ALLOWED_PASSWORD_CHARACTERS } from "../../constants";
+import { PasswordInput } from "../../components/password-input";
+import { FieldContainer } from "../../components/field-container";
+import type { PasswordInputHandle } from "../../components/password-input";
+
 import ToggleBlock from "./ToggleBlock";
+import type { PasswordAccessBlockProps } from "./EditLinkPanel.types";
 
-const PasswordAccessBlock = (props) => {
-  const {
-    t,
-    isLoading,
-    isChecked,
-    passwordValue,
-    setPasswordValue,
-    isPasswordValid,
-    setIsPasswordValid,
-    passwordSettings,
-    isPasswordErrorShow,
-    setIsPasswordErrorShow,
-  } = props;
+const PasswordAccessBlock: FC<PasswordAccessBlockProps> = ({
+  t,
+  bodyText,
+  onChange,
+  isLoading,
+  isChecked,
+  headerText,
+  passwordValue,
+  setPasswordValue,
+  isPasswordValid,
+  setIsPasswordValid,
+  passwordSettings,
+  isPasswordErrorShow,
+  setIsPasswordErrorShow,
+}) => {
+  const passwordInputRef = useRef<PasswordInputHandle>(null);
 
-  const passwordInputRef = useRef(null);
-
-  const onGeneratePasswordClick = () => {
-    passwordInputRef.current.onGeneratePassword();
+  const onGeneratePasswordClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    passwordInputRef.current?.onGeneratePassword(event);
   };
 
-  const onCleanClick = (e) => {
-    e.stopPropagation();
+  const onCleanClick = (event: React.MouseEvent<Element>) => {
+    event.stopPropagation();
     setPasswordValue("");
     setIsPasswordValid(false);
   };
@@ -65,12 +71,15 @@ const PasswordAccessBlock = (props) => {
     const isValid = !!passwordValue.trim();
     if (isValid) {
       copy(passwordValue);
-      toastr.success(t("Files:PasswordSuccessfullyCopied"));
+      toastr.success(t("Common:PasswordSuccessfullyCopied"));
     }
   };
 
-  const onChangePassword = (e, value) => {
-    setPasswordValue(value);
+  const onChangePassword = (
+    _: React.ChangeEvent<HTMLInputElement>,
+    value?: string,
+  ) => {
+    setPasswordValue(value ?? "");
     setIsPasswordValid(true);
     setIsPasswordErrorShow(false);
   };
@@ -79,7 +88,7 @@ const PasswordAccessBlock = (props) => {
   //   setIsPasswordErrorShow(true);
   // };
 
-  const onValidatePassword = (isValidate) => {
+  const onValidatePassword = (isValidate: boolean) => {
     setIsPasswordValid(isValidate);
   };
 
@@ -102,7 +111,14 @@ const PasswordAccessBlock = (props) => {
   };
 
   return (
-    <ToggleBlock {...props} dataTestId="edit_link_panel_password_toggle">
+    <ToggleBlock
+      bodyText={bodyText}
+      isLoading={isLoading}
+      isChecked={isChecked}
+      headerText={headerText}
+      onChange={onChange}
+      dataTestId="edit_link_panel_password_toggle"
+    >
       {isChecked ? (
         <div>
           <div className="edit-link_password-block">
@@ -135,34 +151,34 @@ const PasswordAccessBlock = (props) => {
             </FieldContainer>
 
             <IconButton
-              className="edit-link_generate-icon"
-              size="16"
+              size={16}
               isDisabled={isLoading}
               iconName={RefreshReactSvgUrl}
               onClick={onGeneratePasswordClick}
+              className="edit-link_generate-icon"
               dataTestId="edit_link_panel_generate_password_button"
             />
           </div>
           <div className="edit-link_password-links">
             <Link
+              isHovered
               fontSize="13px"
               fontWeight={600}
-              isHovered
-              type="action"
+              type={LinkType.action}
               onClick={onCleanClick}
               dataTestId="edit_link_panel_clean_password_link"
             >
-              {t("Files:Clean")}
+              {t("Common:Clean")}
             </Link>
             <Link
+              isHovered
               fontSize="13px"
               fontWeight={600}
-              isHovered
-              type="action"
               onClick={onCopyClick}
+              type={LinkType.action}
               dataTestId="edit_link_panel_copy_password_link"
             >
-              {t("Files:CopyPassword")}
+              {t("Common:CopyPassword")}
             </Link>
           </div>
         </div>

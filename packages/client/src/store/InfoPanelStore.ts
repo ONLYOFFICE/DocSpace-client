@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, toJS } from "mobx";
 import { getUserById } from "@docspace/shared/api/people";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
@@ -38,6 +38,8 @@ import { TLogo, TRoom } from "@docspace/shared/api/rooms/types";
 import { Nullable, TCreatedBy } from "@docspace/shared/types";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { isFolder } from "@docspace/shared/utils/typeGuards";
+import { getCookie, getCorrectDate } from "@docspace/shared/utils";
+import { LANGUAGE } from "@docspace/shared/constants";
 
 import config from "PACKAGE_FILE";
 
@@ -191,22 +193,27 @@ class InfoPanelStore {
       fetchedUser.isVisitor ? "/accounts/guests" : "/accounts/people",
     ];
 
-    const defaultFilter = Filter.getDefault();
+    const filter = Filter.getDefault();
+    filter.page = 0;
+    filter.search = fetchedUser.email;
+    filter.selectUserId = fetchedUser.id;
 
-    const newFilter = {
-      ...defaultFilter,
-      page: 0,
-      search: fetchedUser.email,
-      selectUserId: user.id,
-    };
-
-    path.push(`filter?${newFilter.toUrlParams()}`);
+    path.push(`filter?${filter.toUrlParams()}`);
 
     this.selectedFolderStore.setSelectedFolder(null);
     this.treeFoldersStore.setSelectedNode(["accounts"]);
     this.filesStore.resetSelections();
 
-    window.DocSpace.navigate(combineUrl(...path), { state: { user } });
+    const locale = getCookie(LANGUAGE) || "en";
+
+    fetchedUser.registrationDate = getCorrectDate(
+      locale,
+      fetchedUser?.registrationDate || "",
+    );
+
+    window.DocSpace.navigate(combineUrl(...path), {
+      state: { user: toJS(fetchedUser) },
+    });
   };
 
   getInfoPanelItemIcon = (

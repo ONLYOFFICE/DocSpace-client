@@ -4,8 +4,6 @@
   "ErrorViewDescription": "나중에 다시 시도해 주세요",
   "ErrorViewHeader": "양식 갤러리가 일시적으로 사용 불가합니다",
   "SelectForm": "양식 선택",
-  "SubmitToGalleryDialogGuideInfo": "저희의 <1>guide</1>에서 완벽한 양식 작성 방법 및 승인 가능성을 높이는 방법에 대해 알아보세요.",
-  "SubmitToGalleryDialogMainInfo": "다른 사람들이 작업하는 데 사용할 수 있도록 양식을 퍼블릭 갤러리에 제출하세요. 양식이 검토를 통과하면 알림이 전송되며 기여에 대해 보상을 받게 됩니다.",
   "SuggestChanges": "변경 사항 제안",
   "TemplateInfo": "템플릿 정보",
   "ViewAllTemplates": "모든 템플릿 보기"

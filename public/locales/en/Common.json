@@ -778,7 +778,7 @@
   "StorageQuotaDisabled": "Storage quota disabled.",
   "StorageQuotaReset": "Storage quota successfully set to default.",
   "StorageQuotaSet": "Storage quota successfully set.",
-  "SubmitToFormGallery": "Submit to Form Gallery",
+  "SubmitToFormGallery": "Submit to Template Gallery",
   "SubmitToGallery": "Submit to Gallery",
   "SubmitToGalleryBlockBody": "Submit your templates to share them with the {{organizationName}} community.",
   "SubmitToGalleryBlockHeader": "{{organizationName}} Form Gallery",

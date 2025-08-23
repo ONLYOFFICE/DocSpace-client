@@ -94,6 +94,7 @@ const SubmitToFormGallery = ({
     setIsSubmitting(true);
 
     const origin = combineUrl(window.ClientConfig?.proxy?.url);
+
     const fileSrc = `${origin}/filehandler.ashx?action=download&fileid=${formItem.id}`;
 
     const file = await fetch(fileSrc)
@@ -147,7 +148,7 @@ const SubmitToFormGallery = ({
 
   return (
     <ModalDialog visible={visible} onClose={onClose} autoMaxHeight>
-      <ModalDialog.Header>{t("Common:SubmitToFormGallery")}</ModalDialog.Header>
+      <ModalDialog.Header>Submit to Template Gallery</ModalDialog.Header>
       <ModalDialog.Body>
         <div>{t("FormGallery:SubmitToGalleryDialogMainInfo")}</div>
         <div>
@@ -156,8 +157,8 @@ const SubmitToFormGallery = ({
             i18nKey="SubmitToGalleryDialogGuideInfo"
             ns="FormGallery"
           >
-            Learn how to create perfect forms and increase your chance to get
-            approval in our
+            Learn how to create perfect templates and increase your chance to
+            get approval in our
             <Link
               color={currentColorScheme.main?.accent}
               href={guideLink || "#"}
@@ -199,7 +200,7 @@ const SubmitToFormGallery = ({
           <Button
             primary
             size="normal"
-            label={t("FormGallery:SelectForm")}
+            label={t("FormGallery:SelectTemplate")}
             onClick={onOpenFormSelector}
             scale
           />

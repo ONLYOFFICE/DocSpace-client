@@ -346,7 +346,7 @@ export const canShowManageLink = (
   infoPanelVisible: boolean,
   infoPanelView: string,
 ): boolean => {
-  if (isFolderOrRoom(item) && !item.security.EditAccess) return false;
+  if (isFolderOrRoom(item) && !item.security?.EditAccess) return false;
 
   if (!buffer) return true;
 
@@ -357,7 +357,7 @@ export const canShowManageLink = (
 
   const view =
     (isRoom(item) && infoPanelView !== "info_members") ||
-    (!isRoom && infoPanelView !== "info_share");
+    (!isRoom(item) && infoPanelView !== "info_share");
 
   return !isEqual || view || !infoPanelVisible;
 };

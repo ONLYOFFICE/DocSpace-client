@@ -91,7 +91,7 @@ export default function withQuickButtons(WrappedComponent) {
       const { t, item, getManageLinkOptions } = this.props;
       const primaryLink = await ShareLinkService.getPrimaryLink(item);
       if (primaryLink) {
-        copyShareLink(item, primaryLink, t, getManageLinkOptions(item, true));
+        copyShareLink(item, primaryLink, t, getManageLinkOptions(item));
         // copyShareLink(primaryLink.sharedTo.shareLink);
         // toastr.success(t("Common:LinkSuccessfullyCopied"));
       }

@@ -133,6 +133,7 @@ import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { createLoader } from "@docspace/shared/utils/createLoader";
 import { FILLING_STATUS_ID } from "@docspace/shared/constants";
+import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
 import {
   getInfoPanelOpen,
   hideInfoPanel,
@@ -566,12 +567,7 @@ class ContextOptionsStore {
     const primaryLink = await this.filesStore.getPrimaryLink(item.id);
 
     if (primaryLink) {
-      copyShareLink(
-        item,
-        primaryLink,
-        t,
-        this.getManageLinkOptions(item, true),
-      );
+      copyShareLink(item, primaryLink, t, this.getManageLinkOptions(item));
       // copyShareLink(primaryLink.sharedTo.shareLink);
       // item.shared
       //   ? toastr.success(t("Common:LinkSuccessfullyCopied"))
@@ -1480,7 +1476,9 @@ class ContextOptionsStore {
     }
   };
 
-  getManageLinkOptions = (item, isRoom = false) => {
+  getManageLinkOptions = (item) => {
+    const isRoom = isRoomUtil(item);
+
     const openTab = () => {
       if (isRoom) return openMembersTab();
 
@@ -1491,12 +1489,12 @@ class ContextOptionsStore {
       ? this.infoPanelStore.roomsView
       : this.infoPanelStore.fileView;
 
-    const { infoPanelRoomSelection } = this.infoPanelStore;
+    const { infoPanelSelection } = this.infoPanelStore;
 
     return {
       canShowLink: canShowManageLink(
         item,
-        infoPanelRoomSelection,
+        infoPanelSelection,
         getInfoPanelOpen(),
         infoView,
       ),

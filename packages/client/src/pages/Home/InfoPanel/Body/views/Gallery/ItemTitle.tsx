@@ -54,6 +54,7 @@ type ItemTitleProps = {
   getIcon?: FilesSettingsStore["getIcon"];
   currentColorScheme?: SettingsStore["currentColorScheme"];
   getFormGalleryContextOptions?: ContextOptionsStore["getFormGalleryContextOptions"];
+  currentExtensionGallery?: OformsStore["currentExtensionGallery"];
 };
 
 const ItemTitle = ({

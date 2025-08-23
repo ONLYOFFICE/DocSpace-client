@@ -23,43 +23,61 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { globalColors } from "@docspace/shared/themes";
-import styled from "styled-components";
 
-export const RoleLinkBlockWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+import React, { FC } from "react";
+import classNames from "classnames";
 
-  padding-inline: 16px;
-  padding-top: 20px;
+import CopyIcon from "PUBLIC_DIR/images/icons/12/copy.svg?url";
+import EmptyIcon from "PUBLIC_DIR/images/empty.svg?url";
 
-  .dropdown-container {
-    margin-top: 4px;
-  }
+import { Text } from "../../text";
+import { IconButton } from "../../icon-button";
 
-  .combo-button_selected-icon-container {
-    svg path {
-      fill: ${({ theme }) => theme.color};
-    }
-  }
+import styles from "../Share.module.scss";
+import type { LinkTitleProps } from "../Share.types";
 
-  .combo-button_selected-icon svg {
-    width: 16px;
-    height: 16px;
-  }
+const LinkTitle: FC<LinkTitleProps> = ({
+  t,
+  isLoaded,
+  linkTitle,
+  disabledCopy,
+  isExpiredLink,
+  shareLink,
+  onCopyLink,
+}) => {
+  return (
+    <div className={styles.linkTitleContainer} onClick={onCopyLink}>
+      <Text
+        className={classNames(
+          styles.linkOptionsTitle,
+          styles.linkOptionsTitleRoom,
+          {
+            [styles.isExpired]: isExpiredLink,
+          },
+        )}
+        title={linkTitle}
+        truncate
+      >
+        {linkTitle}
+      </Text>
+      {!disabledCopy ? (
+        <div className={styles.linkActionsCopyIconContainer}>
+          <img
+            className={styles.linkActionsCopyImgIcon}
+            src={EmptyIcon}
+            alt={shareLink}
+          />
+          <IconButton
+            title={t("Common:CopySharedLink")}
+            className={styles.linkActionsCopyIcon}
+            size={12}
+            iconName={CopyIcon}
+            isDisabled={isExpiredLink || isLoaded}
+          />
+        </div>
+      ) : null}
+    </div>
+  );
+};
 
-  .combo-buttons_arrow-icon,
-  .combo-buttons_expander-icon > div {
-    width: 16px;
-    height: 16px;
-
-    svg path {
-      fill: ${globalColors.gray};
-    }
-  }
-
-  .combo-buttons_expander-icon {
-    rotate: 90deg;
-  }
-`;
+export default LinkTitle;

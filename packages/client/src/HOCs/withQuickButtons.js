@@ -30,12 +30,10 @@ import moment from "moment";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
-import {
-  copyDocumentShareLink,
-  copyRoomShareLink,
-} from "@docspace/shared/components/share/Share.helpers";
+import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { getCookie, getCorrectDate } from "@docspace/shared/utils";
+import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 
 export default function withQuickButtons(WrappedComponent) {
   class WithQuickButtons extends React.Component {
@@ -79,30 +77,21 @@ export default function withQuickButtons(WrappedComponent) {
     };
 
     onClickShare = async () => {
-      const {
-        t,
-        item,
-        getPrimaryFileLink,
-        setShareChanged,
-        getManageLinkOptions,
-      } = this.props;
-      const primaryLink = await getPrimaryFileLink(item.id);
+      const { t, item, setShareChanged, getManageLinkOptions } = this.props;
+
+      const primaryLink = await ShareLinkService.getPrimaryLink(item);
+
       if (primaryLink) {
-        copyDocumentShareLink(primaryLink, t, getManageLinkOptions(item));
+        copyShareLink(item, primaryLink, t, getManageLinkOptions(item));
         setShareChanged(true);
       }
     };
 
     onCopyPrimaryLink = async () => {
-      const { t, item, getPrimaryLink, getManageLinkOptions } = this.props;
-      const primaryLink = await getPrimaryLink(item.id);
+      const { t, item, getManageLinkOptions } = this.props;
+      const primaryLink = await ShareLinkService.getPrimaryLink(item);
       if (primaryLink) {
-        copyRoomShareLink(
-          primaryLink,
-          t,
-          true,
-          getManageLinkOptions(item, true),
-        );
+        copyShareLink(item, primaryLink, t, getManageLinkOptions(item));
         // copyShareLink(primaryLink.sharedTo.shareLink);
         // toastr.success(t("Common:LinkSuccessfullyCopied"));
       }
@@ -232,8 +221,8 @@ export default function withQuickButtons(WrappedComponent) {
       const { setSharingPanelVisible } = dialogsStore;
 
       const { isPublicRoom } = publicRoomStore;
-      const { getPrimaryFileLink, setShareChanged, infoPanelRoomSelection } =
-        infoPanelStore;
+
+      const { setShareChanged, infoPanelRoomSelection } = infoPanelStore;
 
       const { getManageLinkOptions } = contextOptionsStore;
 
@@ -246,9 +235,7 @@ export default function withQuickButtons(WrappedComponent) {
         setSharingPanelVisible,
         isPublicRoom,
         isPersonalRoom,
-        getPrimaryLink: filesStore.getPrimaryLink,
         isArchiveFolder,
-        getPrimaryFileLink,
         setShareChanged,
         isIndexEditingMode,
         roomLifetime:

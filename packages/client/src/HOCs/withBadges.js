@@ -32,6 +32,7 @@ import config from "PACKAGE_FILE";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import { toastr } from "@docspace/shared/components/toast";
 import Badges from "@docspace/shared/components/badges";
+import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
 
@@ -125,8 +126,8 @@ export default function withBadges(WrappedComponent) {
     };
 
     onCopyPrimaryLink = async () => {
-      const { t, item, getPrimaryLink } = this.props;
-      const primaryLink = await getPrimaryLink(item.id);
+      const { t, item } = this.props;
+      const primaryLink = await ShareLinkService.getPrimaryLink(item);
       if (primaryLink) {
         copyShareLink(primaryLink.sharedTo.shareLink);
         toastr.success(t("Common:LinkSuccessfullyCopied"));
@@ -278,8 +279,7 @@ export default function withBadges(WrappedComponent) {
       const { setIsVerHistoryPanel, fetchFileVersions } = versionHistoryStore;
       const { setConvertDialogVisible, setConvertItem, setConvertDialogData } =
         dialogsStore;
-      const { setIsLoading, isMuteCurrentRoomNotifications, getPrimaryLink } =
-        filesStore;
+      const { setIsLoading, isMuteCurrentRoomNotifications } = filesStore;
       const { roomType, mute } = item;
 
       const isRoom = !!roomType;
@@ -309,7 +309,6 @@ export default function withBadges(WrappedComponent) {
         setPinAction,
         setMuteAction,
         isMutedBadge,
-        getPrimaryLink,
         isArchiveFolder,
         isPublicRoom: publicRoomStore.isPublicRoom,
         isRecentTab,

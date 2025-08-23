@@ -24,11 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import type { TValidateShareRoom } from "@docspace/shared/api/rooms/types";
+
 export interface FilePasswordProps {
   shareKey: string;
-  title: string;
-  id: string;
-  status: string;
-  roomType: string;
-  entryTitle: string;
+  validationData: TValidateShareRoom;
 }

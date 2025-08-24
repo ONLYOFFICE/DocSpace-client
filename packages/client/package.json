@@ -17,7 +17,7 @@
     "test:e2e:docker:start": "docker-compose run --rm tests-local npx playwright test",
     "test:e2e:docker:clear": "docker rmi tests",
     "lint": "eslint ./src --max-warnings=0",
-    "lint:fix": "eslint-interactive ./src --fix",
+    "lint:fix": "eslint ./src --fix",
     "tsc": "tsc"
   },
   "dependencies": {

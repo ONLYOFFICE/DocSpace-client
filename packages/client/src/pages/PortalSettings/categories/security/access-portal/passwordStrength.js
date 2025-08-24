@@ -93,7 +93,7 @@ const PasswordStrength = (props) => {
   const [useSpecialSymbols, setUseSpecialSymbols] = useState(false);
 
   const [showReminder, setShowReminder] = useState(false);
-  //const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
   const checkWidth = () => {

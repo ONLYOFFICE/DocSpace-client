@@ -55,6 +55,7 @@ export const GreetingLoginContainer = ({
   );
   const searchParams = useSearchParams();
   const loginData = searchParams?.get("loginData") || null;
+  const emailChange = searchParams?.get("emailChange") || null;
 
   const pathname = usePathname();
 
@@ -84,49 +85,89 @@ export const GreetingLoginContainer = ({
     ? { tKey: "InvitationToRoom" }
     : { tKey: "InvitationToPortal" };
 
+  const renderEmailChangeContent = () => {
+    if (!(emailChange && type !== "invitation")) return null;
+
+    return (
+      <div className="greeting-container">
+        <Text
+          fontSize="21px"
+          fontWeight={700}
+          textAlign="center"
+          className="greeting-title confirm-email-change"
+        >
+          {t("Login:ConfirmEmailChange")}
+        </Text>
+
+        <Text fontSize="13px" fontWeight={400} className="confirm-email-change">
+          <Trans
+            t={t}
+            i18nKey="ConfirmEmailChangeText"
+            ns="Login"
+            values={{
+              productName: t("Common:ProductName"),
+            }}
+          />
+        </Text>
+      </div>
+    );
+  };
+
+  const renderGreetingTitle = () => {
+    if (!(type !== "invitation" && !emailChange)) return null;
+
+    return (
+      <Text
+        fontSize="23px"
+        fontWeight={700}
+        textAlign="center"
+        className="greeting-title"
+      >
+        {pathname === "/tenant-list"
+          ? t("TenantList:ChoosePortal")
+          : greetingSettings}
+      </Text>
+    );
+  };
+
+  const renderInvitationContent = () => {
+    if (type !== "invitation") return null;
+
+    return (
+      <div className="greeting-container">
+        <Text fontSize="16px">
+          <Trans
+            t={t}
+            i18nKey={keyProp.tKey}
+            ns="Common"
+            defaults={roomName ? DEFAULT_ROOM_TEXT : DEFAULT_PORTAL_TEXT}
+            values={{
+              displayName,
+              productName: t("Common:ProductName"),
+              ...(roomName ? { roomName } : { spaceAddress }),
+            }}
+            components={{
+              1: (
+                <Text
+                  key="component_key"
+                  fontWeight={600}
+                  as="strong"
+                  fontSize="16px"
+                />
+              ),
+            }}
+          />
+        </Text>
+      </div>
+    );
+  };
+
   return (
     <>
       <img src={logoUrl} className="logo-wrapper" alt="greeting-logo" />
-      {type !== "invitation" ? (
-        <Text
-          fontSize="23px"
-          fontWeight={700}
-          textAlign="center"
-          className="greeting-title"
-        >
-          {pathname === "/tenant-list"
-            ? t("TenantList:ChoosePortal")
-            : greetingSettings}
-        </Text>
-      ) : null}
-
-      {type === "invitation" ? (
-        <div className="greeting-container">
-          <Text fontSize="16px">
-            <Trans
-              t={t}
-              i18nKey={keyProp.tKey}
-              ns="Common"
-              defaults={roomName ? DEFAULT_ROOM_TEXT : DEFAULT_PORTAL_TEXT}
-              values={{
-                displayName,
-                productName: t("Common:ProductName"),
-                ...(roomName ? { roomName } : { spaceAddress }),
-              }}
-              components={{
-                1: (
-                  <Text
-                    key="component_key"
-                    fontWeight={600}
-                    as="strong"
-                    fontSize="16px"
-                  />
-                ),
-              }}
-            />
-          </Text>
-        </div>
-      ) : null}
+      {renderEmailChangeContent()}
+      {renderGreetingTitle()}
+      {renderInvitationContent()}
     </>
   );
 };

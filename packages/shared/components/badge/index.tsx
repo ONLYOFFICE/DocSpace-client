@@ -43,7 +43,6 @@ const Badge = (props: BadgeProps) => {
     maxWidth = "50px",
     height,
     type,
-    compact,
     isHovered = false,
     border,
     label = 0,
@@ -120,7 +119,6 @@ const Badge = (props: BadgeProps) => {
       <div
         className={styles.inner}
         style={innerStyle}
-        data-compact={compact}
         data-type={type}
         data-testid="badge-inner"
         aria-hidden="true"

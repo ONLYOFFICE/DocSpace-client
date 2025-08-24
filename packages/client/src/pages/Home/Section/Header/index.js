@@ -180,6 +180,7 @@ const SectionHeaderContent = (props) => {
     setChangeEmailVisible,
     setChangePasswordVisible,
     setChangeAvatarVisible,
+    setChangeNameVisible,
   } = props;
 
   const location = useLocation();
@@ -232,6 +233,7 @@ const SectionHeaderContent = (props) => {
     setChangeEmailVisible,
     setChangePasswordVisible,
     setChangeAvatarVisible,
+    setChangeNameVisible,
   });
 
   const isSettingsPage = location.pathname.includes("/settings");
@@ -516,7 +518,7 @@ const SectionHeaderContent = (props) => {
   }
 
   const currentTitle = isProfile
-    ? "Profile"
+    ? t("Profile:MyProfile")
     : isSettingsPage
       ? t("Common:Settings")
       : isContactsPage
@@ -587,7 +589,7 @@ const SectionHeaderContent = (props) => {
       : "";
 
   const isContextButtonVisible = () => {
-    if (isProfile) return false;
+    if (isProfile) return true;
 
     if (isContactsPage && !isContactsInsideGroupPage) {
       return false;
@@ -948,8 +950,11 @@ export default inject(
       : selectedFolder.id;
 
     const { setDialogData, setChangeEmailVisible } = dialogStore;
-    const { setChangePasswordVisible, setChangeAvatarVisible } =
-      targetUserStore;
+    const {
+      setChangePasswordVisible,
+      setChangeAvatarVisible,
+      setChangeNameVisible,
+    } = targetUserStore;
 
     const { profileClicked } = profileActionsStore;
 
@@ -1075,6 +1080,7 @@ export default inject(
       setChangeEmailVisible,
       setChangePasswordVisible,
       setChangeAvatarVisible,
+      setChangeNameVisible,
     };
   },
 )(
@@ -1089,5 +1095,6 @@ export default inject(
     "PeopleTranslations",
     "ChangeUserTypeDialog",
     "Notifications",
+    "Profile",
   ])(observer(SectionHeaderContent)),
 );

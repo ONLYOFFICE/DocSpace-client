@@ -88,7 +88,7 @@ const DeactivatePortalForm = ({
       <Trans t={t} i18nKey="SuccessDeactivate" ns="Confirm">
         Your account has been successfully deactivated. In 10 seconds you will
         be redirected to the
-        <Link isHovered href={url}>
+        <Link isHovered href={url} dataTestId="redirect_site_link">
           site
         </Link>
       </Trans>
@@ -108,6 +108,7 @@ const DeactivatePortalForm = ({
           label={t("Common:Deactivate")}
           tabIndex={1}
           onClick={onDeactivateClick}
+          testId="deactivate_portal_button"
         />
         <Button
           scale
@@ -115,6 +116,7 @@ const DeactivatePortalForm = ({
           label={t("Common:CancelButton")}
           tabIndex={1}
           onClick={onCancelClick}
+          testId="cancel_button"
         />
       </ButtonsWrapper>
     </>

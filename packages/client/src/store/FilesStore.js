@@ -102,6 +102,7 @@ import {
   FILTER_TEMPLATES_ROOM,
   FILTER_TRASH,
 } from "@docspace/shared/utils/filterConstants";
+import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
 
 const { FilesFilter, RoomsFilter } = api;
 const storageViewAs = localStorage.getItem("viewAs");
@@ -593,9 +594,14 @@ class FilesStore {
 
       api.files
         .getFolderInfo(folder.id)
-        .then((f) => {
-          const folderInfo = { ...f, isRoom: !!f.roomType };
-          console.log("[WS] update folder", f.id, f.title);
+        .then((response) => {
+          const folderInfo = {
+            isFolder: !isRoomUtil(response),
+            isRoom: isRoomUtil(response),
+            ...response,
+          };
+
+          console.log("[WS] update folder", folderInfo.id, folderInfo.title);
 
           if (this.selection?.length) {
             const foundIndex = this.selection?.findIndex(
@@ -610,7 +616,7 @@ class FilesStore {
 
           if (this.bufferSelection) {
             if (
-              this.bufferSelection.id === f.id &&
+              this.bufferSelection.id === folderInfo.id &&
               (this.bufferSelection.isFolder || this.bufferSelection.isRoom)
             ) {
               this.setBufferSelection(folderInfo);
@@ -620,13 +626,13 @@ class FilesStore {
           const navigationPath = [...this.selectedFolderStore.navigationPath];
           const pathParts = [...this.selectedFolderStore.pathParts];
 
-          const idx = navigationPath.findIndex((p) => p.id === f.id);
+          const idx = navigationPath.findIndex((p) => p.id === folderInfo.id);
 
           if (idx !== -1) {
-            navigationPath[idx].title = f?.title;
+            navigationPath[idx].title = folderInfo?.title;
           }
 
-          if (f.id === this.selectedFolderStore.id) {
+          if (folderInfo.id === this.selectedFolderStore.id) {
             this.selectedFolderStore.setSelectedFolder({
               ...folderInfo,
               navigationPath,
@@ -1725,7 +1731,6 @@ class FilesStore {
                 external = room.external;
                 quotaLimit = room.quotaLimit;
                 usedSpace = room.usedSpace;
-                setInfoPanelSelectedRoom(room);
               } else {
                 setInfoPanelSelectedRoom({ ...data.current, isRoom: true });
               }
@@ -2267,6 +2272,10 @@ class FilesStore {
         "separator-SubmitToGallery",
         "link-for-room-members",
         "sharing-settings",
+        "copy-shared-link",
+        "manage-links",
+        "create-room-separator",
+        "create-room",
         "embedding-settings",
         // "external-link",
         // "owner-change",
@@ -2285,7 +2294,6 @@ class FilesStore {
         "mark-read",
         // "mark-as-favorite",
         // "remove-from-favorites",
-        "create-room",
         "download",
         "download-as",
         "convert",
@@ -2316,6 +2324,7 @@ class FilesStore {
           "send-by-email",
           "show-info",
           "separator1",
+          "create-room-separator",
           "create-room",
           "separator2",
           "remove-from-recent",
@@ -2776,13 +2785,16 @@ class FilesStore {
       "open",
       // "separator0",
       "sharing-settings",
+      "copy-shared-link",
+      "manage-links",
+      "create-room-separator",
+      "create-room",
       "link-for-room-members",
       // "owner-change",
       "show-info",
       // "link-for-portal-users",
       "separator1",
       "open-location",
-      "create-room",
       "download",
       "move", // category
       "move-to",
@@ -2806,6 +2818,9 @@ class FilesStore {
       folderOptions = removeOptions(folderOptions, [
         "show-info",
         "sharing-settings",
+        "copy-shared-link",
+        "manage-links",
+        "create-room-separator",
         "separator1",
         "create-room",
       ]);
@@ -3388,6 +3403,7 @@ class FilesStore {
         customFilterEnabled,
         customFilterEnabledBy,
         lockedBy,
+        ...rest
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3413,7 +3429,7 @@ class FilesStore {
       const contextOptions = this.getFilesContextOptions(item);
       const isThirdPartyFolder = providerKey && id === rootFolderId;
 
-      let isFolder = false;
+      let isFolder = item.isFolder ?? false;
       this.folders.forEach((x) => {
         if (x.id === item.id && x.parentId === item.parentId) isFolder = true;
       });
@@ -3570,6 +3586,7 @@ class FilesStore {
         formFillingStatus,
         customFilterEnabled,
         customFilterEnabledBy,
+        ...rest,
       };
     });
   };
@@ -3926,6 +3943,8 @@ class FilesStore {
     const isFormRoom = this.selectedFolderStore.roomType === RoomsType.FormRoom;
     const isPublic = this.publicRoomStore.isPublicRoom;
 
+    const { isFrame, frameConfig } = this.settingsStore;
+
     const canShare =
       share && (isPublic || !isFormRoom) && !isSystemFolder(folderType);
 
@@ -3942,6 +3961,21 @@ class FilesStore {
       config.homepage,
       `/doceditor?${searchParams.toString()}`,
     );
+
+    if (isFrame && frameConfig?.events?.onEditorOpen) {
+      const item = this.files.find((f) => f.id === id);
+
+      frameCallEvent({
+        event: "onEditorOpen",
+        data: {
+          ...item,
+          share,
+          action: preview ? "view" : fillForm ? "fill" : "edit",
+        },
+      });
+
+      return;
+    }
 
     return window.open(url, openOnNewPage ? "_blank" : "_self");
   };

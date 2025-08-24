@@ -14,6 +14,7 @@
   --app-loader-background-color: #{$white};
 
   --files-article-body-download-app-list-text-color: #{$gray};
+  --files-article-body-download-app-list-mac-hover-color: #{$dark-black};
   --files-article-body-dev-tools-background-color: var(
     --accent-main,
     #{$light-blue-main}
@@ -21,6 +22,9 @@
   --files-article-body-dev-tools-background-opacity: 0.17;
   --files-article-body-dev-tools-color: #{$gray-text};
   --article-catalog-background: #{$gray-light};
+  --article-desktop-width: 252px;
+  --article-tablet-width: 243px;
+  --article-tablet-width-collapsed: 60px;
   --article-catalog-show-text: #{$light-gray-dark};
   --article-catalog-header-border-bottom: 1px solid #{$gray-light-mid};
   --article-client-home-logo-color: #{$black};
@@ -363,10 +367,14 @@
   --app-loader-background-color: #{$black};
 
   --files-article-body-download-app-list-text-color: #{$gray-dark};
+  --files-article-body-download-app-list-mac-hover-color: #{$white};
   --files-article-body-dev-tools-background-color: #{$dark-gray-dark};
   --files-article-body-dev-tools-background-opacity: 1;
   --files-article-body-dev-tools-color: #{$black};
   --article-catalog-background: #{$dark-gray-light};
+  --article-desktop-width: 252px;
+  --article-tablet-width: 243px;
+  --article-tablet-width-collapsed: 60px;
   --article-catalog-show-text: #{$dark-gray-dark};
   --article-catalog-header-border-bottom: 1px solid #{$gray-dark-strong};
   --article-client-home-logo-color: #{$white};
@@ -1032,6 +1040,8 @@
   --section-header-height: 69px;
   --section-header-height-tablet: 61px;
   --section-header-height-mobile: 53px;
+  --section-desktop-padding: -20px;
+  --section-tablet-padding: -24px;
 }
 
 .light {
@@ -1075,6 +1085,8 @@
   --section-header-height: 69px;
   --section-header-height-tablet: 61px;
   --section-header-height-mobile: 53px;
+  --section-desktop-padding: -20px;
+  --section-tablet-padding: -24px;
 
   --section-header-bg: #{$white};
   --info-panel-blur-color: #{$blur-light};
@@ -2785,4 +2797,32 @@
   --settings-payment-color: #{$dark-status-warning};
   --settings-payment-border: 1px solid #{$gray-dark-strong};
   --settings-payment-bg-benefits-color: #{$black};
+}
+
+.light {
+  --share-selector-default-color: #{$light-gray-dark};
+  --share-selector-hover-color: #{$light-gray-dark};
+  --share-selector-selected-color: #{$black};
+  --share-selector-disabled-color: #{$gray};
+  --share-selector-not-active-color: #{$light-gray-dark};
+
+  --share-bg-pressed-color: #{$gray-strong};
+}
+
+.dark {
+  --share-selector-default-color: #{$dark-gray-dark};
+  --share-selector-hover-color: #{$dark-gray-dark};
+  --share-selector-selected-color: #{$white};
+  --share-selector-disabled-color: #{$gray-dark};
+  --share-selector-not-active-color: #{$dark-gray-dark};
+
+  --share-bg-pressed-color: #{$dark-gray-light};
+}
+
+.light {
+  --quick-buttons-shared-color: #{$light-icons};
+}
+
+.dark {
+  --quick-buttons-shared-color: #{$white};
 }

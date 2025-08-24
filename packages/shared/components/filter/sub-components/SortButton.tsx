@@ -205,7 +205,7 @@ const SortButton = ({
         className="sort-combo-box"
         options={[]}
         selectedOption={{ key: "", label: "" }}
-        directionX="right"
+        directionX="left"
         directionY="both"
         scaled
         size={ComboBoxSize.content}

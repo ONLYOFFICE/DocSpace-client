@@ -49,6 +49,7 @@ const Header = (props) => {
     setChangeEmailVisible,
     setChangePasswordVisible,
     setChangeAvatarVisible,
+    setChangeNameVisible,
 
     setDialogData,
 
@@ -69,6 +70,7 @@ const Header = (props) => {
       setChangeEmailVisible,
       setChangePasswordVisible,
       setChangeAvatarVisible,
+      setChangeNameVisible,
       setIsLoading,
     });
 
@@ -87,6 +89,7 @@ const Header = (props) => {
         isFill
         onClick={onClickBack}
         className="arrow-button"
+        dataTestId="header_arrow_back_icon_button"
       />
 
       <div>
@@ -98,13 +101,14 @@ const Header = (props) => {
         {(isAdmin && !profile?.isOwner) ||
         (!profile?.isLDAP && !profile?.isSSO) ? (
           <ContextMenuButton
-            directionX="left"
+            directionX="right"
             title={t("Common:Actions")}
             iconName={VerticalDotsReactSvgUrl}
             size={17}
             getData={getUserContextOptions}
             isDisabled={false}
             usePortal
+            testId="user_context_menu_button"
           />
         ) : null}
 
@@ -140,8 +144,11 @@ export default inject(
     const { enabledHotkeys } = filesStore;
     const { visible: mediaViewerIsVisible } = mediaViewerDataStore;
 
-    const { setChangePasswordVisible, setChangeAvatarVisible } =
-      targetUserStore;
+    const {
+      setChangePasswordVisible,
+      setChangeAvatarVisible,
+      setChangeNameVisible,
+    } = targetUserStore;
 
     const { setDialogData, setChangeEmailVisible } = dialogStore;
 
@@ -153,6 +160,7 @@ export default inject(
       setChangeEmailVisible,
       setChangePasswordVisible,
       setChangeAvatarVisible,
+      setChangeNameVisible,
 
       setDialogData,
 

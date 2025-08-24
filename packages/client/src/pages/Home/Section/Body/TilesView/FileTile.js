@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { use, useRef, useEffect } from "react";
+import { use, useRef, useEffect, useState } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
@@ -95,6 +95,11 @@ const FileTile = (props) => {
     setRefMap,
     deleteRefMap,
     dataTestId,
+    setDropTargetPreview,
+    selectedFolderTitle,
+    disableDrag,
+    canCreateSecurity,
+    documentTitle,
   } = props;
 
   const navigate = useNavigate();
@@ -102,6 +107,7 @@ const FileTile = (props) => {
   // const { sectionWidth } = useContext(Context);
 
   const tileRef = useRef(null);
+  const [isDragActive, setIsDragActive] = useState(false);
 
   const { columnCount, thumbSize } = use(FileTileContext);
 
@@ -116,6 +122,7 @@ const FileTile = (props) => {
   );
 
   const { thumbnailUrl } = item;
+  const isDragDisabled = dragging && !isDragging;
 
   useEffect(() => {
     if (!tileRef?.current) return;
@@ -132,6 +139,24 @@ const FileTile = (props) => {
       deleteRefMap(GuidanceRefKey.Ready);
     };
   }, [setRefMap, deleteRefMap]);
+
+  useEffect(() => {
+    if (dragging) {
+      if (isDragging) {
+        if (isDragActive) setDropTargetPreview(item.title);
+      } else if (!disableDrag && canCreateSecurity) {
+        setDropTargetPreview(selectedFolderTitle);
+      } else {
+        setDropTargetPreview(null);
+      }
+    }
+  }, [
+    dragging,
+    isDragging,
+    isDragActive,
+    selectedFolderTitle,
+    setDropTargetPreview,
+  ]);
 
   const element = (
     <ItemIcon
@@ -153,12 +178,18 @@ const FileTile = (props) => {
 
   const activeClass = checkedProps || isActive ? "tile-selected" : "";
 
-  const onDragOverEvent = (_, e) => {
+  const onDragOverEvent = (dragActive, e) => {
     onDragOver && onDragOver(e);
+
+    if (dragActive !== isDragActive) {
+      setIsDragActive(dragActive);
+    }
   };
 
   const onDragLeaveEvent = (e) => {
     onDragLeave && onDragLeave(e);
+    setDropTargetPreview(null);
+    setIsDragActive(false);
   };
 
   const onOpenUser = () => {
@@ -241,17 +272,21 @@ const FileTile = (props) => {
     return fileTile;
   };
 
+  const droppableClassName = isDragging ? "droppable" : "";
+
   return (
     <div ref={selectableRef} id={id}>
       <StyledDragAndDrop
         data-title={item.title}
         value={value}
-        className={`files-item ${className} ${activeClass} ${item.id}_${item.fileExst}`}
+        className={`files-item ${className} ${activeClass} ${item.id}_${item.fileExst} ${droppableClassName}`}
         onDrop={onDrop}
         onMouseDown={onMouseDown}
         dragging={dragging ? isDragging : null}
         onDragOver={onDragOverEvent}
         onDragLeave={onDragLeaveEvent}
+        isDragDisabled={isDragDisabled}
+        data-document-title={documentTitle}
       >
         {renderTile()}
       </StyledDragAndDrop>

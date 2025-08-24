@@ -86,7 +86,7 @@ describe("SnackBar", () => {
       <SnackBar {...defaultProps} isCampaigns htmlContent={htmlContent} />,
     );
 
-    const iframe = screen.getByTitle("bar-frame");
+    const iframe = screen.getByTestId("snackbar-iframe");
     expect(iframe).toBeInTheDocument();
     expect(iframe).toHaveAttribute("src", htmlContent);
   });

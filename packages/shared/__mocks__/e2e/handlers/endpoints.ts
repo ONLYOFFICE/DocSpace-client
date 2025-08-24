@@ -123,7 +123,7 @@ export const endpoints: TEndpoints = {
   },
   activationStatus: {
     url: `${BASE_URL}${SELF_PATH_ACTIVATION_STATUS}`,
-    dataHandler: selfHandler,
+    dataHandler: selfHandler.bind(null, null, null, true),
   },
   activationStatusError: {
     url: `${BASE_URL}${SELF_PATH_ACTIVATION_STATUS}`,

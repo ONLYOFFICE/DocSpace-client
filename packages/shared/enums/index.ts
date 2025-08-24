@@ -582,6 +582,14 @@ export const enum WhiteLabelLogoType {
   LeftMenu = 6,
   AboutPage = 7,
   Notification = 8,
+  SpreadsheetEditor = 9,
+  SpreadsheetEditorEmbed = 10,
+  PresentationEditor = 11,
+  PresentationEditorEmbed = 12,
+  PdfEditor = 13,
+  PdfEditorEmbed = 14,
+  DiagramEditor = 15,
+  DiagramEditorEmbed = 16,
 }
 
 /**
@@ -813,4 +821,14 @@ export enum ProvidersType {
   SharePoint = "SharePoint",
   WebDav = "WebDav",
   Yandex = "Yandex",
+}
+
+export const enum LinkSharingEntityType {
+  RoomOrFolder = 1,
+  File = 2,
+}
+
+export const enum ShareLinkType {
+  Internal = 0,
+  External = 1,
 }

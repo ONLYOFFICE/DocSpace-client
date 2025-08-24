@@ -31,6 +31,7 @@ import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.
 
 import { ContextMenu, ContextMenuModel, ContextMenuRefType } from ".";
 import { globalColors } from "../../themes";
+import { ContextMenuProps } from "./ContextMenu.types";
 
 const meta = {
   title: "Drop down components/ContextMenu",
@@ -52,12 +53,51 @@ In particular case, state is created containing options for particular Row eleme
       url: "https://www.figma.com/file/ZiW5KSwb4t7Tj6Nz5TducC/UI-Kit-DocSpace-1.0.0?type=design&node-id=52-2358&mode=design&t=TBNCKMQKQMxr44IZ-0",
     },
   },
+  argTypes: {
+    model: {
+      control: "object",
+      description: "Menu items model array",
+      table: {
+        type: { summary: "ContextMenuModel[]" },
+      },
+    },
+    className: {
+      control: "text",
+      description: "Additional CSS class for the component",
+      table: {
+        type: { summary: "string" },
+      },
+    },
+    withBackdrop: {
+      control: "boolean",
+      description: "Whether to show backdrop when menu is open",
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+      },
+    },
+    onHide: {
+      action: "onHide",
+      description: "Callback when menu is hidden",
+      table: {
+        type: { summary: "function" },
+      },
+    },
+    id: {
+      control: "text",
+      description: "ID attribute for the component",
+      table: {
+        type: { summary: "string" },
+      },
+    },
+  },
+  tags: ["autodocs"],
 } satisfies Meta<typeof ContextMenu>;
 type Story = StoryObj<typeof ContextMenu>;
 
 export default meta;
 
-const Template = () => {
+const Template = (args: ContextMenuProps) => {
   const cm = useRef<ContextMenuRefType>(null);
   const items: ContextMenuModel[] = [
     {
@@ -173,9 +213,15 @@ const Template = () => {
 
   const containerRef = useRef<null | HTMLDivElement>(null);
 
+  const { model } = args;
+  const combinedArgs = {
+    ...args,
+    model: model || items,
+  };
+
   return (
     <div ref={containerRef}>
-      <ContextMenu model={items} ref={cm} />
+      <ContextMenu {...combinedArgs} ref={cm} />
 
       <div
         style={{
@@ -199,5 +245,5 @@ const Template = () => {
 };
 
 export const Default: Story = {
-  render: () => <Template />,
+  render: Template,
 };

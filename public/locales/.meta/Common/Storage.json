@@ -3,7 +3,7 @@
   "content": "Storage",
   "content_en_sha1_hash": "9e092dda4f0e27d0c7686ddd00272079e678b6e6",
   "created_at": "2025-05-19T21:30:49.092Z",
-  "updated_at": "2025-08-04T07:30:01.210Z",
+  "updated_at": "2025-08-21T11:22:39.844Z",
   "comment": {
     "text": "This translation key is used to display the content \"Storage\" in various places throughout the application, such as on a user's profile page or in an info panel. The text appears when displaying storage information and quotas for users. It provides context for translators to ensure consistency in language usage.",
     "is_auto": true,
@@ -12,20 +12,20 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
-      "line_number": 231,
+      "line_number": 232,
       "context": "return this.t(\"Common:Tags\");\n case \"Storage\":\n if (\"usedSpace\" in this.item && this.item.usedSpace !== undefined) {\n return this.isDefaultRoomsQuotaSet &&\n this.item.quotaLimit !== undefined\n ? this.t(\"Common:StorageAndQuota\")\n : this.t(\"Common:Storage\");\n }\n \n return null;\n default:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 329,
-      "context": "{showStorageInfo && !isGuests ? (\n <>\n <Text\n className={styles.infoField}\n noSelect\n title={t(\"Common:Storage\")}\n >\n {t(\"Common:Storage\")}\n </Text>\n <SpaceQuota\n type=\"user\"",
+      "line_number": 297,
+      "context": "</Text>\n </>\n ) : null}\n {showStorageInfo && !isGuests ? (\n <>\n <Text className={styles.infoField} title={t(\"Common:Storage\")}>\n {t(\"Common:Storage\")}\n </Text>\n <SpaceQuota\n type=\"user\"\n item={userSelection}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 329,
-      "context": "{showStorageInfo && !isGuests ? (\n <>\n <Text\n className={styles.infoField}\n noSelect\n title={t(\"Common:Storage\")}\n >\n {t(\"Common:Storage\")}\n </Text>\n <SpaceQuota\n type=\"user\"",
+      "line_number": 297,
+      "context": "</Text>\n </>\n ) : null}\n {showStorageInfo && !isGuests ? (\n <>\n <Text className={styles.infoField} title={t(\"Common:Storage\")}>\n {t(\"Common:Storage\")}\n </Text>\n <SpaceQuota\n type=\"user\"\n item={userSelection}",
       "module": "/packages/client"
     },
     {
@@ -42,7 +42,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 702,
+      "line_number": 704,
       "context": "const getFilterData = React.useCallback(async () => {\n const quotaFilter = [\n {\n key: FilterGroups.filterQuota,\n group: FilterGroups.filterQuota,\n label: t(\"Common:StorageQuota\"),\n isHeader: true,\n withoutSeparator: true,\n withMultiItems: true,\n },\n {",
       "module": "/packages/client"
     },
@@ -60,8 +60,8 @@
     },
     {
       "file_path": "/packages/management/src/app/settings/layout.tsx",
-      "line_number": 51,
-      "context": "name: t(\"Common:RestoreBackup\"),\n content: children,\n },\n {\n id: \"encrypt-data\",\n name: t(\"Common:Storage\"),\n content: children,\n },\n ];\n \n useEffect(() => {",
+      "line_number": 79,
+      "context": "name: t(\"Common:RestoreBackup\"),\n content: <LoaderWrapper isLoading={isLoading}>{children}</LoaderWrapper>,\n },\n {\n id: \"encrypt-data\",\n name: t(\"Common:Storage\"),\n content: <LoaderWrapper isLoading={isLoading}>{children}</LoaderWrapper>,\n },\n ];\n \n const getCurrentTab = () => {",
       "module": "/packages/management"
     }
   ],

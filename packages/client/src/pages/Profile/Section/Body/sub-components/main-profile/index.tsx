@@ -249,7 +249,14 @@ const MainProfile = (props: MainProfileProps) => {
         ns="Common"
         values={{ supportEmail: documentationEmail }}
         components={{
-          1: <Link href={`mailto:${documentationEmail}`} isHovered />,
+          1: (
+            <Link
+              href={`mailto:${documentationEmail}`}
+              isHovered
+              color="accent"
+              dataTestId="language_support_link"
+            />
+          ),
         }}
       />
 
@@ -265,6 +272,7 @@ const MainProfile = (props: MainProfileProps) => {
           fontSize="13px"
           href={becometranslatorUrl}
           target={LinkTarget.blank}
+          dataTestId="language_becometranslator_link"
         >
           {t("Common:LearnMore")}
         </Link>
@@ -410,6 +418,7 @@ const MainProfile = (props: MainProfileProps) => {
                 iconName={PencilOutlineReactSvgUrl}
                 size={12}
                 onClick={() => setChangeNameVisible?.(true)}
+                dataTestId="name_edit_icon_button"
               />
             ) : null}
           </div>
@@ -441,6 +450,7 @@ const MainProfile = (props: MainProfileProps) => {
                   iconName={PencilOutlineReactSvgUrl}
                   size={12}
                   onClick={onChangeEmailClick}
+                  dataTestId="email_edit_icon_button"
                 />
               ) : null}
             </div>
@@ -448,12 +458,13 @@ const MainProfile = (props: MainProfileProps) => {
               <div
                 className="send-again-container"
                 onClick={sendActivationLinkAction}
+                data-testid="send_again_container"
               >
                 <ReactSVG
                   className="send-again-icon"
                   src={SendClockReactSvgUrl}
                 />
-                <Text className="send-again-text" fontWeight={600} noSelect>
+                <Text className="send-again-text" fontWeight={600}>
                   {t("SendAgain")}
                 </Text>
               </div>
@@ -469,18 +480,22 @@ const MainProfile = (props: MainProfileProps) => {
                 iconName={PencilOutlineReactSvgUrl}
                 size={12}
                 onClick={onChangePasswordClick}
+                dataTestId="password_edit_icon_button"
               />
             ) : null}
           </div>
 
           <StyledLabel as="div" className="profile-language">
             {t("Common:Language")}
-            <HelpButton
-              size={12}
-              offsetRight={0}
-              place={dirTooltip}
-              tooltipContent={tooltipLanguage}
-            />
+            {documentationEmail ? (
+              <HelpButton
+                size={12}
+                offsetRight={0}
+                place={dirTooltip}
+                tooltipContent={tooltipLanguage}
+                dataTestId="language_help_button"
+              />
+            ) : null}
           </StyledLabel>
           <div className="language-combo-box-wrapper" ref={comboBoxRef}>
             <ComboBox
@@ -504,6 +519,9 @@ const MainProfile = (props: MainProfileProps) => {
               withBlur={isMobileHorizontalOrientation ? false : isMobile()}
               fillIcon={false}
               modernView={!isMobile()}
+              dataTestId="language_combo_box"
+              dropDownTestId="language_combo_box_dropdown"
+              noSelect={false}
             />
             {isBetaLanguage ? <BetaBadge place="bottom-end" /> : null}
           </div>
@@ -531,6 +549,7 @@ const MainProfile = (props: MainProfileProps) => {
                   isCollaborator,
                   t,
                 )}
+                dataTestId="user_type_help_button"
               />
             ) : null}
           </div>
@@ -555,6 +574,7 @@ const MainProfile = (props: MainProfileProps) => {
               iconName={PencilOutlineReactSvgUrl}
               size={12}
               onClick={() => setChangeNameVisible?.(true)}
+              dataTestId="edit_name_icon_button"
             />
           </div>
           <div className="mobile-profile-row">
@@ -588,12 +608,13 @@ const MainProfile = (props: MainProfileProps) => {
                 <div
                   className="send-again-container"
                   onClick={sendActivationLinkAction}
+                  data-testid="send_again_container"
                 >
                   <ReactSVG
                     className="send-again-icon"
                     src={SendClockReactSvgUrl}
                   />
-                  <Text className="send-again-text" fontWeight={600} noSelect>
+                  <Text className="send-again-text" fontWeight={600}>
                     {t("SendAgain")}
                   </Text>
                 </div>
@@ -620,6 +641,7 @@ const MainProfile = (props: MainProfileProps) => {
               iconName={PencilOutlineReactSvgUrl}
               size={12}
               onClick={onChangePasswordClick}
+              dataTestId="edit_password_icon_button"
             />
           </div>
           <div className="mobile-profile-row">
@@ -649,6 +671,7 @@ const MainProfile = (props: MainProfileProps) => {
                     isCollaborator,
                     t,
                   )}
+                  dataTestId="user_type_help_button"
                 />
               </div>
             ) : null}
@@ -657,12 +680,15 @@ const MainProfile = (props: MainProfileProps) => {
           <div className="mobile-language">
             <Text as="div" fontWeight={600} className="mobile-profile-label">
               {t("Common:Language")}
-              <HelpButton
-                size={12}
-                offsetRight={0}
-                place="right"
-                tooltipContent={tooltipLanguage}
-              />
+              {documentationEmail ? (
+                <HelpButton
+                  size={12}
+                  offsetRight={0}
+                  place="right"
+                  tooltipContent={tooltipLanguage}
+                  dataTestId="language_help_button"
+                />
+              ) : null}
             </Text>
             <div className="mobile-language__wrapper-combo-box">
               <ComboBox
@@ -682,6 +708,8 @@ const MainProfile = (props: MainProfileProps) => {
                 withBlur={isMobileHorizontalOrientation ? false : isMobile()}
                 fillIcon={false}
                 modernView={!isMobile()}
+                dataTestId="language_combo_box"
+                dropDownTestId="language_combo_box_dropdown"
               />
               {isBetaLanguage ? <BetaBadge place="bottom-end" /> : null}
             </div>

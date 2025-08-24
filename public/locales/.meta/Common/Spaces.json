@@ -3,7 +3,7 @@
   "content": "Spaces",
   "content_en_sha1_hash": "9b584b52b28402594628cea231d8d1cd0eb03d50",
   "created_at": "2025-05-19T21:30:48.971Z",
-  "updated_at": "2025-06-18T17:11:42.535Z",
+  "updated_at": "2025-08-21T11:22:39.923Z",
   "comment": {
     "text": "This translation key is used for the label of a settings section titled \"Spaces\", which appears on a management settings page. It displays the text when the user navigates to this section, serving as a header or title. The translation should accurately convey the concept of spaces in the context of management settings.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ProfileActionsStore.js",
-      "line_number": 315,
+      "line_number": 312,
       "context": "isAdmin && standalone && !limitedAccessSpace\n ? {\n key: \"spaces-management-settings\",\n id: \"spaces\",\n icon: SpacesReactSvgUrl,\n label: t(\"Common:Spaces\"),\n onClick: this.onSpacesClick,\n url: SPACES_URL,\n preventNewTab: true,\n items:\n baseDomain && baseDomain !== \"localhost\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/management/src/components/article/index.tsx",
-      "line_number": 86,
-      "context": "<StyledArticle showText={showText} articleOpen={articleOpen}>\n <div className=\"article__content\">\n <ArticleHeader />\n <ArticleItem\n key=\"spaces\"\n text={t(\"Common:Spaces\")}\n iconNode={<SpacesSvg />}\n showText={showText}\n onClick={() => onItemClick(\"spaces\")}\n isActive={pathname === \"/spaces\"}\n folderId=\"management_catalog-spaces\"",
+      "line_number": 91,
+      "context": "<StyledArticle showText={showText} articleOpen={articleOpen}>\n <div className=\"article__content\">\n <ArticleHeader />\n <ArticleItem\n key=\"spaces\"\n text={t(\"Common:Spaces\")}\n iconNode={<SpacesSvg />}\n showText={showText}\n onClick={() => onItemClick(\"spaces\")}\n isActive={activePath.includes(\"spaces\")}\n folderId=\"management_catalog-spaces\"",
       "module": "/packages/management"
     },
     {

@@ -78,9 +78,6 @@ const View = ({
   getGroups,
   updateCurrentGroup,
 
-  showGuestReleaseTip,
-  setGuestReleaseTipDialogVisible,
-
   setIsChangePageRequestRunning,
   setCurrentClientView,
 
@@ -148,9 +145,6 @@ const View = ({
     getUsersList,
     getGroups,
     updateCurrentGroup,
-
-    showGuestReleaseTip,
-    setGuestReleaseTipDialogVisible,
   });
 
   const { getFiles } = useFiles({
@@ -308,6 +302,9 @@ const View = ({
             await getProfileInitialValue();
           }
 
+          clearFiles();
+          setContactsTab(false);
+
           view = "profile";
         } else if (!isContactsPage) {
           await getFilesRef.current();
@@ -365,8 +362,7 @@ export const ViewComponent = inject(
   ({
     peopleStore,
     treeFoldersStore,
-    settingsStore,
-    dialogsStore,
+
     filesStore,
     clientLoadingStore,
     mediaViewerDataStore,
@@ -394,10 +390,6 @@ export const ViewComponent = inject(
     } = groupsStore!;
 
     const { setSelectedNode } = treeFoldersStore;
-
-    const { showGuestReleaseTip } = settingsStore;
-
-    const { setGuestReleaseTipDialogVisible } = dialogsStore;
 
     const {
       scrollToTop,
@@ -447,9 +439,6 @@ export const ViewComponent = inject(
       updateCurrentGroup,
 
       setSelectedNode,
-
-      showGuestReleaseTip,
-      setGuestReleaseTipDialogVisible,
 
       scrollToTop,
       fetchFiles,

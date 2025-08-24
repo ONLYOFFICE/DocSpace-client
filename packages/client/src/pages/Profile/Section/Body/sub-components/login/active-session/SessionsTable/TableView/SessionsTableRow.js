@@ -90,10 +90,19 @@ const SessionsTableRow = (props) => {
   };
 
   return (
-    <StyledTableRow key={item.id} hideColumns={hideColumns}>
+    <StyledTableRow
+      key={item.id}
+      hideColumns={hideColumns}
+      dataTestId={`session_row_${item.id}`}
+    >
       <TableCell>
-        <Text className="session-platform">{platform}</Text>
-        <Text className="session-info">{`(${browser})`}</Text>
+        <Text className="session-platform" dataTestId="session_platform">
+          {platform}
+        </Text>
+        <Text
+          className="session-info"
+          dataTestId="session_browser"
+        >{`(${browser})`}</Text>
         {showTickIcon ? (
           <IconButton
             size={12}
@@ -105,13 +114,13 @@ const SessionsTableRow = (props) => {
       </TableCell>
 
       <TableCell>
-        <Text className="session-info" truncate>
+        <Text className="session-info" truncate dataTestId="session_date">
           {getCorrectDate(locale, date)}
         </Text>
       </TableCell>
 
       <TableCell>
-        <Text className="session-info" truncate>
+        <Text className="session-info" truncate dataTestId="session_location">
           {country || city ? (
             <>
               {country}
@@ -131,6 +140,7 @@ const SessionsTableRow = (props) => {
             iconName={RemoveSessionSvgUrl}
             isClickable
             onClick={onRemoveClick}
+            dataTestId="session_remove_icon_button"
           />
         </TableCell>
       ) : null}

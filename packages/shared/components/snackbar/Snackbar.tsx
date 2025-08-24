@@ -162,6 +162,7 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
       <div id="bar-banner" style={{ position: "relative" }}>
         <iframe
           id="bar-frame"
+          data-testid="snackbar-iframe"
           className={styles.iframe}
           style={{ "--section-width": sectionWidth } as React.CSSProperties}
           src={htmlContent}
@@ -230,7 +231,6 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
                 color={textColor}
                 fontSize={fontSize}
                 fontWeight={fontWeight}
-                noSelect
                 data-testid="snackbar-message"
               >
                 {text}

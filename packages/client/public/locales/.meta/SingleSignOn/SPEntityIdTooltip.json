@@ -3,7 +3,7 @@
   "content": "The Service provider XML URL address which can be downloaded and used by the Identity provider to unequivocally identify the SP",
   "content_en_sha1_hash": "7e16034dafb05ab76e9dff0e286b4ab633a7939f",
   "created_at": "2025-05-19T21:30:50.165Z",
-  "updated_at": "2025-05-24T03:03:33.160Z",
+  "updated_at": "2025-08-11T18:11:59.261Z",
   "comment": {
     "text": "The \"SPEntityIdTooltip\" translation key provides a tooltip to help users understand that the metadata URL address is used to uniquely identify a Service Provider in the Single Sign-On process. This tooltip appears on the MetadataUrlField component in the PortalSettings page and helps clarify its purpose.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/ProviderMetadata.js",
       "line_number": 84,
-      "context": "<StyledWrapper>\n <MetadataUrlField\n labelText={t(\"SPEntityId\")}\n name=\"spEntityId\"\n placeholder={`${url}/sso/metadata`}\n tooltipContent={<Text fontSize=\"12px\">{t(\"SPEntityIdTooltip\")}</Text>}\n tooltipClass=\"sp-entity-id-tooltip icon-button\"\n />\n \n <MetadataUrlField\n labelText={t(\"SPAssertionConsumerURL\")}",
+      "context": "<StyledWrapper>\n <MetadataUrlField\n labelText={t(\"SPEntityId\")}\n name=\"spEntityId\"\n placeholder={`${url}/sso/metadata`}\n tooltipContent={<Text fontSize=\"12px\">{t(\"SPEntityIdTooltip\")}</Text>}\n tooltipClass=\"sp-entity-id-tooltip icon-button\"\n dataTestId=\"sp_entity_id\"\n />\n \n <MetadataUrlField",
       "module": "/packages/client"
     }
   ],

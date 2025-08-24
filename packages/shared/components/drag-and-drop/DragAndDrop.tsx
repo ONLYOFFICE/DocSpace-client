@@ -41,6 +41,7 @@ const DragAndDrop = (props: DragAndDropProps) => {
     dragging,
     className,
     forwardedRef,
+    isDragDisabled,
 
     onDragOver,
     onDrop,
@@ -74,6 +75,8 @@ const DragAndDrop = (props: DragAndDropProps) => {
   const rootClassName = classNames(styles.dragAndDrop, classNameProp, {
     [styles.dragging]: dragging,
     [styles.dragAccept]: isDragActive,
+    [styles.dragDisabled]: isDragDisabled,
+
     "drag-and-drop": true,
   });
 

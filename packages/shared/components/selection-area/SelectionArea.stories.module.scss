@@ -49,9 +49,14 @@
   justify-content: center;
   cursor: pointer;
   user-select: none;
+  color: #333;
 
   &.selected {
     background-color: #e3f2fd;
     border-color: #2196f3;
   }
+}
+
+:global(.theme-dark) .item {
+  color: #333;
 }

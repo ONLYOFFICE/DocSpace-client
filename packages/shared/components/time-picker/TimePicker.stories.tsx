@@ -102,20 +102,3 @@ export const WithError: Story = {
     hasError: true,
   },
 };
-
-export const FocusedOnRender: Story = {
-  render: Template,
-  args: {
-    ...Default.args,
-    focusOnRender: true,
-  },
-};
-
-export const CustomStyle: Story = {
-  render: Template,
-  args: {
-    ...Default.args,
-    className: "custom-time-picker",
-    classNameInput: "custom-time-input",
-  },
-};

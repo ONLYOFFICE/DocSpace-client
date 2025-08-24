@@ -24,34 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, toJS } from "mobx";
 import { getUserById } from "@docspace/shared/api/people";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
-import {
-  FileType,
-  FolderType,
-  ShareAccessRights,
-} from "@docspace/shared/enums";
+import { FolderType } from "@docspace/shared/enums";
 import Filter from "@docspace/shared/api/people/filter";
-import {
-  DEFAULT_CREATE_LINK_SETTINGS,
-  getExpirationDate,
-} from "@docspace/shared/components/share/Share.helpers";
 import { getTemplateAvailable } from "@docspace/shared/api/rooms";
-import {
-  getPrimaryLink,
-  editExternalLink,
-  addExternalLink,
-  getPrimaryLinkIfNotExistCreate,
-} from "@docspace/shared/api/files";
 
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { TUser } from "@docspace/shared/api/people/types";
 import { TLogo, TRoom } from "@docspace/shared/api/rooms/types";
 import { Nullable, TCreatedBy } from "@docspace/shared/types";
-import { ShareProps } from "@docspace/shared/components/share/Share.types";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
+import { isFolder } from "@docspace/shared/utils/typeGuards";
+import { getCookie, getCorrectDate } from "@docspace/shared/utils";
+import { LANGUAGE } from "@docspace/shared/constants";
 
 import config from "PACKAGE_FILE";
 
@@ -205,22 +193,27 @@ class InfoPanelStore {
       fetchedUser.isVisitor ? "/accounts/guests" : "/accounts/people",
     ];
 
-    const defaultFilter = Filter.getDefault();
+    const filter = Filter.getDefault();
+    filter.page = 0;
+    filter.search = fetchedUser.email;
+    filter.selectUserId = fetchedUser.id;
 
-    const newFilter = {
-      ...defaultFilter,
-      page: 0,
-      search: fetchedUser.email,
-      selectUserId: user.id,
-    };
-
-    path.push(`filter?${newFilter.toUrlParams()}`);
+    path.push(`filter?${filter.toUrlParams()}`);
 
     this.selectedFolderStore.setSelectedFolder(null);
     this.treeFoldersStore.setSelectedNode(["accounts"]);
     this.filesStore.resetSelections();
 
-    window.DocSpace.navigate(combineUrl(...path), { state: { user } });
+    const locale = getCookie(LANGUAGE) || "en";
+
+    fetchedUser.registrationDate = getCorrectDate(
+      locale,
+      fetchedUser?.registrationDate || "",
+    );
+
+    window.DocSpace.navigate(combineUrl(...path), {
+      state: { user: toJS(fetchedUser) },
+    });
   };
 
   getInfoPanelItemIcon = (
@@ -232,13 +225,12 @@ class InfoPanelStore {
     const isRoom = "isRoom" in item && item.isRoom;
     const roomType = "roomType" in item && item.roomType;
 
-    const isFolder = "isFolder" in item && item.isFolder;
     const folderType = "type" in item && item.type;
 
     if ((isRoom || roomType) && "logo" in item)
       return item.logo?.cover ? item.logo : item.logo?.medium;
 
-    if (isFolder)
+    if (isFolder(item))
       return this.filesSettingsStore.getIconByFolderType(folderType, size);
 
     const fileExst = "fileExst" in item && item.fileExst;
@@ -305,7 +297,7 @@ class InfoPanelStore {
     this.roomsView =
       view === InfoPanelView.infoShare ? InfoPanelView.infoMembers : view;
     this.fileView =
-      view === InfoPanelView.infoMembers ? InfoPanelView.infoDetails : view;
+      view === InfoPanelView.infoMembers ? InfoPanelView.infoShare : view;
     this.isScrollLocked = false;
   };
 
@@ -347,82 +339,23 @@ class InfoPanelStore {
     return pathname.indexOf("files/trash") !== -1;
   };
 
-  getPrimaryFileLink = async (fileId: number) => {
-    const file = this.filesStore.files.find((item) => item.id === fileId);
+  // getPrimaryFileLink = async (file: TFile) => {
+  //   if (!isFile(file)) return;
 
-    const value = { ...DEFAULT_CREATE_LINK_SETTINGS };
+  //   const { getFileInfo } = this.filesStore;
 
-    if (value && file.isForm) {
-      value.access = ShareAccessRights.Editing;
-    }
+  //   const res = ShareLinkService.getFilePrimaryLink(file);
 
-    if (
-      value &&
-      !file.isForm &&
-      file.fileType === FileType.PDF &&
-      (value.access === ShareAccessRights.Editing ||
-        value.access === ShareAccessRights.FormFilling)
-    ) {
-      value.access = ShareAccessRights.ReadOnly;
-    }
+  //   await getFileInfo(file.id);
 
-    const { getFileInfo } = this.filesStore;
+  //   return res;
+  // };
 
-    const res = await (value
-      ? getPrimaryLinkIfNotExistCreate(
-          fileId,
-          value.access,
-          value.internal,
-          getExpirationDate(value.diffExpirationDate),
-        )
-      : getPrimaryLink(fileId));
+  // getPrimaryFolderLink = async (folder: TFolder) => {
+  //   if (!isFolder(folder)) return;
 
-    await getFileInfo(fileId);
-
-    return res;
-  };
-
-  editFileLink: ShareProps["editFileLink"] = async (
-    fileId,
-    linkId,
-    access,
-    primary,
-    internal,
-    expirationDate,
-  ) => {
-    const { getFileInfo } = this.filesStore;
-
-    const res = await editExternalLink(
-      fileId,
-      linkId,
-      access,
-      primary,
-      internal,
-      expirationDate,
-    );
-    await getFileInfo(fileId);
-    return res;
-  };
-
-  addFileLink: ShareProps["addFileLink"] = async (
-    fileId,
-    access,
-    primary,
-    internal,
-    expirationDate,
-  ) => {
-    const { getFileInfo } = this.filesStore;
-
-    const res = await addExternalLink(
-      fileId,
-      access,
-      primary,
-      internal,
-      expirationDate,
-    );
-    await getFileInfo(fileId);
-    return res;
-  };
+  //   return ShareLinkService.getFolderPrimaryLink(folder);
+  // };
 
   setShareChanged = (shareChanged: boolean) => {
     this.shareChanged = shareChanged;

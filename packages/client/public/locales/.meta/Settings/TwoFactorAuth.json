@@ -3,7 +3,7 @@
   "content": "Two-factor authentication",
   "content_en_sha1_hash": "edfd617aa53e034bf19dce690f417b00bc824fa9",
   "created_at": "2025-05-19T21:30:53.005Z",
-  "updated_at": "2025-08-04T07:30:01.278Z",
+  "updated_at": "2025-08-11T18:11:59.195Z",
   "comment": {
     "text": "Two-factor authentication is a security feature used to add an extra layer of protection when accessing the portal. This translation key is used as the label for a settings category and button in the portal's security settings, informing users about this security measure.",
     "is_auto": true,
@@ -35,8 +35,8 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/login-settings/index.js",
-      "line_number": 69,
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/login/login-settings/index.tsx",
+      "line_number": 77,
       "context": "return (\n <StyledWrapper>\n <div className=\"header\">\n <Text fontSize=\"16px\" fontWeight={700} lineHeight=\"22px\">\n {t(\"Settings:TwoFactorAuth\")}\n </Text>\n <Text className=\"description\">{t(\"TwoFactorDescription\")}</Text>\n </div>\n <div className=\"actions\">\n <Button",
       "module": "/packages/client"
     }

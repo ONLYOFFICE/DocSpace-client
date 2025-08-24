@@ -23,13 +23,17 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React from "react";
+import React, { useMemo } from "react";
 import { inject, observer } from "mobx-react";
 
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { isLockedSharedRoom as isLockedSharedRoomUtil } from "@docspace/shared/utils";
 import { FolderType } from "@docspace/shared/enums";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
+import {
+  isRoom as isRoomUtil,
+  isFolder as isFolderUtil,
+} from "@docspace/shared/utils/typeGuards";
 
 import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
@@ -54,6 +58,7 @@ type BodyProps = {
   fileView: InfoPanelStore["fileView"];
   getIsFiles: InfoPanelStore["getIsFiles"];
   getIsRooms: InfoPanelStore["getIsRooms"];
+  setView: InfoPanelStore["setView"];
 
   maxImageUploadSize: SettingsStore["maxImageUploadSize"];
 
@@ -80,6 +85,7 @@ const InfoPanelBodyContent = ({
   fileView,
   getIsFiles,
   getIsRooms,
+  setView,
 
   maxImageUploadSize,
 
@@ -102,7 +108,7 @@ const InfoPanelBodyContent = ({
   const isGuests = contactsTab === "guests";
   const isUsers = contactsTab === "inside_group" || contactsTab === "people";
 
-  const isRoom = selection && "expired" in selection && "external" in selection;
+  const isRoom = isRoomUtil(selection);
   const isFolder = selection && "isFolder" in selection && !!selection.isFolder;
 
   const isRoot = isFolder && selection?.id === selection?.rootFolderId;
@@ -116,15 +122,22 @@ const InfoPanelBodyContent = ({
     isLockedSharedRoom ||
     (isRoot && !isGallery);
 
-  const [currentView, setCurrentView] = React.useState(
-    isRooms ? roomsView : fileView,
-  );
+  const currentView = useMemo(() => {
+    return isRoom ? roomsView : fileView;
+  }, [isRoom, roomsView, fileView]);
 
-  const defferedCurrentView = React.useDeferredValue(currentView);
+  const deferredCurrentView = React.useDeferredValue(currentView);
 
   React.useEffect(() => {
-    setCurrentView(isRooms ? roomsView : fileView);
-  }, [isRooms, roomsView, fileView]);
+    if (
+      fileView === InfoPanelView.infoShare &&
+      selection &&
+      isFolderUtil(selection) &&
+      !selection?.canShare
+    ) {
+      setView(InfoPanelView.infoDetails);
+    }
+  }, [fileView, selection]);
 
   const getView = () => {
     if (isUsers || isGuests) return <Users isGuests={isGuests} />;
@@ -164,7 +177,7 @@ const InfoPanelBodyContent = ({
         }
       >
         <FilesView
-          currentView={defferedCurrentView}
+          currentView={deferredCurrentView}
           selection={selection}
           isArchive={selection.rootFolderType === FolderType.Archive}
         />
@@ -224,6 +237,7 @@ export default inject(
 
       getIsFiles,
       getIsRooms,
+      setView,
     } = infoPanelStore;
 
     const { editRoomDialogProps, createRoomDialogProps, templateEventVisible } =
@@ -249,6 +263,7 @@ export default inject(
       fileView,
       getIsFiles,
       getIsRooms,
+      setView,
 
       maxImageUploadSize: settingsStore.maxImageUploadSize,
 

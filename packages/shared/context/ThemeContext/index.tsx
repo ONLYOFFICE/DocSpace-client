@@ -26,15 +26,31 @@
 
 import React, { createContext } from "react";
 
+import type { TColorScheme } from "../../themes";
+
 type TTheme = "Base" | "Dark";
 
-type ThemeProviderProps = {
+type TThemeContextValue = {
   theme: TTheme;
+  currentColorScheme?: TColorScheme;
+};
+
+type ThemeProviderProps = TThemeContextValue & {
   children: React.ReactNode;
 };
 
-export const ThemeContext = createContext<TTheme>("Base");
+export const ThemeContext = createContext<TThemeContextValue>({
+  theme: "Base",
+});
 
-export const ThemeProvider = ({ theme, children }: ThemeProviderProps) => {
-  return <ThemeContext value={theme}>{children}</ThemeContext>;
+export const ThemeProvider = ({
+  theme,
+  currentColorScheme,
+  children,
+}: ThemeProviderProps) => {
+  return (
+    <ThemeContext value={{ theme, currentColorScheme }}>
+      {children}
+    </ThemeContext>
+  );
 };

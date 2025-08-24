@@ -154,7 +154,6 @@ export const AccessRightSelectPure = ({
       selectedOption={
         {
           icon: currentItem?.icon,
-          default: true,
           key: currentItem?.key,
           label: type === "onlyIcon" ? "" : currentItem?.label,
           description: type === "onlyIcon" ? "" : currentItem?.description,
@@ -163,6 +162,7 @@ export const AccessRightSelectPure = ({
       forceCloseClickOutside
       dropDownClassName={styles.accessRightSelectDropdown}
       dataTestId={dataTestId}
+      useImageIcon
       {...props}
     />
   );

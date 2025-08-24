@@ -3,7 +3,7 @@
   "content": "Change",
   "content_en_sha1_hash": "64fbd995d3b6b156ee26ae3c03e6516434c34c12",
   "created_at": "2025-05-19T21:30:43.398Z",
-  "updated_at": "2025-08-04T07:30:01.060Z",
+  "updated_at": "2025-08-21T11:22:39.800Z",
   "comment": {
     "text": "This translation key is used for the text \"Change\" which appears as a label on a button in various UI components, such as change owner or user type dialogs and room settings. It prompts the user to make a change action.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
-      "line_number": 241,
+      "line_number": 245,
       "context": "{t(\"Settings:AccessRightsChangeOwnerConfirmText\")}\n </Text>\n <div className=\"button-wrapper\">\n <Button\n tabIndex={5}\n label={t(\"Common:ChangeButton\")}\n size=\"normal\"\n primary\n scale\n isDisabled={!selectedUser}\n onClick={onChangeAction}",
       "module": "/packages/client"
     },
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ChangeRoomOwner/index.js",
-      "line_number": 90,
+      "line_number": 85,
       "context": "fontWeight={600}\n fontSize=\"13px\"\n color={currentColorScheme.main?.accent}\n onClick={onOwnerChange}\n >\n {t(\"Common:ChangeButton\")}\n </Link>\n ) : null}\n </div>\n </Styled.ChangeRoomOwner>\n );",
       "module": "/packages/client"
     },
@@ -42,7 +42,7 @@
     },
     {
       "file_path": "/packages/management/src/dialogs/change-domain/index.tsx",
-      "line_number": 154,
+      "line_number": 152,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n isLoading={isLoading}\n key=\"CreateButton\"\n label={t(\"Common:ChangeButton\")}\n onClick={onClickDomainChange}\n size={ButtonSize.normal}\n primary\n scale\n />",
       "module": "/packages/management"
     }

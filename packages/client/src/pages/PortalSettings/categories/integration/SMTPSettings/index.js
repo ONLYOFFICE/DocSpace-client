@@ -64,6 +64,7 @@ const SMTPSettings = (props) => {
             isHovered
             target="_blank"
             href={integrationSettingsUrl}
+            dataTestId="integration_settings_link"
           >
             {t("Common:LearnMore")}
           </Link>

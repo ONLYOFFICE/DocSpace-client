@@ -38,7 +38,7 @@ import {
   TRoom,
 } from "@docspace/shared/api/rooms/types";
 
-import PublicRoomStore from "SRC_DIR/store/PublicRoomStore";
+import type PublicRoomStore from "SRC_DIR/store/PublicRoomStore";
 
 import { getFeedInfo } from "../../History/FeedInfo";
 import { TSelectionHistory } from "../../History/History.types";

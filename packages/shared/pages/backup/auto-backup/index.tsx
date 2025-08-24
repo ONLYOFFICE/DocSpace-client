@@ -27,7 +27,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useTheme } from "styled-components";
 import { Trans, useTranslation } from "react-i18next";
 import classNames from "classnames";
 
@@ -62,6 +61,7 @@ import { Text } from "../../../components/text";
 import { RadioButton } from "../../../components/radio-button";
 import { Link, LinkTarget } from "../../../components/link";
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
+import { useTheme } from "../../../hooks/useTheme";
 
 import { ThirdPartyModule } from "./sub-components/ThirdPartyModule";
 import { RoomsModule } from "./sub-components/RoomsModule";

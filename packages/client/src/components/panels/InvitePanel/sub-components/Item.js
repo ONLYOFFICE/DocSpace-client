@@ -320,7 +320,7 @@ const Item = ({
         <div
           className={isGroup ? "invite-user-box group-name" : "invite-user-box"}
         >
-          <Text {...textProps} truncate noSelect>
+          <Text {...textProps} truncate>
             {inputValue}
           </Text>
           {status === EmployeeStatus.Pending ? <StyledSendClockIcon /> : null}
@@ -331,7 +331,6 @@ const Item = ({
             className="label about-label"
             fontWeight={400}
             fontSize="12px"
-            noSelect
             truncate
           >
             {`${typeLabel} | ${email}`}

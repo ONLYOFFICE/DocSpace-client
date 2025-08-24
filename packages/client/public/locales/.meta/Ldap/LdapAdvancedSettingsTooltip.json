@@ -3,7 +3,7 @@
   "content": "Choose user attributes which you want to be synchronized with your LDAP server.",
   "content_en_sha1_hash": "dec832695169557933b47b02e558945a055dace1",
   "created_at": "2025-05-19T21:30:54.165Z",
-  "updated_at": "2025-05-24T08:42:10.808Z",
+  "updated_at": "2025-08-11T18:11:59.236Z",
   "comment": {
     "text": "Choose user attributes which you want to be synchronized with your LDAP server. This tooltip appears on a component in the PortalSettings page, providing context for users configuring attribute mapping for their LDAP integration.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
-      "line_number": 125,
-      "context": "<>\n <div className=\"ldap_attribute-mapping-text\">\n <Text fontWeight={600} fontSize=\"14px\">\n {t(\"LdapAttributeMapping\")}\n </Text>\n <HelpButton tooltipContent={t(\"LdapAdvancedSettingsTooltip\")} />\n </div>\n <div className=\"ldap_attribute-mapping\">\n <FieldContainer\n style={FIELD_STYLE}\n isVertical",
+      "line_number": 127,
+      "context": "<Text fontWeight={600} fontSize=\"14px\">\n {t(\"LdapAttributeMapping\")}\n </Text>\n <HelpButton\n dataTestId=\"attribute_mapping_help_button\"\n tooltipContent={t(\"LdapAdvancedSettingsTooltip\")}\n />\n </div>\n <div className=\"ldap_attribute-mapping\">\n <FieldContainer\n style={FIELD_STYLE}",
       "module": "/packages/client"
     }
   ],

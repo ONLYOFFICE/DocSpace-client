@@ -37,7 +37,7 @@ export const ContactContainer = ({ salesEmail }: { salesEmail: string }) => {
   return (
     <div className={styles.contactContainer}>
       {salesEmail ? (
-        <Text as="span" noSelect fontWeight={600}>
+        <Text as="span" fontWeight={600}>
           {t("ContactUs")}
           <Link
             className="sales-email-link"
@@ -45,6 +45,7 @@ export const ContactContainer = ({ salesEmail }: { salesEmail: string }) => {
             fontWeight="600"
             href={`mailto:${salesEmail}`}
             color="accent"
+            dataTestId="sales_email_link"
           >
             {salesEmail}
           </Link>

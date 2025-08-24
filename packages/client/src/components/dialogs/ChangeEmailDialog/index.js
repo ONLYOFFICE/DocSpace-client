@@ -199,6 +199,7 @@ class ChangeEmailDialogComponent extends React.Component {
               errorMessage={errorMessage}
               hasError={hasError}
               labelVisible={false}
+              dataTestId="change_email_field"
             >
               <EmailInput
                 id="new-email"
@@ -210,6 +211,7 @@ class ChangeEmailDialogComponent extends React.Component {
                 onKeyUp={this.onKeyPress}
                 hasError={hasError}
                 placeholder={t("EnterEmail")}
+                testId="change_email_input"
               />
             </FieldContainer>
           </StyledBodyContent>
@@ -224,6 +226,7 @@ class ChangeEmailDialogComponent extends React.Component {
             primary
             onClick={this.onValidateEmail}
             isLoading={isRequestRunning}
+            testId="change_email_send_button"
           />
           <Button
             className="cancel-button"
@@ -233,6 +236,7 @@ class ChangeEmailDialogComponent extends React.Component {
             scale
             onClick={onClose}
             isDisabled={isRequestRunning}
+            testId="change_email_cancel_button"
           />
         </ModalDialog.Footer>
       </ModalDialog>

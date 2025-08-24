@@ -38,6 +38,7 @@ import EmailReactSvgUrl from "PUBLIC_DIR/images/email.react.svg?url";
 import SecurityReactSvgUrl from "PUBLIC_DIR/images/security.react.svg?url";
 import ImageReactSvgUrl from "PUBLIC_DIR/images/image.react.svg?url";
 import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
+import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 
 import {
   DeleteSelfProfileDialog,
@@ -57,6 +58,7 @@ type UseProfileHeaderProps = {
   setChangeEmailVisible: DialogStore["setChangeEmailVisible"];
   setChangePasswordVisible: TargetUserStore["setChangePasswordVisible"];
   setChangeAvatarVisible: TargetUserStore["setChangeAvatarVisible"];
+  setChangeNameVisible: TargetUserStore["setChangeNameVisible"];
 };
 
 const useProfileHeader = ({
@@ -70,6 +72,7 @@ const useProfileHeader = ({
   setChangeEmailVisible,
   setChangePasswordVisible,
   setChangeAvatarVisible,
+  setChangeNameVisible,
 }: UseProfileHeaderProps) => {
   const userId = profile?.id;
 
@@ -95,8 +98,19 @@ const useProfileHeader = ({
     setChangeEmailVisible?.(true);
   };
 
+  const onChangeNameClick = () => {
+    setChangeNameVisible(true);
+  };
+
   const getUserContextOptions = () => {
     const options = [
+      {
+        key: "change-name",
+        label: t("PeopleTranslations:NameChangeButton"),
+        onClick: onChangeNameClick,
+        disabled: false,
+        icon: PencilReactSvgUrl,
+      },
       {
         key: "change-email",
         label: t("PeopleTranslations:EmailChangeButton"),

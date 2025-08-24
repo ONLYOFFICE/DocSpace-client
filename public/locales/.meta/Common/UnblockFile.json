@@ -3,7 +3,7 @@
   "content": "Unblock",
   "content_en_sha1_hash": "12aabd251c4213f1cebfe4cb83e6547df55552c3",
   "created_at": "2025-05-19T21:30:49.379Z",
-  "updated_at": "2025-08-04T07:30:01.602Z",
+  "updated_at": "2025-08-21T11:22:39.920Z",
   "comment": {
     "text": "This translation key is used to display the text \"Unblock\" in a file context, indicating that the file has been unlocked. It appears on a quick button or dialog and is used when unlocking a previously blocked file.",
     "is_auto": true,
@@ -17,9 +17,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 370,
-      "context": "data-id={id}\n data-locked={!!locked}\n onClick={onIconLockClick}\n color={theme.filesQuickButtons.sharedColor}\n hoverColor=\"accent\"\n title={t(\"Common:UnblockFile\")}\n data-tooltip-id={`lockTooltip${item.id}`}\n />\n {lockedByUser && !canLock ? (\n <Tooltip\n id={`lockTooltip${item.id}`}",
+      "file_path": "/packages/shared/components/quick-buttons/index.tsx",
+      "line_number": 214,
+      "context": "data-id={id}\n data-locked={!!locked}\n onClick={onIconLockClick}\n color=\"--quick-buttons-shared-color\"\n hoverColor=\"accent\"\n title={t(\"Common:UnblockFile\")}\n data-tooltip-id={`lockTooltip${item.id}`}\n />\n {lockedBy && !canLock ? (\n <Tooltip\n id={`lockTooltip${item.id}`}",
       "module": "/packages/shared"
     }
   ],

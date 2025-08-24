@@ -237,6 +237,7 @@ const DocumentService = ({
             isHovered
             target="_blank"
             href={integrationSettingsUrl}
+            dataTestId="integration_settings_link"
           >
             {t("Common:LearnMore")}
           </Link>
@@ -262,6 +263,7 @@ const DocumentService = ({
               placeholder={EDITOR_URL_PLACEHOLDER}
               hasError={!docServiceUrlIsValid}
               isDisabled={isSaveLoading || isResetLoading}
+              dataTestId="editor_url_input_block"
             />
             <Text className="subtitle">
               {t("Common:Example", {
@@ -275,6 +277,7 @@ const DocumentService = ({
               isChecked={isDisabledCertificat}
               onChange={onChangeIsDisabledCertificat}
               isDisabled={isSaveLoading || isResetLoading}
+              dataTestId="disable_certificat_checkbox"
             />
           </div>
           <div className="input-wrapper">
@@ -297,6 +300,7 @@ const DocumentService = ({
               onChange={onChangeSecretKey}
               isDisabled={isSaveLoading || isResetLoading}
               className="password-input"
+              testId="secret_key_input"
             />
             <Text className="subtitle">
               {t("Settings:DocumentServiceSecretKeySubtitle")}
@@ -312,6 +316,7 @@ const DocumentService = ({
               type="action"
               isHovered
               onClick={onChangeIsShowAdvancedSettings}
+              dataTestId="show_hide_advanced_settings_link"
             >
               {!isShowAdvancedSettings
                 ? t("Settings:DocumentServiceShow")
@@ -336,6 +341,7 @@ const DocumentService = ({
                   value={authHeader}
                   onChange={onChangeAuthHeader}
                   isDisabled={isSaveLoading || isResetLoading}
+                  dataTestId="auth_header_input_block"
                 />
                 <Text className="subtitle">
                   {t("Settings:DocumentServiceAuthHeaderSubtitle")}
@@ -360,6 +366,7 @@ const DocumentService = ({
                   placeholder={EDITOR_URL_PLACEHOLDER}
                   hasError={!internalUrlIsValid}
                   isDisabled={isSaveLoading || isResetLoading}
+                  dataTestId="editor_url_input_block"
                 />
                 <Text className="subtitle">
                   {t("Common:Example", {
@@ -386,6 +393,7 @@ const DocumentService = ({
                   placeholder={DNS_PLACEHOLDER}
                   hasError={!portalUrlIsValid}
                   isDisabled={isSaveLoading || isResetLoading}
+                  dataTestId="dns_input_block"
                 />
                 <Text className="subtitle">
                   {t("Common:Example", {
@@ -410,6 +418,8 @@ const DocumentService = ({
           displaySettings
           isSaving={isSaveLoading || isResetLoading}
           showReminder={!saveButtonDisabled}
+          saveButtonDataTestId="settings_save_button"
+          cancelButtonDataTestId="default_settings_button"
         />
       </Styled.LocationForm>
     </Styled.Location>

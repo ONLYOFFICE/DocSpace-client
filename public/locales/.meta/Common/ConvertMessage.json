@@ -3,7 +3,7 @@
   "content": "If you choose to convert the file to a format different from the original, some data might be lost.",
   "content_en_sha1_hash": "289264301ed3356fa949a02e3ff83466c5f9d7be",
   "created_at": "2025-05-19T21:30:43.710Z",
-  "updated_at": "2025-07-01T15:57:36.404Z",
+  "updated_at": "2025-08-21T11:22:39.958Z",
   "comment": {
     "text": "This translation key is used to display a warning message when converting a file, indicating that some data might be lost. It appears in a download dialog box and serves as an explanation of the potential consequences of changing the file format.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
-      "line_number": 529,
-      "context": "type={DownloadedDocumentType.Other}\n title={t(\"Common:Other\")}\n />\n ) : null}\n <div className={styles.downloadDialogConvertMessage}>\n <Text noSelect>{t(\"Common:ConvertMessage\")}</Text>\n </div>\n </>\n );\n \n if (isOnePasswordFile) {",
+      "line_number": 536,
+      "context": "title={t(\"Common:Other\")}\n dataTestId=\"download_dialog_other\"\n />\n ) : null}\n <div className={styles.downloadDialogConvertMessage}>\n <Text>{t(\"Common:ConvertMessage\")}</Text>\n </div>\n </>\n );\n \n if (isOnePasswordFile) {",
       "module": "/packages/shared"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Rooms",
   "content_en_sha1_hash": "3a28d6f078fd35a505195a0f8ec6f59e9801d7c2",
   "created_at": "2025-05-19T21:30:48.236Z",
-  "updated_at": "2025-06-02T10:20:51.014Z",
+  "updated_at": "2025-08-21T11:22:39.776Z",
   "comment": {
     "text": "The \"Rooms\" translation key is used to display the content \"Rooms\" in various parts of the user interface. This includes a file selector and a dialog box where it appears as a section title, providing context for users navigating room templates or reassigning data. It appears in UI elements such as buttons, text labels, and progress indicators.",
     "is_auto": true,
@@ -36,61 +36,49 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Body/Progress.js",
-      "line_number": 203,
-      "context": "<div className=\"data-start\"> {reassigningDataStart}</div>\n <div className=\"progress-container\">\n <div className=\"progress-section\">\n {!noRooms ? (\n <Text className=\"progress-section-text\" noSelect>\n {t(\"Common:Rooms\")}\n </Text>\n ) : null}\n {noRoomFilesToMove ? null : (\n <Text className=\"progress-section-text\" noSelect>\n {t(\"Common:Documents\")}",
+      "line_number": 202,
+      "context": "<StyledProgress>\n <div className=\"data-start\"> {reassigningDataStart}</div>\n <div className=\"progress-container\">\n <div className=\"progress-section\">\n {!noRooms ? (\n <Text className=\"progress-section-text\">{t(\"Common:Rooms\")}</Text>\n ) : null}\n {noRoomFilesToMove ? null : (\n <Text className=\"progress-section-text\">\n {t(\"Common:Documents\")}\n </Text>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Tabs/RoomTemplatesTabs/index.js",
-      "line_number": 52,
-      "context": "const { t } = useTranslation([\"Common\"]);\n \n const tabs = [\n {\n id: \"rooms\",\n name: t(\"Common:Rooms\"),\n },\n {\n id: \"templates\",\n name: t(\"Common:Templates\"),\n },",
+      "line_number": 54,
+      "context": "const [selectedTab, setSelectedTab] = React.useState(\"rooms\");\n \n const tabs = [\n {\n id: \"rooms\",\n name: t(\"Common:Rooms\"),\n },\n {\n id: \"templates\",\n name: t(\"Common:Templates\"),\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 180,
+      "line_number": 184,
       "context": "<ImportSection\n isChecked={importOptions.importSharedFolders}\n onChange={(e) => onChange(e, \"importSharedFolders\")}\n sectionName={t(\"Settings:SharedFolders\")}\n description={t(\"Settings:FolderToRoomImportNote\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n exportSection={{\n sectionName: sharedFoldersExportDetails.name,\n workspace: serviceName,\n sectionIcon: sharedFoldersExportDetails.icon,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 180,
+      "line_number": 184,
       "context": "<ImportSection\n isChecked={importOptions.importSharedFolders}\n onChange={(e) => onChange(e, \"importSharedFolders\")}\n sectionName={t(\"Settings:SharedFolders\")}\n description={t(\"Settings:FolderToRoomImportNote\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n exportSection={{\n sectionName: sharedFoldersExportDetails.name,\n workspace: serviceName,\n sectionIcon: sharedFoldersExportDetails.icon,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 180,
+      "line_number": 184,
       "context": "<ImportSection\n isChecked={importOptions.importSharedFolders}\n onChange={(e) => onChange(e, \"importSharedFolders\")}\n sectionName={t(\"Settings:SharedFolders\")}\n description={t(\"Settings:FolderToRoomImportNote\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n exportSection={{\n sectionName: sharedFoldersExportDetails.name,\n workspace: serviceName,\n sectionIcon: sharedFoldersExportDetails.icon,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 180,
+      "line_number": 184,
       "context": "<ImportSection\n isChecked={importOptions.importSharedFolders}\n onChange={(e) => onChange(e, \"importSharedFolders\")}\n sectionName={t(\"Settings:SharedFolders\")}\n description={t(\"Settings:FolderToRoomImportNote\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n exportSection={{\n sectionName: sharedFoldersExportDetails.name,\n workspace: serviceName,\n sectionIcon: sharedFoldersExportDetails.icon,",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 180,
-      "context": "<ImportSection\n isChecked={importOptions.importSharedFolders}\n onChange={(e) => onChange(e, \"importSharedFolders\")}\n sectionName={t(\"Settings:SharedFolders\")}\n description={t(\"Settings:FolderToRoomImportNote\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n exportSection={{\n sectionName: sharedFoldersExportDetails.name,\n workspace: serviceName,\n sectionIcon: sharedFoldersExportDetails.icon,",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 180,
-      "context": "<ImportSection\n isChecked={importOptions.importSharedFolders}\n onChange={(e) => onChange(e, \"importSharedFolders\")}\n sectionName={t(\"Settings:SharedFolders\")}\n description={t(\"Settings:FolderToRoomImportNote\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n exportSection={{\n sectionName: sharedFoldersExportDetails.name,\n workspace: serviceName,\n sectionIcon: sharedFoldersExportDetails.icon,",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActionsContainer.js",
-      "line_number": 60,
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActionsContainer.tsx",
+      "line_number": 76,
       "context": "return (\n <div className=\"notification-container\">\n <div className=\"row\">\n <Text {...textProps} className=\"subscription-title\">\n {t(\"FileActivityNotify\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n </Text>\n <ToggleButton\n className=\"rooms-actions\"\n onChange={onChangeBadgeSubscription}",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActivityContainer.js",
-      "line_number": 55,
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActivityContainer.tsx",
+      "line_number": 68,
       "context": "return (\n <div className=\"notification-container\">\n <div className=\"row\">\n <Text {...textProps} className=\"subscription-title\">\n {t(\"RoomUpdateNotify\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n </Text>\n <ToggleButton\n className=\"rooms-activity toggle-btn\"\n onChange={onChangeEmailSubscription}",
       "module": "/packages/client"
     },

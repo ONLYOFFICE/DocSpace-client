@@ -12,7 +12,6 @@
   "FolderTitleSkyDrive": "Каталог OneDrive",
   "FolderTitleWebDav": "Каталог WebDAV",
   "FolderTitleYandex": "Каталог Яндекса",
-  "LinkHasExpiredAndHasBeenDisabled": "Срок действия ссылки истек, она отключена",
   "LinkValidTime": "Эта ссылка действительна только {{days_count}} дней.",
   "NewForm": "PDF-форма",
   "OwnerChange": "Сменить владельца",

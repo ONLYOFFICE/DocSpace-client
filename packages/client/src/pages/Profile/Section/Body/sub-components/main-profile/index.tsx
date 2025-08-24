@@ -464,7 +464,7 @@ const MainProfile = (props: MainProfileProps) => {
                   className="send-again-icon"
                   src={SendClockReactSvgUrl}
                 />
-                <Text className="send-again-text" fontWeight={600} noSelect>
+                <Text className="send-again-text" fontWeight={600}>
                   {t("SendAgain")}
                 </Text>
               </div>
@@ -521,6 +521,7 @@ const MainProfile = (props: MainProfileProps) => {
               modernView={!isMobile()}
               dataTestId="language_combo_box"
               dropDownTestId="language_combo_box_dropdown"
+              noSelect={false}
             />
             {isBetaLanguage ? <BetaBadge place="bottom-end" /> : null}
           </div>
@@ -613,7 +614,7 @@ const MainProfile = (props: MainProfileProps) => {
                     className="send-again-icon"
                     src={SendClockReactSvgUrl}
                   />
-                  <Text className="send-again-text" fontWeight={600} noSelect>
+                  <Text className="send-again-text" fontWeight={600}>
                     {t("SendAgain")}
                   </Text>
                 </div>

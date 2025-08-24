@@ -4,7 +4,6 @@
   "private": true,
   "homepage": "",
   "scripts": {
-    "before-build": "node ../../common/scripts/before-build.js",
     "build": "webpack --mode production --env lint=false",
     "build:translations": "node scripts/buildTranslations.js",
     "clean": "shx rm -rf dist",
@@ -158,14 +157,12 @@
     "targets": {
       "build": {
         "dependsOn": [
-          "before-build",
           "build:translations"
         ]
       },
       "start": {
         "continuous": true,
         "dependsOn": [
-          "before-build",
           "build:translations"
         ]
       },
@@ -177,19 +174,16 @@
       },
       "lint": {
         "dependsOn": [
-          "before-build",
           "build:translations"
         ]
       },
       "lint:fix": {
         "dependsOn": [
-          "before-build",
           "build:translations"
         ]
       },
       "tsc": {
         "dependsOn": [
-          "before-build",
           "build:translations"
         ]
       },

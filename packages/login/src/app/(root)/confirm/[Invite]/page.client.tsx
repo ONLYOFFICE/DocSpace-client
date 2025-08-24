@@ -110,7 +110,8 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     invitationSettings,
   } = props;
 
-  const { linkData, roomData } = useContext(ConfirmRouteContext);
+  const { linkData, roomData, confirmLinkResult } =
+    useContext(ConfirmRouteContext);
   const { t, i18n } = useTranslation(["Confirm", "Common"]);
 
   const router = useRouter();
@@ -121,7 +122,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const emailFromLink = linkData?.email ? linkData.email : "";
+  const emailFromLink = confirmLinkResult?.email ? confirmLinkResult.email : "";
   const roomName = roomData?.title;
   const roomId = roomData?.roomId;
 
@@ -159,7 +160,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     async (profile: string) => {
       const signupAccount: { [key: string]: string | undefined } = {
         EmployeeType: linkData.emplType,
-        Email: linkData.email,
+        Email: confirmLinkResult.email,
         Key: linkData.key,
         SerializedProfile: profile,
         culture: currentCultureName,
@@ -222,7 +223,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     [
       currentCultureName,
       defaultPage,
-      linkData.email,
+      confirmLinkResult.email,
       linkData.emplType,
       linkData.key,
       roomData.roomId,

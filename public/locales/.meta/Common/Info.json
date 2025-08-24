@@ -3,7 +3,7 @@
   "content": "Info",
   "content_en_sha1_hash": "4b631f69842530d659306c8f06dbad594a6b1807",
   "created_at": "2025-05-19T21:30:45.900Z",
-  "updated_at": "2025-08-11T18:11:59.188Z",
+  "updated_at": "2025-08-21T11:22:39.852Z",
   "comment": {
     "text": "This translation key is used for the text \"Info\", which is displayed as a header or label in various UI components, including an info panel and an OAuth information dialog. The purpose of this text is to provide basic information or context, often accompanied by icons. It appears in places such as headers, dialogs, and context options.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Header/index.tsx",
       "line_number": 195,
-      "context": "className={classNames(styles.infoPanelHeader, {\n [styles.withTabs]: withTabs,\n })}\n >\n <AsideHeader\n header={t(\"Common:Info\")}\n onCloseClick={closeInfoPanel}\n withoutBorder\n className=\"header-text\"\n isCloseable\n />",
+      "context": "className={classNames(styles.infoPanelHeader, {\n [styles.withTabs]: withTabs,\n })}\n >\n <AsideHeader\n header={t(\"Common:Info\")}\n onCloseClick={closeInfoPanel}\n withoutBorder\n className=\"header-text\"\n isCloseable\n dataTestId=\"info_panel_aside_header\"",
       "module": "/packages/client"
     },
     {
@@ -60,25 +60,25 @@
     },
     {
       "file_path": "/packages/client/src/store/contacts/GroupsStore.ts",
-      "line_number": 486,
+      "line_number": 487,
       "context": "return [\n {\n id: \"info\",\n key: \"group-info\",\n className: \"group-menu_drop-down\",\n label: t(\"Common:Info\"),\n title: t(\"Common:Info\"),\n icon: InfoReactSvgUrl,\n onClick: showInfoPanel,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/GroupsStore.ts",
-      "line_number": 486,
+      "line_number": 487,
       "context": "return [\n {\n id: \"info\",\n key: \"group-info\",\n className: \"group-menu_drop-down\",\n label: t(\"Common:Info\"),\n title: t(\"Common:Info\"),\n icon: InfoReactSvgUrl,\n onClick: showInfoPanel,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/GroupsStore.ts",
-      "line_number": 486,
+      "line_number": 487,
       "context": "return [\n {\n id: \"info\",\n key: \"group-info\",\n className: \"group-menu_drop-down\",\n label: t(\"Common:Info\"),\n title: t(\"Common:Info\"),\n icon: InfoReactSvgUrl,\n onClick: showInfoPanel,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/GroupsStore.ts",
-      "line_number": 486,
+      "line_number": 487,
       "context": "return [\n {\n id: \"info\",\n key: \"group-info\",\n className: \"group-menu_drop-down\",\n label: t(\"Common:Info\"),\n title: t(\"Common:Info\"),\n icon: InfoReactSvgUrl,\n onClick: showInfoPanel,\n },\n {",
       "module": "/packages/client"
     },

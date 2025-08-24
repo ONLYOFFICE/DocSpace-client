@@ -36,7 +36,6 @@ import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 import PersonReactSvg from "PUBLIC_DIR/images/person.react.svg?url";
 import QuestionReactSvg from "PUBLIC_DIR/images/question.react.svg?url";
 import SettingsReactSvg from "PUBLIC_DIR/images/settings.react.svg?url";
-
 import { IconButton } from ".";
 
 const meta = {
@@ -170,7 +169,7 @@ export const WithClickState: Story = {
   args: {
     ...Default.args,
     iconClickName: InfoReactSvgUrl,
-    clickColor: "#666",
+    clickColor: "green",
   },
 };
 
@@ -199,22 +198,35 @@ export const WithStroke: Story = {
 export const WithCustomNode: Story = {
   args: {
     ...Default.args,
+    // Example of passing a custom React node instead of an SVG icon
     iconNode: (
       <div
         style={{
-          width: 25,
-          height: 25,
-          backgroundColor: "blue",
-          borderRadius: "50%",
+          width: 28,
+          height: 28,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          borderRadius: 6,
+          fontSize: 12,
+          fontWeight: 700,
+          color: "#fff",
+          background:
+            "linear-gradient(135deg, rgba(106,17,203,1) 0%, rgba(37,117,252,1) 100%)",
+          boxShadow: "0 1px 2px rgba(0,0,0,0.15)",
         }}
-      />
+        title="Custom node"
+      >
+        IC
+      </div>
     ),
   },
-};
-
-export const WithTooltip: Story = {
-  args: {
-    ...Default.args,
-    dataTip: "This is a tooltip",
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Demonstrates using the `iconNode` prop to pass any custom React node (e.g., avatar/initials) instead of an SVG icon. In this example, we render a small 'JD' avatar tile.",
+      },
+    },
   },
 };

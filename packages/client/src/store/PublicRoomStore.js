@@ -61,6 +61,11 @@ class PublicRoomStore {
 
   filesStore;
 
+  /**
+   * @type {import("@docspace/shared/api/rooms/types").TValidateShareRoom | null}
+   */
+  validationData = null;
+
   constructor(clientLoadingStore, filesStore) {
     this.clientLoadingStore = clientLoadingStore;
     this.filesStore = filesStore;
@@ -83,6 +88,7 @@ class PublicRoomStore {
     this.roomId = id;
     this.roomStatus = status;
     this.roomType = roomType;
+    this.validationData = data;
 
     if (status === ValidationStatus.Ok) this.isLoaded = true;
   };
@@ -207,8 +213,15 @@ class PublicRoomStore {
   editExternalLink = (roomId, link) => {
     const linkType = LinkType.External;
 
-    const { id, title, expirationDate, password, disabled, denyDownload } =
-      link.sharedTo;
+    const {
+      id,
+      title,
+      expirationDate,
+      password,
+      disabled,
+      denyDownload,
+      internal,
+    } = link.sharedTo;
 
     return api.rooms.editExternalLink(
       roomId,
@@ -220,6 +233,7 @@ class PublicRoomStore {
       password,
       disabled,
       denyDownload,
+      internal,
     );
   };
 
@@ -238,8 +252,19 @@ class PublicRoomStore {
 
   validatePublicRoomKey = (key) => {
     this.setIsLoading(true);
+
+    const searchParams = new URLSearchParams(window.location.search);
+
+    const fileId = searchParams.get("fileId");
+    const folderId = searchParams.get("folderId") ?? searchParams.get("folder");
+
+    const params = new URLSearchParams();
+
+    if (fileId) params.set("fileId", fileId);
+    if (folderId) params.set("folderId", folderId);
+
     api.rooms
-      .validatePublicRoomKey(key)
+      .validatePublicRoomKey(key, params)
       .then((res) => {
         runInAction(() => {
           this.publicRoomKey = key;
@@ -252,7 +277,8 @@ class PublicRoomStore {
         if (
           !needPassword &&
           (res?.shared || res?.isAuthenticated) &&
-          !currentUrl.includes("/rooms/shared")
+          !currentUrl.includes("/rooms/shared") &&
+          (res.isRoom || res.isRoomMember)
         ) {
           return this.gotoFolder(res, key);
         }

@@ -88,9 +88,7 @@ export type MembersProps = {
   setExternalLinks?: PublicRoomStore["setExternalLinks"];
   setPublicRoomKey?: PublicRoomStore["setPublicRoomKey"];
 
-  setLinkParams?: DialogsStore["setLinkParams"];
   setAccessSettingsIsVisible?: DialogsStore["setTemplateAccessSettingsVisible"];
-  setEditLinkPanelIsVisible?: DialogsStore["setEditLinkPanelIsVisible"];
 
   getPrimaryLink?: FilesStore["getPrimaryLink"];
 
@@ -147,6 +145,7 @@ export type MembersListProps = {
 };
 
 export type LinkRowProps = {
+  item: TRoom;
   link: TFileLink;
 
   roomId: string | number;
@@ -160,10 +159,8 @@ export type LinkRowProps = {
   setIsScrollLocked?: InfoPanelStore["setIsScrollLocked"];
   isPublicRoomType: boolean;
   isFormRoom: boolean;
-  isPrimaryLink?: boolean;
   isCustomRoom: boolean;
   setExternalLink?: PublicRoomStore["setExternalLink"];
-  editExternalLink?: PublicRoomStore["editExternalLink"];
   deleteExternalLink?: PublicRoomStore["deleteExternalLink"];
 };
 

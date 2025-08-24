@@ -1,9 +1,8 @@
 import React from "react";
-import { screen } from "@testing-library/react";
+import { screen, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Navigation from "./Navigation";
 import { DeviceType } from "../../enums";
-import { renderWithTheme } from "../../utils/render-with-theme";
 
 describe("Navigation Component", () => {
   const defaultProps = {
@@ -70,29 +69,29 @@ describe("Navigation Component", () => {
   });
 
   it("renders navigation component with title", () => {
-    renderWithTheme(<Navigation {...defaultProps} />);
+    render(<Navigation {...defaultProps} />);
     expect(screen.getByText("My Documents")).toBeInTheDocument();
   });
 
   it("renders tariff bar when provided", () => {
-    renderWithTheme(<Navigation {...defaultProps} />);
+    render(<Navigation {...defaultProps} />);
     expect(screen.getByTestId("tariff-bar")).toBeInTheDocument();
   });
 
   it("handles empty file list state", () => {
-    renderWithTheme(<Navigation {...defaultProps} isEmptyFilesList />);
+    render(<Navigation {...defaultProps} isEmptyFilesList />);
     // Add assertions based on your empty state UI
     expect(screen.getByText("My Documents")).toBeInTheDocument();
   });
 
   it("adapts to tablet view", () => {
-    renderWithTheme(<Navigation {...defaultProps} />);
+    render(<Navigation {...defaultProps} />);
     // Add assertions for tablet-specific UI elements
     expect(screen.getByText("My Documents")).toBeInTheDocument();
   });
 
   it("shows public room specific UI when isPublicRoom is true", () => {
-    renderWithTheme(<Navigation {...defaultProps} isPublicRoom />);
+    render(<Navigation {...defaultProps} isPublicRoom />);
     // Add assertions for public room specific UI elements
     expect(screen.getByText("My Documents")).toBeInTheDocument();
   });

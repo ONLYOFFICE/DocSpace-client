@@ -75,6 +75,7 @@ const GroupNameParam = ({
           // onKeyUp={onKeyUp}
           // onKeyDown={onKeyDown}
           maxLength={170}
+          testId="create_edit_group_name"
         />
       </FieldContainer>
     </Styled.GroupNameParam>

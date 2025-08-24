@@ -3,7 +3,7 @@
   "content": "Deactivate",
   "content_en_sha1_hash": "d65ded94286c61f4f34527624be77ef1afce3b5a",
   "created_at": "2025-05-19T21:30:44.433Z",
-  "updated_at": "2025-08-11T18:11:59.207Z",
+  "updated_at": "2025-08-21T11:22:39.869Z",
   "comment": {
     "text": "The translation key \"Deactivate\" is used to display the text \"Deactivate\" on buttons and labels in UI elements that allow users to deactivate or disable certain features, typically related to account management or data removal. This text appears in button components, such as confirm deletion or suspension buttons, in portal settings pages and login interfaces.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     {
       "file_path": "/packages/login/src/app/(root)/confirm/PortalSuspend/page.client.tsx",
       "line_number": 108,
-      "context": "<ButtonsWrapper>\n <Button\n scale\n primary\n size={ButtonSize.medium}\n label={t(\"Common:Deactivate\")}\n tabIndex={1}\n onClick={onDeactivateClick}\n />\n <Button\n scale",
+      "context": "<ButtonsWrapper>\n <Button\n scale\n primary\n size={ButtonSize.medium}\n label={t(\"Common:Deactivate\")}\n tabIndex={1}\n onClick={onDeactivateClick}\n testId=\"deactivate_portal_button\"\n />\n <Button",
       "module": "/packages/login"
     }
   ],

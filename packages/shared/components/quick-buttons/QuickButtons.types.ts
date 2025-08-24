@@ -41,7 +41,6 @@ export type QuickButtonsProps = {
 
   isDisabled?: boolean;
   isPublicRoom?: boolean;
-  isPersonalRoom?: boolean;
   isArchiveFolder?: boolean;
   isTemplatesFolder?: boolean;
   isIndexEditingMode?: boolean;

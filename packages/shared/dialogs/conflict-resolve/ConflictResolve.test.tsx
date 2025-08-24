@@ -25,11 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen } from "@testing-library/react";
+import { screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 
-import { renderWithTheme } from "../../utils/render-with-theme";
 import ConflictResolve from "./ConflictResolve";
 import { ConflictResolveType } from "../../enums";
 
@@ -60,7 +59,7 @@ describe("ConflictResolve", () => {
   });
 
   it("renders conflict resolve dialog with all options", () => {
-    renderWithTheme(<ConflictResolve {...defaultProps} />);
+    render(<ConflictResolve {...defaultProps} />);
 
     expect(screen.getByText("Conflict Resolution")).toBeInTheDocument();
     expect(screen.getByText("test-file.docx")).toBeInTheDocument();
@@ -80,7 +79,7 @@ describe("ConflictResolve", () => {
   });
 
   it("calls onClose when cancel button is clicked", async () => {
-    renderWithTheme(<ConflictResolve {...defaultProps} />);
+    render(<ConflictResolve {...defaultProps} />);
 
     const cancelButton = screen.getByText("Cancel");
     await userEvent.click(cancelButton);
@@ -89,7 +88,7 @@ describe("ConflictResolve", () => {
   });
 
   it("calls onSubmit with selected resolve type when OK button is clicked", async () => {
-    renderWithTheme(<ConflictResolve {...defaultProps} />);
+    render(<ConflictResolve {...defaultProps} />);
 
     // Default selection is Overwrite
     const okButton = screen.getByText("OK");
@@ -99,7 +98,7 @@ describe("ConflictResolve", () => {
   });
 
   it("changes selected resolve type when a different option is selected", async () => {
-    renderWithTheme(<ConflictResolve {...defaultProps} />);
+    render(<ConflictResolve {...defaultProps} />);
 
     // Find the Duplicate radio button and click it
     const duplicateRadio = screen.getByLabelText("Duplicate", { exact: false });
@@ -114,7 +113,7 @@ describe("ConflictResolve", () => {
   });
 
   it("shows loading state when isLoading is true", () => {
-    renderWithTheme(<ConflictResolve {...defaultProps} isLoading />);
+    render(<ConflictResolve {...defaultProps} isLoading />);
 
     // Check that the loading indicator is present
     const modal = screen.getByTestId("modal");

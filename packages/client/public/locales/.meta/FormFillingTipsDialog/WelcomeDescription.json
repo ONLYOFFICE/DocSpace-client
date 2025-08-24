@@ -3,7 +3,7 @@
   "content": "Here, you can organize straightforward PDF form filling, easily collect and analyze responses. Ready to get started?",
   "content_en_sha1_hash": "e55e78dc75d65a0f759607059fbe1b8418fc68bc",
   "created_at": "2025-05-19T21:30:55.151Z",
-  "updated_at": "2025-06-30T12:20:31.245Z",
+  "updated_at": "2025-08-21T11:22:39.817Z",
   "comment": {
     "text": "This translation key contains a welcome message used to describe the functionality of PDF form filling and response collection, appearing in a dialog.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/FormFillingTipsDialog/index.tsx",
-      "line_number": 127,
+      "line_number": 126,
       "context": "className=\"welcome-tips-description\"\n fontWeight=\"400\"\n fontSize=\"12px\"\n lineHeight=\"16px\"\n >\n {t(\"WelcomeDescription\")}\n </Text>\n <div className=\"welcome-tips-image-container\">\n {!isLoaded ? (\n <RectangleSkeleton\n width=\"416px\"",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Archives",
   "content_en_sha1_hash": "a50710e773e144dc2bef188e769e70476bfa5af3",
   "created_at": "2025-05-19T21:30:43.070Z",
-  "updated_at": "2025-08-11T09:02:43.927Z",
+  "updated_at": "2025-08-21T11:22:39.855Z",
   "comment": {
     "text": "This translation key is used for the label \"Archives\" in a filter dropdown menu, likely found on a page or button related to document or file management. It appears in the UI when filtering by type and selecting \"ArchiveOnly\". The translator should consider how this term will be displayed to users.",
     "is_auto": true,
@@ -36,7 +36,7 @@
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 363,
+      "line_number": 360,
       "context": "case FilterType.ImagesOnly:\n return t(\"Common:Images\");\n case FilterType.MediaOnly:\n return t(\"Common:Media\");\n case FilterType.ArchiveOnly:\n return t(\"Common:Archives\");\n case FilterType.FilesOnly:\n return t(\"Common:Files\");\n case FilterType.DiagramsOnly:\n return t(\"Common:Diagrams\");",
       "module": "/packages/shared"
     }

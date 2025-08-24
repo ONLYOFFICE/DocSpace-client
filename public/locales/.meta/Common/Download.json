@@ -3,7 +3,7 @@
   "content": "Download",
   "content_en_sha1_hash": "a479c9c34e878d07b4d67a73a48f432ad7dc53c8",
   "created_at": "2025-05-19T21:30:44.645Z",
-  "updated_at": "2025-08-11T18:11:59.305Z",
+  "updated_at": "2025-08-21T11:22:39.917Z",
   "comment": {
     "text": "This translation key is used for the label and icon of a \"Download\" button, typically found on a version history page or in a file listing. The label displays the content's download size when available, and the button triggers an action to download the file. It appears as a clickable element, allowing users to initiate the download process.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/VersionHistory/Section/Body/VersionRow.js",
-      "line_number": 222,
+      "line_number": 223,
       "context": "onClick: onRestoreClick,\n },\n {\n key: \"download\",\n icon: DownloadReactSvgUrl,\n label: `${t(\"Common:Download\")} (${info.contentLength})`,\n onClick: onDownloadAction,\n disabled: !info.security.Download,\n },\n canDeleteVersion &&\n index !== 0 && {",
       "module": "/packages/client"
     },
@@ -42,8 +42,8 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/completed-form/CompletedForm.tsx",
-      "line_number": 213,
-      "context": "scale\n primary\n size={ButtonSize.medium}\n label={\n isAnonym\n ? t(\"Common:Download\")\n : t(\"CompletedForm:CheckReadyForms\")\n }\n onClick={isAnonym ? handleDownload : gotoCompleteFolder}\n />\n {(!isShareFile || isRoomMember) && !isSDK ? (",
+      "line_number": 219,
+      "context": "scale\n primary\n size={ButtonSize.medium}\n label={\n isAnonym\n ? t(\"Common:Download\")\n : t(\"CompletedForm:CheckReadyForms\")\n }\n onClick={isAnonym ? handleDownload : gotoCompleteFolder}\n testId={\n isAnonym",
       "module": "/packages/doceditor"
     },
     {
@@ -66,13 +66,13 @@
     },
     {
       "file_path": "/packages/shared/components/quick-buttons/index.tsx",
-      "line_number": 170,
+      "line_number": 161,
       "context": "className=\"badge download-file icons-group\"\n size={sizeQuickButton}\n onClick={onClickDownload}\n isDisabled={isDisabled}\n hoverColor=\"accent\"\n title={t(\"Common:Download\")}\n />\n ) : null}\n {isTemplatesFolder ? (\n <IconButton\n iconName={CreateRoomReactSvgUrl}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
-      "line_number": 558,
+      "line_number": 565,
       "context": "autoMaxWidth\n isLarge\n withBodyScroll\n withoutPadding\n >\n <ModalDialog.Header>{t(\"Common:DownloadAs\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.modalBody}>\n {needPassword ? (\n <PasswordContent",
       "module": "/packages/shared"
     }

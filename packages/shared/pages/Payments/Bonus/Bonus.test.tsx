@@ -1,9 +1,8 @@
 import React from "react";
-import { screen } from "@testing-library/react";
+import { screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 
-import { renderWithTheme } from "../../../utils/render-with-theme";
 import { Bonus } from "./index";
 
 const defaultProps = {
@@ -23,12 +22,12 @@ const defaultProps = {
 
 describe("Bonus", () => {
   it("renders without errors", () => {
-    renderWithTheme(<Bonus {...defaultProps} />);
+    render(<Bonus {...defaultProps} />);
     expect(screen.getByTestId("bonus")).toBeInTheDocument();
   });
 
   it("displays community specific content", () => {
-    renderWithTheme(<Bonus {...defaultProps} isCommunity />);
+    render(<Bonus {...defaultProps} isCommunity />);
     expect(
       screen.getByTestId("community-contact-container"),
     ).toBeInTheDocument();
@@ -36,7 +35,7 @@ describe("Bonus", () => {
 
   it("handles click on documentation links", async () => {
     const user = userEvent.setup();
-    renderWithTheme(<Bonus {...defaultProps} />);
+    render(<Bonus {...defaultProps} />);
 
     const links = screen.getAllByRole("link");
 

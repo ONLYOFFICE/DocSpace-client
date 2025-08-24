@@ -3,7 +3,7 @@
   "content": "Logo for the space header",
   "content_en_sha1_hash": "b3d3cbda8a6a9f810657e265ad3acdc0aad5a8c8",
   "created_at": "2025-05-26T07:15:44.924Z",
-  "updated_at": "2025-08-11T09:02:44.090Z",
+  "updated_at": "2025-08-13T18:28:17.988Z",
   "comment": {
     "text": "The \"LogoLightSmall\" translation key contains a short name for a logo used in the space header. It is displayed within a settings component and includes size information about the logo.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 199,
+      "line_number": 218,
       "context": "<Text\n fontSize=\"15px\"\n fontWeight=\"600\"\n className=\"settings_unavailable\"\n >\n {t(\"LogoLightSmall\")} ({logoUrls[0].size.width}x\n {logoUrls[0].size.height})\n </Text>\n <div className={styles.logosWrapper}>\n <Logo\n name={logoUrls[0].name}",
       "module": "/packages/shared"
     }

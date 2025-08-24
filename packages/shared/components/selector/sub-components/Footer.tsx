@@ -97,7 +97,6 @@ const Footer = React.memo(
               lineHeight="20px"
               fontWeight={600}
               fontSize="13px"
-              noSelect
             >
               {footerInputHeader}
             </Text>
@@ -108,6 +107,7 @@ const Footer = React.memo(
               value={currentFooterInputValue || ""}
               scale
               onChange={onChangeFileName}
+              testId="selector_footer_input"
             />
             {withFooterCheckbox ? (
               <Checkbox
@@ -125,6 +125,7 @@ const Footer = React.memo(
             isChecked={isChecked}
             onChange={onChangeCheckbox}
             className="selector_footer-checkbox"
+            dataTestId="selector_footer_checkbox"
           />
         ) : null}
 
@@ -143,6 +144,7 @@ const Footer = React.memo(
                 : disableSubmitButton || !currentFooterInputValue.trim()
             }
             onClick={onSubmit}
+            testId="selector_submit_button"
           />
 
           {withAccessRights ? (
@@ -164,6 +166,7 @@ const Footer = React.memo(
               size={ButtonSize.normal}
               onClick={onCancel}
               isDisabled={requestRunning}
+              testId="selector_cancel_button"
             />
           ) : null}
         </div>

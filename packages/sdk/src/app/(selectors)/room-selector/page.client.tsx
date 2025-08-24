@@ -26,6 +26,7 @@
 
 "use client";
 
+import isNil from "lodash/isNil";
 import React, { useCallback } from "react";
 
 import { frameCallEvent } from "@docspace/shared/utils/common";
@@ -85,7 +86,7 @@ export default function RoomSelectorClient({
         selectedItem.roomType === RoomsType.FormRoom) &&
         selectedItem.shared);
 
-    if (isSharedRoom) {
+    if (isSharedRoom && !isNil(selectedItem.id)) {
       const response = (await getPrimaryLink(selectedItem.id)) as {
         sharedTo: {
           id: string;

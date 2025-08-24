@@ -65,6 +65,9 @@ export const ComboButton: React.FC<TComboButtonProps> = ({
   tabIndex = -1,
   isLoading = false,
   displayArrow: displayArrowProp,
+  noSelect,
+  imageIcon,
+  imageAlt = "",
 }) => {
   const defaultOption = selectedOption?.default;
   // const isSelected = selectedOption?.key !== 0;
@@ -88,6 +91,7 @@ export const ComboButton: React.FC<TComboButtonProps> = ({
       [styles.type]: type,
       [styles.descriptive]: type === "descriptive",
       [styles.plusBadgeValue]: plusBadgeValue,
+      [styles.noSelect]: noSelect,
     },
   );
 
@@ -110,6 +114,7 @@ export const ComboButton: React.FC<TComboButtonProps> = ({
       [styles.isDisabled]: isDisabled,
       [styles.defaultOption]: defaultOption,
       [styles.isLoading]: isLoading,
+      [styles.onlyIcon]: type === "onlyIcon",
     },
   );
 
@@ -138,10 +143,18 @@ export const ComboButton: React.FC<TComboButtonProps> = ({
         <div className={iconClasses} data-test-id="combo-button-icon">
           {isIconReactElement ? React.createElement(Icon) : null}
 
+          {imageIcon && typeof imageIcon === "string" ? (
+            <img
+              className={styles.imageIcon}
+              style={{ userSelect: "text" }}
+              src={imageIcon}
+              alt={`\n${imageAlt}`}
+            />
+          ) : null}
           {typeof selectedOption.icon === "string" ? (
             <ReactSVG
               src={selectedOption.icon}
-              className={classNames({
+              className={classNames(styles.selectedIcon, {
                 [styles.comboButtonSelectedIcon]: fillIcon,
                 "combo-button_selected-icon": fillIcon,
               })}
@@ -156,7 +169,6 @@ export const ComboButton: React.FC<TComboButtonProps> = ({
           color={selectedOption.color}
           backgroundColor={selectedOption.backgroundColor}
           border={`2px solid ${selectedOption.border}`}
-          compact={!!selectedOption.border}
           data-test-id="combo-button-badge"
         />
       ) : type === "descriptive" ? (

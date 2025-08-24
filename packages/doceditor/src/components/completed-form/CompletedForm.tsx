@@ -147,7 +147,7 @@ export const CompletedForm = ({
             <Heading level={HeadingLevel.h1}>
               {t("CompletedForm:FormCompletedSuccessfully")}
             </Heading>
-            <Text noSelect>
+            <Text>
               {isAnonym
                 ? t("CompletedForm:DescriptionForAnonymous")
                 : t("CompletedForm:DescriptionForRegisteredUser")}

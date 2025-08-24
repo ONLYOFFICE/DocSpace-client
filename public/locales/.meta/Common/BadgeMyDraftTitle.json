@@ -3,7 +3,7 @@
   "content": "My draft",
   "content_en_sha1_hash": "b5235c7a4454a54323265ceb2c24783fd196a731",
   "created_at": "2025-05-19T21:30:43.216Z",
-  "updated_at": "2025-08-11T09:02:44.078Z",
+  "updated_at": "2025-08-21T11:22:39.949Z",
   "comment": {
     "text": "This translation key is used to display a label that indicates a draft title. It appears on badges within components and provides contextual information about a file's status. The translation key should be used in situations where a user needs to view or interact with their draft content.",
     "is_auto": true,
@@ -12,19 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 308,
+      "line_number": 309,
       "context": "className={classNames(\n styles.versionBadge,\n \"badge-version badge-version-current tablet-badge icons-group\",\n )}\n backgroundColor={theme.filesBadges.badgeBackgroundColor}\n label={t(\"Common:BadgeMyDraftTitle\")}\n title={t(\"Common:BadgeMyDraftTitle\")}\n {...versionBadgeProps}\n style={{\n width: \"max-content\",\n }}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 308,
+      "line_number": 309,
       "context": "className={classNames(\n styles.versionBadge,\n \"badge-version badge-version-current tablet-badge icons-group\",\n )}\n backgroundColor={theme.filesBadges.badgeBackgroundColor}\n label={t(\"Common:BadgeMyDraftTitle\")}\n title={t(\"Common:BadgeMyDraftTitle\")}\n {...versionBadgeProps}\n style={{\n width: \"max-content\",\n }}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 272,
+      "line_number": 269,
       "context": "status: FileFillingFormStatus | undefined,\n t: TTranslation,\n ) => {\n switch (status) {\n case FileFillingFormStatus.Draft:\n return t(\"Common:BadgeMyDraftTitle\");\n case FileFillingFormStatus.YourTurn:\n return t(\"Common:YourTurn\");\n case FileFillingFormStatus.InProgress:\n return t(\"Common:InProgress\");\n case FileFillingFormStatus.Stopped:",
       "module": "/packages/shared"
     }

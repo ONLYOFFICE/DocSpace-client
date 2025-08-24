@@ -61,6 +61,7 @@ const SearchFilter = ({ t, oformsFilter, filterOformsBySearch }) => {
       onChange={onChangeValue}
       onClick={onInputClick}
       onClearSearch={onClear}
+      dataTestId="form_gallery_search_filter"
     />
   );
 };

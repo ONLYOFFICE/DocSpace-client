@@ -265,21 +265,17 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
     let missing = wsDepsItem.deps.filter((dep) => {
       let success =
         currentWorkspaceCodeImports.uniqueImports.has(dep.name) ||
-        Array.from(currentWorkspaceCodeImports.uniqueImports.values()).some(
-          (s) => {
-            return s.startsWith(`${dep.name}/`);
-          }
-        );
+        Array.from(currentWorkspaceCodeImports.uniqueImports.values()).some((s) => {
+          return s.startsWith(`${dep.name}/`);
+        });
 
       if (!success && dep.name.startsWith("@types/")) {
         const name = dep.name.substring("@types/".length);
         success =
           currentWorkspaceCodeImports.uniqueImports.has(name) ||
-          Array.from(currentWorkspaceCodeImports.uniqueImports.values()).some(
-            (s) => {
-              return s.startsWith(`${name}/`);
-            }
-          );
+          Array.from(currentWorkspaceCodeImports.uniqueImports.values()).some((s) => {
+            return s.startsWith(`${name}/`);
+          });
       }
 
       if (success) {
@@ -289,9 +285,7 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
       return !success;
     });
 
-    if (
-      currentWorkspaceCodeImports.workspace !== path.join("packages", "shared")
-    ) {
+    if (currentWorkspaceCodeImports.workspace !== path.join("packages", "shared")) {
       missing = missing.filter((m) => {
         const success = sharedDeps.deps.find((d) => d.name === m.name);
 
@@ -368,6 +362,7 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
       "jest-styled-components",
       "ts-jest",
       "ts-node",
+      "jest-html-reporter",
     ];
 
     missing = missing.filter((m) => !allowedUnusedDeps.includes(m.name));
@@ -393,9 +388,7 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
       });
     }
 
-    const foundInOtherWorkspace = missing.filter((dep) =>
-      usedSomeWhere.has(dep.name)
-    );
+    const foundInOtherWorkspace = missing.filter((dep) => usedSomeWhere.has(dep.name));
 
     if (foundInOtherWorkspace.length > 0) {
       message += `\n  Found in other workspace:\n`;
@@ -448,7 +441,8 @@ test("DifferentDependencyVersionsTest: Verify that all workspaces use same depen
 
   if (mismatchedDeps.length > 0) {
     const report = mismatchedDeps.join("\n\n");
-    throw new Error(`Found ${mismatchedDeps.length} dependencies with version mismatch:\n\n ${report}`);
+    throw new Error(
+      `Found ${mismatchedDeps.length} dependencies with version mismatch:\n\n ${report}`
+    );
   }
 });
-

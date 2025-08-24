@@ -111,9 +111,7 @@ export const ChangeDomainDialog = observer(() => {
     >
       <ModalDialog.Header>{t("DomainSettings")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text noSelect fontSize="13px">
-          {t("ChangeDomainDescription")}
-        </Text>
+        <Text fontSize="13px">{t("ChangeDomainDescription")}</Text>
         <div className="create-portal-input-block">
           <Text
             fontSize="13px"

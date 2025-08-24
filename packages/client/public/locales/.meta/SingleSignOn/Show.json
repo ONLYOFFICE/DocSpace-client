@@ -3,7 +3,7 @@
   "content": "Show",
   "content_en_sha1_hash": "d97d1ee339e4eeaba8cac91dca37c8b4ec8f5501",
   "created_at": "2025-05-19T21:30:50.132Z",
-  "updated_at": "2025-08-11T18:11:59.247Z",
+  "updated_at": "2025-08-12T19:46:26.187Z",
   "comment": {
     "text": "This translation key \"Show\" is used to display a button that toggles the visibility of settings or parameters in a user interface. It is rendered as part of a styled link component and appears in the layout of a portal settings page. Translators should provide an equivalent word for this text that conveys the same action, such as \"Toggle\", \"Activate\", or similar words depending on the intended context.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/HideButton.js",
-      "line_number": 88,
+      "line_number": 87,
       "context": "{value\n ? isAdditionalParameters\n ? t(\"HideAdditionalParameters\")\n : t(\"Hide\")\n : isAdditionalParameters\n ? t(\"ShowAdditionalParameters\")\n : t(\"Show\")}\n </Link>\n </StyledWrapper>\n );\n };",
       "module": "/packages/client"
     }

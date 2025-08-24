@@ -25,7 +25,14 @@
     "test:build": {
       "cache": true,
       "outputs": ["{projectRoot}/.next"]
+    },
+    "test": {
+      "cache": true,
+      "inputs": ["{workspaceRoot}/packages/shared/**/*"]
     }
   },
-  "defaultBase": "develop"
+  "defaultBase": "develop",
+  "tui": {
+    "enabled": false
+  }
 }

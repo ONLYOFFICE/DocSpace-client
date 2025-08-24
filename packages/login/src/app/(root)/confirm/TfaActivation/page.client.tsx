@@ -26,6 +26,10 @@
 
 "use client";
 
+import DownloadSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
+import ScanSvgUrl from "PUBLIC_DIR/images/scan.react.svg?url";
+import CheckSvgUrl from "PUBLIC_DIR/images/check.toast.react.svg?url";
+
 import { ChangeEvent, useContext, useEffect, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
@@ -41,6 +45,8 @@ import {
 } from "@docspace/shared/components/text-input";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
+import { IconButton } from "@docspace/shared/components/icon-button";
+
 import { checkConfirmLink } from "@docspace/shared/api/user";
 import { validateTfaCode } from "@docspace/shared/api/settings";
 import { OPEN_BACKUP_CODES_DIALOG } from "@docspace/shared/constants";
@@ -53,7 +59,6 @@ import {
 } from "@/utils/constants";
 import { TError } from "@/types";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
-import { GreetingContainer } from "@/components/GreetingContainer";
 import { useSearchParams } from "next/navigation";
 
 type TfaActivationFormProps = {
@@ -140,54 +145,103 @@ const TfaActivationForm = ({ secretKey, qrCode }: TfaActivationFormProps) => {
   return (
     <>
       <div className="set-app-description">
-        <GreetingContainer />
-
-        <Text isBold fontSize="14px" className="set-app-title">
-          {t("SetAppTitle")}
+        <Text isBold fontSize="18px" className="set-app-title">
+          {t("TfaTitle")}
+        </Text>
+        <Text className="set-app-subtitle">
+          {t("TfaSubTitle", { productName: t("Common:ProductName") })}
         </Text>
 
-        <Trans
-          t={t}
-          i18nKey="SetAppDescription"
-          ns="Confirm"
-          values={{ productName: t("Common:ProductName") }}
-          components={{
-            1: (
-              <Link
+        <div className="description">
+          <div className="description-item">
+            <div className="icon-container">
+              <IconButton
                 color="accent"
-                href={TFA_ANDROID_APP_URL}
-                target={LinkTarget.blank}
+                iconName={DownloadSvgUrl}
+                size={16}
+                isDisabled
+                isFill
               />
-            ),
-            4: (
-              <Link
+            </div>
+            <div className="description-text">
+              <Text fontWeight={600}>{t("GetSuitableApp")}</Text>
+              <Trans
+                t={t}
+                i18nKey="GetSuitableAppDescription"
+                ns="Confirm"
+                components={{
+                  1: (
+                    <Link
+                      key="android-link"
+                      color="accent"
+                      href={TFA_ANDROID_APP_URL}
+                      target={LinkTarget.blank}
+                      dataTestId="android_app_link"
+                    />
+                  ),
+                  4: (
+                    <Link
+                      key="ios-link"
+                      color="accent"
+                      href={TFA_IOS_APP_URL}
+                      target={LinkTarget.blank}
+                      dataTestId="ios_app_link"
+                    />
+                  ),
+                  8: (
+                    <Link
+                      key="windows-link"
+                      color="accent"
+                      href={TFA_WIN_APP_URL}
+                      target={LinkTarget.blank}
+                      dataTestId="win_app_link"
+                    />
+                  ),
+                }}
+              />
+            </div>
+          </div>
+          <div className="description-item">
+            <div className="icon-container">
+              <IconButton
                 color="accent"
-                href={TFA_IOS_APP_URL}
-                target={LinkTarget.blank}
+                iconName={ScanSvgUrl}
+                size={16}
+                isDisabled
+                isFill
               />
-            ),
-            8: (
-              <Link
+            </div>
+            <div className="description-text">
+              <Text fontWeight={600}>{t("ConnectApp")}</Text>
+              <Trans
+                t={t}
+                i18nKey="ConnectAppDescription"
+                ns="Confirm"
+                values={{
+                  secretKey,
+                }}
+                components={{
+                  1: <strong key="secret-key-strong" />,
+                }}
+              />
+            </div>
+          </div>
+          <div className="description-item">
+            <div className="icon-container">
+              <IconButton
                 color="accent"
-                href={TFA_WIN_APP_URL}
-                target={LinkTarget.blank}
+                iconName={CheckSvgUrl}
+                size={16}
+                isDisabled
+                isFill
               />
-            ),
-          }}
-        />
-        <Text className="set-app-text">
-          <Trans
-            t={t}
-            i18nKey="SetAppInstallDescription"
-            ns="Confirm"
-            values={{
-              secretKey,
-            }}
-            components={{
-              1: <strong />,
-            }}
-          />
-        </Text>
+            </div>
+            <div className="description-text">
+              <Text fontWeight={600}>{t("VerifyConnection")}</Text>
+              <Text>{t("VerifyConnectionDescription")}</Text>
+            </div>
+          </div>
+        </div>
       </div>
       <FormWrapper id="tfa-activation-form">
         <div className="app-code-wrapper">
@@ -199,6 +253,7 @@ const TfaActivationForm = ({ secretKey, qrCode }: TfaActivationFormProps) => {
               labelVisible={false}
               hasError={!!error}
               errorMessage={error}
+              dataTestId="app_code_field"
             >
               <TextInput
                 id="code"
@@ -215,6 +270,7 @@ const TfaActivationForm = ({ secretKey, qrCode }: TfaActivationFormProps) => {
                 value={code}
                 hasError={!!error}
                 onKeyDown={onKeyPress}
+                testId="app_code_input"
               />
             </FieldContainer>
           </div>
@@ -230,6 +286,7 @@ const TfaActivationForm = ({ secretKey, qrCode }: TfaActivationFormProps) => {
               isDisabled={!code.length || isLoading}
               isLoading={isLoading}
               onClick={onSubmit}
+              testId="app_connect_button"
             />
           </div>
         </div>

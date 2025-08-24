@@ -27,6 +27,49 @@
 @use "../../styles/mixins";
 @use "../../styles/variables";
 
+@mixin icon {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+
+  user-select: text;
+  pointer-events: none;
+}
+
+.linkRow.linkRow {
+  :global(.combo-button) {
+    padding-inline: 8px;
+
+    --icon-color: var(--share-selector-default-color);
+
+    @media (hover: hover) {
+      &:hover {
+        --icon-color: var(--share-selector-hover-color);
+      }
+    }
+
+    &[aria-expanded="true"] {
+      --icon-color: var(--share-selector-selected-color);
+    }
+
+    &:active {
+      background-color: var(--share-bg-pressed-color) !important;
+    }
+
+    &[aria-disabled="true"] {
+      --icon-color: var(--share-selector-disabled-color);
+      background-color: transparent !important;
+    }
+
+    :global(.combo-buttons_arrow-icon),
+    :global(.combo-button_selected-icon-container) {
+      svg path {
+        fill: var(--icon-color);
+      }
+    }
+  }
+}
+
 .links {
   margin-top: 20px;
 
@@ -94,7 +137,9 @@
   .linkOptions {
     display: flex;
     flex-direction: column;
+    align-items: baseline;
     gap: 0;
+
     overflow: hidden;
   }
 
@@ -112,13 +157,11 @@
     line-height: 16px;
     margin: 6px 8px;
 
+    margin-inline-end: 0;
+
     &.isExpired {
       color: var(--info-panel-link-expired);
     }
-  }
-
-  .linkOptionsTitleRoom {
-    margin-inline-start: 0;
   }
 
   .expiredOptions {
@@ -142,17 +185,14 @@
     color: var(--info-panel-links-primary-color);
   }
 
-  .expireTextRoom {
-    margin-inline-start: 0;
-  }
-
   .linkTimeInfo {
     color: var(--info-panel-links-primary-color);
+    padding-inline-start: 8px;
   }
 
   .linkActions {
     display: flex;
-    gap: 16px;
+    gap: 8px;
     align-items: center;
     margin-inline-start: auto;
 
@@ -160,6 +200,9 @@
     .linkActionsCopyIcon {
       min-width: 16px;
       min-height: 16px;
+
+      user-select: all;
+      cursor: pointer;
     }
   }
 
@@ -209,5 +252,82 @@
     position: fixed;
     bottom: 0;
     inset-inline-start: 0;
+  }
+}
+
+.linkTitleContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 100%;
+
+  .linkOptionsTitle:not(.isExpired) {
+    cursor: pointer;
+  }
+
+  .linkActionsCopyIconContainer {
+    aspect-ratio: 1;
+    width: 12px;
+    height: 12px;
+
+    position: relative;
+
+    .linkActionsCopyImgIcon {
+      @include icon;
+
+      width: 12px;
+      height: 12px;
+    }
+
+    .linkActionsCopyIcon {
+      cursor: pointer;
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+  }
+
+  .linkActionsCopyIcon {
+    width: 12px;
+    height: 12px;
+
+    flex-shrink: 0;
+
+    user-select: all;
+  }
+}
+
+.iconContainer {
+  width: 16px;
+  height: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 8px;
+
+  & > * {
+    width: 16px;
+    height: 16px;
+  }
+
+  .wrapper {
+    position: relative;
+  }
+
+  .iconImg {
+    @include icon;
+  }
+
+  .icon {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  svg {
+    path {
+      fill: var(--share-selector-not-active-color);
+    }
   }
 }

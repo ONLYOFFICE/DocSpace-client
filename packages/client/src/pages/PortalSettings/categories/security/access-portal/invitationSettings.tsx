@@ -59,7 +59,6 @@ const InvitationSettings = ({
   allowInvitingMembers: boolean;
   allowInvitingGuests: boolean;
   currentDeviceType: DeviceType;
-  getInvitationSettings: () => void;
   tReady: boolean;
 }) => {
   const [showReminder, setShowReminder] = useState(false);

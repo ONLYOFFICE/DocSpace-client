@@ -101,7 +101,7 @@ const useSecurity = ({
   }, [getAccessPortalData, getLoginHistoryData, getAuditTrailData]);
 
   React.useEffect(() => {
-    //if (window.location.pathname.includes("security"))
+    // if (window.location.pathname.includes("security"))
     //  getSecurityInitialValue();
   }, [getSecurityInitialValue]);
 

@@ -45,7 +45,6 @@ import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStor
 interface Props {
   isMobileView: boolean;
   deepLinkSettings: DeepLinkType;
-  initSettings: (path: string) => Promise<void>;
 }
 
 const StyledWrapper = styled.div`

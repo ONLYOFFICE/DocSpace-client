@@ -139,7 +139,7 @@ const DataManagementWrapper = (props) => {
       content: (
         <ManualBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />
       ),
-      onClick: async () => await getManualBackupData(),
+      onClick: async () => getManualBackupData(),
     },
     {
       id: "auto-backup",
@@ -147,7 +147,7 @@ const DataManagementWrapper = (props) => {
       content: (
         <AutoBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />
       ),
-      onClick: async () => await getAutoBackupData(),
+      onClick: async () => getAutoBackupData(),
     },
   ];
 
@@ -208,7 +208,7 @@ const DataManagementWrapper = (props) => {
       selectedItemId={currentTabId}
       onSelect={(e) => onSelect(e)}
       stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
-      withAnimation={true}
+      withAnimation
     />
   );
 };

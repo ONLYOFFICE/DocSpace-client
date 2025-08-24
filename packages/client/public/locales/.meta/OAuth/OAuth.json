@@ -3,7 +3,7 @@
   "content": "OAuth 2.0",
   "content_en_sha1_hash": "11ff1c5f1bf611e663f09de411b0c9a4d410b907",
   "created_at": "2025-05-19T21:30:53.924Z",
-  "updated_at": "2025-08-04T07:30:01.420Z",
+  "updated_at": "2025-08-21T11:22:39.879Z",
   "comment": {
     "text": "OAuth 2.0 is a translation key used to display the English content \"OAuth 2.0\" in various UI contexts throughout the application, primarily for title settings and button labels, such as on create and edit pages of OAuth-related settings.",
     "is_auto": true,
@@ -36,8 +36,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/List/index.tsx",
-      "line_number": 100,
-      "context": "href={apiOAuthLink}\n tag=\"a\"\n style={isError ? undefined : { marginBottom: \"20px\" }}\n color=\"accent\"\n >\n {t(\"OAuth:OAuth\")} {t(\"Common:Guide\")}\n </Link>\n ) : null}\n \n {isError ? (\n <EmptyServerErrorContainer />",
+      "line_number": 101,
+      "context": "tag=\"a\"\n style={isError ? undefined : { marginBottom: \"20px\" }}\n color=\"accent\"\n dataTestId=\"oauth_guide_link\"\n >\n {t(\"OAuth:OAuth\")} {t(\"Common:Guide\")}\n </Link>\n ) : null}\n \n {isError ? (\n <EmptyServerErrorContainer />",
       "module": "/packages/client"
     },
     {

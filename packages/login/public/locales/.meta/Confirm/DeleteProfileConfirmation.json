@@ -3,7 +3,7 @@
   "content": "Attention! You are about to disable your account.",
   "content_en_sha1_hash": "cf6022cb690fff733a9eba621fab246a7b9af3ac",
   "created_at": "2025-05-19T21:30:57.346Z",
-  "updated_at": "2025-05-24T15:34:26.520Z",
+  "updated_at": "2025-08-21T11:22:39.932Z",
   "comment": {
     "text": "This translation key is used to display a warning message when confirming account deletion, alerting users of the implications of disabling their account. It appears in the UI as part of a confirmation dialog or button.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/ProfileRemove/page.client.tsx",
-      "line_number": 129,
-      "context": "<Text\n fontSize=\"16px\"\n fontWeight=\"600\"\n className=\"delete-profile-confirm\"\n >\n {t(\"DeleteProfileConfirmation\")}\n </Text>\n <Text>\n <Trans i18nKey=\"DeleteProfileConfirmationInfo\" ns=\"Confirm\" t={t}>\n By clicking &quot;Disable my account&quot; you agree with our\n Privacy policy",
+      "line_number": 144,
+      "context": "<Text\n fontSize=\"16px\"\n fontWeight=\"600\"\n className=\"delete-profile-confirm\"\n >\n {t(\"DeleteProfileConfirmation\")}\n </Text>\n \n <div className=\"user-info-wrapper\">\n <Avatar\n role={AvatarRole.user}",
       "module": "/packages/login"
     }
   ],

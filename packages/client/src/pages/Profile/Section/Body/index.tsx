@@ -46,6 +46,7 @@ import OAuthStore from "SRC_DIR/store/OAuthStore";
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import SettingsSetupStore from "SRC_DIR/store/SettingsSetupStore";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
+import FilesStore from "SRC_DIR/store/FilesStore";
 
 import MainProfile from "./sub-components/main-profile";
 import LoginContent from "./sub-components/login";
@@ -96,6 +97,7 @@ type SectionBodyContentProps = {
   getSessions?: SettingsSetupStore["getSessions"];
   setIsProfileLoaded?: ClientLoadingStore["setIsProfileLoaded"];
   setIsSectionHeaderLoading?: ClientLoadingStore["setIsSectionHeaderLoading"];
+  resetSelections?: FilesStore["resetSelections"];
 };
 
 const SectionBodyContent = (props: SectionBodyContentProps) => {
@@ -117,6 +119,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     setIsProfileLoaded,
     setIsSectionHeaderLoading,
     getTfaType,
+    resetSelections,
   } = props;
   const navigate = useNavigate();
 
@@ -134,6 +137,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
 
   useEffect(() => {
     checkEmailChangeParam();
+    resetSelections?.();
   }, []);
 
   const {
@@ -243,6 +247,7 @@ export default inject(
     oauthStore,
     tfaStore,
     setup,
+    filesStore,
   }: TStore) => {
     const { showProfileLoader, setIsProfileLoaded, setIsSectionHeaderLoading } =
       clientLoadingStore;
@@ -262,6 +267,8 @@ export default inject(
 
     const { getSessions } = setup;
 
+    const { resetSelections } = filesStore;
+
     return {
       currentDeviceType: settingsStore.currentDeviceType,
       showProfileLoader,
@@ -280,6 +287,7 @@ export default inject(
       getTfaType,
       setIsProfileLoaded,
       setIsSectionHeaderLoading,
+      resetSelections,
     };
   },
 )(

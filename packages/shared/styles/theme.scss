@@ -2818,6 +2818,26 @@
 }
 
 .light {
+  --share-selector-default-color: #{$light-gray-dark};
+  --share-selector-hover-color: #{$light-gray-dark};
+  --share-selector-selected-color: #{$black};
+  --share-selector-disabled-color: #{$gray};
+  --share-selector-not-active-color: #{$light-gray-dark};
+
+  --share-bg-pressed-color: #{$gray-strong};
+}
+
+.dark {
+  --share-selector-default-color: #{$dark-gray-dark};
+  --share-selector-hover-color: #{$dark-gray-dark};
+  --share-selector-selected-color: #{$white};
+  --share-selector-disabled-color: #{$gray-dark};
+  --share-selector-not-active-color: #{$dark-gray-dark};
+
+  --share-bg-pressed-color: #{$dark-gray-light};
+}
+
+.light {
   --quick-buttons-shared-color: #{$light-icons};
 }
 

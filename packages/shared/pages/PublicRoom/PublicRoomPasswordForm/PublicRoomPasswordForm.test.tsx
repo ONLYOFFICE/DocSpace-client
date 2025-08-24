@@ -27,10 +27,12 @@
 import React from "react";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import type { TFunction } from "i18next";
 
 import { validatePublicRoomPassword } from "../../../api/rooms";
-import { ValidationStatus } from "../../../enums";
+import { ValidationStatus, LinkSharingEntityType } from "../../../enums";
 import { toastr } from "../../../components/toast";
+import type { TValidateShareRoom } from "../../../api/rooms/types";
 
 import PublicRoomPassword from ".";
 
@@ -49,12 +51,28 @@ jest.mock("../../../utils/common", () => ({
   frameCallCommand: jest.fn(),
 }));
 
-const mockT = (key: string) => key;
+// Mock TFunction from i18next
+const mockT = jest.fn((key: string) => key) as unknown as TFunction;
+
+const mockValidationData: TValidateShareRoom = {
+  id: "test-id",
+  isAuthenticated: false,
+  linkId: "test-link-id",
+  shared: true,
+  status: ValidationStatus.Ok,
+  tenantId: 1,
+  title: "Test Room",
+  isRoom: true,
+  type: LinkSharingEntityType.RoomOrFolder,
+  entityId: "test-entity-id",
+  entityTitle: "Test Room Title",
+  entityType: LinkSharingEntityType.RoomOrFolder,
+};
 
 const defaultProps = {
   t: mockT,
   roomKey: "test-room-key",
-  roomTitle: "Test Room",
+  validationData: mockValidationData,
   onSuccessValidationCallback: jest.fn(),
 };
 
@@ -66,8 +84,10 @@ describe("PublicRoomPassword", () => {
   it("renders correctly", () => {
     render(<PublicRoomPassword {...defaultProps} />);
 
-    expect(screen.getByText("Common:EnterPassword")).toBeInTheDocument();
-    expect(screen.getByText("Common:NeedPassword:")).toBeInTheDocument();
+    expect(screen.getByText("Common:PasswordRequired")).toBeInTheDocument();
+    expect(
+      screen.getByText("Common:PasswordProtectedRoomFolder:"),
+    ).toBeInTheDocument();
     expect(screen.getByText("Test Room")).toBeInTheDocument();
     expect(screen.getByPlaceholderText("Common:Password")).toBeInTheDocument();
     expect(

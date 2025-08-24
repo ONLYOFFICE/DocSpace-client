@@ -24,93 +24,81 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { type FC } from "react";
 
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Text } from "@docspace/shared/components/text";
-import { Button } from "@docspace/shared/components/button";
-import { withTranslation } from "react-i18next";
-import { inject, observer } from "mobx-react";
+import { Text } from "../../components/text";
+import { Button, ButtonSize } from "../../components/button";
+import { useEventListener } from "../../hooks/useEventListener";
+import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
 
-const UnsavedChangesDialogComponent = (props) => {
-  const {
-    t,
-    tReady,
-    visible,
-    setUnsavedChangesDialog,
-    setEditLinkPanelIsVisible,
-  } = props;
+import type { UnsavedChangesDialogProps } from "./UnsavedChangesDialog.types";
 
-  const onClose = () => {
-    setUnsavedChangesDialog(false);
-  };
+const UnsavedChangesDialog: FC<UnsavedChangesDialogProps> = ({
+  visible,
+  onClose,
+  onCancel,
+  onConfirm,
+}) => {
+  const { t, ready } = useTranslation(["Files", "Settings", "Common"]);
 
-  const onCloseMenu = () => {
-    setEditLinkPanelIsVisible(false);
-    onClose();
-  };
-
-  const onKeyPress = (e) => {
-    if (e.keyCode === 13) {
-      onCloseMenu();
+  useEventListener("keydown", (e: KeyboardEvent) => {
+    if (e.key === "Enter" && visible) {
+      onConfirm();
     }
-  };
-
-  useEffect(() => {
-    window.addEventListener("keydown", onKeyPress);
-
-    return () => window.removeEventListener("keydown", onKeyPress);
-  }, []);
+  });
 
   return (
     <ModalDialog
-      isLoading={!tReady}
+      zIndex={401}
       visible={visible}
       onClose={onClose}
-      displayType="modal"
-      zIndex={401}
+      isLoading={!ready}
+      displayType={ModalDialogType.modal}
     >
       <ModalDialog.Header>
         {t("Common:YouHaveUnsavedChanges")}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <Text>{t("Settings:UnsavedChangesBody")}</Text>
+        <Text>{t("Common:UnsavedChangesBody")}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
-          key="OKButton"
-          label={t("Settings:CloseMenu")}
-          size="normal"
-          primary
-          onClick={onCloseMenu}
           scale
+          primary
+          key="OKButton"
+          onClick={onConfirm}
+          size={ButtonSize.normal}
+          label={t("Common:CloseMenu")}
         />
         <Button
-          key="CancelButton"
-          label={t("Common:CancelButton")}
-          size="normal"
-          onClick={onClose}
           scale
+          onClick={onCancel}
+          key="CancelButton"
+          size={ButtonSize.normal}
+          label={t("Common:CancelButton")}
         />
       </ModalDialog.Footer>
     </ModalDialog>
   );
 };
 
-const UnsavedChangesDialog = withTranslation(["Files", "Settings", "Common"])(
-  UnsavedChangesDialogComponent,
-);
+export default UnsavedChangesDialog;
 
-export default inject(({ dialogsStore }) => {
-  const {
-    unsavedChangesDialogVisible: visible,
-    setUnsavedChangesDialog,
-    setEditLinkPanelIsVisible,
-  } = dialogsStore;
+// const UnsavedChangesDialog = withTranslation(["Files", "Settings", "Common"])(
+//   UnsavedChangesDialogComponent,
+// );
 
-  return {
-    visible,
-    setUnsavedChangesDialog,
-    setEditLinkPanelIsVisible,
-  };
-})(observer(UnsavedChangesDialog));
+// export default inject(({ dialogsStore }) => {
+//   const {
+//     unsavedChangesDialogVisible: visible,
+//     setUnsavedChangesDialog,
+//     setEditLinkPanelIsVisible,
+//   } = dialogsStore;
+
+//   return {
+//     visible,
+//     setUnsavedChangesDialog,
+//     setEditLinkPanelIsVisible,
+//   };
+// })(observer(UnsavedChangesDialog));

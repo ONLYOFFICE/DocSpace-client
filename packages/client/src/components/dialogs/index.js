@@ -55,7 +55,6 @@ import CreateRoomConfirmDialog from "./CreateRoomConfirmDialog";
 import PortalRenamingDialog from "./PortalRenamingDialog";
 import DataReassignmentDialog from "./DataReassignmentDialog";
 import SubmitToFormGallery from "./SubmitToFormGallery";
-import UnsavedChangesDialog from "./UnsavedChangesDialog";
 import DeleteLinkDialog from "./DeleteLinkDialog";
 import MoveToPublicRoom from "./MoveToPublicRoom";
 import SettingsPluginDialog from "./SettingsPluginDialog";
@@ -109,7 +108,6 @@ export {
   PortalRenamingDialog,
   DataReassignmentDialog,
   SubmitToFormGallery,
-  UnsavedChangesDialog,
   DeleteLinkDialog,
   MoveToPublicRoom,
   SettingsPluginDialog,

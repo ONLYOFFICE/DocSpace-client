@@ -23,55 +23,61 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import React, { FC } from "react";
+import type moment from "moment";
 
-import React from "react";
-import { Text } from "@docspace/shared/components/text";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import type { TFileLink } from "../../../api/files/types";
+import type { TTranslation } from "../../../types";
 
-const ToggleBlock = ({
-  isLoading,
-  headerText,
-  bodyText,
-  isChecked,
-  onChange,
-  children,
-  withToggle = true,
-  isExpired,
-  dataTestId,
+import { Text } from "../../text";
+
+import styles from "../Share.module.scss";
+
+import ExpiredComboBox from "./ExpiredComboBox";
+
+export interface LinkExpirationProps {
+  link: TFileLink;
+  isLoaded: boolean;
+  isRoomsLink: boolean;
+  isArchiveFolder: boolean;
+
+  t: TTranslation;
+  removedExpiredLink: (link: TFileLink) => void;
+  changeExpirationOption: (
+    link: TFileLink,
+    expirationDate: moment.Moment | null,
+  ) => Promise<void>;
+}
+
+export const LinkExpiration: FC<LinkExpirationProps> = ({
+  t,
+  link,
+  isLoaded,
+  isRoomsLink,
+  isArchiveFolder,
+  changeExpirationOption,
+  removedExpiredLink,
 }) => {
-  return (
-    <div className="edit-link-toggle-block">
-      <div className="edit-link-toggle-header">
-        <Text fontSize="16px" fontWeight={700}>
-          {headerText}
-        </Text>
-        {withToggle ? (
-          <ToggleButton
-            isDisabled={isLoading}
-            isChecked={isChecked}
-            onChange={onChange}
-            className="edit-link-toggle"
-            dataTestId={dataTestId}
-          />
-        ) : null}
-      </div>
-      {bodyText ? (
-        <Text
-          className={
-            isExpired
-              ? "edit-link-toggle-description_expired"
-              : "edit-link-toggle-description"
-          }
-          fontSize="12px"
-          fontWeight={400}
-        >
-          {bodyText}
-        </Text>
-      ) : null}
+  if (!link.canEditExpirationDate) {
+    return (
+      <Text
+        fontSize="12px"
+        fontWeight="400"
+        lineHeight="16px"
+        className={styles.linkTimeInfo}
+      >
+        {t("Common:NoTimeLimit")}
+      </Text>
+    );
+  }
 
-      {children}
-    </div>
+  return (
+    <ExpiredComboBox
+      link={link}
+      changeExpirationOption={changeExpirationOption}
+      isDisabled={isLoaded || isArchiveFolder}
+      isRoomsLink={isRoomsLink}
+      removedExpiredLink={removedExpiredLink}
+    />
   );
 };
-
-export default ToggleBlock;

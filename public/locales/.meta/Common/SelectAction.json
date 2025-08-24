@@ -3,7 +3,7 @@
   "content": "Select",
   "content_en_sha1_hash": "8598222918d3c6e513d63060cf55e2971ded729a",
   "created_at": "2025-05-19T21:30:48.355Z",
-  "updated_at": "2025-08-11T09:02:43.829Z",
+  "updated_at": "2025-08-21T11:22:39.783Z",
   "comment": {
     "text": "This translation key is used to display a label for selecting an action, such as choosing a file or folder, in various UI elements. It appears in a placeholder position within a dialog and on a component that handles file selection. Translators should provide a descriptive text that indicates the user's ability to make a choice.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditGroupDialog/sub-components/HeadOfGroupParam/index.tsx",
       "line_number": 57,
-      "context": "{!groupManager ? (\n <Styled.SelectGroupManager onClick={onShowSelectGroupManagerPanel}>\n <SelectorAddButton\n iconName={PlusSvgUrl}\n label={t(\"Common:SelectAction\")}\n />\n </Styled.SelectGroupManager>\n ) : (\n <GroupMemberRow\n groupMember={groupManager}",
+      "context": "{!groupManager ? (\n <Styled.SelectGroupManager onClick={onShowSelectGroupManagerPanel}>\n <SelectorAddButton\n iconName={PlusSvgUrl}\n label={t(\"Common:SelectAction\")}\n testId=\"select_group_manager\"\n />\n </Styled.SelectGroupManager>\n ) : (\n <GroupMemberRow",
       "module": "/packages/client"
     },
     {

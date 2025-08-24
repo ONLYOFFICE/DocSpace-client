@@ -25,7 +25,7 @@
  * content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
-
+import isNil from "lodash/isNil";
 import { isTablet as isTabletDevice } from "react-device-detect";
 
 import FileActionsDownloadReactSvg from "PUBLIC_DIR/images/icons/16/download.react.svg";
@@ -40,6 +40,7 @@ import { RoomsType, ShareAccessRights } from "../../enums";
 import { Tooltip } from "../tooltip";
 import { Text } from "../text";
 import { IconButton } from "../icon-button";
+import { isRoom } from "../../utils/typeGuards";
 
 import type { QuickButtonsProps } from "./QuickButtons.types";
 
@@ -53,7 +54,6 @@ export const QuickButtons = (props: QuickButtonsProps) => {
     viewAs,
     isPublicRoom,
     onClickShare,
-    isPersonalRoom,
     isArchiveFolder,
     isIndexEditingMode,
     showLifetimeIcon,
@@ -74,6 +74,8 @@ export const QuickButtons = (props: QuickButtonsProps) => {
   const iconLock = desktopView ? LockedIconReact12Svg : LockedIconReactSvg;
   const canLock = security && "Lock" in security ? security.Lock : undefined;
 
+  const showShareIcon = !isNil(item.shareSettings?.PrimaryExternalLink);
+
   const tabletViewQuickButton = isTablet() || isTabletDevice;
 
   const sizeQuickButton: IconSizeType =
@@ -82,7 +84,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
   const isAvailableDownloadFile =
     isPublicRoom && item.security?.Download && viewAs === "tile";
 
-  const isAvailableShareFile = isPersonalRoom && item.canShare;
+  const isAvailableShareFile = item.canShare && !isRoom(item);
 
   const isPublicRoomType =
     "roomType" in item &&
@@ -187,12 +189,12 @@ export const QuickButtons = (props: QuickButtonsProps) => {
             <IconButton
               iconName={LinkReactSvgUrl}
               className={classNames("badge copy-link icons-group", {
-                "create-share-link": !item.shared,
-                "link-shared": item.shared,
+                "create-share-link": !item.shared && !showShareIcon,
+                "link-shared": item.shared || showShareIcon,
               })}
               size={sizeQuickButton}
               onClick={onClickShare}
-              color={shared ? "accent" : undefined}
+              color={shared || showShareIcon ? "accent" : undefined}
               isDisabled={isDisabled}
               hoverColor="accent"
               title={t("Common:CopySharedLink")}

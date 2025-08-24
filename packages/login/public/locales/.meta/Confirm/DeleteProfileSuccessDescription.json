@@ -3,7 +3,7 @@
   "content": "Your {{productName}} account is successfully disabled. The {{productName}} owner or admin can permanently delete your disabled account.",
   "content_en_sha1_hash": "819078d1e44eea6c816187a8866798c50d4d88d0",
   "created_at": "2025-05-19T21:30:57.350Z",
-  "updated_at": "2025-05-24T15:31:50.785Z",
+  "updated_at": "2025-08-21T11:22:39.932Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that an account has been successfully disabled. It appears in a confirmation dialog after attempting to delete a profile and contains the product name for contextualization.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/ProfileRemove/page.client.tsx",
-      "line_number": 98,
-      "context": "productName: t(\"Common:ProductName\"),\n })}\n />\n <FormWrapper>\n <Text>\n {t(\"DeleteProfileSuccessDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n <Trans i18nKey=\"DeleteProfileSuccessMessageInfo\" ns=\"Confirm\" t={t}>\n Please check our\n <Link",
+      "line_number": 111,
+      "context": "productName: t(\"Common:ProductName\"),\n })}\n />\n <FormWrapper>\n <Text>\n {t(\"DeleteProfileSuccessDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n <br />\n <Trans i18nKey=\"DeleteProfileSuccessMessageInfo\" ns=\"Confirm\" t={t}>\n Please check our",
       "module": "/packages/login"
     }
   ],

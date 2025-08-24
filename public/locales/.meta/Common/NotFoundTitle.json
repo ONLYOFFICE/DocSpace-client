@@ -3,7 +3,7 @@
   "content": "Nothing found",
   "content_en_sha1_hash": "fed1f5cd946a327d187f842db23041ecd3553315",
   "created_at": "2025-05-19T21:30:46.918Z",
-  "updated_at": "2025-06-30T12:20:31.320Z",
+  "updated_at": "2025-08-21T11:22:39.839Z",
   "comment": {
     "text": "This translation key is used for \"Nothing found\" content, appearing as a header or button text in various screens of the application, such as an empty screen filter or gallery page. It indicates that no data or items were found based on user filters or criteria.",
     "is_auto": true,
@@ -24,8 +24,8 @@
     },
     {
       "file_path": "/packages/shared/selectors/Files/hooks/useSelectorBody.tsx",
-      "line_number": 227,
-      "context": "searchEmptyScreenImage={\n theme?.isBase\n ? EmptyScreenFilterAltSvgUrl\n : EmptyScreenFilterAltDarkSvgUrl\n }\n searchEmptyScreenHeader={t(\"Common:NotFoundTitle\")}\n searchEmptyScreenDescription={t(\"Common:EmptyFilterDescriptionText\")}\n isLoading={showLoader}\n rowLoader={\n <RowLoader\n isMultiSelect={false}",
+      "line_number": 225,
+      "context": "emptyScreenHeader={t(\"Common:SelectorEmptyScreenHeader\")}\n emptyScreenDescription=\"\"\n searchEmptyScreenImage={\n isBase ? EmptyScreenFilterAltSvgUrl : EmptyScreenFilterAltDarkSvgUrl\n }\n searchEmptyScreenHeader={t(\"Common:NotFoundTitle\")}\n searchEmptyScreenDescription={t(\"Common:EmptyFilterDescriptionText\")}\n isLoading={showLoader}\n rowLoader={\n <RowLoader\n isMultiSelect={false}",
       "module": "/packages/shared"
     },
     {

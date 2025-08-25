@@ -61,7 +61,7 @@ const Dialog = ({
   const [value, setValue] = useState("");
 
   const [isError, setIsError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
 
@@ -89,14 +89,14 @@ const Dialog = ({
 
   const onSaveAction = useCallback(
     async (e) => {
-      setIsLoading(true);
+      setIsDisabled(true);
       const keepNewFileNamePromise =
         isCreateDialog && isChecked && setKeepNewFileName(isChecked);
 
       const savePromise = onSave && onSave(e, value);
 
       await Promise.all([keepNewFileNamePromise, savePromise]);
-      setIsLoading(false);
+      setIsDisabled(false);
     },
     [onSave, isCreateDialog, value, isChecked, setKeepNewFileName],
   );
@@ -105,10 +105,10 @@ const Dialog = ({
     (e) => {
       if (e.keyCode === 27) onCancelAction(e);
 
-      if (e.keyCode === 13 && !withForm && !hasError && !isLoading)
+      if (e.keyCode === 13 && !withForm && !hasError && !isDisabled)
         onSaveAction(e);
     },
-    [onCancelAction, onSaveAction, withForm, hasError, isLoading],
+    [onCancelAction, onSaveAction, withForm, hasError, isDisabled],
   );
 
   useEffect(() => {
@@ -198,7 +198,7 @@ const Dialog = ({
             tabIndex={1}
             onChange={onChangeAction}
             onFocus={onFocus}
-            isDisabled={isLoading}
+            isDisabled={isDisabled}
             maxLength={165}
             testId={`${getTestIdPrefix()}_text_input`}
           />
@@ -241,8 +241,8 @@ const Dialog = ({
           type="submit"
           scale
           primary
-          isLoading={isLoading}
-          isDisabled={isLoading || hasError}
+          isLoading={isDisabled}
+          isDisabled={isDisabled || hasError}
           onClick={onSaveAction}
           testId={`${getTestIdPrefix()}_save_button`}
         />
@@ -252,7 +252,7 @@ const Dialog = ({
           label={t("Common:CancelButton")}
           size="normal"
           scale
-          isDisabled={isLoading}
+          isDisabled={isDisabled}
           onClick={onCancelAction}
           testId={`${getTestIdPrefix()}_cancel_button`}
         />

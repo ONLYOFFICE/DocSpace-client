@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { Key } from "react";
+import type { NavigateFunction } from "react-router";
 
 /**
  * Minimal representation of a file inside the Templates Gallery.
@@ -53,7 +54,7 @@ export interface TilesProps {
   submitToGalleryTileIsVisible: boolean;
   canSubmitToFormGallery: () => boolean;
   viewMobile: boolean;
-  onCreateOform: () => void;
+  onCreateOform: (navigate: NavigateFunction) => void;
   setTemplatesGalleryVisible: (isVisible: boolean) => void;
 }
 

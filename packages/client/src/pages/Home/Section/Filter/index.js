@@ -1147,19 +1147,23 @@ const SectionFilterContent = ({
             group: FilterGroups.filterLocation,
             label: t("Common:Rooms"),
           },
-          {
+        ];
+
+        if (!isVisitor) {
+          locationOption.push({
             id: "filter_location-documents",
             key: FilterLocation.Documents.toString(),
             group: FilterGroups.filterLocation,
             label: t("Common:Documents"),
-          },
-          {
-            id: "filter_location-accessible-via-link",
-            key: FilterLocation.Link.toString(),
-            group: FilterGroups.filterLocation,
-            label: t("Common:AccessibleViaLink"),
-          },
-        ];
+          });
+        }
+
+        locationOption.push({
+          id: "filter_location-accessible-via-link",
+          key: FilterLocation.Link.toString(),
+          group: FilterGroups.filterLocation,
+          label: t("Common:AccessibleViaLink"),
+        });
 
         filterOptions.push(...locationOption);
       }

@@ -3,7 +3,7 @@
   "content": "Storage",
   "content_en_sha1_hash": "9e092dda4f0e27d0c7686ddd00272079e678b6e6",
   "created_at": "2025-05-19T21:30:49.092Z",
-  "updated_at": "2025-08-12T19:46:26.019Z",
+  "updated_at": "2025-08-21T11:22:39.844Z",
   "comment": {
     "text": "This translation key is used to display the content \"Storage\" in various places throughout the application, such as on a user's profile page or in an info panel. The text appears when displaying storage information and quotas for users. It provides context for translators to ensure consistency in language usage.",
     "is_auto": true,
@@ -60,8 +60,8 @@
     },
     {
       "file_path": "/packages/management/src/app/settings/layout.tsx",
-      "line_number": 51,
-      "context": "name: t(\"Common:RestoreBackup\"),\n content: children,\n },\n {\n id: \"encrypt-data\",\n name: t(\"Common:Storage\"),\n content: children,\n },\n ];\n \n useEffect(() => {",
+      "line_number": 79,
+      "context": "name: t(\"Common:RestoreBackup\"),\n content: <LoaderWrapper isLoading={isLoading}>{children}</LoaderWrapper>,\n },\n {\n id: \"encrypt-data\",\n name: t(\"Common:Storage\"),\n content: <LoaderWrapper isLoading={isLoading}>{children}</LoaderWrapper>,\n },\n ];\n \n const getCurrentTab = () => {",
       "module": "/packages/management"
     }
   ],

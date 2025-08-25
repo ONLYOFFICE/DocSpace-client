@@ -25,11 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { Tag } from ".";
-
-import { renderWithTheme } from "../../utils/render-with-theme";
 
 const baseProps = {
   tag: "script",
@@ -44,19 +43,17 @@ const baseProps = {
 
 describe("<Tag />", () => {
   it("renders without error", () => {
-    const { getByTestId } = renderWithTheme(<Tag {...baseProps} />);
-    expect(getByTestId("tag")).toBeInTheDocument();
+    const { getByTestId } = render(<Tag {...baseProps} />);
+    expect(getByTestId("tag_item")).toBeInTheDocument();
   });
 
   it("accepts id", () => {
-    const { getByTestId } = renderWithTheme(<Tag {...baseProps} id="testId" />);
-    expect(getByTestId("tag")).toHaveAttribute("id", "testId");
+    const { getByTestId } = render(<Tag {...baseProps} id="testId" />);
+    expect(getByTestId("tag_item")).toHaveAttribute("id", "testId");
   });
 
   it("accepts className", () => {
-    const { getByTestId } = renderWithTheme(
-      <Tag {...baseProps} className="test" />,
-    );
-    expect(getByTestId("tag")).toHaveClass("test");
+    const { getByTestId } = render(<Tag {...baseProps} className="test" />);
+    expect(getByTestId("tag_item")).toHaveClass("test");
   });
 });

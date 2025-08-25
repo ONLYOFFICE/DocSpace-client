@@ -84,6 +84,10 @@ export default {
   },
 } as Meta;
 
+const Wrapper = ({ children }: { children: React.ReactNode }) => {
+  return <div style={{ height: "280px", padding: "20px" }}>{children}</div>;
+};
+
 const Template: StoryFn<typeof DatePicker> = ({
   initialDate,
   ...rest
@@ -93,15 +97,17 @@ const Template: StoryFn<typeof DatePicker> = ({
   );
 
   return (
-    <DatePicker
-      {...rest}
-      initialDate={initialDate}
-      onChange={(date) => {
-        rest.onChange?.(date);
-        setSelectedDate(date);
-      }}
-      outerDate={selectedDate}
-    />
+    <Wrapper>
+      <DatePicker
+        {...rest}
+        initialDate={initialDate}
+        onChange={(date) => {
+          rest.onChange?.(date);
+          setSelectedDate(date);
+        }}
+        outerDate={selectedDate}
+      />
+    </Wrapper>
   );
 };
 
@@ -123,14 +129,6 @@ WithInitialDate.args = {
   selectDateText: "Date with initial value",
 };
 
-export const WithCalendarIcon = Template.bind({});
-WithCalendarIcon.args = {
-  ...Default.args,
-  initialDate: moment(),
-  showCalendarIcon: true,
-  selectDateText: "Date with calendar icon",
-};
-
 export const WithCustomOpenDate = Template.bind({});
 WithCustomOpenDate.args = {
   ...Default.args,
@@ -138,10 +136,18 @@ WithCustomOpenDate.args = {
   selectDateText: "Date with custom open date",
 };
 
-export const WithDateRange = Template.bind({});
-WithDateRange.args = {
+export const WithFutureOnlyDates = Template.bind({});
+WithFutureOnlyDates.args = {
   ...Default.args,
-  minDate: moment().subtract(1, "month"),
-  maxDate: moment().add(1, "month"),
-  selectDateText: "Date with range constraints",
+  minDate: moment().startOf("day"),
+  selectDateText: "Only future dates available",
+};
+
+export const WithSpecificYear = Template.bind({});
+WithSpecificYear.args = {
+  ...Default.args,
+  minDate: moment("2023-01-01"),
+  maxDate: moment("2023-12-31"),
+  openDate: moment("2023-06-15"),
+  selectDateText: "Only dates from 2023",
 };

@@ -8,12 +8,10 @@ import styles from "./SelectionArea.stories.module.scss";
 export default {
   title: "Layout components/SelectionArea",
   component: SelectionArea,
+  tags: ["!autodocs"],
   parameters: {
     docs: {
-      description: {
-        component:
-          "A component that allows users to select multiple items by dragging a selection box",
-      },
+      disable: true,
     },
   },
   decorators: [
@@ -93,25 +91,4 @@ Default.args = {
     },
   ],
   isRooms: false,
-};
-
-export const WithHeaderHeight = Template.bind({});
-WithHeaderHeight.args = {
-  ...Default.args,
-  folderHeaderHeight: 50,
-  defaultHeaderHeight: 30,
-};
-
-export const ListView = Template.bind({});
-ListView.args = {
-  ...Default.args,
-  viewAs: "row",
-  countTilesInRow: 1,
-  arrayTypes: [
-    {
-      type: "default",
-      itemHeight: 50,
-      rowGap: 8,
-    },
-  ],
 };

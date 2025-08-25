@@ -62,6 +62,12 @@ const Dialog = ({
   const [isChecked, setIsChecked] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
 
+  // Generate test ID prefix based on dialog title
+  const getTestIdPrefix = useCallback(() => {
+    if (!title) return "dialog";
+    return title.toLowerCase().replace(/\s+/g, "_");
+  }, [title]);
+
   const onCancelAction = useCallback(
     (e) => {
       onCancel && onCancel(e);
@@ -171,6 +177,7 @@ const Dialog = ({
             onFocus={onFocus}
             isDisabled={isDisabled}
             maxLength={165}
+            testId={`${getTestIdPrefix()}_text_input`}
           />
         </FieldContainer>
         {isCreateDialog && extension ? (
@@ -187,6 +194,7 @@ const Dialog = ({
               label={t("Common:DontAskAgain")}
               isChecked={isChecked}
               onChange={onChangeCheckbox}
+              dataTestId={`${getTestIdPrefix()}_dont_ask_again`}
             />
           </div>
         ) : null}
@@ -197,6 +205,7 @@ const Dialog = ({
             options={options}
             selectedOption={selectedOption}
             onSelect={onSelect}
+            dataTestId={`${getTestIdPrefix()}_combobox`}
           />
         ) : null}
       </ModalDialog.Body>
@@ -212,6 +221,7 @@ const Dialog = ({
           isLoading={isDisabled}
           isDisabled={isDisabled || isError}
           onClick={onSaveAction}
+          testId={`${getTestIdPrefix()}_save_button`}
         />
         <Button
           className="cancel-button"
@@ -221,6 +231,7 @@ const Dialog = ({
           scale
           isDisabled={isDisabled}
           onClick={onCancelAction}
+          testId={`${getTestIdPrefix()}_cancel_button`}
         />
       </ModalDialog.Footer>
     </ModalDialog>

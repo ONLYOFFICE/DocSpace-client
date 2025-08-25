@@ -138,6 +138,7 @@ const PasswordChangeForm = ({
           labelVisible={false}
           hasError={isPasswordErrorShow ? !passwordValid : undefined}
           errorMessage={t("Common:IncorrectPassword")}
+          dataTestId="password_field"
         >
           <PasswordInput
             simpleView={false}
@@ -180,6 +181,7 @@ const PasswordChangeForm = ({
         tabIndex={5}
         onClick={onSubmit}
         isDisabled={isLoading}
+        testId="create_password_button"
       />
     </>
   );

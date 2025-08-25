@@ -107,6 +107,7 @@ const EncryptDataPage = ({
                 components={{
                   1: (
                     <Link
+                      key="more-details-link"
                       className="link"
                       color={currentColorScheme?.main?.accent}
                       href={encryptionBlockHelpUrl}

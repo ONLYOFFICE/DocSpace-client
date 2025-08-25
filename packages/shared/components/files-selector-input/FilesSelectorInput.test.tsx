@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { act, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 
@@ -93,9 +93,7 @@ describe("FilesSelectorInput", () => {
 
     const fileInput = screen.getByTestId("file-input");
 
-    await act(async () => {
-      await userEvent.click(fileInput);
-    });
+    await userEvent.click(fileInput);
 
     expect(screen.getByTestId("files-selector")).toHaveAttribute(
       "data-visible",

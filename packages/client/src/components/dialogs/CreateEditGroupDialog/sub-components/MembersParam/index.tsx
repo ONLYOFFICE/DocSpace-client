@@ -77,6 +77,7 @@ const MembersParam = ({
         <SelectorAddButton
           iconName={PlusSvgUrl}
           label={t("PeopleTranslations:AddMembers")}
+          testId="select_members"
         />
       </Styled.AddMembersButton>
 
@@ -92,11 +93,12 @@ const MembersParam = ({
         ) : (
           groupMembers
             .filter((member) => member.id !== groupManager?.id)
-            .map((member) => (
+            .map((member, index) => (
               <GroupMemberRow
                 key={member.id}
                 groupMember={member}
                 removeMember={removeMember}
+                dataTestId={`group_member_row_${index}`}
               />
             ))
         )

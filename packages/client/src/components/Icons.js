@@ -32,7 +32,7 @@ import { commonIconsStyles, injectDefaultTheme } from "@docspace/shared/utils";
 import FavoriteIcon from "PUBLIC_DIR/images/favorite.react.svg";
 import FileActionsConvertEditDocIcon from "PUBLIC_DIR/images/file.actions.convert.edit.doc.react.svg";
 import FileActionsLockedIcon from "PUBLIC_DIR/images/file.actions.locked.react.svg";
-import EditFormIcon from "PUBLIC_DIR/images/access.edit.form.react.svg";
+import EditFormIcon from "PUBLIC_DIR/images/form.fill.rect.svg";
 
 import SendClockIcon from "PUBLIC_DIR/images/send.clock.react.svg";
 

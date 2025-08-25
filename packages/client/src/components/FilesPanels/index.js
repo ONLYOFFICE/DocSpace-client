@@ -62,7 +62,6 @@ import {
   SubmitToFormGallery,
   EditGroupMembersDialog,
   ChangeQuotaDialog,
-  UnsavedChangesDialog,
   DeleteLinkDialog,
   MoveToPublicRoom,
   SettingsPluginDialog,
@@ -134,7 +133,6 @@ const Panels = (props) => {
     editGroupMembersDialogVisible,
     changeQuotaDialogVisible,
     editLinkPanelIsVisible,
-    unsavedChangesDialogVisible,
     deleteLinkDialogVisible,
     embeddingPanelData,
     moveToPublicRoomVisible,
@@ -345,9 +343,7 @@ const Panels = (props) => {
     ),
     changeQuotaDialogVisible && <ChangeQuotaDialog key="change-quota-dialog" />,
     editLinkPanelIsVisible && <EditLinkPanel key="edit-link-panel" />,
-    unsavedChangesDialogVisible && (
-      <UnsavedChangesDialog key="unsaved-dialog" />
-    ),
+
     deleteLinkDialogVisible && <DeleteLinkDialog key="delete-link-dialog" />,
     embeddingPanelData.visible && <EmbeddingPanel key="embedding-panel" />,
     moveToPublicRoomVisible && (
@@ -469,7 +465,6 @@ export default inject(
       restoreRoomDialogVisible,
       welcomeFormFillingTipsVisible,
 
-      unsavedChangesDialogVisible,
       createMasterForm,
       selectFileDialogVisible,
       setSelectFileDialogVisible,
@@ -593,7 +588,6 @@ export default inject(
       editGroupMembersDialogVisible,
       changeQuotaDialogVisible,
       editLinkPanelIsVisible,
-      unsavedChangesDialogVisible,
       deleteLinkDialogVisible,
       embeddingPanelData,
       moveToPublicRoomVisible,

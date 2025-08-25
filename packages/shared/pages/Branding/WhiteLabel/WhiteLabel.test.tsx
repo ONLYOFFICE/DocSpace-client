@@ -25,12 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen, fireEvent, waitFor } from "@testing-library/react";
+import { screen, fireEvent, waitFor, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { WhiteLabel } from ".";
 import { DeviceType, WhiteLabelLogoType } from "../../../enums";
-import { renderWithTheme } from "../../../utils/render-with-theme";
 import { mockLogos } from "./mockData";
 
 jest.mock("../../../hooks/useResponsiveNavigation", () => ({
@@ -73,20 +72,20 @@ describe("<WhiteLabel />", () => {
   });
 
   it("renders without error", () => {
-    renderWithTheme(<WhiteLabel {...defaultProps} />);
+    render(<WhiteLabel {...defaultProps} />);
 
     expect(screen.getByText("WhiteLabel")).toBeInTheDocument();
   });
 
   it("disables inputs when isSettingPaid is false", () => {
-    renderWithTheme(<WhiteLabel {...defaultProps} isSettingPaid={false} />);
+    render(<WhiteLabel {...defaultProps} isSettingPaid={false} />);
 
     const logoTextInput = screen.getByTestId("logo-text-input");
     expect(logoTextInput).toBeDisabled();
   });
 
   it("updates logo text when input changes", () => {
-    renderWithTheme(<WhiteLabel {...defaultProps} />);
+    render(<WhiteLabel {...defaultProps} />);
 
     const logoTextInput = screen.getByTestId("logo-text-input");
     fireEvent.change(logoTextInput, { target: { value: "New Logo Text" } });
@@ -103,11 +102,11 @@ describe("<WhiteLabel />", () => {
         : logo;
     });
 
-    renderWithTheme(
+    render(
       <WhiteLabel {...defaultProps} logoUrls={newLogoUrls} onSave={onSave} />,
     );
 
-    const saveButton = screen.getByTestId("save-button");
+    const saveButton = screen.getByTestId("white-label-save");
     fireEvent.click(saveButton);
 
     expect(onSave).toHaveBeenCalled();
@@ -115,29 +114,27 @@ describe("<WhiteLabel />", () => {
 
   it("calls onRestoreDefault when restore button is clicked", () => {
     const onRestoreDefault = jest.fn();
-    renderWithTheme(
+    render(
       <WhiteLabel {...defaultProps} onRestoreDefault={onRestoreDefault} />,
     );
 
-    const restoreButton = screen.getByTestId("cancel-button");
+    const restoreButton = screen.getByTestId("white-label-cancel");
     fireEvent.click(restoreButton);
 
     expect(onRestoreDefault).toHaveBeenCalled();
   });
 
   it("shows loading state when isSaving is true", () => {
-    renderWithTheme(<WhiteLabel {...defaultProps} isSaving />);
+    render(<WhiteLabel {...defaultProps} isSaving />);
 
-    const saveButton = screen.getByTestId("save-button");
+    const saveButton = screen.getByTestId("white-label-save");
     expect(saveButton).toHaveAttribute("aria-busy", "true");
   });
 
   it("disables restore button when enableRestoreButton is false", () => {
-    renderWithTheme(
-      <WhiteLabel {...defaultProps} enableRestoreButton={false} />,
-    );
+    render(<WhiteLabel {...defaultProps} enableRestoreButton={false} />);
 
-    const restoreButton = screen.getByTestId("cancel-button");
+    const restoreButton = screen.getByTestId("white-label-cancel");
     expect(restoreButton).toBeDisabled();
   });
 
@@ -148,7 +145,7 @@ describe("<WhiteLabel />", () => {
       setLogoUrls: mockSetLogoUrls,
     };
 
-    renderWithTheme(<WhiteLabel {...props} />);
+    render(<WhiteLabel {...props} />);
 
     const input = screen.getByTestId("logo-text-input");
     const button = screen.getByTestId("generate-logo-button");
@@ -174,7 +171,7 @@ describe("<WhiteLabel />", () => {
       setLogoUrls: mockSetLogoUrls,
     };
 
-    renderWithTheme(<WhiteLabel {...props} />);
+    render(<WhiteLabel {...props} />);
 
     const file = new File(["test"], "test.png", { type: "image/png" });
     const inputId = `logoUploader_${WhiteLabelLogoType.LightSmall}_light`;
@@ -193,9 +190,7 @@ describe("<WhiteLabel />", () => {
       expect(mockSetLogoUrls).toHaveBeenCalled();
       const updatedLogos = mockSetLogoUrls.mock.calls[0][0];
       expect(updatedLogos).toHaveLength(mockLogos.length);
-      expect(updatedLogos[0].path.light).toBe(
-        "https://example.com/uploaded-logo.png",
-      );
+      expect(updatedLogos[0].path.light).toBe("data:image/png;base64,dGVzdA==");
     });
   });
 });

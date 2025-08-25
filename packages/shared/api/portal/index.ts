@@ -303,6 +303,15 @@ export async function getServicesQuotas() {
   return res;
 }
 
+export async function getServiceQuota(serviceName?: string) {
+  const res = (await request({
+    method: "get",
+    url: `/portal/payment/walletservice?service=${serviceName}`,
+  })) as TPaymentQuota;
+
+  return res;
+}
+
 export async function setServiceState(data: {
   service: string;
   enabled: boolean;

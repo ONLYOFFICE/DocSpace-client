@@ -34,7 +34,7 @@ import {
   getSettingsThirdParty,
   uploadBackup,
 } from "@docspace/shared/api/files";
-import { isManagement } from "@docspace/shared/utils/common";
+import { getErrorInfo, isManagement } from "@docspace/shared/utils/common";
 
 import {
   saveToLocalStorage,
@@ -65,6 +65,8 @@ class BackupStore {
   currentTariffStatusStore = null;
 
   settingsStore = null;
+
+  paymentStore = null;
 
   /** @type {import("./ThirdPartyStore").default} */
   thirdPartyStore = null;
@@ -167,8 +169,6 @@ class BackupStore {
 
   backupsCount = null;
 
-  backupServiceOn = null;
-
   isInited = false;
 
   constructor(
@@ -177,6 +177,7 @@ class BackupStore {
     currentQuotaStore,
     currentTariffStatusStore,
     settingsStore,
+    paymentStore,
   ) {
     makeAutoObservable(this);
 
@@ -185,6 +186,7 @@ class BackupStore {
     this.currentQuotaStore = currentQuotaStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
     this.settingsStore = settingsStore;
+    this.paymentStore = paymentStore;
   }
 
   setBackupsCount = (counts) => {
@@ -200,19 +202,16 @@ class BackupStore {
   get backupPageEnable() {
     const { maxFreeBackups, isBackupPaid } = this.currentQuotaStore;
     const { isNotPaidPeriod } = this.currentTariffStatusStore;
+    const { isBackupServiceOn } = this.paymentStore;
 
     if (!isBackupPaid || isNotPaidPeriod) return true;
 
-    if (maxFreeBackups === 0) return this.backupServiceOn;
+    if (maxFreeBackups === 0) return isBackupServiceOn;
 
-    if (this.backupsCount >= maxFreeBackups) return this.backupServiceOn;
+    if (this.backupsCount >= maxFreeBackups) return isBackupServiceOn;
 
     return true;
   }
-
-  setBackupServiceOn = (serviceOn) => {
-    this.backupServiceOn = serviceOn;
-  };
 
   setConnectedThirdPartyAccount = (account) => {
     this.connectedThirdPartyAccount = account;
@@ -611,18 +610,8 @@ class BackupStore {
     }
   };
 
-  setErrorInformation = (err, t) => {
-    let message = "";
-    if (typeof err === "string") message = err;
-    else
-      message =
-        ("response" in err && err.response?.data?.error?.message) ||
-        ("message" in err && err.message) ||
-        "";
-
-    if (err?.response?.status === 502) message = t("Common:UnexpectedError");
-
-    this.errorInformation = message ?? t("Common:UnexpectedError");
+  setErrorInformation = (err, t, customText) => {
+    this.errorInformation = getErrorInfo(err, t, customText);
   };
 
   getProgress = async (t) => {

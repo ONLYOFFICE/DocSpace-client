@@ -29,6 +29,7 @@
 import React, { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import classNames from "classnames";
+import { TFunction } from "i18next";
 
 import { Text } from "../../../components/text";
 import { Button } from "../../../components/button";
@@ -36,11 +37,7 @@ import { Link, LinkTarget } from "../../../components/link";
 import { startBackup } from "../../../api/portal";
 import { RadioButton } from "../../../components/radio-button";
 import { toastr } from "../../../components/toast";
-import {
-  BackupStorageLocalKey,
-  BackupStorageType,
-  FolderType,
-} from "../../../enums";
+import { BackupStorageLocalKey, BackupStorageType } from "../../../enums";
 import StatusMessage from "../../../components/status-message";
 import SocketHelper, {
   SocketEvents,
@@ -49,7 +46,7 @@ import SocketHelper, {
 import { OPERATIONS_NAME } from "../../../constants";
 import OperationsProgressButton from "../../../components/operations-progress-button";
 import DataBackupLoader from "../../../skeletons/backup/DataBackup";
-import { getBackupProgressInfo } from "../../../utils/common";
+import { getBackupProgressInfo, getErrorInfo } from "../../../utils/common";
 import { getFromLocalStorage } from "../../../utils";
 import { useDidMount } from "../../../hooks/useDidMount";
 
@@ -65,6 +62,50 @@ import {
   THIRD_PARTY_STORAGE,
 } from "./ManualBackup.constants";
 import styles from "./ManualBackup.module.scss";
+import { combineUrl } from "../../../utils/combineUrl";
+
+const getPaymentError = (
+  t: TFunction,
+  isPayer: boolean | undefined,
+  walletCustomerEmail: string | null,
+  backupPrice: number,
+) => {
+  const onClickWalletUrl = () => {
+    const walletPageUrl = combineUrl(
+      "/portal-settings",
+      `/payments/wallet?open=true&price=${backupPrice.toString()}`,
+    );
+
+    window.DocSpace.navigate(walletPageUrl);
+  };
+
+  return isPayer ? (
+    <Trans
+      t={t}
+      ns="Common"
+      i18nKey="InsufficientFundsWithTopUp"
+      components={{
+        1: <Link tag="a" onClick={onClickWalletUrl} color="accent" />,
+      }}
+    />
+  ) : (
+    <Trans
+      t={t}
+      ns="Common"
+      i18nKey="InsufficientFundsWithContact"
+      components={{
+        1: (
+          <Link
+            key="contact-payer-link"
+            tag="a"
+            color="accent"
+            href={`mailto:${walletCustomerEmail}`}
+          />
+        ),
+      }}
+    />
+  );
+};
 
 const ManualBackup = ({
   isInitialLoading,
@@ -120,19 +161,26 @@ const ManualBackup = ({
   setConnectedThirdPartyAccount,
   setConnectDialogVisible,
   setIsThirdStorageChanged,
-  setErrorInformation,
+
   errorInformation,
   isManagement = false,
 
   backupProgressError,
   setBackupProgressError,
   setIsBackupProgressVisible,
+  isPayer,
+  walletCustomerEmail,
   isThirdPartyAvailable,
+  backupServicePrice,
 }: ManualBackupProps) => {
   const { t } = useTranslation(["Common"]);
 
   const [storageType, setStorageType] =
     useState<TStorageType>(TEMPORARY_STORAGE);
+
+  const [errorMessage, setErrorMessage] = useState<string | React.ReactNode>(
+    "",
+  );
 
   const isCheckedTemporaryStorage = storageType === TEMPORARY_STORAGE;
   const isCheckedDocuments = storageType === DOCUMENTS;
@@ -177,7 +225,7 @@ const ManualBackup = ({
   }, [setDownloadingProgress, setTemporaryLink, setBackupProgressError, t]);
 
   const onMakeTemporaryBackup = async () => {
-    setErrorInformation("");
+    setErrorMessage("");
     setBackupProgressError("");
     clearLocalStorage();
     localStorage.setItem(
@@ -195,7 +243,25 @@ const ManualBackup = ({
       setDownloadingProgress(1);
       setIsBackupProgressVisible(true);
     } catch (err) {
-      setErrorInformation(err, t);
+      let customText;
+
+      const knownError = err as {
+        response?: { status: number; data: { error: { message: string } } };
+        statusText?: string;
+        message?: string;
+      };
+
+      if (knownError?.response?.status === 402 && backupServicePrice) {
+        customText = getPaymentError(
+          t,
+          isPayer ?? false,
+          walletCustomerEmail ?? "",
+          backupServicePrice,
+        );
+      }
+
+      const message = getErrorInfo(err, t, customText);
+      setErrorMessage(message);
       console.error(err);
     }
   };
@@ -222,7 +288,8 @@ const ManualBackup = ({
     selectedStorageTitle?: string,
   ) => {
     clearLocalStorage();
-    setErrorInformation("");
+
+    setErrorMessage("");
     setBackupProgressError("");
     const storageParams = getStorageParams(
       isCheckedThirdPartyStorage,
@@ -247,7 +314,25 @@ const ManualBackup = ({
       setDownloadingProgress(1);
       setTemporaryLink("");
     } catch (err) {
-      setErrorInformation(err, t);
+      let customText;
+
+      const knownError = err as {
+        response?: { status: number; data: { error: { message: string } } };
+        statusText?: string;
+        message?: string;
+      };
+
+      if (knownError?.response?.status === 402 && backupServicePrice) {
+        customText = getPaymentError(
+          t,
+          isPayer ?? false,
+          walletCustomerEmail ?? "",
+          backupServicePrice,
+        );
+      }
+
+      const message = getErrorInfo(err, t, customText);
+      setErrorMessage(message);
       console.error(err);
     }
   };
@@ -278,7 +363,7 @@ const ManualBackup = ({
 
   return (
     <div className={styles.manualBackup}>
-      <StatusMessage message={errorInformation} />
+      <StatusMessage message={errorMessage || errorInformation} />
       <div
         className={classNames(
           styles.backupModulesHeaderWrapper,

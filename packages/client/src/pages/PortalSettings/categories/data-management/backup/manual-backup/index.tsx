@@ -37,7 +37,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { isManagement } from "@docspace/shared/utils/common";
 import ManualBackup from "@docspace/shared/pages/backup/manual-backup";
 import type { ThirdPartyAccountType } from "@docspace/shared/types";
-import { getBackupsCount, getServiceState } from "@docspace/shared/api/backup";
+import { getBackupsCount } from "@docspace/shared/api/backup";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
@@ -57,10 +57,10 @@ const ManualBackupWrapper = ({
   setBackupsCount,
   setIsInited,
   fetchPayerInfo,
-  setBackupServiceOn,
   setDownloadingProgress,
   isBackupPaid,
   maxFreeBackups,
+  setServiceQuota,
   ...props
 }: ManualBackupWrapperProps) => {
   const [isInitialLoading, setIsInitialLoading] = useState(false);
@@ -95,22 +95,16 @@ const ManualBackupWrapper = ({
         const optionalRequests = [];
 
         if (isBackupPaid) {
-          baseRequests.push(getServiceState());
-
           if (maxFreeBackups > 0) {
             baseRequests.push(getBackupsCount());
           }
 
+          optionalRequests.push(setServiceQuota());
           optionalRequests.push(fetchPayerInfo());
         }
 
-        const [
-          account,
-          backupStorage,
-          storageRegionsS3,
-          serviceState,
-          backupsCount,
-        ] = await Promise.all([...baseRequests, ...optionalRequests]);
+        const [account, backupStorage, storageRegionsS3, backupsCount] =
+          await Promise.all([...baseRequests, ...optionalRequests]);
 
         setConnectedThirdPartyAccount(account ?? null);
         setThirdPartyStorage(backupStorage);
@@ -118,13 +112,6 @@ const ManualBackupWrapper = ({
 
         if (isBackupPaid) {
           if (typeof backupsCount === "number") setBackupsCount(backupsCount);
-
-          if (
-            serviceState &&
-            typeof serviceState === "object" &&
-            "enabled" in serviceState
-          )
-            setBackupServiceOn(serviceState.enabled as boolean);
         }
         setIsInited(true);
       } catch (error) {
@@ -187,6 +174,7 @@ export default inject<
     thirdPartyStore,
     filesSettingsStore,
     currentQuotaStore,
+    paymentStore,
   }) => {
     const {
       accounts,
@@ -216,7 +204,7 @@ export default inject<
       setStorageRegions,
       saveToLocalStorage,
       setThirdPartyStorage,
-      setErrorInformation,
+
       resetDownloadingProgress,
       setCompletedFormFields,
       addValueInFormSettings,
@@ -229,10 +217,11 @@ export default inject<
       setConnectedThirdPartyAccount,
       setBackupsCount,
       setIsInited,
-      setBackupServiceOn,
+
       backupPageEnable,
     } = backup;
 
+    const { isPayer, setServiceQuota, backupServicePrice } = paymentStore;
     const {
       newPath,
       basePath,
@@ -253,7 +242,8 @@ export default inject<
       setDeleteThirdPartyDialogVisible,
     } = dialogsStore;
 
-    const { isNotPaidPeriod, fetchPayerInfo } = currentTariffStatusStore;
+    const { isNotPaidPeriod, fetchPayerInfo, walletCustomerEmail } =
+      currentTariffStatusStore;
 
     const {
       providers,
@@ -313,7 +303,7 @@ export default inject<
       clearLocalStorage,
       setStorageRegions,
       saveToLocalStorage,
-      setErrorInformation,
+
       setThirdPartyStorage,
       resetDownloadingProgress,
       setCompletedFormFields,
@@ -364,10 +354,14 @@ export default inject<
 
       setIsInited,
       fetchPayerInfo,
-      setBackupServiceOn,
+
       maxFreeBackups,
 
+      isPayer,
+      walletCustomerEmail,
       isThirdPartyAvailable,
+      setServiceQuota,
+      backupServicePrice,
     };
   },
 )(observer(ManualBackupWrapper as React.FC<ExternalManualBackupProps>));

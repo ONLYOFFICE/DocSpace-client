@@ -43,7 +43,7 @@ type InjectedProps = {
   backupsCount?: number;
   maxFreeBackups?: number;
   isInited?: boolean;
-  backupServiceOn?: boolean;
+  isBackupServiceOn?: boolean;
 };
 
 const Warning = ({
@@ -55,7 +55,7 @@ const Warning = ({
   backupsCount = 0,
   maxFreeBackups = 0,
   isInited,
-  backupServiceOn,
+  isBackupServiceOn,
 }: InjectedProps) => {
   const { t, ready } = useTranslation(["Services", "Common"]);
   const { pathname } = useLocation();
@@ -124,7 +124,7 @@ const Warning = ({
 
           resultText = backupText;
 
-          if (backupsCount >= maxFreeBackups && !backupServiceOn) {
+          if (backupsCount >= maxFreeBackups && !isBackupServiceOn) {
             const additionalInfo = isPayer ? connectServiceLink : connectPayer;
             resultText = (
               <>
@@ -164,7 +164,7 @@ const Warning = ({
     ready,
     backupsCount,
     isInited,
-    backupServiceOn,
+    isBackupServiceOn,
     cardLinkedOnNonProfit,
     cardLinkedOnFreeTariff,
     isPayer,
@@ -186,11 +186,15 @@ export default inject(
     currentQuotaStore,
     backup,
   }: TStore) => {
-    const { isPayer, cardLinkedOnNonProfit, cardLinkedOnFreeTariff } =
-      paymentStore;
+    const {
+      isPayer,
+      cardLinkedOnNonProfit,
+      cardLinkedOnFreeTariff,
+      isBackupServiceOn,
+    } = paymentStore;
     const { walletCustomerEmail } = currentTariffStatusStore;
     const { isBackupPaid, maxFreeBackups } = currentQuotaStore;
-    const { backupsCount, isInited, backupServiceOn } = backup;
+    const { backupsCount, isInited } = backup;
 
     return {
       isPayer,
@@ -200,7 +204,7 @@ export default inject(
       isBackupPaid,
       backupsCount,
       isInited,
-      backupServiceOn,
+      isBackupServiceOn,
       maxFreeBackups,
     };
   },

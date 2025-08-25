@@ -46,7 +46,7 @@ export interface InjectedAutoBackupWrapperProps
   resetDownloadingProgress: VoidFunction;
   setterSelectedEnableSchedule: (enable: boolean) => void;
   setBackupsCount: (count: number) => void;
-  setBackupServiceOn: (enabled: boolean) => void;
+  setServiceQuota: () => void;
   setIsInited: (inited: boolean) => void;
   fetchPayerInfo: () => void;
   isBackupPaid: boolean;

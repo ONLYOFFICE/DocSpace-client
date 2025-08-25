@@ -166,12 +166,15 @@ describe("ManualBackup", () => {
     setConnectedThirdPartyAccount: jest.fn(),
     setConnectDialogVisible: jest.fn(),
     setIsThirdStorageChanged: jest.fn(),
-    setErrorInformation: jest.fn(),
+
     errorInformation: "",
     backupProgressError: "",
     setBackupProgressError: jest.fn(),
     setIsBackupProgressVisible: jest.fn(),
     isThirdPartyAvailable: true,
+    isPayer: false,
+    walletCustomerEmail: "test@example.com",
+    backupServicePrice: 10,
   };
 
   beforeEach(() => {
@@ -390,14 +393,6 @@ describe("ManualBackup", () => {
     expect(thirdPartyStorageRadio).toBeDisabled();
   });
 
-  it("shows error message when errorInformation is provided", () => {
-    render(
-      <ManualBackup {...defaultProps} errorInformation="Test error message" />,
-    );
-
-    expect(screen.getByText("Test error message")).toBeInTheDocument();
-  });
-
   it("handles error during backup creation", async () => {
     const error = new Error("Backup failed");
     (startBackup as jest.Mock).mockRejectedValueOnce(error);
@@ -412,7 +407,7 @@ describe("ManualBackup", () => {
 
     await userEvent.click(createButton);
 
-    expect(defaultProps.setErrorInformation).toHaveBeenCalled();
+    expect(consoleErrorSpy).toHaveBeenCalledWith(error);
 
     consoleErrorSpy.mockRestore();
   });

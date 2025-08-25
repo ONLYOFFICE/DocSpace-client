@@ -51,7 +51,7 @@ interface BackupServiceDialogProps {
   onToggle: (id: string, enabled: boolean) => void;
   isEnabled?: boolean;
   description?: string;
-  backupPriceIncrement?: number;
+  backupServicePrice?: number;
   formatWalletCurrency?: (
     item: number | null,
     fractionDigits: number,
@@ -71,7 +71,7 @@ const BackupServiceDialog: React.FC<BackupServiceDialogProps> = ({
   onToggle,
   isEnabled = false,
   description,
-  backupPriceIncrement,
+  backupServicePrice,
   formatWalletCurrency,
 }) => {
   const { t } = useTranslation(["Services", "Common", "Payments"]);
@@ -136,7 +136,7 @@ const BackupServiceDialog: React.FC<BackupServiceDialogProps> = ({
               </Text>{" "}
               <Text as="span" fontSize="12px">
                 {t("Payments:PerBackupWithBracket", {
-                  currency: formatWalletCurrency!(backupPriceIncrement!, 2),
+                  currency: formatWalletCurrency!(backupServicePrice!, 2),
                 })}
               </Text>
             </div>
@@ -174,14 +174,14 @@ const BackupServiceDialog: React.FC<BackupServiceDialogProps> = ({
 };
 
 export default inject(({ paymentStore }: TStore) => {
-  const { servicesQuotasFeatures, backupPriceIncrement, formatWalletCurrency } =
+  const { servicesQuotasFeatures, backupServicePrice, formatWalletCurrency } =
     paymentStore;
 
   const feature = servicesQuotasFeatures.get(BACKUP_SERVICE);
   return {
     isEnabled: feature?.value,
     description: feature?.priceTitle,
-    backupPriceIncrement,
+    backupServicePrice,
     formatWalletCurrency,
   };
 })(observer(BackupServiceDialog));

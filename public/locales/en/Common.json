@@ -679,6 +679,8 @@
   "SaveHereButton": "Save here",
   "SaveToPublicRoom": "Save to Public room",
   "Search": "Search",
+  "InsufficientFundsWithTopUp": "Your wallet has insufficient funds. Please <1>top up your wallet</1> and try purchasing again.",
+  "InsufficientFundsWithContact": "Your wallet has insufficient funds. Please reach out to the payer (<1>email@example.com</1>) to top it up and try the purchase again.",
   "SearchEmptyRoomsDescription": "No rooms match this filter. Try a different one or clear filter to view all rooms.",
   "SectionMoveConfirmation": "Move to {{sectionName}}?",
   "SectionMoveNotification": "The file will be moved to {{sectionName}} {{date}}",

@@ -42,7 +42,7 @@ export interface InjectedManualBackupProps
   resetDownloadingProgress: VoidFunction;
   setConnectedThirdPartyAccount: (account: any) => void;
   setBackupsCount: (count: number) => void;
-  setBackupServiceOn: (enabled: boolean) => void;
+  setServiceQuota: () => void;
   setIsInited: (inited: boolean) => void;
   fetchPayerInfo: () => void;
   isBackupPaid: boolean;

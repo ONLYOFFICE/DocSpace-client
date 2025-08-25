@@ -43,6 +43,7 @@ import {
   getAutoTopUpSettings,
   updateAutoTopUpSettings,
   getServicesQuotas,
+  getServiceQuota,
 } from "@docspace/shared/api/portal";
 import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
@@ -158,6 +159,8 @@ class PaymentStore {
   servicesQuotas: TPaymentQuota | null = null; // temporary solution, should be in the service store
 
   isShowStorageTariffDeactivatedModal = false;
+
+  reccomendedAmount = "";
 
   constructor(
     userStore: UserStore,
@@ -407,7 +410,7 @@ class PaymentStore {
     );
   }
 
-  get backupPriceIncrement() {
+  get backupServicePrice() {
     return (
       (
         this.servicesQuotasFeatures.get(
@@ -415,6 +418,10 @@ class PaymentStore {
         ) as TServiceFeatureWithPrice
       )?.price?.value || 0
     );
+  }
+
+  get isBackupServiceOn() {
+    return this.servicesQuotasFeatures.get(BACKUP_SERVICE)?.value;
   }
 
   formatWalletCurrency = (
@@ -548,7 +555,7 @@ class PaymentStore {
 
     if (!res) return;
 
-    const result = res.map((service) => {
+    const quotas = res.map((service) => {
       const feature = service.features[0];
       return {
         ...feature,
@@ -557,10 +564,8 @@ class PaymentStore {
     });
 
     this.servicesQuotasFeatures = new Map(
-      result.map((feature) => [feature.id, feature]),
+      quotas.map((feature) => [feature.id, feature]),
     );
-
-    //  this.servicesQuotas = res[0];
 
     return res;
   };
@@ -614,6 +619,26 @@ class PaymentStore {
     ]);
   };
 
+  setReccomendedAmount = (amount: string) => {
+    this.reccomendedAmount = amount;
+  };
+
+  setServiceQuota = async (serviceName = "backup") => {
+    const service = await getServiceQuota(serviceName);
+
+    const feature = service.features[0];
+
+    this.servicesQuotasFeatures = new Map([
+      [
+        feature.id,
+        {
+          ...feature,
+          price: service.price,
+        },
+      ],
+    ]);
+  };
+
   walletInit = async (t: TTranslation) => {
     const isRefresh = window.location.href.includes("complete=true");
     if (!this.currentTariffStatusStore) return;
@@ -652,7 +677,21 @@ class PaymentStore {
 
       this.setIsInitWalletPage(true);
 
-      if (window.location.href.includes("complete=true")) {
+      const url = new URL(window.location.href);
+      const params = url.searchParams;
+
+      const priceParam = params.get("price");
+
+      if (priceParam) {
+        const reccomendedAmount = this.walletBalance - Number(priceParam);
+        if (reccomendedAmount < 0)
+          this.setReccomendedAmount(Math.abs(reccomendedAmount).toString());
+      }
+
+      if (
+        window.location.href.includes("complete=true") ||
+        window.location.href.includes("open=true")
+      ) {
         window.history.replaceState(
           {},
           document.title,

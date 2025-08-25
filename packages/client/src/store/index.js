@@ -114,6 +114,7 @@ const backupStore = new BackupStore(
   currentQuotaStore,
   currentTariffStatusStore,
   settingsStore,
+  paymentStore,
 );
 const commonStore = new CommonStore(settingsStore);
 

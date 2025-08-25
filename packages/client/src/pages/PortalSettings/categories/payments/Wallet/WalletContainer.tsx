@@ -85,6 +85,7 @@ type WalletProps = {
   payerEmail?: string;
   walletHelpUrl?: string;
   currentColorScheme?: TColorScheme;
+  reccomendedAmount?: string;
 };
 
 const typeClassMap: Record<string, string> = {
@@ -115,6 +116,7 @@ const Wallet = (props: WalletProps) => {
     payerEmail,
     walletHelpUrl,
     currentColorScheme,
+    reccomendedAmount,
   } = props;
 
   const { t } = useTranslation(["Payments", "Common"]);
@@ -301,6 +303,7 @@ const Wallet = (props: WalletProps) => {
           visible={visible}
           onClose={onClose}
           isEditAutoPayment={isEditAutoPayment}
+          reccomendedAmount={reccomendedAmount}
         />
       ) : null}
 
@@ -332,6 +335,7 @@ export default inject(
       fetchTransactionHistory,
       canUpdateTariff,
       isCardLinkedToPortal,
+      reccomendedAmount,
     } = paymentStore;
     const { isFreeTariff } = currentQuotaStore;
     const {
@@ -362,6 +366,7 @@ export default inject(
       payerEmail: walletCustomerEmail,
       walletHelpUrl,
       currentColorScheme,
+      reccomendedAmount,
     };
   },
 )(observer(Wallet));

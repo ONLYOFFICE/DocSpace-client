@@ -42,7 +42,7 @@ import { useUnmount } from "@docspace/shared/hooks/useUnmount";
 
 import type { ThirdPartyAccountType } from "@docspace/shared/types";
 import type { TColorScheme } from "@docspace/shared/themes";
-import { getBackupsCount, getServiceState } from "@docspace/shared/api/backup";
+import { getBackupsCount } from "@docspace/shared/api/backup";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import type {
@@ -61,7 +61,7 @@ const AutoBackupWrapper = ({
   resetDownloadingProgress,
   setErrorInformation,
   setBackupsCount,
-  setBackupServiceOn,
+  setServiceQuota,
   setIsInited,
   fetchPayerInfo,
   isBackupPaid,
@@ -98,12 +98,11 @@ const AutoBackupWrapper = ({
         const optionalRequests = [];
 
         if (isBackupPaid) {
-          baseRequests.push(getServiceState());
-
           if (maxFreeBackups > 0) {
             baseRequests.push(getBackupsCount());
           }
 
+          optionalRequests.push(setServiceQuota());
           optionalRequests.push(fetchPayerInfo());
         }
 
@@ -112,7 +111,6 @@ const AutoBackupWrapper = ({
           backupSchedule,
           backupStorage,
           newStorageRegions,
-          serviceState,
           backupsCount,
         ] = await Promise.all([...baseRequests, ...optionalRequests]);
 
@@ -125,8 +123,6 @@ const AutoBackupWrapper = ({
 
         if (isBackupPaid) {
           if (typeof backupsCount === "number") setBackupsCount(backupsCount);
-          if (typeof serviceState === "object")
-            setBackupServiceOn(serviceState?.enabled);
         }
 
         setIsInited(true);
@@ -191,9 +187,11 @@ export default inject<
     dialogsStore,
     currentTariffStatusStore,
     currentQuotaStore,
+    paymentStore,
   }) => {
     const language = authStore.language;
 
+    const { setServiceQuota } = paymentStore;
     const { fetchPayerInfo } = currentTariffStatusStore;
     const { getIcon, filesSettings } = filesSettingsStore;
 
@@ -296,7 +294,7 @@ export default inject<
       backupPageEnable,
 
       setBackupsCount,
-      setBackupServiceOn,
+
       setIsInited,
     } = backup;
 
@@ -408,7 +406,7 @@ export default inject<
       setDeleteThirdPartyDialogVisible,
       fetchPayerInfo,
       setBackupsCount,
-      setBackupServiceOn,
+      setServiceQuota,
       setIsInited,
       isBackupPaid,
       maxFreeBackups,

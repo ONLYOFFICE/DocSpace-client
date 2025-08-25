@@ -99,7 +99,7 @@ const DataBackup = ({
     errorInformation,
     isFormReady,
     clearLocalStorage,
-    setErrorInformation,
+
     setTemporaryLink,
     deleteValueFormSetting,
     setRequiredFormSettings,
@@ -183,7 +183,6 @@ const DataBackup = ({
       isFormReady={isFormReady}
       isValidForm={isValidForm}
       clearLocalStorage={clearLocalStorage}
-      setErrorInformation={(err: unknown) => setErrorInformation(err, t)}
       setTemporaryLink={setTemporaryLink}
       deleteValueFormSetting={deleteValueFormSetting}
       setRequiredFormSettings={setRequiredFormSettings}

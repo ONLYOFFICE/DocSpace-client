@@ -79,7 +79,7 @@ export interface ManualBackupProps {
   errorsFieldsBeforeSafe: Record<string, boolean>;
   selectedThirdPartyAccount: Nullable<ThirdPartyAccountType>;
   connectedThirdPartyAccount: Nullable<ConnectedThirdPartyAccountType>;
-  errorInformation: string;
+  errorInformation: string | React.ReactNode;
 
   setIsBackupProgressVisible: (visible: boolean) => void;
 
@@ -88,7 +88,7 @@ export interface ManualBackupProps {
 
   isFormReady: () => boolean;
   clearLocalStorage: VoidFunction;
-  setErrorInformation: (error: unknown, t?: TTranslation) => void;
+
   setTemporaryLink: (link: string) => void;
   deleteValueFormSetting: (key: string) => void;
   setRequiredFormSettings: (arr: string[]) => void;
@@ -144,6 +144,8 @@ export interface ManualBackupProps {
 
   // currentTariffStatusStore Store
   isNotPaidPeriod: boolean;
+  isPayer?: boolean;
+  walletCustomerEmail?: string | null;
   // end currentTariffStatusStore
 
   isBackupPaid?: boolean;
@@ -164,4 +166,5 @@ export interface ManualBackupProps {
   // end thirdPartyStore
 
   isThirdPartyAvailable?: boolean;
+  backupServicePrice?: number;
 }

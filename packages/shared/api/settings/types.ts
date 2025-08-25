@@ -523,3 +523,8 @@ export type TTelegramCheck = {
   status: string;
   username?: string;
 };
+
+export type TNotificationChannel = {
+  name: string;
+  isEnabled: boolean;
+};

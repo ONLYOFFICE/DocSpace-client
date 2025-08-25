@@ -60,6 +60,7 @@ import {
   TStorageBackup,
   TEncryptionSettings,
   TTelegramCheck,
+  TNotificationChannel,
 } from "./types";
 
 export async function getSettings(withPassword = false, headers = null) {
@@ -1403,4 +1404,13 @@ export async function deleteTelegramLink() {
   });
 
   return res as boolean;
+}
+
+export async function getNotificationsSettings() {
+  const res = await request({
+    method: "get",
+    url: "/settings/notification/channels",
+  });
+
+  return res.channels as TNotificationChannel[];
 }

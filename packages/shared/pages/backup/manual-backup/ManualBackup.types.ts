@@ -162,4 +162,6 @@ export interface ManualBackupProps {
     modal: Window | null,
   ) => Promise<Window | null>;
   // end thirdPartyStore
+
+  isThirdPartyAvailable: boolean;
 }

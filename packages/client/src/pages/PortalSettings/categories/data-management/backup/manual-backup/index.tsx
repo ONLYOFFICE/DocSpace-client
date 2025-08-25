@@ -261,7 +261,8 @@ export default inject<
       setThirdPartyProviders,
       openConnectWindow,
     } = thirdPartyStore;
-    const { isBackupPaid, maxFreeBackups } = currentQuotaStore;
+    const { isBackupPaid, maxFreeBackups, isThirdPartyAvailable } =
+      currentQuotaStore;
 
     const { getIcon, filesSettings } = filesSettingsStore;
 
@@ -365,6 +366,8 @@ export default inject<
       fetchPayerInfo,
       setBackupServiceOn,
       maxFreeBackups,
+
+      isThirdPartyAvailable,
     };
   },
 )(observer(ManualBackupWrapper as React.FC<ExternalManualBackupProps>));

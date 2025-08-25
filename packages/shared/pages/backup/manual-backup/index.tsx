@@ -127,6 +127,7 @@ const ManualBackup = ({
   backupProgressError,
   setBackupProgressError,
   setIsBackupProgressVisible,
+  isThirdPartyAvailable,
 }: ManualBackupProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -500,6 +501,7 @@ const ManualBackup = ({
             isMaxProgress={isMaxProgress}
             onMakeCopy={onMakeCopy}
             buttonSize={buttonSize}
+            isThirdPartyAvailable={isThirdPartyAvailable}
           />
         ) : null}
       </div>

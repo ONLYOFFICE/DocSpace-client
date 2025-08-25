@@ -2410,6 +2410,7 @@
   --settings-common-white-label-text-color: #{$black};
   --settings-common-backup-rectangle-bg-color: #{$gray-light};
   --settings-backup-text-disabled: #{$gray};
+  --settings-backup-background: #{$gray-light};
 }
 
 .dark {
@@ -2421,6 +2422,7 @@
   --settings-common-white-label-text-color: #{$white};
   --settings-common-backup-rectangle-bg-color: #{$light-dark-gray-hover};
   --settings-backup-text-disabled: #{$gray-dark-text};
+  --settings-backup-background: #{$dark-gray-light};
 }
 
 .light {

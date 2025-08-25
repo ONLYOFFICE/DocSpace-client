@@ -43,7 +43,7 @@ type NotificationsChannelsProps = {
   checkTg?: TStore["telegramStore"]["checkTg"];
   isConnected?: TStore["telegramStore"]["isConnected"];
   username?: TStore["telegramStore"]["username"];
-  notificationChannels: TargetUserStore["notificationChannels"];
+  notificationChannels?: TargetUserStore["notificationChannels"];
 };
 
 const NotificationsChannels = ({

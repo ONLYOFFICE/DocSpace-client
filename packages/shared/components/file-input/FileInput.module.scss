@@ -62,7 +62,7 @@
 
   &.middle {
     width: 300px;
-    max-height: 38px;
+    max-height: 32px;
   }
 
   &.large {
@@ -187,14 +187,10 @@
 
   border-radius: 0 3px 3px 0;
 
-  &.base {
+  &.base,
+  &.middle {
     width: 30px;
     height: 30px;
-  }
-
-  &.middle {
-    width: 36px;
-    height: 36px;
   }
 
   &.large {

@@ -128,6 +128,7 @@ const SearchInput = ({
   };
 
   const iconNode = getIconNode();
+  const iconSizeValue = !!inputValue || showClearButton ? 12 : 14;
 
   return (
     <div
@@ -159,7 +160,7 @@ const SearchInput = ({
           !!inputValue || showClearButton ? "search-cross" : "search-loupe"
         }
         isIconFill
-        iconSize={15}
+        iconSize={iconSizeValue}
         onIconClick={
           !!inputValue || showClearButton ? handleClearSearch : undefined
         }

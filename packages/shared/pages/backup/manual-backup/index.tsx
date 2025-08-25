@@ -501,7 +501,7 @@ const ManualBackup = ({
             isMaxProgress={isMaxProgress}
             onMakeCopy={onMakeCopy}
             buttonSize={buttonSize}
-            isThirdPartyAvailable={isThirdPartyAvailable}
+            isThirdPartyAvailable={isThirdPartyAvailable ?? true}
           />
         ) : null}
       </div>

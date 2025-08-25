@@ -171,6 +171,7 @@ describe("ManualBackup", () => {
     backupProgressError: "",
     setBackupProgressError: jest.fn(),
     setIsBackupProgressVisible: jest.fn(),
+    isThirdPartyAvailable: true,
   };
 
   beforeEach(() => {

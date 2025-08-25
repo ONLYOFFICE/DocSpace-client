@@ -163,5 +163,5 @@ export interface ManualBackupProps {
   ) => Promise<Window | null>;
   // end thirdPartyStore
 
-  isThirdPartyAvailable: boolean;
+  isThirdPartyAvailable?: boolean;
 }

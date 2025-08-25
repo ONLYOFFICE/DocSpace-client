@@ -29,7 +29,6 @@
 import { useMemo } from "react";
 import { observer } from "mobx-react";
 import { useTheme } from "styled-components";
-import { useTranslation } from "react-i18next";
 
 import { useUnmount } from "@docspace/shared/hooks/useUnmount";
 import { useDidMount } from "@docspace/shared/hooks/useDidMount";
@@ -83,8 +82,6 @@ const DataBackup = ({
   const { backupStore, spacesStore } = useStores();
 
   const { currentColorScheme } = useTheme();
-
-  const { t } = useTranslation(["Common"]);
 
   const {
     accounts,

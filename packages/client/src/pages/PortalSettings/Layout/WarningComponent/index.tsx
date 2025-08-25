@@ -149,7 +149,7 @@ const Warning = ({
       resultText = connectServiceLink;
 
       if (cardLinkedOnNonProfit || cardLinkedOnFreeTariff) {
-        if (backupServiceOn) {
+        if (isBackupServiceOn) {
           resultText = "";
         } else {
           resultText = isPayer ? connectServiceLink : connectPayer;

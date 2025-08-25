@@ -34,6 +34,10 @@ import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrol
 import { AnimationEvents } from "@docspace/shared/hooks/useAnimation";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import ShareLoader from "@docspace/shared/skeletons/share";
+import { isFolder, isRoom } from "@docspace/shared/utils/typeGuards";
+import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
+import { ShareLinkService } from "@docspace/shared/services/share-link.service";
+import { FolderType } from "@docspace/shared/enums";
 import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
 
 import InfoPanelStore, { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
@@ -88,6 +92,24 @@ const FilesView = ({
   const [isFirstLoadingSuspense, setIsFirstLoadingSuspense] =
     React.useState(true);
 
+  const generatePrimaryLink = useEventCallback(() => {
+    if (
+      !selection ||
+      isRoom(selection) ||
+      !selection.canShare ||
+      selection.shared
+    )
+      return;
+
+    const parentRoomType = selection.parentRoomType;
+
+    if (
+      parentRoomType === FolderType.FormRoom ||
+      parentRoomType === FolderType.PublicRoom
+    )
+      return ShareLinkService.getPrimaryLink(selection);
+  });
+
   const {
     history,
     total: historyTotal,
@@ -108,6 +130,8 @@ const FilesView = ({
     abortController: shareAbortController,
   } = useShare({
     id: selection.id?.toString() || "",
+    isFolder: isFolder(selection),
+    generatePrimaryLink,
   });
 
   const scrollContext = React.use(ScrollbarContext);
@@ -283,7 +307,7 @@ const FilesView = ({
     }
 
     if (value === InfoPanelView.infoShare) {
-      if (!("fileExst" in selection)) return null;
+      if (isRoom(selection)) return null;
 
       return <Share infoPanelSelection={selection} fileLinkProps={filesLink} />;
     }

@@ -833,3 +833,13 @@ export enum ProvidersType {
   WebDav = "WebDav",
   Yandex = "Yandex",
 }
+
+export const enum LinkSharingEntityType {
+  RoomOrFolder = 1,
+  File = 2,
+}
+
+export const enum ShareLinkType {
+  Internal = 0,
+  External = 1,
+}

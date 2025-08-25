@@ -24,66 +24,53 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { useTranslation } from "react-i18next";
-import { DateTimePicker } from "@docspace/shared/components/date-time-picker";
-import ToggleBlock from "./ToggleBlock";
+import { type FC } from "react";
+import { ComboBox, ComboBoxSize, type TOption } from "../../combobox";
 
-const LimitTimeBlock = (props) => {
-  const {
-    isLoading,
-    expirationDate,
-    setExpirationDate,
-    setIsExpired,
-    isExpired,
-    language,
-    isPrimary,
-    headerText,
-    bodyText,
-  } = props;
+import { IconDisplay } from "./IconDisplay";
 
-  const { t } = useTranslation(["Common"]);
+import styles from "../Share.module.scss";
 
-  const onChange = (date) => {
-    const expired = date
-      ? new Date(date).getTime() <= new Date().getTime()
-      : false;
+export interface AccessOptionProps {
+  isLoaded: boolean;
+  canEditInternal: boolean;
+  isExpiredLink: boolean;
 
-    setExpirationDate(date);
-    setIsExpired(expired);
-  };
+  options: TOption[];
+  selectedOption: TOption;
+  onSelect: (option: TOption) => void;
+}
 
-  if (isPrimary) {
-    return (
-      <ToggleBlock
-        headerText={headerText}
-        bodyText={bodyText}
-        withToggle={false}
-      />
-    );
+export const LinkTypeSelector: FC<AccessOptionProps> = ({
+  options,
+  isLoaded,
+  onSelect,
+  isExpiredLink,
+  selectedOption,
+  canEditInternal,
+}) => {
+  if (!canEditInternal) {
+    return <IconDisplay option={selectedOption} />;
   }
 
-  // const minDate = new Date(new Date().getTime());
-  // minDate.setDate(new Date().getDate() - 1);
-  // minDate.setTime(minDate.getTime() + 60 * 60 * 1000);
-  const minDate = new Date();
-
   return (
-    <ToggleBlock {...props} withToggle={false}>
-      <DateTimePicker
-        className="public-room_date-picker"
-        isDisabled={isLoading}
-        initialDate={expirationDate}
-        onChange={onChange}
-        minDate={minDate}
-        openDate={new Date()}
-        hasError={isExpired}
-        locale={language}
-        selectDateText={t("Common:SelectDate")}
-        dataTestId="edit_link_panel_date_time_picker"
-      />
-    </ToggleBlock>
+    <ComboBox
+      fillIcon
+      modernView
+      type="onlyIcon"
+      directionY="both"
+      manualWidth="auto"
+      scaled={false}
+      noSelect={false}
+      options={options}
+      scaledOptions={false}
+      className={styles.internalCombobox}
+      size={ComboBoxSize.content}
+      selectedOption={selectedOption}
+      onSelect={onSelect}
+      showDisabledItems
+      isDisabled={isLoaded || isExpiredLink}
+      useImageIcon
+    />
   );
 };
-
-export default LimitTimeBlock;

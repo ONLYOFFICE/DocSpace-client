@@ -25,8 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { observer, inject } from "mobx-react";
 
-import EmptyFilterContainer from "./EmptyFilterContainer";
+import { isFolder as isFolderUtil } from "@docspace/shared/utils/typeGuards";
 
+import EmptyFilterContainer from "./EmptyFilterContainer";
 import EmptyViewContainer from "./sub-components/EmptyViewContainer/EmptyViewContainer";
 
 const linkStyles = {
@@ -51,9 +52,8 @@ const EmptyContainer = ({
   parentRoomType,
   folderId,
   isArchiveFolderRoot,
+  isFolder,
 }) => {
-  const isRoom = !!roomType;
-
   linkStyles.color = theme.filesEmptyContainer.linkColor;
 
   const isRootEmptyPage = parentId === 0 || (isPublicRoom && isRoot);
@@ -64,7 +64,7 @@ const EmptyContainer = ({
     <EmptyViewContainer
       type={roomType}
       folderType={type}
-      isFolder={!isRoom ? !isRootEmptyPage : null}
+      isFolder={isFolder}
       folderId={folderId}
       isRootEmptyPage={isRootEmptyPage}
       parentRoomType={parentRoomType}
@@ -93,7 +93,9 @@ export default inject(
     const { roomType, id: folderId, parentRoomType } = selectedFolderStore;
     const { isArchiveFolderRoot } = treeFoldersStore;
 
-    const isRoot = selectedFolderStore.pathParts?.length === 1;
+    const isFolder = isFolderUtil(selectedFolderStore.getSelectedFolder());
+
+    const isRoot = selectedFolderStore.pathParts?.length === 1 && !isFolder;
 
     return {
       theme: settingsStore.theme,
@@ -109,6 +111,7 @@ export default inject(
       parentRoomType,
       folderId,
       isArchiveFolderRoot,
+      isFolder,
     };
   },
 )(observer(EmptyContainer));

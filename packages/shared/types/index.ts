@@ -24,10 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import type { TFile, TFileLink, TFolder } from "../api/files/types";
 import type { TBreadCrumb } from "../components/selector/Selector.types";
-import { RoomsType, ShareAccessRights } from "../enums";
-import { TTheme, TColorScheme } from "../themes";
-import FirebaseHelper from "../utils/firebase";
+import type { RoomsType, ShareAccessRights } from "../enums";
+import type { TTheme, TColorScheme } from "../themes";
+import type FirebaseHelper from "../utils/firebase";
+import type { TRoom } from "../api/rooms/types";
 
 export type Option = {
   key: string;
@@ -184,6 +186,13 @@ export interface StaticImageData {
   blurDataURL?: string;
   blurWidth?: number;
   blurHeight?: number;
+}
+
+export interface LinkParamsType {
+  link: TFileLink;
+  item: TFile | TFolder | TRoom;
+
+  updateLink?: (newLink: TFileLink) => void;
 }
 
 declare global {

@@ -50,6 +50,7 @@ type PropsFromCombobox = Pick<
   | "isMobileView"
   | "shouldShowBackdrop"
   | "dataTestId"
+  | "noSelect"
 >;
 
 export type AccessRightSelectProps = PropsFromCombobox & {

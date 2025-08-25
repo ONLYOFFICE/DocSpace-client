@@ -33,6 +33,7 @@ import { AsideHeader } from "@docspace/shared/components/aside-header";
 import { Tabs } from "@docspace/shared/components/tabs";
 import { isLockedSharedRoom } from "@docspace/shared/utils";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
+import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
 
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 import { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
@@ -123,6 +124,7 @@ const InfoPanelHeaderContent = ({
     !isRecentFolder &&
     selection &&
     "rootFolderType" in selection &&
+    isRoomUtil(selection) &&
     (selection.rootFolderType === FolderType.Rooms ||
       selection.rootFolderType === FolderType.Archive ||
       selection.rootFolderType === FolderType.RoomTemplates);
@@ -132,8 +134,8 @@ const InfoPanelHeaderContent = ({
   if (
     selection &&
     "canShare" in selection &&
-    !isRoomsType &&
-    selection.canShare
+    selection.canShare &&
+    !isRoomUtil(selection)
   ) {
     tabsData.unshift({
       id: "info_share",

@@ -80,6 +80,14 @@
   .channelType {
     color: var(--channel-type-color);
   }
+
+  .disabledText {
+    color: var(--channel-type-color);
+  }
+
+  .isNotValid {
+    color: var(--channel-error-color);
+  }
 }
 
 .channelWrapper::before {
@@ -108,4 +116,10 @@
     width: 16px;
     height: 16px;
   }
+}
+
+.helpButton {
+  align-self: center;
+  margin-inline-start: auto;
+  cursor: pointer;
 }

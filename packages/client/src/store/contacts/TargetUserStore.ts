@@ -35,6 +35,7 @@ import {
   changeNotificationSubscription,
   getNotificationSubscription,
 } from "@docspace/shared/api/settings";
+import { TNotificationChannel } from "@docspace/shared/api/settings/types";
 import { toastr } from "@docspace/shared/components/toast";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { Nullable } from "@docspace/shared/types";
@@ -63,6 +64,8 @@ class TargetUserStore {
   usefulTipsSubscription = false;
 
   isFirstSubscriptionsLoad = true;
+
+  notificationChannels: TNotificationChannel[] = [];
 
   constructor(userStore: UserStore) {
     this.userStore = userStore;
@@ -162,6 +165,10 @@ class TargetUserStore {
     this.dailyFeedSubscriptions = isEnableDailyFeed;
     this.usefulTipsSubscription = isEnableTips;
     this.isFirstSubscriptionsLoad = false;
+  };
+
+  setNotificationChannels = (channels: TNotificationChannel[]) => {
+    this.notificationChannels = channels;
   };
 
   changeSubscription = async (

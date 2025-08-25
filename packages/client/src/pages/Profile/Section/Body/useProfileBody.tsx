@@ -30,8 +30,12 @@ import {
   getNotificationSubscription,
   getAuthProviders,
   getTfaBackupCodes,
+  getNotificationsSettings,
 } from "@docspace/shared/api/settings";
-import { TThirdPartyProvider } from "@docspace/shared/api/settings/types";
+import {
+  TThirdPartyProvider,
+  TNotificationChannel,
+} from "@docspace/shared/api/settings/types";
 import { toastr } from "@docspace/shared/components/toast";
 import { NotificationsType } from "@docspace/shared/enums";
 import { AuthStore } from "@docspace/shared/store/AuthStore";
@@ -51,6 +55,7 @@ export type UseProfileBodyProps = {
 
   getFilesSettings: FilesSettingsStore["getFilesSettings"];
   setSubscriptions: TargetUserStore["setSubscriptions"];
+  setNotificationChannels: TargetUserStore["setNotificationChannels"];
   fetchConsents: OAuthStore["fetchConsents"];
   fetchScopes: OAuthStore["fetchScopes"];
   getTfaType: TfaStore["getTfaType"];
@@ -65,6 +70,7 @@ export type UseProfileBodyProps = {
 const useProfileBody = ({
   getFilesSettings,
   setSubscriptions,
+  setNotificationChannels,
   isFirstSubscriptionsLoad,
   fetchConsents,
   fetchScopes,
@@ -95,10 +101,11 @@ const useProfileBody = ({
       getNotificationSubscription(NotificationsType.UsefulTips) as Promise<{
         isEnabled: boolean;
       }>,
-    ];
+      getNotificationsSettings() as Promise<TNotificationChannel[]>,
+    ] as const;
 
     try {
-      const [badges, roomsActivity, dailyFeed, tips]: { isEnabled: boolean }[] =
+      const [badges, roomsActivity, dailyFeed, tips, channels] =
         await Promise.all(requests);
 
       setSubscriptions?.(
@@ -107,6 +114,8 @@ const useProfileBody = ({
         dailyFeed?.isEnabled,
         tips?.isEnabled,
       );
+
+      setNotificationChannels(channels);
     } catch (e) {
       toastr.error(e as string);
     }

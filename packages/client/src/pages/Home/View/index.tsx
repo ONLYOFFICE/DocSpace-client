@@ -122,6 +122,8 @@ const View = ({
 
   getTfaType,
   setIsProfileLoaded,
+
+  setNotificationChannels,
 }: ViewProps) => {
   const location = useLocation();
 
@@ -170,6 +172,7 @@ const View = ({
   const { getProfileInitialValue } = useProfileBody({
     getFilesSettings: getFilesSettings!,
     setSubscriptions: setSubscriptions!,
+    setNotificationChannels: setNotificationChannels!,
     isFirstSubscriptionsLoad,
     fetchConsents: fetchConsents!,
     fetchScopes: fetchScopes!,
@@ -421,8 +424,11 @@ export const ViewComponent = inject(
 
     const { getFilesSettings } = filesSettingsStore;
 
-    const { setSubscriptions, isFirstSubscriptionsLoad } =
-      peopleStore.targetUserStore!;
+    const {
+      setSubscriptions,
+      setNotificationChannels,
+      isFirstSubscriptionsLoad,
+    } = peopleStore.targetUserStore!;
 
     const { fetchConsents, fetchScopes } = oauthStore;
 
@@ -485,6 +491,7 @@ export const ViewComponent = inject(
 
       getTfaType,
       setIsProfileLoaded,
+      setNotificationChannels,
     };
   },
 )(observer(View));

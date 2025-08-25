@@ -98,6 +98,7 @@ type SectionBodyContentProps = {
   setIsProfileLoaded?: ClientLoadingStore["setIsProfileLoaded"];
   setIsSectionHeaderLoading?: ClientLoadingStore["setIsSectionHeaderLoading"];
   resetSelections?: FilesStore["resetSelections"];
+  setNotificationChannels?: TargetUserStore["setNotificationChannels"];
 };
 
 const SectionBodyContent = (props: SectionBodyContentProps) => {
@@ -120,6 +121,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     setIsSectionHeaderLoading,
     getTfaType,
     resetSelections,
+    setNotificationChannels,
   } = props;
   const navigate = useNavigate();
 
@@ -149,6 +151,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
   } = useProfileBody({
     getFilesSettings: getFilesSettings!,
     setSubscriptions: setSubscriptions!,
+    setNotificationChannels: setNotificationChannels!,
     isFirstSubscriptionsLoad,
     fetchConsents: fetchConsents!,
     fetchScopes: fetchScopes!,
@@ -255,8 +258,11 @@ export default inject(
     const identityServerEnabled =
       authStore?.capabilities?.identityServerEnabled;
 
-    const { setSubscriptions, isFirstSubscriptionsLoad } =
-      peopleStore.targetUserStore!;
+    const {
+      setSubscriptions,
+      setNotificationChannels,
+      isFirstSubscriptionsLoad,
+    } = peopleStore.targetUserStore!;
 
     const { fetchConsents, fetchScopes } = oauthStore;
 
@@ -288,6 +294,7 @@ export default inject(
       setIsProfileLoaded,
       setIsSectionHeaderLoading,
       resetSelections,
+      setNotificationChannels,
     };
   },
 )(

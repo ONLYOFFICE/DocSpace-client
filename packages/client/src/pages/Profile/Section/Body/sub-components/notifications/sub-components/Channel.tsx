@@ -34,7 +34,9 @@ import { ReactSVG } from "react-svg";
 import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
-import { Link, LinkType } from "@docspace/shared/components/link";
+import { Link, LinkType, LinkTarget } from "@docspace/shared/components/link";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { THIRD_PARTY_SERVICES_URL } from "@docspace/shared/constants";
 
 import styles from "../Notifications.module.scss";
 
@@ -44,6 +46,9 @@ type ChannelProps = {
   isConnected?: boolean;
   onConnect?: () => void;
   onDisconnect?: () => void;
+  isNeedConfig?: boolean;
+  isAdmin?: boolean;
+  isNotValid?: boolean;
 };
 
 const getIcon = (type: ChannelProps["type"]) => {
@@ -57,15 +62,90 @@ const getIcon = (type: ChannelProps["type"]) => {
   }
 };
 
-const getTypeTitle = (t: TFunction, type: ChannelProps["type"]) => {
+const getTypeTitle = (
+  t: TFunction,
+  type: ChannelProps["type"],
+  isNotValid?: boolean,
+  isNeedConfig?: boolean,
+) => {
   switch (type) {
     case "email":
-      return t("Common:Email");
+      return `${t("Common:Email")}${isNotValid ? ` (${t("IsNotValid")})` : ""}`;
     case "telegram":
-      return t("Common:ProviderTelegram");
+      return `${t("Common:ProviderTelegram")}${isNeedConfig ? ` (${t("NotConfigured")})` : ""}`;
     default:
       return t("Common:Email");
   }
+};
+
+const getChannelContent = (
+  t: TFunction,
+  {
+    type,
+    name,
+    isConnected,
+    isNeedConfig,
+    isAdmin,
+    isNotValid,
+    onConnect,
+  }: Pick<
+    ChannelProps,
+    | "type"
+    | "name"
+    | "isConnected"
+    | "isNeedConfig"
+    | "isAdmin"
+    | "isNotValid"
+    | "onConnect"
+  >,
+) => {
+  if (isConnected) {
+    return (
+      <Text
+        fontWeight={600}
+        fontSize="13px"
+        className={classNames({
+          [styles.isNotValid]: isNotValid,
+        })}
+      >
+        {name}
+      </Text>
+    );
+  }
+
+  if (isNeedConfig) {
+    if (!isAdmin)
+      return (
+        <Text fontWeight={600} fontSize="12px" className={styles.disabledText}>
+          {t("AdminSetupRequired")}
+        </Text>
+      );
+
+    return (
+      <Link
+        fontSize="13px"
+        fontWeight={600}
+        isHovered
+        type={LinkType.action}
+        href={`${THIRD_PARTY_SERVICES_URL}${type}`}
+        target={LinkTarget.blank}
+      >
+        {t("GoToSettings")}
+      </Link>
+    );
+  }
+
+  return (
+    <Link
+      fontSize="13px"
+      fontWeight={600}
+      isHovered
+      type={LinkType.action}
+      onClick={onConnect}
+    >
+      {t("Common:Connect")}
+    </Link>
+  );
 };
 
 const Channel = ({
@@ -74,8 +154,11 @@ const Channel = ({
   isConnected,
   onConnect,
   onDisconnect,
+  isNeedConfig,
+  isAdmin,
+  isNotValid,
 }: ChannelProps) => {
-  const { t } = useTranslation("Common");
+  const { t } = useTranslation(["Notifications", "Common"]);
 
   return (
     <div
@@ -89,30 +172,38 @@ const Channel = ({
       />
       <div className={styles.channelContent}>
         <Text className={styles.channelType} fontWeight={600} fontSize="12px">
-          {getTypeTitle(t, type)}
+          {getTypeTitle(t, type, isNotValid, isNeedConfig)}
         </Text>
-        {isConnected ? (
-          <Text fontWeight={600} fontSize="13px">
-            {name}
-          </Text>
-        ) : (
-          <Link
-            fontSize="13px"
-            fontWeight={600}
-            isHovered
-            type={LinkType.action}
-            onClick={onConnect}
-          >
-            {t("Common:Connect")}
-          </Link>
-        )}
+        {getChannelContent(t, {
+          type,
+          name,
+          isConnected,
+          isNeedConfig,
+          isAdmin,
+          isNotValid,
+          onConnect,
+        })}
       </div>
-      {isConnected && type !== "email" ? (
+      {isConnected && onDisconnect ? (
         <ReactSVG
           src={CloseIcon}
           className={styles.closeIcon}
           onClick={onDisconnect}
         />
+      ) : null}
+
+      {isNotValid ? (
+        <div className={styles.helpButton}>
+          <HelpButton
+            size={16}
+            place="right"
+            tooltipContent={
+              <Text fontSize="12px" fontWeight={400}>
+                {t("LdapEmailTooltip")}
+              </Text>
+            }
+          />
+        </div>
       ) : null}
     </div>
   );

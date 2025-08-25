@@ -2408,9 +2408,9 @@ class ContextOptionsStore {
       k.contextOptions?.includes("mark-as-favorite"),
     );
 
-    const moveItems = selection.filter((k) =>
+    const canMove = selection.every((k) =>
       k.contextOptions.includes("move-to"),
-    ).length;
+    );
 
     const copyItems = selection.filter((k) =>
       k.contextOptions.includes("copy-to"),
@@ -2489,7 +2489,7 @@ class ContextOptionsStore {
         onClick: allFilesIsEditing
           ? () => this.onShowEditingToast(t)
           : this.onMoveAction,
-        disabled: isRecycleBinFolder || !moveItems,
+        disabled: isRecycleBinFolder || !canMove,
       },
       {
         key: "copy-to",

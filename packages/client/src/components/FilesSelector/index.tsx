@@ -145,6 +145,7 @@ const FilesSelectorWrapper = ({
   folderIsShared,
   checkCreating,
   logoText,
+  isPortalView = false,
 }: FilesSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Files",
@@ -454,6 +455,7 @@ const FilesSelectorWrapper = ({
       headerProps={headerProps}
       formProps={formProps}
       checkCreating={checkCreating}
+      isPortalView={isPortalView}
     />
   );
 };

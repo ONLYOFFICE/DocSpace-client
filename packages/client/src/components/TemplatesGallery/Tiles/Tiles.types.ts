@@ -53,6 +53,8 @@ export interface TilesProps {
   submitToGalleryTileIsVisible: boolean;
   canSubmitToFormGallery: () => boolean;
   viewMobile: boolean;
+  onCreateOform: () => void;
+  setTemplatesGalleryVisible: (isVisible: boolean) => void;
 }
 
 export interface TileProps {

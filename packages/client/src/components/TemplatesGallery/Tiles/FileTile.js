@@ -146,11 +146,11 @@ const Styled = styled.div`
   }
 `;
 
-const FileTile = ({ item, smallPreview, onClickInfo }) => {
+const FileTile = ({ item, smallPreview, onClickInfo, onClick }) => {
   const previewSrc = item?.attributes.card_prewiew.data?.attributes.url;
 
   return (
-    <Styled smallPreview={smallPreview}>
+    <Styled smallPreview={smallPreview} onClick={onClick}>
       <div className="thumbnail-container">
         <img
           src={previewSrc}

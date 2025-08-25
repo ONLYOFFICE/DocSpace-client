@@ -106,6 +106,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
 
     applyFilterOption,
     onSelectItem,
+    isPortalView,
   } = props;
   const { t } = useTranslation(["Common"]);
   const { isFirstLoad, setIsFirstLoad, showLoader } = use(LoadersContext);
@@ -648,7 +649,8 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     </>
   );
 
-  return currentDeviceType === DeviceType.mobile && !embedded ? (
+  return (currentDeviceType === DeviceType.mobile && !embedded) ||
+    isPortalView ? (
     <Portal visible={isPanelVisible} element={<div>{selectorComponent}</div>} />
   ) : (
     selectorComponent

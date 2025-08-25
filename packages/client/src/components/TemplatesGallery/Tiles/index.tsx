@@ -28,7 +28,7 @@ import { Key, useEffect } from "react";
 import { observer, inject } from "mobx-react";
 
 import { withTranslation } from "react-i18next";
-
+import { useNavigate } from "react-router";
 import type { FC } from "react";
 import type { TilesProps } from "./Tiles.types";
 import FileTile from "./FileTile";
@@ -55,7 +55,11 @@ const Tiles: FC<TilesProps> = ({
   smallPreview,
   setIsVisible,
   viewMobile,
+  onCreateOform,
+  setTemplatesGalleryVisible,
 }) => {
+  const navigate = useNavigate();
+
   const onMouseDown = (e: MouseEvent) => {
     const target = e.target as HTMLElement;
     if (
@@ -88,6 +92,12 @@ const Tiles: FC<TilesProps> = ({
     setGallerySelected(item);
   };
 
+  const onClick = (item: { id: Key | null | undefined }) => {
+    setGallerySelected(item);
+    onCreateOform(navigate);
+    setTemplatesGalleryVisible(false);
+  };
+
   const submitToGalleryTileNode =
     submitToGalleryTileIsVisible && canSubmitToFormGallery() ? (
       <SubmitToGalleryTile
@@ -109,6 +119,7 @@ const Tiles: FC<TilesProps> = ({
               item={item}
               smallPreview={smallPreview}
               onClickInfo={() => onClickInfo(item)}
+              onClick={() => onClick(item)}
             />
           );
         })}
@@ -118,7 +129,13 @@ const Tiles: FC<TilesProps> = ({
 };
 
 export default inject<TStore>(
-  ({ settingsStore, accessRightsStore, oformsStore, infoPanelStore }) => ({
+  ({
+    settingsStore,
+    accessRightsStore,
+    oformsStore,
+    infoPanelStore,
+    contextOptionsStore,
+  }) => ({
     theme: settingsStore.theme,
     oformFiles: oformsStore.oformFiles,
     hasGalleryFiles: oformsStore.hasGalleryFiles,
@@ -131,5 +148,7 @@ export default inject<TStore>(
     languageFilterLoaded: oformsStore.languageFilterLoaded,
     oformFilesLoaded: oformsStore.oformFilesLoaded,
     setIsVisible: infoPanelStore.setIsVisible,
+    onCreateOform: contextOptionsStore.onCreateOform,
+    setTemplatesGalleryVisible: oformsStore.setTemplatesGalleryVisible,
   }),
 )(withTranslation(["Common", "FormGallery"])(observer(Tiles)));

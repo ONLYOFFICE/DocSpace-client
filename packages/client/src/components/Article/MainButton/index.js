@@ -297,6 +297,7 @@ const ArticleMainButtonContent = (props) => {
 
   const onShowTemplatesGallery = () => {
     setTemplatesGalleryVisible(true);
+    setOformFromFolderId(currentFolderId);
   };
 
   const onShowGallery = () => {

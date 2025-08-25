@@ -14,6 +14,7 @@
   --app-loader-background-color: #{$white};
 
   --files-article-body-download-app-list-text-color: #{$gray};
+  --files-article-body-download-app-list-mac-hover-color: #{$dark-black};
   --files-article-body-dev-tools-background-color: var(
     --accent-main,
     #{$light-blue-main}
@@ -366,6 +367,7 @@
   --app-loader-background-color: #{$black};
 
   --files-article-body-download-app-list-text-color: #{$gray-dark};
+  --files-article-body-download-app-list-mac-hover-color: #{$white};
   --files-article-body-dev-tools-background-color: #{$dark-gray-dark};
   --files-article-body-dev-tools-background-opacity: 1;
   --files-article-body-dev-tools-color: #{$black};
@@ -2795,4 +2797,32 @@
   --settings-payment-color: #{$dark-status-warning};
   --settings-payment-border: 1px solid #{$gray-dark-strong};
   --settings-payment-bg-benefits-color: #{$black};
+}
+
+.light {
+  --share-selector-default-color: #{$light-gray-dark};
+  --share-selector-hover-color: #{$light-gray-dark};
+  --share-selector-selected-color: #{$black};
+  --share-selector-disabled-color: #{$gray};
+  --share-selector-not-active-color: #{$light-gray-dark};
+
+  --share-bg-pressed-color: #{$gray-strong};
+}
+
+.dark {
+  --share-selector-default-color: #{$dark-gray-dark};
+  --share-selector-hover-color: #{$dark-gray-dark};
+  --share-selector-selected-color: #{$white};
+  --share-selector-disabled-color: #{$gray-dark};
+  --share-selector-not-active-color: #{$dark-gray-dark};
+
+  --share-bg-pressed-color: #{$dark-gray-light};
+}
+
+.light {
+  --quick-buttons-shared-color: #{$light-icons};
+}
+
+.dark {
+  --quick-buttons-shared-color: #{$white};
 }

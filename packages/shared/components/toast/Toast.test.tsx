@@ -25,9 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen, act } from "@testing-library/react";
+import { screen, act, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { renderWithTheme } from "../../utils/render-with-theme";
 import { Toast } from ".";
 import { toastr } from "./sub-components/Toastr";
 
@@ -50,7 +49,7 @@ describe("<Toast />", () => {
   });
 
   it("shows success toast", () => {
-    renderWithTheme(<Toast />);
+    render(<Toast />);
 
     act(() => {
       toastr.success("Success message", "Success");
@@ -61,7 +60,7 @@ describe("<Toast />", () => {
   });
 
   it("shows error toast", () => {
-    renderWithTheme(<Toast />);
+    render(<Toast />);
 
     act(() => {
       toastr.error("Error message", "Error");
@@ -72,7 +71,7 @@ describe("<Toast />", () => {
   });
 
   it("shows warning toast", () => {
-    renderWithTheme(<Toast />);
+    render(<Toast />);
 
     act(() => {
       toastr.warning("Warning message", "Warning");
@@ -83,7 +82,7 @@ describe("<Toast />", () => {
   });
 
   it("shows info toast", () => {
-    renderWithTheme(<Toast />);
+    render(<Toast />);
 
     act(() => {
       toastr.info("Info message", "Info");
@@ -94,7 +93,7 @@ describe("<Toast />", () => {
   });
 
   it("shows toast with close button when withCross is true", () => {
-    renderWithTheme(<Toast />);
+    render(<Toast />);
 
     act(() => {
       toastr.success("With close button", "Title", 5000, true);
@@ -105,7 +104,7 @@ describe("<Toast />", () => {
   });
 
   it("handles error object with response data", () => {
-    renderWithTheme(<Toast />);
+    render(<Toast />);
 
     const errorObj = {
       response: {
@@ -125,7 +124,7 @@ describe("<Toast />", () => {
   });
 
   it("accepts custom React elements as content", () => {
-    renderWithTheme(<Toast />);
+    render(<Toast />);
 
     act(() => {
       toastr.success(<div data-testid="custom-content">Custom Element</div>);
@@ -135,7 +134,7 @@ describe("<Toast />", () => {
   });
 
   it("stays open when timeout is 0", () => {
-    renderWithTheme(<Toast />);
+    render(<Toast />);
 
     act(() => {
       toastr.success("Persistent message", "Title", 0);
@@ -151,7 +150,7 @@ describe("<Toast />", () => {
   });
 
   it("handles multiple toasts simultaneously", () => {
-    renderWithTheme(<Toast />);
+    render(<Toast />);
 
     act(() => {
       toastr.success("Success message", "Success");
@@ -165,7 +164,7 @@ describe("<Toast />", () => {
   });
 
   it("checks toast active status", () => {
-    renderWithTheme(<Toast />);
+    render(<Toast />);
 
     let toastId: string | number;
 
@@ -183,7 +182,7 @@ describe("<Toast />", () => {
   });
 
   it("handles empty array as toast content", () => {
-    renderWithTheme(<Toast />);
+    render(<Toast />);
 
     act(() => {
       toastr.success([]);
@@ -194,7 +193,7 @@ describe("<Toast />", () => {
   });
 
   it("handles server-side rendering", () => {
-    renderWithTheme(<Toast isSSR />);
+    render(<Toast isSSR />);
 
     // Component should not render on server
     expect(

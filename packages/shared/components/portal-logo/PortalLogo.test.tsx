@@ -1,10 +1,14 @@
 import React from "react";
-import { screen, fireEvent, act, waitFor } from "@testing-library/react";
+import {
+  screen,
+  fireEvent,
+  act,
+  waitFor,
+  render,
+} from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import PortalLogo from "./PortalLogo";
-
-import { renderWithTheme } from "../../utils/render-with-theme";
 
 jest.mock("react-device-detect", () => ({
   isMobileOnly: false,
@@ -24,7 +28,7 @@ describe("PortalLogo", () => {
   });
 
   it("renders without crashing", () => {
-    renderWithTheme(<PortalLogo />);
+    render(<PortalLogo />);
     const img = screen.getByRole("img");
     expect(img).toBeInTheDocument();
     expect(img).toHaveAttribute(
@@ -34,19 +38,19 @@ describe("PortalLogo", () => {
   });
 
   it("applies custom className when provided", () => {
-    renderWithTheme(<PortalLogo className="custom-class" />);
+    render(<PortalLogo className="custom-class" />);
     const img = screen.getByRole("img");
     expect(img).toHaveClass("custom-class");
   });
 
   it("adds wrapper class by default", () => {
-    renderWithTheme(<PortalLogo />);
+    render(<PortalLogo />);
     const wrapper = screen.getByRole("img").parentElement;
     expect(wrapper?.className).toContain("wrapper");
   });
 
   it("shows mobile styles when screen is mobile and resizable", async () => {
-    renderWithTheme(<PortalLogo isResizable />);
+    render(<PortalLogo isResizable />);
     mockResizeEvent(767); // Mobile breakpoint
 
     await waitFor(() => {
@@ -58,7 +62,7 @@ describe("PortalLogo", () => {
   });
 
   it("hides logo on mobile when not resizable", async () => {
-    renderWithTheme(<PortalLogo isResizable={false} />);
+    render(<PortalLogo isResizable={false} />);
     mockResizeEvent(767); // Mobile breakpoint
 
     await waitFor(() => {
@@ -69,7 +73,7 @@ describe("PortalLogo", () => {
   });
 
   it("removes resize event listener on unmount", () => {
-    const { unmount } = renderWithTheme(<PortalLogo isResizable />);
+    const { unmount } = render(<PortalLogo isResizable />);
     const removeEventListenerSpy = jest.spyOn(window, "removeEventListener");
     unmount();
     expect(removeEventListenerSpy).toHaveBeenCalledWith(
@@ -80,7 +84,7 @@ describe("PortalLogo", () => {
 
   it("does not add resize listener when isResizable is false", () => {
     const addEventListenerSpy = jest.spyOn(window, "addEventListener");
-    renderWithTheme(<PortalLogo isResizable={false} />);
+    render(<PortalLogo isResizable={false} />);
     expect(addEventListenerSpy).not.toHaveBeenCalledWith(
       "resize",
       expect.any(Function),

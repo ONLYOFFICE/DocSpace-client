@@ -44,11 +44,9 @@ import { Tooltip } from "@docspace/shared/components/tooltip";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import PublicRoomBar from "@docspace/shared/components/public-room-bar";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
-import {
-  GENERAL_LINK_HEADER_KEY,
-  LINKS_LIMIT_COUNT,
-} from "@docspace/shared/constants";
+import { GENERAL_LINK_HEADER_KEY } from "@docspace/shared/constants";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { createExternalLink } from "@docspace/shared/api/rooms";
 
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
 import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?url";
@@ -88,8 +86,6 @@ const Members = ({
   primaryLink,
 
   additionalLinks,
-  setLinkParams,
-  setEditLinkPanelIsVisible,
   getPrimaryLink,
   setExternalLink,
 
@@ -122,8 +118,16 @@ const Members = ({
 
   const onAddNewLink = async () => {
     if (isPublicRoom || primaryLink) {
-      setLinkParams!({ roomId: infoPanelSelection!.id, isEdit: false });
-      setEditLinkPanelIsVisible!(true);
+      const roomId = infoPanelSelection!.id;
+
+      try {
+        const link = await createExternalLink(roomId);
+
+        setExternalLink!(link, searchParams, setSearchParams, isCustomRoom);
+      } catch (error) {
+        toastr.error(error as Error);
+        console.error(error);
+      }
     } else {
       getPrimaryLink!(infoPanelSelection!.id).then((link) => {
         setExternalLink!(link, searchParams, setSearchParams, isCustomRoom);
@@ -161,6 +165,16 @@ const Members = ({
   const getPublicRoomItems = () => {
     const publicRoomItems = [];
 
+    const countCanCreateLink = Math.max(
+      0,
+      (infoPanelSelection?.shareSettings?.ExternalLink ?? 0) +
+        (infoPanelSelection?.shareSettings?.PrimaryExternalLink ?? 0) -
+        1,
+    );
+
+    const canAddLink =
+      (infoPanelSelection?.shareSettings?.ExternalLink ?? 0) > 0;
+
     if (
       isPublicRoomType &&
       infoPanelSelection?.security.EditAccess &&
@@ -178,7 +192,7 @@ const Members = ({
               {isFormRoom ? t("Common:PublicLink") : t("Common:SharedLinks")}
             </Text>
 
-            {!isArchiveFolder && !isFormRoom ? (
+            {!isArchiveFolder && canAddLink ? (
               <div
                 data-tooltip-id="emailTooltip"
                 data-tooltip-content={t(
@@ -192,7 +206,7 @@ const Members = ({
                   size={16}
                   isDisabled={
                     additionalLinks
-                      ? additionalLinks.length >= LINKS_LIMIT_COUNT
+                      ? additionalLinks.length >= countCanCreateLink
                       : false
                   }
                   title={t("Files:AddNewLink")}
@@ -200,7 +214,7 @@ const Members = ({
                 />
 
                 {additionalLinks &&
-                additionalLinks.length >= LINKS_LIMIT_COUNT ? (
+                additionalLinks.length >= countCanCreateLink ? (
                   <Tooltip
                     float={isDesktop()}
                     id="emailTooltip"
@@ -219,12 +233,12 @@ const Members = ({
           <LinkRow
             key="general-link"
             link={primaryLink}
-            isPrimaryLink
             isShareLink
             roomId={infoPanelSelection!.id}
             isPublicRoomType={isPublicRoom!}
             isFormRoom={isFormRoom!}
             isCustomRoom={isCustomRoom!}
+            item={infoPanelSelection}
           />,
         );
       }
@@ -240,6 +254,7 @@ const Members = ({
               isPublicRoomType={isPublicRoom!}
               isFormRoom={isFormRoom!}
               isCustomRoom={isCustomRoom!}
+              item={infoPanelSelection}
             />,
           );
         });
@@ -311,7 +326,7 @@ const Members = ({
 
     const showPublicRoomBar =
       ((primaryLink && !isArchiveFolder) || isPublicRoom) &&
-      infoPanelSelection.security.EditAccess &&
+      infoPanelSelection?.security?.EditAccess &&
       !searchValue &&
       !isTemplate;
 
@@ -448,11 +463,8 @@ export default inject(
       publicRoomStore;
 
     const { isArchiveFolderRoot } = treeFoldersStore;
-    const {
-      setLinkParams,
-      setEditLinkPanelIsVisible,
-      setTemplateAccessSettingsVisible: setAccessSettingsIsVisible,
-    } = dialogsStore;
+    const { setTemplateAccessSettingsVisible: setAccessSettingsIsVisible } =
+      dialogsStore;
 
     const { id } = selectedFolderStore;
 
@@ -479,8 +491,6 @@ export default inject(
       isArchiveFolder: isArchiveFolderRoot,
       isPublicRoom,
       additionalLinks,
-      setLinkParams,
-      setEditLinkPanelIsVisible,
       getPrimaryLink: filesStore.getPrimaryLink,
       setExternalLink,
 

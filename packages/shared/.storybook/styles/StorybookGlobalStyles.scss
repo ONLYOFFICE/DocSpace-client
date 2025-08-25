@@ -1,0 +1,12 @@
+.sbdocs-content {
+  direction: ltr;
+}
+
+.sbdocs-content .docs-story {
+  direction: var(--interface-direction);
+}
+
+#storybook-root {
+  direction: var(--interface-direction);
+}
+

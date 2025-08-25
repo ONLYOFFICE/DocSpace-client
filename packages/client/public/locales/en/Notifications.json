@@ -4,7 +4,6 @@
   "DailyFeed": "Daily {{productName}} feed",
   "DailyFeedDescription": "Read news and events from your {{productName}} in a daily digest.",
   "FileActivityNotify": "Actions with files in {{sectionName}}",
-  "ManageNotifications": "Manage",
   "Notifications": "Notifications",
   "RoomsActivityDescription": "Hourly notifications. Stay updated about all activity in your rooms.",
   "RoomUpdateNotify": "{{sectionName}} activity",

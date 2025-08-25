@@ -221,7 +221,7 @@ const TfaActivationForm = ({ secretKey, qrCode }: TfaActivationFormProps) => {
                   secretKey,
                 }}
                 components={{
-                  1: <strong />,
+                  1: <strong key="secret-key-strong" />,
                 }}
               />
             </div>

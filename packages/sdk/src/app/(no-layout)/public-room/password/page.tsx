@@ -38,7 +38,7 @@ export default async function PublicRoomPasswordPage() {
   logger.info("Public-room password page");
 
   const hdrs = await headers();
-  const roomTitle = hdrs.get(PUBLIC_ROOM_TITLE_HEADER);
+  const validation = JSON.parse(hdrs.get(PUBLIC_ROOM_TITLE_HEADER) || "{}");
 
   return (
     <div className={styles.passwordPage}>
@@ -46,7 +46,7 @@ export default async function PublicRoomPasswordPage() {
         <PortalLogo isResizable />
       </div>
       <div className={styles.content}>
-        <PublicRoomPasswordPageClient roomTitle={roomTitle || ""} />
+        <PublicRoomPasswordPageClient validation={validation} />
       </div>
     </div>
   );

@@ -140,7 +140,7 @@ export const PreparationPortal = (props: IPreparationPortal) => {
     <Text className={styles.preparationPortalError}>{`${errorMessage}`}</Text>
   ) : (
     <PreparationPortalProgress
-      text={t("PreparationPortalDescription", {
+      text={t("PreparationPortal:PreparationPortalDescription", {
         productName: t("Common:ProductName"),
       })}
       percent={percent}

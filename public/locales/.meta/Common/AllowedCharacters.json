@@ -3,7 +3,7 @@
   "content": "Allowed characters",
   "content_en_sha1_hash": "ac77db038821c031371dfa5b23843ccca5ae915f",
   "created_at": "2025-05-19T21:30:42.982Z",
-  "updated_at": "2025-08-11T09:02:43.887Z",
+  "updated_at": "2025-08-21T11:22:39.828Z",
   "comment": {
     "text": "This translation key is used to display a tooltip explaining password complexity requirements. It appears as part of a form or input field and provides users with information about allowed characters in their password, helping them understand the security guidelines.",
     "is_auto": true,
@@ -18,19 +18,19 @@
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/Activation/page.client.tsx",
-      "line_number": 279,
+      "line_number": 284,
       "context": "tooltipPasswordCapital={`${t(\"Common:PasswordLimitUpperCase\")}`}\n tooltipPasswordSpecial={`${t(\n \"Common:PasswordLimitSpecialSymbols\",\n )}`}\n generatePasswordTitle={t(\"Common:GeneratePassword\")}\n tooltipAllowedCharacters={`${t(\"Common:AllowedCharacters\")}: ${ALLOWED_PASSWORD_CHARACTERS}`}\n // If need copy credentials use t(\"EmailAndPasswordCopiedToClipboard\")\n />\n </FieldContainer>\n \n <Button",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/PasswordChange/page.client.tsx",
-      "line_number": 169,
+      "line_number": 170,
       "context": "tooltipPasswordCapital={`${t(\"Common:PasswordLimitUpperCase\")}`}\n tooltipPasswordSpecial={`${t(\n \"Common:PasswordLimitSpecialSymbols\",\n )}`}\n generatePasswordTitle={t(\"Common:GeneratePassword\")}\n tooltipAllowedCharacters={`${t(\"Common:AllowedCharacters\")}: ${ALLOWED_PASSWORD_CHARACTERS}`}\n isAutoFocussed\n />\n </FieldContainer>\n </div>",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/_sub-components/RegistrationForm.tsx",
-      "line_number": 259,
+      "line_number": 266,
       "context": ")}: ${passwordSettings ? passwordSettings.minLength : 8}`}\n tooltipPasswordDigits={`${t(\"Common:PasswordLimitDigits\")}`}\n tooltipPasswordCapital={`${t(\"Common:PasswordLimitUpperCase\")}`}\n tooltipPasswordSpecial={`${t(\"Common:PasswordLimitSpecialSymbols\")}`}\n generatePasswordTitle={t(\"Common:GeneratePassword\")}\n tooltipAllowedCharacters={`${t(\"Common:AllowedCharacters\")}: ${ALLOWED_PASSWORD_CHARACTERS}`}\n />\n </FieldContainer>\n \n {!isStandalone ? (\n <div className=\"news-subscription\">",
       "module": "/packages/login"
     }

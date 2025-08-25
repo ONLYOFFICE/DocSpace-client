@@ -149,6 +149,11 @@ const Styled = styled.div`
 const FileTile = ({ item, smallPreview, onClickInfo, onClick }) => {
   const previewSrc = item?.attributes.card_prewiew.data?.attributes.url;
 
+  const handleInfoClick = (e) => {
+    e.stopPropagation();
+    onClickInfo?.(e);
+  };
+
   return (
     <Styled smallPreview={smallPreview} onClick={onClick}>
       <div className="thumbnail-container">
@@ -165,7 +170,7 @@ const FileTile = ({ item, smallPreview, onClickInfo, onClick }) => {
         </div>
       </div>
 
-      <div className="info-icon" onClick={onClickInfo}>
+      <div className="info-icon" onClick={handleInfoClick}>
         <ReactSVG src={InfoReactSvgUrl} className="icon" />
       </div>
     </Styled>

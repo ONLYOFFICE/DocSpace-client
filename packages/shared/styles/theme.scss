@@ -2583,6 +2583,7 @@
   --channel-body-color-active-opacity: 0.1;
   --channel-type-color: #{$gray};
   --channel-icon-email-color: #{$light-gray-dark};
+  --channel-error-color: #{$light-error-status};
 }
 
 .dark {
@@ -2592,6 +2593,7 @@
   --channel-body-color-active-opacity: 1;
   --channel-type-color: #{$gray-dark};
   --channel-icon-email-color: #{$dark-gray-dark};
+  --channel-error-color: #{$dark-error-status};
 }
 
 .light {

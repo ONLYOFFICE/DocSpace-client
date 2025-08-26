@@ -48,6 +48,7 @@ import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 import OAuthStore from "SRC_DIR/store/OAuthStore";
 import SettingsSetupStore from "SRC_DIR/store/SettingsSetupStore";
+import TelegramStore from "SRC_DIR/store/TelegramStore";
 
 export type UseProfileBodyProps = {
   isFirstSubscriptionsLoad?: boolean;
@@ -65,6 +66,7 @@ export type UseProfileBodyProps = {
   getSessions: SettingsSetupStore["getSessions"];
   setIsProfileLoaded: ClientLoadingStore["setIsProfileLoaded"];
   setIsSectionHeaderLoading: ClientLoadingStore["setIsSectionHeaderLoading"];
+  checkTg: TelegramStore["checkTg"];
 };
 
 const useProfileBody = ({
@@ -82,6 +84,7 @@ const useProfileBody = ({
   setIsProfileLoaded,
   setIsSectionHeaderLoading,
   getTfaType,
+  checkTg,
 }: UseProfileBodyProps) => {
   const tfaOn = tfaSettings && tfaSettings !== "none";
 
@@ -116,6 +119,7 @@ const useProfileBody = ({
       );
 
       setNotificationChannels(channels);
+      checkTg?.();
     } catch (e) {
       toastr.error(e as string);
     }

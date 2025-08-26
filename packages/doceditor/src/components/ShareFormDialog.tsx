@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
 import { useTranslation } from "react-i18next";
-import moment from "moment";
 
 import FormDataCollectionIcon from "PUBLIC_DIR/images/icons/32/form.data.collection.svg";
 import RoleBasedFillingIcon from "PUBLIC_DIR/images/icons/32/role.based.filling.svg";
@@ -36,15 +35,14 @@ import { ShareFormDialog as ShareFormDialogComponent } from "@docspace/shared/di
 import type { TFile, TFilesSettings } from "@docspace/shared/api/files/types";
 import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 
-import { StartFillingSelectorDialogProps } from "@/types";
-import {
-  addExternalLink,
-  editExternalLink,
-  getExternalLinks,
-} from "@docspace/shared/api/files";
-import { copyDocumentShareLink } from "@docspace/shared/components/share/Share.helpers";
+import { addExternalLink, getExternalLinks } from "@docspace/shared/api/files";
+import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
 import { toastr } from "@docspace/shared/components/toast";
 import { Nullable, TResolver } from "@docspace/shared/types";
+import { ShareLinkService } from "@docspace/shared/services/share-link.service";
+
+import { StartFillingSelectorDialogProps } from "@/types";
+
 import StartFillingSelectorDialog from "./StartFillingSelectDialog";
 
 type SubmitFn = StartFillingSelectorDialogProps["onSubmit"];
@@ -106,7 +104,8 @@ const ShareFormDialog = ({
           false,
           false,
         );
-        return copyDocumentShareLink(link, t);
+        copyShareLink(file, link, t);
+        return;
       }
 
       if (res.items.length >= 1) {
@@ -122,19 +121,20 @@ const ShareFormDialog = ({
             });
           });
 
-          const updatedLink = await editExternalLink(
-            file.id,
-            link.sharedTo.id,
-            ShareAccessRights.FormFilling,
-            false,
-            false,
-            moment(null),
-          );
+          const updatedLink = await ShareLinkService.editLink(file, {
+            ...link,
+            access: ShareAccessRights.FormFilling,
+            sharedTo: {
+              ...link.sharedTo,
+              expirationDate: null,
+            },
+          });
 
-          return copyDocumentShareLink(updatedLink, t);
+          copyShareLink(file, updatedLink, t);
+          return;
         }
 
-        return copyDocumentShareLink(link, t);
+        copyShareLink(file, link, t);
       }
     } catch (error) {
       if (error === "canceled") {

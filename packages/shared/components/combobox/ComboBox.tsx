@@ -29,6 +29,8 @@ import equal from "fast-deep-equal/react";
 import { isMobileOnly, isMobile, isTablet } from "react-device-detect";
 import classNames from "classnames";
 
+import EmptyIcon from "PUBLIC_DIR/images/empty.svg?url";
+
 import { DropDown } from "../drop-down";
 import { DropDownItem } from "../drop-down-item";
 
@@ -409,7 +411,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
 
   const imageProps = useImageIcon
     ? {
-        imageIcon: selectedOption.icon,
+        imageIcon: EmptyIcon,
         imageAlt: selectedOption.label
           ? selectedOption.label
           : (selectedOption.key as string),

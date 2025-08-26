@@ -63,7 +63,7 @@ const TagPure = ({
   isDefaultMode = true,
   directionY,
   fixedDirection,
-  manualY,
+  manualY = "4px",
   manualX,
 }: TagProps) => {
   const [openDropdown, setOpenDropdown] = React.useState(false);

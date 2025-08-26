@@ -219,7 +219,7 @@ export const useMembers = ({
         }),
     ];
 
-    abortController.current = null;
+    // abortController.current = null;
 
     if (
       isPublicRoomType &&
@@ -230,9 +230,13 @@ export const useMembers = ({
     ) {
       requests.push(
         api.rooms
-          .getRoomMembers(roomId, {
-            filterType: 2,
-          })
+          .getRoomMembers(
+            roomId,
+            {
+              filterType: 2,
+            },
+            abortController.current?.signal,
+          )
           .then((res) => {
             return res.items;
           }),

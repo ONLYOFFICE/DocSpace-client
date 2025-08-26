@@ -29,8 +29,8 @@ importers:
         specifier: 6.1.0
         version: 6.1.0(typescript@5.6.3)
       nx:
-        specifier: 21.2.0
-        version: 21.2.0
+        specifier: 21.4.0
+        version: 21.4.0
       react:
         specifier: 19.1.0
         version: 19.1.0
@@ -447,8 +447,8 @@ importers:
         specifier: workspace:*
         version: link:../shared
       '@onlyoffice/document-editor-react':
-        specifier: file:./onlyoffice-document-editor-react-1.6.2.tgz
-        version: file:packages/doceditor/onlyoffice-document-editor-react-1.6.2.tgz(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        specifier: file:./onlyoffice-document-editor-react-2.1.1.tgz
+        version: file:packages/doceditor/onlyoffice-document-editor-react-2.1.1.tgz(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       classnames:
         specifier: 2.5.1
         version: 2.5.1
@@ -2892,6 +2892,10 @@ packages:
       node-notifier:
         optional: true
 
+  '@jest/diff-sequences@30.0.1':
+    resolution: {integrity: sha512-n5H8QLDJ47QqbCNn5SuFjCRDrOLEZ0h8vAHCK5RL9Ls7Xa8AQLa/YxAc9UjFqoEDM48muwtBGjtMY5cr0PLDCw==}
+    engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
+
   '@jest/environment@29.7.0':
     resolution: {integrity: sha512-aQIfHDq33ExsN4jP1NWGXhxgQ/wixs60gDiKO+XVMd8Mn0NWPWgc34ZQDTb2jKaUWQ7MuwoitXAsN2XVXNMpAw==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
@@ -2907,6 +2911,10 @@ packages:
   '@jest/fake-timers@29.7.0':
     resolution: {integrity: sha512-q4DH1Ha4TTFPdxLsqDXK1d3+ioSL7yL5oCMJZgDYm6i+6CygW5E5xVr/D1HdsGxjt1ZWSfUAs9OxSB/BNelWrQ==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
+
+  '@jest/get-type@30.0.1':
+    resolution: {integrity: sha512-AyYdemXCptSRFirI5EPazNxyPwAL0jXt3zceFjaj8NFiKP9pOi0bfXonf6qkf82z2t3QWPeLCWWw4stPBzctLw==}
+    engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
 
   '@jest/globals@29.7.0':
     resolution: {integrity: sha512-mpiz3dutLbkW2MNFubUGUEVLkTGiqW6yLVTA+JbP6fI6J5iL9Y0Nlg8k95pcF8ctKwCS7WVxteBs29hhfAotzQ==}
@@ -3116,53 +3124,53 @@ packages:
     resolution: {integrity: sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==}
     engines: {node: '>=12.4.0'}
 
-  '@nx/nx-darwin-arm64@21.2.0':
-    resolution: {integrity: sha512-vfGvQ9IKinXo785jB1gTa9pAFRfxkZGeK/4P5hQNxYNLyROGu9caujrseXTLjZvF1hDuStvnUfoaBlcfhP36hQ==}
+  '@nx/nx-darwin-arm64@21.4.0':
+    resolution: {integrity: sha512-GDa/zycRzRA3jaaHNOBJGKoUFyylcWIv8ANf0OSdj4D92coSn8W1I2F95k9HSoACY4nLLp6hh9F9dLAaCw0GjQ==}
     cpu: [arm64]
     os: [darwin]
 
-  '@nx/nx-darwin-x64@21.2.0':
-    resolution: {integrity: sha512-+EMFxQzZshXbKXF1AexSnutroF1+Fs2W84DdfukHL0Q/hT00CZTKS4wgVAkMEO5dfRKpSB/fs8owRkSbE8R9vQ==}
+  '@nx/nx-darwin-x64@21.4.0':
+    resolution: {integrity: sha512-MNE5Dr7E2eckapk9P/kMtBYZsUmPlnhAYphGTqn3cE8kbe4DdoNB+QPkXK13IgYq3isSyRu5GLyPPxgqz+E2iw==}
     cpu: [x64]
     os: [darwin]
 
-  '@nx/nx-freebsd-x64@21.2.0':
-    resolution: {integrity: sha512-wKTSZI9jb7lEjc8x60h10XCm5NExbXpz0vRjLEt8x8y5NXvDYCgHCRpAU4jPQRS3PIm2fBqa+5umc8qskQu7CQ==}
+  '@nx/nx-freebsd-x64@21.4.0':
+    resolution: {integrity: sha512-2cMcAEqFsBXU8PoL0X7HWSoOhYchOcQ9pQ3W+TJ/r7FV9uwavwKQxzNXfK95Bx33T6D4AY0/vCAeOpaqFFrt0A==}
     cpu: [x64]
     os: [freebsd]
 
-  '@nx/nx-linux-arm-gnueabihf@21.2.0':
-    resolution: {integrity: sha512-6/Uoun4plMesFCrmjtaY5Ye2YvYqNZVkucZyjBYfJ8D5mF967I8Vpt0hDyDVfXxT0zx9YQGeUb33UgOktVL+xg==}
+  '@nx/nx-linux-arm-gnueabihf@21.4.0':
+    resolution: {integrity: sha512-zoc7hBcTS2fmBdbhWCGwlDaTZA7+w/Gb7f6GcAUl4NOx1gT99nuFrQ8XtrmTkIq/YzOhVok/4K82O3CHV7N4qw==}
     cpu: [arm]
     os: [linux]
 
-  '@nx/nx-linux-arm64-gnu@21.2.0':
-    resolution: {integrity: sha512-0U2Q760B0pf9dQBGK3qes25jm1SwqGZ4bCgrdfccWpkka+Z+wWyIga55fAh3KIJQr5Cdw6QgsPKra6HbIFbpfQ==}
+  '@nx/nx-linux-arm64-gnu@21.4.0':
+    resolution: {integrity: sha512-IgHuZyPoAXFYKodjpgb47Dtec6eg1FKKWyZyybn4RvPfp42DlofMASNjUZtjDOilK0vq5FWNOu0C8F3jeGSjqA==}
     cpu: [arm64]
     os: [linux]
 
-  '@nx/nx-linux-arm64-musl@21.2.0':
-    resolution: {integrity: sha512-lM5GEliTA8TH8l64v1zq3sfsSOsODy+KdBLkcis0mNsuCop1kv/CxyuE0X3PwCGAGFchzDNj7mDprRR4FLfWoA==}
+  '@nx/nx-linux-arm64-musl@21.4.0':
+    resolution: {integrity: sha512-Q4RE4rXiH0n+KO71l2V6b5U8sVX24p+81BK0Hi93HgR7WSSMtikTZ3RO8JO3zCIRSJxbjyS8xNiw7F2W3OzmPQ==}
     cpu: [arm64]
     os: [linux]
 
-  '@nx/nx-linux-x64-gnu@21.2.0':
-    resolution: {integrity: sha512-5KoTe9Kv9elMWPvlWI4cXLXYmFjnD2asQIMgR4eSuWi09CqX9ua4mIyKC5sPjgy9VxWUhaKx+fZydp+akWh37w==}
+  '@nx/nx-linux-x64-gnu@21.4.0':
+    resolution: {integrity: sha512-xdKpl0SI+ILqzwd2TAuSH6tA5WHoYRhdbBO3J8NvLga/3b8NxdEN/vLb2FzfsWMu81O0IOJ6pMxGE7N6zps9sg==}
     cpu: [x64]
     os: [linux]
 
-  '@nx/nx-linux-x64-musl@21.2.0':
-    resolution: {integrity: sha512-UbFzIU331vEEprCeKN01k+9Sn1y9pQO32/6yV4eLvK/FdrvzJahu0Dn+IinvCqdIAMiUvIdkBtcKirQby+Pc2Q==}
+  '@nx/nx-linux-x64-musl@21.4.0':
+    resolution: {integrity: sha512-p0Enow79yrdvF3djXohQx8fxp86f8LpQxD0ec4Y0VGT+3xQWSVsnehhiYkPQp3doEj2u/rBJjop6ITfE/Z09Sw==}
     cpu: [x64]
     os: [linux]
 
-  '@nx/nx-win32-arm64-msvc@21.2.0':
-    resolution: {integrity: sha512-mKqED/y9hD4qTPSeBTc3uZHQozm0XtqnnnrZui4BdXJOMvS3llCiCxmZF2E5N6GZl5L5sb6nNkjhzJDbAfs3TQ==}
+  '@nx/nx-win32-arm64-msvc@21.4.0':
+    resolution: {integrity: sha512-nrl89vb/0k8h04hhakzU57cs/dDl9K8xncKBsKKbIDxgd8gRO/KYzEEU/H+QE/jDB/vavm3Q7uxmUpJ5ysIitw==}
     cpu: [arm64]
     os: [win32]
 
-  '@nx/nx-win32-x64-msvc@21.2.0':
-    resolution: {integrity: sha512-UWc5C16yT99ntbHv5a3mlXuRNuPnmPtZ/q9UdRHWbfXbtlf5CBLOH7MrP6bbpNCsRdwsCpGCqAu8XO1QRBjeMw==}
+  '@nx/nx-win32-x64-msvc@21.4.0':
+    resolution: {integrity: sha512-LaPLZjFy59+oIgZm0zSlhcMI8ZICAxEvm0A9VUexxeIj/Od6jmW9BV1tmIpQ0x1G8tN6sFGBt8hBxHNeLFfh1w==}
     cpu: [x64]
     os: [win32]
 
@@ -3170,9 +3178,9 @@ packages:
     resolution: {integrity: sha512-Oqppiv0+1+81fkKCOLAoBcjN80TEJGb+a5GoOBKalkxgy4I4KSqPRiKuOnN+vSGn2nHNyO5787MGXoulLQqBNg==}
     engines: {node: '>=22', pnpm: '>=9'}
 
-  '@onlyoffice/document-editor-react@file:packages/doceditor/onlyoffice-document-editor-react-1.6.2.tgz':
-    resolution: {integrity: sha512-95RC1j6utxY2wiMLtwIdZrWM4E77ZTQK0XRtHApKIi/5SGlfrrsk69wA5eJT+VeUgxmCQtCRRUeXJBzAP+HD6Q==, tarball: file:packages/doceditor/onlyoffice-document-editor-react-1.6.2.tgz}
-    version: 1.6.2
+  '@onlyoffice/document-editor-react@file:packages/doceditor/onlyoffice-document-editor-react-2.1.1.tgz':
+    resolution: {integrity: sha512-jKCmFpp6qTRhZTdc8xaYSBg9A5eHMKKJDensDSvIlrfLOflxt1Fc536fPq5c8NciAFqB1pRp4EjwpRLrph1aBQ==, tarball: file:packages/doceditor/onlyoffice-document-editor-react-2.1.1.tgz}
+    version: 2.1.1
     peerDependencies:
       react: ^16.9.0 || ^17 || ^18 || ^19
       react-dom: ^16.9.0 || ^17 || ^18 || ^19
@@ -7223,6 +7231,10 @@ packages:
     resolution: {integrity: sha512-LMIgiIrhigmPrs03JHpxUh2yISK3vLFPkAodPeo0+BuF7wA2FoQbkEg1u8gBYBThncu7e1oEDUfIXVuTqLRUjw==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
 
+  jest-diff@30.0.5:
+    resolution: {integrity: sha512-1UIqE9PoEKaHcIKvq2vbibrCog4Y8G0zmOxgQUVEiTqwR5hJVMCoDsN1vFvI5JvwD37hjueZ1C4l2FyGnfpE0A==}
+    engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
+
   jest-docblock@29.7.0:
     resolution: {integrity: sha512-q617Auw3A612guyaFgsbFeYpNP5t2aoUNLwBUbc/0kD1R4t9ixDbyFTHd1nok4epoVFpr7PmeWHrhvuV3XaJ4g==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
@@ -8257,8 +8269,8 @@ packages:
   nwsapi@2.2.21:
     resolution: {integrity: sha512-o6nIY3qwiSXl7/LuOU0Dmuctd34Yay0yeuZRLFmDPrrdHpXKFndPj3hM+YEPVHYC5fx2otBx4Ilc/gyYSAUaIA==}
 
-  nx@21.2.0:
-    resolution: {integrity: sha512-64UK6Bt9a2BbeRhKPpfdyHDCtzz5onfjiBtngyqjtkB8FLVXW4OAggG18NIUl354SUcv2xqjlZyTRz7H/mmXdQ==}
+  nx@21.4.0:
+    resolution: {integrity: sha512-BRymw8B8qs24RvqfroUVIRcxvMf1euONpi5+OMqvjZOSy5LTFTggrLwEg6GYIb1lj5kO53TTnZ/Wxj0m8tPKxQ==}
     hasBin: true
     peerDependencies:
       '@swc-node/register': ^1.8.0
@@ -12457,6 +12469,8 @@ snapshots:
       - supports-color
       - ts-node
 
+  '@jest/diff-sequences@30.0.1': {}
+
   '@jest/environment@29.7.0':
     dependencies:
       '@jest/fake-timers': 29.7.0
@@ -12483,6 +12497,8 @@ snapshots:
       jest-message-util: 29.7.0
       jest-mock: 29.7.0
       jest-util: 29.7.0
+
+  '@jest/get-type@30.0.1': {}
 
   '@jest/globals@29.7.0':
     dependencies:
@@ -12783,41 +12799,41 @@ snapshots:
 
   '@nolyfill/is-core-module@1.0.39': {}
 
-  '@nx/nx-darwin-arm64@21.2.0':
+  '@nx/nx-darwin-arm64@21.4.0':
     optional: true
 
-  '@nx/nx-darwin-x64@21.2.0':
+  '@nx/nx-darwin-x64@21.4.0':
     optional: true
 
-  '@nx/nx-freebsd-x64@21.2.0':
+  '@nx/nx-freebsd-x64@21.4.0':
     optional: true
 
-  '@nx/nx-linux-arm-gnueabihf@21.2.0':
+  '@nx/nx-linux-arm-gnueabihf@21.4.0':
     optional: true
 
-  '@nx/nx-linux-arm64-gnu@21.2.0':
+  '@nx/nx-linux-arm64-gnu@21.4.0':
     optional: true
 
-  '@nx/nx-linux-arm64-musl@21.2.0':
+  '@nx/nx-linux-arm64-musl@21.4.0':
     optional: true
 
-  '@nx/nx-linux-x64-gnu@21.2.0':
+  '@nx/nx-linux-x64-gnu@21.4.0':
     optional: true
 
-  '@nx/nx-linux-x64-musl@21.2.0':
+  '@nx/nx-linux-x64-musl@21.4.0':
     optional: true
 
-  '@nx/nx-win32-arm64-msvc@21.2.0':
+  '@nx/nx-win32-arm64-msvc@21.4.0':
     optional: true
 
-  '@nx/nx-win32-x64-msvc@21.2.0':
+  '@nx/nx-win32-x64-msvc@21.4.0':
     optional: true
 
   '@onlyoffice/docspace-sdk-js@2.0.0':
     dependencies:
       pnpm: 9.15.4
 
-  '@onlyoffice/document-editor-react@file:packages/doceditor/onlyoffice-document-editor-react-1.6.2.tgz(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+  '@onlyoffice/document-editor-react@file:packages/doceditor/onlyoffice-document-editor-react-2.1.1.tgz(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
       lodash: 4.17.21
       react: 19.1.0
@@ -16214,7 +16230,7 @@ snapshots:
       '@typescript-eslint/parser': 7.1.0(eslint@8.57.1)(typescript@5.6.3)
       eslint: 8.57.1
       eslint-import-resolver-node: 0.3.9
-      eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.31.0)(eslint@8.57.1)
+      eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.31.0(@typescript-eslint/parser@7.1.0(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1))(eslint@8.57.1)
       eslint-plugin-import: 2.31.0(@typescript-eslint/parser@7.1.0(eslint@8.57.1)(typescript@5.6.3))(eslint-import-resolver-typescript@3.10.1)(eslint@8.57.1)
       eslint-plugin-jsx-a11y: 6.10.0(eslint@8.57.1)
       eslint-plugin-react: 7.37.1(eslint@8.57.1)
@@ -16238,7 +16254,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.31.0)(eslint@8.57.1):
+  eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.31.0(@typescript-eslint/parser@7.1.0(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1))(eslint@8.57.1):
     dependencies:
       '@nolyfill/is-core-module': 1.0.39
       debug: 4.4.1(supports-color@5.5.0)
@@ -16285,14 +16301,14 @@ snapshots:
       terminal-link: 3.0.0
       yargs: 17.7.2
 
-  eslint-module-utils@2.12.1(@typescript-eslint/parser@7.1.0(eslint@8.57.1)(typescript@5.6.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1)(eslint@8.57.1):
+  eslint-module-utils@2.12.1(@typescript-eslint/parser@7.1.0(eslint@8.57.1)(typescript@5.6.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.31.0(@typescript-eslint/parser@7.1.0(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1))(eslint@8.57.1))(eslint@8.57.1):
     dependencies:
       debug: 3.2.7
     optionalDependencies:
       '@typescript-eslint/parser': 7.1.0(eslint@8.57.1)(typescript@5.6.3)
       eslint: 8.57.1
       eslint-import-resolver-node: 0.3.9
-      eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.31.0)(eslint@8.57.1)
+      eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.31.0(@typescript-eslint/parser@7.1.0(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1))(eslint@8.57.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -16318,7 +16334,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 8.57.1
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.12.1(@typescript-eslint/parser@7.1.0(eslint@8.57.1)(typescript@5.6.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1)(eslint@8.57.1)
+      eslint-module-utils: 2.12.1(@typescript-eslint/parser@7.1.0(eslint@8.57.1)(typescript@5.6.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.31.0(@typescript-eslint/parser@7.1.0(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1))(eslint@8.57.1))(eslint@8.57.1)
       hasown: 2.0.2
       is-core-module: 2.16.1
       is-glob: 4.0.3
@@ -17697,6 +17713,13 @@ snapshots:
       diff-sequences: 29.6.3
       jest-get-type: 29.6.3
       pretty-format: 29.7.0
+
+  jest-diff@30.0.5:
+    dependencies:
+      '@jest/diff-sequences': 30.0.1
+      '@jest/get-type': 30.0.1
+      chalk: 4.1.2
+      pretty-format: 30.0.5
 
   jest-docblock@29.7.0:
     dependencies:
@@ -19169,7 +19192,7 @@ snapshots:
 
   nwsapi@2.2.21: {}
 
-  nx@21.2.0:
+  nx@21.4.0:
     dependencies:
       '@napi-rs/wasm-runtime': 0.2.4
       '@yarnpkg/lockfile': 1.1.0
@@ -19187,7 +19210,7 @@ snapshots:
       flat: 5.0.2
       front-matter: 4.0.2
       ignore: 5.3.2
-      jest-diff: 29.7.0
+      jest-diff: 30.0.5
       jsonc-parser: 3.2.0
       lines-and-columns: 2.0.3
       minimatch: 9.0.3
@@ -19207,16 +19230,16 @@ snapshots:
       yargs: 17.7.2
       yargs-parser: 21.1.1
     optionalDependencies:
-      '@nx/nx-darwin-arm64': 21.2.0
-      '@nx/nx-darwin-x64': 21.2.0
-      '@nx/nx-freebsd-x64': 21.2.0
-      '@nx/nx-linux-arm-gnueabihf': 21.2.0
-      '@nx/nx-linux-arm64-gnu': 21.2.0
-      '@nx/nx-linux-arm64-musl': 21.2.0
-      '@nx/nx-linux-x64-gnu': 21.2.0
-      '@nx/nx-linux-x64-musl': 21.2.0
-      '@nx/nx-win32-arm64-msvc': 21.2.0
-      '@nx/nx-win32-x64-msvc': 21.2.0
+      '@nx/nx-darwin-arm64': 21.4.0
+      '@nx/nx-darwin-x64': 21.4.0
+      '@nx/nx-freebsd-x64': 21.4.0
+      '@nx/nx-linux-arm-gnueabihf': 21.4.0
+      '@nx/nx-linux-arm64-gnu': 21.4.0
+      '@nx/nx-linux-arm64-musl': 21.4.0
+      '@nx/nx-linux-x64-gnu': 21.4.0
+      '@nx/nx-linux-x64-musl': 21.4.0
+      '@nx/nx-win32-arm64-msvc': 21.4.0
+      '@nx/nx-win32-x64-msvc': 21.4.0
     transitivePeerDependencies:
       - debug
 
@@ -19340,7 +19363,7 @@ snapshots:
       bl: 4.1.0
       chalk: 4.1.2
       cli-cursor: 3.1.0
-      cli-spinners: 2.6.1
+      cli-spinners: 2.9.2
       is-interactive: 1.0.0
       log-symbols: 4.1.0
       strip-ansi: 6.0.1

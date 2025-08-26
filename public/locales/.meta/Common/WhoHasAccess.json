@@ -1,0 +1,28 @@
+{
+  "key_path": "WhoHasAccess",
+  "content": "Who has access",
+  "content_en_sha1_hash": "b82540c6a77efe28089091e2a93027edf47bac9e",
+  "created_at": "2025-08-26T11:15:03.431Z",
+  "updated_at": "2025-08-26T11:15:45.438Z",
+  "comment": {
+    "text": "This key displays the text \"Who has access\" as a label within an access selector block, likely in a dialog or panel where users manage link permissions. It's used to clearly indicate what the following options pertain to – the individuals or groups who currently have access.",
+    "is_auto": true,
+    "updated_at": "2025-08-26T11:15:45.438Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/dialogs/EditLinkPanel/AccessSelectorBlock/AccessSelectorBlock.tsx",
+      "line_number": 47,
+      "context": "const { t } = useTranslation(\"Common\");\n \n return (\n <div className={styles.accessSelectorBlock}>\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"Common:WhoHasAccess\")}\n </Text>\n <ComboBox\n options={options}\n selectedOption={selectedOption}\n scaledOptions",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

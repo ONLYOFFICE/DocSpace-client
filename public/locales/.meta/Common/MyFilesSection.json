@@ -3,7 +3,7 @@
   "content": "Documents",
   "content_en_sha1_hash": "687c82861c956e47456186f6522cfc8dbadb8ef6",
   "created_at": "2025-05-19T21:30:46.695Z",
-  "updated_at": "2025-08-21T14:45:43.853Z",
+  "updated_at": "2025-08-26T11:15:14.051Z",
   "comment": {
     "text": "This translation key is used to display the text \"Documents\" in a button within a file management component. It appears as part of a link that navigates to a personal section of documents, and its purpose is to provide a clear label for users.",
     "is_auto": true,
@@ -162,7 +162,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1469,
+      "line_number": 1456,
       "context": "},\n {\n id: \"header_option_empty-section\",\n key: \"empty-section\",\n label: t(\"Files:EmptySection\", {\n sectionName: t(\"Common:MyFilesSection\"),\n }),\n onClick: this.onEmptyPersonalAction,\n icon: ClearTrashReactSvgUrl,\n disabled: false,\n },",
       "module": "/packages/client"
     },
@@ -186,7 +186,7 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 397,
+      "line_number": 483,
       "context": "\"backup-description module-documents\",\n { [styles.disabled]: additionalDisabled },\n )}\n >\n {t(\"Common:RoomsModuleDescription\", {\n roomName: t(\"Common:MyFilesSection\"),\n })}\n </Text>\n {isCheckedDocuments ? (\n <RoomsModule\n newPath={newPath}",
       "module": "/packages/shared"
     },

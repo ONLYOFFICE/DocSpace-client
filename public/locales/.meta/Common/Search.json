@@ -3,7 +3,7 @@
   "content": "Search",
   "content_en_sha1_hash": "bce06414177f72ab70e6387b6af9f8ceef0d6049",
   "created_at": "2025-05-19T21:30:48.328Z",
-  "updated_at": "2025-08-21T11:22:39.841Z",
+  "updated_at": "2025-08-26T11:15:14.129Z",
   "comment": {
     "text": "This translation key is used to display the label \"Search\" in various UI elements. It appears on a search input field and an icon button, inviting users to find specific items or content. The text should be translated as \"Search\" in English.",
     "is_auto": true,
@@ -60,7 +60,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector.js",
-      "line_number": 263,
+      "line_number": 266,
       "context": "<ControlsSection>\n <Label className=\"label\">{t(\"InterfaceElements\")}</Label>\n <Checkbox\n className=\"checkbox\"\n label={t(\"Common:Search\")}\n onChange={toggleWithSearch}\n isChecked={config.withSearch}\n dataTestId=\"search_checkbox\"\n />\n <SelectTextInput t={t} config={config} setConfig={setConfig} />",
       "module": "/packages/client"
     },

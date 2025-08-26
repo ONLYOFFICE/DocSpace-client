@@ -3,7 +3,7 @@
   "content": "Two-factor authentication",
   "content_en_sha1_hash": "edfd617aa53e034bf19dce690f417b00bc824fa9",
   "created_at": "2025-05-19T21:30:53.005Z",
-  "updated_at": "2025-06-18T17:11:42.431Z",
+  "updated_at": "2025-08-11T18:11:59.195Z",
   "comment": {
     "text": "Two-factor authentication is a security feature used to add an extra layer of protection when accessing the portal. This translation key is used as the label for a settings category and button in the portal's security settings, informing users about this security measure.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 205,
+      "line_number": 208,
       "context": "return t(\"CustomTitlesWelcome\");\n case \"ManagementCategorySecurity\":\n return t(\"ManagementCategorySecurity\");\n case \"PortalAccess\":\n return t(\"PortalAccess\", { productName: t(\"Common:ProductName\") });\n case \"TwoFactorAuth\":\n return t(\"TwoFactorAuth\");\n case \"ManagementCategoryIntegration\":\n return t(\"ManagementCategoryIntegration\");\n case \"ThirdPartyAuthorization\":\n return t(\"ThirdPartyAuthorization\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 167,
+      "line_number": 168,
       "context": "</div>\n \n <PasswordStrengthSection {...settingsBeforeInvitationSettingsProps} />\n <StyledSettingsSeparator />\n <Text fontSize=\"16px\" fontWeight=\"700\">\n {t(\"TwoFactorAuth\")}\n </Text>\n \n <div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"TwoFactorAuthEnableDescription\", {",
       "module": "/packages/client"
     },
@@ -30,13 +30,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 175,
+      "line_number": 182,
       "context": "{\n id: \"portal-settings_catalog-two-factor-auth\",\n key: \"1-0-1\",\n icon: \"\",\n link: \"tfa\",\n tKey: \"TwoFactorAuth\",\n },\n {\n id: \"portal-settings_catalog-trusted-mail\",\n key: \"1-0-2\",\n icon: \"\",",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/login-settings/index.js",
-      "line_number": 69,
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/login/login-settings/index.tsx",
+      "line_number": 77,
       "context": "return (\n <StyledWrapper>\n <div className=\"header\">\n <Text fontSize=\"16px\" fontWeight={700} lineHeight=\"22px\">\n {t(\"Settings:TwoFactorAuth\")}\n </Text>\n <Text className=\"description\">{t(\"TwoFactorDescription\")}</Text>\n </div>\n <div className=\"actions\">\n <Button",
       "module": "/packages/client"
     }
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Երկգործոն իսկորոշում\" while attempting to convey 'Two-factor authentication' isn't the standard or most accurate Armenian translation. \"Երկկողմ ապացույց\" (Erkkogm apacuyc') is the more commonly used and widely understood term.",
-          "suggestion": "Երկկողմ ապացույց"
+          "description": "The translation \"Երկգործոն իսկորոշում\" is a literal translation of 'two-factor', but doesn't fully capture the meaning of 'authentication'. A more accurate translation would convey the concept of a security measure requiring two verification factors.",
+          "suggestion": "Մարտահավաքում երկու ֆակտորով (Martahavakum yerk`u faktorov) - 'Authentication with two factors' or Երկկողմ ապացույց (Yerk'kogm apacuyc) - 'Two-way verification'."
         }
       ],
       "approved_at": null
@@ -138,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ການຢືນຢັນ 2 ຊັ້ນ' is a literal translation of 'two-factor authentication' but doesn't fully convey the meaning in a way a Lao speaker would readily understand. While technically accurate, it's not the most natural or easily understood phrasing.",
-          "suggestion": "Consider a more descriptive translation like 'ການยืนຢັນຕົວຕົນສອງວິທີ' (gaan yeun yan dtua ton song wi ti) which translates to 'two-way identity verification' or a phrase that emphasizes security like 'ການຢືນຢັນຄວາມປອດໄພສອງຊັ້ນ' (gaan yeun yan kwaam paud sai song chan) - 'two-layer security verification'."
+          "description": "While \"ການຢືນຢັນ 2 ຊັ້ນ\" is a literal translation, it's not the most natural or commonly understood way to express 'two-factor authentication' in Lao. It can sound clunky.",
+          "suggestion": "Consider a more idiomatic translation, such as \"ການยืนຢັນຕົວຕົນສອງສາຍ\" or \"ລະບົບຢັ້ງຢືນຕົວຕົນສອງສາຍ\" (the latter being more formal and precise, incorporating 'system').  The best choice depends on the overall tone and audience of the application."
         }
       ],
       "approved_at": null
@@ -191,9 +191,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The Sinhala translation 'ද්වි සාධක තහවුරුව' contains potential spelling issues. The word 'ද්වි' (dvi) which means 'two' might be more accurately represented or more commonly used in a different form depending on the intended nuance. There is a slight chance the ending '-ුව' (-uwa) is unnecessary or incorrect in this context.",
-          "suggestion": "Consider reviewing the word 'ද්වි' and the ending '-ුව' with a Sinhala language expert to ensure accuracy. Potential alternatives for 'ද්වි' could be explored based on the specific meaning intended (e.g., 'සමීප' (samīpa) for 'double/close')."
+          "type": "incorrect_translation",
+          "description": "The translation 'ද්වි සාධක තහවුරුව' is a literal transliteration and doesn't fully convey the meaning of 'two-factor authentication' in a natural Sinhala way. While technically understandable, it's not the most idiomatic translation.",
+          "suggestion": "A more natural translation would be 'ද්විත්ව ආරක්ෂණ ක්‍රමයක්' (Dwitwa aarakshana kramayak) or 'ද්විත්ව සාධක ආරක්ෂණය' (Dwitwa saadaka aarakshayanaya)."
         }
       ],
       "approved_at": null

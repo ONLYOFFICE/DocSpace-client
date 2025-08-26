@@ -3,7 +3,7 @@
   "content": "Folders moved ({{count}}).",
   "content_en_sha1_hash": "f8c4a3c73824a040d9a4b13d426ba00de13be350",
   "created_at": "2025-05-19T21:30:54.852Z",
-  "updated_at": "2025-06-08T12:02:32.698Z",
+  "updated_at": "2025-08-04T07:30:01.232Z",
   "comment": {
     "text": "This translation key displays a message indicating the number of folders moved, typically used to provide feedback or confirmation after a folder has been relocated. It appears in the UI when navigating history or tracking changes, such as when moving a file between different locations.",
     "is_auto": true,
@@ -11,8 +11,14 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 122,
+      "context": "return t(\"InfoPanel:FolderCreated\");\n case FeedActionKeys.FolderRenamed:\n return t(\"InfoPanel:FolderRenamed\");\n case FeedActionKeys.FolderMoved:\n if (hasRelatedItems)\n return t(\"InfoPanel:FolderMovedCount\", {\n count,\n });\n return t(\"InfoPanel:FolderMoved\");\n case FeedActionKeys.FolderMovedToTrash:\n if (hasRelatedItems)",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 113,
+      "line_number": 116,
       "context": "return t(\"InfoPanel:FolderCreated\");\n case FeedActionKeys.FolderRenamed:\n return t(\"InfoPanel:FolderRenamed\");\n case FeedActionKeys.FolderMoved:\n if (hasRelatedItems)\n return t(\"InfoPanel:FolderMovedCount\", {\n count,\n });\n return t(\"InfoPanel:FolderMoved\");\n case FeedActionKeys.FolderMovedToTrash:\n if (hasRelatedItems)",
       "module": "/packages/client"
     }

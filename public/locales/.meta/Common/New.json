@@ -3,7 +3,7 @@
   "content": "New",
   "content_en_sha1_hash": "6403f2b7eb2aaafe6de34cbf2a029b01afebc512",
   "created_at": "2025-05-19T21:30:46.723Z",
-  "updated_at": "2025-06-08T12:02:32.642Z",
+  "updated_at": "2025-08-21T11:22:39.919Z",
   "comment": {
     "text": "This translation key is used for the text \"New\" in various UI elements to indicate new or updated content. It appears on a badge within a contact tab, and a guest release tip dialog, providing users with context about what's new.",
     "is_auto": true,
@@ -11,33 +11,21 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/GuestReleaseTip/index.tsx",
-      "line_number": 117,
-      "context": "truncate\n className=\"accent-text\"\n >\n {t(\"Common:Guest\")}\n </Text>\n <Badge label={t(\"Common:New\")} noHover />\n </div>\n \n <IconButton\n iconName={CloseSvgUrl}\n size={16}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/Home/Section/Tabs/ContactsTabs/index.tsx",
-      "line_number": 162,
-      "context": "id: \"guests\",\n name: t(\"Common:Guests\"),\n onClick: onGuests,\n content: null,\n badge: !guestsTabVisited ? (\n <Badge label={t(\"Common:New\")} noHover />\n ) : undefined,\n });\n }\n \n return (",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1974,
+      "line_number": 1980,
       "context": "id: \"option_save-as-template\",\n key: \"save-as-template\",\n label: t(\"SaveAsTemplate\"),\n icon: CreateTemplateSvgUrl,\n onClick: () => this.onSaveAsTemplate(item),\n badgeLabel: t(\"Common:New\"),\n disabled: !item.security?.Create || item.providerKey,\n },\n {\n id: \"option_owner-change\",\n key: \"owner-change\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 369,
+      "line_number": 375,
       "context": "{showNew ? (\n <BadgeWrapper onClick={onBadgeClick} isTile={isTile}>\n <Badge\n {...commonBadgeProps}\n className=\"badge-version badge-new-version tablet-badge icons-group\"\n label={t(\"Common:New\")}\n onClick={onBadgeClick}\n />\n </BadgeWrapper>\n ) : null}\n {/* {isForm  && (",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/room-type/index.tsx",
-      "line_number": 94,
-      "context": "<Text noSelect className=\"choose_room-title-text\">\n {t(room.title)}\n </Text>\n {isTemplate ? (\n <Badge\n label={t(\"Common:New\")}\n backgroundColor={globalColors.lightBlueMain}\n fontSize=\"9px\"\n fontWeight={700}\n borderRadius=\"50px\"\n noHover",
+      "line_number": 92,
+      "context": "<div className=\"choose_room-info_wrapper\">\n <div className=\"choose_room-title\">\n <Text className=\"choose_room-title-text\">{t(room.title)}</Text>\n {isTemplate ? (\n <Badge\n label={t(\"Common:New\")}\n backgroundColor={globalColors.lightBlueMain}\n fontSize=\"9px\"\n fontWeight={700}\n borderRadius=\"50px\"\n noHover",
       "module": "/packages/shared"
     }
   ],

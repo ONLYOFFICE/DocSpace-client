@@ -3,7 +3,7 @@
   "content": "Revoke link",
   "content_en_sha1_hash": "60f184b7c84ca59ba034898a93f823c5c9571552",
   "created_at": "2025-05-19T21:30:56.054Z",
-  "updated_at": "2025-05-26T07:57:32.295Z",
+  "updated_at": "2025-08-12T19:46:25.904Z",
   "comment": {
     "text": "\"This translation key is used as a label for a button that allows users to revoke a link, particularly in contexts related to deleting or managing links within files or room settings.\"",
     "is_auto": true,
@@ -12,19 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteLinkDialog/index.js",
-      "line_number": 142,
-      "context": "return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>\n {link.sharedTo.primary && (isPublicRoomType || isFormRoom)\n ? t(\"Files:RevokeLink\")\n : t(\"Files:DeleteLink\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <DeleteLinkDialogContainer className=\"modal-dialog-content-body\">\n <Text lineHeight=\"20px\" noSelect>",
+      "line_number": 156,
+      "context": "return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>\n {link.sharedTo.primary && (isPublicRoomType || isFormRoom)\n ? t(\"Files:RevokeLink\")\n : t(\"Files:DeleteLink\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <DeleteLinkDialogContainer className=\"modal-dialog-content-body\">\n <Text lineHeight=\"20px\">{getDescription()}</Text>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteLinkDialog/index.js",
-      "line_number": 142,
-      "context": "return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>\n {link.sharedTo.primary && (isPublicRoomType || isFormRoom)\n ? t(\"Files:RevokeLink\")\n : t(\"Files:DeleteLink\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <DeleteLinkDialogContainer className=\"modal-dialog-content-body\">\n <Text lineHeight=\"20px\" noSelect>",
+      "line_number": 156,
+      "context": "return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>\n {link.sharedTo.primary && (isPublicRoomType || isFormRoom)\n ? t(\"Files:RevokeLink\")\n : t(\"Files:DeleteLink\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <DeleteLinkDialogContainer className=\"modal-dialog-content-body\">\n <Text lineHeight=\"20px\">{getDescription()}</Text>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/sub-components/LinkRow.tsx",
-      "line_number": 205,
+      "line_number": 180,
       "context": "},\n {\n key: \"delete-link-key\",\n label:\n primary && (isPublicRoomType || isFormRoom)\n ? t(\"Files:RevokeLink\")\n : t(\"Common:Delete\"),\n icon:\n primary && (isPublicRoomType || isFormRoom)\n ? OutlineReactSvgUrl\n : TrashReactSvgUrl,",
       "module": "/packages/client"
     }
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Keçidi ləğv edin\" is technically correct, a more natural and common phrasing for 'Revoke link' in Azerbaijani would be \"Bağlantını silin\" or \"Bağlantını etkinsizləşdirin\". \"Ləğv edin\" implies a more formal or complex cancellation.",
-          "suggestion": "Consider using \"Bağlantını silin\" or \"Bağlantını etkinsizləşdirin\"."
+          "description": "While \"Keçidi ləğv edin\" is a literal translation of \"Revoke link\", it might sound slightly awkward or overly formal in Azerbaijani. A more natural phrasing could be considered.",
+          "suggestion": "Consider alternatives like \"Linki silin\" (Delete the link) or \"Linki etkinsizləşdirin\" (Disable the link)."
         }
       ],
       "approved_at": null
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Опозови линк\" is not the correct translation for \"Revoke link.\" \"Опозови\" means \"to shame\" or \"to disgrace.\" The correct translation should convey the meaning of invalidating or canceling a link.",
-          "suggestion": "Укини линк\" (Ukinni link) - which translates to 'Cancel link' or \"Одузими линк\" (Odzimi link) - which translates to 'Remove link'."
+          "description": "The Serbian translation 'Опозови линк' doesn't accurately convey the meaning of 'Revoke link.' 'Опозови' means 'disgrace' or 'humiliate,' which is not the intended meaning. The correct meaning of 'Revoke' in this context is 'cancel' or 'withdraw.'",
+          "suggestion": "Укини линк"
         }
       ],
       "approved_at": null

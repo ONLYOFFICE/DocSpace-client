@@ -3,7 +3,7 @@
   "content": "Set quota to define storage limit.",
   "content_en_sha1_hash": "76b938d40e18046c5b737223c4a69f182b330d1c",
   "created_at": "2025-05-19T21:30:48.578Z",
-  "updated_at": "2025-05-28T09:30:02.204Z",
+  "updated_at": "2025-08-12T19:46:25.814Z",
   "comment": {
     "text": "This translation key is used to display a label that informs the user about the storage limit they are setting. It appears in a change quota dialog where users can adjust the storage limits for files.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeQuotaDialog/index.js",
       "line_number": 54,
-      "context": "return (\n <ModalDialog visible={visible} onClose={onCloseClick}>\n <ModalDialog.Header>{t(\"Common:ChangeQuota\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <StyledBodyContent>\n <Text noSelect>{t(\"Common:SetQuotaStorageLimit\")}</Text>\n <QuotaForm\n onSetQuotaBytesSize={onSetQuotaBytesSize}\n isLoading={isLoading}\n isError={isError}\n initialSize={initialSize}",
+      "context": "return (\n <ModalDialog visible={visible} onClose={onCloseClick}>\n <ModalDialog.Header>{t(\"Common:ChangeQuota\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <StyledBodyContent>\n <Text>{t(\"Common:SetQuotaStorageLimit\")}</Text>\n <QuotaForm\n onSetQuotaBytesSize={onSetQuotaBytesSize}\n isLoading={isLoading}\n isError={isError}\n initialSize={initialSize}",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "{{productName}} access",
   "content_en_sha1_hash": "47d03f020b562535e6eb17ded31112639c75a4e8",
   "created_at": "2025-05-19T21:30:52.162Z",
-  "updated_at": "2025-06-18T17:11:42.430Z",
+  "updated_at": "2025-08-04T07:30:01.278Z",
   "comment": {
     "text": "The \"PortalAccess\" translation key displays a label indicating access to a portal, typically found on a page or button related to security settings in a software application. The label includes the product name, making it context-specific and user-friendly for end-users. It appears on various pages within the Portal Settings section.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 203,
+      "line_number": 206,
       "context": "return t(\"StudioTimeLanguageSettings\");\n case \"CustomTitlesWelcome\":\n return t(\"CustomTitlesWelcome\");\n case \"ManagementCategorySecurity\":\n return t(\"ManagementCategorySecurity\");\n case \"PortalAccess\":\n return t(\"PortalAccess\", { productName: t(\"Common:ProductName\") });\n case \"TwoFactorAuth\":\n return t(\"TwoFactorAuth\");\n case \"ManagementCategoryIntegration\":\n return t(\"ManagementCategoryIntegration\");",
       "module": "/packages/client"
     },
@@ -36,7 +36,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 160,
+      "line_number": 167,
       "context": "{\n id: \"portal-settings_catalog-access-portal\",\n key: \"1-0\",\n icon: \"\",\n link: \"access-portal\",\n tKey: \"PortalAccess\",\n isCategory: true,\n children: [\n {\n id: \"portal-settings_catalog-password\",\n key: \"1-0-0\",",
       "module": "/packages/client"
     }
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'الوصول إلى {{productName}}' is a literal translation of 'access to {{productName}}'. A more natural and idiomatic Arabic translation for '{{productName}} access' would be 'إمكانية الوصول إلى {{productName}}' or 'دخول {{productName}}'.",
-          "suggestion": "إمكانية الوصول إلى {{productName}}"
+          "description": "The translation 'الوصول إلى {{productName}}' literally translates to 'Access to {{productName}}'. While not entirely incorrect, it's a very direct translation and might benefit from a more natural phrasing in Arabic. A more contextually appropriate translation might consider the specific nuance of 'access' in relation to the product.",
+          "suggestion": "Consider a phrasing like 'دخول {{productName}}' (Dukhool {{productName}} - Entry to {{productName}}) or 'إمكانية الوصول إلى {{productName}}' (Imkaniyat al-wusool ila {{productName}} - The ability to access {{productName}}), depending on the desired level of formality and context."
         }
       ],
       "approved_at": null
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Zugang zu\" is generally correct for 'access to', it can be slightly less natural depending on the specific context. A more fluent option might be \"{{productName}} Zugriff\".",
-          "suggestion": "Consider \"{{productName}} Zugriff\" for a more idiomatic translation."
+          "description": "While technically correct, 'Zugang zu' is a more literal translation of 'access to'. A more natural-sounding German phrasing for '{{productName}} access' would be '{{productName}} Zugang' or 'Zugriff auf {{productName}}'.",
+          "suggestion": "Consider '{{productName}} Zugang' or 'Zugriff auf {{productName}}'"
         }
       ],
       "approved_at": null
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Πρόσβαση στην {{productName}}' is a literal translation of 'access to {{productName}}'. While not strictly incorrect, it might sound slightly awkward in Greek. A more natural phrasing would depend on the specific context and what 'access' refers to.  It lacks nuance.",
-          "suggestion": "Consider alternatives like '{{productName}} πρόσβαση' or '{{productName}} Διαδικτυακή Πύλη' (if 'Portal' refers to a website/platform) or a more contextual translation."
+          "description": "The translation \"Πρόσβαση στην {{productName}}\" literally translates to \"Access to {{productName}}\". While acceptable, it might be more natural to use a phrasing that more closely mirrors the original \"{{productName}} access,\" which implies a setting related to product access.  A more accurate rendering might involve a restructuring for better flow in Greek, potentially using something like \"{{productName}} πρόσβαση\" or a slightly more detailed phrase.",
+          "suggestion": "{{productName}} πρόσβαση"
         }
       ],
       "approved_at": null
@@ -114,8 +114,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Finnish translation \"Pääsy {{productName}}:n\" is not the most natural or accurate translation of \"{{productName}} access\". While grammatically correct, it sounds slightly awkward. A more natural translation would be \"{{productName}}-palveluun\" or \"{{productName}}-sovellukseen\" (depending on the nature of the product).",
-          "suggestion": "{{productName}}-palveluun"
+          "description": "The translation \"Pääsy {{productName}}:n\" is not the most natural or accurate Finnish translation for \"{{productName}} access\".  It implies possession and doesn't directly convey access.",
+          "suggestion": "Pääsy {{productName}} - or - {{productName}} pääsy"
+        },
+        {
+          "type": "formatting",
+          "description": "The colon after \"{{productName}}\" in the translation feels slightly awkward in Finnish. While technically correct, it disrupts the flow.",
+          "suggestion": "Consider removing the colon for a more natural feel."
         }
       ],
       "approved_at": null
@@ -132,8 +137,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"{{productName}}-ի մուտք\" translates literally to '{{productName}}-'s access'. While understandable, a more natural and idiomatic translation for '{{productName}} access' would be something like '{{productName}}-ի հասանելիություն' ({{productName}}-i hasanelut'yun) or '{{productName}}-ով մուտք' ({{productName}}-ov mut'k).",
-          "suggestion": "Consider '{{productName}}-ի հասանելիություն' or '{{productName}}-ով մուտք'"
+          "description": "The Armenian translation \"{{productName}}-ի մուտք\" literally translates to '{{productName}}-'s entry'. A more natural and accurate translation for '{{productName}} access' would be something like '{{productName}}-ի մուտքի հնարավորություն' ({{productName}}-'s access possibility) or simply '{{productName}}-ի մուտքը' ({{productName}}-'s access).",
+          "suggestion": "{{productName}}-ի մուտքը"
         }
       ],
       "approved_at": null
@@ -198,8 +203,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Accesul la spațiu {{productName}}' is not a direct or accurate translation of '{{productName}} access'. 'Spațiu' means 'space', implying a physical space, which may not be accurate depending on the product.",
-          "suggestion": "Consider alternatives like 'Acces {{productName}}' or 'Acces la {{productName}}' for a more literal and accurate translation. The best translation depends on the context of 'productName'."
+          "description": "The Romanian translation 'Accesul la spațiu {{productName}}' doesn't accurately reflect the meaning of '{{productName}} access'. 'Spațiu' means 'space' which isn't the intended meaning of 'access'. It should convey a more general sense of 'access to'.",
+          "suggestion": "Accesul la {{productName}}"
         }
       ],
       "approved_at": null
@@ -222,8 +227,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation \"Prístup k {{productName}}\" literally translates to \"Access to {{productName}}\". While understandable, it's less natural than a more integrated phrasing. A more accurate and natural translation would incorporate the product name more seamlessly.",
-          "suggestion": "Consider alternatives like \"{{productName}} prístup\" or \"Použitie {{productName}}\" depending on the desired nuance. Further context would help choose the best option."
+          "description": "The Slovak translation 'Prístup k {{productName}}' is technically correct but lacks the possessive 'your' or similar equivalent that is commonly used in English to specify who has access. It's more generic. A more natural translation would consider including possessive language depending on context.",
+          "suggestion": "Consider translating as 'Váš prístup k {{productName}}' or 'Prístup k {{productName}} pre vás' depending on intended nuance and context."
         }
       ],
       "approved_at": null
@@ -231,7 +236,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Dostop do {{productName}}' is a literal translation of 'Access to {{productName}}'. A more natural Slovenian phrasing for a settings label might be '{{productName}} dostop' or 'Dostop {{productName}}'. The placement of 'do' can sound awkward.",
+          "suggestion": "Consider '{{productName}} dostop' or 'Dostop {{productName}}'"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -240,8 +251,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Приступ {{productName}}-у\" is not grammatically correct or idiomatic. \"Приступ\" (pristup) means 'access' but the construction with the genitive case '-у' after the placeholder is unusual. The direct translation is awkward and doesn't flow naturally in Serbian. It's unclear how the product name is meant to be incorporated.",
-          "suggestion": "Consider a more natural phrasing. For example, \"Приступ {{productName}}-у за\" or \"Улазак у {{productName}}\" (meaning 'Entry to {{productName}}'). The best option depends on the specific context of 'access'. A better option might be \"{{productName}} - приступ\" which reverses the order to make it more natural in Serbian."
+          "description": "The Serbian translation 'Приступ {{productName}}-у' is not the most natural or accurate translation of '{{productName}} access'. The word 'Приступ' (meaning 'access') is grammatically correct, but the construct feels awkward. A more natural translation would incorporate a preposition that clarifies the type of access.",
+          "suggestion": "Улазак у {{productName}} (Ulaзак u {{productName}})"
+        },
+        {
+          "type": "grammar",
+          "description": "The use of the genitive case '-у' after {{productName}} feels unnatural in this context. The most common and readily understood phrasing should prefer an alternative.",
+          "suggestion": "Consider alternative prepositions and case endings to achieve a more idiomatic Serbian translation.  The suggestion above incorporates 'у' (u) which might require adjustment depending on the precise nuance intended."
         }
       ],
       "approved_at": null
@@ -252,8 +268,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Pristup {{productName}}-u\" is grammatically correct but may not be the most natural or idiomatic translation of \"{{productName}} access\". A more natural translation might be \"{{productName}} pristup\" or \"Приступ за {{productName}}\". The addition of '-u' implies an indirect object, which isn't the intended meaning.",
-          "suggestion": "Consider \"{{productName}} pristup\" or \"Приступ за {{productName}}\""
+          "description": "The translation \"Pristup {{productName}}-u\" is not the most natural or accurate translation of \"{{productName}} access\". While \"Pristup\" correctly means \"access\", the construction \"-u\" is an incorrect genitive case ending in this context. A more natural translation would use a prepositional phrase, or simply use 'do' (to) before the product name.",
+          "suggestion": "Pristup do {{productName}}"
         }
       ],
       "approved_at": null
@@ -270,8 +286,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Ukrainian translation includes a colon ':' at the end, which might not be stylistically appropriate for a settings label. Consider removing it or ensuring it aligns with the overall UI conventions.",
-          "suggestion": "Доступ до {{productName}}"
+          "description": "The Ukrainian translation includes a colon ':' at the end of the phrase. This may not be necessary and should be reviewed for consistency with the English version.",
+          "suggestion": "Consider removing the colon ':' if it's not required for the context of the settings."
         }
       ],
       "approved_at": null

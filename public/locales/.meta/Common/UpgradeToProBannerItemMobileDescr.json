@@ -3,7 +3,7 @@
   "content": "Edit docs, sheets, and slides in mobile browsers.",
   "content_en_sha1_hash": "5744bdbbc2527993b01e534c281aa1b2255ba9e0",
   "created_at": "2025-05-26T07:15:49.265Z",
-  "updated_at": "2025-05-26T08:02:13.012Z",
+  "updated_at": "2025-08-04T07:30:01.743Z",
   "comment": {
     "text": "This translation key describes the text that appears next to a mobile-specific editing feature button. It explains that users can edit docs, sheets, and slides in mobile browsers, providing essential context for translators working on this project.",
     "is_auto": true,
@@ -11,7 +11,7 @@
   },
   "usage": [
     {
-      "file_path": "/packages/shared/pages/Payments/Standalone/BenefitsContainer.tsx",
+      "file_path": "/packages/shared/pages/Payments/common/BenefitsContainer.tsx",
       "line_number": 66,
       "context": "};\n \n const mobileEditing = {\n imag: MobileEditingReactSvgUrl,\n title: t(\"UpgradeToProBannerItemMobileHeader\"),\n description: t(\"UpgradeToProBannerItemMobileDescr\"),\n };\n \n const lifetimeLicense = {\n imag: LifetimeLicenseReactSvgUrl,\n title: t(\"UpgradeToProBannerItemLicenseHeader\"),",
       "module": "/packages/shared"

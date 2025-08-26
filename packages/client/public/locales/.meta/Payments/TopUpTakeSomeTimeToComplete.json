@@ -1,0 +1,28 @@
+{
+  "key_path": "TopUpTakeSomeTimeToComplete",
+  "content": "The top-up might take some time to complete",
+  "content_en_sha1_hash": "879c71750a4b87b47a412c63d6e1558334cfb3a8",
+  "created_at": "2025-06-24T16:31:06.924Z",
+  "updated_at": "2025-06-26T19:00:18.246Z",
+  "comment": {
+    "text": "The translation key \"TopUpTakeSomeTimeToComplete\" is used to display a message indicating that topping up might take some time to complete. This message appears in a button's label when the top-up process is ongoing.",
+    "is_auto": true,
+    "updated_at": "2025-06-24T16:31:50.195Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/TopUpButtons.tsx",
+      "line_number": 89,
+      "context": "}\n };\n \n return (\n <div className={styles.buttonContainerWrapper}>\n {isLoading ? <Text>{t(\"TopUpTakeSomeTimeToComplete\")}</Text> : null}\n <div className={styles.buttonContainer}>\n <Button\n key=\"OkButton\"\n label={t(\"TopUp\")}\n size={ButtonSize.normal}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

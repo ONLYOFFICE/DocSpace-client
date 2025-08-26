@@ -3,7 +3,7 @@
   "content": "API Guide",
   "content_en_sha1_hash": "95bf0e870e2f1145571690754754b56cb523c59b",
   "created_at": "2025-05-19T21:30:50.490Z",
-  "updated_at": "2025-06-08T12:02:32.750Z",
+  "updated_at": "2025-08-04T07:30:01.345Z",
   "comment": {
     "text": "The \"APIGuide\" translation key is used to display the label for an API documentation button, which opens a new window to view API guide content when clicked. The label appears on a portal settings page, allowing users to access API documentation from within the application.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/index.tsx",
-      "line_number": 236,
-      "context": "color={currentColorScheme?.main?.accent}\n fontSize=\"13px\"\n fontWeight={600}\n onClick={() => window.open(apiKeysLink, \"_blank\")}\n >\n {t(\"Settings:APIGuide\")}\n </Link>\n </div>\n <div>\n {error ? (\n <EmptyServerErrorContainer />",
+      "line_number": 194,
+      "context": "fontSize=\"13px\"\n fontWeight={600}\n onClick={() => window.open(apiKeysLink, \"_blank\")}\n dataTestId=\"api_guide_link\"\n >\n {t(\"Settings:APIGuide\")}\n </Link>\n </div>\n <div>\n {error ? (\n <EmptyServerErrorContainer />",
       "module": "/packages/client"
     }
   ],

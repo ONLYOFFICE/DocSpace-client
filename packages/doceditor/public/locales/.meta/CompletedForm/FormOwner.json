@@ -3,7 +3,7 @@
   "content": "Form owner",
   "content_en_sha1_hash": "7022aa4d3edf4428c9fb1db5c36d5affdb524284",
   "created_at": "2025-05-19T21:30:57.171Z",
-  "updated_at": "2025-05-26T07:57:32.850Z",
+  "updated_at": "2025-08-12T19:46:26.306Z",
   "comment": {
     "text": "This translation key is used to display the label \"Form owner\" in a specific part of a completed form. It appears next to an avatar representing the form owner's user account within the form details.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/completed-form/CompletedForm.tsx",
-      "line_number": 184,
+      "line_number": 190,
       "context": "{formNumber}\n </Text>\n </Box>\n </FormNumberWrapper>\n <ManagerWrapper>\n <span className=\"label\">{t(\"CompletedForm:FormOwner\")}</span>\n <Box>\n <Avatar\n className=\"manager__avatar\"\n size={AvatarSize.medium}\n role={AvatarRole.manager}",
       "module": "/packages/doceditor"
     }

@@ -99,11 +99,10 @@ import {
   trimSeparator,
 } from "@docspace/shared/utils";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
-import { copyShareLink } from "@docspace/shared/utils/copy";
+import { copyShareLink as copyToBuffer } from "@docspace/shared/utils/copy";
 import {
   canShowManageLink,
-  copyDocumentShareLink,
-  copyRoomShareLink,
+  copyShareLink,
 } from "@docspace/shared/components/share/Share.helpers";
 
 import { getGuidanceConfig } from "@docspace/shared/components/guidance/configs";
@@ -135,6 +134,17 @@ import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { createLoader } from "@docspace/shared/utils/createLoader";
 import { FILLING_STATUS_ID } from "@docspace/shared/constants";
+import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
+import {
+  getInfoPanelOpen,
+  hideInfoPanel,
+  openMembersTab,
+  openShareTab,
+  setInfoPanelMobileHidden,
+  setView,
+  showInfoPanel,
+} from "SRC_DIR/helpers/info-panel";
+import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 
 const LOADER_TIMER = 500;
 let loadingTime;
@@ -376,10 +386,9 @@ class ContextOptionsStore {
   };
 
   onMoveAction = (item) => {
-    const { setIsMobileHidden } = this.infoPanelStore;
     const { id, isFolder } = this.selectedFolderStore;
 
-    setIsMobileHidden(true);
+    setInfoPanelMobileHidden(true);
 
     const isFolderActions = id === item?.id && isFolder === item?.isFolder;
     if (isFolderActions) {
@@ -390,16 +399,14 @@ class ContextOptionsStore {
   };
 
   onRestoreAction = () => {
-    const { setIsMobileHidden } = this.infoPanelStore;
-    setIsMobileHidden(true);
+    setInfoPanelMobileHidden(true);
     this.dialogsStore.setRestorePanelVisible(true);
   };
 
   onCopyAction = (item) => {
-    const { setIsMobileHidden } = this.infoPanelStore;
     const { id, isFolder } = this.selectedFolderStore;
 
-    setIsMobileHidden(true);
+    setInfoPanelMobileHidden(true);
 
     const isFolderActions = id === item?.id && isFolder === item?.isFolder;
     if (isFolderActions) {
@@ -413,13 +420,11 @@ class ContextOptionsStore {
     const { fetchFileVersions, setIsVerHistoryPanel } =
       this.versionHistoryStore;
 
-    const { setIsMobileHidden } = this.infoPanelStore;
-
     if (this.treeFoldersStore.isRecycleBinFolder) return;
 
     fetchFileVersions(`${id}`, security, requestToken);
     setIsVerHistoryPanel(true);
-    setIsMobileHidden(true);
+    setInfoPanelMobileHidden(true);
   };
 
   finalizeVersion = (id) => {
@@ -444,7 +449,6 @@ class ContextOptionsStore {
 
   lockFile = (item, t) => {
     const { id, locked } = item;
-    const { setInfoPanelSelection } = this.infoPanelStore;
 
     this.filesActionsStore
       .lockFileAction(id, !locked)
@@ -453,7 +457,6 @@ class ContextOptionsStore {
           ? toastr.success(t("Translations:FileUnlocked"))
           : toastr.success(t("Translations:FileLocked")),
       )
-      .then(() => setInfoPanelSelection({ ...item, locked: !locked }))
       .catch((err) => {
         toastr.error(err);
       });
@@ -486,12 +489,17 @@ class ContextOptionsStore {
 
     const isSystemFolder = systemFolders.includes(item.type);
 
+    if (this.publicRoomStore.isPublicRoom) {
+      copyToBuffer(item.shortWebUrl);
+      return toastr.success(t("Common:LinkCopySuccess"));
+    }
+
     if (isShared && !isArchive && !isSystemFolder) {
       try {
         const itemLink = item.isFolder
           ? await getFolderLink(item.id)
           : await getFileLink(item.id);
-        copyShareLink(itemLink.sharedTo.shareLink);
+        copyToBuffer(itemLink.sharedTo.shareLink);
         item.customFilterEnabled
           ? toastr.success(
               <Trans t={t} i18nKey="Common:LinkCopySuccessWithCustomFilter" />,
@@ -539,25 +547,10 @@ class ContextOptionsStore {
   };
 
   onOpenEmbeddingSettings = async (item) => {
-    const { shared, navigationPath, getSelectedFolder } =
-      this.selectedFolderStore;
     const { setLinkParams, setEmbeddingPanelData } = this.dialogsStore;
 
-    const sharedItem = item.isRoom
-      ? item
-      : shared
-        ? getSelectedFolder()
-        : navigationPath.find((r) => r.shared);
-
-    if (!sharedItem) return;
-
-    const isPublicRoomType = sharedItem.roomType === RoomsType.PublicRoom;
-    const isFormRoom = sharedItem.roomType === RoomsType.FormRoom;
-
     setLinkParams({
-      roomId: sharedItem?.id,
-      isPublic: isPublicRoomType,
-      isFormRoom,
+      item,
     });
 
     setEmbeddingPanelData({ visible: true, item });
@@ -575,12 +568,7 @@ class ContextOptionsStore {
     const primaryLink = await this.filesStore.getPrimaryLink(item.id);
 
     if (primaryLink) {
-      copyRoomShareLink(
-        primaryLink,
-        t,
-        true,
-        this.getManageLinkOptions(item, true),
-      );
+      copyShareLink(item, primaryLink, t, this.getManageLinkOptions(item));
       // copyShareLink(primaryLink.sharedTo.shareLink);
       // item.shared
       //   ? toastr.success(t("Common:LinkSuccessfullyCopied"))
@@ -740,7 +728,7 @@ class ContextOptionsStore {
       endLoader(() =>
         runInAction(() => {
           setGroupMenuBlocked(false);
-          clearActiveOperations([item.id], null);
+          clearActiveOperations([item.id]);
         }),
       );
     }
@@ -828,15 +816,15 @@ class ContextOptionsStore {
     );
   };
 
-  onClickShare = (item) => {
-    const { openShareTab } = this.infoPanelStore;
-    const { setShareFolderDialogVisible } = this.dialogsStore;
+  onClickShare = () => {
+    // const { setShareFolderDialogVisible } = this.dialogsStore;
 
-    if (item.isFolder) {
-      setShareFolderDialogVisible(true);
-    } else {
-      openShareTab();
-    }
+    openShareTab();
+    // if (item.isFolder) {
+    //   setShareFolderDialogVisible(true);
+    // } else {
+    // openShareTab();
+    // }
   };
 
   onClickMarkRead = (item) => {
@@ -897,10 +885,11 @@ class ContextOptionsStore {
   };
 
   onShowInfoPanel = (item, view) => {
-    const { setIsVisible, setView } = this.infoPanelStore;
+    showInfoPanel();
 
-    setIsVisible(true);
-    view && setView(view);
+    if (item) {
+      setView(view);
+    }
   };
 
   onClickEditRoom = (item) => {
@@ -972,7 +961,7 @@ class ContextOptionsStore {
   //             icon: SettingsReactSvgUrl,
   //             id: "manage-option",
   //             key: "manage-links",
-  //             label: t("Notifications:ManageNotifications"),
+  //             label: t("Common:ManageNotifications"),
   //             onClick: () => this.onShowInfoPanel(item, "info_members"),
   //           },
   //         ];
@@ -1183,7 +1172,7 @@ class ContextOptionsStore {
     const { getFolderInfo } = this.filesStore;
     const { getPublicKey } = this.filesActionsStore;
 
-    this.infoPanelStore.setIsVisible(false);
+    hideInfoPanel();
 
     const filesFilter = FilesFilter.getDefault();
     filesFilter.folder = this.oformsStore.oformFromFolderId;
@@ -1209,7 +1198,7 @@ class ContextOptionsStore {
   };
 
   onShowOformTemplateInfo = (item) => {
-    this.infoPanelStore.setIsVisible(true);
+    showInfoPanel();
     this.oformsStore.setGallerySelected(item);
   };
 
@@ -1546,26 +1535,38 @@ class ContextOptionsStore {
     return this.getFilesContextOptions(item, t, false, true);
   };
 
-  getManageLinkOptions = (item, isRoom = false) => {
-    const openTab = () => {
-      if (isRoom) return this.infoPanelStore.openMembersTab();
+  handleCopyPrimaryLink = async (item, t) => {
+    if (!item.canShare) return;
 
-      this.infoPanelStore.openShareTab();
+    const primaryLink = await ShareLinkService.getPrimaryLink(item);
+
+    if (primaryLink) {
+      copyShareLink(item, primaryLink, t, this.getManageLinkOptions(item));
+      this.infoPanelStore?.setShareChanged(true);
+    }
+  };
+
+  getManageLinkOptions = (item) => {
+    const isRoom = isRoomUtil(item);
+
+    const openTab = () => {
+      if (isRoom) return openMembersTab();
+
+      openShareTab();
     };
 
     const infoView = isRoom
       ? this.infoPanelStore.roomsView
       : this.infoPanelStore.fileView;
 
-    const { isVisible, infoPanelCurrentSelection } = this.infoPanelStore;
+    const { infoPanelSelection } = this.infoPanelStore;
 
     return {
       canShowLink: canShowManageLink(
         item,
-        infoPanelCurrentSelection,
-        isVisible,
+        infoPanelSelection,
+        getInfoPanelOpen(),
         infoView,
-        isRoom,
       ),
       onClickLink: () => {
         this.filesStore.setSelection([]);
@@ -1577,7 +1578,7 @@ class ContextOptionsStore {
 
   getFilesContextOptions = (item, t, isInfoPanel, isHeader) => {
     const optionsToRemove = isInfoPanel
-      ? ["select", "room-info", "show-info"]
+      ? ["select", "open", "room-info", "show-info"]
       : isHeader
         ? ["select"]
         : [];
@@ -1599,9 +1600,9 @@ class ContextOptionsStore {
     const isRootThirdPartyFolder =
       item.providerKey && item.id === item.rootFolderId;
 
-    const isShareable = this.treeFoldersStore.isPersonalRoom
-      ? item.canShare || (item.isFolder && item.security?.CreateRoomFrom)
-      : false;
+    // const isShareable = this.treeFoldersStore.isPersonalRoom
+    //   ? item.canShare || (item.isFolder && item.security?.CreateRoomFrom)
+    //   : false;
 
     const isMedia =
       item.viewAccessibility?.ImageView || item.viewAccessibility?.MediaView;
@@ -1751,6 +1752,10 @@ class ContextOptionsStore {
     const isTemplateOwner =
       item.access === ShareAccessRights.None ||
       item.access === ShareAccessRights.FullAccess;
+
+    const isRoomAdmin =
+      item.access === ShareAccessRights.RoomManager ||
+      item.access === ShareAccessRights.None;
 
     const optionsModel = [
       {
@@ -1940,34 +1945,62 @@ class ContextOptionsStore {
         disabled: false,
         action: item.id,
       },
-      {
-        id: "option_copy-general-link",
-        key: "copy-general-link",
-        label: t("Common:CopySharedLink"),
-        icon: TabletLinkReactSvgUrl,
-        disabled: !isShareable,
-        onClick: async () => {
-          const { getPrimaryFileLink, setShareChanged } = this.infoPanelStore;
-
-          const primaryLink = await getPrimaryFileLink(item.id);
-
-          if (primaryLink) {
-            copyDocumentShareLink(
-              primaryLink,
-              t,
-              this.getManageLinkOptions(item),
-            );
-            setShareChanged(true);
-          }
-        },
-      },
+      // {
+      //   id: "option_copy-general-link",
+      //   key: "copy-general-link",
+      //   label: t("Common:CopySharedLink"),
+      //   icon: TabletLinkReactSvgUrl,
+      //   disabled: !isShareable,
+      //   onClick: () => this.getManageLink(item, t),
+      // },
       {
         id: "option_sharing-settings",
         key: "sharing-settings",
         label: t("Common:Share"),
         icon: ShareReactSvgUrl,
-        onClick: () => this.onClickShare(item),
-        disabled: !isShareable,
+        disabled:
+          !item.canShare &&
+          !item.security?.CreateRoomFrom &&
+          !item.security?.Embed,
+        items: [
+          {
+            id: "option_copy-shared-link",
+            key: "copy-shared-link",
+            label: t("Common:CopySharedLink"),
+            icon: TabletLinkReactSvgUrl,
+            onClick: () => this.handleCopyPrimaryLink(item, t),
+            disabled: !item.canShare,
+          },
+          {
+            id: "option_manage-links",
+            key: "manage-links",
+            label: t("Common:ManageLinks"),
+            icon: SettingsReactSvgUrl,
+            onClick: () => this.onClickShare(item),
+            disabled: !item.canShare,
+          },
+          {
+            id: "option_embedding-setting",
+            key: "embedding-settings",
+            label: t("Common:Embed"),
+            icon: CodeReactSvgUrl,
+            onClick: () => this.onOpenEmbeddingSettings(item),
+            disabled: !item.security?.Embed,
+          },
+          {
+            key: "create-room-separator",
+            isSeparator: true,
+            disabled: !item.security?.CreateRoomFrom,
+          },
+          {
+            id: "option_create_room",
+            key: "create-room",
+            label: t("Common:CreateRoom"),
+            icon: CatalogRoomsReactSvgUrl,
+            onClick: () => this.onCreateRoom(item, true),
+            disabled: !item.security?.CreateRoomFrom,
+          },
+        ],
       },
       ...versionActions,
       {
@@ -2055,14 +2088,7 @@ class ContextOptionsStore {
       //   icon: MailReactSvgUrl,
       //   disabled: emailSendIsDisabled,
       // },
-      {
-        id: "option_embedding-setting",
-        key: "embedding-settings",
-        label: t("Files:Embed"),
-        icon: CodeReactSvgUrl,
-        onClick: () => this.onOpenEmbeddingSettings(item),
-        disabled: !item.security?.Embed,
-      },
+
       {
         id: "option_show-info",
         key: "show-info",
@@ -2079,7 +2105,12 @@ class ContextOptionsStore {
           : t("Files:CustomFilterEnable"),
         icon: CustomFilterReactSvgUrl,
         onClick: () => this.onSetUpCustomFilter(item, t),
-        disabled: false,
+        disabled: Boolean(
+          !isRoomAdmin &&
+            item.customFilterEnabled &&
+            item.customFilterEnabledBy &&
+            item.customFilterEnabledBy !== this.userStore?.user?.displayName,
+        ),
       },
       {
         id: "option_block-unblock-version",
@@ -2129,14 +2160,7 @@ class ContextOptionsStore {
         "data-action": "remove",
         action: "remove",
       },
-      {
-        id: "option_create_room",
-        key: "create-room",
-        label: t("Common:CreateRoom"),
-        icon: CatalogRoomsReactSvgUrl,
-        onClick: () => this.onCreateRoom(item, true),
-        disabled: !item.security?.CreateRoomFrom,
-      },
+
       {
         id: "option_create-duplicate-room",
         key: "duplicate-room",
@@ -2783,7 +2807,7 @@ class ContextOptionsStore {
   };
 
   onShowFormRoomSelectFileDialog = (filter = FilesSelectorFilterTypes.DOCX) => {
-    this.dialogsStore.setSelectFileFormRoomDialogVisible(true, filter);
+    this.dialogsStore.setSelectFileFormRoomDialogVisible(true, filter, true);
   };
 
   getContextOptionsPlusFormRoom = (t) => {

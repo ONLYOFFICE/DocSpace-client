@@ -70,6 +70,7 @@ const AvatarPure = ({
   noClick = false,
   isNotIcon = false,
   imgClassName = "",
+  dataTestId,
 }: AvatarProps) => {
   const { isRTL } = useInterfaceDirection();
   const { isBase } = useTheme();
@@ -106,7 +107,7 @@ const AvatarPure = ({
         src={source}
         className={`${styles.image}${imgClassName ? ` ${imgClassName}` : ""}`}
         data-is-default={isDefault}
-        alt=""
+        alt="avatar"
         style={
           {
             "--avatar-default-image": `url(${isBase ? AvatarBaseReactSvgUrl : AvatarDarkReactSvgUrl})`,
@@ -120,7 +121,7 @@ const AvatarPure = ({
     <img
       className={styles.image}
       data-is-default="true"
-      alt=""
+      alt="avatar"
       style={
         {
           "--avatar-default-image": `url(${isBase ? AvatarBaseReactSvgUrl : AvatarDarkReactSvgUrl})`,
@@ -194,6 +195,7 @@ const AvatarPure = ({
             label={option.label}
             icon={option.icon}
             onClick={optionOnClickAction}
+            testId={option.key}
           />
         );
       })}
@@ -209,7 +211,7 @@ const AvatarPure = ({
         onMouseDown={onMouseDown}
         onClick={onClick || onClickAvatar}
         ref={iconRef}
-        data-testid="avatar"
+        data-testid={dataTestId ?? "avatar"}
       >
         <div
           className={classNames(styles.avatarWrapper, className)}
@@ -228,6 +230,7 @@ const AvatarPure = ({
                   iconName={PencilReactSvgUrl}
                   onClick={onToggleOpenEditLogo}
                   size={16}
+                  dataTestId="edit_avatar_icon_button"
                 />
                 {dropdownElement}{" "}
               </>
@@ -237,6 +240,7 @@ const AvatarPure = ({
                 iconName={PlusSvgUrl}
                 onClick={onUploadClick}
                 size={16}
+                dataTestId="edit_avatar_icon_button"
               />
             )}
           </div>

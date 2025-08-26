@@ -166,7 +166,6 @@ const DataManagementWrapper = (props) => {
       }
     };
   }, []);
-
   const onSelect = (e) => {
     const url = isManagement()
       ? `/management/settings/backup/${e.id}`

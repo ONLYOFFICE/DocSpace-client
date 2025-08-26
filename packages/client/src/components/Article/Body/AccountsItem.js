@@ -40,14 +40,10 @@ const PureAccountsItem = ({
   t,
   currentColorScheme,
   getLinkData,
-
-  setContactsTab,
 }) => {
   const onClickAction = React.useCallback(
     (e) => {
       onClick && onClick(e, "accounts");
-
-      setContactsTab("people");
     },
     [onClick],
   );
@@ -70,21 +66,27 @@ const PureAccountsItem = ({
       isActive={isActive}
       folderId="document_catalog-accounts"
       $currentColorScheme={currentColorScheme}
+      withAnimation
     />
   );
 };
 
 const AccountsItem = withTranslation(["Common"])(PureAccountsItem);
 
-export default inject(({ settingsStore, peopleStore }) => {
+export default inject(({ settingsStore, filesStore, peopleStore }) => {
   const { showText, currentColorScheme } = settingsStore;
 
   const { setContactsTab } = peopleStore.usersStore;
+
+  const { filesController, roomsController } = filesStore;
 
   return {
     showText,
     currentColorScheme,
 
     setContactsTab,
+
+    filesController,
+    roomsController,
   };
 })(observer(AccountsItem));

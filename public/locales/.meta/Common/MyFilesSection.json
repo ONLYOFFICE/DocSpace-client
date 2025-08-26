@@ -3,7 +3,7 @@
   "content": "Documents",
   "content_en_sha1_hash": "687c82861c956e47456186f6522cfc8dbadb8ef6",
   "created_at": "2025-05-19T21:30:46.695Z",
-  "updated_at": "2025-06-18T17:11:42.301Z",
+  "updated_at": "2025-08-11T18:11:59.100Z",
   "comment": {
     "text": "This translation key is used to display the text \"Documents\" in a button within a file management component. It appears as part of a link that navigates to a personal section of documents, and its purpose is to provide a clear label for users.",
     "is_auto": true,
@@ -42,19 +42,19 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserTypeDialog/index.tsx",
-      "line_number": 118,
+      "line_number": 111,
       "context": "const isSingleUser = userNames.length === 1;\n const translationValues = {\n userName: isSingleUser ? userNames[0] : undefined,\n membersSection: t(\"Common:Members\"),\n documentsSection: t(\"Common:MyFilesSection\"),\n productName: t(\"Common:ProductName\"),\n secondType,\n };\n const translationKey = getChangeTypeKey(\n toType,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserTypeDialog/index.tsx",
-      "line_number": 118,
+      "line_number": 111,
       "context": "const isSingleUser = userNames.length === 1;\n const translationValues = {\n userName: isSingleUser ? userNames[0] : undefined,\n membersSection: t(\"Common:Members\"),\n documentsSection: t(\"Common:MyFilesSection\"),\n productName: t(\"Common:ProductName\"),\n secondType,\n };\n const translationKey = getChangeTypeKey(\n toType,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserTypeDialog/index.tsx",
-      "line_number": 118,
+      "line_number": 111,
       "context": "const isSingleUser = userNames.length === 1;\n const translationValues = {\n userName: isSingleUser ? userNames[0] : undefined,\n membersSection: t(\"Common:Members\"),\n documentsSection: t(\"Common:MyFilesSection\"),\n productName: t(\"Common:ProductName\"),\n secondType,\n };\n const translationKey = getChangeTypeKey(\n toType,",
       "module": "/packages/client"
     },
@@ -66,13 +66,13 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
-      "line_number": 60,
+      "line_number": 61,
       "context": "users,\n onlyOneUser,\n onlyGuests,\n }: BodyComponentProps) => {\n const warningMessageMyDocuments = t(\"UserFilesRemovalScope\", {\n sectionNameFirst: t(\"Common:MyFilesSection\"),\n sectionNameSecond: t(\"Common:TrashSection\"),\n });\n \n const warningMessageReassign = onlyGuests ? (\n t(\"DeleteReqassignDescriptionGuest\", {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
-      "line_number": 60,
+      "line_number": 61,
       "context": "users,\n onlyOneUser,\n onlyGuests,\n }: BodyComponentProps) => {\n const warningMessageMyDocuments = t(\"UserFilesRemovalScope\", {\n sectionNameFirst: t(\"Common:MyFilesSection\"),\n sectionNameSecond: t(\"Common:TrashSection\"),\n });\n \n const warningMessageReassign = onlyGuests ? (\n t(\"DeleteReqassignDescriptionGuest\", {",
       "module": "/packages/client"
     },
@@ -96,32 +96,38 @@
     },
     {
       "file_path": "/packages/client/src/helpers/toast-helpers.tsx",
-      "line_number": 45,
-      "context": "const toastMessage = (\n <Trans\n t={t}\n i18nKey=\"FileExportDestination\"\n ns=\"Files\"\n values={{ fileName, sectionName: t(\"Common:MyFilesSection\") }}\n components={{\n 1: (\n <Link\n tag=\"a\"\n href={fileUrl}",
+      "line_number": 46,
+      "context": "const toastMessage = (\n <Trans\n t={t as TFunction}\n i18nKey=\"FileExportDestination\"\n ns=\"Files\"\n values={{ fileName, sectionName: t(\"Common:MyFilesSection\") }}\n components={{\n 1: (\n <Link\n tag=\"a\"\n href={fileUrl}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 325,
+      "context": "return t(\"InfoPanel:RoomFromArchiveRestore\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomIndexExportSaved:\n return t(\"InfoPanel:RoomIndexExportLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n });\n case FeedActionKeys.FormSubmit:\n return t(\"InfoPanel:FilledOutForm\");\n case FeedActionKeys.FormOpenedForFilling:\n return t(\"InfoPanel:StartedFillingItOut\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 300,
+      "line_number": 303,
       "context": "return t(\"InfoPanel:RoomFromArchiveRestore\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomIndexExportSaved:\n return t(\"InfoPanel:RoomIndexExportLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n });\n case FeedActionKeys.FormSubmit:\n return t(\"InfoPanel:FilledOutForm\");\n case FeedActionKeys.FormOpenedForFilling:\n return t(\"InfoPanel:StartedFillingItOut\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 141,
+      "line_number": 143,
       "context": "<ImportSection\n isChecked={importOptions.importPersonalFiles}\n onChange={(e) => onChange(e, \"importPersonalFiles\")}\n sectionName={t(\"Settings:PersonalFiles\")}\n description={t(\"Settings:ImportFilesLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n })}\n exportSection={{\n sectionName: personalExportDetails.name,\n workspace: serviceName,\n sectionIcon: personalExportDetails.icon,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 141,
+      "line_number": 143,
       "context": "<ImportSection\n isChecked={importOptions.importPersonalFiles}\n onChange={(e) => onChange(e, \"importPersonalFiles\")}\n sectionName={t(\"Settings:PersonalFiles\")}\n description={t(\"Settings:ImportFilesLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n })}\n exportSection={{\n sectionName: personalExportDetails.name,\n workspace: serviceName,\n sectionIcon: personalExportDetails.icon,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
-      "line_number": 328,
-      "context": "isLoading={isFormationHistory}\n isDisabled={isNotPaidPeriod}\n />\n <Text as=\"span\" className={styles.downloadReportDescription}>\n {t(\"Settings:ReportSaveLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n })}\n </Text>\n </div>\n </>\n ) : null}",
+      "line_number": 378,
+      "context": "scale={isMobile}\n testId=\"download_report_button\"\n />\n <Text as=\"span\" className={styles.downloadReportDescription}>\n {t(\"Settings:ReportSaveLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n })}\n </Text>\n </div>\n </>\n ) : null}",
       "module": "/packages/client"
     },
     {
@@ -132,8 +138,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/login-history/index.js",
-      "line_number": 99,
-      "context": "securityLifetime={securityLifetime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}\n downloadReport={t(\"DownloadReportBtnText\")}\n downloadReportDescription={t(\"ReportSaveLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n })}\n getReport={getLoginHistoryReport}\n isSettingNotPaid={!isAuditAvailable}\n />\n )",
+      "line_number": 101,
+      "context": "securityLifetime={securityLifetime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}\n downloadReport={t(\"DownloadReportBtnText\")}\n downloadReportDescription={t(\"ReportSaveLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n })}\n getReport={getLoginHistoryReport}\n isSettingNotPaid={!isAuditAvailable}\n tfaEnabled={tfaEnabled}\n currentColorScheme={currentColorScheme}",
       "module": "/packages/client"
     },
     {
@@ -144,13 +150,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerItem.js",
-      "line_number": 111,
+      "line_number": 113,
       "context": "/>\n <Text className=\"toggle_label\" fontSize=\"12px\">\n {type === \"user\"\n ? t(\"UserDefaultQuotaDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyFilesSection\"),\n })\n : t(\"SetDefaultRoomQuota\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1467,
+      "line_number": 1469,
       "context": "},\n {\n id: \"header_option_empty-section\",\n key: \"empty-section\",\n label: t(\"Files:EmptySection\", {\n sectionName: t(\"Common:MyFilesSection\"),\n }),\n onClick: this.onEmptyPersonalAction,\n icon: ClearTrashReactSvgUrl,\n disabled: false,\n },",
       "module": "/packages/client"
     },
@@ -162,19 +168,19 @@
     },
     {
       "file_path": "/packages/shared/components/guidance/configs/form-filling.ts",
-      "line_number": 87,
+      "line_number": 90,
       "context": "{\n id: 5,\n header: t(\"FormFillingTipsDialog:HeaderUploading\"),\n description: t(\"FormFillingTipsDialog:DescriptionUploading\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyFilesSection\"),\n }),\n key: \"form-filling-uploading\",\n placement: \"side\",\n position: [\n {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 1254,
+      "line_number": 1274,
       "context": "t: TTranslation,\n ) => {\n if (isPortalAdmin)\n return t(\"Common:RolePortalAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyFilesSection\"),\n });\n \n if (isRoomAdmin)\n return t(\"Common:RoleRoomAdminDescription\", {\n sectionName: t(\"Common:MyFilesSection\"),",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 1254,
+      "line_number": 1274,
       "context": "t: TTranslation,\n ) => {\n if (isPortalAdmin)\n return t(\"Common:RolePortalAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyFilesSection\"),\n });\n \n if (isRoomAdmin)\n return t(\"Common:RoleRoomAdminDescription\", {\n sectionName: t(\"Common:MyFilesSection\"),",
       "module": "/packages/shared"
     },
@@ -234,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Greek translation 'Τα έγγραφά' is incomplete. It translates to 'The documents' (nominative case) but lacks a definitive article for clarity depending on the context. The best translation depends on the intended meaning. 'Έγγραφα' (documents) or 'Τα έγγραφα' (the documents) are more complete options.",
-          "suggestion": "Consider 'Έγγραφα' or 'Τα έγγραφα' depending on the context."
+          "description": "The Greek translation 'Τα έγγραφά' is incomplete. It translates to 'The documents' but lacks the necessary article for a proper translation of 'Documents' in this context.",
+          "suggestion": "Έγγραφα"
         }
       ],
       "approved_at": null
@@ -324,8 +330,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Documentele' is grammatically correct but may not be the best choice depending on the context. 'Documentele' is the plural form, but the English 'Documents' can be either singular or plural. If 'Documents' refers to a single section or folder, a singular translation ('Documentul') might be more appropriate. Without more context, it's impossible to definitively say if this is incorrect, but it's a potential area for improvement.",
-          "suggestion": "Consider whether 'Documentul' is more appropriate based on the context of 'MyFilesSection'."
+          "description": "The Romanian translation 'Documentele' is the plural form of 'Document'. The English content 'Documents' is already plural. The singular form 'Documentul' would be more appropriate to match the singular English original.",
+          "suggestion": "Documentul"
         }
       ],
       "approved_at": null
@@ -339,7 +345,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ලේඛන' (lekhana) can translate to 'documents,' it's a more formal or general term. 'Documents' in the context of a file section often implies a collection of files, so a more appropriate translation might be something like 'ගොණු' (gonu) which specifically refers to files, or a more descriptive phrase.",
+          "suggestion": "Consider 'ගොණු' (gonu) or 'ලේඛන ගොණු' (lekhana gonu) for a more accurate translation depending on the specific context."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

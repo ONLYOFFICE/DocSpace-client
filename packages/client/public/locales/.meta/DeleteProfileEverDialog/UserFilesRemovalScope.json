@@ -3,7 +3,7 @@
   "content": "Personal data, all files and folders in the {{sectionNameFirst}} and {{sectionNameSecond}} sections of this user will be permanently deleted.",
   "content_en_sha1_hash": "8e8526e553b6a2fa34f8aaf2a83da2857e899496",
   "created_at": "2025-05-19T21:30:56.684Z",
-  "updated_at": "2025-05-24T13:14:01.436Z",
+  "updated_at": "2025-06-30T12:20:31.234Z",
   "comment": {
     "text": "This translation key is used to display a warning message when deleting a user's profile, stating that personal files and folders will be permanently deleted from specific sections of the user's account. It appears in a dialog box where users confirm deletion, providing context for translators on the scope of data being removed.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
-      "line_number": 59,
+      "line_number": 60,
       "context": "userPerformedDeletion,\n users,\n onlyOneUser,\n onlyGuests,\n }: BodyComponentProps) => {\n const warningMessageMyDocuments = t(\"UserFilesRemovalScope\", {\n sectionNameFirst: t(\"Common:MyFilesSection\"),\n sectionNameSecond: t(\"Common:TrashSection\"),\n });\n \n const warningMessageReassign = onlyGuests ? (",
       "module": "/packages/client"
     }

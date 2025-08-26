@@ -218,6 +218,7 @@ const UsersTableRow = (props: AddEmailTableRowProps) => {
               iconName={CheckSvgUrl}
               isFill
               isClickable
+              dataTestId="import_check_button"
             />
             <IconButton
               className="import-clear-container-button"
@@ -226,6 +227,7 @@ const UsersTableRow = (props: AddEmailTableRowProps) => {
               iconName={CrossSvgUrl}
               isFill
               isClickable
+              dataTestId="import_clear_button"
             />
           </EmailInputWrapper>
         ) : (

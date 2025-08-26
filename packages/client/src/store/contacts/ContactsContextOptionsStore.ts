@@ -78,7 +78,8 @@ import {
   shareGuest,
 } from "SRC_DIR/helpers/contacts";
 
-import InfoPanelStore from "../InfoPanelStore";
+import { getInfoPanelOpen, showInfoPanel } from "SRC_DIR/helpers/info-panel";
+
 import ProfileActionsStore from "../ProfileActionsStore";
 import DialogsStore from "../DialogsStore";
 import SettingsSetupStore from "../SettingsSetupStore";
@@ -94,7 +95,6 @@ type TItem = ReturnType<UsersStore["getPeopleListItem"]>;
 class ContactsConextOptionsStore {
   constructor(
     public profileActionsStore: ProfileActionsStore,
-    public infoPanelStore: InfoPanelStore,
     public userStore: UserStore,
     public tfaStore: TfaStore,
     public settingsStore: SettingsStore,
@@ -106,7 +106,6 @@ class ContactsConextOptionsStore {
     public setup: SettingsSetupStore,
   ) {
     this.settingsStore = settingsStore;
-    this.infoPanelStore = infoPanelStore;
     this.profileActionsStore = profileActionsStore;
     this.userStore = userStore;
     this.tfaStore = tfaStore;
@@ -271,13 +270,15 @@ class ContactsConextOptionsStore {
           };
 
         case "invite-again":
-          return {
-            id: "option_invite-again",
-            key: option,
-            icon: InviteAgainReactSvgUrl,
-            label: t("LblInviteAgain"),
-            onClick: () => onInviteAgainClick(item, t),
-          };
+          return !this.settingsStore.allowInvitingMembers
+            ? null
+            : {
+                id: "option_invite-again",
+                key: option,
+                icon: InviteAgainReactSvgUrl,
+                label: t("LblInviteAgain"),
+                onClick: () => onInviteAgainClick(item, t),
+              };
         case "reset-auth":
           return {
             id: "option_reset-auth",
@@ -437,8 +438,6 @@ class ContactsConextOptionsStore {
 
     const { isRoomAdmin } = this.userStore.user!;
 
-    const { setIsVisible, isVisible } = this.infoPanelStore;
-
     const options = this.getUsersChangeTypeOptions(t);
 
     const menu = [
@@ -461,8 +460,8 @@ class ContactsConextOptionsStore {
       {
         key: "cm-info",
         label: t("Common:Info"),
-        disabled: isVisible,
-        onClick: () => setIsVisible(true),
+        disabled: getInfoPanelOpen(),
+        onClick: showInfoPanel,
         icon: InfoOutlineReactSvgUrl,
       },
       {
@@ -628,10 +627,9 @@ class ContactsConextOptionsStore {
   };
 
   onDetailsClick = (item: TItem) => {
-    const { setIsVisible } = this.infoPanelStore;
     const { setBufferSelection } = this.usersStore;
     setBufferSelection(item);
-    setIsVisible(true);
+    showInfoPanel();
   };
 
   onResetAuth = (item: TItem) => {

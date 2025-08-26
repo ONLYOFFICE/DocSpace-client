@@ -54,6 +54,7 @@ const MobileDetails = memo(
     const contextMenuHeader = useMemo(
       () => ({
         icon,
+        color: "",
         title,
       }),
       [icon, title],

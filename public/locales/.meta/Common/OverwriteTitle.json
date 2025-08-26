@@ -3,7 +3,7 @@
   "content": "Overwrite with version update",
   "content_en_sha1_hash": "85c42df31bdf2069fe66ddcdd0fbefbdae0a2df4",
   "created_at": "2025-05-19T21:30:47.196Z",
-  "updated_at": "2025-05-26T07:57:32.241Z",
+  "updated_at": "2025-06-30T12:20:31.191Z",
   "comment": {
     "text": "This translation key is used to display a title that instructs users to overwrite existing files or folders when merging changes. It appears in conflict resolution dialogs and is typically displayed as a button label or header in UI components. The user is prompted to overwrite existing content with the new version update.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/ConflictResolveDialog/ConflictResolveDialog.tsx",
-      "line_number": 61,
+      "line_number": 62,
       "context": "values={{ fileName }}\n components={{ 1: <strong key=\"component_key\" className=\"bold\" /> }}\n />\n }\n selectActionText={t(\"ConflictResolveSelectAction\")}\n overwriteTitle={t(\"OverwriteTitle\")}\n overwriteDescription={t(\"OverwriteDescription\")}\n duplicateTitle={t(\"Common:CreateFileCopy\")}\n duplicateDescription={t(\"CreateDescription\")}\n skipTitle={t(\"SkipTitle\")}\n skipDescription={t(\"SkipDescription\")}",
       "module": "/packages/doceditor"
     }

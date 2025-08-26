@@ -28,7 +28,7 @@ import { TContextMenuValueTypeOnClick } from "../context-menu/ContextMenu.types"
 import { ShareAccessRights } from "../../enums";
 import { TColorScheme } from "../../themes";
 import { TDirectionX, TDirectionY } from "../../types";
-import { ComboBoxDisplayType, ComboBoxSize } from "./Combobox.enums";
+import { ComboBoxDisplayType, ComboBoxSize } from "./ComboBox.enums";
 
 export type TCombobox = null | "badge" | "onlyIcon" | "descriptive";
 
@@ -50,6 +50,7 @@ export type TBaseOption = {
   access?: ShareAccessRights;
   className?: string;
   title?: string;
+  dataTestId?: string;
   action?: unknown;
   onClick?: (opt: TContextMenuValueTypeOnClick) => void;
   pageNumber?: number;
@@ -76,6 +77,8 @@ export type TComboboxProps = {
   children?: React.ReactNode;
   /** Accepts class */
   className?: string;
+  /** Class name for dropdown container */
+  dropDownClassName?: string;
   /** Icon for the combo button */
   comboIcon?: string;
   /** Disable icon click */
@@ -96,6 +99,8 @@ export type TComboboxProps = {
   displayArrow?: boolean;
   /** Height of Dropdown */
   dropDownMaxHeight?: number;
+  /** Test id for dropdown */
+  dropDownTestId?: string;
   /** Shows disabled items when displayType !== toggle */
   showDisabledItems?: boolean;
   /** Fill icon */
@@ -135,7 +140,7 @@ export type TComboboxProps = {
   /** No border */
   noBorder?: boolean;
   /** Offset left */
-  offsetLeft?: number;
+  offsetX?: number;
   /** Opened state */
   opened?: boolean;
   /** List of options */
@@ -166,6 +171,8 @@ export type TComboboxProps = {
   title?: string;
   /** Top space */
   topSpace?: number;
+  /** Test id */
+  testId?: string;
   /** Type */
   type?: TCombobox;
   /** Use portal backdrop */
@@ -195,6 +202,12 @@ export type TComboboxProps = {
 
   /** Indicates if the backdrop should be shown */
   shouldShowBackdrop?: boolean;
+  /** Data test id */
+  dataTestId?: string;
+  /** Disables text selection */
+  noSelect?: boolean;
+  /** Optional flag to use an image icon. */
+  useImageIcon?: boolean;
 };
 
 export type TComboButtonProps = {
@@ -238,6 +251,12 @@ export type TComboButtonProps = {
   plusBadgeValue?: number;
   /** Indicates if arrow should be displayed */
   displayArrow?: boolean;
+  /** Disables text selection */
+  noSelect?: boolean;
+  /** Icon image */
+  imageIcon?: string | React.ElementType | React.ReactElement;
+  /** Image alt */
+  imageAlt?: string;
 };
 
 export interface TComboButtonThemeProps {

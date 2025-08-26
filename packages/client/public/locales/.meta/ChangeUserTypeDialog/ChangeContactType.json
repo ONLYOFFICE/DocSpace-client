@@ -3,7 +3,7 @@
   "content": "Change contact type",
   "content_en_sha1_hash": "7c54eb1b46d0f4452903e7cc3f3e94550fcce01f",
   "created_at": "2025-05-19T21:30:56.907Z",
-  "updated_at": "2025-05-24T14:13:00.223Z",
+  "updated_at": "2025-06-30T12:20:31.189Z",
   "comment": {
     "text": "\"Change contact type\" is used to label a button in a modal dialog that allows users to update their contact type. The translation key appears in a file used for client-side components and is part of a larger UI element displaying options for user management.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserTypeDialog/index.tsx",
-      "line_number": 261,
+      "line_number": 254,
       "context": "onClose={onClose}\n displayType={ModalDialogType.modal}\n autoMaxHeight\n isLarge={needReassignData}\n >\n <ModalDialog.Header>{t(\"ChangeContactType\")}</ModalDialog.Header>\n <ModalDialog.Body>{getBody()}</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"change-user-type-modal_submit\"\n label={t(\"Common:ChangeButton\")}",
       "module": "/packages/client"
     }

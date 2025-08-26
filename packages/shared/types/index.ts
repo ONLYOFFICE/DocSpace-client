@@ -24,10 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import type { TFile, TFileLink, TFolder } from "../api/files/types";
 import type { TBreadCrumb } from "../components/selector/Selector.types";
-import { RoomsType, ShareAccessRights } from "../enums";
-import { TTheme, TColorScheme } from "../themes";
-import FirebaseHelper from "../utils/firebase";
+import type { RoomsType, ShareAccessRights } from "../enums";
+import type { TTheme, TColorScheme } from "../themes";
+import type FirebaseHelper from "../utils/firebase";
+import type { TRoom } from "../api/rooms/types";
 
 export type Option = {
   key: string;
@@ -81,11 +83,13 @@ export type BackupToPublicRoomOptionType = {
 
 export type TSortOrder = "descending" | "ascending";
 export type TSortBy =
+  | "DateAndTime"
   | "DateAndTimeCreation"
   | "Tags"
+  | "Type"
   | "AZ"
   | "Author"
-  | "Type"
+  | "roomType"
   | "usedspace"
   | "Size";
 
@@ -184,6 +188,13 @@ export interface StaticImageData {
   blurHeight?: number;
 }
 
+export interface LinkParamsType {
+  link: TFileLink;
+  item: TFile | TFolder | TRoom;
+
+  updateLink?: (newLink: TFileLink) => void;
+}
+
 declare global {
   interface Window {
     firebaseHelper: FirebaseHelper;
@@ -202,7 +213,9 @@ declare global {
     DocSpace: {
       navigate: (path: string, state?: { [key: string]: unknown }) => void;
       location: Location & { state: unknown };
+      displayFileExtension?: boolean;
     };
+    loginCallback?: ((profile: unknown) => void) | null;
     logs: {
       socket: string[];
     };
@@ -269,7 +282,7 @@ declare global {
       opType: number;
     }) => void;
     RendererProcessVariable: {
-      theme?: { id: string; system: string };
+      theme?: { id: string; system: string; type: string; addlocal: string };
     };
     Tiff: new (arg: object) => {
       toDataURL: () => string;

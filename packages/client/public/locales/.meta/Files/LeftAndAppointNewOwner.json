@@ -3,7 +3,7 @@
   "content": "You have left the room and appointed a new owner",
   "content_en_sha1_hash": "70c6513ecf2f1d31d81657e1a47a62c5179cea80",
   "created_at": "2025-05-19T21:30:55.742Z",
-  "updated_at": "2025-06-18T17:11:42.515Z",
+  "updated_at": "2025-08-11T18:11:59.315Z",
   "comment": {
     "text": "This translation key is used for a confirmation message when a user leaves a room and appoints a new owner. It appears as a success notification after the action is completed in the application's files management system.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 3060,
+      "line_number": 3075,
       "context": "} else {\n this.filesStore.setInRoomFolder(roomId, false);\n }\n \n isOwner\n ? toastr.success(t(\"Files:LeftAndAppointNewOwner\"))\n : toastr.success(t(\"Files:YouLeftTheRoom\"));\n });\n };\n \n changeRoomOwner = (t, userId, isLeaveChecked = false) => {",
       "module": "/packages/client"
     }
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"You have left the room\" is not accurately conveyed. \"لقد قمت بمغادرة الغرفة\" literally translates to \"You have done leaving the room.\" A more natural translation would be something like \"لقد غادرت الغرفة\" (Laqad ghararta al-ghurfa) - 'You left the room'.",
-          "suggestion": "لقد غادرت الغرفة"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -69,13 +63,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'appointed' doesn't perfectly align with 'asignado' in this context. 'Asignado' implies assigning a task or responsibility, while 'appointed' suggests a formal designation. While not entirely wrong, it's not the most natural translation.",
-          "suggestion": "Consider 'Ha salido de la sala y nombrado un nuevo propietario' or 'Ha salido de la sala y designado un nuevo propietario'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -87,25 +75,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'appointed a new owner' is not perfectly captured by 'choisi un nouveau propriétaire'. 'Appointed' implies a formal designation. 'Choisi' is more like 'selected' or 'chosen'. While not incorrect, it lacks the specific nuance of 'appointed'.",
-          "suggestion": "Consider 'désigné un nouveau propriétaire' for a closer translation of 'appointed'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"You have left the room\" is best translated as \"Դուք լքել եք սենյակը\" instead of \"Դուք դուրս եք եկել սենյակից\". While \"դուրս եք եկել\" can mean 'left', it implies a more deliberate exit, whereas 'լքել' conveys the sense of leaving a room.",
-          "suggestion": "Դուք լքել եք սենյակը"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -117,18 +93,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"You have left the room\" is translated as \"あなた退室し\" which is grammatically incomplete and less natural. A more appropriate translation would include a verb indicating the action of leaving.",
-          "suggestion": "あなたから部屋を出ました (Anata kara heya o demashita) - You left the room"
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence is a compound sentence, but it lacks proper conjunctions for better flow in Japanese. The \"し\" indicates a sequence of actions, but can be awkward here.",
-          "suggestion": "あなた退室し、新しい所有者を任命しました。 could be improved to: あなたは部屋を出て、新しい所有者を任命しました。(Anata wa heya o dete, atarashii shoyusha o ninmeishimashita.) - You left the room and appointed a new owner."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -206,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Напустили сте собу и именовали новог власника' does not accurately convey the meaning of 'You have left the room and appointed a new owner'. The word 'собу' (sobu) means 'room' but in this context, 'left' implies departure, not necessarily from a room. It suggests abandoning or leaving, which is not directly represented.",
-          "suggestion": "Consider a more accurate translation like 'Напустили сте и поставили новог власника' (Napustili ste i postavili novog vlasnika) which translates to 'You have left and appointed a new owner', or 'Откачили сте се и поставили новог власника' (Otkacili ste se i postavili novog vlasnika) which conveys the meaning of removing yourself and assigning a new owner."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

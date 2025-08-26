@@ -3,7 +3,7 @@
   "content": "LDAP settings",
   "content_en_sha1_hash": "47aabd81090aebfdaf6d1d37da2399019820296f",
   "created_at": "2025-05-19T21:30:54.273Z",
-  "updated_at": "2025-06-18T17:11:42.431Z",
+  "updated_at": "2025-08-04T07:30:01.280Z",
   "comment": {
     "text": "The translation key \"Ldap:LdapSettings\" is used to display the title of LDAP settings in the portal settings page. It appears as the title of a category and is also set as the document title when loading the LDAP integration.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 220,
+      "line_number": 223,
       "context": "case \"Common:PaymentsTitle\":\n return t(\"Common:PaymentsTitle\");\n case \"ManagementCategoryDataManagement\":\n return t(\"ManagementCategoryDataManagement\");\n case \"LdapSettings\":\n return t(\"Ldap:LdapSettings\");\n case \"LdapSyncTitle\":\n return t(\"Ldap:LdapSyncTitle\");\n case \"Common:RestoreBackup\":\n return t(\"Common:RestoreBackup\");\n case \"PortalDeletion\":",
       "module": "/packages/client"
     },
@@ -36,13 +36,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 318,
+      "line_number": 325,
       "context": "{\n id: \"portal-settings_catalog-ldap\",\n key: \"4-0\",\n icon: \"\",\n link: \"ldap\",\n tKey: \"LdapSettings\",\n isCategory: true,\n children: [\n {\n id: \"portal-settings_catalog-ldap-settings\",\n key: \"4-0-0\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 326,
+      "line_number": 333,
       "context": "{\n id: \"portal-settings_catalog-ldap-settings\",\n key: \"4-0-0\",\n icon: \"\",\n link: \"settings\",\n tKey: \"Ldap:LdapSettings\",\n },\n {\n id: \"portal-settings_catalog-ldap-sync-data\",\n key: \"4-0-1\",\n icon: \"\",",
       "module": "/packages/client"
     }
@@ -111,7 +111,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"կարգավորումներ\" (kargavorumner) can translate to settings, a more accurate and common translation of \"LDAP settings\" in a technical context would be something like \"LDAP գործունեություն\" (LDAP gorcust'ev) or \"LDAP համապարակներ\" (LDAP hamaparaki). \"կարգավորումներ\" implies more general configuration.",
+          "suggestion": "LDAP գործունեություն (LDAP gorcust'ev) or LDAP համապարակներ (LDAP hamaparaki)"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -183,7 +189,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'සැකසුම්' (sakasuṁ) is a correct transliteration for 'settings', however, in the context of technical settings, a more common and precise term might be 'මානcongurations' (mānaconfiguration) or a similar phrasing. While 'සැකසුම්' is understandable, 'මානcongurations' would be more familiar to technical users.",
+          "suggestion": "Consider using 'මානcongurations' or a similar technical term for 'settings' to better align with typical user expectations."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -204,7 +216,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"LDAP подешавања\" is a reasonable translation of 'LDAP settings,' but 'подешавања' implies settings that can be adjusted or configured. 'LDAP settings' can refer to the configuration itself, not just the ability to adjust them. A more accurate and general translation might be 'LDAP поставке' (LDAP postavke).",
+          "description": "While \"подешавања\" can mean settings, a more natural and commonly used translation for \"LDAP settings\" in Serbian (Cyrillic) would be \"LDAP поставке\". \"подешавања\" implies adjustment or configuration, whereas \"поставке\" directly translates to 'settings'.",
           "suggestion": "LDAP поставке"
         }
       ],
@@ -234,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Cài đặt' translates to 'Settings', a more accurate and common Vietnamese translation for 'LDAP settings' would be 'Thiết lập LDAP'. 'Cài đặt' often implies installation, not the configuration itself.",
-          "suggestion": "Thiết lập LDAP"
+          "description": "While \"Cài đặt\" translates to 'settings' or 'installation', it doesn't directly convey the meaning of 'LDAP settings'. A more accurate translation might include the term 'LDAP' to clarify what settings are being referred to.",
+          "suggestion": "Cài đặt LDAP"
         }
       ],
       "approved_at": null

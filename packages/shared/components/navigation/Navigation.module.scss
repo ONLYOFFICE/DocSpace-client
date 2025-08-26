@@ -1,5 +1,4 @@
 @use "../../styles/mixins";
-@use "../../styles/common-icons-style";
 @use "../../styles/variables/colors";
 
 :global(.rtl) {
@@ -125,10 +124,10 @@
 }
 
 .heading {
-  font-weight: 700;
+  font-weight: 700 !important;
   font-size: 18px !important;
-  line-height: 24px;
-  margin: 0;
+  line-height: 24px !important;
+  margin: 0 !important;
 
   &.rootFolderTitle {
     color: var(--navigation-root-folder-title-color);
@@ -136,16 +135,18 @@
 
   @include mixins.tablet-and-below {
     font-size: 21px !important;
-    line-height: 28px;
+    line-height: 28px !important;
   }
 
   @include mixins.mobile {
     font-size: 18px !important;
-    line-height: 24px;
+    line-height: 24px !important;
   }
 }
 
 .textContainer {
+  @include mixins.no-user-select;
+
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -206,6 +207,8 @@
 }
 
 .warningText {
+  @include mixins.no-user-select;
+
   box-sizing: border-box;
   height: 32px;
   padding: 8px 12px;
@@ -423,6 +426,10 @@
     grid-template-columns: auto 49px auto minmax(186px, 1fr);
   } */
 
+  &[data-is-show-back-button="true"][data-with-logo="false"][data-is-root-folder="true"] {
+    grid-template-columns: 34px auto 1fr;
+  }
+
   &[data-is-root-folder="true"][data-with-logo="false"] {
     grid-template-columns: auto 1fr;
   }
@@ -613,6 +620,10 @@
       }
 
       grid-template-columns: 29px auto 1fr !important;
+
+      &[data-is-show-back-button="true"][data-with-logo="false"][data-is-root-folder="true"] {
+        grid-template-columns: 34px auto 1fr !important;
+      }
 
       &[data-is-root-folder="true"] {
         grid-template-columns: auto 1fr !important;

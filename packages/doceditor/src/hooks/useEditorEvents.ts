@@ -51,7 +51,7 @@ import {
   frameCallEvent,
 } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { FolderType, StartFillingMode } from "@docspace/shared/enums";
+import { StartFillingMode } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 import { Nullable } from "@docspace/shared/types";
@@ -179,6 +179,15 @@ const useEditorEvents = ({
     }
   }, [config?.type]);
 
+  const checkAndRequestRoles = useCallback(() => {
+    const fillingStatus = window?.sessionStorage.getItem(FILLING_STATUS_ID);
+
+    if (fillingStatus === "true") {
+      docEditor?.requestRoles?.();
+      window?.sessionStorage.removeItem(FILLING_STATUS_ID);
+    }
+  }, []);
+
   const onSDKAppReady = React.useCallback(() => {
     docEditor = window.DocEditor.instances[EDITOR_ID];
 
@@ -186,13 +195,6 @@ const useEditorEvents = ({
 
     if (errorMessage || isSkipError)
       return docEditor?.showMessage?.(errorMessage || t("Common:InvalidLink"));
-
-    const fillingStatus = window?.sessionStorage.getItem(FILLING_STATUS_ID);
-
-    if (fillingStatus === "true") {
-      docEditor?.requestRoles?.();
-      window?.sessionStorage.removeItem(FILLING_STATUS_ID);
-    }
 
     console.log("ONLYOFFICE Document Editor is ready", docEditor);
     const url = window.location.href;
@@ -233,6 +235,7 @@ const useEditorEvents = ({
     setDocumentReady(true);
 
     frameCallCommand("setIsLoaded");
+    checkAndRequestRoles();
 
     frameCallEvent({
       event: "onAppReady",
@@ -253,37 +256,11 @@ const useEditorEvents = ({
         docEditor,
       ); // Do not remove: it's for Back button on Mobile App
     }
-  }, [config?.errorMessage, sdkConfig?.frameId]);
+  }, [config?.errorMessage, sdkConfig?.frameId, checkAndRequestRoles]);
 
   const onUserActionRequired = React.useCallback(() => {
     frameCallCommand("setIsLoaded");
   }, []);
-
-  const getBackUrl = React.useCallback(() => {
-    if (!fileInfo) return;
-    const search = window.location.search;
-    const shareIndex = search.indexOf("share=");
-    const key = shareIndex > -1 ? search.substring(shareIndex + 6) : null;
-
-    let backUrl = "";
-
-    if (fileInfo.rootFolderType === FolderType.Rooms) {
-      if (key) {
-        backUrl = `/rooms/share?key=${key}&folder=${fileInfo.folderId}`;
-      } else {
-        backUrl = `/rooms/shared/${fileInfo.folderId}/filter?folder=${fileInfo.folderId}`;
-      }
-    } else if (fileInfo.rootFolderType === FolderType.SHARE) {
-      backUrl = `/rooms/personal/filter?folder=recent`;
-    } else {
-      backUrl = `/rooms/personal/filter?folder=${fileInfo.folderId}`;
-    }
-
-    const url = window.location.href;
-    const origin = url.substring(0, url.indexOf("/doceditor"));
-
-    return `${combineUrl(origin, backUrl)}`;
-  }, [fileInfo]);
 
   const onSDKRequestClose = React.useCallback(() => {
     const editorGoBack = sdkConfig?.editorGoBack;
@@ -291,10 +268,14 @@ const useEditorEvents = ({
     if (editorGoBack === "event") {
       frameCallEvent({ event: "onEditorCloseCallback" });
     } else {
-      const backUrl = getBackUrl();
+      const backUrl = config?.editorConfig?.customization?.goback?.url;
+
       if (backUrl) window.location.replace(backUrl);
     }
-  }, [getBackUrl, sdkConfig?.editorGoBack]);
+  }, [
+    sdkConfig?.editorGoBack,
+    config?.editorConfig?.customization?.goback?.url,
+  ]);
 
   const getDefaultFileName = React.useCallback(
     (withExt = false) => {
@@ -307,7 +288,7 @@ const useEditorEvents = ({
             ? "pptx"
             : documentType === "cell"
               ? "xlsx"
-              : "docxf";
+              : "pdf";
 
       let fileName = t("Common:NewDocument");
 
@@ -318,8 +299,8 @@ const useEditorEvents = ({
         case "pptx":
           fileName = t("Common:NewPresentation");
           break;
-        case "docxf":
-          fileName = t("Common:NewMasterForm");
+        case "pdf":
+          fileName = t("Common:NewPDFForm");
           break;
         default:
           break;
@@ -341,9 +322,17 @@ const useEditorEvents = ({
 
     createFile(fileInfo.folderId, defaultFileName ?? "")
       ?.then((newFile) => {
+        const searchQuery = new URLSearchParams({
+          fileId: newFile.id.toString(),
+        });
+
+        if (newFile.isForm && newFile.security.Edit) {
+          searchQuery.append("action", "edit");
+        }
+
         const newUrl = combineUrl(
           window.ClientConfig?.proxy?.url,
-          `/doceditor?fileId=${encodeURIComponent(newFile.id)}`,
+          `/doceditor?${searchQuery.toString()}`,
         );
         window.open(newUrl, openOnNewPage ? "_blank" : "_self");
       })
@@ -817,7 +806,7 @@ const useEditorEvents = ({
 
     const res = await openEdit(
       fileInfo.id,
-      fileInfo.version,
+      undefined,
       doc,
       config?.editorConfig.mode,
       undefined,
@@ -829,7 +818,6 @@ const useEditorEvents = ({
     window.DocEditor?.instances[EDITOR_ID]?.refreshFile(res);
   }, [
     fileInfo?.id,
-    fileInfo?.version,
     doc,
     shareKey,
     config?.editorType,

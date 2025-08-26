@@ -16,7 +16,7 @@ const {
 } = require("../config/config");
 const axios = require("axios");
 
-const MODEL = process.env.OLLAMA_MODEL || "llama3.2";
+const MODEL = process.env.OLLAMA_MODEL || "gemma3:12b";
 
 /**
  * Checks if Ollama is running and available
@@ -76,7 +76,12 @@ async function generateBasicComment(keyPath, content, usages) {
 - **Key Name:** ${keyPath}
 - **English Content:** "${content}"
 - **Usage Contexts:**
-${processedUsages.map((u) => `  - **File:** ${u.file_path}\n    **Line:** ${u.line_number}\n    **Context:** ${u.context}`).join("\n")}
+${processedUsages
+  .map(
+    (u) =>
+      `  - **File:** ${u.file_path}\n    **Line:** ${u.line_number}\n    **Context:** ${u.context}`
+  )
+  .join("\n")}
 
 ## Instructions
 You are a helpful assistant that creates concise descriptions for translation keys.
@@ -98,7 +103,9 @@ Based on this information, please write a short, clear description of what this 
   while (retries < maxRetries) {
     try {
       console.log(
-        `Generating comment for ${keyPath} (attempt ${retries + 1}/${maxRetries})`
+        `Generating comment for ${keyPath} (attempt ${
+          retries + 1
+        }/${maxRetries})`
       );
 
       // Call Ollama API with timeout
@@ -337,7 +344,9 @@ async function generateAutoComment(projectName) {
  */
 async function generateAutoCommentsMetadata() {
   const projects = Object.keys(projectLocalesMap);
-  console.log(`Generating metadata for ${projects.length} projects: ${projects.join(", ")}`);
+  console.log(
+    `Generating metadata for ${projects.length} projects: ${projects.join(", ")}`
+  );
 
   const overallStats = {
     totalProjects: projects.length,
@@ -349,7 +358,7 @@ async function generateAutoCommentsMetadata() {
     skippedKeys: 0,
     errors: [],
     namespaces: {},
-    startTime: new Date()
+    startTime: new Date(),
   };
 
   for (const project of projects) {
@@ -364,43 +373,53 @@ async function generateAutoCommentsMetadata() {
       overallStats.processedKeys += projectStats.processedKeys || 0;
       overallStats.updatedComments += projectStats.updatedComments || 0;
       overallStats.skippedKeys += projectStats.skippedKeys || 0;
-      
+
       if (projectStats.errors && projectStats.errors.length) {
         overallStats.errors.push(...projectStats.errors);
       }
-      
+
       // Merge namespace stats
       if (projectStats.namespaces) {
-        Object.entries(projectStats.namespaces).forEach(([namespace, nsStats]) => {
-          if (!overallStats.namespaces[namespace]) {
-            overallStats.namespaces[namespace] = {
-              totalKeys: 0,
-              processedKeys: 0,
-              updatedComments: 0,
-              skippedKeys: 0,
-              errors: 0
-            };
+        Object.entries(projectStats.namespaces).forEach(
+          ([namespace, nsStats]) => {
+            if (!overallStats.namespaces[namespace]) {
+              overallStats.namespaces[namespace] = {
+                totalKeys: 0,
+                processedKeys: 0,
+                updatedComments: 0,
+                skippedKeys: 0,
+                errors: 0,
+              };
+            }
+
+            overallStats.namespaces[namespace].totalKeys +=
+              nsStats.totalKeys || 0;
+            overallStats.namespaces[namespace].processedKeys +=
+              nsStats.processedKeys || 0;
+            overallStats.namespaces[namespace].updatedComments +=
+              nsStats.updatedComments || 0;
+            overallStats.namespaces[namespace].skippedKeys +=
+              nsStats.skippedKeys || 0;
+            overallStats.namespaces[namespace].errors += nsStats.errors || 0;
           }
-          
-          overallStats.namespaces[namespace].totalKeys += nsStats.totalKeys || 0;
-          overallStats.namespaces[namespace].processedKeys += nsStats.processedKeys || 0;
-          overallStats.namespaces[namespace].updatedComments += nsStats.updatedComments || 0;
-          overallStats.namespaces[namespace].skippedKeys += nsStats.skippedKeys || 0;
-          overallStats.namespaces[namespace].errors += nsStats.errors || 0;
-        });
+        );
       }
-      
+
       console.log(`Namespace statistics for project ${project}:`);
       if (projectStats.namespaces) {
-        Object.entries(projectStats.namespaces).forEach(([namespace, nsStats]) => {
-          console.log(`  - ${namespace}: ${nsStats.totalKeys || 0} keys (${nsStats.updatedComments || 0} comments generated)`);
-        });
+        Object.entries(projectStats.namespaces).forEach(
+          ([namespace, nsStats]) => {
+            console.log(
+              `  - ${namespace}: ${nsStats.totalKeys || 0} keys (${nsStats.updatedComments || 0} comments generated)`
+            );
+          }
+        );
       }
     } catch (error) {
       console.error(`Error processing project ${project}:`, error);
       overallStats.errors.push({
         project,
-        error: error.message
+        error: error.message,
       });
     }
   }
@@ -423,7 +442,7 @@ generateAutoCommentsMetadata()
       errors: stats.errors || [],
       namespaces: stats.namespaces || {},
       startTime: stats.startTime || new Date(Date.now() - 1000), // Default to 1 second ago if missing
-      ...stats
+      ...stats,
     };
 
     const endTime = new Date();
@@ -450,7 +469,9 @@ generateAutoCommentsMetadata()
     Object.entries(stats.namespaces || {}).forEach(([namespace, nsStats]) => {
       if (nsStats) {
         console.log(
-          `  ${namespace}: ${nsStats.updatedComments || 0}/${nsStats.totalKeys || 0} comments generated`
+          `  ${namespace}: ${nsStats.updatedComments || 0}/${
+            nsStats.totalKeys || 0
+          } comments generated`
         );
       }
     });

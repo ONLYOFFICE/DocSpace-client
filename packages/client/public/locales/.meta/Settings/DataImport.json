@@ -3,7 +3,7 @@
   "content": "Data import",
   "content_en_sha1_hash": "783af5b205a3e0c3c3b5feadf95d2a786442a1fe",
   "created_at": "2025-05-19T21:30:51.050Z",
-  "updated_at": "2025-06-08T12:02:32.730Z",
+  "updated_at": "2025-08-11T09:02:43.935Z",
   "comment": {
     "text": "This translation key is used to display the label \"Data Import\" on a UI component. It is part of a data import process in a portal settings page, and its purpose is to provide a clear indication of what action is being performed or which option has been selected.",
     "is_auto": true,
@@ -12,25 +12,25 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 233,
+      "line_number": 236,
       "context": "return t(\"Common:DeveloperTools\");\n case \"Common:Bonus\":\n return t(\"Common:Bonus\");\n case \"Common:FreeAccessToLicensedVersion\":\n return \"Common:FreeAccessToLicensedVersion\";\n case \"DataImport\":\n return t(\"DataImport\");\n case \"StorageManagement\":\n return t(\"StorageManagement\");\n case \"Services\":\n return t(\"Services\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Section/Header/index.js",
-      "line_number": 322,
-      "context": "? t(\"ImportFromNextcloud\")\n : workspace === \"Workspace\"\n ? t(\"ImportFromPortal\", {\n organizationName: logoText,\n })\n : t(\"DataImport\")\n : t(header, {\n organizationName: logoText,\n license: t(\"Common:EnterpriseLicense\"),\n });",
+      "line_number": 324,
+      "context": "? t(\"ImportFromNextcloud\")\n : workspace === \"Workspace\"\n ? t(\"ImportFromPortal\", {\n organizationName: logoText,\n })\n : t(\"DataImport\")\n : t(header, {\n organizationName: logoText,\n license: t(\"Common:EnterpriseLicense\"),\n productName: t(\"Common:ProductName\"),\n });",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 123,
+      "line_number": 122,
       "context": "</>\n ),\n component: <SelectUsersTypeStep t={t} />,\n },\n {\n title: t(\"Settings:DataImport\"),\n description: t(\"Settings:ImportSectionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n component: (\n <ImportStep",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 131,
+      "line_number": 130,
       "context": "</>\n ),\n component: <SelectUsersTypeStep t={t} />,\n },\n {\n title: t(\"Settings:DataImport\"),\n description: t(\"Settings:ImportSectionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n component: (\n <ImportStep",
       "module": "/packages/client"
     },
@@ -60,7 +60,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 400,
+      "line_number": 407,
       "context": "{\n id: \"portal-settings_catalog-data-import\",\n key: \"5\",\n type: PageType.dataImport,\n link: \"data-import\",\n tKey: \"DataImport\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-data-import-child\",\n key: \"5-0\",",
       "module": "/packages/client"
     }
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Входиране на данни\" is not the most natural or accurate translation of \"Data import\". While \"входиране\" relates to inputting or importing, \"данни\" (data) is often translated as \"данни\" or \"информация\" depending on the context. A more common and understandable translation would be \"Импортиране на данни\" or \"Зареждане на данни\".",
-          "suggestion": "Импортиране на данни"
+          "description": "The translation \"Входиране на данни\" is not the most natural or common way to express \"Data import\" in Bulgarian. While technically understandable, it's not idiomatic.",
+          "suggestion": "Зареждане на данни\" or \"Импортиране на данни\" would be more natural and commonly used translations. \"Зареждане на данни\" is generally preferred."
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Czech translation \"Import dat\" is not a complete or accurate translation of \"Data import\". It's missing the article and doesn't flow naturally in Czech.",
-          "suggestion": "Import dat (needs article/revision to a more natural phrasing, potentially 'Import dat' or 'Voz dat' or similar, depending on the broader context)"
+          "description": "The translation 'Import dat' is not the most natural or accurate Czech translation for 'Data import'. While 'Import' is correct, 'dat' is an abbreviated and informal way to say 'data'.",
+          "suggestion": "Import dat"
         }
       ],
       "approved_at": null
@@ -204,7 +204,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Import date' is a literal translation of 'Data import' and doesn't accurately convey the meaning. 'Data' and 'date' are different concepts.",
+          "description": "The Romanian translation \"Import date\" translates to \"Import date\" which is not equivalent to the English \"Data import\". It should convey the action of importing data, not refer to a date.",
           "suggestion": "Import de date"
         }
       ],
@@ -240,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Увоз података\" is understandable, a more accurate and common translation for 'Data import' in Serbian (Cyrillic) would be \"Увоз података\" or \"Увођење података\". \"Увоз\" literally means 'import' but 'увођење' is more commonly used in technical contexts to describe the action of bringing data in.",
-          "suggestion": "Увоз података"
+          "description": "The translation 'Увоз података' while containing the correct root words, doesn't perfectly capture the meaning of 'Data import'. 'Увоз' generally implies importing goods or commodities. A more accurate translation would be 'Унос података'.",
+          "suggestion": "Унос података"
         }
       ],
       "approved_at": null

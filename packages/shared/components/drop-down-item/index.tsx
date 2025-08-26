@@ -28,13 +28,13 @@ import React from "react";
 import { ReactSVG } from "react-svg";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
-import { useTheme } from "styled-components";
 
 import RightArrowReactSvgUrl from "PUBLIC_DIR/images/right.arrow.react.svg?url";
 import ArrowLeftReactUrl from "PUBLIC_DIR/images/arrow-left.react.svg?url";
 
 import { globalColors } from "../../themes";
 import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
+import { useTheme } from "../../hooks/useTheme";
 
 import { ToggleButton } from "../toggle-button";
 import { Badge } from "../badge";
@@ -111,12 +111,13 @@ const DropDownItem = ({
   isPaidBadge,
   heightTablet,
   badgeLabel,
+  testId,
   ...rest
 }: DropDownItemProps) => {
   const { t } = useTranslation(["Common"]);
   const { isRTL } = useInterfaceDirection();
 
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
   const handleClick = (
     e: React.MouseEvent<HTMLElement> | React.ChangeEvent<HTMLInputElement>,
@@ -158,7 +159,7 @@ const DropDownItem = ({
       )}
       onClick={handleClick}
       tabIndex={tabIndex}
-      data-testid="drop-down-item"
+      data-testid={testId ?? "drop-down-item"}
       data-focused={isActiveDescendant}
       role={isSeparator ? "separator" : "option"}
       aria-selected={isSelected}
@@ -168,7 +169,7 @@ const DropDownItem = ({
       }
     >
       {isHeader && withHeaderArrow ? (
-        <div className={styles.iconWrapper}>
+        <div className={styles.iconWrapper} onClick={headerArrowAction}>
           <ReactSVG src={ArrowLeftReactUrl} className="drop-down-icon_image" />
         </div>
       ) : null}
@@ -237,7 +238,7 @@ const DropDownItem = ({
             borderRadius="50px"
             style={{ marginInlineStart: "10px" }}
             backgroundColor={
-              theme.isBase
+              isBase
                 ? globalColors.favoritesStatus
                 : globalColors.favoriteStatusDark
             }

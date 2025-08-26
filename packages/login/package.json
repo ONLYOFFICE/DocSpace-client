@@ -1,12 +1,12 @@
 {
   "name": "@docspace/login",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "private": true,
   "scripts": {
     "build:translations": "node ./scripts/buildTranslations.js",
     "build": "next build",
     "build:deploy": "cross-env DEPLOY=true next build",
-    "start": "cross-env NODE_ENV=development PORT=5011 next dev",
+    "start": "cross-env NODE_ENV=development PORT=5011 node server.js",
     "start-prod": "cross-env NODE_ENV=production node server.js",
     "lint": "eslint ./src --max-warnings=0",
     "lint:fix": "eslint ./src --fix",
@@ -51,7 +51,7 @@
     "@playwright/test": "1.48.0",
     "@svgr/webpack": "8.1.0",
     "@types/crypto-js": "4.2.2",
-    "@types/nconf": "^0",
+    "@types/nconf": "0.10.7",
     "@types/node": "22.7.5",
     "@types/react": "19.1.4",
     "@types/react-dom": "19.1.5",

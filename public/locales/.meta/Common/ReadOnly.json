@@ -3,7 +3,7 @@
   "content": "Read only",
   "content_en_sha1_hash": "601dcc1c87c313fd30ce84fe78d832c726dc750e",
   "created_at": "2025-05-19T21:30:47.724Z",
-  "updated_at": "2025-06-02T10:20:51.367Z",
+  "updated_at": "2025-08-04T07:30:01.362Z",
   "comment": {
     "text": "\"This translation key is used as a label for the 'ReadOnly' access right, which indicates that the user has read-only permissions in certain contexts, such as viewing shared documents or filling out forms.\"",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
-      "line_number": 269,
+      "line_number": 221,
       "context": "</div>\n ),\n },\n {\n id: \"readonly\",\n name: t(\"Common:ReadOnly\"),\n content: null,\n },\n ];\n \n const inputRef = useRef<HTMLInputElement>(null);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/utils.ts",
-      "line_number": 127,
+      "line_number": 118,
       "context": ") => {\n switch (key) {\n case \"all\":\n return t(\"Common:All\");\n case \"readonly\":\n return t(\"Common:ReadOnly\");\n case \"restricted\":\n return t(\"Common:Restricted\");\n \n default:\n return t(\"Common:All\");",
       "module": "/packages/client"
     },
@@ -45,7 +45,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"للقراءة فقط\" while generally understood, is a more literal translation of \"for reading only.\" A more idiomatic translation for \"Read only\" would be \"فقط للقراءة\" or \"للقراءة فقط\". The original phrasing is slightly less common and slightly more formal.",
+          "suggestion": "Consider \"فقط للقراءة\" or \"للقراءة فقط\""
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -54,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Azerbaijani translation \"Yalnız oxumaq üçün\" is a literal translation and not the typical way to express 'Read only'. It means 'Only for reading'.",
-          "suggestion": "A more natural and accurate translation would be \"Yalnız oxumağa məhdud\" or \"Oxumaq üçün\" (if the context allows, implying read-only)."
+          "description": "The translation \"Yalnız oxumaq üçün\" is a literal translation of \"Only for reading\". While understandable, it's not the idiomatic way to express \"Read only\" in Azerbaijani. A more natural translation would be something like \"Yalnız oxumağa” or “Təkcə oxumaq üçün”.",
+          "suggestion": "Təkcə oxumaq üçün"
         }
       ],
       "approved_at": null
@@ -78,7 +84,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Schreibgeschützt' is a valid German term, it's a more technical and less common translation of 'Read only'. A more user-friendly and common alternative would be 'Nur Lesen'.",
+          "description": "The German translation 'Schreibgeschützt' while technically meaning 'write protected,' isn't the most natural or common translation for 'Read only' in a user interface context. 'Nur Lesen' would be a more direct and widely understood equivalent.",
           "suggestion": "Nur Lesen"
         }
       ],
@@ -114,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Միայն կարդալու համար\" is a literal translation and might sound slightly awkward in Armenian. While technically correct, it's not the most natural way to express \"Read only\".",
-          "suggestion": "Consider a more idiomatic translation like \"Միայն ընթեռնելի\" or \"Կարդալուց բացի ոչինչ\"."
+          "description": "The Armenian translation 'Միայն կարդալու համար' is a literal translation of 'Only for reading' which is not the most natural or accurate way to express 'Read only' in Armenian. A more natural translation would be something like 'Կարդալի համար միայն' or 'Միայն ընթերցելու համար'.",
+          "suggestion": "Կարդալի համար միայն"
         }
       ],
       "approved_at": null
@@ -144,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ອ່ານຢ່າງດຽງວ\" does not accurately convey the meaning of \"Read only\".  \"ອ່ານຢ່າງດຽງວ\" translates to \"read carefully\" or \"read attentively\".",
-          "suggestion": "The correct translation should convey the meaning of restriction or inability to modify. A more accurate translation might be \"ຫ้ามແກ້ໄຂ\" (haem gae khai) which means 'not editable' or 'forbidden to edit', or \"ສາມາດອ່ານໄດ້ເທົ່ານັ້ນ\" (saman an kan dai thao nan) which means 'can only read'."
+          "description": "The Lao translation \"ອ່ານຢ່າງດຽງວ\" is not an accurate translation of \"Read only\". \"ອ່ານຢ່າງດຽງວ\" literally translates to \"read carefully\" or \"read attentively\". \"Read only\" implies that the content is not editable.",
+          "suggestion": "ອ່ານເທົ່ານັ້ນ (Aan thao nan) - Meaning \"Read only\" or ບໍ່ສາມາດແກ້ໄຂໄດ້ (Bo samat kae khai dai) - Meaning \"Cannot be edited\" would be more accurate."
         }
       ],
       "approved_at": null
@@ -156,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation 'Tikai lasīt' is a literal translation of 'Read only' but doesn't convey the intended meaning of 'Read only' in a UI context. It implies 'only reading' rather than 'cannot be edited'.",
-          "suggestion": "Neizmantojams rediģēšanai"
+          "description": "While \"Tikai lasīt\" is understandable, a more idiomatic and accurate translation of \"Read only\" in Latvian would be \"Atļauts tikai lasīt\" or \"Lasītāju režīms\". \"Tikai lasīt\" is too literal and doesn't convey the intended meaning of a read-only state.",
+          "suggestion": "Atļauts tikai lasīt"
         }
       ],
       "approved_at": null
@@ -192,7 +198,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Doar în citire\" is understandable, it's not the most natural or commonly used Romanian translation for \"Read only.\" A more idiomatic translation would be \"Numai citire\" or \"Citire numai\". \"Doar în citire\" sounds a bit literal and slightly awkward.",
+          "description": "While \"Doar în citire\" is understandable, it's not the most natural or idiomatic translation of \"Read only.\" A more common and accurate translation would be \"Numai citire\" or \"Citire numai\". \"Doar în citire\" sounds slightly awkward.",
           "suggestion": "Numai citire"
         }
       ],
@@ -240,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation \"Salt okunur\" is inaccurate. \"Salt\" means salt and is unrelated to the English meaning of \"Read only\".",
-          "suggestion": "The correct translation should be \"Sadece okunabilir\" or \"Yalnızca okunabilir\"."
+          "description": "The Turkish translation \"Salt okunur\" is inaccurate. \"Salt\" typically refers to salt and doesn't fit the context of \"Read only\". The correct translation would be \"Sadece okunabilir\".",
+          "suggestion": "Sadece okunabilir"
         }
       ],
       "approved_at": null
@@ -249,13 +255,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Лише читання\" is understandable, a more natural and commonly used Ukrainian translation for \"Read only\" in a technical context would be \"Тільки для читання\". \"Лише\" is often used in more casual settings.",
-          "suggestion": "Тільки для читання"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -264,8 +264,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Chỉ đọc' is understandable, it's not the most natural or idiomatic translation for 'Read only'. It's a very literal translation.",
-          "suggestion": "Đọc chỉ (for emphasis) or 'Chỉ dành cho việc đọc' (intended for reading only) or 'Không được chỉnh sửa' (not editable) might be more appropriate depending on the context."
+          "description": "While \"Chỉ đọc\" is understandable, a more natural and precise translation of \"Read only\" in Vietnamese would be \"Chỉ xem\" or \"Không chỉnh sửa\". \"Chỉ đọc\" implies reading material that may not be inherently restricted from editing.",
+          "suggestion": "Chỉ xem"
         }
       ],
       "approved_at": null

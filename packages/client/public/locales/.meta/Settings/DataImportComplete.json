@@ -3,7 +3,7 @@
   "content": "Data import complete",
   "content_en_sha1_hash": "2a0f523d96bbf06d15492d217a4ad34d6fd0e309",
   "created_at": "2025-05-19T21:30:51.058Z",
-  "updated_at": "2025-05-26T07:57:32.493Z",
+  "updated_at": "2025-08-11T09:02:43.942Z",
   "comment": {
     "text": "The translation key \"DataImportComplete\" is used to display a confirmation message indicating that data import has been successfully completed. It typically appears on a button or dialog in the UI, providing users with visual feedback after completing data import operations for Google Workspace, Nextcloud, and Other Workspaces.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 153,
+      "line_number": 152,
       "context": "title: t(\"Settings:DataImportProcessing\"),\n description: t(\"Settings:ImportProcessingDescription\"),\n component: <ImportProcessingStep t={t} migratorName=\"GoogleWorkspace\" />,\n },\n {\n title: t(\"Settings:DataImportComplete\"),\n description: t(\"Settings:ImportCompleteDescriptionGoogle\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: <ImportCompleteStep t={t} />,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 161,
+      "line_number": 160,
       "context": "title: t(\"Settings:DataImportProcessing\"),\n description: t(\"Settings:ImportProcessingDescription\"),\n component: <ImportProcessingStep t={t} migratorName=\"Nextcloud\" />,\n },\n {\n title: t(\"Settings:DataImportComplete\"),\n description: t(\"Settings:ImportCompleteDescriptionNextcloud\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: <ImportCompleteStep t={t} />,",
       "module": "/packages/client"
     },

@@ -3,7 +3,7 @@
   "content": "No files and folders here yet",
   "content_en_sha1_hash": "a627ed73bfcb8d72910264294e06487f021b90b5",
   "created_at": "2025-05-19T21:30:48.450Z",
-  "updated_at": "2025-06-08T12:02:32.920Z",
+  "updated_at": "2025-08-21T11:22:39.963Z",
   "comment": {
     "text": "This translation key is used to display a message when no files or folders are present on a list. It appears in an empty file and folder list, typically in a UI component. Translators should provide a clear and concise message indicating that there is currently no content.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/selectors/Files/hooks/useSelectorBody.tsx",
-      "line_number": 219,
-      "context": "items={items}\n onSelect={onSelect}\n emptyScreenImage={\n theme?.isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl\n }\n emptyScreenHeader={t(\"Common:SelectorEmptyScreenHeader\")}\n emptyScreenDescription=\"\"\n searchEmptyScreenImage={\n theme?.isBase\n ? EmptyScreenFilterAltSvgUrl\n : EmptyScreenFilterAltDarkSvgUrl",
+      "line_number": 220,
+      "context": "items={items}\n onSelect={onSelect}\n emptyScreenImage={\n isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl\n }\n emptyScreenHeader={t(\"Common:SelectorEmptyScreenHeader\")}\n emptyScreenDescription=\"\"\n searchEmptyScreenImage={\n isBase ? EmptyScreenFilterAltSvgUrl : EmptyScreenFilterAltDarkSvgUrl\n }\n searchEmptyScreenHeader={t(\"Common:NotFoundTitle\")}",
       "module": "/packages/shared"
     }
   ],
@@ -42,7 +42,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Тук все още няма стаи и папки' translates to 'There are no rooms and folders here yet.' This is not an accurate translation of 'No files and folders here yet.' 'Rooms' ('стаи') is used incorrectly; it should refer to 'files' or 'documents'.",
+          "description": "The translation 'Тук все още няма стаи и папки' literally translates to 'There are no rooms and folders here yet'. The English content refers to files and folders, not rooms. 'Стаи' means 'rooms', which is inaccurate.",
           "suggestion": "Тук все още няма файлове и папки"
         }
       ],
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Aucun fichier ou dossier n'a encore été créé\" is a bit too formal and literally translates to 'No file or folder has yet been created.' A more natural and user-friendly translation would be something like 'Aucun fichier ou dossier pour l'instant' or 'Pas encore de fichiers ou dossiers'.",
-          "suggestion": "Aucun fichier ou dossier pour l'instant"
+          "description": "The translation 'Aucun fichier ou dossier n'a encore été créé' is a bit too formal for a user interface. It translates literally to 'No file or folder has yet been created'. A more natural and user-friendly translation would be more along the lines of 'Rien ici pour l'instant' or 'Pas de fichiers ou dossiers pour le moment'.",
+          "suggestion": "Rien ici pour l'instant"
         }
       ],
       "approved_at": null
@@ -120,13 +120,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is overly verbose and doesn't capture the simplicity of the English original. \"ຫາກໍ່ເລີ່ມຕົ້ນເທົ່ານັ້ນ\" translates to \"just started\" which isn't the intended meaning of 'No files and folders here yet'. It implies a new account or a recently created space.",
-          "suggestion": "ຍັງບໍ່ມີເອກະສານ ແລະ ໂຟນເດີ ຢູ່ທີ່ນີ້"
+          "description": "The Lao translation 'ຫາກໍ່ເລີ່ມຕົ້ນເທົ່ານັ້ນ, ຍັງບໍ່ມີເອກະສານ ແລະ ໂຟນເດີ ຢູ່ທີ່ນີ້.' is overly verbose and doesn't convey the simplicity of the English 'No files and folders here yet'. The Lao implies 'only just started' which isn't the intended meaning.",
+          "suggestion": "ບໍ່ມີເອກະສານ ແລະ ໂຟນເດີ ຢູ່ທີ່ນີ້ເທື່ອ"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"ຫາກໍ່ເລີ່ມຕົ້ນເທົ່ານັ້ນ\" adds unnecessary complexity and doesn't accurately reflect the meaning of \"No files and folders here yet\".",
-          "suggestion": "The suggestion combines the removal of the unnecessary phrase with the previously suggested correction: ຍັງບໍ່ມີເອກະສານ ແລະ ໂຟນເດີ ຢູ່ທີ່ນີ້"
+          "type": "formatting",
+          "description": "While technically correct, the Lao translation includes 'ຢູ່ທີ່ນີ້' which is a bit wordy. It could be more concise.",
+          "suggestion": "ບໍ່ມີເອກະສານ ແລະ ໂຟນເດີ ຢູ່ທີ່ນີ້ເທື່ອ"
         }
       ],
       "approved_at": null
@@ -167,13 +167,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Niciun fișier sau folder deocamdată aici' is a bit verbose and not the most natural way to say 'No files and folders here yet' in Romanian. 'Deocamdată' implies a temporary state, which isn't explicitly conveyed in the English. A more direct translation would be better.",
-          "suggestion": "Poate 'Niciun fișier sau folder aici' or 'Nu există fișiere sau foldere aici'"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the use of 'sau' multiple times can feel slightly clunky. Consider rephrasing to improve flow.",
-          "suggestion": "Poate 'Niciun fișier sau folder aici' or 'Nu există fișiere sau foldere aici'"
+          "description": "The translation 'Niciun fișier sau folder deocamdată aici' while understandable, is slightly verbose and doesn't capture the concise nature of the English original. 'Deocamdată' (for the time being) implies a temporary state, which might not be intended.",
+          "suggestion": "Niciun fișier sau folder aici"
         }
       ],
       "approved_at": null
@@ -190,8 +185,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'මෙතැන ගොනු හෝ බහාලුම් නැත' is a literal translation that doesn't fully capture the nuance of \"No files and folders here yet\". While technically correct, it sounds a bit stiff and formal for a user interface.",
-          "suggestion": "Consider a more natural phrasing like 'මේ chỗට තව ගොනු හා ෆෝල්ඩර් නැත' (me chota thava gonu ha folder nathe) which translates to 'There are no files and folders here yet.'"
+          "description": "The translation 'මෙතැන ගොනු හෝ බහාලුම් නැත' is a literal translation but doesn't flow naturally in Sinhala for a UI element. It emphasizes 'here' unnecessarily.",
+          "suggestion": "Consider a more natural phrasing like 'ගොනු හෝ බහාලුම් නොවී' or 'ගොනු හා බහාලුම් නොවී'."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'හෝ' (or) is a bit formal for this context. It might be better to use a more conversational alternative, depending on the overall tone of the app.",
+          "suggestion": "Consider replacing 'හෝ' with a more suitable conjunction if the app’s tone is informal."
         }
       ],
       "approved_at": null
@@ -208,8 +208,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Tu še ni datotek in map' is a literal translation but doesn't quite capture the natural flow of the English phrase 'No files and folders here yet'. A more natural and idiomatic Slovenian translation would be 'Ni datotek ali map tukaj' or 'Tukaj še ni datotek in map.'.",
-          "suggestion": "Ni datotek ali map tukaj"
+          "description": "The English phrase 'No files and folders here yet' implies a state that will change. The Slovenian translation 'Tu še ni datotek in map' literally translates to 'There are no files and folders here'. While technically correct, it lacks the nuance of 'yet'. A more accurate translation would convey the idea of potential future content.",
+          "suggestion": "Tu še ni datotek in map, a dodajate jih."
         }
       ],
       "approved_at": null
@@ -220,8 +220,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Још увек нема датотека и фолдера овде\" is a literal translation but doesn't quite capture the natural flow and tone of the English phrase \"No files and folders here yet.\" It sounds slightly clunky in Serbian.  A more natural and idiomatic translation would be better.",
-          "suggestion": "Нема ни једне датотеке или фолдере овде."
+          "description": "The translation \"Још увек нема датотека и фолдера овде\" is a literal translation but doesn't quite convey the natural flow of the English phrase 'No files and folders here yet'. It feels a bit clunky in Serbian.",
+          "suggestion": "Consider a more natural phrasing like \"Овде још нема датотека и фолдера\" or \"Ништа још нема овде: датотеке и фолдери\"."
         }
       ],
       "approved_at": null

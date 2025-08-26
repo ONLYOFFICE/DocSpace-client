@@ -3,7 +3,7 @@
   "content": "You can't pin more than 10 rooms to the top. Unpin some that are currently pinned.",
   "content_en_sha1_hash": "f7482a38a156fedb2aa60db7554e918934affe1d",
   "created_at": "2025-05-19T21:30:56.124Z",
-  "updated_at": "2025-06-18T17:11:42.514Z",
+  "updated_at": "2025-08-11T18:11:59.313Z",
   "comment": {
     "text": "This translation key is used for a warning message that informs users they cannot pin more rooms than the limit of 10 and suggests unpinning some pinned rooms to resolve the issue. It appears as an error notification when a user attempts to exceed the room pin limit in a UI component, such as an action button or dialog.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1320,
+      "line_number": 1332,
       "context": "if (!res.value) isError = true;\n });\n \n updatingFolderList(withFinishedOperation, isPin);\n \n isError && toastr.error(t(\"RoomsPinLimitMessage\"));\n \n return;\n }\n \n if (action === \"unpin\") {",
       "module": "/packages/client"
     }
@@ -30,13 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"لا يمكنك تثبيت أكثر من 10 غرف في الأعلى. قم بإلغاء تثبيت بعض العناصر المثبتة حاليًا.\" is not a perfect translation of \"You can't pin more than 10 rooms to the top. Unpin some that are currently pinned.\" The phrase \"العناصر المثبتة حاليًا\" (currently pinned items) is overly formal and doesn't quite capture the natural tone of the original. \"غرف\" (rooms) is accurate, but the overall phrasing is a bit clunky.",
+          "description": "The word 'elements' (عناصر) doesn't accurately translate 'rooms' in this context. It's too generic.",
           "suggestion": "لا يمكنك تثبيت أكثر من 10 غرف في الأعلى. قم بإلغاء تثبيت بعض الغرف المثبتة حاليًا."
-        },
-        {
-          "type": "formatting",
-          "description": "While not incorrect, the translation uses full stops. Consistent punctuation with the English source is recommended.",
-          "suggestion": "Consider whether to match the original English punctuation. In this case, keep the full stop."
         }
       ],
       "approved_at": null
@@ -47,13 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'sabitləyə bilməzsiniz' (you can't stabilize) isn't the best translation for 'pin'. 'Pin' in this context means to fix something at the top of a list. A better translation would be 'bərabərdir' (equal to) or 'yuxarıya keçirməyə' (to move to the top).",
-          "suggestion": "Yuxarıda 10 otağa qədər bərabərdir/yuxarıya keçirə bilərsiniz. Hazırda sabitlənmiş otaqların bəzilərini çıxarın."
+          "description": "The translation 'sabitləyə bilməzsiniz' (cannot pin) is technically correct, but a more natural phrasing would be 'sabit etməyə bilməzsiniz' or 'dərinə salmağa bilməzsiniz' (to pin, to fix). 'Sakitləyə bilməzsiniz' sounds like it could be related to stillness or quietness.",
+          "suggestion": "Yuxarıda 10-dan çox otaq sabit etməyə bilməzsiniz. / Yuxarıda 10-dan çox otaq dərinə salmağa bilməzsiniz."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Hazırda sabitlənmiş otaqların bəzilərini çıxarın' is a bit awkward. 'Sabitlənmiş' is the correct verb form for 'pinned,' but the phrasing could be more natural.",
-          "suggestion": "Hazırda yuxarıda sabitləşdirilmiş otaqların bir neçəsini silin."
+          "description": "The word 'Hazırda sabitlənmiş otaqların bəzilərini çıxarın' is accurate but a more natural phrasing would be 'Hazırda sabitlənmiş otaqların bir neçəsini silin' or 'Hazırda sabitlənmiş otaqların bir neçəsini başqa yerə köçürün'.",
+          "suggestion": "Hazırda sabitlənmiş otaqların bir neçəsini silin. / Hazırda sabitlənmiş otaqların bir neçəsini başqa yerə köçürün."
         }
       ],
       "approved_at": null
@@ -64,13 +59,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"pin to the top\" is not accurately translated to \"закачите към лентата\". \"Pin\" in this context refers to a visual pinning action within the application's interface, not a physical attachment to a ribbon. A more accurate translation would convey this specific application functionality.",
-          "suggestion": "Не можете да закачите повече от 10 стаи в горната част. Откачете някои от закачените в момента."
+          "description": "The term 'лентата' (lentata) is not the most natural way to refer to the top bar where pinned rooms are displayed. A more accurate translation might be 'свърх лентата' (svrъh lentata) or simply 'отгоре'.",
+          "suggestion": "Не можете да закачите повече от 10 стаи отгоре. Откачете някои от закачените в момента."
         },
         {
-          "type": "formatting",
-          "description": "The phrase \"to the top\" is slightly awkward.  While not strictly incorrect, it could be improved.",
-          "suggestion": "Не можете да закачите повече от 10 стаи отгоре. Откачете някои от закачените в момента."
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'откачете някои от закачените в момента' is a bit verbose. A more concise and natural phrasing could be used.",
+          "suggestion": "Откачете някои от закачените."
         }
       ],
       "approved_at": null
@@ -81,13 +76,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Na vrchol nelze připnout více než 10 místností. Některé z nich, které jsou aktuálně připnuté, můžete zrušit.\" is a bit literal and doesn't flow naturally in Czech. 'Na vrchol' (to the top) is not the most idiomatic way to express 'to the top' in this context.",
-          "suggestion": "Consider a more natural phrasing like: 'Můžete připnout maximálně 10 místností. Zrušte připnutí některých, které máte připnuté.' or 'Lze připnout nejvýše 10 místností. Zrušte připnutí těch, které jsou aktuálně připnuté.'"
+          "description": "The phrase \"Na vrchol\" (To the top) isn't the most natural way to express \"to the top\" in this context. It's grammatically correct, but a more idiomatic translation would be something like \"Do horní části\" or simply omitting the preposition entirely.",
+          "suggestion": "Consider 'Můžete připnout nejvýše 10 místností.' or 'Můžete připnout maximálně 10 místností.'"
         },
         {
-          "type": "formatting",
-          "description": "The translation uses passive voice, which, while grammatically correct, can be less direct than active voice. This isn't necessarily an error but contributes to the less-natural flow.",
-          "suggestion": "Consider rewriting the sentence to be more active. For example, instead of '...můžete zrušit připnutí některých...', use '...můžete odepnout některé...'"
+          "type": "incorrect_translation",
+          "description": "The phrasing \"Některé z nich, které jsou aktuálně připnuté, můžete zrušit\" is a bit convoluted. A simpler and more direct translation would improve clarity.",
+          "suggestion": "Consider 'Zrušte ty, které jsou aktuálně připnuté.' or 'Odpiňte některé z připnutých místností.'"
         }
       ],
       "approved_at": null
@@ -101,7 +96,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'pin' is translated as 'καρφιτσώσετε' (karfitsoyste) and 'καρφιτσωμένα' (karfitzomena). While technically correct, a more natural and understandable translation for 'pin' in this context might be something closer to 'αποθηκεύσετε' (apothikefsete) or 'κρατήσετε στην κορυφή' (kratisete stin korifi). The current translation sounds overly literal and slightly awkward.",
+          "suggestion": "Consider translating 'pin' as 'αποθηκεύσετε' (apothikefsete) for 'pin' and 'αποθηκευμένα' (apothikevmena) for 'pinned', or using 'κρατήσετε στην κορυφή' (kratisete stin korifi) and 'κρατημένα στην κορυφή' (kratimena stin korifi)."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -110,8 +111,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'salas' (rooms) feels slightly unnatural in this context. While technically correct, 'habitaciones' might flow better and be more commonly used for rooms in a digital interface.",
-          "suggestion": "No puede anclar más de 10 habitaciones en la parte superior. Desancle algunas que estén ancladas actualmente."
+          "description": "The translation of 'pin' as 'anclar' is technically correct but doesn't fully capture the meaning of 'pinning' rooms in a UI context.  'Fijar' or 'bloquear' might be more appropriate depending on the platform's terminology.",
+          "suggestion": "Consider using 'No puede fijar más de 10 salas en la parte superior. Desfije algunas que estén fijadas actualmente.' or 'No puede bloquear más de 10 salas en la parte superior. Desbloquee algunas que estén bloqueadas actualmente.'"
         }
       ],
       "approved_at": null
@@ -133,14 +134,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"pin\" is translated as \"ամրացնել\", which literally means \"to secure\" or \"to fasten\". While understandable in this context, a more natural translation of \"pin\" (in the sense of pinning a room to the top) might be something like \"գլխավորել\" or a phrasing that indicates prioritization or marking as important.",
-          "suggestion": "Consider alternatives like \"Դուք չեք կարող ավելի քան 10 սենյակ գլխավորել վերևում: Ապամրացրեք այն սենյակները, որոնք ներկայումս գլխավորված են:\" or a similar phrasing that better captures the meaning of 'pinning' in a user interface context."
-        },
-        {
           "type": "formatting",
-          "description": "The phrase \"Որոշները, որոնք ներկայումս ամրացված են\" is grammatically correct but slightly awkward. It could be smoother.",
-          "suggestion": "Consider rewording to \"այն սենյակները, որոնք ներկայումս ամրացված են\" or \"այն սենյակները, որոնք գլխավորված են\" depending on the chosen terminology for 'pin'."
+          "description": "The colon after \"10-ից\" should be a period to match Armenian sentence structure and punctuation conventions.",
+          "suggestion": "Դուք չեք կարող 10-ից ավելի սենյակ ամրացնել վերևում։ Ապամրացրեք որոշները, որոնք ներկայումս ամրացված են:"
         }
       ],
       "approved_at": null
@@ -151,8 +147,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Sbloccane alcuni attualmente fissati in alto' is not a direct or natural translation of 'Unpin some that are currently pinned.' The term 'sbloccare' generally means 'to unlock', which doesn't quite capture the concept of unpinning. A more accurate translation would use a verb related to removing a pin.",
-          "suggestion": "Consider replacing 'Sbloccane alcuni attualmente fissati in alto' with a phrase like 'Rimuovi alcuni attualmente fissati' or 'Annulla la fissazione di alcuni attualmente fissati.'"
+          "description": "The word 'sbloccane' is not the best translation for 'unpin'. It implies unlocking something, rather than removing a pin. A more accurate translation for 'unpin' would be 'rimuovi'.",
+          "suggestion": "Non puoi fissare più di 10 stanze in alto. Rimuovi alcuni attualmente fissati in alto."
         }
       ],
       "approved_at": null
@@ -160,18 +156,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ルーム' (ruumu) is used repeatedly. While technically correct, it might be more natural to use a slightly more varied vocabulary for improved flow.  Consider using '部屋' (heya) or 'スペース' (supēsu) in some instances.",
-          "suggestion": "Consider varying the term for 'room' to enhance readability. For example, 'ピン留めできる部屋の数は10までです...'"
-        },
-        {
-          "type": "formatting",
-          "description": "While the use of 'いくつか' (ikutsu ka) is correct, the sentence could flow a bit better with a more direct instruction. The current phrasing is slightly indirect.",
-          "suggestion": "Consider rewording to something like: 'ピン留めされているルームを解除してください' (Kinpūme sarete iru rūmu o kaijō shite kudasai - Please unpin some of the rooms that are currently pinned)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -180,13 +165,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"상단에 10개 이상의 룸을 고정할 수 없습니다\" is a literal translation and a bit awkward in Korean. A more natural phrasing would convey the limit more clearly.",
-          "suggestion": "최대 10개의 룸만 고정할 수 있습니다. 현재 고정된 룸을 해제해주세요."
+          "description": "The phrase \"상단에 10개 이상의 룸을 고정할 수 없습니다\" is a bit literal and could be more naturally phrased. '상단에' emphasizes 'top' which is somewhat redundant.",
+          "suggestion": "10개 이상의 룸을 고정할 수 없습니다. 현재 고정된 룸의 일부를 해제하세요."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"현재 고정된 룸의 일부를 취소하세요\" is a direct translation of \"Unpin some that are currently pinned.\" While understandable, it's less fluent. \"해제해주세요\" (release/unpin) is more common in this context.",
-          "suggestion": "현재 고정된 룸을 해제해주세요."
+          "description": "The verb '취소하세요' (chwihoseyohaeyo) translates to 'cancel'. 'Unpin' implies 'release' or 'remove', a more appropriate term is '해제하세요' (haejehaseyo).",
+          "suggestion": "현재 고정된 룸의 일부를 해제하세요."
         }
       ],
       "approved_at": null
@@ -194,18 +179,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"ປັກໝຸດ\" while technically meaning \"pin\", can sound awkward in this context. A more natural Lao phrasing for \"pin\" in this context would be \"ຫມາຍເອົາ\" or \"ແກ້ໄຂ\".",
-          "suggestion": "ທ່ານບໍ່ສາມາດຫມາຍເອົາຫຼາຍກວ່າ 10 ຫ້ອງຢູ່ເທິງສຸດໄດ້. ຖອນຫມາຍບາງອັນທີ່ຫມາຍເອົາຢູ່."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'ຖອນປັກໝຸດ' while technically meaning 'unpin', is a bit literal.  'ຖອນ' (thon) can also mean 'remove' or 'cancel.'",
-          "suggestion": "ຖອນບາງຫ້ອງທີ່ໝາຍເອົາຢູ່"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -220,13 +194,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The sentence 'Verwijder pinnen momenteel zijn gepind' is grammatically incorrect and doesn't make sense. It's unclear what 'pinnen' refers to.",
-          "suggestion": "Verwijder de kamers die momenteel vastgepind zijn."
+          "description": "The sentence 'Verwijder pinnen momenteel zijn gepind' is grammatically incorrect. The phrasing is awkward and doesn't accurately convey the English meaning.",
+          "suggestion": "Verwijder de pinnen die momenteel vastgepind zijn."
         },
         {
           "type": "incorrect_translation",
-          "description": "The entire second part of the sentence is a poor translation of 'Unpin some that are currently pinned.'",
-          "suggestion": "Maak eerst kamers los die je momenteel hebt vastgepind."
+          "description": "The phrasing 'Verwijder pinnen...' doesn't directly translate the 'Unpin some that are currently pinned' part of the English sentence.  It implies deleting pins, not unpinning them.",
+          "suggestion": "Verwijder de pinnen die momenteel vastgepind zijn."
         }
       ],
       "approved_at": null
@@ -237,13 +211,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"U góry\" is a literal translation of 'at the top' which is awkward in this context. It doesn't accurately convey the intended meaning of 'to the top' in the user interface.",
-          "suggestion": "Zamiast 'U góry', rozważ 'Na górze' lub 'W widocznym obszarze'."
+          "description": "The phrase \"U góry można przypiąć\" is a bit awkward. A more natural translation for \"You can't pin more than\" would be \"Można przypiąć maksymalnie\".",
+          "suggestion": "Można przypiąć maksymalnie 10 pokoi."
         },
         {
           "type": "incorrect_translation",
-          "description": "The verb 'odepnij' is grammatically correct but sounds slightly formal and less conversational than might be preferred for a user-facing message. A more natural phrasing could be considered.",
-          "suggestion": "Rozważ użycie słowa 'odpiąć' zamiast 'odepnij' (slightly more conversational)."
+          "description": "The word 'Odepnij' (Unpin) is technically correct, but a more fluid and common phrasing would be 'Odpięcie niektórych'.",
+          "suggestion": "Odpięcie niektórych z obecnie przypiętych."
         }
       ],
       "approved_at": null
@@ -254,13 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'fixar' (fixar) is a technically correct translation for 'pin' in this context, but 'ancorar' might be a more natural and understandable equivalent for the user. 'Fixar' can sometimes imply a more permanent action.",
-          "suggestion": "Você não pode ancorar mais de 10 salas no topo. Solte alguns que estão ancorados no momento."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Solte' is technically correct for 'Unpin', it could be more user-friendly to use a more common phrasing such as 'Desfixar' or 'Remover'.",
-          "suggestion": "Você não pode ancorar mais de 10 salas no topo. Desfixe alguns que estão ancorados no momento."
+          "description": "The word 'fixar' (fixar) while technically correct for 'pin', can sound slightly awkward in this context. 'Prender' or 'ancorar' might be more natural for 'pin' in this UI context, depending on the specific platform and intended tone.",
+          "suggestion": "Consider using 'Você não pode prender mais de 10 salas no topo. Solte algumas que estão presas no momento.' or 'Você não pode ancorar mais de 10 salas no topo. Solte algumas que estão ancoradas no momento.'"
         }
       ],
       "approved_at": null
@@ -271,18 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'fixar' while technically meaning 'to pin', doesn't quite convey the same meaning as 'pin' in this context of pinning rooms in a digital interface. 'Fixar' is often used for fixing items in place more permanently. A more appropriate verb would be 'ancorar' or 'travar' (though 'travar' can also have negative connotations).",
-          "suggestion": "Você não pode ancorar mais de 10 salas no topo. Desancore alguns que estão atualmente fixados."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Solte alguns que estão fixados no momento' is a bit awkward. 'Unpin' is more accurately conveyed by 'desancorar'.",
-          "suggestion": "Desancore alguns que estão atualmente fixados."
-        },
-        {
-          "type": "formatting",
-          "description": "The use of 'atualmente' feels slightly formal for this context. While not incorrect, it can be slightly softened for a more natural feel.",
-          "suggestion": "Desancore alguns que estão fixados."
+          "description": "The word 'fixar' (fixar) is a reasonable translation for 'pin' in this context, but 'solte' (release/let go) doesn't quite capture the action of 'unpinning.' A more accurate translation for 'unpin' would be 'desfixar' or 'despinhar'.",
+          "suggestion": "Você não pode fixar mais de 10 salas no topo. Desfixe alguns que estão fixados no momento."
         }
       ],
       "approved_at": null
@@ -293,13 +252,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'fixa în sus' is not the most natural way to express 'pin' in this context. While technically correct, 'prinde' or 'fixează' would be more commonly used and sound more fluent.",
-          "suggestion": "Nu puteţi prinde mai mult de 10 săli. Anulați fixarea unor săli."
+          "description": "The word 'fixa' is a verb conjugation that doesn't quite capture the meaning of 'pin' in this context. While 'fixa' can mean 'fix,' in the sense of attaching something, 'pin' in this context refers to a visual marking or indicator.",
+          "suggestion": "Nu puteţi prinde mai mult de 10 săli în partea de sus. Anulați fixarea celor care sunt deja prinse."
         },
         {
-          "type": "incorrect_translation",
-          "description": "While 'fixează' is technically correct, the repeated use of 'fixare' can sound slightly awkward. Consider using a single term.",
-          "suggestion": "Nu puteţi prinde mai mult de 10 săli. Anulați prinderea unor săli."
+          "type": "formatting",
+          "description": "The phrase 'în partea de sus' is a bit clunky. It is preferable to simplify.",
+          "suggestion": "Nu puteţi prinde mai mult de 10 săli sus. Anulați fixarea celor care sunt deja prinse."
         }
       ],
       "approved_at": null
@@ -316,13 +275,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ඔබ ඉහළට පින් කර ඇති කාමර 10කට වඩා වැඩි ගණනක් පින් කිරීමට හැකියාවක් නැත' is a bit wordy and not the most natural way to express the English meaning. A more concise and idiomatic translation would be better.",
-          "suggestion": "ඔබ ඉහළට 10කට වැඩි කාමර පින් කිරීමට නොහැකිය. දැනට පින් කර ඇති කාමර අඩු කරන්න."
+          "description": "The phrase \"ඔබ ඉහළට පින් කර ඇති කාමර 10කට වඩා වැඩි ගණනක් පින් කිරීමට හැකියාවක් නැත\" is a bit verbose and less natural. A more direct translation of 'You can't pin more than 10 rooms...' would be more appropriate.",
+          "suggestion": "ඔබ 10කට වැඩි කාමර පින් කිරීමට හැකියාවක් නැත."
         },
         {
-          "type": "formatting",
-          "description": "While not a critical error, the sentence structure could be slightly improved for better flow and readability in Sinhala. Separating the '10' from the rest of the phrase would improve clarity.",
-          "suggestion": "ඔබ ඉහළට 10 කාමරකට වඩා පින් කිරීමට හැකියාවක් නැත. දැනටමත් පින් කර ඇති ඒවායින් කිහිපයක් ඉවත් කරන්න."
+          "type": "spelling",
+          "description": "The word 'පින්' is repeated frequently. While technically correct, it could be slightly less repetitive.",
+          "suggestion": "Consider replacing some instances of 'පින්' with a synonym like 'සලකුණු කරන්න' or 'සටහන් කරන්න' (depending on the precise meaning intended)."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'දැනටමත් පින් කර ඇති ඒවායින් කිහිපයක් ඉවත් කරන්න' translates to 'Remove a few of those already pinned'.  A more natural phrasing would be closer to 'Unpin some of the currently pinned rooms'.",
+          "suggestion": "වත්වා ගන්න."
         }
       ],
       "approved_at": null
@@ -339,8 +303,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Na vrhu ni mogoče pripeti več kot 10 sob\" is a bit awkward. A more natural phrasing would be \"Lahko pripnete največ 10 sob na vrh.\" or \"Na vrhu je omejitev pripenjanja 10 sob.\"",
+          "description": "The translation 'Na vrhu ni mogoče pripeti več kot 10 sob' is somewhat literal and could be improved for naturalness. A more natural phrasing might be 'Lahko pripnete največ 10 sob na vrh.'",
           "suggestion": "Lahko pripnete največ 10 sob na vrh."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Odpni nekatere izmed teh, ki so trenutno pripete' could be more concise. The word 'izmed' is unnecessary and adds complexity.",
+          "suggestion": "Odpni nekatere, ki so trenutno pripete."
         }
       ],
       "approved_at": null
@@ -351,13 +320,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'zakaciti' (to pin) implies a physical action of attaching something. 'Pin' in this context refers to pinning a room to the top of a list or interface, which is a digital concept. A more appropriate translation would reflect this digital action.",
-          "suggestion": "Не можете приказати више од 10 просторија на врх. Уклоните неке које су тренутно приказане на врху."
+          "description": "The word \"закачити\" (zakaciti) while technically meaning 'to pin' in a literal sense, doesn't quite convey the intended meaning of pinning a room to the top of a list in a digital interface. It's more associated with physically attaching something.",
+          "suggestion": "Consider using a term like \"прикачити\" (prikaciti) or a phrase that more accurately reflects the action of pinning a room to a list in a digital context. For example, 'можете да закачите' could be rephrased as 'можете да прикачите' or 'можете да додате на врх'."
         },
         {
           "type": "grammar",
-          "description": "The sentence 'Откачите неке који су тренутно закачени' is grammatically awkward. The masculine plural 'који' doesn't match the implied plural 'rooms'.",
-          "suggestion": "Уклоните неке које су тренутно на врху."
+          "description": "The sentence 'Откачите неке који су тренутно закачени' is slightly awkward. It's grammatically correct but sounds unnatural. The use of 'неке који су тренутно закачени' feels unnecessarily complex.",
+          "suggestion": "Rephrase to 'Откачите неке од закачених' or 'Откачите неке које сте већ закачили' (Unpin some that you have already pinned)."
         }
       ],
       "approved_at": null
@@ -367,9 +336,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The word 'zakačiti' (to pin) is used consistently, but 'otkačite' (unpin) should be 'Odvakačite' to maintain consistent verb conjugation. 'Odvakačite' is the correct imperative form to match 'zakačiti'.",
-          "suggestion": "Odvakačite neke koji su trenutno zakačeni."
+          "type": "grammar",
+          "description": "The Serbian sentence 'Ne možete zakačiti više od 10 prostorija na vrh' is grammatically awkward. The preposition 'na' is not necessary and makes the sentence feel less natural.",
+          "suggestion": "Ne možete zakačiti više od 10 prostorija na vrh."
+        },
+        {
+          "type": "grammar",
+          "description": "The Serbian sentence 'Otkačite neke koji su trenutno zakačeni' uses the masculine plural pronoun 'koji' (which) when referring to rooms. Rooms are typically considered feminine in Serbian.",
+          "suggestion": "Otkačite neke koje su trenutno zakačene."
         }
       ],
       "approved_at": null
@@ -380,8 +354,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'En üste 10'dan fazla odayı sabitleyemezsiniz. Şu anda sabitlenmiş olanlardan bazılarının sabitlemesini kaldırın.' is slightly awkward and doesn't perfectly capture the English meaning. The phrase 'bazılarının sabitlemesini kaldırın' (remove the pinning of some) is not the most natural way to express 'Unpin some that are currently pinned'.",
-          "suggestion": "En üste 10'dan fazla oda sabitleyemezsiniz. Şu anda sabitlenmiş olanlardan bazılarını sabitlemeyi kaldırın."
+          "description": "The English phrase 'Unpin some that are currently pinned' is not perfectly conveyed by 'Şu anda sabitlenmiş olanlardan bazılarının sabitlemesini kaldırın'. The Turkish translation implies removing the 'act of pinning' which is not the meaning of the English sentence. A more accurate translation would focus on unpinning the rooms.",
+          "suggestion": "Şu anda sabitlenmiş olanlardan bazılarını sabitlemeyi kaldırın."
         }
       ],
       "approved_at": null
@@ -389,18 +363,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word \"кімнат\" should be \"кімнат\".",
-          "suggestion": "кімнат"
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'Відкріпіть декілька закріплених кімнат' is slightly awkward. While technically correct, it could be improved for natural flow.",
-          "suggestion": "Звільніть декілька закріплених кімнат."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

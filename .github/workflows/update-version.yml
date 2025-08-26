@@ -6,20 +6,21 @@ on:
 jobs:
   change-version:
     if: (startsWith(github.ref, 'refs/heads/release/') ||
-         startsWith(github.ref, 'refs/heads/hotfix/'))    
+      startsWith(github.ref, 'refs/heads/hotfix/'))
     name: "Update packages versions"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          token: '${{ github.token }}'
+          token: "${{ github.token }}"
 
       - name: Filter changes and update versions
         run: |
           VERSION=$(echo "${GITHUB_REF#refs/heads/}" | sed 's/[^0-9.]*//g')
           echo "VERSION=$VERSION" >> $GITHUB_ENV
           sed -i "s/\(\"version\":\).*/\1 \"$VERSION\",/g" packages/*/package.json
+          sed -i "s/\(\"version\":\).*/\1 \"$VERSION\",/g" package.json
 
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
@@ -27,4 +28,3 @@ jobs:
           author_name: github-actions[bot]
           author_email: github-actions[bot]@users.noreply.github.com
           message: Update version in packages.json to v${{ env.VERSION }}
-

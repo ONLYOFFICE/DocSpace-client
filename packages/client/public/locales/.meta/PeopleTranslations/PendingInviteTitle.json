@@ -3,7 +3,7 @@
   "content": "Pending invite",
   "content_en_sha1_hash": "4c0cead4ed08558db964b020a52ab1b4c0661e30",
   "created_at": "2025-05-19T21:30:53.487Z",
-  "updated_at": "2025-05-26T07:57:32.381Z",
+  "updated_at": "2025-08-04T07:30:01.184Z",
   "comment": {
     "text": "This translation key is used to display a label for pending invitations. It appears as a button title and will be displayed when an invitation is pending review or approval. The translator should provide a clear and concise phrase that communicates the status of the invitation in a user-friendly manner.",
     "is_auto": true,
@@ -13,13 +13,13 @@
     {
       "file_path": "/packages/client/src/helpers/contacts/utils.ts",
       "line_number": 202,
-      "context": ") => {\n switch (item) {\n case \"active\":\n return t(\"Common:Active\");\n case \"pending\":\n return t(\"PeopleTranslations:PendingInviteTitle\");\n case \"disabled\":\n return t(\"PeopleTranslations:DisabledEmployeeStatus\");\n case \"all\":\n return t(\"All\");\n default:",
+      "context": ") => {\n switch (item) {\n case \"active\":\n return t(\"Common:Active\");\n case \"pending\":\n return t(\"PeopleTranslations:PendingInviteTitle\");\n case \"disabled\":\n return t(\"PeopleTranslations:DisabledEmployeeStatus\");\n case \"all\":\n return t(\"Common:All\");\n default:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 112,
-      "context": "const getStatusLabel = React.useCallback(() => {\n let label = \"\";\n \n switch (infoPanelSelection.status) {\n case EmployeeStatus.Pending:\n label = t(\"PeopleTranslations:PendingInviteTitle\");\n break;\n \n case EmployeeStatus.Disabled:\n label = t(\"PeopleTranslations:DisabledEmployeeStatus\");\n break;",
+      "line_number": 119,
+      "context": "let label = \"\";\n \n switch (userSelection.status) {\n case EmployeeStatus.Pending:\n label = t(\"PeopleTranslations:PendingInviteTitle\");\n break;\n \n case EmployeeStatus.Disabled:\n label = t(\"PeopleTranslations:DisabledEmployeeStatus\");\n break;",
       "module": "/packages/client"
     },
     {

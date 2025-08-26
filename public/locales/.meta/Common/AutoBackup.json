@@ -3,7 +3,7 @@
   "content": "Automatic backup",
   "content_en_sha1_hash": "63c9d2eb5520b137dffca1ebb5266759080b1352",
   "created_at": "2025-05-26T07:15:40.628Z",
-  "updated_at": "2025-05-26T08:07:44.297Z",
+  "updated_at": "2025-08-21T11:22:39.869Z",
   "comment": {
     "text": "The \"AutoBackup\" translation key refers to a UI element used in data management settings that enables automatic backups. It appears on a page where users can configure backup options and is likely displayed as a button or icon in a dialog box. Its purpose is to provide a clear label for this feature, helping users understand its functionality.",
     "is_auto": true,
@@ -18,14 +18,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 283,
+      "line_number": 290,
       "context": "{\n id: \"portal-settings_catalog-auto-backup\",\n key: \"2-1\",\n icon: \"\",\n link: \"auto-backup\",\n tKey: \"AutoBackup\",\n isCategory: true,\n },\n ],\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/management/src/app/settings/layout.tsx",
-      "line_number": 41,
-      "context": "name: t(\"Common:DataBackup\"),\n content: children,\n },\n {\n id: \"auto-backup\",\n name: t(\"Common:AutoBackup\"),\n content: children,\n },\n {\n id: \"restore\",\n name: t(\"Common:RestoreBackup\"),",
+      "line_number": 69,
+      "context": "name: t(\"Common:DataBackup\"),\n content: <LoaderWrapper isLoading={isLoading}>{children}</LoaderWrapper>,\n },\n {\n id: \"auto-backup\",\n name: t(\"Common:AutoBackup\"),\n content: <LoaderWrapper isLoading={isLoading}>{children}</LoaderWrapper>,\n },\n {\n id: \"restore\",\n name: t(\"Common:RestoreBackup\"),",
       "module": "/packages/management"
     }
   ],

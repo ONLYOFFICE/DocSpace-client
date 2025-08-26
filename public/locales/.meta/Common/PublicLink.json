@@ -3,7 +3,7 @@
   "content": "Public link",
   "content_en_sha1_hash": "dd39ae9e1717c4e3598e229fad2cce750d2b63c7",
   "created_at": "2025-05-19T21:30:47.642Z",
-  "updated_at": "2025-05-26T07:57:32.438Z",
+  "updated_at": "2025-08-11T09:02:43.921Z",
   "comment": {
     "text": "This translation key is used for a label that displays a public link. It appears on a page within an InfoPanel in the Home section of the client application, and is displayed as a header when viewing public room items.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/index.js",
-      "line_number": 194,
-      "context": ") {\n if (!isArchiveFolder || primaryLink) {\n publicRoomItems.push(\n <LinksBlock key={GENERAL_LINK_HEADER_KEY}>\n <Text fontSize=\"14px\" fontWeight={600} lineHeight=\"16px\">\n {isFormRoom ? t(\"Common:PublicLink\") : t(\"Common:SharedLinks\")}\n </Text>\n \n {!isArchiveFolder && !isFormRoom ? (\n <div\n data-tooltip-id=\"emailTooltip\"",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/index.tsx",
+      "line_number": 178,
+      "context": "className={styles.linksBlock}\n key={GENERAL_LINK_HEADER_KEY}\n data-testid=\"info_panel_members_links_block\"\n >\n <Text fontSize=\"14px\" fontWeight={600} lineHeight=\"16px\">\n {isFormRoom ? t(\"Common:PublicLink\") : t(\"Common:SharedLinks\")}\n </Text>\n \n {!isArchiveFolder && !isFormRoom ? (\n <div\n data-tooltip-id=\"emailTooltip\"",
       "module": "/packages/client"
     }
   ],
@@ -144,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Link public\" is a literal word-for-word translation and doesn't flow naturally in Romanian. The correct order would be \"legătură publică\" or simply \"link\" (using the English word, which is common in Romanian).",
-          "suggestion": "legătură publică"
+          "description": "The Romanian translation 'Link public' is a literal word order and doesn't reflect the natural phrasing of 'Public link' in Romanian. A more accurate translation would prioritize 'public' before 'link'.",
+          "suggestion": "Legătură publică"
         }
       ],
       "approved_at": null
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"පොදු සම්බන්ධතාවය\" (pōḍu saṁbandhatavaya) is a literal translation, it's not the most natural or commonly used translation for \"Public link\" in Sinhala. It implies a shared connection rather than a direct, accessible link.",
-          "suggestion": "A more natural translation would be \"ජනතා සබැඳිය\" (janatā sabaeḍiya) or \"ප්‍රසිද්ධ සබැඳිය\" (prasiddha sabaeḍiya)."
+          "description": "While \"පොදු සම්බන්ධතාවය\" is a literal translation of \"public link\", it's not the most natural or commonly used term in Sinhala. It sounds somewhat formal and technical.",
+          "suggestion": "Consider using a more common and user-friendly translation, such as \"සාធාරණ අඩවිය\" (Saadharaana adaviya) or \"ප්‍රසිද්ධ සබැඳිය\" (Prasiddha sabandiya). The best choice would depend on the context of where 'Public Link' is being used."
         }
       ],
       "approved_at": null

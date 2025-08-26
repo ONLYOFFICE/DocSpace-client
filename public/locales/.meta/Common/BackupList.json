@@ -3,7 +3,7 @@
   "content": "Backup List",
   "content_en_sha1_hash": "104eab22b64bfdd7ac57f7948dadb9a22f16bc6c",
   "created_at": "2025-05-26T07:15:40.738Z",
-  "updated_at": "2025-05-26T08:07:23.424Z",
+  "updated_at": "2025-08-12T19:46:26.387Z",
   "comment": {
     "text": "The \"BackupList\" translation key is used to display the text \"Backup List\" in the restore backup page's settings section and in a modal dialog for managing backups. It appears as an unavailable button in the restoration process and is displayed within a modal window when the backup list is visible.",
     "is_auto": true,
@@ -11,15 +11,15 @@
   },
   "usage": [
     {
-      "file_path": "/packages/shared/pages/restore-backup/index.tsx",
-      "line_number": 357,
-      "context": "<Text\n className=\"restore-backup_list settings_unavailable\"\n {...onClickVersionListProp}\n noSelect\n >\n {t(\"Common:BackupList\")}\n </Text>\n \n {isVisibleBackupListDialog ? (\n <BackupListModalDialog\n isVisibleDialog={isVisibleBackupListDialog}",
+      "file_path": "/packages/shared/pages/backup/restore-backup/index.tsx",
+      "line_number": 429,
+      "context": ")}\n {...onClickVersionListProp}\n noSelect\n dataTestId=\"restore_backup_list_button\"\n >\n {t(\"Common:BackupList\")}\n </Text>\n \n {isVisibleBackupListDialog ? (\n <BackupListModalDialog\n isVisibleDialog={isVisibleBackupListDialog}",
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/shared/pages/restore-backup/sub-components/backup-list/index.tsx",
-      "line_number": 220,
-      "context": "<ModalDialog\n displayType={ModalDialogType.aside}\n visible={isVisibleDialog}\n onClose={onModalClose}\n >\n <ModalDialog.Header>{t(\"Common:BackupList\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <StyledBackupList>\n <div className=\"backup-list_content\">\n {filesList.length > 0 ? (\n <div className=\"backup-restore_dialog-header\">",
+      "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/backup-list/index.tsx",
+      "line_number": 229,
+      "context": "<ModalDialog\n displayType={ModalDialogType.aside}\n visible={isVisibleDialog}\n onClose={onModalClose}\n >\n <ModalDialog.Header>{t(\"Common:BackupList\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.backupList} data-testid=\"backup-list-modal\">\n <div\n className={classNames(\n styles.backupListContent,",
       "module": "/packages/shared"
     }
   ],

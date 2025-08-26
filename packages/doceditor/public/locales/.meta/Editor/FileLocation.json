@@ -3,7 +3,7 @@
   "content": "Open file location",
   "content_en_sha1_hash": "3e3e6fccc753b74da3c1194baf8f98ec4f2b9768",
   "created_at": "2025-05-19T21:30:57.126Z",
-  "updated_at": "2025-05-26T07:57:32.846Z",
+  "updated_at": "2025-08-04T07:30:01.627Z",
   "comment": {
     "text": "The \"Open file location\" translation key is used to display a button or link that opens the file location associated with the Editor component. It appears in a likely dialog or settings section where users can access or edit the editor's configuration.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/Editor.tsx",
-      "line_number": 165,
-      "context": "let goBack: TGoBack = {} as TGoBack;\n \n if (fileInfo) {\n const editorGoBack = sdkConfig?.editorGoBack;\n \n const openFileLocationText = (\n (\n i18n.getDataByLanguage(i18n.language) as unknown as {\n Editor: { [key: string]: string };\n }\n )?.[\"Editor\"] as {",
+      "line_number": 171,
+      "context": "let goBack: TGoBack = {} as TGoBack;\n \n if (fileInfo) {\n const editorGoBack = sdkConfig?.editorGoBack;\n \n const openFileLocationText = (\n (\n i18n.getDataByLanguage(i18n.language) as unknown as {\n Editor: { [key: string]: string };\n }\n )?.Editor as {",
       "module": "/packages/doceditor"
     }
   ],
@@ -27,73 +27,37 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"افتح موقع ملف\" is a literal translation that doesn't quite convey the intended meaning of \"Open file location.\" A more natural phrasing would be something that implies opening the location *of* the file, not opening the file itself and then finding the location.",
-          "suggestion": "فتح مسار الملف (Fath masar al-milaf) - which means \"Open file path\" or افتح مكان الملف (Iftah makan al-milaf) - which means \"Open the location of the file\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Faylın yerləşdiyi yeri açın' is a bit literal and doesn't flow naturally in Azerbaijani. 'Open file location' generally implies navigating to the file's location, not necessarily opening *the place where it is located*.",
-          "suggestion": "Consider a more natural translation like 'Faylın açılışına keçid et' or 'Faylın yerini göstər'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Mестоположението на файла\" is too literal. While technically correct, it doesn't convey the intended meaning of 'Open file location'. It translates to 'The file location'.",
-          "suggestion": "A better translation would be something like \"Отвори местоположението на файла\" or \"Отвори файла\" (Open the file) depending on the context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Otevřít umístění souboru\" is technically correct, it's not the most natural or idiomatic translation for \"Open file location.\" A more common and user-friendly phrasing would be \"Otevřít umístění souboru\" or \"Otevřít složku se souborem\".",
-          "suggestion": "Otevřít složku se souborem"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Dateispeicherort öffnen' is not the most natural or idiomatic way to say 'Open file location' in German. 'Dateispeicherort' is technically correct but a bit clunky. A more common and user-friendly translation would be something like 'Datei öffnen' or 'Datei speichern öffnen' (depending on the intended functionality).",
-          "suggestion": "Datei öffnen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Άνοιγμα τοποθεσίας αρχείου' is a literal translation and doesn't convey the intended meaning of 'Open file location' in a natural Greek way. It sounds overly formal and technical.",
-          "suggestion": "Επιλογή τοποθεσίας αρχείου' or 'Εμφάνιση τοποθεσίας αρχείου' would be more natural and idiomatic translations. 'Άνοιγμα' (opening) is not always the best equivalent for 'Open' in UI contexts."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -105,49 +69,25 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Siirry asiakirjoihin' does not accurately convey the meaning of 'Open file location'. 'Siirry asiakirjoihin' translates to 'Go to documents' which is not the same as 'Open file location'. It implies navigation to a list of documents, not opening a specific file's location.",
-          "suggestion": "Avaa tiedoston sijainti"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ouvrir l'emplacement du fichier' is technically correct but a more natural and idiomatic translation for 'Open file location' would be 'Afficher l'emplacement du fichier' or 'Ouvrir l'emplacement du fichier source'. 'Ouvrir' can imply opening the file itself, not just the location.",
-          "suggestion": "Afficher l'emplacement du fichier"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Բացել ֆայլի գտնվելու վայրը\" (Bacil fayli gtnvelu vayru) translates to 'Open the location of the file,' which is a bit verbose. A more natural and concise translation of \"Open file location\" would be something like \"Ֆայլի տեղը բացել\" (Fayli teghu bacel).",
-          "suggestion": "Ֆայլի տեղը բացել (Fayli teghu bacel)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Aprire la posizione del file' is too literal. A more natural Italian translation for 'Open file location' would be 'Apri percorso file' or 'Apri posizione del file'. The current translation sounds awkward.",
-          "suggestion": "Apri percorso file"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -165,25 +105,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"ເປີດບ່ອນຕຳແໜ່ງເອກະສານ\" is a literal translation and doesn't convey the meaning of \"Open file location\" naturally in Lao. It translates to something like \"Open document location\" which is not as idiomatic.",
-          "suggestion": "A more natural translation would be something like \"ເປີດເອກະສານຢູ່ບ່ອນໃດ\" (Open where the document is) or \"ເປີດບ່ອນທີ່ເອກະສານຕັ້ງຢູ່\" (Open the location where the document is located)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Atvērt faila atrašanās vietu\" is a bit literal and doesn't flow naturally in Latvian. \"File location\" is usually referred to more simply.",
-          "suggestion": "Atvērt failu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -201,37 +129,19 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Abrir localização' is a literal translation of 'Open file location' but doesn't convey the intended meaning. 'Location' in this context refers to the file's path or directory.",
-          "suggestion": "A more accurate translation would be something like 'Abrir caminho do arquivo' (Open file path) or 'Abrir diretório do arquivo' (Open file directory)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Local do arquivo aberto' literally translates to 'Open file location'. However, a more natural and accurate translation would be 'Abrir localização do arquivo' or 'Localização do arquivo'. The existing translation sounds awkward in Portuguese.",
-          "suggestion": "Abrir localização do arquivo"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Deschidere locația fișierului\" is too literal. A more natural Romanian translation for \"Open file location\" would be something like \"Deschide locația fișierului\" or \"Deschide fișierul\".",
-          "suggestion": "Deschide locația fișierului"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -243,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"ගොනුවේ ස්ථානය අරින්න\" is a literal translation of \"file location\" and doesn't accurately convey the meaning of \"Open file location.\" It implies opening the location *of* the file, rather than opening the file itself.",
-          "suggestion": "Open the file: ගොනුව අරින්න (Gonuw arinna)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -261,85 +165,43 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Pojdi v dokumente\" does not accurately convey the meaning of \"Open file location.\" \"Pojdi v dokumente\" translates to \"Go to documents,\" which is a different action than opening a file location.",
-          "suggestion": "A more accurate translation would be something like \"Odprti lokacijo datoteke\" or \"Pokaži lokacijo datoteke\" (Show file location)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Отвори локацију датотеке' while literally meaning 'Open file location', doesn't perfectly capture the nuance of the English phrase 'Open file location' in a UI context. It sounds a bit formal and technical. A more natural and common phrase for a button or menu item would be 'Прикажи локацију датотеке' or 'Отвори фајл'.",
-          "suggestion": "Прикажи локацију датотеке"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Otvori lokaciju datoteke' is a literal translation of 'Open file location' but doesn't quite capture the natural flow in Serbian. A more idiomatic translation would be 'Otvor lokaciju fajla' or 'Otvor mesto fajla'.",
-          "suggestion": "Otvor lokaciju fajla"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Dosya konumunu aç\" is not the most natural or accurate translation of \"Open file location.\" It literally translates to \"Open file location.\" A more idiomatic translation would be something like \"Dosya konumuna git\" (Go to file location) or \"Dosya konumunu göster\" (Show file location).",
-          "suggestion": "Dosya konumuna git"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Ukrainian translation \"Перейти до документів\" (Go to documents) does not accurately reflect the English phrase \"Open file location\". The English phrase implies opening a specific file's location, not just navigating to a general documents folder.",
-          "suggestion": "A more accurate translation would be something like \"Відкрити розташування файлу\" (Vidkryty roztashuvannya faylu) or \"Перейти до розташування файлу\" (Pereйти do roztashuvannya faylu)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Đi tới Tài liệu\" doesn't accurately convey the meaning of \"Open file location.\" \"Đi tới\" means \"go to\" and \"Tài liệu\" means \"documents.\" The intended meaning is to open the location of a file, not simply navigate to a folder of documents.",
-          "suggestion": "Mở vị trí tệp"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"打开文件的位置\" (dǎ kāi wén jiàn de wèizhi) is a very literal translation and sounds unnatural. It translates to 'Open the location of the file' rather than the intended 'Open file location'. A more natural phrasing would be '打开文件' (dǎ kāi wén jiàn).",
-          "suggestion": "打开文件 (dǎ kāi wén jiàn)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

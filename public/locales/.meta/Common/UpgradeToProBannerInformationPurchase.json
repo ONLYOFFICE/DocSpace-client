@@ -3,7 +3,7 @@
   "content": "Ask purchase questions at <1>{{email}}</1>",
   "content_en_sha1_hash": "6b8817e13f560fda3a03a1762a7240069b4575df",
   "created_at": "2025-05-26T07:15:49.141Z",
-  "updated_at": "2025-05-26T08:02:38.040Z",
+  "updated_at": "2025-08-11T18:11:59.375Z",
   "comment": {
     "text": "This translation key is used for a text that prompts users to ask purchase-related questions when making an upgrade to a Pro plan. It appears in a contact component on a payment page, likely as part of a help or support section.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/shared/pages/Payments/Bonus/ContactContainer.tsx",
-      "line_number": 98,
-      "context": "<StyledContactComponent>\n <div className=\"payments_contact\">\n <Text className=\"text\" fontWeight={600}>\n <Trans\n t={t}\n i18nKey=\"UpgradeToProBannerInformationPurchase\"\n ns=\"Common\"\n values={{ email: salesEmail }}\n components={{\n 1: (\n <Link",
+      "file_path": "/packages/shared/pages/Payments/Bonus/sub-components/ContactContainer.tsx",
+      "line_number": 104,
+      "context": "<div className={styles.contactComponent}>\n <div className={styles.paymentsContact}>\n <Text className={styles.text} fontWeight={600}>\n <Trans\n t={t}\n i18nKey=\"UpgradeToProBannerInformationPurchase\"\n ns=\"Common\"\n values={{ email: salesEmail }}\n components={{\n 1: (\n <Link",
       "module": "/packages/shared"
     }
   ],

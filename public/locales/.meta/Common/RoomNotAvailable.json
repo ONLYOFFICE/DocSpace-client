@@ -3,7 +3,7 @@
   "content": "Room not available",
   "content_en_sha1_hash": "9133dc18fe95f3b8f20a7849bdab1ce0384389ce",
   "created_at": "2025-05-19T21:30:48.227Z",
-  "updated_at": "2025-06-18T17:11:42.419Z",
+  "updated_at": "2025-08-11T18:11:59.176Z",
   "comment": {
     "text": "The \"RoomNotAvailable\" translation key is used to display a message indicating that a room is not available, typically appearing in error messages or notifications on expired shared links. This message aims to inform users of the room's unavailability. It is used within error handling contexts, such as in error messages or password entry dialogs.",
     "is_auto": true,
@@ -11,26 +11,26 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/NoItem/ExpiredItem.tsx",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/NoItem/ExpiredItem.tsx",
       "line_number": 85,
       "context": "<Heading\n className=\"expired-title\"\n level={HeadingLevel.h3}\n size={HeadingSize.xsmall}\n >\n {t(\"Common:RoomNotAvailable\")}\n </Heading>\n <Text className=\"expired-text\" textAlign=\"center\">\n {t(\"Common:RoomLinkExpired\")}\n </Text>\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 243,
+      "line_number": 252,
       "context": "const { isExpiredLinkAsync } = this.filesActionsStore;\n \n if (item.external && (item.expired || (await isExpiredLinkAsync(item))))\n return toastr.error(\n t(\"Common:RoomLinkExpired\"),\n t(\"Common:RoomNotAvailable\"),\n );\n \n if (isLockedSharedRoom(item))\n return this.dialogsStore.setPasswordEntryDialog(true, item);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 243,
+      "line_number": 252,
       "context": "const { isExpiredLinkAsync } = this.filesActionsStore;\n \n if (item.external && (item.expired || (await isExpiredLinkAsync(item))))\n return toastr.error(\n t(\"Common:RoomLinkExpired\"),\n t(\"Common:RoomNotAvailable\"),\n );\n \n if (isLockedSharedRoom(item))\n return this.dialogsStore.setPasswordEntryDialog(true, item);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2618,
+      "line_number": 2619,
       "context": "item.external &&\n (item.expired || (await this.isExpiredLinkAsync(item)))\n )\n return toastr.error(\n t(\"Common:RoomLinkExpired\"),\n t(\"Common:RoomNotAvailable\"),\n );\n \n if (isLockedSharedRoom(item))\n return this.dialogsStore.setPasswordEntryDialog(true, item);",
       "module": "/packages/client"
     }
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Arabic word 'متاحة' (mutaaha) is misspelled. The correct spelling is 'متاحة'.",
-          "suggestion": "الغرفة غير متاحة -> الغرفة غير متاحة"
+          "description": "The word 'متاحة' (mutaaha) should be 'متوفرة' (mutawaffira) for a more natural and accurate translation of 'available' in this context.  'متاحة' is more appropriate for things like 'available for use' but 'متوفرة' better reflects a room not being offered.",
+          "suggestion": "الغرفة غير متوفرة"
         }
       ],
       "approved_at": null
@@ -177,7 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'කාමරය නොමැත' while literally meaning 'room not exists', doesn't convey the intended meaning of 'Room not available'. A more appropriate translation would emphasize the room's unavailability.",
+          "suggestion": "කාමරය అందుబాటులో లేదు (Kamara anduvaloo leedu) - Room is not available"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -198,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Соба није доступна\" translates to \"Room is not available\". The correct translation for \"Room not available\" should be something along the lines of \"Нема доступне собе\" or \"Собе нема\".",
-          "suggestion": "Нема доступне собе"
+          "description": "The Serbian (Cyrillic) translation \"Соба није доступна\" incorrectly translates 'Room'. It should be 'Собе' (Sobе). 'Соба' means 'room' in singular form, while 'Собе' is the correct plural form based on the English phrase 'Room not available'.",
+          "suggestion": "Собе није доступна"
         }
       ],
       "approved_at": null

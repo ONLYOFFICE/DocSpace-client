@@ -3,7 +3,7 @@
   "content": "Nothing found",
   "content_en_sha1_hash": "fed1f5cd946a327d187f842db23041ecd3553315",
   "created_at": "2025-05-19T21:30:46.918Z",
-  "updated_at": "2025-06-08T12:02:32.685Z",
+  "updated_at": "2025-08-21T11:22:39.839Z",
   "comment": {
     "text": "This translation key is used for \"Nothing found\" content, appearing as a header or button text in various screens of the application, such as an empty screen filter or gallery page. It indicates that no data or items were found based on user filters or criteria.",
     "is_auto": true,
@@ -24,8 +24,8 @@
     },
     {
       "file_path": "/packages/shared/selectors/Files/hooks/useSelectorBody.tsx",
-      "line_number": 226,
-      "context": "searchEmptyScreenImage={\n theme?.isBase\n ? EmptyScreenFilterAltSvgUrl\n : EmptyScreenFilterAltDarkSvgUrl\n }\n searchEmptyScreenHeader={t(\"Common:NotFoundTitle\")}\n searchEmptyScreenDescription={t(\"Common:EmptyFilterDescriptionText\")}\n isLoading={showLoader}\n rowLoader={\n <RowLoader\n isMultiSelect={false}",
+      "line_number": 225,
+      "context": "emptyScreenHeader={t(\"Common:SelectorEmptyScreenHeader\")}\n emptyScreenDescription=\"\"\n searchEmptyScreenImage={\n isBase ? EmptyScreenFilterAltSvgUrl : EmptyScreenFilterAltDarkSvgUrl\n }\n searchEmptyScreenHeader={t(\"Common:NotFoundTitle\")}\n searchEmptyScreenDescription={t(\"Common:EmptyFilterDescriptionText\")}\n isLoading={showLoader}\n rowLoader={\n <RowLoader\n isMultiSelect={false}",
       "module": "/packages/shared"
     },
     {
@@ -45,13 +45,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"لا يوجد معلومات\" while generally understandable, isn't the most natural or idiomatic way to express \"Nothing found\" in Saudi Arabic. A more common and direct equivalent would be \"لم يتم العثور على شيء\" or \"لا توجد نتائج\".",
-          "suggestion": "لا توجد نتائج"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -78,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Keine Suchergebnisse\" is a possible translation, \"Nothing found\" often translates more directly to \"Nichts gefunden.\" \"Keine Suchergebnisse\" implies a search was performed and no results were found, which might not always be the case.",
-          "suggestion": "Nichts gefunden"
+          "description": "While \"Keine Suchergebnisse\" is a reasonable translation, \"Nothing found\" implies a broader sense of absence, not specifically related to a search.  \"Keine Ergebnisse\" would be a more literal and generally applicable translation.",
+          "suggestion": "Keine Ergebnisse"
         }
       ],
       "approved_at": null
@@ -120,7 +114,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Non è stato trovato nulla' is a literal translation and can sound a bit awkward in Italian. A more natural and idiomatic translation would be 'Nessun risultato' or 'Niente trovato'.",
+          "description": "While grammatically correct, \"Non è stato trovato nulla\" is a somewhat literal and slightly awkward translation of \"Nothing found\". A more natural and idiomatic Italian translation would be \"Nessun risultato\" or \"Niente trovato\".",
           "suggestion": "Nessun risultato"
         }
       ],
@@ -201,13 +195,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Ničesar ni najdeno' is technically correct, a more natural and commonly used translation of 'Nothing found' in Slovenian would be 'Ni najdeno.'",
-          "suggestion": "Ni najdeno"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

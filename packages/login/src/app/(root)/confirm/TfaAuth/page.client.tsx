@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 import { ChangeEvent, useContext, useState } from "react";
 
 import { validateTfaCode } from "@docspace/shared/api/settings";
-import { checkConfirmLink, loginWithTfaCode } from "@docspace/shared/api/user";
+import { checkConfirmLink } from "@docspace/shared/api/user";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
@@ -41,7 +41,6 @@ import {
   TextInput,
 } from "@docspace/shared/components/text-input";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { TPasswordHash } from "@docspace/shared/api/settings/types";
 import { ButtonKeys } from "@docspace/shared/enums";
 
 import { TError } from "@/types";
@@ -50,16 +49,10 @@ import { useSearchParams } from "next/navigation";
 import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
 
 type TfaAuthFormProps = {
-  passwordHash: TPasswordHash;
-  userName?: string;
   defaultPage?: string;
 };
 
-const TfaAuthForm = ({
-  passwordHash,
-  userName,
-  defaultPage = "/",
-}: TfaAuthFormProps) => {
+const TfaAuthForm = ({ defaultPage = "/" }: TfaAuthFormProps) => {
   const { linkData } = useContext(ConfirmRouteContext);
   const { t } = useTranslation(["Confirm", "Common"]);
 
@@ -78,11 +71,7 @@ const TfaAuthForm = ({
     try {
       setIsLoading(true);
 
-      if (userName && passwordHash) {
-        await loginWithTfaCode(userName, passwordHash, code);
-      } else {
-        await validateTfaCode(code, confirmHeader);
-      }
+      await validateTfaCode(code, confirmHeader);
 
       let confirmData = "";
       try {
@@ -172,6 +161,7 @@ const TfaAuthForm = ({
               value={code}
               hasError={!!error}
               onKeyDown={onKeyPress}
+              testId="app_code_input"
             />
           </FieldContainer>
         </div>
@@ -189,6 +179,7 @@ const TfaAuthForm = ({
             isDisabled={!code.length || isLoading}
             isLoading={isLoading}
             onClick={onSubmit}
+            testId="app_code_continue_button"
           />
         </div>
       </div>

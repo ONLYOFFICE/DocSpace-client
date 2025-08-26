@@ -3,7 +3,7 @@
   "content": "Link deleted successfully",
   "content_en_sha1_hash": "1d0682ce997a2ffc32592cbebffe9839b47dab71",
   "created_at": "2025-05-19T21:30:55.776Z",
-  "updated_at": "2025-05-26T07:57:32.294Z",
+  "updated_at": "2025-08-04T07:30:01.097Z",
   "comment": {
     "text": "This translation key is used to display a success message when a link is deleted successfully. It appears as an alert in a delete confirmation dialog and info panel, providing feedback to users that their link has been removed.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteLinkDialog/index.js",
-      "line_number": 77,
-      "context": "setRoomShared(roomId, !!res);\n deleteExternalLink(res, newLink.sharedTo.id);\n \n if (link.sharedTo.primary && (isPublicRoomType || isFormRoom)) {\n toastr.success(t(\"Files:GeneralLinkDeletedSuccessfully\"));\n } else toastr.success(t(\"Files:LinkDeletedSuccessfully\"));\n \n const filterObj = FilesFilter.getFilter(window.location);\n \n if (link.sharedTo.primary && (isPublicRoomType || isFormRoom)) {\n if (filterObj.key !== res.sharedTo.requestToken) {",
+      "line_number": 78,
+      "context": ".then((res) => {\n deleteExternalLink(res, newLink.sharedTo.id);\n \n if (link.sharedTo.primary && (isPublicRoomType || isFormRoom)) {\n toastr.success(t(\"Files:GeneralLinkRevokedAndCreatedSuccessfully\"));\n } else toastr.success(t(\"Files:LinkDeletedSuccessfully\"));\n \n const filterObj = FilesFilter.getFilter(window.location);\n \n return api.rooms\n .getRoomMembers(roomId, { filterType: 2 })",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/sub-components/LinkRow.tsx",
-      "line_number": 258,
-      "context": "editExternalLink(roomId, { ...removeLink, access: ShareAccessRights.None })\n .then(() => {\n deleteExternalLink(null, removeLink.sharedTo.id);\n \n toastr.success(t(\"Files:LinkDeletedSuccessfully\"));\n })\n .catch((err: Error) => toastr.error(err?.message))\n .finally(() => setLoadingLinks([]));\n };",
+      "line_number": 238,
+      "context": "access: ShareAccessRights.None,\n });\n \n deleteExternalLink!(null, removeLink.sharedTo.id);\n \n toastr.success(t(\"Files:LinkDeletedSuccessfully\"));\n } catch (err: unknown) {\n console.log(err);\n toastr.error((err as Error)?.message);\n } finally {\n setLoadingLinks([]);",
       "module": "/packages/client"
     }
   ],
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'සබැඳිය මැකිණි' is not the most natural or accurate translation of \"Link deleted successfully\". While it literally translates to \"Link deleted,\" it lacks the \"successfully\" element which is important for conveying the full meaning.",
-          "suggestion": "Consider \"සබැඳිය සාර්ථකව මැකිණි\" (Sabandiya sartakava makini) which means \"Link deleted successfully\" or \"මැකිවියේ සාර්ථකව\" (Makiniwē sartakava) - \"Deleted successfully\"."
+          "description": "The translation 'සබැඳිය මැකිණි' (sabandiya makiyani) literally translates to 'The link erased' or 'The link is erased'. While conveying a similar meaning, 'deleted' has a more formal and positive connotation in this context, which is usually expected for a success message. A more accurate translation would convey 'removed' or 'taken away'.",
+          "suggestion": "Consider 'සබැඳිය ඉවත් කරන ලදි' (sabandiya ivat karana ladi) which means 'The link was removed' or 'සබැඳිය අයින් කරන ලදි' (sabandiya ain karan ladi) meaning 'The link was taken away'."
         }
       ],
       "approved_at": null
@@ -185,9 +185,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "While understandable, 'Линк обрисан успешно' is a slightly awkward translation. A more natural phrasing would use a more common verb for 'delete' in this context.",
-          "suggestion": "Линк је обрисан успешно"
+          "type": "spelling",
+          "description": "The word 'Линк' is commonly used but 'Веза' or 'Дозвола' would be a more formal and accurate translation of 'Link' in this context.",
+          "suggestion": "Веза обрисана успешно"
         }
       ],
       "approved_at": null
@@ -195,7 +195,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'obrisan' is misspelled. The correct spelling is 'obrisan'.",
+          "suggestion": "Link obrisan uspešno"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

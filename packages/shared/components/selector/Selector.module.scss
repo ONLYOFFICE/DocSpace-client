@@ -23,8 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-@use "../../../shared/styles/mixins.scss";
-@use "../../../shared/styles/variables/devices.scss";
+@use "../../../shared/styles/mixins";
 
 .selector {
   width: 100%;
@@ -94,7 +93,7 @@
   :global {
     .combo-button {
       min-height: 40px;
-      padding-inline-start: 16px;
+      padding-inline-start: 16px !important;
     }
 
     .combo-button-label,
@@ -205,6 +204,7 @@
         display: flex;
         align-items: center;
         gap: 8px;
+        cursor: pointer;
 
         .empty-folder_link {
           color: var(--selector-empty-screen-button-color);
@@ -299,6 +299,21 @@
 
       padding: 12px 0;
       margin-top: 16px;
+
+      .empty-button > div {
+        display: flex;
+
+        justify-content: center;
+        align-items: center;
+
+        box-sizing: border-box;
+
+        .icon-button_svg {
+          aspect-ratio: 1;
+          width: 16px;
+          height: 16px;
+        }
+      }
     }
 
     .empty-button p {
@@ -478,6 +493,14 @@
     cursor: pointer;
   }
 
+  &.isSystem {
+    .userAvatar {
+      svg path {
+        fill: var(--info-panel-role-color);
+      }
+    }
+  }
+
   &.disabled {
     .itemLogo,
     .userAvatar {
@@ -577,4 +600,12 @@
 
     border-radius: 6px 6px 0 0;
   }
+}
+
+.selectorSeparator {
+  cursor: default;
+  margin: 8px 16px 0px 16px;
+  line-height: 1px;
+  height: 1px;
+  width: calc(100% - 32px);
 }

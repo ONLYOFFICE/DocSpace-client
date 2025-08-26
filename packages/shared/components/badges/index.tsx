@@ -264,6 +264,7 @@ const Badges = ({
 
   return fileExst ? (
     <div
+      data-testid="badges"
       className={classNames(
         wrapperCommonClasses,
         "additional-badges file__badges",
@@ -329,6 +330,7 @@ const Badges = ({
           title={t("Common:EditButton")}
         />
       ) : null}
+
       {item.viewAccessibility?.MustConvert &&
       security &&
       "Convert" in security &&
@@ -364,6 +366,7 @@ const Badges = ({
           />
         </BadgeWrapper>
       ) : null}
+
       {showNew ? (
         <BadgeWrapper onClick={onBadgeClick} isTile={isTile}>
           <Badge
@@ -411,6 +414,7 @@ const Badges = ({
     </div>
   ) : (
     <div
+      data-testid="badges"
       className={classNames(wrapperCommonClasses, {
         folder__badges: isFolder && !isRoom,
         room__badges: isRoom,
@@ -479,10 +483,11 @@ const Badges = ({
           hoverColor="accent"
         />
       ) : null}
-      {showNew && !isTile && isRoom ? newFilesBadge : null}
+      {showNew && !isTile ? newFilesBadge : null}
       {showNew && isTile && isRoom ? (
         <div className={styles.badgeWrapperNewBadge}>{newFilesBadge}</div>
       ) : null}
+      {showNew && isTile && !isRoom ? newFilesBadge : null}
     </div>
   );
 };

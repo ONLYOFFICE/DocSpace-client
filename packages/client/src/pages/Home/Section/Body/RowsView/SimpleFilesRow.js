@@ -31,9 +31,9 @@ import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-compone
 import { isMobile as isMobileUtile, classNames } from "@docspace/shared/utils";
 import { FolderType } from "@docspace/shared/enums";
 import {
-  StyledWrapper,
-  StyledSimpleFilesRow,
-} from "@docspace/shared/styles/FilesRow.styled";
+  FilesRow,
+  FilesRowWrapper,
+} from "@docspace/shared/components/files-row";
 
 import FilesRowContent from "./FilesRowContent";
 
@@ -85,6 +85,10 @@ const SimpleFilesRow = (props) => {
     isTutorialEnabled,
     setRefMap,
     deleteRefMap,
+    selectedFolderTitle,
+    setDropTargetPreview,
+    disableDrag,
+    canCreateSecurity,
   } = props;
 
   const isMobileDevice = isMobileUtile();
@@ -146,10 +150,12 @@ const SimpleFilesRow = (props) => {
     onDragLeave && onDragLeave(e);
 
     setIsDragActive(false);
+    setDropTargetPreview(null);
   };
+  const isDragDisabled = dragging && !isDragging;
 
   const dragStyles =
-    dragging && isDragging
+    (dragging && isDragging) || isDragDisabled
       ? {
           marginInline: "-16px",
           paddingInline: "16px",
@@ -160,8 +166,27 @@ const SimpleFilesRow = (props) => {
     ? `${item.id}_${item.fileExst}`
     : (item.id ?? "");
 
+  React.useEffect(() => {
+    if (dragging) {
+      if (isDragging) {
+        setDropTargetPreview(item.title);
+      } else if (!disableDrag && canCreateSecurity) {
+        setDropTargetPreview(selectedFolderTitle);
+      } else {
+        setDropTargetPreview(null);
+      }
+    }
+  }, [
+    dragging,
+    isDragging,
+    isDragActive,
+    isDragDisabled,
+    selectedFolderTitle,
+    setDropTargetPreview,
+  ]);
+
   return (
-    <StyledWrapper
+    <FilesRowWrapper
       ref={rowRef}
       id={id}
       onDragOver={onDragOver}
@@ -190,14 +215,14 @@ const SimpleFilesRow = (props) => {
         onDragOver={onDragOverEvent}
         onDragLeave={onDragLeaveEvent}
         style={dragStyles}
+        isDragDisabled={isDragDisabled}
       >
-        <StyledSimpleFilesRow
+        <FilesRow
           key={item.id}
           data={item}
           isEdit={isEdit}
           element={element}
           mode="modern"
-          sectionWidth={sectionWidth}
           contentElement={
             isMobileDevice || isRooms ? null : quickButtonsComponent
           }
@@ -234,6 +259,7 @@ const SimpleFilesRow = (props) => {
           badgeUrl={badgeUrl}
           canDrag={canDrag}
           isFolder={isFolder}
+          dataTestId={`files_row_${itemIndex}`}
         >
           <FilesRowContent
             item={item}
@@ -247,9 +273,9 @@ const SimpleFilesRow = (props) => {
               isMobileDevice && !item.isTemplate ? badgesComponent : null
             }
           />
-        </StyledSimpleFilesRow>
+        </FilesRow>
       </DragAndDrop>
-    </StyledWrapper>
+    </FilesRowWrapper>
   );
 };
 

@@ -3,7 +3,7 @@
   "content": "During the grace period, admins cannot create new rooms and add new users. After the due date of the grace period, {{productName}} will become unavailable until the payment is made.",
   "content_en_sha1_hash": "b7a0c210f73172985d0560ba94236b522d1ece70",
   "created_at": "2025-05-19T21:30:53.688Z",
-  "updated_at": "2025-05-24T06:53:52.094Z",
+  "updated_at": "2025-08-12T19:46:25.923Z",
   "comment": {
     "text": "This translation key is used to display a message explaining that during a grace period, admins can't create new rooms or add users, and that access will be unavailable until payment is made. It appears in a modal dialog and an invite quota warning dialog, prompting admins to make timely payments.",
     "is_auto": true,
@@ -18,8 +18,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/PaymentContainer.js",
-      "line_number": 276,
+      "line_number": 261,
       "context": "{{ byDate: gracePeriodEndDate }}\n </strong>\n (days remaining: {{ delayDaysCount }})\n </Trans>{\" \"}\n <Text as=\"span\" fontSize=\"14px\" lineHeight=\"16px\">\n {t(\"GracePeriodActivatedDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n </Text>\n );",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/GracePeriodModal.tsx",
+      "line_number": 95,
+      "context": "1: <Text as=\"span\" />,\n }}\n />\n </Text>{\" \"}\n <Text as=\"span\">\n {t(\"GracePeriodActivatedDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
       "module": "/packages/client"
     }
   ],
@@ -35,14 +41,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"فترة السماح المؤقتة\" (temporary grace period) is redundant. \"فترة السماح\" is sufficient to convey the meaning of a grace period.",
+          "type": "formatting",
+          "description": "The phrase '(فترة السماح المؤقتة)' is repeated, creating redundancy. It's unnecessary to repeat 'temporary grace period'.",
           "suggestion": "خلال فترة السماح، لا يُسمح للمسؤولين بإنشاء غرف جديدة أو إضافة مستخدمين جدد. بعد انتهاء تاريخ استحقاق فترة السماح، سيتم جعل {{productName}} غير متوفر حتى يتم سداد الدفعة."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'سيتم جعل {{productName}} غير متوفر' is not the most natural way to express that the product will become unavailable. A more direct translation would be better.",
-          "suggestion": "بعد انتهاء تاريخ استحقاق فترة السماح، سيصبح {{productName}} غير متاح حتى يتم سداد الدفعة."
+          "type": "grammatical",
+          "description": "The phrase 'سيتم جعل' (will be made) is slightly awkward in Arabic. A more natural phrasing could be used.",
+          "suggestion": "بعد انتهاء تاريخ استحقاق فترة السماح، {{productName}} لن يكون متاحاً حتى يتم سداد الدفعة."
         }
       ],
       "approved_at": null
@@ -52,14 +58,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'Güzəşt' is used repeatedly, but 'Güzəşt' likely refers to a discount or grace period. The English text uses 'grace period'.",
-          "suggestion": "Consider using a more accurate term for 'grace period' in Azerbaijani, possibly 'möhlət' or similar, and ensure consistency."
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence \"Güzəşt müddəti bitdikdən sonra ödəniş edilənə qədər {{productName}} əlçatan olmayacaq.\" can be slightly improved for flow.  The phrase 'ödəniş edilənə qədər' is technically correct but can sound clunky.",
-          "suggestion": "Consider rephrasing to something like \"Güzəşt müddəti bitdikdən sonra {{productName}} ödəniş həyata keçirilənə qədər əlçatan olmayacaq.\""
+          "type": "incorrect_translation",
+          "description": "The phrase \"Güzəşt müddəti bitdikdən sonra\" is a literal translation of \"After the due date of the grace period.\" A more natural and idiomatic translation would be something like \"Güzəşt müddəti sona çatdıqdan sonra\" or \"Güzəşt dövrü bitdikdən sonra\".",
+          "suggestion": "Güzəşt dövrü bitdikdən sonra"
         }
       ],
       "approved_at": null
@@ -82,13 +83,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'During the grace period' is translated as 'Während der bezahlten Frist'. While technically correct, 'Während der Gnadenfrist' is a more natural and commonly used translation for 'grace period' in this context.",
-          "suggestion": "Während der Gnadenfrist"
+          "description": "The phrase \"bezahlten Frist\" is an awkward and not entirely accurate translation of \"grace period\". \"Grace period\" implies a period of leeway, which \"bezahlten Frist\" emphasizes payment. A more natural translation would incorporate this nuance.",
+          "suggestion": "Während der Gnadenfrist können Administratoren keine neuen Räume erstellen und keine neuen Benutzer hinzufügen. Nach dem Fälligkeitsdatum der Gnadenfrist wird {{productName}} nicht mehr verfügbar sein, bis die Zahlung erfolgt ist."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'After the due date of the grace period' is translated as 'Nach dem Fälligkeitsdatum der bezahlten Frist'. This is a bit clunky.  'Nach Ablauf der Gnadenfrist' would be a more fluent translation.",
-          "suggestion": "Nach Ablauf der Gnadenfrist"
+          "type": "spelling",
+          "description": "The word 'Frist' is repeated several times. While technically correct, this repetition can sound clunky in German. While not a strict error, a more fluent rendering is desirable.",
+          "suggestion": "Während der Gnadenfrist können Administratoren keine neuen Räume erstellen und keine neuen Benutzer hinzufügen. Nach Ablauf der Gnadenfrist wird {{productName}} nicht mehr verfügbar sein, bis die Zahlung erfolgt ist."
         }
       ],
       "approved_at": null
@@ -111,13 +112,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"{{productName}}-a\" is not a correct translation. It appears to be an attempt to incorporate the product name but with an incorrect grammatical suffix. It should be translated as \"{{productName}}\" or a more natural phrasing depending on the context.",
-          "suggestion": "{{productName}} ei ole enää käytettävissä ennen kuin maksu on suoritettu."
+          "description": "The phrase \"{{productName}}-a\" is grammatically incorrect and doesn't accurately translate \"{{productName}}\". It appears to be attempting to incorporate the product name as a genitive form, which isn't necessary or correct in this context.",
+          "suggestion": "Replace \"{{productName}}-a\" with \"{{productName}}\"."
         },
         {
           "type": "grammar",
-          "description": "While understandable, the sentence structure 'Lisäajan eräpäivän jälkeen' could be slightly improved for flow. While correct, it's a little clunky.",
-          "suggestion": "Lisäajan päättymisen jälkeen"
+          "description": "While grammatically passable, the phrasing 'ei voi enää käyttää' could be improved for more natural flow. The word 'enää' (anymore) isn't strictly needed and makes the sentence slightly less concise.",
+          "suggestion": "Replace 'ei voi enää käyttää' with 'ei voi käyttää'."
         }
       ],
       "approved_at": null
@@ -134,8 +135,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Armenian translation uses a colon (:) after the first sentence, which is not standard in Armenian sentence structure and doesn't flow naturally. It's more common to use a period or a conjunction.",
-          "suggestion": "Remove the colon and replace it with a period or conjunction. For example: «Արտոնյալ ժամանակահատվածում ադմինները չեն կարող ստեղծել նոր սենյակներ և ավելացնել նոր օգտվողներ։ Կամ: Արտոնյալ ժամանակահատվածում ադմինները չեն կարող ստեղծել նոր սենյակներ և ավելացնել նոր օգտվողներ, բայց..."
+          "description": "The Armenian translation uses a colon after \"Արտոնյալ ժամանակահատվածում\". This is not standard Armenian punctuation in this context and should be removed.",
+          "suggestion": "Remove the colon after \"Արտոնյալ ժամանակահատվածում\"."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase \"Արտոնյալ ժամանակաշրջանի վերջնաժամկետից հետո\" is grammatically correct, but stylistically could be improved for flow. Consider rephrasing for better readability.",
+          "suggestion": "Consider rephrasing to something like \"Արտոնյալ ժամանակաշրջանի ավարտից հետո\" or \"Արտոնյալ ժամանակաշրջանը ավարտվելուց հետո\"."
         }
       ],
       "approved_at": null
@@ -149,13 +155,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"お支払いが完了するまで\" (o shiharai ga kanryou suru made) translates to \"until the payment is completed.\" While technically correct, it's less natural and slightly more formal than a simpler phrasing. A more natural translation for \"until the payment is made\" would be something like \"お支払いが済むまで\" (o shiharai ga sumu made).",
-          "suggestion": "猶予期間の期限を過ぎると、お支払いが済むまで{{productName}}はご利用いただけません。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -164,8 +164,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"will become unavailable\" is not accurately translated. \"사용할 수 없습니다\" (useul su eopseumnida) translates to 'cannot use' which is a functional equivalent but loses the nuance of unavailability. A more accurate translation might be something along the lines of '서비스가 중단됩니다' (seobiseuga jungdandaemnida) which means 'the service will be suspended'.",
-          "suggestion": "서비스가 중단됩니다. (seobiseuga jungdandaemnida)"
+          "description": "The phrase '{{productName}} will become unavailable' is translated as '{{productName}}를 사용할 수 없습니다'. While technically correct, a more natural and precise translation would emphasize that the product is inaccessible or blocked. A better option would be '{{productName}} 이용이 중단됩니다' ({{productName}} usage is suspended).",
+          "suggestion": "유예 기간이 지나면 결제할 때까지 {{productName}} 이용이 중단됩니다."
         }
       ],
       "approved_at": null
@@ -194,8 +194,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'grace period' is translated as 'prolongata'. While 'prolongata' can mean extension, in this context, it doesn't accurately convey the meaning of a grace period, which implies a short period of leniency. A better translation would be 'okres wygody' or 'okres karencji'.",
-          "suggestion": "Consider translating 'grace period' as 'okres wygody' or 'okres karencji'."
+          "description": "The English term 'grace period' is translated as 'prolongata'. While 'prolongata' can sometimes imply an extension, it doesn't accurately convey the meaning of a 'grace period' in this context, which refers to a short period after a due date before penalties are applied. A more accurate translation might be 'okres karencji' or 'okres przejściowy'.",
+          "suggestion": "Consider using 'okres karencji' or 'okres przejściowy' to better reflect the meaning of 'grace period'."
         }
       ],
       "approved_at": null
@@ -206,13 +206,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"salas novas\" sounds slightly unnatural. While technically correct, a more natural phrasing would be \"novas salas\".",
-          "suggestion": "Durante o período de tolerância, os administradores não podem criar novas salas e adicionar novos utilizadores."
+          "description": "The English phrase 'grace period' is translated as 'período de tolerância'. While technically correct, 'período de carência' might be a more natural and commonly understood translation in this context.",
+          "suggestion": "Consider using 'período de carência' instead of 'período de tolerância'."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The word 'efetuado' is a bit formal for this context. A more common and natural word would be 'realizado'.",
-          "suggestion": "Durante o período de tolerância, os administradores não podem criar novas salas e adicionar novos utilizadores. Assim que o período de tolerância terminar, o {{productName}} ficará indisponível até que o pagamento seja realizado."
+          "type": "formatting",
+          "description": "The English uses '{{productName}}' for the variable. The Portuguese translation uses the same format, which is correct and consistent. No change needed.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -223,7 +223,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'grace period' is translated as 'período de carência'. While technically correct, 'período de cortesia' more accurately conveys the intended meaning of a lenient period.",
+          "description": "The term 'grace period' is translated as 'período de carência'. While technically correct, 'período de cortesia' is a more common and natural translation in this context, specifically referring to a payment grace period.",
           "suggestion": "Consider translating 'grace period' as 'período de cortesia'."
         }
       ],
@@ -235,8 +235,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ajuta utilizatorii noi\" (help new users) is not an accurate translation of 'add new users'. It implies assistance rather than adding them to the system.",
-          "suggestion": "The phrase should be translated to something like \"adăuga utilizatori noi\" (add new users) or \"înregistra utilizatori noi\" (register new users)."
+          "description": "The phrase \"ajuta utilizatorii noi\" (help new users) is not an accurate translation of \"add new users.\" It introduces an action that isn't present in the English original. The English phrase implies adding users to the system or account.",
+          "suggestion": "În perioada de graţie, administratorii nu pot crea sălile noi şi adăuga utilizatori noi."
+        },
+        {
+          "type": "formatting",
+          "description": "The Romanian translation maintains the English formatting with {{productName}}. It is important to ensure this placeholder is properly handled in the Romanian context, including proper localization if necessary.",
+          "suggestion": "Ensure {{productName}} is correctly localized or replaced with the appropriate Romanian product name."
         }
       ],
       "approved_at": null
@@ -253,13 +258,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrasing \"සහන කාල සීමාවේ අවසාන දිනය පසු වූ විට\" is slightly awkward. It could be improved for better flow.",
+          "description": "The phrase 'සහන කාල සීමාවේ අවසාන දිනය පසු වූ විට' is a bit convoluted. A more natural phrasing would improve readability.",
           "suggestion": "සහන කාලය අවසන් වූ පසු"
         },
         {
           "type": "formatting",
-          "description": "The use of double quotes for the Sinhala translation could be inconsistent with other text in the application. Consider using single quotes instead if that's the standard.",
-          "suggestion": "Re-evaluate application style guide for quote usage. If single quotes are standard, replace double quotes with single quotes."
+          "description": "The use of '{{productName}}' seems consistent with the English. It's crucial that this variable is correctly handled in the Sinhala implementation.",
+          "suggestion": "Ensure the variable '{{productName}}' is properly localized and displayed."
         }
       ],
       "approved_at": null
@@ -273,7 +278,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"grace period\" is translated as \"prehodnem obdobju,\" which is accurate but could be more natural. A more idiomatic translation might be \"prehodno obdobje\" (without the \"m\").",
+          "suggestion": "V prehodnem obdobje skrbniki ne morejo ustvarjati novih sob in dodajati novih uporabnikov."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -282,8 +293,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'просторије' (prostoriye) is used for 'rooms'. While technically correct, 'собе' (sobe) would be a more natural and common term in this context, especially when referring to a digital product's 'rooms'.",
-          "suggestion": "Замените 'просторије' са 'собе'."
+          "description": "The word 'просторије' (prostorije) is used for 'rooms'. While technically correct, 'собе' (sobe) would be a more natural and common translation for 'rooms' in this context.",
+          "suggestion": "Током грејс периода, администратори не могу да праве нове собе и додају нове кориснике."
         }
       ],
       "approved_at": null
@@ -294,13 +305,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'grejs' is a direct transliteration of 'grace' and might sound unnatural in Serbian. While understandable, it's better to use a more localized equivalent if available.",
-          "suggestion": "Consider using a Serbian equivalent for 'grace period' if one exists and maintains the intended meaning."
+          "description": "The word 'grejs' is an Anglicism. The correct Serbian word for 'grace' is 'probni'.",
+          "suggestion": "Tokom probnog perioda, administratori ne mogu da prave nove prostorije i dodaju nove korisnike. Nakon isteka probnog perioda, {{productName}} će postati nedostupan dok se ne izvrši uplata."
         },
         {
-          "type": "formatting",
-          "description": "The curly braces around {{productName}} are retained in the translation. While technically correct, it might be better to remove them to align with Serbian writing conventions.",
-          "suggestion": "Remove the curly braces around {{productName}}:  'Nakon isteka grejs perioda, productName će postati nedostupan dok se ne izvrši uplata.'"
+          "type": "grammar",
+          "description": "While technically correct, 'ne mogu da prave' is less natural than 'ne mogu da kreiraju'.",
+          "suggestion": "Tokom probnog perioda, administratori ne mogu da kreiraju nove prostorije i dodaju nove korisnike. Nakon isteka probnog perioda, {{productName}} će postati nedostupan dok se ne izvrši uplata."
         }
       ],
       "approved_at": null
@@ -311,13 +322,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'grace period' is translated as 'Ödemesiz dönem'. While technically correct, 'erteleme süresi' might be a more natural and commonly understood term in Turkish, especially in a financial/subscription context. 'Ödemesiz dönem' directly translates to 'payment-free period' which is a bit literal.",
-          "suggestion": "Ödemesiz dönem -> Erteleme süresi"
+          "description": "The English phrase \"grace period\" is consistently translated as \"ödemesiz dönem\" which literally means 'payment-free period'. A more accurate and natural translation would be \"erteleme süresi\" (postponement period) or \"uzatma süresi\" (extension period) as it refers to a period where payments are delayed, not completely absent.",
+          "suggestion": "Consider translating \"grace period\" as \"erteleme süresi\" or \"uzatma süresi\" for better clarity and naturalness."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'will become unavailable' is translated as 'kullanılamayacaktır'. A more common and natural wording would be 'kullanılamaz'.",
-          "suggestion": "kullanılamayacaktır -> kullanılamaz"
+          "description": "The sentence \"Ödemesiz dönemin bitiş tarihinden sonra, ödeme yapılana kadar {{productName}} kullanılamayacaktır.\" is a bit verbose and less fluent than it could be. A more concise and natural translation of 'After the due date of the grace period, {{productName}} will become unavailable until the payment is made.' would be '{{productName}}, ödeme yapılana kadar, erteleme süresinin bitiş tarihinden sonra kullanılamayacaktır.'",
+          "suggestion": "Rephrase the sentence to: '{{productName}}, ödeme yapılana kadar, erteleme süresinin bitiş tarihinden sonra kullanılamayacaktır.'"
         }
       ],
       "approved_at": null
@@ -331,19 +342,24 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ngày hết hạn thanh toán\" (payment due date) is a bit literal and less natural in Vietnamese. A more common and clearer phrasing would be 'hết thời gian ân hạn' or 'kết thúc thời gian ân hạn'.",
+          "suggestion": "Sau khi hết thời gian ân hạn, {{productName}} sẽ không khả dụng cho đến khi thanh toán được thực hiện."
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the punctuation in Vietnamese often places a space before certain punctuation marks (e.g., before a period or question mark).",
+          "suggestion": "Trong thời gian ân hạn, quản trị viên không thể tạo phòng mới và thêm người dùng mới . Sau khi hết thời gian ân hạn, {{productName}} sẽ không khả dụng cho đến khi thanh toán được thực hiện."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"宽限期截止后\" (kuānxiànqí jiézhǐ hòu) translates to 'after the grace period ends' which is slightly less natural than 'after the grace period expires' or 'after the grace period due date'. It implies a hard end date more than a gentle expiration.",
-          "suggestion": "Consider using a phrase like \"宽限期到期后\" (kuānxiànqí dàoqí hòu) which translates to 'after the grace period expires' or “宽限期到期日后” (kuānxiànqí dàoqí rì hòu) which translates to 'after the grace period due date'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

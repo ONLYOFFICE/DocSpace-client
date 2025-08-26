@@ -84,7 +84,7 @@ const PriceCalculation = ({
   isGracePeriod,
   isNotPaidPeriod,
   priceManagerPerMonth,
-  currencySymbol,
+  formatPaymentCurrency,
   isAlreadyPaid,
 
   managersCount,
@@ -141,7 +141,7 @@ const PriceCalculation = ({
             t={t}
             i18nKey="PerUserYear"
             ns="Common"
-            values={{ currencySymbol, price: priceManagerPerMonth }}
+            values={{ price: formatPaymentCurrency(priceManagerPerMonth) }}
             components={{ 1: <strong style={{ fontSize: "16px" }} /> }}
           />
         ) : (
@@ -149,7 +149,7 @@ const PriceCalculation = ({
             t={t}
             i18nKey="PerUserMonth"
             ns="Common"
-            values={{ currencySymbol, price: priceManagerPerMonth }}
+            values={{ price: formatPaymentCurrency(priceManagerPerMonth) }}
             components={{ 1: <strong style={{ fontSize: "16px" }} /> }}
           />
         )}
@@ -161,12 +161,7 @@ const PriceCalculation = ({
 
   return (
     <StyledBody className="price-calculation-container" isDisabled={isDisabled}>
-      <Text
-        fontSize="16px"
-        fontWeight={600}
-        noSelect
-        className="payment_main-title"
-      >
+      <Text fontSize="16px" fontWeight={600} className="payment_main-title">
         {isGracePeriod || isNotPaidPeriod
           ? t("YourPrice")
           : t("PriceCalculation")}
@@ -210,6 +205,7 @@ export default inject(
       isAlreadyPaid,
       getPaymentLink,
       canUpdateTariff,
+      formatPaymentCurrency,
     } = paymentStore;
     const { theme } = settingsStore;
 
@@ -232,7 +228,7 @@ export default inject(
       isNotPaidPeriod,
 
       priceManagerPerMonth: planCost.value,
-      currencySymbol: planCost.currencySymbol,
+      formatPaymentCurrency,
       getPaymentLink,
       isYearTariff,
     };

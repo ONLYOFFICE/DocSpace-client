@@ -3,7 +3,7 @@
   "content": "Add the website URL for embedding to the <1>allow list</1>.",
   "content_en_sha1_hash": "74a4a58edf7147b1aace227876881032aba6a2bb",
   "created_at": "2025-05-19T21:30:56.583Z",
-  "updated_at": "2025-05-24T13:05:08.512Z",
+  "updated_at": "2025-08-11T09:02:43.890Z",
   "comment": {
     "text": "This translation key controls the text displayed on a button to add a website URL to an embedding allow list. It is used in the EmbeddingPanel component and prompts users to grant permission for embedding from specific websites.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
-      "line_number": 409,
-      "context": "<Text fontSize=\"12px\" fontWeight={400}>\n {isAdmin ? (\n <Trans\n t={t}\n ns=\"EmbeddingPanel\"\n i18nKey=\"EmbeddingBarAllowList\"\n components={{\n 1: (\n <Link\n onClick={onOpenDevTools}\n color={currentColorScheme?.main?.accent}",
+      "line_number": 420,
+      "context": "<Text fontSize=\"12px\" fontWeight={400}>\n {isAdmin ? (\n <Trans\n t={t as TFunction}\n ns=\"EmbeddingPanel\"\n i18nKey=\"EmbeddingBarAllowList\"\n components={{\n 1: (\n <Link\n onClick={onOpenDevTools}\n color={currentColorScheme?.main?.accent}",
       "module": "/packages/client"
     }
   ],

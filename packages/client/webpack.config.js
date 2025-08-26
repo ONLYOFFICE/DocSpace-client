@@ -197,7 +197,17 @@ const config = {
             loader: "@svgr/webpack",
             options: {
               svgoConfig: {
-                plugins: [{ removeViewBox: false }],
+                plugins: [
+                  {
+                    name: "preset-default",
+                    params: {
+                      overrides: {
+                        removeViewBox: false,
+                        cleanupIds: false,
+                      },
+                    },
+                  },
+                ],
               },
             },
           },
@@ -314,6 +324,20 @@ const config = {
       ],
     }),
   ],
+
+  // Extract css processed by MiniCssExtractPlugin in a single file
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        styles: {
+          name: "styles",
+          type: "css/mini-extract",
+          chunks: "all",
+          enforce: true,
+        },
+      },
+    },
+  },
 };
 
 const getBuildDate = () => {
@@ -329,8 +353,6 @@ const getBuildYear = () => {
 };
 
 module.exports = (env, argv) => {
-  config.devtool = "source-map";
-
   const isProduction = argv.mode === "production";
   const styleLoader = isProduction
     ? MiniCssExtractPlugin.loader
@@ -355,39 +377,22 @@ module.exports = (env, argv) => {
   });
 
   if (isProduction) {
+    config.devtool = "source-map";
     config.mode = "production";
-    config.optimization = {
-      splitChunks: {
-        chunks: "all",
-      },
-      minimize: !env.minimize,
-      minimizer: [
-        new TerserPlugin({
-          terserOptions: {
-            format: {
-              comments: /\*\s*\(c\)\s+Copyright\s+Ascensio\s+System\s+SIA/i,
-            },
+    config.optimization.splitChunks.chunks = "all";
+    config.optimization.minimize = !env.minimize;
+    config.optimization.minimizer = [
+      new TerserPlugin({
+        terserOptions: {
+          format: {
+            comments: /\*\s*\(c\)\s+Copyright\s+Ascensio\s+System\s+SIA/i,
           },
-          extractComments: false,
-          parallel: false,
-        }),
-      ],
-    };
-  }
-
-  // Extract css processed by MiniCssExtractPlugin in a single file
-  config.optimization = {
-    splitChunks: {
-      cacheGroups: {
-        styles: {
-          name: "styles",
-          type: "css/mini-extract",
-          chunks: "all",
-          enforce: true,
         },
-      },
-    },
-  };
+        extractComments: false,
+        parallel: false,
+      }),
+    ];
+  }
 
   const htmlTemplate = {
     title: title,

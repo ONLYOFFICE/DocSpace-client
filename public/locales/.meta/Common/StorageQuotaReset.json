@@ -3,7 +3,7 @@
   "content": "Storage quota successfully set to default.",
   "content_en_sha1_hash": "b6fea99a34e64a58d31ebe5913e5b51c86e315db",
   "created_at": "2025-05-19T21:30:49.128Z",
-  "updated_at": "2025-06-18T17:11:42.317Z",
+  "updated_at": "2025-08-11T18:11:59.117Z",
   "comment": {
     "text": "This translation key is used for a success message when setting a storage quota to its default value, typically displayed after a button click or operation in the FilesActionsStore and SpaceQuota components. It informs users that the quota has been successfully reset to its original size.",
     "is_auto": true,
@@ -12,20 +12,20 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/SpaceQuota/index.js",
-      "line_number": 153,
+      "line_number": 159,
       "context": "options.forEach((o) => {\n if (o.key === \"default-quota\") o.label = defaultQuotaSize;\n });\n \n successCallback(items);\n toastr.success(t(\"Common:StorageQuotaReset\"));\n } catch (e) {\n abortCallback();\n toastr.error(e);\n }\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2174,
+      "line_number": 2175,
       "context": "return item?.id ? item.id : item;\n });\n \n try {\n await resetRoomQuota(userIDs);\n toastr.success(t(\"Common:StorageQuotaReset\"));\n } catch (e) {\n toastr.error(e);\n }\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/HeaderMenuStore.ts",
-      "line_number": 105,
-      "context": "setInfoPanelSelection(getPeopleListItem(items[0]));\n } else {\n setInfoPanelSelection(items);\n }\n \n toastr.success(t(\"Common:StorageQuotaReset\"));\n } catch (e) {\n toastr.error(e as unknown as TData);\n }\n };",
+      "line_number": 89,
+      "context": "});\n \n try {\n await api.people.resetUserQuota(userIDs);\n \n toastr.success(t(\"Common:StorageQuotaReset\"));\n } catch (e) {\n toastr.error(e as unknown as TData);\n }\n };",
       "module": "/packages/client"
     }
   ],
@@ -48,7 +48,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'default' is transliterated as 'defolt'.  The correct Azerbaijani word for 'default' is 'standart'.",
+          "description": "The word 'default' is transliterated as 'defolt'. It should be translated as 'standart' or 'bədii'.",
           "suggestion": "Yaddaş kvotası uğurla standart olaraq ayarlandı."
         }
       ],
@@ -75,7 +75,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'αποθ.' is an abbreviation for 'αποθηκευτικού χώρου' (storage space). While commonly understood, a more formal and complete spelling improves clarity.",
+          "suggestion": "αποθηκευτικού χώρου"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -102,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Պահպանման քվոտան հաջողությամբ սահմանվեց լռելյայն։' while understandable, doesn't perfectly capture the nuance of 'Storage quota successfully set to default.'  'Լռելյայն' translates to 'silent' or 'default' but the flow feels slightly awkward. A more natural phrasing might be needed.",
-          "suggestion": "Consider a more fluid phrasing like 'Պահպանման քվոտան հաջողությամբ վերականգնվեց սկզբնական ցուցիչներին։' or 'Պահպանման քվոտան հաջողությամբ վերականգնվեց սկզբնական ծավալին։'"
+          "description": "The term 'default' is not accurately translated. 'Լռելյայն' (lrel'yayn) translates to 'silent' or 'implicit,' not 'default.'  'Սանդարժ' (sandarz) or a more descriptive phrase would be more accurate for 'default'.",
+          "suggestion": "Պահպանման քվոտան հաջողությամբ սահմանվեց սանդարժ։ (Pahp'anman kwotan hachoghut'yamb sahmanvetc sandarz.)  Or a phrase like: Պահպանման քվոտան հաջողությամբ սահմանվեց նախնական արժեքին։ (Pahp'anman kwotan hachoghut'yamb sahmanvetc nakhnakhan arzh'ekin.)"
         }
       ],
       "approved_at": null
@@ -131,14 +137,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'ກໍານົດ' (ganot) is acceptable, but 'ຕັ້ງຄ່າ' (tang kha) might be a more natural and clearer word for 'set' in this context. It conveys the idea of configuring or establishing a setting.",
-          "suggestion": "ກຳນົດກໍານານບ່ອນເກັບຂໍ້ມູນສຳເລັດແລ້ວຕາມຄ່າເລີ່ມຕົ້ນ."
-        },
-        {
-          "type": "grammar",
-          "description": "While grammatically correct, the sentence structure is a bit formal. A slightly more conversational tone might improve readability.  Consider rearranging the sentence to place the action ('reset') earlier.",
-          "suggestion": "ບ່ອນເກັບຂໍ້ມູນຖືກຕັ້ງຄ່າສຳເລັດແລ້ວຕາມຄ່າເລີ່ມຕົ້ນ."
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ກຳນົດກໍານານບ່ອນເກັບຂໍ້ມູນສຳເລັດແລ້ວຕາມຄ່າເລີ່ມຕົ້ນ' is a bit verbose and not the most natural way to express 'Storage quota successfully set to default.' The phrase 'ກຳນົດກໍານານ' can be simplified.",
+          "suggestion": "ເກືອບເຕັມຄໍານິເດືອນສຳເລັດແລ້ວ (Gep teum khano samret laeo)"
         }
       ],
       "approved_at": null
@@ -161,13 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Limit pamięci został pomyślnie ustawiony na domyślny.\" is not a precise translation of 'Storage quota successfully set to default.' While 'Limit pamięci' (memory limit) conveys a similar concept, 'Storage quota' is more specific. 'Quota' doesn't directly translate to 'Limit' in this context.",
-          "suggestion": "Limit przestrzeni dyskowej został pomyślnie ustawiony na domyślny."
-        },
-        {
-          "type": "spelling",
-          "description": "While technically not incorrect, 'pomyślnie' can sometimes be replaced with a more natural phrasing depending on the context. In this case, it isn't a significant issue, but could be slightly improved.",
-          "suggestion": "Limit przestrzeni dyskowej został ustawiony na domyślny."
+          "description": "The translation \"Limit pamięci został pomyślnie ustawiony na domyślny\" is not a direct or ideal translation of \"Storage quota successfully set to default.\"  'Limit pamięci' translates to 'Memory Limit,' which isn't precisely what 'Storage Quota' represents. A better translation would focus on 'quota' or 'przydział' relating to storage capacity.",
+          "suggestion": "Przydział pamięci został pomyślnie ustawiony na domyślny. / Kwota pamięci została pomyślnie zresetowana do domyślnej."
         }
       ],
       "approved_at": null
@@ -190,13 +186,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Limită de stocare este setată cu succes la valorile prestabilite' is a bit verbose and not as natural as it could be. 'Valorile prestabilite' is accurate but less common than other phrasing.",
-          "suggestion": "Limită de stocare restabilită la valoarea implicită."
+          "description": "The translation 'Limită de stocare este setată cu succes la valorile prestabilite' is a bit literal and could be improved for naturalness. 'Prestabilitite' sounds overly formal in this context.",
+          "suggestion": "Limită de stocare a fost resetată la valorile implicite."
         },
         {
           "type": "incorrect_translation",
-          "description": "The original English 'Storage quota successfully set to default' implies a *reset* to the original value. 'Setată cu succes' is accurate, but 'restabilită' conveys the reset more accurately.",
-          "suggestion": "Limită de stocare restabilită la valoarea implicită."
+          "description": "While not strictly incorrect, 'valorile prestabilite' implies a predefined list of values, whereas 'Storage quota successfully set to default' indicates a simple return to the original setting.",
+          "suggestion": "Limită de stocare a fost resetată la valoarea implicită."
         }
       ],
       "approved_at": null
@@ -213,8 +209,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ආචයන සලාකය පෙරනිමියට සැකසිණි.' is not a natural or accurate translation of 'Storage quota successfully set to default.' 'ආචයන' doesn't fit the context.  'Storage quota' should be translated more accurately. 'පෙරනිමියට' is correct for 'to default'. 'සැකසිණි' means arranged or decorated which isn't the appropriate verb.",
-          "suggestion": "A more accurate translation would be something like 'ගබඩාවේ ප්‍රමාණය පෙරනිමි තත්වයට යවා ඇත' (Gabadava pramaṇaya peranimithavaṭṭavata yava ata), which translates to 'The storage limit has been reset to the default value'."
+          "description": "The translation 'ආචයන සලාකය පෙරනිමියට සැකසිණි' doesn't accurately convey the meaning of 'Storage quota successfully set to default.' 'ආචයන' (aachayana) doesn't fit the context and suggests a ritual or offering. 'සලාකය' (salaakaya) generally means 'salve' or 'residue'.",
+          "suggestion": "A more accurate translation would be something along the lines of 'ගබඩාවේ ඉඩ ප්‍රමාණය පෙරනිමියට යවා ඇත' (Gabadawe idda pramanya peranimiyata yawa atha) - 'Storage space has been reset to default' or 'ගබඩාවේ ඉඩ ප්රමාණය පෙරනිමියට පිහිටුවන ලදි' (Gabadawe idda pramanya peranimiyata pihituwana ladi) - 'Storage space was established to default'."
         }
       ],
       "approved_at": null
@@ -225,7 +221,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation 'Kvóta úložiska bola úspešne upravená na predvolené nastavenie' implies the quota was modified, rather than reset. The English says 'set to default', which suggests a reset to the initial value.",
+          "description": "The Slovak translation 'Kvóta úložiska bola úspešne upravená na predvolené nastavenie' translates to 'Storage quota was successfully modified to the default setting'. The original English says 'set to default', which implies a reset to the initial value, not just a modification. 'Upravená' suggests an alteration, not necessarily a reset.",
           "suggestion": "Kvóta úložiska bola úspešne obnovená na predvolené nastavenie."
         }
       ],
@@ -242,9 +238,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "spelling",
+          "description": "The word 'Складишна' is a misspelling. It should be 'Корисничка'.",
+          "suggestion": "Корисничка"
+        },
+        {
           "type": "incorrect_translation",
-          "description": "The word 'Складишна' (Skladishna) doesn't accurately translate 'Storage'. It implies 'warehouse' or 'storage space' in a more general sense. A more accurate translation would be 'Просторна' (Prostorna) or 'Члани' (Člani).",
-          "suggestion": "Consider using 'Просторна квота успешно постављена на подразумевано.' or 'Члани успешно постављена на подразумевано.'"
+          "description": "While 'помиљавано' is a possible translation for 'default', it can sound slightly awkward. A more natural translation might be 'оснивачки' or 'почетно'.",
+          "suggestion": "оснивачки"
         }
       ],
       "approved_at": null

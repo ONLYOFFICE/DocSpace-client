@@ -78,6 +78,7 @@ const ErrorView = ({
           scale={isMobile}
           size={!isMobile ? "small" : "normal"}
           onClick={onGoBack}
+          testId="form_gallery_error_view_back_button"
         />
       }
     />

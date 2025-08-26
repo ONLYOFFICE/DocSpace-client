@@ -3,7 +3,7 @@
   "content": "If you enable these users, they will be able to log in to {{productName}} again and access their documents and data.",
   "content_en_sha1_hash": "61e8d10c36f1b30de48b0856fadfef112538af82",
   "created_at": "2025-05-19T21:30:56.975Z",
-  "updated_at": "2025-05-24T14:13:19.778Z",
+  "updated_at": "2025-08-04T07:30:01.066Z",
   "comment": {
     "text": "If you enable these users, they will be able to log in to {{productName}} again and access their documents and data. This description appears in a change user status dialog when enabling user capabilities.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
-      "line_number": 207,
+      "line_number": 203,
       "context": "? isGuests\n ? t(\"EnableGuestDescription\", { productName: t(\"Common:ProductName\") })\n : t(\"EnableUserDescription\", { productName: t(\"Common:ProductName\") })\n : isGuests\n ? t(\"EnableGuestsDescription\", { productName: t(\"Common:ProductName\") })\n : t(\"EnableUsersDescription\", { productName: t(\"Common:ProductName\") });\n \n buttonLabelSave = t(\"Common:Enable\");\n }\n \n return (",
       "module": "/packages/client"
     }

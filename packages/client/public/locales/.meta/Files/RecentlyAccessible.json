@@ -3,7 +3,7 @@
   "content": "Recently accessible via link",
   "content_en_sha1_hash": "311cb1a7a76668aa73e143691e47bd7007baff84",
   "created_at": "2025-05-19T21:30:56.015Z",
-  "updated_at": "2025-05-26T07:57:32.466Z",
+  "updated_at": "2025-08-11T09:02:43.932Z",
   "comment": {
     "text": "This translation key is used to describe a tab or section label that indicates recently accessible files. It appears in a UI component, likely a file explorer or management interface, and helps users identify a specific section of documents. The translation should aim to be clear and concise, providing context for users familiar with the concept of \"recently accessed\" content.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Tabs/MyDocumentsTabs/index.js",
-      "line_number": 56,
+      "line_number": 75,
       "context": "id: \"my\",\n name: t(\"Common:MyDocuments\"),\n },\n {\n id: \"recent\",\n name: t(\"Files:RecentlyAccessible\"),\n },\n ];\n \n const onSelect = (e) => {\n const filter = FilesFilter.getDefault();",
       "module": "/packages/client"
     }
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'مفتوحة مؤخرا عبر رابط' implies 'opened recently via link', which doesn't accurately convey the meaning of 'Recently accessible via link'.  'Accessible' implies the ability to access, not that something was opened.",
-          "suggestion": "Recently accessible could be translated as 'تم الوصول إليه مؤخرًا عبر رابط' (Tam al-wusool ilayhi mu'akharan 'abr rabit) - 'Recently accessed via link'."
+          "description": "The translation 'مفتوحة مؤخرا عبر رابط' doesn't accurately convey the meaning of 'Recently accessible via link'. 'مفتوحة' means 'open', which implies the file is currently open, not recently accessed. A better translation would convey the sense of recent access.",
+          "suggestion": "تم الوصول إليه مؤخرًا عبر رابط"
         }
       ],
       "approved_at": null
@@ -42,13 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Bu yaxınlarda link vasitəsilə əlçatan ola bilər' is too literal and doesn't quite capture the meaning of 'Recently accessible via link'. It implies potential accessibility rather than confirmed recent access. A more natural and accurate translation would convey the sense of recent access.",
-          "suggestion": "Consider alternatives like 'Son zamanlar keçid vasitəsilə əldə edilə bilər' or 'Son istifadə olunmuş keçidlərlə'. A more dynamic and contextually relevant translation would be preferable."
+          "description": "The translation \"Bu yaxınlarda link vasitəsilə əlçatan ola bilər\" is a bit literal and awkward. \"Erişilə bilən\" would be a more natural way to express 'accessible'. The 'ola bilər' (can be) implies uncertainty, which isn't conveyed in the English original.",
+          "suggestion": "Bu yaxınlarda link vasitəsilə əlçatan"
         },
         {
           "type": "grammar",
-          "description": "The phrase 'əlçatan ola bilər' (can be accessible) is slightly awkward. While grammatically correct, it's not the most natural way to express recent access in Azerbaijani.",
-          "suggestion": "Consider revising it to something more direct like 'əldə edilə bilər' (can be obtained) or 'təmin edilə bilər' (can be provided)."
+          "description": "While technically correct, \"vasitəsilə\" can be a bit formal for this context. A simpler construction might be preferable.",
+          "suggestion": "linklə"
         }
       ],
       "approved_at": null
@@ -92,19 +92,19 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Récemment consultés via le lien\" implies a more active consultation than 'Recently accessible via link'. 'Accessible' suggests availability, not necessarily active viewing or use. A more accurate translation would convey availability.",
+          "suggestion": "Récemment disponibles via le lien"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Վերջերս հասանելի է հղման միջոցով' is a literal translation and doesn't quite capture the nuance of 'Recently accessible via link.' It sounds somewhat awkward in Armenian. A more natural phrasing would emphasize that files were recently accessed through a link.",
-          "suggestion": "Վերջերս բացվել է հղմամբ (Verjerս bacvel е hghmam) - 'Recently opened via link' or Վերջերս հասանելի էր հղման միջոցով (Verjerս hasaneli er hghman mijocov) - 'Recently was accessible via link', although the former is more commonly used."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -119,8 +119,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"最近リンクから閲覧したファイル\" directly translates to \"Files viewed recently from link\". While understandable, it's not the most natural way to express \"Recently accessible via link\" in Japanese. It lacks nuance and implies active viewing rather than mere accessibility.",
-          "suggestion": "Consider a more natural phrasing like \"リンク経由で最近アクセスしたファイル\" (Link-via recently accessed files) or \"リンクを通じて最近アクセス可能なファイル\" (Files recently accessible through a link)."
+          "description": "The translation \"最近リンクから閲覧したファイル\" while understandable, is a bit literal and doesn't quite capture the nuance of \"Recently accessible via link.\" It implies the user *actively* viewed the file, whereas the English phrase suggests it was accessible through a link, regardless of whether it was viewed.",
+          "suggestion": "最近リンク経由でアクセスしたファイル"
         }
       ],
       "approved_at": null
@@ -131,8 +131,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation '링크를 통해 최근에 액세스한 파일' is a literal translation but doesn't quite capture the nuance of 'Recently accessible via link.' It's a bit clunky and less natural.",
-          "suggestion": "Consider a more natural phrasing like '최근 링크를 통해 열람한 파일' or '링크를 통해 최근 열람한 파일' depending on the desired level of formality."
+          "description": "The Korean translation \"링크를 통해 최근에 액세스한 파일\" is a literal translation, but a more natural and concise phrasing would be better. While technically correct, it sounds a bit clunky in Korean.",
+          "suggestion": "Consider a more natural phrasing like \"최근 링크 접속 파일\" or \"링크를 통한 최근 접속 파일\"."
         }
       ],
       "approved_at": null
@@ -142,14 +142,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'ລິ້ງ' (ling) is a transliteration and might be better replaced with a more formal Lao term for 'link'.",
-          "suggestion": "ລິ້ງ → ເຊື່ອມຕໍ່"
-        },
-        {
-          "type": "grammar",
-          "description": "While technically correct, the phrasing 'ເຂົ້າເຖິງໄດ້ເມື່ອບໍ່ດົນມານີ້ຜ່ານລິ້ງ' can sound slightly awkward in Lao. It lacks a natural flow.",
-          "suggestion": "ສາມາດເຂົ້າເຖິງໄດ້ຜ່ານລິ້ງບໍ່ດົນມານີ້"
+          "type": "incorrect_translation",
+          "description": "The translation \"ເຂົ້າເຖິງໄດ້ເມື່ອບໍ່ດົນມານີ້ຜ່ານລິ້ງ\" while understandable, is a bit verbose and literal. A more natural and concise translation would improve readability.",
+          "suggestion": "ອ່ານໄດ້ບໍ່ດົນມານີ້ຜ່ານລິ້ງ"
         }
       ],
       "approved_at": null
@@ -160,8 +155,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nesen piekļūts, izmantojot saiti' while conveying a similar idea, isn't the most natural or precise translation of 'Recently accessible via link'. A more accurate and idiomatic translation might be 'Nesen pieejams, izmantojot saiti' or 'Nesen atrodams, izmantojot saiti'. 'Pieejams' or 'atrodams' more closely aligns with 'accessible'.",
-          "suggestion": "Nesen pieejams, izmantojot saiti"
+          "description": "The translation 'Nesen piekļūts, izmantojot saiti' while technically correct, isn't the most natural or concise way to express \"Recently accessible via link\" in Latvian. It sounds slightly formal and verbose.",
+          "suggestion": "Consider a more concise option like 'Pēdējā pieejamība saites caur' or 'Atjaunināts, izmantojot saiti' depending on the context and intended tone. A more conversational option might be 'Pēdējā reize, kad tika piekļauts saites caur'."
         }
       ],
       "approved_at": null
@@ -184,8 +179,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Portuguese translation \"Recentemente acessível via link\" is a direct translation but doesn't flow naturally in Portuguese. It's a very literal rendering of the English and lacks idiomatic flow. \"Recentemente acessível\" sounds awkward.",
-          "suggestion": "Acessado recentemente via link"
+          "description": "The Portuguese translation \"Recentemente acessível via link\" is a direct, literal translation and doesn't flow naturally in Portuguese. It's awkward and doesn't convey the intended meaning clearly. A more natural translation would emphasize the 'recently' aspect related to accessibility.",
+          "suggestion": "Acessado recentemente através de link"
         }
       ],
       "approved_at": null
@@ -196,7 +191,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Recentemente acessível via link' is a literal translation and doesn't sound natural in Portuguese. It's unnecessarily verbose and 'acessível' is not the best word choice here. A more natural phrasing would be something like 'Acessado recentemente via link'.",
+          "description": "The Portuguese translation 'Recentemente acessível via link' is a literal translation and doesn't sound natural in Brazilian Portuguese. 'Accessible' is a bit awkward here. A more natural translation would convey the meaning of 'recently accessed'.",
           "suggestion": "Acessado recentemente via link"
         }
       ],
@@ -208,8 +203,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'A fost accesibil recent prin link' is grammatically correct but doesn't fully capture the nuance of 'Recently accessible via link'. It implies a passive state rather than an action of access. A more accurate translation might emphasize the accessibility aspect.",
-          "suggestion": "Poate fi accesat recent prin link"
+          "description": "The translation 'A fost accesibil recent prin link' is a literal translation that doesn't quite capture the nuance of \"Recently accessible via link.\" A more natural Romanian phrasing would be more appropriate.",
+          "suggestion": "Accesat recent prin link"
         }
       ],
       "approved_at": null
@@ -220,8 +215,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Последние доступны по ссылке' is not the most accurate rendering of \"Recently accessible via link\". It translates to \"Last accessible via link.\" While close, 'Recently' implies a timeframe, which is not fully captured.",
-          "suggestion": "Недавние, доступные по ссылке"
+          "description": "The translation \"Последние доступны по ссылке\" doesn't quite capture the meaning of \"Recently accessible via link\". It implies that the files *themselves* are accessible via a link, rather than the fact that they were recently accessed *through* a link. A better translation would convey the temporal aspect of recent access through a link.",
+          "suggestion": "Возможно, более точный перевод: \"Недавно использованные по ссылке\" or \"Недавние обращения по ссылке\"."
         }
       ],
       "approved_at": null
@@ -232,8 +227,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'මෑතදී සබැඳියකින් ප්‍රවේශිත' is a literal translation but doesn't quite capture the natural flow of the English phrase \"Recently accessible via link.\" A more natural Sinhala phrasing might be 'සබැඳිය හරහා මෑතකදී ප්‍රවේශ කළ'.",
-          "suggestion": "Consider revising to 'සබැඳිය හරහා මෑතකදී ප්‍රවේශ කළ'."
+          "description": "The translation 'මෑතදී සබැඳියකින් ප්‍රවේශිත' is a literal translation and sounds unnatural in Sinhala. A more natural phrasing would convey the meaning of 'recently accessed via link'.",
+          "suggestion": "Consider alternatives such as 'අතීතයේදී සබැඳිය හරහා ප්‍රවේශ කර ඇත' or 'සබැඳියෙන් පසුකාලීනව ප්‍රවේශිත'."
         }
       ],
       "approved_at": null
@@ -256,13 +251,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Недавно приступно путем линка' doesn't fully capture the meaning of 'Recently accessible via link'. It's a literal translation but sounds unnatural in Serbian. 'Via link' implies access *through* a link, which isn't entirely reflected.",
-          "suggestion": "Недавно приступно преко везе"
-        },
-        {
-          "type": "formatting",
-          "description": "The Serbian translation lacks necessary capitalization. Proper nouns and the beginning of a sentence should always be capitalized.",
-          "suggestion": "Недавно приступно преко везе"
+          "description": "The Serbian translation \"Недавно приступно путем линка\" doesn't fully capture the meaning of 'Recently accessible via link'. 'Приступно' is grammatically incorrect and doesn't accurately convey accessibility. It implies something is *available* rather than *recently accessible*.  A more accurate translation would reflect the 'recently' aspect.",
+          "suggestion": "Недавно приступачно преко везе"
         }
       ],
       "approved_at": null
@@ -273,8 +263,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nedavno pristupno putem linka' is not the most natural or accurate rendering of 'Recently accessible via link'. It's technically correct but a bit clunky. A more fluid translation would be something along the lines of 'Nedavno pristupačno preko linka' or 'Nedavno dostupan putem linka'. The word 'pristupno' sounds somewhat awkward in this context.",
-          "suggestion": "Nedavno pristupačno preko linka"
+          "description": "The translation 'Nedavno pristupno putem linka' is not the most natural or accurate rendering of 'Recently accessible via link'. While understandable, it's a bit clunky. 'Nedavno pristupačno putem linka' or 'Nedavno dostupno putem linka' would be more common and flow better in Serbian.",
+          "suggestion": "Nedavno pristupačno putem linka"
         }
       ],
       "approved_at": null
@@ -285,13 +275,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Bağlantı yoluyla erişilebilen Yakın Zamanda\" doesn't accurately convey the meaning of \"Recently accessible via link.\" \"Yakın Zamanda\" means \"recently\" but it's positioned awkwardly and doesn't flow naturally. The overall phrasing is not idiomatic Turkish.",
-          "suggestion": "A more accurate and natural translation would be something like \"Bağlantı üzerinden yakın zamanda erişilen\" or \"Bağlantı ile son erişilen\"."
+          "description": "The translation 'Bağlantı yoluyla erişilebilen Yakın Zamanda' doesn't accurately convey the meaning of 'Recently accessible via link'. 'Yakın Zamanda' means 'Recently' but the phrasing is awkward and doesn't flow naturally. A more accurate and natural translation would incorporate 'Yakın zamanda' as part of a descriptive phrase, rather than a standalone phrase.",
+          "suggestion": "Consider alternatives like 'Bağlantı yoluyla son erişilen' or 'Bağlantı aracılığıyla yakın zamanda erişilen'."
         },
         {
-          "type": "formatting",
-          "description": "The phrase \"Yakın Zamanda\" is separated from the rest of the sentence, making it feel incomplete and less clear. It should be integrated smoothly.",
-          "suggestion": "Integrate \"Yakın Zamanda\" or its equivalent into the sentence flow, as suggested in the incorrect_translation fix."
+          "type": "grammar",
+          "description": "While not strictly incorrect, 'Bağlantı yoluyla erişilebilen Yakın Zamanda' is somewhat disjointed. The two phrases don't flow seamlessly together.",
+          "suggestion": "Rephrasing to improve flow as suggested in the 'incorrect_translation' issue."
         }
       ],
       "approved_at": null
@@ -302,8 +292,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Нещодавно доступні за посиланням\" is not the most natural or accurate translation of \"Recently accessible via link.\" It's a bit literal and clunky. A more idiomatic translation might be \"Останнім часом доступні за посиланням\" or \"Нещодавно доступні через посилання\".",
+          "description": "The translation \"Нещодавно доступні за посиланням\" is technically correct but not the most natural or idiomatic way to express \"Recently accessible via link\" in Ukrainian. \"Available via link\" implies the files were accessible, not that they are currently available. A more suitable translation would convey the sense of recent access.",
           "suggestion": "Останнім часом доступні за посиланням"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'доступні' (available) suggests files that *can* be accessed now, which might not be the intended meaning. 'Recently accessible' implies past access.",
+          "suggestion": "Нещодавно отримали доступ за посиланням"
         }
       ],
       "approved_at": null
@@ -320,8 +315,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"近期链接访问文档\" doesn't accurately convey the meaning of \"Recently accessible via link\". It literally translates to \"Recently link access documents\". A better translation would focus on the accessibility aspect.",
-          "suggestion": "可访问的近期链接 (Kě fǎngwèn de jìnqí liánjí) - 'Recently accessible links' or 近期可访问的文件 (Jìnqí kě fǎngwèn de wénjiàn) - 'Recently accessible files'"
+          "description": "The translation \"近期链接访问文档\" doesn't fully capture the meaning of \"Recently accessible via link\". It focuses on documents accessed via links, but the original implies recent access regardless of the method.",
+          "suggestion": "最近通过链接访问过的文件"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'via' is lost in the translation. While '通过' implies it, the phrasing could be more direct.",
+          "suggestion": "最近通过链接访问的文件"
         }
       ],
       "approved_at": null

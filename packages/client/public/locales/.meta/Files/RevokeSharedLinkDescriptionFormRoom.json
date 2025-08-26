@@ -3,7 +3,7 @@
   "content": "Links to all forms in the room will be re-generated. Previous links to room forms and embedded forms will become unavailable.",
   "content_en_sha1_hash": "3097908789ffd132e941b4e82a21df2f16bc5599",
   "created_at": "2025-05-19T21:30:56.063Z",
-  "updated_at": "2025-05-26T07:57:32.294Z",
+  "updated_at": "2025-08-04T07:30:01.098Z",
   "comment": {
     "text": "This translation key is used to display a message when a user revokes a shared link for a room form, indicating that all links to forms in the room will be re-generated and previous links become unavailable. It appears in a delete confirmation dialog.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteLinkDialog/index.js",
-      "line_number": 121,
+      "line_number": 140,
       "context": "const getDescription = () => {\n if (link.sharedTo.primary) {\n if (isCustomRoom) return t(\"Files:RevokeSharedLinkDescriptionCustomRoom\");\n \n if (isFormRoom) return t(\"Files:RevokeSharedLinkDescriptionFormRoom\");\n \n if (isPublicRoomType)\n return t(\"Files:RevokeSharedLinkDescriptionPublicRoom\");\n }",
       "module": "/packages/client"
     }
@@ -30,13 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'Files' in the English content is not reflected in the Arabic translation. The translation focuses on 'links' and 'room', but the reference to 'files' is missing.",
-          "suggestion": "سيتم إعادة إنشاء الروابط إلى جميع الملفات في الغرفة (مثل الملفات)."
+          "description": "The term \"الملفات\" (al-malaffat) translates to \"files\" in general, but in this context, it should refer to \"forms.\" The English text specifies \"forms,\" and the Arabic translation is too broad.",
+          "suggestion": "سيتم إعادة إنشاء الروابط إلى جميع النماذج في الغرفة."
         },
         {
           "type": "incorrect_translation",
-          "description": "The term 'embedded forms' is translated as 'المستندات المضمنة'. While technically correct, 'نماذج مضمنة' would be a more accurate and natural translation of 'embedded forms' in this context.",
-          "suggestion": "سيتم إعادة إنشاء الروابط إلى جميع الملفات في الغرفة. وستصبح الروابط السابقة إلى ملفات الغرفة والنماذج المضمنة غير متاحة."
+          "description": "The term \"المستندات المضمنة\" (al-mustanadat al-mudammana) translates to \"embedded documents\" which is accurate, but “forms” is more fitting for consistency with the English version.",
+          "suggestion": "سيتم إعادة إنشاء الروابط إلى جميع النماذج المضمنة."
         }
       ],
       "approved_at": null
@@ -47,13 +47,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"embedded forms\" is not accurately translated. While 'əlavə olunmuş formalar' technically means 'added forms', it doesn't convey the meaning of embedded forms, which implies forms included within another context or document.",
-          "suggestion": "Consider a more precise translation of 'embedded forms,' potentially using a phrase like 'daxil edilmiş formalar' or 'proqram daxilindəki formalar' to better reflect the original meaning."
+          "description": "The phrase 'embedded forms' is not accurately translated. 'Əlavə olunmuş formalar' translates to 'added forms' which isn't the correct meaning of 'embedded'. Embedded forms are forms integrated within another resource.",
+          "suggestion": "Consider using a more precise translation for 'embedded forms', such as 'daxil edilmiş formalar' or 'gömülü formalar', depending on the specific context and desired nuance.  A simpler option could be 'integrasiya olunmuş formalar'."
         },
         {
           "type": "formatting",
-          "description": "The punctuation could be improved for better readability in Azerbaijani. A semicolon or a conjunction might improve the flow between the two sentences.",
-          "suggestion": "Replace the period after 'yaradılacaq' with a conjunction like 'və' or a semicolon to link the sentences more smoothly. For example: 'Otaqdakı bütün formalara keçidlər yenidən yaradılacaq və otaq formaları və əlavə olunmuş formalara əvvəlki keçidlər əlçatan olmayacaq.'"
+          "description": "The sentence structure in the Azerbaijani translation could be improved for better readability. Specifically, the second sentence feels slightly clunky.",
+          "suggestion": "Reconsider the sentence structure of the second sentence. A possible revision: 'Otaq formalarına və daxil edilmiş formalara olan əvvəlki keçidlər işləməz olacaq.'"
         }
       ],
       "approved_at": null
@@ -94,13 +94,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Links to all forms in the room\" is somewhat literally translated. A more natural phrasing in Finnish would be preferable. \"Kaikkiin huoneen lomakkeisiin liittyvät linkit\" or similar would improve flow.",
-          "suggestion": "Kaikkiin huoneen lomakkeisiin liittyvät linkit luodaan uudelleen."
+          "description": "The phrase \"Links to all forms in the room\" is not accurately translated. \"Linkit kaikkiin huoneen lomakkeisiin\" is a literal translation, but it could be more naturally expressed in Finnish.",
+          "suggestion": "Huoneen lomakkeiden linkit"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"embedded forms\" is translated as \"upotetut lomakkeet\". While technically correct, it might not be the most natural way to convey the meaning to a wider audience. Considering the context, it might be better to use a simpler alternative.",
-          "suggestion": "Sisällytetyt lomakkeet"
+          "description": "The phrase \"Previous links and embedded forms\" is not perfectly conveyed by \"Aiemmat linkit ja upotetut lomakkeet\". While technically correct, it can be improved for clarity and fluency.",
+          "suggestion": "Aiemmat linkit ja lomakkeisiin upotetut linkit"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"will become unavailable\" is translated as \"poistuvat käytöstä\". While accurate, a more natural Finnish phrasing could improve readability.  A direct equivalent is quite clunky.",
+          "suggestion": "eivät enää toimi"
         }
       ],
       "approved_at": null
@@ -117,8 +122,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'embedded' is not accurately conveyed. While 'ներկառուցված' is technically correct, it might be too literal and not easily understood by the target audience. A more natural phrasing might be more suitable.",
-          "suggestion": "Consider 'ներկայացված' or 'մուտքագրված' forms instead of 'ներկառուցված ձևերի'."
+          "description": "The English phrase \"Links to all forms in the room\" is translated as \"Սենյակի բոլոր ձևերի հղումները\". While not entirely incorrect, a more natural and precise translation might be \"Բոլոր ձևերի հղումները այն սենյակում\". The current translation feels slightly awkward.",
+          "suggestion": "Բոլոր ձևերի հղումները այն սենյակում"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"embedded forms\" is translated as \"ներկառուցված ձևերի\". While technically correct, a simpler and more understandable translation for a non-technical user might be \"ներծծված ձևերի\" or even omitting the specific translation and using something like \"մուտքագրված ձևերի\".",
+          "suggestion": "մուտքագրված ձևերի"
         }
       ],
       "approved_at": null
@@ -138,7 +148,18 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Links to all forms in the room\" is somewhat passively translated. A more active voice would improve readability and clarity. While technically correct, it doesn't flow as naturally in Korean.",
+          "suggestion": "룸에 있는 모든 양식의 링크는 다시 생성됩니다."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure could be slightly improved for better flow. Splitting it into two shorter sentences might be more readable.",
+          "suggestion": "룸에 있는 모든 양식에 대한 링크가 다시 생성됩니다. 이전 링크는 룸 양식과 임베드된 양식 모두 사용할 수 없게 됩니다."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -147,13 +168,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Links to all forms in the room\" is translated as \"ລິ້ງໄປຫາທຸກຮູບແບບໃນຫ້ອງ\", which is accurate but could be more natural-sounding. A more conversational translation might be 'ລິ້ງທັງໝົດທີ່ຈະເຂົ້າໄປຫາແບບຟອມໃນຫ້ອງ'.",
-          "suggestion": "ລິ້ງທັງໝົດທີ່ຈະເຂົ້າໄປຫາແບບຟອມໃນຫ້ອງ"
+          "description": "The phrase \"Links to all forms in the room\" is not accurately reflected in the Lao translation. 'ລິ້ງໄປຫາທຸກຮູບແບບໃນຫ້ອງ' translates more literally to 'Links to all forms in the room'.  While understandable, it's a rather literal translation. A more natural phrasing could improve clarity.",
+          "suggestion": "ລິ້ງຂອງແບບຟອມທັງໝົດໃນຫ້ອງຈະຖືກສ້າງໃໝ່."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Previous links to room forms and embedded forms\" is translated as \"ລິ້ງກ່ອນໜ້ານີ້ໄປຫາແບບຟອມຫ້ອງ ແລະແບບຟອມທີ່ຝັງໄວ້\". While technically correct, a more fluent translation considering the context of revocation could be something like 'ລິ້ງເກົ່າທີ່ຈະເຂົ້າຫາແບບຟອມໃນຫ້ອງແລະແບບຟອມທີ່ຝັງໄວ້'.",
-          "suggestion": "ລິ້ງເກົ່າທີ່ຈະເຂົ້າຫາແບບຟອມໃນຫ້ອງແລະແບບຟອມທີ່ຝັງໄວ້"
+          "description": "The word 'unavailable' is translated as 'ບໍ່ສາມາດໃຊ້ໄດ້', which is accurate but can be more elegantly expressed in Lao for a more natural flow.  It's a bit clunky.",
+          "suggestion": "ລິ້ງກ່ອນໜ້ານີ້ໄປຫາແບບຟອມຫ້ອງ ແລະແບບຟອມທີ່ຝັງໄວ້ຈະບໍ່ສາມາດເຂົ້າໃຊ້ໄດ້."
         }
       ],
       "approved_at": null
@@ -193,19 +214,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'documentele' is likely a typo. It should probably be 'formularele'.",
-          "suggestion": "formularele"
-        },
-        {
           "type": "grammar",
-          "description": "The phrase 'si documentele incorporate for' is grammatically incorrect. 'for' seems like a remnant from another language and should be removed or replaced. It probably intended to be 'și formularele incorporate'.",
-          "suggestion": "și formularele incorporate"
+          "description": "The phrase 'documentele incorporate for' is grammatically incorrect. 'for' is unnecessary and incorrect in this context. It should be 'documente incorporate'.",
+          "suggestion": "documente incorporate"
         },
         {
           "type": "incorrect_translation",
-          "description": "The translation of 'embedded forms' as 'documentele incorporate' isn't a precise translation. While understandable, 'formularele incorporate' is more accurate in this context.",
-          "suggestion": "formularele incorporate"
+          "description": "While generally accurate, 'Link-uri către toate formularele din sala' could be slightly improved for better flow and more natural Romanian. 'Formulare' is plural, but the translation could benefit from a more elegant phrasing.",
+          "suggestion": "Legături către toate formularele din sală"
         }
       ],
       "approved_at": null
@@ -222,13 +238,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"will become unavailable\" is not the most natural translation of the English \"will become unavailable\" in this context.  A more accurate and natural rendering would imply invalidation or expiry.",
+          "description": "The phrase \"will become unavailable\" is not accurately translated by \"අ වලංගු නොවනු ඇත\". It implies they will *not* become invalid, which is the opposite of what the English means. The correct meaning should be that they will become invalid/disabled.",
           "suggestion": "කාමරයේ ආකරයන් සහ අන්තර්ගත ආකරයන් සඳහා වූ පෙර සම්බන්ධතා වලංගු නොවනු ඇත."
         },
         {
           "type": "spelling",
-          "description": "The word 'අ වලංගු' contains a typo. It should be 'අවලංගු'.",
-          "suggestion": "අවලංගු"
+          "description": "The word 'ආකරයන්' (aakarayan) is repeated multiple times. While it technically means 'forms,' the repetition makes it sound awkward. Consider using synonyms or rewording for better flow.",
+          "suggestion": "කාමරයේ සියලුම පත්තුරු සඳහා වූ සම්බන්ධතා නැවත ජනනය කරනු ලැබේ. කාමරයේ පත්තුරු සහ අන්තර්ගත පත්තුරු සඳහා වූ පෙර සම්බන්ධතා වලංගු නොවනු ඇත."
         }
       ],
       "approved_at": null
@@ -251,8 +267,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'уграђених' (embedded) could be more clearly translated as 'уграђени' to agree in number with 'образаца'.",
-          "suggestion": "Линкови до свих образаца у соби ће бити регенерисани. Претходни линкови до образаца у соби и уграђени образаца постаће недоступни."
+          "description": "The word 'уграђених' is a valid word but 'embedded' is often translated as 'унешених' in contexts like this, to convey the meaning of integrated or inserted. While 'уграђених' isn't *wrong*, 'унешених' might be more precise.",
+          "suggestion": "унешених"
         }
       ],
       "approved_at": null
@@ -260,7 +276,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'postajaće' is a less common and slightly awkward phrasing. While technically correct, a more natural phrasing would improve readability.",
+          "suggestion": "postaće"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -281,13 +303,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"room forms\" is unclear and could be misinterpreted. It's not directly equivalent to \"forms in the room\".",
-          "suggestion": "Liên kết đến tất cả các biểu mẫu trong phòng sẽ được tạo lại. Các liên kết trước đó đến biểu mẫu phòng và biểu mẫu nhúng sẽ không khả dụng."
+          "description": "The phrase \"Links to all forms in the room will be re-generated\" is not accurately reflected. 'Tạo lại' implies creation, but 're-generation' is closer to a refresh or replacement of existing links. A better translation would convey the replacement aspect.",
+          "suggestion": "Liên kết đến tất cả các biểu mẫu trong phòng sẽ được thay thế."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'phòng' is repeated unnecessarily. While grammatically correct, it can be improved for flow.",
-          "suggestion": "Liên kết đến tất cả các biểu mẫu trong phòng sẽ được tạo lại. Các liên kết trước đó đến biểu mẫu và biểu mẫu nhúng sẽ không khả dụng."
+          "description": "The phrase \"Previous links to room forms and embedded forms will become unavailable\" can be improved for clarity. 'Phòng có biểu mẫu' is a little awkward.  'Forms' isn't explicitly stated for the embedded forms.",
+          "suggestion": "Các liên kết trước đây đến các biểu mẫu phòng và biểu mẫu nhúng sẽ không còn hiệu lực."
         }
       ],
       "approved_at": null
@@ -298,8 +320,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"embedded forms\" is translated as \"嵌入式表单\". While technically correct, it's a bit technical and not as clear for a general user. A more accessible translation might be \"内嵌表单\" or a descriptive phrase like \"表单内嵌在页面中\".",
-          "suggestion": "Consider using \"内嵌表单\" or a more descriptive phrase like \"表单内嵌在页面中\"."
+          "description": "The English phrase \"Links to all forms in the room will be re-generated\" is translated as \"房间内所有表单的链接将重新生成\". While technically correct, it could be more naturally translated as \"房间内所有表单的链接都将重新生成\" to emphasize that *all* links will be regenerated.",
+          "suggestion": "房间内所有表单的链接都将重新生成"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Previous links to room forms and embedded forms will become unavailable\" is translated as \"之前的房间表单和嵌入式表单的链接将失效\". While acceptable, a more precise translation would be “之前的房间表单和嵌入式表单链接将无法使用” to accurately convey 'unavailable'.",
+          "suggestion": "之前的房间表单和嵌入式表单链接将无法使用"
         }
       ],
       "approved_at": null

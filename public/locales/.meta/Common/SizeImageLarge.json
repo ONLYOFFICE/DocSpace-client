@@ -3,7 +3,7 @@
   "content": "The image size is too large, please select another image.",
   "content_en_sha1_hash": "70aa576311994ef2eb1361f70f15d79707597c1f",
   "created_at": "2025-05-19T21:30:48.898Z",
-  "updated_at": "2025-06-02T10:20:51.118Z",
+  "updated_at": "2025-08-04T07:30:01.089Z",
   "comment": {
     "text": "The translation key \"SizeImageLarge\" is used to display an error message when an image file exceeds a certain size limit. This message is intended to inform users that their selected image is too large and should be replaced with a smaller one. It appears in various UI components, including dialog boxes and form fields, where image uploads are required.",
     "is_auto": true,
@@ -18,13 +18,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/BasicBlock.tsx",
-      "line_number": 99,
+      "line_number": 100,
       "context": "const file =\n e.target.files && e.target.files?.length > 0 && e.target.files[0];\n \n if (file && file.type === \"image/svg+xml\") {\n if (file.size > ONE_MEGABYTE)\n return toastr.error(t(\"Common:SizeImageLarge\"));\n \n const reader = new FileReader();\n reader.onloadend = () => {\n if (reader.result && typeof reader.result === \"string\")\n changeValue(\"logo\", reader.result);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/AvatarEditorDialogStore.js",
-      "line_number": 205,
+      "line_number": 203,
       "context": ".catch((error) => {\n if (\n error instanceof Error &&\n error.message === \"recursion depth exceeded\"\n ) {\n toastr.error(t(\"Common:SizeImageLarge\"));\n }\n });\n } catch (error) {\n toastr.error(t(\"Common:NotSupportedFormat\"));\n }",
       "module": "/packages/client"
     }

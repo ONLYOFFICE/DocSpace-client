@@ -3,7 +3,7 @@
   "content": "Email address not valid. You can edit the email by double-clicking on it.",
   "content_en_sha1_hash": "c3b76d1a9c93105e923664b7b759f4e5e023e836",
   "created_at": "2025-05-19T21:30:54.716Z",
-  "updated_at": "2025-06-18T17:11:42.395Z",
+  "updated_at": "2025-08-12T19:46:25.988Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that an email address is invalid. It appears as a tooltip on a help button in an invite panel component. Translators should provide a descriptive error message to guide users when editing an invalid email address.",
     "is_auto": true,

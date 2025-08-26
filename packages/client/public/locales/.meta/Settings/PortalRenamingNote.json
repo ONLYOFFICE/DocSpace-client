@@ -3,7 +3,7 @@
   "content": "<strong>Note:</strong> Your old space address will become unavailable to new users once you click the Save button.",
   "content_en_sha1_hash": "2c9edfd2e118ab897a57d7d5168c0a41b4ae4d12",
   "created_at": "2025-05-19T21:30:52.293Z",
-  "updated_at": "2025-05-24T04:30:14.328Z",
+  "updated_at": "2025-08-04T07:30:01.293Z",
   "comment": {
     "text": "This translation key is used to display a note about making an old space address unavailable to new users. It appears in a portal settings page and is displayed next to a save button. The translator should provide a message that informs users of this change's consequences.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 340,
+      "line_number": 366,
       "context": "<div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight={400}>\n {t(\"PortalRenamingDescriptionText\", { domain })}\n </Text>\n <Text fontSize=\"13px\" fontWeight={400}>\n <Trans t={t} i18nKey=\"PortalRenamingNote\" />\n </Text>\n {renamingSettingsUrl ? (\n <Link\n className=\"link-learn-more\"\n color={currentColorScheme.main?.accent}",
       "module": "/packages/client"
     }
@@ -30,8 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"Your old space address\" is too literal. A more natural phrasing would be \"عنوان مساحتك القديمة\" (ʿunwān masāḥatik al-qadīma) instead of \"عنوان بوابتك القديم\" (ʿunwān bawwātik al-qadīm). While 'bawwātik' can mean portal, 'masāḥatik' more accurately conveys the user's personalized space.",
-          "suggestion": "عنوان مساحتك القديمة"
+          "description": "The phrase 'Your old space address' is not accurately translated. 'بوابتك القديم' (bawabatak al-qadeem) literally translates to 'your old portal' which isn't the best equivalent to 'space address' in this context. A more accurate translation might convey the idea of a unique identifier or URL.",
+          "suggestion": "Consider a translation like: \"عنوان مساحتك القديمة\" (unsaan masahatak al-qadeema) which translates to 'your old space address'."
+        },
+        {
+          "type": "formatting",
+          "description": "While the strong tag is correctly used, consistency with other similar content should be checked. Is the same bolding used in other related UI elements?",
+          "suggestion": "Verify the formatting aligns with the overall design of the interface."
         }
       ],
       "approved_at": null
@@ -42,13 +47,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'domain' (domen) is not the most appropriate translation for 'space address' in this context. 'Space address' refers to the URL of the user's space, and a better translation would be something like 'fəsilə ünvanı' or 'sahə ünvanı'.",
-          "suggestion": "Consider translating 'space address' as 'fəsilə ünvanı' or 'sahə ünvanı'."
+          "description": "The term 'domain address' (domen ünvanınız) is not the most natural or accurate translation of 'space address' in this context. 'space address' refers to the URL or unique identifier for a user's space within the portal. 'Domen' typically refers to a broader domain.",
+          "suggestion": "Consider a more specific translation like 'fasilə ünvanınız' (your space address) or 'sahə ünvanınız' (your area address) which better reflects the original meaning."
         },
         {
           "type": "formatting",
-          "description": "The use of '<strong...>' tags is appropriate, but ensure it is consistently applied and valid HTML within the target platform's requirements.",
-          "suggestion": "Verify HTML tag validity and consistency with the platform's standards."
+          "description": "The bolding (<strong>) is consistent between the English and Azerbaijani versions, which is good.",
+          "suggestion": "N/A"
         }
       ],
       "approved_at": null
@@ -68,7 +73,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The German translation maintains the strong tag, which is consistent with the English. This is good.",
+          "suggestion": null
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -83,13 +94,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'space address' isn't directly translatable and the Spanish translation 'dirección del espacio' sounds awkward.  A more natural translation would depend on the context (e.g., 'enlace', 'ubicación', 'URL').  'Dirección' typically refers to a postal address.",
-          "suggestion": "Consider alternatives like 'enlace antiguo', 'ubicación anterior', or 'URL anterior', depending on the context.  More context would allow for a more accurate suggestion."
+          "description": "'Space address' isn't the most natural translation for 'space address' in this context. It might be better to convey the idea of a URL or web address.",
+          "suggestion": "'Su antigua dirección web/URL' "
         },
         {
           "type": "formatting",
-          "description": "The strong tag formatting is correctly replicated.",
-          "suggestion": "N/A"
+          "description": "The strong tag is correctly used, however, it might be beneficial to check if this formatting matches the UI of the Spanish version of the application.",
+          "suggestion": "Ensure consistent formatting with the rest of the Spanish UI."
         }
       ],
       "approved_at": null
@@ -100,8 +111,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'käyttäjäjille' is a misspelling of 'käyttäjille'.",
-          "suggestion": "käyttäjille"
+          "description": "The word 'uusilla käyttäjäjille' is misspelled. The correct word should be 'uusille käyttäjille'.",
+          "suggestion": "uusille käyttäjille"
         }
       ],
       "approved_at": null
@@ -111,9 +122,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Your old space address' is a bit too literal. 'Adresse de l'espace' is acceptable, but a more natural phrasing in French might be 'votre ancienne URL de l'espace' or 'l'ancien identifiant de votre espace'.",
+          "suggestion": "Consider 'votre ancienne URL de l'espace' or 'l'ancien identifiant de votre espace' for a more natural French phrasing."
+        },
+        {
           "type": "formatting",
-          "description": "The French translation uses double quotes for \"Sauvegarder\" where single quotes would be more consistent with the English use of single quotes around 'Save'.",
-          "suggestion": "\"Sauvegarder\" should be changed to 'Sauvegarder'."
+          "description": "The French translation maintains the strong tag, which is consistent with the English. However, ensure this formatting is consistent across the entire application.",
+          "suggestion": "Verify consistent use of strong tags throughout the application."
         }
       ],
       "approved_at": null
@@ -124,8 +140,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Armenian translation lacks the strong tag for 'Note:' as in the English version.  This impacts the visual emphasis.",
-          "suggestion": "<strong>Նշում։</strong> Ձեր հին տարածքի հասցեն անհասանելի կդառնա նոր օգտվողների համար, երբ սեղմեք Պահպանել կոճակը:"
+          "description": "The Armenian translation does not match the English formatting. The English uses strong tags (<b>) while the Armenian translation appears to not have them applied consistently or might be relying on different styling.",
+          "suggestion": "Ensure the Armenian translation utilizes appropriate HTML tags (e.g., <strong>) or CSS styling to match the visual emphasis of the original English text."
         }
       ],
       "approved_at": null
@@ -136,13 +152,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The strong tag (<b> or <strong>) is present in both the English and Italian versions, which is good, maintaining the emphasis on 'Note'.",
+          "description": "The strong tag (<strong/>) is correctly used in both English and Italian to emphasize the 'Note'.",
           "suggestion": null
         },
         {
           "type": "incorrect_translation",
-          "description": "While generally accurate, 'Your old space address' is translated as 'il tuo vecchio indirizzo dello spazio'. A more natural and concise translation might be 'il tuo vecchio indirizzo'.",
-          "suggestion": "il tuo vecchio indirizzo"
+          "description": "While generally accurate, 'dopo aver fatto clic sul pulsante Salva' is a bit wordy and less natural than a more concise alternative.",
+          "suggestion": "dopo aver cliccato sul pulsante Salva"
         }
       ],
       "approved_at": null
@@ -159,8 +175,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Korean translation maintains the strong tag, which is consistent with the English. However, it's important to ensure this is the desired formatting for the Korean UI.",
-          "suggestion": "Confirm if the strong tag is required for the Korean UI. If not, remove it."
+          "description": "The Korean translation preserves the strong tag, which is consistent with the English, but it's good to confirm that this formatting is intended and consistent across all locales.",
+          "suggestion": "Verify that the strong tag is intended and consistent with the design and other locales."
         }
       ],
       "approved_at": null
@@ -171,8 +187,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Your old space address\" is not accurately translated. \"ທີ່ຢູ່ອາວະກາດເກົ່າຂອງເຈົ້າ\" translates more literally to 'Your old space location'.  'Address' implies a web address or URL, which is the intended meaning.",
-          "suggestion": "Consider translating it as something like \"ທີ່ຢູ່ຂອງເວັບໄຊ້ເກົ່າຂອງເຈົ້າ\" (Your old website address) or \"URL ຂອງເວັບໄຊ້ເກົ່າຂອງເຈົ້າ\" (Your old website URL)."
+          "description": "The phrase \"Your old space address\" is not accurately translated. 'Space address' could be better conveyed as 'ຊຸດທີ່ຢູ່' or a similar term depending on the platform's terminology for user spaces.",
+          "suggestion": "Consider revising to something like: '<strong>ໝາຍເຫດ:</strong> ທີ່ຢູ່ຂອງຊຸດເກົ່າຂອງເຈົ້າຈະບໍ່ສາມາດໃຊ້ໄດ້ກັບຜູ້ໃຊ້ໃໝ່ເມື່ອທ່ານຄລິກທີ່ປຸ່ມບັນທຶກ.'"
+        },
+        {
+          "type": "formatting",
+          "description": "The strong tag is used correctly, maintaining the bolding of 'Note'.",
+          "suggestion": "No change needed."
+        },
+        {
+          "type": "grammar",
+          "description": "While technically correct, the sentence structure \"ທີ່ຢູ່ອາວະກາດເກົ່າຂອງເຈົ້າຈະບໍ່ສາມາດໃຊ້ໄດ້\" can be made slightly more natural in Lao. It might be more idiomatic to rephrase the dependency of the action.",
+          "suggestion": "Consider revising to something like: 'ເມື່ອທ່ານຄລິກທີ່ປຸ່ມບັນທຶກ, ທີ່ຢູ່ອາວະກາດເກົ່າຂອງເຈົ້າຈະບໍ່ສາມາດໃຊ້ໄດ້ກັບຜູ້ໃຊ້ໃໝ່'"
         }
       ],
       "approved_at": null
@@ -189,8 +215,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Dutch translation 'wordt beschikbaar voor nieuwe gebruikers' translates to 'becomes available to new users,' which is the opposite of the intended meaning of 'will become unavailable to new users'.",
-          "suggestion": "Let op: uw oude ruimteadres wordt niet meer beschikbaar voor nieuwe gebruikers zodra u op de Opslaan knop klikt."
+          "description": "The English phrase 'will become unavailable' is translated as 'wordt beschikbaar' which means 'will become available'. This is the opposite of the intended meaning.",
+          "suggestion": "uw oude ruimteadres wordt niet meer beschikbaar voor nieuwe gebruikers"
         }
       ],
       "approved_at": null
@@ -219,13 +245,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'spațiu' is spelled incorrectly. It should be 'spațiu'.",
+          "description": "The word 'spaţiu' is missing a diacritic. It should be 'spațiu'.",
           "suggestion": "spațiu"
         },
         {
           "type": "grammar",
-          "description": "The phrase 'odată ce faceți clic pe butonul Salvare' is slightly awkward. It can be improved for natural flow.",
-          "suggestion": "odată ce dați clic pe butonul Salvare"
+          "description": "The phrase 'odată ce faceți clic pe butonul Salvare' is a bit clunky. A more natural phrasing would be 'după ce dați clic pe butonul Salvare'.",
+          "suggestion": "după ce dați clic pe butonul Salvare"
         }
       ],
       "approved_at": null
@@ -233,13 +259,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Russian translation uses double quotes (“”) for the word \"Save\". While acceptable, single quotes (') are more commonly used for English loanwords in Russian, aligning better with the English original’s use of single quotes.",
-          "suggestion": "Replace “Сохранить” with 'Сохранить'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -248,18 +268,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Your old space address' is not accurately translated. 'ඔබගේ අවකාශයේ පරණ ලිපිනය' literally translates to 'your space's old address.' A more accurate translation might emphasize that it's the *previous* address of the renamed space.",
-          "suggestion": "ඔබගේ කලින් වූ අවකාශයේ ලිපිනය"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'will become unavailable' is not as fluent in Sinhala as it could be. 'ලැබ ගැනීමට නොහැකිය' translates to 'cannot be obtained,' but a better phrasing would indicate that access is blocked or disabled.",
-          "suggestion": "ප්‍රවේශය ලබා ගැනීමට නොහැකිය"
+          "description": "The phrase 'Your old space address' is not accurately translated. 'අවකාශයේ පරණ ලිපිනය' literally translates to 'old address of the space' which, while understandable, isn't the most natural or precise rendering of 'space address' in this context. It could be more accurately conveyed.",
+          "suggestion": "Consider using a more contextually appropriate term for 'space address'. Something like 'ඔබේ ස්ථානයේ පරණ ලිපිනය' (obe sthanaye parana lipinaya) might be better, though further context would be ideal for the most accurate rendering."
         },
         {
           "type": "formatting",
-          "description": "While the strong tag is correctly used for 'Note', ensure consistent formatting across the entire application.  Verify that `<strong/>` tags are uniformly applied for similar elements.",
-          "suggestion": "Verify consistent use of strong tags across the application."
+          "description": "The Sinhala translation maintains the strong tag, which is consistent with the English source, but ensure this formatting choice is appropriate for the target platform and audience.  While consistent, bolding might not be desired.",
+          "suggestion": "Consider whether bolding is necessary in the Sinhala version. If not, remove the strong tags."
         }
       ],
       "approved_at": null
@@ -282,13 +297,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The strong tag is present in both the English and Serbian translations, which is consistent and acceptable.",
+          "description": "The strong tag (<b> or <strong>) is preserved correctly.",
           "suggestion": null
         },
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, 'простора' (prostora) might be slightly less natural than 'простора' (prostora). It's implying 'space' as a genitive case here, which isn't wrong but can sound a little stiff.  'Ваша стара адреса простора...' sounds a bit clunky.",
-          "suggestion": "Ваша стара адреса биће недоступна новим корисницима након што кликнете на дугме Сачувај."
+          "description": "While generally accurate, 'простора' (prostora) could be slightly improved to 'простора' (prostora) or 'простору' (prostoru) to better reflect the meaning of 'space'. However, 'простора' is not incorrect. The best choice depends on the desired nuance.",
+          "suggestion": "Consider 'Ваша стара адреса простору постаће недоступна новим корисницима након што кликнете на дугме Сачувај.'"
         }
       ],
       "approved_at": null
@@ -296,13 +311,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Serbian translation preserves the strong tag as in the English. Ensure this is desired and consistent with the application's style guide.",
-          "suggestion": "Review the usage of the strong tag and ensure consistency with the application's design and styling.  Consider if it should be removed or altered."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -311,8 +320,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The strong tag is inconsistent. The English uses `<strong>` while the Turkish uses `<strong`.",
-          "suggestion": "Use `<strong>` in the Turkish translation to match the English source: `<strong>Not:</strong>`"
+          "description": "The strong tag is inconsistent with the English version. The English version uses `<strong>`, while the Turkish version does not.",
+          "suggestion": "Apply the `<strong>` tag to the Turkish translation, similar to the English: `<strong>Not:</strong> Kaydet düğmesine tıkladığınızda eski alan adresiniz yeni kullanıcılar tarafından kullanılamaz hale gelecektir."
         }
       ],
       "approved_at": null
@@ -329,13 +338,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The strong tag formatting is consistent between the English and Vietnamese versions, which is good.",
+          "description": "The formatting of the strong tag is preserved, which is correct.",
           "suggestion": null
         },
         {
           "type": "incorrect_translation",
-          "description": "While 'Địa chỉ không gian cũ' is understandable, a more natural and clearer translation of 'old space address' would be 'địa chỉ khu vực cũ' or 'địa chỉ không gian làm việc cũ'.  'Địa chỉ không gian cũ' is technically correct but not idiomatic.",
-          "suggestion": "Địa chỉ khu vực cũ của bạn"
+          "description": "“Space address” is translated as “Địa chỉ không gian”. While technically correct, a more natural and user-friendly translation might be “địa chỉ của bạn” (your address).",
+          "suggestion": "Địa chỉ của bạn"
         }
       ],
       "approved_at": null
@@ -346,13 +355,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Your old space address' is not accurately translated. '空间' (space) is technically correct but lacks the nuance of 'address' in this context. It implies a physical space rather than a URL or identifier. A more accurate translation would convey the idea of a URL or access point.",
-          "suggestion": "点击“保存”按钮后，新用户将无法通过您旧的访问地址进入您的空间。"
+          "description": "The English phrase \"Your old space address\" is not perfectly captured by \"旧地址进入您的空间\". While \"旧地址\" conveys 'old address', the latter part implies 'access your space through the old address'. It's more accurate to reflect that the address itself becomes unavailable.",
+          "suggestion": "点击“保存”按钮后，新用户将无法使用旧空间地址。"
         },
         {
           "type": "formatting",
-          "description": "The original English content uses a strong tag for 'Note:'. The Chinese translation uses '请注意' which acts similarly but may not have the visual emphasis intended by the original. While not strictly incorrect, consistency in formatting should be considered.",
-          "suggestion": "Consider using a similar formatting approach for '请注意' if visual emphasis is desired, such as using <strong>请注意</strong>."
+          "description": "The English uses a strong tag for 'Note:' which is reflected in the Chinese translation using a strong tag for '请注意'. While generally acceptable, consider whether a simpler, non-bolded version ('请注意：') might be more consistent with the UI style.  This is minor and depends on specific design guidelines.",
+          "suggestion": "请注意："
         }
       ],
       "approved_at": null

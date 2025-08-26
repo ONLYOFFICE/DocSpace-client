@@ -83,7 +83,7 @@ const SortFilter = ({ t, oformsFilter, sortOforms }) => {
           opened={isOpen}
           onToggle={onToggleCombobox}
           className="sort-combo-box"
-          directionX="right"
+          directionX="left"
           directionY="both"
           scaled
           size="content"
@@ -97,6 +97,7 @@ const SortFilter = ({ t, oformsFilter, sortOforms }) => {
           options={[]}
           selectedOption={{}}
           manualWidth="auto"
+          dataTestId="form_gallery_sort_filter"
           advancedOptions={sortData?.map((item) => (
             <Styled.SortDropdownItem
               id={item.id}

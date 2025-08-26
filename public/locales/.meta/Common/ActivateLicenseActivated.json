@@ -2,23 +2,23 @@
   "key_path": "ActivateLicenseActivated",
   "content": "License activated",
   "content_en_sha1_hash": "576ed3bc179267c56642a371e93bad575e13aa61",
-  "created_at": "2025-05-26T07:15:40.031Z",
-  "updated_at": "2025-06-18T17:11:42.523Z",
+  "created_at": "2025-05-19T21:30:53.572Z",
+  "updated_at": "2025-08-21T11:22:39.923Z",
   "comment": {
-    "text": "The translation key \"ActivateLicenseActivated\" is used to display a message indicating that a license has been successfully activated. This message typically appears as a success toast notification in the UI, notifying users of successful activation after triggering an action like getting payment information or refreshing the page.",
+    "text": "The translation key \"ActivateLicenseActivated\" represents the localized text \"License activated\", used to display a success message when a license is successfully activated in the payment process. This text appears as part of a toast notification when the user's license has been activated, providing confirmation of the action taken.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:09:05.267Z"
+    "updated_at": "2025-05-20T09:43:29.464Z"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/store/PaymentStore.ts",
-      "line_number": 703,
+      "line_number": 832,
       "context": "if (message) {\n toastr.error(message);\n return;\n }\n \n toastr.success(t(\"ActivateLicenseActivated\"));\n localStorage.removeItem(\"enterpriseAlertClose\");\n \n await getPaymentInfo();\n await this.settingsStore?.getSettings();\n } catch (e) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/management/src/app/payments/page.client.tsx",
-      "line_number": 87,
+      "line_number": 91,
       "context": "if (message) {\n toastr.error(message);\n return;\n }\n \n toastr.success(t(\"ActivateLicenseActivated\"));\n localStorage.removeItem(\"enterpriseAlertClose\");\n \n router.refresh();\n } catch (error) {\n toastr.error(error!);",
       "module": "/packages/management"
     }
@@ -99,7 +99,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation \"ライセンス認証済み\" while technically correct, can be improved to better reflect the nuance of 'License activated'. \"ライセンス認証済み\" implies a process of authentication has already occurred and is now complete, whereas 'License activated' suggests the action of activation itself. A more appropriate translation might focus on the 'activation' itself.",
+          "suggestion": "ライセンスアクティベート済み (RaisenSU Akutibēto Zumi) - This translates closer to 'License Activated' focusing on the action itself. Alternatively, ライセンス有効化されました (Raisen Yūkōka Saremashita) – 'License has been enabled' is also a good option."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -177,7 +183,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"Лиценца активирана\" is grammatically correct, but a more natural and accurate translation of \"License activated\" would be \"Активирана лиценца\". The original translation puts the possessive before the noun, which is less common in Serbian.",
+          "suggestion": "Активирана лиценца"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

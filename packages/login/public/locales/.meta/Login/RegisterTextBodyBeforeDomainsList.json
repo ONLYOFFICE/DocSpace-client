@@ -3,7 +3,7 @@
   "content": "Registration is available to users with an email account at",
   "content_en_sha1_hash": "303ce775a30cbae3eac07ea39b0043213fdd41b5",
   "created_at": "2025-05-19T21:30:57.261Z",
-  "updated_at": "2025-05-24T15:00:34.178Z",
+  "updated_at": "2025-06-30T12:20:31.681Z",
   "comment": {
     "text": "This translation key is used for the text \"Registration is available to users with an email account at\", which appears in a registration modal dialog. The purpose of this text is to inform users about the eligibility criteria for registering an account based on their email provider.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/login/src/components/Register/sub-components/RegisterModalDialog.tsx",
       "line_number": 85,
-      "context": "};\n \n const getDomainsBlock = () => {\n return trustedDomainsType === TenantTrustedDomainsType.Custom ? (\n <>\n {t(\"RegisterTextBodyBeforeDomainsList\")} {getDomains()}{\" \"}\n </>\n ) : (\n <></>\n );\n };",
+      "context": "};\n \n const getDomainsBlock = () => {\n return trustedDomainsType === TenantTrustedDomainsType.Custom ? (\n <>\n {t(\"RegisterTextBodyBeforeDomainsList\")} {getDomains()}{\" \"}\n </>\n ) : null;\n };\n \n return (",
       "module": "/packages/login"
     }
   ],

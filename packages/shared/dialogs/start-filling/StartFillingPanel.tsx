@@ -68,6 +68,7 @@ const StartFillingPanel = ({
   inviteUserToRoom,
   setStartFillingPanelVisible,
   withBorder,
+  canEditRoom = false,
   ...props
 }: IStartFillingPanelProps) => {
   const [infoBarVisible, setInfoBarVisible] = useLocalStorage(
@@ -118,8 +119,10 @@ const StartFillingPanel = ({
   }, []);
 
   const openInvitePanel = useCallback(() => {
+    if (!canEditRoom) return;
+
     setIsInvitePanelVisible(true);
-  }, []);
+  }, [canEditRoom]);
 
   const onSubmit = async () => {
     startTransition(async () => {
@@ -255,6 +258,7 @@ const StartFillingPanel = ({
       onClose={closeStartFillingPanel}
       displayType={ModalDialogType.aside}
       containerVisible={isRoleSelectorVisible || isInvitePanelVisible}
+      withoutPadding
     >
       <ModalDialog.Container>
         {isRoleSelectorVisible && !isInvitePanelVisible ? (
@@ -271,12 +275,13 @@ const StartFillingPanel = ({
             onClose={closeUsersPanel}
             submitButtonLabel={t("Common:SelectAction")}
             cancelButtonLabel={t("Common:CancelButton")}
-            disableDisabledUsers={false}
+            disableDisabledUsers
             disableSubmitButton={false}
             checkIfUserInvited={checkIfUserInvited}
             injectedElement={
               <Header
                 t={t}
+                canEditRoom={canEditRoom}
                 className={styles.header}
                 roleName={roles[currentRoleIndex]?.name ?? ""}
                 openInvitePanel={openInvitePanel}
@@ -301,7 +306,7 @@ const StartFillingPanel = ({
             onSubmit={inviteUsers}
             onClose={closeInvitePanel}
             submitButtonLabel={t("Common:AddToRoom")}
-            disableDisabledUsers={false}
+            disableDisabledUsers
             disableSubmitButton={false}
             headerProps={invitePanelSelectorHeader}
           />
@@ -309,30 +314,32 @@ const StartFillingPanel = ({
       </ModalDialog.Container>
       <ModalDialog.Header>{t("Common:StartFilling")}</ModalDialog.Header>
       <ModalDialog.Body>
-        {infoBarVisible ? (
-          <>
-            <PublicRoomBar
-              headerText={t("Common:FillingStatusBarTitle")}
-              bodyText={t("Common:FillingStatusBarDescription")}
-              iconName={InfoSvgUrl}
-              onClose={() => setInfoBarVisible(false)}
-            />
-            <hr className={styles.divider} />
-          </>
-        ) : null}
-        <p
-          className={classNames(styles.title, {
-            [styles.titleMargin]: !infoBarVisible,
-          })}
-        >
-          {t("Common:RolesFromTheForm")}
-        </p>
-        <FillingRoleSelector
-          roles={roles}
-          onSelect={onSelect}
-          removeUserFromRole={removeUserFromRole}
-          currentUserId={user.id}
-        />
+        <section className={styles.container}>
+          {infoBarVisible ? (
+            <>
+              <PublicRoomBar
+                headerText={t("Common:FillingStatusBarTitle")}
+                bodyText={t("Common:FillingStatusBarDescription")}
+                iconName={InfoSvgUrl}
+                onClose={() => setInfoBarVisible(false)}
+              />
+              <hr className={styles.divider} />
+            </>
+          ) : null}
+          <p
+            className={classNames(styles.title, {
+              [styles.titleMargin]: !infoBarVisible,
+            })}
+          >
+            {t("Common:RolesFromTheForm")}
+          </p>
+          <FillingRoleSelector
+            roles={roles}
+            onSelect={onSelect}
+            removeUserFromRole={removeUserFromRole}
+            currentUserId={user.id}
+          />
+        </section>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

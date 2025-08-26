@@ -3,7 +3,7 @@
   "content": "Submit to Form Gallery",
   "content_en_sha1_hash": "66ff599553fb39661692837e8fdd73d746451d5d",
   "created_at": "2025-05-19T21:30:49.146Z",
-  "updated_at": "2025-06-08T12:02:32.658Z",
+  "updated_at": "2025-08-21T11:22:39.825Z",
   "comment": {
     "text": "The translation key \"SubmitToFormGallery\" is used to display the phrase \"Submit to Form Gallery\" in various UI elements, such as a modal dialog and a button. It appears on-screen when interacting with form galleries or submitting forms to gallery views, helping users understand their options.",
     "is_auto": true,
@@ -18,19 +18,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/FormGallery/Header.js",
-      "line_number": 125,
-      "context": "{!oformsLoadError && canSubmitToFormGallery() ? (\n <StyledSubmitToGalleryButton\n primary\n size=\"small\"\n onClick={onOpenSubmitToGalleryDialog}\n label={t(\"Common:SubmitToFormGallery\")}\n />\n ) : null}\n \n {!oformsLoadError ? (\n <StyledInfoPanelToggleWrapper isInfoPanelVisible={isInfoPanelVisible}>",
+      "line_number": 126,
+      "context": "{!oformsLoadError && canSubmitToFormGallery() ? (\n <StyledSubmitToGalleryButton\n primary\n size=\"small\"\n onClick={onOpenSubmitToGalleryDialog}\n label={t(\"Common:SubmitToFormGallery\")}\n testId=\"form_gallery_header_submit_to_gallery\"\n />\n ) : null}\n \n {!oformsLoadError ? (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/FormGallery/TilesView/sub-components/SubmitToGalleryTile.js",
       "line_number": 126,
-      "context": "</div>\n \n <Button\n onClick={onSubmitToGallery}\n size=\"small\"\n label={t(\"Common:SubmitToFormGallery\")}\n scale\n />\n </StyledSubmitToGalleryTile>\n );\n };",
+      "context": "</div>\n \n <Button\n onClick={onSubmitToGallery}\n size=\"small\"\n label={t(\"Common:SubmitToFormGallery\")}\n scale\n testId=\"submit_to_gallery_tile\"\n />\n </StyledSubmitToGalleryTile>\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1813,
+      "line_number": 1819,
       "context": "},\n separator0,\n {\n id: \"option_submit-to-gallery\",\n key: \"submit-to-gallery\",\n label: t(\"Common:SubmitToFormGallery\"),\n icon: FormFileReactSvgUrl,\n onClick: () => this.onClickSubmitToFormGallery(item),\n isOutsideLink: true,\n disabled: !item.security?.SubmitToFormGallery,\n },",
       "module": "/packages/client"
     }

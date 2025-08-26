@@ -12,8 +12,6 @@
   "FolderTitleSkyDrive": "OneDrive-hakemisto",
   "FolderTitleWebDav": "WebDAV-hakemisto",
   "FolderTitleYandex": "Yandex-hakemisto",
-  "GuestReleaseTipLink": "Lue lisää käyttäjätyypeistä",
-  "LinkHasExpiredAndHasBeenDisabled": "Linkki on vanhentunut ja se on poistettu käytöstä",
   "LinkValidTime": "Linkki on voimassa vain {{days_count}} päivää.",
   "NewForm": "PDF-lomake",
   "OwnerChange": "Vaihda omistaja",

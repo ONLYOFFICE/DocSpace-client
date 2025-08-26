@@ -3,7 +3,7 @@
   "content": "Enter name",
   "content_en_sha1_hash": "5df85959e93e078f85961a413efbd7ba4ef678d2",
   "created_at": "2025-05-19T21:30:44.990Z",
-  "updated_at": "2025-05-26T07:57:32.251Z",
+  "updated_at": "2025-08-11T18:11:59.133Z",
   "comment": {
     "text": "\"Enter name\" is used as a placeholder text in various input fields within the application, prompting users to provide a name. It appears in dialogue boxes, room setting pages, and other forms where user-inputted names are required.",
     "is_auto": true,
@@ -18,31 +18,31 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/SetRoomParams.js",
-      "line_number": 448,
+      "line_number": 450,
       "context": "<div className=\"logo-name-container\">\n {element}\n <InputParam\n id=\"shared_room-name\"\n title={inputTitle}\n placeholder={t(\"Common:EnterName\")}\n value={roomParams.title}\n onChange={onChangeName}\n isDisabled={isDisabled}\n isValidTitle={isValidTitle}\n isWrongTitle={isWrongTitle}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 313,
-      "context": "scale\n value={portalName}\n onChange={onChangePortalName}\n isDisabled={isLoadingPortalNameSave}\n hasError={hasError}\n placeholder={`${t(\"Common:EnterName\")}`}\n />\n <div className=\"errorText\">{errorValue}</div>\n </FieldContainer>\n </div>\n );",
+      "line_number": 323,
+      "context": "onChange={onChangePortalName}\n isDisabled={\n (!isSettingPaid && !standalone) || isLoadingPortalNameSave\n }\n hasError={hasError}\n placeholder={`${t(\"Common:EnterName\")}`}\n />\n <div className=\"errorText\">{errorValue}</div>\n </FieldContainer>\n </div>\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/BasicBlock.tsx",
-      "line_number": 141,
+      "line_number": 142,
       "context": "<BlockHeader header={t(\"BasicInfo\")} />\n <StyledInputBlock>\n <InputGroup\n label={t(\"AppName\")}\n name=\"name\"\n placeholder={t(\"Common:EnterName\")}\n value={nameValue}\n error={isNameError ? `${t(\"ErrorName\")} 3` : t(\"ThisRequiredField\")}\n onChange={onChange}\n isRequired\n isError={isNameRequiredError || isNameError}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/sub-components/CustomSettings.js",
-      "line_number": 203,
-      "context": "<Text {...commonTextProps}>{t(\"SenderDisplayName\")}</Text>\n <TextInput\n isDisabled={isLoading}\n className=\"smtp-settings_input\"\n name={SENDER_DISPLAY_NAME}\n placeholder={t(\"Common:EnterName\")}\n onChange={onChange}\n value={settings[SENDER_DISPLAY_NAME]}\n scale\n />",
+      "line_number": 209,
+      "context": "<Text {...commonTextProps}>{t(\"SenderDisplayName\")}</Text>\n <TextInput\n isDisabled={isLoading}\n className=\"smtp-settings_input\"\n name={SENDER_DISPLAY_NAME}\n placeholder={t(\"Common:EnterName\")}\n onChange={onChange}\n value={settings[SENDER_DISPLAY_NAME]}\n scale\n testId=\"smtp_sender_display_name_input\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/selectors/utils/hooks/useRoomsHelper.tsx",
-      "line_number": 98,
+      "line_number": 97,
       "context": "}, [isInit]);\n \n const createDropDownItems = React.useMemo(() => {\n return RoomsTypeValues.map((value) => {\n const onClick = () => {\n addInputItem(\"\", \"\", value as RoomsType, t(\"EnterName\"));\n };\n \n return (\n <RoomType\n key={value}",
       "module": "/packages/shared"
     }
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Saisir un prénom\" translates to 'Enter a first name'. While not entirely wrong, \"Enter name\" is more general and would be better served by a translation that reflects this generality. 'Saisir un nom' would be a more appropriate translation.",
-          "suggestion": "Saisir un nom"
+          "description": "The translation 'Saisir un prénom' translates to 'Enter a first name', which is too specific. 'Enter name' is more general and should reflect that.",
+          "suggestion": "Saisir le nom"
         }
       ],
       "approved_at": null
@@ -144,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເຂົ້າ ຊື່\" is not the accurate translation of \"Enter name\". While 'ເຂົ້າ' can mean 'enter' or 'come in', 'ຊື່' means 'name' but isn't used in the context of inputting a name. A more appropriate translation would involve a phrase conveying 'input name' or 'type name'.",
-          "suggestion": "ປ້ອນຊື່ (pon suu) - This translates to 'input name' or 'enter name'."
+          "description": "The Lao translation 'ເຂົ້າ ຊື່' is a literal transliteration and not a proper translation of 'Enter name'. It doesn't convey the intended meaning of providing a name in a form or field.",
+          "suggestion": "A more accurate translation would be something like 'ໃສ່ຊື່' (sai suei) which means 'enter name' or 'input name'."
         }
       ],
       "approved_at": null
@@ -195,7 +195,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'නම ලියන්න' while literally meaning 'Write name', is not the most natural or common way to say 'Enter name' in Sinhala. A more suitable translation would convey the action of entering or typing a name.",
+          "suggestion": "ඇතුළත් කරන්න (Athulath karanna) - Enter, or නම් ඇතුළත් කරන්න (Nam athulath karanna) - Enter name"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -222,7 +228,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Unesi ime' literally translates to 'Enter my name'. The correct translation of 'Enter name' should be 'Unesite ime'.",
+          "description": "The translation 'Unesi ime' literally translates to 'Enter my name'. The intended meaning of 'Enter name' is a prompt for the user to input their name, not to indicate that the system is entering the user's name.",
           "suggestion": "Unesite ime"
         }
       ],

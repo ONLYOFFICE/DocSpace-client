@@ -3,7 +3,7 @@
   "content": "Enable",
   "content_en_sha1_hash": "20063ad9053289cecaa20ae630ed2dd758282a07",
   "created_at": "2025-05-19T21:30:44.923Z",
-  "updated_at": "2025-06-08T12:02:32.614Z",
+  "updated_at": "2025-08-11T18:11:59.129Z",
   "comment": {
     "text": "This translation key is used to display the label \"Enable\" on a button in a modal dialog, typically found in settings or configuration sections of an application. It appears as the primary action button in a footer section and is used for enabling a feature or functionality.",
     "is_auto": true,
@@ -12,61 +12,67 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
-      "line_number": 209,
+      "line_number": 205,
       "context": ": t(\"EnableUserDescription\", { productName: t(\"Common:ProductName\") })\n : isGuests\n ? t(\"EnableGuestsDescription\", { productName: t(\"Common:ProductName\") })\n : t(\"EnableUsersDescription\", { productName: t(\"Common:ProductName\") });\n \n buttonLabelSave = t(\"Common:Enable\");\n }\n \n return (\n <ModalDialog\n visible={visible}",
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ad-management.tsx",
+      "line_number": 157,
+      "context": "value: 0,\n dataTestId: \"ad_management_disable\",\n },\n {\n id: \"enable\",\n label: t(\"Common:Enable\"),\n value: 1,\n dataTestId: \"ad_management_enable\",\n },\n ]}\n selected={type}",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/sub-components/consumerModalDialog.js",
-      "line_number": 336,
-      "context": "<ModalDialog.Footer>\n <Button\n primary\n size=\"normal\"\n id=\"enable-button\"\n label={isLoading ? t(\"Common:Sending\") : t(\"Common:Enable\")}\n isLoading={isLoading}\n isDisabled={isLoading || isDisabled}\n scale\n onClick={updateConsumerValues}\n />",
+      "line_number": 339,
+      "context": "<ModalDialog.Footer>\n <Button\n primary\n size=\"normal\"\n id=\"enable-button\"\n label={isLoading ? t(\"Common:Sending\") : t(\"Common:Enable\")}\n isLoading={isLoading}\n isDisabled={isLoading || isDisabled}\n scale\n onClick={updateConsumerValues}\n testId=\"consumer_dialog_enable_button\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/adminMessage.js",
-      "line_number": 201,
-      "context": "label: t(\"Common:Disabled\"),\n value: \"disabled\",\n },\n {\n id: \"admin-message-enable\",\n label: t(\"Common:Enable\"),\n value: \"enable\",\n },\n ]}\n selected={type}\n onClick={onSelectType}",
+      "line_number": 204,
+      "context": "value: \"disabled\",\n dataTestId: \"administrator_message_disabled\",\n },\n {\n id: \"admin-message-enable\",\n label: t(\"Common:Enable\"),\n value: \"enable\",\n dataTestId: \"administrator_message_enabled\",\n },\n ]}\n selected={type}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/devToolsAccess.tsx",
-      "line_number": 234,
-      "context": "label: t(\"Common:Disabled\"),\n value: \"true\",\n },\n {\n id: \"dev-tools-access-enable\",\n label: t(\"Common:Enable\"),\n value: \"false\",\n },\n ]}\n selected={accessEnabled}\n onClick={onSelect}",
+      "line_number": 237,
+      "context": "value: \"true\",\n dataTestId: \"developer_tools_access_disabled\",\n },\n {\n id: \"dev-tools-access-enable\",\n label: t(\"Common:Enable\"),\n value: \"false\",\n dataTestId: \"developer_tools_access_enabled\",\n },\n ]}\n selected={accessEnabled}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
-      "line_number": 275,
-      "context": "label: t(\"Common:Disabled\"),\n value: \"disabled\",\n },\n {\n id: \"ip-security-enable\",\n label: t(\"Common:Enable\"),\n value: \"enable\",\n },\n ]}\n selected={enable ? \"enable\" : \"disabled\"}\n onClick={onSelectType}",
+      "line_number": 278,
+      "context": "value: \"disabled\",\n dataTestId: \"ip_security_disabled\",\n },\n {\n id: \"ip-security-enable\",\n label: t(\"Common:Enable\"),\n value: \"enable\",\n dataTestId: \"ip_security_enabled\",\n },\n ]}\n selected={enable ? \"enable\" : \"disabled\"}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/sessionLifetime.js",
-      "line_number": 269,
-      "context": "label: t(\"Common:Disabled\"),\n value: \"disabled\",\n },\n {\n id: \"session-lifetime-enable\",\n label: t(\"Common:Enable\"),\n value: \"enable\",\n },\n ]}\n selected={type ? \"enable\" : \"disabled\"}\n onClick={onSelectType}",
+      "line_number": 272,
+      "context": "value: \"disabled\",\n dataTestId: \"session_lifetime_disabled\",\n },\n {\n id: \"session-lifetime-enable\",\n label: t(\"Common:Enable\"),\n value: \"enable\",\n dataTestId: \"session_lifetime_enabled\",\n },\n ]}\n selected={type ? \"enable\" : \"disabled\"}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 748,
+      "line_number": 753,
       "context": "};\n \n const enableOption = {\n key: \"enable\",\n icon: EnableReactSvgUrl,\n label: t(\"Common:Enable\"),\n onClick: () => this.onEnable(t, clientId),\n };\n \n const disableOption = {\n key: \"disable\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 748,
+      "line_number": 753,
       "context": "};\n \n const enableOption = {\n key: \"enable\",\n icon: EnableReactSvgUrl,\n label: t(\"Common:Enable\"),\n onClick: () => this.onEnable(t, clientId),\n };\n \n const disableOption = {\n key: \"disable\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 477,
+      "line_number": 476,
       "context": "onClick: () => setSendInviteDialogVisible(true),\n icon: InviteAgainReactSvgUrl,\n },\n {\n key: \"cm-enable\",\n label: t(\"Common:Enable\"),\n disabled: !hasUsersToActivate || (isRoomAdmin && isGuests),\n onClick: () => onChangeStatus(EmployeeStatus.Active),\n icon: EnableReactSvgUrl,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/HeaderMenuStore.ts",
-      "line_number": 212,
+      "line_number": 189,
       "context": "iconUrl: InviteAgainReactSvgUrl,\n },\n {\n id: \"menu-enable\",\n key: \"enable\",\n label: t(\"Common:Enable\"),\n disabled: !hasUsersToActivate,\n onClick: () =>\n this.contextOptionsStore.onChangeStatus(EmployeeStatus.Active),\n iconUrl: EnableReactSvgUrl,\n },",
       "module": "/packages/client"
     }
@@ -90,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'İşə salmaq' while literally meaning 'to put into operation' or 'to switch on,' isn't the best equivalent for 'Enable' in many contexts. It's a more active verb. 'Enable' often implies making something possible or allowing something to happen, which can be better conveyed with a different phrasing.",
-          "suggestion": "Consider alternatives like 'Aktiv et', 'Qəbul et', or 'İzin ver'. The best option depends on the surrounding context."
+          "description": "While \"İşə salmaq\" can mean \"to enable,\" it's a rather literal and potentially awkward translation in this context. It implies putting something to work, rather than simply enabling a feature or option. A more natural and concise translation would be better suited.",
+          "suggestion": "Consider \"Aktiv etmək\" or \"Qaynaqlayıb\" as a more appropriate translation for 'Enable' depending on the specific context."
         }
       ],
       "approved_at": null
@@ -99,7 +105,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Активирай' while technically meaning 'Activate' or 'Enable', isn't the most natural or direct equivalent of 'Enable' in this context. It implies an action of enabling something, rather than simply representing the state of being enabled.",
+          "suggestion": "Consider 'Включено' for a more neutral translation representing the state of being enabled, or 'Разрешено' if referring to permission/access."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -120,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Ενεργοποίηση' is a valid Greek word, it translates more closely to 'Activation' rather than 'Enable'. 'Ενεργοποίηση' implies the act of enabling, not the state of being enabled.",
-          "suggestion": "Consider 'Ενεργό' or 'Επιτρεπτό' depending on the specific context. 'Ενεργό' means 'active' or 'enabled' as an adjective. 'Επιτρεπτό' means 'allowed' or 'permitted'. The best option depends on how 'Enable' is used."
+          "description": "The Greek translation \"Ενεργοποίηση\" while technically meaning \"Activation\" or \"Enabling\", is not the most direct or common translation for \"Enable\".  A more accurate and frequently used translation would be \"Ενεργό\" or simply \"Ενεργοποίηση\". However, \"Ενεργό\" is generally used as an adjective, not a noun like \"Enable\".",
+          "suggestion": "Consider \"Ενεργό\" or a slightly rephrased sentence depending on the context. If a noun is absolutely required, \"Ενεργοποίηση\" is passable, but less ideal."
         }
       ],
       "approved_at": null
@@ -162,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Japanese translation \"有効\" (yuukou) translates to 'valid' or 'operative', not 'enable'. While it can be used in some contexts to imply enabling, it's not the direct equivalent.",
-          "suggestion": "Consider translations like \"有効にする\" (yuukou ni suru) which directly means 'to enable', or a more context-specific translation depending on the software."
+          "description": "The Japanese translation \"有効\" (yūkō) translates to \"valid\" or \"effective\", not directly \"Enable\". While it can sometimes be used in a similar context, it's not the most accurate translation of 'Enable'. A more direct translation might be \"有効にする\" (yūkō suru) which means \"to enable\", or a simpler option like \"許可\" (kyoka) which means \"permission/allowed\".",
+          "suggestion": "Consider \"有効にする\" (yūkō suru) or \"許可\" (kyoka) for a more accurate translation depending on the specific context."
         }
       ],
       "approved_at": null
@@ -174,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"허용\" (heoyong) can mean 'allow' or 'permit,' in the context of a simple 'Enable' toggle, a more direct and commonly used translation would be '활성화' (hwasanghwa). \"허용\" implies granting permission, which might not be the intended meaning here.",
-          "suggestion": "활성화"
+          "description": "While '허용' (heoyong) can mean 'allow' or 'permit', 'Enable' often implies a direct activation or turning on of a feature. '활성화' (hwal-seong-hwa) might be a more accurate translation in many contexts, as it directly conveys 'activation'. The best translation depends on the specific context where 'Enable' is used.",
+          "suggestion": "Consider '활성화' (hwal-seong-hwa) as an alternative, especially if 'Enable' means 'activate'."
         }
       ],
       "approved_at": null

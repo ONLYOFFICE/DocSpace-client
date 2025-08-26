@@ -3,7 +3,7 @@
   "content": "Would you like to enable automatic top-ups so your balance never runs out?",
   "content_en_sha1_hash": "4e8a95782e3c4f52d937db0d2d9ae74053cc4d62",
   "created_at": "2025-05-28T09:33:06.856Z",
-  "updated_at": "2025-05-28T09:34:30.834Z",
+  "updated_at": "2025-06-26T19:00:18.244Z",
   "comment": {
     "text": "This translation key is used for the question \"Would you like to enable automatic top-ups so your balance never runs out?\" in a wallet refill modal on the Portal Settings page. It appears as a prompt to enable automatic top-up features for users' wallets.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/WalletRefilledModal.tsx",
-      "line_number": 131,
+      "line_number": 120,
       "context": "1: <span style={{ fontWeight: 600 }} />,\n }}\n />\n </Text>\n </div>\n <Text>{t(\"WouldYouLikeToEnableAutoTopUps\")}</Text>\n \n <AutomaticPaymentsBlock\n onAdditionalSave={onAdditionalSave}\n noMargin\n />",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Delete",
   "content_en_sha1_hash": "f6fdbe48dc54dd86f63097a03bd24094dedd713a",
   "created_at": "2025-05-19T21:30:44.452Z",
-  "updated_at": "2025-06-18T17:11:42.320Z",
+  "updated_at": "2025-08-21T11:22:39.793Z",
   "comment": {
     "text": "This translation key is used to display the text \"Delete\" on a button in a file editor component, specifically within an avatar cropper. It appears as a button's text and title, allowing users to confirm deletion of an image.",
     "is_auto": true,
@@ -48,8 +48,8 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeletePortalDialog/index.js",
-      "line_number": 81,
-      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"delete-button\"\n key=\"DeletePortalBtn\"\n label={t(\"Common:Delete\")}\n size=\"normal\"\n scale\n primary\n onClick={onDeleteClick}\n />",
+      "line_number": 82,
+      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"delete-button\"\n key=\"DeletePortalBtn\"\n label={t(\"Common:Delete\")}\n size=\"normal\"\n scale\n primary\n onClick={onDeleteClick}\n testId=\"submit_delete_portal_button\"",
       "module": "/packages/client"
     },
     {
@@ -66,26 +66,26 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/sub-components/LinkRow.tsx",
-      "line_number": 206,
+      "line_number": 181,
       "context": "{\n key: \"delete-link-key\",\n label:\n primary && (isPublicRoomType || isFormRoom)\n ? t(\"Files:RevokeLink\")\n : t(\"Common:Delete\"),\n icon:\n primary && (isPublicRoomType || isFormRoom)\n ? OutlineReactSvgUrl\n : TrashReactSvgUrl,\n onClick: onDeleteLink,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Section/Header/index.js",
-      "line_number": 305,
+      "line_number": 307,
       "context": "const headerMenu = isOAuth\n ? getHeaderMenuItems(t, true)\n : [\n {\n label: t(\"Common:Delete\"),\n disabled: !selection || !selection.length > 0,\n onClick,\n iconUrl: DeleteReactSvgUrl,\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/sub-components/modalDialogDelete.js",
       "line_number": 62,
-      "context": "<ModalDialog.Body>{t(\"Settings:DeleteThemeNotice\")}</ModalDialog.Body>\n <ModalDialog.Footer>\n <StyledFooterContent>\n <Button\n className=\"delete button-modal\"\n label={t(\"Common:Delete\")}\n onClick={onClickDelete}\n primary\n size=\"normal\"\n />\n <Button",
+      "context": "<ModalDialog.Body>{t(\"Settings:DeleteThemeNotice\")}</ModalDialog.Body>\n <ModalDialog.Footer>\n <StyledFooterContent>\n <Button\n className=\"delete button-modal\"\n label={t(\"Common:Delete\")}\n onClick={onClickDelete}\n primary\n size=\"normal\"\n testId=\"portal_settings_modal_dialog_delete_button\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/delete-data/portalDeletion.js",
       "line_number": 104,
-      "context": "</Text>\n <Text className=\"helper\">{t(\"PortalDeletionHelper\")}</Text>\n <ButtonWrapper>\n <Button\n className=\"delete-button button\"\n label={t(\"Common:Delete\")}\n primary\n size={isDesktopView ? \"small\" : \"normal\"}\n onClick={onDeleteClick}\n isDisabled={notActivatedEmail}\n />",
+      "context": "</Text>\n <Text className=\"helper\">{t(\"PortalDeletionHelper\")}</Text>\n <ButtonWrapper>\n <Button\n className=\"delete-button button\"\n label={t(\"Common:Delete\")}\n primary\n size={isDesktopView ? \"small\" : \"normal\"}\n onClick={onDeleteClick}\n isDisabled={notActivatedEmail}\n testId=\"delete_portal_button\"",
       "module": "/packages/client"
     },
     {
@@ -108,122 +108,122 @@
     },
     {
       "file_path": "/packages/client/src/pages/VersionHistory/Section/Body/VersionRow.js",
-      "line_number": 235,
+      "line_number": 236,
       "context": "},\n canDeleteVersion &&\n index !== 0 && {\n key: \"delete\",\n icon: DeleteIcon,\n label: t(\"Common:Delete\"),\n onClick: onDeleteVersion,\n },\n ];\n \n // uncomment if we want to change versions again",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2217,
+      "line_number": 2228,
       "context": "key: \"delete\",\n label: isRootThirdPartyFolder\n ? t(\"Common:Disconnect\")\n : item.isTemplate\n ? t(\"DeleteTemplate\")\n : t(\"Common:Delete\"),\n icon: TrashReactSvgUrl,\n onClick: () => this.onDelete(item, t),\n disabled: item.isTemplate ? !isTemplateOwner : false,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2217,
+      "line_number": 2228,
       "context": "key: \"delete\",\n label: isRootThirdPartyFolder\n ? t(\"Common:Disconnect\")\n : item.isTemplate\n ? t(\"DeleteTemplate\")\n : t(\"Common:Delete\"),\n icon: TrashReactSvgUrl,\n onClick: () => this.onDelete(item, t),\n disabled: item.isTemplate ? !isTemplateOwner : false,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2217,
+      "line_number": 2228,
       "context": "key: \"delete\",\n label: isRootThirdPartyFolder\n ? t(\"Common:Disconnect\")\n : item.isTemplate\n ? t(\"DeleteTemplate\")\n : t(\"Common:Delete\"),\n icon: TrashReactSvgUrl,\n onClick: () => this.onDelete(item, t),\n disabled: item.isTemplate ? !isTemplateOwner : false,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/DialogsStore.js",
-      "line_number": 988,
-      "context": "onClick: (ref) => ref.current.click(),\n },\n \n hasImage\n ? {\n label: t(\"Common:Delete\"),\n icon: TrashIconSvgUrl,\n key: \"delete\",\n onClick: onDelete ? onDelete() : () => this.deleteRoomLogo(),\n }\n : {",
+      "line_number": 974,
+      "context": "onClick: (ref) => ref.current.click(),\n },\n \n hasImage\n ? {\n label: t(\"Common:Delete\"),\n icon: TrashIconSvgUrl,\n key: \"create_edit_room_delete\",\n onClick: onDelete ? onDelete() : () => this.deleteRoomLogo(),\n }\n : {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2321,
+      "line_number": 2322,
       "context": "case \"delete-room\":\n if (!this.isAvailableOption(\"delete-room\")) return null;\n return {\n id: \"menu-delete-room\",\n label: t(\"Common:Delete\"),\n onClick: () => this.deleteRooms(t),\n iconUrl: DeleteReactSvgUrl,\n };\n \n case \"delete\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2321,
+      "line_number": 2322,
       "context": "case \"delete-room\":\n if (!this.isAvailableOption(\"delete-room\")) return null;\n return {\n id: \"menu-delete-room\",\n label: t(\"Common:Delete\"),\n onClick: () => this.deleteRooms(t),\n iconUrl: DeleteReactSvgUrl,\n };\n \n case \"delete\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 778,
-      "context": "};\n \n const contextOptions: ContextMenuModel[] = [\n {\n key: \"delete\",\n label: t(\"Common:Delete\"),\n icon: DeleteIconUrl,\n onClick: () => this.onDelete(clientId),\n },\n ];",
+      "line_number": 786,
+      "context": "};\n \n const contextOptions: ContextMenuModel[] = [\n {\n key: \"delete\",\n label: t(\"Common:Delete\"),\n icon: DeleteIconUrl,\n onClick: () => this.onDelete(clientId),\n dataTestId: \"oauth_delete_option\",\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 778,
-      "context": "};\n \n const contextOptions: ContextMenuModel[] = [\n {\n key: \"delete\",\n label: t(\"Common:Delete\"),\n icon: DeleteIconUrl,\n onClick: () => this.onDelete(clientId),\n },\n ];",
+      "line_number": 786,
+      "context": "};\n \n const contextOptions: ContextMenuModel[] = [\n {\n key: \"delete\",\n label: t(\"Common:Delete\"),\n icon: DeleteIconUrl,\n onClick: () => this.onDelete(clientId),\n dataTestId: \"oauth_delete_option\",\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 491,
+      "line_number": 490,
       "context": "onClick: () => onChangeStatus(EmployeeStatus.Disabled),\n icon: DisableReactSvgUrl,\n },\n {\n key: \"cm-delete\",\n label: t(\"Common:Delete\"),\n disabled: !hasOnlyOneUserToRemove || (isRoomAdmin && isGuests),\n onClick: () => setDeleteProfileDialogVisible(true),\n icon: DeleteReactSvgUrl,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/GroupsStore.ts",
-      "line_number": 475,
+      "line_number": 501,
       "context": "},\n {\n id: \"delete-group\",\n key: \"delete-group\",\n className: \"group-menu_drop-down\",\n label: t(\"Common:Delete\"),\n title: t(\"Common:Delete\"),\n icon: TrashReactSvgUrl,\n onClick: () => setDeleteGroupDialogVisible(true),\n disabled: !this.hasGroupsToRemove,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/GroupsStore.ts",
-      "line_number": 475,
+      "line_number": 501,
       "context": "},\n {\n id: \"delete-group\",\n key: \"delete-group\",\n className: \"group-menu_drop-down\",\n label: t(\"Common:Delete\"),\n title: t(\"Common:Delete\"),\n icon: TrashReactSvgUrl,\n onClick: () => setDeleteGroupDialogVisible(true),\n disabled: !this.hasGroupsToRemove,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/GroupsStore.ts",
-      "line_number": 475,
+      "line_number": 501,
       "context": "},\n {\n id: \"delete-group\",\n key: \"delete-group\",\n className: \"group-menu_drop-down\",\n label: t(\"Common:Delete\"),\n title: t(\"Common:Delete\"),\n icon: TrashReactSvgUrl,\n onClick: () => setDeleteGroupDialogVisible(true),\n disabled: !this.hasGroupsToRemove,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/GroupsStore.ts",
-      "line_number": 475,
+      "line_number": 501,
       "context": "},\n {\n id: \"delete-group\",\n key: \"delete-group\",\n className: \"group-menu_drop-down\",\n label: t(\"Common:Delete\"),\n title: t(\"Common:Delete\"),\n icon: TrashReactSvgUrl,\n onClick: () => setDeleteGroupDialogVisible(true),\n disabled: !this.hasGroupsToRemove,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/HeaderMenuStore.ts",
-      "line_number": 163,
+      "line_number": 140,
       "context": "if (isRoomAdmin || isCollaborator) return [];\n return [\n {\n id: \"menu-delete\",\n key: \"delete\",\n label: t(\"Common:Delete\"),\n onClick: this.onDeleteClick,\n iconUrl: DeleteReactSvgUrl,\n },\n ];\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/HeaderMenuStore.ts",
-      "line_number": 163,
+      "line_number": 140,
       "context": "if (isRoomAdmin || isCollaborator) return [];\n return [\n {\n id: \"menu-delete\",\n key: \"delete\",\n label: t(\"Common:Delete\"),\n onClick: this.onDeleteClick,\n iconUrl: DeleteReactSvgUrl,\n },\n ];\n }",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/store/contacts/TargetUserStore.js",
-      "line_number": 177,
-      "context": "icon: UploadSvgUrl,\n key: \"upload\",\n onClick: (ref) => ref.current.click(),\n },\n {\n label: t(\"Common:Delete\"),\n icon: TrashIconSvgUrl,\n key: \"delete\",\n onClick: () => this.deleteProfileAvatar(),\n },\n ];",
+      "file_path": "/packages/client/src/store/contacts/TargetUserStore.ts",
+      "line_number": 146,
+      "context": "icon: UploadSvgUrl,\n key: \"profile_avatar_upload\",\n onClick: (ref: React.RefObject<HTMLDivElement>) => ref.current?.click(),\n },\n {\n label: t(\"Common:Delete\"),\n icon: TrashIconSvgUrl,\n key: \"profile_avatar_delete\",\n onClick: () => this.deleteProfileAvatar(),\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/PortalRemove/page.client.tsx",
-      "line_number": 113,
-      "context": "<ButtonsWrapper>\n <Button\n primary\n scale\n size={ButtonSize.medium}\n label={t(\"Common:Delete\")}\n tabIndex={1}\n onClick={onDeleteClick}\n />\n <Button\n scale",
+      "line_number": 112,
+      "context": "<ButtonsWrapper>\n <Button\n primary\n scale\n size={ButtonSize.medium}\n label={t(\"Common:Delete\")}\n tabIndex={1}\n onClick={onDeleteClick}\n testId=\"delete_portal_button\"\n />\n <Button",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/shared/components/image-editor/ButtonDelete/index.tsx",
       "line_number": 77,
-      "context": "\"icon_cropper-delete_button\",\n styles.buttonDelete,\n className,\n )}\n onClick={onClick}\n title={t(\"Common:Delete\")}\n >\n <ReactSVG src={TrashReactSvgUrl} />\n <div\n className={classNames(\"icon_cropper-delete_button-text\", styles.text)}\n >",
+      "context": "\"icon_cropper-delete_button\",\n styles.buttonDelete,\n className,\n )}\n onClick={onClick}\n title={t(\"Common:Delete\")}\n data-testid=\"cropper_delete_button\"\n >\n <ReactSVG src={TrashReactSvgUrl} />\n <div\n className={classNames(\"icon_cropper-delete_button-text\", styles.text)}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/image-editor/ButtonDelete/index.tsx",
       "line_number": 77,
-      "context": "\"icon_cropper-delete_button\",\n styles.buttonDelete,\n className,\n )}\n onClick={onClick}\n title={t(\"Common:Delete\")}\n >\n <ReactSVG src={TrashReactSvgUrl} />\n <div\n className={classNames(\"icon_cropper-delete_button-text\", styles.text)}\n >",
+      "context": "\"icon_cropper-delete_button\",\n styles.buttonDelete,\n className,\n )}\n onClick={onClick}\n title={t(\"Common:Delete\")}\n data-testid=\"cropper_delete_button\"\n >\n <ReactSVG src={TrashReactSvgUrl} />\n <div\n className={classNames(\"icon_cropper-delete_button-text\", styles.text)}",
       "module": "/packages/shared"
     },
     {
@@ -252,7 +252,7 @@
     },
     {
       "file_path": "/packages/management/src/dialogs/delete-portal/index.tsx",
-      "line_number": 147,
+      "line_number": 146,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n isLoading={isLoading}\n key=\"CreateButton\"\n label={t(\"Common:Delete\")}\n size={ButtonSize.normal}\n scale\n primary\n onClick={onDelete}\n />",
       "module": "/packages/management"
     }
@@ -414,8 +414,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Обриши' translates to 'Erase' or 'Wipe' rather than 'Delete'. While conveying a similar action, 'Delete' implies removal from a system or database, which 'Обриши' doesn't necessarily capture.",
-          "suggestion": "Consider 'Избриши' (Izbriši) which more accurately translates to 'Delete'."
+          "description": "While 'Обриши' can mean 'delete' in some contexts (primarily when referring to erasing something), it's more commonly used for 'wipe' or 'erase'. 'Delete' implies a more permanent removal, which 'Обриши' doesn't always convey. A more precise translation depending on the context would be 'Избриши' (Izbriši).",
+          "suggestion": "Избриши"
         }
       ],
       "approved_at": null
@@ -426,7 +426,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Obriši\" is the imperative form of \"obrisati\" (to delete) and is appropriate when addressing someone directly. For a general label meaning 'Delete', a noun form would be more suitable. \"Brisanje\" would be a better translation.",
+          "description": "The Serbian translation 'Obriši' is the imperative form (you delete) and might not be appropriate depending on the context. 'Delete' can also refer to the action of deleting, not a command to delete. A more neutral translation might be 'Brisanje'.",
           "suggestion": "Brisanje"
         }
       ],

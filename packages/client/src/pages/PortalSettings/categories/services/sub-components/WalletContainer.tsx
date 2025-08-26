@@ -25,11 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { inject, observer } from "mobx-react";
 
-import { useServicesActions } from "../hooks/useServicesActions";
-
 import WalletInfo from "../../payments/Wallet/sub-components/WalletInfo";
 
 import styles from "../styles/StorageSummary.module.scss";
+import { usePaymentContext } from "../context/PaymentContext";
 
 type WalletContainerProps = {
   onTopUp: () => void;
@@ -39,6 +38,7 @@ type WalletContainerProps = {
   isCurrentStoragePlan: boolean;
   isDowngradeStoragePlan: boolean;
   isLoading: boolean;
+  formatWalletCurrency?: (item?: number, fractionDigits?: number) => string;
 };
 
 const WalletContainer = (props: WalletContainerProps) => {
@@ -50,31 +50,38 @@ const WalletContainer = (props: WalletContainerProps) => {
     isCurrentStoragePlan,
     isDowngradeStoragePlan,
     isLoading,
+    formatWalletCurrency,
   } = props;
-  const { formatWalletCurrency } = useServicesActions();
+
+  const { isWaitingCalculation } = usePaymentContext();
 
   if (hasScheduledStorageChange) return null;
+
+  const isBalanceInsufficient =
+    isPaymentBlockedByBalance &&
+    !isLoading &&
+    !isCurrentStoragePlan &&
+    !isDowngradeStoragePlan &&
+    !isExceedingStorageLimit;
 
   return (
     <div className={styles.walletContainer}>
       <WalletInfo
-        balance={formatWalletCurrency(null, 2, 2)}
-        {...(isPaymentBlockedByBalance &&
-          !isLoading &&
-          !isCurrentStoragePlan &&
-          !isDowngradeStoragePlan &&
-          !isExceedingStorageLimit && { onTopUp })}
+        balance={formatWalletCurrency!()}
+        isBalanceInsufficient={isBalanceInsufficient}
+        {...(!isWaitingCalculation && { onTopUp })}
       />
     </div>
   );
 };
 
-export default inject(({ currentTariffStatusStore }: TStore) => {
+export default inject(({ currentTariffStatusStore, paymentStore }: TStore) => {
   const { hasScheduledStorageChange, currentStoragePlanSize } =
     currentTariffStatusStore;
-
+  const { formatWalletCurrency } = paymentStore;
   return {
     hasScheduledStorageChange,
     currentStoragePlanSize,
+    formatWalletCurrency,
   };
 })(observer(WalletContainer));

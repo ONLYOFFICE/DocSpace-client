@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import classNames from "classnames";
 import { SliderProps } from "./Slider.types";
 import styles from "./Slider.module.scss";
@@ -45,9 +45,29 @@ const Slider = (props: SliderProps) => {
     thumbHeight,
     thumbWidth,
     runnableTrackHeight,
+    dataTestId,
   } = props;
 
   const [sizeProp, setSizeProp] = useState("0%");
+  const sliderRef = useRef<HTMLInputElement>(null);
+  const [isRtl, setIsRtl] = useState(false);
+
+  useEffect(() => {
+    const checkRtl = () => {
+      if (document.dir === "rtl" || document.documentElement.dir === "rtl") {
+        return true;
+      }
+
+      if (sliderRef.current) {
+        const computedStyle = window.getComputedStyle(sliderRef.current);
+        return computedStyle.direction === "rtl";
+      }
+
+      return false;
+    };
+
+    setIsRtl(checkRtl());
+  }, []);
 
   useEffect(() => {
     const percentage = ((value - min) / (max - min)) * 100;
@@ -61,6 +81,9 @@ const Slider = (props: SliderProps) => {
     "--thumb-border-width": thumbBorderWidth,
     "--runnable-track-height": runnableTrackHeight,
     "--size-prop": sizeProp,
+    backgroundSize: withPouring ? `${sizeProp} 100%` : "auto",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: isRtl ? "right center" : "left center",
   } as React.CSSProperties;
 
   const sliderClasses = classNames(
@@ -75,6 +98,7 @@ const Slider = (props: SliderProps) => {
   return (
     <input
       id={id}
+      ref={sliderRef}
       type="range"
       className={sliderClasses}
       style={sliderStyle}
@@ -84,7 +108,7 @@ const Slider = (props: SliderProps) => {
       step={step}
       value={value}
       disabled={isDisabled}
-      data-testid="slider"
+      data-testid={dataTestId ?? "slider"}
     />
   );
 };

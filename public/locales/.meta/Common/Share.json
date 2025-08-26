@@ -3,7 +3,7 @@
   "content": "Share",
   "content_en_sha1_hash": "09ca55ca52d207f2cc1d9339e0226a88e9e96e2f",
   "created_at": "2025-05-19T21:30:48.615Z",
-  "updated_at": "2025-06-08T12:02:32.596Z",
+  "updated_at": "2025-08-04T07:30:01.034Z",
   "comment": {
     "text": "The translation key \"Share\" is used to display a button label in the user interface. It appears on a shared form panel and is linked to an icon representing sharing. The purpose of this text is to enable users to share content.",
     "is_auto": true,
@@ -30,13 +30,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Header/index.tsx",
-      "line_number": 158,
+      "line_number": 137,
       "context": "!isRoomsType &&\n selection.canShare\n ) {\n tabsData.unshift({\n id: \"info_share\",\n name: t(\"Common:Share\"),\n onClick: setShare,\n content: null,\n });\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1924,
+      "line_number": 1930,
       "context": "},\n },\n {\n id: \"option_sharing-settings\",\n key: \"sharing-settings\",\n label: t(\"Common:Share\"),\n icon: ShareReactSvgUrl,\n onClick: () => this.onClickShare(item),\n disabled: !isShareable,\n },\n ...versionActions,",
       "module": "/packages/client"
     },
@@ -48,7 +48,7 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/ShareFormDialog.tsx",
-      "line_number": 157,
+      "line_number": 155,
       "context": "const cards = [\n {\n id: \"quick-sharing\",\n title: t(\"Common:QuickSharing\"),\n description: t(\"Common:ShareTheOriginalFormForFillingOut\"),\n buttonLabel: t(\"Common:Share\"),\n onClick: onClickShareFile,\n icon: <ShareSvg />,\n disabled: !file.canShare,\n },",
       "module": "/packages/doceditor"
     }

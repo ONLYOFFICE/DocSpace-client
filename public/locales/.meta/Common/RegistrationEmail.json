@@ -3,7 +3,7 @@
   "content": "Your registration email address",
   "content_en_sha1_hash": "8cc0ae7ce8d6f84fb6f6364ece769b5cac5b2cd4",
   "created_at": "2025-05-19T21:30:47.781Z",
-  "updated_at": "2025-06-18T07:34:15.244Z",
+  "updated_at": "2025-08-21T11:22:39.911Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Your registration email address\" in various UI components, typically as a placeholder or label for an input field related to user registration. It appears in sales department request dialogs and modal dialogs for accessing portal services, prompting users to enter their registration email address.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     {
       "file_path": "/packages/login/src/components/LoginForm/sub-components/ForgotPasswordModalDialog.tsx",
       "line_number": 147,
-      "context": "errorText ? t(`Common:${errorText}`) : t(\"Common:RequiredField\")\n }\n >\n <EmailInput\n hasError={isShowError && emailError}\n placeholder={t(\"Common:RegistrationEmail\")}\n isAutoFocussed\n id=\"forgot-password-modal_email\"\n name=\"e-mail\"\n size={InputSize.base}\n scale",
+      "context": "}\n dataTestId=\"email_input_field\"\n >\n <EmailInput\n hasError={isShowError ? emailError : undefined}\n placeholder={t(\"Common:RegistrationEmail\")}\n isAutoFocussed\n id=\"forgot-password-modal_email\"\n name=\"e-mail\"\n size={InputSize.base}\n scale",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/components/Register/sub-components/RegisterModalDialog.tsx",
-      "line_number": 120,
-      "context": "errorText ? t(`Common:${errorText}`) : t(\"Common:RequiredField\")\n }\n >\n <EmailInput\n hasError={isShowError && emailErr}\n placeholder={t(\"Common:RegistrationEmail\")}\n isAutoFocussed\n id=\"registration-modal_email\"\n name=\"e-mail\"\n size={InputSize.base}\n scale",
+      "line_number": 119,
+      "context": "}\n dataTestId=\"register_email_field\"\n >\n <EmailInput\n hasError={isShowError ? emailErr : undefined}\n placeholder={t(\"Common:RegistrationEmail\")}\n isAutoFocussed\n id=\"registration-modal_email\"\n name=\"e-mail\"\n size={InputSize.base}\n scale",
       "module": "/packages/login"
     }
   ],

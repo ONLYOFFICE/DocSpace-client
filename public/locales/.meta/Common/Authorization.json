@@ -3,7 +3,7 @@
   "content": "Authorization",
   "content_en_sha1_hash": "5e25ce007aa95ea2ea8b158aee9c630a32ea5616",
   "created_at": "2025-05-19T21:30:43.158Z",
-  "updated_at": "2025-05-26T07:57:32.265Z",
+  "updated_at": "2025-08-11T09:02:43.860Z",
   "comment": {
     "text": "This translation key is used as the title of an authorization dialog box that opens to prompt users to grant access or authenticate. It appears in various places, such as when reconnecting to a provider or connecting to a third-party storage, and its purpose is to inform the user about the authentication request.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 301,
+      "line_number": 310,
       "context": "};\n \n if (provider.isOauth) {\n const authModal = window.open(\n \"\",\n t(\"Common:Authorization\"),\n \"height=600, width=1020\",\n );\n await openConnectWindow(provider.providerName, authModal)\n .then(getOAuthToken)\n .then((token) => {",
       "module": "/packages/client"
     },
@@ -42,7 +42,7 @@
     },
     {
       "file_path": "/packages/shared/dialogs/connect/ConnectDialog.tsx",
-      "line_number": 252,
+      "line_number": 245,
       "context": "]);\n \n const onReconnect = () => {\n const authModal = window.open(\n \"\",\n t(\"Common:Authorization\"),\n \"height=600, width=1020\",\n );\n openConnectWindow(provider_key, authModal).then((modal) =>\n getOAuthToken(modal).then((accessToken) => {\n authModal?.close();",
       "module": "/packages/shared"
     },

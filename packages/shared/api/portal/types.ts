@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TError } from "../../utils/axiosClient";
-import type { TariffState, BackupStorageType } from "../../enums";
+import type { TariffState, BackupStorageType, QuotaState } from "../../enums";
 
 export type TQuotas = {
   id: number;
@@ -33,6 +33,7 @@ export type TQuotas = {
   wallet?: boolean;
   dueDate?: string;
   nextQuantity?: number;
+  state?: QuotaState;
 };
 
 export type TPortalTariff = {
@@ -185,6 +186,18 @@ export type TCustomerInfo = {
   paymentMethodStatus: number;
   email: string | null;
   portalId: string | null;
+  payer: {
+    avatar: string;
+    avatarMax: string;
+    avatarMedium: string;
+    avatarOriginal: string;
+    avatarSmall: string;
+    displayName: string;
+    hasAvatar: boolean;
+    id: string;
+    isAnonim: boolean;
+    profileUrl: string;
+  } | null;
 };
 
 export type TBalance =

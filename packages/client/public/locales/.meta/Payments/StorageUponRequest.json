@@ -3,7 +3,7 @@
   "content": "Additional storage exceeding {{amount}} is available upon request.",
   "content_en_sha1_hash": "96d1a8d7da572c73f3ebe1d76840e01702df0791",
   "created_at": "2025-06-03T20:59:26.843Z",
-  "updated_at": "2025-06-03T21:00:22.836Z",
+  "updated_at": "2025-06-26T19:00:18.270Z",
   "comment": {
     "text": "This translation key is used to provide a notification when a user's storage limit has been exceeded. It informs the user that additional storage is available upon request and displays the current storage limit in gigabytes.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/PlanInfo.tsx",
-      "line_number": 115,
+      "line_number": 116,
       "context": ")}\n </div>\n <div className={styles.planInfoBody}>\n {isExceedingStorageLimit ? (\n <Text fontWeight=\"600\" fontSize=\"14px\">\n {t(\"StorageUponRequest\", {\n amount: `${maxStorageLimit} ${t(\"Common:Gigabyte\")}`,\n })}\n </Text>\n ) : (\n <>",
       "module": "/packages/client"
     }

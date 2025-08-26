@@ -3,7 +3,7 @@
   "content": "The two-factor authentication is enabled to provide additional security. Enter your mobile phone number to continue working in the {{productName}}. Mobile phone number must be entered using an international format with the country code.",
   "content_en_sha1_hash": "278e2e7917f39bdf597e5758e552fdbe95b7626a",
   "created_at": "2025-05-19T21:30:57.376Z",
-  "updated_at": "2025-05-24T15:26:22.254Z",
+  "updated_at": "2025-06-30T12:20:31.658Z",
   "comment": {
     "text": "This translation key is used to display a security message to users requesting their mobile phone number for two-factor authentication. The text explains that international format with country code is required and appears in a login confirmation page.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/PhoneActivation/page.client.tsx",
-      "line_number": 55,
+      "line_number": 54,
       "context": "</Text>\n <Text>\n {t(\"CurrentNumber\")}: {currentNumber}\n </Text>\n <Text>\n {t(\"PhoneSubtitle\", { productName: t(\"Common:ProductName\") })}\n </Text>\n </div>\n \n <TextInput\n className=\"phone-input\"",
       "module": "/packages/login"
     }

@@ -3,7 +3,7 @@
   "content": "Your current mobile phone number",
   "content_en_sha1_hash": "80875756c7e3f651d328c3b135b4e0f17fc421ba",
   "created_at": "2025-05-19T21:30:57.342Z",
-  "updated_at": "2025-05-24T15:35:31.035Z",
+  "updated_at": "2025-06-30T12:20:31.657Z",
   "comment": {
     "text": "This translation key is used to display a user's current mobile phone number. It will be displayed in the confirmation page of the phone activation process, likely as part of the form submission or confirmation dialog.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/PhoneActivation/page.client.tsx",
-      "line_number": 43,
-      "context": "import { Text } from \"@docspace/shared/components/text\";\n \n const ChangePhoneForm = () => {\n const { t } = useTranslation([\"Confirm\", \"Common\"]);\n \n const [currentNumber, setCurrentNumber] = useState(\"+00000000000\");\n \n return (\n <>\n <div className=\"subtitle\">\n <Text fontSize=\"16px\" fontWeight=\"600\" className=\"phone-title\">",
+      "line_number": 51,
+      "context": "<div className=\"subtitle\">\n <Text fontSize=\"16px\" fontWeight=\"600\" className=\"phone-title\">\n {t(\"EnterPhone\")}\n </Text>\n <Text>\n {t(\"CurrentNumber\")}: {currentNumber}\n </Text>\n <Text>\n {t(\"PhoneSubtitle\", { productName: t(\"Common:ProductName\") })}\n </Text>\n </div>",
       "module": "/packages/login"
     }
   ],

@@ -62,6 +62,7 @@ const FileInputPure = ({
   isDocumentIcon = false,
   isMultiple = true,
   className,
+  "data-test-id": dataTestId,
   ...rest
 }: FileInputProps) => {
   const { t } = useTranslation("Common");
@@ -163,7 +164,7 @@ const FileInputPure = ({
         <div
           className={wrapperClasses}
           id={idButton}
-          data-testid="file-input"
+          data-testid={dataTestId ?? "file-input"}
           aria-disabled={isDisabled ? "true" : "false"}
           role="button"
           {...rest}
@@ -185,6 +186,7 @@ const FileInputPure = ({
           />
           {!fromStorage ? (
             <input
+              data-testid="upload-click-input"
               type="file"
               id={id}
               ref={inputRef}

@@ -3,7 +3,7 @@
   "content": "Access scopes",
   "content_en_sha1_hash": "10ff78341c66f3c95452023413e4bba54342f528",
   "created_at": "2025-05-19T21:30:54.032Z",
-  "updated_at": "2025-05-26T07:57:32.555Z",
+  "updated_at": "2025-08-04T07:30:01.359Z",
   "comment": {
     "text": "This translation key is used for the text \"Access scopes\" which appears as a header in a dialog to inform users about the access permissions they are setting. It is part of a larger UI component that handles API key settings and OAuth scopes.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
-      "line_number": 245,
+      "line_number": 197,
       "context": "name: t(\"Common:Restricted\"),\n content: (\n <div className=\"api-key_permission-tab\">\n <div className=\"api-key_permission-container\">\n <Text fontSize=\"13px\" fontWeight={600} className=\"separator\">\n {t(\"OAuth:ScopesHeader\")}\n </Text>\n <Text\n className=\"api-key_permission-container-text separator\"\n fontWeight={600}\n >",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/ScopesBlock.tsx",
-      "line_number": 236,
+      "line_number": 238,
       "context": "return (\n <StyledScopesContainer isRequiredError={isRequiredError}>\n <BlockHeader\n className=\"header\"\n header={t(\"ScopesHeader\")}\n helpButtonText={t(\"ScopesHelp\")}\n isRequired\n />\n \n <Text",
       "module": "/packages/client"
     }
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Giriş dairələri\" doesn't accurately convey the meaning of \"Access scopes\". \"Giriş\" means \"entry\" or \"access\" in a general sense, but in the context of OAuth, it's more accurately translated as 'İstifadə dairələri' (Usage scopes) or 'Sahələr' (Scopes).",
-          "suggestion": "Consider 'İstifadə dairələri' or 'Sahələr'"
+          "description": "The translation 'Giriş dairələri' doesn't accurately convey the meaning of 'Access scopes'. 'Giriş' means 'entry' or 'access' which is somewhat redundant. 'Scopes' refers to permissions or ranges of access.",
+          "suggestion": "İstifadəçi icazələri"
         }
       ],
       "approved_at": null
@@ -51,13 +51,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Обхвати на достъп\" is a literal translation that doesn't quite convey the intended meaning of 'Access scopes' in the context of OAuth. It's technically correct but sounds overly formal and potentially confusing for a general user.",
-          "suggestion": "Достъпни обхвати"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -66,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Rozsahy přístupu' is technically correct, it's not the most natural or idiomatic translation for 'Access scopes' in a technical context like OAuth. It sounds a bit formal and clunky.",
-          "suggestion": "Consider 'Oblastí přístupu' or 'Rozsahy oprávnění' for a more natural phrasing, depending on the precise intended meaning."
+          "description": "While \"Rozsahy přístupu\" is technically correct, it's not the most natural or common translation for \"Access scopes.\" It's overly literal.",
+          "suggestion": "Možné lepší varianty: \"Rozsahy oprávnění\", \"Oprávnění\", or \"Použité rozsahy\"."
         }
       ],
       "approved_at": null
@@ -78,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Zugriffsbereiche' is technically correct, it sounds overly formal and less natural for a user-facing UI element like 'Access scopes'. A more common and user-friendly translation would be closer to 'Bereiche' or 'Scopes'.",
-          "suggestion": "Bereiche"
+          "description": "The translation 'Zugriffsbereiche' while technically correct, isn't the most natural or idiomatic way to express 'Access scopes' in a technical context. It's a bit literal.",
+          "suggestion": "Consider 'Bereiche für den Zugriff' or 'Zugriffsrechte' for a more fluent and common phrasing in a technical context."
         }
       ],
       "approved_at": null
@@ -90,8 +84,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Πεδία εφαρμογής πρόσβασης\" is too literal and doesn't accurately convey the meaning of \"Access scopes\". It translates to \"Access application fields,\" which is not the intended meaning.",
-          "suggestion": "A more accurate translation would be something like \"Εμβέλεια πρόσβασης\" (Emvelia prosvasis) which means 'Scope of access', or 'Πεδίο πρόσβασης' (Pedio prosvasis), which means 'Access scope'."
+          "description": "The translation \"Πεδία εφαρμογής πρόσβασης\" is a literal translation of 'access scopes' but doesn't accurately convey the meaning in a user-facing context. 'Scopes' in OAuth refers to specific permissions.",
+          "suggestion": "Εξουσιοδοτήσεις πρόσβασης"
+        },
+        {
+          "type": "cultural",
+          "description": "While grammatically correct, the translation sounds overly technical and might confuse users. A simpler, more user-friendly term would improve comprehension.",
+          "suggestion": "Εξουσιοδοτήσεις πρόσβασης"
         }
       ],
       "approved_at": null
@@ -108,8 +107,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Pääsylaajuudet\" is a literal translation, it's not the most natural or common way to express \"Access scopes\" in Finnish. It sounds somewhat technical and awkward.",
-          "suggestion": "Consider alternatives like \"Käyttöoikeudet\" (Permissions) or \"Pääsyn laajuus\" (Scope of access), or more context-dependent variations."
+          "description": "While 'Pääsylaajuudet' is technically understandable, it's not the most natural or idiomatic Finnish translation for 'Access scopes'. It's a bit literal and clunky.",
+          "suggestion": "Consider 'Käyttöoikeudet' or 'Laajuudet' depending on the specific context. 'Käyttöoikeudet' directly translates to 'permissions' and might be more suitable for OAuth scopes."
         }
       ],
       "approved_at": null
@@ -120,8 +119,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Accéder aux champs d'application' does not accurately convey the meaning of 'Access scopes'. 'Scopes' refers to permissions, not 'fields of application'.",
-          "suggestion": "A more accurate translation would be 'Accès aux autorisations' or 'Portée des accès'."
+          "description": "The translation 'Accéder aux champs d'application' is not an accurate translation of 'Access scopes'. 'Champs d'application' refers to application fields, not scopes.  'Scopes' in the context of OAuth refers to permissions.",
+          "suggestion": "Portée d'accès"
         }
       ],
       "approved_at": null
@@ -132,8 +131,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Մուտքի շրջանակներ\" (Mut'ki shrjanakner) is a literal translation of 'scopes' as 'circles/ranges' referring to access. However, the term 'scopes' in the context of OAuth usually implies 'permissions'. A more accurate translation would convey this meaning.",
-          "suggestion": "Հատուկ իրավունքներ"
+          "description": "The translation 'Մուտքի շրջանակներ' doesn't accurately convey the meaning of 'Access scopes'. 'Scopes' refers to a list of permissions granted to an application. A more accurate translation would reflect this.",
+          "suggestion": "Մուտքի իրավունքներ (Mut'ki iravunqner) or Գործունեության ոլորտներ (Gortsut'yany Otvortner)"
         }
       ],
       "approved_at": null
@@ -144,8 +143,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Accedi agli scope' is not the most natural or accurate translation of 'Access scopes'. While technically correct, it's a literal translation that doesn't convey the intended meaning as smoothly. 'Access scopes' implies authorization and what permissions are being granted.",
-          "suggestion": "Consider 'Autorizzazioni di scope' or 'Scope di accesso' which are more idiomatic for describing access scopes in an authorization context."
+          "description": "The translation 'Accedi agli scope' is not the most accurate or natural translation of 'Access scopes'. 'Accedi' implies an action of accessing, whereas 'Access' in this context refers to the collection of scopes.",
+          "suggestion": "Accesso agli scope"
         }
       ],
       "approved_at": null
@@ -156,8 +155,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"スコープへのアクセス\" (sukōpu e no akusesu) literally translates to \"Access to scopes.\" While technically understandable, it doesn't convey the intended meaning of \"Access scopes\" as the ability to request or utilize scopes.  It sounds a bit awkward.",
-          "suggestion": "スコープの利用"
+          "description": "The translation \"スコープへのアクセス\" (sukoopu e no akusesu) is a literal translation of 'access to scopes' but doesn't convey the meaning of 'access scopes' in the context of OAuth. It implies giving access *to* scopes, rather than having scopes for access.",
+          "suggestion": "A more appropriate translation would be something like \"スコープの利用\" (sukoopu no riyou) - 'use of scopes', or \"アクセス許可スコープ\" (akusesu kyoka sukoopu) - 'access permission scopes', or even just \"スコープ\" (sukoopu) if the context clearly implies authorization."
         }
       ],
       "approved_at": null
@@ -174,8 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ຄອບໝູ່ການເຂົ້າໃຊ້ງານ' (khop mu ngan khao sai ngan) doesn't fully capture the meaning of 'Access scopes'. It translates more literally as 'group of usage access' which is not idiomatic.",
-          "suggestion": "Consider a translation like 'ຂອບເຂດການເຂົ້າໃຊ້' (khop khet ngan khao sai) which translates more closely to 'access scope' or 'scope of access'."
+          "description": "The Lao translation 'ຄອບໝູ່ການເຂົ້າໃຊ້ງານ' doesn't accurately convey the meaning of 'Access scopes'. While it translates to something like 'group of access usages,' it's not a natural or commonly used way to express the concept of OAuth scopes.",
+          "suggestion": "Consider a more direct translation such as 'ຂອບເຂດການອະນຸຍາດ' (khop khit kan anuyat) which means 'permissions' or 'authorization scopes'. Alternatively, 'ເຂດການເຂົ້າອານຸຍາດ' (khet kan khao anuyat) meaning 'access permissions' could be suitable, depending on the overall context."
         }
       ],
       "approved_at": null
@@ -183,7 +182,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Piekļuves tvērumi\" is understandable, it's a rather literal and somewhat awkward translation of \"Access scopes.\" A more natural and idiomatic Latvian translation would be something like \"Atļautie darbības jomi\" or \"Aplēs tiešienes\". \"Piekļuves tvērumi\" feels overly technical and less user-friendly.",
+          "suggestion": "Consider \"Atļautie darbības jomi\" or \"Aplēs tiešienes\" as alternatives."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -192,8 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Dutch translation 'Toegang scopes' is a literal translation and not idiomatic. 'Scopes' is an English term frequently used in Dutch IT contexts, but 'toegang' should be rephrased to better convey the meaning of 'access'.",
-          "suggestion": "Toegestane scopes"
+          "description": "The Dutch translation 'Toegang scopes' is not a natural or accurate translation of 'Access scopes'. 'Toegang' means 'access' and repeating it creates redundancy. The word 'scopes' is already in English, which is also unconventional in Dutch in this context.",
+          "suggestion": "Geautoriseerde scope(s)"
         }
       ],
       "approved_at": null
@@ -207,7 +212,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Acessar escopos' is understandable, a more accurate and idiomatic translation of 'Access scopes' would be 'Escopos de acesso' or 'Acesso a escopos'. 'Acessar escopos' literally translates to 'Access scopes' and while grammatically correct, it doesn't convey the intended meaning as naturally.",
+          "suggestion": "Escopos de acesso"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -222,8 +233,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Domenii de acces\" is a literal translation of 'scopes' but doesn't quite convey the intended meaning in a user-facing context within OAuth. 'Scopes' in OAuth refer to permissions granted to an application.",
-          "suggestion": "Consider 'Permisiuni de acces' or 'Domenii de autorizare' as more accurate and user-friendly translations. The best choice depends on the broader UI context."
+          "description": "The translation \"Domenii de acces\" is not the most natural or accurate translation of \"Access scopes.\" \"Domenii\" literally translates to \"domains.\" \"Scopes\" in this context refers to permissions or authorized access, not domains.",
+          "suggestion": "Acces la permisiuni"
         }
       ],
       "approved_at": null
@@ -234,8 +245,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Получить доступ к областям действия\" is too literal and doesn't accurately convey the meaning of \"Access scopes\" in the context of OAuth. \"Scopes\" refers to permissions, not necessarily 'areas of action'.",
-          "suggestion": "A better translation would be something like \"Области доступа\" or \"Разрешения\" depending on the specific OAuth implementation and intended user understanding. If a more descriptive phrase is needed, \"Управление разрешениями\" could be considered."
+          "description": "The translation \"Получить доступ к областям действия\" is too literal and doesn't quite capture the meaning of \"Access scopes\" in the context of OAuth. It implies gaining access *to* scopes, rather than simply referring to the scopes themselves. A more appropriate translation would convey the concept of the scopes being present or available.",
+          "suggestion": "Возможные варианты: \"Области доступа\", \"Сферы действия\", \"Определенные области\""
         }
       ],
       "approved_at": null
@@ -246,8 +257,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ප්‍රවේශ පරිధి\" is a literal translation of 'access scope' but may not be the most natural or idiomatic way to express it in Sinhala. While technically correct, it sounds slightly formal and technical.",
-          "suggestion": "Consider alternatives like \"ප්‍රවේශ අයිතිවාසිකම්\" (access rights) or \"ප්‍රවේශ කළ හැකි Bereiche\" (accessible areas/domains) depending on the specific context of 'scopes' in OAuth."
+          "description": "The translation \"ප්‍රවේශ පරිధి\" while technically meaning 'access scope,' doesn't quite capture the nuance of 'Access scopes' in the context of OAuth. It sounds overly formal and technical for a user-facing label.",
+          "suggestion": "Consider \"ප්‍රවේශ මාතෘකා\" (praveśa māthrukā) which translates to 'access headings' or 'access topics' as a potentially more user-friendly option. Alternatively, \"ප්‍රවේශ අයිතිවාසිකම්\" (praveśa aithivāsikam) which means 'access rights' might also be suitable, depending on the overall user interface."
         }
       ],
       "approved_at": null
@@ -258,8 +269,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Rozsahy prístupu' is understandable, it's a rather literal and slightly awkward translation of 'Access scopes'. A more natural and idiomatic Slovak translation would be 'Prístupné rozsahy' or 'Rozsahy opráv'.",
-          "suggestion": "Prístupné rozsahy"
+          "description": "The translation 'Rozsahy prístupu' while technically accurate, doesn't quite capture the nuance of 'Access scopes' in the context of OAuth. 'Rozsahy prístupu' sounds more like a definition or enumeration of available permissions rather than the header itself.",
+          "suggestion": "Consider 'Rozsahy opráv' or 'Prístupné rozsahy' which may better convey the meaning of the OAuth header."
         }
       ],
       "approved_at": null
@@ -270,8 +281,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Dostopaj do okvirjev' is not the most natural or accurate translation of 'Access scopes'. While 'Dostopaj' (access) is correct, 'okvirjev' (frameworks/frames) doesn't quite capture the meaning of 'scopes' in the context of OAuth.",
-          "suggestion": "A more accurate translation would be 'Obsegi dovoljenj' or 'Dovoljeni obsegi' or 'Nabor dovoljenj'."
+          "description": "The translation 'Dostopaj do okvirjev' is not the most natural or accurate translation of 'Access scopes'. While 'Dostopaj' means 'access', 'okvirjev' translates to 'frameworks' or 'frames'. A more appropriate translation would focus on the meaning of 'scopes' within the context of OAuth, which refers to permissions or areas of access.",
+          "suggestion": "A better translation would be something like 'Obsegi dostopa' or 'Dostopni obsegi' which more closely aligns with the concept of OAuth scopes."
         }
       ],
       "approved_at": null
@@ -282,8 +293,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Опсези приступа\" is not an accurate translation of \"Access scopes\". \"Приступа\" translates to \"access\" or \"approach\", but \"опсези\" doesn't directly relate to \"scopes\" in this context. A more accurate translation would be something like \"Области дозвола\" or \"Дозвољене области\".",
-          "suggestion": "Consider \"Области дозвола\" or \"Дозвољене области\"."
+          "description": "The Serbian translation \"Опсези приступа\" is not an accurate translation of \"Access scopes.\" \"Приступа\" translates to \"accesses\" or \"approaches\" which doesn't fit the context of scopes in OAuth. A more accurate translation would reflect the concept of authorized permissions or areas of access.",
+          "suggestion": "Possible suggestions include: \"Опсеги дозвола\" (Scopes of permissions), \"Дозвољене опсеге\" (Allowed scopes), or \"Области приступа\" (Areas of access) depending on the desired level of technicality."
         }
       ],
       "approved_at": null
@@ -294,8 +305,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Opsezi pristupa' does not accurately convey the meaning of 'Access scopes'. 'Opsezi' is a plural form of 'opseg', which translates to 'range' or 'scope' as a noun, but it doesn't capture the action of 'accessing' those scopes. 'Pristupa' means 'access' as a noun, but in this context, it’s an incorrect choice.",
-          "suggestion": "Potencijalne sugestije uključuju: 'Opseg pristupa', 'Dozvole pristupa', 'Opsezi dozvola' or 'Dozvole'. The best option depends on the overall context and the desired level of formality."
+          "description": "The translation 'Opsezi pristupa' doesn't accurately reflect the meaning of 'Access scopes'. 'Opsezi' is an uncommon and potentially incorrect pluralization of 'opseg' (scope). 'Pristupa' means 'accesses' and doesn't convey the intended meaning of defining scopes.",
+          "suggestion": "A more accurate translation would be 'Obim pristupa' or 'Definisani opsezi'."
         }
       ],
       "approved_at": null
@@ -306,13 +317,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation \"Kapsamlara eriş\" is not a natural or accurate translation of \"Access scopes.\" It's grammatically correct but doesn't convey the intended meaning effectively. \"Eriş\" implies access *to* something, but the English phrase is more about the concept of scopes themselves.",
-          "suggestion": "Authorization Kapsamları"
+          "description": "The translation \"Kapsamlara eriş\" is not the best translation for \"Access scopes\". It literally translates to \"Access to scopes\". A more natural and accurate translation would convey the meaning of allowing access to scopes.",
+          "suggestion": "Erişilebilen kapsamlar"
         },
         {
           "type": "incorrect_translation",
-          "description": "A more accurate and natural translation would be something like \"Yetkilendirme Kapsamları\" (Authorization Scopes) or \"Kapsamlar\".",
-          "suggestion": "Kapsamlar"
+          "description": "The current translation \"Kapsamlara eriş\" is a less idiomatic way to express the meaning of \"Access scopes\" in Turkish. It feels slightly awkward.",
+          "suggestion": "Kapsam erişimi"
         }
       ],
       "approved_at": null
@@ -323,7 +334,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ділянки доступу\" doesn't accurately convey the meaning of \"Access scopes\". \"Ділянки\" translates to 'plots' or 'areas', which is not the intended meaning. 'Scopes' refers to permissions or ranges of access.",
+          "description": "The translation \"Ділянки доступу\" does not accurately convey the meaning of \"Access scopes\". \"Ділянки\" translates to 'plots' or 'areas', which is not the intended meaning. \"Scopes\" refers to permissions or authorizations.",
           "suggestion": "Розширені дозволи"
         }
       ],
@@ -335,8 +346,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Phạm vi truy cập' is understandable, it's a somewhat literal translation and may not be the most natural or idiomatic way to express 'Access scopes' in Vietnamese. It sounds slightly technical and formal.",
-          "suggestion": "Consider alternatives like 'Quyền truy cập' or 'Phạm vi quyền' which might be more fluent and commonly used."
+          "description": "While \"Phạm vi truy cập\" is understandable, it's a somewhat literal translation. A more natural and commonly used translation for \"Access scopes\" would be \"Quyền truy cập\" or \"Phạm vi quyền\". \"Phạm vi truy cập\" sounds slightly awkward.",
+          "suggestion": "Quyền truy cập"
         }
       ],
       "approved_at": null
@@ -347,8 +358,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While '访问作用域' (fǎngwèn zuòyòngfù) is technically correct, it sounds overly formal and technical for a UI element like \"Access scopes\". A more natural and user-friendly translation would be more direct.",
-          "suggestion": "授权范围 (shòuquán fànwéi) - which means 'Authorization Scope'"
+          "description": "While \"访问作用域\" (fǎngwèn zuòyòngfù) is technically correct, it's a very literal and somewhat awkward translation. 'Scopes' in OAuth often refers to a list of permissions. A more natural and user-friendly translation would be '授权范围' (shòuquán fànwéi) or '权限范围' (quánxiàn fànwéi).",
+          "suggestion": "授权范围 (shòuquán fànwéi) or 权限范围 (quánxiàn fànwéi)"
         }
       ],
       "approved_at": null

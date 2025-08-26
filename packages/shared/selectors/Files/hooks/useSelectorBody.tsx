@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { use } from "react";
-import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 
 import EmptyScreenFilterAltSvgUrl from "PUBLIC_DIR/images/empty_screen_filter_alt.svg?url";
@@ -48,6 +47,7 @@ import {
   RowLoader,
   SearchLoader,
 } from "../../../skeletons/selector";
+import { useTheme } from "../../../hooks/useTheme";
 
 import { FilesSelectorProps } from "../FilesSelector.types";
 import { LoadersContext } from "../../utils/contexts/Loaders";
@@ -130,7 +130,7 @@ const useSelectorBody = ({
   PickedSubmitButtonProps &
   PickedBreadCrumbsProps &
   PickedSelectorBodyProps) => {
-  const theme = useTheme();
+  const { isBase } = useTheme();
   const { t } = useTranslation(["Common"]);
 
   const { showBreadCrumbsLoader, isNextPageLoading, showLoader } =
@@ -198,6 +198,7 @@ const useSelectorBody = ({
         isBreadCrumbsLoading: showBreadCrumbsLoader,
         withBreadCrumbs: true,
         onSelectBreadCrumb: onSelectBreadCrumb!,
+        bodyIsLoading: showLoader,
       }
     : {};
 
@@ -214,14 +215,12 @@ const useSelectorBody = ({
       items={items}
       onSelect={onSelect}
       emptyScreenImage={
-        theme?.isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl
+        isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl
       }
       emptyScreenHeader={t("Common:SelectorEmptyScreenHeader")}
       emptyScreenDescription=""
       searchEmptyScreenImage={
-        theme?.isBase
-          ? EmptyScreenFilterAltSvgUrl
-          : EmptyScreenFilterAltDarkSvgUrl
+        isBase ? EmptyScreenFilterAltSvgUrl : EmptyScreenFilterAltDarkSvgUrl
       }
       searchEmptyScreenHeader={t("Common:NotFoundTitle")}
       searchEmptyScreenDescription={t("Common:EmptyFilterDescriptionText")}

@@ -3,7 +3,7 @@
   "content": "Shared files",
   "content_en_sha1_hash": "cfe54be5a424bb7cc83f0a51e73041a07e253640",
   "created_at": "2025-05-19T21:30:52.690Z",
-  "updated_at": "2025-05-26T07:57:32.492Z",
+  "updated_at": "2025-08-11T09:02:43.941Z",
   "comment": {
     "text": "This translation key is used to display the label \"Shared files\" in various UI contexts, such as import sections and stepper components, where users can select or manage shared files. The label appears on a button with an \"Import Shared Files\" checkbox and in dialog windows related to file imports.",
     "is_auto": true,
@@ -12,19 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 139,
+      "line_number": 138,
       "context": "}}\n personalExportDetails={{\n name: t(\"Settings:GoogleDriveFiles\"),\n }}\n sharedFilesExportDetails={{\n name: t(\"Settings:SharedFiles\"),\n }}\n sharedFoldersExportDetails={{\n name: t(\"Settings:SharedFolders\"),\n }}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 147,
+      "line_number": 146,
       "context": "}}\n personalExportDetails={{\n name: t(\"Settings:UsersFiles\"),\n }}\n sharedFilesExportDetails={{\n name: t(\"Settings:SharedFiles\"),\n }}\n sharedFoldersExportDetails={{\n name: t(\"Settings:SharedFolders\"),\n }}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 159,
+      "line_number": 162,
       "context": "/>\n \n <ImportSection\n isChecked={importOptions.importSharedFiles}\n onChange={(e) => onChange(e, \"importSharedFiles\")}\n sectionName={t(\"Settings:SharedFiles\")}\n description={t(\"Settings:SharedFilesImportLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n })}\n exportSection={{\n sectionName: sharedFilesExportDetails.name,",
       "module": "/packages/client"
     }

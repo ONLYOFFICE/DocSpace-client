@@ -3,7 +3,7 @@
   "content": "Data shared with <strong>{{displayName}}</strong> will be governed by <strong>{{nameApp}}</strong> <6>privacy policy</6> and <6>terms of service</6>. You can revoke this consent at any time in your {{productName}} account settings.",
   "content_en_sha1_hash": "adb9c93b661c124ad0f90e380ee2a371dc3d7df3",
   "created_at": "2025-05-19T21:30:57.323Z",
-  "updated_at": "2025-05-26T07:57:32.868Z",
+  "updated_at": "2025-08-21T11:22:39.935Z",
   "comment": {
     "text": "This translation key is used to display a consent message when a user grants permission to share their data. It explains how data will be governed and allows users to revoke consent at any time in their account settings.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/consent/page.client.tsx",
-      "line_number": 249,
-      "context": "isLoading={isDenyRunning}\n />\n </StyledButtonContainer>\n <StyledDescriptionContainer>\n <Text fontWeight={400} fontSize={\"13px\"} lineHeight={\"20px\"}>\n <Trans t={t} i18nKey=\"ConsentDescription\" ns=\"Consent\">\n Data shared with {{ displayName: user.displayName }} will be\n governed by {{ nameApp: client.name }}\n <Link\n className={\"login-link\"}\n type={LinkType.page}",
+      "line_number": 251,
+      "context": "testId=\"consent_deny_button\"\n />\n </StyledButtonContainer>\n <StyledDescriptionContainer>\n <Text fontWeight={400} fontSize=\"13px\" lineHeight=\"20px\">\n <Trans t={t} i18nKey=\"ConsentDescription\" ns=\"Consent\">\n Data shared with {{ displayName: user.displayName }} will be\n governed by {{ nameApp: client.name }}\n <Link\n className=\"login-link\"\n type={LinkType.page}",
       "module": "/packages/login"
     }
   ],

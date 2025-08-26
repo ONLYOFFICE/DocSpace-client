@@ -92,7 +92,6 @@ const SectionFilterContent = ({
   infoPanelVisible,
   isRooms,
   isTrash,
-  userId,
   isPersonalRoom,
   isIndexing,
   isIndexEditingMode,
@@ -116,6 +115,10 @@ const SectionFilterContent = ({
   usersFilter,
   setUsersFilter,
 
+  isCollaborator,
+  isVisitor,
+  userId,
+
   showFilterLoader,
   isPublicRoom,
   publicRoomKey,
@@ -126,16 +129,18 @@ const SectionFilterContent = ({
   showStorageInfo,
   isDefaultRoomsQuotaSet,
   isTemplatesFolder,
+
+  currentClientView,
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const isContactsPage = location.pathname.includes("accounts");
+  const isContactsPage =
+    currentClientView === "users" || currentClientView === "groups";
   const isContactsPeoplePage = contactsTab === "people";
   const isContactsInsideGroupPage = contactsTab === "inside_group";
   const isContactsGroupsPage = contactsTab === "groups";
   const isContactsGuestsPage = contactsTab === "guests";
-  const isFlowsPage = location.pathname.includes("flows");
 
   const {
     onContactsFilter,
@@ -613,6 +618,9 @@ const SectionFilterContent = ({
           case FilterType.Pdf.toString():
             label = getManyPDFTitle(t, false);
             break;
+          case FilterType.DiagramsOnly.toString():
+            label = t("Common:Diagrams");
+            break;
           default:
             break;
         }
@@ -885,6 +893,12 @@ const SectionFilterContent = ({
             group: FilterGroups.filterType,
             label: getManyPDFTitle(t, true),
           },
+          {
+            id: "filter_type-diagrams",
+            key: FilterType.DiagramsOnly.toString(),
+            group: FilterGroups.filterType,
+            label: t("Common:Diagrams"),
+          },
           ...archives,
           ...images,
           ...media,
@@ -905,12 +919,7 @@ const SectionFilterContent = ({
         group: FilterGroups.roomFilterSubject,
         label: t("Common:MeLabel"),
       },
-      {
-        id: "filter_author-other",
-        key: FilterKeys.other,
-        group: FilterGroups.roomFilterSubject,
-        label: t("Common:OtherLabel"),
-      },
+
       {
         id: "filter_author-user",
         key: FilterKeys.user,
@@ -918,6 +927,15 @@ const SectionFilterContent = ({
         displaySelectorType: "link",
       },
     ];
+
+    if (!isCollaborator && !isVisitor) {
+      subjectOptions.push({
+        id: "filter_author-other",
+        key: FilterKeys.other,
+        group: FilterGroups.roomFilterSubject,
+        label: t("Common:OtherLabel"),
+      });
+    }
 
     const ownerOptions = [
       {
@@ -1046,12 +1064,7 @@ const SectionFilterContent = ({
           group: FilterGroups.filterAuthor,
           label: t("Common:MeLabel"),
         },
-        {
-          id: "filter_author-other",
-          key: FilterKeys.other,
-          group: FilterGroups.filterAuthor,
-          label: t("Common:OtherLabel"),
-        },
+
         {
           id: "filter_author-user",
           key: FilterKeys.user,
@@ -1059,6 +1072,15 @@ const SectionFilterContent = ({
           displaySelectorType: "link",
         },
       ];
+
+      if (!isCollaborator && !isVisitor) {
+        authorOption.push({
+          id: "filter_author-other",
+          key: FilterKeys.other,
+          group: FilterGroups.filterAuthor,
+          label: t("Common:OtherLabel"),
+        });
+      }
 
       !isPublicRoom && filterOptions.push(...authorOption);
       filterOptions.push(...typeOptions);
@@ -1097,6 +1119,8 @@ const SectionFilterContent = ({
     isTrash,
     isPublicRoom,
     isTemplatesFolder,
+    isCollaborator,
+    isVisitor,
     getContactsFilterData,
   ]);
 
@@ -1399,7 +1423,6 @@ const SectionFilterContent = ({
       isContactsGroupsPage={isContactsGroupsPage}
       isContactsInsideGroupPage={isContactsInsideGroupPage}
       isContactsGuestsPage={isContactsGuestsPage}
-      isFlowsPage={isFlowsPage}
     />
   );
 };
@@ -1478,8 +1501,10 @@ export default inject(
       showStorageInfo,
       isDefaultRoomsQuotaSet,
 
-      user,
       userId: user?.id,
+
+      isCollaborator: user?.isCollaborator,
+      isVisitor: user?.isVisitor,
 
       filter,
       roomsFilter,
@@ -1496,6 +1521,8 @@ export default inject(
 
       setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
       showFilterLoader: clientLoadingStore.showFilterLoader,
+
+      currentClientView: clientLoadingStore.currentClientView,
 
       fetchTags,
       setViewAs,

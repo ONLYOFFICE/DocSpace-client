@@ -171,6 +171,7 @@ const BodyComponent = ({
           fontWeight={600}
           isHovered
           onClick={onClickReassignData}
+          dataTestId="dialog_reassign_data_link"
         >
           {t("DeleteProfileEverDialog:ReassignDataToAnotherUser")}
         </Link>

@@ -28,45 +28,48 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
+import moment from "moment";
 
 import { Text } from "@docspace/shared/components/text";
 import { calcalateWalletPayment } from "@docspace/shared/api/portal";
 import { toastr } from "@docspace/shared/components/toast";
 import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
 import { useInterfaceDirection } from "@docspace/shared/hooks/useInterfaceDirection";
+import { HelpButton } from "@docspace/shared/components/help-button";
 
 import UpgradeWalletIcon from "PUBLIC_DIR/images/icons/16/upgrade.react.svg";
 
 import styles from "../styles/StorageSummary.module.scss";
 import { useServicesActions } from "../hooks/useServicesActions";
-import {
-  getDaysUntilPayment,
-  calculateDifference,
-} from "../hooks/resourceUtils";
+import { calculateDifference } from "../hooks/resourceUtils";
 import { usePaymentContext } from "../context/PaymentContext";
 
 let timeout: NodeJS.Timeout | null;
 let controller: AbortController;
 
+type PlanUpgradePreviewProps = {
+  amount: number;
+  currentStoragePlanSize?: number;
+  daysUntilStorageExpiry?: number;
+  setPartialUpgradeFee?: (amount: number) => void;
+  partialUpgradeFee?: number;
+  storageExpiryDate?: string;
+  formatWalletCurrency?: (amount: number, decimalPlaces?: number) => string;
+};
+
 const getDirectionalText = (isRTL: boolean) => {
   return isRTL ? `>1` : `<1`;
 };
 
-type PlanUpgradePreviewProps = {
-  currentStoragePlanSize?: number;
-  amount: number;
-  daysUtilPayment?: number;
-  setPartialUpgradeFee?: (fee: number) => void;
-  partialUpgradeFee?: number;
-};
-
-const PlanUpgradePreview = (props: PlanUpgradePreviewProps) => {
+const PlanUpgradePreview: React.FC<PlanUpgradePreviewProps> = (props) => {
   const {
     currentStoragePlanSize,
     amount,
-    daysUtilPayment,
+    daysUntilStorageExpiry,
     setPartialUpgradeFee,
     partialUpgradeFee,
+    storageExpiryDate,
+    formatWalletCurrency,
   } = props;
   const { isRTL } = useInterfaceDirection();
 
@@ -74,8 +77,23 @@ const PlanUpgradePreview = (props: PlanUpgradePreviewProps) => {
   const { t } = useTranslation(["Payments", "Common"]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { formatWalletCurrency, calculateDifferenceBetweenPlan } =
-    useServicesActions();
+  const { calculateDifferenceBetweenPlan } = useServicesActions();
+
+  const tooltipText = () => {
+    return (
+      <>
+        <Text as="span">
+          {daysUntilStorageExpiry === 0
+            ? t("PartialPaymentNoDate")
+            : t("PartialPaymentWithDate", {
+                startDate: moment().tz(window.timezone).format("LL"),
+                endDate: storageExpiryDate,
+              })}
+        </Text>{" "}
+        <Text as="span">{t("PartialPaymentDescription")}</Text>
+      </>
+    );
+  };
 
   useEffect(() => {
     const calcalatePayment = () => {
@@ -122,13 +140,22 @@ const PlanUpgradePreview = (props: PlanUpgradePreviewProps) => {
     };
   }, []);
 
-  const days = daysUtilPayment || getDirectionalText(isRTL);
+  const days = daysUntilStorageExpiry || getDirectionalText(isRTL);
 
   return (
     <>
-      <Text fontWeight={700} fontSize="16px">
-        {t("DueToday")}
-      </Text>
+      <div className={styles.planInfoHeader}>
+        <Text fontWeight={700} fontSize="16px">
+          {t("DueToday")}
+        </Text>
+        <HelpButton
+          size={12}
+          offsetRight={0}
+          place={isRTL ? "left" : "right"}
+          tooltipContent={tooltipText()}
+          dataTestId="partial_payment_help_button"
+        />
+      </div>
       <div className={classNames(styles.planInfoContainer, styles.withBottom)}>
         <div className={styles.planInfoIcon}>
           <UpgradeWalletIcon />
@@ -154,7 +181,7 @@ const PlanUpgradePreview = (props: PlanUpgradePreviewProps) => {
           ) : (
             <>
               <Text fontWeight="600" fontSize="14px">
-                {formatWalletCurrency(partialUpgradeFee)}
+                {formatWalletCurrency!(partialUpgradeFee!)}
               </Text>
               <Text
                 fontWeight="600"
@@ -171,14 +198,22 @@ const PlanUpgradePreview = (props: PlanUpgradePreviewProps) => {
   );
 };
 
-export default inject(({ currentTariffStatusStore, servicesStore }: TStore) => {
-  const { currentStoragePlanSize, storageSubscriptionExpiryDate } =
-    currentTariffStatusStore;
-  const { setPartialUpgradeFee, partialUpgradeFee } = servicesStore;
-  return {
-    currentStoragePlanSize,
-    daysUtilPayment: getDaysUntilPayment(storageSubscriptionExpiryDate!),
-    setPartialUpgradeFee,
-    partialUpgradeFee,
-  };
-})(observer(PlanUpgradePreview));
+export default inject(
+  ({ currentTariffStatusStore, servicesStore, paymentStore }: TStore) => {
+    const {
+      currentStoragePlanSize,
+      daysUntilStorageExpiry,
+      storageExpiryDate,
+    } = currentTariffStatusStore;
+    const { setPartialUpgradeFee, partialUpgradeFee } = servicesStore;
+    const { formatWalletCurrency } = paymentStore;
+    return {
+      currentStoragePlanSize,
+      daysUntilStorageExpiry,
+      setPartialUpgradeFee,
+      partialUpgradeFee,
+      storageExpiryDate,
+      formatWalletCurrency,
+    };
+  },
+)(observer(PlanUpgradePreview));

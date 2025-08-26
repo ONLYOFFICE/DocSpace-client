@@ -45,6 +45,14 @@ import LightSmallSvgUrl from "PUBLIC_DIR/images/logo/lightsmall.svg?url";
 import DocsEditoRembedSvgUrl from "PUBLIC_DIR/images/logo/docseditorembed.svg?url";
 import DarkLightSmallSvgUrl from "PUBLIC_DIR/images/logo/dark_lightsmall.svg?url";
 import FaviconIco from "PUBLIC_DIR/images/logo/favicon.ico";
+import SpreadsheetEditorSvgUrl from "PUBLIC_DIR/images/logo/spreadsheeteditor.svg?url";
+import SpreadsheetEditorEmbedSvgUrl from "PUBLIC_DIR/images/logo/spreadsheeteditorembed.svg?url";
+import PresentationEditorSvgUrl from "PUBLIC_DIR/images/logo/presentationeditor.svg?url";
+import PresentationEditorEmbedSvgUrl from "PUBLIC_DIR/images/logo/presentationeditorembed.svg?url";
+import PDFEditorSvgUrl from "PUBLIC_DIR/images/logo/pdfeditor.svg?url";
+import PDFEditorEmbedSvgUrl from "PUBLIC_DIR/images/logo/pdfeditorembed.svg?url";
+import DiagramEditorSvgUrl from "PUBLIC_DIR/images/logo/diagrameditor.svg?url";
+import DiagramEditorEmbedSvgUrl from "PUBLIC_DIR/images/logo/diagrameditorembed.svg?url";
 
 import BackgroundPatternReactSvgUrl from "PUBLIC_DIR/images/background.pattern.react.svg?url";
 import BackgroundPatternOrangeReactSvgUrl from "PUBLIC_DIR/images/background.pattern.orange.react.svg?url";
@@ -1024,11 +1032,7 @@ export const getSystemTheme = () => {
   if (typeof window !== "undefined") {
     const isDesktopClient = window?.AscDesktopEditor !== undefined;
     const desktopClientTheme = window?.RendererProcessVariable?.theme;
-    const isDark =
-      desktopClientTheme?.id === "theme-dark" ||
-      desktopClientTheme?.id === "theme-contrast-dark" ||
-      (desktopClientTheme?.id === "theme-system" &&
-        desktopClientTheme?.system === "dark");
+    const isDark = desktopClientTheme?.type === "dark";
 
     return isDesktopClient
       ? isDark
@@ -1045,15 +1049,15 @@ export const getSystemTheme = () => {
 
 export const getEditorTheme = (theme?: ThemeKeys) => {
   const systemTheme =
-    getSystemTheme() === ThemeKeys.DarkStr ? "default-dark" : "default-light";
+    getSystemTheme() === ThemeKeys.DarkStr ? "theme-night" : "theme-white";
 
   switch (theme) {
     case ThemeKeys.BaseStr:
-      return "default-light";
+      return "theme-white";
     case ThemeKeys.DarkStr:
-      return "default-dark";
+      return "theme-night";
     case ThemeKeys.SystemStr:
-      return systemTheme;
+      return "theme-system";
     default:
       return systemTheme;
   }
@@ -1089,6 +1093,22 @@ export const getLogoFromPath = (path: string) => {
       return DocsEditoRembedSvgUrl;
     case "favicon.ico":
       return FaviconIco;
+    case "spreadsheeteditor.svg":
+      return SpreadsheetEditorSvgUrl;
+    case "spreadsheeteditorembed.svg":
+      return SpreadsheetEditorEmbedSvgUrl;
+    case "presentationeditor.svg":
+      return PresentationEditorSvgUrl;
+    case "presentationeditorembed.svg":
+      return PresentationEditorEmbedSvgUrl;
+    case "pdfeditor.svg":
+      return PDFEditorSvgUrl;
+    case "pdfeditorembed.svg":
+      return PDFEditorEmbedSvgUrl;
+    case "diagrameditor.svg":
+      return DiagramEditorSvgUrl;
+    case "diagrameditorembed.svg":
+      return DiagramEditorEmbedSvgUrl;
     default:
       break;
   }
@@ -1264,7 +1284,10 @@ export const getUserTypeDescription = (
   return t("Translations:RoleGuestDescriprion");
 };
 
-export function setLanguageForUnauthorized(culture: string) {
+export function setLanguageForUnauthorized(
+  culture: string,
+  isReload: boolean = true,
+) {
   setCookie(LANGUAGE, culture, {
     "max-age": COOKIE_EXPIRATION_YEAR,
   });
@@ -1280,7 +1303,7 @@ export function setLanguageForUnauthorized(culture: string) {
     window.history.pushState({}, "", newUrl);
   }
 
-  window.location.reload();
+  if (isReload) window.location.reload();
 }
 
 export function setTimezoneForUnauthorized(timezone: string) {
@@ -1409,3 +1432,81 @@ export const getSdkScriptUrl = (version: string) => {
     ? `${window.location.origin}/static/scripts/sdk/${version}/api.js`
     : "";
 };
+
+export const calculateTotalPrice = (
+  quantity: number,
+  unitPrice: number,
+): number => {
+  return Number((quantity * unitPrice).toFixed(2));
+};
+
+export const truncateNumberToFraction = (
+  value: number,
+  digits: number = 2,
+): string => {
+  const [intPart, fracPart = ""] = value.toString().split(".");
+  const truncated = fracPart.slice(0, digits).padEnd(digits, "0");
+  return `${intPart}.${truncated}`;
+};
+
+export const formatCurrencyValue = (
+  language: string,
+  amount: number,
+  currency: string,
+  fractionDigits: number = 3,
+) => {
+  const truncatedStr = truncateNumberToFraction(amount, fractionDigits);
+  const truncated = Number(truncatedStr);
+
+  const formatter = new Intl.NumberFormat(language, {
+    style: "currency",
+    currency,
+    minimumFractionDigits: fractionDigits,
+    maximumFractionDigits: fractionDigits,
+  });
+
+  return formatter.format(truncated);
+};
+
+export const insertEditorPreloadFrame = (docServiceUrl: string) => {
+  if (
+    !docServiceUrl ||
+    typeof window === "undefined" ||
+    document.getElementById("editor-preload-frame")
+  ) {
+    return;
+  }
+
+  const iframe = document.createElement("iframe");
+
+  iframe.id = "editor-preload-frame";
+  iframe.style.cssText =
+    "position:absolute;width:0;height:0;border:0;opacity:0;pointer-events:none;visibility:hidden";
+  iframe.setAttribute("aria-hidden", "true");
+  iframe.setAttribute("tabindex", "-1");
+
+  const cleanup = () => iframe.remove();
+  const setupCleanup = () => setTimeout(cleanup, 3000);
+
+  iframe.addEventListener("load", setupCleanup, { once: true });
+  iframe.addEventListener("error", cleanup, { once: true });
+
+  const appendIframe = () => {
+    document.body.appendChild(iframe);
+    iframe.src = docServiceUrl;
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", appendIframe, { once: true });
+  } else {
+    appendIframe();
+  }
+};
+
+export function buildDataTestId(
+  dataTestId: string | undefined,
+  suffix: string,
+): string | undefined {
+  if (!dataTestId) return undefined;
+  return `${dataTestId}_${suffix}`;
+}

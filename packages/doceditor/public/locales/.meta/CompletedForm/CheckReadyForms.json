@@ -3,7 +3,7 @@
   "content": "Check ready forms",
   "content_en_sha1_hash": "8a0b92bde27cfd467ecd8178e67fff5a5b357f4f",
   "created_at": "2025-05-19T21:30:57.155Z",
-  "updated_at": "2025-05-26T07:57:32.850Z",
+  "updated_at": "2025-08-12T19:46:26.307Z",
   "comment": {
     "text": "The translation key \"CheckReadyForms\" is used to display a label that confirms users are ready to submit completed forms. It appears as a button in a completed form component and changes depending on whether anonymous access is granted or not.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/completed-form/CompletedForm.tsx",
-      "line_number": 213,
-      "context": "primary\n size={ButtonSize.medium}\n label={\n isAnonym\n ? t(\"Common:Download\")\n : t(\"CompletedForm:CheckReadyForms\")\n }\n onClick={isAnonym ? handleDownload : gotoCompleteFolder}\n />\n {(!isShareFile || isRoomMember) && !isSDK && (\n <Button",
+      "line_number": 220,
+      "context": "primary\n size={ButtonSize.medium}\n label={\n isAnonym\n ? t(\"Common:Download\")\n : t(\"CompletedForm:CheckReadyForms\")\n }\n onClick={isAnonym ? handleDownload : gotoCompleteFolder}\n testId={\n isAnonym\n ? \"download_form_button\"",
       "module": "/packages/doceditor"
     }
   ],

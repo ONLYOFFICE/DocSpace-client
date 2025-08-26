@@ -3,7 +3,7 @@
   "content": "Confirm that you are not a robot",
   "content_en_sha1_hash": "3aab2c84eba713b9e899821400ca17067061fc52",
   "created_at": "2025-05-19T21:30:57.292Z",
-  "updated_at": "2025-05-26T07:57:32.876Z",
+  "updated_at": "2025-08-21T11:22:39.943Z",
   "comment": {
     "text": "This translation key is used for the \"Confirm that you are not a robot\" message, which appears on a login form and in error messages when a user submits an action that triggers a Captcha. Its purpose is to inform users that their login attempt may be flagged as suspicious if they fail the Captcha verification.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/login/src/components/LoginForm/index.tsx",
-      "line_number": 640,
-      "context": "onChange={onSuccessfullyComplete}\n />\n )}\n </div>\n {isCaptchaError && (\n <Text>{t(\"Errors:LoginWithBruteForceCaptcha\")}</Text>\n )}\n </StyledCaptcha>\n )}\n <Button\n id=\"login_submit\"",
+      "line_number": 649,
+      "context": "onChange={onSuccessfullyComplete}\n />\n )}\n </div>\n {isCaptchaError ? (\n <Text>{t(\"Errors:LoginWithBruteForceCaptcha\")}</Text>\n ) : null}\n </StyledCaptcha>\n ) : null}\n <Button\n id=\"login_submit\"",
       "module": "/packages/login"
     }
   ],

@@ -292,7 +292,7 @@ const DeleteDialogComponent = (props) => {
     <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
       <ModalDialog.Header>{title}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text noSelect>{noteText}</Text>
+        <Text>{noteText}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -305,6 +305,7 @@ const DeleteDialogComponent = (props) => {
           onClick={onDeleteAction}
           isLoading={isLoading}
           isDisabled={!selection.length}
+          testId="delete_dialog_modal_submit"
         />
         <Button
           id="delete-file-modal_cancel"
@@ -314,6 +315,7 @@ const DeleteDialogComponent = (props) => {
           scale
           onClick={onClose}
           isLoading={isLoading}
+          testId="delete_dialog_modal_cancel"
         />
       </ModalDialog.Footer>
     </ModalDialog>

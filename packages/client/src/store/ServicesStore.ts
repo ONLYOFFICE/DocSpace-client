@@ -28,36 +28,20 @@
 /* eslint-disable no-console */
 import { makeAutoObservable } from "mobx";
 
-import { getServicesQuotas } from "@docspace/shared/api/portal";
-
 import { toastr } from "@docspace/shared/components/toast";
 
-import { UserStore } from "@docspace/shared/store/UserStore";
 import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
-import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
-import { PaymentQuotasStore } from "@docspace/shared/store/PaymentQuotasStore";
-import { TTranslation } from "@docspace/shared/types";
-import { TOTAL_SIZE } from "@docspace/shared/constants";
 
-import {
-  TPaymentFeature,
-  TNumericPaymentFeature,
-  TPaymentQuota,
-} from "@docspace/shared/api/portal/types";
+import { TTranslation } from "@docspace/shared/types";
+
 import PaymentStore from "./PaymentStore";
 
 class ServicesStore {
-  userStore: UserStore | null = null;
-
   currentTariffStatusStore: CurrentTariffStatusStore | null = null;
 
-  currentQuotaStore: CurrentQuotasStore | null = null;
+  // servicesQuotasFeatures: Map<string, TPaymentFeature> = new Map();
 
-  paymentQuotasStore: PaymentQuotasStore | null = null;
-
-  servicesQuotasFeatures: Map<string, TPaymentFeature> = new Map();
-
-  servicesQuotas: TPaymentQuota | null = null;
+  // servicesQuotas: TPaymentQuota | null = null;
 
   paymentStore: PaymentStore | null = null;
 
@@ -72,41 +56,35 @@ class ServicesStore {
   featureCountData: number = 0;
 
   constructor(
-    userStore: UserStore,
     currentTariffStatusStore: CurrentTariffStatusStore,
-    currentQuotaStore: CurrentQuotasStore,
-    paymentQuotasStore: PaymentQuotasStore,
     paymentStore: PaymentStore,
   ) {
-    this.userStore = userStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
-    this.currentQuotaStore = currentQuotaStore;
-    this.paymentQuotasStore = paymentQuotasStore;
     this.paymentStore = paymentStore;
 
     makeAutoObservable(this);
   }
 
-  get storageSizeIncrement() {
-    return (
-      (this.servicesQuotasFeatures.get(TOTAL_SIZE) as TNumericPaymentFeature)
-        ?.value || 0
-    );
-  }
+  // get storageSizeIncrement() { // temp in payment store because of storage tariff deeactivation
+  //   return (
+  //     (this.servicesQuotasFeatures.get(TOTAL_SIZE) as TNumericPaymentFeature)
+  //       ?.value || 0
+  //   );
+  // }
 
-  get storageQuotaIncrementPrice() {
-    return (
-      this.servicesQuotas?.price ?? {
-        value: 0,
-        currencySymbol: "",
-        isoCurrencySymbol: "USD",
-      }
-    );
-  }
+  // get storagePriceIncrement() {
+  //   return this.servicesQuotas?.price.value ?? 0;
+  // }
 
-  get storagePriceIncrement() {
-    return this.servicesQuotas?.price.value ?? 0;
-  }
+  // get storageQuotaIncrementPrice() {
+  //   return (
+  //     this.servicesQuotas?.price ?? {
+  //       value: 0,
+  //       currencySymbol: "",
+  //       isoCurrencySymbol: "USD",
+  //     }
+  //   );
+  // }
 
   setPartialUpgradeFee = (partialUpgradeFee: number) => {
     this.partialUpgradeFee = partialUpgradeFee;
@@ -120,19 +98,19 @@ class ServicesStore {
     this.isInitServicesPage = isInitServicesPage;
   };
 
-  handleServicesQuotas = async () => {
-    const res = await getServicesQuotas();
+  // handleServicesQuotas = async () => { // temp in payment store because of storage tariff deeactivation
+  //   const res = await getServicesQuotas();
 
-    if (!res) return;
+  //   if (!res) return;
 
-    res[0].features.forEach((feature) => {
-      this.servicesQuotasFeatures.set(feature.id, feature);
-    });
+  //   res[0].features.forEach((feature) => {
+  //     this.servicesQuotasFeatures.set(feature.id, feature);
+  //   });
 
-    this.servicesQuotas = res[0];
+  //   this.servicesQuotas = res[0];
 
-    return res;
-  };
+  //   return res;
+  // };
 
   setReccomendedAmount = (amount: number) => {
     this.reccomendedAmount = amount;
@@ -151,23 +129,38 @@ class ServicesStore {
       setPaymentAccount,
       isAlreadyPaid,
       initWalletPayerAndBalance,
+      handleServicesQuotas,
     } = this.paymentStore!;
 
-    const requests = [
-      this.handleServicesQuotas(),
-      initWalletPayerAndBalance(isRefresh),
-    ];
+    const { fetchPortalTariff, walletCustomerStatusNotActive } =
+      this.currentTariffStatusStore!;
 
-    if (!this.currentTariffStatusStore) return;
+    const requests = [
+      handleServicesQuotas(),
+      initWalletPayerAndBalance(isRefresh),
+      fetchPortalTariff(),
+    ];
 
     try {
       const [quotas] = await Promise.all(requests);
 
       if (!quotas) throw new Error();
 
-      if (isAlreadyPaid || this.paymentStore!.walletCustomerEmail) {
-        if (this.paymentStore!.isStripePortalAvailable)
+      if (isAlreadyPaid) {
+        if (this.paymentStore!.isStripePortalAvailable) {
           requests.push(setPaymentAccount());
+
+          if (this.paymentStore!.isPayer && walletCustomerStatusNotActive) {
+            requests.push(fetchCardLinked());
+          }
+
+          if (
+            this.paymentStore!.isShowStorageTariffDeactivated() &&
+            this.paymentStore!.isPayer
+          ) {
+            this.paymentStore!.setIsShowTariffDeactivatedModal(true);
+          }
+        }
         requests.push(fetchAutoPayments());
       } else {
         requests.push(fetchCardLinked());

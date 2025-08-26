@@ -116,6 +116,5 @@
   "Subtitle": "Sous-titre",
   "SubtitleDescription": "Sous-titre avec des commentaires ou descriptions supplémentaires pour le répertoire actuel.",
   "TabPlugins": "Onglet Module complémentaires",
-  "Viewer": "Lecteur",
   "ViewerDescription": "Intégrez le lecteur pour permettre aux utilisateurs d'ouvrir un fichier en lecture seule à partir d'une salle."
 }

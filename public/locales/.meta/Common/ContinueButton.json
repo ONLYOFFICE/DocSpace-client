@@ -3,7 +3,7 @@
   "content": "Continue",
   "content_en_sha1_hash": "2e02623966f9391facf6eaefc8b079ed5b630bee",
   "created_at": "2025-05-19T21:30:43.691Z",
-  "updated_at": "2025-06-02T10:20:51.093Z",
+  "updated_at": "2025-08-21T11:22:39.803Z",
   "comment": {
     "text": "This translation key is used as a label for a \"Continue\" button that appears in various dialogs and confirms user actions. It provides a clear and consistent text to be translated, allowing users to proceed after completing a task or operation.",
     "is_auto": true,
@@ -42,37 +42,37 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/WarningQuotaDialog/WarningQuotaDialog.tsx",
-      "line_number": 108,
-      "context": "primary\n onClick={onClickRedirect}\n scale\n />\n <Button\n label={t(\"Common:ContinueButton\")}\n size={ButtonSize.normal}\n onClick={onCloseDialog}\n scale\n />\n </ModalDialog.Footer>",
+      "line_number": 107,
+      "context": "onClick={onClickRedirect}\n scale\n testId=\"continue_change_quota_button\"\n />\n <Button\n label={t(\"Common:ContinueButton\")}\n size={ButtonSize.normal}\n onClick={onCloseDialog}\n scale\n testId=\"cancel_continue_change_quota_button\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/doceditor/src/components/file-password/index.tsx",
-      "line_number": 205,
+      "line_number": 204,
       "context": "<Button\n primary\n size={ButtonSize.medium}\n scale\n label={t(\"Common:ContinueButton\")}\n tabIndex={5}\n onClick={onSubmit}\n isDisabled={isLoading}\n />\n </FormWrapper>",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/TfaAuth/page.client.tsx",
-      "line_number": 191,
-      "context": "size={ButtonSize.medium}\n tabIndex={3}\n label={\n isLoading\n ? t(\"Common:LoadingProcessing\")\n : t(\"Common:ContinueButton\")\n }\n isDisabled={!code.length || isLoading}\n isLoading={isLoading}\n onClick={onSubmit}\n />",
+      "line_number": 177,
+      "context": "size={ButtonSize.medium}\n tabIndex={3}\n label={\n isLoading\n ? t(\"Common:LoadingProcessing\")\n : t(\"Common:ContinueButton\")\n }\n isDisabled={!code.length || isLoading}\n isLoading={isLoading}\n onClick={onSubmit}\n testId=\"app_code_continue_button\"",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/_sub-components/EmailInputForm.tsx",
-      "line_number": 111,
-      "context": "id=\"email-continue\"\n className=\"login-button\"\n primary\n size={ButtonSize.medium}\n scale={true}\n label={t(\"Common:ContinueButton\")}\n tabIndex={1}\n isDisabled={isLoading}\n isLoading={isLoading}\n onClick={onContinue}\n />",
+      "line_number": 112,
+      "context": "id=\"email-continue\"\n className=\"login-button\"\n primary\n size={ButtonSize.medium}\n scale\n label={t(\"Common:ContinueButton\")}\n tabIndex={1}\n isDisabled={isLoading}\n isLoading={isLoading}\n onClick={onContinue}\n testId=\"email_continue_button\"",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/app/(root)/wizard/page.client.tsx",
-      "line_number": 547,
-      "context": "<Button\n size={ButtonSize.medium}\n scale={true}\n primary\n label={t(\"Common:ContinueButton\")}\n isLoading={isCreated}\n onClick={onContinueClick}\n />\n </WizardContainer>\n );",
+      "line_number": 562,
+      "context": "<Button\n size={ButtonSize.medium}\n scale\n primary\n label={t(\"Common:ContinueButton\")}\n isLoading={isCreated}\n onClick={onContinueClick}\n testId=\"wizard_continue_button\"\n />\n </WizardContainer>",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
-      "line_number": 563,
+      "line_number": 587,
       "context": "<ModalDialog.Footer>\n <Button\n key=\"DownloadButton\"\n label={\n needPassword ? t(\"Common:ContinueButton\") : t(\"Common:Download\")\n }\n size={ButtonSize.normal}\n primary\n onClick={needPassword ? onReDownload : onDownload}\n isDisabled={",
       "module": "/packages/shared"
     },
@@ -96,7 +96,7 @@
     },
     {
       "file_path": "/packages/shared/pages/PublicRoom/PublicRoomPasswordForm/index.tsx",
-      "line_number": 221,
+      "line_number": 220,
       "context": "<Button\n primary\n size={ButtonSize.medium}\n scale\n label={t(\"Common:ContinueButton\")}\n tabIndex={5}\n isLoading={isLoading}\n isDisabled={isLoading}\n onClick={onSubmitAction}\n />",
       "module": "/packages/shared"
     }

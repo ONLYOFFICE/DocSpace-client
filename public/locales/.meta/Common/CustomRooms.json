@@ -3,7 +3,7 @@
   "content": "Custom",
   "content_en_sha1_hash": "081ae3fdc403609cf6e760849ebb14117b7a50cb",
   "created_at": "2025-05-19T21:30:44.377Z",
-  "updated_at": "2025-06-08T12:02:32.676Z",
+  "updated_at": "2025-08-21T11:22:39.835Z",
   "comment": {
     "text": "This translation key is used to display the text \"Custom\" in various contexts throughout the application, typically appearing on filters or buttons related to custom rooms. The text is rendered using the \"Common:CustomRooms\" translation from the i18n module, which provides a consistent and localized experience for users.",
     "is_auto": true,
@@ -18,14 +18,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 838,
+      "line_number": 846,
       "context": "default:\n return {\n id: \"filter_type-custom\",\n key: RoomsType.CustomRoom,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:CustomRooms\"),\n };\n }\n }),\n ]\n : [",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 362,
-      "context": "return t(\"Common:Archives\");\n case FilterType.FilesOnly:\n return t(\"Common:Files\");\n \n case `room-${RoomsType.CustomRoom}`:\n return t(\"Common:CustomRooms\");\n case `room-${RoomsType.EditingRoom}`:\n return t(\"Common:CollaborationRooms\");\n \n case `room-${RoomsType.FormRoom}`:\n return t(\"Common:FormRoom\");",
+      "line_number": 367,
+      "context": "return t(\"Common:Files\");\n case FilterType.DiagramsOnly:\n return t(\"Common:Diagrams\");\n \n case `room-${RoomsType.CustomRoom}`:\n return t(\"Common:CustomRooms\");\n case `room-${RoomsType.EditingRoom}`:\n return t(\"Common:CollaborationRooms\");\n \n case `room-${RoomsType.FormRoom}`:\n return t(\"Common:FormRoom\");",
       "module": "/packages/shared"
     }
   ],
@@ -69,13 +69,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation \"Προσαρμοσμένα\" while technically meaning 'adapted' or 'customized', doesn't perfectly capture the brevity and common usage of \"Custom\" in this context. A more direct and commonly used translation for 'Custom' in software or settings would be 'Εξατομικευμένα'.",
-          "suggestion": "Εξατομικευμένα"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -93,7 +87,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Salles personnalisées' is a reasonable translation, it's quite literal and long. Considering the context of 'Custom' (likely referring to a feature or setting), a more concise and natural translation would be 'Personnalisées' or even just 'Personnalisation'.",
+          "suggestion": "Personnalisées"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Հարմարեցնել\" (Harmartsnel) translates to 'to customize' or 'to adapt'. While technically related to 'Custom', it doesn't convey the same meaning as the English word 'Custom' in this context. 'Custom' often refers to a standard or established practice, or something that is made to order. A more accurate translation might depend on the specific context of 'Common:CustomRooms', but it likely needs a more direct equivalent.",
-          "suggestion": "Consider translations like \"Մատուցված\" (Matutsad - 'Made-to-order'), \"Երևույթ\" (Yerevuyt - 'Special/Unique'), or potentially a transliteration like \"Կաստոմ\" (Kast'om) depending on the desired tone and user understanding."
+          "description": "The translation 'Հարմարեցնել' (Harmartsetnel) generally means 'to customize' or 'to adapt'. While it's related to 'Custom', it's not a direct or ideal translation in this context, which likely refers to a setting or feature label. A more literal or contextually appropriate translation might be 'Պատվերով' (Patverov - meaning 'custom-made' or 'ordered') or 'Անհատական' (Anhatakan - meaning 'individual' or 'personalized').",
+          "suggestion": "Consider 'Պատվերով' (Patverov) or 'Անհատական' (Anhatakan) depending on the precise meaning intended."
         }
       ],
       "approved_at": null
@@ -150,8 +150,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Polish translation \"Niestandardowa \" is a possible translation of \"Custom\" but it lacks the proper ending to match the key name \"Common:CustomRooms\". It should be \"Niestandardowe\" to agree with the plural \"Rooms\".",
-          "suggestion": "Niestandardowe"
+          "description": "The translation 'Niestandardowa ' does not fully convey the meaning of 'Custom'. While 'Niestandardowa' means 'non-standard' or 'unconventional', 'Custom' often implies personalization or modification. A better translation might be 'Spersonalizowana' (personalized) or 'Dostosowana' (adapted/tailored), depending on the exact context.",
+          "suggestion": "Consider 'Spersonalizowana' or 'Dostosowana' for a more accurate translation."
+        },
+        {
+          "type": "formatting",
+          "description": "The Polish translation has a trailing space.",
+          "suggestion": "Remove the trailing space: 'Niestandardowa'"
         }
       ],
       "approved_at": null
@@ -222,8 +227,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Налаштовувана' is a valid Ukrainian word, it doesn't perfectly convey the meaning of 'Custom' in this context. 'Custom' often implies personalization or user-defined options, and 'Налаштовувана' leans more towards 'configurable'. A more suitable translation might be 'Користувацькі' or 'Спеціалізовані'.",
-          "suggestion": "Consider 'Користувацькі' or 'Спеціалізовані' for a more accurate translation."
+          "description": "The translation 'Налаштовувана' while technically meaning 'customizable' or 'configurable', doesn't fully capture the meaning of 'Custom' in the context of a room type. It implies a degree of configuration that might not be intended. A more direct and often preferred translation for 'Custom' in a user interface context is 'Індивідуальні'.",
+          "suggestion": "Індивідуальні"
         }
       ],
       "approved_at": null

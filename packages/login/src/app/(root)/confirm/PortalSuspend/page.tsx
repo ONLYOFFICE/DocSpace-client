@@ -29,9 +29,12 @@ import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { GreetingContainer } from "@/components/GreetingContainer";
 import { getCompanyInfoSettings, getSettings } from "@/utils/actions";
 
+import { logger } from "logger.mjs";
 import DeactivatePortalForm from "./page.client";
 
 async function Page() {
+  logger.info("PortalSuspend page");
+
   const [settings, companyInfoSettings] = await Promise.all([
     getSettings(),
     getCompanyInfoSettings(),
@@ -42,7 +45,7 @@ async function Page() {
       <GreetingContainer greetingText={settings?.greetingSettings} />
       <FormWrapper id="portal-suspend-form">
         <DeactivatePortalForm
-          onlyofficeUrl={settings?.externalResources.site.domain}
+          onlyofficeUrl={settings?.externalResources?.site?.domain}
           siteUrl={companyInfoSettings?.site}
         />
       </FormWrapper>

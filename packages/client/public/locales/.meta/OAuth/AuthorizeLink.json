@@ -3,7 +3,7 @@
   "content": "Authorize link",
   "content_en_sha1_hash": "81ad6b89c40401161374de86969d1109d955deff",
   "created_at": "2025-05-19T21:30:53.826Z",
-  "updated_at": "2025-05-26T07:57:32.665Z",
+  "updated_at": "2025-08-12T19:46:26.146Z",
   "comment": {
     "text": "The \"AuthorizeLink\" translation key is used to display the text for an authorization link in a preview dialog, providing users with a clear indication of what action will be performed when they click the link. This text appears on a button-like component within the dialog. Translators should provide a descriptive and actionable label for this link.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/PreviewDialog.tsx",
-      "line_number": 252,
-      "context": "value={scriptBlock}\n />\n </div>\n <div className=\"block-container\">\n <Text fontWeight={600} lineHeight=\"20px\" fontSize=\"13px\" noSelect>\n {t(\"OAuth:AuthorizeLink\")}\n </Text>\n <Textarea\n heightTextArea={64}\n enableCopy\n isReadOnly",
+      "line_number": 256,
+      "context": "dataTestId=\"script_block_textarea\"\n />\n </div>\n <div className=\"block-container\">\n <Text fontWeight={600} lineHeight=\"20px\" fontSize=\"13px\">\n {t(\"OAuth:AuthorizeLink\")}\n </Text>\n <Textarea\n heightTextArea={64}\n enableCopy\n isReadOnly",
       "module": "/packages/client"
     }
   ],

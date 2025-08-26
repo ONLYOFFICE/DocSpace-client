@@ -48,9 +48,14 @@ import * as Styled from "./index.styled";
 interface GroupMemberRowProps {
   groupMember: TUser;
   removeMember: (member: TUser) => void;
+  dataTestId?: string;
 }
 
-const GroupMemberRow = ({ groupMember, removeMember }: GroupMemberRowProps) => {
+const GroupMemberRow = ({
+  groupMember,
+  removeMember,
+  dataTestId,
+}: GroupMemberRowProps) => {
   const { t } = useTranslation(["Common"]);
 
   const type = getUserType(groupMember);
@@ -76,14 +81,15 @@ const GroupMemberRow = ({ groupMember, removeMember }: GroupMemberRowProps) => {
   };
 
   return (
-    <Styled.GroupMemberRow>
+    <Styled.GroupMemberRow data-testid={dataTestId ?? "group_member_row"}>
       <Avatar
         className="avatar"
         size={AvatarSize.min}
         role={avatarRole}
         source={groupMember.avatarSmall ?? groupMember.avatar}
+        dataTestId="create_edit_group_member_row_avatar"
       />
-      <div className="info">
+      <div className="info" data-testid="create_edit_group_member_row_info">
         <div className="info-box">
           <div className="name">{groupMember.displayName}</div>
           {groupMember.status === EmployeeStatus.Pending ? (
@@ -94,6 +100,7 @@ const GroupMemberRow = ({ groupMember, removeMember }: GroupMemberRowProps) => {
       </div>
       <ReactSVG
         className="remove-icon"
+        data-testid="remove_group_member"
         src={RemoveReactSvgUrl}
         onClick={onRemove}
       />

@@ -3,7 +3,7 @@
   "content": "Edit",
   "content_en_sha1_hash": "5301648dcf6b53cefc9ed52999aaa92d4603cae0",
   "created_at": "2025-05-19T21:30:44.738Z",
-  "updated_at": "2025-06-18T17:11:42.406Z",
+  "updated_at": "2025-08-21T11:22:39.842Z",
   "comment": {
     "text": "The translation key \"EditButton\" is used to display the label \"Edit\" in various UI elements such as buttons and toggle switches. It is intended to be used in situations where users need to make changes or edits, typically in contexts related to commenting, theme editing, or API key management.",
     "is_auto": true,
@@ -11,20 +11,20 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/CommentEditor.js",
-      "line_number": 113,
-      "context": ") : null}\n {changeVersionHistoryAbility ? (\n <div className=\"edit_toggle\" onClick={onOpenEditor}>\n <ReactSVG className=\"edit_toggle-icon\" src={PencilReactSvgUrl} />\n <div className=\"property-content edit_toggle-text\">\n {comment ? t(\"Common:EditButton\") : t(\"Common:AddButton\")}\n </div>\n </div>\n ) : null}\n </div>\n ) : (",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/CommentEditor.tsx",
+      "line_number": 140,
+      "context": "onClick={onOpenEditor}\n data-testid=\"info_panel_details_comment_edit_toggle\"\n >\n <ReactSVG className=\"edit_toggle-icon\" src={PencilReactSvgUrl} />\n <div className=\"property-content edit_toggle-text\">\n {comment ? t(\"Common:EditButton\") : t(\"Common:AddButton\")}\n </div>\n </div>\n ) : null}\n </div>\n ) : (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 821,
-      "context": "isDisabled={isDisabledSaveButton}\n />\n \n <Button\n className=\"edit-current-theme button\"\n label={t(\"Common:EditButton\")}\n onClick={onClickEdit}\n size={buttonSize}\n isDisabled={isDisabledEditButton}\n />\n {isShowDeleteButton ? (",
+      "line_number": 833,
+      "context": "testId=\"appearance_save_button\"\n />\n \n <Button\n className=\"edit-current-theme button\"\n label={t(\"Common:EditButton\")}\n onClick={onClickEdit}\n size={buttonSize}\n isDisabled={isDisabledEditButton}\n testId=\"appearance_edit_button\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
-      "line_number": 552,
+      "line_number": 508,
       "context": "const createFooter = (\n <>\n <Button\n key=\"OKButton\"\n label={isEdit ? t(\"Common:EditButton\") : t(\"Webhooks:Generate\")}\n size={ButtonSize.normal}\n primary\n onClick={onGenerate}\n scale\n isDisabled={isRequestRunning || editIsDisabled || generateIsDisabled}",
       "module": "/packages/client"
     },
@@ -42,38 +42,38 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/AutoPaymentInfo.tsx",
-      "line_number": 81,
-      "context": "min: formatCurrencyValue(language, minBalance, walletCodeCurrency),\n max: formatCurrencyValue(language, upToBalance, walletCodeCurrency),\n })}{\" \"}\n {isPayer ? (\n <Link onClick={onOpen} textDecoration=\"underline\">\n {t(\"Common:EditButton\")}\n </Link>\n ) : null}\n </Text>\n </div>\n </div>",
+      "line_number": 85,
+      "context": "<Link\n onClick={onOpen}\n textDecoration=\"underline\"\n dataTestId=\"auto_edit_button\"\n >\n {t(\"Common:EditButton\")}\n </Link>\n ) : null}\n </Text>\n </div>\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/AutoPayments.tsx",
-      "line_number": 340,
-      "context": "language={language!}\n currency={currency!}\n />\n <Button\n key=\"EditButton\"\n label={t(\"Common:EditButton\")}\n size={ButtonSize.small}\n onClick={onEditClick}\n isDisabled={isDisabled}\n />\n </div>",
+      "line_number": 324,
+      "context": "autoPayments={autoPayments!}\n formatWalletCurrency={formatWalletCurrency}\n />\n <Button\n key=\"EditButton\"\n label={t(\"Common:EditButton\")}\n size={ButtonSize.small}\n onClick={onEditClick}\n isDisabled={isDisabled}\n testId=\"edit_auto_payment_button\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1750,
+      "line_number": 1756,
       "context": "disabled: false,\n },\n {\n id: \"option_edit-pdf\",\n key: \"edit-pdf\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => {\n if (isMobile) {\n toastr.info(t(\"Common:MobileEditPdfNotAvailableInfo\"));\n return;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1750,
+      "line_number": 1756,
       "context": "disabled: false,\n },\n {\n id: \"option_edit-pdf\",\n key: \"edit-pdf\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => {\n if (isMobile) {\n toastr.info(t(\"Common:MobileEditPdfNotAvailableInfo\"));\n return;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 733,
-      "context": "}\n \n const editOption = {\n key: \"edit\",\n icon: PencilReactSvgUrl,\n label: t(\"Common:EditButton\"),\n onClick: () => this.editClient(clientId),\n };\n \n const authButtonOption = {\n key: \"auth-button\",",
+      "line_number": 736,
+      "context": "}\n \n const editOption = {\n key: \"edit\",\n icon: PencilReactSvgUrl,\n label: t(\"Common:EditButton\"),\n onClick: () => this.editClient(clientId),\n dataTestId: \"oauth_edit_option\",\n };\n \n const authButtonOption = {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 326,
-      "context": "\"badge icons-group is-editing tablet-badge tablet-edit\",\n )}\n onClick={onFilesClick}\n color=\"accent\"\n hoverColor=\"accent\"\n title={t(\"Common:EditButton\")}\n />\n ) : null}\n {item.viewAccessibility?.MustConvert &&\n security &&\n \"Convert\" in security &&",
+      "line_number": 330,
+      "context": "\"badge icons-group is-editing tablet-badge tablet-edit\",\n )}\n onClick={onFilesClick}\n color=\"accent\"\n hoverColor=\"accent\"\n title={t(\"Common:EditButton\")}\n />\n ) : null}\n \n {item.viewAccessibility?.MustConvert &&\n security &&",
       "module": "/packages/shared"
     },
     {
@@ -85,7 +85,7 @@
     {
       "file_path": "/packages/management/src/app/spaces/multiple/domain-settings.tsx",
       "line_number": 83,
-      "context": "size={\n currentDeviceType === DeviceType.desktop\n ? ButtonSize.small\n : ButtonSize.normal\n }\n label={t(\"Common:EditButton\")}\n primary={true}\n onClick={onEditButtonClick}\n scale={false}\n />\n </StyledDomainSettings>",
+      "context": "size={\n currentDeviceType === DeviceType.desktop\n ? ButtonSize.small\n : ButtonSize.normal\n }\n label={t(\"Common:EditButton\")}\n primary\n onClick={onEditButtonClick}\n scale={false}\n />\n </StyledDomainSettings>",
       "module": "/packages/management"
     }
   ],
@@ -108,7 +108,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Redaktə edin\" literally translates to \"Edit it\". The intended meaning is simply \"Edit\". The suffix '-in' implies a command directed at someone, which isn't necessary in this context.",
+          "description": "The translation \"Redaktə edin\" is a command form (\"Edit it\") rather than a simple \"Edit\". The English 'Edit' is often used as a label or text on a button, and doesn't require the imperative form.",
           "suggestion": "Redaktə"
         }
       ],

@@ -26,13 +26,17 @@
 
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
+
 import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { toastr } from "@docspace/shared/components/toast";
+import { DeviceType } from "@docspace/shared/enums";
+import { Link } from "@docspace/shared/components/link";
+import { TColorScheme } from "@docspace/shared/themes";
 
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
@@ -75,6 +79,13 @@ type WalletProps = {
   canUpdateTariff: VoidFunction;
   setVisibleWalletSetting?: (value: boolean) => void;
   isNotPaidPeriod?: boolean;
+  isMobile?: boolean;
+  walletCustomerStatusNotActive?: boolean;
+  cardLinked?: string;
+  isPayer?: boolean;
+  payerEmail?: string;
+  walletHelpUrl?: string;
+  currentColorScheme?: TColorScheme;
 };
 
 const typeClassMap: Record<string, string> = {
@@ -99,6 +110,13 @@ const Wallet = (props: WalletProps) => {
     canUpdateTariff,
     setVisibleWalletSetting,
     isNotPaidPeriod,
+    isMobile,
+    walletCustomerStatusNotActive,
+    cardLinked,
+    isPayer,
+    payerEmail,
+    walletHelpUrl,
+    currentColorScheme,
   } = props;
 
   const { t } = useTranslation(["Payments", "Common"]);
@@ -111,6 +129,7 @@ const Wallet = (props: WalletProps) => {
     language,
     walletBalance,
     walletCodeCurrency || "",
+    3,
   );
 
   const onClose = () => {
@@ -165,11 +184,30 @@ const Wallet = (props: WalletProps) => {
     }
   };
 
+  const goLinkCard = () => {
+    cardLinked
+      ? window.open(cardLinked, "_self")
+      : toastr.error(t("Common:UnexpectedError"));
+  };
+
   return (
     <div className={styles.walletContainer}>
       <Text className={styles.walletDescription}>
         {t("WalletDescription", { productName: t("Common:ProductName") })}
       </Text>
+
+      {walletHelpUrl ? (
+        <Link
+          textDecoration="underline"
+          fontWeight={600}
+          href={walletHelpUrl}
+          color={currentColorScheme?.main?.accent}
+          dataTestId="wallet_learn_more_link"
+        >
+          {t("Common:LearnMore")}
+        </Link>
+      ) : null}
+
       {isCardLinkedToPortal ? (
         <PayerInformation
           style={undefined}
@@ -182,10 +220,9 @@ const Wallet = (props: WalletProps) => {
           isStripePortalAvailable={undefined}
         />
       ) : null}
-
       <div className={styles.balanceWrapper}>
         <div className={styles.headerContainer}>
-          <Text isBold fontSize="16px">
+          <Text isBold fontSize="18px" className={styles.balanceTitle}>
             {t("BalanceText")}
           </Text>
 
@@ -206,15 +243,61 @@ const Wallet = (props: WalletProps) => {
         </div>
 
         <Button
-          size={ButtonSize.small}
+          size={isMobile ? ButtonSize.normal : ButtonSize.small}
           primary
           label={t("TopUpBalance")}
           onClick={onOpen}
           isDisabled={!canUpdateTariff || isNotPaidPeriod}
+          scale={isMobile}
+          className={classNames(styles.topUpButton, {
+            [styles.isMobileButton]: isMobile,
+          })}
+          testId="top_up_balance_button"
         />
       </div>
 
-      <AutoPaymentInfo onOpen={onOpenLink} />
+      {walletCustomerStatusNotActive ? (
+        <div className={styles.walletCustomerStatusNotActive}>
+          <Text fontWeight={600} className={styles.warningColor}>
+            {t("CardUnlinked")}
+          </Text>
+          <Text as="span" className={styles.warningColor}>
+            {isPayer ? (
+              t("LinkNewCard")
+            ) : (
+              <Trans
+                t={t}
+                i18nKey="LinkNewCardEmail"
+                values={{
+                  email: payerEmail,
+                }}
+                components={{
+                  1: (
+                    <Link
+                      textDecoration="underline"
+                      fontWeight="600"
+                      className="error_description_link"
+                      href={`mailto:${payerEmail}`}
+                    />
+                  ),
+                }}
+              />
+            )}
+          </Text>{" "}
+          {isPayer ? (
+            <Link
+              as="span"
+              onClick={goLinkCard}
+              fontWeight={600}
+              textDecoration="underline"
+            >
+              {t("AddPaymentMethod")}
+            </Link>
+          ) : null}
+        </div>
+      ) : (
+        <AutoPaymentInfo onOpen={onOpenLink} />
+      )}
 
       {visible ? (
         <TopUpModal
@@ -238,6 +321,7 @@ export default inject(
     authStore,
     currentQuotaStore,
     currentTariffStatusStore,
+    settingsStore,
   }: TStore) => {
     const { language } = authStore;
     const {
@@ -254,8 +338,15 @@ export default inject(
       isCardLinkedToPortal,
     } = paymentStore;
     const { isFreeTariff } = currentQuotaStore;
-    const { isNotPaidPeriod } = currentTariffStatusStore;
+    const {
+      isNotPaidPeriod,
+      walletCustomerStatusNotActive,
+      walletCustomerEmail,
+    } = currentTariffStatusStore;
+    const { currentDeviceType, walletHelpUrl, currentColorScheme } =
+      settingsStore;
 
+    const isMobile = currentDeviceType === DeviceType.mobile;
     return {
       walletBalance,
       walletCodeCurrency,
@@ -271,6 +362,11 @@ export default inject(
       setVisibleWalletSetting,
       isCardLinkedToPortal,
       isNotPaidPeriod,
+      isMobile,
+      walletCustomerStatusNotActive,
+      payerEmail: walletCustomerEmail,
+      walletHelpUrl,
+      currentColorScheme,
     };
   },
 )(observer(Wallet));

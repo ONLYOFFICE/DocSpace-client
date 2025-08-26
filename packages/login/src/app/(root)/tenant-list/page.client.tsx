@@ -67,6 +67,7 @@ const TenantList = ({ clientId, baseDomain }: TenantListProps) => {
         onClick={goToLogin}
         label={t("BackToSignIn")}
         className="back-button"
+        testId="back_to_login_button"
       />
     </StyledTenantList>
   );

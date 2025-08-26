@@ -3,7 +3,7 @@
   "content": "Roles from the form:",
   "content_en_sha1_hash": "9aebb40c190759d663dcd420b90d3ba134b620a6",
   "created_at": "2025-05-19T21:30:48.131Z",
-  "updated_at": "2025-06-18T17:09:45.984Z",
+  "updated_at": "2025-06-26T19:00:18.307Z",
   "comment": {
     "text": "This translation key is used to display a label indicating that the roles selection is from a form. It appears as a title in a UI component where users can select roles, likely in a start filling or role assignment dialog.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/start-filling/StartFillingPanel.tsx",
-      "line_number": 328,
+      "line_number": 334,
       "context": "<p\n className={classNames(styles.title, {\n [styles.titleMargin]: !infoBarVisible,\n })}\n >\n {t(\"Common:RolesFromTheForm\")}\n </p>\n <FillingRoleSelector\n roles={roles}\n onSelect={onSelect}\n removeUserFromRole={removeUserFromRole}",
       "module": "/packages/shared"
     }

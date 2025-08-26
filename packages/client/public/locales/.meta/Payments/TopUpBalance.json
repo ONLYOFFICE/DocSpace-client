@@ -3,7 +3,7 @@
   "content": "Top up balance",
   "content_en_sha1_hash": "c9ec141fc5fcaffb8be65dc754acb82e2c543f06",
   "created_at": "2025-05-28T09:33:06.822Z",
-  "updated_at": "2025-06-18T17:11:42.487Z",
+  "updated_at": "2025-08-11T18:11:59.280Z",
   "comment": {
     "text": "The translation key \"TopUpBalance\" is used to display the text \"Top up balance\" as a label on a button in a payment wallet settings section. This button likely prompts users to add funds to their account balance.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/WalletContainer.tsx",
-      "line_number": 200,
-      "context": "</div>\n \n <Button\n size={ButtonSize.small}\n primary\n label={t(\"TopUpBalance\")}\n onClick={onOpen}\n isDisabled={!canUpdateTariff || isNotPaidPeriod}\n />\n </div>",
+      "line_number": 248,
+      "context": "</div>\n \n <Button\n size={isMobile ? ButtonSize.normal : ButtonSize.small}\n primary\n label={t(\"TopUpBalance\")}\n onClick={onOpen}\n isDisabled={!canUpdateTariff || isNotPaidPeriod}\n scale={isMobile}\n className={classNames(styles.topUpButton, {\n [styles.isMobileButton]: isMobile,",
       "module": "/packages/client"
     }
   ],

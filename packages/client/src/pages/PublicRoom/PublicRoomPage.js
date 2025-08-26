@@ -72,6 +72,7 @@ const PublicRoomPage = (props) => {
     secondaryOperationsAlert,
     onOpenSignInWindow,
     windowIsOpen,
+    isAuthenticated,
   } = props;
 
   const location = useLocation();
@@ -122,7 +123,7 @@ const PublicRoomPage = (props) => {
         t={t}
         ns="Common"
         i18nKey="PublicAuthorizeToast"
-        values={{ roomMode }}
+        values={{ roomMode, productName: t("Common:ProductName") }}
         components={{
           1: <Text as="span" fontSize="12px" fontWeight={700} />,
         }}
@@ -156,6 +157,8 @@ const PublicRoomPage = (props) => {
     secondaryOperationsAlert,
   };
 
+  const showSignInButton = !isFrame && !isAuthenticated;
+
   return (
     <>
       <SectionWrapper
@@ -165,7 +168,7 @@ const PublicRoomPage = (props) => {
       >
         <Section.SectionHeader>
           <SectionHeaderContent
-            showSignInButton={!isFrame}
+            showSignInButton={showSignInButton}
             onSignInClick={() => onOpenSignInWindow()}
             signInButtonIsDisabled={windowIsOpen}
           />
@@ -212,6 +215,7 @@ export default inject(
       fetchPublicRoom,
       onOpenSignInWindow,
       windowIsOpen,
+      validationData,
     } = publicRoomStore;
     const { isLoading } = clientLoadingStore;
 
@@ -229,6 +233,9 @@ export default inject(
 
     const { fetchPreviewMediaFile } = mediaViewerDataStore;
 
+    const isAuthenticated =
+      validationData?.isAuthenticated || authStore.isAuthenticated;
+
     return {
       isLoaded,
       isLoading,
@@ -242,7 +249,7 @@ export default inject(
       secondaryActiveOperations,
       secondaryOperationsAlert,
 
-      isAuthenticated: authStore.isAuthenticated,
+      isAuthenticated,
       isEmptyPage,
       fetchPublicRoom,
       fetchPreviewMediaFile,

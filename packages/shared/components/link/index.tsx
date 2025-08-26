@@ -46,7 +46,7 @@ const Link: React.FC<LinkProps> = ({
   type = LinkType.page,
   isTextOverflow = false,
   noHover = false,
-  enableUserSelect = false,
+  enableUserSelect = true,
   textDecoration,
   ariaLabel,
   dataTestId,
@@ -80,7 +80,7 @@ const Link: React.FC<LinkProps> = ({
         textDecoration,
       }}
       aria-label={ariaLabel || children}
-      data-testid={dataTestId || "link"}
+      data-testid={dataTestId ?? "link"}
       {...rest}
     >
       {children}

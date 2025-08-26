@@ -3,7 +3,7 @@
   "content": "The selected disabled users will be removed from {{productName}}. This action cannot be undone.",
   "content_en_sha1_hash": "00684d428b17255bcdd0514a8aac68e4f38ec5f3",
   "created_at": "2025-05-19T21:30:56.640Z",
-  "updated_at": "2025-06-08T12:02:32.638Z",
+  "updated_at": "2025-08-11T18:11:59.145Z",
   "comment": {
     "text": "This translation key is used in a confirmation dialog to inform users that removing selected disabled users from an application is irreversible. It provides a descriptive message for users to review before confirming the action.",
     "is_auto": true,
@@ -12,19 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
-      "line_number": 101,
+      "line_number": 112,
       "context": "if (deleteWithoutReassign) {\n return (\n <>\n <Text className=\"user-delete\">\n {onlyGuests\n ? t(\"ActionCannotBeUndoneGuests\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"ActionCannotBeUndone\", {\n productName: t(\"Common:ProductName\"),\n })}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
-      "line_number": 101,
+      "line_number": 112,
       "context": "if (deleteWithoutReassign) {\n return (\n <>\n <Text className=\"user-delete\">\n {onlyGuests\n ? t(\"ActionCannotBeUndoneGuests\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"ActionCannotBeUndone\", {\n productName: t(\"Common:ProductName\"),\n })}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/sub-components/UpdatePlanButtonContainer.js",
-      "line_number": 285,
+      "line_number": 362,
       "context": "}}\n />\n </Text>\n <Text className=\"text-warning\">\n <Trans\n i18nKey=\"ActionCannotBeUndone\"\n ns=\"Payments\"\n t={t}\n components={{\n 1: <span style={{ fontWeight: 600 }} />,\n }}",
       "module": "/packages/client"
     }
@@ -57,18 +57,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'zprostoru' (from 'zprostoru') in the Czech translation doesn't accurately convey the meaning of 'removed from' in the English context. It implies a freeing from a space, rather than a deletion or removal.",
-          "suggestion": "Vybraní zakázaní uživatelé budou z {{productName}} odstraněni."
-        },
-        {
-          "type": "formatting",
-          "description": "The placement of {{productName}} in the Czech translation is not ideal. It's better to keep the placement consistent with the English version.",
-          "suggestion": "Vybraní zakázaní uživatelé budou z {{productName}} odstraněni."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -92,13 +81,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The preposition \"-sta\" is attached to the product name, which looks unnatural in Finnish. It should be separated with a space.",
-          "suggestion": "Valitut käytöstä poistetut käyttäjät poistetaan {{productName}} -sta. Tätä toimintoa ei voi peruuttaa."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -182,18 +165,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Sinhala translation lacks the double curly braces for the `{{productName}}` placeholder as present in the English source.",
-          "suggestion": "Replace `{{productName}}` with `{{productName}}` in the Sinhala translation."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'මෙම ක්‍රියාමාර්ගය අප්‍රතිවර්ත්‍යයි' is a literal translation of 'This action cannot be undone' but may not be the most natural or common way to express this in Sinhala. A more common phrasing could be considered.",
-          "suggestion": "Consider replacing 'මෙම ක්‍රියාමාර්ගය අප්‍රතිවර්ත්‍යයි' with a more natural phrasing like 'මෙය කළ පසු නැවත සිදු කිරීමට නොහැකියි' or 'මේ ක්‍රියාව අවසානයේදී නැවත නොකළ යුතු'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -211,25 +183,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation adds a hyphen to productName ({{productName}}-а). This deviates from the English source and may cause display issues depending on the context.",
-          "suggestion": "Consider removing the hyphen after {{productName}}. Use '{{productName}}'. Alternatively, investigate if the hyphen is necessary for Serbian grammar and context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Serbian translation includes an unnecessary hyphen between 'productName' and '-a'.",
-          "suggestion": "Izabrani onemogućeni korisnici će biti uklonjeni iz {{productName}}. Ova radnja se ne može opozvati."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -253,18 +213,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation of \"This action cannot be undone\" is too literal. A more natural Chinese expression would convey the irreversibility of the action.",
-          "suggestion": "此操作不可逆转 (Cǐ cāozuò bùkě nìzhuǎn)"
-        },
-        {
-          "type": "formatting",
-          "description": "The space before and after the full stop (period) at the end of the sentence is unnecessary and makes the sentence look slightly off.",
-          "suggestion": "所选的已禁用用户将从{{productName}}中删除。此操作不可逆转"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

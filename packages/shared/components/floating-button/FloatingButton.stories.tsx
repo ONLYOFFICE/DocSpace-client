@@ -58,7 +58,8 @@ const meta = {
     (Story) => (
       <div
         style={{
-          height: "300px",
+          height: "70px",
+          width: "100px",
           display: "flex",
           justifyContent: "flex-start",
           position: "relative",
@@ -83,6 +84,7 @@ export const Default: Story = {
 export const WithProgress: Story = {
   args: {
     icon: FloatingButtonIcons.upload,
+    percent: 45,
   },
 };
 
@@ -96,13 +98,7 @@ export const WithAlert: Story = {
 export const Completed: Story = {
   args: {
     icon: FloatingButtonIcons.upload,
-  },
-};
-
-export const WithCloseButton: Story = {
-  args: {
-    icon: FloatingButtonIcons.upload,
-
-    clearUploadedFilesHistory: () => alert("Clear history clicked"),
+    completed: true,
+    percent: 100,
   },
 };

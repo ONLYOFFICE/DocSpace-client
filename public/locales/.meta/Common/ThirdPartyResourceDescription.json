@@ -3,7 +3,7 @@
   "content": "Backup can be saved to your third-party account (Dropbox, Box.com, OneDrive or Google Drive). You need to connect your third-party account (Dropbox, Box.com, OneDrive or Google Drive) before you will be able to save your backup there.",
   "content_en_sha1_hash": "c0e812cbda982e696e4ea4d91c8c7d55b6033146",
   "created_at": "2025-05-26T07:15:48.804Z",
-  "updated_at": "2025-05-26T08:03:13.581Z",
+  "updated_at": "2025-08-11T09:02:44.095Z",
   "comment": {
     "text": "This translation key is used to describe third-party backup storage options. It informs users that they need to connect their third-party account to save backups there. This message appears in the UI on certain pages of the auto-backup and manual-backup processes, particularly when selecting a third-party storage type.",
     "is_auto": true,
@@ -11,15 +11,15 @@
   },
   "usage": [
     {
-      "file_path": "/packages/shared/pages/auto-backup/index.tsx",
-      "line_number": 523,
-      "context": "isLoadingData\n // || isDisabledThirdPartyList\n }\n />\n <Text className=\"backup-description\">\n {t(\"Common:ThirdPartyResourceDescription\")}\n </Text>\n {isCheckedThirdParty ? (\n <ThirdPartyModule\n setSelectedFolder={setSelectedFolder}\n defaultStorageType={defaultStorageType}",
+      "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
+      "line_number": 569,
+      "context": "className={classNames(\n styles.backupDescription,\n \"backup-description\",\n )}\n >\n {t(\"Common:ThirdPartyResourceDescription\")}\n </Text>\n {isCheckedThirdParty ? (\n <ThirdPartyModule\n setSelectedFolder={setSelectedFolder}\n defaultStorageType={defaultStorageType}",
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/shared/pages/manual-backup/index.tsx",
-      "line_number": 388,
-      "context": "isChecked={isCheckedThirdParty}\n isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}\n {...commonRadioButtonProps}\n />\n <Text className=\"backup-description\">\n {t(\"Common:ThirdPartyResourceDescription\")}\n </Text>\n {isCheckedThirdParty ? (\n <ThirdPartyModule\n newPath={newPath}\n accounts={accounts}",
+      "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
+      "line_number": 423,
+      "context": "testId=\"third_party_resource_radio_button\"\n />\n <Text\n className={classNames(styles.backupDescription, \"backup-description\")}\n >\n {t(\"Common:ThirdPartyResourceDescription\")}\n </Text>\n {isCheckedThirdParty ? (\n <ThirdPartyModule\n newPath={newPath}\n accounts={accounts}",
       "module": "/packages/shared"
     }
   ],

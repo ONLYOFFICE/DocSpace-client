@@ -28,7 +28,7 @@ import React from "react";
 import classNames from "classnames";
 import ActionsHeaderTouchReactSvgUrl from "PUBLIC_DIR/images/actions.header.touch.react.svg?url";
 
-import { useTheme } from "styled-components";
+import { useTheme } from "../../hooks/useTheme";
 import { Text } from "../text";
 import { IconButton } from "../icon-button";
 import styles from "./SelectorAddButton.module.scss";
@@ -55,6 +55,8 @@ const SelectorAddButton = (props: SelectorAddButtonProps) => {
     dir,
     truncate,
 
+    testId = "selector-add-button",
+
     ...rest
   } = props;
 
@@ -68,8 +70,7 @@ const SelectorAddButton = (props: SelectorAddButtonProps) => {
   const buttonClassName = classNames(styles.selectorButton, {
     [styles.isAction]: isAction,
     [styles.isDisabled]: isDisabled,
-    [styles.isSize]: !!size,
-    "---selector-add-button-size": size,
+    // [styles.isSize]: !!size,
   });
 
   const containerClassName = classNames(
@@ -85,11 +86,15 @@ const SelectorAddButton = (props: SelectorAddButtonProps) => {
     ? ({
         ...style,
         "--main-accent-button": `${mainAccentColor}1A`,
+        "--selector-add-button-size": size,
       } as React.CSSProperties)
     : style;
 
   return (
-    <div className={containerClassName}>
+    <div
+      data-testid="selector-add-button-container"
+      className={containerClassName}
+    >
       <div
         {...rest}
         id={id}
@@ -97,7 +102,7 @@ const SelectorAddButton = (props: SelectorAddButtonProps) => {
         title={title}
         className={buttonClassName}
         onClick={onClickAction}
-        data-testid="selector-add-button"
+        data-testid={testId}
       >
         <IconButton
           size={iconSize}

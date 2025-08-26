@@ -25,13 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen, fireEvent } from "@testing-library/react";
+import { screen, fireEvent, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 
 import { TextInput } from ".";
 import { InputSize, InputType } from "./TextInput.enums";
-import { renderWithTheme } from "../../utils/render-with-theme";
 
 describe("<TextInput />", () => {
   const defaultProps = {
@@ -42,7 +41,7 @@ describe("<TextInput />", () => {
   };
 
   it("renders without error", () => {
-    renderWithTheme(<TextInput {...defaultProps} />);
+    render(<TextInput {...defaultProps} />);
 
     const input = screen.getByTestId("text-input");
     expect(input).toBeInTheDocument();
@@ -56,7 +55,7 @@ describe("<TextInput />", () => {
       id: "custom-id",
     };
 
-    renderWithTheme(<TextInput {...testProps} />);
+    render(<TextInput {...testProps} />);
 
     const input = screen.getByTestId("text-input");
     expect(input).toHaveClass("custom-class");
@@ -64,14 +63,14 @@ describe("<TextInput />", () => {
   });
 
   it("handles disabled state correctly", () => {
-    renderWithTheme(<TextInput {...defaultProps} isDisabled />);
+    render(<TextInput {...defaultProps} isDisabled />);
 
     const input = screen.getByTestId("text-input");
     expect(input).toBeDisabled();
   });
 
   it("handles readonly state correctly", () => {
-    renderWithTheme(<TextInput {...defaultProps} isReadOnly />);
+    render(<TextInput {...defaultProps} isReadOnly />);
 
     const input = screen.getByTestId("text-input");
     expect(input).toHaveAttribute("readonly");
@@ -79,14 +78,14 @@ describe("<TextInput />", () => {
 
   it("shows placeholder text", () => {
     const placeholder = "Enter text here";
-    renderWithTheme(<TextInput {...defaultProps} placeholder={placeholder} />);
+    render(<TextInput {...defaultProps} placeholder={placeholder} />);
 
     expect(screen.getByPlaceholderText(placeholder)).toBeInTheDocument();
   });
 
   it("calls onChange when text is entered", async () => {
     const onChange = jest.fn();
-    renderWithTheme(<TextInput {...defaultProps} onChange={onChange} />);
+    render(<TextInput {...defaultProps} onChange={onChange} />);
 
     const input = screen.getByTestId("text-input");
     await userEvent.type(input, "a");
@@ -96,7 +95,7 @@ describe("<TextInput />", () => {
 
   it("calls onFocus when input is focused", () => {
     const onFocus = jest.fn();
-    renderWithTheme(<TextInput {...defaultProps} onFocus={onFocus} />);
+    render(<TextInput {...defaultProps} onFocus={onFocus} />);
 
     const input = screen.getByTestId("text-input");
     fireEvent.focus(input);
@@ -106,7 +105,7 @@ describe("<TextInput />", () => {
 
   it("calls onBlur when input loses focus", () => {
     const onBlur = jest.fn();
-    renderWithTheme(<TextInput {...defaultProps} onBlur={onBlur} />);
+    render(<TextInput {...defaultProps} onBlur={onBlur} />);
 
     const input = screen.getByTestId("text-input");
     fireEvent.blur(input);
@@ -115,14 +114,14 @@ describe("<TextInput />", () => {
   });
 
   it("applies error styles when hasError is true", () => {
-    renderWithTheme(<TextInput {...defaultProps} hasError />);
+    render(<TextInput {...defaultProps} hasError />);
 
     const input = screen.getByTestId("text-input");
     expect(input).toHaveAttribute("data-error", "true");
   });
 
   it("applies warning styles when hasWarning is true", () => {
-    renderWithTheme(<TextInput {...defaultProps} hasWarning />);
+    render(<TextInput {...defaultProps} hasWarning />);
 
     const input = screen.getByTestId("text-input");
     expect(input).toHaveAttribute("data-warning", "true");
@@ -130,42 +129,42 @@ describe("<TextInput />", () => {
 
   it("handles maxLength correctly", () => {
     const maxLength = 5;
-    renderWithTheme(<TextInput {...defaultProps} maxLength={maxLength} />);
+    render(<TextInput {...defaultProps} maxLength={maxLength} />);
 
     const input = screen.getByTestId("text-input");
     expect(input).toHaveAttribute("maxLength", String(maxLength));
   });
 
   it("applies correct size class", () => {
-    renderWithTheme(<TextInput {...defaultProps} size={InputSize.large} />);
+    render(<TextInput {...defaultProps} size={InputSize.large} />);
 
     const input = screen.getByTestId("text-input");
     expect(input).toHaveAttribute("data-size", InputSize.large);
   });
 
   it("applies correct type attribute", () => {
-    renderWithTheme(<TextInput {...defaultProps} type={InputType.password} />);
+    render(<TextInput {...defaultProps} type={InputType.password} />);
 
     const input = screen.getByTestId("text-input");
     expect(input).toHaveAttribute("type", "password");
   });
 
   it("handles name attribute correctly", () => {
-    renderWithTheme(<TextInput {...defaultProps} name="username" />);
+    render(<TextInput {...defaultProps} name="username" />);
 
     const input = screen.getByTestId("text-input");
     expect(input).toHaveAttribute("name", "username");
   });
 
   it("handles tabIndex correctly", () => {
-    renderWithTheme(<TextInput {...defaultProps} tabIndex={2} />);
+    render(<TextInput {...defaultProps} tabIndex={2} />);
 
     const input = screen.getByTestId("text-input");
     expect(input).toHaveAttribute("tabindex", "2");
   });
 
   it("handles autoComplete attribute", () => {
-    renderWithTheme(<TextInput {...defaultProps} autoComplete="off" />);
+    render(<TextInput {...defaultProps} autoComplete="off" />);
 
     const input = screen.getByTestId("text-input");
     expect(input).toHaveAttribute("autocomplete", "off");
@@ -173,35 +172,35 @@ describe("<TextInput />", () => {
 
   it("handles custom style prop", () => {
     const customStyle = { color: "red", marginTop: "10px" };
-    renderWithTheme(<TextInput {...defaultProps} style={customStyle} />);
+    render(<TextInput {...defaultProps} style={customStyle} />);
 
     const input = screen.getByTestId("text-input");
     expect(input).toHaveStyle(customStyle);
   });
 
   it("handles font weight props correctly", () => {
-    renderWithTheme(<TextInput {...defaultProps} fontWeight={700} />);
+    render(<TextInput {...defaultProps} fontWeight={700} />);
 
     const input = screen.getByTestId("text-input");
     expect(input).toHaveStyle({ fontWeight: 700 });
   });
 
   it("applies bold style when isBold is true", () => {
-    renderWithTheme(<TextInput {...defaultProps} isBold />);
+    render(<TextInput {...defaultProps} isBold />);
 
     const input = screen.getByTestId("text-input");
     expect(input).toHaveStyle({ fontWeight: 600 });
   });
 
   it("handles inputMode correctly", () => {
-    renderWithTheme(<TextInput {...defaultProps} inputMode="numeric" />);
+    render(<TextInput {...defaultProps} inputMode="numeric" />);
 
     const input = screen.getByTestId("text-input");
     expect(input).toHaveAttribute("inputmode", "numeric");
   });
 
   it("handles dir attribute", () => {
-    renderWithTheme(<TextInput {...defaultProps} dir="rtl" />);
+    render(<TextInput {...defaultProps} dir="rtl" />);
 
     const input = screen.getByTestId("text-input");
     expect(input).toHaveAttribute("dir", "rtl");
@@ -209,7 +208,7 @@ describe("<TextInput />", () => {
 
   it("calls onKeyDown when key is pressed", () => {
     const onKeyDown = jest.fn();
-    renderWithTheme(<TextInput {...defaultProps} onKeyDown={onKeyDown} />);
+    render(<TextInput {...defaultProps} onKeyDown={onKeyDown} />);
 
     const input = screen.getByTestId("text-input");
     fireEvent.keyDown(input, { key: "Enter", code: "Enter" });
@@ -219,7 +218,7 @@ describe("<TextInput />", () => {
 
   it("calls onClick when clicked", () => {
     const onClick = jest.fn();
-    renderWithTheme(<TextInput {...defaultProps} onClick={onClick} />);
+    render(<TextInput {...defaultProps} onClick={onClick} />);
 
     const input = screen.getByTestId("text-input");
     fireEvent.click(input);
@@ -229,9 +228,7 @@ describe("<TextInput />", () => {
 
   it("calls onContextMenu on right click", () => {
     const onContextMenu = jest.fn();
-    renderWithTheme(
-      <TextInput {...defaultProps} onContextMenu={onContextMenu} />,
-    );
+    render(<TextInput {...defaultProps} onContextMenu={onContextMenu} />);
 
     const input = screen.getByTestId("text-input");
     fireEvent.contextMenu(input);
@@ -240,14 +237,14 @@ describe("<TextInput />", () => {
   });
 
   it("handles scale prop correctly", () => {
-    renderWithTheme(<TextInput {...defaultProps} scale />);
+    render(<TextInput {...defaultProps} scale />);
 
     const input = screen.getByTestId("text-input");
     expect(input).toHaveAttribute("data-scale", "true");
   });
 
   it("handles withBorder prop correctly", () => {
-    renderWithTheme(<TextInput {...defaultProps} withBorder={false} />);
+    render(<TextInput {...defaultProps} withBorder={false} />);
 
     const input = screen.getByTestId("text-input");
     expect(input).toHaveAttribute("data-without-border", "true");
@@ -256,7 +253,7 @@ describe("<TextInput />", () => {
   describe("mask functionality", () => {
     it("handles keepCharPositions prop with mask", () => {
       const mask = [/\d/, /\d/, "-", /\d/, /\d/];
-      renderWithTheme(
+      render(
         <TextInput
           {...defaultProps}
           mask={mask}
@@ -271,9 +268,7 @@ describe("<TextInput />", () => {
 
     it("handles guide prop with mask", () => {
       const mask = [/\d/, /\d/, "-", /\d/, /\d/];
-      renderWithTheme(
-        <TextInput {...defaultProps} mask={mask} guide value="12" />,
-      );
+      render(<TextInput {...defaultProps} mask={mask} guide value="12" />);
 
       const input = screen.getByTestId("text-input");
       expect(input).toHaveAttribute("data-guide", "true");

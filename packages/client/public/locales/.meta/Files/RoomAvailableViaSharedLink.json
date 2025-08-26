@@ -3,7 +3,7 @@
   "content": "Room available via shared link",
   "content_en_sha1_hash": "8acb01f94cadbbbaa3b7e445cdaf6f155d7a1512",
   "created_at": "2025-05-19T21:30:56.077Z",
-  "updated_at": "2025-05-26T07:57:32.439Z",
+  "updated_at": "2025-08-11T09:02:43.922Z",
   "comment": {
     "text": "The translation key \"RoomAvailableViaSharedLink\" is used to display a message indicating that a room can be accessed via a shared link. This text appears in a file sharing or collaboration context, likely on a button or dialog related to creating or editing a room.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/index.js",
-      "line_number": 328,
-      "context": "{showPublicRoomBar ? (\n <StyledPublicRoomBarContainer>\n <PublicRoomBar\n headerText={\n isFormRoom\n ? t(\"Files:RoomAvailableViaSharedLink\")\n : t(\"Files:RoomAvailableViaExternalLink\")\n }\n bodyText={\n isFormRoom\n ? t(\"CreateEditRoomDialog:FormRoomBarDescription\")",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/index.tsx",
+      "line_number": 368,
+      "context": "data-testid=\"info_panel_members_public_room_bar_container\"\n >\n <PublicRoomBar\n headerText={\n isFormRoom\n ? t(\"Files:RoomAvailableViaSharedLink\")\n : t(\"Files:RoomAvailableViaExternalLink\")\n }\n bodyText={\n isFormRoom\n ? t(\"CreateEditRoomDialog:FormRoomBarDescription\")",
       "module": "/packages/client"
     }
   ],
@@ -54,13 +54,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Raum über geteilten Link verfügbar' is not the most natural or accurate translation of 'Room available via shared link.' While technically correct, it sounds a bit awkward in German.  'über' implies 'about' or 'via' but not ideally in this context.",
-          "suggestion": "Raum ist über geteilten Link verfügbar"
+          "description": "The translation 'Raum über geteilten Link verfügbar' is not the most natural or accurate rendering of 'Room available via shared link' in German. 'Über' implies 'about' or 'regarding,' which isn't quite right in this context. A more accurate and idiomatic translation would convey the room *through* or *by means of* a shared link.",
+          "suggestion": "Raum über geteilten Link zugänglich"
         },
         {
           "type": "incorrect_translation",
-          "description": "Using 'ist' (is) before 'Raum' would improve the flow and naturalness of the German sentence.",
-          "suggestion": "Raum ist über geteilten Link verfügbar"
+          "description": "The use of 'geteilten' (dative masculine plural) is grammatically correct, but it suggests multiple shared links.  The English original refers to a single link.",
+          "suggestion": "Raum über einem geteilten Link verfügbar"
         }
       ],
       "approved_at": null
@@ -83,13 +83,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word \"huoneeeen\" has an extra 'e'.",
+          "description": "The word 'huoneeeen' contains an extra 'e'.",
           "suggestion": "huoneeseen"
         },
         {
           "type": "incorrect_translation",
-          "description": "The translation is too literal and doesn't flow naturally in Finnish. \"Pääsy\" (access) is not the most natural way to express 'available'.",
-          "suggestion": "Huone on käytettävissä jaetun linkin kautta"
+          "description": "The translation 'Pääsy huoneeseen jaetun linkin kautta' is a bit literal and doesn't flow naturally. A more idiomatic translation would convey the meaning of 'Room available via shared link' more accurately.",
+          "suggestion": "Huone on saatavilla jaetun linkin kautta"
         }
       ],
       "approved_at": null
@@ -115,13 +115,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"共有リンクで利用可能なルーム\" while understandable, isn't the most natural or precise translation of 'Room available via shared link.' '利用可能な' implies availability, but it's a slightly clunky construction. A more natural phrasing might emphasize the link granting access.",
-          "suggestion": "ルームは共有リンクからアクセス可能です"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -130,8 +124,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '공유 링크를 통해 이용 가능한 룸' is a literal translation but sounds slightly unnatural in Korean. A more natural phrasing would be preferred.",
-          "suggestion": "공유 링크로 이용 가능한 룸 (Gongyu link-ro iyonga-neun rum)"
+          "description": "While the translation is understandable, \"공유 링크를 통해 이용 가능한 룸\" is a bit literal and not the most natural phrasing in Korean. A more common and fluent way to express 'Room available via shared link' would be something like \"공유 링크로 접속 가능한 룸\" or \"공유 링크를 통해 입장 가능한 룸\".",
+          "suggestion": "공유 링크로 접속 가능한 룸"
         }
       ],
       "approved_at": null
@@ -139,7 +133,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Lao word 'ສາແບ່ງຮ່ວມ' is technically correct but a more common and natural phrasing for 'shared link' would be 'ເຊືອກແບ່ງປັນ' or 'ລິ້ງເຊືອກແບ່ງປັນ'.",
+          "suggestion": "ຫ້ອງຫວ່າງຜ່ານລິ້ງເຊືອກແບ່ງປັນ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -160,13 +160,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Pokój dostępny za pośrednictwem linku udostępniania' is a bit verbose and not the most natural way to express 'Room available via shared link' in Polish. It translates literally as 'Room available via link of sharing'.",
-          "suggestion": "Pokój dostępny przez link udostępniony"
+          "description": "The translation 'Pokój dostępny za pośrednictwem linku udostępniania' is overly formal and verbose. A more natural and concise translation would be preferable.",
+          "suggestion": "Pokój dostępny przez link"
         },
         {
           "type": "incorrect_translation",
-          "description": "While not incorrect, 'link udostępniony' implies the link was shared by someone. 'link udostępniony' would be more accurate if sharing is the main focus. The original English implies the room is simply available, not necessarily *shared*.",
-          "suggestion": "Pokój dostępny przez udostępniony link"
+          "description": "The term 'linku udostępniania' is redundant. 'Link' already implies it's a shared link.",
+          "suggestion": "Pokój dostępny przez link"
         }
       ],
       "approved_at": null
@@ -189,13 +189,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Sala este disponibilă pe link partajat\" doesn't fully capture the meaning of \"Room available via shared link\".  'Partajat' is technically correct, but 'link partajat' sounds awkward. A more natural phrasing would convey that the room's availability is accessible through a shared link.",
-          "suggestion": "Sala este accesibilă prin link partajat"
+          "description": "The translation 'Sala este disponibilă pe link partajat' doesn't accurately convey the meaning of 'Room available via shared link'. 'Partajat' (shared) is modifying 'link' instead of describing the availability. A more accurate translation would indicate the room's availability *through* the shared link.",
+          "suggestion": "Sala este disponibilă prin link partajat"
         },
         {
-          "type": "incorrect_translation",
-          "description": "While grammatically correct, the phrase 'link partajat' is a literal translation and doesn't flow naturally in Romanian.  A more idiomatic expression would be preferred.",
-          "suggestion": "Link de accesare partajat"
+          "type": "grammar",
+          "description": "While grammatically correct, the phrase 'prin link partajat' is slightly less natural in Romanian. 'Via' typically implies a method or means. A more fluent phrasing could be considered.",
+          "suggestion": "Sala este accesibilă prin link partajat"
         }
       ],
       "approved_at": null
@@ -209,7 +209,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'අසුරැකියාංගයක් බෙදාගත් සම්බන්ධතාව හරහා ලබාගත හැකිය.' is a very literal and somewhat awkward translation. 'අසුරැකියාංගයක්' (asurakiyangayak) translates to 'facility' which isn't necessarily what 'Room' implies. ' බෙදාගත් සම්බන්ධතාව' (bedagat sambandhawathawa) means 'shared connection/link', which is accurate but stiff. The entire phrase sounds overly formal and technical for a user-facing message.",
+          "suggestion": "A more natural and accurate translation might be 'කාමරය බෙදාගත් සබැඳිය හරහා ලබාගත හැකිය.' (Kamaraya bedagat sabandiya haratha labagathak atha yati.) - meaning 'The room is accessible via a shared link.'"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a long sentence structure which might be difficult for users to quickly understand. Breaking it down might improve readability.",
+          "suggestion": "Consider splitting the sentence. For example, 'කාමරය බෙදාගත් සබැඳියකින් ලබාගත හැකිය.' (Kamaraya bedagat sabandiyakkin labagathak atha yati.) - 'The room is accessible via a shared link.'"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -233,13 +244,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Prostorija dostupna preko podeljenog linka\" is understandable, \"Room available via shared link\" implies access, not just existence. 'Prostorija' translates more to 'room' as a physical space, whereas 'access' might be better conveyed. A more accurate translation might use a word conveying access or availability to use.",
-          "suggestion": "Razmotrite 'Prostorija dostupna putem deljenog linka' ili 'Prostorija otvorena putem deljenog linka' depending on the intended meaning."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -248,8 +253,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Oda paylaşımlı bağlantı üzerinden kullanılabilir\" is a literal translation but doesn't convey the nuance of 'available via shared link' as it might be understood in the context of scheduling or access control. It translates to 'Room can be used via shared link.'",
-          "suggestion": "Oda, paylaşımlı bağlantı ile erişilebilir. (Room is accessible via shared link.) or Oda, paylaşımlı bağlantı üzerinden paylaşıma açıktır. (Room is open for sharing via shared link.)"
+          "description": "The translation 'Oda paylaşımlı bağlantı üzerinden kullanılabilir' is a literal translation and not the most natural or idiomatic way to express 'Room available via shared link' in Turkish. It's a bit clunky.",
+          "suggestion": "Consider alternatives like 'Odaya paylaşımlı bağlantı ile erişilebilir' or 'Oda, paylaşımlı bağlantı yoluyla kullanılabilir'."
         }
       ],
       "approved_at": null
@@ -272,8 +277,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"可通过共享连接访问此房间\" is a bit literal and formal. A more natural and concise translation would be better.",
-          "suggestion": "可以通过共享链接访问此房间"
+          "description": "The translation \"可通过共享连接访问此房间\" is a bit literal and doesn't flow naturally in Chinese. 'Shared link' implies access, so '访问' (access) is slightly redundant. A more natural phrasing would imply access through the shared link.",
+          "suggestion": "可以通过共享链接即可访问此房间"
         }
       ],
       "approved_at": null

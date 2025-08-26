@@ -56,7 +56,7 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 10.12.3
+          version: 10.15.0
       - name: Use Node.js 22.x
         uses: actions/setup-node@v4
         with:
@@ -66,25 +66,44 @@ jobs:
         run: pnpm install
       - name: Lint clients
         run: pnpm lint
-  # unit-tests:
-  #   name: "Unit tests"
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - name: enable corepack
-  #       run: corepack enable
-  #     - uses: actions/setup-node@v4
-  #       with:
-  #         node-version: "22.x"
-  #         cache: "pnpm"
-  #     - name: Clear pnpm cache
-  #       run: pnpm cache clean
-  #     - name: Install dependencies
-  #       run: pnpm install
-  #     - name: Run unit tests
-  #       run: pnpm test
-  common:
-    name: "Common tests"
+  tsc:
+    name: "TypeScript tests"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.15.0
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: "pnpm"
+      - name: Install dependencies
+        run: pnpm install
+      - name: Run tsc
+        run: pnpm tsc
+  unit-tests:
+    name: "Unit tests"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.15.0
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: "pnpm"
+      - name: Install dependencies
+        run: pnpm install
+      - name: Run unit tests
+        run: pnpm test
+  images:
+    name: "Images tests"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -111,8 +130,22 @@ jobs:
       - name: Run common tests
         working-directory: ./common/tests
         run: npm run test:colors
-  translations-skip-base-languages:
-    name: "Translations tests (skip base languages)"
+  dependencies:
+    name: "Dependencies tests"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        working-directory: ./common/tests
+        run: npm install
+      - name: Run common tests
+        working-directory: ./common/tests
+        run: npm run test:dependencies
+  locales:
+    name: "Locales tests (skip base languages)"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

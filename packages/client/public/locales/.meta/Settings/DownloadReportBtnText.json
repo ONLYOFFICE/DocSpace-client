@@ -3,7 +3,7 @@
   "content": "Download report",
   "content_en_sha1_hash": "ca59430707ce8fb813997d7d85dff992c7f66e85",
   "created_at": "2025-05-19T21:30:51.450Z",
-  "updated_at": "2025-06-18T17:11:42.487Z",
+  "updated_at": "2025-08-11T18:11:59.280Z",
   "comment": {
     "text": "The \"DownloadReportBtnText\" translation key is used to display the text for a download report button in various UI elements, such as reports and audit trails, allowing users to access and export data. This text is expected to be concise and action-oriented, providing clear instructions for users to initiate the download process.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
-      "line_number": 313,
-      "context": "{isTransactionHistoryExist && !isLoading ? (\n <>\n <Text className={styles.transactionsLimit}>\n {t(\"TransactionsLimit\", {\n buttonName: t(\"Settings:DownloadReportBtnText\"),\n })}\n </Text>\n \n <div className={styles.downloadWrapper}>\n <Button",
+      "line_number": 357,
+      "context": "{isTransactionHistoryExist && !isLoading ? (\n <>\n <Text className={styles.transactionsLimit}>\n {t(\"TransactionsLimit\", {\n buttonName: t(\"Settings:DownloadReportBtnText\"),\n })}\n </Text>\n \n <div\n className={classNames(styles.downloadWrapper, {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
-      "line_number": 313,
-      "context": "{isTransactionHistoryExist && !isLoading ? (\n <>\n <Text className={styles.transactionsLimit}>\n {t(\"TransactionsLimit\", {\n buttonName: t(\"Settings:DownloadReportBtnText\"),\n })}\n </Text>\n \n <div className={styles.downloadWrapper}>\n <Button",
+      "line_number": 357,
+      "context": "{isTransactionHistoryExist && !isLoading ? (\n <>\n <Text className={styles.transactionsLimit}>\n {t(\"TransactionsLimit\", {\n buttonName: t(\"Settings:DownloadReportBtnText\"),\n })}\n </Text>\n \n <div\n className={classNames(styles.downloadWrapper, {",
       "module": "/packages/client"
     },
     {
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/login-history/index.js",
-      "line_number": 97,
+      "line_number": 99,
       "context": "cancelButtonLabel={t(\"Common:CancelButton\")}\n lifetime={securityLifetime.loginHistoryLifeTime}\n securityLifetime={securityLifetime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}\n downloadReport={t(\"DownloadReportBtnText\")}\n downloadReportDescription={t(\"ReportSaveLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n })}\n getReport={getLoginHistoryReport}\n isSettingNotPaid={!isAuditAvailable}",
       "module": "/packages/client"
     }
@@ -51,7 +51,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Hesabatı yükləyin' is understandable, a more natural and common translation for 'Download report' in Azerbaijani would be 'Hesabatı endir'. 'Yükləyin' generally means 'upload'.",
+          "suggestion": "Hesabatı endir"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -114,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Japanese translation 'ダウンロードのレポート' is not a natural or accurate translation of \"Download report\". While it literally translates to \"Download's report\", it's not idiomatic Japanese for a button label.",
-          "suggestion": "レポートをダウンロード"
+          "description": "The translation \"ダウンロードのレポート\" is not the ideal translation of \"Download report\". While understandable, it's not the most natural Japanese phrasing. \"レポートのダウンロード\" or simply \"ダウンロード\" would be more common and fluent.",
+          "suggestion": "レポートのダウンロード"
         }
       ],
       "approved_at": null
@@ -156,7 +162,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Transferir o relatório\" is understandable, a more precise and commonly used translation for \"Download report\" in a technical context would be \"Baixar relatório\". \"Transferir\" implies moving something that already exists, while \"Baixar\" directly conveys the action of downloading.",
+          "description": "While 'Transferir' can mean 'to transfer', in the context of downloading a report, 'Baixar relatório' is a more accurate and natural translation for 'Download report'. 'Transferir' implies moving something from one place to another, not necessarily downloading it.",
           "suggestion": "Baixar relatório"
         }
       ],
@@ -186,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"වාර්තාව බාගන්න\" while understandable, isn't the most natural or accurate translation of \"Download report\". A more common and preferred phrasing would use a more formal verb for 'download'.",
-          "suggestion": "වාර්තා පත්‍රය බාගන්න (Warta pataraya baganna) or වාර්තාව බාගත කරන්න (Wartaya bagathakata karna)"
+          "description": "The translation 'වාර්තාව බාගන්න' while understandable, is not the most natural or precise translation of 'Download report'. 'වාර්තාව' means 'report', and 'බාගන්න' means 'to bring/get'. While functional, a more natural translation might use a verb expressing downloading.",
+          "suggestion": "Consider alternatives like 'ගබන්න වාර්තාව' (gabanawa vartaav) - meaning 'to download the report' or 'වාර්තාව බාගත කරන්න' (vartaav baagath karanna) - a more formal and accurate translation using the verb 'to download'."
         }
       ],
       "approved_at": null

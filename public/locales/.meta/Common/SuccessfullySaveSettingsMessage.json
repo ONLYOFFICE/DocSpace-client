@@ -3,7 +3,7 @@
   "content": "Settings have been successfully updated",
   "content_en_sha1_hash": "a3e0f1940499fb1b34253a9a7b050c2136e1f58b",
   "created_at": "2025-05-26T07:15:48.667Z",
-  "updated_at": "2025-06-18T17:11:42.433Z",
+  "updated_at": "2025-08-04T07:30:01.283Z",
   "comment": {
     "text": "The translation key \"SuccessfullySaveSettingsMessage\" is used to display a success message after saving portal settings. It appears in UI elements such as buttons or dialogs that trigger setting updates, providing feedback to the user that changes have been successfully applied.",
     "is_auto": true,
@@ -24,8 +24,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Branding/brandName.js",
-      "line_number": 63,
-      "context": "try {\n setIsSaving(true);\n await saveBrandName(data);\n setBrandName(data.logoText);\n \n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error);\n } finally {\n setIsSaving(false);\n }",
+      "line_number": 65,
+      "context": "try {\n setIsSaving(true);\n await saveBrandName(data);\n setBrandName(data.logoText);\n \n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (err) {\n toastr.error(err);\n } finally {\n setIsSaving(false);\n }",
       "module": "/packages/client"
     },
     {
@@ -50,6 +50,12 @@
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Branding/whitelabel.js",
       "line_number": 72,
       "context": "}, []);\n \n const onRestoreDefault = async () => {\n try {\n await resetWhiteLabelLogos();\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error);\n }\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ad-management.tsx",
+      "line_number": 116,
+      "context": "await setAdManagement(!type);\n setDisplayBanners(Boolean(type));\n setShowReminder(false);\n saveToSessionStorage(\"defaultDisplayBanners\", type);\n saveToSessionStorage(\"currentDisplayBanners\", type);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (e) {\n toastr.error(e!);\n } finally {\n setIsSaving(false);\n }",
       "module": "/packages/client"
     },
     {
@@ -60,37 +66,37 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/dns-settings.js",
-      "line_number": 161,
+      "line_number": 163,
       "context": "timerId = setTimeout(() => {\n setIsLoading(true);\n }, [200]);\n \n await saveDNSSettings();\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (e) {\n setIsError(true);\n toastr.error(e);\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/language-and-time-zone.js",
-      "line_number": 413,
+      "line_number": 406,
       "context": "setCookie(LANGUAGE, state.language.key || \"en\", {\n \"max-age\": COOKIE_EXPIRATION_YEAR,\n });\n window.timezone = state.timezone.key;\n })\n .then(() => toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\")))\n .then(\n () =>\n !user.cultureName &&\n lng !== state.language.key &&\n window.location.reload(),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 346,
+      "line_number": 350,
       "context": "if (!selectThemeId) return;\n \n try {\n await api.settings.sendAppearanceTheme({ selected: selectThemeId });\n await getAppearanceTheme();\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error);\n }\n saveToSessionStorage(\"selectColorId\", selectThemeId);\n saveToSessionStorage(\"defaultColorId\", selectThemeId);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 346,
+      "line_number": 350,
       "context": "if (!selectThemeId) return;\n \n try {\n await api.settings.sendAppearanceTheme({ selected: selectThemeId });\n await getAppearanceTheme();\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error);\n }\n saveToSessionStorage(\"selectColorId\", selectThemeId);\n saveToSessionStorage(\"defaultColorId\", selectThemeId);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 346,
+      "line_number": 350,
       "context": "if (!selectThemeId) return;\n \n try {\n await api.settings.sendAppearanceTheme({ selected: selectThemeId });\n await getAppearanceTheme();\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error);\n }\n saveToSessionStorage(\"selectColorId\", selectThemeId);\n saveToSessionStorage(\"defaultColorId\", selectThemeId);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 346,
+      "line_number": 350,
       "context": "if (!selectThemeId) return;\n \n try {\n await api.settings.sendAppearanceTheme({ selected: selectThemeId });\n await getAppearanceTheme();\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error);\n }\n saveToSessionStorage(\"selectColorId\", selectThemeId);\n saveToSessionStorage(\"defaultColorId\", selectThemeId);",
       "module": "/packages/client"
     },
@@ -179,26 +185,26 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/shared/pages/auto-backup/index.tsx",
-      "line_number": 277,
+      "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
+      "line_number": 276,
       "context": "const handleDeleteSchedule = () => {\n setIsLoadingData(true, () => {\n deleteBackupSchedule(isManagement)\n ?.then(() => {\n deleteSchedule(weekdaysLabelArray);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n })\n .catch((error) => {\n setErrorInformation(error, t);\n toastr.error(error);\n console.error(error);",
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/shared/pages/auto-backup/index.tsx",
-      "line_number": 277,
+      "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
+      "line_number": 276,
       "context": "const handleDeleteSchedule = () => {\n setIsLoadingData(true, () => {\n deleteBackupSchedule(isManagement)\n ?.then(() => {\n deleteSchedule(weekdaysLabelArray);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n })\n .catch((error) => {\n setErrorInformation(error, t);\n toastr.error(error);\n console.error(error);",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/management/src/app/settings/branding/additional-resources/page.client.tsx",
-      "line_number": 88,
+      "line_number": 87,
       "context": "helpCenterEnabled: helpEnabled,\n };\n await setAdditionalResources(updatedData);\n const additional = await getAdditionalResources();\n setAdditionalRes(additional);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error!);\n }\n });\n };",
       "module": "/packages/management"
     },
     {
       "file_path": "/packages/management/src/app/settings/branding/additional-resources/page.client.tsx",
-      "line_number": 88,
+      "line_number": 87,
       "context": "helpCenterEnabled: helpEnabled,\n };\n await setAdditionalResources(updatedData);\n const additional = await getAdditionalResources();\n setAdditionalRes(additional);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error!);\n }\n });\n };",
       "module": "/packages/management"
     },
@@ -210,26 +216,26 @@
     },
     {
       "file_path": "/packages/management/src/app/settings/branding/company-info/page.client.tsx",
-      "line_number": 123,
+      "line_number": 122,
       "context": "phone,\n site,\n hideAbout,\n );\n await getCompanyData();\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error!);\n }\n });\n };",
       "module": "/packages/management"
     },
     {
       "file_path": "/packages/management/src/app/settings/branding/company-info/page.client.tsx",
-      "line_number": 123,
+      "line_number": 122,
       "context": "phone,\n site,\n hideAbout,\n );\n await getCompanyData();\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error!);\n }\n });\n };",
       "module": "/packages/management"
     },
     {
       "file_path": "/packages/management/src/app/settings/branding/white-label/page.client.tsx",
-      "line_number": 111,
-      "context": ")) as TDefaultWhiteLabel;\n \n setLogoUrls(logos);\n setDefaultLogoUrls(cloneDeep(logos));\n setIsDefault(getIsDefaultWhiteLabel(isDefault));\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error!);\n }\n });\n };",
+      "line_number": 108,
+      "context": ")) as TDefaultWhiteLabel;\n \n setLogoUrls(logos);\n setDefaultLogoUrls(cloneDeep(logos));\n setIsDefault(getIsDefaultWhiteLabel(isDef));\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error!);\n }\n });\n };",
       "module": "/packages/management"
     },
     {
       "file_path": "/packages/management/src/app/settings/branding/white-label/page.client.tsx",
-      "line_number": 111,
-      "context": ")) as TDefaultWhiteLabel;\n \n setLogoUrls(logos);\n setDefaultLogoUrls(cloneDeep(logos));\n setIsDefault(getIsDefaultWhiteLabel(isDefault));\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error!);\n }\n });\n };",
+      "line_number": 108,
+      "context": ")) as TDefaultWhiteLabel;\n \n setLogoUrls(logos);\n setDefaultLogoUrls(cloneDeep(logos));\n setIsDefault(getIsDefaultWhiteLabel(isDef));\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error!);\n }\n });\n };",
       "module": "/packages/management"
     }
   ],

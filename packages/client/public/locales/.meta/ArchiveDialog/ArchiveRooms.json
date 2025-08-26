@@ -3,7 +3,7 @@
   "content": "You are about to archive rooms.",
   "content_en_sha1_hash": "7ec21db52915f2cd4ebef07340b69fdb32cf2984",
   "created_at": "2025-05-19T21:30:57.059Z",
-  "updated_at": "2025-05-26T07:57:32.206Z",
+  "updated_at": "2025-08-04T07:30:01.045Z",
   "comment": {
     "text": "The translation key \"ArchiveRooms\" is used to display a message indicating that rooms are about to be archived in a dialog or UI element. This text appears when archiving multiple rooms or a single room and prompts the user to confirm the action. The translator should provide a clear, concise message that accurately reflects the user experience.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ArchiveDialog/index.js",
-      "line_number": 71,
+      "line_number": 81,
       "context": "const getDescription = () => {\n if (restoreAll) return t(\"ArchiveDialog:RestoreAllRooms\");\n \n return items.length > 1\n ? `${t(\"ArchiveDialog:ArchiveRooms\")} ${t(\"Common:WantToContinue\")}`\n : `${t(\"ArchiveDialog:ArchiveRoom\")} ${t(\"Common:WantToContinue\")}`;\n };\n \n const description = getDescription();",
       "module": "/packages/client"
     }
@@ -93,37 +93,19 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'このルームをアーカイブしようとしています。' is a literal translation of 'You are about to archive rooms' and doesn't fully convey the intended meaning. While technically correct, it sounds somewhat unnatural in Japanese. A more natural phrasing would be closer to 'アーカイブを開始します。' or 'アーカイブ処理を開始します。'",
-          "suggestion": "アーカイブを開始します。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"방을 아카이브하려고 합니다\" is a literal translation and may sound unnatural in Korean. While understandable, a more natural phrasing would convey the meaning more effectively.",
-          "suggestion": "Consider a more natural phrasing like \"방들을 보관하려고 합니다.\" (We are going to store the rooms) or \"방들을 기록 보관합니다.\" (We are archiving the rooms) depending on the specific context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ທ່ານກຳລັງຈະຈັດເກັບຫ້ອງ' while containing the correct words, doesn't perfectly capture the nuance of 'archiving rooms'. 'ຈັດເກັບ' can imply storing or organizing, not necessarily permanently archiving. A more accurate translation would emphasize the archival process.",
-          "suggestion": "Consider a translation like 'ທ່ານກຳລັງຈະຖິ້ມຫ້ອງໄວ້ໃນບ່ອນເກັບມ້ຽນ' (You are about to put the rooms in storage) or 'ທ່ານກຳລັງຈະຖິ້ມຫ້ອງໄວ້ໃນຫ້ອງເກັບຖິ້ມ' (You are about to put the rooms in an archive room). This depends heavily on the specific context of 'archiving'. "
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -147,13 +129,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'You are about to archive rooms' implies a single action or a small number of rooms. The Portuguese translation 'Está prestes a arquivar várias salas' uses 'várias' (several/multiple), which changes the meaning. A more accurate translation would be 'Está prestes a arquivar salas' or 'Está prestes a arquivar quartos'.",
-          "suggestion": "Está prestes a arquivar salas"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -177,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"ඔබ කාමර සංරක්‍ෂණයට සැරසෙමින් සිටියි.\" implies 'You are preparing to archive rooms', rather than 'You are about to archive rooms'. While related, the English sentence implies the action is imminent.",
-          "suggestion": "ඔබ කාමර සංරක්‍ෂණය කිරීමට නියමිතව සිටි."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -201,25 +171,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'archive' is best translated as 'архива' (arhiva) in this context, as it refers to the action of archiving something, rather than simply 'archive'. 'архива' is the accusative form needed with the verb 'спремате'.",
-          "suggestion": "Спремате се да архивујете собе."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Spremate se da arhivirate sobe' doesn't accurately convey the meaning of 'You are about to archive rooms.' 'Spremate se' implies 'You are preparing yourself' rather than 'You are about to'.",
-          "suggestion": "You could use 'Pripremaju se sobe za arhivu' (Rooms are being prepared for archiving) or 'Sobe će biti arhivirane' (Rooms will be archived)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -237,13 +195,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Bạn sắp sao lưu các phòng\" uses 'sao lưu' which means 'backup'. The English phrase 'archive rooms' implies moving rooms to a storage or historical record, not necessarily creating a backup. A more accurate translation would convey the concept of archiving, such as moving to a repository or historical record.",
-          "suggestion": "Bạn sắp lưu trữ các phòng."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

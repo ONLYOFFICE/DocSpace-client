@@ -3,7 +3,7 @@
   "content": "Link successfully created and copied to clipboard",
   "content_en_sha1_hash": "e2f282155a04f8b128e934a7c3ee95e5dd9cf092",
   "created_at": "2025-05-19T21:30:55.795Z",
-  "updated_at": "2025-05-26T07:57:32.347Z",
+  "updated_at": "2025-08-04T07:30:01.159Z",
   "comment": {
     "text": "This translation key is used to display a success message when a link is successfully created and copied to the clipboard, typically in response to button clicks or dialog actions. The message informs users that their link has been successfully generated and made available for sharing. It appears in the UI when creating or editing links, such as in edit link panels or info panel dialogs.",
     "is_auto": true,
@@ -12,19 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EditLinkPanel/index.js",
-      "line_number": 174,
+      "line_number": 176,
       "context": "copyShareLink(linkValue);\n // toastr.success(t(\"Files:LinkEditedSuccessfully\"));\n } else {\n copyShareLink(response?.sharedTo?.shareLink);\n \n // toastr.success(t(\"Files:LinkSuccessfullyCreatedAndCopied\"));\n }\n copyRoomShareLink(response, t, false);\n onClose();\n })\n .catch((err) => {",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/index.js",
-      "line_number": 159,
-      "context": "setEditLinkPanelIsVisible(true);\n } else {\n getPrimaryLink(infoPanelSelection.id).then((link) => {\n setExternalLink(link);\n copyShareLink(link.sharedTo.shareLink);\n toastr.success(t(\"Files:LinkSuccessfullyCreatedAndCopied\"));\n \n const filterObj = FilesFilter.getFilter(window.location);\n \n if (isPublicRoomType && !filterObj.key) {\n setRoomShared(currentId, true);",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/index.tsx",
+      "line_number": 139,
+      "context": "const shareLink = typeLink.sharedTo.shareLink;\n \n copyShareLink(shareLink);\n \n toastr.success(t(\"Files:LinkSuccessfullyCreatedAndCopied\"));\n \n const filterObj = FilesFilter.getFilter(window.location);\n \n if (isPublicRoomType && filterObj && !filterObj.key && !isRootFolder) {\n setPublicRoomKey!(typeLink.sharedTo.requestToken);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 586,
+      "line_number": 588,
       "context": "this.getManageLinkOptions(item, true),\n );\n // copyShareLink(primaryLink.sharedTo.shareLink);\n // item.shared\n //   ? toastr.success(t(\"Common:LinkSuccessfullyCopied\"))\n //   : toastr.success(t(\"Files:LinkSuccessfullyCreatedAndCopied\"));\n \n this.publicRoomStore.setExternalLink(primaryLink);\n }\n };",
       "module": "/packages/client"
     }
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'mübadilə buferə' is an awkward translation of 'clipboard'. While technically correct, a more natural and idiomatic Azerbaijani term would be more appropriate.",
-          "suggestion": "Consider using 'keçid lövhəsinə' or 'yayımlama lövhəsinə' instead of 'mübadilə buferə'. For example, 'Link uğurla yaradıldı və keçid lövhəsinə kopyalandı'."
+          "description": "The word 'mübadilə buferə' (exchange buffer) isn't the best translation for 'clipboard'.  'Clipboard' is more accurately translated as 'keçid lövhəsi' or simply 'keçid'.",
+          "suggestion": "Link uğurla yaradıldı və keçid lövhəsinə kopyalandı"
         }
       ],
       "approved_at": null
@@ -84,7 +84,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'correctly' is redundant. 'Se ha creado y copiado' implies successful creation and copying.",
+          "description": "The phrase 'correctly' seems redundant as 'se ha creado' and 'copiado' already imply success. While not strictly incorrect, it's slightly unnatural.",
           "suggestion": "El enlace se ha creado y copiado en el portapapeles"
         }
       ],
@@ -165,7 +165,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Romanian translation uses a hyphenated word 'clipboard' which is not a standard Romanian term. While understood, it's less idiomatic.",
+          "suggestion": "Consider using a more Romanian equivalent like 'aglomează' or rephrasing the sentence to avoid the English term if possible."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -180,13 +186,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"සබැඳිය පසුරුපුවරුවට පිටපත් විය\" doesn't fully capture the meaning of 'Link successfully created and copied to clipboard'. It translates to 'Link copied to clipboard'. It misses the 'created' aspect of the original English sentence.",
-          "suggestion": "Consider a more comprehensive translation that includes the creation of the link, such as \"සබැඳිය සාදා පසුරුපුවරුවට පිටපත් විය\" (Link created and copied to clipboard)."
+          "description": "The translation 'සබැඳිය පසුරුපුවරුවට පිටපත් විය' doesn't fully convey the meaning of 'Link successfully created and copied to clipboard'.  'පිටපත් විය' (copied) is accurate, but 'පසුරුපුවරුවට' (to clipboard) might be too literal and not the natural way to express this in Sinhala. It sounds slightly awkward.",
+          "suggestion": "Consider a more natural phrasing like 'සබැඳිය සාර්ථකව නිර්මාණය වී, ක්ලිප්බෝඩ් වෙත පිටපත් කරන ලදි' (Sabandiya saarthaakava nirmanaaya vey, klippobaad wena pitiyath karaada leni)."
         },
         {
-          "type": "spelling",
-          "description": "While the words used are generally correct, there's a slight potential for improvement in phrasing. The use of \"පිටපත් විය\" (copied) is acceptable, but more natural phrasing might exist depending on the context.",
-          "suggestion": "Further review by a native Sinhala speaker is recommended to ensure the most natural and idiomatic phrasing is used. Alternative phrasing may improve clarity."
+          "type": "formatting",
+          "description": "While not strictly wrong, Sinhala often utilizes a more conversational tone. The current translation sounds slightly formal for a UI message.",
+          "suggestion": "Consider a slightly less formal tone. Further assessment would require more context."
         }
       ],
       "approved_at": null
@@ -209,12 +215,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'created' is translated as 'креиран', which while understandable, isn't the most natural or common translation for 'created' in this context. 'Направљен' would be more accurate.",
-          "suggestion": "Линк успешно направљен и копиран у привремену меморију"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the Serbian translation might benefit from capitalizing the first letter of the sentence for consistency with formal communication.",
+          "description": "The word 'created' is translated as 'креиран', which while understandable, is less common and less natural than using 'направљен' in this context. 'Креиран' is more commonly associated with design or artistic creation.",
           "suggestion": "Линк успешно направљен и копиран у привремену меморију"
         }
       ],
@@ -226,8 +227,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'privremena memorija' (temporary memory) is a literal translation of 'clipboard'. In Serbian, 'clipbord' is often used directly or a more natural phrase like 'na isečnu tablu' would be preferred.",
-          "suggestion": "Link uspešno kreiran i kopiran na isečnu tablu"
+          "description": "The term 'privremena memorija' literally translates to 'temporary memory,' which is a less common and slightly awkward way to say 'clipboard' in this context. A more natural translation would be 'sistemski isečak' or 'clipbord'.",
+          "suggestion": "Link uspešno kreiran i kopiran u sistemski isečak"
         }
       ],
       "approved_at": null
@@ -241,7 +242,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"буфера обміну\" is a less common and slightly awkward phrasing. A more natural and common translation for 'clipboard' would be \"клипарту\".",
+          "suggestion": "Посилання успішно створено та скопійовано до кліпарту"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -250,13 +257,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Đã tạo và sao chép liên kết thành công vào bộ nhớ tạm' doesn't perfectly capture the meaning of 'Link successfully created and copied to clipboard'.  'Bộ nhớ tạm' literally means 'temporary memory', which is a more technical term for clipboard. A more natural translation for 'clipboard' would be 'khay nhớ tạm' or simply 'khay'.",
-          "suggestion": "Đã tạo và sao chép liên kết thành công vào khay nhớ tạm"
+          "description": "The term 'link' is not accurately translated. 'Liên kết' implies a connection or relationship, not a direct URL or hyperlink. While it's understandable in context, a more precise translation would be 'đường dẫn' (URL) or 'liên kết trực tiếp' (direct link).",
+          "suggestion": "Đã tạo và sao chép đường dẫn thành công vào bộ nhớ tạm"
         },
         {
-          "type": "formatting",
-          "description": "While not strictly incorrect, using 'khay' instead of 'khay nhớ tạm' could be more concise and natural in this context. The current translation is a bit verbose.",
-          "suggestion": "Đã tạo và sao chép liên kết thành công vào khay"
+          "type": "grammar",
+          "description": "While understandable, the sentence structure could be improved for better flow in Vietnamese. The phrasing 'Đã tạo và sao chép...' sounds slightly awkward.",
+          "suggestion": "Đã tạo và sao chép đường dẫn thành công vào bộ nhớ tạm."
         }
       ],
       "approved_at": null

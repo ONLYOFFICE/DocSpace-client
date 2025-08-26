@@ -74,6 +74,7 @@ const CategoryFilterDesktop = ({
         isDisabled={false}
         showDisabledItems
         options={[]}
+        scaledOptions
         directionX="right"
         directionY="both"
         scaled
@@ -86,6 +87,7 @@ const CategoryFilterDesktop = ({
         fixedDirection
         disableItemClickFirstLevel
         advancedOptionsCount={5}
+        dataTestId="form_gallery_category_combobox"
         selectedOption={{
           label:
             getCategoryTitle(currentCategory) || t("FormGallery:Categories"),
@@ -106,6 +108,7 @@ const CategoryFilterDesktop = ({
               <Styled.CategoryFilterItem
                 id={item.key}
                 key={item.key}
+                testId={`category_filter_${item.key}`}
                 title={item.label}
                 className={`item-by-${item.key} item-by-first-level`}
                 label={item.label}

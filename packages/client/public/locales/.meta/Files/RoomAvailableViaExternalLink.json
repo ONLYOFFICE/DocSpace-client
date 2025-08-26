@@ -3,7 +3,7 @@
   "content": "Room available via external link",
   "content_en_sha1_hash": "5eafad26a9c596d53f01c8dbd5b7dfa038263586",
   "created_at": "2025-05-19T21:30:56.072Z",
-  "updated_at": "2025-05-26T07:57:32.440Z",
+  "updated_at": "2025-08-11T09:02:43.922Z",
   "comment": {
     "text": "The translation key \"RoomAvailableViaExternalLink\" is used to display the text \"Room available via external link\" in UI elements that indicate a room can be accessed through an external link. This text appears on buttons or dialogs related to public rooms, guiding users to find or access the room.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/index.js",
-      "line_number": 329,
-      "context": "<StyledPublicRoomBarContainer>\n <PublicRoomBar\n headerText={\n isFormRoom\n ? t(\"Files:RoomAvailableViaSharedLink\")\n : t(\"Files:RoomAvailableViaExternalLink\")\n }\n bodyText={\n isFormRoom\n ? t(\"CreateEditRoomDialog:FormRoomBarDescription\")\n : t(\"CreateEditRoomDialog:PublicRoomBarDescription\")",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/index.tsx",
+      "line_number": 369,
+      "context": ">\n <PublicRoomBar\n headerText={\n isFormRoom\n ? t(\"Files:RoomAvailableViaSharedLink\")\n : t(\"Files:RoomAvailableViaExternalLink\")\n }\n bodyText={\n isFormRoom\n ? t(\"CreateEditRoomDialog:FormRoomBarDescription\")\n : t(\"CreateEditRoomDialog:PublicRoomBarDescription\")",
       "module": "/packages/client"
     }
   ],
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Otaq xarici keçid ilə istifadə edilə bilər' is a literal translation that doesn't quite convey the intended meaning. 'Room available via external link' implies a room can be accessed or booked through a link. The current translation suggests the room *itself* is being used *with* an external link, which is not the intended meaning.",
-          "suggestion": "Consider 'Otaq xarici keçid vasitəsilə mövcuddur' or 'Otaq xarici keçidlə əldə edilə bilər'."
+          "description": "The translation 'Otaq xarici keçid ilə istifadə edilə bilər' is a literal translation that doesn't fully capture the meaning of 'Room available via external link'. It implies the room *can* be used via an external link, not that it *is* accessible that way.",
+          "suggestion": "Consider a phrasing like 'Otaq xarici linklə əldə edilə bilər' or 'Otaq xarici link vasitəsilə mövcuddur' which better conveys the meaning of availability through a link."
         }
       ],
       "approved_at": null
@@ -47,8 +47,8 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'Стаята е достъп а чрез външен линк' is grammatically incorrect and doesn't accurately convey the meaning of 'Room available via external link'. The word 'достъп' should be conjugated and placed correctly.",
+          "type": "spelling",
+          "description": "The word 'достъп' is misspelled. It should be 'достъпна'.",
           "suggestion": "Стаята е достъпна чрез външен линк"
         }
       ],
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Այստեղ դեռ ֆայլեր և թղթապանակներ չկան\" translates to \"There are no files and folders here yet.\" This does not accurately reflect the English meaning of \"Room available via external link\".",
-          "suggestion": "A more accurate translation would be something like \"Դրանք գտնվում են այնպես, ինչպես վավերագրի այնպիսի ազդանշանը ցույց է տալիս\" (This means: \"They are located as indicated by the document's signal\") or \"Համաձայնման համար կտտացրեք այստեղ\" (Click here for confirmation)."
+          "description": "The Armenian translation \"Այստեղ դեռ ֆայլեր և թղթապանակներ չկան\" translates to \"There are no files and folders here yet.\" This does not accurately reflect the meaning of the English content \"Room available via external link.\"",
+          "suggestion": "A more accurate translation would be something like \"Քյուրմ հասանելի է արտաքին հղմամբ\" or \"Սենյակը հասանելի է արտաքին հղմամբ\"."
         }
       ],
       "approved_at": null
@@ -114,13 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '外部リンクから利用可能なルーム' is technically correct but could be more natural. '利用可能な' (riyō kanō na) is a bit formal and less common in this context. It directly translates to 'available for use'.",
-          "suggestion": "ルームは外部リンク経由で利用できます (Rūmu wa furinkuro ryū no yude riyō dekimasu)"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, '外部リンク' (furinkuro) is a direct transliteration of 'external link'.  A more natural phrasing could avoid this direct transliteration.",
-          "suggestion": "外部のリンクから利用可能なルーム (Gaibu no ringu kara riyō kanō na rūmu)"
+          "description": "The translation '外部リンクから利用可能なルーム' while technically accurate, sounds somewhat unnatural in Japanese. A more natural phrasing would emphasize access rather than mere availability.",
+          "suggestion": "ルームは外部リンクからアクセス可能です (Rūmu wa buru rin'ku kara akusesu kanō desu) - Room is accessible via external link."
         }
       ],
       "approved_at": null
@@ -131,8 +126,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"외부 링크를 통해 이용 가능한 방\" is a literal translation that sounds slightly unnatural in Korean. A more natural phrasing would convey the same meaning in a more idiomatic way.",
-          "suggestion": "Consider alternatives like \"외부 링크를 통해 예약 가능한 방\" (Room available for reservation via external link) or \"외부 링크로 이용 가능한 방\" (Room available via external link - slightly more concise)."
+          "description": "The translation '외부 링크를 통해 이용 가능한 방' is technically correct but somewhat stiff and formal. A more natural Korean phrasing would be preferable.",
+          "suggestion": "외부 링크로 예약 가능한 방 (External link for reservation)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word '이용 가능한' (available for use) is a bit verbose. It can be simplified to indicate availability.",
+          "suggestion": "외부 링크를 통해 예약 가능한 방"
         }
       ],
       "approved_at": null
@@ -140,7 +140,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ພາຍນອກ' is a correct spelling but might be unnecessarily formal for this context. A more common and potentially clearer phrasing could be considered.",
+          "suggestion": "Consider 'ຫ້ອງຫວ່າງຜ່ານລິ້ງຄ໌ຕ່າງປະເທດ' for potentially better readability. While not strictly incorrect, 'ພາຍນອກ' can feel stiff."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -149,8 +155,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Numurs ir pieejams, izmantojot ārējo saiti' is a literal translation and doesn't quite capture the intended meaning of 'Room available via external link'.  'Numurs' means 'number', while 'Room' refers to a physical space. It sounds awkward and potentially confusing to a Latvian speaker. A better translation would focus on 'telpa' (room/space).",
-          "suggestion": "Telpa ir pieejama, izmantojot ārējo saiti"
+          "description": "The translation \"Numurs ir pieejams, izmantojot ārējo saiti\" is a literal translation and not the most natural way to express 'Room available via external link' in Latvian.  'Numurs' means 'number', but in this context, 'Room' implies a space, not a number.  A more accurate translation would convey the meaning of a room being accessible through a link.",
+          "suggestion": "Telpa pieejama, izmantojot ārējo saiti"
         }
       ],
       "approved_at": null
@@ -185,8 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Sala este disponibilă pe link extern' is not the most natural Romanian phrasing for 'Room available via external link'. While technically correct, it sounds a bit clunky.",
-          "suggestion": "A more natural translation would be 'Camera este accesibilă prin link extern' or 'Camera disponibilă prin link extern'."
+          "description": "The translation \"Sala este disponibilă pe link extern\" is not the most natural or accurate translation of \"Room available via external link.\" While technically correct, it sounds somewhat awkward in Romanian. A better translation would emphasize the accessibility or access to the room.",
+          "suggestion": "Sala este accesibilă prin link extern"
         }
       ],
       "approved_at": null
@@ -203,8 +209,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"බාහිර සබැඳියකින් කාමරයට ප්‍රවේශ විය හැකිය\" is a bit literal and could be improved for naturalness. While technically correct, it's not how a Sinhala speaker would typically express this concept.",
-          "suggestion": "Consider a more natural phrasing like \"බාහිර සබැඳිය ඔස්සේ කාමරයට පිවිසිය හැකිය\" or \"බාහිර සබැඳියෙන් කාමරයට යා හැකිය\"."
+          "description": "The translation 'බාහිර සබැඳියකින් කාමරයට ප්‍රවේශ විය හැකිය' (bahira sabandiyakin kamarayata pravesa viyaa kahadeniya) is a literal translation and doesn't flow naturally in Sinhala. It means 'Can access the room via an external link'. A more natural phrasing would convey that the room *is* accessible via the link.",
+          "suggestion": "බාහිර සබැඳියකින් කාමරය ලබා ගත හැකිය (bahira sabandiyakin kamaraya lavaa gatathaa kahadanya) - 'Room can be obtained via external link' or කාමරය බාහිර සබැඳියෙන් ලබාගත හැකිය (kamaraaya bahira sabandiyena lavaa gatathaa kahadanya) - 'The room can be obtained through an external link'."
         }
       ],
       "approved_at": null
@@ -227,13 +233,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Соба доступна путем спољног линка\" does not accurately convey the meaning of \"Room available via external link.\" \"Соба\" means \"room\" but the wording implies a general space rather than a specific room. \"доступна\" should be modified for accuracy. \"путем спољног линка\" is a literal translation, but could be improved for naturalness.",
-          "suggestion": "Соба је доступна преко спољашње везе"
+          "description": "The Serbian translation \"Соба доступна путем спољног линка\" translates to \"Room available via external link\" but the word 'soba' means 'room' and 'soba' is not the correct term for 'room' in this context (likely referring to a meeting room or conference room). It should be something more specific.",
+          "suggestion": "Consider using a more specific term for 'room', such as 'Сала доступна путем спољног линка' (Sala dostupna putem spoljnog linka) which translates to 'Hall available via external link' or another relevant term depending on the context.  'Просторија доступна путем спољног линка' (Prostorija dostupna putem spoljnog linka) – 'Room/Space available via external link' could be more suitable."
         },
         {
           "type": "spelling",
-          "description": "The Serbian word 'линка' should be 'линка'.",
-          "suggestion": "линка"
+          "description": "The word 'линка' (linka) appears to be a misspelling of 'линка' (linka).",
+          "suggestion": "Correct 'линка' to 'линка'."
         }
       ],
       "approved_at": null
@@ -250,8 +256,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Oda harici bağlantıyla kullanılabilir' doesn't fully capture the meaning of 'Room available via external link'. While 'harici bağlantıyla' correctly translates 'via external link,' 'kullanılabilir' (usable/available) doesn't convey the sense of 'being accessible' or 'being provided' through the link. A better translation would emphasize accessibility.",
-          "suggestion": "Oda harici bağlantıyla erişilebilir"
+          "description": "The translation 'Oda harici bağlantıyla kullanılabilir' is not the most natural or accurate translation of 'Room available via external link'. 'Harici bağlantıyla' is too literal and sounds awkward. A more idiomatic translation would be something like 'Odaya harici bağlantıdan erişilebilir' or 'Odaya dış bağlantı ile ulaşılabilir'.",
+          "suggestion": "Odaya harici bağlantıdan erişilebilir"
         }
       ],
       "approved_at": null
@@ -274,8 +280,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '可通过外部链接访问的房间' while technically correct, is a bit verbose and formal for the concise English phrase 'Room available via external link'. A more natural and direct translation might be better.",
-          "suggestion": "房间可通过外部链接访问"
+          "description": "The translation '可通过外部链接访问的房间' is a bit literal and can be improved for a more natural flow in Chinese. While technically correct, it sounds somewhat clunky.",
+          "suggestion": "考虑使用更自然的表达方式，例如 '房间可通过外部链接查看' 或 '可通过外部链接访问房间信息'"
         }
       ],
       "approved_at": null

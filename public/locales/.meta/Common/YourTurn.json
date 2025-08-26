@@ -3,7 +3,7 @@
   "content": "Your turn",
   "content_en_sha1_hash": "8a4e60471b34b8af985c6dd2d93792af71788f57",
   "created_at": "2025-05-19T21:30:49.657Z",
-  "updated_at": "2025-06-08T12:02:32.931Z",
+  "updated_at": "2025-08-21T11:22:39.967Z",
   "comment": {
     "text": "\"This translation key displays the message 'Your turn' to indicate whose action is being requested or awaited. It is used in UI elements where a user's input or submission is required.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 270,
+      "line_number": 271,
       "context": ") => {\n switch (status) {\n case FileFillingFormStatus.Draft:\n return t(\"Common:BadgeMyDraftTitle\");\n case FileFillingFormStatus.YourTurn:\n return t(\"Common:YourTurn\");\n case FileFillingFormStatus.InProgress:\n return t(\"Common:InProgress\");\n case FileFillingFormStatus.Stopped:\n return t(\"Common:Stopped\");\n case FileFillingFormStatus.Completed:",
       "module": "/packages/shared"
     }
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation '고객님의 차례입니다' translates to 'It's your turn, customer'. While technically correct, it's overly formal and includes 'customer'.  'Your turn' is a more casual and direct phrase.",
-          "suggestion": "Consider a more natural and less formal Korean phrase like '번갈아 가며 진행하세요' (Rotate and proceed) or '다음 차례입니다' (It's the next turn)."
+          "description": "The Korean translation '고객님의 차례입니다' translates to 'It's the customer's turn.' While technically correct, it's a more formal and verbose translation of 'Your turn'. A more natural and conversational translation would be better.",
+          "suggestion": "차례입니다"
         }
       ],
       "approved_at": null
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເປັນຂອງເຈົ້າແລ້ວ\" literally translates to \"it's yours now\" or \"it belongs to you now.\" While it can be used in a conversational context to imply 'your turn,' it's not a direct or common translation of \"Your turn.\" It lacks the sense of sequence or a prompt to take action.",
-          "suggestion": "A more accurate translation of \"Your turn\" would be something like \"ຖ້າເຈົ້າເຮັດແລ້ວ\" (if you're ready) or \"ເຈົ້າເຮັດຕໍ່ໄປ\" (you go next)."
+          "description": "The Lao translation \"ເປັນຂອງເຈົ້າແລ້ວ\" (pen khong chao laeo) literally translates to 'it's yours now' or 'it belongs to you now'. While it *could* be used in some contexts to mean 'your turn', it's not the most accurate or common way to express 'Your turn'. A more direct and common translation would be something like 'ຖ້າຂອງເຈົ້າ' (tha khong chao).",
+          "suggestion": "Consider using 'ຖ້າຂອງເຈົ້າ' (tha khong chao) or a similar phrasing that directly conveys 'your turn'."
         }
       ],
       "approved_at": null
@@ -210,7 +210,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Phiên của bạn\" doesn't accurately convey the meaning of \"Your turn.\" \"Phiên của bạn\" translates to \"Your session\" or \"Your round\" and isn't the common phrase used to indicate someone's turn.",
+          "description": "The translation 'Phiên của bạn' doesn't accurately convey the meaning of 'Your turn'. 'Phiên' refers to a session or phase, not a turn in a game or conversation.",
           "suggestion": "Lượt của bạn"
         }
       ],

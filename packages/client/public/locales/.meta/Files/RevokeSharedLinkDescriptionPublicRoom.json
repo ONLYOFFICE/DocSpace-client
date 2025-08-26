@@ -3,7 +3,7 @@
   "content": "Links to all files in the room will be re-generated. Previous links to room files and embedded documents will become unavailable.",
   "content_en_sha1_hash": "1ab94d3634f74dbf40fd8f7f1f697c4325fd6c13",
   "created_at": "2025-05-19T21:30:56.068Z",
-  "updated_at": "2025-05-26T07:57:32.295Z",
+  "updated_at": "2025-08-04T07:30:01.098Z",
   "comment": {
     "text": "RevokeSharedLinkDescriptionPublicRoom is used to display a message when a user attempts to revoke links to room files and embedded documents in a public room. This text appears in a dialog, specifically when deleting shared links in the Files component of a client package. It informs users that previous links will be regenerated but become unavailable.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteLinkDialog/index.js",
-      "line_number": 124,
+      "line_number": 143,
       "context": "if (isCustomRoom) return t(\"Files:RevokeSharedLinkDescriptionCustomRoom\");\n \n if (isFormRoom) return t(\"Files:RevokeSharedLinkDescriptionFormRoom\");\n \n if (isPublicRoomType)\n return t(\"Files:RevokeSharedLinkDescriptionPublicRoom\");\n }\n \n if (isPublicRoomType || isCustomRoom)\n return t(\"Files:DeleteSharedCustomPublic\");",
       "module": "/packages/client"
     }
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"المستندات المضمنة\" (embedded documents) feels slightly awkward and less natural in this context. A more natural phrasing might emphasize that links to *embedded content* will also be revoked.",
+          "suggestion": "سيتم إعادة إنشاء الروابط إلى جميع الملفات في الغرفة. وستصبح الروابط السابقة إلى ملفات الغرفة والمحتوى المضمن بها غير متاحة."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -36,13 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"embedded documents\" is not accurately translated. \"Əlavə olunmuş sənədlər\" literally means 'added documents' which is not quite the same as 'embedded documents'.",
-          "suggestion": "Consider using a more precise translation for 'embedded documents,' such as \"daxil edilmiş sənədlər\" or \"gömülü sənədlər\"."
+          "description": "The term \"embedded documents\" is not accurately translated. \"Əlavə olunmuş sənədlərə\" literally translates to 'added documents' which doesn't convey the meaning of 'embedded'.",
+          "suggestion": "Otaq faylları və daxil edilmiş sənədlərə əvvəlki keçidlər əlçatan olmayacaq."
         },
         {
           "type": "formatting",
-          "description": "The sentence structure could be improved for better flow in Azerbaijani. While technically correct, it sounds slightly awkward.",
-          "suggestion": "Consider rephrasing the second sentence to something like: \"Otaq faylları və daxil edilmiş sənədlərə olan əvvəlki keçidlər işləməyəcəkdir.\""
+          "description": "While grammatically correct, the phrasing 'Otaq faylları və əlavə olunmuş sənədlərə əvvəlki keçidlər əlçatan olmayacaq' could be improved for fluency in Azerbaijani. It's a bit clunky.",
+          "suggestion": "Otaq faylları və daxil edilmiş sənədlərə olan əvvəlki keçidlər əlçatan olmayacaq."
         }
       ],
       "approved_at": null
@@ -53,13 +59,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'room files' is ambiguous and could be misinterpreted. It's unclear if it refers to files *of* the room or files within the room. A more accurate translation would clarify the meaning.",
-          "suggestion": "Линковете към файловете в стаята (or 'файловете на стаята') ще станат недостъпни."
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'файлове на стаи' is grammatically incorrect. 'Стаи' is plural and doesn't align with the singular 'файлове'.",
-          "suggestion": "файлове на стаята"
+          "description": "The phrase 'room files' is not accurately translated. 'Room files' refers to files *within* the room, not files *of* rooms.",
+          "suggestion": "Линковете към всички файлове в стаята ще бъдат генерирани отново. Предишните линкове към файловете в стаята и вградени документи ще станат недостъпни."
         }
       ],
       "approved_at": null
@@ -94,12 +95,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'lomakkeisiin' (forms) doesn't accurately reflect 'files'. The original English refers to files in general, not specifically forms.",
+          "description": "The term 'lomakkeisiin' (forms) doesn't accurately reflect 'files'. The English text refers to files in general, not specifically forms.",
           "suggestion": "Linkit kaikkiin huoneen tiedostoihin luodaan uudelleen."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'poistuvat käytöstä' (become unavailable) is a bit awkward. While technically correct, a more natural phrasing would improve clarity.",
+          "description": "The phrase 'poistuvat käytöstä' (become unavailable) is a bit clunky. A more natural phrasing would improve readability.",
           "suggestion": "Aiemmat linkit ja upotetut asiakirjat eivät enää toimi."
         }
       ],
@@ -117,8 +118,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"embedded documents\" is not accurately translated. \"Ներկառուցված փաստաթղթերի\" literally translates to \"built-in documents\" which isn't the intended meaning. It should convey the meaning of documents linked or included within the room, but not physically built into the system.",
-          "suggestion": "Consider a more descriptive translation like: «սենյակի ֆայլերի և կից փաստաթղթերի» (room files and attached documents) or «սենյակի ֆայլերի և կից տեղադրված փաստաթղթերի» (room files and attached/placed documents)."
+          "description": "The phrase \"embedded documents\" is translated as \"ներկառուցված փաստաթղթերի\". While technically correct, a more natural and common phrasing in Armenian would be \"մուշտացված փաստաթղթերի\" or \"ներդրված փաստաթղթերի\". \"Ներկառուցված\" is more commonly used for built-in functionality.",
+          "suggestion": "Մուշտացված փաստաթղթերի"
         }
       ],
       "approved_at": null
@@ -138,13 +139,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"임베드된 문서\" is a direct transliteration of \"embedded documents\" and might not be the most natural or easily understood term for a Korean audience. A more idiomatic translation might be preferred.",
-          "suggestion": "룸 파일과 포함된 문서"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -153,18 +148,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Links to all files\" is not accurately reflected. The Lao translation uses \"ລິ້ງໄປສູ່ເອກະສານທັງໝົດ\" which translates to 'Links to all documents'. While close, it's more precise to convey 'links to all files' directly.",
-          "suggestion": "ລິ້ງໄປສູ່ໄຟລ໌ທັງໝົດ"
+          "description": "The phrase \"Links to all files\" is somewhat awkwardly translated. A more natural phrasing might be \"ລິ້ງເອກະສານທັງໝົດ\" or \"ລິ້ງເອກະສານທັງໝົດທີ່ຢູ່ໃນຫ້ອງ\". The current translation reads a little clunky.",
+          "suggestion": "ລິ້ງເອກະສານທັງໝົດທີ່ຢູ່ໃນຫ້ອງຈະຖືກສ້າງໃໝ່ອີກຄັ້ງ."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Previous links...' is less natural. The Lao translation \"ລິ້ງທີ່ເຄີຍໃຊ້ໄດ້\" is literally 'links that were usable'.",
-          "suggestion": "ລິ້ງທີ່ເຄີຍມີຢູ່"
-        },
-        {
-          "type": "formatting",
-          "description": "The sentence structure could be improved for better readability in Lao. The current phrasing is slightly awkward.",
-          "suggestion": "ລິ້ງໄປສູ່ໄຟລ໌ທັງໝົດໃນຫ້ອງຈະຖືກສ້າງໃໝ່ອີກຄັ້ງ. ໄຟລ໌ ແລະເອກະສານທີ່ຝັງໄວ້ທີ່ເຄີຍມີລິ້ງຢູ່ຈະບໍ່ສາມາດໃຊ້ໄດ້ອີກ."
+          "description": "The phrase \"Previous links... will become unavailable\" could be more clearly translated.  The current phrasing 'ລິ້ງທີ່ເຄີຍໃຊ້ໄດ້...ຈະບໍ່ສາມາດໃຊ້ໄດ້ອີກ' isn't as direct.  Consider a more active voice.",
+          "suggestion": "ລິ້ງທີ່ເຄີຍມີຢູ່ກ່ອນໜ້າຈະບໍ່ສາມາດໃຊ້ງານໄດ້ອີກ."
         }
       ],
       "approved_at": null
@@ -204,14 +194,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The phrase 'for deveni' is grammatically incorrect. It appears to be a combination of words and needs restructuring.",
-          "suggestion": "vor deveni"
+          "type": "spelling",
+          "description": "The word 'fișerele' is misspelled. It should be 'fișierele'.",
+          "suggestion": "fișierele"
         },
         {
-          "type": "spelling",
-          "description": "The word 'fișerele' should be 'fișierele'.",
-          "suggestion": "fișierele"
+          "type": "grammar",
+          "description": "The phrase 'for deveni' is grammatically incorrect. It should be 'vor deveni'.",
+          "suggestion": "vor deveni"
         }
       ],
       "approved_at": null
@@ -228,18 +218,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"will become unavailable\" is not the best translation for 'become unavailable'. A more natural Sinhala translation would convey the idea of being invalidated or deactivated.",
-          "suggestion": "කාමරයේ ගොනු සහ අන්තර්ගත ලේඛන සඳහා පෙර තිබූ සම්බන්ධතා වලංගු නොවන."
-        },
-        {
-          "type": "spelling",
-          "description": "There's a potential spelling mistake in 'අ වලංගු නොවනු ඇත'. It seems like a combination of two words, resulting in an awkward phrasing.",
-          "suggestion": "අවලංගු නොවන"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'සියලු ගොනු සඳහා වූ සම්බන්ධතා' could be improved for clarity and natural flow. It's a bit literal and not the most common phrasing in Sinhala.",
-          "suggestion": "කාමරයේ සියලු ගොනු සඳහා වූ සබැඳි"
+          "description": "The phrase \"අ වලංගු නොවනු ඇත\" translates to 'will not become invalid' instead of 'will become unavailable'. This contradicts the original English meaning.",
+          "suggestion": "කාමරයේ ගොනු සහ අන්තර්ගත ලේඛන සඳහා පෙර තිබූ සම්බන්ධතා වලංගු නොවනු ඇත."
         }
       ],
       "approved_at": null
@@ -247,7 +227,18 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Links to all files...' is a bit clunky in Slovak. While technically correct, it's not the most natural phrasing.  'Odkazy na všetky súbory...' is accurate but could be improved for flow.",
+          "suggestion": "Všetky odkazy na súbory v miestnosti budú vygenerované nanovo."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'embedded' could be better translated.  'Vložené' is okay, but 'pripojené' or 'integrované' might be more accurate depending on the specific context of 'embedded documents'.",
+          "suggestion": "Všetky odkazy na súbory v miestnosti budú vygenerované nanovo. Predchádzajúce odkazy na súbory v miestnosti a pripojené dokumenty sa stanú nedostupnými."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -267,14 +258,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Serbian translation uses a passive voice (“postaće nedostupni”) which is less direct than the English. Consider a more active phrasing.",
-          "suggestion": "Linkovi do fajlova u sobi i ugrađenih dokumenata biće onemogućeni."
+          "type": "incorrect_translation",
+          "description": "The phrase \"Links to all files\" is slightly awkward in Serbian. While technically correct, \"Linkovi do svih fajlova\" sounds less natural.  A more fluid translation might consider rewording.",
+          "suggestion": "Linkovi do svih datoteka u sobi"
         },
         {
           "type": "incorrect_translation",
-          "description": "While 'ugrađenih dokumenata' is technically correct, 'priloženih dokumenata' might be a more natural and commonly used term in this context (referring to attached or linked documents).",
-          "suggestion": "Linkovi do fajlova u sobi i prilozhenih dokumenata postaće nedostupni."
+          "description": "The phrase 'become unavailable' is translated as 'postaće nedostupni', which is grammatically correct but sounds slightly formal. A more conversational and natural phrasing could improve readability.",
+          "suggestion": "neće više biti dostupni"
         }
       ],
       "approved_at": null
@@ -282,25 +273,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"will become unavailable\" could be improved for naturalness in Turkish. While technically correct, it sounds slightly stiff.",
-          "suggestion": "Oda dosyalarına ve gömülü belgelere yönelik önceki bağlantılar geçersiz kılınacaktır."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The phrase 'в цій кімнаті' (in this room) is slightly awkward in this context. Using 'кімнати' (of the room) sounds more natural and concise.",
-          "suggestion": "Посилання на всі файли в кімнати буде створено повторно."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -309,13 +288,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"room files\" is awkward. It should be more specific about what 'files' refers to.",
-          "suggestion": "Liên kết trước đó đến các tập tin trong phòng và tài liệu nhúng sẽ không khả dụng."
+          "description": "The phrase \"room files\" is a bit awkward. It's better to clarify what kind of files are being referred to.  'Files in the room' is more natural.",
+          "suggestion": "Liên kết đến tất cả các tập tin trong phòng sẽ được tạo lại. Các liên kết trước đó đến các tập tin trong phòng và tài liệu nhúng sẽ không khả dụng."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'khả dụng' (available) isn't the best fit. 'Hợp lệ' (valid) or 'hoạt động' (functional) would be more accurate in this context.",
-          "suggestion": "Liên kết trước đó đến các tập tin trong phòng và tài liệu nhúng sẽ không còn hiệu lực."
+          "description": "The translation of \"embedded documents\" as \"tài liệu nhúng\" is technically correct, but can be improved to 'tài liệu đính kèm' to sound more natural in this context. \"Nhúng\" is more fitting for embedded code or data, not necessarily documents.",
+          "suggestion": "Liên kết đến tất cả các tập tin trong phòng sẽ được tạo lại. Các liên kết trước đó đến các tập tin trong phòng và tài liệu đính kèm sẽ không khả dụng."
         }
       ],
       "approved_at": null
@@ -326,8 +305,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"embedded documents\" is not accurately conveyed by \"嵌入式文档\". A more accurate translation might be \"嵌入文件\" or \"嵌入的文档\". While \"嵌入式文档\" isn't *wrong*, it's less natural and slightly technical.",
-          "suggestion": "房间内所有文件的链接将重新生成。之前的房间文件和嵌入文件/嵌入的文档的链接将失效。"
+          "description": "The phrase \"embedded documents\" is not accurately translated. \"嵌入式文档\" literally means 'embedded documents' but the meaning might be unclear to the user. A more natural translation would convey the idea that links to documents *included* in the room will be invalid.",
+          "suggestion": "房间内所有文件的链接将重新生成。之前的房间文件和包含在其中的文档的链接将失效。"
         }
       ],
       "approved_at": null

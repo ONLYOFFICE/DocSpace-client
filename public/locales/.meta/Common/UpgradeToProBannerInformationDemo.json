@@ -3,7 +3,7 @@
   "content": "Request demonstration <1>here</1>",
   "content_en_sha1_hash": "5a17e37a14adcdf587aa798979c9909eed1f5cd0",
   "created_at": "2025-05-26T07:15:49.130Z",
-  "updated_at": "2025-05-26T08:02:40.158Z",
+  "updated_at": "2025-08-11T18:11:59.375Z",
   "comment": {
     "text": "This translation key is used to display a button or link that requests a demonstration, likely in a user interface related to upgrading to a premium plan. It appears as \"Request demonstration\" and is translated from \"UpgradeToProBannerInformationDemo\".",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/shared/pages/Payments/Bonus/ContactContainer.tsx",
-      "line_number": 74,
-      "context": "</Text>\n </div>\n <div className=\"payments_contact\">\n <Text className=\"text\" fontWeight={600}>\n <Trans\n i18nKey=\"UpgradeToProBannerInformationDemo\"\n ns=\"Common\"\n t={t}\n >\n Request demonstration\n <Link",
+      "file_path": "/packages/shared/pages/Payments/Bonus/sub-components/ContactContainer.tsx",
+      "line_number": 79,
+      "context": "</Text>\n </div>\n <div className={styles.paymentsContact}>\n <Text className={styles.text} fontWeight={600}>\n <Trans\n i18nKey=\"UpgradeToProBannerInformationDemo\"\n ns=\"Common\"\n t={t}\n >\n Request demonstration\n <Link",
       "module": "/packages/shared"
     }
   ],

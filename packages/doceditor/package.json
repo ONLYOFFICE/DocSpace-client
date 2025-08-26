@@ -1,12 +1,12 @@
 {
   "name": "@docspace/doceditor",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "private": true,
   "scripts": {
     "build:translations": "node ./scripts/buildTranslations.js",
     "build": "next build",
     "build:deploy": "cross-env DEPLOY=true next build",
-    "start": "cross-env NODE_ENV=development PORT=5013 next dev",
+    "start": "cross-env NODE_ENV=development PORT=5013 node server.js",
     "start-prod": "cross-env NODE_ENV=production node server.js",
     "lint": "eslint ./src --max-warnings=0",
     "lint:fix": "eslint ./src --fix",
@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@docspace/shared": "workspace:*",
-    "@onlyoffice/document-editor-react": "file:./onlyoffice-document-editor-react-1.6.2.tgz",
+    "@onlyoffice/document-editor-react": "file:./onlyoffice-document-editor-react-2.1.1.tgz",
     "classnames": "2.5.1",
     "crypto-js": "4.2.0",
     "date-and-time": "3.6.0",

@@ -29,9 +29,12 @@ import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { GreetingContainer } from "@/components/GreetingContainer";
 import { getCompanyInfoSettings, getSettings } from "@/utils/actions";
 
+import { logger } from "logger.mjs";
 import RemovePortalForm from "./page.client";
 
 async function Page() {
+  logger.info("PortalRemove page");
+
   const [settings, companyInfoSettings] = await Promise.all([
     getSettings(),
     getCompanyInfoSettings(),
@@ -42,7 +45,7 @@ async function Page() {
       <GreetingContainer greetingText={settings?.greetingSettings} />
       <FormWrapper id="remove-portal-form">
         <RemovePortalForm
-          onlyofficeUrl={settings?.externalResources.site.domain}
+          onlyofficeUrl={settings?.externalResources?.site?.domain}
           siteUrl={companyInfoSettings?.site}
         />
       </FormWrapper>

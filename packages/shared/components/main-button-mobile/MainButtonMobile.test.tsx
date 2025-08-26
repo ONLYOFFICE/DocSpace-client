@@ -25,13 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen, fireEvent } from "@testing-library/react";
+import { screen, fireEvent, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { MainButtonMobile } from ".";
 import { ButtonOption } from "./MainButtonMobile.types";
-
-import { renderWithTheme } from "../../utils/render-with-theme";
 
 jest.mock("PUBLIC_DIR/images/button.alert.react.svg", () => ({
   __esModule: true,
@@ -59,31 +57,21 @@ describe("<MainButtonMobile />", () => {
   });
 
   it("renders without error", () => {
-    renderWithTheme(<MainButtonMobile />);
+    render(<MainButtonMobile />);
     expect(screen.getByTestId("main-button-mobile")).toBeInTheDocument();
   });
 
   it("renders with button options", () => {
-    renderWithTheme(<MainButtonMobile buttonOptions={buttonOptions} opened />);
+    render(<MainButtonMobile buttonOptions={buttonOptions} opened />);
     expect(screen.getByTestId("dropdown")).toBeInTheDocument();
     expect(screen.getByText("Option 1")).toBeInTheDocument();
     expect(screen.getByText("Option 2")).toBeInTheDocument();
   });
 
   it("handles main button click", () => {
-    renderWithTheme(
-      <MainButtonMobile onClick={mockOnClick} withMenu={false} />,
-    );
+    render(<MainButtonMobile onClick={mockOnClick} withMenu={false} />);
     const button = screen.getByTestId("floating-button");
     fireEvent.click(button);
     expect(mockOnClick).toHaveBeenCalled();
-  });
-
-  it("hides loading indicator when upload is complete", () => {
-    renderWithTheme(<MainButtonMobile percent={100} />);
-    const wrapper = screen.getByTestId("main-button-mobile");
-    const button = wrapper.querySelector('[data-testid="floating-button"]');
-    expect(button).not.toBeNull();
-    expect(button?.className).toMatch(/hideLoading/);
   });
 });

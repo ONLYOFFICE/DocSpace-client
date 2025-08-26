@@ -3,7 +3,7 @@
   "content": "Custom filter enabled.",
   "content_en_sha1_hash": "23c45dc7a2dbd306581c8718a1d6a272a3b62997",
   "created_at": "2025-05-19T21:30:54.803Z",
-  "updated_at": "2025-06-08T12:02:32.706Z",
+  "updated_at": "2025-08-04T07:30:01.248Z",
   "comment": {
     "text": "The \"FileCustomFilterEnabled\" translation key is used to display the text \"Custom filter enabled.\" in a UI component, likely as a confirmation or indication of the user's settings on the \"History\" page in an info panel.",
     "is_auto": true,
@@ -11,8 +11,14 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 332,
+      "context": "case FeedActionKeys.FormSubmit:\n return t(\"InfoPanel:FilledOutForm\");\n case FeedActionKeys.FormOpenedForFilling:\n return t(\"InfoPanel:StartedFillingItOut\");\n case FeedActionKeys.FileCustomFilterEnabled:\n return t(\"InfoPanel:FileCustomFilterEnabled\");\n case FeedActionKeys.FileCustomFilterDisabled:\n return t(\"InfoPanel:FileCustomFilterDisabled\");\n \n case FeedActionKeys.FormStartedToFill:\n return t(\"InfoPanel:FormStartedToFill\");",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 307,
+      "line_number": 310,
       "context": "case FeedActionKeys.FormSubmit:\n return t(\"InfoPanel:FilledOutForm\");\n case FeedActionKeys.FormOpenedForFilling:\n return t(\"InfoPanel:StartedFillingItOut\");\n case FeedActionKeys.FileCustomFilterEnabled:\n return t(\"InfoPanel:FileCustomFilterEnabled\");\n case FeedActionKeys.FileCustomFilterDisabled:\n return t(\"InfoPanel:FileCustomFilterDisabled\");\n \n case FeedActionKeys.FormStartedToFill:\n return t(\"InfoPanel:FormStartedToFill\");",
       "module": "/packages/client"
     }

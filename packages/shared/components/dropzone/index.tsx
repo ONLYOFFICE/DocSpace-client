@@ -43,6 +43,7 @@ const Dropzone = ({
   linkMainText,
   linkSecondaryText,
   exstsText,
+  dataTestId,
 }: DropzoneProps) => {
   const { getRootProps, getInputProps } = useDropzone({
     maxFiles,
@@ -57,7 +58,7 @@ const Dropzone = ({
       className={classNames(styles.dropzoneWrapper, {
         [styles.isLoading]: isLoading,
       })}
-      data-testid="dropzone"
+      data-testid={dataTestId ?? "dropzone"}
       aria-busy={isLoading}
       aria-disabled={isDisabled}
     >

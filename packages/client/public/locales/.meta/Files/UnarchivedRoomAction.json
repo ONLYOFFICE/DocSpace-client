@@ -3,7 +3,7 @@
   "content": "The room '{{name}}' is unarchived.",
   "content_en_sha1_hash": "d68b761bc18ae09882e723fde8fedb83e39a13de",
   "created_at": "2025-05-19T21:30:56.275Z",
-  "updated_at": "2025-06-18T17:11:42.515Z",
+  "updated_at": "2025-08-11T18:11:59.315Z",
   "comment": {
     "text": "The \"UnarchivedRoomAction\" translation key is used to display a success message when a room is successfully unarchived in the UI, typically after a button or action is clicked. The text will replace \"{name}\" with the actual room name or title. It appears in the application's feedback system, such as toastr notifications.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1515,
+      "line_number": 1527,
       "context": ".then(() => {\n const successTranslation =\n folders.length !== 1 && Array.isArray(folders)\n ? t(\"UnarchivedRoomsAction\")\n : Array.isArray(folders)\n ? t(\"UnarchivedRoomAction\", { name: folders[0].title })\n : t(\"UnarchivedRoomAction\", { name: folders.title });\n \n toastr.success(successTranslation);\n })\n .then(() => setSelected(\"close\"))",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1515,
+      "line_number": 1527,
       "context": ".then(() => {\n const successTranslation =\n folders.length !== 1 && Array.isArray(folders)\n ? t(\"UnarchivedRoomsAction\")\n : Array.isArray(folders)\n ? t(\"UnarchivedRoomAction\", { name: folders[0].title })\n : t(\"UnarchivedRoomAction\", { name: folders.title });\n \n toastr.success(successTranslation);\n })\n .then(() => setSelected(\"close\"))",
       "module": "/packages/client"
     }
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Arabic translation includes double quotes around the variable {{name}}. This should match the English format of single quotes.",
-          "suggestion": "Replace \"{{name}}\" with '{{name}}'"
+          "description": "The double curly braces around '{{name}}' are inconsistent with typical Arabic text rendering and might not display correctly in all contexts. While functional, it's worth checking for preferred formatting.",
+          "suggestion": "Consider checking if a different formatting approach (e.g., using standard Arabic brackets or leaving it as is, depending on the system's capabilities) would be more suitable.  Further investigation into the platform's expected format is needed."
         }
       ],
       "approved_at": null
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'is unarchived' implies a change from archived to not archived. The Czech translation 'není archivována' literally translates to 'is not archived,' which is accurate, but it doesn't fully capture the action of *reversing* an archiving process. A more accurate translation would convey the action of unarchiving.",
-          "suggestion": "Consider 'Místnost '{{name}}' byla od archivace' or 'Místnost '{{name}}' byla odstraněna z archivu.'"
+          "description": "The English phrase 'is unarchived' implies a reversal of an archiving action. The Czech translation 'není archivována' literally translates to 'is not archived', which doesn't quite capture the meaning of 'unarchived'. A more accurate translation would convey the action of removing the archiving status.",
+          "suggestion": "Místnost '{{name}}' byla dearchivována."
         }
       ],
       "approved_at": null
@@ -72,7 +72,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'unarchived' implies a reversal of an archiving action. The German translation 'nicht archiviert' literally means 'not archived,' which doesn't convey the action of *unarchiving*. A more accurate translation would use a verb expressing the reversal of the archiving action.",
+          "description": "The English phrase 'unarchived' implies a reversal of an archiving action. The German translation 'nicht archiviert' simply means 'not archived', which isn't as precise. A more accurate translation would convey the action of undoing an archive.",
           "suggestion": "Der Raum '{{name}}' wurde entarchiviert."
         }
       ],
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'unarchived' implies a reversal of a previous archiving action. The Greek translation 'δεν έχει αρχειοθετηθεί' literally means 'has not been archived.' While technically correct, it doesn't convey the same nuance of an action being reversed. A better translation would emphasize the reversal.",
-          "suggestion": "Consider a more active phrasing that indicates the room has been restored from an archived state. For example: 'Το δωμάτιο '{{name}}' επαναφέρθηκε.' (The room '{{name}}' was restored.)"
+          "description": "The English phrase 'unarchived' implies a reversal of an archiving action. The Greek translation 'δεν έχει αρχειοθετηθεί' literally means 'has not been archived'. While technically correct, it doesn't convey the action of *undoing* an archiving action. A more accurate translation would suggest a reversion of the archiving process.",
+          "suggestion": "Consider a translation like 'Το δωμάτιο '{{name}}' αποαρχειοθετήθηκε.' (To domatio '{{name}}' apoarchiothetike) which means 'The room '{{name}}' was dearchived.'"
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Huone '{{name}}' on arkistoimaton' doesn't accurately convey the meaning of 'The room '{{name}}' is unarchived.' 'Arkistoimaton' literally means 'unarchived', but in this context, a more natural Finnish phrasing would indicate the room has been restored or made available again.",
-          "suggestion": "Consider 'Huone '{{name}}' on palautettu.' or 'Huone '{{name}}' on nyt käytettävissä.'"
+          "description": "The translation 'Huone '{{name}}' on arkistoimaton' is not an accurate translation of 'The room '{{name}}' is unarchived.'. 'Arkistoimaton' translates to 'archived' or 'archivable' not 'unarchived'.",
+          "suggestion": "Huone '{{name}}' on poistettu arkistosta."
         }
       ],
       "approved_at": null
@@ -111,7 +111,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'is unarchived' is better translated as 'has been unarchived' or 'is no longer archived' for a more natural French phrasing. 'n'est plus archivée' is accurate but slightly less idiomatic.",
+          "suggestion": "La salle '{{name}}' n'est plus archivée."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -126,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'La stanza '{{name}}' è stata rimossa dall'archivio.' does not accurately convey the meaning of 'The room '{{name}}' is unarchived.'  'Unarchived' implies a reversal of archiving, whereas 'rimossa dall'archivio' translates to 'removed from the archive,' which suggests a deletion rather than a reversal of an archiving process.  The meaning is subtly different and could lead to user confusion.",
-          "suggestion": "La stanza '{{name}}' è stata dearchivata."
+          "description": "The translation 'è stata rimossa dall'archivio' (was removed from the archive) doesn't accurately reflect the English meaning of 'is unarchived'. 'Unarchived' implies a return to a non-archived state, not necessarily a removal.",
+          "suggestion": "La stanza '{{name}}' è stata ripristinata."
         }
       ],
       "approved_at": null
@@ -144,13 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term '아카이브' (archive) might be too technical for the intended audience. While technically correct, it's less natural than alternatives that focus on the 'unarchived' aspect.",
-          "suggestion": "'{{name}}' 방이 보관 해제되었습니다."
-        },
-        {
-          "type": "formatting",
-          "description": "The Korean sentence structure is slightly awkward and could be improved for better flow. While not strictly incorrect, it's not the most natural way to express this.",
-          "suggestion": "'{{name}}' 방이 보관 해제되었습니다."
+          "description": "The word '아카이브' (akaibeu) is a transliteration of 'archive' and while understandable, it's not the most natural way to express 'unarchived' in Korean. A more appropriate term would be '압축 해제' (apcheuk haje) or '보관 해제' (bogwan haje).",
+          "suggestion": "'{{name}}' 방의 보관이 해제되었습니다."
         }
       ],
       "approved_at": null
@@ -161,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ຫ້ອງ '{{name}}' ບໍ່ໄດ້ຖືກເກັບໄວ້.' while literally translating to 'The room '{{name}}' is not archived,' doesn't fully capture the nuance of 'unarchived'.  'ບໍ່ໄດ້ຖືກເກັບໄວ້' implies something was never archived, whereas 'unarchived' suggests it *was* archived and is now being reverted.",
-          "suggestion": "ຫ້ອງ '{{name}}' ຖືກຍົກການເກັບໄວ້."
+          "description": "The Lao translation 'ຫ້ອງ '{{name}}' ບໍ່ໄດ້ຖືກເກັບໄວ້.' literally translates to 'The room '{{name}}' has not been archived.' While conveying a similar meaning, 'unarchived' implies a reversal of a previous archiving action. A more accurate translation might emphasize this reversal.",
+          "suggestion": "ຫ້ອງ '{{name}}' ຖືກຖອນການເກັບໄວ້ແລ້ວ."
         }
       ],
       "approved_at": null
@@ -179,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'De kamer '{{name}}' is niet meer gearchiveerd' literally translates to 'The room '{{name}}' is no longer archived.' While conveying a similar meaning, 'unarchived' implies a reversal of an archiving action. 'Niet meer gearchiveerd' is a bit more descriptive and less direct. A more accurate translation closer to the English would be 'De kamer '{{name}}' is nu niet meer gearchiveerd' or 'De kamer '{{name}}' is ontarchiveerd'.",
-          "suggestion": "De kamer '{{name}}' is ontarchiveerd."
+          "description": "The translation 'De kamer '{{name}}' is niet meer gearchiveerd' literally translates to 'The room '{{name}}' is no longer archived.' While technically correct, 'unarchived' implies a reversal of a previous archiving action. A more accurate translation would convey that directly.",
+          "suggestion": "De kamer '{{name}}' is nu actief."
         }
       ],
       "approved_at": null
@@ -191,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'unarchived' implies a reversal of an archiving action. 'Przywrócony z archiwum' literally translates to 'restored from archive,' which is a more accurate representation of the action, but might be perceived as slightly more formal or technical than a direct equivalent of 'unarchived'.",
-          "suggestion": "Consider 'Pokój '{{name}}' został dearchiwizowany.' or 'Pokój '{{name}}' nie jest już zarchiwizowany.' for a closer equivalent to 'unarchived'."
+          "description": "The English phrase 'unarchived' implies a reversal of an archiving process. 'Przywrócony z archiwum' literally translates to 'restored from archive', which is a reasonable equivalent but might not fully capture the original meaning. 'Odwieziony z archiwum' or 'dezaktywowane archiwum' could be more precise depending on the specific technical context.",
+          "suggestion": "Consider 'Odwieziony z archiwum' or 'Dezaktywowane archiwum' for a more accurate translation, if the context warrants it."
         }
       ],
       "approved_at": null
@@ -221,7 +222,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The verb 'разархивирована' (razaarhivirovana) implies 'unzipped' or 'extracted from an archive'. 'Unarchived' suggests a state change, not necessarily related to an archive. A more accurate translation would convey that the room's archived status has been reversed.",
+          "description": "The verb 'разархивирована' (razarkhivirovana) implies 'unarchived' in the sense of 'decompressed' or 'extracted from an archive'. While technically correct, it doesn't convey the intended meaning of a room being restored to a non-archived state. A better term would emphasize the removal of an archived status.",
           "suggestion": "Комната '{{name}}' восстановлена из архива."
         }
       ],
@@ -233,13 +234,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '{{name}}' කාමරය අසංරක්‍ෂිතයි. does not accurately convey the meaning of 'The room '{{name}}' is unarchived.'.  'අසංරක්‍ෂිතයි' primarily means 'unprotected' or 'unshielded,' not 'unarchived.' A more accurate translation would convey the action of removing an archive status.",
-          "suggestion": "'{{name}}' කාමරය දැන් සංරක්ෂණය වී නොමැත."
+          "description": "The word 'අසංරක්‍ෂිතයි' (asanrakshitayi) literally translates to 'unprotected'. While it conveys the sense of being unarchived, a more accurate and natural translation for 'unarchived' in this context would be something like 'දෙසංඝ්‍රහිත' (desangrahita) or a rephrased sentence.",
+          "suggestion": "'{{name}}' කාමරය දෙසංඝ්‍රහිතයි."
         },
         {
           "type": "formatting",
-          "description": "The Sinhala translation doesn't have a full stop or punctuation at the end of the sentence like the English version does.",
-          "suggestion": "'{{name}}' කාමරය දැන් සංරක්ෂණය වී නොමැත."
+          "description": "While the apostrophe usage is present, using a space before it might improve readability in Sinhala.",
+          "suggestion": "'{{name}}' කාමරය දෙසංඝ්‍රහිතයි."
         }
       ],
       "approved_at": null
@@ -250,8 +251,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English term 'unarchived' implies the room has been removed from an archive. 'Rozbalená z archívu' literally translates to 'unpacked from the archive,' which while related, doesn't perfectly convey the intended meaning of being restored from an archived state. A better translation might emphasize the restoration aspect.",
-          "suggestion": "Miestnosť '{{name}}' bola obnovená z archívu."
+          "description": "The term 'rozbalená z archívu' doesn't directly translate to 'unarchived'. While it conveys the action of removing from an archive, 'unarchived' implies a more direct reversal of the archiving process. A more accurate translation would be 'odarchívovaná'.",
+          "suggestion": "Miestnosť '{{name}}' bola odarchívovaná."
         }
       ],
       "approved_at": null
@@ -268,13 +269,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'неархивирана' (nearhivirana) doesn't accurately convey the meaning of 'unarchived'. A more appropriate translation would use a term that reflects the action of making something no longer archived.",
-          "suggestion": "The more accurate translation would be 'Разархивирана' (Razarhivirana)."
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'Соба' is a misspelling of 'Соба'.",
-          "suggestion": "Correct 'Соба' to 'Соба'"
+          "description": "The word 'Соба' is incorrect. It's a diminutive and informal term for 'room'.  The correct term is 'Соба' (Soba) which translates to 'room'.",
+          "suggestion": "Соба '{{name}}' је неархивирана."
         }
       ],
       "approved_at": null
@@ -285,8 +281,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English word 'unarchived' implies a reversal of an archiving action. The Serbian translation 'nearhivirana' simply means 'unarchived' without conveying the sense of a previous archiving. A more accurate translation would involve expressing the reversal of the action.",
-          "suggestion": "Soba '{{name}}' je vraćena u arhivu."
+          "description": "The word 'nearhivirana' is not the correct past participle for 'unarchive' in Serbian. It implies 'not archived' in a static sense, rather than the action of being unarchived.",
+          "suggestion": "Soba '{{name}}' je dearchiwirana."
         }
       ],
       "approved_at": null
@@ -309,8 +305,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Phòng '{{name}}' chưa được sao lưu.' implies the room was previously backed up, while the English 'The room '{{name}}' is unarchived.' indicates it was not archived in the first place. 'Unarchived' means removing an archive status, not performing a backup.",
-          "suggestion": "Phòng '{{name}}' đã được hủy bỏ trạng thái lưu trữ."
+          "description": "The Vietnamese translation 'Phòng '{{name}}' chưa được sao lưu' implies the room was previously backed up and is now being restored. The English 'The room '{{name}}' is unarchived' means the room was previously archived and is now accessible again. 'Sao lưu' typically refers to backup, not the act of unarchiving.",
+          "suggestion": "Phòng '{{name}}' đã được mở khóa."
         }
       ],
       "approved_at": null
@@ -321,8 +317,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '已取消存档' is a literal translation of 'unarchived' that doesn't quite capture the nuance. It implies a process of removing a saved state, rather than simply restoring a room to an active state. A more natural translation might be something like '已恢复' or '已启用'.",
-          "suggestion": "房间 '{{name}}' 已恢复."
+          "description": "The translation '已取消存档' doesn't perfectly capture the nuance of 'unarchived'. '已取消存档' implies a deliberate archiving and then unarchiving. 'Unarchived' can simply mean the room was previously archived and now isn't, without necessarily implying a conscious undoing.",
+          "suggestion": "房间 '{{name}}' 已解除存档。"
         }
       ],
       "approved_at": null

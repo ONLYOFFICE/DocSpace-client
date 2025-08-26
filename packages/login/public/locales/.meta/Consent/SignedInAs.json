@@ -3,7 +3,7 @@
   "content": "Signed in as",
   "content_en_sha1_hash": "a02107c35fb17aee91fc9a3715c3e8eb17220829",
   "created_at": "2025-05-19T21:30:57.329Z",
-  "updated_at": "2025-05-26T07:57:32.869Z",
+  "updated_at": "2025-08-21T11:22:39.936Z",
   "comment": {
     "text": "The \"SignedInAs\" translation key displays a message indicating that the user is signed in as. It is used to provide contextual information about the current logged-in user in the UI.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/consent/page.client.tsx",
-      "line_number": 287,
-      "context": "role={AvatarRole.user}\n source={user.avatarSmall || \"\"}\n />\n <div className=\"user-info\">\n <Text lineHeight={\"20px\"}>\n {t(\"SignedInAs\")} {user.email}\n </Text>\n <Link\n className={\"login-link\"}\n type={LinkType.action}\n isHovered={false}",
+      "line_number": 291,
+      "context": "role={AvatarRole.user}\n source={user.avatarSmall || \"\"}\n />\n <div className=\"user-info\">\n <Text lineHeight=\"20px\">\n {t(\"SignedInAs\")} {user.email}\n </Text>\n <Link\n className=\"login-link\"\n type={LinkType.action}\n isHovered={false}",
       "module": "/packages/login"
     }
   ],

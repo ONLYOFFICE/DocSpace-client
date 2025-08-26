@@ -3,7 +3,7 @@
   "content": "Form completed successfully",
   "content_en_sha1_hash": "8a5d38d82abc25db3aba2ee1cc7b0b06efe89106",
   "created_at": "2025-05-19T21:30:57.165Z",
-  "updated_at": "2025-05-26T07:57:32.849Z",
+  "updated_at": "2025-08-12T19:46:26.305Z",
   "comment": {
     "text": "This translation key is used for displaying a success message after completing a form. It appears in the UI as a heading or text element in a completed form, typically following a submit button. Its purpose is to inform the user that their form has been successfully submitted.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/completed-form/CompletedForm.tsx",
-      "line_number": 147,
-      "context": "<source media={mobileMore} srcSet={logoUrl} />\n <img src={logoUrl} alt=\"logo\" />\n </picture>\n <TextWrapper>\n <Heading level={HeadingLevel.h1}>\n {t(\"CompletedForm:FormCompletedSuccessfully\")}\n </Heading>\n <Text noSelect>\n {isAnonym\n ? t(\"CompletedForm:DescriptionForAnonymous\")\n : t(\"CompletedForm:DescriptionForRegisteredUser\")}",
+      "line_number": 148,
+      "context": "<source media={mobileMore} srcSet={logoUrl} />\n <img src={logoUrl} alt=\"logo\" />\n </picture>\n <TextWrapper>\n <Heading level={HeadingLevel.h1}>\n {t(\"CompletedForm:FormCompletedSuccessfully\")}\n </Heading>\n <Text>\n {isAnonym\n ? t(\"CompletedForm:DescriptionForAnonymous\")\n : t(\"CompletedForm:DescriptionForRegisteredUser\")}",
       "module": "/packages/doceditor"
     }
   ],

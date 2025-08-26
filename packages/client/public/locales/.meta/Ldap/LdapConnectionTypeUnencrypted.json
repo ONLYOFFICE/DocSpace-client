@@ -3,7 +3,7 @@
   "content": "Unencrypted communication",
   "content_en_sha1_hash": "bc1d8c39d5290a229552fb64a476b343bca25d9c",
   "created_at": "2025-05-19T21:30:54.196Z",
-  "updated_at": "2025-05-24T08:37:19.420Z",
+  "updated_at": "2025-08-11T18:11:59.240Z",
   "comment": {
     "text": "This translation key is used for the label of a checkbox indicating unencrypted LDAP connection type. It appears in a settings page within a file, and its purpose is to display the description of this option to users, allowing them to understand what \"unencrypted communication\" means in the context of LDAP connections.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/Checkboxes.js",
       "line_number": 86,
-      "context": "key={ConnectionType.Unencrypted}\n value={ConnectionType.Unencrypted}\n isChecked={!isTlsEnabled ? !isSslEnabled : null}\n onChange={onChangeUnencrypted}\n isDisabled={!isLdapEnabled || isUIDisabled}\n label={t(\"LdapConnectionTypeUnencrypted\")}\n />\n </div>\n <div className=\"ldap_checkbox-header\">\n <RadioButton\n id=\"ldap-connection-type\"",
+      "context": "key={ConnectionType.Unencrypted}\n value={ConnectionType.Unencrypted}\n isChecked={!isTlsEnabled ? !isSslEnabled : null}\n onChange={onChangeUnencrypted}\n isDisabled={!isLdapEnabled || isUIDisabled}\n label={t(\"LdapConnectionTypeUnencrypted\")}\n testId=\"type_unencrypted_radio_button\"\n />\n </div>\n <div className=\"ldap_checkbox-header\">\n <RadioButton",
       "module": "/packages/client"
     }
   ],

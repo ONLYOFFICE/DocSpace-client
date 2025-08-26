@@ -85,6 +85,13 @@ export const settingsTree = [
             link: "configure-deep-link",
             tKey: "ConfigureDeepLink",
           },
+          {
+            id: "portal-settings_catalog-ad-management",
+            key: "0-0-5",
+            icon: "",
+            link: "ad-management",
+            tKey: "AdManagement",
+          },
         ],
       },
       {
@@ -506,7 +513,7 @@ export const settingsTree = [
             key: "7-1-5",
             icon: "",
             link: "viewer",
-            tKey: "JavascriptSdk:Viewer",
+            tKey: "Common:Viewer",
           },
           {
             id: "portal-settings_catalog-javascript-sdk_portal",

@@ -3,7 +3,7 @@
   "content": "Restore",
   "content_en_sha1_hash": "3cbe6d6b9a8d1596bb5bca12e14d81c9e108a1a3",
   "created_at": "2025-05-19T21:30:47.901Z",
-  "updated_at": "2025-06-18T17:11:42.307Z",
+  "updated_at": "2025-08-21T11:22:39.782Z",
   "comment": {
     "text": "The translation key \"Restore\" is used to display a button label or header in various UI elements, such as buttons and dialogs. It indicates an action of recovering or returning a file or room to its original state. This translation key appears on screens like Restore Room Dialogs where users can restore a room.",
     "is_auto": true,
@@ -19,91 +19,91 @@
     {
       "file_path": "/packages/client/src/components/dialogs/RestoreRoomDialog/index.js",
       "line_number": 99,
-      "context": "isLoading={!tReady}\n visible={visible}\n onClose={onClose}\n displayType=\"modal\"\n >\n <ModalDialog.Header>{t(\"Common:Restore\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text noSelect>{description}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
+      "context": "isLoading={!tReady}\n visible={visible}\n onClose={onClose}\n displayType=\"modal\"\n >\n <ModalDialog.Header>{t(\"Common:Restore\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{description}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/RestoreRoomDialog/index.js",
       "line_number": 99,
-      "context": "isLoading={!tReady}\n visible={visible}\n onClose={onClose}\n displayType=\"modal\"\n >\n <ModalDialog.Header>{t(\"Common:Restore\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text noSelect>{description}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
+      "context": "isLoading={!tReady}\n visible={visible}\n onClose={onClose}\n displayType=\"modal\"\n >\n <ModalDialog.Header>{t(\"Common:Restore\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{description}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/welcome-page-settings.js",
-      "line_number": 383,
-      "context": "onSaveClick={onSaveGreetingSettings}\n onCancelClick={onRestoreGreetingSettings}\n showReminder={state.showReminder}\n reminderText={t(\"YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n displaySettings\n hasScroll={state.hasScroll}\n disableRestoreToDefault={greetingSettingsIsDefault}\n additionalClassSaveButton=\"welcome-page-save\"\n additionalClassCancelButton=\"welcome-page-cancel\"",
+      "line_number": 385,
+      "context": "onSaveClick={onSaveGreetingSettings}\n onCancelClick={onRestoreGreetingSettings}\n showReminder={state.showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n displaySettings\n hasScroll={state.hasScroll}\n disableRestoreToDefault={greetingSettingsIsDefault}\n additionalClassSaveButton=\"welcome-page-save\"\n additionalClassCancelButton=\"welcome-page-cancel\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/VersionHistory/Section/Body/VersionRow.js",
-      "line_number": 216,
+      "line_number": 217,
       "context": "},\n index !== 0 &&\n canChangeVersionFileHistory && {\n key: \"restore\",\n icon: RestoreAuthReactSvgUrl,\n label: t(\"Common:Restore\"),\n onClick: onRestoreClick,\n },\n {\n key: \"download\",\n icon: DownloadReactSvgUrl,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2127,
+      "line_number": 2138,
       "context": "},\n ...moveActions,\n {\n id: \"option_restore\",\n key: \"restore\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: this.onRestoreAction,\n disabled: false,\n },\n indexOptions,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2127,
+      "line_number": 2138,
       "context": "},\n ...moveActions,\n {\n id: \"option_restore\",\n key: \"restore\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: this.onRestoreAction,\n disabled: false,\n },\n indexOptions,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2127,
+      "line_number": 2138,
       "context": "},\n ...moveActions,\n {\n id: \"option_restore\",\n key: \"restore\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: this.onRestoreAction,\n disabled: false,\n },\n indexOptions,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2127,
+      "line_number": 2138,
       "context": "},\n ...moveActions,\n {\n id: \"option_restore\",\n key: \"restore\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: this.onRestoreAction,\n disabled: false,\n },\n indexOptions,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2281,
+      "line_number": 2282,
       "context": "case \"unarchive\":\n if (!this.isAvailableOption(\"unarchive\")) return null;\n return {\n id: \"menu-unarchive\",\n key: \"unarchive\",\n label: t(\"Common:Restore\"),\n iconUrl: MoveReactSvgUrl,\n onClick: () => this.archiveRooms(\"unarchive\"),\n disabled: false,\n };\n case \"change-quota\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2281,
+      "line_number": 2282,
       "context": "case \"unarchive\":\n if (!this.isAvailableOption(\"unarchive\")) return null;\n return {\n id: \"menu-unarchive\",\n key: \"unarchive\",\n label: t(\"Common:Restore\"),\n iconUrl: MoveReactSvgUrl,\n onClick: () => this.archiveRooms(\"unarchive\"),\n disabled: false,\n };\n case \"change-quota\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/pages/Branding/AdditionalResources/index.tsx",
       "line_number": 126,
-      "context": "</div>\n <SaveCancelButtons\n onSaveClick={onSaveAction}\n onCancelClick={onRestore}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n displaySettings\n reminderText={t(\"YouHaveUnsavedChanges\")}\n showReminder={(isSettingPaid && hasChanges) || isLoading}\n disableRestoreToDefault={additionalResourcesIsDefault || isLoading}\n additionalClassSaveButton=\"additional-resources-save\"",
+      "context": "</div>\n <SaveCancelButtons\n onSaveClick={onSaveAction}\n onCancelClick={onRestore}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n displaySettings\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n showReminder={(isSettingPaid && hasChanges) || isLoading}\n disableRestoreToDefault={additionalResourcesIsDefault || isLoading}\n additionalClassSaveButton=\"additional-resources-save\"",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
-      "line_number": 306,
-      "context": "\"save-cancel-buttons\",\n )}\n onSaveClick={onSaveAction}\n onCancelClick={onRestoreAction}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n reminderText={t(\"YouHaveUnsavedChanges\")}\n displaySettings\n saveButtonDisabled={isDisabled}\n hasScroll\n hideBorder",
+      "line_number": 307,
+      "context": "\"save-cancel-buttons\",\n )}\n onSaveClick={onSaveAction}\n onCancelClick={onRestoreAction}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n displaySettings\n saveButtonDisabled={isDisabled}\n hasScroll\n hideBorder",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 432,
-      "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveAction}\n onCancelClick={onRestoreDefault}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n displaySettings\n hasScroll\n hideBorder\n showReminder={!isEqualLogo}\n reminderText={t(\"YouHaveUnsavedChanges\")}",
+      "line_number": 628,
+      "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveAction}\n onCancelClick={onRestoreDefault}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n displaySettings\n hasScroll\n hideBorder\n showReminder={!isEqualLogo}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}",
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/shared/pages/restore-backup/sub-components/backup-list/index.tsx",
-      "line_number": 201,
-      "context": "const { filesList, isLoading, selectedFileIndex, isChecked } = state;\n \n const helpContent = () => (\n <Text className=\"restore-backup_warning-description\">\n {t(\"Common:RestoreBackupWarningText\", {\n productName: t(\"Common:ProductName\"),\n })}{\" \"}\n {!standalone ? (\n <Text as=\"span\" className=\"restore-backup_warning-link\">\n {t(\"Common:RestoreBackupResetInfoWarningText\", {",
+      "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/backup-list/index.tsx",
+      "line_number": 204,
+      "context": "className={classNames(\n styles.restoreBackupWarningDescription,\n \"restore-backup_warning-description\",\n )}\n >\n {t(\"Common:RestoreBackupWarningText\", {\n productName: t(\"Common:ProductName\"),\n })}{\" \"}\n {!standalone ? (\n <Text\n as=\"span\"",
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/shared/pages/restore-backup/sub-components/button-component/ButtonComponent.tsx",
-      "line_number": 149,
-      "context": "return (\n <div className=\"restore-backup_button-container\">\n <Button\n className=\"restore-backup_button\"\n label={t(\"Common:Restore\")}\n onClick={onRestoreClick}\n primary\n isDisabled={isButtonDisabled}\n isLoading={isLoadingButton}\n size={buttonSize}",
+      "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/button-component/ButtonComponent.tsx",
+      "line_number": 157,
+      "context": "<Button\n className={classNames(\n styles.restoreBackupButton,\n \"restore-backup_button\",\n )}\n label={t(\"Common:Restore\")}\n onClick={onRestoreClick}\n primary\n isDisabled={isButtonDisabled}\n isLoading={isLoadingButton}\n size={buttonSize}",
       "module": "/packages/shared"
     }
   ],
@@ -246,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'ප්‍රත්‍යර්පණය' (Pratyarpanaya) can mean 'restoration' or 'recovery,' it's a formal and somewhat uncommon term. For a common word like 'Restore,' a simpler and more widely understood translation might be preferable. Alternatives could include ' නැවත ගොඩ ඒraise' (naewatha goda e raise) which means 'rebuild' or 'recover'.",
-          "suggestion": "Consider alternatives such as ' නැවත ගොඩ ඒraise' (naewatha goda e raise) for a more accessible translation."
+          "description": "While 'ප්‍රත්‍යර්පණය' (pratyarpanaya) is a valid Sinhala word, it primarily means 'repayment', 'offering', or 'dedication'.  'Restore' in the context of data or a system usually implies returning something to a previous state, which is better translated as ' නැවත ස්ථානගත කිරීම' (naewath sthaanagath karuma) or ' නැවත පහසකිරීම' (naewath pahasakareema).",
+          "suggestion": "Consider 'නැවත ස්ථානගත කිරීම' (naewath sthaanagath karuma) or 'නැවත පහසකිරීම' (naewath pahasakareema)"
         }
       ],
       "approved_at": null
@@ -270,8 +270,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Поврати\" can mean 'return' or 'bring back,' in the context of 'Restore,' a more accurate translation would be 'Врати' or 'Обнови'. 'Поврати' implies a return to a previous location, whereas 'Restore' refers to bringing something back to a former state.",
-          "suggestion": "Врати or Обнови"
+          "description": "While \"Поврати\" can mean \"return\" or \"restore\" in some contexts, it's not the most common or natural translation of \"Restore\" in this context. A more accurate and common translation would be \"Врати\" or potentially \"Обнови\" depending on the precise nuance intended.",
+          "suggestion": "Врати"
         }
       ],
       "approved_at": null
@@ -285,13 +285,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Onar' can mean 'repair', 'Restore' in this context implies a return to a previous state or condition, which is not perfectly captured by 'Onar'. A more accurate translation might consider options like 'Geri yükle' (re-upload/re-load) or 'Düzelt' (correct).",
-          "suggestion": "Consider 'Geri yükle' or 'Düzelt' for a more accurate reflection of 'Restore'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

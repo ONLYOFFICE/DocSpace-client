@@ -44,7 +44,7 @@ const Search = React.memo(({ isSearch }: SearchProps) => {
   } = use(SearchContext);
   const setIsSearch = use(SearchDispatchContext);
 
-  const { isBreadCrumbsLoading } = use(BreadCrumbsContext);
+  const { isBreadCrumbsLoading, bodyIsLoading } = use(BreadCrumbsContext);
 
   const onClearSearchAction = useCallback(() => {
     onClearSearch?.(() => setIsSearch(false));
@@ -61,7 +61,8 @@ const Search = React.memo(({ isSearch }: SearchProps) => {
     [onClearSearchAction, onSearch, setIsSearch],
   );
 
-  if (isBreadCrumbsLoading || isSearchLoading) return searchLoader;
+  if (isBreadCrumbsLoading || isSearchLoading || (!isSearch && bodyIsLoading))
+    return searchLoader;
 
   if (!withSearch || !isSearch) return null;
 
@@ -74,6 +75,7 @@ const Search = React.memo(({ isSearch }: SearchProps) => {
       onClearSearch={onClearSearchAction}
       size={InputSize.base}
       resetOnBlur
+      dataTestId="selector_search_input"
     />
   );
 });

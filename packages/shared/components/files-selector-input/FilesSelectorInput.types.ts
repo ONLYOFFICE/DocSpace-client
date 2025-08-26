@@ -72,6 +72,7 @@ export type FilesSelectorInputProps = {
   isDocumentIcon?: boolean;
   filesSelectorSettings: FilesSelectorSettings;
   formProps?: FilesSelectorProps["formProps"];
+  dataTestId?: string;
 
   setBasePath: (folders: TBreadCrumb[]) => void;
   toDefault: VoidFunction;
@@ -87,8 +88,4 @@ export type FilesSelectorInputProps = {
     visible: boolean,
     options: BackupToPublicRoomOptionType,
   ) => void;
-};
-
-export type StyledBodyWrapperProps = {
-  maxWidth?: string;
 };

@@ -3,7 +3,7 @@
   "content": "Form templates",
   "content_en_sha1_hash": "c2d535bf745606b2674f9041a286dd91c5c0f493",
   "created_at": "2025-05-19T21:30:45.540Z",
-  "updated_at": "2025-05-26T07:57:32.939Z",
+  "updated_at": "2025-08-21T11:22:39.958Z",
   "comment": {
     "text": "This translation key is used for a button title displaying \"Form Templates\" and appears on a download dialog in the application.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
-      "line_number": 485,
-      "context": "isChecked={state.masterForms.isChecked}\n isIndeterminate={state.masterForms.isIndeterminate}\n items={state.masterForms.files}\n titleFormat={state.masterForms.format || t(\"Common:OriginalFormat\")}\n type={DownloadedDocumentType.MasterForms}\n title={t(\"Common:FormTemplates\")}\n />\n ) : null}\n {state.pdfForms.files.length > 0 ? (\n <DownloadContent\n {...downloadContentProps}",
+      "line_number": 496,
+      "context": "isChecked={state.masterForms.isChecked}\n isIndeterminate={state.masterForms.isIndeterminate}\n items={state.masterForms.files}\n titleFormat={state.masterForms.format || t(\"Common:OriginalFormat\")}\n type={DownloadedDocumentType.MasterForms}\n title={t(\"Common:FormTemplates\")}\n dataTestId=\"download_dialog_master-forms\"\n />\n ) : null}\n {state.pdfForms.files.length > 0 ? (\n <DownloadContent",
       "module": "/packages/shared"
     }
   ],

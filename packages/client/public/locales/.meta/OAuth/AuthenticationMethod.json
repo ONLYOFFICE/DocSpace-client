@@ -3,7 +3,7 @@
   "content": "Authentication method",
   "content_en_sha1_hash": "4a2641463bda57c970dcaba44cead46536e41155",
   "created_at": "2025-05-19T21:30:53.820Z",
-  "updated_at": "2025-05-24T07:41:29.891Z",
+  "updated_at": "2025-08-04T07:30:01.426Z",
   "comment": {
     "text": "This translation key is used to display the label for an input field that allows users to select or enter their authentication method. It appears in a form element and helps users understand what value they are expected to provide.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/BasicBlock.tsx",
-      "line_number": 190,
-      "context": "value={descriptionValue}\n onChange={onChange}\n increaseHeight={isLogoRequiredError}\n />\n <InputGroup\n label={t(\"AuthenticationMethod\")}\n name=\"auth_method\"\n placeholder={t(\"EnterURL\")}\n value={websiteUrlValue}\n error=\"\"\n onChange={() => {}}",
+      "line_number": 196,
+      "context": "onChange={onChange}\n increaseHeight={isLogoRequiredError}\n dataTestId=\"description_textarea_group\"\n />\n <InputGroup\n label={t(\"AuthenticationMethod\")}\n name=\"auth_method\"\n placeholder={t(\"EnterURL\")}\n value={websiteUrlValue}\n error=\"\"\n onChange={() => {}}",
       "module": "/packages/client"
     }
   ],

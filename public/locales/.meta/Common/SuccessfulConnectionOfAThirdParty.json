@@ -3,7 +3,7 @@
   "content": "Third-party service was successfully connected.",
   "content_en_sha1_hash": "d90004d45511c7e00dbd7ab694c8f7ffb4579948",
   "created_at": "2025-05-26T07:15:48.645Z",
-  "updated_at": "2025-05-26T08:03:27.753Z",
+  "updated_at": "2025-06-30T12:20:31.715Z",
   "comment": {
     "text": "This translation key is used to display a success message when a third-party service is successfully connected. It appears as an alert after clicking a connection button in the ConnectDialog component.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/connect/ConnectDialog.tsx",
-      "line_number": 214,
+      "line_number": 207,
       "context": "provider_id,\n roomCreation,\n )\n .then(async (res) => {\n setSaveThirdpartyResponse?.(res);\n toastr.success(t(\"Common:SuccessfulConnectionOfAThirdParty\"));\n await fetchThirdPartyProviders();\n })\n .catch((err) => {\n onClose();\n toastr.error(err);",
       "module": "/packages/shared"
     }

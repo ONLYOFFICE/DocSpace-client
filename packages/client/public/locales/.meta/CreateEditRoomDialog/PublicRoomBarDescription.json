@@ -3,7 +3,7 @@
   "content": "This room is available to anyone with the link. Access for external users is provided depending on the selected type of access rights.",
   "content_en_sha1_hash": "4bc35bd08c0af45d41d49efdb193f7e2ec35def5",
   "created_at": "2025-05-19T21:30:56.821Z",
-  "updated_at": "2025-05-26T07:57:32.440Z",
+  "updated_at": "2025-08-11T09:02:43.922Z",
   "comment": {
     "text": "This translation key is used to describe public access settings for a room. It appears in a bar at the bottom of a UI element, providing context for external users accessing the room. The description explains the type of access rights selected and when access is available via an external link.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/index.js",
-      "line_number": 334,
-      "context": ": t(\"Files:RoomAvailableViaExternalLink\")\n }\n bodyText={\n isFormRoom\n ? t(\"CreateEditRoomDialog:FormRoomBarDescription\")\n : t(\"CreateEditRoomDialog:PublicRoomBarDescription\")\n }\n />\n </StyledPublicRoomBarContainer>\n ) : null}",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/index.tsx",
+      "line_number": 374,
+      "context": ": t(\"Files:RoomAvailableViaExternalLink\")\n }\n bodyText={\n isFormRoom\n ? t(\"CreateEditRoomDialog:FormRoomBarDescription\")\n : t(\"CreateEditRoomDialog:PublicRoomBarDescription\")\n }\n />\n </div>\n ) : null}",
       "module": "/packages/client"
     }
   ],
@@ -33,18 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"keçidi olan hər kəs\" is a bit awkward. It literally translates to 'everyone with the passage'. A more natural phrasing would be 'linkə malik olan hər kəs' or 'linki olan hər kəs'.",
-          "suggestion": "Bu otaq linki olan hər kəs üçün əlçatandır."
-        },
-        {
-          "type": "formatting",
-          "description": "The sentence structure could be improved for better flow.  The phrase \"Seçilmiş giriş hüquqlarının növündən asılı olaraq\" is a bit clunky.",
-          "suggestion": "Bu otaq linki olan hər kəs üçün əlçatandır və xarici istifadəçilərə seçilmiş giriş hüquqlarının növündən asılı olaraq giriş verilir."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -116,18 +105,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Access for external users is provided depending on the selected type of access rights\" is not accurately conveyed. The Lao translation's wording (\"ມັນຈະອີງຕາມປະເພດສິດທິການເຂົ້າທີ່ຖືກເລືອກ\") implies the access is dependent *after* the access rights have been selected, rather than the selection being *based on* the accessibility.",
-          "suggestion": "ຫ້ອງນີ້ສາມາດໃຊ້ໄດ້ແກ່ຜູ້ໃດຜູ້ໜຶ່ງທີ່ມີລິ້ງນີ້ ການເຂົ້າເຖິງຜູ້ໃຊ້ນອກຈະອີງຕາມປະເພດສິດທິການເຂົ້າທີ່ຖືກເລືອກ."
-        },
-        {
-          "type": "formatting",
-          "description": "The sentence structure is a bit long and could be improved for readability in Lao. Breaking it into two sentences might enhance comprehension.",
-          "suggestion": "ຫ້ອງນີ້ສາມາດໃຊ້ໄດ້ແກ່ຜູ້ໃດຜູ້ໜຶ່ງທີ່ມີລິ້ງນີ້ ການເຂົ້າເຖິງຜູ້ໃຊ້ນອກຈະອີງຕາມປະເພດສິດທິການເຂົ້າທີ່ຖືກເລືອກ."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -163,23 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"la link-ul\" is an awkward translation of \"with the link.\" It's more natural to say something like \"prin link\" or \"prin intermediul link-ului\".",
-          "suggestion": "Această sală este disponibilă tuturor prin link."
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase \"În funcție de nivelul de acces permis\" is grammatically correct, but slightly verbose. It can be simplified.",
-          "suggestion": "În funcție de tipul de acces permis."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"Access for external users is provided depending on the selected type of access rights\" is better conveyed with a simpler wording. The provided translation is quite literal.",
-          "suggestion": "Accesul pentru utilizatorii externi depinde de tipul de drepturi de acces selectate."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -191,18 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'లిංక్' appears to be a mix of Sinhala and Telugu script. It should be rendered in Sinhala script.",
-          "suggestion": "లిංక్ → లిංක්"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'බාහිර පරිශීලකයින්' is a less common and somewhat technical term for external users. A simpler and more natural translation might be better. 'බාහිර ක්‍රියාකරුවන්' or ' පිටත සිට පැමිණෙන کاربران' might be more suitable.",
-          "suggestion": "බාහිර පරිශීලකයින් → පිටත සිට පැමිණෙන کاربران or බාහිර ක්‍රියාකරුවන්"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -220,35 +171,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'available to anyone with the link' is not perfectly captured by 'доступна свакоме ко има линк'. A more natural translation might be something like 'доступна свима са линком' or 'може се приступити са линком'.",
-          "suggestion": "Ова соба је доступна свима са линком."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Access for external users is provided depending on the selected type of access rights' is somewhat literal. A more natural phrasing might be 'Приступ спољашњим корисницима зависи од изабраног типа права'.",
-          "suggestion": "Приступ спољашњим корисницима зависи од изабраног типа права."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Access for external users is provided' is a bit clunky and literal. A more natural Serbian phrasing would be better.",
-          "suggestion": "Pristup spoljnim korisnicima je dozvoljen"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'rights' is a bit formal in this context.  'Permissions' might be more appropriate.",
-          "suggestion": "Ova soba je dostupna svakome ko ima link. Pristup spoljnim korisnicima je dozvoljen u zavisnosti od odabranog tipa dozvola."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -272,13 +201,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Access for external users is provided depending on the selected type of access rights' is not fully conveyed in the translation. The original emphasizes the *user's* settings, whereas the translation just says 'depends on your settings', which is vague and doesn't reflect the agency of the room creator.",
-          "suggestion": "任何人都能通过此链接访问该房间。外部用户的访问权限取决于房间创建者的设置。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

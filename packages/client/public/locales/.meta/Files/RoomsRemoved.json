@@ -3,7 +3,7 @@
   "content": "Rooms removed",
   "content_en_sha1_hash": "b7f6fbe672117d78dda530804dc9a74efcd4e510",
   "created_at": "2025-05-19T21:30:56.133Z",
-  "updated_at": "2025-06-18T17:11:42.365Z",
+  "updated_at": "2025-08-11T18:11:59.141Z",
   "comment": {
     "text": "The \"Rooms removed\" translation key is used to display a success message when rooms are successfully deleted from a selected folder. This message appears in dialogs after deletion and is translated to fit various languages. It indicates that room removal has been completed successfully.",
     "is_auto": true,
@@ -18,13 +18,13 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 780,
+      "line_number": 782,
       "context": "let translations;\n \n if (isRoom) {\n translations = {\n successRemoveRoom: t(\"Files:RoomRemoved\"),\n successRemoveRooms: t(\"Files:RoomsRemoved\"),\n };\n \n deleteRoomsAction([selectedFolderId], translations).catch((err) =>\n toastr.error(err),\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2060,
+      "line_number": 2069,
       "context": "items.push(item.id);\n });\n \n const translations = {\n successRemoveRoom: t(\"Files:RoomRemoved\"),\n successRemoveRooms: t(\"Files:RoomsRemoved\"),\n };\n \n this.deleteItemAction(items, \"\", translations, null, null, true);\n };",
       "module": "/packages/client"
     }
@@ -75,13 +75,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Se han eliminado las salas' is technically correct, a more natural and common translation for 'Rooms removed' in a user interface or system message would be 'Salas eliminadas'. The current translation includes a reflexive verb ('se han eliminado') which is less direct.",
-          "suggestion": "Salas eliminadas"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -108,7 +102,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Italian translation 'Le stanze sono state rimosse' is a literal translation and sounds slightly awkward in Italian. A more natural phrasing would be 'Stanze rimosse' or 'Le stanze eliminate'.",
+          "description": "The translation 'Le stanze sono state rimosse' is a literal translation and sounds somewhat awkward in Italian. A more natural phrasing would be 'Stanze rimosse' or 'Le stanze eliminate'.",
           "suggestion": "Stanze rimosse"
         }
       ],
@@ -120,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Rooms removed\" implies a passive action. The Japanese translation \"ルームが削除されました\" (Room ga sakujo saremashita) translates to \"Rooms were deleted.\" While close, \"removed\" can have nuances beyond simple deletion. Depending on the context, \"取り除かれました\" (torihikomaremashita) might be a more accurate translation conveying a sense of removing something from a place.",
-          "suggestion": "ルームが取り除かれました (Room ga torihikomaremashita)"
+          "description": "The translation 'ルームが削除されました' (Room ga sakujo saremashita) literally translates to \"Rooms were deleted.\" While technically correct, it conveys a more formal and passive tone than the original \"Rooms removed.\" A more appropriate and active translation might be \"削除されたルーム\" (Sakujo sareta ruum) which translates to \"Removed rooms\".",
+          "suggestion": "削除されたルーム (Sakujo sareta ruum)"
         }
       ],
       "approved_at": null
@@ -129,13 +123,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Rooms removed' is a more concise description than the Korean translation '방이 삭제되었습니다'. The latter translates to 'Rooms have been deleted' which is grammatically correct but less direct.  A more appropriate translation would be something like '삭제된 방' (removed rooms) or '제거된 방' (eliminated rooms).",
-          "suggestion": "Consider '삭제된 방' or '제거된 방' for a more concise and equivalent translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -189,7 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'කාමර ඉවත් කෙරිණි' while literally translatable to \"rooms were removed\", sounds slightly awkward and overly formal in Sinhala. A more natural phrasing would be preferred.",
+          "suggestion": "කාමර ඉවත් කළා"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -210,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Собе уклоњене' is not an accurate translation of 'Rooms removed'. 'Sobe' means 'rooms' but the verb 'уклоњене' (uklonjene) doesn't convey the passive voice 'removed' correctly. It means 'removed' in a more active sense, as if they performed the removal.",
-          "suggestion": "Одвојене собе"
+          "description": "The Serbian (Cyrillic) translation \"Собе уклоњене\" is not a correct translation of \"Rooms removed\". It is grammatically incorrect and doesn't convey the intended meaning.",
+          "suggestion": "The correct translation should be something like \"Уклоњени простори\" (Uklonjeni prostori) or \"Избрисане собе\" (Izbrisane sobe)."
         }
       ],
       "approved_at": null
@@ -219,13 +213,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Sobe uklonjene\" is technically correct, a more natural and commonly used translation for \"Rooms removed\" would be \"Uklonjene prostorije\" or \"Uklonjene sobe\" (depending on the context). \"Sobe uklonjene\" sounds slightly awkward.",
-          "suggestion": "Uklonjene prostorije"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -246,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Đã xóa phòng\" is a literal translation, it's not the most natural or idiomatic way to convey \"Rooms removed\" in Vietnamese. \"Rooms removed\" often implies a deletion that has already happened and is being acknowledged.",
-          "suggestion": "Consider alternatives like \"Phòng đã bị xóa\" (Rooms have been deleted) or \"Phòng đã loại bỏ\" (Rooms have been removed) for a more natural feel. The best option depends on the exact context."
+          "description": "While \"Đã xóa phòng\" is understandable, a more natural and precise translation of \"Rooms removed\" would be \"Các phòng đã bị xóa\" or \"Phòng đã bị xóa\". \"Đã xóa phòng\" is grammatically correct but lacks the passive voice inherent in the English phrase, implying someone performed the removal.",
+          "suggestion": "Các phòng đã bị xóa"
         }
       ],
       "approved_at": null

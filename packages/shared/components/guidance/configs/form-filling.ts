@@ -37,7 +37,10 @@ export const getFormFillingConfig = ({ t }: GuidanceConfig): GuidanceStep[] => [
         type: GuidanceElementType.Content,
         refKey: GuidanceRefKey.Share,
         offset: {
-          value: 2,
+          left: -2,
+          top: -2,
+          width: 6,
+          height: 5,
         },
         smallBorder: true,
       },

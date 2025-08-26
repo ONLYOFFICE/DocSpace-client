@@ -3,7 +3,7 @@
   "content": "Interface theme",
   "content_en_sha1_hash": "f47f8ed32464b7b3aa479c8638758420470a60e9",
   "created_at": "2025-05-19T21:30:53.359Z",
-  "updated_at": "2025-05-24T06:12:42.770Z",
+  "updated_at": "2025-08-21T11:22:39.913Z",
   "comment": {
     "text": "This translation key is used for the interface theme description displayed on the profile settings page. It explains the purpose of this setting and helps users understand its effect on the app's visual appearance.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/index.js",
-      "line_number": 43,
-      "context": "import { SECTION_HEADER_HEIGHT } from \"@docspace/shared/components/section/Section.constants\";\n import MainProfile from \"./sub-components/main-profile\";\n import LoginContent from \"./sub-components/LoginContent\";\n import Notifications from \"./sub-components/notifications\";\n import FileManagement from \"./sub-components/file-management\";\n import InterfaceTheme from \"./sub-components/interface-theme\";\n \n import AuthorizedApps from \"./sub-components/authorized-apps\";\n \n const Wrapper = styled.div`\n display: flex;",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/index.tsx",
+      "line_number": 54,
+      "context": "import MainProfile from \"./sub-components/main-profile\";\n import LoginContent from \"./sub-components/login\";\n import Notifications from \"./sub-components/notifications\";\n import FileManagement from \"./sub-components/file-management\";\n import InterfaceTheme from \"./sub-components/interface-theme\";\n import AuthorizedApps from \"./sub-components/authorized-apps\";\n import useProfileBody from \"./useProfileBody\";\n \n const Wrapper = styled.div`\n display: flex;",
       "module": "/packages/client"
     }
   ],

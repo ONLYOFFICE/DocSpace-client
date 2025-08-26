@@ -3,7 +3,7 @@
   "content": "The license is not valid. Make sure you select the correct file.",
   "content_en_sha1_hash": "c341f78e4aeff67e1ff38612677f3f38cb476b47",
   "created_at": "2025-05-19T21:30:57.213Z",
-  "updated_at": "2025-05-24T14:54:43.329Z",
+  "updated_at": "2025-08-21T11:22:39.937Z",
   "comment": {
     "text": "This translation key is used to display an error message when a license file is invalid or missing. It appears in a file input field within a wizard page. The text informs users to select the correct file.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/wizard/page.client.tsx",
-      "line_number": 430,
-      "context": "className=\"license-filed\"\n isVertical={true}\n labelVisible={false}\n hasError={hasErrorLicense}\n errorMessage={\n invalidLicense ? t(\"ErrorLicenseBody\") : t(\"ErrorUploadLicenseFile\")\n }\n >\n <FileInput\n scale\n size={InputSize.large}",
+      "line_number": 437,
+      "context": "className=\"license-filed\"\n isVertical\n labelVisible={false}\n hasError={hasErrorLicense}\n errorMessage={\n invalidLicense ? t(\"ErrorLicenseBody\") : t(\"ErrorUploadLicenseFile\")\n }\n dataTestId=\"license_field_container\"\n >\n <FileInput\n scale",
       "module": "/packages/login"
     }
   ],

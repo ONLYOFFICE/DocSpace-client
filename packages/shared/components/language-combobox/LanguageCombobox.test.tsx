@@ -49,11 +49,11 @@ describe("LanguageCombobox", () => {
 
   it("renders without crashing", () => {
     render(<LanguageCombobox {...defaultProps} />);
-    expect(screen.getByTestId("combobox")).toBeInTheDocument();
+    expect(screen.getByTestId("language-combobox")).toBeInTheDocument();
   });
 
   it("applies custom className", () => {
     render(<LanguageCombobox {...defaultProps} />);
-    expect(screen.getByTestId("combobox")).toHaveClass("test-class");
+    expect(screen.getByTestId("language-combobox")).toHaveClass("test-class");
   });
 });

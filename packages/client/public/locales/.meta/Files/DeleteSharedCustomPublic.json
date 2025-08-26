@@ -3,7 +3,7 @@
   "content": "The link will be deleted permanently. You will not be able to undo this action.",
   "content_en_sha1_hash": "291d989a907f37f68f6722de9a2b1c829ef6ef24",
   "created_at": "2025-05-19T21:30:55.430Z",
-  "updated_at": "2025-05-26T07:57:32.295Z",
+  "updated_at": "2025-08-04T07:30:01.099Z",
   "comment": {
     "text": "This translation key is used to display a warning message when deleting a shared link in a public or custom room. It informs users that the deletion action is permanent and irreversible.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteLinkDialog/index.js",
-      "line_number": 128,
-      "context": "if (isPublicRoomType)\n return t(\"Files:RevokeSharedLinkDescriptionPublicRoom\");\n }\n \n if (isPublicRoomType || isCustomRoom)\n return t(\"Files:DeleteSharedCustomPublic\");\n \n return t(\"Files:DeleteSharedLink\");\n };\n \n console.debug({",
+      "line_number": 147,
+      "context": "if (isPublicRoomType)\n return t(\"Files:RevokeSharedLinkDescriptionPublicRoom\");\n }\n \n if (isPublicRoomType || isCustomRoom)\n return t(\"Files:DeleteSharedCustomPublic\");\n \n return t(\"Files:DeleteSharedLink\");\n };\n \n return (",
       "module": "/packages/client"
     }
   ],
@@ -27,25 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'سيتم حذف الرابط نهائيا لن تتمكن من التراجع عن هذا الإجراء' is a literal translation but sounds slightly unnatural in Arabic. A more natural phrasing would emphasize the finality.",
-          "suggestion": "سيتم حذف الرابط بشكل نهائي ولن يكون بالإمكان استرجاعه."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Link həmişəlik silinəcək. Bu əməliyyatı geri qaytara bilməzsiniz.\" is a generally accurate translation, but 'geri qaytara bilməzsiniz' is a bit literal and sounds slightly awkward in Azerbaijani. A more natural phrasing for 'You will not be able to undo this action' would be 'Bu hərəkəti arxa돌urmaq mümkün deyil' or 'Bu hərəkəti ləğv etmək mümkün deyil'.",
-          "suggestion": "Consider using 'Bu hərəkəti arxa돌urmaq mümkün deyil' or 'Bu hərəkəti ləğv etmək mümkün deyil' for a more natural and idiomatic rendering."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -111,18 +99,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"The link will be deleted permanently\" is not perfectly captured by \"링크가 영구적으로 삭제됩니다.\" While the meaning is similar, a more natural and precise translation would be something like \"링크가 영구히 삭제되어집니다.\" or \"링크는 영구적으로 삭제됩니다.\"",
-          "suggestion": "링크는 영구적으로 삭제됩니다."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"You will not be able to undo this action\" is not perfectly captured by \"이 작업은 실행 취소할 수 없습니다.\" A more natural phrasing would be \"이 작업은 되돌릴 수 없습니다.\"",
-          "suggestion": "이 작업은 되돌릴 수 없습니다."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -134,13 +111,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"permanently\" is better conveyed with a more emphatic term in Latvian, given the severity of the action. \"Neatgriezeniski\" is correct but could be strengthened.",
-          "suggestion": "Saite tiks dzēsta pavisam neatgriezeniski. Šo darbību nevarēsiet atcelt."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -170,13 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'şters' is a valid spelling, but 'șters' is the more common and preferred spelling in modern Romanian.",
-          "suggestion": "Link-ul va fi șters definitiv. Această acțiune nu poate fi anulată."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -188,18 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ක්‍රියාව' (kriyawa) is a bit formal for this context. A more common and accessible word would be better.",
-          "suggestion": "මෙම ක්‍රියාව --> මෙම පියවර (pīyava)"
-        },
-        {
-          "type": "grammar",
-          "description": "While grammatically correct, 'ඔබට මෙම ක්‍රියාව අහෝසි කිරීමට නොහැකි වනු ඇත' sounds slightly awkward. A more natural phrasing could improve readability.",
-          "suggestion": "ඔබට මෙම ක්‍රියාව අහෝසි කිරීමට නොහැකි වනු ඇත --> ඔබට මෙය අවමඟුලක් කිරීමට බැරිවනු ඇත."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -217,23 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'линк' is often used informally. A more formal and accurate translation of 'link' would be 'веза'.",
-          "suggestion": "Веза ће бити трајно избрисана."
-        },
-        {
-          "type": "grammar",
-          "description": "Agreement error: The verb 'бити' needs to agree in gender and number with 'веза'. Since 'веза' is feminine singular, it should be 'биће', not 'бити'.",
-          "suggestion": "Веза ће бити трајно избрисана."
-        },
-        {
-          "type": "grammar",
-          "description": "The verb 'бити' is not necessary. A more concise translation would omit it.",
-          "suggestion": "Веза ће бити трајно избрисана."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

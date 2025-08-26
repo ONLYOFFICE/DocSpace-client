@@ -3,7 +3,7 @@
   "content": "By continuing, you understand and agree to our <1>Terms and conditions</1> and <2>Privacy statement</2>.",
   "content_en_sha1_hash": "a1850a6bb971901ab26d5ec516c919f3835e1a23",
   "created_at": "2025-05-19T21:30:57.403Z",
-  "updated_at": "2025-05-26T07:57:32.867Z",
+  "updated_at": "2025-06-30T12:20:31.664Z",
   "comment": {
     "text": "This translation key is used to display the user agreement statement for terms and conditions and privacy policy. It appears in a registration form and is likely displayed as an overlay or modal when a user continues after agreeing to the terms. Translators should focus on ensuring that the wording accurately conveys the necessary legal information in each supported language.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/_sub-components/RegistrationForm.tsx",
       "line_number": 133,
-      "context": "<div className=\"terms-conditions\">\n <Text fontSize={\"13px\"} textAlign=\"center\" lineHeight=\"20px\">\n <Trans\n t={t}\n ns=\"Confirm\"\n i18nKey=\"TermsAndConditions\"\n components={{\n 1: (\n <Link\n key=\"component_key\"\n tag=\"a\"",
+      "context": "<div className=\"terms-conditions\">\n <Text fontSize=\"13px\" textAlign=\"center\" lineHeight=\"20px\">\n <Trans\n t={t}\n ns=\"Confirm\"\n i18nKey=\"TermsAndConditions\"\n components={{\n 1: (\n <Link\n key=\"component_key\"\n tag=\"a\"",
       "module": "/packages/login"
     }
   ],

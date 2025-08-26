@@ -24,11 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React from "react";
 import { inject, observer } from "mobx-react";
 import { Button } from "@docspace/shared/components/button";
 import styled from "styled-components";
-import ChangePricingPlanDialog from "../../../../../../components/dialogs/ChangePricingPlanDialog";
 
 const StyledBody = styled.div`
   button {
@@ -40,39 +39,11 @@ const DowngradePlanButtonContainer = ({
   isDisabled,
   isLoading,
   isLessCountThanAcceptable,
-  isAlreadyPaid,
-  onUpdateTariff,
-  canDowngradeTariff,
-  canPayTariff,
+  onDowngradeTariff,
   buttonLabel,
 }) => {
-  const [isVisibleDowngradePlanDialog, setIsVisibleDowngradePlanDialog] =
-    useState(false);
-
-  const isPassedByQuota = () => {
-    return isAlreadyPaid ? canDowngradeTariff : canPayTariff;
-  };
-  const onDowngradeTariff = () => {
-    if (isPassedByQuota()) {
-      onUpdateTariff && onUpdateTariff();
-      return;
-    }
-
-    setIsVisibleDowngradePlanDialog(true);
-  };
-
-  const onClose = () => {
-    isVisibleDowngradePlanDialog && setIsVisibleDowngradePlanDialog(false);
-  };
-
   return (
     <StyledBody>
-      {isVisibleDowngradePlanDialog ? (
-        <ChangePricingPlanDialog
-          visible={isVisibleDowngradePlanDialog}
-          onClose={onClose}
-        />
-      ) : null}
       <Button
         label={buttonLabel}
         size="medium"
@@ -80,6 +51,7 @@ const DowngradePlanButtonContainer = ({
         isDisabled={isLessCountThanAcceptable || isLoading || isDisabled}
         onClick={onDowngradeTariff}
         isLoading={isLoading}
+        testId="downgrade_plan_button"
       />
     </StyledBody>
   );

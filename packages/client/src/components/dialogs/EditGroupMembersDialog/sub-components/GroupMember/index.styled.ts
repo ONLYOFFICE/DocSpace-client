@@ -26,7 +26,7 @@
 
 import styled from "styled-components";
 
-import { injectDefaultTheme, TextUserSelect } from "@docspace/shared/utils";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
 export const GroupMember = styled.div.attrs(injectDefaultTheme)<{
   isExpect: boolean;
@@ -43,7 +43,6 @@ export const GroupMember = styled.div.attrs(injectDefaultTheme)<{
 
   .user_body-wrapper {
     overflow: auto;
-    ${TextUserSelect}
   }
 
   .info,

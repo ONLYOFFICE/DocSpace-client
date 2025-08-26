@@ -320,8 +320,6 @@ class SettingsStore {
 
   isBannerVisible = false;
 
-  showGuestReleaseTip = false;
-
   logoText = "";
 
   limitedAccessDevToolsForUsers = false;
@@ -334,6 +332,8 @@ class SettingsStore {
 
   scrollToSettings: boolean = false;
 
+  displayBanners: boolean = false;
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -344,10 +344,6 @@ class SettingsStore {
 
   setTenantStatus = (tenantStatus: TenantStatus) => {
     this.tenantStatus = tenantStatus;
-  };
-
-  setShowGuestReleaseTip = (showGuestReleaseTip: boolean) => {
-    this.showGuestReleaseTip = showGuestReleaseTip;
   };
 
   get wizardCompleted() {
@@ -614,6 +610,12 @@ class SettingsStore {
       : this.helpCenterDomain;
   }
 
+  get walletHelpUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.configuringsettings
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.configuringsettings}`
+      : this.helpCenterDomain;
+  }
+
   get webhooksGuideUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.administrationguides
       ? `${this.helpCenterDomain}${this.helpCenterEntries.administrationguides}`
@@ -739,19 +741,19 @@ class SettingsStore {
   get downloaddesktopUrl() {
     return this.siteDomain && this.siteEntries?.downloaddesktop
       ? `${this.siteDomain}${this.siteEntries.downloaddesktop}`
-      : this.siteDomain;
+      : null;
   }
 
   get officeforandroidUrl() {
     return this.siteDomain && this.siteEntries?.officeforandroid
       ? `${this.siteDomain}${this.siteEntries.officeforandroid}`
-      : this.siteDomain;
+      : null;
   }
 
   get officeforiosUrl() {
     return this.siteDomain && this.siteEntries?.officeforios
       ? `${this.siteDomain}${this.siteEntries.officeforios}`
-      : this.siteDomain;
+      : null;
   }
 
   get forumLinkUrl() {
@@ -765,7 +767,7 @@ class SettingsStore {
   }
 
   get requestEntriesUrl() {
-    return this.externalResources?.support.entries?.request;
+    return this.externalResources?.support?.entries?.request;
   }
 
   get requestSupportUrl() {
@@ -775,11 +777,11 @@ class SettingsStore {
   }
 
   get documentationEmail() {
-    return this.externalResources?.common.entries.documentationemail;
+    return this.externalResources?.common?.entries?.documentationemail;
   }
 
   get bookTrainingEmail() {
-    return this.externalResources?.common.entries?.booktrainingemail;
+    return this.externalResources?.common?.entries?.booktrainingemail;
   }
 
   get appearanceBlockHelpUrl() {
@@ -1550,6 +1552,10 @@ class SettingsStore {
 
   setScrollToSettings = (scrollToSettings: boolean) => {
     this.scrollToSettings = scrollToSettings;
+  };
+
+  setDisplayBanners = (displayBanners: boolean) => {
+    this.displayBanners = displayBanners;
   };
 }
 

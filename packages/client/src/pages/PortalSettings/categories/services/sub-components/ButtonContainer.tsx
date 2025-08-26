@@ -44,6 +44,7 @@ interface ButtonContainerProps {
   isCurrentStoragePlan?: boolean;
   hasStorageSubscription?: boolean;
   isDowngradeStoragePlan?: boolean;
+  isPaymentBlocked?: boolean;
 }
 
 const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
@@ -59,6 +60,7 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
     isCurrentStoragePlan,
     isDowngradeStoragePlan,
     hasStorageSubscription,
+    isPaymentBlocked,
   } = props;
 
   const { t } = useServicesActions();
@@ -75,12 +77,15 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
         onClick={isExceedingStorageLimit ? onSendRequest : onBuy}
         isLoading={isLoading || isWaitingCalculation}
         isDisabled={
-          !isExceedingStorageLimit && !isDowngradeStoragePlan
-            ? (!hasStorageSubscription && isNullAmount) ||
-              isPaymentBlockedByBalance ||
-              isCurrentStoragePlan
-            : false
+          isPaymentBlocked
+            ? true
+            : !isExceedingStorageLimit && !isDowngradeStoragePlan
+              ? (!hasStorageSubscription && isNullAmount) ||
+                isPaymentBlockedByBalance ||
+                isCurrentStoragePlan
+              : false
         }
+        testId="storage_plan_upgrade_ok_button"
       />
       <Button
         key="CancelButton"
@@ -89,6 +94,7 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
         scale
         onClick={onClose}
         isDisabled={isLoading}
+        testId="storage_plan_upgrade_cancel_button"
       />
     </>
   );

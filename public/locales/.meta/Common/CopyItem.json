@@ -3,7 +3,7 @@
   "content": "<2>{{title}}</2> successfully copied to <1>{{folderName}}</1>",
   "content_en_sha1_hash": "230031d75ca57d38f165f05a0fbf2c89bf74c2c6",
   "created_at": "2025-05-19T21:30:43.772Z",
-  "updated_at": "2025-05-26T07:57:32.839Z",
+  "updated_at": "2025-06-30T12:20:31.635Z",
   "comment": {
     "text": "This translation key is used to display a success message when an item (e.g. file or folder) is successfully copied in the UI. The message includes placeholders for the title and folder name of the copied item. It appears in success messages displayed via the toastr library, often as a toast notification.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/doceditor/src/hooks/useStartFillingSelectDialog.tsx",
-      "line_number": 208,
+      "line_number": 207,
       "context": "toastr.success(\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"CopyItem\"\n values={values}\n components={components}\n />,\n );",
       "module": "/packages/doceditor"
     }

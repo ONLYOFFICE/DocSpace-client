@@ -3,7 +3,7 @@
   "content": "No",
   "content_en_sha1_hash": "816c52fd2bdd94a63cd0944823a6c0aa9384c103",
   "created_at": "2025-05-19T21:30:46.818Z",
-  "updated_at": "2025-06-08T12:02:32.604Z",
+  "updated_at": "2025-08-11T18:11:59.120Z",
   "comment": {
     "text": "This translation key is used to display the word \"No\" in various contexts, such as a confirm button in a cancel operation dialog and a button in a cancel upload dialog. It is used to provide an option for users to decline or cancel an action.",
     "is_auto": true,
@@ -18,14 +18,14 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CancelUploadDialog/index.js",
-      "line_number": 71,
-      "context": "primary\n onClick={onCancelProcess}\n isLoading={loading}\n />\n <Button\n label={t(\"Common:No\")}\n size=\"normal\"\n scale\n onClick={onClose}\n isDisabled={loading}\n />",
+      "line_number": 72,
+      "context": "onClick={onCancelProcess}\n isLoading={loading}\n testId=\"confirm_cancel_upload_button\"\n />\n <Button\n label={t(\"Common:No\")}\n size=\"normal\"\n scale\n onClick={onClose}\n isDisabled={loading}\n testId=\"cancel_confirmation_cancel_button\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/StoragePlanCancel.tsx",
-      "line_number": 158,
-      "context": "onClick={handleStoragePlanChange}\n isLoading={isLoading}\n />\n <Button\n key=\"CancelButton\"\n label={t(\"Common:No\")}\n size={ButtonSize.normal}\n onClick={onClose}\n />\n </ModalDialog.Footer>\n </ModalDialog>",
+      "line_number": 164,
+      "context": "isLoading={isLoading}\n testId=\"storage_plan_cancel_ok_button\"\n />\n <Button\n key=\"CancelButton\"\n label={t(\"Common:No\")}\n size={ButtonSize.normal}\n onClick={onClose}\n testId=\"storage_plan_cancel_no_button\"\n />\n </ModalDialog.Footer>",
       "module": "/packages/client"
     }
   ],
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Xeyr' is a valid translation for 'No', often used as a polite refusal or to mean 'okay' in some contexts. However, it's more formal and less common than other options for a simple 'No'. Depending on the context, a more direct translation like 'Yox' might be more suitable.",
-          "suggestion": "Consider 'Yox' as an alternative translation for a more direct 'No'."
+          "description": "The English word \"No\" is best translated as \"Yox\" in Azerbaijani, not \"Xeyr\". \"Xeyr\" typically means 'goodbye' or 'no, thank you'.",
+          "suggestion": "Change \"Xeyr\" to \"Yox\"."
         }
       ],
       "approved_at": null

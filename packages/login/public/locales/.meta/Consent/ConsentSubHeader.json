@@ -3,7 +3,7 @@
   "content": "<1>{{nameApp}}</1> would like the ability to access the following data in <strong>your {{productName}} account</strong>:",
   "content_en_sha1_hash": "c957267e1716ff361bf4fba5521f23172333de4b",
   "created_at": "2025-05-19T21:30:57.325Z",
-  "updated_at": "2025-05-24T15:17:37.242Z",
+  "updated_at": "2025-06-30T12:20:31.671Z",
   "comment": {
     "text": "This translation key is used for a consent subheader that informs users about the data access requested by an application within their account. It is displayed in a screen where user consent is required, likely as part of an account settings or login process. The key allows translators to localize the text \"would like the ability to access\" and \"your {{productName}} account\".",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/components/ConsentInfo.tsx",
-      "line_number": 81,
+      "line_number": 106,
       "context": "lineHeight=\"22px\"\n >\n {isConsentScreen ? (\n <Trans\n t={t}\n i18nKey=\"ConsentSubHeader\"\n ns=\"Consent\"\n values={{ nameApp: name, productName: t(\"Common:ProductName\") }}\n components={{\n 1: (\n <Link",
       "module": "/packages/login"
     }

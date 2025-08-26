@@ -3,7 +3,7 @@
   "content": "Change type",
   "content_en_sha1_hash": "6e6f60c8b6ac90dba84303fb48273c30945c6d3f",
   "created_at": "2025-05-19T21:30:56.926Z",
-  "updated_at": "2025-05-26T07:57:32.543Z",
+  "updated_at": "2025-08-04T07:30:01.319Z",
   "comment": {
     "text": "This translation key is used for the \"Change type\" button in a user settings dialog. It appears as a label on a dropdown menu or a button, allowing users to select a new user type. The text should be translated to fit different languages and cultures.",
     "is_auto": true,
@@ -12,43 +12,43 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/RowView/index.tsx",
-      "line_number": 153,
+      "line_number": 156,
       "context": "const onClearFilter = () => setSearchValue(\"\");\n \n const headerMenu = [\n {\n id: \"change-type\",\n label: t(\"ChangeUserTypeDialog:ChangeUserTypeButton\"),\n disabled: false,\n withDropDown: true,\n options: typeOptions,\n iconUrl: ChangeTypeReactSvgUrl,\n onClick: () => {},",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/RowView/index.tsx",
-      "line_number": 153,
+      "line_number": 156,
       "context": "const onClearFilter = () => setSearchValue(\"\");\n \n const headerMenu = [\n {\n id: \"change-type\",\n label: t(\"ChangeUserTypeDialog:ChangeUserTypeButton\"),\n disabled: false,\n withDropDown: true,\n options: typeOptions,\n iconUrl: ChangeTypeReactSvgUrl,\n onClick: () => {},",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/TableView/index.tsx",
       "line_number": 132,
-      "context": "};\n \n const headerMenu: TGroupMenuItem[] = [\n {\n id: \"change-type\",\n label: t(\"ChangeUserTypeDialog:ChangeUserTypeButton\"),\n disabled: false,\n withDropDown: true,\n options: typeOptions,\n iconUrl: ChangeTypeReactSvgUrl,\n onClick: () => {},",
+      "context": "};\n \n const headerMenu: TGroupMenuItem[] = [\n {\n id: \"change-type\",\n label: t(\"ChangeUserTypeDialog:ChangeUserTypeButton\"),\n disabled: false,\n withDropDown: true,\n options: typeOptions as ContextMenuModel[],\n iconUrl: ChangeTypeReactSvgUrl,\n onClick: () => {},",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/TableView/index.tsx",
       "line_number": 132,
-      "context": "};\n \n const headerMenu: TGroupMenuItem[] = [\n {\n id: \"change-type\",\n label: t(\"ChangeUserTypeDialog:ChangeUserTypeButton\"),\n disabled: false,\n withDropDown: true,\n options: typeOptions,\n iconUrl: ChangeTypeReactSvgUrl,\n onClick: () => {},",
+      "context": "};\n \n const headerMenu: TGroupMenuItem[] = [\n {\n id: \"change-type\",\n label: t(\"ChangeUserTypeDialog:ChangeUserTypeButton\"),\n disabled: false,\n withDropDown: true,\n options: typeOptions as ContextMenuModel[],\n iconUrl: ChangeTypeReactSvgUrl,\n onClick: () => {},",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 303,
+      "line_number": 304,
       "context": "case \"change-type\":\n return {\n id: \"option_change-type\",\n key: option,\n icon: ChangeToEmployeeReactSvgUrl,\n label: t(\"ChangeUserTypeDialog:ChangeUserTypeButton\"),\n onClick:\n isGuests && isRoomAdmin\n ? () =>\n this.usersStore.changeType(\n EmployeeType.User,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 303,
+      "line_number": 304,
       "context": "case \"change-type\":\n return {\n id: \"option_change-type\",\n key: option,\n icon: ChangeToEmployeeReactSvgUrl,\n label: t(\"ChangeUserTypeDialog:ChangeUserTypeButton\"),\n onClick:\n isGuests && isRoomAdmin\n ? () =>\n this.usersStore.changeType(\n EmployeeType.User,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/HeaderMenuStore.ts",
-      "line_number": 174,
+      "line_number": 151,
       "context": "const headerMenu = [\n {\n id: \"menu-change-type\",\n key: \"change-user\",\n label: t(\"ChangeUserTypeDialog:ChangeUserTypeButton\"),\n disabled: isGuests ? !hasUsersToMakeEmployees : !hasUsersToChangeType,\n iconUrl: ChangeToEmployeeReactSvgUrl,\n onClick:\n isGuests && isRoomAdmin\n ? () =>",
       "module": "/packages/client"
     }
@@ -69,13 +69,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Növün dəyişdirilməsi\" is too literal and clunky for a button label. It translates to \"The change of type\". A more natural and user-friendly translation would be something like \"Yeni növ\" (New type) or \"Növü dəyiş\" (Change type).",
-          "suggestion": "Növü dəyiş"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -135,13 +129,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'タイプの変更' (Tai puru no henko) is a literal translation of 'Change type' and while understandable, it's not the most natural phrasing in Japanese. A more idiomatic translation would be something like 'ユーザータイプ変更' (Yuuzaa taipu henko) or 'タイプ変更' (Taippu henko).",
-          "suggestion": "タイプ変更 (Taippu henko) or ユーザータイプ変更 (Yuuzaa taipu henko)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -189,13 +177,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Modificare tip' is a literal translation and doesn't fully convey the intended meaning of 'Change type' in a user interface context. 'Modificare' implies a more complex change. A more natural and user-friendly translation would be something like 'Schimbă tipul' or 'Modifică tip'.",
-          "suggestion": "Schimbă tipul"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -207,13 +189,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'වර්ගය සංශෝධනය' (vargaya sanshodanaya) literally translates to 'type amendment' or 'category amendment'. While understandable, it's not the most natural or idiomatic way to convey 'Change type' in Sinhala. A more natural translation would be something like 'වර්ගය වෙනස් කරන්න' (vargaya venas karanna) which means 'change type'.",
-          "suggestion": "වර්ගය වෙනස් කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

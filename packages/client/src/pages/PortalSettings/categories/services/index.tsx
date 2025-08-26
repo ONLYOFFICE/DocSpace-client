@@ -27,20 +27,28 @@
 import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { useLocation, useNavigate } from "react-router";
+
 import { toastr } from "@docspace/shared/components/toast";
 import { TOTAL_SIZE } from "@docspace/shared/constants";
 import { TTranslation } from "@docspace/shared/types";
+
+import { StorageTariffDeactiveted } from "SRC_DIR/components/dialogs";
 
 import AdditionalStorage from "./AdditionalStorage";
 import StoragePlanUpgrade from "./StoragePlanUpgrade";
 import ServicesLoader from "./ServicesLoader";
 
 import StoragePlanCancel from "./StoragePlanCancel";
+import GracePeriodModal from "./GracePeriodModal";
 
 type ServicesProps = {
   servicesInit: (t: TTranslation) => void;
   isInitServicesPage: boolean;
   isVisibleWalletSettings: boolean;
+  isShowStorageTariffDeactivatedModal: boolean;
+  isGracePeriod: boolean;
+  previousStoragePlanSize: number;
 };
 
 let timerId: NodeJS.Timeout | null = null;
@@ -49,13 +57,22 @@ const Services: React.FC<ServicesProps> = ({
   servicesInit,
   isInitServicesPage,
   isVisibleWalletSettings,
+  isGracePeriod,
+  previousStoragePlanSize,
+  isShowStorageTariffDeactivatedModal,
 }) => {
   const { t, ready } = useTranslation(["Payments", "Common"]);
   const [isStorageVisible, setIsStorageVisible] = useState(false);
   const [isStorageCancelattion, setIsStorageCancellation] = useState(false);
+  const [isGracePeriodModalVisible, setIsGracePeriodModalVisible] =
+    useState(false);
+  const [previousValue, setPreviousValue] = useState(0);
 
   const [showLoader, setShowLoader] = useState(false);
   const shouldShowLoader = !isInitServicesPage || !ready;
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { openDialog } = location.state || {};
 
   useEffect(() => {
     const fetchData = async () => {
@@ -75,6 +92,14 @@ const Services: React.FC<ServicesProps> = ({
   }, [isVisibleWalletSettings]);
 
   useEffect(() => {
+    if (openDialog) {
+      setIsStorageVisible(openDialog);
+      setPreviousValue(previousStoragePlanSize);
+      navigate(location.pathname, { replace: true });
+    }
+  }, [openDialog]);
+
+  useEffect(() => {
     timerId = setTimeout(() => {
       setShowLoader(true);
     }, 200);
@@ -85,6 +110,11 @@ const Services: React.FC<ServicesProps> = ({
   }, []);
 
   const onClick = () => {
+    if (isGracePeriod) {
+      setIsGracePeriodModalVisible(true);
+      return;
+    }
+
     setIsStorageVisible(true);
   };
 
@@ -106,6 +136,10 @@ const Services: React.FC<ServicesProps> = ({
     }
   };
 
+  const onCloseGracePeriodModal = () => {
+    setIsGracePeriodModalVisible(false);
+  };
+
   return shouldShowLoader ? (
     showLoader ? (
       <ServicesLoader />
@@ -113,8 +147,17 @@ const Services: React.FC<ServicesProps> = ({
   ) : (
     <>
       <AdditionalStorage onClick={onClick} onToggle={onToggle} />
+      {isShowStorageTariffDeactivatedModal ? (
+        <StorageTariffDeactiveted
+          visible={isShowStorageTariffDeactivatedModal}
+        />
+      ) : null}
       {isStorageVisible ? (
-        <StoragePlanUpgrade visible={isStorageVisible} onClose={onClose} />
+        <StoragePlanUpgrade
+          visible={isStorageVisible}
+          onClose={onClose}
+          previousValue={previousValue}
+        />
       ) : null}
       {isStorageCancelattion ? (
         <StoragePlanCancel
@@ -122,19 +165,31 @@ const Services: React.FC<ServicesProps> = ({
           onClose={onCloseStorageCancell}
         />
       ) : null}
+      {isGracePeriodModalVisible ? (
+        <GracePeriodModal
+          visible={isGracePeriodModalVisible}
+          onClose={onCloseGracePeriodModal}
+        />
+      ) : null}
     </>
   );
 };
 
-export const Component = inject(({ servicesStore }: TStore) => {
-  const { servicesInit, isInitServicesPage, isVisibleWalletSettings } =
-    servicesStore;
-
-  return {
-    servicesInit,
-    isInitServicesPage,
-    isVisibleWalletSettings,
-  };
-})(observer(Services));
+export const Component = inject(
+  ({ servicesStore, currentTariffStatusStore, paymentStore }: TStore) => {
+    const { servicesInit, isInitServicesPage, isVisibleWalletSettings } =
+      servicesStore;
+    const { isGracePeriod, previousStoragePlanSize } = currentTariffStatusStore;
+    const { isShowStorageTariffDeactivatedModal } = paymentStore;
+    return {
+      servicesInit,
+      isInitServicesPage,
+      isVisibleWalletSettings,
+      isShowStorageTariffDeactivatedModal,
+      isGracePeriod,
+      previousStoragePlanSize,
+    };
+  },
+)(observer(Services));
 
 export default Component;

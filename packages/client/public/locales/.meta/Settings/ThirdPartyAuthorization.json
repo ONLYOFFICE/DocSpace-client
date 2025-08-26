@@ -3,7 +3,7 @@
   "content": "Third-party Authorization",
   "content_en_sha1_hash": "3861395ee9ebb8b36b5c86c31bb334a7938d4491",
   "created_at": "2025-05-19T21:30:52.873Z",
-  "updated_at": "2025-06-08T12:02:32.727Z",
+  "updated_at": "2025-08-12T19:46:26.061Z",
   "comment": {
     "text": "This translation key is used to display the label \"Third-party Authorization\" in various UI contexts, such as buttons and dialog titles, primarily within integration settings and portal settings. It appears on a page that allows users to manage third-party services integrations.",
     "is_auto": true,
@@ -12,25 +12,25 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 209,
+      "line_number": 212,
       "context": "return t(\"PortalAccess\", { productName: t(\"Common:ProductName\") });\n case \"TwoFactorAuth\":\n return t(\"TwoFactorAuth\");\n case \"ManagementCategoryIntegration\":\n return t(\"ManagementCategoryIntegration\");\n case \"ThirdPartyAuthorization\":\n return t(\"ThirdPartyAuthorization\");\n case \"Migration\":\n return t(\"Migration\");\n case \"Backup\":\n return t(\"Common:Backup\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/index.js",
-      "line_number": 122,
+      "line_number": 126,
       "context": "class ThirdPartyServices extends React.Component {\n constructor(props) {\n super(props);\n const { t, tReady } = props;\n \n if (tReady) setDocumentTitle(`${t(\"ThirdPartyAuthorization\")}`);\n \n this.state = {\n dialogVisible: false,\n isLoading: false,\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/index.js",
-      "line_number": 122,
+      "line_number": 126,
       "context": "class ThirdPartyServices extends React.Component {\n constructor(props) {\n super(props);\n const { t, tReady } = props;\n \n if (tReady) setDocumentTitle(`${t(\"ThirdPartyAuthorization\")}`);\n \n this.state = {\n dialogVisible: false,\n isLoading: false,\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 342,
+      "line_number": 349,
       "context": "{\n id: \"portal-settings_catalog-third-party-services\",\n key: \"4-1\",\n icon: \"\",\n link: \"third-party-services\",\n tKey: \"ThirdPartyAuthorization\",\n isCategory: true,\n },\n {\n id: \"portal-settings_catalog-sso\",\n key: \"4-2\",",
       "module": "/packages/client"
     }
@@ -48,7 +48,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'المصادقة مع الطرف الثالث' while technically accurate, doesn't convey the common meaning of 'Authorization' as granting permission. 'Authorization' implies a process or privilege, while 'المصادقة مع الطرف الثالث' leans towards authentication or verification with a third party. A more appropriate translation would focus on the granting of access.",
+          "description": "While \"المصادقة مع الطرف الثالث\" is a literal translation, \"Authorization\" implies granting permission, which is better conveyed by a phrase like \"تفويض الطرف الثالث\" or \"السماح للطرف الثالث\". \"المصادقة\" typically refers to verification or authentication, not authorization.",
           "suggestion": "تفويض الطرف الثالث"
         }
       ],
@@ -66,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Удостоверяване от Трето Лице\" is technically correct, it's a very formal and potentially confusing translation for \"Third-party Authorization\".  A more natural and user-friendly translation might be preferable.",
-          "suggestion": "Consider alternatives like \"Авторизация от Трети Страни\" or \"Разрешения от Трети Страни\" which are more commonly used in this context."
+          "description": "While \"Удостоверяване от Трето Лице\" is a literal translation, it's not the most natural or commonly used phrasing in Bulgarian for \"Third-party Authorization.\" \"Разрешение от Трета Страна\" or \"Оторизация от Трета Страна\" would be more idiomatic.",
+          "suggestion": "Consider \"Разрешение от Трета Страна\" or \"Оторизация от Трета Страна\"."
         }
       ],
       "approved_at": null
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The German translation \"Dienste von Drittanbietern\" translates to \"Third-party Services\" rather than \"Third-party Authorization.\" While related, it doesn't convey the precise meaning of authorization.",
-          "suggestion": "Consider a more accurate translation like \"Drittanbieter-Autorisierung\" or \"Berechtigungen von Drittanbietern\" to more closely reflect 'Third-party Authorization'."
+          "description": "'Third-party Authorization' implies a formal granting of permission. 'Dienste von Drittanbietern' translates to 'Third-party services' which is a broader and less precise term. While technically not incorrect, it misses the specific nuance of authorization.",
+          "suggestion": "Consider 'Drittanbieter-Autorisierung' or 'Berechtigungen von Drittanbietern' to more closely reflect the English meaning. The best option would depend on the surrounding context and desired level of formality."
         }
       ],
       "approved_at": null
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The French translation 'Tiers autorisé' is a literal translation and doesn't accurately convey the meaning of 'Third-party Authorization'. 'Tiers' refers to a third party, but 'autorisé' is a passive form. It's missing the active voice or action of granting authorization.",
-          "suggestion": "Autorisation par un tiers"
+          "description": "The translation 'Tiers autorisé' doesn't fully convey the meaning of 'Third-party Authorization'. While 'Tiers' correctly refers to third parties, 'autorisé' implies a single authorization, whereas the English term suggests a broader framework.",
+          "suggestion": "Autorisation par des tiers"
         }
       ],
       "approved_at": null
@@ -126,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Երրորդ կողմի լիազորում\" is a literal translation, \"Third-party Authorization\" often implies a permission or agreement granted to a third party, which might be better conveyed with a more nuanced term in Armenian.",
-          "suggestion": "Consider alternatives like \"Երրորդ կողմի խնձիրավիճակ\" (Third-party Agreement) or \"Երրորդ կողմի թույլտվություն\" (Third-party Permission) depending on the specific context."
+          "description": "While \"Երրորդ կողմի լիազորում\" is a literal translation, it might not be the most natural or commonly used term for \"Third-party Authorization\" in an Armenian user interface. It sounds somewhat formal and technical.",
+          "suggestion": "Consider alternatives like \"Երրորդ կողմի աջակցություն\" (Third-party support) or a more context-specific phrasing depending on the exact functionality.  A user research or feedback from native Armenian speakers is highly recommended to find the most appropriate term."
         }
       ],
       "approved_at": null
@@ -144,13 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While '第三者機関による認証' is technically correct, it's a very literal and formal translation of 'Third-party Authorization.' It doesn't convey the ease or typical understanding of third-party authorization in a settings context. 'サードパーティ認証' would be more natural and commonly used.",
-          "suggestion": "サードパーティ認証"
-        },
-        {
-          "type": "cultural",
-          "description": "The use of '機関' (kikan - institution/agency) sounds overly formal and bureaucratic for a user-facing setting. It creates a sense of something complex and potentially intimidating.",
-          "suggestion": "Consider alternatives that are more approachable and less formal. For example, omitting '機関' entirely or using a more casual term depending on the specific brand voice."
+          "description": "The translation '第三者機関による認証' is too literal and formal for a settings label. 'Third-party Authorization' typically refers to permission granted to a third party to access or use services, not necessarily an authentication process *by* a third party.",
+          "suggestion": "Consider a translation that conveys the idea of granting permission to third parties, such as 'サードパーティ連携' (Sādo pāti renkei - Third-party connection/integration) or '第三者連携' (Daisansha renkei - Third-party connection/integration)."
         }
       ],
       "approved_at": null
@@ -167,13 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ການອະນຸຍາດໃຫ້ສິດກັບບຸກຄົນທີ 3\" is a literal translation and can be improved for clarity and natural language. 'ການອະນຸຍາດໃຫ້ສິດ' is a bit redundant; 'ການອະນຸຍາດ' alone is sufficient.",
-          "suggestion": "ການອະນຸຍາດໃຫ້ບຸກຄົນທີ 3"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the phrase \"ບຸກຄົນທີ 3\" is commonly seen, a more natural phrasing could improve readability.",
-          "suggestion": "ບຸກຄົນທີສາມ"
+          "description": "The translation \"ການອະນຸຍາດໃຫ້ສິດກັບບຸກຄົນທີ 3\" is a literal translation that doesn't fully capture the nuance of \"Third-party Authorization.\" It implies granting rights *to* a third person, rather than authorization *by* a third party. A more accurate translation would convey the concept of allowing access or approval through a third party.",
+          "suggestion": "Consider alternatives such as \"ການອະນຸຍາດຈາກບຸກຄົນທີ 3\", \"ການຮັບອະນຸຍາດຈາກບຸກຄົນທີ 3\", or a more contextual translation depending on the specific function."
         }
       ],
       "approved_at": null
@@ -199,7 +189,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Autorização para Terceiros' is understandable, a more idiomatic and precise translation of 'Third-party Authorization' would be 'Autorização de Terceiros'. 'Para' implies authorization *for* third parties, whereas 'de' signifies authorization *by* or *from* third parties, which aligns better with the intended meaning.",
+          "suggestion": "Autorização de Terceiros"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -214,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Autentificare de terță parte' is understandable, it's not the most natural or commonly used translation for 'Third-party Authorization'. 'Autorizare de la terți' or 'Autorizare prin terți' would be more accurate and idiomatic.",
-          "suggestion": "Autorizare de la terți"
+          "description": "While \"Autentificare de terță parte\" is a possible translation, \"Autorizare de terță parte\" would be a more direct and commonly used equivalent for 'Third-party Authorization'. 'Autentificare' implies authentication or verification, while 'Autorizare' better reflects the granting of permission.",
+          "suggestion": "Autorizare de terță parte"
         }
       ],
       "approved_at": null
@@ -226,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Russian translation \"Сторонние сервисы\" (Storonnie servisyi) translates to 'Third-party services' rather than 'Third-party Authorization'. While 'services' can be implied, the direct meaning is lost.",
-          "suggestion": "Consider \"Разрешение сторонних приложений\" (Razreshenie storonnih prilozheniy) for 'Third-party Authorization' or \"Авторизация сторонних приложений\" (Avtorizatsiya storonnih prilozheniy) if authorization is the key element."
+          "description": "The translation \"Сторонние сервисы\" (Storonnie servisyi) translates to \"Third-party services\" rather than \"Third-party Authorization\". While \"сторонние\" (storonnie) relates to third-party, the concept of \"Authorization\" is lost.",
+          "suggestion": "Consider \"Разрешение сторонних приложений\" (Razreshenie storonnikh prilozheniy) or \"Авторизация сторонних сервисов\" (Avtorizatsiya storonnikh servisov) to better reflect the English term."
         }
       ],
       "approved_at": null
@@ -238,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"තෙවන පාර්ශ්ව බලයදීම\" while containing the correct components (Third-party, Power/Authorization), the overall phrasing is not the most natural or common way to express \"Third-party Authorization\" in Sinhala. It sounds somewhat literal.",
-          "suggestion": "Consider alternative translations like \"තෙවන පාර්ශ්ව අවසරය\" (Third-party permission), \"තෙවන පාර්ශ්ව අනුමැතිය\" (Third-party approval), or \"තෙවන පාර්ශ්ව බලතීන්ත\" (Third-party empowerment). The best choice depends on the specific nuance desired."
+          "description": "The translation 'තෙවන පාර්ශ්ව බලයදීම' while containing the correct words, doesn't accurately convey the meaning of 'Third-party Authorization'. 'Authorization' implies granting permission or rights. 'බලයදීම' translates closer to 'empowerment' or 'giving power' rather than authorization.",
+          "suggestion": "A more accurate translation might be 'තෙවන පාර්ශ්ව අවසරය' (Thavena parshwa avasariya) which translates to 'Third-party Permission'. Or 'තෙවන පාර්ශ්වික අධිකාරය' (Thavena parshvika adhikaaraya) for 'Third-party Authority'."
         }
       ],
       "approved_at": null
@@ -256,8 +252,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Pooblastilo tretje osebe' is a literal translation, it's not the most natural or common way to express 'Third-party Authorization' in Slovenian. It sounds quite formal and legalistic.",
-          "suggestion": "Consider alternatives like 'Avtorizacija tretjih oseb' or 'Odobritev tretjih oseb'. 'Avtorizacija' is closer in meaning to 'Authorization' in a general sense and 'Odobritev' implies approval or permission. The best option depends on the specific context, but they are more idiomatic."
+          "description": "While \"Pooblastilo tretje osebe\" is technically correct, it's a very literal and somewhat clunky translation of \"Third-party Authorization.\" A more natural and common term in Slovenian for this context would be \"Avtorizacija tretje osebe\" or potentially \"Dovoljenje tretje osebe\" depending on the specific nuance required.",
+          "suggestion": "Consider using \"Avtorizacija tretje osebe\" or \"Dovoljenje tretje osebe\" for a more idiomatic translation."
         }
       ],
       "approved_at": null
@@ -265,19 +261,19 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Ауторизација треће стране\" is a rather formal and less natural phrasing in Serbian. A more common and user-friendly translation would be something along the lines of \"Овлашћење треће стране\" or \"Повезивање са трећом страном\". \"Трећа страна\" is accurate but can sound stiff in a user interface.",
-          "suggestion": "Consider \"Овлашћење треће стране\" or \"Повезивање са трећом страном\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Autorizacija treće strane\" is understandable, a more natural and common translation for \"Third-party Authorization\" in Serbian (Latin) would be \"Autorizacija spoljašnjih strana\" or \"Autorizacija od trećih strana\". \"Treće strane\" can sound slightly awkward in this context.",
+          "suggestion": "Autorizacija spoljašnjih strana"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -295,7 +291,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Ủy quyền của bên thứ ba\" is a literal translation, it might sound a bit formal and less natural in Vietnamese. A more common and understandable translation would be something like \"Phân quyền cho bên thứ ba\" or \"Cấp quyền cho bên thứ ba\".",
+          "suggestion": "Phân quyền cho bên thứ ba"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

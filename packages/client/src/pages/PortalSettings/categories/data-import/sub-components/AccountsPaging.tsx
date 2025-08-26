@@ -132,6 +132,7 @@ const AccountsPaging = (props: AccountsPagingProps) => {
       selectedCountItem={selectedCountItem}
       disablePrevious={!pageItems[selectedPageItem.pageNumber - 1]}
       disableNext={!pageItems[selectedPageItem.pageNumber + 1]}
+      dataTestId="accounts_paging"
     />
   );
 };

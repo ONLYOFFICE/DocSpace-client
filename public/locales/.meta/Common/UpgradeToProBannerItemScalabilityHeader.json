@@ -3,7 +3,7 @@
   "content": "Scalability and clustering.",
   "content_en_sha1_hash": "6cc8e719d41e0d79ee36d84a4938186906c5e5a8",
   "created_at": "2025-05-26T07:15:49.299Z",
-  "updated_at": "2025-05-26T08:02:06.655Z",
+  "updated_at": "2025-08-04T07:30:01.744Z",
   "comment": {
     "text": "This translation key is used to display a header that explains the benefits of scalability and clustering. It appears in a UI component likely used to promote or describe the upgrade to Pro features. Translators should focus on conveying the concept of improving system performance and adaptability.",
     "is_auto": true,
@@ -11,7 +11,7 @@
   },
   "usage": [
     {
-      "file_path": "/packages/shared/pages/Payments/Standalone/BenefitsContainer.tsx",
+      "file_path": "/packages/shared/pages/Payments/common/BenefitsContainer.tsx",
       "line_number": 77,
       "context": "description: t(\"UpgradeToProBannerItemLicenseDescr\"),\n };\n \n const scalabilityClustering = {\n imag: ScalabilityReactSvgUrl,\n title: t(\"UpgradeToProBannerItemScalabilityHeader\"),\n description: t(\"UpgradeToProBannerItemScalabilityDescr\"),\n };\n \n const featuresArray = [];",
       "module": "/packages/shared"

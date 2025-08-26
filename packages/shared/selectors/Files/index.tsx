@@ -31,7 +31,7 @@ import { useTranslation } from "react-i18next";
 
 import { createFile, deleteFile } from "../../api/files";
 
-import { FolderType, RoomsType, DeviceType } from "../../enums";
+import { FolderType, RoomsType, DeviceType, RoomSearchArea } from "../../enums";
 
 import { TSelectorItem } from "../../components/selector";
 import { Aside } from "../../components/aside";
@@ -185,6 +185,17 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     setIsInit,
   });
 
+  let rootFolderTypeItem;
+  const rootFolderTypeIndex = breadCrumbs.findIndex((tp) => tp.rootFolderType);
+  if (rootFolderTypeIndex > -1) {
+    rootFolderTypeItem = breadCrumbs[rootFolderTypeIndex].rootFolderType;
+  }
+
+  let searchArea;
+  if ((rootFolderType ?? rootFolderTypeItem) === FolderType.RoomTemplates) {
+    searchArea = RoomSearchArea.Templates;
+  }
+
   const { getRoomList } = useRoomsHelper({
     setBreadCrumbs,
     setHasNextPage,
@@ -205,6 +216,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     withCreate,
     createDefineRoomLabel,
     createDefineRoomType,
+    searchArea,
 
     withInit,
   });

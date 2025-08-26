@@ -44,6 +44,24 @@ const checkboxesNames = {
   ],
 };
 
+const checkboxesDataTestId = {
+  authRequestCheckbox: {
+    idp: "idp_verify_auth_responses_sign_checkbox",
+    sp: "sp_sign_auth_requests_checkbox",
+  },
+  logoutRequestCheckbox: {
+    idp: "idp_verify_logout_requests_sign_checkbox",
+    sp: "sp_sign_logout_requests_checkbox",
+  },
+  logoutResponseCheckbox: {
+    idp: "idp_verify_logout_responses_sign_checkbox",
+    sp: "sp_sign_logout_responses_checkbox",
+  },
+  encryptAssertionCheckbox: {
+    sp: "sp_encrypt_assertions_checkbox",
+  },
+};
+
 const StyledWrapper = styled.div`
   margin: 16px 0;
   .checkbox-input {
@@ -89,6 +107,7 @@ const CheckboxSet = (props) => {
         isChecked={
           prefix === "idp" ? idpVerifyAuthResponsesSign : spSignAuthRequests
         }
+        dataTestId={checkboxesDataTestId.authRequestCheckbox[prefix]}
       />
       <Checkbox
         id={
@@ -107,6 +126,7 @@ const CheckboxSet = (props) => {
         isChecked={
           prefix === "idp" ? idpVerifyLogoutRequestsSign : spSignLogoutRequests
         }
+        dataTestId={checkboxesDataTestId.logoutRequestCheckbox[prefix]}
       />
       <Checkbox
         id={
@@ -129,6 +149,7 @@ const CheckboxSet = (props) => {
             ? idpVerifyLogoutResponsesSign
             : spSignLogoutResponses
         }
+        dataTestId={checkboxesDataTestId.logoutResponseCheckbox[prefix]}
       />
 
       {prefix === "sp" ? (
@@ -141,6 +162,7 @@ const CheckboxSet = (props) => {
           name={checkboxesNames[prefix][3]}
           tabIndex={13}
           isChecked={spEncryptAssertions}
+          dataTestId={checkboxesDataTestId.encryptAssertionCheckbox[prefix]}
         />
       ) : null}
     </StyledWrapper>

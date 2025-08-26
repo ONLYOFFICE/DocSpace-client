@@ -3,7 +3,7 @@
   "content": "Create group",
   "content_en_sha1_hash": "5a0b1c170fd55ab07e5656625be963d20baa107a",
   "created_at": "2025-05-19T21:30:53.461Z",
-  "updated_at": "2025-05-26T07:57:32.250Z",
+  "updated_at": "2025-08-04T07:30:01.077Z",
   "comment": {
     "text": "\"This translation key is used to display the text 'Create group' in various UI elements, such as a modal dialog header and a button. It appears when users interact with options related to creating or managing groups, and its purpose is to provide a clear label for this action.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditGroupDialog/CreateGroupDialog.tsx",
-      "line_number": 156,
+      "line_number": 157,
       "context": "onClose={onClose}\n //   isScrollLocked={isScrollLocked}\n //   isOauthWindowOpen={isOauthWindowOpen}\n >\n <ModalDialog.Header>\n {t(\"PeopleTranslations:CreateGroup\")}\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n <StyledBodyContent>\n <GroupNameParam",
       "module": "/packages/client"
     },
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 727,
+      "line_number": 725,
       "context": "},\n {\n id: \"create_group\",\n className: \"main-button_drop-down\",\n icon: GroupReactSvgUrl,\n label: t(\"PeopleTranslations:CreateGroup\"),\n onClick: createGroup,\n action: \"group\",\n key: \"group\",\n },\n ];",
       "module": "/packages/client"
     }
@@ -45,13 +45,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Qrup yaradın' is a direct translation of 'Create group' but conveys the action of *having* created a group, not the act of creating one. A more accurate translation would be something like 'Qrup yarat' or 'Yeni qrup yaradın'.",
-          "suggestion": "Qrup yarat"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {

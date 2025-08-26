@@ -29,6 +29,7 @@ $font-family-base: "Open Sans", sans-serif;
 
 @use "./variables/colors";
 @use "../../../public/css/fonts.css";
+@use "./mixins";
 
 html,
 body {
@@ -45,6 +46,10 @@ body {
     inset-inline-start: calc(50% - 20px);
     top: 35%;
   }
+}
+
+img {
+  @include mixins.no-user-select;
 }
 
 .table-container_settings-checkbox {

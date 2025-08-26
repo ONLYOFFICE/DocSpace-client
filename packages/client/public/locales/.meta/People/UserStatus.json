@@ -3,7 +3,7 @@
   "content": "Status",
   "content_en_sha1_hash": "bae7d5be70820ed56467bd9a63744e23b47bd711",
   "created_at": "2025-05-19T21:30:53.557Z",
-  "updated_at": "2025-05-26T07:57:32.334Z",
+  "updated_at": "2025-08-12T19:46:25.943Z",
   "comment": {
     "text": "This translation key is used to display the status of a user in various parts of the application. It appears as \"Status\" next to the user's current state in the SettingsPluginDialog and as part of the user information panel. Its purpose is to provide a clear understanding of the user's current status, helping users navigate and understand their account settings or quotas effectively.",
     "is_auto": true,
@@ -12,20 +12,20 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Info.js",
-      "line_number": 165,
-      "context": "fontWeight={400}\n lineHeight=\"20px\"\n noSelect\n truncate\n >\n {t(\"People:UserStatus\")}\n </Text>\n <Text fontSize=\"13px\" fontWeight={600} lineHeight=\"20px\" noSelect>\n {pluginStatus}\n </Text>",
+      "line_number": 141,
+      "context": "</Text>\n </>\n ) : null}\n \n <Text fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\" truncate>\n {t(\"People:UserStatus\")}\n </Text>\n <Text fontSize=\"13px\" fontWeight={600} lineHeight=\"20px\">\n {pluginStatus}\n </Text>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 45,
-      "context": "import { CurrentQuotasStore } from \"@docspace/shared/store/CurrentQuotaStore\";\n import { SettingsStore } from \"@docspace/shared/store/SettingsStore\";\n import { EmployeeStatus } from \"@docspace/shared/enums\";\n \n import SpaceQuota from \"SRC_DIR/components/SpaceQuota\";\n import { getUserStatus } from \"SRC_DIR/helpers/people-helpers\";\n import { getContactsUrl } from \"SRC_DIR/helpers/contacts\";\n import ContactsConextOptionsStore from \"SRC_DIR/store/contacts/ContactsContextOptionsStore\";\n import UsersStore from \"SRC_DIR/store/contacts/UsersStore\";\n import InfoPanelStore from \"SRC_DIR/store/InfoPanelStore\";\n import AccessRightsStore from \"SRC_DIR/store/AccessRightsStore\";",
+      "line_number": 49,
+      "context": "import { SettingsStore } from \"@docspace/shared/store/SettingsStore\";\n import { EmployeeStatus } from \"@docspace/shared/enums\";\n import { Nullable } from \"@docspace/shared/types\";\n \n import SpaceQuota from \"SRC_DIR/components/SpaceQuota\";\n import { getUserStatus } from \"SRC_DIR/helpers/people-helpers\";\n import { getContactsUrl, TPeopleListItem } from \"SRC_DIR/helpers/contacts\";\n import ContactsConextOptionsStore from \"SRC_DIR/store/contacts/ContactsContextOptionsStore\";\n import UsersStore from \"SRC_DIR/store/contacts/UsersStore\";\n import AccessRightsStore from \"SRC_DIR/store/AccessRightsStore\";",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 45,
-      "context": "import { CurrentQuotasStore } from \"@docspace/shared/store/CurrentQuotaStore\";\n import { SettingsStore } from \"@docspace/shared/store/SettingsStore\";\n import { EmployeeStatus } from \"@docspace/shared/enums\";\n \n import SpaceQuota from \"SRC_DIR/components/SpaceQuota\";\n import { getUserStatus } from \"SRC_DIR/helpers/people-helpers\";\n import { getContactsUrl } from \"SRC_DIR/helpers/contacts\";\n import ContactsConextOptionsStore from \"SRC_DIR/store/contacts/ContactsContextOptionsStore\";\n import UsersStore from \"SRC_DIR/store/contacts/UsersStore\";\n import InfoPanelStore from \"SRC_DIR/store/InfoPanelStore\";\n import AccessRightsStore from \"SRC_DIR/store/AccessRightsStore\";",
+      "line_number": 49,
+      "context": "import { SettingsStore } from \"@docspace/shared/store/SettingsStore\";\n import { EmployeeStatus } from \"@docspace/shared/enums\";\n import { Nullable } from \"@docspace/shared/types\";\n \n import SpaceQuota from \"SRC_DIR/components/SpaceQuota\";\n import { getUserStatus } from \"SRC_DIR/helpers/people-helpers\";\n import { getContactsUrl, TPeopleListItem } from \"SRC_DIR/helpers/contacts\";\n import ContactsConextOptionsStore from \"SRC_DIR/store/contacts/ContactsContextOptionsStore\";\n import UsersStore from \"SRC_DIR/store/contacts/UsersStore\";\n import AccessRightsStore from \"SRC_DIR/store/AccessRightsStore\";",
       "module": "/packages/client"
     },
     {
@@ -42,7 +42,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/FilterDialog/StatusPicker.js",
-      "line_number": 113,
+      "line_number": 114,
       "context": ");\n \n return (\n <>\n <Text fontWeight={600} fontSize=\"15px\">\n {t(\"People:UserStatus\")}\n </Text>\n <Selectors>{StatusBadgeElements}</Selectors>\n </>\n );\n };",
       "module": "/packages/client"
     },

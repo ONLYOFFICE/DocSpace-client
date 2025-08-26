@@ -3,7 +3,7 @@
   "content": "Search block",
   "content_en_sha1_hash": "56c6cf7793ee4ba51ec0088f1810351bb7bb5a27",
   "created_at": "2025-05-19T21:30:54.653Z",
-  "updated_at": "2025-05-26T07:57:32.359Z",
+  "updated_at": "2025-08-11T09:02:43.892Z",
   "comment": {
     "text": "This translation key is used for a UI component that represents a search block. It is typically displayed as a label and may also include an image, and appears in various contexts such as panels, tooltips, or dialog boxes, guiding users to search functionality.",
     "is_auto": true,
@@ -12,20 +12,20 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
-      "line_number": 518,
-      "context": "<CheckboxElement\n label={t(\"JavascriptSdk:SearchFilterAndSort\")}\n onChange={onTitleChange}\n isChecked={embeddingConfig.showFilter}\n img={theme.isBase ? SearchUrl : SearchDarkUrl}\n title={t(\"JavascriptSdk:SearchBlock\")}\n description={t(\n \"JavascriptSdk:ManagerSearchBlockDescription\",\n )}\n />\n </div>",
+      "line_number": 533,
+      "context": "<CheckboxElement\n label={t(\"JavascriptSdk:SearchFilterAndSort\")}\n onChange={onTitleChange}\n isChecked={embeddingConfig.showFilter}\n img={theme.isBase ? SearchUrl : SearchDarkUrl}\n title={t(\"JavascriptSdk:SearchBlock\")}\n dataTestId=\"show_filter\"\n description={t(\n \"JavascriptSdk:ManagerSearchBlockDescription\",\n )}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 534,
-      "context": "place=\"right\"\n offsetRight={4}\n size={12}\n tooltipContent={\n <TooltipContent\n title={t(\"SearchBlock\")}\n description={t(\"ManagerSearchBlockDescription\")}\n img={theme.isBase ? SearchUrl : SearchDarkUrl}\n />\n }\n />",
+      "line_number": 546,
+      "context": "place=\"right\"\n offsetRight={4}\n size={12}\n tooltipContent={\n <TooltipContent\n title={t(\"SearchBlock\")}\n description={t(\"ManagerSearchBlockDescription\")}\n img={theme.isBase ? SearchUrl : SearchDarkUrl}\n />\n }\n dataTestId=\"show_filter_help_button\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
-      "line_number": 413,
-      "context": "place=\"right\"\n offsetRight={4}\n size={12}\n tooltipContent={\n <TooltipContent\n title={t(\"SearchBlock\")}\n description={t(\"ManagerSearchBlockDescription\")}\n img={theme.isBase ? SearchUrl : SearchDarkUrl}\n />\n }\n />",
+      "line_number": 418,
+      "context": "offsetRight={4}\n size={12}\n dataTestId=\"filter_help_button\"\n tooltipContent={\n <TooltipContent\n title={t(\"SearchBlock\")}\n description={t(\"ManagerSearchBlockDescription\")}\n img={theme.isBase ? SearchUrl : SearchDarkUrl}\n />\n }\n />",
       "module": "/packages/client"
     }
   ],

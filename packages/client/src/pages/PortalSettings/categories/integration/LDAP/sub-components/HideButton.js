@@ -54,7 +54,6 @@ const HideButton = (props) => {
           fontSize="16px"
           fontWeight={700}
           className="settings_unavailable"
-          noSelect
         >
           {text}
         </Text>
@@ -65,6 +64,7 @@ const HideButton = (props) => {
         isHovered
         onClick={onClick}
         type="action"
+        dataTestId="hide_show_ldap_link"
       >
         {value
           ? isAdditionalParameters

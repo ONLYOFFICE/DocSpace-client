@@ -3,7 +3,7 @@
   "content": "Access denied",
   "content_en_sha1_hash": "64343a83ad8c0b8e2789c32ca5ab1eb6abb614e0",
   "created_at": "2025-05-19T21:30:42.816Z",
-  "updated_at": "2025-05-26T07:57:32.872Z",
+  "updated_at": "2025-08-21T11:22:39.939Z",
   "comment": {
     "text": "This translation key displays a message indicating that access has been denied, used when the user lacks permissions to perform an action. It is displayed in an error container within the login component and can also be triggered by OAuth errors, such as client permission denial.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/login/src/components/ConfirmRoute.tsx",
-      "line_number": 63,
-      "context": "user &&\n !user.isAdmin &&\n !user.isOwner &&\n !user.isRoomAdmin\n ) {\n throw new Error(t(\"Common:AccessDenied\"));\n }\n \n useEffect(() => {\n if (location.search.includes(\"culture\")) return;\n const lng = getCookie(LANGUAGE);",
+      "line_number": 64,
+      "context": "user &&\n !user.isAdmin &&\n !user.isOwner &&\n !user.isRoomAdmin\n ) {\n throw new Error(t(\"Common:AccessDenied\"));\n }\n \n useEffect(() => {\n if (window.location.search.includes(\"culture\")) return;\n const lng = getCookie(LANGUAGE);",
       "module": "/packages/login"
     },
     {

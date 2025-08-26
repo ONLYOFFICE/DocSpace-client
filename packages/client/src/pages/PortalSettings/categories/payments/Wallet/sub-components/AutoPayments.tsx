@@ -35,20 +35,18 @@ import { toastr } from "@docspace/shared/components/toast";
 import { TextInput, InputType } from "@docspace/shared/components/text-input";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { TAutoTopUpSettings } from "@docspace/shared/api/portal/types";
+
 import CheckRoundSvg from "PUBLIC_DIR/images/icons/16/check.round.react.svg";
 
 import styles from "../styles/AutoPayments.module.scss";
-import { formatCurrencyValue } from "../utils";
 
 type AutoPaymentsProps = {
   onAdditionalSave?: () => void;
   noMargin?: boolean;
   walletCustomerEmail?: boolean;
-  currency?: string;
   updateAutoPayments?: () => Promise<void>;
   autoPayments?: TAutoTopUpSettings | null | undefined;
   isAutoPaymentExist?: boolean;
-  language?: string;
   setMinBalance?: (value: string) => void;
   setUpToBalance?: (value: string) => void;
   isAutomaticPaymentsEnabled?: boolean;
@@ -61,18 +59,17 @@ type AutoPaymentsProps = {
   setUpToBalanceError?: (value: boolean) => void;
   upToBalanceError?: boolean;
   isDisabled?: boolean;
+  formatWalletCurrency?: (item?: number, fractionDigits?: number) => string;
 };
 
 type CurrentPaymentSettingsProps = {
   autoPayments: TAutoTopUpSettings;
-  language: string;
-  currency: string;
+  formatWalletCurrency?: (item?: number, fractionDigits?: number) => string;
 };
 
 const CurrentPaymentSettings = ({
   autoPayments,
-  language,
-  currency,
+  formatWalletCurrency,
 }: CurrentPaymentSettingsProps) => {
   const { t } = useTranslation("Payments");
 
@@ -88,8 +85,8 @@ const CurrentPaymentSettings = ({
       </div>
       <Text fontSize="12px" fontWeight={400} className={styles.infoDescription}>
         {t("WhenBalanceDropsTo", {
-          min: formatCurrencyValue(language, minBalance, currency),
-          max: formatCurrencyValue(language, upToBalance, currency),
+          min: formatWalletCurrency!(minBalance, 0),
+          max: formatWalletCurrency!(upToBalance, 0),
         })}
       </Text>
     </div>
@@ -98,11 +95,9 @@ const CurrentPaymentSettings = ({
 
 const AutoPayments = ({
   walletCustomerEmail,
-  currency,
   updateAutoPayments,
   autoPayments,
   isAutoPaymentExist,
-  language,
   isEditAutoPayment,
   setMinBalance,
   setUpToBalance,
@@ -117,6 +112,7 @@ const AutoPayments = ({
   upToBalanceError,
   noMargin,
   isDisabled,
+  formatWalletCurrency,
 }: AutoPaymentsProps) => {
   const { t } = useTranslation(["Payments", "Common"]);
 
@@ -238,15 +234,10 @@ const AutoPayments = ({
   };
 
   const description = (min: number, max: number) => (
-    <Text
-      fontSize="12px"
-      className={styles.inputDescription}
-      noSelect
-      fontWeight={400}
-    >
+    <Text fontSize="12px" className={styles.inputDescription} fontWeight={400}>
       {t("EnterAnIntegerAmountBetween", {
-        min: formatCurrencyValue(language!, min, currency!),
-        max: formatCurrencyValue(language!, max, currency!),
+        min: formatWalletCurrency!(min, 0),
+        max: formatWalletCurrency!(max, 0),
       })}
     </Text>
   );
@@ -254,12 +245,7 @@ const AutoPayments = ({
   const renderInputField = () => (
     <div className={styles.inputFields}>
       <div className={styles.inputField}>
-        <Text
-          fontSize="12px"
-          className={styles.inputLabel}
-          noSelect
-          fontWeight={600}
-        >
+        <Text fontSize="12px" className={styles.inputLabel} fontWeight={600}>
           {t("WhenBalanceGoesBellow")}
         </Text>
         <TextInput
@@ -270,17 +256,13 @@ const AutoPayments = ({
           type={InputType.text}
           pattern="\d+"
           isDisabled={isDisabled}
+          testId="top_up_min_balance_input"
         />
         {description(5, 1000)}
       </div>
 
       <div className={styles.inputField}>
-        <Text
-          fontSize="12px"
-          className={styles.inputLabel}
-          noSelect
-          fontWeight={600}
-        >
+        <Text fontSize="12px" className={styles.inputLabel} fontWeight={600}>
           {t("BringCreditBackUpTo")}
         </Text>
         <TextInput
@@ -291,6 +273,7 @@ const AutoPayments = ({
           type={InputType.text}
           pattern="\d+"
           isDisabled={isDisabled}
+          testId="top_up_max_balance_input"
         />
         {description(minUpToBalance, 5000)}
       </div>
@@ -310,6 +293,7 @@ const AutoPayments = ({
               !minBalance ||
               !upToBalance
             }
+            testId="save_auto_payment_button"
           />
           <Button
             key="CancelButton"
@@ -317,6 +301,7 @@ const AutoPayments = ({
             size={ButtonSize.small}
             onClick={onClose}
             isDisabled={isDisabled || isLoading}
+            testId="cancel_auto_payment_button"
           />
         </div>
       ) : null}
@@ -332,8 +317,7 @@ const AutoPayments = ({
     >
       <CurrentPaymentSettings
         autoPayments={autoPayments!}
-        language={language!}
-        currency={currency!}
+        formatWalletCurrency={formatWalletCurrency}
       />
       <Button
         key="EditButton"
@@ -341,6 +325,7 @@ const AutoPayments = ({
         size={ButtonSize.small}
         onClick={onEditClick}
         isDisabled={isDisabled}
+        testId="edit_auto_payment_button"
       />
     </div>
   );
@@ -352,7 +337,7 @@ const AutoPayments = ({
       })}
     >
       <div className={styles.autoPaymentHeader}>
-        <Text noSelect isBold fontSize="16px">
+        <Text isBold fontSize="16px">
           {t("AutomaticPayments")}
         </Text>
         <ToggleButton
@@ -360,10 +345,11 @@ const AutoPayments = ({
           onChange={onToggleClick}
           className={styles.toggleButton}
           isDisabled={isDisabled || !walletCustomerEmail}
+          dataTestId="auto_payments_toggle_button"
         />
       </div>
 
-      <Text fontSize="12px" className={styles.autoPaymentDescription} noSelect>
+      <Text fontSize="12px" className={styles.autoPaymentDescription}>
         {t("AutomaticallyTopUpCard")}
       </Text>
 
@@ -376,9 +362,8 @@ const AutoPayments = ({
   );
 };
 
-export default inject(({ paymentStore, authStore }: TStore) => {
+export default inject(({ paymentStore, currentTariffStatusStore }: TStore) => {
   const {
-    walletCustomerEmail,
     updateAutoPayments,
     autoPayments,
     isAutoPaymentExist,
@@ -388,21 +373,20 @@ export default inject(({ paymentStore, authStore }: TStore) => {
     setIsAutomaticPaymentsEnabled,
     minBalance,
     upToBalance,
-    walletCodeCurrency,
     setMinBalanceError,
     minBalanceError,
     setUpToBalanceError,
     upToBalanceError,
+    formatWalletCurrency,
   } = paymentStore;
-  const { language } = authStore;
+
+  const { walletCustomerEmail } = currentTariffStatusStore;
 
   return {
     walletCustomerEmail,
     updateAutoPayments,
     autoPayments,
     isAutoPaymentExist,
-    currency: walletCodeCurrency,
-    language,
     setMinBalance,
     setUpToBalance,
     isAutomaticPaymentsEnabled,
@@ -413,5 +397,6 @@ export default inject(({ paymentStore, authStore }: TStore) => {
     minBalanceError,
     setUpToBalanceError,
     upToBalanceError,
+    formatWalletCurrency,
   };
 })(observer(AutoPayments));

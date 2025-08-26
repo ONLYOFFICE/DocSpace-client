@@ -3,7 +3,7 @@
   "content": "Hide",
   "content_en_sha1_hash": "34d8b60fe25332f7b98585e82e753eaf502c3e50",
   "created_at": "2025-05-19T21:30:50.084Z",
-  "updated_at": "2025-05-24T03:25:50.490Z",
+  "updated_at": "2025-08-11T18:11:59.247Z",
   "comment": {
     "text": "This translation key is used as a label for a button that allows users to hide or toggle off Single Sign-On functionality. In the UI, this \"Hide\" button appears in a portal settings page and is likely used by administrators to manage their organization's SSO configuration.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/HideButton.js",
       "line_number": 45,
-      "context": ".hide-button {\n margin-inline-start: 12px;\n }\n `;\n \n const HideButton = (props) => {\n const { t } = useTranslation(\"SingleSignOn\");\n const { text, label, isAdditionalParameters, value, setHideLabel, id } =\n props;\n \n const onClick = () => {",
+      "context": ".hide-button {\n margin-inline-start: 12px;\n }\n `;\n \n const HideButton = (props) => {\n const { t } = useTranslation(\"SingleSignOn\");\n const {\n text,\n label,\n isAdditionalParameters,",
       "module": "/packages/client"
     }
   ],

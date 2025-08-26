@@ -55,7 +55,6 @@ import CreateRoomConfirmDialog from "./CreateRoomConfirmDialog";
 import PortalRenamingDialog from "./PortalRenamingDialog";
 import DataReassignmentDialog from "./DataReassignmentDialog";
 import SubmitToFormGallery from "./SubmitToFormGallery";
-import UnsavedChangesDialog from "./UnsavedChangesDialog";
 import DeleteLinkDialog from "./DeleteLinkDialog";
 import MoveToPublicRoom from "./MoveToPublicRoom";
 import SettingsPluginDialog from "./SettingsPluginDialog";
@@ -68,12 +67,12 @@ import EditGroupMembersDialog from "./EditGroupMembersDialog";
 import DeleteGroupDialog from "./DeleteGroupDialog";
 import RoomLogoCoverDialog from "./RoomLogoCoverDialog";
 import RemoveGuestDialog from "./RemoveGuest";
-import GuestReleaseTipDialog from "./GuestReleaseTip";
 import DeleteVersionDialog from "./DeleteVersionDialog";
 import CancelOperationDialog from "./CancelOperationDialog";
 import FormFillingTipsDialog from "./FormFillingTipsDialog";
 import ReducedRightsDialog from "./ReducedRightsDialog";
 import SocialAuthWelcomeDialog from "./SocialAuthWelcomeDialog";
+import StorageTariffDeactiveted from "./StorageTariffDeactiveted";
 
 export {
   EmptyTrashDialog,
@@ -107,7 +106,6 @@ export {
   PortalRenamingDialog,
   DataReassignmentDialog,
   SubmitToFormGallery,
-  UnsavedChangesDialog,
   DeleteLinkDialog,
   MoveToPublicRoom,
   SettingsPluginDialog,
@@ -120,10 +118,10 @@ export {
   DeleteGroupDialog,
   RoomLogoCoverDialog,
   RemoveGuestDialog,
-  GuestReleaseTipDialog,
   DeleteVersionDialog,
   CancelOperationDialog,
   FormFillingTipsDialog,
   ReducedRightsDialog,
   SocialAuthWelcomeDialog,
+  StorageTariffDeactiveted,
 };

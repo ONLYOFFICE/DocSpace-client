@@ -3,7 +3,7 @@
   "content": "Invalid link",
   "content_en_sha1_hash": "3aaeaeb6ec3f8154506ce18b333531c275dcb035",
   "created_at": "2025-05-19T21:30:45.936Z",
-  "updated_at": "2025-06-18T17:11:42.548Z",
+  "updated_at": "2025-08-21T11:22:39.928Z",
   "comment": {
     "text": "This translation key is used to display an error message when a link provided is invalid. It appears as a message shown by the docEditor component, typically in response to user interactions such as clicking on a button or attempting to load content.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/hooks/useEditorEvents.ts",
-      "line_number": 194,
-      "context": "docEditor = window.DocEditor.instances[EDITOR_ID];\n \n fixSize();\n \n if (errorMessage || isSkipError)\n return docEditor?.showMessage?.(errorMessage || t(\"Common:InvalidLink\"));\n \n const fillingStatus = window?.sessionStorage.getItem(FILLING_STATUS_ID);\n \n if (fillingStatus === \"true\") {\n docEditor?.requestRoles?.();",
+      "line_number": 197,
+      "context": "docEditor = window.DocEditor.instances[EDITOR_ID];\n \n fixSize();\n \n if (errorMessage || isSkipError)\n return docEditor?.showMessage?.(errorMessage || t(\"Common:InvalidLink\"));\n \n console.log(\"ONLYOFFICE Document Editor is ready\", docEditor);\n const url = window.location.href;\n \n const index = url.indexOf(\"#message/\");",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/login/src/components/ConfirmRoute.tsx",
-      "line_number": 93,
+      "line_number": 101,
       "context": "case ValidationResult.Invalid:\n console.error(\"invalid link\", {\n confirmLinkParams,\n validationResult: confirmLinkResult.result,\n });\n throw new Error(t(\"Common:InvalidLink\"));\n case ValidationResult.Expired:\n console.error(\"expired link\", {\n confirmLinkParams,\n validationResult: confirmLinkResult.result,\n });",
       "module": "/packages/login"
     },
@@ -180,23 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'සබැඳිය' is a correct spelling for 'link'.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'වලංගු' is a correct spelling for 'valid'.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'නොවේ' is a correct spelling for 'not'.",
-          "suggestion": null
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While the individual words are spelled correctly, the overall phrasing 'සබැඳිය වලංගු නොවේ' can be more naturally translated as 'අවලංගු සබැඳිය' or 'අවසම් සබැඳිය' for better flow and common usage.  'Invalid link' often implies the link itself is bad, not that it is not valid.",
-          "suggestion": "අවලංගු සබැඳිය"
+          "description": "The word 'සබැඳිය' is sometimes spelled 'සබැඳුම'. While 'සබැඳිය' isn't technically incorrect, 'සබැඳුම' is more common and might be preferred for greater clarity.",
+          "suggestion": "Consider using 'සබැඳුම' instead of 'සබැඳිය'."
         }
       ],
       "approved_at": null

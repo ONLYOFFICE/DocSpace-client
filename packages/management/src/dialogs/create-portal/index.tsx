@@ -179,7 +179,7 @@ export const CreatePortalDialog = observer(
           {t("CreatingPortal", { productName: t("Common:ProductName") })}
         </ModalDialog.Header>
         <ModalDialog.Body>
-          <Text noSelect>
+          <Text>
             {t("CreateSpaceDescription", {
               productName: t("Common:ProductName"),
             })}
@@ -190,7 +190,9 @@ export const CreatePortalDialog = observer(
               fontWeight="600"
               style={{ paddingBottom: "5px" }}
             >
-              {t("PortalName")}
+              {t("PortalName", {
+                productName: t("Common:ProductName"),
+              })}
             </Text>
             <TextInput
               type={InputType.text}

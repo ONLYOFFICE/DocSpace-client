@@ -3,7 +3,7 @@
   "content": "Enter email",
   "content_en_sha1_hash": "2561af4e3ae4688b16392bbda30fa27b36cf9e1a",
   "created_at": "2025-05-19T21:30:53.296Z",
-  "updated_at": "2025-06-18T17:11:42.373Z",
+  "updated_at": "2025-08-11T18:11:59.146Z",
   "comment": {
     "text": "\"Used as a placeholder and label for an email input field in various UI components, such as dialogs and tables, to prompt users to enter their email address.\"",
     "is_auto": true,
@@ -12,26 +12,26 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/EmailChangeDialog/index.tsx",
-      "line_number": 85,
-      "context": "<ModalDialog.Header>{t(\"AddEmail\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <DialogBodyWrapper>\n <Text>{displayName}</Text>\n <EmailInput\n placeholder={t(\"SMTPSettings:EnterEmail\")}\n className=\"import-email-input\"\n value={tempEmail}\n onChange={handleEmailChange}\n type={InputType.email}\n onValidateInput={onValidateEmail}",
+      "line_number": 84,
+      "context": "<ModalDialog.Header>{t(\"AddEmail\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <DialogBodyWrapper>\n <Text>{displayName}</Text>\n <EmailInput\n placeholder={t(\"SMTPSettings:EnterEmail\")}\n className=\"import-email-input\"\n value={tempEmail}\n onChange={handleEmailChange}\n onValidateInput={onValidateEmail}\n hasError={hasError}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/SalesDepartmentRequestDialog/index.js",
-      "line_number": 210,
-      "context": "scale\n value={email}\n onChange={onChangeEmail}\n onValidateInput={onValidateEmailInput}\n hasError={!isValidEmail}\n placeholder={t(\"SMTPSettings:EnterEmail\")}\n />\n </FieldContainer>\n \n <FieldContainer\n className=\"description_field\"",
+      "line_number": 213,
+      "context": "scale\n value={email}\n onChange={onChangeEmail}\n onValidateInput={onValidateEmailInput}\n hasError={!isValidEmail}\n placeholder={t(\"SMTPSettings:EnterEmail\")}\n testId=\"request_email_input\"\n />\n </FieldContainer>\n \n <FieldContainer",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/RowView/UsersRowContent.tsx",
-      "line_number": 205,
-      "context": "displayName={displayName}\n />\n ) : (\n <EmailInputWrapper ref={emailInputRef}>\n <EmailInput\n placeholder={t(\"SMTPSettings:EnterEmail\")}\n className=\"import-email-input\"\n value={tempEmail}\n onChange={handleEmailChange}\n type={InputType.email}\n onValidateInput={onValidateEmail}",
+      "line_number": 204,
+      "context": "displayName={displayName}\n />\n ) : (\n <EmailInputWrapper ref={emailInputRef}>\n <EmailInput\n placeholder={t(\"SMTPSettings:EnterEmail\")}\n className=\"import-email-input\"\n value={tempEmail}\n onChange={handleEmailChange}\n onValidateInput={onValidateEmail}\n hasError={hasError}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/TableView/UsersTableRow.tsx",
-      "line_number": 202,
-      "context": "<TableCell>\n {isEmailOpen ? (\n <EmailInputWrapper ref={emailInputRef}>\n <EmailInput\n placeholder={t(\"SMTPSettings:EnterEmail\")}\n className=\"import-email-input\"\n value={tempEmail}\n onChange={handleEmailChange}\n type={InputType.email}\n onValidateInput={onValidateEmail}",
+      "line_number": 203,
+      "context": "<TableCell>\n {isEmailOpen ? (\n <EmailInputWrapper ref={emailInputRef}>\n <EmailInput\n placeholder={t(\"SMTPSettings:EnterEmail\")}\n className=\"import-email-input\"\n value={tempEmail}\n onChange={handleEmailChange}\n onValidateInput={onValidateEmail}\n onKeyDown={handleKeyDown}",
       "module": "/packages/client"
     }
   ],

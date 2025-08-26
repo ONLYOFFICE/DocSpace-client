@@ -3,7 +3,7 @@
   "content": "Enter email",
   "content_en_sha1_hash": "2561af4e3ae4688b16392bbda30fa27b36cf9e1a",
   "created_at": "2025-05-19T21:30:57.364Z",
-  "updated_at": "2025-05-24T15:27:54.552Z",
+  "updated_at": "2025-06-30T12:20:31.664Z",
   "comment": {
     "text": "This translation key is used to display a label for an email input field on a login form. It appears as a subtitle in the form and prompts the user to enter their email address.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/_sub-components/EmailInputForm.tsx",
       "line_number": 73,
-      "context": "const { t } = useTranslation([\"Confirm\", \"Common\"]);\n \n return (\n <div className=\"email-container\">\n <Text fontSize=\"16px\" fontWeight=\"600\" className=\"sign-in-subtitle\">\n {t(\"EnterEmailHeader\")}\n </Text>\n <FieldContainer\n className=\"form-field\"\n isVertical={true}\n labelVisible={false}",
+      "context": "const { t } = useTranslation([\"Confirm\", \"Common\"]);\n \n return (\n <div className=\"email-container\">\n <Text fontSize=\"16px\" fontWeight=\"600\" className=\"sign-in-subtitle\">\n {t(\"EnterEmailHeader\")}\n </Text>\n <FieldContainer\n className=\"form-field\"\n isVertical\n labelVisible={false}",
       "module": "/packages/login"
     }
   ],

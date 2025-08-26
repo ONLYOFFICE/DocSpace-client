@@ -35,14 +35,10 @@ import { DatePicker } from "./DatePicker";
 jest.mock("../selector-add-button", () => ({
   SelectorAddButton: ({
     children,
-    ...props
+    // ...props
   }: {
     children: React.ReactNode;
-  }) => (
-    <div data-testid="mock-selector-add-button" {...props}>
-      {children}
-    </div>
-  ),
+  }) => <div data-testid="mock-selector-add-button">{children}</div>,
 }));
 
 describe("DatePicker tests", () => {

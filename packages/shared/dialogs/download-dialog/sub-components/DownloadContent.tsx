@@ -57,6 +57,7 @@ export const DownloadContent = (props: DownloadContentProps) => {
     isChecked,
     isIndeterminate,
     getItemIcon,
+    dataTestId,
   } = props;
 
   const getTitleExtensions = () => {
@@ -119,20 +120,7 @@ export const DownloadContent = (props: DownloadContentProps) => {
       });
     });
 
-    switch (type) {
-      case "documents":
-        return formats;
-      case "spreadsheets":
-        return formats;
-      case "presentations":
-        return formats;
-      case "masterForms":
-        return formats;
-      case "pdfForms":
-        return formats;
-      default:
-        return [];
-    }
+    return type === "other" ? [] : formats;
   };
 
   const isOther = type === "other";
@@ -152,6 +140,7 @@ export const DownloadContent = (props: DownloadContentProps) => {
       className={classNames(styles.downloadContent, {
         [styles.isOpen]: showHeader ? isOpen : true,
       })}
+      data-testid={dataTestId || "download-dialog-content"}
     >
       {showHeader ? (
         <div
@@ -168,6 +157,7 @@ export const DownloadContent = (props: DownloadContentProps) => {
               isIndeterminate={isIndeterminate}
               onChange={onRowSelect}
               className={styles.downloadDialogCheckbox}
+              dataTestId={`${dataTestId}_checkbox`}
             />
             <div
               onClick={onOpen}
@@ -206,7 +196,7 @@ export const DownloadContent = (props: DownloadContentProps) => {
         </div>
       ) : null}
       <div className={styles.downloadDialogHiddenItems}>
-        {items.map((file) => {
+        {items.map((file, index) => {
           const dropdownItems = !isOther
             ? getFormats(file).filter(
                 (x) => isFile(file) && x.label !== file.fileExst,
@@ -224,6 +214,7 @@ export const DownloadContent = (props: DownloadContentProps) => {
               isOther={isOther}
               dropdownItems={dropdownItems}
               getItemIcon={getItemIcon}
+              dataTestId={`${dataTestId}_row_${index}`}
             />
           );
         })}

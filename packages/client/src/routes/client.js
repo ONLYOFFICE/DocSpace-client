@@ -26,16 +26,23 @@
 
 import { Navigate } from "react-router";
 
+import { validatePublicRoomKey } from "@docspace/shared/api/rooms";
+import { getSettingsFiles } from "@docspace/shared/api/files";
 import componentLoader from "@docspace/shared/utils/component-loader";
-
 import Error404 from "@docspace/shared/components/errors/Error404";
+
+import { ViewComponent } from "SRC_DIR/pages/Home/View";
+
 import PrivateRoute from "../components/PrivateRouteWrapper";
 import PublicRoute from "../components/PublicRouteWrapper";
 import ErrorBoundary from "../components/ErrorBoundaryWrapper";
 
-import { generalRoutes } from "./general";
+import { profileClientRoutes, generalClientRoutes } from "./general";
 import { contanctsRoutes } from "./contacts";
 
+/**
+ * @type {import("react-router").RouteObject[]}
+ */
 const ClientRoutes = [
   {
     path: "/",
@@ -98,312 +105,143 @@ const ClientRoutes = [
           },
           {
             path: "rooms/personal",
-            async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute restricted withManager withCollaborator>
-                    <FilesView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute restricted withManager withCollaborator>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
           {
             path: "rooms/personal/filter",
-            async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute restricted withManager withCollaborator>
-                    <FilesView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute restricted withManager withCollaborator>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
           {
             path: "files/trash",
-            async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FilesView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
           {
             path: "files/trash/filter",
-            async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FilesView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
           {
             path: "rooms/shared",
-            async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FilesView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
           {
             path: "rooms/shared/filter",
-            async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FilesView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
           {
             path: "rooms/shared/:room",
-            async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FilesView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
           {
             path: "rooms/shared/:room/filter",
-            async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FilesView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
           {
             path: "rooms/archived",
-            async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FilesView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
           {
             path: "rooms/archived/filter",
-            async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FilesView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
           {
             path: "rooms/archived/:room",
-            async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FilesView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
           {
             path: "rooms/archived/:room/filter",
-            async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FilesView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
           {
             path: "rooms/templates",
 
-            async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FilesView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
           {
             path: "rooms/templates/filter",
-            async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FilesView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
           {
             path: "rooms/templates/:room",
-            async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FilesView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
           {
             path: "rooms/templates/:room/filter",
-            async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FilesView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
           {
             path: "media/view/:id",
-            async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FilesView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
           ...contanctsRoutes,
+          ...profileClientRoutes,
         ],
       },
       {
@@ -414,7 +252,7 @@ const ClientRoutes = [
           </PrivateRoute>
         ),
       },
-      ...generalRoutes,
+      ...generalClientRoutes,
     ],
   },
   {
@@ -479,19 +317,30 @@ const ClientRoutes = [
   {
     path: "/share/preview/:id",
     async lazy() {
-      const { WrappedComponent } = await componentLoader(
+      const { PublicPreview } = await componentLoader(
         () => import("SRC_DIR/pages/PublicPreview/PublicPreview"),
       );
 
       const Component = () => (
         <PublicRoute>
           <ErrorBoundary>
-            <WrappedComponent />
+            <PublicPreview />
           </ErrorBoundary>
         </PublicRoute>
       );
 
       return { Component };
+    },
+    loader: async ({ request }) => {
+      const searchParams = new URL(request.url).searchParams;
+      const key = searchParams.get("share");
+
+      const [validateData, settings] = await Promise.all([
+        validatePublicRoomKey(key),
+        getSettingsFiles(),
+      ]);
+
+      return { validateData, key, settings };
     },
   },
   {
@@ -515,39 +364,19 @@ const ClientRoutes = [
     children: [
       {
         index: true,
-        async lazy() {
-          const { FilesView } = await componentLoader(
-            () => import("SRC_DIR/pages/Home/View/Files"),
-          );
-
-          const Component = () => {
-            return (
-              <PublicRoute restricted withManager withCollaborator>
-                <FilesView />
-              </PublicRoute>
-            );
-          };
-
-          return { Component };
-        },
+        element: (
+          <PublicRoute>
+            <ViewComponent />
+          </PublicRoute>
+        ),
       },
       {
         path: "media/view/:id",
-        async lazy() {
-          const { FilesView } = await componentLoader(
-            () => import("SRC_DIR/pages/Home/View/Files"),
-          );
-
-          const Component = () => {
-            return (
-              <PublicRoute restricted withManager withCollaborator>
-                <FilesView />
-              </PublicRoute>
-            );
-          };
-
-          return { Component };
-        },
+        element: (
+          <PublicRoute>
+            <ViewComponent />
+          </PublicRoute>
+        ),
       },
     ],
   },

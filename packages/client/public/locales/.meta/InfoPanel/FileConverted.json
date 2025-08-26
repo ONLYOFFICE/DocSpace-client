@@ -3,7 +3,7 @@
   "content": "File converted.",
   "content_en_sha1_hash": "1de949499d23c1b37664d1d36e3c621d47452849",
   "created_at": "2025-05-19T21:30:54.789Z",
-  "updated_at": "2025-06-08T12:02:32.695Z",
+  "updated_at": "2025-08-04T07:30:01.219Z",
   "comment": {
     "text": "This translation key is used to display a confirmation message when a file conversion process is complete. It appears on-screen when an action involving file conversion has been performed, such as after a file upload or update. Translators should provide a localized equivalent of \"File converted\" for this context.",
     "is_auto": true,
@@ -11,8 +11,14 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 61,
+      "context": "});\n return t(\"InfoPanel:FileUploaded\");\n case FeedActionKeys.UserFileUpdated:\n return t(\"InfoPanel:UserFileUpdated\");\n case FeedActionKeys.FileConverted:\n return t(\"InfoPanel:FileConverted\");\n case FeedActionKeys.FileRenamed:\n return t(\"InfoPanel:FileRenamed\");\n case FeedActionKeys.FileMoved:\n if (\"fromParentTitle\" in feed.data && feed.data.fromParentTitle) {\n return t(\"InfoPanel:FileMovedTo\", {",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 52,
+      "line_number": 55,
       "context": "});\n return t(\"InfoPanel:FileUploaded\");\n case FeedActionKeys.UserFileUpdated:\n return t(\"InfoPanel:UserFileUpdated\");\n case FeedActionKeys.FileConverted:\n return t(\"InfoPanel:FileConverted\");\n case FeedActionKeys.FileRenamed:\n return t(\"InfoPanel:FileRenamed\");\n case FeedActionKeys.FileMoved:\n if (feed.data.fromParentTitle) {\n return t(\"InfoPanel:FileMovedTo\", {",
       "module": "/packages/client"
     }

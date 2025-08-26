@@ -3,7 +3,7 @@
   "content": "Send request",
   "content_en_sha1_hash": "a89d64179469a9dcedf347dc7dddae85a2272b3e",
   "created_at": "2025-05-19T21:30:48.550Z",
-  "updated_at": "2025-06-18T17:11:42.434Z",
+  "updated_at": "2025-08-21T11:22:39.860Z",
   "comment": {
     "text": "This translation key is used for the label of a button that sends a request. It appears on various screens, such as in payment settings and registration modals, and should be translated to indicate sending a request or a similar action in different languages.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/dns-settings.js",
-      "line_number": 273,
+      "line_number": 276,
       "context": "/>\n ) : (\n <Button\n {...buttonProps}\n size={currentDeviceType === DeviceType.desktop ? \"small\" : \"normal\"}\n label={t(\"Common:SendRequest\")}\n onClick={onSendRequest}\n isDisabled={!isSettingPaid || isError}\n />\n );",
       "module": "/packages/client"
     },
@@ -24,13 +24,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/hooks/useServicesActions.tsx",
-      "line_number": 109,
+      "line_number": 91,
       "context": "const isStorageCancellation = () => {\n return hasScheduledStorageChange && nextStoragePlanSize === 0;\n };\n \n const buttonTitle = (quantity: number, type: string = \"storage\"): string => {\n if (isExceedingPlanLimit(quantity)) return t(\"Common:SendRequest\");\n \n let hasSubscription;\n \n switch (type) {\n case \"storage\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/login/src/components/Register/sub-components/RegisterModalDialog.tsx",
-      "line_number": 142,
+      "line_number": 141,
       "context": "<ModalDialog.Footer>\n <Button\n id=\"registration-modal_send\"\n className=\"modal-dialog-button\"\n key=\"RegisterSendBtn\"\n label={loading ? t(\"Common:Sending\") : t(\"Common:SendRequest\")}\n size={ButtonSize.normal}\n scale={false}\n primary\n onClick={onSendRegisterRequest}\n isLoading={loading}",
       "module": "/packages/login"
     }
@@ -195,13 +195,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Pošalji zahtev' is understandable, a more natural and accurate translation of 'Send request' would be 'Slanje zahteva' or 'Izvrši zahtev'. 'Pošalji zahtev' is more akin to 'Send a request' implying a direct action.",
-          "suggestion": "Slanje zahteva"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

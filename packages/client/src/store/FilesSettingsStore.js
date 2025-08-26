@@ -43,6 +43,7 @@ import { HTML_EXST, EBOOK_EXST } from "@docspace/shared/constants";
 import {
   getIconPathByFolderType,
   isPublicPreview,
+  insertEditorPreloadFrame,
 } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/shared/components/toast";
 
@@ -140,6 +141,8 @@ class FilesSettingsStore {
 
   extsDocument = [];
 
+  extsDiagram = [];
+
   internalFormats = {};
 
   masterFormExtension = "";
@@ -228,8 +231,18 @@ class FilesSettingsStore {
             capabilities.forEach((item) => {
               item.splice(1, 1);
             });
+
             this.thirdPartyStore.setThirdPartyCapabilities(capabilities); // TODO: Out of bounds read: 1
             this.thirdPartyStore.setThirdPartyProviders(providers);
+          });
+      })
+      .then(() => {
+        api.files
+          .getDocumentServiceLocation()
+          .then(({ docServicePreloadUrl }) => {
+            if (docServicePreloadUrl) {
+              insertEditorPreloadFrame(docServicePreloadUrl);
+            }
           });
       })
       .catch(() => this.setIsErrorSettings(true));
@@ -380,6 +393,8 @@ class FilesSettingsStore {
   isEbook = (extension) => presentInArray(EBOOK_EXST, extension);
 
   isDocument = (extension) => presentInArray(this.extsDocument, extension);
+
+  isDiagram = (extension) => presentInArray(this.extsDiagram, extension);
 
   isMasterFormExtension = (extension) => this.masterFormExtension === extension;
 

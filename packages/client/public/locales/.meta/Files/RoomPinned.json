@@ -3,7 +3,7 @@
   "content": "Room pinned",
   "content_en_sha1_hash": "81ef48bb3373a4abb09c637f8c7aeda4ee051e63",
   "created_at": "2025-05-19T21:30:56.115Z",
-  "updated_at": "2025-06-18T17:11:42.513Z",
+  "updated_at": "2025-08-11T18:11:59.312Z",
   "comment": {
     "text": "This translation key represents a descriptive label used when a room is pinned, appearing as a notification or confirmation message in the UI, likely triggered by an action on the FilesActionsStore.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1290,
+      "line_number": 1302,
       "context": "this.updateCurrentFolder(true, operationId);\n \n const itemCount = { count: elems.length };\n \n const translationForOneItem = isPin ? t(\"RoomPinned\") : t(\"RoomUnpinned\");\n const translationForSeverals = isPin\n ? t(\"RoomsPinned\", { ...itemCount })\n : t(\"RoomsUnpinned\", { ...itemCount });\n \n toastr.success(",
       "module": "/packages/client"
     }
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Otaq sabitləndi\" is grammatically correct, a more natural and contextually appropriate translation for \"Room pinned\" in this scenario (likely referring to pinning a room in an app or interface) would be something along the lines of \"Otaq keçirildi\" or \"Otaq möhkəmləndirildi\". \"Sabitləndi\" often implies a more permanent fixing.",
+          "suggestion": "Consider using \"Otaq keçirildi\" or \"Otaq möhkəmləndirildi\"."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -42,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Стаята е фиксирана\" is a valid translation, \"pinned\" in this context likely refers to a visual pinning action (e.g., a pin icon on a list or map). \"Фиксирана\" implies a more permanent or structural fix. A more accurate translation would convey the meaning of being visually marked or saved.",
-          "suggestion": "Стаята е запаметена"
+          "description": "While 'Стаята е фиксирана' is technically correct, 'pinned' in the context of a room (likely referring to pinning a room in a list or app) is better translated as 'закрепена'. 'Фиксирана' implies a permanent physical attachment.",
+          "suggestion": "Стаята е закрепена"
         }
       ],
       "approved_at": null
@@ -66,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Το δωμάτιο καρφιτσώθηκε' literally translates to 'The room was nailed'. While 'pinned' can sometimes be associated with a physical action, in this context, it likely refers to a digital pin or bookmark. The translation doesn't capture this meaning.",
-          "suggestion": "Consider a translation that reflects the digital pinning concept, such as 'Το δωμάτιο είναι καρφιτσωμένο' (The room is marked/saved) or 'Το δωμάτιο είναι αποθηκευμένο' (The room is saved)."
+          "description": "The translation \"Το δωμάτιο καρφιτσώθηκε\" literally translates to \"The room was nailed.\" This doesn't convey the meaning of 'Room pinned' which implies a digital pinning, such as in an app or platform. The word 'καρφιτσώθηκε' implies a physical action of nailing.",
+          "suggestion": "A more appropriate translation would be something like \"Το δωμάτιο είναι καρφιτσωμένο\" (The room is pinned) or \"Το δωμάτιο έχει καρφιτσωθεί\" (The room has been pinned), or ideally, a more nuanced translation that captures the digital pinning concept if possible, such as 'Το δωμάτιο είναι αποθηκευμένο' (The room is saved/stored)."
         }
       ],
       "approved_at": null
@@ -78,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Se ha anclado la sala' while grammatically correct, doesn't perfectly convey the meaning of 'Room pinned' in the context of a UI element indicating a room is fixed or locked in a view. A more natural and common translation for this context would be 'Sala fijada' or 'Sala anclada'.",
-          "suggestion": "Sala fijada"
+          "description": "While 'Se ha anclado la sala' is grammatically correct, it's a somewhat literal and formal translation. A more natural and common phrasing for 'Room pinned' in Spanish would be 'Sala anclada' or 'Habitación anclada'.",
+          "suggestion": "Sala anclada"
         }
       ],
       "approved_at": null
@@ -108,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"La stanza è stata fissata\" is a literal translation of 'pinned' that doesn't accurately convey the meaning of pinning a room in a software or application context. 'Pinned' in this context usually implies saving or marking a room for easy access.",
-          "suggestion": "Consider alternatives like \"La stanza è stata salvata\" (The room is saved), \"La stanza è stata bloccata\" (The room is blocked/locked), or \"La stanza è stata aggiunta ai preferiti\" (The room is added to favorites). The most appropriate option would depend on the exact functionality."
+          "description": "The Italian translation \"La stanza è stata fissata\" literally translates to 'The room has been fixed'.  'Pinned' in this context likely refers to a pinned room in an application, meaning it's kept visible or important. A more appropriate translation would convey this meaning.",
+          "suggestion": "Consider translations like \"Stanza bloccata\", \"Stanza segnalata\", \"Stanza salvata\", or \"Stanza in evidenza\" depending on the specific functionality being described."
         }
       ],
       "approved_at": null
@@ -117,7 +123,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ルームが固定されました\" (Room ga kotei saremashita) is too formal and passive. While technically correct, it's not the most natural phrasing for a UI element indicating a room is pinned. A more natural and user-friendly translation would be something like \"ピン留めしました\" (Pin tsume shimashita) or \"固定しました\" (Kotei shimashita).",
+          "suggestion": "Consider \"ピン留めしました\" (Pin tsume shimashita) or \"固定しました\" (Kotei shimashita)"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -129,13 +141,25 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ປັກໝຸດຫ້ອງແລ້ວ' is a literal translation, it sounds unnatural. 'Room pinned' suggests a status change (pinned). A more natural Lao translation would convey that meaning.",
+          "suggestion": "ຫ້ອງໝຸດແລ້ວ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Telpa ir piesprausta\" is technically correct, it doesn't fully capture the meaning of 'Room pinned' in the context of a software feature (e.g., a room being 'pinned' to stay visible). A better translation might convey the action of pinning.",
+          "suggestion": "Telpa ir iespiesta"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -150,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Pokój został przypięty\" while technically correct, might not be the most natural or idiomatic translation of \"Room pinned\" in all contexts. 'Przypięty' implies something has been fastened or attached, which might not be the intended meaning of 'pinned' in a digital room-pinning context (e.g., pinning a room to a list).",
-          "suggestion": "Consider alternatives like \"Pokój zapisany\" (Room saved), \"Pokój dodany do ulubionych\" (Room added to favorites), or \"Pokój przypinamy\" (We're pinning the room) depending on the specific user interface."
+          "description": "The translation \"Pokój został przypięty\" while grammatically correct, doesn't perfectly capture the nuance of \"Room pinned\". \"Przypięty\" implies something was attached or fastened. \"Pinned\" in this context likely refers to a digital pin or a notification that a room is being watched/followed. A better translation might focus on that aspect.",
+          "suggestion": "Pokój przypięty"
         }
       ],
       "approved_at": null
@@ -186,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'කාමරය අමුණා ඇත' (kamaray amuna ata) literally translates to 'The room is fastened/attached'. While 'pinned' can sometimes imply fastening, a more accurate translation for 'Room pinned' in a user interface context, suggesting a room is marked or saved, would be something like 'කාමරය තැබි ඇත' (kamaray thabi ata - room saved/placed) or 'කාමරය සුරක්ෂිත කර ඇත' (kamaray surakshita kara ata - room secured/stored).",
-          "suggestion": "කාමරය තැබි ඇත"
+          "description": "The translation 'කාමරය අමුණා ඇත' while technically meaning 'the room is fastened', doesn't accurately convey the meaning of 'Room pinned' in the context of a feature (likely pinning a room in an application). 'Pinned' implies a more digital or temporary state of importance, not physical fastening.",
+          "suggestion": "කාමරය තියා ඇත (Kamara tiya athe), which means 'Room saved/held' or කාමරය සුරක්ෂිත කර ඇත (Kamara surakshitha kara athe) which means 'Room secured/saved'."
         }
       ],
       "approved_at": null
@@ -210,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'Соба закачена' does not accurately translate 'Room pinned'. 'Закачена' means 'hung' or 'attached', which isn't the intended meaning of 'pinned' in this context.",
-          "suggestion": "A more accurate translation could be 'Фиксана соба' (Fiksana soba - Fixed room) or 'Закључана соба' (Zaključana soba - Locked room), depending on the specific meaning of 'pinned'."
+          "description": "The Serbian translation \"Соба закачена\" does not accurately convey the meaning of \"Room pinned.\" 'Закачена' typically means 'hung' or 'attached'. 'Pinned' implies securing something with a pin or similar device.",
+          "suggestion": "A more accurate translation might be 'Фиксана соба' (Fiksana soba - fixed room) or 'Приказана соба' (Prikazana soba - displayed room, depending on the intended meaning of 'pinned' within the context of the application)."
         }
       ],
       "approved_at": null
@@ -222,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'zakačena' can mean 'pinned,' it's not the most natural or accurate translation of 'Room pinned' in this context. 'Pinned' in this scenario likely refers to a room being fixed or secured to a list or display, not physically pinned.",
-          "suggestion": "Consider 'Soba pričvršćena' or 'Soba fiksirana' as alternatives. A more context-dependent translation might be best."
+          "description": "While 'zakačena' can mean 'pinned,' it's not the most natural or idiomatic translation for 'Room pinned' in this context. It implies physically hooking something onto a wall or similar.",
+          "suggestion": "Consider 'Sala zaglavljena' (Room fixed/locked) or 'Sala pričvršćena' (Room secured) depending on the intended meaning of 'pinned' in the original context.  Without further context, 'Sala zaglavljena' might be the closest approximation."
         }
       ],
       "approved_at": null
@@ -234,8 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Oda sabitlendi\" is a literal translation, a more natural and common phrasing for 'Room pinned' in a UI context (likely indicating a room has been saved or favorited) would be 'Oda kaydedildi' or 'Odayı sabitledim'. 'Sabitlendi' can imply a more permanent or technical locking, which isn't the intended meaning here.",
-          "suggestion": "Oda kaydedildi"
+          "description": "While \"Oda sabitlendi\" is technically correct, it implies a more forceful or permanent fixing. \"Room pinned\" usually indicates a temporary state, like pinning a room in a list or application. A more accurate translation would convey this temporary nature.",
+          "suggestion": "Oda eklendi (Room added) or Oda kaydoldu (Room registered) or Oda işaretlendi (Room marked)"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Automatic payments",
   "content_en_sha1_hash": "0d1f62072cabc5b7f051e3f49621066de8ced2c3",
   "created_at": "2025-05-28T09:33:06.634Z",
-  "updated_at": "2025-05-28T09:38:02.175Z",
+  "updated_at": "2025-06-26T19:00:18.246Z",
   "comment": {
     "text": "Automatic payment settings are displayed to users to enable or disable automatic top-up payments. This translation key is used in a UI element related to wallet management within the PortalSettings page.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/AutoPayments.tsx",
-      "line_number": 54,
-      "context": "autoPayments?: TAutoTopUpSettings | null | undefined;\n isAutoPaymentExist?: boolean;\n language?: string;\n setMinBalance?: (value: string) => void;\n setUpToBalance?: (value: string) => void;\n isAutomaticPaymentsEnabled?: boolean;\n setIsAutomaticPaymentsEnabled?: (value: boolean) => void;\n minBalance?: string;\n upToBalance?: string;\n isEditAutoPayment?: boolean;\n setMinBalanceError?: (value: boolean) => void;",
+      "line_number": 52,
+      "context": "updateAutoPayments?: () => Promise<void>;\n autoPayments?: TAutoTopUpSettings | null | undefined;\n isAutoPaymentExist?: boolean;\n setMinBalance?: (value: string) => void;\n setUpToBalance?: (value: string) => void;\n isAutomaticPaymentsEnabled?: boolean;\n setIsAutomaticPaymentsEnabled?: (value: boolean) => void;\n minBalance?: string;\n upToBalance?: string;\n isEditAutoPayment?: boolean;\n setMinBalanceError?: (value: boolean) => void;",
       "module": "/packages/client"
     }
   ],

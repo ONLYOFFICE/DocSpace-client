@@ -43,7 +43,6 @@ const Badge = (props: BadgeProps) => {
     maxWidth = "50px",
     height,
     type,
-    compact,
     isHovered = false,
     border,
     label = 0,
@@ -76,12 +75,18 @@ const Badge = (props: BadgeProps) => {
     "--badge-background-color": backgroundColor,
   } as React.CSSProperties;
 
-  const innerStyle = {
-    maxWidth,
-    padding,
-    borderRadius,
-    "--badge-background-color": backgroundColor,
-  } as React.CSSProperties;
+  const innerStyle = isPaidBadge
+    ? ({
+        padding,
+        borderRadius,
+        "--badge-background-color": backgroundColor,
+      } as React.CSSProperties)
+    : ({
+        maxWidth,
+        padding,
+        borderRadius,
+        "--badge-background-color": backgroundColor,
+      } as React.CSSProperties);
 
   const textStyle = {
     fontSize,
@@ -114,7 +119,6 @@ const Badge = (props: BadgeProps) => {
       <div
         className={styles.inner}
         style={innerStyle}
-        data-compact={compact}
         data-type={type}
         data-testid="badge-inner"
         aria-hidden="true"

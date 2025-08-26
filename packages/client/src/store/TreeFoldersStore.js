@@ -75,6 +75,9 @@ class TreeFoldersStore {
         case FolderType.TRASH:
           folder.title = i18n.t("Common:TrashSection");
           break;
+        case FolderType.Favorites:
+          folder.title = i18n.t("Common:Favorites");
+          break;
         default:
           break;
       }
@@ -291,6 +294,10 @@ class TreeFoldersStore {
 
   get recycleBinFolderId() {
     return this.recycleBinFolder ? this.recycleBinFolder.id : null;
+  }
+
+  get favoritesFolderId() {
+    return this.favoritesFolder ? this.favoritesFolder.id : null;
   }
 
   get isPersonalRoom() {

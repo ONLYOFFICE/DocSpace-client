@@ -28,8 +28,9 @@ import { Navigate } from "react-router";
 
 import Error404 from "@docspace/shared/components/errors/Error404";
 import componentLoader from "@docspace/shared/utils/component-loader";
-
 import { generalRoutes } from "./general";
+
+import { ViewComponent } from "../pages/PortalSettings/View";
 
 const PortalSettingsRoutes = {
   path: "portal-settings/",
@@ -46,154 +47,55 @@ const PortalSettingsRoutes = {
     },
     {
       path: "customization/general",
-      lazy: () =>
-        componentLoader(
-          () => import("SRC_DIR/pages/PortalSettings/categories/common"),
-        ),
+      element: <ViewComponent />,
     },
     {
       path: "customization/branding",
-      lazy: () =>
-        componentLoader(
-          () => import("SRC_DIR/pages/PortalSettings/categories/common"),
-        ),
+      element: <ViewComponent />,
     },
     {
       path: "customization/appearance",
-      lazy: () =>
-        componentLoader(
-          () => import("SRC_DIR/pages/PortalSettings/categories/common"),
-        ),
+      element: <ViewComponent />,
     },
     {
       path: "customization/branding/brand-name",
-      async lazy() {
-        const { BrandName } = await componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/common/Branding/brandName"
-            ),
-        );
-
-        return { Component: BrandName };
-      },
+      element: <ViewComponent />,
     },
     {
       path: "customization/branding/white-label",
-      async lazy() {
-        const { WhiteLabel } = await componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/common/Branding/whitelabel"
-            ),
-        );
-
-        return { Component: WhiteLabel };
-      },
+      element: <ViewComponent />,
     },
     {
       path: "customization/branding/company-info",
-      async lazy() {
-        const { CompanyInfoSettings } = await componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/common/Branding/companyInfoSettings"
-            ),
-        );
-
-        return { Component: CompanyInfoSettings };
-      },
+      element: <ViewComponent />,
     },
     {
       path: "customization/branding/additional-resources",
-      async lazy() {
-        const { AdditionalResources } = await componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/common/Branding/additionalResources"
-            ),
-        );
-
-        return { Component: AdditionalResources };
-      },
+      element: <ViewComponent />,
     },
     {
       path: "customization/general/language-and-time-zone",
-      async lazy() {
-        const { LanguageAndTimeZoneSettings } = await componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/common/Customization/language-and-time-zone"
-            ),
-        );
-
-        return { Component: LanguageAndTimeZoneSettings };
-      },
+      element: <ViewComponent />,
     },
     {
       path: "customization/general/welcome-page-settings",
-      async lazy() {
-        const { WelcomePageSettings } = await componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/common/Customization/welcome-page-settings"
-            ),
-        );
-
-        return { Component: WelcomePageSettings };
-      },
+      element: <ViewComponent />,
     },
     {
       path: "customization/general/dns-settings",
-      async lazy() {
-        const { DNSSettings } = await componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/common/Customization/dns-settings"
-            ),
-        );
-
-        return { Component: DNSSettings };
-      },
+      element: <ViewComponent />,
     },
     {
       path: "customization/general/portal-renaming",
-      async lazy() {
-        const { PortalRenaming } = await componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/common/Customization/portal-renaming"
-            ),
-        );
-
-        return { Component: PortalRenaming };
-      },
+      element: <ViewComponent />,
     },
     {
       path: "customization/general/configure-deep-link",
-      async lazy() {
-        const { ConfigureDeepLink } = await componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/common/Customization/configure-deep-link"
-            ),
-        );
-
-        return { Component: ConfigureDeepLink };
-      },
+      element: <ViewComponent />,
     },
     {
       path: "customization/general/ad-management",
-      async lazy() {
-        const { AdManagement } = await componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/common/Customization/ad-management"
-            ),
-        );
-
-        return { Component: AdManagement };
-      },
+      element: <ViewComponent />,
     },
     {
       path: "security",
@@ -201,141 +103,51 @@ const PortalSettingsRoutes = {
     },
     {
       path: "security/access-portal",
-      lazy: () =>
-        componentLoader(
-          () => import("SRC_DIR/pages/PortalSettings/categories/security"),
-        ),
+      element: <ViewComponent />,
     },
     {
       path: "security/login-history",
-      lazy: () =>
-        componentLoader(
-          () => import("SRC_DIR/pages/PortalSettings/categories/security"),
-        ),
+      element: <ViewComponent />,
     },
     {
       path: "security/audit-trail",
-      lazy: () =>
-        componentLoader(
-          () => import("SRC_DIR/pages/PortalSettings/categories/security"),
-        ),
+      element: <ViewComponent />,
     },
     {
       path: "security/access-portal/tfa",
-      async lazy() {
-        const { TfaSection } = await componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/security/access-portal/tfa"
-            ),
-        );
-
-        return { Component: TfaSection };
-      },
+      element: <ViewComponent />,
     },
     {
       path: "security/access-portal/password",
-      async lazy() {
-        const { PasswordStrengthSection } = await componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/security/access-portal/passwordStrength"
-            ),
-        );
-
-        return { Component: PasswordStrengthSection };
-      },
+      element: <ViewComponent />,
     },
     {
       path: "security/access-portal/trusted-mail",
-      async lazy() {
-        const { TrustedMailSection } = await componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/security/access-portal/trustedMail"
-            ),
-        );
-
-        return { Component: TrustedMailSection };
-      },
+      element: <ViewComponent />,
     },
     {
       path: "security/access-portal/access-dev-tools",
-      async lazy() {
-        const { DevToolsAccessSection } = await componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/security/access-portal/devToolsAccess"
-            ),
-        );
-
-        return { Component: DevToolsAccessSection };
-      },
+      element: <ViewComponent />,
     },
     {
       path: "security/access-portal/invitation-settings",
-      async lazy() {
-        const { InvitationSettingsSection } = await componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/security/access-portal/invitationSettings"
-            ),
-        );
-
-        return { Component: InvitationSettingsSection };
-      },
+      element: <ViewComponent />,
     },
     {
       path: "security/access-portal/ip",
-      async lazy() {
-        const { IpSecuritySection } = await componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/security/access-portal/ipSecurity"
-            ),
-        );
-
-        return { Component: IpSecuritySection };
-      },
+      element: <ViewComponent />,
     },
     {
       path: "security/access-portal/brute-force-protection",
-      async lazy() {
-        const { BruteForceProtectionSection } = await componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/security/access-portal/bruteForceProtection"
-            ),
-        );
-
-        return { Component: BruteForceProtectionSection };
-      },
+      element: <ViewComponent />,
     },
     {
       path: "security/access-portal/admin-message",
-      async lazy() {
-        const { AdminMessageSection } = await componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/security/access-portal/adminMessage"
-            ),
-        );
-
-        return { Component: AdminMessageSection };
-      },
+      element: <ViewComponent />,
     },
     {
       path: "security/access-portal/lifetime",
-      async lazy() {
-        const { SessionLifetimeSection } = await componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/security/access-portal/sessionLifetime"
-            ),
-        );
-
-        return { Component: SessionLifetimeSection };
-      },
+      element: <ViewComponent />,
     },
     {
       path: "integration",
@@ -343,168 +155,75 @@ const PortalSettingsRoutes = {
     },
     {
       path: "integration/ldap",
-      lazy: () =>
-        componentLoader(
-          () => import("SRC_DIR/pages/PortalSettings/categories/integration"),
-        ),
+      element: <ViewComponent />,
     },
     {
       path: "integration/third-party-services",
-      lazy: () =>
-        componentLoader(
-          () => import("SRC_DIR/pages/PortalSettings/categories/integration"),
-        ),
+      element: <ViewComponent />,
     },
     {
       path: "integration/sso",
-      lazy: () =>
-        componentLoader(
-          () => import("SRC_DIR/pages/PortalSettings/categories/integration"),
-        ),
+      element: <ViewComponent />,
     },
     {
       path: "integration/portal-integration",
-      lazy: () =>
-        componentLoader(
-          () => import("SRC_DIR/pages/PortalSettings/categories/integration"),
-        ),
+      element: <ViewComponent />,
     },
     {
       path: "integration/document-service",
-      lazy: () =>
-        componentLoader(
-          () => import("SRC_DIR/pages/PortalSettings/categories/integration"),
-        ),
+      element: <ViewComponent />,
     },
     {
       path: "integration/plugins",
-      lazy: () =>
-        componentLoader(
-          () => import("SRC_DIR/pages/PortalSettings/categories/integration"),
-        ),
+      element: <ViewComponent />,
     },
     {
       path: "integration/smtp-settings",
-      lazy: () =>
-        componentLoader(
-          () => import("SRC_DIR/pages/PortalSettings/categories/integration"),
-        ),
+      element: <ViewComponent />,
     },
     {
       path: "integration/ldap/settings",
-      async lazy() {
-        const { SettingsContainerSection } = await componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/integration/LDAP/sub-components/SettingsContainer"
-            ),
-        );
-
-        return { Component: SettingsContainerSection };
-      },
+      element: <ViewComponent />,
     },
     {
       path: "integration/ldap/sync-data",
-      async lazy() {
-        const { SyncContainerSection } = await componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/integration/LDAP/sub-components/SyncContainer"
-            ),
-        );
-
-        return { Component: SyncContainerSection };
-      },
+      element: <ViewComponent />,
     },
     {
       path: "integration/sso/settings",
-      async lazy() {
-        const { SPSettingsSection } = await componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/integration/SingleSignOn/SPSettings"
-            ),
-        );
-
-        return { Component: SPSettingsSection };
-      },
+      element: <ViewComponent />,
     },
     {
       path: "integration/sso/metadata",
-      async lazy() {
-        const { ProviderMetadataSection } = await componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/integration/SingleSignOn/ProviderMetadata"
-            ),
-        );
-
-        return { Component: ProviderMetadataSection };
-      },
+      element: <ViewComponent />,
     },
     {
       path: "payments/portal-payments",
-      lazy: () =>
-        componentLoader(
-          () => import("SRC_DIR/pages/PortalSettings/categories/payments"),
-        ),
+      element: <ViewComponent />,
     },
     {
-      path: "payments/wallet",
-      lazy: () =>
-        componentLoader(
-          () => import("SRC_DIR/pages/PortalSettings/categories/payments"),
-        ),
+      path: "payments/tariff",
+      element: <ViewComponent />,
     },
     {
       path: "services",
-      lazy: () =>
-        componentLoader(
-          () => import("SRC_DIR/pages/PortalSettings/categories/services"),
-        ),
+      element: <ViewComponent />,
     },
     {
       path: "management/disk-space",
-      lazy: () =>
-        componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/storage-management"
-            ),
-        ),
+      element: <ViewComponent />,
     },
     {
       path: "management/disk-space/quota-per-room",
-      async lazy() {
-        const { QuotaPerRoomComponentSection } = await componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerRoom"
-            ),
-        );
-
-        return { Component: QuotaPerRoomComponentSection };
-      },
+      element: <ViewComponent />,
     },
     {
       path: "management/disk-space/quota-per-user",
-      async lazy() {
-        const { QuotaPerUserComponentSection } = await componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerUser"
-            ),
-        );
-
-        return { Component: QuotaPerUserComponentSection };
-      },
+      element: <ViewComponent />,
     },
     {
       path: "data-import",
-      lazy: () =>
-        componentLoader(
-          () => import("SRC_DIR/pages/PortalSettings/categories/data-import"),
-        ),
+      element: <ViewComponent />,
     },
     {
       path: "backup",
@@ -512,19 +231,11 @@ const PortalSettingsRoutes = {
     },
     {
       path: "backup/data-backup",
-      lazy: () =>
-        componentLoader(
-          () =>
-            import("SRC_DIR/pages/PortalSettings/categories/data-management"),
-        ),
+      element: <ViewComponent />,
     },
     {
       path: "backup/auto-backup",
-      lazy: () =>
-        componentLoader(
-          () =>
-            import("SRC_DIR/pages/PortalSettings/categories/data-management"),
-        ),
+      element: <ViewComponent />,
     },
     {
       path: "delete-data",
@@ -532,17 +243,11 @@ const PortalSettingsRoutes = {
     },
     {
       path: "delete-data/deletion",
-      lazy: () =>
-        componentLoader(
-          () => import("SRC_DIR/pages/PortalSettings/categories/delete-data"),
-        ),
+      element: <ViewComponent />,
     },
     {
       path: "delete-data/deactivation",
-      lazy: () =>
-        componentLoader(
-          () => import("SRC_DIR/pages/PortalSettings/categories/delete-data"),
-        ),
+      element: <ViewComponent />,
     },
     {
       path: "restore",
@@ -550,18 +255,11 @@ const PortalSettingsRoutes = {
     },
     {
       path: "restore/restore-backup",
-      lazy: () =>
-        componentLoader(async () => {
-          const RestoreBackup = await import(
-            "SRC_DIR/pages/PortalSettings/categories/data-management/backup/restore-backup"
-          );
-
-          return { Component: RestoreBackup.default };
-        }),
+      element: <ViewComponent />,
     },
     {
       path: "bonus",
-      lazy: () => componentLoader(() => import("SRC_DIR/pages/Bonus")),
+      element: <ViewComponent />,
     },
     ...generalRoutes,
   ],

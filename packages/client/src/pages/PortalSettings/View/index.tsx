@@ -301,7 +301,7 @@ const View = ({
           | "management"
           | "developer-tools"
           | "delete-data"
-          | undefined = undefined;
+          | undefined;
 
         if (isCustomizationPage) {
           view = "customization";

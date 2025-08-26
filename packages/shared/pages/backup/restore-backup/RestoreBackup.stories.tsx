@@ -131,7 +131,7 @@ export const Default: Story = {
     settingsFileSelector: {
       getIcon: () => "",
     },
-    isInitialLoading: false,
+    // isInitialLoading: false,
     standalone: false,
     setTenantStatus: () => {},
     errorInformation: "",

@@ -95,6 +95,8 @@ const CreatePluginFile = ({
       );
       !message.createDialogProps?.errorText && onCloseAction();
     } catch (error) {
+      if (!onError) return;
+
       const message = await onError(error);
 
       messageActions(

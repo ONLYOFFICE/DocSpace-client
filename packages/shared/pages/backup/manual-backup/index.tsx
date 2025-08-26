@@ -233,6 +233,9 @@ const ManualBackup = ({
       JSON.stringify(TEMPORARY_STORAGE),
     );
 
+    setDownloadingProgress(1);
+    setIsBackupProgressVisible(true);
+
     try {
       await startBackup(
         `${BackupStorageType.TemporaryModuleType}`,
@@ -240,8 +243,6 @@ const ManualBackup = ({
         false,
         isManagement,
       );
-      setDownloadingProgress(1);
-      setIsBackupProgressVisible(true);
     } catch (err) {
       let customText;
 
@@ -262,6 +263,8 @@ const ManualBackup = ({
 
       const message = getErrorInfo(err, t, customText);
       setErrorMessage(message);
+      setBackupProgressError("error");
+      setDownloadingProgress(100);
       console.error(err);
     }
   };
@@ -308,10 +311,12 @@ const ManualBackup = ({
       selectedStorageTitle,
     );
 
+    setDownloadingProgress(1);
+    setIsBackupProgressVisible(true);
+
     try {
       await startBackup(moduleType, storageParams, false, isManagement);
-      setIsBackupProgressVisible(true);
-      setDownloadingProgress(1);
+
       setTemporaryLink("");
     } catch (err) {
       let customText;
@@ -333,6 +338,8 @@ const ManualBackup = ({
 
       const message = getErrorInfo(err, t, customText);
       setErrorMessage(message);
+      setBackupProgressError("error");
+      setDownloadingProgress(100);
       console.error(err);
     }
   };

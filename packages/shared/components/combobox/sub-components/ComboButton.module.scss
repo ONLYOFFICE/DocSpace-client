@@ -293,6 +293,28 @@
 
   visibility: visible;
 
+  position: relative;
+
+  .imageIcon {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+
+    width: 16px;
+    height: 16px;
+
+    pointer-events: none;
+  }
+
+  .selectedIcon {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+
+    width: 16px;
+    height: 16px;
+  }
+
   @include mixins.flip-in-rtl;
 
   &.isLoading {
@@ -317,6 +339,10 @@
 
   &.defaultOption.isDisabled .comboButtonSelectedIcon path {
     fill: var(--combobox-children-button-default-disabled-color);
+  }
+
+  &.onlyIcon {
+    margin-inline-end: 0;
   }
 
   svg {

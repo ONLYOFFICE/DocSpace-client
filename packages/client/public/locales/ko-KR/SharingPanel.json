@@ -1,7 +1,5 @@
 {
   "ExternalLink": "외부 링크",
-  "LinkName": "링크 이름",
-  "RoleForLink": "링크에 대한 역할",
   "ShareEmailBody": "{{itemName}} 문서에 대한 액세스 권한을 부여 받았습니다. 아래 링크를 클릭하여 지금 바로 문서를 여세요: {{shareLink}}",
   "ShareEmailSubject": "{{itemName}} 문서에 대한 액세스 권한을 부여 받았습니다"
 }

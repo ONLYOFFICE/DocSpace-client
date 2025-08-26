@@ -24,52 +24,43 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Text } from "@docspace/shared/components/text";
-import { TextInput } from "@docspace/shared/components/text-input";
+import styled from "styled-components";
 
-const LinkBlock = (props) => {
-  const { t, isEdit, isLoading, linkNameValue, setLinkNameValue, linkValue } =
-    props;
+import { globalColors } from "../../../themes";
 
-  const onChangeLinkName = (e) => {
-    setLinkNameValue(e.target.value);
-  };
+export const RoleLinkBlockWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 
-  return (
-    <div className="edit-link_link-block">
-      <Text className="edit-link-text" fontSize="16px" fontWeight={600}>
-        {t("LinkName")}
-      </Text>
-      <Text className="edit-link_required-icon">*</Text>
+  padding: 0px 16px 20px 16px;
 
-      <TextInput
-        scale
-        size="base"
-        withBorder
-        isAutoFocussed
-        className="edit-link_name-input"
-        value={linkNameValue}
-        onChange={onChangeLinkName}
-        placeholder={t("LinkName")}
-        isDisabled={isLoading}
-        testId="edit_link_panel_name_input"
-      />
+  .dropdown-container {
+    margin-top: 4px;
+  }
 
-      {isEdit ? (
-        <TextInput
-          scale
-          size="base"
-          withBorder
-          isDisabled
-          isReadOnly
-          className="edit-link_link-input"
-          value={linkValue}
-          placeholder={t("LinkName")}
-          testId="edit_link_panel_link_input"
-        />
-      ) : null}
-    </div>
-  );
-};
+  .combo-button_selected-icon-container {
+    svg path {
+      fill: ${({ theme }) => theme.color};
+    }
+  }
 
-export default LinkBlock;
+  .combo-button_selected-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .combo-buttons_arrow-icon,
+  .combo-buttons_expander-icon > div {
+    width: 16px;
+    height: 16px;
+
+    svg path {
+      fill: ${globalColors.gray};
+    }
+  }
+
+  .combo-buttons_expander-icon {
+    rotate: 90deg;
+  }
+`;

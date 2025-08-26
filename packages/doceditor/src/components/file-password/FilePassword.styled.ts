@@ -191,6 +191,19 @@ export const StyledBody = styled.div`
   }
 `;
 
+export const Container = styled.section`
+  display: flex;
+  flex-direction: column;
+
+  height: fit-content;
+  min-height: 100%;
+
+  & > #public-password-page {
+    flex: 1 0 auto;
+    min-height: 0;
+  }
+`;
+
 export const StyledSimpleNav = styled.div`
   display: none;
   height: 48px;

@@ -26,10 +26,20 @@
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import classNames from "classnames";
-
-import { TileSkeleton } from "../../../skeletons/tiles";
+import styled from "styled-components";
+import { RectangleSkeleton } from "../../../skeletons/rectangle";
 import { GridDynamicHeightProps } from "../InfiniteLoader.types";
 import styles from "../InfiniteLoader.module.scss";
+
+const StyledSkeletonTile = styled.div`
+  .loader-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    margin: 10px;
+  }
+`;
 
 const GridDynamicHeight = ({
   children,
@@ -197,13 +207,19 @@ const GridDynamicHeight = ({
     if (!hasMoreFiles) return null;
 
     const skeletons = [];
-    for (let i = 0; i < countTilesInRow; i++) {
+
+    for (let i = 0; i < countTilesInRow; i += 1) {
       skeletons.push(
-        <TileSkeleton
+        <StyledSkeletonTile
           key={`skeleton-${i}`}
           className="tiles-loader isTemplate"
-          isFolder={false}
-        />,
+        >
+          <div className="loader-container">
+            <RectangleSkeleton height="100%" width="100%" animate />
+
+            <RectangleSkeleton height="20px" width="182px" animate />
+          </div>
+        </StyledSkeletonTile>,
       );
     }
 

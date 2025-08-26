@@ -239,7 +239,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               color={shared || showShareIcon ? "accent" : undefined}
               isDisabled={isDisabled}
               hoverColor="accent"
-              title={t("Common:AddToFavorites")}
+              title={t("Common:Favorites")}
             />
           ) : null}
         </>

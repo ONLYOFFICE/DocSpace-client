@@ -128,7 +128,11 @@ const WelcomePageSettingsComponent = (props) => {
 
       const newUrl = "/portal-settings/customization/general";
 
-      if (newUrl === currentUrl) return;
+      if (currentUrl.startsWith("/portal-settings/")) {
+        return;
+      }
+
+      // if (newUrl === currentUrl) return;
 
       navigate(newUrl);
     } else {

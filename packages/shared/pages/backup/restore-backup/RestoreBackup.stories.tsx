@@ -218,7 +218,7 @@ export const Disabled: Story = {
 export const Loading: Story = {
   args: {
     ...Default.args,
-    isInitialLoading: true,
+    // isInitialLoading: true,
   },
 };
 

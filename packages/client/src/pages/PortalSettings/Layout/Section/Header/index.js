@@ -176,7 +176,6 @@ const SectionHeaderContent = (props) => {
     isCategoryOrHeader: false,
     showSelector: false,
     isHeaderVisible: false,
-    needWarning: false,
   });
 
   const getArrayOfParams = () => {
@@ -216,15 +215,6 @@ const SectionHeaderContent = (props) => {
     }
   };
 
-  const needWarningByHeader = (header) => {
-    if (header === "Backup") {
-      // if (standalone) return false;
-
-      return true;
-    }
-    return false;
-  };
-
   React.useEffect(() => {
     if (tReady) setIsLoadedSectionHeader(true);
 
@@ -256,12 +246,7 @@ const SectionHeaderContent = (props) => {
     state.isNeedPaidIcon !== isNeedPaidIcon &&
       setState((val) => ({ ...val, isNeedPaidIcon }));
 
-    const needWarning = needWarningByHeader(header);
-
     header !== state.header && setState((val) => ({ ...val, header }));
-
-    state.needWarning !== needWarning &&
-      setState((val) => ({ ...val, needWarning }));
 
     isCategoryOrHeader !== state.isCategoryOrHeader &&
       setState((val) => ({ ...val, isCategoryOrHeader }));
@@ -316,7 +301,7 @@ const SectionHeaderContent = (props) => {
     logoText,
   } = props;
 
-  const { header, isCategoryOrHeader, isNeedPaidIcon, needWarning } = state;
+  const { header, isCategoryOrHeader, isNeedPaidIcon } = state;
   const arrayOfParams = getArrayOfParams();
 
   const menuItems = (
@@ -408,7 +393,7 @@ const SectionHeaderContent = (props) => {
               )}
             </div>
           </Heading>
-          {needWarning && deviceType === DeviceType.desktop ? (
+          {deviceType === DeviceType.desktop ? (
             <div className="settings-section_warning">
               <Warning />
             </div>

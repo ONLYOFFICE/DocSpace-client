@@ -44,6 +44,7 @@ type InjectedProps = {
   maxFreeBackups?: number;
   isInited?: boolean;
   isBackupServiceOn?: boolean;
+  standalone?: boolean;
 };
 
 const Warning = ({
@@ -56,6 +57,7 @@ const Warning = ({
   maxFreeBackups = 0,
   isInited,
   isBackupServiceOn,
+  standalone,
 }: InjectedProps) => {
   const { t, ready } = useTranslation(["Services", "Common"]);
   const { pathname } = useLocation();
@@ -72,7 +74,7 @@ const Warning = ({
 
   React.useEffect(() => {
     if (!isBackupPaid) return;
-    if (!isBackupRoute || !isInited) return;
+    if (standalone || !isBackupRoute || !isInited) return;
     if (!ready) return;
 
     const setWarningTextFunc = () => {
@@ -174,7 +176,7 @@ const Warning = ({
     if (warningText) setWarningText("");
   }, [isBackupRoute]);
 
-  if (!isBackupRoute || !warningText) return null;
+  if (standalone || !isBackupRoute || !warningText) return null;
 
   return <WarningComponent title={warningText} />;
 };
@@ -185,6 +187,7 @@ export default inject(
     currentTariffStatusStore,
     currentQuotaStore,
     backup,
+    settingsStore,
   }: TStore) => {
     const {
       isPayer,
@@ -195,6 +198,7 @@ export default inject(
     const { walletCustomerEmail } = currentTariffStatusStore;
     const { isBackupPaid, maxFreeBackups } = currentQuotaStore;
     const { backupsCount, isInited } = backup;
+    const { standalone } = settingsStore;
 
     return {
       isPayer,
@@ -206,6 +210,7 @@ export default inject(
       isInited,
       isBackupServiceOn,
       maxFreeBackups,
+      standalone,
     };
   },
 )(observer(Warning));

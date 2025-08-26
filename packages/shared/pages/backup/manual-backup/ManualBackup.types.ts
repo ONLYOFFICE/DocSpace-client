@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { TThirdParties } from "../../../api/files/types";
-import type { DeviceType, FolderType } from "../../../enums";
+import type { DeviceType } from "../../../enums";
 import type {
   ConnectedThirdPartyAccountType,
   Nullable,
@@ -79,7 +79,7 @@ export interface ManualBackupProps {
   errorsFieldsBeforeSafe: Record<string, boolean>;
   selectedThirdPartyAccount: Nullable<ThirdPartyAccountType>;
   connectedThirdPartyAccount: Nullable<ConnectedThirdPartyAccountType>;
-  errorInformation: string;
+  errorInformation: string | React.ReactNode;
 
   setIsBackupProgressVisible: (visible: boolean) => void;
 
@@ -88,7 +88,7 @@ export interface ManualBackupProps {
 
   isFormReady: () => boolean;
   clearLocalStorage: VoidFunction;
-  setErrorInformation: (error: unknown, t?: TTranslation) => void;
+
   setTemporaryLink: (link: string) => void;
   deleteValueFormSetting: (key: string) => void;
   setRequiredFormSettings: (arr: string[]) => void;
@@ -144,11 +144,12 @@ export interface ManualBackupProps {
 
   // currentTariffStatusStore Store
   isNotPaidPeriod: boolean;
+  isPayer?: boolean;
+  walletCustomerEmail?: string | null;
   // end currentTariffStatusStore
 
-  // treeFoldersStore Store
-  rootFoldersTitles: Partial<Record<FolderType, { title: string }>>;
-  // end treeFoldersStore
+  isBackupPaid?: boolean;
+  maxFreeBackups?: number;
 
   // selectedThirdPartyAccount from backupStore
   // removeItem from dialogsStore
@@ -163,4 +164,7 @@ export interface ManualBackupProps {
     modal: Window | null,
   ) => Promise<Window | null>;
   // end thirdPartyStore
+
+  isThirdPartyAvailable?: boolean;
+  backupServicePrice?: number;
 }

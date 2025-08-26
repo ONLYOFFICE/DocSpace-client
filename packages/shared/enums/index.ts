@@ -760,7 +760,7 @@ export const enum SortByFieldName {
   Author = "Author",
   Size = "Size",
   Type = "Type",
-  Room = "Room",
+  Location = "Location",
   Tags = "Tags",
   RoomType = "roomType",
   LastOpened = "LastOpened",

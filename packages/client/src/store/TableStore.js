@@ -90,7 +90,7 @@ class TableStore {
 
   authorColumnIsEnabled = false;
 
-  roomColumnIsEnabled = true;
+  locationColumnIsEnabled = true;
 
   erasureColumnIsEnabled = true;
 
@@ -256,8 +256,8 @@ class TableStore {
     this.modifiedVDRColumnIsEnabled = enable;
   };
 
-  setRoomColumn = (enable) => {
-    this.roomColumnIsEnabled = enable;
+  setLocationColumn = (enable) => {
+    this.locationColumnIsEnabled = enable;
   };
 
   setErasureColumn = (enable) => {
@@ -429,7 +429,7 @@ class TableStore {
       }
 
       if (isTrashFolder) {
-        this.setRoomColumn(splitColumns.includes("Room"));
+        this.setLocationColumn(splitColumns.includes("Location"));
         this.setAuthorTrashColumn(splitColumns.includes("AuthorTrash"));
         this.setCreatedTrashColumn(splitColumns.includes("CreatedTrash"));
         this.setErasureColumn(splitColumns.includes("Erasure"));
@@ -484,8 +484,8 @@ class TableStore {
     const isRooms = isRoomsFolder || isArchiveFolder;
 
     switch (key) {
-      case "Room":
-        this.setRoomColumn(!this.roomColumnIsEnabled);
+      case "Location":
+        this.setLocationColumn(!this.locationColumnIsEnabled);
         return;
       case "LocationRecent":
         this.setLocationRecentColumn(!this.locationRecentColumnIsEnabled);

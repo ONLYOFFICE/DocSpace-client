@@ -1046,7 +1046,62 @@ class UploadDataStore {
         errorMessage = err;
       }
 
-      toastr.error(errorMessage, null, 0, true);
+      // Early/preflight error: finalize files so the loader doesn't spin forever
+      runInAction(() => {
+        // Ensure local state mirrors the pending uploadData
+        if (uploadData) {
+          if (
+            !this.uploadedFilesHistory ||
+            this.uploadedFilesHistory.length === 0
+          ) {
+            this.uploadedFilesHistory = uploadData.uploadedFilesHistory || [];
+          }
+          if (!this.files || this.files.length === 0) {
+            this.files = uploadData.files || [];
+          }
+        }
+
+        // Mark all new files as errored and finalized in history
+        const allFiles = uploadData?.allNewFiles || [];
+        allFiles.forEach((f) => {
+          // files array entry
+          const fileIdx = this.files.findIndex(
+            (x) => x.uniqueId === f.uniqueId,
+          );
+          if (fileIdx > -1) {
+            this.files[fileIdx].error =
+              errorMessage || t?.("Common:UnexpectedError");
+            this.files[fileIdx].inAction = false;
+          }
+
+          // history entry
+          const hIdx = this.uploadedFilesHistory.findIndex(
+            (x) => x.uniqueId === f.uniqueId,
+          );
+          if (hIdx > -1) {
+            this.uploadedFilesHistory[hIdx].error =
+              errorMessage || t?.("Common:UnexpectedError");
+            this.uploadedFilesHistory[hIdx].percent = 100;
+          }
+        });
+
+        // Update overall percent based on finalized history
+        const newPercent = this.getFilesPercent();
+        this.percent = Number.isNaN(newPercent) ? 100 : newPercent;
+      });
+
+      // Reflect error state in primary progress and finish
+      this.totalErrorsCount += 1;
+      this.primaryProgressDataStore.setPrimaryProgressBarData({
+        operation: OPERATIONS_NAME.upload,
+        percent: this.percent,
+        completed: true,
+        alert: true,
+        errorCount: this.totalErrorsCount,
+      });
+
+      // Finalize upload panel state (no conversions yet at this stage)
+      this.finishUploadFiles(t, false);
     }
   };
 
@@ -1087,7 +1142,6 @@ class UploadDataStore {
         file,
         uniqueId: uniqueid("download_row-key_"),
         fileId: null,
-        // toFolderId,
         toFolderId: file.parentFolderId,
         action: "upload",
         error: file.size ? null : t("Files:EmptyFile"),
@@ -1308,10 +1362,12 @@ class UploadDataStore {
 
         this.currentUploadNumber -= 1;
 
-        const nextFileIndex = this.files.findIndex((f) => !f.inAction);
-
-        if (nextFileIndex !== -1) {
-          this.startSessionFunc(nextFileIndex, t, createNewIfExist);
+        // continue uploading remaining files in parallel, respecting limits
+        const notUploadedFiles = this.files.filter(
+          (f) => !f.inAction && f.action === "upload" && !f.error && !f.cancel,
+        );
+        if (notUploadedFiles.length > 0) {
+          this.parallelUploading(notUploadedFiles, t, createNewIfExist);
         }
       });
 
@@ -1747,10 +1803,13 @@ class UploadDataStore {
 
         this.currentUploadNumber -= 1;
 
-        const nextFileIndex = this.files.findIndex((f) => !f.inAction);
+        // Continue with all eligible files, respecting concurrency
+        const notUploadedFiles = this.files.filter(
+          (f) => !f.inAction && f.action === "upload" && !f.error && !f.cancel,
+        );
 
-        if (nextFileIndex !== -1) {
-          this.startSessionFunc(nextFileIndex, t, createNewIfExist);
+        if (notUploadedFiles.length > 0) {
+          this.parallelUploading(notUploadedFiles, t, createNewIfExist);
         }
 
         return Promise.resolve();

@@ -3,7 +3,7 @@
   "content": "Save",
   "content_en_sha1_hash": "efc007a393f66cdb14d57d385822a3d9e36ef873",
   "created_at": "2025-05-19T21:30:48.300Z",
-  "updated_at": "2025-08-21T14:45:43.862Z",
+  "updated_at": "2025-08-26T11:15:14.059Z",
   "comment": {
     "text": "The translation key \"SaveButton\" is used to display the label for a save button on a UI component. In a file editor and dialog contexts, it appears as a button that triggers saving changes made to a document or form.",
     "is_auto": true,
@@ -68,12 +68,6 @@
       "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Footer.js",
       "line_number": 64,
       "context": "...saveButtonProps?.props,\n scale: true,\n isSaveButton: true,\n primary: true,\n size: \"normal\",\n label: t(\"Common:SaveButton\"),\n modalRequestRunning,\n setSettingsModalRequestRunning: setModalRequestRunning,\n onCloseAction,\n testId: \"settings_plugin_save_button\",\n },",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/panels/EditLinkPanel/index.js",
-      "line_number": 359,
-      "context": "<ModalDialog.Footer>\n <Button\n scale\n primary\n size=\"normal\"\n label={isEdit ? t(\"Common:SaveButton\") : t(\"Common:Create\")}\n isDisabled={isDisabledSaveButton}\n onClick={onSave}\n testId=\"edit_link_panel_save_button\"\n />\n <Button",
       "module": "/packages/client"
     },
     {
@@ -296,6 +290,12 @@
       "file_path": "/packages/shared/components/quota-form/index.tsx",
       "line_number": 269,
       "context": "{isButtonsEnable ? (\n <SaveCancelButtons\n isSaving={isLoading}\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n displaySettings\n saveButtonDisabled={isDefaultQuota}\n disableRestoreToDefault={isDefaultQuota}",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/dialogs/EditLinkPanel/index.tsx",
+      "line_number": 573,
+      "context": "<Button\n scale\n primary\n onClick={onSave}\n size={ButtonSize.normal}\n label={t(\"Common:SaveButton\")}\n isDisabled={isDisabledSaveButton}\n testId=\"edit_link_panel_save_button\"\n />\n <Button\n scale",
       "module": "/packages/shared"
     },
     {

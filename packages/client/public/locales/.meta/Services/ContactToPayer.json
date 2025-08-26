@@ -3,7 +3,7 @@
   "content": "Contact the Payer (<1>{{email}}</1>) to connect the backup service.",
   "content_en_sha1_hash": "b700b846a0abe7d7234a5ef9e44502f3ca39735f",
   "created_at": "2025-08-21T14:45:38.902Z",
-  "updated_at": "2025-08-21T14:48:34.673Z",
+  "updated_at": "2025-08-26T11:14:27.657Z",
   "comment": {
     "text": "This key displays a message instructing the user to contact the payer (with their email address inserted) to enable the backup service. It appears within a UI component, likely a warning or informational message, within the Portal Settings. Translators should ensure the phrasing encourages user action and clearly indicates the email address is for the payer's contact.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/WarningComponent/index.tsx",
-      "line_number": 100,
+      "line_number": 102,
       "context": ");\n \n const connectPayer = (\n <Trans\n t={t}\n i18nKey=\"ContactToPayer\"\n ns=\"Services\"\n values={{ email: walletCustomerEmail }}\n components={{\n 1: (\n <Link",
       "module": "/packages/client"
     }

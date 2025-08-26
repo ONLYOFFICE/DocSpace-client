@@ -3,7 +3,7 @@
   "content": "Yesterday",
   "content_en_sha1_hash": "da24830f1f7072d55862afb6969c1a4c433ac056",
   "created_at": "2025-05-19T21:30:49.639Z",
-  "updated_at": "2025-08-04T07:30:01.027Z",
+  "updated_at": "2025-08-26T11:15:14.066Z",
   "comment": {
     "text": "This translation key is used to display a generic date phrase indicating \"yesterday\" when comparing two dates in a week-by-week or month-to-month context. It appears on a component that displays historical data, such as a calendar or information panel, and is triggered when the current date matches the previous date.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/index.tsx",
-      "line_number": 59,
+      "line_number": 60,
       "context": "const weekAgo = moment().subtract(1, \"week\");\n const halfYearAgo = moment().subtract(6, \"month\");\n \n if (given.isAfter(weekAgo)) {\n if (now.weekday() === given.weekday()) return t(\"Common:Today\");\n if (now.weekday() - 1 === given.weekday()) return t(\"Common:Yesterday\");\n \n const weekday = moment.weekdays(given.weekday());\n return weekday.charAt(0).toUpperCase() + weekday.slice(1);\n }",
       "module": "/packages/client"
     }

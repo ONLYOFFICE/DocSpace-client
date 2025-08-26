@@ -3,7 +3,7 @@
   "content": "Room type display",
   "content_en_sha1_hash": "165bb5ec5f6e4fb29f2448e73ad35a8267ef1fe0",
   "created_at": "2025-05-19T21:30:54.639Z",
-  "updated_at": "2025-08-04T07:30:01.399Z",
+  "updated_at": "2025-08-26T11:15:14.172Z",
   "comment": {
     "text": "The \"RoomTypeDisplay\" translation key is used to display the room type selection label in a dropdown menu. It appears in the Room Selector category of the developer tools page and provides context for translators to translate this text into different languages.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector.js",
-      "line_number": 275,
-      "context": "</ControlsSection>\n \n <ControlsSection>\n <CategorySubHeader>{t(\"AdvancedDisplay\")}</CategorySubHeader>\n \n <Label className=\"label\" text={t(\"RoomTypeDisplay\")} />\n <ComboBox\n onSelect={changeRoomType}\n options={roomTypeOptions}\n scaled\n selectedOption={roomType}",
+      "line_number": 278,
+      "context": "</ControlsSection>\n \n <ControlsSection>\n <CategorySubHeader>{t(\"AdvancedDisplay\")}</CategorySubHeader>\n \n <Label className=\"label\" text={t(\"RoomTypeDisplay\")} />\n <ComboBox\n onSelect={changeRoomType}\n options={roomTypeOptions}\n scaled\n selectedOption={selectedOption}",
       "module": "/packages/client"
     }
   ],

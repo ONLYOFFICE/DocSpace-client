@@ -3,7 +3,7 @@
   "content": "Yes",
   "content_en_sha1_hash": "5397e0583f14f6c88de06b1ef28f460a1fb5b0ae",
   "created_at": "2025-05-19T21:30:49.630Z",
-  "updated_at": "2025-08-11T18:11:59.120Z",
+  "updated_at": "2025-08-21T14:45:43.881Z",
   "comment": {
     "text": "This translation key is used for the affirmative response \"Yes\" in various UI elements, such as buttons and dialogues. It appears in a confirmatory modal where users can choose to confirm an action or cancel it, typically with options labeled \"Yes\" and \"No\".",
     "is_auto": true,
@@ -23,8 +23,8 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/StoragePlanCancel.tsx",
-      "line_number": 155,
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AdditionalStorage/StoragePlanCancel.tsx",
+      "line_number": 154,
       "context": "<StorageWarning />\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"OkButton\"\n label={t(\"Common:Yes\")}\n size={ButtonSize.normal}\n primary\n onClick={handleStoragePlanChange}\n isLoading={isLoading}\n testId=\"storage_plan_cancel_ok_button\"",
       "module": "/packages/client"
     }

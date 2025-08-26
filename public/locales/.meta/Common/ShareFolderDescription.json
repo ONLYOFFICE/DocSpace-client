@@ -1,0 +1,28 @@
+{
+  "key_path": "ShareFolderDescription",
+  "content": "Provide access to the folder and set the permission levels.",
+  "content_en_sha1_hash": "85cdb69a150659c5463be79cc84498e6c5fe9ad6",
+  "created_at": "2025-08-26T11:15:01.383Z",
+  "updated_at": "2025-08-26T11:16:58.294Z",
+  "comment": {
+    "text": "This text appears in a sharing dialog or panel. It explains the action of granting access and setting permissions for a shared folder. Translators should ensure the description accurately reflects the folder sharing process.",
+    "is_auto": true,
+    "updated_at": "2025-08-26T11:16:58.294Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/share/index.tsx",
+      "line_number": 464,
+      "context": "return {\n headerText: isFolder\n ? t(\"Common:ShareFolder\")\n : t(\"Common:ShareDocument\"),\n bodyText: isFolder\n ? t(\"Common:ShareFolderDescription\")\n : t(\"Common:ShareDocumentDescription\"),\n iconName: InfoIcon,\n onClose: () => setVisibleBar(false),\n };\n }, [parentShared, setVisibleBar, t, isFolder]);",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

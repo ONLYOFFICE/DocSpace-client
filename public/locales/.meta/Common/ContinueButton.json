@@ -3,7 +3,7 @@
   "content": "Continue",
   "content_en_sha1_hash": "2e02623966f9391facf6eaefc8b079ed5b630bee",
   "created_at": "2025-05-19T21:30:43.691Z",
-  "updated_at": "2025-08-21T11:22:39.803Z",
+  "updated_at": "2025-08-26T11:15:14.080Z",
   "comment": {
     "text": "This translation key is used as a label for a \"Continue\" button that appears in various dialogs and confirms user actions. It provides a clear and consistent text to be translated, allowing users to proceed after completing a task or operation.",
     "is_auto": true,
@@ -47,10 +47,10 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/doceditor/src/components/file-password/index.tsx",
-      "line_number": 204,
-      "context": "<Button\n primary\n size={ButtonSize.medium}\n scale\n label={t(\"Common:ContinueButton\")}\n tabIndex={5}\n onClick={onSubmit}\n isDisabled={isLoading}\n />\n </FormWrapper>",
-      "module": "/packages/doceditor"
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/ConfirmationDialog.tsx",
+      "line_number": 68,
+      "context": "<ModalDialog.Body>\n <Text>{bodyText}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:ContinueButton\")}\n size={ButtonSize.normal}\n onClick={onConfirm}\n primary\n scale\n />",
+      "module": "/packages/client"
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/TfaAuth/page.client.tsx",
@@ -96,7 +96,7 @@
     },
     {
       "file_path": "/packages/shared/pages/PublicRoom/PublicRoomPasswordForm/index.tsx",
-      "line_number": 220,
+      "line_number": 238,
       "context": "<Button\n primary\n size={ButtonSize.medium}\n scale\n label={t(\"Common:ContinueButton\")}\n tabIndex={5}\n isLoading={isLoading}\n isDisabled={isLoading}\n onClick={onSubmitAction}\n />",
       "module": "/packages/shared"
     }

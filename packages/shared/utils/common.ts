@@ -1385,11 +1385,15 @@ export const getBackupProgressInfo = (
   setLink: (link: string) => void,
 ) => {
   const { isCompleted, link, error, progress } = opt;
-  setBackupProgress(progress);
+
+  if (progress !== 100) {
+    setBackupProgress(progress);
+  }
 
   if (isCompleted) {
+    setBackupProgress(100);
+
     if (error) {
-      setBackupProgress(100);
       return { error };
     }
 
@@ -1510,3 +1514,32 @@ export function buildDataTestId(
   if (!dataTestId) return undefined;
   return `${dataTestId}_${suffix}`;
 }
+
+export const getErrorInfo = (
+  err: unknown,
+  t: TTranslation,
+  customText: string | React.ReactNode,
+) => {
+  let message;
+
+  const knownError = err as {
+    response?: { status: number; data: { error: { message: string } } };
+    message?: string;
+  };
+
+  if (customText) {
+    message = customText;
+  } else if (typeof err === "string") {
+    message = err;
+  } else {
+    message =
+      ("response" in knownError && knownError.response?.data?.error?.message) ||
+      ("message" in knownError && knownError.message) ||
+      "";
+  }
+
+  if (knownError?.response?.status === 502)
+    message = t("Common:UnexpectedError");
+
+  return message ?? t("Common:UnexpectedError");
+};

@@ -43,6 +43,7 @@ import {
   getAutoTopUpSettings,
   updateAutoTopUpSettings,
   getServicesQuotas,
+  getServiceQuota,
 } from "@docspace/shared/api/portal";
 import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
@@ -64,10 +65,20 @@ import {
   TNumericPaymentFeature,
 } from "@docspace/shared/api/portal/types";
 import { formatCurrencyValue } from "@docspace/shared/utils/common";
-import { STORAGE_TARIFF_DEACTIVATED } from "@docspace/shared/constants";
+import {
+  BACKUP_SERVICE,
+  STORAGE_TARIFF_DEACTIVATED,
+} from "@docspace/shared/constants";
 
 // Constants for feature identifiers
 export const TOTAL_SIZE = "total_size";
+
+type TServiceFeatureWithPrice = TNumericPaymentFeature & {
+  price: {
+    value: number;
+    currencySymbol: string;
+  };
+};
 
 class PaymentStore {
   userStore: UserStore | null = null;
@@ -148,6 +159,8 @@ class PaymentStore {
   servicesQuotas: TPaymentQuota | null = null; // temporary solution, should be in the service store
 
   isShowStorageTariffDeactivatedModal = false;
+
+  reccomendedAmount = "";
 
   constructor(
     userStore: UserStore,
@@ -391,7 +404,24 @@ class PaymentStore {
   }
 
   get storagePriceIncrement() {
-    return this.servicesQuotas?.price.value ?? 0;
+    return (
+      (this.servicesQuotasFeatures.get(TOTAL_SIZE) as TServiceFeatureWithPrice)
+        ?.price?.value || 0
+    );
+  }
+
+  get backupServicePrice() {
+    return (
+      (
+        this.servicesQuotasFeatures.get(
+          BACKUP_SERVICE,
+        ) as TServiceFeatureWithPrice
+      )?.price?.value || 0
+    );
+  }
+
+  get isBackupServiceOn() {
+    return this.servicesQuotasFeatures.get(BACKUP_SERVICE)?.value;
   }
 
   formatWalletCurrency = (
@@ -442,10 +472,6 @@ class PaymentStore {
 
   getStartTransactionDate = (format = "YYYY-MM-DDTHH:mm:ss") => {
     return moment().subtract(4, "weeks").format(format);
-  };
-
-  fetchMoreTransactionHistory = async () => {
-    console.log("fetchMoreTransactionHistory");
   };
 
   formatDate = (date: moment.Moment) => {
@@ -529,13 +555,30 @@ class PaymentStore {
 
     if (!res) return;
 
-    res[0].features.forEach((feature) => {
-      this.servicesQuotasFeatures.set(feature.id, feature);
+    const quotas = res.map((service) => {
+      const feature = service.features[0];
+      return {
+        ...feature,
+        price: service.price,
+      };
     });
 
-    this.servicesQuotas = res[0];
+    this.servicesQuotasFeatures = new Map(
+      quotas.map((feature) => [feature.id, feature]),
+    );
 
     return res;
+  };
+
+  changeServiceState = async (service: string) => {
+    const feature = this.servicesQuotasFeatures.get(service);
+
+    if (!feature) return;
+
+    this.servicesQuotasFeatures.set(service, {
+      ...feature,
+      value: !feature.value,
+    });
   };
 
   isShowStorageTariffDeactivated = () => {
@@ -576,11 +619,33 @@ class PaymentStore {
     ]);
   };
 
+  setReccomendedAmount = (amount: string) => {
+    this.reccomendedAmount = amount;
+  };
+
+  setServiceQuota = async (serviceName = "backup") => {
+    const service = await getServiceQuota(serviceName);
+
+    const feature = service.features[0];
+
+    this.servicesQuotasFeatures = new Map([
+      [
+        feature.id,
+        {
+          ...feature,
+          price: service.price,
+        },
+      ],
+    ]);
+  };
+
   walletInit = async (t: TTranslation) => {
     const isRefresh = window.location.href.includes("complete=true");
     if (!this.currentTariffStatusStore) return;
 
-    this.setVisibleWalletSetting(false);
+    if (!isRefresh) {
+      if (this.isVisibleWalletSettings) this.setVisibleWalletSetting(false);
+    }
 
     const { fetchPortalTariff, walletCustomerStatusNotActive } =
       this.currentTariffStatusStore;
@@ -616,7 +681,23 @@ class PaymentStore {
 
       this.setIsInitWalletPage(true);
 
-      if (window.location.href.includes("complete=true")) {
+      const url = new URL(window.location.href);
+      const params = url.searchParams;
+
+      const priceParam = params.get("price");
+
+      if (priceParam) {
+        const reccomendedAmount = this.walletBalance - Number(priceParam);
+        if (reccomendedAmount < 0)
+          this.setReccomendedAmount(Math.abs(reccomendedAmount).toString());
+      } else {
+        this.setReccomendedAmount("");
+      }
+
+      if (
+        window.location.href.includes("complete=true") ||
+        window.location.href.includes("open=true")
+      ) {
         window.history.replaceState(
           {},
           document.title,

@@ -1,0 +1,28 @@
+{
+  "key_path": "FileAvailableViaParentFolderLinkDescription",
+  "content": "This file is accessible via a shared link from its parent folder, but you can create a custom external link with specific permissions.",
+  "content_en_sha1_hash": "21b1fc46186eef68a1016e49be49251201770088",
+  "created_at": "2025-08-26T11:15:03.874Z",
+  "updated_at": "2025-08-26T11:28:23.765Z",
+  "comment": {
+    "text": "This text explains that a file or folder can be accessed through a parent folder's shared link, but users have the option to create a custom link with tailored permissions. It appears as explanatory text within a UI element, likely a dialog or panel, related to sharing files or folders. Translators should ensure the meaning of accessibility via a parent link and the possibility of custom links is preserved.",
+    "is_auto": true,
+    "updated_at": "2025-08-26T11:28:23.765Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/share/index.tsx",
+      "line_number": 454,
+      "context": "headerText: isFolder\n ? t(\"Common:FolderAvailableViaParentFolderLinkTitle\")\n : t(\"Common:FileAvailableViaParentFolderLinkTitle\"),\n bodyText: isFolder\n ? t(\"Common:FolderAvailableViaParentFolderLinkDescription\")\n : t(\"Common:FileAvailableViaParentFolderLinkDescription\"),\n iconName: FolderIcon,\n };\n }\n \n return {",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

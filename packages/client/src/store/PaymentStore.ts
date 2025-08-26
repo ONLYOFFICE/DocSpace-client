@@ -643,6 +643,10 @@ class PaymentStore {
     const isRefresh = window.location.href.includes("complete=true");
     if (!this.currentTariffStatusStore) return;
 
+    if (!isRefresh) {
+      if (this.isVisibleWalletSettings) this.setVisibleWalletSetting(false);
+    }
+
     const { fetchPortalTariff, walletCustomerStatusNotActive } =
       this.currentTariffStatusStore;
 
@@ -686,6 +690,8 @@ class PaymentStore {
         const reccomendedAmount = this.walletBalance - Number(priceParam);
         if (reccomendedAmount < 0)
           this.setReccomendedAmount(Math.abs(reccomendedAmount).toString());
+      } else {
+        this.setReccomendedAmount("");
       }
 
       if (

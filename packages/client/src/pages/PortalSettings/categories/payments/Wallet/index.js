@@ -42,7 +42,7 @@ const Wallet = (props) => {
     isInitWalletPage,
     isShowStorageTariffDeactivatedModal,
     language,
-    setVisibleWalletSetting,
+    setIsInitWalletPage,
   } = props;
 
   const { t, ready } = useTranslation(["Payments", "Common"]);
@@ -69,7 +69,8 @@ const Wallet = (props) => {
 
     return () => {
       clearTimeout(timerId);
-      setVisibleWalletSetting(false);
+
+      setIsInitWalletPage(false);
     };
   }, []);
 
@@ -94,7 +95,7 @@ export default inject(({ paymentStore, authStore }) => {
     walletInit,
     isInitWalletPage,
     isShowStorageTariffDeactivatedModal,
-    setVisibleWalletSetting,
+    setIsInitWalletPage,
   } = paymentStore;
   const { language } = authStore;
 
@@ -103,6 +104,7 @@ export default inject(({ paymentStore, authStore }) => {
     isInitWalletPage,
     isShowStorageTariffDeactivatedModal,
     language,
-    setVisibleWalletSetting,
+
+    setIsInitWalletPage,
   };
 })(observer(Wallet));

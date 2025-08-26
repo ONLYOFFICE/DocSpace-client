@@ -27,10 +27,10 @@
 import React, { useCallback, useState } from "react";
 import { getPaymentAccount } from "@docspace/shared/api/portal";
 
-import SettingsSetupStore from "SRC_DIR/store/SettingsSetupStore";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 export type UseDeleteDataProps = {
-  getPortalOwner: SettingsSetupStore["getPortalOwner"];
+  getPortalOwner: SettingsStore["getPortalOwner"];
 };
 
 const useDeleteData = ({ getPortalOwner }: UseDeleteDataProps) => {
@@ -41,7 +41,7 @@ const useDeleteData = ({ getPortalOwner }: UseDeleteDataProps) => {
 
     const res = await getPaymentAccount();
     setStripeUrl(res);
-  }, [getPortalOwner]);
+  }, [getPortalOwner, getPaymentAccount]);
 
   const fetchPortalDeactivationData = useCallback(async () => {
     await getPortalOwner();
@@ -57,11 +57,6 @@ const useDeleteData = ({ getPortalOwner }: UseDeleteDataProps) => {
 
     await Promise.all(actions);
   }, [fetchPortalDeletionData, fetchPortalDeactivationData]);
-
-  React.useEffect(() => {
-    // if (window.location.pathname.includes("delete-data"))
-    //  getDeleteDataInitialValue();
-  }, [getDeleteDataInitialValue]);
 
   return {
     stripeUrl,

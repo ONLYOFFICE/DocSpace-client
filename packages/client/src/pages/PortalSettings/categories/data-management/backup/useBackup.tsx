@@ -35,6 +35,7 @@ import {
 import { getBackupSchedule } from "@docspace/shared/api/portal";
 import { toastr } from "@docspace/shared/components/toast";
 import { useDefaultOptions } from "@docspace/shared/pages/backup/auto-backup/hooks";
+import { isManagement } from "@docspace/shared/utils/common";
 
 import { AuthStore } from "@docspace/shared/store/AuthStore";
 
@@ -137,6 +138,32 @@ const useBackup = ({
     language,
   ]);
 
+  const getRestoreBackupData = useCallback(async () => {
+    try {
+      getProgress(t);
+
+      const [account, backupStorage, resStorageRegions] = await Promise.all([
+        getSettingsThirdParty(),
+        getBackupStorage(isManagement()),
+        getStorageRegions(),
+      ]);
+
+      if (account) setConnectedThirdPartyAccount(account);
+      setThirdPartyStorage(backupStorage);
+      setStorageRegions(resStorageRegions);
+
+      return true;
+    } catch (error) {
+      toastr.error(error as Error);
+      return false;
+    }
+  }, [
+    getProgress,
+    setConnectedThirdPartyAccount,
+    setThirdPartyStorage,
+    setStorageRegions,
+  ]);
+
   const getBackupInitialValue = React.useCallback(async () => {
     const actions = [];
     if (window.location.pathname.includes("data-backup"))
@@ -145,8 +172,11 @@ const useBackup = ({
     if (window.location.pathname.includes("auto-backup"))
       actions.push(getAutoBackupData());
 
+    if (window.location.pathname.includes("restore"))
+      actions.push(getRestoreBackupData());
+
     await Promise.all(actions);
-  }, [getManualBackupData, getAutoBackupData]);
+  }, [getManualBackupData, getAutoBackupData, getRestoreBackupData]);
 
   React.useEffect(() => {
     //  if (window.location.pathname.includes("backup")) getBackupInitialValue();
@@ -155,6 +185,7 @@ const useBackup = ({
   return {
     getManualBackupData,
     getAutoBackupData,
+    getRestoreBackupData,
     getBackupInitialValue,
   };
 };

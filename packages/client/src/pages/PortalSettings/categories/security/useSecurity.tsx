@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { TfaStore } from "@docspace/shared/store/TfaStore";
@@ -88,8 +88,8 @@ const useSecurity = ({
 
   const getSecurityInitialValue = useCallback(async () => {
     const actions = [];
-    // if (window.location.pathname.includes("access-portal"))
-    //   actions.push(getAccessPortalData());
+    if (window.location.pathname.includes("access-portal"))
+      actions.push(getAccessPortalData());
 
     if (window.location.pathname.includes("login-history"))
       actions.push(getLoginHistoryData());
@@ -99,11 +99,6 @@ const useSecurity = ({
 
     await Promise.all(actions);
   }, [getAccessPortalData, getLoginHistoryData, getAuditTrailData]);
-
-  React.useEffect(() => {
-    // if (window.location.pathname.includes("security"))
-    //  getSecurityInitialValue();
-  }, [getSecurityInitialValue]);
 
   return {
     getAccessPortalData,

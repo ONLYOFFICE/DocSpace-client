@@ -40,16 +40,11 @@ import RegionComponent from "./Region";
 import { StyledBody } from "./StyledComponent";
 import StyledSettingsSeparator from "../../StyledSettingsSeparator";
 
-const StorageManagement = ({
-  isInit,
-  language,
-  init,
-  clearIntervalCheckRecalculate,
-  standalone,
-}) => {
+const StorageManagementWrapper = (props) => {
+  const { isInit, language, clearIntervalCheckRecalculate, standalone } = props;
+
   useEffect(() => {
     moment.locale(language);
-    init();
 
     return () => {
       clearIntervalCheckRecalculate();
@@ -81,14 +76,13 @@ const StorageManagement = ({
 export const Component = inject(
   ({ authStore, storageManagement, settingsStore }) => {
     const { language } = authStore;
-    const { init, isInit, clearIntervalCheckRecalculate } = storageManagement;
+    const { isInit, clearIntervalCheckRecalculate } = storageManagement;
     const { standalone } = settingsStore;
     return {
       isInit,
       language,
-      init,
       clearIntervalCheckRecalculate,
       standalone,
     };
   },
-)(observer(StorageManagement));
+)(observer(StorageManagementWrapper));

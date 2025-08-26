@@ -72,11 +72,6 @@ const useCommon = ({
     await Promise.all(actions);
   }, [getCustomizationData, getBrandingData]);
 
-  React.useEffect(() => {
-    if (window.location.pathname.includes("customization"))
-      getCommonInitialValue();
-  }, [getCommonInitialValue]);
-
   return {
     getCustomizationData,
     getBrandingData,

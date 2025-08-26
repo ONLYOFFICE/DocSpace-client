@@ -337,14 +337,16 @@ export async function getCommonFoldersTree() {
 //   return request(options);
 // }
 
-// export function getFavoritesFolderList() {
-//   const options: AxiosRequestConfig = {
-//     method: "get",
-//     url: `/files/@favorites`,
-//   };
+export async function getFavoritesFolderList() {
+  const options: AxiosRequestConfig = {
+    method: "get",
+    url: `/files/@favorites`,
+  };
 
-//   return request(options);
-// }
+  const res = (await request(options)) as TGetFolder;
+
+  return res;
+}
 
 // export function getProjectsFolderList() {
 //   const options: AxiosRequestConfig = {

@@ -67,4 +67,5 @@ export type GridDynamicHeightProps = {
   showSkeleton?: boolean;
   itemCount: number;
   filesLength: number;
+  isOneTile: boolean;
 };

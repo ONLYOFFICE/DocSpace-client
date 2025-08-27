@@ -39,6 +39,10 @@ const StyledSkeletonTile = styled.div`
 
     margin: 10px;
   }
+
+  .loader-title {
+    width: 70%;
+  }
 `;
 
 const GridDynamicHeight = ({
@@ -50,6 +54,7 @@ const GridDynamicHeight = ({
   onScroll,
   smallPreview = false,
   countTilesInRow = 1,
+  isOneTile,
 }: GridDynamicHeightProps) => {
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -208,6 +213,8 @@ const GridDynamicHeight = ({
 
     const skeletons = [];
 
+    console.log("renderLoadingRow countTilesInRow", countTilesInRow);
+
     for (let i = 0; i < countTilesInRow; i += 1) {
       skeletons.push(
         <StyledSkeletonTile
@@ -217,15 +224,23 @@ const GridDynamicHeight = ({
           <div className="loader-container">
             <RectangleSkeleton height="100%" width="100%" animate />
 
-            <RectangleSkeleton height="20px" width="182px" animate />
+            <div className="loader-title">
+              <RectangleSkeleton height="20px" animate />
+            </div>
           </div>
         </StyledSkeletonTile>,
       );
     }
 
     return (
-      <div className="Item loading-item">
-        <div className={styles.item}>{skeletons}</div>
+      <div className="Item">
+        <div
+          className={classNames(styles.skeleton, {
+            [styles.isOneTile]: isOneTile,
+          })}
+        >
+          {skeletons}
+        </div>
       </div>
     );
   };

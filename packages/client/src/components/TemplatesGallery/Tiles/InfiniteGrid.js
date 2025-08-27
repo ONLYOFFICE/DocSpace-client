@@ -190,6 +190,7 @@ const InfiniteGrid = (props) => {
       loadMoreItems={fetchMoreFiles}
       className={`TileList ${className}`}
       smallPreview={smallPreview}
+      isOneTile={isShowOneTile}
       {...rest}
     >
       {list}

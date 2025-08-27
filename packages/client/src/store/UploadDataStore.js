@@ -688,11 +688,9 @@ class UploadDataStore {
         });
 
         if (this.uploaded) {
-          this.totalErrorsCount += 1;
           const primaryProgressData = {
             operation: OPERATIONS_NAME.upload,
             alert: true,
-            errorCount: this.totalErrorsCount,
           };
 
           this.primaryProgressDataStore.setPrimaryProgressBarData(
@@ -740,12 +738,10 @@ class UploadDataStore {
                 newFile.inConversion = false;
                 if (fileInfo === "password") {
                   newFile.needPassword = true;
-                  this.totalErrorsCount += 1;
 
                   this.primaryProgressDataStore.setPrimaryProgressBarData({
                     operation: OPERATIONS_NAME.upload,
                     alert: true,
-                    errorCount: this.totalErrorsCount,
                   });
                 }
               }
@@ -809,12 +805,9 @@ class UploadDataStore {
               if (error.indexOf("password") !== -1) {
                 hFile.needPassword = true;
 
-                this.totalErrorsCount += 1;
-
                 this.primaryProgressDataStore.setPrimaryProgressBarData({
                   operation: OPERATIONS_NAME.upload,
                   alert: true,
-                  errorCount: this.totalErrorsCount,
                 });
               } else hFile.action = "converted";
             }
@@ -898,6 +891,7 @@ class UploadDataStore {
         const fileIndex = this.files.findIndex(
           (f) => f.uniqueId === notUploadedFiles[i].uniqueId,
         );
+
         if (fileIndex !== -1) {
           this.currentUploadNumber += 1;
           this.startSessionFunc(fileIndex, t, createNewIfExist);
@@ -1060,7 +1054,6 @@ class UploadDataStore {
       this.filesSize = 0;
       this.uploadToFolder = null;
       this.percent = 0;
-      this.totalErrorsCount = 0;
     }
     if (this.uploaded && this.converted) {
       this.files = [];
@@ -1685,14 +1678,11 @@ class UploadDataStore {
         );
       })
       .catch((error) => {
-        this.totalErrorsCount += 1;
-
         if (this.files[indexOfFile] === undefined) {
           this.primaryProgressDataStore.setPrimaryProgressBarData({
             operation: OPERATIONS_NAME.upload,
             completed: true,
             alert: true,
-            errorCount: this.totalErrorsCount,
           });
           return Promise.resolve();
         }
@@ -1742,7 +1732,6 @@ class UploadDataStore {
           percent: newPercent,
           completed: allFilesIsUploaded,
           alert: true,
-          errorCount: this.totalErrorsCount,
         });
 
         this.currentUploadNumber -= 1;
@@ -1835,11 +1824,11 @@ class UploadDataStore {
       });
 
       // for empty file
-      this.totalErrorsCount += 1;
+
       this.primaryProgressDataStore.setPrimaryProgressBarData({
         operation: OPERATIONS_NAME.upload,
         alert: true,
-        errorCount: this.totalErrorsCount,
+        errorCount: totalErrorsCount,
       });
 
       console.log("Errors: ", totalErrorsCount);

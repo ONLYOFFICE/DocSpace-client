@@ -3,7 +3,7 @@
   "content": "Show version history",
   "content_en_sha1_hash": "55f3b72517c6594dba1e3a6ce9d3fdee0a590f36",
   "created_at": "2025-05-19T21:30:48.734Z",
-  "updated_at": "2025-08-26T11:15:14.226Z",
+  "updated_at": "2025-08-27T10:14:35.476Z",
   "comment": {
     "text": "This translation key is used to display the label \"Show version history\" on a badge component. It will be shown when the user clicks on a button that shows or hides version history information in the UI.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 365,
+      "line_number": 363,
       "context": "version: countVersions as string,\n })}\n {...onShowVersionHistoryProp}\n noHover\n isVersionBadge\n title={t(\"Common:ShowVersionHistory\")}\n />\n </BadgeWrapper>\n ) : null}\n \n {showNew ? (",
       "module": "/packages/shared"
     }

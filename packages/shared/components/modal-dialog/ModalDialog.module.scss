@@ -142,6 +142,10 @@
   &.displayTypeModal {
     margin-bottom: 16px;
   }
+
+  &.withoutHeaderMargin {
+    margin-bottom: 0;
+  }
 }
 
 .body {

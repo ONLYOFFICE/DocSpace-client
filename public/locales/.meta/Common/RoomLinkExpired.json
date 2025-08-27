@@ -3,7 +3,7 @@
   "content": "The room link you are trying to open does not exist or has expired.",
   "content_en_sha1_hash": "c16f473a9fbf86a65ac485294a575a3b10d7278a",
   "created_at": "2025-05-19T21:30:48.190Z",
-  "updated_at": "2025-08-26T11:15:14.129Z",
+  "updated_at": "2025-08-27T10:14:35.221Z",
   "comment": {
     "text": "The translation key \"RoomLinkExpired\" is used to display a message indicating that a room link has expired or does not exist. It appears in an error message when trying to open an external item, and serves as a fallback for cases where the item is locked or unavailable.",
     "is_auto": true,
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2618,
+      "line_number": 2616,
       "context": "if (\n item.external &&\n (item.expired || (await this.isExpiredLinkAsync(item)))\n )\n return toastr.error(\n t(\"Common:RoomLinkExpired\"),\n t(\"Common:RoomNotAvailable\"),\n );\n \n if (isLockedSharedRoom(item))\n return this.dialogsStore.setPasswordEntryDialog(true, item);",
       "module": "/packages/client"
     }

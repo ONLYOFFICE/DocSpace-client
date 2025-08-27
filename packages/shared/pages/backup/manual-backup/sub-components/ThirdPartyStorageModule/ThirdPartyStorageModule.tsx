@@ -243,7 +243,10 @@ const ThirdPartyStorageModule = ({
         )}
       >
         {!isThirdPartyAvailable ? (
-          <div className={styles.notAvailable}>
+          <div
+            className={styles.notAvailable}
+            data-testid="third-party-storage-not-available"
+          >
             <LockedReactSvg />
             <Text>{t("Common:NotIncludedInYourCurrentPlan")}</Text>
           </div>

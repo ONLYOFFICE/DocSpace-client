@@ -3,7 +3,7 @@
   "content": "New",
   "content_en_sha1_hash": "6403f2b7eb2aaafe6de34cbf2a029b01afebc512",
   "created_at": "2025-05-19T21:30:46.723Z",
-  "updated_at": "2025-08-26T11:15:14.230Z",
+  "updated_at": "2025-08-27T10:14:35.478Z",
   "comment": {
     "text": "This translation key is used for the text \"New\" in various UI elements to indicate new or updated content. It appears on a badge within a contact tab, and a guest release tip dialog, providing users with context about what's new.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 375,
+      "line_number": 373,
       "context": "{showNew ? (\n <BadgeWrapper onClick={onBadgeClick} isTile={isTile}>\n <Badge\n {...commonBadgeProps}\n className=\"badge-version badge-new-version tablet-badge icons-group\"\n label={t(\"Common:New\")}\n onClick={onBadgeClick}\n />\n </BadgeWrapper>\n ) : null}\n {/* {isForm  && (",
       "module": "/packages/shared"
     },

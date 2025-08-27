@@ -139,12 +139,8 @@
 }
 
 .header {
-  &.displayTypeModal {
+  &.displayTypeModal:not(.withoutHeaderMargin) {
     margin-bottom: 16px;
-  }
-
-  &.withoutHeaderMargin {
-    margin-bottom: 0;
   }
 }
 

@@ -77,7 +77,7 @@ const nextConfig = {
       },
     };
 
-    config.devtool = "source-map";
+    // config.devtool = "source-map";
 
     if (config.mode === "production") {
       config.optimization = {

@@ -370,7 +370,8 @@ module.exports = (env, argv) => {
   const banner = getBanner(version);
 
   if (isProduction) {
-    config.devtool = "source-map";
+    // config.devtool = "source-map";
+
     config.mode = "production";
     config.optimization.splitChunks.chunks = "all";
     config.optimization.minimize = !env.minimize;

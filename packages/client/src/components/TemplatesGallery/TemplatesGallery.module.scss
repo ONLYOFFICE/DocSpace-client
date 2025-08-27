@@ -53,12 +53,22 @@
 }
 
 .header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+
+.closeButton {
+  padding-top: 18px;
+}
+
+.headerText {
   font-weight: 700;
   font-size: 21px;
 
   line-height: 28px;
 
-  padding: 12px 0 13px 16px;
+  padding: 12px 0 13px 0px;
   border-bottom: 1px solid #{colors.$gray-light-mid};
 }
 

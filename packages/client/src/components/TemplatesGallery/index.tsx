@@ -30,7 +30,8 @@ import { Portal } from "@docspace/shared/components/portal";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 import { Tabs } from "@docspace/shared/components/tabs";
 import { isMobile } from "@docspace/shared/utils";
-
+import { IconButton } from "@docspace/shared/components/icon-button";
+import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 import Form from "./Form";
 import styles from "./TemplatesGallery.module.scss";
 
@@ -45,9 +46,14 @@ const FormComponent = Form as React.ComponentType<FormComponentProps>;
 
 const TemplatesGallery = (props: {
   templatesGalleryVisible: boolean;
+  setTemplatesGalleryVisible: (isVisible: boolean) => void;
   setCurrentExtensionGallery: (extension: string) => void;
 }) => {
-  const { templatesGalleryVisible, setCurrentExtensionGallery } = props;
+  const {
+    templatesGalleryVisible,
+    setTemplatesGalleryVisible,
+    setCurrentExtensionGallery,
+  } = props;
   const [viewMobile, setViewMobile] = useState(false);
   const [currentTabId, setCurrentTabId] = useState("documents");
 
@@ -104,12 +110,25 @@ const TemplatesGallery = (props: {
     setCurrentExtensionGallery(fileExtension);
   };
 
+  const onCloseClick = () => setTemplatesGalleryVisible(false);
+
   const nodeTemplatesGallery = (
     <>
       <Backdrop visible withBackground />
       <div className={styles.container}>
         <div className={styles.templatesGallery}>
-          <div className={styles.header}>Template gallery</div>
+          <div className={styles.header}>
+            <div className={styles.headerText}>Template gallery</div>
+            <IconButton
+              size={17}
+              className={styles.closeButton}
+              iconName={CrossReactSvgUrl}
+              onClick={onCloseClick}
+              isClickable
+              isStroke
+            />
+          </div>
+
           <div className={styles.templatesGalleryWrapper}>
             <Tabs
               items={tabs}
@@ -127,7 +146,17 @@ const TemplatesGallery = (props: {
       <Backdrop visible withBackground />
       <div className={styles.containerMobile}>
         <div className={styles.templatesGalleryMobile}>
-          <div className={styles.header}>Template gallery</div>
+          <div className={styles.header}>
+            <div className={styles.headerText}>Template gallery</div>
+            <IconButton
+              size={17}
+              className={styles.closeButton}
+              iconName={CrossReactSvgUrl}
+              onClick={onCloseClick}
+              isClickable
+              isStroke
+            />
+          </div>
           <div className={styles.templatesGalleryWrapper}>
             <Tabs
               items={tabs}
@@ -149,10 +178,15 @@ const TemplatesGallery = (props: {
 };
 
 export default inject<TStore>(({ oformsStore }) => {
-  const { templatesGalleryVisible, setCurrentExtensionGallery } = oformsStore;
+  const {
+    templatesGalleryVisible,
+    setTemplatesGalleryVisible,
+    setCurrentExtensionGallery,
+  } = oformsStore;
 
   return {
     templatesGalleryVisible,
+    setTemplatesGalleryVisible,
     setCurrentExtensionGallery,
   };
 })(observer(TemplatesGallery));

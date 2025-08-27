@@ -55,6 +55,8 @@ class ServicesStore {
 
   featureCountData: number = 0;
 
+  confirmActionType: string | null = null;
+
   constructor(
     currentTariffStatusStore: CurrentTariffStatusStore,
     paymentStore: PaymentStore,
@@ -112,6 +114,10 @@ class ServicesStore {
   //   return res;
   // };
 
+  setConfirmActionType = (value: string) => {
+    this.confirmActionType = value;
+  };
+
   setReccomendedAmount = (amount: number) => {
     this.reccomendedAmount = amount;
   };
@@ -123,11 +129,14 @@ class ServicesStore {
   servicesInit = async (t: TTranslation) => {
     const isRefresh = window.location.href.includes("complete=true");
 
+    if (!isRefresh) {
+      if (this.isVisibleWalletSettings) this.setVisibleWalletSetting(false);
+    }
+
     const {
       fetchAutoPayments,
       fetchCardLinked,
       setPaymentAccount,
-      isAlreadyPaid,
       initWalletPayerAndBalance,
       handleServicesQuotas,
     } = this.paymentStore!;
@@ -146,7 +155,7 @@ class ServicesStore {
 
       if (!quotas) throw new Error();
 
-      if (isAlreadyPaid) {
+      if (this.paymentStore!.isAlreadyPaid) {
         if (this.paymentStore!.isStripePortalAvailable) {
           requests.push(setPaymentAccount());
 
@@ -173,6 +182,7 @@ class ServicesStore {
 
         const amountParam = params.get("amount");
         const recommendedAmountParam = params.get("recommendedAmount");
+        const actionTypeParam = params.get("actionType");
 
         if (amountParam && recommendedAmountParam) {
           const amount = Number(amountParam);
@@ -182,13 +192,16 @@ class ServicesStore {
           this.setFeatureCountData(amount);
         }
 
+        if (actionTypeParam) {
+          this.setConfirmActionType(actionTypeParam);
+          this.setVisibleWalletSetting(true);
+        }
+
         window.history.replaceState(
           {},
           document.title,
           window.location.pathname,
         );
-
-        this.setVisibleWalletSetting(true);
       }
     } catch (e) {
       toastr.error(t("Common:UnexpectedError"));

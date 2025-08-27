@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { TTranslation } from "@docspace/shared/types";
-import type { TFolder } from "@docspace/shared/api/files/types";
 import type { ManualBackupProps } from "@docspace/shared/pages/backup/manual-backup/ManualBackup.types";
 
 export interface InjectedManualBackupProps
@@ -40,8 +39,14 @@ export interface InjectedManualBackupProps
   getProgress: (t: TTranslation) => Promise<void>;
   setStorageRegions: (regions: unknown) => void;
   setThirdPartyStorage: (list: unknown) => void;
-  fetchTreeFolders: () => Promise<TFolder[] | undefined>;
   resetDownloadingProgress: VoidFunction;
+  setConnectedThirdPartyAccount: (account: any) => void;
+  setBackupsCount: (count: number) => void;
+  setServiceQuota: () => void;
+  setIsInited: (inited: boolean) => void;
+  fetchPayerInfo: () => void;
+  isBackupPaid: boolean;
+  maxFreeBackups: number;
 }
 
 export interface ExternalManualBackupProps

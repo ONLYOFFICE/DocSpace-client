@@ -37,6 +37,8 @@ const CreatePluginFile = ({
   title,
   startValue,
   onSave,
+  onChange,
+  onError,
   onCancel,
   onClose,
   isCreateDialog,
@@ -45,6 +47,8 @@ const CreatePluginFile = ({
   onSelect,
   extension,
   pluginName,
+  errorText,
+  isAutoFocusOnError,
   updatePluginStatus,
   setCurrentSettingsDialogPlugin,
   setSettingsPluginDialogVisible,
@@ -56,6 +60,7 @@ const CreatePluginFile = ({
   updateProfileMenuItems,
   updateEventListenerItems,
   updateFileItems,
+  updateCreatePluginFileProps,
 }) => {
   const { t } = useTranslation(["Translations", "Common", "Files"]);
 
@@ -67,26 +72,52 @@ const CreatePluginFile = ({
   const onSaveAction = async (e, value) => {
     if (!onSave) return onCloseAction();
 
-    const message = await onSave(e, value);
+    try {
+      const message = await onSave(e, value);
 
-    messageActions(
-      message,
-      null,
-      pluginName,
-      setSettingsPluginDialogVisible,
-      setCurrentSettingsDialogPlugin,
-      updatePluginStatus,
-      null,
-      setPluginDialogVisible,
-      setPluginDialogProps,
-      updateContextMenuItems,
-      updateInfoPanelItems,
-      updateMainButtonItems,
-      updateProfileMenuItems,
-      updateEventListenerItems,
-      updateFileItems,
-    );
-    onCloseAction();
+      messageActions(
+        message,
+        null,
+        pluginName,
+        setSettingsPluginDialogVisible,
+        setCurrentSettingsDialogPlugin,
+        updatePluginStatus,
+        null,
+        setPluginDialogVisible,
+        setPluginDialogProps,
+        updateContextMenuItems,
+        updateInfoPanelItems,
+        updateMainButtonItems,
+        updateProfileMenuItems,
+        updateEventListenerItems,
+        updateFileItems,
+        updateCreatePluginFileProps,
+      );
+      !message.createDialogProps?.errorText && onCloseAction();
+    } catch (error) {
+      if (!onError) return;
+
+      const message = await onError(error);
+
+      messageActions(
+        message,
+        null,
+        pluginName,
+        setSettingsPluginDialogVisible,
+        setCurrentSettingsDialogPlugin,
+        updatePluginStatus,
+        null,
+        setPluginDialogVisible,
+        setPluginDialogProps,
+        updateContextMenuItems,
+        updateInfoPanelItems,
+        updateMainButtonItems,
+        updateProfileMenuItems,
+        updateEventListenerItems,
+        updateFileItems,
+        updateCreatePluginFileProps,
+      );
+    }
   };
 
   const onSelectAction = (option) => {
@@ -109,6 +140,31 @@ const CreatePluginFile = ({
       updateProfileMenuItems,
       updateEventListenerItems,
       updateFileItems,
+      updateCreatePluginFileProps,
+    );
+  };
+
+  const onChangeAction = (value) => {
+    if (!onChange) return;
+    const message = onChange(value);
+
+    messageActions(
+      message,
+      null,
+      pluginName,
+      setSettingsPluginDialogVisible,
+      setCurrentSettingsDialogPlugin,
+      updatePluginStatus,
+      null,
+      setPluginDialogVisible,
+      setPluginDialogProps,
+      updateContextMenuItems,
+      updateInfoPanelItems,
+      updateMainButtonItems,
+      updateProfileMenuItems,
+      updateEventListenerItems,
+      updateFileItems,
+      updateCreatePluginFileProps,
     );
   };
 
@@ -119,6 +175,7 @@ const CreatePluginFile = ({
       title={title}
       startValue={startValue}
       onSave={onSaveAction}
+      onChange={onChangeAction}
       onCancel={onCloseAction}
       onClose={onCloseAction}
       isCreateDialog={isCreateDialog}
@@ -126,6 +183,8 @@ const CreatePluginFile = ({
       selectedOption={selectedOption}
       onSelect={onSelectAction}
       extension={extension}
+      errorText={errorText}
+      isAutoFocusOnError={isAutoFocusOnError}
     />
   );
 };

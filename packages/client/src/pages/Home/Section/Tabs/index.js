@@ -27,12 +27,9 @@ import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 
 import ContactsTabs from "./ContactsTabs";
-import MyDocumentsTabs from "./MyDocumentsTabs";
 import RoomTemplatesTabs from "./RoomTemplatesTabs";
 
 const SectionSubmenuContent = ({
-  isPersonalRoom,
-  isRecentTab,
   isRoomsFolderRoot,
   isTemplatesFolder,
   allowInvitingGuests,
@@ -62,8 +59,6 @@ const SectionSubmenuContent = ({
       <ContactsTabs showGuestsTab={allowInvitingGuests || showGuestsTab} />
     );
 
-  if (!isContacts && (isPersonalRoom || isRecentTab))
-    return <MyDocumentsTabs />;
   if (!isContacts && (isRoomsFolderRoot || isTemplatesFolder))
     return <RoomTemplatesTabs />;
   return null;
@@ -71,20 +66,13 @@ const SectionSubmenuContent = ({
 
 export default inject(
   ({ treeFoldersStore, settingsStore, clientLoadingStore }) => {
-    const {
-      isPersonalRoom,
-      isRecentTab,
-      isRoomsFolderRoot,
-      isTemplatesFolder,
-    } = treeFoldersStore;
+    const { isRoomsFolderRoot, isTemplatesFolder } = treeFoldersStore;
 
     const { allowInvitingGuests, checkGuests, hasGuests } = settingsStore;
 
     const { currentClientView } = clientLoadingStore;
 
     return {
-      isPersonalRoom,
-      isRecentTab,
       isRoomsFolderRoot,
       isTemplatesFolder,
       allowInvitingGuests,

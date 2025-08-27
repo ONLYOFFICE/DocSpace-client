@@ -30,6 +30,8 @@ import { useTranslation } from "react-i18next";
 import React, { useMemo, useState } from "react";
 import classNames from "classnames";
 
+import LockedReactSvg from "PUBLIC_DIR/images/icons/16/locked.react.svg";
+
 import { Text } from "../../../../../components/text";
 import { ComboBox } from "../../../../../components/combobox";
 import { DropDownItem } from "../../../../../components/drop-down-item";
@@ -85,6 +87,7 @@ interface ThirdPartyStorageModuleProps {
   addValueInFormSettings: (name: string, value: string) => void;
   setRequiredFormSettings: (arr: string[]) => void;
   setIsThirdStorageChanged: (changed: boolean) => void;
+  isThirdPartyAvailable: boolean;
 }
 
 const ThirdPartyStorageModule = ({
@@ -104,6 +107,7 @@ const ThirdPartyStorageModule = ({
   deleteValueFormSetting,
   setRequiredFormSettings,
   setIsThirdStorageChanged,
+  isThirdPartyAvailable,
 }: ThirdPartyStorageModuleProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -180,6 +184,7 @@ const ThirdPartyStorageModule = ({
     addValueInFormSettings,
     setRequiredFormSettings,
     setIsThirdStorageChanged,
+    isThirdPartyAvailable,
   };
 
   const advancedOptions = (
@@ -237,6 +242,13 @@ const ThirdPartyStorageModule = ({
           "manual-backup_storages-module",
         )}
       >
+        {!isThirdPartyAvailable ? (
+          <div className={styles.notAvailable}>
+            <LockedReactSvg />
+            <Text>{t("Common:NotIncludedInYourCurrentPlan")}</Text>
+          </div>
+        ) : null}
+
         <ComboBox
           options={[]}
           displayArrow

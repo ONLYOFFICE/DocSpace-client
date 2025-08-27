@@ -127,7 +127,11 @@ const BackupServiceDialog: React.FC<BackupServiceDialogProps> = ({
       <ModalDialog.Body>
         <div className={styles.backupToggleSection}>
           <div className={styles.toggleButton}>
-            <ToggleButton isChecked={isEnabled} onChange={handleToggleChange} />
+            <ToggleButton
+              isChecked={isEnabled}
+              onChange={handleToggleChange}
+              dataTestId="service-backup-toggle-button"
+            />
           </div>
           <div className={styles.textContent}>
             <div>
@@ -167,6 +171,7 @@ const BackupServiceDialog: React.FC<BackupServiceDialogProps> = ({
           size={ButtonSize.normal}
           onClick={onClose}
           scale
+          testId="service-backup-dialog-close-button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

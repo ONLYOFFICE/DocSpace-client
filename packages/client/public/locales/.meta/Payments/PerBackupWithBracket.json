@@ -1,0 +1,28 @@
+{
+  "key_path": "PerBackupWithBracket",
+  "content": "({{currency}} per 1 backup)",
+  "content_en_sha1_hash": "995f9b7ce53cca9b8ffe731b7155aea8ff69f25d",
+  "created_at": "2025-08-21T14:45:39.480Z",
+  "updated_at": "2025-08-26T11:14:27.717Z",
+  "comment": {
+    "text": "This key displays the price per backup, formatted with the currency symbol and enclosed in parentheses. It appears within a backup service dialog to show the cost structure to the user. Translators should ensure the currency symbol is handled correctly within the translated string.",
+    "is_auto": true,
+    "updated_at": "2025-08-21T14:47:18.617Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/Backup/BackupServiceDialog.tsx",
+      "line_number": 138,
+      "context": "<div>\n <Text fontSize=\"12px\" fontWeight={600} as=\"span\">\n {t(\"Common:Backup\")}\n </Text>{\" \"}\n <Text as=\"span\" fontSize=\"12px\">\n {t(\"Payments:PerBackupWithBracket\", {\n currency: formatWalletCurrency!(backupServicePrice!, 2),\n })}\n </Text>\n </div>\n <Text fontSize=\"12px\" className={styles.backupDescription}>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

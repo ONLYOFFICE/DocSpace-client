@@ -152,6 +152,16 @@ export enum FilterType {
 }
 
 /**
+ * Enum for filter location.
+ * @readonly
+ */
+export const enum FilterLocation {
+  Rooms = 1,
+  Documents = 2,
+  Link = 3,
+}
+
+/**
  * Enum for file type.
  * @readonly
  */
@@ -472,6 +482,7 @@ export const enum FilterGroups {
   filterAccount = "filter-account",
   filterOther = "filter-other",
   filterInviter = "filter-inviter",
+  filterLocation = "filter-location",
 }
 
 export const enum FilterKeys {
@@ -749,7 +760,7 @@ export const enum SortByFieldName {
   Author = "Author",
   Size = "Size",
   Type = "Type",
-  Room = "Room",
+  Location = "Location",
   Tags = "Tags",
   RoomType = "roomType",
   LastOpened = "LastOpened",

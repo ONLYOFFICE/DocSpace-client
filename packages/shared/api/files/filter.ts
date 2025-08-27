@@ -29,7 +29,7 @@
 
 import queryString from "query-string";
 
-import { ApplyFilterOption, FilterType } from "../../enums";
+import { ApplyFilterOption, FilterLocation, FilterType } from "../../enums";
 import { getObjectByLocation, toUrlParams } from "../../utils/common";
 import { TViewAs, TSortOrder, TSortBy } from "../../types";
 import { validateAndFixObject } from "../../utils/filterValidator";
@@ -37,8 +37,8 @@ import { validateAndFixObject } from "../../utils/filterValidator";
 const DEFAULT_PAGE = 0;
 const DEFAULT_PAGE_COUNT = 25;
 const DEFAULT_TOTAL = 0;
-const DEFAULT_SORT_BY: TSortBy = "DateAndTime";
-const DEFAULT_SORT_ORDER: TSortOrder = "descending";
+const DEFAULT_SORT_BY: TSortBy | null = "DateAndTime";
+const DEFAULT_SORT_ORDER: TSortOrder | null = "descending";
 const DEFAULT_VIEW: TViewAs = "row";
 const DEFAULT_FILTER_TYPE: FilterType | null = null;
 const DEFAULT_SEARCH_TYPE: boolean | null = null; // withSubfolders
@@ -50,8 +50,9 @@ const DEFAULT_SEARCH_IN_CONTENT: boolean | null = null;
 const DEFAULT_EXCLUDE_SUBJECT: boolean | null = null;
 const DEFAULT_APPLY_FILTER_OPTION: ApplyFilterOption | null = null;
 const DEFAULT_EXTENSION: string | null = null;
-const DEFAULT_SEARCH_AREA: number | null = 3;
+const DEFAULT_SEARCH_AREA: number | null = null;
 const DEFAULT_KEY: string | null = null;
+const DEFAULT_LOCATION: FilterLocation | null = null;
 
 const SEARCH_TYPE = "withSubfolders";
 const AUTHOR_TYPE = "authorType";
@@ -73,6 +74,7 @@ const SEARCH_AREA = "searchArea";
 const KEY = "key";
 const DATE = "date";
 const TAGS = "tags";
+const LOCATION = "location";
 
 // TODO: add next params
 // subjectGroup bool
@@ -101,6 +103,7 @@ const getOtherSearchParams = () => {
     KEY,
     DATE,
     TAGS,
+    LOCATION,
   ];
 
   filterSearchParams.forEach((param) => {
@@ -136,9 +139,9 @@ class FilesFilter {
 
   pageCount: number;
 
-  sortBy: TSortBy;
+  sortBy: TSortBy | null;
 
-  sortOrder: TSortOrder;
+  sortOrder: TSortOrder | null;
 
   viewAs: TViewAs;
 
@@ -170,16 +173,40 @@ class FilesFilter {
 
   key: string | null = null;
 
-  static getDefault(pageCount = DEFAULT_PAGE_COUNT, total = DEFAULT_TOTAL) {
-    return new FilesFilter(DEFAULT_PAGE, pageCount, total);
+  location: FilterLocation | null = null;
+
+  static getDefault(
+    options: {
+      pageCount?: number;
+      total?: number;
+      isRecentFolder?: boolean;
+    } = {},
+  ) {
+    const {
+      pageCount = DEFAULT_PAGE_COUNT,
+      total = DEFAULT_TOTAL,
+      isRecentFolder = false,
+    } = options;
+
+    const filter = new FilesFilter(DEFAULT_PAGE, pageCount, total);
+
+    if (isRecentFolder) {
+      filter.sortBy = null;
+      filter.sortOrder = null;
+      filter.folder = "@recent";
+    }
+
+    return filter;
   }
 
   static getFilter(location: Location): FilesFilter {
     if (!location) return this.getDefault();
 
+    const isRecentFolder = location.pathname?.startsWith("/recent");
+
     const urlFilter = getObjectByLocation(location);
 
-    const defaultFilter = FilesFilter.getDefault();
+    const defaultFilter = FilesFilter.getDefault({ isRecentFolder });
 
     if (!urlFilter) return defaultFilter;
 
@@ -217,6 +244,8 @@ class FilesFilter {
       (urlFilter[SEARCH_AREA] && urlFilter[SEARCH_AREA]) ||
       defaultFilter.searchArea;
     const key = (urlFilter[KEY] && urlFilter[KEY]) || defaultFilter.key;
+    const locationFilter =
+      (urlFilter[LOCATION] && +urlFilter[LOCATION]) || defaultFilter.location;
 
     const newFilter = new FilesFilter(
       page,
@@ -237,6 +266,7 @@ class FilesFilter {
       extension,
       searchArea,
       key,
+      locationFilter,
     );
 
     return newFilter;
@@ -261,6 +291,7 @@ class FilesFilter {
     extension = DEFAULT_EXTENSION,
     searchArea = DEFAULT_SEARCH_AREA,
     key = DEFAULT_KEY,
+    location = DEFAULT_LOCATION,
   ) {
     this.page = page;
     this.pageCount = pageCount;
@@ -280,6 +311,7 @@ class FilesFilter {
     this.extension = extension;
     this.searchArea = searchArea;
     this.key = key;
+    this.location = location;
   }
 
   getStartIndex = () => {
@@ -313,6 +345,7 @@ class FilesFilter {
       applyFilterOption,
       extension,
       searchArea,
+      location,
     } = fixedValidObject;
 
     const isFilterSet =
@@ -344,6 +377,7 @@ class FilesFilter {
       applyFilterOption,
       extension,
       searchArea,
+      location,
     };
 
     const str = toUrlParams(dtoFilter, true);
@@ -370,6 +404,7 @@ class FilesFilter {
       extension,
       searchArea,
       key,
+      location,
     } = fixedValidObject;
 
     const dtoFilter: { [key: string]: unknown } = {};
@@ -390,6 +425,7 @@ class FilesFilter {
     if (extension) dtoFilter[EXTENSION] = extension;
     if (searchArea) dtoFilter[SEARCH_AREA] = searchArea;
     if (key) dtoFilter[KEY] = key;
+    if (location) dtoFilter[LOCATION] = location;
 
     dtoFilter[PAGE] = page + 1;
     dtoFilter[SORT_BY] = sortBy;
@@ -398,6 +434,7 @@ class FilesFilter {
     const otherSearchParams = getOtherSearchParams();
 
     const str = toUrlParams(dtoFilter, true);
+
     return `${str}&${otherSearchParams}`;
   };
 
@@ -415,7 +452,8 @@ class FilesFilter {
         this.searchInContent ||
         this.excludeSubject ||
         this.applyFilterOption ||
-        this.extension,
+        this.extension ||
+        this.location,
     );
   }
 
@@ -439,6 +477,7 @@ class FilesFilter {
       this.extension,
       this.searchArea,
       this.key,
+      this.location,
     );
   }
 
@@ -459,7 +498,8 @@ class FilesFilter {
       this.excludeSubject === filter.excludeSubject &&
       this.applyFilterOption === filter.applyFilterOption &&
       this.extension === filter.extension &&
-      this.searchArea === filter.searchArea;
+      this.searchArea === filter.searchArea &&
+      this.location === filter.location;
 
     return equals;
   }

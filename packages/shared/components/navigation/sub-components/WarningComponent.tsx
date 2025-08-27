@@ -27,9 +27,10 @@
 import React from "react";
 import styles from "../Navigation.module.scss";
 
-const WarningComponent = ({ title }: { title?: string }) => {
+const WarningComponent = ({ title }: { title?: React.ReactNode }) => {
+  const tooltip = typeof title === "string" ? title : undefined;
   return (
-    <div className={`${styles.warningText}`} title={title}>
+    <div className={`${styles.warningText}`} title={tooltip}>
       <div className="warning-text">{title}</div>
     </div>
   );

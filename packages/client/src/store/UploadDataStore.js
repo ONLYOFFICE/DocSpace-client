@@ -1786,14 +1786,19 @@ class UploadDataStore {
       (f) => !f.error,
     );
     const totalErrorsCount = filesWithErrors.length;
-
     if (totalErrorsCount > 0) {
-      filesWithErrors.forEach((f) => {
-        const historyFile = this.uploadedFilesHistory.find(
-          (file) => file.uniqueId === f.uniqueId,
-        );
+      this.primaryProgressDataStore.setPrimaryProgressBarData({
+        operation: OPERATIONS_NAME.upload,
+        alert: true,
+        errorCount: totalErrorsCount,
+      });
 
-        if (f.error.indexOf("password") > -1) {
+      console.log("Errors: ", totalErrorsCount);
+
+      if (totalErrorsCount === 1) {
+        const errorItem = filesWithErrors[0];
+
+        if (errorItem.error.indexOf("password") > -1) {
           toastr.warning(
             <Trans
               i18nKey="Common:PasswordProtectedFiles"
@@ -1815,23 +1820,15 @@ class UploadDataStore {
             60000,
             true,
           );
-        } else {
-          toastr.error(f.error);
+
+          return;
         }
-        if (historyFile) {
-          historyFile.errorShown = true;
-        }
-      });
 
-      // for empty file
+        toastr.error(errorItem.error);
+        return;
+      }
 
-      this.primaryProgressDataStore.setPrimaryProgressBarData({
-        operation: OPERATIONS_NAME.upload,
-        alert: true,
-        errorCount: totalErrorsCount,
-      });
-
-      console.log("Errors: ", totalErrorsCount);
+      toastr.error(t("UploadPanel:UploadingError"));
     } else {
       toastr.success(
         t("Common:ItemsSuccessfullyUploaded", {

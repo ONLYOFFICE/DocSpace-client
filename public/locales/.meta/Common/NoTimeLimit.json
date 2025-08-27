@@ -3,7 +3,7 @@
   "content": "No time limit",
   "content_en_sha1_hash": "ba3ffdc5c084cea0b7c0c475d3801a30fcb258b6",
   "created_at": "2025-05-19T21:30:46.946Z",
-  "updated_at": "2025-08-12T19:46:26.360Z",
+  "updated_at": "2025-08-26T11:15:14.272Z",
   "comment": {
     "text": "\"NoTimeLimit\" is a translation key used to display the phrase \"No time limit\" in the Link Row component of a file's UI, likely appearing as part of a dropdown menu or button. This text provides context about a link's expiration status, indicating that there is no deadline for accessing its content.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/shared/components/share/sub-components/LinkRow.tsx",
-      "line_number": 234,
-      "context": "fontSize=\"12px\"\n fontWeight=\"400\"\n lineHeight=\"16px\"\n className={styles.linkTimeInfo}\n >\n {t(\"Common:NoTimeLimit\")}\n </Text>\n ) : (\n <ExpiredComboBox\n link={link}\n availableExternalRights={availableExternalRights!}",
+      "file_path": "/packages/shared/components/share/sub-components/LinkExpiration.tsx",
+      "line_number": 69,
+      "context": "fontSize=\"12px\"\n fontWeight=\"400\"\n lineHeight=\"16px\"\n className={styles.linkTimeInfo}\n >\n {t(\"Common:NoTimeLimit\")}\n </Text>\n );\n }\n \n return (",
       "module": "/packages/shared"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "TB",
   "content_en_sha1_hash": "f8a902b067d4344b687920f92c669bffad7b0e0e",
   "created_at": "2025-05-19T21:30:49.270Z",
-  "updated_at": "2025-08-11T09:02:44.040Z",
+  "updated_at": "2025-08-21T14:45:44.124Z",
   "comment": {
     "text": "This translation key is used to display a unit of measurement for file sizes (\"TB\") and is included in a dropdown list within the Quota Form component. The label is part of a common size unit system and is used to help users understand the quantity of data being measured. It appears on the \"Common:Bytes\" option selection screen.",
     "is_auto": true,
@@ -11,8 +11,8 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/SelectionAmount.tsx",
-      "line_number": 138,
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AdditionalStorage/SelectionAmount.tsx",
+      "line_number": 111,
       "context": "const amountTabs = () => {\n const amounts = [100, 200, 500, 1024];\n return amounts.map((item) => {\n const name =\n item > 800\n ? `1 ${t(\"Common:Terabyte\")}`\n : `${item} ${t(\"Common:Gigabyte\")}`;\n return { value: item, name };\n });\n };",
       "module": "/packages/client"
     },

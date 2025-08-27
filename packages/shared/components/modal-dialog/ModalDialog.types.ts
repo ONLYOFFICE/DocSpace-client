@@ -89,6 +89,8 @@ export type ModalSubComponentsProps = AsideHeaderProps & {
   onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
   /** Removes default padding from body */
   withoutPadding?: boolean;
+  /** Removes default margin from header */
+  withoutHeaderMargin?: boolean;
   /** Hides modal content */
   hideContent?: boolean;
   /** Sets backdrop blur value */

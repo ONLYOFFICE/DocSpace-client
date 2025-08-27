@@ -130,7 +130,6 @@ export interface IMessage {
       | ToggleButtonProps;
   }[];
   createDialogProps?: ICreateDialog;
-  updateCreateDialogProps?: Partial<ICreateDialog>;
   modalDialogProps?: ModalDialogProps;
   postMessage?: IPostMessage;
   settings?: string;

@@ -298,6 +298,8 @@ const Root = ({
   const organizationName = settings?.logoText || t("Common:OrganizationName");
 
   React.useEffect(() => {
+    if (user?.isVisitor) return;
+
     const getMy = async () => {
       const res = await getPersonalFolderTree();
 
@@ -312,7 +314,7 @@ const Root = ({
     if (fileInfo?.rootFolderType === FolderType.RoomTemplates) {
       setSelectedFolderId(undefined);
     }
-  }, [fileInfo?.rootFolderType]);
+  }, [fileInfo?.rootFolderType, user?.isVisitor]);
 
   return isShowDeepLink ? (
     <DeepLink

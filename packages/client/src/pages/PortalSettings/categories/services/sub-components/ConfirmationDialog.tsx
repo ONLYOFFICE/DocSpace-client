@@ -70,11 +70,13 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
           onClick={onConfirm}
           primary
           scale
+          testId="service-confirmation-dialog-continue-button"
         />
         <Button
           label={t("Common:CloseButton")}
           size={ButtonSize.normal}
           onClick={onClose}
+          testId="service-confirmation-dialog-close-button"
           scale
         />
       </ModalDialog.Footer>

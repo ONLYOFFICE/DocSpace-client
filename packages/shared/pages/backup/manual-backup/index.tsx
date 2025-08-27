@@ -85,7 +85,14 @@ const getPaymentError = (
       ns="Common"
       i18nKey="InsufficientFundsWithTopUp"
       components={{
-        1: <Link tag="a" onClick={onClickWalletUrl} color="accent" />,
+        1: (
+          <Link
+            tag="a"
+            onClick={onClickWalletUrl}
+            color="accent"
+            dataTestId="insufficient-funds-top-up-link"
+          />
+        ),
       }}
     />
   ) : (
@@ -100,6 +107,7 @@ const getPaymentError = (
             tag="a"
             color="accent"
             href={`mailto:${walletCustomerEmail}`}
+            dataTestId="insufficient-funds-contact-link"
           />
         ),
       }}

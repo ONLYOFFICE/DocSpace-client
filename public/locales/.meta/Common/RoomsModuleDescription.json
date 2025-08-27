@@ -3,7 +3,7 @@
   "content": "You may create a new room specifically for the backup, choose one of the existing rooms, or save the copy in their {{roomName}} room.",
   "content_en_sha1_hash": "2f37d9051c90dfc970642bac71d6899484e612bd",
   "created_at": "2025-05-26T07:15:47.398Z",
-  "updated_at": "2025-08-26T11:14:27.766Z",
+  "updated_at": "2025-08-27T10:14:35.606Z",
   "comment": {
     "text": "This translation key is used to describe a room name in a backup process. It appears on buttons and dialogs in the auto-backup and manual-backup pages, prompting users to select or create a specific room for their backups.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 482,
+      "line_number": 497,
       "context": "styles.backupDescription,\n \"backup-description module-documents\",\n { [styles.disabled]: additionalDisabled },\n )}\n >\n {t(\"Common:RoomsModuleDescription\", {\n roomName: t(\"Common:MyFilesSection\"),\n })}\n </Text>\n {isCheckedDocuments ? (\n <RoomsModule",
       "module": "/packages/shared"
     }

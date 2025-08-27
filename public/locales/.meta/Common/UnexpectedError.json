@@ -3,7 +3,7 @@
   "content": "An unexpected error occurred. Try again later or contact support.",
   "content_en_sha1_hash": "25ad5a8afd50db67da636bee026c36dbe54b15d6",
   "created_at": "2025-05-19T21:30:49.388Z",
-  "updated_at": "2025-08-26T11:14:27.635Z",
+  "updated_at": "2025-08-27T10:14:35.201Z",
   "comment": {
     "text": "This translation key is used to display an error message when an unexpected issue occurs while performing a specific action, such as opening a link or sending a test email. It appears in a notification dialog, typically triggered by user interaction, and informs the user that they should try again later or contact support for assistance.",
     "is_auto": true,
@@ -61,7 +61,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/index.js",
       "line_number": 50,
-      "context": "setVisibleWalletSetting,\n } = props;\n \n const { t, ready } = useTranslation([\"Payments\", \"Common\"]);\n \n const errorText = t(\"Common:UnexpectedError\");\n const [showLoader, setShowLoader] = useState(false);\n \n const shouldShowLoader = !isInitWalletPage || !ready;\n \n useEffect(() => {",
+      "context": "setIsInitWalletPage,\n } = props;\n \n const { t, ready } = useTranslation([\"Payments\", \"Common\"]);\n \n const errorText = t(\"Common:UnexpectedError\");\n const [showLoader, setShowLoader] = useState(false);\n \n const shouldShowLoader = !isInitWalletPage || !ready;\n \n useEffect(() => {",
       "module": "/packages/client"
     },
     {

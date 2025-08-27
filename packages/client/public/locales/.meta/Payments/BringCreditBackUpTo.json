@@ -3,7 +3,7 @@
   "content": "Bring credit back up to",
   "content_en_sha1_hash": "e0278adc83cf35f5ec0697e0b62bd121bb84ba1d",
   "created_at": "2025-05-28T09:33:06.652Z",
-  "updated_at": "2025-08-12T19:46:26.233Z",
+  "updated_at": "2025-08-21T14:45:43.961Z",
   "comment": {
     "text": "This translation key is used to display the text \"Bring credit back up to\" in a wallet settings page, specifically as a label for an input field that allows users to set an auto-payment limit. It appears on the screen where users can configure their automatic payments.",
     "is_auto": true,
@@ -11,7 +11,7 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/AutoPayments.tsx",
+      "file_path": "/packages/client/src/components/panels/TopUpBalance/sub-components/AutoPayments.tsx",
       "line_number": 266,
       "context": "{description(5, 1000)}\n </div>\n \n <div className={styles.inputField}>\n <Text fontSize=\"12px\" className={styles.inputLabel} fontWeight={600}>\n {t(\"BringCreditBackUpTo\")}\n </Text>\n <TextInput\n scale\n value={upToBalance!}\n onChange={onMaxUpToBalanceChange}",
       "module": "/packages/client"

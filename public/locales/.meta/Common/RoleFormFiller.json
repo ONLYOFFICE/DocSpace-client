@@ -3,7 +3,7 @@
   "content": "Form filler",
   "content_en_sha1_hash": "36309bd9112093f7939d015f5678b7699adce63e",
   "created_at": "2025-05-19T21:30:48.030Z",
-  "updated_at": "2025-08-04T07:30:01.251Z",
+  "updated_at": "2025-08-26T11:15:14.139Z",
   "comment": {
     "text": "This translation key is used to display the role \"Form filler\" and its corresponding description in various parts of the UI, likely on access control settings or room information pages. It provides a clear label for users and reviewers in different contexts.",
     "is_auto": true,
@@ -15,12 +15,6 @@
       "line_number": 71,
       "context": "access: ShareAccessRights.Editing,\n type: \"user\",\n },\n formFiller: {\n key: \"formFiller\",\n label: this.t(\"Common:RoleFormFiller\"),\n access: ShareAccessRights.FormFilling,\n type: \"user\",\n },\n reviewer: {\n key: \"reviewer\",",
       "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 284,
-      "context": "case ShareAccessRights.Comment:\n return t(\"Common:Commentator\");\n case ShareAccessRights.ReadOnly:\n return t(\"JavascriptSdk:Viewer\");\n case ShareAccessRights.FormFilling:\n return t(\"Common:RoleFormFiller\");\n default:\n return \"\";\n }\n };",
-      "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",

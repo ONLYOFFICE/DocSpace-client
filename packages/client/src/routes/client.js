@@ -120,6 +120,22 @@ const ClientRoutes = [
             ),
           },
           {
+            path: "recent",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "recent/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
             path: "files/trash",
             element: (
               <PrivateRoute>

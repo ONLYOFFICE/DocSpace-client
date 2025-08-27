@@ -3,7 +3,7 @@
   "content": "No files or folders match this filter. Try another or remove the filter to view all files.",
   "content_en_sha1_hash": "f2861dacb0262bcf7db8f51e73d24b3a7e422750",
   "created_at": "2025-05-19T21:30:44.832Z",
-  "updated_at": "2025-05-28T09:30:02.090Z",
+  "updated_at": "2025-08-27T10:14:35.034Z",
   "comment": {
     "text": "\"No files or folders match this filter. Try another or remove the filter to view all files.\" This translation key is used in a UI element to display a message when a file filter does not return any results, prompting the user to adjust their search or remove the filter. It appears in an empty filter container component.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/EmptyFilterContainer.js",
-      "line_number": 64,
+      "line_number": 65,
       "context": "const navigate = useNavigate();\n const location = useLocation();\n \n const descriptionText = isRooms\n ? t(\"Common:EmptyFilterRoomsDescription\")\n : t(\"Common:EmptyFilterFilesDescription\");\n \n const getIconURL = () => {\n if (isRooms)\n return theme.isBase ? (\n <EmptyFilterRoomsLightIcon />",
       "module": "/packages/client"
     }

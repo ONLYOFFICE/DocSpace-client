@@ -317,8 +317,8 @@ export const getRootTitle = (
     .with([FolderType.USER, ShareAccessRights.None], () =>
       t("Common:EmptyScreenFolder"),
     )
-    .with([FolderType.Recent, P._], () => t("Files:NoFilesHereYet"))
     .with([FolderType.Favorites, P._], () => t("Files:NoFilesHereYet"))
+    .with([FolderType.Recent, P._], () => t("EmptyView:NoRecentFilesHereYet"))
     .with([FolderType.Archive, P._], () => t("Files:ArchiveEmptyScreenHeader"))
     .with([FolderType.TRASH, P._], () => t("Common:EmptyScreenFolder"))
     .otherwise(() => "");

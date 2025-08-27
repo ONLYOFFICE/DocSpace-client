@@ -77,6 +77,8 @@ class TreeFoldersStore {
           break;
         case FolderType.Favorites:
           folder.title = i18n.t("Common:Favorites");
+        case FolderType.Recent:
+          folder.title = i18n.t("Common:Recent");
           break;
         default:
           break;
@@ -300,6 +302,10 @@ class TreeFoldersStore {
     return this.favoritesFolder ? this.favoritesFolder.id : null;
   }
 
+  get recentFolderId() {
+    return this.recentFolder ? this.recentFolder.id : null;
+  }
+
   get isPersonalRoom() {
     return (
       this.myFolder &&
@@ -396,10 +402,6 @@ class TreeFoldersStore {
 
   get isDocumentsFolder() {
     return FolderType.USER === this.selectedFolderStore.rootFolderType;
-  }
-
-  get isRecentTab() {
-    return this.selectedFolderStore.rootFolderType === FolderType.Recent;
   }
 
   get isRoot() {

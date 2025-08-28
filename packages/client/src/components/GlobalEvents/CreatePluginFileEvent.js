@@ -75,14 +75,12 @@ const CreatePluginFile = ({
     try {
       const message = await onSave(e, value);
 
-      messageActions(
+      messageActions({
         message,
-        null,
         pluginName,
         setSettingsPluginDialogVisible,
         setCurrentSettingsDialogPlugin,
         updatePluginStatus,
-        null,
         setPluginDialogVisible,
         setPluginDialogProps,
         updateContextMenuItems,
@@ -91,22 +89,20 @@ const CreatePluginFile = ({
         updateProfileMenuItems,
         updateEventListenerItems,
         updateFileItems,
-        updateCreatePluginFileProps,
-      );
+        updateCreateDialogProps: updateCreatePluginFileProps,
+      });
       !message.createDialogProps?.errorText && onCloseAction();
     } catch (error) {
       if (!onError) return;
 
       const message = await onError(error);
 
-      messageActions(
+      messageActions({
         message,
-        null,
         pluginName,
         setSettingsPluginDialogVisible,
         setCurrentSettingsDialogPlugin,
         updatePluginStatus,
-        null,
         setPluginDialogVisible,
         setPluginDialogProps,
         updateContextMenuItems,
@@ -115,8 +111,8 @@ const CreatePluginFile = ({
         updateProfileMenuItems,
         updateEventListenerItems,
         updateFileItems,
-        updateCreatePluginFileProps,
-      );
+        updateCreateDialogProps: updateCreatePluginFileProps,
+      });
     }
   };
 
@@ -124,14 +120,12 @@ const CreatePluginFile = ({
     if (!onSelect) return;
     const message = onSelect(option);
 
-    messageActions(
+    messageActions({
       message,
-      null,
       pluginName,
       setSettingsPluginDialogVisible,
       setCurrentSettingsDialogPlugin,
       updatePluginStatus,
-      null,
       setPluginDialogVisible,
       setPluginDialogProps,
       updateContextMenuItems,
@@ -140,22 +134,20 @@ const CreatePluginFile = ({
       updateProfileMenuItems,
       updateEventListenerItems,
       updateFileItems,
-      updateCreatePluginFileProps,
-    );
+      updateCreateDialogProps: updateCreatePluginFileProps,
+    });
   };
 
   const onChangeAction = (value) => {
     if (!onChange) return;
     const message = onChange(value);
 
-    messageActions(
+    messageActions({
       message,
-      null,
       pluginName,
       setSettingsPluginDialogVisible,
       setCurrentSettingsDialogPlugin,
       updatePluginStatus,
-      null,
       setPluginDialogVisible,
       setPluginDialogProps,
       updateContextMenuItems,
@@ -164,8 +156,8 @@ const CreatePluginFile = ({
       updateProfileMenuItems,
       updateEventListenerItems,
       updateFileItems,
-      updateCreatePluginFileProps,
-    );
+      updateCreateDialogProps: updateCreatePluginFileProps,
+    });
   };
 
   return (

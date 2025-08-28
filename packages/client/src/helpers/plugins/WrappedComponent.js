@@ -178,26 +178,23 @@ export const PluginComponent = inject(({ pluginStore }) => {
             const onChangeAction = () => {
               const message = elementProps.onChange();
 
-              messageActions(
+              messageActions({
                 message,
                 setElementProps,
-
                 pluginName,
-
                 setSettingsPluginDialogVisible,
                 setCurrentSettingsDialogPlugin,
                 updatePluginStatus,
                 updatePropsContext,
                 setPluginDialogVisible,
                 setPluginDialogProps,
-
                 updateContextMenuItems,
                 updateInfoPanelItems,
                 updateMainButtonItems,
                 updateProfileMenuItems,
                 updateEventListenerItems,
                 updateFileItems,
-              );
+              });
             };
 
             return <Checkbox {...elementProps} onChange={onChangeAction} />;
@@ -207,26 +204,23 @@ export const PluginComponent = inject(({ pluginStore }) => {
             const onChangeAction = () => {
               const message = elementProps.onChange();
 
-              messageActions(
+              messageActions({
                 message,
                 setElementProps,
-
                 pluginName,
-
                 setSettingsPluginDialogVisible,
                 setCurrentSettingsDialogPlugin,
                 updatePluginStatus,
                 updatePropsContext,
                 setPluginDialogVisible,
                 setPluginDialogProps,
-
                 updateContextMenuItems,
                 updateInfoPanelItems,
                 updateMainButtonItems,
                 updateProfileMenuItems,
                 updateEventListenerItems,
                 updateFileItems,
-              );
+              });
             };
 
             return <ToggleButton {...elementProps} onChange={onChangeAction} />;
@@ -236,26 +230,23 @@ export const PluginComponent = inject(({ pluginStore }) => {
             const onChangeAction = (e) => {
               const message = elementProps.onChange(e.target.value);
 
-              messageActions(
+              messageActions({
                 message,
                 setElementProps,
-
                 pluginName,
-
                 setSettingsPluginDialogVisible,
                 setCurrentSettingsDialogPlugin,
                 updatePluginStatus,
                 updatePropsContext,
                 setPluginDialogVisible,
                 setPluginDialogProps,
-
                 updateContextMenuItems,
                 updateInfoPanelItems,
                 updateMainButtonItems,
                 updateProfileMenuItems,
                 updateEventListenerItems,
                 updateFileItems,
-              );
+              });
             };
 
             return <Textarea {...elementProps} onChange={onChangeAction} />;
@@ -265,26 +256,23 @@ export const PluginComponent = inject(({ pluginStore }) => {
             const onChangeAction = (e) => {
               const message = elementProps.onChange(e.target.value);
 
-              messageActions(
+              messageActions({
                 message,
                 setElementProps,
-
                 pluginName,
-
                 setSettingsPluginDialogVisible,
                 setCurrentSettingsDialogPlugin,
                 updatePluginStatus,
                 updatePropsContext,
                 setPluginDialogVisible,
                 setPluginDialogProps,
-
                 updateContextMenuItems,
                 updateInfoPanelItems,
                 updateMainButtonItems,
                 updateProfileMenuItems,
                 updateEventListenerItems,
                 updateFileItems,
-              );
+              });
             };
 
             return <TextInput {...elementProps} onChange={onChangeAction} />;
@@ -313,29 +301,24 @@ export const PluginComponent = inject(({ pluginStore }) => {
 
               const message = await elementProps.onClick();
 
-              messageActions(
+              messageActions({
                 message,
                 setElementProps,
-
                 pluginName,
-
                 setSettingsPluginDialogVisible,
                 setCurrentSettingsDialogPlugin,
                 updatePluginStatus,
                 updatePropsContext,
                 setPluginDialogVisible,
                 setPluginDialogProps,
-
                 updateContextMenuItems,
                 updateInfoPanelItems,
                 updateMainButtonItems,
                 updateProfileMenuItems,
                 updateEventListenerItems,
                 updateFileItems,
-                null,
-
                 updatePlugin,
-              );
+              });
 
               setIsRequestRunning && setIsRequestRunning(false);
               setModalRequestRunning && setModalRequestRunning(false);
@@ -371,26 +354,23 @@ export const PluginComponent = inject(({ pluginStore }) => {
             const onSelectAction = (option) => {
               const message = elementProps.onSelect(option);
 
-              messageActions(
+              messageActions({
                 message,
                 setElementProps,
-
                 pluginName,
-
                 setSettingsPluginDialogVisible,
                 setCurrentSettingsDialogPlugin,
                 updatePluginStatus,
                 updatePropsContext,
                 setPluginDialogVisible,
                 setPluginDialogProps,
-
                 updateContextMenuItems,
                 updateInfoPanelItems,
                 updateMainButtonItems,
                 updateProfileMenuItems,
                 updateEventListenerItems,
                 updateFileItems,
-              );
+              });
             };
 
             return <ComboBox {...elementProps} onSelect={onSelectAction} />;

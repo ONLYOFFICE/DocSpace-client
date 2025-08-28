@@ -1047,6 +1047,15 @@ class UploadDataStore {
       }
 
       toastr.error(errorMessage, null, 0, true);
+
+      if (this.uploaded) {
+        this.primaryProgressDataStore.setPrimaryProgressBarData({
+          operation: OPERATIONS_NAME.upload,
+          completed: this.uploaded,
+          alert: this.uploadedFilesHistory.length === 0,
+          ...(this.uploadedFilesHistory.length === 0 && { showPanel: null }),
+        });
+      }
     }
   };
 
@@ -1087,7 +1096,6 @@ class UploadDataStore {
         file,
         uniqueId: uniqueid("download_row-key_"),
         fileId: null,
-        // toFolderId,
         toFolderId: file.parentFolderId,
         action: "upload",
         error: file.size ? null : t("Files:EmptyFile"),

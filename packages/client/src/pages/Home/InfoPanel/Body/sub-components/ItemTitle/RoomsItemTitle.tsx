@@ -213,6 +213,7 @@ const RoomsItemHeader = ({
           tooltipContent={tooltipContent ?? undefined}
           hoverSrc={
             isRoom &&
+            selection?.security &&
             "EditRoom" in selection.security &&
             selection.security?.EditRoom
               ? Camera10ReactSvgUrl

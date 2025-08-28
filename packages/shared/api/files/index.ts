@@ -1668,13 +1668,17 @@ export async function addExternalFolderLink(
 
 // TODO: Need update res type
 export function checkIsFileExist(folderId: number, filesTitle: string[]) {
-  return request({
-    method: "post",
-    url: `files/${folderId}/upload/check`,
-    data: {
-      filesTitle,
+  const skipRedirect = true;
+  return request(
+    {
+      method: "post",
+      url: `files/${folderId}/upload/check`,
+      data: {
+        filesTitle,
+      },
     },
-  });
+    skipRedirect,
+  );
 }
 
 export function deleteFilesFromRecent(fileIds: number[]) {

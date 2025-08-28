@@ -83,26 +83,33 @@ const IntegrationWrapper = (props) => {
       name: t("SMTPSettings"),
       content: <SMTPSettings />,
     },
-    {
-      id: "ai-settings",
-      name: t("AISettings"),
-      content: <AISettngs />,
-    },
-    {
+  ];
+
+  // Todo: AI: change to SAAS
+  if (standalone) {
+    const mcpServersData = {
       id: "mcp-servers",
       name: t("MCPServers"),
       content: <MCPServers />,
-    },
-  ];
+    };
+
+    data.push(mcpServersData);
+  }
 
   if (standalone) {
+    const aiSettingsData = {
+      id: "ai-settings",
+      name: t("AISettings"),
+      content: <AISettngs />,
+    };
+
     const documentServiceData = {
       id: "document-service",
       name: t("DocumentService"),
       content: <DocumentService />,
     };
 
-    data.push(documentServiceData);
+    data.push(aiSettingsData, documentServiceData);
   }
 
   if (enablePlugins) {

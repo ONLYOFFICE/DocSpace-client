@@ -38,9 +38,12 @@ import { type TFile } from "../../api/files/types";
 import type { TTranslation } from "../../types";
 
 // Mock SVG imports
-jest.mock("PUBLIC_DIR/images/icons/16/download.react.svg", () => () => (
-  <div data-testid="download-icon" />
-));
+jest.mock("PUBLIC_DIR/images/icons/16/download.react.svg", () => {
+  const DownloadIcon = () => <div data-testid="download-icon" />;
+
+  DownloadIcon.displayName = "DownloadIcon";
+  return DownloadIcon;
+});
 jest.mock("PUBLIC_DIR/images/link.react.svg?url", () => "link-icon.svg");
 jest.mock(
   "PUBLIC_DIR/images/lifetime.react.svg?url",
@@ -179,7 +182,6 @@ const baseProps: QuickButtonsProps = {
   onClickLock: jest.fn(),
   isDisabled: false,
   isPublicRoom: false,
-  isPersonalRoom: true,
   isArchiveFolder: false,
   isTemplatesFolder: false,
   isIndexEditingMode: false,
@@ -231,14 +233,7 @@ describe("<QuickButtons />", () => {
   });
 
   it("renders download button for public room files in tile view", () => {
-    renderWithTheme(
-      <QuickButtons
-        {...baseProps}
-        isPublicRoom={true}
-        isPersonalRoom={false}
-        viewAs="tile"
-      />,
-    );
+    renderWithTheme(<QuickButtons {...baseProps} isPublicRoom viewAs="tile" />);
 
     const downloadButton = screen.getByTitle("Download");
     expect(downloadButton).toBeInTheDocument();
@@ -250,8 +245,7 @@ describe("<QuickButtons />", () => {
     renderWithTheme(
       <QuickButtons
         {...baseProps}
-        isPublicRoom={true}
-        isPersonalRoom={false}
+        isPublicRoom
         viewAs="tile"
         onClickDownload={onClickDownload}
       />,
@@ -264,7 +258,7 @@ describe("<QuickButtons />", () => {
   });
 
   it("renders create room button for templates folder", () => {
-    renderWithTheme(<QuickButtons {...baseProps} isTemplatesFolder={true} />);
+    renderWithTheme(<QuickButtons {...baseProps} isTemplatesFolder />);
 
     const createRoomButton = screen.getByTitle("Create Room");
     expect(createRoomButton).toBeInTheDocument();
@@ -276,7 +270,7 @@ describe("<QuickButtons />", () => {
     renderWithTheme(
       <QuickButtons
         {...baseProps}
-        isTemplatesFolder={true}
+        isTemplatesFolder
         onCreateRoom={onCreateRoom}
       />,
     );
@@ -296,12 +290,7 @@ describe("<QuickButtons />", () => {
     };
 
     renderWithTheme(
-      <QuickButtons
-        {...baseProps}
-        item={publicRoomItem}
-        isPublicRoom={true}
-        isPersonalRoom={false}
-      />,
+      <QuickButtons {...baseProps} item={publicRoomItem} isPublicRoom />,
     );
 
     const copyLinkButton = screen.getByTitle("Copy Shared Link");
@@ -321,8 +310,7 @@ describe("<QuickButtons />", () => {
       <QuickButtons
         {...baseProps}
         item={publicRoomItem}
-        isPublicRoom={true}
-        isPersonalRoom={false}
+        isPublicRoom
         onCopyPrimaryLink={onCopyPrimaryLink}
       />,
     );
@@ -397,11 +385,7 @@ describe("<QuickButtons />", () => {
 
   it("renders lifetime icon when showLifetimeIcon is true", () => {
     renderWithTheme(
-      <QuickButtons
-        {...baseProps}
-        showLifetimeIcon={true}
-        expiredDate="2025-12-31"
-      />,
+      <QuickButtons {...baseProps} showLifetimeIcon expiredDate="2025-12-31" />,
     );
 
     // Use getAllByTestId to get all elements with the data-testid="icon-button"
@@ -415,7 +399,7 @@ describe("<QuickButtons />", () => {
   });
 
   it("does not render any buttons when isIndexEditingMode is true", () => {
-    renderWithTheme(<QuickButtons {...baseProps} isIndexEditingMode={true} />);
+    renderWithTheme(<QuickButtons {...baseProps} isIndexEditingMode />);
 
     expect(screen.queryByTitle("Copy Shared Link")).not.toBeInTheDocument();
     expect(screen.queryByTitle("Download")).not.toBeInTheDocument();
@@ -428,7 +412,7 @@ describe("<QuickButtons />", () => {
     renderWithTheme(
       <QuickButtons
         {...baseProps}
-        isDisabled={true}
+        isDisabled
         onCopyPrimaryLink={onCopyPrimaryLink}
       />,
     );

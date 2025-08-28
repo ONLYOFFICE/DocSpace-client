@@ -36,7 +36,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 
-import AutomaticPaymentsBlock from "./sub-components/AutoPayments";
+import AutomaticPaymentsBlock from "../../../../../components/panels/TopUpBalance/sub-components/AutoPayments";
 
 import styles from "./styles/Wallet.module.scss";
 

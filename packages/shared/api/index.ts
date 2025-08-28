@@ -45,6 +45,7 @@ import * as oforms from "./oforms";
 import * as oauth from "./oauth";
 import * as debuginfo from "./debuginfo";
 import * as apiKeys from "./api-keys";
+import * as backup from "./backup";
 
 export default {
   Filter,
@@ -56,6 +57,7 @@ export default {
   settings,
   modules,
   portal,
+  backup,
   groups,
   files,
   rooms,

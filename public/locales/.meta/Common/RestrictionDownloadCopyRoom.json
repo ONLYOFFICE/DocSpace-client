@@ -1,0 +1,28 @@
+{
+  "key_path": "RestrictionDownloadCopyRoom",
+  "content": "You cannot disable the restriction on downloading and copying data because this setting is enforced at the room level for all files.",
+  "content_en_sha1_hash": "5fc62c010d3055bab64d90486b438d05848dc72f",
+  "created_at": "2025-08-26T11:15:00.099Z",
+  "updated_at": "2025-08-26T11:18:07.011Z",
+  "comment": {
+    "text": "This text explains why a user cannot disable download and copy restrictions. It appears as a tooltip in a dialog (EditLinkPanel) when download restrictions are enforced at the room level, informing the user that the setting cannot be changed. Translators should convey the reason for the restriction.",
+    "is_auto": true,
+    "updated_at": "2025-08-26T11:18:07.011Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/dialogs/EditLinkPanel/index.tsx",
+      "line_number": 549,
+      "context": "headerText={t(\"Common:DisableDownload\")}\n bodyText={getDisableDownloadText()}\n isChecked={denyDownload || disabledDenyDownload}\n onChange={onDenyDownloadChange}\n isDisabled={disabledDenyDownload}\n tooltipContent={t(\"Common:RestrictionDownloadCopyRoom\")}\n dataTestId=\"edit_link_panel_deny_download_toggle\"\n />\n ) : null}\n \n <LimitTimeBlock",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

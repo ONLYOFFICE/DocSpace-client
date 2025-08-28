@@ -50,12 +50,14 @@ import {
   getFilterContent,
   getTags,
   getQuotaFilter,
+  getFilterLocation,
 } from "@docspace/shared/components/filter/Filter.utils";
 
 import {
   DeviceType,
   FilterGroups,
   FilterKeys,
+  FilterLocation,
   FilterSubject,
   FilterType,
   RoomSearchArea,
@@ -80,7 +82,7 @@ const SectionFilterContent = ({
   t,
   filter,
   roomsFilter,
-  isRecentTab,
+  isRecentFolder,
   isFavoritesFolder,
   sectionWidth,
   viewAs,
@@ -250,6 +252,8 @@ const SectionFilterContent = ({
 
         newFilter.filterType = filterType;
 
+        newFilter.location = getFilterLocation(data);
+
         if (authorType === FilterKeys.me || authorType === FilterKeys.other) {
           newFilter.authorType = `user_${userId}`;
           newFilter.excludeSubject = authorType === FilterKeys.other;
@@ -274,7 +278,6 @@ const SectionFilterContent = ({
     [
       isRooms,
       isTrash,
-      isRecentTab,
       setIsLoading,
       roomsFilter,
       filter,
@@ -667,6 +670,20 @@ const SectionFilterContent = ({
           label,
         });
       }
+
+      if (filter.location) {
+        const locationLabels = {
+          [FilterLocation.Rooms]: t("Common:Rooms"),
+          [FilterLocation.Documents]: t("Common:Documents"),
+          [FilterLocation.Link]: t("Common:AccessibleViaLink"),
+        };
+
+        filterValues.push({
+          key: filter.location.toString(),
+          group: FilterGroups.filterLocation,
+          label: locationLabels[filter.location],
+        });
+      }
     }
 
     return filterValues;
@@ -675,6 +692,7 @@ const SectionFilterContent = ({
     filter.roomId,
     filter.filterType,
     filter.excludeSubject,
+    filter.location,
     roomsFilter.provider,
     roomsFilter.type,
     roomsFilter.subjectId,
@@ -739,7 +757,7 @@ const SectionFilterContent = ({
     const isLastTypeOptionsRooms = !connectedThirdParty.length && !tags?.length;
 
     const folders =
-      !isFavoritesFolder && !isRecentTab
+      !isFavoritesFolder && !isRecentFolder
         ? [
             {
               id: "filter_type-folders",
@@ -749,6 +767,17 @@ const SectionFilterContent = ({
             },
           ]
         : "";
+
+    const files = !isRecentFolder
+      ? [
+          {
+            id: "filter_type-all-files",
+            key: FilterType.FilesOnly.toString(),
+            group: FilterGroups.filterType,
+            label: t("Common:Files"),
+          },
+        ]
+      : [];
 
     const images = [
       {
@@ -861,15 +890,10 @@ const SectionFilterContent = ({
             group: FilterGroups.filterType,
             label: t("Common:Type"),
             isHeader: true,
-            isLast: !isTrash,
+            isLast: !isTrash && !isRecentFolder,
           },
           ...folders,
-          {
-            id: "filter_type-all-files",
-            key: FilterType.FilesOnly.toString(),
-            group: FilterGroups.filterType,
-            label: t("Common:Files"),
-          },
+          ...files,
           {
             id: "filter_type-documents",
             key: FilterType.DocumentsOnly.toString(),
@@ -1114,6 +1138,42 @@ const SectionFilterContent = ({
         ];
         filterOptions.push(...roomOption);
       }
+
+      if (isRecentFolder) {
+        const locationOption = [
+          {
+            key: FilterGroups.filterLocation,
+            group: FilterGroups.filterLocation,
+            label: t("Common:Location"),
+            isHeader: true,
+            isLast: true,
+          },
+          {
+            id: "filter_location-rooms",
+            key: FilterLocation.Rooms.toString(),
+            group: FilterGroups.filterLocation,
+            label: t("Common:Rooms"),
+          },
+        ];
+
+        if (!isVisitor) {
+          locationOption.push({
+            id: "filter_location-documents",
+            key: FilterLocation.Documents.toString(),
+            group: FilterGroups.filterLocation,
+            label: t("Common:Documents"),
+          });
+        }
+
+        locationOption.push({
+          id: "filter_location-accessible-via-link",
+          key: FilterLocation.Link.toString(),
+          group: FilterGroups.filterLocation,
+          label: t("Common:AccessibleViaLink"),
+        });
+
+        filterOptions.push(...locationOption);
+      }
     }
     return filterOptions;
   }, [
@@ -1122,7 +1182,7 @@ const SectionFilterContent = ({
     isRooms,
     isContactsPage,
     isFavoritesFolder,
-    isRecentTab,
+    isRecentFolder,
     isTrash,
     isPublicRoom,
     isTemplatesFolder,
@@ -1172,12 +1232,6 @@ const SectionFilterContent = ({
       id: "sort-by_activity",
       key: SortByFieldName.ModifiedDate,
       label: t("Common:LastActivityDate"),
-      default: true,
-    };
-    const lastOpenedDate = {
-      id: "sort-by_last-opened",
-      key: SortByFieldName.LastOpened,
-      label: t("DateLastOpened"),
       default: true,
     };
 
@@ -1240,7 +1294,6 @@ const SectionFilterContent = ({
       commonOptions.push(modifiedDate);
       commonOptions.push(size);
       // commonOptions.push(type);
-      isRecentTab && commonOptions.push(lastOpenedDate);
     }
 
     return commonOptions;
@@ -1331,6 +1384,9 @@ const SectionFilterContent = ({
         }
         if (group === FilterGroups.filterRoom) {
           newFilter.roomId = null;
+        }
+        if (group === FilterGroups.filterLocation) {
+          newFilter.location = null;
         }
 
         newFilter.page = 0;
@@ -1430,6 +1486,7 @@ const SectionFilterContent = ({
       isContactsGroupsPage={isContactsGroupsPage}
       isContactsInsideGroupPage={isContactsInsideGroupPage}
       isContactsGuestsPage={isContactsGuestsPage}
+      isRecentFolder={isRecentFolder}
     />
   );
 };
@@ -1475,7 +1532,7 @@ export default inject(
     const { standalone, currentDeviceType } = settingsStore;
     const {
       isFavoritesFolder,
-      isRecentTab,
+      isRecentFolder,
       isRoomsFolder,
       isArchiveFolder,
       isPersonalRoom,
@@ -1518,7 +1575,7 @@ export default inject(
       viewAs,
 
       isFavoritesFolder,
-      isRecentTab,
+      isRecentFolder,
       isRooms,
       isTrash,
       isArchiveFolder,

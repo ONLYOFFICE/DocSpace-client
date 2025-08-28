@@ -41,7 +41,12 @@ import type {
   TPathParts,
   // TTranslation,
 } from "@docspace/shared/types";
-import { TFolder, TFolderSecurity } from "@docspace/shared/api/files/types";
+import {
+  TAvailableExternalRights,
+  TFolder,
+  TFolderSecurity,
+  TShareSettings,
+} from "@docspace/shared/api/files/types";
 import {
   TLogo,
   TRoomLifetime,
@@ -179,6 +184,12 @@ class SelectedFolderStore {
 
   rootRoomId: number | string = "";
 
+  shareSettings: TShareSettings | null = null;
+
+  availableExternalRights: TAvailableExternalRights | null = null;
+
+  parentShared: boolean = false;
+
   constructor(settingsStore: SettingsStore) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -239,6 +250,9 @@ class SelectedFolderStore {
       chatSettings: this.chatSettings,
       rootRoomType: this.rootRoomType,
       rootRoomId: this.rootRoomId,
+      shareSettings: this.shareSettings,
+      availableExternalRights: this.availableExternalRights,
+      parentShared: this.parentShared,
     };
   };
 
@@ -295,6 +309,9 @@ class SelectedFolderStore {
     this.chatSettings = undefined;
     this.rootRoomType = null;
     this.rootRoomId = "";
+    this.shareSettings = null;
+    this.availableExternalRights = null;
+    this.parentShared = false;
   };
 
   setFilesCount = (filesCount: number) => {

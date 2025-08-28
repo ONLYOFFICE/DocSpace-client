@@ -529,7 +529,7 @@ export const settingsTree = [
             key: "7-1-5",
             icon: "",
             link: "viewer",
-            tKey: "JavascriptSdk:Viewer",
+            tKey: "Common:Viewer",
           },
           {
             id: "portal-settings_catalog-javascript-sdk_portal",

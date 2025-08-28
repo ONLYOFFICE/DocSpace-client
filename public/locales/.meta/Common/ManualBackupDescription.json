@@ -3,7 +3,7 @@
   "content": "Use this option if you want to get all data contained in the space as a file.",
   "content_en_sha1_hash": "72b06ec623764ca1cdcbbdbe125f16fc48240dee",
   "created_at": "2025-05-26T07:15:44.992Z",
-  "updated_at": "2025-08-04T07:30:01.748Z",
+  "updated_at": "2025-08-27T10:14:35.608Z",
   "comment": {
     "text": "Use this option to download all data contained within a space as a file. This setting is typically found on backup and restore options in a space management interface.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 292,
+      "line_number": 394,
       "context": "className={classNames(\n styles.backupModulesDescription,\n \"backup_modules-description\",\n )}\n >\n {t(\"Common:ManualBackupDescription\")}\n </Text>\n {!isManagement ? (\n <Link\n className={classNames(styles.linkLearnMore, \"link-learn-more\")}\n href={dataBackupUrl}",
       "module": "/packages/shared"
     }

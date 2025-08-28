@@ -24,10 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TFile, TFolder } from "../files/types";
+import type {
+  TAvailableExternalRights,
+  TFile,
+  TFolder,
+  TShareSettings,
+} from "../files/types";
 import {
   ExportRoomIndexTaskStatus,
   FolderType,
+  LinkSharingEntityType,
   RoomsType,
   ShareAccessRights,
   ValidationStatus,
@@ -133,6 +139,8 @@ export type TRoom = {
   isAvailable?: boolean;
   isRoom?: boolean;
   chatSettings?: { prompt: string; providerId: number; modelId: string };
+  shareSettings?: TShareSettings;
+  availableExternalRights?: TAvailableExternalRights;
 };
 
 export type TGetRooms = {
@@ -172,23 +180,23 @@ export type TNewFiles = {
   items: TNewFilesItem[];
 };
 
-export type TValidateShareRoom =
-  | {
-      id: string;
-      isAuthenticated: boolean;
-      linkId: string;
-      shared: boolean;
-      status: number;
-      tenantId: number;
-      title: string;
-    }
-  | {
-      isAuthenticated: boolean;
-      linkId: string;
-      shared: boolean;
-      status: number;
-      tenantId: number;
-    };
+export type TValidateShareRoom = {
+  id: string;
+  isAuthenticated: boolean;
+  linkId: string;
+  shared: boolean;
+  status: number;
+  tenantId: number;
+  title: string;
+
+  isRoom: boolean;
+  type: LinkSharingEntityType;
+
+  entityId?: string;
+  entityTitle?: string;
+  entityType?: LinkSharingEntityType;
+  isRoomMember?: boolean;
+};
 
 export type RoomMember = {
   access: number;

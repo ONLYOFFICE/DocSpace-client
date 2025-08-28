@@ -41,6 +41,10 @@
 
 .transactionHistoryBody {
   margin-top: 27px;
+
+  :global(.table-container_header) {
+    position: absolute;
+  }
 }
 
 .transactionDates {

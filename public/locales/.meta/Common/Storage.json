@@ -3,7 +3,7 @@
   "content": "Storage",
   "content_en_sha1_hash": "9e092dda4f0e27d0c7686ddd00272079e678b6e6",
   "created_at": "2025-05-19T21:30:49.092Z",
-  "updated_at": "2025-08-21T11:22:39.844Z",
+  "updated_at": "2025-08-27T10:14:35.227Z",
   "comment": {
     "text": "This translation key is used to display the content \"Storage\" in various places throughout the application, such as on a user's profile page or in an info panel. The text appears when displaying storage information and quotas for users. It provides context for translators to ensure consistency in language usage.",
     "is_auto": true,
@@ -30,19 +30,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 633,
+      "line_number": 599,
       "context": "showStorageInfo &&\n columns.splice(columns.length, 0, {\n key: \"Storage\",\n title:\n isDefaultRoomsQuotaSet && !isArchiveFolder\n ? t(\"Common:StorageAndQuota\")\n : t(\"Common:Storage\"),\n enable: roomQuotaColumnIsEnable,\n sortBy: SortByFieldName.UsedSpace,\n resizable: true,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 633,
+      "line_number": 599,
       "context": "showStorageInfo &&\n columns.splice(columns.length, 0, {\n key: \"Storage\",\n title:\n isDefaultRoomsQuotaSet && !isArchiveFolder\n ? t(\"Common:StorageAndQuota\")\n : t(\"Common:Storage\"),\n enable: roomQuotaColumnIsEnable,\n sortBy: SortByFieldName.UsedSpace,\n resizable: true,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 704,
+      "line_number": 722,
       "context": "const getFilterData = React.useCallback(async () => {\n const quotaFilter = [\n {\n key: FilterGroups.filterQuota,\n group: FilterGroups.filterQuota,\n label: t(\"Common:StorageQuota\"),\n isHeader: true,\n withoutSeparator: true,\n withMultiItems: true,\n },\n {",
       "module": "/packages/client"
     },

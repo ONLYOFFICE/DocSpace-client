@@ -27,14 +27,11 @@ import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 
 import ContactsTabs from "./ContactsTabs";
-import MyDocumentsTabs from "./MyDocumentsTabs";
 import RoomTemplatesTabs from "./RoomTemplatesTabs";
 import AiRoomTabs from "./AiRoomTabs";
 
 const SectionSubmenuContent = ({
-  isPersonalRoom,
   isAIRoom,
-  isRecentTab,
   isRoomsFolderRoot,
   isTemplatesFolder,
   allowInvitingGuests,
@@ -59,15 +56,12 @@ const SectionSubmenuContent = ({
 
   if (isContacts && allowInvitingGuests === false) checkGuests();
 
-  if (isPersonalRoom || isRecentTab) return <MyDocumentsTabs />;
   if (isAIRoom) return <AiRoomTabs />;
   if (isContacts && (allowInvitingGuests || isCheckGuests))
     return (
       <ContactsTabs showGuestsTab={allowInvitingGuests || showGuestsTab} />
     );
 
-  if (!isContacts && (isPersonalRoom || isRecentTab))
-    return <MyDocumentsTabs />;
   if (!isContacts && (isRoomsFolderRoot || isTemplatesFolder))
     return <RoomTemplatesTabs />;
   return null;
@@ -80,20 +74,13 @@ export default inject(
     clientLoadingStore,
     selectedFolderStore,
   }) => {
-    const {
-      isPersonalRoom,
-      isRecentTab,
-      isRoomsFolderRoot,
-      isTemplatesFolder,
-    } = treeFoldersStore;
+    const { isRoomsFolderRoot, isTemplatesFolder } = treeFoldersStore;
 
     const { allowInvitingGuests, checkGuests, hasGuests } = settingsStore;
 
     const { currentClientView } = clientLoadingStore;
 
     return {
-      isPersonalRoom,
-      isRecentTab,
       isAIRoom: selectedFolderStore.isAIRoom,
       isRoomsFolderRoot,
       isTemplatesFolder,

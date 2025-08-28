@@ -2820,6 +2820,8 @@ class FilesStore {
       // "link-for-portal-users",
       "separator1",
       "open-location",
+      "mark-as-favorite",
+      "remove-from-favorites",
       "download",
       "move", // category
       "move-to",
@@ -2965,6 +2967,17 @@ class FilesStore {
 
     if (isMyFolder) {
       folderOptions = removeOptions(folderOptions, ["link-for-room-members"]);
+    }
+
+    if (item?.isFavorite) {
+      folderOptions = removeOptions(folderOptions, ["mark-as-favorite"]);
+    } else {
+      folderOptions = removeOptions(folderOptions, ["remove-from-favorites"]);
+    }
+
+    if (isFavoritesFolder) {
+      folderOptions = removeOptions(folderOptions, ["mark-as-favorite"]);
+      folderOptions = removeOptions(folderOptions, ["delete"]);
     }
 
     folderOptions = removeSeparator(folderOptions);

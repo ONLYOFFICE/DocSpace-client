@@ -101,6 +101,7 @@ import {
   frameCallEvent,
   getConvertedSize,
   getObjectByLocation,
+  splitFileAndFolderIds,
 } from "@docspace/shared/utils/common";
 import uniqueid from "lodash/uniqueId";
 import FilesFilter from "@docspace/shared/api/files/filter";
@@ -1257,28 +1258,19 @@ class FilesActionStore {
     return Promise.all(requests);
   };
 
-  setFavoriteAction = (action, id) => {
-    const { fetchFavoritesFolder, setSelected } = this.filesStore;
-
-    const items = Array.isArray(id) ? id : [id];
+  setFavoriteAction = (action, items) => {
+    const { setSelected } = this.filesStore;
+    const { fileIds, folderIds } = splitFileAndFolderIds(items);
 
     switch (action) {
       case "mark":
         return api.files
-          .markAsFavorite(items)
-          .then(() => {
-            return this.getFilesInfo(items);
-          })
+          .markAsFavorite(fileIds, folderIds)
           .then(() => setSelected("close"));
 
       case "remove":
         return api.files
-          .removeFromFavorite(items)
-          .then(() => {
-            return this.treeFoldersStore.isFavoritesFolder
-              ? fetchFavoritesFolder(this.selectedFolderStore.id)
-              : this.getFilesInfo(items);
-          })
+          .removeFromFavorite(fileIds, folderIds)
           .then(() => setSelected("close"));
       default:
     }
@@ -2493,8 +2485,7 @@ class FilesActionStore {
         alt: t("RemoveFromFavorites"),
         iconUrl: FavoritesFillReactSvgUrl,
         onClick: () => {
-          const items = selection.map((item) => item.id);
-          this.setFavoriteAction("remove", items)
+          this.setFavoriteAction("remove", selection)
             .then(() => toastr.success(t("RemovedFromFavorites")))
             .catch((err) => toastr.error(err));
         },

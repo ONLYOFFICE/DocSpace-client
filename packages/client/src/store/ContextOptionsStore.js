@@ -433,12 +433,12 @@ class ContextOptionsStore {
     });
   };
 
-  onClickFavorite = (e, id, t) => {
+  onClickFavorite = (e, items, t) => {
     const data = (e.currentTarget && e.currentTarget.dataset) || e;
     const { action } = data;
 
     this.filesActionsStore
-      .setFavoriteAction(action, id)
+      .setFavoriteAction(action, items)
       .then(() =>
         action === "mark"
           ? toastr.success(t("MarkedAsFavorite"))
@@ -2090,7 +2090,7 @@ class ContextOptionsStore {
         key: "mark-as-favorite",
         label: t("MarkAsFavorite"),
         icon: FavoritesReactSvgUrl,
-        onClick: (e) => this.onClickFavorite(e, item.id, t),
+        onClick: (e) => this.onClickFavorite(e, [item], t),
         disabled: false,
         "data-action": "mark",
         action: "mark",
@@ -2226,7 +2226,7 @@ class ContextOptionsStore {
         key: "remove-from-favorites",
         label: t("RemoveFromFavorites"),
         icon: FavoritesFillReactSvgUrl,
-        onClick: (e) => this.onClickFavorite(e, item.id, t),
+        onClick: (e) => this.onClickFavorite(e, [item], t),
         disabled: false,
         "data-action": "remove",
         action: "remove",
@@ -2432,30 +2432,15 @@ class ContextOptionsStore {
       (x) => x.providerKey && x.id === x.rootFolderId,
     );
 
-    const favoriteItemsIds = favoriteItems.map((item) => item.id);
-
-    const removeFromFavoriteItemsIds = removeFromFavoriteItems.map(
-      (item) => item.id,
-    );
-
     const options = [
       {
         key: "mark-as-favorite",
         label: t("MarkAsFavorite"),
         icon: FavoritesReactSvgUrl,
-        onClick: (e) => this.onClickFavorite(e, favoriteItemsIds, t),
+        onClick: (e) => this.onClickFavorite(e, favoriteItems, t),
         disabled: !favoriteItems.length,
         "data-action": "mark",
         action: "mark",
-      },
-      {
-        key: "remove-from-favorites",
-        label: t("RemoveFromFavorites"),
-        icon: FavoritesFillReactSvgUrl,
-        onClick: (e) => this.onClickFavorite(e, removeFromFavoriteItemsIds, t),
-        disabled: favoriteItems.length || !removeFromFavoriteItems.length,
-        "data-action": "remove",
-        action: "remove",
       },
       {
         id: "create_room",
@@ -2517,6 +2502,15 @@ class ContextOptionsStore {
         onClick: () =>
           this.filesActionsStore.onClickRemoveFromRecent(selection),
         disabled: !this.treeFoldersStore.isRecentFolder,
+      },
+      {
+        key: "remove-from-favorites",
+        label: t("RemoveFromFavorites"),
+        icon: FavoritesFillReactSvgUrl,
+        onClick: (e) => this.onClickFavorite(e, removeFromFavoriteItems, t),
+        disabled: favoriteItems.length || !removeFromFavoriteItems.length,
+        "data-action": "remove",
+        action: "remove",
       },
       {
         key: "delete",

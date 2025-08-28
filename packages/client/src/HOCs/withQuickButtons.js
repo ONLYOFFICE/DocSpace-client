@@ -65,13 +65,13 @@ export default function withQuickButtons(WrappedComponent) {
       const { t, item, setFavoriteAction } = this.props;
 
       if (item?.isFavorite) {
-        setFavoriteAction("remove", item.id)
+        setFavoriteAction("remove", [item])
           .then(() => toastr.success(t("RemovedFromFavorites")))
           .catch((err) => toastr.error(err));
         return;
       }
 
-      setFavoriteAction("mark", item.id)
+      setFavoriteAction("mark", [item])
         .then(() => toastr.success(t("MarkedAsFavorite")))
         .catch((err) => toastr.error(err));
     };

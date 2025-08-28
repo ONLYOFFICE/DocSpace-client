@@ -79,7 +79,6 @@ const TransactionHistoryTableHeader = (props: TableHeaderProps) => {
       columns={defaultColumns}
       showSettings={false}
       useReactWindow
-      style={{ position: "absolute" }}
       {...props}
     />
   );

@@ -3,7 +3,7 @@
   "content": "Your email has been successfully changed.",
   "content_en_sha1_hash": "7598dc6b7e35f5e1b7604f60c13c3fabf7a0f23f",
   "created_at": "2025-08-21T11:22:35.110Z",
-  "updated_at": "2025-08-21T11:22:56.105Z",
+  "updated_at": "2025-08-26T11:15:14.215Z",
   "comment": {
     "text": "This key displays a success message to the user after they have successfully changed their email address. It appears as a toast notification within the user's profile section. Translators should ensure the message clearly conveys a successful email update.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/index.tsx",
-      "line_number": 128,
+      "line_number": 131,
       "context": "const checkEmailChangeParam = () => {\n const search = window.location.search;\n const urlParams = new URLSearchParams(search);\n \n if (urlParams.get(\"email_change\") === \"success\") {\n toastr.success(t?.(\"Profile:EmailChangeSuccess\"));\n \n const pathname = window.location.pathname;\n window.history.replaceState({}, document.title, pathname);\n }\n };",
       "module": "/packages/client"
     }

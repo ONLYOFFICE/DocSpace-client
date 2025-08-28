@@ -99,14 +99,6 @@ const FileInputPure = ({
         iconSize = 15;
         buttonSize = ButtonSize.small;
         break;
-      case InputSize.big:
-        iconSize = 16;
-        buttonSize = ButtonSize.normal;
-        break;
-      case InputSize.huge:
-        iconSize = 16;
-        buttonSize = ButtonSize.medium;
-        break;
       case InputSize.large:
         iconSize = 16;
         buttonSize = ButtonSize.medium;

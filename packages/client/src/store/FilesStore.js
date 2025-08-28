@@ -465,7 +465,11 @@ class FilesStore {
 
     if (this.files.findIndex((x) => x.id === fileInfo.id) > -1) return;
 
-    if (this.selectedFolderStore.id !== fileInfo.folderId) return;
+    if (
+      this.selectedFolderStore.id !== fileInfo.folderId &&
+      this.selectedFolderStore.rootFolderType !== FolderType.Recent
+    )
+      return;
 
     console.log("[WS] create new file", { fileInfo });
 

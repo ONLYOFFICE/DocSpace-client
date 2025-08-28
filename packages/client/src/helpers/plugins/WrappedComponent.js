@@ -332,6 +332,7 @@ export const PluginComponent = inject(({ pluginStore }) => {
                 updateProfileMenuItems,
                 updateEventListenerItems,
                 updateFileItems,
+                null,
 
                 updatePlugin,
               );

@@ -120,7 +120,7 @@ const CreateEvent = ({
       };
 
       if (!extension) {
-        api.files
+        await api.files
           .createFolder(parentId, newValue)
           .then((folder) => {
             item = folder;

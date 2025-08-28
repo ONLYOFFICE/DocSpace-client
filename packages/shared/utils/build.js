@@ -24,64 +24,27 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { useTranslation } from "react-i18next";
-
-import { TableHeader } from "@docspace/shared/components/table";
-
-type TableHeaderProps = {
-  containerRef: React.RefObject<HTMLDivElement>;
-  columnStorageName: string;
-  columnInfoPanelStorageName: string;
-  sectionWidth: number;
-  itemHeight: number;
+const getBuildYear = () => {
+  const timeElapsed = Date.now();
+  const today = new Date(timeElapsed);
+  return today.getFullYear();
 };
 
-const TransactionHistoryTableHeader = (props: TableHeaderProps) => {
-  const { t } = useTranslation(["Payments", "Common"]);
-
-  const defaultColumns = [
-    {
-      key: "Date",
-      title: t("Common:Date"),
-      enable: true,
-      resizable: true,
-      default: true,
-      sortBy: "AZ",
-      active: true,
-      minWidth: 150,
-    },
-    {
-      key: "Action",
-      title: t("Common:Action"),
-      enable: true,
-      resizable: true,
-      minWidth: 120,
-    },
-    {
-      key: "Quantity",
-      title: t("Payments:Quantity"),
-      enable: true,
-      resizable: true,
-      minWidth: 150,
-    },
-    {
-      key: "Cost",
-      title: t("Payments:Cost"),
-      enable: true,
-      resizable: true,
-      minWidth: 120,
-    },
-  ];
-
-  return (
-    <TableHeader
-      columns={defaultColumns}
-      showSettings={false}
-      useReactWindow
-      {...props}
-    />
-  );
+const getBuildDate = () => {
+  const timeElapsed = Date.now();
+  const today = new Date(timeElapsed);
+  return JSON.stringify(`${today.toISOString().split(".")[0]}Z`);
 };
 
-export default TransactionHistoryTableHeader;
+const getBanner = (version) => `/*
+* (c) Copyright Ascensio System SIA 2009-${getBuildYear()}. All rights reserved
+*
+* https://www.onlyoffice.com/
+*
+* Version: ${version} (build at: ${getBuildDate()})
+*/`;
+
+export default {
+  getBuildDate,
+  getBanner,
+};

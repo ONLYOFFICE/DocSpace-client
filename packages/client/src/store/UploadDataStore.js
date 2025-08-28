@@ -1046,62 +1046,16 @@ class UploadDataStore {
         errorMessage = err;
       }
 
-      // Early/preflight error: finalize files so the loader doesn't spin forever
-      runInAction(() => {
-        // Ensure local state mirrors the pending uploadData
-        if (uploadData) {
-          if (
-            !this.uploadedFilesHistory ||
-            this.uploadedFilesHistory.length === 0
-          ) {
-            this.uploadedFilesHistory = uploadData.uploadedFilesHistory || [];
-          }
-          if (!this.files || this.files.length === 0) {
-            this.files = uploadData.files || [];
-          }
-        }
+      toastr.error(errorMessage, null, 0, true);
 
-        // Mark all new files as errored and finalized in history
-        const allFiles = uploadData?.allNewFiles || [];
-        allFiles.forEach((f) => {
-          // files array entry
-          const fileIdx = this.files.findIndex(
-            (x) => x.uniqueId === f.uniqueId,
-          );
-          if (fileIdx > -1) {
-            this.files[fileIdx].error =
-              errorMessage || t?.("Common:UnexpectedError");
-            this.files[fileIdx].inAction = false;
-          }
-
-          // history entry
-          const hIdx = this.uploadedFilesHistory.findIndex(
-            (x) => x.uniqueId === f.uniqueId,
-          );
-          if (hIdx > -1) {
-            this.uploadedFilesHistory[hIdx].error =
-              errorMessage || t?.("Common:UnexpectedError");
-            this.uploadedFilesHistory[hIdx].percent = 100;
-          }
+      if (this.uploaded) {
+        this.primaryProgressDataStore.setPrimaryProgressBarData({
+          operation: OPERATIONS_NAME.upload,
+          completed: this.uploaded,
+          alert: this.uploadedFilesHistory.length === 0,
+          ...(this.uploadedFilesHistory.length === 0 && { showPanel: null }),
         });
-
-        // Update overall percent based on finalized history
-        const newPercent = this.getFilesPercent();
-        this.percent = Number.isNaN(newPercent) ? 100 : newPercent;
-      });
-
-      // Reflect error state in primary progress and finish
-      this.totalErrorsCount += 1;
-      this.primaryProgressDataStore.setPrimaryProgressBarData({
-        operation: OPERATIONS_NAME.upload,
-        percent: this.percent,
-        completed: true,
-        alert: true,
-        errorCount: this.totalErrorsCount,
-      });
-
-      // Finalize upload panel state (no conversions yet at this stage)
-      this.finishUploadFiles(t, false);
+      }
     }
   };
 

@@ -1184,8 +1184,8 @@ export async function getSettingsFiles(headers = null) {
   return res;
 }
 
-export async function markAsFavorite(ids: number[]) {
-  const data = { fileIds: ids };
+export async function markAsFavorite(fileIds: number[], folderIds: number[]) {
+  const data = { fileIds, folderIds };
   const options: AxiosRequestConfig = {
     method: "post",
     url: "/files/favorites",
@@ -1195,8 +1195,11 @@ export async function markAsFavorite(ids: number[]) {
   return res;
 }
 
-export async function removeFromFavorite(ids: number[]) {
-  const data = { fileIds: ids };
+export async function removeFromFavorite(
+  fileIds: number[],
+  folderIds: number[],
+) {
+  const data = { fileIds, folderIds };
   const options: AxiosRequestConfig = {
     method: "delete",
     url: "/files/favorites",

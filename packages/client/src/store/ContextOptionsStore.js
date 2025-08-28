@@ -2138,7 +2138,7 @@ class ContextOptionsStore {
         label: t("OpenLocation"),
         icon: FolderLocationReactSvgUrl,
         onClick: () => this.onOpenLocation(item),
-        disabled: false,
+        disabled: !!item.requestToken,
       },
       {
         id: "option_mark-read",
@@ -2298,7 +2298,7 @@ class ContextOptionsStore {
         label: t("Common:RemoveFromList"),
         icon: RemoveOutlineSvgUrl,
         onClick: () => this.onClickRemoveFromRecent(item),
-        disabled: !this.treeFoldersStore.isRecentTab,
+        disabled: !this.treeFoldersStore.isRecentFolder,
       },
       {
         key: "separate-stop-filling",
@@ -2589,9 +2589,9 @@ class ContextOptionsStore {
       k.contextOptions?.includes("mark-as-favorite"),
     );
 
-    const moveItems = selection.filter((k) =>
+    const canMove = selection.every((k) =>
       k.contextOptions.includes("move-to"),
-    ).length;
+    );
 
     const copyItems = selection.filter((k) =>
       k.contextOptions.includes("copy-to"),
@@ -2670,7 +2670,7 @@ class ContextOptionsStore {
         onClick: allFilesIsEditing
           ? () => this.onShowEditingToast(t)
           : this.onMoveAction,
-        disabled: isRecycleBinFolder || !moveItems,
+        disabled: isRecycleBinFolder || !canMove,
       },
       {
         key: "copy-to",
@@ -2697,7 +2697,7 @@ class ContextOptionsStore {
         icon: RemoveOutlineSvgUrl,
         onClick: () =>
           this.filesActionsStore.onClickRemoveFromRecent(selection),
-        disabled: !this.treeFoldersStore.isRecentTab,
+        disabled: !this.treeFoldersStore.isRecentFolder,
       },
       {
         key: "delete",

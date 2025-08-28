@@ -1,0 +1,28 @@
+{
+  "key_path": "ThirdPartyResourceDescription",
+  "content": "Connect and save backups to cloud accounts like Dropbox, Box, OneDrive, or Google Drive.",
+  "content_en_sha1_hash": "d6d98aca6b01118eed9f4e3fafbc26f3ce023df7",
+  "created_at": "2025-08-21T14:45:38.904Z",
+  "updated_at": "2025-08-21T14:47:55.411Z",
+  "comment": {
+    "text": "This text describes the option to back up data to third-party cloud storage services. It appears as a description within a dialog, likely related to backup settings, and helps users understand the available backup destinations like Dropbox, Box, OneDrive, or Google Drive.",
+    "is_auto": true,
+    "updated_at": "2025-08-21T14:47:55.411Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/Backup/BackupServiceDialog.tsx",
+      "line_number": 102,
+      "context": "icon: <ServiceIcon />,\n },\n {\n id: \"third-party-resource\",\n title: t(\"Common:ThirdPartyResource\"),\n description: t(\"ThirdPartyResourceDescription\"),\n icon: <MoveIcon />,\n },\n {\n id: \"third-party-storage\",\n title: t(\"Common:ThirdPartyStorage\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

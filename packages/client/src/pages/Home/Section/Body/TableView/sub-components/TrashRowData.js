@@ -35,13 +35,13 @@ import DateCell from "./DateCell";
 import SizeCell from "./SizeCell";
 import { StyledBadgesContainer } from "../StyledTable";
 import ErasureCell from "./ErasureCell";
-import RoomCell from "./RoomCell";
+import LocationCell from "./LocationCell";
 
 const TrashRowDataComponent = (props) => {
   const {
     authorTrashColumnIsEnabled,
     createdTrashColumnIsEnabled,
-    roomColumnIsEnabled,
+    locationColumnIsEnabled,
     erasureColumnIsEnabled,
     sizeTrashColumnIsEnabled,
     typeTrashColumnIsEnabled,
@@ -85,19 +85,19 @@ const TrashRowDataComponent = (props) => {
         </StyledBadgesContainer>
       </TableCell>
 
-      {roomColumnIsEnabled ? (
+      {locationColumnIsEnabled ? (
         <TableCell
-          dataTestId={`trash-cell-room-${index}`}
+          dataTestId={`trash-cell-location-${index}`}
           style={
-            !roomColumnIsEnabled ? { background: "none" } : dragStyles.style
+            !locationColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
-            lastColumn === "Room" ? "no-extra-space" : "",
+            lastColumn === "Location" ? "no-extra-space" : "",
           )}
         >
-          <RoomCell
+          <LocationCell
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
@@ -227,7 +227,7 @@ export default inject(({ tableStore }) => {
   const {
     authorTrashColumnIsEnabled,
     createdTrashColumnIsEnabled,
-    roomColumnIsEnabled,
+    locationColumnIsEnabled,
     erasureColumnIsEnabled,
     sizeTrashColumnIsEnabled,
     typeTrashColumnIsEnabled,
@@ -237,7 +237,7 @@ export default inject(({ tableStore }) => {
   return {
     authorTrashColumnIsEnabled,
     createdTrashColumnIsEnabled,
-    roomColumnIsEnabled,
+    locationColumnIsEnabled,
     erasureColumnIsEnabled,
     sizeTrashColumnIsEnabled,
     typeTrashColumnIsEnabled,

@@ -1,0 +1,28 @@
+{
+  "key_path": "NeedMoreGoToServices",
+  "content": "Need more? Go to the <1>Services</1>",
+  "content_en_sha1_hash": "4261636c8382f1071446fa0820c94b82fd61734e",
+  "created_at": "2025-08-21T14:45:39.444Z",
+  "updated_at": "2025-08-21T14:47:37.057Z",
+  "comment": {
+    "text": "This text appears as a call to action, likely on a button or link, encouraging users to view additional services. It directs users to the \"Services\" section when they need more options or information. The key is used within the Payments section of the Portal Settings.",
+    "is_auto": true,
+    "updated_at": "2025-08-21T14:47:37.057Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/BenefitsContainer.js",
+      "line_number": 113,
+      "context": "offsetRight={0}\n iconName={HelpReactSvgUrl}\n tooltipContent={\n <Trans\n t={t}\n i18nKey=\"NeedMoreGoToServices\"\n ns=\"Payments\"\n components={{\n 1: (\n <Link\n key=\"contact-payer-link\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

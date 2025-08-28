@@ -3,7 +3,7 @@
   "content": "History",
   "content_en_sha1_hash": "90ccd6497400b5576aeca1bd94af74aae1e0a250",
   "created_at": "2025-05-19T21:30:54.971Z",
-  "updated_at": "2025-08-04T07:30:01.261Z",
+  "updated_at": "2025-08-27T10:14:35.253Z",
   "comment": {
     "text": "The \"InfoPanel:SubmenuHistory\" translation key is used to display the label \"History\" in a submenu within an info panel on the Home page. It appears as a heading in a developer tool section, prompting users to view or manage their history.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Header/index.tsx",
-      "line_number": 113,
+      "line_number": 116,
       "context": "const templateSubmenu = [memberTab, detailsTab];\n \n const tabsData = [\n {\n id: \"info_history\",\n name: t(\"InfoPanel:SubmenuHistory\"),\n onClick: setHistory,\n content: null,\n },\n detailsTab,\n ];",
       "module": "/packages/client"
     },

@@ -3,7 +3,7 @@
   "content": "DocSpace",
   "content_en_sha1_hash": "ce0b96eab5006b875f6c4a6c31ad73c3c86edcf5",
   "created_at": "2025-05-19T21:30:47.504Z",
-  "updated_at": "2025-08-21T11:22:39.770Z",
+  "updated_at": "2025-08-26T11:15:14.040Z",
   "comment": {
     "text": "This translation key is used for the \"From Portal\" button label, which indicates that a document can be uploaded from DocSpace. It appears in a dropdown menu on a main button in a shell interface. Translators should provide a translated version of \"From Portal\" with the product name inserted.",
     "is_auto": true,
@@ -432,7 +432,7 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
-      "line_number": 436,
+      "line_number": 434,
       "context": ">\n {`\"Add the website URL for embedding to the <1>allow list</1>.\"`}\n </Trans>\n ) : (\n t(\"EmbeddingPanel:EmbeddingBarDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n )}\n </Text>\n <IconButton\n className=\"embedding-panel_banner-close-icon\"",
       "module": "/packages/client"
     },
@@ -485,8 +485,14 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/components/panels/TopUpBalance/sub-components/WalletInfo.tsx",
+      "line_number": 64,
+      "context": "<Text\n className={styles.walletInfoTitle}\n fontWeight=\"600\"\n fontSize=\"14px\"\n >\n {t(\"ProductNameWallet\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <div\n className={classNames(styles.walletInfoBalance, {\n [styles.warningColor]: isBalanceInsufficient,\n })}",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/index.tsx",
-      "line_number": 332,
+      "line_number": 347,
       "context": "headerText={t(\"Files:TemplateAvailable\")}\n bodyText={\n <>\n <div className=\"template-access_description\">\n {t(\"Files:TemplateAvailableDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </div>\n {isTemplateOwner ? (\n <Link\n className=\"template-access_link\"",
       "module": "/packages/client"
     },
@@ -516,7 +522,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Section/Header/index.js",
-      "line_number": 328,
+      "line_number": 341,
       "context": "})\n : t(\"DataImport\")\n : t(header, {\n organizationName: logoText,\n license: t(\"Common:EnterpriseLicense\"),\n productName: t(\"Common:ProductName\"),\n });\n \n // console.log(translatedHeader, header);\n \n return (",
       "module": "/packages/client"
     },
@@ -990,7 +996,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/index.js",
-      "line_number": 234,
+      "line_number": 235,
       "context": "src={imgSrc}\n alt=\"integration_icon\"\n />\n <Text>\n {t(\"IntegrationRequest\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n })}\n </Text>\n <Button\n label={t(\"Submit\")}",
       "module": "/packages/client"
     },
@@ -1044,14 +1050,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/WalletContainer.tsx",
-      "line_number": 196,
+      "line_number": 195,
       "context": "};\n \n return (\n <div className={styles.walletContainer}>\n <Text className={styles.walletDescription}>\n {t(\"WalletDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n \n {walletHelpUrl ? (\n <Link\n textDecoration=\"underline\"",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/WalletInfo.tsx",
-      "line_number": 64,
-      "context": "<Text\n className={styles.walletInfoTitle}\n fontWeight=\"600\"\n fontSize=\"14px\"\n >\n {t(\"ProductNameWallet\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <div\n className={classNames(styles.walletInfoBalance, {\n [styles.warningColor]: isBalanceInsufficient,\n })}",
       "module": "/packages/client"
     },
     {
@@ -1169,7 +1169,13 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/GracePeriodModal.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/index.tsx",
+      "line_number": 142,
+      "context": "const confirmationDialogContent = {\n backup: {\n title: t(\"Common:Backup\"),\n body: t(\"Services:EnableBackupConfirm\", {\n productName: t(\"Common:ProductName\"),\n }),\n },\n };\n \n const getDialogContent = (actionType: string | null) => {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AdditionalStorage/GracePeriodModal.tsx",
       "line_number": 96,
       "context": "}}\n />\n </Text>{\" \"}\n <Text as=\"span\">\n {t(\"GracePeriodActivatedDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
       "module": "/packages/client"
@@ -1332,25 +1338,25 @@
     },
     {
       "file_path": "/packages/client/src/pages/PublicRoom/PublicRoomPage.js",
-      "line_number": 119,
+      "line_number": 120,
       "context": "const roomMode = getAccessTranslation().toLowerCase();\n \n sessionStorage.setItem(PUBLIC_SIGN_IN_TOAST, \"true\");\n \n const content = isFormRoom ? (\n t(\"Common:FormAuthorizeToast\", { productName: t(\"Common:ProductName\") })\n ) : (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"PublicAuthorizeToast\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PublicRoom/PublicRoomPage.js",
-      "line_number": 119,
+      "line_number": 120,
       "context": "const roomMode = getAccessTranslation().toLowerCase();\n \n sessionStorage.setItem(PUBLIC_SIGN_IN_TOAST, \"true\");\n \n const content = isFormRoom ? (\n t(\"Common:FormAuthorizeToast\", { productName: t(\"Common:ProductName\") })\n ) : (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"PublicAuthorizeToast\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1995,
+      "line_number": 2022,
       "context": "},\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1995,
+      "line_number": 2022,
       "context": "},\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     },
@@ -1512,14 +1518,14 @@
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 71,
-      "context": "},\n {\n internal: true,\n key: \"users\",\n label: t(\"Common:SpaceUsersOnly\", {\n productName: t(\"Common:ProductName\"),\n }),\n },\n available?.None && {\n key: \"separator\",\n isSeparator: true,",
+      "line_number": 74,
+      "context": "},\n {\n internal: true,\n key: \"users\",\n label: t(\"Common:SpaceUsersOnly\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: withIcon ? PeopleIcon : undefined,\n },\n ];\n };",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 71,
-      "context": "},\n {\n internal: true,\n key: \"users\",\n label: t(\"Common:SpaceUsersOnly\", {\n productName: t(\"Common:ProductName\"),\n }),\n },\n available?.None && {\n key: \"separator\",\n isSeparator: true,",
+      "line_number": 74,
+      "context": "},\n {\n internal: true,\n key: \"users\",\n label: t(\"Common:SpaceUsersOnly\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: withIcon ? PeopleIcon : undefined,\n },\n ];\n };",
       "module": "/packages/shared"
     },
     {

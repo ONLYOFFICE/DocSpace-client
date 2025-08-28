@@ -1778,6 +1778,69 @@ class UploadDataStore {
       });
   };
 
+  showFinishUploadToastr = (
+    t,
+    totalErrorsCount,
+    filesWithoutErrors,
+    filesWithErrors,
+  ) => {
+    if (totalErrorsCount === 0) {
+      toastr.success(
+        t("Common:ItemsSuccessfullyUploaded", {
+          count: filesWithoutErrors.length,
+        }),
+      );
+      return;
+    }
+
+    this.primaryProgressDataStore.setPrimaryProgressBarData({
+      operation: OPERATIONS_NAME.upload,
+      alert: true,
+      errorCount: totalErrorsCount,
+    });
+
+    this.uploadedFilesHistory.forEach((f) => {
+      f.errorShown = true;
+    });
+
+    console.log("Errors: ", totalErrorsCount);
+
+    if (totalErrorsCount > 1) {
+      toastr.error(t("UploadPanel:UploadingError"));
+      return;
+    }
+
+    const errorItem = filesWithErrors[0];
+    const passwordErrorIndex = errorItem.error.indexOf("password");
+
+    if (passwordErrorIndex === -1) {
+      toastr.error(errorItem.error);
+      return;
+    }
+
+    toastr.warning(
+      <Trans
+        i18nKey="Common:PasswordProtectedFiles"
+        t={t}
+        components={[
+          <Link
+            key="a"
+            tag="a"
+            isHovered
+            color="accent"
+            onClick={() => {
+              toastr.clear();
+              this.setUploadPanelVisible(true);
+            }}
+          />,
+        ]}
+      />,
+      null,
+      60000,
+      true,
+    );
+  };
+
   finishUploadFiles = (t, waitConversion) => {
     const filesWithErrors = this.uploadedFilesHistory.filter(
       (f) => f.error && !f.errorShown,
@@ -1786,56 +1849,13 @@ class UploadDataStore {
       (f) => !f.error,
     );
     const totalErrorsCount = filesWithErrors.length;
-    if (totalErrorsCount > 0) {
-      this.primaryProgressDataStore.setPrimaryProgressBarData({
-        operation: OPERATIONS_NAME.upload,
-        alert: true,
-        errorCount: totalErrorsCount,
-      });
 
-      console.log("Errors: ", totalErrorsCount);
-
-      if (totalErrorsCount === 1) {
-        const errorItem = filesWithErrors[0];
-
-        if (errorItem.error.indexOf("password") > -1) {
-          toastr.warning(
-            <Trans
-              i18nKey="Common:PasswordProtectedFiles"
-              t={t}
-              components={[
-                <Link
-                  key="a"
-                  tag="a"
-                  isHovered
-                  color="accent"
-                  onClick={() => {
-                    toastr.clear();
-                    this.setUploadPanelVisible(true);
-                  }}
-                />,
-              ]}
-            />,
-            null,
-            60000,
-            true,
-          );
-
-          return;
-        }
-
-        toastr.error(errorItem.error);
-        return;
-      }
-
-      toastr.error(t("UploadPanel:UploadingError"));
-    } else {
-      toastr.success(
-        t("Common:ItemsSuccessfullyUploaded", {
-          count: filesWithoutErrors.length,
-        }),
-      );
-    }
+    this.showFinishUploadToastr(
+      t,
+      totalErrorsCount,
+      filesWithoutErrors,
+      filesWithErrors,
+    );
 
     this.uploaded = true;
     this.converted = true;

@@ -35,13 +35,14 @@ import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
 import LockedIconReactSvg from "PUBLIC_DIR/images/file.actions.locked.react.svg?url";
 import LockedIconReact12Svg from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";
 import FavoriteReactSvgUrl from "PUBLIC_DIR/images/favorite.react.svg?url";
+import FavoriteFillReactSvgUrl from "PUBLIC_DIR/images/favorite.fill.react.svg?url";
 
 import { classNames, IconSizeType, isTablet, isDesktop } from "../../utils";
 import { RoomsType, ShareAccessRights } from "../../enums";
 import { Tooltip } from "../tooltip";
 import { Text } from "../text";
 import { IconButton } from "../icon-button";
-import { isRoom, isFile } from "../../utils/typeGuards";
+import { isRoom } from "../../utils/typeGuards";
 
 import type { QuickButtonsProps } from "./QuickButtons.types";
 
@@ -230,13 +231,15 @@ export const QuickButtons = (props: QuickButtonsProps) => {
             </>
           ) : null}
 
-          {isFile(item) ? (
+          {!isRoom(item) ? (
             <IconButton
-              iconName={FavoriteReactSvgUrl}
+              iconName={
+                item?.isFavorite ? FavoriteFillReactSvgUrl : FavoriteReactSvgUrl
+              }
               className={classNames("badge copy-link icons-group")}
               size={sizeQuickButton}
               onClick={onClickFavorite}
-              color={shared || showShareIcon ? "accent" : undefined}
+              color={item?.isFavorite ? "accent" : undefined}
               isDisabled={isDisabled}
               hoverColor="accent"
               title={t("Common:Favorites")}

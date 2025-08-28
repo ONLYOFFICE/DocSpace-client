@@ -29,9 +29,12 @@
 const path = require("path");
 const pkg = require("./package.json");
 const BannerPlugin = require("webpack").BannerPlugin;
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const { getBanner } = require("@docspace/shared/utils/build").default;
 
 const version = pkg.version;
+const banner = getBanner(version);
 
 const nextConfig = {
   basePath: "/doceditor",
@@ -68,18 +71,6 @@ const nextConfig = {
   devIndicators: false,
 };
 
-const getBuildDate = () => {
-  const timeElapsed = Date.now();
-  const today = new Date(timeElapsed);
-  return JSON.stringify(today.toISOString().split(".")[0] + "Z");
-};
-
-const getBuildYear = () => {
-  const timeElapsed = Date.now();
-  const today = new Date(timeElapsed);
-  return today.getFullYear();
-};
-
 if (process.env.DEPLOY) {
   nextConfig.output = "standalone";
 }
@@ -95,13 +86,32 @@ module.exports = {
       },
     };
 
-    config.devtool = "source-map";
+    // config.devtool = "source-map";
 
     if (config.mode === "production") {
       config.optimization = {
         splitChunks: { chunks: "all" },
         minimize: true,
         minimizer: [
+          new CssMinimizerPlugin({
+            minimizerOptions: {
+              preset: [
+                "default",
+                {
+                  discardComments: {
+                    removeAll: false,
+                    remove: (comment) => {
+                      // Keep copyright comments that contain the copyright text
+                      const isCopyright =
+                        comment.includes("Copyright Ascensio System SIA") &&
+                        comment.includes("https://www.onlyoffice.com/");
+                      return !isCopyright;
+                    },
+                  },
+                },
+              ],
+            },
+          }),
           new TerserPlugin({
             terserOptions: {
               format: {
@@ -117,13 +127,7 @@ module.exports = {
       config.plugins.push(
         new BannerPlugin({
           raw: true,
-          banner: `/*
-* (c) Copyright Ascensio System SIA 2009-${getBuildYear()}. All rights reserved
-*
-* https://www.onlyoffice.com/
-*
-* Version: ${version} (build: ${getBuildDate()})
-*/`,
+          banner,
         }),
       );
     }

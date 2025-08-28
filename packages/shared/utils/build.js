@@ -24,17 +24,27 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export enum InputType {
-  text = "text",
-  password = "password",
-  email = "email",
-  tel = "tel",
-  search = "search",
-  number = "number",
-}
+const getBuildYear = () => {
+  const timeElapsed = Date.now();
+  const today = new Date(timeElapsed);
+  return today.getFullYear();
+};
 
-export enum InputSize {
-  base = "base",
-  middle = "middle",
-  large = "large",
-}
+const getBuildDate = () => {
+  const timeElapsed = Date.now();
+  const today = new Date(timeElapsed);
+  return JSON.stringify(`${today.toISOString().split(".")[0]}Z`);
+};
+
+const getBanner = (version) => `/*
+* (c) Copyright Ascensio System SIA 2009-${getBuildYear()}. All rights reserved
+*
+* https://www.onlyoffice.com/
+*
+* Version: ${version} (build at: ${getBuildDate()})
+*/`;
+
+export default {
+  getBuildDate,
+  getBanner,
+};

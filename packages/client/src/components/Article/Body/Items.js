@@ -104,7 +104,7 @@ const Item = ({
 
       createFoldersTree(t, files, uploadToFolder, dragged)
         .then((f) => {
-          if (f.length > 0) startUpload(f, null, t);
+          if (f.length > 0) startUpload(f, uploadToFolder, t);
         })
         .catch((err) => {
           toastr.error(err);

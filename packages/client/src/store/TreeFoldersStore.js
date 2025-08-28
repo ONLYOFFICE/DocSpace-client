@@ -94,6 +94,9 @@ class TreeFoldersStore {
 
   listenTreeFolders = (treeFolders) => {
     const roomParts = treeFolders
+      .filter((f) => {
+        return f.rootFolderType !== FolderType.Recent;
+      })
       .map((f) => `DIR-${f.id}`)
       .filter((f) => !SocketHelper.socketSubscribers.has(f));
 

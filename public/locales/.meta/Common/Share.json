@@ -3,7 +3,7 @@
   "content": "Share",
   "content_en_sha1_hash": "09ca55ca52d207f2cc1d9339e0226a88e9e96e2f",
   "created_at": "2025-05-19T21:30:48.615Z",
-  "updated_at": "2025-08-04T07:30:01.034Z",
+  "updated_at": "2025-08-27T10:14:35.074Z",
   "comment": {
     "text": "The translation key \"Share\" is used to display a button label in the user interface. It appears on a shared form panel and is linked to an icon representing sharing. The purpose of this text is to enable users to share content.",
     "is_auto": true,
@@ -30,20 +30,20 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Header/index.tsx",
-      "line_number": 137,
-      "context": "!isRoomsType &&\n selection.canShare\n ) {\n tabsData.unshift({\n id: \"info_share\",\n name: t(\"Common:Share\"),\n onClick: setShare,\n content: null,\n });\n }",
+      "line_number": 142,
+      "context": "selection.canShare &&\n !isRoomUtil(selection)\n ) {\n tabsData.unshift({\n id: \"info_share\",\n name: t(\"Common:Share\"),\n onClick: setShare,\n content: null,\n });\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1930,
-      "context": "},\n },\n {\n id: \"option_sharing-settings\",\n key: \"sharing-settings\",\n label: t(\"Common:Share\"),\n icon: ShareReactSvgUrl,\n onClick: () => this.onClickShare(item),\n disabled: !isShareable,\n },\n ...versionActions,",
+      "line_number": 1916,
+      "context": "//   onClick: () => this.getManageLink(item, t),\n // },\n {\n id: \"option_sharing-settings\",\n key: \"sharing-settings\",\n label: t(\"Common:Share\"),\n icon: ShareReactSvgUrl,\n disabled:\n !item.canShare &&\n !item.security?.CreateRoomFrom &&\n !item.security?.Embed,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/doceditor/src/components/ShareDialog.tsx",
-      "line_number": 78,
-      "context": "onClose={onCancel}\n displayType={ModalDialogType.aside}\n withBodyScroll\n withBorder\n >\n <ModalDialog.Header>{t(\"Common:Share\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <StyledWrapper>\n <div className=\"share-file_body\">\n <Share\n infoPanelSelection={fileInfo}",
+      "line_number": 140,
+      "context": "onClose={onClosePanel}\n />\n ) : null}\n </ModalDialog.Container>\n \n <ModalDialog.Header>{t(\"Common:Share\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <StyledWrapper>\n <div className=\"share-file_body\">\n <Share\n infoPanelSelection={fileInfo}",
       "module": "/packages/doceditor"
     },
     {

@@ -77,7 +77,7 @@ const FilesTableRow = (props) => {
     onDragOver,
     onDragLeave,
     badgeUrl,
-    isRecentTab,
+    isRecentFolder,
     canDrag,
     onEditIndex,
     isIndexUpdated,
@@ -296,7 +296,7 @@ const FilesTableRow = (props) => {
             dragStyles={dragStyles}
             {...props}
           />
-        ) : isRecentTab ? (
+        ) : isRecentFolder ? (
           <RecentRowDataComponent
             element={element}
             dragStyles={dragStyles}

@@ -86,8 +86,11 @@ export interface ICreateDialog {
   ) => Promise<IMessage> | Promise<void> | IMessage | void;
   onCancel?: (e: unknown) => void;
   onClose?: (e: unknown) => void;
+  onChange?: (value: string) => void;
   isCreateDialog: boolean;
   extension?: string;
+  errorText?: string;
+  isAutoFocusOnError?: boolean;
 }
 
 export interface IImage {

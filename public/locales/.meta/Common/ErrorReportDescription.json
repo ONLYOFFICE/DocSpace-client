@@ -3,7 +3,7 @@
   "content": "Open the report below to see what data is included. Error reports do not contain any personal data of the users. To help our team better understand the problem, describe it in the free form using the comment field.",
   "content_en_sha1_hash": "2abb51e98a74ae9cad4d84745a6fedd126698925",
   "created_at": "2025-05-19T21:30:45.110Z",
-  "updated_at": "2025-08-12T19:46:26.352Z",
+  "updated_at": "2025-08-21T14:45:44.188Z",
   "comment": {
     "text": "This translation key is used for an error report description, guiding users to view a report that contains no personal data and providing an opportunity to describe the issue in free form. It appears on a modal dialog header, prompting users to explore the report further.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/report-dialog/index.tsx",
-      "line_number": 116,
+      "line_number": 114,
       "context": ">\n <ModalDialog.Header>{t(\"ErrorReport\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.bodyContent}>\n <Text className={styles.reportDescription}>\n {t(\"ErrorReportDescription\")}\n </Text>\n <Textarea\n placeholder={t(\"RecoverDescribeYourProblemPlaceholder\")}\n value={description}\n onChange={onChangeTextareaValue}",
       "module": "/packages/shared"
     }

@@ -301,7 +301,7 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
         ? operations[0].label
         : panelOperations[0].label;
 
-      if (getPercent()) {
+      if (operationName === OPERATIONS_NAME.upload && getPercent()) {
         return (
           <Text fontWeight={600}>
             {operationName}
@@ -310,6 +310,7 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
           </Text>
         );
       }
+
       return (
         <Text fontWeight={600}>
           {t("Common:ErrorOperation", {

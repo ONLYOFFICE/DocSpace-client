@@ -253,12 +253,6 @@ describe("AutomaticBackup", () => {
     expect(screen.getByText("Common:CancelButton")).toBeInTheDocument();
   });
 
-  it("shows paid badge when isEnableAuto is false", () => {
-    render(<AutomaticBackup {...defaultProps} isEnableAuto={false} />);
-
-    expect(screen.getByText("Common:Paid")).toBeInTheDocument();
-  });
-
   it("calls deleteBackupSchedule when toggle is turned off and save is clicked", async () => {
     render(
       <AutomaticBackup

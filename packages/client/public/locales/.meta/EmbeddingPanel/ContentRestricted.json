@@ -3,7 +3,7 @@
   "content": "Content copying, file downloading and printing are restricted.",
   "content_en_sha1_hash": "d8e271a937efa90e3953ecc46a4796d2a538adac",
   "created_at": "2025-05-19T21:30:56.580Z",
-  "updated_at": "2025-06-30T12:20:31.281Z",
+  "updated_at": "2025-08-26T11:15:14.111Z",
   "comment": {
     "text": "Content restricted message is used to inform users that certain actions like downloading or printing are not allowed due to content restrictions. It appears on an Embedding Panel and is translated as per the \"ContentRestricted\" key.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
-      "line_number": 200,
+      "line_number": 196,
       "context": "const linkTitle = currentLink?.sharedTo?.title;\n const withPassword = currentLink?.sharedTo?.password;\n const denyDownload = currentLink?.sharedTo?.denyDownload;\n \n const contentRestrictedTitle = t(\"EmbeddingPanel:ContentRestricted\");\n const withPasswordTitle = t(\"EmbeddingPanel:LinkProtectedWithPassword\");\n \n let barSubTitle = \"\";\n \n if (withPassword) {",
       "module": "/packages/client"
     }

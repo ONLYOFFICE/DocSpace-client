@@ -97,6 +97,7 @@ import {
   FILTER_ARCHIVE_ROOM,
   FILTER_DOCUMENTS,
   FILTER_RECENT,
+  FILTER_FAVORITES,
   FILTER_ROOM_DOCUMENTS,
   FILTER_SHARED_ROOM,
   FILTER_TEMPLATES_ROOM,
@@ -1518,11 +1519,13 @@ class FilesStore {
           ? `${FILTER_ROOM_DOCUMENTS}=${this.userStore.user?.id}`
           : this.categoryType === CategoryType.Recent
             ? `${FILTER_RECENT}=${this.userStore.user?.id}`
-            : +folderId === recycleBinFolderId
-              ? `${FILTER_TRASH}=${this.userStore.user?.id}`
-              : !this.publicRoomStore.isPublicRoom
-                ? `${FILTER_DOCUMENTS}=${this.userStore.user?.id}`
-                : null;
+            : this.categoryType === CategoryType.Favorite
+              ? `${FILTER_FAVORITES}=${this.userStore.user?.id}`
+              : +folderId === recycleBinFolderId
+                ? `${FILTER_TRASH}=${this.userStore.user?.id}`
+                : !this.publicRoomStore.isPublicRoom
+                  ? `${FILTER_DOCUMENTS}=${this.userStore.user?.id}`
+                  : null;
 
     if (key) {
       setUserFilter(key, {

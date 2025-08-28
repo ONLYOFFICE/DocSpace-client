@@ -44,6 +44,7 @@ import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
 import {
   FILTER_DOCUMENTS,
   FILTER_RECENT,
+  FILTER_FAVORITES,
   FILTER_TRASH,
 } from "@docspace/shared/utils/filterConstants";
 
@@ -147,7 +148,7 @@ const ArticleBodyContent = (props) => {
           favFilter.folder = folderId;
 
           if (userId) {
-            const filterObj = getUserFilter(`${FILTER_DOCUMENTS}=${userId}`);
+            const filterObj = getUserFilter(`${FILTER_FAVORITES}=${userId}`);
 
             if (filterObj?.sortBy) favFilter.sortBy = filterObj.sortBy;
             if (filterObj?.sortOrder) favFilter.sortOrder = filterObj.sortOrder;

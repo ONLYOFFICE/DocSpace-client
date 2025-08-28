@@ -296,7 +296,7 @@ export default class MessageStore {
 
             const [event, data] = chunk.split("\n");
 
-            const jsonData = data.split("data:")[1]?.trim();
+            const jsonData = data?.split("data:")[1]?.trim();
 
             if (!jsonData) {
               await streamHandler();

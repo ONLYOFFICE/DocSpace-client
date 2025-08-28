@@ -1316,12 +1316,10 @@ class UploadDataStore {
 
         this.currentUploadNumber -= 1;
 
-        // continue uploading remaining files in parallel, respecting limits
-        const notUploadedFiles = this.files.filter(
-          (f) => !f.inAction && f.action === "upload" && !f.error && !f.cancel,
-        );
-        if (notUploadedFiles.length > 0) {
-          this.parallelUploading(notUploadedFiles, t, createNewIfExist);
+        const nextFileIndex = this.files.findIndex((f) => !f.inAction);
+
+        if (nextFileIndex !== -1) {
+          this.startSessionFunc(nextFileIndex, t, createNewIfExist);
         }
       });
 
@@ -1757,13 +1755,10 @@ class UploadDataStore {
 
         this.currentUploadNumber -= 1;
 
-        // Continue with all eligible files, respecting concurrency
-        const notUploadedFiles = this.files.filter(
-          (f) => !f.inAction && f.action === "upload" && !f.error && !f.cancel,
-        );
+        const nextFileIndex = this.files.findIndex((f) => !f.inAction);
 
-        if (notUploadedFiles.length > 0) {
-          this.parallelUploading(notUploadedFiles, t, createNewIfExist);
+        if (nextFileIndex !== -1) {
+          this.startSessionFunc(nextFileIndex, t, createNewIfExist);
         }
 
         return Promise.resolve();

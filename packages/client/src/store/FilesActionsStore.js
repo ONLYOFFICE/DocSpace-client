@@ -83,6 +83,8 @@ import {
   isSystemFolder,
 } from "@docspace/shared/utils";
 import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
+import { isFile, isFolder } from "@docspace/shared/utils/typeGuards";
+
 import {
   FILTER_ARCHIVE_DOCUMENTS,
   FILTER_ROOM_DOCUMENTS,
@@ -1248,29 +1250,41 @@ class FilesActionStore {
       });
   };
 
-  getFilesInfo = (items) => {
-    const requests = [];
-    let i = items.length;
-    while (i !== 0) {
-      requests.push(this.filesStore.getFileInfo(items[i - 1]));
-      i--;
-    }
+  getItemsInfo = (items) => {
+    const requests = items
+      .map((item) => {
+        if (isFolder(item)) {
+          return this.filesStore.getFolderInfo(item.id);
+        }
+        if (isFile(item)) {
+          return this.filesStore.getFileInfo(item.id);
+        }
+        return null;
+      })
+      .filter(Boolean);
+
     return Promise.all(requests);
   };
 
   setFavoriteAction = (action, items) => {
-    const { setSelected } = this.filesStore;
+    const { fetchFavoritesFolder, setSelected } = this.filesStore;
     const { fileIds, folderIds } = splitFileAndFolderIds(items);
 
     switch (action) {
       case "mark":
         return api.files
           .markAsFavorite(fileIds, folderIds)
+          .then(() => this.getItemsInfo(items))
           .then(() => setSelected("close"));
 
       case "remove":
         return api.files
           .removeFromFavorite(fileIds, folderIds)
+          .then(() => {
+            return this.treeFoldersStore.isFavoritesFolder
+              ? fetchFavoritesFolder(this.selectedFolderStore.id)
+              : this.getItemsInfo(items);
+          })
           .then(() => setSelected("close"));
       default:
     }

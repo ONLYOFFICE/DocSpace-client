@@ -64,12 +64,12 @@ export default function withQuickButtons(WrappedComponent) {
     onClickFavorite = () => {
       const { t, item, setFavoriteAction } = this.props;
 
-      /* if (showFavorite) {
+      if (item?.isFavorite) {
         setFavoriteAction("remove", item.id)
           .then(() => toastr.success(t("RemovedFromFavorites")))
           .catch((err) => toastr.error(err));
         return;
-      } */
+      }
 
       setFavoriteAction("mark", item.id)
         .then(() => toastr.success(t("MarkedAsFavorite")))

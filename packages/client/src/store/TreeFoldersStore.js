@@ -77,6 +77,7 @@ class TreeFoldersStore {
           break;
         case FolderType.Favorites:
           folder.title = i18n.t("Common:Favorites");
+          break;
         case FolderType.Recent:
           folder.title = i18n.t("Common:Recent");
           break;

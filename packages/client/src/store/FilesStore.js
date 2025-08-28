@@ -660,13 +660,15 @@ class FilesStore {
   };
 
   wsModifyFolderDelete = (opt) => {
-    const { recentFolderId } = this.treeFoldersStore;
+    const { recentFolderId, favoritesFolderId } = this.treeFoldersStore;
     const data = opt?.data && JSON.parse(opt.data);
 
-    // Skip when removing in recent but selected folder is not recent
+    // Skip when removing in recent or favorites but selected folder is not recent or favorites
     if (
-      data?.folderId === recentFolderId &&
-      this.selectedFolderStore.id !== recentFolderId
+      (data?.folderId === recentFolderId &&
+        this.selectedFolderStore.id !== recentFolderId) ||
+      (data?.folderId === favoritesFolderId &&
+        this.selectedFolderStore.id !== favoritesFolderId)
     ) {
       return;
     }
@@ -2216,8 +2218,13 @@ class FilesStore {
     const isDocuSign = false; // TODO: need this prop;
     const isEditing = false; // (item.fileStatus & FileStatus.IsEditing) === FileStatus.IsEditing;
 
-    const { isRecycleBinFolder, isMy, isArchiveFolder, isRecentFolder } =
-      this.treeFoldersStore;
+    const {
+      isRecycleBinFolder,
+      isMy,
+      isArchiveFolder,
+      isRecentFolder,
+      isFavoritesFolder,
+    } = this.treeFoldersStore;
     const { security } = this.selectedFolderStore;
 
     const { enablePlugins } = this.settingsStore;
@@ -2312,8 +2319,8 @@ class FilesStore {
 
         "open-location",
         "mark-read",
-        // "mark-as-favorite",
-        // "remove-from-favorites",
+        "mark-as-favorite",
+        "remove-from-favorites",
         "download",
         "download-as",
         "convert",
@@ -2491,25 +2498,23 @@ class FilesStore {
 
       if (
         isEditing ||
-        item.rootFolderType === FolderType.Archive
-        // ||
-        // (isFavoritesFolder && !isFavorite) ||
-        // isFavoritesFolder ||
-        // isRecentFolder
+        item.rootFolderType === FolderType.Archive ||
+        (isFavoritesFolder && !item?.isFavorite) ||
+        isFavoritesFolder ||
+        isRecentFolder
       )
         fileOptions = removeOptions(fileOptions, ["separator2"]);
 
-      // if (isFavorite) {
-      //   fileOptions = removeOptions(fileOptions, ["mark-as-favorite"]);
-      // } else {
-      //   fileOptions = removeOptions(fileOptions, [
-      //     "remove-from-favorites",
-      //   ]);
+      if (item?.isFavorite) {
+        fileOptions = removeOptions(fileOptions, ["mark-as-favorite"]);
+      } else {
+        fileOptions = removeOptions(fileOptions, ["remove-from-favorites"]);
+      }
 
-      //   if (isFavoritesFolder) {
-      //     fileOptions = removeOptions(fileOptions, ["mark-as-favorite"]);
-      //   }
-      // }
+      if (isFavoritesFolder) {
+        fileOptions = removeOptions(fileOptions, ["mark-as-favorite"]);
+        fileOptions = removeOptions(fileOptions, ["delete"]);
+      }
 
       if (isEncrypted) {
         fileOptions = removeOptions(fileOptions, [
@@ -2589,7 +2594,7 @@ class FilesStore {
       if (
         !(
           isRecentFolder ||
-          // isFavoritesFolder ||
+          isFavoritesFolder ||
           (isMyFolder && (this.filterType || this.filterSearch))
         )
       ) {

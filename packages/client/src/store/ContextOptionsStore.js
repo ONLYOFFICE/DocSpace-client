@@ -35,7 +35,8 @@ import ReconnectSvgUrl from "PUBLIC_DIR/images/reconnect.svg?url";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import FolderLocationReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?url";
 import TickRoundedSvgUrl from "PUBLIC_DIR/images/tick.rounded.svg?url";
-import FavoritesReactSvgUrl from "PUBLIC_DIR/images/favorites.react.svg?url";
+import FavoritesReactSvgUrl from "PUBLIC_DIR/images/favorite.react.svg?url";
+import FavoritesFillReactSvgUrl from "PUBLIC_DIR/images/favorite.fill.react.svg?url";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 import CircleCrossSvgUrl from "PUBLIC_DIR/images/icons/16/circle.cross.svg?url";
 import DownloadAsReactSvgUrl from "PUBLIC_DIR/images/download-as.react.svg?url";
@@ -2095,17 +2096,6 @@ class ContextOptionsStore {
         action: "mark",
       },
       {
-        id: "option_remove-from-favorites",
-        key: "remove-from-favorites",
-        label: t("RemoveFromFavorites"),
-        icon: FavoritesReactSvgUrl,
-        onClick: (e) => this.onClickFavorite(e, item.id, t),
-        disabled: false,
-        "data-action": "remove",
-        action: "remove",
-      },
-
-      {
         id: "option_create-duplicate-room",
         key: "duplicate-room",
         label: t("Common:Duplicate"),
@@ -2230,6 +2220,16 @@ class ContextOptionsStore {
         disabled: false,
         "data-action": "unarchive",
         action: "unarchive",
+      },
+      {
+        id: "option_remove-from-favorites",
+        key: "remove-from-favorites",
+        label: t("RemoveFromFavorites"),
+        icon: FavoritesFillReactSvgUrl,
+        onClick: (e) => this.onClickFavorite(e, item.id, t),
+        disabled: false,
+        "data-action": "remove",
+        action: "remove",
       },
       {
         id: "option_delete",
@@ -2451,7 +2451,7 @@ class ContextOptionsStore {
       {
         key: "remove-from-favorites",
         label: t("RemoveFromFavorites"),
-        icon: FavoritesReactSvgUrl,
+        icon: FavoritesFillReactSvgUrl,
         onClick: (e) => this.onClickFavorite(e, removeFromFavoriteItemsIds, t),
         disabled: favoriteItems.length || !removeFromFavoriteItems.length,
         "data-action": "remove",

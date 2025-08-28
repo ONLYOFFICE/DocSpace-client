@@ -24,6 +24,45 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+.aiSettingsContainer {
+  width: 100%;
+  max-width: 700px;
+}
+
+.aiProvider {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.heading {
+  margin-bottom: 8px;
+}
+
+.description {
+  color: var(--settings-common-description-color);
+
+  margin-bottom: 8px;
+}
+
+.learnMoreLink {
+  margin-bottom: 16px;
+}
+
+.addProviderButton {
+  margin-bottom: 20px;
+}
+
+.providerList {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* ============================================================================================ */
+
 .addProvider {
   width: 600px;
   display: flex;

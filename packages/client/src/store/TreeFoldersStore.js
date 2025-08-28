@@ -75,6 +75,9 @@ class TreeFoldersStore {
         case FolderType.TRASH:
           folder.title = i18n.t("Common:TrashSection");
           break;
+        case FolderType.Recent:
+          folder.title = i18n.t("Common:Recent");
+          break;
         default:
           break;
       }
@@ -88,6 +91,9 @@ class TreeFoldersStore {
 
   listenTreeFolders = (treeFolders) => {
     const roomParts = treeFolders
+      .filter((f) => {
+        return f.rootFolderType !== FolderType.Recent;
+      })
       .map((f) => `DIR-${f.id}`)
       .filter((f) => !SocketHelper.socketSubscribers.has(f));
 
@@ -293,6 +299,10 @@ class TreeFoldersStore {
     return this.recycleBinFolder ? this.recycleBinFolder.id : null;
   }
 
+  get recentFolderId() {
+    return this.recentFolder ? this.recentFolder.id : null;
+  }
+
   get isPersonalRoom() {
     return (
       this.myFolder &&
@@ -389,10 +399,6 @@ class TreeFoldersStore {
 
   get isDocumentsFolder() {
     return FolderType.USER === this.selectedFolderStore.rootFolderType;
-  }
-
-  get isRecentTab() {
-    return this.selectedFolderStore.rootFolderType === FolderType.Recent;
   }
 
   get isRoot() {

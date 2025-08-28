@@ -276,8 +276,8 @@ class FilesSettingsStore {
       .catch((e) => toastr.error(e));
   };
 
-  setKeepNewFileName = (data) => {
-    api.files
+  setKeepNewFileName = async (data) => {
+    return api.files
       .changeKeepNewFileName(data)
       .then((res) => this.setFilesSetting("keepNewFileName", res))
       .catch((e) => toastr.error(e));

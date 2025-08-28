@@ -105,6 +105,11 @@
     padding: 12px;
     max-width: 724px;
     box-sizing: border-box;
+    &.isDisabled {
+      p {
+        color: var(--settings-backup-text-disabled);
+      }
+    }
   }
 
   .toggleCaption {

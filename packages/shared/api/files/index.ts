@@ -29,6 +29,7 @@
 
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import moment from "moment";
+
 import {
   ConflictResolveType,
   FolderType,
@@ -849,10 +850,11 @@ export async function moveToFolder(
   return res;
 }
 
-export async function getFileVersionInfo(fileId: number) {
+export async function getFileVersionInfo(fileId: number, shareKey?: string) {
   const res = (await request({
     method: "get",
     url: `/files/file/${fileId}/history`,
+    params: { share: shareKey },
   })) as TFile[];
   return res;
 }
@@ -1666,13 +1668,17 @@ export async function addExternalFolderLink(
 
 // TODO: Need update res type
 export function checkIsFileExist(folderId: number, filesTitle: string[]) {
-  return request({
-    method: "post",
-    url: `files/${folderId}/upload/check`,
-    data: {
-      filesTitle,
+  const skipRedirect = true;
+  return request(
+    {
+      method: "post",
+      url: `files/${folderId}/upload/check`,
+      data: {
+        filesTitle,
+      },
     },
-  });
+    skipRedirect,
+  );
 }
 
 export function deleteFilesFromRecent(fileIds: number[]) {

@@ -99,8 +99,7 @@ const SizesComponent = () => {
   const [sizes, setSizes] = useState({
     base: "Base size",
     middle: "Middle size",
-    big: "Big size",
-    huge: "Huge size",
+    large: "Large size",
   });
 
   const handleChange = (key: string) => (value: string) => {
@@ -127,18 +126,10 @@ const SizesComponent = () => {
       </div>
       <div style={{ width: "300px" }}>
         <SearchInput
-          size={InputSize.big}
-          value={sizes.big}
-          onChange={handleChange("big")}
-          showClearButton={!!sizes.big}
-        />
-      </div>
-      <div style={{ width: "300px" }}>
-        <SearchInput
-          size={InputSize.huge}
-          value={sizes.huge}
-          onChange={handleChange("huge")}
-          showClearButton={!!sizes.huge}
+          size={InputSize.large}
+          value={sizes.large}
+          onChange={handleChange("large")}
+          showClearButton={!!sizes.large}
         />
       </div>
     </div>

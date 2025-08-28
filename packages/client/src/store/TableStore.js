@@ -90,7 +90,7 @@ class TableStore {
 
   authorColumnIsEnabled = false;
 
-  roomColumnIsEnabled = true;
+  locationColumnIsEnabled = true;
 
   erasureColumnIsEnabled = true;
 
@@ -102,17 +102,15 @@ class TableStore {
 
   typeColumnIsEnabled = false;
 
+  locationRecentColumnIsEnabled = true;
+
   authorRecentColumnIsEnabled = true;
 
-  modifiedRecentColumnIsEnabled = false;
-
-  createdRecentColumnIsEnabled = false;
-
-  sizeRecentColumnIsEnabled = true;
+  sizeRecentColumnIsEnabled = false;
 
   typeRecentColumnIsEnabled = false;
 
-  lastOpenedColumnIsEnabled = true;
+  lastOpenedRecentColumnIsEnabled = true;
 
   authorTrashColumnIsEnabled = true;
 
@@ -226,6 +224,10 @@ class TableStore {
     this.authorColumnIsEnabled = enable;
   };
 
+  setLocationRecentColumn = (enable) => {
+    this.locationRecentColumnIsEnabled = enable;
+  };
+
   setAuthorRecentColumn = (enable) => {
     this.authorRecentColumnIsEnabled = enable;
   };
@@ -242,10 +244,6 @@ class TableStore {
     this.createdColumnIsEnabled = enable;
   };
 
-  setCreatedRecentColumn = (enable) => {
-    this.createdRecentColumnIsEnabled = enable;
-  };
-
   setCreatedVDRColumn = (enable) => {
     this.createdVDRColumnIsEnabled = enable;
   };
@@ -254,16 +252,12 @@ class TableStore {
     this.modifiedColumnIsEnabled = enable;
   };
 
-  setModifiedRecentColumn = (enable) => {
-    this.modifiedRecentColumnIsEnabled = enable;
-  };
-
   setModifiedVDRColumn = (enable) => {
     this.modifiedVDRColumnIsEnabled = enable;
   };
 
-  setRoomColumn = (enable) => {
-    this.roomColumnIsEnabled = enable;
+  setLocationColumn = (enable) => {
+    this.locationColumnIsEnabled = enable;
   };
 
   setErasureColumn = (enable) => {
@@ -307,7 +301,8 @@ class TableStore {
 
   setTypeTrashColumn = (enable) => (this.typeTrashColumnIsEnabled = enable);
 
-  setLastOpenedColumn = (enable) => (this.lastOpenedColumnIsEnabled = enable);
+  setLastOpenedRecentColumn = (enable) =>
+    (this.lastOpenedRecentColumnIsEnabled = enable);
 
   setGroupsColumnPeople = (enable) =>
     (this.peopleGroupsColumnIsEnabled = enable);
@@ -344,7 +339,7 @@ class TableStore {
   setInsideGroupColumnStorage = (enable) =>
     (this.storageInsideGroupColumnIsEnabled = enable);
 
-  setColumnsEnable = (frameTableColumns, isRecentTab) => {
+  setColumnsEnable = (frameTableColumns) => {
     const { contactsTab } = this.peopleStore.usersStore;
     const storageColumns = localStorage.getItem(this.tableStorageName);
     const splitColumns = storageColumns
@@ -360,6 +355,7 @@ class TableStore {
         isTrashFolder,
         isTemplatesFolder,
         isPersonalReadOnly,
+        isRecentFolder,
       } = this.treeFoldersStore;
 
       const contactsView = getContactsView();
@@ -433,7 +429,7 @@ class TableStore {
       }
 
       if (isTrashFolder) {
-        this.setRoomColumn(splitColumns.includes("Room"));
+        this.setLocationColumn(splitColumns.includes("Location"));
         this.setAuthorTrashColumn(splitColumns.includes("AuthorTrash"));
         this.setCreatedTrashColumn(splitColumns.includes("CreatedTrash"));
         this.setErasureColumn(splitColumns.includes("Erasure"));
@@ -442,11 +438,12 @@ class TableStore {
         return;
       }
 
-      if (isRecentTab) {
-        this.setModifiedRecentColumn(splitColumns.includes("ModifiedRecent"));
+      if (isRecentFolder) {
+        this.setLocationRecentColumn(splitColumns.includes("LocationRecent"));
         this.setAuthorRecentColumn(splitColumns.includes("AuthorRecent"));
-        this.setCreatedRecentColumn(splitColumns.includes("CreatedRecent"));
-        this.setLastOpenedColumn(splitColumns.includes("LastOpened"));
+        this.setLastOpenedRecentColumn(
+          splitColumns.includes("LastOpenedRecent"),
+        );
         this.setSizeRecentColumn(splitColumns.includes("SizeRecent"));
         this.setTypeRecentColumn(splitColumns.includes("TypeRecent"));
         return;
@@ -467,7 +464,6 @@ class TableStore {
         this.setErasureColumn(splitColumns.includes("Erasure"));
       this.setSizeColumn(splitColumns.includes("Size"));
       this.setTypeColumn(splitColumns.includes("Type"));
-      this.setLastOpenedColumn(splitColumns.includes("LastOpened"));
     }
   };
 
@@ -488,10 +484,12 @@ class TableStore {
     const isRooms = isRoomsFolder || isArchiveFolder;
 
     switch (key) {
-      case "Room":
-        this.setRoomColumn(!this.roomColumnIsEnabled);
+      case "Location":
+        this.setLocationColumn(!this.locationColumnIsEnabled);
         return;
-
+      case "LocationRecent":
+        this.setLocationRecentColumn(!this.locationRecentColumnIsEnabled);
+        return;
       case "Author":
         this.setAuthorColumn(!this.authorColumnIsEnabled);
         return;
@@ -513,9 +511,6 @@ class TableStore {
       case "CreatedTrash":
         this.setCreatedTrashColumn(!this.createdTrashColumnIsEnabled);
         return;
-      case "CreatedRecent":
-        this.setCreatedRecentColumn(!this.createdRecentColumnIsEnabled);
-        return;
       case "CreatedIndexing":
         this.setCreatedVDRColumn(!this.createdVDRColumnIsEnabled);
         return;
@@ -529,9 +524,6 @@ class TableStore {
 
       case "Modified":
         this.setModifiedColumn(!this.modifiedColumnIsEnabled);
-        return;
-      case "ModifiedRecent":
-        this.setModifiedRecentColumn(!this.modifiedRecentColumnIsEnabled);
         return;
       case "ModifiedIndexing":
         this.setModifiedVDRColumn(!this.modifiedVDRColumnIsEnabled);
@@ -605,8 +597,8 @@ class TableStore {
         );
         return;
 
-      case "LastOpened":
-        this.setLastOpenedColumn(!this.lastOpenedColumnIsEnabled);
+      case "LastOpenedRecent":
+        this.setLastOpenedRecentColumn(!this.lastOpenedRecentColumnIsEnabled);
         return;
 
       case "Mail":
@@ -651,7 +643,7 @@ class TableStore {
     }
   };
 
-  getColumns = (defaultColumns, isRecentTab) => {
+  getColumns = (defaultColumns) => {
     const { isFrame, frameConfig } = this.settingsStore;
     const storageColumns = localStorage.getItem(this.tableStorageName);
     const splitColumns = storageColumns && storageColumns.split(",");
@@ -660,7 +652,7 @@ class TableStore {
     const columns = [];
 
     if (splitColumns) {
-      this.setColumnsEnable(null, isRecentTab);
+      this.setColumnsEnable(null);
 
       defaultColumns.forEach((col) => {
         const column = splitColumns.find((key) => key === col.key);
@@ -688,7 +680,7 @@ class TableStore {
       isRoomsFolder,
       isArchiveFolder,
       isTrashFolder,
-      isRecentTab,
+      isRecentFolder,
       isTemplatesFolder,
     } = this.treeFoldersStore;
 
@@ -730,7 +722,7 @@ class TableStore {
       tableStorageName = `${TABLE_INSIDE_GROUP_COLUMNS}=${userId}`;
     else if (isTrashFolder)
       tableStorageName = `${TABLE_TRASH_COLUMNS}=${userId}`;
-    else if (isRecentTab)
+    else if (isRecentFolder)
       tableStorageName = `${TABLE_RECENT_COLUMNS}=${userId}`;
     else if (isIndexedFolder)
       tableStorageName = `${TABLE_VDR_INDEXING_COLUMNS}=${userId}`;
@@ -748,7 +740,7 @@ class TableStore {
       isRoomsFolder,
       isArchiveFolder,
       isTrashFolder,
-      isRecentTab,
+      isRecentFolder,
       isTemplatesFolder,
     } = this.treeFoldersStore;
 
@@ -782,7 +774,7 @@ class TableStore {
     else if (isRooms) columnStorageName = `${COLUMNS_ROOMS_SIZE}=${userId}`;
     else if (isTrashFolder)
       columnStorageName = `${COLUMNS_TRASH_SIZE}=${userId}`;
-    else if (isRecentTab)
+    else if (isRecentFolder)
       columnStorageName = `${COLUMNS_RECENT_SIZE}=${userId}`;
     else if (isIndexedFolder)
       columnStorageName = `${COLUMNS_VDR_INDEXING_SIZE}=${userId}`;
@@ -808,7 +800,7 @@ class TableStore {
       isRoomsFolder,
       isArchiveFolder,
       isTrashFolder,
-      isRecentTab,
+      isRecentFolder,
       isTemplatesFolder,
     } = this.treeFoldersStore;
 
@@ -843,7 +835,7 @@ class TableStore {
       columnInfoPanelStorageName = `${COLUMNS_ROOMS_SIZE_INFO_PANEL}=${userId}`;
     else if (isTrashFolder)
       columnInfoPanelStorageName = `${COLUMNS_TRASH_SIZE_INFO_PANEL}=${userId}`;
-    else if (isRecentTab)
+    else if (isRecentFolder)
       columnInfoPanelStorageName = `${COLUMNS_RECENT_SIZE_INFO_PANEL}=${userId}`;
     else if (isIndexedFolder)
       columnInfoPanelStorageName = `${COLUMNS_VDR_INDEXING_SIZE_INFO_PANEL}=${userId}`;

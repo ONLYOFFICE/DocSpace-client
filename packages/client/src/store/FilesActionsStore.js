@@ -83,7 +83,10 @@ import {
   isSystemFolder,
 } from "@docspace/shared/utils";
 import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
-import { isFile, isFolder } from "@docspace/shared/utils/typeGuards";
+import {
+  isFile as isFileCheck,
+  isFolder as isFolderCheck,
+} from "@docspace/shared/utils/typeGuards";
 
 import {
   FILTER_ARCHIVE_DOCUMENTS,
@@ -1253,10 +1256,10 @@ class FilesActionStore {
   getItemsInfo = (items) => {
     const requests = items
       .map((item) => {
-        if (isFolder(item)) {
+        if (isFolderCheck(item)) {
           return this.filesStore.getFolderInfo(item.id);
         }
-        if (isFile(item)) {
+        if (isFileCheck(item)) {
           return this.filesStore.getFileInfo(item.id);
         }
         return null;

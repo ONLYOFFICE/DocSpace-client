@@ -2015,6 +2015,14 @@ class ContextOptionsStore {
             Boolean(item.external && (item.expired || item.passwordProtected)),
       },
       {
+        id: "option_embedding-setting",
+        key: "embedding-settings",
+        label: t("Files:Embed"),
+        icon: CodeReactSvgUrl,
+        onClick: () => this.onOpenEmbeddingSettings(item),
+        disabled: !item.security?.Embed,
+      },
+      {
         id: "option_copy-external-link",
         key: "external-link",
         label: t("Common:CopySharedLink"),

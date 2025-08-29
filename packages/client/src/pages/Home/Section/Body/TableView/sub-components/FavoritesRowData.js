@@ -30,7 +30,10 @@ import { inject, observer } from "mobx-react";
 import { TableCell } from "@docspace/shared/components/table";
 import { classNames, getLastColumn } from "@docspace/shared/utils";
 
-import { StyledBadgesContainer } from "../StyledTable";
+import {
+  StyledBadgesContainer,
+  StyledQuickButtonsContainer,
+} from "../StyledTable";
 import FileNameCell from "./FileNameCell";
 import TypeCell from "./TypeCell";
 import AuthorCell from "./AuthorCell";
@@ -55,11 +58,19 @@ const FavoritesRowDataComponent = (props) => {
     inProgress,
     showHotkeyBorder,
     badgesComponent,
+    quickButtonsComponent,
     tableStorageName,
     item,
     index,
   } = props;
+
   const lastColumn = getLastColumn(tableStorageName);
+
+  const quickButtonsComponentNode = (
+    <StyledQuickButtonsContainer>
+      {quickButtonsComponent}
+    </StyledQuickButtonsContainer>
+  );
 
   return (
     <>
@@ -83,6 +94,7 @@ const FavoritesRowDataComponent = (props) => {
         <StyledBadgesContainer showHotkeyBorder={showHotkeyBorder}>
           {badgesComponent}
         </StyledBadgesContainer>
+        {lastColumn === "Name" ? quickButtonsComponentNode : null}
       </TableCell>
 
       {authorFavoritesColumnIsEnabled ? (
@@ -103,6 +115,7 @@ const FavoritesRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
+          {lastColumn === "AuthorFavorites" ? quickButtonsComponentNode : null}
         </TableCell>
       ) : (
         <div />
@@ -126,6 +139,9 @@ const FavoritesRowDataComponent = (props) => {
             item={item}
             sideColor={theme.filesSection.tableView.row.sideColor}
           />
+          {lastColumn === "LocationFavorites"
+            ? quickButtonsComponentNode
+            : null}
         </TableCell>
       ) : (
         <div />
@@ -149,6 +165,9 @@ const FavoritesRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
+          {lastColumn === "ModifiedFavorites"
+            ? quickButtonsComponentNode
+            : null}
         </TableCell>
       ) : (
         <div />
@@ -172,6 +191,7 @@ const FavoritesRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
+          {lastColumn === "SizeFavorites" ? quickButtonsComponentNode : null}
         </TableCell>
       ) : (
         <div />
@@ -195,6 +215,7 @@ const FavoritesRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
+          {lastColumn === "TypeFavorites" ? quickButtonsComponentNode : null}
         </TableCell>
       ) : (
         <div />

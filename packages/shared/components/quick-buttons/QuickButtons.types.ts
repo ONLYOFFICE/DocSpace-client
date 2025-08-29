@@ -45,6 +45,7 @@ export type QuickButtonsProps = {
   isTemplatesFolder?: boolean;
   isIndexEditingMode?: boolean;
   showLifetimeIcon?: boolean;
+  isRecentFolder?: boolean;
 
   onClickDownload?: VoidFunction;
   onCopyPrimaryLink?: VoidFunction;

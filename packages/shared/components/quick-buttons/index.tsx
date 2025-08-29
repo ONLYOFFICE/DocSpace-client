@@ -65,6 +65,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
     isTemplatesFolder,
     onClickLock,
     onClickFavorite,
+    isRecentFolder,
   } = props;
 
   const { id, shared, security } = item;
@@ -231,7 +232,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
             </>
           ) : null}
 
-          {!isRoom(item) ? (
+          {!isRoom(item) && !isRecentFolder ? (
             <IconButton
               iconName={
                 item?.isFavorite ? FavoriteFillReactSvgUrl : FavoriteReactSvgUrl

@@ -443,6 +443,7 @@ export type TDocEditor = {
   setUsers?: ({ c, users }: { c: string; users: TSharedUsers[] }) => void;
   startFilling?: VoidFunction;
   requestRoles?: VoidFunction;
+  setFavorite?: (favorite: boolean) => void;
 };
 
 export type TCatchError =

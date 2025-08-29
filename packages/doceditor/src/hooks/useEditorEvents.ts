@@ -38,6 +38,8 @@ import {
   openEdit,
   restoreDocumentsVersion,
   sendEditorNotify,
+  markAsFavorite,
+  removeFromFavorite,
 } from "@docspace/shared/api/files";
 import {
   TEditHistory,
@@ -628,9 +630,23 @@ const useEditorEvents = ({
   );
 
   const onMetaChange = React.useCallback(
-    (event: object) => {
+    async (event: object) => {
       const newTitle = (event as { data: { title: string } }).data.title;
-      // const favorite = event.data.favorite;
+      const favorite = (event as { data: { favorite: boolean } }).data.favorite;
+
+      if (favorite !== fileInfo?.isFavorite && fileInfo?.id) {
+        try {
+          if (favorite) {
+            await markAsFavorite([fileInfo.id], []);
+          } else {
+            await removeFromFavorite([fileInfo.id], []);
+          }
+        } catch (error) {
+          console.error(error);
+        } finally {
+          docEditor?.setFavorite?.(favorite);
+        }
+      }
 
       if (newTitle && newTitle !== docTitle) {
         setDocumentTitle(

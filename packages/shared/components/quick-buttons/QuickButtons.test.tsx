@@ -141,6 +141,7 @@ const baseFileItem: TFile = {
   fileStatus: 0,
   fileType: 0,
   folderId: 1,
+  isFavorite: true,
   mute: false,
   pureContentLength: 0,
   rootFolderId: 1,

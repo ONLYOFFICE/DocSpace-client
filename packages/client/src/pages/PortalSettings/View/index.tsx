@@ -151,8 +151,8 @@ const View = ({
     getGreetingSettingsIsDefault: getGreetingSettingsIsDefault || (() => {}),
     getBrandName: getBrandName || (() => {}),
     initWhiteLabel: initWhiteLabel || (() => {}),
-    isLoaded: isLoaded,
-    setIsLoaded: setIsLoaded,
+    isLoaded,
+    setIsLoaded,
   });
 
   // Initialize useSecurity hook with null checks
@@ -440,9 +440,6 @@ export const ViewComponent = inject(
       setCurrentClientView,
 
       showHeaderLoader,
-
-      setCurrentSettingsView,
-      currentSettingsView,
     } = clientLoadingStore;
 
     const {

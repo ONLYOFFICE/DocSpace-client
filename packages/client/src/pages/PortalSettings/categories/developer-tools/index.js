@@ -43,7 +43,6 @@ import Api from "./Api";
 import PluginSDK from "./PluginSDK";
 import OAuth from "./OAuth";
 
-import SSOLoader from "./sub-components/ssoLoader";
 import ApiKeys from "./ApiKeys";
 import useDeveloperTools from "./useDeveloperTools";
 
@@ -61,7 +60,7 @@ const DeveloperToolsWrapper = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const [currentTabId, setCurrentTabId] = useState();
 
   const { t } = useTranslation([
@@ -173,7 +172,7 @@ const DeveloperToolsWrapper = (props) => {
       setCurrentTabId(currentTab?.id);
     }
 
-    setIsLoading(true);
+    // setIsLoading(true);
   }, [location.pathname]);
 
   const onSelect = (e) => {

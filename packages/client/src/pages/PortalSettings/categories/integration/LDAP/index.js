@@ -42,7 +42,6 @@ import ToggleLDAP from "./sub-components/ToggleLDAP";
 import { SyncContainerSection } from "./sub-components/SyncContainer";
 import LdapMobileView from "./sub-components/LdapMobileView";
 import { SettingsContainerSection } from "./sub-components/SettingsContainer";
-import LdapLoader from "./sub-components/LdapLoader";
 
 const LDAP = ({
   ldapSettingsUrl,
@@ -51,7 +50,6 @@ const LDAP = ({
   load,
   isMobileView,
   isLdapEnabled,
-  isLoaded,
   setScrollToSettings,
 }) => {
   const { t } = useTranslation(["Ldap", "Settings", "Common"]);
@@ -72,7 +70,7 @@ const LDAP = ({
   };
 
   useEffect(() => {
-    //isLdapAvailable && load(t);
+    // isLdapAvailable && load(t);
     onCheckView();
     setDocumentTitle(t("Ldap:LdapSettings"));
     window.addEventListener("resize", onCheckView);

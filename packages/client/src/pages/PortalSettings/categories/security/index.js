@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Tabs } from "@docspace/shared/components/tabs";
 import { useNavigate, useLocation } from "react-router";
 import { withTranslation } from "react-i18next";
@@ -47,8 +47,6 @@ import useSecurity from "./useSecurity";
 const SecurityWrapper = (props) => {
   const {
     t,
-    initSettings,
-    isInit,
     resetIsInit,
     currentDeviceType,
     getPortalPasswordSettings,
@@ -62,7 +60,7 @@ const SecurityWrapper = (props) => {
     getLifetimeAuditSettings,
     getAuditTrail,
   } = props;
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -124,7 +122,7 @@ const SecurityWrapper = (props) => {
   // };
 
   useEffect(() => {
-    //load();
+    // load();
     return () => {
       resetIsInit();
       resetSessionStorage();
@@ -141,7 +139,7 @@ const SecurityWrapper = (props) => {
     );
   };
 
-  if (isLoading && data.length)
+  if (data.length)
     return currentTabId === data[0].id ? (
       currentDeviceType !== DeviceType.desktop ? (
         <MobileSecurityLoader />

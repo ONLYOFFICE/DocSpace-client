@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect } from "react";
-import { useParams } from "react-router";
+import { useParams, useLocation } from "react-router";
 import Article from "@docspace/shared/components/article";
 import { inject, observer } from "mobx-react";
 import Section from "@docspace/shared/components/section";
@@ -85,6 +85,7 @@ const Layout = ({
   isNotPaidPeriod,
 }) => {
   const { id, eventId } = useParams();
+  const location = useLocation();
 
   const path = location.pathname.includes("/portal-settings")
     ? "/portal-settings"

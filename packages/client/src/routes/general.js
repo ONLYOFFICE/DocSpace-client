@@ -221,7 +221,6 @@ export const generalClientRoutes = [
       },
       {
         path: "oauth/create",
-        path: "developer-tools/oauth/create",
         lazy: () =>
           componentLoader(
             () =>

@@ -2364,6 +2364,13 @@ class FilesStore {
         ]);
       }
 
+      if (isRecentFolder) {
+        fileOptions = removeOptions(fileOptions, [
+          "mark-as-favorite",
+          "remove-from-favorites",
+        ]);
+      }
+
       if (!item.security?.FillingStatus) {
         fileOptions = removeOptions(fileOptions, ["filling-status"]);
       }

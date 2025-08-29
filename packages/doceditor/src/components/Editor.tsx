@@ -228,7 +228,7 @@ const Editor = ({
 
   try {
     if (newConfig.document && newConfig.document.info)
-      newConfig.document.info.favorite = fileInfo?.isFavorite ? true : false;
+      newConfig.document.info.favorite = !!fileInfo?.isFavorite;
 
     const url = typeof window !== "undefined" ? window.location.href : "";
 

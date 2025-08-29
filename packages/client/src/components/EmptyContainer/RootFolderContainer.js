@@ -47,8 +47,8 @@ import EmptyScreenPersonalUrl from "PUBLIC_DIR/images/empty_screen_personal.svg?
 import EmptyScreenPersonalDarkUrl from "PUBLIC_DIR/images/empty_screen_personal_dark.svg?url";
 import EmptyScreenCorporateSvgUrl from "PUBLIC_DIR/images/empty_screen_corporate.svg?url";
 import EmptyScreenCorporateDarkSvgUrl from "PUBLIC_DIR/images/empty_screen_corporate_dark.svg?url";
-import EmptyScreenFavoritesUrl from "PUBLIC_DIR/images/empty_screen_favorites.svg?url";
-import EmptyScreenFavoritesDarkUrl from "PUBLIC_DIR/images/empty_screen_favorites_dark.svg?url";
+import EmptyScreenFavoritesUrl from "PUBLIC_DIR/images/emptyview/empty.favorites.svg?url";
+import EmptyScreenFavoritesDarkUrl from "PUBLIC_DIR/images/emptyview/empty.favorites.dark.svg?url";
 import EmptyScreenRecentUrl from "PUBLIC_DIR/images/empty_screen_recent.svg?url";
 import EmptyScreenRecentDarkUrl from "PUBLIC_DIR/images/empty_screen_recent_dark.svg?url";
 import EmptyScreenPrivacyUrl from "PUBLIC_DIR/images/empty_screen_privacy.svg?url";

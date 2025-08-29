@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import type { TDocServiceLocation } from "@docspace/shared/api/files/types";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
@@ -33,6 +34,7 @@ import SetupStore from "SRC_DIR/store/SettingsSetupStore";
 import SsoFormStore from "SRC_DIR/store/SsoFormStore";
 import PluginStore from "SRC_DIR/store/PluginStore";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
+import LdapFormStore from "SRC_DIR/store/LdapFormStore";
 
 export type UseIntegrationProps = {
   isSSOAvailable?: CurrentQuotasStore["isSSOAvailable"];
@@ -43,6 +45,8 @@ export type UseIntegrationProps = {
   fetchAndSetConsumers: SetupStore["fetchAndSetConsumers"];
   setInitSMTPSettings: SetupStore["setInitSMTPSettings"];
   getDocumentServiceLocation: FilesSettingsStore["getDocumentServiceLocation"];
+  loadLDAP: LdapFormStore["load"];
+  isLdapAvailable: CurrentQuotasStore["isLdapAvailable"];
 };
 
 const useIntegration = ({
@@ -54,10 +58,18 @@ const useIntegration = ({
   fetchAndSetConsumers,
   setInitSMTPSettings,
   getDocumentServiceLocation,
+  loadLDAP,
+  isLdapAvailable,
 }: UseIntegrationProps) => {
+  const { t } = useTranslation(["Ldap", "Settings", "Common"]);
+
   const [openThirdPartyModal, setOpenThirdPartyModal] = useState(false);
   const [documentServiceLocationData, setDocumentServiceLocationData] =
     useState<TDocServiceLocation>();
+
+  const getLDAPData = useCallback(() => {
+    isLdapAvailable && loadLDAP(t);
+  }, [isLdapAvailable, loadLDAP, t]);
 
   const getSSOData = useCallback(() => {
     isSSOAvailable && !isInit && init();
@@ -91,6 +103,8 @@ const useIntegration = ({
 
   const getIntegrationInitialValue = useCallback(async () => {
     const actions = [];
+    if (window.location.pathname.includes("ldap")) actions.push(getLDAPData());
+
     if (window.location.pathname.includes("sso")) actions.push(getSSOData());
 
     if (window.location.pathname.includes("plugins"))

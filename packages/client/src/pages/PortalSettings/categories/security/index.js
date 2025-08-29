@@ -116,15 +116,15 @@ const SecurityWrapper = (props) => {
 
   const currentTabId = getCurrentTabId();
 
-  const load = async () => {
-    !isInit &&
-      currentDeviceType !== DeviceType.mobile &&
-      (await initSettings());
-    setIsLoading(true);
-  };
+  // const load = async () => {
+  //   !isInit &&
+  //     currentDeviceType !== DeviceType.mobile &&
+  //     (await initSettings());
+  //   setIsLoading(true);
+  // };
 
   useEffect(() => {
-    load();
+    //load();
     return () => {
       resetIsInit();
       resetSessionStorage();
@@ -141,7 +141,7 @@ const SecurityWrapper = (props) => {
     );
   };
 
-  if (!isLoading && data.length)
+  if (isLoading && data.length)
     return currentTabId === data[0].id ? (
       currentDeviceType !== DeviceType.desktop ? (
         <MobileSecurityLoader />

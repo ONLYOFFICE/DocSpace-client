@@ -35,6 +35,8 @@ export type UseCommonProps = {
   getGreetingSettingsIsDefault: CommonStore["getGreetingSettingsIsDefault"];
   getBrandName: BrandingStore["getBrandName"];
   initWhiteLabel: BrandingStore["initWhiteLabel"];
+  setIsLoaded: CommonStore["setIsLoaded"];
+  isLoaded: CommonStore["isLoaded"];
 };
 
 const useCommon = ({
@@ -43,8 +45,16 @@ const useCommon = ({
   getGreetingSettingsIsDefault,
   getBrandName,
   initWhiteLabel,
+
+  setIsLoaded,
+  isLoaded,
 }: UseCommonProps) => {
-  const getCustomizationData = useCallback(() => {
+  const inTabBranding = window.location.pathname.includes("branding");
+  const inTabGeneral = window.location.pathname.includes("general");
+
+  const getCustomizationData = useCallback(async () => {
+    if (isLoaded) return;
+
     if (isMobileView) {
       loadBaseInfo("language-and-time-zone");
       loadBaseInfo("dns-settings");
@@ -52,25 +62,38 @@ const useCommon = ({
     } else {
       loadBaseInfo("general");
     }
+    setIsLoaded(true);
 
     getGreetingSettingsIsDefault();
   }, [isMobileView, loadBaseInfo, getGreetingSettingsIsDefault]);
 
-  const getBrandingData = useCallback(() => {
+  const getBrandingData = useCallback(async () => {
     getBrandName();
     initWhiteLabel();
   }, [getBrandName, initWhiteLabel]);
 
-  const getCommonInitialValue = React.useCallback(async () => {
-    const actions = [];
-    if (window.location.pathname.includes("general"))
-      actions.push(getCustomizationData());
+  const initialLoad = useCallback(async () => {
+    // if (!isMobileView) {
+    //   await loadBaseInfo(
+    //     inTabGeneral
+    //       ? "customization"
+    //       : inTabBranding
+    //         ? "branding"
+    //         : "appearance",
+    //   );
+    // } else {
+    //    await loadBaseInfo("customization");
+    // }
+  }, [loadBaseInfo, inTabGeneral, inTabBranding, isMobileView]);
 
-    if (window.location.pathname.includes("branding"))
-      actions.push(getBrandingData());
+  const getCommonInitialValue = React.useCallback(async () => {
+    const actions = [initialLoad()];
+    if (inTabGeneral) actions.push(getCustomizationData());
+
+    if (inTabBranding) actions.push(getBrandingData());
 
     await Promise.all(actions);
-  }, [getCustomizationData, getBrandingData]);
+  }, [getCustomizationData, getBrandingData, initialLoad]);
 
   return {
     getCustomizationData,

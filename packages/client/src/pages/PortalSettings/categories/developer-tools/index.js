@@ -170,7 +170,7 @@ const DeveloperToolsWrapper = (props) => {
     );
 
     if (currentTab !== -1 && data.length) {
-      setCurrentTabId(currentTab.id);
+      setCurrentTabId(currentTab?.id);
     }
 
     setIsLoading(true);
@@ -190,7 +190,7 @@ const DeveloperToolsWrapper = (props) => {
     setCurrentTabId(e.id);
   };
 
-  if (!isLoading) return <SSOLoader />;
+  // if (!isLoading) return <SSOLoader />;
 
   return (
     <Tabs
@@ -204,9 +204,7 @@ const DeveloperToolsWrapper = (props) => {
 };
 
 export const Component = inject(
-  ({ setup, settingsStore, authStore, webhooksStore, oauthStore }) => {
-    const { initSettings } = setup;
-
+  ({ settingsStore, authStore, webhooksStore, oauthStore }) => {
     const identityServerEnabled =
       authStore?.capabilities?.identityServerEnabled;
 
@@ -219,9 +217,6 @@ export const Component = inject(
     return {
       currentDeviceType,
       getCSPSettings,
-      loadBaseInfo: async () => {
-        await initSettings();
-      },
       identityServerEnabled,
       loadWebhooks,
       isInit,

@@ -115,11 +115,6 @@ const useDeveloperTools = ({
     await Promise.all(actions);
   }, [getJavascriptSDKData, getWebhooksData, getOAuthData, getKeysData]);
 
-  React.useEffect(() => {
-    if (window.location.pathname.includes("portal-settings"))
-      getDeveloperToolsInitialValue();
-  }, [getDeveloperToolsInitialValue]);
-
   return {
     getDeveloperToolsInitialValue,
     getJavascriptSDKData,

@@ -72,7 +72,7 @@ const LDAP = ({
   };
 
   useEffect(() => {
-    isLdapAvailable && load(t);
+    //isLdapAvailable && load(t);
     onCheckView();
     setDocumentTitle(t("Ldap:LdapSettings"));
     window.addEventListener("resize", onCheckView);
@@ -80,7 +80,7 @@ const LDAP = ({
     return () => window.removeEventListener("resize", onCheckView);
   }, [isLdapAvailable, load, t]);
 
-  if (!isLoaded && isLdapAvailable) return <LdapLoader />;
+  // if (!isLoaded && isLdapAvailable) return <LdapLoader />;
 
   const link = `${`${t("Settings:ManagementCategorySecurity")} > ${t("Settings:InvitationSettings")}.`}`;
 

@@ -28,6 +28,7 @@ import { useCallback } from "react";
 
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { TfaStore } from "@docspace/shared/store/TfaStore";
+import { DeviceType } from "@docspace/shared/enums";
 
 import SettingsSetupStore from "SRC_DIR/store/SettingsSetupStore";
 
@@ -42,6 +43,9 @@ export type UseSecurityProps = {
   getLoginHistory: SettingsSetupStore["getLoginHistory"];
   getLifetimeAuditSettings: SettingsSetupStore["getLifetimeAuditSettings"];
   getAuditTrail: SettingsSetupStore["getAuditTrail"];
+  initSettings: SettingsSetupStore["initSettings"];
+  isInit: SettingsSetupStore["isInit"];
+  currentDeviceType: SettingsStore["currentDeviceType"];
 };
 
 const useSecurity = ({
@@ -55,6 +59,9 @@ const useSecurity = ({
   getLoginHistory,
   getLifetimeAuditSettings,
   getAuditTrail,
+  initSettings,
+  isInit,
+  currentDeviceType,
 }: UseSecurityProps) => {
   const getAccessPortalData = useCallback(async () => {
     getPortalPasswordSettings();
@@ -76,18 +83,23 @@ const useSecurity = ({
     getSessionLifetime,
   ]);
 
-  const getLoginHistoryData = useCallback(() => {
+  const getLoginHistoryData = useCallback(async () => {
     getLoginHistory();
     getLifetimeAuditSettings();
   }, [getLoginHistory, getLifetimeAuditSettings]);
 
-  const getAuditTrailData = useCallback(() => {
+  const getAuditTrailData = useCallback(async () => {
     getAuditTrail();
     getLifetimeAuditSettings();
   }, [getAuditTrail, getLifetimeAuditSettings]);
 
+  const initialLoad = useCallback(async () => {
+    if (!isInit && currentDeviceType !== DeviceType.mobile)
+      await initSettings();
+  }, [isInit, currentDeviceType, initSettings]);
+
   const getSecurityInitialValue = useCallback(async () => {
-    const actions = [];
+    const actions = [initialLoad()];
     if (window.location.pathname.includes("access-portal"))
       actions.push(getAccessPortalData());
 

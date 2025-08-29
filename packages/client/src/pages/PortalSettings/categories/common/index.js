@@ -102,15 +102,15 @@ const TabsCommon = (props) => {
     const tabId = getCurrentTabId();
     setCurrentTabId(tabId);
 
-    await loadBaseInfo(
-      !isMobileView
-        ? tabId === "general"
-          ? "customization"
-          : tabId === "branding"
-            ? "branding"
-            : "appearance"
-        : "customization",
-    );
+    // await loadBaseInfo(
+    //   !isMobileView
+    //     ? tabId === "general"
+    //       ? "customization"
+    //       : tabId === "branding"
+    //         ? "branding"
+    //         : "appearance"
+    //     : "customization",
+    // );
   };
 
   useEffect(() => {

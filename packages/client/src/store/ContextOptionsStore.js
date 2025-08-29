@@ -1954,53 +1954,20 @@ class ContextOptionsStore {
       //   onClick: () => this.getManageLink(item, t),
       // },
       {
-        id: "option_sharing-settings",
-        key: "sharing-settings",
-        label: t("Common:Share"),
-        icon: ShareReactSvgUrl,
-        disabled:
-          !item.canShare &&
-          !item.security?.CreateRoomFrom &&
-          !item.security?.Embed,
-        items: [
-          {
-            id: "option_copy-shared-link",
-            key: "copy-shared-link",
-            label: t("Common:CopySharedLink"),
-            icon: TabletLinkReactSvgUrl,
-            onClick: () => this.handleCopyPrimaryLink(item, t),
-            disabled: !item.canShare,
-          },
-          {
-            id: "option_manage-links",
-            key: "manage-links",
-            label: t("Common:ManageLinks"),
-            icon: SettingsReactSvgUrl,
-            onClick: () => this.onClickShare(item),
-            disabled: !item.canShare,
-          },
-          {
-            id: "option_embedding-setting",
-            key: "embedding-settings",
-            label: t("Common:Embed"),
-            icon: CodeReactSvgUrl,
-            onClick: () => this.onOpenEmbeddingSettings(item),
-            disabled: !item.security?.Embed,
-          },
-          {
-            key: "create-room-separator",
-            isSeparator: true,
-            disabled: !item.security?.CreateRoomFrom,
-          },
-          {
-            id: "option_create_room",
-            key: "create-room",
-            label: t("Common:CreateRoom"),
-            icon: CatalogRoomsReactSvgUrl,
-            onClick: () => this.onCreateRoom(item, true),
-            disabled: !item.security?.CreateRoomFrom,
-          },
-        ],
+        id: "option_copy-shared-link",
+        key: "copy-shared-link",
+        label: t("Common:CopySharedLink"),
+        icon: TabletLinkReactSvgUrl,
+        onClick: () => this.handleCopyPrimaryLink(item, t),
+        disabled: !item.canShare,
+      },
+      {
+        id: "option_manage-links",
+        key: "manage-links",
+        label: t("Common:ManageLinks"),
+        icon: SettingsReactSvgUrl,
+        onClick: () => this.onClickShare(item),
+        disabled: !item.canShare,
       },
       ...versionActions,
       {
@@ -2372,7 +2339,8 @@ class ContextOptionsStore {
         groupIcon: ShareReactSvgUrl,
         itemKeys: [
           "invite-users-to-room",
-          "copy-general-link",
+          "copy-shared-link",
+          "manage-links",
           "link-for-room-members",
           "external-link",
           "embedding-settings",
@@ -2428,7 +2396,7 @@ class ContextOptionsStore {
       });
     }
 
-    const menuGroups = [];
+    let menuGroups = [];
     let keysToRemove = [];
 
     menuGroupsConfig.forEach((configItem) => {
@@ -2447,6 +2415,25 @@ class ContextOptionsStore {
 
     if (downloadOption && downloadAsOption) {
       keysToRemove.push("download-original");
+    }
+
+    const hasCopySharedLink = newOptions.some(
+      (option) => option.key === "copy-shared-link",
+    );
+    const linkForRoomMembers = newOptions.some(
+      (option) => option.key === "link-for-room-members",
+    );
+
+    if (hasCopySharedLink && linkForRoomMembers && menuGroups.length > 0) {
+      menuGroups = menuGroups.map((group) => {
+        if (group.key === "share" && Array.isArray(group.items)) {
+          const items = group.items.filter(
+            (i) => i.key !== "link-for-room-members",
+          );
+          return { ...group, items };
+        }
+        return group;
+      });
     }
 
     const resultOptions = newOptions.filter(

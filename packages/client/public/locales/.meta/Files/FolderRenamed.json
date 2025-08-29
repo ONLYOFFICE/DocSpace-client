@@ -3,7 +3,7 @@
   "content": "The folder '{{folderTitle}}' is renamed to '{{newFoldedTitle}}'",
   "content_en_sha1_hash": "00e0cd3e6f810877e66c2784d96ec62ae9adc140",
   "created_at": "2025-05-19T21:30:55.695Z",
-  "updated_at": "2025-05-24T12:06:39.468Z",
+  "updated_at": "2025-08-29T14:33:37.957Z",
   "comment": {
     "text": "The translation key \"FolderRenamed\" is used to display a success message after renaming a folder, showing the original and new folder titles. This message appears as a toast notification in a UI component.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/GlobalEvents/RenameEvent.js",
       "line_number": 116,
-      "context": "})\n : renameFolder(item.id, value)\n .then(() => completeAction(item, type))\n .then(() => {\n toastr.success(\n t(\"FolderRenamed\", {\n folderTitle: item.title,\n newFoldedTitle: value,\n }),\n );\n })",
+      "context": "})\n : await renameFolder(item.id, value)\n .then(() => completeAction(item, type))\n .then(() => {\n toastr.success(\n t(\"FolderRenamed\", {\n folderTitle: item.title,\n newFoldedTitle: value,\n }),\n );\n })",
       "module": "/packages/client"
     }
   ],

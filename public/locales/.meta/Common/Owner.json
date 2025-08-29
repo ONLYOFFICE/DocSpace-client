@@ -3,7 +3,7 @@
   "content": "Owner",
   "content_en_sha1_hash": "89ff31225c5f042fff61e92ec8cf80e417a7140c",
   "created_at": "2025-05-19T21:30:47.205Z",
-  "updated_at": "2025-08-27T10:14:35.092Z",
+  "updated_at": "2025-08-29T14:33:37.987Z",
   "comment": {
     "text": "The translation key \"Owner\" represents the label used to display an owner's name or avatar in a user interface, typically appearing in dialog boxes and info panels. It is translated from \"Common:Owner\", suggesting that it relates to general information about a user's role. This text appears as part of a styled component, likely within a UI element intended to provide context or identify the user.",
     "is_auto": true,
@@ -36,13 +36,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 576,
+      "line_number": 631,
       "context": "onChange: this.onColumnChange,\n onClick: this.onRoomsFilter,\n },\n {\n key: \"Owner\",\n title: t(\"Common:Owner\"),\n enable: roomColumnOwnerIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Author,\n onChange: this.onColumnChange,\n onClick: this.onRoomsFilter,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 576,
+      "line_number": 631,
       "context": "onChange: this.onColumnChange,\n onClick: this.onRoomsFilter,\n },\n {\n key: \"Owner\",\n title: t(\"Common:Owner\"),\n enable: roomColumnOwnerIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Author,\n onChange: this.onColumnChange,\n onClick: this.onRoomsFilter,",
       "module": "/packages/client"
     },
@@ -72,13 +72,13 @@
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 329,
+      "line_number": 330,
       "context": "};\n \n export const getUserTypeTranslation = (type: EmployeeType, t: TTranslation) => {\n switch (type) {\n case EmployeeType.Owner:\n return t(\"Common:Owner\");\n case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n });\n case EmployeeType.RoomAdmin:",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 329,
+      "line_number": 330,
       "context": "};\n \n export const getUserTypeTranslation = (type: EmployeeType, t: TTranslation) => {\n switch (type) {\n case EmployeeType.Owner:\n return t(\"Common:Owner\");\n case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n });\n case EmployeeType.RoomAdmin:",
       "module": "/packages/shared"
     },

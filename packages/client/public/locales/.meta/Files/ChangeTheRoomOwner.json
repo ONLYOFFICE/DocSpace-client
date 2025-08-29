@@ -3,7 +3,7 @@
   "content": "Change the Room Owner",
   "content_en_sha1_hash": "02a0f3d75f6449e5611f36f91216cb8be76a6efe",
   "created_at": "2025-05-19T21:30:55.324Z",
-  "updated_at": "2025-08-26T11:15:14.111Z",
+  "updated_at": "2025-08-29T14:33:38.074Z",
   "comment": {
     "text": "This translation key is used to display the label \"Change the Room Owner\" in a UI element. It will appear as a button or header in a panel, prompting users to update the room owner. Translators should focus on conveying the action of changing the room's ownership.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2188,
+      "line_number": 2178,
       "context": "disabled: false,\n },\n {\n id: \"option_change-room-owner\",\n key: \"change-room-owner\",\n label: t(\"Files:ChangeTheRoomOwner\"),\n icon: ReconnectSvgUrl,\n onClick: this.onChangeRoomOwner,\n disabled: false,\n },\n {",
       "module": "/packages/client"
     }

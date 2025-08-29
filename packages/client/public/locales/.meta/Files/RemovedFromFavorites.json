@@ -3,7 +3,7 @@
   "content": "Removed from favorites",
   "content_en_sha1_hash": "c259d9197c21c066bff3db7e0f183ec9c293053c",
   "created_at": "2025-05-19T21:30:56.030Z",
-  "updated_at": "2025-08-27T10:14:35.020Z",
+  "updated_at": "2025-08-29T14:33:37.904Z",
   "comment": {
     "text": "This translation key \"RemovedFromFavorites\" is used to display a message when an item is removed from favorites. It is typically displayed as a success toast after removing an item from favorites in the UI.",
     "is_auto": true,
@@ -12,26 +12,26 @@
   "usage": [
     {
       "file_path": "/packages/client/src/HOCs/withHotkeys.js",
-      "line_number": 375,
-      "context": "if (isFavoritesFolder) {\n const items = selection.map((item) => item.id);\n \n setFavoriteAction(\"remove\", items)\n .then(() => toastr.success(t(\"RemovedFromFavorites\")))\n .catch((err) => toastr.error(err));\n \n return;\n }",
+      "line_number": 373,
+      "context": "if (isAvailableOption(\"delete\") && !isGroupMenuBlocked) {\n if (isRecentFolder) return;\n \n if (isFavoritesFolder) {\n setFavoriteAction(\"remove\", selection)\n .then(() => toastr.success(t(\"RemovedFromFavorites\")))\n .catch((err) => toastr.error(err));\n \n return;\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/HOCs/withQuickButtons.js",
       "line_number": 69,
-      "context": "onClickFavorite = (showFavorite) => {\n const { t, item, setFavoriteAction } = this.props;\n \n if (showFavorite) {\n setFavoriteAction(\"remove\", item.id)\n .then(() => toastr.success(t(\"RemovedFromFavorites\")))\n .catch((err) => toastr.error(err));\n return;\n }\n \n setFavoriteAction(\"mark\", item.id)",
+      "context": "onClickFavorite = () => {\n const { t, item, setFavoriteAction } = this.props;\n \n if (item?.isFavorite) {\n setFavoriteAction(\"remove\", [item])\n .then(() => toastr.success(t(\"RemovedFromFavorites\")))\n .catch((err) => toastr.error(err));\n return;\n }\n \n setFavoriteAction(\"mark\", [item])",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 444,
-      "context": "this.filesActionsStore\n .setFavoriteAction(action, id)\n .then(() =>\n action === \"mark\"\n ? toastr.success(t(\"MarkedAsFavorite\"))\n : toastr.success(t(\"RemovedFromFavorites\")),\n )\n .catch((err) => toastr.error(err));\n };\n \n lockFile = (item, t) => {",
+      "line_number": 445,
+      "context": "this.filesActionsStore\n .setFavoriteAction(action, items)\n .then(() =>\n action === \"mark\"\n ? toastr.success(t(\"MarkedAsFavorite\"))\n : toastr.success(t(\"RemovedFromFavorites\")),\n )\n .catch((err) => toastr.error(err));\n };\n \n lockFile = (item, t) => {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2498,
-      "context": "alt: t(\"RemoveFromFavorites\"),\n iconUrl: FavoritesReactSvgUrl,\n onClick: () => {\n const items = selection.map((item) => item.id);\n this.setFavoriteAction(\"remove\", items)\n .then(() => toastr.success(t(\"RemovedFromFavorites\")))\n .catch((err) => toastr.error(err));\n },\n })\n .set(\"showInfo\", showInfo);",
+      "line_number": 2506,
+      "context": "label: t(\"RemoveFromFavorites\"),\n alt: t(\"RemoveFromFavorites\"),\n iconUrl: FavoritesFillReactSvgUrl,\n onClick: () => {\n this.setFavoriteAction(\"remove\", selection)\n .then(() => toastr.success(t(\"RemovedFromFavorites\")))\n .catch((err) => toastr.error(err));\n },\n })\n .set(\"showInfo\", showInfo);",
       "module": "/packages/client"
     }
   ],

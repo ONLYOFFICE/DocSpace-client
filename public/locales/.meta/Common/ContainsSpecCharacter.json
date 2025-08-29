@@ -3,7 +3,7 @@
   "content": "The title can't contain any of the following characters: *+:\"<>?|/",
   "content_en_sha1_hash": "2988d94a573dbf375e5668150d952ca1022bdb80",
   "created_at": "2025-05-26T07:15:41.554Z",
-  "updated_at": "2025-08-21T11:22:39.786Z",
+  "updated_at": "2025-08-29T14:33:37.958Z",
   "comment": {
     "text": "The translation key \"ContainsSpecCharacter\" is used to display an error message when a file title contains specific characters. It appears in a dialog box that allows users to input a file name and is linked to validation rules for folder names. Translators should replace this text with a corresponding message in their language, ensuring it conveys the same meaning as the original English content.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/GlobalEvents/sub-components/Dialog.js",
-      "line_number": 165,
-      "context": "<ModalDialog.Body>\n <FieldContainer\n hasError={isError}\n labelVisible={false}\n errorMessageWidth=\"100%\"\n errorMessage={t(\"Common:ContainsSpecCharacter\")}\n removeMargin\n >\n <TextInput\n id=\"create-text-input\"\n name=\"create\"",
+      "line_number": 188,
+      "context": "<ModalDialog.Body>\n <FieldContainer\n hasError={hasError}\n labelVisible={false}\n errorMessageWidth=\"100%\"\n errorMessage={errorText || t(\"Common:ContainsSpecCharacter\")}\n removeMargin\n >\n <TextInput\n id=\"create-text-input\"\n name=\"create\"",
       "module": "/packages/client"
     },
     {

@@ -51,13 +51,13 @@ const TransactionRowView: React.FC<TransactionRowViewProps> = ({
   theme,
   sectionWidth,
 }) => {
-  const { credit, withdrawal, currency } = transaction;
+  const { credit, debit, currency } = transaction;
   const { t } = useTranslation("Payments");
   const isCredit = credit > 0;
 
   const formattedAmount = accountingLedgersFormat(
     language,
-    credit || withdrawal,
+    credit || debit,
     isCredit,
     currency,
   );

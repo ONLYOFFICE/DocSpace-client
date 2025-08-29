@@ -214,7 +214,7 @@ export type TTransactionCollection = {
   quantity: number;
   amount: number;
   credit: number;
-  withdrawal: number;
+  debit: number;
   currency: string;
   description: string;
   details: string;

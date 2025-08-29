@@ -42,6 +42,7 @@ import { UserStore } from "@docspace/shared/store/UserStore";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { getUserTypeTranslation } from "@docspace/shared/utils/common";
+import { CategoryType } from "@docspace/shared/constants";
 
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import ChangeMailReactSvgUrl from "PUBLIC_DIR/images/email.react.svg?url";
@@ -69,7 +70,6 @@ import GroupReactSvgUrl from "PUBLIC_DIR/images/group.react.svg?url";
 import CatalogUserReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.user.react.svg?url";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { CategoryType } from "SRC_DIR/helpers/constants";
 import {
   createGroup,
   onDeletePersonalDataClick,

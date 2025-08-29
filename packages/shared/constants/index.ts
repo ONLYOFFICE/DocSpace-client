@@ -249,3 +249,23 @@ export const STORAGE_TARIFF_DEACTIVATED = "storageTariffDeactivated";
 // any unicode letters are allowed, characters are prohibited
 export const BRAND_NAME_REGEX =
   /^[^\s-]([^<>\/\\|:*?"'`~!@#$%^&()+={}[\];,.])*[^\s-]$/;
+
+/**
+ * Enum for type of confirm link.
+ * @readonly
+ */
+export const CategoryType = Object.freeze({
+  Personal: 0,
+  Shared: 1,
+  SharedRoom: 2,
+  Archive: 3,
+  ArchivedRoom: 4,
+  Favorite: 5,
+  Recent: 6,
+  Trash: 7,
+  Settings: 8,
+  Accounts: 9,
+  PublicRoom: 10,
+  Flows: 11,
+  SharedWithMe: 12,
+});

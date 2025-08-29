@@ -30,7 +30,11 @@ import { useNavigate, useLocation, useParams } from "react-router";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
-import { CREATED_FORM_KEY, MEDIA_VIEW_URL } from "@docspace/shared/constants";
+import {
+  CREATED_FORM_KEY,
+  MEDIA_VIEW_URL,
+  CategoryType,
+} from "@docspace/shared/constants";
 import { toastr } from "@docspace/shared/components/toast";
 import {
   Events,
@@ -41,7 +45,6 @@ import {
 import { getObjectByLocation } from "@docspace/shared/utils/common";
 
 import { getCategoryType, getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { CategoryType } from "SRC_DIR/helpers/constants";
 import FilesStore from "SRC_DIR/store/FilesStore";
 import MediaViewerDataStore from "SRC_DIR/store/MediaViewerDataStore";
 import OformsStore from "SRC_DIR/store/OformsStore";

@@ -195,6 +195,8 @@ export interface LinkParamsType {
   updateLink?: (newLink: TFileLink) => void;
 }
 
+export type ValueOf<T> = T[keyof T];
+
 declare global {
   interface Window {
     firebaseHelper: FirebaseHelper;

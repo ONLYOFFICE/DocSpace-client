@@ -69,6 +69,7 @@ import {
   PDF_FORM_DIALOG_KEY,
   ROOMS_PROVIDER_TYPE_NAME,
   thumbnailStatuses,
+  CategoryType,
 } from "@docspace/shared/constants";
 
 import {
@@ -79,7 +80,6 @@ import {
 
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 
-import { CategoryType } from "SRC_DIR/helpers/constants";
 import debounce from "lodash.debounce";
 import Queue from "queue-promise";
 import {

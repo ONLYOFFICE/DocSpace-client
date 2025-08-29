@@ -7,7 +7,7 @@ import {
   FILTER_ROOM_DOCUMENTS,
 } from "@docspace/shared/utils/filterConstants";
 
-import { CategoryType } from "SRC_DIR/helpers/constants";
+import { CategoryType } from "@docspace/shared/constants";
 
 import { getCategoryUrl, getCategoryTypeByFolderType } from "./utils";
 

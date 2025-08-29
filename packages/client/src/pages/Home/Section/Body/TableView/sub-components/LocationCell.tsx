@@ -33,7 +33,7 @@ import { globalColors } from "@docspace/shared/themes";
 import { Text } from "@docspace/shared/components/text";
 import { getFolderPath } from "@docspace/shared/api/files";
 
-import { CategoryType } from "SRC_DIR/helpers/constants";
+import { CategoryType } from "@docspace/shared/constants";
 
 import { StyledText } from "./CellStyles";
 

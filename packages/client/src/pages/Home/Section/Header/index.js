@@ -55,7 +55,7 @@ import {
   WhiteLabelLogoType,
 } from "@docspace/shared/enums";
 
-import { CategoryType } from "SRC_DIR/helpers/constants";
+import { CategoryType } from "@docspace/shared/constants";
 import {
   getCategoryTypeByFolderType,
   getCategoryUrl,

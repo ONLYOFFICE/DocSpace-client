@@ -93,7 +93,6 @@ import {
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import { muteRoomNotification } from "@docspace/shared/api/settings";
-import { CategoryType } from "SRC_DIR/helpers/constants";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import UsersFilter from "@docspace/shared/api/people/filter";
 import GroupsFilter from "@docspace/shared/api/groups/filter";
@@ -118,7 +117,7 @@ import { getContactsView } from "SRC_DIR/helpers/contacts";
 import { createFolderNavigation } from "SRC_DIR/helpers/createFolderNavigation";
 import { hideInfoPanel, showInfoPanel } from "SRC_DIR/helpers/info-panel";
 
-import { OPERATIONS_NAME } from "@docspace/shared/constants";
+import { OPERATIONS_NAME, CategoryType } from "@docspace/shared/constants";
 import { checkProtocol } from "../helpers/files-helpers";
 
 class FilesActionStore {

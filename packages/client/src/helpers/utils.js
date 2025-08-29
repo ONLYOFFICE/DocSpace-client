@@ -27,7 +27,7 @@
 import { authStore, settingsStore } from "@docspace/shared/store";
 import { toCommunityHostname } from "@docspace/shared/utils/common";
 import { FolderType } from "@docspace/shared/enums";
-import { CategoryType } from "./constants";
+import { CategoryType } from "@docspace/shared/constants";
 
 import { PEOPLE_ROUTE_WITH_FILTER } from "./contacts";
 

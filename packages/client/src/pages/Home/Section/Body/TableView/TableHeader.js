@@ -457,6 +457,7 @@ class FilesTableHeader extends React.Component {
       authorFavoritesColumnIsEnabled,
       sizeFavoritesColumnIsEnabled,
       typeFavoritesColumnIsEnabled,
+      modifiedFavoritesColumnIsEnabled,
     } = this.props;
 
     const columns = [
@@ -480,6 +481,15 @@ class FilesTableHeader extends React.Component {
         title: t("Common:Location"),
         enable: locationFavoritesColumnIsEnabled,
         resizable: true,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "ModifiedFavorites",
+        title: t("ByLastModified"),
+        enable: modifiedFavoritesColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.ModifiedDate,
+        onClick: this.onFilter,
         onChange: this.onColumnChange,
       },
       {
@@ -945,6 +955,7 @@ export default inject(
       authorFavoritesColumnIsEnabled,
       sizeFavoritesColumnIsEnabled,
       typeFavoritesColumnIsEnabled,
+      modifiedFavoritesColumnIsEnabled,
 
       indexVDRColumnIsEnabled,
       authorVDRColumnIsEnabled,
@@ -1026,6 +1037,7 @@ export default inject(
       authorFavoritesColumnIsEnabled,
       sizeFavoritesColumnIsEnabled,
       typeFavoritesColumnIsEnabled,
+      modifiedFavoritesColumnIsEnabled,
 
       indexVDRColumnIsEnabled,
       authorVDRColumnIsEnabled,

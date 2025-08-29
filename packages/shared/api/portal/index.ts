@@ -493,7 +493,7 @@ export async function getTransactionHistory(
   startDate: string,
   endDate: string,
   credit: boolean = true,
-  withdrawal: boolean = true,
+  debit: boolean = true,
   participantName: string = "",
   offset: number = 0,
   limit: number = 25,
@@ -502,7 +502,7 @@ export async function getTransactionHistory(
     startDate,
     endDate,
     credit,
-    withdrawal,
+    debit,
     offset,
     limit,
   };

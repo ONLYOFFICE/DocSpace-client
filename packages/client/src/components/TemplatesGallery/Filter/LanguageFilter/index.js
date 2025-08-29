@@ -61,12 +61,10 @@ const LanguageFilter = ({
   setLanguageFilterLoaded,
   categoryFilterLoaded,
   languageFilterLoaded,
-  // oformFilesLoaded,
+  oformFilesLoaded,
   oformsLocal,
   isMobileView,
 }) => {
-  const convertedLocales = oformLocales.map((item) => convertToCulture(item));
-
   const onFilterByLocale = async (newLocale) => {
     const key = getOformLocaleByIndex(newLocale.index, oformLocales);
 
@@ -82,17 +80,13 @@ const LanguageFilter = ({
     setLanguageFilterLoaded(oformLocales && oformLocales?.length !== 0);
   }, [oformLocales, oformLocales?.length]);
 
-  // if (
-  //   filterOformsByLocaleIsLoading ||
-  //   !(categoryFilterLoaded && languageFilterLoaded && oformFilesLoaded)
-  // )
-  //   return <RectangleSkeleton width="41px" height="32px" />;
-
   if (
     filterOformsByLocaleIsLoading ||
-    !(categoryFilterLoaded && languageFilterLoaded)
+    !(categoryFilterLoaded && languageFilterLoaded && oformFilesLoaded)
   )
     return <RectangleSkeleton width="41px" height="32px" />;
+
+  const convertedLocales = oformLocales.map((item) => convertToCulture(item));
 
   return (
     <LanguageCombobox

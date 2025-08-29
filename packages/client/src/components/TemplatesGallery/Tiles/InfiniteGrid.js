@@ -174,85 +174,130 @@ const InfiniteGrid = (props) => {
     };
   });
 
-  let currentRowSpan = 0; // Track how many grid columns are used in current row
+  // If showLoading is true, show 3 rows of skeletons instead of content
+  if (showLoading) {
+    // Create 3 rows of skeleton tiles
+    for (let row = 0; row < 3; row++) {
+      cards = [];
 
-  React.Children.map(children, (child) => {
-    if (child) {
-      // Check if this is a SubmitToGalleryTile that will span 2 columns
-      const isSubmitTile = child?.props?.isSubmitTile === true;
-      const elementSpan = smallPreview && isSubmitTile ? 2 : 1;
+      // Fill each row with skeleton tiles
+      for (let col = 0; col < countTilesInRow; col++) {
+        const key = `skeleton-loader_${row}_${col}`;
+        cards.push(
+          <StyledSkeletonTile
+            key={key}
+            className="tiles-loader isTemplate Card"
+            $height={averageCardHeight ? `${averageCardHeight}px` : "200px"}
+            $minHeight={averageCardHeight ? `${averageCardHeight}px` : "200px"}
+          >
+            <div className="loader-container">
+              <RectangleSkeleton
+                className="image-skeleton"
+                height={
+                  averageCardHeight ? `${averageCardHeight - 50}px` : "150px"
+                }
+                width="100%"
+                animate
+              />
 
-      // If adding this element would exceed the row capacity, start a new row
-      if (
-        currentRowSpan > 0 &&
-        currentRowSpan + elementSpan > countTilesInRow
-      ) {
-        const listKey = uniqueid("list-item_");
-        addItemToList(listKey, true, isShowOneTile);
-        currentRowSpan = 0;
-      }
-
-      const cardKey = uniqueid("card-item_");
-      cards.push(
-        <Card
-          countTilesInRow={countTilesInRow}
-          smallPreview={smallPreview}
-          key={cardKey}
-        >
-          {child}
-        </Card>,
-      );
-
-      currentRowSpan += elementSpan;
-
-      // If we've filled the row exactly, start a new row
-      if (currentRowSpan === countTilesInRow) {
-        const listKey = uniqueid("list-item_");
-        addItemToList(listKey, true, isShowOneTile);
-        currentRowSpan = 0;
-      }
-    }
-  });
-
-  if (hasMoreFiles) {
-    // If cards elements are full, it will add the full line of loaders
-    if (cards.length === countTilesInRow) {
-      addItemToList("loaded-row", true, isShowOneTile);
-    }
-
-    // Added line of loaders
-    while (countTilesInRow > cards.length && cards.length !== countTilesInRow) {
-      const key = `tiles-loader_${countTilesInRow - cards.length}`;
-      cards.push(
-        <StyledSkeletonTile
-          key={key}
-          className="tiles-loader isTemplate Card"
-          $height={averageCardHeight ? `${averageCardHeight}px` : "auto"}
-          $minHeight={averageCardHeight ? `${averageCardHeight}px` : "auto"}
-        >
-          <div className="loader-container">
-            <RectangleSkeleton
-              className="image-skeleton"
-              height={
-                averageCardHeight ? `${averageCardHeight - 50}px` : "120px"
-              }
-              width="100%"
-              animate
-            />
-
-            <div className="loader-title">
-              <RectangleSkeleton height="20px" animate />
+              <div className="loader-title">
+                <RectangleSkeleton height="20px" animate />
+              </div>
             </div>
-          </div>
-        </StyledSkeletonTile>,
-      );
-    }
+          </StyledSkeletonTile>,
+        );
+      }
 
-    addItemToList("loaded-row", false, isShowOneTile);
-  } else if (cards.length) {
-    // Adds loaders until the row is full
-    const listKey = uniqueid("list-item_");
-    addItemToList(listKey, false, isShowOneTile);
+      const listKey = uniqueid(`skeleton-row_${row}`);
+      addItemToList(listKey, true, isShowOneTile);
+    }
+  } else {
+    let currentRowSpan = 0; // Track how many grid columns are used in current row
+
+    React.Children.map(children, (child) => {
+      if (child) {
+        // Check if this is a SubmitToGalleryTile that will span 2 columns
+        const isSubmitTile = child?.props?.isSubmitTile === true;
+        const elementSpan = smallPreview && isSubmitTile ? 2 : 1;
+
+        // If adding this element would exceed the row capacity, start a new row
+        if (
+          currentRowSpan > 0 &&
+          currentRowSpan + elementSpan > countTilesInRow
+        ) {
+          const listKey = uniqueid("list-item_");
+          addItemToList(listKey, true, isShowOneTile);
+          currentRowSpan = 0;
+        }
+
+        const cardKey = uniqueid("card-item_");
+        cards.push(
+          <Card
+            countTilesInRow={countTilesInRow}
+            smallPreview={smallPreview}
+            key={cardKey}
+          >
+            {child}
+          </Card>,
+        );
+
+        currentRowSpan += elementSpan;
+
+        // If we've filled the row exactly, start a new row
+        if (currentRowSpan === countTilesInRow) {
+          const listKey = uniqueid("list-item_");
+          addItemToList(listKey, true, isShowOneTile);
+          currentRowSpan = 0;
+        }
+      }
+    });
+  }
+
+  // Only add infinite loading skeletons if not in showLoading state
+  if (!showLoading) {
+    if (hasMoreFiles) {
+      // If cards elements are full, it will add the full line of loaders
+      if (cards.length === countTilesInRow) {
+        addItemToList("loaded-row", true, isShowOneTile);
+      }
+
+      // Added line of loaders
+      while (
+        countTilesInRow > cards.length &&
+        cards.length !== countTilesInRow
+      ) {
+        const key = `tiles-loader_${countTilesInRow - cards.length}`;
+        cards.push(
+          <StyledSkeletonTile
+            key={key}
+            className="tiles-loader isTemplate Card"
+            $height={averageCardHeight ? `${averageCardHeight}px` : "auto"}
+            $minHeight={averageCardHeight ? `${averageCardHeight}px` : "auto"}
+          >
+            <div className="loader-container">
+              <RectangleSkeleton
+                className="image-skeleton"
+                height={
+                  averageCardHeight ? `${averageCardHeight - 50}px` : "120px"
+                }
+                width="100%"
+                animate
+              />
+
+              <div className="loader-title">
+                <RectangleSkeleton height="20px" animate />
+              </div>
+            </div>
+          </StyledSkeletonTile>,
+        );
+      }
+
+      addItemToList("loaded-row", false, isShowOneTile);
+    } else if (cards.length) {
+      // Adds loaders until the row is full
+      const listKey = uniqueid("list-item_");
+      addItemToList(listKey, false, isShowOneTile);
+    }
   }
 
   return (
@@ -279,7 +324,7 @@ export default inject(({ oformsStore, infoPanelStore }) => {
   const { oformFiles, hasMoreForms, oformsFilterTotal, fetchMoreOforms } =
     oformsStore;
 
-  const filesLength = oformFiles.length;
+  const filesLength = oformFiles?.length;
   const { isVisible } = infoPanelStore;
 
   return {

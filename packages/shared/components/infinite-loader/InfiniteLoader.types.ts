@@ -45,6 +45,7 @@ export type InfiniteLoaderProps = {
   showSkeleton?: boolean;
   currentFolderId?: string | number;
   smallPreview?: boolean;
+  isOneTile?: boolean;
 };
 
 export type ListComponentProps = InfiniteLoaderProps & {
@@ -67,5 +68,5 @@ export type GridDynamicHeightProps = {
   showSkeleton?: boolean;
   itemCount: number;
   filesLength: number;
-  isOneTile: boolean;
+  isOneTile?: boolean;
 };

@@ -151,13 +151,26 @@ const GridDynamicHeight = ({
         const targetHeight =
           globalMinHeight === Infinity ? 120 : globalMinHeight;
 
-        // Apply the global minimum height to ALL cards in ALL rows (including submit tile)
+        // Apply height only to rows that have cards taller than the minimum
         rows.forEach((row) => {
           const cards = row.querySelectorAll(".Card");
+          let rowNeedsAdjustment = false;
+
+          // Check if this row has any cards taller than the minimum
           cards.forEach((card) => {
-            (card as HTMLElement).style.height = `${targetHeight}px`;
-            (card as HTMLElement).style.minHeight = `${targetHeight}px`;
+            const cardHeight = (card as HTMLElement).offsetHeight;
+            if (cardHeight > 0 && cardHeight > targetHeight + 2) {
+              rowNeedsAdjustment = true;
+            }
           });
+
+          // Only adjust height for rows that need it
+          if (rowNeedsAdjustment) {
+            cards.forEach((card) => {
+              (card as HTMLElement).style.height = `${targetHeight}px`;
+              (card as HTMLElement).style.minHeight = `${targetHeight}px`;
+            });
+          }
         });
       } else {
         // For normal view: find the global maximum height across ALL rows
@@ -173,14 +186,27 @@ const GridDynamicHeight = ({
           });
         });
 
-        // Apply the global maximum height to ALL cards in ALL rows
+        // Apply height only to rows that have cards shorter than the maximum
         if (globalMaxHeight > 0) {
           rows.forEach((row) => {
             const cards = row.querySelectorAll(".Card");
+            let rowNeedsAdjustment = false;
+
+            // Check if this row has any cards shorter than the maximum
             cards.forEach((card) => {
-              (card as HTMLElement).style.height = `${globalMaxHeight}px`;
-              (card as HTMLElement).style.minHeight = `${globalMaxHeight}px`;
+              const cardHeight = (card as HTMLElement).offsetHeight;
+              if (cardHeight > 0 && cardHeight < globalMaxHeight - 2) {
+                rowNeedsAdjustment = true;
+              }
             });
+
+            // Only adjust height for rows that need it
+            if (rowNeedsAdjustment) {
+              cards.forEach((card) => {
+                (card as HTMLElement).style.height = `${globalMaxHeight}px`;
+                (card as HTMLElement).style.minHeight = `${globalMaxHeight}px`;
+              });
+            }
           });
         }
       }

@@ -32,6 +32,9 @@ import { Tabs } from "@docspace/shared/components/tabs";
 import { isMobile } from "@docspace/shared/utils";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
+
+import OformsFilter from "@docspace/shared/api/oforms/filter";
+
 import Form from "./Form";
 import styles from "./TemplatesGallery.module.scss";
 
@@ -48,35 +51,62 @@ const TemplatesGallery = (props: {
   templatesGalleryVisible: boolean;
   setTemplatesGalleryVisible: (isVisible: boolean) => void;
   setCurrentExtensionGallery: (extension: string) => void;
+  fetchOforms: (filter: OformsFilter) => Promise<unknown>;
 }) => {
   const {
     templatesGalleryVisible,
     setTemplatesGalleryVisible,
     setCurrentExtensionGallery,
+    fetchOforms,
   } = props;
   const [viewMobile, setViewMobile] = useState(false);
   const [currentTabId, setCurrentTabId] = useState("documents");
+
+  const getData = async (ext: string) => {
+    const firstLoadFilter =
+      ext === ".docx"
+        ? OformsFilter.getDefaultDocx()
+        : ext === ".xlsx"
+          ? OformsFilter.getDefaultSpreadsheet()
+          : ext === ".pptx"
+            ? OformsFilter.getDefaultPresentation()
+            : OformsFilter.getDefault();
+
+    await fetchOforms(firstLoadFilter);
+  };
 
   const tabs = [
     {
       id: "documents",
       name: "Documents",
       content: <FormComponent tabDocuments />,
+      onClick: async () => {
+        await getData(".docx");
+      },
     },
     {
       id: "spreadsheet",
       name: "Spreadsheet",
       content: <FormComponent tabSpreadsheet />,
+      onClick: async () => {
+        await getData(".xlsx");
+      },
     },
     {
       id: "presentation",
       name: "Presentation",
       content: <FormComponent tabPresentation />,
+      onClick: async () => {
+        await getData(".pptx");
+      },
     },
     {
       id: "forms",
       name: "Forms",
-      content: <FormComponent />,
+      content: <FormComponent tabForm />,
+      onClick: async () => {
+        await getData(".pdf");
+      },
     },
   ];
 
@@ -134,6 +164,7 @@ const TemplatesGallery = (props: {
               items={tabs}
               selectedItemId={currentTabId}
               onSelect={onSelect}
+              withAnimation
             />
           </div>
         </div>
@@ -182,11 +213,13 @@ export default inject<TStore>(({ oformsStore }) => {
     templatesGalleryVisible,
     setTemplatesGalleryVisible,
     setCurrentExtensionGallery,
+    fetchOforms,
   } = oformsStore;
 
   return {
     templatesGalleryVisible,
     setTemplatesGalleryVisible,
     setCurrentExtensionGallery,
+    fetchOforms,
   };
 })(observer(TemplatesGallery));

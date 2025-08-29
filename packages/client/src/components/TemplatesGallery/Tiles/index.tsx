@@ -57,6 +57,7 @@ const Tiles: FC<TilesProps> = ({
   viewMobile,
   onCreateOform,
   setTemplatesGalleryVisible,
+  isInitLoading,
 }) => {
   const navigate = useNavigate();
 
@@ -83,7 +84,7 @@ const Tiles: FC<TilesProps> = ({
   }, [onMouseDown]);
 
   useEffect(() => {
-    setOformFilesLoaded(tReady && oformFiles.length > 0);
+    setOformFilesLoaded(tReady && oformFiles?.length > 0);
   }, [tReady, oformFiles]);
 
   const onClickInfo = (item: { id: Key | null | undefined }) => {
@@ -109,20 +110,26 @@ const Tiles: FC<TilesProps> = ({
 
   return (
     <StyledTileContainer className="tile-container">
-      {viewMobile ? submitToGalleryTileNode : null}
-      <InfiniteGrid isShowOneTile={isShowOneTile} smallPreview={smallPreview}>
-        {viewMobile ? null : submitToGalleryTileNode}
-        {oformFiles.map((item: { id: Key | null | undefined }) => {
-          return (
-            <FileTile
-              key={item.id}
-              item={item}
-              smallPreview={smallPreview}
-              onClickInfo={() => onClickInfo(item)}
-              onClick={() => onClick(item)}
-            />
-          );
-        })}
+      {viewMobile && !isInitLoading ? submitToGalleryTileNode : null}
+      <InfiniteGrid
+        isShowOneTile={isShowOneTile}
+        smallPreview={smallPreview}
+        showLoading={isInitLoading}
+      >
+        {viewMobile && !isInitLoading ? null : submitToGalleryTileNode}
+        {isInitLoading
+          ? null
+          : oformFiles.map((item: { id: Key | null | undefined }) => {
+              return (
+                <FileTile
+                  key={item.id}
+                  item={item}
+                  smallPreview={smallPreview}
+                  onClickInfo={() => onClickInfo(item)}
+                  onClick={() => onClick(item)}
+                />
+              );
+            })}
       </InfiniteGrid>
     </StyledTileContainer>
   );

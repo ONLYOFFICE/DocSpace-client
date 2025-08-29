@@ -89,7 +89,7 @@ const CategoryFilter = ({
   setCategoryFilterLoaded,
   categoryFilterLoaded,
   languageFilterLoaded,
-  // oformFilesLoaded,
+  oformFilesLoaded,
 }) => {
   const [menuItems, setMenuItems] = useState([]);
 
@@ -142,15 +142,9 @@ const CategoryFilter = ({
     setCategoryFilterLoaded(menuItems.length !== 0);
   }, [menuItems.length]);
 
-  // if (
-  //   filterOformsByLocaleIsLoading ||
-  //   !(categoryFilterLoaded && languageFilterLoaded && oformFilesLoaded)
-  // )
-  //   return <StyledSkeleton $noLocales={noLocales} />;
-
   if (
     filterOformsByLocaleIsLoading ||
-    !(categoryFilterLoaded && languageFilterLoaded)
+    !(categoryFilterLoaded && languageFilterLoaded && oformFilesLoaded)
   )
     return <StyledSkeleton $noLocales={noLocales} />;
 

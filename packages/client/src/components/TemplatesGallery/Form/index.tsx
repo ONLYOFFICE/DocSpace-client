@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { observer, inject } from "mobx-react";
 import { useLocation } from "react-router";
 
@@ -34,6 +34,8 @@ import { isMobile } from "@docspace/shared/utils";
 import type { FC } from "react";
 
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import { Scrollbar as CustomScrollbar } from "@docspace/shared/components/scrollbar/custom-scrollbar";
+
 import SectionFilterContent from "../Filter";
 import Tiles from "../Tiles";
 
@@ -47,6 +49,7 @@ type FormProps = {
   tabDocuments?: boolean;
   tabSpreadsheet?: boolean;
   tabPresentation?: boolean;
+  tabForm?: boolean;
 };
 
 const Form: FC<FormProps> = ({
@@ -59,6 +62,7 @@ const Form: FC<FormProps> = ({
   tabDocuments,
   tabSpreadsheet,
   tabPresentation,
+  tabForm,
 }) => {
   const location = useLocation();
   // const navigate = useNavigate();
@@ -67,6 +71,8 @@ const Form: FC<FormProps> = ({
   const [isShowOneTile, setShowOneTile] = useState(false);
 
   const [viewMobile, setViewMobile] = useState(false);
+
+  const scrollRef = useRef<CustomScrollbar>(null);
 
   const onCheckView = () => setViewMobile(isMobile());
 
@@ -78,38 +84,29 @@ const Form: FC<FormProps> = ({
   }, [onCheckView]);
 
   useEffect(() => {
-    console.log("location", location);
+    if (!tabDocuments) return;
 
-    const firstLoadFilter = tabDocuments
-      ? OformsFilter.getDefaultDocx()
-      : tabSpreadsheet
-        ? OformsFilter.getDefaultSpreadsheet()
-        : tabPresentation
-          ? OformsFilter.getDefaultPresentation()
-          : OformsFilter.getDefault();
+    const firstLoadFilter = OformsFilter.getDefaultDocx();
 
-    console.log("firstLoadFilter", firstLoadFilter);
-    if (firstLoadFilter) {
-      Promise.all([fetchOforms(firstLoadFilter), fetchOformLocales()]).finally(
-        () => {
-          setIsInitLoading(false);
-        },
-      );
-    }
-  }, [tabDocuments, tabPresentation, tabSpreadsheet]);
+    Promise.all([fetchOforms(firstLoadFilter), fetchOformLocales()]).finally(
+      () => {
+        setIsInitLoading(false);
+      },
+    );
+  }, [tabDocuments]);
 
   useEffect(() => {
-    if (!isInitLoading) {
+    if (!isInitLoading)
       if (!oformsFilter.locale) oformsFilter.locale = defaultOformLocale;
-      // navigate(`${location.pathname}?${oformsFilter.toUrlParams()}`);
-    }
-  }, [oformsFilter]);
+  }, [oformsFilter, isInitLoading]);
 
   useEffect(() => {
     if (!currentCategory) fetchCurrentCategory();
   }, [oformsFilter.categorizeBy, oformsFilter.categoryId]);
 
-  if (isInitLoading) return null;
+  useEffect(() => {
+    if (scrollRef.current) scrollRef.current.scrollToTop();
+  }, [tabDocuments, tabSpreadsheet, tabPresentation, tabForm]);
 
   return (
     <div style={{ width: "100%" }}>
@@ -122,19 +119,26 @@ const Form: FC<FormProps> = ({
         <Scrollbar
           style={{ height: "calc(100vh - 227px)", width: "calc(100% + 16px)" }}
           id="scroll-templates-gallery"
+          ref={scrollRef}
         >
           <Tiles
             isShowOneTile={isShowOneTile}
             smallPreview={tabPresentation || tabSpreadsheet}
             viewMobile={viewMobile}
+            isInitLoading={isInitLoading}
           />
         </Scrollbar>
       ) : (
         <Scrollbar
           style={{ height: "calc(100vh - 286px)", width: "calc(100% + 16px)" }}
           id="scroll-templates-gallery"
+          ref={scrollRef}
         >
-          <Tiles smallPreview={tabPresentation || tabSpreadsheet} />
+          <Tiles
+            isShowOneTile={false}
+            smallPreview={tabPresentation || tabSpreadsheet}
+            isInitLoading={isInitLoading}
+          />
         </Scrollbar>
       )}
     </div>

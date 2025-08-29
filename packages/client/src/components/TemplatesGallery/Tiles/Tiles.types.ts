@@ -56,6 +56,7 @@ export interface TilesProps {
   viewMobile: boolean;
   onCreateOform: (navigate: NavigateFunction) => void;
   setTemplatesGalleryVisible: (isVisible: boolean) => void;
+  isInitLoading: boolean;
 }
 
 export interface TileProps {

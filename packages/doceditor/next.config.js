@@ -77,6 +77,7 @@ if (process.env.DEPLOY) {
 
 module.exports = {
   webpack(config) {
+    const isProduction = config.mode === "production";
     // Add resolve configuration for shared package
     config.resolve = {
       ...config.resolve,
@@ -86,9 +87,11 @@ module.exports = {
       },
     };
 
-    // config.devtool = "source-map";
+    config.devtool = isProduction
+      ? "source-map"
+      : "eval-cheap-module-source-map";
 
-    if (config.mode === "production") {
+    if (isProduction) {
       config.optimization = {
         splitChunks: { chunks: "all" },
         minimize: true,

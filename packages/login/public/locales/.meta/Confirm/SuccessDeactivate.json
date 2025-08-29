@@ -3,7 +3,7 @@
   "content": "Your account has been successfully deactivated. In 10 seconds you will be redirected to the <1>site</1>.",
   "content_en_sha1_hash": "d6d11d0d371364467018610063c9cdc6f6c7d21c",
   "created_at": "2025-05-19T21:30:57.396Z",
-  "updated_at": "2025-06-30T12:20:31.660Z",
+  "updated_at": "2025-08-21T11:22:39.931Z",
   "comment": {
     "text": "This translation key displays a message confirming account deactivation and provides information about the redirect to another site after 10 seconds. It is used in a UI confirmation page where the user's account has been successfully deactivated.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/login/src/app/(root)/confirm/PortalSuspend/page.client.tsx",
       "line_number": 88,
-      "context": "window.location.href = \"/\";\n };\n \n return isDeactivate ? (\n <Text>\n <Trans t={t} i18nKey=\"SuccessDeactivate\" ns=\"Confirm\">\n Your account has been successfully deactivated. In 10 seconds you will\n be redirected to the\n <Link isHovered href={url}>\n site\n </Link>",
+      "context": "window.location.href = \"/\";\n };\n \n return isDeactivate ? (\n <Text>\n <Trans t={t} i18nKey=\"SuccessDeactivate\" ns=\"Confirm\">\n Your account has been successfully deactivated. In 10 seconds you will\n be redirected to the\n <Link isHovered href={url} dataTestId=\"redirect_site_link\">\n site\n </Link>",
       "module": "/packages/login"
     }
   ],

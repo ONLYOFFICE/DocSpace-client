@@ -42,7 +42,7 @@ import { InputBlock } from "../input-block";
 import { Link, LinkType } from "../link";
 import { Text } from "../text";
 import { Tooltip } from "../tooltip";
-import { InputType } from "../text-input";
+import { InputSize, InputType } from "../text-input";
 
 import { PasswordInputProps, TPasswordSettings } from "./PasswordInput.types";
 import { globalColors } from "../../themes";
@@ -361,6 +361,7 @@ const PasswordInput = ({
   );
 
   const renderInputGroup = () => {
+    const effectiveSize = size ?? InputSize.middle;
     const { type, value } = state;
     const iconNode =
       type === "password" ? (
@@ -391,7 +392,7 @@ const PasswordInput = ({
           onIconClick={changeInputType}
           onChange={onChangeAction}
           scale={scale}
-          size={size}
+          size={effectiveSize}
           type={isSimulateType ? InputType.text : type}
           iconSize={16}
           isIconFill
@@ -412,7 +413,7 @@ const PasswordInput = ({
             place="top"
             clickable
             openOnClick
-            anchorSelect="div[id='tooltipContent'] input"
+            anchorSelect={`div[id='tooltipContent-${id || inputName}'] input`}
             ref={refTooltip}
             imperativeModeOnly
           >
@@ -450,7 +451,7 @@ const PasswordInput = ({
         <>
           <div className="password-field-wrapper">
             <div
-              id="tooltipContent"
+              id={`tooltipContent-${id || inputName}`}
               data-testid="tooltipContent"
               ref={refProgress}
               className={classNames(styles.passwordProgress, {

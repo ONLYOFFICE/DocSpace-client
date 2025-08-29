@@ -38,14 +38,6 @@
           padding-left: 48px;
         }
 
-        &.big {
-          padding-left: 53px;
-        }
-
-        &.huge {
-          padding-left: 58px;
-        }
-
         &.large {
           padding-left: 64px;
         }
@@ -70,17 +62,7 @@
 
   &.middle {
     width: 300px;
-    max-height: 38px;
-  }
-
-  &.big {
-    width: 350px;
-    max-height: 38px;
-  }
-
-  &.huge {
-    width: 500px;
-    max-height: 39px;
+    max-height: 32px;
   }
 
   &.large {
@@ -153,14 +135,6 @@
       padding-right: 48px;
     }
 
-    &.big {
-      padding-right: 53px;
-    }
-
-    &.huge {
-      padding-right: 58px;
-    }
-
     &.large {
       padding-right: 64px;
     }
@@ -213,24 +187,10 @@
 
   border-radius: 0 3px 3px 0;
 
-  &.base {
+  &.base,
+  &.middle {
     width: 30px;
     height: 30px;
-  }
-
-  &.middle {
-    width: 36px;
-    height: 36px;
-  }
-
-  &.big {
-    width: 37px;
-    height: 36px;
-  }
-
-  &.huge {
-    width: 38px;
-    height: 37px;
   }
 
   &.large {
@@ -272,18 +232,10 @@
 
   .iconButton {
     &.base {
-      width: 15px;
-    }
-
-    &.middle {
-      width: 15px;
-    }
-
-    &.big {
       width: 16px;
     }
 
-    &.huge {
+    &.middle {
       width: 16px;
     }
 

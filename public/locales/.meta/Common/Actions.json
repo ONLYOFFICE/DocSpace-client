@@ -3,7 +3,7 @@
   "content": "Actions",
   "content_en_sha1_hash": "c3cd636a585b20c40ac2df5ffb403e83cb2eef51",
   "created_at": "2025-05-19T21:30:42.878Z",
-  "updated_at": "2025-08-11T18:11:59.096Z",
+  "updated_at": "2025-08-26T11:15:14.046Z",
   "comment": {
     "text": "This translation key is used to display a button or label that indicates actions available in an article or profile section. It appears on a main button and in some header sections, where it shows a title such as \"Actions\" or \"Invite\", depending on the context.",
     "is_auto": true,
@@ -30,13 +30,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/VersionHistory/Section/Body/VersionRow.js",
-      "line_number": 261,
-      "context": "contextOptions={contextOptions}\n canEdit={canChangeVersionFileHistory}\n isTabletView={isTabletView}\n isSavingComment={isSavingComment}\n isEditing={isEditing}\n contextTitle={t(\"Common:Actions\")}\n versionDeleteProcess={versionDeletionProcess}\n versionDeleteRow={\n versionDeletionProcess\n ? versionSelectedForDeletion === info.versionGroup\n : null",
+      "line_number": 262,
+      "context": "contextOptions={contextOptions}\n canEdit={canChangeVersionFileHistory}\n isTabletView={isTabletView}\n isSavingComment={isSavingComment}\n isEditing={isEditing}\n contextTitle={t(\"Common:Actions\")}\n versionDeleteProcess={versionDeletionProcess}\n dataTestId={dataTestId}\n versionDeleteRow={\n versionDeletionProcess\n ? versionSelectedForDeletion === info.versionGroup",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2275,
+      "line_number": 2288,
       "context": "});\n } else {\n options.splice(1, 0, {\n id: \"option_plugin-actions\",\n key: \"plugin_actions\",\n label: t(\"Common:Actions\"),\n icon: PluginActionsSvgUrl,\n disabled: false,\n \n onLoad: () => this.onLoadPlugins(item),\n });",
       "module": "/packages/client"
     },
@@ -48,7 +48,7 @@
     },
     {
       "file_path": "/packages/shared/dialogs/download-dialog/sub-components/PasswordRow.tsx",
-      "line_number": 184,
+      "line_number": 178,
       "context": "<div className={styles.downloadDialogActions}>\n <ContextMenuButton\n className=\"expandButton\"\n directionX=\"left\"\n getData={getOptions}\n title={t(\"Common:Actions\")}\n isDisabled={false}\n usePortal\n iconName={VerticalDotsReactSvgUrl}\n />\n </div>",
       "module": "/packages/shared"
     }

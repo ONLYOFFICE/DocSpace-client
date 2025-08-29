@@ -24,8 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import moment from "moment";
-import { TCreatedBy, TPathParts } from "../../types";
+import type { TCreatedBy, TPathParts } from "../../types";
 import type {
   EmployeeActivationStatus,
   EmployeeStatus,
@@ -37,7 +36,7 @@ import type {
   RoomsType,
   ShareAccessRights,
 } from "../../enums";
-import { TUser } from "../people/types";
+import type { TUser } from "../people/types";
 import type { TRoom } from "../rooms/types";
 
 export type TFileViewAccessibility = {
@@ -91,6 +90,11 @@ export type TAvailableExternalRights = {
   FillForms: boolean;
 };
 
+export type TShareSettings = {
+  ExternalLink?: number;
+  PrimaryExternalLink?: number;
+};
+
 export type TFile = {
   isFile?: boolean;
   access: ShareAccessRights;
@@ -106,7 +110,10 @@ export type TFile = {
   fileType: FileType;
   folderId: number;
   id: number;
+  parentRoomType?: FolderType;
+  shareSettings?: TShareSettings;
   mute: boolean;
+  parentShared?: boolean;
   pureContentLength: number;
   rootFolderId: number;
   rootFolderType: FolderType;
@@ -136,6 +143,10 @@ export type TFile = {
   hasDraft?: boolean;
   order?: string;
   lockedBy?: string;
+  originId?: number;
+  originRoomTitle?: string;
+  originTitle?: string;
+  requestToken?: string;
 };
 
 export type TOpenEditRequest = {
@@ -221,9 +232,12 @@ export type TFolder = {
   indexing: boolean;
   denyDownload: boolean;
   fileEntryType: number;
-  parentRoomType?: number;
+  parentShared?: boolean;
+  parentRoomType?: FolderType;
   order?: string;
   isRoom?: false;
+  shareSettings?: TShareSettings;
+  availableExternalRights?: TAvailableExternalRights;
 };
 
 export type TGetFolderPath = TFolder[];
@@ -442,6 +456,9 @@ export type TDocServiceLocation = {
 export type TFileLink = {
   access: ShareAccessRights;
   canEditAccess: boolean;
+  canEditDenyDownload: boolean;
+  canEditInternal: boolean;
+  canEditExpirationDate: boolean;
   isLocked: boolean;
   isOwner: boolean;
   sharedTo: {
@@ -453,8 +470,8 @@ export type TFileLink = {
     requestToken: string;
     shareLink: string;
     title: string;
-    expirationDate?: moment.Moment | null;
-    internal?: boolean;
+    expirationDate?: string | null;
+    internal: boolean;
     password?: string;
   };
   subjectType: number;

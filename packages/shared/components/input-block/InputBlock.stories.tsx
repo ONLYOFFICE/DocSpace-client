@@ -143,17 +143,6 @@ export const Password: Story = {
   },
 };
 
-export const CustomColors: Story = {
-  render: (args) => <Template {...args} />,
-  args: {
-    ...defaultArgs,
-    id: "custom-colors-input",
-    iconColor: "#6c2bd9",
-    hoverColor: "#4c1d95",
-    placeholder: "Custom icon colors",
-  },
-};
-
 export const Sizes: Story = {
   args: defaultArgs,
   render: () => (
@@ -172,26 +161,10 @@ export const Sizes: Story = {
       />
       <Template
         {...defaultArgs}
-        id="big-size"
-        size={InputSize.big}
-        placeholder="Big size"
-      />
-      <Template
-        {...defaultArgs}
-        id="huge-size"
-        size={InputSize.huge}
-        placeholder="Huge size"
+        id="large-size"
+        size={InputSize.large}
+        placeholder="Large size"
       />
     </div>
   ),
-};
-
-export const WithCustomStyle: Story = {
-  render: (args) => <Template {...args} />,
-  args: {
-    ...defaultArgs,
-    id: "custom-style-input",
-    style: { width: "400px", backgroundColor: "#f3f4f6" },
-    placeholder: "Custom styled input",
-  },
 };

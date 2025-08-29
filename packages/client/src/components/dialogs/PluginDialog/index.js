@@ -53,6 +53,8 @@ const PluginDialog = ({
   dialogHeader,
   dialogBody,
   dialogFooter,
+  withoutBodyPadding = false,
+  withoutHeaderMargin = false,
   onClose,
   onLoad,
   eventListeners,
@@ -182,7 +184,13 @@ const PluginDialog = ({
       />
     </StyledFullScreen>
   ) : (
-    <ModalDialog visible={isVisible} onClose={onCloseAction} {...rest}>
+    <ModalDialog
+      visible={isVisible}
+      onClose={onCloseAction}
+      withoutPadding={withoutBodyPadding}
+      withoutHeaderMargin={withoutHeaderMargin}
+      {...rest}
+    >
       <ModalDialog.Header>{dialogHeaderProps}</ModalDialog.Header>
       <ModalDialog.Body>
         <WrappedComponent

@@ -41,7 +41,12 @@ import type {
   TPathParts,
   // TTranslation,
 } from "@docspace/shared/types";
-import { TFolder, TFolderSecurity } from "@docspace/shared/api/files/types";
+import {
+  TAvailableExternalRights,
+  TFolder,
+  TFolderSecurity,
+  TShareSettings,
+} from "@docspace/shared/api/files/types";
 import {
   TLogo,
   TRoomLifetime,
@@ -171,6 +176,12 @@ class SelectedFolderStore {
 
   passwordProtected: boolean = false;
 
+  shareSettings: TShareSettings | null = null;
+
+  availableExternalRights: TAvailableExternalRights | null = null;
+
+  parentShared: boolean = false;
+
   constructor(settingsStore: SettingsStore) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -227,6 +238,9 @@ class SelectedFolderStore {
       external: this.external,
       changeDocumentsTabs: this.changeDocumentsTabs,
       isIndexedFolder: this.isIndexedFolder,
+      shareSettings: this.shareSettings,
+      availableExternalRights: this.availableExternalRights,
+      parentShared: this.parentShared,
     };
   };
 
@@ -280,6 +294,9 @@ class SelectedFolderStore {
     this.watermark = null;
     this.passwordProtected = false;
     this.external = false;
+    this.shareSettings = null;
+    this.availableExternalRights = null;
+    this.parentShared = false;
   };
 
   setFilesCount = (filesCount: number) => {
@@ -376,6 +393,7 @@ class SelectedFolderStore {
     selectedFolder,
   ) => {
     const currentId = this.id;
+    const isCurrentRecent = this.rootFolderType === FolderType.Recent;
     const navPath = [{ id: currentId }, ...this.navigationPath];
 
     this.toDefault();
@@ -419,6 +437,13 @@ class SelectedFolderStore {
     if (socketUnsub.length > 0) {
       SocketHelper.emit(SocketCommands.Unsubscribe, {
         roomParts: socketUnsub.map((p) => `DIR-${p.id}`),
+        individual: true,
+      });
+    }
+
+    if (isCurrentRecent) {
+      SocketHelper.emit(SocketCommands.Unsubscribe, {
+        roomParts: `DIR-${currentId}`,
         individual: true,
       });
     }

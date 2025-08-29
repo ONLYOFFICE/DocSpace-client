@@ -3,7 +3,7 @@
   "content": "Select a license file",
   "content_en_sha1_hash": "4e049f73c49a4ddc533010d283dd7b5cdc023a8c",
   "created_at": "2025-05-19T21:30:57.216Z",
-  "updated_at": "2025-08-11T09:02:44.070Z",
+  "updated_at": "2025-08-21T11:22:39.938Z",
   "comment": {
     "text": "This translation key is used for an error message that displays when a user attempts to upload a license file, providing instructions and context for the error. It appears as part of a UI component for handling errors related to uploading license files.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/wizard/page.client.tsx",
-      "line_number": 431,
-      "context": "className=\"license-filed\"\n isVertical\n labelVisible={false}\n hasError={hasErrorLicense}\n errorMessage={\n invalidLicense ? t(\"ErrorLicenseBody\") : t(\"ErrorUploadLicenseFile\")\n }\n >\n <FileInput\n scale\n size={InputSize.large}",
+      "line_number": 437,
+      "context": "className=\"license-filed\"\n isVertical\n labelVisible={false}\n hasError={hasErrorLicense}\n errorMessage={\n invalidLicense ? t(\"ErrorLicenseBody\") : t(\"ErrorUploadLicenseFile\")\n }\n dataTestId=\"license_field_container\"\n >\n <FileInput\n scale",
       "module": "/packages/login"
     }
   ],

@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@docspace/shared": "workspace:*",
-    "@onlyoffice/document-editor-react": "file:./onlyoffice-document-editor-react-1.6.2.tgz",
+    "@onlyoffice/document-editor-react": "file:./onlyoffice-document-editor-react-2.1.1.tgz",
     "classnames": "2.5.1",
     "crypto-js": "4.2.0",
     "date-and-time": "3.6.0",
@@ -51,6 +51,7 @@
     "@types/react-dom": "19.1.5",
     "@types/styled-components": "5.1.34",
     "cross-env": "^7.0.3",
+    "css-minimizer-webpack-plugin": "^7.0.2",
     "eslint": "8.57.1",
     "eslint-config-next": "15.3.2",
     "nconf": "0.12.1",

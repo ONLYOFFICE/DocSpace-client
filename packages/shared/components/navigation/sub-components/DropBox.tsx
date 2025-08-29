@@ -25,8 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useCallback } from "react";
-import { useTheme } from "styled-components";
-import { Direction, VariableSizeList } from "react-window";
+import { VariableSizeList } from "react-window";
 
 import { DeviceType } from "../../../enums";
 
@@ -34,6 +33,7 @@ import { CustomScrollbarsVirtualList } from "../../scrollbar";
 
 import styles from "../Navigation.module.scss";
 import { TDropBoxProps } from "../Navigation.types";
+import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
 
 import NavigationLogo from "./LogoBlock";
 import ArrowButton from "./ArrowBtn";
@@ -65,8 +65,11 @@ const DropBox = ({
   isContextButtonVisible,
   isPublicRoom,
   isPlusButtonVisible,
+  showTitleInDropBox,
 }: TDropBoxProps) => {
   const [dropBoxHeight, setDropBoxHeight] = React.useState(0);
+  const { interfaceDirection } = useInterfaceDirection();
+
   const countItems = navigationItems.length;
 
   const getItemSize = useCallback(
@@ -77,7 +80,6 @@ const DropBox = ({
     [countItems, currentDeviceType],
   );
 
-  const { interfaceDirection } = useTheme();
   React.useEffect(() => {
     const itemsHeight = navigationItems.map((item, index) =>
       getItemSize(index),
@@ -85,22 +87,34 @@ const DropBox = ({
 
     const currentHeight = itemsHeight.reduce((a, b) => a + b);
 
-    let navHeight = 41;
+    // Reserve header height only when title is shown
+    let navHeight = showTitleInDropBox === false ? 0 : 41;
 
     if (currentDeviceType === DeviceType.tablet) {
-      navHeight = 49;
+      navHeight = showTitleInDropBox === false ? 0 : 49;
     }
 
     if (currentDeviceType === DeviceType.mobile) {
-      navHeight = 45;
+      navHeight = showTitleInDropBox === false ? 0 : 45;
     }
 
-    setDropBoxHeight(
-      currentHeight + navHeight > sectionHeight
-        ? sectionHeight - navHeight - 20
-        : currentHeight,
-    );
-  }, [sectionHeight, currentDeviceType, navigationItems, getItemSize]);
+    if (!sectionHeight || sectionHeight <= 0) {
+      // Fallback for Storybook/no layout context
+      setDropBoxHeight(Math.max(1, currentHeight));
+    } else {
+      const candidate =
+        currentHeight + navHeight > sectionHeight
+          ? sectionHeight - navHeight - 20
+          : currentHeight;
+      setDropBoxHeight(Math.max(1, candidate));
+    }
+  }, [
+    sectionHeight,
+    currentDeviceType,
+    navigationItems,
+    getItemSize,
+    showTitleInDropBox,
+  ]);
 
   const isTabletView = currentDeviceType === DeviceType.tablet;
 
@@ -114,7 +128,14 @@ const DropBox = ({
         {
           "--drop-box-width": `${dropBoxWidth}px`,
           "--drop-box-height":
-            sectionHeight < dropBoxHeight ? `${sectionHeight}px` : null,
+            sectionHeight && sectionHeight > 0 && sectionHeight < dropBoxHeight
+              ? `${sectionHeight}px`
+              : null,
+          // Explicit height when no sectionHeight provided (Storybook)
+          height:
+            (!sectionHeight || sectionHeight <= 0) && dropBoxHeight
+              ? `${dropBoxHeight}px`
+              : undefined,
         } as React.CSSProperties
       }
     >
@@ -139,7 +160,7 @@ const DropBox = ({
           onBackToParentFolder={onBackToParentFolder}
         />
 
-        {navigationTitleContainerNode}
+        {showTitleInDropBox !== false ? navigationTitleContainerNode : null}
 
         <ControlButtons
           isDesktop={isDesktop}
@@ -160,7 +181,7 @@ const DropBox = ({
       </div>
 
       <VariableSizeList
-        direction={interfaceDirection as Direction}
+        direction={interfaceDirection}
         height={dropBoxHeight}
         width="auto"
         itemCount={countItems}

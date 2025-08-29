@@ -72,6 +72,7 @@ const PublicRoomPage = (props) => {
     secondaryOperationsAlert,
     onOpenSignInWindow,
     windowIsOpen,
+    isAuthenticated,
   } = props;
 
   const location = useLocation();
@@ -109,7 +110,8 @@ const PublicRoomPage = (props) => {
     const isFormRoom =
       roomType === RoomsType.FormRoom || parentRoomType === FolderType.FormRoom;
 
-    if (!access || !ready || toastIsDisabled || isFrame) return;
+    if (!access || !ready || toastIsDisabled || isFrame || isAuthenticated)
+      return;
 
     const roomMode = getAccessTranslation().toLowerCase();
 
@@ -146,7 +148,7 @@ const PublicRoomPage = (props) => {
     );
 
     toastr.info(toastText);
-  }, [access, ready, roomType, parentRoomType]);
+  }, [access, ready, roomType, parentRoomType, isAuthenticated]);
 
   const sectionProps = {
     isSecondaryProgressVisbile,
@@ -155,6 +157,8 @@ const PublicRoomPage = (props) => {
     secondaryActiveOperations,
     secondaryOperationsAlert,
   };
+
+  const showSignInButton = !isFrame && !isAuthenticated;
 
   return (
     <>
@@ -165,7 +169,7 @@ const PublicRoomPage = (props) => {
       >
         <Section.SectionHeader>
           <SectionHeaderContent
-            showSignInButton={!isFrame}
+            showSignInButton={showSignInButton}
             onSignInClick={() => onOpenSignInWindow()}
             signInButtonIsDisabled={windowIsOpen}
           />
@@ -212,6 +216,7 @@ export default inject(
       fetchPublicRoom,
       onOpenSignInWindow,
       windowIsOpen,
+      validationData,
     } = publicRoomStore;
     const { isLoading } = clientLoadingStore;
 
@@ -229,6 +234,9 @@ export default inject(
 
     const { fetchPreviewMediaFile } = mediaViewerDataStore;
 
+    const isAuthenticated =
+      validationData?.isAuthenticated || authStore.isAuthenticated;
+
     return {
       isLoaded,
       isLoading,
@@ -242,7 +250,7 @@ export default inject(
       secondaryActiveOperations,
       secondaryOperationsAlert,
 
-      isAuthenticated: authStore.isAuthenticated,
+      isAuthenticated,
       isEmptyPage,
       fetchPublicRoom,
       fetchPreviewMediaFile,

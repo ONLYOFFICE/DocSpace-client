@@ -27,7 +27,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useTheme } from "styled-components";
 import { Trans, useTranslation } from "react-i18next";
 import classNames from "classnames";
 
@@ -62,6 +61,7 @@ import { Text } from "../../../components/text";
 import { RadioButton } from "../../../components/radio-button";
 import { Link, LinkTarget } from "../../../components/link";
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
+import { useTheme } from "../../../hooks/useTheme";
 
 import { ThirdPartyModule } from "./sub-components/ThirdPartyModule";
 import { RoomsModule } from "./sub-components/RoomsModule";
@@ -93,7 +93,7 @@ const AutomaticBackup = ({
   setThirdPartyStorage,
   setBackupSchedule,
   setConnectedThirdPartyAccount,
-  rootFoldersTitles,
+
   seStorageType,
   setSelectedEnableSchedule,
   toDefault,
@@ -391,14 +391,14 @@ const AutomaticBackup = ({
 
   const operationsCompleted = downloadingProgress === 100;
 
-  const roomName = rootFoldersTitles[FolderType.USER]?.title;
-
   const isSaveCancelDisabled =
     isLoadingData || !(isChanged || isThirdStorageChanged);
 
   if (isEmptyContentBeforeLoader && !isInitialLoading) return null;
 
   if (isInitialLoading) return <AutoBackupLoader />;
+
+  const mainDisabled = isLoadingData || !isEnableAuto || isInitialError;
 
   return (
     <div data-testid="auto-backup" className={styles.autoBackup}>
@@ -439,6 +439,9 @@ const AutomaticBackup = ({
         className={classNames(
           styles.backupToggleWrapper,
           "backup_toggle-wrapper",
+          {
+            [styles.isDisabled]: mainDisabled,
+          },
         )}
       >
         <ToggleButton
@@ -448,7 +451,7 @@ const AutomaticBackup = ({
           )}
           onChange={onClickPermissions}
           isChecked={selectedEnableSchedule}
-          isDisabled={isLoadingData || !isEnableAuto || isInitialError}
+          isDisabled={mainDisabled}
           dataTestId="enable_automatic_backup_button"
         />
 
@@ -470,22 +473,6 @@ const AutomaticBackup = ({
             >
               {t("Common:EnableAutomaticBackup")}
             </Text>
-            {!isEnableAuto && !isManagement ? (
-              <Badge
-                backgroundColor={
-                  theme.isBase
-                    ? globalColors.favoritesStatus
-                    : globalColors.favoriteStatusDark
-                }
-                label={t("Common:Paid")}
-                fontWeight="700"
-                className={classNames(
-                  styles.autoBackupBadge,
-                  "auto-backup_badge",
-                )}
-                isPaidBadge
-              />
-            ) : null}
           </div>
           <Text
             className={classNames(
@@ -516,9 +503,9 @@ const AutomaticBackup = ({
                 "backup-description",
               )}
             >
-              <Trans t={t} i18nKey="RoomsModuleDescription" ns="Common">
-                {{ roomName }}
-              </Trans>
+              {t("Common:RoomsModuleDescription", {
+                roomName: t("Common:MyFilesSection"),
+              })}
             </Text>
             {isCheckedDocuments ? (
               <RoomsModule

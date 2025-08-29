@@ -81,6 +81,7 @@ import {
   isDesktop,
   isLockedSharedRoom,
   isSystemFolder,
+  getCategoryType,
 } from "@docspace/shared/utils";
 import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
 import {
@@ -88,7 +89,6 @@ import {
   FILTER_ROOM_DOCUMENTS,
 } from "@docspace/shared/utils/filterConstants";
 import {
-  getCategoryType,
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";

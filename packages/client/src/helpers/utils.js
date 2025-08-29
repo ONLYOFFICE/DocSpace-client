@@ -98,39 +98,6 @@ export const onItemClick = (e) => {
   // router.navigate(link);
 };
 
-export const getCategoryType = (location) => {
-  let categoryType = CategoryType.Shared;
-  const { pathname } = location;
-
-  if (pathname.startsWith("/rooms")) {
-    if (pathname.indexOf("personal") > -1) {
-      categoryType = CategoryType.Personal;
-    } else if (pathname.indexOf("shared") > -1) {
-      const regexp = /(rooms)\/shared\/([\d])/;
-
-      categoryType = !regexp.test(location.pathname)
-        ? CategoryType.Shared
-        : CategoryType.SharedRoom;
-    } else if (pathname.indexOf("share") > -1) {
-      categoryType = CategoryType.PublicRoom;
-    } else if (pathname.indexOf("archive") > -1) {
-      categoryType = CategoryType.Archive;
-    }
-  } else if (pathname.startsWith("/favorite")) {
-    categoryType = CategoryType.Favorite;
-  } else if (pathname.startsWith("/recent")) {
-    categoryType = CategoryType.Recent;
-  } else if (pathname.startsWith("/files/trash")) {
-    categoryType = CategoryType.Trash;
-  } else if (pathname.startsWith("/settings")) {
-    categoryType = CategoryType.Settings;
-  } else if (pathname.startsWith("/accounts")) {
-    categoryType = CategoryType.Accounts;
-  }
-
-  return categoryType;
-};
-
 export const getCategoryTypeByFolderType = (folderType, parentId) => {
   switch (folderType) {
     case FolderType.Rooms:

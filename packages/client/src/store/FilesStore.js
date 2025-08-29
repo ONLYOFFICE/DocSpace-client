@@ -50,6 +50,7 @@ import {
   isDesktop,
   isMobile,
   isSystemFolder,
+  getCategoryType,
 } from "@docspace/shared/utils";
 import { getViewForCurrentRoom } from "@docspace/shared/utils/getViewForCurrentRoom";
 
@@ -73,7 +74,6 @@ import {
 } from "@docspace/shared/constants";
 
 import {
-  getCategoryType,
   getCategoryUrl,
   getCategoryTypeByFolderType,
 } from "SRC_DIR/helpers/utils";

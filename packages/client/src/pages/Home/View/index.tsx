@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 
 import { useLocation } from "react-router";
 
-import { Consumer } from "@docspace/shared/utils";
+import { Consumer, getCategoryType } from "@docspace/shared/utils";
 import { Nullable } from "@docspace/shared/types";
 
 import { AnimationEvents } from "@docspace/shared/hooks/useAnimation";
@@ -38,7 +38,6 @@ import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
 
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import FilesStore from "SRC_DIR/store/FilesStore";
-import { getCategoryType } from "SRC_DIR/helpers/utils";
 
 import { SectionBodyContent, ContactsSectionBodyContent } from "../Section";
 import ProfileSectionBodyContent from "../../Profile/Section/Body";

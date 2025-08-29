@@ -152,6 +152,7 @@ export default function withQuickButtons(WrappedComponent) {
         isIndexEditingMode,
         roomLifetime,
         isTemplatesFolder,
+        isRecentFolder,
       } = this.props;
 
       const showLifetimeIcon =
@@ -181,6 +182,7 @@ export default function withQuickButtons(WrappedComponent) {
           roomLifetime={roomLifetime}
           onCreateRoom={this.onCreateRoom}
           isTemplatesFolder={isTemplatesFolder}
+          isRecentFolder={isRecentFolder}
         />
       );
 
@@ -213,8 +215,12 @@ export default function withQuickButtons(WrappedComponent) {
         onCreateRoomFromTemplate,
         lockFileAction,
       } = filesActionsStore;
-      const { isPersonalRoom, isArchiveFolder, isTemplatesFolder } =
-        treeFoldersStore;
+      const {
+        isPersonalRoom,
+        isArchiveFolder,
+        isTemplatesFolder,
+        isRecentFolder,
+      } = treeFoldersStore;
 
       const { isIndexEditingMode } = indexingStore;
 
@@ -245,6 +251,7 @@ export default function withQuickButtons(WrappedComponent) {
         onCreateRoomFromTemplate,
         setBufferSelection: filesStore.setBufferSelection,
         lockFileAction,
+        isRecentFolder,
       };
     },
   )(observer(WithQuickButtons));

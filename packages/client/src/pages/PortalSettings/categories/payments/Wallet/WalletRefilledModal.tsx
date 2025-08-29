@@ -141,6 +141,7 @@ const WalletRefilledModal = (props: WalletRefilledModalProps) => {
             !upToBalance
           }
           isLoading={isLoading}
+          testId="wallet_refilled_save_button"
         />
         <Button
           key="CancelButton"
@@ -148,6 +149,7 @@ const WalletRefilledModal = (props: WalletRefilledModalProps) => {
           size={ButtonSize.normal}
           scale
           onClick={onCloseDialog}
+          testId="wallet_refilled_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

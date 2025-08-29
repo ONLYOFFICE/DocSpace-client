@@ -29,6 +29,7 @@ import isUndefined from "lodash/isUndefined";
 import { useSearchParams } from "next/navigation";
 
 import {
+  addFileToRecentlyViewed,
   createFile,
   getEditDiff,
   getEditHistory,
@@ -73,6 +74,7 @@ import {
   THistoryData,
   UseEventsProps,
 } from "@/types";
+import { onSDKInfo, type TInfoEvent } from "@/utils/events";
 
 let docEditor: TDocEditor | null = null;
 
@@ -824,6 +826,21 @@ const useEditorEvents = ({
     config?.editorConfig.mode,
   ]);
 
+  const onInfo = React.useCallback(
+    async (e: object) => {
+      onSDKInfo(e);
+
+      const mode = (e as TInfoEvent).data.mode;
+
+      // Documents opened in "view" mode currently cannot be added to Recent automatically on the server,
+      // so they are added manually on the client.
+      if (successAuth && fileInfo?.id && mode === "view") {
+        addFileToRecentlyViewed(fileInfo.id);
+      }
+    },
+    [onSDKInfo, successAuth, fileInfo?.id],
+  );
+
   return {
     createUrl,
     documentReady,
@@ -850,6 +867,7 @@ const useEditorEvents = ({
     onRequestFillingStatus,
     onRequestStartFilling,
     onRequestRefreshFile,
+    onInfo,
   };
 };
 

@@ -39,8 +39,8 @@ import EmptyRecentLightIcon from "PUBLIC_DIR/images/emptyview/empty.recent.light
 import EmptyTrashDarkIcon from "PUBLIC_DIR/images/emptyview/empty.trash.dark.svg";
 import EmptyTrashLightIcon from "PUBLIC_DIR/images/emptyview/empty.trash.light.svg";
 
-import EmptyFavoritesLightIcon from "PUBLIC_DIR/images/empty_screen_favorites.svg";
-import EmptyFavoritesDarkIcon from "PUBLIC_DIR/images/empty_screen_favorites_dark.svg";
+import EmptyFavoritesLightIcon from "PUBLIC_DIR/images/emptyview/empty.favorites.svg";
+import EmptyFavoritesDarkIcon from "PUBLIC_DIR/images/emptyview/empty.favorites.dark.svg";
 
 import EmptyArchiveDarkIcon from "PUBLIC_DIR/images/emptyview/empty.archive.dark.svg";
 import EmptyArchiveLightIcon from "PUBLIC_DIR/images/emptyview/empty.archive.light.svg";
@@ -200,7 +200,7 @@ export const getRootDescription = (
     )
     .with([FolderType.Recent, P._], () => t("EmptyView:EmptyRecentDescription"))
     .with([FolderType.Favorites, P._], () =>
-      t("Files:FavoritesEmptyContainerDescription"),
+      t("EmptyView:EmptyFavoritesDescription"),
     )
     .with([FolderType.Archive, ShareAccessRights.None], () =>
       t("Files:ArchiveEmptyScreen", {
@@ -317,7 +317,7 @@ export const getRootTitle = (
     .with([FolderType.USER, ShareAccessRights.None], () =>
       t("Common:EmptyScreenFolder"),
     )
-    .with([FolderType.Favorites, P._], () => t("Files:NoFilesHereYet"))
+    .with([FolderType.Favorites, P._], () => t("EmptyView:EmptyFavoritesTitle"))
     .with([FolderType.Recent, P._], () => t("EmptyView:NoRecentFilesHereYet"))
     .with([FolderType.Archive, P._], () => t("Files:ArchiveEmptyScreenHeader"))
     .with([FolderType.TRASH, P._], () => t("Common:EmptyScreenFolder"))

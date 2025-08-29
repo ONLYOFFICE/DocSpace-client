@@ -215,8 +215,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
                 data-id={id}
                 data-locked={!!locked}
                 onClick={onIconLockClick}
-                color="--quick-buttons-shared-color"
-                hoverColor="accent"
+                color="accent"
                 title={t("Common:UnblockFile")}
                 data-tooltip-id={`lockTooltip${item.id}`}
               />
@@ -232,7 +231,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
             </>
           ) : null}
 
-          {!isRoom(item) && !isRecentFolder ? (
+          {!isRoom(item) && item?.isFavorite && !isRecentFolder ? (
             <IconButton
               iconName={
                 item?.isFavorite ? FavoriteFillReactSvgUrl : FavoriteReactSvgUrl
@@ -240,9 +239,8 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               className={classNames("badge copy-link icons-group")}
               size={sizeQuickButton}
               onClick={onClickFavorite}
-              color={item?.isFavorite ? "accent" : undefined}
+              color="accent"
               isDisabled={isDisabled}
-              hoverColor="accent"
               title={t("Common:Favorites")}
             />
           ) : null}

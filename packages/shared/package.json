@@ -20,7 +20,7 @@
     "tsc": "tsc"
   },
   "dependencies": {
-    "@babel/runtime": "7.25.7",
+    "@babel/runtime": "7.28.3",
     "@floating-ui/dom": "1.6.13",
     "@react-spring/web": "9.7.5",
     "@socket.io/component-emitter": "3.1.2",

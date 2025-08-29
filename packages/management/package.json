@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-cloudwatch-logs": "3.816.0",
-    "@babel/runtime": "7.25.7",
+    "@babel/runtime": "7.28.3",
     "@docspace/shared": "workspace:*",
     "axios": "1.11.0",
     "classnames": "2.5.1",

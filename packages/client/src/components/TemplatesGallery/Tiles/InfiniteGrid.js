@@ -26,13 +26,32 @@
 
 import uniqueid from "lodash/uniqueId";
 import { inject, observer } from "mobx-react";
-import React, { useEffect, useState } from "react";
-
-import { TileSkeleton } from "@docspace/shared/skeletons/tiles";
+import React, { useEffect, useState, useRef } from "react";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import styled from "styled-components";
 import { InfiniteLoaderComponent } from "@docspace/shared/components/infinite-loader";
 import { getCountTilesInRow } from "@docspace/shared/utils";
 
 import { StyledCard, StyledItem } from "./StyledTileView";
+
+const StyledSkeletonTile = styled.div`
+  .loader-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    margin: 10px;
+  }
+
+  .loader-title {
+    width: 70%;
+  }
+
+  &.Card {
+    min-height: ${(props) => props.$minHeight || "auto"};
+    height: ${(props) => props.$height || "auto"};
+  }
+`;
 
 const Card = ({ children, countTilesInRow, smallPreview, ...rest }) => {
   const isSubmitToGalleryTile = children?.props?.isSubmitTile === true;
@@ -71,6 +90,7 @@ const InfiniteGrid = (props) => {
     className,
     isShowOneTile,
     smallPreview,
+    showLoading,
     ...rest
   } = props;
 
@@ -78,9 +98,49 @@ const InfiniteGrid = (props) => {
   const [countTilesInRow, setCountTilesInRow] = useState(
     getCountTilesInRow(false, false, true, isShowOneTile),
   );
+  const [averageCardHeight, setAverageCardHeight] = useState(null);
+  const containerRef = useRef(null);
 
   let cards = [];
   const list = [];
+
+  // Function to calculate the height of existing cards
+  const calculateCardHeight = (container) => {
+    if (!container) return null;
+
+    // Try multiple selectors to find existing cards
+    let existingCards = container.querySelectorAll(".Card:not(.tiles-loader)");
+
+    if (existingCards.length === 0) {
+      existingCards = container.querySelectorAll("[class*='StyledCard']");
+    }
+
+    if (existingCards.length === 0) return null;
+
+    let totalHeight = 0;
+    let validCards = 0;
+
+    existingCards.forEach((card) => {
+      const height = card.offsetHeight;
+
+      if (height > 0) {
+        totalHeight += height;
+        validCards++;
+      }
+    });
+
+    return validCards > 0 ? Math.round(totalHeight / validCards) : null;
+  };
+
+  // Update average height when component updates
+  useEffect(() => {
+    if (containerRef.current) {
+      const height = calculateCardHeight(containerRef.current);
+      if (height && height !== averageCardHeight) {
+        setAverageCardHeight(height);
+      }
+    }
+  });
 
   const addItemToList = (key, clear, isOneTile) => {
     list.push(
@@ -164,11 +224,27 @@ const InfiniteGrid = (props) => {
     while (countTilesInRow > cards.length && cards.length !== countTilesInRow) {
       const key = `tiles-loader_${countTilesInRow - cards.length}`;
       cards.push(
-        <TileSkeleton
+        <StyledSkeletonTile
           key={key}
-          className="tiles-loader isFile"
-          isFolder={false}
-        />,
+          className="tiles-loader isTemplate Card"
+          $height={averageCardHeight ? `${averageCardHeight}px` : "auto"}
+          $minHeight={averageCardHeight ? `${averageCardHeight}px` : "auto"}
+        >
+          <div className="loader-container">
+            <RectangleSkeleton
+              className="image-skeleton"
+              height={
+                averageCardHeight ? `${averageCardHeight - 50}px` : "120px"
+              }
+              width="100%"
+              animate
+            />
+
+            <div className="loader-title">
+              <RectangleSkeleton height="20px" animate />
+            </div>
+          </div>
+        </StyledSkeletonTile>,
       );
     }
 
@@ -179,22 +255,23 @@ const InfiniteGrid = (props) => {
     addItemToList(listKey, false, isShowOneTile);
   }
 
-  console.log("countTilesInRow", countTilesInRow);
   return (
-    <InfiniteLoaderComponent
-      viewAs="tileDynamicHeight"
-      countTilesInRow={countTilesInRow}
-      filesLength={filesLength}
-      hasMoreFiles={hasMoreFiles}
-      itemCount={hasMoreFiles ? list.length + 1 : list.length}
-      loadMoreItems={fetchMoreFiles}
-      className={`TileList ${className}`}
-      smallPreview={smallPreview}
-      isOneTile={isShowOneTile}
-      {...rest}
-    >
-      {list}
-    </InfiniteLoaderComponent>
+    <div ref={containerRef}>
+      <InfiniteLoaderComponent
+        viewAs="tileDynamicHeight"
+        countTilesInRow={countTilesInRow}
+        filesLength={filesLength}
+        hasMoreFiles={hasMoreFiles}
+        itemCount={hasMoreFiles ? list.length + 1 : list.length}
+        loadMoreItems={fetchMoreFiles}
+        className={`TileList ${className}`}
+        smallPreview={smallPreview}
+        isOneTile={isShowOneTile}
+        {...rest}
+      >
+        {list}
+      </InfiniteLoaderComponent>
+    </div>
   );
 };
 

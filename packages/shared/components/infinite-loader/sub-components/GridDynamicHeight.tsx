@@ -31,7 +31,10 @@ import { RectangleSkeleton } from "../../../skeletons/rectangle";
 import { GridDynamicHeightProps } from "../InfiniteLoader.types";
 import styles from "../InfiniteLoader.module.scss";
 
-const StyledSkeletonTile = styled.div`
+const StyledSkeletonTile = styled.div<{
+  $height?: string;
+  $minHeight?: string;
+}>`
   .loader-container {
     display: flex;
     flex-direction: column;
@@ -42,6 +45,11 @@ const StyledSkeletonTile = styled.div`
 
   .loader-title {
     width: 70%;
+  }
+
+  &.Card {
+    min-height: ${(props) => props.$minHeight || "auto"};
+    height: ${(props) => props.$height || "auto"};
   }
 `;
 
@@ -211,6 +219,26 @@ const GridDynamicHeight = ({
   const renderLoadingRow = () => {
     if (!hasMoreFiles) return null;
 
+    // Calculate height for skeleton tiles based on existing cards
+    const calculateCardHeight = () => {
+      const existingCards = containerRef.current?.querySelectorAll(".Card");
+      if (!existingCards || existingCards.length === 0) return null;
+
+      let totalHeight = 0;
+      let validCards = 0;
+
+      existingCards.forEach((card) => {
+        const height = (card as HTMLElement).offsetHeight;
+        if (height > 0) {
+          totalHeight += height;
+          validCards += 1;
+        }
+      });
+
+      return validCards > 0 ? Math.round(totalHeight / validCards) : null;
+    };
+
+    const calculatedHeight = calculateCardHeight();
     const skeletons = [];
 
     console.log("renderLoadingRow countTilesInRow", countTilesInRow);
@@ -219,10 +247,17 @@ const GridDynamicHeight = ({
       skeletons.push(
         <StyledSkeletonTile
           key={`skeleton-${i}`}
-          className="tiles-loader isTemplate"
+          className="tiles-loader isTemplate Card"
+          $height={calculatedHeight ? `${calculatedHeight}px` : "auto"}
+          $minHeight={calculatedHeight ? `${calculatedHeight}px` : "auto"}
         >
           <div className="loader-container">
-            <RectangleSkeleton height="100%" width="100%" animate />
+            <RectangleSkeleton
+              className="image-skeleton"
+              height={calculatedHeight ? `${calculatedHeight - 50}px` : "120px"}
+              width="100%"
+              animate
+            />
 
             <div className="loader-title">
               <RectangleSkeleton height="20px" animate />

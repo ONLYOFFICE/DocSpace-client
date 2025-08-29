@@ -36,6 +36,7 @@ import TypeCell from "./TypeCell";
 import AuthorCell from "./AuthorCell";
 import SizeCell from "./SizeCell";
 import LocationCell from "./LocationCell";
+import DateCell from "./DateCell";
 
 const FavoritesRowDataComponent = (props) => {
   const {
@@ -43,7 +44,7 @@ const FavoritesRowDataComponent = (props) => {
     authorFavoritesColumnIsEnabled,
     sizeFavoritesColumnIsEnabled,
     typeFavoritesColumnIsEnabled,
-
+    modifiedFavoritesColumnIsEnabled,
     dragStyles,
     selectionProp,
     value,
@@ -58,8 +59,6 @@ const FavoritesRowDataComponent = (props) => {
     item,
     index,
   } = props;
-
-  console.log("item", item);
   const lastColumn = getLastColumn(tableStorageName);
 
   return (
@@ -132,6 +131,29 @@ const FavoritesRowDataComponent = (props) => {
         <div />
       )}
 
+      {modifiedFavoritesColumnIsEnabled ? (
+        <TableCell
+          dataTestId={`favorites-cell-modified-${index}`}
+          style={
+            !modifiedFavoritesColumnIsEnabled
+              ? { background: "none" }
+              : dragStyles.style
+          }
+          {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "ModifiedFavorites" ? "no-extra-space" : "",
+          )}
+        >
+          <DateCell
+            sideColor={theme.filesSection.tableView.row.sideColor}
+            {...props}
+          />
+        </TableCell>
+      ) : (
+        <div />
+      )}
+
       {sizeFavoritesColumnIsEnabled ? (
         <TableCell
           dataTestId={`favorites-cell-size-${index}`}
@@ -187,6 +209,7 @@ export default inject(({ tableStore }) => {
     authorFavoritesColumnIsEnabled,
     sizeFavoritesColumnIsEnabled,
     typeFavoritesColumnIsEnabled,
+    modifiedFavoritesColumnIsEnabled,
     tableStorageName,
   } = tableStore;
 
@@ -195,6 +218,7 @@ export default inject(({ tableStore }) => {
     authorFavoritesColumnIsEnabled,
     sizeFavoritesColumnIsEnabled,
     typeFavoritesColumnIsEnabled,
+    modifiedFavoritesColumnIsEnabled,
     tableStorageName,
   };
 })(observer(FavoritesRowDataComponent));

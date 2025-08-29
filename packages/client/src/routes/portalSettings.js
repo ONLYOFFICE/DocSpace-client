@@ -261,6 +261,144 @@ const PortalSettingsRoutes = {
       path: "bonus",
       element: <ViewComponent />,
     },
+    {
+      path: "developer-tools",
+      element: <ViewComponent />,
+    },
+    {
+      path: "developer-tools/api",
+      element: <ViewComponent />,
+    },
+    {
+      path: "developer-tools/api-keys",
+      element: <ViewComponent />,
+    },
+    {
+      path: "developer-tools/javascript-sdk",
+      element: <ViewComponent />,
+    },
+    {
+      path: "developer-tools/javascript-sdk/docspace",
+      lazy: () =>
+        componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/DocSpace"
+            ),
+        ),
+    },
+    {
+      path: "developer-tools/javascript-sdk/public-room",
+      lazy: () =>
+        componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom"
+            ),
+        ),
+    },
+    {
+      path: "developer-tools/javascript-sdk/custom",
+      lazy: () =>
+        componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager"
+            ),
+        ),
+    },
+    {
+      path: "developer-tools/javascript-sdk/room-selector",
+      lazy: () =>
+        componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector"
+            ),
+        ),
+    },
+    {
+      path: "developer-tools/javascript-sdk/file-selector",
+      lazy: () =>
+        componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector"
+            ),
+        ),
+    },
+    {
+      path: "developer-tools/javascript-sdk/editor",
+      lazy: () =>
+        componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Editor"
+            ),
+        ),
+    },
+    {
+      path: "developer-tools/javascript-sdk/viewer",
+      lazy: () =>
+        componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Viewer"
+            ),
+        ),
+    },
+    {
+      path: "developer-tools/plugin-sdk",
+      element: <ViewComponent />,
+    },
+    {
+      path: "developer-tools/webhooks",
+      element: <ViewComponent />,
+    },
+    {
+      path: "developer-tools/webhooks/:id",
+      lazy: () =>
+        componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory"
+            ),
+        ),
+    },
+    {
+      path: "developer-tools/webhooks/:id/:eventId",
+      lazy: () =>
+        componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails"
+            ),
+        ),
+    },
+    {
+      path: "developer-tools/oauth",
+      element: <ViewComponent />,
+    },
+    {
+      path: "developer-tools/oauth/create",
+      lazy: () =>
+        componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/developer-tools/OAuth/OAuthCreatePage"
+            ),
+        ),
+    },
+    {
+      path: "developer-tools/oauth/:id",
+      lazy: () =>
+        componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/developer-tools/OAuth/OAuthEditPage"
+            ),
+        ),
+    },
     ...generalRoutes,
   ],
 };

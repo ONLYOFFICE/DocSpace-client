@@ -52,9 +52,6 @@ import useDataImport from "../categories/data-import/useDataImport";
 
 const View = ({
   setIsChangePageRequestRunning,
-  setCurrentClientView,
-
-  showHeaderLoader,
 
   // Common hook props
   loadBaseInfo,
@@ -62,6 +59,8 @@ const View = ({
   getGreetingSettingsIsDefault,
   getBrandName,
   initWhiteLabel,
+  isLoaded,
+  setIsLoaded,
 
   // Security hook props
   settingsStore,
@@ -69,6 +68,8 @@ const View = ({
   getLoginHistory,
   getLifetimeAuditSettings,
   getAuditTrail,
+  initSettingsSetup,
+  isInitSetup,
 
   // Backup hook props
   backupStore,
@@ -83,6 +84,8 @@ const View = ({
   fetchAndSetConsumers,
   setInitSMTPSettings,
   getDocumentServiceLocation,
+  loadLDAP,
+  isLdapAvailable,
 
   // Developer tools hook props
   getCSPSettings,
@@ -127,8 +130,6 @@ const View = ({
   >("");
   const [isLoading, setIsLoading] = React.useState(false);
 
-  const [securityDataLoaded, setSecurityDataLoaded] = React.useState(false);
-
   const animationStartedRef = useRef(false);
   const prevCurrentViewRef = React.useRef(currentView);
   const prevPathRef = useRef<string | null>(null);
@@ -150,6 +151,8 @@ const View = ({
     getGreetingSettingsIsDefault: getGreetingSettingsIsDefault || (() => {}),
     getBrandName: getBrandName || (() => {}),
     initWhiteLabel: initWhiteLabel || (() => {}),
+    isLoaded: isLoaded,
+    setIsLoaded: setIsLoaded,
   });
 
   // Initialize useSecurity hook with null checks
@@ -168,6 +171,9 @@ const View = ({
     getLoginHistory: getLoginHistory || (() => {}),
     getLifetimeAuditSettings: getLifetimeAuditSettings || (() => {}),
     getAuditTrail: getAuditTrail || (() => {}),
+    initSettings: initSettingsSetup,
+    isInit: isInitSetup,
+    currentDeviceType: settingsStore?.currentDeviceType,
   });
 
   // Initialize useBackup hook with null checks
@@ -197,6 +203,8 @@ const View = ({
     setInitSMTPSettings: setInitSMTPSettings || (() => Promise.resolve()),
     getDocumentServiceLocation:
       getDocumentServiceLocation || (() => Promise.resolve()),
+    loadLDAP: loadLDAP || (() => Promise.resolve()),
+    isLdapAvailable: isLdapAvailable || (() => false),
   });
 
   // Initialize useDataImport hook with null checks
@@ -250,12 +258,6 @@ const View = ({
   }, []);
 
   useEffect(() => {
-    if (!isLoading) {
-      window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION));
-    }
-  }, [isLoading]);
-
-  useEffect(() => {
     animationStartedRef.current = false;
 
     const animationEndedAction = () => {
@@ -274,6 +276,12 @@ const View = ({
       );
     };
   }, []);
+
+  useEffect(() => {
+    if (!isLoading) {
+      window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION));
+    }
+  }, [isLoading]);
 
   useEffect(() => {
     if (prevPathRef.current === location.pathname) {
@@ -312,9 +320,8 @@ const View = ({
         } else if (isSecurityPage) {
           view = "security";
 
-          if (!securityDataLoaded) {
+          if (prevCurrentViewRef.current !== "security") {
             await getSecurityInitialValue();
-            setSecurityDataLoaded(true);
           }
         } else if (isRestorePage) {
           view = "restore";
@@ -364,7 +371,6 @@ const View = ({
           prevCurrentViewRef.current = view;
 
           setCurrentView(view);
-          setCurrentClientView(view);
         }
 
         setIsChangePageRequestRunning(false);
@@ -381,10 +387,10 @@ const View = ({
     };
 
     getView();
-  }, [location.pathname]);
+  }, [location.pathname, isDeveloperToolsPage]);
 
   return (
-    <LoaderWrapper isLoading={isLoading ? !showHeaderLoader : false}>
+    <LoaderWrapper isLoading={isLoading}>
       {currentView === "customization" ? <Customization /> : null}
       {currentView === "security" ? <Security /> : null}
       {currentView === "backup" ? <Backup /> : null}
@@ -417,16 +423,26 @@ export const ViewComponent = inject(
     common,
     importAccountsStore,
     storageManagement,
+    ldapStore,
   }: TStore) => {
     const { language } = authStore;
 
-    const { initSettings, getGreetingSettingsIsDefault } = common;
+    const {
+      initSettings: initSettingsCommon,
+      getGreetingSettingsIsDefault,
+      isLoadedSubmenu,
+      isLoaded,
+      setIsLoaded,
+    } = common;
 
     const {
       setIsChangePageRequestRunning,
       setCurrentClientView,
 
       showHeaderLoader,
+
+      setCurrentSettingsView,
+      currentSettingsView,
     } = clientLoadingStore;
 
     const {
@@ -436,9 +452,11 @@ export const ViewComponent = inject(
       getConsumers,
       fetchAndSetConsumers,
       setInitSMTPSettings,
+      initSettings: initSettingsSetup,
+      isInit: isInitSetup,
     } = setup;
 
-    const { isSSOAvailable } = currentQuotaStore;
+    const { isSSOAvailable, isLdapAvailable } = currentQuotaStore;
 
     const { updatePlugins } = pluginStore;
 
@@ -467,6 +485,8 @@ export const ViewComponent = inject(
 
     const { init } = storageManagement;
 
+    const { load: loadLDAP } = ldapStore;
+
     const isMobileView = settingsStore.deviceType === DeviceType.mobile;
 
     return {
@@ -481,8 +501,11 @@ export const ViewComponent = inject(
       getBrandName,
       initWhiteLabel,
       loadBaseInfo: async (page: string) => {
-        await initSettings(page);
+        await initSettingsCommon(page);
       },
+      isLoadedSubmenu,
+      isLoaded,
+      setIsLoaded,
 
       // Security hook props
       settingsStore,
@@ -490,6 +513,8 @@ export const ViewComponent = inject(
       getLoginHistory,
       getLifetimeAuditSettings,
       getAuditTrail,
+      initSettingsSetup,
+      isInitSetup,
 
       // Backup hook props
       backup,
@@ -504,6 +529,8 @@ export const ViewComponent = inject(
       fetchAndSetConsumers,
       setInitSMTPSettings,
       getDocumentServiceLocation,
+      loadLDAP,
+      isLdapAvailable,
 
       // Developer tools hook props
       getCSPSettings,

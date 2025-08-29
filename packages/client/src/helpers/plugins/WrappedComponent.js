@@ -296,6 +296,7 @@ export const PluginComponent = inject(({ pluginStore }) => {
               withLoadingAfterClick,
               disableWhileRequestRunning,
               isSaveButton,
+              settingsModalRequestRunning,
               setSettingsModalRequestRunning,
               onCloseAction,
               ...rest
@@ -347,12 +348,13 @@ export const PluginComponent = inject(({ pluginStore }) => {
 
             const isLoading = withLoadingAfterClick
               ? isSaveButton
-                ? modalRequestRunning
+                ? settingsModalRequestRunning
                 : isRequestRunning || rest.isLoading || modalRequestRunning
               : rest.isLoading;
+
             const isDisabled = disableWhileRequestRunning
               ? isSaveButton
-                ? modalRequestRunning
+                ? settingsModalRequestRunning
                 : isRequestRunning || rest.isDisabled || modalRequestRunning
               : rest.isDisabled;
 

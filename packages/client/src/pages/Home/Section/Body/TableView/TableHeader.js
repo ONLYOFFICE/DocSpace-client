@@ -485,7 +485,7 @@ class FilesTableHeader extends React.Component {
       },
       {
         key: "ModifiedFavorites",
-        title: t("Common:Modified"),
+        title: t("ByLastModified"),
         enable: modifiedFavoritesColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.ModifiedDate,

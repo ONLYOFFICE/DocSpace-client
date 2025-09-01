@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Tabs } from "@docspace/shared/components/tabs";
 import { useNavigate, useLocation } from "react-router";
 import { withTranslation } from "react-i18next";
@@ -139,16 +139,16 @@ const SecurityWrapper = (props) => {
     );
   };
 
-  if (data.length)
-    return currentTabId === data[0].id ? (
-      currentDeviceType !== DeviceType.desktop ? (
-        <MobileSecurityLoader />
-      ) : (
-        <SecurityLoader />
-      )
-    ) : (
-      <AccessLoader />
-    );
+  // if (isLoading && data.length)
+  //   return currentTabId === data[0].id ? (
+  //     currentDeviceType !== DeviceType.desktop ? (
+  //       <MobileSecurityLoader />
+  //     ) : (
+  //       <SecurityLoader />
+  //     )
+  //   ) : (
+  //     <AccessLoader />
+  //   );
 
   return (
     <Tabs

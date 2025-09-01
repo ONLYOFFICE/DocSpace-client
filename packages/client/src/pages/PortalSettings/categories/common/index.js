@@ -54,6 +54,8 @@ const TabsCommon = (props) => {
     getGreetingSettingsIsDefault,
     getBrandName,
     initWhiteLabel,
+    setIsLoaded,
+    isLoaded,
   } = props;
   const location = useLocation();
   const navigate = useNavigate();
@@ -66,6 +68,8 @@ const TabsCommon = (props) => {
     getGreetingSettingsIsDefault,
     getBrandName,
     initWhiteLabel,
+    setIsLoaded,
+    isLoaded,
   });
 
   const data = [
@@ -158,6 +162,7 @@ export const Component = inject(
       initSettings,
       isLoadedSubmenu,
       getGreetingSettingsIsDefault,
+      setIsLoaded,
     } = common;
 
     const { getBrandName, initWhiteLabel } = brandingStore;
@@ -179,6 +184,7 @@ export const Component = inject(
       getGreetingSettingsIsDefault,
       getBrandName,
       initWhiteLabel,
+      setIsLoaded,
     };
   },
 )(withLoading(withTranslation("Settings")(observer(TabsCommon))));

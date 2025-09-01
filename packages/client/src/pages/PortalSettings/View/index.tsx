@@ -151,9 +151,11 @@ const View = ({
     getGreetingSettingsIsDefault: getGreetingSettingsIsDefault || (() => {}),
     getBrandName: getBrandName || (() => {}),
     initWhiteLabel: initWhiteLabel || (() => {}),
-    isLoaded,
-    setIsLoaded,
+    setIsLoaded: setIsLoaded || (() => {}),
+    isLoaded: isLoaded || false,
   });
+
+  console.log("setIsLoaded", setIsLoaded);
 
   // Initialize useSecurity hook with null checks
   const { getSecurityInitialValue } = useSecurity({

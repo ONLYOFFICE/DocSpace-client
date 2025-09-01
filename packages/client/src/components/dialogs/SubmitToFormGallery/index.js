@@ -140,6 +140,7 @@ const SubmitToFormGallery = ({
         isPanelVisible
         onSelectFile={onSelectForm}
         onClose={onCloseFormSelector}
+        withRecentTreeFolder
       />
     );
 

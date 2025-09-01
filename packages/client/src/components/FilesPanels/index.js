@@ -303,6 +303,7 @@ const Panels = (props) => {
         isPanelVisible={selectFileDialogVisible}
         onSelectFile={createMasterForm}
         onClose={onClose}
+        withRecentTreeFolder
       />
     ),
 
@@ -316,6 +317,7 @@ const Panels = (props) => {
         onSelectFile={(file) => copyFromTemplateForm(file, t)}
         filterParam={selectFileFormRoomFilterParam}
         descriptionText={descriptionTextFileFormRoomDialog}
+        withRecentTreeFolder
       />
     ),
 

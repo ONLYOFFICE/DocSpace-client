@@ -577,6 +577,7 @@ const ManualBackup = ({
           isChecked={isCheckedThirdPartyStorage}
           isDisabled={additionalDisabled}
           {...commonRadioButtonProps}
+          testId="third_party_storage_radio_button"
         />
         <Text
           className={classNames(styles.backupDescription, "backup-description")}

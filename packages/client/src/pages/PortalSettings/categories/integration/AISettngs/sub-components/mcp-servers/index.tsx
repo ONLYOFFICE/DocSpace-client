@@ -36,7 +36,7 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import type { TServer } from "@docspace/shared/api/ai/types";
 
 import styles from "../../AISettings.module.scss";
-import { AiTile } from "../ai-tile";
+import { AiTile, AiTileVariant } from "../ai-tile";
 
 type MCPListProps = {
   showHeading: boolean;
@@ -63,7 +63,15 @@ const MCPList = ({ showHeading, headingText, mcpServers }: MCPListProps) => {
 
       <div className={styles.mcpList}>
         {mcpServers.map((mcp) => (
-          <AiTile key={mcp.id} />
+          <AiTile
+            key={mcp.id}
+            title="Asana"
+            variant={AiTileVariant.MCPServer}
+            item={{
+              description:
+                "A tool for creating diagrams, flowcharts, intelligence maps, business layouts, entity relationships, program blocks, and more",
+            }}
+          />
         ))}
       </div>
     </div>

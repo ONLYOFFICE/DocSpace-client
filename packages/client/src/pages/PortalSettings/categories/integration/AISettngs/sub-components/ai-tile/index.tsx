@@ -29,11 +29,31 @@
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { Heading, HeadingLevel } from "@docspace/shared/components/heading";
 import { Text } from "@docspace/shared/components/text";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
 
 import SettingsIcon from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
 
 import styles from "./AiTile.module.scss";
+
+export enum AiTileVariant {
+  AiProvider = "ai-provider",
+  MCPServer = "mcp-server",
+}
+
+type AiProviderTileProps = {
+  variant: AiTileVariant.AiProvider;
+  item: { company: string; apiUrl: string };
+};
+
+type MCPTileProps = {
+  variant: AiTileVariant.MCPServer;
+  item: { description: string };
+};
+
+type AiTileProps = {
+  title: string;
+} & (AiProviderTileProps | MCPTileProps);
 
 const getContextOptions = () => {
   return [
@@ -52,7 +72,34 @@ const getContextOptions = () => {
   ];
 };
 
-export const AiTile = () => {
+export const AiTile = (props: AiTileProps) => {
+  const { title, variant, item } = props;
+
+  const actionButton =
+    variant === AiTileVariant.AiProvider ? (
+      <ContextMenuButton directionX="right" getData={getContextOptions} />
+    ) : (
+      <ToggleButton
+        className={styles.toggleButton}
+        isChecked
+        onChange={() => {}}
+      />
+    );
+
+  const bodyContent =
+    variant === AiTileVariant.AiProvider ? (
+      <>
+        <Text className={styles.companyTitle} truncate>
+          Anthropic
+        </Text>
+        <Text className={styles.apiUrl} truncate>
+          https://api.anthropic.com/v1
+        </Text>
+      </>
+    ) : (
+      <Text className={styles.description}>{item.description}</Text>
+    );
+
   return (
     <div className={styles.aiTile}>
       <div className={styles.icon} />
@@ -66,18 +113,11 @@ export const AiTile = () => {
             lineHeight="22px"
             truncate
           >
-            Claude
+            {title}
           </Heading>
-          <ContextMenuButton directionX="right" getData={getContextOptions} />
+          {actionButton}
         </div>
-        <div className={styles.body}>
-          <Text className={styles.companyTitle} truncate>
-            Anthropic
-          </Text>
-          <Text className={styles.apiUrl} truncate>
-            https://api.anthropic.com/v1
-          </Text>
-        </div>
+        <div className={styles.body}>{bodyContent}</div>
       </div>
     </div>
   );

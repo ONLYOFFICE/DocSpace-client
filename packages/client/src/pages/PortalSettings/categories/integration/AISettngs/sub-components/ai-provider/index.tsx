@@ -35,7 +35,7 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 
 import styles from "../../AISettings.module.scss";
-import { AiTile } from "../ai-tile";
+import { AiTile, AiTileVariant } from "../ai-tile";
 
 export const AiProvider = () => {
   const { t } = useTranslation("Common");
@@ -76,10 +76,17 @@ export const AiProvider = () => {
       />
 
       <div className={styles.providerList}>
-        <AiTile />
-        <AiTile />
-        <AiTile />
-        <AiTile />
+        {Array.from({ length: 4 }).map((_, index) => (
+          <AiTile
+            key={index}
+            title="Claude"
+            variant={AiTileVariant.AiProvider}
+            item={{
+              company: "Anthropic",
+              apiUrl: "https://api.anthropic.com/v1",
+            }}
+          />
+        ))}
       </div>
     </div>
   );

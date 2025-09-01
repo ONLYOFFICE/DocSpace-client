@@ -36,9 +36,13 @@ import { Text } from "@docspace/shared/components/text";
 
 import styles from "../../AISettings.module.scss";
 import { AiTile, AiTileVariant } from "../ai-tile";
+import { useFetchAiProviders } from "./useFetchAiProviders";
 
 export const AiProvider = () => {
   const { t } = useTranslation("Common");
+  const { aiProviders, isAiProvidersLoading } = useFetchAiProviders();
+
+  if (isAiProvidersLoading) return null;
 
   return (
     <div className={styles.aiProvider}>
@@ -76,15 +80,11 @@ export const AiProvider = () => {
       />
 
       <div className={styles.providerList}>
-        {Array.from({ length: 4 }).map((_, index) => (
+        {aiProviders.map((provider) => (
           <AiTile
-            key={index}
-            title="Claude"
+            key={provider.id}
             variant={AiTileVariant.AiProvider}
-            item={{
-              company: "Anthropic",
-              apiUrl: "https://api.anthropic.com/v1",
-            }}
+            item={provider}
           />
         ))}
       </div>

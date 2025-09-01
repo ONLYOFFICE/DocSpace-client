@@ -32,7 +32,7 @@ import { ContextMenuButton } from "@docspace/shared/components/context-menu-butt
 import { Heading, HeadingLevel } from "@docspace/shared/components/heading";
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
-import type { TServer } from "@docspace/shared/api/ai/types";
+import type { TAiProvider, TServer } from "@docspace/shared/api/ai/types";
 import { getServerIcon } from "@docspace/shared/utils/getServerIcon";
 import { useTheme } from "@docspace/shared/hooks/useTheme";
 
@@ -48,7 +48,7 @@ export enum AiTileVariant {
 
 type AiProviderTileProps = {
   variant: AiTileVariant.AiProvider;
-  item: { company: string; apiUrl: string };
+  item: TAiProvider;
 };
 
 type MCPTileProps = {
@@ -98,7 +98,7 @@ export const AiTile = (props: AiTileProps) => {
           Anthropic
         </Text>
         <Text className={styles.apiUrl} truncate>
-          https://api.anthropic.com/v1
+          {item.url}
         </Text>
       </>
     ) : (
@@ -125,9 +125,7 @@ export const AiTile = (props: AiTileProps) => {
             lineHeight="22px"
             truncate
           >
-            {variant === AiTileVariant.AiProvider
-              ? "ai provider name"
-              : item.name}
+            {variant === AiTileVariant.AiProvider ? item.title : item.name}
           </Heading>
           {actionButton}
         </div>

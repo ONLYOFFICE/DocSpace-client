@@ -138,95 +138,95 @@ const AISettngs = ({ standalone }: { standalone?: boolean }) => {
       <div className={styles.aiSettingsContainer}>
         {standalone ? <AiProvider /> : null}
         <McpServers standalone={standalone} />
-        {/*<div className={styles.addProvider}>*/}
-        {/*  <FieldContainer*/}
-        {/*    labelText="Provider type"*/}
-        {/*    labelVisible*/}
-        {/*    isVertical*/}
-        {/*    removeMargin*/}
-        {/*  >*/}
-        {/*    <ComboBox*/}
-        {/*      options={providerTypes}*/}
-        {/*      selectedOption={selectedOption}*/}
-        {/*      onSelect={(option) => setSelectedOption(option)}*/}
-        {/*      scaled*/}
-        {/*      scaledOptions*/}
-        {/*    />*/}
-        {/*  </FieldContainer>*/}
-        {/*  <FieldContainer*/}
-        {/*    labelText="Provider title"*/}
-        {/*    labelVisible*/}
-        {/*    isVertical*/}
-        {/*    removeMargin*/}
-        {/*  >*/}
-        {/*    <TextInput*/}
-        {/*      size={InputSize.base}*/}
-        {/*      type={InputType.text}*/}
-        {/*      value={providerTitle}*/}
-        {/*      onChange={(e) => setProviderTitle(e.target.value)}*/}
-        {/*      scale*/}
-        {/*      placeholder="Provider title"*/}
-        {/*    />*/}
-        {/*  </FieldContainer>*/}
+        <div className={styles.addProvider}>
+          <FieldContainer
+            labelText="Provider type"
+            labelVisible
+            isVertical
+            removeMargin
+          >
+            <ComboBox
+              options={providerTypes}
+              selectedOption={selectedOption}
+              onSelect={(option) => setSelectedOption(option)}
+              scaled
+              scaledOptions
+            />
+          </FieldContainer>
+          <FieldContainer
+            labelText="Provider title"
+            labelVisible
+            isVertical
+            removeMargin
+          >
+            <TextInput
+              size={InputSize.base}
+              type={InputType.text}
+              value={providerTitle}
+              onChange={(e) => setProviderTitle(e.target.value)}
+              scale
+              placeholder="Provider title"
+            />
+          </FieldContainer>
 
-        {/*  <FieldContainer*/}
-        {/*    labelText="Provider key"*/}
-        {/*    labelVisible*/}
-        {/*    isVertical*/}
-        {/*    removeMargin*/}
-        {/*  >*/}
-        {/*    <TextInput*/}
-        {/*      size={InputSize.base}*/}
-        {/*      type={InputType.text}*/}
-        {/*      value={providerKey}*/}
-        {/*      onChange={(e) => setProviderKey(e.target.value)}*/}
-        {/*      scale*/}
-        {/*      placeholder="Provider key"*/}
-        {/*    />*/}
-        {/*  </FieldContainer>*/}
-        {/*  <FieldContainer*/}
-        {/*    labelText="Provider url"*/}
-        {/*    labelVisible*/}
-        {/*    isVertical*/}
-        {/*    removeMargin*/}
-        {/*  >*/}
-        {/*    <TextInput*/}
-        {/*      size={InputSize.base}*/}
-        {/*      type={InputType.text}*/}
-        {/*      value={providerUrl}*/}
-        {/*      onChange={(e) => setProviderUrl(e.target.value)}*/}
-        {/*      scale*/}
-        {/*      placeholder="Provider url"*/}
-        {/*    />*/}
-        {/*  </FieldContainer>*/}
-        {/*  <Button*/}
-        {/*    size={ButtonSize.normal}*/}
-        {/*    label="Add provider"*/}
-        {/*    onClick={onAddProvider}*/}
-        {/*    primary*/}
-        {/*    isDisabled={!selectedOption || !providerTitle || !providerKey}*/}
-        {/*    style={{ marginTop: "8px" }}*/}
-        {/*  />*/}
-        {/*</div>*/}
-        {/*<div className={styles.listProviders}>*/}
-        {/*  {providers.map((provider) => (*/}
-        {/*    <div className={styles.providerItem} key={provider.id}>*/}
-        {/*      <div className={styles.providerItemTitle}>*/}
-        {/*        <Text isBold fontSize="16px" lineHeight="20px">*/}
-        {/*          {provider.title}*/}
-        {/*        </Text>*/}
-        {/*        <IconButton*/}
-        {/*          iconName={DeleteIconReactSvgUrl}*/}
-        {/*          onClick={() => onDeleteProvider(provider.id)}*/}
-        {/*          size={16}*/}
-        {/*        />*/}
-        {/*      </div>*/}
+          <FieldContainer
+            labelText="Provider key"
+            labelVisible
+            isVertical
+            removeMargin
+          >
+            <TextInput
+              size={InputSize.base}
+              type={InputType.text}
+              value={providerKey}
+              onChange={(e) => setProviderKey(e.target.value)}
+              scale
+              placeholder="Provider key"
+            />
+          </FieldContainer>
+          <FieldContainer
+            labelText="Provider url"
+            labelVisible
+            isVertical
+            removeMargin
+          >
+            <TextInput
+              size={InputSize.base}
+              type={InputType.text}
+              value={providerUrl}
+              onChange={(e) => setProviderUrl(e.target.value)}
+              scale
+              placeholder="Provider url"
+            />
+          </FieldContainer>
+          <Button
+            size={ButtonSize.normal}
+            label="Add provider"
+            onClick={onAddProvider}
+            primary
+            isDisabled={!selectedOption || !providerTitle || !providerKey}
+            style={{ marginTop: "8px" }}
+          />
+        </div>
+        <div className={styles.listProviders}>
+          {providers.map((provider) => (
+            <div className={styles.providerItem} key={provider.id}>
+              <div className={styles.providerItemTitle}>
+                <Text isBold fontSize="16px" lineHeight="20px">
+                  {provider.title}
+                </Text>
+                <IconButton
+                  iconName={DeleteIconReactSvgUrl}
+                  onClick={() => onDeleteProvider(provider.id)}
+                  size={16}
+                />
+              </div>
 
-        {/*      <div>Type: {getProviderLabel(provider.type)}</div>*/}
-        {/*      <div>Url: {provider.url}</div>*/}
-        {/*    </div>*/}
-        {/*  ))}*/}
-        {/*</div>*/}
+              <div>Type: {getProviderLabel(provider.type)}</div>
+              <div>Url: {provider.url}</div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

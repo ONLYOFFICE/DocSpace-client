@@ -2826,3 +2826,22 @@
 .dark {
   --quick-buttons-shared-color: #{$white};
 }
+
+.light {
+  --submit-gallery-tile-border: var(--color-scheme-main-accent);
+  --submit-gallery-tile-color-close-icon-fill: #{$light-gray-dark};
+  --submit-gallery-tile-background: #{$white};
+
+  --submit-gallery-tile-text: var(--color-scheme-main-accent);
+  --submit-gallery-tile-text-body: #{$gray-text};
+  --submit-gallery-tile-text-background: #{$white};
+}
+
+.dark {
+  --submit-gallery-tile-border: #{$white};
+  --submit-gallery-tile-color-close-icon-fill: #{$dark-gray-dark};
+  --submit-gallery-tile-background: #{$dark-gray-light};
+
+  --submit-gallery-tile-text: #{$white};
+  --submit-gallery-tile-text-body: #{$dark-gray-dark};
+}

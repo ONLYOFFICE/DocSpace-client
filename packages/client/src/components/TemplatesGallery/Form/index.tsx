@@ -26,7 +26,6 @@
 
 import { useState, useEffect, useRef } from "react";
 import { observer, inject } from "mobx-react";
-import { useLocation } from "react-router";
 
 import OformsFilter from "@docspace/shared/api/oforms/filter";
 import { isMobile } from "@docspace/shared/utils";
@@ -64,7 +63,6 @@ const Form: FC<FormProps> = ({
   tabPresentation,
   tabForm,
 }) => {
-  const location = useLocation();
   // const navigate = useNavigate();
 
   const [isInitLoading, setIsInitLoading] = useState(true);

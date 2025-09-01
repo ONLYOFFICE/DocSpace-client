@@ -43,6 +43,7 @@ interface FormComponentProps {
   tabDocuments?: boolean;
   tabSpreadsheet?: boolean;
   tabPresentation?: boolean;
+  tabForm?: boolean;
 }
 
 const FormComponent = Form as React.ComponentType<FormComponentProps>;

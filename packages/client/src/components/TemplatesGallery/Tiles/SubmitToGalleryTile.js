@@ -25,130 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { Button } from "@docspace/shared/components/button";
-import styled, { css } from "styled-components";
-import {
-  commonIconsStyles,
-  injectDefaultTheme,
-  tablet,
-} from "@docspace/shared/utils";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
+import { ReactSVG } from "react-svg";
+import { useTheme } from "styled-components";
 import hexRgb from "hex-rgb";
-import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
+import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg?url";
+import { globalColors } from "@docspace/shared/themes";
 
-export const StyledSubmitToGalleryTile = styled.div.attrs(injectDefaultTheme)`
-  width: 100%;
-  height: ${(props) => (props.viewMobile ? `100%` : `calc(100% - 51px)`)};
-
-  .content {
-    height: ${(props) => (props.viewMobile ? `110px` : `100%`)};
-
-    margin: ${(props) =>
-      props.viewMobile ? `0 10px 26px 10px` : `12px 10px 10px 10px`};
-
-    position: relative;
-
-    padding: 16px;
-    box-sizing: border-box;
-
-    border: 2px solid
-      ${({ currentColorScheme }) => currentColorScheme.main?.accent};
-    border-radius: 6px;
-    background-color: ${({ currentColorScheme }) =>
-      hexRgb(currentColorScheme.main?.accent, { alpha: 0.03, format: "css" })};
-
-    display: flex;
-    flex-direction: column;
-
-    justify-content: center;
-    gap: 16px;
-  }
-
-  .info {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 8px;
-
-    .title {
-      color: ${({ currentColorScheme }) => currentColorScheme.main?.accent};
-      font-weight: 600;
-      font-size: 14px;
-      line-height: 16px;
-    }
-    .body {
-      font-weight: 400;
-      font-size: 12px;
-      line-height: 16px;
-      color: ${({ theme }) => theme.oformGallery.submitToGalleryTile.bodyText};
-    }
-  }
-
-  .button-submit {
-    min-height: 28px;
-    height: 28px;
-    padding: 0;
-
-    .button-content {
-      font-weight: 600;
-      font-size: 12px;
-      line-height: 16px;
-      white-space: normal;
-      word-wrap: break-word;
-      text-align: center;
-    }
-  }
-
-  @media ${tablet} {
-    .content {
-      padding: 6px 16px;
-      gap: 10px;
-
-      ${(props) =>
-        props.smallPreview &&
-        css`
-          padding: 14px 16px;
-        `}
-    }
-
-    .info {
-      gap: 4px;
-
-      .title {
-        font-size: 11px;
-        line-height: 12px;
-      }
-
-      .body {
-        font-size: 10px;
-        line-height: 14px;
-      }
-    }
-
-    .button-submit {
-      min-height: 24px;
-      height: auto;
-
-      .button-content {
-        font-size: 10px;
-        line-height: 15px;
-      }
-    }
-  }
-`;
-
-const StyledCloseIcon = styled(CrossIcon).attrs(injectDefaultTheme)`
-  ${commonIconsStyles}
-  position: absolute;
-  top: 10px;
-  cursor: pointer;
-  inset-inline-end: 10px;
-
-  path {
-    fill: ${({ theme }) =>
-      theme.oformGallery.submitToGalleryTile.closeIconFill};
-  }
-`;
+import classNames from "classnames";
+import styles from "./SubmitToGalleryTile.module.scss";
 
 const SubmitToGalleryTile = ({
   t,
@@ -161,28 +47,49 @@ const SubmitToGalleryTile = ({
   submitToGalleryTileIsVisible,
   viewMobile,
 }) => {
+  const { isBase } = useTheme();
+
   if (!submitToGalleryTileIsVisible) return null;
 
   const onSubmitToGallery = () => setSubmitToGalleryDialogVisible(true);
 
+  const tileClassName = classNames(styles.submitToGalleryTile, {
+    [styles.viewMobile]: viewMobile,
+  });
+
+  const contentClassName = classNames(styles.content, {
+    [styles.smallPreview]: smallPreview,
+  });
+
   return (
-    <StyledSubmitToGalleryTile
-      currentColorScheme={currentColorScheme}
-      smallPreview={smallPreview}
+    <div
+      className={tileClassName}
       data-small-preview={smallPreview ? "true" : "false"}
       data-submit-tile={isSubmitTile ? "true" : "false"}
-      viewMobile={viewMobile}
     >
-      <div className="content">
-        <StyledCloseIcon
+      <div
+        className={contentClassName}
+        style={{
+          "--color-background": isBase
+            ? hexRgb(currentColorScheme.main?.accent, {
+                alpha: 0.03,
+                format: "css",
+              })
+            : hexRgb(globalColors.white, {
+                alpha: 0.03,
+                format: "css",
+              }),
+        }}
+      >
+        <ReactSVG
+          src={CrossIcon}
           onClick={hideSubmitToGalleryTile}
-          className="close-icon"
-          size="medium"
+          className={styles.closeIcon}
         />
 
-        <div className="info">
-          <div className="title">ONLYOFFICE Template Gallery</div>
-          <div className="body">
+        <div className={styles.info}>
+          <div className={styles.title}>ONLYOFFICE Template Gallery</div>
+          <div className={styles.body}>
             {t("Common:SubmitToGalleryBlockBody", {
               organizationName: logoText,
             })}
@@ -190,14 +97,14 @@ const SubmitToGalleryTile = ({
         </div>
 
         <Button
-          className="button-submit"
+          className={styles.buttonSubmit}
           onClick={onSubmitToGallery}
           size="small"
           label={t("FormGallery:UploadGallery")}
           scale
         />
       </div>
-    </StyledSubmitToGalleryTile>
+    </div>
   );
 };
 

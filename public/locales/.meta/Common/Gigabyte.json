@@ -3,7 +3,7 @@
   "content": "GB",
   "content_en_sha1_hash": "505a44facaa3e758845f6e101f4e21f9d99acf63",
   "created_at": "2025-05-19T21:30:45.623Z",
-  "updated_at": "2025-08-21T14:45:43.945Z",
+  "updated_at": "2025-09-01T14:09:49.940Z",
   "comment": {
     "text": "This translation key is used to display the unit \"Gigabyte\" (GB) in a file quota form. It appears on a dropdown menu where users can select their preferred size unit for displaying and managing files. Translators should note that this term will be used as an option within a larger list of units, including Bytes, Kilobytes, Megabytes, Terabytes, Petabytes, Exabytes, and others.",
     "is_auto": true,
@@ -14,18 +14,6 @@
       "file_path": "/packages/client/src/components/dialogs/StorageTariffDeactiveted/index.tsx",
       "line_number": 113,
       "context": "<Trans\n t={t}\n ns=\"Payments\"\n i18nKey=\"PreviousPlan\"\n values={{\n amount: `${previousStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n price: formatWalletCurrency!(totalPrice!, 2),\n }}\n components={{\n 1: <Text fontWeight={600} as=\"span\" />,\n 2: <Text className={styles.monthPayment} as=\"span\" />,",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/RowView/RowBody.tsx",
-      "line_number": 74,
-      "context": "serviceName = \"disk-storage\";\n }\n \n switch (serviceName) {\n case \"disk-storage\":\n return `${quantity} ${t(\"Common:Gigabyte\")}`;\n default:\n return \"—\";\n }\n };\n const correctDate = getCorrectDate(language, transaction.date);",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/TableView/TableBody.tsx",
-      "line_number": 69,
-      "context": "serviceName = \"disk-storage\";\n }\n \n switch (serviceName) {\n case \"disk-storage\":\n return `${quantity} ${t(\"Common:Gigabyte\")}`;\n default:\n return \"—\";\n }\n };\n const correctDate = getCorrectDate(language, transaction.date);",
       "module": "/packages/client"
     },
     {

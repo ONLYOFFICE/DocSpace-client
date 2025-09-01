@@ -3,7 +3,7 @@
   "content": "Apply",
   "content_en_sha1_hash": "cfea419c3b4e8b02ee586e70a28bf846e44cdda4",
   "created_at": "2025-05-19T21:30:43.032Z",
-  "updated_at": "2025-08-11T18:11:59.153Z",
+  "updated_at": "2025-09-01T14:09:49.934Z",
   "comment": {
     "text": "The \"Apply\" translation key is used to display the label for an apply button that confirms changes or applies settings in a color selection dialog. It appears as part of a larger dialog component and is also referenced as the primary action button within another variant of the same dialog. This translation can be found on buttons with the id \"applyButtonLabel\" in various dialogs.",
     "is_auto": true,
@@ -65,8 +65,8 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
-      "line_number": 426,
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/FilterPanel.tsx",
+      "line_number": 121,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n onClick={onApplyFilter}\n size={ButtonSize.medium}\n label={t(\"Common:ApplyButton\")}\n isDisabled={!isChanged}\n primary\n scale\n testId=\"apply_filter_button\"\n />",
       "module": "/packages/client"
     },

@@ -46,6 +46,7 @@ import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStor
 import LoaderCustomization from "../sub-components/loaderCustomization";
 import { StyledSettingsComponent } from "./StyledSettings";
 import checkScrollSettingsBlock from "../utils";
+import useCommon from "../useCommon";
 
 import BetaBadge from "../../../../../components/BetaBadgeWrapper";
 
@@ -96,9 +97,21 @@ const LanguageAndTimeZoneComponent = (props) => {
     isLoadedPage,
     currentColorScheme,
     deviceType,
+    setIsLoaded,
+    loadBaseInfo,
   } = props;
 
   const isMobileView = deviceType === DeviceType.mobile;
+
+  const { getCommonInitialValue } = useCommon({
+    loadBaseInfo,
+    isMobileView,
+    getGreetingSettingsIsDefault: () => {},
+    getBrandName: () => {},
+    initWhiteLabel: () => {},
+    setIsLoaded,
+    isLoaded,
+  });
 
   const navigate = useNavigate();
 
@@ -172,6 +185,8 @@ const LanguageAndTimeZoneComponent = (props) => {
     timezoneFromSessionStorage = getFromSessionStorage("timezone");
     timezoneDefaultFromSessionStorage =
       getFromSessionStorage("timezoneDefault");
+
+    getCommonInitialValue();
 
     setDocumentTitle(t("StudioTimeLanguageSettings"));
 
@@ -578,7 +593,8 @@ export const LanguageAndTimeZoneSettings = inject(
     const { user } = userStore;
 
     const { setLanguageAndTime } = setup;
-    const { isLoaded, setIsLoadedLngTZSettings, initSettings } = common;
+    const { isLoaded, setIsLoadedLngTZSettings, initSettings, setIsLoaded } =
+      common;
     return {
       user,
       portalLanguage: culture,
@@ -595,6 +611,10 @@ export const LanguageAndTimeZoneSettings = inject(
       currentColorScheme,
       languageAndTimeZoneSettingsUrl,
       deviceType,
+      setIsLoaded,
+      loadBaseInfo: async (page) => {
+        await initSettings(page);
+      },
     };
   },
 )(

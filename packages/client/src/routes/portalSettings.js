@@ -59,43 +59,133 @@ const PortalSettingsRoutes = {
     },
     {
       path: "customization/branding/brand-name",
-      element: <ViewComponent />,
+      async lazy() {
+        const { BrandName } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/common/Branding/brandName"
+            ),
+        );
+
+        return { Component: BrandName };
+      },
     },
     {
       path: "customization/branding/white-label",
-      element: <ViewComponent />,
+      async lazy() {
+        const { WhiteLabel } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/common/Branding/whitelabel"
+            ),
+        );
+
+        return { Component: WhiteLabel };
+      },
     },
     {
       path: "customization/branding/company-info",
-      element: <ViewComponent />,
+      async lazy() {
+        const { CompanyInfoSettings } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/common/Branding/companyInfoSettings"
+            ),
+        );
+
+        return { Component: CompanyInfoSettings };
+      },
     },
     {
       path: "customization/branding/additional-resources",
-      element: <ViewComponent />,
+      async lazy() {
+        const { AdditionalResources } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/common/Branding/additionalResources"
+            ),
+        );
+
+        return { Component: AdditionalResources };
+      },
     },
     {
       path: "customization/general/language-and-time-zone",
-      element: <ViewComponent />,
+      async lazy() {
+        const { LanguageAndTimeZoneSettings } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/common/Customization/language-and-time-zone"
+            ),
+        );
+
+        return { Component: LanguageAndTimeZoneSettings };
+      },
     },
     {
       path: "customization/general/welcome-page-settings",
-      element: <ViewComponent />,
+      async lazy() {
+        const { WelcomePageSettings } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/common/Customization/welcome-page-settings"
+            ),
+        );
+
+        return { Component: WelcomePageSettings };
+      },
     },
     {
       path: "customization/general/dns-settings",
-      element: <ViewComponent />,
+      async lazy() {
+        const { DNSSettings } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/common/Customization/dns-settings"
+            ),
+        );
+
+        return { Component: DNSSettings };
+      },
     },
     {
       path: "customization/general/portal-renaming",
-      element: <ViewComponent />,
+      async lazy() {
+        const { PortalRenaming } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/common/Customization/portal-renaming"
+            ),
+        );
+
+        return { Component: PortalRenaming };
+      },
     },
     {
       path: "customization/general/configure-deep-link",
-      element: <ViewComponent />,
+      async lazy() {
+        const { ConfigureDeepLink } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/common/Customization/configure-deep-link"
+            ),
+        );
+
+        return { Component: ConfigureDeepLink };
+      },
     },
     {
       path: "customization/general/ad-management",
-      element: <ViewComponent />,
+      async lazy() {
+        const { AdManagement } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/common/Customization/ad-management"
+            ),
+        );
+
+        return { Component: AdManagement };
+      },
     },
     {
       path: "security",
@@ -115,39 +205,120 @@ const PortalSettingsRoutes = {
     },
     {
       path: "security/access-portal/tfa",
-      element: <ViewComponent />,
+      async lazy() {
+        const { TfaSection } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/security/access-portal/tfa"
+            ),
+        );
+
+        return { Component: TfaSection };
+      },
     },
     {
       path: "security/access-portal/password",
-      element: <ViewComponent />,
+      async lazy() {
+        const { PasswordStrengthSection } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/security/access-portal/passwordStrength"
+            ),
+        );
+
+        return { Component: PasswordStrengthSection };
+      },
     },
     {
       path: "security/access-portal/trusted-mail",
-      element: <ViewComponent />,
+      async lazy() {
+        const { TrustedMailSection } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/security/access-portal/trustedMail"
+            ),
+        );
+
+        return { Component: TrustedMailSection };
+      },
     },
     {
       path: "security/access-portal/access-dev-tools",
-      element: <ViewComponent />,
+      async lazy() {
+        const { DevToolsAccessSection } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/security/access-portal/devToolsAccess"
+            ),
+        );
+
+        return { Component: DevToolsAccessSection };
+      },
     },
     {
       path: "security/access-portal/invitation-settings",
-      element: <ViewComponent />,
+      async lazy() {
+        const { InvitationSettingsSection } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/security/access-portal/invitationSettings"
+            ),
+        );
+
+        return { Component: InvitationSettingsSection };
+      },
     },
     {
       path: "security/access-portal/ip",
-      element: <ViewComponent />,
+      async lazy() {
+        const { IpSecuritySection } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/security/access-portal/ipSecurity"
+            ),
+        );
+
+        return { Component: IpSecuritySection };
+      },
     },
     {
       path: "security/access-portal/brute-force-protection",
-      element: <ViewComponent />,
+      async lazy() {
+        const { BruteForceProtectionSection } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/security/access-portal/bruteForceProtection"
+            ),
+        );
+
+        return { Component: BruteForceProtectionSection };
+      },
     },
     {
       path: "security/access-portal/admin-message",
-      element: <ViewComponent />,
+      async lazy() {
+        const { AdminMessageSection } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/security/access-portal/adminMessage"
+            ),
+        );
+
+        return { Component: AdminMessageSection };
+      },
     },
     {
       path: "security/access-portal/lifetime",
-      element: <ViewComponent />,
+      async lazy() {
+        const { SessionLifetimeSection } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/security/access-portal/sessionLifetime"
+            ),
+        );
+
+        return { Component: SessionLifetimeSection };
+      },
     },
     {
       path: "integration",
@@ -183,19 +354,55 @@ const PortalSettingsRoutes = {
     },
     {
       path: "integration/ldap/settings",
-      element: <ViewComponent />,
+      async lazy() {
+        const { SettingsContainerSection } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/integration/LDAP/sub-components/SettingsContainer"
+            ),
+        );
+
+        return { Component: SettingsContainerSection };
+      },
     },
     {
       path: "integration/ldap/sync-data",
-      element: <ViewComponent />,
+      async lazy() {
+        const { SyncContainerSection } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/integration/LDAP/sub-components/SyncContainer"
+            ),
+        );
+
+        return { Component: SyncContainerSection };
+      },
     },
     {
       path: "integration/sso/settings",
-      element: <ViewComponent />,
+      async lazy() {
+        const { SPSettingsSection } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/integration/SingleSignOn/SPSettings"
+            ),
+        );
+
+        return { Component: SPSettingsSection };
+      },
     },
     {
       path: "integration/sso/metadata",
-      element: <ViewComponent />,
+      async lazy() {
+        const { ProviderMetadataSection } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/integration/SingleSignOn/ProviderMetadata"
+            ),
+        );
+
+        return { Component: ProviderMetadataSection };
+      },
     },
     {
       path: "payments/portal-payments",
@@ -215,11 +422,29 @@ const PortalSettingsRoutes = {
     },
     {
       path: "management/disk-space/quota-per-room",
-      element: <ViewComponent />,
+      async lazy() {
+        const { QuotaPerRoomComponentSection } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerRoom"
+            ),
+        );
+
+        return { Component: QuotaPerRoomComponentSection };
+      },
     },
     {
       path: "management/disk-space/quota-per-user",
-      element: <ViewComponent />,
+      async lazy() {
+        const { QuotaPerUserComponentSection } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerUser"
+            ),
+        );
+
+        return { Component: QuotaPerUserComponentSection };
+      },
     },
     {
       path: "data-import",

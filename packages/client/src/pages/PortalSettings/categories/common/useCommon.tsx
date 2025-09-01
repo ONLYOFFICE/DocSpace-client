@@ -52,20 +52,23 @@ const useCommon = ({
   const inTabBranding = window.location.pathname.includes("branding");
   const inTabGeneral = window.location.pathname.includes("general");
 
-  const getCustomizationData = useCallback(async () => {
-    if (isLoaded) return;
+  const getCustomizationData = useCallback(
+    async (
+      page?: "language-and-time-zone" | "dns-settings" | "configure-deep-link",
+    ) => {
+      if (isLoaded) return;
 
-    if (isMobileView) {
-      loadBaseInfo("language-and-time-zone");
-      loadBaseInfo("dns-settings");
-      loadBaseInfo("configure-deep-link");
-    } else {
-      loadBaseInfo("general");
-    }
-    setIsLoaded(true);
+      if (isMobileView && page) {
+        loadBaseInfo(page);
+      } else {
+        loadBaseInfo("general");
+      }
+      setIsLoaded(true);
 
-    getGreetingSettingsIsDefault();
-  }, [isMobileView, loadBaseInfo, getGreetingSettingsIsDefault]);
+      getGreetingSettingsIsDefault();
+    },
+    [isMobileView, loadBaseInfo, getGreetingSettingsIsDefault],
+  );
 
   const getBrandingData = useCallback(async () => {
     getBrandName();
@@ -88,6 +91,15 @@ const useCommon = ({
 
   const getCommonInitialValue = React.useCallback(async () => {
     const actions = [initialLoad()];
+    if (window.location.pathname.includes("language-and-time-zone"))
+      actions.push(getCustomizationData("language-and-time-zone"));
+
+    if (window.location.pathname.includes("dns-settings"))
+      actions.push(getCustomizationData("dns-settings"));
+
+    if (window.location.pathname.includes("configure-deep-link"))
+      actions.push(getCustomizationData("configure-deep-link"));
+
     if (inTabGeneral) actions.push(getCustomizationData());
 
     if (inTabBranding) actions.push(getBrandingData());

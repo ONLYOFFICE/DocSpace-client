@@ -3,7 +3,7 @@
   "content": "Via link",
   "content_en_sha1_hash": "82b77d2291896256b99fa9e0bc5d62490fdcf53d",
   "created_at": "2025-08-27T10:14:18.067Z",
-  "updated_at": "2025-08-27T10:15:07.074Z",
+  "updated_at": "2025-09-01T11:05:24.220Z",
   "comment": {
     "text": "This key displays a link label, likely a button or link text, indicating a connection or pathway. It appears conditionally based on the `requestToken` property of an item, suggesting it provides access to a related resource or page. Translators should consider a term that accurately conveys the idea of a connection or pathway.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/sub-components/LocationCell.tsx",
-      "line_number": 58,
-      "context": "const { t } = useTranslation(\"Common\");\n const [path, setPath] = useState<TPath[]>([]);\n const [isPathLoading, setIsPathLoading] = useState(false);\n \n const title = item.requestToken\n ? t(\"Common:ViaLink\")\n : originRoomTitle || originTitle;\n const withTooltip = item.requestToken ? false : !!title;\n \n const getPath = useCallback(async () => {\n if (path.length || !originId || !title) return;",
+      "line_number": 62,
+      "context": "const { t } = useTranslation(\"Common\");\n const [path, setPath] = useState<TPath[]>([]);\n const [isPathLoading, setIsPathLoading] = useState(false);\n \n const title = item.requestToken\n ? t(\"Common:ViaLink\")\n : originRoomTitle || originTitle;\n const originId = originFolderId || originRoomId;\n const withTooltip = item.requestToken ? false : !!title;\n \n const getPath = useCallback(async () => {",
       "module": "/packages/client"
     }
   ],

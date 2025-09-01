@@ -146,6 +146,7 @@ const FilesSelectorWrapper = ({
   checkCreating,
   logoText,
   isPortalView = false,
+  withoutDescriptionText = false,
 }: FilesSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Files",
@@ -437,7 +438,10 @@ const FilesSelectorWrapper = ({
       withSearch={withSearch}
       withPadding={withPadding}
       descriptionText={
-        !withSubtitle || !filterParam || filterParam === "ALL"
+        !withSubtitle ||
+        !filterParam ||
+        filterParam === "ALL" ||
+        withoutDescriptionText
           ? ""
           : (descriptionText ?? t("Common:SelectDOCXFormat"))
       }

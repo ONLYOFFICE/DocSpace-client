@@ -247,3 +247,5 @@ export const STORAGE_TARIFF_DEACTIVATED = "storageTariffDeactivated";
 // any unicode letters are allowed, characters are prohibited
 export const BRAND_NAME_REGEX =
   /^[^\s-]([^<>\/\\|:*?"'`~!@#$%^&()+={}[\];,.])*[^\s-]$/;
+
+export const TEMPLATE_GALLERY_FORMATS = [".docx", ".xlsx", ".pptx", ".pdf"];

@@ -30,6 +30,7 @@ import {
   FilesSelectorFilterTypes,
   FilterType,
 } from "../../enums";
+import { TEMPLATE_GALLERY_FORMATS } from "../../constants";
 
 export const configureFilterByFilterParam = (
   filter: FilesFilter,
@@ -109,6 +110,12 @@ export const configureFilterByFilterParam = (
       filter.extension = extsWebEdited
         .map((extension) => extension.slice(1))
         .join(",");
+      break;
+
+    case "TemplateGalleryTypes":
+      filter.extension = TEMPLATE_GALLERY_FORMATS.map((extension) =>
+        extension.slice(1),
+      ).join(",");
       break;
 
     default:

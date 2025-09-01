@@ -155,4 +155,5 @@ export type FilesSelectorProps = TSelectorHeader & {
   checkCreating?: boolean;
   logoText: string;
   isPortalView?: boolean;
+  withoutDescriptionText?: boolean;
 };

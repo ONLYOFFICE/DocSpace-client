@@ -136,12 +136,12 @@ const SubmitToFormGallery = ({
     return (
       <FilesSelector
         key="select-file-dialog"
-        filterParam={FilesSelectorFilterTypes.PDF}
-        descriptionText={t("Common:SelectPDFFormat")}
+        filterParam="TemplateGalleryTypes"
         isPanelVisible
         onSelectFile={onSelectForm}
         onClose={onCloseFormSelector}
         isPortalView
+        withoutDescriptionText
       />
     );
 

@@ -1,0 +1,28 @@
+{
+  "key_path": "OnlyPortalAdminsShown",
+  "content": "Only {{productName}} admins are shown here",
+  "content_en_sha1_hash": "f8a6bcdf8beb69a00c76ffb122523b63fdf29c5d",
+  "created_at": "2025-09-01T14:09:45.411Z",
+  "updated_at": "2025-09-01T14:10:50.012Z",
+  "comment": {
+    "text": "This text displays a message indicating that only administrators of the specified product ({{productName}}) are shown in the current view. It appears as an informational message within the Transaction History section of the Portal Settings. Translators should ensure the wording accurately reflects this limitation.",
+    "is_auto": true,
+    "updated_at": "2025-09-01T14:10:50.012Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
+      "line_number": 479,
+      "context": "isCloseable: true,\n headerLabel: t(\"ListContacts\"),\n }}\n filter={filter}\n withInfo\n infoText={t(\"OnlyPortalAdminsShown\", {\n productName: t(\"Common:ProductName\"),\n })}\n emptyScreenHeader={t(\"Common:NotFoundMembers\")}\n emptyScreenDescription={t(\"CreateEditRoomDialog:PeopleSelectorInfo\", {\n productName: t(\"Common:ProductName\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

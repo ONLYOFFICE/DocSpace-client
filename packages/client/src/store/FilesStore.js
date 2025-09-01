@@ -464,8 +464,7 @@ class FilesStore {
     this.createNewFilesQueue.on("resolve", this.onResolveNewFile);
   }
 
-  // targetFolderId needed for Recent folder. fileInfo.folderId === original folderId
-  onResolveNewFile = ({ fileInfo, targetFolderId }) => {
+  onResolveNewFile = ({ fileInfo }) => {
     if (!fileInfo) return;
 
     // console.log("onResolveNewFiles", { fileInfo });
@@ -473,8 +472,9 @@ class FilesStore {
     if (this.files.findIndex((x) => x.id === fileInfo.id) > -1) return;
 
     if (
-      this.selectedFolderStore.id !== targetFolderId &&
-      this.aiRoomStore.knowledgeId !== fileInfo.folderId
+      this.selectedFolderStore.id !== fileInfo.folderId &&
+      this.aiRoomStore.knowledgeId !== fileInfo.folderId &&
+      this.selectedFolderStore.rootFolderType !== FolderType.Recent
     )
       return;
 
@@ -554,7 +554,6 @@ class FilesStore {
             .getFileInfo(file.id, file.requestToken)
             .then((fileInfo) => ({
               fileInfo,
-              targetFolderId: file.folderId,
             }));
         });
       }, 300);

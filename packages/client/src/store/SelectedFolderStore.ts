@@ -408,6 +408,7 @@ class SelectedFolderStore {
     selectedFolder,
   ) => {
     const currentId = this.id;
+    const isCurrentRecent = this.rootFolderType === FolderType.Recent;
     const navPath = [{ id: currentId }, ...this.navigationPath];
 
     this.toDefault();
@@ -451,6 +452,13 @@ class SelectedFolderStore {
     if (socketUnsub.length > 0) {
       SocketHelper.emit(SocketCommands.Unsubscribe, {
         roomParts: socketUnsub.map((p) => `DIR-${p.id}`),
+        individual: true,
+      });
+    }
+
+    if (isCurrentRecent) {
+      SocketHelper.emit(SocketCommands.Unsubscribe, {
+        roomParts: `DIR-${currentId}`,
         individual: true,
       });
     }

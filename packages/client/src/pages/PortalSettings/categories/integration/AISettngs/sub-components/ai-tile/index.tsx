@@ -26,10 +26,15 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+import { ReactSVG } from "react-svg";
+
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { Heading, HeadingLevel } from "@docspace/shared/components/heading";
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import type { TServer } from "@docspace/shared/api/ai/types";
+import { getServerIcon } from "@docspace/shared/utils/getServerIcon";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 
 import SettingsIcon from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
@@ -48,12 +53,10 @@ type AiProviderTileProps = {
 
 type MCPTileProps = {
   variant: AiTileVariant.MCPServer;
-  item: { description: string };
+  item: TServer;
 };
 
-type AiTileProps = {
-  title: string;
-} & (AiProviderTileProps | MCPTileProps);
+type AiTileProps = AiProviderTileProps | MCPTileProps;
 
 const getContextOptions = () => {
   return [
@@ -73,7 +76,9 @@ const getContextOptions = () => {
 };
 
 export const AiTile = (props: AiTileProps) => {
-  const { title, variant, item } = props;
+  const { variant, item } = props;
+
+  const { isBase } = useTheme();
 
   const actionButton =
     variant === AiTileVariant.AiProvider ? (
@@ -81,7 +86,7 @@ export const AiTile = (props: AiTileProps) => {
     ) : (
       <ToggleButton
         className={styles.toggleButton}
-        isChecked
+        isChecked={item.enabled}
         onChange={() => {}}
       />
     );
@@ -100,9 +105,16 @@ export const AiTile = (props: AiTileProps) => {
       <Text className={styles.description}>{item.description}</Text>
     );
 
+  const icon =
+    variant === AiTileVariant.MCPServer
+      ? (getServerIcon(item.serverType, isBase) ?? "")
+      : "";
+
   return (
     <div className={styles.aiTile}>
-      <div className={styles.icon} />
+      <div className={styles.icon}>
+        <ReactSVG src={icon} />
+      </div>
       <div className={styles.content}>
         <div className={styles.header}>
           <Heading
@@ -113,7 +125,9 @@ export const AiTile = (props: AiTileProps) => {
             lineHeight="22px"
             truncate
           >
-            {title}
+            {variant === AiTileVariant.AiProvider
+              ? "ai provider name"
+              : item.name}
           </Heading>
           {actionButton}
         </div>

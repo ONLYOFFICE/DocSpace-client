@@ -1,4 +1,4 @@
-/*!
+/*
  * (c) Copyright Ascensio System SIA 2009-2025
  *
  * This program is a free software product.
@@ -26,52 +26,49 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-.aiTile {
-  box-sizing: border-box;
-  height: 110px;
-  min-width: 340px;
+import { useEffect, useState } from "react";
 
-  padding: 20px;
+import type { TServer } from "@docspace/shared/api/ai/types";
+import { getServersList } from "@docspace/shared/api/ai";
+import { ServerType } from "@docspace/shared/api/ai/enums";
 
-  background: var(--tile-background-color);
-  border: var(--tile-room-border);
-  border-radius: var(--tile-room-border-radius);
+export const useFetchMCPServers = () => {
+  const [systemMCPServers, setSystemMCPServers] = useState<TServer[]>([]);
+  const [customMCPServers, setCustomMCPServers] = useState<TServer[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  display: flex;
-  gap: 20px;
-}
+  useEffect(() => {
+    const fetchServersList = async () => {
+      setIsLoading(true);
 
-.icon {
-  width: 48px;
-  height: 48px;
+      try {
+        const res = await getServersList(0, 100);
+        if (!res) return;
 
-  flex-shrink: 0;
-}
+        const system: TServer[] = [];
+        const custom: TServer[] = [];
 
-.content {
-  flex-grow: 1;
+        res.items.forEach((mcp) =>
+          mcp.serverType === ServerType.Custom
+            ? custom.push(mcp)
+            : system.push(mcp),
+        );
 
-  overflow: hidden;
-}
+        setSystemMCPServers(system);
+        setCustomMCPServers(custom);
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
+    fetchServersList();
+  }, []);
 
-  margin-bottom: 8px;
-}
-
-.description {
-  overflow: hidden;
-
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-}
-
-.toggleButton {
-  position: relative;
-  width: 28px;
-}
+  return {
+    systemMCPServers,
+    customMCPServers,
+    isMCPLoading: isLoading,
+  };
+};

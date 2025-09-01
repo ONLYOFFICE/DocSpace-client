@@ -26,7 +26,6 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { Heading, HeadingLevel } from "@docspace/shared/components/heading";
@@ -37,6 +36,7 @@ import type { TServer } from "@docspace/shared/api/ai/types";
 
 import styles from "../../AISettings.module.scss";
 import { AiTile, AiTileVariant } from "../ai-tile";
+import { useFetchMCPServers } from "./useFetchMCPServers";
 
 type MCPListProps = {
   showHeading: boolean;
@@ -63,15 +63,7 @@ const MCPList = ({ showHeading, headingText, mcpServers }: MCPListProps) => {
 
       <div className={styles.mcpList}>
         {mcpServers.map((mcp) => (
-          <AiTile
-            key={mcp.id}
-            title="Asana"
-            variant={AiTileVariant.MCPServer}
-            item={{
-              description:
-                "A tool for creating diagrams, flowcharts, intelligence maps, business layouts, entity relationships, program blocks, and more",
-            }}
-          />
+          <AiTile key={mcp.id} variant={AiTileVariant.MCPServer} item={mcp} />
         ))}
       </div>
     </div>
@@ -80,11 +72,12 @@ const MCPList = ({ showHeading, headingText, mcpServers }: MCPListProps) => {
 
 export const McpServers = ({ standalone }: { standalone?: boolean }) => {
   const { t } = useTranslation("Common");
-
-  const [systemMCPServers, setSystemMCPServers] = React.useState([1, 1, 1, 1]);
-  const [customMCPServers, setCustomMCPServers] = React.useState([1]);
+  const { customMCPServers, systemMCPServers, isMCPLoading } =
+    useFetchMCPServers();
 
   const showMCPHeadings = customMCPServers.length > 0;
+
+  if (isMCPLoading) return null;
 
   return (
     <div className={styles.mcpServers}>

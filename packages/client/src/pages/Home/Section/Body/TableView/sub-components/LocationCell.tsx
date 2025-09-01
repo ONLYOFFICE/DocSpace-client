@@ -46,7 +46,13 @@ type LocationCellProps = {
 };
 
 const LocationCell = ({ sideColor, item }: LocationCellProps) => {
-  const { originRoomTitle, originId, originTitle, id } = item;
+  const {
+    originRoomTitle,
+    originId: originFolderId,
+    originRoomId,
+    originTitle,
+    id,
+  } = item;
 
   const { t } = useTranslation("Common");
   const [path, setPath] = useState<TPath[]>([]);
@@ -55,6 +61,7 @@ const LocationCell = ({ sideColor, item }: LocationCellProps) => {
   const title = item.requestToken
     ? t("Common:ViaLink")
     : originRoomTitle || originTitle;
+  const originId = originFolderId || originRoomId;
   const withTooltip = item.requestToken ? false : !!title;
 
   const getPath = useCallback(async () => {

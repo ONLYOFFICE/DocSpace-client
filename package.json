@@ -8,11 +8,11 @@
   },
   "scripts": {
     "before-build": "node ./common/scripts/before-build.js",
-    "build": "pnpm run before-build && pnpm nx run-many -t build -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk",
+    "build": "pnpm run before-build && pnpm --filter @docspace/shared run sw:build && pnpm nx run-many -t build -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk",
     "build:lite": "pnpm run before-build && pnpm nx run-many -t build -p @docspace/client @docspace/login @docspace/doceditor",
     "bump": "pnpm version --workspace",
     "clean": "pnpm -r run clean",
-    "deploy": "shx rm -rf ../publish/web && pnpm run before-build && pnpm nx run-many -t deploy -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk && shx cp -r public ../publish/web/ && node common/scripts/minify-common-locales.js",
+    "deploy": "shx rm -rf ../publish/web && pnpm run before-build && pnpm nx run-many -t deploy -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk && pnpm --filter @docspace/shared run sw:build && shx cp -r public ../publish/web/ && node common/scripts/minify-common-locales.js",
     "start": "pnpm run before-build && pnpm nx run-many -t start -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk",
     "start:lite": "pnpm run before-build && pnpm nx run-many -t start -p @docspace/client @docspace/login @docspace/doceditor",
     "start-prod": "pnpm run before-build && pnpm nx run-many -t start-prod -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk",

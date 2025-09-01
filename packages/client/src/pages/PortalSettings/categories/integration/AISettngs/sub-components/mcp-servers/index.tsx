@@ -78,7 +78,7 @@ const MCPList = ({ showHeading, headingText, mcpServers }: MCPListProps) => {
   );
 };
 
-export const McpServers = () => {
+export const McpServers = ({ standalone }: { standalone?: boolean }) => {
   const { t } = useTranslation("Common");
 
   const [systemMCPServers, setSystemMCPServers] = React.useState([1, 1, 1, 1]);
@@ -88,15 +88,18 @@ export const McpServers = () => {
 
   return (
     <div className={styles.mcpServers}>
-      <Heading
-        className={styles.heading}
-        level={HeadingLevel.h3}
-        fontSize="16px"
-        fontWeight={700}
-        lineHeight="22px"
-      >
-        MCP Servers
-      </Heading>
+      {standalone ? (
+        <Heading
+          className={styles.heading}
+          level={HeadingLevel.h3}
+          fontSize="16px"
+          fontWeight={700}
+          lineHeight="22px"
+        >
+          MCP Servers
+        </Heading>
+      ) : null}
+
       <Text className={styles.description}>
         This section lets you manage MCP servers for AI chats within rooms. You
         can enable system MCP servers or add custom ones to meet your company's

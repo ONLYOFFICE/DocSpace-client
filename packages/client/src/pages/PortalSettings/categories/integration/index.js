@@ -85,12 +85,12 @@ const IntegrationWrapper = (props) => {
     },
   ];
 
-  // Todo: AI: change to SAAS
+  // Todo: AI: Unite with ai settings
   if (standalone) {
     const mcpServersData = {
       id: "mcp-servers",
       name: t("MCPServers"),
-      content: <MCPServers />,
+      content: <AISettngs standalone={false} />,
     };
 
     data.push(mcpServersData);
@@ -100,7 +100,7 @@ const IntegrationWrapper = (props) => {
     const aiSettingsData = {
       id: "ai-settings",
       name: t("AISettings"),
-      content: <AISettngs />,
+      content: <AISettngs standalone={standalone} />,
     };
 
     const documentServiceData = {

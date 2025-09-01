@@ -82,7 +82,7 @@ const providerTypes: TOption[] = [
   },
 ];
 
-const AISettngs = () => {
+const AISettngs = ({ standalone }: { standalone?: boolean }) => {
   const [selectedOption, setSelectedOption] = React.useState(providerTypes[0]);
   const [providerTitle, setProviderTitle] = React.useState("");
   const [providerKey, setProviderKey] = React.useState("");
@@ -136,8 +136,8 @@ const AISettngs = () => {
   return (
     <div>
       <div className={styles.aiSettingsContainer}>
-        <AiProvider />
-        <McpServers />
+        {standalone ? <AiProvider /> : null}
+        <McpServers standalone={standalone} />
         {/*<div className={styles.addProvider}>*/}
         {/*  <FieldContainer*/}
         {/*    labelText="Provider type"*/}

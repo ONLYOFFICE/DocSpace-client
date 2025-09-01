@@ -29,15 +29,18 @@
 }
 
 .transactionHistoryTitle {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .transactionHistoryCombobox {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 2px;
+  margin-bottom: 8px;
   gap: 12px;
   align-items: start;
+  .transactionTypeCombobox {
+    padding: 0;
+  }
 }
 
 .transactionHistoryBody {

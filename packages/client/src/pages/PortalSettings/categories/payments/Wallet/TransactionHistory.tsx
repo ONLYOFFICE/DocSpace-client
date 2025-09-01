@@ -430,6 +430,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
   const filterCombobox = (
     <div className={styles.transactionHistoryCombobox}>
       <ComboBox
+        className={styles.transactionTypeCombobox}
         tabIndex={1}
         options={typeOfHistoty}
         selectedOption={selectedType}

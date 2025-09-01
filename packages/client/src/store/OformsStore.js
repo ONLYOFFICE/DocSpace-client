@@ -162,8 +162,9 @@ class OformsStore {
     const templateDescription = "&fields[5]=template_desc";
     const cardPrewiew = "&populate[card_prewiew][fields][6]=url";
     const templateImage = "&populate[template_image][fields][7]=formats";
+    const templateSize = "&populate[file_oform][fields][8]=size";
 
-    const fields = `${formName}${updatedAt}${defaultDescription}${templateDescription}${cardPrewiew}${templateImage}`;
+    const fields = `${formName}${updatedAt}${defaultDescription}${templateDescription}${cardPrewiew}${templateImage}${templateSize}`;
     const params = `?${fields}&${filter.toApiUrlParams()}`;
 
     const apiUrl = combineUrl(domain, path, params);
@@ -213,7 +214,7 @@ class OformsStore {
 
     runInAction(() => {
       this.setOformsFilter(newOformsFilter);
-      this.setOformFiles([...this.oformFiles, ...newForms]);
+      this.setOformFiles([...(this.oformFiles || []), ...newForms]);
       this.setOformsIsLoading(false);
     });
   };
@@ -391,7 +392,7 @@ class OformsStore {
   }
 
   get hasMoreForms() {
-    return this.oformFiles.length < this.oformsFilterTotal;
+    return this.oformFiles && this.oformFiles.length < this.oformsFilterTotal;
   }
 }
 

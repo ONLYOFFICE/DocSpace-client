@@ -60,6 +60,9 @@ const Gallery = ({ gallerySelected, culture }: GalleryProps) => {
   const thumbnailUrl =
     gallerySelected?.attributes.card_prewiew.data?.attributes.url;
   const formTitle = gallerySelected?.attributes?.name_form;
+  const size = gallerySelected.attributes.file_oform.data[0].attributes.size;
+  const sizeWithExtra =
+    size < 1024 ? `${size.toFixed(0)} KB` : `${(size / 1024).toFixed(0)} MB`;
 
   return (
     <div data-testid="info_panel_gallery_container">
@@ -133,6 +136,13 @@ const Gallery = ({ gallerySelected, culture }: GalleryProps) => {
               gallerySelected.attributes.updatedAt,
             )}
           </Text>
+        </div>
+        <div
+          className="property"
+          data-testid="info_panel_gallery_size_property"
+        >
+          <Text className="property-title">{t("Common:Size")}</Text>
+          <Text className="property-content">{sizeWithExtra}</Text>
         </div>
       </div>
     </div>

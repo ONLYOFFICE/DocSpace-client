@@ -3,7 +3,7 @@
   "content": "The file is password protected",
   "content_en_sha1_hash": "3f1a3e1fb99e2c4ac9bfd19915c5facc2ea9c102",
   "created_at": "2025-05-19T21:30:49.967Z",
-  "updated_at": "2025-08-26T11:15:14.038Z",
+  "updated_at": "2025-09-01T11:05:24.079Z",
   "comment": {
     "text": "The translation key \"FileProtected\" is used to display a message indicating that a file has been password protected. It appears in an error message within a form creation process and is displayed as a warning to the user.",
     "is_auto": true,
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 361,
+      "line_number": 362,
       "context": "if (errorMessage.indexOf(\"password\") == -1) {\n toastr.error(errorMessage, t(\"Common:Warning\"));\n return;\n }\n \n toastr.error(t(\"Translations:FileProtected\"), t(\"Common:Warning\"));\n setFormCreationInfo({\n newTitle,\n fromExst: fileExst,\n toExst: this.filesSettingsStore.extsWebRestrictedEditing[0],\n fileInfo: item,",
       "module": "/packages/client"
     }

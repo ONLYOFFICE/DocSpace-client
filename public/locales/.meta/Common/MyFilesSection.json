@@ -3,7 +3,7 @@
   "content": "Documents",
   "content_en_sha1_hash": "687c82861c956e47456186f6522cfc8dbadb8ef6",
   "created_at": "2025-05-19T21:30:46.695Z",
-  "updated_at": "2025-08-27T10:14:35.042Z",
+  "updated_at": "2025-09-01T11:05:24.096Z",
   "comment": {
     "text": "This translation key is used to display the text \"Documents\" in a button within a file management component. It appears as part of a link that navigates to a personal section of documents, and its purpose is to provide a clear label for users.",
     "is_auto": true,
@@ -156,7 +156,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1456,
+      "line_number": 1526,
       "context": "},\n {\n id: \"header_option_empty-section\",\n key: \"empty-section\",\n label: t(\"Files:EmptySection\", {\n sectionName: t(\"Common:MyFilesSection\"),\n }),\n onClick: this.onEmptyPersonalAction,\n icon: ClearTrashReactSvgUrl,\n disabled: false,\n },",
       "module": "/packages/client"
     },

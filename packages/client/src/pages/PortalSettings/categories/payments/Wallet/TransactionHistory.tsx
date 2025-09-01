@@ -308,7 +308,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         showDisabledItems
         size={ComboBoxSize.content}
         scaled={false}
-        testId="transaction_type_combobox"
+        dataTestId="transaction_type_combobox"
         dropDownTestId="transaction_type_dropdown"
       />
       {datesComponent}
@@ -406,7 +406,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
                   showDisabledItems
                   size={ComboBoxSize.content}
                   scaled
-                  testId="transaction_type_combobox"
+                  dataTestId="transaction_type_combobox"
                   dropDownTestId="transaction_type_dropdown"
                 />
               </div>

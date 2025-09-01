@@ -310,6 +310,8 @@ const AmazonSettings = ({
           isDisabled={isDisabled}
           tabIndex={2}
           showDisabledItems
+          dataTestId="amazon_settings_region_combobox"
+          dropDownTestId="amazon_settings_region_dropdown"
         />
       </div>
 

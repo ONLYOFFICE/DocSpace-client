@@ -33,8 +33,6 @@ import { globalColors } from "@docspace/shared/themes";
 import { Text } from "@docspace/shared/components/text";
 import { getFolderPath } from "@docspace/shared/api/files";
 
-import { CategoryType } from "SRC_DIR/helpers/constants";
-
 import { StyledText } from "./CellStyles";
 
 type TPath = {
@@ -65,7 +63,6 @@ const LocationCell = ({ sideColor, item }: LocationCellProps) => {
     setIsPathLoading(true);
     try {
       const folderPath = await getFolderPath(originId);
-      if (folderPath[0].id === CategoryType.SharedRoom) folderPath.shift();
       setPath(folderPath);
     } catch (e) {
       console.error(e);

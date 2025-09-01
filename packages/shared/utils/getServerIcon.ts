@@ -25,17 +25,20 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import BoxSvgUrl from "PUBLIC_DIR/images/thirdparties/box.svg?url";
+import GitHubLightSvgUrl from "PUBLIC_DIR/images/thirdparties/github.light.react.svg?url";
+import GitHubDarkSvgUrl from "PUBLIC_DIR/images/thirdparties/github.dark.react.svg?url";
 
 import { ServerType } from "../api/ai/enums";
 
-export const getServerIcon = (type: ServerType) => {
+export const getServerIcon = (type: ServerType, isBase: boolean) => {
   switch (type) {
     case ServerType.Custom:
       return null;
     case ServerType.Portal:
       return "/logo.ashx?logotype=3";
     case ServerType.GitHub:
-      return "";
+      if (isBase) return GitHubLightSvgUrl;
+      return GitHubDarkSvgUrl;
     case ServerType.Box:
       return BoxSvgUrl;
     default:

@@ -35,6 +35,7 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { TRoomParams } from "@docspace/shared/utils/rooms";
 import { getServersListForRoom } from "@docspace/shared/api/ai";
 import { getServerIcon } from "@docspace/shared/utils/getServerIcon";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 
@@ -47,6 +48,8 @@ interface MCPSettingsProps {
 
 const MCPSettings = ({ roomParams, setRoomParams }: MCPSettingsProps) => {
   const { t } = useTranslation(["AIRoom", "Common"]);
+
+  const { isBase } = useTheme();
 
   const [isSelectorVisible, setIsSelectorVisible] = React.useState(false);
 
@@ -75,7 +78,7 @@ const MCPSettings = ({ roomParams, setRoomParams }: MCPSettingsProps) => {
             key: item.id,
             id: item.id,
             label: item.name,
-            icon: getServerIcon(item.serverType) ?? "",
+            icon: getServerIcon(item.serverType, isBase) ?? "",
             isInputItem: false,
             onAcceptInput: () => {},
             onCancelInput: () => {},

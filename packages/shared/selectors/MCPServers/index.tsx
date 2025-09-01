@@ -29,6 +29,7 @@ import { useTranslation } from "react-i18next";
 
 import { getAvailableServersList } from "../../api/ai";
 import { TServer } from "../../api/ai/types";
+import { useTheme } from "../../hooks/useTheme";
 
 import { Selector, TSelectorItem } from "../../components/selector";
 import { getServerIcon } from "../../utils/getServerIcon";
@@ -43,10 +44,13 @@ type MCPServersSelectorProps = {
 const MCPServersSelector = ({ onSubmit, onClose }: MCPServersSelectorProps) => {
   const { t } = useTranslation(["Common"]);
 
+  const { isBase } = useTheme();
+
   const [servers, setServers] = React.useState<TSelectorItem[]>([]);
   const [selectedServers, setSelectedServers] = React.useState<TSelectorItem[]>(
     [],
   );
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const startCurrentIndexRef = React.useRef(0);
   const [totalServers, setTotalServers] = React.useState(0);
@@ -59,7 +63,7 @@ const MCPServersSelector = ({ onSubmit, onClose }: MCPServersSelectorProps) => {
         key: server.id,
         id: server.id,
         label: server.name,
-        icon: getServerIcon(server.serverType) ?? "",
+        icon: getServerIcon(server.serverType, isBase) ?? "",
         isInputItem: false,
         onAcceptInput: () => {},
         onCancelInput: () => {},
@@ -67,13 +71,14 @@ const MCPServersSelector = ({ onSubmit, onClose }: MCPServersSelectorProps) => {
         placeholder: "",
       };
     },
-    [],
+    [isBase],
   );
 
   const fetchServers = React.useCallback(async () => {
     if (isRequestLoading.current) return;
 
     isRequestLoading.current = true;
+    setIsLoading(true);
     const response = await getAvailableServersList(0, 100);
 
     if (response) {
@@ -86,6 +91,7 @@ const MCPServersSelector = ({ onSubmit, onClose }: MCPServersSelectorProps) => {
     }
 
     isRequestLoading.current = false;
+    setIsLoading(false);
   }, [convertServerToOption]);
 
   const fetchMoreServer = React.useCallback(async () => {
@@ -106,6 +112,7 @@ const MCPServersSelector = ({ onSubmit, onClose }: MCPServersSelectorProps) => {
     }
 
     isRequestLoading.current = false;
+    setIsLoading(false);
   }, [convertServerToOption]);
 
   const onSelect = (item: TSelectorItem) => {
@@ -127,6 +134,8 @@ const MCPServersSelector = ({ onSubmit, onClose }: MCPServersSelectorProps) => {
     fetchServers();
   }, [fetchServers]);
 
+  console.log(isLoading);
+
   return (
     <Selector
       items={servers}
@@ -144,7 +153,7 @@ const MCPServersSelector = ({ onSubmit, onClose }: MCPServersSelectorProps) => {
       isNextPageLoading={false}
       totalItems={totalServers}
       loadNextPage={fetchMoreServer}
-      isLoading={servers.length === 0}
+      isLoading={isLoading}
       isMultiSelect
       useAside
       onClose={onClose}

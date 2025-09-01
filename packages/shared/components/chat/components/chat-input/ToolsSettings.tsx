@@ -32,6 +32,7 @@ import classNames from "classnames";
 import McpToolReactSvgUrl from "PUBLIC_DIR/images/mcp.tool.svg?url";
 import ManageConnectionsReactSvgUrl from "PUBLIC_DIR/images/manage.connection.react.svg?url";
 
+import { openConnectWindow } from "../../../../api/files";
 import {
   changeMCPToolsForRoom,
   connectServer,
@@ -42,14 +43,16 @@ import {
 import { ServerType } from "../../../../api/ai/enums";
 import { TMCPTool, TServer } from "../../../../api/ai/types";
 import { getOAuthToken } from "../../../../utils/common";
-
 import { getServerIcon } from "../../../../utils/getServerIcon";
+import { useTheme } from "../../../../hooks/useTheme";
 
 import { Text } from "../../../text";
 import { ContextMenu, type ContextMenuRefType } from "../../../context-menu";
 import { IconButton } from "../../../icon-button";
 import { Aside } from "../../../aside";
 import { Button, ButtonSize } from "../../../button";
+import { Backdrop } from "../../../backdrop";
+import { Portal } from "../../../portal";
 
 import { useChatStore } from "../../store/chatStore";
 
@@ -59,6 +62,7 @@ const ToolsSettings = () => {
   const { t } = useTranslation(["Common"]);
 
   const { roomId } = useChatStore();
+  const { isBase } = useTheme();
 
   const [showManageConnections, setShowManageConnections] =
     React.useState(false);
@@ -151,7 +155,9 @@ const ToolsSettings = () => {
     fetchTools();
   }, [roomId]);
 
-  const openOauthWindow = async (url: string, serverId: string) => {
+  const openOauthWindow = async (serverId: string, type: string) => {
+    const url = await openConnectWindow(type);
+
     const newWindow = window.open(
       "",
       t("Common:Authorization"),
@@ -167,6 +173,8 @@ const ToolsSettings = () => {
         if (token) {
           try {
             await connectServer(Number(roomId), serverId, token);
+
+            newWindow?.close();
 
             const newTools = await getMCPToolsForRoom(Number(roomId), serverId);
 
@@ -238,7 +246,7 @@ const ToolsSettings = () => {
       return {
         key: mcpId,
         label: server.name,
-        icon: getServerIcon(server.serverType) ?? "",
+        icon: getServerIcon(server.serverType, isBase) ?? "",
         items: tools.map((tool) => ({
           key: tool.name,
           label: tool.name,
@@ -253,7 +261,7 @@ const ToolsSettings = () => {
     { key: "separator-1", isSeparator: true },
     {
       key: "manage-connections",
-      label: "Manage connections",
+      label: t("ManageConnection"),
       onClick: () => {
         setShowManageConnections(true);
       },
@@ -278,49 +286,65 @@ const ToolsSettings = () => {
         <ContextMenu ref={contextMenuRef} model={model} onHide={hideMcpTools} />
       </div>
       {showManageConnections ? (
-        <Aside
-          header="Manage connection"
-          onClose={() => setShowManageConnections(false)}
-          visible={showManageConnections}
-        >
-          <div className={styles.toolSettingsWrapper}>
-            {servers.map((server) => {
-              if (
-                server.serverType === ServerType.Portal ||
-                !server.authorizationEndpoint
-              )
-                return null;
+        <Portal
+          visible
+          element={
+            <>
+              <Aside
+                header={t("ManageConnection")}
+                onClose={() => setShowManageConnections(false)}
+                visible={showManageConnections}
+              >
+                <div className={styles.toolSettingsWrapper}>
+                  {servers.map((server) => {
+                    if (
+                      server.serverType === ServerType.Portal ||
+                      !server.authorizationEndpoint
+                    )
+                      return null;
 
-              return (
-                <div key={server.id} className={styles.toolSettingsItem}>
-                  <div className={styles.toolSettingsItemInfo}>
-                    <img
-                      src={getServerIcon(server.serverType) ?? ""}
-                      alt={server.name}
-                    />
-                    <Text fontSize="14px" lineHeight="16px" fontWeight={600}>
-                      {server.name}
-                    </Text>
-                  </div>
-                  <Button
-                    label={server.connected ? t("Disconnect") : t("Connect")}
-                    size={ButtonSize.small}
-                    onClick={() => {
-                      if (server.connected) {
-                        disconnectServerAction(server.id);
-                      } else {
-                        openOauthWindow(
-                          server.authorizationEndpoint as string,
-                          server.id,
-                        );
-                      }
-                    }}
-                  />
+                    return (
+                      <div key={server.id} className={styles.toolSettingsItem}>
+                        <div className={styles.toolSettingsItemInfo}>
+                          <img
+                            src={getServerIcon(server.serverType, isBase) ?? ""}
+                            alt={server.name}
+                          />
+                          <Text
+                            fontSize="14px"
+                            lineHeight="16px"
+                            fontWeight={600}
+                          >
+                            {server.name}
+                          </Text>
+                        </div>
+                        <Button
+                          label={
+                            server.connected ? t("Disconnect") : t("Connect")
+                          }
+                          size={ButtonSize.small}
+                          onClick={() => {
+                            if (server.connected) {
+                              disconnectServerAction(server.id);
+                            } else {
+                              openOauthWindow(server.id, server.name);
+                            }
+                          }}
+                        />
+                      </div>
+                    );
+                  })}
                 </div>
-              );
-            })}
-          </div>
-        </Aside>
+              </Aside>
+              <Backdrop
+                isAside
+                onClick={() => setShowManageConnections(false)}
+                visible={showManageConnections}
+                withBackground
+              />
+            </>
+          }
+        />
       ) : null}
     </>
   );

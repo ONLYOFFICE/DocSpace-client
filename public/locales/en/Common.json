@@ -44,7 +44,6 @@
   "AIRoomTitle": "AI Room",
   "Alert": "Alert",
   "All": "All",
-  "AllTools": "All tools",
   "AllowedCharacters": "Allowed characters",
   "AllTypesAvailableForEditing": "all file types available for editing in {{organizationName}}",
   "AmazonBucketTip": "Enter the unique name of the Amazon S3 bucket where you want to store your backups.",
@@ -350,7 +349,6 @@
   "FillingOnly": "For filling only",
   "Finish": "Finish",
   "FirstName": "First name",
-  "Flows": "Flows",
   "Folder": "Folder",
   "FolderActionRequired": "The destination already contains a folder named «<1>{{folderName}}</1>».",
   "Folders": "Folders",
@@ -960,5 +958,6 @@
   "FolderAvailableViaParentFolderLinkDescription": "This folder is accessible via a shared link from its parent folder, but you can create a custom external link with specific permissions.",
   "LogoForEditors": "Logo for {{editorName}} editor",
   "LogoForViewer": "Logo for {{diagramViewer}}",
-  "LogoDocsEditor": "Logo for the editors header"
+  "LogoDocsEditor": "Logo for the editors header",
+  "ManageConnection": "Manage connection"
 }

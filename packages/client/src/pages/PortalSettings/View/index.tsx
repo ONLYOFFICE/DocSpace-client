@@ -61,6 +61,8 @@ const View = ({
   initWhiteLabel,
   isLoaded,
   setIsLoaded,
+  getPortalCultures,
+  cultures,
 
   // Security hook props
   settingsStore,
@@ -153,6 +155,8 @@ const View = ({
     initWhiteLabel: initWhiteLabel || (() => {}),
     setIsLoaded: setIsLoaded || (() => {}),
     isLoaded: isLoaded || false,
+    cultures: cultures || [],
+    getPortalCultures: getPortalCultures || (() => {}),
   });
 
   // Initialize useSecurity hook with null checks
@@ -459,7 +463,8 @@ export const ViewComponent = inject(
 
     const { getDocumentServiceLocation } = filesSettingsStore;
 
-    const { getCSPSettings, getPortalOwner } = settingsStore;
+    const { getCSPSettings, getPortalOwner, getPortalCultures, cultures } =
+      settingsStore;
 
     const { loadWebhooks } = webhooksStore;
 
@@ -503,6 +508,8 @@ export const ViewComponent = inject(
       isLoadedSubmenu,
       isLoaded,
       setIsLoaded,
+      getPortalCultures,
+      cultures,
 
       // Security hook props
       settingsStore,

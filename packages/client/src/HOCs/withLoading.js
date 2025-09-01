@@ -69,20 +69,10 @@ const withLoading = (WrappedComponent) => {
       }
     }, [isLoadedArticleBody, setIsBurgerLoading]);
 
-    const loadedPortalRenaming = enablePortalRename
-      ? isLoadedPortalRenaming
-      : true;
+    const loadedPortalRenaming = !!enablePortalRename;
 
     const isLoadedCustomizationSettings =
-      isLoadedCustomization &&
-      isLoadedLngTZSettings &&
-      isLoadedWelcomePageSettings &&
-      isLoadedDNSSettings &&
-      loadedPortalRenaming &&
-      isLoadedArticleBody &&
-      !isBurgerLoading &&
-      isLoadedSectionHeader &&
-      isLoadedSubmenu;
+      isLoadedArticleBody && !isBurgerLoading && isLoadedSectionHeader;
 
     const isLoadedCustomizationNavbarSettings =
       isLoadedCustomizationNavbar &&

@@ -24,10 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 
 import BrandingStore from "SRC_DIR/store/portal-settings/BrandingStore";
 import CommonStore from "SRC_DIR/store/CommonStore";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { mapCulturesToArray } from "@docspace/shared/utils/common";
+import i18n from "SRC_DIR/i18n";
 
 export type UseCommonProps = {
   loadBaseInfo: (page: string) => Promise<void>;
@@ -37,6 +40,9 @@ export type UseCommonProps = {
   initWhiteLabel: BrandingStore["initWhiteLabel"];
   setIsLoaded: CommonStore["setIsLoaded"];
   isLoaded: CommonStore["isLoaded"];
+
+  cultures: SettingsStore["cultures"];
+  getPortalCultures: SettingsStore["getPortalCultures"];
 };
 
 const useCommon = ({
@@ -48,6 +54,9 @@ const useCommon = ({
 
   setIsLoaded,
   isLoaded,
+
+  cultures,
+  getPortalCultures,
 }: UseCommonProps) => {
   const inTabBranding = window.location.pathname.includes("branding");
   const inTabGeneral = window.location.pathname.includes("general");
@@ -56,18 +65,24 @@ const useCommon = ({
     async (
       page?: "language-and-time-zone" | "dns-settings" | "configure-deep-link",
     ) => {
-      if (isLoaded) return;
+      // if (isLoaded) return;
 
       if (isMobileView && page) {
-        loadBaseInfo(page);
+        await loadBaseInfo(page);
       } else {
-        loadBaseInfo("general");
+        await loadBaseInfo("general");
       }
-      setIsLoaded(true);
+      // setIsLoaded(true);
 
-      getGreetingSettingsIsDefault();
+      await getGreetingSettingsIsDefault();
+      await getPortalCultures();
     },
-    [isMobileView, loadBaseInfo, getGreetingSettingsIsDefault],
+    [
+      isMobileView,
+      loadBaseInfo,
+      getGreetingSettingsIsDefault,
+      getPortalCultures,
+    ],
   );
 
   const getBrandingData = useCallback(async () => {
@@ -75,22 +90,13 @@ const useCommon = ({
     initWhiteLabel();
   }, [getBrandName, initWhiteLabel]);
 
-  const initialLoad = useCallback(async () => {
-    // if (!isMobileView) {
-    //   await loadBaseInfo(
-    //     inTabGeneral
-    //       ? "customization"
-    //       : inTabBranding
-    //         ? "branding"
-    //         : "appearance",
-    //   );
-    // } else {
-    //    await loadBaseInfo("customization");
-    // }
-  }, [loadBaseInfo, inTabGeneral, inTabBranding, isMobileView]);
+  const cultureNames = useMemo(
+    () => (cultures ? mapCulturesToArray(cultures, true, i18n) : []),
+    [cultures],
+  );
 
   const getCommonInitialValue = React.useCallback(async () => {
-    const actions = [initialLoad()];
+    const actions = [];
     if (window.location.pathname.includes("language-and-time-zone"))
       actions.push(getCustomizationData("language-and-time-zone"));
 
@@ -105,12 +111,13 @@ const useCommon = ({
     if (inTabBranding) actions.push(getBrandingData());
 
     await Promise.all(actions);
-  }, [getCustomizationData, getBrandingData, initialLoad]);
+  }, [getCustomizationData, getBrandingData]);
 
   return {
     getCustomizationData,
     getBrandingData,
     getCommonInitialValue,
+    cultureNames,
   };
 };
 

@@ -82,11 +82,11 @@ const LanguageAndTimeZoneComponent = (props) => {
   const {
     i18n,
     language,
-    cultureNames,
     rawTimezones,
     portalTimeZoneId,
     isLoaded,
     cultures,
+    getPortalCultures,
     portalLanguage,
     tReady,
     setIsLoadedLngTZSettings,
@@ -103,7 +103,7 @@ const LanguageAndTimeZoneComponent = (props) => {
 
   const isMobileView = deviceType === DeviceType.mobile;
 
-  const { getCommonInitialValue } = useCommon({
+  const { getCommonInitialValue, cultureNames } = useCommon({
     loadBaseInfo,
     isMobileView,
     getGreetingSettingsIsDefault: () => {},
@@ -111,6 +111,8 @@ const LanguageAndTimeZoneComponent = (props) => {
     initWhiteLabel: () => {},
     setIsLoaded,
     isLoaded,
+    cultures,
+    getPortalCultures: getPortalCultures,
   });
 
   const navigate = useNavigate();
@@ -585,6 +587,7 @@ export const LanguageAndTimeZoneSettings = inject(
       nameSchemaId,
       greetingSettings,
       cultures,
+      getPortalCultures,
       currentColorScheme,
       languageAndTimeZoneSettingsUrl,
       deviceType,
@@ -607,6 +610,7 @@ export const LanguageAndTimeZoneSettings = inject(
       isLoaded,
       setIsLoadedLngTZSettings,
       cultures,
+      getPortalCultures,
       initSettings,
       currentColorScheme,
       languageAndTimeZoneSettingsUrl,
@@ -618,11 +622,9 @@ export const LanguageAndTimeZoneSettings = inject(
     };
   },
 )(
-  withCultureNames(
-    withLoading(
-      withTranslation(["Settings", "Common"])(
-        observer(LanguageAndTimeZoneComponent),
-      ),
+  withLoading(
+    withTranslation(["Settings", "Common"])(
+      observer(LanguageAndTimeZoneComponent),
     ),
   ),
 );

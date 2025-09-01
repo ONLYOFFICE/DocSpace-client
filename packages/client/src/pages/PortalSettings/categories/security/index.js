@@ -24,11 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Tabs } from "@docspace/shared/components/tabs";
 import { useNavigate, useLocation } from "react-router";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import MobileSecurityLoader from "./sub-components/loaders/mobile-security-loader";
+import AccessLoader from "./sub-components/loaders/access-loader";
+import SecurityLoader from "./sub-components/loaders/security-loader";
+import { DeviceType } from "@docspace/shared/enums";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
@@ -55,8 +59,11 @@ const SecurityWrapper = (props) => {
     getLoginHistory,
     getLifetimeAuditSettings,
     getAuditTrail,
+
+    isLoadedArticleBody,
+    isLoadedSectionHeader,
+    isBurgerLoading,
   } = props;
-  // const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -135,16 +142,20 @@ const SecurityWrapper = (props) => {
     );
   };
 
-  // if (isLoading && data.length)
-  //   return currentTabId === data[0].id ? (
-  //     currentDeviceType !== DeviceType.desktop ? (
-  //       <MobileSecurityLoader />
-  //     ) : (
-  //       <SecurityLoader />
-  //     )
-  //   ) : (
-  //     <AccessLoader />
-  //   );
+  const isLoaded = Boolean(
+    isLoadedArticleBody && isLoadedSectionHeader && !isBurgerLoading,
+  );
+
+  if (!isLoaded && data.length)
+    return currentTabId === data[0].id ? (
+      currentDeviceType !== DeviceType.desktop ? (
+        <MobileSecurityLoader />
+      ) : (
+        <SecurityLoader />
+      )
+    ) : (
+      <AccessLoader />
+    );
 
   return (
     <Tabs
@@ -157,39 +168,48 @@ const SecurityWrapper = (props) => {
   );
 };
 
-export const Component = inject(({ settingsStore, setup, tfaStore }) => {
-  const {
-    resetIsInit,
-    initSettings,
-    isInit,
-    getLoginHistory,
-    getLifetimeAuditSettings,
-    getAuditTrail,
-  } = setup;
-  const {
-    getPortalPasswordSettings,
-    getInvitationSettings,
-    getIpRestrictionsEnable,
-    getIpRestrictions,
-    getBruteForceProtection,
-    getSessionLifetime,
-  } = settingsStore;
-  const { getTfaType } = tfaStore;
+export const Component = inject(
+  ({ settingsStore, setup, tfaStore, common }) => {
+    const { isLoadedArticleBody, isLoadedSectionHeader } = common;
+    const {
+      resetIsInit,
+      initSettings,
+      isInit,
+      getLoginHistory,
+      getLifetimeAuditSettings,
+      getAuditTrail,
+    } = setup;
+    const {
+      getPortalPasswordSettings,
+      getInvitationSettings,
+      getIpRestrictionsEnable,
+      getIpRestrictions,
+      getBruteForceProtection,
+      getSessionLifetime,
+    } = settingsStore;
+    const { getTfaType } = tfaStore;
 
-  return {
-    isInit,
-    initSettings,
-    resetIsInit,
-    currentDeviceType: settingsStore.currentDeviceType,
-    getPortalPasswordSettings,
-    getTfaType,
-    getInvitationSettings,
-    getIpRestrictionsEnable,
-    getIpRestrictions,
-    getBruteForceProtection,
-    getSessionLifetime,
-    getLoginHistory,
-    getLifetimeAuditSettings,
-    getAuditTrail,
-  };
-})(withTranslation(["Settings", "Common"])(observer(SecurityWrapper)));
+    const { currentDeviceType, isBurgerLoading } = settingsStore;
+
+    return {
+      isInit,
+      initSettings,
+      resetIsInit,
+      currentDeviceType,
+      getPortalPasswordSettings,
+      getTfaType,
+      getInvitationSettings,
+      getIpRestrictionsEnable,
+      getIpRestrictions,
+      getBruteForceProtection,
+      getSessionLifetime,
+      getLoginHistory,
+      getLifetimeAuditSettings,
+      getAuditTrail,
+
+      isLoadedArticleBody,
+      isLoadedSectionHeader,
+      isBurgerLoading,
+    };
+  },
+)(withTranslation(["Settings", "Common"])(observer(SecurityWrapper)));

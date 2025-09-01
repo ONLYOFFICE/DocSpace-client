@@ -3,7 +3,7 @@
   "content": "Uploaded elements: {{count}}",
   "content_en_sha1_hash": "3fbe647575ee9d3b5b58c83eb362282b29b9a3a2",
   "created_at": "2025-05-19T21:30:46.011Z",
-  "updated_at": "2025-08-29T14:33:38.386Z",
+  "updated_at": "2025-09-01T11:05:24.407Z",
   "comment": {
     "text": "This translation key is used to display a success message after uploading files successfully. It shows the number of uploaded elements and will be displayed in a toast notification, indicating the completion of an upload action.",
     "is_auto": true,

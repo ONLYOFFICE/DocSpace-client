@@ -3,7 +3,7 @@
   "content": "Wait for the current operation to complete",
   "content_en_sha1_hash": "43744920068ae9c077e24f893ad58703d318a3a0",
   "created_at": "2025-05-19T21:30:56.313Z",
-  "updated_at": "2025-08-29T14:33:38.348Z",
+  "updated_at": "2025-09-01T11:05:24.387Z",
   "comment": {
     "text": "This translation key is used to display a warning message that indicates the current operation is being waited on, typically in a toast notification. It appears when the \"Files:WaitOperation\" action is triggered, informing users of a pending process. Translators should consider phrases that convey a sense of waiting or anticipation for the operation's completion.",
     "is_auto": true,

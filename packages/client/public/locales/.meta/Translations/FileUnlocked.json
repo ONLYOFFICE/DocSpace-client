@@ -3,7 +3,7 @@
   "content": "File unlocked",
   "content_en_sha1_hash": "c60e9fe76b848fe79d0d3970f5c0c61d094278c2",
   "created_at": "2025-05-19T21:30:49.968Z",
-  "updated_at": "2025-08-29T14:33:37.906Z",
+  "updated_at": "2025-09-01T11:05:24.078Z",
   "comment": {
     "text": "The \"FileUnlocked\" translation key is used to display a success message when a file is unlocked. It appears in various UI elements, including buttons and tooltips, such as on a button that unlocks a file or in an info panel displaying file history. The text should indicate that the file has been successfully unlocked, providing feedback to users about the outcome of the action.",
     "is_auto": true,

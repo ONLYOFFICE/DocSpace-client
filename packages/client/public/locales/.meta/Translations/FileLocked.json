@@ -3,7 +3,7 @@
   "content": "File locked",
   "content_en_sha1_hash": "d56ec25816d2caab4e55bb34552b52e102303854",
   "created_at": "2025-05-19T21:30:49.965Z",
-  "updated_at": "2025-08-29T14:33:38.119Z",
+  "updated_at": "2025-09-01T11:05:24.211Z",
   "comment": {
     "text": "FileLocked is a translation key used to display the message \"File locked\" when a file's locking status is unavailable or cannot be updated. It appears in various UI elements where file locking status is being attempted or shown.",
     "is_auto": true,

@@ -3,7 +3,7 @@
   "content": "If you have an account in this {{productName}}, we recommend that you log in so that completed forms are recorded under your account.",
   "content_en_sha1_hash": "e3d3e517125a284eb929dc671a7064ebc8fbdee2",
   "created_at": "2025-05-19T21:30:45.471Z",
-  "updated_at": "2025-08-29T14:33:38.342Z",
+  "updated_at": "2025-09-01T11:05:24.383Z",
   "comment": {
     "text": "This translation key is used for a toast message that recommends logging in to record completed forms under the user's account. The message appears on-screen when users access a product they already have an account for.",
     "is_auto": true,

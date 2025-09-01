@@ -3,7 +3,7 @@
   "content": "The document '{{oldTitle}}' is renamed to '{{newTitle}}'",
   "content_en_sha1_hash": "336eeeca9a65f25c4a36baaba98cd68b80c397f5",
   "created_at": "2025-05-19T21:30:55.681Z",
-  "updated_at": "2025-08-29T14:33:37.957Z",
+  "updated_at": "2025-09-01T11:05:24.111Z",
   "comment": {
     "text": "The \"FileRenamed\" translation key is used to display a success message after renaming a file. It includes the old and new file titles, indicating that the document has been successfully renamed. This message appears in a toast notification when a user renames a file via the Rename Event button.",
     "is_auto": true,

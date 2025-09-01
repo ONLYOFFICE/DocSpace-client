@@ -3,7 +3,7 @@
   "content": "Disconnect",
   "content_en_sha1_hash": "ed28e0686e1251ba046f582a3e9ec02470a5e78d",
   "created_at": "2025-05-19T21:30:44.562Z",
-  "updated_at": "2025-08-29T14:33:38.375Z",
+  "updated_at": "2025-09-01T11:05:24.398Z",
   "comment": {
     "text": "This translation key is used to display the label \"Disconnect\" or variations of it, such as \"Sign Up With Apple\", in various UI elements like buttons and icons. It appears on a settings page and is related to data management, file backup, or deletion options. Translators should use this key for localized versions of these labels.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2238,
+      "line_number": 2271,
       "context": "},\n {\n id: \"option_delete\",\n key: \"delete\",\n label: isRootThirdPartyFolder\n ? t(\"Common:Disconnect\")\n : item.isTemplate\n ? t(\"DeleteTemplate\")\n : t(\"Common:Delete\"),\n icon: TrashReactSvgUrl,\n onClick: () => this.onDelete(item, t),",
       "module": "/packages/client"
     },
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 390,
+      "line_number": 389,
       "context": "signUp = false,\n ) {\n const capitalizeProvider =\n provider.charAt(0).toUpperCase() + provider.slice(1);\n if (linked) {\n return `${t(\"Common:Disconnect\")} ${capitalizeProvider}`;\n }\n \n switch (provider) {\n case \"apple\":\n return signUp ? t(\"Common:SignUpWithApple\") : t(\"Common:SignInWithApple\");",
       "module": "/packages/shared"
     }

@@ -3,7 +3,7 @@
   "content": "Version history",
   "content_en_sha1_hash": "91f86581f16b879da742c9455c03ac6262bd4f8d",
   "created_at": "2025-05-19T21:30:56.299Z",
-  "updated_at": "2025-08-29T14:33:38.364Z",
+  "updated_at": "2025-09-01T11:05:24.390Z",
   "comment": {
     "text": "Version history is displayed when a user requests to view file version history. This label is used in a dialog window. Translators should provide a description that accurately conveys this information in the target language.",
     "is_auto": true,

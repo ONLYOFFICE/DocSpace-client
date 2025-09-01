@@ -3,7 +3,7 @@
   "content": "Delete",
   "content_en_sha1_hash": "f6fdbe48dc54dd86f63097a03bd24094dedd713a",
   "created_at": "2025-05-19T21:30:44.452Z",
-  "updated_at": "2025-08-29T14:33:37.976Z",
+  "updated_at": "2025-09-01T11:05:24.126Z",
   "comment": {
     "text": "This translation key is used to display the text \"Delete\" on a button in a file editor component, specifically within an avatar cropper. It appears as a button's text and title, allowing users to confirm deletion of an image.",
     "is_auto": true,
@@ -114,19 +114,19 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2241,
+      "line_number": 2274,
       "context": "key: \"delete\",\n label: isRootThirdPartyFolder\n ? t(\"Common:Disconnect\")\n : item.isTemplate\n ? t(\"DeleteTemplate\")\n : t(\"Common:Delete\"),\n icon: TrashReactSvgUrl,\n onClick: () => this.onDelete(item, t),\n disabled: item.isTemplate ? !isTemplateOwner : false,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2241,
+      "line_number": 2274,
       "context": "key: \"delete\",\n label: isRootThirdPartyFolder\n ? t(\"Common:Disconnect\")\n : item.isTemplate\n ? t(\"DeleteTemplate\")\n : t(\"Common:Delete\"),\n icon: TrashReactSvgUrl,\n onClick: () => this.onDelete(item, t),\n disabled: item.isTemplate ? !isTemplateOwner : false,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2241,
+      "line_number": 2274,
       "context": "key: \"delete\",\n label: isRootThirdPartyFolder\n ? t(\"Common:Disconnect\")\n : item.isTemplate\n ? t(\"DeleteTemplate\")\n : t(\"Common:Delete\"),\n icon: TrashReactSvgUrl,\n onClick: () => this.onDelete(item, t),\n disabled: item.isTemplate ? !isTemplateOwner : false,\n },\n {",
       "module": "/packages/client"
     },
@@ -138,13 +138,13 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2331,
+      "line_number": 2322,
       "context": "case \"delete-room\":\n if (!this.isAvailableOption(\"delete-room\")) return null;\n return {\n id: \"menu-delete-room\",\n label: t(\"Common:Delete\"),\n onClick: () => this.deleteRooms(t),\n iconUrl: DeleteReactSvgUrl,\n };\n \n case \"delete\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2331,
+      "line_number": 2322,
       "context": "case \"delete-room\":\n if (!this.isAvailableOption(\"delete-room\")) return null;\n return {\n id: \"menu-delete-room\",\n label: t(\"Common:Delete\"),\n onClick: () => this.deleteRooms(t),\n iconUrl: DeleteReactSvgUrl,\n };\n \n case \"delete\":",
       "module": "/packages/client"
     },

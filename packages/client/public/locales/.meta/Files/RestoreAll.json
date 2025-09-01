@@ -3,7 +3,7 @@
   "content": "Restore all",
   "content_en_sha1_hash": "9eca7fb8c0e99c10b51061dabb85aee7a49051cf",
   "created_at": "2025-05-19T21:30:56.049Z",
-  "updated_at": "2025-08-29T14:33:38.353Z",
+  "updated_at": "2025-09-01T11:05:24.388Z",
   "comment": {
     "text": "Restore all button text: \"Restore all\" is used as a label on a restore all button in the empty trash dialog, prompting users to retrieve deleted files. It appears on the screen when an empty trash dialog is opened. Translators should consider the context of file management and restoration.",
     "is_auto": true,

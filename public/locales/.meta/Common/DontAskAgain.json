@@ -3,7 +3,7 @@
   "content": "Don't ask file name again on creation",
   "content_en_sha1_hash": "8e94add6c6b263663fe317dddfd29004f6cc223b",
   "created_at": "2025-05-19T21:30:44.617Z",
-  "updated_at": "2025-08-29T14:33:37.959Z",
+  "updated_at": "2025-09-01T11:05:24.113Z",
   "comment": {
     "text": "This translation key is used to display a message reminding users not to ask for file name changes on creation. It appears in two UI elements: a checkbox in a dialog and a toggle button in a file management section. Translators should provide a message that conveys this reminder in an friendly and non-intrusive tone.",
     "is_auto": true,

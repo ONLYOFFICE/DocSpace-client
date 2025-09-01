@@ -47,7 +47,6 @@ import { EditorProps, TGoBack } from "@/types";
 import {
   onSDKRequestHistoryClose,
   onSDKRequestEditRights,
-  onSDKInfo,
   onSDKWarning,
   onSDKError,
   onSDKRequestRename,
@@ -118,6 +117,7 @@ const Editor = ({
     onRequestStartFilling,
 
     onRequestRefreshFile,
+    onInfo,
   } = useEditorEvents({
     user,
     successAuth,
@@ -252,7 +252,7 @@ const Editor = ({
     onRequestEditRights: () =>
       onSDKRequestEditRights(t, fileInfo, newConfig.documentType),
     onAppReady: onSDKAppReady,
-    onInfo: onSDKInfo,
+    onInfo,
     onWarning: onSDKWarning,
     onError: onSDKError,
     onRequestHistoryData: onSDKRequestHistoryData,

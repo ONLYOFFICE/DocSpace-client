@@ -3,7 +3,7 @@
   "content": "Search",
   "content_en_sha1_hash": "bce06414177f72ab70e6387b6af9f8ceef0d6049",
   "created_at": "2025-05-19T21:30:48.328Z",
-  "updated_at": "2025-08-29T14:33:38.105Z",
+  "updated_at": "2025-09-01T11:05:24.202Z",
   "comment": {
     "text": "This translation key is used to display the label \"Search\" in various UI elements. It appears on a search input field and an icon button, inviting users to find specific items or content. The text should be translated as \"Search\" in English.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1486,
+      "line_number": 1460,
       "context": "getViewSettingsData={getViewSettingsData}\n onSearch={onSearch}\n onClearFilter={onClearFilter}\n getSelectedInputValue={getSelectedInputValue}\n filterHeader={t(\"Common:AdvancedFilter\")}\n placeholder={t(\"Common:Search\")}\n view={t(\"Common:View\")}\n isFavoritesFolder={isFavoritesFolder}\n isPersonalRoom={isPersonalRoom}\n isRooms={isRooms}\n removeSelectedItem={removeSelectedItem}",
       "module": "/packages/client"
     },

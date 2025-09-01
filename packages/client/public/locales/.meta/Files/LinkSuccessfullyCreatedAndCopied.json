@@ -3,7 +3,7 @@
   "content": "Link successfully created and copied to clipboard",
   "content_en_sha1_hash": "e2f282155a04f8b128e934a7c3ee95e5dd9cf092",
   "created_at": "2025-05-19T21:30:55.795Z",
-  "updated_at": "2025-08-29T14:33:38.127Z",
+  "updated_at": "2025-09-01T11:05:24.215Z",
   "comment": {
     "text": "This translation key is used to display a success message when a link is successfully created and copied to the clipboard, typically in response to button clicks or dialog actions. The message informs users that their link has been successfully generated and made available for sharing. It appears in the UI when creating or editing links, such as in edit link panels or info panel dialogs.",
     "is_auto": true,

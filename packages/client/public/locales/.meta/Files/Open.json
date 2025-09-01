@@ -3,7 +3,7 @@
   "content": "Open",
   "content_en_sha1_hash": "cf9b77061f7b3126b49d50a6fa68f7ca8c26b7a3",
   "created_at": "2025-05-19T21:30:55.917Z",
-  "updated_at": "2025-08-29T14:33:38.344Z",
+  "updated_at": "2025-09-01T11:05:24.383Z",
   "comment": {
     "text": "The translation key \"Open\" is used to display the label for a file opening action. It is commonly found on a button or link in UI elements that allow users to access or open files, such as external links or file picker dialogs. This key helps to provide clear and consistent language across different interfaces and locales.",
     "is_auto": true,

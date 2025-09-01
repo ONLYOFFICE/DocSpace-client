@@ -3,7 +3,7 @@
   "content": "The folder '{{folderTitle}}' is renamed to '{{newFoldedTitle}}'",
   "content_en_sha1_hash": "00e0cd3e6f810877e66c2784d96ec62ae9adc140",
   "created_at": "2025-05-19T21:30:55.695Z",
-  "updated_at": "2025-08-29T14:33:37.957Z",
+  "updated_at": "2025-09-01T11:05:24.111Z",
   "comment": {
     "text": "The translation key \"FolderRenamed\" is used to display a success message after renaming a folder, showing the original and new folder titles. This message appears as a toast notification in a UI component.",
     "is_auto": true,

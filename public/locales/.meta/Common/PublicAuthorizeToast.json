@@ -3,7 +3,7 @@
   "content": "This room is opened in the <1>{{roomMode}}</1> mode. If you have an account in this {{productName}}, please authorize.",
   "content_en_sha1_hash": "966e9f6f87aa9004801797a1570d6371db7bf248",
   "created_at": "2025-06-24T16:31:00.928Z",
-  "updated_at": "2025-08-29T14:33:38.343Z",
+  "updated_at": "2025-09-01T11:05:24.383Z",
   "comment": {
     "text": "This translation key is used to display a toast message prompting users to authorize access to their account when they enter a public room in the application. The message includes placeholders for room mode and product name, which will be replaced by actual values during translation. It appears as a modal or dialog prompt.",
     "is_auto": true,

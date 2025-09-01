@@ -3,7 +3,7 @@
   "content": "Invalid link",
   "content_en_sha1_hash": "3aaeaeb6ec3f8154506ce18b333531c275dcb035",
   "created_at": "2025-05-19T21:30:45.936Z",
-  "updated_at": "2025-08-29T14:33:38.394Z",
+  "updated_at": "2025-09-01T11:05:24.413Z",
   "comment": {
     "text": "This translation key is used to display an error message when a link provided is invalid. It appears as a message shown by the docEditor component, typically in response to user interactions such as clicking on a button or attempting to load content.",
     "is_auto": true,

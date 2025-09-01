@@ -3,7 +3,7 @@
   "content": "PDF form <1>{{filename}}</1> is ready to be filled out.",
   "content_en_sha1_hash": "d99ebd71967eb9504b7a963b948e8e633fa45c97",
   "created_at": "2025-05-19T21:30:53.768Z",
-  "updated_at": "2025-08-29T14:33:37.958Z",
+  "updated_at": "2025-09-01T11:05:24.112Z",
   "comment": {
     "text": "This translation key is used to display a success message when a PDF form is ready to be filled out. The message includes the title of the form file. It appears in a toast notification in the GlobalEvents component's button context.",
     "is_auto": true,

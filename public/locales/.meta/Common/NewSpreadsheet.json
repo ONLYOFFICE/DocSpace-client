@@ -3,7 +3,7 @@
   "content": "New spreadsheet",
   "content_en_sha1_hash": "6bde054ddba34bfc0975daa6211434db38bf5b6f",
   "created_at": "2025-05-19T21:30:46.791Z",
-  "updated_at": "2025-08-29T14:33:38.096Z",
+  "updated_at": "2025-09-01T11:05:24.195Z",
   "comment": {
     "text": "This translation key is used to display the label for a \"Create New Spreadsheet\" button in a user interface. It appears as part of a contextual menu or dialog, allowing users to create a new spreadsheet file when selecting an option from a list.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2769,
+      "line_number": 3012,
       "context": "};\n \n const createNewSpreadsheet = {\n id: \"personal_new-spreadsheet\",\n key: \"new-spreadsheet\",\n label: t(\"Common:NewSpreadsheet\"),\n onClick: () => this.onCreate(\"xlsx\"),\n icon: SpreadsheetReactSvgUrl,\n };\n \n const createNewPresentation = {",
       "module": "/packages/client"
     },

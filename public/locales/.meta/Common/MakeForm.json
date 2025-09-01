@@ -3,7 +3,7 @@
   "content": "Save as PDF form",
   "content_en_sha1_hash": "a43317ae627c650dad0fca77c887e0530bc4974c",
   "created_at": "2025-05-19T21:30:46.344Z",
-  "updated_at": "2025-08-29T14:33:38.001Z",
+  "updated_at": "2025-09-01T11:05:24.146Z",
   "comment": {
     "text": "This translation key is used to display the label \"Make Form\" in a dialog window when converting a file. The translated text will be shown as a button or heading within this dialog, allowing users to create a new form based on an existing document.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1810,
-      "context": "disabled: false,\n },\n {\n id: \"option_make-form\",\n key: \"make-form\",\n label: t(\"Common:MakeForm\"),\n icon: FormPlusReactSvgUrl,\n onClick: () => this.onClickMakeForm(item, t),\n disabled: false,\n },\n separator0,",
+      "line_number": 1850,
+      "context": "disabled: false,\n },\n {\n id: \"option_make-form\",\n key: \"make-form\",\n label: t(\"Common:MakeForm\"),\n icon: FormPlusReactSvgUrl,\n onClick: () => this.onClickMakeForm(item, t),\n disabled: false,\n },\n ...pinOptions,",
       "module": "/packages/client"
     }
   ],

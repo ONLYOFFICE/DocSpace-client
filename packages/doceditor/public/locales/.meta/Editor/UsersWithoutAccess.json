@@ -3,7 +3,7 @@
   "content": "Some users whom you want to mention don't have access to the room: {{users}}",
   "content_en_sha1_hash": "0e74bc0626bcf6b856447b7dbe024abf390630fa",
   "created_at": "2025-05-19T21:30:57.136Z",
-  "updated_at": "2025-08-29T14:33:38.394Z",
+  "updated_at": "2025-09-01T11:05:24.413Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that some users do not have access to a room. The message appears when users are unable to edit or view content in a specific file (useEditorEvents.ts) and shows a list of non-privileged users who should be mentioned, if any exist.",
     "is_auto": true,

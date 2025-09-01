@@ -3,7 +3,7 @@
   "content": "Created",
   "content_en_sha1_hash": "accf40c89baa4fa88e6a7ff11e1f805beecafd3f",
   "created_at": "2025-05-19T21:30:55.310Z",
-  "updated_at": "2025-08-04T07:30:01.262Z",
+  "updated_at": "2025-08-27T10:14:35.255Z",
   "comment": {
     "text": "This translation key is used for the label that appears next to a column header, specifically the \"Created\" column in a table view. It's part of the UI element on the page /packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js. The translated text will be displayed as the title for this column.",
     "is_auto": true,
@@ -12,25 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 269,
+      "line_number": 262,
       "context": "onClick: this.onFilter,\n },\n { ...authorBlock },\n {\n key: \"Created\",\n title: t(\"ByCreation\"),\n enable: createdColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.CreationDate,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 269,
+      "line_number": 262,
       "context": "onClick: this.onFilter,\n },\n { ...authorBlock },\n {\n key: \"Created\",\n title: t(\"ByCreation\"),\n enable: createdColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.CreationDate,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 269,
-      "context": "onClick: this.onFilter,\n },\n { ...authorBlock },\n {\n key: \"Created\",\n title: t(\"ByCreation\"),\n enable: createdColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.CreationDate,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 269,
+      "line_number": 262,
       "context": "onClick: this.onFilter,\n },\n { ...authorBlock },\n {\n key: \"Created\",\n title: t(\"ByCreation\"),\n enable: createdColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.CreationDate,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },

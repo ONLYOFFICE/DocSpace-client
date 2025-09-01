@@ -247,6 +247,12 @@ const GlobalEvents = ({
           payload.onClose && payload.onClose();
           setCreatePluginFileProps({ visible: false, onClose: null });
         },
+        updateCreatePluginFileProps: (newProps) => {
+          setCreatePluginFileProps((prevProps) => ({
+            ...prevProps,
+            ...newProps,
+          }));
+        },
       });
     },
     [enablePlugins],

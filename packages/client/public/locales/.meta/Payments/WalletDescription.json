@@ -3,7 +3,7 @@
   "content": "The {{productName}} Wallet lets you easily purchase storage space. Add funds to your wallet and select the services you need in the Services section to get started.",
   "content_en_sha1_hash": "bda5925a978407a689871edbbddca83881674e8f",
   "created_at": "2025-06-18T17:09:38.094Z",
-  "updated_at": "2025-06-26T19:00:18.243Z",
+  "updated_at": "2025-08-26T11:14:27.709Z",
   "comment": {
     "text": "This translation key is used to display a brief introduction about the wallet feature, explaining how it allows users to purchase storage space. It appears in the PortalSettings page and is displayed below any available payment options. The phrase \"{{productName}}\" should be replaced with the actual product name during translation.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/WalletContainer.tsx",
-      "line_number": 196,
+      "line_number": 195,
       "context": "};\n \n return (\n <div className={styles.walletContainer}>\n <Text className={styles.walletDescription}>\n {t(\"WalletDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n \n {walletHelpUrl ? (\n <Link\n textDecoration=\"underline\"",
       "module": "/packages/client"
     }

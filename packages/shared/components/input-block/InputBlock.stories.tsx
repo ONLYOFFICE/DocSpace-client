@@ -161,15 +161,9 @@ export const Sizes: Story = {
       />
       <Template
         {...defaultArgs}
-        id="big-size"
-        size={InputSize.big}
-        placeholder="Big size"
-      />
-      <Template
-        {...defaultArgs}
-        id="huge-size"
-        size={InputSize.huge}
-        placeholder="Huge size"
+        id="large-size"
+        size={InputSize.large}
+        placeholder="Large size"
       />
     </div>
   ),

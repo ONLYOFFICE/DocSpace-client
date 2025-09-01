@@ -219,6 +219,7 @@ export const Component = inject(
     treeFoldersStore,
     setup,
     currentTariffStatusStore,
+    currentQuotaStore,
     backup,
     authStore,
   }) => {
@@ -248,6 +249,8 @@ export const Component = inject(
       currentDeviceType,
       standalone,
     } = settingsStore;
+    const { setBackupsCount } = backup;
+    const { isFreeTariff, isNonProfit } = currentQuotaStore;
 
     const buttonSize =
       currentDeviceType !== DeviceType.desktop ? "normal" : "small";
@@ -262,6 +265,9 @@ export const Component = inject(
       currentColorScheme,
       currentDeviceType,
       standalone,
+      isFreeTariff,
+      isNonProfit,
+      setBackupsCount,
 
       getProgress,
       setStorageRegions,

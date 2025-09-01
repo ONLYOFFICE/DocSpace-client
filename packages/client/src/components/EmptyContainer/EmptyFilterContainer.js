@@ -50,6 +50,7 @@ const EmptyFilterContainer = ({
   isRooms,
   isArchiveFolder,
   isRoomsFolder,
+  isRecentFolder,
   setClearSearch,
   theme,
   isPublicRoom,
@@ -96,7 +97,7 @@ const EmptyFilterContainer = ({
 
       navigate(`${location.pathname}?${newFilter.toUrlParams(userId)}`);
     } else {
-      const newFilter = FilesFilter.getDefault();
+      const newFilter = FilesFilter.getDefault({ isRecentFolder });
 
       newFilter.folder = selectedFolderId;
 
@@ -142,7 +143,7 @@ export default inject(
     publicRoomStore,
     userStore,
   }) => {
-    const { isRoomsFolder, isArchiveFolder } = treeFoldersStore;
+    const { isRoomsFolder, isArchiveFolder, isRecentFolder } = treeFoldersStore;
 
     const isRooms = isRoomsFolder || isArchiveFolder;
     const { isPublicRoom, publicRoomKey } = publicRoomStore;
@@ -154,6 +155,7 @@ export default inject(
       isRooms,
       isArchiveFolder,
       isRoomsFolder,
+      isRecentFolder,
       setClearSearch: filesStore.setClearSearch,
       theme: settingsStore.theme,
       userId: user?.id,

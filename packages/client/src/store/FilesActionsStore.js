@@ -2424,14 +2424,12 @@ class FilesActionStore {
   getRecentFolderOptions = (itemsCollection, t) => {
     const download = this.getOption("download", t);
     const downloadAs = this.getOption("downloadAs", t);
-    const copy = this.getOption("copy", t);
-    const showInfo = this.getOption("showInfo", t);
+    const showInfo = this.getOption("show-info", t);
     const removeFromRecent = this.getOption("remove-from-recent", t);
 
     itemsCollection
       .set("download", download)
       .set("downloadAs", downloadAs)
-      .set("copy", copy)
       .set("showInfo", showInfo)
       .set("removeFromRecent", removeFromRecent);
 
@@ -2537,7 +2535,7 @@ class FilesActionStore {
       isShareFolder,
       isRoomsFolder,
       isArchiveFolder,
-      isRecentTab,
+      isRecentFolder,
       isTemplatesFolder,
     } = this.treeFoldersStore;
 
@@ -2553,7 +2551,7 @@ class FilesActionStore {
 
     if (isShareFolder) return this.getShareFolderOptions(itemsCollection, t);
 
-    if (isRecentTab) return this.getRecentFolderOptions(itemsCollection, t);
+    if (isRecentFolder) return this.getRecentFolderOptions(itemsCollection, t);
 
     if (isArchiveFolder)
       return this.getArchiveRoomsFolderOptions(itemsCollection, t);

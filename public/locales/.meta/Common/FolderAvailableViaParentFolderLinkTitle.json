@@ -1,0 +1,28 @@
+{
+  "key_path": "FolderAvailableViaParentFolderLinkTitle",
+  "content": "Folder available via parent folder link",
+  "content_en_sha1_hash": "5e90a87ed5626ac566160b2e47170aed900972fc",
+  "created_at": "2025-08-26T11:15:03.886Z",
+  "updated_at": "2025-08-26T11:26:32.698Z",
+  "comment": {
+    "text": "This text indicates that a folder is accessible through a link from its parent folder. It's used to inform users about the folder's accessibility method, likely appearing as a header within a UI element (potentially a dialog or panel) related to sharing or folder details. Translators should ensure the description accurately conveys this access method.",
+    "is_auto": true,
+    "updated_at": "2025-08-26T11:26:32.698Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/share/index.tsx",
+      "line_number": 450,
+      "context": "const barData = useMemo(() => {\n if (parentShared) {\n return {\n headerText: isFolder\n ? t(\"Common:FolderAvailableViaParentFolderLinkTitle\")\n : t(\"Common:FileAvailableViaParentFolderLinkTitle\"),\n bodyText: isFolder\n ? t(\"Common:FolderAvailableViaParentFolderLinkDescription\")\n : t(\"Common:FileAvailableViaParentFolderLinkDescription\"),\n iconName: FolderIcon,",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

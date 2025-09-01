@@ -110,7 +110,8 @@ const PublicRoomPage = (props) => {
     const isFormRoom =
       roomType === RoomsType.FormRoom || parentRoomType === FolderType.FormRoom;
 
-    if (!access || !ready || toastIsDisabled || isFrame) return;
+    if (!access || !ready || toastIsDisabled || isFrame || isAuthenticated)
+      return;
 
     const roomMode = getAccessTranslation().toLowerCase();
 
@@ -147,7 +148,7 @@ const PublicRoomPage = (props) => {
     );
 
     toastr.info(toastText);
-  }, [access, ready, roomType, parentRoomType]);
+  }, [access, ready, roomType, parentRoomType, isAuthenticated]);
 
   const sectionProps = {
     isSecondaryProgressVisbile,

@@ -129,6 +129,21 @@ class ThirdPartyServices extends React.Component {
     };
   }
 
+  // componentDidMount() {
+  //   const { getConsumers, fetchAndSetConsumers, isThirdPartyAvailable } =
+  //     this.props;
+  //   showLoader();
+  //   const urlParts = window.location.href.split("?");
+  //   if (urlParts.length > 1 && isThirdPartyAvailable) {
+  //     const queryValue = urlParts[1].split("=")[1];
+  //     fetchAndSetConsumers(queryValue)
+  //       .then((isConsumerExist) => isConsumerExist && this.onModalOpen())
+  //       .finally(() => hideLoader());
+  //   } else {
+  //     getConsumers().finally(() => hideLoader());
+  //   }
+  // }
+
   componentDidUpdate(prevProps) {
     const { t, tReady, openModal } = this.props;
     if (prevProps.tReady !== tReady && tReady)

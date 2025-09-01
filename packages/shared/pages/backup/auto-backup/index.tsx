@@ -93,7 +93,7 @@ const AutomaticBackup = ({
   setThirdPartyStorage,
   setBackupSchedule,
   setConnectedThirdPartyAccount,
-  rootFoldersTitles,
+
   seStorageType,
   setSelectedEnableSchedule,
   toDefault,
@@ -388,14 +388,14 @@ const AutomaticBackup = ({
 
   const operationsCompleted = downloadingProgress === 100;
 
-  const roomName = rootFoldersTitles[FolderType.USER]?.title;
-
   const isSaveCancelDisabled =
     isLoadingData || !(isChanged || isThirdStorageChanged);
 
   if (isEmptyContentBeforeLoader && !isInitialLoading) return null;
 
   if (isInitialLoading) return <AutoBackupLoader />;
+
+  const mainDisabled = isLoadingData || !isEnableAuto || isInitialError;
 
   return (
     <div data-testid="auto-backup" className={styles.autoBackup}>
@@ -436,6 +436,9 @@ const AutomaticBackup = ({
         className={classNames(
           styles.backupToggleWrapper,
           "backup_toggle-wrapper",
+          {
+            [styles.isDisabled]: mainDisabled,
+          },
         )}
       >
         <ToggleButton
@@ -445,7 +448,7 @@ const AutomaticBackup = ({
           )}
           onChange={onClickPermissions}
           isChecked={selectedEnableSchedule}
-          isDisabled={isLoadingData || !isEnableAuto || isInitialError}
+          isDisabled={mainDisabled}
           dataTestId="enable_automatic_backup_button"
         />
 
@@ -467,22 +470,6 @@ const AutomaticBackup = ({
             >
               {t("Common:EnableAutomaticBackup")}
             </Text>
-            {!isEnableAuto && !isManagement ? (
-              <Badge
-                backgroundColor={
-                  theme.isBase
-                    ? globalColors.favoritesStatus
-                    : globalColors.favoriteStatusDark
-                }
-                label={t("Common:Paid")}
-                fontWeight="700"
-                className={classNames(
-                  styles.autoBackupBadge,
-                  "auto-backup_badge",
-                )}
-                isPaidBadge
-              />
-            ) : null}
           </div>
           <Text
             className={classNames(
@@ -513,9 +500,9 @@ const AutomaticBackup = ({
                 "backup-description",
               )}
             >
-              <Trans t={t} i18nKey="RoomsModuleDescription" ns="Common">
-                {{ roomName }}
-              </Trans>
+              {t("Common:RoomsModuleDescription", {
+                roomName: t("Common:MyFilesSection"),
+              })}
             </Text>
             {isCheckedDocuments ? (
               <RoomsModule

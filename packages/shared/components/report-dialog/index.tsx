@@ -94,8 +94,6 @@ const ReportDialog = (props: ReportDialogProps) => {
       onCloseAction();
     } catch (err) {
       toastr.error(err as Error);
-      // eslint-disable-next-line no-console
-      console.error(err);
     }
   };
 

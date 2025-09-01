@@ -29,6 +29,7 @@ import { useParams, useLocation } from "react-router";
 import Article from "@docspace/shared/components/article";
 import { inject, observer } from "mobx-react";
 import Section from "@docspace/shared/components/section";
+import { DeviceType } from "@docspace/shared/enums";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import ArticleWrapper from "SRC_DIR/components/ArticleWrapper";
@@ -37,6 +38,7 @@ import SectionWrapper from "SRC_DIR/components/Section";
 
 import SectionHeaderContent from "./Section/Header";
 import { ArticleHeaderContent, ArticleBodyContent } from "./Article";
+import Warning from "./WarningComponent";
 
 import HistoryHeader from "../categories/developer-tools/Webhooks/WebhookHistory/sub-components/HistoryHeader";
 import DetailsNavigationHeader from "../categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/DetailsNavigationHeader";
@@ -83,6 +85,7 @@ const Layout = ({
   isLoadedArticleBody,
   needPageReload,
   isNotPaidPeriod,
+  currentDeviceType,
 }) => {
   const { id, eventId } = useParams();
   const location = useLocation();
@@ -127,6 +130,12 @@ const Layout = ({
             )}
           </Section.SectionHeader>
 
+          {currentDeviceType !== DeviceType.desktop ? (
+            <Section.SectionWarning>
+              <Warning />
+            </Section.SectionWarning>
+          ) : null}
+
           <Section.SectionBody>{children}</Section.SectionBody>
         </SectionWrapper>
       ) : null}
@@ -148,7 +157,7 @@ export default inject(
     const {
       setCurrentProductId,
       enablePlugins,
-
+      currentDeviceType,
       isLoadedArticleBody,
     } = settingsStore;
     const { isNotPaidPeriod } = currentTariffStatusStore;
@@ -166,6 +175,7 @@ export default inject(
       isLoadedArticleBody,
       needPageReload,
       isNotPaidPeriod,
+      currentDeviceType,
     };
   },
 )(withLoading(observer(Layout)));

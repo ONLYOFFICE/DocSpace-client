@@ -34,6 +34,7 @@ import { useUnmount } from "@docspace/shared/hooks/useUnmount";
 
 import type { ThirdPartyAccountType } from "@docspace/shared/types";
 import type { TColorScheme } from "@docspace/shared/themes";
+import { getBackupsCount } from "@docspace/shared/api/backup";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import type {
@@ -49,9 +50,14 @@ const AutoBackupWrapper = ({
   setBackupSchedule,
   setThirdPartyStorage,
   setDefaultOptions,
-  fetchTreeFolders,
   resetDownloadingProgress,
   setErrorInformation,
+  setBackupsCount,
+  setServiceQuota,
+  setIsInited,
+  fetchPayerInfo,
+  isBackupPaid,
+  maxFreeBackups,
   ...props
 }: AutoBackupWrapperProps) => {
   const { t, ready } = useTranslation(["Settings", "Common"]);
@@ -60,6 +66,7 @@ const AutoBackupWrapper = ({
     resetDownloadingProgress();
     props.setterSelectedEnableSchedule(false);
     props.toDefault();
+    setIsInited(false);
   });
 
   useEffect(() => {
@@ -86,15 +93,18 @@ export default inject<
     backup,
     authStore,
     settingsStore,
-    currentQuotaStore,
     filesSettingsStore,
-    treeFoldersStore,
     filesSelectorInput,
     thirdPartyStore,
     dialogsStore,
+    currentTariffStatusStore,
+    currentQuotaStore,
+    paymentStore,
   }) => {
     const language = authStore.language;
-    const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
+
+    const { setServiceQuota } = paymentStore;
+    const { fetchPayerInfo } = currentTariffStatusStore;
     const { getIcon, filesSettings } = filesSettingsStore;
 
     const settingsFileSelector = { getIcon, filesSettings };
@@ -105,17 +115,9 @@ export default inject<
       deleteThirdParty,
     } = thirdPartyStore;
 
-    const {
-      checkEnablePortalSettings,
-      automaticBackupUrl,
-      currentColorScheme,
-    } = settingsStore;
+    const { automaticBackupUrl, currentColorScheme } = settingsStore;
+    const { isBackupPaid, maxFreeBackups } = currentQuotaStore;
 
-    const isEnableAuto = checkEnablePortalSettings(
-      Boolean(isRestoreAndAutoBackupAvailable),
-    );
-
-    const { rootFoldersTitles, fetchTreeFolders } = treeFoldersStore;
     const {
       basePath,
       newPath,
@@ -201,7 +203,14 @@ export default inject<
       backupProgressError,
       setBackupProgressError,
       setterSelectedEnableSchedule,
+      backupPageEnable,
+
+      setBackupsCount,
+
+      setIsInited,
     } = backup;
+
+    const isEnableAuto = backupPageEnable ?? false;
 
     const defaultRegion =
       defaultFormSettings && "region" in defaultFormSettings
@@ -283,10 +292,6 @@ export default inject<
       backupProgressError,
       setBackupProgressError,
 
-      // treeFoldersStore
-      rootFoldersTitles,
-      fetchTreeFolders,
-
       // settingsStore
       automaticBackupUrl,
       currentColorScheme: currentColorScheme as TColorScheme,
@@ -311,6 +316,12 @@ export default inject<
       deleteThirdPartyDialogVisible,
       setConnectDialogVisible,
       setDeleteThirdPartyDialogVisible,
+      fetchPayerInfo,
+      setBackupsCount,
+      setServiceQuota,
+      setIsInited,
+      isBackupPaid,
+      maxFreeBackups,
     };
   },
 )(observer(AutoBackupWrapper as React.FC<ExternalAutoBackupWrapperProps>));

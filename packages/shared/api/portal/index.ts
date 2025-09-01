@@ -297,12 +297,33 @@ export async function getPortalPaymentQuotas() {
 export async function getServicesQuotas() {
   const res = (await request({
     method: "get",
-    url: "/portal/payment/quotas?wallet=true",
+    url: "/portal/payment/walletservices",
   })) as TPaymentQuota[];
 
   return res;
 }
 
+export async function getServiceQuota(serviceName?: string) {
+  const res = (await request({
+    method: "get",
+    url: `/portal/payment/walletservice?service=${serviceName}`,
+  })) as TPaymentQuota;
+
+  return res;
+}
+
+export async function setServiceState(data: {
+  service: string;
+  enabled: boolean;
+}) {
+  const res = (await request({
+    method: "post",
+    url: "/portal/payment/servicestate",
+    data,
+  })) as TPaymentQuota;
+
+  return res;
+}
 export async function getPortalQuota(refresh = false) {
   const params = refresh ? { refresh: true } : {};
   // console.log("getPortalQuota", { params });

@@ -271,9 +271,9 @@ export const updateServer = async (
   serverId: string,
   endpoint: string,
   name: string,
-  description: string,
-  headers: Record<string, string>,
-  enabled: boolean,
+  description?: string,
+  headers?: Record<string, string>,
+  enabled?: boolean,
 ) => {
   try {
     await request({

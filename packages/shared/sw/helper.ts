@@ -40,5 +40,5 @@ window.SW = {
   unregister: () => serviceWorker.unregister(),
 };
 
-export const registerSW = serviceWorker.register;
-export const unregisterSW = serviceWorker.unregister;
+export const registerSW = () => serviceWorker.register();
+export const unregisterSW = () => serviceWorker.unregister();

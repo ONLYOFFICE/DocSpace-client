@@ -33,16 +33,13 @@ import { Heading, HeadingLevel } from "@docspace/shared/components/heading";
 import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
+import type { TAiProvider } from "@docspace/shared/api/ai/types";
 
 import styles from "../../AISettings.module.scss";
 import { AiTile, AiTileVariant } from "../ai-tile";
-import { useFetchAiProviders } from "./useFetchAiProviders";
 
-export const AiProvider = () => {
+export const AiProvider = ({ aiProviders }: { aiProviders: TAiProvider[] }) => {
   const { t } = useTranslation("Common");
-  const { aiProviders, isAiProvidersLoading } = useFetchAiProviders();
-
-  if (isAiProvidersLoading) return null;
 
   return (
     <div className={styles.aiProvider}>

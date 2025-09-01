@@ -70,14 +70,18 @@ const MCPList = ({ showHeading, headingText, mcpServers }: MCPListProps) => {
   );
 };
 
-export const McpServers = ({ standalone }: { standalone?: boolean }) => {
+export const McpServers = ({
+  standalone,
+  customMCPServers,
+  systemMCPServers,
+}: {
+  standalone?: boolean;
+  customMCPServers: TServer[];
+  systemMCPServers: TServer[];
+}) => {
   const { t } = useTranslation("Common");
-  const { customMCPServers, systemMCPServers, isMCPLoading } =
-    useFetchMCPServers();
 
   const showMCPHeadings = customMCPServers.length > 0;
-
-  if (isMCPLoading) return null;
 
   return (
     <div className={styles.mcpServers}>

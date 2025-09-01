@@ -17,18 +17,6 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/RowView/RowBody.tsx",
-      "line_number": 74,
-      "context": "serviceName = \"disk-storage\";\n }\n \n switch (serviceName) {\n case \"disk-storage\":\n return `${quantity} ${t(\"Common:Gigabyte\")}`;\n default:\n return \"—\";\n }\n };\n const correctDate = getCorrectDate(language, transaction.date);",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/TableView/TableBody.tsx",
-      "line_number": 69,
-      "context": "serviceName = \"disk-storage\";\n }\n \n switch (serviceName) {\n case \"disk-storage\":\n return `${quantity} ${t(\"Common:Gigabyte\")}`;\n default:\n return \"—\";\n }\n };\n const correctDate = getCorrectDate(language, transaction.date);",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/ServicesItems.tsx",
       "line_number": 138,
       "context": "const textTooltip = () => {\n return (\n <>\n <Text fontWeight={600} fontSize=\"12px\">\n {t(\"StorageUpgradeMessage\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n toSize: `${nextStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n })}\n </Text>\n <Text fontSize=\"12px\">\n {nextStoragePlanSize === 0",

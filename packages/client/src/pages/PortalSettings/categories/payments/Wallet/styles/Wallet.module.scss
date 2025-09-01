@@ -31,11 +31,12 @@
     max-width: 660px;
     color: var(--payment-text-color);
     margin-bottom: 4px;
+    line-height: 20px;
   }
 
   .balanceWrapper {
-    margin-top: 20px;
-    margin-bottom: 12px;
+    margin-top: 24px;
+    margin-bottom: 16px;
     .balanceTitle {
       height: 24px;
     }
@@ -53,6 +54,9 @@
   .autoPaymentInformation {
     margin-bottom: 24px;
     color: var(--payment-text-color);
+    p:first-child {
+      margin-bottom: 2px;
+    }
   }
 
   .autoPaymentEditing {

@@ -7,6 +7,7 @@
   "DesktopTheme": "Sync with Desktop Editor settings",
   "DesktopThemeDescription": "Automatically switch between light and dark themes depending on the current theme of Desktop Editors.",
   "EditPhoto": "Edit photo",
+  "EmailChangeSuccess": "Your email has been successfully changed.",
   "EmailNotVerified": "Email is not verified",
   "ErrorAccountAlreadyUse": "Linked account already in use by another user",
   "FileManagement": "File management",
@@ -25,6 +26,5 @@
   "SystemTheme": "Use system theme",
   "SystemThemeDescription": "Automatically switch between light and dark themes when your system does.",
   "TerminateAllSessions": "Terminate all sessions except the current one",
-  "TwoFactorDescription": "Two-factor authentication via a code-generating app was enabled for all users by the admin.",
-  "EmailChangeSuccess": "Your email has been successfully changed."
+  "TwoFactorDescription": "Two-factor authentication via a code-generating app was enabled for all users by the admin."
 }

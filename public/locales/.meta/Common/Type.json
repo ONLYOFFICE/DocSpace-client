@@ -131,9 +131,15 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
-      "line_number": 397,
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/FilterPanel.tsx",
+      "line_number": 85,
       "context": "<ModalDialog.Header>{t(\"Filter\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.filterDialogContent}>\n <div className={styles.filterDialogSection}>\n <Text fontWeight={600} fontSize=\"15px\">\n {t(\"Common:Type\")}\n </Text>\n <ComboBox\n options={typeOfHistoty}\n selectedOption={selectedType}\n onSelect={onSelectType}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/TableView/TableHeader.tsx",
+      "line_number": 56,
+      "context": "active: true,\n minWidth: 150,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: true,\n resizable: true,\n minWidth: 120,\n },\n {",
       "module": "/packages/client"
     },
     {

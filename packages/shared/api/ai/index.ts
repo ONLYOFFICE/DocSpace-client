@@ -234,6 +234,22 @@ export const getServersList = async (startIndex: number, count: number) => {
   }
 };
 
+export const getAvailableServersList = async (
+  startIndex: number,
+  count: number,
+) => {
+  try {
+    const res = await request({
+      method: "get",
+      url: `${baseUrl}/servers/available?startIndex=${startIndex}&count=${count}`,
+    });
+
+    return res as { items: TServer[]; total: number };
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 export const addNewServer = async (
   endpoint: string,
   name: string,

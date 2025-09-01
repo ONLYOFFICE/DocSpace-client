@@ -113,6 +113,7 @@ const StyledParam = styled.div.attrs(injectDefaultTheme)<{
       align-items: center;
       justify-content: center;
       gap: 8px;
+      border-radius: 3px;
 
       background: var(--filled-button-background-color);
 

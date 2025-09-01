@@ -27,26 +27,13 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { getServersList } from "../../api/ai";
+import { getAvailableServersList } from "../../api/ai";
 import { TServer } from "../../api/ai/types";
 
 import { Selector, TSelectorItem } from "../../components/selector";
+import { getServerIcon } from "../../utils/getServerIcon";
 
 import { RowLoader } from "../../skeletons/selector";
-
-const convertServerToOption = (server: TServer): TSelectorItem => {
-  return {
-    key: server.id,
-    id: server.id,
-    label: server.name,
-    icon: "",
-    isInputItem: false,
-    onAcceptInput: () => {},
-    onCancelInput: () => {},
-    defaultInputValue: "",
-    placeholder: "",
-  };
-};
 
 type MCPServersSelectorProps = {
   onSubmit: (servers: TSelectorItem[]) => void;
@@ -66,11 +53,28 @@ const MCPServersSelector = ({ onSubmit, onClose }: MCPServersSelectorProps) => {
 
   const isRequestLoading = React.useRef(false);
 
+  const convertServerToOption = React.useCallback(
+    (server: TServer): TSelectorItem => {
+      return {
+        key: server.id,
+        id: server.id,
+        label: server.name,
+        icon: getServerIcon(server.serverType) ?? "",
+        isInputItem: false,
+        onAcceptInput: () => {},
+        onCancelInput: () => {},
+        defaultInputValue: "",
+        placeholder: "",
+      };
+    },
+    [],
+  );
+
   const fetchServers = React.useCallback(async () => {
     if (isRequestLoading.current) return;
 
     isRequestLoading.current = true;
-    const response = await getServersList(0, 100);
+    const response = await getAvailableServersList(0, 100);
 
     if (response) {
       const items = response.items.map(convertServerToOption);
@@ -82,12 +86,15 @@ const MCPServersSelector = ({ onSubmit, onClose }: MCPServersSelectorProps) => {
     }
 
     isRequestLoading.current = false;
-  }, []);
+  }, [convertServerToOption]);
 
   const fetchMoreServer = React.useCallback(async () => {
     if (isRequestLoading.current) return;
     isRequestLoading.current = true;
-    const response = await getServersList(startCurrentIndexRef.current, 100);
+    const response = await getAvailableServersList(
+      startCurrentIndexRef.current,
+      100,
+    );
 
     if (response) {
       const items = response.items.map(convertServerToOption);
@@ -99,7 +106,7 @@ const MCPServersSelector = ({ onSubmit, onClose }: MCPServersSelectorProps) => {
     }
 
     isRequestLoading.current = false;
-  }, []);
+  }, [convertServerToOption]);
 
   const onSelect = (item: TSelectorItem) => {
     const isIncluded = selectedServers.some((i) => i.id === item.id);

@@ -34,6 +34,7 @@ import { TSelectorItem } from "@docspace/shared/components/selector";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { TRoomParams } from "@docspace/shared/utils/rooms";
 import { getServersListForRoom } from "@docspace/shared/api/ai";
+import { getServerIcon } from "@docspace/shared/utils/getServerIcon";
 
 import CloseCircleReactSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
 
@@ -69,13 +70,12 @@ const MCPSettings = ({ roomParams, setRoomParams }: MCPSettingsProps) => {
   React.useEffect(() => {
     if (roomId) {
       getServersListForRoom(roomId).then((res) => {
-        console.log(res);
         if (res) {
           const items = res.map((item) => ({
             key: item.id,
             id: item.id,
             label: item.name,
-            icon: "",
+            icon: getServerIcon(item.serverType) ?? "",
             isInputItem: false,
             onAcceptInput: () => {},
             onCancelInput: () => {},

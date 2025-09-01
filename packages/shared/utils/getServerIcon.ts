@@ -24,36 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const enum RoleType {
-  UserMessage = 0,
-  AssistantMessage = 1,
-  Error = 10,
-}
+import BoxSvgUrl from "PUBLIC_DIR/images/thirdparties/box.svg?url";
 
-export const enum ContentType {
-  Text = 0,
-  Tool = 1,
-  Files = 2,
-}
+import { ServerType } from "../api/ai/enums";
 
-export const enum ProviderType {
-  OpenAi = 1,
-  TogetherAi = 2,
-  OpenAiCompatible = 3,
-  Anthropic = 4,
-}
-
-export const enum EventType {
-  Metadata = "metadata",
-  NewToken = "new_token",
-  ToolCall = "tool_call",
-  ToolResult = "tool_result",
-  Error = "error",
-}
-
-export const enum ServerType {
-  Custom,
-  Portal,
-  GitHub,
-  Box,
-}
+export const getServerIcon = (type: ServerType) => {
+  switch (type) {
+    case ServerType.Custom:
+      return null;
+    case ServerType.Portal:
+      return "/logo.ashx?logotype=3";
+    case ServerType.GitHub:
+      return "";
+    case ServerType.Box:
+      return BoxSvgUrl;
+    default:
+      return null;
+  }
+};

@@ -3,8 +3,8 @@
   "version": "3.3.0",
   "private": true,
   "engines": {
-    "node": ">=20",
-    "pnpm": ">=9"
+    "node": ">=22",
+    "pnpm": ">=10"
   },
   "scripts": {
     "before-build": "node ./common/scripts/before-build.js",

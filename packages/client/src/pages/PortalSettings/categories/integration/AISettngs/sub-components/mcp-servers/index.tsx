@@ -30,18 +30,56 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { Heading, HeadingLevel } from "@docspace/shared/components/heading";
+import { Text } from "@docspace/shared/components/text";
 import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
+import type { TServer } from "@docspace/shared/api/ai/types";
 
 import styles from "../../AISettings.module.scss";
 import { AiTile } from "../ai-tile";
 
-export const AiProvider = () => {
-  const { t } = useTranslation("Common");
+type MCPListProps = {
+  showHeading: boolean;
+  headingText: string;
+  mcpServers: TServer[];
+};
+
+const MCPList = ({ showHeading, headingText, mcpServers }: MCPListProps) => {
+  if (!mcpServers?.length) return;
 
   return (
-    <div className={styles.aiProvider}>
+    <div className={styles.mcpListContainer}>
+      {showHeading ? (
+        <Heading
+          className={styles.mcpHeading}
+          level={HeadingLevel.h3}
+          fontSize="16px"
+          fontWeight={700}
+          lineHeight="22px"
+        >
+          {headingText}
+        </Heading>
+      ) : null}
+
+      <div className={styles.mcpList}>
+        {mcpServers.map((mcp) => (
+          <AiTile key={mcp.id} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export const McpServers = () => {
+  const { t } = useTranslation("Common");
+
+  const [systemMCPServers, setSystemMCPServers] = React.useState([1, 1, 1, 1]);
+  const [customMCPServers, setCustomMCPServers] = React.useState([1]);
+
+  const showMCPHeadings = customMCPServers.length > 0;
+
+  return (
+    <div className={styles.mcpServers}>
       <Heading
         className={styles.heading}
         level={HeadingLevel.h3}
@@ -49,11 +87,13 @@ export const AiProvider = () => {
         fontWeight={700}
         lineHeight="22px"
       >
-        AI provider
+        MCP Servers
       </Heading>
       <Text className={styles.description}>
-        Connect your own AI service to unlock advanced features in DocSpace.
-        Once added, it will be accessible to all users in AI chats.
+        This section lets you manage MCP servers for AI chats within rooms. You
+        can enable system MCP servers or add custom ones to meet your company's
+        needs. Once enabled, these servers will be accessible to other users for
+        their tasks.
       </Text>
       <Link
         className={styles.learnMoreLink}
@@ -69,18 +109,23 @@ export const AiProvider = () => {
       <Button
         primary
         size={ButtonSize.small}
-        label="Add AI provider"
+        label="Add MCP Server"
         scale={false}
         className={styles.addProviderButton}
         // onClick={showAddNewDialog}
       />
 
-      <div className={styles.providerList}>
-        <AiTile />
-        <AiTile />
-        <AiTile />
-        <AiTile />
-      </div>
+      <MCPList
+        headingText="Custom"
+        mcpServers={customMCPServers}
+        showHeading={showMCPHeadings}
+      />
+
+      <MCPList
+        headingText="System"
+        mcpServers={systemMCPServers}
+        showHeading={showMCPHeadings}
+      />
     </div>
   );
 };

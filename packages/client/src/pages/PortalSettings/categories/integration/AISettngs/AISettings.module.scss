@@ -29,10 +29,15 @@
   max-width: 700px;
 }
 
-.aiProvider {
+.aiProvider,
+.mcpServers {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+
+.aiProvider {
+  margin-bottom: 24px;
 }
 
 .heading {
@@ -53,12 +58,21 @@
   margin-bottom: 20px;
 }
 
-.providerList {
+.providerList,
+.mcpList {
   width: 100%;
 
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
+}
+
+.mcpHeading {
+  margin-bottom: 20px;
+}
+
+.mcpListContainer {
+  margin-bottom: 20px;
 }
 
 /* ============================================================================================ */

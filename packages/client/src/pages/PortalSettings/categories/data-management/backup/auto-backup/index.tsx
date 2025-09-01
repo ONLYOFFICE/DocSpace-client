@@ -34,7 +34,7 @@ import { useUnmount } from "@docspace/shared/hooks/useUnmount";
 
 import type { ThirdPartyAccountType } from "@docspace/shared/types";
 import type { TColorScheme } from "@docspace/shared/themes";
-import { getBackupsCount } from "@docspace/shared/api/backup";
+// import { getBackupsCount } from "@docspace/shared/api/backup";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import type {

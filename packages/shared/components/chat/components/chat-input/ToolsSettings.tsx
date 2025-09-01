@@ -177,6 +177,14 @@ const ToolsSettings = () => {
               newMap.set(serverId, newTools);
               return newMap;
             });
+            setServers((prev) => {
+              const newServers = [...prev];
+              const serverIndex = newServers.findIndex(
+                (s) => s.id === serverId,
+              );
+              newServers[serverIndex].connected = true;
+              return newServers;
+            });
           } catch (e) {
             console.log(e);
           }
@@ -193,6 +201,12 @@ const ToolsSettings = () => {
         const newMap = new Map(prev);
         newMap.delete(serverId);
         return newMap;
+      });
+      setServers((prev) => {
+        const newServers = [...prev];
+        const serverIndex = newServers.findIndex((s) => s.id === serverId);
+        newServers[serverIndex].connected = false;
+        return newServers;
       });
     } catch (e) {
       console.log(e);

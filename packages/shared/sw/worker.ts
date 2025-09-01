@@ -26,7 +26,7 @@
 
 import { Workbox } from "workbox-window";
 import i18n from "i18next";
-import { useTranslation, initReactI18next } from "react-i18next";
+import { initReactI18next } from "react-i18next";
 import Backend from "i18next-http-backend";
 import { LANGUAGE } from "../constants";
 
@@ -66,24 +66,34 @@ interface SwUpdateOptions {
 }
 
 export class ServiceWorker {
-  private wb: Workbox;
+  private wb?: Workbox;
   private options: SwUpdateOptions;
   private updateTimer?: number;
+  private swUrl: string;
 
   constructor(swUrl: string = "/sw.js", options: SwUpdateOptions = {}) {
-    this.wb = new Workbox(swUrl, {
-      scope: "/",
-      updateViaCache: "none",
-    });
+    this.swUrl = swUrl;
     this.options = {
       updateInterval: 60 * 60 * 1000, // 1 hour
       ...options,
     };
+  }
 
+  private ensureWorkbox(): boolean {
+    if (this.wb) return true;
+    if (typeof window === "undefined" || !("serviceWorker" in navigator)) {
+      return false;
+    }
+    this.wb = new Workbox(this.swUrl, {
+      scope: "/",
+      updateViaCache: "none",
+    });
     this.setupEventListeners();
+    return true;
   }
 
   private setupEventListeners(): void {
+    if (!this.wb) return;
     this.wb.addEventListener("installed", (event) => {
       console.log("Service worker installed", event);
       this.options.onInstalled?.();
@@ -113,7 +123,6 @@ export class ServiceWorker {
   }
 
   private showUpdatePrompt(): void {
-    const { t, ready } = useTranslation("Common", { i18n });
     const notification = document.createElement("div");
     notification.innerHTML = `
       <div style="
@@ -130,7 +139,7 @@ export class ServiceWorker {
         max-width: 300px;
       ">
         <div style="margin-bottom: 12px;">
-          ${t("NewVersionAvailable")}
+          ${i18n.t("Common:NewVersionAvailable")}
         </div>
         <div>
           <button onclick="this.parentElement.parentElement.parentElement.updateSw()" style="
@@ -141,7 +150,7 @@ export class ServiceWorker {
             cursor: pointer;
             font-weight: 500;
             margin-right: 8px;
-          ">${t("Load")}</button>
+          ">${i18n.t("Common:Load")}</button>
           <button onclick="this.parentElement.parentElement.parentElement.remove()" style="
             background: transparent;
             color: white;
@@ -155,7 +164,7 @@ export class ServiceWorker {
     `;
 
     (notification as any).updateSw = () => {
-      this.wb.messageSkipWaiting();
+      this.wb?.messageSkipWaiting();
       notification.remove();
     };
 
@@ -172,7 +181,7 @@ export class ServiceWorker {
     if (this.options.updateInterval && this.options.updateInterval > 0) {
       this.updateTimer = window.setInterval(() => {
         console.log("Checking for service worker updates...");
-        this.wb.update().catch((error) => {
+        this.wb?.update().catch((error) => {
           console.error("SW update check failed:", error);
           this.options.onError?.(error);
         });
@@ -187,13 +196,45 @@ export class ServiceWorker {
     }
   }
 
+  private async swAvailable(): Promise<boolean> {
+    try {
+      if (typeof window === "undefined") return false;
+      const url = new URL(this.swUrl, window.location.href).toString();
+      let res: Response | undefined;
+      try {
+        res = await fetch(url, { method: "HEAD", cache: "no-store" });
+      } catch (e) {
+        res = await fetch(url, { method: "GET", cache: "no-store" });
+      }
+      return !!res && res.ok;
+    } catch (e) {
+      console.warn("SW availability check failed:", e);
+      return false;
+    }
+  }
+
   async register(): Promise<ServiceWorkerRegistration | undefined> {
-    if (!("serviceWorker" in navigator)) {
+    if (typeof window === "undefined" || !("serviceWorker" in navigator)) {
       console.warn("Service worker not supported");
       return;
     }
 
     try {
+      if ((window as any).__NEXT_DATA__) {
+        console.info("Skipping service worker on Next.js app page");
+        return;
+      }
+
+      if (!this.ensureWorkbox()) return;
+      if (!this.wb) return;
+
+      const available = await this.swAvailable();
+      if (!available) {
+        console.warn(
+          `Service worker file not found at ${this.swUrl}. Skipping registration.`,
+        );
+        return;
+      }
       const registration = await this.wb.register();
       console.log("Service worker registered successfully:", registration);
 
@@ -201,7 +242,7 @@ export class ServiceWorker {
 
       document.addEventListener("visibilitychange", () => {
         if (document.visibilityState === "visible") {
-          this.wb.update().catch(console.error);
+          this.wb?.update().catch(console.error);
         }
       });
 
@@ -232,7 +273,7 @@ export class ServiceWorker {
   }
 
   forceUpdate(): void {
-    this.wb.messageSkipWaiting();
+    this.wb?.messageSkipWaiting();
   }
 }
 

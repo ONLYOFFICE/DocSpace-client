@@ -77,8 +77,8 @@ const config: InjectManifestOptions = {
     "**/locales/**/*.json",
   ],
 
-  // Maximum file size to precache (3MB)
-  maximumFileSizeToCacheInBytes: 3 * 1024 * 1024,
+  // Maximum file size to precache (4MB)
+  maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
 };
 
 export default config;

@@ -2479,8 +2479,8 @@ class ContextOptionsStore {
       const groups = [
         ["select", "open"],
         ["share", "show-info"],
-        ["download", "move", "copy-to", "rename"],
-        ["delete"],
+        ["mark-as-favorite", "download", "move", "copy-to", "rename"],
+        ["remove-from-favorites", "delete"],
       ];
 
       const items = resultOptions.filter((opt) => !opt.isSeparator);

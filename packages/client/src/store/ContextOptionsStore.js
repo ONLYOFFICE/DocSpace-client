@@ -1990,6 +1990,19 @@ class ContextOptionsStore {
         disabled: !item.security?.Embed,
       },
       {
+        key: "create-room-separator",
+        isSeparator: true,
+        disabled: !item.security?.CreateRoomFrom,
+      },
+      {
+        id: "option_create_room",
+        key: "create-room",
+        label: t("Common:CreateRoom"),
+        icon: CatalogRoomsReactSvgUrl,
+        onClick: () => this.onCreateRoom(item, true),
+        disabled: !item.security?.CreateRoomFrom,
+      },
+      {
         id: "option_copy-external-link",
         key: "external-link",
         label: t("Common:CopySharedLink"),
@@ -2248,6 +2261,10 @@ class ContextOptionsStore {
         action: "unarchive",
       },
       {
+        key: "separator4",
+        isSeparator: true,
+      },
+      {
         id: "option_delete",
         key: "delete",
         label: isRootThirdPartyFolder
@@ -2344,6 +2361,8 @@ class ContextOptionsStore {
           "link-for-room-members",
           "external-link",
           "embedding-settings",
+          "create-room-separator",
+          "create-room",
         ],
         minItemsCount: 1,
       },
@@ -2455,6 +2474,56 @@ class ContextOptionsStore {
     const moveIndex = resultOptions.findIndex(
       (option) => option.key === "move",
     );
+
+    if (item.isFolder && !item.isRoom) {
+      const groups = [
+        ["select", "open"],
+        ["share", "show-info"],
+        ["download", "move", "copy-to", "rename"],
+        ["delete"],
+      ];
+
+      const items = resultOptions.filter((opt) => !opt.isSeparator);
+      const result = [];
+      let folderSeparatorIndex = 0;
+
+      groups.forEach((group) => {
+        const groupItems = [];
+        group.forEach((key) => {
+          const option = items.find((opt) => opt.key === key);
+          if (option) groupItems.push(option);
+        });
+
+        if (groupItems.length > 0) {
+          const isDeleteGroup = group.includes("delete");
+          const shouldAddSeparator =
+            result.length > 0 && (groupItems.length >= 2 || isDeleteGroup);
+
+          if (shouldAddSeparator) {
+            result.push({
+              key: `separator${folderSeparatorIndex++}`,
+              isSeparator: true,
+            });
+          }
+          result.push(...groupItems);
+        }
+      });
+
+      items.forEach((option) => {
+        const isInGroups = groups.flat().includes(option.key);
+        if (!isInGroups) {
+          if (result.length > 0 && !result[result.length - 1].isSeparator) {
+            result.push({
+              key: `separator${folderSeparatorIndex++}`,
+              isSeparator: true,
+            });
+          }
+          result.push(option);
+        }
+      });
+
+      return trimSeparator(result);
+    }
 
     if (downloadGroupIndex !== -1 && moveIndex !== -1) {
       // If download group is already before move, do nothing

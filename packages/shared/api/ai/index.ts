@@ -323,6 +323,33 @@ export const getServersListForRoom = async (roomId: number) => {
   }
 };
 
+export const connectServer = async (
+  roomId: number,
+  serverId: string,
+  code: string,
+) => {
+  try {
+    await request({
+      method: "post",
+      url: `${baseUrl}/rooms/${roomId}/servers/${serverId}/connect`,
+      data: { code },
+    });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const disconnectServer = async (roomId: number, serverId: string) => {
+  try {
+    await request({
+      method: "post",
+      url: `${baseUrl}/rooms/${roomId}/servers/${serverId}/disconnect`,
+    });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 export const deleteServersForRoom = async (
   roomId: number,
   servers: string[],

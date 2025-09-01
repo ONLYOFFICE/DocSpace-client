@@ -36,7 +36,7 @@ import { TRoomParams } from "@docspace/shared/utils/rooms";
 import { getServersListForRoom } from "@docspace/shared/api/ai";
 import { getServerIcon } from "@docspace/shared/utils/getServerIcon";
 
-import CloseCircleReactSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
+import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 
 import { StyledParam } from "../Params/StyledParam";
 
@@ -121,6 +121,8 @@ const MCPSettings = ({ roomParams, setRoomParams }: MCPSettingsProps) => {
             </Text>
           </div>
           <div className="ai-mcp-group">
+            <SelectorAddButton onClick={onClickAction} />
+
             {selectedServers.map((server) => (
               <div className="ai-mcp-item" key={server.id}>
                 <img src={server.icon} alt="DocSpace" />
@@ -134,8 +136,8 @@ const MCPSettings = ({ roomParams, setRoomParams }: MCPSettingsProps) => {
                 </Text>
 
                 <IconButton
-                  iconName={CloseCircleReactSvgUrl}
-                  size={16}
+                  iconName={CrossReactSvgUrl}
+                  size={12}
                   onClick={() => {
                     setSelectedServers((prev) =>
                       prev.filter((item) => item.id !== server.id),
@@ -144,8 +146,6 @@ const MCPSettings = ({ roomParams, setRoomParams }: MCPSettingsProps) => {
                 />
               </div>
             ))}
-
-            <SelectorAddButton onClick={onClickAction} />
           </div>
         </div>
       </StyledParam>

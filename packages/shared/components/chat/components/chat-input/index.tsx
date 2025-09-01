@@ -41,7 +41,6 @@ import { useChatStore } from "../../store/chatStore";
 
 import { ChatInputProps } from "../../Chat.types";
 
-import ToolsSettings from "./ToolsSettings";
 import Attachment from "./Attachment";
 import FilesList from "./FilesList";
 import Buttons from "./Buttons";
@@ -61,12 +60,9 @@ const ChatInput = ({ getIcon, isLoading }: ChatInputProps) => {
   );
   const [isFilesSelectorVisible, setIsFilesSelectorVisible] =
     React.useState(false);
-  const [isMcpToolsVisible, setIsMcpToolsVisible] = React.useState(false);
-  const [hideMcpToolsButton, setHideMcpToolsButton] = React.useState(false);
 
   const prevSession = React.useRef(currentChatId);
   const inputRef = React.useRef<HTMLDivElement>(null);
-  const toolSettingsRef = React.useRef<HTMLDivElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const val = e.target.value;
@@ -107,7 +103,6 @@ const ChatInput = ({ getIcon, isLoading }: ChatInputProps) => {
   );
 
   const showFilesSelector = () => {
-    setIsMcpToolsVisible(false);
     setIsFilesSelectorVisible(true);
   };
   const hideFilesSelector = () => setIsFilesSelectorVisible(false);
@@ -116,19 +111,6 @@ const ChatInput = ({ getIcon, isLoading }: ChatInputProps) => {
       hideFilesSelector();
     } else {
       showFilesSelector();
-    }
-  };
-
-  const showMcpTools = () => {
-    setIsFilesSelectorVisible(false);
-    setIsMcpToolsVisible(true);
-  };
-  const hideMcpTools = () => setIsMcpToolsVisible(false);
-  const toggleMcpTools = () => {
-    if (isMcpToolsVisible) {
-      hideMcpTools();
-    } else {
-      showMcpTools();
     }
   };
 
@@ -206,11 +188,7 @@ const ChatInput = ({ getIcon, isLoading }: ChatInputProps) => {
               inputWidth={inputWidth}
               isFilesSelectorVisible={isFilesSelectorVisible}
               toggleFilesSelector={toggleFilesSelector}
-              isMcpToolsVisible={isMcpToolsVisible}
-              toggleMcpTools={toggleMcpTools}
-              toolSettingsRef={toolSettingsRef}
               sendMessageAction={sendMessageAction}
-              hideMcpToolsButton={hideMcpToolsButton}
             />
           </>
         )}
@@ -221,13 +199,12 @@ const ChatInput = ({ getIcon, isLoading }: ChatInputProps) => {
         getIcon={getIcon}
         setSelectedFiles={setSelectedFiles}
       />
-      <ToolsSettings
-        isVisible={isMcpToolsVisible}
-        toggleToolsSettings={toggleMcpTools}
-        setHideMcpToolsButton={setHideMcpToolsButton}
-        forwardedRef={toolSettingsRef}
-      />
-      <Text fontSize="10px" fontWeight={400} className={styles.chatInputText}>
+      <Text
+        fontSize="10px"
+        fontWeight={400}
+        className={styles.chatInputText}
+        noSelect
+      >
         AI Chat can make mistakes. Check important info.
       </Text>
     </>

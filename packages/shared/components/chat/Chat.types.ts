@@ -106,13 +106,7 @@ export type MessageBodyProps = {
   getIcon: TGetIcon;
 };
 
-export type ToolsSettingsProps = {
-  isVisible: boolean;
-  toggleToolsSettings: VoidFunction;
-  setHideMcpToolsButton: (value: boolean) => void;
-
-  forwardedRef: React.RefObject<HTMLDivElement | null>;
-};
+export type ToolsSettingsProps = {};
 
 export type FilesListProps = {
   files: Partial<TFile>[];
@@ -124,12 +118,8 @@ export type FilesListProps = {
 export type ButtonsProps = {
   inputWidth: number;
   isFilesSelectorVisible: boolean;
-  isMcpToolsVisible: boolean;
-  toolSettingsRef: React.RefObject<HTMLDivElement | null>;
-  hideMcpToolsButton: boolean;
 
   toggleFilesSelector: VoidFunction;
-  toggleMcpTools: VoidFunction;
   sendMessageAction: () => Promise<void>;
 };
 

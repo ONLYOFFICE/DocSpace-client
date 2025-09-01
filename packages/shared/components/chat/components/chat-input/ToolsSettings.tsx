@@ -27,96 +27,103 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
+import classNames from "classnames";
+
+import McpToolReactSvgUrl from "PUBLIC_DIR/images/mcp.tool.svg?url";
+import ManageConnectionsReactSvgUrl from "PUBLIC_DIR/images/manage.connection.react.svg?url";
 
 import {
   changeMCPToolsForRoom,
+  connectServer,
+  disconnectServer,
   getMCPToolsForRoom,
   getServersListForRoom,
 } from "../../../../api/ai";
-import { TMCPTool } from "../../../../api/ai/types";
+import { ServerType } from "../../../../api/ai/enums";
+import { TMCPTool, TServer } from "../../../../api/ai/types";
+import { getOAuthToken } from "../../../../utils/common";
 
-import { isMobile } from "../../../../utils";
+import { getServerIcon } from "../../../../utils/getServerIcon";
 
-import { DropDown } from "../../../drop-down";
-import { DropDownItem } from "../../../drop-down-item";
-import { Backdrop } from "../../../backdrop";
 import { Text } from "../../../text";
+import { ContextMenu, type ContextMenuRefType } from "../../../context-menu";
+import { IconButton } from "../../../icon-button";
+import { Aside } from "../../../aside";
+import { Button, ButtonSize } from "../../../button";
 
 import { useChatStore } from "../../store/chatStore";
 
-import { ToolsSettingsProps } from "../../Chat.types";
-
 import styles from "./ChatInput.module.scss";
 
-const ToolsSettings = ({
-  isVisible,
-  toggleToolsSettings,
-  setHideMcpToolsButton,
-
-  forwardedRef,
-}: ToolsSettingsProps) => {
+const ToolsSettings = () => {
   const { t } = useTranslation(["Common"]);
 
   const { roomId } = useChatStore();
 
+  const [showManageConnections, setShowManageConnections] =
+    React.useState(false);
+
+  const [isMcpToolsVisible, setIsMcpToolsVisible] = React.useState(false);
+  const [servers, setServers] = React.useState<TServer[]>([]);
   const [MCPTools, setMCPTools] = React.useState<Map<string, TMCPTool[]>>(
     new Map(),
   );
-  const [servers, setServers] = React.useState<string[]>([]);
+  const contextMenuRef = React.useRef<ContextMenuRefType>(null);
 
-  const mobile = isMobile();
+  const toggleTool = React.useCallback(
+    async (mcpId: string, toolId: string) => {
+      const countTools = MCPTools.get(mcpId)?.length ?? 0;
+      const disabledTools =
+        MCPTools.get(mcpId)
+          ?.filter((tool) => !tool.enabled)
+          .map((tool) => tool.name) ?? [];
 
-  const toggleTool = async (mcpId: string, toolId: string) => {
-    const countTools = MCPTools.get(mcpId)?.length ?? 0;
-    const disabledTools =
-      MCPTools.get(mcpId)
-        ?.filter((tool) => !tool.enabled)
-        .map((tool) => tool.name) ?? [];
+      if (toolId === "all_tools") {
+        const enabled = disabledTools.length === countTools;
+        const newTools =
+          MCPTools.get(mcpId)?.map((tool) => ({
+            ...tool,
+            enabled,
+          })) ?? [];
 
-    if (toolId === "all_tools") {
-      const enabled = disabledTools.length === countTools;
-      const newTools =
-        MCPTools.get(mcpId)?.map((tool) => ({
-          ...tool,
-          enabled,
-        })) ?? [];
+        if (enabled) {
+          await changeMCPToolsForRoom(Number(roomId), mcpId, []);
+        } else {
+          await changeMCPToolsForRoom(
+            Number(roomId),
+            mcpId,
+            newTools.map((tool) => tool.name),
+          );
+        }
 
-      if (enabled) {
-        await changeMCPToolsForRoom(Number(roomId), mcpId, []);
+        setMCPTools(new Map([...MCPTools, [mcpId, newTools]]));
       } else {
-        await changeMCPToolsForRoom(
-          Number(roomId),
-          mcpId,
-          newTools.map((tool) => tool.name),
-        );
+        const enabled = disabledTools.includes(toolId);
+
+        const newTools =
+          MCPTools.get(mcpId)?.map((tool) => ({
+            ...tool,
+            enabled: tool.name === toolId ? enabled : tool.enabled,
+          })) ?? [];
+
+        setMCPTools(new Map([...MCPTools, [mcpId, newTools]]));
+
+        if (enabled) {
+          await changeMCPToolsForRoom(
+            Number(roomId),
+            mcpId,
+            disabledTools.filter((tool) => tool !== toolId),
+          );
+        } else {
+          await changeMCPToolsForRoom(Number(roomId), mcpId, [
+            ...disabledTools,
+            toolId,
+          ]);
+        }
       }
-
-      setMCPTools(new Map([...MCPTools, [mcpId, newTools]]));
-    } else {
-      const enabled = disabledTools.includes(toolId);
-
-      const newTools =
-        MCPTools.get(mcpId)?.map((tool) => ({
-          ...tool,
-          enabled: tool.name === toolId ? enabled : tool.enabled,
-        })) ?? [];
-
-      setMCPTools(new Map([...MCPTools, [mcpId, newTools]]));
-
-      if (enabled) {
-        await changeMCPToolsForRoom(
-          Number(roomId),
-          mcpId,
-          disabledTools.filter((tool) => tool !== toolId),
-        );
-      } else {
-        await changeMCPToolsForRoom(Number(roomId), mcpId, [
-          ...disabledTools,
-          toolId,
-        ]);
-      }
-    }
-  };
+    },
+    [MCPTools, roomId],
+  );
 
   React.useEffect(() => {
     const fetchTools = async () => {
@@ -124,16 +131,19 @@ const ToolsSettings = ({
 
       if (!res) return;
 
-      setServers(res.map((server) => server.id));
+      setServers(res);
+
+      const enabledServers = res.filter((server) => server.connected);
 
       const actions = await Promise.all(
-        res.map((server) => getMCPToolsForRoom(Number(roomId), server.id)),
+        enabledServers.map((server) =>
+          getMCPToolsForRoom(Number(roomId), server.id),
+        ),
       );
 
-      const serverTools: [string, TMCPTool[]][] = res.map((item, index) => [
-        item.id,
-        actions[index] ?? [],
-      ]);
+      const serverTools: [string, TMCPTool[]][] = enabledServers.map(
+        (item, index) => [item.id, actions[index] ?? []],
+      );
 
       setMCPTools(new Map(serverTools));
     };
@@ -141,80 +151,164 @@ const ToolsSettings = ({
     fetchTools();
   }, [roomId]);
 
-  React.useEffect(() => {
-    setHideMcpToolsButton(!servers.length);
-  }, [servers.length, setHideMcpToolsButton]);
+  const openOauthWindow = async (url: string, serverId: string) => {
+    const newWindow = window.open(
+      "",
+      t("Common:Authorization"),
+      "height=600, width=1020",
+    );
 
-  if (!isVisible || !servers.length) return;
+    if (newWindow) {
+      newWindow.location = url;
+    }
+
+    getOAuthToken(newWindow)
+      .then(async (token) => {
+        if (token) {
+          try {
+            await connectServer(Number(roomId), serverId, token);
+
+            const newTools = await getMCPToolsForRoom(Number(roomId), serverId);
+
+            if (!newTools) return;
+
+            setMCPTools((prev) => {
+              const newMap = new Map(prev);
+              newMap.set(serverId, newTools);
+              return newMap;
+            });
+          } catch (e) {
+            console.log(e);
+          }
+        }
+      })
+      .catch((e) => console.log(e));
+  };
+
+  const disconnectServerAction = async (serverId: string) => {
+    try {
+      await disconnectServer(Number(roomId), serverId);
+
+      setMCPTools((prev) => {
+        const newMap = new Map(prev);
+        newMap.delete(serverId);
+        return newMap;
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const showMcpTools = (e: React.MouseEvent<HTMLElement>) => {
+    if (!servers.length) return;
+    if (showManageConnections) return;
+
+    setIsMcpToolsVisible(true);
+    contextMenuRef.current?.show(e);
+  };
+
+  const hideMcpTools = () => {
+    setIsMcpToolsVisible(false);
+  };
+
+  const model = [
+    ...Array.from(MCPTools.entries()).map(([mcpId, tools]) => {
+      const server = servers.find((s) => s.id === mcpId);
+
+      if (!server)
+        return {
+          key: "",
+          label: "",
+        };
+
+      return {
+        key: mcpId,
+        label: server.name,
+        icon: getServerIcon(server.serverType) ?? "",
+        items: tools.map((tool) => ({
+          key: tool.name,
+          label: tool.name,
+          withToggle: true,
+          checked: tool.enabled,
+          onClick: () => {
+            toggleTool(mcpId, tool.name);
+          },
+        })),
+      };
+    }),
+    { key: "separator-1", isSeparator: true },
+    {
+      key: "manage-connections",
+      label: "Manage connections",
+      onClick: () => {
+        setShowManageConnections(true);
+      },
+      icon: ManageConnectionsReactSvgUrl,
+    },
+  ];
+
+  if (!servers.length) return;
 
   return (
-    <DropDown
-      open={isVisible}
-      forwardedRef={mobile ? undefined : forwardedRef}
-      isDefaultMode
-      clickOutsideAction={toggleToolsSettings}
-      directionY="both"
-      directionX="right"
-      maxHeight={mobile ? window.innerHeight - 64 : 300}
-      manualWidth={mobile ? undefined : "300px"}
-      isMobileView={mobile}
-      usePortalBackdrop={mobile}
-      backDrop={
-        mobile && isVisible ? (
-          <Backdrop
-            visible
-            onClick={toggleToolsSettings}
-            withBackground
-            zIndex={400}
-          />
-        ) : null
-      }
-      zIndex={500}
-      isNoFixedHeightOptions
-    >
-      <DropDownItem
-        withToggle
-        className={styles.toolSettingsItem}
-        noHover
-        checked={MCPTools.get(servers[0])?.some((tool) => tool.enabled)}
-        onClick={(
-          e:
-            | React.ChangeEvent<HTMLInputElement>
-            | React.MouseEvent<HTMLElement, MouseEvent>,
-        ) => {
-          if (e.target instanceof HTMLInputElement) {
-            toggleTool(servers[0], "all_tools");
-          }
-        }}
+    <>
+      <div
+        className={classNames(styles.chatInputButton, {
+          [styles.activeChatInputButton]: isMcpToolsVisible,
+        })}
+        onClick={showMcpTools}
       >
-        <Text fontSize="12px" fontWeight={600} lineHeight="16px" noSelect>
-          {t("AllTools")}
+        <IconButton iconName={McpToolReactSvgUrl} size={16} isFill={false} />
+        <Text lineHeight="16px" fontSize="13px" fontWeight={600} noSelect>
+          {t("Tools")}
         </Text>
-      </DropDownItem>
-      <DropDownItem isSeparator />
-      {MCPTools.get(servers[0])?.map((tool) => (
-        <DropDownItem
-          key={tool.name}
-          withToggle
-          className={styles.toolSettingsItem}
-          noHover
-          checked={tool.enabled}
-          onClick={(
-            e:
-              | React.ChangeEvent<HTMLInputElement>
-              | React.MouseEvent<HTMLElement, MouseEvent>,
-          ) => {
-            if (e.target instanceof HTMLInputElement) {
-              toggleTool(servers[0], tool.name);
-            }
-          }}
+        <ContextMenu ref={contextMenuRef} model={model} onHide={hideMcpTools} />
+      </div>
+      {showManageConnections ? (
+        <Aside
+          header="Manage connection"
+          onClose={() => setShowManageConnections(false)}
+          visible={showManageConnections}
         >
-          <Text fontSize="12px" fontWeight={600} lineHeight="16px" noSelect>
-            {tool.name}
-          </Text>
-        </DropDownItem>
-      ))}
-    </DropDown>
+          <div className={styles.toolSettingsWrapper}>
+            {servers.map((server) => {
+              if (
+                server.serverType === ServerType.Portal ||
+                !server.authorizationEndpoint
+              )
+                return null;
+
+              return (
+                <div key={server.id} className={styles.toolSettingsItem}>
+                  <div className={styles.toolSettingsItemInfo}>
+                    <img
+                      src={getServerIcon(server.serverType) ?? ""}
+                      alt={server.name}
+                    />
+                    <Text fontSize="14px" lineHeight="16px" fontWeight={600}>
+                      {server.name}
+                    </Text>
+                  </div>
+                  <Button
+                    label={server.connected ? t("Disconnect") : t("Connect")}
+                    size={ButtonSize.small}
+                    onClick={() => {
+                      if (server.connected) {
+                        disconnectServerAction(server.id);
+                      } else {
+                        openOauthWindow(
+                          server.authorizationEndpoint as string,
+                          server.id,
+                        );
+                      }
+                    }}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </Aside>
+      ) : null}
+    </>
   );
 };
 

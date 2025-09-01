@@ -26,34 +26,26 @@
 
 import React from "react";
 import classNames from "classnames";
-import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 
 import SendReactSvgUrl from "PUBLIC_DIR/images/icons/12/arrow.up.react.svg?url";
-import McpToolReactSvgUrl from "PUBLIC_DIR/images/mcp.tool.svg?url";
 import AttachmentReactSvgUrl from "PUBLIC_DIR/images/attachment.react.svg?url";
 
 import { IconButton } from "../../../icon-button";
-import { Text } from "../../../text";
 
 import { useMessageStore } from "../../store/messageStore";
 
 import { ButtonsProps } from "../../Chat.types";
 
 import styles from "./ChatInput.module.scss";
+import ToolsSettings from "./ToolsSettings";
 
 const Buttons = ({
   inputWidth,
   isFilesSelectorVisible,
   toggleFilesSelector,
-  isMcpToolsVisible,
-  toggleMcpTools,
-  toolSettingsRef,
   sendMessageAction,
-  hideMcpToolsButton,
 }: ButtonsProps) => {
-  const { t } = useTranslation(["Common"]);
-
   const { isRequestRunning, stopMessage } = useMessageStore();
 
   const sendIconProps = !isRequestRunning
@@ -82,24 +74,7 @@ const Buttons = ({
             isFill={false}
           />
         </div>
-        {hideMcpToolsButton ? null : (
-          <div
-            ref={toolSettingsRef}
-            className={classNames(styles.chatInputButton, {
-              [styles.activeChatInputButton]: isMcpToolsVisible,
-            })}
-            onClick={toggleMcpTools}
-          >
-            <IconButton
-              iconName={McpToolReactSvgUrl}
-              size={16}
-              isFill={false}
-            />
-            <Text lineHeight="16px" fontSize="13px" fontWeight={600} noSelect>
-              {t("Tools")}
-            </Text>
-          </div>
-        )}
+        <ToolsSettings />
       </div>
       <IconButton
         iconName={SendReactSvgUrl}

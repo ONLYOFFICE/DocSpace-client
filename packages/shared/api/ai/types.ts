@@ -108,11 +108,13 @@ export type TServer = {
   id: string;
   name: string;
   serverType: ServerType;
-  description: string;
-  icon: string;
-  enabled: boolean;
+  description?: string;
+  icon?: string;
+  enabled?: boolean;
+  connected?: boolean;
   headers: Record<string, string>;
   endpoint: string;
+  authorizationEndpoint?: string;
 };
 
 export type TVectorizeOperation = {

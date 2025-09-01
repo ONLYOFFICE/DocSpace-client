@@ -171,8 +171,6 @@ export type TComboboxProps = {
   title?: string;
   /** Top space */
   topSpace?: number;
-  /** Test id */
-  testId?: string;
   /** Type */
   type?: TCombobox;
   /** Use portal backdrop */

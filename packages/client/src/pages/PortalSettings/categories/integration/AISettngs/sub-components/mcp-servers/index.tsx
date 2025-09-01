@@ -35,8 +35,7 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import type { TServer } from "@docspace/shared/api/ai/types";
 
 import styles from "../../AISettings.module.scss";
-import { AiTile, AiTileVariant } from "../ai-tile";
-import { useFetchMCPServers } from "./useFetchMCPServers";
+import { MCPTile } from "../tiles/mcp-tile";
 
 type MCPListProps = {
   showHeading: boolean;
@@ -63,7 +62,7 @@ const MCPList = ({ showHeading, headingText, mcpServers }: MCPListProps) => {
 
       <div className={styles.mcpList}>
         {mcpServers.map((mcp) => (
-          <AiTile key={mcp.id} variant={AiTileVariant.MCPServer} item={mcp} />
+          <MCPTile key={mcp.id} item={mcp} />
         ))}
       </div>
     </div>

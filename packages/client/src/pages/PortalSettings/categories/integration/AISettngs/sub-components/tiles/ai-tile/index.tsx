@@ -1,4 +1,4 @@
-/*!
+/*
  * (c) Copyright Ascensio System SIA 2009-2025
  *
  * This program is a free software product.
@@ -26,52 +26,52 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-.aiTile {
-  box-sizing: border-box;
-  height: 110px;
-  min-width: 340px;
+import { ReactSVG } from "react-svg";
 
-  padding: 20px;
+import { Heading, HeadingLevel } from "@docspace/shared/components/heading";
 
-  background: var(--tile-background-color);
-  border: var(--tile-room-border);
-  border-radius: var(--tile-room-border-radius);
+import styles from "./AiTile.module.scss";
 
-  display: flex;
-  gap: 20px;
-}
+type AiTileProps = {
+  icon: string;
+  children: React.ReactNode;
+};
 
-.icon {
-  width: 48px;
-  height: 48px;
+export const AiTile = ({ icon, children }: AiTileProps) => {
+  return (
+    <div className={styles.aiTile}>
+      <div className={styles.icon}>
+        <ReactSVG src={icon} />
+      </div>
+      <div className={styles.content}>{children}</div>
+    </div>
+  );
+};
 
-  flex-shrink: 0;
-}
+type HeaderProps = {
+  title: string;
+  children: React.ReactNode;
+};
 
-.content {
-  flex-grow: 1;
+const Header = ({ title, children }: HeaderProps) => (
+  <div className={styles.header}>
+    <Heading
+      className={styles.heading}
+      level={HeadingLevel.h3}
+      fontSize="16px"
+      fontWeight={700}
+      lineHeight="22px"
+      truncate
+    >
+      {title}
+    </Heading>
+    {children}
+  </div>
+);
 
-  overflow: hidden;
-}
+const Body = ({ children }: { children: React.ReactNode }) => (
+  <div className={styles.body}>{children}</div>
+);
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-
-  margin-bottom: 8px;
-}
-
-.description {
-  overflow: hidden;
-
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-}
-
-.toggleButton {
-  position: relative;
-  width: 28px;
-}
+AiTile.Header = Header;
+AiTile.Body = Body;

@@ -26,61 +26,47 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import React from "react";
-import { useTranslation } from "react-i18next";
-
-import { Heading, HeadingLevel } from "@docspace/shared/components/heading";
-import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
+import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import type { TAiProvider } from "@docspace/shared/api/ai/types";
 
-import styles from "../../AISettings.module.scss";
-import { AiProviderTile } from "../tiles/ai-provider-tile";
+import SettingsIcon from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
+import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
 
-export const AiProvider = ({ aiProviders }: { aiProviders: TAiProvider[] }) => {
-  const { t } = useTranslation("Common");
+import { AiTile } from "../ai-tile";
 
+type AiProviderTileProps = {
+  item: TAiProvider;
+};
+
+const getContextOptions = () => {
+  return [
+    {
+      key: "settings",
+      label: "Common:Settings",
+      icon: SettingsIcon,
+      onClick: () => {},
+    },
+    {
+      key: "delete",
+      label: "Common:Delete",
+      onClick: () => {},
+      icon: CatalogTrashReactSvgUrl,
+    },
+  ];
+};
+
+export const AiProviderTile = ({ item }: AiProviderTileProps) => {
   return (
-    <div className={styles.aiProvider}>
-      <Heading
-        className={styles.heading}
-        level={HeadingLevel.h3}
-        fontSize="16px"
-        fontWeight={700}
-        lineHeight="22px"
-      >
-        AI provider
-      </Heading>
-      <Text className={styles.description}>
-        Connect your own AI service to unlock advanced features in DocSpace.
-        Once added, it will be accessible to all users in AI chats.
-      </Text>
-      <Link
-        className={styles.learnMoreLink}
-        target={LinkTarget.blank}
-        type={LinkType.page}
-        fontWeight={600}
-        isHovered
-        href=""
-        color="accent"
-      >
-        {t("Common:LearnMore")}
-      </Link>
-      <Button
-        primary
-        size={ButtonSize.small}
-        label="Add AI provider"
-        scale={false}
-        className={styles.addProviderButton}
-        // onClick={showAddNewDialog}
-      />
+    <AiTile icon="">
+      <AiTile.Header title={item.title}>
+        <ContextMenuButton directionX="right" getData={getContextOptions} />
+      </AiTile.Header>
 
-      <div className={styles.providerList}>
-        {aiProviders.map((provider) => (
-          <AiProviderTile key={provider.id} item={provider} />
-        ))}
-      </div>
-    </div>
+      <AiTile.Body>
+        <Text truncate>Temp title</Text>
+        <Text truncate>{item.url}</Text>
+      </AiTile.Body>
+    </AiTile>
   );
 };

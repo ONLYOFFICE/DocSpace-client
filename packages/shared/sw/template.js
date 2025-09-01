@@ -24,16 +24,28 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { precacheAndRoute, cleanupOutdatedCaches } from "workbox-precaching";
-import { registerRoute } from "workbox-routing";
-import { CacheFirst, StaleWhileRevalidate } from "workbox-strategies";
-import { ExpirationPlugin } from "workbox-expiration";
-import { CacheableResponsePlugin } from "workbox-cacheable-response";
-import { imageCache, googleFontsCache } from "workbox-recipes";
-import { cacheNames, setCacheNameDetails } from "workbox-core";
+importScripts(
+  "https://storage.googleapis.com/workbox-cdn/releases/7.3.0/workbox-sw.js",
+);
 
-precacheAndRoute(self.__WB_MANIFEST);
-cleanupOutdatedCaches();
+if (!self.workbox) {
+  console.error("Workbox failed to load in the Service Worker");
+} else {
+  console.log("Workbox loaded in the Service Worker");
+}
+
+const {
+  precaching,
+  routing,
+  strategies,
+  expiration,
+  cacheableResponse,
+  recipes,
+  core,
+} = self.workbox || {};
+
+precaching && precaching.precacheAndRoute(self.__WB_MANIFEST || []);
+precaching && precaching.cleanupOutdatedCaches();
 
 self.addEventListener("install", () => {
   self.skipWaiting();
@@ -43,92 +55,81 @@ self.addEventListener("activate", (event) => {
   event.waitUntil(self.clients.claim());
 });
 
-setCacheNameDetails({
-  prefix: "docspace",
-  suffix: "v3.2.1",
-  precache: "precache",
-  runtime: "runtime",
-  static: "static",
-  googleFonts: "gfonts",
-  images: "images",
-  translations: "translations",
-});
+core &&
+  core.setCacheNameDetails({
+    prefix: "docspace",
+    suffix: "v3.3.0",
+    precache: "precache",
+    runtime: "runtime",
+  });
 
-registerRoute(
-  ({ url }) => url.pathname.includes("/locales/"),
-  new StaleWhileRevalidate({
-    cacheName: cacheNames.translations,
-    plugins: [
-      new ExpirationPlugin({
-        maxEntries: 50,
-        maxAgeSeconds: 24 * 60 * 60, // 1 day
-      }),
-      new CacheableResponsePlugin({
-        statuses: [0, 200],
-      }),
-    ],
-  }),
-);
+const cacheNames = core
+  ? core.cacheNames
+  : {
+      precache: "docspace-precache-v3.3.0",
+      runtime: "docspace-runtime-v3.3.0",
+    };
 
-registerRoute(
-  ({ request, url }) =>
-    request.destination === "script" ||
-    request.destination === "style" ||
-    request.destination === "font" ||
-    /\.(js|css|woff2?|ttf)$/.test(url.pathname),
-  new CacheFirst({
-    cacheName: cacheNames.static,
-    plugins: [
-      new ExpirationPlugin({
-        maxEntries: 200,
-        maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
-      }),
-      new CacheableResponsePlugin({
-        statuses: [0, 200],
-      }),
-    ],
-  }),
-);
+routing &&
+  routing.registerRoute(
+    ({ url }) => url.pathname.includes("/locales/"),
+    new strategies.StaleWhileRevalidate({
+      cacheName: `${cacheNames.runtime}-translations`,
+      plugins: [
+        new expiration.ExpirationPlugin({
+          maxEntries: 50,
+          maxAgeSeconds: 24 * 60 * 60, // 1 day
+        }),
+        new cacheableResponse.CacheableResponsePlugin({
+          statuses: [0, 200],
+        }),
+      ],
+    }),
+  );
 
-imageCache({ cacheName: cacheNames.images, maxEntries: 60 });
+const ssrPaths = [
+  /^\/login(\/|$)/,
+  /^\/management(\/|$)/,
+  /^\/doceditor(\/|$)/,
+  /^\/sdk(\/|$)/,
+];
+routing &&
+  routing.registerRoute(
+    ({ request, url }) =>
+      request.mode === "navigate" &&
+      ssrPaths.some((re) => re.test(url.pathname)),
+    new strategies.NetworkOnly(),
+  );
 
-/* registerRoute(
-  ({ request, url }) =>
-    request.destination === "image" ||
-    /\.(png|jpg|jpeg|gif|svg|webp|ico)$/.test(url.pathname),
-  new CacheFirst({
-    cacheName: CACHE_NAMES.images,
-    plugins: [
-      new ExpirationPlugin({
-        maxEntries: 100,
-        maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
-      }),
-      new CacheableResponsePlugin({
-        statuses: [0, 200],
-      }),
-    ],
-  }),
-); */
+routing &&
+  routing.registerRoute(
+    ({ request, url }) =>
+      request.destination === "script" ||
+      request.destination === "style" ||
+      request.destination === "font" ||
+      /\.(js|css|woff2?|ttf)$/.test(url.pathname),
+    new strategies.CacheFirst({
+      cacheName: `${cacheNames.runtime}-static`,
+      plugins: [
+        new expiration.ExpirationPlugin({
+          maxEntries: 200,
+          maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
+        }),
+        new cacheableResponse.CacheableResponsePlugin({
+          statuses: [0, 200],
+        }),
+      ],
+    }),
+  );
 
-googleFontsCache({ cachePrefix: cacheNames.gfonts });
+recipes &&
+  recipes.imageCache({
+    cacheName: `${cacheNames.runtime}-images`,
+    maxEntries: 60,
+  });
 
-/* registerRoute(
-  ({ url }) =>
-    url.origin === "https://fonts.googleapis.com" ||
-    url.origin === "https://fonts.gstatic.com",
-  new CacheFirst({
-    cacheName: CACHE_NAMES.gfonts,
-    plugins: [
-      new ExpirationPlugin({
-        maxEntries: 30,
-        maxAgeSeconds: 365 * 24 * 60 * 60, // 1 year
-      }),
-      new CacheableResponsePlugin({
-        statuses: [0, 200],
-      }),
-    ],
-  }),
-); */
+recipes &&
+  recipes.googleFontsCache({ cachePrefix: `${cacheNames.runtime}-gfonts` });
 
 self.addEventListener("message", (event) => {
   if (event.data && event.data.type === "SKIP_WAITING") {
@@ -149,4 +150,4 @@ self.addEventListener("notificationclick", (event) => {
   );
 });
 
-console.log("DocSpace Service Worker v3.2.1 activated with Workbox");
+console.log("DocSpace Service Worker v3.3.0 activated with Workbox");

@@ -78,7 +78,7 @@ export const McpServers = ({
   customMCPServers: TServer[];
   systemMCPServers: TServer[];
 }) => {
-  const { t } = useTranslation("Common");
+  const { t } = useTranslation(["Common", "AISettings"]);
 
   const showMCPHeadings = customMCPServers.length > 0;
 
@@ -92,15 +92,12 @@ export const McpServers = ({
           fontWeight={700}
           lineHeight="22px"
         >
-          MCP Servers
+          {t("AISettings:MCPSettingTitle")}
         </Heading>
       ) : null}
 
       <Text className={styles.description}>
-        This section lets you manage MCP servers for AI chats within rooms. You
-        can enable system MCP servers or add custom ones to meet your company's
-        needs. Once enabled, these servers will be accessible to other users for
-        their tasks.
+        {t("AISettings:MCPSettingDescription")}
       </Text>
       <Link
         className={styles.learnMoreLink}
@@ -116,20 +113,20 @@ export const McpServers = ({
       <Button
         primary
         size={ButtonSize.small}
-        label="Add MCP Server"
+        label={t("AISettings:AddMCPServer")}
         scale={false}
         className={styles.addProviderButton}
         // onClick={showAddNewDialog}
       />
 
       <MCPList
-        headingText="Custom"
+        headingText={t("AISettings:CustomMCPListTitle")}
         mcpServers={customMCPServers}
         showHeading={showMCPHeadings}
       />
 
       <MCPList
-        headingText="System"
+        headingText={t("AISettings:SystemMCPListTitle")}
         mcpServers={systemMCPServers}
         showHeading={showMCPHeadings}
       />

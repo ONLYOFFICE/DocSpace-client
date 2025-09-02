@@ -39,7 +39,7 @@ import styles from "../../AISettings.module.scss";
 import { AiProviderTile } from "../tiles/ai-provider-tile";
 
 export const AiProvider = ({ aiProviders }: { aiProviders: TAiProvider[] }) => {
-  const { t } = useTranslation("Common");
+  const { t } = useTranslation(["Common", "AISettings"]);
 
   return (
     <div className={styles.aiProvider}>
@@ -50,11 +50,12 @@ export const AiProvider = ({ aiProviders }: { aiProviders: TAiProvider[] }) => {
         fontWeight={700}
         lineHeight="22px"
       >
-        AI provider
+        {t("AISettings:AIProviderSettingTitle")}
       </Heading>
       <Text className={styles.description}>
-        Connect your own AI service to unlock advanced features in DocSpace.
-        Once added, it will be accessible to all users in AI chats.
+        {t("AISettings:AIProviderSettingDescription", {
+          productName: t("Common:ProductName"),
+        })}
       </Text>
       <Link
         className={styles.learnMoreLink}
@@ -70,7 +71,7 @@ export const AiProvider = ({ aiProviders }: { aiProviders: TAiProvider[] }) => {
       <Button
         primary
         size={ButtonSize.small}
-        label="Add AI provider"
+        label={t("AISettings:AddAIProvider")}
         scale={false}
         className={styles.addProviderButton}
         // onClick={showAddNewDialog}

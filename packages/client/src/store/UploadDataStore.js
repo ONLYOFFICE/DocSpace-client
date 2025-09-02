@@ -67,15 +67,15 @@ const removeDuplicate = (items) => {
 const getConversationProgress = async (fileId) => {
   const promise = new Promise((resolve, reject) => {
     setTimeout(() => {
-      try {
-        getFileConversationProgress(fileId).then((res) => {
-          // console.log(`getFileConversationProgress fileId:${fileId}`, res);
+      getFileConversationProgress(fileId)
+        .then((res) => {
+          console.log(`getFileConversationProgress fileId:${fileId}`, res);
           resolve(res);
+        })
+        .catch((error) => {
+          console.error("getFileConversationProgress error", error);
+          reject(error);
         });
-      } catch (error) {
-        console.error(error);
-        reject(error);
-      }
     }, 1000);
   });
 
@@ -683,8 +683,14 @@ class UploadDataStore {
         const error = t("FailedToConvert");
 
         runInAction(() => {
-          if (file) file.error = error;
-          if (historyFile) historyFile.error = error;
+          if (file) {
+            file.error = error;
+            file.inConversion = false;
+          }
+          if (historyFile) {
+            historyFile.error = error;
+            historyFile.inConversion = false;
+          }
         });
 
         if (this.uploaded) {
@@ -711,9 +717,27 @@ class UploadDataStore {
         let error = null;
 
         while (progress < 100) {
-          const response = await getConversationProgress(fileId);
-          progress = response?.[0]?.progress;
-          fileInfo = response?.[0]?.result;
+          let response = null;
+          try {
+            response = await getConversationProgress(fileId);
+            progress = response?.[0]?.progress;
+            fileInfo = response?.[0]?.result;
+          } catch (err) {
+            const conversionError = err.message || "Conversion progress failed";
+
+            runInAction(() => {
+              if (file) {
+                file.error = conversionError;
+                file.inConversion = false;
+              }
+              if (historyFile) {
+                historyFile.error = conversionError;
+                historyFile.inConversion = false;
+              }
+            });
+
+            break;
+          }
 
           runInAction(() => {
             const currentFile = this.files.find((f) => f.fileId === fileId);
@@ -1571,6 +1595,54 @@ class UploadDataStore {
         // console.log(`Uploaded chunk ${index}/${length}`, res);
       }
     }
+  };
+
+  retryUploadFiles = (t, uniqueId) => {
+    const fileIndex = this.files.findIndex((f) => f.uniqueId === uniqueId);
+    const fileUploadedIndex = this.uploadedFilesHistory.findIndex(
+      (f) => f.uniqueId === uniqueId,
+    );
+    const retryFile = this.files[fileIndex];
+    const retryFileUploaded = this.uploadedFilesHistory[fileUploadedIndex];
+
+
+    if (retryFileUploaded.action === "convert") {
+      retryFileUploaded.inConversion = false;
+      retryFile.inConversion = false;
+      this.convertFile(retryFileUploaded, t);
+      return;
+    }
+
+    retryFile.action = "upload";
+    retryFile.error = "";
+    retryFile.inAction = false;
+
+    retryFileUploaded.action = "upload";
+    retryFileUploaded.error = "";
+    retryFileUploaded.inAction = false;
+    retryFileUploaded.errorShown = false;
+
+    if (this.uploaded) {
+      const newUploadData = {
+        filesSize: this.convertFilesSize,
+        uploadedFiles: this.uploadedFiles,
+        percent: this.percent,
+        uploaded: false,
+      };
+
+      this.setUploadData(newUploadData);
+      const progressData = {
+        completed: false,
+        percent: this.percent,
+        operation: OPERATIONS_NAME.upload,
+        alert: false,
+        showPanel: this.setUploadPanelVisible,
+      };
+
+      this.primaryProgressDataStore.setPrimaryProgressBarData(progressData);
+    }
+
+    this.parallelUploading([retryFile], t);
   };
 
   startUploadFiles = async (t, createNewIfExist = true) => {

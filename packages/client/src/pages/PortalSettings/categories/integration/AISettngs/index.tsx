@@ -24,58 +24,50 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useEffect } from "react";
+import { inject, observer } from "mobx-react";
 
-import { AiProvider } from "./sub-components/ai-provider";
-import { McpServers } from "./sub-components/mcp-servers";
+import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
+
+import { AIProvider } from "./sub-components/ai-provider";
+import { MCPServers } from "./sub-components/mcp-servers";
 import styles from "./AISettings.module.scss";
-import { useFetchAiProviders } from "./sub-components/ai-provider/useFetchAiProviders";
-import { useFetchMCPServers } from "./sub-components/mcp-servers/useFetchMCPServers";
 
-const Standalone = () => {
-  const { aiProviders, isAiProvidersLoading } = useFetchAiProviders();
-  const { customMCPServers, systemMCPServers, isMCPLoading } =
-    useFetchMCPServers();
+type StoreProps = Pick<
+  AISettingsStore,
+  "isInit" | "initAISettings" | "setIsInit"
+>;
 
-  if (isAiProvidersLoading || isMCPLoading) return null;
-
-  console.log("standalone");
-
-  return (
-    <>
-      <AiProvider aiProviders={aiProviders} />
-      <McpServers
-        standalone
-        customMCPServers={customMCPServers}
-        systemMCPServers={systemMCPServers}
-      />
-    </>
-  );
+type AISettingsProps = Partial<StoreProps> & {
+  standalone: boolean; // Todo: Get from store after enabling ai settings for saas
 };
 
-const Saas = () => {
-  const { customMCPServers, systemMCPServers, isMCPLoading } =
-    useFetchMCPServers();
+const AISettngs = ({
+  standalone,
+  isInit,
+  setIsInit,
+  initAISettings,
+}: AISettingsProps) => {
+  useEffect(() => {
+    initAISettings?.(standalone);
 
-  if (isMCPLoading) return null;
+    return () => {
+      setIsInit?.(false);
+    };
+  }, [standalone, initAISettings, setIsInit]);
+
+  if (!isInit) return null;
 
   return (
-    <McpServers
-      standalone={false}
-      customMCPServers={customMCPServers}
-      systemMCPServers={systemMCPServers}
-    />
-  );
-};
-
-const AISettngs = ({ standalone }: { standalone?: boolean }) => {
-  return (
-    <div>
-      <div className={styles.aiSettingsContainer}>
-        {standalone ? <Standalone /> : <Saas />}
-      </div>
+    <div className={styles.aiSettingsContainer}>
+      {standalone ? <AIProvider /> : null}
+      <MCPServers standalone={standalone} />
     </div>
   );
 };
 
-export default AISettngs;
+export default inject(({ aiSettingsStore }: TStore) => {
+  const { isInit, initAISettings, setIsInit } = aiSettingsStore;
+
+  return { isInit, initAISettings, setIsInit };
+})(observer(AISettngs));

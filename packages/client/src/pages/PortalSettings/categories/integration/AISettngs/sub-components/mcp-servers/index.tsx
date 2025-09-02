@@ -27,6 +27,7 @@
  */
 
 import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
 
 import { Heading, HeadingLevel } from "@docspace/shared/components/heading";
 import { Text } from "@docspace/shared/components/text";
@@ -34,13 +35,15 @@ import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import type { TServer } from "@docspace/shared/api/ai/types";
 
+import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
+
 import styles from "../../AISettings.module.scss";
 import { MCPTile } from "../tiles/mcp-tile";
 
 type MCPListProps = {
   showHeading: boolean;
   headingText: string;
-  mcpServers: TServer[];
+  mcpServers?: TServer[];
 };
 
 const MCPList = ({ showHeading, headingText, mcpServers }: MCPListProps) => {
@@ -69,18 +72,20 @@ const MCPList = ({ showHeading, headingText, mcpServers }: MCPListProps) => {
   );
 };
 
-export const McpServers = ({
+type MCPServersProps = {
+  standalone?: boolean;
+  customMCPServers?: AISettingsStore["customMCPServers"];
+  systemMCPServers?: AISettingsStore["systemMCPServers"];
+};
+
+const MCPServersComponent = ({
   standalone,
   customMCPServers,
   systemMCPServers,
-}: {
-  standalone?: boolean;
-  customMCPServers: TServer[];
-  systemMCPServers: TServer[];
-}) => {
+}: MCPServersProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
 
-  const showMCPHeadings = customMCPServers.length > 0;
+  const showMCPHeadings = !!customMCPServers?.length;
 
   return (
     <div className={styles.mcpServers}>
@@ -133,3 +138,12 @@ export const McpServers = ({
     </div>
   );
 };
+
+export const MCPServers = inject(({ aiSettingsStore }: TStore) => {
+  const { customMCPServers, systemMCPServers } = aiSettingsStore;
+
+  return {
+    customMCPServers,
+    systemMCPServers,
+  };
+})(observer(MCPServersComponent));

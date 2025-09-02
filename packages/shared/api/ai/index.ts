@@ -232,11 +232,15 @@ export const deleteChat = async (chatId: string) => {
   });
 };
 
-export const getServersList = async (startIndex: number, count: number) => {
+export const getServersList = async (startIndex: number, count?: number) => {
   try {
     const res = await request({
       method: "get",
-      url: `${baseUrl}/servers?startIndex=${startIndex}&count=${count}`,
+      url: `${baseUrl}/servers`,
+      params: {
+        startIndex,
+        count,
+      },
     });
 
     return res as { items: TServer[]; total: number };

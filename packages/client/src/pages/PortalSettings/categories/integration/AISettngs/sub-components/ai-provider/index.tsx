@@ -28,22 +28,26 @@
 
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
 
 import { Heading, HeadingLevel } from "@docspace/shared/components/heading";
 import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
-import type {
-  TAiProvider,
-  TProviderTypeWithUrl,
-} from "@docspace/shared/api/ai/types";
+import type { TProviderTypeWithUrl } from "@docspace/shared/api/ai/types";
 import { getAvailableProviderUrls } from "@docspace/shared/api/ai";
+
+import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
 import styles from "../../AISettings.module.scss";
 import { AiProviderTile } from "../tiles/ai-provider-tile";
 import { AddAIProviderDialog } from "./dialogs/add-ai-provider";
 
-export const AiProvider = ({ aiProviders }: { aiProviders: TAiProvider[] }) => {
+type AIProviderProps = {
+  aiProviders?: AISettingsStore["aiProviders"];
+};
+
+const AIProviderComponent = ({ aiProviders }: AIProviderProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
   const [addAIProviderDialogVisible, setAddAIProviderDialogVisible] =
     useState(false);
@@ -101,7 +105,7 @@ export const AiProvider = ({ aiProviders }: { aiProviders: TAiProvider[] }) => {
       />
 
       <div className={styles.providerList}>
-        {aiProviders.map((provider) => (
+        {aiProviders?.map((provider) => (
           <AiProviderTile key={provider.id} item={provider} />
         ))}
       </div>
@@ -115,3 +119,9 @@ export const AiProvider = ({ aiProviders }: { aiProviders: TAiProvider[] }) => {
     </div>
   );
 };
+
+export const AIProvider = inject(({ aiSettingsStore }: TStore) => {
+  return {
+    aiProviders: aiSettingsStore.aiProviders,
+  };
+})(observer(AIProviderComponent));

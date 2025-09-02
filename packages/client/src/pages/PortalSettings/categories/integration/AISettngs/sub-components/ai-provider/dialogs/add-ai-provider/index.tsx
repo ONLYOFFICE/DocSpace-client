@@ -240,7 +240,5 @@ const AddAIProviderDialogComponent = ({
 export const AddAIProviderDialog = inject(({ aiSettingsStore }: TStore) => {
   const { addAIProvider } = aiSettingsStore;
 
-  return {
-    addAIProvider,
-  };
+  return { addAIProvider };
 })(observer(AddAIProviderDialogComponent));

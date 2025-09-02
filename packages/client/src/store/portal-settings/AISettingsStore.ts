@@ -30,19 +30,37 @@ import { makeAutoObservable } from "mobx";
 
 import {
   type TAiProvider,
-  TCreateAiProvider,
+  type TCreateAiProvider,
+  type TServer,
 } from "@docspace/shared/api/ai/types";
-import { createProvider } from "@docspace/shared/api/ai";
+import {
+  createProvider,
+  getProviders,
+  getServersList,
+} from "@docspace/shared/api/ai";
+import { ServerType } from "@docspace/shared/api/ai/enums";
 
 class AISettingsStore {
+  isInit = false;
+
   aiProviders: TAiProvider[] = [];
+
+  mcpServers: TServer[] = [];
 
   constructor() {
     makeAutoObservable(this);
   }
 
+  setIsInit = (value: boolean) => {
+    this.isInit = value;
+  };
+
   setAIProviders = (providers: TAiProvider[]) => {
     this.aiProviders = providers;
+  };
+
+  setMCPServers = (servers: TServer[]) => {
+    this.mcpServers = servers;
   };
 
   addAIProvider = async (provider: TCreateAiProvider) => {
@@ -50,6 +68,52 @@ class AISettingsStore {
 
     this.aiProviders.push(newProvider);
   };
+
+  fetchAIProviders = async () => {
+    try {
+      const res = await getProviders();
+
+      this.setAIProviders(res);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  fetchMCPServers = async () => {
+    try {
+      const res = await getServersList(0);
+
+      if (!res) return;
+
+      this.setMCPServers(res.items);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  initAISettings = async (standalone: boolean) => {
+    const actions = [this.fetchMCPServers()];
+
+    if (standalone) {
+      actions.push(this.fetchAIProviders());
+    }
+
+    await Promise.all(actions);
+
+    this.setIsInit(true);
+  };
+
+  get systemMCPServers() {
+    return this.mcpServers.filter(
+      (mcp) => mcp.serverType !== ServerType.Custom,
+    );
+  }
+
+  get customMCPServers() {
+    return this.mcpServers.filter(
+      (mcp) => mcp.serverType === ServerType.Custom,
+    );
+  }
 }
 
 export default AISettingsStore;

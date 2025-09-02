@@ -81,7 +81,7 @@ const PublicPreviewViewer: FC<PublicPreviewViewerProps> = ({
           return setErrorStatus(status);
         }
 
-        toastr.error(error);
+        toastr.error(error?.message || t("Common:UnexpectedError"));
       }
 
       // eslint-disable-next-line no-console

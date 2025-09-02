@@ -434,16 +434,16 @@ class SocketHelper {
 
     // this.instance = new SocketHelper();
     // return this.instance;
-    if (typeof globalThis !== "undefined" && globalThis.SOCKET_INSTANCE) {
+    if (typeof globalThis !== "undefined" && (globalThis as any).SOCKET_INSTANCE) {
       // [WS] Returning existing global socket instance
-      return globalThis.SOCKET_INSTANCE;
+      return (globalThis as any).SOCKET_INSTANCE;
     }
 
     if (!this.instance) {
       // [WS] Creating new socket instance
       this.instance = new SocketHelper();
       if (typeof globalThis !== "undefined")
-        globalThis.SOCKET_INSTANCE = this.instance;
+        (globalThis as any).SOCKET_INSTANCE = this.instance;
     }
     // [WS] Returning existing socket instance
     return this.instance;

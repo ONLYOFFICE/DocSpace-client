@@ -296,7 +296,7 @@ class UsersStore {
     SocketHelper.on(SocketEvents.DeleteGuest, deleteUser);
     SocketHelper.on(SocketEvents.ChangeMyType, changeMyType);
 
-    SocketHelper.on(SocketEvents.UpdateGroup, async (value) => {
+    SocketHelper.on(SocketEvents.UpdateGroup, async (value: { id: string; data: any }) => {
       console.log(
         `[WS] ${SocketEvents.UpdateGroup}: ${value?.id}:${value?.data}`,
       );

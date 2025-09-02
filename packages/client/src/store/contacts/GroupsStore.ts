@@ -101,7 +101,7 @@ class GroupsStore {
 
     makeAutoObservable(this);
 
-    SocketHelper.on(SocketEvents.AddGroup, async (value) => {
+    SocketHelper.on(SocketEvents.AddGroup, async (value: { id: string; data: any }) => {
       const { contactsTab } = this.peopleStore.usersStore;
 
       if (contactsTab !== "groups") return;
@@ -128,7 +128,7 @@ class GroupsStore {
       });
     });
 
-    SocketHelper.on(SocketEvents.UpdateGroup, async (value) => {
+    SocketHelper.on(SocketEvents.UpdateGroup, async (value: { id: string; data: any }) => {
       const { contactsTab } = this.peopleStore.usersStore;
 
       const { id, data } = value;
@@ -155,7 +155,7 @@ class GroupsStore {
       });
     });
 
-    SocketHelper.on(SocketEvents.DeleteGroup, (id) => {
+    SocketHelper.on(SocketEvents.DeleteGroup, (id: string) => {
       const { contactsTab } = this.peopleStore.usersStore;
 
       if (contactsTab !== "groups") {

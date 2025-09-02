@@ -6,6 +6,7 @@
   "HotkeysClearAll": "Clear all selections",
   "HotkeysClose": "Close/Undo action",
   "HotkeysCopySelected": "Copy selected items to the clipboard",
+  "HotkeysCopySelectedItems": "Copy the selected items text",
   "HotkeysCreateDocument": "Create document",
   "HotkeysCreateFolder": "Create folder",
   "HotkeysCreateForm": "Create blank form template",
@@ -14,6 +15,7 @@
   "HotkeysCreateSpreadsheet": "Create spreadsheet",
   "HotkeysCreatingObjects": "Creating items",
   "HotkeysCutSelected": "Cut selected items to the clipboard",
+  "HotkeysDisablesSelectionArea": "Disable the selection area",
   "HotkeysExtendSelectionDown": "Extend selection down",
   "HotkeysExtendSelectionLeft": "Extend selection left",
   "HotkeysExtendSelectionRight": "Extend selection right",
@@ -43,7 +45,5 @@
   "HotkeysUploadFile": "Upload file",
   "HotkeysUploadingObjects": "Uploading items",
   "HotkeysZoomIn": "Zoom in",
-  "HotkeysZoomOut": "Zoom out",
-  "HotkeysCopySelectedItems": "Copy the selected items text",
-  "HotkeysDisablesSelectionArea": "Disable the selection area"
+  "HotkeysZoomOut": "Zoom out"
 }

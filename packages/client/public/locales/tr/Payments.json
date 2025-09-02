@@ -38,7 +38,6 @@
   "ChooseNewPlan": "Yeni bir fiyatlandırma planı seçmek ister misiniz?",
   "ConfirmPayment": "Ödeme Onayı",
   "ConnectAndConfigureServices": "Bu bölüm, hizmetleri bağlamak ve yapılandırmak için kullanılır.",
-  "Cost": "Maliyet",
   "Credit": "Kredi",
   "CurrencyPerMonth": "{{currency}}/ay",
   "CurrentBalance": "Mevcut bakiye: <1>{{balance}}</1>",

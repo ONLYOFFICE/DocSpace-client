@@ -116,6 +116,9 @@ export const getCategoryTypeByFolderType = (folderType, parentId) => {
     case FolderType.TRASH:
       return CategoryType.Trash;
 
+    case FolderType.SHARE:
+      return CategoryType.SharedWithMe;
+
     default:
       return CategoryType.Personal;
   }
@@ -157,6 +160,9 @@ export const getCategoryUrl = (categoryType, folderId = null) => {
 
     case CategoryType.Settings:
       return "/settings/personal";
+
+    case CategoryType.SharedWithMe:
+      return "/shared-with-me/filter";
 
     default:
       throw new Error("Unknown category type");

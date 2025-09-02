@@ -94,14 +94,12 @@ const useFiles = ({
   const location = useLocation();
   const { id } = useParams();
 
-  const fetchDefaultFiles = (isRecentFolder = false) => {
+  const fetchDefaultFiles = (categoryType: ValueOf<typeof CategoryType>) => {
     const filter = FilesFilter.getDefault({
-      isRecentFolder,
+      categoryType,
     });
 
-    const url = getCategoryUrl(
-      isRecentFolder ? CategoryType.Recent : CategoryType.Personal,
-    );
+    const url = getCategoryUrl(categoryType);
 
     navigate(`${url}?${filter.toUrlParams()}`);
   };
@@ -135,7 +133,7 @@ const useFiles = ({
   };
 
   const getFiles = React.useCallback(async () => {
-    const categoryType = getCategoryType(location) as number; // TODO: Remove "as number" when getCategoryType is rewritten to TS
+    const categoryType = getCategoryType(location);
 
     let filterObj = null;
     let isRooms = false;
@@ -156,13 +154,12 @@ const useFiles = ({
           })
           .catch((err) => {
             toastr.error(err);
-            fetchDefaultFiles();
+            fetchDefaultFiles(categoryType);
           });
       }, 1);
     }
 
     const isRoomFolder = getObjectByLocation(location)?.folder;
-    const isRecentFolder = categoryType === CategoryType.Recent;
 
     if (
       (categoryType == CategoryType.Shared ||
@@ -183,7 +180,7 @@ const useFiles = ({
       filterObj = FilesFilter.getFilter(window.location);
 
       if (!filterObj) {
-        fetchDefaultFiles(isRecentFolder);
+        fetchDefaultFiles(categoryType);
 
         return;
       }
@@ -242,7 +239,7 @@ const useFiles = ({
       ? filter.clone()
       : isRooms
         ? RoomsFilter.getDefault(userId, filterObj.searchArea?.toString())
-        : FilesFilter.getDefault({ isRecentFolder });
+        : FilesFilter.getDefault({ categoryType });
     const requests = [Promise.resolve(newFilter)];
 
     await axios

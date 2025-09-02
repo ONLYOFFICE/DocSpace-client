@@ -43,6 +43,7 @@ import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
 import {
   FILTER_DOCUMENTS,
   FILTER_RECENT,
+  FILTER_SHARE,
   FILTER_TRASH,
 } from "@docspace/shared/utils/filterConstants";
 
@@ -81,6 +82,7 @@ const ArticleBodyContent = (props) => {
     displayBanners,
     startDrag,
     setDropTargetPreview,
+    shareFolderId,
   } = props;
 
   const location = useLocation();
@@ -105,7 +107,9 @@ const ArticleBodyContent = (props) => {
 
       switch (folderId) {
         case recentFolderId: {
-          const recentFilter = FilesFilter.getDefault({ isRecentFolder: true });
+          const recentFilter = FilesFilter.getDefault({
+            categoryType: CategoryType.Recent,
+          });
           recentFilter.folder = folderId;
 
           if (userId) {
@@ -140,6 +144,25 @@ const ArticleBodyContent = (props) => {
 
           break;
         }
+        case shareFolderId: {
+          const shareFilter = FilesFilter.getDefault({
+            categoryType: CategoryType.SharedWithMe,
+          });
+
+          if (userId) {
+            const filterObj = getUserFilter(`${FILTER_SHARE}=${userId}`);
+
+            if (filterObj?.sortBy) shareFilter.sortBy = filterObj.sortBy;
+            if (filterObj?.sortOrder)
+              shareFilter.sortOrder = filterObj.sortOrder;
+          }
+
+          params = shareFilter.toUrlParams();
+          path = getCategoryUrl(CategoryType.SharedWithMe);
+
+          break;
+        }
+
         case archiveFolderId: {
           const archiveFilter = RoomsFilter.getDefault(
             userId,
@@ -202,6 +225,7 @@ const ArticleBodyContent = (props) => {
       hashDate,
       roomsFilter,
       recentFolderId,
+      shareFolderId,
     ],
   );
 
@@ -376,6 +400,7 @@ export default inject(
       myFolderId,
       recycleBinFolderId,
       recentFolderId,
+      shareFolderId,
     } = treeFoldersStore;
 
     const selectedFolderId = selectedFolderStore.id;
@@ -417,6 +442,7 @@ export default inject(
       recycleBinFolderId,
       rootFolderId,
       recentFolderId,
+      shareFolderId,
 
       setIsLoading,
 

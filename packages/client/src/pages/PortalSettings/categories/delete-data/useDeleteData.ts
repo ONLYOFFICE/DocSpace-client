@@ -30,21 +30,21 @@ import { getPaymentAccount } from "@docspace/shared/api/portal";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 export type UseDeleteDataProps = {
-  getPortalOwner: SettingsStore["getPortalOwner"];
+  getPortalOwner?: SettingsStore["getPortalOwner"];
 };
 
 const useDeleteData = ({ getPortalOwner }: UseDeleteDataProps) => {
   const [stripeUrl, setStripeUrl] = useState<string | null>(null);
 
   const fetchPortalDeletionData = useCallback(async () => {
-    await getPortalOwner();
+    await getPortalOwner?.();
 
     const res = await getPaymentAccount();
     setStripeUrl(res);
   }, [getPortalOwner, getPaymentAccount]);
 
   const fetchPortalDeactivationData = useCallback(async () => {
-    await getPortalOwner();
+    await getPortalOwner?.();
   }, [getPortalOwner]);
 
   const getDeleteDataInitialValue = React.useCallback(async () => {

@@ -31,16 +31,16 @@ import { toastr } from "@docspace/shared/components/toast";
 import ImportAccountsStore from "SRC_DIR/store/ImportAccountsStore";
 
 export type UseDataImportProps = {
-  isMigrationInit: ImportAccountsStore["isMigrationInit"];
-  getMigrationStatus: ImportAccountsStore["getMigrationStatus"];
-  setUsers: ImportAccountsStore["setUsers"];
-  setWorkspace: ImportAccountsStore["setWorkspace"];
-  setMigratingWorkspace: ImportAccountsStore["setMigratingWorkspace"];
-  setFiles: ImportAccountsStore["setFiles"];
-  setLoadingStatus: ImportAccountsStore["setLoadingStatus"];
-  setMigrationPhase: ImportAccountsStore["setMigrationPhase"];
-  setServices: ImportAccountsStore["setServices"];
-  getMigrationList: ImportAccountsStore["getMigrationList"];
+  isMigrationInit?: ImportAccountsStore["isMigrationInit"];
+  getMigrationStatus?: ImportAccountsStore["getMigrationStatus"];
+  setUsers?: ImportAccountsStore["setUsers"];
+  setWorkspace?: ImportAccountsStore["setWorkspace"];
+  setMigratingWorkspace?: ImportAccountsStore["setMigratingWorkspace"];
+  setFiles?: ImportAccountsStore["setFiles"];
+  setLoadingStatus?: ImportAccountsStore["setLoadingStatus"];
+  setMigrationPhase?: ImportAccountsStore["setMigrationPhase"];
+  setServices?: ImportAccountsStore["setServices"];
+  getMigrationList?: ImportAccountsStore["getMigrationList"];
 };
 
 const useDataImport = ({
@@ -59,44 +59,44 @@ const useDataImport = ({
     try {
       if (isMigrationInit) return;
 
-      const response = await getMigrationStatus();
+      const response = await getMigrationStatus?.();
 
       if (!response) return;
 
       const { parseResult, error, isCompleted } = response;
 
       const isErrorOrFailedParse =
-        error || parseResult.failedArchives.length > 0;
+        error || parseResult?.failedArchives.length > 0;
       const isNoUsersParsed =
-        parseResult.users.length +
-          parseResult.existUsers.length +
-          parseResult.withoutEmailUsers.length ===
+        parseResult?.users.length +
+          parseResult?.existUsers.length +
+          parseResult?.withoutEmailUsers.length ===
         0;
 
       if (isErrorOrFailedParse || isNoUsersParsed) return;
 
-      if (parseResult.operation === "parse") {
-        setWorkspace(parseResult.migratorName);
-        setMigratingWorkspace(parseResult.migratorName);
-        setFiles(parseResult.files);
+      if (parseResult?.operation === "parse") {
+        setWorkspace?.(parseResult.migratorName);
+        setMigratingWorkspace?.(parseResult.migratorName);
+        setFiles?.(parseResult.files);
 
         if (isCompleted) {
-          setUsers(parseResult);
-          setMigrationPhase("setup");
-          setLoadingStatus("done");
+          setUsers?.(parseResult);
+          setMigrationPhase?.("setup");
+          setLoadingStatus?.("done");
         } else {
-          setLoadingStatus("proceed");
+          setLoadingStatus?.("proceed");
         }
       }
 
-      if (parseResult.operation === "migration") {
-        setWorkspace(parseResult.migratorName);
-        setMigratingWorkspace(parseResult.migratorName);
+      if (parseResult?.operation === "migration") {
+        setWorkspace?.(parseResult.migratorName);
+        setMigratingWorkspace?.(parseResult.migratorName);
 
         if (isCompleted) {
-          setMigrationPhase("complete");
+          setMigrationPhase?.("complete");
         } else {
-          setMigrationPhase("migrating");
+          setMigrationPhase?.("migrating");
         }
       }
     } catch (error) {
@@ -114,9 +114,9 @@ const useDataImport = ({
   ]);
 
   const handleMigrationCheck = useCallback(async () => {
-    const migrationList = await getMigrationList();
+    const migrationList = await getMigrationList?.();
     // setAreProvidersReady(true);
-    setServices(migrationList);
+    setServices?.(migrationList);
   }, [getMigrationList, setServices]);
 
   const getDataImportInitialValue = useCallback(async () => {

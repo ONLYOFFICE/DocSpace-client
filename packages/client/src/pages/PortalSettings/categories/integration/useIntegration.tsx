@@ -38,15 +38,15 @@ import LdapFormStore from "SRC_DIR/store/LdapFormStore";
 
 export type UseIntegrationProps = {
   isSSOAvailable?: CurrentQuotasStore["isSSOAvailable"];
-  init: SsoFormStore["init"];
-  isInit: SsoFormStore["isInit"];
-  updatePlugins: PluginStore["updatePlugins"];
-  getConsumers: SetupStore["getConsumers"];
-  fetchAndSetConsumers: SetupStore["fetchAndSetConsumers"];
-  setInitSMTPSettings: SetupStore["setInitSMTPSettings"];
-  getDocumentServiceLocation: FilesSettingsStore["getDocumentServiceLocation"];
-  loadLDAP: LdapFormStore["load"];
-  isLdapAvailable: CurrentQuotasStore["isLdapAvailable"];
+  init?: SsoFormStore["init"];
+  isInit?: SsoFormStore["isInit"];
+  updatePlugins?: PluginStore["updatePlugins"];
+  getConsumers?: SetupStore["getConsumers"];
+  fetchAndSetConsumers?: SetupStore["fetchAndSetConsumers"];
+  setInitSMTPSettings?: SetupStore["setInitSMTPSettings"];
+  getDocumentServiceLocation?: FilesSettingsStore["getDocumentServiceLocation"];
+  loadLDAP?: LdapFormStore["load"];
+  isLdapAvailable?: CurrentQuotasStore["isLdapAvailable"];
 };
 
 const useIntegration = ({
@@ -68,35 +68,35 @@ const useIntegration = ({
     useState<TDocServiceLocation>();
 
   const getLDAPData = useCallback(() => {
-    isLdapAvailable && loadLDAP(t);
+    isLdapAvailable && loadLDAP?.(t);
   }, [isLdapAvailable, loadLDAP, t]);
 
   const getSSOData = useCallback(() => {
-    isSSOAvailable && !isInit && init();
+    isSSOAvailable && !isInit && init?.();
   }, [isSSOAvailable, isInit, init]);
 
   const getPluginsData = useCallback(() => {
-    updatePlugins(true);
+    updatePlugins?.(true);
   }, [updatePlugins]);
 
   const getThirdPartyData = useCallback(() => {
     const urlParts = window.location.href.split("?");
     if (urlParts.length > 1) {
       const queryValue = urlParts[1].split("=")[1];
-      fetchAndSetConsumers(queryValue).then(
+      fetchAndSetConsumers?.(queryValue).then(
         (isConsumerExist) => isConsumerExist && setOpenThirdPartyModal(true),
       );
     } else {
-      getConsumers();
+      getConsumers?.();
     }
   }, [getConsumers, fetchAndSetConsumers]);
 
   const getSMTPSettingsData = useCallback(async () => {
-    await setInitSMTPSettings();
+    await setInitSMTPSettings?.();
   }, [setInitSMTPSettings]);
 
   const getDocumentServiceData = useCallback(() => {
-    getDocumentServiceLocation().then((result) => {
+    getDocumentServiceLocation?.().then((result) => {
       setDocumentServiceLocationData(result);
     });
   }, [getDocumentServiceLocation]);

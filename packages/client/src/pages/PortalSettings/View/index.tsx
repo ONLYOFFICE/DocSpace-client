@@ -67,9 +67,6 @@ const View = ({
   setIsChangePageRequestRunning,
   loadBaseInfo,
   isMobileView,
-  getGreetingSettingsIsDefault,
-  isLoaded,
-  setIsLoaded,
   settingsStore,
   tfaStore,
   backupStore,
@@ -86,6 +83,7 @@ const View = ({
   brandingStore,
   importAccountsStore,
   ldapStore,
+  common,
 }: any) => {
   const location = useLocation();
 
@@ -106,12 +104,9 @@ const View = ({
   const isDeveloperToolsPage = location.pathname.includes("developer-tools");
   const isDeletePage = location.pathname.includes("delete-data");
 
-  const safeProps = createDefaultHookSettingsProps({
+  const defaultProps = createDefaultHookSettingsProps({
     loadBaseInfo,
     isMobileView,
-    getGreetingSettingsIsDefault,
-    setIsLoaded,
-    isLoaded,
     settingsStore,
     tfaStore,
     backupStore,
@@ -127,17 +122,20 @@ const View = ({
     brandingStore,
     importAccountsStore,
     ldapStore,
+    common,
   });
 
-  const { getCommonInitialValue } = useCommon(safeProps.common);
-  const { getSecurityInitialValue } = useSecurity(safeProps.security);
-  const { getBackupInitialValue } = useBackup(safeProps.backup);
-  const { getIntegrationInitialValue } = useIntegration(safeProps.integration);
-  const { getDataImportInitialValue } = useDataImport(safeProps.dataImport);
-  const { getDeveloperToolsInitialValue } = useDeveloperTools(
-    safeProps.developerTools,
+  const { getCommonInitialValue } = useCommon(defaultProps.common);
+  const { getSecurityInitialValue } = useSecurity(defaultProps.security);
+  const { getBackupInitialValue } = useBackup(defaultProps.backup);
+  const { getIntegrationInitialValue } = useIntegration(
+    defaultProps.integration,
   );
-  const { getDeleteDataInitialValue } = useDeleteData(safeProps.deleteData);
+  const { getDataImportInitialValue } = useDataImport(defaultProps.dataImport);
+  const { getDeveloperToolsInitialValue } = useDeveloperTools(
+    defaultProps.developerTools,
+  );
+  const { getDeleteDataInitialValue } = useDeleteData(defaultProps.deleteData);
 
   useEffect(() => {
     animationStartedRef.current = false;
@@ -316,12 +314,7 @@ export const ViewComponent = inject(
     storageManagement,
     ldapStore,
   }: TStore) => {
-    const {
-      initSettings: initSettingsCommon,
-      getGreetingSettingsIsDefault,
-      isLoaded,
-      setIsLoaded,
-    } = common;
+    const { initSettings: initSettingsCommon } = common;
 
     const {
       setIsChangePageRequestRunning,
@@ -357,13 +350,11 @@ export const ViewComponent = inject(
       importAccountsStore,
       storageManagement,
       ldapStore,
+      common,
 
       // Direct values needed in safeProps
       isMobileView,
-      getGreetingSettingsIsDefault,
       loadBaseInfo,
-      setIsLoaded,
-      isLoaded,
     };
   },
 )(observer(View));

@@ -43,15 +43,15 @@ import TreeFoldersStore from "SRC_DIR/store/TreeFoldersStore";
 import BackupStore from "SRC_DIR/store/BackupStore";
 
 export type UseBackupProps = {
-  getProgress: BackupStore["getProgress"];
-  rootFoldersTitles: TreeFoldersStore["rootFoldersTitles"];
-  fetchTreeFolders: TreeFoldersStore["fetchTreeFolders"];
-  setStorageRegions: BackupStore["setStorageRegions"];
-  setThirdPartyStorage: BackupStore["setThirdPartyStorage"];
-  setConnectedThirdPartyAccount: BackupStore["setConnectedThirdPartyAccount"];
-  setBackupSchedule: BackupStore["setBackupSchedule"];
-  setDefaultOptions: BackupStore["setDefaultOptions"];
-  language: AuthStore["language"];
+  getProgress?: BackupStore["getProgress"];
+  rootFoldersTitles?: TreeFoldersStore["rootFoldersTitles"];
+  fetchTreeFolders?: TreeFoldersStore["fetchTreeFolders"];
+  setStorageRegions?: BackupStore["setStorageRegions"];
+  setThirdPartyStorage?: BackupStore["setThirdPartyStorage"];
+  setConnectedThirdPartyAccount?: BackupStore["setConnectedThirdPartyAccount"];
+  setBackupSchedule?: BackupStore["setBackupSchedule"];
+  setDefaultOptions?: BackupStore["setDefaultOptions"];
+  language?: AuthStore["language"];
 };
 
 const useBackup = ({
@@ -69,7 +69,7 @@ const useBackup = ({
 
   const getManualBackupData = useCallback(async () => {
     try {
-      getProgress(t);
+      getProgress?.(t);
 
       const baseRequests = [
         getSettingsThirdParty(),
@@ -80,7 +80,7 @@ const useBackup = ({
       const optionalRequests = [];
 
       if (!rootFoldersTitles || Object.keys(rootFoldersTitles).length === 0) {
-        optionalRequests.push(fetchTreeFolders());
+        optionalRequests.push(fetchTreeFolders?.());
       }
 
       const [account, backupStorage, storageRegionsS3] = await Promise.all([
@@ -88,9 +88,9 @@ const useBackup = ({
         ...optionalRequests,
       ]);
 
-      setConnectedThirdPartyAccount(account ?? null);
-      setThirdPartyStorage(backupStorage);
-      setStorageRegions(storageRegionsS3);
+      setConnectedThirdPartyAccount?.(account ?? null);
+      setThirdPartyStorage?.(backupStorage);
+      setStorageRegions?.(storageRegionsS3);
     } catch (error) {
       toastr.error(error as Error);
     }
@@ -105,9 +105,9 @@ const useBackup = ({
 
   const getAutoBackupData = useCallback(async () => {
     try {
-      if (Object.keys(rootFoldersTitles).length === 0) fetchTreeFolders();
+      if (Object.keys(rootFoldersTitles).length === 0) fetchTreeFolders?.();
 
-      getProgress(t);
+      getProgress?.(t);
       const [account, backupSchedule, backupStorage, newStorageRegions] =
         await Promise.all([
           getSettingsThirdParty(),
@@ -116,13 +116,13 @@ const useBackup = ({
           getStorageRegions(),
         ]);
 
-      if (account) setConnectedThirdPartyAccount(account);
-      if (backupStorage) setThirdPartyStorage(backupStorage);
+      if (account) setConnectedThirdPartyAccount?.(account);
+      if (backupStorage) setThirdPartyStorage?.(backupStorage);
 
-      setBackupSchedule(backupSchedule);
-      setStorageRegions(newStorageRegions);
+      setBackupSchedule?.(backupSchedule);
+      setStorageRegions?.(newStorageRegions);
 
-      setDefaultOptions(periodsObject, weekdaysLabelArray);
+      setDefaultOptions?.(periodsObject, weekdaysLabelArray);
     } catch (error) {
       toastr.error(error as Error);
     }
@@ -140,7 +140,7 @@ const useBackup = ({
 
   const getRestoreBackupData = useCallback(async () => {
     try {
-      getProgress(t);
+      getProgress?.(t);
 
       const [account, backupStorage, resStorageRegions] = await Promise.all([
         getSettingsThirdParty(),
@@ -148,9 +148,9 @@ const useBackup = ({
         getStorageRegions(),
       ]);
 
-      if (account) setConnectedThirdPartyAccount(account);
-      setThirdPartyStorage(backupStorage);
-      setStorageRegions(resStorageRegions);
+      if (account) setConnectedThirdPartyAccount?.(account);
+      setThirdPartyStorage?.(backupStorage);
+      setStorageRegions?.(resStorageRegions);
 
       return true;
     } catch (error) {

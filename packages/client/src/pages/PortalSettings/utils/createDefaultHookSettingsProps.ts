@@ -35,6 +35,7 @@ import OAuthStore from "SRC_DIR/store/OAuthStore";
 import BrandingStore from "SRC_DIR/store/portal-settings/BrandingStore";
 import ImportAccountsStore from "SRC_DIR/store/ImportAccountsStore";
 import LdapFormStore from "SRC_DIR/store/LdapFormStore";
+import CommonStore from "SRC_DIR/store/CommonStore";
 
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { TfaStore } from "@docspace/shared/store/TfaStore";
@@ -42,11 +43,8 @@ import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { AuthStore } from "@docspace/shared/store/AuthStore";
 
 export interface DefaultHookSettingsPropsParams {
-  loadBaseInfo: (page: string) => Promise<void>;
-  isMobileView: boolean;
-  getGreetingSettingsIsDefault: () => Promise<void>;
-  setIsLoaded: (loaded: boolean) => void;
-  isLoaded: boolean;
+  loadBaseInfo?: (page: string) => Promise<void>;
+  isMobileView?: boolean;
   settingsStore?: SettingsStore;
   tfaStore?: TfaStore;
   backupStore?: BackupStore;
@@ -62,14 +60,12 @@ export interface DefaultHookSettingsPropsParams {
   brandingStore?: BrandingStore;
   importAccountsStore?: ImportAccountsStore;
   ldapStore?: LdapFormStore;
+  common?: CommonStore;
 }
 
 export const createDefaultHookSettingsProps = ({
   loadBaseInfo,
   isMobileView,
-  getGreetingSettingsIsDefault,
-  setIsLoaded,
-  isLoaded,
   settingsStore,
   tfaStore,
   backupStore,
@@ -85,15 +81,16 @@ export const createDefaultHookSettingsProps = ({
   brandingStore,
   importAccountsStore,
   ldapStore,
+  common,
 }: DefaultHookSettingsPropsParams) => ({
   common: {
     loadBaseInfo,
     isMobileView,
-    getGreetingSettingsIsDefault,
+    getGreetingSettingsIsDefault: common?.getGreetingSettingsIsDefault,
     getBrandName: brandingStore?.getBrandName,
     initWhiteLabel: brandingStore?.initWhiteLabel,
-    setIsLoaded,
-    isLoaded,
+    setIsLoaded: common?.setIsLoaded,
+    isLoaded: common?.isLoaded,
     cultures: settingsStore?.cultures,
     getPortalCultures: settingsStore?.getPortalCultures,
   },

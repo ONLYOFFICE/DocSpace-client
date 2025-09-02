@@ -33,19 +33,19 @@ import { DeviceType } from "@docspace/shared/enums";
 import SettingsSetupStore from "SRC_DIR/store/SettingsSetupStore";
 
 export type UseSecurityProps = {
-  getPortalPasswordSettings: SettingsStore["getPortalPasswordSettings"];
-  getTfaType: TfaStore["getTfaType"];
-  getInvitationSettings: SettingsStore["getInvitationSettings"];
-  getIpRestrictionsEnable: SettingsStore["getIpRestrictionsEnable"];
-  getIpRestrictions: SettingsStore["getIpRestrictions"];
-  getBruteForceProtection: SettingsStore["getBruteForceProtection"];
-  getSessionLifetime: SettingsStore["getSessionLifetime"];
-  getLoginHistory: SettingsSetupStore["getLoginHistory"];
-  getLifetimeAuditSettings: SettingsSetupStore["getLifetimeAuditSettings"];
-  getAuditTrail: SettingsSetupStore["getAuditTrail"];
-  initSettings: SettingsSetupStore["initSettings"];
-  isInit: SettingsSetupStore["isInit"];
-  currentDeviceType: SettingsStore["currentDeviceType"];
+  getPortalPasswordSettings?: SettingsStore["getPortalPasswordSettings"];
+  getTfaType?: TfaStore["getTfaType"];
+  getInvitationSettings?: SettingsStore["getInvitationSettings"];
+  getIpRestrictionsEnable?: SettingsStore["getIpRestrictionsEnable"];
+  getIpRestrictions?: SettingsStore["getIpRestrictions"];
+  getBruteForceProtection?: SettingsStore["getBruteForceProtection"];
+  getSessionLifetime?: SettingsStore["getSessionLifetime"];
+  getLoginHistory?: SettingsSetupStore["getLoginHistory"];
+  getLifetimeAuditSettings?: SettingsSetupStore["getLifetimeAuditSettings"];
+  getAuditTrail?: SettingsSetupStore["getAuditTrail"];
+  initSettings?: SettingsSetupStore["initSettings"];
+  isInit?: SettingsSetupStore["isInit"];
+  currentDeviceType?: SettingsStore["currentDeviceType"];
 };
 
 const useSecurity = ({
@@ -64,15 +64,15 @@ const useSecurity = ({
   currentDeviceType,
 }: UseSecurityProps) => {
   const getAccessPortalData = useCallback(async () => {
-    getPortalPasswordSettings();
-    getTfaType();
-    getInvitationSettings();
+    getPortalPasswordSettings?.();
+    getTfaType?.();
+    getInvitationSettings?.();
 
-    await getIpRestrictionsEnable();
-    await getIpRestrictions();
+    await getIpRestrictionsEnable?.();
+    await getIpRestrictions?.();
 
-    getBruteForceProtection();
-    getSessionLifetime();
+    getBruteForceProtection?.();
+    getSessionLifetime?.();
   }, [
     getPortalPasswordSettings,
     getTfaType,
@@ -84,30 +84,30 @@ const useSecurity = ({
   ]);
 
   const getLoginHistoryData = useCallback(async () => {
-    getLoginHistory();
-    getLifetimeAuditSettings();
+    getLoginHistory?.();
+    getLifetimeAuditSettings?.();
   }, [getLoginHistory, getLifetimeAuditSettings]);
 
   const getAuditTrailData = useCallback(async () => {
-    getAuditTrail();
-    getLifetimeAuditSettings();
+    getAuditTrail?.();
+    getLifetimeAuditSettings?.();
   }, [getAuditTrail, getLifetimeAuditSettings]);
 
   const initialLoad = useCallback(async () => {
     if (!isInit && currentDeviceType !== DeviceType.mobile)
-      await initSettings();
+      await initSettings?.();
   }, [isInit, currentDeviceType, initSettings]);
 
   const getSecurityInitialValue = useCallback(async () => {
-    const actions = [initialLoad()];
+    const actions = [initialLoad?.()];
     if (window.location.pathname.includes("access-portal"))
-      actions.push(getAccessPortalData());
+      actions.push(getAccessPortalData?.());
 
     if (window.location.pathname.includes("login-history"))
-      actions.push(getLoginHistoryData());
+      actions.push(getLoginHistoryData?.());
 
     if (window.location.pathname.includes("audit-trail"))
-      actions.push(getAuditTrailData());
+      actions.push(getAuditTrailData?.());
 
     await Promise.all(actions);
   }, [getAccessPortalData, getLoginHistoryData, getAuditTrailData]);

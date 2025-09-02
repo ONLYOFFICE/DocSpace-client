@@ -39,12 +39,12 @@ import OAuthStore from "SRC_DIR/store/OAuthStore";
 import { TApiKey } from "@docspace/shared/api/api-keys/types";
 
 export type UseDeveloperToolsProps = {
-  getCSPSettings: SettingsStore["getCSPSettings"];
-  loadWebhooks: WebhooksStore["loadWebhooks"];
-  fetchClients: OAuthStore["fetchClients"];
-  fetchScopes: OAuthStore["fetchScopes"];
-  isInit: OAuthStore["isInit"];
-  setIsInit: OAuthStore["setIsInit"];
+  getCSPSettings?: SettingsStore["getCSPSettings"];
+  loadWebhooks?: WebhooksStore["loadWebhooks"];
+  fetchClients?: OAuthStore["fetchClients"];
+  fetchScopes?: OAuthStore["fetchScopes"];
+  isInit?: OAuthStore["isInit"];
+  setIsInit?: OAuthStore["setIsInit"];
 };
 
 const useDeveloperTools = ({
@@ -62,11 +62,11 @@ const useDeveloperTools = ({
   const [errorKeys, setErrorKeys] = useState<Error | null>(null);
 
   const getJavascriptSDKData = React.useCallback(() => {
-    getCSPSettings();
+    getCSPSettings?.();
   }, [getCSPSettings]);
 
   const getWebhooksData = React.useCallback(async () => {
-    await loadWebhooks();
+    await loadWebhooks?.();
   }, [loadWebhooks]);
 
   const getOAuthData = React.useCallback(async () => {
@@ -74,16 +74,16 @@ const useDeveloperTools = ({
 
     try {
       if (!isInit) {
-        actions.push(fetchScopes());
+        actions.push(fetchScopes?.());
       }
-      actions.push(fetchClients());
+      actions.push(fetchClients?.());
 
       await Promise.all(actions);
     } catch (e) {
       setErrorOAuth(e as Error);
     }
 
-    setIsInit(true);
+    setIsInit?.(true);
   }, [fetchClients, fetchScopes, isInit, setIsInit]);
 
   const getKeysData = React.useCallback(async () => {

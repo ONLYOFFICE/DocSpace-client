@@ -412,6 +412,7 @@ class UsersStore {
     filter?: Filter,
     updateFilter = false,
     withFilterLocalStorage = false,
+    contactsTab?: TContactsTab,
   ) => {
     const { currentGroup } = this.groupsStore;
     const filterData = filter ? filter.clone() : Filter.getDefault();
@@ -442,7 +443,12 @@ class UsersStore {
       if (filterObj?.sortOrder) filterData.sortOrder = filterObj.sortOrder;
     }
 
-    if (currentGroup?.id && contactsView === "inside_group") {
+    if (
+      currentGroup?.id &&
+      (contactsTab
+        ? contactsTab === "inside_group"
+        : contactsView === "inside_group")
+    ) {
       filterData.group = currentGroup.id;
     }
 
@@ -450,9 +456,13 @@ class UsersStore {
       filterData.group = null;
     }
 
-    if (this.contactsTab === "guests") {
+    if (
+      contactsTab ? contactsTab === "guests" : this.contactsTab === "guests"
+    ) {
       filterData.area = "guests";
-    } else if (contactsView === "people") {
+    } else if (
+      contactsTab ? contactsTab === "people" : contactsView === "people"
+    ) {
       filterData.area = "people";
     }
 

@@ -155,10 +155,10 @@
     "msw": "^2.8.4",
     "msw-storybook-addon": "^2.0.4",
     "open-cli": "^8.0.0",
-    "prettier": "3.3.3",
-    "react": "19.1.0",
+    "prettier": "3.6.2",
+    "react": "19.1.1",
     "react-docgen-typescript-plugin": "1.0.8",
-    "react-dom": "19.1.0",
+    "react-dom": "19.1.1",
     "react-values": "0.3.3",
     "remark-gfm": "4.0.1",
     "sass": "1.79.5",
@@ -169,11 +169,11 @@
     "style-loader": "3.3.4",
     "ts-jest": "29.2.5",
     "ts-node": "10.9.2",
-    "typescript": "5.6.3"
+    "typescript": "5.9.2"
   },
   "peerDependencies": {
-    "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
   },
   "nx": {
     "targets": {

@@ -31,9 +31,9 @@
     "i18next": "23.7.19",
     "nconf": "0.12.1",
     "next": "15.5.2",
-    "react": "19.1.0",
+    "react": "19.1.1",
     "react-device-detect": "2.2.3",
-    "react-dom": "19.1.0",
+    "react-dom": "19.1.1",
     "react-google-recaptcha": "3.1.0",
     "react-i18next": "14.0.1",
     "react-router": "7.5.2",
@@ -61,12 +61,12 @@
     "cross-env": "^7.0.3",
     "css-minimizer-webpack-plugin": "^7.0.2",
     "eslint": "8.57.1",
-    "eslint-config-next": "15.3.2",
-    "prettier": "3.3.3",
+    "eslint-config-next": "15.5.2",
+    "prettier": "3.6.2",
     "sass": "1.79.5",
     "shx": "0.3.4",
     "terser-webpack-plugin": "5.3.10",
-    "typescript": "5.6.3"
+    "typescript": "5.9.2"
   },
   "nx": {
     "targets": {

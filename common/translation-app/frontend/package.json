@@ -14,8 +14,8 @@
     "framer-motion": "^11.18.2",
     "next": "^15.5.2",
     "postcss": "^8",
-    "react": "^18",
-    "react-dom": "^18",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
     "react-toastify": "^11.0.5",
     "recharts": "^2.15.3",
     "socket.io-client": "^4.7.2",
@@ -28,6 +28,6 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "15.5.2",
-    "typescript": "5.8.3"
+    "typescript": "5.9.2"
   }
 }

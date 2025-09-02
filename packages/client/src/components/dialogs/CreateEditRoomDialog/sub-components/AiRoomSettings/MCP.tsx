@@ -34,7 +34,7 @@ import { TSelectorItem } from "@docspace/shared/components/selector";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { TRoomParams } from "@docspace/shared/utils/rooms";
 import { getServersListForRoom } from "@docspace/shared/api/ai";
-import { getServerIcon } from "@docspace/shared/utils/getServerIcon";
+import { getServerIcon } from "@docspace/shared/utils";
 import { useTheme } from "@docspace/shared/hooks/useTheme";
 
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";

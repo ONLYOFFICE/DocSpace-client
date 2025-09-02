@@ -26,23 +26,24 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import AnthropicSvgUrl from "PUBLIC_DIR/images/ai-providers/anthropic.svg?url";
-import OpenaiSvgUrl from "PUBLIC_DIR/images/ai-providers/openai.svg?url";
-import TogetherAiSvgUrl from "PUBLIC_DIR/images/ai-providers/together_ai.svg?url";
-import OllamaSvgUrl from "PUBLIC_DIR/images/ai-providers/ollama.svg?url";
+import BoxSvgUrl from "PUBLIC_DIR/images/thirdparties/box.svg?url";
+import BoxDarkSvgUrl from "PUBLIC_DIR/images/thirdparties/box.dark.svg?url";
+import GitHubLightSvgUrl from "PUBLIC_DIR/images/thirdparties/github.light.react.svg?url";
+import GitHubDarkSvgUrl from "PUBLIC_DIR/images/thirdparties/github.dark.react.svg?url";
 
-import { ProviderType } from "../api/ai/enums";
+import { ServerType } from "../../api/ai/enums";
 
-export const getAiProviderIcon = (type: ProviderType, isBase: boolean) => {
+export const getServerIcon = (type: ServerType, isBase: boolean) => {
   switch (type) {
-    case ProviderType.Anthropic:
-      return AnthropicSvgUrl;
-    case ProviderType.OpenAi:
-      return OpenaiSvgUrl;
-    case ProviderType.TogetherAi:
-      return TogetherAiSvgUrl;
-    case ProviderType.OpenAiCompatible:
-      return OllamaSvgUrl;
+    case ServerType.Custom:
+      return null;
+    case ServerType.Portal:
+      return "/logo.ashx?logotype=3";
+    case ServerType.GitHub:
+      if (isBase) return GitHubLightSvgUrl;
+      return GitHubDarkSvgUrl;
+    case ServerType.Box:
+      return isBase ? BoxSvgUrl : BoxDarkSvgUrl;
     default:
       return null;
   }

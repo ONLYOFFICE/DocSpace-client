@@ -43,7 +43,7 @@ import {
 import { ServerType } from "../../../../api/ai/enums";
 import { TMCPTool, TServer } from "../../../../api/ai/types";
 import { getOAuthToken } from "../../../../utils/common";
-import { getServerIcon } from "../../../../utils/getServerIcon";
+import { getServerIcon } from "../../../../utils";
 import { useTheme } from "../../../../hooks/useTheme";
 import socket, { SocketEvents, TOptSocket } from "../../../../utils/socket";
 

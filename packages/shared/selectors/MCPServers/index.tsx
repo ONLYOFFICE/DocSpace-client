@@ -32,7 +32,7 @@ import { TServer } from "../../api/ai/types";
 import { useTheme } from "../../hooks/useTheme";
 
 import { Selector, TSelectorItem } from "../../components/selector";
-import { getServerIcon } from "../../utils/getServerIcon";
+import { getServerIcon } from "../../utils";
 
 import { RowLoader } from "../../skeletons/selector";
 

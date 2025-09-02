@@ -26,52 +26,5 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { Text } from "@docspace/shared/components/text";
-import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
-import type { TAiProvider } from "@docspace/shared/api/ai/types";
-import { useTheme } from "@docspace/shared/hooks/useTheme";
-import { getAiProviderIcon } from "@docspace/shared/utils";
-
-import SettingsIcon from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
-import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
-
-import { AiTile } from "../ai-tile";
-
-type AiProviderTileProps = {
-  item: TAiProvider;
-};
-
-const getContextOptions = () => {
-  return [
-    {
-      key: "settings",
-      label: "Common:Settings",
-      icon: SettingsIcon,
-      onClick: () => {},
-    },
-    {
-      key: "delete",
-      label: "Common:Delete",
-      onClick: () => {},
-      icon: CatalogTrashReactSvgUrl,
-    },
-  ];
-};
-
-export const AiProviderTile = ({ item }: AiProviderTileProps) => {
-  const { isBase } = useTheme();
-  const icon = getAiProviderIcon(item.type, isBase) ?? "";
-
-  return (
-    <AiTile icon={icon}>
-      <AiTile.Header title={item.title}>
-        <ContextMenuButton directionX="right" getData={getContextOptions} />
-      </AiTile.Header>
-
-      <AiTile.Body>
-        <Text truncate>Temp title</Text>
-        <Text truncate>{item.url}</Text>
-      </AiTile.Body>
-    </AiTile>
-  );
-};
+export { getAiProviderIcon } from "./getAiProviderIcon";
+export { getServerIcon } from "./getServerIcon";

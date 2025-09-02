@@ -235,6 +235,7 @@ export default function withFileActions(WrappedFileItem) {
         !!e.target.closest(".lock-file") ||
         // !!e.target.closest(".additional-badges") ||
         e.target.closest(".tag") ||
+        e.target.closest(".mainIcons") ||
         isTrashFolder
       )
         return;

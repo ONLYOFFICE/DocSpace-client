@@ -57,6 +57,7 @@ type ServicesProps = {
   setConfirmActionType: (value: string) => void;
   confirmActionType: string | null;
   setIsInitServicesPage: (value: boolean) => void;
+  setVisibleWalletSetting: (value: boolean) => void;
 };
 
 let timerId: NodeJS.Timeout | null = null;
@@ -73,6 +74,7 @@ const Services: React.FC<ServicesProps> = ({
   setConfirmActionType,
   confirmActionType,
   setIsInitServicesPage,
+  setVisibleWalletSetting,
 }) => {
   const { t, ready } = useTranslation(["Payments", "Services", "Common"]);
   const [isStorageVisible, setIsStorageVisible] = useState(false);
@@ -262,7 +264,7 @@ const Services: React.FC<ServicesProps> = ({
 
   const onCloseTopUpModal = (isTopUp: boolean | Event) => {
     setIsTopUpBalanceVisible(false);
-
+    setVisibleWalletSetting(false);
     if (isTopUp) {
       setIsConfirmDialogVisible(true);
     }
@@ -334,6 +336,7 @@ export const Component = inject(
       setConfirmActionType,
       confirmActionType,
       setIsInitServicesPage,
+      setVisibleWalletSetting,
     } = servicesStore;
     const { isGracePeriod, previousStoragePlanSize } = currentTariffStatusStore;
     const {
@@ -354,6 +357,7 @@ export const Component = inject(
       setConfirmActionType,
       confirmActionType,
       setIsInitServicesPage,
+      setVisibleWalletSetting,
     };
   },
 )(observer(Services));

@@ -3,7 +3,7 @@
   "content": "Type",
   "content_en_sha1_hash": "3deb7456519697ecf4eefc455516c969a3681bae",
   "created_at": "2025-05-19T21:30:49.370Z",
-  "updated_at": "2025-08-27T10:14:35.224Z",
+  "updated_at": "2025-09-01T14:09:49.970Z",
   "comment": {
     "text": "This translation key is used to display a label indicating the type of an item or entity. It appears in various UI elements, such as titles, labels, and field headers, where it provides a brief description of the item's classification (e.g., \"Type\" for a data entry field).",
     "is_auto": true,
@@ -125,9 +125,15 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
-      "line_number": 397,
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/FilterPanel.tsx",
+      "line_number": 85,
       "context": "<ModalDialog.Header>{t(\"Filter\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.filterDialogContent}>\n <div className={styles.filterDialogSection}>\n <Text fontWeight={600} fontSize=\"15px\">\n {t(\"Common:Type\")}\n </Text>\n <ComboBox\n options={typeOfHistoty}\n selectedOption={selectedType}\n onSelect={onSelectType}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/TableView/TableHeader.tsx",
+      "line_number": 56,
+      "context": "active: true,\n minWidth: 150,\n },\n {\n key: \"Type\",\n title: t(\"Common:Type\"),\n enable: true,\n resizable: true,\n minWidth: 120,\n },\n {",
       "module": "/packages/client"
     },
     {

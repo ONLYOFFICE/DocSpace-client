@@ -26,53 +26,24 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { Text } from "@docspace/shared/components/text";
-import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
-import type { TAiProvider } from "@docspace/shared/api/ai/types";
-import { useTheme } from "@docspace/shared/hooks/useTheme";
-import { getAiProviderIcon, getAiProviderLabel } from "@docspace/shared/utils";
+import { ProviderType } from "../../api/ai/enums";
 
-import SettingsIcon from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
-import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
+const OPENAI_LABEL = "OpenAI";
+const TOGETHER_AI_LABEL = "TogetherAI";
+const OPENAI_COMPATIBLE_LABEL = "OpenAI-compatible";
+const ANTHROPIC_LABEL = "Anthropic";
 
-import { AiTile } from "../ai-tile";
-
-type AiProviderTileProps = {
-  item: TAiProvider;
-};
-
-const getContextOptions = () => {
-  return [
-    {
-      key: "settings",
-      label: "Common:Settings",
-      icon: SettingsIcon,
-      onClick: () => {},
-    },
-    {
-      key: "delete",
-      label: "Common:Delete",
-      onClick: () => {},
-      icon: CatalogTrashReactSvgUrl,
-    },
-  ];
-};
-
-export const AiProviderTile = ({ item }: AiProviderTileProps) => {
-  const { isBase } = useTheme();
-  const icon = getAiProviderIcon(item.type, isBase) ?? "";
-  const companyLabel = getAiProviderLabel(item.type);
-
-  return (
-    <AiTile icon={icon}>
-      <AiTile.Header title={item.title}>
-        <ContextMenuButton directionX="right" getData={getContextOptions} />
-      </AiTile.Header>
-
-      <AiTile.Body>
-        <Text truncate>{companyLabel}</Text>
-        <Text truncate>{item.url}</Text>
-      </AiTile.Body>
-    </AiTile>
-  );
+export const getAiProviderLabel = (type: ProviderType) => {
+  switch (type) {
+    case ProviderType.OpenAi:
+      return OPENAI_LABEL;
+    case ProviderType.TogetherAi:
+      return TOGETHER_AI_LABEL;
+    case ProviderType.OpenAiCompatible:
+      return OPENAI_COMPATIBLE_LABEL;
+    case ProviderType.Anthropic:
+      return ANTHROPIC_LABEL;
+    default:
+      return "";
+  }
 };

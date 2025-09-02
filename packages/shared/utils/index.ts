@@ -100,7 +100,7 @@ import { getCountTilesInRow } from "./getCountTilesInRow";
 import { getSelectFormatTranslation } from "./getSelectFormatTranslation";
 import * as userFilterUtils from "./userFilterUtils";
 import * as filterConstants from "./filterConstants";
-import { getAiProviderIcon, getServerIcon } from "./ai";
+import { getAiProviderIcon, getServerIcon, getAiProviderLabel } from "./ai";
 
 export {
   isBetaLanguage,
@@ -166,6 +166,7 @@ export {
   filterConstants,
   getAiProviderIcon,
   getServerIcon,
+  getAiProviderLabel,
 };
 
 export const getModalType = () => {

@@ -28,3 +28,4 @@
 
 export { getAiProviderIcon } from "./getAiProviderIcon";
 export { getServerIcon } from "./getServerIcon";
+export { getAiProviderLabel } from "./getAiProviderLabel";

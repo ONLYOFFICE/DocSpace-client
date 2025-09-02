@@ -42,6 +42,7 @@ import {
   getProviders,
 } from "@docspace/shared/api/ai";
 import { TAiProvider, TCreateAiProvider } from "@docspace/shared/api/ai/types";
+import { getAiProviderLabel } from "@docspace/shared/utils";
 import { IconButton } from "@docspace/shared/components/icon-button";
 
 import DeleteIconReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
@@ -52,35 +53,20 @@ import styles from "./AISettings.module.scss";
 import { useFetchAiProviders } from "./sub-components/ai-provider/useFetchAiProviders";
 import { useFetchMCPServers } from "./sub-components/mcp-servers/useFetchMCPServers";
 
-const getProviderLabel = (type: ProviderType) => {
-  switch (type) {
-    case ProviderType.OpenAi:
-      return "OpenAI";
-    case ProviderType.TogetherAi:
-      return "TogetherAI";
-    case ProviderType.OpenAiCompatible:
-      return "OpenAI-compatible";
-    case ProviderType.Anthropic:
-      return "Anthropic ";
-    default:
-      return "";
-  }
-};
-
 const providerTypes: TOption[] = [
-  { key: ProviderType.OpenAi, label: getProviderLabel(ProviderType.OpenAi) },
+  { key: ProviderType.OpenAi, label: getAiProviderLabel(ProviderType.OpenAi) },
   {
     key: ProviderType.TogetherAi,
-    label: getProviderLabel(ProviderType.TogetherAi),
+    label: getAiProviderLabel(ProviderType.TogetherAi),
   },
 
   {
     key: ProviderType.OpenAiCompatible,
-    label: getProviderLabel(ProviderType.OpenAiCompatible),
+    label: getAiProviderLabel(ProviderType.OpenAiCompatible),
   },
   {
     key: ProviderType.Anthropic,
-    label: getProviderLabel(ProviderType.Anthropic),
+    label: getAiProviderLabel(ProviderType.Anthropic),
   },
 ];
 

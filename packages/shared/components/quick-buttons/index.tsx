@@ -236,7 +236,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               iconName={
                 item?.isFavorite ? FavoriteFillReactSvgUrl : FavoriteReactSvgUrl
               }
-              className={classNames("badge copy-link icons-group")}
+              className={classNames("badge icons-group")}
               size={sizeQuickButton}
               onClick={onClickFavorite}
               color="accent"

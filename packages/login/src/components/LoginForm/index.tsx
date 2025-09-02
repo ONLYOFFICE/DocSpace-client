@@ -192,6 +192,7 @@ const LoginForm = ({
           window.location.replace("/");
         }
       } catch (e) {
+        console.error(e);
         toastr.error(
           t("Common:ProviderNotConnected"),
           t("Common:ProviderLoginError"),

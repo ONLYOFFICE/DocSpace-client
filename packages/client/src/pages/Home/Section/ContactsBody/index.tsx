@@ -48,6 +48,7 @@ type SectionBodyContentProps = {
   currentView: string;
   isUsersLoading?: UsersStore["isUsersLoading"];
   selectUser?: UsersStore["selectUser"];
+  clearSelection: UsersStore["clearSelection"];
   setPeopleSelection?: UsersStore["setSelection"];
   setPeopleBufferSelection?: UsersStore["setBufferSelection"];
   setGroupsSelection?: GroupsStore["setSelection"];
@@ -79,6 +80,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     setGroupsBufferSelection,
     setChangeOwnerDialogVisible,
     selectUser,
+    clearSelection,
     enabledHotkeys,
     isUsersLoading,
     selectBottom,
@@ -156,6 +158,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     }
 
     if (location?.state?.user) {
+      clearSelection();
       selectUser!(location?.state?.user);
     }
   }, [
@@ -199,6 +202,7 @@ export default inject(
       isUsersLoading,
 
       selectUser,
+      clearSelection,
       setSelection: setPeopleSelection,
       setBufferSelection: setPeopleBufferSelection,
       selection: membersSelection,
@@ -238,6 +242,7 @@ export default inject(
       setGroupsBufferSelection,
       setChangeOwnerDialogVisible,
       selectUser,
+      clearSelection,
       enabledHotkeys,
       isUsersLoading,
 

@@ -61,6 +61,10 @@ jest.mock(
   "PUBLIC_DIR/images/icons/12/lock.react.svg?url",
   () => "locked-icon-12.svg",
 );
+jest.mock(
+  "PUBLIC_DIR/images/favorite.react.svg?url",
+  () => "favorite-icon.svg",
+);
 
 // Mock isTablet and isDesktop
 jest.mock("../../utils", () => ({
@@ -85,6 +89,7 @@ const mockT: TTranslation = (
     "Common:CopySharedLink": "Copy Shared Link",
     "Common:CreateRoom": "Create Room",
     "Common:UnblockFile": "Unblock File",
+    "Common:Favorites": "Favorites",
     "Common:LockedBy": `Locked by ${params?.userName || ""}`,
     "Common:FileWillBeDeletedPermanently": `File will be deleted permanently on ${params?.date || ""}`,
     "Common:SectionMoveNotification": `File will be moved to ${params?.sectionName || ""} on ${params?.date || ""}`,
@@ -136,6 +141,7 @@ const baseFileItem: TFile = {
   fileStatus: 0,
   fileType: 0,
   folderId: 1,
+  isFavorite: true,
   mute: false,
   pureContentLength: 0,
   rootFolderId: 1,
@@ -195,7 +201,8 @@ describe("<QuickButtons />", () => {
 
   it("renders without error", () => {
     renderWithTheme(<QuickButtons {...baseProps} />);
-    expect(screen.getByTestId("icon-button")).toBeInTheDocument();
+    const buttons = screen.getAllByTestId("icon-button");
+    expect(buttons.length).toBeGreaterThan(0);
   });
 
   it("renders share button for personal room files", () => {
@@ -407,25 +414,49 @@ describe("<QuickButtons />", () => {
     expect(screen.queryByTitle("Unblock File")).not.toBeInTheDocument();
   });
 
-  it("disables buttons when isDisabled is true", () => {
-    const onCopyPrimaryLink = jest.fn();
+  it("disables share button when isDisabled is true", () => {
+    const onClickShare = jest.fn();
+    renderWithTheme(
+      <QuickButtons {...baseProps} isDisabled onClickShare={onClickShare} />,
+    );
+
+    const shareButton = screen.getByTitle("Copy Shared Link");
+    expect(shareButton).toBeInTheDocument();
+
+    fireEvent.click(shareButton);
+    expect(onClickShare).not.toHaveBeenCalled();
+  });
+
+  it("renders favorites button for files", () => {
+    renderWithTheme(<QuickButtons {...baseProps} />);
+
+    const favoritesButton = screen.getByTitle("Favorites");
+    expect(favoritesButton).toBeInTheDocument();
+  });
+
+  it("handles favorites button click", async () => {
+    const onClickFavorite = jest.fn();
+    renderWithTheme(
+      <QuickButtons {...baseProps} onClickFavorite={onClickFavorite} />,
+    );
+
+    const favoritesButton = screen.getByTitle("Favorites");
+    await userEvent.click(favoritesButton);
+    expect(onClickFavorite).toHaveBeenCalledTimes(1);
+  });
+
+  it("does not call onClickFavorite when disabled", async () => {
+    const onClickFavorite = jest.fn();
     renderWithTheme(
       <QuickButtons
         {...baseProps}
         isDisabled
-        onCopyPrimaryLink={onCopyPrimaryLink}
+        onClickFavorite={onClickFavorite}
       />,
     );
 
-    // Check if the component renders with the isDisabled prop
-    const shareButton = screen.getByTitle("Copy Shared Link");
-
-    // The component might handle disabled state through CSS classes or other means
-    // Let's verify the button is in the DOM but has some visual indication of being disabled
-    expect(shareButton).toBeInTheDocument();
-
-    // We can also verify the onClick handler doesn't get called when disabled
-    fireEvent.click(shareButton);
-    expect(onCopyPrimaryLink).not.toHaveBeenCalled();
+    const favoritesButton = screen.getByTitle("Favorites");
+    await userEvent.click(favoritesButton);
+    expect(onClickFavorite).not.toHaveBeenCalled();
   });
 });

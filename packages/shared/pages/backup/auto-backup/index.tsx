@@ -504,7 +504,7 @@ const AutomaticBackup = ({
               )}
             >
               {t("Common:RoomsModuleDescription", {
-                roomName: t("Common:MyFilesSection"),
+                roomName: t("Common:MyDocuments"),
               })}
             </Text>
             {isCheckedDocuments ? (

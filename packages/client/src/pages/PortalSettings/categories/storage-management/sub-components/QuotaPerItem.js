@@ -110,7 +110,7 @@ const QuotaPerItemComponent = (props) => {
           {type === "user"
             ? t("UserDefaultQuotaDescription", {
                 productName: t("Common:ProductName"),
-                sectionName: t("Common:MyFilesSection"),
+                sectionName: t("Common:MyDocuments"),
               })
             : t("SetDefaultRoomQuota", {
                 productName: t("Common:ProductName"),

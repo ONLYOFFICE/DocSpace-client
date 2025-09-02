@@ -3,7 +3,7 @@
   "content": "Manage links",
   "content_en_sha1_hash": "e5e6400f20a7240845599cb3f3ae314adf5c03bd",
   "created_at": "2025-08-26T11:14:58.297Z",
-  "updated_at": "2025-09-01T11:05:24.393Z",
+  "updated_at": "2025-09-02T07:59:28.677Z",
   "comment": {
     "text": "This key is used for a button label that allows users to manage links. It appears as part of a list of options, likely within a settings or sharing context. Translators should ensure the meaning accurately reflects link management functionality.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1967,
+      "line_number": 1968,
       "context": "disabled: !item.canShare,\n },\n {\n id: \"option_manage-links\",\n key: \"manage-links\",\n label: t(\"Common:ManageLinks\"),\n icon: SettingsReactSvgUrl,\n onClick: () => this.onClickShare(item),\n disabled: !item.canShare,\n },\n ...versionActions,",
       "module": "/packages/client"
     }

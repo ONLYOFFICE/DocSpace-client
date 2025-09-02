@@ -26,6 +26,8 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+import { useTranslation } from "react-i18next";
+
 import { Text } from "@docspace/shared/components/text";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import type { TAiProvider } from "@docspace/shared/api/ai/types";
@@ -41,27 +43,29 @@ type AiProviderTileProps = {
   item: TAiProvider;
 };
 
-const getContextOptions = () => {
-  return [
-    {
-      key: "settings",
-      label: "Common:Settings",
-      icon: SettingsIcon,
-      onClick: () => {},
-    },
-    {
-      key: "delete",
-      label: "Common:Delete",
-      onClick: () => {},
-      icon: CatalogTrashReactSvgUrl,
-    },
-  ];
-};
-
 export const AiProviderTile = ({ item }: AiProviderTileProps) => {
+  const { t } = useTranslation("Common");
   const { isBase } = useTheme();
+
   const icon = getAiProviderIcon(item.type, isBase) ?? "";
   const companyLabel = getAiProviderLabel(item.type);
+
+  const getContextOptions = () => {
+    return [
+      {
+        key: "settings",
+        label: t("Common:Settings"),
+        icon: SettingsIcon,
+        onClick: () => {},
+      },
+      {
+        key: "delete",
+        label: t("Common:Delete"),
+        onClick: () => {},
+        icon: CatalogTrashReactSvgUrl,
+      },
+    ];
+  };
 
   return (
     <AiTile icon={icon}>

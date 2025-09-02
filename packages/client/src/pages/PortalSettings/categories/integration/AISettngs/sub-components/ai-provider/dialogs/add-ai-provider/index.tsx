@@ -28,6 +28,7 @@
 
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
 
 import {
   ModalDialog,
@@ -43,39 +44,96 @@ import {
 } from "@docspace/shared/components/text-input";
 import { ProviderType } from "@docspace/shared/api/ai/enums";
 import { getAiProviderLabel } from "@docspace/shared/utils";
+import {
+  TCreateAiProvider,
+  type TProviderTypeWithUrl,
+} from "@docspace/shared/api/ai/types";
+import { TData, toastr } from "@docspace/shared/components/toast";
+
+import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
 import styles from "./AddAIProviderDialog.module.scss";
 
 type AddAIProviderDialogProps = {
   onClose: () => void;
+  aiProviderTypesWithUrls: TProviderTypeWithUrl[];
+  addAIProvider?: AISettingsStore["addAIProvider"];
 };
 
 const providerTypes: TOption[] = [
-  { key: ProviderType.OpenAi, label: getAiProviderLabel(ProviderType.OpenAi) },
   {
-    key: ProviderType.TogetherAi,
-    label: getAiProviderLabel(ProviderType.TogetherAi),
-  },
-
-  {
-    key: ProviderType.OpenAiCompatible,
-    label: getAiProviderLabel(ProviderType.OpenAiCompatible),
+    key: ProviderType.OpenAi,
+    label: getAiProviderLabel(ProviderType.OpenAi),
   },
   {
     key: ProviderType.Anthropic,
     label: getAiProviderLabel(ProviderType.Anthropic),
   },
+  {
+    key: ProviderType.TogetherAi,
+    label: getAiProviderLabel(ProviderType.TogetherAi),
+  },
+  {
+    key: ProviderType.OpenAiCompatible,
+    label: getAiProviderLabel(ProviderType.OpenAiCompatible),
+  },
 ];
 
-export const AddAIProviderDialog = ({ onClose }: AddAIProviderDialogProps) => {
+const getURLByProviderType = (
+  type: ProviderType,
+  aiProviderTypesWithUrls: TProviderTypeWithUrl[],
+) => {
+  return aiProviderTypesWithUrls.find((item) => item.type === type)?.url || "";
+};
+
+const AddAIProviderDialogComponent = ({
+  onClose,
+  aiProviderTypesWithUrls,
+  addAIProvider,
+}: AddAIProviderDialogProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
   const [selectedOption, setSelectedOption] = useState(providerTypes[0]);
   const [providerTitle, setProviderTitle] = useState("");
   const [providerKey, setProviderKey] = useState("");
-  const [providerUrl, setProviderUrl] = useState("");
+  const [providerUrl, setProviderUrl] = useState(
+    getURLByProviderType(
+      selectedOption.key as ProviderType,
+      aiProviderTypesWithUrls,
+    ),
+  );
+  const [isRequestRunning, setIsRequestRunning] = useState(false);
 
   const canSubmit =
     providerTitle.trim().length > 0 && providerUrl.trim().length > 0;
+
+  const onSelectProvider = (option: TOption) => {
+    setSelectedOption(option);
+    setProviderUrl(
+      getURLByProviderType(option.key as ProviderType, aiProviderTypesWithUrls),
+    );
+  };
+
+  const onSubmit = async () => {
+    setIsRequestRunning(true);
+
+    const providerData: TCreateAiProvider = {
+      key: providerKey,
+      title: providerTitle,
+      type: selectedOption.key as ProviderType,
+      url: providerUrl,
+    };
+
+    try {
+      await addAIProvider?.(providerData);
+
+      toastr.success(t("AISettings:ProviderAddedSuccess"));
+      onClose();
+    } catch (e) {
+      toastr.error(e as TData);
+    } finally {
+      setIsRequestRunning(false);
+    }
+  };
 
   return (
     <ModalDialog
@@ -97,9 +155,10 @@ export const AddAIProviderDialog = ({ onClose }: AddAIProviderDialogProps) => {
             <ComboBox
               options={providerTypes}
               selectedOption={selectedOption}
-              onSelect={(option) => setSelectedOption(option)}
+              onSelect={onSelectProvider}
               scaled
               scaledOptions
+              isDisabled={isRequestRunning}
             />
           </FieldContainer>
           <FieldContainer
@@ -116,6 +175,7 @@ export const AddAIProviderDialog = ({ onClose }: AddAIProviderDialogProps) => {
               onChange={(e) => setProviderTitle(e.target.value)}
               scale
               placeholder={t("AISettings:EnterLabel")}
+              isDisabled={isRequestRunning}
             />
           </FieldContainer>
 
@@ -133,6 +193,7 @@ export const AddAIProviderDialog = ({ onClose }: AddAIProviderDialogProps) => {
               onChange={(e) => setProviderUrl(e.target.value)}
               scale
               placeholder={t("AISettings:EnterURL")}
+              isDisabled={isRequestRunning}
             />
           </FieldContainer>
           <FieldContainer
@@ -148,6 +209,7 @@ export const AddAIProviderDialog = ({ onClose }: AddAIProviderDialogProps) => {
               onChange={(e) => setProviderKey(e.target.value)}
               scale
               placeholder={t("AISettings:EnterKey")}
+              isDisabled={isRequestRunning}
             />
           </FieldContainer>
         </div>
@@ -159,8 +221,8 @@ export const AddAIProviderDialog = ({ onClose }: AddAIProviderDialogProps) => {
           size={ButtonSize.normal}
           label={t("Common:AddButton")}
           scale
-          // onClick={onSubmitAction}
-          // isLoading={loading}
+          onClick={onSubmit}
+          isLoading={isRequestRunning}
           isDisabled={!canSubmit}
         />
         <Button
@@ -168,9 +230,17 @@ export const AddAIProviderDialog = ({ onClose }: AddAIProviderDialogProps) => {
           label={t("Common:CancelButton")}
           scale
           onClick={onClose}
-          // isDisabled={loading}
+          isDisabled={isRequestRunning}
         />
       </ModalDialog.Footer>
     </ModalDialog>
   );
 };
+
+export const AddAIProviderDialog = inject(({ aiSettingsStore }: TStore) => {
+  const { addAIProvider } = aiSettingsStore;
+
+  return {
+    addAIProvider,
+  };
+})(observer(AddAIProviderDialogComponent));

@@ -26,35 +26,30 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { useEffect, useState } from "react";
+import { makeAutoObservable } from "mobx";
 
-import type { TAiProvider } from "@docspace/shared/api/ai/types";
-import { getProviders } from "@docspace/shared/api/ai";
+import {
+  type TAiProvider,
+  TCreateAiProvider,
+} from "@docspace/shared/api/ai/types";
+import { createProvider } from "@docspace/shared/api/ai";
 
-export const useFetchAiProviders = () => {
-  const [aiProviders, setAiProviders] = useState<TAiProvider[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+class AISettingsStore {
+  aiProviders: TAiProvider[] = [];
 
-  useEffect(() => {
-    const fetchProvidersList = async () => {
-      setIsLoading(true);
+  constructor() {
+    makeAutoObservable(this);
+  }
 
-      try {
-        const res = await getProviders();
-
-        setAiProviders(res);
-      } catch (e) {
-        console.error(e);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchProvidersList();
-  }, []);
-
-  return {
-    aiProviders,
-    isAiProvidersLoading: isLoading,
+  setAIProviders = (providers: TAiProvider[]) => {
+    this.aiProviders = providers;
   };
-};
+
+  addAIProvider = async (provider: TCreateAiProvider) => {
+    const newProvider = await createProvider(provider);
+
+    this.aiProviders.push(newProvider);
+  };
+}
+
+export default AISettingsStore;

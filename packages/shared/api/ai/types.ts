@@ -27,19 +27,12 @@
 import { TCreatedBy } from "../../types";
 import { ContentType, ProviderType, RoleType, ServerType } from "./enums";
 
-export type TCreateAiProvider =
-  | {
-      type: ProviderType;
-      title: string;
-      key: string;
-      url?: undefined;
-    }
-  | {
-      type: ProviderType.OpenAiCompatible;
-      title: string;
-      key: string;
-      url: string;
-    };
+export type TCreateAiProvider = {
+  type: ProviderType;
+  title: string;
+  key: string;
+  url: string;
+};
 
 export type TAiProvider = {
   id: number;
@@ -57,6 +50,8 @@ export type TUpdateAiProviders = {
 };
 
 export type TDeleteAiProviders = { ids: TAiProvider["id"][] };
+
+export type TProviderTypeWithUrl = Pick<TAiProvider, "type" | "url">;
 
 export type TModel = {
   providerId: TAiProvider["id"];

@@ -26,14 +26,18 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Heading, HeadingLevel } from "@docspace/shared/components/heading";
 import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
-import type { TAiProvider } from "@docspace/shared/api/ai/types";
+import type {
+  TAiProvider,
+  TProviderTypeWithUrl,
+} from "@docspace/shared/api/ai/types";
+import { getAvailableProviderUrls } from "@docspace/shared/api/ai";
 
 import styles from "../../AISettings.module.scss";
 import { AiProviderTile } from "../tiles/ai-provider-tile";
@@ -43,9 +47,22 @@ export const AiProvider = ({ aiProviders }: { aiProviders: TAiProvider[] }) => {
   const { t } = useTranslation(["Common", "AISettings"]);
   const [addAIProviderDialogVisible, setAddAIProviderDialogVisible] =
     useState(false);
+  const [aiProviderTypesWithUrls, setAiProviderTypesWithUrls] = useState<
+    TProviderTypeWithUrl[]
+  >([]);
 
   const showAddProviderDialog = () => setAddAIProviderDialogVisible(true);
   const hideAddProviderDialog = () => setAddAIProviderDialogVisible(false);
+
+  useEffect(() => {
+    const init = async () => {
+      const res = await getAvailableProviderUrls?.();
+
+      setAiProviderTypesWithUrls(res);
+    };
+
+    init();
+  }, []);
 
   return (
     <div className={styles.aiProvider}>
@@ -90,7 +107,10 @@ export const AiProvider = ({ aiProviders }: { aiProviders: TAiProvider[] }) => {
       </div>
 
       {addAIProviderDialogVisible ? (
-        <AddAIProviderDialog onClose={hideAddProviderDialog} />
+        <AddAIProviderDialog
+          onClose={hideAddProviderDialog}
+          aiProviderTypesWithUrls={aiProviderTypesWithUrls}
+        />
       ) : null}
     </div>
   );

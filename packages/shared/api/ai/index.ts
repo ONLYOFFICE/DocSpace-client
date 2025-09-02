@@ -41,6 +41,7 @@ import {
   TMCPTool,
   TServer,
   TVectorizeOperation,
+  type TProviderTypeWithUrl,
 } from "./types";
 
 const baseUrl = "/ai";
@@ -83,6 +84,15 @@ export const deleteProvider = async (data: TDeleteAiProviders) => {
     url: `${baseUrl}/providers`,
     data,
   })) as TDeleteAiProviders;
+
+  return res;
+};
+
+export const getAvailableProviderUrls = async () => {
+  const res = (await request({
+    method: "get",
+    url: `${baseUrl}/providers/available`,
+  })) as TProviderTypeWithUrl[];
 
   return res;
 };

@@ -33,5 +33,6 @@
   "DeleteServerDescription": "If you delete this server, all active consents and authorization will be revoked. If a user tries to open the consent screen for this app, an error will occur in the document space and the user will be redirected to the specified redirect URL.",
   "Provider": "Provider",
   "ProviderURL": "URL",
-  "ProviderKey": "Key"
+  "ProviderKey": "Key",
+  "ProviderAddedSuccess": "Provider added successfully"
 }

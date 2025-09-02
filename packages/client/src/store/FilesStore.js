@@ -1863,9 +1863,6 @@ class FilesStore {
           }
         }
 
-        this.clientLoadingStore.setIsSectionHeaderLoading(false);
-        this.clientLoadingStore.setIsSectionFilterLoading(false);
-
         const selectedFolder = {
           selectedFolder: { ...this.selectedFolderStore },
         };
@@ -1950,6 +1947,9 @@ class FilesStore {
       })
       .finally(() => {
         this.setIsLoadedFetchFiles(true);
+
+        this.clientLoadingStore.setIsSectionHeaderLoading(false);
+        this.clientLoadingStore.setIsSectionFilterLoading(false);
 
         if (window?.DocSpace?.location?.state?.highlightFileId) {
           this.setHighlightFile({
@@ -2093,9 +2093,6 @@ class FilesStore {
 
           setInfoPanelSelectedRoom(null);
 
-          this.clientLoadingStore.setIsSectionHeaderLoading(false);
-          this.clientLoadingStore.setIsSectionFilterLoading(false);
-
           const selectedFolder = {
             selectedFolder: { ...this.selectedFolderStore },
           };
@@ -2133,6 +2130,10 @@ class FilesStore {
           } else {
             toastr.error(err);
           }
+        })
+        .finally(() => {
+          this.clientLoadingStore.setIsSectionHeaderLoading(false);
+          this.clientLoadingStore.setIsSectionFilterLoading(false);
         });
 
     return request();

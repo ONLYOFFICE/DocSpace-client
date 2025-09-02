@@ -6,10 +6,15 @@ import { TwoFactorCampaignBanner } from "@docspace/shared/components/two-factor-
 type LoginCampaignProps = {
   currentColorScheme: TColorScheme;
   tfaEnabled: boolean;
+  canManageTfa: boolean;
 };
 
 const LoginCampaignComponent = (props: LoginCampaignProps) => {
-  const { currentColorScheme, tfaEnabled } = props;
+  const { currentColorScheme, tfaEnabled, canManageTfa } = props;
+
+  if (!canManageTfa) {
+    return null;
+  }
 
   return (
     <TwoFactorCampaignBanner
@@ -20,15 +25,21 @@ const LoginCampaignComponent = (props: LoginCampaignProps) => {
   );
 };
 
-const LoginCampaign = inject(({ tfaStore, settingsStore }: TStore) => {
-  const { currentColorScheme } = settingsStore;
-  const { tfaSettings } = tfaStore || {};
-  const tfaEnabled = tfaSettings && tfaSettings !== "none";
+const LoginCampaign = inject(
+  ({ tfaStore, settingsStore, userStore }: TStore) => {
+    const { currentColorScheme } = settingsStore;
+    const { tfaSettings } = tfaStore || {};
+    const tfaEnabled = tfaSettings && tfaSettings !== "none";
 
-  return {
-    currentColorScheme,
-    tfaEnabled,
-  };
-})(observer(LoginCampaignComponent)) as unknown as React.ComponentType;
+    const { user } = userStore;
+    const canManageTfa = user?.isOwner || user?.isAdmin;
+
+    return {
+      currentColorScheme,
+      tfaEnabled,
+      canManageTfa,
+    };
+  },
+)(observer(LoginCampaignComponent)) as unknown as React.ComponentType;
 
 export default LoginCampaign;

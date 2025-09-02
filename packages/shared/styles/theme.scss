@@ -2828,6 +2828,22 @@
 }
 
 .light {
+  --template-gallery-header-border: #{$gray-light-mid};
+
+  --template-tile-border-hover: #{$light-blue-main};
+  --template-tile-text: #{$gray-text};
+  --template-tile-text-hover: #{$light-blue-main};
+
+  --template-tile-background: #{$white};
+  --template-tile-background-active: #{$light-gray-hover};
+  --template-tile-text-active: #{$gray-text};
+  --template-tile-container-border: #{$light-gray-selected};
+
+  --template-tile-icon-background: #{$white};
+  --template-tile-icon-box-shadow: #{$box-shadow-dark-color};
+
+  --template-tile-icon-fill: #{$gray};
+
   --submit-gallery-tile-border: var(--color-scheme-main-accent);
   --submit-gallery-tile-color-close-icon-fill: #{$light-gray-dark};
   --submit-gallery-tile-background: #{$white};
@@ -2835,9 +2851,27 @@
   --submit-gallery-tile-text: var(--color-scheme-main-accent);
   --submit-gallery-tile-text-body: #{$gray-text};
   --submit-gallery-tile-text-background: #{$white};
+
+  --submit-gallery-tile-text-background: #{$white};
 }
 
 .dark {
+  --template-gallery-header-border: #{$gray-dark-strong};
+
+  --template-tile-border-hover: #{$white};
+  --template-tile-text: #{$dark-gray-dark};
+  --template-tile-text-hover: #{$white};
+
+  --template-tile-background: #{$dark-gray-light};
+  --template-tile-background-active: #{$black};
+  --template-tile-text-active: #{$dark-gray-dark};
+  --template-tile-container-border: #{$gray-dark-strong};
+
+  --template-tile-icon-background: #{$black};
+  --template-tile-icon-box-shadow: #{$box-shadow-black-color};
+
+  --template-tile-icon-fill: #{$gray-dark};
+
   --submit-gallery-tile-border: #{$white};
   --submit-gallery-tile-color-close-icon-fill: #{$dark-gray-dark};
   --submit-gallery-tile-background: #{$dark-gray-light};

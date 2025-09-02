@@ -69,7 +69,10 @@
   line-height: 28px;
 
   padding: 12px 0 13px 0px;
-  border-bottom: 1px solid #{colors.$gray-light-mid};
+}
+
+.header {
+  border-bottom: 1px solid var(--template-gallery-header-border);
 }
 
 .containerMobile {

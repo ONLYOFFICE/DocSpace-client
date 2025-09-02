@@ -40,13 +40,13 @@ import { isMobileDevice, isBetaLanguage } from "@docspace/shared/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
-import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import LoaderCustomization from "../sub-components/loaderCustomization";
 import { StyledSettingsComponent } from "./StyledSettings";
 import checkScrollSettingsBlock from "../utils";
 import useCommon from "../useCommon";
+import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 
 import BetaBadge from "../../../../../components/BetaBadgeWrapper";
 
@@ -86,34 +86,32 @@ const LanguageAndTimeZoneComponent = (props) => {
     portalTimeZoneId,
     isLoaded,
     cultures,
-    getPortalCultures,
     portalLanguage,
     tReady,
     setIsLoadedLngTZSettings,
     t,
     timezone,
     languageAndTimeZoneSettingsUrl,
-    initSettings,
     isLoadedPage,
     currentColorScheme,
     deviceType,
-    setIsLoaded,
     loadBaseInfo,
+    common,
+    settingsStore,
   } = props;
 
   const isMobileView = deviceType === DeviceType.mobile;
 
-  const { getCommonInitialValue, cultureNames } = useCommon({
+  const defaultProps = createDefaultHookSettingsProps({
     loadBaseInfo,
     isMobileView,
-    getGreetingSettingsIsDefault: () => {},
-    getBrandName: () => {},
-    initWhiteLabel: () => {},
-    setIsLoaded,
-    isLoaded,
-    cultures,
-    getPortalCultures: getPortalCultures,
+    settingsStore,
+    common,
   });
+
+  const { getCommonInitialValue, cultureNames } = useCommon(
+    defaultProps.common,
+  );
 
   const navigate = useNavigate();
 
@@ -369,8 +367,6 @@ const LanguageAndTimeZoneComponent = (props) => {
     setIsLoadedLngTZSettings,
 
     timezone,
-
-    initSettings,
   ]);
 
   const onSelectLanguage = (selectedLanguage) => {
@@ -611,11 +607,12 @@ export const LanguageAndTimeZoneSettings = inject(
       setIsLoadedLngTZSettings,
       cultures,
       getPortalCultures,
-      initSettings,
       currentColorScheme,
       languageAndTimeZoneSettingsUrl,
       deviceType,
       setIsLoaded,
+      common,
+      settingsStore,
       loadBaseInfo: async (page) => {
         await initSettings(page);
       },

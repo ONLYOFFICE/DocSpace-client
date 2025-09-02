@@ -25,23 +25,48 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect, useState } from "react";
-import { Tabs } from "@docspace/shared/components/tabs";
+import { inject, observer } from "mobx-react";
 import { useLocation, useNavigate } from "react-router";
 import { withTranslation } from "react-i18next";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import config from "PACKAGE_FILE";
-import { inject, observer } from "mobx-react";
-import withLoading from "SRC_DIR/HOCs/withLoading";
-import { DeviceType } from "@docspace/shared/enums";
+
+import { Tabs } from "@docspace/shared/components/tabs";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
+import { DeviceType } from "@docspace/shared/enums";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import type { TTranslation } from "@docspace/shared/types";
+
+import config from "PACKAGE_FILE";
+import withLoading from "SRC_DIR/HOCs/withLoading";
+import BrandingStore from "SRC_DIR/store/portal-settings/BrandingStore";
+import CommonStore from "SRC_DIR/store/CommonStore";
+
 import Customization from "./customization";
 import Branding from "./branding";
 import Appearance from "./appearance";
 import LoaderTabs from "./sub-components/loaderTabs";
-import { resetSessionStorage } from "../../utils";
 import useCommon from "./useCommon";
+import { resetSessionStorage } from "../../utils";
+import { createDefaultHookSettingsProps } from "../../utils/createDefaultHookSettingsProps";
 
-const TabsCommon = (props) => {
+type TabsCommonProps = {
+  t: TTranslation;
+  tReady: boolean;
+  setIsLoadedSubmenu: (value: boolean) => void;
+  loadBaseInfo: (page: string) => Promise<void>;
+  isLoadedSubmenu: boolean;
+  currentDeviceType: DeviceType;
+  isMobileView: boolean;
+  isCommunity: boolean;
+  getGreetingSettingsIsDefault: () => Promise<void>;
+  setIsLoaded: (value: boolean) => void;
+  isLoaded: boolean;
+  brandingStore: BrandingStore;
+  settingsStore: SettingsStore;
+  common: CommonStore;
+};
+
+const TabsCommon = (props: TabsCommonProps) => {
   const {
     t,
     tReady,
@@ -51,26 +76,26 @@ const TabsCommon = (props) => {
     currentDeviceType,
     isMobileView,
     isCommunity,
-    getGreetingSettingsIsDefault,
-    getBrandName,
-    initWhiteLabel,
-    setIsLoaded,
-    isLoaded,
+    brandingStore,
+    settingsStore,
+    common,
   } = props;
   const location = useLocation();
   const navigate = useNavigate();
 
-  const [currentTabId, setCurrentTabId] = useState();
+  const [currentTabId, setCurrentTabId] = useState<string>("");
 
-  const { getCustomizationData, getBrandingData } = useCommon({
+  const defaultProps = createDefaultHookSettingsProps({
     loadBaseInfo,
     isMobileView,
-    getGreetingSettingsIsDefault,
-    getBrandName,
-    initWhiteLabel,
-    setIsLoaded,
-    isLoaded,
+    settingsStore,
+    brandingStore,
+    common,
   });
+
+  const { getCustomizationData, getBrandingData } = useCommon(
+    defaultProps.common,
+  );
 
   const data = [
     {
@@ -102,21 +127,6 @@ const TabsCommon = (props) => {
     return currentTab && data.length ? currentTab.id : data[0].id;
   };
 
-  const load = async () => {
-    const tabId = getCurrentTabId();
-    setCurrentTabId(tabId);
-
-    // await loadBaseInfo(
-    //   !isMobileView
-    //     ? tabId === "general"
-    //       ? "customization"
-    //       : tabId === "branding"
-    //         ? "branding"
-    //         : "appearance"
-    //     : "customization",
-    // );
-  };
-
   useEffect(() => {
     return () => {
       resetSessionStorage();
@@ -126,11 +136,12 @@ const TabsCommon = (props) => {
   useEffect(() => {
     if (tReady) setIsLoadedSubmenu(true);
     if (isLoadedSubmenu) {
-      load();
+      const tabId = getCurrentTabId();
+      setCurrentTabId(tabId);
     }
   }, [tReady, isLoadedSubmenu]);
 
-  const onSelect = (e) => {
+  const onSelect = (e: { id: string }) => {
     navigate(
       combineUrl(
         window.ClientConfig?.proxy?.url,
@@ -155,36 +166,30 @@ const TabsCommon = (props) => {
 };
 
 export const Component = inject(
-  ({ settingsStore, common, currentTariffStatusStore, brandingStore }) => {
-    const {
-      isLoaded,
-      setIsLoadedSubmenu,
-      initSettings,
-      isLoadedSubmenu,
-      getGreetingSettingsIsDefault,
-      setIsLoaded,
-    } = common;
-
-    const { getBrandName, initWhiteLabel } = brandingStore;
+  ({
+    settingsStore,
+    common,
+    currentTariffStatusStore,
+    brandingStore,
+  }: TStore) => {
+    const { setIsLoadedSubmenu, initSettings, isLoadedSubmenu } = common;
 
     const { isCommunity } = currentTariffStatusStore;
-    const currentDeviceType = settingsStore.currentDeviceType;
+    const currentDeviceType = settingsStore.currentDeviceType as DeviceType;
 
     const isMobileView = settingsStore.deviceType === DeviceType.mobile;
     return {
-      loadBaseInfo: async (page) => {
+      loadBaseInfo: async (page: string) => {
         await initSettings(page);
       },
-      isLoaded,
       setIsLoadedSubmenu,
       isLoadedSubmenu,
       currentDeviceType,
       isMobileView,
       isCommunity,
-      getGreetingSettingsIsDefault,
-      getBrandName,
-      initWhiteLabel,
-      setIsLoaded,
+      brandingStore,
+      settingsStore,
+      common,
     };
   },
 )(withLoading(withTranslation("Settings")(observer(TabsCommon))));

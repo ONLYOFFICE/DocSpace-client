@@ -42,6 +42,8 @@ import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStor
 import checkScrollSettingsBlock from "../utils";
 import { StyledSettingsComponent } from "./StyledSettings";
 import LoaderCustomization from "../sub-components/loaderCustomization";
+import useCommon from "../useCommon";
+import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 
 let greetingTitleFromSessionStorage = "";
 let greetingTitleDefaultFromSessionStorage = "";
@@ -63,9 +65,21 @@ const WelcomePageSettingsComponent = (props) => {
     getGreetingSettingsIsDefault,
     currentColorScheme,
     welcomePageSettingsUrl,
+    loadBaseInfo,
+    common,
+    settingsStore,
   } = props;
 
   const navigate = useNavigate();
+
+  const defaultProps = createDefaultHookSettingsProps({
+    loadBaseInfo,
+    isMobileView,
+    settingsStore,
+    common,
+  });
+
+  const { getCommonInitialValue } = useCommon(defaultProps.common);
 
   const [state, setState] = React.useState({
     isLoading: false,
@@ -148,6 +162,8 @@ const WelcomePageSettingsComponent = (props) => {
     );
 
     setDocumentTitle(t("CustomTitlesWelcome"));
+
+    getCommonInitialValue();
 
     const greetingTitle =
       greetingTitleFromSessionStorage === null ||
@@ -408,6 +424,7 @@ export const WelcomePageSettings = inject(
       setIsLoaded,
       greetingSettingsIsDefault,
       getGreetingSettingsIsDefault,
+      initSettings,
     } = common;
 
     return {
@@ -422,6 +439,11 @@ export const WelcomePageSettings = inject(
       setIsLoaded,
       currentColorScheme,
       welcomePageSettingsUrl,
+      common,
+      settingsStore,
+      loadBaseInfo: async (page) => {
+        await initSettings(page);
+      },
     };
   },
 )(

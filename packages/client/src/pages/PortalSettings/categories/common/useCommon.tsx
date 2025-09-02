@@ -33,16 +33,16 @@ import { mapCulturesToArray } from "@docspace/shared/utils/common";
 import i18n from "SRC_DIR/i18n";
 
 export type UseCommonProps = {
-  loadBaseInfo: (page: string) => Promise<void>;
-  isMobileView: boolean;
-  getGreetingSettingsIsDefault: CommonStore["getGreetingSettingsIsDefault"];
-  getBrandName: BrandingStore["getBrandName"];
-  initWhiteLabel: BrandingStore["initWhiteLabel"];
-  setIsLoaded: CommonStore["setIsLoaded"];
-  isLoaded: CommonStore["isLoaded"];
+  loadBaseInfo?: (page: string) => Promise<void>;
+  isMobileView?: boolean;
+  getGreetingSettingsIsDefault?: CommonStore["getGreetingSettingsIsDefault"];
+  getBrandName?: BrandingStore["getBrandName"];
+  initWhiteLabel?: BrandingStore["initWhiteLabel"];
+  setIsLoaded?: CommonStore["setIsLoaded"];
+  isLoaded?: CommonStore["isLoaded"];
 
-  cultures: SettingsStore["cultures"];
-  getPortalCultures: SettingsStore["getPortalCultures"];
+  cultures?: SettingsStore["cultures"];
+  getPortalCultures?: SettingsStore["getPortalCultures"];
 };
 
 const useCommon = ({
@@ -63,31 +63,39 @@ const useCommon = ({
 
   const getCustomizationData = useCallback(
     async (
-      page?: "language-and-time-zone" | "dns-settings" | "configure-deep-link",
+      page?:
+        | "language-and-time-zone"
+        | "dns-settings"
+        | "configure-deep-link"
+        | "welcome-page-settings",
     ) => {
-      // if (isLoaded) return;
+      if (isLoaded) return;
 
+      console.log("page", page);
       if (isMobileView && page) {
-        await loadBaseInfo(page);
-      } else {
-        await loadBaseInfo("general");
+        await loadBaseInfo?.(page);
+        if (page === "welcome-page-settings") {
+          await getGreetingSettingsIsDefault?.();
+        }
+      } else if (!isMobileView && !page) {
+        await loadBaseInfo?.("general");
+        await getGreetingSettingsIsDefault?.();
       }
-      // setIsLoaded(true);
-
-      await getGreetingSettingsIsDefault();
-      await getPortalCultures();
+      setIsLoaded?.(true);
     },
     [
       isMobileView,
       loadBaseInfo,
       getGreetingSettingsIsDefault,
       getPortalCultures,
+      setIsLoaded,
+      isLoaded,
     ],
   );
 
   const getBrandingData = useCallback(async () => {
-    getBrandName();
-    initWhiteLabel();
+    getBrandName?.();
+    initWhiteLabel?.();
   }, [getBrandName, initWhiteLabel]);
 
   const cultureNames = useMemo(
@@ -100,15 +108,24 @@ const useCommon = ({
     if (window.location.pathname.includes("language-and-time-zone"))
       actions.push(getCustomizationData("language-and-time-zone"));
 
+    if (window.location.pathname.includes("welcome-page-settings"))
+      actions.push(getCustomizationData("welcome-page-settings"));
+
     if (window.location.pathname.includes("dns-settings"))
       actions.push(getCustomizationData("dns-settings"));
+
+    if (window.location.pathname.includes("brand-name"))
+      actions.push(getBrandName?.());
+
+    if (window.location.pathname.includes("white-label"))
+      actions.push(initWhiteLabel?.());
 
     if (window.location.pathname.includes("configure-deep-link"))
       actions.push(getCustomizationData("configure-deep-link"));
 
-    if (inTabGeneral) actions.push(getCustomizationData());
+    if (inTabGeneral && !isMobileView) actions.push(getCustomizationData());
 
-    if (inTabBranding) actions.push(getBrandingData());
+    if (inTabBranding && !isMobileView) actions.push(getBrandingData());
 
     await Promise.all(actions);
   }, [getCustomizationData, getBrandingData]);

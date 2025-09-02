@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -32,8 +32,11 @@ import { BrandName as BrandNamePage } from "@docspace/shared/pages/Branding/Bran
 import { toastr } from "@docspace/shared/components/toast";
 import { isManagement } from "@docspace/shared/utils/common";
 import { BRAND_NAME_REGEX } from "@docspace/shared/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 import LoaderBrandName from "../sub-components/loaderBrandName";
+import useCommon from "../useCommon";
+import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 
 const BrandNameComponent = (props) => {
   const {
@@ -47,9 +50,24 @@ const BrandNameComponent = (props) => {
     isBrandNameLoaded,
     setBrandName,
     saveBrandName,
+    brandingStore,
   } = props;
+
+  const isMobileView = deviceType === DeviceType.mobile;
+
+  const defaultProps = createDefaultHookSettingsProps({
+    isMobileView,
+    brandingStore,
+  });
+
+  const { getCommonInitialValue } = useCommon(defaultProps.common);
+
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (isMobileView) getCommonInitialValue();
+  }, []);
 
   const onSave = async (data) => {
     try {
@@ -129,6 +147,7 @@ export const BrandName = inject(
       isBrandNameLoaded,
       setBrandName,
       saveBrandName,
+      brandingStore,
     };
   },
 )(

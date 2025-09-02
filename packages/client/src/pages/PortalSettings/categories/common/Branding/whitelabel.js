@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -32,9 +32,12 @@ import { useResponsiveNavigation } from "@docspace/shared/hooks/useResponsiveNav
 import { WhiteLabel as WhiteLabelPage } from "@docspace/shared/pages/Branding/WhiteLabel";
 import { toastr } from "@docspace/shared/components/toast";
 import { isManagement } from "@docspace/shared/utils/common";
+import { DeviceType } from "@docspace/shared/enums";
 
 import LoaderWhiteLabel from "../sub-components/loaderWhiteLabel";
 import { brandingRedirectUrl } from "./constants";
+import useCommon from "../useCommon";
+import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 
 const WhiteLabelComponent = (props) => {
   const {
@@ -51,9 +54,23 @@ const WhiteLabelComponent = (props) => {
     setLogoUrls,
     saveWhiteLabelLogos,
     resetWhiteLabelLogos,
+    brandingStore,
   } = props;
+  const isMobileView = deviceType === DeviceType.mobile;
+
+  const defaultProps = createDefaultHookSettingsProps({
+    isMobileView,
+    brandingStore,
+  });
+
+  const { getCommonInitialValue } = useCommon(defaultProps.common);
+
   const [isSaving, setIsSaving] = useState(false);
   const showAbout = standalone && isManagement() && displayAbout;
+
+  useEffect(() => {
+    if (isMobileView) getCommonInitialValue();
+  }, []);
 
   useResponsiveNavigation({
     redirectUrl: brandingRedirectUrl,
@@ -151,6 +168,7 @@ export const WhiteLabel = inject(
       saveWhiteLabelLogos,
       saveBrandName,
       resetWhiteLabelLogos,
+      brandingStore,
     };
   },
 )(

@@ -800,6 +800,12 @@ export const sortInDisplayOrder = (folders: TGetFolder[]) => {
   );
   if (myFolder) sorted.push(myFolder);
 
+  const shareFolder = find(
+    folders,
+    (folder) => folder.current.rootFolderType === FolderType.SHARE,
+  );
+  if (shareFolder) sorted.push(shareFolder);
+
   const shareRoom = find(
     folders,
     (folder) => folder.current.rootFolderType === FolderType.Rooms,
@@ -811,12 +817,6 @@ export const sortInDisplayOrder = (folders: TGetFolder[]) => {
     (folder) => folder.current.rootFolderType === FolderType.Archive,
   );
   if (archiveRoom) sorted.push(archiveRoom);
-
-  const shareFolder = find(
-    folders,
-    (folder) => folder.current.rootFolderType === FolderType.SHARE,
-  );
-  if (shareFolder) sorted.push(shareFolder);
 
   const favoritesFolder = find(
     folders,

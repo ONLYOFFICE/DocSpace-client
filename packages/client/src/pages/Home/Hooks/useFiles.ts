@@ -42,9 +42,13 @@ import {
   RoomSearchArea,
   RoomsType,
 } from "@docspace/shared/enums";
-import { getObjectByLocation } from "@docspace/shared/utils/common";
+import {
+  getObjectByLocation,
+  getCategoryType,
+} from "@docspace/shared/utils/common";
+import type { ValueOf } from "@docspace/shared/types";
 
-import { getCategoryType, getCategoryUrl } from "SRC_DIR/helpers/utils";
+import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import FilesStore from "SRC_DIR/store/FilesStore";
 import MediaViewerDataStore from "SRC_DIR/store/MediaViewerDataStore";
 import OformsStore from "SRC_DIR/store/OformsStore";

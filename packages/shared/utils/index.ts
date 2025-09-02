@@ -27,7 +27,7 @@
 "use client";
 
 import moment from "moment-timezone";
-import { TTranslation, ValueOf } from "../types";
+import { TTranslation } from "../types";
 
 import { isArrayEqual } from "./array";
 import * as email from "./email";
@@ -88,7 +88,6 @@ import {
   FileFillingFormStatus,
   FolderType,
 } from "../enums";
-import { CategoryType } from "../constants";
 import { TFile } from "../api/files/types";
 import { onEdgeScrolling, clearEdgeScrollingTimer } from "./edgeScrolling";
 import type { TRoom } from "../api/rooms/types";
@@ -389,39 +388,4 @@ export const isSystemFolder = (folderType: FolderType) => {
     folderType === FolderType.SubFolderDone ||
     folderType === FolderType.SubFolderInProgress
   );
-};
-
-export const getCategoryType = (location: { pathname: string }) => {
-  let categoryType: ValueOf<typeof CategoryType> = CategoryType.Shared;
-  const { pathname } = location;
-
-  if (pathname.startsWith("/rooms")) {
-    if (pathname.indexOf("personal") > -1) {
-      categoryType = CategoryType.Personal;
-    } else if (pathname.indexOf("shared") > -1) {
-      const regexp = /(rooms)\/shared\/([\d])/;
-
-      categoryType = !regexp.test(location.pathname)
-        ? CategoryType.Shared
-        : CategoryType.SharedRoom;
-    } else if (pathname.indexOf("share") > -1) {
-      categoryType = CategoryType.PublicRoom;
-    } else if (pathname.indexOf("archive") > -1) {
-      categoryType = CategoryType.Archive;
-    }
-  } else if (pathname.startsWith("/favorite")) {
-    categoryType = CategoryType.Favorite;
-  } else if (pathname.startsWith("/recent")) {
-    categoryType = CategoryType.Recent;
-  } else if (pathname.startsWith("/files/trash")) {
-    categoryType = CategoryType.Trash;
-  } else if (pathname.startsWith("/settings")) {
-    categoryType = CategoryType.Settings;
-  } else if (pathname.startsWith("/accounts")) {
-    categoryType = CategoryType.Accounts;
-  } else if (pathname.startsWith("/shared-with-me")) {
-    categoryType = CategoryType.SharedWithMe;
-  }
-
-  return categoryType;
 };

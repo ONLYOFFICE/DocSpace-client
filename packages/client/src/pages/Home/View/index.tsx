@@ -29,7 +29,8 @@ import { inject, observer } from "mobx-react";
 
 import { useLocation } from "react-router";
 
-import { Consumer, getCategoryType } from "@docspace/shared/utils";
+import { getCategoryType } from "@docspace/shared/utils/common";
+import { Consumer } from "@docspace/shared/utils";
 import { Nullable } from "@docspace/shared/types";
 
 import { AnimationEvents } from "@docspace/shared/hooks/useAnimation";

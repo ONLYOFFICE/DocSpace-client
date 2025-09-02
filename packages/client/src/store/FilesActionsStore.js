@@ -81,7 +81,6 @@ import {
   isDesktop,
   isLockedSharedRoom,
   isSystemFolder,
-  getCategoryType,
 } from "@docspace/shared/utils";
 import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
 import {
@@ -100,6 +99,7 @@ import {
   frameCallEvent,
   getConvertedSize,
   getObjectByLocation,
+  getCategoryType,
 } from "@docspace/shared/utils/common";
 import uniqueid from "lodash/uniqueId";
 import FilesFilter from "@docspace/shared/api/files/filter";

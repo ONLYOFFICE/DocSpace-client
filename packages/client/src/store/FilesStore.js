@@ -50,7 +50,6 @@ import {
   isDesktop,
   isMobile,
   isSystemFolder,
-  getCategoryType,
 } from "@docspace/shared/utils";
 import { getViewForCurrentRoom } from "@docspace/shared/utils/getViewForCurrentRoom";
 
@@ -60,6 +59,7 @@ import {
   isPublicRoom,
   getDaysRemaining,
   frameCallEvent,
+  getCategoryType,
 } from "@docspace/shared/utils/common";
 
 import { toastr } from "@docspace/shared/components/toast";

@@ -49,87 +49,47 @@ import useDeveloperTools from "../categories/developer-tools/useDeveloperTools";
 import useDeleteData from "../categories/delete-data/useDeleteData";
 import useCommon from "../categories/common/useCommon";
 import useDataImport from "../categories/data-import/useDataImport";
+import { createDefaultHookSettingsProps } from "../utils/createDefaultHookSettingsProps";
+
+type TView =
+  | "customization"
+  | "security"
+  | "backup"
+  | "restore"
+  | "integration"
+  | "data-import"
+  | "management"
+  | "developer-tools"
+  | "delete-data"
+  | "";
 
 const View = ({
   setIsChangePageRequestRunning,
-
-  // Common hook props
   loadBaseInfo,
   isMobileView,
   getGreetingSettingsIsDefault,
-  getBrandName,
-  initWhiteLabel,
   isLoaded,
   setIsLoaded,
-  getPortalCultures,
-  cultures,
-
-  // Security hook props
   settingsStore,
   tfaStore,
-  getLoginHistory,
-  getLifetimeAuditSettings,
-  getAuditTrail,
-  initSettingsSetup,
-  isInitSetup,
-
-  // Backup hook props
   backupStore,
   treeFoldersStore,
-  language,
-
-  // Integration hook props
-  isSSOAvailable,
   ssoFormStore,
-  updatePlugins,
-  getConsumers,
-  fetchAndSetConsumers,
-  setInitSMTPSettings,
-  getDocumentServiceLocation,
-  loadLDAP,
-  isLdapAvailable,
-
-  // Developer tools hook props
-  getCSPSettings,
-  loadWebhooks,
-  fetchClients,
-  fetchScopes,
-  isInit,
-  setIsInit,
-
-  // Delete data hook props
-  getPortalOwner,
-
-  // Data import hook props
-  isMigrationInit,
-  getMigrationStatus,
-  setUsers,
-  setWorkspace,
-  setMigratingWorkspace,
-  setFiles,
-  setLoadingStatus,
-  setMigrationPhase,
-  setServices,
-  getMigrationList,
-
-  // Storage management props
   init,
+  setup,
+  authStore,
+  currentQuotaStore,
+  pluginStore,
+  filesSettingsStore,
+  webhooksStore,
+  oauthStore,
+  brandingStore,
+  importAccountsStore,
+  ldapStore,
 }: any) => {
   const location = useLocation();
 
-  const [currentView, setCurrentView] = React.useState<
-    | "customization"
-    | "security"
-    | "backup"
-    | "restore"
-    | "integration"
-    | "data-import"
-    | "management"
-    | "developer-tools"
-    | "delete-data"
-    | "payments"
-    | ""
-  >("");
+  const [currentView, setCurrentView] = React.useState<TView>("");
   const [isLoading, setIsLoading] = React.useState(false);
 
   const animationStartedRef = useRef(false);
@@ -146,101 +106,39 @@ const View = ({
   const isDeveloperToolsPage = location.pathname.includes("developer-tools");
   const isDeletePage = location.pathname.includes("delete-data");
 
-  // Initialize useCommon hook with null checks
-  const { getCommonInitialValue } = useCommon({
-    loadBaseInfo: loadBaseInfo || (() => Promise.resolve()),
-    isMobileView: isMobileView || false,
-    getGreetingSettingsIsDefault: getGreetingSettingsIsDefault || (() => {}),
-    getBrandName: getBrandName || (() => {}),
-    initWhiteLabel: initWhiteLabel || (() => {}),
-    setIsLoaded: setIsLoaded || (() => {}),
-    isLoaded: isLoaded || false,
-    cultures: cultures || [],
-    getPortalCultures: getPortalCultures || (() => {}),
+  const safeProps = createDefaultHookSettingsProps({
+    loadBaseInfo,
+    isMobileView,
+    getGreetingSettingsIsDefault,
+    setIsLoaded,
+    isLoaded,
+    settingsStore,
+    tfaStore,
+    backupStore,
+    treeFoldersStore,
+    setup,
+    authStore,
+    currentQuotaStore,
+    ssoFormStore,
+    pluginStore,
+    filesSettingsStore,
+    webhooksStore,
+    oauthStore,
+    brandingStore,
+    importAccountsStore,
+    ldapStore,
   });
 
-  // Initialize useSecurity hook with null checks
-  const { getSecurityInitialValue } = useSecurity({
-    getPortalPasswordSettings:
-      settingsStore?.getPortalPasswordSettings || (() => {}),
-    getTfaType: tfaStore?.getTfaType || (() => {}),
-    getInvitationSettings: settingsStore?.getInvitationSettings || (() => {}),
-    getIpRestrictionsEnable:
-      settingsStore?.getIpRestrictionsEnable || (() => Promise.resolve()),
-    getIpRestrictions:
-      settingsStore?.getIpRestrictions || (() => Promise.resolve()),
-    getBruteForceProtection:
-      settingsStore?.getBruteForceProtection || (() => {}),
-    getSessionLifetime: settingsStore?.getSessionLifetime || (() => {}),
-    getLoginHistory: getLoginHistory || (() => {}),
-    getLifetimeAuditSettings: getLifetimeAuditSettings || (() => {}),
-    getAuditTrail: getAuditTrail || (() => {}),
-    initSettings: initSettingsSetup,
-    isInit: isInitSetup,
-    currentDeviceType: settingsStore?.currentDeviceType,
-  });
+  const { getCommonInitialValue } = useCommon(safeProps.common);
+  const { getSecurityInitialValue } = useSecurity(safeProps.security);
+  const { getBackupInitialValue } = useBackup(safeProps.backup);
+  const { getIntegrationInitialValue } = useIntegration(safeProps.integration);
+  const { getDataImportInitialValue } = useDataImport(safeProps.dataImport);
+  const { getDeveloperToolsInitialValue } = useDeveloperTools(
+    safeProps.developerTools,
+  );
+  const { getDeleteDataInitialValue } = useDeleteData(safeProps.deleteData);
 
-  // Initialize useBackup hook with null checks
-  const { getBackupInitialValue } = useBackup({
-    getProgress: backupStore?.getProgress || (() => {}),
-    rootFoldersTitles: treeFoldersStore?.rootFoldersTitles || {},
-    fetchTreeFolders:
-      treeFoldersStore?.fetchTreeFolders || (() => Promise.resolve()),
-    setStorageRegions: backupStore?.setStorageRegions || (() => {}),
-    setThirdPartyStorage: backupStore?.setThirdPartyStorage || (() => {}),
-    setConnectedThirdPartyAccount:
-      backupStore?.setConnectedThirdPartyAccount || (() => {}),
-    setBackupSchedule: backupStore?.setBackupSchedule || (() => {}),
-    setDefaultOptions: backupStore?.setDefaultOptions || (() => {}),
-    language: language || "",
-  });
-
-  // Initialize useIntegration hook with null checks
-  const { getIntegrationInitialValue } = useIntegration({
-    isSSOAvailable: isSSOAvailable || (() => false),
-    init: ssoFormStore?.init || (() => Promise.resolve()),
-    isInit: ssoFormStore?.isInit || false,
-    updatePlugins: updatePlugins || (() => Promise.resolve()),
-    getConsumers: getConsumers || (() => Promise.resolve()),
-    fetchAndSetConsumers:
-      fetchAndSetConsumers || (() => Promise.resolve(false)),
-    setInitSMTPSettings: setInitSMTPSettings || (() => Promise.resolve()),
-    getDocumentServiceLocation:
-      getDocumentServiceLocation || (() => Promise.resolve()),
-    loadLDAP: loadLDAP || (() => Promise.resolve()),
-    isLdapAvailable: isLdapAvailable || (() => false),
-  });
-
-  // Initialize useDataImport hook with null checks
-  const { getDataImportInitialValue } = useDataImport({
-    isMigrationInit: isMigrationInit || (() => false),
-    getMigrationStatus: getMigrationStatus || (() => Promise.resolve()),
-    setUsers: setUsers || (() => {}),
-    setWorkspace: setWorkspace || (() => {}),
-    setMigratingWorkspace: setMigratingWorkspace || (() => {}),
-    setFiles: setFiles || (() => {}),
-    setLoadingStatus: setLoadingStatus || (() => {}),
-    setMigrationPhase: setMigrationPhase || (() => {}),
-    setServices: setServices || (() => {}),
-    getMigrationList: getMigrationList || (() => Promise.resolve()),
-  });
-
-  // Initialize useDeveloperTools hook with null checks
-  const { getDeveloperToolsInitialValue } = useDeveloperTools({
-    getCSPSettings: getCSPSettings || (() => {}),
-    loadWebhooks: loadWebhooks || (() => Promise.resolve()),
-    fetchClients: fetchClients || (() => Promise.resolve()),
-    fetchScopes: fetchScopes || (() => Promise.resolve()),
-    isInit: isInit || false,
-    setIsInit: setIsInit || (() => {}),
-  });
-
-  // Initialize useDeleteData hook with null check
-  const { getDeleteDataInitialValue } = useDeleteData({
-    getPortalOwner: getPortalOwner || (() => {}),
-  });
-
-  // Animation event handlers setup
   useEffect(() => {
     animationStartedRef.current = false;
 
@@ -287,6 +185,65 @@ const View = ({
     }
   }, [isLoading]);
 
+  const loadViewData = async (view: TView, prevView: TView): Promise<void> => {
+    switch (view) {
+      case "customization":
+        if (prevView !== "customization") {
+          await getCommonInitialValue();
+        }
+        break;
+      case "security":
+        if (prevView !== "security") {
+          await getSecurityInitialValue();
+        }
+        break;
+      case "restore":
+      case "backup":
+        if (prevView !== "restore" && prevView !== "backup") {
+          await getBackupInitialValue();
+        }
+        break;
+      case "integration":
+        if (prevView !== "integration") {
+          await getIntegrationInitialValue();
+        }
+        break;
+      case "data-import":
+        if (prevView !== "data-import") {
+          await getDataImportInitialValue();
+        }
+        break;
+      case "management":
+        if (prevView !== "management") {
+          await init();
+        }
+        break;
+      case "developer-tools":
+        if (prevView !== "developer-tools") {
+          await getDeveloperToolsInitialValue();
+        }
+        break;
+      case "delete-data":
+        if (prevView !== "delete-data") {
+          await getDeleteDataInitialValue();
+        }
+        break;
+    }
+  };
+
+  const determineViewFromPath = (): TView => {
+    if (isCustomizationPage) return "customization";
+    if (isSecurityPage) return "security";
+    if (isRestorePage) return "restore";
+    if (isBackupPage) return "backup";
+    if (isIntegrationPage) return "integration";
+    if (isDataImportPage) return "data-import";
+    if (isStorageManagementPage) return "management";
+    if (isDeveloperToolsPage) return "developer-tools";
+    if (isDeletePage) return "delete-data";
+    return "";
+  };
+
   useEffect(() => {
     if (prevPathRef.current === location.pathname) {
       return;
@@ -296,84 +253,14 @@ const View = ({
 
     const getView = async () => {
       try {
-        // abortControllers.current.usersAbortController?.abort();
-        // abortControllers.current.groupsAbortController?.abort();
-        // abortControllers.current.filesAbortController?.abort();
-        // abortControllers.current.roomsAbortController?.abort();
-
         setIsLoading(true);
         setIsChangePageRequestRunning(true);
-        let view:
-          | "customization"
-          | "security"
-          | "backup"
-          | "restore"
-          | "integration"
-          | "data-import"
-          | "management"
-          | "developer-tools"
-          | "delete-data"
-          | undefined;
 
-        if (isCustomizationPage) {
-          view = "customization";
-
-          if (prevCurrentViewRef.current !== "customization") {
-            await getCommonInitialValue();
-          }
-        } else if (isSecurityPage) {
-          view = "security";
-
-          if (prevCurrentViewRef.current !== "security") {
-            await getSecurityInitialValue();
-          }
-        } else if (isRestorePage) {
-          view = "restore";
-
-          if (prevCurrentViewRef.current !== "restore") {
-            await getBackupInitialValue();
-          }
-        } else if (isBackupPage) {
-          view = "backup";
-
-          if (prevCurrentViewRef.current !== "backup") {
-            await getBackupInitialValue();
-          }
-        } else if (isIntegrationPage) {
-          view = "integration";
-
-          if (prevCurrentViewRef.current !== "integration") {
-            await getIntegrationInitialValue();
-          }
-        } else if (isDataImportPage) {
-          view = "data-import";
-
-          if (prevCurrentViewRef.current !== "data-import") {
-            await getDataImportInitialValue();
-          }
-        } else if (isStorageManagementPage) {
-          view = "management";
-
-          if (prevCurrentViewRef.current !== "management") {
-            await init();
-          }
-        } else if (isDeveloperToolsPage) {
-          view = "developer-tools";
-
-          if (prevCurrentViewRef.current !== "developer-tools") {
-            await getDeveloperToolsInitialValue();
-          }
-        } else if (isDeletePage) {
-          view = "delete-data";
-
-          if (prevCurrentViewRef.current !== "delete-data") {
-            await getDeleteDataInitialValue();
-          }
-        }
+        const view = determineViewFromPath();
 
         if (view) {
+          await loadViewData(view, prevCurrentViewRef.current);
           prevCurrentViewRef.current = view;
-
           setCurrentView(view);
         }
 
@@ -429,12 +316,9 @@ export const ViewComponent = inject(
     storageManagement,
     ldapStore,
   }: TStore) => {
-    const { language } = authStore;
-
     const {
       initSettings: initSettingsCommon,
       getGreetingSettingsIsDefault,
-      isLoadedSubmenu,
       isLoaded,
       setIsLoaded,
     } = common;
@@ -442,125 +326,44 @@ export const ViewComponent = inject(
     const {
       setIsChangePageRequestRunning,
       setCurrentClientView,
-
       showHeaderLoader,
     } = clientLoadingStore;
 
-    const {
-      getLoginHistory,
-      getLifetimeAuditSettings,
-      getAuditTrail,
-      getConsumers,
-      fetchAndSetConsumers,
-      setInitSMTPSettings,
-      initSettings: initSettingsSetup,
-      isInit: isInitSetup,
-    } = setup;
-
-    const { isSSOAvailable, isLdapAvailable } = currentQuotaStore;
-
-    const { updatePlugins } = pluginStore;
-
-    const { getDocumentServiceLocation } = filesSettingsStore;
-
-    const { getCSPSettings, getPortalOwner, getPortalCultures, cultures } =
-      settingsStore;
-
-    const { loadWebhooks } = webhooksStore;
-
-    const { fetchClients, fetchScopes, isInit, setIsInit } = oauthStore;
-
-    const { getBrandName, initWhiteLabel } = brandingStore;
-
-    const {
-      getMigrationList,
-      getMigrationStatus,
-      isMigrationInit,
-      setUsers,
-      setWorkspace,
-      setMigratingWorkspace,
-      setFiles,
-      setLoadingStatus,
-      setMigrationPhase,
-      setServices,
-    } = importAccountsStore;
-
-    const { init } = storageManagement;
-
-    const { load: loadLDAP } = ldapStore;
-
     const isMobileView = settingsStore.deviceType === DeviceType.mobile;
+
+    const loadBaseInfo = async (page: string) => {
+      await initSettingsCommon(page);
+    };
 
     return {
       setIsChangePageRequestRunning,
       setCurrentClientView,
-
       showHeaderLoader,
 
-      // Common hook props
-      isMobileView,
-      getGreetingSettingsIsDefault,
-      getBrandName,
-      initWhiteLabel,
-      loadBaseInfo: async (page: string) => {
-        await initSettingsCommon(page);
-      },
-      isLoadedSubmenu,
-      isLoaded,
-      setIsLoaded,
-      getPortalCultures,
-      cultures,
-
-      // Security hook props
+      // Stores for safeProps
+      setup,
       settingsStore,
       tfaStore,
-      getLoginHistory,
-      getLifetimeAuditSettings,
-      getAuditTrail,
-      initSettingsSetup,
-      isInitSetup,
-
-      // Backup hook props
-      backup,
+      backup: backup,
       treeFoldersStore,
-      language,
+      authStore,
+      currentQuotaStore,
+      ssoStore,
+      pluginStore,
+      filesSettingsStore,
+      webhooksStore,
+      oauthStore,
+      brandingStore,
+      importAccountsStore,
+      storageManagement,
+      ldapStore,
 
-      // Integration hook props
-      isSSOAvailable,
-      ssoFormStore: ssoStore,
-      updatePlugins,
-      getConsumers,
-      fetchAndSetConsumers,
-      setInitSMTPSettings,
-      getDocumentServiceLocation,
-      loadLDAP,
-      isLdapAvailable,
-
-      // Developer tools hook props
-      getCSPSettings,
-      loadWebhooks,
-      fetchClients,
-      fetchScopes,
-      isInit,
-      setIsInit,
-
-      // Delete data hook props
-      getPortalOwner,
-
-      // Data import hook props
-      isMigrationInit,
-      getMigrationStatus,
-      setUsers,
-      setWorkspace,
-      setMigratingWorkspace,
-      setFiles,
-      setLoadingStatus,
-      setMigrationPhase,
-      setServices,
-      getMigrationList,
-
-      // Storage management props
-      init,
+      // Direct values needed in safeProps
+      isMobileView,
+      getGreetingSettingsIsDefault,
+      loadBaseInfo,
+      setIsLoaded,
+      isLoaded,
     };
   },
 )(observer(View));

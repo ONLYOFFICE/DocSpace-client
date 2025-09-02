@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import BoxSvgUrl from "PUBLIC_DIR/images/thirdparties/box.svg?url";
+import BoxDarkSvgUrl from "PUBLIC_DIR/images/thirdparties/box.dark.svg?url";
 import GitHubLightSvgUrl from "PUBLIC_DIR/images/thirdparties/github.light.react.svg?url";
 import GitHubDarkSvgUrl from "PUBLIC_DIR/images/thirdparties/github.dark.react.svg?url";
 
@@ -40,7 +41,7 @@ export const getServerIcon = (type: ServerType, isBase: boolean) => {
       if (isBase) return GitHubLightSvgUrl;
       return GitHubDarkSvgUrl;
     case ServerType.Box:
-      return BoxSvgUrl;
+      return isBase ? BoxSvgUrl : BoxDarkSvgUrl;
     default:
       return null;
   }

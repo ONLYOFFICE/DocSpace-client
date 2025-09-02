@@ -136,6 +136,22 @@ const ClientRoutes = [
             ),
           },
           {
+            path: "shared-with-me",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "shared-with-me/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
             path: "files/trash",
             element: (
               <PrivateRoute>

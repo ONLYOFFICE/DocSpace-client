@@ -2798,6 +2798,7 @@ class FilesStore {
             PluginFileType.Rooms,
             null,
             security,
+            item.security,
           );
 
           pluginAllKeys &&

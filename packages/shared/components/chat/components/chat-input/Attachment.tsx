@@ -123,6 +123,7 @@ const Attachment = ({
       getFilesArchiveError={() => ""}
       filterParam={CHAT_SUPPORTED_FORMATS}
       isMultiSelect
+      withRecentTreeFolder
       currentDeviceType={
         isDesktop()
           ? DeviceType.desktop

@@ -340,6 +340,7 @@ const Panels = (props) => {
         filterParam={extsFilesVectorized.join(",")}
         descriptionText=""
         isMultiSelect
+        withRecentTreeFolder
       />
     ),
 

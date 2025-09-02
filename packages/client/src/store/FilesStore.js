@@ -2233,7 +2233,12 @@ class FilesStore {
 
     const pluginAllKeys =
       enablePlugins &&
-      this.pluginStore.getContextMenuKeysByType(null, null, security);
+      this.pluginStore.getContextMenuKeysByType(
+        null,
+        null,
+        security,
+        item.security,
+      );
 
     const canRenameItem = item.security?.Rename;
 
@@ -2542,6 +2547,7 @@ class FilesStore {
               PluginFileType.Files,
               item.fileExst,
               security,
+              item.security,
             );
 
             pluginAllKeys &&
@@ -2558,6 +2564,7 @@ class FilesStore {
               PluginFileType.Image,
               item.fileExst,
               security,
+              item.security,
             );
 
             pluginAllKeys &&
@@ -2574,6 +2581,7 @@ class FilesStore {
               PluginFileType.Video,
               item.fileExst,
               security,
+              item.security,
             );
 
             pluginAllKeys &&

@@ -75,9 +75,9 @@ const WalletInfo = (props: WalletInfoProps) => {
             values={{ balance }}
             components={{
               1: isBalanceInsufficient ? (
-                <Text as="span" fontWeight={600} />
+                <Text key="balance-text" as="span" fontWeight={600} />
               ) : (
-                <Text fontWeight={600} isInline />
+                <Text key="balance-text" fontWeight={600} isInline />
               ),
             }}
           />

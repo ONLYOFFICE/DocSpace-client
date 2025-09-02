@@ -38,7 +38,6 @@
   "ChooseNewPlan": "Бажаєте вибрати новий тарифний план?",
   "ConfirmPayment": "Підтвердити оплату",
   "ConnectAndConfigureServices": "Цей розділ використовується для підключення та налаштування сервісів.",
-  "Cost": "Вартість",
   "Credit": "Кредит",
   "CurrencyPerMonth": "{{currency}}/місяць",
   "CurrentBalance": "Поточний баланс: <1>{{balance}}</1>",

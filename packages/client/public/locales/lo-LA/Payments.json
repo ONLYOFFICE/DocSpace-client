@@ -38,7 +38,6 @@
   "ChooseNewPlan": "ທ່ານຕ້ອງການເລືອກແຜນລາຄາໃໝ່ບໍ?",
   "ConfirmPayment": "ກວດຢັ້ງຢືນການຈ່າຍເງິນ",
   "ConnectAndConfigureServices": "ພາກນີ້ຖືກນໍາໃຊ້ເພື່ອເຊື່ອມຕໍ່ແລະກໍາຫນົດຄ່າການບໍລິການ.",
-  "Cost": "ຄ່າໃຊ້ຈ່າຍ",
   "Credit": "ເຄດິດ",
   "CurrencyPerMonth": "ເງິນ {{currency}}/ເດືອນ",
   "CurrentBalance": "ຍອດເງິນປະຈຸບັນ: <1>{{balance}}</1>",

@@ -45,6 +45,7 @@ import { TMCPTool, TServer } from "../../../../api/ai/types";
 import { getOAuthToken } from "../../../../utils/common";
 import { getServerIcon } from "../../../../utils/getServerIcon";
 import { useTheme } from "../../../../hooks/useTheme";
+import socket, { SocketEvents, TOptSocket } from "../../../../utils/socket";
 
 import { Text } from "../../../text";
 import { ContextMenu, type ContextMenuRefType } from "../../../context-menu";
@@ -129,31 +130,54 @@ const ToolsSettings = () => {
     [MCPTools, roomId],
   );
 
-  React.useEffect(() => {
-    const fetchTools = async () => {
-      const res = await getServersListForRoom(Number(roomId));
+  const fetchTools = React.useCallback(async () => {
+    const res = await getServersListForRoom(Number(roomId));
 
-      if (!res) return;
+    if (!res) return;
 
-      setServers(res);
+    setServers(res);
 
-      const enabledServers = res.filter((server) => server.connected);
+    const enabledServers = res.filter((server) => server.connected);
 
-      const actions = await Promise.all(
-        enabledServers.map((server) =>
-          getMCPToolsForRoom(Number(roomId), server.id),
-        ),
-      );
+    const actions = await Promise.all(
+      enabledServers.map((server) =>
+        getMCPToolsForRoom(Number(roomId), server.id),
+      ),
+    );
 
-      const serverTools: [string, TMCPTool[]][] = enabledServers.map(
-        (item, index) => [item.id, actions[index] ?? []],
-      );
+    const serverTools: [string, TMCPTool[]][] = enabledServers.map(
+      (item, index) => [item.id, actions[index] ?? []],
+    );
 
-      setMCPTools(new Map(serverTools));
-    };
-
-    fetchTools();
+    setMCPTools(new Map(serverTools));
   }, [roomId]);
+
+  const onModifyFolder = React.useCallback(
+    (data?: TOptSocket) => {
+      if (!data) return;
+
+      if (
+        data.type === "folder" &&
+        data.id &&
+        Number(data.id) === Number(roomId)
+      ) {
+        fetchTools();
+      }
+    },
+    [fetchTools, roomId],
+  );
+
+  React.useEffect(() => {
+    fetchTools();
+  }, [fetchTools]);
+
+  React.useEffect(() => {
+    socket.on(SocketEvents.ModifyFolder, onModifyFolder);
+
+    return () => {
+      socket.off(SocketEvents.ModifyFolder, onModifyFolder);
+    };
+  }, [onModifyFolder]);
 
   const openOauthWindow = async (serverId: string, type: string) => {
     const url = await openConnectWindow(type);
@@ -243,19 +267,38 @@ const ToolsSettings = () => {
           label: "",
         };
 
+      const items = [
+        {
+          key: "all_tools",
+          label: "All tools",
+          withToggle: true,
+          checked: tools.some((tool) => tool.enabled),
+          onClick: () => {
+            toggleTool(mcpId, "all_tools");
+          },
+        },
+        {
+          key: "separator-sub-menu-1",
+          isSeparator: true,
+        },
+        ...tools
+          .map((tool) => ({
+            key: tool.name,
+            label: tool.name,
+            withToggle: true,
+            checked: tool.enabled,
+            onClick: () => {
+              toggleTool(mcpId, tool.name);
+            },
+          }))
+          .filter(Boolean),
+      ];
+
       return {
         key: mcpId,
         label: server.name,
         icon: getServerIcon(server.serverType, isBase) ?? "",
-        items: tools.map((tool) => ({
-          key: tool.name,
-          label: tool.name,
-          withToggle: true,
-          checked: tool.enabled,
-          onClick: () => {
-            toggleTool(mcpId, tool.name);
-          },
-        })),
+        items,
       };
     }),
     { key: "separator-1", isSeparator: true },
@@ -269,7 +312,7 @@ const ToolsSettings = () => {
     },
   ];
 
-  if (!servers.length) return;
+  if (!servers.length || !MCPTools.size) return;
 
   return (
     <>

@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import axios from "axios";
+import { match } from "ts-pattern";
 import { makeAutoObservable, runInAction } from "mobx";
 
 import api from "@docspace/shared/api";
@@ -98,6 +99,7 @@ import {
   FILTER_DOCUMENTS,
   FILTER_RECENT,
   FILTER_ROOM_DOCUMENTS,
+  FILTER_SHARE,
   FILTER_SHARED_ROOM,
   FILTER_TEMPLATES_ROOM,
   FILTER_TRASH,
@@ -1505,20 +1507,32 @@ class FilesStore {
   };
 
   setFilesFilter = (filter, folderId = null) => {
-    const { recycleBinFolderId } = this.treeFoldersStore;
-
-    const key =
-      this.categoryType === CategoryType.Archive
-        ? `${FILTER_ARCHIVE_DOCUMENTS}=${this.userStore.user?.id}`
-        : this.categoryType === CategoryType.SharedRoom
-          ? `${FILTER_ROOM_DOCUMENTS}=${this.userStore.user?.id}`
-          : this.categoryType === CategoryType.Recent
-            ? `${FILTER_RECENT}=${this.userStore.user?.id}`
-            : +folderId === recycleBinFolderId
-              ? `${FILTER_TRASH}=${this.userStore.user?.id}`
-              : !this.publicRoomStore.isPublicRoom
-                ? `${FILTER_DOCUMENTS}=${this.userStore.user?.id}`
-                : null;
+    const key = match(this.categoryType)
+      .with(
+        CategoryType.Archive,
+        () => `${FILTER_ARCHIVE_DOCUMENTS}=${this.userStore.user?.id}`,
+      )
+      .with(
+        CategoryType.SharedRoom,
+        () => `${FILTER_ROOM_DOCUMENTS}=${this.userStore.user?.id}`,
+      )
+      .with(
+        CategoryType.Recent,
+        () => `${FILTER_RECENT}=${this.userStore.user?.id}`,
+      )
+      .with(
+        CategoryType.SharedWithMe,
+        () => `${FILTER_SHARE}=${this.userStore.user?.id}`,
+      )
+      .when(
+        () => +folderId === this.treeFoldersStore.recycleBinFolderId,
+        () => `${FILTER_TRASH}=${this.userStore.user?.id}`,
+      )
+      .when(
+        () => !this.publicRoomStore.isPublicRoom,
+        () => `${FILTER_DOCUMENTS}=${this.userStore.user?.id}`,
+      )
+      .otherwise(() => null);
 
     if (key) {
       setUserFilter(key, {

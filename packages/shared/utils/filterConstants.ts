@@ -30,6 +30,7 @@ export const FILTER_VERSION = 1;
 export const FILTER_DOCUMENTS = "UserFilter";
 export const FILTER_RECENT = "UserFilterRecent";
 export const FILTER_TRASH = "UserFilterTrash";
+export const FILTER_SHARE = "UserFilterShare";
 
 // Room filters
 export const FILTER_SHARED_ROOM = "UserRoomsSharedFilter";

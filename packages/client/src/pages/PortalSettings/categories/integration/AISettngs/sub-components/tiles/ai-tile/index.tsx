@@ -26,8 +26,6 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { ReactSVG } from "react-svg";
-
 import { Heading, HeadingLevel } from "@docspace/shared/components/heading";
 
 import styles from "./AiTile.module.scss";
@@ -41,7 +39,7 @@ export const AiTile = ({ icon, children }: AiTileProps) => {
   return (
     <div className={styles.aiTile}>
       <div className={styles.icon}>
-        <ReactSVG src={icon} />
+        <img src={icon} alt="ai tile icon" />
       </div>
       <div className={styles.content}>{children}</div>
     </div>

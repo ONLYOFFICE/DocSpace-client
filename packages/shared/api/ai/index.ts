@@ -28,6 +28,7 @@ import { getCookie } from "../../utils";
 
 import { request } from "../client";
 import { TFile } from "../files/types";
+import { ToolsPermission } from "./enums";
 
 import {
   TCreateAiProvider,
@@ -467,6 +468,21 @@ export const removeVectorizationTasks = async (id: string) => {
     await request({
       method: "DELETE",
       url: `${baseUrl}/vectorization/tasks/${id}`,
+    });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const updateToolsPermission = async (
+  callId: string,
+  decision: ToolsPermission,
+) => {
+  try {
+    await request({
+      method: "POST",
+      url: `${baseUrl}/chats/tool-permissions/${callId}/decision`,
+      data: { decision },
     });
   } catch (e) {
     console.log(e);

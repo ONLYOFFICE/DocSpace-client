@@ -32,10 +32,12 @@ import { ReactSVG } from "react-svg";
 import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg?url";
 import ToolFinish from "PUBLIC_DIR/images/tool.finish.svg?url";
 
-import { ContentType } from "../../../../../../api/ai/enums";
+import { ContentType, ToolsPermission } from "../../../../../../api/ai/enums";
+import { updateToolsPermission } from "../../../../../../api/ai";
 
 import { Text } from "../../../../../text";
 import { Loader, LoaderTypes } from "../../../../../loader";
+import { Button, ButtonSize } from "../../../../../button";
 
 import { formatJsonWithMarkdown } from "../../../../utils";
 
@@ -62,10 +64,18 @@ const ToolCall = ({ content }: MessageToolCallProps) => {
     isJson = false;
   }
 
-  return (
+  const onClickAction = (decision: ToolsPermission) => {
+    if (!content.callId) return;
+
+    updateToolsPermission(content.callId, decision);
+  };
+
+  const toolCallComponent = (
     <div className={styles.toolCall}>
       <div
-        className={classNames(styles.toolCallHeader, { [styles.hide]: isHide })}
+        className={classNames(styles.toolCallHeader, {
+          [styles.hide]: isHide,
+        })}
         onClick={() => setIsHide((val) => !val)}
       >
         {content.result ? (
@@ -103,6 +113,44 @@ const ToolCall = ({ content }: MessageToolCallProps) => {
         </div>
       )}
     </div>
+  );
+
+  return content.additionalProperties?.managed ? (
+    <div className={styles.toolCallManage}>
+      <Text>AI would like to use this tool</Text>
+
+      {toolCallComponent}
+
+      <div>
+        <Text>{t("Common:ReviewAction")}</Text>
+        <Text>{t("Common:CannotGuaranteeSecurity")}</Text>
+      </div>
+      <div className={styles.buttonsBlockContaiener}>
+        <div className={styles.approveButtonBlock}>
+          <Button
+            size={ButtonSize.small}
+            primary
+            scale
+            label={t("Common:AllowAlways")}
+            onClick={() => onClickAction(ToolsPermission.AlwaysAllow)}
+          />
+          <Button
+            size={ButtonSize.small}
+            primary
+            scale
+            label={t("Common:AllowOnce")}
+            onClick={() => onClickAction(ToolsPermission.Allow)}
+          />
+        </div>
+        <Button
+          size={ButtonSize.small}
+          label={t("Common:Deny")}
+          onClick={() => onClickAction(ToolsPermission.Deny)}
+        />
+      </div>
+    </div>
+  ) : (
+    toolCallComponent
   );
 };
 

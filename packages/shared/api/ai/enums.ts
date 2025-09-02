@@ -57,3 +57,9 @@ export const enum ServerType {
   GitHub,
   Box,
 }
+
+export const enum ToolsPermission {
+  Allow,
+  AlwaysAllow,
+  Deny,
+}

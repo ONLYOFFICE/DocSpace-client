@@ -206,7 +206,12 @@ export default class MessageStore {
   };
 
   handleToolCall = (jsonData: string) => {
-    const { name, arguments: args } = JSON.parse(jsonData);
+    const {
+      name,
+      arguments: args,
+      callId,
+      additionalProperties,
+    } = JSON.parse(jsonData);
 
     const newMsg: TMessage = {
       role: RoleType.AssistantMessage,
@@ -216,6 +221,8 @@ export default class MessageStore {
           type: ContentType.Tool,
           name,
           arguments: args,
+          callId,
+          additionalProperties,
         },
       ],
     };

@@ -959,5 +959,10 @@
   "LogoForEditors": "Logo for {{editorName}} editor",
   "LogoForViewer": "Logo for {{diagramViewer}}",
   "LogoDocsEditor": "Logo for the editors header",
-  "ManageConnection": "Manage connection"
+  "ManageConnection": "Manage connection",
+  "AllowAlways": "Allow always",
+  "AllowOnce": "Allow once",
+  "ReviewAction": "Review each action carefully before approving.",
+  "CannotGuaranteeSecurity": "We cannot guarantee the security or privacy practices of third-party integrations.",
+  "AIWouldLikeToUseThisTool": "AI would like to use this tool"
 }

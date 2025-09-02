@@ -84,6 +84,8 @@ export type TContent =
       arguments: Record<string, unknown>;
       name: string;
       result?: Record<string, unknown>;
+      callId?: string;
+      additionalProperties?: { managed: true };
     }
   | {
       type: ContentType.Files;

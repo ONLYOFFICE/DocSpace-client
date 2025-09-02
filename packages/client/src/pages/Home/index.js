@@ -197,7 +197,7 @@ const PureHome = (props) => {
 
     createFoldersTree(t, f, uploadToFolder, dragged)
       .then((fItem) => {
-        if (fItem.length > 0) startUpload(fItem, null, t);
+        if (fItem.length > 0) startUpload(fItem, uploadToFolder, t);
       })
       .catch((err) => {
         toastr.error(err, null, 0, true);
@@ -471,7 +471,6 @@ export const Component = inject(
 
     const {
       firstLoad,
-      setIsSectionHeaderLoading,
       setIsSectionBodyLoading,
       setIsSectionFilterLoading,
       isLoading,
@@ -634,7 +633,6 @@ export const Component = inject(
       setExpandedKeys,
 
       setDragging,
-      setIsSectionHeaderLoading,
       setIsSectionBodyLoading,
       setIsSectionFilterLoading,
       isLoading,

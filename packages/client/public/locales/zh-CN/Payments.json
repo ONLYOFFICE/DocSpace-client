@@ -38,7 +38,6 @@
   "ChooseNewPlan": "是否选择新的定价版本？",
   "ConfirmPayment": "确认支付",
   "ConnectAndConfigureServices": "本板块用于连接和配置服务。",
-  "Cost": "费用",
   "Credit": "信用额度",
   "CurrencyPerMonth": "{{currency}}/月",
   "CurrentBalance": "当前余额：<1>{{balance}}</1>",

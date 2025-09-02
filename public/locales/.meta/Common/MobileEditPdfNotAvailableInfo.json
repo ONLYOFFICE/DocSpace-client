@@ -3,7 +3,7 @@
   "content": "Unsupported action. Please switch to the desktop mode to be able to edit PDFs or create PDF forms.",
   "content_en_sha1_hash": "38b34163571b050a0e177d79b00073163a6f1c1b",
   "created_at": "2025-05-19T21:30:46.558Z",
-  "updated_at": "2025-08-26T11:15:14.042Z",
+  "updated_at": "2025-09-01T11:05:24.083Z",
   "comment": {
     "text": "This translation key is used to display a message when attempting to edit or create PDFs on mobile devices. It appears as an info toast notification and instructs users to switch to desktop mode to enable these actions.",
     "is_auto": true,
@@ -36,31 +36,31 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1759,
+      "line_number": 1800,
       "context": "key: \"edit-pdf\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => {\n if (isMobile) {\n toastr.info(t(\"Common:MobileEditPdfNotAvailableInfo\"));\n return;\n }\n this.onOpenPDFEditDialog(item.id);\n },\n disabled: false,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1759,
+      "line_number": 1800,
       "context": "key: \"edit-pdf\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => {\n if (isMobile) {\n toastr.info(t(\"Common:MobileEditPdfNotAvailableInfo\"));\n return;\n }\n this.onOpenPDFEditDialog(item.id);\n },\n disabled: false,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1759,
+      "line_number": 1800,
       "context": "key: \"edit-pdf\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => {\n if (isMobile) {\n toastr.info(t(\"Common:MobileEditPdfNotAvailableInfo\"));\n return;\n }\n this.onOpenPDFEditDialog(item.id);\n },\n disabled: false,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1759,
+      "line_number": 1800,
       "context": "key: \"edit-pdf\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => {\n if (isMobile) {\n toastr.info(t(\"Common:MobileEditPdfNotAvailableInfo\"));\n return;\n }\n this.onOpenPDFEditDialog(item.id);\n },\n disabled: false,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1759,
+      "line_number": 1800,
       "context": "key: \"edit-pdf\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => {\n if (isMobile) {\n toastr.info(t(\"Common:MobileEditPdfNotAvailableInfo\"));\n return;\n }\n this.onOpenPDFEditDialog(item.id);\n },\n disabled: false,",
       "module": "/packages/client"
     }

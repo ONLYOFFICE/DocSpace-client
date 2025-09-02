@@ -33,24 +33,6 @@ import { IconButton } from "../icon-button";
 import { InputBlockProps } from "./InputBlock.types";
 import styles from "./InputBlock.module.scss";
 
-const useIconSize = (size?: InputSize, customIconSize?: number): number => {
-  return useMemo(() => {
-    if (customIconSize && customIconSize > 0) return customIconSize;
-
-    if (!size) return 16;
-
-    const sizeMap = {
-      [InputSize.base]: 16,
-      [InputSize.middle]: 18,
-      [InputSize.big]: 21,
-      [InputSize.huge]: 24,
-      [InputSize.large]: 24,
-    };
-
-    return sizeMap[size];
-  }, [size, customIconSize]);
-};
-
 const InputBlock = React.memo(
   ({
     // Input props
@@ -103,7 +85,6 @@ const InputBlock = React.memo(
     dataTestId,
   }: InputBlockProps) => {
     const [isFocus, setIsFocus] = useState(isAutoFocussed);
-    const iconButtonSize = useIconSize(size, iconSize);
 
     const handleChange = useCallback(
       (e: React.ChangeEvent<HTMLInputElement>) => onChange?.(e),
@@ -193,9 +174,10 @@ const InputBlock = React.memo(
               data-size={size}
             >
               <IconButton
-                size={iconButtonSize}
+                size={iconSize || size}
                 iconNode={iconNode}
                 iconName={iconName}
+                className="input-block-icon"
                 isFill={isIconFill}
                 isClickable={typeof onIconClick === "function"}
                 color={iconColor}

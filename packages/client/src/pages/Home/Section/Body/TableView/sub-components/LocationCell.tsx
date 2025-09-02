@@ -33,8 +33,6 @@ import { globalColors } from "@docspace/shared/themes";
 import { Text } from "@docspace/shared/components/text";
 import { getFolderPath } from "@docspace/shared/api/files";
 
-import { CategoryType } from "@docspace/shared/constants";
-
 import { StyledText } from "./CellStyles";
 
 type TPath = {
@@ -48,7 +46,13 @@ type LocationCellProps = {
 };
 
 const LocationCell = ({ sideColor, item }: LocationCellProps) => {
-  const { originRoomTitle, originId, originTitle, id } = item;
+  const {
+    originRoomTitle,
+    originId: originFolderId,
+    originRoomId,
+    originTitle,
+    id,
+  } = item;
 
   const { t } = useTranslation("Common");
   const [path, setPath] = useState<TPath[]>([]);
@@ -57,6 +61,7 @@ const LocationCell = ({ sideColor, item }: LocationCellProps) => {
   const title = item.requestToken
     ? t("Common:ViaLink")
     : originRoomTitle || originTitle;
+  const originId = originFolderId || originRoomId;
   const withTooltip = item.requestToken ? false : !!title;
 
   const getPath = useCallback(async () => {
@@ -65,7 +70,6 @@ const LocationCell = ({ sideColor, item }: LocationCellProps) => {
     setIsPathLoading(true);
     try {
       const folderPath = await getFolderPath(originId);
-      if (folderPath[0].id === CategoryType.SharedRoom) folderPath.shift();
       setPath(folderPath);
     } catch (e) {
       console.error(e);

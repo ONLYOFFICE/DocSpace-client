@@ -460,15 +460,18 @@ class FilesStore {
     this.createNewFilesQueue.on("resolve", this.onResolveNewFile);
   }
 
-  // targetFolderId needed for Recent folder. fileInfo.folderId === original folderId
-  onResolveNewFile = ({ fileInfo, targetFolderId }) => {
+  onResolveNewFile = ({ fileInfo }) => {
     if (!fileInfo) return;
 
     // console.log("onResolveNewFiles", { fileInfo });
 
     if (this.files.findIndex((x) => x.id === fileInfo.id) > -1) return;
 
-    if (this.selectedFolderStore.id !== targetFolderId) return;
+    if (
+      this.selectedFolderStore.id !== fileInfo.folderId &&
+      this.selectedFolderStore.rootFolderType !== FolderType.Recent
+    )
+      return;
 
     console.log("[WS] create new file", { fileInfo });
 
@@ -543,7 +546,6 @@ class FilesStore {
             .getFileInfo(file.id, file.requestToken)
             .then((fileInfo) => ({
               fileInfo,
-              targetFolderId: file.folderId,
             }));
         });
       }, 300);
@@ -1870,9 +1872,6 @@ class FilesStore {
           }
         }
 
-        this.clientLoadingStore.setIsSectionHeaderLoading(false);
-        this.clientLoadingStore.setIsSectionFilterLoading(false);
-
         const selectedFolder = {
           selectedFolder: { ...this.selectedFolderStore },
         };
@@ -1957,6 +1956,9 @@ class FilesStore {
       })
       .finally(() => {
         this.setIsLoadedFetchFiles(true);
+
+        this.clientLoadingStore.setIsSectionHeaderLoading(false);
+        this.clientLoadingStore.setIsSectionFilterLoading(false);
 
         if (window?.DocSpace?.location?.state?.highlightFileId) {
           this.setHighlightFile({
@@ -2100,9 +2102,6 @@ class FilesStore {
 
           setInfoPanelSelectedRoom(null);
 
-          this.clientLoadingStore.setIsSectionHeaderLoading(false);
-          this.clientLoadingStore.setIsSectionFilterLoading(false);
-
           const selectedFolder = {
             selectedFolder: { ...this.selectedFolderStore },
           };
@@ -2140,6 +2139,10 @@ class FilesStore {
           } else {
             toastr.error(err);
           }
+        })
+        .finally(() => {
+          this.clientLoadingStore.setIsSectionHeaderLoading(false);
+          this.clientLoadingStore.setIsSectionFilterLoading(false);
         });
 
     return request();
@@ -2340,6 +2343,7 @@ class FilesStore {
         "edit-index",
         "separator2",
         // "unsubscribe",
+        "separator4",
         "delete",
         "remove-from-recent",
         "copy-general-link",

@@ -377,6 +377,7 @@ const UpdatePlanButtonContainer = ({
               primary
               scale
               onClick={onUpdateTariff}
+              testId="confirm_payment_button"
             />
             <Button
               key="CancelButton"
@@ -384,6 +385,7 @@ const UpdatePlanButtonContainer = ({
               size={ButtonSize.normal}
               scale
               onClick={onClose}
+              testId="cancel_payment_button"
             />
           </ModalDialog.Footer>
         </ModalDialog>

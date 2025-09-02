@@ -209,7 +209,6 @@ const Wallet = (props: WalletProps) => {
 
       {isCardLinkedToPortal ? (
         <PayerInformation
-          style={undefined}
           theme={undefined}
           user={undefined}
           accountLink={undefined}
@@ -217,6 +216,9 @@ const Wallet = (props: WalletProps) => {
           email={undefined}
           isNotPaidPeriod={undefined}
           isStripePortalAvailable={undefined}
+          style={{
+            marginTop: "18px",
+          }}
         />
       ) : null}
       <div className={styles.balanceWrapper}>

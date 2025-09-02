@@ -39,6 +39,7 @@ import { Nullable, TCreatedBy } from "@docspace/shared/types";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { isFolder } from "@docspace/shared/utils/typeGuards";
 import { getCookie, getCorrectDate } from "@docspace/shared/utils";
+import { getUserType } from "@docspace/shared/utils/common";
 import { LANGUAGE } from "@docspace/shared/constants";
 
 import config from "PACKAGE_FILE";
@@ -211,8 +212,11 @@ class InfoPanelStore {
       fetchedUser?.registrationDate || "",
     );
 
+    const userRole = { role: getUserType(fetchedUser) };
+    const stateUserItem = { ...fetchedUser, ...userRole };
+
     window.DocSpace.navigate(combineUrl(...path), {
-      state: { user: toJS(fetchedUser) },
+      state: { user: toJS(stateUserItem) },
     });
   };
 

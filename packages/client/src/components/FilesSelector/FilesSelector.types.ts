@@ -77,6 +77,7 @@ export type FilesSelectorProps = TSelectorHeader & {
   folderIsShared?: boolean;
 
   treeFolders?: TFolder[];
+  withRecentTreeFolder?: boolean;
 
   theme: TTheme;
 

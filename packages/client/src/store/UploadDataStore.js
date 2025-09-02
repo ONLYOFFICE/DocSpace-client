@@ -1058,6 +1058,15 @@ class UploadDataStore {
       }
 
       toastr.error(errorMessage, null, 0, true);
+
+      if (this.uploaded) {
+        this.primaryProgressDataStore.setPrimaryProgressBarData({
+          operation: OPERATIONS_NAME.upload,
+          completed: this.uploaded,
+          alert: this.uploadedFilesHistory.length === 0,
+          ...(this.uploadedFilesHistory.length === 0 && { showPanel: null }),
+        });
+      }
     }
   };
 

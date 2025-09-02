@@ -482,13 +482,15 @@ class PaymentStore {
     startDate = moment().subtract(4, "weeks"),
     endDate = moment(),
     credit = true,
-    withdrawal = true,
+    debit = true,
+    participantName?: string,
   ) => {
     const res = await getTransactionHistory(
       this.formatDate(startDate),
       this.formatDate(endDate),
       credit,
-      withdrawal,
+      debit,
+      participantName,
     );
 
     if (!res) return;

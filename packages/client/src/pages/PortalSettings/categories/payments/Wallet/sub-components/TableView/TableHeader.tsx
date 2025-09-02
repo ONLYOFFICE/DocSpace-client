@@ -52,8 +52,15 @@ const TransactionHistoryTableHeader = (props: TableHeaderProps) => {
       minWidth: 150,
     },
     {
-      key: "Action",
-      title: t("Common:Action"),
+      key: "Type",
+      title: t("Common:Type"),
+      enable: true,
+      resizable: true,
+      minWidth: 120,
+    },
+    {
+      key: "Contact",
+      title: t("Payments:Contact"),
       enable: true,
       resizable: true,
       minWidth: 120,
@@ -66,8 +73,8 @@ const TransactionHistoryTableHeader = (props: TableHeaderProps) => {
       minWidth: 150,
     },
     {
-      key: "Cost",
-      title: t("Payments:Cost"),
+      key: "Amount",
+      title: t("Payments:Amount"),
       enable: true,
       resizable: true,
       minWidth: 120,

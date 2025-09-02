@@ -30,6 +30,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import moment from "moment";
 
+import { sharedWithMe } from "../../__mocks__/share";
 import {
   ConflictResolveType,
   FolderType,
@@ -209,6 +210,9 @@ export async function getFoldersTree() {
     method: "get",
     url: "/files/@root?filterType=2&count=1",
   })) as TGetFolder[];
+
+  // TODO: remove after mock is fixed
+  res.splice(2, 0, sharedWithMe);
 
   const folders = sortInDisplayOrder(res);
 

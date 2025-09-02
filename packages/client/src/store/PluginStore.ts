@@ -519,7 +519,8 @@ class PluginStore {
   getContextMenuKeysByType = (
     type: PluginFileType,
     fileExst: string,
-    security: TRoomSecurity | TFileSecurity | TFolderSecurity,
+    security: TRoomSecurity | TFolderSecurity,
+    fileSecurity: TFileSecurity,
   ) => {
     if (!this.contextMenuItems) return;
 
@@ -549,9 +550,18 @@ class PluginStore {
               ? item.devices.includes(device)
               : true;
 
+            // folder and room security
             const correctSecurity = item.security
               ? item.security.every(
                   (key: string) => security?.[key as keyof typeof security],
+                )
+              : true;
+
+            // file security
+            const correctFileSecurity = item.fileSecurity
+              ? item.fileSecurity.every(
+                  (key: string) =>
+                    fileSecurity?.[key as keyof typeof fileSecurity],
                 )
               : true;
 
@@ -559,7 +569,8 @@ class PluginStore {
               correctFileExt &&
               correctUserType &&
               correctDevice &&
-              correctSecurity
+              correctSecurity &&
+              correctFileSecurity
             )
               keys.push(item.key);
           }

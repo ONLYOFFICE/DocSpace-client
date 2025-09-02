@@ -144,6 +144,7 @@ export type TFile = {
   order?: string;
   lockedBy?: string;
   originId?: number;
+  originRoomId?: number;
   originRoomTitle?: string;
   originTitle?: string;
   requestToken?: string;

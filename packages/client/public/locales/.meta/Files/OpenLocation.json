@@ -3,7 +3,7 @@
   "content": "Open location",
   "content_en_sha1_hash": "dbcca6bc5e893598b3c23f1313c9f5d1b45c0114",
   "created_at": "2025-05-19T21:30:55.927Z",
-  "updated_at": "2025-08-26T11:15:14.132Z",
+  "updated_at": "2025-09-01T11:05:24.209Z",
   "comment": {
     "text": "This translation key is used for the text \"Open location\" in a button, which opens the selected location when clicked. It appears on the Home page's History block content and is associated with file management actions.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 383,
+      "line_number": 384,
       "context": "this.dialogsStore.setFormItem(item);\n this.dialogsStore.setSubmitToGalleryDialogVisible(true);\n };\n \n onOpenLocation = (item) => {\n this.filesActionsStore.checkAndOpenLocationAction(item);\n };\n \n onMoveAction = (item) => {\n const { id, isFolder } = this.selectedFolderStore;",
       "module": "/packages/client"
     }

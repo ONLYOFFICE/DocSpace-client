@@ -38,7 +38,6 @@
   "ChooseNewPlan": "Möchten Sie einen neuen Preisplan wählen?",
   "ConfirmPayment": "Zahlung bestätigen",
   "ConnectAndConfigureServices": "Dieser Abschnitt dient zum Verbinden und Konfigurieren der Dienste.",
-  "Cost": "Kosten",
   "Credit": "Guthaben",
   "CurrencyPerMonth": "{{currency}}/Monat",
   "CurrentBalance": "Aktueller Kontostand: <1>{{balance}}</1>",

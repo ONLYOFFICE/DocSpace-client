@@ -38,7 +38,6 @@
   "ChooseNewPlan": "Искате ли да изберете нов ценови план?",
   "ConfirmPayment": "Потвърди плащане",
   "ConnectAndConfigureServices": "Тази секция се използва за свързване и конфигуриране на услугите.",
-  "Cost": "Разход",
   "Credit": "Кредит",
   "CurrencyPerMonth": "{{currency}}/месец",
   "CurrentBalance": "Текущ баланс: <1>{{balance}}</1>",

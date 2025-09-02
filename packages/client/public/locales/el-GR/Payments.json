@@ -38,7 +38,6 @@
   "ChooseNewPlan": "Θα θέλατε να επιλέξετε ένα νέο πρόγραμμα τιμολόγησης;",
   "ConfirmPayment": "Επιβεβαίωση Πληρωμής",
   "ConnectAndConfigureServices": "Αυτή η ενότητα χρησιμοποιείται για να συνδέσετε και να ρυθμίσετε τις υπηρεσίες.",
-  "Cost": "Κόστος",
   "Credit": "Πίστωση",
   "CurrencyPerMonth": "{{currency}}/μήνα",
   "CurrentBalance": "τρέχουσα υπόλοιπο: <1>{{balance}}</1>",

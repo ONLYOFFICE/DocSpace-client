@@ -1272,12 +1272,12 @@ export const getUserTypeDescription = (
   if (isPortalAdmin)
     return t("Common:RolePortalAdminDescription", {
       productName: t("Common:ProductName"),
-      sectionName: t("Common:MyFilesSection"),
+      sectionName: t("Common:MyDocuments"),
     });
 
   if (isRoomAdmin)
     return t("Common:RoleRoomAdminDescription", {
-      sectionName: t("Common:MyFilesSection"),
+      sectionName: t("Common:MyDocuments"),
     });
 
   if (isCollaborator) return t("Common:RoleNewUserDescription");

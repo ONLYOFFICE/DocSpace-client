@@ -92,7 +92,7 @@ const BackupServiceDialog: React.FC<BackupServiceDialogProps> = ({
       id: "backup-room",
       title: t("Common:RoomsModule"),
       description: t("BackupRoomDescription", {
-        sectionName: t("Common:MyFilesSection"),
+        sectionName: t("Common:MyDocuments"),
       }),
       icon: <ServiceIcon />,
     },

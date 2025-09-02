@@ -3,7 +3,7 @@
   "content": "{{productName}} admins can access {{productName}} settings, manage and archive rooms, invite new users and assign roles below their level. All admins have access to the {{sectionName}} section.",
   "content_en_sha1_hash": "87028b550c1a2b07e57da5aa45f8bf2d4dc61013",
   "created_at": "2025-05-19T21:30:48.068Z",
-  "updated_at": "2025-08-29T14:33:38.483Z",
+  "updated_at": "2025-09-02T07:59:28.821Z",
   "comment": {
     "text": "This translation key describes the permissions and access level of a Portal Admin, indicating what they can do in the application, such as managing rooms and users. It appears to be used in UI elements related to user roles and permissions.",
     "is_auto": true,
@@ -13,13 +13,13 @@
     {
       "file_path": "/packages/shared/utils/common.ts",
       "line_number": 1273,
-      "context": "isRoomAdmin: boolean,\n isCollaborator: boolean,\n t: TTranslation,\n ) => {\n if (isPortalAdmin)\n return t(\"Common:RolePortalAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyFilesSection\"),\n });\n \n if (isRoomAdmin)",
+      "context": "isRoomAdmin: boolean,\n isCollaborator: boolean,\n t: TTranslation,\n ) => {\n if (isPortalAdmin)\n return t(\"Common:RolePortalAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyDocuments\"),\n });\n \n if (isRoomAdmin)",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
       "line_number": 97,
-      "context": "let options: Array<AccessOptionType | SeparatorOptionType> = [];\n const accesses = {\n portalAdmin: {\n key: EmployeeType.Admin,\n label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: t(\"Common:RolePortalAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyFilesSection\"),\n }),\n ...(!standalone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,",
+      "context": "let options: Array<AccessOptionType | SeparatorOptionType> = [];\n const accesses = {\n portalAdmin: {\n key: EmployeeType.Admin,\n label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: t(\"Common:RolePortalAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyDocuments\"),\n }),\n ...(!standalone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,",
       "module": "/packages/shared"
     }
   ],

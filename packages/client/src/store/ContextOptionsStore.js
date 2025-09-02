@@ -1524,7 +1524,7 @@ class ContextOptionsStore {
           id: "header_option_empty-section",
           key: "empty-section",
           label: t("Files:EmptySection", {
-            sectionName: t("Common:MyFilesSection"),
+            sectionName: t("Common:MyDocuments"),
           }),
           onClick: this.onEmptyPersonalAction,
           icon: ClearTrashReactSvgUrl,

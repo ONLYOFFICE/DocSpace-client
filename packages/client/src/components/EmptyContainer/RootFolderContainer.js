@@ -217,7 +217,7 @@ const RootFolderContainer = (props) => {
       />
       <Link onClick={onGoToPersonal} {...linkStyles}>
         {t("Files:GoToSection", {
-          sectionName: t("Common:MyFilesSection"),
+          sectionName: t("Common:MyDocuments"),
         })}
       </Link>
     </div>
@@ -234,7 +234,7 @@ const RootFolderContainer = (props) => {
       />
       <Link onClick={onGoToPersonal} {...linkStyles}>
         {t("Files:GoToSection", {
-          sectionName: t("Common:MyFilesSection"),
+          sectionName: t("Common:MyDocuments"),
         })}
       </Link>
     </div>

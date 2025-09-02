@@ -64,7 +64,7 @@ class TreeFoldersStore {
     treeFolders.forEach((folder) => {
       switch (folder.rootFolderType) {
         case FolderType.USER:
-          folder.title = i18n.t("Common:MyFilesSection");
+          folder.title = i18n.t("Common:MyDocuments");
           break;
         case FolderType.Rooms:
           folder.title = i18n.t("Common:Rooms");

@@ -3,7 +3,7 @@
   "content": "Backup room",
   "content_en_sha1_hash": "d713be356f0517828e717778afb3cc8136c8c476",
   "created_at": "2025-05-26T07:15:47.386Z",
-  "updated_at": "2025-08-27T10:14:35.443Z",
+  "updated_at": "2025-09-02T07:59:28.627Z",
   "comment": {
     "text": "This translation key is used to display the label \"Backup room\" in a radio button group within a backup settings page. It is intended for use by users who need to select a specific type of file or resource to back up. This option appears in various UI contexts, including restore backup and manual backup pages.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/Backup/BackupServiceDialog.tsx",
       "line_number": 93,
-      "context": "description: t(\"TemporaryDescription\"),\n icon: <ClockIcon />,\n },\n {\n id: \"backup-room\",\n title: t(\"Common:RoomsModule\"),\n description: t(\"BackupRoomDescription\", {\n sectionName: t(\"Common:MyFilesSection\"),\n }),\n icon: <ServiceIcon />,\n },",
+      "context": "description: t(\"TemporaryDescription\"),\n icon: <ClockIcon />,\n },\n {\n id: \"backup-room\",\n title: t(\"Common:RoomsModule\"),\n description: t(\"BackupRoomDescription\", {\n sectionName: t(\"Common:MyDocuments\"),\n }),\n icon: <ServiceIcon />,\n },",
       "module": "/packages/client"
     },
     {

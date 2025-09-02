@@ -300,6 +300,10 @@ class TreeFoldersStore {
     return this.recentFolder ? this.recentFolder.id : null;
   }
 
+  get shareFolderId() {
+    return this.shareFolder ? this.shareFolder.id : null;
+  }
+
   get isPersonalRoom() {
     return (
       this.myFolder &&

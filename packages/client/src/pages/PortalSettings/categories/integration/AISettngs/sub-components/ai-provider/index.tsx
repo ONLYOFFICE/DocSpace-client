@@ -26,7 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Heading, HeadingLevel } from "@docspace/shared/components/heading";
@@ -37,9 +37,15 @@ import type { TAiProvider } from "@docspace/shared/api/ai/types";
 
 import styles from "../../AISettings.module.scss";
 import { AiProviderTile } from "../tiles/ai-provider-tile";
+import { AddAIProviderDialog } from "./dialogs/add-ai-provider";
 
 export const AiProvider = ({ aiProviders }: { aiProviders: TAiProvider[] }) => {
   const { t } = useTranslation(["Common", "AISettings"]);
+  const [addAIProviderDialogVisible, setAddAIProviderDialogVisible] =
+    useState(false);
+
+  const showAddProviderDialog = () => setAddAIProviderDialogVisible(true);
+  const hideAddProviderDialog = () => setAddAIProviderDialogVisible(false);
 
   return (
     <div className={styles.aiProvider}>
@@ -50,7 +56,7 @@ export const AiProvider = ({ aiProviders }: { aiProviders: TAiProvider[] }) => {
         fontWeight={700}
         lineHeight="22px"
       >
-        {t("AISettings:AIProviderSettingTitle")}
+        {t("AISettings:AIProvider")}
       </Heading>
       <Text className={styles.description}>
         {t("AISettings:AIProviderSettingDescription", {
@@ -74,7 +80,7 @@ export const AiProvider = ({ aiProviders }: { aiProviders: TAiProvider[] }) => {
         label={t("AISettings:AddAIProvider")}
         scale={false}
         className={styles.addProviderButton}
-        // onClick={showAddNewDialog}
+        onClick={showAddProviderDialog}
       />
 
       <div className={styles.providerList}>
@@ -82,6 +88,10 @@ export const AiProvider = ({ aiProviders }: { aiProviders: TAiProvider[] }) => {
           <AiProviderTile key={provider.id} item={provider} />
         ))}
       </div>
+
+      {addAIProviderDialogVisible ? (
+        <AddAIProviderDialog onClose={hideAddProviderDialog} />
+      ) : null}
     </div>
   );
 };

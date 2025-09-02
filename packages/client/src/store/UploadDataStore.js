@@ -421,53 +421,38 @@ class UploadDataStore {
   convertFile = (file, t, isOpen) => {
     this.dialogsStore.setConvertItem(null);
 
-    const fileIndex =
-      file.index ?? this.files.findIndex((el) => el.fileId === file.fileId);
+    const fileHistoryIndex = this.uploadedFilesHistory.findIndex(
+      (el) => el.fileId === file.fileId,
+    );
+    const secondConverting = fileHistoryIndex > -1;
 
-    if (fileIndex > -1 && this.files[fileIndex].inConversion) return;
-
-    const secondConvertingWithPassword =
-      hasOwnProperty(file, "password") || fileIndex > -1;
-    const conversionPositionIndex =
-      hasOwnProperty(file, "index") || fileIndex > -1;
+    if (
+      secondConverting &&
+      this.uploadedFilesHistory[fileHistoryIndex].inConversion
+    )
+      return;
 
     if (this.converted) {
       this.filesToConversion = [];
       this.convertFilesSize = 0;
-      // if (!secondConvertingWithPassword)
-      //   this.files = this.files.filter((f) => f.action === "converted");
     }
 
-    if (secondConvertingWithPassword) {
-      const operationName = OPERATIONS_NAME.upload;
-      this.primaryProgressDataStore.setPrimaryProgressBarData({
-        operation: operationName,
-        alert: false,
-      });
-    }
+    const operationName = OPERATIONS_NAME.upload;
+    this.primaryProgressDataStore.setPrimaryProgressBarData({
+      operation: operationName,
+      alert: false,
+    });
 
-    if (secondConvertingWithPassword && conversionPositionIndex) {
-      this.files.splice(fileIndex, 1, file);
-    } else {
-      this.files.push(file);
-    }
+    this.uploadedFilesHistory[fileHistoryIndex].action = "convert";
+    this.uploadedFilesHistory[fileHistoryIndex].error = null;
+    this.uploadedFilesHistory[fileHistoryIndex].errorShown = false;
 
     if (!this.filesToConversion.length) {
       this.filesToConversion.push(file);
 
-      if (secondConvertingWithPassword && conversionPositionIndex) {
-        this.uploadedFilesHistory[fileIndex].action = "convert";
-        this.uploadedFilesHistory[fileIndex].error = null; // reset error to show loader for convert with password
-        this.uploadedFilesHistory[fileIndex].errorShown = false;
-      } else {
-        this.uploadedFilesHistory.push(file);
-      }
-
-      this.startConversion(t, isOpen, true, secondConvertingWithPassword);
+      this.startConversion(t, isOpen);
     } else {
       this.filesToConversion.push(file);
-      if (!secondConvertingWithPassword && !conversionPositionIndex)
-        this.uploadedFilesHistory.push(file);
     }
   };
 
@@ -1083,13 +1068,13 @@ class UploadDataStore {
     const toFolderId = folderId || this.selectedFolderStore.id;
 
     if (this.uploaded) {
-      this.files = this.files.filter((f) => f.action !== "upload");
+      this.files = this.files.filter((f) => f.action !== "upload" || f.error);
       this.filesSize = 0;
       this.uploadToFolder = null;
       this.percent = 0;
     }
     if (this.uploaded && this.converted) {
-      this.files = [];
+      this.files = this.files.filter((f) => f.error);
       this.filesToConversion = [];
       this.uploadedFilesSize = 0;
       this.asyncUploadObj = {};
@@ -1616,11 +1601,13 @@ class UploadDataStore {
     retryFile.action = "upload";
     retryFile.error = "";
     retryFile.inAction = false;
+    retryFile.percent = 0;
 
     retryFileUploaded.action = "upload";
     retryFileUploaded.error = "";
     retryFileUploaded.inAction = false;
     retryFileUploaded.errorShown = false;
+    retryFileUploaded.percent = 0;
 
     if (this.uploaded) {
       const newUploadData = {
@@ -1863,6 +1850,7 @@ class UploadDataStore {
     totalErrorsCount,
     filesWithoutErrors,
     filesWithErrors,
+    filesWithAllErrors,
   ) => {
     if (totalErrorsCount === 0) {
       toastr.success(
@@ -1876,7 +1864,7 @@ class UploadDataStore {
     this.primaryProgressDataStore.setPrimaryProgressBarData({
       operation: OPERATIONS_NAME.upload,
       alert: true,
-      errorCount: totalErrorsCount,
+      errorCount: filesWithAllErrors,
     });
 
     this.uploadedFilesHistory.forEach((f) => {
@@ -1925,16 +1913,17 @@ class UploadDataStore {
     const filesWithErrors = this.uploadedFilesHistory.filter(
       (f) => f.error && !f.errorShown,
     );
+    const filesWithAllErrors = this.uploadedFilesHistory.filter((f) => f.error);
     const filesWithoutErrors = this.uploadedFilesHistory.filter(
       (f) => !f.error,
     );
-    const totalErrorsCount = filesWithErrors.length;
 
     this.showFinishUploadToastr(
       t,
-      totalErrorsCount,
+      filesWithAllErrors.length,
       filesWithoutErrors,
       filesWithErrors,
+      filesWithAllErrors.length,
     );
 
     this.uploaded = true;

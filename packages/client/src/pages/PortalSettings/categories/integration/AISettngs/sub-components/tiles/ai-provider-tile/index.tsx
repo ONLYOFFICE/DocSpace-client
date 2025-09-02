@@ -70,8 +70,12 @@ export const AiProviderTile = ({ item }: AiProviderTileProps) => {
       </AiTile.Header>
 
       <AiTile.Body>
-        <Text truncate>{companyLabel}</Text>
-        <Text truncate>{item.url}</Text>
+        <Text lineHeight="20px" truncate>
+          {companyLabel}
+        </Text>
+        <Text lineHeight="20px" truncate>
+          {item.url}
+        </Text>
       </AiTile.Body>
     </AiTile>
   );

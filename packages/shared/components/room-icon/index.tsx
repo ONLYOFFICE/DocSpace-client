@@ -37,6 +37,7 @@ import { useClickOutside } from "../../utils/useClickOutside";
 import { getTextColor } from "../../utils";
 import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
 import { useTheme } from "../../hooks/useTheme";
+import { ROOM_ACTION_KEYS } from "../../constants";
 import { globalColors } from "../../themes/globalColors";
 
 import { DropDown } from "../drop-down";
@@ -119,7 +120,7 @@ const RoomIcon = ({
       {model?.map((option) => {
         const optionOnClickAction = () => {
           setOpenLogoEdit(false);
-          if (option.key === "create_edit_room_upload") {
+          if (option.key === ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_UPLOAD) {
             return option.onClick(inputFilesElement);
           }
           option.onClick();

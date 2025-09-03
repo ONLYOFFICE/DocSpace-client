@@ -94,7 +94,7 @@ const DeleteDialogComponent = ({
   );
 };
 
-export const DeleteDialog = inject(({ aiSettingsStore }: TStore) => {
+export const DeleteMCPDialog = inject(({ aiSettingsStore }: TStore) => {
   return {
     deleteMCP: aiSettingsStore.deleteMCP,
   };

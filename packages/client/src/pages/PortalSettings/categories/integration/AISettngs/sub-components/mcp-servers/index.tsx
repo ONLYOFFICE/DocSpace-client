@@ -42,8 +42,8 @@ import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore"
 import styles from "../../AISettings.module.scss";
 import { MCPTile } from "../tiles/mcp-tile";
 import { AddMCPDialog } from "./dialogs/add";
-import { DeleteDialog } from "./dialogs/delete";
-import { DisableDialog } from "./dialogs/disable";
+import { DeleteMCPDialog } from "./dialogs/delete";
+import { DisableMCPDialog } from "./dialogs/disable";
 import { EditMCPDialog } from "./dialogs/edit";
 
 type MCPListProps = {
@@ -253,14 +253,14 @@ const MCPServersComponent = ({
       {addDialogVisible ? <AddMCPDialog onClose={hideAddDialog} /> : null}
 
       {deleteDialogData.visible ? (
-        <DeleteDialog
+        <DeleteMCPDialog
           onClose={hideDeleteDialog}
           serverId={deleteDialogData.serverId}
         />
       ) : null}
 
       {disableDialogData.visible ? (
-        <DisableDialog
+        <DisableMCPDialog
           onClose={hideDisableDialog}
           serverId={disableDialogData.serverId}
         />

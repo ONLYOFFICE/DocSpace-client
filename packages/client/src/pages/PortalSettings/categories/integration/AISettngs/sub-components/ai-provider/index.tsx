@@ -73,8 +73,7 @@ type AIProviderProps = {
 
 const AIProviderComponent = ({ aiProviders }: AIProviderProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
-  const [addAIProviderDialogVisible, setaddAIProviderDialogVisible] =
-    useState(false);
+  const [addDialogVisible, setaddDialogVisible] = useState(false);
   const [updateDialogData, setUpdateDialogData] = useState<TUpdateDialogData>({
     visible: false,
     provider: null,
@@ -87,9 +86,9 @@ const AIProviderComponent = ({ aiProviders }: AIProviderProps) => {
     TProviderTypeWithUrl[]
   >([]);
 
-  const showAddProviderDialog = () => setaddAIProviderDialogVisible(true);
+  const showAddProviderDialog = () => setaddDialogVisible(true);
 
-  const hideAddProviderDialog = () => setaddAIProviderDialogVisible(false);
+  const hideAddProviderDialog = () => setaddDialogVisible(false);
   const hideUpdateDialog = () =>
     setUpdateDialogData({ visible: false, provider: null });
 
@@ -161,7 +160,7 @@ const AIProviderComponent = ({ aiProviders }: AIProviderProps) => {
         ))}
       </div>
 
-      {addAIProviderDialogVisible ? (
+      {addDialogVisible ? (
         <AddUpdateProviderDialog
           variant="add"
           onClose={hideAddProviderDialog}

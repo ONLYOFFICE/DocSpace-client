@@ -99,7 +99,7 @@ const DisableDialogComponent = ({
   );
 };
 
-export const DisableDialog = inject(({ aiSettingsStore }: TStore) => {
+export const DisableMCPDialog = inject(({ aiSettingsStore }: TStore) => {
   return {
     updateMCPStatus: aiSettingsStore.updateMCPStatus,
   };

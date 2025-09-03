@@ -35,5 +35,7 @@
   "ProviderURL": "URL",
   "ProviderKey": "Key",
   "ProviderAddedSuccess": "Provider added successfully",
-  "ProviderRemovedSuccess": "Provider removed successfully"
+  "ProviderRemovedSuccess": "Provider removed successfully",
+  "DeleteProvider": "Delete provider",
+  "DeleteProviderDescription": "Deleting this provider will revoke access for all users, and its settings will be permanently erased. To use the provider again, you will need to set it up from scratch."
 }

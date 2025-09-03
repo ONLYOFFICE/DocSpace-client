@@ -39,42 +39,49 @@ import type {
   TProviderTypeWithUrl,
 } from "@docspace/shared/api/ai/types";
 import { getAvailableProviderUrls } from "@docspace/shared/api/ai";
-import { type TData, toastr } from "@docspace/shared/components/toast";
 
+import { DeleteAIProviderDialog } from "SRC_DIR/pages/PortalSettings/categories/integration/AISettngs/sub-components/ai-provider/dialogs/delete";
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
 import styles from "../../AISettings.module.scss";
 import { AiProviderTile } from "../tiles/ai-provider-tile";
 import { AddAIProviderDialog } from "./dialogs/add";
 
+type TDeleteDialogData =
+  | {
+      visible: false;
+      providerId: null;
+    }
+  | {
+      visible: true;
+      providerId: TAiProvider["id"];
+    };
+
 type AIProviderProps = {
   aiProviders?: AISettingsStore["aiProviders"];
-  deleteAIProvider?: AISettingsStore["deleteAIProvider"];
 };
 
-const AIProviderComponent = ({
-  aiProviders,
-  deleteAIProvider,
-}: AIProviderProps) => {
+const AIProviderComponent = ({ aiProviders }: AIProviderProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
-  const [addAIProviderDialogVisible, setAddAIProviderDialogVisible] =
+  const [addAIProviderDialogVisible, setaddAIProviderDialogVisible] =
     useState(false);
+  const [deleteDialogData, setDeleteDialogData] = useState<TDeleteDialogData>({
+    visible: false,
+    providerId: null,
+  });
   const [aiProviderTypesWithUrls, setAiProviderTypesWithUrls] = useState<
     TProviderTypeWithUrl[]
   >([]);
 
-  const showAddProviderDialog = () => setAddAIProviderDialogVisible(true);
+  const showAddProviderDialog = () => setaddAIProviderDialogVisible(true);
 
-  const hideAddProviderDialog = () => setAddAIProviderDialogVisible(false);
+  const hideAddProviderDialog = () => setaddAIProviderDialogVisible(false);
+
+  const hideDeleteProviderDialog = () =>
+    setDeleteDialogData({ visible: false, providerId: null });
 
   const onDeleteAIProvider = async (id: TAiProvider["id"]) => {
-    try {
-      await deleteAIProvider?.(id);
-
-      toastr.success(t("AISettings:ProviderRemovedSuccess"));
-    } catch (e) {
-      toastr.error(e as TData);
-    }
+    setDeleteDialogData({ visible: true, providerId: id });
   };
 
   useEffect(() => {
@@ -139,6 +146,13 @@ const AIProviderComponent = ({
           aiProviderTypesWithUrls={aiProviderTypesWithUrls}
         />
       ) : null}
+
+      {deleteDialogData.visible ? (
+        <DeleteAIProviderDialog
+          onClose={hideDeleteProviderDialog}
+          providerId={deleteDialogData.providerId}
+        />
+      ) : null}
     </div>
   );
 };
@@ -146,6 +160,5 @@ const AIProviderComponent = ({
 export const AIProvider = inject(({ aiSettingsStore }: TStore) => {
   return {
     aiProviders: aiSettingsStore.aiProviders,
-    deleteAIProvider: aiSettingsStore.deleteAIProvider,
   };
 })(observer(AIProviderComponent));

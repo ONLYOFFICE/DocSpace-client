@@ -37,24 +37,38 @@ import config from "../../../../../package.json";
 import PaymentsEnterprise from "./Standalone";
 import PaymentsSaaS from "./SaaS";
 import Wallet from "./Wallet";
+import usePayments from "./usePayments";
 
-const PaymentsPage = ({ currentDeviceType, standalone }) => {
+import { createDefaultHookSettingsProps } from "../../utils/createDefaultHookSettingsProps";
+
+const PaymentsPage = (props) => {
+  const { currentDeviceType, standalone, paymentStore } = props;
   const [currentTabId, setCurrentTabId] = useState();
   const location = useLocation();
   const navigate = useNavigate();
   const [isLoaded, setIsLoaded] = useState(false);
   const { t } = useTranslation(["Payments"]);
 
+  const defaultProps = createDefaultHookSettingsProps({
+    paymentStore,
+  });
+
+  const { getWalletData, getPortalPaymentsData } = usePayments(
+    defaultProps.payment,
+  );
+
   const data = [
     {
       id: "portal-payments",
       name: t("TariffPlan"),
       content: <PaymentsSaaS />,
+      onClick: getPortalPaymentsData,
     },
     {
       id: "wallet",
       name: t("Wallet"),
       content: <Wallet />,
+      onClick: getWalletData,
     },
   ];
 
@@ -92,11 +106,12 @@ const PaymentsPage = ({ currentDeviceType, standalone }) => {
   );
 };
 
-export const Component = inject(({ settingsStore }) => {
+export const Component = inject(({ settingsStore, paymentStore }) => {
   const { standalone, currentDeviceType } = settingsStore;
 
   return {
     standalone,
     currentDeviceType,
+    paymentStore,
   };
 })(observer(PaymentsPage));

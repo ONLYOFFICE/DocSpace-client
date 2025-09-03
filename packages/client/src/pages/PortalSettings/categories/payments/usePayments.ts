@@ -24,82 +24,48 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
-import { inject, observer } from "mobx-react";
+import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import moment from "moment";
 
-import { StorageTariffDeactiveted } from "SRC_DIR/components/dialogs";
+import PaymentStore from "SRC_DIR/store/PaymentStore";
 
-import TransactionHistoryLoader from "./sub-components/TransactionHistoryLoader";
-import WalletContainer from "./WalletContainer";
-
-let timerId = null;
-
-const Wallet = (props) => {
-  const {
-    isInitWalletPage,
-    isShowStorageTariffDeactivatedModal,
-    language,
-    setIsInitWalletPage,
-  } = props;
-
-  const { t, ready } = useTranslation(["Payments", "Common"]);
-
-  const errorText = t("Common:UnexpectedError");
-  const [showLoader, setShowLoader] = useState(false);
-
-  const shouldShowLoader = !isInitWalletPage || !ready;
-
-  useEffect(() => {
-    if (!ready) return;
-  }, [errorText, ready]);
-
-  useEffect(() => {
-    moment.locale(language);
-  }, [language]);
-
-  useEffect(() => {
-    timerId = setTimeout(() => {
-      setShowLoader(true);
-    }, 500);
-
-    return () => {
-      clearTimeout(timerId);
-
-      setIsInitWalletPage(false);
-    };
-  }, []);
-
-  return shouldShowLoader ? (
-    showLoader ? (
-      <TransactionHistoryLoader />
-    ) : null
-  ) : (
-    <>
-      <WalletContainer t={t} />
-      {isShowStorageTariffDeactivatedModal ? (
-        <StorageTariffDeactiveted
-          visible={isShowStorageTariffDeactivatedModal}
-        />
-      ) : null}
-    </>
-  );
+export type UsePaymentsProps = {
+  initPayments?: PaymentStore["init"];
+  walletInit?: PaymentStore["walletInit"];
 };
 
-export default inject(({ paymentStore, authStore }) => {
-  const {
-    isInitWalletPage,
-    isShowStorageTariffDeactivatedModal,
-    setIsInitWalletPage,
-  } = paymentStore;
-  const { language } = authStore;
+const usePayments = ({ initPayments, walletInit }: UsePaymentsProps) => {
+  const { t, ready } = useTranslation(["Payments", "Common", "Settings"]);
+
+  const errorText = t("Common:UnexpectedError");
+
+  const inTabPayments = window.location.pathname.includes("portal-payments");
+  const inTabWallet = window.location.pathname.includes("wallet");
+
+  const getPortalPaymentsData = useCallback(async () => {
+    await initPayments?.(t);
+  }, [initPayments]);
+
+  const getWalletData = useCallback(async () => {
+    if (!ready) return;
+
+    await walletInit?.(errorText);
+  }, [walletInit, errorText, ready]);
+
+  const getPaymentsInitialValue = React.useCallback(async () => {
+    const actions = [];
+    if (inTabPayments) actions.push(getPortalPaymentsData());
+
+    if (inTabWallet) actions.push(getWalletData());
+
+    await Promise.all(actions);
+  }, [getPortalPaymentsData, getWalletData]);
 
   return {
-    isInitWalletPage,
-    isShowStorageTariffDeactivatedModal,
-    language,
-
-    setIsInitWalletPage,
+    getPortalPaymentsData,
+    getWalletData,
+    getPaymentsInitialValue,
   };
-})(observer(Wallet));
+};
+
+export default usePayments;

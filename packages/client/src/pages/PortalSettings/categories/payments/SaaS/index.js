@@ -38,12 +38,12 @@ import { StorageTariffDeactiveted } from "SRC_DIR/components/dialogs";
 import PaymentContainer from "./PaymentContainer";
 
 let timerId = null;
+
 const SaaSPage = ({
   language,
   isLoadedTariffStatus,
   isLoadedCurrentQuota,
   isInitPaymentPage,
-  init,
   isUpdatingTariff,
   isUpdatingBasicSettings,
   resetTariffContainerToBasic,
@@ -88,8 +88,6 @@ const SaaSPage = ({
 
   useEffect(() => {
     if (!isLoadedTariffStatus || !isLoadedCurrentQuota || !ready) return;
-
-    init(t);
   }, [isLoadedTariffStatus, isLoadedCurrentQuota, ready]);
 
   useEffect(() => {
@@ -145,7 +143,6 @@ export default inject(
     const { isLoaded: isLoadedTariffStatus } = currentTariffStatusStore;
     const {
       isInitPaymentPage,
-      init,
       isUpdatingBasicSettings,
       resetTariffContainerToBasic,
       setIsUpdatingBasicSettings,
@@ -170,7 +167,6 @@ export default inject(
       setEncryptionKeys,
       resetTariffContainerToBasic,
       isUpdatingTariff,
-      init,
       isInitPaymentPage,
       language,
       isLoadedTariffStatus,

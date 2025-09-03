@@ -24,31 +24,28 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
+import React from "react";
 import { observer, inject } from "mobx-react";
 
 import { PaymentsStandaloneLoader } from "@docspace/shared/skeletons/payments";
 import { Bonus as BonusPage } from "@docspace/shared/pages/Payments/Bonus";
 
-const Bonus = ({
-  standaloneInit,
-  isInitPaymentPage,
-  isEnterprise,
-  isTrial,
-  isDeveloper,
-  isCommunity,
-  feedbackAndSupportUrl,
-  salesEmail,
-  dataBackupUrl,
-  logoText,
-  enterpriseInstallScriptUrl,
-  enterpriseInstallWindowsUrl,
-  forEnterprisesUrl,
-  demoOrderUrl,
-}) => {
-  useEffect(() => {
-    standaloneInit();
-  }, []);
+const Bonus = (props) => {
+  const {
+    isInitPaymentPage,
+    isEnterprise,
+    isTrial,
+    isDeveloper,
+    isCommunity,
+    feedbackAndSupportUrl,
+    salesEmail,
+    dataBackupUrl,
+    logoText,
+    enterpriseInstallScriptUrl,
+    enterpriseInstallWindowsUrl,
+    forEnterprisesUrl,
+    demoOrderUrl,
+  } = props;
 
   if (!isInitPaymentPage) return <PaymentsStandaloneLoader />;
 
@@ -77,7 +74,7 @@ export const Component = inject(
     currentQuotaStore,
     settingsStore,
   }) => {
-    const { standaloneInit, isInitPaymentPage } = paymentStore;
+    const { isInitPaymentPage } = paymentStore;
     const { isCommunity, isEnterprise, isDeveloper } = currentTariffStatusStore;
     const { isTrial } = currentQuotaStore;
     const {
@@ -92,7 +89,6 @@ export const Component = inject(
     } = settingsStore;
 
     return {
-      standaloneInit,
       isInitPaymentPage,
       isCommunity,
       isEnterprise,

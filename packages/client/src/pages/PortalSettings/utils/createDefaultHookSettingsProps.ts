@@ -41,6 +41,8 @@ import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { TfaStore } from "@docspace/shared/store/TfaStore";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { AuthStore } from "@docspace/shared/store/AuthStore";
+import PaymentStore from "SRC_DIR/store/PaymentStore";
+import ServicesStore from "SRC_DIR/store/ServicesStore";
 
 export interface DefaultHookSettingsPropsParams {
   loadBaseInfo?: (page: string) => Promise<void>;
@@ -61,6 +63,8 @@ export interface DefaultHookSettingsPropsParams {
   importAccountsStore?: ImportAccountsStore;
   ldapStore?: LdapFormStore;
   common?: CommonStore;
+  paymentStore?: PaymentStore;
+  servicesStore?: ServicesStore;
 }
 
 export const createDefaultHookSettingsProps = ({
@@ -82,6 +86,8 @@ export const createDefaultHookSettingsProps = ({
   importAccountsStore,
   ldapStore,
   common,
+  paymentStore,
+  servicesStore,
 }: DefaultHookSettingsPropsParams) => ({
   common: {
     loadBaseInfo,
@@ -154,5 +160,12 @@ export const createDefaultHookSettingsProps = ({
   },
   deleteData: {
     getPortalOwner: settingsStore?.getPortalOwner,
+  },
+  payment: {
+    initPayments: paymentStore?.init,
+    walletInit: paymentStore?.walletInit,
+  },
+  services: {
+    servicesInit: servicesStore?.servicesInit,
   },
 });

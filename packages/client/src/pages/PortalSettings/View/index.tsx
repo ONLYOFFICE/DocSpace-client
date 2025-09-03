@@ -41,6 +41,9 @@ import { Component as DataImport } from "../categories/data-import";
 import { Component as DeveloperTools } from "../categories/developer-tools";
 import { Component as DeleteData } from "../categories/delete-data";
 import { Component as StorageManagement } from "../categories/storage-management";
+import { Component as Payments } from "../categories/payments";
+import { Component as Bonus } from "../../Bonus";
+import { Component as Services } from "../categories/services";
 
 import useSecurity from "../categories/security/useSecurity";
 import useBackup from "../categories/data-management/backup/useBackup";
@@ -49,7 +52,9 @@ import useDeveloperTools from "../categories/developer-tools/useDeveloperTools";
 import useDeleteData from "../categories/delete-data/useDeleteData";
 import useCommon from "../categories/common/useCommon";
 import useDataImport from "../categories/data-import/useDataImport";
+import usePayments from "../categories/payments/usePayments";
 import { createDefaultHookSettingsProps } from "../utils/createDefaultHookSettingsProps";
+import useServices from "../categories/services/useServices";
 
 type TView =
   | "customization"
@@ -61,6 +66,9 @@ type TView =
   | "management"
   | "developer-tools"
   | "delete-data"
+  | "payments"
+  | "bonus"
+  | "services"
   | "";
 
 const View = ({
@@ -73,6 +81,7 @@ const View = ({
   treeFoldersStore,
   ssoFormStore,
   init,
+  standaloneInit,
   setup,
   authStore,
   currentQuotaStore,
@@ -84,6 +93,8 @@ const View = ({
   importAccountsStore,
   ldapStore,
   common,
+  paymentStore,
+  servicesStore,
 }: any) => {
   const location = useLocation();
 
@@ -103,6 +114,9 @@ const View = ({
   const isStorageManagementPage = location.pathname.includes("management");
   const isDeveloperToolsPage = location.pathname.includes("developer-tools");
   const isDeletePage = location.pathname.includes("delete-data");
+  const isPaymentsPage = location.pathname.includes("payments");
+  const isBonusPage = location.pathname.includes("bonus");
+  const isServicesPage = location.pathname.includes("services");
 
   const defaultProps = createDefaultHookSettingsProps({
     loadBaseInfo,
@@ -123,6 +137,8 @@ const View = ({
     importAccountsStore,
     ldapStore,
     common,
+    paymentStore,
+    servicesStore,
   });
 
   const { getCommonInitialValue } = useCommon(defaultProps.common);
@@ -136,6 +152,8 @@ const View = ({
     defaultProps.developerTools,
   );
   const { getDeleteDataInitialValue } = useDeleteData(defaultProps.deleteData);
+  const { getPaymentsInitialValue } = usePayments(defaultProps.payment);
+  const { getServicesInitialValue } = useServices(defaultProps.services);
 
   useEffect(() => {
     animationStartedRef.current = false;
@@ -226,6 +244,21 @@ const View = ({
           await getDeleteDataInitialValue();
         }
         break;
+      case "payments":
+        if (prevView !== "payments") {
+          await getPaymentsInitialValue();
+        }
+        break;
+      case "bonus":
+        if (prevView !== "bonus") {
+          await standaloneInit();
+        }
+        break;
+      case "services":
+        if (prevView !== "services") {
+          await getServicesInitialValue();
+        }
+        break;
     }
   };
 
@@ -239,6 +272,9 @@ const View = ({
     if (isStorageManagementPage) return "management";
     if (isDeveloperToolsPage) return "developer-tools";
     if (isDeletePage) return "delete-data";
+    if (isPaymentsPage) return "payments";
+    if (isBonusPage) return "bonus";
+    if (isServicesPage) return "services";
     return "";
   };
 
@@ -289,6 +325,9 @@ const View = ({
       {currentView === "management" ? <StorageManagement /> : null}
       {currentView === "developer-tools" ? <DeveloperTools /> : null}
       {currentView === "delete-data" ? <DeleteData /> : null}
+      {currentView === "payments" ? <Payments /> : null}
+      {currentView === "bonus" ? <Bonus /> : null}
+      {currentView === "services" ? <Services /> : null}
     </LoaderWrapper>
   );
 };
@@ -313,14 +352,13 @@ export const ViewComponent = inject(
     importAccountsStore,
     storageManagement,
     ldapStore,
+    paymentStore,
+    servicesStore,
   }: TStore) => {
     const { initSettings: initSettingsCommon } = common;
 
-    const {
-      setIsChangePageRequestRunning,
-      setCurrentClientView,
-      showHeaderLoader,
-    } = clientLoadingStore;
+    const { setIsChangePageRequestRunning, showHeaderLoader } =
+      clientLoadingStore;
 
     const isMobileView = settingsStore.deviceType === DeviceType.mobile;
 
@@ -328,10 +366,14 @@ export const ViewComponent = inject(
       await initSettingsCommon(page);
     };
 
+    const { init } = storageManagement;
+    const { standaloneInit } = paymentStore;
+
     return {
       setIsChangePageRequestRunning,
-      setCurrentClientView,
       showHeaderLoader,
+      init,
+      standaloneInit,
 
       // Stores for safeProps
       setup,
@@ -348,9 +390,10 @@ export const ViewComponent = inject(
       oauthStore,
       brandingStore,
       importAccountsStore,
-      storageManagement,
       ldapStore,
       common,
+      paymentStore,
+      servicesStore,
 
       // Direct values needed in safeProps
       isMobileView,

@@ -31,7 +31,6 @@ import { useLocation, useNavigate } from "react-router";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { BACKUP_SERVICE, TOTAL_SIZE } from "@docspace/shared/constants";
-import { TTranslation } from "@docspace/shared/types";
 import { setServiceState } from "@docspace/shared/api/portal";
 
 import { StorageTariffDeactiveted } from "SRC_DIR/components/dialogs";
@@ -45,37 +44,22 @@ import GracePeriodModal from "./sub-components/AdditionalStorage/GracePeriodModa
 import BackupServiceDialog from "./sub-components/Backup/BackupServiceDialog";
 import ConfirmationDialog from "./sub-components/ConfirmationDialog";
 
-type ServicesProps = {
-  servicesInit: (t: TTranslation) => void;
-  isInitServicesPage: boolean;
-  isVisibleWalletSettings: boolean;
-  isShowStorageTariffDeactivatedModal: boolean;
-  isGracePeriod: boolean;
-  previousStoragePlanSize: number;
-  changeServiceState: (service: string) => void;
-  isCardLinkedToPortal: boolean;
-  setConfirmActionType: (value: string) => void;
-  confirmActionType: string | null;
-  setIsInitServicesPage: (value: boolean) => void;
-  setVisibleWalletSetting: (value: boolean) => void;
-};
-
 let timerId: NodeJS.Timeout | null = null;
 
-const Services: React.FC<ServicesProps> = ({
-  servicesInit,
-  isInitServicesPage,
-  isVisibleWalletSettings,
-  isGracePeriod,
-  previousStoragePlanSize,
-  isShowStorageTariffDeactivatedModal,
-  changeServiceState,
-  isCardLinkedToPortal,
-  setConfirmActionType,
-  confirmActionType,
-  setIsInitServicesPage,
-  setVisibleWalletSetting,
-}) => {
+const Services = (props: InjectedProps) => {
+  const {
+    isInitServicesPage,
+    isVisibleWalletSettings,
+    isGracePeriod,
+    previousStoragePlanSize,
+    isShowStorageTariffDeactivatedModal,
+    changeServiceState,
+    isCardLinkedToPortal,
+    setConfirmActionType,
+    confirmActionType,
+    setIsInitServicesPage,
+    setVisibleWalletSetting,
+  } = props;
   const { t, ready } = useTranslation(["Payments", "Services", "Common"]);
   const [isStorageVisible, setIsStorageVisible] = useState(false);
   const [isBackupVisible, setIsBackupVisible] = useState(false);
@@ -94,19 +78,6 @@ const Services: React.FC<ServicesProps> = ({
   const { openDialog } = location.state || {};
 
   const previousDialogRef = useRef<boolean>(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        await servicesInit(t);
-      } catch (error) {
-        console.error(error);
-        toastr.error(t("Common:UnexpectedError"));
-      }
-    };
-
-    fetchData();
-  }, [servicesInit]);
 
   useEffect(() => {
     if (!isVisibleWalletSettings || !isInitServicesPage) return;
@@ -327,39 +298,43 @@ const Services: React.FC<ServicesProps> = ({
   );
 };
 
-export const Component = inject(
-  ({ servicesStore, currentTariffStatusStore, paymentStore }: TStore) => {
-    const {
-      servicesInit,
-      isInitServicesPage,
-      isVisibleWalletSettings,
-      setConfirmActionType,
-      confirmActionType,
-      setIsInitServicesPage,
-      setVisibleWalletSetting,
-    } = servicesStore;
-    const { isGracePeriod, previousStoragePlanSize } = currentTariffStatusStore;
-    const {
-      isShowStorageTariffDeactivatedModal,
-      changeServiceState,
-      isCardLinkedToPortal,
-    } = paymentStore;
+const mapStoreToProps = ({
+  servicesStore,
+  currentTariffStatusStore,
+  paymentStore,
+}: TStore) => {
+  const {
+    isInitServicesPage,
+    isVisibleWalletSettings,
+    setConfirmActionType,
+    confirmActionType,
+    setIsInitServicesPage,
+    setVisibleWalletSetting,
+  } = servicesStore;
+  const { isGracePeriod, previousStoragePlanSize } = currentTariffStatusStore;
+  const {
+    isShowStorageTariffDeactivatedModal,
+    changeServiceState,
+    isCardLinkedToPortal,
+  } = paymentStore;
 
-    return {
-      servicesInit,
-      isInitServicesPage,
-      isVisibleWalletSettings,
-      isShowStorageTariffDeactivatedModal,
-      isGracePeriod,
-      previousStoragePlanSize,
-      changeServiceState,
-      isCardLinkedToPortal,
-      setConfirmActionType,
-      confirmActionType,
-      setIsInitServicesPage,
-      setVisibleWalletSetting,
-    };
-  },
-)(observer(Services));
+  return {
+    isInitServicesPage,
+    isVisibleWalletSettings,
+    isShowStorageTariffDeactivatedModal,
+    isGracePeriod,
+    previousStoragePlanSize,
+    changeServiceState,
+    isCardLinkedToPortal,
+    setConfirmActionType,
+    confirmActionType,
+    setIsInitServicesPage,
+    setVisibleWalletSetting,
+  };
+};
 
-export default Component;
+type InjectedProps = ReturnType<typeof mapStoreToProps>;
+
+export const Component = inject(mapStoreToProps)(
+  observer(Services),
+) as unknown as React.ComponentType;

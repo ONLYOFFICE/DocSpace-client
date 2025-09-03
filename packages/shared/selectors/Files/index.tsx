@@ -64,6 +64,8 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
 
     treeFolders,
     withRecentTreeFolder,
+    withFavoritesTreeFolder,
+
     onSetBaseFolderPath,
     roomType,
     isUserOnly,
@@ -189,6 +191,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     setHasNextPage,
     setIsInit,
     withRecentTreeFolder,
+    withFavoritesTreeFolder,
   });
 
   let rootFolderTypeItem;

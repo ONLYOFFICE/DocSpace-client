@@ -92,26 +92,21 @@ const PluginDialog = ({
     if (modalRequestRunning) return;
     const message = await onClose();
 
-    messageActions(
+    messageActions({
       message,
-      null,
-
       pluginName,
-
       setSettingsPluginDialogVisible,
       setCurrentSettingsDialogPlugin,
       updatePluginStatus,
-      null,
       setPluginDialogVisible,
       setPluginDialogProps,
-
       updateContextMenuItems,
       updateInfoPanelItems,
       updateMainButtonItems,
       updateProfileMenuItems,
       updateEventListenerItems,
       updateFileItems,
-    );
+    });
   };
 
   React.useEffect(() => {
@@ -120,26 +115,21 @@ const PluginDialog = ({
         const onAction = async (evt) => {
           const message = await e.onAction(evt);
 
-          messageActions(
+          messageActions({
             message,
-            null,
-
             pluginName,
-
             setSettingsPluginDialogVisible,
             setCurrentSettingsDialogPlugin,
             updatePluginStatus,
-            null,
             setPluginDialogVisible,
             setPluginDialogProps,
-
             updateContextMenuItems,
             updateInfoPanelItems,
             updateMainButtonItems,
             updateProfileMenuItems,
             updateEventListenerItems,
             updateFileItems,
-          );
+          });
         };
 
         functionsRef.current.push(onAction);

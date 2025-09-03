@@ -338,7 +338,7 @@ const Items = ({
 
   const getItems = React.useCallback(
     (elm) => {
-      const items = elm.map((item, index) => {
+      const items = elm.map((item) => {
         const isTrash = item.rootFolderType === FolderType.TRASH;
         const showBadge = emptyTrashInProgress
           ? false
@@ -360,7 +360,6 @@ const Items = ({
             dragging={dragging}
             getFolderIcon={getFolderIcon}
             isActive={item.id === activeItemId}
-            isLastItem={index === elm.length - 1}
             showText={showText}
             onClick={onClick}
             getLinkData={getLinkData}
@@ -386,6 +385,7 @@ const Items = ({
 
       if (!isVisitor && !isCollaborator)
         items.push(
+          <CatalogDivider key="other-header" />,
           <AccountsItem
             key="accounts-item"
             onClick={onClick}

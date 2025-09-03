@@ -83,33 +83,21 @@ const IntegrationWrapper = (props) => {
       name: t("SMTPSettings"),
       content: <SMTPSettings />,
     },
+    {
+      id: "ai-settings",
+      name: t(standalone ? "AISettings" : "MCPServers"),
+      content: <AISettngs standalone />, // TODO: Change to standalone={standalone} when adding providers on stand is not needed
+    },
   ];
 
-  // Todo: AI: Unite with ai settings
   if (standalone) {
-    const mcpServersData = {
-      id: "mcp-servers",
-      name: t("MCPServers"),
-      content: <AISettngs standalone={false} />,
-    };
-
-    data.push(mcpServersData);
-  }
-
-  if (standalone) {
-    const aiSettingsData = {
-      id: "ai-settings",
-      name: t("AISettings"),
-      content: <AISettngs standalone={standalone} />,
-    };
-
     const documentServiceData = {
       id: "document-service",
       name: t("DocumentService"),
       content: <DocumentService />,
     };
 
-    data.push(aiSettingsData, documentServiceData);
+    data.push(documentServiceData);
   }
 
   if (enablePlugins) {

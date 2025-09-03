@@ -1591,7 +1591,6 @@ class UploadDataStore {
     const retryFile = this.files[fileIndex];
     const retryFileUploaded = this.uploadedFilesHistory[fileUploadedIndex];
 
-
     if (retryFileUploaded.action === "convert") {
       retryFileUploaded.inConversion = false;
       retryFile.inConversion = false;

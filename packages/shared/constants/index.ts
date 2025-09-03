@@ -249,3 +249,14 @@ export const STORAGE_TARIFF_DEACTIVATED = "storageTariffDeactivated";
 // any unicode letters are allowed, characters are prohibited
 export const BRAND_NAME_REGEX =
   /^[^\s-]([^<>\/\\|:*?"'`~!@#$%^&()+={}[\];,.])*[^\s-]$/;
+
+export const AVATAR_ACTION_KEYS = {
+  PROFILE_AVATAR_UPLOAD: "profile_avatar_upload",
+  PROFILE_AVATAR_DELETE: "profile_avatar_delete",
+} as const;
+
+export const ROOM_ACTION_KEYS = {
+  CREATE_EDIT_ROOM_UPLOAD: "create_edit_room_upload",
+  CREATE_EDIT_ROOM_DELETE: "create_edit_room_delete",
+  CREATE_EDIT_ROOM_CUSTOMIZE_COVER: "create_edit_room_customize_cover",
+} as const;

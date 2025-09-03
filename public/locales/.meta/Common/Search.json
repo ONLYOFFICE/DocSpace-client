@@ -3,7 +3,7 @@
   "content": "Search",
   "content_en_sha1_hash": "bce06414177f72ab70e6387b6af9f8ceef0d6049",
   "created_at": "2025-05-19T21:30:48.328Z",
-  "updated_at": "2025-08-27T10:14:35.218Z",
+  "updated_at": "2025-09-02T07:59:28.429Z",
   "comment": {
     "text": "This translation key is used to display the label \"Search\" in various UI elements. It appears on a search input field and an icon button, inviting users to find specific items or content. The text should be translated as \"Search\" in English.",
     "is_auto": true,
@@ -18,13 +18,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/ItemTitle/RoomsItemTitle.tsx",
-      "line_number": 246,
+      "line_number": 247,
       "context": "<div className=\"info_title-icons\">\n {isRoomMembersPanel ? (\n <IconButton\n id=\"info_search\"\n className=\"icon\"\n title={t(\"Common:Search\")}\n iconName={SearchIconReactSvgUrl}\n onClick={onSearchClick}\n size={16}\n />\n ) : null}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1460,
+      "line_number": 1486,
       "context": "getViewSettingsData={getViewSettingsData}\n onSearch={onSearch}\n onClearFilter={onClearFilter}\n getSelectedInputValue={getSelectedInputValue}\n filterHeader={t(\"Common:AdvancedFilter\")}\n placeholder={t(\"Common:Search\")}\n view={t(\"Common:View\")}\n isFavoritesFolder={isFavoritesFolder}\n isPersonalRoom={isPersonalRoom}\n isRooms={isRooms}\n removeSelectedItem={removeSelectedItem}",
       "module": "/packages/client"
     },

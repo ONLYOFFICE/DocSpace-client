@@ -380,12 +380,12 @@ const Items = ({
         );
       });
 
-      items.splice(1, 0, <CatalogDivider key="recent-divider" />);
+      // items.splice(1, 0, <CatalogDivider key="recent-divider" />);
+
+      items.splice(3, 0, <CatalogDivider key="other-header" />);
 
       if (!isVisitor && !isCollaborator)
-        items.splice(
-          5,
-          0,
+        items.push(
           <AccountsItem
             key="accounts-item"
             onClick={onClick}
@@ -393,9 +393,6 @@ const Items = ({
             isActive={activeItemId === "accounts"}
           />,
         );
-
-      if (!isVisitor) items.splice(5, 0, <CatalogDivider key="other-header" />);
-      else items.splice(4, 0, <CatalogDivider key="other-header" />);
 
       if (isCommunity && isPaymentPageAvailable)
         items.push(<BonusItem key="bonus-item" />);

@@ -71,6 +71,7 @@ class FilesTableHeader extends React.Component {
       columnStorageName,
       columnInfoPanelStorageName,
       isRecentFolder,
+      isFavoritesFolder,
       isArchiveFolder,
       isIndexEditingMode,
       showStorageInfo,
@@ -96,6 +97,7 @@ class FilesTableHeader extends React.Component {
       columnStorageName !== prevProps.columnStorageName ||
       columnInfoPanelStorageName !== prevProps.columnInfoPanelStorageName ||
       isRecentFolder !== prevProps.isRecentFolder ||
+      isFavoritesFolder !== prevProps.isFavoritesFolder ||
       showStorageInfo !== prevProps.showStorageInfo ||
       (!changeDocumentsTabs && sortBy !== stateSortBy) ||
       (!changeDocumentsTabs && sortOrder !== stateSortOrder)
@@ -195,6 +197,7 @@ class FilesTableHeader extends React.Component {
       isRooms,
       isTrashFolder,
       isRecentFolder,
+      isFavoritesFolder,
       isTemplatesFolder,
       isIndexing,
     } = this.props;
@@ -203,6 +206,7 @@ class FilesTableHeader extends React.Component {
     if (isRooms) return this.getRoomsColumns();
     if (isTrashFolder) return this.getTrashFolderColumns();
     if (isRecentFolder) return this.getRecentFolderColumns();
+    if (isFavoritesFolder) return this.getFavoritesFolderColumns();
     if (isIndexing) return this.getIndexingColumns();
     return this.getFilesColumns();
   };
@@ -438,6 +442,67 @@ class FilesTableHeader extends React.Component {
         key: "TypeRecent",
         title: t("Common:Type"),
         enable: typeRecentColumnIsEnabled,
+        resizable: true,
+        onChange: this.onColumnChange,
+      },
+    ];
+    return [...columns];
+  };
+
+  getFavoritesFolderColumns = () => {
+    const {
+      t,
+      nameColumnIsEnabled,
+      locationFavoritesColumnIsEnabled,
+      authorFavoritesColumnIsEnabled,
+      sizeFavoritesColumnIsEnabled,
+      typeFavoritesColumnIsEnabled,
+      modifiedFavoritesColumnIsEnabled,
+    } = this.props;
+
+    const columns = [
+      {
+        key: "Name",
+        title: t("Common:Label"),
+        resizable: true,
+        enable: nameColumnIsEnabled,
+        default: true,
+        minWidth: 210,
+      },
+      {
+        key: "AuthorFavorites",
+        title: t("ByAuthor"),
+        enable: authorFavoritesColumnIsEnabled,
+        resizable: true,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "LocationFavorites",
+        title: t("Common:Location"),
+        enable: locationFavoritesColumnIsEnabled,
+        resizable: true,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "ModifiedFavorites",
+        title: t("ByLastModified"),
+        enable: modifiedFavoritesColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.ModifiedDate,
+        onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "SizeFavorites",
+        title: t("Common:Size"),
+        enable: sizeFavoritesColumnIsEnabled,
+        resizable: true,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "TypeFavorites",
+        title: t("Common:Type"),
+        enable: typeFavoritesColumnIsEnabled,
         resizable: true,
         onChange: this.onColumnChange,
       },
@@ -849,6 +914,7 @@ export default inject(
       isTemplatesFolder,
       isPersonalReadOnly,
       isRecentFolder,
+      isFavoritesFolder,
     } = treeFoldersStore;
     const withContent = canShare;
     const sortingVisible = true;
@@ -884,6 +950,12 @@ export default inject(
       authorRecentColumnIsEnabled,
       sizeRecentColumnIsEnabled,
       typeRecentColumnIsEnabled,
+
+      locationFavoritesColumnIsEnabled,
+      authorFavoritesColumnIsEnabled,
+      sizeFavoritesColumnIsEnabled,
+      typeFavoritesColumnIsEnabled,
+      modifiedFavoritesColumnIsEnabled,
 
       indexVDRColumnIsEnabled,
       authorVDRColumnIsEnabled,
@@ -961,6 +1033,12 @@ export default inject(
       sizeRecentColumnIsEnabled,
       typeRecentColumnIsEnabled,
 
+      locationFavoritesColumnIsEnabled,
+      authorFavoritesColumnIsEnabled,
+      sizeFavoritesColumnIsEnabled,
+      typeFavoritesColumnIsEnabled,
+      modifiedFavoritesColumnIsEnabled,
+
       indexVDRColumnIsEnabled,
       authorVDRColumnIsEnabled,
       modifiedVDRColumnIsEnabled,
@@ -984,6 +1062,7 @@ export default inject(
 
       isFrame,
       isRecentFolder,
+      isFavoritesFolder,
       showSettings: frameConfig?.showSettings,
       isDefaultRoomsQuotaSet,
       showStorageInfo,

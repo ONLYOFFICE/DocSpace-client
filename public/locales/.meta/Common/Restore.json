@@ -3,7 +3,7 @@
   "content": "Restore",
   "content_en_sha1_hash": "3cbe6d6b9a8d1596bb5bca12e14d81c9e108a1a3",
   "created_at": "2025-05-19T21:30:47.901Z",
-  "updated_at": "2025-08-26T11:15:14.058Z",
+  "updated_at": "2025-09-02T07:59:28.313Z",
   "comment": {
     "text": "The translation key \"Restore\" is used to display a button label or header in various UI elements, such as buttons and dialogs. It indicates an action of recovering or returning a file or room to its original state. This translation key appears on screens like Restore Room Dialogs where users can restore a room.",
     "is_auto": true,
@@ -42,37 +42,37 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2151,
+      "line_number": 2170,
       "context": "},\n ...moveActions,\n {\n id: \"option_restore\",\n key: \"restore\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: this.onRestoreAction,\n disabled: false,\n },\n indexOptions,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2151,
+      "line_number": 2170,
       "context": "},\n ...moveActions,\n {\n id: \"option_restore\",\n key: \"restore\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: this.onRestoreAction,\n disabled: false,\n },\n indexOptions,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2151,
+      "line_number": 2170,
       "context": "},\n ...moveActions,\n {\n id: \"option_restore\",\n key: \"restore\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: this.onRestoreAction,\n disabled: false,\n },\n indexOptions,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2151,
+      "line_number": 2170,
       "context": "},\n ...moveActions,\n {\n id: \"option_restore\",\n key: \"restore\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: this.onRestoreAction,\n disabled: false,\n },\n indexOptions,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2282,
+      "line_number": 2291,
       "context": "case \"unarchive\":\n if (!this.isAvailableOption(\"unarchive\")) return null;\n return {\n id: \"menu-unarchive\",\n key: \"unarchive\",\n label: t(\"Common:Restore\"),\n iconUrl: MoveReactSvgUrl,\n onClick: () => this.archiveRooms(\"unarchive\"),\n disabled: false,\n };\n case \"change-quota\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2282,
+      "line_number": 2291,
       "context": "case \"unarchive\":\n if (!this.isAvailableOption(\"unarchive\")) return null;\n return {\n id: \"menu-unarchive\",\n key: \"unarchive\",\n label: t(\"Common:Restore\"),\n iconUrl: MoveReactSvgUrl,\n onClick: () => this.archiveRooms(\"unarchive\"),\n disabled: false,\n };\n case \"change-quota\":",
       "module": "/packages/client"
     },

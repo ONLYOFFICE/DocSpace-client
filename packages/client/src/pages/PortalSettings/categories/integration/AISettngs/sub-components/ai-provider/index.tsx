@@ -45,7 +45,7 @@ import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore"
 
 import styles from "../../AISettings.module.scss";
 import { AiProviderTile } from "../tiles/ai-provider-tile";
-import { AddAIProviderDialog } from "./dialogs/add-ai-provider";
+import { AddAIProviderDialog } from "./dialogs/add";
 
 type AIProviderProps = {
   aiProviders?: AISettingsStore["aiProviders"];

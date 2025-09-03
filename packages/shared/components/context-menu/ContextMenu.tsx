@@ -50,11 +50,7 @@ import { RoomIcon } from "../room-icon";
 import { SubMenu } from "./sub-components/SubMenu";
 import { MobileSubMenu } from "./sub-components/MobileSubMenu";
 
-import {
-  ContextMenuModel,
-  ContextMenuProps,
-  ContextMenuRefType,
-} from "./ContextMenu.types";
+import { ContextMenuModel, ContextMenuProps } from "./ContextMenu.types";
 import styles from "./ContextMenu.module.scss";
 
 const MARGIN_BORDER = 16; // Indentation from the border of the screen

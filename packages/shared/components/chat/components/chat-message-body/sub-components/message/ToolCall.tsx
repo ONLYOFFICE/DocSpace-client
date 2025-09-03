@@ -49,6 +49,11 @@ import MarkdownField from "./Markdown";
 const ToolCall = ({ content }: MessageToolCallProps) => {
   const { t } = useTranslation(["Common"]);
   const [isHide, setIsHide] = React.useState(true);
+  const [isManage, setIsManage] = React.useState(() => {
+    if (content.type !== ContentType.Tool) return false;
+
+    return content.additionalProperties?.managed;
+  });
 
   if (content.type !== ContentType.Tool) return null;
 
@@ -66,6 +71,8 @@ const ToolCall = ({ content }: MessageToolCallProps) => {
 
   const onClickAction = (decision: ToolsPermission) => {
     if (!content.callId) return;
+
+    setIsManage(false);
 
     updateToolsPermission(content.callId, decision);
   };
@@ -115,7 +122,7 @@ const ToolCall = ({ content }: MessageToolCallProps) => {
     </div>
   );
 
-  return content.additionalProperties?.managed ? (
+  return isManage ? (
     <div className={styles.toolCallManage}>
       <Text>AI would like to use this tool</Text>
 

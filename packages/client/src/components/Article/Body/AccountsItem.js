@@ -67,6 +67,7 @@ const PureAccountsItem = ({
       folderId="document_catalog-accounts"
       $currentColorScheme={currentColorScheme}
       withAnimation
+      isEndOfBlock
     />
   );
 };

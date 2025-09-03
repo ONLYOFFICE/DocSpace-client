@@ -2,7 +2,6 @@
   "name": "@docspace/client",
   "version": "3.3.0",
   "private": true,
-  "type": "module",
   "homepage": "",
   "scripts": {
     "build": "webpack --mode production --env lint=false",

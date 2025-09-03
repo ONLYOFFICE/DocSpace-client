@@ -33,6 +33,7 @@ import ActionsDocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.rea
 import SpreadsheetReactSvgUrl from "PUBLIC_DIR/images/spreadsheet.react.svg?url";
 import ActionsPresentationReactSvgUrl from "PUBLIC_DIR/images/actions.presentation.react.svg?url";
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
+import TemplateGalleryReactSvgUrl from "PUBLIC_DIR/images/template.gallery.react.svg?url";
 // import PersonAdminReactSvgUrl from "PUBLIC_DIR/images/person.admin.react.svg?url";
 // import PersonManagerReactSvgUrl from "PUBLIC_DIR/images/person.manager.react.svg?url";
 // import PersonReactSvgUrl from "PUBLIC_DIR/images/person.react.svg?url";
@@ -186,6 +187,7 @@ const ArticleMainButtonContent = (props) => {
     defaultOformLocale,
 
     setTemplatesGalleryVisible,
+    templateGalleryAvailable,
   } = props;
 
   const navigate = useNavigate();
@@ -563,15 +565,6 @@ const ArticleMainButtonContent = (props) => {
       key: "pptx",
     };
 
-    const openTemplatesGallery = {
-      id: "actions_open-templates-gallery",
-      className: "main-button_drop-down",
-      icon: CatalogFolderReactSvgUrl,
-      label: "Templates Gallery",
-      onClick: onShowTemplatesGallery,
-      key: "templates-gallery",
-    };
-
     const newUploadActions = [
       {
         id: "actions_upload-files",
@@ -637,7 +630,6 @@ const ArticleMainButtonContent = (props) => {
       createNewPresentationPptx,
       ...formActions,
       createNewFolder,
-      openTemplatesGallery,
     ];
 
     if (pluginItems.length > 0) {
@@ -659,6 +651,17 @@ const ArticleMainButtonContent = (props) => {
         disabled: false,
         key: "more-plugins",
         items: pluginItems,
+      });
+    }
+
+    if (templateGalleryAvailable) {
+      newActions.push({
+        id: "actions_open-template-gallery",
+        className: "main-button_drop-down",
+        icon: TemplateGalleryReactSvgUrl,
+        label: "Template Gallery",
+        onClick: onShowTemplatesGallery,
+        key: "template-gallery",
       });
     }
 
@@ -872,8 +875,12 @@ export default inject(
       setSelectFileFormRoomDialogVisible,
     } = dialogsStore;
 
-    const { enablePlugins, currentColorScheme, currentDeviceType } =
-      settingsStore;
+    const {
+      enablePlugins,
+      currentColorScheme,
+      currentDeviceType,
+      templateGalleryAvailable,
+    } = settingsStore;
     const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
 
     const { security } = selectedFolderStore;
@@ -964,6 +971,7 @@ export default inject(
       setRefMap,
       defaultOformLocale,
       setTemplatesGalleryVisible,
+      templateGalleryAvailable,
     };
   },
 )(

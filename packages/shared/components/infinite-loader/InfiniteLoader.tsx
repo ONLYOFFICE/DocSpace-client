@@ -43,7 +43,7 @@ const InfiniteLoaderComponent = (props: InfiniteLoaderProps) => {
   const scroll =
     viewAs === "tileDynamicHeight"
       ? document.querySelector(
-          "#scroll-templates-gallery .scroll-wrapper > .scroller",
+          "#scroll-template-gallery .scroll-wrapper > .scroller",
         )
       : isMobile()
         ? document.querySelector("#customScrollBar .scroll-wrapper > .scroller")

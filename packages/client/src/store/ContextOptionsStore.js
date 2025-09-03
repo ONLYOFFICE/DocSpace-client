@@ -83,6 +83,7 @@ import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/icons/16/custom-filter.re
 
 import CreateTemplateSvgUrl from "PUBLIC_DIR/images/template.react.svg?url";
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
+import TemplateGalleryReactSvgUrl from "PUBLIC_DIR/images/template.gallery.react.svg?url";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
 import { makeAutoObservable, runInAction } from "mobx";
@@ -2621,6 +2622,11 @@ class ContextOptionsStore {
     );
   };
 
+  onShowTemplatesGallery = () => {
+    this.oformsStore.setTemplatesGalleryVisible(true);
+    this.oformsStore.setOformFromFolderId(this.selectedFolderStore.id);
+  };
+
   // TODO: add privacy room check for files
   onUploadAction = (type) => {
     const element =
@@ -2756,7 +2762,7 @@ class ContextOptionsStore {
     const { isRoomsFolder, isPrivacyFolder, isFlowsFolder } =
       this.treeFoldersStore;
     const { mainButtonItemsList } = this.pluginStore;
-    const { enablePlugins } = this.settingsStore;
+    const { enablePlugins, templateGalleryAvailable } = this.settingsStore;
     const isFormRoomType =
       roomType === RoomsType.FormRoom ||
       (parentRoomType === FolderType.FormRoom && isFolder);
@@ -2842,6 +2848,13 @@ class ContextOptionsStore {
       icon: ActionsUploadReactSvgUrl,
     };
 
+    const templateGallery = {
+      key: "template-gallery",
+      label: "Template Gallery",
+      onClick: () => this.onShowTemplatesGallery(),
+      icon: TemplateGalleryReactSvgUrl,
+    };
+
     if (isFormRoomType) {
       return this.getContextOptionsPlusFormRoom(t, {
         createTemplateForm,
@@ -2889,6 +2902,7 @@ class ContextOptionsStore {
           createNewPresentation,
           ...formActions,
           createNewFolder,
+          templateGalleryAvailable ? templateGallery : null,
           { key: "separator", isSeparator: true },
           uploadFiles,
           showUploadFolder ? uploadFolder : null,

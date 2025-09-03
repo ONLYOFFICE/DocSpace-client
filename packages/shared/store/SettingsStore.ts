@@ -809,6 +809,10 @@ class SettingsStore {
       : this.helpCenterDomain;
   }
 
+  get templateGalleryAvailable() {
+    return !!(this.formGallery && this.formGallery.domain !== "");
+  }
+
   setIsDesktopClientInit = (isDesktopClientInit: boolean) => {
     this.isDesktopClientInit = isDesktopClientInit;
   };

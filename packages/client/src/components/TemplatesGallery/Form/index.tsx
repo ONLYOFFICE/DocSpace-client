@@ -106,6 +106,8 @@ const Form: FC<FormProps> = ({
     if (scrollRef.current) scrollRef.current.scrollToTop();
   }, [tabDocuments, tabSpreadsheet, tabPresentation, tabForm]);
 
+  console.log("isInitLoading", isInitLoading);
+
   return (
     <div style={{ width: "100%" }}>
       <SectionFilterContent
@@ -116,7 +118,7 @@ const Form: FC<FormProps> = ({
       {viewMobile ? (
         <Scrollbar
           style={{ height: "calc(100vh - 227px)", width: "calc(100% + 16px)" }}
-          id="scroll-templates-gallery"
+          id="scroll-template-gallery"
           ref={scrollRef}
         >
           <Tiles
@@ -129,7 +131,7 @@ const Form: FC<FormProps> = ({
       ) : (
         <Scrollbar
           style={{ height: "calc(100vh - 286px)", width: "calc(100% + 16px)" }}
-          id="scroll-templates-gallery"
+          id="scroll-template-gallery"
           ref={scrollRef}
         >
           <Tiles

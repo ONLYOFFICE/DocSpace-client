@@ -3,7 +3,7 @@
   "content": "Download as",
   "content_en_sha1_hash": "e10ee8f09efe43f28dc9a950ae25d485fde3ca5e",
   "created_at": "2025-05-19T21:30:44.663Z",
-  "updated_at": "2025-09-01T11:05:24.397Z",
+  "updated_at": "2025-09-02T07:59:28.696Z",
   "comment": {
     "text": "The translation key \"DownloadAs\" is used to display the text \"Download as\", which appears on a download button in the UI. This text allows users to select a file format or destination when downloading a file from an application. It may appear in dialog boxes or buttons related to file management and downloads.",
     "is_auto": true,
@@ -12,19 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2171,
+      "line_number": 2161,
       "context": "disabled: this.userStore?.user?.isAdmin || !item.external,\n },\n {\n id: \"option_download-as\",\n key: \"download-as\",\n label: t(\"Common:DownloadAs\"),\n icon: DownloadAsReactSvgUrl,\n onClick: this.onClickDownloadAs,\n disabled: !item.security?.Download,\n },\n ...moveActions,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2171,
+      "line_number": 2161,
       "context": "disabled: this.userStore?.user?.isAdmin || !item.external,\n },\n {\n id: \"option_download-as\",\n key: \"download-as\",\n label: t(\"Common:DownloadAs\"),\n icon: DownloadAsReactSvgUrl,\n onClick: this.onClickDownloadAs,\n disabled: !item.security?.Download,\n },\n ...moveActions,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2236,
+      "line_number": 2245,
       "context": "case \"downloadAs\":\n if (!this.isAvailableOption(\"downloadAs\")) return null;\n return {\n id: \"menu-download-as\",\n label: t(\"Common:DownloadAs\"),\n onClick: () => setDownloadDialogVisible(true),\n iconUrl: DownloadAsReactSvgUrl,\n };\n \n case \"moveTo\":",
       "module": "/packages/client"
     },

@@ -369,9 +369,7 @@ const withHotkeys = (Component) => {
           if (isRecentFolder) return;
 
           if (isFavoritesFolder) {
-            const items = selection.map((item) => item.id);
-
-            setFavoriteAction("remove", items)
+            setFavoriteAction("remove", selection)
               .then(() => toastr.success(t("RemovedFromFavorites")))
               .catch((err) => toastr.error(err));
 

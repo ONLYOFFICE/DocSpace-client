@@ -3,7 +3,7 @@
   "content": "Members",
   "content_en_sha1_hash": "1cb449c1126609b4b41e1d87f65f0d7cd19b49b9",
   "created_at": "2025-05-19T21:30:46.449Z",
-  "updated_at": "2025-08-11T18:11:59.130Z",
+  "updated_at": "2025-09-02T07:59:28.343Z",
   "comment": {
     "text": "This translation key is used to display the label \"Members\" in various UI contexts, such as headers and buttons, within dialogs and other interactive components. It appears on screens related to user management, group creation, and contact filtering, providing context for users navigating these sections.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserTypeDialog/index.tsx",
       "line_number": 110,
-      "context": "const { t } = useTranslation([\"ChangeUserTypeDialog\", \"People\", \"Common\"]);\n \n const isSingleUser = userNames.length === 1;\n const translationValues = {\n userName: isSingleUser ? userNames[0] : undefined,\n membersSection: t(\"Common:Members\"),\n documentsSection: t(\"Common:MyFilesSection\"),\n productName: t(\"Common:ProductName\"),\n secondType,\n };\n const translationKey = getChangeTypeKey(",
+      "context": "const { t } = useTranslation([\"ChangeUserTypeDialog\", \"People\", \"Common\"]);\n \n const isSingleUser = userNames.length === 1;\n const translationValues = {\n userName: isSingleUser ? userNames[0] : undefined,\n membersSection: t(\"Common:Members\"),\n documentsSection: t(\"Common:MyDocuments\"),\n productName: t(\"Common:ProductName\"),\n secondType,\n };\n const translationKey = getChangeTypeKey(",
       "module": "/packages/client"
     },
     {

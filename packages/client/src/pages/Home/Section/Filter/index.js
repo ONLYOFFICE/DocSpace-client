@@ -1167,6 +1167,32 @@ const SectionFilterContent = ({
 
         filterOptions.push(...locationOption);
       }
+
+      if (isFavoritesFolder) {
+        const locationOption = [
+          {
+            key: FilterGroups.filterLocation,
+            group: FilterGroups.filterLocation,
+            label: t("Common:Location"),
+            isHeader: true,
+            isLast: true,
+          },
+          {
+            id: "filter_location-documents",
+            key: FilterLocation.Documents.toString(),
+            group: FilterGroups.filterLocation,
+            label: t("Common:Documents"),
+          },
+          {
+            id: "filter_location-rooms",
+            key: FilterLocation.Rooms.toString(),
+            group: FilterGroups.filterLocation,
+            label: t("Common:Rooms"),
+          },
+        ];
+
+        filterOptions.push(...locationOption);
+      }
     }
     return filterOptions;
   }, [

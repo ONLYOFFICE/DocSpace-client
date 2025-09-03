@@ -219,7 +219,7 @@ const AddAIProviderDialogComponent = ({
         <Button
           primary
           size={ButtonSize.normal}
-          label={t("Common:AddButton")}
+          label={t("Common:SaveButton")}
           scale
           onClick={onSubmit}
           isLoading={isRequestRunning}

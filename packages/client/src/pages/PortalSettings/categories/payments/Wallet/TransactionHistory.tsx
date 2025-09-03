@@ -535,7 +535,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
             />
             <Text as="span" className={styles.downloadReportDescription}>
               {t("Settings:ReportSaveLocation", {
-                sectionName: t("Common:MyFilesSection"),
+                sectionName: t("Common:MyDocuments"),
               })}
             </Text>
           </div>

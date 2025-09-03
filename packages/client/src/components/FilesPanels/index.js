@@ -304,6 +304,7 @@ const Panels = (props) => {
         onSelectFile={createMasterForm}
         onClose={onClose}
         withRecentTreeFolder
+        withFavoritesTreeFolder
       />
     ),
 
@@ -318,6 +319,7 @@ const Panels = (props) => {
         filterParam={selectFileFormRoomFilterParam}
         descriptionText={descriptionTextFileFormRoomDialog}
         withRecentTreeFolder
+        withFavoritesTreeFolder
       />
     ),
 

@@ -168,6 +168,22 @@ const ClientRoutes = [
             ),
           },
           {
+            path: "files/favorite",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "files/favorite/filter",
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
+          },
+          {
             path: "rooms/shared",
             element: (
               <PrivateRoute>

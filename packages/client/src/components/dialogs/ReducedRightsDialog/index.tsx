@@ -58,7 +58,7 @@ const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
             t={t}
             ns="Files"
             i18nKey="PersonalContentRemovalNotice"
-            values={{ sectionName: t("Common:MyFilesSection") }}
+            values={{ sectionName: t("Common:MyDocuments") }}
             components={{ 1: <span style={{ fontWeight: 600 }} /> }}
           />
         </StyledText>
@@ -80,7 +80,7 @@ const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
         <Button
           key="RedirectButton"
           label={t("Files:GoToSection", {
-            sectionName: t("Common:MyFilesSection"),
+            sectionName: t("Common:MyDocuments"),
           })}
           size={ButtonSize.normal}
           onClick={onRedirect}

@@ -103,6 +103,7 @@ import { getCookie, setCookie } from "./cookie";
 import { checkIsSSR } from "./device";
 import { hasOwnProperty } from "./object";
 import { TFrameConfig } from "../types/Frame";
+import { isFile, isFolder } from "./typeGuards";
 
 export const desktopConstants = Object.freeze({
   domain: !checkIsSSR() && window.location.origin,
@@ -788,12 +789,6 @@ export const getFileExtension = (fileTitleParam: string) => {
 export const sortInDisplayOrder = (folders: TGetFolder[]) => {
   const sorted = [];
 
-  const recentFolder = find(
-    folders,
-    (folder) => folder.current.rootFolderType === FolderType.Recent,
-  );
-  if (recentFolder) sorted.push(recentFolder);
-
   const myFolder = find(
     folders,
     (folder) => folder.current.rootFolderType === FolderType.USER,
@@ -806,6 +801,18 @@ export const sortInDisplayOrder = (folders: TGetFolder[]) => {
   );
   if (shareFolder) sorted.push(shareFolder);
 
+  const favoritesFolder = find(
+    folders,
+    (folder) => folder.current.rootFolderType === FolderType.Favorites,
+  );
+  if (favoritesFolder) sorted.push(favoritesFolder);
+
+  const recentFolder = find(
+    folders,
+    (folder) => folder.current.rootFolderType === FolderType.Recent,
+  );
+  if (recentFolder) sorted.push(recentFolder);
+
   const shareRoom = find(
     folders,
     (folder) => folder.current.rootFolderType === FolderType.Rooms,
@@ -817,12 +824,6 @@ export const sortInDisplayOrder = (folders: TGetFolder[]) => {
     (folder) => folder.current.rootFolderType === FolderType.Archive,
   );
   if (archiveRoom) sorted.push(archiveRoom);
-
-  const favoritesFolder = find(
-    folders,
-    (folder) => folder.current.rootFolderType === FolderType.Favorites,
-  );
-  if (favoritesFolder) sorted.push(favoritesFolder);
 
   const privateFolder = find(
     folders,
@@ -1272,12 +1273,12 @@ export const getUserTypeDescription = (
   if (isPortalAdmin)
     return t("Common:RolePortalAdminDescription", {
       productName: t("Common:ProductName"),
-      sectionName: t("Common:MyFilesSection"),
+      sectionName: t("Common:MyDocuments"),
     });
 
   if (isRoomAdmin)
     return t("Common:RoleRoomAdminDescription", {
-      sectionName: t("Common:MyFilesSection"),
+      sectionName: t("Common:MyDocuments"),
     });
 
   if (isCollaborator) return t("Common:RoleNewUserDescription");
@@ -1563,6 +1564,8 @@ export const getCategoryType = (location: { pathname: string }) => {
     } else if (pathname.indexOf("archive") > -1) {
       categoryType = CategoryType.Archive;
     }
+  } else if (pathname.startsWith("/files/favorite")) {
+    categoryType = CategoryType.Favorite;
   } else if (pathname.startsWith("/favorite")) {
     categoryType = CategoryType.Favorite;
   } else if (pathname.startsWith("/recent")) {
@@ -1579,3 +1582,19 @@ export const getCategoryType = (location: { pathname: string }) => {
 
   return categoryType;
 };
+export function splitFileAndFolderIds<T extends TFolder | TFile>(items: T[]) {
+  const initial = {
+    fileIds: [] as Array<string | number>,
+    folderIds: [] as Array<string | number>,
+  };
+
+  return (items ?? []).reduce((acc, item) => {
+    const id = (item as TFolder | TFile)?.id;
+    if (id === undefined || id === null) return acc;
+
+    if (isFolder(item)) acc.folderIds.push(id);
+    else if (isFile(item)) acc.fileIds.push(id);
+
+    return acc;
+  }, initial);
+}

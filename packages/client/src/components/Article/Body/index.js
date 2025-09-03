@@ -44,6 +44,7 @@ import {
   FILTER_DOCUMENTS,
   FILTER_RECENT,
   FILTER_SHARE,
+  FILTER_FAVORITES,
   FILTER_TRASH,
 } from "@docspace/shared/utils/filterConstants";
 
@@ -62,6 +63,7 @@ const ArticleBodyContent = (props) => {
     roomsFilter,
     archiveFolderId,
     myFolderId,
+    favoritesFolderId,
     recycleBinFolderId,
     rootFolderId,
     recentFolderId,
@@ -163,6 +165,22 @@ const ArticleBodyContent = (props) => {
           break;
         }
 
+        case favoritesFolderId: {
+          const favFilter = FilesFilter.getDefault();
+          favFilter.folder = folderId;
+
+          if (userId) {
+            const filterObj = getUserFilter(`${FILTER_FAVORITES}=${userId}`);
+
+            if (filterObj?.sortBy) favFilter.sortBy = filterObj.sortBy;
+            if (filterObj?.sortOrder) favFilter.sortOrder = filterObj.sortOrder;
+          }
+
+          params = favFilter.toUrlParams();
+          path = getCategoryUrl(CategoryType.Favorite);
+
+          break;
+        }
         case archiveFolderId: {
           const archiveFilter = RoomsFilter.getDefault(
             userId,
@@ -220,6 +238,7 @@ const ArticleBodyContent = (props) => {
       roomsFolderId,
       archiveFolderId,
       myFolderId,
+      favoritesFolderId,
       recycleBinFolderId,
       activeItemId,
       hashDate,
@@ -293,6 +312,12 @@ const ArticleBodyContent = (props) => {
     )
       return setActiveItemId(recycleBinFolderId);
 
+    if (
+      location.pathname.includes("/files/favorite") &&
+      activeItemId !== favoritesFolderId
+    )
+      return setActiveItemId(favoritesFolderId);
+
     if (location.pathname.includes("/accounts") && activeItemId !== "accounts")
       return setActiveItemId("accounts");
 
@@ -313,6 +338,7 @@ const ArticleBodyContent = (props) => {
     roomsFolderId,
     archiveFolderId,
     myFolderId,
+    favoritesFolderId,
     recycleBinFolderId,
     isVisitor,
     rootFolderId,
@@ -401,12 +427,10 @@ export default inject(
       recycleBinFolderId,
       recentFolderId,
       shareFolderId,
+      favoritesFolderId,
     } = treeFoldersStore;
-
     const selectedFolderId = selectedFolderStore.id;
-
     const rootFolderId = selectedFolderStore.rootFolderId;
-
     const {
       showText,
 
@@ -439,6 +463,7 @@ export default inject(
       roomsFolderId,
       archiveFolderId,
       myFolderId,
+      favoritesFolderId,
       recycleBinFolderId,
       rootFolderId,
       recentFolderId,

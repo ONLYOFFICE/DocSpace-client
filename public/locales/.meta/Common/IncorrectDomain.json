@@ -3,7 +3,7 @@
   "content": "Incorrect domain",
   "content_en_sha1_hash": "d609421cd522ec58b1c74e81fb0b0128cbebce7d",
   "created_at": "2025-05-19T21:30:45.845Z",
-  "updated_at": "2025-08-11T09:02:43.843Z",
+  "updated_at": "2025-08-29T14:33:37.980Z",
   "comment": {
     "text": "This translation key is used to display an error message indicating that a domain entered is incorrect. It is commonly displayed in a dialog or notification when a user attempts to access a trusted mail account with an invalid domain. The translated version of this message should appear next to \"Incorrect domain\" on the screen.",
     "is_auto": true,
@@ -30,13 +30,13 @@
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 175,
+      "line_number": 176,
       "context": "switch (error.errorKey) {\n case ErrorKeys.LocalDomain:\n return t(\"Common:LocalDomain\");\n case ErrorKeys.IncorrectDomain:\n case ErrorKeys.IncorrectEmail:\n return t(\"Common:IncorrectDomain\");\n case ErrorKeys.DomainIpAddress:\n return t(\"Common:DomainIpAddress\");\n case ErrorKeys.PunycodeDomain:\n return t(\"Common:PunycodeDomain\");\n case ErrorKeys.PunycodeLocalPart:",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 175,
+      "line_number": 176,
       "context": "switch (error.errorKey) {\n case ErrorKeys.LocalDomain:\n return t(\"Common:LocalDomain\");\n case ErrorKeys.IncorrectDomain:\n case ErrorKeys.IncorrectEmail:\n return t(\"Common:IncorrectDomain\");\n case ErrorKeys.DomainIpAddress:\n return t(\"Common:DomainIpAddress\");\n case ErrorKeys.PunycodeDomain:\n return t(\"Common:PunycodeDomain\");\n case ErrorKeys.PunycodeLocalPart:",
       "module": "/packages/shared"
     }

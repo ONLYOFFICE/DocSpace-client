@@ -342,14 +342,16 @@ export async function getCommonFoldersTree() {
 //   return request(options);
 // }
 
-// export function getFavoritesFolderList() {
-//   const options: AxiosRequestConfig = {
-//     method: "get",
-//     url: `/files/@favorites`,
-//   };
+export async function getFavoritesFolderList() {
+  const options: AxiosRequestConfig = {
+    method: "get",
+    url: `/files/@favorites`,
+  };
 
-//   return request(options);
-// }
+  const res = (await request(options)) as TGetFolder;
+
+  return res;
+}
 
 // export function getProjectsFolderList() {
 //   const options: AxiosRequestConfig = {
@@ -1186,8 +1188,8 @@ export async function getSettingsFiles(headers = null) {
   return res;
 }
 
-export async function markAsFavorite(ids: number[]) {
-  const data = { fileIds: ids };
+export async function markAsFavorite(fileIds: number[], folderIds: number[]) {
+  const data = { fileIds, folderIds };
   const options: AxiosRequestConfig = {
     method: "post",
     url: "/files/favorites",
@@ -1197,8 +1199,11 @@ export async function markAsFavorite(ids: number[]) {
   return res;
 }
 
-export async function removeFromFavorite(ids: number[]) {
-  const data = { fileIds: ids };
+export async function removeFromFavorite(
+  fileIds: number[],
+  folderIds: number[],
+) {
+  const data = { fileIds, folderIds };
   const options: AxiosRequestConfig = {
     method: "delete",
     url: "/files/favorites",

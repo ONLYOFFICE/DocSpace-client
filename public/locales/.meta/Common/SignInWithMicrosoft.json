@@ -3,7 +3,7 @@
   "content": "Sign in with Microsoft",
   "content_en_sha1_hash": "fd62c61f849bb4cfbfd3a2146d1eff8cd56b5601",
   "created_at": "2025-05-19T21:30:48.781Z",
-  "updated_at": "2025-08-11T09:02:44.102Z",
+  "updated_at": "2025-08-29T14:33:38.478Z",
   "comment": {
     "text": "This translation key is used for \"Sign in with Microsoft\" in various UI contexts, typically as a button or link in sign-up processes. It appears on a login page or registration form and serves as an alternative to other authentication methods like LinkedIn or SSO. The translators should update this text according to the specific UI component it's used in.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 414,
+      "line_number": 415,
       "context": "? t(\"Common:SignUpWithLinkedIn\")\n : t(\"Common:SignInWithLinkedIn\");\n case \"microsoft\":\n return signUp\n ? t(\"Common:SignUpWithMicrosoft\")\n : t(\"Common:SignInWithMicrosoft\");\n case \"sso\":\n return signUp ? t(\"Common:SignUpWithSso\") : t(\"Common:SignInWithSso\");\n case \"zoom\":\n return signUp ? t(\"Common:SignUpWithZoom\") : t(\"Common:SignInWithZoom\");\n default:",
       "module": "/packages/shared"
     }

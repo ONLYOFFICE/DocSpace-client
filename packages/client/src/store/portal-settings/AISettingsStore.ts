@@ -35,6 +35,7 @@ import {
 } from "@docspace/shared/api/ai/types";
 import {
   createProvider,
+  deleteProviders,
   getProviders,
   getServersList,
 } from "@docspace/shared/api/ai";
@@ -67,6 +68,14 @@ class AISettingsStore {
     const newProvider = await createProvider(provider);
 
     this.aiProviders.push(newProvider);
+  };
+
+  deleteAIProvider = async (id: TAiProvider["id"]) => {
+    await deleteProviders({ ids: [id] });
+
+    this.aiProviders = this.aiProviders.filter(
+      (provider) => provider.id !== id,
+    );
   };
 
   fetchAIProviders = async () => {

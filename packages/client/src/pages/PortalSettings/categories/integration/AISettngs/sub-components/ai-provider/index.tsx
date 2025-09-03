@@ -34,8 +34,12 @@ import { Heading, HeadingLevel } from "@docspace/shared/components/heading";
 import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
-import type { TProviderTypeWithUrl } from "@docspace/shared/api/ai/types";
+import type {
+  TAiProvider,
+  TProviderTypeWithUrl,
+} from "@docspace/shared/api/ai/types";
 import { getAvailableProviderUrls } from "@docspace/shared/api/ai";
+import { type TData, toastr } from "@docspace/shared/components/toast";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
@@ -45,9 +49,13 @@ import { AddAIProviderDialog } from "./dialogs/add-ai-provider";
 
 type AIProviderProps = {
   aiProviders?: AISettingsStore["aiProviders"];
+  deleteAIProvider?: AISettingsStore["deleteAIProvider"];
 };
 
-const AIProviderComponent = ({ aiProviders }: AIProviderProps) => {
+const AIProviderComponent = ({
+  aiProviders,
+  deleteAIProvider,
+}: AIProviderProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
   const [addAIProviderDialogVisible, setAddAIProviderDialogVisible] =
     useState(false);
@@ -56,7 +64,18 @@ const AIProviderComponent = ({ aiProviders }: AIProviderProps) => {
   >([]);
 
   const showAddProviderDialog = () => setAddAIProviderDialogVisible(true);
+
   const hideAddProviderDialog = () => setAddAIProviderDialogVisible(false);
+
+  const onDeleteAIProvider = async (id: TAiProvider["id"]) => {
+    try {
+      await deleteAIProvider?.(id);
+
+      toastr.success(t("AISettings:ProviderRemovedSuccess"));
+    } catch (e) {
+      toastr.error(e as TData);
+    }
+  };
 
   useEffect(() => {
     const init = async () => {
@@ -106,7 +125,11 @@ const AIProviderComponent = ({ aiProviders }: AIProviderProps) => {
 
       <div className={styles.providerList}>
         {aiProviders?.map((provider) => (
-          <AiProviderTile key={provider.id} item={provider} />
+          <AiProviderTile
+            key={provider.id}
+            item={provider}
+            onDelete={onDeleteAIProvider}
+          />
         ))}
       </div>
 
@@ -123,5 +146,6 @@ const AIProviderComponent = ({ aiProviders }: AIProviderProps) => {
 export const AIProvider = inject(({ aiSettingsStore }: TStore) => {
   return {
     aiProviders: aiSettingsStore.aiProviders,
+    deleteAIProvider: aiSettingsStore.deleteAIProvider,
   };
 })(observer(AIProviderComponent));

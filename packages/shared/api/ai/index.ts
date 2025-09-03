@@ -78,7 +78,7 @@ export const updateProvider = async (
   return res;
 };
 
-export const deleteProvider = async (data: TDeleteAiProviders) => {
+export const deleteProviders = async (data: TDeleteAiProviders) => {
   const res = (await request({
     method: "delete",
     url: `${baseUrl}/providers`,

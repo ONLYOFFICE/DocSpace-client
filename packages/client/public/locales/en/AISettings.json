@@ -34,5 +34,6 @@
   "Provider": "Provider",
   "ProviderURL": "URL",
   "ProviderKey": "Key",
-  "ProviderAddedSuccess": "Provider added successfully"
+  "ProviderAddedSuccess": "Provider added successfully",
+  "ProviderRemovedSuccess": "Provider removed successfully"
 }

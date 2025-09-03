@@ -2242,15 +2242,6 @@ class FilesStore {
 
     const { isDesktopClient } = this.settingsStore;
 
-    const pluginAllKeys =
-      enablePlugins &&
-      this.pluginStore.getContextMenuKeysByType(
-        null,
-        null,
-        security,
-        item.security,
-      );
-
     const canRenameItem = item.security?.Rename;
 
     const canMove = this.accessRightsStore.canMoveItems({
@@ -2567,8 +2558,6 @@ class FilesStore {
               item.security,
             );
 
-            pluginAllKeys &&
-              pluginAllKeys.forEach((key) => fileOptions.push(key));
             pluginFilesKeys &&
               pluginFilesKeys.forEach((key) => fileOptions.push(key));
           }
@@ -2584,8 +2573,6 @@ class FilesStore {
               item.security,
             );
 
-            pluginAllKeys &&
-              pluginAllKeys.forEach((key) => fileOptions.push(key));
             pluginFilesKeys &&
               pluginFilesKeys.forEach((key) => fileOptions.push(key));
           }
@@ -2601,8 +2588,6 @@ class FilesStore {
               item.security,
             );
 
-            pluginAllKeys &&
-              pluginAllKeys.forEach((key) => fileOptions.push(key));
             pluginFilesKeys &&
               pluginFilesKeys.forEach((key) => fileOptions.push(key));
           }
@@ -2817,8 +2802,6 @@ class FilesStore {
             item.security,
           );
 
-          pluginAllKeys &&
-            pluginAllKeys.forEach((key) => roomOptions.push(key));
           pluginRoomsKeys &&
             pluginRoomsKeys.forEach((key) => roomOptions.push(key));
         }
@@ -2934,10 +2917,9 @@ class FilesStore {
           PluginFileType.Folders,
           null,
           security,
+          item.security,
         );
 
-        pluginAllKeys &&
-          pluginAllKeys.forEach((key) => folderOptions.push(key));
         pluginFoldersKeys &&
           pluginFoldersKeys.forEach((key) => folderOptions.push(key));
       }

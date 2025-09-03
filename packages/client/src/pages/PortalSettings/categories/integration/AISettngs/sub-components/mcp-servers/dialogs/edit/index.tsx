@@ -37,7 +37,7 @@ import { type TData, toastr } from "@docspace/shared/components/toast";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
-import styles from "../../MCPServers.module.scss";
+import styles from "../../styles/AddEditDialog.module.scss";
 
 import { useAdvancedSettings } from "../../hooks/useAdvancedSettings";
 import { useBaseParams } from "../../hooks/useBaseParams";

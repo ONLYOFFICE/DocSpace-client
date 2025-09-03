@@ -37,7 +37,7 @@ import { Text } from "@docspace/shared/components/text";
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
 import { Link, LinkType } from "@docspace/shared/components/link";
 
-import styles from "../MCPServers.module.scss";
+import styles from "../styles/AddEditDialog.module.scss";
 
 export const useAdvancedSettings = (initialValues?: Record<string, string>) => {
   const { t } = useTranslation(["Common", "AISettings", "SingleSignOn"]);

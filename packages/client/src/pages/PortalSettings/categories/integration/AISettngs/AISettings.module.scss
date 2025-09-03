@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+@use "@docspace/shared/styles/mixins";
+
 .aiSettingsContainer {
   width: 100%;
   max-width: 700px;
@@ -63,8 +65,12 @@
   width: 100%;
 
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, 340px);
   gap: 20px;
+
+  @include mixins.mobile {
+    grid-template-columns: 1fr;
+  }
 }
 
 .mcpHeading {
@@ -73,44 +79,5 @@
 
 .mcpListContainer {
   margin-bottom: 20px;
-}
-
-/* ============================================================================================ */
-
-.addProvider {
-  width: 600px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-
-  margin-bottom: 32px;
-}
-
-.listProviders {
-  width: 600px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 16px;
-}
-
-.providerItem {
-  width: 292px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-
-  border: var(--article-catalog-header-border-bottom);
-
-  box-sizing: border-box;
-
-  padding: 8px;
-  border-radius: 6px;
-}
-
-.providerItemTitle {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+  width: 100%;
 }

@@ -33,7 +33,7 @@ import { FieldContainer } from "@docspace/shared/components/field-container";
 import { toastr } from "@docspace/shared/components/toast";
 import { ONE_MEGABYTE } from "@docspace/shared/constants";
 
-import styles from "../MCPServers.module.scss";
+import styles from "../styles/AddEditDialog.module.scss";
 
 export const useIcon = () => {
   const { t } = useTranslation(["AISettings", "OAuth"]);

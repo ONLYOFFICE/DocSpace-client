@@ -787,23 +787,11 @@ class ContextOptionsStore {
   };
 
   onClickDelete = (item, t) => {
-    const { id, title, providerKey, rootFolderId, isFolder, isRoom } = item;
-
-    const { setRemoveItem, setDeleteThirdPartyDialogVisible } =
-      this.dialogsStore;
+    const { id, title, providerKey, isFolder, isRoom } = item;
 
     if (id === this.selectedFolderStore.id && isFolder) {
       this.onClickDeleteSelectedFolder(t, isRoom);
 
-      return;
-    }
-
-    const isRootThirdPartyFolder = providerKey && id === rootFolderId;
-
-    if (isRootThirdPartyFolder) {
-      const splitItem = id.split("-");
-      setRemoveItem({ id: splitItem[splitItem.length - 1], title });
-      setDeleteThirdPartyDialogVisible(true);
       return;
     }
 

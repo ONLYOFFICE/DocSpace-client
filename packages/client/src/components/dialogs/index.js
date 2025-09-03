@@ -28,7 +28,6 @@ import EmptyTrashDialog from "./EmptyTrashDialog";
 import DeleteDialog from "./DeleteDialog";
 import DownloadDialog from "./DownloadDialog";
 import ConvertDialog from "./ConvertDialog";
-import DeleteThirdPartyDialog from "./DeleteThirdPartyDialog";
 import ConnectDialog from "./ConnectDialog/ConnectDialogWrapper";
 import ConflictResolveDialog from "./ConflictResolveDialog";
 import ChangeEmailDialog from "./ChangeEmailDialog";
@@ -79,7 +78,6 @@ export {
   DeleteDialog,
   DownloadDialog,
   ConvertDialog,
-  DeleteThirdPartyDialog,
   ConnectDialog,
   ConflictResolveDialog,
   ChangeEmailDialog,

@@ -48,6 +48,7 @@ const Dialogs = ({
         onSelectFile={() => {}}
         onClose={onCloseSelectFileDialogVisible}
         withRecentTreeFolder
+        withFavoritesTreeFolder
       />
     ),
     submitToGalleryDialogVisible && (

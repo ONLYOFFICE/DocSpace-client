@@ -115,6 +115,7 @@ const SelectFileDialog = ({
       shareKey={shareKey}
       openRoot={openRoot}
       withRecentTreeFolder
+      withFavoritesTreeFolder
     />
   );
 };

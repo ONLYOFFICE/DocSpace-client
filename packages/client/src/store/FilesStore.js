@@ -671,6 +671,8 @@ class FilesStore {
       (data?.folderId === recentFolderId &&
         this.selectedFolderStore.id !== recentFolderId) ||
       (data?.folderId === favoritesFolderId &&
+        this.selectedFolderStore.id !== favoritesFolderId) ||
+      (data?.parentId === favoritesFolderId &&
         this.selectedFolderStore.id !== favoritesFolderId)
     ) {
       return;

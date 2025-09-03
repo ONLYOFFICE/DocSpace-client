@@ -33,7 +33,7 @@ import { ToolsPermission } from "./enums";
 import {
   TCreateAiProvider,
   TAiProvider,
-  TUpdateAiProviders,
+  TUpdateAiProvider,
   TDeleteAiProviders,
   TModelList,
   TChat,
@@ -67,7 +67,7 @@ export const getProviders = async () => {
 
 export const updateProvider = async (
   providerId: TAiProvider["id"],
-  data: TUpdateAiProviders,
+  data: TUpdateAiProvider,
 ) => {
   const res = (await request({
     method: "put",

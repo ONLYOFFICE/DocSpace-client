@@ -43,7 +43,7 @@ export type TAiProvider = {
   modifiedOn: string;
 };
 
-export type TUpdateAiProviders = {
+export type TUpdateAiProvider = {
   title?: TCreateAiProvider["title"];
   key?: TCreateAiProvider["key"];
   url?: TCreateAiProvider["url"];

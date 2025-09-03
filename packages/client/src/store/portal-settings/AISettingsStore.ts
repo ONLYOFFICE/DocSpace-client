@@ -32,12 +32,14 @@ import {
   type TAiProvider,
   type TCreateAiProvider,
   type TServer,
+  type TUpdateAiProvider,
 } from "@docspace/shared/api/ai/types";
 import {
   createProvider,
   deleteProviders,
   getProviders,
   getServersList,
+  updateProvider,
 } from "@docspace/shared/api/ai";
 import { ServerType } from "@docspace/shared/api/ai/enums";
 
@@ -68,6 +70,15 @@ class AISettingsStore {
     const newProvider = await createProvider(provider);
 
     this.aiProviders.push(newProvider);
+  };
+
+  updateAIProvider = async (id: TAiProvider["id"], data: TUpdateAiProvider) => {
+    const newProvider = await updateProvider(id, data);
+    const index = this.aiProviders.findIndex((p) => p.id === id);
+
+    if (index) {
+      this.aiProviders[index] = newProvider;
+    }
   };
 
   deleteAIProvider = async (id: TAiProvider["id"]) => {

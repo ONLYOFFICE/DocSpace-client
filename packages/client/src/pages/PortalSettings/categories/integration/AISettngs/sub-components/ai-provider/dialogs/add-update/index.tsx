@@ -45,19 +45,24 @@ import {
 import { ProviderType } from "@docspace/shared/api/ai/enums";
 import { getAiProviderLabel } from "@docspace/shared/utils";
 import {
+  type TAiProvider,
   TCreateAiProvider,
   type TProviderTypeWithUrl,
+  type TUpdateAiProvider,
 } from "@docspace/shared/api/ai/types";
 import { TData, toastr } from "@docspace/shared/components/toast";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
-import styles from "./AddAIProviderDialog.module.scss";
+import styles from "./AddUpdateDialog.module.scss";
 
-type AddAIProviderDialogProps = {
+type AddEditDialogProps = {
+  variant: "add" | "update";
   onClose: () => void;
   aiProviderTypesWithUrls: TProviderTypeWithUrl[];
+  providerData?: TAiProvider;
   addAIProvider?: AISettingsStore["addAIProvider"];
+  updateAIProvider?: AISettingsStore["updateAIProvider"];
 };
 
 const providerTypes: TOption[] = [
@@ -79,6 +84,10 @@ const providerTypes: TOption[] = [
   },
 ];
 
+const getSelectedOptionByProviderType = (type?: ProviderType) => {
+  return providerTypes.find((item) => item.key === type) || providerTypes[0];
+};
+
 const getURLByProviderType = (
   type: ProviderType,
   aiProviderTypesWithUrls: TProviderTypeWithUrl[],
@@ -86,20 +95,26 @@ const getURLByProviderType = (
   return aiProviderTypesWithUrls.find((item) => item.type === type)?.url || "";
 };
 
-const AddAIProviderDialogComponent = ({
+const AddUpdateDialogComponent = ({
+  variant,
   onClose,
   aiProviderTypesWithUrls,
   addAIProvider,
-}: AddAIProviderDialogProps) => {
+  updateAIProvider,
+  providerData,
+}: AddEditDialogProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
-  const [selectedOption, setSelectedOption] = useState(providerTypes[0]);
-  const [providerTitle, setProviderTitle] = useState("");
+  const [selectedOption, setSelectedOption] = useState(
+    getSelectedOptionByProviderType(providerData?.type),
+  );
+  const [providerTitle, setProviderTitle] = useState(providerData?.title || "");
   const [providerKey, setProviderKey] = useState("");
   const [providerUrl, setProviderUrl] = useState(
-    getURLByProviderType(
-      selectedOption.key as ProviderType,
-      aiProviderTypesWithUrls,
-    ),
+    providerData?.url ||
+      getURLByProviderType(
+        selectedOption.key as ProviderType,
+        aiProviderTypesWithUrls,
+      ),
   );
   const [isRequestRunning, setIsRequestRunning] = useState(false);
 
@@ -116,17 +131,30 @@ const AddAIProviderDialogComponent = ({
   const onSubmit = async () => {
     setIsRequestRunning(true);
 
-    const providerData: TCreateAiProvider = {
-      key: providerKey,
-      title: providerTitle,
-      type: selectedOption.key as ProviderType,
-      url: providerUrl,
-    };
-
     try {
-      await addAIProvider?.(providerData);
+      if (variant === "add") {
+        const data: TCreateAiProvider = {
+          key: providerKey,
+          title: providerTitle,
+          type: selectedOption.key as ProviderType,
+          url: providerUrl,
+        };
 
-      toastr.success(t("AISettings:ProviderAddedSuccess"));
+        await addAIProvider?.(data);
+        toastr.success(t("AISettings:ProviderAddedSuccess"));
+      }
+
+      if (variant === "update" && providerData?.id) {
+        const data: TUpdateAiProvider = {
+          key: providerKey,
+          title: providerTitle,
+          url: providerUrl,
+        };
+
+        await updateAIProvider?.(providerData.id, data);
+        toastr.success(t("AISettings:ProviderUpdatedSuccess"));
+      }
+
       onClose();
     } catch (e) {
       toastr.error(e as TData);
@@ -158,7 +186,7 @@ const AddAIProviderDialogComponent = ({
               onSelect={onSelectProvider}
               scaled
               scaledOptions
-              isDisabled={isRequestRunning}
+              isDisabled={variant === "update" || isRequestRunning}
             />
           </FieldContainer>
           <FieldContainer
@@ -237,8 +265,8 @@ const AddAIProviderDialogComponent = ({
   );
 };
 
-export const AddAIProviderDialog = inject(({ aiSettingsStore }: TStore) => {
-  const { addAIProvider } = aiSettingsStore;
+export const AddUpdateProviderDialog = inject(({ aiSettingsStore }: TStore) => {
+  const { addAIProvider, updateAIProvider } = aiSettingsStore;
 
-  return { addAIProvider };
-})(observer(AddAIProviderDialogComponent));
+  return { addAIProvider, updateAIProvider };
+})(observer(AddUpdateDialogComponent));

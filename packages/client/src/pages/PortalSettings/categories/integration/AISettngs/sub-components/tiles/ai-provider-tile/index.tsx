@@ -41,10 +41,15 @@ import { AiTile } from "../ai-tile";
 
 type AiProviderTileProps = {
   item: TAiProvider;
-  onDelete: (id: TAiProvider["id"]) => void;
+  onDeleteClick: (id: TAiProvider["id"]) => void;
+  onSettingsClick: (provider: TAiProvider) => void;
 };
 
-export const AiProviderTile = ({ item, onDelete }: AiProviderTileProps) => {
+export const AiProviderTile = ({
+  item,
+  onDeleteClick,
+  onSettingsClick,
+}: AiProviderTileProps) => {
   const { t } = useTranslation("Common");
   const { isBase } = useTheme();
 
@@ -57,12 +62,12 @@ export const AiProviderTile = ({ item, onDelete }: AiProviderTileProps) => {
         key: "settings",
         label: t("Common:Settings"),
         icon: SettingsIcon,
-        onClick: () => {},
+        onClick: () => onSettingsClick(item),
       },
       {
         key: "delete",
         label: t("Common:Delete"),
-        onClick: () => onDelete(item.id),
+        onClick: () => onDeleteClick(item.id),
         icon: CatalogTrashReactSvgUrl,
       },
     ];

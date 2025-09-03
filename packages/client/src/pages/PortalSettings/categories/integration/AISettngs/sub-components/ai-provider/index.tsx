@@ -45,7 +45,7 @@ import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore"
 
 import styles from "../../AISettings.module.scss";
 import { AiProviderTile } from "../tiles/ai-provider-tile";
-import { AddAIProviderDialog } from "./dialogs/add";
+import { AddUpdateProviderDialog } from "./dialogs/add-update";
 
 type TDeleteDialogData =
   | {
@@ -57,6 +57,16 @@ type TDeleteDialogData =
       providerId: TAiProvider["id"];
     };
 
+type TUpdateDialogData =
+  | {
+      visible: false;
+      provider: null;
+    }
+  | {
+      visible: true;
+      provider: TAiProvider;
+    };
+
 type AIProviderProps = {
   aiProviders?: AISettingsStore["aiProviders"];
 };
@@ -65,6 +75,10 @@ const AIProviderComponent = ({ aiProviders }: AIProviderProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
   const [addAIProviderDialogVisible, setaddAIProviderDialogVisible] =
     useState(false);
+  const [updateDialogData, setUpdateDialogData] = useState<TUpdateDialogData>({
+    visible: false,
+    provider: null,
+  });
   const [deleteDialogData, setDeleteDialogData] = useState<TDeleteDialogData>({
     visible: false,
     providerId: null,
@@ -76,12 +90,18 @@ const AIProviderComponent = ({ aiProviders }: AIProviderProps) => {
   const showAddProviderDialog = () => setaddAIProviderDialogVisible(true);
 
   const hideAddProviderDialog = () => setaddAIProviderDialogVisible(false);
+  const hideUpdateDialog = () =>
+    setUpdateDialogData({ visible: false, provider: null });
 
   const hideDeleteProviderDialog = () =>
     setDeleteDialogData({ visible: false, providerId: null });
 
   const onDeleteAIProvider = async (id: TAiProvider["id"]) => {
     setDeleteDialogData({ visible: true, providerId: id });
+  };
+
+  const onUpdateAIProvider = async (provider: TAiProvider) => {
+    setUpdateDialogData({ visible: true, provider });
   };
 
   useEffect(() => {
@@ -135,15 +155,26 @@ const AIProviderComponent = ({ aiProviders }: AIProviderProps) => {
           <AiProviderTile
             key={provider.id}
             item={provider}
-            onDelete={onDeleteAIProvider}
+            onDeleteClick={onDeleteAIProvider}
+            onSettingsClick={onUpdateAIProvider}
           />
         ))}
       </div>
 
       {addAIProviderDialogVisible ? (
-        <AddAIProviderDialog
+        <AddUpdateProviderDialog
+          variant="add"
           onClose={hideAddProviderDialog}
           aiProviderTypesWithUrls={aiProviderTypesWithUrls}
+        />
+      ) : null}
+
+      {updateDialogData.visible ? (
+        <AddUpdateProviderDialog
+          variant="update"
+          onClose={hideUpdateDialog}
+          aiProviderTypesWithUrls={aiProviderTypesWithUrls}
+          providerData={updateDialogData.provider}
         />
       ) : null}
 

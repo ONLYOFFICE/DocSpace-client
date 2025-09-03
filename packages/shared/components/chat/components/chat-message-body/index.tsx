@@ -60,6 +60,8 @@ const ChatMessageBody = ({
 
   const isEmpty = messages.length === 0;
 
+  console.log(isScrolled);
+
   useEffect(() => {
     if (!currentChat?.id) return;
 
@@ -111,9 +113,14 @@ const ChatMessageBody = ({
   }, [messages.length]);
 
   const onScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const currentHeight =
+      e.currentTarget.scrollTop + e.currentTarget.clientHeight;
+
     if (
-      e.currentTarget.scrollTop + e.currentTarget.clientHeight ===
-      chatBodyRef.current?.offsetHeight
+      currentHeight === chatBodyRef.current?.offsetHeight ||
+      (chatBodyRef.current &&
+        Math.abs(currentHeight - chatBodyRef.current.offsetHeight) < 5) ||
+      (chatBodyRef.current && chatBodyRef.current.offsetHeight < currentHeight)
     ) {
       setIsScrolled(false);
     } else {

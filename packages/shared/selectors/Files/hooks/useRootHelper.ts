@@ -122,6 +122,7 @@ const useRootHelper = ({
     setTotal,
     treeFolders,
     withRecentTreeFolder,
+    withFavoritesTreeFolder,
     t,
   ]);
 

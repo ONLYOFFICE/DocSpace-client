@@ -140,7 +140,7 @@ const ImportStep = (props: ImportStepProps) => {
         onChange={(e) => onChange(e, "importPersonalFiles")}
         sectionName={t("Settings:PersonalFiles")}
         description={t("Settings:ImportFilesLocation", {
-          sectionName: t("Common:MyFilesSection"),
+          sectionName: t("Common:MyDocuments"),
         })}
         exportSection={{
           sectionName: personalExportDetails.name,
@@ -161,7 +161,7 @@ const ImportStep = (props: ImportStepProps) => {
         onChange={(e) => onChange(e, "importSharedFiles")}
         sectionName={t("Settings:SharedFiles")}
         description={t("Settings:SharedFilesImportLocation", {
-          sectionName: t("Common:MyFilesSection"),
+          sectionName: t("Common:MyDocuments"),
         })}
         exportSection={{
           sectionName: sharedFilesExportDetails.name,

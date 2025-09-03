@@ -204,7 +204,7 @@ export const getOptions = (
       productName: t("Common:ProductName"),
     }),
     t("EmptyView:SectionsUploadDescription", {
-      sectionNameFirst: t("Common:MyFilesSection"),
+      sectionNameFirst: t("Common:MyDocuments"),
       sectionNameSecond: t("Common:Rooms"),
     }),
     // TODO: need fix selector
@@ -404,7 +404,7 @@ export const getOptions = (
           ...actions.onGoToPersonal(),
           icon: <PersonIcon />,
           description: t("Files:GoToSection", {
-            sectionName: t("Common:MyFilesSection"),
+            sectionName: t("Common:MyDocuments"),
           }),
           key: "empty-view-trash-goto-personal",
         },

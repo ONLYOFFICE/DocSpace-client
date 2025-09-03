@@ -238,6 +238,7 @@ const FilesSelectorInput = ({
           currentDeviceType={currentDeviceType ?? DeviceType.desktop}
           {...filesSelectorSettings}
           withRecentTreeFolder={isFilesSelection}
+          withFavoritesTreeFolder={isFilesSelection}
         />
       </Aside>
     </>

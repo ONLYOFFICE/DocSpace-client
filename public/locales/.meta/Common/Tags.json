@@ -3,7 +3,7 @@
   "content": "Tags",
   "content_en_sha1_hash": "848eed0fbd5429f556b2982dec3ea87136e33e44",
   "created_at": "2025-05-19T21:30:49.252Z",
-  "updated_at": "2025-08-27T10:14:35.119Z",
+  "updated_at": "2025-09-02T07:59:28.355Z",
   "comment": {
     "text": "This translation key is used to display the label \"Tags\" in various UI elements throughout the application, such as input fields and column headers. It appears in contexts like dialog components, info panels, and table headers, helping users understand what field or section they are interacting with. Translators should provide a clear and concise version of this text that accurately conveys its intended purpose.",
     "is_auto": true,
@@ -24,13 +24,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 566,
+      "line_number": 631,
       "context": "onChange: this.onColumnChange,\n onClick: this.onRoomsFilter,\n },\n {\n key: \"Tags\",\n title: t(\"Common:Tags\"),\n enable: roomColumnTagsIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Tags,\n withTagRef: true,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 566,
+      "line_number": 631,
       "context": "onChange: this.onColumnChange,\n onClick: this.onRoomsFilter,\n },\n {\n key: \"Tags\",\n title: t(\"Common:Tags\"),\n enable: roomColumnTagsIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Tags,\n withTagRef: true,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },

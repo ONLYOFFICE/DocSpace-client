@@ -29,6 +29,7 @@ export const FILTER_VERSION = 1;
 // Document filters
 export const FILTER_DOCUMENTS = "UserFilter";
 export const FILTER_RECENT = "UserFilterRecent";
+export const FILTER_FAVORITES = "UserFilterFavorites";
 export const FILTER_TRASH = "UserFilterTrash";
 
 // Room filters

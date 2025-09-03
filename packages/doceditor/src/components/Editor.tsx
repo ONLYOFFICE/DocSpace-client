@@ -227,8 +227,9 @@ const Editor = ({
   }
 
   try {
-    // if (newConfig.document && newConfig.document.info)
-    //  newConfig.document.info.favorite = false;
+    if (newConfig.document && newConfig.document.info)
+      newConfig.document.info.favorite = !!fileInfo?.isFavorite;
+
     const url = typeof window !== "undefined" ? window.location.href : "";
 
     if (url.indexOf("anchor") !== -1) {

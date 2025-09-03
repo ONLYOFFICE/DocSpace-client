@@ -537,19 +537,19 @@ class PluginStore {
     if (userRole && item.usersTypes && !item.usersTypes.includes(userRole))
       return false;
 
-    if (device && item.devices && !item.devices?.includes(device)) return false;
+    if (device && item.devices && !item.devices.includes(device)) return false;
 
     if (
       security &&
       item.security &&
-      !item.security?.every((key) => security[key as keyof typeof security])
+      !item.security.every((key) => security[key as keyof typeof security])
     )
       return false;
 
     if (
       itemSecurity &&
       item.itemSecurity &&
-      !item.itemSecurity?.every(
+      !item.itemSecurity.every(
         (key) => itemSecurity[key as keyof typeof itemSecurity],
       )
     )

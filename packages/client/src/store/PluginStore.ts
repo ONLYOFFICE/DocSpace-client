@@ -642,18 +642,6 @@ class PluginStore {
         });
         break;
       default:
-        items.forEach((item) => {
-          if (item.fileType) return;
-
-          const isValid = this.validateContextMenuItem(item, {
-            userRole,
-            device,
-            security,
-            itemSecurity,
-          });
-
-          if (isValid) keys.push(item.key);
-        });
     }
 
     if (keys.length === 0) return null;

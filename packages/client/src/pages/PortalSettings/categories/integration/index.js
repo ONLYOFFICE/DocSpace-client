@@ -41,7 +41,6 @@ import SMTPSettings from "./SMTPSettings";
 import DocumentService from "./DocumentService";
 import PluginPage from "./Plugins";
 import AISettngs from "./AISettngs";
-import MCPServers from "./MCPServers";
 
 const IntegrationWrapper = (props) => {
   const {

@@ -38,7 +38,6 @@
   "ChooseNewPlan": "ඔබ නව මිලකරණ සැලසුමක් තේරීමට කැමතිද?",
   "ConfirmPayment": "ගෙවීම තහවුරුවත් කරන්න",
   "ConnectAndConfigureServices": "මෙම කොටස සේවා සම්බන්ධ කිරීමට සහ සැකසියමට භාවිතා වේ.",
-  "Cost": "වියය",
   "Credit": "ණය",
   "CurrencyPerMonth": "{{currency}}/මාසයක",
   "CurrentBalance": "වත්ථම ශේෂය: <1>{{balance}}</1>",

@@ -3,7 +3,7 @@
   "content": "Files shared by other users will be imported into {{sectionName}} > Recently accessible via link. Please note: some access rights may get lost during import.",
   "content_en_sha1_hash": "446ebeabb21e73dbb8be3a550abd4bd8e3c4a641",
   "created_at": "2025-05-19T21:30:52.698Z",
-  "updated_at": "2025-08-11T09:02:43.946Z",
+  "updated_at": "2025-09-02T07:59:28.498Z",
   "comment": {
     "text": "This translation key is used to display a message explaining that shared files will be imported into a specific section and may lose some access rights during import. It appears in a data-import component, likely on a button or dialog related to importing file categories, such as \"Import Shared Files\" in the Portal Settings page.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
       "line_number": 163,
-      "context": "<ImportSection\n isChecked={importOptions.importSharedFiles}\n onChange={(e) => onChange(e, \"importSharedFiles\")}\n sectionName={t(\"Settings:SharedFiles\")}\n description={t(\"Settings:SharedFilesImportLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n })}\n exportSection={{\n sectionName: sharedFilesExportDetails.name,\n workspace: serviceName,",
+      "context": "<ImportSection\n isChecked={importOptions.importSharedFiles}\n onChange={(e) => onChange(e, \"importSharedFiles\")}\n sectionName={t(\"Settings:SharedFiles\")}\n description={t(\"Settings:SharedFilesImportLocation\", {\n sectionName: t(\"Common:MyDocuments\"),\n })}\n exportSection={{\n sectionName: sharedFilesExportDetails.name,\n workspace: serviceName,",
       "module": "/packages/client"
     }
   ],

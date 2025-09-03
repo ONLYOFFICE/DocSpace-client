@@ -36,6 +36,7 @@ const TABLE_INSIDE_GROUP_COLUMNS = `insideGroupTableColumns_ver-${TableVersions.
 const TABLE_ROOMS_COLUMNS = `roomsTableColumns_ver-${TableVersions.Rooms}`;
 const TABLE_TRASH_COLUMNS = `trashTableColumns_ver-${TableVersions.Trash}`;
 const TABLE_RECENT_COLUMNS = `recentTableColumns_ver-${TableVersions.Recent}`;
+const TABLE_FAVORITES_COLUMNS = `favoritesTableColumns_ver-${TableVersions.Favorites}`;
 const TABLE_VDR_INDEXING_COLUMNS = `vdrIndexingColumns_ver-${TableVersions.Rooms}`;
 const TABLE_TEMPLATES_ROOM_COLUMNS = `templatesRoomsTableColumns_ver-${TableVersions.Rooms}`;
 
@@ -43,6 +44,7 @@ const COLUMNS_SIZE = `filesColumnsSize_ver-${TableVersions.Files}`;
 const COLUMNS_ROOMS_SIZE = `roomsColumnsSize_ver-${TableVersions.Rooms}`;
 const COLUMNS_TRASH_SIZE = `trashColumnsSize_ver-${TableVersions.Trash}`;
 const COLUMNS_RECENT_SIZE = `recentColumnsSize_ver-${TableVersions.Recent}`;
+const COLUMNS_FAVORITES_SIZE = `favoritesColumnsSize_ver-${TableVersions.Favorites}`;
 const COLUMNS_VDR_INDEXING_SIZE = `vdrIndexingColumnsSize_ver-${TableVersions.Rooms}`;
 const COLUMNS_PEOPLE_SIZE = `peopleColumnsSize_ver-${TableVersions.People}`;
 const COLUMNS_GUESTS_SIZE = `guestsColumnsSize_ver-${TableVersions.Guests}`;
@@ -54,6 +56,7 @@ const COLUMNS_SIZE_INFO_PANEL = `filesColumnsSizeInfoPanel_ver-${TableVersions.F
 const COLUMNS_ROOMS_SIZE_INFO_PANEL = `roomsColumnsSizeInfoPanel_ver-${TableVersions.Rooms}`;
 const COLUMNS_TRASH_SIZE_INFO_PANEL = `trashColumnsSizeInfoPanel_ver-${TableVersions.Trash}`;
 const COLUMNS_RECENT_SIZE_INFO_PANEL = `recentColumnsSizeInfoPanel_ver-${TableVersions.Recent}`;
+const COLUMNS_FAVORITES_SIZE_INFO_PANEL = `favoritesColumnsSizeInfoPanel_ver-${TableVersions.Favorites}`;
 const COLUMNS_VDR_INDEXING_SIZE_INFO_PANEL = `vdrIndexingColumnsSizeInfoPanel_ver-${TableVersions.Rooms}`;
 const COLUMNS_PEOPLE_INFO_PANEL_SIZE = `infoPanelPeopleColumnsSize_ver-${TableVersions.People}`;
 const COLUMNS_GUESTS_INFO_PANEL_SIZE = `infoPanelGuestsColumnsSize_ver-${TableVersions.Guests}`;
@@ -111,6 +114,16 @@ class TableStore {
   typeRecentColumnIsEnabled = false;
 
   lastOpenedRecentColumnIsEnabled = true;
+
+  locationFavoritesColumnIsEnabled = true;
+
+  authorFavoritesColumnIsEnabled = true;
+
+  modifiedFavoritesColumnIsEnabled = true;
+
+  sizeFavoritesColumnIsEnabled = true;
+
+  typeFavoritesColumnIsEnabled = false;
 
   authorTrashColumnIsEnabled = true;
 
@@ -230,6 +243,26 @@ class TableStore {
 
   setAuthorRecentColumn = (enable) => {
     this.authorRecentColumnIsEnabled = enable;
+  };
+
+  setLocationFavoritesColumn = (enable) => {
+    this.locationFavoritesColumnIsEnabled = enable;
+  };
+
+  setAuthorFavoritesColumn = (enable) => {
+    this.authorFavoritesColumnIsEnabled = enable;
+  };
+
+  setModifiedFavoritesColumn = (enable) => {
+    this.modifiedFavoritesColumnIsEnabled = enable;
+  };
+
+  setSizeFavoritesColumn = (enable) => {
+    this.sizeFavoritesColumnIsEnabled = enable;
+  };
+
+  setTypeFavoritesColumn = (enable) => {
+    this.typeFavoritesColumnIsEnabled = enable;
   };
 
   setAuthorVDRColumn = (enable) => {
@@ -356,6 +389,7 @@ class TableStore {
         isTemplatesFolder,
         isPersonalReadOnly,
         isRecentFolder,
+        isFavoritesFolder,
       } = this.treeFoldersStore;
 
       const contactsView = getContactsView();
@@ -449,6 +483,19 @@ class TableStore {
         return;
       }
 
+      if (isFavoritesFolder) {
+        this.setLocationFavoritesColumn(
+          splitColumns.includes("LocationFavorites"),
+        );
+        this.setAuthorFavoritesColumn(splitColumns.includes("AuthorFavorites"));
+        this.setModifiedFavoritesColumn(
+          splitColumns.includes("ModifiedFavorites"),
+        );
+        this.setSizeFavoritesColumn(splitColumns.includes("SizeFavorites"));
+        this.setTypeFavoritesColumn(splitColumns.includes("TypeFavorites"));
+        return;
+      }
+
       if (this.selectedFolderStore.isIndexedFolder) {
         this.setAuthorVDRColumn(splitColumns.includes("AuthorIndexing"));
         this.setCreatedVDRColumn(splitColumns.includes("CreatedIndexing"));
@@ -490,6 +537,9 @@ class TableStore {
       case "LocationRecent":
         this.setLocationRecentColumn(!this.locationRecentColumnIsEnabled);
         return;
+      case "LocationFavorites":
+        this.setLocationFavoritesColumn(!this.locationFavoritesColumnIsEnabled);
+        return;
       case "Author":
         this.setAuthorColumn(!this.authorColumnIsEnabled);
         return;
@@ -498,6 +548,9 @@ class TableStore {
         return;
       case "AuthorRecent":
         this.setAuthorRecentColumn(!this.authorRecentColumnIsEnabled);
+        return;
+      case "AuthorFavorites":
+        this.setAuthorFavoritesColumn(!this.authorFavoritesColumnIsEnabled);
         return;
       case "AuthorIndexing":
         this.setAuthorVDRColumn(!this.authorVDRColumnIsEnabled);
@@ -528,7 +581,9 @@ class TableStore {
       case "ModifiedIndexing":
         this.setModifiedVDRColumn(!this.modifiedVDRColumnIsEnabled);
         return;
-
+      case "ModifiedFavorites":
+        this.setModifiedFavoritesColumn(!this.modifiedFavoritesColumnIsEnabled);
+        return;
       case "Erasure":
         this.setErasureColumn(!this.erasureColumnIsEnabled);
         return;
@@ -541,6 +596,9 @@ class TableStore {
         return;
       case "SizeRecent":
         this.setSizeRecentColumn(!this.sizeRecentColumnIsEnabled);
+        return;
+      case "SizeFavorites":
+        this.setSizeFavoritesColumn(!this.sizeFavoritesColumnIsEnabled);
         return;
 
       case "SizeIndexing":
@@ -565,6 +623,10 @@ class TableStore {
 
       case "TypeRecent":
         this.setTypeRecentColumn(!this.typeRecentColumnIsEnabled);
+        return;
+
+      case "TypeFavorites":
+        this.setTypeFavoritesColumn(!this.typeFavoritesColumnIsEnabled);
         return;
 
       case "TypeIndexing":
@@ -682,6 +744,7 @@ class TableStore {
       isTrashFolder,
       isRecentFolder,
       isTemplatesFolder,
+      isFavoritesFolder,
     } = this.treeFoldersStore;
 
     const { contactsTab } = this.peopleStore.usersStore;
@@ -724,6 +787,8 @@ class TableStore {
       tableStorageName = `${TABLE_TRASH_COLUMNS}=${userId}`;
     else if (isRecentFolder)
       tableStorageName = `${TABLE_RECENT_COLUMNS}=${userId}`;
+    else if (isFavoritesFolder)
+      tableStorageName = `${TABLE_FAVORITES_COLUMNS}=${userId}`;
     else if (isIndexedFolder)
       tableStorageName = `${TABLE_VDR_INDEXING_COLUMNS}=${userId}`;
     else if (isDocumentsFolder) tableStorageName = `${TABLE_COLUMNS}=${userId}`;
@@ -742,6 +807,7 @@ class TableStore {
       isTrashFolder,
       isRecentFolder,
       isTemplatesFolder,
+      isFavoritesFolder,
     } = this.treeFoldersStore;
 
     const { contactsTab } = this.peopleStore.usersStore;
@@ -776,6 +842,8 @@ class TableStore {
       columnStorageName = `${COLUMNS_TRASH_SIZE}=${userId}`;
     else if (isRecentFolder)
       columnStorageName = `${COLUMNS_RECENT_SIZE}=${userId}`;
+    else if (isFavoritesFolder)
+      columnStorageName = `${COLUMNS_FAVORITES_SIZE}=${userId}`;
     else if (isIndexedFolder)
       columnStorageName = `${COLUMNS_VDR_INDEXING_SIZE}=${userId}`;
     else if (isContactsPeople)
@@ -802,6 +870,7 @@ class TableStore {
       isTrashFolder,
       isRecentFolder,
       isTemplatesFolder,
+      isFavoritesFolder,
     } = this.treeFoldersStore;
 
     const { isIndexedFolder } = this.selectedFolderStore;
@@ -837,6 +906,8 @@ class TableStore {
       columnInfoPanelStorageName = `${COLUMNS_TRASH_SIZE_INFO_PANEL}=${userId}`;
     else if (isRecentFolder)
       columnInfoPanelStorageName = `${COLUMNS_RECENT_SIZE_INFO_PANEL}=${userId}`;
+    else if (isFavoritesFolder)
+      columnInfoPanelStorageName = `${COLUMNS_FAVORITES_SIZE_INFO_PANEL}=${userId}`;
     else if (isIndexedFolder)
       columnInfoPanelStorageName = `${COLUMNS_VDR_INDEXING_SIZE_INFO_PANEL}=${userId}`;
     else if (isContactsPeople)

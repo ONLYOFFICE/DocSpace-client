@@ -3,7 +3,7 @@
   "content": "{{productName}} admin",
   "content_en_sha1_hash": "c2ab2049e1e222685c5af15f68e5f6c5b11e8747",
   "created_at": "2025-05-19T21:30:47.411Z",
-  "updated_at": "2025-08-11T09:02:43.923Z",
+  "updated_at": "2025-08-29T14:33:38.131Z",
   "comment": {
     "text": "This translation key is used to display \"PortalAdmin\" as a label for users who have full access, appearing in tooltips and UI elements related to user management. It is likely to be displayed on buttons, dropdowns, or other interactive elements where user permissions are being managed. The key is used consistently with other labels, such as \"Common:PortalOwner\", suggesting it may appear in multiple places throughout the application.",
     "is_auto": true,
@@ -36,13 +36,13 @@
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 331,
+      "line_number": 332,
       "context": "export const getUserTypeTranslation = (type: EmployeeType, t: TTranslation) => {\n switch (type) {\n case EmployeeType.Owner:\n return t(\"Common:Owner\");\n case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 331,
+      "line_number": 332,
       "context": "export const getUserTypeTranslation = (type: EmployeeType, t: TTranslation) => {\n switch (type) {\n case EmployeeType.Owner:\n return t(\"Common:Owner\");\n case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:",
       "module": "/packages/shared"
     }

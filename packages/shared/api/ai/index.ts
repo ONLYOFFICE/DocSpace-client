@@ -294,15 +294,11 @@ export const updateServer = async (
 };
 
 export const deleteServers = async (servers: string[]) => {
-  try {
-    await request({
-      method: "delete",
-      url: `${baseUrl}/servers`,
-      data: { servers },
-    });
-  } catch (e) {
-    console.log(e);
-  }
+  await request({
+    method: "delete",
+    url: `${baseUrl}/servers`,
+    data: { servers },
+  });
 };
 
 export const addServersForRoom = async (roomId: number, servers: string[]) => {

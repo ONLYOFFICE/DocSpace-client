@@ -42,16 +42,26 @@ import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore"
 import styles from "../../AISettings.module.scss";
 import { MCPTile } from "../tiles/mcp-tile";
 import { AddMCPDialog } from "./dialogs/add";
+import { DeleteDialog } from "./dialogs/delete";
 
 type MCPListProps = {
   showHeading: boolean;
   headingText: string;
   mcpServers?: TServer[];
   onMCPToggle: (id: TServer["id"], enabled: boolean) => void;
+  onSettingsClick: (item: TServer) => void;
+  onDeleteClick: (id: TServer["id"]) => void;
 };
 
 const MCPList = observer(
-  ({ showHeading, headingText, mcpServers, onMCPToggle }: MCPListProps) => {
+  ({
+    showHeading,
+    headingText,
+    mcpServers,
+    onMCPToggle,
+    onSettingsClick,
+    onDeleteClick,
+  }: MCPListProps) => {
     if (!mcpServers?.length) return;
 
     return (
@@ -70,13 +80,23 @@ const MCPList = observer(
 
         <div className={styles.mcpList}>
           {mcpServers.map((mcp) => (
-            <MCPTile key={mcp.id} item={mcp} onToggle={onMCPToggle} />
+            <MCPTile
+              key={mcp.id}
+              item={mcp}
+              onToggle={onMCPToggle}
+              onSettingsClick={onSettingsClick}
+              onDeleteClick={onDeleteClick}
+            />
           ))}
         </div>
       </div>
     );
   },
 );
+
+type DeleteDialogData =
+  | { visible: false; serverId: null }
+  | { visible: true; serverId: TServer["id"] };
 
 type MCPServersProps = {
   standalone?: boolean;
@@ -93,6 +113,10 @@ const MCPServersComponent = ({
 }: MCPServersProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
   const [addDialogVisible, setAddDialogVisible] = useState(false);
+  const [deleteDialogData, setDeleteDialogData] = useState<DeleteDialogData>({
+    visible: false,
+    serverId: null,
+  });
 
   const showMCPHeadings = !!customMCPServers?.length;
 
@@ -110,9 +134,27 @@ const MCPServersComponent = ({
     }
   };
 
+  const onUpdateMCP = (item: TServer) => {
+    console.log(item);
+  };
+
+  const onDeleteMCP = (id: TServer["id"]) => {
+    setDeleteDialogData({
+      visible: true,
+      serverId: id,
+    });
+  };
+
   const showAddDialog = () => setAddDialogVisible(true);
 
   const hideAddDialog = () => setAddDialogVisible(false);
+
+  const hideDeleteDialog = () => {
+    setDeleteDialogData({
+      visible: false,
+      serverId: null,
+    });
+  };
 
   return (
     <div className={styles.mcpServers}>
@@ -156,6 +198,8 @@ const MCPServersComponent = ({
         mcpServers={customMCPServers}
         showHeading={showMCPHeadings}
         onMCPToggle={onMCPToggle}
+        onSettingsClick={onUpdateMCP}
+        onDeleteClick={onDeleteMCP}
       />
 
       <MCPList
@@ -163,9 +207,18 @@ const MCPServersComponent = ({
         mcpServers={systemMCPServers}
         showHeading={showMCPHeadings}
         onMCPToggle={onMCPToggle}
+        onSettingsClick={onUpdateMCP}
+        onDeleteClick={onDeleteMCP}
       />
 
       {addDialogVisible ? <AddMCPDialog onClose={hideAddDialog} /> : null}
+
+      {deleteDialogData.visible ? (
+        <DeleteDialog
+          onClose={hideDeleteDialog}
+          serverId={deleteDialogData.serverId}
+        />
+      ) : null}
     </div>
   );
 };

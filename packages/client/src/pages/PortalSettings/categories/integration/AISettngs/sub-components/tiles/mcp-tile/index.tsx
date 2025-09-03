@@ -46,9 +46,17 @@ import styles from "./MCPTile.module.scss";
 type MCPTileProps = {
   item: TServer;
   onToggle: (id: TServer["id"], enabled: boolean) => void;
+
+  onSettingsClick?: (item: TServer) => void;
+  onDeleteClick?: (id: TServer["id"]) => void;
 };
 
-export const MCPTile = ({ item, onToggle }: MCPTileProps) => {
+export const MCPTile = ({
+  item,
+  onToggle,
+  onSettingsClick,
+  onDeleteClick,
+}: MCPTileProps) => {
   const { isBase } = useTheme();
   const { t } = useTranslation("Common");
 
@@ -60,12 +68,12 @@ export const MCPTile = ({ item, onToggle }: MCPTileProps) => {
         key: "settings",
         label: t("Common:Settings"),
         icon: SettingsIcon,
-        // onClick: () => onSettingsClick(item),
+        onClick: () => onSettingsClick?.(item),
       },
       {
         key: "delete",
         label: t("Common:Delete"),
-        // onClick: () => onDeleteClick(item.id),
+        onClick: () => onDeleteClick?.(item.id),
         icon: CatalogTrashReactSvgUrl,
       },
     ];

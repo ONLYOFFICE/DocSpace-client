@@ -27,7 +27,7 @@
   "DisableServerDescription": "If you disable this server, all active consents and authorization will be revoked. If necessary, you can enable the disabled server later.",
   "DisableServerNote": "<strong>Note:</strong> That all users all again be required to complete the consent screen",
   "DeleteServer": "Delete server",
-  "DeleteServerDescription": "If you delete this server, all active consents and authorization will be revoked. If a user tries to open the consent screen for this app, an error will occur in the document space and the user will be redirected to the specified redirect URL.",
+  "DeleteServerDescription": "Deleting this server will revoke access for all users, and its settings will be permanently erased.\n To use the server again, you will need to set it up from scratch.",
   "Provider": "Provider",
   "ProviderURL": "URL",
   "ProviderKey": "Key",

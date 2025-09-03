@@ -39,6 +39,7 @@ import {
   addNewServer,
   createProvider,
   deleteProviders,
+  deleteServers,
   getProviders,
   getServersList,
   updateProvider,
@@ -120,6 +121,12 @@ class AISettingsStore {
     if (newServer) {
       this.mcpServers.push(newServer);
     }
+  };
+
+  deleteMCP = async (id: TServer["id"]) => {
+    await deleteServers([id]);
+
+    this.mcpServers = this.mcpServers.filter((mcp) => mcp.id !== id);
   };
 
   updateMCPStatus = async (id: TServer["id"], enabled: boolean) => {

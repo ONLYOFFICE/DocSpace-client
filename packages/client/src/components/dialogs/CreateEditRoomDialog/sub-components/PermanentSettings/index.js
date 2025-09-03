@@ -42,6 +42,7 @@ const StyledPermanentSettings = styled.div`
 const PermanentSettings = ({ t, isThirdparty, storageLocation, isPrivate }) => {
   const thirdpartyTitle = getProviderTypeTitle(storageLocation?.providerKey, t);
   const thirdpartyFolderName = isThirdparty ? storageLocation?.title : "";
+  const thirdpartyPath = "";
 
   return (
     <StyledPermanentSettings displayNone={!(isPrivate || isThirdparty)}>
@@ -58,8 +59,8 @@ const PermanentSettings = ({ t, isThirdparty, storageLocation, isPrivate }) => {
               t={t}
             >
               Files are stored in a third-party {{ thirdpartyTitle }} storage in
-              the \"{{ thirdpartyFolderName }}\" folder.{" "}
-              {/* <strong>{{ thirdpartyPath }}</strong>" */}
+              the \"{{ thirdpartyFolderName }}\" folder.
+              <strong>{{ thirdpartyPath }}</strong>"
             </Trans>
           }
         />

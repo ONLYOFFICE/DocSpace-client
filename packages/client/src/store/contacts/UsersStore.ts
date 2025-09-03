@@ -296,27 +296,30 @@ class UsersStore {
     SocketHelper.on(SocketEvents.DeleteGuest, deleteUser);
     SocketHelper.on(SocketEvents.ChangeMyType, changeMyType);
 
-    SocketHelper.on(SocketEvents.UpdateGroup, async (value: { id: string; data: any }) => {
-      console.log(
-        `[WS] ${SocketEvents.UpdateGroup}: ${value?.id}:${value?.data}`,
-      );
-      const { contactsTab } = this;
+    SocketHelper.on(
+      SocketEvents.UpdateGroup,
+      async (value: { id: string; data: any }) => {
+        console.log(
+          `[WS] ${SocketEvents.UpdateGroup}: ${value?.id}:${value?.data}`,
+        );
+        const { contactsTab } = this;
 
-      if (contactsTab !== "inside_group") return;
+        if (contactsTab !== "inside_group") return;
 
-      const { id, data } = value;
+        const { id, data } = value;
 
-      if (!data || !id) return;
+        if (!data || !id) return;
 
-      if (this.groupsStore!.currentGroup?.id !== id) return;
+        if (this.groupsStore!.currentGroup?.id !== id) return;
 
-      const group = await api.groups.getGroupById(id, true);
+        const group = await api.groups.getGroupById(id, true);
 
-      runInAction(() => {
-        this.users = group.members ?? [];
-        this.filter.total = this.users.length;
-      });
-    });
+        runInAction(() => {
+          this.users = group.members ?? [];
+          this.filter.total = this.users.length;
+        });
+      },
+    );
   }
 
   setContactsTab = (contactsTab: TContactsTab) => {

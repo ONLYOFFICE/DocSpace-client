@@ -1,14 +1,14 @@
-import path from "path";
-import sharedConfig from "../shared/eslint.config.js";
+const path = require("path");
+const sharedConfig = require("../shared/eslint.config.js");
 
-export default [
+module.exports = [
   ...sharedConfig,
   {
     files: ["**/*.{js,jsx,ts,tsx}"],
     languageOptions: {
       parserOptions: {
         project: "./tsconfig.eslint.json",
-        tsconfigRootDir: import.meta.dirname,
+        tsconfigRootDir: __dirname,
         sourceType: "module",
       },
     },
@@ -41,11 +41,11 @@ export default [
             resolve: {
               extensions: [".jsx", ".js", ".tsx", ".ts", ".json"],
               alias: {
-                PUBLIC_DIR: path.resolve(import.meta.dirname, "../../public"),
-                ASSETS_DIR: path.resolve(import.meta.dirname, "./public"),
-                SRC_DIR: path.resolve(import.meta.dirname, "./src"),
-                PACKAGE_FILE: path.resolve(import.meta.dirname, "package.json"),
-                COMMON_DIR: path.resolve(import.meta.dirname, "../common"),
+                PUBLIC_DIR: path.resolve(__dirname, "../../public"),
+                ASSETS_DIR: path.resolve(__dirname, "./public"),
+                SRC_DIR: path.resolve(__dirname, "./src"),
+                PACKAGE_FILE: path.resolve(__dirname, "package.json"),
+                COMMON_DIR: path.resolve(__dirname, "../common"),
               },
             },
           },

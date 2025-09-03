@@ -32,19 +32,16 @@ import config from "PACKAGE_FILE";
 
 import { PluginActions, PluginToastType } from "./enums";
 
-export const messageActions = (
+export const messageActions = ({
   message,
   setElementProps,
-
   pluginName,
-
   setSettingsPluginDialogVisible,
   setCurrentSettingsDialogPlugin,
   updatePluginStatus,
   updatePropsContext,
   setPluginDialogVisible,
   setPluginDialogProps,
-
   updateContextMenuItems,
   updateInfoPanelItems,
   updateMainButtonItems,
@@ -52,9 +49,8 @@ export const messageActions = (
   updateEventListenerItems,
   updateFileItems,
   updateCreateDialogProps,
-
   updatePlugin,
-) => {
+}) => {
   if (!message || !message.actions || message.actions.length === 0) return;
 
   message.actions.forEach((action) => {

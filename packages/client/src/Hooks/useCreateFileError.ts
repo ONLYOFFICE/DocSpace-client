@@ -29,9 +29,20 @@ import { useTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
 
 type UseCreateFileErrorProps = {
-  setPortalTariff: Function;
-  setFormCreationInfo: Function;
-  setConvertPasswordDialogVisible: Function;
+  setPortalTariff: () => void;
+  setFormCreationInfo: (info: {
+    newTitle: string;
+    fromExst: string;
+    toExst: string;
+    open: boolean;
+    actionId: string;
+    fileInfo: {
+      id: string;
+      folderId: number;
+      fileExst: string;
+    };
+  }) => void;
+  setConvertPasswordDialogVisible: () => void;
 };
 
 const useCreateFileError = ({

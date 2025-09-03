@@ -65,7 +65,7 @@ export type TNavigationPath = {
   shared: boolean;
 };
 
-type ExcludeTypes = SettingsStore | Function;
+type ExcludeTypes = SettingsStore | ((...args: any[]) => any);
 
 export type TSelectedFolder = NonFunctionProperties<
   SelectedFolderStore,

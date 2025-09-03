@@ -33,7 +33,6 @@ import { PasswordInput } from "@docspace/shared/components/password-input";
 const LdapFieldComponent = (props) => {
   const {
     isTextArea,
-    errors,
     removeErrorField,
     setErrorField,
     name,

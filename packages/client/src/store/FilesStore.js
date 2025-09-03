@@ -4142,7 +4142,7 @@ class FilesStore {
   };
 
   get indexColumnSize() {
-    if (!this.selectedFolderStore.isIndexedFolder) return;
+    if (!this.selectedFolderStore.isIndexedFolder) return 0;
 
     const minWidth = 33;
     const maxIndexLength = 5;

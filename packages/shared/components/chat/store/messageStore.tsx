@@ -290,6 +290,7 @@ export default class MessageStore {
 
         if (done) {
           this.setIsRequestRunning(false);
+          reader.cancel();
           return;
         }
 
@@ -364,6 +365,7 @@ export default class MessageStore {
       await streamHandler();
     } catch (e) {
       console.log(e);
+      toastr.error(e as string);
     } finally {
       this.setIsRequestRunning(false);
     }

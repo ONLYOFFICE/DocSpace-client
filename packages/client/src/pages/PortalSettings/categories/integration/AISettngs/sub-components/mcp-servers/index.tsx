@@ -26,6 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -39,14 +40,21 @@ import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore"
 
 import styles from "../../AISettings.module.scss";
 import { MCPTile } from "../tiles/mcp-tile";
+import { AddMCPDialog } from "./dialogs/add";
 
 type MCPListProps = {
   showHeading: boolean;
   headingText: string;
   mcpServers?: TServer[];
+  onMCPToggle: (item: TServer) => void;
 };
 
-const MCPList = ({ showHeading, headingText, mcpServers }: MCPListProps) => {
+const MCPList = ({
+  showHeading,
+  headingText,
+  mcpServers,
+  onMCPToggle,
+}: MCPListProps) => {
   if (!mcpServers?.length) return;
 
   return (
@@ -65,7 +73,7 @@ const MCPList = ({ showHeading, headingText, mcpServers }: MCPListProps) => {
 
       <div className={styles.mcpList}>
         {mcpServers.map((mcp) => (
-          <MCPTile key={mcp.id} item={mcp} />
+          <MCPTile key={mcp.id} item={mcp} onToggle={onMCPToggle} />
         ))}
       </div>
     </div>
@@ -84,8 +92,17 @@ const MCPServersComponent = ({
   systemMCPServers,
 }: MCPServersProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
+  const [addDialogVisible, setAddDialogVisible] = useState(false);
 
   const showMCPHeadings = !!customMCPServers?.length;
+
+  const onMCPToggle = (item: TServer) => {
+    if (!item.connected) {
+      setAddDialogVisible(true);
+    }
+  };
+
+  const hideAddDialog = () => setAddDialogVisible(false);
 
   return (
     <div className={styles.mcpServers}>
@@ -128,13 +145,22 @@ const MCPServersComponent = ({
         headingText={t("AISettings:CustomMCPListTitle")}
         mcpServers={customMCPServers}
         showHeading={showMCPHeadings}
+        onMCPToggle={onMCPToggle}
       />
 
       <MCPList
         headingText={t("AISettings:SystemMCPListTitle")}
         mcpServers={systemMCPServers}
         showHeading={showMCPHeadings}
+        onMCPToggle={onMCPToggle}
       />
+
+      {addDialogVisible ? (
+        <AddMCPDialog
+          onSubmit={async (...args) => {}}
+          onClose={hideAddDialog}
+        />
+      ) : null}
     </div>
   );
 };

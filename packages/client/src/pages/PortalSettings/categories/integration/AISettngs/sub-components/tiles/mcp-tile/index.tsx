@@ -38,9 +38,10 @@ import styles from "./MCPTile.module.scss";
 
 type MCPTileProps = {
   item: TServer;
+  onToggle: (item: TServer) => void;
 };
 
-export const MCPTile = ({ item }: MCPTileProps) => {
+export const MCPTile = ({ item, onToggle }: MCPTileProps) => {
   const { isBase } = useTheme();
 
   const icon = getServerIcon(item.serverType, isBase) ?? "";
@@ -51,7 +52,7 @@ export const MCPTile = ({ item }: MCPTileProps) => {
         <ToggleButton
           className={styles.toggleButton}
           isChecked={item.enabled}
-          onChange={() => {}}
+          onChange={() => onToggle(item)}
         />
       </AiTile.Header>
 

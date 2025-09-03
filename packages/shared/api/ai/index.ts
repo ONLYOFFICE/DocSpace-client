@@ -372,6 +372,19 @@ export const deleteServersForRoom = async (
   }
 };
 
+export const updateServerStatus = async (
+  serverId: TServer["id"],
+  enabled: boolean,
+) => {
+  const res = await request({
+    method: "put",
+    url: `${baseUrl}/servers/${serverId}/status`,
+    data: { enabled },
+  });
+
+  return res as TServer;
+};
+
 export const getMCPToolsForRoom = async (room: number, mcpId: string) => {
   try {
     const res = await request({

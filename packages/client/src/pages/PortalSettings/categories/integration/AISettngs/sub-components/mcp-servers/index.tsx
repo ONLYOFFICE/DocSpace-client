@@ -35,6 +35,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import type { TServer } from "@docspace/shared/api/ai/types";
+import { toastr, TData } from "@docspace/shared/components/toast";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
@@ -46,58 +47,67 @@ type MCPListProps = {
   showHeading: boolean;
   headingText: string;
   mcpServers?: TServer[];
-  onMCPToggle: (item: TServer) => void;
+  onMCPToggle: (id: TServer["id"], enabled: boolean) => void;
 };
 
-const MCPList = ({
-  showHeading,
-  headingText,
-  mcpServers,
-  onMCPToggle,
-}: MCPListProps) => {
-  if (!mcpServers?.length) return;
+const MCPList = observer(
+  ({ showHeading, headingText, mcpServers, onMCPToggle }: MCPListProps) => {
+    if (!mcpServers?.length) return;
 
-  return (
-    <div className={styles.mcpListContainer}>
-      {showHeading ? (
-        <Heading
-          className={styles.mcpHeading}
-          level={HeadingLevel.h3}
-          fontSize="16px"
-          fontWeight={700}
-          lineHeight="22px"
-        >
-          {headingText}
-        </Heading>
-      ) : null}
+    return (
+      <div className={styles.mcpListContainer}>
+        {showHeading ? (
+          <Heading
+            className={styles.mcpHeading}
+            level={HeadingLevel.h3}
+            fontSize="16px"
+            fontWeight={700}
+            lineHeight="22px"
+          >
+            {headingText}
+          </Heading>
+        ) : null}
 
-      <div className={styles.mcpList}>
-        {mcpServers.map((mcp) => (
-          <MCPTile key={mcp.id} item={mcp} onToggle={onMCPToggle} />
-        ))}
+        <div className={styles.mcpList}>
+          {mcpServers.map((mcp) => (
+            <MCPTile key={mcp.id} item={mcp} onToggle={onMCPToggle} />
+          ))}
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  },
+);
 
 type MCPServersProps = {
   standalone?: boolean;
   customMCPServers?: AISettingsStore["customMCPServers"];
   systemMCPServers?: AISettingsStore["systemMCPServers"];
+  updateMCPStatus?: AISettingsStore["updateMCPStatus"];
 };
 
 const MCPServersComponent = ({
   standalone,
   customMCPServers,
   systemMCPServers,
+  updateMCPStatus,
 }: MCPServersProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
   const [addDialogVisible, setAddDialogVisible] = useState(false);
 
   const showMCPHeadings = !!customMCPServers?.length;
 
-  const onMCPToggle = (item: TServer) => {
-    console.log(item);
+  const onMCPToggle = async (id: TServer["id"], enabled: boolean) => {
+    try {
+      await updateMCPStatus?.(id, enabled);
+      const translationKey = enabled
+        ? "AISettings:ServerEnabledSuccess"
+        : "AISettings:ServerDisabledSuccess";
+
+      toastr.success(t(translationKey));
+    } catch (e) {
+      console.error(e);
+      toastr.error(e as TData);
+    }
   };
 
   const showAddDialog = () => setAddDialogVisible(true);
@@ -161,10 +171,12 @@ const MCPServersComponent = ({
 };
 
 export const MCPServers = inject(({ aiSettingsStore }: TStore) => {
-  const { customMCPServers, systemMCPServers } = aiSettingsStore;
+  const { customMCPServers, systemMCPServers, updateMCPStatus } =
+    aiSettingsStore;
 
   return {
     customMCPServers,
     systemMCPServers,
+    updateMCPStatus,
   };
 })(observer(MCPServersComponent));

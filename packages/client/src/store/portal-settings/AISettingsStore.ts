@@ -42,6 +42,7 @@ import {
   getProviders,
   getServersList,
   updateProvider,
+  updateServerStatus,
 } from "@docspace/shared/api/ai";
 import { ServerType } from "@docspace/shared/api/ai/enums";
 
@@ -78,7 +79,7 @@ class AISettingsStore {
     const newProvider = await updateProvider(id, data);
     const index = this.aiProviders.findIndex((p) => p.id === id);
 
-    if (index) {
+    if (index !== -1) {
       this.aiProviders[index] = newProvider;
     }
   };
@@ -118,6 +119,16 @@ class AISettingsStore {
 
     if (newServer) {
       this.mcpServers.push(newServer);
+    }
+  };
+
+  updateMCPStatus = async (id: TServer["id"], enabled: boolean) => {
+    const newMCP = await updateServerStatus(id, enabled);
+
+    const index = this.mcpServers.findIndex((p) => p.id === id);
+
+    if (index !== -1) {
+      this.mcpServers[index] = newMCP;
     }
   };
 

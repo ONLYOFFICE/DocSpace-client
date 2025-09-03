@@ -339,7 +339,7 @@ const Items = ({
 
   const getItems = React.useCallback(
     (elm) => {
-      const items = elm.map((item, index) => {
+      const items = elm.map((item) => {
         const isTrash = item.rootFolderType === FolderType.TRASH;
         const showBadge = emptyTrashInProgress
           ? false
@@ -361,7 +361,6 @@ const Items = ({
             dragging={dragging}
             getFolderIcon={getFolderIcon}
             isActive={item.id === activeItemId}
-            isLastItem={index === elm.length - 1}
             showText={showText}
             onClick={onClick}
             getLinkData={getLinkData}
@@ -381,12 +380,13 @@ const Items = ({
         );
       });
 
-      items.splice(1, 0, <CatalogDivider key="recent-divider" />);
+      // items.splice(1, 0, <CatalogDivider key="recent-divider" />);
+
+      items.splice(3, 0, <CatalogDivider key="other-header" />);
 
       if (!isVisitor && !isCollaborator)
-        items.splice(
-          5,
-          0,
+        items.push(
+          <CatalogDivider key="other-header" />,
           <AccountsItem
             key="accounts-item"
             onClick={onClick}
@@ -394,9 +394,6 @@ const Items = ({
             isActive={activeItemId === "accounts"}
           />,
         );
-
-      if (!isVisitor) items.splice(5, 0, <CatalogDivider key="other-header" />);
-      else items.splice(4, 0, <CatalogDivider key="other-header" />);
 
       if (isCommunity && isPaymentPageAvailable)
         items.push(<BonusItem key="bonus-item" />);

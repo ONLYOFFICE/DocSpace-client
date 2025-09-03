@@ -122,7 +122,7 @@ export const getCategoryType = (location) => {
     } else if (pathname.indexOf("archive") > -1) {
       categoryType = CategoryType.Archive;
     }
-  } else if (pathname.startsWith("/favorite")) {
+  } else if (pathname.startsWith("/files/favorite")) {
     categoryType = CategoryType.Favorite;
   } else if (pathname.startsWith("/recent")) {
     categoryType = CategoryType.Recent;

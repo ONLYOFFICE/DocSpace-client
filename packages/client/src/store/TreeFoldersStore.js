@@ -64,7 +64,7 @@ class TreeFoldersStore {
     treeFolders.forEach((folder) => {
       switch (folder.rootFolderType) {
         case FolderType.USER:
-          folder.title = i18n.t("Common:MyFilesSection");
+          folder.title = i18n.t("Common:MyDocuments");
           break;
         case FolderType.Rooms:
           folder.title = i18n.t("Common:Rooms");
@@ -74,6 +74,9 @@ class TreeFoldersStore {
           break;
         case FolderType.TRASH:
           folder.title = i18n.t("Common:TrashSection");
+          break;
+        case FolderType.Favorites:
+          folder.title = i18n.t("Common:Favorites");
           break;
         case FolderType.Recent:
           folder.title = i18n.t("Common:Recent");
@@ -297,6 +300,10 @@ class TreeFoldersStore {
 
   get recycleBinFolderId() {
     return this.recycleBinFolder ? this.recycleBinFolder.id : null;
+  }
+
+  get favoritesFolderId() {
+    return this.favoritesFolder ? this.favoritesFolder.id : null;
   }
 
   get recentFolderId() {

@@ -3,7 +3,7 @@
   "content": "The {{userCaption}} will be deleted from all rooms to which they were invited. Documents created by this {{userCaption}} in rooms will be automatically reassigned to the room owners.",
   "content_en_sha1_hash": "df9daf698829e8350ceee582640c85b700c4c49d",
   "created_at": "2025-05-19T21:30:56.665Z",
-  "updated_at": "2025-06-30T12:20:31.234Z",
+  "updated_at": "2025-09-02T07:59:28.379Z",
   "comment": {
     "text": "This translation key is used to display a warning message to users when they delete a guest's profile. The message informs them that all documents created by the guest in rooms will be automatically reassigned to room owners. It appears in a dialog component.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
       "line_number": 66,
-      "context": "sectionNameFirst: t(\"Common:MyFilesSection\"),\n sectionNameSecond: t(\"Common:TrashSection\"),\n });\n \n const warningMessageReassign = onlyGuests ? (\n t(\"DeleteReqassignDescriptionGuest\", {\n userCaption: onlyOneUser\n ? t(\"Common:Guest\").toLowerCase()\n : t(\"Common:Guests\").toLowerCase(),\n })\n ) : (",
+      "context": "sectionNameFirst: t(\"Common:MyDocuments\"),\n sectionNameSecond: t(\"Common:TrashSection\"),\n });\n \n const warningMessageReassign = onlyGuests ? (\n t(\"DeleteReqassignDescriptionGuest\", {\n userCaption: onlyOneUser\n ? t(\"Common:Guest\").toLowerCase()\n : t(\"Common:Guests\").toLowerCase(),\n })\n ) : (",
       "module": "/packages/client"
     }
   ],

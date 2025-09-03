@@ -26,11 +26,18 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+import { useTranslation } from "react-i18next";
+
 import type { TServer } from "@docspace/shared/api/ai/types";
 import { useTheme } from "@docspace/shared/hooks/useTheme";
 import { getServerIcon } from "@docspace/shared/utils";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Text } from "@docspace/shared/components/text";
+import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
+import { ServerType } from "@docspace/shared/api/ai/enums";
+
+import SettingsIcon from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
+import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
 
 import { AiTile } from "../ai-tile";
 
@@ -43,17 +50,40 @@ type MCPTileProps = {
 
 export const MCPTile = ({ item, onToggle }: MCPTileProps) => {
   const { isBase } = useTheme();
+  const { t } = useTranslation("Common");
 
   const icon = getServerIcon(item.serverType, isBase) ?? "";
+
+  const getContextOptions = () => {
+    return [
+      {
+        key: "settings",
+        label: t("Common:Settings"),
+        icon: SettingsIcon,
+        // onClick: () => onSettingsClick(item),
+      },
+      {
+        key: "delete",
+        label: t("Common:Delete"),
+        // onClick: () => onDeleteClick(item.id),
+        icon: CatalogTrashReactSvgUrl,
+      },
+    ];
+  };
 
   return (
     <AiTile icon={icon}>
       <AiTile.Header title={item.name}>
-        <ToggleButton
-          className={styles.toggleButton}
-          isChecked={item.enabled}
-          onChange={() => onToggle(item.id, !item.enabled)}
-        />
+        <div className={styles.buttonsContainer}>
+          <ToggleButton
+            className={styles.toggleButton}
+            isChecked={item.enabled}
+            onChange={() => onToggle(item.id, !item.enabled)}
+          />
+          {item.serverType === ServerType.Custom ? (
+            <ContextMenuButton directionX="right" getData={getContextOptions} />
+          ) : null}
+        </div>
       </AiTile.Header>
 
       <AiTile.Body>

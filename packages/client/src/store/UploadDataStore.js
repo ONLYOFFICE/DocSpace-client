@@ -69,11 +69,11 @@ const getConversationProgress = async (fileId) => {
     setTimeout(() => {
       getFileConversationProgress(fileId)
         .then((res) => {
-          console.log(`getFileConversationProgress fileId:${fileId}`, res);
+          // console.log(`getFileConversationProgress fileId:${fileId}`, res);
           resolve(res);
         })
         .catch((error) => {
-          console.error("getFileConversationProgress error", error);
+          // console.error("getFileConversationProgress error", error);
           reject(error);
         });
     }, 1000);

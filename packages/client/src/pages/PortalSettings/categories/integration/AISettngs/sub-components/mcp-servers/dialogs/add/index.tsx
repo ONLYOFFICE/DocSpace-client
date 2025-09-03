@@ -23,14 +23,19 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React, { useState } from "react";
+import React from "react";
+import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
+import type { TAddNewServer } from "@docspace/shared/api/ai/types";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
+import { type TData, toastr } from "@docspace/shared/components/toast";
+
+import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
 import styles from "../../MCPServers.module.scss";
 
@@ -39,16 +44,11 @@ import { useBaseParams } from "../../hooks/useBaseParams";
 import { useIcon } from "../../hooks/useIcon";
 
 type AddMCPDialogProps = {
-  onSubmit: (
-    endpoint: string,
-    name: string,
-    description: string,
-    headers: Record<string, string>,
-  ) => Promise<void>;
   onClose: VoidFunction;
+  addNewMCP?: AISettingsStore["addNewMCP"];
 };
 
-export const AddMCPDialog = ({ onSubmit, onClose }: AddMCPDialogProps) => {
+const AddMCPDialogComponent = ({ onClose, addNewMCP }: AddMCPDialogProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
 
   const [loading, setLoading] = React.useState(false);
@@ -60,24 +60,33 @@ export const AddMCPDialog = ({ onSubmit, onClose }: AddMCPDialogProps) => {
   const onSubmitAction = async () => {
     const headers = getAPIHeaders();
     const baseParams = getBaseParams();
+
+    // TODO: Add icon to request after changing API
     const icon = getIcon();
 
     if (!baseParams) return;
 
-    console.log(icon);
-
     setLoading(true);
 
-    await onSubmit(
-      baseParams.url,
-      baseParams.name,
-      baseParams.description,
+    const data: TAddNewServer = {
+      endpoint: baseParams.url,
+      name: baseParams.name,
+      description: baseParams.description,
       headers,
-    );
+    };
+
+    try {
+      await addNewMCP?.(data);
+      toastr.success(t("AISettings:ServerAddedSuccess"));
+      onClose();
+    } catch (e) {
+      console.error(e);
+      toastr.error(e as TData);
+    } finally {
+      setLoading(false);
+    }
 
     setLoading(false);
-
-    onClose();
   };
 
   return (
@@ -115,3 +124,9 @@ export const AddMCPDialog = ({ onSubmit, onClose }: AddMCPDialogProps) => {
     </ModalDialog>
   );
 };
+
+export const AddMCPDialog = inject(({ aiSettingsStore }: TStore) => {
+  return {
+    addNewMCP: aiSettingsStore.addNewMCP,
+  };
+})(observer(AddMCPDialogComponent));

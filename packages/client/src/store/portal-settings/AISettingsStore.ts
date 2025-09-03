@@ -29,12 +29,14 @@
 import { makeAutoObservable } from "mobx";
 
 import {
+  type TAddNewServer,
   type TAiProvider,
   type TCreateAiProvider,
   type TServer,
   type TUpdateAiProvider,
 } from "@docspace/shared/api/ai/types";
 import {
+  addNewServer,
   createProvider,
   deleteProviders,
   getProviders,
@@ -108,6 +110,14 @@ class AISettingsStore {
       this.setMCPServers(res.items);
     } catch (e) {
       console.error(e);
+    }
+  };
+
+  addNewMCP = async (data: TAddNewServer) => {
+    const newServer = await addNewServer(data);
+
+    if (newServer) {
+      this.mcpServers.push(newServer);
     }
   };
 

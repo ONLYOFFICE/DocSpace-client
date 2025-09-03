@@ -121,3 +121,10 @@ export type TVectorizeOperation = {
   percentage: number;
   status: number;
 };
+
+export type TAddNewServer = {
+  endpoint: string;
+  name: string;
+  description: string;
+  headers: Record<string, string>;
+};

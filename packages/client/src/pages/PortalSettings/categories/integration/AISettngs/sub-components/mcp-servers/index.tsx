@@ -97,10 +97,10 @@ const MCPServersComponent = ({
   const showMCPHeadings = !!customMCPServers?.length;
 
   const onMCPToggle = (item: TServer) => {
-    if (!item.connected) {
-      setAddDialogVisible(true);
-    }
+    console.log(item);
   };
+
+  const showAddDialog = () => setAddDialogVisible(true);
 
   const hideAddDialog = () => setAddDialogVisible(false);
 
@@ -138,7 +138,7 @@ const MCPServersComponent = ({
         label={t("AISettings:AddMCPServer")}
         scale={false}
         className={styles.addProviderButton}
-        // onClick={showAddNewDialog}
+        onClick={showAddDialog}
       />
 
       <MCPList
@@ -155,12 +155,7 @@ const MCPServersComponent = ({
         onMCPToggle={onMCPToggle}
       />
 
-      {addDialogVisible ? (
-        <AddMCPDialog
-          onSubmit={async (...args) => {}}
-          onClose={hideAddDialog}
-        />
-      ) : null}
+      {addDialogVisible ? <AddMCPDialog onClose={hideAddDialog} /> : null}
     </div>
   );
 };

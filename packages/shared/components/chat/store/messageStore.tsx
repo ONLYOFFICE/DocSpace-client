@@ -285,121 +285,85 @@ export default class MessageStore {
 
       let msg = "";
 
-      const streamHandler = async (): Promise<void> => {
+      const streamHandler = async () => {
+        const { done, value } = await reader.read();
+
+        if (done) {
+          this.setIsRequestRunning(false);
+          return;
+        }
+
+        const decodedChunk = textDecoder.decode(value);
+
         try {
-          const { done, value } = await reader.read();
+          const chunks = decodedChunk.split("\n\n");
 
-          if (done) {
-            this.setIsRequestRunning(false);
-            // Close the reader to prevent further operations
-            try {
-              await reader.cancel();
-            } catch (e) {
-              // Ignore cancel errors
-              console.log(e);
-              toastr.error(e as unknown as string);
+          chunks.forEach(async (chunk) => {
+            if (!chunk) return;
+
+            const [event, data] = chunk.split("\n");
+
+            const jsonData = data?.split("data:")[1]?.trim();
+
+            if (!jsonData) {
+              await streamHandler();
+
+              return;
             }
-            return;
-          }
 
-          const decodedChunk = textDecoder.decode(value);
+            if (event.includes(EventType.Metadata)) {
+              this.handleMetadata(jsonData);
 
-          try {
-            const chunks = decodedChunk.split("\n\n");
+              return;
+            }
 
-            chunks.forEach(async (chunk) => {
-              if (!chunk) return;
+            if (event.includes(EventType.NewToken)) {
+              const { text } = JSON.parse(jsonData);
 
-              const [event, data] = chunk.split("\n");
-              const jsonData = data?.split("data:")[1]?.trim();
+              msg += text;
 
-              if (!jsonData) {
-                // Continue reading instead of recursive call
-                return;
-              }
-
-              if (event.includes(EventType.Metadata)) {
-                this.handleMetadata(jsonData);
-                return;
-              }
-
-              if (event.includes(EventType.NewToken)) {
-                const { text } = JSON.parse(jsonData);
-                msg += text;
-
-                if (msg) {
-                  if (prevMsg) {
-                    this.continueAIMessage(msg);
-                  } else {
-                    this.addNewAIMessage(msg);
-                  }
-                  prevMsg = msg;
+              if (msg) {
+                if (prevMsg) {
+                  this.continueAIMessage(msg);
+                } else {
+                  this.addNewAIMessage(msg);
                 }
+                prevMsg = msg;
               }
-
-              if (event.includes(EventType.ToolCall)) {
-                msg = "";
-                prevMsg = "";
-                this.handleToolCall(jsonData);
-                return;
-              }
-
-              if (event.includes(EventType.ToolResult)) {
-                msg = "";
-                prevMsg = "";
-                this.handleToolResult(jsonData);
-                return;
-              }
-
-              if (event.includes(EventType.Error)) {
-                this.handleStreamError(jsonData);
-              }
-            });
-
-            // Continue reading the stream only if not done
-            if (!this.abortController.signal.aborted) {
-              await streamHandler();
             }
-          } catch (parseError) {
-            console.error("Stream parsing error:", parseError);
-            // Only continue if not aborted and stream is still active
-            if (!this.abortController.signal.aborted) {
-              await streamHandler();
+
+            if (event.includes(EventType.ToolCall)) {
+              msg = "";
+              prevMsg = "";
+              this.handleToolCall(jsonData);
+
+              return;
             }
-          }
-        } catch (readerError) {
-          // Handle specific network/abort errors
-          const error = readerError as Error;
-          if (error.name === "AbortError") {
-            console.log("Stream reading aborted");
-            return;
-          }
 
-          if (
-            error.message?.includes("network") ||
-            error.message?.includes("NetworkError")
-          ) {
-            console.error("Network error during stream reading:", error);
-            return;
-          }
+            if (event.includes(EventType.ToolResult)) {
+              msg = "";
+              prevMsg = "";
+              this.handleToolResult(jsonData);
 
-          if (
-            error.message?.includes("stream") &&
-            error.message?.includes("closed")
-          ) {
-            console.log("Stream closed");
-            return;
-          }
+              return;
+            }
 
-          // Re-throw unexpected errors
-          throw error;
+            if (event.includes(EventType.Error)) {
+              this.handleStreamError(jsonData);
+            }
+          });
+
+          await streamHandler();
+        } catch (e) {
+          console.log(e);
+        } finally {
+          this.setIsRequestRunning(false);
         }
       };
 
       await streamHandler();
     } catch (e) {
       console.log(e);
-      toastr.error(e as unknown as string);
     } finally {
       this.setIsRequestRunning(false);
     }

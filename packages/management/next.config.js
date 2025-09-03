@@ -82,9 +82,7 @@ module.exports = {
       },
     };
 
-    config.devtool = isProduction
-      ? "source-map"
-      : "eval-cheap-module-source-map";
+    config.devtool = isProduction ? "source-map" : false; // TODO: replace to "eval-cheap-module-source-map" if you want to debug in a browser;
 
     if (isProduction) {
       config.optimization = {

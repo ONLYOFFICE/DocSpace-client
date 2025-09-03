@@ -1,0 +1,34 @@
+{
+  "key_path": "Favorites",
+  "content": "Favorites",
+  "content_en_sha1_hash": "07b3e447db02b7cc20a78a57c316febae22ed72b",
+  "created_at": "2025-08-29T14:33:19.030Z",
+  "updated_at": "2025-09-02T07:59:28.715Z",
+  "comment": {
+    "text": "This key displays the label for a user's saved or preferred items. It appears as the title for a folder in the tree view and as the tooltip for a button that toggles the \"favorite\" status of an item. Translators should ensure the translation conveys the meaning of \"saved items\" or \"preferred selections.\"",
+    "is_auto": true,
+    "updated_at": "2025-08-29T14:34:32.665Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/TreeFoldersStore.js",
+      "line_number": 79,
+      "context": "break;\n case FolderType.TRASH:\n folder.title = i18n.t(\"Common:TrashSection\");\n break;\n case FolderType.Favorites:\n folder.title = i18n.t(\"Common:Favorites\");\n break;\n case FolderType.Recent:\n folder.title = i18n.t(\"Common:Recent\");\n break;\n default:",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/components/quick-buttons/index.tsx",
+      "line_number": 244,
+      "context": "className={classNames(\"badge copy-link icons-group\")}\n size={sizeQuickButton}\n onClick={onClickFavorite}\n color=\"accent\"\n isDisabled={isDisabled}\n title={t(\"Common:Favorites\")}\n />\n ) : null}\n </>\n ) : null}\n </div>",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

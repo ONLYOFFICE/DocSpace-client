@@ -3,7 +3,7 @@
   "content": "Take a short tour",
   "content_en_sha1_hash": "f769ba61daddc3b54db23529401893568c14a110",
   "created_at": "2025-05-19T21:30:55.154Z",
-  "updated_at": "2025-09-01T11:05:24.167Z",
+  "updated_at": "2025-09-02T07:59:28.386Z",
   "comment": {
     "text": "This translation key is used for a button label that invites users to take a short tour or introduction when they start using a form-filling tips dialog. It appears in the footer of a modal dialog component and serves as a prompt to engage new users. Translators should provide a welcoming phrase that conveys this intention.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2235,
+      "line_number": 2225,
       "context": "action: \"archive\",\n },\n {\n id: \"option_short-tour\",\n key: \"short-tour\",\n label: t(\"FormFillingTipsDialog:WelcomeStartTutorial\"),\n icon: HelpCenterReactSvgUrl,\n onClick: () => this.onEnableFormFillingGuid(t, item.roomType),\n disabled:\n isArchive ||\n !isFormRoom ||",
       "module": "/packages/client"
     }

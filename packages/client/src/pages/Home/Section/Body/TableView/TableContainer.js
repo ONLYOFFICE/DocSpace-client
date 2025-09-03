@@ -150,6 +150,7 @@ const Table = ({
   setDropTargetPreview,
   disableDrag,
   withContentSelection,
+  isFavoritesFolder,
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -224,6 +225,7 @@ const Table = ({
         isRooms={isRooms}
         isTemplates={isTemplatesFolder}
         isTrashFolder={isTrashFolder}
+        isFavoritesFolder={isFavoritesFolder}
         hideColumns={hideColumns}
         isHighlight={
           highlightFile.id == item.id
@@ -312,8 +314,13 @@ export default inject(
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
-    const { isRoomsFolder, isArchiveFolder, isTrashFolder, isTemplatesFolder } =
-      treeFoldersStore;
+    const {
+      isRoomsFolder,
+      isArchiveFolder,
+      isTrashFolder,
+      isTemplatesFolder,
+      isFavoritesFolder,
+    } = treeFoldersStore;
     const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
 
     const { columnStorageName, columnInfoPanelStorageName } = tableStore;
@@ -375,6 +382,7 @@ export default inject(
       setDropTargetPreview,
       disableDrag,
       withContentSelection,
+      isFavoritesFolder,
     };
   },
 )(withContainer(observer(Table)));

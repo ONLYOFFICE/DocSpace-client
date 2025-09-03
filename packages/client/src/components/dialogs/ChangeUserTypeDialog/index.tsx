@@ -108,7 +108,7 @@ const ChangeUserTypeDialog = ({
   const translationValues = {
     userName: isSingleUser ? userNames[0] : undefined,
     membersSection: t("Common:Members"),
-    documentsSection: t("Common:MyFilesSection"),
+    documentsSection: t("Common:MyDocuments"),
     productName: t("Common:ProductName"),
     secondType,
   };
@@ -167,7 +167,7 @@ const ChangeUserTypeDialog = ({
                 i18nKey="PersonalDataDeletion"
                 ns="ChangeUserTypeDialog"
                 t={t}
-                values={{ sectionName: t("Common:MyFilesSection") }}
+                values={{ sectionName: t("Common:MyDocuments") }}
                 components={{
                   1: <span style={{ fontWeight: 600 }} />,
                 }}
@@ -178,7 +178,7 @@ const ChangeUserTypeDialog = ({
                   i18nKey="DataReassignmentWithFilesDeletion"
                   ns="ChangeUserTypeDialog"
                   t={t}
-                  values={{ sectionName: t("Common:MyFilesSection") }}
+                  values={{ sectionName: t("Common:MyDocuments") }}
                   components={{
                     1: <span style={{ fontWeight: 600 }} />,
                   }}

@@ -16,7 +16,6 @@
   "AddMoreHeaders": "Add more headers",
   "EnterValue": "Enter value",
   "EnterLabel": "Enter name",
-  "EnterURL": "Enter URL",
   "EnterKey": "Enter key",
   "DisableMCPServer": "Disable server",
   "ServerDisabledSuccess": "Server disabled successfully",
@@ -31,6 +30,7 @@
   "ProviderURL": "URL",
   "ProviderKey": "Key",
   "ProviderAddedSuccess": "Provider added successfully",
+  "ProviderUpdatedSuccess": "Provider updated successfully",
   "ProviderRemovedSuccess": "Provider removed successfully",
   "DeleteProvider": "Delete provider",
   "DeleteProviderDescription": "Deleting this provider will revoke access for all users, and its settings will be permanently erased. To use the provider again, you will need to set it up from scratch."

@@ -103,7 +103,7 @@ const AddUpdateDialogComponent = ({
   updateAIProvider,
   providerData,
 }: AddEditDialogProps) => {
-  const { t } = useTranslation(["Common", "AISettings"]);
+  const { t } = useTranslation(["Common", "AISettings", "OAuth"]);
   const [selectedOption, setSelectedOption] = useState(
     getSelectedOptionByProviderType(providerData?.type),
   );
@@ -220,7 +220,7 @@ const AddUpdateDialogComponent = ({
               value={providerUrl}
               onChange={(e) => setProviderUrl(e.target.value)}
               scale
-              placeholder={t("AISettings:EnterURL")}
+              placeholder={t("OAuth:EnterURL")}
               isDisabled={isRequestRunning}
             />
           </FieldContainer>

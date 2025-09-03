@@ -84,7 +84,7 @@ const IntegrationWrapper = (props) => {
     },
     {
       id: "ai-settings",
-      name: t(standalone ? "AISettings" : "MCPServers"),
+      name: standalone ? t("AISettings") : t("MCPServers"),
       content: <AISettngs standalone />, // TODO: Change to standalone={standalone} when adding providers on stand is not needed
     },
   ];

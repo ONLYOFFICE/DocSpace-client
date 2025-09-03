@@ -76,6 +76,7 @@ const openDeepLink = (
 
     window.location.href = url;
   } catch (error) {
+    console.error(error);
     options?.onFail?.();
   }
 };

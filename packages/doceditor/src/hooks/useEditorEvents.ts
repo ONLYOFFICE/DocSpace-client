@@ -255,7 +255,7 @@ const useEditorEvents = ({
     if (docEditor) {
       // console.log("call assign for asc files editor doceditor");
       assign(
-        window as unknown as { [key: string]: {} },
+        window as unknown as { [key: string]: object },
         ["ASC", "Files", "Editor", "docEditor"],
         docEditor,
       ); // Do not remove: it's for Back button on Mobile App
@@ -673,14 +673,14 @@ const useEditorEvents = ({
     ],
   );
 
-  const generateLink = (actionData: {}) => {
+  const generateLink = (actionData: object) => {
     return encodeURIComponent(JSON.stringify(actionData));
   };
 
   const onMakeActionLink = React.useCallback((event: object) => {
     const url = window.location.href;
 
-    const actionData = (event as { data: {} }).data;
+    const actionData = (event as { data: object }).data;
 
     const link = generateLink(actionData);
 
@@ -796,7 +796,7 @@ const useEditorEvents = ({
   }, [setFillingStatusDialogVisible]);
 
   const onRequestStartFilling = useCallback(
-    (event: {}) => {
+    (event: object) => {
       switch (config?.startFillingMode) {
         case StartFillingMode.ShareToFillOut:
           openShareFormDialog?.();

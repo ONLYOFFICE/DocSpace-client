@@ -89,6 +89,8 @@ const FilesSelectorWrapper = ({
   rootFolderType,
 
   treeFolders,
+  withRecentTreeFolder,
+  withFavoritesTreeFolder,
 
   selection,
   // disabledItems,
@@ -406,6 +408,8 @@ const FilesSelectorWrapper = ({
       getIcon={getIcon}
       setIsDataReady={setIsDataReady}
       treeFolders={treeFolders}
+      withRecentTreeFolder={withRecentTreeFolder}
+      withFavoritesTreeFolder={withFavoritesTreeFolder}
       onSetBaseFolderPath={onSetBaseFolderPath}
       isUserOnly={isUserOnly}
       isRoomsOnly={isRoomsOnly}
@@ -488,6 +492,7 @@ export default inject(
       id,
       currentFolderId: currentFolderIdProp,
       isThirdParty,
+      openRoot: openRootProp,
     }: FilesSelectorProps,
   ) => {
     const {
@@ -501,7 +506,7 @@ export default inject(
       filesActionsStore;
     const { itemOperationToFolder, clearActiveOperations } = uploadDataStore;
 
-    const { treeFolders, roomsFolderId, myFolderId } = treeFoldersStore;
+    const { treeFolders, roomsFolderId } = treeFoldersStore;
 
     const {
       restorePanelVisible,
@@ -569,13 +574,29 @@ export default inject(
       selectionsWithoutEditing.filter((i) => "isFolder" in i && i.isFolder)
         .length > 0;
 
+    const getFolderIdForRecent = () => {
+      // Don't know which folder should be selected. Can be files from different folders
+      if (selectionsWithoutEditing.length !== 1) {
+        return undefined;
+      }
+
+      const [selectedFile] = selectionsWithoutEditing;
+
+      // File is shared via link
+      if ("requestToken" in selectedFile && selectedFile.requestToken) {
+        return undefined;
+      }
+
+      return "folderId" in selectedFile ? selectedFile?.folderId : undefined;
+    };
+
     const fromFolderId =
       id ||
       (rootFolderType === FolderType.Archive ||
       rootFolderType === FolderType.TRASH
         ? undefined
         : rootFolderType === FolderType.Recent
-          ? myFolderId
+          ? getFolderIdForRecent()
           : selectedId === selectionsWithoutEditing[0]?.id &&
               "isFolder" in selectionsWithoutEditing[0] &&
               selectionsWithoutEditing[0]?.isFolder
@@ -583,6 +604,8 @@ export default inject(
             : selectedId);
 
     const folderId = fromFolderId;
+    const openRoot =
+      openRootProp || (rootFolderType === FolderType.Recent && !fromFolderId);
 
     return {
       fromFolderId,
@@ -626,6 +649,7 @@ export default inject(
       filesSettings,
       folderIsShared: shared,
       logoText,
+      openRoot,
     };
   },
 )(observer(FilesSelectorWrapper));

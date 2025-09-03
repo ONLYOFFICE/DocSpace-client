@@ -3,7 +3,7 @@
   "content": "Rooms",
   "content_en_sha1_hash": "3a28d6f078fd35a505195a0f8ec6f59e9801d7c2",
   "created_at": "2025-05-19T21:30:48.236Z",
-  "updated_at": "2025-08-21T11:22:39.776Z",
+  "updated_at": "2025-09-02T07:59:28.299Z",
   "comment": {
     "text": "The \"Rooms\" translation key is used to display the content \"Rooms\" in various parts of the user interface. This includes a file selector and a dialog box where it appears as a section title, providing context for users navigating room templates or reassigning data. It appears in UI elements such as buttons, text labels, and progress indicators.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
       "line_number": 208,
-      "context": "t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:MyFilesSection\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
+      "context": "t(\"EmptyView:UploadFromPortalTitle\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"EmptyView:SectionsUploadDescription\", {\n sectionNameFirst: t(\"Common:MyDocuments\"),\n sectionNameSecond: t(\"Common:Rooms\"),\n }),\n // TODO: need fix selector\n FilesSelectorFilterTypes.ALL,\n );",
       "module": "/packages/client"
     },
     {
@@ -38,6 +38,24 @@
       "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Body/Progress.js",
       "line_number": 202,
       "context": "<StyledProgress>\n <div className=\"data-start\"> {reassigningDataStart}</div>\n <div className=\"progress-container\">\n <div className=\"progress-section\">\n {!noRooms ? (\n <Text className=\"progress-section-text\">{t(\"Common:Rooms\")}</Text>\n ) : null}\n {noRoomFilesToMove ? null : (\n <Text className=\"progress-section-text\">\n {t(\"Common:Documents\")}\n </Text>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
+      "line_number": 676,
+      "context": "});\n }\n \n if (filter.location) {\n const locationLabels = {\n [FilterLocation.Rooms]: t(\"Common:Rooms\"),\n [FilterLocation.Documents]: t(\"Common:Documents\"),\n [FilterLocation.Link]: t(\"Common:AccessibleViaLink\"),\n };\n \n filterValues.push({",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
+      "line_number": 676,
+      "context": "});\n }\n \n if (filter.location) {\n const locationLabels = {\n [FilterLocation.Rooms]: t(\"Common:Rooms\"),\n [FilterLocation.Documents]: t(\"Common:Documents\"),\n [FilterLocation.Link]: t(\"Common:AccessibleViaLink\"),\n };\n \n filterValues.push({",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
+      "line_number": 676,
+      "context": "});\n }\n \n if (filter.location) {\n const locationLabels = {\n [FilterLocation.Rooms]: t(\"Common:Rooms\"),\n [FilterLocation.Documents]: t(\"Common:Documents\"),\n [FilterLocation.Link]: t(\"Common:AccessibleViaLink\"),\n };\n \n filterValues.push({",
       "module": "/packages/client"
     },
     {
@@ -85,7 +103,7 @@
     {
       "file_path": "/packages/client/src/store/TreeFoldersStore.js",
       "line_number": 70,
-      "context": "switch (folder.rootFolderType) {\n case FolderType.USER:\n folder.title = i18n.t(\"Common:MyFilesSection\");\n break;\n case FolderType.Rooms:\n folder.title = i18n.t(\"Common:Rooms\");\n break;\n case FolderType.Archive:\n folder.title = i18n.t(\"Common:Archive\");\n break;\n case FolderType.TRASH:",
+      "context": "switch (folder.rootFolderType) {\n case FolderType.USER:\n folder.title = i18n.t(\"Common:MyDocuments\");\n break;\n case FolderType.Rooms:\n folder.title = i18n.t(\"Common:Rooms\");\n break;\n case FolderType.Archive:\n folder.title = i18n.t(\"Common:Archive\");\n break;\n case FolderType.TRASH:",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "This section is used to connect and configure the services.",
   "content_en_sha1_hash": "56fead1ac3c0ee9e9cfc0757f75de60cb30caef9",
   "created_at": "2025-06-24T16:31:06.652Z",
-  "updated_at": "2025-06-30T12:20:31.589Z",
+  "updated_at": "2025-08-21T14:45:44.122Z",
   "comment": {
     "text": "\"This section is used to connect and configure services, appearing as a label when the 'ConnectAndConfigureServices' button is clicked or displayed in a dialog.\"",
     "is_auto": true,
@@ -11,8 +11,8 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/AdditionalStorage.tsx",
-      "line_number": 143,
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/ServicesItems.tsx",
+      "line_number": 175,
       "context": "return (\n <div>\n <Text className={styles.storageDescription}>\n {isPayer || !isCardLinkedToPortal\n ? t(\"ConnectAndConfigureServices\")\n : t(\"ServiceConfigurationNotice\")}\n </Text>\n {isCardLinkedToPortal ? (\n <div className={styles.payerContainer}>\n <PayerInformation",
       "module": "/packages/client"
     }

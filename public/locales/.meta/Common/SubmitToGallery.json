@@ -3,7 +3,7 @@
   "content": "Submit to Gallery",
   "content_en_sha1_hash": "bdafae9667e0dfca9267553c450423232243e0d4",
   "created_at": "2025-05-19T21:30:49.155Z",
-  "updated_at": "2025-08-21T11:22:39.786Z",
+  "updated_at": "2025-09-01T11:05:24.110Z",
   "comment": {
     "text": "The translation key \"SubmitToGallery\" is used to display the button label in a gallery submission context. When clicked, this action submits files to a gallery. It appears as a prominent button within a submit form gallery dialog.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/SubmitToFormGallery/index.js",
-      "line_number": 212,
+      "line_number": 213,
       "context": "/>\n ) : (\n <Button\n primary\n size=\"normal\"\n label={t(\"Common:SubmitToGallery\")}\n onClick={onSubmitToGallery}\n isLoading={isSubmitting}\n scale\n testId=\"submit_to_gallery_apply_button\"\n />",
       "module": "/packages/client"
     }

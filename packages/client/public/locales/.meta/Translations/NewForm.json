@@ -3,7 +3,7 @@
   "content": "PDF Form",
   "content_en_sha1_hash": "d6182f70d8b22eaa5700e3917f6ccb00e1d25bdb",
   "created_at": "2025-05-19T21:30:49.997Z",
-  "updated_at": "2025-08-04T07:30:00.971Z",
+  "updated_at": "2025-09-02T07:59:28.294Z",
   "comment": {
     "text": "The translation key \"Translations:NewForm\" represents the text \"PDF Form\". It is used to display this text in a button within an empty folder container.",
     "is_auto": true,
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2850,
+      "line_number": 3094,
       "context": "const formActions = [\n {\n id: \"personal_form-template\",\n icon: FormReactSvgUrl,\n label: t(\"Translations:NewForm\"),\n key: \"new-form-base\",\n items: [\n createTemplateForm,\n createTemplateNewFormFile,\n templateOformsGallery,",
       "module": "/packages/client"
     }

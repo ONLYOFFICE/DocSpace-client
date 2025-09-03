@@ -3,9 +3,22 @@
 .iconBlock {
   display: flex;
   align-items: center;
-  height: 100%;
+  /* Match icon container height to text line-height for perfect vertical centering */
+  height: auto;
   padding-inline-end: 8px;
   padding-inline-start: 1px;
+
+  &[data-size="base"] {
+    height: var(--text-input-line-height-base);
+  }
+  &[data-size="middle"] {
+    height: var(--text-input-line-height-middle);
+  }
+  // Large uses same right padding, only height differs
+  &[data-size="large"] {
+    height: var(--text-input-line-height-large);
+    padding-inline-end: 12px;
+  }
 
   background-color: inherit;
 }
@@ -24,6 +37,7 @@
 }
 
 .append {
+  display: flex;
   align-items: center;
   margin: 0;
   background-color: inherit;
@@ -35,10 +49,21 @@
   width: 100%;
 
   display: flex;
+  align-items: center;
+  -webkit-background-clip: padding-box !important;
+  background-clip: padding-box;
 
   :global {
     .append {
       background: inherit;
+      -webkit-background-clip: padding-box !important;
+      background-clip: padding-box;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-block-icon {
+      background-color: inherit;
     }
   }
 

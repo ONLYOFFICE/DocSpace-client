@@ -67,15 +67,15 @@ const removeDuplicate = (items) => {
 const getConversationProgress = async (fileId) => {
   const promise = new Promise((resolve, reject) => {
     setTimeout(() => {
-      try {
-        getFileConversationProgress(fileId).then((res) => {
+      getFileConversationProgress(fileId)
+        .then((res) => {
           // console.log(`getFileConversationProgress fileId:${fileId}`, res);
           resolve(res);
+        })
+        .catch((error) => {
+          // console.error("getFileConversationProgress error", error);
+          reject(error);
         });
-      } catch (error) {
-        console.error(error);
-        reject(error);
-      }
     }, 1000);
   });
 
@@ -421,53 +421,38 @@ class UploadDataStore {
   convertFile = (file, t, isOpen) => {
     this.dialogsStore.setConvertItem(null);
 
-    const fileIndex =
-      file.index ?? this.files.findIndex((el) => el.fileId === file.fileId);
+    const fileHistoryIndex = this.uploadedFilesHistory.findIndex(
+      (el) => el.fileId === file.fileId,
+    );
+    const secondConverting = fileHistoryIndex > -1;
 
-    if (fileIndex > -1 && this.files[fileIndex].inConversion) return;
-
-    const secondConvertingWithPassword =
-      hasOwnProperty(file, "password") || fileIndex > -1;
-    const conversionPositionIndex =
-      hasOwnProperty(file, "index") || fileIndex > -1;
+    if (
+      secondConverting &&
+      this.uploadedFilesHistory[fileHistoryIndex].inConversion
+    )
+      return;
 
     if (this.converted) {
       this.filesToConversion = [];
       this.convertFilesSize = 0;
-      // if (!secondConvertingWithPassword)
-      //   this.files = this.files.filter((f) => f.action === "converted");
     }
 
-    if (secondConvertingWithPassword) {
-      const operationName = OPERATIONS_NAME.upload;
-      this.primaryProgressDataStore.setPrimaryProgressBarData({
-        operation: operationName,
-        alert: false,
-      });
-    }
+    const operationName = OPERATIONS_NAME.upload;
+    this.primaryProgressDataStore.setPrimaryProgressBarData({
+      operation: operationName,
+      alert: false,
+    });
 
-    if (secondConvertingWithPassword && conversionPositionIndex) {
-      this.files.splice(fileIndex, 1, file);
-    } else {
-      this.files.push(file);
-    }
+    this.uploadedFilesHistory[fileHistoryIndex].action = "convert";
+    this.uploadedFilesHistory[fileHistoryIndex].error = null;
+    this.uploadedFilesHistory[fileHistoryIndex].errorShown = false;
 
     if (!this.filesToConversion.length) {
       this.filesToConversion.push(file);
 
-      if (secondConvertingWithPassword && conversionPositionIndex) {
-        this.uploadedFilesHistory[fileIndex].action = "convert";
-        this.uploadedFilesHistory[fileIndex].error = null; // reset error to show loader for convert with password
-        this.uploadedFilesHistory[fileIndex].errorShown = false;
-      } else {
-        this.uploadedFilesHistory.push(file);
-      }
-
-      this.startConversion(t, isOpen, true, secondConvertingWithPassword);
+      this.startConversion(t, isOpen);
     } else {
       this.filesToConversion.push(file);
-      if (!secondConvertingWithPassword && !conversionPositionIndex)
-        this.uploadedFilesHistory.push(file);
     }
   };
 
@@ -683,16 +668,20 @@ class UploadDataStore {
         const error = t("FailedToConvert");
 
         runInAction(() => {
-          if (file) file.error = error;
-          if (historyFile) historyFile.error = error;
+          if (file) {
+            file.error = error;
+            file.inConversion = false;
+          }
+          if (historyFile) {
+            historyFile.error = error;
+            historyFile.inConversion = false;
+          }
         });
 
         if (this.uploaded) {
-          this.totalErrorsCount += 1;
           const primaryProgressData = {
             operation: OPERATIONS_NAME.upload,
             alert: true,
-            errorCount: this.totalErrorsCount,
           };
 
           this.primaryProgressDataStore.setPrimaryProgressBarData(
@@ -713,9 +702,28 @@ class UploadDataStore {
         let error = null;
 
         while (progress < 100) {
-          const response = await getConversationProgress(fileId);
-          progress = response?.[0]?.progress;
-          fileInfo = response?.[0]?.result;
+          let response = null;
+          try {
+            response = await getConversationProgress(fileId);
+            progress = response?.[0]?.progress;
+            fileInfo = response?.[0]?.result;
+          } catch (err) {
+            // console.log("Error in startConversion while loop:", fileId, err);
+            const conversionError = err.message || t("FailedToConvert");
+
+            runInAction(() => {
+              if (file) {
+                file.error = conversionError;
+                file.inConversion = false;
+              }
+              if (historyFile) {
+                historyFile.error = conversionError;
+                historyFile.inConversion = false;
+              }
+            });
+
+            break;
+          }
 
           runInAction(() => {
             const currentFile = this.files.find((f) => f.fileId === fileId);
@@ -740,12 +748,10 @@ class UploadDataStore {
                 newFile.inConversion = false;
                 if (fileInfo === "password") {
                   newFile.needPassword = true;
-                  this.totalErrorsCount += 1;
 
                   this.primaryProgressDataStore.setPrimaryProgressBarData({
                     operation: OPERATIONS_NAME.upload,
                     alert: true,
-                    errorCount: this.totalErrorsCount,
                   });
                 }
               }
@@ -809,12 +815,9 @@ class UploadDataStore {
               if (error.indexOf("password") !== -1) {
                 hFile.needPassword = true;
 
-                this.totalErrorsCount += 1;
-
                 this.primaryProgressDataStore.setPrimaryProgressBarData({
                   operation: OPERATIONS_NAME.upload,
                   alert: true,
-                  errorCount: this.totalErrorsCount,
                 });
               } else hFile.action = "converted";
             }
@@ -898,6 +901,7 @@ class UploadDataStore {
         const fileIndex = this.files.findIndex(
           (f) => f.uniqueId === notUploadedFiles[i].uniqueId,
         );
+
         if (fileIndex !== -1) {
           this.currentUploadNumber += 1;
           this.startSessionFunc(fileIndex, t, createNewIfExist);
@@ -1047,6 +1051,15 @@ class UploadDataStore {
       }
 
       toastr.error(errorMessage, null, 0, true);
+
+      if (this.uploaded) {
+        this.primaryProgressDataStore.setPrimaryProgressBarData({
+          operation: OPERATIONS_NAME.upload,
+          completed: this.uploaded,
+          alert: this.uploadedFilesHistory.length === 0,
+          ...(this.uploadedFilesHistory.length === 0 && { showPanel: null }),
+        });
+      }
     }
   };
 
@@ -1056,14 +1069,13 @@ class UploadDataStore {
     const toFolderId = folderId || this.selectedFolderStore.id;
 
     if (this.uploaded) {
-      this.files = this.files.filter((f) => f.action !== "upload");
+      this.files = this.files.filter((f) => f.action !== "upload" || f.error);
       this.filesSize = 0;
       this.uploadToFolder = null;
       this.percent = 0;
-      this.totalErrorsCount = 0;
     }
     if (this.uploaded && this.converted) {
-      this.files = [];
+      this.files = this.files.filter((f) => f.error);
       this.filesToConversion = [];
       this.uploadedFilesSize = 0;
       this.asyncUploadObj = {};
@@ -1087,7 +1099,6 @@ class UploadDataStore {
         file,
         uniqueId: uniqueid("download_row-key_"),
         fileId: null,
-        // toFolderId,
         toFolderId: file.parentFolderId,
         action: "upload",
         error: file.size ? null : t("Files:EmptyFile"),
@@ -1572,6 +1583,55 @@ class UploadDataStore {
     }
   };
 
+  retryUploadFiles = (t, uniqueId) => {
+    const fileIndex = this.files.findIndex((f) => f.uniqueId === uniqueId);
+    const fileUploadedIndex = this.uploadedFilesHistory.findIndex(
+      (f) => f.uniqueId === uniqueId,
+    );
+    const retryFile = this.files[fileIndex];
+    const retryFileUploaded = this.uploadedFilesHistory[fileUploadedIndex];
+
+    if (retryFileUploaded.action === "convert") {
+      retryFileUploaded.inConversion = false;
+      retryFile.inConversion = false;
+      this.convertFile(retryFileUploaded, t);
+      return;
+    }
+
+    retryFile.action = "upload";
+    retryFile.error = "";
+    retryFile.inAction = false;
+    retryFile.percent = 0;
+
+    retryFileUploaded.action = "upload";
+    retryFileUploaded.error = "";
+    retryFileUploaded.inAction = false;
+    retryFileUploaded.errorShown = false;
+    retryFileUploaded.percent = 0;
+
+    if (this.uploaded) {
+      const newUploadData = {
+        filesSize: this.convertFilesSize,
+        uploadedFiles: this.uploadedFiles,
+        percent: this.percent,
+        uploaded: false,
+      };
+
+      this.setUploadData(newUploadData);
+      const progressData = {
+        completed: false,
+        percent: this.percent,
+        operation: OPERATIONS_NAME.upload,
+        alert: false,
+        showPanel: this.setUploadPanelVisible,
+      };
+
+      this.primaryProgressDataStore.setPrimaryProgressBarData(progressData);
+    }
+
+    this.parallelUploading([retryFile], t);
+  };
+
   startUploadFiles = async (t, createNewIfExist = true) => {
     this.finishUploadFilesCalled = false;
 
@@ -1685,14 +1745,11 @@ class UploadDataStore {
         );
       })
       .catch((error) => {
-        this.totalErrorsCount += 1;
-
         if (this.files[indexOfFile] === undefined) {
           this.primaryProgressDataStore.setPrimaryProgressBarData({
             operation: OPERATIONS_NAME.upload,
             completed: true,
             alert: true,
-            errorCount: this.totalErrorsCount,
           });
           return Promise.resolve();
         }
@@ -1742,7 +1799,6 @@ class UploadDataStore {
           percent: newPercent,
           completed: allFilesIsUploaded,
           alert: true,
-          errorCount: this.totalErrorsCount,
         });
 
         this.currentUploadNumber -= 1;
@@ -1789,67 +1845,86 @@ class UploadDataStore {
       });
   };
 
-  finishUploadFiles = (t, waitConversion) => {
-    const filesWithErrors = this.uploadedFilesHistory.filter(
-      (f) => f.error && !f.errorShown,
-    );
-    const filesWithoutErrors = this.uploadedFilesHistory.filter(
-      (f) => !f.error,
-    );
-    const totalErrorsCount = filesWithErrors.length;
-
-    if (totalErrorsCount > 0) {
-      filesWithErrors.forEach((f) => {
-        const historyFile = this.uploadedFilesHistory.find(
-          (file) => file.uniqueId === f.uniqueId,
-        );
-
-        if (f.error.indexOf("password") > -1) {
-          toastr.warning(
-            <Trans
-              i18nKey="Common:PasswordProtectedFiles"
-              t={t}
-              components={[
-                <Link
-                  key="a"
-                  tag="a"
-                  isHovered
-                  color="accent"
-                  onClick={() => {
-                    toastr.clear();
-                    this.setUploadPanelVisible(true);
-                  }}
-                />,
-              ]}
-            />,
-            null,
-            60000,
-            true,
-          );
-        } else {
-          toastr.error(f.error);
-        }
-        if (historyFile) {
-          historyFile.errorShown = true;
-        }
-      });
-
-      // for empty file
-      this.totalErrorsCount += 1;
-      this.primaryProgressDataStore.setPrimaryProgressBarData({
-        operation: OPERATIONS_NAME.upload,
-        alert: true,
-        errorCount: this.totalErrorsCount,
-      });
-
-      console.log("Errors: ", totalErrorsCount);
-    } else {
+  showFinishUploadToastr = (
+    t,
+    totalErrorsCount,
+    filesWithoutErrors,
+    filesWithErrors,
+    filesWithAllErrors,
+  ) => {
+    if (totalErrorsCount === 0) {
       toastr.success(
         t("Common:ItemsSuccessfullyUploaded", {
           count: filesWithoutErrors.length,
         }),
       );
+      return;
     }
+
+    this.primaryProgressDataStore.setPrimaryProgressBarData({
+      operation: OPERATIONS_NAME.upload,
+      alert: true,
+      errorCount: filesWithAllErrors,
+    });
+
+    this.uploadedFilesHistory.forEach((f) => {
+      f.errorShown = true;
+    });
+
+    console.log("Errors: ", totalErrorsCount);
+
+    if (totalErrorsCount > 1) {
+      toastr.error(t("UploadPanel:UploadingError"));
+      return;
+    }
+
+    const errorItem = filesWithErrors[0];
+    const passwordErrorIndex = errorItem.error.indexOf("password");
+
+    if (passwordErrorIndex === -1) {
+      toastr.error(errorItem.error);
+      return;
+    }
+
+    toastr.warning(
+      <Trans
+        i18nKey="Common:PasswordProtectedFiles"
+        t={t}
+        components={[
+          <Link
+            key="a"
+            tag="a"
+            isHovered
+            color="accent"
+            onClick={() => {
+              toastr.clear();
+              this.setUploadPanelVisible(true);
+            }}
+          />,
+        ]}
+      />,
+      null,
+      60000,
+      true,
+    );
+  };
+
+  finishUploadFiles = (t, waitConversion) => {
+    const filesWithErrors = this.uploadedFilesHistory.filter(
+      (f) => f.error && !f.errorShown,
+    );
+    const filesWithAllErrors = this.uploadedFilesHistory.filter((f) => f.error);
+    const filesWithoutErrors = this.uploadedFilesHistory.filter(
+      (f) => !f.error,
+    );
+
+    this.showFinishUploadToastr(
+      t,
+      filesWithAllErrors.length,
+      filesWithoutErrors,
+      filesWithErrors,
+      filesWithAllErrors.length,
+    );
 
     this.uploaded = true;
     this.converted = true;

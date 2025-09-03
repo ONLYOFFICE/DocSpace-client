@@ -110,7 +110,14 @@ const servicesStore = new ServicesStore(currentTariffStatusStore, paymentStore);
 
 const wizardStore = new WizardStore();
 const confirmStore = new ConfirmStore();
-const backupStore = new BackupStore(authStore, thirdPartyStore);
+const backupStore = new BackupStore(
+  authStore,
+  thirdPartyStore,
+  currentQuotaStore,
+  currentTariffStatusStore,
+  settingsStore,
+  paymentStore,
+);
 const commonStore = new CommonStore(settingsStore);
 
 const ssoStore = new SsoFormStore();

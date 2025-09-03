@@ -34,6 +34,7 @@ import {
   type TCreateAiProvider,
   type TServer,
   type TUpdateAiProvider,
+  type TUpdateServer,
 } from "@docspace/shared/api/ai/types";
 import {
   addNewServer,
@@ -43,6 +44,7 @@ import {
   getProviders,
   getServersList,
   updateProvider,
+  updateServer,
   updateServerStatus,
 } from "@docspace/shared/api/ai";
 import { ServerType } from "@docspace/shared/api/ai/enums";
@@ -120,6 +122,16 @@ class AISettingsStore {
 
     if (newServer) {
       this.mcpServers.push(newServer);
+    }
+  };
+
+  updateMCP = async (id: TServer["id"], data: TUpdateServer) => {
+    const newServer = await updateServer(id, data);
+
+    const index = this.mcpServers.findIndex((p) => p.id === id);
+
+    if (index !== -1) {
+      this.mcpServers[index] = newServer;
     }
   };
 

@@ -99,12 +99,7 @@ export const useIcon = () => {
       removeMargin
     >
       <div className={styles.iconBlock}>
-        <img
-          className={styles.icon}
-          style={{ display: icon ? "block" : "none" }}
-          alt="img"
-          src={icon}
-        />
+        {icon ? <img className={styles.icon} alt="img" src={icon} /> : null}
         <SelectorAddButton
           label={t("OAuth:SelectNewImage")}
           onClick={onClick}

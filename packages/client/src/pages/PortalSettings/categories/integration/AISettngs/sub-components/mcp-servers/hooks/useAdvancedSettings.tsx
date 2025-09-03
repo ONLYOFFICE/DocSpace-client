@@ -41,7 +41,8 @@ import styles from "../MCPServers.module.scss";
 
 export const useAdvancedSettings = (initialValues?: Record<string, string>) => {
   const { t } = useTranslation(["Common", "AISettings", "SingleSignOn"]);
-  const [showAdvancedSettings, setShowAdvancedSettings] = useState(false);
+  const [showAdvancedSettings, setShowAdvancedSettings] =
+    useState(!!initialValues);
 
   const [headerCounts, setHeaderCounts] = React.useState(
     initialValues ? Object.keys(initialValues).length : 1,

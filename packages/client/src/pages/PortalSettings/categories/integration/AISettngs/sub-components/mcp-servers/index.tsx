@@ -44,6 +44,7 @@ import { MCPTile } from "../tiles/mcp-tile";
 import { AddMCPDialog } from "./dialogs/add";
 import { DeleteDialog } from "./dialogs/delete";
 import { DisableDialog } from "./dialogs/disable";
+import { EditMCPDialog } from "./dialogs/edit";
 
 type MCPListProps = {
   showHeading: boolean;
@@ -99,6 +100,10 @@ type DisableDeleteDialogData =
   | { visible: false; serverId: null }
   | { visible: true; serverId: TServer["id"] };
 
+type EditDialogData =
+  | { visible: false; server: null }
+  | { visible: true; server: TServer };
+
 type MCPServersProps = {
   standalone?: boolean;
   customMCPServers?: AISettingsStore["customMCPServers"];
@@ -124,6 +129,11 @@ const MCPServersComponent = ({
       visible: false,
       serverId: null,
     });
+
+  const [editDialogData, setEditDialogData] = useState<EditDialogData>({
+    visible: false,
+    server: null,
+  });
 
   const showMCPHeadings = !!customMCPServers?.length;
 
@@ -154,7 +164,10 @@ const MCPServersComponent = ({
   };
 
   const onUpdateMCP = (item: TServer) => {
-    console.log(item);
+    setEditDialogData({
+      visible: true,
+      server: item,
+    });
   };
 
   const onDeleteMCP = (id: TServer["id"]) => {
@@ -172,6 +185,13 @@ const MCPServersComponent = ({
     setDeleteDialogData({
       visible: false,
       serverId: null,
+    });
+  };
+
+  const hideEditDialog = () => {
+    setEditDialogData({
+      visible: false,
+      server: null,
     });
   };
 
@@ -243,6 +263,13 @@ const MCPServersComponent = ({
         <DisableDialog
           onClose={hideDisableDialog}
           serverId={disableDialogData.serverId}
+        />
+      ) : null}
+
+      {editDialogData.visible ? (
+        <EditMCPDialog
+          server={editDialogData.server}
+          onClose={hideEditDialog}
         />
       ) : null}
     </div>

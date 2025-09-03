@@ -43,6 +43,7 @@ import {
   TVectorizeOperation,
   type TProviderTypeWithUrl,
   type TAddNewServer,
+  type TUpdateServer,
 } from "./types";
 
 const baseUrl = "/ai";
@@ -274,23 +275,14 @@ export const addNewServer = async (data: TAddNewServer) => {
   })) as TServer;
 };
 
-export const updateServer = async (
-  serverId: string,
-  endpoint: string,
-  name: string,
-  description?: string,
-  headers?: Record<string, string>,
-  enabled?: boolean,
-) => {
-  try {
-    await request({
-      method: "put",
-      url: `${baseUrl}/servers/${serverId}`,
-      data: { endpoint, name, description, headers, enabled },
-    });
-  } catch (e) {
-    console.log(e);
-  }
+export const updateServer = async (serverId: string, data: TUpdateServer) => {
+  const res = await request({
+    method: "put",
+    url: `${baseUrl}/servers/${serverId}`,
+    data,
+  });
+
+  return res as TServer;
 };
 
 export const deleteServers = async (servers: string[]) => {

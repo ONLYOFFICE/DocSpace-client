@@ -128,3 +128,10 @@ export type TAddNewServer = {
   description: string;
   headers: Record<string, string>;
 };
+
+export type TUpdateServer = {
+  endpoint: string;
+  name: string;
+  description?: string;
+  headers?: Record<string, string>;
+};

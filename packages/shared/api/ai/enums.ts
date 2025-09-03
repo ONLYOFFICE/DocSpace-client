@@ -44,7 +44,8 @@ export const enum ProviderType {
 }
 
 export const enum EventType {
-  Metadata = "metadata",
+  MessageStart = "message_start",
+  MessageStop = "message_stop",
   NewToken = "new_token",
   ToolCall = "tool_call",
   ToolResult = "tool_result",

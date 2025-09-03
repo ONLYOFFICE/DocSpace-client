@@ -290,7 +290,11 @@ export default class MessageStore {
 
         if (done) {
           this.setIsRequestRunning(false);
-          reader.cancel();
+          try {
+            reader.cancel();
+          } catch (e) {
+            // Ignore cancel errors
+          }
           return;
         }
 
@@ -307,12 +311,10 @@ export default class MessageStore {
             const jsonData = data?.split("data:")[1]?.trim();
 
             if (!jsonData) {
-              await streamHandler();
-
               return;
             }
 
-            if (event.includes(EventType.Metadata)) {
+            if (event.includes(EventType.MessageStart)) {
               this.handleMetadata(jsonData);
 
               return;
@@ -351,6 +353,14 @@ export default class MessageStore {
 
             if (event.includes(EventType.Error)) {
               this.handleStreamError(jsonData);
+            }
+
+            if (event.includes(EventType.MessageStop)) {
+              try {
+                reader.cancel();
+              } catch (e) {
+                console.log(e);
+              }
             }
           });
 

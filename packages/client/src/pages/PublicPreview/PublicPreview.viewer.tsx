@@ -84,7 +84,6 @@ const PublicPreviewViewer: FC<PublicPreviewViewerProps> = ({
         toastr.error(error?.message || t("Common:UnexpectedError"));
       }
 
-      // eslint-disable-next-line no-console
       console.error(error);
     } finally {
       setIsLoading(false);

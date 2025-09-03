@@ -75,7 +75,6 @@ class IndexingStore {
 
     if (existItem.length > 0) {
       if (existItem[0].order === selection[0].order) return;
-      // eslint-disable-next-line no-else-return
       else if (
         existItem[0].order &&
         existItem[0].order !== selection[0].order

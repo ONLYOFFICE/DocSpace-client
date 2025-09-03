@@ -708,7 +708,8 @@ class UploadDataStore {
             progress = response?.[0]?.progress;
             fileInfo = response?.[0]?.result;
           } catch (err) {
-            const conversionError = err.message || "Conversion progress failed";
+            // console.log("Error in startConversion while loop:", fileId, err);
+            const conversionError = err.message || t("FailedToConvert");
 
             runInAction(() => {
               if (file) {

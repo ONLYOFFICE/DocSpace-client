@@ -343,6 +343,7 @@ const Panels = (props) => {
         descriptionText=""
         isMultiSelect
         withRecentTreeFolder
+        withFavoritesTreeFolder
       />
     ),
 

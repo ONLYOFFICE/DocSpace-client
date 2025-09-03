@@ -124,6 +124,7 @@ const Attachment = ({
       filterParam={CHAT_SUPPORTED_FORMATS}
       isMultiSelect
       withRecentTreeFolder
+      withFavoritesTreeFolder
       currentDeviceType={
         isDesktop()
           ? DeviceType.desktop

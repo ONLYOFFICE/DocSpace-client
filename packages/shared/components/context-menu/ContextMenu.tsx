@@ -111,6 +111,7 @@ const ContextMenu = (props: ContextMenuProps) => {
     badgeUrl,
     headerOnlyMobile = false,
     dataTestId,
+    maxHeightLowerSubmenu,
   } = props;
 
   const onMenuClick = () => {
@@ -644,6 +645,7 @@ const ContextMenu = (props: ContextMenuProps) => {
                 onMobileItemClick={onMobileItemClick}
                 changeView={changeView}
                 withHeader={withHeader}
+                maxHeightLowerSubmenu={maxHeightLowerSubmenu}
               />
             )}
           </div>

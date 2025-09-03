@@ -75,6 +75,9 @@ type SubMenuProps = {
   changeView?: boolean;
   withHeader?: boolean;
   onSubMenuMouseEnter?: () => void;
+
+  isLowerSubmenu?: boolean;
+  maxHeightLowerSubmenu?: number;
 };
 
 const SubMenu = (props: SubMenuProps) => {
@@ -89,13 +92,19 @@ const SubMenu = (props: SubMenuProps) => {
     changeView,
     withHeader,
     onSubMenuMouseEnter,
+    isLowerSubmenu,
+    maxHeightLowerSubmenu,
   } = props;
 
   const [model, setModel] = useState(props?.model);
   const [isLoading, setIsLoading] = useState(false);
   const [activeItem, setActiveItem] = useState<ContextMenuType | null>(null);
+  const [activeItemKey, setActiveItemKey] = useState<string | number | null>(
+    null,
+  );
   const [widthSubMenu, setWidthSubMenu] = useState<null | number>(null);
 
+  const prevWidthSubMenu = useRef<number | null>(null);
   const subMenuRef = useRef<HTMLUListElement>(null);
   const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -115,9 +124,11 @@ const SubMenu = (props: SubMenuProps) => {
 
     if (item.items || item.onLoad) {
       setActiveItem(item);
+      setActiveItemKey(item.key);
     } else {
       hideTimeoutRef.current = setTimeout(() => {
         setActiveItem(null);
+        setActiveItemKey(null);
       }, 400);
     }
   };
@@ -128,6 +139,7 @@ const SubMenu = (props: SubMenuProps) => {
     if (item.items || item.onLoad) {
       hideTimeoutRef.current = setTimeout(() => {
         setActiveItem(null);
+        setActiveItemKey(null);
       }, 400);
     }
   };
@@ -175,7 +187,7 @@ const SubMenu = (props: SubMenuProps) => {
       return;
     }
 
-    onLeafClick?.(e);
+    if (!item.withToggle) onLeafClick?.(e);
   };
 
   const position = () => {
@@ -212,8 +224,11 @@ const SubMenu = (props: SubMenuProps) => {
       let subMenuRefTop = null;
 
       if (!isMobile()) {
-        if (root) subMenuRef.current.style.width = `${subListWidth}px`;
-        else subMenuRef.current.style.width = `${subListWidth}px`;
+        if (!prevWidthSubMenu.current) {
+          prevWidthSubMenu.current = subListWidth;
+        }
+
+        subMenuRef.current.style.width = `${prevWidthSubMenu.current}px`;
       } else {
         setWidthSubMenu(subListWidth);
       }
@@ -347,6 +362,22 @@ const SubMenu = (props: SubMenuProps) => {
       position();
     }
   });
+
+  useEffect(() => {
+    if (props.model) {
+      setModel(props.model);
+    }
+  }, [props.model]);
+
+  useEffect(() => {
+    if (!activeItemKey) return;
+
+    const item = model.find(
+      (item) => item.key === activeItemKey,
+    ) as ContextMenuType;
+
+    setActiveItem(item || null);
+  }, [model]);
 
   useEffect(() => {
     return () => {
@@ -598,7 +629,7 @@ const SubMenu = (props: SubMenuProps) => {
       if (contextMenuTypeItem?.items || contextMenuTypeItem?.onLoad) {
         submenu.push(
           <SubMenu
-            key={`sub-menu_${item.id}`}
+            key={`sub-menu_${item.key}`}
             model={
               contextMenuTypeItem?.onLoad
                 ? [loaderItem]
@@ -608,6 +639,8 @@ const SubMenu = (props: SubMenuProps) => {
             onLeafClick={onLeafClick}
             onLoad={contextMenuTypeItem?.onLoad}
             onSubMenuMouseEnter={handleSubMenuMouseEnter}
+            isLowerSubmenu
+            maxHeightLowerSubmenu={maxHeightLowerSubmenu}
           />,
         );
       }
@@ -638,7 +671,7 @@ const SubMenu = (props: SubMenuProps) => {
     const backdrop = 64;
     const header = 55;
 
-    const listHeight =
+    let listHeight =
       changeView && withHeader
         ? height + paddingList + header > viewport.height
           ? viewport.height - backdrop - header - paddingList
@@ -646,6 +679,10 @@ const SubMenu = (props: SubMenuProps) => {
         : height + paddingList + marginsList > viewport.height
           ? viewport.height - marginsList
           : height + paddingList;
+
+    if (isLowerSubmenu && maxHeightLowerSubmenu) {
+      listHeight = Math.min(listHeight, maxHeightLowerSubmenu);
+    }
 
     return (
       <CSSTransition

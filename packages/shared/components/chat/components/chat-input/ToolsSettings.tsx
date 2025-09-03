@@ -253,64 +253,67 @@ const ToolsSettings = () => {
     contextMenuRef.current?.show(e);
   };
 
-  const hideMcpTools = () => {
+  const hideMcpTools = React.useCallback(() => {
     setIsMcpToolsVisible(false);
-  };
+  }, []);
 
-  const model = [
-    ...Array.from(MCPTools.entries()).map(([mcpId, tools]) => {
-      const server = servers.find((s) => s.id === mcpId);
+  const model = React.useMemo(
+    () => [
+      ...Array.from(MCPTools.entries()).map(([mcpId, tools]) => {
+        const server = servers.find((s) => s.id === mcpId);
 
-      if (!server)
-        return {
-          key: "",
-          label: "",
-        };
+        if (!server)
+          return {
+            key: "",
+            label: "",
+          };
 
-      const items = [
-        {
-          key: "all_tools",
-          label: "All tools",
-          withToggle: true,
-          checked: tools.some((tool) => tool.enabled),
-          onClick: () => {
-            toggleTool(mcpId, "all_tools");
-          },
-        },
-        {
-          key: "separator-sub-menu-1",
-          isSeparator: true,
-        },
-        ...tools
-          .map((tool) => ({
-            key: tool.name,
-            label: tool.name,
+        const items = [
+          {
+            key: "all_tools",
+            label: "All tools",
             withToggle: true,
-            checked: tool.enabled,
+            checked: tools.some((tool) => tool.enabled),
             onClick: () => {
-              toggleTool(mcpId, tool.name);
+              toggleTool(mcpId, "all_tools");
             },
-          }))
-          .filter(Boolean),
-      ];
+          },
+          {
+            key: "separator-sub-menu-1",
+            isSeparator: true,
+          },
+          ...tools
+            .map((tool) => ({
+              key: tool.name,
+              label: tool.name,
+              withToggle: true,
+              checked: tool.enabled,
+              onClick: () => {
+                toggleTool(mcpId, tool.name);
+              },
+            }))
+            .filter(Boolean),
+        ];
 
-      return {
-        key: mcpId,
-        label: server.name,
-        icon: getServerIcon(server.serverType, isBase) ?? "",
-        items,
-      };
-    }),
-    { key: "separator-1", isSeparator: true },
-    {
-      key: "manage-connections",
-      label: t("ManageConnection"),
-      onClick: () => {
-        setShowManageConnections(true);
+        return {
+          key: mcpId,
+          label: server.name,
+          icon: getServerIcon(server.serverType, isBase) ?? "",
+          items,
+        };
+      }),
+      { key: "separator-1", isSeparator: true },
+      {
+        key: "manage-connections",
+        label: t("ManageConnection"),
+        onClick: () => {
+          setShowManageConnections(true);
+        },
+        icon: ManageConnectionsReactSvgUrl,
       },
-      icon: ManageConnectionsReactSvgUrl,
-    },
-  ];
+    ],
+    [MCPTools, servers],
+  );
 
   if (!servers.length || !MCPTools.size) return;
 
@@ -326,7 +329,12 @@ const ToolsSettings = () => {
         <Text lineHeight="16px" fontSize="13px" fontWeight={600} noSelect>
           {t("Tools")}
         </Text>
-        <ContextMenu ref={contextMenuRef} model={model} onHide={hideMcpTools} />
+        <ContextMenu
+          ref={contextMenuRef}
+          model={model}
+          onHide={hideMcpTools}
+          maxHeightLowerSubmenu={360}
+        />
       </div>
       {showManageConnections ? (
         <Portal
@@ -340,11 +348,7 @@ const ToolsSettings = () => {
               >
                 <div className={styles.toolSettingsWrapper}>
                   {servers.map((server) => {
-                    if (
-                      server.serverType === ServerType.Portal ||
-                      !server.authorizationEndpoint
-                    )
-                      return null;
+                    if (server.serverType === ServerType.Portal) return null;
 
                     return (
                       <div key={server.id} className={styles.toolSettingsItem}>

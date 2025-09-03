@@ -168,6 +168,7 @@ export interface ContextMenuProps {
   badgeUrl?: string;
   headerOnlyMobile?: boolean;
   dataTestId?: string;
+  maxHeightLowerSubmenu?: number;
 }
 
 export type TContextMenuRef = {

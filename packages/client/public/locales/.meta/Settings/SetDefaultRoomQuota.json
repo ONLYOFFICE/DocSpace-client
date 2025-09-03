@@ -3,7 +3,7 @@
   "content": "Set the default storage quota for rooms in this {{productName}}. It can later be adjusted for each room individually by the room admin.",
   "content_en_sha1_hash": "70a076e65a43bd6bbbe50850d4834ecd8ec75cad",
   "created_at": "2025-05-19T21:30:52.660Z",
-  "updated_at": "2025-08-11T09:02:44.042Z",
+  "updated_at": "2025-09-02T07:59:28.631Z",
   "comment": {
     "text": "\"This translation key controls the default storage quota setting displayed to users when adjusting room quotas. It can later be adjusted individually by room admins. Appears in the 'QuotaPerRoom' category.\"",
     "is_auto": true,
@@ -19,7 +19,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerItem.js",
       "line_number": 115,
-      "context": "{type === \"user\"\n ? t(\"UserDefaultQuotaDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyFilesSection\"),\n })\n : t(\"SetDefaultRoomQuota\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {isToggleChecked ? (\n <QuotaForm",
+      "context": "{type === \"user\"\n ? t(\"UserDefaultQuotaDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyDocuments\"),\n })\n : t(\"SetDefaultRoomQuota\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {isToggleChecked ? (\n <QuotaForm",
       "module": "/packages/client"
     }
   ],

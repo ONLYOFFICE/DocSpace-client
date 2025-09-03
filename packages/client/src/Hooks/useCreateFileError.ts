@@ -42,7 +42,7 @@ type UseCreateFileErrorProps = {
       fileExst: string;
     };
   }) => void;
-  setConvertPasswordDialogVisible: () => void;
+  setConvertPasswordDialogVisible: (visible: boolean) => void;
 };
 
 const useCreateFileError = ({

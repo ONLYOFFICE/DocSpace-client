@@ -31,7 +31,6 @@ import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import type { TAiProvider } from "@docspace/shared/api/ai/types";
-import { useTheme } from "@docspace/shared/hooks/useTheme";
 import { getAiProviderIcon, getAiProviderLabel } from "@docspace/shared/utils";
 
 import SettingsIcon from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
@@ -51,9 +50,8 @@ export const AiProviderTile = ({
   onSettingsClick,
 }: AiProviderTileProps) => {
   const { t } = useTranslation("Common");
-  const { isBase } = useTheme();
 
-  const icon = getAiProviderIcon(item.type, isBase) ?? "";
+  const icon = getAiProviderIcon(item.type) ?? "";
   const companyLabel = getAiProviderLabel(item.type);
 
   const getContextOptions = () => {

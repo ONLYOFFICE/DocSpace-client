@@ -33,7 +33,7 @@ import OllamaSvgUrl from "PUBLIC_DIR/images/ai-providers/ollama.svg?url";
 
 import { ProviderType } from "../../api/ai/enums";
 
-export const getAiProviderIcon = (type: ProviderType, isBase: boolean) => {
+export const getAiProviderIcon = (type: ProviderType) => {
   switch (type) {
     case ProviderType.Anthropic:
       return AnthropicSvgUrl;

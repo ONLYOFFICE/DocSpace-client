@@ -43,6 +43,7 @@ import styles from "../../AISettings.module.scss";
 import { MCPTile } from "../tiles/mcp-tile";
 import { AddMCPDialog } from "./dialogs/add";
 import { DeleteDialog } from "./dialogs/delete";
+import { DisableDialog } from "./dialogs/disable";
 
 type MCPListProps = {
   showHeading: boolean;
@@ -94,7 +95,7 @@ const MCPList = observer(
   },
 );
 
-type DeleteDialogData =
+type DisableDeleteDialogData =
   | { visible: false; serverId: null }
   | { visible: true; serverId: TServer["id"] };
 
@@ -113,25 +114,43 @@ const MCPServersComponent = ({
 }: MCPServersProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
   const [addDialogVisible, setAddDialogVisible] = useState(false);
-  const [deleteDialogData, setDeleteDialogData] = useState<DeleteDialogData>({
-    visible: false,
-    serverId: null,
-  });
+  const [deleteDialogData, setDeleteDialogData] =
+    useState<DisableDeleteDialogData>({
+      visible: false,
+      serverId: null,
+    });
+  const [disableDialogData, setDisableDialogData] =
+    useState<DisableDeleteDialogData>({
+      visible: false,
+      serverId: null,
+    });
 
   const showMCPHeadings = !!customMCPServers?.length;
 
   const onMCPToggle = async (id: TServer["id"], enabled: boolean) => {
+    if (!enabled) {
+      setDisableDialogData({
+        visible: true,
+        serverId: id,
+      });
+
+      return;
+    }
+
     try {
       await updateMCPStatus?.(id, enabled);
-      const translationKey = enabled
-        ? "AISettings:ServerEnabledSuccess"
-        : "AISettings:ServerDisabledSuccess";
-
-      toastr.success(t(translationKey));
+      toastr.success(t("AISettings:ServerEnabledSuccess"));
     } catch (e) {
       console.error(e);
       toastr.error(e as TData);
     }
+  };
+
+  const hideDisableDialog = () => {
+    setDisableDialogData({
+      visible: false,
+      serverId: null,
+    });
   };
 
   const onUpdateMCP = (item: TServer) => {
@@ -217,6 +236,13 @@ const MCPServersComponent = ({
         <DeleteDialog
           onClose={hideDeleteDialog}
           serverId={deleteDialogData.serverId}
+        />
+      ) : null}
+
+      {disableDialogData.visible ? (
+        <DisableDialog
+          onClose={hideDisableDialog}
+          serverId={disableDialogData.serverId}
         />
       ) : null}
     </div>

@@ -25,9 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 import { AIProvider } from "./sub-components/ai-provider";
 import { MCPServers } from "./sub-components/mcp-servers";
@@ -48,6 +50,8 @@ const AISettngs = ({
   setIsInit,
   initAISettings,
 }: AISettingsProps) => {
+  const { t, ready } = useTranslation("AISettings");
+
   useEffect(() => {
     initAISettings?.(standalone);
 
@@ -55,6 +59,12 @@ const AISettngs = ({
       setIsInit?.(false);
     };
   }, [standalone, initAISettings, setIsInit]);
+
+  useEffect(() => {
+    const titleKey = standalone ? "Settings:AISettings" : "Settings:MCPServers";
+
+    if (ready) setDocumentTitle(t(titleKey));
+  }, [ready, standalone]);
 
   if (!isInit) return null;
 

@@ -2830,9 +2830,9 @@
 .light {
   --template-gallery-header-border: #{$gray-light-mid};
 
-  --template-tile-border-hover: #{$light-blue-main};
+  --template-tile-border-hover: var(--color-scheme-main-accent);
   --template-tile-text: #{$gray-text};
-  --template-tile-text-hover: #{$light-blue-main};
+  --template-tile-text-hover: var(--color-scheme-main-accent);
 
   --template-tile-background: #{$white};
   --template-tile-background-active: #{$light-gray-hover};

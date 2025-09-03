@@ -60,8 +60,6 @@ const ChatMessageBody = ({
 
   const isEmpty = messages.length === 0;
 
-  console.log(isScrolled);
-
   useEffect(() => {
     if (!currentChat?.id) return;
 

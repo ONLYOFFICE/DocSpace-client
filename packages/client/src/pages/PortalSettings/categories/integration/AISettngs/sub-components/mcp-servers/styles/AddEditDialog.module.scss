@@ -42,3 +42,13 @@
   align-items: center;
   gap: 12px;
 }
+
+.connectDocspace {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  .connectDocspaceDescription {
+    color: var(--settings-common-description-color);
+  }
+}

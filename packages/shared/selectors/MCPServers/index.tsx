@@ -134,8 +134,6 @@ const MCPServersSelector = ({ onSubmit, onClose }: MCPServersSelectorProps) => {
     fetchServers();
   }, [fetchServers]);
 
-  console.log(isLoading);
-
   return (
     <Selector
       items={servers}

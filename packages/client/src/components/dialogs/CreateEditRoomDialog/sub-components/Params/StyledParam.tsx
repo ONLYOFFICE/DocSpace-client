@@ -103,6 +103,7 @@ const StyledParam = styled.div.attrs(injectDefaultTheme)<{
   .ai-mcp-group {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 16px;
 
     .ai-mcp-item {

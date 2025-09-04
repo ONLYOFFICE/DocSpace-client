@@ -24,53 +24,92 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
-import { Trans, useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
+import type { TAddNewServer } from "@docspace/shared/api/ai/types";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { toastr } from "@docspace/shared/components/toast";
-import { Text } from "@docspace/shared/components/text";
+import { type TData, toastr } from "@docspace/shared/components/toast";
 
-type DisableDialogProps = {
-  onSubmit: () => Promise<void>;
+import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
+
+import styles from "../../styles/AddEditDialog.module.scss";
+
+import { useAdvancedSettings } from "../../hooks/useAdvancedSettings";
+import { useBaseParams } from "../../hooks/useBaseParams";
+import { useIcon } from "../../hooks/useIcon";
+
+type AddMCPDialogProps = {
   onClose: VoidFunction;
+  addNewMCP?: AISettingsStore["addNewMCP"];
 };
 
-const DisableDialog = ({ onSubmit, onClose }: DisableDialogProps) => {
-  const { t } = useTranslation(["MCPServers", "Common", "OAuth"]);
+const AddMCPDialogComponent = ({ onClose, addNewMCP }: AddMCPDialogProps) => {
+  const { t } = useTranslation(["Common", "AISettings"]);
 
   const [loading, setLoading] = React.useState(false);
 
+  const { getBaseParams, baseParamsComponent } = useBaseParams();
+  const { headersComponent, getAPIHeaders } = useAdvancedSettings();
+  const { iconComponent, getIcon } = useIcon();
+
   const onSubmitAction = async () => {
+    const headers = getAPIHeaders();
+    const baseParams = getBaseParams();
+
+    // TODO: Add icon to request after changing API
+    const icon = getIcon();
+    console.log(icon);
+
+    if (!baseParams) return;
+
+    setLoading(true);
+
+    const data: TAddNewServer = {
+      endpoint: baseParams.url,
+      name: baseParams.name,
+      description: baseParams.description,
+      headers,
+    };
+
     try {
-      await onSubmit();
-    } catch (error) {
-      console.error(error);
-      toastr.error(error as string);
+      await addNewMCP?.(data);
+      toastr.success(t("AISettings:ServerAddedSuccess"));
+      onClose();
+    } catch (e) {
+      console.error(e);
+      toastr.error(e as TData);
     } finally {
       setLoading(false);
-      onClose();
     }
+
+    setLoading(false);
   };
 
   return (
-    <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>
-      <ModalDialog.Header>{t("MCPServers:DisableServer")}</ModalDialog.Header>
+    <ModalDialog
+      visible
+      displayType={ModalDialogType.aside}
+      onClose={onClose}
+      withBodyScroll
+    >
+      <ModalDialog.Header>{t("AISettings:MCPServer")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text style={{ marginBottom: "16px" }}>
-          <Trans t={t} i18nKey="DisableServerDescription" ns="MCPServers" />
-        </Text>
-
-        <Trans t={t} i18nKey="DisableServerNote" ns="MCPServers" />
+        <div className={styles.bodyContainer}>
+          {iconComponent}
+          {baseParamsComponent}
+          {headersComponent}
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
           primary
           size={ButtonSize.normal}
-          label={t("Common:OKButton")}
+          label={t("Common:SaveButton")}
           scale
           onClick={onSubmitAction}
           isLoading={loading}
@@ -87,4 +126,8 @@ const DisableDialog = ({ onSubmit, onClose }: DisableDialogProps) => {
   );
 };
 
-export default DisableDialog;
+export const AddMCPDialog = inject(({ aiSettingsStore }: TStore) => {
+  return {
+    addNewMCP: aiSettingsStore.addNewMCP,
+  };
+})(observer(AddMCPDialogComponent));

@@ -27,19 +27,12 @@
 import { TCreatedBy } from "../../types";
 import { ContentType, ProviderType, RoleType, ServerType } from "./enums";
 
-export type TCreateAiProvider =
-  | {
-      type: ProviderType;
-      title: string;
-      key: string;
-      url?: undefined;
-    }
-  | {
-      type: ProviderType.OpenAiCompatible;
-      title: string;
-      key: string;
-      url: string;
-    };
+export type TCreateAiProvider = {
+  type: ProviderType;
+  title: string;
+  key: string;
+  url: string;
+};
 
 export type TAiProvider = {
   id: number;
@@ -50,13 +43,15 @@ export type TAiProvider = {
   modifiedOn: string;
 };
 
-export type TUpdateAiProviders = {
+export type TUpdateAiProvider = {
   title?: TCreateAiProvider["title"];
   key?: TCreateAiProvider["key"];
   url?: TCreateAiProvider["url"];
 };
 
 export type TDeleteAiProviders = { ids: TAiProvider["id"][] };
+
+export type TProviderTypeWithUrl = Pick<TAiProvider, "type" | "url">;
 
 export type TModel = {
   providerId: TAiProvider["id"];
@@ -125,4 +120,18 @@ export type TVectorizeOperation = {
   isCompleted: boolean;
   percentage: number;
   status: number;
+};
+
+export type TAddNewServer = {
+  endpoint: string;
+  name: string;
+  description: string;
+  headers: Record<string, string>;
+};
+
+export type TUpdateServer = {
+  endpoint: string;
+  name: string;
+  description?: string;
+  headers?: Record<string, string>;
 };

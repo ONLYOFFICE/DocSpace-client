@@ -33,7 +33,7 @@ import { ToolsPermission } from "./enums";
 import {
   TCreateAiProvider,
   TAiProvider,
-  TUpdateAiProviders,
+  TUpdateAiProvider,
   TDeleteAiProviders,
   TModelList,
   TChat,
@@ -41,6 +41,9 @@ import {
   TMCPTool,
   TServer,
   TVectorizeOperation,
+  type TProviderTypeWithUrl,
+  type TAddNewServer,
+  type TUpdateServer,
 } from "./types";
 
 const baseUrl = "/ai";
@@ -66,7 +69,7 @@ export const getProviders = async () => {
 
 export const updateProvider = async (
   providerId: TAiProvider["id"],
-  data: TUpdateAiProviders,
+  data: TUpdateAiProvider,
 ) => {
   const res = (await request({
     method: "put",
@@ -77,12 +80,21 @@ export const updateProvider = async (
   return res;
 };
 
-export const deleteProvider = async (data: TDeleteAiProviders) => {
+export const deleteProviders = async (data: TDeleteAiProviders) => {
   const res = (await request({
     method: "delete",
     url: `${baseUrl}/providers`,
     data,
   })) as TDeleteAiProviders;
+
+  return res;
+};
+
+export const getAvailableProviderUrls = async () => {
+  const res = (await request({
+    method: "get",
+    url: `${baseUrl}/providers/available`,
+  })) as TProviderTypeWithUrl[];
 
   return res;
 };
@@ -222,11 +234,15 @@ export const deleteChat = async (chatId: string) => {
   });
 };
 
-export const getServersList = async (startIndex: number, count: number) => {
+export const getServersList = async (startIndex: number, count?: number) => {
   try {
     const res = await request({
       method: "get",
-      url: `${baseUrl}/servers?startIndex=${startIndex}&count=${count}`,
+      url: `${baseUrl}/servers`,
+      params: {
+        startIndex,
+        count,
+      },
     });
 
     return res as { items: TServer[]; total: number };
@@ -251,52 +267,30 @@ export const getAvailableServersList = async (
   }
 };
 
-export const addNewServer = async (
-  endpoint: string,
-  name: string,
-  description: string,
-  headers: Record<string, string>,
-) => {
-  try {
-    return (await request({
-      method: "post",
-      url: `${baseUrl}/servers`,
-      data: { endpoint, name, description, headers },
-    })) as TServer;
-  } catch (e) {
-    console.log(e);
-  }
+export const addNewServer = async (data: TAddNewServer) => {
+  return (await request({
+    method: "post",
+    url: `${baseUrl}/servers`,
+    data,
+  })) as TServer;
 };
 
-export const updateServer = async (
-  serverId: string,
-  endpoint: string,
-  name: string,
-  description?: string,
-  headers?: Record<string, string>,
-  enabled?: boolean,
-) => {
-  try {
-    await request({
-      method: "put",
-      url: `${baseUrl}/servers/${serverId}`,
-      data: { endpoint, name, description, headers, enabled },
-    });
-  } catch (e) {
-    console.log(e);
-  }
+export const updateServer = async (serverId: string, data: TUpdateServer) => {
+  const res = await request({
+    method: "put",
+    url: `${baseUrl}/servers/${serverId}`,
+    data,
+  });
+
+  return res as TServer;
 };
 
 export const deleteServers = async (servers: string[]) => {
-  try {
-    await request({
-      method: "delete",
-      url: `${baseUrl}/servers`,
-      data: { servers },
-    });
-  } catch (e) {
-    console.log(e);
-  }
+  await request({
+    method: "delete",
+    url: `${baseUrl}/servers`,
+    data: { servers },
+  });
 };
 
 export const addServersForRoom = async (roomId: number, servers: string[]) => {
@@ -364,6 +358,19 @@ export const deleteServersForRoom = async (
   } catch (e) {
     console.log(e);
   }
+};
+
+export const updateServerStatus = async (
+  serverId: TServer["id"],
+  enabled: boolean,
+) => {
+  const res = await request({
+    method: "put",
+    url: `${baseUrl}/servers/${serverId}/status`,
+    data: { enabled },
+  });
+
+  return res as TServer;
 };
 
 export const getMCPToolsForRoom = async (room: number, mcpId: string) => {

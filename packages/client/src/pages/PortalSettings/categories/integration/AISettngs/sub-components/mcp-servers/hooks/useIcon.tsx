@@ -29,14 +29,14 @@ import { useTranslation } from "react-i18next";
 import resizeImage from "resize-image";
 
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
-import { Text } from "@docspace/shared/components/text";
+import { FieldContainer } from "@docspace/shared/components/field-container";
 import { toastr } from "@docspace/shared/components/toast";
 import { ONE_MEGABYTE } from "@docspace/shared/constants";
 
-import styles from "../MCPServers.module.scss";
+import styles from "../styles/AddEditDialog.module.scss";
 
 export const useIcon = () => {
-  const { t } = useTranslation(["MCPServers"]);
+  const { t } = useTranslation(["AISettings", "OAuth"]);
 
   const [icon, setIcon] = React.useState("");
 
@@ -90,17 +90,16 @@ export const useIcon = () => {
   const getIcon = () => icon;
 
   const iconComponent = (
-    <div className={styles.iconContainer}>
-      <Text fontSize="13px" lineHeight="20px" fontWeight={600}>
-        {t("MCPServers:IntegrationIcon")}
-      </Text>
+    <FieldContainer
+      className={styles.iconContainer}
+      labelText={t("AISettings:ServiceIcon")}
+      isRequired
+      isVertical
+      labelVisible
+      removeMargin
+    >
       <div className={styles.iconBlock}>
-        <img
-          className={styles.icon}
-          style={{ display: icon ? "block" : "none" }}
-          alt="img"
-          src={icon}
-        />
+        {icon ? <img className={styles.icon} alt="img" src={icon} /> : null}
         <SelectorAddButton
           label={t("OAuth:SelectNewImage")}
           onClick={onClick}
@@ -117,7 +116,7 @@ export const useIcon = () => {
         style={{ display: "none" }}
         accept="image/png, image/jpeg, image/svg+xml"
       />
-    </div>
+    </FieldContainer>
   );
 
   return {

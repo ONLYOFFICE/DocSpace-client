@@ -90,6 +90,7 @@ import OAuthStore from "./OAuthStore";
 import AiRoomStore from "./AiRoomStore";
 
 import BrandingStore from "./portal-settings/BrandingStore";
+import AISettingsStore from "./portal-settings/AISettingsStore";
 
 const aiRoomStore = new AiRoomStore();
 
@@ -359,6 +360,8 @@ const editGroupStore = new EditGroupStore(peopleStore);
 
 const brandingStore = new BrandingStore(settingsStore);
 
+const aiSettingsStore = new AISettingsStore();
+
 const store = {
   authStore,
   userStore,
@@ -424,6 +427,7 @@ const store = {
   guidanceStore,
 
   aiRoomStore,
+  aiSettingsStore,
 };
 
 export default store;

@@ -40,7 +40,7 @@ export const useBaseParams = (initialValues?: {
   url?: string;
   description?: string;
 }) => {
-  const { t } = useTranslation(["MCPServers", "Common", "OAuth"]);
+  const { t } = useTranslation(["AISettings", "Common", "OAuth"]);
 
   const [name, setName] = React.useState(initialValues?.name || "");
   const [url, setUrl] = React.useState(initialValues?.url || "");
@@ -91,7 +91,7 @@ export const useBaseParams = (initialValues?: {
   const baseParamsComponent = (
     <>
       <FieldContainer
-        labelText={t("MCPServers:IntegrationName")}
+        labelText={t("AISettings:IntegrationName")}
         isRequired
         isVertical
         removeMargin
@@ -110,7 +110,7 @@ export const useBaseParams = (initialValues?: {
         />
       </FieldContainer>
       <FieldContainer
-        labelText={t("MCPServers:IntegrationUrl")}
+        labelText={t("AISettings:IntegrationURL")}
         isRequired
         isVertical
         removeMargin
@@ -129,7 +129,7 @@ export const useBaseParams = (initialValues?: {
         />
       </FieldContainer>
       <FieldContainer
-        labelText={t("MCPServers:IntegrationDescription")}
+        labelText={t("Common:Description")}
         isRequired
         isVertical
         removeMargin

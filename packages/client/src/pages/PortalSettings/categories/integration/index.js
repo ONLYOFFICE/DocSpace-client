@@ -41,7 +41,6 @@ import SMTPSettings from "./SMTPSettings";
 import DocumentService from "./DocumentService";
 import PluginPage from "./Plugins";
 import AISettngs from "./AISettngs";
-import MCPServers from "./MCPServers";
 
 const IntegrationWrapper = (props) => {
   const {
@@ -85,13 +84,8 @@ const IntegrationWrapper = (props) => {
     },
     {
       id: "ai-settings",
-      name: t("AISettings"),
-      content: <AISettngs />,
-    },
-    {
-      id: "mcp-servers",
-      name: t("MCPServers"),
-      content: <MCPServers />,
+      name: standalone ? t("AISettings") : t("MCPServers"),
+      content: <AISettngs standalone />, // TODO: Change to standalone={standalone} when adding providers on stand is not needed
     },
   ];
 

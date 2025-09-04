@@ -24,51 +24,104 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { toastr } from "@docspace/shared/components/toast";
-import { Text } from "@docspace/shared/components/text";
+import { TServer, type TUpdateServer } from "@docspace/shared/api/ai/types";
+import { type TData, toastr } from "@docspace/shared/components/toast";
 
-type DeleteDialogProps = {
-  onSubmit: () => Promise<void>;
+import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
+
+import styles from "../../styles/AddEditDialog.module.scss";
+
+import { useAdvancedSettings } from "../../hooks/useAdvancedSettings";
+import { useBaseParams } from "../../hooks/useBaseParams";
+import { useIcon } from "../../hooks/useIcon";
+
+type EditDialogProps = {
+  server: TServer;
   onClose: VoidFunction;
+
+  updateMCP?: AISettingsStore["updateMCP"];
 };
 
-const DeleteDialog = ({ onSubmit, onClose }: DeleteDialogProps) => {
-  const { t } = useTranslation(["MCPServers", "Common", "OAuth"]);
+const EditMCPDialogComponent = ({
+  server,
+  onClose,
+  updateMCP,
+}: EditDialogProps) => {
+  const { t } = useTranslation(["AISettings", "Common", "OAuth"]);
 
   const [loading, setLoading] = React.useState(false);
 
+  const { getBaseParams, baseParamsComponent } = useBaseParams({
+    url: server?.endpoint,
+    name: server?.name,
+    description: server?.description,
+  });
+  const { headersComponent, getAPIHeaders } = useAdvancedSettings(
+    server?.headers,
+  );
+  const { iconComponent, getIcon } = useIcon();
+
   const onSubmitAction = async () => {
+    const headers = getAPIHeaders();
+    const baseParams = getBaseParams();
+
+    // TODO: Add icon to request after changing API
+    const icon = getIcon();
+    console.log(icon);
+
+    if (!baseParams) return;
+
+    setLoading(true);
+
+    const data: TUpdateServer = {
+      endpoint: baseParams.url,
+      name: baseParams.name,
+      description: baseParams.description,
+      headers,
+    };
+
     try {
-      await onSubmit();
-    } catch (error) {
-      console.error(error);
-      toastr.error(error as string);
+      await updateMCP?.(server.id, data);
+
+      toastr.success(t("AISettings:ServerUpdatedSuccess"));
+
+      onClose();
+    } catch (e) {
+      toastr.error(e as TData);
+      console.error(e);
     } finally {
       setLoading(false);
-      onClose();
     }
   };
 
   return (
-    <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>
-      <ModalDialog.Header>{t("MCPServers:DeleteServer")}</ModalDialog.Header>
+    <ModalDialog
+      visible
+      displayType={ModalDialogType.aside}
+      onClose={onClose}
+      withBodyScroll
+    >
+      <ModalDialog.Header>{t("AISettings:MCPServer")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text style={{ marginBottom: "16px" }}>
-          <Trans t={t} i18nKey="DeleteServerDescription" ns="MCPServers" />
-        </Text>
+        <div className={styles.bodyContainer}>
+          {iconComponent}
+          {baseParamsComponent}
+          {headersComponent}
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
           primary
           size={ButtonSize.normal}
-          label={t("Common:OKButton")}
+          label={t("Common:SaveButton")}
           scale
           onClick={onSubmitAction}
           isLoading={loading}
@@ -85,4 +138,8 @@ const DeleteDialog = ({ onSubmit, onClose }: DeleteDialogProps) => {
   );
 };
 
-export default DeleteDialog;
+export const EditMCPDialog = inject(({ aiSettingsStore }: TStore) => {
+  return {
+    updateMCP: aiSettingsStore.updateMCP,
+  };
+})(observer(EditMCPDialogComponent));

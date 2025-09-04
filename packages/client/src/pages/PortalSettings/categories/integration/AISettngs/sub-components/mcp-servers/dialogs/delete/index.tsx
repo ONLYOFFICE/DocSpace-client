@@ -25,87 +25,59 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { TServer } from "@docspace/shared/api/ai/types";
+import { toastr } from "@docspace/shared/components/toast";
+import { Text } from "@docspace/shared/components/text";
+import type { TServer } from "@docspace/shared/api/ai/types";
 
-import styles from "../../MCPServers.module.scss";
+import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
-import { useHeaders } from "../../hooks/useHeaders";
-import { useBaseParams } from "../../hooks/useBaseParams";
-import { useIcon } from "../../hooks/useIcon";
-
-type EditDialogProps = {
-  server: TServer;
-  onSubmit: (
-    endpoint: string,
-    name: string,
-    description: string,
-    headers: Record<string, string>,
-  ) => Promise<void>;
+type DeleteDialogProps = {
   onClose: VoidFunction;
+  serverId: TServer["id"];
+
+  deleteMCP?: AISettingsStore["deleteMCP"];
 };
 
-const EditDialog = ({ server, onSubmit, onClose }: EditDialogProps) => {
-  const { t } = useTranslation(["MCPServers", "Common", "OAuth"]);
+const DeleteDialogComponent = ({
+  onClose,
+  serverId,
+  deleteMCP,
+}: DeleteDialogProps) => {
+  const { t } = useTranslation(["AISettings", "Common", "OAuth"]);
 
   const [loading, setLoading] = React.useState(false);
 
-  const { getBaseParams, baseParamsComponent } = useBaseParams({
-    url: server?.endpoint,
-    name: server?.name,
-    description: server?.description,
-  });
-  const { headersComponent, getAPIHeaders } = useHeaders(server?.headers);
-  const { iconComponent, getIcon } = useIcon();
-
   const onSubmitAction = async () => {
-    const headers = getAPIHeaders();
-    const baseParams = getBaseParams();
-    const icon = getIcon();
-
-    if (!baseParams) return;
-
-    console.log(icon);
-
-    setLoading(true);
-
-    await onSubmit(
-      baseParams.url,
-      baseParams.name,
-      baseParams.description,
-      headers,
-    );
-
-    setLoading(false);
-
-    onClose();
+    try {
+      await deleteMCP?.(serverId);
+      toastr.success(t("AISettings:ServerRemovedSuccess"));
+    } catch (error) {
+      console.error(error);
+      toastr.error(error as string);
+    } finally {
+      setLoading(false);
+      onClose();
+    }
   };
 
   return (
-    <ModalDialog
-      visible
-      displayType={ModalDialogType.aside}
-      onClose={onClose}
-      withBodyScroll
-    >
-      <ModalDialog.Header>{t("MCPServers:MCPServer")}</ModalDialog.Header>
+    <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>
+      <ModalDialog.Header>{t("AISettings:DeleteServer")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <div className={styles.bodyContainer}>
-          {iconComponent}
-          {baseParamsComponent}
-          {headersComponent}
-        </div>
+        <Text>{t("AISettings:DeleteServerDescription")}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
           primary
           size={ButtonSize.normal}
-          label={t("Common:AddButton")}
+          label={t("Common:OKButton")}
           scale
           onClick={onSubmitAction}
           isLoading={loading}
@@ -122,4 +94,8 @@ const EditDialog = ({ server, onSubmit, onClose }: EditDialogProps) => {
   );
 };
 
-export default EditDialog;
+export const DeleteMCPDialog = inject(({ aiSettingsStore }: TStore) => {
+  return {
+    deleteMCP: aiSettingsStore.deleteMCP,
+  };
+})(observer(DeleteDialogComponent));

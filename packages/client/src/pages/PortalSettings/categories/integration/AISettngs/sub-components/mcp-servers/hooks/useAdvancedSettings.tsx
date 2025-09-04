@@ -24,25 +24,28 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import {
-  TextInput,
-  InputType,
   InputSize,
+  InputType,
+  TextInput,
 } from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
+import { Link, LinkType } from "@docspace/shared/components/link";
 
-import styles from "../MCPServers.module.scss";
+import styles from "../styles/AddEditDialog.module.scss";
 
-export const useHeaders = (initialValues?: Record<string, string>) => {
-  const { t } = useTranslation(["MCPServers"]);
+export const useAdvancedSettings = (initialValues?: Record<string, string>) => {
+  const { t } = useTranslation(["Common", "AISettings", "SingleSignOn"]);
+  const [showAdvancedSettings, setShowAdvancedSettings] =
+    useState(!!initialValues);
 
   const [headerCounts, setHeaderCounts] = React.useState(
-    initialValues ? Object.keys(initialValues).length : 0,
+    initialValues ? Object.keys(initialValues).length : 1,
   );
   const [headerNames, setHeaderNames] = React.useState<Record<string, string>>(
     () => {
@@ -87,49 +90,61 @@ export const useHeaders = (initialValues?: Record<string, string>) => {
 
   const headersComponent = (
     <>
-      <Text fontSize="16px" lineHeight="22px" fontWeight={700}>
-        {t("MCPServers:IntegrationHeaders")}
-      </Text>
-      <div className={styles.headersContainer}>
-        {Array.from({ length: headerCounts }).map((_, index) => (
-          <React.Fragment key={`header-${index * 2}`}>
-            <FieldContainer
-              labelText={t("MCPServers:IntegrationHeaderName")}
-              isVertical
-              removeMargin
-              labelVisible
-            >
-              <TextInput
-                type={InputType.text}
-                size={InputSize.base}
-                value={headerNames[index]}
-                onChange={(e) => onChangeHeaderName(index, e.target.value)}
-                placeholder={t("MCPServers:EnterHeaderName")}
-                scale
-              />
-            </FieldContainer>
-            <FieldContainer
-              labelText={t("MCPServers:IntegrationHeaderValue")}
-              isVertical
-              removeMargin
-              labelVisible
-            >
-              <TextInput
-                type={InputType.text}
-                size={InputSize.base}
-                value={headerValues[index]}
-                onChange={(e) => onChangeHeaderValue(index, e.target.value)}
-                placeholder={t("MCPServers:EnterHeaderValue")}
-                scale
-              />
-            </FieldContainer>
-          </React.Fragment>
-        ))}
+      <div className={styles.advancedSettings}>
+        <Text fontSize="16px" lineHeight="22px" fontWeight={700}>
+          {t("SingleSignOn:AdvancedSettings")}
+        </Text>
+        <Link
+          onClick={() => setShowAdvancedSettings(!showAdvancedSettings)}
+          type={LinkType.action}
+        >
+          {t(showAdvancedSettings ? "Common:Hide" : "SingleSignOn:Show")}
+        </Link>
       </div>
-      <SelectorAddButton
-        label={t("MCPServers:AddMoreHeaders")}
-        onClick={onAddNewHeader}
-      />
+      {showAdvancedSettings ? (
+        <div>
+          <div className={styles.headersContainer}>
+            {Array.from({ length: headerCounts }).map((_, index) => (
+              <React.Fragment key={`header-${index * 2}`}>
+                <FieldContainer
+                  labelText={t("AISettings:HeaderName")}
+                  isVertical
+                  removeMargin
+                  labelVisible
+                >
+                  <TextInput
+                    type={InputType.text}
+                    size={InputSize.base}
+                    value={headerNames[index]}
+                    onChange={(e) => onChangeHeaderName(index, e.target.value)}
+                    placeholder={t("AISettings:EnterLabel")}
+                    scale
+                  />
+                </FieldContainer>
+                <FieldContainer
+                  labelText={t("AISettings:HeaderValue")}
+                  isVertical
+                  removeMargin
+                  labelVisible
+                >
+                  <TextInput
+                    type={InputType.text}
+                    size={InputSize.base}
+                    value={headerValues[index]}
+                    onChange={(e) => onChangeHeaderValue(index, e.target.value)}
+                    placeholder={t("AISettings:EnterValue")}
+                    scale
+                  />
+                </FieldContainer>
+              </React.Fragment>
+            ))}
+          </div>
+          <SelectorAddButton
+            label={t("AISettings:AddMoreHeaders")}
+            onClick={onAddNewHeader}
+          />
+        </div>
+      ) : null}
     </>
   );
 

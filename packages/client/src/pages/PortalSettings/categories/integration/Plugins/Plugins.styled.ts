@@ -39,7 +39,6 @@ const StyledEmptyContainer = styled.div`
 const StyledUploadDescription = styled.div.attrs(injectDefaultTheme)`
   .upload-description-text {
     max-width: 700px;
-    margin-bottom: 8px;
     color: ${(props) => props.theme.client.settings.common.descriptionColor};
     line-height: 20px;
   }
@@ -47,6 +46,7 @@ const StyledUploadDescription = styled.div.attrs(injectDefaultTheme)`
   .link-learn-more {
     display: inline-block;
     font-weight: 600;
+    margin-top: 8px;
   }
 `;
 

@@ -137,7 +137,6 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
       style,
       countDownTime,
       isCampaigns,
-      onAction,
       sectionWidth,
       backgroundColor = globalColors.lightToastAlert,
       opacity,

@@ -24,10 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useState } from "react";
 import classNames from "classnames";
 
-import { InputSize, TextInput } from "../text-input";
+import { TextInput } from "../text-input";
 import { IconButton } from "../icon-button";
 
 import { InputBlockProps } from "./InputBlock.types";

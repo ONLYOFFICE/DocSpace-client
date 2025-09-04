@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import ShareSkeleton from "./index";
 import i18nextStoryDecorator from "../../.storybook/decorators/i18nextStoryDecorator";
 
-const ShareSkeletonWithTranslation = (props: any) => {
+const ShareSkeletonWithTranslation = (props: object) => {
   const { t } = useTranslation();
   return <ShareSkeleton t={t} {...props} />;
 };

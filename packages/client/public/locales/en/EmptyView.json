@@ -21,7 +21,7 @@
   "EmptyGroupsCreateGroupOptionDescription": "Create a group to add them to the room",
   "EmptyRecentDescription": "All recent files opened in the portal end up in this section. Files are stored for 90 days",
   "EmptyRootRoomUserDescription": "The shared room will appear here.",
-  "EmptyShareDescription": "Here you'll find files and folders shared with you by other DocSpace members. Own files and room content are not shown here.",
+  "EmptyShareDescription": "Here you'll find files and folders shared with you by other {{productName}} members. Own files and room content are not shown here.",
   "EmptyRootRoomUserTitle": "There are no rooms here yet",
   "EmptyTemplatesDescription": "You can create a template from a room in the Room section",
   "EmptyTemplatesTitle": "No templates here yet",

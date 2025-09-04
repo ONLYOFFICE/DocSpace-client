@@ -198,7 +198,11 @@ export const getRootDescription = (
     .with([FolderType.USER, P.when(() => security?.Create)], () =>
       t("EmptyView:DefaultFolderDescription"),
     )
-    .with([FolderType.SHARE, P._], () => t("EmptyView:EmptyShareDescription"))
+    .with([FolderType.SHARE, P._], () =>
+      t("EmptyView:EmptyShareDescription", {
+        productName: t("Common:ProductName"),
+      }),
+    )
     .with([FolderType.Recent, P._], () => t("EmptyView:EmptyRecentDescription"))
     .with([FolderType.Favorites, P._], () =>
       t("EmptyView:EmptyFavoritesDescription"),

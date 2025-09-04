@@ -12,10 +12,6 @@ module.exports = [
         sourceType: "module",
       },
     },
-    rules: {
-      "@typescript-eslint/no-explicit-any": "off",
-      "@typescript-eslint/no-unused-expressions": "off",
-    },
     settings: {
       "import/resolver": {
         webpack: {

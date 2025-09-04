@@ -488,8 +488,7 @@ const useEditorEvents = ({
           }),
         );
 
-        usersNotFound &&
-          usersNotFound.length > 0 &&
+        if (usersNotFound && usersNotFound.length > 0) {
           docEditor?.showMessage?.(
             t
               ? t("UsersWithoutAccess", {
@@ -497,6 +496,7 @@ const useEditorEvents = ({
                 })
               : "",
           );
+        }
       } catch (e) {
         toastr.error(e as TData);
       }
@@ -599,25 +599,27 @@ const useEditorEvents = ({
       setDocSaved(!(event as { data: boolean }).data);
 
       setTimeout(() => {
-        docSaved
-          ? setDocumentTitle(
-              t,
-              docTitle,
-              config?.document.fileType ?? "",
-              documentReady,
-              successAuth ?? false,
-              organizationName,
-              setDocTitle,
-            )
-          : setDocumentTitle(
-              t,
-              `*${docTitle}`,
-              config?.document.fileType ?? "",
-              documentReady,
-              successAuth ?? false,
-              organizationName,
-              setDocTitle,
-            );
+        if (docSaved) {
+          setDocumentTitle(
+            t,
+            docTitle,
+            config?.document.fileType ?? "",
+            documentReady,
+            successAuth ?? false,
+            organizationName,
+            setDocTitle,
+          );
+        } else {
+          setDocumentTitle(
+            t,
+            `*${docTitle}`,
+            config?.document.fileType ?? "",
+            documentReady,
+            successAuth ?? false,
+            organizationName,
+            setDocTitle,
+          );
+        }
       }, 500);
     },
     [

@@ -500,7 +500,7 @@ export type ConflictStateType = {
   resolve: (
     value: ConflictResolveType | PromiseLike<ConflictResolveType>,
   ) => void;
-  reject: (reason?: any) => void;
+  reject: (reason?: unknown) => void;
   fileName: string;
   folderName: string;
 };

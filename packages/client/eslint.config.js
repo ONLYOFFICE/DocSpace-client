@@ -24,7 +24,6 @@ module.exports = [
       "no-bitwise": "off",
       eqeqeq: "off",
       "@typescript-eslint/no-explicit-any": "off",
-      "react/forbid-prop-types": "off",
       "class-methods-use-this": "off",
       "@typescript-eslint/no-loop-func": "off",
       "react/prop-types": "off",

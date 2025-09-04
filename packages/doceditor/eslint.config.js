@@ -37,7 +37,6 @@ module.exports = [
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-loop-func": "off",
       "@typescript-eslint/no-unused-expressions": "off",
-      "react-hooks/exhaustive-deps": "off",
       "import/no-named-as-default": "off",
       "global-require": "off",
       "@typescript-eslint/no-implied-eval": "off",

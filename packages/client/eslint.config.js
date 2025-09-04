@@ -13,11 +13,9 @@ module.exports = [
       },
     },
     rules: {
-      "no-console": "off",
       "no-continue": "off",
       "no-fallthrough": "off",
       "no-await-in-loop": "off",
-      "no-useless-escape": "off",
       "react/no-danger": "off",
       "@typescript-eslint/naming-convention": "off",
       "jsx-a11y/aria-role": "off",
@@ -31,7 +29,6 @@ module.exports = [
       "@typescript-eslint/no-loop-func": "off",
       "react/prop-types": "off",
       "@typescript-eslint/no-unused-expressions": "off",
-      "jsx-a11y/tabindex-no-positive": "off",
       "react-hooks/exhaustive-deps": "off",
     },
     settings: {

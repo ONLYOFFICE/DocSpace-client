@@ -92,54 +92,46 @@ const PluginDialog = ({
     if (modalRequestRunning) return;
     const message = await onClose();
 
-    messageActions(
+    messageActions({
       message,
-      null,
-
       pluginName,
-
       setSettingsPluginDialogVisible,
       setCurrentSettingsDialogPlugin,
       updatePluginStatus,
-      null,
       setPluginDialogVisible,
       setPluginDialogProps,
-
       updateContextMenuItems,
       updateInfoPanelItems,
       updateMainButtonItems,
       updateProfileMenuItems,
       updateEventListenerItems,
       updateFileItems,
-    );
+    });
   };
 
   React.useEffect(() => {
     if (eventListeners) {
       eventListeners.forEach((e) => {
         const onAction = async (evt) => {
+          setModalRequestRunning(true);
           const message = await e.onAction(evt);
+          setModalRequestRunning(false);
 
-          messageActions(
+          messageActions({
             message,
-            null,
-
             pluginName,
-
             setSettingsPluginDialogVisible,
             setCurrentSettingsDialogPlugin,
             updatePluginStatus,
-            null,
             setPluginDialogVisible,
             setPluginDialogProps,
-
             updateContextMenuItems,
             updateInfoPanelItems,
             updateMainButtonItems,
             updateProfileMenuItems,
             updateEventListenerItems,
             updateFileItems,
-          );
+          });
         };
 
         functionsRef.current.push(onAction);
@@ -181,6 +173,7 @@ const PluginDialog = ({
           props: dialogBodyProps,
         }}
         setModalRequestRunning={setModalRequestRunning}
+        modalRequestRunning={modalRequestRunning}
       />
     </StyledFullScreen>
   ) : (
@@ -200,6 +193,7 @@ const PluginDialog = ({
             props: dialogBodyProps,
           }}
           setModalRequestRunning={setModalRequestRunning}
+          modalRequestRunning={modalRequestRunning}
         />
       </ModalDialog.Body>
       {dialogFooterProps ? (
@@ -211,6 +205,7 @@ const PluginDialog = ({
               props: dialogFooterProps,
             }}
             setModalRequestRunning={setModalRequestRunning}
+            modalRequestRunning={modalRequestRunning}
           />
         </ModalDialog.Footer>
       ) : null}

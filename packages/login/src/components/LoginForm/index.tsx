@@ -219,7 +219,7 @@ const LoginForm = ({
   }, [authCallback, currentCulture]);
 
   useEffect(() => {
-    message && setErrorText(message);
+    if (message) setErrorText(message);
     const confirmedData = sessionStorage?.getItem("confirmedData");
     let email;
 
@@ -313,7 +313,7 @@ const LoginForm = ({
       console.error("parse error", e);
     }
 
-    isDesktop && checkPwd();
+    if (isDesktop) checkPwd();
     const session = !isChecked;
 
     if (client?.isPublic && hash) {
@@ -507,7 +507,7 @@ const LoginForm = ({
   ]);
 
   const onBlurEmail = () => {
-    !identifierValid && setIsEmailErrorShow(true);
+    if (!identifierValid) setIsEmailErrorShow(true);
   };
 
   const onValidateEmail = (res: TValidate) => {

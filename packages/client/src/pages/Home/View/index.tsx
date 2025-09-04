@@ -26,7 +26,7 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { useLocation, useParams } from "react-router";
+import { useLocation } from "react-router";
 
 import Chat from "@docspace/shared/components/chat";
 import { Consumer } from "@docspace/shared/utils";
@@ -136,7 +136,6 @@ const View = ({
   setIsProfileLoaded,
 }: ViewProps) => {
   const location = useLocation();
-  const { room } = useParams();
 
   const isContactsPage = location.pathname.includes("accounts");
   const isProfilePage = location.pathname.includes("profile");
@@ -365,7 +364,7 @@ const View = ({
           ) : currentView === "chat" ? (
             <Chat
               userAvatar={userAvatar}
-              roomId={room!}
+              roomId={selectedFolderStore.id!}
               getIcon={getIcon}
               selectedModel={chatSettings?.modelId ?? ""}
               isLoading={showBodyLoader}

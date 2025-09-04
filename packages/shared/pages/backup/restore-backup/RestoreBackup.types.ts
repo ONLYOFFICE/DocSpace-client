@@ -46,7 +46,7 @@ export interface RestoreBackupProps {
   isEnableRestore: boolean;
   navigate: (path: string) => void;
   settingsFileSelector: FilesSelectorSettings;
-  //isInitialLoading: boolean;
+  isInitialLoading: boolean;
   // settingsStore
   standalone: boolean;
   setTenantStatus: (tenantStatus: TenantStatus) => void;

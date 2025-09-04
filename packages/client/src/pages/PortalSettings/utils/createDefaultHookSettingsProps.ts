@@ -43,6 +43,7 @@ import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { AuthStore } from "@docspace/shared/store/AuthStore";
 import PaymentStore from "SRC_DIR/store/PaymentStore";
 import ServicesStore from "SRC_DIR/store/ServicesStore";
+import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
 
 export interface DefaultHookSettingsPropsParams {
   loadBaseInfo?: (page: string) => Promise<void>;
@@ -50,7 +51,6 @@ export interface DefaultHookSettingsPropsParams {
   settingsStore?: SettingsStore;
   tfaStore?: TfaStore;
   backupStore?: BackupStore;
-  treeFoldersStore?: TreeFoldersStore;
   setup?: SetupStore;
   authStore?: AuthStore;
   currentQuotaStore?: CurrentQuotasStore;
@@ -65,6 +65,7 @@ export interface DefaultHookSettingsPropsParams {
   common?: CommonStore;
   paymentStore?: PaymentStore;
   servicesStore?: ServicesStore;
+  currentTariffStatusStore?: CurrentTariffStatusStore;
 }
 
 export const createDefaultHookSettingsProps = ({
@@ -73,7 +74,6 @@ export const createDefaultHookSettingsProps = ({
   settingsStore,
   tfaStore,
   backupStore,
-  treeFoldersStore,
   setup,
   authStore,
   currentQuotaStore,
@@ -88,6 +88,7 @@ export const createDefaultHookSettingsProps = ({
   common,
   paymentStore,
   servicesStore,
+  currentTariffStatusStore,
 }: DefaultHookSettingsPropsParams) => ({
   common: {
     loadBaseInfo,
@@ -117,14 +118,18 @@ export const createDefaultHookSettingsProps = ({
   },
   backup: {
     getProgress: backupStore?.getProgress,
-    rootFoldersTitles: treeFoldersStore?.rootFoldersTitles,
-    fetchTreeFolders: treeFoldersStore?.fetchTreeFolders,
     setStorageRegions: backupStore?.setStorageRegions,
     setThirdPartyStorage: backupStore?.setThirdPartyStorage,
     setConnectedThirdPartyAccount: backupStore?.setConnectedThirdPartyAccount,
     setBackupSchedule: backupStore?.setBackupSchedule,
     setDefaultOptions: backupStore?.setDefaultOptions,
     language: authStore?.language,
+    isBackupPaid: currentQuotaStore?.isBackupPaid,
+    maxFreeBackups: currentQuotaStore?.maxFreeBackups,
+    setServiceQuota: paymentStore?.setServiceQuota,
+    fetchPayerInfo: currentTariffStatusStore?.fetchPayerInfo,
+    setBackupsCount: backupStore?.setBackupsCount,
+    setIsInited: backupStore?.setIsInited,
   },
   integration: {
     isSSOAvailable: currentQuotaStore?.isSSOAvailable,

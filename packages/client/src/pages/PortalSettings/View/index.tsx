@@ -78,7 +78,6 @@ const View = ({
   settingsStore,
   tfaStore,
   backupStore,
-  treeFoldersStore,
   ssoFormStore,
   init,
   standaloneInit,
@@ -95,6 +94,7 @@ const View = ({
   common,
   paymentStore,
   servicesStore,
+  currentTariffStatusStore,
 }: any) => {
   const location = useLocation();
 
@@ -124,7 +124,6 @@ const View = ({
     settingsStore,
     tfaStore,
     backupStore,
-    treeFoldersStore,
     setup,
     authStore,
     currentQuotaStore,
@@ -139,6 +138,7 @@ const View = ({
     common,
     paymentStore,
     servicesStore,
+    currentTariffStatusStore,
   });
 
   const { getCommonInitialValue } = useCommon(defaultProps.common);
@@ -335,7 +335,6 @@ export const ViewComponent = inject(
     settingsStore,
     tfaStore,
     backup,
-    treeFoldersStore,
     authStore,
     currentQuotaStore,
     ssoStore,
@@ -350,6 +349,7 @@ export const ViewComponent = inject(
     ldapStore,
     paymentStore,
     servicesStore,
+    currentTariffStatusStore,
   }: TStore) => {
     const { initSettings: initSettingsCommon } = common;
 
@@ -375,8 +375,7 @@ export const ViewComponent = inject(
       setup,
       settingsStore,
       tfaStore,
-      backup: backup,
-      treeFoldersStore,
+      backupStore: backup,
       authStore,
       currentQuotaStore,
       ssoStore,
@@ -390,6 +389,7 @@ export const ViewComponent = inject(
       common,
       paymentStore,
       servicesStore,
+      currentTariffStatusStore,
 
       // Direct values needed in safeProps
       isMobileView,

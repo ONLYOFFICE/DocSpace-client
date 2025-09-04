@@ -47,6 +47,7 @@ export type UseIntegrationProps = {
   getDocumentServiceLocation?: FilesSettingsStore["getDocumentServiceLocation"];
   loadLDAP?: LdapFormStore["load"];
   isLdapAvailable?: CurrentQuotasStore["isLdapAvailable"];
+  isThirdPartyAvailable?: CurrentQuotasStore["isThirdPartyAvailable"];
 };
 
 const useIntegration = ({
@@ -60,6 +61,7 @@ const useIntegration = ({
   getDocumentServiceLocation,
   loadLDAP,
   isLdapAvailable,
+  isThirdPartyAvailable,
 }: UseIntegrationProps) => {
   const { t } = useTranslation(["Ldap", "Settings", "Common"]);
 
@@ -81,7 +83,7 @@ const useIntegration = ({
 
   const getThirdPartyData = useCallback(() => {
     const urlParts = window.location.href.split("?");
-    if (urlParts.length > 1) {
+    if (urlParts.length > 1 && isThirdPartyAvailable) {
       const queryValue = urlParts[1].split("=")[1];
       fetchAndSetConsumers?.(queryValue).then(
         (isConsumerExist) => isConsumerExist && setOpenThirdPartyModal(true),

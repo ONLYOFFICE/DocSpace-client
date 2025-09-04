@@ -29,7 +29,7 @@ import type { TTranslation } from "@docspace/shared/types";
 
 export type ExternalAutoBackupWrapperProps = Pick<
   AutomaticBackupProps,
-  "buttonSize" | "isNeedFilePath"
+  "buttonSize" | "isNeedFilePath" | "isEmptyContentBeforeLoader" | "isInitialLoading" | "isInitialError"
 >;
 
 export interface InjectedAutoBackupWrapperProps

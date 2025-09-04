@@ -171,6 +171,12 @@ class BackupStore {
 
   isInited = false;
 
+  isEmptyContentBeforeLoader = true;
+
+  isInitialLoading = false;
+
+  isInitialError = false;
+
   constructor(
     authStore,
     thirdPartyStore,
@@ -188,6 +194,18 @@ class BackupStore {
     this.settingsStore = settingsStore;
     this.paymentStore = paymentStore;
   }
+
+  setIsInitialError = (isInitialError) => {
+    this.isInitialError = isInitialError;
+  };
+
+  setIsInitialLoading = (isInitialLoading) => {
+    this.isInitialLoading = isInitialLoading;
+  };
+
+  setIsEmptyContentBeforeLoader = (isEmptyContentBeforeLoader) => {
+    this.isEmptyContentBeforeLoader = isEmptyContentBeforeLoader;
+  };
 
   setBackupsCount = (counts) => {
     if (counts === undefined || counts === null) return;

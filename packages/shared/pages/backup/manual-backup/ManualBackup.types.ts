@@ -61,7 +61,7 @@ export interface ManualBackupProps {
   maxWidth?: string;
   buttonSize?: ButtonSize;
   isNeedFilePath?: boolean;
-  isInitialLoading?: boolean;
+  isInitialLoading: boolean;
   settingsFileSelector: FilesSelectorSettings;
   isEmptyContentBeforeLoader: boolean;
 

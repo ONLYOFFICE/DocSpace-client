@@ -131,7 +131,7 @@ export const Default: Story = {
     settingsFileSelector: {
       getIcon: () => "",
     },
-    // isInitialLoading: false,
+    isInitialLoading: false,
     standalone: false,
     setTenantStatus: () => {},
     errorInformation: "",
@@ -218,7 +218,7 @@ export const Disabled: Story = {
 export const Loading: Story = {
   args: {
     ...Default.args,
-    // isInitialLoading: true,
+    isInitialLoading: true,
   },
 };
 

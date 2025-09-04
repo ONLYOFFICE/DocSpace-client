@@ -249,7 +249,7 @@ const Restore = ({
 
   return (
     <RestoreBackup
-      // isInitialLoading={false}
+      isInitialLoading={false}
       removeItem={selectedThirdPartyAccount as ThirdPartyAccountType}
       buttonSize={ButtonSize.normal}
       isEnableRestore={isEnableRestore}

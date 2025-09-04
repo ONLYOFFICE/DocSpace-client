@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { observer, inject } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -58,6 +58,10 @@ const AutoBackupWrapper = ({
   fetchPayerInfo,
   isBackupPaid,
   maxFreeBackups,
+  isInitialLoading,
+  isEmptyContentBeforeLoader,
+  isInitialError,
+
   ...props
 }: AutoBackupWrapperProps) => {
   const { t, ready } = useTranslation(["Settings", "Common"]);
@@ -79,6 +83,10 @@ const AutoBackupWrapper = ({
       setBackupSchedule={setBackupSchedule}
       setThirdPartyStorage={setThirdPartyStorage}
       setConnectedThirdPartyAccount={setConnectedThirdPartyAccount}
+      isInitialLoading={isInitialLoading}
+      isEmptyContentBeforeLoader={isEmptyContentBeforeLoader}
+      setErrorInformation={setErrorInformation}
+      isInitialError={isInitialError}
       {...props}
     />
   );

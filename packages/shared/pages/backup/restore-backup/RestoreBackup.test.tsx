@@ -138,14 +138,14 @@ describe("RestoreBackup", () => {
     expect(screen.getByText(errorMessage)).toBeInTheDocument();
   });
 
-  // it("shows loading skeleton when isInitialLoading is true", () => {
-  //   const { rerender } = render(
-  //     <RestoreBackup {...defaultProps} isInitialLoading />,
-  //   );
+  it("shows loading skeleton when isInitialLoading is true", () => {
+    const { rerender } = render(
+      <RestoreBackup {...defaultProps} isInitialLoading />,
+    );
 
-  //   rerender(<RestoreBackup {...defaultProps} isInitialLoading={false} />);
-  //   expect(screen.getByTestId("restore-backup")).toBeInTheDocument();
-  // });
+    rerender(<RestoreBackup {...defaultProps} isInitialLoading={false} />);
+    expect(screen.getByTestId("restore-backup")).toBeInTheDocument();
+  });
 
   it("changes radio button state when clicked", async () => {
     render(<RestoreBackup {...defaultProps} />);

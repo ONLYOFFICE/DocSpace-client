@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { t } from "i18next";
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 
 import { getSettingsThirdParty } from "@docspace/shared/api/files";
 import {
@@ -36,39 +36,73 @@ import { getBackupSchedule } from "@docspace/shared/api/portal";
 import { toastr } from "@docspace/shared/components/toast";
 import { useDefaultOptions } from "@docspace/shared/pages/backup/auto-backup/hooks";
 import { isManagement } from "@docspace/shared/utils/common";
+import { getBackupsCount } from "@docspace/shared/api/backup";
 
 import { AuthStore } from "@docspace/shared/store/AuthStore";
+import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 
-import TreeFoldersStore from "SRC_DIR/store/TreeFoldersStore";
 import BackupStore from "SRC_DIR/store/BackupStore";
+import PaymentStore from "SRC_DIR/store/PaymentStore";
+import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
 
 export type UseBackupProps = {
   getProgress?: BackupStore["getProgress"];
-  rootFoldersTitles?: TreeFoldersStore["rootFoldersTitles"];
-  fetchTreeFolders?: TreeFoldersStore["fetchTreeFolders"];
   setStorageRegions?: BackupStore["setStorageRegions"];
   setThirdPartyStorage?: BackupStore["setThirdPartyStorage"];
   setConnectedThirdPartyAccount?: BackupStore["setConnectedThirdPartyAccount"];
   setBackupSchedule?: BackupStore["setBackupSchedule"];
   setDefaultOptions?: BackupStore["setDefaultOptions"];
   language?: AuthStore["language"];
+
+  isBackupPaid?: CurrentQuotasStore["isBackupPaid"];
+  maxFreeBackups?: CurrentQuotasStore["maxFreeBackups"];
+  setServiceQuota?: PaymentStore["setServiceQuota"];
+  fetchPayerInfo?: CurrentTariffStatusStore["fetchPayerInfo"];
+  setBackupsCount?: BackupStore["setBackupsCount"];
+  setIsInited?: BackupStore["setIsInited"];
+  setErrorInformation?: BackupStore["setErrorInformation"];
+
+  setIsInitialError?: BackupStore["setIsInitialError"];
+  setIsInitialLoading?: BackupStore["setIsInitialLoading"];
+  setIsEmptyContentBeforeLoader?: BackupStore["setIsEmptyContentBeforeLoader"];
+  isInitialLoading?: BackupStore["isInitialLoading"];
+  isInitialError?: BackupStore["isInitialError"];
+  isEmptyContentBeforeLoader?: BackupStore["isEmptyContentBeforeLoader"];
 };
 
 const useBackup = ({
   getProgress,
-  rootFoldersTitles,
-  fetchTreeFolders,
   setStorageRegions,
   setThirdPartyStorage,
   setConnectedThirdPartyAccount,
   setBackupSchedule,
   setDefaultOptions,
   language,
+
+  isBackupPaid,
+  maxFreeBackups,
+  setServiceQuota,
+  fetchPayerInfo,
+  setBackupsCount,
+  setIsInited,
+  setErrorInformation,
+
+  setIsInitialError,
+  setIsInitialLoading,
+  setIsEmptyContentBeforeLoader,
+  isInitialLoading,
+  isInitialError,
+  isEmptyContentBeforeLoader,
 }: UseBackupProps) => {
-  const { periodsObject, weekdaysLabelArray } = useDefaultOptions(t, language);
+  const { periodsObject, weekdaysLabelArray } = useDefaultOptions(
+    t,
+    language ?? "",
+  );
 
   const getManualBackupData = useCallback(async () => {
     try {
+      setIsInitialLoading?.(true);
+
       getProgress?.(t);
 
       const baseRequests = [
@@ -79,42 +113,73 @@ const useBackup = ({
 
       const optionalRequests = [];
 
-      if (!rootFoldersTitles || Object.keys(rootFoldersTitles).length === 0) {
-        optionalRequests.push(fetchTreeFolders?.());
+      if (isBackupPaid) {
+        if (maxFreeBackups && maxFreeBackups > 0) {
+          baseRequests.push(getBackupsCount());
+        }
+
+        optionalRequests.push(setServiceQuota?.());
+        optionalRequests.push(fetchPayerInfo?.());
       }
 
-      const [account, backupStorage, storageRegionsS3] = await Promise.all([
-        ...baseRequests,
-        ...optionalRequests,
-      ]);
+      const [account, backupStorage, storageRegionsS3, backupsCount] =
+        await Promise.all([...baseRequests, ...optionalRequests]);
 
       setConnectedThirdPartyAccount?.(account ?? null);
       setThirdPartyStorage?.(backupStorage);
       setStorageRegions?.(storageRegionsS3);
+
+      if (isBackupPaid) {
+        if (typeof backupsCount === "number") setBackupsCount?.(backupsCount);
+      }
+      setIsInited?.(true);
     } catch (error) {
       toastr.error(error as Error);
     }
+    setIsEmptyContentBeforeLoader?.(false);
+    setIsInitialLoading?.(false);
   }, [
     getProgress,
-    rootFoldersTitles,
-    fetchTreeFolders,
     setConnectedThirdPartyAccount,
     setThirdPartyStorage,
     setStorageRegions,
+    setBackupsCount,
+    setIsInited,
+    setServiceQuota,
+    fetchPayerInfo,
+    setIsEmptyContentBeforeLoader,
+    setIsInitialLoading,
   ]);
 
   const getAutoBackupData = useCallback(async () => {
     try {
-      if (Object.keys(rootFoldersTitles).length === 0) fetchTreeFolders?.();
+      setIsInitialLoading?.(true);
 
       getProgress?.(t);
-      const [account, backupSchedule, backupStorage, newStorageRegions] =
-        await Promise.all([
-          getSettingsThirdParty(),
-          getBackupSchedule(),
-          getBackupStorage(),
-          getStorageRegions(),
-        ]);
+
+      const baseRequests: (Promise<any> | undefined)[] = [
+        getSettingsThirdParty(),
+        getBackupSchedule(),
+        getBackupStorage(),
+        getStorageRegions(),
+      ];
+
+      const optionalRequests = [];
+      if (isBackupPaid) {
+        if (maxFreeBackups && maxFreeBackups > 0) {
+          baseRequests.push(getBackupsCount());
+        }
+        optionalRequests.push(setServiceQuota?.());
+        optionalRequests.push(fetchPayerInfo?.());
+      }
+
+      const [
+        account,
+        backupSchedule,
+        backupStorage,
+        newStorageRegions,
+        backupsCount,
+      ] = await Promise.all([...baseRequests, ...optionalRequests]);
 
       if (account) setConnectedThirdPartyAccount?.(account);
       if (backupStorage) setThirdPartyStorage?.(backupStorage);
@@ -122,20 +187,33 @@ const useBackup = ({
       setBackupSchedule?.(backupSchedule);
       setStorageRegions?.(newStorageRegions);
 
+      setIsInited?.(true);
+
+      if (isBackupPaid) {
+        if (typeof backupsCount === "number") setBackupsCount?.(backupsCount);
+      }
+
       setDefaultOptions?.(periodsObject, weekdaysLabelArray);
     } catch (error) {
+      setErrorInformation?.(error, t);
+      setIsInitialError?.(true);
       toastr.error(error as Error);
+    } finally {
+      setIsEmptyContentBeforeLoader?.(false);
+      setIsInitialLoading?.(false);
     }
   }, [
     getProgress,
-    rootFoldersTitles,
-    fetchTreeFolders,
     setConnectedThirdPartyAccount,
     setThirdPartyStorage,
     setStorageRegions,
     setBackupSchedule,
     setDefaultOptions,
-    language,
+    setBackupsCount,
+    setIsInited,
+    setServiceQuota,
+    fetchPayerInfo,
+    setErrorInformation,
   ]);
 
   const getRestoreBackupData = useCallback(async () => {
@@ -159,15 +237,19 @@ const useBackup = ({
     }
   }, [
     getProgress,
+
     setConnectedThirdPartyAccount,
     setThirdPartyStorage,
     setStorageRegions,
   ]);
 
   const getBackupInitialValue = React.useCallback(async () => {
+    console.log("here");
     const actions = [];
-    if (window.location.pathname.includes("data-backup"))
+    if (window.location.pathname.includes("data-backup")) {
+      console.log("data-backup");
       actions.push(getManualBackupData());
+    }
 
     if (window.location.pathname.includes("auto-backup"))
       actions.push(getAutoBackupData());
@@ -178,15 +260,16 @@ const useBackup = ({
     await Promise.all(actions);
   }, [getManualBackupData, getAutoBackupData, getRestoreBackupData]);
 
-  React.useEffect(() => {
-    //  if (window.location.pathname.includes("backup")) getBackupInitialValue();
-  }, [getBackupInitialValue]);
-
   return {
     getManualBackupData,
     getAutoBackupData,
     getRestoreBackupData,
     getBackupInitialValue,
+
+    isEmptyContentBeforeLoader,
+    setIsEmptyContentBeforeLoader,
+    isInitialLoading,
+    isInitialError,
   };
 };
 

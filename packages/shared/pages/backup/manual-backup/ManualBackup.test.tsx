@@ -194,24 +194,23 @@ describe("ManualBackup", () => {
     expect(screen.getByText("Common:ThirdPartyStorage")).toBeInTheDocument();
   });
 
-  // TODO: Enable these tests if loader and empty content handling is reintroduced
-  // it("shows loader when isInitialLoading is true", () => {
-  //   render(<ManualBackup {...defaultProps} isInitialLoading />);
+  it("shows loader when isInitialLoading is true", () => {
+    render(<ManualBackup {...defaultProps} isInitialLoading />);
 
-  //   expect(screen.getByTestId("data-backup-loader")).toBeInTheDocument();
-  // });
+    expect(screen.getByTestId("data-backup-loader")).toBeInTheDocument();
+  });
 
-  // it("returns null when isEmptyContentBeforeLoader is true and isInitialLoading is false", () => {
-  //   const { container } = render(
-  //     <ManualBackup
-  //       {...defaultProps}
-  //       isEmptyContentBeforeLoader
-  //       isInitialLoading={false}
-  //     />,
-  //   );
+  it("returns null when isEmptyContentBeforeLoader is true and isInitialLoading is false", () => {
+    const { container } = render(
+      <ManualBackup
+        {...defaultProps}
+        isEmptyContentBeforeLoader
+        isInitialLoading={false}
+      />,
+    );
 
-  //   expect(container.firstChild).toBeNull();
-  // });
+    expect(container.firstChild).toBeNull();
+  });
 
   it("shows temporary storage by default and allows creating backup", async () => {
     render(<ManualBackup {...defaultProps} />);

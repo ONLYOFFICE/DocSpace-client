@@ -116,6 +116,7 @@ const getPaymentError = (
 };
 
 const ManualBackup = ({
+  isInitialLoading,
   buttonSize,
   temporaryLink,
   dataBackupUrl,
@@ -125,6 +126,7 @@ const ManualBackup = ({
   downloadingProgress,
   isBackupProgressVisible,
   basePath,
+  isEmptyContentBeforeLoader,
   isErrorPath,
   newPath,
   providers,
@@ -366,9 +368,9 @@ const ManualBackup = ({
     buttonSize,
   };
 
-  //if (isEmptyContentBeforeLoader && !isInitialLoading) return null;
+  if (isEmptyContentBeforeLoader && !isInitialLoading) return null;
 
-  // if (isInitialLoading) return <DataBackupLoader />;
+  if (isInitialLoading) return <DataBackupLoader />;
 
   const mainDisabled = !isMaxProgress || pageIsDisabled;
   const additionalDisabled =

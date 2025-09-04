@@ -52,8 +52,16 @@ export interface InjectedManualBackupProps
 export interface ExternalManualBackupProps
   extends Pick<
     ManualBackupProps,
-    "maxWidth" | "buttonSize" | "isNeedFilePath"
-  > {}
+    | "maxWidth"
+    | "buttonSize"
+    | "isNeedFilePath"
+    | "isInitialLoading"
+    | "isEmptyContentBeforeLoader"
+  > {
+  setIsEmptyContentBeforeLoader: (
+    value: boolean | ((prev: boolean) => boolean),
+  ) => void;
+}
 
 export interface ManualBackupWrapperProps
   extends InjectedManualBackupProps,

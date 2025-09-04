@@ -51,6 +51,7 @@ import config from "../../../../../package.json";
 import ManualBackup from "./backup/manual-backup";
 import AutoBackup from "./backup/auto-backup";
 import useBackup from "./backup/useBackup";
+import { createDefaultHookSettingsProps } from "../../utils/createDefaultHookSettingsProps";
 
 const DataManagementWrapper = (props) => {
   const {
@@ -62,17 +63,11 @@ const DataManagementWrapper = (props) => {
     currentDeviceType,
     standalone,
 
-    getProgress,
-    setStorageRegions,
-    setThirdPartyStorage,
-    setConnectedThirdPartyAccount,
-
-    setBackupSchedule,
-    setDefaultOptions,
-
-    rootFoldersTitles,
-    fetchTreeFolders,
-    language,
+    backup,
+    authStore,
+    currentQuotaStore,
+    paymentStore,
+    currentTariffStatusStore,
   } = props;
 
   const navigate = useNavigate();
@@ -82,6 +77,24 @@ const DataManagementWrapper = (props) => {
 
   const { interfaceDirection } = useTheme();
   const directionTooltip = interfaceDirection === "rtl" ? "left" : "right";
+
+  const defaultProps = createDefaultHookSettingsProps({
+    backupStore: backup,
+    authStore,
+    currentQuotaStore,
+    paymentStore,
+    currentTariffStatusStore,
+  });
+
+  const {
+    getManualBackupData,
+    getAutoBackupData,
+
+    isEmptyContentBeforeLoader,
+    isInitialLoading,
+    isInitialError,
+    setIsEmptyContentBeforeLoader,
+  } = useBackup(defaultProps.backup);
 
   const renderTooltip = (helpInfo, className) => {
     const isAutoBackupPage = window.location.pathname.includes(
@@ -120,34 +133,35 @@ const DataManagementWrapper = (props) => {
     );
   };
 
-  const { getManualBackupData, getAutoBackupData } = useBackup({
-    getProgress,
-    rootFoldersTitles,
-    fetchTreeFolders,
-    setStorageRegions,
-    setThirdPartyStorage,
-    setConnectedThirdPartyAccount,
-    setBackupSchedule,
-    setDefaultOptions,
-    language,
-  });
-
   const data = [
     {
       id: "data-backup",
       name: t("Common:DataBackup"),
       content: (
-        <ManualBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />
+        <ManualBackup
+          buttonSize={buttonSize}
+          renderTooltip={renderTooltip}
+          isEmptyContentBeforeLoader={isEmptyContentBeforeLoader}
+          setIsEmptyContentBeforeLoader={setIsEmptyContentBeforeLoader}
+          isInitialLoading={isInitialLoading}
+          isInitialError={isInitialError}
+        />
       ),
-      onClick: async () => getManualBackupData(),
+      onClick: getManualBackupData,
     },
     {
       id: "auto-backup",
       name: t("Common:AutoBackup"),
       content: (
-        <AutoBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />
+        <AutoBackup
+          buttonSize={buttonSize}
+          renderTooltip={renderTooltip}
+          isEmptyContentBeforeLoader={isEmptyContentBeforeLoader}
+          isInitialLoading={isInitialLoading}
+          isInitialError={isInitialError}
+        />
       ),
-      onClick: async () => getAutoBackupData(),
+      onClick: getAutoBackupData,
     },
   ];
 
@@ -216,70 +230,35 @@ const DataManagementWrapper = (props) => {
 export const Component = inject(
   ({
     settingsStore,
-    treeFoldersStore,
-    setup,
+    paymentStore,
     currentTariffStatusStore,
     currentQuotaStore,
     backup,
     authStore,
   }) => {
-    const { initSettings } = setup;
-
-    const { rootFoldersTitles, fetchTreeFolders } = treeFoldersStore;
-
-    const language = authStore.language;
-
-    const {
-      getProgress,
-      setStorageRegions,
-      setThirdPartyStorage,
-      setConnectedThirdPartyAccount,
-
-      setBackupSchedule,
-      setDefaultOptions,
-    } = backup;
-
-    const { isNotPaidPeriod } = currentTariffStatusStore;
-
     const {
       dataBackupUrl,
       automaticBackupUrl,
 
-      currentColorScheme,
       currentDeviceType,
       standalone,
     } = settingsStore;
-    const { setBackupsCount } = backup;
-    const { isFreeTariff, isNonProfit } = currentQuotaStore;
 
     const buttonSize =
       currentDeviceType !== DeviceType.desktop ? "normal" : "small";
     return {
-      loadBaseInfo: async () => {
-        await initSettings();
-      },
       dataBackupUrl,
       automaticBackupUrl,
       buttonSize,
-      isNotPaidPeriod,
-      currentColorScheme,
+
       currentDeviceType,
       standalone,
-      isFreeTariff,
-      isNonProfit,
-      setBackupsCount,
 
-      getProgress,
-      setStorageRegions,
-      setThirdPartyStorage,
-      setConnectedThirdPartyAccount,
-
-      setBackupSchedule,
-      setDefaultOptions,
-
-      rootFoldersTitles,
-      fetchTreeFolders,
-      language,
+      backup,
+      authStore,
+      currentQuotaStore,
+      paymentStore,
+      currentTariffStatusStore,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(DataManagementWrapper)));

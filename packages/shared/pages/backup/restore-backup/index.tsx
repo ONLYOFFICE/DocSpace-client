@@ -109,7 +109,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
     restoreResource,
     uploadLocalFile,
     isBackupProgressVisible,
-    // isInitialLoading,
+    isInitialLoading,
 
     errorInformation,
     setDownloadingProgress,
@@ -389,7 +389,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
     ? { onClick: onClickBackupList }
     : {};
 
-  // if (isInitialLoading) return <RestoreBackupLoader />;
+  if (isInitialLoading) return <RestoreBackupLoader />;
 
   return (
     <div

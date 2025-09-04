@@ -54,11 +54,11 @@ const ManualBackupWrapper = ({
   isBackupPaid,
   maxFreeBackups,
   setServiceQuota,
+  setIsEmptyContentBeforeLoader,
+  isEmptyContentBeforeLoader,
+  isInitialLoading,
   ...props
 }: ManualBackupWrapperProps) => {
-  const [isEmptyContentBeforeLoader, setIsEmptyContentBeforeLoader] =
-    useState(true);
-
   const { t } = useTranslation(["Settings", "Common"]);
 
   useLayoutEffect(() => {
@@ -88,8 +88,7 @@ const ManualBackupWrapper = ({
   return (
     <ManualBackup
       isNotPaidPeriod={isNotPaidPeriod}
-      // isInitialLoading={isInitialLoading}
-      //  rootFoldersTitles={rootFoldersTitles}
+      isInitialLoading={isInitialLoading}
       isEmptyContentBeforeLoader={isEmptyContentBeforeLoader}
       setConnectedThirdPartyAccount={setConnectedThirdPartyAccount}
       setDownloadingProgress={updateDownloadingProgress}

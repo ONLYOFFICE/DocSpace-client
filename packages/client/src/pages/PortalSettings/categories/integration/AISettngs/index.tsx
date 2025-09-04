@@ -53,7 +53,7 @@ const AISettngs = ({
   const { t, ready } = useTranslation("AISettings");
 
   useEffect(() => {
-    initAISettings?.(true);
+    initAISettings?.();
 
     return () => {
       setIsInit?.(false);

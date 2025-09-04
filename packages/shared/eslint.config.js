@@ -37,11 +37,6 @@ module.exports = [
       import: importPlugin,
       prettier,
     },
-    settings: {
-      react: {
-        version: "detect",
-      },
-    },
     rules: {
       // Custom rules
       "import/prefer-default-export": "off",
@@ -62,9 +57,6 @@ module.exports = [
       "no-return-assign": "off",
       "react/require-default-props": "off",
       "react/function-component-definition": "off",
-      "react/forbid-prop-types": "off",
-      "react/prop-types": "off",
-      "class-methods-use-this": "off",
       "no-console": "off",
       "no-useless-escape": "off",
       "no-param-reassign": "off",

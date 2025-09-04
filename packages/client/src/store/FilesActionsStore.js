@@ -2667,12 +2667,13 @@ class FilesActionStore {
     const canWebEdit = item.viewAccessibility?.WebEdit;
     const canViewedDocs = item.viewAccessibility?.WebView;
 
-    const { id, viewUrl, fileStatus, encrypted, isFolder, webUrl } = item;
+    const { id, viewUrl, fileStatus, encrypted, isFolder, webUrl, isRoom } =
+      item;
     if (encrypted && isPrivacyFolder) return checkProtocol(item.id, true);
 
     if (isRecycleBinFolder || isLoading) return;
 
-    if (isFolder) {
+    if (isFolder || isRoom) {
       const { url, state } = await createFolderNavigation(
         item,
         categoryType,

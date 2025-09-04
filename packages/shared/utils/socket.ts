@@ -356,20 +356,20 @@ const isEmitDataValid = (
  * @class
  * @example
  * // Retrieve the singleton instance
- * const socketHelper = SocketHelper.getInstance();
+ * const socketHelper = SocketHelper?.getInstance();
  *
  * // Establish a connection
- * socketHelper.connect('ws://example.com', 'publicRoomKey');
+ * SocketHelper?.connect('ws://example.com', 'publicRoomKey');
  *
  * // Emit a message
- * socketHelper.emit('message', { text: 'Hello, World!' });
+ * SocketHelper?.emit('message', { text: 'Hello, World!' });
  *
  * // Register an event listener
- * socketHelper.on('message', (data) => {
+ * SocketHelper?.on('message', (data) => {
  *   console.log('Received message:', data);
  * });
  * // Remove the event listener
- * socketHelper.on('message', (data) => {
+ * SocketHelper?.on('message', (data) => {
  *   console.log('Received message:', data);
  * });
  *
@@ -710,4 +710,4 @@ class SocketHelper {
   };
 }
 
-export default SocketHelper.getInstance();
+export default SocketHelper?.getInstance();

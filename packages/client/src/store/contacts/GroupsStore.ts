@@ -101,7 +101,7 @@ class GroupsStore {
 
     makeAutoObservable(this);
 
-    SocketHelper.on(
+    SocketHelper?.on(
       SocketEvents.AddGroup,
       async (value: { id: string; data: any }) => {
         const { contactsTab } = this.peopleStore.usersStore;
@@ -131,7 +131,7 @@ class GroupsStore {
       },
     );
 
-    SocketHelper.on(
+    SocketHelper?.on(
       SocketEvents.UpdateGroup,
       async (value: { id: string; data: any }) => {
         const { contactsTab } = this.peopleStore.usersStore;
@@ -161,7 +161,7 @@ class GroupsStore {
       },
     );
 
-    SocketHelper.on(SocketEvents.DeleteGroup, (id: string) => {
+    SocketHelper?.on(SocketEvents.DeleteGroup, (id: string) => {
       const { contactsTab } = this.peopleStore.usersStore;
 
       if (contactsTab !== "groups") {

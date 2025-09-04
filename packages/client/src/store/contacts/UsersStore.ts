@@ -288,15 +288,15 @@ class UsersStore {
       }
     };
 
-    SocketHelper.on(SocketEvents.AddUser, addUser);
-    SocketHelper.on(SocketEvents.AddGuest, addUser);
-    SocketHelper.on(SocketEvents.UpdateUser, updateUser);
-    SocketHelper.on(SocketEvents.UpdateGuest, updateUser);
-    SocketHelper.on(SocketEvents.DeleteUser, deleteUser);
-    SocketHelper.on(SocketEvents.DeleteGuest, deleteUser);
-    SocketHelper.on(SocketEvents.ChangeMyType, changeMyType);
+    SocketHelper?.on(SocketEvents.AddUser, addUser);
+    SocketHelper?.on(SocketEvents.AddGuest, addUser);
+    SocketHelper?.on(SocketEvents.UpdateUser, updateUser);
+    SocketHelper?.on(SocketEvents.UpdateGuest, updateUser);
+    SocketHelper?.on(SocketEvents.DeleteUser, deleteUser);
+    SocketHelper?.on(SocketEvents.DeleteGuest, deleteUser);
+    SocketHelper?.on(SocketEvents.ChangeMyType, changeMyType);
 
-    SocketHelper.on(
+    SocketHelper?.on(
       SocketEvents.UpdateGroup,
       async (value: { id: string; data: any }) => {
         console.log(
@@ -332,18 +332,18 @@ class UsersStore {
             : "users";
 
       if (
-        SocketHelper.socketSubscribers.has(this.roomParts) &&
+        SocketHelper?.socketSubscribers.has(this.roomParts) &&
         this.roomParts !== roomParts
       )
-        SocketHelper.emit(SocketCommands.Unsubscribe, {
+        SocketHelper?.emit(SocketCommands.Unsubscribe, {
           roomParts: this.roomParts,
           ...(this.roomParts === "guests" && { individual: true }),
         });
 
       this.roomParts = roomParts;
 
-      if (!SocketHelper.socketSubscribers.has(roomParts))
-        SocketHelper.emit(SocketCommands.Subscribe, {
+      if (!SocketHelper?.socketSubscribers.has(roomParts))
+        SocketHelper?.emit(SocketCommands.Subscribe, {
           roomParts,
           ...(roomParts === "guests" && { individual: true }),
         });

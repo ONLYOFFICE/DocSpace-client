@@ -404,7 +404,7 @@ class SelectedFolderStore {
           return (
             !selectedFolder?.navigationPath?.some((np) => np.id === p.id) &&
             !selectedFolder?.folders?.some((np) => np.id === p.id) &&
-            SocketHelper.socketSubscribers.has(`DIR-${p.id}`) &&
+            SocketHelper?.socketSubscribers.has(`DIR-${p.id}`) &&
             selectedFolder?.id !== p.id &&
             index !== navPath.length - 1
           );
@@ -413,7 +413,7 @@ class SelectedFolderStore {
 
     // if (
     //   currentId !== null &&
-    //   SocketHelper.socketSubscribers.has(`DIR-${currentId}`) &&
+    //   SocketHelper?.socketSubscribers.has(`DIR-${currentId}`) &&
     //   !selectedFolder?.navigationPath?.some((np) => np.id === currentId) &&
     //   !selectedFolder?.folders?.some((np) => np.id === currentId) &&
     //   !isRoot
@@ -426,31 +426,31 @@ class SelectedFolderStore {
     const socketSub = selectedFolder
       ? (selectedFolder.navigationPath
           ?.map((p) => `DIR-${p.id}`)
-          .filter((p) => !SocketHelper.socketSubscribers.has(p)) ?? [])
+          .filter((p) => !SocketHelper?.socketSubscribers.has(p)) ?? [])
       : [];
 
     if (
       selectedFolder &&
-      !SocketHelper.socketSubscribers.has(`DIR-${selectedFolder.id}`)
+      !SocketHelper?.socketSubscribers.has(`DIR-${selectedFolder.id}`)
     )
       socketSub.push(`DIR-${selectedFolder.id}`);
 
     if (socketUnsub.length > 0) {
-      SocketHelper.emit(SocketCommands.Unsubscribe, {
+      SocketHelper?.emit(SocketCommands.Unsubscribe, {
         roomParts: socketUnsub.map((p) => `DIR-${p.id}`),
         individual: true,
       });
     }
 
     if (isCurrentRecent && !isNewRecent) {
-      SocketHelper.emit(SocketCommands.Unsubscribe, {
+      SocketHelper?.emit(SocketCommands.Unsubscribe, {
         roomParts: `DIR-${currentId}`,
         individual: true,
       });
     }
 
     if (socketSub.length > 0) {
-      SocketHelper.emit(SocketCommands.Subscribe, {
+      SocketHelper?.emit(SocketCommands.Subscribe, {
         roomParts: socketSub,
         individual: true,
       });

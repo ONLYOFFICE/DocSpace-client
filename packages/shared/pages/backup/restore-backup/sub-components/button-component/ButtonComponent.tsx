@@ -116,7 +116,9 @@ const ButtonContainer = (props: ButtonContainerProps) => {
       );
       setTenantStatus(TenantStatus.PortalRestore);
 
-      SocketHelper.emit(SocketCommands.RestoreBackup, { dump: isManagement() });
+      SocketHelper?.emit(SocketCommands.RestoreBackup, {
+        dump: isManagement(),
+      });
 
       navigate(
         "/preparation-portal",

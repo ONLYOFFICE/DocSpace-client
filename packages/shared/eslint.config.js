@@ -127,6 +127,7 @@ module.exports = [
     ignores: [
       "./tsconfig.json",
       "./eslint.config.js",
+      "./.storybook/**",
       "node_modules/**",
       "storybook-static/**",
       "coverage/**",

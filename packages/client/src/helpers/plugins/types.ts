@@ -158,11 +158,12 @@ export interface IContextMenuItem {
   fileType?: PluginFileType[];
   usersTypes?: PluginUsersType[];
   devices?: PluginDevices[];
-  security?: (
-    | keyof TRoomSecurity
+  itemSecurity?: (
     | keyof TFileSecurity
+    | keyof TRoomSecurity
     | keyof TFolderSecurity
   )[];
+  security?: (keyof TRoomSecurity | keyof TFolderSecurity)[];
   pluginName?: string;
 }
 
@@ -185,6 +186,8 @@ export interface IFileItem {
   fileTileIcon?: string;
   fileIcon?: string;
   fileIconTile?: string;
+  security?: (keyof TRoomSecurity | keyof TFolderSecurity)[];
+  fileSecurity?: (keyof TFileSecurity)[];
   pluginName?: string;
 }
 

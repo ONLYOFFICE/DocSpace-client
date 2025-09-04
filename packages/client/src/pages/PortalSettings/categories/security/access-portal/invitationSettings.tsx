@@ -33,7 +33,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Text } from "@docspace/shared/components/text";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import { size } from "@docspace/shared/utils";
+import { size, isMobileDevice } from "@docspace/shared/utils";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
@@ -41,6 +41,11 @@ import { DeviceType } from "@docspace/shared/enums";
 import styles from "./InvitationSettings.module.scss";
 import { LearnMoreWrapper } from "../StyledSecurity";
 import InvitationLoader from "../sub-components/loaders/invitation-loader";
+import useSecurity from "../useSecurity";
+import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { TfaStore } from "@docspace/shared/store/TfaStore";
+import SettingsSetupStore from "SRC_DIR/store/SettingsSetupStore";
 
 const InvitationSettings = ({
   t,
@@ -49,6 +54,9 @@ const InvitationSettings = ({
   allowInvitingGuests,
   currentDeviceType,
   tReady,
+  settingsStore,
+  tfaStore,
+  setup,
 }: {
   t: TTranslation;
 
@@ -60,9 +68,13 @@ const InvitationSettings = ({
   allowInvitingGuests: boolean;
   currentDeviceType: DeviceType;
   tReady: boolean;
+  settingsStore: SettingsStore;
+  tfaStore: TfaStore;
+  setup: SettingsSetupStore;
 }) => {
   const [showReminder, setShowReminder] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const [isCheckedContacts, setIsCheckedContacts] =
     useState(allowInvitingMembers);
@@ -70,6 +82,14 @@ const InvitationSettings = ({
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  const defaultProps = createDefaultHookSettingsProps({
+    settingsStore,
+    tfaStore,
+    setup,
+  });
+
+  const { getSecurityInitialValue } = useSecurity(defaultProps.security);
 
   const checkWidth = () => {
     window.innerWidth > size.mobile &&
@@ -105,6 +125,13 @@ const InvitationSettings = ({
         : allowInvitingGuests,
     );
   };
+
+  useEffect(() => {
+    if (isMobileDevice()) {
+      getSecurityInitialValue();
+      setIsLoaded(true);
+    }
+  }, [isMobileDevice]);
 
   useEffect(() => {
     checkWidth();
@@ -194,7 +221,7 @@ const InvitationSettings = ({
   };
 
   if (
-    currentDeviceType !== DeviceType.desktop ||
+    (currentDeviceType !== DeviceType.desktop && !isLoaded) ||
     !tReady ||
     typeof allowInvitingMembers !== "boolean" ||
     typeof allowInvitingGuests !== "boolean"
@@ -298,18 +325,23 @@ const InvitationSettings = ({
   );
 };
 
-export const InvitationSettingsSection = inject(({ settingsStore }: TStore) => {
-  const {
-    setInvitationSettings,
-    allowInvitingMembers,
-    allowInvitingGuests,
-    currentDeviceType,
-  } = settingsStore;
+export const InvitationSettingsSection = inject(
+  ({ settingsStore, tfaStore, setup }: TStore) => {
+    const {
+      setInvitationSettings,
+      allowInvitingMembers,
+      allowInvitingGuests,
+      currentDeviceType,
+    } = settingsStore;
 
-  return {
-    setInvitationSettings,
-    allowInvitingMembers,
-    allowInvitingGuests,
-    currentDeviceType,
-  };
-})(withTranslation(["Settings", "Common"])(observer(InvitationSettings)));
+    return {
+      setInvitationSettings,
+      allowInvitingMembers,
+      allowInvitingGuests,
+      currentDeviceType,
+      settingsStore,
+      tfaStore,
+      setup,
+    };
+  },
+)(withTranslation(["Settings", "Common"])(observer(InvitationSettings)));

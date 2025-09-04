@@ -28,7 +28,6 @@ import { useCallback } from "react";
 
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { TfaStore } from "@docspace/shared/store/TfaStore";
-import { DeviceType } from "@docspace/shared/enums";
 
 import SettingsSetupStore from "SRC_DIR/store/SettingsSetupStore";
 
@@ -64,42 +63,47 @@ const useSecurity = ({
   currentDeviceType,
 }: UseSecurityProps) => {
   const getAccessPortalData = useCallback(async () => {
-    getPortalPasswordSettings?.();
-    getTfaType?.();
-    getInvitationSettings?.();
-
-    await getIpRestrictionsEnable?.();
-    await getIpRestrictions?.();
-
-    getBruteForceProtection?.();
-    getSessionLifetime?.();
-  }, [
-    getPortalPasswordSettings,
-    getTfaType,
-    getInvitationSettings,
-    getIpRestrictionsEnable,
-    getIpRestrictions,
-    getBruteForceProtection,
-    getSessionLifetime,
-  ]);
+    await initSettings?.();
+  }, [initSettings]);
 
   const getLoginHistoryData = useCallback(async () => {
-    getLoginHistory?.();
-    getLifetimeAuditSettings?.();
+    await Promise.all([getLoginHistory?.(), getLifetimeAuditSettings?.()]);
   }, [getLoginHistory, getLifetimeAuditSettings]);
 
   const getAuditTrailData = useCallback(async () => {
-    getAuditTrail?.();
-    getLifetimeAuditSettings?.();
+    await Promise.all([getAuditTrail?.(), getLifetimeAuditSettings?.()]);
   }, [getAuditTrail, getLifetimeAuditSettings]);
 
-  const initialLoad = useCallback(async () => {
-    if (!isInit && currentDeviceType !== DeviceType.mobile)
-      await initSettings?.();
-  }, [isInit, currentDeviceType, initSettings]);
-
   const getSecurityInitialValue = useCallback(async () => {
-    const actions = [initialLoad?.()];
+    const actions = [];
+    if (window.location.pathname.includes("password") && !isInit) {
+      console.log("here");
+      actions.push(getPortalPasswordSettings?.());
+    }
+
+    if (window.location.pathname.includes("tfa") && !isInit) {
+      actions.push(getTfaType?.());
+    }
+
+    if (window.location.pathname.includes("invitation-settings") && !isInit) {
+      actions.push(getInvitationSettings?.());
+    }
+
+    if (window.location.pathname.includes("ip") && !isInit) {
+      actions.push(getIpRestrictionsEnable?.(), getIpRestrictions?.());
+    }
+
+    if (
+      window.location.pathname.includes("brute-force-protection") &&
+      !isInit
+    ) {
+      actions.push(getBruteForceProtection?.());
+    }
+
+    if (window.location.pathname.includes("lifetime") && !isInit) {
+      actions.push(getSessionLifetime?.());
+    }
+
     if (window.location.pathname.includes("access-portal"))
       actions.push(getAccessPortalData?.());
 

@@ -33,7 +33,7 @@ import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
-import { size } from "@docspace/shared/utils";
+import { size, isMobileDevice } from "@docspace/shared/utils";
 import isEqual from "lodash/isEqual";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
@@ -42,6 +42,8 @@ import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorag
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import TfaLoader from "../sub-components/loaders/tfa-loader";
 import { LearnMoreWrapper } from "../StyledSecurity";
+import useSecurity from "../useSecurity";
+import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -61,6 +63,10 @@ const TwoFactorAuth = (props) => {
     appAvailable,
     tfaSettings,
     onSettingsSkeletonNotShown,
+
+    settingsStore,
+    tfaStore,
+    setup,
   } = props;
 
   const [type, setType] = useState("none");
@@ -70,6 +76,14 @@ const TwoFactorAuth = (props) => {
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  const defaultProps = createDefaultHookSettingsProps({
+    settingsStore,
+    tfaStore,
+    setup,
+  });
+
+  const { getSecurityInitialValue } = useSecurity(defaultProps.security);
 
   const checkWidth = () => {
     window.innerWidth > size.mobile &&
@@ -94,6 +108,13 @@ const TwoFactorAuth = (props) => {
     }
     setIsLoading(true);
   };
+
+  useEffect(() => {
+    if (isMobileDevice()) {
+      getSecurityInitialValue();
+      setIsLoading(true);
+    }
+  }, [isMobileDevice]);
 
   useEffect(() => {
     if (!onSettingsSkeletonNotShown) return;
@@ -271,5 +292,8 @@ export const TfaSection = inject(({ settingsStore, setup, tfaStore }) => {
     currentColorScheme,
     tfaSettingsUrl,
     currentDeviceType,
+    settingsStore,
+    tfaStore,
+    setup,
   };
 })(withTranslation(["Settings", "Common"])(observer(TwoFactorAuth)));

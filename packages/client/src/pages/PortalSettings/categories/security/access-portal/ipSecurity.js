@@ -33,7 +33,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { toastr } from "@docspace/shared/components/toast";
-import { size } from "@docspace/shared/utils";
+import { size, isMobileDevice } from "@docspace/shared/utils";
 import isEqual from "lodash/isEqual";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { DeviceType } from "@docspace/shared/enums";
@@ -41,6 +41,8 @@ import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorag
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import { LearnMoreWrapper } from "../StyledSecurity";
 import UserFields from "../sub-components/user-fields";
+import useSecurity from "../useSecurity";
+import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 
 import IpSecurityLoader from "../sub-components/loaders/ip-security-loader";
 
@@ -82,6 +84,10 @@ const IpSecurity = (props) => {
     ipSettingsUrl,
     currentColorScheme,
     currentDeviceType,
+
+    settingsStore,
+    tfaStore,
+    setup,
   } = props;
 
   const navigate = useNavigate();
@@ -92,9 +98,17 @@ const IpSecurity = (props) => {
   const [enable, setEnable] = useState(false);
   const [ips, setIps] = useState();
   const [showReminder, setShowReminder] = useState(false);
-  //  const [isLoading, setIsLoading] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [autoFocus, setAutoFocus] = useState(false);
+
+  const defaultProps = createDefaultHookSettingsProps({
+    settingsStore,
+    tfaStore,
+    setup,
+  });
+
+  const { getSecurityInitialValue } = useSecurity(defaultProps.security);
 
   const checkWidth = () => {
     window.innerWidth > size.mobile &&
@@ -126,6 +140,13 @@ const IpSecurity = (props) => {
       setIps(ipRestrictions);
     }
   };
+
+  useEffect(() => {
+    if (isMobileDevice()) {
+      getSecurityInitialValue();
+      setIsLoaded(true);
+    }
+  }, [isMobileDevice]);
 
   useEffect(() => {
     checkWidth();
@@ -226,7 +247,7 @@ const IpSecurity = (props) => {
     setShowReminder(false);
   };
 
-  if (currentDeviceType !== DeviceType.desktop) {
+  if (currentDeviceType !== DeviceType.desktop && !isLoaded) {
     return <IpSecurityLoader />;
   }
 
@@ -324,23 +345,29 @@ const IpSecurity = (props) => {
   );
 };
 
-export const IpSecuritySection = inject(({ settingsStore }) => {
-  const {
-    ipRestrictionEnable,
-    ipRestrictions,
-    setIpRestrictions,
-    ipSettingsUrl,
-    currentColorScheme,
-    currentDeviceType,
-  } = settingsStore;
+export const IpSecuritySection = inject(
+  ({ settingsStore, tfaStore, setup }) => {
+    const {
+      ipRestrictionEnable,
+      ipRestrictions,
+      setIpRestrictions,
+      ipSettingsUrl,
+      currentColorScheme,
+      currentDeviceType,
+    } = settingsStore;
 
-  return {
-    ipRestrictionEnable,
-    ipRestrictions,
-    setIpRestrictions,
+    return {
+      ipRestrictionEnable,
+      ipRestrictions,
+      setIpRestrictions,
 
-    ipSettingsUrl,
-    currentColorScheme,
-    currentDeviceType,
-  };
-})(withTranslation(["Settings", "Common"])(observer(IpSecurity)));
+      ipSettingsUrl,
+      currentColorScheme,
+      currentDeviceType,
+
+      settingsStore,
+      tfaStore,
+      setup,
+    };
+  },
+)(withTranslation(["Settings", "Common"])(observer(IpSecurity)));

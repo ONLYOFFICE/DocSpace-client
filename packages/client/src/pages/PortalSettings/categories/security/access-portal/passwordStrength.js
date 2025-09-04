@@ -34,7 +34,7 @@ import { Link } from "@docspace/shared/components/link";
 import { Slider } from "@docspace/shared/components/slider";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { toastr } from "@docspace/shared/components/toast";
-import { size } from "@docspace/shared/utils";
+import { isMobileDevice, size } from "@docspace/shared/utils";
 import isEqual from "lodash/isEqual";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
@@ -43,6 +43,8 @@ import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorag
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import PasswordLoader from "../sub-components/loaders/password-loader";
 import { LearnMoreWrapper } from "../StyledSecurity";
+import useSecurity from "../useSecurity";
+import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -82,6 +84,9 @@ const PasswordStrength = (props) => {
     passwordStrengthSettingsUrl,
     currentDeviceType,
     onSettingsSkeletonNotShown,
+    settingsStore,
+    tfaStore,
+    setup,
   } = props;
 
   const navigate = useNavigate();
@@ -93,8 +98,16 @@ const PasswordStrength = (props) => {
   const [useSpecialSymbols, setUseSpecialSymbols] = useState(false);
 
   const [showReminder, setShowReminder] = useState(false);
-  // const [isLoading, setIsLoading] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+
+  const defaultProps = createDefaultHookSettingsProps({
+    settingsStore,
+    tfaStore,
+    setup,
+  });
+
+  const { getSecurityInitialValue } = useSecurity(defaultProps.security);
 
   const checkWidth = () => {
     window.innerWidth > size.mobile &&
@@ -141,6 +154,13 @@ const PasswordStrength = (props) => {
     if (!(currentDeviceType !== DeviceType.desktop))
       onSettingsSkeletonNotShown("PasswordStrength");
   }, [currentDeviceType, onSettingsSkeletonNotShown]);
+
+  useEffect(() => {
+    if (isMobileDevice()) {
+      getSecurityInitialValue();
+      setIsLoaded(true);
+    }
+  }, [isMobileDevice]);
 
   useEffect(() => {
     checkWidth();
@@ -237,7 +257,7 @@ const PasswordStrength = (props) => {
     setShowReminder(false);
   };
 
-  if (currentDeviceType !== DeviceType.desktop) {
+  if (currentDeviceType !== DeviceType.desktop && !isLoaded) {
     return <PasswordLoader />;
   }
 
@@ -329,20 +349,25 @@ const PasswordStrength = (props) => {
   );
 };
 
-export const PasswordStrengthSection = inject(({ settingsStore }) => {
-  const {
-    setPortalPasswordSettings,
-    passwordSettings,
-    currentColorScheme,
-    passwordStrengthSettingsUrl,
-    currentDeviceType,
-  } = settingsStore;
+export const PasswordStrengthSection = inject(
+  ({ settingsStore, tfaStore, setup }) => {
+    const {
+      setPortalPasswordSettings,
+      passwordSettings,
+      currentColorScheme,
+      passwordStrengthSettingsUrl,
+      currentDeviceType,
+    } = settingsStore;
 
-  return {
-    setPortalPasswordSettings,
-    passwordSettings,
-    currentColorScheme,
-    passwordStrengthSettingsUrl,
-    currentDeviceType,
-  };
-})(withTranslation(["Settings", "Common"])(observer(PasswordStrength)));
+    return {
+      setPortalPasswordSettings,
+      passwordSettings,
+      currentColorScheme,
+      passwordStrengthSettingsUrl,
+      currentDeviceType,
+      settingsStore,
+      tfaStore,
+      setup,
+    };
+  },
+)(withTranslation(["Settings", "Common"])(observer(PasswordStrength)));

@@ -36,6 +36,7 @@ import { DeviceType } from "@docspace/shared/enums";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
+import { createDefaultHookSettingsProps } from "../../utils/createDefaultHookSettingsProps";
 
 import config from "PACKAGE_FILE";
 import AccessPortal from "./access-portal";
@@ -49,62 +50,50 @@ const SecurityWrapper = (props) => {
     t,
     resetIsInit,
     currentDeviceType,
-    getPortalPasswordSettings,
-    getTfaType,
-    getInvitationSettings,
-    getIpRestrictionsEnable,
-    getIpRestrictions,
-    getBruteForceProtection,
-    getSessionLifetime,
-    getLoginHistory,
-    getLifetimeAuditSettings,
-    getAuditTrail,
-
     isLoadedArticleBody,
     isLoadedSectionHeader,
     isBurgerLoading,
+
+    settingsStore,
+    tfaStore,
+    setup,
   } = props;
 
   const navigate = useNavigate();
   const location = useLocation();
 
+  const defaultProps = createDefaultHookSettingsProps({
+    settingsStore,
+    tfaStore,
+    setup,
+  });
+
   const { getAccessPortalData, getLoginHistoryData, getAuditTrailData } =
-    useSecurity({
-      getPortalPasswordSettings,
-      getTfaType,
-      getInvitationSettings,
-      getIpRestrictionsEnable,
-      getIpRestrictions,
-      getBruteForceProtection,
-      getSessionLifetime,
-      getLoginHistory,
-      getLifetimeAuditSettings,
-      getAuditTrail,
-    });
+    useSecurity(defaultProps.security);
 
   const data = [
     {
       id: "access-portal",
       name: t("PortalAccess", { productName: t("Common:ProductName") }),
       content: <AccessPortal />,
-      onClick: () => {
-        getAccessPortalData();
+      onClick: async () => {
+        await getAccessPortalData();
       },
     },
     {
       id: "login-history",
       name: t("LoginHistoryTitle"),
       content: <LoginHistory />,
-      onClick: () => {
-        getLoginHistoryData();
+      onClick: async () => {
+        await getLoginHistoryData();
       },
     },
     {
       id: "audit-trail",
       name: t("AuditTrailNav"),
       content: <AuditTrail />,
-      onClick: () => {
-        getAuditTrailData();
+      onClick: async () => {
+        await getAuditTrailData();
       },
     },
   ];
@@ -117,15 +106,7 @@ const SecurityWrapper = (props) => {
 
   const currentTabId = getCurrentTabId();
 
-  // const load = async () => {
-  //   !isInit &&
-  //     currentDeviceType !== DeviceType.mobile &&
-  //     (await initSettings());
-  //   setIsLoading(true);
-  // };
-
   useEffect(() => {
-    // load();
     return () => {
       resetIsInit();
       resetSessionStorage();
@@ -171,45 +152,20 @@ const SecurityWrapper = (props) => {
 export const Component = inject(
   ({ settingsStore, setup, tfaStore, common }) => {
     const { isLoadedArticleBody, isLoadedSectionHeader } = common;
-    const {
-      resetIsInit,
-      initSettings,
-      isInit,
-      getLoginHistory,
-      getLifetimeAuditSettings,
-      getAuditTrail,
-    } = setup;
-    const {
-      getPortalPasswordSettings,
-      getInvitationSettings,
-      getIpRestrictionsEnable,
-      getIpRestrictions,
-      getBruteForceProtection,
-      getSessionLifetime,
-    } = settingsStore;
-    const { getTfaType } = tfaStore;
+    const { resetIsInit } = setup;
 
-    const { currentDeviceType, isBurgerLoading } = settingsStore;
+    const { isBurgerLoading } = settingsStore;
 
     return {
-      isInit,
-      initSettings,
       resetIsInit,
-      currentDeviceType,
-      getPortalPasswordSettings,
-      getTfaType,
-      getInvitationSettings,
-      getIpRestrictionsEnable,
-      getIpRestrictions,
-      getBruteForceProtection,
-      getSessionLifetime,
-      getLoginHistory,
-      getLifetimeAuditSettings,
-      getAuditTrail,
 
       isLoadedArticleBody,
       isLoadedSectionHeader,
       isBurgerLoading,
+
+      settingsStore,
+      tfaStore,
+      setup,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(SecurityWrapper)));

@@ -144,9 +144,8 @@ class BrandingStore {
     this.applyNewLogos(logos);
   };
 
-  initWhiteLabel = () => {
-    this.getLogoUrls();
-    this.getIsDefaultLogos();
+  initWhiteLabel = async () => {
+    await Promise.all([this.getLogoUrls(), this.getIsDefaultLogos()]);
   };
 
   get isWhiteLabelLoaded() {

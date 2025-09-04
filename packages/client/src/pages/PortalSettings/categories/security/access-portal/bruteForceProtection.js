@@ -26,7 +26,7 @@
 
 import { useState, useEffect } from "react";
 import api from "@docspace/shared/api";
-import { size } from "@docspace/shared/utils";
+import { size, isMobileDevice } from "@docspace/shared/utils";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import isEqual from "lodash/isEqual";
@@ -42,6 +42,8 @@ import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorag
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import BruteForceProtectionLoader from "../sub-components/loaders/brute-force-protection-loader";
 import { StyledBruteForceProtection } from "../StyledSecurity";
+import useSecurity from "../useSecurity";
+import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 
 const BruteForceProtection = (props) => {
   const {
@@ -57,6 +59,10 @@ const BruteForceProtection = (props) => {
     currentColorScheme,
     isDefaultPasswordProtection,
     setBruteForceProtectionSettings,
+
+    settingsStore,
+    tfaStore,
+    setup,
   } = props;
 
   const defaultNumberAttempt = numberAttempt?.toString();
@@ -83,6 +89,14 @@ const BruteForceProtection = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const defaultProps = createDefaultHookSettingsProps({
+    settingsStore,
+    tfaStore,
+    setup,
+  });
+
+  const { getSecurityInitialValue } = useSecurity(defaultProps.security);
+
   const checkWidth = () => {
     window.innerWidth > size.mobile &&
       location.pathname.includes("brute-force-protection") &&
@@ -103,6 +117,13 @@ const BruteForceProtection = (props) => {
     setIsDefault(isDefaultPasswordProtection);
     setIsGetSettingsLoaded(true);
   };
+
+  useEffect(() => {
+    if (isMobileDevice()) {
+      getSecurityInitialValue();
+      setIsGetSettingsLoaded(true);
+    }
+  }, [isMobileDevice]);
 
   useEffect(() => {
     if (
@@ -349,28 +370,34 @@ const BruteForceProtection = (props) => {
   );
 };
 
-export const BruteForceProtectionSection = inject(({ settingsStore }) => {
-  const {
-    numberAttempt,
-    blockingTime,
-    checkPeriod,
-    isDefaultPasswordProtection,
-    getBruteForceProtection,
-    bruteForceProtectionUrl,
-    currentDeviceType,
-    currentColorScheme,
-    setBruteForceProtectionSettings,
-  } = settingsStore;
+export const BruteForceProtectionSection = inject(
+  ({ settingsStore, tfaStore, setup }) => {
+    const {
+      numberAttempt,
+      blockingTime,
+      checkPeriod,
+      isDefaultPasswordProtection,
+      getBruteForceProtection,
+      bruteForceProtectionUrl,
+      currentDeviceType,
+      currentColorScheme,
+      setBruteForceProtectionSettings,
+    } = settingsStore;
 
-  return {
-    numberAttempt,
-    blockingTime,
-    checkPeriod,
-    isDefaultPasswordProtection,
-    setBruteForceProtectionSettings,
-    getBruteForceProtection,
-    bruteForceProtectionUrl,
-    currentDeviceType,
-    currentColorScheme,
-  };
-})(withTranslation(["Settings", "Common"])(observer(BruteForceProtection)));
+    return {
+      numberAttempt,
+      blockingTime,
+      checkPeriod,
+      isDefaultPasswordProtection,
+      setBruteForceProtectionSettings,
+      getBruteForceProtection,
+      bruteForceProtectionUrl,
+      currentDeviceType,
+      currentColorScheme,
+
+      settingsStore,
+      tfaStore,
+      setup,
+    };
+  },
+)(withTranslation(["Settings", "Common"])(observer(BruteForceProtection)));

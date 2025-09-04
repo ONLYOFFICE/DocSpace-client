@@ -25,7 +25,6 @@ module.exports = [
       eqeqeq: "off",
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-loop-func": "off",
-      "react/prop-types": "off",
       "@typescript-eslint/no-unused-expressions": "off",
       "react-hooks/exhaustive-deps": "off",
     },

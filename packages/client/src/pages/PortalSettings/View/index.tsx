@@ -201,83 +201,6 @@ const View = ({
     }
   }, [isLoading]);
 
-  const loadViewData = async (view: TView, prevView: TView): Promise<void> => {
-    switch (view) {
-      case "customization":
-        if (prevView !== "customization") {
-          await getCommonInitialValue();
-        }
-        break;
-      case "security":
-        if (prevView !== "security") {
-          await getSecurityInitialValue();
-        }
-        break;
-      case "restore":
-      case "backup":
-        if (prevView !== "restore" && prevView !== "backup") {
-          await getBackupInitialValue();
-        }
-        break;
-      case "integration":
-        if (prevView !== "integration") {
-          await getIntegrationInitialValue();
-        }
-        break;
-      case "data-import":
-        if (prevView !== "data-import") {
-          await getDataImportInitialValue();
-        }
-        break;
-      case "management":
-        if (prevView !== "management") {
-          await init();
-        }
-        break;
-      case "developer-tools":
-        if (prevView !== "developer-tools") {
-          await getDeveloperToolsInitialValue();
-        }
-        break;
-      case "delete-data":
-        if (prevView !== "delete-data") {
-          await getDeleteDataInitialValue();
-        }
-        break;
-      case "payments":
-        if (prevView !== "payments") {
-          await getPaymentsInitialValue();
-        }
-        break;
-      case "bonus":
-        if (prevView !== "bonus") {
-          await standaloneInit();
-        }
-        break;
-      case "services":
-        if (prevView !== "services") {
-          await getServicesInitialValue();
-        }
-        break;
-    }
-  };
-
-  const determineViewFromPath = (): TView => {
-    if (isCustomizationPage) return "customization";
-    if (isSecurityPage) return "security";
-    if (isRestorePage) return "restore";
-    if (isBackupPage) return "backup";
-    if (isIntegrationPage) return "integration";
-    if (isDataImportPage) return "data-import";
-    if (isStorageManagementPage) return "management";
-    if (isDeveloperToolsPage) return "developer-tools";
-    if (isDeletePage) return "delete-data";
-    if (isPaymentsPage) return "payments";
-    if (isBonusPage) return "bonus";
-    if (isServicesPage) return "services";
-    return "";
-  };
-
   useEffect(() => {
     if (prevPathRef.current === location.pathname) {
       return;
@@ -289,12 +212,85 @@ const View = ({
       try {
         setIsLoading(true);
         setIsChangePageRequestRunning(true);
+        let view: TView = "";
 
-        const view = determineViewFromPath();
+        if (isCustomizationPage) {
+          view = "customization";
+
+          if (prevCurrentViewRef.current !== "customization") {
+            await getCommonInitialValue();
+          }
+        } else if (isSecurityPage) {
+          view = "security";
+
+          if (prevCurrentViewRef.current !== "security") {
+            await getSecurityInitialValue();
+          }
+        } else if (isRestorePage) {
+          view = "restore";
+
+          if (prevCurrentViewRef.current !== "restore") {
+            await getBackupInitialValue();
+          }
+        } else if (isBackupPage) {
+          view = "backup";
+
+          if (prevCurrentViewRef.current !== "backup") {
+            await getBackupInitialValue();
+          }
+        } else if (isIntegrationPage) {
+          view = "integration";
+
+          if (prevCurrentViewRef.current !== "integration") {
+            await getIntegrationInitialValue();
+          }
+        } else if (isDataImportPage) {
+          view = "data-import";
+
+          if (prevCurrentViewRef.current !== "data-import") {
+            await getDataImportInitialValue();
+          }
+        } else if (isStorageManagementPage) {
+          view = "management";
+
+          if (prevCurrentViewRef.current !== "management") {
+            await init();
+          }
+        } else if (isDeveloperToolsPage) {
+          view = "developer-tools";
+
+          if (prevCurrentViewRef.current !== "developer-tools") {
+            await getDeveloperToolsInitialValue();
+          }
+        } else if (isDeletePage) {
+          view = "delete-data";
+
+          if (prevCurrentViewRef.current !== "delete-data") {
+            await getDeleteDataInitialValue();
+          }
+        } else if (isPaymentsPage) {
+          view = "payments";
+
+          if (prevCurrentViewRef.current !== "payments") {
+            await getPaymentsInitialValue();
+          }
+        } else if (isBonusPage) {
+          view = "bonus";
+
+          if (prevCurrentViewRef.current !== "bonus") {
+            await standaloneInit();
+          }
+        } else if (isServicesPage) {
+          view = "services";
+
+          if (prevCurrentViewRef.current !== "services") {
+            await getServicesInitialValue();
+          }
+        }
 
         if (view) {
-          await loadViewData(view, prevCurrentViewRef.current);
           prevCurrentViewRef.current = view;
+
           setCurrentView(view);
         }
 
@@ -312,7 +308,7 @@ const View = ({
     };
 
     getView();
-  }, [location.pathname, isDeveloperToolsPage]);
+  }, [location.pathname]);
 
   return (
     <LoaderWrapper isLoading={isLoading}>

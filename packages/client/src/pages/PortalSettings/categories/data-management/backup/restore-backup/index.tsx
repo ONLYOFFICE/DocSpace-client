@@ -51,10 +51,9 @@ const RestoreBackupWrapper = ({
   setThirdPartyStorage,
   resetDownloadingProgress,
   setConnectedThirdPartyAccount,
+  isInitialLoading,
   ...props
 }: RestoreBackupWrapperProps) => {
-  // const [isInitialLoading, setIsInitialLoading] = useState(true);
-
   const { t } = useTranslation(["Settings", "Common"]);
   const navigate = useNavigate();
 
@@ -80,7 +79,7 @@ const RestoreBackupWrapper = ({
     <RestoreBackup
       setConnectedThirdPartyAccount={setConnectedThirdPartyAccount}
       setRestoreResource={setRestoreResource}
-      // isInitialLoading={isInitialLoading}
+      isInitialLoading={isInitialLoading}
       navigate={navigateTo}
       {...props}
     />
@@ -105,6 +104,7 @@ export default inject<
       errorInformation,
       selectedThirdPartyAccount,
       isBackupProgressVisible,
+      isInitialLoading,
       restoreResource,
       formSettings,
       errorsFieldsBeforeSafe,
@@ -200,6 +200,7 @@ export default inject<
       buttonSize,
       isEnableRestore,
       settingsFileSelector,
+      isInitialLoading,
 
       // settingsStore
       standalone,

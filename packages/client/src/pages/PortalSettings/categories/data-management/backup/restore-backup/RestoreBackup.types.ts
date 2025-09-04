@@ -28,7 +28,7 @@ import type { RestoreBackupProps } from "@docspace/shared/pages/backup/restore-b
 import type { TTranslation } from "@docspace/shared/types";
 
 export interface InjectedRestoreBackupWrapperProps
-  extends Omit<RestoreBackupProps, "navigate" | "isInitialLoading"> {
+  extends Omit<RestoreBackupProps, "navigate"> {
   getProgress: (t: TTranslation) => Promise<void>;
   setThirdPartyStorage: (list: unknown) => void;
   setStorageRegions: (regions: unknown) => void;

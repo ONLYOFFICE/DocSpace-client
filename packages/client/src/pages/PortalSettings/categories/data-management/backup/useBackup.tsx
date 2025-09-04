@@ -230,10 +230,9 @@ const useBackup = ({
       setThirdPartyStorage?.(backupStorage);
       setStorageRegions?.(resStorageRegions);
 
-      return true;
+      setIsInitialLoading?.(false);
     } catch (error) {
       toastr.error(error as Error);
-      return false;
     }
   }, [
     getProgress,

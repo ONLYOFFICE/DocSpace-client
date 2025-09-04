@@ -172,5 +172,5 @@ export interface ContextMenuProps {
 
 export type TContextMenuRef = {
   show: (e: React.MouseEvent) => void;
-  hide: (e: React.MouseEvent) => {};
+  hide: (e: React.MouseEvent) => object | void;
 };

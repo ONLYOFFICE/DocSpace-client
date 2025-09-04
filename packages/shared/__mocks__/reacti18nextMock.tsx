@@ -31,7 +31,7 @@ const react_i18next: {
     Component: React.JSXElementConstructor<{
       t: () => string;
     }>,
-  ) => (props: {}) => React.JSX.Element;
+  ) => (props: object) => React.JSX.Element;
   useTranslation: (value: string) => {
     t: (key: string) => string;
     i18n: {
@@ -46,7 +46,7 @@ const react_i18next: {
 
 const translate =
   () => (Component: React.JSXElementConstructor<{ t: () => string }>) =>
-    function (props: {}) {
+    function (props: object) {
       return <Component t={() => ""} {...props} />;
     };
 

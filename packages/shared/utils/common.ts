@@ -157,7 +157,7 @@ export const isPublicPreview = () => {
 
 export const parseDomain = (
   domain: string,
-  setError: Function,
+  setError: (error: string[] | null) => void,
   t: (key: string) => string,
 ) => {
   const parsedDomain = parseAddress(`test@${domain}`);
@@ -196,7 +196,7 @@ export const parseDomain = (
 export const validatePortalName = (
   value: string,
   nameValidator: TDomainValidator,
-  setError: Function,
+  setError: (error: string | null) => void,
   t: TTranslation,
 ) => {
   const validName = new RegExp(nameValidator.regex);
@@ -348,8 +348,8 @@ export function clickBackdrop() {
   }
 }
 
-export function objectToGetParams(object: {}) {
-  const params = Object.entries(object)
+export function objectToGetParams(obj: object) {
+  const params = Object.entries(obj)
     .filter(([, value]) => value !== undefined && value !== null)
     .map(
       ([key, value]) =>
@@ -576,18 +576,18 @@ export function isElementInViewport(el: HTMLElement) {
 }
 
 export function assign(
-  objParam: { [key: string]: {} },
+  objParam: Record<string, unknown>,
   keyPath: string[],
-  value: {},
+  value: unknown,
 ) {
-  let obj = objParam;
+  let obj: Record<string, unknown> = objParam;
   const lastKeyIndex = keyPath.length - 1;
   for (let i = 0; i < lastKeyIndex; ++i) {
     const key = keyPath[i];
     if (!(key in obj)) {
       obj[key] = {};
     }
-    obj = obj[key];
+    obj = obj[key] as Record<string, unknown>;
   }
   obj[keyPath[lastKeyIndex]] = value;
 }
@@ -903,8 +903,8 @@ export const decodeDisplayName = <T extends TFile | TFolder | TRoom>(
 };
 
 export const checkFilterInstance = (
-  filterObject: {},
-  certainClass: { prototype: {} },
+  filterObject: object,
+  certainClass: { prototype: object },
 ) => {
   const isInstance =
     filterObject.constructor.name === certainClass.prototype.constructor.name;

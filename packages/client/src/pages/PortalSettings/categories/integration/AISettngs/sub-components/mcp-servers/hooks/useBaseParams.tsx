@@ -26,6 +26,7 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
+import equal from "fast-deep-equal/react";
 
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import {
@@ -47,6 +48,12 @@ export const useBaseParams = (initialValues?: {
   const [description, setDescription] = React.useState(
     initialValues?.description || "",
   );
+
+  const initBaseParams = React.useRef({
+    name,
+    url,
+    description,
+  });
 
   const [nameError, setNameError] = React.useState("");
   const [urlError, setUrlError] = React.useState("");
@@ -87,6 +94,8 @@ export const useBaseParams = (initialValues?: {
       description,
     };
   };
+
+  const hasChanges = !equal(initBaseParams.current, { name, url, description });
 
   const baseParamsComponent = (
     <>
@@ -150,5 +159,6 @@ export const useBaseParams = (initialValues?: {
   return {
     getBaseParams,
     baseParamsComponent,
+    baseParamsChanged: hasChanges,
   };
 };

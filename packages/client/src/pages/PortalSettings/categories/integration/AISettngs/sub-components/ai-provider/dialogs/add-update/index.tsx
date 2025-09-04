@@ -26,9 +26,10 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import equal from "fast-deep-equal/react";
 
 import {
   ModalDialog,
@@ -117,9 +118,23 @@ const AddUpdateDialogComponent = ({
       ),
   );
   const [isRequestRunning, setIsRequestRunning] = useState(false);
+  const initFormData = useRef({
+    selectedOption,
+    providerTitle,
+    providerUrl,
+    providerKey,
+  });
 
-  const canSubmit =
+  const requiredFieldsFilled =
     providerTitle.trim().length > 0 && providerUrl.trim().length > 0;
+  const hasChanges = !equal(initFormData.current, {
+    selectedOption,
+    providerTitle,
+    providerUrl,
+    providerKey,
+  });
+
+  const canSubmit = requiredFieldsFilled && hasChanges;
 
   const onSelectProvider = (option: TOption) => {
     setSelectedOption(option);

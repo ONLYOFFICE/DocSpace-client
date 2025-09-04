@@ -35,33 +35,26 @@ import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 
 import OformsFilter from "@docspace/shared/api/oforms/filter";
 
-import Form from "./Form";
+import TilesContainer from "./TilesContainer";
 import styles from "./TemplatesGallery.module.scss";
-
-// Define the props interface for FormComponent
-interface FormComponentProps {
-  tabDocuments?: boolean;
-  tabSpreadsheet?: boolean;
-  tabPresentation?: boolean;
-  tabForm?: boolean;
-}
-
-const FormComponent = Form as React.ComponentType<FormComponentProps>;
 
 const TemplatesGallery = (props: {
   templatesGalleryVisible: boolean;
   setTemplatesGalleryVisible: (isVisible: boolean) => void;
   setCurrentExtensionGallery: (extension: string) => void;
-  fetchOforms: (filter: OformsFilter) => Promise<unknown>;
+  resetFilters: (filter: any) => Promise<void>;
+  initTemplateGallery: () => Promise<void>;
 }) => {
   const {
     templatesGalleryVisible,
     setTemplatesGalleryVisible,
     setCurrentExtensionGallery,
-    fetchOforms,
+    resetFilters,
+    initTemplateGallery,
   } = props;
   const [viewMobile, setViewMobile] = useState(false);
   const [currentTabId, setCurrentTabId] = useState("documents");
+  const [isInitLoading, setIsInitLoading] = useState(true);
 
   const getData = async (ext: string) => {
     const firstLoadFilter =
@@ -73,14 +66,20 @@ const TemplatesGallery = (props: {
             ? OformsFilter.getDefaultPresentation()
             : OformsFilter.getDefault();
 
-    await fetchOforms(firstLoadFilter);
+    await resetFilters(firstLoadFilter);
   };
+
+  useEffect(() => {
+    initTemplateGallery().then(() => {
+      setIsInitLoading(false);
+    });
+  }, []);
 
   const tabs = [
     {
       id: "documents",
       name: "Documents",
-      content: <FormComponent tabDocuments />,
+      content: <TilesContainer tabDocuments isInitLoading={isInitLoading} />,
       onClick: async () => {
         await getData(".docx");
       },
@@ -88,7 +87,7 @@ const TemplatesGallery = (props: {
     {
       id: "spreadsheet",
       name: "Spreadsheet",
-      content: <FormComponent tabSpreadsheet />,
+      content: <TilesContainer tabSpreadsheet isInitLoading={false} />,
       onClick: async () => {
         await getData(".xlsx");
       },
@@ -96,7 +95,7 @@ const TemplatesGallery = (props: {
     {
       id: "presentation",
       name: "Presentation",
-      content: <FormComponent tabPresentation />,
+      content: <TilesContainer tabPresentation isInitLoading={false} />,
       onClick: async () => {
         await getData(".pptx");
       },
@@ -104,7 +103,7 @@ const TemplatesGallery = (props: {
     {
       id: "forms",
       name: "Forms",
-      content: <FormComponent tabForm />,
+      content: <TilesContainer tabForm isInitLoading={false} />,
       onClick: async () => {
         await getData(".pdf");
       },
@@ -214,13 +213,15 @@ export default inject<TStore>(({ oformsStore }) => {
     templatesGalleryVisible,
     setTemplatesGalleryVisible,
     setCurrentExtensionGallery,
-    fetchOforms,
+    resetFilters,
+    initTemplateGallery,
   } = oformsStore;
 
   return {
     templatesGalleryVisible,
     setTemplatesGalleryVisible,
     setCurrentExtensionGallery,
-    fetchOforms,
+    resetFilters,
+    initTemplateGallery,
   };
 })(observer(TemplatesGallery));

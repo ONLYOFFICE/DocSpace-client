@@ -228,7 +228,8 @@ const GridDynamicHeight = ({
                 if (rowNeedsAdjustment) {
                   cards.forEach((card) => {
                     (card as HTMLElement).style.height = `${globalMaxHeight}px`;
-                    (card as HTMLElement).style.minHeight = `${globalMaxHeight}px`;
+                    (card as HTMLElement).style.minHeight =
+                      `${globalMaxHeight}px`;
                   });
                 }
               });
@@ -292,8 +293,6 @@ const GridDynamicHeight = ({
 
     const calculatedHeight = calculateCardHeight();
     const skeletons = [];
-
-    console.log("renderLoadingRow countTilesInRow", countTilesInRow);
 
     for (let i = 0; i < countTilesInRow; i += 1) {
       skeletons.push(

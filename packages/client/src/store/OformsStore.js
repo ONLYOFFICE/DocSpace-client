@@ -350,6 +350,17 @@ class OformsStore {
     runInAction(() => this.fetchOforms(newOformsFilter));
   };
 
+  initTemplateGallery = async () => {
+    const firstLoadFilter = OformsFilter.getDefaultDocx();
+    firstLoadFilter.locale = this.defaultOformLocale;
+
+    await Promise.all([
+      this.fetchOforms(firstLoadFilter),
+      this.fetchOformLocales(),
+      this.fetchCurrentCategory(),
+    ]);
+  };
+
   sortOforms = (sortBy, sortOrder) => {
     if (!sortBy || !sortOrder) return;
 
@@ -361,12 +372,11 @@ class OformsStore {
     runInAction(() => this.fetchOforms(newOformsFilter));
   };
 
-  resetFilters = () => {
+  resetFilters = (defaultFilter) => {
     this.currentCategory = null;
-    const newOformsFilter = OformsFilter.getDefault();
-    newOformsFilter.locale = this.defaultOformLocale;
 
-    runInAction(() => this.fetchOforms(newOformsFilter));
+    defaultFilter.locale = this.defaultOformLocale;
+    runInAction(() => this.fetchOforms(defaultFilter));
   };
 
   hideSubmitToGalleryTile = () => {

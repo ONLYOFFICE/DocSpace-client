@@ -27,7 +27,6 @@
 import { useState, useEffect, useRef } from "react";
 import { observer, inject } from "mobx-react";
 
-import OformsFilter from "@docspace/shared/api/oforms/filter";
 import { isMobile } from "@docspace/shared/utils";
 
 import type { FC } from "react";
@@ -38,34 +37,21 @@ import { Scrollbar as CustomScrollbar } from "@docspace/shared/components/scroll
 import SectionFilterContent from "../Filter";
 import Tiles from "../Tiles";
 
-type FormProps = {
-  currentCategory?: unknown;
-  fetchCurrentCategory: () => void;
-  defaultOformLocale?: string | null;
-  fetchOformLocales: () => Promise<unknown>;
-  oformsFilter: OformsFilter;
-  fetchOforms: (filter: OformsFilter) => Promise<unknown>;
+interface TilesContainerProps {
   tabDocuments?: boolean;
   tabSpreadsheet?: boolean;
   tabPresentation?: boolean;
   tabForm?: boolean;
-};
+  isInitLoading: boolean;
+}
 
-const Form: FC<FormProps> = ({
-  currentCategory,
-  fetchCurrentCategory,
-  defaultOformLocale,
-  fetchOformLocales,
-  oformsFilter,
-  fetchOforms,
+const TilesContainer: FC<TilesContainerProps> = ({
   tabDocuments,
   tabSpreadsheet,
   tabPresentation,
   tabForm,
+  isInitLoading,
 }) => {
-  // const navigate = useNavigate();
-
-  const [isInitLoading, setIsInitLoading] = useState(true);
   const [isShowOneTile, setShowOneTile] = useState(false);
 
   const [viewMobile, setViewMobile] = useState(false);
@@ -82,31 +68,8 @@ const Form: FC<FormProps> = ({
   }, [onCheckView]);
 
   useEffect(() => {
-    if (!tabDocuments) return;
-
-    const firstLoadFilter = OformsFilter.getDefaultDocx();
-
-    Promise.all([fetchOforms(firstLoadFilter), fetchOformLocales()]).finally(
-      () => {
-        setIsInitLoading(false);
-      },
-    );
-  }, [tabDocuments]);
-
-  useEffect(() => {
-    if (!isInitLoading)
-      if (!oformsFilter.locale) oformsFilter.locale = defaultOformLocale;
-  }, [oformsFilter, isInitLoading]);
-
-  useEffect(() => {
-    if (!currentCategory) fetchCurrentCategory();
-  }, [oformsFilter.categorizeBy, oformsFilter.categoryId]);
-
-  useEffect(() => {
     if (scrollRef.current) scrollRef.current.scrollToTop();
   }, [tabDocuments, tabSpreadsheet, tabPresentation, tabForm]);
-
-  console.log("isInitLoading", isInitLoading);
 
   return (
     <div style={{ width: "100%" }}>
@@ -145,7 +108,7 @@ const Form: FC<FormProps> = ({
   );
 };
 
-const ConnectedForm = inject<TStore>(({ oformsStore }) => ({
+export default inject<TStore>(({ oformsStore }) => ({
   oformsLoadError: oformsStore.oformsLoadError,
 
   currentCategory: oformsStore.currentCategory,
@@ -159,6 +122,4 @@ const ConnectedForm = inject<TStore>(({ oformsStore }) => ({
 
   fetchOforms: oformsStore.fetchOforms,
   setOformFromFolderId: oformsStore.setOformFromFolderId,
-}))(observer(Form)) as unknown as React.ComponentType<{}>;
-
-export default ConnectedForm;
+}))(observer(TilesContainer)) as unknown as React.ComponentType<TilesContainerProps>;

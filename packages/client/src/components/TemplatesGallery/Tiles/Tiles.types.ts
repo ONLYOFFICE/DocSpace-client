@@ -28,7 +28,7 @@ import type { Key } from "react";
 import type { NavigateFunction } from "react-router";
 
 /**
- * Minimal representation of a file inside the Templates Gallery.
+ * Minimal representation of a file inside the Template Gallery.
  * Currently only the `id` field is required by the UI layer but we keep the
  * interface extensible for future use.
  */

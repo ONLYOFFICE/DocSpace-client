@@ -95,14 +95,12 @@ const CategoryFilter = ({
 
   useEffect(() => {
     (async () => {
-      console.log("oformsFilter.locale", oformsFilter.locale);
-
       if (!oformsFilter.locale) return;
       let newMenuItems = await fetchCategoryTypes();
       if (!newMenuItems) {
         filterOformsByLocaleIsLoading &&
           setFilterOformsByLocaleIsLoading(false);
-        console.log("setFilterOformsByLocaleIsLoading(false)");
+
         return;
       }
 
@@ -112,7 +110,6 @@ const CategoryFilter = ({
             resolve(fetchCategoriesOfCategoryType(item.attributes.categoryId));
           }),
       );
-      console.log("categoryPromises", categoryPromises);
 
       Promise.all(categoryPromises)
         .then((results) => {

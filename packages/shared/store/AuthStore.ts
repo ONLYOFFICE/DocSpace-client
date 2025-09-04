@@ -146,6 +146,7 @@ class AuthStore {
             return;
           }
 
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           const { customQuotaFeature, ...updatableObject } = options;
 
           this.currentQuotaStore?.updateTenantCustomQuota(updatableObject);

@@ -318,6 +318,12 @@ const ArticleBodyContent = (props) => {
     )
       return setActiveItemId(favoritesFolderId);
 
+    if (
+      location.pathname.includes("/shared-with-me") &&
+      activeItemId !== shareFolderId
+    )
+      return setActiveItemId(shareFolderId);
+
     if (location.pathname.includes("/accounts") && activeItemId !== "accounts")
       return setActiveItemId("accounts");
 

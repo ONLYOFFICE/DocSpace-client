@@ -431,17 +431,21 @@ class SocketHelper {
     // return this.instance;
     if (
       typeof globalThis !== "undefined" &&
-      (globalThis as any).SOCKET_INSTANCE
+      (globalThis as unknown as { SOCKET_INSTANCE?: SocketHelper })
+        .SOCKET_INSTANCE
     ) {
       // [WS] Returning existing global socket instance
-      return (globalThis as any).SOCKET_INSTANCE;
+      return (globalThis as unknown as { SOCKET_INSTANCE?: SocketHelper })
+        .SOCKET_INSTANCE;
     }
 
     if (!this.instance) {
       // [WS] Creating new socket instance
       this.instance = new SocketHelper();
       if (typeof globalThis !== "undefined")
-        (globalThis as any).SOCKET_INSTANCE = this.instance;
+        (
+          globalThis as unknown as { SOCKET_INSTANCE?: SocketHelper }
+        ).SOCKET_INSTANCE = this.instance;
     }
     // [WS] Returning existing socket instance
     return this.instance;

@@ -104,7 +104,7 @@ const StyledParam = styled.div.attrs(injectDefaultTheme)<{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 8px;
 
     .ai-mcp-item {
       height: 32px;

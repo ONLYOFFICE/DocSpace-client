@@ -43,6 +43,7 @@ import { DropDownItem } from "../drop-down-item";
 import { IconButton } from "../icon-button";
 import { Text } from "../text";
 import { TGetTooltipContent, Tooltip } from "../tooltip";
+import { AVATAR_ACTION_KEYS } from "../../constants";
 
 import styles from "./Avatar.module.scss";
 
@@ -182,7 +183,7 @@ const AvatarPure = ({
         const optionOnClickAction = () => {
           setOpenLogoEdit(false);
 
-          if (option.key === "upload") {
+          if (option.key === AVATAR_ACTION_KEYS.PROFILE_AVATAR_UPLOAD) {
             return option.onClick(inputFilesElement);
           }
 

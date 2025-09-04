@@ -173,7 +173,7 @@ class Backend {
           // fallback, which omits calling the parse function
           ret = res.data;
         }
-      } catch (e) {
+      } catch {
         parseErr = `failed parsing ${url} to json`;
       }
       if (parseErr) return this.sendCallbacks(url, namespaces, parseErr, false);

@@ -34,6 +34,8 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { TServer, type TUpdateServer } from "@docspace/shared/api/ai/types";
 import { type TData, toastr } from "@docspace/shared/components/toast";
+import { Text } from "@docspace/shared/components/text";
+import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
@@ -112,6 +114,22 @@ const EditMCPDialogComponent = ({
       <ModalDialog.Header>{t("AISettings:MCPServer")}</ModalDialog.Header>
       <ModalDialog.Body>
         <div className={styles.bodyContainer}>
+          <div className={styles.connectDocspace}>
+            <Text className={styles.connectDocspaceDescription}>
+              {t("AISettings:MCPConnectDocSpaceDescription")}
+            </Text>
+            <Link
+              className={styles.learnMoreLink}
+              target={LinkTarget.blank}
+              type={LinkType.page}
+              fontWeight={600}
+              isHovered
+              href=""
+              color="accent"
+            >
+              {t("Common:LearnMore")}
+            </Link>
+          </div>
           {iconComponent}
           {baseParamsComponent}
           {headersComponent}

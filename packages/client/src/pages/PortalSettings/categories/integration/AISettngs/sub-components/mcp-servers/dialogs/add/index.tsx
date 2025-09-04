@@ -34,6 +34,8 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { type TData, toastr } from "@docspace/shared/components/toast";
+import { Text } from "@docspace/shared/components/text";
+import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
@@ -86,8 +88,6 @@ const AddMCPDialogComponent = ({ onClose, addNewMCP }: AddMCPDialogProps) => {
     } finally {
       setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
@@ -100,6 +100,22 @@ const AddMCPDialogComponent = ({ onClose, addNewMCP }: AddMCPDialogProps) => {
       <ModalDialog.Header>{t("AISettings:MCPServer")}</ModalDialog.Header>
       <ModalDialog.Body>
         <div className={styles.bodyContainer}>
+          <div className={styles.connectDocspace}>
+            <Text className={styles.connectDocspaceDescription}>
+              {t("AISettings:MCPConnectDocSpaceDescription")}
+            </Text>
+            <Link
+              className={styles.learnMoreLink}
+              target={LinkTarget.blank}
+              type={LinkType.page}
+              fontWeight={600}
+              isHovered
+              href=""
+              color="accent"
+            >
+              {t("Common:LearnMore")}
+            </Link>
+          </div>
           {iconComponent}
           {baseParamsComponent}
           {headersComponent}

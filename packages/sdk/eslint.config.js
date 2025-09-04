@@ -13,32 +13,7 @@ module.exports = [
       },
     },
     rules: {
-      "@next/next/no-img-element": "off",
-      "import/extensions": [
-        "error",
-        "ignorePackages",
-        {
-          js: "never",
-          jsx: "never",
-          ts: "never",
-          tsx: "never",
-        },
-      ],
-      "no-continue": "off",
-      "no-fallthrough": "off",
-      "no-await-in-loop": "off",
-      "react/no-danger": "off",
-      "@typescript-eslint/naming-convention": "off",
-      "jsx-a11y/aria-role": "off",
-      "react/no-unescaped-entities": "off",
-      "no-plusplus": "off",
-      "no-bitwise": "off",
-      eqeqeq: "off",
-      "@typescript-eslint/no-explicit-any": "off",
-      "@typescript-eslint/no-loop-func": "off",
       "@typescript-eslint/no-unused-expressions": "off",
-      "import/no-named-as-default": "off",
-      "global-require": "off",
     },
     settings: {
       "import/resolver": {

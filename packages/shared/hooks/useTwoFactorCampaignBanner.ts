@@ -53,13 +53,16 @@ export const useTwoFactorCampaignBanner = (
       }),
       SubHeader: t("LoginHistoryCampaignTitle"),
       Text: t("LoginHistoryCampaignText"),
-      Link: "/portal-settings/security/access-portal/tfa",
+      Link: isMobile
+        ? "/portal-settings/security/access-portal/tfa"
+        : "/portal-settings/security/access-portal",
     }),
-    [t],
+    [t, isMobile],
   );
 
   const navigateTo2FA = () => {
-    window.location.href = loginHistoryTranslates.Link;
+    const targetUrl = `${loginHistoryTranslates.Link}#tfa-section`;
+    window.location.href = targetUrl;
   };
 
   const loginHistoryConfig = useMemo(

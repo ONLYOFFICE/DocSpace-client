@@ -198,6 +198,7 @@ export const getRootDescription = (
     .with([FolderType.USER, P.when(() => security?.Create)], () =>
       t("EmptyView:DefaultFolderDescription"),
     )
+    .with([FolderType.SHARE, P._], () => t("EmptyView:EmptyShareDescription"))
     .with([FolderType.Recent, P._], () => t("EmptyView:EmptyRecentDescription"))
     .with([FolderType.Favorites, P._], () =>
       t("EmptyView:EmptyFavoritesDescription"),
@@ -317,6 +318,7 @@ export const getRootTitle = (
     .with([FolderType.USER, ShareAccessRights.None], () =>
       t("Common:EmptyScreenFolder"),
     )
+    .with([FolderType.SHARE, P._], () => t("EmptyView:EmptyShareTitle"))
     .with([FolderType.Favorites, P._], () => t("EmptyView:EmptyFavoritesTitle"))
     .with([FolderType.Recent, P._], () => t("EmptyView:NoRecentFilesHereYet"))
     .with([FolderType.Archive, P._], () => t("Files:ArchiveEmptyScreenHeader"))
@@ -493,6 +495,9 @@ export const getRootIcon = (
       isBaseTheme ? <EmptyRecentLightIcon /> : <EmptyRecentDarkIcon />,
     )
     .with([FolderType.Favorites, P._], () =>
+      isBaseTheme ? <EmptyFavoritesLightIcon /> : <EmptyFavoritesDarkIcon />,
+    )
+    .with([FolderType.SHARE, P._], () =>
       isBaseTheme ? <EmptyFavoritesLightIcon /> : <EmptyFavoritesDarkIcon />,
     )
     .with([FolderType.Archive, ShareAccessRights.None], () =>

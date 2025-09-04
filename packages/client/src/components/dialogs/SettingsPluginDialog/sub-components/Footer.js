@@ -62,7 +62,7 @@ const Footer = ({
             primary: true,
             size: "normal",
             label: t("Common:SaveButton"),
-            modalRequestRunning,
+            settingsModalRequestRunning: modalRequestRunning,
             setSettingsModalRequestRunning: setModalRequestRunning,
             onCloseAction,
             testId: "settings_plugin_save_button",

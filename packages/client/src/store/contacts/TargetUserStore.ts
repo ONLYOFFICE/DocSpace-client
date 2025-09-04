@@ -30,7 +30,11 @@ import { TFunction } from "i18next";
 import api from "@docspace/shared/api";
 import { NotificationsType } from "@docspace/shared/enums";
 import { setCookie } from "@docspace/shared/utils/cookie";
-import { LANGUAGE, COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
+import {
+  LANGUAGE,
+  COOKIE_EXPIRATION_YEAR,
+  AVATAR_ACTION_KEYS,
+} from "@docspace/shared/constants";
 import {
   changeNotificationSubscription,
   getNotificationSubscription,
@@ -139,13 +143,13 @@ class TargetUserStore {
       {
         label: t("RoomLogoCover:UploadPicture"),
         icon: UploadSvgUrl,
-        key: "profile_avatar_upload",
+        key: AVATAR_ACTION_KEYS.PROFILE_AVATAR_UPLOAD,
         onClick: (ref: React.RefObject<HTMLDivElement>) => ref.current?.click(),
       },
       {
         label: t("Common:Delete"),
         icon: TrashIconSvgUrl,
-        key: "profile_avatar_delete",
+        key: AVATAR_ACTION_KEYS.PROFILE_AVATAR_DELETE,
         onClick: () => this.deleteProfileAvatar(),
       },
     ];

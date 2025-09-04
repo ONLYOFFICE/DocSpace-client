@@ -141,6 +141,7 @@ const SubmitToFormGallery = ({
         onSelectFile={onSelectForm}
         onClose={onCloseFormSelector}
         withRecentTreeFolder
+        withFavoritesTreeFolder
       />
     );
 

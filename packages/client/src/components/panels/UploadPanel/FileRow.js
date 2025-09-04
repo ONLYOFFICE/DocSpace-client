@@ -69,6 +69,13 @@ class FileRow extends Component {
     });
   };
 
+  onRetryClick = () => {
+    const { item, retryUploadFiles, t } = this.props;
+    const { uniqueId } = item;
+
+    retryUploadFiles(t, uniqueId);
+  };
+
   onCancelCurrentUpload = (e) => {
     // console.log("cancel upload ", e);
     const { id, action, fileId } = e.currentTarget.dataset;
@@ -238,6 +245,7 @@ class FileRow extends Component {
               item={item}
               theme={theme}
               onTextClick={this.onTextClick}
+              onRetryClick={this.onRetryClick}
               showPasswordInput={showPasswordInput}
             />
           ) : (
@@ -361,6 +369,7 @@ export default inject(
 
       convertFile,
       uploadedFilesHistory: uploadedFiles,
+      retryUploadFiles,
     } = uploadDataStore;
     const { playlist, setMediaViewerData, setCurrentItem } =
       mediaViewerDataStore;
@@ -399,6 +408,7 @@ export default inject(
 
       isPlugin,
       onPluginClick,
+      retryUploadFiles,
     };
   },
 )(withTranslation("UploadPanel")(observer(FileRow)));

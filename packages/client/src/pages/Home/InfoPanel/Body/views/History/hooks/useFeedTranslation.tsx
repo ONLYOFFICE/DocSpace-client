@@ -322,7 +322,7 @@ export const useFeedTranslation = (
         });
       case FeedActionKeys.RoomIndexExportSaved:
         return t("InfoPanel:RoomIndexExportLocation", {
-          sectionName: t("Common:MyFilesSection"),
+          sectionName: t("Common:MyDocuments"),
         });
       case FeedActionKeys.FormSubmit:
         return t("InfoPanel:FilledOutForm");

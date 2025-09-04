@@ -385,7 +385,7 @@ const Items = ({
 
       if (!isVisitor && !isCollaborator)
         items.push(
-          <CatalogDivider key="other-header" />,
+          <CatalogDivider key="accounts-header" />,
           <AccountsItem
             key="accounts-item"
             onClick={onClick}

@@ -73,6 +73,7 @@ const ToolsSettings = () => {
   const [MCPTools, setMCPTools] = React.useState<Map<string, TMCPTool[]>>(
     new Map(),
   );
+  const [isFetched, setIsFetched] = React.useState(false);
   const contextMenuRef = React.useRef<ContextMenuRefType>(null);
 
   const toggleTool = React.useCallback(
@@ -150,6 +151,7 @@ const ToolsSettings = () => {
     );
 
     setMCPTools(new Map(serverTools));
+    setIsFetched(true);
   }, [roomId]);
 
   const onModifyFolder = React.useCallback(
@@ -257,52 +259,56 @@ const ToolsSettings = () => {
     setIsMcpToolsVisible(false);
   }, []);
 
-  const model = React.useMemo(
-    () => [
-      ...Array.from(MCPTools.entries()).map(([mcpId, tools]) => {
-        const server = servers.find((s) => s.id === mcpId);
+  const model = React.useMemo(() => {
+    const serverItems = Array.from(MCPTools.entries()).map(([mcpId, tools]) => {
+      const server = servers.find((s) => s.id === mcpId);
 
-        if (!server)
-          return {
-            key: "",
-            label: "",
-          };
-
-        const items = [
-          {
-            key: "all_tools",
-            label: "All tools",
-            withToggle: true,
-            checked: tools.some((tool) => tool.enabled),
-            onClick: () => {
-              toggleTool(mcpId, "all_tools");
-            },
-          },
-          {
-            key: "separator-sub-menu-1",
-            isSeparator: true,
-          },
-          ...tools
-            .map((tool) => ({
-              key: tool.name,
-              label: tool.name,
-              withToggle: true,
-              checked: tool.enabled,
-              onClick: () => {
-                toggleTool(mcpId, tool.name);
-              },
-            }))
-            .filter(Boolean),
-        ];
-
+      if (!server)
         return {
-          key: mcpId,
-          label: server.name,
-          icon: getServerIcon(server.serverType, isBase) ?? "",
-          items,
+          key: "",
+          label: "",
         };
-      }),
-      { key: "separator-1", isSeparator: true },
+
+      const items = [
+        {
+          key: "all_tools",
+          label: "All tools",
+          withToggle: true,
+          checked: tools.some((tool) => tool.enabled),
+          onClick: () => {
+            toggleTool(mcpId, "all_tools");
+          },
+        },
+        {
+          key: "separator-sub-menu-1",
+          isSeparator: true,
+        },
+        ...tools
+          .map((tool) => ({
+            key: tool.name,
+            label: tool.name,
+            withToggle: true,
+            checked: tool.enabled,
+            onClick: () => {
+              toggleTool(mcpId, tool.name);
+            },
+          }))
+          .filter(Boolean),
+      ];
+
+      return {
+        key: mcpId,
+        label: server.name,
+        icon: getServerIcon(server.serverType, isBase) ?? "",
+        items,
+      };
+    });
+
+    return [
+      ...serverItems,
+      ...(serverItems.length > 0
+        ? [{ key: "separator-1", isSeparator: true }]
+        : []),
       {
         key: "manage-connections",
         label: t("ManageConnection"),
@@ -311,11 +317,10 @@ const ToolsSettings = () => {
         },
         icon: ManageConnectionsReactSvgUrl,
       },
-    ],
-    [MCPTools, servers],
-  );
+    ];
+  }, [MCPTools, isBase, servers, t, toggleTool]);
 
-  if (!servers.length || !MCPTools.size) return;
+  if (!servers.length || !isFetched) return;
 
   return (
     <>
@@ -348,7 +353,11 @@ const ToolsSettings = () => {
               >
                 <div className={styles.toolSettingsWrapper}>
                   {servers.map((server) => {
-                    if (server.serverType === ServerType.Portal) return null;
+                    if (
+                      server.serverType === ServerType.Portal ||
+                      server.serverType === ServerType.Custom
+                    )
+                      return null;
 
                     return (
                       <div key={server.id} className={styles.toolSettingsItem}>

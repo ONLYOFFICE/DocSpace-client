@@ -175,6 +175,10 @@ class AISettingsStore {
       (mcp) => mcp.serverType === ServerType.Custom,
     );
   }
+
+  get hasAIProviders() {
+    return this.aiProviders.length > 0;
+  }
 }
 
 export default AISettingsStore;

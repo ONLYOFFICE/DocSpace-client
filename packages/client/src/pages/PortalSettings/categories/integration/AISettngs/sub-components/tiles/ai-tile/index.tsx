@@ -26,22 +26,36 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+import { useId } from "react";
+
 import { Heading, HeadingLevel } from "@docspace/shared/components/heading";
+import { Tooltip } from "@docspace/shared/components/tooltip";
 
 import styles from "./AiTile.module.scss";
 
 type AiTileProps = {
   icon: string;
   children: React.ReactNode;
+  tooltipText?: string;
 };
 
-export const AiTile = ({ icon, children }: AiTileProps) => {
+export const AiTile = ({ icon, children, tooltipText }: AiTileProps) => {
+  const tooltipId = useId();
+
+  const dataTooltipProps = tooltipText
+    ? { "data-tooltip-id": tooltipId, "data-tooltip-content": tooltipText }
+    : {};
+
   return (
-    <div className={styles.aiTile}>
+    <div className={styles.aiTile} {...dataTooltipProps}>
       <div className={styles.icon}>
         <img src={icon} alt="ai tile icon" />
       </div>
       <div className={styles.content}>{children}</div>
+
+      {tooltipText ? (
+        <Tooltip id={tooltipId} place="bottom" offset={10} float />
+      ) : null}
     </div>
   );
 };

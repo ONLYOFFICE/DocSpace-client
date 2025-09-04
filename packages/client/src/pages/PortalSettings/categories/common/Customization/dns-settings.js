@@ -47,6 +47,8 @@ import { globalColors } from "@docspace/shared/themes";
 import LoaderCustomization from "../sub-components/loaderCustomization";
 import { StyledSettingsComponent } from "./StyledSettings";
 import checkScrollSettingsBlock from "../utils";
+import useCommon from "../useCommon";
+import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 
 const toggleStyle = {
   position: "static",
@@ -70,7 +72,6 @@ let timerId = null;
 const DNSSettingsComponent = (props) => {
   const {
     t,
-    isMobileView,
     tReady,
     isLoaded,
     setIsLoadedDNSSettings,
@@ -87,6 +88,10 @@ const DNSSettingsComponent = (props) => {
     dnsSettingsUrl,
     currentDeviceType,
     requestSupportUrl,
+    loadBaseInfo,
+    deviceType,
+    settingsStore,
+    common,
   } = props;
 
   const [hasScroll, setHasScroll] = useState(false);
@@ -96,6 +101,17 @@ const DNSSettingsComponent = (props) => {
   const [isLoading, setIsLoading] = useState();
   const [isError, setIsError] = useState(false);
   const [errorText, setErrorText] = useState("");
+
+  const isMobileView = deviceType === DeviceType.mobile;
+
+  const defaultProps = createDefaultHookSettingsProps({
+    loadBaseInfo,
+    isMobileView,
+    settingsStore,
+    common,
+  });
+
+  const { getCommonInitialValue } = useCommon(defaultProps.common);
 
   const theme = useTheme();
 
@@ -124,6 +140,8 @@ const DNSSettingsComponent = (props) => {
     const checkScroll = checkScrollSettingsBlock();
     checkInnerWidth();
     window.addEventListener("resize", checkInnerWidth);
+
+    if (isMobileView) getCommonInitialValue();
 
     const scrollPortalName = checkScroll();
 
@@ -341,6 +359,7 @@ export const DNSSettings = inject(
       setDNSName,
       saveDNSSettings,
       isDefaultDNS,
+      initSettings,
     } = common;
 
     const { isCustomizationAvailable } = currentQuotaStore;
@@ -363,6 +382,11 @@ export const DNSSettings = inject(
       dnsSettingsUrl,
       currentDeviceType,
       requestSupportUrl,
+      loadBaseInfo: async (page) => {
+        await initSettings(page);
+      },
+      settingsStore,
+      common,
     };
   },
 )(

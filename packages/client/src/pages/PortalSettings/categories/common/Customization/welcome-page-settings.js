@@ -39,6 +39,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
+import { DeviceType } from "@docspace/shared/enums";
 import checkScrollSettingsBlock from "../utils";
 import { StyledSettingsComponent } from "./StyledSettings";
 import LoaderCustomization from "../sub-components/loaderCustomization";
@@ -59,7 +60,6 @@ const WelcomePageSettingsComponent = (props) => {
     setIsLoaded,
     setGreetingTitle,
     restoreGreetingTitle,
-    isMobileView,
     isLoadedPage,
     greetingSettingsIsDefault,
     getGreetingSettingsIsDefault,
@@ -68,9 +68,12 @@ const WelcomePageSettingsComponent = (props) => {
     loadBaseInfo,
     common,
     settingsStore,
+    deviceType,
   } = props;
 
   const navigate = useNavigate();
+
+  const isMobileView = deviceType === DeviceType.mobile;
 
   const defaultProps = createDefaultHookSettingsProps({
     loadBaseInfo,
@@ -155,6 +158,10 @@ const WelcomePageSettingsComponent = (props) => {
   };
 
   React.useEffect(() => {
+    if (isMobileView) getCommonInitialValue();
+  }, [isMobileView]);
+
+  React.useEffect(() => {
     greetingTitleFromSessionStorage = getFromSessionStorage("greetingTitle");
 
     greetingTitleDefaultFromSessionStorage = getFromSessionStorage(
@@ -162,8 +169,6 @@ const WelcomePageSettingsComponent = (props) => {
     );
 
     setDocumentTitle(t("CustomTitlesWelcome"));
-
-    getCommonInitialValue();
 
     const greetingTitle =
       greetingTitleFromSessionStorage === null ||
@@ -416,6 +421,7 @@ export const WelcomePageSettings = inject(
       theme,
       currentColorScheme,
       welcomePageSettingsUrl,
+      deviceType,
     } = settingsStore;
     const { setGreetingTitle, restoreGreetingTitle } = setup;
     const {
@@ -444,6 +450,7 @@ export const WelcomePageSettings = inject(
       loadBaseInfo: async (page) => {
         await initSettings(page);
       },
+      deviceType,
     };
   },
 )(

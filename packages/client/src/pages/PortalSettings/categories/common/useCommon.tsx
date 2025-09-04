@@ -58,9 +58,6 @@ const useCommon = ({
   cultures,
   getPortalCultures,
 }: UseCommonProps) => {
-  const inTabBranding = window.location.pathname.includes("branding");
-  const inTabGeneral = window.location.pathname.includes("general");
-
   const getCustomizationData = useCallback(
     async (
       page?:
@@ -94,8 +91,7 @@ const useCommon = ({
   );
 
   const getBrandingData = useCallback(async () => {
-    getBrandName?.();
-    initWhiteLabel?.();
+    await Promise.all([getBrandName?.(), initWhiteLabel?.()]);
   }, [getBrandName, initWhiteLabel]);
 
   const cultureNames = useMemo(
@@ -104,12 +100,16 @@ const useCommon = ({
   );
 
   const getCommonInitialValue = React.useCallback(async () => {
+    console.log("getCommonInitialValue");
     const actions = [];
     if (window.location.pathname.includes("language-and-time-zone"))
       actions.push(getCustomizationData("language-and-time-zone"));
 
     if (window.location.pathname.includes("welcome-page-settings"))
       actions.push(getCustomizationData("welcome-page-settings"));
+
+    if (window.location.pathname.includes("configure-deep-link"))
+      actions.push(getCustomizationData("configure-deep-link"));
 
     if (window.location.pathname.includes("dns-settings"))
       actions.push(getCustomizationData("dns-settings"));
@@ -120,15 +120,14 @@ const useCommon = ({
     if (window.location.pathname.includes("white-label"))
       actions.push(initWhiteLabel?.());
 
-    if (window.location.pathname.includes("configure-deep-link"))
-      actions.push(getCustomizationData("configure-deep-link"));
+    if (!isMobileView && window.location.pathname.includes("general"))
+      actions.push(getCustomizationData());
 
-    if (inTabGeneral && !isMobileView) actions.push(getCustomizationData());
-
-    if (inTabBranding && !isMobileView) actions.push(getBrandingData());
+    if (!isMobileView && window.location.pathname.includes("branding"))
+      actions.push(getBrandingData());
 
     await Promise.all(actions);
-  }, [getCustomizationData, getBrandingData]);
+  }, [getCustomizationData, getBrandingData, getBrandName, initWhiteLabel]);
 
   return {
     getCustomizationData,

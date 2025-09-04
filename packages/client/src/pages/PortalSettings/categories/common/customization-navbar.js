@@ -125,8 +125,4 @@ export default inject(({ common, settingsStore, currentTariffStatusStore }) => {
     enablePortalRename,
     isEnterprise,
   };
-})(
-  withCultureNames(
-    observer(withTranslation(["Settings", "Common"])(CustomizationNavbar)),
-  ),
-);
+})(observer(withTranslation(["Settings", "Common"])(CustomizationNavbar)));

@@ -186,7 +186,7 @@ const LanguageAndTimeZoneComponent = (props) => {
     timezoneDefaultFromSessionStorage =
       getFromSessionStorage("timezoneDefault");
 
-    getCommonInitialValue();
+    if (isMobileView) getCommonInitialValue();
 
     setDocumentTitle(t("StudioTimeLanguageSettings"));
 
@@ -464,7 +464,7 @@ const LanguageAndTimeZoneComponent = (props) => {
 
   const isBetaLang = state?.language?.isBeta;
 
-  const settingsBlock = !(state.language && state.timezone) ? null : (
+  const settingsBlock = (
     <div className="settings-block">
       <FieldContainer
         id="fieldContainerLanguage"
@@ -478,7 +478,7 @@ const LanguageAndTimeZoneComponent = (props) => {
             options={cultureNamesNew}
             selectedOption={state.language}
             onSelect={onSelectLanguage}
-            isDisabled={isLoading}
+            isDisabled={isLoading || !state.language}
             directionY="both"
             noBorder={false}
             scaled
@@ -503,7 +503,7 @@ const LanguageAndTimeZoneComponent = (props) => {
           directionY="both"
           selectedOption={state.timezone}
           onSelect={onSelectTimezone}
-          isDisabled={isLoading}
+          isDisabled={isLoading || !state.timezone}
           noBorder={false}
           scaled
           scaledOptions

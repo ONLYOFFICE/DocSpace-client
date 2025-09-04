@@ -132,7 +132,7 @@ const ConfigureDeepLinkComponent = (props: Props) => {
   }, []);
 
   useEffect(() => {
-    getCommonInitialValue();
+    if (isMobileView) getCommonInitialValue();
   }, []);
 
   useEffect(() => {

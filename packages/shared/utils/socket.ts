@@ -24,11 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable class-methods-use-this */
-/* eslint-disable no-console */
-/* eslint-disable no-var */
-/* eslint-disable vars-on-top */
-/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 
 import io, { Socket } from "socket.io-client";
@@ -434,7 +429,10 @@ class SocketHelper {
 
     // this.instance = new SocketHelper();
     // return this.instance;
-    if (typeof globalThis !== "undefined" && (globalThis as any).SOCKET_INSTANCE) {
+    if (
+      typeof globalThis !== "undefined" &&
+      (globalThis as any).SOCKET_INSTANCE
+    ) {
       // [WS] Returning existing global socket instance
       return (globalThis as any).SOCKET_INSTANCE;
     }

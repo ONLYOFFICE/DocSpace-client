@@ -955,7 +955,7 @@ export const ImageViewer = ({
     return () => {
       if (imgRef.current) {
         // abort img loading
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+
         imgRef.current.src = "";
       }
     };

@@ -24,13 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable func-names */
-/* eslint-disable no-console */
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable global-require */
-/* eslint-disable import/no-unresolved */
-
 const path = require("path");
 const fs = require("fs");
 const { readdir } = require("fs").promises;

@@ -24,10 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable no-console */
-/* eslint-disable no-multi-str */
-/* eslint-disable no-plusplus */
-
 import type { Location } from "react-router";
 import find from "lodash/find";
 import moment from "moment-timezone";
@@ -1363,7 +1359,6 @@ export const imageProcessing = async (file: File, maxSize?: number) => {
     }
 
     return new Promise((resolve) => {
-      // eslint-disable-next-line no-promise-executor-return
       return resolve(newFile);
     }).then(() => resizeRecursiveAsync(img, compressionRatio + 1, depth + 1));
   }

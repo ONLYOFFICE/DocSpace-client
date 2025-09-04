@@ -129,6 +129,6 @@ WithAction.args = {
   style: {
     maxWidth: "210px",
   },
-  // eslint-disable-next-line no-alert
+
   onAction: () => alert("Button clicked"),
 };

@@ -84,7 +84,7 @@ type ChatListProps = {
   hoveredChatId: TChat["id"];
   setHoveredChatId: (id: TChat["id"]) => void;
   activeChatId?: TChat["id"];
-  loadNextPage: () => void;
+  loadNextPage: (startIndex: number) => void;
   hasNextPage: boolean;
   isNextPageLoading: boolean;
   total: number;

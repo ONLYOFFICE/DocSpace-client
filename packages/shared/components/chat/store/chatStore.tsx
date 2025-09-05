@@ -42,8 +42,6 @@ export default class ChatStore {
 
   totalChats: number = 0;
 
-  startIndex: number = 0;
-
   roomId: TChatStoreProps["roomId"];
 
   isLoading: boolean = false;
@@ -58,10 +56,6 @@ export default class ChatStore {
 
   setTotalChats = (value: number) => {
     this.totalChats = value;
-  };
-
-  setStartIndex = (value: number) => {
-    this.startIndex = value;
   };
 
   setChats = (value: TChat[]) => {
@@ -106,7 +100,6 @@ export default class ChatStore {
 
       this.setChats(items);
       this.setTotalChats(total);
-      this.setStartIndex(100);
     } catch (error) {
       console.error(error);
       toastr.error(error as string);
@@ -120,18 +113,17 @@ export default class ChatStore {
     this.chats.push(...chats);
   };
 
-  fetchNextChats = async () => {
+  fetchNextChats = async (startIndex: number) => {
     if (this.isRequestRunning) return;
 
     this.setIsRequestRunning(true);
     this.setIsLoading(true);
 
     try {
-      const { items, total } = await getChats(this.roomId, this.startIndex);
+      const { items, total } = await getChats(this.roomId, startIndex);
 
       this.addChats(items);
       this.setTotalChats(total);
-      this.setStartIndex(this.startIndex + 100);
     } catch (error) {
       console.error(error);
       toastr.error(error as string);
@@ -162,7 +154,6 @@ export default class ChatStore {
 
     this.chats = this.chats.filter((chat) => chat.id !== id);
 
-    this.setStartIndex(this.startIndex - 1);
     this.setTotalChats(this.totalChats - 1);
   };
 

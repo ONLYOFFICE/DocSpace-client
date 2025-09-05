@@ -46,6 +46,7 @@ import styles from "./MCPTile.module.scss";
 type MCPTileProps = {
   item: TServer;
   onToggle: (id: TServer["id"], enabled: boolean) => void;
+  disableActions?: boolean;
 
   onSettingsClick?: (item: TServer) => void;
   onDeleteClick?: (id: TServer["id"]) => void;
@@ -56,9 +57,10 @@ export const MCPTile = ({
   onToggle,
   onSettingsClick,
   onDeleteClick,
+  disableActions,
 }: MCPTileProps) => {
   const { isBase } = useTheme();
-  const { t } = useTranslation("Common");
+  const { t } = useTranslation(["Common", "AISettings"]);
 
   const icon = getServerIcon(item.serverType, isBase) ?? "";
 
@@ -80,16 +82,26 @@ export const MCPTile = ({
   };
 
   return (
-    <AiTile icon={icon}>
+    <AiTile
+      icon={icon}
+      tooltipText={
+        disableActions ? t("AISettings:ToUseMCPAddProvider") : undefined
+      }
+    >
       <AiTile.Header title={item.name}>
         <div className={styles.buttonsContainer}>
           <ToggleButton
             className={styles.toggleButton}
             isChecked={item.enabled}
             onChange={() => onToggle(item.id, !item.enabled)}
+            isDisabled={disableActions}
           />
           {item.serverType === ServerType.Custom ? (
-            <ContextMenuButton directionX="right" getData={getContextOptions} />
+            <ContextMenuButton
+              directionX="right"
+              getData={getContextOptions}
+              isDisabled={disableActions}
+            />
           ) : null}
         </div>
       </AiTile.Header>

@@ -55,9 +55,14 @@ const AddMCPDialogComponent = ({ onClose, addNewMCP }: AddMCPDialogProps) => {
 
   const [loading, setLoading] = React.useState(false);
 
-  const { getBaseParams, baseParamsComponent } = useBaseParams();
-  const { headersComponent, getAPIHeaders } = useAdvancedSettings();
-  const { iconComponent, getIcon } = useIcon();
+  const { getBaseParams, baseParamsComponent, baseParamsChanged } =
+    useBaseParams();
+  const { headersComponent, getAPIHeaders, advancedSettingsChanged } =
+    useAdvancedSettings();
+  const { iconComponent, getIcon, iconChanged } = useIcon();
+
+  const hasChanges =
+    baseParamsChanged || advancedSettingsChanged || iconChanged;
 
   const onSubmitAction = async () => {
     const headers = getAPIHeaders();
@@ -129,6 +134,7 @@ const AddMCPDialogComponent = ({ onClose, addNewMCP }: AddMCPDialogProps) => {
           scale
           onClick={onSubmitAction}
           isLoading={loading}
+          isDisabled={!hasChanges}
         />
         <Button
           size={ButtonSize.normal}

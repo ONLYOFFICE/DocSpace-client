@@ -61,15 +61,18 @@ const EditMCPDialogComponent = ({
 
   const [loading, setLoading] = React.useState(false);
 
-  const { getBaseParams, baseParamsComponent } = useBaseParams({
-    url: server?.endpoint,
-    name: server?.name,
-    description: server?.description,
-  });
-  const { headersComponent, getAPIHeaders } = useAdvancedSettings(
-    server?.headers,
-  );
-  const { iconComponent, getIcon } = useIcon();
+  const { getBaseParams, baseParamsComponent, baseParamsChanged } =
+    useBaseParams({
+      url: server?.endpoint,
+      name: server?.name,
+      description: server?.description,
+    });
+  const { headersComponent, getAPIHeaders, advancedSettingsChanged } =
+    useAdvancedSettings(server?.headers);
+  const { iconComponent, getIcon, iconChanged } = useIcon();
+
+  const hasChanges =
+    baseParamsChanged || advancedSettingsChanged || iconChanged;
 
   const onSubmitAction = async () => {
     const headers = getAPIHeaders();
@@ -143,6 +146,7 @@ const EditMCPDialogComponent = ({
           scale
           onClick={onSubmitAction}
           isLoading={loading}
+          isDisabled={!hasChanges}
         />
         <Button
           size={ButtonSize.normal}

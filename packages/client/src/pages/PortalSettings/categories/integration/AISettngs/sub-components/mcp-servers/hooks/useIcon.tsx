@@ -27,6 +27,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import resizeImage from "resize-image";
+import equal from "fast-deep-equal/react";
 
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
@@ -39,6 +40,8 @@ export const useIcon = () => {
   const { t } = useTranslation(["AISettings", "OAuth"]);
 
   const [icon, setIcon] = React.useState("");
+
+  const initFormData = React.useRef({ icon });
 
   const inputRef = React.useRef<HTMLInputElement | null>(null);
 
@@ -89,6 +92,8 @@ export const useIcon = () => {
 
   const getIcon = () => icon;
 
+  const hasChanges = !equal(initFormData.current, { icon });
+
   const iconComponent = (
     <FieldContainer
       className={styles.iconContainer}
@@ -122,5 +127,6 @@ export const useIcon = () => {
   return {
     iconComponent,
     getIcon,
+    iconChanged: hasChanges,
   };
 };

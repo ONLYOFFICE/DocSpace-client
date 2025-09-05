@@ -26,6 +26,7 @@
 
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import equal from "fast-deep-equal/react";
 
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import {
@@ -64,6 +65,16 @@ export const useAdvancedSettings = (initialValues?: Record<string, string>) => {
     const values: Record<string, string> = {};
     Object.values(initialValues).map((value, index) => (values[index] = value));
     return values;
+  });
+
+  const initFormData = React.useRef({
+    headerNames,
+    headerValues,
+  });
+
+  const hasChanges = !equal(initFormData.current, {
+    headerNames,
+    headerValues,
   });
 
   const onChangeHeaderName = (index: number, value: string) => {
@@ -157,5 +168,6 @@ export const useAdvancedSettings = (initialValues?: Record<string, string>) => {
     onChangeHeaderValue,
     onAddNewHeader,
     getAPIHeaders,
+    advancedSettingsChanged: hasChanges,
   };
 };

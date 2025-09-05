@@ -53,48 +53,49 @@ type MCPListProps = {
   onMCPToggle: (id: TServer["id"], enabled: boolean) => void;
   onSettingsClick: (item: TServer) => void;
   onDeleteClick: (id: TServer["id"]) => void;
+  isMCPActionsDisabled?: boolean;
 };
 
-const MCPList = observer(
-  ({
-    showHeading,
-    headingText,
-    mcpServers,
-    onMCPToggle,
-    onSettingsClick,
-    onDeleteClick,
-  }: MCPListProps) => {
-    if (!mcpServers?.length) return;
+const MCPList = ({
+  showHeading,
+  headingText,
+  mcpServers,
+  onMCPToggle,
+  onSettingsClick,
+  onDeleteClick,
+  isMCPActionsDisabled,
+}: MCPListProps) => {
+  if (!mcpServers?.length) return;
 
-    return (
-      <div className={styles.mcpListContainer}>
-        {showHeading ? (
-          <Heading
-            className={styles.mcpHeading}
-            level={HeadingLevel.h3}
-            fontSize="16px"
-            fontWeight={700}
-            lineHeight="22px"
-          >
-            {headingText}
-          </Heading>
-        ) : null}
+  return (
+    <div className={styles.mcpListContainer}>
+      {showHeading ? (
+        <Heading
+          className={styles.mcpHeading}
+          level={HeadingLevel.h3}
+          fontSize="16px"
+          fontWeight={700}
+          lineHeight="22px"
+        >
+          {headingText}
+        </Heading>
+      ) : null}
 
-        <div className={styles.mcpList}>
-          {mcpServers.map((mcp) => (
-            <MCPTile
-              key={mcp.id}
-              item={mcp}
-              onToggle={onMCPToggle}
-              onSettingsClick={onSettingsClick}
-              onDeleteClick={onDeleteClick}
-            />
-          ))}
-        </div>
+      <div className={styles.mcpList}>
+        {mcpServers.map((mcp) => (
+          <MCPTile
+            key={mcp.id}
+            item={mcp}
+            onToggle={onMCPToggle}
+            onSettingsClick={onSettingsClick}
+            onDeleteClick={onDeleteClick}
+            disableActions={isMCPActionsDisabled}
+          />
+        ))}
       </div>
-    );
-  },
-);
+    </div>
+  );
+};
 
 type DisableDeleteDialogData =
   | { visible: false; serverId: null }
@@ -109,6 +110,7 @@ type MCPServersProps = {
   customMCPServers?: AISettingsStore["customMCPServers"];
   systemMCPServers?: AISettingsStore["systemMCPServers"];
   updateMCPStatus?: AISettingsStore["updateMCPStatus"];
+  hasAIProviders?: AISettingsStore["hasAIProviders"];
 };
 
 const MCPServersComponent = ({
@@ -116,6 +118,7 @@ const MCPServersComponent = ({
   customMCPServers,
   systemMCPServers,
   updateMCPStatus,
+  hasAIProviders,
 }: MCPServersProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
   const [addDialogVisible, setAddDialogVisible] = useState(false);
@@ -134,6 +137,8 @@ const MCPServersComponent = ({
     visible: false,
     server: null,
   });
+
+  const isMCPActionsDisabled = standalone && !hasAIProviders;
 
   const showMCPHeadings = !!customMCPServers?.length;
 
@@ -230,6 +235,7 @@ const MCPServersComponent = ({
         scale={false}
         className={styles.addProviderButton}
         onClick={showAddDialog}
+        isDisabled={isMCPActionsDisabled}
       />
 
       <MCPList
@@ -239,6 +245,7 @@ const MCPServersComponent = ({
         onMCPToggle={onMCPToggle}
         onSettingsClick={onUpdateMCP}
         onDeleteClick={onDeleteMCP}
+        isMCPActionsDisabled={isMCPActionsDisabled}
       />
 
       <MCPList
@@ -248,6 +255,7 @@ const MCPServersComponent = ({
         onMCPToggle={onMCPToggle}
         onSettingsClick={onUpdateMCP}
         onDeleteClick={onDeleteMCP}
+        isMCPActionsDisabled={isMCPActionsDisabled}
       />
 
       {addDialogVisible ? <AddMCPDialog onClose={hideAddDialog} /> : null}
@@ -277,12 +285,17 @@ const MCPServersComponent = ({
 };
 
 export const MCPServers = inject(({ aiSettingsStore }: TStore) => {
-  const { customMCPServers, systemMCPServers, updateMCPStatus } =
-    aiSettingsStore;
+  const {
+    customMCPServers,
+    systemMCPServers,
+    updateMCPStatus,
+    hasAIProviders,
+  } = aiSettingsStore;
 
   return {
     customMCPServers,
     systemMCPServers,
     updateMCPStatus,
+    hasAIProviders,
   };
 })(observer(MCPServersComponent));

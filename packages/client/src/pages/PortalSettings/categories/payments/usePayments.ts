@@ -37,8 +37,6 @@ export type UsePaymentsProps = {
 const usePayments = ({ initPayments, walletInit }: UsePaymentsProps) => {
   const { t, ready } = useTranslation(["Payments", "Common", "Settings"]);
 
-  const errorText = t("Common:UnexpectedError");
-
   const inTabPayments = window.location.pathname.includes("portal-payments");
   const inTabWallet = window.location.pathname.includes("wallet");
 
@@ -49,8 +47,8 @@ const usePayments = ({ initPayments, walletInit }: UsePaymentsProps) => {
   const getWalletData = useCallback(async () => {
     if (!ready) return;
 
-    await walletInit?.(errorText);
-  }, [walletInit, errorText, ready]);
+    await walletInit?.(t);
+  }, [walletInit, ready]);
 
   const getPaymentsInitialValue = React.useCallback(async () => {
     const actions = [];

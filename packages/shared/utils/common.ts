@@ -102,6 +102,7 @@ import { getCookie, setCookie } from "./cookie";
 import { checkIsSSR } from "./device";
 import { hasOwnProperty } from "./object";
 import { TFrameConfig } from "../types/Frame";
+import { isFile, isFolder } from "./typeGuards";
 
 export const desktopConstants = Object.freeze({
   domain: !checkIsSSR() && window.location.origin,
@@ -793,6 +794,18 @@ export const sortInDisplayOrder = (folders: TGetFolder[]) => {
   );
   if (myFolder) sorted.push(myFolder);
 
+  const favoritesFolder = find(
+    folders,
+    (folder) => folder.current.rootFolderType === FolderType.Favorites,
+  );
+  if (favoritesFolder) sorted.push(favoritesFolder);
+
+  const recentFolder = find(
+    folders,
+    (folder) => folder.current.rootFolderType === FolderType.Recent,
+  );
+  if (recentFolder) sorted.push(recentFolder);
+
   const shareRoom = find(
     folders,
     (folder) => folder.current.rootFolderType === FolderType.Rooms,
@@ -810,18 +823,6 @@ export const sortInDisplayOrder = (folders: TGetFolder[]) => {
     (folder) => folder.current.rootFolderType === FolderType.SHARE,
   );
   if (shareFolder) sorted.push(shareFolder);
-
-  const favoritesFolder = find(
-    folders,
-    (folder) => folder.current.rootFolderType === FolderType.Favorites,
-  );
-  if (favoritesFolder) sorted.push(favoritesFolder);
-
-  const recentFolder = find(
-    folders,
-    (folder) => folder.current.rootFolderType === FolderType.Recent,
-  );
-  if (recentFolder) sorted.push(recentFolder);
 
   const privateFolder = find(
     folders,
@@ -1271,12 +1272,12 @@ export const getUserTypeDescription = (
   if (isPortalAdmin)
     return t("Common:RolePortalAdminDescription", {
       productName: t("Common:ProductName"),
-      sectionName: t("Common:MyFilesSection"),
+      sectionName: t("Common:MyDocuments"),
     });
 
   if (isRoomAdmin)
     return t("Common:RoleRoomAdminDescription", {
-      sectionName: t("Common:MyFilesSection"),
+      sectionName: t("Common:MyDocuments"),
     });
 
   if (isCollaborator) return t("Common:RoleNewUserDescription");
@@ -1385,11 +1386,15 @@ export const getBackupProgressInfo = (
   setLink: (link: string) => void,
 ) => {
   const { isCompleted, link, error, progress } = opt;
-  setBackupProgress(progress);
+
+  if (progress !== 100) {
+    setBackupProgress(progress);
+  }
 
   if (isCompleted) {
+    setBackupProgress(100);
+
     if (error) {
-      setBackupProgress(100);
       return { error };
     }
 
@@ -1509,4 +1514,50 @@ export function buildDataTestId(
 ): string | undefined {
   if (!dataTestId) return undefined;
   return `${dataTestId}_${suffix}`;
+}
+
+export const getErrorInfo = (
+  err: unknown,
+  t: TTranslation,
+  customText: string | React.ReactNode,
+) => {
+  let message;
+
+  const knownError = err as {
+    response?: { status: number; data: { error: { message: string } } };
+    message?: string;
+  };
+
+  if (customText) {
+    message = customText;
+  } else if (typeof err === "string") {
+    message = err;
+  } else {
+    message =
+      ("response" in knownError && knownError.response?.data?.error?.message) ||
+      ("message" in knownError && knownError.message) ||
+      "";
+  }
+
+  if (knownError?.response?.status === 502)
+    message = t("Common:UnexpectedError");
+
+  return message ?? t("Common:UnexpectedError");
+};
+
+export function splitFileAndFolderIds<T extends TFolder | TFile>(items: T[]) {
+  const initial = {
+    fileIds: [] as Array<string | number>,
+    folderIds: [] as Array<string | number>,
+  };
+
+  return (items ?? []).reduce((acc, item) => {
+    const id = (item as TFolder | TFile)?.id;
+    if (id === undefined || id === null) return acc;
+
+    if (isFolder(item)) acc.folderIds.push(id);
+    else if (isFile(item)) acc.fileIds.push(id);
+
+    return acc;
+  }, initial);
 }

@@ -53,6 +53,8 @@ const InfoPanelHeaderContent = ({
   getIsTrash,
   infoPanelItemsList,
   enablePlugins,
+
+  isRecentFolder,
 }: InfoPanelHeaderContentProps) => {
   const { t } = useTranslation(["Common", "InfoPanel"]);
 
@@ -120,6 +122,7 @@ const InfoPanelHeaderContent = ({
   ];
 
   const isRoomsType =
+    !isRecentFolder &&
     selection &&
     "rootFolderType" in selection &&
     isRoomUtil(selection) &&
@@ -218,7 +221,13 @@ const InfoPanelHeaderContent = ({
 };
 
 export default inject(
-  ({ settingsStore, infoPanelStore, pluginStore, oformsStore }: TStore) => {
+  ({
+    settingsStore,
+    infoPanelStore,
+    pluginStore,
+    treeFoldersStore,
+    oformsStore,
+  }: TStore) => {
     const { gallerySelected } = oformsStore;
     const { infoPanelItemsList } = pluginStore;
 
@@ -228,6 +237,8 @@ export default inject(
     const { enablePlugins } = settingsStore;
 
     const selection = infoPanelStore.infoPanelSelection;
+
+    const { isRecentFolder } = treeFoldersStore;
 
     return {
       selection,
@@ -242,6 +253,8 @@ export default inject(
       infoPanelItemsList,
 
       enablePlugins,
+
+      isRecentFolder,
     };
   },
 )(observer(InfoPanelHeaderContent));

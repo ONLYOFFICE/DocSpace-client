@@ -139,6 +139,8 @@ const SubmitToFormGallery = ({
         isPanelVisible
         onSelectFile={onSelectForm}
         onClose={onCloseFormSelector}
+        withRecentTreeFolder
+        withFavoritesTreeFolder
         isPortalView
         withoutDescriptionText
       />

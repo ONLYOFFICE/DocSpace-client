@@ -28,6 +28,13 @@
 
 const path = require("path");
 const pkg = require("./package.json");
+const BannerPlugin = require("webpack").BannerPlugin;
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
+const { getBanner } = require("@docspace/shared/utils/build").default;
+
+const version = pkg.version;
+const banner = getBanner(version);
 
 const nextConfig = {
   basePath: "/sdk",
@@ -72,6 +79,52 @@ const nextConfig = {
         "@docspace/shared": path.resolve(__dirname, "../shared"),
       },
     };
+
+    // config.devtool = "source-map";
+
+    if (config.mode === "production") {
+      config.optimization = {
+        splitChunks: { chunks: "all" },
+        minimize: true,
+        minimizer: [
+          new CssMinimizerPlugin({
+            minimizerOptions: {
+              preset: [
+                "default",
+                {
+                  discardComments: {
+                    removeAll: false,
+                    remove: (comment) => {
+                      // Keep copyright comments that contain the copyright text
+                      const isCopyright =
+                        comment.includes("Copyright Ascensio System SIA") &&
+                        comment.includes("https://www.onlyoffice.com/");
+                      return !isCopyright;
+                    },
+                  },
+                },
+              ],
+            },
+          }),
+          new TerserPlugin({
+            terserOptions: {
+              format: {
+                comments: /\*\s*\(c\)\s+Copyright\s+Ascensio\s+System\s+SIA/i,
+              },
+            },
+            extractComments: false,
+            parallel: false,
+          }),
+        ],
+      };
+
+      config.plugins.push(
+        new BannerPlugin({
+          raw: true,
+          banner,
+        }),
+      );
+    }
 
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) =>

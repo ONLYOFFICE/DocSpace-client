@@ -198,7 +198,7 @@ const PureHome = (props) => {
 
     createFoldersTree(t, f, uploadToFolder, dragged)
       .then((fItem) => {
-        if (fItem.length > 0) startUpload(fItem, null, t);
+        if (fItem.length > 0) startUpload(fItem, uploadToFolder, t);
       })
       .catch((err) => {
         toastr.error(err, null, 0, true);
@@ -473,7 +473,6 @@ export const Component = inject(
 
     const {
       firstLoad,
-      setIsSectionHeaderLoading,
       setIsSectionBodyLoading,
       setIsSectionFilterLoading,
       isLoading,
@@ -528,8 +527,6 @@ export const Component = inject(
       isRoomsFolder,
       isArchiveFolder,
       setSelectedNode,
-      isPersonalRoom,
-      isRecentTab,
       isRoomsFolderRoot,
       isTemplatesFolder,
       isRoot,
@@ -595,11 +592,10 @@ export const Component = inject(
 
     const { isRoomAdmin, isAdmin } = authStore;
 
-    const withDocumentTabs = isPersonalRoom || isRecentTab;
     const withRoomsTabs =
       (isRoomsFolderRoot || isTemplatesFolder) && (isRoomAdmin || isAdmin);
 
-    const sectionWithTabs = (withDocumentTabs || withRoomsTabs) && isRoot;
+    const sectionWithTabs = withRoomsTabs && isRoot;
 
     // if (!firstLoad) {
     //   if (isLoading) {
@@ -639,7 +635,6 @@ export const Component = inject(
       setExpandedKeys,
 
       setDragging,
-      setIsSectionHeaderLoading,
       setIsSectionBodyLoading,
       setIsSectionFilterLoading,
       isLoading,

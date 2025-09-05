@@ -68,6 +68,8 @@ export interface UseRootHelperProps {
 
   setIsInit: (value: boolean) => void;
   treeFolders?: TFolder[];
+  withRecentTreeFolder?: boolean;
+  withFavoritesTreeFolder?: boolean;
   isUserOnly?: boolean;
 }
 
@@ -203,6 +205,9 @@ export type FilesSelectorProps = TInfoBar &
     shareKey?: string;
 
     treeFolders?: TFolder[];
+    withRecentTreeFolder?: boolean;
+    withFavoritesTreeFolder?: boolean;
+
     onSetBaseFolderPath?: (
       value: number | string | undefined | TBreadCrumb[],
     ) => void;

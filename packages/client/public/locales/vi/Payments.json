@@ -38,7 +38,6 @@
   "ChooseNewPlan": "Bạn có muốn chọn gói dịch vụ có giá mới không?",
   "ConfirmPayment": "Xác nhận thanh toán",
   "ConnectAndConfigureServices": "Đoạn này được sử dụng để kết nối và cấu hình các dịch vụ.",
-  "Cost": "Chi phí",
   "Credit": "Tín dụng",
   "CurrencyPerMonth": "{{currency}}/tháng",
   "CurrentBalance": "Số dư hiện tại: <1>{{balance}}</1>",

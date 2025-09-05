@@ -43,6 +43,8 @@ import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
 import {
   FILTER_DOCUMENTS,
+  FILTER_RECENT,
+  FILTER_FAVORITES,
   FILTER_TRASH,
 } from "@docspace/shared/utils/filterConstants";
 
@@ -61,8 +63,10 @@ const ArticleBodyContent = (props) => {
     roomsFilter,
     archiveFolderId,
     myFolderId,
+    favoritesFolderId,
     recycleBinFolderId,
     rootFolderId,
+    recentFolderId,
 
     isVisitor,
     setIsLoading,
@@ -103,6 +107,25 @@ const ArticleBodyContent = (props) => {
       };
 
       switch (folderId) {
+        case recentFolderId: {
+          const recentFilter = FilesFilter.getDefault({ isRecentFolder: true });
+          recentFilter.folder = folderId;
+
+          if (userId) {
+            const { sortBy, sortOrder } = getUserFilter(
+              `${FILTER_RECENT}=${userId}`,
+            );
+
+            if (sortBy) recentFilter.sortBy = sortBy;
+            if (sortOrder) recentFilter.sortOrder = sortOrder;
+          }
+
+          params = recentFilter.toUrlParams();
+
+          path = getCategoryUrl(CategoryType.Recent);
+
+          break;
+        }
         case myFolderId: {
           const myFilter = FilesFilter.getDefault();
           myFilter.folder = folderId;
@@ -117,6 +140,22 @@ const ArticleBodyContent = (props) => {
           params = myFilter.toUrlParams();
 
           path = getCategoryUrl(CategoryType.Personal);
+
+          break;
+        }
+        case favoritesFolderId: {
+          const favFilter = FilesFilter.getDefault();
+          favFilter.folder = folderId;
+
+          if (userId) {
+            const filterObj = getUserFilter(`${FILTER_FAVORITES}=${userId}`);
+
+            if (filterObj?.sortBy) favFilter.sortBy = filterObj.sortBy;
+            if (filterObj?.sortOrder) favFilter.sortOrder = filterObj.sortOrder;
+          }
+
+          params = favFilter.toUrlParams();
+          path = getCategoryUrl(CategoryType.Favorite);
 
           break;
         }
@@ -177,10 +216,12 @@ const ArticleBodyContent = (props) => {
       roomsFolderId,
       archiveFolderId,
       myFolderId,
+      favoritesFolderId,
       recycleBinFolderId,
       activeItemId,
       hashDate,
       roomsFilter,
+      recentFolderId,
     ],
   );
 
@@ -219,6 +260,12 @@ const ArticleBodyContent = (props) => {
 
   React.useEffect(() => {
     if (
+      location.pathname.includes("/recent") &&
+      activeItemId !== recentFolderId
+    )
+      return setActiveItemId(recentFolderId);
+
+    if (
       location.pathname.includes("/rooms/shared") &&
       activeItemId !== roomsFolderId
     )
@@ -242,6 +289,12 @@ const ArticleBodyContent = (props) => {
     )
       return setActiveItemId(recycleBinFolderId);
 
+    if (
+      location.pathname.includes("/files/favorite") &&
+      activeItemId !== favoritesFolderId
+    )
+      return setActiveItemId(favoritesFolderId);
+
     if (location.pathname.includes("/accounts") && activeItemId !== "accounts")
       return setActiveItemId("accounts");
 
@@ -262,9 +315,11 @@ const ArticleBodyContent = (props) => {
     roomsFolderId,
     archiveFolderId,
     myFolderId,
+    favoritesFolderId,
     recycleBinFolderId,
     isVisitor,
     rootFolderId,
+    recentFolderId,
   ]);
 
   React.useEffect(() => {
@@ -342,8 +397,14 @@ export default inject(
       // if (param && withTimer) showProgress();
     };
 
-    const { roomsFolderId, archiveFolderId, myFolderId, recycleBinFolderId } =
-      treeFoldersStore;
+    const {
+      roomsFolderId,
+      archiveFolderId,
+      myFolderId,
+      recycleBinFolderId,
+      recentFolderId,
+      favoritesFolderId,
+    } = treeFoldersStore;
 
     const selectedFolderId = selectedFolderStore.id;
 
@@ -381,8 +442,10 @@ export default inject(
       roomsFolderId,
       archiveFolderId,
       myFolderId,
+      favoritesFolderId,
       recycleBinFolderId,
       rootFolderId,
+      recentFolderId,
 
       setIsLoading,
 

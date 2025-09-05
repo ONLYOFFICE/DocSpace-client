@@ -38,6 +38,7 @@ import {
   FILTER_INSIDE_GROUPS,
   FILTER_DOCUMENTS,
   FILTER_RECENT,
+  FILTER_FAVORITES,
   FILTER_TRASH,
   FILTER_ROOM_DOCUMENTS,
   FILTER_ARCHIVE_DOCUMENTS,
@@ -72,6 +73,7 @@ const getTypeDefinition = (storageKey: string) => {
       return peopleTypeDefinition;
     case FILTER_DOCUMENTS:
     case FILTER_RECENT:
+    case FILTER_FAVORITES:
     case FILTER_TRASH:
     case FILTER_ROOM_DOCUMENTS:
     case FILTER_ARCHIVE_DOCUMENTS:

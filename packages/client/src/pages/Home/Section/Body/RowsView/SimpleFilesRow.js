@@ -29,6 +29,7 @@ import { withTranslation } from "react-i18next";
 import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
 import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 import { isMobile as isMobileUtile, classNames } from "@docspace/shared/utils";
+import { isMobile } from "react-device-detect";
 import { FolderType } from "@docspace/shared/enums";
 import {
   FilesRow,
@@ -218,6 +219,9 @@ const SimpleFilesRow = (props) => {
         isDragDisabled={isDragDisabled}
       >
         <FilesRow
+          onRowClick={(e) => {
+            if (isMobile) onDoubleClick(e);
+          }}
           key={item.id}
           data={item}
           isEdit={isEdit}

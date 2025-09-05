@@ -104,7 +104,7 @@ const Item = ({
 
       createFoldersTree(t, files, uploadToFolder, dragged)
         .then((f) => {
-          if (f.length > 0) startUpload(f, null, t);
+          if (f.length > 0) startUpload(f, uploadToFolder, t);
         })
         .catch((err) => {
           toastr.error(err);
@@ -338,7 +338,7 @@ const Items = ({
 
   const getItems = React.useCallback(
     (elm) => {
-      const items = elm.map((item, index) => {
+      const items = elm.map((item) => {
         const isTrash = item.rootFolderType === FolderType.TRASH;
         const showBadge = emptyTrashInProgress
           ? false
@@ -360,7 +360,6 @@ const Items = ({
             dragging={dragging}
             getFolderIcon={getFolderIcon}
             isActive={item.id === activeItemId}
-            isLastItem={index === elm.length - 1}
             showText={showText}
             onClick={onClick}
             getLinkData={getLinkData}
@@ -380,10 +379,13 @@ const Items = ({
         );
       });
 
+      // items.splice(1, 0, <CatalogDivider key="recent-divider" />);
+
+      items.splice(3, 0, <CatalogDivider key="other-header" />);
+
       if (!isVisitor && !isCollaborator)
-        items.splice(
-          3,
-          0,
+        items.push(
+          <CatalogDivider key="accounts-header" />,
           <AccountsItem
             key="accounts-item"
             onClick={onClick}
@@ -391,9 +393,6 @@ const Items = ({
             isActive={activeItemId === "accounts"}
           />,
         );
-
-      if (!isVisitor) items.splice(3, 0, <CatalogDivider key="other-header" />);
-      else items.splice(2, 0, <CatalogDivider key="other-header" />);
 
       if (isCommunity && isPaymentPageAvailable)
         items.push(<BonusItem key="bonus-item" />);

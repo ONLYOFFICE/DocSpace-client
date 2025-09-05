@@ -39,8 +39,6 @@ const commonInputStyles = css<{
     (props.scale && "100%") ||
     (props.size === "base" && props.theme.input.width.base) ||
     (props.size === "middle" && props.theme.input.width.middle) ||
-    (props.size === "big" && props.theme.input.width.big) ||
-    (props.size === "huge" && props.theme.input.width.huge) ||
     (props.size === "large" && props.theme.input.width.large)};
 
   background-color: ${(props) =>

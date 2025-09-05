@@ -28,6 +28,7 @@ import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import PluginStore from "SRC_DIR/store/PluginStore";
+import type TreeFoldersStore from "SRC_DIR/store/TreeFoldersStore";
 import OformsStore from "SRC_DIR/store/OformsStore";
 
 type InfoPanelHeaderContentProps = {
@@ -43,6 +44,8 @@ type InfoPanelHeaderContentProps = {
   infoPanelItemsList: PluginStore["infoPanelItemsList"];
 
   enablePlugins: SettingsStore["enablePlugins"];
+
+  isRecentFolder: TreeFoldersStore["isRecentFolder"];
 
   gallerySelected: OformsStore["gallerySelected"];
 };

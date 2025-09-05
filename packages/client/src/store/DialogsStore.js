@@ -35,6 +35,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import TrashIconSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import PenSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import UploadSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
+import { ROOM_ACTION_KEYS } from "@docspace/shared/constants";
 
 import {
   getRoomCovers,
@@ -965,7 +966,7 @@ class DialogsStore {
       {
         label: t("RoomLogoCover:UploadPicture"),
         icon: UploadSvgUrl,
-        key: "create_edit_room_upload",
+        key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_UPLOAD,
         onClick: (ref) => ref.current.click(),
       },
 
@@ -973,13 +974,13 @@ class DialogsStore {
         ? {
             label: t("Common:Delete"),
             icon: TrashIconSvgUrl,
-            key: "create_edit_room_delete",
+            key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_DELETE,
             onClick: onDelete ? onDelete() : () => this.deleteRoomLogo(),
           }
         : {
             label: t("RoomLogoCover:CustomizeCover"),
             icon: PenSvgUrl,
-            key: "create_edit_room_customize_cover",
+            key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_CUSTOMIZE_COVER,
             onClick: () => this.setRoomLogoCoverDialogVisible(true),
           },
     ];

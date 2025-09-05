@@ -3,7 +3,7 @@
   "content": "Last activity date",
   "content_en_sha1_hash": "7858db9eac1fd53a9a6e83786014f02e6d83aea2",
   "created_at": "2025-05-19T21:30:46.047Z",
-  "updated_at": "2025-08-11T09:02:43.930Z",
+  "updated_at": "2025-08-29T14:33:38.146Z",
   "comment": {
     "text": "The \"LastActivityDate\" translation key is used to display a date label in a filter section, likely on a sorting options page. It appears next to a button or similar UI element that allows users to sort by the last activity date of a file or item. This key should be translated for use in various file and item metadata descriptions.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1167,
-      "context": "default: true,\n };\n const activityDate = {\n id: \"sort-by_activity\",\n key: SortByFieldName.ModifiedDate,\n label: t(\"Common:LastActivityDate\"),\n default: true,\n };\n const lastOpenedDate = {\n id: \"sort-by_last-opened\",\n key: SortByFieldName.LastOpened,",
+      "line_number": 1253,
+      "context": "default: true,\n };\n const activityDate = {\n id: \"sort-by_activity\",\n key: SortByFieldName.ModifiedDate,\n label: t(\"Common:LastActivityDate\"),\n default: true,\n };\n \n const owner = {\n id: \"sort-by_owner\",",
       "module": "/packages/client"
     }
   ],

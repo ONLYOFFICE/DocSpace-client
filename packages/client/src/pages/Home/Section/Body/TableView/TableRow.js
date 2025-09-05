@@ -40,6 +40,7 @@ import RecentRowDataComponent from "./sub-components/RecentRowData";
 import IndexRowDataComponent from "./sub-components/IndexRowData";
 import TemplatesRowData from "./sub-components/TemplatesRowData";
 import RowDataComponent from "./sub-components/RowData";
+import FavoritesRowDataComponent from "./sub-components/FavoritesRowData";
 import { StyledTableRow, StyledDragAndDrop } from "./StyledTable";
 
 const FilesTableRow = (props) => {
@@ -77,7 +78,8 @@ const FilesTableRow = (props) => {
     onDragOver,
     onDragLeave,
     badgeUrl,
-    isRecentTab,
+    isRecentFolder,
+    isFavoritesFolder,
     canDrag,
     onEditIndex,
     isIndexUpdated,
@@ -296,8 +298,15 @@ const FilesTableRow = (props) => {
             dragStyles={dragStyles}
             {...props}
           />
-        ) : isRecentTab ? (
+        ) : isRecentFolder ? (
           <RecentRowDataComponent
+            element={element}
+            dragStyles={dragStyles}
+            selectionProp={selectionProp}
+            {...props}
+          />
+        ) : isFavoritesFolder ? (
+          <FavoritesRowDataComponent
             element={element}
             dragStyles={dragStyles}
             selectionProp={selectionProp}

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { t } from "i18next";
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 
 import { getSettingsThirdParty } from "@docspace/shared/api/files";
 import {

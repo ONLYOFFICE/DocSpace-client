@@ -30,8 +30,6 @@ import { withTranslation } from "react-i18next";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
-import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
-
 import { injectDefaultTheme } from "@docspace/shared/utils";
 import { MobileCategoryWrapper } from "@docspace/shared/components/mobile-category-wrapper";
 

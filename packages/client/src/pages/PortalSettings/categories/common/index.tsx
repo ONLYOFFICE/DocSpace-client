@@ -58,9 +58,6 @@ type TabsCommonProps = {
   currentDeviceType: DeviceType;
   isMobileView: boolean;
   isCommunity: boolean;
-  getGreetingSettingsIsDefault: () => Promise<void>;
-  setIsLoaded: (value: boolean) => void;
-  isLoaded: boolean;
   brandingStore: BrandingStore;
   settingsStore: SettingsStore;
   common: CommonStore;

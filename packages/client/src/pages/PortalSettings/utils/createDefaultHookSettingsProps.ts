@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import BackupStore from "SRC_DIR/store/BackupStore";
-import TreeFoldersStore from "SRC_DIR/store/TreeFoldersStore";
 import SetupStore from "SRC_DIR/store/SettingsSetupStore";
 import SsoFormStore from "SRC_DIR/store/SsoFormStore";
 import PluginStore from "SRC_DIR/store/PluginStore";

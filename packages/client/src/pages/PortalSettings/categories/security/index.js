@@ -24,21 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Tabs } from "@docspace/shared/components/tabs";
 import { useNavigate, useLocation } from "react-router";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import { DeviceType } from "@docspace/shared/enums";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
+import config from "PACKAGE_FILE";
 import MobileSecurityLoader from "./sub-components/loaders/mobile-security-loader";
 import AccessLoader from "./sub-components/loaders/access-loader";
 import SecurityLoader from "./sub-components/loaders/security-loader";
-import { DeviceType } from "@docspace/shared/enums";
 
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 import { createDefaultHookSettingsProps } from "../../utils/createDefaultHookSettingsProps";
 
-import config from "PACKAGE_FILE";
 import AccessPortal from "./access-portal";
 import LoginHistory from "./login-history";
 import AuditTrail from "./audit-trail";

@@ -68,9 +68,9 @@ const useDataImport = ({
       const isErrorOrFailedParse =
         error || parseResult?.failedArchives.length > 0;
       const isNoUsersParsed =
-        parseResult?.users.length +
-          parseResult?.existUsers.length +
-          parseResult?.withoutEmailUsers.length ===
+        (parseResult?.users.length ?? 0) +
+          (parseResult?.existUsers.length ?? 0) +
+          (parseResult?.withoutEmailUsers.length ?? 0) ===
         0;
 
       if (isErrorOrFailedParse || isNoUsersParsed) return;

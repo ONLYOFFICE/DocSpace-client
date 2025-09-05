@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { Button } from "@docspace/shared/components/button";
-import { useState, Suspense } from "react";
+import { useState } from "react";
 
 import { inject, observer } from "mobx-react";
 

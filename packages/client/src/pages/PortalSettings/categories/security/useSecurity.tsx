@@ -44,7 +44,6 @@ export type UseSecurityProps = {
   getAuditTrail?: SettingsSetupStore["getAuditTrail"];
   initSettings?: SettingsSetupStore["initSettings"];
   isInit?: SettingsSetupStore["isInit"];
-  currentDeviceType?: SettingsStore["currentDeviceType"];
 };
 
 const useSecurity = ({
@@ -60,7 +59,6 @@ const useSecurity = ({
   getAuditTrail,
   initSettings,
   isInit,
-  currentDeviceType,
 }: UseSecurityProps) => {
   const getAccessPortalData = useCallback(async () => {
     await initSettings?.();

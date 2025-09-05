@@ -38,14 +38,14 @@ import { TData } from "@docspace/shared/components/toast/Toast.type";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import { DeviceType } from "@docspace/shared/enums";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { TfaStore } from "@docspace/shared/store/TfaStore";
+import SettingsSetupStore from "SRC_DIR/store/SettingsSetupStore";
 import styles from "./InvitationSettings.module.scss";
 import { LearnMoreWrapper } from "../StyledSecurity";
 import InvitationLoader from "../sub-components/loaders/invitation-loader";
 import useSecurity from "../useSecurity";
 import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
-import { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import { TfaStore } from "@docspace/shared/store/TfaStore";
-import SettingsSetupStore from "SRC_DIR/store/SettingsSetupStore";
 
 const InvitationSettings = ({
   t,

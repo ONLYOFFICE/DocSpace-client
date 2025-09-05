@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { observer, inject } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -34,7 +34,6 @@ import { useUnmount } from "@docspace/shared/hooks/useUnmount";
 
 import type { ThirdPartyAccountType } from "@docspace/shared/types";
 import type { TColorScheme } from "@docspace/shared/themes";
-// import { getBackupsCount } from "@docspace/shared/api/backup";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import type {

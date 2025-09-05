@@ -41,8 +41,6 @@ let timerId = null;
 
 const SaaSPage = ({
   language,
-  isLoadedTariffStatus,
-  isLoadedCurrentQuota,
   isInitPaymentPage,
   isUpdatingTariff,
   isUpdatingBasicSettings,
@@ -87,10 +85,6 @@ const SaaSPage = ({
   }, [ready]);
 
   useEffect(() => {
-    if (!isLoadedTariffStatus || !isLoadedCurrentQuota || !ready) return;
-  }, [isLoadedTariffStatus, isLoadedCurrentQuota, ready]);
-
-  useEffect(() => {
     if (!shouldShowLoader && timerId) {
       clearTimeout(timerId);
       timerId = null;
@@ -125,22 +119,13 @@ const SaaSPage = ({
 };
 
 export default inject(
-  ({
-    authStore,
-    settingsStore,
-    paymentStore,
-    userStore,
-    currentQuotaStore,
-    currentTariffStatusStore,
-  }) => {
+  ({ authStore, settingsStore, paymentStore, userStore }) => {
     const {
       language,
 
       isUpdatingTariff,
     } = authStore;
     const { user } = userStore;
-    const { isLoaded: isLoadedCurrentQuota } = currentQuotaStore;
-    const { isLoaded: isLoadedTariffStatus } = currentTariffStatusStore;
     const {
       isInitPaymentPage,
       isUpdatingBasicSettings,
@@ -169,8 +154,6 @@ export default inject(
       isUpdatingTariff,
       isInitPaymentPage,
       language,
-      isLoadedTariffStatus,
-      isLoadedCurrentQuota,
       isUpdatingBasicSettings,
       setIsUpdatingBasicSettings,
       isShowStorageTariffDeactivatedModal,

@@ -46,14 +46,9 @@ const Wallet = (props) => {
 
   const { t, ready } = useTranslation(["Payments", "Common"]);
 
-  const errorText = t("Common:UnexpectedError");
   const [showLoader, setShowLoader] = useState(false);
 
   const shouldShowLoader = !isInitWalletPage || !ready;
-
-  useEffect(() => {
-    if (!ready) return;
-  }, [errorText, ready]);
 
   useEffect(() => {
     moment.locale(language);

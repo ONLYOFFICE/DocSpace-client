@@ -28,9 +28,6 @@
 
 import React from "react";
 
-import { ToolsPermission } from "../../../../../../../api/ai/enums";
-import { updateToolsPermission } from "../../../../../../../api/ai";
-
 import { MessageToolCallProps } from "../../../../../Chat.types";
 
 import { ToolCallConfirmDialog } from "./ToolCallConfirmDialog";
@@ -38,24 +35,22 @@ import { ToolCall } from "./ToolCall";
 
 const ToolCallMessage = ({ content }: MessageToolCallProps) => {
   const [needConfirmation, setNeedConfirmation] = React.useState(
-    () => !!content.additionalProperties?.managed,
+    () => !!content.additionalProperties?.managed || true,
   );
 
-  const onClickAction = (decision: ToolsPermission) => {
-    if (!content.callId) return;
+  const hideConfirmDialog = () => setNeedConfirmation(false);
 
-    setNeedConfirmation(false);
+  return (
+    <div>
+      <ToolCall
+        content={content}
+        status={needConfirmation || !content.result ? "loading" : "success"}
+      />
 
-    updateToolsPermission(content.callId, decision);
-  };
-
-  return needConfirmation ? (
-    <ToolCallConfirmDialog content={content} />
-  ) : (
-    <ToolCall
-      content={content}
-      status={needConfirmation || !content.result ? "loading" : "success"}
-    />
+      {needConfirmation ? (
+        <ToolCallConfirmDialog content={content} onClose={hideConfirmDialog} />
+      ) : null}
+    </div>
   );
 };
 

@@ -31,57 +31,80 @@ import { useTranslation } from "react-i18next";
 
 import { ToolsPermission } from "../../../../../../../api/ai/enums";
 import type { TToolCallContent } from "../../../../../../../api/ai/types";
+import { updateToolsPermission } from "../../../../../../../api/ai";
 
 import { Text } from "../../../../../../text";
 import { Button, ButtonSize } from "../../../../../../button";
 
 import styles from "../../../ChatMessageBody.module.scss";
 import { ToolCall } from "./ToolCall";
+import { ModalDialog, ModalDialogType } from "../../../../../../modal-dialog";
+import { isMobile } from "../../../../../../../utils";
 
 type ToolCallConfirmDialogProps = {
   content: TToolCallContent;
+  onClose: () => void;
 };
 
 export const ToolCallConfirmDialog = ({
   content,
+  onClose,
 }: ToolCallConfirmDialogProps) => {
   const { t } = useTranslation(["Common"]);
 
   const onClickAction = (decision: ToolsPermission) => {
-    console.log(decision);
+    if (!content.callId) return;
+
+    updateToolsPermission(content.callId, decision);
+
+    onClose();
   };
 
   return (
-    <div className={styles.toolCallManage}>
-      <Text>AI would like to use this tool</Text>
-      <ToolCall content={content} />
-      <div>
-        <Text>{t("Common:ReviewAction")}</Text>
-        <Text>{t("Common:CannotGuaranteeSecurity")}</Text>
-      </div>
-      <div className={styles.buttonsBlockContaiener}>
-        <div className={styles.approveButtonBlock}>
+    <ModalDialog
+      visible
+      displayType={ModalDialogType.modal}
+      onClose={onClose}
+      isLarge
+    >
+      <ModalDialog.Header>{t("Common:Confirmation")}</ModalDialog.Header>
+
+      <ModalDialog.Body>
+        <div className={styles.toolCallManage}>
+          <Text>AI would like to use this tool</Text>
+          <ToolCall content={content} />
+          <div>
+            <Text>{t("Common:ReviewAction")}</Text>
+            <Text>{t("Common:CannotGuaranteeSecurity")}</Text>
+          </div>
+        </div>
+      </ModalDialog.Body>
+
+      <ModalDialog.Footer>
+        <div className={styles.buttonsBlockContainer}>
           <Button
-            size={ButtonSize.small}
             primary
-            scale
             label={t("Common:AllowAlways")}
             onClick={() => onClickAction(ToolsPermission.AlwaysAllow)}
+            size={ButtonSize.normal}
+            scale={isMobile()}
           />
           <Button
-            size={ButtonSize.small}
             primary
-            scale
             label={t("Common:AllowOnce")}
             onClick={() => onClickAction(ToolsPermission.Allow)}
+            scale={isMobile()}
+            size={ButtonSize.normal}
+          />
+          <Button
+            className={styles.denyButton}
+            label={t("Common:Deny")}
+            onClick={() => onClickAction(ToolsPermission.Deny)}
+            size={ButtonSize.normal}
+            scale={isMobile()}
           />
         </div>
-        <Button
-          size={ButtonSize.small}
-          label={t("Common:Deny")}
-          onClick={() => onClickAction(ToolsPermission.Deny)}
-        />
-      </div>
-    </div>
+      </ModalDialog.Footer>
+    </ModalDialog>
   );
 };

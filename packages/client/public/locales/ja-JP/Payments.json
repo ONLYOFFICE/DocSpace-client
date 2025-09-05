@@ -38,7 +38,6 @@
   "ChooseNewPlan": " 新しい料金プランの選択を希望されますか？",
   "ConfirmPayment": "お支払いを確定",
   "ConnectAndConfigureServices": "このセクションは、サービスを接続および設定するために使用されます。",
-  "Cost": "価格",
   "Credit": "クレジット",
   "CurrencyPerMonth": "{{currency}}/月",
   "CurrentBalance": "現在の残高：<1>{{balance}}</1>",

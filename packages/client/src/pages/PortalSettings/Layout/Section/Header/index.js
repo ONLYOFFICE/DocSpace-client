@@ -40,8 +40,12 @@ import { mobile, tablet, desktop, isMobile } from "@docspace/shared/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Badge } from "@docspace/shared/components/badge";
 import { globalColors } from "@docspace/shared/themes";
+import { DeviceType } from "@docspace/shared/enums";
+
 import TariffBar from "SRC_DIR/components/TariffBar";
 import { IMPORT_HEADER_CONST } from "SRC_DIR/pages/PortalSettings/utils/settingsTree";
+
+import Warning from "../../WarningComponent";
 import {
   getKeyByLink,
   settingsTree,
@@ -69,6 +73,9 @@ export const HeaderContainer = styled.div`
       overflow: hidden;
       color: ${(props) => props.theme.client.settings.headerTitleColor};
     }
+  }
+  .settings-section_warning {
+    margin-inline-start: 16px;
   }
   .action-wrapper {
     flex-grow: 1;
@@ -153,6 +160,9 @@ const SectionHeaderContent = (props) => {
     selectorIsOpen,
     toggleSelector,
     removeAdmins,
+    deviceType,
+    isNotPaidPeriod,
+    isBackupPaid,
   } = props;
 
   const navigate = useNavigate();
@@ -197,6 +207,9 @@ const SectionHeaderContent = (props) => {
       case "SingleSignOn:ServiceProviderSettings":
       case "SingleSignOn:SpMetadata":
         return isSSOAvailable;
+      case "Backup":
+        if (isNotPaidPeriod) return true;
+        return !isBackupPaid;
       default:
         return true;
     }
@@ -380,12 +393,16 @@ const SectionHeaderContent = (props) => {
               )}
             </div>
           </Heading>
+          {deviceType === DeviceType.desktop ? (
+            <div className="settings-section_warning">
+              <Warning />
+            </div>
+          ) : null}
           {arrayOfParams[0] !== "payments" && arrayOfParams.length < 3 ? (
             <div className="tariff-bar">
               <TariffBar />
             </div>
           ) : null}
-
           {addUsers ? (
             <div className="action-wrapper">
               <IconButton
@@ -411,12 +428,15 @@ export default inject(
     importAccountsStore,
     settingsStore,
     oauthStore,
+    currentTariffStatusStore,
   }) => {
     const {
       isCustomizationAvailable,
       isRestoreAndAutoBackupAvailable,
       isSSOAvailable,
+      isBackupPaid,
     } = currentQuotaStore;
+    const { isNotPaidPeriod } = currentTariffStatusStore;
     const { addUsers, removeAdmins } = setup.headerAction;
     const { toggleSelector } = setup;
     const {
@@ -433,7 +453,7 @@ export default inject(
     const { isLoadedSectionHeader, setIsLoadedSectionHeader } = common;
 
     const { workspace } = importAccountsStore;
-    const { standalone, logoText } = settingsStore;
+    const { standalone, logoText, deviceType } = settingsStore;
 
     const { getHeaderMenuItems } = oauthStore;
     return {
@@ -461,6 +481,9 @@ export default inject(
       getHeaderMenuItems,
       setSelections: oauthStore.setSelections,
       logoText,
+      deviceType,
+      isNotPaidPeriod,
+      isBackupPaid,
     };
   },
 )(

@@ -38,7 +38,6 @@
   "ChooseNewPlan": "새로운 요금제를 선택하시겠습니까?",
   "ConfirmPayment": "결제 확인",
   "ConnectAndConfigureServices": "이 섹션은 서비스 연결 및 구성을 위해 사용됩니다.",
-  "Cost": "비용",
   "Credit": "신용",
   "CurrencyPerMonth": "{{currency}}/월",
   "CurrentBalance": "현재 잔액: <1>{{balance}}</1>",

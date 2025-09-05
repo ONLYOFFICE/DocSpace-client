@@ -38,7 +38,6 @@
   "ChooseNewPlan": "Haluaisitko valita uuden hinnoitteluohjelman?",
   "ConfirmPayment": "Vahvista maksu",
   "ConnectAndConfigureServices": "Tämä osio on tarkoitettu palveluiden yhdistämiseen ja konfigurointiin.",
-  "Cost": "Kustannus",
   "Credit": "Luotto",
   "CurrencyPerMonth": "{{currency}}/kuukausi",
   "CurrentBalance": "Nykyinen saldo: <1>{{balance}}</1>",

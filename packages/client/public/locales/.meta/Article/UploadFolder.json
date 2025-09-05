@@ -3,7 +3,7 @@
   "content": "Upload folder",
   "content_en_sha1_hash": "e77a1496f8e8093547d02f31abdfb67b6e95e806",
   "created_at": "2025-05-19T21:30:57.049Z",
-  "updated_at": "2025-08-04T07:30:00.971Z",
+  "updated_at": "2025-09-02T07:59:28.294Z",
   "comment": {
     "text": "The translation key \"UploadFolder\" is used to display the text for an upload folder button. It appears in a button component, where it allows users to select a folder for uploading files, and its purpose is to provide a clear label for this action.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2827,
+      "line_number": 3071,
       "context": "icon: ActionsUploadReactSvgUrl,\n };\n \n const uploadFolder = {\n key: \"upload-folder\",\n label: t(\"Article:UploadFolder\"),\n onClick: () => this.onUploadAction(\"folder\"),\n icon: ActionsUploadReactSvgUrl,\n };\n \n if (isFormRoomType) {",
       "module": "/packages/client"
     }

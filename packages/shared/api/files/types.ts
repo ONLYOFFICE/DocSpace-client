@@ -143,6 +143,12 @@ export type TFile = {
   hasDraft?: boolean;
   order?: string;
   lockedBy?: string;
+  originId?: number;
+  originRoomId?: number;
+  originRoomTitle?: string;
+  originTitle?: string;
+  requestToken?: string;
+  isFavorite?: boolean;
 };
 
 export type TOpenEditRequest = {
@@ -234,6 +240,7 @@ export type TFolder = {
   isRoom?: false;
   shareSettings?: TShareSettings;
   availableExternalRights?: TAvailableExternalRights;
+  isFavorite?: boolean;
 };
 
 export type TGetFolderPath = TFolder[];

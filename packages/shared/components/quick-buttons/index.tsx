@@ -34,6 +34,8 @@ import LifetimeReactSvgUrl from "PUBLIC_DIR/images/lifetime.react.svg?url";
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
 import LockedIconReactSvg from "PUBLIC_DIR/images/file.actions.locked.react.svg?url";
 import LockedIconReact12Svg from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";
+import FavoriteReactSvgUrl from "PUBLIC_DIR/images/favorite.react.svg?url";
+import FavoriteFillReactSvgUrl from "PUBLIC_DIR/images/favorite.fill.react.svg?url";
 
 import { classNames, IconSizeType, isTablet, isDesktop } from "../../utils";
 import { RoomsType, ShareAccessRights } from "../../enums";
@@ -62,6 +64,8 @@ export const QuickButtons = (props: QuickButtonsProps) => {
     onCreateRoom,
     isTemplatesFolder,
     onClickLock,
+    onClickFavorite,
+    isRecentFolder,
   } = props;
 
   const { id, shared, security } = item;
@@ -211,8 +215,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
                 data-id={id}
                 data-locked={!!locked}
                 onClick={onIconLockClick}
-                color="--quick-buttons-shared-color"
-                hoverColor="accent"
+                color="accent"
                 title={t("Common:UnblockFile")}
                 data-tooltip-id={`lockTooltip${item.id}`}
               />
@@ -226,6 +229,20 @@ export const QuickButtons = (props: QuickButtonsProps) => {
                 />
               ) : null}
             </>
+          ) : null}
+
+          {!isRoom(item) && item?.isFavorite && !isRecentFolder ? (
+            <IconButton
+              iconName={
+                item?.isFavorite ? FavoriteFillReactSvgUrl : FavoriteReactSvgUrl
+              }
+              className={classNames("badge icons-group")}
+              size={sizeQuickButton}
+              onClick={onClickFavorite}
+              color="accent"
+              isDisabled={isDisabled}
+              title={t("Common:Favorites")}
+            />
           ) : null}
         </>
       ) : null}

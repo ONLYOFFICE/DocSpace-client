@@ -86,8 +86,11 @@ export interface ICreateDialog {
   ) => Promise<IMessage> | Promise<void> | IMessage | void;
   onCancel?: (e: unknown) => void;
   onClose?: (e: unknown) => void;
+  onChange?: (value: string) => void;
   isCreateDialog: boolean;
   extension?: string;
+  errorText?: string;
+  isAutoFocusOnError?: boolean;
 }
 
 export interface IImage {
@@ -155,11 +158,12 @@ export interface IContextMenuItem {
   fileType?: PluginFileType[];
   usersTypes?: PluginUsersType[];
   devices?: PluginDevices[];
-  security?: (
-    | keyof TRoomSecurity
+  itemSecurity?: (
     | keyof TFileSecurity
+    | keyof TRoomSecurity
     | keyof TFolderSecurity
   )[];
+  security?: (keyof TRoomSecurity | keyof TFolderSecurity)[];
   pluginName?: string;
 }
 
@@ -182,6 +186,8 @@ export interface IFileItem {
   fileTileIcon?: string;
   fileIcon?: string;
   fileIconTile?: string;
+  security?: (keyof TRoomSecurity | keyof TFolderSecurity)[];
+  fileSecurity?: (keyof TFileSecurity)[];
   pluginName?: string;
 }
 

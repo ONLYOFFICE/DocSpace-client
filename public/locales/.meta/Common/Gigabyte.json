@@ -3,7 +3,7 @@
   "content": "GB",
   "content_en_sha1_hash": "505a44facaa3e758845f6e101f4e21f9d99acf63",
   "created_at": "2025-05-19T21:30:45.623Z",
-  "updated_at": "2025-08-11T18:11:59.158Z",
+  "updated_at": "2025-08-29T14:33:38.071Z",
   "comment": {
     "text": "This translation key is used to display the unit \"Gigabyte\" (GB) in a file quota form. It appears on a dropdown menu where users can select their preferred size unit for displaying and managing files. Translators should note that this term will be used as an option within a larger list of units, including Bytes, Kilobytes, Megabytes, Terabytes, Petabytes, Exabytes, and others.",
     "is_auto": true,
@@ -17,115 +17,115 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/RowView/RowBody.tsx",
-      "line_number": 74,
-      "context": "serviceName = \"disk-storage\";\n }\n \n switch (serviceName) {\n case \"disk-storage\":\n return `${quantity} ${t(\"Common:Gigabyte\")}`;\n default:\n return \"—\";\n }\n };\n const correctDate = getCorrectDate(language, transaction.date);",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/TableView/TableBody.tsx",
-      "line_number": 69,
-      "context": "serviceName = \"disk-storage\";\n }\n \n switch (serviceName) {\n case \"disk-storage\":\n return `${quantity} ${t(\"Common:Gigabyte\")}`;\n default:\n return \"—\";\n }\n };\n const correctDate = getCorrectDate(language, transaction.date);",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/AdditionalStorage.tsx",
-      "line_number": 122,
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/ServicesItems.tsx",
+      "line_number": 138,
       "context": "const textTooltip = () => {\n return (\n <>\n <Text fontWeight={600} fontSize=\"12px\">\n {t(\"StorageUpgradeMessage\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n toSize: `${nextStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n })}\n </Text>\n <Text fontSize=\"12px\">\n {nextStoragePlanSize === 0",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/AdditionalStorage.tsx",
-      "line_number": 122,
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/ServicesItems.tsx",
+      "line_number": 138,
       "context": "const textTooltip = () => {\n return (\n <>\n <Text fontWeight={600} fontSize=\"12px\">\n {t(\"StorageUpgradeMessage\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n toSize: `${nextStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n })}\n </Text>\n <Text fontSize=\"12px\">\n {nextStoragePlanSize === 0",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/AdditionalStorage.tsx",
-      "line_number": 122,
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/ServicesItems.tsx",
+      "line_number": 138,
       "context": "const textTooltip = () => {\n return (\n <>\n <Text fontWeight={600} fontSize=\"12px\">\n {t(\"StorageUpgradeMessage\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n toSize: `${nextStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n })}\n </Text>\n <Text fontSize=\"12px\">\n {nextStoragePlanSize === 0",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/StoragePlanCancel.tsx",
-      "line_number": 127,
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AdditionalStorage/PlanInfo.tsx",
+      "line_number": 73,
+      "context": "const { maxStorageLimit, t, isStorageCancellation } = useServicesActions();\n \n const getStorageStatusText = () => {\n if (!hasStorageSubscription) {\n return t(\"AdditionalStorage\", {\n amount: `${amount} ${t(\"Common:Gigabyte\")}`,\n });\n }\n \n if (!isCurrentStoragePlan) {\n return t(\"StorageUpgradeMessage\", {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AdditionalStorage/PlanInfo.tsx",
+      "line_number": 73,
+      "context": "const { maxStorageLimit, t, isStorageCancellation } = useServicesActions();\n \n const getStorageStatusText = () => {\n if (!hasStorageSubscription) {\n return t(\"AdditionalStorage\", {\n amount: `${amount} ${t(\"Common:Gigabyte\")}`,\n });\n }\n \n if (!isCurrentStoragePlan) {\n return t(\"StorageUpgradeMessage\", {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AdditionalStorage/PlanInfo.tsx",
+      "line_number": 73,
+      "context": "const { maxStorageLimit, t, isStorageCancellation } = useServicesActions();\n \n const getStorageStatusText = () => {\n if (!hasStorageSubscription) {\n return t(\"AdditionalStorage\", {\n amount: `${amount} ${t(\"Common:Gigabyte\")}`,\n });\n }\n \n if (!isCurrentStoragePlan) {\n return t(\"StorageUpgradeMessage\", {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AdditionalStorage/PlanInfo.tsx",
+      "line_number": 73,
+      "context": "const { maxStorageLimit, t, isStorageCancellation } = useServicesActions();\n \n const getStorageStatusText = () => {\n if (!hasStorageSubscription) {\n return t(\"AdditionalStorage\", {\n amount: `${amount} ${t(\"Common:Gigabyte\")}`,\n });\n }\n \n if (!isCurrentStoragePlan) {\n return t(\"StorageUpgradeMessage\", {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AdditionalStorage/PlanInfo.tsx",
+      "line_number": 73,
+      "context": "const { maxStorageLimit, t, isStorageCancellation } = useServicesActions();\n \n const getStorageStatusText = () => {\n if (!hasStorageSubscription) {\n return t(\"AdditionalStorage\", {\n amount: `${amount} ${t(\"Common:Gigabyte\")}`,\n });\n }\n \n if (!isCurrentStoragePlan) {\n return t(\"StorageUpgradeMessage\", {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AdditionalStorage/PlanInfo.tsx",
+      "line_number": 73,
+      "context": "const { maxStorageLimit, t, isStorageCancellation } = useServicesActions();\n \n const getStorageStatusText = () => {\n if (!hasStorageSubscription) {\n return t(\"AdditionalStorage\", {\n amount: `${amount} ${t(\"Common:Gigabyte\")}`,\n });\n }\n \n if (!isCurrentStoragePlan) {\n return t(\"StorageUpgradeMessage\", {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AdditionalStorage/PlanInfo.tsx",
+      "line_number": 73,
+      "context": "const { maxStorageLimit, t, isStorageCancellation } = useServicesActions();\n \n const getStorageStatusText = () => {\n if (!hasStorageSubscription) {\n return t(\"AdditionalStorage\", {\n amount: `${amount} ${t(\"Common:Gigabyte\")}`,\n });\n }\n \n if (!isCurrentStoragePlan) {\n return t(\"StorageUpgradeMessage\", {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AdditionalStorage/PlanUpgradePreview.tsx",
+      "line_number": 87,
+      "context": "const tooltipText = () => {\n return (\n <>\n <Text as=\"span\">\n {daysUntilStorageExpiry === 0\n ? t(\"PartialPaymentNoDate\", { storageUnit: t(\"Common:Gigabyte\") })\n : t(\"PartialPaymentWithDate\", {\n startDate: moment().tz(window.timezone).format(\"LL\"),\n endDate: storageExpiryDate,\n storageUnit: t(\"Common:Gigabyte\"),\n })}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AdditionalStorage/PlanUpgradePreview.tsx",
+      "line_number": 87,
+      "context": "const tooltipText = () => {\n return (\n <>\n <Text as=\"span\">\n {daysUntilStorageExpiry === 0\n ? t(\"PartialPaymentNoDate\", { storageUnit: t(\"Common:Gigabyte\") })\n : t(\"PartialPaymentWithDate\", {\n startDate: moment().tz(window.timezone).format(\"LL\"),\n endDate: storageExpiryDate,\n storageUnit: t(\"Common:Gigabyte\"),\n })}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AdditionalStorage/PlanUpgradePreview.tsx",
+      "line_number": 87,
+      "context": "const tooltipText = () => {\n return (\n <>\n <Text as=\"span\">\n {daysUntilStorageExpiry === 0\n ? t(\"PartialPaymentNoDate\", { storageUnit: t(\"Common:Gigabyte\") })\n : t(\"PartialPaymentWithDate\", {\n startDate: moment().tz(window.timezone).format(\"LL\"),\n endDate: storageExpiryDate,\n storageUnit: t(\"Common:Gigabyte\"),\n })}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AdditionalStorage/SelectionAmount.tsx",
+      "line_number": 112,
+      "context": "const amounts = [100, 200, 500, 1024];\n return amounts.map((item) => {\n const name =\n item > 800\n ? `1 ${t(\"Common:Terabyte\")}`\n : `${item} ${t(\"Common:Gigabyte\")}`;\n return { value: item, name };\n });\n };\n \n const getDirectionalText = (from: number, to: number) => {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AdditionalStorage/SelectionAmount.tsx",
+      "line_number": 112,
+      "context": "const amounts = [100, 200, 500, 1024];\n return amounts.map((item) => {\n const name =\n item > 800\n ? `1 ${t(\"Common:Terabyte\")}`\n : `${item} ${t(\"Common:Gigabyte\")}`;\n return { value: item, name };\n });\n };\n \n const getDirectionalText = (from: number, to: number) => {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AdditionalStorage/SelectionAmount.tsx",
+      "line_number": 112,
+      "context": "const amounts = [100, 200, 500, 1024];\n return amounts.map((item) => {\n const name =\n item > 800\n ? `1 ${t(\"Common:Terabyte\")}`\n : `${item} ${t(\"Common:Gigabyte\")}`;\n return { value: item, name };\n });\n };\n \n const getDirectionalText = (from: number, to: number) => {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AdditionalStorage/StoragePlanCancel.tsx",
+      "line_number": 126,
       "context": "<Trans\n t={t}\n ns=\"Payments\"\n i18nKey=\"YourCurrentPlan\"\n values={{\n amount: `${currentStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n price: formatWalletCurrency!(totalPrice!, 2),\n }}\n components={{\n 1: <Text fontWeight={600} as=\"span\" />,\n 2: <Text className={styles.monthPayment} as=\"span\" />,",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/PlanInfo.tsx",
-      "line_number": 73,
-      "context": "const { maxStorageLimit, t, isStorageCancellation } = useServicesActions();\n \n const getStorageStatusText = () => {\n if (!hasStorageSubscription) {\n return t(\"AdditionalStorage\", {\n amount: `${amount} ${t(\"Common:Gigabyte\")}`,\n });\n }\n \n if (!isCurrentStoragePlan) {\n return t(\"StorageUpgradeMessage\", {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/PlanInfo.tsx",
-      "line_number": 73,
-      "context": "const { maxStorageLimit, t, isStorageCancellation } = useServicesActions();\n \n const getStorageStatusText = () => {\n if (!hasStorageSubscription) {\n return t(\"AdditionalStorage\", {\n amount: `${amount} ${t(\"Common:Gigabyte\")}`,\n });\n }\n \n if (!isCurrentStoragePlan) {\n return t(\"StorageUpgradeMessage\", {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/PlanInfo.tsx",
-      "line_number": 73,
-      "context": "const { maxStorageLimit, t, isStorageCancellation } = useServicesActions();\n \n const getStorageStatusText = () => {\n if (!hasStorageSubscription) {\n return t(\"AdditionalStorage\", {\n amount: `${amount} ${t(\"Common:Gigabyte\")}`,\n });\n }\n \n if (!isCurrentStoragePlan) {\n return t(\"StorageUpgradeMessage\", {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/PlanInfo.tsx",
-      "line_number": 73,
-      "context": "const { maxStorageLimit, t, isStorageCancellation } = useServicesActions();\n \n const getStorageStatusText = () => {\n if (!hasStorageSubscription) {\n return t(\"AdditionalStorage\", {\n amount: `${amount} ${t(\"Common:Gigabyte\")}`,\n });\n }\n \n if (!isCurrentStoragePlan) {\n return t(\"StorageUpgradeMessage\", {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/PlanInfo.tsx",
-      "line_number": 73,
-      "context": "const { maxStorageLimit, t, isStorageCancellation } = useServicesActions();\n \n const getStorageStatusText = () => {\n if (!hasStorageSubscription) {\n return t(\"AdditionalStorage\", {\n amount: `${amount} ${t(\"Common:Gigabyte\")}`,\n });\n }\n \n if (!isCurrentStoragePlan) {\n return t(\"StorageUpgradeMessage\", {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/PlanInfo.tsx",
-      "line_number": 73,
-      "context": "const { maxStorageLimit, t, isStorageCancellation } = useServicesActions();\n \n const getStorageStatusText = () => {\n if (!hasStorageSubscription) {\n return t(\"AdditionalStorage\", {\n amount: `${amount} ${t(\"Common:Gigabyte\")}`,\n });\n }\n \n if (!isCurrentStoragePlan) {\n return t(\"StorageUpgradeMessage\", {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/PlanInfo.tsx",
-      "line_number": 73,
-      "context": "const { maxStorageLimit, t, isStorageCancellation } = useServicesActions();\n \n const getStorageStatusText = () => {\n if (!hasStorageSubscription) {\n return t(\"AdditionalStorage\", {\n amount: `${amount} ${t(\"Common:Gigabyte\")}`,\n });\n }\n \n if (!isCurrentStoragePlan) {\n return t(\"StorageUpgradeMessage\", {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/PlanUpgradePreview.tsx",
-      "line_number": 166,
-      "context": "<UpgradeWalletIcon />\n </div>\n <div className={styles.planInfoBody}>\n <Text fontWeight={600}>\n {t(\"AdditionalStorage\", {\n amount: `${calculateDifference(amount, currentStoragePlanSize!)} ${t(\"Common:Gigabyte\")}`,\n })}\n </Text>\n <Text\n fontWeight=\"600\"\n fontSize=\"11px\"",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/SelectionAmount.tsx",
-      "line_number": 139,
-      "context": "const amounts = [100, 200, 500, 1024];\n return amounts.map((item) => {\n const name =\n item > 800\n ? `1 ${t(\"Common:Terabyte\")}`\n : `${item} ${t(\"Common:Gigabyte\")}`;\n return { value: item, name };\n });\n };\n \n const getDirectionalText = (from: number, to: number) => {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/SelectionAmount.tsx",
-      "line_number": 139,
-      "context": "const amounts = [100, 200, 500, 1024];\n return amounts.map((item) => {\n const name =\n item > 800\n ? `1 ${t(\"Common:Terabyte\")}`\n : `${item} ${t(\"Common:Gigabyte\")}`;\n return { value: item, name };\n });\n };\n \n const getDirectionalText = (from: number, to: number) => {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/SelectionAmount.tsx",
-      "line_number": 139,
-      "context": "const amounts = [100, 200, 500, 1024];\n return amounts.map((item) => {\n const name =\n item > 800\n ? `1 ${t(\"Common:Terabyte\")}`\n : `${item} ${t(\"Common:Gigabyte\")}`;\n return { value: item, name };\n });\n };\n \n const getDirectionalText = (from: number, to: number) => {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/StorageWarning.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AdditionalStorage/StorageWarning.tsx",
       "line_number": 55,
       "context": "<InfoIcon />\n <Text fontWeight={600}>{t(\"Important\")}</Text>\n </div>\n <Text>\n {t(\"Warning\", {\n amount: `${currentStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n storageUnit: t(\"Common:Gigabyte\"),\n })}\n </Text>\n </div>\n );",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/StorageWarning.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AdditionalStorage/StorageWarning.tsx",
       "line_number": 55,
       "context": "<InfoIcon />\n <Text fontWeight={600}>{t(\"Important\")}</Text>\n </div>\n <Text>\n {t(\"Warning\", {\n amount: `${currentStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n storageUnit: t(\"Common:Gigabyte\"),\n })}\n </Text>\n </div>\n );",
       "module": "/packages/client"
@@ -138,7 +138,7 @@
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 696,
+      "line_number": 697,
       "context": "const sizeNames = [\n t(\"Common:Bytes\"),\n t(\"Common:Kilobyte\"),\n t(\"Common:Megabyte\"),\n t(\"Common:Gigabyte\"),\n t(\"Common:Terabyte\"),\n t(\"Common:Petabyte\"),\n t(\"Common:Exabyte\"),\n ];",
       "module": "/packages/shared"
     }

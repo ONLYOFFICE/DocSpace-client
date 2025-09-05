@@ -79,11 +79,17 @@ export default function withFileActions(WrappedFileItem) {
     };
 
     onDrop = (items) => {
-      const { isTrashFolder, dragging, setDragging, isDisabledDropItem, item } =
-        this.props;
+      const {
+        isTrashFolder,
+        dragging,
+        setDragging,
+        isDisabledDropItem,
+        item,
+        isRecentFolder,
+      } = this.props;
       const { fileExst, isFolder, id } = item;
 
-      if (isTrashFolder || isDisabledDropItem)
+      if (isTrashFolder || isRecentFolder || isDisabledDropItem)
         return dragging && setDragging(false);
       if (!fileExst && isFolder) {
         this.onDropZoneUpload(items, id);
@@ -229,6 +235,7 @@ export default function withFileActions(WrappedFileItem) {
         !!e.target.closest(".lock-file") ||
         // !!e.target.closest(".additional-badges") ||
         e.target.closest(".tag") ||
+        e.target.closest(".mainIcons") ||
         isTrashFolder
       )
         return;
@@ -295,7 +302,7 @@ export default function withFileActions(WrappedFileItem) {
         itemIndex,
         currentDeviceType,
         isDisabledDropItem,
-        isRecentTab,
+        isRecentFolder,
         canDrag,
         isIndexUpdated,
       } = this.props;
@@ -361,7 +368,7 @@ export default function withFileActions(WrappedFileItem) {
           onDragOver={this.onDragOver}
           onDragLeave={this.onDragLeave}
           badgeUrl={badgeUrl}
-          isRecentTab={isRecentTab}
+          isRecentFolder={isRecentFolder}
           canDrag={canDrag}
           {...this.props}
         />
@@ -402,7 +409,7 @@ export default function withFileActions(WrappedFileItem) {
         isRoomsFolder,
         isArchiveFolder,
         isTemplatesFolder,
-        isRecentTab,
+        isRecentFolder,
       } = treeFoldersStore;
       const {
         dragging,
@@ -486,6 +493,7 @@ export default function withFileActions(WrappedFileItem) {
         isRoomsFolder ||
         isArchiveFolder ||
         isTemplatesFolder ||
+        isRecentFolder ||
         settingsStore.currentDeviceType !== DeviceType.desktop ||
         inProgress;
 
@@ -546,7 +554,7 @@ export default function withFileActions(WrappedFileItem) {
         setSelection,
         currentDeviceType: settingsStore.currentDeviceType,
         isDisabledDropItem,
-        isRecentTab,
+        isRecentFolder,
         isIndexUpdated,
 
         canDrag: !dragIsDisabled,

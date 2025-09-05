@@ -51,7 +51,6 @@ import {
 } from "../panels";
 import {
   ConnectDialog,
-  DeleteThirdPartyDialog,
   EmptyTrashDialog,
   DeleteDialog,
   DownloadDialog,
@@ -102,7 +101,6 @@ const Panels = (props) => {
     moveToPanelVisible,
     restorePanelVisible,
     connectDialogVisible,
-    deleteThirdPartyDialogVisible,
     versionHistoryPanelVisible,
     deleteDialogVisible,
     lifetimeDialogVisible,
@@ -276,9 +274,6 @@ const Panels = (props) => {
       />
     ),
     connectDialogVisible && <ConnectDialog key="connect-dialog" />,
-    deleteThirdPartyDialogVisible && (
-      <DeleteThirdPartyDialog key="thirdparty-delete-dialog" />
-    ),
     versionHistoryPanelVisible && (
       <VersionHistoryPanel key="version-history-panel" />
     ),
@@ -303,6 +298,8 @@ const Panels = (props) => {
         isPanelVisible={selectFileDialogVisible}
         onSelectFile={createMasterForm}
         onClose={onClose}
+        withRecentTreeFolder
+        withFavoritesTreeFolder
       />
     ),
 
@@ -316,6 +313,8 @@ const Panels = (props) => {
         onSelectFile={(file) => copyFromTemplateForm(file, t)}
         filterParam={selectFileFormRoomFilterParam}
         descriptionText={descriptionTextFileFormRoomDialog}
+        withRecentTreeFolder
+        withFavoritesTreeFolder
       />
     ),
 
@@ -444,7 +443,6 @@ export default inject(
       moveToPanelVisible,
       restorePanelVisible,
       connectDialogVisible,
-      deleteThirdPartyDialogVisible,
       deleteDialogVisible,
       lifetimeDialogVisible,
       downloadDialogVisible,
@@ -552,7 +550,6 @@ export default inject(
       moveToPanelVisible,
       restorePanelVisible,
       connectDialogVisible: connectDialogVisible || !!connectItem, // TODO:
-      deleteThirdPartyDialogVisible,
       versionHistoryPanelVisible,
       deleteDialogVisible,
       lifetimeDialogVisible,

@@ -38,6 +38,8 @@ import { RenameChatProps } from "../../../Chat.types";
 const RenameChat = ({ chatId, prevTitle, onRenameToggle }: RenameChatProps) => {
   const { t } = useTranslation(["Common"]);
 
+  const [isLoading, setIsLoading] = React.useState(false);
+
   const { renameChat } = useChatStore();
 
   const [newName, setNewName] = React.useState("");
@@ -49,15 +51,40 @@ const RenameChat = ({ chatId, prevTitle, onRenameToggle }: RenameChatProps) => {
     [],
   );
 
-  const onRenameAction = React.useCallback(() => {
-    renameChat(chatId, newName);
+  const onRenameClose = React.useCallback(() => {
+    if (isLoading) return;
     onRenameToggle();
-  }, [chatId, newName, onRenameToggle, renameChat]);
+  }, [onRenameToggle, isLoading]);
+
+  const onRenameAction = React.useCallback(async () => {
+    if (isLoading) return;
+    setIsLoading(true);
+    await renameChat(chatId, newName);
+    onRenameToggle();
+    setIsLoading(false);
+  }, [chatId, newName, onRenameToggle, renameChat, isLoading]);
+
+  React.useEffect(() => {
+    const onKeydown = (e: KeyboardEvent) => {
+      if (e.key === "Enter") {
+        onRenameAction();
+      }
+      if (e.key === "Escape") {
+        onRenameClose();
+      }
+    };
+
+    window.addEventListener("keydown", onKeydown);
+
+    return () => {
+      window.removeEventListener("keydown", onKeydown);
+    };
+  }, [onRenameAction, onRenameClose]);
 
   return (
     <ModalDialog
       visible
-      onClose={onRenameToggle}
+      onClose={onRenameClose}
       displayType={ModalDialogType.modal}
     >
       <ModalDialog.Header>{t("Common:Rename")}</ModalDialog.Header>
@@ -80,12 +107,14 @@ const RenameChat = ({ chatId, prevTitle, onRenameToggle }: RenameChatProps) => {
           onClick={onRenameAction}
           scale
           primary
+          isLoading={isLoading}
         />
         <Button
           size={ButtonSize.small}
           label={t("Common:CancelButton")}
           onClick={onRenameToggle}
           scale
+          isDisabled={isLoading}
         />
       </ModalDialog.Footer>
     </ModalDialog>

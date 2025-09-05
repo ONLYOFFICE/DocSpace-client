@@ -47,13 +47,20 @@ import styles from "../TemplatesGallery.module.scss";
 import SectionFilterContent from "../Filter";
 import Tiles from "../Tiles";
 
-interface TilesContainerProps {
+interface TilesContainerOwnProps {
   ext: string;
   isInitLoading: boolean;
+}
+
+interface TilesContainerInjectedProps {
   hasGalleryFiles: boolean;
   resetFilters: (ext: string) => Promise<void>;
   t: TTranslation;
 }
+
+interface TilesContainerProps
+  extends TilesContainerOwnProps,
+    TilesContainerInjectedProps {}
 
 const TilesContainer: FC<TilesContainerProps> = ({
   ext,
@@ -162,4 +169,4 @@ export default inject<TStore>(({ oformsStore }) => ({
   setOformFromFolderId: oformsStore.setOformFromFolderId,
 }))(
   withTranslation("Common")(observer(TilesContainer)),
-) as unknown as React.ComponentType<TilesContainerProps>;
+) as unknown as React.ComponentType<TilesContainerOwnProps>;

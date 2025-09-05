@@ -34,6 +34,7 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 
 import TilesContainer from "./TilesContainer";
+import ErrorView from "./ErrorView";
 import styles from "./TemplatesGallery.module.scss";
 
 const TemplatesGallery = (props: {
@@ -42,6 +43,7 @@ const TemplatesGallery = (props: {
   setCurrentExtensionGallery: (extension: string) => void;
   resetFilters: (ext: string) => Promise<void>;
   initTemplateGallery: () => Promise<void>;
+  oformsLoadError: boolean;
 }) => {
   const {
     templatesGalleryVisible,
@@ -49,6 +51,7 @@ const TemplatesGallery = (props: {
     setCurrentExtensionGallery,
     resetFilters,
     initTemplateGallery,
+    oformsLoadError,
   } = props;
   const [viewMobile, setViewMobile] = useState(false);
   const [currentTabId, setCurrentTabId] = useState("documents");
@@ -144,14 +147,18 @@ const TemplatesGallery = (props: {
             />
           </div>
 
-          <div className={styles.templatesGalleryWrapper}>
-            <Tabs
-              items={tabs}
-              selectedItemId={currentTabId}
-              onSelect={onSelect}
-              withAnimation
-            />
-          </div>
+          {oformsLoadError ? (
+            <ErrorView onCloseClick={onCloseClick} />
+          ) : (
+            <div className={styles.templatesGalleryWrapper}>
+              <Tabs
+                items={tabs}
+                selectedItemId={currentTabId}
+                onSelect={onSelect}
+                withAnimation
+              />
+            </div>
+          )}
         </div>
       </div>
     </>
@@ -173,13 +180,18 @@ const TemplatesGallery = (props: {
               isStroke
             />
           </div>
-          <div className={styles.templatesGalleryWrapper}>
-            <Tabs
-              items={tabs}
-              selectedItemId={currentTabId}
-              onSelect={onSelect}
-            />
-          </div>
+
+          {oformsLoadError ? (
+            <ErrorView onCloseClick={onCloseClick} />
+          ) : (
+            <div className={styles.templatesGalleryWrapper}>
+              <Tabs
+                items={tabs}
+                selectedItemId={currentTabId}
+                onSelect={onSelect}
+              />
+            </div>
+          )}
         </div>
       </div>
     </>
@@ -200,6 +212,7 @@ export default inject<TStore>(({ oformsStore }) => {
     setCurrentExtensionGallery,
     resetFilters,
     initTemplateGallery,
+    oformsLoadError,
   } = oformsStore;
 
   return {
@@ -208,5 +221,6 @@ export default inject<TStore>(({ oformsStore }) => {
     setCurrentExtensionGallery,
     resetFilters,
     initTemplateGallery,
+    oformsLoadError,
   };
 })(observer(TemplatesGallery));

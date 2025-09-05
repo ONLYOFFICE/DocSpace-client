@@ -760,6 +760,7 @@ const ArticleMainButtonContent = (props) => {
           primary
           scale
           title={t("Common:NewRoom")}
+          testId="create_new_room_button"
         />
       ) : (
         <MainButton

@@ -119,6 +119,7 @@ const ArticleProfile = (props: ArticleProfileProps) => {
             source={userAvatar}
             userName={user?.displayName || ""}
             onClick={onAvatarClick}
+            dataTestId="profile_user_avatar"
           />
           <ContextMenu
             model={model ?? []}
@@ -128,6 +129,7 @@ const ArticleProfile = (props: ArticleProfileProps) => {
             scaled={false}
             leftOffset={Number(!isRTL && -50)}
             rightOffset={Number(isRTL && 54)}
+            dataTestId="profile_user_menu"
           />
         </div>
         {!isTabletView || showText ? (
@@ -136,6 +138,7 @@ const ArticleProfile = (props: ArticleProfileProps) => {
               className={styles.userName}
               onMouseDown={onNameMouseDownClick}
               onClick={onNameClick}
+              data-testid="profile_username"
             >
               <Text fontWeight={600} noSelect truncate dir="auto">
                 {displayName}
@@ -148,6 +151,7 @@ const ArticleProfile = (props: ArticleProfileProps) => {
                 iconName={VerticalDotsReactSvgUrl}
                 size={32}
                 isFill
+                dataTestId="profile_user_icon_button"
               />
               <ContextMenu
                 model={model || []}
@@ -156,6 +160,7 @@ const ArticleProfile = (props: ArticleProfileProps) => {
                 onHide={onHide}
                 scaled={false}
                 leftOffset={10}
+                dataTestId="profile_user_context_menu"
               />
             </div>
           </>

@@ -1839,22 +1839,22 @@ class FilesStore {
               : "knowledge",
           );
 
-          currentFolder = aiRoom;
+          currentFolder = { ...aiRoom, isRoom: true };
         } else if (currentFolder.roomType === RoomsType.AIRoom) {
           this.aiRoomStore.setCurrentTab("chat");
         } else if (currentFolder.rootRoomType === RoomsType.AIRoom) {
           this.aiRoomStore.setCurrentTab("result");
         } else {
-          console.log("unset");
           this.aiRoomStore.setKnowledgeId(null);
         }
 
         runInAction(() => {
           this.selectedFolderStore.setSelectedFolder({
             folders: data.folders,
-            ...currentFolder,
-            inRoom: !!data.current.inRoom,
             isRoom: !!data.current.roomType,
+            ...currentFolder,
+
+            inRoom: !!data.current.inRoom,
             isTemplate:
               data.current.rootFolderType === FolderType.RoomTemplates,
             pathParts: data.pathParts,

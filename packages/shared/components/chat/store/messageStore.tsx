@@ -206,65 +206,55 @@ export default class MessageStore {
   };
 
   handleToolCall = (jsonData: string) => {
-    try {
-      const {
-        name,
-        arguments: args,
-        callId,
-        additionalProperties,
-      } = JSON.parse(jsonData);
+    const {
+      name,
+      arguments: args,
+      callId,
+      additionalProperties,
+    } = JSON.parse(jsonData);
 
-      const newMsg: TMessage = {
-        role: RoleType.AssistantMessage,
-        createdOn: new Date().toString(),
-        contents: [
-          {
-            type: ContentType.Tool,
-            name,
-            arguments: args,
-            callId,
-            additionalProperties,
-          },
-        ],
-      };
+    const newMsg: TMessage = {
+      role: RoleType.AssistantMessage,
+      createdOn: new Date().toString(),
+      contents: [
+        {
+          type: ContentType.Tool,
+          name,
+          arguments: args,
+          callId,
+          additionalProperties,
+        },
+      ],
+    };
 
-      this.setMessages([newMsg, ...this.messages]);
-      this.setTotalMessages(this.totalMessages + 1);
-      this.setStartIndex(this.startIndex + 1);
-    } catch (e) {
-      console.log("failed parse tool call");
-      // ignore
-    }
+    this.setMessages([newMsg, ...this.messages]);
+    this.setTotalMessages(this.totalMessages + 1);
+    this.setStartIndex(this.startIndex + 1);
   };
 
   handleToolResult = (jsonData: string) => {
-    try {
-      const { result } = JSON.parse(jsonData);
+    const { result } = JSON.parse(jsonData);
 
-      const newMsg: TMessage = {
-        ...this.messages[0],
+    const newMsg: TMessage = {
+      ...this.messages[0],
 
-        contents: [
-          {
-            type: ContentType.Tool,
-            result,
-            arguments:
-              "arguments" in this.messages[0].contents[0]
-                ? this.messages[0].contents[0].arguments!
-                : {},
-            name:
-              "name" in this.messages[0].contents[0]
-                ? this.messages[0].contents[0].name
-                : "",
-          },
-        ],
-      };
+      contents: [
+        {
+          type: ContentType.Tool,
+          result,
+          arguments:
+            "arguments" in this.messages[0].contents[0]
+              ? this.messages[0].contents[0].arguments!
+              : {},
+          name:
+            "name" in this.messages[0].contents[0]
+              ? this.messages[0].contents[0].name
+              : "",
+        },
+      ],
+    };
 
-      this.messages[0] = newMsg;
-    } catch (e) {
-      console.log("failed parse tool result");
-      // ignore
-    }
+    this.messages[0] = newMsg;
   };
 
   handleStreamError = (jsonData: string) => {
@@ -297,6 +287,8 @@ export default class MessageStore {
       let toolCall = "";
       let toolResult = "";
 
+      let failed = false;
+
       const streamHandler = async () => {
         const { done, value } = await reader.read();
 
@@ -324,6 +316,12 @@ export default class MessageStore {
 
             if (!jsonData) {
               return;
+            }
+
+            if (failed) {
+              failed = false;
+              console.log("CHUNK_AFTER_FAIL");
+              console.log(chunk);
             }
 
             if (event.includes(EventType.MessageStart)) {
@@ -355,13 +353,19 @@ export default class MessageStore {
             }
 
             if (event.includes(EventType.ToolCall)) {
-              msg = "";
-              prevMsg = "";
-              toolResult = "";
+              try {
+                msg = "";
+                prevMsg = "";
+                toolResult = "";
 
-              toolCall += jsonData;
+                toolCall += jsonData;
 
-              this.handleToolCall(toolCall);
+                this.handleToolCall(toolCall);
+              } catch (e) {
+                console.log("Failed TOOL_CALL");
+                console.log(chunk);
+                failed = true;
+              }
 
               return;
             }
@@ -373,7 +377,13 @@ export default class MessageStore {
 
               toolResult += jsonData;
 
-              this.handleToolResult(toolResult);
+              try {
+                this.handleToolResult(toolResult);
+              } catch (e) {
+                console.log("Failed TOOL_RESULT");
+                console.log(chunk);
+                failed = true;
+              }
 
               return;
             }

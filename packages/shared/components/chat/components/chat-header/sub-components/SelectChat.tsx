@@ -49,7 +49,11 @@ import { SelectChatProps } from "../../../Chat.types";
 import styles from "../ChatHeader.module.scss";
 
 import RenameChat from "./RenameChat";
-import { CHAT_LIST_MAX_HEIGHT, CHAT_LIST_WIDTH } from "../constants";
+import {
+  CHAT_LIST_MAX_HEIGHT,
+  CHAT_LIST_ROW_HEIGHT,
+  CHAT_LIST_WIDTH,
+} from "../constants";
 import { ChatList } from "./ChatList";
 
 const SelectChat = ({ isLoadingProp }: SelectChatProps) => {
@@ -148,7 +152,10 @@ const SelectChat = ({ isLoadingProp }: SelectChatProps) => {
     ];
   }, [t, onDeleteAction, onRenameToggle, onSaveToFileAction]);
 
-  const maxHeight = chats.length > 7 ? { maxHeight: CHAT_LIST_MAX_HEIGHT } : {};
+  const maxHeight =
+    chats.length > 7
+      ? CHAT_LIST_MAX_HEIGHT
+      : CHAT_LIST_ROW_HEIGHT * chats.length;
 
   if (isLoadingProp) {
     return (
@@ -181,7 +188,7 @@ const SelectChat = ({ isLoadingProp }: SelectChatProps) => {
           directionY="bottom"
           directionX="right"
           forwardedRef={parentRef}
-          {...maxHeight}
+          maxHeight={maxHeight}
           manualWidth={`${CHAT_LIST_WIDTH}px`}
           isNoFixedHeightOptions
         >

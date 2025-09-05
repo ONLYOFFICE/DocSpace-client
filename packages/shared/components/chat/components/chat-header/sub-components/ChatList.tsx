@@ -29,15 +29,12 @@
 import React, { useCallback } from "react";
 import InfiniteLoader from "react-window-infinite-loader";
 import { FixedSizeList as List } from "react-window";
+import AutoSizer from "react-virtualized-auto-sizer";
 
 import type { TChat } from "../../../../../api/ai/types";
 import { useInterfaceDirection } from "../../../../../hooks/useInterfaceDirection";
 import { Scrollbar } from "../../../../scrollbar";
-import {
-  CHAT_LIST_MAX_HEIGHT,
-  CHAT_LIST_ROW_HEIGHT,
-  CHAT_LIST_WIDTH,
-} from "../constants";
+import { CHAT_LIST_ROW_HEIGHT, CHAT_LIST_WIDTH } from "../constants";
 import { RectangleSkeleton } from "../../../../../skeletons";
 import { ChatListItem } from "./ChatListItem";
 
@@ -117,34 +114,38 @@ export const ChatList = ({
   const loadMoreItems = isNextPageLoading ? () => {} : loadNextPage;
 
   return (
-    <InfiniteLoader
-      isItemLoaded={isItemLoaded}
-      loadMoreItems={loadMoreItems}
-      itemCount={total}
-    >
-      {({ onItemsRendered, ref }) => (
-        <List
-          className="chats-list-scroll"
-          ref={ref}
-          direction={interfaceDirection}
-          height={CHAT_LIST_MAX_HEIGHT}
-          width={CHAT_LIST_WIDTH}
-          itemCount={itemCount}
-          itemSize={CHAT_LIST_ROW_HEIGHT}
-          itemData={{
-            chats,
-            onSelectChat,
-            contextModel,
-            hoveredChatId,
-            setHoveredChatId,
-            activeChatId,
-          }}
-          outerElementType={Scrollbar}
-          onItemsRendered={onItemsRendered}
+    <AutoSizer>
+      {({ height }) => (
+        <InfiniteLoader
+          isItemLoaded={isItemLoaded}
+          loadMoreItems={loadMoreItems}
+          itemCount={total}
         >
-          {Row}
-        </List>
+          {({ onItemsRendered, ref }) => (
+            <List
+              className="chats-list-scroll"
+              ref={ref}
+              direction={interfaceDirection}
+              height={height}
+              width={CHAT_LIST_WIDTH}
+              itemCount={itemCount}
+              itemSize={CHAT_LIST_ROW_HEIGHT}
+              itemData={{
+                chats,
+                onSelectChat,
+                contextModel,
+                hoveredChatId,
+                setHoveredChatId,
+                activeChatId,
+              }}
+              outerElementType={Scrollbar}
+              onItemsRendered={onItemsRendered}
+            >
+              {Row}
+            </List>
+          )}
+        </InfiniteLoader>
       )}
-    </InfiniteLoader>
+    </AutoSizer>
   );
 };

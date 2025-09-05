@@ -35,7 +35,6 @@ import { StandalonePage as StandalonePageComponent } from "@docspace/shared/page
 
 const StandalonePage = (props) => {
   const {
-    standaloneInit,
     isInitPaymentPage,
     isLoadedTariffStatus,
     isLoadedCurrentQuota,
@@ -51,24 +50,24 @@ const StandalonePage = (props) => {
     buyUrl,
     salesEmail,
     isEnterprise,
+    isLoadedArticleBody,
+    isLoadedSectionHeader,
   } = props;
 
   const { t, ready } = useTranslation("Common");
 
   useEffect(() => {
-    if (!isLoadedTariffStatus || !isLoadedCurrentQuota || !ready) return;
-
     setDocumentTitle(t("Common:PaymentsTitle"));
-
-    standaloneInit(t);
-  }, [isLoadedTariffStatus, isLoadedCurrentQuota, ready]);
+  }, [ready]);
 
   if (
-    !isInitPaymentPage ||
-    !isLoadedTariffStatus ||
-    !isLoadedCurrentQuota ||
-    !ready ||
-    isUpdatingBasicSettings
+    (!isInitPaymentPage ||
+      !isLoadedTariffStatus ||
+      !isLoadedCurrentQuota ||
+      !ready ||
+      isUpdatingBasicSettings) &&
+    !isLoadedArticleBody &&
+    !isLoadedSectionHeader
   )
     return <PaymentsStandaloneLoader isEnterprise={!isTrial} />;
 
@@ -90,9 +89,8 @@ const StandalonePage = (props) => {
 };
 
 export default inject(
-  ({ currentQuotaStore, paymentStore, currentTariffStatusStore }) => {
+  ({ currentQuotaStore, paymentStore, currentTariffStatusStore, common }) => {
     const {
-      standaloneInit,
       isInitPaymentPage,
       isUpdatingBasicSettings,
       setPaymentsLicense,
@@ -110,10 +108,10 @@ export default inject(
       isDeveloper,
       isEnterprise,
     } = currentTariffStatusStore;
+    const { isLoadedArticleBody, isLoadedSectionHeader } = common;
 
     return {
       isTrial,
-      standaloneInit,
       isInitPaymentPage,
       isLoadedTariffStatus,
       isLoadedCurrentQuota,
@@ -128,6 +126,8 @@ export default inject(
       buyUrl,
       salesEmail,
       isEnterprise,
+      isLoadedArticleBody,
+      isLoadedSectionHeader,
     };
   },
 )(observer(StandalonePage));

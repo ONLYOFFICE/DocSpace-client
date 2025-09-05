@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 import { inject, observer } from "mobx-react";
 import moment from "moment";
@@ -36,8 +36,6 @@ import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { StorageTariffDeactiveted } from "SRC_DIR/components/dialogs";
 
 import PaymentContainer from "./PaymentContainer";
-
-let timerId = null;
 
 const SaaSPage = ({
   language,
@@ -52,14 +50,13 @@ const SaaSPage = ({
   isDesktop,
   isDesktopClientInit,
   setIsDesktopClientInit,
-  setIsUpdatingBasicSettings,
+  isLoadedArticleBody,
+  isLoadedSectionHeader,
   isShowStorageTariffDeactivatedModal,
 }) => {
   const { t, ready } = useTranslation(["Payments", "Common", "Settings"]);
   const shouldShowLoader =
     !isInitPaymentPage || !ready || isUpdatingTariff || isUpdatingBasicSettings;
-
-  const [showLoader, setShowLoader] = useState(false);
 
   useEffect(() => {
     moment.locale(language);
@@ -84,28 +81,8 @@ const SaaSPage = ({
     setDocumentTitle(t("Common:PaymentsTitle"));
   }, [ready]);
 
-  useEffect(() => {
-    if (!shouldShowLoader && timerId) {
-      clearTimeout(timerId);
-      timerId = null;
-    }
-  }, [shouldShowLoader]);
-
-  useEffect(() => {
-    timerId = setTimeout(() => {
-      setShowLoader(true);
-    }, 200);
-
-    return () => {
-      clearTimeout(timerId);
-      setIsUpdatingBasicSettings(true);
-    };
-  }, []);
-
-  return shouldShowLoader ? (
-    showLoader ? (
-      <PaymentsLoader />
-    ) : null
+  return shouldShowLoader && !isLoadedArticleBody && !isLoadedSectionHeader ? (
+    <PaymentsLoader />
   ) : (
     <>
       <PaymentContainer t={t} />
@@ -119,7 +96,7 @@ const SaaSPage = ({
 };
 
 export default inject(
-  ({ authStore, settingsStore, paymentStore, userStore }) => {
+  ({ authStore, settingsStore, paymentStore, userStore, common }) => {
     const {
       language,
 
@@ -130,7 +107,6 @@ export default inject(
       isInitPaymentPage,
       isUpdatingBasicSettings,
       resetTariffContainerToBasic,
-      setIsUpdatingBasicSettings,
       isShowStorageTariffDeactivatedModal,
     } = paymentStore;
 
@@ -142,6 +118,7 @@ export default inject(
       isDesktopClientInit,
       setIsDesktopClientInit,
     } = settingsStore;
+    const { isLoadedArticleBody, isLoadedSectionHeader } = common;
     return {
       isDesktopClientInit,
       setIsDesktopClientInit,
@@ -155,7 +132,8 @@ export default inject(
       isInitPaymentPage,
       language,
       isUpdatingBasicSettings,
-      setIsUpdatingBasicSettings,
+      isLoadedArticleBody,
+      isLoadedSectionHeader,
       isShowStorageTariffDeactivatedModal,
     };
   },

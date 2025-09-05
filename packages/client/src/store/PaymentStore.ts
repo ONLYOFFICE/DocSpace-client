@@ -713,7 +713,7 @@ class PaymentStore {
 
   init = async (t: TTranslation) => {
     if (this.isInitPaymentPage) {
-      this.basicSettings();
+      await this.basicSettings();
 
       return;
     }

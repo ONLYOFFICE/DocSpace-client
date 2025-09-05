@@ -28,33 +28,42 @@ import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
 import PaymentStore from "SRC_DIR/store/PaymentStore";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 export type UsePaymentsProps = {
   initPayments?: PaymentStore["init"];
+  initPaymentsStandalone?: PaymentStore["standaloneInit"];
   walletInit?: PaymentStore["walletInit"];
+  standalone?: SettingsStore["standalone"];
 };
 
-const usePayments = ({ initPayments, walletInit }: UsePaymentsProps) => {
-  const { t, ready } = useTranslation(["Payments", "Common", "Settings"]);
-
-  const inTabPayments = window.location.pathname.includes("portal-payments");
-  const inTabWallet = window.location.pathname.includes("wallet");
+const usePayments = ({
+  initPayments,
+  walletInit,
+  initPaymentsStandalone,
+  standalone,
+}: UsePaymentsProps) => {
+  const { t } = useTranslation(["Payments", "Common", "Settings"]);
 
   const getPortalPaymentsData = useCallback(async () => {
-    await initPayments?.(t);
-  }, [initPayments]);
+    if (standalone) {
+      await initPaymentsStandalone?.(t);
+    } else {
+      await initPayments?.(t);
+    }
+  }, [initPayments, t]);
 
   const getWalletData = useCallback(async () => {
-    if (!ready) return;
-
     await walletInit?.(t);
-  }, [walletInit, ready]);
+  }, [walletInit]);
 
   const getPaymentsInitialValue = React.useCallback(async () => {
     const actions = [];
-    if (inTabPayments) actions.push(getPortalPaymentsData());
+    if (window.location.pathname.includes("portal-payments"))
+      actions.push(getPortalPaymentsData());
 
-    if (inTabWallet) actions.push(getWalletData());
+    if (window.location.pathname.includes("wallet"))
+      actions.push(getWalletData());
 
     await Promise.all(actions);
   }, [getPortalPaymentsData, getWalletData]);

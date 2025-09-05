@@ -42,15 +42,15 @@ import usePayments from "./usePayments";
 import { createDefaultHookSettingsProps } from "../../utils/createDefaultHookSettingsProps";
 
 const PaymentsPage = (props) => {
-  const { currentDeviceType, standalone, paymentStore } = props;
+  const { currentDeviceType, standalone, paymentStore, settingsStore } = props;
   const [currentTabId, setCurrentTabId] = useState();
   const location = useLocation();
   const navigate = useNavigate();
-  const [isLoaded, setIsLoaded] = useState(false);
   const { t } = useTranslation(["Payments"]);
 
   const defaultProps = createDefaultHookSettingsProps({
     paymentStore,
+    settingsStore,
   });
 
   const { getWalletData, getPortalPaymentsData } = usePayments(
@@ -62,13 +62,17 @@ const PaymentsPage = (props) => {
       id: "portal-payments",
       name: t("TariffPlan"),
       content: <PaymentsSaaS />,
-      onClick: getPortalPaymentsData,
+      onClick: async () => {
+        await getPortalPaymentsData();
+      },
     },
     {
       id: "wallet",
       name: t("Wallet"),
       content: <Wallet />,
-      onClick: getWalletData,
+      onClick: async () => {
+        await getWalletData();
+      },
     },
   ];
 
@@ -80,21 +84,15 @@ const PaymentsPage = (props) => {
     navigate(
       combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, url),
     );
-
-    setIsLoaded(false);
   };
 
   useEffect(() => {
     const path = location.pathname;
     const currentTab = data.find((item) => path.includes(item.id));
     if (currentTab && data.length) setCurrentTabId(currentTab.id);
-
-    setIsLoaded(true);
   }, [location.pathname]);
 
   if (standalone) return <PaymentsEnterprise />;
-
-  if (!isLoaded) return null;
 
   return (
     <Tabs
@@ -102,6 +100,7 @@ const PaymentsPage = (props) => {
       selectedItemId={currentTabId}
       onSelect={(e) => onSelect(e)}
       stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
+      withAnimation
     />
   );
 };
@@ -113,5 +112,6 @@ export const Component = inject(({ settingsStore, paymentStore }) => {
     standalone,
     currentDeviceType,
     paymentStore,
+    settingsStore,
   };
 })(observer(PaymentsPage));

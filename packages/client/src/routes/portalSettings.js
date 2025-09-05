@@ -409,7 +409,7 @@ const PortalSettingsRoutes = {
       element: <ViewComponent />,
     },
     {
-      path: "payments/tariff",
+      path: "payments/wallet",
       element: <ViewComponent />,
     },
     {

@@ -92,11 +92,17 @@ class OAuthStore {
 
   setJwtTokenRunning: boolean = false;
 
+  errorOAuth: Error | null = null;
+
   constructor(userStore: UserStore) {
     this.userStore = userStore;
 
     makeAutoObservable(this);
   }
+
+  setErrorOAuth = (error: Error | null) => {
+    this.errorOAuth = error;
+  };
 
   setJwtToken = async () => {
     let cookieToken = getOAuthJWTSignature(this.userStore!.user!.id);

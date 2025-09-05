@@ -162,6 +162,8 @@ export const createDefaultHookSettingsProps = ({
     fetchScopes: oauthStore?.fetchScopes,
     isInit: oauthStore?.isInit,
     setIsInit: oauthStore?.setIsInit,
+    setErrorOAuth: oauthStore?.setErrorOAuth,
+    errorOAuth: oauthStore?.errorOAuth,
   },
   deleteData: {
     getPortalOwner: settingsStore?.getPortalOwner,

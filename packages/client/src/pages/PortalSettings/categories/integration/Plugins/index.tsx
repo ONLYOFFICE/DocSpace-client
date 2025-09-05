@@ -56,8 +56,6 @@ const PluginPage = ({
   updatePlugin,
   addPlugin,
 
-  updatePlugins,
-
   theme,
   isEmptyList,
 }: PluginsProps) => {
@@ -73,10 +71,6 @@ const PluginPage = ({
   React.useEffect(() => {
     setDocumentTitle(t("Common:Plugins"));
   }, [t]);
-
-  React.useEffect(() => {
-    updatePlugins(true);
-  }, [updatePlugins]);
 
   return !isEmptyList && pluginList.length === 0 ? (
     <StyledContainer>

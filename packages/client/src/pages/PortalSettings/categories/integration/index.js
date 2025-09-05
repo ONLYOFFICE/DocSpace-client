@@ -43,6 +43,8 @@ import DocumentService from "./DocumentService";
 import PluginPage from "./Plugins";
 import useIntegration from "./useIntegration";
 
+import { createDefaultHookSettingsProps } from "../../utils/createDefaultHookSettingsProps";
+
 const IntegrationWrapper = (props) => {
   const {
     t,
@@ -51,15 +53,24 @@ const IntegrationWrapper = (props) => {
     isSSOAvailable,
     standalone,
     enablePlugins,
-    init,
-    isInit,
-    updatePlugins,
-    getConsumers,
-    fetchAndSetConsumers,
-    setInitSMTPSettings,
-    getDocumentServiceLocation,
+
+    setup,
+    currentQuotaStore,
+    ssoFormStore,
+    pluginStore,
+    filesSettingsStore,
+    ldapStore,
   } = props;
   const navigate = useNavigate();
+
+  const defaultProps = createDefaultHookSettingsProps({
+    setup,
+    currentQuotaStore,
+    ssoFormStore,
+    pluginStore,
+    filesSettingsStore,
+    ldapStore,
+  });
 
   const {
     openThirdPartyModal,
@@ -69,16 +80,7 @@ const IntegrationWrapper = (props) => {
     getThirdPartyData,
     getSMTPSettingsData,
     getDocumentServiceData,
-  } = useIntegration({
-    isSSOAvailable,
-    init,
-    isInit,
-    updatePlugins,
-    getConsumers,
-    fetchAndSetConsumers,
-    setInitSMTPSettings,
-    getDocumentServiceLocation,
-  });
+  } = useIntegration(defaultProps.integration);
 
   useEffect(() => {
     return () => {
@@ -182,31 +184,26 @@ export const Component = inject(
     pluginStore,
     setup,
     filesSettingsStore,
+    ldapStore,
   }) => {
     const { standalone, enablePlugins, currentDeviceType } = settingsStore;
-    const { load: toDefault, init, isInit } = ssoStore;
+    const { load: toDefault } = ssoStore;
 
     const { isSSOAvailable } = currentQuotaStore;
 
-    const { updatePlugins } = pluginStore;
-
-    const { getConsumers, fetchAndSetConsumers, setInitSMTPSettings } = setup;
-
-    const { getDocumentServiceLocation } = filesSettingsStore;
-
     return {
       toDefault,
-      init,
-      isInit,
       isSSOAvailable,
       standalone,
       currentDeviceType,
       enablePlugins,
-      updatePlugins,
-      getConsumers,
-      fetchAndSetConsumers,
-      setInitSMTPSettings,
-      getDocumentServiceLocation,
+
+      setup,
+      currentQuotaStore,
+      ssoFormStore: ssoStore,
+      pluginStore,
+      filesSettingsStore,
+      ldapStore,
     };
   },
 )(

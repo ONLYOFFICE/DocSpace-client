@@ -45,6 +45,8 @@ export type UseDeveloperToolsProps = {
   fetchScopes?: OAuthStore["fetchScopes"];
   isInit?: OAuthStore["isInit"];
   setIsInit?: OAuthStore["setIsInit"];
+  setErrorOAuth?: OAuthStore["setErrorOAuth"];
+  errorOAuth?: OAuthStore["errorOAuth"];
 };
 
 const useDeveloperTools = ({
@@ -54,15 +56,15 @@ const useDeveloperTools = ({
   fetchScopes,
   isInit,
   setIsInit,
+  setErrorOAuth,
+  errorOAuth,
 }: UseDeveloperToolsProps) => {
-  const [errorOAuth, setErrorOAuth] = useState<Error | null>(null);
-
   const [listItems, setListItems] = useState<TApiKey[]>([]);
   const [permissions, setPermissions] = useState<string[]>([]);
   const [errorKeys, setErrorKeys] = useState<Error | null>(null);
 
-  const getJavascriptSDKData = React.useCallback(() => {
-    getCSPSettings?.();
+  const getJavascriptSDKData = React.useCallback(async () => {
+    await getCSPSettings?.();
   }, [getCSPSettings]);
 
   const getWebhooksData = React.useCallback(async () => {
@@ -80,7 +82,7 @@ const useDeveloperTools = ({
 
       await Promise.all(actions);
     } catch (e) {
-      setErrorOAuth(e as Error);
+      setErrorOAuth?.(e as Error);
     }
 
     setIsInit?.(true);
@@ -105,10 +107,13 @@ const useDeveloperTools = ({
     const actions = [];
     if (window.location.pathname.includes("javascript-sdk"))
       actions.push(getJavascriptSDKData());
+
     if (window.location.pathname.includes("webhooks"))
       actions.push(getWebhooksData());
+
     if (window.location.pathname.includes("oauth"))
       actions.push(getOAuthData());
+
     if (window.location.pathname.includes("api-keys"))
       actions.push(getKeysData());
 

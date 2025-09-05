@@ -219,10 +219,10 @@ class SsoFormStore {
     makeAutoObservable(this);
   }
 
-  init = () => {
+  init = async () => {
     if (this.isInit) return;
     this.isInit = true;
-    this.load();
+    await this.load();
   };
 
   load = async () => {

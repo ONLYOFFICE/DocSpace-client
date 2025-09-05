@@ -36,6 +36,7 @@ import { Tabs } from "@docspace/shared/components/tabs";
 
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import SSOLoader from "./sub-components/ssoLoader";
 
 import JavascriptSDK from "./JavascriptSDK";
 import Webhooks from "./Webhooks";
@@ -45,22 +46,22 @@ import OAuth from "./OAuth";
 
 import ApiKeys from "./ApiKeys";
 import useDeveloperTools from "./useDeveloperTools";
+import { createDefaultHookSettingsProps } from "../../utils/createDefaultHookSettingsProps";
 
 const DeveloperToolsWrapper = (props) => {
   const {
     currentDeviceType,
     identityServerEnabled,
-    getCSPSettings,
-    loadWebhooks,
-    isInit,
-    setIsInit,
-    fetchClients,
-    fetchScopes,
+    isLoadedArticleBody,
+
+    settingsStore,
+    webhooksStore,
+    oauthStore,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
 
-  // const [isLoading, setIsLoading] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [currentTabId, setCurrentTabId] = useState();
 
   const { t } = useTranslation([
@@ -72,6 +73,12 @@ const DeveloperToolsWrapper = (props) => {
     "OAuth",
   ]);
 
+  const defaultProps = createDefaultHookSettingsProps({
+    settingsStore,
+    webhooksStore,
+    oauthStore,
+  });
+
   const {
     getJavascriptSDKData,
     getWebhooksData,
@@ -82,14 +89,7 @@ const DeveloperToolsWrapper = (props) => {
     listItems,
     setListItems,
     permissions,
-  } = useDeveloperTools({
-    getCSPSettings,
-    loadWebhooks,
-    fetchClients,
-    fetchScopes,
-    isInit,
-    setIsInit,
-  });
+  } = useDeveloperTools(defaultProps.developerTools);
 
   const sdkLabel = (
     <div style={{ boxSizing: "border-box", display: "flex", gap: "8px" }}>
@@ -123,8 +123,8 @@ const DeveloperToolsWrapper = (props) => {
       id: "javascript-sdk",
       name: sdkLabel,
       content: <JavascriptSDK />,
-      onClick: () => {
-        getJavascriptSDKData();
+      onClick: async () => {
+        await getJavascriptSDKData();
       },
     },
     {
@@ -172,7 +172,7 @@ const DeveloperToolsWrapper = (props) => {
       setCurrentTabId(currentTab?.id);
     }
 
-    // setIsLoading(true);
+    setIsLoaded(true);
   }, [location.pathname]);
 
   const onSelect = (e) => {
@@ -189,7 +189,9 @@ const DeveloperToolsWrapper = (props) => {
     setCurrentTabId(e.id);
   };
 
-  // if (!isLoading) return <SSOLoader />;
+  if (isLoadedArticleBody) {
+    !isLoaded ? <SSOLoader /> : null;
+  }
 
   return (
     <Tabs
@@ -203,25 +205,22 @@ const DeveloperToolsWrapper = (props) => {
 };
 
 export const Component = inject(
-  ({ settingsStore, authStore, webhooksStore, oauthStore }) => {
+  ({ settingsStore, authStore, webhooksStore, oauthStore, common }) => {
     const identityServerEnabled =
       authStore?.capabilities?.identityServerEnabled;
 
-    const { getCSPSettings, currentDeviceType } = settingsStore;
+    const { currentDeviceType } = settingsStore;
 
-    const { loadWebhooks } = webhooksStore;
-
-    const { isInit, setIsInit, fetchClients, fetchScopes } = oauthStore;
+    const { isLoadedArticleBody } = common;
 
     return {
       currentDeviceType,
-      getCSPSettings,
       identityServerEnabled,
-      loadWebhooks,
-      isInit,
-      setIsInit,
-      fetchClients,
-      fetchScopes,
+      isLoadedArticleBody,
+
+      settingsStore,
+      webhooksStore,
+      oauthStore,
     };
   },
 )(observer(DeveloperToolsWrapper));

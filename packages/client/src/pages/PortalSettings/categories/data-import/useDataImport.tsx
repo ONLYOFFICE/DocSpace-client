@@ -115,8 +115,8 @@ const useDataImport = ({
 
   const handleMigrationCheck = useCallback(async () => {
     const migrationList = await getMigrationList?.();
-    // setAreProvidersReady(true);
-    setServices?.(migrationList);
+
+    setServices?.(migrationList ?? []);
   }, [getMigrationList, setServices]);
 
   const getDataImportInitialValue = useCallback(async () => {

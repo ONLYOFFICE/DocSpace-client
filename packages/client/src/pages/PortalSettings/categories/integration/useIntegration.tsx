@@ -69,27 +69,27 @@ const useIntegration = ({
   const [documentServiceLocationData, setDocumentServiceLocationData] =
     useState<TDocServiceLocation>();
 
-  const getLDAPData = useCallback(() => {
-    isLdapAvailable && loadLDAP?.(t);
+  const getLDAPData = useCallback(async () => {
+    isLdapAvailable && (await loadLDAP?.(t));
   }, [isLdapAvailable, loadLDAP, t]);
 
-  const getSSOData = useCallback(() => {
-    isSSOAvailable && !isInit && init?.();
+  const getSSOData = useCallback(async () => {
+    isSSOAvailable && !isInit && (await init?.());
   }, [isSSOAvailable, isInit, init]);
 
-  const getPluginsData = useCallback(() => {
-    updatePlugins?.(true);
+  const getPluginsData = useCallback(async () => {
+    await updatePlugins?.(true);
   }, [updatePlugins]);
 
-  const getThirdPartyData = useCallback(() => {
+  const getThirdPartyData = useCallback(async () => {
     const urlParts = window.location.href.split("?");
     if (urlParts.length > 1 && isThirdPartyAvailable) {
       const queryValue = urlParts[1].split("=")[1];
-      fetchAndSetConsumers?.(queryValue).then(
+      await fetchAndSetConsumers?.(queryValue).then(
         (isConsumerExist) => isConsumerExist && setOpenThirdPartyModal(true),
       );
     } else {
-      getConsumers?.();
+      await getConsumers?.();
     }
   }, [getConsumers, fetchAndSetConsumers]);
 
@@ -97,8 +97,8 @@ const useIntegration = ({
     await setInitSMTPSettings?.();
   }, [setInitSMTPSettings]);
 
-  const getDocumentServiceData = useCallback(() => {
-    getDocumentServiceLocation?.().then((result) => {
+  const getDocumentServiceData = useCallback(async () => {
+    await getDocumentServiceLocation?.().then((result) => {
       setDocumentServiceLocationData(result);
     });
   }, [getDocumentServiceLocation]);

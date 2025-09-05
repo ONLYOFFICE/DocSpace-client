@@ -53,8 +53,8 @@ import useDeleteData from "../categories/delete-data/useDeleteData";
 import useCommon from "../categories/common/useCommon";
 import useDataImport from "../categories/data-import/useDataImport";
 import usePayments from "../categories/payments/usePayments";
-import { createDefaultHookSettingsProps } from "../utils/createDefaultHookSettingsProps";
 import useServices from "../categories/services/useServices";
+import { createDefaultHookSettingsProps } from "../utils/createDefaultHookSettingsProps";
 
 type TView =
   | "customization"

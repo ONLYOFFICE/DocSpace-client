@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import FavoritesFillReactSvgUrl from "PUBLIC_DIR/images/favorite.fill.react.svg?url";
+// import FavoritesFillReactSvgUrl from "PUBLIC_DIR/images/favorite.fill.react.svg?url";
 import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import CopyToReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
@@ -2492,7 +2492,7 @@ class FilesActionStore {
   };
 
   getFavoritesFolderOptions = (itemsCollection, t) => {
-    const { selection } = this.filesStore;
+    // const { selection } = this.filesStore;
     const download = this.getOption("download", t);
     const downloadAs = this.getOption("downloadAs", t);
     const copy = this.getOption("copy", t);
@@ -2502,7 +2502,7 @@ class FilesActionStore {
       .set("download", download)
       .set("downloadAs", downloadAs)
       .set("copy", copy)
-      .set("delete", {
+      /* .set("delete", {
         label: t("RemoveFromFavorites"),
         alt: t("RemoveFromFavorites"),
         iconUrl: FavoritesFillReactSvgUrl,
@@ -2511,7 +2511,7 @@ class FilesActionStore {
             .then(() => toastr.success(t("RemovedFromFavorites")))
             .catch((err) => toastr.error(err));
         },
-      })
+      }) */
       .set("showInfo", showInfo);
 
     return this.convertToArray(itemsCollection);

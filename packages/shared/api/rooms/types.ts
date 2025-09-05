@@ -251,6 +251,7 @@ export interface TFeedData {
   group?: {
     id: string;
     name: string;
+    isSystem?: boolean;
   };
   tags?: string[];
   sharedTo?: {

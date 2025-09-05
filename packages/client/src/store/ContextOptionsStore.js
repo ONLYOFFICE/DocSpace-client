@@ -786,23 +786,11 @@ class ContextOptionsStore {
   };
 
   onClickDelete = (item, t) => {
-    const { id, title, providerKey, rootFolderId, isFolder, isRoom } = item;
-
-    const { setRemoveItem, setDeleteThirdPartyDialogVisible } =
-      this.dialogsStore;
+    const { id, title, providerKey, isFolder, isRoom } = item;
 
     if (id === this.selectedFolderStore.id && isFolder) {
       this.onClickDeleteSelectedFolder(t, isRoom);
 
-      return;
-    }
-
-    const isRootThirdPartyFolder = providerKey && id === rootFolderId;
-
-    if (isRootThirdPartyFolder) {
-      const splitItem = id.split("-");
-      setRemoveItem({ id: splitItem[splitItem.length - 1], title });
-      setDeleteThirdPartyDialogVisible(true);
       return;
     }
 
@@ -2657,9 +2645,9 @@ class ContextOptionsStore {
     const hasDownloadAccess =
       selection.findIndex((k) => k.security.Download) !== -1;
 
-    const favoriteItems = selection.filter((k) =>
+    /* const favoriteItems = selection.filter((k) =>
       k.contextOptions?.includes("mark-as-favorite"),
-    );
+    ); */
 
     const canMove = selection.every((k) =>
       k.contextOptions.includes("move-to"),
@@ -2673,9 +2661,9 @@ class ContextOptionsStore {
       k.contextOptions.includes("restore"),
     ).length;
 
-    const removeFromFavoriteItems = selection.filter((k) =>
+    /* const removeFromFavoriteItems = selection.filter((k) =>
       k.contextOptions.includes("remove-from-favorites"),
-    );
+    ); */
 
     const deleteItems = selection.filter((k) =>
       k.contextOptions.includes("delete"),
@@ -2686,7 +2674,7 @@ class ContextOptionsStore {
     );
 
     const options = [
-      {
+      /* {
         key: "mark-as-favorite",
         label: t("MarkAsFavorite"),
         icon: FavoritesReactSvgUrl,
@@ -2694,7 +2682,7 @@ class ContextOptionsStore {
         disabled: !favoriteItems.length,
         "data-action": "mark",
         action: "mark",
-      },
+      }, */
       {
         id: "create_room",
         key: "create-room",
@@ -2756,7 +2744,7 @@ class ContextOptionsStore {
           this.filesActionsStore.onClickRemoveFromRecent(selection),
         disabled: !this.treeFoldersStore.isRecentFolder,
       },
-      {
+      /* {
         key: "remove-from-favorites",
         label: t("RemoveFromFavorites"),
         icon: FavoritesFillReactSvgUrl,
@@ -2764,7 +2752,7 @@ class ContextOptionsStore {
         disabled: favoriteItems.length || !removeFromFavoriteItems.length,
         "data-action": "remove",
         action: "remove",
-      },
+      }, */
       {
         key: "delete",
         label: t("Common:Delete"),

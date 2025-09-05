@@ -103,7 +103,7 @@ import {
   FILTER_TEMPLATES_ROOM,
   FILTER_TRASH,
 } from "@docspace/shared/utils/filterConstants";
-import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
+// import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
 
 const { FilesFilter, RoomsFilter } = api;
 const storageViewAs = localStorage.getItem("viewAs");
@@ -615,11 +615,12 @@ class FilesStore {
       api.files
         .getFolderInfo(folder.id)
         .then((response) => {
-          const folderInfo = {
-            isFolder: !isRoomUtil(response),
-            isRoom: isRoomUtil(response),
-            ...response,
-          };
+          // const folderInfo = {
+          //   isFolder: !isRoomUtil(response),
+          //   isRoom: isRoomUtil(response),
+          //   ...response,
+          // };
+          const folderInfo = this.getFilesListItems([response])[0];
 
           console.log("[WS] update folder", folderInfo.id, folderInfo.title);
 
@@ -2298,10 +2299,6 @@ class FilesStore {
 
     const { isDesktopClient } = this.settingsStore;
 
-    const pluginAllKeys =
-      enablePlugins &&
-      this.pluginStore.getContextMenuKeysByType(null, null, security);
-
     const canRenameItem = item.security?.Rename;
 
     const canMove = this.accessRightsStore.canMoveItems({
@@ -2615,10 +2612,9 @@ class FilesStore {
               PluginFileType.Files,
               item.fileExst,
               security,
+              item.security,
             );
 
-            pluginAllKeys &&
-              pluginAllKeys.forEach((key) => fileOptions.push(key));
             pluginFilesKeys &&
               pluginFilesKeys.forEach((key) => fileOptions.push(key));
           }
@@ -2631,10 +2627,9 @@ class FilesStore {
               PluginFileType.Image,
               item.fileExst,
               security,
+              item.security,
             );
 
-            pluginAllKeys &&
-              pluginAllKeys.forEach((key) => fileOptions.push(key));
             pluginFilesKeys &&
               pluginFilesKeys.forEach((key) => fileOptions.push(key));
           }
@@ -2647,10 +2642,9 @@ class FilesStore {
               PluginFileType.Video,
               item.fileExst,
               security,
+              item.security,
             );
 
-            pluginAllKeys &&
-              pluginAllKeys.forEach((key) => fileOptions.push(key));
             pluginFilesKeys &&
               pluginFilesKeys.forEach((key) => fileOptions.push(key));
           }
@@ -2862,10 +2856,9 @@ class FilesStore {
             PluginFileType.Rooms,
             null,
             security,
+            item.security,
           );
 
-          pluginAllKeys &&
-            pluginAllKeys.forEach((key) => roomOptions.push(key));
           pluginRoomsKeys &&
             pluginRoomsKeys.forEach((key) => roomOptions.push(key));
         }
@@ -2981,10 +2974,9 @@ class FilesStore {
           PluginFileType.Folders,
           null,
           security,
+          item.security,
         );
 
-        pluginAllKeys &&
-          pluginAllKeys.forEach((key) => folderOptions.push(key));
         pluginFoldersKeys &&
           pluginFoldersKeys.forEach((key) => folderOptions.push(key));
       }

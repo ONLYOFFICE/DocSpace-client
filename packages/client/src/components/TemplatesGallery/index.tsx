@@ -33,8 +33,6 @@ import { isMobile } from "@docspace/shared/utils";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 
-import OformsFilter from "@docspace/shared/api/oforms/filter";
-
 import TilesContainer from "./TilesContainer";
 import styles from "./TemplatesGallery.module.scss";
 
@@ -42,7 +40,7 @@ const TemplatesGallery = (props: {
   templatesGalleryVisible: boolean;
   setTemplatesGalleryVisible: (isVisible: boolean) => void;
   setCurrentExtensionGallery: (extension: string) => void;
-  resetFilters: (filter: any) => Promise<void>;
+  resetFilters: (ext: string) => Promise<void>;
   initTemplateGallery: () => Promise<void>;
 }) => {
   const {
@@ -56,30 +54,17 @@ const TemplatesGallery = (props: {
   const [currentTabId, setCurrentTabId] = useState("documents");
   const [isInitLoading, setIsInitLoading] = useState(true);
 
-  const getData = async (ext: string) => {
-    const firstLoadFilter =
-      ext === ".docx"
-        ? OformsFilter.getDefaultDocx()
-        : ext === ".xlsx"
-          ? OformsFilter.getDefaultSpreadsheet()
-          : ext === ".pptx"
-            ? OformsFilter.getDefaultPresentation()
-            : OformsFilter.getDefault();
-
-    await resetFilters(firstLoadFilter);
-  };
+  const getData = async (ext: string) => resetFilters(ext);
 
   useEffect(() => {
-    initTemplateGallery().then(() => {
-      setIsInitLoading(false);
-    });
+    initTemplateGallery().then(() => setIsInitLoading(false));
   }, []);
 
   const tabs = [
     {
       id: "documents",
       name: "Documents",
-      content: <TilesContainer tabDocuments isInitLoading={isInitLoading} />,
+      content: <TilesContainer ext=".docx" isInitLoading={isInitLoading} />,
       onClick: async () => {
         await getData(".docx");
       },
@@ -87,7 +72,7 @@ const TemplatesGallery = (props: {
     {
       id: "spreadsheet",
       name: "Spreadsheet",
-      content: <TilesContainer tabSpreadsheet isInitLoading={false} />,
+      content: <TilesContainer ext=".xlsx" isInitLoading={false} />,
       onClick: async () => {
         await getData(".xlsx");
       },
@@ -95,7 +80,7 @@ const TemplatesGallery = (props: {
     {
       id: "presentation",
       name: "Presentation",
-      content: <TilesContainer tabPresentation isInitLoading={false} />,
+      content: <TilesContainer ext=".pptx" isInitLoading={false} />,
       onClick: async () => {
         await getData(".pptx");
       },
@@ -103,7 +88,7 @@ const TemplatesGallery = (props: {
     {
       id: "forms",
       name: "Forms",
-      content: <TilesContainer tabForm isInitLoading={false} />,
+      content: <TilesContainer ext=".pdf" isInitLoading={false} />,
       onClick: async () => {
         await getData(".pdf");
       },

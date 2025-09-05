@@ -372,8 +372,17 @@ class OformsStore {
     runInAction(() => this.fetchOforms(newOformsFilter));
   };
 
-  resetFilters = (defaultFilter) => {
+  resetFilters = (ext) => {
     this.currentCategory = null;
+
+    const defaultFilter =
+      ext === ".docx"
+        ? OformsFilter.getDefaultDocx()
+        : ext === ".xlsx"
+          ? OformsFilter.getDefaultSpreadsheet()
+          : ext === ".pptx"
+            ? OformsFilter.getDefaultPresentation()
+            : OformsFilter.getDefault();
 
     defaultFilter.locale = this.defaultOformLocale;
     runInAction(() => this.fetchOforms(defaultFilter));

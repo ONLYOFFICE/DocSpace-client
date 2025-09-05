@@ -2853,6 +2853,8 @@
   --submit-gallery-tile-text-background: #{$white};
 
   --submit-gallery-tile-text-background: #{$white};
+
+  --template-gallery-empty-screen: #{$gray-text};
 }
 
 .dark {
@@ -2878,4 +2880,6 @@
 
   --submit-gallery-tile-text: #{$white};
   --submit-gallery-tile-text-body: #{$dark-gray-dark};
+
+  --template-gallery-empty-screen: #{$dark-gray-dark};
 }

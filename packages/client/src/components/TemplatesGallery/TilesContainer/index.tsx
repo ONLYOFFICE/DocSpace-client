@@ -26,50 +26,60 @@
 
 import { useState, useEffect, useRef } from "react";
 import { observer, inject } from "mobx-react";
-
-import { isMobile } from "@docspace/shared/utils";
-
+import { withTranslation } from "react-i18next";
 import type { FC } from "react";
+import EmptyScreenFilterAltSvgUrl from "PUBLIC_DIR/images/empty_screen_filter_alt.svg?url";
+import EmptyScreenFilterAltDarkSvgUrl from "PUBLIC_DIR/images/empty_screen_filter_alt_dark.svg?url";
+import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
+import { isMobile, IconSizeType } from "@docspace/shared/utils";
+import { TTranslation } from "@docspace/shared/types";
+
+import { useTheme } from "styled-components";
 
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { Scrollbar as CustomScrollbar } from "@docspace/shared/components/scrollbar/custom-scrollbar";
+import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
+import { Link, LinkType } from "@docspace/shared/components/link";
 
+import { IconButton } from "@docspace/shared/components/icon-button";
+
+import styles from "../TemplatesGallery.module.scss";
 import SectionFilterContent from "../Filter";
 import Tiles from "../Tiles";
 
 interface TilesContainerProps {
-  tabDocuments?: boolean;
-  tabSpreadsheet?: boolean;
-  tabPresentation?: boolean;
-  tabForm?: boolean;
+  ext: string;
   isInitLoading: boolean;
+  hasGalleryFiles: boolean;
+  resetFilters: (ext: string) => Promise<void>;
+  t: TTranslation;
 }
 
 const TilesContainer: FC<TilesContainerProps> = ({
-  tabDocuments,
-  tabSpreadsheet,
-  tabPresentation,
-  tabForm,
+  ext,
   isInitLoading,
+  hasGalleryFiles,
+  resetFilters,
+  t,
 }) => {
-  const [isShowOneTile, setShowOneTile] = useState(false);
+  const { isBase } = useTheme();
 
+  const [isShowOneTile, setShowOneTile] = useState(false);
   const [viewMobile, setViewMobile] = useState(false);
 
   const scrollRef = useRef<CustomScrollbar>(null);
+
+  useEffect(() => {
+    if (scrollRef.current) scrollRef.current.scrollToTop();
+  }, [ext]);
 
   const onCheckView = () => setViewMobile(isMobile());
 
   useEffect(() => {
     onCheckView();
     window.addEventListener("resize", onCheckView);
-
     return () => window.removeEventListener("resize", onCheckView);
   }, [onCheckView]);
-
-  useEffect(() => {
-    if (scrollRef.current) scrollRef.current.scrollToTop();
-  }, [tabDocuments, tabSpreadsheet, tabPresentation, tabForm]);
 
   return (
     <div style={{ width: "100%" }}>
@@ -78,7 +88,37 @@ const TilesContainer: FC<TilesContainerProps> = ({
         setShowOneTile={setShowOneTile}
         viewMobile={viewMobile}
       />
-      {viewMobile ? (
+      {!hasGalleryFiles && !isInitLoading ? (
+        <EmptyScreenContainer
+          imageSrc={
+            isBase ? EmptyScreenFilterAltSvgUrl : EmptyScreenFilterAltDarkSvgUrl
+          }
+          imageAlt="Empty Screen Gallery image"
+          headerText={t("Common:NotFoundTitle")}
+          descriptionText={t("FormGallery:EmptyFormGalleryScreenDescription")}
+          buttons={
+            <div className={styles.links}>
+              <IconButton
+                className={styles.icon}
+                size={IconSizeType.small}
+                onClick={() => resetFilters(ext)}
+                iconName={ClearEmptyFilterSvgUrl}
+                isFill
+              />
+              <Link
+                className={styles.link}
+                onClick={() => resetFilters(ext)}
+                isHovered
+                type={LinkType.action}
+                fontWeight="600"
+                display="flex"
+              >
+                {t("Common:ClearFilter")}
+              </Link>
+            </div>
+          }
+        />
+      ) : viewMobile ? (
         <Scrollbar
           style={{ height: "calc(100vh - 227px)", width: "calc(100% + 16px)" }}
           id="scroll-template-gallery"
@@ -86,7 +126,7 @@ const TilesContainer: FC<TilesContainerProps> = ({
         >
           <Tiles
             isShowOneTile={isShowOneTile}
-            smallPreview={tabPresentation || tabSpreadsheet}
+            smallPreview={ext === ".pptx" || ext === ".xlsx"}
             viewMobile={viewMobile}
             isInitLoading={isInitLoading}
           />
@@ -99,7 +139,7 @@ const TilesContainer: FC<TilesContainerProps> = ({
         >
           <Tiles
             isShowOneTile={false}
-            smallPreview={tabPresentation || tabSpreadsheet}
+            smallPreview={ext === ".pptx" || ext === ".xlsx"}
             isInitLoading={isInitLoading}
           />
         </Scrollbar>
@@ -110,18 +150,16 @@ const TilesContainer: FC<TilesContainerProps> = ({
 
 export default inject<TStore>(({ oformsStore }) => ({
   oformsLoadError: oformsStore.oformsLoadError,
-
   currentCategory: oformsStore.currentCategory,
   fetchCurrentCategory: oformsStore.fetchCurrentCategory,
-
+  hasGalleryFiles: oformsStore.hasGalleryFiles,
   defaultOformLocale: oformsStore.defaultOformLocale,
   fetchOformLocales: oformsStore.fetchOformLocales,
-
   oformsFilter: oformsStore.oformsFilter,
   setOformsFilter: oformsStore.setOformsFilter,
-
+  resetFilters: oformsStore.resetFilters,
   fetchOforms: oformsStore.fetchOforms,
   setOformFromFolderId: oformsStore.setOformFromFolderId,
 }))(
-  observer(TilesContainer),
+  withTranslation("Common")(observer(TilesContainer)),
 ) as unknown as React.ComponentType<TilesContainerProps>;

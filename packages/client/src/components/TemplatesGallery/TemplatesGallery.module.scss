@@ -90,3 +90,24 @@
   background-color: var(--background-color);
   height: 100%;
 }
+
+.links {
+  display: grid;
+  margin: 13px 0;
+  grid-template-columns: 12px 1fr;
+  grid-column-gap: 8px;
+
+  .icon {
+    height: 20px;
+    width: 12px;
+    margin-block: 4px 0;
+    margin-inline: 0 4px;
+    cursor: pointer;
+  }
+
+  .link {
+    color: var(--template-gallery-empty-screen);
+    margin-block: 0;
+    margin-inline: 0 7px;
+  }
+}

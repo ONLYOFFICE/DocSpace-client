@@ -100,7 +100,9 @@ const Tiles: FC<TilesProps> = ({
   };
 
   const submitToGalleryTileNode =
-    submitToGalleryTileIsVisible && canSubmitToFormGallery() ? (
+    submitToGalleryTileIsVisible &&
+    canSubmitToFormGallery() &&
+    oformFiles?.length > 0 ? (
       <SubmitToGalleryTile
         viewMobile={viewMobile}
         smallPreview={smallPreview}

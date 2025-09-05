@@ -37,7 +37,7 @@ import { useChatStore } from "../../../store/chatStore";
 import styles from "../ChatHeader.module.scss";
 
 const CreateChat = () => {
-  const { messages, startNewChat } = useMessageStore();
+  const { messages, isRequestRunning, startNewChat } = useMessageStore();
   const { setCurrentChat } = useChatStore();
 
   const { t } = useTranslation(["Common"]);
@@ -45,6 +45,8 @@ const CreateChat = () => {
   if (messages.length === 0) return null;
 
   const onClickAction = () => {
+    if (isRequestRunning) return;
+
     setCurrentChat(null);
     startNewChat();
   };

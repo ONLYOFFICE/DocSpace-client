@@ -116,15 +116,20 @@ export default class ChatStore {
     }
   };
 
+  addChats = (chats: TChat[]) => {
+    this.chats.push(...chats);
+  };
+
   fetchNextChats = async () => {
     if (this.isRequestRunning) return;
 
     this.setIsRequestRunning(true);
+    this.setIsLoading(true);
 
     try {
       const { items, total } = await getChats(this.roomId, this.startIndex);
 
-      this.setChats(items);
+      this.addChats(items);
       this.setTotalChats(total);
       this.setStartIndex(this.startIndex + 100);
     } catch (error) {
@@ -132,6 +137,7 @@ export default class ChatStore {
       toastr.error(error as string);
     } finally {
       this.setIsRequestRunning(false);
+      this.setIsLoading(false);
     }
   };
 
@@ -159,6 +165,10 @@ export default class ChatStore {
     this.setStartIndex(this.startIndex - 1);
     this.setTotalChats(this.totalChats - 1);
   };
+
+  get hasNextChats() {
+    return this.totalChats > this.chats.length;
+  }
 }
 
 export const ChatStoreContext = React.createContext<ChatStore>(undefined!);

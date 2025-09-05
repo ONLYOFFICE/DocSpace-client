@@ -30,21 +30,15 @@ import { observer } from "mobx-react";
 import classNames from "classnames";
 
 import SelectSessionReactSvg from "PUBLIC_DIR/images/select.session.react.svg";
-import HorizontalDotsIcon from "PUBLIC_DIR/images/icons/16/horizontal-dots.react.svg?url";
 import RenameReactSvgUrl from "PUBLIC_DIR/images/rename.react.svg?url";
 import RemoveSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
 import SaveToFileIconUrl from "PUBLIC_DIR/images/message.save.svg?url";
 
-import { isDesktop } from "../../../../../utils";
 import { RectangleSkeleton } from "../../../../../skeletons";
 import { exportChat } from "../../../../../api/ai";
 
 import { DropDown } from "../../../../drop-down";
-import { DropDownItem } from "../../../../drop-down-item";
-import { IconButton } from "../../../../icon-button";
 import { toastr } from "../../../../toast";
-import { ContextMenu, ContextMenuRefType } from "../../../../context-menu";
-import { Text } from "../../../../text";
 import { Link, LinkType, LinkTarget } from "../../../../link";
 
 import { useChatStore } from "../../../store/chatStore";
@@ -55,6 +49,8 @@ import { SelectChatProps } from "../../../Chat.types";
 import styles from "../ChatHeader.module.scss";
 
 import RenameChat from "./RenameChat";
+import { CHAT_LIST_MAX_HEIGHT, CHAT_LIST_WIDTH } from "../constants";
+import { ChatList } from "./ChatList";
 
 const SelectChat = ({ isLoadingProp }: SelectChatProps) => {
   const { t } = useTranslation(["Common"]);
@@ -64,10 +60,17 @@ const SelectChat = ({ isLoadingProp }: SelectChatProps) => {
   const [isRenameOpen, setIsRenameOpen] = React.useState(false);
 
   const parentRef = React.useRef<HTMLDivElement>(null);
-  const contextMenuRef = React.useRef<ContextMenuRefType>(null);
 
-  const { chats, isLoading, currentChat, fetchChat, deleteChat } =
-    useChatStore();
+  const {
+    chats,
+    isLoading,
+    currentChat,
+    fetchChat,
+    deleteChat,
+    totalChats,
+    fetchNextChats,
+    hasNextChats,
+  } = useChatStore();
   const { fetchMessages, startNewChat } = useMessageStore();
 
   const toggleOpen = () => {
@@ -121,7 +124,7 @@ const SelectChat = ({ isLoadingProp }: SelectChatProps) => {
     toastr.success(toastMsg);
   }, [hoveredItem, chats, t]);
 
-  const model = React.useMemo(() => {
+  const contextModel = React.useMemo(() => {
     return [
       {
         key: "rename",
@@ -145,13 +148,9 @@ const SelectChat = ({ isLoadingProp }: SelectChatProps) => {
     ];
   }, [t, onDeleteAction, onRenameToggle, onSaveToFileAction]);
 
-  const onShowContextMenu = (e: React.MouseEvent<HTMLElement>) => {
-    contextMenuRef.current?.show(e);
-  };
+  const maxHeight = chats.length > 7 ? { maxHeight: CHAT_LIST_MAX_HEIGHT } : {};
 
-  const maxHeight = chats.length > 7 ? { maxHeight: 224 } : {};
-
-  if (isLoading || isLoadingProp) {
+  if (isLoadingProp) {
     return (
       <RectangleSkeleton
         width="32px"
@@ -163,8 +162,6 @@ const SelectChat = ({ isLoadingProp }: SelectChatProps) => {
   }
 
   if (!chats.length) return null;
-
-  const desktop = isDesktop();
 
   return (
     <>
@@ -185,55 +182,21 @@ const SelectChat = ({ isLoadingProp }: SelectChatProps) => {
           directionX="right"
           forwardedRef={parentRef}
           {...maxHeight}
-          manualWidth="280px"
+          manualWidth={`${CHAT_LIST_WIDTH}px`}
           isNoFixedHeightOptions
         >
-          {chats.map(({ title, id }) => {
-            return (
-              <DropDownItem
-                key={id}
-                onClick={(e) => {
-                  e.stopPropagation();
-
-                  const target = e.target as HTMLElement;
-                  const iconButtonWrapper = target.closest(
-                    `.${styles.iconButtonWrapper}`,
-                  );
-
-                  if (iconButtonWrapper) {
-                    return;
-                  }
-
-                  onSelectAction(id);
-                }}
-                className={classNames("drop-down-item")}
-                isActive={id === currentChat?.id}
-                data-id={id}
-              >
-                <div
-                  className={styles.dropdowItemWrapper}
-                  onMouseEnter={() => setHoveredItem(id)}
-                >
-                  <Text truncate>{title}</Text>
-                  {hoveredItem === id || !desktop ? (
-                    <div
-                      className={styles.iconButtonWrapper}
-                      onClick={onShowContextMenu}
-                    >
-                      <IconButton
-                        iconName={HorizontalDotsIcon}
-                        size={16}
-                        isClickable
-                        isFill
-                        onClick={() => {}}
-                      />
-                      <ContextMenu ref={contextMenuRef} model={model} />
-                    </div>
-                  ) : null}
-                </div>
-              </DropDownItem>
-            );
-          })}
+          <ChatList
+            chats={chats}
+            activeChatId={currentChat?.id}
+            contextModel={contextModel}
+            onSelectChat={onSelectAction}
+            hoveredChatId={hoveredItem}
+            setHoveredChatId={setHoveredItem}
+            loadNextPage={fetchNextChats}
+            hasNextPage={hasNextChats}
+            isNextPageLoading={isLoading}
+            total={totalChats}
+          />
         </DropDown>
       ) : null}
       {isRenameOpen ? (

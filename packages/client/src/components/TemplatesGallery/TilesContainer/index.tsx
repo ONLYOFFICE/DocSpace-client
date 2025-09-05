@@ -122,4 +122,6 @@ export default inject<TStore>(({ oformsStore }) => ({
 
   fetchOforms: oformsStore.fetchOforms,
   setOformFromFolderId: oformsStore.setOformFromFolderId,
-}))(observer(TilesContainer)) as unknown as React.ComponentType<TilesContainerProps>;
+}))(
+  observer(TilesContainer),
+) as unknown as React.ComponentType<TilesContainerProps>;

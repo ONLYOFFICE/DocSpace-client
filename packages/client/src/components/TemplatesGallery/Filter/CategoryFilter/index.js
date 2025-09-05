@@ -89,7 +89,6 @@ const CategoryFilter = ({
   setCategoryFilterLoaded,
   categoryFilterLoaded,
   languageFilterLoaded,
-  oformFilesLoaded,
 }) => {
   const [menuItems, setMenuItems] = useState([]);
 
@@ -141,7 +140,7 @@ const CategoryFilter = ({
 
   if (
     filterOformsByLocaleIsLoading ||
-    !(categoryFilterLoaded && languageFilterLoaded && oformFilesLoaded)
+    !(categoryFilterLoaded && languageFilterLoaded)
   )
     return <StyledSkeleton $noLocales={noLocales} />;
 
@@ -167,5 +166,4 @@ export default inject(({ oformsStore }) => ({
   setCategoryFilterLoaded: oformsStore.setCategoryFilterLoaded,
   categoryFilterLoaded: oformsStore.categoryFilterLoaded,
   languageFilterLoaded: oformsStore.languageFilterLoaded,
-  oformFilesLoaded: oformsStore.oformFilesLoaded,
 }))(observer(CategoryFilter));

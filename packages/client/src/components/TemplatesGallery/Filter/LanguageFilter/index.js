@@ -61,7 +61,6 @@ const LanguageFilter = ({
   setLanguageFilterLoaded,
   categoryFilterLoaded,
   languageFilterLoaded,
-  oformFilesLoaded,
   oformsLocal,
   isMobileView,
 }) => {
@@ -82,7 +81,7 @@ const LanguageFilter = ({
 
   if (
     filterOformsByLocaleIsLoading ||
-    !(categoryFilterLoaded && languageFilterLoaded && oformFilesLoaded)
+    !(categoryFilterLoaded && languageFilterLoaded)
   )
     return <RectangleSkeleton width="41px" height="32px" />;
 
@@ -107,7 +106,6 @@ export default inject(({ oformsStore, settingsStore }) => {
     filterOformsByLocaleIsLoading,
     setLanguageFilterLoaded,
     languageFilterLoaded,
-    oformFilesLoaded,
     categoryFilterLoaded,
     oformsFilter,
   } = oformsStore;
@@ -123,9 +121,7 @@ export default inject(({ oformsStore, settingsStore }) => {
     setLanguageFilterLoaded,
     categoryFilterLoaded,
     languageFilterLoaded,
-    oformFilesLoaded,
     oformsLocal: oformsFilter.locale,
-
     isMobileView,
   };
 })(withTranslation(["Common"])(observer(LanguageFilter)));

@@ -70,11 +70,13 @@ const PermanentSettings = ({
               i18nKey="ThirdPartyStoragePermanentSettingDescription"
               ns="CreateEditRoomDialog"
               t={t}
-            >
-              Files are stored in a third-party {{ thirdpartyTitle }} storage in
-              the \"{{ thirdpartyFolderName }}\" folder.
-              <strong>{{ thirdpartyPath }}</strong>"
-            </Trans>
+              values={{
+                thirdpartyTitle,
+                thirdpartyFolderName,
+                thirdpartyPath,
+              }}
+              components={{ strong: <strong /> }}
+            />
           }
         />
       ) : null}

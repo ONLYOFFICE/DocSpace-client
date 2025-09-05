@@ -243,10 +243,8 @@ const useBackup = ({
   ]);
 
   const getBackupInitialValue = React.useCallback(async () => {
-    console.log("here");
     const actions = [];
     if (window.location.pathname.includes("data-backup")) {
-      console.log("data-backup");
       actions.push(getManualBackupData());
     }
 

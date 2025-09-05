@@ -69,24 +69,26 @@ export type TChat = {
   createdBy: TCreatedBy;
 };
 
+export type TToolCallContent = {
+  type: ContentType.Tool;
+  arguments: Record<string, unknown>;
+  name: string;
+  result?: Record<string, unknown>;
+  callId?: string;
+  mcpServerInfo?: {
+    serverId: string;
+    serverName: string;
+    serverType: ServerType;
+  };
+  managed?: boolean;
+};
+
 export type TContent =
   | {
       type: ContentType.Text;
       text: string;
     }
-  | {
-      type: ContentType.Tool;
-      arguments: Record<string, unknown>;
-      name: string;
-      result?: Record<string, unknown>;
-      callId?: string;
-      mcpServerInfo?: {
-        serverId: string;
-        serverName: string;
-        serverType: ServerType;
-      };
-      managed?: boolean;
-    }
+  | TToolCallContent
   | {
       type: ContentType.Files;
       id: number;

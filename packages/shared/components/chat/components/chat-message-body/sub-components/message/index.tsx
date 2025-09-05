@@ -37,7 +37,7 @@ import { useChatStore } from "../../../../store/chatStore";
 import styles from "../../ChatMessageBody.module.scss";
 
 import Markdown from "./Markdown";
-import ToolCall from "./ToolCall";
+import ToolCallMessage from "./ToolCallMessage";
 import Error from "./Error";
 import Files from "./Files";
 import Buttons from "./Buttons";
@@ -116,7 +116,7 @@ const Message = ({
           return <Markdown key={c.text} chatMessage={c.text} />;
 
         if (c.type === ContentType.Tool)
-          return <ToolCall key={c.name} content={c} />;
+          return <ToolCallMessage key={c.name} content={c} />;
 
         return null;
       })}

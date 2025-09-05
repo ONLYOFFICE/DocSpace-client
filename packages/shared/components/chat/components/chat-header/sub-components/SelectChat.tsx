@@ -68,34 +68,45 @@ const SelectChat = ({ isLoadingProp }: SelectChatProps) => {
 
   const { chats, isLoading, currentChat, fetchChat, deleteChat } =
     useChatStore();
-  const { fetchMessages, startNewChat } = useMessageStore();
+  const { fetchMessages, startNewChat, isRequestRunning } = useMessageStore();
 
   const toggleOpen = () => {
+    if (isRequestRunning) return;
     setIsOpen((value) => !value);
     setHoveredItem("");
   };
 
   const onSelectAction = (id: string) => {
+    if (isRequestRunning) return;
     fetchChat(id);
     fetchMessages(id);
     toggleOpen();
   };
 
   const onRenameToggle = React.useCallback(() => {
+    if (isRequestRunning) return;
     setIsOpen(false);
     setIsRenameOpen((value) => !value);
-  }, []);
+  }, [isRequestRunning]);
 
   const onDeleteAction = React.useCallback(async () => {
+    if (isRequestRunning) return;
     await deleteChat(hoveredItem);
     if (hoveredItem === currentChat?.id) {
       startNewChat();
     }
     setIsOpen(false);
     setHoveredItem("");
-  }, [hoveredItem, deleteChat, currentChat?.id, startNewChat]);
+  }, [
+    hoveredItem,
+    deleteChat,
+    isRequestRunning,
+    currentChat?.id,
+    startNewChat,
+  ]);
 
   const onSaveToFileAction = React.useCallback(async () => {
+    if (isRequestRunning) return;
     const res = await exportChat(hoveredItem);
 
     const title = chats.find((chat) => chat.id === hoveredItem)?.title;
@@ -119,7 +130,7 @@ const SelectChat = ({ isLoadingProp }: SelectChatProps) => {
     );
 
     toastr.success(toastMsg);
-  }, [hoveredItem, chats, t]);
+  }, [hoveredItem, chats, isRequestRunning, t]);
 
   const model = React.useMemo(() => {
     return [
@@ -148,6 +159,12 @@ const SelectChat = ({ isLoadingProp }: SelectChatProps) => {
   const onShowContextMenu = (e: React.MouseEvent<HTMLElement>) => {
     contextMenuRef.current?.show(e);
   };
+
+  React.useEffect(() => {
+    if (isRequestRunning) {
+      setIsOpen(false);
+    }
+  }, [isRequestRunning]);
 
   const maxHeight = chats.length > 7 ? { maxHeight: 224 } : {};
 

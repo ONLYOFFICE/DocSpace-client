@@ -206,55 +206,65 @@ export default class MessageStore {
   };
 
   handleToolCall = (jsonData: string) => {
-    const {
-      name,
-      arguments: args,
-      callId,
-      additionalProperties,
-    } = JSON.parse(jsonData);
+    try {
+      const {
+        name,
+        arguments: args,
+        callId,
+        additionalProperties,
+      } = JSON.parse(jsonData);
 
-    const newMsg: TMessage = {
-      role: RoleType.AssistantMessage,
-      createdOn: new Date().toString(),
-      contents: [
-        {
-          type: ContentType.Tool,
-          name,
-          arguments: args,
-          callId,
-          additionalProperties,
-        },
-      ],
-    };
+      const newMsg: TMessage = {
+        role: RoleType.AssistantMessage,
+        createdOn: new Date().toString(),
+        contents: [
+          {
+            type: ContentType.Tool,
+            name,
+            arguments: args,
+            callId,
+            additionalProperties,
+          },
+        ],
+      };
 
-    this.setMessages([newMsg, ...this.messages]);
-    this.setTotalMessages(this.totalMessages + 1);
-    this.setStartIndex(this.startIndex + 1);
+      this.setMessages([newMsg, ...this.messages]);
+      this.setTotalMessages(this.totalMessages + 1);
+      this.setStartIndex(this.startIndex + 1);
+    } catch (e) {
+      console.log("failed parse tool call");
+      // ignore
+    }
   };
 
   handleToolResult = (jsonData: string) => {
-    const { result } = JSON.parse(jsonData);
+    try {
+      const { result } = JSON.parse(jsonData);
 
-    const newMsg: TMessage = {
-      ...this.messages[0],
+      const newMsg: TMessage = {
+        ...this.messages[0],
 
-      contents: [
-        {
-          type: ContentType.Tool,
-          result,
-          arguments:
-            "arguments" in this.messages[0].contents[0]
-              ? this.messages[0].contents[0].arguments!
-              : {},
-          name:
-            "name" in this.messages[0].contents[0]
-              ? this.messages[0].contents[0].name
-              : "",
-        },
-      ],
-    };
+        contents: [
+          {
+            type: ContentType.Tool,
+            result,
+            arguments:
+              "arguments" in this.messages[0].contents[0]
+                ? this.messages[0].contents[0].arguments!
+                : {},
+            name:
+              "name" in this.messages[0].contents[0]
+                ? this.messages[0].contents[0].name
+                : "",
+          },
+        ],
+      };
 
-    this.messages[0] = newMsg;
+      this.messages[0] = newMsg;
+    } catch (e) {
+      console.log("failed parse tool result");
+      // ignore
+    }
   };
 
   handleStreamError = (jsonData: string) => {
@@ -284,6 +294,8 @@ export default class MessageStore {
       let prevMsg = "";
 
       let msg = "";
+      let toolCall = "";
+      let toolResult = "";
 
       const streamHandler = async () => {
         const { done, value } = await reader.read();
@@ -321,24 +333,35 @@ export default class MessageStore {
             }
 
             if (event.includes(EventType.NewToken)) {
-              const { text } = JSON.parse(jsonData);
+              toolCall = "";
+              toolResult = "";
 
-              msg += text;
+              try {
+                const { text } = JSON.parse(jsonData);
 
-              if (msg) {
-                if (prevMsg) {
-                  this.continueAIMessage(msg);
-                } else {
-                  this.addNewAIMessage(msg);
+                msg += text;
+
+                if (msg) {
+                  if (prevMsg) {
+                    this.continueAIMessage(msg);
+                  } else {
+                    this.addNewAIMessage(msg);
+                  }
+                  prevMsg = msg;
                 }
-                prevMsg = msg;
+              } catch (e) {
+                // ignore
               }
             }
 
             if (event.includes(EventType.ToolCall)) {
               msg = "";
               prevMsg = "";
-              this.handleToolCall(jsonData);
+              toolResult = "";
+
+              toolCall += jsonData;
+
+              this.handleToolCall(toolCall);
 
               return;
             }
@@ -346,7 +369,11 @@ export default class MessageStore {
             if (event.includes(EventType.ToolResult)) {
               msg = "";
               prevMsg = "";
-              this.handleToolResult(jsonData);
+              toolCall = "";
+
+              toolResult += jsonData;
+
+              this.handleToolResult(toolResult);
 
               return;
             }

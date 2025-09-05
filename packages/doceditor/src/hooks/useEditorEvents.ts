@@ -29,6 +29,7 @@ import isUndefined from "lodash/isUndefined";
 import { useSearchParams } from "next/navigation";
 
 import {
+  addFileToRecentlyViewed,
   createFile,
   getEditDiff,
   getEditHistory,
@@ -38,6 +39,8 @@ import {
   openEdit,
   restoreDocumentsVersion,
   sendEditorNotify,
+  markAsFavorite,
+  removeFromFavorite,
 } from "@docspace/shared/api/files";
 import {
   TEditHistory,
@@ -73,6 +76,7 @@ import {
   THistoryData,
   UseEventsProps,
 } from "@/types";
+import { onSDKInfo, type TInfoEvent } from "@/utils/events";
 
 let docEditor: TDocEditor | null = null;
 
@@ -628,9 +632,23 @@ const useEditorEvents = ({
   );
 
   const onMetaChange = React.useCallback(
-    (event: object) => {
+    async (event: object) => {
       const newTitle = (event as { data: { title: string } }).data.title;
-      // const favorite = event.data.favorite;
+      const favorite = (event as { data: { favorite: boolean } }).data.favorite;
+
+      if (favorite !== fileInfo?.isFavorite && fileInfo?.id) {
+        try {
+          if (favorite) {
+            await markAsFavorite([fileInfo.id], []);
+          } else {
+            await removeFromFavorite([fileInfo.id], []);
+          }
+        } catch (error) {
+          console.error(error);
+        } finally {
+          docEditor?.setFavorite?.(favorite);
+        }
+      }
 
       if (newTitle && newTitle !== docTitle) {
         setDocumentTitle(
@@ -824,6 +842,21 @@ const useEditorEvents = ({
     config?.editorConfig.mode,
   ]);
 
+  const onInfo = React.useCallback(
+    async (e: object) => {
+      onSDKInfo(e);
+
+      const mode = (e as TInfoEvent).data.mode;
+
+      // Documents opened in "view" mode currently cannot be added to Recent automatically on the server,
+      // so they are added manually on the client.
+      if (successAuth && fileInfo?.id && mode === "view") {
+        addFileToRecentlyViewed(fileInfo.id);
+      }
+    },
+    [onSDKInfo, successAuth, fileInfo?.id],
+  );
+
   return {
     createUrl,
     documentReady,
@@ -850,6 +883,7 @@ const useEditorEvents = ({
     onRequestFillingStatus,
     onRequestStartFilling,
     onRequestRefreshFile,
+    onInfo,
   };
 };
 

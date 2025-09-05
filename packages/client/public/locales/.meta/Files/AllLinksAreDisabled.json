@@ -3,7 +3,7 @@
   "content": "All links are disabled",
   "content_en_sha1_hash": "4abc782c5ef61014c486667e9d377d626e19ba82",
   "created_at": "2025-05-19T21:30:55.258Z",
-  "updated_at": "2025-08-26T11:15:14.224Z",
+  "updated_at": "2025-09-02T07:59:28.648Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that all links are disabled. It appears as the label on an option in a UI component, providing context to users about their settings. Translators should replace the English content with a localized equivalent for the \"AllLinksAreDisabled\" setting.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 952,
+      "line_number": 954,
       "context": "//           {\n //             id: \"no-external-links-option\",\n //             key: \"no-external-links\",\n //             label: !links.length\n //               ? t(\"Files:NoExternalLinks\")\n //               : t(\"Files:AllLinksAreDisabled\"),\n //             disableColor: true,\n //           },\n //           !isMobile && {\n //             key: \"separator0\",\n //             isSeparator: true,",
       "module": "/packages/client"
     }

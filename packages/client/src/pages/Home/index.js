@@ -471,7 +471,6 @@ export const Component = inject(
 
     const {
       firstLoad,
-      setIsSectionHeaderLoading,
       setIsSectionBodyLoading,
       setIsSectionFilterLoading,
       isLoading,
@@ -634,7 +633,6 @@ export const Component = inject(
       setExpandedKeys,
 
       setDragging,
-      setIsSectionHeaderLoading,
       setIsSectionBodyLoading,
       setIsSectionFilterLoading,
       isLoading,

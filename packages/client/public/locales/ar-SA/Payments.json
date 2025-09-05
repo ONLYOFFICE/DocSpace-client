@@ -38,7 +38,6 @@
   "ChooseNewPlan": "هل ترغب في اختيار خطة تسعير جديدة؟",
   "ConfirmPayment": "تأكيد الدفع",
   "ConnectAndConfigureServices": "يُستخدم هذا القسم للاتصال والتهيئة للخدمات.",
-  "Cost": "التكلفة",
   "Credit": "أيضاً",
   "CurrencyPerMonth": "{{currency}}/شهْر",
   "CurrentBalance": "الرصيد الحالي: <1>{{balance}}</1>",

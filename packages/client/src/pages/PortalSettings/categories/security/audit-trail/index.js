@@ -114,7 +114,7 @@ const AuditTrail = (props) => {
         content={getContent()}
         downloadReport={t("DownloadReportBtnText")}
         downloadReportDescription={t("ReportSaveLocation", {
-          sectionName: t("Common:MyFilesSection"),
+          sectionName: t("Common:MyDocuments"),
         })}
         getReport={getAuditTrailReport}
         isSettingNotPaid={!isAuditAvailable}

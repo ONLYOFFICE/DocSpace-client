@@ -38,7 +38,6 @@
   "ChooseNewPlan": "¿Desea elegir un nuevo plan de precios?",
   "ConfirmPayment": "Confirmar pago",
   "ConnectAndConfigureServices": "Esta sección se utiliza para conectar y configurar los servicios.",
-  "Cost": "Coste",
   "Credit": "Crédito",
   "CurrencyPerMonth": "{{currency}}/mes",
   "CurrentBalance": "Saldo actual: <1>{{balance}}</1>",

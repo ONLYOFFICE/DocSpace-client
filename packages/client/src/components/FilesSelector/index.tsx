@@ -89,6 +89,8 @@ const FilesSelectorWrapper = ({
   rootFolderType,
 
   treeFolders,
+  withRecentTreeFolder,
+  withFavoritesTreeFolder,
 
   selection,
   // disabledItems,
@@ -406,6 +408,8 @@ const FilesSelectorWrapper = ({
       getIcon={getIcon}
       setIsDataReady={setIsDataReady}
       treeFolders={treeFolders}
+      withRecentTreeFolder={withRecentTreeFolder}
+      withFavoritesTreeFolder={withFavoritesTreeFolder}
       onSetBaseFolderPath={onSetBaseFolderPath}
       isUserOnly={isUserOnly}
       isRoomsOnly={isRoomsOnly}

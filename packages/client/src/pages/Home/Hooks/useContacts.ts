@@ -101,7 +101,7 @@ const useContacts = ({
       }
 
       await Promise.all([
-        getUsersList(newFilter, true, true),
+        getUsersList(newFilter, true, true, contactsView),
         groupId && isInsideGroup ? updateCurrentGroup(groupId) : null,
       ]);
 

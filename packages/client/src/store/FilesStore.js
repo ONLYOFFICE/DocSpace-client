@@ -97,12 +97,13 @@ import {
   FILTER_ARCHIVE_ROOM,
   FILTER_DOCUMENTS,
   FILTER_RECENT,
+  FILTER_FAVORITES,
   FILTER_ROOM_DOCUMENTS,
   FILTER_SHARED_ROOM,
   FILTER_TEMPLATES_ROOM,
   FILTER_TRASH,
 } from "@docspace/shared/utils/filterConstants";
-import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
+// import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
 
 const { FilesFilter, RoomsFilter } = api;
 const storageViewAs = localStorage.getItem("viewAs");
@@ -604,11 +605,12 @@ class FilesStore {
       api.files
         .getFolderInfo(folder.id)
         .then((response) => {
-          const folderInfo = {
-            isFolder: !isRoomUtil(response),
-            isRoom: isRoomUtil(response),
-            ...response,
-          };
+          // const folderInfo = {
+          //   isFolder: !isRoomUtil(response),
+          //   isRoom: isRoomUtil(response),
+          //   ...response,
+          // };
+          const folderInfo = this.getFilesListItems([response])[0];
 
           console.log("[WS] update folder", folderInfo.id, folderInfo.title);
 
@@ -662,13 +664,17 @@ class FilesStore {
   };
 
   wsModifyFolderDelete = (opt) => {
-    const { recentFolderId } = this.treeFoldersStore;
+    const { recentFolderId, favoritesFolderId } = this.treeFoldersStore;
     const data = opt?.data && JSON.parse(opt.data);
 
-    // Skip when removing in recent but selected folder is not recent
+    // Skip when removing in recent or favorites but selected folder is not recent or favorites
     if (
-      data?.folderId === recentFolderId &&
-      this.selectedFolderStore.id !== recentFolderId
+      (data?.folderId === recentFolderId &&
+        this.selectedFolderStore.id !== recentFolderId) ||
+      (data?.folderId === favoritesFolderId &&
+        this.selectedFolderStore.id !== favoritesFolderId) ||
+      (data?.parentId === favoritesFolderId &&
+        this.selectedFolderStore.id !== favoritesFolderId)
     ) {
       return;
     }
@@ -1516,11 +1522,13 @@ class FilesStore {
           ? `${FILTER_ROOM_DOCUMENTS}=${this.userStore.user?.id}`
           : this.categoryType === CategoryType.Recent
             ? `${FILTER_RECENT}=${this.userStore.user?.id}`
-            : +folderId === recycleBinFolderId
-              ? `${FILTER_TRASH}=${this.userStore.user?.id}`
-              : !this.publicRoomStore.isPublicRoom
-                ? `${FILTER_DOCUMENTS}=${this.userStore.user?.id}`
-                : null;
+            : this.categoryType === CategoryType.Favorite
+              ? `${FILTER_FAVORITES}=${this.userStore.user?.id}`
+              : +folderId === recycleBinFolderId
+                ? `${FILTER_TRASH}=${this.userStore.user?.id}`
+                : !this.publicRoomStore.isPublicRoom
+                  ? `${FILTER_DOCUMENTS}=${this.userStore.user?.id}`
+                  : null;
 
     if (key) {
       setUserFilter(key, {
@@ -1858,9 +1866,6 @@ class FilesStore {
           }
         }
 
-        this.clientLoadingStore.setIsSectionHeaderLoading(false);
-        this.clientLoadingStore.setIsSectionFilterLoading(false);
-
         const selectedFolder = {
           selectedFolder: { ...this.selectedFolderStore },
         };
@@ -1945,6 +1950,9 @@ class FilesStore {
       })
       .finally(() => {
         this.setIsLoadedFetchFiles(true);
+
+        this.clientLoadingStore.setIsSectionHeaderLoading(false);
+        this.clientLoadingStore.setIsSectionFilterLoading(false);
 
         if (window?.DocSpace?.location?.state?.highlightFileId) {
           this.setHighlightFile({
@@ -2088,9 +2096,6 @@ class FilesStore {
 
           setInfoPanelSelectedRoom(null);
 
-          this.clientLoadingStore.setIsSectionHeaderLoading(false);
-          this.clientLoadingStore.setIsSectionFilterLoading(false);
-
           const selectedFolder = {
             selectedFolder: { ...this.selectedFolderStore },
           };
@@ -2128,6 +2133,10 @@ class FilesStore {
           } else {
             toastr.error(err);
           }
+        })
+        .finally(() => {
+          this.clientLoadingStore.setIsSectionHeaderLoading(false);
+          this.clientLoadingStore.setIsSectionFilterLoading(false);
         });
 
     return request();
@@ -2218,8 +2227,13 @@ class FilesStore {
     const isDocuSign = false; // TODO: need this prop;
     const isEditing = false; // (item.fileStatus & FileStatus.IsEditing) === FileStatus.IsEditing;
 
-    const { isRecycleBinFolder, isMy, isArchiveFolder, isRecentFolder } =
-      this.treeFoldersStore;
+    const {
+      isRecycleBinFolder,
+      isMy,
+      isArchiveFolder,
+      isRecentFolder,
+      isFavoritesFolder,
+    } = this.treeFoldersStore;
     const { security } = this.selectedFolderStore;
 
     const { enablePlugins } = this.settingsStore;
@@ -2230,10 +2244,6 @@ class FilesStore {
     const isMyFolder = isMy(item.rootFolderType);
 
     const { isDesktopClient } = this.settingsStore;
-
-    const pluginAllKeys =
-      enablePlugins &&
-      this.pluginStore.getContextMenuKeysByType(null, null, security);
 
     const canRenameItem = item.security?.Rename;
 
@@ -2314,8 +2324,8 @@ class FilesStore {
 
         "open-location",
         "mark-read",
-        // "mark-as-favorite",
-        // "remove-from-favorites",
+        "mark-as-favorite",
+        "remove-from-favorites",
         "download",
         "download-as",
         "convert",
@@ -2328,6 +2338,7 @@ class FilesStore {
         "edit-index",
         "separator2",
         // "unsubscribe",
+        "separator4",
         "delete",
         "remove-from-recent",
         "copy-general-link",
@@ -2351,6 +2362,13 @@ class FilesStore {
           "separator2",
           "remove-from-recent",
           "copy-general-link",
+        ]);
+      }
+
+      if (isRecentFolder) {
+        fileOptions = removeOptions(fileOptions, [
+          "mark-as-favorite",
+          "remove-from-favorites",
         ]);
       }
 
@@ -2493,25 +2511,23 @@ class FilesStore {
 
       if (
         isEditing ||
-        item.rootFolderType === FolderType.Archive
-        // ||
-        // (isFavoritesFolder && !isFavorite) ||
-        // isFavoritesFolder ||
-        // isRecentFolder
+        item.rootFolderType === FolderType.Archive ||
+        (isFavoritesFolder && !item?.isFavorite) ||
+        isFavoritesFolder ||
+        isRecentFolder
       )
         fileOptions = removeOptions(fileOptions, ["separator2"]);
 
-      // if (isFavorite) {
-      //   fileOptions = removeOptions(fileOptions, ["mark-as-favorite"]);
-      // } else {
-      //   fileOptions = removeOptions(fileOptions, [
-      //     "remove-from-favorites",
-      //   ]);
+      if (item?.isFavorite) {
+        fileOptions = removeOptions(fileOptions, ["mark-as-favorite"]);
+      } else {
+        fileOptions = removeOptions(fileOptions, ["remove-from-favorites"]);
+      }
 
-      //   if (isFavoritesFolder) {
-      //     fileOptions = removeOptions(fileOptions, ["mark-as-favorite"]);
-      //   }
-      // }
+      if (isFavoritesFolder) {
+        fileOptions = removeOptions(fileOptions, ["mark-as-favorite"]);
+        fileOptions = removeOptions(fileOptions, ["delete"]);
+      }
 
       if (isEncrypted) {
         fileOptions = removeOptions(fileOptions, [
@@ -2542,10 +2558,9 @@ class FilesStore {
               PluginFileType.Files,
               item.fileExst,
               security,
+              item.security,
             );
 
-            pluginAllKeys &&
-              pluginAllKeys.forEach((key) => fileOptions.push(key));
             pluginFilesKeys &&
               pluginFilesKeys.forEach((key) => fileOptions.push(key));
           }
@@ -2558,10 +2573,9 @@ class FilesStore {
               PluginFileType.Image,
               item.fileExst,
               security,
+              item.security,
             );
 
-            pluginAllKeys &&
-              pluginAllKeys.forEach((key) => fileOptions.push(key));
             pluginFilesKeys &&
               pluginFilesKeys.forEach((key) => fileOptions.push(key));
           }
@@ -2574,10 +2588,9 @@ class FilesStore {
               PluginFileType.Video,
               item.fileExst,
               security,
+              item.security,
             );
 
-            pluginAllKeys &&
-              pluginAllKeys.forEach((key) => fileOptions.push(key));
             pluginFilesKeys &&
               pluginFilesKeys.forEach((key) => fileOptions.push(key));
           }
@@ -2591,7 +2604,7 @@ class FilesStore {
       if (
         !(
           isRecentFolder ||
-          // isFavoritesFolder ||
+          isFavoritesFolder ||
           (isMyFolder && (this.filterType || this.filterSearch))
         )
       ) {
@@ -2789,10 +2802,9 @@ class FilesStore {
             PluginFileType.Rooms,
             null,
             security,
+            item.security,
           );
 
-          pluginAllKeys &&
-            pluginAllKeys.forEach((key) => roomOptions.push(key));
           pluginRoomsKeys &&
             pluginRoomsKeys.forEach((key) => roomOptions.push(key));
         }
@@ -2817,6 +2829,8 @@ class FilesStore {
       // "link-for-portal-users",
       "separator1",
       "open-location",
+      "mark-as-favorite",
+      "remove-from-favorites",
       "download",
       "move", // category
       "move-to",
@@ -2906,10 +2920,9 @@ class FilesStore {
           PluginFileType.Folders,
           null,
           security,
+          item.security,
         );
 
-        pluginAllKeys &&
-          pluginAllKeys.forEach((key) => folderOptions.push(key));
         pluginFoldersKeys &&
           pluginFoldersKeys.forEach((key) => folderOptions.push(key));
       }
@@ -2962,6 +2975,17 @@ class FilesStore {
 
     if (isMyFolder) {
       folderOptions = removeOptions(folderOptions, ["link-for-room-members"]);
+    }
+
+    if (item?.isFavorite) {
+      folderOptions = removeOptions(folderOptions, ["mark-as-favorite"]);
+    } else {
+      folderOptions = removeOptions(folderOptions, ["remove-from-favorites"]);
+    }
+
+    if (isFavoritesFolder) {
+      folderOptions = removeOptions(folderOptions, ["mark-as-favorite"]);
+      folderOptions = removeOptions(folderOptions, ["delete"]);
     }
 
     folderOptions = removeSeparator(folderOptions);

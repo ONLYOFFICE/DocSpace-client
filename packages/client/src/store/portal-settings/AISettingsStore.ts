@@ -151,11 +151,10 @@ class AISettingsStore {
     }
   };
 
-  // initAISettings = async (standalone: boolean) => {
-  initAISettings = async () => {
+  initAISettings = async (standalone: boolean) => {
     const actions = [this.fetchMCPServers()];
 
-    if (true) {
+    if (standalone) {
       actions.push(this.fetchAIProviders());
     }
 

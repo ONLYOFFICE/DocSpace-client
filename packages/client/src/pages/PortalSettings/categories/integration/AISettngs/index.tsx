@@ -53,16 +53,15 @@ const AISettngs = ({
   const { t, ready } = useTranslation("AISettings");
 
   useEffect(() => {
-    initAISettings?.(true);
+    initAISettings?.(standalone);
 
     return () => {
       setIsInit?.(false);
     };
-  }, [initAISettings, setIsInit]);
+  }, [standalone, initAISettings, setIsInit]);
 
   useEffect(() => {
-    // const titleKey = standalone ? "Settings:AISettings" : "Settings:MCPServers";
-    const titleKey = "Settings:AISettings";
+    const titleKey = standalone ? "Settings:AISettings" : "Settings:MCPServers";
 
     if (ready) setDocumentTitle(t(titleKey));
   }, [ready, standalone]);
@@ -71,9 +70,8 @@ const AISettngs = ({
 
   return (
     <div className={styles.aiSettingsContainer}>
-      {/* {standalone ? <AIProvider /> : null} */}
-      <AIProvider />
-      <MCPServers standalone={true} />
+      {standalone ? <AIProvider /> : null}
+      <MCPServers standalone={standalone} />
     </div>
   );
 };

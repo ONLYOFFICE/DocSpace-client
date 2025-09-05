@@ -112,7 +112,7 @@ type MCPServersProps = {
 };
 
 const MCPServersComponent = ({
-  // standalone,
+  standalone,
   customMCPServers,
   systemMCPServers,
   updateMCPStatus,
@@ -197,7 +197,7 @@ const MCPServersComponent = ({
 
   return (
     <div className={styles.mcpServers}>
-      {/* {standalone ? (
+      {standalone ? (
         <Heading
           className={styles.heading}
           level={HeadingLevel.h3}
@@ -207,16 +207,8 @@ const MCPServersComponent = ({
         >
           {t("AISettings:MCPSettingTitle")}
         </Heading>
-      ) : null} */}{" "}
-      <Heading
-        className={styles.heading}
-        level={HeadingLevel.h3}
-        fontSize="16px"
-        fontWeight={700}
-        lineHeight="22px"
-      >
-        {t("AISettings:MCPSettingTitle")}
-      </Heading>
+      ) : null}
+
       <Text className={styles.description}>
         {t("AISettings:MCPSettingDescription")}
       </Text>
@@ -239,6 +231,7 @@ const MCPServersComponent = ({
         className={styles.addProviderButton}
         onClick={showAddDialog}
       />
+
       <MCPList
         headingText={t("AISettings:CustomMCPListTitle")}
         mcpServers={customMCPServers}
@@ -247,6 +240,7 @@ const MCPServersComponent = ({
         onSettingsClick={onUpdateMCP}
         onDeleteClick={onDeleteMCP}
       />
+
       <MCPList
         headingText={t("AISettings:SystemMCPListTitle")}
         mcpServers={systemMCPServers}
@@ -255,19 +249,23 @@ const MCPServersComponent = ({
         onSettingsClick={onUpdateMCP}
         onDeleteClick={onDeleteMCP}
       />
+
       {addDialogVisible ? <AddMCPDialog onClose={hideAddDialog} /> : null}
+
       {deleteDialogData.visible ? (
         <DeleteMCPDialog
           onClose={hideDeleteDialog}
           serverId={deleteDialogData.serverId}
         />
       ) : null}
+
       {disableDialogData.visible ? (
         <DisableMCPDialog
           onClose={hideDisableDialog}
           serverId={disableDialogData.serverId}
         />
       ) : null}
+
       {editDialogData.visible ? (
         <EditMCPDialog
           server={editDialogData.server}

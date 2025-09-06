@@ -49,11 +49,10 @@ export interface InjectedManualBackupProps
   maxFreeBackups: number;
 }
 
-export interface ExternalManualBackupProps
-  extends Pick<
-    ManualBackupProps,
-    "maxWidth" | "buttonSize" | "isNeedFilePath"
-  > {}
+export type ExternalManualBackupProps = Pick<
+  ManualBackupProps,
+  "maxWidth" | "buttonSize" | "isNeedFilePath"
+>;
 
 export interface ManualBackupWrapperProps
   extends InjectedManualBackupProps,

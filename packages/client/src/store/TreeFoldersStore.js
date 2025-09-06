@@ -98,15 +98,15 @@ class TreeFoldersStore {
         return f.rootFolderType !== FolderType.Recent;
       })
       .map((f) => `DIR-${f.id}`)
-      .filter((f) => !SocketHelper.socketSubscribers.has(f));
+      .filter((f) => !SocketHelper?.socketSubscribers.has(f));
 
     if (roomParts.length > 0) {
-      // SocketHelper.emit(SocketCommands.Unsubscribe, {
+      // SocketHelper?.emit(SocketCommands.Unsubscribe, {
       //   roomParts: treeFolders.map((f) => `DIR-${f.id}`),
       //   individual: true,
       // });
 
-      SocketHelper.emit(SocketCommands.Subscribe, {
+      SocketHelper?.emit(SocketCommands.Subscribe, {
         roomParts,
         individual: true,
       });

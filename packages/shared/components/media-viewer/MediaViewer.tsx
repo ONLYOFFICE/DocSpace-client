@@ -347,7 +347,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
         if (error.name === "AbortError") {
           return;
         }
-        // eslint-disable-next-line no-console
+
         console.log(error);
       });
   }, []);

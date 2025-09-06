@@ -122,6 +122,7 @@ describe("<Badges />", () => {
       );
       const tileBadgesElement = screen.getByTestId("badges");
       expect(tileBadgesElement).toHaveClass("tileView");
+      unmountTile();
     });
 
     test("renders with custom className", () => {

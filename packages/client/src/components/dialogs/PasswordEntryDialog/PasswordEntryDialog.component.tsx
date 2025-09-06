@@ -117,7 +117,6 @@ const PasswordEntryDialog = ({
       if (axios.isCancel(error)) return;
 
       toastr.error(error as Error);
-      // eslint-disable-next-line no-console
       console.error(error);
     } finally {
       setIsLoading(false);

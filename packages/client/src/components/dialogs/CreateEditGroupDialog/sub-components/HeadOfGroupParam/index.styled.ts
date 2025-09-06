@@ -37,7 +37,7 @@ export const Header = styled.div`
   line-height: 16px;
 `;
 
-export const SelectGroupManager = styled.div<{}>`
+export const SelectGroupManager = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;

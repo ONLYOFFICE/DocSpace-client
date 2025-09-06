@@ -40,7 +40,6 @@ const ContextButton = ({
   isTrashFolder,
   isMobile,
   id,
-  title,
   onCloseDropBox,
   onContextOptionsClick,
   contextButtonAnimation,

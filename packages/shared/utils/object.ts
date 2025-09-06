@@ -29,7 +29,7 @@ export const hasOwnProperty = (obj: unknown, propertyName: string): boolean => {
 
   try {
     return Object.prototype.hasOwnProperty.call(obj, propertyName);
-  } catch (error) {
+  } catch {
     return false;
   }
 };

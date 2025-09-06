@@ -71,6 +71,7 @@ const nextConfig = {
     NEXT_PUBLIC_E2E_TEST: process.env.E2E_TEST,
   },
   webpack: (config) => {
+    const isProduction = config.mode === "production";
     // Add resolve configuration for shared package
     config.resolve = {
       ...config.resolve,
@@ -80,9 +81,9 @@ const nextConfig = {
       },
     };
 
-    // config.devtool = "source-map";
+    config.devtool = isProduction ? "source-map" : false; // TODO: replace to "eval-cheap-module-source-map" if you want to debug in a browser;
 
-    if (config.mode === "production") {
+    if (isProduction) {
       config.optimization = {
         splitChunks: { chunks: "all" },
         minimize: true,

@@ -68,7 +68,7 @@ function ConfirmRoute(props: ConfirmRouteProps) {
     if (window.location.search.includes("culture")) return;
     const lng = getCookie(LANGUAGE);
 
-    isAuthenticated && i18n.changeLanguage(lng);
+    if (isAuthenticated) i18n.changeLanguage(lng);
   }, [isAuthenticated, i18n]);
 
   if (!stateData) {

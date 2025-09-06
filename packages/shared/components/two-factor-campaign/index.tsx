@@ -40,11 +40,13 @@ export interface TwoFactorCampaignBannerProps {
   currentColorScheme: TColorScheme;
   /** Whether to show campaign banner */
   withCampaign?: boolean;
+  /** Additional styles */
+  style?: React.CSSProperties;
 }
 
 export const TwoFactorCampaignBanner: React.FC<
   TwoFactorCampaignBannerProps
-> = ({ tfaEnabled, currentColorScheme, withCampaign = false }) => {
+> = ({ tfaEnabled, currentColorScheme, withCampaign = false, style }) => {
   const { isRTL } = useInterfaceDirection();
   const theme = useTheme();
   const isBaseTheme = theme.isBase;
@@ -59,7 +61,7 @@ export const TwoFactorCampaignBanner: React.FC<
   const wrapperClassName = `${styles.bannerWrapper} ${isRTL ? styles.rtl : ""}`;
 
   return (
-    <div className={wrapperClassName} onClick={navigateTo2FA}>
+    <div className={wrapperClassName} onClick={navigateTo2FA} style={style}>
       <CampaignsBanner
         campaignBackground=""
         campaignIcon=""

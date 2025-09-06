@@ -227,6 +227,7 @@ const HistoryMainContent = (props) => {
         tfaEnabled={tfaEnabled}
         currentColorScheme={currentColorScheme}
         withCampaign={withCampaign}
+        style={{ marginBottom: "20px" }}
       />
       {isSettingNotPaid ? (
         <Badge

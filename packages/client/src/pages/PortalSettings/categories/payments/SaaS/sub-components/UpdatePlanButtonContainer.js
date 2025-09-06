@@ -196,6 +196,7 @@ const UpdatePlanButtonContainer = ({
         waitingForQuota();
       }
     } catch (e) {
+      console.error(e);
       toastr.error(t("ErrorNotification"));
       setIsLoading(false);
       clearTimeout(timerId);

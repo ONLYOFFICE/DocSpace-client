@@ -32,7 +32,7 @@ import i18nextStoryDecorator from "../../.storybook/decorators/i18nextStoryDecor
 export default {
   title: "Components/LanguageCombobox",
   component: LanguageCombobox,
-  // eslint-disable-next-line @typescript-eslint/no-shadow
+
   decorators: [(Story) => <Story />, i18nextStoryDecorator],
   argTypes: {
     withBorder: {

@@ -53,7 +53,7 @@ export const LayoutWrapper = ({
   useEffect(() => {
     if (!socketUrl) return;
 
-    SocketHelper.connect(socketUrl, "");
+    SocketHelper?.connect(socketUrl, "");
   }, [socketUrl]);
 
   return (

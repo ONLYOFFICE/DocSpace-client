@@ -79,7 +79,7 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
       doubleClickCallback();
     }
   };
-  const onSearch = useCallback((value: string, callback?: Function) => {
+  const onSearch = useCallback((value: string, callback?: () => void) => {
     isFirstLoad.current = true;
     afterSearch.current = true;
     setSearchValue(() => {
@@ -88,7 +88,7 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
     callback?.();
   }, []);
 
-  const onClearSearch = useCallback((callback?: Function) => {
+  const onClearSearch = useCallback((callback?: () => void) => {
     isFirstLoad.current = true;
     afterSearch.current = true;
     setSearchValue(() => {

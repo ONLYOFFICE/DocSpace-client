@@ -27,7 +27,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 import {
@@ -35,11 +35,7 @@ import {
   getBackupSchedule,
   createBackupSchedule,
 } from "../../../api/portal";
-import {
-  BackupStorageType,
-  AutoBackupPeriod,
-  FolderType,
-} from "../../../enums";
+import { BackupStorageType, AutoBackupPeriod } from "../../../enums";
 import { OPERATIONS_NAME } from "../../../constants";
 import { ToggleButton } from "../../../components/toggle-button";
 import { getBackupStorage } from "../../../api/settings";
@@ -50,18 +46,14 @@ import SocketHelper, {
   type TSocketListener,
 } from "../../../utils/socket";
 import { getBackupProgressInfo } from "../../../utils/common";
-
-import { globalColors } from "../../../themes";
 import { useStateCallback } from "../../../hooks/useStateCallback";
 import type { Nullable, Option } from "../../../types";
 import OperationsProgressButton from "../../../components/operations-progress-button";
-import { Badge } from "../../../components/badge";
 import { toastr } from "../../../components/toast";
 import { Text } from "../../../components/text";
 import { RadioButton } from "../../../components/radio-button";
 import { Link, LinkTarget } from "../../../components/link";
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
-import { useTheme } from "../../../hooks/useTheme";
 
 import { ThirdPartyModule } from "./sub-components/ThirdPartyModule";
 import { RoomsModule } from "./sub-components/RoomsModule";
@@ -186,7 +178,6 @@ const AutomaticBackup = ({
     selectedStorageType === `${BackupStorageType.StorageModuleType}`;
 
   const { t } = useTranslation(["Common"]);
-  const theme = useTheme();
 
   const [isLoadingData, setIsLoadingData] = useStateCallback(false);
 
@@ -216,10 +207,10 @@ const AutomaticBackup = ({
       if (success) toastr.success(success);
     };
 
-    SocketHelper.on(SocketEvents.BackupProgress, onBackupProgress);
+    SocketHelper?.on(SocketEvents.BackupProgress, onBackupProgress);
 
     return () => {
-      SocketHelper.off(SocketEvents.BackupProgress, onBackupProgress);
+      SocketHelper?.off(SocketEvents.BackupProgress, onBackupProgress);
     };
   }, [setDownloadingProgress, setBackupProgressError, setTemporaryLink, t]);
 

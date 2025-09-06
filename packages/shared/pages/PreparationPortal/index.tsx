@@ -108,22 +108,25 @@ export const PreparationPortal = (props: IPreparationPortal) => {
   }, [errorInternalServer]);
 
   useEffect(() => {
-    SocketHelper?.on(SocketEvents.RestoreProgress, (opt) => {
-      const { progress, isCompleted, error } = opt;
+    SocketHelper?.on(
+      SocketEvents.RestoreProgress,
+      (opt: { progress: number; isCompleted: boolean; error?: string }) => {
+        const { progress, isCompleted, error } = opt;
 
-      setPercent(progress);
+        setPercent(progress);
 
-      if (isCompleted) {
-        if (error) {
-          setErrorMessage(error);
+        if (isCompleted) {
+          if (error) {
+            setErrorMessage(error);
 
-          return;
+            return;
+          }
+
+          returnToPortal();
+          clearLocalStorage();
         }
-
-        returnToPortal();
-        clearLocalStorage();
-      }
-    });
+      },
+    );
   }, [getRecoveryProgress]);
 
   useEffect(() => {

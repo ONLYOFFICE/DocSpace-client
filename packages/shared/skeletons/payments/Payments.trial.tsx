@@ -29,7 +29,7 @@ import { RectangleSkeleton } from "../rectangle";
 import styles from "./Payments.module.scss";
 import { PaymentsLoaderProps } from "./Payments.types";
 
-const TrialLoader = ({ className, style, ...rest }: PaymentsLoaderProps) => {
+const TrialLoader = (props: PaymentsLoaderProps) => {
   const {
     title,
     borderRadius,
@@ -39,7 +39,7 @@ const TrialLoader = ({ className, style, ...rest }: PaymentsLoaderProps) => {
     foregroundOpacity,
     speed,
     animate,
-  } = rest;
+  } = props;
 
   return (
     <div className={styles.trialComponent} data-testid="trial-loader">

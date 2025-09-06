@@ -286,7 +286,6 @@ export default function useFilesFilter({
 
   const initSelectedFilterData = React.useMemo(
     () => getSelectedFilterData(),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [], // should be calculated once
   );
 

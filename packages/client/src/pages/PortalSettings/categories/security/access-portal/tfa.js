@@ -121,6 +121,7 @@ const TwoFactorAuth = (props) => {
       null,
       window.location.pathname + window.location.search,
     );
+    setType("app");
   };
 
   useEffect(() => {

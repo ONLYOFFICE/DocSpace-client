@@ -26,6 +26,7 @@
 
 import { useMemo, useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate, useLocation } from "react-router";
 import { getLoginHistoryConfig } from "../components/campaigns-banner/campaign/LoginHistoryCampaign";
 import { TColorScheme } from "../themes";
 import { size } from "../utils";
@@ -36,6 +37,9 @@ export const useTwoFactorCampaignBanner = (
 ) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= size.mobile);
   const { t } = useTranslation(["Settings", "Common"]);
+
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleResize = () => {
@@ -62,6 +66,10 @@ export const useTwoFactorCampaignBanner = (
 
   const navigateTo2FA = () => {
     const targetUrl = `${loginHistoryTranslates.Link}#tfa-section`;
+    if (location.pathname === "/portal-settings/security/login-history") {
+      navigate(targetUrl);
+      return;
+    }
     window.location.href = targetUrl;
   };
 

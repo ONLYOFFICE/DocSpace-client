@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable class-methods-use-this */
-/* eslint-disable no-underscore-dangle */
 import { defaults, makePromise } from "./utils";
 import request from "./request";
 
@@ -175,7 +173,7 @@ class Backend {
           // fallback, which omits calling the parse function
           ret = res.data;
         }
-      } catch (e) {
+      } catch {
         parseErr = `failed parsing ${url} to json`;
       }
       if (parseErr) return this.sendCallbacks(url, namespaces, parseErr, false);

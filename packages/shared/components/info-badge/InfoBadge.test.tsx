@@ -83,7 +83,7 @@ describe("<InfoBadge />", () => {
       await waitFor(() => {
         expect(screen.queryByTestId("tooltip-title")).not.toBeInTheDocument();
       });
-    } catch (e) {
+    } catch {
       expect(true);
     }
   });

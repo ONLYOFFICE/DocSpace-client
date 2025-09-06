@@ -803,7 +803,7 @@ const ArticleMainButtonContent = (props) => {
         id="customFolderInput"
         className="custom-file-input"
         webkitdirectory=""
-        mozdirectory="" // eslint-disable-line react/no-unknown-property
+        mozdirectory=""
         type="file"
         onChange={onFileChange}
         onClick={onInputClick}

@@ -27,8 +27,6 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
-/* eslint-disable react/no-unstable-nested-components */
-/* eslint-disable react/no-unescaped-entities */
 import React from "react";
 // import { BooleanValue, StringValue } from "react-values";
 
@@ -451,7 +449,6 @@ const Template = () => (
       <div style={{ padding: "8px 0" }}>
         {/* {rowArray[0]} */}
         {rowArray.map((item, idx) => {
-          // eslint-disable-next-line react/no-array-index-key
           return <div key={`${idx}`}>{item}</div>;
         })}
       </div>

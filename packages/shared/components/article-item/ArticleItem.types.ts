@@ -34,7 +34,7 @@ export type TArticleLinkDataState =
       rootFolderType: number;
       canCreate: boolean;
     }
-  | {};
+  | object;
 
 export type TArticleLinkData = {
   path: string;

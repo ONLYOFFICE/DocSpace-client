@@ -183,6 +183,7 @@ const Services = (props: InjectedProps) => {
       try {
         await setServiceState(raw);
       } catch (error) {
+        console.error(error);
         toastr.error(t("Common:UnexpectedError"));
         changeServiceState(id);
       }
@@ -228,6 +229,7 @@ const Services = (props: InjectedProps) => {
 
       toastr.success(t("Services:BackupServiceEnabled"));
     } catch (error) {
+      console.error(error);
       toastr.error(t("Common:UnexpectedError"));
       changeServiceState(confirmActionType);
     }

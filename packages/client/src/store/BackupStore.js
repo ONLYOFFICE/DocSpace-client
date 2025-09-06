@@ -747,7 +747,7 @@ class BackupStore {
 
   get isValidForm() {
     const requiredKeys = Object.keys(this.requiredFormSettings);
-    if (!requiredKeys.length) return;
+    if (!requiredKeys.length) return true;
 
     return !this.requiredFormSettings.some((key) => {
       const value = this.formSettings[key];
@@ -841,7 +841,6 @@ class BackupStore {
       url,
     );
 
-    // eslint-disable-next-line no-restricted-syntax
     for await (const value of uploadBackupFile(requestsDataArray, uploadUrl)) {
       if (!value) return false;
 

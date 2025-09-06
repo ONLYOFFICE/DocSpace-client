@@ -63,7 +63,6 @@ const Modal = ({
   containerVisible,
   isDoubleFooterLine,
 
-  embedded,
   withForm,
   withoutPadding,
   withoutHeaderMargin,

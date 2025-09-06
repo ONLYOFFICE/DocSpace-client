@@ -68,7 +68,8 @@ describe("EncryptionPortal", () => {
   test("renders loader when not ready", async () => {
     // Mock the useTranslation hook to return ready: false
     jest
-      // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
+
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
       .spyOn(require("react-i18next"), "useTranslation")
       .mockImplementation(() => ({
         t: (key: string) => key,
@@ -85,7 +86,8 @@ describe("EncryptionPortal", () => {
 
     // Restore the original mock
     jest
-      // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
+
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
       .spyOn(require("react-i18next"), "useTranslation")
       .mockImplementation(() => ({
         t: (key: string) => key,
@@ -178,7 +180,7 @@ describe("EncryptionPortal", () => {
     let socketCallback:
       | ((data: { percentage: number; error: string | null }) => void)
       | undefined;
-    (SocketHelper.on as jest.Mock).mockImplementation((event, callback) => {
+    (SocketHelper?.on as jest.Mock).mockImplementation((event, callback) => {
       if (event === SocketEvents.EncryptionProgress) {
         socketCallback = callback;
       }
@@ -227,7 +229,7 @@ describe("EncryptionPortal", () => {
     let socketCallback:
       | ((data: { percentage: number; error: string | null }) => void)
       | undefined;
-    (SocketHelper.on as jest.Mock).mockImplementation((event, callback) => {
+    (SocketHelper?.on as jest.Mock).mockImplementation((event, callback) => {
       if (event === SocketEvents.EncryptionProgress) {
         socketCallback = callback;
       }

@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable class-methods-use-this */
-/* eslint-disable no-console */
 import axios from "axios";
 import { makeAutoObservable } from "mobx";
 import moment from "moment";
@@ -826,6 +824,7 @@ class PaymentStore {
     try {
       await getPaymentInfo();
     } catch (e) {
+      console.error(e);
       toastr.error(t("Common:UnexpectedError"));
 
       return;

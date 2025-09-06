@@ -28,7 +28,6 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
@@ -38,6 +37,7 @@ import Dropzone from "./sub-components/Dropzone";
 import PluginItem from "./sub-components/PluginItem";
 import EmptyScreen from "./sub-components/EmptyScreen";
 import ListLoader from "./sub-components/ListLoader";
+import UploadDescription from "./sub-components/UploadDescription";
 
 import {
   PluginListContainer,
@@ -58,6 +58,8 @@ const PluginPage = ({
 
   theme,
   isEmptyList,
+  currentColorScheme,
+  apiPluginSDKLink,
 }: PluginsProps) => {
   const { t } = useTranslation(["WebPlugins", "Common"]);
 
@@ -83,6 +85,8 @@ const PluginPage = ({
         theme={theme}
         onDrop={onDrop}
         withUpload={withUpload}
+        apiPluginSDKLink={apiPluginSDKLink}
+        currentColorScheme={currentColorScheme}
       />
     </StyledEmptyContainer>
   ) : (
@@ -95,9 +99,11 @@ const PluginPage = ({
           /> */}
       {withUpload ? (
         <>
-          <Text>
-            {t("UploadDescription", { productName: t("Common:ProductName") })}
-          </Text>
+          <UploadDescription
+            t={t}
+            apiPluginSDKLink={apiPluginSDKLink}
+            currentColorScheme={currentColorScheme}
+          />
           <Dropzone
             onDrop={onDrop}
             isDisabled={!withUpload}
@@ -129,7 +135,8 @@ export default inject(
     settingsStore: SettingsStore;
     pluginStore: PluginStore;
   }) => {
-    const { pluginOptions, currentColorScheme, theme } = settingsStore;
+    const { pluginOptions, currentColorScheme, theme, apiPluginSDKLink } =
+      settingsStore;
 
     const withUpload = pluginOptions.upload;
 
@@ -165,6 +172,7 @@ export default inject(
       currentColorScheme,
       theme,
       isEmptyList,
+      apiPluginSDKLink,
     };
   },
 )(observer(PluginPage));

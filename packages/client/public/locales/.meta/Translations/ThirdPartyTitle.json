@@ -3,7 +3,7 @@
   "content": "Third-party services",
   "content_en_sha1_hash": "871d2b6d2f4209a2045939948478b5ad9e16f6a2",
   "created_at": "2025-05-19T21:30:50.013Z",
-  "updated_at": "2025-05-26T07:57:32.267Z",
+  "updated_at": "2025-09-07T07:53:15.082Z",
   "comment": {
     "text": "This translation key is used to display \"Third-party services\" as a title in various UI components, such as a link and a category name, often found in settings or configuration pages. It appears on a page that lists integration options for third-party services.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/index.js",
       "line_number": 77,
-      "context": "name: t(\"SingleSignOn\"),\n content: <SSO />,\n },\n {\n id: \"third-party-services\",\n name: t(\"Translations:ThirdPartyTitle\"),\n content: <ThirdParty />,\n },\n {\n id: \"smtp-settings\",\n name: t(\"SMTPSettings\"),",
+      "context": "name: t(\"SingleSignOn\"),\n content: <SsoSettings />,\n },\n {\n id: \"third-party-services\",\n name: t(\"Translations:ThirdPartyTitle\"),\n content: <ThirdParty />,\n },\n {\n id: \"smtp-settings\",\n name: t(\"SMTPSettings\"),",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Connect",
   "content_en_sha1_hash": "b65463cb6a42a17de514acc4659f7fd331e0876a",
   "created_at": "2025-05-19T21:30:43.652Z",
-  "updated_at": "2025-08-11T09:02:43.861Z",
+  "updated_at": "2025-09-07T07:53:15.081Z",
   "comment": {
     "text": "This translation key is used for a \"Connect\" button that appears in various UI elements, such as buttons and dialog components. Its purpose is to provide a consistent label for this action across different applications and languages, allowing users to understand what happens when they click on the button.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/components/direct-third-party-connection/DirectThirdPartyConnection.tsx",
-      "line_number": 368,
+      "line_number": 366,
       "context": "{!connectedThirdPartyAccount?.id || !isTheSameThirdPartyAccount ? (\n <Button\n id=\"connect-button\"\n primary\n label={t(\"Common:Connect\")}\n onClick={onConnect}\n size={buttonSize}\n isDisabled={isDisabledComponent}\n testId={\n buildDataTestId(dataTestId, \"connect_account_button\") ??",
       "module": "/packages/shared"
     },

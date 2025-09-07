@@ -3,7 +3,7 @@
   "content": "Contacts",
   "content_en_sha1_hash": "b0dd615cbbdcbf21ffb72115599ca915634fcb85",
   "created_at": "2025-05-19T21:30:46.964Z",
-  "updated_at": "2025-05-26T07:57:32.562Z",
+  "updated_at": "2025-09-07T07:53:15.256Z",
   "comment": {
     "text": "This translation key is used to display the label \"Contacts\" in the OAuth accounts settings, typically found within a configuration or permissions section. It appears to be related to account management and profile settings, possibly on a portal or application page. The translation value will vary depending on the locale.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/utils/oauth/index.ts",
-      "line_number": 143,
+      "line_number": 142,
       "context": "switch (group) {\n case ScopeGroup.files:\n return t(\"Common:OAuthFilesName\");\n case ScopeGroup.accounts:\n case ScopeGroup.contacts:\n return t(\"Common:OAuthAccountsName\");\n case ScopeGroup.profiles:\n return t(\"Common:OAuthProfilesName\");\n case ScopeGroup.rooms:\n return t(\"Common:OAuthRoomsName\");\n case ScopeGroup.openid:",
       "module": "/packages/shared"
     }

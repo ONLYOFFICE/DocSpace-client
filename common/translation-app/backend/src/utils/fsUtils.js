@@ -439,6 +439,7 @@ async function deleteNamespace(projectName, namespace) {
 
       if (await fs.pathExists(filePath)) {
         await fs.remove(filePath);
+        await removeMetaNamespace(projectName, namespace);
         deletedAny = true;
       }
     }
@@ -690,6 +691,40 @@ async function removeMetaFile(projectName, namespace, keyPath) {
   } catch (error) {
     console.error(
       `Error removing metadata file for project ${projectName}, namespace ${namespace}, key ${keyPath}:`,
+      error
+    );
+    return false;
+  }
+}
+
+/**
+ * Removes a namespace directory and its contents
+ * @param {string} projectName - Name of the project
+ * @param {string} namespace - Namespace to remove
+ * @returns {Promise<boolean>} Success status
+ */
+async function removeMetaNamespace(projectName, namespace) {
+  try {
+    const localesPath = projectLocalesMap[projectName];
+    if (!localesPath) {
+      throw new Error(`Project ${projectName} not found in configuration`);
+    }
+
+    const projectPath = path.join(appRootPath, localesPath);
+    const metaDir = path.join(projectPath, ".meta");
+    const namespacePath = path.join(metaDir, namespace);
+
+    if (await fs.pathExists(namespacePath)) {
+      await fs.remove(namespacePath);
+      console.log(`Removed metadata namespace: ${namespacePath}`);
+      return true;
+    } else {
+      console.log(`Metadata namespace not found: ${namespacePath}`);
+      return false;
+    }
+  } catch (error) {
+    console.error(
+      `Error removing metadata namespace for project ${projectName}, namespace ${namespace}:`,
       error
     );
     return false;

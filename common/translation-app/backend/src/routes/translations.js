@@ -292,7 +292,9 @@ async function routes(fastify, options) {
           .map((r) => r.language);
         return reply.code(500).send({
           success: false,
-          error: `Failed to rename key in languages: ${failedLanguages.join(", ")}`,
+          error: `Failed to rename key in languages: ${failedLanguages.join(
+            ", "
+          )}`,
         });
       }
 
@@ -454,7 +456,9 @@ async function routes(fastify, options) {
 
         return reply.code(500).send({
           success: false,
-          error: `Failed to move key in languages: ${failedLanguages.join(", ")}`,
+          error: `Failed to move key in languages: ${failedLanguages.join(
+            ", "
+          )}`,
         });
       }
 
@@ -564,9 +568,14 @@ async function routes(fastify, options) {
             .map((r) => r.language);
           return reply.code(500).send({
             success: false,
-            error: `Failed to delete key in languages: ${failedLanguages.join(", ")}`,
+            error: `Failed to delete key in languages: ${failedLanguages.join(
+              ", "
+            )}`,
           });
         }
+
+        // remove .meta file for this key
+        fsUtils.removeMetaFile(projectName, namespace, keyPath);
 
         // Broadcast update to connected clients
         fastify.io.emit("translation:key-deleted", {

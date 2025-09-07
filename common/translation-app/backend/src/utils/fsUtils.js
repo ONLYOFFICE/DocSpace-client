@@ -660,6 +660,42 @@ async function findNamespaceMetadataFiles(projectName, namespace) {
   return result;
 }
 
+/**
+ * Remove metadata file for a specific key
+ * @param {string} projectName - Project name
+ * @param {string} namespace - Namespace
+ * @param {string} keyPath - Key path
+ * @returns {Promise<boolean>} Success status
+ */
+async function removeMetaFile(projectName, namespace, keyPath) {
+  try {
+    const localesPath = projectLocalesMap[projectName];
+    if (!localesPath) {
+      throw new Error(`Project ${projectName} not found in configuration`);
+    }
+
+    const projectPath = path.join(appRootPath, localesPath);
+    const metaDir = path.join(projectPath, ".meta");
+    const namespacePath = path.join(metaDir, namespace);
+    const metadataFilePath = path.join(namespacePath, `${keyPath}.json`);
+
+    if (await fs.pathExists(metadataFilePath)) {
+      await fs.remove(metadataFilePath);
+      console.log(`Removed metadata file: ${metadataFilePath}`);
+      return true;
+    } else {
+      console.log(`Metadata file not found: ${metadataFilePath}`);
+      return false;
+    }
+  } catch (error) {
+    console.error(
+      `Error removing metadata file for project ${projectName}, namespace ${namespace}, key ${keyPath}:`,
+      error
+    );
+    return false;
+  }
+}
+
 module.exports = {
   resolveProjectPath,
   getAvailableLanguages,
@@ -677,4 +713,5 @@ module.exports = {
   writeJsonWithConsistentEolSync,
   findMetadataFile,
   findNamespaceMetadataFiles,
+  removeMetaFile,
 };

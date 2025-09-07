@@ -411,6 +411,13 @@ async function moveNamespaceTo(
       );
     }
 
+    await moveMetaNamespace(
+      sourceProjectName,
+      sourceNamespace,
+      targetProjectName,
+      targetNamespace
+    );
+
     // Delete the source namespace now that content is moved
     await deleteNamespace(sourceProjectName, sourceNamespace);
 
@@ -765,6 +772,69 @@ async function renameMetaNamespace(projectName, oldName, newName) {
   } catch (error) {
     console.error(
       `Error renaming metadata namespace for project ${projectName}, namespace ${oldName}:`,
+      error
+    );
+    return false;
+  }
+}
+
+/**
+ * Moves a namespace directory and its contents
+ * @param {string} sourceProjectName - Source project name
+ * @param {string} sourceNamespace - Source namespace name
+ * @param {string} targetProjectName - Target project name
+ * @param {string} targetNamespace - Target namespace name
+ * @returns {Promise<boolean>} - Success status
+ */
+async function moveMetaNamespace(
+  sourceProjectName,
+  sourceNamespace,
+  targetProjectName,
+  targetNamespace
+) {
+  try {
+    const localesPath = projectLocalesMap[sourceProjectName];
+    if (!localesPath) {
+      throw new Error(
+        `Project ${sourceProjectName} not found in configuration`
+      );
+    }
+
+    const sourceProjectPath = path.join(appRootPath, localesPath);
+    const sourceMetaDir = path.join(sourceProjectPath, ".meta");
+    const sourceNamespacePath = path.join(sourceMetaDir, sourceNamespace);
+    const targetProjectPath = path.join(
+      appRootPath,
+      projectLocalesMap[targetProjectName]
+    );
+    const targetMetaDir = path.join(targetProjectPath, ".meta");
+    const targetNamespacePath = path.join(targetMetaDir, targetNamespace);
+
+    if (await fs.pathExists(sourceNamespacePath)) {
+      // TODO: move all files from source namespace to target namespace
+      const files = await fs.readdir(sourceNamespacePath);
+      for (const file of files) {
+        await fs.move(
+          path.join(sourceNamespacePath, file),
+          path.join(targetNamespacePath, file),
+          {
+            overwrite: false,
+          }
+        );
+      }
+
+      await fs.remove(sourceNamespacePath);
+      console.log(
+        `Moved metadata namespace: ${sourceNamespacePath} -> ${targetNamespacePath}`
+      );
+      return true;
+    } else {
+      console.log(`Metadata namespace not found: ${sourceNamespacePath}`);
+      return false;
+    }
+  } catch (error) {
+    console.error(
+      `Error moving metadata namespace for project ${sourceProjectName}, namespace ${sourceNamespace}:`,
       error
     );
     return false;

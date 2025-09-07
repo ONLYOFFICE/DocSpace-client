@@ -321,6 +321,8 @@ async function renameNamespace(projectName, oldName, newName) {
       // Only rename if old file exists
       if (await fs.pathExists(oldPath)) {
         await fs.move(oldPath, newPath, { overwrite: false });
+
+        await renameMetaNamespace(projectName, oldName, newName);
       }
     }
 
@@ -725,6 +727,44 @@ async function removeMetaNamespace(projectName, namespace) {
   } catch (error) {
     console.error(
       `Error removing metadata namespace for project ${projectName}, namespace ${namespace}:`,
+      error
+    );
+    return false;
+  }
+}
+
+/**
+ * Renames a namespace directory and its contents
+ * @param {string} projectName - Name of the project
+ * @param {string} oldName - Current namespace name
+ * @param {string} newName - New namespace name
+ * @returns {Promise<boolean>} - Success status
+ */
+async function renameMetaNamespace(projectName, oldName, newName) {
+  try {
+    const localesPath = projectLocalesMap[projectName];
+    if (!localesPath) {
+      throw new Error(`Project ${projectName} not found in configuration`);
+    }
+
+    const projectPath = path.join(appRootPath, localesPath);
+    const metaDir = path.join(projectPath, ".meta");
+    const oldNamespacePath = path.join(metaDir, oldName);
+    const newNamespacePath = path.join(metaDir, newName);
+
+    if (await fs.pathExists(oldNamespacePath)) {
+      await fs.move(oldNamespacePath, newNamespacePath, { overwrite: false });
+      console.log(
+        `Renamed metadata namespace: ${oldNamespacePath} -> ${newNamespacePath}`
+      );
+      return true;
+    } else {
+      console.log(`Metadata namespace not found: ${oldNamespacePath}`);
+      return false;
+    }
+  } catch (error) {
+    console.error(
+      `Error renaming metadata namespace for project ${projectName}, namespace ${oldName}:`,
       error
     );
     return false;

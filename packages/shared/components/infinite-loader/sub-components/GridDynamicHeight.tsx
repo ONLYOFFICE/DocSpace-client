@@ -113,24 +113,37 @@ const GridDynamicHeight = ({
       const rows = containerRef.current?.querySelectorAll(".Item");
       if (!rows || rows.length === 0) return;
 
-      // Wait for images to load before synchronizing heights
-      const images = containerRef.current?.querySelectorAll(".thumbnail-image");
+      // Wait for ALL images to load before synchronizing heights
+      const images = containerRef.current?.querySelectorAll(
+        "img, .thumbnail-image, [class*='image'], [class*='Image']",
+      );
       const imagePromises = Array.from(images || []).map((img) => {
         return new Promise<void>((resolve) => {
           const image = img as HTMLImageElement;
+
+          // Check if image is already loaded
           if (image.complete && image.naturalHeight !== 0) {
             resolve();
-          } else {
-            const handleLoad = () => {
-              image.removeEventListener("load", handleLoad);
-              image.removeEventListener("error", handleLoad);
-              resolve();
-            };
-            image.addEventListener("load", handleLoad);
-            image.addEventListener("error", handleLoad);
-            // Fallback timeout in case image never loads
-            setTimeout(resolve, 1000);
+            return;
           }
+
+          // If image has no src or is broken, resolve immediately
+          if (!image.src || image.src === "") {
+            resolve();
+            return;
+          }
+
+          const handleLoad = () => {
+            image.removeEventListener("load", handleLoad);
+            image.removeEventListener("error", handleLoad);
+            resolve();
+          };
+
+          image.addEventListener("load", handleLoad);
+          image.addEventListener("error", handleLoad);
+
+          // Increased timeout for slower connections
+          setTimeout(resolve, 2000);
         });
       });
 
@@ -171,9 +184,14 @@ const GridDynamicHeight = ({
               });
             });
 
-            // If all cards were excluded (e.g., only submit tile present), fallback to a sane default
+            // If all cards were excluded or heights are too small, use fallback
+            const minAcceptableHeight = 100;
+            const fallbackHeight = 120;
             const targetHeight =
-              globalMinHeight === Infinity ? 120 : globalMinHeight;
+              globalMinHeight === Infinity ||
+              globalMinHeight < minAcceptableHeight
+                ? fallbackHeight
+                : globalMinHeight;
 
             // Apply height only to rows that have cards taller than the minimum
             rows.forEach((row) => {
@@ -211,29 +229,33 @@ const GridDynamicHeight = ({
             });
 
             // Apply height only to rows that have cards shorter than the maximum
-            if (globalMaxHeight > 0) {
-              rows.forEach((row) => {
-                const cards = row.querySelectorAll(".Card");
-                let rowNeedsAdjustment = false;
+            const minAcceptableHeight = 150;
+            const fallbackHeight = 200;
+            const targetHeight =
+              globalMaxHeight === 0 || globalMaxHeight < minAcceptableHeight
+                ? fallbackHeight
+                : globalMaxHeight;
 
-                // Check if this row has any cards shorter than the maximum
-                cards.forEach((card) => {
-                  const cardHeight = (card as HTMLElement).offsetHeight;
-                  if (cardHeight > 0 && cardHeight < globalMaxHeight - 2) {
-                    rowNeedsAdjustment = true;
-                  }
-                });
+            rows.forEach((row) => {
+              const cards = row.querySelectorAll(".Card");
+              let rowNeedsAdjustment = false;
 
-                // Only adjust height for rows that need it
-                if (rowNeedsAdjustment) {
-                  cards.forEach((card) => {
-                    (card as HTMLElement).style.height = `${globalMaxHeight}px`;
-                    (card as HTMLElement).style.minHeight =
-                      `${globalMaxHeight}px`;
-                  });
+              // Check if this row has any cards shorter than the target
+              cards.forEach((card) => {
+                const cardHeight = (card as HTMLElement).offsetHeight;
+                if (cardHeight > 0 && cardHeight < targetHeight - 2) {
+                  rowNeedsAdjustment = true;
                 }
               });
-            }
+
+              // Only adjust height for rows that need it
+              if (rowNeedsAdjustment) {
+                cards.forEach((card) => {
+                  (card as HTMLElement).style.height = `${targetHeight}px`;
+                  (card as HTMLElement).style.minHeight = `${targetHeight}px`;
+                });
+              }
+            });
           }
         }, 50);
       });

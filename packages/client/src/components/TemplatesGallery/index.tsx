@@ -31,6 +31,7 @@ import { Backdrop } from "@docspace/shared/components/backdrop";
 import { Tabs } from "@docspace/shared/components/tabs";
 import { isMobile } from "@docspace/shared/utils";
 import { IconButton } from "@docspace/shared/components/icon-button";
+import { Button } from "@docspace/shared/components/button";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 
 import TilesContainer from "./TilesContainer";
@@ -44,6 +45,7 @@ const TemplatesGallery = (props: {
   resetFilters: (ext: string) => Promise<void>;
   initTemplateGallery: () => Promise<void>;
   oformsLoadError: boolean;
+  setSubmitToGalleryDialogVisible: (isVisible: boolean) => void;
 }) => {
   const {
     templatesGalleryVisible,
@@ -52,6 +54,7 @@ const TemplatesGallery = (props: {
     resetFilters,
     initTemplateGallery,
     oformsLoadError,
+    setSubmitToGalleryDialogVisible,
   } = props;
   const [viewMobile, setViewMobile] = useState(false);
   const [currentTabId, setCurrentTabId] = useState("documents");
@@ -129,6 +132,8 @@ const TemplatesGallery = (props: {
   };
 
   const onCloseClick = () => setTemplatesGalleryVisible(false);
+  const onOpenSubmitToGalleryDialog = () =>
+    setSubmitToGalleryDialogVisible(true);
 
   const nodeTemplatesGallery = (
     <>
@@ -136,7 +141,15 @@ const TemplatesGallery = (props: {
       <div className={styles.container}>
         <div className={styles.templatesGallery}>
           <div className={styles.header}>
-            <div className={styles.headerText}>Template gallery</div>
+            <div className={styles.headerContent}>
+              <div className={styles.headerText}>Template gallery</div>
+              <Button
+                className={styles.headerButton}
+                onClick={onOpenSubmitToGalleryDialog}
+                label="Submit to Template Gallery"
+              />
+            </div>
+
             <IconButton
               size={17}
               className={styles.closeButton}
@@ -205,7 +218,7 @@ const TemplatesGallery = (props: {
   );
 };
 
-export default inject<TStore>(({ oformsStore }) => {
+export default inject<TStore>(({ oformsStore, dialogsStore }) => {
   const {
     templatesGalleryVisible,
     setTemplatesGalleryVisible,
@@ -215,6 +228,8 @@ export default inject<TStore>(({ oformsStore }) => {
     oformsLoadError,
   } = oformsStore;
 
+  const { setSubmitToGalleryDialogVisible } = dialogsStore;
+
   return {
     templatesGalleryVisible,
     setTemplatesGalleryVisible,
@@ -222,5 +237,6 @@ export default inject<TStore>(({ oformsStore }) => {
     resetFilters,
     initTemplateGallery,
     oformsLoadError,
+    setSubmitToGalleryDialogVisible,
   };
 })(observer(TemplatesGallery));

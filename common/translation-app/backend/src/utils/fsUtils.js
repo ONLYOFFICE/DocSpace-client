@@ -432,6 +432,145 @@ async function moveNamespaceTo(
 }
 
 /**
+ * Move key to another namespace for all languages
+ * @param {string} sourceProjectName - Source project name
+ * @param {string} sourceNamespace - Source namespace
+ * @param {string} targetProjectName - Target project name
+ * @param {string} targetNamespace - Target namespace
+ * @param {string} keyPath - Key path
+ * @returns {Promise<boolean>} - Success status
+ */
+async function moveKeyToNamespace(
+  sourceProjectName,
+  sourceNamespace,
+  targetProjectName,
+  targetNamespace,
+  keyPath
+) {
+  try {
+    const languages = await getAvailableLanguages(sourceProjectName);
+
+    if (!languages.length) {
+      throw new Error("No languages found for source project");
+    }
+
+    for (const language of languages) {
+      const sourceTranslations = await readTranslationFile(
+        sourceProjectName,
+        language,
+        sourceNamespace
+      );
+
+      if (!sourceTranslations) {
+        throw new Error(`Source file not found for language ${language}`);
+      }
+
+      // Get the value from the key
+      const keyParts = keyPath.split(".");
+      let value = sourceTranslations;
+      let tempValue;
+
+      for (const part of keyParts) {
+        if (!value || typeof value !== "object" || !(part in value)) {
+          break;
+        }
+        tempValue = value[part];
+        value = value[part];
+      }
+
+      if (!value || !tempValue) {
+        console.log(
+          `Key ${keyPath} not found in source file for language ${language}`
+        );
+        continue;
+      }
+
+      // Read the target translation file
+      let targetTranslations = await readTranslationFile(
+        targetProjectName,
+        language,
+        targetNamespace
+      );
+
+      // If target doesn't exist, create it
+      if (!targetTranslations) {
+        targetTranslations = {};
+      }
+
+      // Set the value at the same key path in target
+      let current = targetTranslations;
+      for (let i = 0; i < keyParts.length - 1; i++) {
+        const part = keyParts[i];
+        if (!current[part]) {
+          current[part] = {};
+        }
+        current = current[part];
+      }
+      current[keyParts[keyParts.length - 1]] = tempValue;
+
+      // Write updated target translations
+      const targetSuccess = await writeTranslationFile(
+        targetProjectName,
+        language,
+        targetNamespace,
+        targetTranslations
+      );
+
+      if (!targetSuccess) {
+        throw new Error(`Failed to write target file for language ${language}`);
+      }
+
+      // Remove the key from source translations
+      const updatedSourceTranslations = JSON.parse(
+        JSON.stringify(sourceTranslations)
+      );
+      current = updatedSourceTranslations;
+
+      for (let i = 0; i < keyParts.length - 1; i++) {
+        const part = keyParts[i];
+        if (!current[part]) break;
+        current = current[part];
+      }
+      delete current[keyParts[keyParts.length - 1]];
+
+      // Write updated source translations
+      const sourceSuccess = await writeTranslationFile(
+        sourceProjectName,
+        language,
+        sourceNamespace,
+        updatedSourceTranslations
+      );
+
+      if (!sourceSuccess) {
+        throw new Error(`Failed to write source file for language ${language}`);
+      }
+    }
+
+    // Move metadata file if it exists
+    try {
+      await moveMetaKey(
+        sourceProjectName,
+        sourceNamespace,
+        targetProjectName,
+        targetNamespace,
+        keyPath
+      );
+    } catch (metaError) {
+      console.warn(`Failed to move metadata for key ${keyPath}:`, metaError);
+      // Don't fail the entire operation if metadata move fails
+    }
+
+    return true;
+  } catch (error) {
+    console.error(
+      `Error moving key ${keyPath} from project ${sourceProjectName}, namespace ${sourceNamespace} to ${targetNamespace} in project ${targetProjectName}:`,
+      error
+    );
+    throw error; // Re-throw to handle in route
+  }
+}
+
+/**
  * Deletes a namespace across all language folders for a project
  * @param {string} projectName - Name of the project
  * @param {string} namespace - Namespace to delete
@@ -841,6 +980,79 @@ async function moveMetaNamespace(
   }
 }
 
+/**
+ * Moves a key metadata to a different namespace
+ * @param {string} sourceProjectName - Source project name
+ * @param {string} sourceNamespace - Source namespace
+ * @param {string} targetProjectName - Target project name
+ * @param {string} targetNamespace - Target namespace
+ * @param {string} keyPath - Key path
+ * @returns {Promise<boolean>} - Success status
+ */
+async function moveMetaKey(
+  sourceProjectName,
+  sourceNamespace,
+  targetProjectName,
+  targetNamespace,
+  keyPath
+) {
+  try {
+    const sourceMetaFile = await findMetadataFile(
+      sourceProjectName,
+      sourceNamespace,
+      keyPath
+    );
+
+    if (!sourceMetaFile) {
+      console.log(
+        `No metadata file found for key ${keyPath}, skipping metadata move`
+      );
+      return true; // Not an error if metadata doesn't exist
+    }
+
+    // Construct target metadata file path
+    const targetLocalesPath = projectLocalesMap[targetProjectName];
+    if (!targetLocalesPath) {
+      throw new Error(
+        `Target project ${targetProjectName} not found in configuration`
+      );
+    }
+
+    const targetProjectPath = path.join(appRootPath, targetLocalesPath);
+    const targetMetaDir = path.join(targetProjectPath, ".meta");
+    const targetNamespacePath = path.join(targetMetaDir, targetNamespace);
+    const targetMetadataFilePath = path.join(
+      targetNamespacePath,
+      `${keyPath}.json`
+    );
+
+    // Ensure target directory exists
+    await fs.ensureDir(targetNamespacePath);
+
+    // Check if target file already exists
+    if (await fs.pathExists(targetMetadataFilePath)) {
+      console.warn(
+        `Metadata file already exists at target: ${targetMetadataFilePath}, overwriting`
+      );
+    }
+
+    // Move the metadata file
+    await fs.move(sourceMetaFile.filePath, targetMetadataFilePath, {
+      overwrite: true,
+    });
+    console.log(
+      `Moved metadata file: ${sourceMetaFile.filePath} -> ${targetMetadataFilePath}`
+    );
+    return true;
+  } catch (error) {
+    console.error(
+      `Error moving metadata file for project ${sourceProjectName}, namespace ${sourceNamespace}, key ${keyPath}:`,
+      error
+    );
+    throw error;
+  }
+}
+
 module.exports = {
   resolveProjectPath,
   getAvailableLanguages,
@@ -853,6 +1065,7 @@ module.exports = {
   validateTranslationFile,
   renameNamespace,
   moveNamespaceTo,
+  moveKeyToNamespace,
   deleteNamespace,
   writeJsonWithConsistentEol,
   writeJsonWithConsistentEolSync,

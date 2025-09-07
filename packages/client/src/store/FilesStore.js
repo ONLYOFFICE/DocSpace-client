@@ -468,7 +468,8 @@ class FilesStore {
 
     if (
       this.selectedFolderStore.id !== fileInfo.folderId &&
-      this.selectedFolderStore.rootFolderType !== FolderType.Recent
+      this.selectedFolderStore.rootFolderType !== FolderType.Recent &&
+      this.selectedFolderStore.rootFolderType !== FolderType.Favorites
     )
       return;
 

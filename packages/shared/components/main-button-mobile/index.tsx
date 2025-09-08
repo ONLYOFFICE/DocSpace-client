@@ -341,7 +341,7 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
       <div
         ref={mainButtonRef}
         className={className}
-        style={{ zIndex: z.floatingUI, ...style }}
+        style={{ zIndex: `${isOpen ? z.overlay : z.backdrop}`, ...style }}
         data-testid="main-button-mobile"
       >
         <FloatingButton

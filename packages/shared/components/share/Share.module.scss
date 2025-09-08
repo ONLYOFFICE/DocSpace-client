@@ -26,11 +26,12 @@
 
 @use "../../styles/mixins";
 @use "../../styles/variables";
+@use "../../styles/z-index" as z;
 
 @mixin icon {
   position: absolute;
   inset: 0;
-  z-index: 2;
+  z-index: z.$content;
 
   user-select: text;
   pointer-events: none;
@@ -283,7 +284,7 @@
       cursor: pointer;
       position: absolute;
       inset: 0;
-      z-index: 1;
+      z-index: z.$content;
     }
   }
 
@@ -322,7 +323,7 @@
   .icon {
     position: absolute;
     inset: 0;
-    z-index: 1;
+    z-index: z.$content;
   }
 
   svg {

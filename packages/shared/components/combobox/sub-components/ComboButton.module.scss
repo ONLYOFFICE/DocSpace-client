@@ -28,6 +28,7 @@
 
 @use "../../../styles/mixins";
 @use "../../../styles/variables";
+@use "../../../styles/z-index" as z;
 
 .comboButton {
   display: flex;
@@ -150,10 +151,10 @@
     }
 
     &:is(
-        .isDisabled,
-        .isLoading,
-        :not(.containOptions):not(.withAdvancedOptions)
-      ) {
+      .isDisabled,
+      .isLoading,
+      :not(.containOptions):not(.withAdvancedOptions)
+    ) {
       cursor: default;
     }
 
@@ -298,7 +299,7 @@
   .imageIcon {
     position: absolute;
     inset: 0;
-    z-index: 2;
+    z-index: z.$content;
 
     width: 16px;
     height: 16px;
@@ -309,7 +310,7 @@
   .selectedIcon {
     position: absolute;
     inset: 0;
-    z-index: 1;
+    z-index: z.$content;
 
     width: 16px;
     height: 16px;

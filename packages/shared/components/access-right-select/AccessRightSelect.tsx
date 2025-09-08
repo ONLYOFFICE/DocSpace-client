@@ -89,7 +89,6 @@ export const AccessRightSelectPure = ({
   const formatToAccessRightItem = (data: TOption[]) => {
     const items = data.map((item: TOption) => {
       const isSelected = currentItem?.key === item?.key;
-
       return "isSeparator" in item && item.isSeparator ? (
         <DropDownItem key={item.key} isSeparator />
       ) : (
@@ -101,6 +100,7 @@ export const AccessRightSelectPure = ({
           isActive={isSelected}
           onClick={() => onSelectCurrentItem(item)}
           testId={`access_right_option_${item.key.toString().toLowerCase()}`}
+          disabled={item?.disabled}
         >
           <div className={styles.item}>
             {item.icon && typeof item.icon === "string" ? (

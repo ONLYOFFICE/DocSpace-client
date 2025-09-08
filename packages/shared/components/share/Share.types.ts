@@ -84,6 +84,8 @@ export type LinkRowProps = {
   getData: (link: TFileLink) => ContextMenuModel[];
   onOpenContextMenu: (e: React.MouseEvent) => void;
   onCloseContextMenu: () => void;
+
+  isShareLink?: boolean;
 } & (
   | {
       isRoomsLink?: undefined | false;
@@ -182,15 +184,15 @@ export interface UseShareProps {
   }) => void;
 }
 
-export type TInfoPanelMember = {
+export type TShareMember = {
   access: number;
   canEditAccess: boolean;
   isExpect?: boolean;
 } & (TUser | TGroup);
 
 export interface UserProps {
-  user: TInfoPanelMember;
-  currentUser: TInfoPanelMember;
+  user: TShareMember;
+  currentUser: TShareMember;
 
   isLoading?: boolean;
   options?: TOption[];

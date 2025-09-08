@@ -34,6 +34,7 @@ import { useLocalStorage } from "../../../hooks/useLocalStorage";
 import PublicRoomBar from "../../public-room-bar";
 
 import type { TShareBarProps } from "../Share.types";
+import styles from "../Share.module.scss";
 
 const ShareInfoBar = ({
   t,
@@ -76,7 +77,11 @@ const ShareInfoBar = ({
   if (!barIsVisible) return null;
 
   return (
-    <PublicRoomBar {...barData} dataTestId="info_panel_share_public_room_bar" />
+    <PublicRoomBar
+      {...barData}
+      className={styles.shareInfoBar}
+      dataTestId="info_panel_share_public_room_bar"
+    />
   );
 };
 

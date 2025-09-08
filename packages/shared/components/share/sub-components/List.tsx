@@ -45,6 +45,7 @@ import { ListProps } from "../Share.types";
 
 const itemSize = 48;
 const shareLinkItemSize = 68;
+const SHARE_HEADER_HEIGHT = 28;
 const GENERAL_LINK_HEADER_HEIGHT = 38;
 
 const List: FC<ListProps> = (props) => {
@@ -147,6 +148,10 @@ const List: FC<ListProps> = (props) => {
 
   const getItemSize = ({ index }: { index: number }) => {
     const elem = list[index];
+
+    if (elem?.key === "share-header") {
+      return SHARE_HEADER_HEIGHT;
+    }
 
     if (elem?.key === GENERAL_LINK_HEADER_KEY) {
       return GENERAL_LINK_HEADER_HEIGHT;

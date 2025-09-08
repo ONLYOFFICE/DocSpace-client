@@ -465,6 +465,7 @@ export const useShare = ({
       ...fileLinks.map((link) => (
         <LinkRow
           key={"key" in link ? link.key : link.sharedTo?.id?.toString()}
+          isShareLink
           links={[link]}
           getData={getData}
           isFolder={isFolder}

@@ -36,6 +36,17 @@
   pointer-events: none;
 }
 
+.shareInfoBar {
+  position: sticky;
+  top: 80px;
+  overflow: hidden;
+  z-index: 1;
+
+  &:global(.public-room-bar) {
+    margin-top: 0;
+  }
+}
+
 .linkRow.linkRow {
   :global(.combo-button) {
     padding-inline: 8px;

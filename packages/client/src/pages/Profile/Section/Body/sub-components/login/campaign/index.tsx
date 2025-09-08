@@ -18,6 +18,7 @@ const LoginCampaignComponent = (props: LoginCampaignProps) => {
 
   return (
     <TwoFactorCampaignBanner
+      style={{ maxWidth: "660px" }}
       tfaEnabled={tfaEnabled}
       currentColorScheme={currentColorScheme}
       withCampaign

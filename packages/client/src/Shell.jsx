@@ -518,7 +518,7 @@ const Shell = ({ page = "home", ...rest }) => {
           <ReactSmartBanner t={t} ready={ready} />
         ) : null}
         {barTypeInFrame !== "none" ? <MainBar /> : null}
-        <div className="main-container">
+        <div id="main-container" className="main-container">
           <Outlet />
         </div>
       </Main>

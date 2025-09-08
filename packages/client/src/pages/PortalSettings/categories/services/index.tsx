@@ -212,6 +212,7 @@ const Services: React.FC<ServicesProps> = ({
       try {
         await setServiceState(raw);
       } catch (error) {
+        console.error(error);
         toastr.error(t("Common:UnexpectedError"));
         changeServiceState(id);
       }
@@ -257,6 +258,7 @@ const Services: React.FC<ServicesProps> = ({
 
       toastr.success(t("Services:BackupServiceEnabled"));
     } catch (error) {
+      console.error(error);
       toastr.error(t("Common:UnexpectedError"));
       changeServiceState(confirmActionType);
     }

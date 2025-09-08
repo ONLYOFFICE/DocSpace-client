@@ -21,6 +21,7 @@ import { ToastContainer, toast, Id } from "react-toastify";
 interface TranslationEntry {
   key: string;
   path: string;
+  untranslatedLngs: string[];
   translations: {
     [language: string]: string;
   };
@@ -96,7 +97,7 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
   const [activeKeyPath, setActiveKeyPath] = useState<string>("");
   const [activeTranslationValue, setActiveTranslationValue] =
     useState<string>("");
-    
+
   // State for metadata
   const [currentMetadata, setCurrentMetadata] = useState<any>(null);
   const { loadKeyUsage, keyUsage } = useKeyUsageStore();
@@ -284,12 +285,15 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
     const nonBaseLanguages = languages.filter((lang) => lang !== baseLanguage);
 
     // Check if any language is missing a translation
-    return nonBaseLanguages.some((lang) => {
+    let hasUntranslated = false;
+    hasUntranslated = nonBaseLanguages.some((lang) => {
       // Check if translation is empty or undefined
       return (
-        !entry.translations[lang] || entry.translations[lang].trim() === ""
+        !entry.translations[lang] || entry.untranslatedLngs?.includes(lang)
       );
     });
+
+    return hasUntranslated;
   };
 
   // Filter translations based on search term and untranslated filter
@@ -362,7 +366,9 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
     // Print detailed debug info
     console.log(`----- NAVIGATION -----`);
     console.log(
-      `From page ${currentPageRef.current} (${filteredTranslations[currentPageRef.current]?.path || "unknown"})`
+      `From page ${currentPageRef.current} (${
+        filteredTranslations[currentPageRef.current]?.path || "unknown"
+      })`
     );
     console.log(`To page ${safeIndex} (${stableKeyReference})`);
 
@@ -600,7 +606,6 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
       currentPageRef.current = currentPage;
     }
   }, [currentPage]);
-
 
   // One-time only initialization from URL parameters
   useEffect(() => {

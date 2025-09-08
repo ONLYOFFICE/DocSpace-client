@@ -204,6 +204,7 @@ class AvatarEditorDialogStore {
           }
         });
     } catch (error) {
+      console.error(error);
       toastr.error(t("Common:NotSupportedFormat"));
     }
   };

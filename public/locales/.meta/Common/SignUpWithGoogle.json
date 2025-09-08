@@ -3,7 +3,7 @@
   "content": "Sign up with Google",
   "content_en_sha1_hash": "338492d670292a6edd749c6b68952f5de10e1c01",
   "created_at": "2025-05-19T21:30:48.835Z",
-  "updated_at": "2025-08-29T14:33:38.474Z",
+  "updated_at": "2025-09-07T07:53:15.513Z",
   "comment": {
     "text": "Sign up with Google is a text used to describe the option to create an account using a Google account. It appears in a sign-up flow, providing clarity on how users can proceed with the registration process.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 398,
+      "line_number": 394,
       "context": "switch (provider) {\n case \"apple\":\n return signUp ? t(\"Common:SignUpWithApple\") : t(\"Common:SignInWithApple\");\n case \"google\":\n return signUp\n ? t(\"Common:SignUpWithGoogle\")\n : t(\"Common:SignInWithGoogle\");\n case \"facebook\":\n return signUp\n ? t(\"Common:SignUpWithFacebook\")\n : t(\"Common:SignInWithFacebook\");",
       "module": "/packages/shared"
     }

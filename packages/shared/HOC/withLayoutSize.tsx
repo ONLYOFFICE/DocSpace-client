@@ -28,7 +28,7 @@ import React from "react";
 import { Consumer } from "../utils";
 
 export function withLayoutSize(Component: React.JSX.ElementType) {
-  return function LayoutSizeComponent(props: {}) {
+  return function LayoutSizeComponent(props: object) {
     return (
       <Consumer>
         {(context) => {

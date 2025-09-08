@@ -1,5 +1,3 @@
-/* eslint-disable no-await-in-loop */
-/* eslint-disable no-restricted-syntax */
 // (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.

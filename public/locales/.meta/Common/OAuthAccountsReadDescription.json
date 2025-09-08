@@ -3,7 +3,7 @@
   "content": "View all contacts",
   "content_en_sha1_hash": "859eb1e255d69ca6c23a42997bfd6dd2ede94b6a",
   "created_at": "2025-05-19T21:30:46.973Z",
-  "updated_at": "2025-05-26T07:57:32.998Z",
+  "updated_at": "2025-09-07T07:53:15.529Z",
   "comment": {
     "text": "This translation key is used to display a brief description of the \"View all contacts\" feature. It will appear in UI elements related to OAuth account scopes and permissions, such as buttons or dialogs, where users can choose to access their contact information.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/oauth/index.ts",
-      "line_number": 121,
+      "line_number": 120,
       "context": "if (type === ScopeType.read) return t(\"Common:OAuthFilesReadDescription\");\n return t(\"Common:OAuthFilesWriteDescription\");\n case ScopeGroup.accounts:\n case ScopeGroup.contacts:\n if (type === ScopeType.read)\n return t(\"Common:OAuthAccountsReadDescription\");\n return t(\"Common:OAuthAccountsWriteDescription\");\n case ScopeGroup.profiles:\n if (type === ScopeType.read)\n return t(\"Common:OAuthProfilesReadDescription\");\n return t(\"Common:OAuthProfilesWriteDescription\");",
       "module": "/packages/shared"
     }

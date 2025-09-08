@@ -301,8 +301,6 @@ export type TEvent = {
   data: TEventData;
 };
 
-export interface UseSelectFolderDialogProps {}
-
 export interface UseSelectFileDialogProps {
   instanceId: string;
 }
@@ -435,7 +433,7 @@ export type TDocEditor = {
     history,
   }: {
     currentVersion?: number;
-    history?: {};
+    history?: object;
     error?: string;
   }) => void;
   setHistoryData?: (obj: THistoryData) => void;
@@ -502,7 +500,7 @@ export type ConflictStateType = {
   resolve: (
     value: ConflictResolveType | PromiseLike<ConflictResolveType>,
   ) => void;
-  reject: (reason?: any) => void;
+  reject: (reason?: unknown) => void;
   fileName: string;
   folderName: string;
 };

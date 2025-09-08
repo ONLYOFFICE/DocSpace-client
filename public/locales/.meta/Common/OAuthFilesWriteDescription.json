@@ -3,7 +3,7 @@
   "content": "View and manage all files and folders",
   "content_en_sha1_hash": "07c9e42a035928c689645c2bb99f9e8490d45a8b",
   "created_at": "2025-05-19T21:30:47.010Z",
-  "updated_at": "2025-05-28T09:30:03.010Z",
+  "updated_at": "2025-09-07T07:53:15.528Z",
   "comment": {
     "text": "This translation key is used to display a description for managing files and folders. It appears on a settings page or similar UI element within an OAuth application, allowing users to view and manage all files and folders associated with their accounts.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/oauth/index.ts",
-      "line_number": 117,
+      "line_number": 116,
       "context": "t: TTranslation,\n ) => {\n switch (group) {\n case ScopeGroup.files:\n if (type === ScopeType.read) return t(\"Common:OAuthFilesReadDescription\");\n return t(\"Common:OAuthFilesWriteDescription\");\n case ScopeGroup.accounts:\n case ScopeGroup.contacts:\n if (type === ScopeType.read)\n return t(\"Common:OAuthAccountsReadDescription\");\n return t(\"Common:OAuthAccountsWriteDescription\");",
       "module": "/packages/shared"
     }

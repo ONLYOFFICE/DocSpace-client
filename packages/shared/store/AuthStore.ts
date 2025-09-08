@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable no-console */
 import { makeAutoObservable, runInAction } from "mobx";
 
 import SocketHelper, { SocketEvents, TOptSocket } from "../utils/socket";
@@ -147,6 +146,7 @@ class AuthStore {
             return;
           }
 
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           const { customQuotaFeature, ...updatableObject } = options;
 
           this.currentQuotaStore?.updateTenantCustomQuota(updatableObject);

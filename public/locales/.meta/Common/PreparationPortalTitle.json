@@ -3,7 +3,7 @@
   "content": "Portal restoring is underway",
   "content_en_sha1_hash": "4d21b354c882fba5a868ff44f825eac2c9872eda",
   "created_at": "2025-05-19T21:30:47.439Z",
-  "updated_at": "2025-06-02T10:20:51.536Z",
+  "updated_at": "2025-09-07T07:53:15.411Z",
   "comment": {
     "text": "The \"Portal restoring is underway\" translation key is used to display a message indicating that the preparation portal is being restored, typically in a recovery or error context. This text appears in a dialog box and might be related to a button or a section header. It is part of the UI's recovery process.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/pages/PreparationPortal/index.tsx",
-      "line_number": 137,
+      "line_number": 140,
       "context": "if (!isDialog) getRecoveryProgress();\n }, [ready, getRecoveryProgress, isDialog]);\n \n const headerText = errorMessage\n ? t(\"Common:Error\")\n : t(\"Common:PreparationPortalTitle\");\n \n const componentBody = errorMessage ? (\n <Text className={styles.preparationPortalError}>{`${errorMessage}`}</Text>\n ) : (\n <PreparationPortalProgress",
       "module": "/packages/shared"
     }

@@ -75,6 +75,7 @@ type SubMenuProps = {
   changeView?: boolean;
   withHeader?: boolean;
   onSubMenuMouseEnter?: () => void;
+  menuHovered?: boolean;
 };
 
 const SubMenu = (props: SubMenuProps) => {
@@ -89,6 +90,7 @@ const SubMenu = (props: SubMenuProps) => {
     changeView,
     withHeader,
     onSubMenuMouseEnter,
+    menuHovered,
   } = props;
 
   const [model, setModel] = useState(props?.model);
@@ -140,6 +142,23 @@ const SubMenu = (props: SubMenuProps) => {
       hideTimeoutRef.current = null;
     }
   };
+
+  useEffect(() => {
+    if (isMobileDevice) return;
+    if (menuHovered === undefined) return;
+
+    if (!menuHovered) {
+      if (hideTimeoutRef.current) clearTimeout(hideTimeoutRef.current);
+      hideTimeoutRef.current = setTimeout(() => {
+        setActiveItem(null);
+      }, 400);
+    } else {
+      if (hideTimeoutRef.current) {
+        clearTimeout(hideTimeoutRef.current);
+        hideTimeoutRef.current = null;
+      }
+    }
+  }, [menuHovered]);
 
   const onItemClick = (
     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,

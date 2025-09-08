@@ -454,3 +454,46 @@
     }
   }
 }
+
+.mainStyles {
+  :global(#members-list-header) {
+    display: none;
+    position: fixed;
+    height: 52px;
+    width: calc(100% - 32px);
+    padding: 0;
+    z-index: 1;
+    background: var(--info-panel-background-color);
+
+    @include mixins.mobile {
+      padding-inline-end: 16px;
+    }
+  }
+}
+
+.membersList {
+  height: 100%;
+}
+
+.list {
+  width: calc(100% + 20px) !important;
+  margin-bottom: 24px;
+
+  overflow: visible !important;
+
+  :global(.members-list-item) {
+    // doesn't require mirroring for RTL
+    left: unset !important;
+    inset-inline-start: 0;
+    width: calc(100% - 23px) !important;
+  }
+
+  :global(.members-list-loader-item) {
+    margin: 0 -16px;
+  }
+
+  @include mixins.mobile {
+    width: calc(100% + 16px) !important;
+    margin-bottom: 48px;
+  }
+}

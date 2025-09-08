@@ -24,23 +24,30 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useCallback, useEffect, use } from "react";
-import { InfiniteLoader, WindowScroller, List } from "react-virtualized";
+import React, { useState, useCallback, use, FC } from "react";
+import {
+  InfiniteLoader,
+  WindowScroller,
+  List as VirtualizedList,
+} from "react-virtualized";
 import classNames from "classnames";
 
-import { RowLoader } from "@docspace/shared/skeletons/selector";
-import { Text } from "@docspace/shared/components/text";
-import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
-import { GENERAL_LINK_HEADER_KEY } from "@docspace/shared/constants";
+import { RowLoader } from "../../../skeletons/selector";
+import { GENERAL_LINK_HEADER_KEY } from "../../../constants";
+import { useEventListener } from "../../../hooks/useEventListener";
+import type { TUser } from "../../../api/people/types";
 
-import { MembersListProps, UserProps } from "../Members.types";
-import styles from "../Members.module.scss";
+import { Text } from "../../text";
+import ScrollbarContext from "../../scrollbar/custom-scrollbar/ScrollbarContext";
+
+import styles from "../Share.module.scss";
+import { ListProps } from "../Share.types";
 
 const itemSize = 48;
 const shareLinkItemSize = 68;
 const GENERAL_LINK_HEADER_HEIGHT = 38;
 
-const MembersList = (props: MembersListProps) => {
+const List: FC<ListProps> = (props) => {
   const {
     hasNextPage,
     itemCount,
@@ -53,15 +60,21 @@ const MembersList = (props: MembersListProps) => {
   const scrollContext = use(ScrollbarContext);
   const scrollElement = scrollContext.parentScrollbar?.scrollerElement;
 
-  const list: React.ReactElement<
-    UserProps & { isShareLink?: boolean; "data-share"?: boolean }
-  >[] = [];
+  const list: React.ReactElement<{
+    isShareLink?: boolean;
+    "data-share"?: boolean;
+    user: TUser;
+    index?: number;
+  }>[] = [];
 
   React.Children.map(children, (item) => {
     list.push(
-      item as React.ReactElement<
-        UserProps & { isShareLink?: boolean; "data-share"?: boolean }
-      >,
+      item as React.ReactElement<{
+        isShareLink?: boolean;
+        "data-share"?: boolean;
+        user: TUser;
+        index?: number;
+      }>,
     );
   });
 
@@ -146,7 +159,7 @@ const MembersList = (props: MembersListProps) => {
     return itemSize;
   };
 
-  const onScroll = (e: React.UIEvent<HTMLDivElement>) => {
+  const onScroll = (e: Event) => {
     const header = document.getElementById("members-list-header");
 
     if (!header) {
@@ -175,15 +188,7 @@ const MembersList = (props: MembersListProps) => {
     });
   };
 
-  useEffect(() => {
-    if (withoutTitlesAndLinks) return;
-
-    scrollElement?.addEventListener("scroll", onScroll);
-
-    return () => {
-      scrollElement?.removeEventListener("scroll", onScroll);
-    };
-  }, [scrollElement, linksBlockLength, withoutTitlesAndLinks]);
+  useEventListener("scroll", onScroll, scrollElement);
 
   if (!scrollElement) {
     return null;
@@ -216,7 +221,7 @@ const MembersList = (props: MembersListProps) => {
                   const width = scrollElement.getBoundingClientRect().width;
 
                   return (
-                    <List
+                    <VirtualizedList
                       autoHeight
                       height={height}
                       onRowsRendered={onRowsRendered}
@@ -244,4 +249,4 @@ const MembersList = (props: MembersListProps) => {
   );
 };
 
-export default MembersList;
+export default List;

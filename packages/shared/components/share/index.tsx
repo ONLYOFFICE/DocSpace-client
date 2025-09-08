@@ -32,7 +32,7 @@ import ShareLoader from "../../skeletons/share";
 import type { ShareProps } from "./Share.types";
 import styles from "./Share.module.scss";
 
-import { List } from "./sub-components/List";
+import List from "./sub-components/List";
 import { useShare } from "./hooks/useShare";
 import ShareInfoBar from "./sub-components/ShareInfoBar";
 
@@ -97,6 +97,7 @@ const Share = (props: ShareProps) => {
             itemCount={links.length}
             linksBlockLength={links.length}
             loadNextPage={() => Promise.resolve()}
+            withoutTitlesAndLinks={false}
           >
             {links}
           </List>

@@ -203,3 +203,12 @@ export interface UserProps {
 
   onClickGroup?: (group: TGroup) => void;
 }
+
+export type ListProps = {
+  hasNextPage: boolean;
+  itemCount: number;
+  loadNextPage: () => Promise<void>;
+  linksBlockLength: number;
+  withoutTitlesAndLinks: boolean;
+  children: React.ReactNode;
+};

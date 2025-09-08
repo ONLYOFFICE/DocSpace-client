@@ -331,3 +331,126 @@
     }
   }
 }
+
+.userTypeHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-top: 16px;
+  padding-bottom: 12px;
+
+  &.isExpect {
+    padding-top: 20px;
+  }
+
+  :global(.title) {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--info-panel-subtitle-color);
+  }
+
+  :global(.icon) {
+    margin-inline-end: 8px;
+  }
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+
+  :global(.avatar) {
+    min-width: 32px;
+    min-height: 32px;
+  }
+
+  &.isSystem {
+    :global(.avatar) {
+      svg path {
+        fill: var(--info-panel-role-color);
+      }
+    }
+  }
+
+  :global(.user_body-wrapper) {
+    overflow: auto;
+
+    -webkit-touch-callout: text;
+    -webkit-user-select: text;
+    -khtml-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+  }
+
+  :global(.name-wrapper),
+  :global(.role-email) {
+    display: flex;
+  }
+
+  :global(.name) {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &.isExpect {
+    :global(.name) {
+      color: var(--info-panel-expect-name-color);
+    }
+  }
+
+  &.isSystem {
+    :global(.name) {
+      cursor: default;
+    }
+  }
+
+  :global(.me-label) {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    color: var(--info-panel-me-label-color);
+    padding-inline-start: 8px;
+    margin-inline-start: -8px;
+  }
+
+  :global(.role-wrapper) {
+    margin-inline: auto -12px;
+    padding-inline-start: 8px;
+
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 20px;
+    white-space: nowrap;
+
+    :global(.disabled-role-combobox) {
+      color: var(--info-panel-disable-role-color);
+
+      margin-inline-end: 16px;
+    }
+  }
+
+  :global(.role-view_remove-icon) {
+    cursor: pointer;
+    svg {
+      path {
+        fill: var(--info-panel-icon-button-color);
+      }
+    }
+
+    :hover {
+      svg {
+        path {
+          fill: var(--info-panel-icon-button-hover-color);
+        }
+      }
+    }
+  }
+}

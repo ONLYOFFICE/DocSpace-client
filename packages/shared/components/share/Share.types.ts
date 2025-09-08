@@ -182,6 +182,24 @@ export interface UseShareProps {
   }) => void;
 }
 
+export type TInfoPanelMember = {
+  access: number;
+  canEditAccess: boolean;
+  isExpect?: boolean;
+} & (TUser | TGroup);
+
 export interface UserProps {
-  user: TUser | TGroup;
+  user: TInfoPanelMember;
+  currentUser: TInfoPanelMember;
+
+  isLoading?: boolean;
+  options?: TOption[];
+  hideCombobox?: boolean;
+  selectedOption?: TOption;
+  onSelectOption?: (option: TOption) => void;
+
+  showInviteIcon?: boolean;
+  onRepeatInvitation?: () => Promise<void>;
+
+  onClickGroup?: (group: TGroup) => void;
 }

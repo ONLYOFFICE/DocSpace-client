@@ -26,41 +26,20 @@
 
 import { useState } from "react";
 import { inject, observer } from "mobx-react";
-import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
-import { isMobileOnly, isMobile } from "react-device-detect";
-import { decode } from "he";
-import classNames from "classnames";
 
-import {
-  Avatar,
-  AvatarRole,
-  AvatarSize,
-} from "@docspace/shared/components/avatar";
-import { ComboBox, TOption } from "@docspace/shared/components/combobox";
-import { toastr } from "@docspace/shared/components/toast";
-import {
-  getUserType,
-  getUserTypeTranslation,
-} from "@docspace/shared/utils/common";
-import { TUser } from "@docspace/shared/api/people/types";
-import { TGroup } from "@docspace/shared/api/groups/types";
-import { Text } from "@docspace/shared/components/text";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { Link, LinkType } from "@docspace/shared/components/link";
 import api from "@docspace/shared/api";
+import { toastr } from "@docspace/shared/components/toast";
 import { FolderType, RoomSecurityError } from "@docspace/shared/enums";
+import { User as ShareUser } from "@docspace/shared/components/share/sub-components/User";
 
-import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
-import DefaultUserPhotoUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
-import EmailPlusReactSvgUrl from "PUBLIC_DIR/images/e-mail+.react.svg?url";
-import EveryoneIconUrl from "PUBLIC_DIR/images/icons/16/departments.react.svg?url";
+import type { TOption } from "@docspace/shared/components/combobox";
+import type { TGroup } from "@docspace/shared/api/groups/types";
 
 import { filterPaidRoleOptions } from "SRC_DIR/helpers";
 
 import MembersHelper from "../Members.utils";
-import { UserProps } from "../Members.types";
-import styles from "../Members.module.scss";
+import type { UserProps } from "../Members.types";
 
 const User = ({
   room,
@@ -76,7 +55,6 @@ const User = ({
   setEditGroupMembersDialogVisible,
   setRemoveUserConfirmation,
 }: UserProps) => {
-  const theme = useTheme();
   const { t } = useTranslation([
     "InfoPanel",
     "Common",
@@ -103,7 +81,6 @@ const User = ({
 
   const security = room?.security;
   const isExpect = user.isExpect;
-  const isSystem = "isSystem" in user && user.isSystem;
   const canInviteUserInRoomAbility = security?.EditAccess;
   const showInviteIcon = canInviteUserInRoomAbility && isExpect;
   const canChangeUserRole = user.canEditAccess;
@@ -163,154 +140,25 @@ const User = ({
     updateRole(option, false);
   };
 
-  const type = getUserType(user as unknown as TUser);
-  const typeLabel = getUserTypeTranslation(type, t);
-
   const onOpenGroup = (group: TGroup) => {
     if (group.isSystem) return;
     setEditMembersGroup!(group);
     setEditGroupMembersDialogVisible!(true);
   };
 
-  const userAvatar =
-    "hasAvatar" in user && user.hasAvatar
-      ? user.avatar
-      : "isGroup" in user && user.isGroup
-        ? ""
-        : DefaultUserPhotoUrl;
-
-  const withTooltip = "isOwner" in user && (user.isOwner || user.isAdmin);
-
-  const uniqueTooltipId = `userTooltip_${Math.random()}`;
-
-  const tooltipContent = `${
-    "isOwner" in user && user.isOwner
-      ? t("Common:PortalOwner", { productName: t("Common:ProductName") })
-      : t("Common:PortalAdmin", { productName: t("Common:ProductName") })
-  }. ${t("Common:HasFullAccess")}`;
-
-  const itemAvatar = isSystem
-    ? EveryoneIconUrl
-    : isExpect
-      ? AtReactSvgUrl
-      : userAvatar || "";
-
-  return "isTitle" in user && user.isTitle ? (
-    <div
-      className={classNames(styles.userTypeHeader, {
-        [styles.isExpect]: isExpect,
-      })}
-      data-testid="info_panel_members_user_type_header"
-    >
-      <Text className="title">
-        {"displayName" in user ? user.displayName : ""}
-      </Text>
-
-      {showInviteIcon ? (
-        <IconButton
-          className="icon"
-          title={t("Common:RepeatInvitation")}
-          iconName={EmailPlusReactSvgUrl}
-          isFill
-          onClick={onRepeatInvitation}
-          size={16}
-          data-testid="info_panel_members_repeat_invitation_button"
-        />
-      ) : null}
-    </div>
-  ) : (
-    <div
-      className={classNames(styles.user, {
-        [styles.isExpect]: isExpect,
-        [styles.isSystem]: isSystem,
-      })}
-      key={user.id}
-      data-testid="info_panel_members_user"
-    >
-      <Avatar
-        role={type as unknown as AvatarRole}
-        className="avatar"
-        size={AvatarSize.min}
-        source={itemAvatar}
-        userName={
-          isExpect ? "" : "displayName" in user ? user.displayName : user.name
-        }
-        withTooltip={withTooltip}
-        tooltipContent={tooltipContent}
-        hideRoleIcon={!withTooltip}
-        isGroup={"isGroup" in user ? user.isGroup : false}
-        dataTestId="info_panel_members_user_avatar"
-      />
-      <div className="user_body-wrapper">
-        <div className="name-wrapper">
-          {"isGroup" in user && user.isGroup ? (
-            <Link
-              className="name"
-              type={LinkType.action}
-              onClick={() => onOpenGroup(user)}
-              title={decode(user.name)}
-              noHover={isSystem}
-              dataTestId="info_panel_members_user_group_link"
-            >
-              {decode(user.name)}
-            </Link>
-          ) : (
-            <Text className="name" data-tooltip-id={uniqueTooltipId}>
-              {"displayName" in user && user.displayName
-                ? decode(user.displayName)
-                : null}
-            </Text>
-          )}
-
-          {currentUser?.id === user.id ? (
-            <div className="me-label">&nbsp;{`(${t("Common:MeLabel")})`}</div>
-          ) : null}
-        </div>
-        {!("isGroup" in user) ? (
-          <div className="role-email" style={{ display: "flex" }}>
-            <Text
-              className="label"
-              fontWeight={400}
-              fontSize="12px"
-              truncate
-              color={theme.infoPanel.members.subtitleColor}
-              dir="auto"
-            >
-              {`${typeLabel} | ${(user as TUser).email}`}
-            </Text>
-          </div>
-        ) : null}
-      </div>
-
-      {userRole && userRoleOptions && !hideUserRole ? (
-        <div className="role-wrapper">
-          {canChangeUserRole ? (
-            <ComboBox
-              className="role-combobox"
-              selectedOption={userRole}
-              options={userRoleOptions}
-              onSelect={onOptionClick}
-              scaled={false}
-              withBackdrop={isMobile}
-              size="content"
-              modernView
-              title={t("Common:Role")}
-              manualWidth="auto"
-              isLoading={isLoading}
-              isMobileView={isMobileOnly}
-              directionY="both"
-              displaySelectedOption
-              noSelect={false}
-              dataTestId="info_panel_members_user_role_combobox"
-            />
-          ) : (
-            <div className="disabled-role-combobox" title={t("Common:Role")}>
-              {userRole.label}
-            </div>
-          )}
-        </div>
-      ) : null}
-    </div>
+  return (
+    <ShareUser
+      user={user}
+      currentUser={currentUser}
+      isLoading={isLoading}
+      selectedOption={userRole}
+      options={userRoleOptions}
+      hideCombobox={hideUserRole}
+      onSelectOption={onOptionClick}
+      onClickGroup={onOpenGroup}
+      onRepeatInvitation={onRepeatInvitation}
+      showInviteIcon={showInviteIcon}
+    />
   );
 };
 

@@ -28,12 +28,14 @@ import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router";
 import { TFunction } from "i18next";
+import { useEffect } from "react";
 
 import { ProfileViewLoader } from "@docspace/shared/skeletons/profile";
 import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
 import { DeviceType } from "@docspace/shared/enums";
 import { tablet, mobile } from "@docspace/shared/utils";
 import { zIndex } from "@docspace/shared/themes";
+import { toastr } from "@docspace/shared/components/toast";
 
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 import { TfaStore } from "@docspace/shared/store/TfaStore";
@@ -45,6 +47,7 @@ import OAuthStore from "SRC_DIR/store/OAuthStore";
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import SettingsSetupStore from "SRC_DIR/store/SettingsSetupStore";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
+import FilesStore from "SRC_DIR/store/FilesStore";
 
 import MainProfile from "./sub-components/main-profile";
 import LoginContent from "./sub-components/login";
@@ -95,6 +98,7 @@ type SectionBodyContentProps = {
   getSessions?: SettingsSetupStore["getSessions"];
   setIsProfileLoaded?: ClientLoadingStore["setIsProfileLoaded"];
   setIsSectionHeaderLoading?: ClientLoadingStore["setIsSectionHeaderLoading"];
+  resetSelections?: FilesStore["resetSelections"];
 };
 
 const SectionBodyContent = (props: SectionBodyContentProps) => {
@@ -116,8 +120,26 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     setIsProfileLoaded,
     setIsSectionHeaderLoading,
     getTfaType,
+    resetSelections,
   } = props;
   const navigate = useNavigate();
+
+  const checkEmailChangeParam = () => {
+    const search = window.location.search;
+    const urlParams = new URLSearchParams(search);
+
+    if (urlParams.get("email_change") === "success") {
+      toastr.success(t?.("Profile:EmailChangeSuccess"));
+
+      const pathname = window.location.pathname;
+      window.history.replaceState({}, document.title, pathname);
+    }
+  };
+
+  useEffect(() => {
+    checkEmailChangeParam();
+    resetSelections?.();
+  }, []);
 
   const {
     tfaOn,
@@ -226,6 +248,7 @@ export default inject(
     oauthStore,
     tfaStore,
     setup,
+    filesStore,
   }: TStore) => {
     const { showProfileLoader, setIsProfileLoaded, setIsSectionHeaderLoading } =
       clientLoadingStore;
@@ -245,6 +268,8 @@ export default inject(
 
     const { getSessions } = setup;
 
+    const { resetSelections } = filesStore;
+
     return {
       currentDeviceType: settingsStore.currentDeviceType,
       showProfileLoader,
@@ -263,6 +288,7 @@ export default inject(
       getTfaType,
       setIsProfileLoaded,
       setIsSectionHeaderLoading,
+      resetSelections,
     };
   },
 )(

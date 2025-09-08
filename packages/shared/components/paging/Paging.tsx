@@ -119,7 +119,7 @@ const Paging = (props: PagingProps) => {
                 scaledOptions
                 onSelect={onSelectCountAction}
                 selectedOption={selectedCountItem}
-                testId="paging_count_items_combobox"
+                dataTestId="paging_count_items_combobox"
               />
             </div>
           )

@@ -3,7 +3,7 @@
   "content": "Comments",
   "content_en_sha1_hash": "fce06e20e5f7f74aacccab40b59b75a56c8f7305",
   "created_at": "2025-05-19T21:30:43.569Z",
-  "updated_at": "2025-08-11T09:02:43.912Z",
+  "updated_at": "2025-08-12T19:46:26.018Z",
   "comment": {
     "text": "This translation key is used to display the text \"Comments\" in various UI elements. It appears in a page that displays information about files, specifically in the \"DetailsHelper.js\" file, where it returns a translated version of this key for the \"Files:Index\" context.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
-      "line_number": 226,
+      "line_number": 225,
       "context": "return this.t(\"Files:Index\");\n \n case \"Versions\":\n return this.t(\"InfoPanel:Versions\");\n case \"Comments\":\n return this.t(\"Common:Comments\");\n case \"Tags\":\n return this.t(\"Common:Tags\");\n case \"Storage\":\n if (\"usedSpace\" in this.item && this.item.usedSpace !== undefined) {\n return this.isDefaultRoomsQuotaSet &&",
       "module": "/packages/client"
     }

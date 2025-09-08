@@ -3,7 +3,7 @@
   "content": "Link has been copied to the clipboard",
   "content_en_sha1_hash": "2254c41229de93951969596ba422451fa0eff387",
   "created_at": "2025-05-19T21:30:46.142Z",
-  "updated_at": "2025-08-11T18:11:59.167Z",
+  "updated_at": "2025-09-02T07:59:28.412Z",
   "comment": {
     "text": "This translation key is used to display a success message when a link is successfully copied to the clipboard, typically in a button or link copy action. It appears as an alert or notification in UI components such as ExternalLinks and MetadataUrlField, and is used to provide a positive feedback to users after they have copied a link.",
     "is_auto": true,
@@ -24,43 +24,49 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 475,
+      "line_number": 478,
       "context": "? `${window.location.href}&preview=${id}`\n : webUrl\n : `${window.location.origin + config.homepage}/filter?folder=${id}`, // TODO: Change url by category\n );\n \n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n onCopyLink = async (item, t) => {\n const { shared, navigationPath } = this.selectedFolderStore;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 475,
+      "line_number": 478,
       "context": "? `${window.location.href}&preview=${id}`\n : webUrl\n : `${window.location.origin + config.homepage}/filter?folder=${id}`, // TODO: Change url by category\n );\n \n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n onCopyLink = async (item, t) => {\n const { shared, navigationPath } = this.selectedFolderStore;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 475,
+      "line_number": 478,
       "context": "? `${window.location.href}&preview=${id}`\n : webUrl\n : `${window.location.origin + config.homepage}/filter?folder=${id}`, // TODO: Change url by category\n );\n \n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n onCopyLink = async (item, t) => {\n const { shared, navigationPath } = this.selectedFolderStore;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 475,
+      "line_number": 478,
       "context": "? `${window.location.href}&preview=${id}`\n : webUrl\n : `${window.location.origin + config.homepage}/filter?folder=${id}`, // TODO: Change url by category\n );\n \n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n onCopyLink = async (item, t) => {\n const { shared, navigationPath } = this.selectedFolderStore;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 475,
+      "line_number": 478,
       "context": "? `${window.location.href}&preview=${id}`\n : webUrl\n : `${window.location.origin + config.homepage}/filter?folder=${id}`, // TODO: Change url by category\n );\n \n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n onCopyLink = async (item, t) => {\n const { shared, navigationPath } = this.selectedFolderStore;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 475,
+      "line_number": 478,
       "context": "? `${window.location.href}&preview=${id}`\n : webUrl\n : `${window.location.origin + config.homepage}/filter?folder=${id}`, // TODO: Change url by category\n );\n \n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n onCopyLink = async (item, t) => {\n const { shared, navigationPath } = this.selectedFolderStore;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 475,
+      "line_number": 478,
+      "context": "? `${window.location.href}&preview=${id}`\n : webUrl\n : `${window.location.origin + config.homepage}/filter?folder=${id}`, // TODO: Change url by category\n );\n \n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n onCopyLink = async (item, t) => {\n const { shared, navigationPath } = this.selectedFolderStore;",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 478,
       "context": "? `${window.location.href}&preview=${id}`\n : webUrl\n : `${window.location.origin + config.homepage}/filter?folder=${id}`, // TODO: Change url by category\n );\n \n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n onCopyLink = async (item, t) => {\n const { shared, navigationPath } = this.selectedFolderStore;",
       "module": "/packages/client"
     },

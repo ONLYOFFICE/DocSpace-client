@@ -39,7 +39,7 @@ import { TTranslation } from "@docspace/shared/types";
 import type { TFunction } from "i18next";
 import { TUser } from "@docspace/shared/api/people/types";
 
-export interface ProvidersProps {}
+export type ProvidersProps = object;
 
 export interface InjectedProvidersProps extends ProvidersProps {
   theme: TStore["settingsStore"]["theme"];
@@ -83,7 +83,7 @@ export interface InjectedSelectFileStepProps extends SelectFileStepProps {
   setWarningQuotaDialogVisible: TStore["dialogsStore"]["setWarningQuotaDialogVisible"];
 }
 
-export interface DataImportProps {}
+export type DataImportProps = object;
 
 export interface InjectedDataImportProps extends DataImportProps {
   getMigrationStatus: TStore["importAccountsStore"]["getMigrationStatus"];
@@ -100,7 +100,7 @@ export interface InjectedDataImportProps extends DataImportProps {
   setMigrationPhase: TStore["importAccountsStore"]["setMigrationPhase"];
 }
 
-export interface WorkspaceProps {}
+export type WorkspaceProps = object;
 
 export interface InjectedWorkspaceProps extends WorkspaceProps {
   theme: TStore["settingsStore"]["theme"];

@@ -48,7 +48,6 @@ const svgLoader = () => <div style={{ width: "96px" }} />;
 const FileTile = ({
   checked,
   children,
-  contextButtonSpacerWidth,
   contextOptions,
   contentElement,
   inProgress,
@@ -56,7 +55,6 @@ const FileTile = ({
   element,
   onSelect,
   setSelection,
-  sideColor,
   temporaryIcon,
   thumbnail,
   thumbSize,

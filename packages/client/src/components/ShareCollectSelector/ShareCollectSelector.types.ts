@@ -32,7 +32,7 @@ export interface ShareCollectSelectorProps {
   file: TFile;
   createDefineRoomType: RoomsType;
   onCloseActionProp?: () => void;
-  headerProps?: HeaderProps | {};
+  headerProps?: HeaderProps | object;
   onCancel: VoidFunction;
 }
 

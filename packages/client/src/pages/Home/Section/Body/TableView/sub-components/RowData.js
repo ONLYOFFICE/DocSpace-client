@@ -69,6 +69,7 @@ const RowDataComponent = (props) => {
     isIndexedFolder,
     erasureColumnIsEnabled,
     index,
+    isPersonalReadOnly,
   } = props;
 
   const [lastColumn, setLastColumn] = useState(
@@ -226,7 +227,7 @@ const RowDataComponent = (props) => {
         <div />
       )}
 
-      {erasureColumnIsEnabled ? (
+      {isPersonalReadOnly && erasureColumnIsEnabled ? (
         <TableCell
           dataTestId={`files-cell-erasure-${index}`}
           style={
@@ -298,30 +299,34 @@ const RowDataComponent = (props) => {
   );
 };
 
-export default inject(({ tableStore, selectedFolderStore }) => {
-  const {
-    authorColumnIsEnabled,
-    createdColumnIsEnabled,
-    modifiedColumnIsEnabled,
-    sizeColumnIsEnabled,
-    typeColumnIsEnabled,
-    tableStorageName,
-    columnStorageName,
-    erasureColumnIsEnabled,
-  } = tableStore;
+export default inject(
+  ({ tableStore, selectedFolderStore, treeFoldersStore }) => {
+    const {
+      authorColumnIsEnabled,
+      createdColumnIsEnabled,
+      modifiedColumnIsEnabled,
+      sizeColumnIsEnabled,
+      typeColumnIsEnabled,
+      tableStorageName,
+      columnStorageName,
+      erasureColumnIsEnabled,
+    } = tableStore;
 
-  const { isIndexedFolder } = selectedFolderStore;
+    const { isIndexedFolder } = selectedFolderStore;
+    const { isPersonalReadOnly } = treeFoldersStore;
 
-  return {
-    authorColumnIsEnabled,
-    createdColumnIsEnabled,
-    modifiedColumnIsEnabled,
-    sizeColumnIsEnabled,
-    typeColumnIsEnabled,
-    tableStorageName,
-    columnStorageName,
+    return {
+      authorColumnIsEnabled,
+      createdColumnIsEnabled,
+      modifiedColumnIsEnabled,
+      sizeColumnIsEnabled,
+      typeColumnIsEnabled,
+      tableStorageName,
+      columnStorageName,
 
-    isIndexedFolder,
-    erasureColumnIsEnabled,
-  };
-})(observer(RowDataComponent));
+      isIndexedFolder,
+      erasureColumnIsEnabled,
+      isPersonalReadOnly,
+    };
+  },
+)(observer(RowDataComponent));

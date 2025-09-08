@@ -26,7 +26,6 @@
 
 import { useCallback, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
 
 import EmptyScreenGroupSvgUrl from "PUBLIC_DIR/images/empty_screen_groups_75-75.svg?url";
 import EmptyScreenGroupSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_groups_dark_75-75.svg?url";
@@ -34,6 +33,7 @@ import EmptyScreenGroupSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_groups_da
 import api from "../../api";
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
 import { Selector, TSelectorItem } from "../../components/selector";
+import { useTheme } from "../../hooks/useTheme";
 
 import { GroupsSelectorProps } from "./GroupsSelector.types";
 
@@ -48,7 +48,7 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
   } = props;
 
   const { t } = useTranslation(["Common"]);
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
   const [searchValue, setSearchValue] = useState("");
   const [hasNextPage, setHasNextPage] = useState(false);
@@ -60,7 +60,7 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
   const afterSearch = useRef(false);
   const totalRef = useRef(0);
 
-  const emptyScreenImg = theme.isBase
+  const emptyScreenImg = isBase
     ? EmptyScreenGroupSvgUrl
     : EmptyScreenGroupSvgDarkUrl;
 
@@ -79,7 +79,7 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
       doubleClickCallback();
     }
   };
-  const onSearch = useCallback((value: string, callback?: Function) => {
+  const onSearch = useCallback((value: string, callback?: () => void) => {
     isFirstLoad.current = true;
     afterSearch.current = true;
     setSearchValue(() => {
@@ -88,7 +88,7 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
     callback?.();
   }, []);
 
-  const onClearSearch = useCallback((callback?: Function) => {
+  const onClearSearch = useCallback((callback?: () => void) => {
     isFirstLoad.current = true;
     afterSearch.current = true;
     setSearchValue(() => {

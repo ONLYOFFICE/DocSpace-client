@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable class-methods-use-this */
-/* eslint-disable no-console */
 import { makeAutoObservable } from "mobx";
 
 import { toastr } from "@docspace/shared/components/toast";
@@ -54,6 +52,8 @@ class ServicesStore {
   reccomendedAmount: number = 0;
 
   featureCountData: number = 0;
+
+  confirmActionType: string | null = null;
 
   constructor(
     currentTariffStatusStore: CurrentTariffStatusStore,
@@ -112,6 +112,10 @@ class ServicesStore {
   //   return res;
   // };
 
+  setConfirmActionType = (value: string) => {
+    this.confirmActionType = value;
+  };
+
   setReccomendedAmount = (amount: number) => {
     this.reccomendedAmount = amount;
   };
@@ -123,11 +127,14 @@ class ServicesStore {
   servicesInit = async (t: TTranslation) => {
     const isRefresh = window.location.href.includes("complete=true");
 
+    if (!isRefresh) {
+      if (this.isVisibleWalletSettings) this.setVisibleWalletSetting(false);
+    }
+
     const {
       fetchAutoPayments,
       fetchCardLinked,
       setPaymentAccount,
-      isAlreadyPaid,
       initWalletPayerAndBalance,
       handleServicesQuotas,
     } = this.paymentStore!;
@@ -146,7 +153,7 @@ class ServicesStore {
 
       if (!quotas) throw new Error();
 
-      if (isAlreadyPaid) {
+      if (this.paymentStore!.isAlreadyPaid) {
         if (this.paymentStore!.isStripePortalAvailable) {
           requests.push(setPaymentAccount());
 
@@ -173,6 +180,7 @@ class ServicesStore {
 
         const amountParam = params.get("amount");
         const recommendedAmountParam = params.get("recommendedAmount");
+        const actionTypeParam = params.get("actionType");
 
         if (amountParam && recommendedAmountParam) {
           const amount = Number(amountParam);
@@ -182,13 +190,16 @@ class ServicesStore {
           this.setFeatureCountData(amount);
         }
 
+        if (actionTypeParam) {
+          this.setConfirmActionType(actionTypeParam);
+          this.setVisibleWalletSetting(true);
+        }
+
         window.history.replaceState(
           {},
           document.title,
           window.location.pathname,
         );
-
-        this.setVisibleWalletSetting(true);
       }
     } catch (e) {
       toastr.error(t("Common:UnexpectedError"));

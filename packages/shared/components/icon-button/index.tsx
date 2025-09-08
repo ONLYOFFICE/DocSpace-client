@@ -38,10 +38,23 @@ import { Tooltip } from "../tooltip";
 import styles from "./IconButton.module.scss";
 import { IconButtonProps } from "./IconButton.types";
 
+const resolveSize = (size: IconButtonProps["size"]): string => {
+  if (typeof size === "number") return `${size}px`;
+  if (typeof size === "string") {
+    if (size === "base" || size === "middle" || size === "large") return "15px";
+    return size;
+  }
+  return "16px";
+};
+
 const isTouchDevice = () => "ontouchstart" in document.documentElement;
 
 const getColor = (color: IconButtonProps["color"]): string => {
   if (!color) return "";
+
+  if (color.startsWith("--")) {
+    return `var(${color})`;
+  }
 
   return color === "accent" ? "var(--accent-main)" : color;
 };
@@ -219,7 +232,7 @@ const IconButton = ({
   );
 
   const buttonStyle = {
-    "--icon-button-size": typeof size === "number" ? `${size}px` : size,
+    "--icon-button-size": resolveSize(size),
     "--icon-button-color": getColor(currentIcon.color),
     "--icon-button-hover-color": getColor(currentIcon.color),
     ...style,
@@ -242,7 +255,7 @@ const IconButton = ({
       style={buttonStyle}
       data-testid={dataTestId || "icon-button"}
       data-iconname={currentIcon.name}
-      data-size={size}
+      data-size={resolveSize(size)}
       data-tooltip-id={tooltipId}
       data-tooltip-content={tooltipContent}
       {...rest}

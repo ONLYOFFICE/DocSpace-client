@@ -39,9 +39,11 @@ import { zIndex as z } from "../../../../themes/zIndex";
 const GroupMenuItem = ({
   item,
   isBlocked,
+  dataTestId,
 }: {
   item: TGroupMenuItem;
   isBlocked?: boolean;
+  dataTestId?: string;
 }) => {
   const buttonRef = React.useRef<HTMLButtonElement | null>(null);
 
@@ -73,7 +75,10 @@ const GroupMenuItem = ({
   };
 
   return disabled ? null : (
-    <div data-testid="group-menu-item" className={styles.groupMenuItem}>
+    <div
+      data-testid={dataTestId ?? "group-menu-item"}
+      className={styles.groupMenuItem}
+    >
       <Button
         id={id}
         className={classNames(styles.button, styles.overrideNativeStyles, {
@@ -99,9 +104,7 @@ const GroupMenuItem = ({
           {options?.map((option) => {
             const { key, ...rest } = option;
 
-            return (
-              <DropDownItem key={option.key} {...rest} setOpen={setOpen} />
-            );
+            return <DropDownItem key={key} {...rest} setOpen={setOpen} />;
           })}
         </DropDown>
       ) : null}

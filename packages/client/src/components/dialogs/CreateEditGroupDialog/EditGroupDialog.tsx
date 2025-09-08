@@ -232,6 +232,7 @@ const EditGroupDialog = ({
         <ModalDialog.Footer>
           <Button
             id="edit-group-modal_submit"
+            testId="edit_group_save_button"
             tabIndex={5}
             label={t("Common:SaveButton")}
             size={ButtonSize.normal}
@@ -243,6 +244,7 @@ const EditGroupDialog = ({
           />
           <Button
             id="edit-group-modal_cancel"
+            testId="edit_group_cancel_button"
             tabIndex={5}
             label={t("Common:CancelButton")}
             size={ButtonSize.normal}

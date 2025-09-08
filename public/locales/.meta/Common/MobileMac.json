@@ -3,7 +3,7 @@
   "content": "Download {{organizationName}} Desktop Editors for macOS",
   "content_en_sha1_hash": "1caf2b6b576ac3a6346e411a1ffb2a2f8bcc6b87",
   "created_at": "2025-05-19T21:30:46.585Z",
-  "updated_at": "2025-08-11T09:02:44.077Z",
+  "updated_at": "2025-08-21T11:22:39.947Z",
   "comment": {
     "text": "This translation key is used to display a link to download desktop editors for macOS from an organization's website. It appears as part of a button in a UI component, and its content will vary based on the organization's name.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/article/sub-components/Apps.tsx",
-      "line_number": 96,
-      "context": "onClick={() => window.open(downloaddesktopUrl)}\n iconName={MacOSReactSvgUrl}\n size={32}\n isFill\n hoverColor={theme.filesArticleBody.downloadAppList.macHoverColor}\n title={t(\"Common:MobileMac\", {\n organizationName: logoText,\n })}\n />\n ) : null}",
+      "line_number": 94,
+      "context": "className={styles.macOsIcon}\n onClick={() => window.open(downloaddesktopUrl)}\n iconName={MacOSReactSvgUrl}\n size={32}\n isFill\n title={t(\"Common:MobileMac\", {\n organizationName: logoText,\n })}\n />\n ) : null}",
       "module": "/packages/shared"
     }
   ],

@@ -41,10 +41,10 @@ const contextCss = css`
 
 export const StyledTableContainer = styled(TableContainer)`
   :has(
-      .table-container_body
-        .table-list-item:first-child:first-child
-        > .table-row-selected
-    ) {
+    .table-container_body
+      .table-list-item:first-child:first-child
+      > .table-row-selected
+  ) {
     .table-container_header {
       border-image-slice: 1;
       border-image-source: ${(props) =>

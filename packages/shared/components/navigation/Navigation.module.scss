@@ -1,5 +1,4 @@
 @use "../../styles/mixins";
-@use "../../styles/common-icons-style";
 @use "../../styles/variables/colors";
 @use "../../styles/z-index" as z;
 
@@ -147,6 +146,8 @@
 }
 
 .textContainer {
+  @include mixins.no-user-select;
+
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -207,6 +208,8 @@
 }
 
 .warningText {
+  @include mixins.no-user-select;
+
   box-sizing: border-box;
   height: 32px;
   padding: 8px 12px;

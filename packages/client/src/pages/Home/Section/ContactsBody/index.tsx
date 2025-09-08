@@ -48,6 +48,7 @@ type SectionBodyContentProps = {
   currentView: string;
   isUsersLoading?: UsersStore["isUsersLoading"];
   selectUser?: UsersStore["selectUser"];
+  clearSelection: UsersStore["clearSelection"];
   setPeopleSelection?: UsersStore["setSelection"];
   setPeopleBufferSelection?: UsersStore["setBufferSelection"];
   setGroupsSelection?: GroupsStore["setSelection"];
@@ -64,6 +65,10 @@ type SectionBodyContentProps = {
   openItem?: ContactsHotkeysStore["openItem"];
   onClickBack?: FilesActionStore["onClickBack"];
   getTfaType?: TfaStore["getTfaType"];
+  enableSelection: ContactsHotkeysStore["enableSelection"];
+  viewAs: PeopleStore["viewAs"];
+  membersSelection: UsersStore["selection"];
+  groupsSelection: GroupsStore["selection"];
 };
 
 const SectionBodyContent = (props: SectionBodyContentProps) => {
@@ -75,6 +80,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     setGroupsBufferSelection,
     setChangeOwnerDialogVisible,
     selectUser,
+    clearSelection,
     enabledHotkeys,
     isUsersLoading,
     selectBottom,
@@ -87,9 +93,16 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     openItem,
     onClickBack,
     getTfaType,
+    enableSelection,
+    viewAs,
+    membersSelection,
+    groupsSelection,
   } = props;
 
   const location = useLocation();
+
+  const selection =
+    currentView !== "groups" ? membersSelection : groupsSelection;
 
   useAccountsHotkeys({
     enabledHotkeys: enabledHotkeys!,
@@ -101,6 +114,9 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     deselectAll: deselectAll!,
     openItem: openItem!,
     onClickBack: onClickBack!,
+    enableSelection,
+    viewAs,
+    selection,
   });
 
   const onMouseDown = useCallback(
@@ -142,6 +158,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     }
 
     if (location?.state?.user) {
+      clearSelection();
       selectUser!(location?.state?.user);
     }
   }, [
@@ -178,19 +195,23 @@ export default inject(
       contactsHotkeysStore,
 
       enabledHotkeys,
+      viewAs,
     } = peopleStore;
     const {
       isFiltered,
       isUsersLoading,
 
       selectUser,
+      clearSelection,
       setSelection: setPeopleSelection,
       setBufferSelection: setPeopleBufferSelection,
+      selection: membersSelection,
     } = usersStore!;
 
     const {
       setSelection: setGroupsSelection,
       setBufferSelection: setGroupsBufferSelection,
+      selection: groupsSelection,
     } = groupsStore!;
 
     const { setChangeOwnerDialogVisible } = dialogStore!;
@@ -205,6 +226,8 @@ export default inject(
       selectAll,
       deselectAll,
       openItem,
+
+      enableSelection,
     } = contactsHotkeysStore!;
 
     const { onClickBack } = filesActionsStore;
@@ -219,6 +242,7 @@ export default inject(
       setGroupsBufferSelection,
       setChangeOwnerDialogVisible,
       selectUser,
+      clearSelection,
       enabledHotkeys,
       isUsersLoading,
 
@@ -233,6 +257,11 @@ export default inject(
       onClickBack,
 
       getTfaType,
+
+      enableSelection,
+      viewAs,
+      membersSelection,
+      groupsSelection,
     };
   },
 )(

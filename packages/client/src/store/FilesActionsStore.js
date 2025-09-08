@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import FavoritesReactSvgUrl from "PUBLIC_DIR/images/favorites.react.svg?url";
+// import FavoritesFillReactSvgUrl from "PUBLIC_DIR/images/favorite.fill.react.svg?url";
 import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import CopyToReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
@@ -84,6 +84,11 @@ import {
 } from "@docspace/shared/utils";
 import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
 import {
+  isFile as isFileCheck,
+  isFolder as isFolderCheck,
+} from "@docspace/shared/utils/typeGuards";
+
+import {
   FILTER_ARCHIVE_DOCUMENTS,
   FILTER_ROOM_DOCUMENTS,
 } from "@docspace/shared/utils/filterConstants";
@@ -101,6 +106,7 @@ import {
   frameCallEvent,
   getConvertedSize,
   getObjectByLocation,
+  splitFileAndFolderIds,
 } from "@docspace/shared/utils/common";
 import uniqueid from "lodash/uniqueId";
 import FilesFilter from "@docspace/shared/api/files/filter";
@@ -539,7 +545,7 @@ class FilesActionStore {
             }
 
             if (currentFolderId) {
-              SocketHelper.emit(SocketCommands.RefreshFolder, currentFolderId);
+              SocketHelper?.emit(SocketCommands.RefreshFolder, currentFolderId);
             }
           })
           .finally(() => {
@@ -1247,37 +1253,40 @@ class FilesActionStore {
       });
   };
 
-  getFilesInfo = (items) => {
-    const requests = [];
-    let i = items.length;
-    while (i !== 0) {
-      requests.push(this.filesStore.getFileInfo(items[i - 1]));
-      i--;
-    }
+  getItemsInfo = (items) => {
+    const requests = items
+      .map((item) => {
+        if (isFolderCheck(item)) {
+          return this.filesStore.getFolderInfo(item.id);
+        }
+        if (isFileCheck(item)) {
+          return this.filesStore.getFileInfo(item.id);
+        }
+        return null;
+      })
+      .filter(Boolean);
+
     return Promise.all(requests);
   };
 
-  setFavoriteAction = (action, id) => {
+  setFavoriteAction = (action, items) => {
     const { fetchFavoritesFolder, setSelected } = this.filesStore;
-
-    const items = Array.isArray(id) ? id : [id];
+    const { fileIds, folderIds } = splitFileAndFolderIds(items);
 
     switch (action) {
       case "mark":
         return api.files
-          .markAsFavorite(items)
-          .then(() => {
-            return this.getFilesInfo(items);
-          })
+          .markAsFavorite(fileIds, folderIds)
+          .then(() => this.getItemsInfo(items))
           .then(() => setSelected("close"));
 
       case "remove":
         return api.files
-          .removeFromFavorite(items)
+          .removeFromFavorite(fileIds, folderIds)
           .then(() => {
             return this.treeFoldersStore.isFavoritesFolder
               ? fetchFavoritesFolder(this.selectedFolderStore.id)
-              : this.getFilesInfo(items);
+              : this.getItemsInfo(items);
           })
           .then(() => setSelected("close"));
       default:
@@ -1925,6 +1934,7 @@ class FilesActionStore {
       try {
         await this.uploadDataStore.itemOperationToFolder(operationData);
       } catch (err) {
+        console.error(err);
         setBufferSelection(null);
       }
     }
@@ -2424,14 +2434,12 @@ class FilesActionStore {
   getRecentFolderOptions = (itemsCollection, t) => {
     const download = this.getOption("download", t);
     const downloadAs = this.getOption("downloadAs", t);
-    const copy = this.getOption("copy", t);
-    const showInfo = this.getOption("showInfo", t);
+    const showInfo = this.getOption("show-info", t);
     const removeFromRecent = this.getOption("remove-from-recent", t);
 
     itemsCollection
       .set("download", download)
       .set("downloadAs", downloadAs)
-      .set("copy", copy)
       .set("showInfo", showInfo)
       .set("removeFromRecent", removeFromRecent);
 
@@ -2480,7 +2488,7 @@ class FilesActionStore {
   };
 
   getFavoritesFolderOptions = (itemsCollection, t) => {
-    const { selection } = this.filesStore;
+    // const { selection } = this.filesStore;
     const download = this.getOption("download", t);
     const downloadAs = this.getOption("downloadAs", t);
     const copy = this.getOption("copy", t);
@@ -2490,17 +2498,16 @@ class FilesActionStore {
       .set("download", download)
       .set("downloadAs", downloadAs)
       .set("copy", copy)
-      .set("delete", {
+      /* .set("delete", {
         label: t("RemoveFromFavorites"),
         alt: t("RemoveFromFavorites"),
-        iconUrl: FavoritesReactSvgUrl,
+        iconUrl: FavoritesFillReactSvgUrl,
         onClick: () => {
-          const items = selection.map((item) => item.id);
-          this.setFavoriteAction("remove", items)
+          this.setFavoriteAction("remove", selection)
             .then(() => toastr.success(t("RemovedFromFavorites")))
             .catch((err) => toastr.error(err));
         },
-      })
+      }) */
       .set("showInfo", showInfo);
 
     return this.convertToArray(itemsCollection);
@@ -2537,7 +2544,7 @@ class FilesActionStore {
       isShareFolder,
       isRoomsFolder,
       isArchiveFolder,
-      isRecentTab,
+      isRecentFolder,
       isTemplatesFolder,
     } = this.treeFoldersStore;
 
@@ -2553,7 +2560,7 @@ class FilesActionStore {
 
     if (isShareFolder) return this.getShareFolderOptions(itemsCollection, t);
 
-    if (isRecentTab) return this.getRecentFolderOptions(itemsCollection, t);
+    if (isRecentFolder) return this.getRecentFolderOptions(itemsCollection, t);
 
     if (isArchiveFolder)
       return this.getArchiveRoomsFolderOptions(itemsCollection, t);
@@ -2683,6 +2690,21 @@ class FilesActionStore {
         return;
       }
 
+      if (fileItemsList && enablePlugins) {
+        let currPluginItem = null;
+
+        fileItemsList.forEach((i) => {
+          if (i.key === item.fileExst) currPluginItem = i.value;
+        });
+
+        if (currPluginItem) {
+          const correctDevice = currPluginItem.devices
+            ? currPluginItem.devices.includes(currentDeviceType)
+            : true;
+          if (correctDevice) return currPluginItem.onClick(item);
+        }
+      }
+
       if (canConvert) {
         setConvertItem({ ...item, isOpen: true });
         setConvertDialogData({
@@ -2722,21 +2744,6 @@ class FilesActionStore {
         window.history.pushState("", "", url);
 
         return;
-      }
-
-      if (fileItemsList && enablePlugins) {
-        let currPluginItem = null;
-
-        fileItemsList.forEach((i) => {
-          if (i.key === item.fileExst) currPluginItem = i.value;
-        });
-
-        if (currPluginItem) {
-          const correctDevice = currPluginItem.devices
-            ? currPluginItem.devices.includes(currentDeviceType)
-            : true;
-          if (correctDevice) return currPluginItem.onClick(item);
-        }
       }
 
       if (!item.security.Download) {
@@ -3304,6 +3311,7 @@ class FilesActionStore {
       this.setFilesOrder(current, newReplaceable, indexMovedFromBottom);
       this.filesStore.setSelected("none");
     } catch (e) {
+      console.error(e);
       toastr.error(t("Files:ErrorChangeIndex"));
     }
   };
@@ -3318,6 +3326,7 @@ class FilesActionStore {
         await changeIndex(items);
       }
     } catch (e) {
+      console.error(e);
       toastr.error(t("Files:ErrorChangeIndex"));
     }
   };
@@ -3332,6 +3341,7 @@ class FilesActionStore {
       setIsIndexEditingMode(false);
       this.updateCurrentFolder(true, operationId);
     } catch (e) {
+      console.error(e);
       toastr.error(t("Files:ErrorChangeIndex"));
     }
   };

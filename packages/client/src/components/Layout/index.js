@@ -40,15 +40,11 @@ import {
 import { zIndex } from "@docspace/shared/themes";
 
 const StyledContainer = styled.div`
-  user-select: none;
   width: 100%;
   height: 100dvh;
 
   #customScrollBar {
     z-index: ${zIndex.base};
-    > .scroll-wrapper > .scroller > .scroll-body {
-      -webkit-user-select: none;
-    }
   }
 
   ${(props) =>

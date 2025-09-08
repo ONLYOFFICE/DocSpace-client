@@ -38,12 +38,14 @@ import OutlineReactSvgUrl from "PUBLIC_DIR/images/outline-true.react.svg?url";
 import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 
-import { ShareAccessRights } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
-import { copyRoomShareLink } from "@docspace/shared/components/share/Share.helpers";
+import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
+import { ShareLinkService } from "@docspace/shared/services/share-link.service";
+import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
 import LinkRowComponent from "@docspace/shared/components/share/sub-components/LinkRow";
 
 import type { TFileLink } from "@docspace/shared/api/files/types";
+
 import type { TOption } from "@docspace/shared/components/combobox";
 
 import { LinkRowProps } from "../Members.types";
@@ -53,22 +55,21 @@ const MIN_LOADER_TIME = 200;
 const LinkRow = (props: LinkRowProps) => {
   const {
     link,
-    roomId,
     setLinkParams,
     setEditLinkPanelIsVisible,
     setDeleteLinkDialogVisible,
     setEmbeddingPanelData,
     isArchiveFolder,
     setIsScrollLocked,
-    isPublicRoomType,
-    isFormRoom,
-    isCustomRoom,
-    isPrimaryLink,
-    editExternalLink,
     setExternalLink,
     deleteExternalLink,
+    item,
   } = props;
 
+  const availableExternalRights = item.availableExternalRights;
+
+  const isFormRoom = item.roomType === RoomsType.FormRoom;
+  const isPublicRoomType = item.roomType === RoomsType.PublicRoom;
   const { t } = useTranslation([
     "SharingPanel",
     "Files",
@@ -88,14 +89,10 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const onEditLink = () => {
-    setEditLinkPanelIsVisible!(true);
-    setLinkParams!({
-      isEdit: true,
+    setEditLinkPanelIsVisible?.(true);
+    setLinkParams?.({
       link,
-      roomId,
-      isPublic: isPublicRoomType,
-      isFormRoom,
-      isCustomRoom,
+      item,
     });
     onCloseContextMenu();
   };
@@ -103,17 +100,14 @@ const LinkRow = (props: LinkRowProps) => {
   const onCopyPassword = () => {
     if (password) {
       copy(password);
-      toastr.success(t("Files:PasswordSuccessfullyCopied"));
+      toastr.success(t("Common:PasswordSuccessfullyCopied"));
     }
   };
 
   const onEmbeddingClick = () => {
     setLinkParams!({
       link,
-      roomId,
-      isPublic: isPublicRoomType,
-      isFormRoom,
-      isCustomRoom,
+      item,
     });
     setEmbeddingPanelData!({ visible: true });
     onCloseContextMenu();
@@ -122,17 +116,14 @@ const LinkRow = (props: LinkRowProps) => {
   const onDeleteLink = () => {
     setLinkParams!({
       link,
-      roomId,
-      isPublic: isPublicRoomType,
-      isFormRoom,
-      isCustomRoom,
+      item,
     });
     setDeleteLinkDialogVisible!(true);
     onCloseContextMenu();
   };
 
   const onCopyExternalLink = () => {
-    copyRoomShareLink(link, t as TFunction);
+    copyShareLink(item, link, t as TFunction);
     onCloseContextMenu();
   };
 
@@ -144,7 +135,7 @@ const LinkRow = (props: LinkRowProps) => {
     return [
       {
         key: "edit-link-key",
-        label: t("Files:LinkSettings"),
+        label: t("Common:LinkSettings"),
         icon: SettingsReactSvgUrl,
         onClick: onEditLink,
       },
@@ -164,7 +155,7 @@ const LinkRow = (props: LinkRowProps) => {
       },
       {
         key: "embedding-settings-key",
-        label: t("Files:Embed"),
+        label: t("Common:Embed"),
         icon: CodeReactSvgUrl,
         onClick: onEmbeddingClick,
         disabled: isDisabled,
@@ -177,7 +168,7 @@ const LinkRow = (props: LinkRowProps) => {
         key: "delete-link-key",
         label:
           primary && (isPublicRoomType || isFormRoom)
-            ? t("Files:RevokeLink")
+            ? t("Common:RevokeLink")
             : t("Common:Delete"),
         icon:
           primary && (isPublicRoomType || isFormRoom)
@@ -194,18 +185,15 @@ const LinkRow = (props: LinkRowProps) => {
     const startLoaderTime = new Date();
 
     try {
-      const linkData = (await editExternalLink!(roomId, newLink)) as TFileLink;
+      const linkData = await ShareLinkService.editLink(item, newLink);
       setExternalLink!(linkData);
       setLinkParams!({
         link: linkData,
-        roomId,
-        isPublic: isPublicRoomType,
-        isFormRoom,
-        isCustomRoom,
+        item,
       });
 
       if (linkData) {
-        copyRoomShareLink(linkData, t);
+        copyShareLink(item, linkData, t);
       }
     } catch (err: unknown) {
       console.log(err);
@@ -228,7 +216,7 @@ const LinkRow = (props: LinkRowProps) => {
     setLoadingLinks([removeLink.sharedTo.id]);
 
     try {
-      await editExternalLink!(roomId, {
+      await ShareLinkService.editLink(item, {
         ...removeLink,
         access: ShareAccessRights.None,
       });
@@ -251,14 +239,27 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const changeExpirationOption = async (
-    linkData: TFileLink,
+    _linkData: TFileLink,
     expirationDate: moment.Moment | null,
   ) => {
     const newLink = { ...link };
     newLink.sharedTo.expirationDate = expirationDate
-      ? moment(expirationDate)
+      ? moment(expirationDate).toISOString()
       : null;
     editExternalLinkAction(newLink);
+  };
+
+  const changeShareOption = (option: TOption): void => {
+    const newLink = { ...link };
+
+    if ("internal" in option && typeof option.internal === "boolean")
+      newLink.sharedTo.internal = option.internal;
+
+    editExternalLinkAction(newLink);
+  };
+
+  const onCopyLink = (linkArg: TFileLink) => {
+    copyShareLink(item, linkArg, t);
   };
 
   return (
@@ -270,11 +271,13 @@ const LinkRow = (props: LinkRowProps) => {
       onCloseContextMenu={onCloseContextMenu}
       removedExpiredLink={removedExpiredLink}
       isRoomsLink
-      isPrimaryLink={isPrimaryLink ?? false}
       onAccessRightsSelect={onAccessRightsSelect}
       changeExpirationOption={changeExpirationOption}
       isArchiveFolder={isArchiveFolder!}
-      isFormRoom={isFormRoom}
+      isPublicRoom={isPublicRoomType}
+      changeShareOption={changeShareOption}
+      availableExternalRights={availableExternalRights}
+      onCopyLink={onCopyLink}
     />
   );
 };
@@ -291,8 +294,7 @@ export default inject<TStore>(
     } = dialogsStore;
     const { isArchiveFolderRoot } = treeFoldersStore;
 
-    const { editExternalLink, setExternalLink, deleteExternalLink } =
-      publicRoomStore;
+    const { setExternalLink, deleteExternalLink } = publicRoomStore;
 
     return {
       isArchiveFolder: isArchiveFolderRoot,
@@ -302,9 +304,9 @@ export default inject<TStore>(
       setDeleteLinkDialogVisible,
       setEmbeddingPanelData,
 
-      editExternalLink,
       setExternalLink,
       deleteExternalLink,
+
       setIsScrollLocked,
     };
   },

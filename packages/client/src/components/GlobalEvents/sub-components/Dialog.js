@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useCallback, useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { isMobile, isIOS } from "react-device-detect";
 
@@ -47,6 +47,7 @@ const Dialog = ({
   options,
   selectedOption,
   onSelect,
+  onChange,
   onSave,
   onCancel,
   onClose,
@@ -55,6 +56,8 @@ const Dialog = ({
   keepNewFileName,
   setKeepNewFileName,
   withForm,
+  errorText,
+  isAutoFocusOnError,
 }) => {
   const [value, setValue] = useState("");
 
@@ -62,6 +65,14 @@ const Dialog = ({
   const [isDisabled, setIsDisabled] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
+
+  const hasError = Boolean(errorText) || isError;
+
+  // Generate test ID prefix based on dialog title
+  const getTestIdPrefix = useCallback(() => {
+    if (!title) return "dialog";
+    return title.toLowerCase().replace(/\s+/g, "_");
+  }, [title]);
 
   const onCancelAction = useCallback(
     (e) => {
@@ -78,10 +89,15 @@ const Dialog = ({
   );
 
   const onSaveAction = useCallback(
-    (e) => {
+    async (e) => {
       setIsDisabled(true);
-      isCreateDialog && isChecked && setKeepNewFileName(isChecked);
-      onSave && onSave(e, value);
+      const keepNewFileNamePromise =
+        isCreateDialog && isChecked && setKeepNewFileName(isChecked);
+
+      const savePromise = onSave && onSave(e, value);
+
+      await Promise.all([keepNewFileNamePromise, savePromise]);
+      setIsDisabled(false);
     },
     [onSave, isCreateDialog, value, isChecked, setKeepNewFileName],
   );
@@ -90,9 +106,10 @@ const Dialog = ({
     (e) => {
       if (e.keyCode === 27) onCancelAction(e);
 
-      if (e.keyCode === 13 && !withForm && !isError) onSaveAction(e);
+      if (e.keyCode === 13 && !withForm && !hasError && !isDisabled)
+        onSaveAction(e);
     },
-    [onCancelAction, onSaveAction, withForm, isError],
+    [onCancelAction, onSaveAction, withForm, hasError, isDisabled],
   );
 
   useEffect(() => {
@@ -117,11 +134,12 @@ const Dialog = ({
     };
   }, [onKeyUpHandler]);
 
-  const onChange = useCallback(
+  const onChangeAction = useCallback(
     (e) => {
       let newValue = e.target.value;
 
       newValue = removeEmojiCharacters(newValue);
+      onChange?.(newValue);
       if (newValue.match(folderFormValidation)) {
         setIsError(true);
       } else {
@@ -142,6 +160,17 @@ const Dialog = ({
     isCreateDialog && setIsChecked((val) => !val);
   };
 
+  useEffect(() => {
+    if (hasError && isAutoFocusOnError) {
+      setTimeout(() => {
+        const input = document?.getElementById("create-text-input");
+        if (input) {
+          input.focus();
+        }
+      }, 50);
+    }
+  }, [hasError, isAutoFocusOnError]);
+
   return (
     <ModalDialog
       withForm={withForm}
@@ -154,10 +183,10 @@ const Dialog = ({
       <ModalDialog.Header>{title}</ModalDialog.Header>
       <ModalDialog.Body>
         <FieldContainer
-          hasError={isError}
+          hasError={hasError}
           labelVisible={false}
           errorMessageWidth="100%"
-          errorMessage={t("Common:ContainsSpecCharacter")}
+          errorMessage={errorText || t("Common:ContainsSpecCharacter")}
           removeMargin
         >
           <TextInput
@@ -168,10 +197,11 @@ const Dialog = ({
             value={value}
             isAutoFocussed
             tabIndex={1}
-            onChange={onChange}
+            onChange={onChangeAction}
             onFocus={onFocus}
             isDisabled={isDisabled}
             maxLength={165}
+            testId={`${getTestIdPrefix()}_text_input`}
           />
         </FieldContainer>
         {isCreateDialog && extension ? (
@@ -188,6 +218,7 @@ const Dialog = ({
               label={t("Common:DontAskAgain")}
               isChecked={isChecked}
               onChange={onChangeCheckbox}
+              dataTestId={`${getTestIdPrefix()}_dont_ask_again`}
             />
           </div>
         ) : null}
@@ -198,6 +229,7 @@ const Dialog = ({
             options={options}
             selectedOption={selectedOption}
             onSelect={onSelect}
+            dataTestId={`${getTestIdPrefix()}_combobox`}
           />
         ) : null}
       </ModalDialog.Body>
@@ -211,8 +243,9 @@ const Dialog = ({
           scale
           primary
           isLoading={isDisabled}
-          isDisabled={isDisabled || isError}
+          isDisabled={isDisabled || hasError}
           onClick={onSaveAction}
+          testId={`${getTestIdPrefix()}_save_button`}
         />
         <Button
           className="cancel-button"
@@ -222,6 +255,7 @@ const Dialog = ({
           scale
           isDisabled={isDisabled}
           onClick={onCancelAction}
+          testId={`${getTestIdPrefix()}_cancel_button`}
         />
       </ModalDialog.Footer>
     </ModalDialog>

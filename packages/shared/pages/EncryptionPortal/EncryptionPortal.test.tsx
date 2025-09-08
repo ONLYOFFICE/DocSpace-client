@@ -25,12 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen, waitFor } from "@testing-library/react";
+import { screen, waitFor, act, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { EncryptionPortal } from "./index";
 
-import { renderWithTheme } from "../../utils/render-with-theme";
 import SocketHelper, { SocketEvents } from "../../utils/socket";
 import * as settingsApi from "../../api/settings";
 
@@ -48,6 +47,7 @@ jest.mock("../../utils/socket", () => ({
 // Mock the settings API
 jest.mock("../../api/settings", () => ({
   getEncryptionProgress: jest.fn().mockResolvedValue(50),
+  getEncryptionSettings: jest.fn().mockResolvedValue({ status: 1 }),
 }));
 
 // Mock the utils
@@ -65,17 +65,18 @@ jest.mock("react-i18next", () => ({
 
 describe("EncryptionPortal", () => {
   // Add a test for the loader state
-  test("renders loader when not ready", () => {
+  test("renders loader when not ready", async () => {
     // Mock the useTranslation hook to return ready: false
     jest
-      // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
+
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
       .spyOn(require("react-i18next"), "useTranslation")
       .mockImplementation(() => ({
         t: (key: string) => key,
         ready: false,
       }));
 
-    renderWithTheme(<EncryptionPortal />);
+    await act(async () => render(<EncryptionPortal />));
 
     expect(screen.getByTestId("preparation-portal-loader")).toBeInTheDocument();
     expect(screen.getByTestId("encryption-portal")).toHaveAttribute(
@@ -85,7 +86,8 @@ describe("EncryptionPortal", () => {
 
     // Restore the original mock
     jest
-      // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
+
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
       .spyOn(require("react-i18next"), "useTranslation")
       .mockImplementation(() => ({
         t: (key: string) => key,
@@ -96,8 +98,8 @@ describe("EncryptionPortal", () => {
     jest.clearAllMocks();
   });
 
-  test("renders state initially", () => {
-    renderWithTheme(<EncryptionPortal />);
+  test("renders state initially", async () => {
+    await act(async () => render(<EncryptionPortal />));
 
     const portalElement = screen.getByTestId("encryption-portal");
     expect(portalElement).toBeInTheDocument();
@@ -106,7 +108,7 @@ describe("EncryptionPortal", () => {
   test("renders progress bar when encryption is in progress", async () => {
     (settingsApi.getEncryptionProgress as jest.Mock).mockResolvedValue(50);
 
-    renderWithTheme(<EncryptionPortal />);
+    await act(async () => render(<EncryptionPortal />));
 
     await waitFor(
       () => {
@@ -148,7 +150,7 @@ describe("EncryptionPortal", () => {
       },
     });
 
-    renderWithTheme(<EncryptionPortal />);
+    await act(async () => render(<EncryptionPortal />));
 
     await waitFor(
       () => {
@@ -178,13 +180,13 @@ describe("EncryptionPortal", () => {
     let socketCallback:
       | ((data: { percentage: number; error: string | null }) => void)
       | undefined;
-    (SocketHelper.on as jest.Mock).mockImplementation((event, callback) => {
+    (SocketHelper?.on as jest.Mock).mockImplementation((event, callback) => {
       if (event === SocketEvents.EncryptionProgress) {
         socketCallback = callback;
       }
     });
 
-    renderWithTheme(<EncryptionPortal />);
+    await act(async () => render(<EncryptionPortal />));
 
     await waitFor(
       () => {
@@ -196,28 +198,28 @@ describe("EncryptionPortal", () => {
 
     // Simulate socket event
     expect(socketCallback).toBeDefined();
-    if (socketCallback) {
-      socketCallback({ percentage: 75, error: null });
+    act(() => {
+      socketCallback?.({ percentage: 75, error: null });
+    });
 
-      await waitFor(
-        () => {
-          const progressText = screen.queryByText(/75\s*%/i);
-          expect(progressText).toBeInTheDocument();
-        },
-        { timeout: 3000 },
-      );
+    await waitFor(
+      () => {
+        const progressText = screen.queryByText(/75\s*%/i);
+        expect(progressText).toBeInTheDocument();
+      },
+      { timeout: 3000 },
+    );
 
-      const progressBar = screen.getByTestId("encryption-progress-bar");
-      const portalBody = screen.getByTestId("encryption-portal-body");
+    const progressBar = screen.getByTestId("encryption-progress-bar");
+    const portalBody = screen.getByTestId("encryption-portal-body");
 
-      expect(progressBar).toBeInTheDocument();
-      expect(progressBar).toHaveAttribute("aria-valuenow", "75");
-      expect(progressBar).toHaveAttribute("data-percent", "75");
-      expect(progressBar).toHaveAttribute("role", "progressbar");
-      expect(progressBar).toHaveAttribute("aria-valuemin", "0");
-      expect(progressBar).toHaveAttribute("aria-valuemax", "100");
-      expect(portalBody).toHaveAttribute("data-progress", "true");
-    }
+    expect(progressBar).toBeInTheDocument();
+    expect(progressBar).toHaveAttribute("aria-valuenow", "75");
+    expect(progressBar).toHaveAttribute("data-percent", "75");
+    expect(progressBar).toHaveAttribute("role", "progressbar");
+    expect(progressBar).toHaveAttribute("aria-valuemin", "0");
+    expect(progressBar).toHaveAttribute("aria-valuemax", "100");
+    expect(portalBody).toHaveAttribute("data-progress", "true");
   });
 
   test("handles socket error events", async () => {
@@ -227,13 +229,13 @@ describe("EncryptionPortal", () => {
     let socketCallback:
       | ((data: { percentage: number; error: string | null }) => void)
       | undefined;
-    (SocketHelper.on as jest.Mock).mockImplementation((event, callback) => {
+    (SocketHelper?.on as jest.Mock).mockImplementation((event, callback) => {
       if (event === SocketEvents.EncryptionProgress) {
         socketCallback = callback;
       }
     });
 
-    renderWithTheme(<EncryptionPortal />);
+    await act(async () => render(<EncryptionPortal />));
 
     await waitFor(
       () => {
@@ -246,29 +248,29 @@ describe("EncryptionPortal", () => {
     // Simulate socket error event
     const socketError = "Socket Error";
     expect(socketCallback).toBeDefined();
-    if (socketCallback) {
-      socketCallback({ percentage: 100, error: socketError });
+    act(() => {
+      socketCallback?.({ percentage: 100, error: socketError });
+    });
 
-      await waitFor(
-        () => {
-          expect(screen.getByText(socketError)).toBeInTheDocument();
-          expect(screen.getByText("Error")).toBeInTheDocument();
-        },
-        { timeout: 3000 },
-      );
+    await waitFor(
+      () => {
+        expect(screen.getByText(socketError)).toBeInTheDocument();
+        expect(screen.getByText("Error")).toBeInTheDocument();
+      },
+      { timeout: 3000 },
+    );
 
-      const errorContainer = screen.getByTestId("encryption-portal-error");
-      const portalElement = screen.getByTestId("encryption-portal");
-      const portalBody = screen.getByTestId("encryption-portal-body");
+    const errorContainer = screen.getByTestId("encryption-portal-error");
+    const portalElement = screen.getByTestId("encryption-portal");
+    const portalBody = screen.getByTestId("encryption-portal-body");
 
-      expect(errorContainer).toBeInTheDocument();
-      expect(errorContainer).toHaveAttribute("data-error", "true");
-      expect(errorContainer).toHaveAttribute("aria-live", "assertive");
-      expect(portalElement).toHaveAttribute("aria-busy", "false");
-      expect(portalElement).toHaveClass("encryptionPortal");
-      expect(portalElement).toHaveClass("error");
-      expect(portalBody).toHaveAttribute("data-error", "true");
-      expect(portalBody).toHaveAttribute("data-socket-error", "true");
-    }
+    expect(errorContainer).toBeInTheDocument();
+    expect(errorContainer).toHaveAttribute("data-error", "true");
+    expect(errorContainer).toHaveAttribute("aria-live", "assertive");
+    expect(portalElement).toHaveAttribute("aria-busy", "false");
+    expect(portalElement).toHaveClass("encryptionPortal");
+    expect(portalElement).toHaveClass("error");
+    expect(portalBody).toHaveAttribute("data-error", "true");
+    expect(portalBody).toHaveAttribute("data-socket-error", "true");
   });
 });

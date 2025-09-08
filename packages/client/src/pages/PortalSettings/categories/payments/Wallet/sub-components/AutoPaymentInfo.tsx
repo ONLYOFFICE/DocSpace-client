@@ -31,7 +31,7 @@ import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 
-import styles from "../styles/AutoPayments.module.scss";
+import styles from "../styles/Wallet.module.scss";
 
 type AutoPaymentInfoProps = {
   onOpen: (e: React.MouseEvent) => void;

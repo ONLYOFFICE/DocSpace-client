@@ -3,7 +3,7 @@
   "content": "Backup room",
   "content_en_sha1_hash": "d713be356f0517828e717778afb3cc8136c8c476",
   "created_at": "2025-05-26T07:15:47.386Z",
-  "updated_at": "2025-08-11T09:02:44.095Z",
+  "updated_at": "2025-09-07T07:53:15.357Z",
   "comment": {
     "text": "This translation key is used to display the label \"Backup room\" in a radio button group within a backup settings page. It is intended for use by users who need to select a specific type of file or resource to back up. This option appears in various UI contexts, including restore backup and manual backup pages.",
     "is_auto": true,
@@ -11,15 +11,21 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/Backup/BackupServiceDialog.tsx",
+      "line_number": 93,
+      "context": "description: t(\"TemporaryDescription\"),\n icon: <ClockIcon />,\n },\n {\n id: \"backup-room\",\n title: t(\"Common:RoomsModule\"),\n description: t(\"BackupRoomDescription\", {\n sectionName: t(\"Common:MyDocuments\"),\n }),\n icon: <ServiceIcon />,\n },",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 507,
+      "line_number": 485,
       "context": "<div className={styles.modules}>\n <RadioButton\n key={0}\n {...commonRadioButtonProps}\n id=\"backup-room\"\n label={t(\"Common:RoomsModule\")}\n name={`${BackupStorageType.DocumentModuleType}`}\n isChecked={isCheckedDocuments}\n isDisabled={isLoadingData}\n testId=\"auto_backup_room_radio_button\"\n />",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 371,
-      "context": "[styles.isDisabled]: isNotPaidPeriod,\n })}\n >\n <RadioButton\n id=\"backup-room\"\n label={t(\"Common:RoomsModule\")}\n name={DOCUMENTS}\n key={1}\n isChecked={isCheckedDocuments}\n isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}\n {...commonRadioButtonProps}",
+      "line_number": 482,
+      "context": "[styles.isDisabled]: additionalDisabled,\n })}\n >\n <RadioButton\n id=\"backup-room\"\n label={t(\"Common:RoomsModule\")}\n name={DOCUMENTS}\n key={1}\n isChecked={isCheckedDocuments}\n isDisabled={additionalDisabled}\n {...commonRadioButtonProps}",
       "module": "/packages/shared"
     },
     {

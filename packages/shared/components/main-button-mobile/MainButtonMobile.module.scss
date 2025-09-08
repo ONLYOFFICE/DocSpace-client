@@ -1,5 +1,4 @@
 @use "../../styles/mixins";
-
 @use "../../styles/variables/colors";
 @use "../../styles/common-icons-style";
 @use "../../styles/z-index" as z;
@@ -214,7 +213,7 @@
   cursor: pointer;
   vertical-align: top !important;
 
-  @include common-icons-style.common-icons-style;
+  @include mixins.common-icons-style;
 }
 
 // ProgressBar styles

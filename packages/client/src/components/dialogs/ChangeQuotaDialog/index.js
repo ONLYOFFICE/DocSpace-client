@@ -51,7 +51,7 @@ const ChangeQuotaDialog = (props) => {
       <ModalDialog.Header>{t("Common:ChangeQuota")}</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledBodyContent>
-          <Text noSelect>{t("Common:SetQuotaStorageLimit")}</Text>
+          <Text>{t("Common:SetQuotaStorageLimit")}</Text>
           <QuotaForm
             onSetQuotaBytesSize={onSetQuotaBytesSize}
             isLoading={isLoading}

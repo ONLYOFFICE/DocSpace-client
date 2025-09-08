@@ -3,7 +3,7 @@
   "content": "Files will be compressed into the <strong>.zip file</strong>",
   "content_en_sha1_hash": "a3f20fa0332e521b74d0bff520f9e7c6989dbd5d",
   "created_at": "2025-05-19T21:30:43.719Z",
-  "updated_at": "2025-08-04T07:30:01.721Z",
+  "updated_at": "2025-08-12T19:46:26.366Z",
   "comment": {
     "text": "This translation key is used to describe the action of compressing files into a zip file. It appears in a download dialog when selecting a format for downloaded files, and its purpose is to inform users about the outcome of their choice.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
       "line_number": 448,
-      "context": "<>\n <div className={styles.downloadDialogBodyContent}>\n <Text noSelect>{t(\"Common:ChooseFormatText\")}.</Text>\n {!isSingleFile ? (\n <Text noSelect>\n <Trans t={t} ns=\"Common\" i18nKey=\"ConvertToZip\" />\n </Text>\n ) : null}\n </div>\n {state.documents.files.length > 0 ? (\n <DownloadContent",
+      "context": "<>\n <div className={styles.downloadDialogBodyContent}>\n <Text>{t(\"Common:ChooseFormatText\")}.</Text>\n {!isSingleFile ? (\n <Text>\n <Trans t={t} ns=\"Common\" i18nKey=\"ConvertToZip\" />\n </Text>\n ) : null}\n </div>\n {state.documents.files.length > 0 ? (\n <DownloadContent",
       "module": "/packages/shared"
     }
   ],

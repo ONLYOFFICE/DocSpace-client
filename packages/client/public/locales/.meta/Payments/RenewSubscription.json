@@ -3,7 +3,7 @@
   "content": "Renew subscription to {{planName}} plan",
   "content_en_sha1_hash": "ab8a1ed47bbc9bb05d92ff4ae2e9cf0620d14a23",
   "created_at": "2025-05-19T21:30:53.723Z",
-  "updated_at": "2025-08-11T18:11:59.275Z",
+  "updated_at": "2025-08-12T19:46:26.222Z",
   "comment": {
     "text": "The translation key \"RenewSubscription\" is used to display a message prompting the user to renew their subscription to a specific plan (\"{{planName}} plan\") in the PortalSettings page.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/PaymentContainer.js",
-      "line_number": 239,
-      "context": "noSelect\n fontSize=\"16px\"\n isBold\n className=\"payment-info_suggestion\"\n >\n <Trans t={t} i18nKey=\"RenewSubscription\" ns=\"Payments\">\n {{ planName: tariffPlanTitle }}\n </Trans>\n </Text>\n );\n }",
+      "line_number": 223,
+      "context": "}\n \n if (isNotPaidPeriod) {\n return (\n <Text fontSize=\"16px\" isBold className=\"payment-info_suggestion\">\n <Trans t={t} i18nKey=\"RenewSubscription\" ns=\"Payments\">\n {{ planName: tariffPlanTitle }}\n </Trans>\n </Text>\n );\n }",
       "module": "/packages/client"
     }
   ],

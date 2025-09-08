@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router";
 import { withTranslation } from "react-i18next";
@@ -51,6 +51,12 @@ const MainContainer = styled.div`
   }
 `;
 
+const TFA_HASH = "#tfa-section";
+const SCROLL_MARGIN_TOP =
+  window.innerWidth > size.mobile && window.innerWidth < size.desktop
+    ? "190px"
+    : "230px";
+
 const TwoFactorAuth = (props) => {
   const {
     t,
@@ -69,6 +75,7 @@ const TwoFactorAuth = (props) => {
   const [showReminder, setShowReminder] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const targetRef = useRef(null);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -102,6 +109,34 @@ const TwoFactorAuth = (props) => {
     if (!(currentDeviceType !== DeviceType.desktop && !isLoading))
       onSettingsSkeletonNotShown("Tfa");
   }, [currentDeviceType, isLoading]);
+
+  const scrollToTarget = () => {
+    targetRef.current.style.scrollMarginTop = SCROLL_MARGIN_TOP;
+    targetRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+    window.history.replaceState(
+      null,
+      null,
+      window.location.pathname + window.location.search,
+    );
+    setType("app");
+  };
+
+  useEffect(() => {
+    if (window.location.hash !== TFA_HASH) return;
+    if (!targetRef?.current) {
+      // If element is not available yet, try again after a small delay
+      const timer = setTimeout(scrollToTarget, 50);
+      return () => clearTimeout(timer);
+    }
+
+    if (targetRef.current) {
+      const timer = setTimeout(scrollToTarget, 700);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   useEffect(() => {
     checkWidth();
@@ -179,7 +214,7 @@ const TwoFactorAuth = (props) => {
   }
 
   return (
-    <MainContainer>
+    <MainContainer id="tfa-section" ref={targetRef}>
       <LearnMoreWrapper withoutExternalLink={!tfaSettingsUrl}>
         <Text fontSize="13px" fontWeight="400">
           {t("TwoFactorAuthEnableDescription", {

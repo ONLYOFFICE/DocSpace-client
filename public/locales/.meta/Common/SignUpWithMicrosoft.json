@@ -3,7 +3,7 @@
   "content": "Sign up with Microsoft",
   "content_en_sha1_hash": "e42ef65d8922b6518d457278329d7e64a6f24601",
   "created_at": "2025-05-19T21:30:48.853Z",
-  "updated_at": "2025-08-11T09:02:44.102Z",
+  "updated_at": "2025-09-07T07:53:15.515Z",
   "comment": {
     "text": "This translation key is used to display the label for a Microsoft sign-up button. It appears on the login form and is translated to support different languages, ensuring a consistent user experience across various regions.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 413,
+      "line_number": 410,
       "context": "return signUp\n ? t(\"Common:SignUpWithLinkedIn\")\n : t(\"Common:SignInWithLinkedIn\");\n case \"microsoft\":\n return signUp\n ? t(\"Common:SignUpWithMicrosoft\")\n : t(\"Common:SignInWithMicrosoft\");\n case \"sso\":\n return signUp ? t(\"Common:SignUpWithSso\") : t(\"Common:SignInWithSso\");\n case \"zoom\":\n return signUp ? t(\"Common:SignUpWithZoom\") : t(\"Common:SignInWithZoom\");",
       "module": "/packages/shared"
     }

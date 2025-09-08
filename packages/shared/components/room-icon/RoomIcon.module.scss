@@ -1,5 +1,6 @@
 @use "../../styles/variables/colors";
 @use "../../styles/z-index" as z;
+@use "../../styles/mixins";
 
 .roomIcon {
   display: flex;
@@ -13,6 +14,7 @@
   img {
     max-width: 100%;
     height: auto;
+    @include mixins.no-user-select;
   }
 
   :global {

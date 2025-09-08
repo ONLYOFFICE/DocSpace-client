@@ -1,0 +1,28 @@
+{
+  "key_path": "GetSuitableApp",
+  "content": "Get a suitable app",
+  "content_en_sha1_hash": "a213d580999f952abf043592cd8e47465943313a",
+  "created_at": "2025-08-12T19:46:18.444Z",
+  "updated_at": "2025-08-12T19:52:25.563Z",
+  "comment": {
+    "text": "This text appears as a label, likely on a button or link, prompting the user to find or select an appropriate application. It's used within the Two-Factor Authentication activation flow to guide users toward setting up a compatible app. Translators should ensure the translation conveys the action of obtaining a suitable application.",
+    "is_auto": true,
+    "updated_at": "2025-08-12T19:52:25.563Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/login/src/app/(root)/confirm/TfaActivation/page.client.tsx",
+      "line_number": 167,
+      "context": "isDisabled\n isFill\n />\n </div>\n <div className=\"description-text\">\n <Text fontWeight={600}>{t(\"GetSuitableApp\")}</Text>\n <Trans\n t={t}\n i18nKey=\"GetSuitableAppDescription\"\n ns=\"Confirm\"\n components={{",
+      "module": "/packages/login"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

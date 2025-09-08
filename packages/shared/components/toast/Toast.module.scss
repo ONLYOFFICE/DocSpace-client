@@ -1,7 +1,4 @@
-@use "../../styles/variables";
-@use "../../styles/variables/colors";
 @use "../../styles/mixins";
-@use "../../styles/common-icons-style";
 @use "../../styles/z-index" as z;
 
 .iconButton {
@@ -311,5 +308,5 @@
 }
 
 .toastrIcon {
-  @include common-icons-style.common-icons-style;
+  @include mixins.common-icons-style;
 }

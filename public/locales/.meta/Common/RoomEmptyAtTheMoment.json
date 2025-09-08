@@ -3,7 +3,7 @@
   "content": "This room is empty at the moment.",
   "content_en_sha1_hash": "3c4268449c6b0a77d6a2e03a4db49e65be91efc6",
   "created_at": "2025-05-19T21:30:48.181Z",
-  "updated_at": "2025-06-02T10:20:51.017Z",
+  "updated_at": "2025-08-29T14:33:37.928Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a room has no content or files at the moment. It appears in an empty room view component, providing context to users when they visit a public room without any content.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 190,
+      "line_number": 193,
       "context": ".with([FolderType.RoomTemplates, P._], () =>\n t(\"EmptyView:EmptyTemplatesDescription\"),\n )\n .with([FolderType.Rooms, P.when(() => isPublicRoom)], () => (\n <>\n <span>{t(\"Common:RoomEmptyAtTheMoment\")}</span>\n <br />\n <span>{t(\"Common:FilesWillAppearHere\")}</span>\n </>\n ))\n .with([FolderType.USER, P.when(() => security?.Create)], () =>",
       "module": "/packages/client"
     }

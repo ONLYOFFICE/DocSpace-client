@@ -138,7 +138,7 @@ const DataManagementWrapper = (props) => {
 
     if (!socketSubscribers.has("backup")) {
       if (!isManagement()) {
-        SocketHelper.emit(SocketCommands.Subscribe, {
+        SocketHelper?.emit(SocketCommands.Subscribe, {
           roomParts: "backup",
         });
       }
@@ -151,10 +151,10 @@ const DataManagementWrapper = (props) => {
     }
 
     return () => {
-      SocketHelper.off(SocketEvents.BackupProgress);
+      SocketHelper?.off(SocketEvents.BackupProgress);
 
       if (!isManagement()) {
-        SocketHelper.emit(SocketCommands.Unsubscribe, {
+        SocketHelper?.emit(SocketCommands.Unsubscribe, {
           roomParts: "backup",
         });
       }
@@ -166,6 +166,7 @@ const DataManagementWrapper = (props) => {
       }
     };
   }, []);
+
   const onSelect = (e) => {
     const url = isManagement()
       ? `/management/settings/backup/${e.id}`
@@ -193,7 +194,13 @@ const DataManagementWrapper = (props) => {
 };
 
 export const Component = inject(
-  ({ settingsStore, setup, currentTariffStatusStore }) => {
+  ({
+    settingsStore,
+    setup,
+    currentTariffStatusStore,
+    currentQuotaStore,
+    backup,
+  }) => {
     const { initSettings } = setup;
 
     const { isNotPaidPeriod } = currentTariffStatusStore;
@@ -206,6 +213,8 @@ export const Component = inject(
       currentDeviceType,
       standalone,
     } = settingsStore;
+    const { setBackupsCount } = backup;
+    const { isFreeTariff, isNonProfit } = currentQuotaStore;
 
     const buttonSize =
       currentDeviceType !== DeviceType.desktop ? "normal" : "small";
@@ -220,6 +229,9 @@ export const Component = inject(
       currentColorScheme,
       currentDeviceType,
       standalone,
+      isFreeTariff,
+      isNonProfit,
+      setBackupsCount,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(DataManagementWrapper)));

@@ -29,6 +29,8 @@ import equal from "fast-deep-equal/react";
 import { isMobileOnly, isMobile, isTablet } from "react-device-detect";
 import classNames from "classnames";
 
+import EmptyIcon from "PUBLIC_DIR/images/empty.svg?url";
+
 import { DropDown } from "../drop-down";
 import { DropDownItem } from "../drop-down-item";
 
@@ -245,6 +247,8 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
     dropDownClassName,
     dropDownTestId,
     dataTestId,
+    noSelect = true,
+    useImageIcon = false,
   } = props;
 
   React.useEffect(() => {
@@ -400,9 +404,19 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
   const comboboxClasses = classNames(styles.combobox, className, styles[size], {
     [styles.scaled]: scaled,
     [styles.isOpen]: isOpen,
+    [styles.noSelect]: noSelect,
     [styles.disableMobileView]: disableMobileView,
     [styles.withoutPadding]: withoutPadding,
   });
+
+  const imageProps = useImageIcon
+    ? {
+        imageIcon: EmptyIcon,
+        imageAlt: selectedOption.label
+          ? selectedOption.label
+          : (selectedOption.key as string),
+      }
+    : {};
 
   return (
     <div
@@ -434,6 +448,8 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
         type={type}
         plusBadgeValue={plusBadgeValue}
         displayArrow={displayArrow}
+        noSelect={noSelect}
+        {...imageProps}
       />
 
       {displayType !== "toggle" ? renderDropDown() : null}

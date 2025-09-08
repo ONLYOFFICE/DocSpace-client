@@ -171,8 +171,6 @@ export type TComboboxProps = {
   title?: string;
   /** Top space */
   topSpace?: number;
-  /** Test id */
-  testId?: string;
   /** Type */
   type?: TCombobox;
   /** Use portal backdrop */
@@ -204,6 +202,10 @@ export type TComboboxProps = {
   shouldShowBackdrop?: boolean;
   /** Data test id */
   dataTestId?: string;
+  /** Disables text selection */
+  noSelect?: boolean;
+  /** Optional flag to use an image icon. */
+  useImageIcon?: boolean;
 };
 
 export type TComboButtonProps = {
@@ -247,6 +249,12 @@ export type TComboButtonProps = {
   plusBadgeValue?: number;
   /** Indicates if arrow should be displayed */
   displayArrow?: boolean;
+  /** Disables text selection */
+  noSelect?: boolean;
+  /** Icon image */
+  imageIcon?: string | React.ElementType | React.ReactElement;
+  /** Image alt */
+  imageAlt?: string;
 };
 
 export interface TComboButtonThemeProps {

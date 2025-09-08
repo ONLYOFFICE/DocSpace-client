@@ -63,9 +63,9 @@ const Modal = ({
   containerVisible,
   isDoubleFooterLine,
 
-  embedded,
   withForm,
   withoutPadding,
+  withoutHeaderMargin,
   hideContent,
 
   isInvitePanelLoader = false,
@@ -157,6 +157,7 @@ const Modal = ({
     headerProps.className,
     {
       [styles.displayTypeModal]: currentDisplayType === "modal",
+      [styles.withoutHeaderMargin]: withoutHeaderMargin,
     },
   );
 

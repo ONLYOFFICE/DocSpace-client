@@ -219,7 +219,7 @@ export default function FilesSelectorClient({
     if (isInit.current) return;
 
     isInit.current = true;
-    SocketHelper.connect(socketUrl, "");
+    SocketHelper?.connect(socketUrl, "");
   }, [socketUrl]);
 
   const getFilesArchiveError = useCallback(() => "", []);

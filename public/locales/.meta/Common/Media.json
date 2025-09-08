@@ -3,7 +3,7 @@
   "content": "Media",
   "content_en_sha1_hash": "0c77aeece8c258113148c6fb487946bf97b34672",
   "created_at": "2025-05-19T21:30:46.398Z",
-  "updated_at": "2025-08-11T09:02:43.928Z",
+  "updated_at": "2025-08-27T10:14:35.264Z",
   "comment": {
     "text": "This translation key is used to display the label for a filter option that categorizes files as \"Media\". It appears in a file browser or list view, allowing users to select files based on their media type. Translators should provide an equivalent phrase for common languages.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 610,
+      "line_number": 613,
       "context": "break;\n case FilterType.ImagesOnly.toString():\n label = t(\"Common:Images\");\n break;\n case FilterType.MediaOnly.toString():\n label = t(\"Common:Media\");\n break;\n case FilterType.FilesOnly.toString():\n label = t(\"Common:Files\");\n break;\n case FilterType.PDFForm.toString():",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 610,
+      "line_number": 613,
       "context": "break;\n case FilterType.ImagesOnly.toString():\n label = t(\"Common:Images\");\n break;\n case FilterType.MediaOnly.toString():\n label = t(\"Common:Media\");\n break;\n case FilterType.FilesOnly.toString():\n label = t(\"Common:Files\");\n break;\n case FilterType.PDFForm.toString():",
       "module": "/packages/client"
     },
@@ -42,7 +42,7 @@
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 361,
+      "line_number": 358,
       "context": "case FilterType.SpreadsheetsOnly:\n return t(\"Common:Spreadsheets\");\n case FilterType.ImagesOnly:\n return t(\"Common:Images\");\n case FilterType.MediaOnly:\n return t(\"Common:Media\");\n case FilterType.ArchiveOnly:\n return t(\"Common:Archives\");\n case FilterType.FilesOnly:\n return t(\"Common:Files\");\n case FilterType.DiagramsOnly:",
       "module": "/packages/shared"
     }

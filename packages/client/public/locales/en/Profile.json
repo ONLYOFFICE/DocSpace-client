@@ -7,6 +7,7 @@
   "DesktopTheme": "Sync with Desktop Editor settings",
   "DesktopThemeDescription": "Automatically switch between light and dark themes depending on the current theme of Desktop Editors.",
   "EditPhoto": "Edit photo",
+  "EmailChangeSuccess": "Your email has been successfully changed.",
   "EmailNotVerified": "Email is not verified",
   "ErrorAccountAlreadyUse": "Linked account already in use by another user",
   "FileManagement": "File management",

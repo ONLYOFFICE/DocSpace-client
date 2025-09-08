@@ -147,7 +147,7 @@ export const CompletedForm = ({
             <Heading level={HeadingLevel.h1}>
               {t("CompletedForm:FormCompletedSuccessfully")}
             </Heading>
-            <Text noSelect>
+            <Text>
               {isAnonym
                 ? t("CompletedForm:DescriptionForAnonymous")
                 : t("CompletedForm:DescriptionForRegisteredUser")}
@@ -167,6 +167,11 @@ export const CompletedForm = ({
                 className="completed-form__download"
                 iconName={isAnonym ? DownloadIconUrl : LinkIconUrl}
                 onClick={isAnonym ? handleDownload : copyLinkFile}
+                dataTestId={
+                  isAnonym
+                    ? "download_form_icon_button"
+                    : "copy_link_icon_button"
+                }
               />
             </Box>
             <FormNumberWrapper>
@@ -196,6 +201,7 @@ export const CompletedForm = ({
                 <Link
                   className="manager__mail link"
                   href={`mailto:${manager.email}`}
+                  data-testid="manager_email_link"
                 >
                   <MailIcon />
                   <span>{manager.email}</span>
@@ -214,6 +220,11 @@ export const CompletedForm = ({
                   : t("CompletedForm:CheckReadyForms")
               }
               onClick={isAnonym ? handleDownload : gotoCompleteFolder}
+              testId={
+                isAnonym
+                  ? "download_form_button"
+                  : "goto_complete_folder_button"
+              }
             />
             {(!isShareFile || isRoomMember) && !isSDK ? (
               <Button
@@ -221,6 +232,7 @@ export const CompletedForm = ({
                 size={ButtonSize.medium}
                 label={t("CompletedForm:BackToRoom")}
                 onClick={handleBackToRoom}
+                testId="back_to_room_button"
               />
             ) : null}
           </ButtonWrapper>
@@ -228,6 +240,7 @@ export const CompletedForm = ({
             className="link"
             href={`/?${fillAgainSearchParams.toString()}`}
             prefetch={false}
+            data-testid="fill_again_link"
           >
             {t("CompletedForm:FillItOutAgain")}
           </Link>

@@ -57,7 +57,7 @@ const AddIdpCertificateModal = (props) => {
 
       <ModalDialog.Body>
         <StyledBodyContent>
-          <Text isBold className="text-area-label" noSelect>
+          <Text isBold className="text-area-label">
             {t("OpenCertificate")}
           </Text>
 

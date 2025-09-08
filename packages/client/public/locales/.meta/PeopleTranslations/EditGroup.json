@@ -3,7 +3,7 @@
   "content": "Edit group",
   "content_en_sha1_hash": "edb57d8eeff83c091697eab4d31079c72abcd3d1",
   "created_at": "2025-05-19T21:30:53.468Z",
-  "updated_at": "2025-08-11T09:02:43.854Z",
+  "updated_at": "2025-09-07T07:53:15.073Z",
   "comment": {
     "text": "EditGroup is used as a label in a modal dialog, appearing on a button to indicate editing of a group. It translates to \"Edit group\" and should be visible when allowing users to modify group settings.",
     "is_auto": true,
@@ -18,13 +18,13 @@
     },
     {
       "file_path": "/packages/client/src/store/contacts/GroupsStore.ts",
-      "line_number": 531,
+      "line_number": 538,
       "context": "if (!isRoomAdmin && !isCollaborator && !item?.isLDAP)\n options.push({\n id: \"edit-group\",\n key: \"edit-group\",\n className: \"group-menu_drop-down\",\n label: t(\"PeopleTranslations:EditGroup\"),\n title: t(\"PeopleTranslations:EditGroup\"),\n icon: PencilReactSvgUrl,\n onClick: () => editGroup(item),\n });",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/GroupsStore.ts",
-      "line_number": 531,
+      "line_number": 538,
       "context": "if (!isRoomAdmin && !isCollaborator && !item?.isLDAP)\n options.push({\n id: \"edit-group\",\n key: \"edit-group\",\n className: \"group-menu_drop-down\",\n label: t(\"PeopleTranslations:EditGroup\"),\n title: t(\"PeopleTranslations:EditGroup\"),\n icon: PencilReactSvgUrl,\n onClick: () => editGroup(item),\n });",
       "module": "/packages/client"
     }

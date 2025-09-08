@@ -1,4 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
 import React from "react";
 import { Meta, StoryFn } from "@storybook/react";
 
@@ -75,7 +74,7 @@ const Template: StoryFn<DragAndDropProps> = (args) => {
 
   const textStyle: React.CSSProperties = {
     margin: 0,
-    color: "#333",
+    color: "var(--text-color)",
     textAlign: "center",
   };
 

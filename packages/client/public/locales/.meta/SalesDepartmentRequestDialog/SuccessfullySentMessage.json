@@ -3,7 +3,7 @@
   "content": "Your message was successfully sent. You will be contacted by the Sales Department.",
   "content_en_sha1_hash": "98daa82292b84195ac631968a95bf10cadaf23da",
   "created_at": "2025-05-19T21:30:53.283Z",
-  "updated_at": "2025-08-04T07:30:01.617Z",
+  "updated_at": "2025-09-07T07:53:15.399Z",
   "comment": {
     "text": "This translation key is used to display a success message when a payment request is sent successfully. The message informs the user that their payment was processed and will be contacted by the Sales Department. It appears in the PaymentStore's sendPaymentRequest function, likely as part of a confirmation dialog or notification after submitting the form.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/PaymentStore.ts",
-      "line_number": 930,
+      "line_number": 1012,
       "context": "message: string,\n t: TTranslation,\n ) => {\n try {\n await api.portal.sendPaymentRequest(email, userName, message);\n toastr.success(t(\"SuccessfullySentMessage\"));\n } catch (e) {\n toastr.error(e as TData);\n }\n };\n }",
       "module": "/packages/client"
     }

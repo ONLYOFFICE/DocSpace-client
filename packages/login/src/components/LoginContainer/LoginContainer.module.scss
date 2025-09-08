@@ -111,6 +111,10 @@
       line-height: 28px;
       color: var(--login-header-color);
 
+      &.confirm-email-change {
+        padding-bottom: 8px;
+      }
+
       @include mixins.mobile {
         overflow: hidden;
         display: block;
@@ -118,6 +122,10 @@
 
         padding-top: 32px;
         padding-bottom: 32px;
+
+        .confirm-email-change {
+          padding-bottom: 8px;
+        }
       }
     }
 
@@ -290,10 +298,6 @@
 
     .code-description {
       color: var(--login-text-colors);
-    }
-
-    .input-block-icon {
-      padding-inline-end: 12px;
     }
 
     .wrapper {

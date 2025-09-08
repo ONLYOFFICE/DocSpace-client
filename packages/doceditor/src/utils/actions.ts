@@ -176,7 +176,7 @@ export async function fileCopyAs(
             }
         : undefined,
     };
-  } catch (e: any) {
+  } catch (e: unknown) {
     const hdrs = await headers();
 
     const hostname = hdrs.get("x-forwarded-host");
@@ -190,10 +190,16 @@ export async function fileCopyAs(
         typeof e === "string"
           ? e
           : {
-              message: e.message,
-              status: e.statusCode,
-              type: e.type,
-              stack: e.stack,
+              message: e instanceof Error ? e.message : String(e),
+              status:
+                e && typeof e === "object" && "statusCode" in e
+                  ? (e as { statusCode: number }).statusCode
+                  : 0,
+              type:
+                e && typeof e === "object" && "type" in e
+                  ? (e as { type: string }).type
+                  : "unknown",
+              stack: e instanceof Error ? (e.stack ?? "") : "",
             },
     };
   }
@@ -270,7 +276,7 @@ export async function createFile(
             }
         : undefined,
     };
-  } catch (e: any) {
+  } catch (e: unknown) {
     const hdrs = await headers();
 
     const hostname = hdrs.get("x-forwarded-host");
@@ -283,10 +289,16 @@ export async function createFile(
         typeof e === "string"
           ? e
           : {
-              message: e.message,
-              status: e.statusCode,
-              type: e.type,
-              stack: e.stack,
+              message: e instanceof Error ? e.message : String(e),
+              status:
+                e && typeof e === "object" && "statusCode" in e
+                  ? (e as { statusCode: number }).statusCode
+                  : 0,
+              type:
+                e && typeof e === "object" && "type" in e
+                  ? (e as { type: string }).type
+                  : "unknown",
+              stack: e instanceof Error ? (e.stack ?? "") : "",
             },
     };
   }

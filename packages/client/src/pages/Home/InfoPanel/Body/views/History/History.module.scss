@@ -202,6 +202,13 @@
   }
 }
 
+.groupLink {
+  &.notClickable {
+    // text-decoration: none;
+    cursor: default;
+  }
+}
+
 .historyBlockTagList {
   margin-top: 8px;
   display: flex;

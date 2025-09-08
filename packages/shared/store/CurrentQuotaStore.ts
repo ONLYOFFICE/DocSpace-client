@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable class-methods-use-this */
 import { makeAutoObservable } from "mobx";
 
 import { setDefaultUserQuota, setDefaultRoomQuota } from "../api/settings";
@@ -49,6 +48,7 @@ import {
   COUNT_FOR_SHOWING_BAR,
   PERCENTAGE_FOR_SHOWING_BAR,
   YEAR_KEY,
+  FREE_BACKUP,
 } from "../constants";
 import { Nullable } from "../types";
 import { UserStore } from "./UserStore";
@@ -212,6 +212,21 @@ class CurrentQuotasStore {
     return result?.value;
   }
 
+  get isBackupPaid() {
+    const result = this.currentPortalQuotaFeatures.get(
+      FREE_BACKUP,
+    ) as TNumericPaymentFeature;
+    return result?.value !== -1;
+  }
+
+  get maxFreeBackups(): number {
+    const result = this.currentPortalQuotaFeatures.get(
+      FREE_BACKUP,
+    ) as TNumericPaymentFeature;
+
+    return result?.value ?? 0;
+  }
+
   get isRestoreAndAutoBackupAvailable() {
     const result = this.currentPortalQuotaFeatures.get(
       "restore",
@@ -234,7 +249,7 @@ class CurrentQuotasStore {
   }
 
   get currentTariffPlanTitle() {
-    return this.currentPortalQuota?.title;
+    return this.currentPortalQuota?.title ?? "";
   }
 
   get quotaCharacteristics() {

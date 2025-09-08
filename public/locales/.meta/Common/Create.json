@@ -3,7 +3,7 @@
   "content": "Create",
   "content_en_sha1_hash": "6e157c5da4410b7e9de85f5c93026b9176e69064",
   "created_at": "2025-05-19T21:30:43.828Z",
-  "updated_at": "2025-08-11T09:02:43.830Z",
+  "updated_at": "2025-09-07T07:53:15.028Z",
   "comment": {
     "text": "This translation key is used to display the label \"Create\" in a button within a modal dialog. It appears as the primary action button when creating a new group and is also shown in other contexts where creation is applicable.",
     "is_auto": true,
@@ -18,26 +18,20 @@
     },
     {
       "file_path": "/packages/client/src/components/GlobalEvents/sub-components/Dialog.js",
-      "line_number": 207,
+      "line_number": 239,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"submit\"\n key=\"GlobalSendBtn\"\n label={isCreateDialog ? t(\"Common:Create\") : t(\"Common:SaveButton\")}\n size=\"normal\"\n type=\"submit\"\n scale\n primary\n isLoading={isDisabled}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditGroupDialog/CreateGroupDialog.tsx",
-      "line_number": 184,
-      "context": "<ModalDialog.Footer>\n <Button\n id=\"create-group-modal_submit\"\n tabIndex={5}\n label={t(\"Common:Create\")}\n size={ButtonSize.normal}\n primary\n scale\n onClick={onCreateGroup}\n isDisabled={",
+      "line_number": 185,
+      "context": "<ModalDialog.Footer>\n <Button\n id=\"create-group-modal_submit\"\n testId=\"create_edit_group_create_button\"\n tabIndex={5}\n label={t(\"Common:Create\")}\n size={ButtonSize.normal}\n primary\n scale\n onClick={onCreateGroup}\n isDisabled={",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js",
       "line_number": 225,
       "context": "const isTemplate = !roomParams.type && !isTemplateSelected;\n \n const dialogHeader = !roomParams.type\n ? t(\"ChooseRoomType\")\n : t(\"Common:CreateRoom\");\n \n return (\n <ModalDialog\n displayType=\"aside\"\n withBodyScroll",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/panels/EditLinkPanel/index.js",
-      "line_number": 359,
-      "context": "<ModalDialog.Footer>\n <Button\n scale\n primary\n size=\"normal\"\n label={isEdit ? t(\"Common:SaveButton\") : t(\"Common:Create\")}\n isDisabled={isDisabledSaveButton}\n onClick={onSave}\n testId=\"edit_link_panel_save_button\"\n />\n <Button",
       "module": "/packages/client"
     },
     {
@@ -48,14 +42,14 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1230,
+      "line_number": 1207,
       "context": "getFormGalleryContextOptions = (item, t, navigate) => {\n return [\n {\n key: \"create\",\n label: t(\"Common:Create\"),\n onClick: () => this.onCreateOform(navigate),\n },\n {\n key: \"template-info\",\n label: t(\"FormGallery:TemplateInfo\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/PasswordChange/page.client.tsx",
-      "line_number": 179,
-      "context": "<Button\n primary\n size={ButtonSize.medium}\n scale\n label={t(\"Common:Create\")}\n tabIndex={5}\n onClick={onSubmit}\n isDisabled={isLoading}\n />\n </>",
+      "line_number": 180,
+      "context": "<Button\n primary\n size={ButtonSize.medium}\n scale\n label={t(\"Common:Create\")}\n tabIndex={5}\n onClick={onSubmit}\n isDisabled={isLoading}\n testId=\"create_password_button\"\n />",
       "module": "/packages/login"
     },
     {
@@ -66,8 +60,8 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 334,
-      "context": "\"manual-backup_buttons\",\n )}\n >\n <Button\n id=\"create-button\"\n label={t(\"Common:Create\")}\n onClick={onMakeTemporaryBackup}\n primary\n isDisabled={!isMaxProgress || pageIsDisabled}\n size={buttonSize}\n testId=\"create_temporary_backup_button\"",
+      "line_number": 444,
+      "context": "\"manual-backup_buttons\",\n )}\n >\n <Button\n id=\"create-button\"\n label={t(\"Common:Create\")}\n onClick={onMakeTemporaryBackup}\n primary\n isDisabled={mainDisabled}\n size={buttonSize}\n testId=\"create_temporary_backup_button\"",
       "module": "/packages/shared"
     },
     {

@@ -93,6 +93,26 @@
     display: flex;
     gap: 13px;
   }
+
+  .windowsIcon {
+    --icon-button-hover-color: #{colors.$windows-color};
+  }
+
+  .macOsIcon {
+    --icon-button-hover-color: var(--files-article-body-download-app-list-mac-hover-color);
+  }
+
+  .linuxIcon {
+    --icon-button-hover-color: #{colors.$linux-color};
+  }
+
+  .androidIcon {
+    --icon-button-hover-color: #{colors.$android-color};
+  }
+
+  .iosIcon {
+    --icon-button-hover-color: var(--files-article-body-download-app-list-mac-hover-color);
+  }
 }
 
 .wrapper {

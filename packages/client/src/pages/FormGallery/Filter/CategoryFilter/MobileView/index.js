@@ -36,11 +36,8 @@ import * as Styled from "./index.styled";
 
 const CategoryFilterMobile = ({
   t,
-
   menuItems,
-
   currentCategory,
-  getTypeOfCategory,
   getCategoryTitle,
   filterOformsByCategory,
   setOformsCurrentCategory,
@@ -163,6 +160,7 @@ const CategoryFilterMobile = ({
                     label={item.label}
                     onClick={() => onOpenMenuItem(item)}
                     style={{ paddingLeft: "0" }}
+                    testId={`category_filter_${item.key}`}
                     isSubMenu
                   />
                 ))
@@ -171,6 +169,7 @@ const CategoryFilterMobile = ({
                     key={category.id}
                     label={getCategoryTitle(category)}
                     onClick={() => onFilterByCategory(category)}
+                    testId={`category_filter_${category.id}`}
                     style={{ paddingLeft: "0" }}
                   />
                 ))}

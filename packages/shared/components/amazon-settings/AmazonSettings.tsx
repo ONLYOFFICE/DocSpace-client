@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable jsx-a11y/tabindex-no-positive */
-
 import classNames from "classnames";
 import { TFunction } from "i18next";
 import { Trans } from "react-i18next";
@@ -310,6 +308,8 @@ const AmazonSettings = ({
           isDisabled={isDisabled}
           tabIndex={2}
           showDisabledItems
+          dataTestId="amazon_settings_region_combobox"
+          dropDownTestId="amazon_settings_region_dropdown"
         />
       </div>
 

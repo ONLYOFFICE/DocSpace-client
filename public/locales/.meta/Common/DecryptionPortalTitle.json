@@ -3,7 +3,7 @@
   "content": "The decryption process in progress",
   "content_en_sha1_hash": "b86e0f9fb7d337435ac35794b69427793f2c847c",
   "created_at": "2025-08-04T07:29:08.253Z",
-  "updated_at": "2025-08-04T08:11:24.853Z",
+  "updated_at": "2025-09-07T07:53:15.491Z",
   "comment": {
     "text": "This text appears as a header within the Decryption Portal, indicating that the decryption process is currently running. It informs the user that the decryption is in progress. Translators should ensure the tone remains informative and reassuring.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/EncryptionPortal/index.tsx",
-      "line_number": 149,
+      "line_number": 152,
       "context": "const headerText = errorMessage\n ? t(\"Error\")\n : statusEncryption === EncryptionStatus.Decrypted ||\n statusEncryption === EncryptionStatus.DecryptionStarted\n ? t(\"DecryptionPortalTitle\")\n : t(\"EncryptionPortalTitle\");\n \n const componentBody = errorMessage ? (\n <Text\n className={styles.encryptionPortalError}",
       "module": "/packages/shared"
     }

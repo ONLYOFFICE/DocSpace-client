@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable jsx-a11y/tabindex-no-positive */
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -123,8 +122,8 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
       visible={visible}
       onClose={onRecoverModalClose}
       displayType={ModalDialogType.modal}
-      data-testid="recover-access-modal"
       aria-labelledby="recover-access-modal-title"
+      dataTestId="recover_access_modal"
     >
       <ModalDialog.Header>{t("Common:RecoverTitle")}</ModalDialog.Header>
       <ModalDialog.Body>
@@ -134,8 +133,7 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
             className={styles.textBody}
             isBold={false}
             fontSize="13px"
-            noSelect
-            data-testid="recover-access-modal-text"
+            dataTestId="recover_access_modal_text"
           >
             {textBody}
           </Text>
@@ -149,7 +147,7 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
                 ? t(`Common:${emailErrorMessage}`)
                 : t("Common:RequiredField")
             }
-            dataTestId="recover-access-modal-email-container"
+            dataTestId="recover_access_modal_email_container"
           >
             <EmailInput
               scale
@@ -167,10 +165,10 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
               onChange={onChangeEmail}
               onValidateInput={onValidateEmail}
               maxLength={255}
-              data-testid="recover-access-modal-email-input"
               aria-label="Email input"
               aria-invalid={emailErr}
               aria-required="true"
+              dataTestId="recover_access_modal_email_input"
             />
           </FieldContainer>
           <FieldContainer
@@ -180,7 +178,7 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
             className={styles.textarea}
             key="text-description"
             errorMessage={t("Common:RequiredField")}
-            dataTestId="recover-access-modal-description-container"
+            dataTestId="recover_access_modal_description_container"
           >
             <Textarea
               tabIndex={2}
@@ -193,10 +191,10 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
               placeholder={t("Common:RecoverDescribeYourProblemPlaceholder")}
               onChange={onChangeDescription}
               maxLength={255}
-              data-testid="recover-access-modal-description-input"
               aria-label="Problem description"
               aria-invalid={descErr}
               aria-required="true"
+              dataTestId="recover_access_modal_description_textarea"
             />
           </FieldContainer>
         </div>
@@ -214,8 +212,8 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
             className={styles.recoverButtonDialog}
             label={loading ? t("Common:Sending") : t("Common:SendButton")}
             onClick={onSendRecoverRequest}
-            data-testid="recover-access-modal-submit"
             aria-label="Send recover request"
+            testId="recover_access_modal_submit_button"
           />
           <Button
             tabIndex={4}
@@ -227,6 +225,7 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
             className={styles.recoverButtonDialog}
             label={t("Common:CancelButton")}
             onClick={onRecoverModalClose}
+            testId="recover_access_modal_close_button"
           />
         </div>
       </ModalDialog.Footer>

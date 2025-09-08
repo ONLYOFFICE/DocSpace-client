@@ -102,7 +102,6 @@ const LoginForm = ({
   const currentCulture = i18n.language;
 
   const message = searchParams?.get("message");
-  const confirmedEmail = searchParams?.get("confirmedEmail");
   const authError = searchParams?.get("authError");
   const referenceUrl = searchParams?.get("referenceUrl");
   const loginData = searchParams?.get("loginData") ?? null;
@@ -193,6 +192,7 @@ const LoginForm = ({
           window.location.replace("/");
         }
       } catch (e) {
+        console.error(e);
         toastr.error(
           t("Common:ProviderNotConnected"),
           t("Common:ProviderLoginError"),
@@ -219,10 +219,17 @@ const LoginForm = ({
   }, [authCallback, currentCulture]);
 
   useEffect(() => {
-    message && setErrorText(message);
-    confirmedEmail && setIdentifier(confirmedEmail);
+    if (message) setErrorText(message);
+    const confirmedData = sessionStorage?.getItem("confirmedData");
+    let email;
 
-    if (confirmedEmail && ready && !emailConfirmedToastShown.current) {
+    if (confirmedData) {
+      email = JSON.parse(atob(confirmedData));
+      setIdentifier(email);
+      sessionStorage.removeItem("confirmedData");
+    }
+
+    if (email && ready && !emailConfirmedToastShown.current) {
       const messageEmailConfirmed = t("MessageEmailConfirmed");
       const messageAuthorize = t("MessageAuthorize");
       const text = `${messageEmailConfirmed} ${messageAuthorize}`;
@@ -230,7 +237,7 @@ const LoginForm = ({
       toastr.success(text);
       emailConfirmedToastShown.current = true;
     }
-  }, [message, confirmedEmail, t, ready, authCallback]);
+  }, [message, t, ready, authCallback]);
 
   useEffect(() => {
     if (passwordChanged && ready && !passwordChangedToastShown.current) {
@@ -306,7 +313,7 @@ const LoginForm = ({
       console.error("parse error", e);
     }
 
-    isDesktop && checkPwd();
+    if (isDesktop) checkPwd();
     const session = !isChecked;
 
     if (client?.isPublic && hash) {
@@ -500,7 +507,7 @@ const LoginForm = ({
   ]);
 
   const onBlurEmail = () => {
-    !identifierValid && setIsEmailErrorShow(true);
+    if (!identifierValid) setIsEmailErrorShow(true);
   };
 
   const onValidateEmail = (res: TValidate) => {
@@ -657,6 +664,7 @@ const LoginForm = ({
         isDisabled={isLoading}
         isLoading={isLoading}
         onClick={onSubmit}
+        testId="login_button"
       />
     </form>
   );

@@ -118,7 +118,7 @@ const UploadXML = (props) => {
     try {
       const newUrl = new URL(url);
       return newUrl.protocol === "http:" || newUrl.protocol === "https:";
-    } catch (err) {
+    } catch {
       return false;
     }
   };
@@ -171,9 +171,7 @@ const UploadXML = (props) => {
             testId="upload_xml_button"
           />
         </div>
-        <Text className="or-text" noSelect>
-          {t("Common:Or")}
-        </Text>
+        <Text className="or-text">{t("Common:Or")}</Text>
 
         <FileInput
           idButton="select-file"

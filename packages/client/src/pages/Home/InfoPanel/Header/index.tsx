@@ -33,6 +33,7 @@ import { AsideHeader } from "@docspace/shared/components/aside-header";
 import { Tabs } from "@docspace/shared/components/tabs";
 import { isLockedSharedRoom } from "@docspace/shared/utils";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
+import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
 
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 import { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
@@ -51,6 +52,8 @@ const InfoPanelHeaderContent = ({
   getIsTrash,
   infoPanelItemsList,
   enablePlugins,
+
+  isRecentFolder,
 }: InfoPanelHeaderContentProps) => {
   const { t } = useTranslation(["Common", "InfoPanel"]);
 
@@ -118,8 +121,10 @@ const InfoPanelHeaderContent = ({
   ];
 
   const isRoomsType =
+    !isRecentFolder &&
     selection &&
     "rootFolderType" in selection &&
+    isRoomUtil(selection) &&
     (selection.rootFolderType === FolderType.Rooms ||
       selection.rootFolderType === FolderType.Archive ||
       selection.rootFolderType === FolderType.RoomTemplates);
@@ -129,8 +134,8 @@ const InfoPanelHeaderContent = ({
   if (
     selection &&
     "canShare" in selection &&
-    !isRoomsType &&
-    selection.canShare
+    selection.canShare &&
+    !isRoomUtil(selection)
   ) {
     tabsData.unshift({
       id: "info_share",
@@ -197,6 +202,7 @@ const InfoPanelHeaderContent = ({
         withoutBorder
         className="header-text"
         isCloseable
+        dataTestId="info_panel_aside_header"
       />
 
       {withTabs ? (
@@ -214,7 +220,12 @@ const InfoPanelHeaderContent = ({
 };
 
 export default inject(
-  ({ settingsStore, infoPanelStore, pluginStore }: TStore) => {
+  ({
+    settingsStore,
+    infoPanelStore,
+    pluginStore,
+    treeFoldersStore,
+  }: TStore) => {
     const { infoPanelItemsList } = pluginStore;
 
     const {
@@ -230,6 +241,8 @@ export default inject(
 
     const selection = infoPanelStore.infoPanelSelection;
 
+    const { isRecentFolder } = treeFoldersStore;
+
     return {
       selection,
       roomsView,
@@ -242,6 +255,8 @@ export default inject(
       infoPanelItemsList,
 
       enablePlugins,
+
+      isRecentFolder,
     };
   },
 )(observer(InfoPanelHeaderContent));

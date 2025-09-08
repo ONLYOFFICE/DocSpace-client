@@ -3,7 +3,7 @@
   "content": "Operation has been successfully completed.",
   "content_en_sha1_hash": "849e11257114c8c8bbc65cf054d9b6da983bcb6d",
   "created_at": "2025-05-19T21:30:49.214Z",
-  "updated_at": "2025-08-11T18:11:59.251Z",
+  "updated_at": "2025-09-07T07:53:15.307Z",
   "comment": {
     "text": "This translation key is used to display a success message when an operation is completed successfully. It appears as a toast notification after an operation is finished, typically in response to user actions such as saving settings or completing a process.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 3331,
-      "context": "const { setIsIndexEditingMode } = this.indexingStore;\n \n try {\n const operationId = uniqueid(\"operation_\");\n await reorderIndex(id);\n toastr.success(t(\"Common:SuccessfullyCompletedOperation\"));\n setIsIndexEditingMode(false);\n this.updateCurrentFolder(true, operationId);\n } catch (e) {\n toastr.error(t(\"Files:ErrorChangeIndex\"));\n }",
+      "line_number": 3340,
+      "context": "const { setIsIndexEditingMode } = this.indexingStore;\n \n try {\n const operationId = uniqueid(\"operation_\");\n await reorderIndex(id);\n toastr.success(t(\"Common:SuccessfullyCompletedOperation\"));\n setIsIndexEditingMode(false);\n this.updateCurrentFolder(true, operationId);\n } catch (e) {\n console.error(e);\n toastr.error(t(\"Files:ErrorChangeIndex\"));",
       "module": "/packages/client"
     },
     {

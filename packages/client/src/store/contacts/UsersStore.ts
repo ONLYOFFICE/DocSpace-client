@@ -288,35 +288,38 @@ class UsersStore {
       }
     };
 
-    SocketHelper.on(SocketEvents.AddUser, addUser);
-    SocketHelper.on(SocketEvents.AddGuest, addUser);
-    SocketHelper.on(SocketEvents.UpdateUser, updateUser);
-    SocketHelper.on(SocketEvents.UpdateGuest, updateUser);
-    SocketHelper.on(SocketEvents.DeleteUser, deleteUser);
-    SocketHelper.on(SocketEvents.DeleteGuest, deleteUser);
-    SocketHelper.on(SocketEvents.ChangeMyType, changeMyType);
+    SocketHelper?.on(SocketEvents.AddUser, addUser);
+    SocketHelper?.on(SocketEvents.AddGuest, addUser);
+    SocketHelper?.on(SocketEvents.UpdateUser, updateUser);
+    SocketHelper?.on(SocketEvents.UpdateGuest, updateUser);
+    SocketHelper?.on(SocketEvents.DeleteUser, deleteUser);
+    SocketHelper?.on(SocketEvents.DeleteGuest, deleteUser);
+    SocketHelper?.on(SocketEvents.ChangeMyType, changeMyType);
 
-    SocketHelper.on(SocketEvents.UpdateGroup, async (value) => {
-      console.log(
-        `[WS] ${SocketEvents.UpdateGroup}: ${value?.id}:${value?.data}`,
-      );
-      const { contactsTab } = this;
+    SocketHelper?.on(
+      SocketEvents.UpdateGroup,
+      async (value: { id: string; data: any }) => {
+        console.log(
+          `[WS] ${SocketEvents.UpdateGroup}: ${value?.id}:${value?.data}`,
+        );
+        const { contactsTab } = this;
 
-      if (contactsTab !== "inside_group") return;
+        if (contactsTab !== "inside_group") return;
 
-      const { id, data } = value;
+        const { id, data } = value;
 
-      if (!data || !id) return;
+        if (!data || !id) return;
 
-      if (this.groupsStore!.currentGroup?.id !== id) return;
+        if (this.groupsStore!.currentGroup?.id !== id) return;
 
-      const group = await api.groups.getGroupById(id, true);
+        const group = await api.groups.getGroupById(id, true);
 
-      runInAction(() => {
-        this.users = group.members ?? [];
-        this.filter.total = this.users.length;
-      });
-    });
+        runInAction(() => {
+          this.users = group.members ?? [];
+          this.filter.total = this.users.length;
+        });
+      },
+    );
   }
 
   setContactsTab = (contactsTab: TContactsTab) => {
@@ -329,18 +332,18 @@ class UsersStore {
             : "users";
 
       if (
-        SocketHelper.socketSubscribers.has(this.roomParts) &&
+        SocketHelper?.socketSubscribers.has(this.roomParts) &&
         this.roomParts !== roomParts
       )
-        SocketHelper.emit(SocketCommands.Unsubscribe, {
+        SocketHelper?.emit(SocketCommands.Unsubscribe, {
           roomParts: this.roomParts,
           ...(this.roomParts === "guests" && { individual: true }),
         });
 
       this.roomParts = roomParts;
 
-      if (!SocketHelper.socketSubscribers.has(roomParts))
-        SocketHelper.emit(SocketCommands.Subscribe, {
+      if (!SocketHelper?.socketSubscribers.has(roomParts))
+        SocketHelper?.emit(SocketCommands.Subscribe, {
           roomParts,
           ...(roomParts === "guests" && { individual: true }),
         });
@@ -412,6 +415,7 @@ class UsersStore {
     filter?: Filter,
     updateFilter = false,
     withFilterLocalStorage = false,
+    contactsTab?: TContactsTab,
   ) => {
     const { currentGroup } = this.groupsStore;
     const filterData = filter ? filter.clone() : Filter.getDefault();
@@ -442,7 +446,12 @@ class UsersStore {
       if (filterObj?.sortOrder) filterData.sortOrder = filterObj.sortOrder;
     }
 
-    if (currentGroup?.id && contactsView === "inside_group") {
+    if (
+      currentGroup?.id &&
+      (contactsTab
+        ? contactsTab === "inside_group"
+        : contactsView === "inside_group")
+    ) {
       filterData.group = currentGroup.id;
     }
 
@@ -450,9 +459,13 @@ class UsersStore {
       filterData.group = null;
     }
 
-    if (this.contactsTab === "guests") {
+    if (
+      contactsTab ? contactsTab === "guests" : this.contactsTab === "guests"
+    ) {
       filterData.area = "guests";
-    } else if (contactsView === "people") {
+    } else if (
+      contactsTab ? contactsTab === "people" : contactsView === "people"
+    ) {
       filterData.area = "people";
     }
 

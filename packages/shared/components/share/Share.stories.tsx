@@ -37,6 +37,12 @@ import Share from ".";
 
 const createDefaultProps = (): ShareProps => ({
   selfId: "current-user-id",
+  setEditLinkPanelIsVisible: (value: boolean) => {
+    console.log("Edit link panel visibility:", value);
+  },
+  setLinkParams: (linkParams) => {
+    console.log("Link params set:", linkParams);
+  },
   infoPanelSelection: {
     isFile: false,
     access: 0,

@@ -223,14 +223,13 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
   return (
     <div className={containerClass}>
       {title ? (
-        <Text noSelect fontWeight={600} fontSize="16px" className={titleClass}>
+        <Text fontWeight={600} fontSize="16px" className={titleClass}>
           {title}
         </Text>
       ) : null}
 
       {subtitle ? (
         <Text
-          noSelect
           fontWeight={600}
           fontSize="11px"
           className={classNames(styles.subTitle, {
@@ -299,12 +298,8 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
             dataTestId="quantity_picker_slider"
           />
           <div className={styles.sliderTrack}>
-            <Text className={styles.sliderTrackValueMin} noSelect>
-              {minValue}
-            </Text>
-            <Text className={styles.sliderTrackValueMax} noSelect>
-              {`${maxValue}+`}
-            </Text>
+            <Text className={styles.sliderTrackValueMin}>{minValue}</Text>
+            <Text className={styles.sliderTrackValueMax}>{`${maxValue}+`}</Text>
           </div>
         </div>
       ) : null}
@@ -319,6 +314,7 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
                 label={item.name}
                 onSelect={onSelectTab}
                 allowNoSelection
+                dataTestId={`add_${item.id}_tab_item`}
               />
             );
           })}

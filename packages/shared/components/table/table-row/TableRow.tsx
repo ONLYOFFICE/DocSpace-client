@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useRef, useMemo } from "react";
+import React, { useRef } from "react";
 import classNames from "classnames";
 
 import { ContextMenu, ContextMenuRefType } from "../../context-menu";
@@ -59,7 +59,7 @@ const TableRow = (props: TableRowProps) => {
     onClick,
     onDoubleClick,
     contextMenuCellStyle,
-    dataTestId,
+    dataTestId = "table-row",
     contextMenuTestId,
   } = props;
 
@@ -88,6 +88,7 @@ const TableRow = (props: TableRowProps) => {
     styles.tableRow,
     className,
     "table-container_row",
+    checked ? "checked" : "",
     {
       [styles.isIndexEditingMode]: isIndexEditingMode,
       [styles.isActive]: isActive,
@@ -105,7 +106,7 @@ const TableRow = (props: TableRowProps) => {
       style={style}
       onClick={onClick}
       onDoubleClick={onDoubleClick}
-      data-testid={dataTestId}
+      data-testid={dataTestId ?? "table-row"}
     >
       {children}
       {isIndexEditingMode ? null : (

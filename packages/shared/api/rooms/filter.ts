@@ -142,7 +142,7 @@ class RoomsFilter {
       try {
         const filterStorageItem = getUserFilter(storageKey);
         Object.assign(defaultFilter, filterStorageItem);
-      } catch (e) {
+      } catch {
         // console.log(e);
       }
     }
@@ -404,7 +404,7 @@ class RoomsFilter {
       archivedStorageFilter = getUserFilter(archivedFilterKey);
       sharedStorageFilter = getUserFilter(sharedFilterKey);
       templatesStorageFilter = getUserFilter(templatesFilterKey);
-    } catch (e) {
+    } catch {
       // console.log(e);
     }
 

@@ -44,7 +44,6 @@ import Badges from "./sub-components/Badges";
 import { zIndex as z } from "../../themes/zIndex";
 
 const Navigation = ({
-  showText,
   isRootFolder,
   title,
   canCreate,
@@ -54,9 +53,6 @@ const Navigation = ({
   getContextOptionsFolder,
   onBackToParentFolder,
   isTrashFolder,
-  clearTrash,
-  showFolderInfo,
-  isCurrentFolderInfo,
   toggleInfoPanel,
   isInfoPanelVisible,
   titles,
@@ -64,7 +60,6 @@ const Navigation = ({
   onPlusClick,
   isEmptyPage,
   isDesktop: isDesktopClient,
-  isRoom,
   isFrame,
   hideInfoPanel,
   showRootFolderTitle,

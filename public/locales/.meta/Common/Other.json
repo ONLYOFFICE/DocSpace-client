@@ -3,7 +3,7 @@
   "content": "Other",
   "content_en_sha1_hash": "6e6a6f2086bb5fe5dbfd17d8d5f502d48759834b",
   "created_at": "2025-05-19T21:30:47.167Z",
-  "updated_at": "2025-08-04T07:30:01.722Z",
+  "updated_at": "2025-08-21T11:22:39.958Z",
   "comment": {
     "text": "This translation key is used to display the English content \"Other\" and its corresponding title \"Common:Other\", which appears in a download dialog as the label for an \"Other\" file option. The key is used to render a customizable message in the UI.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
-      "line_number": 525,
-      "context": "{...downloadContentProps}\n isChecked={state.other.isChecked}\n isIndeterminate={state.other.isIndeterminate}\n items={state.other.files}\n type={DownloadedDocumentType.Other}\n title={t(\"Common:Other\")}\n />\n ) : null}\n <div className={styles.downloadDialogConvertMessage}>\n <Text noSelect>{t(\"Common:ConvertMessage\")}</Text>\n </div>",
+      "line_number": 531,
+      "context": "{...downloadContentProps}\n isChecked={state.other.isChecked}\n isIndeterminate={state.other.isIndeterminate}\n items={state.other.files}\n type={DownloadedDocumentType.Other}\n title={t(\"Common:Other\")}\n dataTestId=\"download_dialog_other\"\n />\n ) : null}\n <div className={styles.downloadDialogConvertMessage}>\n <Text>{t(\"Common:ConvertMessage\")}</Text>",
       "module": "/packages/shared"
     }
   ],

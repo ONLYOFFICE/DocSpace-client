@@ -35,7 +35,7 @@ import { TTransactionCollection } from "@docspace/shared/api/portal/types";
 
 import { getCorrectDate } from "@docspace/shared/utils";
 import styles from "../../styles/TransactionHistory.module.scss";
-import { accountingLedgersFormat } from "../../utils";
+import { accountingLedgersFormat, getServiceQuantity } from "../../utils";
 
 interface TransactionRowProps {
   transaction: TTransactionCollection;
@@ -46,32 +46,19 @@ const TransactionRow: React.FC<TransactionRowProps> = ({
   transaction,
   language = "en",
 }) => {
-  const { credit, withdrawal, currency } = transaction;
+  const { credit, debit, currency } = transaction;
   const { t } = useTranslation("Payments");
   const isCredit = credit > 0;
 
   const formattedAmount = accountingLedgersFormat(
     language,
-    credit || withdrawal,
+    credit || debit,
     isCredit,
     currency,
   );
 
-  const getServiceQuantity = (quantity: number, service: string) => {
-    let serviceName = service;
-
-    if (service != null && service.includes("disk-storage")) {
-      serviceName = "disk-storage";
-    }
-
-    switch (serviceName) {
-      case "disk-storage":
-        return `${quantity} ${t("Common:Gigabyte")}`;
-      default:
-        return "—";
-    }
-  };
   const correctDate = getCorrectDate(language, transaction.date);
+
   return (
     <TableRow>
       <TableCell>
@@ -80,13 +67,33 @@ const TransactionRow: React.FC<TransactionRowProps> = ({
         </Text>
       </TableCell>
       <TableCell>
-        <Text fontWeight={600} fontSize="11px">
+        <Text
+          fontWeight={600}
+          fontSize="11px"
+          as="span"
+          className={styles.transactionRowDescription}
+        >
           {transaction.description}
+        </Text>
+        {transaction.details ? (
+          <Text
+            fontWeight={600}
+            fontSize="11px"
+            as="span"
+            className={styles.transactionRowDetails}
+          >
+            ({transaction.details})
+          </Text>
+        ) : null}
+      </TableCell>
+      <TableCell>
+        <Text fontWeight={600} fontSize="11px">
+          {transaction.participantDisplayName || "—"}
         </Text>
       </TableCell>
       <TableCell>
         <Text fontWeight={600} fontSize="11px">
-          {getServiceQuantity(transaction.quantity, transaction.service!)}
+          {getServiceQuantity(t, transaction.quantity, transaction.serviceUnit)}
         </Text>
       </TableCell>
       <TableCell>

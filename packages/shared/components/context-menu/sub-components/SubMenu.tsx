@@ -28,7 +28,6 @@ import React, { useRef, useState, useEffect, type JSX } from "react";
 
 import { CSSTransition } from "react-transition-group";
 import { ReactSVG } from "react-svg";
-import { useTheme } from "styled-components";
 import { isMobile as isMobileDevice } from "react-device-detect";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
@@ -49,6 +48,8 @@ import {
 } from "../ContextMenu.types";
 import { Badge } from "../../badge";
 import { globalColors } from "../../../themes";
+import { useTheme } from "../../../hooks/useTheme";
+import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
 
 import styles from "../ContextMenu.module.scss";
 
@@ -73,6 +74,7 @@ type SubMenuProps = {
   onLoad?: () => Promise<ContextMenuModel[]>;
   changeView?: boolean;
   withHeader?: boolean;
+  onSubMenuMouseEnter?: () => void;
 };
 
 const SubMenu = (props: SubMenuProps) => {
@@ -86,6 +88,7 @@ const SubMenu = (props: SubMenuProps) => {
 
     changeView,
     withHeader,
+    onSubMenuMouseEnter,
   } = props;
 
   const [model, setModel] = useState(props?.model);
@@ -94,8 +97,10 @@ const SubMenu = (props: SubMenuProps) => {
   const [widthSubMenu, setWidthSubMenu] = useState<null | number>(null);
 
   const subMenuRef = useRef<HTMLUListElement>(null);
+  const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const theme = useTheme();
+  const { isBase } = useTheme();
+  const { isRTL } = useInterfaceDirection();
 
   const onItemMouseEnter = (e: React.MouseEvent, item: ContextMenuType) => {
     if (isMobileDevice) {
@@ -103,7 +108,37 @@ const SubMenu = (props: SubMenuProps) => {
       return;
     }
 
-    setActiveItem(item);
+    if (hideTimeoutRef.current) {
+      clearTimeout(hideTimeoutRef.current);
+      hideTimeoutRef.current = null;
+    }
+
+    if (item.items || item.onLoad) {
+      setActiveItem(item);
+    } else {
+      hideTimeoutRef.current = setTimeout(() => {
+        setActiveItem(null);
+      }, 400);
+    }
+  };
+
+  const onItemMouseLeave = (item: ContextMenuType) => {
+    if (isMobileDevice) return;
+
+    if (item.items || item.onLoad) {
+      hideTimeoutRef.current = setTimeout(() => {
+        setActiveItem(null);
+      }, 400);
+    }
+  };
+
+  const handleSubMenuMouseEnter = () => {
+    if (isMobileDevice) return;
+
+    if (hideTimeoutRef.current) {
+      clearTimeout(hideTimeoutRef.current);
+      hideTimeoutRef.current = null;
+    }
   };
 
   const onItemClick = (
@@ -159,8 +194,6 @@ const SubMenu = (props: SubMenuProps) => {
       parentItem?.children[0] as HTMLElement,
     );
 
-    const isRtl = theme.interfaceDirection === "rtl";
-
     if (!isMobile() && options) {
       const optionsWidth: number[] = [];
       Array.from(options).forEach((option) =>
@@ -192,13 +225,15 @@ const SubMenu = (props: SubMenuProps) => {
           ".p-menuitem-active",
         ) as HTMLElement;
 
-        const top = menuItemActive.offsetTop;
-        const scroller = firstList.querySelector(".scroller") as HTMLElement;
-        const { scrollTop } = scroller;
-        const positionActiveItem = top - scrollTop;
+        if (menuItemActive) {
+          const top = menuItemActive.offsetTop;
+          const scroller = firstList.querySelector(".scroller") as HTMLElement;
+          const { scrollTop } = scroller;
+          const positionActiveItem = top - scrollTop;
 
-        subMenuRefTop = positionActiveItem - 2;
-        subMenuRef.current.style.top = `${subMenuRefTop}px`;
+          subMenuRefTop = positionActiveItem - 2;
+          subMenuRef.current.style.top = `${subMenuRefTop}px`;
+        }
       }
 
       const submenuRects = subMenuRef.current.getBoundingClientRect();
@@ -219,7 +254,7 @@ const SubMenu = (props: SubMenuProps) => {
         viewport.width - containerOffsetLeft - itemOuterWidth;
       const freeSpaceLeft = containerOffsetLeft;
 
-      if (isRtl) {
+      if (isRTL) {
         if (
           subListWidth < containerOffsetLeft ||
           (!root && freeSpaceLeft > freeSpaceRight)
@@ -253,7 +288,7 @@ const SubMenu = (props: SubMenuProps) => {
         containerOffsetLeft + itemOuterWidth + subListWidth >
         viewport.width - DomHelpers.calculateScrollbarWidth();
 
-      if (!isRtl) {
+      if (!isRTL) {
         if (notEnoughWidthRight && freeSpaceLeft > freeSpaceRight) {
           subMenuRef.current.style.left = `${-1 * subListWidth}px`;
 
@@ -312,6 +347,14 @@ const SubMenu = (props: SubMenuProps) => {
       position();
     }
   });
+
+  useEffect(() => {
+    return () => {
+      if (hideTimeoutRef.current) {
+        clearTimeout(hideTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const renderSeparator = (index: number, style: React.CSSProperties) => (
     <li
@@ -419,7 +462,7 @@ const SubMenu = (props: SubMenuProps) => {
             className={`${subMenuIconClassName} p-submenu-badge`}
             backgroundColor={
               item.isPaidBadge
-                ? theme.isBase
+                ? isBase
                   ? globalColors.favoritesStatus
                   : globalColors.favoriteStatusDark
                 : globalColors.lightBlueMain
@@ -466,6 +509,7 @@ const SubMenu = (props: SubMenuProps) => {
           onClick={onClick}
           onMouseDown={onMouseDown}
           onMouseEnter={(e) => onItemMouseEnter(e, item)}
+          onMouseLeave={() => onItemMouseLeave(item)}
         >
           {content}
           <ToggleButton
@@ -488,6 +532,7 @@ const SubMenu = (props: SubMenuProps) => {
         onClick={onClick}
         onMouseDown={onMouseDown}
         onMouseEnter={(e) => onItemMouseEnter(e, item)}
+        onMouseLeave={() => onItemMouseLeave(item)}
       >
         {content}
       </li>
@@ -562,6 +607,7 @@ const SubMenu = (props: SubMenuProps) => {
             resetMenu={item !== activeItem}
             onLeafClick={onLeafClick}
             onLoad={contextMenuTypeItem?.onLoad}
+            onSubMenuMouseEnter={handleSubMenuMouseEnter}
           />,
         );
       }
@@ -585,7 +631,7 @@ const SubMenu = (props: SubMenuProps) => {
       return 36;
     });
 
-    const height = rowHeights.reduce((a, b) => a + b);
+    const height = rowHeights.reduce((a, b) => a + b, 0);
     const viewport = DomHelpers.getViewport();
     const paddingList = 12;
     const marginsList = 32;
@@ -629,6 +675,7 @@ const SubMenu = (props: SubMenuProps) => {
                 }),
             } as React.CSSProperties
           }
+          onMouseEnter={onSubMenuMouseEnter || handleSubMenuMouseEnter}
         >
           <Scrollbar style={{ height: listHeight }}>{submenu}</Scrollbar>
           {submenuLower}

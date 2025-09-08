@@ -93,7 +93,9 @@ jest.mock("@docspace/shared/components/context-menu", () => {
 
     return (
       <div data-testid="context-menu">
-        {model?.map((item) => <div key={item.key}>{item.label}</div>)}
+        {model?.map((item) => (
+          <div key={item.key}>{item.label}</div>
+        ))}
       </div>
     );
   };

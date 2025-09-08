@@ -3,7 +3,7 @@
   "content": "Secure your {{productName}}",
   "content_en_sha1_hash": "dd0cf4fa1223874a80abb7d22c5bd183f7f2cc2d",
   "created_at": "2025-08-04T07:29:46.167Z",
-  "updated_at": "2025-08-04T08:12:12.821Z",
+  "updated_at": "2025-09-07T07:53:15.484Z",
   "comment": {
     "text": "This key displays a header message within the Login History section of the Portal Settings, specifically under the Security category. It's used to reassure users by highlighting the security of their {{productName}}. Translators should ensure the tone remains reassuring and emphasizes security.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/sub-components/HistoryMainContent.js",
-      "line_number": 253,
-      "context": "const theme = useTheme();\n const isBaseTheme = theme.isBase;\n \n const loginHistoryTranslates = {\n Header: t(\"LoginHistoryCampaignHeader\", {\n productName: t(\"Common:ProductName\"),\n }),\n SubHeader: t(\"LoginHistoryCampaignTitle\"),\n Text: t(\"LoginHistoryCampaignText\"),\n Link: \"/portal-settings/security/access-portal/tfa\",",
-      "module": "/packages/client"
+      "file_path": "/packages/shared/hooks/useTwoFactorCampaignBanner.ts",
+      "line_number": 55,
+      "context": "return () => window.removeEventListener(\"resize\", handleResize);\n }, []);\n \n const loginHistoryTranslates = useMemo(\n () => ({\n Header: t(\"LoginHistoryCampaignHeader\", {\n productName: t(\"Common:ProductName\"),\n }),\n SubHeader: t(\"LoginHistoryCampaignTitle\"),\n Text: t(\"LoginHistoryCampaignText\"),\n Link: isMobile",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

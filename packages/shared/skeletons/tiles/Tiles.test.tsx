@@ -1,6 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import styles from "./Tiles.module.scss";
 
 import { TilesSkeleton } from "./Tiles";
 import { TileSkeleton } from "./Tile";
@@ -29,20 +30,20 @@ describe("TilesSkeleton", () => {
 
 describe("TileSkeleton", () => {
   it("renders folder tile", () => {
-    const { container } = render(<TileSkeleton isFolder />);
-    const bottom = container.querySelector("[class*='bottom']");
-    expect(bottom).not.toHaveClass("file");
+    const { getByTestId } = render(<TileSkeleton isFolder />);
+    const folderTile = getByTestId("tile-skeleton-folder");
+    expect(folderTile).toBeInTheDocument();
   });
 
   it("renders file tile", () => {
-    const { container } = render(<TileSkeleton />);
-    const bottom = container.querySelector("[class*='bottom']");
-    expect(bottom).toHaveClass("file");
+    const { getByTestId } = render(<TileSkeleton />);
+    const fileTile = getByTestId("tile-skeleton-file");
+    expect(fileTile).toHaveClass(styles.file);
   });
 
   it("renders room tile", () => {
-    const { container } = render(<TileSkeleton isRoom />);
-    const roomTile = container.querySelector("[class*='roomTile']");
+    const { getByTestId } = render(<TileSkeleton isRoom />);
+    const roomTile = getByTestId("room-tile-content");
     expect(roomTile).toBeInTheDocument();
   });
 });

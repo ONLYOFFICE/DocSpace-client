@@ -3,7 +3,7 @@
   "content": "Create room",
   "content_en_sha1_hash": "bc487b9d588a5f906e3f1cf66e5d6096e1b21ed5",
   "created_at": "2025-05-19T21:30:43.921Z",
-  "updated_at": "2025-08-11T18:11:59.101Z",
+  "updated_at": "2025-09-07T07:53:15.017Z",
   "comment": {
     "text": "This translation key is used for the \"Create room\" button label in various UI components, such as buttons and dialog headers. It appears when a user clicks on the \"Create room\" link or button to initiate the creation of a new room.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/ShareFolderDialog/index.js",
       "line_number": 66,
-      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"create-room\"\n key=\"OKButton\"\n label={t(\"Common:CreateRoom\")}\n size=\"normal\"\n primary\n onClick={onAction}\n scale\n />",
+      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"create-room\"\n key=\"OKButton\"\n label={t(\"Common:CreateRoom\")}\n size=\"normal\"\n primary\n onClick={onAction}\n scale\n testId=\"share_folder_dialog_create_room_button\"",
       "module": "/packages/client"
     },
     {
@@ -48,25 +48,25 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1868,
-      "context": "disabled: !item.security?.Reconnect || !item.security?.EditRoom,\n },\n {\n id: \"option_create-room\",\n key: \"create-room-from-template\",\n label: t(\"Common:CreateRoom\"),\n icon: CreateRoomReactSvgUrl,\n onClick: () => this.filesActionsStore.onCreateRoomFromTemplate(item),\n disabled: false,\n },\n {",
+      "line_number": 1891,
+      "context": "isSeparator: true,\n },\n {\n id: \"option_create-room\",\n key: \"create-room-from-template\",\n label: t(\"Common:CreateRoom\"),\n icon: CreateRoomReactSvgUrl,\n onClick: () => this.filesActionsStore.onCreateRoomFromTemplate(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1868,
-      "context": "disabled: !item.security?.Reconnect || !item.security?.EditRoom,\n },\n {\n id: \"option_create-room\",\n key: \"create-room-from-template\",\n label: t(\"Common:CreateRoom\"),\n icon: CreateRoomReactSvgUrl,\n onClick: () => this.filesActionsStore.onCreateRoomFromTemplate(item),\n disabled: false,\n },\n {",
+      "line_number": 1891,
+      "context": "isSeparator: true,\n },\n {\n id: \"option_create-room\",\n key: \"create-room-from-template\",\n label: t(\"Common:CreateRoom\"),\n icon: CreateRoomReactSvgUrl,\n onClick: () => this.filesActionsStore.onCreateRoomFromTemplate(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1868,
-      "context": "disabled: !item.security?.Reconnect || !item.security?.EditRoom,\n },\n {\n id: \"option_create-room\",\n key: \"create-room-from-template\",\n label: t(\"Common:CreateRoom\"),\n icon: CreateRoomReactSvgUrl,\n onClick: () => this.filesActionsStore.onCreateRoomFromTemplate(item),\n disabled: false,\n },\n {",
+      "line_number": 1891,
+      "context": "isSeparator: true,\n },\n {\n id: \"option_create-room\",\n key: \"create-room-from-template\",\n label: t(\"Common:CreateRoom\"),\n icon: CreateRoomReactSvgUrl,\n onClick: () => this.filesActionsStore.onCreateRoomFromTemplate(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2215,
+      "line_number": 2225,
       "context": "case \"create-room\":\n if (!this.isAvailableOption(\"create-room\")) return null;\n return {\n id: \"menu-create-room\",\n label: t(\"Common:CreateRoom\"),\n onClick: this.onClickCreateRoom,\n iconUrl: CatalogRoomsReactSvgUrl,\n };\n \n case \"download\":",
       "module": "/packages/client"
     },
@@ -78,8 +78,8 @@
     },
     {
       "file_path": "/packages/shared/components/quick-buttons/index.tsx",
-      "line_number": 182,
-      "context": "size={IconSizeType.medium}\n onClick={onCreateRoom}\n color={colorLock}\n isDisabled={isDisabled}\n hoverColor=\"accent\"\n title={t(\"Common:CreateRoom\")}\n />\n ) : null}\n {showCopyLinkIcon ? (\n <IconButton\n iconName={LinkReactSvgUrl}",
+      "line_number": 178,
+      "context": "className=\"badge create-room icons-group\"\n size={IconSizeType.medium}\n onClick={onCreateRoom}\n isDisabled={isDisabled}\n hoverColor=\"accent\"\n title={t(\"Common:CreateRoom\")}\n />\n ) : null}\n {showCopyLinkIcon ? (\n <IconButton\n iconName={LinkReactSvgUrl}",
       "module": "/packages/shared"
     }
   ],

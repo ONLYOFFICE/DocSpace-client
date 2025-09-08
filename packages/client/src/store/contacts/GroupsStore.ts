@@ -101,61 +101,67 @@ class GroupsStore {
 
     makeAutoObservable(this);
 
-    SocketHelper.on(SocketEvents.AddGroup, async (value) => {
-      const { contactsTab } = this.peopleStore.usersStore;
+    SocketHelper?.on(
+      SocketEvents.AddGroup,
+      async (value: { id: string; data: any }) => {
+        const { contactsTab } = this.peopleStore.usersStore;
 
-      if (contactsTab !== "groups") return;
+        if (contactsTab !== "groups") return;
 
-      const { id, data } = value;
+        const { id, data } = value;
 
-      if (!data || !id) return;
+        if (!data || !id) return;
 
-      const group = await api.groups.getGroupById(id, true);
+        const group = await api.groups.getGroupById(id, true);
 
-      runInAction(() => {
-        const idx = this.groups.findIndex((x) => x.id === group.id);
+        runInAction(() => {
+          const idx = this.groups.findIndex((x) => x.id === group.id);
 
-        if (idx !== -1) {
-          runInAction(() => {
-            this.groups[idx] = group;
-            this.updateSelection();
-          });
+          if (idx !== -1) {
+            runInAction(() => {
+              this.groups[idx] = group;
+              this.updateSelection();
+            });
+            return;
+          }
+
+          this.groups = [group, ...this.groups];
+          this.groupsFilter.total += 1;
+        });
+      },
+    );
+
+    SocketHelper?.on(
+      SocketEvents.UpdateGroup,
+      async (value: { id: string; data: any }) => {
+        const { contactsTab } = this.peopleStore.usersStore;
+
+        const { id, data } = value;
+
+        if (!data || !id) return;
+
+        const idx = this.groups.findIndex((x) => x.id === id);
+
+        if (idx === -1) return;
+
+        const group = await api.groups.getGroupById(id, true);
+
+        if (contactsTab !== "groups") {
+          if (this.currentGroup?.id !== group.id) return;
+
+          this.currentGroup = group;
           return;
         }
 
-        this.groups = [group, ...this.groups];
-        this.groupsFilter.total += 1;
-      });
-    });
+        runInAction(() => {
+          this.groups[idx] = group;
 
-    SocketHelper.on(SocketEvents.UpdateGroup, async (value) => {
-      const { contactsTab } = this.peopleStore.usersStore;
+          this.updateSelection();
+        });
+      },
+    );
 
-      const { id, data } = value;
-
-      if (!data || !id) return;
-
-      const idx = this.groups.findIndex((x) => x.id === id);
-
-      if (idx === -1) return;
-
-      const group = await api.groups.getGroupById(id, true);
-
-      if (contactsTab !== "groups") {
-        if (this.currentGroup?.id !== group.id) return;
-
-        this.currentGroup = group;
-        return;
-      }
-
-      runInAction(() => {
-        this.groups[idx] = group;
-
-        this.updateSelection();
-      });
-    });
-
-    SocketHelper.on(SocketEvents.DeleteGroup, (id) => {
+    SocketHelper?.on(SocketEvents.DeleteGroup, (id: string) => {
       const { contactsTab } = this.peopleStore.usersStore;
 
       if (contactsTab !== "groups") {
@@ -278,7 +284,8 @@ class GroupsStore {
 
     if (updateFilter) this.setFilterParams(filterData);
 
-    this.clientLoadingStore.setIsSectionBodyLoading(false);
+    this.clientLoadingStore.setIsLoading("body", false);
+    this.clientLoadingStore.setIsLoading("header", false);
 
     runInAction(() => {
       this.groups = res.items || [];

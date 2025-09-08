@@ -29,6 +29,7 @@
 
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import moment from "moment";
+
 import {
   ConflictResolveType,
   FolderType,
@@ -337,14 +338,16 @@ export async function getCommonFoldersTree() {
 //   return request(options);
 // }
 
-// export function getFavoritesFolderList() {
-//   const options: AxiosRequestConfig = {
-//     method: "get",
-//     url: `/files/@favorites`,
-//   };
+export async function getFavoritesFolderList() {
+  const options: AxiosRequestConfig = {
+    method: "get",
+    url: `/files/@favorites`,
+  };
 
-//   return request(options);
-// }
+  const res = (await request(options)) as TGetFolder;
+
+  return res;
+}
 
 // export function getProjectsFolderList() {
 //   const options: AxiosRequestConfig = {
@@ -849,10 +852,11 @@ export async function moveToFolder(
   return res;
 }
 
-export async function getFileVersionInfo(fileId: number) {
+export async function getFileVersionInfo(fileId: number, shareKey?: string) {
   const res = (await request({
     method: "get",
     url: `/files/file/${fileId}/history`,
+    params: { share: shareKey },
   })) as TFile[];
   return res;
 }
@@ -1180,8 +1184,8 @@ export async function getSettingsFiles(headers = null) {
   return res;
 }
 
-export async function markAsFavorite(ids: number[]) {
-  const data = { fileIds: ids };
+export async function markAsFavorite(fileIds: number[], folderIds: number[]) {
+  const data = { fileIds, folderIds };
   const options: AxiosRequestConfig = {
     method: "post",
     url: "/files/favorites",
@@ -1191,8 +1195,11 @@ export async function markAsFavorite(ids: number[]) {
   return res;
 }
 
-export async function removeFromFavorite(ids: number[]) {
-  const data = { fileIds: ids };
+export async function removeFromFavorite(
+  fileIds: number[],
+  folderIds: number[],
+) {
+  const data = { fileIds, folderIds };
   const options: AxiosRequestConfig = {
     method: "delete",
     url: "/files/favorites",
@@ -1506,6 +1513,23 @@ export async function getExternalLinks(
   return res;
 }
 
+export async function getExternalFolderLinks(
+  fileId: number | string,
+  startIndex = 0,
+  count = 50,
+  signal?: AbortSignal,
+) {
+  const linkParams = `?startIndex=${startIndex}&count=${count}`;
+
+  const res = await request<TFileLink[]>({
+    method: "get",
+    url: `files/folder/${fileId}/links${linkParams}`,
+    signal,
+  });
+
+  return { items: res! };
+}
+
 export async function getPrimaryLink(fileId: number) {
   const res = (await request({
     method: "get",
@@ -1519,12 +1543,41 @@ export async function getPrimaryLinkIfNotExistCreate(
   fileId: number | string,
   access: ShareAccessRights,
   internal: boolean,
-  expirationDate: moment.Moment,
+  expirationDate: moment.Moment | null,
 ) {
+  const res = (await request(
+    {
+      method: "post",
+      url: `/files/file/${fileId}/link`,
+      data: { access, internal, expirationDate },
+    },
+    true,
+  )) as TFileLink;
+
+  return res;
+}
+export async function getOrCreatePrimaryFolderLink(
+  folderId: number | string,
+  access?: ShareAccessRights,
+  internal?: boolean,
+  expirationDate?: moment.Moment | null,
+) {
+  const res = (await request(
+    {
+      method: "post",
+      url: `/files/folder/${folderId}/link`,
+      data: { access, internal, expirationDate },
+    },
+    true,
+  )) as TFileLink;
+
+  return res;
+}
+
+export async function getPrimaryFolderLink(fileId: number | string) {
   const res = (await request({
-    method: "post",
-    url: `/files/file/${fileId}/link`,
-    data: { access, internal, expirationDate },
+    method: "get",
+    url: `/files/folder/${fileId}/link`,
   })) as TFileLink;
 
   return res;
@@ -1536,12 +1589,52 @@ export async function editExternalLink(
   access: ShareAccessRights,
   primary: boolean,
   internal: boolean,
-  expirationDate: moment.Moment,
+  expirationDate: moment.Moment | string | null,
+  title: string,
+  password?: string,
+  denyDownload?: boolean,
 ) {
   const res = (await request({
     method: "put",
     url: `/files/file/${fileId}/links`,
-    data: { linkId, access, primary, internal, expirationDate },
+    data: {
+      linkId,
+      access,
+      primary,
+      internal,
+      expirationDate,
+      password,
+      denyDownload,
+      title,
+    },
+  })) as TFileLink;
+
+  return res;
+}
+export async function editExternalFolderLink(
+  fileId: number | string,
+  linkId: number | string,
+  access: ShareAccessRights,
+  primary: boolean,
+  internal: boolean,
+  expirationDate: moment.Moment | string | null,
+  title: string,
+  password?: string,
+  denyDownload?: boolean,
+) {
+  const res = (await request({
+    method: "put",
+    url: `/files/folder/${fileId}/links`,
+    data: {
+      linkId,
+      access,
+      primary,
+      internal,
+      expirationDate,
+      password,
+      denyDownload,
+      title,
+    },
   })) as TFileLink;
 
   return res;
@@ -1562,16 +1655,35 @@ export async function addExternalLink(
 
   return res;
 }
+export async function addExternalFolderLink(
+  fileId: number | string,
+  access: ShareAccessRights,
+  primary: boolean,
+  internal: boolean,
+  expirationDate?: moment.Moment | null,
+) {
+  const res = (await request({
+    method: "put",
+    url: `/files/folder/${fileId}/links`,
+    data: { access, primary, internal, expirationDate },
+  })) as TFileLink;
+
+  return res;
+}
 
 // TODO: Need update res type
 export function checkIsFileExist(folderId: number, filesTitle: string[]) {
-  return request({
-    method: "post",
-    url: `files/${folderId}/upload/check`,
-    data: {
-      filesTitle,
+  const skipRedirect = true;
+  return request(
+    {
+      method: "post",
+      url: `files/${folderId}/upload/check`,
+      data: {
+        filesTitle,
+      },
     },
-  });
+    skipRedirect,
+  );
 }
 
 export function deleteFilesFromRecent(fileIds: number[]) {

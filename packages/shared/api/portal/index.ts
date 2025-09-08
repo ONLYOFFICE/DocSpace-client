@@ -297,12 +297,33 @@ export async function getPortalPaymentQuotas() {
 export async function getServicesQuotas() {
   const res = (await request({
     method: "get",
-    url: "/portal/payment/quotas?wallet=true",
+    url: "/portal/payment/walletservices",
   })) as TPaymentQuota[];
 
   return res;
 }
 
+export async function getServiceQuota(serviceName?: string) {
+  const res = (await request({
+    method: "get",
+    url: `/portal/payment/walletservice?service=${serviceName}`,
+  })) as TPaymentQuota;
+
+  return res;
+}
+
+export async function setServiceState(data: {
+  service: string;
+  enabled: boolean;
+}) {
+  const res = (await request({
+    method: "post",
+    url: "/portal/payment/servicestate",
+    data,
+  })) as TPaymentQuota;
+
+  return res;
+}
 export async function getPortalQuota(refresh = false) {
   const params = refresh ? { refresh: true } : {};
   // console.log("getPortalQuota", { params });
@@ -472,21 +493,28 @@ export async function getTransactionHistory(
   startDate: string,
   endDate: string,
   credit: boolean = true,
-  withdrawal: boolean = true,
+  debit: boolean = true,
+  participantName: string = "",
   offset: number = 0,
   limit: number = 25,
 ) {
+  const params = {
+    startDate,
+    endDate,
+    credit,
+    debit,
+    offset,
+    limit,
+  };
+
+  if (participantName) {
+    params.participantName = participantName;
+  }
+
   const options = {
     method: "get",
     url: "/portal/payment/customer/operations",
-    params: {
-      startDate,
-      endDate,
-      credit,
-      withdrawal,
-      offset,
-      limit,
-    },
+    params,
   };
   const res = (await request(options)) as TCustomerOperation;
 
@@ -528,7 +556,7 @@ export async function updateAutoTopUpSettings(
   return request(options);
 }
 
-export async function getTransactionHistoryReport(
+export async function startTransactionHistoryReport(
   startDate: string,
   endDate: string,
   credit: boolean,
@@ -544,7 +572,17 @@ export async function getTransactionHistoryReport(
       withdrawal,
     },
   };
-  const res = (await request(options)) as string;
+  const res = (await request(options)) as TransactionHistoryReport;
+
+  return res;
+}
+
+export async function checkTransactionHistoryReport() {
+  const options = {
+    method: "get",
+    url: "/portal/payment/customer/operationsreport",
+  };
+  const res = (await request(options)) as TransactionHistoryReport;
 
   return res;
 }

@@ -66,7 +66,7 @@ const EmptyViewOption = ({ option }: EmptyViewOptionProps) => {
   }
 
   const { key, ...other } = option;
-  return <EmptyViewItem id={option.key.toString()} {...other} />;
+  return <EmptyViewItem id={key.toString()} {...other} />;
 };
 
 export default EmptyViewOption;

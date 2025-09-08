@@ -28,6 +28,7 @@
 
 import React, { useState } from "react";
 import { isMobileOnly } from "react-device-detect";
+import lightSmall from "PUBLIC_DIR/images/logo/lightsmall.svg?url";
 
 import { classNames, getLogoUrl, size as deviceSize } from "../../utils";
 import { WhiteLabelLogoType } from "../../enums";
@@ -36,6 +37,8 @@ import type { PortalLogoProps } from "./PortalLogo.types";
 import styles from "./PortalLogo.module.scss";
 
 const PortalLogo = ({ className, isResizable = false }: PortalLogoProps) => {
+  const [isError, setIsError] = useState(false);
+
   const { isBase } = useTheme();
 
   const [size, setSize] = useState(
@@ -69,13 +72,24 @@ const PortalLogo = ({ className, isResizable = false }: PortalLogoProps) => {
     "not-mobile": !isMobileOnly,
   });
 
+  if (isError) {
+    return (
+      <img
+        className={classNames("logo-wrapper", className)}
+        alt="portal logo"
+        src={lightSmall}
+      />
+    );
+  }
+
   return (
     <div className={wrapperClassName}>
       {logo ? (
         <img
           src={logo}
           className={classNames("logo-wrapper", className)}
-          alt=""
+          alt="portal logo"
+          onError={() => setIsError(true)}
         />
       ) : null}
     </div>

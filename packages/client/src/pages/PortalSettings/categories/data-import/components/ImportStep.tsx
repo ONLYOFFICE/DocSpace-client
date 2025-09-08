@@ -140,7 +140,7 @@ const ImportStep = (props: ImportStepProps) => {
         onChange={(e) => onChange(e, "importPersonalFiles")}
         sectionName={t("Settings:PersonalFiles")}
         description={t("Settings:ImportFilesLocation", {
-          sectionName: t("Common:MyFilesSection"),
+          sectionName: t("Common:MyDocuments"),
         })}
         exportSection={{
           sectionName: personalExportDetails.name,
@@ -161,7 +161,7 @@ const ImportStep = (props: ImportStepProps) => {
         onChange={(e) => onChange(e, "importSharedFiles")}
         sectionName={t("Settings:SharedFiles")}
         description={t("Settings:SharedFilesImportLocation", {
-          sectionName: t("Common:MyFilesSection"),
+          sectionName: t("Common:MyDocuments"),
         })}
         exportSection={{
           sectionName: sharedFilesExportDetails.name,
@@ -195,45 +195,6 @@ const ImportStep = (props: ImportStepProps) => {
         }}
         isDisabled={false}
         dataTestId="import_shared_folders_section"
-      />
-      <ImportSection
-        isChecked={importOptions.importCommonFiles}
-        onChange={(e) => onChange(e, "importCommonFiles")}
-        sectionName={t("Common:CommonFiles")}
-        description={t("Settings:CommonFilesDescription", {
-          user: user?.displayName,
-          productName: t("Common:ProductName"),
-        })}
-        exportSection={{
-          sectionName: t("Common:Common"),
-          workspace: serviceName,
-          sectionIcon: PortfolioIcon,
-        }}
-        importSection={{
-          sectionName: t("Common:Rooms"),
-          workspace: t("Common:ProductName"),
-          sectionIcon: RoomsIcon,
-        }}
-        isDisabled={false}
-        dataTestId="import_common_files_section"
-      />
-      <ImportSection
-        isChecked={importOptions.importProjectFiles}
-        onChange={(e) => onChange(e, "importProjectFiles")}
-        sectionName={t("Common:Projects")}
-        description={t("Settings:ProjectsDescription")}
-        exportSection={{
-          sectionName: t("Common:Projects"),
-          workspace: serviceName,
-          sectionIcon: ProjectsIcon,
-        }}
-        importSection={{
-          sectionName: t("Common:Rooms"),
-          workspace: t("Common:ProductName"),
-          sectionIcon: RoomsIcon,
-        }}
-        isDisabled={false}
-        dataTestId="import_project_files_section"
       />
       {hasCommonFiles ? (
         <ImportSection

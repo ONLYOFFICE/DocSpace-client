@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
 import { Meta, StoryFn } from "@storybook/react";
 import { SocialButtonsGroup } from "./index";
 import type { SocialButtonProps } from "./SocialButtonsGroup.types";
@@ -82,8 +83,30 @@ export default {
   },
 } as Meta;
 
+const StorybookSocialButtonsGroup = (props: SocialButtonProps) => {
+  const { onClick, ...restProps } = props;
+  const handleClick: (e: React.MouseEvent<Element, MouseEvent>) => void = (
+    e,
+  ) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (onClick) {
+      onClick(e);
+    }
+  };
+
+  const modifiedProps = { ...restProps, onClick: handleClick };
+
+  if (props.ssoUrl) {
+    modifiedProps.ssoUrl = "javascript:void(0);";
+  }
+
+  return <SocialButtonsGroup {...modifiedProps} />;
+};
+
 const Template: StoryFn<SocialButtonProps> = (args) => (
-  <SocialButtonsGroup {...args} />
+  <StorybookSocialButtonsGroup {...args} />
 );
 
 export const Default = Template.bind({});

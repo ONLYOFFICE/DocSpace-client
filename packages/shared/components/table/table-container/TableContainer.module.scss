@@ -30,11 +30,24 @@
 @use "../../../styles/z-index" as z;
 
 .tableContainer {
-  user-select: none;
   display: grid;
   width: 100%;
   max-width: 100%;
   margin-top: -25px;
+
+  user-select: text;
+
+  & *:not(img) {
+    user-select: text;
+  }
+
+  &.noSelect {
+    user-select: none;
+
+    & *:not(img) {
+      user-select: none;
+    }
+  }
 
   &.useReactWindow {
     display: block;

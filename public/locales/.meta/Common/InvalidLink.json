@@ -3,7 +3,7 @@
   "content": "Invalid link",
   "content_en_sha1_hash": "3aaeaeb6ec3f8154506ce18b333531c275dcb035",
   "created_at": "2025-05-19T21:30:45.936Z",
-  "updated_at": "2025-08-04T07:30:01.631Z",
+  "updated_at": "2025-09-07T07:53:15.411Z",
   "comment": {
     "text": "This translation key is used to display an error message when a link provided is invalid. It appears as a message shown by the docEditor component, typically in response to user interactions such as clicking on a button or attempting to load content.",
     "is_auto": true,
@@ -12,19 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/hooks/useEditorEvents.ts",
-      "line_number": 197,
+      "line_number": 201,
       "context": "docEditor = window.DocEditor.instances[EDITOR_ID];\n \n fixSize();\n \n if (errorMessage || isSkipError)\n return docEditor?.showMessage?.(errorMessage || t(\"Common:InvalidLink\"));\n \n console.log(\"ONLYOFFICE Document Editor is ready\", docEditor);\n const url = window.location.href;\n \n const index = url.indexOf(\"#message/\");",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/login/src/components/ConfirmRoute.tsx",
-      "line_number": 95,
+      "line_number": 101,
       "context": "case ValidationResult.Invalid:\n console.error(\"invalid link\", {\n confirmLinkParams,\n validationResult: confirmLinkResult.result,\n });\n throw new Error(t(\"Common:InvalidLink\"));\n case ValidationResult.Expired:\n console.error(\"expired link\", {\n confirmLinkParams,\n validationResult: confirmLinkResult.result,\n });",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/utils/index.ts",
-      "line_number": 108,
+      "line_number": 109,
       "context": "case \"SsoAttributesNotFound\":\n return t(\"Errors:SsoAttributesNotFound\");\n case \"QuotaPaidUserLimitError\":\n return t(\"Common:QuotaPaidUserLimitError\");\n case \"InvalidLink\":\n return t(\"Common:InvalidLink\");\n default:\n return t(\"Common:Error\");\n }\n };",
       "module": "/packages/login"
     },

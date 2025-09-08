@@ -1,11 +1,10 @@
 import React from "react";
-import { fireEvent, screen } from "@testing-library/react";
+import { fireEvent, screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 
 import { BackupStorageType, DeviceType, FolderType } from "../../../enums";
 import { ButtonSize } from "../../../components/button";
-import { renderWithTheme } from "../../../utils/render-with-theme";
 import { startBackup } from "../../../api/portal";
 import SocketHelper from "../../../utils/socket";
 
@@ -167,11 +166,15 @@ describe("ManualBackup", () => {
     setConnectedThirdPartyAccount: jest.fn(),
     setConnectDialogVisible: jest.fn(),
     setIsThirdStorageChanged: jest.fn(),
-    setErrorInformation: jest.fn(),
+
     errorInformation: "",
     backupProgressError: "",
     setBackupProgressError: jest.fn(),
     setIsBackupProgressVisible: jest.fn(),
+    isThirdPartyAvailable: true,
+    isPayer: false,
+    walletCustomerEmail: "test@example.com",
+    backupServicePrice: 10,
   };
 
   beforeEach(() => {
@@ -179,7 +182,7 @@ describe("ManualBackup", () => {
   });
 
   it("renders without errors", () => {
-    renderWithTheme(<ManualBackup {...defaultProps} />);
+    render(<ManualBackup {...defaultProps} />);
 
     expect(
       screen.getByText("Common:ManualBackupDescription"),
@@ -192,13 +195,13 @@ describe("ManualBackup", () => {
   });
 
   it("shows loader when isInitialLoading is true", () => {
-    renderWithTheme(<ManualBackup {...defaultProps} isInitialLoading />);
+    render(<ManualBackup {...defaultProps} isInitialLoading />);
 
     expect(screen.getByTestId("data-backup-loader")).toBeInTheDocument();
   });
 
   it("returns null when isEmptyContentBeforeLoader is true and isInitialLoading is false", () => {
-    const { container } = renderWithTheme(
+    const { container } = render(
       <ManualBackup
         {...defaultProps}
         isEmptyContentBeforeLoader
@@ -210,7 +213,7 @@ describe("ManualBackup", () => {
   });
 
   it("shows temporary storage by default and allows creating backup", async () => {
-    renderWithTheme(<ManualBackup {...defaultProps} />);
+    render(<ManualBackup {...defaultProps} />);
 
     const temporaryRadio = screen.getByLabelText("Common:TemporaryStorage");
     expect(temporaryRadio).toBeChecked();
@@ -232,7 +235,7 @@ describe("ManualBackup", () => {
   });
 
   it("shows download button when temporaryLink is available", () => {
-    renderWithTheme(
+    render(
       <ManualBackup {...defaultProps} temporaryLink="/download/backup.zip" />,
     );
 
@@ -248,7 +251,7 @@ describe("ManualBackup", () => {
   });
 
   it("switches to Rooms Module when selected", async () => {
-    renderWithTheme(<ManualBackup {...defaultProps} />);
+    render(<ManualBackup {...defaultProps} />);
 
     const roomsRadio = screen.getByLabelText("Common:RoomsModule");
     await userEvent.click(roomsRadio);
@@ -257,7 +260,7 @@ describe("ManualBackup", () => {
   });
 
   it("switches to Third Party Resource when selected", async () => {
-    renderWithTheme(<ManualBackup {...defaultProps} />);
+    render(<ManualBackup {...defaultProps} />);
 
     const thirdPartyRadio = screen.getByLabelText("Common:ThirdPartyResource");
     await userEvent.click(thirdPartyRadio);
@@ -266,7 +269,7 @@ describe("ManualBackup", () => {
   });
 
   it("switches to Third Party Storage when selected", async () => {
-    renderWithTheme(<ManualBackup {...defaultProps} />);
+    render(<ManualBackup {...defaultProps} />);
 
     const thirdPartyStorageRadio = screen.getByLabelText(
       "Common:ThirdPartyStorage",
@@ -279,7 +282,7 @@ describe("ManualBackup", () => {
   });
 
   it("handles backup from Rooms Module", async () => {
-    renderWithTheme(<ManualBackup {...defaultProps} />);
+    render(<ManualBackup {...defaultProps} />);
 
     const roomsRadio = screen.getByLabelText("Common:RoomsModule");
     await userEvent.click(roomsRadio);
@@ -297,7 +300,7 @@ describe("ManualBackup", () => {
   });
 
   it("handles backup from Third Party Resource", async () => {
-    renderWithTheme(<ManualBackup {...defaultProps} />);
+    render(<ManualBackup {...defaultProps} />);
 
     const thirdPartyRadio = screen.getByLabelText("Common:ThirdPartyResource");
     await userEvent.click(thirdPartyRadio);
@@ -315,7 +318,7 @@ describe("ManualBackup", () => {
   });
 
   it("handles backup from Third Party Storage", async () => {
-    renderWithTheme(<ManualBackup {...defaultProps} />);
+    render(<ManualBackup {...defaultProps} />);
 
     const thirdPartyStorageRadio = screen.getByLabelText(
       "Common:ThirdPartyStorage",
@@ -335,9 +338,7 @@ describe("ManualBackup", () => {
   });
 
   it("disables radio buttons and actions when downloadingProgress is not 100", () => {
-    renderWithTheme(
-      <ManualBackup {...defaultProps} downloadingProgress={50} />,
-    );
+    render(<ManualBackup {...defaultProps} downloadingProgress={50} />);
 
     const temporaryRadio = screen.getByLabelText("Common:TemporaryStorage");
     const roomsRadio = screen.getByLabelText("Common:RoomsModule");
@@ -357,7 +358,7 @@ describe("ManualBackup", () => {
   });
 
   it("disables all options when pageIsDisabled is true", () => {
-    renderWithTheme(<ManualBackup {...defaultProps} pageIsDisabled />);
+    render(<ManualBackup {...defaultProps} pageIsDisabled />);
 
     const temporaryRadio = screen.getByLabelText("Common:TemporaryStorage");
     const roomsRadio = screen.getByLabelText("Common:RoomsModule");
@@ -376,7 +377,7 @@ describe("ManualBackup", () => {
   });
 
   it("disables paid features when isNotPaidPeriod is true", () => {
-    renderWithTheme(<ManualBackup {...defaultProps} isNotPaidPeriod />);
+    render(<ManualBackup {...defaultProps} isNotPaidPeriod />);
 
     const temporaryRadio = screen.getByLabelText("Common:TemporaryStorage");
     expect(temporaryRadio).not.toBeDisabled();
@@ -392,14 +393,6 @@ describe("ManualBackup", () => {
     expect(thirdPartyStorageRadio).toBeDisabled();
   });
 
-  it("shows error message when errorInformation is provided", () => {
-    renderWithTheme(
-      <ManualBackup {...defaultProps} errorInformation="Test error message" />,
-    );
-
-    expect(screen.getByText("Test error message")).toBeInTheDocument();
-  });
-
   it("handles error during backup creation", async () => {
     const error = new Error("Backup failed");
     (startBackup as jest.Mock).mockRejectedValueOnce(error);
@@ -408,24 +401,24 @@ describe("ManualBackup", () => {
       .spyOn(console, "error")
       .mockImplementation(() => {});
 
-    renderWithTheme(<ManualBackup {...defaultProps} />);
+    render(<ManualBackup {...defaultProps} />);
 
     const createButton = screen.getByText("Common:Create");
 
     await userEvent.click(createButton);
 
-    expect(defaultProps.setErrorInformation).toHaveBeenCalled();
+    expect(consoleErrorSpy).toHaveBeenCalledWith(error);
 
     consoleErrorSpy.mockRestore();
   });
 
   it("sets up and cleans up socket listeners", () => {
-    const { unmount } = renderWithTheme(<ManualBackup {...defaultProps} />);
+    const { unmount } = render(<ManualBackup {...defaultProps} />);
 
-    expect(SocketHelper.on).toHaveBeenCalled();
+    expect(SocketHelper?.on).toHaveBeenCalled();
 
     unmount();
 
-    expect(SocketHelper.off).toHaveBeenCalled();
+    expect(SocketHelper?.off).toHaveBeenCalled();
   });
 });

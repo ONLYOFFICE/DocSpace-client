@@ -28,7 +28,6 @@ import EmptyTrashDialog from "./EmptyTrashDialog";
 import DeleteDialog from "./DeleteDialog";
 import DownloadDialog from "./DownloadDialog";
 import ConvertDialog from "./ConvertDialog";
-import DeleteThirdPartyDialog from "./DeleteThirdPartyDialog";
 import ConnectDialog from "./ConnectDialog/ConnectDialogWrapper";
 import ConflictResolveDialog from "./ConflictResolveDialog";
 import ChangeEmailDialog from "./ChangeEmailDialog";
@@ -55,7 +54,6 @@ import CreateRoomConfirmDialog from "./CreateRoomConfirmDialog";
 import PortalRenamingDialog from "./PortalRenamingDialog";
 import DataReassignmentDialog from "./DataReassignmentDialog";
 import SubmitToFormGallery from "./SubmitToFormGallery";
-import UnsavedChangesDialog from "./UnsavedChangesDialog";
 import DeleteLinkDialog from "./DeleteLinkDialog";
 import MoveToPublicRoom from "./MoveToPublicRoom";
 import SettingsPluginDialog from "./SettingsPluginDialog";
@@ -80,7 +78,6 @@ export {
   DeleteDialog,
   DownloadDialog,
   ConvertDialog,
-  DeleteThirdPartyDialog,
   ConnectDialog,
   ConflictResolveDialog,
   ChangeEmailDialog,
@@ -107,7 +104,6 @@ export {
   PortalRenamingDialog,
   DataReassignmentDialog,
   SubmitToFormGallery,
-  UnsavedChangesDialog,
   DeleteLinkDialog,
   MoveToPublicRoom,
   SettingsPluginDialog,

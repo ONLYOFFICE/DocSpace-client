@@ -3,7 +3,7 @@
   "content": "If you delete multiple users at once, you cannot reassign their files to other users.",
   "content_en_sha1_hash": "1d82f9d2d56e9e5ac7a5d3230b1554e9ba7c8f60",
   "created_at": "2025-05-19T21:30:56.652Z",
-  "updated_at": "2025-06-30T12:20:31.238Z",
+  "updated_at": "2025-09-02T07:59:28.382Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that deleting multiple users prevents reassigning their files. It appears in a delete profile dialog, specifically on the body component, where it explains the limitation of file reassignment after mass deletion.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
       "line_number": 128,
-      "context": "sectionNameFirst: t(\"Common:MyFilesSection\"),\n sectionNameSecond: t(\"Common:TrashSection\"),\n })}\n </Text>\n <Text className=\"text-delete-description\">\n {t(\"CannotReassignFiles\")}\n </Text>\n <Text className=\"text-delete-description\">\n {t(\"ToBeAbleToReassignData\")}\n </Text>\n <Text className=\"text-delete-description\">",
+      "context": "sectionNameFirst: t(\"Common:MyDocuments\"),\n sectionNameSecond: t(\"Common:TrashSection\"),\n })}\n </Text>\n <Text className=\"text-delete-description\">\n {t(\"CannotReassignFiles\")}\n </Text>\n <Text className=\"text-delete-description\">\n {t(\"ToBeAbleToReassignData\")}\n </Text>\n <Text className=\"text-delete-description\">",
       "module": "/packages/client"
     }
   ],

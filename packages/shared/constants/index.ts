@@ -32,7 +32,6 @@ import ShareLinkedinReactSvg from "PUBLIC_DIR/images/share.linkedin.react.svg";
 import ShareMicrosoftReactSvg from "PUBLIC_DIR/images/share.microsoft.react.svg";
 import ShareZoomReactSvg from "PUBLIC_DIR/images/share.zoom.react.svg";
 import ShareWeixinReactSvg from "PUBLIC_DIR/images/share.weixin.react.svg";
-import ShareQqReactSvg from "PUBLIC_DIR/images/share.qq.react.svg";
 import { globalColors } from "../themes/globalColors";
 import { FileFillingFormStatus } from "../enums";
 

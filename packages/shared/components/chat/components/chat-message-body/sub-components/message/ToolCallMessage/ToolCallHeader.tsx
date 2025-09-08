@@ -84,7 +84,21 @@ export const ToolCallHeader = ({
     >
       {statusIcon}
       <Text fontSize="13px" lineHeight="15px" fontWeight={600}>
-        {t("Common:ToolCallExecuted")}:<span> {toolName}</span>
+        {t("Common:ToolCallExecuted")}:
+      </Text>
+      <img // Todo: This is a placeholder. Replace with tool icon when it's ready on backend
+        src="/logo.ashx?logotype=3"
+        width="16px"
+        height="16px"
+        alt="tool logo"
+      />
+      <Text
+        fontSize="13px"
+        lineHeight="15px"
+        fontWeight={600}
+        className={styles.toolName}
+      >
+        {toolName}
       </Text>
       {expandable ? (
         <ReactSVG src={ArrowRightIcon} className={styles.arrowRightIcon} />

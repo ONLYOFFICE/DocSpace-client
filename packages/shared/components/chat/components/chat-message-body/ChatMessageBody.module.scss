@@ -291,6 +291,10 @@
       }
     }
 
+    .toolName {
+      color: var(--chat-message-color);
+    }
+
     &.hide {
       border-bottom: none;
     }

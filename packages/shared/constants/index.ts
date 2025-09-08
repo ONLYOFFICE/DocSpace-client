@@ -31,6 +31,8 @@ import ShareTwitterReactSvg from "PUBLIC_DIR/images/thirdparties/twitter.svg";
 import ShareLinkedinReactSvg from "PUBLIC_DIR/images/share.linkedin.react.svg";
 import ShareMicrosoftReactSvg from "PUBLIC_DIR/images/share.microsoft.react.svg";
 import ShareZoomReactSvg from "PUBLIC_DIR/images/share.zoom.react.svg";
+import ShareWeixinReactSvg from "PUBLIC_DIR/images/share.weixin.react.svg";
+import ShareQqReactSvg from "PUBLIC_DIR/images/share.qq.react.svg";
 import { globalColors } from "../themes/globalColors";
 import { FileFillingFormStatus } from "../enums";
 
@@ -141,6 +143,11 @@ export const PROVIDERS_DATA = Object.freeze({
   zoom: {
     label: "zoom",
     icon: ShareZoomReactSvg,
+    iconOptions: undefined,
+  },
+  weixin: {
+    label: "weixin",
+    icon: ShareWeixinReactSvg,
     iconOptions: undefined,
   },
 });

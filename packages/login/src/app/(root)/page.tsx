@@ -60,6 +60,12 @@ async function Page(props: {
       clientId ? getOAuthClient(clientId) : undefined,
     ]);
 
+  thirdParty?.push({
+    linked: false,
+    provider: "weixin",
+    url: "",
+  });
+
   const ssoUrl = capabilities ? capabilities.ssoUrl : "";
   const hideAuthPage = ssoSettings ? ssoSettings.hideAuthPage : false;
   const ssoExists = !!ssoUrl;

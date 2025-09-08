@@ -413,6 +413,10 @@ export function getProviderTranslation(
       return signUp ? t("Common:SignUpWithSso") : t("Common:SignInWithSso");
     case "zoom":
       return signUp ? t("Common:SignUpWithZoom") : t("Common:SignInWithZoom");
+    case "weixin":
+      return signUp
+        ? t("Common:SignUpWithWechat")
+        : t("Common:SignInWithWechat");
     default:
       return "";
   }
@@ -435,6 +439,8 @@ export function getProviderLabel(provider: string, t: (key: string) => string) {
       return t("Common:SSO");
     case "zoom":
       return t("Common:ProviderZoom");
+    case "weixin":
+      return t("Common:ProviderWechat");
     case "sso-full":
       return t("Common:ProviderSsoSetting");
     default:

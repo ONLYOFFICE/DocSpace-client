@@ -73,7 +73,7 @@ const InfoPanel = ({
   );
 
   const renderPortalInfoPanel = () => {
-    const rootElement = document.getElementById("root");
+    const rootElement = document.getElementById("main-container");
 
     return (
       <Portal

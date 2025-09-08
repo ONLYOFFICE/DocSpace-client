@@ -106,10 +106,10 @@
   height: auto;
   width: auto;
   background: var(--info-panel-blur-color);
-  z-index: z.$overlay;
+  z-index: z.$modal;
 
   @include mixins.tablet-and-below {
-    z-index: z.$overlay;
+    z-index: z.$modal;
     position: fixed;
     inset: 0;
   }
@@ -445,7 +445,7 @@
       position: sticky;
       top: 0;
       background: var(--section-header-bg);
-      z-index: z.$sticky;
+      z-index: z.$content;
       padding-inline: 20px;
       margin-inline: -20px -17px;
 
@@ -619,7 +619,8 @@
     height: 12px;
     border: 2px solid transparent;
     border-radius: 50%;
-    background-image: linear-gradient(rgb(85, 95, 101), rgb(85, 95, 101)),
+    background-image:
+      linear-gradient(rgb(85, 95, 101), rgb(85, 95, 101)),
       conic-gradient(
         from 0.25turn at 50% 30%,
         rgb(85, 95, 101),

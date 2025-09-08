@@ -203,6 +203,8 @@
 
   .codeBody {
     background-color: var(--chat-message-code-block-background-color);
+
+    max-height: 168px;
   }
 }
 

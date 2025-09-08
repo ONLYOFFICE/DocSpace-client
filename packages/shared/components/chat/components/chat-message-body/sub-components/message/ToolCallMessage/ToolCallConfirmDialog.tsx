@@ -53,9 +53,17 @@ export const ToolCallConfirmDialog = ({
   const { t } = useTranslation(["Common"]);
 
   const onClickAction = (decision: ToolsPermission) => {
-    if (!content.callId) return;
+    if (content.callId) {
+      updateToolsPermission(content.callId, decision);
+    }
 
-    updateToolsPermission(content.callId, decision);
+    onClose();
+  };
+
+  const onCloseAction = () => {
+    if (content.callId) {
+      updateToolsPermission(content.callId, ToolsPermission.Deny);
+    }
 
     onClose();
   };
@@ -64,15 +72,20 @@ export const ToolCallConfirmDialog = ({
     <ModalDialog
       visible
       displayType={ModalDialogType.modal}
-      onClose={onClose}
+      onClose={onCloseAction}
       isLarge
+      autoMaxHeight
     >
       <ModalDialog.Header>{t("Common:Confirmation")}</ModalDialog.Header>
 
       <ModalDialog.Body>
         <div className={styles.toolCallManage}>
           <Text>AI would like to use this tool</Text>
-          <ToolCall content={content} />
+          <ToolCall
+            content={content}
+            status="confirmation"
+            placement="confirmDialog"
+          />
           <div>
             <Text>{t("Common:ReviewAction")}</Text>
             <Text>{t("Common:CannotGuaranteeSecurity")}</Text>

@@ -95,7 +95,9 @@ export type MessageToolCallProps = {
   content: TToolCallContent;
 };
 
-export type ToolCallStatus = "idle" | "loading" | "success";
+export type ToolCallStatus = "loading" | "confirmation" | "finished";
+
+export type ToolCallPlacement = "message" | "confirmDialog";
 
 export type MessageEmptyProps = {
   isLoading?: boolean;

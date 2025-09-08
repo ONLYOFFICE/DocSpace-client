@@ -31,20 +31,24 @@ import React from "react";
 import type { TToolCallContent } from "../../../../../../../api/ai/types";
 
 import styles from "../../../ChatMessageBody.module.scss";
-import type { ToolCallStatus } from "../../../../../Chat.types";
+import type {
+  ToolCallPlacement,
+  ToolCallStatus,
+} from "../../../../../Chat.types";
 
 import { ToolCallHeader } from "./ToolCallHeader";
 import { ToolCallBody } from "./ToolCallBody";
 
 type ToolCallProps = {
   content: TToolCallContent;
-  status?: ToolCallStatus;
+  placement: ToolCallPlacement;
+  status: ToolCallStatus;
 };
 
-export const ToolCall = ({ content, status }: ToolCallProps) => {
+export const ToolCall = ({ content, status, placement }: ToolCallProps) => {
   const [collapsed, setCollapsed] = React.useState(true);
 
-  const blockExpanding = status === "loading";
+  const expandable = placement === "confirmDialog" || status === "finished";
 
   return (
     <div className={styles.toolCall}>
@@ -52,11 +56,14 @@ export const ToolCall = ({ content, status }: ToolCallProps) => {
         collapsed={collapsed}
         setCollapsed={setCollapsed}
         toolName={content.name}
-        status={status || "idle"}
-        blockExpanding={blockExpanding}
+        status={status}
+        placement={placement}
+        expandable={expandable}
       />
 
-      {blockExpanding || collapsed ? null : <ToolCallBody content={content} />}
+      {!expandable || collapsed ? null : (
+        <ToolCallBody content={content} placement={placement} />
+      )}
     </div>
   );
 };

@@ -298,6 +298,10 @@
         rotate: 90deg;
       }
     }
+
+    &.noClick {
+      pointer-events: none;
+    }
   }
 
   .toolCallBody {

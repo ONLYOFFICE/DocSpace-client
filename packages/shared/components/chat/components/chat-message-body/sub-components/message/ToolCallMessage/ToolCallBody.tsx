@@ -35,12 +35,14 @@ import type { TToolCallContent } from "../../../../../../../api/ai/types";
 import { formatJsonWithMarkdown } from "../../../../../utils";
 
 import MarkdownField from "../Markdown";
+import type { ToolCallPlacement } from "../../../../../Chat.types";
 
 type ToolCallBodyProps = {
   content: TToolCallContent;
+  placement: ToolCallPlacement;
 };
 
-export const ToolCallBody = ({ content }: ToolCallBodyProps) => {
+export const ToolCallBody = ({ content, placement }: ToolCallBodyProps) => {
   const { t } = useTranslation(["Common"]);
 
   const result = (content.result?.content as Record<string, unknown>[])?.[0]
@@ -55,6 +57,8 @@ export const ToolCallBody = ({ content }: ToolCallBodyProps) => {
     isJson = false;
   }
 
+  const showResult = placement === "message" && content.result;
+
   return (
     <div className={styles.toolCallBody}>
       <div className={styles.toolCallBodyItem}>
@@ -65,7 +69,7 @@ export const ToolCallBody = ({ content }: ToolCallBodyProps) => {
           chatMessage={formatJsonWithMarkdown(content.arguments)}
         />
       </div>
-      {content.result ? (
+      {showResult ? (
         <div className={styles.toolCallBodyItem}>
           <Text fontSize="15px" lineHeight="16px" fontWeight={600}>
             {t("Common:ToolCallResult")}

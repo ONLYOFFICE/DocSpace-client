@@ -35,7 +35,10 @@ import ToolFinish from "PUBLIC_DIR/images/tool.finish.svg?url";
 import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg?url";
 
 import { Text } from "../../../../../../text";
-import type { ToolCallStatus } from "../../../../../Chat.types";
+import type {
+  ToolCallPlacement,
+  ToolCallStatus,
+} from "../../../../../Chat.types";
 import { Loader, LoaderTypes } from "../../../../../../loader";
 
 import styles from "../../../ChatMessageBody.module.scss";
@@ -45,7 +48,8 @@ type ToolCallHeaderProps = {
   setCollapsed: (value: boolean) => void;
   toolName: string;
   status: ToolCallStatus;
-  blockExpanding?: boolean;
+  placement: ToolCallPlacement;
+  expandable?: boolean;
 };
 
 export const ToolCallHeader = ({
@@ -53,21 +57,20 @@ export const ToolCallHeader = ({
   setCollapsed,
   status,
   toolName,
-  blockExpanding,
+  placement,
+  expandable,
 }: ToolCallHeaderProps) => {
   const { t } = useTranslation(["Common"]);
 
   const statusIcons = {
-    idle: null,
     loading: <Loader type={LoaderTypes.track} size="12px" />,
-    success: <ReactSVG src={ToolFinish} className={styles.toolFinishIcon} />,
+    confirmation: <Loader type={LoaderTypes.track} size="12px" />,
+    finished: <ReactSVG src={ToolFinish} className={styles.toolFinishIcon} />,
   };
 
-  const statusIcon = statusIcons[status];
+  const statusIcon = placement === "confirmDialog" ? null : statusIcons[status];
 
   const onClick = () => {
-    if (blockExpanding) return;
-
     setCollapsed(!collapsed);
   };
 
@@ -75,6 +78,7 @@ export const ToolCallHeader = ({
     <div
       className={classNames(styles.toolCallHeader, {
         [styles.hide]: collapsed,
+        [styles.noClick]: !expandable,
       })}
       onClick={onClick}
     >
@@ -82,9 +86,9 @@ export const ToolCallHeader = ({
       <Text fontSize="13px" lineHeight="15px" fontWeight={600}>
         {t("Common:ToolCallExecuted")}:<span> {toolName}</span>
       </Text>
-      {blockExpanding ? null : (
+      {expandable ? (
         <ReactSVG src={ArrowRightIcon} className={styles.arrowRightIcon} />
-      )}
+      ) : null}
     </div>
   );
 };

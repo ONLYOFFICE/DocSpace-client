@@ -28,24 +28,30 @@
 
 import React from "react";
 
-import { MessageToolCallProps } from "../../../../../Chat.types";
+import {
+  MessageToolCallProps,
+  type ToolCallStatus,
+} from "../../../../../Chat.types";
 
 import { ToolCallConfirmDialog } from "./ToolCallConfirmDialog";
 import { ToolCall } from "./ToolCall";
 
 const ToolCallMessage = ({ content }: MessageToolCallProps) => {
   const [needConfirmation, setNeedConfirmation] = React.useState(
-    () => !!content.additionalProperties?.managed || true,
+    () => !!content.additionalProperties?.managed,
   );
 
   const hideConfirmDialog = () => setNeedConfirmation(false);
 
+  const toolCallStatus: ToolCallStatus = needConfirmation
+    ? "confirmation"
+    : !content.result
+      ? "loading"
+      : "finished";
+
   return (
     <div>
-      <ToolCall
-        content={content}
-        status={needConfirmation || !content.result ? "loading" : "success"}
-      />
+      <ToolCall content={content} status={toolCallStatus} placement="message" />
 
       {needConfirmation ? (
         <ToolCallConfirmDialog content={content} onClose={hideConfirmDialog} />

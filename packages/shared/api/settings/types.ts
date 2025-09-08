@@ -184,6 +184,7 @@ export type THelpCenterEntries = {
   becometranslator: string;
   connectamazon: string;
   connectapple: string;
+  connectweixin: string;
   connectbox: string;
   connectclickatell: string;
   connectdocusign: string;

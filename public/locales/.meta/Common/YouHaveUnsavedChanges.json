@@ -3,7 +3,7 @@
   "content": "You have unsaved changes",
   "content_en_sha1_hash": "5ea3902f149163da1cf57472568ec3a89d52e790",
   "created_at": "2025-05-19T21:30:53.245Z",
-  "updated_at": "2025-08-26T11:15:14.152Z",
+  "updated_at": "2025-09-07T07:53:15.214Z",
   "comment": {
     "text": "This translation key is used to display a reminder message when unsaved changes are made to a form or settings, prompting the user to save their work before leaving the page. It appears in various UI elements such as save buttons and dialogs, alerting users of potential data loss. The translation should convey a clear warning without being too intrusive.",
     "is_auto": true,
@@ -84,7 +84,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
-      "line_number": 242,
+      "line_number": 277,
       "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}",
       "module": "/packages/client"
     },
@@ -96,13 +96,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/sub-components/HistoryMainContent.js",
-      "line_number": 373,
+      "line_number": 277,
       "context": "onSaveClick={setLifeTimeSettings}\n onCancelClick={onCancelLoginLifeTime}\n saveButtonLabel={saveButtonLabel}\n cancelButtonLabel={cancelButtonLabel}\n showReminder={loginLifeTimeReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n displaySettings={true}\n hasScroll={false}\n isDisabled={isSettingNotPaid}\n />\n </>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/sub-components/HistoryMainContent.js",
-      "line_number": 373,
+      "line_number": 277,
       "context": "onSaveClick={setLifeTimeSettings}\n onCancelClick={onCancelLoginLifeTime}\n saveButtonLabel={saveButtonLabel}\n cancelButtonLabel={cancelButtonLabel}\n showReminder={loginLifeTimeReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n displaySettings={true}\n hasScroll={false}\n isDisabled={isSettingNotPaid}\n />\n </>",
       "module": "/packages/client"
     },

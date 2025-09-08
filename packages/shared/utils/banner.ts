@@ -43,7 +43,7 @@ export function getLanguage(lng: string) {
     }
 
     return language;
-  } catch (error) {
+  } catch {
     return lng;
   }
 }

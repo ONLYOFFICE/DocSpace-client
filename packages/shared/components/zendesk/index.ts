@@ -32,7 +32,7 @@ interface Props {
   zendeskKey: string;
   defer?: boolean;
   onLoaded?: () => void;
-  config?: {};
+  config?: object;
   isShowLiveChat: boolean;
 }
 

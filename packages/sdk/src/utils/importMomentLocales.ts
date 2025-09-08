@@ -26,14 +26,13 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-/* eslint-disable import/no-dynamic-require */
-
 function importMomentLocale(locale: string) {
   const splittedLocale = locale.split("-");
 
   while (splittedLocale.length > 0) {
     try {
       const normalizedLocale = splittedLocale.join("-").toLowerCase();
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
       require(`moment/locale/${normalizedLocale}`);
 
       break;

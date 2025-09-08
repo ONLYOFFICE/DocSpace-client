@@ -3,7 +3,7 @@
   "content": "Document Service",
   "content_en_sha1_hash": "56cd1da1e1b8ef8da631a87da2db26079d5a2586",
   "created_at": "2025-05-19T21:30:51.251Z",
-  "updated_at": "2025-08-04T07:30:01.473Z",
+  "updated_at": "2025-09-07T07:53:15.295Z",
   "comment": {
     "text": "The translation key \"DocumentService\" is used to display the name of a document service component, likely appearing on a settings page or integration wrapper. This text provides context for users navigating portal settings and configuring integration options.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/index.js",
       "line_number": 42,
-      "context": "import SSO from \"./SingleSignOn\";\n import LDAP from \"./LDAP\";\n import ThirdParty from \"./ThirdPartyServicesSettings\";\n \n import SMTPSettings from \"./SMTPSettings\";\n import DocumentService from \"./DocumentService\";\n import PluginPage from \"./Plugins\";\n \n const IntegrationWrapper = (props) => {\n const {\n t,",
+      "context": "import SsoSettings from \"./SingleSignOn\";\n import LdapSettings from \"./LDAP\";\n import ThirdParty from \"./ThirdPartyServicesSettings\";\n \n import SMTPSettings from \"./SMTPSettings\";\n import DocumentService from \"./DocumentService\";\n import PluginPage from \"./Plugins\";\n \n const IntegrationWrapper = (props) => {\n const {\n t,",
       "module": "/packages/client"
     },
     {

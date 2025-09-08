@@ -45,7 +45,7 @@ export interface DragAndDropProps {
   onDragLeave?: (e: React.DragEvent<HTMLElement>) => void;
   /** Needs for selection area and DND work */
   value?: string;
-  targetFile?: Function;
+  targetFile?: (file?: File | null) => void;
   style?: React.CSSProperties;
   forwardedRef?: React.RefObject<HTMLDivElement | null>;
 }

@@ -3,7 +3,7 @@
   "content": "Search by group members",
   "content_en_sha1_hash": "184145132a97e055ac3dffd682c055646ed6d938",
   "created_at": "2025-05-19T21:30:53.510Z",
-  "updated_at": "2025-08-12T19:46:25.912Z",
+  "updated_at": "2025-09-07T07:53:15.097Z",
   "comment": {
     "text": "The translation key \"SearchByGroupMembers\" is used to describe the search input field in a dialogue, allowing users to find and select group members. The text appears in a modal body loader or dialog box, typically prompting users to enter a search query.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/EditGroupMembersDialog/index.tsx",
-      "line_number": 152,
+      "line_number": 151,
       "context": "<ModalBodyLoader withSearch />\n ) : (\n <>\n <SearchInput\n className=\"search-input\"\n placeholder={t(\"PeopleTranslations:SearchByGroupMembers\")}\n value={searchValue}\n onChange={onChangeSearchValue}\n onClearSearch={onClearSearch}\n size={InputSize.base}\n />",
       "module": "/packages/client"
     }

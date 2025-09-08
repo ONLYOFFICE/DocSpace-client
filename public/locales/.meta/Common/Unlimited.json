@@ -3,7 +3,7 @@
   "content": "Unlimited",
   "content_en_sha1_hash": "b8bef37b7153b5665e94cf9b212c8708eb06db1f",
   "created_at": "2025-05-19T21:30:49.415Z",
-  "updated_at": "2025-08-29T14:33:37.970Z",
+  "updated_at": "2025-09-07T07:53:15.043Z",
   "comment": {
     "text": "This translation key is used to display \"Unlimited\" when an account has no quota limit. It appears in various UI elements, such as space quota components and share helpers, where it indicates that there are no restrictions on data storage or sharing.",
     "is_auto": true,
@@ -36,7 +36,7 @@
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 719,
+      "line_number": 715,
       "context": "export const getConvertedQuota = (\n t: (key: string) => string,\n bytes: number,\n ) => {\n if (bytes === -1) return t(\"Common:Unlimited\");\n return getConvertedSize(t, bytes);\n };\n \n export const getSpaceQuotaAsText = (\n t: (key: string) => string,",
       "module": "/packages/shared"
     }

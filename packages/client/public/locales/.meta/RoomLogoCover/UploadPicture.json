@@ -3,7 +3,7 @@
   "content": "Upload picture",
   "content_en_sha1_hash": "0a024e54cb81f9e05f0faa90496774cb8e76dcae",
   "created_at": "2025-05-19T21:30:53.320Z",
-  "updated_at": "2025-08-11T18:11:59.311Z",
+  "updated_at": "2025-09-07T07:53:15.394Z",
   "comment": {
     "text": "Upload picture is a button label used to trigger uploading an image. It appears as a label on a UI element that allows users to select or upload images.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/DialogsStore.js",
-      "line_number": 966,
-      "context": "};\n \n getLogoCoverModel = (t, hasImage, onDelete) => {\n return [\n {\n label: t(\"RoomLogoCover:UploadPicture\"),\n icon: UploadSvgUrl,\n key: \"create_edit_room_upload\",\n onClick: (ref) => ref.current.click(),\n },",
+      "line_number": 967,
+      "context": "};\n \n getLogoCoverModel = (t, hasImage, onDelete) => {\n return [\n {\n label: t(\"RoomLogoCover:UploadPicture\"),\n icon: UploadSvgUrl,\n key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_UPLOAD,\n onClick: (ref) => ref.current.click(),\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/TargetUserStore.ts",
-      "line_number": 140,
-      "context": "};\n \n getProfileModel = (t: TFunction) => {\n return [\n {\n label: t(\"RoomLogoCover:UploadPicture\"),\n icon: UploadSvgUrl,\n key: \"profile_avatar_upload\",\n onClick: (ref: React.RefObject<HTMLDivElement>) => ref.current?.click(),\n },\n {",
+      "line_number": 144,
+      "context": "};\n \n getProfileModel = (t: TFunction) => {\n return [\n {\n label: t(\"RoomLogoCover:UploadPicture\"),\n icon: UploadSvgUrl,\n key: AVATAR_ACTION_KEYS.PROFILE_AVATAR_UPLOAD,\n onClick: (ref: React.RefObject<HTMLDivElement>) => ref.current?.click(),\n },\n {",
       "module": "/packages/client"
     }
   ],

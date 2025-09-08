@@ -516,182 +516,132 @@ class PluginStore {
     return currentDeviceType as PluginDevices;
   };
 
+  validateContextMenuItem = (
+    item: IContextMenuItem,
+    ctx: {
+      type?: PluginFileType;
+      fileExst?: string;
+      userRole?: PluginUsersType;
+      device?: PluginDevices;
+      security?: TRoomSecurity | TFolderSecurity;
+      itemSecurity?: TFileSecurity | TRoomSecurity | TFolderSecurity;
+    },
+  ) => {
+    const { type, fileExst, userRole, device, security, itemSecurity } = ctx;
+
+    if (type && item.fileType && !item.fileType.includes(type)) return false;
+
+    if (fileExst && item.fileExt && !item.fileExt.includes(fileExst))
+      return false;
+
+    if (userRole && item.usersTypes && !item.usersTypes.includes(userRole))
+      return false;
+
+    if (device && item.devices && !item.devices.includes(device)) return false;
+
+    if (
+      security &&
+      item.security &&
+      !item.security.every((key) => security[key as keyof typeof security])
+    )
+      return false;
+
+    if (
+      itemSecurity &&
+      item.itemSecurity &&
+      !item.itemSecurity.every(
+        (key) => itemSecurity[key as keyof typeof itemSecurity],
+      )
+    )
+      return false;
+
+    return true;
+  };
+
   getContextMenuKeysByType = (
     type: PluginFileType,
     fileExst: string,
-    security: TRoomSecurity | TFileSecurity | TFolderSecurity,
+    security: TRoomSecurity | TFolderSecurity,
+    itemSecurity: TFileSecurity | TRoomSecurity | TFolderSecurity,
   ) => {
     if (!this.contextMenuItems) return;
 
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
 
-    const itemsMap = Array.from(this.contextMenuItems);
+    const items = this.contextMenuItems.values();
     const keys: string[] = [];
 
     switch (type) {
       case PluginFileType.Files:
-        itemsMap.forEach((val) => {
-          const item = val[1];
+        items.forEach((item) => {
+          const isValid = this.validateContextMenuItem(item, {
+            type,
+            fileExst,
+            userRole,
+            device,
+            security,
+            itemSecurity,
+          });
 
-          if (!item.fileType) return;
-
-          if (item.fileType.includes(PluginFileType.Files)) {
-            const correctFileExt = item.fileExt
-              ? item.fileExt.includes(fileExst)
-              : true;
-
-            const correctUserType = item.usersTypes
-              ? item.usersTypes.includes(userRole)
-              : true;
-
-            const correctDevice = item.devices
-              ? item.devices.includes(device)
-              : true;
-
-            const correctSecurity = item.security
-              ? item.security.every(
-                  (key: string) => security?.[key as keyof typeof security],
-                )
-              : true;
-
-            if (
-              correctFileExt &&
-              correctUserType &&
-              correctDevice &&
-              correctSecurity
-            )
-              keys.push(item.key);
-          }
+          if (isValid) keys.push(item.key);
         });
+
         break;
       case PluginFileType.Folders:
-        itemsMap.forEach((val) => {
-          const item = val[1];
+        items.forEach((item) => {
+          const isValid = this.validateContextMenuItem(item, {
+            type,
+            userRole,
+            device,
+            security,
+            itemSecurity,
+          });
 
-          if (item.fileType?.includes(PluginFileType.Folders)) {
-            const correctUserType = item.usersTypes
-              ? item.usersTypes.includes(userRole)
-              : true;
-
-            const correctDevice = item.devices
-              ? item.devices.includes(device)
-              : true;
-
-            const correctSecurity = item.security
-              ? item.security.every(
-                  (key: string) => security?.[key as keyof typeof security],
-                )
-              : true;
-
-            if (correctUserType && correctDevice && correctSecurity)
-              keys.push(item.key);
-          }
+          if (isValid) keys.push(item.key);
         });
         break;
       case PluginFileType.Rooms:
-        itemsMap.forEach((val) => {
-          const item = val[1];
+        items.forEach((item) => {
+          const isValid = this.validateContextMenuItem(item, {
+            type,
+            userRole,
+            device,
+            security,
+            itemSecurity,
+          });
 
-          if (item.fileType?.includes(PluginFileType.Rooms)) {
-            const correctUserType = item.usersTypes
-              ? item.usersTypes.includes(userRole)
-              : true;
-
-            const correctDevice = item.devices
-              ? item.devices.includes(device)
-              : true;
-
-            const correctSecurity = item.security
-              ? item.security.every(
-                  (key: string) => security?.[key as keyof typeof security],
-                )
-              : true;
-
-            if (correctUserType && correctDevice && correctSecurity)
-              keys.push(item.key);
-          }
+          if (isValid) keys.push(item.key);
         });
         break;
       case PluginFileType.Image:
-        itemsMap.forEach((val) => {
-          const item = val[1];
+        items.forEach((item) => {
+          const isValid = this.validateContextMenuItem(item, {
+            type,
+            userRole,
+            device,
+            fileExst,
+            security,
+            itemSecurity,
+          });
 
-          if (item.fileType?.includes(PluginFileType.Image)) {
-            const correctFileExt = item.fileExt
-              ? item.fileExt.includes(fileExst)
-              : true;
-
-            const correctUserType = item.usersTypes
-              ? item.usersTypes.includes(userRole)
-              : true;
-
-            const correctDevice = item.devices
-              ? item.devices.includes(device)
-              : true;
-
-            const correctSecurity = item.security
-              ? item.security.every(
-                  (key: string) => security?.[key as keyof typeof security],
-                )
-              : true;
-
-            if (
-              correctUserType &&
-              correctDevice &&
-              correctFileExt &&
-              correctSecurity
-            )
-              keys.push(item.key);
-          }
+          if (isValid) keys.push(item.key);
         });
         break;
       case PluginFileType.Video:
-        itemsMap.forEach((val) => {
-          const item = val[1];
+        items.forEach((item) => {
+          const isValid = this.validateContextMenuItem(item, {
+            type,
+            userRole,
+            device,
+            security,
+            itemSecurity,
+          });
 
-          if (item.fileType?.includes(PluginFileType.Video)) {
-            const correctUserType = item.usersTypes
-              ? item.usersTypes.includes(userRole)
-              : true;
-
-            const correctDevice = item.devices
-              ? item.devices.includes(device)
-              : true;
-
-            const correctSecurity = item.security
-              ? item.security.every(
-                  (key: string) => security?.[key as keyof typeof security],
-                )
-              : true;
-
-            if (correctUserType && correctDevice && correctSecurity)
-              keys.push(item.key);
-          }
+          if (isValid) keys.push(item.key);
         });
         break;
       default:
-        itemsMap.forEach((val) => {
-          const item = val[1];
-          if (item.fileType) return;
-
-          const correctUserType = item.usersTypes
-            ? item.usersTypes.includes(userRole)
-            : true;
-
-          const correctDevice = item.devices
-            ? item.devices.includes(device)
-            : true;
-
-          const correctSecurity = item.security
-            ? item.security.every(
-                (key: string) => security?.[key as keyof typeof security],
-              )
-            : true;
-
-          if (correctUserType && correctDevice && correctSecurity)
-            keys.push(item.key);
-        });
     }
 
     if (keys.length === 0) return null;
@@ -1124,7 +1074,28 @@ class PluginStore {
         const correctDevice = value.devices
           ? value.devices.includes(device)
           : true;
-        if (!value.onClick || !correctDevice) return;
+
+        const { security } = this.selectedFolderStore;
+
+        const correctSecurity = value.security
+          ? value.security.every(
+              (sKey) => security?.[sKey as keyof typeof security],
+            )
+          : true;
+
+        const correctFileSecurity = value.fileSecurity
+          ? value.fileSecurity.every(
+              (sKey) => item.security[sKey as keyof typeof item.security],
+            )
+          : true;
+
+        if (
+          !value.onClick ||
+          !correctDevice ||
+          !correctSecurity ||
+          !correctFileSecurity
+        )
+          return;
 
         const message = await value.onClick(item);
 

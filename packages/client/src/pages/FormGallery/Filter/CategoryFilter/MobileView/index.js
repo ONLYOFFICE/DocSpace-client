@@ -36,11 +36,8 @@ import * as Styled from "./index.styled";
 
 const CategoryFilterMobile = ({
   t,
-
   menuItems,
-
   currentCategory,
-  getTypeOfCategory,
   getCategoryTitle,
   filterOformsByCategory,
   setOformsCurrentCategory,

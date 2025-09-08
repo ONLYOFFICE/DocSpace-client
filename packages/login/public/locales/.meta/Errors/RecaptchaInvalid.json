@@ -3,7 +3,7 @@
   "content": "Invalid Recaptcha",
   "content_en_sha1_hash": "aee84b26a40c729bb0159bed3ff7a17aee7201f6",
   "created_at": "2025-05-19T21:30:57.299Z",
-  "updated_at": "2025-05-26T07:57:32.882Z",
+  "updated_at": "2025-09-07T07:53:15.425Z",
   "comment": {
     "text": "The \"RecaptchaInvalid\" translation key is used to display an error message when the ReCAPTCHA verification fails. This text is likely displayed as an error message on a login form or similar UI element when users fail to pass the reCAPTCHA challenge. Translators should provide a clear and concise equivalent for this text that conveys the same meaning in the target language.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/utils/index.ts",
-      "line_number": 82,
+      "line_number": 83,
       "context": "case \"ErrorNotCorrectEmail\":\n return t(\"Common:IncorrectEmail\");\n case \"LoginWithBruteForce\":\n return t(\"Errors:LoginWithBruteForce\");\n case \"RecaptchaInvalid\":\n return t(\"Errors:RecaptchaInvalid\");\n case \"LoginWithAccountNotFound\":\n return t(\"Errors:LoginWithAccountNotFound\");\n case \"InvalidUsernameOrPassword\":\n return t(\"Errors:InvalidUsernameOrPassword\");\n case \"SsoSettingsDisabled\":",
       "module": "/packages/login"
     }

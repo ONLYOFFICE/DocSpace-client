@@ -3,7 +3,7 @@
   "content": "Reconnect storage",
   "content_en_sha1_hash": "0649139f8f43a246ffc081a20e4c40c7a08245da",
   "created_at": "2025-05-19T21:30:47.753Z",
-  "updated_at": "2025-09-02T07:59:28.676Z",
+  "updated_at": "2025-09-07T07:53:15.386Z",
   "comment": {
     "text": "The translation key \"ReconnectStorage\" is used to display the text \"Reconnect storage\", which appears in a Connect Dialog component, serving as the label for a button that initiates the reconnect process of storage.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1903,
-      "context": "isSeparator: true,\n },\n {\n id: \"option_reconnect-storage\",\n key: \"reconnect-storage\",\n label: t(\"Common:ReconnectStorage\"),\n icon: ReconnectSvgUrl,\n onClick: () => this.onClickReconnectStorage(item, t),\n disabled: !item.security?.Reconnect || !item.security?.EditRoom,\n },\n {",
+      "line_number": 1965,
+      "context": "action: \"archive\",\n },\n {\n id: \"option_reconnect-storage\",\n key: \"reconnect-storage\",\n label: t(\"Common:ReconnectStorage\"),\n icon: ReconnectSvgUrl,\n onClick: () => this.onClickReconnectStorage(item, t),\n disabled: !item.security?.Reconnect || !item.security?.EditRoom,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/dialogs/connect/ConnectDialog.tsx",
-      "line_number": 102,
+      "line_number": 99,
       "context": "const isAccount = !!link;\n const showUrlField = !!connectItem?.requiredConnectionUrl;\n \n const header = isConnectDialogReconnect\n ? t(\"Common:ReconnectStorage\")\n : t(\"Common:ConnectingAccount\");\n \n const onChangeUrl = (e: React.ChangeEvent<HTMLInputElement>) => {\n setIsUrlValid(true);\n setUrlValue(e.target.value);",
       "module": "/packages/shared"
     }

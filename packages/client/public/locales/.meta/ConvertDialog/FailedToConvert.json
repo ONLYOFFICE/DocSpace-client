@@ -3,7 +3,7 @@
   "content": "Failed to convert",
   "content_en_sha1_hash": "77f83211c6420544a7cbc52ddd9fdd077801b113",
   "created_at": "2025-05-19T21:30:56.884Z",
-  "updated_at": "2025-06-18T17:11:42.539Z",
+  "updated_at": "2025-09-07T07:53:15.404Z",
   "comment": {
     "text": "The translation key \"FailedToConvert\" is used to display an error message when file conversion fails. It appears in UI components that handle upload and conversion processes, such as buttons or dialog windows. The translator should provide a clear and concise phrase that conveys the error without technical jargon.",
     "is_auto": true,
@@ -12,13 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/UploadDataStore.js",
-      "line_number": 551,
+      "line_number": 536,
       "context": "if (fileIndex === -1) break;\n \n runInAction(() => (historyFile.inConversion = true));\n \n const res = convertFile(fileId, format, itemPassword).catch(() => {\n const error = t(\"FailedToConvert\");\n \n runInAction(() => {\n historyFile.error = error;\n });",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/UploadDataStore.js",
-      "line_number": 551,
+      "line_number": 536,
+      "context": "if (fileIndex === -1) break;\n \n runInAction(() => (historyFile.inConversion = true));\n \n const res = convertFile(fileId, format, itemPassword).catch(() => {\n const error = t(\"FailedToConvert\");\n \n runInAction(() => {\n historyFile.error = error;\n });",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/UploadDataStore.js",
+      "line_number": 536,
       "context": "if (fileIndex === -1) break;\n \n runInAction(() => (historyFile.inConversion = true));\n \n const res = convertFile(fileId, format, itemPassword).catch(() => {\n const error = t(\"FailedToConvert\");\n \n runInAction(() => {\n historyFile.error = error;\n });",
       "module": "/packages/client"
     }

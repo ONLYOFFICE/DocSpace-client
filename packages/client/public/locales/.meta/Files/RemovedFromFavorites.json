@@ -3,7 +3,7 @@
   "content": "Removed from favorites",
   "content_en_sha1_hash": "c259d9197c21c066bff3db7e0f183ec9c293053c",
   "created_at": "2025-05-19T21:30:56.030Z",
-  "updated_at": "2025-09-02T07:59:28.281Z",
+  "updated_at": "2025-09-07T07:53:14.994Z",
   "comment": {
     "text": "This translation key \"RemovedFromFavorites\" is used to display a message when an item is removed from favorites. It is typically displayed as a success toast after removing an item from favorites in the UI.",
     "is_auto": true,
@@ -30,8 +30,8 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2506,
-      "context": "label: t(\"RemoveFromFavorites\"),\n alt: t(\"RemoveFromFavorites\"),\n iconUrl: FavoritesFillReactSvgUrl,\n onClick: () => {\n this.setFavoriteAction(\"remove\", selection)\n .then(() => toastr.success(t(\"RemovedFromFavorites\")))\n .catch((err) => toastr.error(err));\n },\n })\n .set(\"showInfo\", showInfo);",
+      "line_number": 2507,
+      "context": "label: t(\"RemoveFromFavorites\"),\n alt: t(\"RemoveFromFavorites\"),\n iconUrl: FavoritesFillReactSvgUrl,\n onClick: () => {\n this.setFavoriteAction(\"remove\", selection)\n .then(() => toastr.success(t(\"RemovedFromFavorites\")))\n .catch((err) => toastr.error(err));\n },\n }) */\n .set(\"showInfo\", showInfo);",
       "module": "/packages/client"
     }
   ],

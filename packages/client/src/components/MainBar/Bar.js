@@ -297,6 +297,7 @@ const Bar = (props) => {
       setHtmlLink(htmlUrl);
       setCampaigns(currentBar);
     } catch (e) {
+      console.error(e);
       updateBanner();
     }
 

@@ -98,9 +98,7 @@ const StorybookSocialButtonsGroup = (props: SocialButtonProps) => {
 
   const modifiedProps = { ...restProps, onClick: handleClick };
 
-  // eslint-disable-next-line react/destructuring-assignment
   if (props.ssoUrl) {
-    // eslint-disable-next-line no-script-url
     modifiedProps.ssoUrl = "javascript:void(0);";
   }
 

@@ -38,7 +38,7 @@ const AsidePure = (props: AsideProps) => {
     visible,
     children,
     scale = false,
-    zIndex = z.modal,
+    zIndex = z.overlay,
     className,
     withoutBodyScroll = false,
     onClose,

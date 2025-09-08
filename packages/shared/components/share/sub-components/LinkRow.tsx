@@ -28,16 +28,13 @@ import { useMemo } from "react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
-import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
 import LinkIcon from "PUBLIC_DIR/images/tablet-link.react.svg?url";
 
 import { RowSkeleton } from "../../../skeletons/share";
 import { useIsMobile } from "../../../hooks/useIsMobile";
 import type { TFileLink } from "../../../api/files/types";
 
-import { Link } from "../../link";
 import type { TOption } from "../../combobox";
-import { IconButton } from "../../icon-button";
 import { ContextMenuButton } from "../../context-menu-button";
 
 import {
@@ -56,7 +53,6 @@ import { LinkTypeSelector } from "./LinkTypeSelector";
 import { AccessRightSelector } from "./AccessRightSelector";
 
 const LinkRow = ({
-  onAddClick,
   links,
   changeShareOption,
   changeAccessOption,
@@ -100,28 +96,11 @@ const LinkRow = ({
     changeAccessOption?.(item, link);
   };
 
-  if (!links?.length) {
-    return (
-      <div
-        onClick={onAddClick}
-        className={styles.linkRow}
-        data-testid="info_panel_share_create_and_copy_link"
-      >
-        <div className={styles.square}>
-          <IconButton size={12} iconName={PlusIcon} isDisabled />
-        </div>
-        <Link className={styles.createAndCopyLink} noHover fontWeight={600}>
-          {t("Common:CreateAndCopy")}
-        </Link>
-      </div>
-    );
-  }
-
   const className = classNames(styles.linkRow, {
     [styles.isDisabled]: isArchiveFolder,
   });
 
-  return links.map((link) => {
+  return links?.map((link) => {
     if (("isLoaded" in link && link.isLoaded) || "isLoaded" in link)
       return <RowSkeleton key="loading-link" />;
 

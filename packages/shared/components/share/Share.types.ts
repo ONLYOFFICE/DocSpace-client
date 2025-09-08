@@ -38,6 +38,8 @@ import type { LinkParamsType } from "../../types";
 import type { ShareAccessRights } from "../../enums";
 
 import type { TOption } from "../combobox";
+import type { TUser } from "../../api/people/types";
+import type { TGroup } from "../../api/groups/types";
 
 export type ShareCalendarProps = {
   onDateSet: (formattedDate: moment.Moment) => void;
@@ -55,7 +57,7 @@ export type DefaultCreatePropsType = {
 
 export type AccessItem = { access?: ShareAccessRights };
 
-export type TLink = TFileLink | { isLoaded: boolean };
+export type TLink = TFileLink | { key: string; isLoaded: boolean };
 
 export type LinkRowProps = {
   onAddClick?: () => Promise<void>;
@@ -130,6 +132,7 @@ export type ShareProps = {
   setEditLinkPanelIsVisible: (value: boolean) => void;
   setLinkParams: (linkParams: LinkParamsType) => void;
   fileLinkProps?: TFileLink[];
+  members?: TFileLink[];
 };
 
 export interface LinkTitleProps {
@@ -147,3 +150,38 @@ export type TCopyShareLinkOptions = {
   canShowLink: boolean;
   onClickLink: VoidFunction;
 };
+
+export type TShareBarProps = {
+  t: TFunction;
+  isFolder?: boolean;
+  parentShared?: boolean;
+  selfId?: string;
+};
+
+export interface UseShareProps {
+  infoPanelSelection: TFile | TFolder;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setEditLinkPanelIsVisible: (value: boolean) => void;
+  setLinkParams: (linkParams: LinkParamsType) => void;
+
+  onlyOneLink?: boolean;
+  shareChanged?: boolean;
+  setShareChanged?: (value: boolean) => void;
+
+  fileLinkProps?: TLink[];
+  setView?: (view: string) => void;
+  setIsScrollLocked?: (isScrollLocked: boolean) => void;
+  onOpenPanel?: (options: {
+    visible: boolean;
+    updateAccessLink: () => Promise<void>;
+    fileId: string | number;
+  }) => void;
+  setEmbeddingPanelData?: (value: {
+    visible: boolean;
+    item?: TFile | TFolder;
+  }) => void;
+}
+
+export interface UserProps {
+  user: TUser | TGroup;
+}

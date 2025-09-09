@@ -280,7 +280,7 @@ export default class MessageStore {
       let msg = "";
 
       let buffer = "";
-      let chunkIdx = 0;
+      let chunkIdx = -1;
 
       const streamHandler = async () => {
         const { done, value } = await reader.read();
@@ -338,8 +338,7 @@ export default class MessageStore {
                   }
                   prevMsg = msg;
                 }
-              } catch (e) {
-                console.log(e);
+              } catch {
                 // ignore
               }
             }
@@ -350,8 +349,8 @@ export default class MessageStore {
                 prevMsg = "";
 
                 this.handleToolCall(jsonData);
-              } catch (e) {
-                console.log(e);
+              } catch {
+                // ignore
               }
 
               return;
@@ -363,8 +362,8 @@ export default class MessageStore {
 
               try {
                 this.handleToolResult(jsonData);
-              } catch (e) {
-                console.log(e);
+              } catch {
+                // ignore
               }
 
               return;

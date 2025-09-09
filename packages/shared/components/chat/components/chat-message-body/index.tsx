@@ -29,6 +29,7 @@ import { observer } from "mobx-react";
 import classNames from "classnames";
 
 import socket, { SocketCommands, SocketEvents } from "../../../../utils/socket";
+import { isMobile } from "../../../../utils";
 
 import { Scrollbar } from "../../../scrollbar";
 import type { Scrollbar as CustomScrollbar } from "../../../scrollbar/custom-scrollbar";
@@ -98,6 +99,8 @@ const ChatMessageBody = ({
   });
 
   const calculateHeight = React.useCallback(() => {
+    if (isMobile()) return;
+
     const sectionHeight =
       document.getElementsByClassName("section-wrapper")[0]?.clientHeight || 0;
     const sectionHeaderHeight =
@@ -189,7 +192,7 @@ const ChatMessageBody = ({
       className={classNames(styles.chatMessageBody, {
         [styles.empty]: isEmpty,
       })}
-      style={{ height: `${height}px` }}
+      style={isMobile() ? { height: `${height}px` } : undefined}
     >
       {messages.length === 0 ? (
         <EmptyScreen isLoading={isLoading} />

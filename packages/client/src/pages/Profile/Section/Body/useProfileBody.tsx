@@ -58,10 +58,10 @@ export type UseProfileBodyProps = {
   setProviders: UsersStore["setProviders"];
   getCapabilities: AuthStore["getCapabilities"];
   getSessions: SettingsSetupStore["getSessions"];
-  setIsProfileLoaded: ClientLoadingStore["setIsProfileLoaded"];
-  setIsSectionHeaderLoading: ClientLoadingStore["setIsSectionHeaderLoading"];
-  setIsArticleLoading: ClientLoadingStore["setIsArticleLoading"];
-  setIsSectionBodyLoading: ClientLoadingStore["setIsSectionBodyLoading"];
+  setIsProfileLoaded?: ClientLoadingStore["setIsProfileLoaded"];
+  setIsSectionHeaderLoading?: ClientLoadingStore["setIsSectionHeaderLoading"];
+  setIsArticleLoading?: ClientLoadingStore["setIsArticleLoading"];
+  setIsSectionBodyLoading?: ClientLoadingStore["setIsSectionBodyLoading"];
 };
 
 const useProfileBody = ({
@@ -198,10 +198,10 @@ const useProfileBody = ({
 
       await Promise.all(actions);
       if (portalSettings) {
-        setIsSectionHeaderLoading(false);
-        setIsSectionBodyLoading(false);
-        setIsProfileLoaded(true);
-        setIsArticleLoading(false);
+        setIsSectionHeaderLoading?.(false);
+        setIsSectionBodyLoading?.(false);
+        setIsProfileLoaded?.(true);
+        setIsArticleLoading?.(false);
       }
     },
     [

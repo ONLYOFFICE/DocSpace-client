@@ -24,7 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useCallback, use, FC } from "react";
+import React, {
+  useState,
+  useCallback,
+  use,
+  FC,
+  useRef,
+  useEffect,
+  useMemo,
+} from "react";
 import {
   InfiniteLoader,
   WindowScroller,
@@ -58,26 +66,31 @@ const List: FC<ListProps> = (props) => {
     children,
   } = props;
 
+  const listRef = useRef<VirtualizedList>(null);
   const scrollContext = use(ScrollbarContext);
   const scrollElement = scrollContext.parentScrollbar?.scrollerElement;
 
-  const list: React.ReactElement<{
-    isShareLink?: boolean;
-    "data-share"?: boolean;
-    user: TUser;
-    index?: number;
-  }>[] = [];
+  const list = useMemo(() => {
+    const temp: React.ReactElement<{
+      isShareLink?: boolean;
+      "data-share"?: boolean;
+      user: TUser;
+      index?: number;
+    }>[] = [];
 
-  React.Children.map(children, (item) => {
-    list.push(
-      item as React.ReactElement<{
-        isShareLink?: boolean;
-        "data-share"?: boolean;
-        user: TUser;
-        index?: number;
-      }>,
-    );
-  });
+    React.Children.map(children, (item) => {
+      temp.push(
+        item as React.ReactElement<{
+          isShareLink?: boolean;
+          "data-share"?: boolean;
+          user: TUser;
+          index?: number;
+        }>,
+      );
+    });
+
+    return temp;
+  }, [children]);
 
   const listOfTitles = list
     .filter(
@@ -90,6 +103,12 @@ const List: FC<ListProps> = (props) => {
         index: item.props.index!,
       };
     });
+
+  useEffect(() => {
+    if (listRef.current) {
+      listRef.current.recomputeRowHeights();
+    }
+  }, [list]);
 
   const renderRow = ({
     key,
@@ -228,9 +247,12 @@ const List: FC<ListProps> = (props) => {
                   return (
                     <VirtualizedList
                       autoHeight
+                      ref={(ref) => {
+                        registerChild(ref);
+                        listRef.current = ref;
+                      }}
                       height={height}
                       onRowsRendered={onRowsRendered}
-                      ref={registerChild}
                       rowCount={itemsCount}
                       rowHeight={getItemSize}
                       rowRenderer={renderRow}

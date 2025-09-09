@@ -282,12 +282,10 @@ export default class MessageStore {
       const reader = stream.getReader();
 
       let prevMsg = "";
-
       let msg = "";
-      let toolCall = "";
-      let toolResult = "";
 
-      let failed = false;
+      let buffer = "";
+      let chunkIdx = 0;
 
       const streamHandler = async () => {
         const { done, value } = await reader.read();
@@ -305,11 +303,17 @@ export default class MessageStore {
 
         const decodedChunk = textDecoder.decode(value);
 
-        try {
-          const chunks = decodedChunk.split("\n\n");
+        buffer += decodedChunk;
 
-          chunks.forEach(async (chunk) => {
-            if (!chunk) return;
+        try {
+          const chunks = buffer.split("\n\n");
+
+          chunks.pop();
+
+          chunks.forEach(async (chunk, idx) => {
+            if (!chunk || idx <= chunkIdx) return;
+
+            chunkIdx = idx;
 
             const [event, data] = chunk.split("\n");
 
@@ -319,12 +323,6 @@ export default class MessageStore {
               return;
             }
 
-            if (failed) {
-              failed = false;
-              console.log("CHUNK_AFTER_FAIL");
-              console.log(chunk);
-            }
-
             if (event.includes(EventType.MessageStart)) {
               this.handleMetadata(jsonData);
 
@@ -332,9 +330,6 @@ export default class MessageStore {
             }
 
             if (event.includes(EventType.NewToken)) {
-              toolCall = "";
-              toolResult = "";
-
               try {
                 const { text } = JSON.parse(jsonData);
 
@@ -358,16 +353,10 @@ export default class MessageStore {
               try {
                 msg = "";
                 prevMsg = "";
-                toolResult = "";
 
-                toolCall += jsonData;
-
-                this.handleToolCall(toolCall);
+                this.handleToolCall(jsonData);
               } catch (e) {
                 console.log(e);
-                console.log("Failed TOOL_CALL");
-                console.log(chunk);
-                failed = true;
               }
 
               return;
@@ -376,17 +365,11 @@ export default class MessageStore {
             if (event.includes(EventType.ToolResult)) {
               msg = "";
               prevMsg = "";
-              toolCall = "";
-
-              toolResult += jsonData;
 
               try {
-                this.handleToolResult(toolResult);
+                this.handleToolResult(jsonData);
               } catch (e) {
                 console.log(e);
-                console.log("Failed TOOL_RESULT");
-                console.log(chunk);
-                failed = true;
               }
 
               return;

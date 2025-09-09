@@ -538,7 +538,7 @@ const ContextMenu = (props: ContextMenuProps) => {
         className={classNames(styles.contextMenu, {
           [styles.isRoom]: isRoom,
           [styles.coverExist]: isCoverExist,
-          [styles.isIconExist]: isIconExist,
+          [styles.isIconExist]: isIconExist || showMobileMenu,
           [styles.fillIcon]: fillIcon,
           [styles.changeView]: changeView,
         })}

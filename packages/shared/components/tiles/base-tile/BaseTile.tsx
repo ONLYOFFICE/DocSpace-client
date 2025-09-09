@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useRef } from "react";
-import { isMobile } from "react-device-detect";
+import { isMobile } from "../../../utils";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
@@ -81,6 +81,7 @@ export const BaseTile = ({
     contextOptions?.length > 0;
 
   const firstChild = childrenArray[0] as React.ReactElement<TileChildProps>;
+
   const contextMenuHeader: HeaderType | undefined =
     React.isValidElement(firstChild) && firstChild.props?.item
       ? {
@@ -117,7 +118,7 @@ export const BaseTile = ({
   };
 
   const onRoomIconClick = () => {
-    if (!isMobile) return;
+    if (!isMobile()) return;
     onSelect?.(true, item);
   };
 
@@ -231,6 +232,8 @@ export const BaseTile = ({
             ref={cmRef}
             header={contextMenuHeader}
             withBackdrop
+            ignoreChangeView={isMobile()}
+            headerOnlyMobile
           />
         </div>
       </div>

@@ -455,8 +455,8 @@ importers:
         specifier: workspace:*
         version: link:../shared
       '@onlyoffice/document-editor-react':
-        specifier: file:./onlyoffice-document-editor-react-2.1.1.tgz
-        version: file:packages/doceditor/onlyoffice-document-editor-react-2.1.1.tgz(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        specifier: 2.1.1
+        version: 2.1.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       classnames:
         specifier: 2.5.1
         version: 2.5.1
@@ -3397,9 +3397,8 @@ packages:
     resolution: {integrity: sha512-Oqppiv0+1+81fkKCOLAoBcjN80TEJGb+a5GoOBKalkxgy4I4KSqPRiKuOnN+vSGn2nHNyO5787MGXoulLQqBNg==}
     engines: {node: '>=22', pnpm: '>=9'}
 
-  '@onlyoffice/document-editor-react@file:packages/doceditor/onlyoffice-document-editor-react-2.1.1.tgz':
-    resolution: {integrity: sha512-jKCmFpp6qTRhZTdc8xaYSBg9A5eHMKKJDensDSvIlrfLOflxt1Fc536fPq5c8NciAFqB1pRp4EjwpRLrph1aBQ==, tarball: file:packages/doceditor/onlyoffice-document-editor-react-2.1.1.tgz}
-    version: 2.1.1
+  '@onlyoffice/document-editor-react@2.1.1':
+    resolution: {integrity: sha512-b0SnFPmT+OEyJons18PPHpwtFABVCI4nr3gPtAAImar1PhN9tNc9703Yo5KPYsHhIgVq+FqHSWgunI9GJnKa5w==}
     peerDependencies:
       react: ^16.9.0 || ^17 || ^18 || ^19
       react-dom: ^16.9.0 || ^17 || ^18 || ^19
@@ -13339,7 +13338,7 @@ snapshots:
     dependencies:
       pnpm: 10.15.1
 
-  '@onlyoffice/document-editor-react@file:packages/doceditor/onlyoffice-document-editor-react-2.1.1.tgz(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+  '@onlyoffice/document-editor-react@2.1.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       lodash: 4.17.21
       react: 19.1.1

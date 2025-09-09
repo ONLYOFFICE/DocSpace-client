@@ -40,6 +40,7 @@ import styles from "../../../ChatMessageBody.module.scss";
 import { ToolCall } from "./ToolCall";
 import { ModalDialog, ModalDialogType } from "../../../../../../modal-dialog";
 import { isMobile } from "../../../../../../../utils";
+import { ToolCallPlacement, ToolCallStatus } from "./ToolCall.enum";
 
 type ToolCallConfirmDialogProps = {
   content: TToolCallContent;
@@ -83,8 +84,8 @@ export const ToolCallConfirmDialog = ({
           <Text>AI would like to use this tool</Text>
           <ToolCall
             content={content}
-            status="confirmation"
-            placement="confirmDialog"
+            status={ToolCallStatus.Confirmation}
+            placement={ToolCallPlacement.ConfirmDialog}
           />
           <div>
             <Text>{t("Common:ReviewAction")}</Text>

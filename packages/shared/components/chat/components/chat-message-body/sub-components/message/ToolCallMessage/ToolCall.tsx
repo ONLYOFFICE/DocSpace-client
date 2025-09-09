@@ -31,13 +31,10 @@ import React from "react";
 import type { TToolCallContent } from "../../../../../../../api/ai/types";
 
 import styles from "../../../ChatMessageBody.module.scss";
-import type {
-  ToolCallPlacement,
-  ToolCallStatus,
-} from "../../../../../Chat.types";
 
 import { ToolCallHeader } from "./ToolCallHeader";
 import { ToolCallBody } from "./ToolCallBody";
+import { ToolCallPlacement, ToolCallStatus } from "./ToolCall.enum";
 
 type ToolCallProps = {
   content: TToolCallContent;
@@ -48,7 +45,9 @@ type ToolCallProps = {
 export const ToolCall = ({ content, status, placement }: ToolCallProps) => {
   const [collapsed, setCollapsed] = React.useState(true);
 
-  const expandable = placement === "confirmDialog" || status === "finished";
+  const expandable =
+    placement === ToolCallPlacement.ConfirmDialog ||
+    status === ToolCallStatus.Finished;
 
   return (
     <div className={styles.toolCall}>

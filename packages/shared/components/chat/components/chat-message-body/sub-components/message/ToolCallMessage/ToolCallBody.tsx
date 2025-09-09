@@ -35,7 +35,7 @@ import type { TToolCallContent } from "../../../../../../../api/ai/types";
 import { formatJsonWithMarkdown } from "../../../../../utils";
 
 import MarkdownField from "../Markdown";
-import type { ToolCallPlacement } from "../../../../../Chat.types";
+import type { ToolCallPlacement } from "./ToolCall.enum";
 
 type ToolCallBodyProps = {
   content: TToolCallContent;
@@ -53,7 +53,7 @@ export const ToolCallBody = ({ content, placement }: ToolCallBodyProps) => {
   try {
     JSON.parse(result);
     isJson = true;
-  } catch (e) {
+  } catch {
     isJson = false;
   }
 

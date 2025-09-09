@@ -35,10 +35,6 @@ import ToolFinish from "PUBLIC_DIR/images/tool.finish.svg?url";
 import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg?url";
 
 import { Text } from "../../../../../../text";
-import type {
-  ToolCallPlacement,
-  ToolCallStatus,
-} from "../../../../../Chat.types";
 import { Loader, LoaderTypes } from "../../../../../../loader";
 import { useTheme } from "../../../../../../../hooks/useTheme";
 import { getServerIcon } from "../../../../../../../utils";
@@ -46,6 +42,7 @@ import { ServerType } from "../../../../../../../api/ai/enums";
 import type { TToolCallContent } from "../../../../../../../api/ai/types";
 
 import styles from "../../../ChatMessageBody.module.scss";
+import { ToolCallPlacement, ToolCallStatus } from "./ToolCall.enum";
 
 type ToolCallHeaderProps = {
   content: TToolCallContent;
@@ -67,13 +64,18 @@ export const ToolCallHeader = ({
   const { t } = useTranslation(["Common"]);
   const { isBase } = useTheme();
 
-  const statusIcons = {
-    loading: <Loader type={LoaderTypes.track} size="12px" />,
-    confirmation: <Loader type={LoaderTypes.track} size="12px" />,
-    finished: <ReactSVG src={ToolFinish} className={styles.toolFinishIcon} />,
+  const statusIcons: Record<ToolCallStatus, React.ReactNode> = {
+    [ToolCallStatus.Loading]: <Loader type={LoaderTypes.track} size="12px" />,
+    [ToolCallStatus.Confirmation]: (
+      <Loader type={LoaderTypes.track} size="12px" />
+    ),
+    [ToolCallStatus.Finished]: (
+      <ReactSVG src={ToolFinish} className={styles.toolFinishIcon} />
+    ),
   };
 
-  const statusIcon = placement === "confirmDialog" ? null : statusIcons[status];
+  const statusIcon =
+    placement === ToolCallPlacement.ConfirmDialog ? null : statusIcons[status];
 
   const onClick = () => {
     setCollapsed(!collapsed);

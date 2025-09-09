@@ -26,40 +26,13 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import React from "react";
+export enum ToolCallStatus {
+  Loading = "loading",
+  Confirmation = "confirmation",
+  Finished = "finished",
+}
 
-import { MessageToolCallProps } from "../../../../../Chat.types";
-
-import { ToolCallConfirmDialog } from "./ToolCallConfirmDialog";
-import { ToolCall } from "./ToolCall";
-import { ToolCallPlacement, ToolCallStatus } from "./ToolCall.enum";
-
-const ToolCallMessage = ({ content }: MessageToolCallProps) => {
-  const [needConfirmation, setNeedConfirmation] = React.useState(
-    () => !!content.managed,
-  );
-
-  const hideConfirmDialog = () => setNeedConfirmation(false);
-
-  const toolCallStatus: ToolCallStatus = needConfirmation
-    ? ToolCallStatus.Confirmation
-    : !content.result
-      ? ToolCallStatus.Loading
-      : ToolCallStatus.Finished;
-
-  return (
-    <div>
-      <ToolCall
-        content={content}
-        status={toolCallStatus}
-        placement={ToolCallPlacement.Message}
-      />
-
-      {needConfirmation ? (
-        <ToolCallConfirmDialog content={content} onClose={hideConfirmDialog} />
-      ) : null}
-    </div>
-  );
-};
-
-export default ToolCallMessage;
+export enum ToolCallPlacement {
+  Message = "message",
+  ConfirmDialog = "confirm-dialog",
+}

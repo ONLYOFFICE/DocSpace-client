@@ -100,6 +100,8 @@ const SubMenu = (props: SubMenuProps) => {
 
   const subMenuRef = useRef<HTMLUListElement>(null);
   const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const keepClosingRef = useRef<boolean>(false);
+  const openTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const { isBase } = useTheme();
   const { isRTL } = useInterfaceDirection();
@@ -110,14 +112,33 @@ const SubMenu = (props: SubMenuProps) => {
       return;
     }
 
-    if (hideTimeoutRef.current) {
-      clearTimeout(hideTimeoutRef.current);
-      hideTimeoutRef.current = null;
+    const hasSubMenu = !!(item.items || item.onLoad);
+
+    if (activeItem && !hasSubMenu) {
+      if (!hideTimeoutRef.current) {
+        hideTimeoutRef.current = setTimeout(() => {
+          setActiveItem(null);
+        }, 400);
+      }
+      return;
     }
 
-    if (item.items || item.onLoad) {
-      setActiveItem(item);
-    } else {
+    if (keepClosingRef.current) return;
+
+    if (hasSubMenu) {
+      if (openTimeoutRef.current) clearTimeout(openTimeoutRef.current);
+      openTimeoutRef.current = setTimeout(() => {
+        if (keepClosingRef.current) return;
+        if (hideTimeoutRef.current) {
+          clearTimeout(hideTimeoutRef.current);
+          hideTimeoutRef.current = null;
+        }
+        setActiveItem(item);
+      }, 200);
+      return;
+    }
+
+    if (!hideTimeoutRef.current) {
       hideTimeoutRef.current = setTimeout(() => {
         setActiveItem(null);
       }, 400);
@@ -128,6 +149,10 @@ const SubMenu = (props: SubMenuProps) => {
     if (isMobileDevice) return;
 
     if (item.items || item.onLoad) {
+      if (openTimeoutRef.current) {
+        clearTimeout(openTimeoutRef.current);
+        openTimeoutRef.current = null;
+      }
       hideTimeoutRef.current = setTimeout(() => {
         setActiveItem(null);
       }, 400);
@@ -141,6 +166,23 @@ const SubMenu = (props: SubMenuProps) => {
       clearTimeout(hideTimeoutRef.current);
       hideTimeoutRef.current = null;
     }
+
+    keepClosingRef.current = false;
+    if (openTimeoutRef.current) {
+      clearTimeout(openTimeoutRef.current);
+      openTimeoutRef.current = null;
+    }
+  };
+
+  const handleSubMenuMouseLeave = () => {
+    if (isMobileDevice) return;
+
+    if (hideTimeoutRef.current) clearTimeout(hideTimeoutRef.current);
+    keepClosingRef.current = true;
+    hideTimeoutRef.current = setTimeout(() => {
+      setActiveItem(null);
+      keepClosingRef.current = false;
+    }, 400);
   };
 
   useEffect(() => {
@@ -153,7 +195,7 @@ const SubMenu = (props: SubMenuProps) => {
         setActiveItem(null);
       }, 400);
     } else {
-      if (hideTimeoutRef.current) {
+      if (!keepClosingRef.current && hideTimeoutRef.current) {
         clearTimeout(hideTimeoutRef.current);
         hideTimeoutRef.current = null;
       }
@@ -371,6 +413,9 @@ const SubMenu = (props: SubMenuProps) => {
     return () => {
       if (hideTimeoutRef.current) {
         clearTimeout(hideTimeoutRef.current);
+      }
+      if (openTimeoutRef.current) {
+        clearTimeout(openTimeoutRef.current);
       }
     };
   }, []);
@@ -695,6 +740,7 @@ const SubMenu = (props: SubMenuProps) => {
             } as React.CSSProperties
           }
           onMouseEnter={onSubMenuMouseEnter || handleSubMenuMouseEnter}
+          onMouseLeave={handleSubMenuMouseLeave}
         >
           <Scrollbar style={{ height: listHeight }}>{submenu}</Scrollbar>
           {submenuLower}

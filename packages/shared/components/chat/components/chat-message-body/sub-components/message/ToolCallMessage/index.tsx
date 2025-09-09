@@ -38,7 +38,7 @@ import { ToolCall } from "./ToolCall";
 
 const ToolCallMessage = ({ content }: MessageToolCallProps) => {
   const [needConfirmation, setNeedConfirmation] = React.useState(
-    () => !!content.additionalProperties?.managed,
+    () => !!content.managed,
   );
 
   const hideConfirmDialog = () => setNeedConfirmation(false);

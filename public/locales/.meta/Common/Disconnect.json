@@ -3,7 +3,7 @@
   "content": "Disconnect",
   "content_en_sha1_hash": "ed28e0686e1251ba046f582a3e9ec02470a5e78d",
   "created_at": "2025-05-19T21:30:44.562Z",
-  "updated_at": "2025-09-07T07:53:15.393Z",
+  "updated_at": "2025-09-09T10:39:52.952Z",
   "comment": {
     "text": "This translation key is used to display the label \"Disconnect\" or variations of it, such as \"Sign Up With Apple\", in various UI elements like buttons and icons. It appears on a settings page and is related to data management, file backup, or deletion options. Translators should use this key for localized versions of these labels.",
     "is_auto": true,
@@ -24,8 +24,8 @@
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 386,
-      "context": "signUp = false,\n ) {\n const capitalizeProvider =\n provider.charAt(0).toUpperCase() + provider.slice(1);\n if (linked) {\n return `${t(\"Common:Disconnect\")} ${capitalizeProvider}`;\n }\n \n switch (provider) {\n case \"apple\":\n return signUp ? t(\"Common:SignUpWithApple\") : t(\"Common:SignInWithApple\");",
+      "line_number": 413,
+      "context": "signUp = false,\n ) {\n const providerLabel = getProviderLabel(provider, t);\n \n if (linked) {\n return `${t(\"Common:Disconnect\")} ${providerLabel}`;\n }\n \n switch (provider) {\n case \"apple\":\n return signUp ? t(\"Common:SignUpWithApple\") : t(\"Common:SignInWithApple\");",
       "module": "/packages/shared"
     }
   ],

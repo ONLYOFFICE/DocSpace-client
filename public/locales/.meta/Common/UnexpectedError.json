@@ -3,7 +3,7 @@
   "content": "An unexpected error occurred. Try again later or contact support.",
   "content_en_sha1_hash": "25ad5a8afd50db67da636bee026c36dbe54b15d6",
   "created_at": "2025-05-19T21:30:49.388Z",
-  "updated_at": "2025-09-07T07:53:15.156Z",
+  "updated_at": "2025-09-09T10:39:52.786Z",
   "comment": {
     "text": "This translation key is used to display an error message when an unexpected issue occurs while performing a specific action, such as opening a link or sending a test email. It appears in a notification dialog, typically triggered by user interaction, and informs the user that they should try again later or contact support for assistance.",
     "is_auto": true,
@@ -174,13 +174,13 @@
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 1538,
+      "line_number": 1545,
       "context": "(\"message\" in knownError && knownError.message) ||\n \"\";\n }\n \n if (knownError?.response?.status === 502)\n message = t(\"Common:UnexpectedError\");\n \n return message ?? t(\"Common:UnexpectedError\");\n };\n \n export function splitFileAndFolderIds<T extends TFolder | TFile>(items: T[]) {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 1538,
+      "line_number": 1545,
       "context": "(\"message\" in knownError && knownError.message) ||\n \"\";\n }\n \n if (knownError?.response?.status === 502)\n message = t(\"Common:UnexpectedError\");\n \n return message ?? t(\"Common:UnexpectedError\");\n };\n \n export function splitFileAndFolderIds<T extends TFolder | TFile>(items: T[]) {",
       "module": "/packages/shared"
     }

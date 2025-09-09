@@ -53,9 +53,9 @@ export const ToolCall = ({ content, status, placement }: ToolCallProps) => {
   return (
     <div className={styles.toolCall}>
       <ToolCallHeader
+        content={content}
         collapsed={collapsed}
         setCollapsed={setCollapsed}
-        toolName={content.name}
         status={status}
         placement={placement}
         expandable={expandable}

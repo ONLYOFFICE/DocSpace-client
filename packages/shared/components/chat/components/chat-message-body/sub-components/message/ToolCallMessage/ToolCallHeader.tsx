@@ -40,27 +40,32 @@ import type {
   ToolCallStatus,
 } from "../../../../../Chat.types";
 import { Loader, LoaderTypes } from "../../../../../../loader";
+import { useTheme } from "../../../../../../../hooks/useTheme";
+import { getServerIcon } from "../../../../../../../utils";
+import { ServerType } from "../../../../../../../api/ai/enums";
+import type { TToolCallContent } from "../../../../../../../api/ai/types";
 
 import styles from "../../../ChatMessageBody.module.scss";
 
 type ToolCallHeaderProps = {
+  content: TToolCallContent;
   collapsed: boolean;
   setCollapsed: (value: boolean) => void;
-  toolName: string;
   status: ToolCallStatus;
   placement: ToolCallPlacement;
   expandable?: boolean;
 };
 
 export const ToolCallHeader = ({
+  content,
   collapsed,
   setCollapsed,
   status,
-  toolName,
   placement,
   expandable,
 }: ToolCallHeaderProps) => {
   const { t } = useTranslation(["Common"]);
+  const { isBase } = useTheme();
 
   const statusIcons = {
     loading: <Loader type={LoaderTypes.track} size="12px" />,
@@ -74,6 +79,11 @@ export const ToolCallHeader = ({
     setCollapsed(!collapsed);
   };
 
+  const serverIcon = getServerIcon(
+    content.mcpServerInfo?.serverType || ServerType.Custom,
+    isBase,
+  );
+
   return (
     <div
       className={classNames(styles.toolCallHeader, {
@@ -86,19 +96,21 @@ export const ToolCallHeader = ({
       <Text fontSize="13px" lineHeight="15px" fontWeight={600}>
         {t("Common:ToolCallExecuted")}:
       </Text>
-      <img // Todo: This is a placeholder. Replace with tool icon when it's ready on backend
-        src="/logo.ashx?logotype=3"
-        width="16px"
-        height="16px"
-        alt="tool logo"
-      />
+      {serverIcon ? (
+        <img
+          src={serverIcon}
+          width="16px"
+          height="16px"
+          alt="mcp server logo"
+        />
+      ) : null}
       <Text
         fontSize="13px"
         lineHeight="15px"
         fontWeight={600}
         className={styles.toolName}
       >
-        {toolName}
+        {content.name}
       </Text>
       {expandable ? (
         <ReactSVG src={ArrowRightIcon} className={styles.arrowRightIcon} />

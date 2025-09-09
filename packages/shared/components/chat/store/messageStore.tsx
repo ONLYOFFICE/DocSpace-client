@@ -27,7 +27,11 @@
 import React from "react";
 import { makeAutoObservable } from "mobx";
 
-import { TContent, TMessage } from "../../../api/ai/types";
+import {
+  TContent,
+  TMessage,
+  type TToolCallContent,
+} from "../../../api/ai/types";
 import {
   getChatMessages,
   startNewChat,
@@ -230,22 +234,18 @@ export default class MessageStore {
   handleToolResult = (jsonData: string) => {
     const { result } = JSON.parse(jsonData);
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { managed, ...oldContent } = this.messages[0]
+      .contents[0] as TToolCallContent;
+
     const newMsg: TMessage = {
       ...this.messages[0],
 
       contents: [
         {
-          type: ContentType.Tool,
+          ...oldContent,
           result,
-          arguments:
-            "arguments" in this.messages[0].contents[0]
-              ? this.messages[0].contents[0].arguments!
-              : {},
-          name:
-            "name" in this.messages[0].contents[0]
-              ? this.messages[0].contents[0].name
-              : "",
-        },
+        } as TToolCallContent,
       ],
     };
 

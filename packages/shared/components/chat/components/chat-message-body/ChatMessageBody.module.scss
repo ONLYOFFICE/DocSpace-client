@@ -272,6 +272,18 @@
 
     cursor: pointer;
 
+    .toolCallHeaderText {
+      display: flex;
+      align-items: center;
+
+      .toolCallHeaderIcon {
+        width: 16px;
+        height: 16px;
+
+        margin: 0 8px;
+      }
+    }
+
     div {
       height: 15px;
     }

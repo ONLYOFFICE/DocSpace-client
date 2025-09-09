@@ -80,7 +80,12 @@ export type TContent =
       name: string;
       result?: Record<string, unknown>;
       callId?: string;
-      additionalProperties?: { managed: true };
+      mcpServerInfo?: {
+        serverId: string;
+        serverName: string;
+        serverType: ServerType;
+      };
+      managed?: boolean;
     }
   | {
       type: ContentType.Files;

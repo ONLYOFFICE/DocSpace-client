@@ -32,8 +32,14 @@ import { ReactSVG } from "react-svg";
 import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg?url";
 import ToolFinish from "PUBLIC_DIR/images/tool.finish.svg?url";
 
-import { ContentType, ToolsPermission } from "../../../../../../api/ai/enums";
+import {
+  ContentType,
+  ServerType,
+  ToolsPermission,
+} from "../../../../../../api/ai/enums";
 import { updateToolsPermission } from "../../../../../../api/ai";
+import { getServerIcon } from "../../../../../../utils";
+import { useTheme } from "../../../../../../hooks/useTheme";
 
 import { Text } from "../../../../../text";
 import { Loader, LoaderTypes } from "../../../../../loader";
@@ -47,12 +53,13 @@ import styles from "../../ChatMessageBody.module.scss";
 import MarkdownField from "./Markdown";
 
 const ToolCall = ({ content }: MessageToolCallProps) => {
+  const { isBase } = useTheme();
   const { t } = useTranslation(["Common"]);
   const [isHide, setIsHide] = React.useState(true);
   const [isManage, setIsManage] = React.useState(() => {
     if (content.type !== ContentType.Tool) return false;
 
-    return content.additionalProperties?.managed;
+    return content?.managed;
   });
 
   if (content.type !== ContentType.Tool) return null;
@@ -78,6 +85,11 @@ const ToolCall = ({ content }: MessageToolCallProps) => {
     updateToolsPermission(content.callId, decision);
   };
 
+  const icon = getServerIcon(
+    content.mcpServerInfo?.serverType || ServerType.Custom,
+    isBase,
+  );
+
   const toolCallComponent = (
     <div className={styles.toolCall}>
       <div
@@ -91,8 +103,17 @@ const ToolCall = ({ content }: MessageToolCallProps) => {
         ) : (
           <Loader type={LoaderTypes.track} size="12px" />
         )}
-        <Text fontSize="13px" lineHeight="15px" fontWeight={600}>
-          {t("Common:ToolCallExecuted")}:<span> {content.name}</span>
+        <Text
+          className={styles.toolCallHeaderText}
+          fontSize="13px"
+          lineHeight="15px"
+          fontWeight={600}
+        >
+          {t("Common:ToolCallExecuted")}:
+          {icon ? (
+            <img className={styles.toolCallHeaderIcon} src={icon} alt="" />
+          ) : null}
+          <span> {content.name}</span>
         </Text>
         <ReactSVG src={ArrowRightIcon} className={styles.arrowRightIcon} />
       </div>

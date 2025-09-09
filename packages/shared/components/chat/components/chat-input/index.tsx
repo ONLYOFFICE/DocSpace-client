@@ -154,7 +154,7 @@ const ChatInput = ({ getIcon, isLoading }: ChatInputProps) => {
   return (
     <>
       <div
-        className={classNames(styles.chatInput)}
+        className={classNames(styles.chatInput, "chat-input")}
         ref={(ref) => {
           if (ref) setInputWidth(ref.offsetWidth);
           inputRef.current = ref;

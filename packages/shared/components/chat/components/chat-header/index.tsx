@@ -36,7 +36,7 @@ import SelectModel from "./sub-components/SelectModel";
 
 const ChatHeader = ({ selectedModel, isLoading }: ChatHeaderProps) => {
   return (
-    <div className={styles.chatHeader}>
+    <div className={`${styles.chatHeader} chat-header`}>
       <SelectChat isLoadingProp={isLoading} />
       <CreateChat />
       <SelectModel selectedModel={selectedModel} isLoading={isLoading} />

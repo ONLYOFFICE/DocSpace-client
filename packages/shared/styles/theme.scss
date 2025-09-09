@@ -121,11 +121,8 @@
     --accent-button,
     #{$light-second-main-hover}
   );
-  --button-background-primary-active: linear-gradient(
-      0deg,
-      #{$light-second-main},
-      #{$light-second-main}
-    ),
+  --button-background-primary-active:
+    linear-gradient(0deg, #{$light-second-main}, #{$light-second-main}),
     linear-gradient(0deg, #{$on-white-color}, #{$on-white-color});
   --button-background-primary-disabled: var(
     --accent-button,
@@ -461,11 +458,8 @@
     --accent-button,
     #{$light-second-main-hover}
   );
-  --button-background-primary-active: linear-gradient(
-      0deg,
-      #{$light-second-main},
-      #{$light-second-main}
-    ),
+  --button-background-primary-active:
+    linear-gradient(0deg, #{$light-second-main}, #{$light-second-main}),
     linear-gradient(0deg, #{$on-white-color}, #{$on-white-color});
   --button-background-primary-disabled: var(
     --accent-button,
@@ -478,11 +472,8 @@
   --button-border-base-disabled: 1px solid #{$gray-dark-strong};
 
   --button-border-primary: 1px solid var(--accent-button, #{$light-second-main});
-  --button-border-primary-active: linear-gradient(
-      0deg,
-      #{$light-second-main},
-      #{$light-second-main}
-    ),
+  --button-border-primary-active:
+    linear-gradient(0deg, #{$light-second-main}, #{$light-second-main}),
     linear-gradient(0deg, #{$on-white-color}, #{$on-white-color});
   --button-border-primary-disabled: 1px solid
     var(--accent-button, #{$light-second-main-disabled});
@@ -1769,7 +1760,7 @@
   --mobile-details-text-color: #{$white};
   --mobile-details-icon-color: #{$white};
   --mobile-details-height: 53px;
-  --mobile-details-z-index: z.$floating-ui;
+  --mobile-details-z-index: z.$overlay;
 
   --bookmarks-text-color: #{$white};
   --bookmarks-color: #{$gray-dark-strong};
@@ -1872,7 +1863,7 @@
   --mobile-details-text-color: #{$white};
   --mobile-details-icon-color: #{$white};
   --mobile-details-height: 53px;
-  --mobile-details-z-index: z.$floating-ui;
+  --mobile-details-z-index: z.$overlay;
 
   --bookmarks-text-color: #{$white};
   --bookmarks-color: #{$gray-dark-strong};
@@ -2664,8 +2655,8 @@
 
   --table-group-menu-border-bottom: 1px solid transparent;
   --table-group-menu-border-right: 1px solid #{$gray-strong};
-  --table-group-menu-box-shadow: 0px 8px 16px #{$popup-shadow},
-    0px 0px 4px #{$menu-shadow};
+  --table-group-menu-box-shadow:
+    0px 8px 16px #{$popup-shadow}, 0px 0px 4px #{$menu-shadow};
 }
 
 .dark {
@@ -2702,8 +2693,8 @@
 
   --table-group-menu-border-bottom: 1px solid #{$gray-dark-strong};
   --table-group-menu-border-right: 1px solid #{$gray-dark-strong};
-  --table-group-menu-box-shadow: 0px 8px 16px #{$badge-shadow},
-    0px 0px 4px #{$menu-shadow-dark};
+  --table-group-menu-box-shadow:
+    0px 8px 16px #{$badge-shadow}, 0px 0px 4px #{$menu-shadow-dark};
 }
 
 .light {

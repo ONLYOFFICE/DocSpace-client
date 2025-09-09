@@ -549,7 +549,7 @@ class FilesActionStore {
             }
 
             if (currentFolderId) {
-              SocketHelper.emit(SocketCommands.RefreshFolder, currentFolderId);
+              SocketHelper?.emit(SocketCommands.RefreshFolder, currentFolderId);
             }
           })
           .finally(() => {
@@ -1939,6 +1939,7 @@ class FilesActionStore {
       try {
         await this.uploadDataStore.itemOperationToFolder(operationData);
       } catch (err) {
+        console.error(err);
         setBufferSelection(null);
       }
     }
@@ -3349,6 +3350,7 @@ class FilesActionStore {
       this.setFilesOrder(current, newReplaceable, indexMovedFromBottom);
       this.filesStore.setSelected("none");
     } catch (e) {
+      console.error(e);
       toastr.error(t("Files:ErrorChangeIndex"));
     }
   };
@@ -3363,6 +3365,7 @@ class FilesActionStore {
         await changeIndex(items);
       }
     } catch (e) {
+      console.error(e);
       toastr.error(t("Files:ErrorChangeIndex"));
     }
   };
@@ -3377,6 +3380,7 @@ class FilesActionStore {
       setIsIndexEditingMode(false);
       this.updateCurrentFolder(true, operationId);
     } catch (e) {
+      console.error(e);
       toastr.error(t("Files:ErrorChangeIndex"));
     }
   };

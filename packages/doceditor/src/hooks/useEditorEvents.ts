@@ -255,7 +255,7 @@ const useEditorEvents = ({
     if (docEditor) {
       // console.log("call assign for asc files editor doceditor");
       assign(
-        window as unknown as { [key: string]: {} },
+        window as unknown as { [key: string]: object },
         ["ASC", "Files", "Editor", "docEditor"],
         docEditor,
       ); // Do not remove: it's for Back button on Mobile App
@@ -488,8 +488,7 @@ const useEditorEvents = ({
           }),
         );
 
-        usersNotFound &&
-          usersNotFound.length > 0 &&
+        if (usersNotFound && usersNotFound.length > 0) {
           docEditor?.showMessage?.(
             t
               ? t("UsersWithoutAccess", {
@@ -497,6 +496,7 @@ const useEditorEvents = ({
                 })
               : "",
           );
+        }
       } catch (e) {
         toastr.error(e as TData);
       }
@@ -599,25 +599,27 @@ const useEditorEvents = ({
       setDocSaved(!(event as { data: boolean }).data);
 
       setTimeout(() => {
-        docSaved
-          ? setDocumentTitle(
-              t,
-              docTitle,
-              config?.document.fileType ?? "",
-              documentReady,
-              successAuth ?? false,
-              organizationName,
-              setDocTitle,
-            )
-          : setDocumentTitle(
-              t,
-              `*${docTitle}`,
-              config?.document.fileType ?? "",
-              documentReady,
-              successAuth ?? false,
-              organizationName,
-              setDocTitle,
-            );
+        if (docSaved) {
+          setDocumentTitle(
+            t,
+            docTitle,
+            config?.document.fileType ?? "",
+            documentReady,
+            successAuth ?? false,
+            organizationName,
+            setDocTitle,
+          );
+        } else {
+          setDocumentTitle(
+            t,
+            `*${docTitle}`,
+            config?.document.fileType ?? "",
+            documentReady,
+            successAuth ?? false,
+            organizationName,
+            setDocTitle,
+          );
+        }
       }, 500);
     },
     [
@@ -673,14 +675,14 @@ const useEditorEvents = ({
     ],
   );
 
-  const generateLink = (actionData: {}) => {
+  const generateLink = (actionData: object) => {
     return encodeURIComponent(JSON.stringify(actionData));
   };
 
   const onMakeActionLink = React.useCallback((event: object) => {
     const url = window.location.href;
 
-    const actionData = (event as { data: {} }).data;
+    const actionData = (event as { data: object }).data;
 
     const link = generateLink(actionData);
 
@@ -796,7 +798,7 @@ const useEditorEvents = ({
   }, [setFillingStatusDialogVisible]);
 
   const onRequestStartFilling = useCallback(
-    (event: {}) => {
+    (event: object) => {
       switch (config?.startFillingMode) {
         case StartFillingMode.ShareToFillOut:
           openShareFormDialog?.();

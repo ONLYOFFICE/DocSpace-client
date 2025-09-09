@@ -348,126 +348,154 @@ export const getRoomIcon = (
   isBaseTheme: boolean,
   access: AccessType,
 ) => {
-  return (
-    match([type, access])
-      .with([RoomsType.FormRoom, ShareAccessRights.FormFilling], () =>
+  return match([type, access])
+    .with([RoomsType.FormRoom, ShareAccessRights.FormFilling], () =>
+      isBaseTheme ? (
+        <EmptyFormRoomFillingLightIcon />
+      ) : (
+        <EmptyFormRoomFillingDarkIcon />
+      ),
+    )
+    .with([RoomsType.FormRoom, ShareAccessRights.Collaborator], () =>
+      isBaseTheme ? (
+        <EmptyFormRoomCollaboratorLightIcon />
+      ) : (
+        <EmptyFormRoomCollaboratorDarkIcon />
+      ),
+    )
+    .with([RoomsType.FormRoom, P._], () =>
+      isBaseTheme ? <EmptyFormRoomLightIcon /> : <EmptyFormRoomDarkIcon />,
+    )
+    .with(
+      [
+        RoomsType.EditingRoom,
+        P.union(ShareAccessRights.None, ShareAccessRights.RoomManager),
+      ],
+      () =>
         isBaseTheme ? (
-          <EmptyFormRoomFillingLightIcon />
+          <EmptyCollaborationRoomLightIcon />
         ) : (
-          <EmptyFormRoomFillingDarkIcon />
+          <EmptyCollaborationRoomDarkIcon />
         ),
-      )
-      .with([RoomsType.FormRoom, ShareAccessRights.Collaborator], () =>
+    )
+    .with([RoomsType.EditingRoom, ShareAccessRights.Collaborator], () =>
+      isBaseTheme ? (
+        <EmptyCollaborationRoomCollaboratorLightIcon />
+      ) : (
+        <EmptyCollaborationRoomCollaboratorDarkIcon />
+      ),
+    )
+    .with(
+      [
+        RoomsType.PublicRoom,
+        P.union(ShareAccessRights.None, ShareAccessRights.RoomManager), // owner, docspace admin, room admin
+      ],
+      () =>
         isBaseTheme ? (
-          <EmptyFormRoomCollaboratorLightIcon />
+          <EmptyPublicRoomLightIcon />
         ) : (
-          <EmptyFormRoomCollaboratorDarkIcon />
+          <EmptyPublicRoomDarkIcon />
         ),
-      )
-      .with([RoomsType.FormRoom, P._], () =>
-        isBaseTheme ? <EmptyFormRoomLightIcon /> : <EmptyFormRoomDarkIcon />,
-      )
-      .with(
-        [
-          RoomsType.EditingRoom,
-          P.union(ShareAccessRights.None, ShareAccessRights.RoomManager),
-        ],
-        () =>
-          isBaseTheme ? (
-            <EmptyCollaborationRoomLightIcon />
-          ) : (
-            <EmptyCollaborationRoomDarkIcon />
-          ),
-      )
-      .with([RoomsType.EditingRoom, ShareAccessRights.Collaborator], () =>
+    )
+    .with([RoomsType.PublicRoom, ShareAccessRights.Collaborator], () =>
+      isBaseTheme ? (
+        <EmptyPublicRoomCollaboratorLightIcon />
+      ) : (
+        <EmptyPublicRoomCollaboratorDarkIcon />
+      ),
+    )
+    .with(
+      [
+        RoomsType.VirtualDataRoom,
+        P.union(ShareAccessRights.None, ShareAccessRights.RoomManager), // owner, docspace admin, room admin
+      ],
+      () =>
         isBaseTheme ? (
-          <EmptyCollaborationRoomCollaboratorLightIcon />
+          <EmptyVirtualDataRoomLightIcon />
         ) : (
-          <EmptyCollaborationRoomCollaboratorDarkIcon />
+          <EmptyVirtualDataRoomDarkIcon />
         ),
-      )
-      .with(
-        [
-          RoomsType.PublicRoom,
-          P.union(ShareAccessRights.None, ShareAccessRights.RoomManager), // owner, docspace admin, room admin
-        ],
-        () =>
-          isBaseTheme ? (
-            <EmptyPublicRoomLightIcon />
-          ) : (
-            <EmptyPublicRoomDarkIcon />
-          ),
-      )
-      .with([RoomsType.PublicRoom, ShareAccessRights.Collaborator], () =>
+    )
+    .with([RoomsType.VirtualDataRoom, ShareAccessRights.Collaborator], () =>
+      isBaseTheme ? (
+        <EmptyVirtualDataRoomCollaboratorLightIcon />
+      ) : (
+        <EmptyVirtualDataRoomCollaboratorDarkIcon />
+      ),
+    )
+    .with(
+      [
+        RoomsType.CustomRoom,
+        P.union(ShareAccessRights.None, ShareAccessRights.RoomManager), // owner, docspace admin, room admin
+      ],
+      () =>
         isBaseTheme ? (
-          <EmptyPublicRoomCollaboratorLightIcon />
+          <EmptyCustomRoomLightIcon />
         ) : (
-          <EmptyPublicRoomCollaboratorDarkIcon />
+          <EmptyCustomRoomDarkIcon />
         ),
-      )
-      .with(
-        [
-          RoomsType.VirtualDataRoom,
-          P.union(ShareAccessRights.None, ShareAccessRights.RoomManager), // owner, docspace admin, room admin
-        ],
-        () =>
-          isBaseTheme ? (
-            <EmptyVirtualDataRoomLightIcon />
-          ) : (
-            <EmptyVirtualDataRoomDarkIcon />
-          ),
-      )
-      .with([RoomsType.VirtualDataRoom, ShareAccessRights.Collaborator], () =>
+    )
+    .with(
+      [
+        RoomsType.VirtualDataRoom,
+        P.union(ShareAccessRights.None, ShareAccessRights.RoomManager), // owner, docspace admin, room admin
+      ],
+      () =>
         isBaseTheme ? (
-          <EmptyVirtualDataRoomCollaboratorLightIcon />
+          <EmptyVirtualDataRoomLightIcon />
         ) : (
-          <EmptyVirtualDataRoomCollaboratorDarkIcon />
+          <EmptyVirtualDataRoomDarkIcon />
         ),
-      )
-      .with(
-        [
-          RoomsType.CustomRoom,
-          P.union(ShareAccessRights.None, ShareAccessRights.RoomManager), // owner, docspace admin, room admin
-        ],
-        () =>
-          isBaseTheme ? (
-            <EmptyCustomRoomLightIcon />
-          ) : (
-            <EmptyCustomRoomDarkIcon />
-          ),
-      )
-      .with([RoomsType.CustomRoom, ShareAccessRights.Collaborator], () =>
+    )
+    .with([RoomsType.VirtualDataRoom, ShareAccessRights.Collaborator], () =>
+      isBaseTheme ? (
+        <EmptyVirtualDataRoomCollaboratorLightIcon />
+      ) : (
+        <EmptyVirtualDataRoomCollaboratorDarkIcon />
+      ),
+    )
+    .with(
+      [
+        RoomsType.CustomRoom,
+        P.union(ShareAccessRights.None, ShareAccessRights.RoomManager), // owner, docspace admin, room admin
+      ],
+      () =>
         isBaseTheme ? (
-          <EmptyCustomRoomCollaboratorLightIcon />
+          <EmptyCustomRoomLightIcon />
         ) : (
-          <EmptyCustomRoomCollaboratorDarkIcon />
+          <EmptyCustomRoomDarkIcon />
         ),
-      )
-      .with(
-        [
-          RoomsType.AIRoom,
-          P.union(ShareAccessRights.None, ShareAccessRights.RoomManager), // owner, docspace admin, room admin
-        ],
-        () =>
-          isBaseTheme ? (
-            <EmptyCustomRoomLightIcon />
-          ) : (
-            <EmptyCustomRoomDarkIcon />
-          ),
-      )
-      .with([RoomsType.AIRoom, ShareAccessRights.Collaborator], () =>
+    )
+    .with([RoomsType.CustomRoom, ShareAccessRights.Collaborator], () =>
+      isBaseTheme ? (
+        <EmptyCustomRoomCollaboratorLightIcon />
+      ) : (
+        <EmptyCustomRoomCollaboratorDarkIcon />
+      ),
+    )
+    .with(
+      [
+        RoomsType.AIRoom,
+        P.union(ShareAccessRights.None, ShareAccessRights.RoomManager), // owner, docspace admin, room admin
+      ],
+      () =>
         isBaseTheme ? (
-          <EmptyCustomRoomCollaboratorLightIcon />
+          <EmptyCustomRoomLightIcon />
         ) : (
-          <EmptyCustomRoomCollaboratorDarkIcon />
+          <EmptyCustomRoomDarkIcon />
         ),
-      )
-      .with([P._, P.when(isUser)], () =>
-        isBaseTheme ? <DefaultFolderUserLight /> : <DefaultFolderUserDark />,
-      )
-      // eslint-disable-next-line react/jsx-no-useless-fragment
-      .otherwise(() => null)
-  );
+    )
+    .with([RoomsType.AIRoom, ShareAccessRights.Collaborator], () =>
+      isBaseTheme ? (
+        <EmptyCustomRoomCollaboratorLightIcon />
+      ) : (
+        <EmptyCustomRoomCollaboratorDarkIcon />
+      ),
+    )
+    .with([P._, P.when(isUser)], () =>
+      isBaseTheme ? <DefaultFolderUserLight /> : <DefaultFolderUserDark />,
+    )
+    .otherwise(() => null);
 };
 
 export const getRootIcon = (

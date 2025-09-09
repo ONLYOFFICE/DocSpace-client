@@ -50,7 +50,6 @@ import {
 import type { AutomaticBackupProps } from "./AutoBackup.types";
 
 const AutoBackupWithToggle = ({
-  selectedEnableSchedule,
   selectedStorageType,
   ...rest
 }: AutomaticBackupProps) => {

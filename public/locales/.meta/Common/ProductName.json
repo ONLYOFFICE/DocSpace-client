@@ -3,7 +3,7 @@
   "content": "DocSpace",
   "content_en_sha1_hash": "ce0b96eab5006b875f6c4a6c31ad73c3c86edcf5",
   "created_at": "2025-05-19T21:30:47.504Z",
-  "updated_at": "2025-09-02T07:59:28.287Z",
+  "updated_at": "2025-09-07T07:53:14.999Z",
   "comment": {
     "text": "This translation key is used for the \"From Portal\" button label, which indicates that a document can be uploaded from DocSpace. It appears in a dropdown menu on a main button in a shell interface. Translators should provide a translated version of \"From Portal\" with the product name inserted.",
     "is_auto": true,
@@ -965,15 +965,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/Plugins/index.tsx",
-      "line_number": 106,
-      "context": "withUpload={withUpload}\n /> */}\n {withUpload ? (\n <>\n <Text>\n {t(\"UploadDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <Dropzone\n onDrop={onDrop}\n isDisabled={!withUpload}\n isLoading={false}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/Plugins/sub-components/EmptyScreen.tsx",
-      "line_number": 70,
-      "context": "<StyledEmptyScreen\n headerText={t(\"NoPlugins\")}\n descriptionText={\n <Text>\n {withUpload\n ? t(\"UploadDescription\", { productName: t(\"Common:ProductName\") })\n : null}\n </Text>\n }\n style={{ gridColumnGap: \"39px\" }}\n buttonStyle={{ marginTop: \"16px\" }}",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/Plugins/sub-components/UploadDescription.tsx",
+      "line_number": 14,
+      "context": "t,\n }: UploadDecsriptionProps) => {\n return (\n <StyledUploadDescription>\n <Text className=\"upload-description-text\">\n {t(\"UploadDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n {apiPluginSDKLink ? (\n <Link\n className=\"link-learn-more\"\n color={currentColorScheme.main?.accent}",
       "module": "/packages/client"
     },
     {
@@ -1152,8 +1146,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
-      "line_number": 186,
-      "context": "return (\n <MainContainer>\n <LearnMoreWrapper withoutExternalLink={!tfaSettingsUrl}>\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"TwoFactorAuthEnableDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {tfaSettingsUrl ? (\n <Link\n className=\"link-learn-more\"",
+      "line_number": 221,
+      "context": "return (\n <MainContainer id=\"tfa-section\" ref={targetRef}>\n <LearnMoreWrapper withoutExternalLink={!tfaSettingsUrl}>\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"TwoFactorAuthEnableDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {tfaSettingsUrl ? (\n <Link\n className=\"link-learn-more\"",
       "module": "/packages/client"
     },
     {
@@ -1172,12 +1166,6 @@
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/index.js",
       "line_number": 56,
       "context": "const location = useLocation();\n \n const data = [\n {\n id: \"access-portal\",\n name: t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n content: <AccessPortal />,\n },\n {\n id: \"login-history\",\n name: t(\"LoginHistoryTitle\"),",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/sub-components/HistoryMainContent.js",
-      "line_number": 254,
-      "context": "const theme = useTheme();\n const isBaseTheme = theme.isBase;\n \n const loginHistoryTranslates = {\n Header: t(\"LoginHistoryCampaignHeader\", {\n productName: t(\"Common:ProductName\"),\n }),\n SubHeader: t(\"LoginHistoryCampaignTitle\"),\n Text: t(\"LoginHistoryCampaignText\"),\n Link: \"/portal-settings/security/access-portal/tfa\",\n };",
       "module": "/packages/client"
     },
     {
@@ -1362,13 +1350,13 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2067,
+      "line_number": 2080,
       "context": "},\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2067,
+      "line_number": 2080,
       "context": "},\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     },
@@ -1553,6 +1541,12 @@
       "module": "/packages/shared"
     },
     {
+      "file_path": "/packages/shared/hooks/useTwoFactorCampaignBanner.ts",
+      "line_number": 56,
+      "context": "}, []);\n \n const loginHistoryTranslates = useMemo(\n () => ({\n Header: t(\"LoginHistoryCampaignHeader\", {\n productName: t(\"Common:ProductName\"),\n }),\n SubHeader: t(\"LoginHistoryCampaignTitle\"),\n Text: t(\"LoginHistoryCampaignText\"),\n Link: isMobile\n ? \"/portal-settings/security/access-portal/tfa\"",
+      "module": "/packages/shared"
+    },
+    {
       "file_path": "/packages/shared/pages/Branding/AdditionalResources/index.tsx",
       "line_number": 97,
       "context": "styles.additionalDescription,\n \"settings_unavailable\",\n )}\n >\n {t(\"Common:AdditionalResourcesDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </div>\n <div className={classNames(styles.brandingCheckbox)}>\n <Checkbox\n data-testid=\"show-feedback-support\"",
@@ -1584,13 +1578,13 @@
     },
     {
       "file_path": "/packages/shared/pages/PreparationPortal/index.tsx",
-      "line_number": 144,
+      "line_number": 147,
       "context": "const componentBody = errorMessage ? (\n <Text className={styles.preparationPortalError}>{`${errorMessage}`}</Text>\n ) : (\n <PreparationPortalProgress\n text={t(\"PreparationPortal:PreparationPortalDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n percent={percent}\n />\n );\n return (",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 420,
+      "line_number": 411,
       "context": "styles.settingsUnavailable,\n \"backup_modules-description settings_unavailable\",\n )}\n >\n {t(\"Common:AutoBackupDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {!isManagement ? (\n <Link\n className={classNames(styles.linkLearnMore, \"link-learn-more\")}",
       "module": "/packages/shared"
     },
@@ -1638,19 +1632,19 @@
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 333,
+      "line_number": 329,
       "context": "switch (type) {\n case EmployeeType.Owner:\n return t(\"Common:Owner\");\n case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 333,
+      "line_number": 329,
       "context": "switch (type) {\n case EmployeeType.Owner:\n return t(\"Common:Owner\");\n case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 333,
+      "line_number": 329,
       "context": "switch (type) {\n case EmployeeType.Owner:\n return t(\"Common:Owner\");\n case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");",
       "module": "/packages/shared"
     },

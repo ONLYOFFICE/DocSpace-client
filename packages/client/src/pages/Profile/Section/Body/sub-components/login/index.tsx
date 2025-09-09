@@ -27,6 +27,7 @@
 import LoginSettings from "./login-settings";
 import SocialNetworks from "./social-networks";
 import ActiveSession from "./active-session";
+import LoginCampaign from "./campaign";
 
 import { StyledWrapper } from "./Login.styled";
 
@@ -37,6 +38,7 @@ type LoginContentProps = {
 const LoginContent = ({ tfaOn }: LoginContentProps) => {
   return (
     <StyledWrapper>
+      <LoginCampaign />
       {tfaOn ? <LoginSettings /> : null}
       <SocialNetworks />
       <ActiveSession />

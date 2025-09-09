@@ -3,7 +3,7 @@
   "content": "Application could not be found",
   "content_en_sha1_hash": "560c59db081117f2c4b8a0fb377e3750ce3e34f2",
   "created_at": "2025-05-19T21:30:57.296Z",
-  "updated_at": "2025-05-26T07:57:32.887Z",
+  "updated_at": "2025-09-07T07:53:15.429Z",
   "comment": {
     "text": "This translation key displays an error message when an OAuth application is not found. It appears on screens indicating that an application has been disabled or missing, and its purpose is to inform the user of the error.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/utils/index.ts",
-      "line_number": 125,
+      "line_number": 126,
       "context": "case OAuth2ErrorKey.asc_retrieval_error:\n return t(\"Common:SomethingWentWrong\");\n case OAuth2ErrorKey.client_disabled_error:\n return t(\"Errors:OAuthApplicationDisabled\");\n case OAuth2ErrorKey.client_not_found_error:\n return t(\"Errors:OAuthApplicationEmpty\");\n case OAuth2ErrorKey.client_permission_denied_error:\n return t(\"Common:AccessDenied\");\n case OAuth2ErrorKey.missing_client_id_error:\n return t(\"Errors:OAuthClientEmpty\");\n case OAuth2ErrorKey.something_went_wrong_error:",
       "module": "/packages/login"
     }

@@ -3,7 +3,7 @@
   "content": "Loading...",
   "content_en_sha1_hash": "b04ba49f848624bb97ab094a2631d2ad74913498",
   "created_at": "2025-05-19T21:30:46.280Z",
-  "updated_at": "2025-08-21T11:22:39.934Z",
+  "updated_at": "2025-09-07T07:53:15.416Z",
   "comment": {
     "text": "This translation key is used to display a loading message when an operation is in progress. It appears on various buttons, including confirm and continue buttons, as well as a registration form button, and is intended to provide visual feedback to the user that something is happening behind the scenes.",
     "is_auto": true,
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/login/src/components/LoginForm/index.tsx",
-      "line_number": 660,
+      "line_number": 661,
       "context": "className=\"login-button\"\n primary\n size={ButtonSize.medium}\n scale\n label={\n isLoading ? t(\"Common:LoadingProcessing\") : t(\"Common:LoginButton\")\n }\n tabIndex={5}\n isDisabled={isLoading}\n isLoading={isLoading}\n onClick={onSubmit}",
       "module": "/packages/login"
     },

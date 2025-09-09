@@ -447,7 +447,11 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
   const onKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === ButtonKeys.enter) {
-      registrationForm ? onSubmit() : onContinue();
+      if (registrationForm) {
+        onSubmit();
+      } else {
+        onContinue();
+      }
     }
   };
 
@@ -510,7 +514,6 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     if (!capabilities?.oauthEnabled) return false;
 
     let existProviders = 0;
-    thirdPartyProviders && thirdPartyProviders.length > 0;
     thirdPartyProviders?.forEach((item) => {
       const key = item.provider as keyof typeof PROVIDERS_DATA;
       if (

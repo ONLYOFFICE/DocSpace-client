@@ -59,7 +59,7 @@ describe("PlayerSpeedControl", () => {
     jest.clearAllMocks();
     jest.useFakeTimers();
     const deviceDetect = jest.requireMock("react-device-detect");
-    // eslint-disable-next-line no-underscore-dangle
+
     deviceDetect.__setMobileOnly = false;
   });
 

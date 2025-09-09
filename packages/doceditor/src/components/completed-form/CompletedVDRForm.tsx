@@ -103,13 +103,13 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
 
   useEffect(() => {
     if (!isInitSocket.current) {
-      SocketHelper.connect(socketUrl, "");
+      SocketHelper?.connect(socketUrl, "");
     }
 
     const fileSocketPart = `FILE-${formId}`;
 
-    if (!SocketHelper.socketSubscribers.has(fileSocketPart))
-      SocketHelper.emit(SocketCommands.Subscribe, {
+    if (!SocketHelper?.socketSubscribers.has(fileSocketPart))
+      SocketHelper?.emit(SocketCommands.Subscribe, {
         roomParts: [fileSocketPart],
         individual: true,
       });
@@ -123,11 +123,11 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
       }
     };
 
-    SocketHelper.on(SocketEvents.StopEditFile, stopEditFileHandler);
+    SocketHelper?.on(SocketEvents.StopEditFile, stopEditFileHandler);
 
     isInitSocket.current = true;
     return () => {
-      SocketHelper.off(SocketEvents.StopEditFile, stopEditFileHandler);
+      SocketHelper?.off(SocketEvents.StopEditFile, stopEditFileHandler);
     };
   }, [socketUrl, formId]);
 

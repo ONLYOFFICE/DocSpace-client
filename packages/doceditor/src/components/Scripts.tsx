@@ -26,7 +26,6 @@
 
 import Script from "next/script";
 
-// eslint-disable-next-line
 import runtime from "../../../runtime.json";
 
 const hashDate = runtime?.date;

@@ -24,11 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable class-methods-use-this */
-/* eslint-disable no-console */
-/* eslint-disable no-var */
-/* eslint-disable vars-on-top */
-/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 
 import io, { Socket } from "socket.io-client";
@@ -363,20 +358,20 @@ const isEmitDataValid = (
  * @class
  * @example
  * // Retrieve the singleton instance
- * const socketHelper = SocketHelper.getInstance();
+ * const socketHelper = SocketHelper?.getInstance();
  *
  * // Establish a connection
- * socketHelper.connect('ws://example.com', 'publicRoomKey');
+ * SocketHelper?.connect('ws://example.com', 'publicRoomKey');
  *
  * // Emit a message
- * socketHelper.emit('message', { text: 'Hello, World!' });
+ * SocketHelper?.emit('message', { text: 'Hello, World!' });
  *
  * // Register an event listener
- * socketHelper.on('message', (data) => {
+ * SocketHelper?.on('message', (data) => {
  *   console.log('Received message:', data);
  * });
  * // Remove the event listener
- * socketHelper.on('message', (data) => {
+ * SocketHelper?.on('message', (data) => {
  *   console.log('Received message:', data);
  * });
  *
@@ -436,16 +431,23 @@ class SocketHelper {
 
     // this.instance = new SocketHelper();
     // return this.instance;
-    if (typeof globalThis !== "undefined" && globalThis.SOCKET_INSTANCE) {
+    if (
+      typeof globalThis !== "undefined" &&
+      (globalThis as unknown as { SOCKET_INSTANCE?: SocketHelper })
+        .SOCKET_INSTANCE
+    ) {
       // [WS] Returning existing global socket instance
-      return globalThis.SOCKET_INSTANCE;
+      return (globalThis as unknown as { SOCKET_INSTANCE?: SocketHelper })
+        .SOCKET_INSTANCE;
     }
 
     if (!this.instance) {
       // [WS] Creating new socket instance
       this.instance = new SocketHelper();
       if (typeof globalThis !== "undefined")
-        globalThis.SOCKET_INSTANCE = this.instance;
+        (
+          globalThis as unknown as { SOCKET_INSTANCE?: SocketHelper }
+        ).SOCKET_INSTANCE = this.instance;
     }
     // [WS] Returning existing socket instance
     return this.instance;
@@ -710,4 +712,4 @@ class SocketHelper {
   };
 }
 
-export default SocketHelper.getInstance();
+export default SocketHelper?.getInstance();

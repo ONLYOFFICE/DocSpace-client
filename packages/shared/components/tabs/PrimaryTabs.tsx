@@ -46,7 +46,6 @@ const PrimaryTabs = (props: TabsProps) => {
     stickyTop,
     onSelect,
     withoutStickyIntend = false,
-    layoutId,
     id,
     withAnimation,
     ...rest

@@ -72,7 +72,14 @@ export const useBackupSettings = ({
   );
 
   const [selected, setSelected] = useReducer(
-    (state, action: Partial<BackupSelectedStateType> | Function) => ({
+    (
+      state: BackupSelectedStateType,
+      action:
+        | Partial<BackupSelectedStateType>
+        | ((
+            state: BackupSelectedStateType,
+          ) => Partial<BackupSelectedStateType>),
+    ): BackupSelectedStateType => ({
       ...state,
       ...(typeof action === "function" ? action(state) : action),
     }),
@@ -93,7 +100,7 @@ export const useBackupSettings = ({
       if (schedule) {
         const { storageType, cronParams, backupsStored, storageParams } =
           schedule;
-        const { folderId, module, tenantId, ...other } = storageParams;
+        const { folderId, module, ...other } = storageParams;
         const { period, day, hour } = cronParams;
 
         const defaultFormSettings: Record<string, string> = {

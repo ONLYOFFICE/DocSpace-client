@@ -132,6 +132,7 @@ export class ThirdPartyStore {
         ? newWindow
         : window.open(url, i18n.t("Common:Authorization"), params);
     } catch (err) {
+      console.error(err);
       newWindow = modal
         ? newWindow
         : window.open(url, i18n.t("Common:Authorization"));

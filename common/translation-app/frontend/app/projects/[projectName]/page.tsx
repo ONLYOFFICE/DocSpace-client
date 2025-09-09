@@ -415,7 +415,9 @@ export default function ProjectPage() {
             // Update progress toast
             const progress = completedItems / totalItems;
             toast.update(toastId.current!, {
-              render: `Translating key "${keyPath}" to ${targetLang}... (${Math.round(progress * 100)}%)`,
+              render: `Translating key "${keyPath}" to ${targetLang}... (${Math.round(
+                progress * 100
+              )}%)`,
               progress: progress,
             });
 
@@ -437,16 +439,18 @@ export default function ProjectPage() {
             );
             // Continue with other translations even if one fails
             toast.error(
-              `Failed to translate key "${keyPath}" to ${targetLang}: ${(error as Error).message}`
+              `Failed to translate key "${keyPath}" to ${targetLang}: ${
+                (error as Error).message
+              }`
             );
           }
         }
       }
 
       // Refresh translations to show the changes
-      if (currentNamespace === namespace) {
-        fetchTranslations(projectName, selectedLanguages, namespace);
-      }
+      // if (currentNamespace === namespace) {
+      //  fetchTranslations(projectName, selectedLanguages, namespace);
+      // }
 
       // Complete the toast
       if (toastId.current) {
@@ -465,7 +469,9 @@ export default function ProjectPage() {
     } catch (error) {
       console.error("Translation error:", error);
       toast.error(
-        `Failed to translate namespace ${namespace}: ${(error as Error).message}`
+        `Failed to translate namespace ${namespace}: ${
+          (error as Error).message
+        }`
       );
 
       // Reset toast ID on error too

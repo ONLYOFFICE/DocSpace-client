@@ -70,6 +70,8 @@ const List: FC<ListProps> = (props) => {
   const scrollContext = use(ScrollbarContext);
   const scrollElement = scrollContext.parentScrollbar?.scrollerElement;
 
+  const scrollRef = useRef<HTMLDivElement>(scrollElement);
+
   const list = useMemo(() => {
     const temp: React.ReactElement<{
       isShareLink?: boolean;
@@ -212,7 +214,7 @@ const List: FC<ListProps> = (props) => {
     });
   };
 
-  useEventListener("scroll", onScroll, scrollElement);
+  useEventListener("scroll", onScroll, scrollRef);
 
   if (!scrollElement) {
     return null;

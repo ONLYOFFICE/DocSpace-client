@@ -234,16 +234,13 @@ export default class MessageStore {
   handleToolResult = (jsonData: string) => {
     const { result } = JSON.parse(jsonData);
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { managed, ...oldContent } = this.messages[0]
-      .contents[0] as TToolCallContent;
-
     const newMsg: TMessage = {
       ...this.messages[0],
 
       contents: [
         {
-          ...oldContent,
+          ...this.messages[0].contents[0],
+          managed: false,
           result,
         } as TToolCallContent,
       ],

@@ -63,19 +63,19 @@ const ChatMessageBody = ({
   useEffect(() => {
     if (!currentChat?.id) return;
 
-    socket.emit(SocketCommands.Subscribe, {
+    socket?.emit(SocketCommands.Subscribe, {
       roomParts: `CHAT-${currentChat?.id}`,
     });
 
     return () => {
-      socket.emit(SocketCommands.Unsubscribe, {
+      socket?.emit(SocketCommands.Unsubscribe, {
         roomParts: `CHAT-${currentChat?.id}`,
       });
     };
   }, [currentChat?.id]);
 
   useEffect(() => {
-    socket.on(SocketEvents.ChatMessageId, (data) => {
+    socket?.on(SocketEvents.ChatMessageId, (data) => {
       addMessageId(data.messageId);
     });
   }, [addMessageId]);

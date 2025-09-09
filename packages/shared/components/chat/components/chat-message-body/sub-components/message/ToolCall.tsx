@@ -66,6 +66,7 @@ const ToolCall = ({ content }: MessageToolCallProps) => {
     JSON.parse(result);
     isJson = true;
   } catch (e) {
+    console.log(e);
     isJson = false;
   }
 

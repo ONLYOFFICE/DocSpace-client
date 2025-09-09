@@ -52,9 +52,9 @@ class AiRoomStore {
     if (
       this.knowledgeId &&
       this.knowledgeId !== knowledgeId &&
-      SocketHelper.socketSubscribers.has(`DIR-${knowledgeId}`)
+      SocketHelper?.socketSubscribers.has(`DIR-${knowledgeId}`)
     ) {
-      SocketHelper.emit(SocketCommands.Unsubscribe, {
+      SocketHelper?.emit(SocketCommands.Unsubscribe, {
         roomParts: [`DIR-${this.knowledgeId}`],
         individual: true,
       });
@@ -64,7 +64,7 @@ class AiRoomStore {
 
     setTimeout(() => {
       if (knowledgeId) {
-        SocketHelper.emit(SocketCommands.Subscribe, {
+        SocketHelper?.emit(SocketCommands.Subscribe, {
           roomParts: [`DIR-${knowledgeId}`],
           individual: true,
         });

@@ -297,6 +297,7 @@ export default class MessageStore {
           try {
             reader.cancel();
           } catch (e) {
+            console.log(e);
             // Ignore cancel errors
           }
           return;
@@ -348,6 +349,7 @@ export default class MessageStore {
                   prevMsg = msg;
                 }
               } catch (e) {
+                console.log(e);
                 // ignore
               }
             }
@@ -362,6 +364,7 @@ export default class MessageStore {
 
                 this.handleToolCall(toolCall);
               } catch (e) {
+                console.log(e);
                 console.log("Failed TOOL_CALL");
                 console.log(chunk);
                 failed = true;
@@ -380,6 +383,7 @@ export default class MessageStore {
               try {
                 this.handleToolResult(toolResult);
               } catch (e) {
+                console.log(e);
                 console.log("Failed TOOL_RESULT");
                 console.log(chunk);
                 failed = true;

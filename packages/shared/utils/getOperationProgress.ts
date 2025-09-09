@@ -32,7 +32,9 @@ export const getOperationProgress = async (
   id: string,
   errorMessage: string,
   isOneOperation: boolean = false,
-  action: Function = getProgress,
+  action: (
+    id?: string,
+  ) => Promise<TOperation[] | TVectorizeOperation> = getProgress,
 ) => {
   const operationId = isOneOperation ? id : undefined;
 
@@ -46,7 +48,7 @@ export const getOperationProgress = async (
                 reject(errorMessage);
               }
 
-              if (!Array.isArray(res) && action) {
+              if (!Array.isArray(res) && !!action) {
                 if (res.error) {
                   reject(errorMessage);
                 }

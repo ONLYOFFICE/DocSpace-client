@@ -174,10 +174,10 @@ const ToolsSettings = () => {
   }, [fetchTools]);
 
   React.useEffect(() => {
-    socket.on(SocketEvents.ModifyFolder, onModifyFolder);
+    socket?.on(SocketEvents.ModifyFolder, onModifyFolder);
 
     return () => {
-      socket.off(SocketEvents.ModifyFolder, onModifyFolder);
+      socket?.off(SocketEvents.ModifyFolder, onModifyFolder);
     };
   }, [onModifyFolder]);
 

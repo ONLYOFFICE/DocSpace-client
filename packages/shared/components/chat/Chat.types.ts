@@ -106,8 +106,6 @@ export type MessageBodyProps = {
   getIcon: TGetIcon;
 };
 
-export type ToolsSettingsProps = {};
-
 export type FilesListProps = {
   files: Partial<TFile>[];
   isFixed?: boolean;

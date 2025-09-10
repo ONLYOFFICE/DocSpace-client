@@ -219,6 +219,9 @@ const ViewerInfoWatermark = ({
     });
   };
 
+  const lockLastSelection =
+    Object.values(elements.current).filter((v) => v === true).length === 1;
+
   return (
     <StyledWatermark>
       <Text className="watermark-title" fontWeight={600} lineHeight="20px">
@@ -236,7 +239,7 @@ const ViewerInfoWatermark = ({
               data-key={item.id}
               label={item.name}
               isActive={isActive}
-              isDisabled={isActive}
+              lockLastSelection={lockLastSelection}
               onSelect={onSelect}
               withMultiSelect
               dataTestId={`virtual_data_room_watermark_tab_${item.id.toLowerCase()}`}

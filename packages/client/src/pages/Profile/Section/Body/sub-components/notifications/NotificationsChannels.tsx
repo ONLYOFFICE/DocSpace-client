@@ -43,6 +43,7 @@ type NotificationsChannelsProps = {
   isEmailEnabled?: TargetUserStore["isEmailEnabled"];
   isTelegramEnabled?: TargetUserStore["isTelegramEnabled"];
   isEmailNotValid?: TargetUserStore["isEmailNotValid"];
+  isThirdPartyAvailable?: boolean;
 };
 
 const NotificationsChannels = ({
@@ -54,6 +55,7 @@ const NotificationsChannels = ({
   isEmailEnabled,
   isTelegramEnabled,
   isEmailNotValid,
+  isThirdPartyAvailable,
 }: NotificationsChannelsProps) => {
   const { t } = useTranslation("Profile");
 
@@ -81,6 +83,7 @@ const NotificationsChannels = ({
           isConnected={isConnected}
           isAdmin={user?.isAdmin}
           isNeedConfig={!isTelegramEnabled}
+          isThirdPartyAvailable={isThirdPartyAvailable}
         />
       </div>
     </div>
@@ -88,7 +91,13 @@ const NotificationsChannels = ({
 };
 
 export default inject(
-  ({ dialogsStore, userStore, telegramStore, peopleStore }: TStore) => {
+  ({
+    dialogsStore,
+    userStore,
+    telegramStore,
+    peopleStore,
+    currentQuotaStore,
+  }: TStore) => {
     const {
       setConnectAccountDialogVisible,
       setDisconnectAccountDialogVisible,
@@ -99,6 +108,8 @@ export default inject(
     const { isEmailEnabled, isTelegramEnabled, isEmailNotValid } =
       peopleStore.targetUserStore!;
 
+    const { isThirdPartyAvailable } = currentQuotaStore;
+
     return {
       setConnectAccountDialogVisible,
       setDisconnectAccountDialogVisible,
@@ -108,6 +119,7 @@ export default inject(
       isEmailEnabled,
       isTelegramEnabled,
       isEmailNotValid,
+      isThirdPartyAvailable,
     };
   },
 )(observer(NotificationsChannels));

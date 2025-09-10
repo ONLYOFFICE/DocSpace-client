@@ -43,7 +43,7 @@ import {
   sortInDisplayOrder,
 } from "../../utils/common";
 
-import { TNewFiles } from "../rooms/types";
+import type { TGetRoomMembers, TNewFiles } from "../rooms/types";
 import { request } from "../client";
 
 import FilesFilter from "./filter";
@@ -74,6 +74,7 @@ import {
   TUploadBackup,
   TFormRoleMappingRequest,
   TFileFillingFormStatus,
+  TShareToUser,
 } from "./types";
 import type { TFileConvertId } from "../../dialogs/download-dialog/DownloadDialog.types";
 
@@ -1802,6 +1803,52 @@ export async function getFormFillingStatus(
     method: "get",
     url: `/files/file/${formId}/formroles`,
   })) as TFileFillingFormStatus[];
+
+  return res;
+}
+
+export async function getShareFile(id: string | number) {
+  const res = (await request({
+    method: "get",
+    url: `/files/file/${id}/share`,
+  })) as TGetRoomMembers;
+
+  return res;
+}
+export async function getShareFolder(id: string | number) {
+  const res = (await request({
+    method: "get",
+    url: `/files/folder/${id}/share`,
+  })) as TGetRoomMembers;
+
+  return res;
+}
+
+export async function shareFolderToUser(
+  folderId: string | number,
+  share: TShareToUser[],
+) {
+  const res = (await request({
+    method: "put",
+    url: `/files/folder/${folderId}/share`,
+    data: {
+      share,
+    },
+  })) as TGetRoomMembers;
+
+  return res;
+}
+export async function shareFileToUser(
+  fileId: string | number,
+  share: TShareToUser[],
+) {
+  const res = (await request({
+    method: "put",
+    url: `/files/file/${fileId}/share`,
+    data: {
+      share,
+    },
+  })) as TGetRoomMembers;
 
   return res;
 }

@@ -551,3 +551,8 @@ export type TFileFillingFormStatus = {
   submitted: boolean;
   history?: Record<FillingFormStatusHistory, string>;
 };
+
+export type TShareToUser = {
+  shareTo: string;
+  access: ShareAccessRights;
+};

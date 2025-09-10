@@ -31,6 +31,10 @@ import {
   editExternalLink,
   getOrCreatePrimaryFolderLink,
   getPrimaryLinkIfNotExistCreate,
+  getShareFile,
+  getShareFolder,
+  shareFileToUser,
+  shareFolderToUser,
 } from "../api/files";
 
 import {
@@ -42,7 +46,12 @@ import { FolderType, ShareAccessRights, ShareLinkType } from "../enums";
 import { isFile, isRoom } from "../utils/typeGuards";
 
 import type { TRoom } from "../api/rooms/types";
-import type { TFile, TFileLink, TFolder } from "../api/files/types";
+import type {
+  TFile,
+  TFileLink,
+  TFolder,
+  TShareToUser,
+} from "../api/files/types";
 
 /**
  * Service for managing document sharing links
@@ -209,5 +218,28 @@ export class ShareLinkService {
     return isFile(item)
       ? this.addExternalFileLink(item)
       : this.addExternalFolderLink(item);
+  };
+
+  public static getShareFile = (id: string | number) => {
+    return getShareFile(id);
+  };
+
+  public static getShareFolder = (id: string | number) => {
+    return getShareFolder(id);
+  };
+
+  public static getShare = (item: TFile | TFolder) => {
+    return isFile(item)
+      ? this.getShareFile(item.id)
+      : this.getShareFolder(item.id);
+  };
+
+  public static shareEntityToUser = async (
+    share: TShareToUser[],
+    item: TFile | TFolder,
+  ) => {
+    return isFile(item)
+      ? shareFileToUser(item.id, share)
+      : shareFolderToUser(item.id, share);
   };
 }

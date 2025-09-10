@@ -51,18 +51,24 @@ import { TOperation } from "../files/filter";
 export async function getUserList(
   filter = Filter.getDefault(),
   signal?: AbortSignal,
+  searchArea: AccountsSearchArea = AccountsSearchArea.People,
 ) {
   let params = "";
+  const isGroups = searchArea === AccountsSearchArea.Groups;
 
   if (filter) {
     checkFilterInstance(filter, Filter);
 
-    params = `/filter?${filter.toApiUrlParams()}`;
+    const search = filter.toApiUrlParams();
+
+    params = isGroups ? `?${search}` : `/filter?${search}`;
   }
+
+  const url = isGroups ? `/group${params}` : `/people${params}`;
 
   const res = (await request({
     method: "get",
-    url: `/people${params}`,
+    url,
     signal,
   })) as TGetUserList;
 

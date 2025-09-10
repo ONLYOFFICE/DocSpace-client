@@ -93,6 +93,7 @@ import FillingStatusPanel from "../panels/FillingStatusPanel";
 import TemplateAccessSettingsPanel from "../panels/TemplateAccessSettingsPanel";
 import RemoveUserConfirmationDialog from "../dialogs/RemoveUserConfirmationDialog";
 import AssignRoles from "../dialogs/AssignRoles";
+import ShareSelector from "../ShareSelector";
 
 const Panels = (props) => {
   const {
@@ -420,6 +421,7 @@ const Panels = (props) => {
     socialAuthWelcomeDialogVisible && (
       <SocialAuthWelcomeDialog key="joining-space-dialog" />
     ),
+    <ShareSelector key="share-selector" />,
   ];
 };
 

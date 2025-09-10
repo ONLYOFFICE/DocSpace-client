@@ -343,7 +343,11 @@ const PeopleSelector = ({
         abortControllerRef.current = new AbortController();
 
         const response = !roomId
-          ? await getUserList(currentFilter, abortControllerRef.current?.signal)
+          ? await getUserList(
+              currentFilter,
+              abortControllerRef.current?.signal,
+              searchArea,
+            )
           : await getMembersList(
               searchArea,
               roomId,

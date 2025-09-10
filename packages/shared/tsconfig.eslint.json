@@ -33,6 +33,8 @@
     "routes",
     "polyfills",
     "api",
-    "jest"
+    "jest",
+    // include local eslint custom rules
+    "eslint-rules"
   ]
 }

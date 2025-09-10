@@ -57,6 +57,9 @@ const SUBMENU_LIST_MARGIN = 4; // Indentation of the second level menu from the 
 const SECTION_PADDING = 16; // Screen margin
 const MIN_SUBMENU_WIDTH = 240; // Minimum width for submenu on mobile devices
 
+const OPEN_DELAY = 200;
+const HIDE_DELAY = 400;
+
 type SubMenuProps = {
   model: ContextMenuModel[];
   root?: boolean;
@@ -99,9 +102,56 @@ const SubMenu = (props: SubMenuProps) => {
   const [widthSubMenu, setWidthSubMenu] = useState<null | number>(null);
 
   const subMenuRef = useRef<HTMLUListElement>(null);
-  const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const hideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const keepClosingRef = useRef<boolean>(false);
-  const openTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const openTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const clearOpen = () => {
+    if (openTimeoutRef.current) {
+      clearTimeout(openTimeoutRef.current);
+      openTimeoutRef.current = null;
+    }
+  };
+
+  const clearHide = () => {
+    if (hideTimeoutRef.current) {
+      clearTimeout(hideTimeoutRef.current);
+      hideTimeoutRef.current = null;
+    }
+  };
+
+  const cancelAll = () => {
+    clearOpen();
+    clearHide();
+    keepClosingRef.current = false;
+  };
+
+  const scheduleOpen = (itm: ContextMenuType, delay = OPEN_DELAY) => {
+    clearOpen();
+    clearHide();
+    keepClosingRef.current = false;
+    if (delay === 0) {
+      setActiveItem(itm);
+      return;
+    }
+    openTimeoutRef.current = setTimeout(() => {
+      if (keepClosingRef.current) return;
+      setActiveItem(itm);
+    }, delay);
+  };
+
+  const scheduleHide = (delay = HIDE_DELAY) => {
+    clearOpen();
+    keepClosingRef.current = true;
+    clearHide();
+    hideTimeoutRef.current = setTimeout(() => {
+      if (keepClosingRef.current) {
+        setActiveItem(null);
+        keepClosingRef.current = false;
+      }
+    }, delay);
+  };
 
   const { isBase } = useTheme();
   const { isRTL } = useInterfaceDirection();
@@ -114,75 +164,54 @@ const SubMenu = (props: SubMenuProps) => {
 
     const hasSubMenu = !!(item.items || item.onLoad);
 
-    if (activeItem && !hasSubMenu) {
-      if (!hideTimeoutRef.current) {
-        hideTimeoutRef.current = setTimeout(() => {
-          setActiveItem(null);
-        }, 400);
+    if (keepClosingRef.current) {
+      if (hasSubMenu) {
+        keepClosingRef.current = false;
+        clearHide();
       }
+    }
+
+    if (activeItem && !hasSubMenu) {
+      if (!hideTimeoutRef.current) scheduleHide(HIDE_DELAY);
       return;
     }
 
     if (keepClosingRef.current) return;
 
     if (hasSubMenu) {
-      if (openTimeoutRef.current) clearTimeout(openTimeoutRef.current);
-      openTimeoutRef.current = setTimeout(() => {
-        if (keepClosingRef.current) return;
-        if (hideTimeoutRef.current) {
-          clearTimeout(hideTimeoutRef.current);
-          hideTimeoutRef.current = null;
-        }
+      if (root) {
+        cancelAll();
         setActiveItem(item);
-      }, 200);
+        return;
+      }
+
+      scheduleOpen(item, OPEN_DELAY);
       return;
     }
 
-    if (!hideTimeoutRef.current) {
-      hideTimeoutRef.current = setTimeout(() => {
-        setActiveItem(null);
-      }, 400);
-    }
+    if (!hideTimeoutRef.current) scheduleHide(HIDE_DELAY);
   };
 
   const onItemMouseLeave = (item: ContextMenuType) => {
     if (isMobileDevice) return;
 
     if (item.items || item.onLoad) {
-      if (openTimeoutRef.current) {
-        clearTimeout(openTimeoutRef.current);
-        openTimeoutRef.current = null;
-      }
-      hideTimeoutRef.current = setTimeout(() => {
-        setActiveItem(null);
-      }, 400);
+      clearOpen();
+      scheduleHide(HIDE_DELAY);
     }
   };
 
   const handleSubMenuMouseEnter = () => {
     if (isMobileDevice) return;
 
-    if (hideTimeoutRef.current) {
-      clearTimeout(hideTimeoutRef.current);
-      hideTimeoutRef.current = null;
-    }
-
+    clearHide();
     keepClosingRef.current = false;
-    if (openTimeoutRef.current) {
-      clearTimeout(openTimeoutRef.current);
-      openTimeoutRef.current = null;
-    }
+    clearOpen();
   };
 
   const handleSubMenuMouseLeave = () => {
     if (isMobileDevice) return;
-
-    if (hideTimeoutRef.current) clearTimeout(hideTimeoutRef.current);
-    keepClosingRef.current = true;
-    hideTimeoutRef.current = setTimeout(() => {
-      setActiveItem(null);
-      keepClosingRef.current = false;
-    }, 400);
+    scheduleHide(HIDE_DELAY);
   };
 
   useEffect(() => {
@@ -190,15 +219,9 @@ const SubMenu = (props: SubMenuProps) => {
     if (menuHovered === undefined) return;
 
     if (!menuHovered) {
-      if (hideTimeoutRef.current) clearTimeout(hideTimeoutRef.current);
-      hideTimeoutRef.current = setTimeout(() => {
-        setActiveItem(null);
-      }, 400);
+      scheduleHide(HIDE_DELAY);
     } else {
-      if (!keepClosingRef.current && hideTimeoutRef.current) {
-        clearTimeout(hideTimeoutRef.current);
-        hideTimeoutRef.current = null;
-      }
+      if (!keepClosingRef.current && hideTimeoutRef.current) clearHide();
     }
   }, [menuHovered]);
 
@@ -411,12 +434,7 @@ const SubMenu = (props: SubMenuProps) => {
 
   useEffect(() => {
     return () => {
-      if (hideTimeoutRef.current) {
-        clearTimeout(hideTimeoutRef.current);
-      }
-      if (openTimeoutRef.current) {
-        clearTimeout(openTimeoutRef.current);
-      }
+      cancelAll();
     };
   }, []);
 

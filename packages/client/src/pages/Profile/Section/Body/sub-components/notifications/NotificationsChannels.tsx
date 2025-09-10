@@ -75,7 +75,7 @@ const NotificationsChannels = ({
         ) : null}
         <Channel
           type="telegram"
-          name={`@${username}` || ""}
+          name={username ? `@${username}` : ""}
           onConnect={() => setConnectAccountDialogVisible?.(true)}
           onDisconnect={() => setDisconnectAccountDialogVisible?.(true)}
           isConnected={isConnected}

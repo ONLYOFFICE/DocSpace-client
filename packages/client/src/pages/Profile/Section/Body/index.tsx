@@ -96,7 +96,9 @@ type SectionBodyContentProps = {
   getCapabilities?: AuthStore["getCapabilities"];
   getSessions?: SettingsSetupStore["getSessions"];
   setIsProfileLoaded?: ClientLoadingStore["setIsProfileLoaded"];
+  setIsSectionBodyLoading?: ClientLoadingStore["setIsSectionBodyLoading"];
   setIsSectionHeaderLoading?: ClientLoadingStore["setIsSectionHeaderLoading"];
+  setIsArticleLoading?: ClientLoadingStore["setIsArticleLoading"];
   resetSelections?: FilesStore["resetSelections"];
 };
 
@@ -117,7 +119,9 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     getCapabilities,
     getSessions,
     setIsProfileLoaded,
+    setIsSectionBodyLoading,
     setIsSectionHeaderLoading,
+    setIsArticleLoading,
     getTfaType,
     resetSelections,
   } = props;
@@ -159,7 +163,9 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     getSessions: getSessions!,
     setIsProfileLoaded: setIsProfileLoaded!,
     setIsSectionHeaderLoading: setIsSectionHeaderLoading!,
+    setIsArticleLoading: setIsArticleLoading!,
     getTfaType: getTfaType!,
+    setIsSectionBodyLoading: setIsSectionBodyLoading!,
   });
 
   const data = [
@@ -249,8 +255,13 @@ export default inject(
     setup,
     filesStore,
   }: TStore) => {
-    const { showProfileLoader, setIsProfileLoaded, setIsSectionHeaderLoading } =
-      clientLoadingStore;
+    const {
+      showProfileLoader,
+      setIsProfileLoaded,
+      setIsSectionHeaderLoading,
+      setIsSectionBodyLoading,
+      setIsArticleLoading,
+    } = clientLoadingStore;
 
     const identityServerEnabled =
       authStore?.capabilities?.identityServerEnabled;
@@ -287,6 +298,8 @@ export default inject(
       getTfaType,
       setIsProfileLoaded,
       setIsSectionHeaderLoading,
+      setIsSectionBodyLoading,
+      setIsArticleLoading,
       resetSelections,
     };
   },

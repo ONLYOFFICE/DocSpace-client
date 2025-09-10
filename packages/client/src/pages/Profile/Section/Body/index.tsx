@@ -65,12 +65,9 @@ const Wrapper = styled.div`
   margin-top: -19px;
 
   @media ${tablet} {
+    margin-top: 0;
     width: 100%;
     max-width: 100%;
-  }
-
-  @media ${mobile} {
-    margin-top: 0;
   }
 `;
 

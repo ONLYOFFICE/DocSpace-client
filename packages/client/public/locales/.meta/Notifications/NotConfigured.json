@@ -1,0 +1,28 @@
+{
+  "key_path": "NotConfigured",
+  "content": "Not configured",
+  "content_en_sha1_hash": "811931bba8d18b2931c45fefe992575887f49909",
+  "created_at": "2025-09-10T09:59:17.188Z",
+  "updated_at": "2025-09-10T10:00:41.140Z",
+  "comment": {
+    "text": "Indicates that a Telegram channel is not yet configured. This text appears within a notification section of a user's profile, specifically when a Telegram integration requires setup. Translators should ensure the phrasing accurately conveys the need for user action.",
+    "is_auto": true,
+    "updated_at": "2025-09-10T10:00:41.140Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/Channel.tsx",
+      "line_number": 75,
+      "context": ") => {\n switch (type) {\n case \"email\":\n return `${t(\"Common:Email\")}${isNotValid ? ` (${t(\"IsNotValid\")})` : \"\"}`;\n case \"telegram\":\n return `${t(\"Common:ProviderTelegram\")}${isNeedConfig ? ` (${t(\"NotConfigured\")})` : \"\"}`;\n default:\n return t(\"Common:Email\");\n }\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

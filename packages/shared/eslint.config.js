@@ -7,6 +7,7 @@ const importPlugin = require("eslint-plugin-import");
 const prettier = require("eslint-plugin-prettier");
 const prettierConfig = require("eslint-config-prettier");
 const globals = require("globals");
+const localRules = require("./eslint-rules");
 
 module.exports = [
   js.configs.recommended,
@@ -36,6 +37,7 @@ module.exports = [
       "jsx-a11y": jsxA11y,
       import: importPlugin,
       prettier,
+      "local-rules": localRules,
     },
     rules: {
       // Custom rules
@@ -102,6 +104,7 @@ module.exports = [
       "react/no-danger-with-children": "error",
       "react/no-unstable-nested-components": ["error", { allowAsProps: true }],
       "react/no-this-in-sfc": "error",
+      "local-rules/no-iterator-foreach": "error",
     },
     settings: {
       react: {

@@ -64,27 +64,6 @@
     }
   }
 
-  &:hover:not(.isDragging),
-  &:hover:not(.isEdit) {
-    :global(.badges) :global(.copy-link) {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    :global(.badges) :global(.lock-file) {
-      opacity: 0;
-      pointer-events: none;
-    }
-  }
-
-  &:not(:hover) {
-    :global(.copy-link) {
-      opacity: 0;
-      transition: opacity 0.1s;
-      pointer-events: none;
-    }
-  }
-
   &.isTouchDevice {
     :global(.badge) {
       opacity: 1;

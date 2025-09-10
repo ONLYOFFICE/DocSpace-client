@@ -2575,6 +2575,26 @@
 }
 
 .light {
+  --notification-text-border: 1px solid #{$gray-light-mid};
+  --channel-body-color: #{$gray-light};
+  --channel-body-color-active: var(--accent-main, #{$light-blue-main});
+  --channel-body-color-active-opacity: 0.1;
+  --channel-type-color: #{$gray};
+  --channel-icon-email-color: #{$light-gray-dark};
+  --channel-error-color: #{$light-error-status};
+}
+
+.dark {
+  --notification-text-border: 1px solid #{$gray-dark-strong};
+  --channel-body-color: #{$dark-gray-light};
+  --channel-body-color-active: #{$on-black-color};
+  --channel-body-color-active-opacity: 1;
+  --channel-type-color: #{$gray-dark};
+  --channel-icon-email-color: #{$dark-gray-dark};
+  --channel-error-color: #{$dark-error-status};
+}
+
+.light {
   --tab-item-selected-background-color: var(--accent-main, #{$light-blue-main});
   --tab-item-selected-item-color: #{$white};
   --tab-item-tag-border: 1px solid #{$gray-light-mid};

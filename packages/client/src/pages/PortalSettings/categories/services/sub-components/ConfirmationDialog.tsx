@@ -73,7 +73,7 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
           testId="service-confirmation-dialog-continue-button"
         />
         <Button
-          label={t("Common:CloseButton")}
+          label={t("Common:CancelButton")}
           size={ButtonSize.normal}
           onClick={onClose}
           testId="service-confirmation-dialog-close-button"

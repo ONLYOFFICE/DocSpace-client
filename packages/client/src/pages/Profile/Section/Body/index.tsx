@@ -97,7 +97,9 @@ type SectionBodyContentProps = {
   getCapabilities?: AuthStore["getCapabilities"];
   getSessions?: SettingsSetupStore["getSessions"];
   setIsProfileLoaded?: ClientLoadingStore["setIsProfileLoaded"];
+  setIsSectionBodyLoading?: ClientLoadingStore["setIsSectionBodyLoading"];
   setIsSectionHeaderLoading?: ClientLoadingStore["setIsSectionHeaderLoading"];
+  setIsArticleLoading?: ClientLoadingStore["setIsArticleLoading"];
   resetSelections?: FilesStore["resetSelections"];
   setNotificationChannels?: TargetUserStore["setNotificationChannels"];
   checkTg?: TelegramStore["checkTg"];
@@ -120,7 +122,9 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     getCapabilities,
     getSessions,
     setIsProfileLoaded,
+    setIsSectionBodyLoading,
     setIsSectionHeaderLoading,
+    setIsArticleLoading,
     getTfaType,
     resetSelections,
     setNotificationChannels,
@@ -165,8 +169,10 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     getSessions: getSessions!,
     setIsProfileLoaded: setIsProfileLoaded!,
     setIsSectionHeaderLoading: setIsSectionHeaderLoading!,
+    setIsArticleLoading: setIsArticleLoading!,
     getTfaType: getTfaType!,
     checkTg: checkTg!,
+    setIsSectionBodyLoading: setIsSectionBodyLoading!,
   });
 
   const data = [
@@ -257,8 +263,13 @@ export default inject(
     filesStore,
     telegramStore,
   }: TStore) => {
-    const { showProfileLoader, setIsProfileLoaded, setIsSectionHeaderLoading } =
-      clientLoadingStore;
+    const {
+      showProfileLoader,
+      setIsProfileLoaded,
+      setIsSectionHeaderLoading,
+      setIsSectionBodyLoading,
+      setIsArticleLoading,
+    } = clientLoadingStore;
 
     const identityServerEnabled =
       authStore?.capabilities?.identityServerEnabled;
@@ -300,6 +311,8 @@ export default inject(
       getTfaType,
       setIsProfileLoaded,
       setIsSectionHeaderLoading,
+      setIsSectionBodyLoading,
+      setIsArticleLoading,
       resetSelections,
       setNotificationChannels,
       checkTg,

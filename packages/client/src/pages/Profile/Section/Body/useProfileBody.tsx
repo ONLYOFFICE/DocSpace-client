@@ -67,6 +67,8 @@ export type UseProfileBodyProps = {
   setIsProfileLoaded: ClientLoadingStore["setIsProfileLoaded"];
   setIsSectionHeaderLoading: ClientLoadingStore["setIsSectionHeaderLoading"];
   checkTg: TelegramStore["checkTg"];
+  setIsArticleLoading?: ClientLoadingStore["setIsArticleLoading"];
+  setIsSectionBodyLoading?: ClientLoadingStore["setIsSectionBodyLoading"];
 };
 
 const useProfileBody = ({
@@ -83,6 +85,8 @@ const useProfileBody = ({
   getSessions,
   setIsProfileLoaded,
   setIsSectionHeaderLoading,
+  setIsArticleLoading,
+  setIsSectionBodyLoading,
   getTfaType,
   checkTg,
 }: UseProfileBodyProps) => {
@@ -190,32 +194,44 @@ const useProfileBody = ({
     setDocumentTitle?.(t?.("Common:Profile"));
   }, [setIsProfileLoaded, t]);
 
-  const getProfileInitialValue = React.useCallback(async () => {
-    const actions = [initialLoad()];
-    if (window.location.pathname.includes("login"))
-      actions.push(openLoginTab());
+  const getProfileInitialValue = React.useCallback(
+    async (portalSettings = false) => {
+      const actions = [initialLoad()];
+      if (window.location.pathname.includes("login"))
+        actions.push(openLoginTab());
 
-    if (window.location.pathname.includes("notifications"))
-      actions.push(getNotificationsData());
+      if (window.location.pathname.includes("notifications"))
+        actions.push(getNotificationsData());
 
-    if (window.location.pathname.includes("file-management"))
-      actions.push(getFileManagementData());
+      if (window.location.pathname.includes("file-management"))
+        actions.push(getFileManagementData());
 
-    if (window.location.pathname.includes("authorized-apps"))
-      actions.push(getConsentList());
+      if (window.location.pathname.includes("authorized-apps"))
+        actions.push(getConsentList());
 
-    await Promise.all(actions);
-  }, [
-    initialLoad,
-    openLoginTab,
-    getNotificationsData,
-    getFileManagementData,
-    getConsentList,
-  ]);
+      await Promise.all(actions);
+      if (portalSettings) {
+        setIsSectionHeaderLoading?.(false);
+        setIsSectionBodyLoading?.(false);
+        setIsProfileLoaded?.(true);
+        setIsArticleLoading?.(false);
+      }
+    },
+    [
+      initialLoad,
+      openLoginTab,
+      getNotificationsData,
+      setIsSectionBodyLoading,
+      setIsSectionHeaderLoading,
+      getFileManagementData,
+      getConsentList,
+      setIsArticleLoading,
+    ],
+  );
 
   React.useEffect(() => {
     if (window.location.pathname.includes("portal-settings"))
-      getProfileInitialValue();
+      getProfileInitialValue(true);
   }, [getProfileInitialValue]);
 
   return {

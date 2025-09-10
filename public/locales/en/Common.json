@@ -601,6 +601,7 @@
   "ProviderMicrosoft": "Microsoft",
   "ProviderNotConnected": "Provider is not connected to your account",
   "ProviderSsoSetting": "Single sign-on",
+  "ProviderTelegram": "Telegram",
   "ProviderTwitter": "Twitter",
   "ProviderZoom": "Zoom",
   "PublicAuthorizeToast": "This room is opened in the <1>{{roomMode}}</1> mode. If you have an account in this {{productName}}, please authorize.",

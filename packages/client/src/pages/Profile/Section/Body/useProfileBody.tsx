@@ -30,8 +30,12 @@ import {
   getNotificationSubscription,
   getAuthProviders,
   getTfaBackupCodes,
+  getNotificationsSettings,
 } from "@docspace/shared/api/settings";
-import { TThirdPartyProvider } from "@docspace/shared/api/settings/types";
+import {
+  TThirdPartyProvider,
+  TNotificationChannel,
+} from "@docspace/shared/api/settings/types";
 import { toastr } from "@docspace/shared/components/toast";
 import { NotificationsType } from "@docspace/shared/enums";
 import { AuthStore } from "@docspace/shared/store/AuthStore";
@@ -44,6 +48,7 @@ import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 import OAuthStore from "SRC_DIR/store/OAuthStore";
 import SettingsSetupStore from "SRC_DIR/store/SettingsSetupStore";
+import TelegramStore from "SRC_DIR/store/TelegramStore";
 
 export type UseProfileBodyProps = {
   isFirstSubscriptionsLoad?: boolean;
@@ -51,6 +56,7 @@ export type UseProfileBodyProps = {
 
   getFilesSettings: FilesSettingsStore["getFilesSettings"];
   setSubscriptions: TargetUserStore["setSubscriptions"];
+  setNotificationChannels: TargetUserStore["setNotificationChannels"];
   fetchConsents: OAuthStore["fetchConsents"];
   fetchScopes: OAuthStore["fetchScopes"];
   getTfaType: TfaStore["getTfaType"];
@@ -60,11 +66,15 @@ export type UseProfileBodyProps = {
   getSessions: SettingsSetupStore["getSessions"];
   setIsProfileLoaded: ClientLoadingStore["setIsProfileLoaded"];
   setIsSectionHeaderLoading: ClientLoadingStore["setIsSectionHeaderLoading"];
+  checkTg: TelegramStore["checkTg"];
+  setIsArticleLoading?: ClientLoadingStore["setIsArticleLoading"];
+  setIsSectionBodyLoading?: ClientLoadingStore["setIsSectionBodyLoading"];
 };
 
 const useProfileBody = ({
   getFilesSettings,
   setSubscriptions,
+  setNotificationChannels,
   isFirstSubscriptionsLoad,
   fetchConsents,
   fetchScopes,
@@ -75,7 +85,10 @@ const useProfileBody = ({
   getSessions,
   setIsProfileLoaded,
   setIsSectionHeaderLoading,
+  setIsArticleLoading,
+  setIsSectionBodyLoading,
   getTfaType,
+  checkTg,
 }: UseProfileBodyProps) => {
   const tfaOn = tfaSettings && tfaSettings !== "none";
 
@@ -95,10 +108,11 @@ const useProfileBody = ({
       getNotificationSubscription(NotificationsType.UsefulTips) as Promise<{
         isEnabled: boolean;
       }>,
-    ];
+      getNotificationsSettings() as Promise<TNotificationChannel[]>,
+    ] as const;
 
     try {
-      const [badges, roomsActivity, dailyFeed, tips]: { isEnabled: boolean }[] =
+      const [badges, roomsActivity, dailyFeed, tips, channels] =
         await Promise.all(requests);
 
       setSubscriptions?.(
@@ -107,6 +121,9 @@ const useProfileBody = ({
         dailyFeed?.isEnabled,
         tips?.isEnabled,
       );
+
+      setNotificationChannels(channels);
+      checkTg?.();
     } catch (e) {
       toastr.error(e as string);
     }
@@ -177,32 +194,44 @@ const useProfileBody = ({
     setDocumentTitle?.(t?.("Common:Profile"));
   }, [setIsProfileLoaded, t]);
 
-  const getProfileInitialValue = React.useCallback(async () => {
-    const actions = [initialLoad()];
-    if (window.location.pathname.includes("login"))
-      actions.push(openLoginTab());
+  const getProfileInitialValue = React.useCallback(
+    async (portalSettings = false) => {
+      const actions = [initialLoad()];
+      if (window.location.pathname.includes("login"))
+        actions.push(openLoginTab());
 
-    if (window.location.pathname.includes("notifications"))
-      actions.push(getNotificationsData());
+      if (window.location.pathname.includes("notifications"))
+        actions.push(getNotificationsData());
 
-    if (window.location.pathname.includes("file-management"))
-      actions.push(getFileManagementData());
+      if (window.location.pathname.includes("file-management"))
+        actions.push(getFileManagementData());
 
-    if (window.location.pathname.includes("authorized-apps"))
-      actions.push(getConsentList());
+      if (window.location.pathname.includes("authorized-apps"))
+        actions.push(getConsentList());
 
-    await Promise.all(actions);
-  }, [
-    initialLoad,
-    openLoginTab,
-    getNotificationsData,
-    getFileManagementData,
-    getConsentList,
-  ]);
+      await Promise.all(actions);
+      if (portalSettings) {
+        setIsSectionHeaderLoading?.(false);
+        setIsSectionBodyLoading?.(false);
+        setIsProfileLoaded?.(true);
+        setIsArticleLoading?.(false);
+      }
+    },
+    [
+      initialLoad,
+      openLoginTab,
+      getNotificationsData,
+      setIsSectionBodyLoading,
+      setIsSectionHeaderLoading,
+      getFileManagementData,
+      getConsentList,
+      setIsArticleLoading,
+    ],
+  );
 
   React.useEffect(() => {
     if (window.location.pathname.includes("portal-settings"))
-      getProfileInitialValue();
+      getProfileInitialValue(true);
   }, [getProfileInitialValue]);
 
   return {

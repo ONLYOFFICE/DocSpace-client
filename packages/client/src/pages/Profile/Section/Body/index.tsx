@@ -33,7 +33,7 @@ import { useEffect } from "react";
 import { ProfileViewLoader } from "@docspace/shared/skeletons/profile";
 import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
 import { DeviceType } from "@docspace/shared/enums";
-import { tablet, mobile } from "@docspace/shared/utils";
+import { tablet } from "@docspace/shared/utils";
 import { toastr } from "@docspace/shared/components/toast";
 
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";

@@ -3,7 +3,7 @@
   "content": "Email",
   "content_en_sha1_hash": "84add5b2952787581cb9a8851eef63d1ec75d22b",
   "created_at": "2025-05-19T21:30:44.776Z",
-  "updated_at": "2025-08-21T11:22:39.824Z",
+  "updated_at": "2025-09-10T09:59:20.827Z",
   "comment": {
     "text": "This translation key represents the label for displaying a user's email address, typically shown alongside their name in a welcome message or profile section. It appears in various UI elements, such as social authentication dialogs and contact filtering interfaces, where users' email addresses need to be displayed. The translated text should correspond to the English content \"Email\".",
     "is_auto": true,
@@ -59,9 +59,15 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/index.tsx",
-      "line_number": 68,
-      "context": "const emailContent = (\n <>\n <StyledTextContent>\n <Text fontSize=\"14px\" fontWeight={600} className=\"email-title\">\n {t(\"Common:Email\")}\n </Text>\n </StyledTextContent>\n \n <div className=\"badges-container\">\n <RoomsActivityContainer",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/Channel.tsx",
+      "line_number": 73,
+      "context": "isNotValid?: boolean,\n isNeedConfig?: boolean,\n ) => {\n switch (type) {\n case \"email\":\n return `${t(\"Common:Email\")}${isNotValid ? ` (${t(\"IsNotValid\")})` : \"\"}`;\n case \"telegram\":\n return `${t(\"Common:ProviderTelegram\")}${isNeedConfig ? ` (${t(\"NotConfigured\")})` : \"\"}`;\n default:\n return t(\"Common:Email\");\n }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/Channel.tsx",
+      "line_number": 73,
+      "context": "isNotValid?: boolean,\n isNeedConfig?: boolean,\n ) => {\n switch (type) {\n case \"email\":\n return `${t(\"Common:Email\")}${isNotValid ? ` (${t(\"IsNotValid\")})` : \"\"}`;\n case \"telegram\":\n return `${t(\"Common:ProviderTelegram\")}${isNeedConfig ? ` (${t(\"NotConfigured\")})` : \"\"}`;\n default:\n return t(\"Common:Email\");\n }",
       "module": "/packages/client"
     },
     {

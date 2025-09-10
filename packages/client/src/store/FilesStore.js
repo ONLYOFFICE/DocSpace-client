@@ -2339,7 +2339,7 @@ class FilesStore {
         "edit-index",
         "separator2",
         // "unsubscribe",
-        "separator4",
+        "separator5",
         "delete",
         "remove-from-recent",
         "copy-general-link",

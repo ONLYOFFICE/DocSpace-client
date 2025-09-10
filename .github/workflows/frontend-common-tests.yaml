@@ -158,3 +158,17 @@ jobs:
       - name: Run common tests
         working-directory: ./common/tests
         run: npm run test:skip-base-languages
+  ascii:
+    name: "ASCII Symbols tests"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        working-directory: ./common/tests
+        run: npm install
+      - name: Run common tests
+        working-directory: ./common/tests
+        run: npm run test:ascii

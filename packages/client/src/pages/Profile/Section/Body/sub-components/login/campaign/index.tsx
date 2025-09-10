@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 import { TColorScheme } from "@docspace/shared/themes";
 import { TwoFactorCampaignBanner } from "@docspace/shared/components/two-factor-campaign";
+import { isTablet } from "@docspace/shared/utils";
 
 type LoginCampaignProps = {
   currentColorScheme: TColorScheme;
@@ -12,12 +13,29 @@ type LoginCampaignProps = {
 const LoginCampaignComponent = (props: LoginCampaignProps) => {
   const { currentColorScheme, tfaEnabled, canManageTfa } = props;
 
+  const [tablet, setTablet] = useState<boolean>(isTablet());
+
+  useEffect(() => {
+    const handleResize = () => setTablet(isTablet());
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("orientationchange", handleResize as EventListener);
+    handleResize();
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener(
+        "orientationchange",
+        handleResize as EventListener,
+      );
+    };
+  }, []);
+
   if (!canManageTfa) {
     return null;
   }
 
   return (
     <TwoFactorCampaignBanner
+      style={{ maxWidth: tablet ? "100%" : "660px" }}
       tfaEnabled={tfaEnabled}
       currentColorScheme={currentColorScheme}
       withCampaign

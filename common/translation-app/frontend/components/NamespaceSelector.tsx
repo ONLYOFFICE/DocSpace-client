@@ -31,7 +31,7 @@ const NamespaceSelector: React.FC<NamespaceSelectorProps> = ({
   onRunLLMAnalysis,
   onTranslateUntranslated,
   showUntranslated = false,
-  baseLanguage = 'en',
+  baseLanguage = "en",
 }) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [contextMenu, setContextMenu] = useState<{
@@ -71,13 +71,17 @@ const NamespaceSelector: React.FC<NamespaceSelectorProps> = ({
     }
 
     // Look through all translations in the current namespace
-    return flattenedTranslations.some(entry => {
+    return flattenedTranslations.some((entry) => {
       // Get non-base languages
-      const nonBaseLanguages = languages.filter(lang => lang !== baseLanguage);
-      
+      const nonBaseLanguages = languages.filter(
+        (lang) => lang !== baseLanguage
+      );
+
       // Check if any language is missing a translation
-      return nonBaseLanguages.some(lang => {
-        return !entry.translations[lang] || entry.translations[lang].trim() === '';
+      return nonBaseLanguages.some((lang) => {
+        return (
+          !entry.translations[lang] || entry.translations[lang].trim() === ""
+        );
       });
     });
   };
@@ -89,7 +93,9 @@ const NamespaceSelector: React.FC<NamespaceSelectorProps> = ({
 
     // Apply untranslated filter if enabled
     if (showUntranslated) {
-      filtered = filtered.filter(namespace => namespaceHasUntranslatedKeys(namespace));
+      filtered = filtered.filter((namespace) =>
+        namespaceHasUntranslatedKeys(namespace)
+      );
     }
 
     // Then apply search term filter
@@ -101,7 +107,15 @@ const NamespaceSelector: React.FC<NamespaceSelectorProps> = ({
     }
 
     return filtered;
-  }, [namespaces, searchTerm, showUntranslated, selectedNamespace, flattenedTranslations]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    namespaces,
+    searchTerm,
+    showUntranslated,
+    selectedNamespace,
+    flattenedTranslations,
+    namespaceHasUntranslatedKeys,
+  ]);
 
   const handleContextMenu = (e: React.MouseEvent, namespace: string) => {
     e.preventDefault();
@@ -311,7 +325,9 @@ const NamespaceSelector: React.FC<NamespaceSelectorProps> = ({
           onCheckErrors={onCheckErrors || ((namespace) => {})}
           onRunLLMAnalysis={onRunLLMAnalysis}
           onTranslateUntranslated={onTranslateUntranslated}
-          refreshTranslations={onNamespaceUpdated ? () => onNamespaceUpdated() : undefined}
+          refreshTranslations={
+            onNamespaceUpdated ? () => onNamespaceUpdated() : undefined
+          }
         />
       )}
 

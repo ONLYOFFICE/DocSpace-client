@@ -24,8 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../../../styles/variables/devices.scss";
-@import "../../../../styles/mixins";
+@use "../../../../styles/mixins";
 
 .chatMessageBody {
   height: 100%;
@@ -204,6 +203,8 @@
 
   .codeBody {
     background-color: var(--chat-message-code-block-background-color);
+
+    max-height: 168px;
   }
 }
 
@@ -219,15 +220,10 @@
 }
 
 .toolCallManage {
-  padding: 16px;
-
   width: 100%;
   height: fit-content;
 
   box-sizing: border-box;
-
-  background-color: var(--chat-message-code-block-background-color);
-  border: var(--chat-message-code-block-border);
 
   border-radius: 6px;
 
@@ -235,21 +231,20 @@
   flex-direction: column;
 
   gap: 16px;
+}
 
-  .buttonsBlockContaiener {
-    display: flex;
-    flex-direction: row;
+.buttonsBlockContainer {
+  width: 100%;
 
-    justify-content: space-between;
+  display: flex;
+  gap: 8px;
 
-    .approveButtonBlock {
-      width: 70%;
-      max-width: 70%;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
+  @include mixins.mobile {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    .denyButton {
+      grid-column: 1 / -1;
     }
   }
 }
@@ -272,18 +267,6 @@
 
     cursor: pointer;
 
-    .toolCallHeaderText {
-      display: flex;
-      align-items: center;
-
-      .toolCallHeaderIcon {
-        width: 16px;
-        height: 16px;
-
-        margin: 0 8px;
-      }
-    }
-
     div {
       height: 15px;
     }
@@ -296,6 +279,10 @@
       }
     }
 
+    .toolName {
+      color: var(--chat-message-color);
+    }
+
     &.hide {
       border-bottom: none;
     }
@@ -304,6 +291,10 @@
       .arrowRightIcon {
         rotate: 90deg;
       }
+    }
+
+    &.noClick {
+      pointer-events: none;
     }
   }
 

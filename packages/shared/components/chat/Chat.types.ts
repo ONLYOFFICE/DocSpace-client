@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
 
-import { TContent, TMessage } from "../../api/ai/types";
+import { TContent, TMessage, type TToolCallContent } from "../../api/ai/types";
 import { TGetIcon } from "../../selectors/utils/types";
 import { TFile } from "../../api/files/types";
 
@@ -92,7 +92,7 @@ export type MessageMarkdownFieldProps = {
 };
 
 export type MessageToolCallProps = {
-  content: TContent;
+  content: TToolCallContent;
 };
 
 export type MessageEmptyProps = {

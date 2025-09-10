@@ -37,7 +37,7 @@ import { useChatStore } from "../../../../store/chatStore";
 import styles from "../../ChatMessageBody.module.scss";
 
 import Markdown from "./Markdown";
-import ToolCall from "./ToolCall";
+import ToolCallMessage from "./ToolCallMessage";
 import Error from "./Error";
 import Files from "./Files";
 import Buttons from "./Buttons";
@@ -111,12 +111,12 @@ const Message = ({
 
   return (
     <div key={`${currentChat?.id}-${message.createdOn}-${idx * 2}`}>
-      {message.contents.map((c) => {
+      {message.contents.map((c, mId) => {
         if (c.type === ContentType.Text)
           return <Markdown key={c.text} chatMessage={c.text} />;
 
         if (c.type === ContentType.Tool)
-          return <ToolCall key={c.name} content={c} />;
+          return <ToolCallMessage key={`${c.name}_${mId * 2}`} content={c} />;
 
         return null;
       })}

@@ -39,7 +39,7 @@ import { hasOwnProperty } from "../../../utils/object";
 import { HeaderType } from "../../context-menu/ContextMenu.types";
 import { Loader, LoaderTypes } from "../../loader";
 
-import { BaseTileProps, TileChildProps } from "./BaseTile.types";
+import { BaseTileProps, TileChildProps, ItemProps } from "./BaseTile.types";
 
 import styles from "./BaseTile.module.scss";
 
@@ -81,30 +81,31 @@ export const BaseTile = ({
     contextOptions?.length > 0;
 
   const firstChild = childrenArray[0] as React.ReactElement<TileChildProps>;
+  const childItem = React.isValidElement(firstChild)
+    ? (firstChild.props as TileChildProps | undefined)?.item
+    : undefined;
 
-  const contextMenuHeader: HeaderType | undefined =
-    React.isValidElement(firstChild) && firstChild.props?.item
-      ? {
-          title:
-            firstChild.props.item.title ||
-            firstChild.props.item.displayName ||
-            "",
-          icon: firstChild.props.item.icon,
-          original: firstChild.props.item.logo?.original || "",
-          large: firstChild.props.item.logo?.large || "",
-          medium: firstChild.props.item.logo?.medium || "",
-          small: firstChild.props.item.logo?.small || "",
-          color: firstChild.props.item.logo?.color,
-          cover: firstChild.props.item.logo?.cover
-            ? typeof firstChild.props.item.logo.cover === "string"
-              ? {
-                  data: firstChild.props.item.logo.cover,
-                  id: "",
-                }
-              : firstChild.props.item.logo.cover
-            : undefined,
-        }
-      : undefined;
+  const srcItem: ItemProps | undefined = childItem ?? item;
+
+  const contextMenuHeader: HeaderType | undefined = srcItem
+    ? {
+        title: srcItem.title || srcItem.displayName || "",
+        icon: srcItem.icon,
+        original: srcItem.logo?.original || "",
+        large: srcItem.logo?.large || "",
+        medium: srcItem.logo?.medium || "",
+        small: srcItem.logo?.small || "",
+        color: srcItem.logo?.color,
+        cover: srcItem.logo?.cover
+          ? typeof srcItem.logo.cover === "string"
+            ? {
+                data: srcItem.logo.cover,
+                id: "",
+              }
+            : srcItem.logo.cover
+          : undefined,
+      }
+    : undefined;
 
   const getOptions = () => {
     if (tileContextClick) {

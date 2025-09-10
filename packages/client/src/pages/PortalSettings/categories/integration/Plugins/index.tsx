@@ -78,7 +78,7 @@ const PluginPage = ({
   }, [t]);
 
   React.useEffect(() => {
-    updatePlugins(true);
+    !isLoading && updatePlugins(true);
   }, [updatePlugins]);
 
   return isLoading || (!isEmptyList && pluginList.length === 0) ? (

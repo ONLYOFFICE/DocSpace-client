@@ -24,7 +24,7 @@ export async function validateNamespaceTranslations(
     let languagesToCheck = languages;
     if (languagesToCheck.length === 0) {
       const languagesResponse = await getLanguages(projectName);
-      languagesToCheck = languagesResponse.data.data || [];
+      languagesToCheck = languagesResponse.data.data.languages || [];
     }
 
     if (languagesToCheck.length === 0) {
@@ -32,26 +32,28 @@ export async function validateNamespaceTranslations(
     }
 
     // Find the base language (usually 'en')
-    const baseLanguage = languagesToCheck.includes("en") ? "en" : languagesToCheck[0];
-    
+    const baseLanguage = languagesToCheck.includes("en")
+      ? "en"
+      : languagesToCheck[0];
+
     // Get base language translations as reference
     const baseTranslationsResponse = await getTranslations(
       projectName,
       baseLanguage,
       namespace
     );
-    
+
     if (!baseTranslationsResponse.data.success) {
       throw new Error("Failed to get base translations");
     }
-    
+
     const baseTranslations = baseTranslationsResponse.data.data;
     const errors: ValidationError[] = [];
 
     // Helper function to recursively flatten translations with path
     const flattenTranslations = (
-      obj: any, 
-      prefix = "", 
+      obj: any,
+      prefix = "",
       result: Record<string, string> = {}
     ) => {
       for (const key in obj) {
@@ -106,7 +108,7 @@ export async function validateNamespaceTranslations(
         }
 
         const value = flattenedTranslations[key];
-        
+
         // Empty translation check
         if (value === null || value === undefined || value.trim() === "") {
           errors.push({
@@ -121,13 +123,13 @@ export async function validateNamespaceTranslations(
         // Check for placeholder consistency
         const basePlaceholders = extractPlaceholders(flattenedBase[key]);
         const translationPlaceholders = extractPlaceholders(value);
-        
+
         const missingPlaceholders = basePlaceholders.filter(
-          p => !translationPlaceholders.includes(p)
+          (p) => !translationPlaceholders.includes(p)
         );
-        
+
         const extraPlaceholders = translationPlaceholders.filter(
-          p => !basePlaceholders.includes(p)
+          (p) => !basePlaceholders.includes(p)
         );
 
         if (missingPlaceholders.length > 0) {
@@ -153,7 +155,8 @@ export async function validateNamespaceTranslations(
           errors.push({
             key,
             language,
-            message: "Numeric value in base language should remain numeric in translation",
+            message:
+              "Numeric value in base language should remain numeric in translation",
             severity: "warning",
           });
         }
@@ -161,10 +164,10 @@ export async function validateNamespaceTranslations(
         // Issue with significantly different length
         const baseLength = flattenedBase[key].length;
         const translationLength = value.length;
-        
+
         if (baseLength > 5 && translationLength > 0) {
           const ratio = translationLength / baseLength;
-          
+
           // If translation is significantly shorter or longer than base
           if (ratio < 0.3 || ratio > 3) {
             errors.push({
@@ -193,12 +196,16 @@ export async function validateNamespaceTranslations(
     return errors;
   } catch (error) {
     console.error("Error validating translations:", error);
-    return [{
-      key: "(system)",
-      language: "all",
-      message: `Validation failed: ${error instanceof Error ? error.message : String(error)}`,
-      severity: "error",
-    }];
+    return [
+      {
+        key: "(system)",
+        language: "all",
+        message: `Validation failed: ${
+          error instanceof Error ? error.message : String(error)
+        }`,
+        severity: "error",
+      },
+    ];
   }
 }
 
@@ -212,21 +219,21 @@ export async function validateNamespaceTranslations(
  */
 function extractPlaceholders(str: string): string[] {
   if (typeof str !== "string") return [];
-  
+
   const placeholders: string[] = [];
-  
+
   // Match {placeholder} and {{placeholder}} formats
   const bracketMatches = str.match(/\{\{?([^{}]+)\}?\}/g) || [];
-  bracketMatches.forEach(match => placeholders.push(match));
-  
+  bracketMatches.forEach((match) => placeholders.push(match));
+
   // Match %s, %d printf style
   const printfMatches = str.match(/%[sdifoxXeEgGaAcCpn%]/g) || [];
-  printfMatches.forEach(match => placeholders.push(match));
-  
+  printfMatches.forEach((match) => placeholders.push(match));
+
   // Match $variable style
   const variableMatches = str.match(/\$\w+/g) || [];
-  variableMatches.forEach(match => placeholders.push(match));
-  
+  variableMatches.forEach((match) => placeholders.push(match));
+
   return placeholders;
 }
 
@@ -237,7 +244,3 @@ function isNumericString(str: string): boolean {
   if (typeof str !== "string") return false;
   return /^\d+$/.test(str.trim());
 }
-
-export default {
-  validateNamespaceTranslations,
-};

@@ -152,6 +152,10 @@
       }
     }
 
+    .p-contextmenu .p-menuitem.p-menuitem-active > .p-menuitem-link {
+      background-color: var(--sub-menu-item-hover-background-color);
+    }
+
     .p-contextmenu .p-menuitem-text {
       line-height: 36px;
       white-space: nowrap;
@@ -377,6 +381,11 @@
   }
 
   &:not(.noHover):hover {
+    background-color: var(--sub-menu-item-hover-background-color);
+  }
+
+  /* Keep root item highlighted while submenu is open */
+  &.p-menuitem-active:not(.noHover) {
     background-color: var(--sub-menu-item-hover-background-color);
   }
 

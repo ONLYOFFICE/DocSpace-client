@@ -30,11 +30,11 @@ import { inject, observer } from "mobx-react";
 import Share from "@docspace/shared/components/share";
 import { ShareProps } from "@docspace/shared/components/share/Share.types";
 
-interface ExternalShareProps
-  extends Pick<
-    ShareProps,
-    "infoPanelSelection" | "fileLinkProps" | "members"
-  > {}
+interface ExternalShareProps {
+  infoPanelSelection?: ShareProps["infoPanelSelection"];
+  fileLinkProps?: ShareProps["fileLinkProps"];
+  members?: ShareProps["members"];
+}
 
 export default inject<TStore>(({ infoPanelStore, userStore, dialogsStore }) => {
   const selfId = userStore.user?.id ?? "";

@@ -255,13 +255,13 @@ function WizardForm(props: WizardFormProps) {
     const emptyInstanceId = instanceId.trim() === "";
 
     if (emptyEmail || emptyPassword) {
-      emptyEmail && setHasErrorEmail(true);
-      emptyPassword && setHasErrorPass(true);
+      if (emptyEmail) setHasErrorEmail(true);
+      if (emptyPassword) setHasErrorPass(true);
       anyError = true;
     }
 
     if (isAmi && emptyInstanceId) {
-      emptyInstanceId && setHasErrorInstanceId(true);
+      if (emptyInstanceId) setHasErrorInstanceId(true);
       anyError = true;
     }
 

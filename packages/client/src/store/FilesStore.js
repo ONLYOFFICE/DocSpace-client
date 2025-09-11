@@ -291,7 +291,7 @@ class FilesStore {
     this.settingsStore = settingsStore;
     this.indexingStore = indexingStore;
 
-    SocketHelper.on(SocketEvents.ChangedQuotaUsedValue, (res) => {
+    SocketHelper?.on(SocketEvents.ChangedQuotaUsedValue, (res) => {
       const { isFrame } = this.settingsStore;
 
       if (res && res.featureId === "room" && isFrame) {
@@ -305,7 +305,7 @@ class FilesStore {
       }
     });
 
-    SocketHelper.on(SocketEvents.ModifyFolder, async (opt) => {
+    SocketHelper?.on(SocketEvents.ModifyFolder, async (opt) => {
       const { socketSubscribers } = SocketHelper;
 
       if (opt && opt.data) {
@@ -351,7 +351,7 @@ class FilesStore {
       this.treeFoldersStore.updateTreeFoldersItem(opt);
     });
 
-    SocketHelper.on(SocketEvents.MarkAsNewFolder, ({ folderId, count }) => {
+    SocketHelper?.on(SocketEvents.MarkAsNewFolder, ({ folderId, count }) => {
       const { socketSubscribers } = SocketHelper;
       const pathParts = `DIR-${folderId}`;
 
@@ -374,7 +374,7 @@ class FilesStore {
       });
     });
 
-    SocketHelper.on(SocketEvents.MarkAsNewFile, ({ fileId, count }) => {
+    SocketHelper?.on(SocketEvents.MarkAsNewFile, ({ fileId, count }) => {
       const { socketSubscribers } = SocketHelper;
       const pathParts = `FILE-${fileId}`;
 
@@ -397,7 +397,7 @@ class FilesStore {
     });
 
     // WAIT FOR RESPONSES OF EDITING FILE
-    SocketHelper.on(SocketEvents.StartEditFile, (id) => {
+    SocketHelper?.on(SocketEvents.StartEditFile, (id) => {
       const { socketSubscribers } = SocketHelper;
       const pathParts = `FILE-${id}`;
 
@@ -420,7 +420,7 @@ class FilesStore {
       );
     });
 
-    SocketHelper.on(SocketEvents.ModifyRoom, (option) => {
+    SocketHelper?.on(SocketEvents.ModifyRoom, (option) => {
       switch (option.cmd) {
         case "create-form":
           setTimeout(() => this.wsCreatedPDFForm(option), LOADER_TIMEOUT * 2);
@@ -431,7 +431,7 @@ class FilesStore {
       }
     });
 
-    SocketHelper.on(SocketEvents.StopEditFile, (id) => {
+    SocketHelper?.on(SocketEvents.StopEditFile, (id) => {
       const { socketSubscribers } = SocketHelper;
       const pathParts = `FILE-${id}`;
 
@@ -470,7 +470,8 @@ class FilesStore {
 
     if (
       this.selectedFolderStore.id !== fileInfo.folderId &&
-      this.selectedFolderStore.rootFolderType !== FolderType.Recent
+      this.selectedFolderStore.rootFolderType !== FolderType.Recent &&
+      this.selectedFolderStore.rootFolderType !== FolderType.Favorites
     )
       return;
 
@@ -608,7 +609,7 @@ class FilesStore {
         .getFolderInfo(folder.id)
         .then((response) => {
           const folderInfo = {
-            isFolder: !isRoomUtil(response),
+            isFolder: true,
             isRoom: isRoomUtil(response),
             ...response,
           };
@@ -1183,16 +1184,16 @@ class FilesStore {
       .filter(
         (f) =>
           !files.some((nf) => nf.id === f.id) &&
-          SocketHelper.socketSubscribers.has(`FILE-${f.id}`),
+          SocketHelper?.socketSubscribers.has(`FILE-${f.id}`),
       )
       .map((f) => `FILE-${f.id}`);
 
     const roomPartsToSub = files
       .map((f) => `FILE-${f.id}`)
-      .filter((f) => !SocketHelper.socketSubscribers.has(f));
+      .filter((f) => !SocketHelper?.socketSubscribers.has(f));
 
     if (roomPartsToUnsub.length > 0) {
-      SocketHelper.emit(SocketCommands.Unsubscribe, {
+      SocketHelper?.emit(SocketCommands.Unsubscribe, {
         roomParts: roomPartsToUnsub,
         individual: true,
       });
@@ -1201,7 +1202,7 @@ class FilesStore {
     this.files = files;
 
     if (roomPartsToSub.length > 0) {
-      SocketHelper.emit(SocketCommands.Subscribe, {
+      SocketHelper?.emit(SocketCommands.Subscribe, {
         roomParts: roomPartsToSub,
         individual: true,
       });
@@ -1221,17 +1222,17 @@ class FilesStore {
       .filter(
         (f) =>
           !folders.some((nf) => nf.id === f.id) &&
-          SocketHelper.socketSubscribers.has(`DIR-${f.id}`) &&
+          SocketHelper?.socketSubscribers.has(`DIR-${f.id}`) &&
           this.selectedFolderStore.id !== f.id,
       )
       .map((f) => `DIR-${f.id}`);
 
     const roomPartsToSub = folders
       .map((f) => `DIR-${f.id}`)
-      .filter((f) => !SocketHelper.socketSubscribers.has(f));
+      .filter((f) => !SocketHelper?.socketSubscribers.has(f));
 
     if (roomPartsToUnsub.length > 0) {
-      SocketHelper.emit(SocketCommands.Unsubscribe, {
+      SocketHelper?.emit(SocketCommands.Unsubscribe, {
         roomParts: roomPartsToUnsub,
         individual: true,
       });
@@ -1240,7 +1241,7 @@ class FilesStore {
     this.folders = folders;
 
     if (roomPartsToSub.length > 0) {
-      SocketHelper.emit(SocketCommands.Subscribe, {
+      SocketHelper?.emit(SocketCommands.Subscribe, {
         roomParts: roomPartsToSub,
         individual: true,
       });
@@ -2260,10 +2261,6 @@ class FilesStore {
 
     const { isDesktopClient } = this.settingsStore;
 
-    const pluginAllKeys =
-      enablePlugins &&
-      this.pluginStore.getContextMenuKeysByType(null, null, security);
-
     const canRenameItem = item.security?.Rename;
 
     const canMove = this.accessRightsStore.canMoveItems({
@@ -2357,7 +2354,7 @@ class FilesStore {
         "edit-index",
         "separator2",
         // "unsubscribe",
-        "separator4",
+        "separator5",
         "delete",
         "remove-from-recent",
         "copy-general-link",
@@ -2577,10 +2574,9 @@ class FilesStore {
               PluginFileType.Files,
               item.fileExst,
               security,
+              item.security,
             );
 
-            pluginAllKeys &&
-              pluginAllKeys.forEach((key) => fileOptions.push(key));
             pluginFilesKeys &&
               pluginFilesKeys.forEach((key) => fileOptions.push(key));
           }
@@ -2593,10 +2589,9 @@ class FilesStore {
               PluginFileType.Image,
               item.fileExst,
               security,
+              item.security,
             );
 
-            pluginAllKeys &&
-              pluginAllKeys.forEach((key) => fileOptions.push(key));
             pluginFilesKeys &&
               pluginFilesKeys.forEach((key) => fileOptions.push(key));
           }
@@ -2609,10 +2604,9 @@ class FilesStore {
               PluginFileType.Video,
               item.fileExst,
               security,
+              item.security,
             );
 
-            pluginAllKeys &&
-              pluginAllKeys.forEach((key) => fileOptions.push(key));
             pluginFilesKeys &&
               pluginFilesKeys.forEach((key) => fileOptions.push(key));
           }
@@ -2824,10 +2818,9 @@ class FilesStore {
             PluginFileType.Rooms,
             null,
             security,
+            item.security,
           );
 
-          pluginAllKeys &&
-            pluginAllKeys.forEach((key) => roomOptions.push(key));
           pluginRoomsKeys &&
             pluginRoomsKeys.forEach((key) => roomOptions.push(key));
         }
@@ -2943,10 +2936,9 @@ class FilesStore {
           PluginFileType.Folders,
           null,
           security,
+          item.security,
         );
 
-        pluginAllKeys &&
-          pluginAllKeys.forEach((key) => folderOptions.push(key));
         pluginFoldersKeys &&
           pluginFoldersKeys.forEach((key) => folderOptions.push(key));
       }
@@ -4128,7 +4120,7 @@ class FilesStore {
     //     createdItem.title
     //   );
 
-    //   SocketHelper.emit({
+    //   SocketHelper?.emit({
     //     command: "subscribe",
     //     data: { roomParts: `FILE-${createdItem.id}`, individual: true },
     //   });
@@ -4158,7 +4150,7 @@ class FilesStore {
   };
 
   get indexColumnSize() {
-    if (!this.selectedFolderStore.isIndexedFolder) return;
+    if (!this.selectedFolderStore.isIndexedFolder) return 0;
 
     const minWidth = 33;
     const maxIndexLength = 5;

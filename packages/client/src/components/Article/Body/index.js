@@ -230,6 +230,7 @@ const ArticleBodyContent = (props) => {
         }
       }
 
+      if (params.at(-1) === "&") params = params.slice(0, -1);
       path += `?${params}&date=${hashDate}`;
 
       return { path, state };

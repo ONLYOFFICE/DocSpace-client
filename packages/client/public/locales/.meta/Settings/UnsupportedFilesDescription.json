@@ -3,7 +3,7 @@
   "content": "Some of the backup files are not supported. Click \"Check unsupported files\" to download the list of the unsupported items",
   "content_en_sha1_hash": "8920aec1acfe5e0af4ab26e2a95abe5be8859e34",
   "created_at": "2025-05-19T21:30:53.053Z",
-  "updated_at": "2025-08-11T09:02:43.948Z",
+  "updated_at": "2025-09-07T07:53:15.242Z",
   "comment": {
     "text": "The \"UnsupportedFilesDescription\" translation key is used to display a message when certain backup files are not supported, indicating that users can click on \"Check unsupported files\" to download a list of unsupported items. This message appears in a UI element and provides context for users to understand the issue with their files.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectFileStep.tsx",
-      "line_number": 441,
+      "line_number": 440,
       "context": "percent={100}\n className=\"complete-progress-bar\"\n label={t(\"Common:LoadingIsComplete\")}\n />\n <Text className=\"error-text\">\n {t(\"Settings:UnsupportedFilesDescription\")}\n </Text>\n <Link\n type={LinkType.action}\n isHovered\n fontWeight={600}",
       "module": "/packages/client"
     }

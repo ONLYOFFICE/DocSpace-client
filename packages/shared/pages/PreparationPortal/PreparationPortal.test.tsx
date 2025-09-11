@@ -130,27 +130,33 @@ describe("<PreparationPortal />", () => {
     });
 
     // Setup socket callback capture
-    let socketCallback: Function;
-    (SocketHelper.on as jest.Mock).mockImplementation((event, callback) => {
-      if (event === SocketEvents.RestoreProgress) {
-        socketCallback = callback;
-      }
-      return SocketHelper;
-    });
+    type RestoreProgressPayload = {
+      progress: number;
+      isCompleted: boolean;
+      error: string | null;
+    };
+    let socketCallback: ((payload: RestoreProgressPayload) => void) | undefined;
+    (SocketHelper?.on as jest.Mock).mockImplementation(
+      (event, callback: (p: RestoreProgressPayload) => void) => {
+        if (event === SocketEvents.RestoreProgress) {
+          socketCallback = callback;
+        }
+        return SocketHelper;
+      },
+    );
 
     render(<PreparationPortal />);
 
     // Wait for the component to register socket listener
     await waitFor(() => {
-      expect(SocketHelper.on).toHaveBeenCalledWith(
+      expect(SocketHelper?.on).toHaveBeenCalledWith(
         SocketEvents.RestoreProgress,
         expect.any(Function),
       );
     });
 
-    // Simulate socket event with progress update
     act(() => {
-      socketCallback({ progress: 50, isCompleted: false, error: null });
+      socketCallback!({ progress: 50, isCompleted: false, error: null });
     });
 
     // Check if progress was updated

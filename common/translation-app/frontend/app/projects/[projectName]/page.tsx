@@ -141,6 +141,7 @@ export default function ProjectPage() {
       // Clean up socket listeners
       useOllamaValidationStore.getState().cleanupSocketListeners();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projectName]);
 
   // Select all languages by default when languages are loaded
@@ -154,6 +155,7 @@ export default function ProjectPage() {
       // Fetch namespaces for the base language
       fetchNamespaces(projectName, baseLanguage);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [languages, selectedLanguages, baseLanguage]);
 
   // Get URL parameters and manage state
@@ -250,7 +252,7 @@ export default function ProjectPage() {
         setCurrentNamespace(namespaces[0]);
       }
     }
-  }, [namespaces, namespaceFromUrl]);
+  }, [namespaces, currentNamespace, setCurrentNamespace, namespaceFromUrl]);
 
   // Re-fetch namespaces when showUntranslated changes
   useEffect(() => {
@@ -259,14 +261,14 @@ export default function ProjectPage() {
         untranslatedOnly: showUntranslated,
       });
     }
-  }, [showUntranslated, projectName, baseLanguage]);
+  }, [showUntranslated, projectName, baseLanguage, fetchNamespaces]);
 
   // Fetch Ollama models when connected
   useEffect(() => {
     if (ollamaConnected) {
       fetchModels();
     }
-  }, [ollamaConnected]);
+  }, [ollamaConnected, fetchModels]);
 
   // Load translations when namespace is selected
   useEffect(() => {
@@ -292,7 +294,13 @@ export default function ProjectPage() {
         window.history.pushState({}, "", newUrl.toString());
       });
     }
-  }, [currentNamespace, selectedLanguages, projectName, projectLoading]);
+  }, [
+    currentNamespace,
+    selectedLanguages,
+    projectName,
+    projectLoading,
+    fetchTranslations,
+  ]);
 
   // Toggle a language selection
   const handleLanguageToggle = (language: string) => {
@@ -415,7 +423,9 @@ export default function ProjectPage() {
             // Update progress toast
             const progress = completedItems / totalItems;
             toast.update(toastId.current!, {
-              render: `Translating key "${keyPath}" to ${targetLang}... (${Math.round(progress * 100)}%)`,
+              render: `Translating key "${keyPath}" to ${targetLang}... (${Math.round(
+                progress * 100
+              )}%)`,
               progress: progress,
             });
 
@@ -437,16 +447,18 @@ export default function ProjectPage() {
             );
             // Continue with other translations even if one fails
             toast.error(
-              `Failed to translate key "${keyPath}" to ${targetLang}: ${(error as Error).message}`
+              `Failed to translate key "${keyPath}" to ${targetLang}: ${
+                (error as Error).message
+              }`
             );
           }
         }
       }
 
       // Refresh translations to show the changes
-      if (currentNamespace === namespace) {
-        fetchTranslations(projectName, selectedLanguages, namespace);
-      }
+      // if (currentNamespace === namespace) {
+      //  fetchTranslations(projectName, selectedLanguages, namespace);
+      // }
 
       // Complete the toast
       if (toastId.current) {
@@ -465,7 +477,9 @@ export default function ProjectPage() {
     } catch (error) {
       console.error("Translation error:", error);
       toast.error(
-        `Failed to translate namespace ${namespace}: ${(error as Error).message}`
+        `Failed to translate namespace ${namespace}: ${
+          (error as Error).message
+        }`
       );
 
       // Reset toast ID on error too

@@ -93,10 +93,10 @@ const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
   }, [pathname]);
 
   useEffect(() => {
-    const { socketSubscribers } = SocketHelper;
+    const { socketSubscribers } = SocketHelper!;
 
     if (!socketSubscribers.has("backup")) {
-      SocketHelper.emit(SocketCommands.Subscribe, {
+      SocketHelper?.emit(SocketCommands.Subscribe, {
         roomParts: "backup",
       });
 
@@ -108,8 +108,8 @@ const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
     }
 
     return () => {
-      SocketHelper.off(SocketEvents.BackupProgress);
-      SocketHelper.emit(SocketCommands.Unsubscribe, {
+      SocketHelper?.off(SocketEvents.BackupProgress);
+      SocketHelper?.emit(SocketCommands.Unsubscribe, {
         roomParts: "backup",
       });
 

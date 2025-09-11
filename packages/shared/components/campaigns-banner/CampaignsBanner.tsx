@@ -104,7 +104,7 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
               color={body?.color ?? globalColors.black}
               fontSize={fontSize ?? "13px"}
               fontWeight={body?.fontWeight ?? "normal"}
-              lineHeight={body?.lineHeight ?? "20px"}
+              lineHeight={body?.lineHeight ?? "16px"}
             >
               {SubHeader}
             </TextComponent>

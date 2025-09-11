@@ -80,6 +80,7 @@ const KEY = "key";
 const DATE = "date";
 const TAGS = "tags";
 const LOCATION = "location";
+const AREA = "area";
 
 // TODO: add next params
 // subjectGroup bool
@@ -109,6 +110,7 @@ const getOtherSearchParams = () => {
     DATE,
     TAGS,
     LOCATION,
+    AREA,
   ];
 
   filterSearchParams.forEach((param) => {

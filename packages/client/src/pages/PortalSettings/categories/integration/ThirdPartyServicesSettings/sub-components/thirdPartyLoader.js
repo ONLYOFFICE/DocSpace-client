@@ -42,7 +42,7 @@ const ThirdPartyLoader = () => {
     <StyledLoader>
       {rectangles.map((_, index) => (
         <RectangleSkeleton
-          key={`third-party-loader-${index}`} // eslint-disable-line react/no-array-index-key
+          key={`third-party-loader-${index}`}
           height="120px"
           borderRadius="6px"
         />

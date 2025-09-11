@@ -54,8 +54,8 @@ import type {
   TSelectedFileInfo,
 } from "@docspace/shared/selectors/Files/FilesSelector.types";
 import { getSelectFormatTranslation } from "@docspace/shared/utils";
+import { useDocumentTitle } from "@docspace/shared/hooks/useDocumentTitle";
 
-import useDocumentTitle from "@/hooks/useDocumentTitle";
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 
 const IS_TEST = process.env.NEXT_PUBLIC_E2E_TEST;
@@ -219,7 +219,7 @@ export default function FilesSelectorClient({
     if (isInit.current) return;
 
     isInit.current = true;
-    SocketHelper.connect(socketUrl, "");
+    SocketHelper?.connect(socketUrl, "");
   }, [socketUrl]);
 
   const getFilesArchiveError = useCallback(() => "", []);

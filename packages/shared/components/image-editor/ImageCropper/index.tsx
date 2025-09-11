@@ -108,7 +108,7 @@ const ImageCropper = ({
         .getImageScaledToCanvas()
         ?.toDataURL();
       setPreviewImage(newPreviewImage);
-    } catch (e) {
+    } catch {
       // console.error(e);
     }
   }, 300);

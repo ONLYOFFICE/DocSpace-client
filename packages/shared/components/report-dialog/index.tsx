@@ -62,7 +62,6 @@ const ReportDialog = (props: ReportDialogProps) => {
 
   const report = useMemo(() => {
     return getCrashReport(user.id, version, user.cultureName, error);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const [description, setDescription] = useState("");
 

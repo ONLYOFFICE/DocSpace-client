@@ -3,7 +3,7 @@
   "content": "Wait for the current operation to complete",
   "content_en_sha1_hash": "43744920068ae9c077e24f893ad58703d318a3a0",
   "created_at": "2025-05-19T21:30:56.313Z",
-  "updated_at": "2025-09-02T07:59:28.648Z",
+  "updated_at": "2025-09-07T07:53:15.378Z",
   "comment": {
     "text": "This translation key is used to display a warning message that indicates the current operation is being waited on, typically in a toast notification. It appears when the \"Files:WaitOperation\" action is triggered, informing users of a pending process. Translators should consider phrases that convey a sense of waiting or anticipation for the operation's completion.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1099,
+      "line_number": 1087,
       "context": "onShowEditingToast = (t) => {\n toastr.error(t(\"Files:DocumentEdited\"));\n };\n \n onShowWaitOperationToast = (t) => {\n toastr.warning(t(\"Files:WaitOperation\"));\n };\n \n onClickMute = (e, item, t) => {\n const data = (e.currentTarget && e.currentTarget.dataset) || e;\n const { action } = data;",
       "module": "/packages/client"
     }

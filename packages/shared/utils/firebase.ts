@@ -24,9 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable no-console */
-/* eslint-disable prefer-promise-reject-errors */
-/* eslint-disable class-methods-use-this */
 import firebase from "firebase/compat/app";
 import "firebase/compat/remote-config";
 import "firebase/compat/storage";

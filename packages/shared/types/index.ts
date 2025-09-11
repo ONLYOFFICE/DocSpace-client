@@ -203,7 +203,7 @@ declare global {
     Asc: unknown;
     zESettings: unknown;
     zE: {
-      apply: Function;
+      apply: (...args: unknown[]) => void;
     };
     i18n: {
       loaded: {
@@ -211,7 +211,7 @@ declare global {
       };
     };
     timezone: string;
-    snackbar?: {};
+    snackbar?: object;
     DocSpace: {
       navigate: (path: string, state?: { [key: string]: unknown }) => void;
       location: Location & { state: unknown };
@@ -276,7 +276,7 @@ declare global {
     cloudCryptoCommand: (
       type: string,
       params: { [key: string]: string | boolean },
-      callback: (obj?: {}) => void,
+      callback: (obj?: object) => void,
     ) => void;
     onSystemMessage: (e: {
       type: string;

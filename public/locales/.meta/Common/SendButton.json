@@ -3,7 +3,7 @@
   "content": "Send",
   "content_en_sha1_hash": "9bc2575c3930437e80555f78757b783c842e8e66",
   "created_at": "2025-05-19T21:30:48.532Z",
-  "updated_at": "2025-08-21T14:45:43.885Z",
+  "updated_at": "2025-09-07T07:53:15.056Z",
   "comment": {
     "text": "The translation key \"SendButton\" is used to display the label \"Send\" in various contexts, including buttons and dialog footers. It appears on change email and password dialogs, as well as a phone erasure description in another dialog. Its purpose is to provide a clear action for users to confirm changes or initiate actions.",
     "is_auto": true,
@@ -54,13 +54,13 @@
     },
     {
       "file_path": "/packages/shared/components/report-dialog/index.tsx",
-      "line_number": 154,
+      "line_number": 153,
       "context": "</div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary\n key=\"SendButton\"\n onClick={onClickSend}\n label={t(\"SendButton\")}\n size={ButtonSize.normal}\n scale={currentDeviceType === DeviceType.mobile}\n data-id=\"send-report\"",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog.tsx",
-      "line_number": 214,
+      "line_number": 213,
       "context": "isDisabled={loading}\n key=\"RecoverySendBtn\"\n size={ButtonSize.normal}\n id=\"recover-access-modal_send\"\n className={styles.recoverButtonDialog}\n label={loading ? t(\"Common:Sending\") : t(\"Common:SendButton\")}\n onClick={onSendRecoverRequest}\n aria-label=\"Send recover request\"\n testId=\"recover_access_modal_submit_button\"\n />\n <Button",
       "module": "/packages/shared"
     }

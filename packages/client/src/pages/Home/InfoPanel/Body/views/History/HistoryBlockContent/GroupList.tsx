@@ -118,12 +118,17 @@ const HistoryGroupList = ({
               </Text>
             ) : (
               <Link
-                className="text link"
-                onClick={() => onGroupClick(group.id)}
+                className={classNames("text link", styles.groupLink, {
+                  [styles.notClickable]: group.isSystem,
+                })}
+                onClick={
+                  group.isSystem ? undefined : () => onGroupClick(group.id)
+                }
                 style={
                   withWrapping ? { display: "inline", textWrap: "wrap" } : {}
                 }
                 dataTestId={`history_group_link_${i}`}
+                noHover={group.isSystem}
               >
                 {decode(group.name)}
               </Link>

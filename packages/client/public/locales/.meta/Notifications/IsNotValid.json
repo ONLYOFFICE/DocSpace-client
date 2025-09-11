@@ -1,0 +1,28 @@
+{
+  "key_path": "IsNotValid",
+  "content": "Is not valid",
+  "content_en_sha1_hash": "b6c9108a01a4d042f4a9d3910a5cc88b9df4e7f2",
+  "created_at": "2025-09-10T09:59:17.189Z",
+  "updated_at": "2025-09-10T10:01:00.792Z",
+  "comment": {
+    "text": "Indicates that a notification channel is invalid. This text appears within a notification channel display, likely appended to the channel type (e.g., email) to signify an issue with its configuration. Translators should ensure the tone aligns with error messaging.",
+    "is_auto": true,
+    "updated_at": "2025-09-10T10:01:00.792Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/Channel.tsx",
+      "line_number": 73,
+      "context": "isNotValid?: boolean,\n isNeedConfig?: boolean,\n ) => {\n switch (type) {\n case \"email\":\n return `${t(\"Common:Email\")}${isNotValid ? ` (${t(\"IsNotValid\")})` : \"\"}`;\n case \"telegram\":\n return `${t(\"Common:ProviderTelegram\")}${isNeedConfig ? ` (${t(\"NotConfigured\")})` : \"\"}`;\n default:\n return t(\"Common:Email\");\n }",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -106,6 +106,7 @@ const SubMenu = (props: SubMenuProps) => {
   const hideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const keepClosingRef = useRef<boolean>(false);
   const openTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const subMenuHoveredRef = useRef<boolean>(false);
 
   const clearOpen = () => {
     if (openTimeoutRef.current) {
@@ -205,12 +206,15 @@ const SubMenu = (props: SubMenuProps) => {
     if (isMobileDevice) return;
 
     clearHide();
+
     keepClosingRef.current = false;
     clearOpen();
+    subMenuHoveredRef.current = true;
   };
 
   const handleSubMenuMouseLeave = () => {
     if (isMobileDevice) return;
+    subMenuHoveredRef.current = false;
     scheduleHide(HIDE_DELAY);
   };
 
@@ -219,7 +223,10 @@ const SubMenu = (props: SubMenuProps) => {
     if (menuHovered === undefined) return;
 
     if (!menuHovered) {
-      scheduleHide(HIDE_DELAY);
+      // Don't schedule hide if the pointer is currently over the submenu
+      if (!subMenuHoveredRef.current) {
+        scheduleHide(HIDE_DELAY);
+      }
     } else {
       if (!keepClosingRef.current && hideTimeoutRef.current) clearHide();
     }

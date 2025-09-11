@@ -258,9 +258,7 @@ class PluginStore {
     } catch (e) {
       console.log(e);
     } finally {
-      setTimeout(() => {
-        this.setIsLoading(false);
-      }, 500);
+      this.setIsLoading(false);
     }
   };
 

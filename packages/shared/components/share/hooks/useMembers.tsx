@@ -24,29 +24,51 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { isNil } from "lodash";
-import { useCallback, useMemo, useState } from "react";
+import isNil from "lodash/isNil";
+import uniqBy from "lodash/uniqBy";
 import { useTranslation } from "react-i18next";
+import type { IndexRange } from "react-virtualized";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
+import { useUnmount } from "../../../hooks/useUnmount";
 import { ShareAccessRights } from "../../../enums";
 import { ShareLinkService } from "../../../services/share-link.service";
 import type { TOption } from "../../combobox";
 
 import type { TShare, TShareMember, UseMembersProps } from "../Share.types";
 import { convertMembers, getShareAccessRightOptions } from "../Share.helpers";
+import { ShareEventName, PAGE_COUNT } from "../Share.constants";
 
 import { User } from "../sub-components/User";
 import ShareHeader from "../sub-components/ShareHeader";
 import { CreateButton } from "../sub-components/CreateButton";
-import { ShareEventName } from "../Share.constants";
 
 export const useMembers = (props: UseMembersProps) => {
   const { selfId, shareMembersTotal, infoPanelSelection, linksCount } = props;
 
+  const abortController = useRef(new AbortController());
+
   const { t } = useTranslation("Common");
+
+  const [filter, setFilter] = useState(() => ({
+    page: 0,
+    startIndex: 0,
+  }));
 
   const [total, setTotal] = useState(() => shareMembersTotal);
   const [members, setMembers] = useState(() => props.members ?? []);
+
+  useEffect(() => {
+    setMembers(props.members ?? []);
+  }, [props.members]);
+
+  useEffect(() => {
+    setTotal(shareMembersTotal);
+  }, [shareMembersTotal]);
+
+  useUnmount(() => {
+    abortController.current.abort();
+  });
 
   const memoMembers = useMemo(
     () => convertMembers(members ?? [], t),
@@ -54,6 +76,39 @@ export const useMembers = (props: UseMembersProps) => {
   );
 
   const countMembers = props.members?.length ?? 0;
+
+  const fetchMoreShareMembers = useCallback(async (range: IndexRange) => {
+    console.log(range);
+
+    abortController.current.abort();
+    abortController.current = new AbortController();
+
+    const newStartIndex = filter.startIndex + PAGE_COUNT;
+    const newPage = filter.page + 1;
+
+    setFilter({
+      startIndex: newStartIndex,
+      page: newPage,
+    });
+
+    try {
+      const data = await ShareLinkService.getShare(
+        infoPanelSelection,
+        {
+          page: newPage,
+          startIndex: newStartIndex,
+        },
+        abortController.current.signal,
+      );
+      setTotal(data.length);
+
+      setMembers((prev) =>
+        uniqBy([...prev, ...data], (item) => item.sharedTo.id),
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
 
   const onAdded = useCallback(() => {
     const event = new CustomEvent(ShareEventName, {
@@ -173,5 +228,6 @@ export const useMembers = (props: UseMembersProps) => {
   return {
     getUsers,
     total,
+    fetchMoreShareMembers,
   };
 };

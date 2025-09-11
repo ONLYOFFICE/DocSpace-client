@@ -37,6 +37,7 @@ import {
   InfiniteLoader,
   WindowScroller,
   List as VirtualizedList,
+  IndexRange,
 } from "react-virtualized";
 import classNames from "classnames";
 
@@ -159,13 +160,16 @@ const List: FC<ListProps> = (props) => {
     [hasNextPage, itemsCount],
   );
 
-  const loadMoreItems = useCallback(async () => {
-    setIsNextPageLoading(true);
-    if (!isNextPageLoading) {
-      await loadNextPage();
-    }
-    setIsNextPageLoading(false);
-  }, [isNextPageLoading, loadNextPage]);
+  const loadMoreItems = useCallback(
+    async (params: IndexRange) => {
+      setIsNextPageLoading(true);
+      if (!isNextPageLoading) {
+        await loadNextPage(params);
+      }
+      setIsNextPageLoading(false);
+    },
+    [isNextPageLoading, loadNextPage],
+  );
 
   const getItemSize = ({ index }: { index: number }) => {
     const elem = list[index];

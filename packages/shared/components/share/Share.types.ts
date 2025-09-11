@@ -27,6 +27,7 @@
 import React from "react";
 import moment from "moment";
 import type { TFunction } from "i18next";
+import type { IndexRange } from "react-virtualized";
 
 import type {
   TAvailableExternalRights,
@@ -238,7 +239,7 @@ export interface UserProps {
 export type ListProps = {
   hasNextPage: boolean;
   itemCount: number;
-  loadNextPage: () => Promise<void>;
+  loadNextPage: (params: IndexRange) => Promise<void>;
   linksBlockLength: number;
   withoutTitlesAndLinks: boolean;
   children: React.ReactNode;

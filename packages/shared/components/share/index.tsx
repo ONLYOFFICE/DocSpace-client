@@ -79,7 +79,7 @@ const Share = (props: ShareProps) => {
   });
   const links = getLinkElements();
 
-  const { getUsers, total } = useMembers({
+  const { getUsers, total, fetchMoreShareMembers } = useMembers({
     members,
     selfId,
     shareMembersTotal,
@@ -107,7 +107,7 @@ const Share = (props: ShareProps) => {
             hasNextPage={content.length - headersCount < total}
             itemCount={links.length + headersCount + total}
             linksBlockLength={links.length}
-            loadNextPage={() => Promise.resolve()}
+            loadNextPage={fetchMoreShareMembers}
             withoutTitlesAndLinks={false}
           >
             {links}

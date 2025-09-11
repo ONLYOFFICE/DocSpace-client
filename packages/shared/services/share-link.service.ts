@@ -220,18 +220,35 @@ export class ShareLinkService {
       : this.addExternalFolderLink(item);
   };
 
-  public static getShareFile = (id: string | number) => {
-    return getFileSharedUsers(id);
+  public static getShareFile = (
+    id: string | number,
+    startIndex = 0,
+    count = 50,
+    signal?: AbortSignal,
+  ) => {
+    return getFileSharedUsers(id, startIndex, count, signal);
   };
 
-  public static getShareFolder = (id: string | number) => {
-    return getFolderSharedUsers(id);
+  public static getShareFolder = (
+    id: string | number,
+    startIndex = 0,
+    count = 50,
+    signal?: AbortSignal,
+  ) => {
+    return getFolderSharedUsers(id, startIndex, count, signal);
   };
 
-  public static getShare = (item: TFile | TFolder) => {
-    return isFile(item)
-      ? this.getShareFile(item.id)
-      : this.getShareFolder(item.id);
+  public static getShare = (
+    item: TFile | TFolder,
+    filter: {
+      page?: number;
+      startIndex?: number;
+    },
+    signal?: AbortSignal,
+  ) => {
+    const getShare = isFile(item) ? this.getShareFile : this.getShareFolder;
+
+    return getShare(item.id, filter.startIndex, filter.page, signal);
   };
 
   public static shareItemToUser = async (

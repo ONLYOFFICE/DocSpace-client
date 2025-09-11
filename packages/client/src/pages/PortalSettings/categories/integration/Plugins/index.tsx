@@ -157,7 +157,6 @@ export default inject(
       addPlugin,
 
       isLoading,
-      isInit,
       isEmptyList,
     } = pluginStore;
 
@@ -183,7 +182,6 @@ export default inject(
       isLoading,
       isEmptyList,
       apiPluginSDKLink,
-      isInit,
     };
   },
 )(observer(PluginPage));

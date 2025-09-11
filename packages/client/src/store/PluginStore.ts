@@ -255,12 +255,12 @@ class PluginStore {
 
       this.setIsEmptyList(plugins.length === 0);
       plugins.forEach((plugin) => this.initPlugin(plugin, undefined, fromList));
-
+    } catch (e) {
+      console.log(e);
+    } finally {
       setTimeout(() => {
         this.setIsLoading(false);
       }, 500);
-    } catch (e) {
-      console.log(e);
     }
   };
 

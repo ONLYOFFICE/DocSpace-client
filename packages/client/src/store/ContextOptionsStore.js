@@ -994,7 +994,8 @@ class ContextOptionsStore {
             };
 
             const processedOptionValue = {
-              key: value.key,
+              key: `option_${value.key}`,
+              id: value.key,
               label: value.label,
               icon: value.icon,
               onClick,

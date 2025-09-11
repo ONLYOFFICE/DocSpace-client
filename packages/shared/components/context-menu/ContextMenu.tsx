@@ -479,11 +479,10 @@ const ContextMenu = (props: ContextMenuProps) => {
   ) => {
     e.stopPropagation();
 
-    setShowMobileMenu(true);
-
     const res = loadFunc ? await loadFunc() : items;
-    setMobileSubMenuItems(res);
 
+    setMobileSubMenuItems(res);
+    setShowMobileMenu(true);
     setMobileHeader(label);
 
     if (res && menuRef.current) {

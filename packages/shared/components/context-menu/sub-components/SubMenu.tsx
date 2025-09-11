@@ -282,8 +282,6 @@ const SubMenu = (props: SubMenuProps) => {
     );
 
     if (!isMobile() && options) {
-      console.log(Array.from(options));
-
       const optionsWidth: number[] = [];
       Array.from(options).forEach((option) => {
         const isNestedOption =

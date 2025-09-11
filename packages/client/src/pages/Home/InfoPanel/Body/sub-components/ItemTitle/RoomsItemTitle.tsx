@@ -198,6 +198,12 @@ const RoomsItemHeader = ({
     onClickInviteUsers();
   };
 
+  const addUserTitle = canShare
+    ? t("Common:AddUsers")
+    : isTemplate
+      ? t("Files:AccessSettings")
+      : t("Common:InviteContacts");
+
   const onSearchClick = () => setShowSearchBlock?.(true);
 
   const isRoom = "isRoom" in selection && (selection.isRoom as boolean);
@@ -283,11 +289,7 @@ const RoomsItemHeader = ({
           <IconButton
             id="info_add-user"
             className="icon"
-            title={
-              isTemplate
-                ? t("Files:AccessSettings")
-                : t("Common:InviteContacts")
-            }
+            title={addUserTitle}
             iconName={PersonPlusReactSvgUrl}
             isFill
             onClick={onClickAddUser}

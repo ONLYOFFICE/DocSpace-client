@@ -31,10 +31,10 @@ import {
   editExternalLink,
   getOrCreatePrimaryFolderLink,
   getPrimaryLinkIfNotExistCreate,
-  getShareFile,
-  getShareFolder,
-  shareFileToUser,
-  shareFolderToUser,
+  getFileSharedUsers,
+  getFolderSharedUsers,
+  shareFileToUsers,
+  shareFolderToUsers,
 } from "../api/files";
 
 import {
@@ -221,11 +221,11 @@ export class ShareLinkService {
   };
 
   public static getShareFile = (id: string | number) => {
-    return getShareFile(id);
+    return getFileSharedUsers(id);
   };
 
   public static getShareFolder = (id: string | number) => {
-    return getShareFolder(id);
+    return getFolderSharedUsers(id);
   };
 
   public static getShare = (item: TFile | TFolder) => {
@@ -234,12 +234,12 @@ export class ShareLinkService {
       : this.getShareFolder(item.id);
   };
 
-  public static shareEntityToUser = async (
+  public static shareItemToUser = async (
     share: TShareToUser[],
     item: TFile | TFolder,
   ) => {
     return isFile(item)
-      ? shareFileToUser(item.id, share)
-      : shareFolderToUser(item.id, share);
+      ? shareFileToUsers(item.id, share)
+      : shareFolderToUsers(item.id, share);
   };
 }

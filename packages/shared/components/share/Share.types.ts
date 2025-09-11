@@ -40,6 +40,7 @@ import type { ShareAccessRights } from "../../enums";
 import type { TOption } from "../combobox";
 import type { TUser } from "../../api/people/types";
 import type { TGroup } from "../../api/groups/types";
+import type { RoomMember } from "../../api/rooms/types";
 
 export type ShareCalendarProps = {
   onDateSet: (formattedDate: moment.Moment) => void;
@@ -134,7 +135,8 @@ export type ShareProps = {
   setEditLinkPanelIsVisible: (value: boolean) => void;
   setLinkParams: (linkParams: LinkParamsType) => void;
   fileLinkProps?: TFileLink[];
-  members?: TFileLink[];
+  members?: RoomMember[];
+  shareMembersTotal?: number;
 };
 
 export interface LinkTitleProps {
@@ -160,6 +162,15 @@ export type TShareBarProps = {
   selfId?: string;
 };
 
+export interface UseMembersProps {
+  members: RoomMember[] | undefined;
+  selfId: string | undefined;
+  shareMembersTotal: number;
+  infoPanelSelection: TFile | TFolder;
+
+  linksCount: number;
+}
+
 export interface UseShareProps {
   infoPanelSelection: TFile | TFolder;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
@@ -184,26 +195,44 @@ export interface UseShareProps {
   }) => void;
 }
 
+export type TTitleID =
+  | "groups"
+  | "users"
+  | "guests"
+  | "expected"
+  | "administrators";
+
+export type TTitleShare = {
+  id: TTitleID;
+  displayName: string;
+  isTitle: true;
+  isExpect?: boolean;
+};
+
 export type TShareMember = {
   access: number;
   canEditAccess: boolean;
   isExpect?: boolean;
 } & (TUser | TGroup);
 
+export type TShare = TTitleShare | TShareMember;
+export type TShareMembers = Record<TTitleID, TShare[]>;
+
 export interface UserProps {
-  user: TShareMember;
+  user: TShare;
   currentUser: TShareMember;
 
-  isLoading?: boolean;
   options?: TOption[];
   hideCombobox?: boolean;
   selectedOption?: TOption;
-  onSelectOption?: (option: TOption) => void;
+  onSelectOption?: (option: TOption) => Promise<void>;
 
   showInviteIcon?: boolean;
   onRepeatInvitation?: () => Promise<void>;
 
   onClickGroup?: (group: TGroup) => void;
+
+  index?: number;
 }
 
 export type ListProps = {

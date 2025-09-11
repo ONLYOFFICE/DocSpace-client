@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { FC } from "react";
+import classNames from "classnames";
 
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
 
@@ -42,7 +43,7 @@ export const CreateButton: FC<CreateButtonProps> = ({ onClick, title }) => {
   return (
     <div
       onClick={onClick}
-      className={styles.linkRow}
+      className={classNames(styles.linkRow, styles.createButton)}
       data-testid="info_panel_share_create_and_copy_link"
     >
       <div className={styles.square}>

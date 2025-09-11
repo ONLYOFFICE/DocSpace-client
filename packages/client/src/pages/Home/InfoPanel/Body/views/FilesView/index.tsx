@@ -126,6 +126,7 @@ const FilesView = ({
 
   const {
     filesLink,
+    shareMembers,
     fetchExternalLinks,
     abortController: shareAbortController,
   } = useShare({
@@ -309,7 +310,13 @@ const FilesView = ({
     if (value === InfoPanelView.infoShare) {
       if (isRoom(selection)) return null;
 
-      return <Share infoPanelSelection={selection} fileLinkProps={filesLink} />;
+      return (
+        <Share
+          members={shareMembers}
+          fileLinkProps={filesLink}
+          infoPanelSelection={selection}
+        />
+      );
     }
 
     // @ts-expect-error fixed after rewrite plugin to ts

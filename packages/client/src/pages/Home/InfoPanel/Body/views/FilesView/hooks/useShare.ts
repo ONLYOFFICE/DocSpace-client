@@ -29,8 +29,12 @@ import React from "react";
 import {
   getExternalFolderLinks,
   getExternalLinks,
+  getFileSharedUsers,
+  getFolderSharedUsers,
 } from "@docspace/shared/api/files";
 import { TFileLink } from "@docspace/shared/api/files/types";
+
+import { RoomMember } from "@docspace/shared/api/rooms/types";
 
 interface UseShareProps {
   id: string;
@@ -44,6 +48,8 @@ export const useShare = ({
   generatePrimaryLink,
 }: UseShareProps) => {
   const [filesLink, setFilesLink] = React.useState<TFileLink[]>([]);
+  const [shareMembers, setShareMembers] = React.useState<RoomMember[]>([]);
+  const [shareMembersTotal, setShareMembersTotal] = React.useState(0);
 
   const abortController = React.useRef<AbortController | null>(null);
 
@@ -58,14 +64,32 @@ export const useShare = ({
         ? getExternalFolderLinks
         : getExternalLinks;
 
-      const response = await getExternalLinksMethod(
+      const getShareUsers = isFolder
+        ? getFolderSharedUsers
+        : getFileSharedUsers;
+
+      const response = getExternalLinksMethod(
         id,
         0,
         50,
         abortController.current.signal,
       );
 
-      setFilesLink(response.items);
+      const sharedToUsersResponse = getShareUsers(
+        id,
+        0,
+        50,
+        abortController.current.signal,
+      );
+
+      const [link, shareUsers] = await Promise.all([
+        response,
+        sharedToUsersResponse,
+      ]);
+
+      setFilesLink(link.items);
+      setShareMembers(shareUsers);
+      setShareMembersTotal(shareUsers.length);
     } catch (error) {
       console.error("Error fetching external links:", error);
       throw error;
@@ -74,7 +98,9 @@ export const useShare = ({
 
   return {
     filesLink,
+    shareMembers,
     fetchExternalLinks,
     abortController,
+    shareMembersTotal,
   };
 };

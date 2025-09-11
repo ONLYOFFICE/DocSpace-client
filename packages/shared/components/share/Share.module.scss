@@ -95,12 +95,18 @@
     justify-content: space-between;
     gap: 10px;
 
+    margin-top: 20px;
+
     .linkToViewingIcon {
       svg {
         width: 16px;
         height: 16px;
       }
     }
+  }
+
+  .shareHeader {
+    margin-top: 0;
   }
 }
 
@@ -507,4 +513,8 @@
     width: calc(100% + 16px) !important;
     margin-bottom: 48px;
   }
+}
+
+.createButton {
+  height: 48px;
 }

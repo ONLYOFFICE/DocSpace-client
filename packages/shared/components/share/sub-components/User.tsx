@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { decode } from "he";
-import { useId } from "react";
+import { useId, useState } from "react";
 import classNames from "classnames";
 import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
@@ -41,7 +41,7 @@ import { getUserType, getUserTypeTranslation } from "../../../utils/common";
 import { TUser } from "../../../api/people/types";
 
 import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
-import { ComboBox } from "../../combobox";
+import { ComboBox, type TOption } from "../../combobox";
 
 import { Text } from "../../text";
 import { IconButton } from "../../icon-button";
@@ -60,7 +60,6 @@ export const User = ({
   onClickGroup,
 
   options,
-  isLoading,
   hideCombobox,
   selectedOption,
   onSelectOption,
@@ -68,6 +67,13 @@ export const User = ({
   const id = useId();
   const theme = useTheme();
   const { t } = useTranslation(["Common"]);
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSelectOption = async (option: TOption) => {
+    setIsLoading(true);
+    onSelectOption?.(option).finally(() => setIsLoading(false));
+  };
 
   if (
     "displayName" in user &&
@@ -81,7 +87,7 @@ export const User = ({
 
   const isExpect = user.isExpect;
   const isSystem = "isSystem" in user && user.isSystem;
-  const canChangeUserRole = user.canEditAccess;
+  const canChangeUserRole = "canEditAccess" in user && user.canEditAccess;
 
   const type = getUserType(user as unknown as TUser);
   const typeLabel = getUserTypeTranslation(type, t);
@@ -207,7 +213,7 @@ export const User = ({
               className="role-combobox"
               selectedOption={selectedOption}
               options={options}
-              onSelect={onSelectOption}
+              onSelect={handleSelectOption}
               scaled={false}
               withBackdrop={isMobile}
               size="content"

@@ -35,6 +35,7 @@ import styles from "./Share.module.scss";
 import List from "./sub-components/List";
 import { useShare } from "./hooks/useShare";
 import ShareInfoBar from "./sub-components/ShareInfoBar";
+import { useMembers } from "./hooks/useMembers";
 
 const Share = (props: ShareProps) => {
   const {
@@ -51,6 +52,7 @@ const Share = (props: ShareProps) => {
     setEmbeddingPanelData,
     fileLinkProps,
     members,
+    shareMembersTotal = 0,
   } = props;
 
   const isFolder = infoPanelSelection.isFolder;
@@ -59,7 +61,7 @@ const Share = (props: ShareProps) => {
 
   const { t } = useTranslation(["Common"]);
 
-  const [isLoading, setIsLoading] = useState(!fileLinkProps);
+  const [isLoading, setIsLoading] = useState(!fileLinkProps && !members);
 
   const { getLinkElements } = useShare({
     infoPanelSelection,
@@ -75,10 +77,19 @@ const Share = (props: ShareProps) => {
     setView,
     shareChanged,
   });
-
   const links = getLinkElements();
 
+  const { getUsers, total } = useMembers({
+    members,
+    selfId,
+    shareMembersTotal,
+    infoPanelSelection,
+    linksCount: links.length,
+  });
+
   if (hideSharePanel) return null;
+
+  const { content, headersCount } = getUsers();
 
   return (
     <div data-testid="shared-links">
@@ -93,13 +104,14 @@ const Share = (props: ShareProps) => {
       ) : (
         <div className={styles.links}>
           <List
-            hasNextPage={false}
-            itemCount={links.length}
+            hasNextPage={content.length - headersCount < total}
+            itemCount={links.length + headersCount + total}
             linksBlockLength={links.length}
             loadNextPage={() => Promise.resolve()}
             withoutTitlesAndLinks={false}
           >
             {links}
+            {content}
           </List>
         </div>
       )}

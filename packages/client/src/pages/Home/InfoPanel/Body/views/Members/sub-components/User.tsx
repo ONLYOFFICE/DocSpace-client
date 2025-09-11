@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -66,8 +65,6 @@ const User = ({
   ]);
 
   const membersHelper = new MembersHelper({ t });
-
-  const [isLoading, setIsLoading] = useState(false);
 
   if (
     "displayName" in user &&
@@ -117,8 +114,6 @@ const User = ({
         force,
       })
       .then(async (item) => {
-        setIsLoading(false);
-
         if (item?.error === RoomSecurityError.FormRoleBlockingDeletion) {
           return setRemoveUserConfirmation!(true, async () => {
             await updateRole(option, true);
@@ -129,15 +124,13 @@ const User = ({
       })
       .catch((err) => {
         toastr.error(err);
-        setIsLoading(false);
       });
   };
 
-  const onOptionClick = (option: TOption) => {
+  const onOptionClick = async (option: TOption) => {
     if (option.access === userRole?.access) return;
 
-    setIsLoading(true);
-    updateRole(option, false);
+    return updateRole(option, false);
   };
 
   const onOpenGroup = (group: TGroup) => {
@@ -150,7 +143,6 @@ const User = ({
     <ShareUser
       user={user}
       currentUser={currentUser}
-      isLoading={isLoading}
       selectedOption={userRole}
       options={userRoleOptions}
       hideCombobox={hideUserRole}

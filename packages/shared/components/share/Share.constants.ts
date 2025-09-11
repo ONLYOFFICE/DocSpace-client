@@ -23,47 +23,4 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
-import type { FC } from "react";
-import { inject, observer } from "mobx-react";
-
-import Share from "@docspace/shared/components/share";
-import { ShareProps } from "@docspace/shared/components/share/Share.types";
-
-interface ExternalShareProps
-  extends Pick<
-    ShareProps,
-    "infoPanelSelection" | "fileLinkProps" | "members"
-  > {}
-
-export default inject<TStore>(({ infoPanelStore, userStore, dialogsStore }) => {
-  const selfId = userStore.user?.id ?? "";
-
-  const {
-    setLinkParams,
-    setEditLinkPanelIsVisible,
-    setEmbeddingPanelData,
-    setIsShareFormData,
-  } = dialogsStore;
-
-  const {
-    setView,
-
-    shareChanged,
-    setShareChanged,
-    setIsScrollLocked,
-  } = infoPanelStore;
-
-  return {
-    setView,
-
-    shareChanged,
-    setShareChanged,
-    selfId,
-    setIsScrollLocked,
-    setLinkParams,
-    setEditLinkPanelIsVisible,
-    setEmbeddingPanelData,
-    onOpenPanel: setIsShareFormData,
-  };
-})(observer(Share as FC<ExternalShareProps>));
+export const ShareEventName = "share-selector";

@@ -1807,24 +1807,40 @@ export async function getFormFillingStatus(
   return res;
 }
 
-export async function getShareFile(id: string | number) {
+export async function getFileSharedUsers(
+  id: string | number,
+  startIndex = 0,
+  count = 50,
+  signal?: AbortSignal,
+) {
+  const linkParams = `?startIndex=${startIndex}&count=${count}`;
+
   const res = (await request({
     method: "get",
-    url: `/files/file/${id}/share`,
-  })) as TGetRoomMembers;
+    url: `/files/file/${id}/share${linkParams}`,
+    signal,
+  })) as RoomMember[];
 
   return res;
 }
-export async function getShareFolder(id: string | number) {
+export async function getFolderSharedUsers(
+  id: string | number,
+  startIndex = 0,
+  count = 50,
+  signal?: AbortSignal,
+) {
+  const linkParams = `?startIndex=${startIndex}&count=${count}`;
+
   const res = (await request({
     method: "get",
-    url: `/files/folder/${id}/share`,
-  })) as TGetRoomMembers;
+    url: `/files/folder/${id}/share${linkParams}`,
+    signal,
+  })) as RoomMember[];
 
   return res;
 }
 
-export async function shareFolderToUser(
+export async function shareFolderToUsers(
   folderId: string | number,
   share: TShareToUser[],
 ) {
@@ -1838,7 +1854,7 @@ export async function shareFolderToUser(
 
   return res;
 }
-export async function shareFileToUser(
+export async function shareFileToUsers(
   fileId: string | number,
   share: TShareToUser[],
 ) {

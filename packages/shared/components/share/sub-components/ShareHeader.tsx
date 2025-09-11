@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { FC, ReactNode } from "react";
+import classNames from "classnames";
 
 import { Text } from "../../text";
 
@@ -33,11 +34,21 @@ import styles from "../Share.module.scss";
 interface ShareHeaderProps {
   title: string;
   options?: ReactNode;
+  isShareTitle?: boolean;
 }
 
-const ShareHeader: FC<ShareHeaderProps> = ({ title, options }) => {
+const ShareHeader: FC<ShareHeaderProps> = ({
+  title,
+  options,
+  isShareTitle,
+}) => {
   return (
-    <div key="share-header" className={styles.additionalLink}>
+    <div
+      key="share-header"
+      className={classNames(styles.additionalLink, {
+        [styles.shareHeader]: isShareTitle,
+      })}
+    >
       <Text fontSize="14px" fontWeight={600} className={styles.titleLink}>
         {title}
       </Text>

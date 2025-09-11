@@ -447,6 +447,7 @@ export const useShare = ({
         key="share-header"
         title={t("Common:SharedLinks")}
         options={options}
+        isShareTitle
       />
     );
 

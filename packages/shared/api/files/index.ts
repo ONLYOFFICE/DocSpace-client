@@ -43,7 +43,7 @@ import {
   sortInDisplayOrder,
 } from "../../utils/common";
 
-import type { TGetRoomMembers, TNewFiles } from "../rooms/types";
+import type { TNewFiles } from "../rooms/types";
 import { request } from "../client";
 
 import FilesFilter from "./filter";
@@ -1850,7 +1850,7 @@ export async function shareFolderToUsers(
     data: {
       share,
     },
-  })) as TGetRoomMembers;
+  })) as RoomMember[];
 
   return res;
 }
@@ -1864,7 +1864,7 @@ export async function shareFileToUsers(
     data: {
       share,
     },
-  })) as TGetRoomMembers;
+  })) as RoomMember[];
 
   return res;
 }

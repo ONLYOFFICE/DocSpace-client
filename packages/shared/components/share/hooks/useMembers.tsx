@@ -70,10 +70,22 @@ export const useMembers = (props: UseMembersProps) => {
       if (isNil(option.access)) return;
 
       try {
-        await ShareLinkService.shareItemToUser(
+        const newShareItems = await ShareLinkService.shareItemToUser(
           [{ shareTo: member.id, access: option.access }],
           infoPanelSelection,
         );
+
+        const newMember = newShareItems.find(
+          (item) => item.sharedTo.id === member.id,
+        );
+
+        if (newMember) {
+          setMembers((prev) =>
+            prev.map((item) =>
+              item.sharedTo.id === member.id ? newMember : item,
+            ),
+          );
+        }
       } catch (error) {
         console.error(error);
       }

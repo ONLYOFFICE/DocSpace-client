@@ -111,7 +111,7 @@ class PluginStore {
 
   deletePluginDialogProps: null | { pluginName: string } = null;
 
-  isLoading = true;
+  isLoading = false;
 
   isEmptyList = false;
 
@@ -240,7 +240,7 @@ class PluginStore {
   };
 
   updatePlugins = async (fromList?: boolean) => {
-    if (!this.userStore || !this.userStore.user) return;
+    if (!this.userStore || !this.userStore.user || this.isLoading) return;
 
     const { isAdmin, isOwner } = this.userStore.user;
 

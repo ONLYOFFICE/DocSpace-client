@@ -78,7 +78,7 @@ const PluginPage = ({
   }, [t]);
 
   React.useEffect(() => {
-    !isLoading && updatePlugins(true);
+    updatePlugins(true);
   }, [updatePlugins]);
 
   return isLoading || (!isEmptyList && pluginList.length === 0) ? (
@@ -157,6 +157,7 @@ export default inject(
       addPlugin,
 
       isLoading,
+      isInit,
       isEmptyList,
     } = pluginStore;
 
@@ -182,6 +183,7 @@ export default inject(
       isLoading,
       isEmptyList,
       apiPluginSDKLink,
+      isInit,
     };
   },
 )(observer(PluginPage));

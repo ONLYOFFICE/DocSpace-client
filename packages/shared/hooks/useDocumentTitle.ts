@@ -29,14 +29,25 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
-import { setDocumentTitle } from "@/utils";
+import type { TTranslation } from "../types";
 
-const useDocumentTitle = (titleI18nKey: string) => {
+export const useDocumentTitle = (titleI18nKey: string) => {
   const { t } = useTranslation();
+
+  const setDocumentTitle = (t: TTranslation, titleI18nKey: string) => {
+    let title;
+    const organizationName = t("Common:OrganizationName");
+
+    if (titleI18nKey) {
+      title = `${t(titleI18nKey)} - ${organizationName}`;
+    } else {
+      title = organizationName;
+    }
+
+    document.title = title;
+  };
 
   useEffect(() => {
     setDocumentTitle(t, titleI18nKey);
   }, [t, titleI18nKey]);
 };
-
-export default useDocumentTitle;

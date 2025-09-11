@@ -28,6 +28,7 @@ import { isNil } from "lodash";
 import { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { ShareAccessRights } from "../../../enums";
 import { ShareLinkService } from "../../../services/share-link.service";
 import type { TOption } from "../../combobox";
 
@@ -74,6 +75,13 @@ export const useMembers = (props: UseMembersProps) => {
           [{ shareTo: member.id, access: option.access }],
           infoPanelSelection,
         );
+
+        if (option.access === ShareAccessRights.None) {
+          setTotal((prev) => prev - 1);
+          return setMembers((prev) =>
+            prev.filter((item) => item.sharedTo.id !== member.id),
+          );
+        }
 
         const newMember = newShareItems.find(
           (item) => item.sharedTo.id === member.id,

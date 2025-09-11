@@ -51,7 +51,7 @@ export const ShareSelector: FC<ShareSelectorProps> = ({ item, onClose }) => {
     });
 
     try {
-      await ShareLinkService.shareEntityToUser(share, item);
+      await ShareLinkService.shareItemToUser(share, item);
     } catch (error) {
       toastr.error(error as TData);
       console.error(error);

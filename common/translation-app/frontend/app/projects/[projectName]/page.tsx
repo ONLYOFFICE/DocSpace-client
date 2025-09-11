@@ -141,6 +141,7 @@ export default function ProjectPage() {
       // Clean up socket listeners
       useOllamaValidationStore.getState().cleanupSocketListeners();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projectName]);
 
   // Select all languages by default when languages are loaded
@@ -154,6 +155,7 @@ export default function ProjectPage() {
       // Fetch namespaces for the base language
       fetchNamespaces(projectName, baseLanguage);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [languages, selectedLanguages, baseLanguage]);
 
   // Get URL parameters and manage state
@@ -250,7 +252,7 @@ export default function ProjectPage() {
         setCurrentNamespace(namespaces[0]);
       }
     }
-  }, [namespaces, namespaceFromUrl]);
+  }, [namespaces, currentNamespace, setCurrentNamespace, namespaceFromUrl]);
 
   // Re-fetch namespaces when showUntranslated changes
   useEffect(() => {
@@ -259,14 +261,14 @@ export default function ProjectPage() {
         untranslatedOnly: showUntranslated,
       });
     }
-  }, [showUntranslated, projectName, baseLanguage]);
+  }, [showUntranslated, projectName, baseLanguage, fetchNamespaces]);
 
   // Fetch Ollama models when connected
   useEffect(() => {
     if (ollamaConnected) {
       fetchModels();
     }
-  }, [ollamaConnected]);
+  }, [ollamaConnected, fetchModels]);
 
   // Load translations when namespace is selected
   useEffect(() => {
@@ -292,7 +294,13 @@ export default function ProjectPage() {
         window.history.pushState({}, "", newUrl.toString());
       });
     }
-  }, [currentNamespace, selectedLanguages, projectName, projectLoading]);
+  }, [
+    currentNamespace,
+    selectedLanguages,
+    projectName,
+    projectLoading,
+    fetchTranslations,
+  ]);
 
   // Toggle a language selection
   const handleLanguageToggle = (language: string) => {

@@ -43,18 +43,12 @@ import type {
 
 const ManualBackupWrapper = ({
   isNotPaidPeriod,
-  getProgress,
-  setStorageRegions,
-  setThirdPartyStorage,
   resetDownloadingProgress,
   setConnectedThirdPartyAccount,
   setBackupsCount,
   setIsInited,
-  fetchPayerInfo,
-  setDownloadingProgress,
   isBackupPaid,
-  maxFreeBackups,
-  setServiceQuota,
+  setDownloadingProgress,
   setIsEmptyContentBeforeLoader,
   isEmptyContentBeforeLoader,
   isInitialLoading,
@@ -135,13 +129,10 @@ export default inject<
       setBackupProgressError,
 
       isFormReady,
-      getProgress,
       setTemporaryLink,
       getStorageParams,
       clearLocalStorage,
-      setStorageRegions,
       saveToLocalStorage,
-      setThirdPartyStorage,
 
       resetDownloadingProgress,
       setCompletedFormFields,
@@ -159,7 +150,7 @@ export default inject<
       backupPageEnable,
     } = backup;
 
-    const { isPayer, setServiceQuota, backupServicePrice } = paymentStore;
+    const { isPayer, backupServicePrice } = paymentStore;
     const {
       newPath,
       basePath,
@@ -180,8 +171,7 @@ export default inject<
       setDeleteThirdPartyDialogVisible,
     } = dialogsStore;
 
-    const { isNotPaidPeriod, fetchPayerInfo, walletCustomerEmail } =
-      currentTariffStatusStore;
+    const { isNotPaidPeriod, walletCustomerEmail } = currentTariffStatusStore;
 
     const {
       providers,
@@ -189,8 +179,7 @@ export default inject<
       setThirdPartyProviders,
       openConnectWindow,
     } = thirdPartyStore;
-    const { isBackupPaid, maxFreeBackups, isThirdPartyAvailable } =
-      currentQuotaStore;
+    const { isBackupPaid, isThirdPartyAvailable } = currentQuotaStore;
 
     const { getIcon, filesSettings } = filesSettingsStore;
 
@@ -235,14 +224,11 @@ export default inject<
       setBackupProgressError,
 
       isFormReady,
-      getProgress,
       setTemporaryLink,
       getStorageParams,
       clearLocalStorage,
-      setStorageRegions,
       saveToLocalStorage,
 
-      setThirdPartyStorage,
       resetDownloadingProgress,
       setCompletedFormFields,
       addValueInFormSettings,
@@ -291,14 +277,11 @@ export default inject<
       setBackupsCount,
 
       setIsInited,
-      fetchPayerInfo,
-
-      maxFreeBackups,
 
       isPayer,
       walletCustomerEmail,
       isThirdPartyAvailable,
-      setServiceQuota,
+
       backupServicePrice,
     };
   },

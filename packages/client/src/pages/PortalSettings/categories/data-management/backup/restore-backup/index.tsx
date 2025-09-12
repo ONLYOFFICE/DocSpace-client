@@ -45,10 +45,7 @@ import type {
 } from "./RestoreBackup.types";
 
 const RestoreBackupWrapper = ({
-  getProgress,
-  setStorageRegions,
   setRestoreResource,
-  setThirdPartyStorage,
   resetDownloadingProgress,
   setConnectedThirdPartyAccount,
   isInitialLoading,
@@ -118,12 +115,9 @@ export default inject<
       backupProgressError,
       setIsBackupProgressVisible,
       setBackupProgressError,
-      getProgress,
       setTemporaryLink,
-      setThirdPartyStorage,
       setErrorInformation,
       setDownloadingProgress,
-      setStorageRegions,
       setConnectedThirdPartyAccount,
       resetDownloadingProgress,
       setRestoreResource,
@@ -222,12 +216,10 @@ export default inject<
       backupProgressError,
       setIsBackupProgressVisible,
       setBackupProgressError,
-      getProgress,
-      setThirdPartyStorage,
       setTemporaryLink,
       setErrorInformation,
       setDownloadingProgress,
-      setStorageRegions,
+
       setConnectedThirdPartyAccount,
       resetDownloadingProgress,
       setRestoreResource,

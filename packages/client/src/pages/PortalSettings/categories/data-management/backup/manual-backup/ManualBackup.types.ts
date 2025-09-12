@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TTranslation } from "@docspace/shared/types";
 import type { ManualBackupProps } from "@docspace/shared/pages/backup/manual-backup/ManualBackup.types";
 
 export interface InjectedManualBackupProps
@@ -36,17 +35,11 @@ export interface InjectedManualBackupProps
     | "isInitialLoading"
     | "isEmptyContentBeforeLoader"
   > {
-  getProgress: (t: TTranslation) => Promise<void>;
-  setStorageRegions: (regions: unknown) => void;
-  setThirdPartyStorage: (list: unknown) => void;
   resetDownloadingProgress: VoidFunction;
   setConnectedThirdPartyAccount: (account: any) => void;
   setBackupsCount: (count: number) => void;
-  setServiceQuota: () => void;
   setIsInited: (inited: boolean) => void;
-  fetchPayerInfo: () => void;
   isBackupPaid: boolean;
-  maxFreeBackups: number;
 }
 
 export interface ExternalManualBackupProps

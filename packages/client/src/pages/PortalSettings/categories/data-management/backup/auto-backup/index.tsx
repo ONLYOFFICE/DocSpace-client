@@ -43,20 +43,13 @@ import type {
 } from "./AutoBackup.types";
 
 const AutoBackupWrapper = ({
-  getProgress,
   setConnectedThirdPartyAccount,
-  setStorageRegions,
   setBackupSchedule,
   setThirdPartyStorage,
   setDefaultOptions,
   resetDownloadingProgress,
   setErrorInformation,
-  setBackupsCount,
-  setServiceQuota,
   setIsInited,
-  fetchPayerInfo,
-  isBackupPaid,
-  maxFreeBackups,
   isInitialLoading,
   isEmptyContentBeforeLoader,
   isInitialError,
@@ -104,14 +97,9 @@ export default inject<
     filesSelectorInput,
     thirdPartyStore,
     dialogsStore,
-    currentTariffStatusStore,
-    currentQuotaStore,
-    paymentStore,
   }) => {
     const language = authStore.language;
 
-    const { setServiceQuota } = paymentStore;
-    const { fetchPayerInfo } = currentTariffStatusStore;
     const { getIcon, filesSettings } = filesSettingsStore;
 
     const settingsFileSelector = { getIcon, filesSettings };
@@ -123,7 +111,6 @@ export default inject<
     } = thirdPartyStore;
 
     const { automaticBackupUrl, currentColorScheme } = settingsStore;
-    const { isBackupPaid, maxFreeBackups } = currentQuotaStore;
 
     const {
       basePath,
@@ -211,8 +198,6 @@ export default inject<
       setBackupProgressError,
       setterSelectedEnableSchedule,
       backupPageEnable,
-
-      setBackupsCount,
 
       setIsInited,
     } = backup;
@@ -323,12 +308,7 @@ export default inject<
       deleteThirdPartyDialogVisible,
       setConnectDialogVisible,
       setDeleteThirdPartyDialogVisible,
-      fetchPayerInfo,
-      setBackupsCount,
-      setServiceQuota,
       setIsInited,
-      isBackupPaid,
-      maxFreeBackups,
     };
   },
 )(observer(AutoBackupWrapper as React.FC<ExternalAutoBackupWrapperProps>));

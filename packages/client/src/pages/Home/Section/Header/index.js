@@ -521,9 +521,9 @@ const SectionHeaderContent = (props) => {
       case "people":
         return t("Common:Members");
       case "groups":
-        return isContactsInsideGroupPage
-          ? getInsideGroupTitle()
-          : t("Common:Groups");
+        return t("Common:Groups");
+      case "inside_group":
+        return getInsideGroupTitle();
       case "guests":
         return t("Common:Guests");
       default:

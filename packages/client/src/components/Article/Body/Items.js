@@ -44,7 +44,6 @@ import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import { toastr } from "@docspace/shared/components/toast";
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
-import AccountsItem from "./AccountsItem";
 import BonusItem from "./BonusItem";
 
 const StyledDragAndDrop = styled(DragAndDrop)`
@@ -382,17 +381,6 @@ const Items = ({
       // items.splice(1, 0, <CatalogDivider key="recent-divider" />);
 
       items.splice(3, 0, <CatalogDivider key="other-header" />);
-
-      if (!isVisitor && !isCollaborator)
-        items.push(
-          <CatalogDivider key="accounts-header" />,
-          <AccountsItem
-            key="accounts-item"
-            onClick={onClick}
-            getLinkData={getLinkData}
-            isActive={activeItemId === "accounts"}
-          />,
-        );
 
       if (isCommunity && isPaymentPageAvailable)
         items.push(<BonusItem key="bonus-item" />);

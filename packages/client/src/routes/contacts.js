@@ -47,7 +47,7 @@ export const contactsRoutes = [
     path: CONTACTS_ROUTE,
     element: (
       <PrivateRoute restricted withManager>
-        <Navigate to={PEOPLE_ROUTE_WITH_FILTER} replace />
+        <Navigate to={`/${PEOPLE_ROUTE_WITH_FILTER}`} replace />
       </PrivateRoute>
     ),
   },
@@ -55,7 +55,7 @@ export const contactsRoutes = [
     path: "accounts/filter",
     element: (
       <PrivateRoute restricted withManager>
-        <Navigate to={PEOPLE_ROUTE_WITH_FILTER} replace />
+        <Navigate to={`/${PEOPLE_ROUTE_WITH_FILTER}`} replace />
       </PrivateRoute>
     ),
   },
@@ -64,7 +64,7 @@ export const contactsRoutes = [
     element: (
       <PrivateRoute restricted withManager>
         <Navigate
-          to={PEOPLE_ROUTE_WITH_FILTER}
+          to={`/${PEOPLE_ROUTE_WITH_FILTER}`}
           state={{ openChangeOwnerDialog: true }}
           replace
         />
@@ -75,7 +75,7 @@ export const contactsRoutes = [
     path: PEOPLE_ROUTE,
     element: (
       <PrivateRoute restricted withManager>
-        <Navigate to={PEOPLE_ROUTE_WITH_FILTER} replace />
+        <Navigate to={`/${PEOPLE_ROUTE_WITH_FILTER}`} replace />
       </PrivateRoute>
     ),
   },
@@ -91,7 +91,7 @@ export const contactsRoutes = [
     path: GROUPS_ROUTE,
     element: (
       <PrivateRoute restricted withManager>
-        <Navigate to={GROUPS_ROUTE_WITH_FILTER} replace />
+        <Navigate to={`/${GROUPS_ROUTE_WITH_FILTER}`} replace />
       </PrivateRoute>
     ),
   },
@@ -107,7 +107,7 @@ export const contactsRoutes = [
     path: INSIDE_GROUP_ROUTE,
     element: (
       <PrivateRoute restricted withManager>
-        <Navigate to={INSIDE_GROUP_ROUTE_WITH_FILTER} replace />
+        <Navigate to={`/${INSIDE_GROUP_ROUTE_WITH_FILTER}`} replace />
       </PrivateRoute>
     ),
   },
@@ -123,7 +123,7 @@ export const contactsRoutes = [
     path: GUESTS_ROUTE,
     element: (
       <PrivateRoute restricted withManager>
-        <Navigate to={GUESTS_ROUTE_WITH_FILTER} replace />
+        <Navigate to={`/${GUESTS_ROUTE_WITH_FILTER}`} replace />
       </PrivateRoute>
     ),
   },

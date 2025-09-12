@@ -207,7 +207,6 @@
             "task": "Frontend | start-prod:lite",
             "tooltip": "🛠️ Start the \"frontend start production\" task"
           },
-          ,
           {
             "label": "Deploy",
             "task": "Frontend | deploy",
@@ -253,11 +252,6 @@
             "label": "Test dependencies",
             "task": "Test | Jest:dependencies",
             "tooltip": "🛠️ Start the \"Test | Jest:dependencies\" task"
-          },
-          {
-            "label": "Test ascii",
-            "task": "Test | Jest:ascii",
-            "tooltip": "🛠️ Start the \"Test | Jest:ascii\" task"
           },
           {
             "label": "Test unit",

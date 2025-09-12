@@ -60,6 +60,7 @@ import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
+import { getContactsView } from "SRC_DIR/helpers/contacts";
 import TariffBar from "SRC_DIR/components/TariffBar";
 import { getLifetimePeriodTranslation } from "@docspace/shared/utils/common";
 import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
@@ -170,7 +171,6 @@ const SectionHeaderContent = (props) => {
     isPersonalReadOnly,
     showTemplateBadge,
     allowInvitingMembers,
-    contactsTab,
     currentClientView,
     profile,
     profileClicked,
@@ -185,11 +185,10 @@ const SectionHeaderContent = (props) => {
 
   const location = useLocation();
 
-  const contactsView =
-    currentClientView === "users" || currentClientView === "groups";
+  const contactsView = getContactsView(location);
   const isContactsPage = contactsView;
-  const isContactsGroupsPage = contactsTab === "groups";
-  const isContactsInsideGroupPage = contactsTab === "inside_group";
+  const isContactsGroupsPage = contactsView === "groups";
+  const isContactsInsideGroupPage = contactsView === "inside_group";
   const isProfile = currentClientView === "profile";
 
   const addButtonRefCallback = React.useCallback(
@@ -517,14 +516,27 @@ const SectionHeaderContent = (props) => {
       isIndexEditingMode || isPublicRoom;
   }
 
+  const getAccountsTitle = () => {
+    switch (contactsView) {
+      case "people":
+        return t("Common:Members");
+      case "groups":
+        return isContactsInsideGroupPage
+          ? getInsideGroupTitle()
+          : t("Common:Groups");
+      case "guests":
+        return t("Common:Guests");
+      default:
+        return t("Common:Members");
+    }
+  };
+
   const currentTitle = isProfile
     ? t("Profile:MyProfile")
     : isSettingsPage
       ? t("Common:Settings")
       : isContactsPage
-        ? isContactsInsideGroupPage
-          ? getInsideGroupTitle()
-          : t("Common:Contacts")
+        ? getAccountsTitle()
         : title;
 
   const currentCanCreate = security?.Create;
@@ -918,7 +930,7 @@ export default inject(
     const { getContactsModel, contactsCanCreate } =
       peopleStore.contextOptionsStore;
 
-    const { setSelected: setUsersSelected, contactsTab } = usersStore;
+    const { setSelected: setUsersSelected } = usersStore;
 
     const { isIndexEditingMode, setIsIndexEditingMode, getIndexingArray } =
       indexingStore;
@@ -1069,7 +1081,6 @@ export default inject(
       deleteRefMap,
       showTemplateBadge: isTemplate && !isRoot,
       allowInvitingMembers,
-      contactsTab,
 
       profile: userStore.user,
       profileClicked,

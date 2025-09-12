@@ -154,6 +154,7 @@ const ContextButton = ({
         ignoreChangeView={ignoreChangeView}
         headerOnlyMobile
         header={contextMenuHeader}
+        badgeUrl={contextMenuHeader?.badgeUrl}
       />
     </div>
   );

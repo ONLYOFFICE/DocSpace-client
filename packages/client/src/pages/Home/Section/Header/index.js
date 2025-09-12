@@ -26,7 +26,6 @@
 
 import PublicRoomIconUrl from "PUBLIC_DIR/images/public-room.react.svg?url";
 import LifetimeRoomIconUrl from "PUBLIC_DIR/images/lifetime-room.react.svg?url";
-import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 import RoundedArrowSvgUrl from "PUBLIC_DIR/images/rounded arrow.react.svg?url";
 import SharedLinkSvgUrl from "PUBLIC_DIR/images/icons/16/shared.link.svg?url";
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg?url";
@@ -535,6 +534,7 @@ const SectionHeaderContent = (props) => {
   const contextMenuHeader = React.useMemo(() => {
     const srcLogo = selectedFolder?.logo || null;
     const title = currentTitle || selectedFolder?.title || "";
+    const headerBadgeUrl = titleIcon.includes("public-room") && titleIcon;
 
     const iconUrl = getIcon(
       32,
@@ -568,6 +568,7 @@ const SectionHeaderContent = (props) => {
       small: normalizedLogo?.small,
       color: normalizedLogo?.color,
       cover: normalizedCover,
+      badgeUrl: headerBadgeUrl,
     };
   }, [
     selectedFolder?.logo,

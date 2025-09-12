@@ -235,7 +235,7 @@ class TreeFoldersStore {
     return this.treeFolders.find((x) => x.rootFolderType === FolderType.USER);
   }
 
-  get shareWithMeFolder() {
+  get sharedWithMeFolder() {
     return this.treeFolders.find((x) => x.rootFolderType === FolderType.SHARE);
   }
 
@@ -310,8 +310,8 @@ class TreeFoldersStore {
     return this.recentFolder ? this.recentFolder.id : null;
   }
 
-  get shareWithMeFolderId() {
-    return this.shareWithMeFolder ? this.shareWithMeFolder.id : null;
+  get sharedWithMeFolderId() {
+    return this.sharedWithMeFolder ? this.sharedWithMeFolder.id : null;
   }
 
   get isPersonalRoom() {
@@ -321,10 +321,10 @@ class TreeFoldersStore {
     );
   }
 
-  get isShareWithMeFolder() {
+  get isSharedWithMeFolder() {
     return (
-      this.shareWithMeFolder &&
-      this.shareWithMeFolder.id === this.selectedFolderStore.id
+      this.sharedWithMeFolder &&
+      this.sharedWithMeFolder.id === this.selectedFolderStore.id
     );
   }
 

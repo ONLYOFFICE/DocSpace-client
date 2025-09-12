@@ -84,7 +84,7 @@ const ArticleBodyContent = (props) => {
     displayBanners,
     startDrag,
     setDropTargetPreview,
-    shareWithMeFolderId,
+    sharedWithMeFolderId,
   } = props;
 
   const location = useLocation();
@@ -146,7 +146,7 @@ const ArticleBodyContent = (props) => {
 
           break;
         }
-        case shareWithMeFolderId: {
+        case sharedWithMeFolderId: {
           const shareFilter = FilesFilter.getDefault({
             categoryType: CategoryType.SharedWithMe,
           });
@@ -245,7 +245,7 @@ const ArticleBodyContent = (props) => {
       hashDate,
       roomsFilter,
       recentFolderId,
-      shareWithMeFolderId,
+      sharedWithMeFolderId,
     ],
   );
 
@@ -321,9 +321,9 @@ const ArticleBodyContent = (props) => {
 
     if (
       location.pathname.includes("/shared-with-me") &&
-      activeItemId !== shareWithMeFolderId
+      activeItemId !== sharedWithMeFolderId
     )
-      return setActiveItemId(shareWithMeFolderId);
+      return setActiveItemId(sharedWithMeFolderId);
 
     if (location.pathname.includes("/accounts") && activeItemId !== "accounts")
       return setActiveItemId("accounts");
@@ -433,7 +433,7 @@ export default inject(
       myFolderId,
       recycleBinFolderId,
       recentFolderId,
-      shareWithMeFolderId,
+      sharedWithMeFolderId,
       favoritesFolderId,
     } = treeFoldersStore;
     const selectedFolderId = selectedFolderStore.id;
@@ -474,7 +474,7 @@ export default inject(
       recycleBinFolderId,
       rootFolderId,
       recentFolderId,
-      shareWithMeFolderId,
+      sharedWithMeFolderId,
 
       setIsLoading,
 

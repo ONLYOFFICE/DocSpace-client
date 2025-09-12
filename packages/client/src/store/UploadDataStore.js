@@ -631,7 +631,7 @@ class UploadDataStore {
   };
 
   startConversion = async (t, isOpen = false) => {
-    const { isRecentFolder, isFavoritesFolder, isShareWithMeFolder } =
+    const { isRecentFolder, isFavoritesFolder, isSharedWithMeFolder } =
       this.treeFoldersStore;
 
     if (!this.converted) return;
@@ -639,7 +639,7 @@ class UploadDataStore {
     const { storeOriginalFiles } = this.filesSettingsStore;
 
     const isSortedFolder =
-      isRecentFolder || isFavoritesFolder || isShareWithMeFolder;
+      isRecentFolder || isFavoritesFolder || isSharedWithMeFolder;
     const needToRefreshFilesList = !isSortedFolder || !storeOriginalFiles;
 
     runInAction(() => (this.converted = false));

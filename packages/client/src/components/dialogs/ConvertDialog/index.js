@@ -70,7 +70,7 @@ const ConvertDialogComponent = (props) => {
     rootFoldersTitles,
     isRecentFolder,
     isFavoritesFolder,
-    isShareWithMeFolder,
+    isSharedWithMeFolder,
 
     createNewIfExist,
     isUploadAction,
@@ -94,10 +94,10 @@ const ConvertDialogComponent = (props) => {
   let rootFolderTitle = "";
   const convertSingleFile = !!convertItem;
   const sortedFolder =
-    isRecentFolder || isFavoritesFolder || isShareWithMeFolder;
+    isRecentFolder || isFavoritesFolder || isSharedWithMeFolder;
 
   if (convertSingleFile && sortedFolder) {
-    rootFolderTitle = isShareWithMeFolder
+    rootFolderTitle = isSharedWithMeFolder
       ? t("Common:MyDocuments")
       : rootFoldersTitles[convertItem.rootFolderType]?.title;
   }
@@ -261,7 +261,7 @@ export default inject(
       rootFoldersTitles,
       isRecentFolder,
       isFavoritesFolder,
-      isShareWithMeFolder,
+      isSharedWithMeFolder,
     } = treeFoldersStore;
     const {
       convertUploadedFiles,
@@ -295,7 +295,7 @@ export default inject(
       rootFoldersTitles,
       isRecentFolder,
       isFavoritesFolder,
-      isShareWithMeFolder,
+      isSharedWithMeFolder,
       createNewIfExist,
       isUploadAction,
       cancelUploadAction,

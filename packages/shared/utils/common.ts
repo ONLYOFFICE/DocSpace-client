@@ -791,11 +791,11 @@ export const sortInDisplayOrder = (folders: TGetFolder[]) => {
   );
   if (myFolder) sorted.push(myFolder);
 
-  const shareWithMeFolder = find(
+  const sharedWithMeFolder = find(
     folders,
     (folder) => folder.current.rootFolderType === FolderType.SHARE,
   );
-  if (shareWithMeFolder) sorted.push(shareWithMeFolder);
+  if (sharedWithMeFolder) sorted.push(sharedWithMeFolder);
 
   const favoritesFolder = find(
     folders,

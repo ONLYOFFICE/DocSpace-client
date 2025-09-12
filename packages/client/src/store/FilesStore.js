@@ -1073,15 +1073,15 @@ class FilesStore {
     const elementTitle = selectionLength && this.selection[0].title;
     const singleElement = selectionLength === 1;
     const filesCount = singleElement ? elementTitle : selectionLength;
-    const { isShareWithMeFolder, isCommonFolder } = this.treeFoldersStore;
+    const { isSharedWithMeFolder, isCommonFolder } = this.treeFoldersStore;
 
     let operationName;
 
-    if (this.authStore.isAdmin && isShareWithMeFolder) {
+    if (this.authStore.isAdmin && isSharedWithMeFolder) {
       operationName = "copy";
     } else if (
       !this.authStore.isAdmin &&
-      (isShareWithMeFolder || isCommonFolder)
+      (isSharedWithMeFolder || isCommonFolder)
     ) {
       operationName = "copy";
     } else {
@@ -2369,7 +2369,7 @@ class FilesStore {
         fileOptions = removeOptions(fileOptions, optionsToRemove);
       }
 
-      if (this.treeFoldersStore.isShareWithMeFolder) {
+      if (this.treeFoldersStore.isSharedWithMeFolder) {
         fileOptions = removeOptions(fileOptions, [
           "mark-as-favorite",
           "remove-from-favorites",
@@ -2888,7 +2888,7 @@ class FilesStore {
       ]);
     }
 
-    if (this.treeFoldersStore.isShareWithMeFolder) {
+    if (this.treeFoldersStore.isSharedWithMeFolder) {
       folderOptions = removeOptions(folderOptions, [
         "mark-as-favorite",
         "remove-from-favorites",
@@ -2975,7 +2975,7 @@ class FilesStore {
 
     // if (isThirdPartyItem) {
 
-    //   if (isShareWithMeFolder) {
+    //   if (isSharedWithMeFolder) {
     //     folderOptions = removeOptions(folderOptions, [
     //       "change-thirdparty-info",
     //     ]);

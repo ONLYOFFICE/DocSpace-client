@@ -95,6 +95,7 @@ const AccountsItems = ({
           isActive={activeItemId === "guests"}
           folderId="accounts_catalog-guests"
           withAnimation
+          isEndOfBlock
         />
       )}
     </>

@@ -165,7 +165,7 @@ export default inject(({ settingsStore, pluginStore }) => {
 
   const withDelete = pluginOptions.delete && !plugin?.system;
 
-  const pluginSettings = plugin?.getAdminPluginSettings();
+  const pluginSettings = plugin?.getAdminPluginSettings?.();
 
   const onClose = () => {
     setSettingsPluginDialogVisible(false);

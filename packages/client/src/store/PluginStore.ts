@@ -168,7 +168,7 @@ class PluginStore {
   updatePluginStatus = (name: string) => {
     const plugin = this.plugins.find((p) => p.name === name);
 
-    const newStatus = plugin?.getStatus();
+    const newStatus = plugin?.getStatus?.();
 
     const pluginIdx = this.plugins.findIndex((p) => p.name === name);
 

@@ -76,7 +76,7 @@ const AccountsItems = ({
         text={t("Common:Groups")}
         linkData={getLinkData("groups")}
         title={t("Common:Groups")}
-        icon={getCatalogIconUrlByType(PageType.account)}
+        icon={getCatalogIconUrlByType(PageType.groups)}
         showText={showText}
         onClick={onClickAction}
         isActive={activeItemId === "groups"}
@@ -89,7 +89,7 @@ const AccountsItems = ({
           text={t("Common:Guests")}
           linkData={getLinkData("guests")}
           title={t("Common:Guests")}
-          icon={getCatalogIconUrlByType(PageType.account)}
+          icon={getCatalogIconUrlByType(PageType.guests)}
           showText={showText}
           onClick={onClickAction}
           isActive={activeItemId === "guests"}

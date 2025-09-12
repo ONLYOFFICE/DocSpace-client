@@ -45,12 +45,18 @@ import {
 import ArticleWrapper from "./components/ArticleWrapper";
 
 const ClientArticle = React.memo(
-  ({ withMainButton, showArticleLoader, isInfoPanelVisible }) => {
+  ({
+    withMainButton,
+    showArticleLoader,
+    isInfoPanelVisible,
+    isAccountsPage,
+  }) => {
     return (
       <ArticleWrapper
         isInfoPanelVisible={isInfoPanelVisible}
         withMainButton={withMainButton}
         showArticleLoader={showArticleLoader}
+        showBackButton={isAccountsPage}
       >
         <Article.Header>
           <ArticleHeaderContent />
@@ -98,6 +104,7 @@ const ClientContent = (props) => {
 
   const isEditor = location.pathname.indexOf("doceditor") !== -1;
   const isFormGallery = location.pathname.split("/").includes("form-gallery");
+  const isAccountsPage = location.pathname.includes("accounts");
 
   React.useEffect(() => {
     loadClientInfo()
@@ -159,6 +166,7 @@ const ClientContent = (props) => {
               setIsHeaderLoading={setIsHeaderLoading}
               setIsFilterLoading={setIsFilterLoading}
               showArticleLoader={showArticleLoader}
+              isAccountsPage={isAccountsPage}
             />
           )
         ) : (
@@ -168,6 +176,7 @@ const ClientContent = (props) => {
             setIsHeaderLoading={setIsHeaderLoading}
             setIsFilterLoading={setIsFilterLoading}
             showArticleLoader={showArticleLoader}
+            isAccountsPage={isAccountsPage}
           />
         )
       ) : null}

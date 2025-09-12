@@ -85,7 +85,7 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
 
     // Start animation if withAnimation is true
     if (withAnimation) {
-      if (preventRepeatedAnimation && isActive) return;
+      // if (preventRepeatedAnimation && isActive) return;
       triggerAnimation();
     }
   };

@@ -43,6 +43,7 @@ import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 
 import BackupStore from "SRC_DIR/store/BackupStore";
 import PaymentStore from "SRC_DIR/store/PaymentStore";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
 
 export type UseBackupProps = {
@@ -68,6 +69,8 @@ export type UseBackupProps = {
   isInitialLoading?: BackupStore["isInitialLoading"];
   isInitialError?: BackupStore["isInitialError"];
   isEmptyContentBeforeLoader?: BackupStore["isEmptyContentBeforeLoader"];
+
+  addAbortControllers?: SettingsStore["addAbortControllers"];
 };
 
 const useBackup = ({
@@ -93,6 +96,8 @@ const useBackup = ({
   isInitialLoading,
   isInitialError,
   isEmptyContentBeforeLoader,
+
+  addAbortControllers,
 }: UseBackupProps) => {
   const { periodsObject, weekdaysLabelArray } = useDefaultOptions(
     t,
@@ -105,17 +110,36 @@ const useBackup = ({
 
       getProgress?.(t);
 
+      // Create individual abort controllers for each request
+      const thirdPartyController = new AbortController();
+      const backupStorageController = new AbortController();
+      const storageRegionsController = new AbortController();
+      const backupsCountController = new AbortController();
+
+      addAbortControllers?.([
+        thirdPartyController,
+        backupStorageController,
+        storageRegionsController,
+        backupsCountController,
+      ]);
+
       const baseRequests = [
-        getSettingsThirdParty(),
-        getBackupStorage(),
-        getStorageRegions(),
+        getSettingsThirdParty(thirdPartyController.signal),
+        getBackupStorage(false, backupStorageController.signal),
+        getStorageRegions(storageRegionsController.signal),
       ];
 
       const optionalRequests = [];
 
       if (isBackupPaid) {
         if (maxFreeBackups && maxFreeBackups > 0) {
-          baseRequests.push(getBackupsCount());
+          baseRequests.push(
+            getBackupsCount(
+              undefined,
+              undefined,
+              backupsCountController.signal,
+            ),
+          );
         }
 
         optionalRequests.push(setServiceQuota?.());
@@ -134,6 +158,13 @@ const useBackup = ({
       }
       setIsInited?.(true);
     } catch (error) {
+      if (
+        error instanceof Error &&
+        (error.name === "CanceledError" || error.message === "canceled")
+      ) {
+        return;
+      }
+
       toastr.error(error as Error);
     }
     setIsEmptyContentBeforeLoader?.(false);
@@ -157,17 +188,38 @@ const useBackup = ({
 
       getProgress?.(t);
 
+      // Create individual abort controllers for each request
+      const thirdPartyController = new AbortController();
+      const backupScheduleController = new AbortController();
+      const backupStorageController = new AbortController();
+      const storageRegionsController = new AbortController();
+      const backupsCountController = new AbortController();
+
+      addAbortControllers?.([
+        thirdPartyController,
+        backupScheduleController,
+        backupStorageController,
+        storageRegionsController,
+        backupsCountController,
+      ]);
+
       const baseRequests: (Promise<any> | undefined)[] = [
-        getSettingsThirdParty(),
-        getBackupSchedule(),
-        getBackupStorage(),
-        getStorageRegions(),
+        getSettingsThirdParty(thirdPartyController.signal),
+        getBackupSchedule(undefined, backupScheduleController.signal),
+        getBackupStorage(undefined, backupStorageController.signal),
+        getStorageRegions(storageRegionsController.signal),
       ];
 
       const optionalRequests = [];
       if (isBackupPaid) {
         if (maxFreeBackups && maxFreeBackups > 0) {
-          baseRequests.push(getBackupsCount());
+          baseRequests.push(
+            getBackupsCount(
+              undefined,
+              undefined,
+              backupsCountController.signal,
+            ),
+          );
         }
         optionalRequests.push(setServiceQuota?.());
         optionalRequests.push(fetchPayerInfo?.());
@@ -195,6 +247,13 @@ const useBackup = ({
 
       setDefaultOptions?.(periodsObject, weekdaysLabelArray);
     } catch (error) {
+      if (
+        error instanceof Error &&
+        (error.name === "CanceledError" || error.message === "canceled")
+      ) {
+        return;
+      }
+
       setErrorInformation?.(error, t);
       setIsInitialError?.(true);
       toastr.error(error as Error);
@@ -220,10 +279,21 @@ const useBackup = ({
     try {
       getProgress?.(t);
 
+      // Create individual abort controllers for each request
+      const thirdPartyController = new AbortController();
+      const backupStorageController = new AbortController();
+      const storageRegionsController = new AbortController();
+
+      addAbortControllers?.([
+        thirdPartyController,
+        backupStorageController,
+        storageRegionsController,
+      ]);
+
       const [account, backupStorage, resStorageRegions] = await Promise.all([
-        getSettingsThirdParty(),
-        getBackupStorage(isManagement()),
-        getStorageRegions(),
+        getSettingsThirdParty(thirdPartyController.signal),
+        getBackupStorage(isManagement(), backupStorageController.signal),
+        getStorageRegions(storageRegionsController.signal),
       ]);
 
       if (account) setConnectedThirdPartyAccount?.(account);
@@ -232,11 +302,17 @@ const useBackup = ({
 
       setIsInitialLoading?.(false);
     } catch (error) {
+      if (
+        error instanceof Error &&
+        (error.name === "CanceledError" || error.message === "canceled")
+      ) {
+        return;
+      }
+
       toastr.error(error as Error);
     }
   }, [
     getProgress,
-
     setConnectedThirdPartyAccount,
     setThirdPartyStorage,
     setStorageRegions,

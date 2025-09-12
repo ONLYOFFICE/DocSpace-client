@@ -47,6 +47,8 @@ export type UseDeveloperToolsProps = {
   setIsInit?: OAuthStore["setIsInit"];
   setErrorOAuth?: OAuthStore["setErrorOAuth"];
   errorOAuth?: OAuthStore["errorOAuth"];
+
+  addAbortControllers?: SettingsStore["addAbortControllers"];
 };
 
 const useDeveloperTools = ({
@@ -58,6 +60,7 @@ const useDeveloperTools = ({
   setIsInit,
   setErrorOAuth,
   errorOAuth,
+  addAbortControllers,
 }: UseDeveloperToolsProps) => {
   const [listItems, setListItems] = useState<TApiKey[]>([]);
   const [permissions, setPermissions] = useState<string[]>([]);
@@ -89,19 +92,33 @@ const useDeveloperTools = ({
   }, [fetchClients, fetchScopes, isInit, setIsInit]);
 
   const getKeysData = React.useCallback(async () => {
+    const ApiKeysAbortController = new AbortController();
+    const ApiKeyPermissionsAbortController = new AbortController();
+    addAbortControllers?.([
+      ApiKeysAbortController,
+      ApiKeyPermissionsAbortController,
+    ]);
+
     try {
       const [keys, permissionsData] = await Promise.all([
-        getApiKeys(),
-        getApiKeyPermissions(),
+        getApiKeys(ApiKeysAbortController.signal),
+        getApiKeyPermissions(ApiKeyPermissionsAbortController.signal),
       ]);
 
       setListItems(keys);
       setPermissions(permissionsData);
     } catch (err) {
+      if (
+        err instanceof Error &&
+        (err.name === "CanceledError" || err.message === "canceled")
+      ) {
+        return;
+      }
+
       toastr.error(err as Error);
       setErrorKeys(err as Error);
     }
-  }, [getApiKeys, getApiKeyPermissions]);
+  }, [getApiKeys, getApiKeyPermissions, addAbortControllers]);
 
   const getDeveloperToolsInitialValue = React.useCallback(async () => {
     const actions = [];

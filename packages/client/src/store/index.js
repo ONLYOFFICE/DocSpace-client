@@ -118,8 +118,8 @@ const backupStore = new BackupStore(
 );
 const commonStore = new CommonStore(settingsStore);
 
-const ssoStore = new SsoFormStore();
-const ldapStore = new LdapFormStore(currentQuotaStore);
+const ssoStore = new SsoFormStore(settingsStore);
+const ldapStore = new LdapFormStore(currentQuotaStore, settingsStore);
 
 const tagsStore = new TagsStore();
 
@@ -336,7 +336,10 @@ const createEditRoomStore = new CreateEditRoomStore(
 );
 
 const webhooksStore = new WebhooksStore(settingsStore);
-const importAccountsStore = new ImportAccountsStore(currentQuotaStore);
+const importAccountsStore = new ImportAccountsStore(
+  currentQuotaStore,
+  settingsStore,
+);
 const storageManagement = new StorageManagement(
   filesStore,
   peopleStore,
@@ -345,7 +348,7 @@ const storageManagement = new StorageManagement(
   settingsStore,
 );
 
-const oauthStore = new OAuthStore(userStore, storageManagement);
+const oauthStore = new OAuthStore(userStore, settingsStore);
 
 const campaignsStore = new CampaignsStore(settingsStore, userStore);
 

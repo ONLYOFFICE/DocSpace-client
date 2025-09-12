@@ -24,8 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
+import axios from "axios";
 
+import { SettingsStore } from "./SettingsStore";
 import api from "../api";
 import { TTfaType } from "../api/settings/types";
 
@@ -38,6 +40,8 @@ class TfaStore {
 
   backupCodes: string[] = [];
 
+  settingsStore: SettingsStore = {} as SettingsStore;
+
   tfaAndroidAppUrl =
     "https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2";
 
@@ -46,28 +50,48 @@ class TfaStore {
   tfaWinAppUrl =
     "https://www.microsoft.com/ru-ru/p/authenticator/9wzdncrfj3rj?rtc=1&activetab=pivot:overviewtab";
 
-  constructor() {
+  constructor(settingsStore: SettingsStore) {
+    this.settingsStore = settingsStore;
     makeAutoObservable(this);
   }
 
   getTfaType = async () => {
-    const res = await api.settings.getTfaSettings();
-    const sms = res[0].enabled;
-    const app = res[1].enabled;
+    const abortController = new AbortController();
+    this.settingsStore.addAbortControllers(abortController);
 
-    const type = sms ? "sms" : app ? "app" : "none";
-    this.tfaSettings = type;
-    this.smsAvailable = res[0].avaliable;
-    this.appAvailable = res[1].avaliable;
+    try {
+      const res = await api.settings.getTfaSettings(abortController.signal);
+      const sms = res[0].enabled;
+      const app = res[1].enabled;
 
-    return type;
+      const type = sms ? "sms" : app ? "app" : "none";
+      this.tfaSettings = type;
+      this.smsAvailable = res[0].avaliable;
+      this.appAvailable = res[1].avaliable;
+
+      return type;
+    } catch (e) {
+      if (axios.isCancel(e)) return;
+      throw e;
+    }
   };
 
   setTfaSettings = async (type: TTfaType) => {
-    this.tfaSettings = type;
-    const res = await api.settings.setTfaSettings(type);
+    const abortController = new AbortController();
+    this.settingsStore.addAbortControllers(abortController);
 
-    return res;
+    try {
+      this.tfaSettings = type;
+      const res = await api.settings.setTfaSettings(
+        type,
+        abortController.signal,
+      );
+
+      return res;
+    } catch (error) {
+      if (axios.isCancel(error)) return;
+      throw error;
+    }
   };
 
   setBackupCodes = (codes: string[]) => {

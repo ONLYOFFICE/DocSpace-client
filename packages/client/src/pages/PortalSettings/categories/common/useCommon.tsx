@@ -42,7 +42,6 @@ export type UseCommonProps = {
   isLoaded?: CommonStore["isLoaded"];
 
   cultures?: SettingsStore["cultures"];
-  getPortalCultures?: SettingsStore["getPortalCultures"];
 };
 
 const useCommon = ({
@@ -56,7 +55,6 @@ const useCommon = ({
   isLoaded,
 
   cultures,
-  getPortalCultures,
 }: UseCommonProps) => {
   const getCustomizationData = useCallback(
     async (
@@ -68,15 +66,16 @@ const useCommon = ({
     ) => {
       if (isLoaded) return;
 
-      console.log("page", page);
       if (isMobileView && page) {
         await loadBaseInfo?.(page);
         if (page === "welcome-page-settings") {
           await getGreetingSettingsIsDefault?.();
         }
       } else if (!isMobileView && !page) {
-        await loadBaseInfo?.("general");
-        await getGreetingSettingsIsDefault?.();
+        await Promise.all([
+          loadBaseInfo?.("general"),
+          getGreetingSettingsIsDefault?.(),
+        ]);
       }
       setIsLoaded?.(true);
     },
@@ -84,7 +83,6 @@ const useCommon = ({
       isMobileView,
       loadBaseInfo,
       getGreetingSettingsIsDefault,
-      getPortalCultures,
       setIsLoaded,
       isLoaded,
     ],
@@ -100,7 +98,6 @@ const useCommon = ({
   );
 
   const getCommonInitialValue = React.useCallback(async () => {
-    console.log("getCommonInitialValue");
     const actions = [];
     if (window.location.pathname.includes("language-and-time-zone"))
       actions.push(getCustomizationData("language-and-time-zone"));

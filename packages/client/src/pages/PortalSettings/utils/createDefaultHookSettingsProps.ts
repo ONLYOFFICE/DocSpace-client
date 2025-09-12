@@ -129,6 +129,7 @@ export const createDefaultHookSettingsProps = ({
     fetchPayerInfo: currentTariffStatusStore?.fetchPayerInfo,
     setBackupsCount: backupStore?.setBackupsCount,
     setIsInited: backupStore?.setIsInited,
+    addAbortControllers: settingsStore?.addAbortControllers,
   },
   integration: {
     isSSOAvailable: currentQuotaStore?.isSSOAvailable,
@@ -163,6 +164,7 @@ export const createDefaultHookSettingsProps = ({
     setIsInit: oauthStore?.setIsInit,
     setErrorOAuth: oauthStore?.setErrorOAuth,
     errorOAuth: oauthStore?.errorOAuth,
+    addAbortControllers: settingsStore?.addAbortControllers,
   },
   deleteData: {
     getPortalOwner: settingsStore?.getPortalOwner,

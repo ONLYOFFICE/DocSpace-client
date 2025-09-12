@@ -70,7 +70,7 @@ const useIntegration = ({
     useState<TDocServiceLocation>();
 
   const getLDAPData = useCallback(async () => {
-    isLdapAvailable && (await loadLDAP?.(t));
+    await loadLDAP?.(t);
   }, [isLdapAvailable, loadLDAP, t]);
 
   const getSSOData = useCallback(async () => {

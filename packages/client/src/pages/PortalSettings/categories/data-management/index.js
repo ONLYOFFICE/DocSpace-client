@@ -68,6 +68,7 @@ const DataManagementWrapper = (props) => {
     currentQuotaStore,
     paymentStore,
     currentTariffStatusStore,
+    settingsStore,
   } = props;
 
   const navigate = useNavigate();
@@ -84,6 +85,7 @@ const DataManagementWrapper = (props) => {
     currentQuotaStore,
     paymentStore,
     currentTariffStatusStore,
+    settingsStore,
   });
 
   const {
@@ -259,6 +261,7 @@ export const Component = inject(
       currentQuotaStore,
       paymentStore,
       currentTariffStatusStore,
+      settingsStore,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(DataManagementWrapper)));

@@ -100,6 +100,13 @@ const useDataImport = ({
         }
       }
     } catch (error) {
+      if (
+        error instanceof Error &&
+        (error.name === "CanceledError" || error.message === "canceled")
+      ) {
+        return;
+      }
+
       toastr.error(error as string);
     }
   }, [

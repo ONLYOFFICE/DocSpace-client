@@ -1,4 +1,5 @@
 import { makeAutoObservable, runInAction } from "mobx";
+import axios from "axios";
 
 import api from "@docspace/shared/api";
 import {
@@ -21,6 +22,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { Nullable, TTranslation } from "@docspace/shared/types";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import EnableReactSvgUrl from "PUBLIC_DIR/images/enable.react.svg?url";
 import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
@@ -39,6 +41,8 @@ export type ViewAsType = "table" | "row";
 
 class OAuthStore {
   userStore: Nullable<UserStore> = null;
+
+  settingsStore: Nullable<SettingsStore> = null;
 
   viewAs: ViewAsType = "table";
 
@@ -94,8 +98,9 @@ class OAuthStore {
 
   errorOAuth: Error | null = null;
 
-  constructor(userStore: UserStore) {
+  constructor(userStore: UserStore, settingsStore: SettingsStore) {
     this.userStore = userStore;
+    this.settingsStore = settingsStore;
 
     makeAutoObservable(this);
   }
@@ -231,9 +236,16 @@ class OAuthStore {
   fetchClients = async () => {
     await this.setJwtToken();
 
+    const clientListAbortController = new AbortController();
+    this.settingsStore?.addAbortControllers(clientListAbortController);
+
     try {
       this.setClientsIsLoading(true);
-      const clientList: IClientListProps = await getClientList(0, PAGE_LIMIT);
+      const clientList: IClientListProps = await getClientList(
+        0,
+        PAGE_LIMIT,
+        clientListAbortController.signal,
+      );
 
       const fetchUsers = async () => {
         const { id, displayName, avatarSmall } = this.userStore!.user!;
@@ -244,7 +256,12 @@ class OAuthStore {
           .filter((c, idx, arr) => arr.indexOf(c) === idx);
 
         const users = await Promise.all(
-          newUsers.map((u) => api.people.getUserById(u)),
+          newUsers.map((u) => {
+            const controller = new AbortController();
+            this.settingsStore?.addAbortControllers(controller);
+
+            return api.people.getUserById(u, controller.signal);
+          }),
         );
 
         clientList.data.forEach((client) => {
@@ -283,6 +300,8 @@ class OAuthStore {
       this.setClientsIsLoading(false);
     } catch (e) {
       const err = e as TData;
+      if (axios.isCancel(err)) return;
+
       toastr.error(err);
       throw new Error(err.message);
     }
@@ -471,14 +490,20 @@ class OAuthStore {
   };
 
   fetchScopes = async () => {
+    const abortController = new AbortController();
+    this.settingsStore?.addAbortControllers(abortController);
+
     try {
       await this.setJwtToken();
 
-      const scopes = await getScopeList();
+      const scopes = await getScopeList(abortController.signal);
 
       this.scopes = scopes;
     } catch (e) {
       const err = e as TData;
+
+      if (axios.isCancel(err)) return;
+
       toastr.error(err);
       throw new Error(err.message);
     }

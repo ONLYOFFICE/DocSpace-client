@@ -89,13 +89,14 @@ fi
 echo
 echo "Starting backend server..."
 cd "$BACKEND_DIR"
-npm run dev > backend.log 2>&1 &
+npm run start > backend.log 2>&1 &
 BACKEND_PID=$!
 echo "Backend server started with PID: $BACKEND_PID"
 
 echo "Starting frontend server..."
 cd "$FRONTEND_DIR"
-npm run dev > frontend.log 2>&1 &
+npm run build
+npm run start > frontend.log 2>&1 &
 FRONTEND_PID=$!
 echo "Frontend server started with PID: $FRONTEND_PID"
 

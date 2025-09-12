@@ -398,7 +398,8 @@ const ArticleBodyContent = (props) => {
       !firstLoad &&
       campaigns.length > 0 &&
       !isFrame &&
-      displayBanners ? (
+      displayBanners &&
+      !isAccountsPage ? (
         <Banner />
       ) : null}
     </>

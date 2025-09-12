@@ -90,7 +90,6 @@ const ClientContent = (props) => {
     showMenu,
     isFrame,
     isInfoPanelVisible,
-    withMainButton,
     t,
 
     setIsFilterLoading,
@@ -152,6 +151,8 @@ const ClientContent = (props) => {
   //     hideLoader();
   //   }
   // }, [isLoading]);
+
+  const withMainButton = !isAccountsPage;
 
   return (
     <>
@@ -218,8 +219,6 @@ export const Client = inject(
       showArticleLoader,
     } = clientLoadingStore;
 
-    const withMainButton = true; // !isVisitor; // Allways true for any type of users
-
     const { isInit: isInitPlugins, initPlugins } = pluginStore;
 
     const { isVisible } = infoPanelStore;
@@ -237,7 +236,6 @@ export const Client = inject(
       isEncryption: isEncryptionSupport,
       isLoaded: authStore.isLoaded && clientLoadingStore.isLoaded,
       setIsLoaded: clientLoadingStore.setIsLoaded,
-      withMainButton,
       isInfoPanelVisible: isVisible && !isProfile,
       setIsFilterLoading: setIsSectionFilterLoading,
       setIsHeaderLoading: setIsSectionHeaderLoading,

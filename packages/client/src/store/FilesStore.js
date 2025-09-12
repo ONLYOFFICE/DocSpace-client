@@ -1073,13 +1073,13 @@ class FilesStore {
     const elementTitle = selectionLength && this.selection[0].title;
     const singleElement = selectionLength === 1;
     const filesCount = singleElement ? elementTitle : selectionLength;
-    const { isShareFolder, isCommonFolder } = this.treeFoldersStore;
+    const { isShareWithMeFolder, isCommonFolder } = this.treeFoldersStore;
 
     let operationName;
 
-    if (this.authStore.isAdmin && isShareFolder) {
+    if (this.authStore.isAdmin && isShareWithMeFolder) {
       operationName = "copy";
-    } else if (!this.authStore.isAdmin && (isShareFolder || isCommonFolder)) {
+    } else if (!this.authStore.isAdmin && (isShareWithMeFolder || isCommonFolder)) {
       operationName = "copy";
     } else {
       operationName = "move";
@@ -2958,7 +2958,7 @@ class FilesStore {
 
     // if (isThirdPartyItem) {
 
-    //   if (isShareFolder) {
+    //   if (isShareWithMeFolder) {
     //     folderOptions = removeOptions(folderOptions, [
     //       "change-thirdparty-info",
     //     ]);

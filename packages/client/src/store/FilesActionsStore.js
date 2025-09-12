@@ -2540,7 +2540,7 @@ class FilesActionStore {
       isFavoritesFolder,
       isRecycleBinFolder,
       isPrivacyFolder,
-      isShareFolder,
+      isShareWithMeFolder,
       isRoomsFolder,
       isArchiveFolder,
       isRecentFolder,
@@ -2557,7 +2557,8 @@ class FilesActionStore {
 
     if (isPrivacyFolder) return this.getPrivacyFolderOption(itemsCollection, t);
 
-    if (isShareFolder) return this.getShareFolderOptions(itemsCollection, t);
+    if (isShareWithMeFolder)
+      return this.getShareFolderOptions(itemsCollection, t);
 
     if (isRecentFolder) return this.getRecentFolderOptions(itemsCollection, t);
 

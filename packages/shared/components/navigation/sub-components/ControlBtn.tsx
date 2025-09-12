@@ -81,6 +81,7 @@ const ControlButtons = ({
   isContextButtonVisible,
 
   isPlusButtonVisible,
+  contextMenuHeader,
 }: TControlButtonProps) => {
   const toggleInfoPanelAction = () => {
     toggleInfoPanel?.();
@@ -146,14 +147,16 @@ const ControlButtons = ({
         className="option-button"
         getData={getContextOptionsFolder}
         withMenu={withMenu}
-        title={titles?.actions}
+        title={title}
         isTrashFolder={isTrashFolder}
         isMobile={isMobile || false}
+        contextMenuHeader={contextMenuHeader}
         onCloseDropBox={onCloseDropBox}
         onContextOptionsClick={onContextOptionsClick}
         contextButtonAnimation={contextButtonAnimation}
         guidAnimationVisible={guidAnimationVisible}
         setGuidAnimationVisible={setGuidAnimationVisible}
+        ignoreChangeView={isMobile}
       />
     );
   };

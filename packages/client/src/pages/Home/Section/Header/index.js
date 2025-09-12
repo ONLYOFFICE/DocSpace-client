@@ -26,6 +26,7 @@
 
 import PublicRoomIconUrl from "PUBLIC_DIR/images/public-room.react.svg?url";
 import LifetimeRoomIconUrl from "PUBLIC_DIR/images/lifetime-room.react.svg?url";
+import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 import RoundedArrowSvgUrl from "PUBLIC_DIR/images/rounded arrow.react.svg?url";
 import SharedLinkSvgUrl from "PUBLIC_DIR/images/icons/16/shared.link.svg?url";
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg?url";
@@ -101,6 +102,7 @@ const SectionHeaderContent = (props) => {
     isEmptyArchive,
 
     isRoom,
+    roomType,
     isGroupMenuBlocked,
 
     onClickBack,
@@ -181,6 +183,7 @@ const SectionHeaderContent = (props) => {
     setChangePasswordVisible,
     setChangeAvatarVisible,
     setChangeNameVisible,
+    getIcon,
   } = props;
 
   const location = useLocation();
@@ -527,6 +530,58 @@ const SectionHeaderContent = (props) => {
           : t("Common:Contacts")
         : title;
 
+  const titleIcon = getTitleIcon();
+
+  const contextMenuHeader = React.useMemo(() => {
+    const srcLogo = selectedFolder?.logo || null;
+    const title = currentTitle || selectedFolder?.title || "";
+
+    const iconUrl = getIcon(
+      32,
+      selectedFolder?.fileExst,
+      selectedFolder?.providerKey,
+      selectedFolder?.contentLength,
+      isRoom ? roomType : undefined,
+      selectedFolder?.isArchive,
+      selectedFolder?.type,
+    );
+
+    const normalizedCover =
+      typeof srcLogo?.cover === "string"
+        ? { data: srcLogo?.cover, id: "" }
+        : srcLogo?.cover;
+
+    const normalizedLogo =
+      typeof srcLogo === "object" &&
+      srcLogo &&
+      !srcLogo?.medium &&
+      srcLogo?.original
+        ? { ...srcLogo, medium: srcLogo?.original }
+        : srcLogo;
+
+    return {
+      title,
+      icon: normalizedLogo?.medium || iconUrl,
+      original: normalizedLogo?.original,
+      large: normalizedLogo?.large,
+      medium: normalizedLogo?.medium,
+      small: normalizedLogo?.small,
+      color: normalizedLogo?.color,
+      cover: normalizedCover,
+    };
+  }, [
+    selectedFolder?.logo,
+    selectedFolder?.title,
+    currentTitle,
+    isRoom,
+    getIcon,
+    selectedFolder?.fileExst,
+    selectedFolder?.providerKey,
+    selectedFolder?.contentLength,
+    selectedFolder?.isArchive,
+    selectedFolder?.type,
+  ]);
+
   const currentCanCreate = security?.Create;
 
   const currentRootRoomTitle =
@@ -561,8 +616,6 @@ const SectionHeaderContent = (props) => {
 
   const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
   const burgerLogo = getLogoUrl(WhiteLabelLogoType.LeftMenu, !theme.isBase);
-
-  const titleIcon = getTitleIcon();
 
   const titleIconTooltip = getTitleIconTooltip();
 
@@ -715,6 +768,7 @@ const SectionHeaderContent = (props) => {
                   !allowInvitingMembers ? isPlusButtonVisible() : true
                 }
                 showBackButton={isProfile}
+                contextMenuHeader={contextMenuHeader}
               />
               {showSignInButton ? (
                 <Button
@@ -973,6 +1027,7 @@ export default inject(
       isRootFolder: isPublicRoom && !folderPath?.length ? true : isRoot,
       title,
       isRoom,
+      roomType,
 
       navigationPath: folderPath,
 
@@ -1081,6 +1136,7 @@ export default inject(
       setChangePasswordVisible,
       setChangeAvatarVisible,
       setChangeNameVisible,
+      getIcon: filesStore.filesSettingsStore.getIcon,
     };
   },
 )(

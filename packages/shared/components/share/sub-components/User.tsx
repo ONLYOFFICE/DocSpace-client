@@ -39,6 +39,8 @@ import DefaultUserPhotoUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82
 
 import { getUserType, getUserTypeTranslation } from "../../../utils/common";
 import { TUser } from "../../../api/people/types";
+import { isNextImage } from "../../../utils/typeGuards";
+import type { StaticImageData } from "../../../types";
 
 import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
 import { ComboBox, type TOption } from "../../combobox";
@@ -92,12 +94,16 @@ export const User = ({
   const type = getUserType(user as unknown as TUser);
   const typeLabel = getUserTypeTranslation(type, t);
 
+  const userPhotoUrl = isNextImage(DefaultUserPhotoUrl)
+    ? (DefaultUserPhotoUrl as StaticImageData).src
+    : DefaultUserPhotoUrl;
+
   const userAvatar =
     "hasAvatar" in user && user.hasAvatar
       ? user.avatar
       : "isGroup" in user && user.isGroup
         ? ""
-        : DefaultUserPhotoUrl;
+        : userPhotoUrl;
 
   const withTooltip = "isOwner" in user && (user.isOwner || user.isAdmin);
 

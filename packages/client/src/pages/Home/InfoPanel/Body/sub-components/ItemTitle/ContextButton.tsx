@@ -29,6 +29,7 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { TRoom } from "@docspace/shared/api/rooms/types";
+import { isMobile } from "@docspace/shared/utils";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import {
   ContextMenu,
@@ -98,6 +99,8 @@ const RoomsContextBtn = ({
         model={data}
         withBackdrop
         baseZIndex={310}
+        headerOnlyMobile
+        ignoreChangeView={isMobile()}
       />
     </div>
   );

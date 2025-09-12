@@ -233,19 +233,19 @@
   gap: 16px;
 }
 
-.buttonsBlockContainer {
+.toolCallFooter {
   width: 100%;
 
   display: flex;
-  gap: 8px;
+  flex-direction: column;
 
-  @include mixins.mobile {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  gap: 16px;
 
-    .denyButton {
-      grid-column: 1 / -1;
-    }
+  .buttonsBlockContainer {
+    width: 100%;
+
+    display: flex;
+    gap: 8px;
   }
 }
 

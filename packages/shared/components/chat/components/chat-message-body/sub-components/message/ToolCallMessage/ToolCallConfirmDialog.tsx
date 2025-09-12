@@ -35,6 +35,7 @@ import { updateToolsPermission } from "../../../../../../../api/ai";
 
 import { Text } from "../../../../../../text";
 import { Button, ButtonSize } from "../../../../../../button";
+import { Checkbox } from "../../../../../../checkbox";
 
 import styles from "../../../ChatMessageBody.module.scss";
 import { ToolCall } from "./ToolCall";
@@ -51,11 +52,17 @@ export const ToolCallConfirmDialog = ({
   content,
   onClose,
 }: ToolCallConfirmDialogProps) => {
+  const [alwaysAllow, setAlwaysAllow] = React.useState(false);
   const { t } = useTranslation(["Common"]);
 
   const onClickAction = (decision: ToolsPermission) => {
     if (content.callId) {
-      updateToolsPermission(content.callId, decision);
+      updateToolsPermission(
+        content.callId,
+        alwaysAllow && decision === ToolsPermission.Allow
+          ? ToolsPermission.AlwaysAllow
+          : decision,
+      );
     }
 
     onClose();
@@ -81,7 +88,7 @@ export const ToolCallConfirmDialog = ({
 
       <ModalDialog.Body>
         <div className={styles.toolCallManage}>
-          <Text>AI would like to use this tool</Text>
+          <Text>{t("Common:AIWouldLikeToUseThisTool")}</Text>
           <ToolCall
             content={content}
             status={ToolCallStatus.Confirmation}
@@ -95,28 +102,28 @@ export const ToolCallConfirmDialog = ({
       </ModalDialog.Body>
 
       <ModalDialog.Footer>
-        <div className={styles.buttonsBlockContainer}>
-          <Button
-            primary
-            label={t("Common:AllowAlways")}
-            onClick={() => onClickAction(ToolsPermission.AlwaysAllow)}
-            size={ButtonSize.normal}
-            scale={isMobile()}
+        <div className={styles.toolCallFooter}>
+          <Checkbox
+            isChecked={alwaysAllow}
+            onChange={(e) => setAlwaysAllow(e.target.checked)}
+            label={t("Common:AlwaysAllowToolCall")}
           />
-          <Button
-            primary
-            label={t("Common:AllowOnce")}
-            onClick={() => onClickAction(ToolsPermission.Allow)}
-            scale={isMobile()}
-            size={ButtonSize.normal}
-          />
-          <Button
-            className={styles.denyButton}
-            label={t("Common:Deny")}
-            onClick={() => onClickAction(ToolsPermission.Deny)}
-            size={ButtonSize.normal}
-            scale={isMobile()}
-          />
+          <div className={styles.buttonsBlockContainer}>
+            <Button
+              primary
+              label={t("Common:Allow")}
+              onClick={() => onClickAction(ToolsPermission.Allow)}
+              scale={isMobile()}
+              size={ButtonSize.normal}
+            />
+            <Button
+              className={styles.denyButton}
+              label={t("Common:Deny")}
+              onClick={() => onClickAction(ToolsPermission.Deny)}
+              size={ButtonSize.normal}
+              scale={isMobile()}
+            />
+          </div>
         </div>
       </ModalDialog.Footer>
     </ModalDialog>

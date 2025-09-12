@@ -99,7 +99,7 @@ const ChatMessageBody = ({
   });
 
   const calculateHeight = React.useCallback(() => {
-    if (isMobile()) return;
+    if (!isMobile()) return;
 
     const sectionHeight =
       document.getElementsByClassName("section-wrapper")[0]?.clientHeight || 0;

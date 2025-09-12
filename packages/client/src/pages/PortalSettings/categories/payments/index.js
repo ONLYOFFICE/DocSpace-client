@@ -42,7 +42,13 @@ import usePayments from "./usePayments";
 import { createDefaultHookSettingsProps } from "../../utils/createDefaultHookSettingsProps";
 
 const PaymentsPage = (props) => {
-  const { currentDeviceType, standalone, paymentStore, settingsStore } = props;
+  const {
+    currentDeviceType,
+    standalone,
+    paymentStore,
+    settingsStore,
+    clearAbortControllerArr,
+  } = props;
   const [currentTabId, setCurrentTabId] = useState();
   const location = useLocation();
   const navigate = useNavigate();
@@ -63,6 +69,7 @@ const PaymentsPage = (props) => {
       name: t("TariffPlan"),
       content: <PaymentsSaaS />,
       onClick: async () => {
+        clearAbortControllerArr();
         await getPortalPaymentsData();
       },
     },
@@ -71,6 +78,7 @@ const PaymentsPage = (props) => {
       name: t("Wallet"),
       content: <Wallet />,
       onClick: async () => {
+        clearAbortControllerArr();
         await getWalletData();
       },
     },
@@ -106,12 +114,14 @@ const PaymentsPage = (props) => {
 };
 
 export const Component = inject(({ settingsStore, paymentStore }) => {
-  const { standalone, currentDeviceType } = settingsStore;
+  const { standalone, currentDeviceType, clearAbortControllerArr } =
+    settingsStore;
 
   return {
     standalone,
     currentDeviceType,
     paymentStore,
     settingsStore,
+    clearAbortControllerArr,
   };
 })(observer(PaymentsPage));

@@ -57,6 +57,7 @@ const SecurityWrapper = (props) => {
     settingsStore,
     tfaStore,
     setup,
+    clearAbortControllerArr,
   } = props;
 
   const navigate = useNavigate();
@@ -77,6 +78,7 @@ const SecurityWrapper = (props) => {
       name: t("PortalAccess", { productName: t("Common:ProductName") }),
       content: <AccessPortal />,
       onClick: async () => {
+        clearAbortControllerArr();
         await getAccessPortalData();
       },
     },
@@ -85,6 +87,7 @@ const SecurityWrapper = (props) => {
       name: t("LoginHistoryTitle"),
       content: <LoginHistory />,
       onClick: async () => {
+        clearAbortControllerArr();
         await getLoginHistoryData();
       },
     },
@@ -93,6 +96,7 @@ const SecurityWrapper = (props) => {
       name: t("AuditTrailNav"),
       content: <AuditTrail />,
       onClick: async () => {
+        clearAbortControllerArr();
         await getAuditTrailData();
       },
     },
@@ -154,7 +158,7 @@ export const Component = inject(
     const { isLoadedArticleBody, isLoadedSectionHeader } = common;
     const { resetIsInit } = setup;
 
-    const { isBurgerLoading } = settingsStore;
+    const { isBurgerLoading, clearAbortControllerArr } = settingsStore;
 
     return {
       resetIsInit,
@@ -166,6 +170,7 @@ export const Component = inject(
       settingsStore,
       tfaStore,
       setup,
+      clearAbortControllerArr,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(SecurityWrapper)));

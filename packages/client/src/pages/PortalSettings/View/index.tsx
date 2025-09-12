@@ -55,6 +55,7 @@ import useDataImport from "../categories/data-import/useDataImport";
 import usePayments from "../categories/payments/usePayments";
 import useServices from "../categories/services/useServices";
 import { createDefaultHookSettingsProps } from "../utils/createDefaultHookSettingsProps";
+import { isMainSectionChange } from "../utils/isMainSectionChange";
 
 type TView =
   | "customization"
@@ -96,7 +97,6 @@ const View = ({
   servicesStore,
   currentTariffStatusStore,
 
-  abortControllerArr,
   clearAbortControllerArr,
 }: any) => {
   const location = useLocation();
@@ -104,11 +104,10 @@ const View = ({
   const [currentView, setCurrentView] = React.useState<TView>("");
   const [isLoading, setIsLoading] = React.useState(false);
 
-  const animationStartedRef = useRef(false);
-  const prevCurrentViewRef = React.useRef(currentView);
-  const prevPathRef = useRef<string | null>(null);
-
+  const activeRequestIdRef = useRef(0);
+  const prevPathRef = useRef<string>("");
   const clearAbortControllerArrRef = React.useRef(clearAbortControllerArr);
+  const animationStartedRef = useRef(false);
 
   const isCustomizationPage = location.pathname.includes("customization");
   const isSecurityPage = location.pathname.includes("security");
@@ -146,24 +145,6 @@ const View = ({
     currentTariffStatusStore,
   });
 
-  const activeRequestIdRef = useRef(0);
-
-  const getCurrentSection = (): TView => {
-    if (isCustomizationPage) return "customization";
-    if (isSecurityPage) return "security";
-    if (isRestorePage) return "restore";
-    if (isBackupPage) return "backup";
-    if (isIntegrationPage) return "integration";
-    if (isDataImportPage) return "data-import";
-    if (isStorageManagementPage) return "management";
-    if (isDeveloperToolsPage) return "developer-tools";
-    if (isDeletePage) return "delete-data";
-    if (isPaymentsPage) return "payments";
-    if (isBonusPage) return "bonus";
-    if (isServicesPage) return "services";
-    return "";
-  };
-
   const { getCommonInitialValue } = useCommon(defaultProps.common);
   const { getSecurityInitialValue } = useSecurity(defaultProps.security);
   const { getBackupInitialValue } = useBackup(defaultProps.backup);
@@ -181,8 +162,6 @@ const View = ({
   React.useEffect(() => {
     clearAbortControllerArrRef.current = clearAbortControllerArr;
   }, [clearAbortControllerArr]);
-
-  //console.log("abortControllerArr", abortControllerArr);
 
   useEffect(() => {
     animationStartedRef.current = false;
@@ -231,26 +210,29 @@ const View = ({
   }, [isLoading]);
 
   useEffect(() => {
-    if (prevPathRef.current === location.pathname) {
-      return;
-    }
-    prevPathRef.current = location.pathname;
-
     const getView = async () => {
       const requestId = ++activeRequestIdRef.current;
       try {
-        const currentSection = getCurrentSection();
-        const previousSection = prevCurrentViewRef.current;
+        const currentPath = location.pathname;
+        const previousPath = prevPathRef.current;
 
-        console.log("prevCurrentViewRef.current", previousSection);
-        console.log("currentSection", currentSection);
-        
-        // Update prevCurrentViewRef immediately to prevent race conditions
-        prevCurrentViewRef.current = currentSection;
-        
-        if (previousSection && previousSection !== currentSection) {
-          clearAbortControllerArr();
+        const isMainSectionChanged =
+          !previousPath || isMainSectionChange(currentPath, previousPath);
+        const isSameSectionClick =
+          previousPath && !isMainSectionChanged && currentPath === previousPath;
+
+        prevPathRef.current = currentPath;
+
+        // Only proceed with data loading if it's a main section change
+        if (!isMainSectionChanged && !isSameSectionClick) {
+          if (requestId === activeRequestIdRef.current) {
+            setIsChangePageRequestRunning(false);
+            setIsLoading(false);
+          }
+          return;
         }
+
+        clearAbortControllerArrRef.current();
 
         setIsLoading(true);
         setIsChangePageRequestRunning(true);
@@ -258,76 +240,40 @@ const View = ({
 
         if (isCustomizationPage) {
           view = "customization";
-
-          if (previousSection !== "customization") {
-            await getCommonInitialValue();
-          }
+          await getCommonInitialValue();
         } else if (isSecurityPage) {
           view = "security";
-
-          if (previousSection !== "security") {
-            await getSecurityInitialValue();
-          }
+          await getSecurityInitialValue();
         } else if (isRestorePage) {
           view = "restore";
-
-          if (previousSection !== "restore") {
-            await getBackupInitialValue();
-          }
+          await getBackupInitialValue();
         } else if (isBackupPage) {
           view = "backup";
-
-          if (previousSection !== "backup") {
-            await getBackupInitialValue();
-          }
+          await getBackupInitialValue();
         } else if (isIntegrationPage) {
           view = "integration";
-
-          if (previousSection !== "integration") {
-            await getIntegrationInitialValue();
-          }
+          await getIntegrationInitialValue();
         } else if (isDataImportPage) {
           view = "data-import";
-
-          if (previousSection !== "data-import") {
-            await getDataImportInitialValue();
-          }
+          await getDataImportInitialValue();
         } else if (isStorageManagementPage) {
           view = "management";
-
-          if (previousSection !== "management") {
-            await init();
-          }
+          await init();
         } else if (isDeveloperToolsPage) {
           view = "developer-tools";
-
-          if (previousSection !== "developer-tools") {
-            await getDeveloperToolsInitialValue();
-          }
+          await getDeveloperToolsInitialValue();
         } else if (isDeletePage) {
           view = "delete-data";
-
-          if (previousSection !== "delete-data") {
-            await getDeleteDataInitialValue();
-          }
+          await getDeleteDataInitialValue();
         } else if (isPaymentsPage) {
           view = "payments";
-
-          if (previousSection !== "payments") {
-            await getPaymentsInitialValue();
-          }
+          await getPaymentsInitialValue();
         } else if (isBonusPage) {
           view = "bonus";
-
-          if (previousSection !== "bonus") {
-            await standaloneInit();
-          }
+          await standaloneInit();
         } else if (isServicesPage) {
           view = "services";
-
-          if (previousSection !== "services") {
-            await getServicesInitialValue();
-          }
+          await getServicesInitialValue();
         }
 
         if (requestId === activeRequestIdRef.current) {
@@ -352,7 +298,7 @@ const View = ({
     };
 
     getView();
-  }, [location.pathname]);
+  }, [location]);
 
   return (
     <LoaderWrapper isLoading={isLoading}>
@@ -397,7 +343,7 @@ export const ViewComponent = inject(
   }: TStore) => {
     const { initSettings: initSettingsCommon } = common;
 
-    const { abortControllerArr, clearAbortControllerArr } = settingsStore;
+    const { clearAbortControllerArr } = settingsStore;
 
     const { setIsChangePageRequestRunning, showHeaderLoader } =
       clientLoadingStore;
@@ -441,7 +387,6 @@ export const ViewComponent = inject(
       isMobileView,
       loadBaseInfo,
 
-      abortControllerArr,
       clearAbortControllerArr,
     };
   },

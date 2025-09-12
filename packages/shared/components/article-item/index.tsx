@@ -67,7 +67,6 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
     item,
     iconNode,
     withAnimation,
-    preventRepeatedAnimation,
   } = props;
 
   // Animation hook
@@ -85,7 +84,6 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
 
     // Start animation if withAnimation is true
     if (withAnimation) {
-      // if (preventRepeatedAnimation && isActive) return;
       triggerAnimation();
     }
   };

@@ -61,6 +61,7 @@ type TabsCommonProps = {
   brandingStore: BrandingStore;
   settingsStore: SettingsStore;
   common: CommonStore;
+  clearAbortControllerArr: SettingsStore["clearAbortControllerArr"];
 };
 
 const TabsCommon = (props: TabsCommonProps) => {
@@ -76,6 +77,7 @@ const TabsCommon = (props: TabsCommonProps) => {
     brandingStore,
     settingsStore,
     common,
+    clearAbortControllerArr,
   } = props;
   const location = useLocation();
   const navigate = useNavigate();
@@ -99,7 +101,10 @@ const TabsCommon = (props: TabsCommonProps) => {
       id: "general",
       name: t("Common:SettingsGeneral"),
       content: <Customization />,
-      onClick: getCustomizationData,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getCustomizationData();
+      },
     },
     {
       id: "appearance",
@@ -114,7 +119,10 @@ const TabsCommon = (props: TabsCommonProps) => {
       id: "branding",
       name: t("Common:Branding"),
       content: <Branding />,
-      onClick: getBrandingData,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getBrandingData();
+      },
     });
   }
 
@@ -170,6 +178,7 @@ export const Component = inject(
     brandingStore,
   }: TStore) => {
     const { setIsLoadedSubmenu, initSettings, isLoadedSubmenu } = common;
+    const { clearAbortControllerArr } = settingsStore;
 
     const { isCommunity } = currentTariffStatusStore;
     const currentDeviceType = settingsStore.currentDeviceType as DeviceType;
@@ -187,6 +196,7 @@ export const Component = inject(
       brandingStore,
       settingsStore,
       common,
+      clearAbortControllerArr,
     };
   },
 )(withLoading(withTranslation("Settings")(observer(TabsCommon))));

@@ -60,6 +60,7 @@ const IntegrationWrapper = (props) => {
     pluginStore,
     filesSettingsStore,
     ldapStore,
+    clearAbortControllerArr,
   } = props;
   const navigate = useNavigate();
 
@@ -101,19 +102,28 @@ const IntegrationWrapper = (props) => {
       id: "sso",
       name: t("SingleSignOn"),
       content: <SsoSettings />,
-      onClick: getSSOData,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getSSOData();
+      },
     },
     {
       id: "third-party-services",
       name: t("Translations:ThirdPartyTitle"),
       content: <ThirdParty openModal={openThirdPartyModal} />,
-      onClick: getThirdPartyData,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getThirdPartyData();
+      },
     },
     {
       id: "smtp-settings",
       name: t("SMTPSettings"),
       content: <SMTPSettings />,
-      onClick: getSMTPSettingsData,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getSMTPSettingsData();
+      },
     },
   ];
 
@@ -126,7 +136,10 @@ const IntegrationWrapper = (props) => {
           initialDocumentServiceData={documentServiceLocationData}
         />
       ),
-      onClick: getDocumentServiceData,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getDocumentServiceData();
+      },
     };
 
     data.push(documentServiceData);
@@ -143,7 +156,10 @@ const IntegrationWrapper = (props) => {
       id: "plugins",
       name: pluginLabel,
       content: <PluginPage />,
-      onClick: getPluginsData,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getPluginsData();
+      },
     });
   }
 
@@ -186,7 +202,12 @@ export const Component = inject(
     filesSettingsStore,
     ldapStore,
   }) => {
-    const { standalone, enablePlugins, currentDeviceType } = settingsStore;
+    const {
+      standalone,
+      enablePlugins,
+      currentDeviceType,
+      clearAbortControllerArr,
+    } = settingsStore;
     const { load: toDefault } = ssoStore;
 
     const { isSSOAvailable } = currentQuotaStore;
@@ -204,6 +225,7 @@ export const Component = inject(
       pluginStore,
       filesSettingsStore,
       ldapStore,
+      clearAbortControllerArr,
     };
   },
 )(

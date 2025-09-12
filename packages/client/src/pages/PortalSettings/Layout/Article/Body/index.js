@@ -320,7 +320,6 @@ const ArticleBodyContent = (props) => {
           style={style}
           $currentColorScheme={currentColorScheme}
           withAnimation
-          preventRepeatedAnimation
         />,
       );
     });

@@ -69,6 +69,7 @@ const DataManagementWrapper = (props) => {
     paymentStore,
     currentTariffStatusStore,
     settingsStore,
+    clearAbortControllerArr,
   } = props;
 
   const navigate = useNavigate();
@@ -149,7 +150,10 @@ const DataManagementWrapper = (props) => {
           isInitialError={isInitialError}
         />
       ),
-      onClick: getManualBackupData,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getManualBackupData();
+      },
     },
     {
       id: "auto-backup",
@@ -163,7 +167,10 @@ const DataManagementWrapper = (props) => {
           isInitialError={isInitialError}
         />
       ),
-      onClick: getAutoBackupData,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getAutoBackupData();
+      },
     },
   ];
 
@@ -244,6 +251,7 @@ export const Component = inject(
 
       currentDeviceType,
       standalone,
+      clearAbortControllerArr,
     } = settingsStore;
 
     const buttonSize =
@@ -262,6 +270,7 @@ export const Component = inject(
       paymentStore,
       currentTariffStatusStore,
       settingsStore,
+      clearAbortControllerArr,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(DataManagementWrapper)));

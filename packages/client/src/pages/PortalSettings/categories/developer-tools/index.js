@@ -57,6 +57,7 @@ const DeveloperToolsWrapper = (props) => {
     settingsStore,
     webhooksStore,
     oauthStore,
+    clearAbortControllerArr,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -108,7 +109,10 @@ const DeveloperToolsWrapper = (props) => {
         id: "oauth",
         name: t("OAuth:OAuth"),
         content: <OAuth error={errorOAuth} />,
-        onClick: getOAuthData,
+        onClick: async () => {
+          clearAbortControllerArr();
+          await getOAuthData();
+        },
       }
     : {};
 
@@ -124,6 +128,7 @@ const DeveloperToolsWrapper = (props) => {
       name: sdkLabel,
       content: <JavascriptSDK />,
       onClick: async () => {
+        clearAbortControllerArr();
         await getJavascriptSDKData();
       },
     },
@@ -138,6 +143,7 @@ const DeveloperToolsWrapper = (props) => {
       name: t("Webhooks:Webhooks"),
       content: <Webhooks />,
       onClick: async () => {
+        clearAbortControllerArr();
         await getWebhooksData();
       },
     },
@@ -154,6 +160,7 @@ const DeveloperToolsWrapper = (props) => {
         />
       ),
       onClick: async () => {
+        clearAbortControllerArr();
         await getKeysData();
       },
     },
@@ -209,7 +216,7 @@ export const Component = inject(
     const identityServerEnabled =
       authStore?.capabilities?.identityServerEnabled;
 
-    const { currentDeviceType } = settingsStore;
+    const { currentDeviceType, clearAbortControllerArr } = settingsStore;
 
     const { isLoadedArticleBody } = common;
 
@@ -221,6 +228,7 @@ export const Component = inject(
       settingsStore,
       webhooksStore,
       oauthStore,
+      clearAbortControllerArr,
     };
   },
 )(observer(DeveloperToolsWrapper));

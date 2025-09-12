@@ -421,7 +421,7 @@ class ProfileActionsStore {
         ? {
             key: "user-menu-accounts",
             icon: CatalogAccountsReactSvgUrl,
-            label: t("Common:Accounts"),
+            label: t("Common:Contacts"),
             onClick: (obj) =>
               this.onAccountsClick(PEOPLE_ROUTE_WITH_FILTER, obj),
             url: PEOPLE_ROUTE_WITH_FILTER,

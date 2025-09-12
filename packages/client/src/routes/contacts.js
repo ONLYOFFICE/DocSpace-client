@@ -42,7 +42,7 @@ import { ViewComponent } from "SRC_DIR/pages/Home/View";
 
 import PrivateRoute from "../components/PrivateRouteWrapper";
 
-export const contanctsRoutes = [
+export const contactsRoutes = [
   {
     path: CONTACTS_ROUTE,
     element: (

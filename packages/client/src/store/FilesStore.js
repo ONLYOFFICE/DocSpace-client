@@ -1079,7 +1079,10 @@ class FilesStore {
 
     if (this.authStore.isAdmin && isShareWithMeFolder) {
       operationName = "copy";
-    } else if (!this.authStore.isAdmin && (isShareWithMeFolder || isCommonFolder)) {
+    } else if (
+      !this.authStore.isAdmin &&
+      (isShareWithMeFolder || isCommonFolder)
+    ) {
       operationName = "copy";
     } else {
       operationName = "move";
@@ -2366,6 +2369,13 @@ class FilesStore {
         fileOptions = removeOptions(fileOptions, optionsToRemove);
       }
 
+      if (this.treeFoldersStore.isShareWithMeFolder) {
+        fileOptions = removeOptions(fileOptions, [
+          "mark-as-favorite",
+          "remove-from-favorites",
+        ]);
+      }
+
       if (this.publicRoomStore.isPublicRoom) {
         fileOptions = removeOptions(fileOptions, [
           "separator0",
@@ -2875,6 +2885,13 @@ class FilesStore {
         "create-room-separator",
         "separator1",
         "create-room",
+      ]);
+    }
+
+    if (this.treeFoldersStore.isShareWithMeFolder) {
+      folderOptions = removeOptions(folderOptions, [
+        "mark-as-favorite",
+        "remove-from-favorites",
       ]);
     }
 

@@ -60,7 +60,7 @@ import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
-import { getContactsView } from "SRC_DIR/helpers/contacts";
+import { getContactsView, createGroup } from "SRC_DIR/helpers/contacts";
 import TariffBar from "SRC_DIR/components/TariffBar";
 import { getLifetimePeriodTranslation } from "@docspace/shared/utils/common";
 import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
@@ -186,7 +186,7 @@ const SectionHeaderContent = (props) => {
   const location = useLocation();
 
   const contactsView = getContactsView(location);
-  const isContactsPage = contactsView;
+  const isContactsPage = !!contactsView;
   const isContactsGroupsPage = contactsView === "groups";
   const isContactsInsideGroupPage = contactsView === "inside_group";
   const isProfile = currentClientView === "profile";
@@ -614,6 +614,11 @@ const SectionHeaderContent = (props) => {
     return (isRecycleBinFolder && !isEmptyFilesList) || !isRootFolder;
   };
 
+  const onPlusClick = () => {
+    if (!isContactsPage) return onCreateRoom();
+    if (isContactsGroupsPage) return createGroup();
+  };
+
   const isPlusButtonVisible = () => {
     if (!isContactsPage || isContactsInsideGroupPage) return true;
 
@@ -622,6 +627,8 @@ const SectionHeaderContent = (props) => {
 
     return true;
   };
+
+  const withMenu = !isRoomsFolder && !isContactsGroupsPage;
 
   return (
     <Consumer key="header">
@@ -686,8 +693,8 @@ const SectionHeaderContent = (props) => {
                   contextMenu: t("Translations:TitleShowFolderActions"),
                   infoPanel: t("Common:InfoPanel"),
                 }}
-                withMenu={!isRoomsFolder}
-                onPlusClick={onCreateRoom}
+                withMenu={withMenu}
+                onPlusClick={onPlusClick}
                 isEmptyPage={isEmptyPage}
                 isRoom={isCurrentRoom || isContactsPage || isProfile}
                 hideInfoPanel={

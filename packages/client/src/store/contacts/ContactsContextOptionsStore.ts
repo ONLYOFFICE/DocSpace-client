@@ -63,15 +63,12 @@ import ReassignDataReactSvgUrl from "PUBLIC_DIR/images/reassign.data.svg?url";
 import PersonAdminReactSvgUrl from "PUBLIC_DIR/images/person.admin.react.svg?url";
 import PersonManagerReactSvgUrl from "PUBLIC_DIR/images/person.manager.react.svg?url";
 import PersonDefaultReactSvgUrl from "PUBLIC_DIR/images/person.default.react.svg?url";
-import PersonUserReactSvgUrl from "PUBLIC_DIR/images/person.user.react.svg?url";
 import PersonShareReactSvgUrl from "PUBLIC_DIR/images/person.share.react.svg?url";
-import GroupReactSvgUrl from "PUBLIC_DIR/images/group.react.svg?url";
 import CatalogUserReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.user.react.svg?url";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import {
-  createGroup,
   onDeletePersonalDataClick,
   onInviteAgainClick,
   onInviteMultipleAgain,
@@ -641,22 +638,24 @@ class ContactsConextOptionsStore {
 
   get contactsCanCreate() {
     const isInsideGroup = this.usersStore.contactsTab === "inside_group";
+    const isGuestView = this.usersStore.contactsTab === "guests";
 
     const isCollaborator = this.userStore.user?.isCollaborator;
 
-    const canCreate = !isInsideGroup && !isCollaborator;
+    const canCreate = !isInsideGroup && !isGuestView && !isCollaborator;
 
     return canCreate;
   }
 
   getContactsModel = (t: TTranslation, isSectionMenu: boolean) => {
-    const { isRoomAdmin, isOwner, isAdmin } = this.userStore.user!;
+    const { isOwner, isAdmin } = this.userStore.user!;
 
     const someDialogIsOpen = checkDialogsOpen();
 
     if (
       !this.contactsCanCreate ||
-      (isSectionMenu && (isMobile || someDialogIsOpen))
+      (isSectionMenu && (isMobile || someDialogIsOpen)) ||
+      !this.settingsStore.allowInvitingMembers
     )
       return null;
 
@@ -708,36 +707,7 @@ class ContactsConextOptionsStore {
       },
     ];
 
-    const accountsFullOptions = [
-      {
-        id: "actions_invite_user",
-        className: "main-button_drop-down",
-        icon: PersonUserReactSvgUrl,
-        label: t("Common:Invite"),
-        key: "new-user",
-        openByDefault: true,
-        items: accountsUserOptions,
-      },
-      {
-        id: "create_group",
-        className: "main-button_drop-down",
-        icon: GroupReactSvgUrl,
-        label: t("PeopleTranslations:CreateGroup"),
-        onClick: createGroup,
-        action: "group",
-        key: "group",
-      },
-    ];
-
-    // Delete Invite
-    if (!this.settingsStore.allowInvitingMembers)
-      accountsFullOptions.splice(0, 1);
-
-    return isRoomAdmin
-      ? !this.settingsStore.allowInvitingMembers
-        ? []
-        : accountsUserOptions
-      : accountsFullOptions;
+    return accountsUserOptions;
   };
 
   inviteUser = (userType: EmployeeType) => {

@@ -73,6 +73,7 @@ type RoomsItemHeaderProps = {
   onChangeFile?: AvatarEditorDialogStore["onChangeFile"];
   getIcon?: FilesSettingsStore["getIcon"];
   isRoomMembersPanel?: boolean;
+  isShareTab?: boolean;
 } & (
   | {
       roomsView: InfoPanelView.infoMembers;
@@ -98,6 +99,7 @@ const RoomsItemHeader = ({
   getIcon,
   searchProps,
   isRoomMembersPanel,
+  isShareTab,
 }: RoomsItemHeaderProps) => {
   const { t } = useTranslation([
     "Files",
@@ -125,7 +127,7 @@ const RoomsItemHeader = ({
     ("isTemplate" in selection && selection.isTemplate) ||
     selection?.rootFolderType === FolderType.RoomTemplates;
 
-  const canShare = !isRoomType(selection) && selection.canShare;
+  const canShare = !isRoomType(selection) && selection.canShare && isShareTab;
 
   const roomType =
     "roomType" in selection ? selection.roomType : RoomsType.CustomRoom;

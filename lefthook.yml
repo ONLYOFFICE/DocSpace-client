@@ -14,23 +14,8 @@ pre-push:
       skip_empty: true
       follow: true
       skip_on_fail: false
-    images:
-      run: npm --prefix ./common/tests run test:images
-      skip_empty: true
-      follow: true
-      skip_on_fail: false
-    colors:
-      run: npm --prefix ./common/tests run test:colors
-      skip_empty: true
-      follow: true
-      skip_on_fail: false
-    dependencies:
-      run: npm --prefix ./common/tests run test:dependencies
-      skip_empty: true
-      follow: true
-      skip_on_fail: false
-    translations:
-      run: npm --prefix ./common/tests run test:skip-base-languages
+    common:
+      run: npm --prefix ./common/tests run test
       skip_empty: true
       follow: true
       skip_on_fail: false

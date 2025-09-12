@@ -255,6 +255,11 @@
             "tooltip": "🛠️ Start the \"Test | Jest:dependencies\" task"
           },
           {
+            "label": "Test ascii",
+            "task": "Test | Jest:ascii",
+            "tooltip": "🛠️ Start the \"Test | Jest:ascii\" task"
+          },
+          {
             "label": "Test unit",
             "task": "Test | Jest:unit",
             "tooltip": "🛠️ Start the \"Test | Jest:unit\" task"

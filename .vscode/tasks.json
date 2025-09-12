@@ -601,6 +601,21 @@
       }
     },
     {
+      "label": "Test | Jest:ascii",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:ascii ; npm run open-report",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Test | Test e2e docker build",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm test:e2e:docker:build",

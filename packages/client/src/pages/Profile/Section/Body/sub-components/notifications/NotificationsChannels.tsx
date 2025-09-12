@@ -38,8 +38,8 @@ import Channel from "./sub-components/Channel";
 import styles from "./Notifications.module.scss";
 
 type NotificationsChannelsProps = {
-  connectAccountDialogVisible: TStore["dialogsStore"]["connectAccountDialogVisible"];
-  disconnectAccountDialogVisible: TStore["dialogsStore"]["disconnectAccountDialogVisible"];
+  connectAccountDialogVisible?: TStore["dialogsStore"]["connectAccountDialogVisible"];
+  disconnectAccountDialogVisible?: TStore["dialogsStore"]["disconnectAccountDialogVisible"];
   setConnectAccountDialogVisible?: TStore["dialogsStore"]["setConnectAccountDialogVisible"];
   setDisconnectAccountDialogVisible?: TStore["dialogsStore"]["setDisconnectAccountDialogVisible"];
   user?: TStore["userStore"]["user"];

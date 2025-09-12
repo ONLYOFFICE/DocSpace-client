@@ -374,6 +374,7 @@ const Items = ({
             onHide={onHide}
             isIndexEditingMode={isIndexEditingMode}
             setDropTargetPreview={setDropTargetPreview}
+            isLastItem={isTrash}
           />
         );
       });

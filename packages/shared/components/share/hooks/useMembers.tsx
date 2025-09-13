@@ -34,6 +34,7 @@ import { useUnmount } from "../../../hooks/useUnmount";
 import { ShareAccessRights } from "../../../enums";
 import { ShareLinkService } from "../../../services/share-link.service";
 import type { TOption } from "../../combobox";
+import { TData, toastr } from "../../toast";
 
 import type { TShare, TShareMember, UseMembersProps } from "../Share.types";
 import { convertMembers, getShareAccessRightOptions } from "../Share.helpers";
@@ -107,6 +108,7 @@ export const useMembers = (props: UseMembersProps) => {
       );
     } catch (error) {
       console.error(error);
+      toastr.error(error as TData);
     }
   }, []);
 
@@ -151,6 +153,7 @@ export const useMembers = (props: UseMembersProps) => {
         }
       } catch (error) {
         console.error(error);
+        toastr.error(error as TData);
       }
     },
     [infoPanelSelection],

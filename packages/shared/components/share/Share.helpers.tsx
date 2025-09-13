@@ -573,7 +573,7 @@ export const getShareAccessRightOptions = (
   if (isFolder(infoPanelSelection)) {
     return [
       {
-        access: ShareAccessRights.FormFilling,
+        access: ShareAccessRights.FullAccess,
         key: "full-access",
         label: t("Common:FullAccess"),
         description: t("Common:FullAccessDescription"),

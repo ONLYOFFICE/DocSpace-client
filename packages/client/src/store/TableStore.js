@@ -118,6 +118,16 @@ class TableStore {
 
   lastOpenedRecentColumnIsEnabled = true;
 
+  authorShareWithMeColumnIsEnabled = true;
+
+  accessLevelShareWithMeColumnIsEnabled = true;
+
+  modifiedShareWithMeColumnIsEnabled = true;
+
+  sizeShareWithMeColumnIsEnabled = false;
+
+  typeShareWithMeColumnIsEnabled = false;
+
   locationFavoritesColumnIsEnabled = true;
 
   authorFavoritesColumnIsEnabled = true;
@@ -337,6 +347,22 @@ class TableStore {
 
   setTypeTrashColumn = (enable) => (this.typeTrashColumnIsEnabled = enable);
 
+  setAuthorShareWithMeColumn = (enable) =>
+    (this.authorShareWithMeColumnIsEnabled = enable);
+
+  setAccessLevelShareWithMeColumn = (enable) => {
+    this.accessLevelShareWithMeColumnIsEnabled = enable;
+  };
+
+  setModifiedShareWithMeColumn = (enable) =>
+    (this.modifiedShareWithMeColumnIsEnabled = enable);
+
+  setSizeShareWithMeColumn = (enable) =>
+    (this.sizeShareWithMeColumnIsEnabled = enable);
+
+  setTypeShareWithMeColumn = (enable) =>
+    (this.typeShareWithMeColumnIsEnabled = enable);
+
   setLastOpenedRecentColumn = (enable) =>
     (this.lastOpenedRecentColumnIsEnabled = enable);
 
@@ -393,6 +419,7 @@ class TableStore {
         isPersonalReadOnly,
         isRecentFolder,
         isFavoritesFolder,
+        isSharedWithMeFolder,
       } = this.treeFoldersStore;
 
       const contactsView = getContactsView();
@@ -421,6 +448,20 @@ class TableStore {
         );
         this.setTemplateRoomColumnQuota(
           splitColumns.includes("StorageTemplates"),
+        );
+
+        return;
+      }
+
+      if (isSharedWithMeFolder) {
+        this.setAuthorShareWithMeColumn(
+          splitColumns.includes("AuthorShareWithMe"),
+        );
+        this.setAccessLevelShareWithMeColumn(
+          splitColumns.includes("AccessLevelShareWithMe"),
+        );
+        this.setModifiedShareWithMeColumn(
+          splitColumns.includes("ModifiedShareWithMe"),
         );
 
         return;
@@ -654,6 +695,30 @@ class TableStore {
 
       case "Activity":
         this.setRoomColumnActivity(!this.roomColumnActivityIsEnabled);
+        return;
+
+      case "AuthorShareWithMe":
+        this.setAuthorShareWithMeColumn(!this.authorShareWithMeColumnIsEnabled);
+        return;
+
+      case "AccessLevelShareWithMe":
+        this.setAccessLevelShareWithMeColumn(
+          !this.accessLevelShareWithMeColumnIsEnabled,
+        );
+        return;
+
+      case "ModifiedShareWithMe":
+        this.setModifiedShareWithMeColumn(
+          !this.modifiedShareWithMeColumnIsEnabled,
+        );
+        return;
+
+      case "SizeShareWithMe":
+        this.setSizeShareWithMeColumn(!this.sizeShareWithMeColumnIsEnabled);
+        return;
+
+      case "TypeShareWithMe":
+        this.setTypeShareWithMeColumn(!this.typeShareWithMeColumnIsEnabled);
         return;
 
       case "ActivityTemplates":

@@ -71,6 +71,7 @@ class FilesTableHeader extends React.Component {
       columnStorageName,
       columnInfoPanelStorageName,
       isRecentFolder,
+      isSharedWithMeFolder,
       isFavoritesFolder,
       isArchiveFolder,
       isIndexEditingMode,
@@ -97,6 +98,7 @@ class FilesTableHeader extends React.Component {
       columnStorageName !== prevProps.columnStorageName ||
       columnInfoPanelStorageName !== prevProps.columnInfoPanelStorageName ||
       isRecentFolder !== prevProps.isRecentFolder ||
+      isSharedWithMeFolder !== prevProps.isSharedWithMeFolder ||
       isFavoritesFolder !== prevProps.isFavoritesFolder ||
       showStorageInfo !== prevProps.showStorageInfo ||
       (!changeDocumentsTabs && sortBy !== stateSortBy) ||
@@ -200,8 +202,10 @@ class FilesTableHeader extends React.Component {
       isFavoritesFolder,
       isTemplatesFolder,
       isIndexing,
+      isSharedWithMeFolder,
     } = this.props;
 
+    if (isSharedWithMeFolder) return this.getSharedWithMeFolderColumns();
     if (isTemplatesFolder) return this.getTemplatesColumns();
     if (isRooms) return this.getRoomsColumns();
     if (isTrashFolder) return this.getTrashFolderColumns();
@@ -388,6 +392,72 @@ class FilesTableHeader extends React.Component {
     ];
 
     return [...columns];
+  };
+
+  getSharedWithMeFolderColumns = () => {
+    const {
+      t,
+      nameColumnIsEnabled,
+      authorShareWithMeColumnIsEnabled,
+      accessLevelShareWithMeColumnIsEnabled,
+      modifiedShareWithMeColumnIsEnabled,
+      sizeShareWithMeColumnIsEnabled,
+      typeShareWithMeColumnIsEnabled,
+    } = this.props;
+
+    const columns = [
+      {
+        key: "Name",
+        title: t("Common:Label"),
+        default: true,
+        resizable: true,
+        minWidth: 210,
+        enable: nameColumnIsEnabled,
+        sortBy: SortByFieldName.Name,
+        onClick: this.onFilter,
+      },
+      {
+        key: "AuthorShareWithMe",
+        title: t("ByAuthor"),
+        enable: authorShareWithMeColumnIsEnabled,
+        resizable: true,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "AccessLevelShareWithMe",
+        title: t("AccessLevel"),
+        enable: accessLevelShareWithMeColumnIsEnabled,
+        resizable: true,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "ModifiedShareWithMe",
+        title: t("ByLastModified"),
+        enable: modifiedShareWithMeColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.ModifiedDate,
+        onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "SizeShareWithMe",
+        title: t("Common:Size"),
+        enable: sizeShareWithMeColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.Size,
+        onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "TypeShareWithMe",
+        title: t("Common:Type"),
+        enable: typeShareWithMeColumnIsEnabled,
+        resizable: true,
+        onChange: this.onColumnChange,
+      },
+    ];
+
+    return columns;
   };
 
   getRecentFolderColumns = () => {
@@ -915,6 +985,7 @@ export default inject(
       isPersonalReadOnly,
       isRecentFolder,
       isFavoritesFolder,
+      isSharedWithMeFolder,
     } = treeFoldersStore;
     const withContent = canShare;
     const sortingVisible = true;
@@ -944,6 +1015,12 @@ export default inject(
       roomColumnOwnerIsEnabled,
       roomColumnActivityIsEnabled,
       roomQuotaColumnIsEnable,
+
+      authorShareWithMeColumnIsEnabled,
+      accessLevelShareWithMeColumnIsEnabled,
+      modifiedShareWithMeColumnIsEnabled,
+      sizeShareWithMeColumnIsEnabled,
+      typeShareWithMeColumnIsEnabled,
 
       locationRecentColumnIsEnabled,
       lastOpenedRecentColumnIsEnabled,
@@ -1027,6 +1104,12 @@ export default inject(
       roomColumnActivityIsEnabled,
       roomQuotaColumnIsEnable,
 
+      authorShareWithMeColumnIsEnabled,
+      accessLevelShareWithMeColumnIsEnabled,
+      modifiedShareWithMeColumnIsEnabled,
+      sizeShareWithMeColumnIsEnabled,
+      typeShareWithMeColumnIsEnabled,
+
       locationRecentColumnIsEnabled,
       lastOpenedRecentColumnIsEnabled,
       authorRecentColumnIsEnabled,
@@ -1062,6 +1145,7 @@ export default inject(
 
       isFrame,
       isRecentFolder,
+      isSharedWithMeFolder,
       isFavoritesFolder,
       showSettings: frameConfig?.showSettings,
       isDefaultRoomsQuotaSet,

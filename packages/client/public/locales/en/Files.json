@@ -211,5 +211,6 @@
   "WarningMoveToFormRoomServal": "Moving several files to the Form Filling room is not supported. Move one {{ organizationName }} PDF form at a time.",
   "WillBeDeletedPermanently": "{{date}} will be deleted permanently",
   "YouLeftTheRoom": "You have left the room",
-  "YourUserTypeHasChanged": "Your user type has been changed to <1>“{{userType}}”</1> by the {{productName}} admin <1>{{adminName}}</1>."
+  "YourUserTypeHasChanged": "Your user type has been changed to <1>“{{userType}}”</1> by the {{productName}} admin <1>{{adminName}}</1>.",
+  "AccessLevel": "Access level"
 }

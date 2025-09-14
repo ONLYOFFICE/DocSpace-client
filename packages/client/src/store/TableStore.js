@@ -463,6 +463,8 @@ class TableStore {
         this.setModifiedShareWithMeColumn(
           splitColumns.includes("ModifiedShareWithMe"),
         );
+        this.setSizeShareWithMeColumn(splitColumns.includes("SizeShareWithMe"));
+        this.setTypeShareWithMeColumn(splitColumns.includes("TypeShareWithMe"));
 
         return;
       }

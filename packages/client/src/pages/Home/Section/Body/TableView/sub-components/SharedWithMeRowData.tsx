@@ -113,14 +113,6 @@ const SharedWithMeRowData: FC<
     typeShareWithMeColumnIsEnabled,
   } = props;
 
-  console.log({
-    authorShareWithMeColumnIsEnabled,
-    accessLevelShareWithMeColumnIsEnabled,
-    modifiedShareWithMeColumnIsEnabled,
-    sizeShareWithMeColumnIsEnabled,
-    typeShareWithMeColumnIsEnabled,
-  });
-
   return (
     <>
       <TableCell

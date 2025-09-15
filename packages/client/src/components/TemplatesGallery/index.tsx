@@ -26,6 +26,8 @@
 
 import { inject, observer } from "mobx-react";
 import { useState, useEffect, SetStateAction } from "react";
+import { withTranslation } from "react-i18next";
+
 import { Portal } from "@docspace/shared/components/portal";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 import { Tabs } from "@docspace/shared/components/tabs";
@@ -33,7 +35,7 @@ import { isMobile } from "@docspace/shared/utils";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Button } from "@docspace/shared/components/button";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
-
+import { TTranslation } from "@docspace/shared/types";
 import TilesContainer from "./TilesContainer";
 import ErrorView from "./ErrorView";
 import styles from "./TemplatesGallery.module.scss";
@@ -46,6 +48,7 @@ const TemplateGallery = (props: {
   initTemplateGallery: () => Promise<void>;
   oformsLoadError: boolean;
   setSubmitToGalleryDialogVisible: (isVisible: boolean) => void;
+  t: TTranslation;
 }) => {
   const {
     templatesGalleryVisible,
@@ -55,6 +58,7 @@ const TemplateGallery = (props: {
     initTemplateGallery,
     oformsLoadError,
     setSubmitToGalleryDialogVisible,
+    t,
   } = props;
   const [viewMobile, setViewMobile] = useState(false);
   const [currentTabId, setCurrentTabId] = useState("documents");
@@ -146,7 +150,7 @@ const TemplateGallery = (props: {
               <Button
                 className={styles.headerButton}
                 onClick={onOpenSubmitToGalleryDialog}
-                label="Submit to Template Gallery"
+                label={t("Common:SubmitToFormGallery")}
               />
             </div>
 
@@ -239,4 +243,4 @@ export default inject<TStore>(({ oformsStore, dialogsStore }) => {
     oformsLoadError,
     setSubmitToGalleryDialogVisible,
   };
-})(observer(TemplateGallery));
+})(withTranslation("Common")(observer(TemplateGallery)));

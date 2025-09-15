@@ -1187,10 +1187,21 @@ class SettingsStore {
   };
 
   getPortalOwner = async () => {
-    const owner = await api.people.getUserById(this.ownerId);
+    const abortController = new AbortController();
+    this.addAbortControllers(abortController);
 
-    this.setPortalOwner(owner);
-    return owner;
+    try {
+      const owner = await api.people.getUserById(
+        this.ownerId,
+        abortController.signal,
+      );
+
+      this.setPortalOwner(owner);
+      return owner;
+    } catch (e) {
+      if (axios.isCancel(e)) return;
+      throw e;
+    }
   };
 
   setWizardComplete = () => {

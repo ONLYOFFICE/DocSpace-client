@@ -168,6 +168,7 @@ export const createDefaultHookSettingsProps = ({
   },
   deleteData: {
     getPortalOwner: settingsStore?.getPortalOwner,
+    addAbortControllers: settingsStore?.addAbortControllers,
   },
   payment: {
     initPayments: paymentStore?.init,

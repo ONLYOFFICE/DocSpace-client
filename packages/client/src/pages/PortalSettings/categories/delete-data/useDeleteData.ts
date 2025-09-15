@@ -31,16 +31,36 @@ import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 export type UseDeleteDataProps = {
   getPortalOwner?: SettingsStore["getPortalOwner"];
+  addAbortControllers?: SettingsStore["addAbortControllers"];
 };
 
-const useDeleteData = ({ getPortalOwner }: UseDeleteDataProps) => {
+const useDeleteData = ({
+  getPortalOwner,
+  addAbortControllers,
+}: UseDeleteDataProps) => {
   const [stripeUrl, setStripeUrl] = useState<string | null>(null);
 
   const fetchPortalDeletionData = useCallback(async () => {
-    await getPortalOwner?.();
+    try {
+      const paymentAccountController = new AbortController();
+      addAbortControllers?.(paymentAccountController);
 
-    const res = await getPaymentAccount();
-    setStripeUrl(res);
+      const [_, res] = await Promise.all([
+        getPortalOwner?.(),
+        getPaymentAccount(paymentAccountController.signal),
+      ]);
+
+      setStripeUrl(res);
+    } catch (error) {
+      if (
+        error instanceof Error &&
+        (error.name === "CanceledError" || error.message === "canceled")
+      ) {
+        return;
+      }
+
+      throw error;
+    }
   }, [getPortalOwner, getPaymentAccount]);
 
   const fetchPortalDeactivationData = useCallback(async () => {

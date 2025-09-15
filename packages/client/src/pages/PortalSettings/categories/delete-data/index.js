@@ -43,6 +43,7 @@ const DeleteData = (props) => {
     tReady,
     getPortalOwner,
     isPortalSettingsLoading,
+    clearAbortControllerArr,
   } = props;
 
   const navigate = useNavigate();
@@ -61,6 +62,7 @@ const DeleteData = (props) => {
       name: t("DeletePortal", { productName: t("Common:ProductName") }),
       content: <PortalDeletionSection stripeUrl={stripeUrl} />,
       onClick: async () => {
+        clearAbortControllerArr();
         await fetchPortalDeletionData();
       },
     },
@@ -69,6 +71,7 @@ const DeleteData = (props) => {
       name: t("PortalDeactivation", { productName: t("Common:ProductName") }),
       content: <PortalDeactivationSection />,
       onClick: async () => {
+        clearAbortControllerArr();
         await fetchPortalDeactivationData();
       },
     },
@@ -108,7 +111,7 @@ const DeleteData = (props) => {
 export const Component = inject(
   ({ currentTariffStatusStore, settingsStore, clientLoadingStore }) => {
     const { isNotPaidPeriod } = currentTariffStatusStore;
-    const { getPortalOwner } = settingsStore;
+    const { getPortalOwner, clearAbortControllerArr } = settingsStore;
 
     const { isPortalSettingsLoading } = clientLoadingStore;
 
@@ -116,6 +119,7 @@ export const Component = inject(
       isNotPaidPeriod,
       getPortalOwner,
       isPortalSettingsLoading,
+      clearAbortControllerArr,
     };
   },
 )(observer(withTranslation("Settings")(DeleteData)));

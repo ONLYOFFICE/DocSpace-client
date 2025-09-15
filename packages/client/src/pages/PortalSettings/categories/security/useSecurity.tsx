@@ -75,7 +75,6 @@ const useSecurity = ({
   const getSecurityInitialValue = useCallback(async () => {
     const actions = [];
     if (window.location.pathname.includes("password") && !isInit) {
-      console.log("here");
       actions.push(getPortalPasswordSettings?.());
     }
 

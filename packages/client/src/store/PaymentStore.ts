@@ -604,7 +604,7 @@ class PaymentStore {
 
       return res;
     } catch (error) {
-      if (axios.isCancel(error)) return;
+      // if (axios.isCancel(error)) return;
       throw error;
     }
   };

@@ -265,6 +265,7 @@ class CurrentTariffStatusStore {
         return;
       }
       console.error(e);
+      throw e;
     }
   };
 

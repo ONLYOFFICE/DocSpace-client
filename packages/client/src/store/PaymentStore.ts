@@ -585,28 +585,23 @@ class PaymentStore {
     const abortController = new AbortController();
     this.settingsStore?.addAbortControllers(abortController);
 
-    try {
-      const res = await getServicesQuotas(abortController.signal);
+    const res = await getServicesQuotas(abortController.signal);
 
-      if (!res) return;
+    if (!res) return;
 
-      const quotas = res.map((service) => {
-        const feature = service.features[0];
-        return {
-          ...feature,
-          price: service.price,
-        };
-      });
+    const quotas = res.map((service) => {
+      const feature = service.features[0];
+      return {
+        ...feature,
+        price: service.price,
+      };
+    });
 
-      this.servicesQuotasFeatures = new Map(
-        quotas.map((feature) => [feature.id, feature]),
-      );
+    this.servicesQuotasFeatures = new Map(
+      quotas.map((feature) => [feature.id, feature]),
+    );
 
-      return res;
-    } catch (error) {
-      // if (axios.isCancel(error)) return;
-      throw error;
-    }
+    return res;
   };
 
   changeServiceState = async (service: string) => {

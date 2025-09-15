@@ -45,7 +45,7 @@ const useDeleteData = ({
       const paymentAccountController = new AbortController();
       addAbortControllers?.(paymentAccountController);
 
-      const [_, res] = await Promise.all([
+      const [, res] = await Promise.all([
         getPortalOwner?.(),
         getPaymentAccount(paymentAccountController.signal),
       ]);

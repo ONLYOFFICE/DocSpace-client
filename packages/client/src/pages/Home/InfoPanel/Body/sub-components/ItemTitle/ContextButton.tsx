@@ -31,10 +31,12 @@ import { inject, observer } from "mobx-react";
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import { isMobile } from "@docspace/shared/utils";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
+import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
 import {
   ContextMenu,
   ContextMenuRefType,
 } from "@docspace/shared/components/context-menu";
+import { HeaderType } from "@docspace/shared/components/context-menu/ContextMenu.types";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
@@ -78,6 +80,30 @@ const RoomsContextBtn = ({
 
   const data = useMemo(() => getData(), [selection, t]);
 
+  const contextMenuHeader = useMemo((): HeaderType | undefined => {
+    if (!selection) return undefined;
+
+    const isRoom = "isRoom" in selection && selection.isRoom;
+    const badgeUrl = isRoom ? getRoomBadgeUrl(selection) : null;
+
+    return {
+      title: selection.title || "",
+      icon: "icon" in selection ? (selection.icon as string) || "" : "",
+      original: "logo" in selection ? selection.logo?.original : "",
+      large: "logo" in selection ? selection.logo?.large : "",
+      medium: "logo" in selection ? selection.logo?.medium : "",
+      small: "logo" in selection ? selection.logo?.small : "",
+      color: "logo" in selection ? selection.logo?.color : "",
+      cover:
+        "logo" in selection && selection.logo?.cover
+          ? typeof selection.logo.cover === "string"
+            ? { data: selection.logo.cover, id: "" }
+            : selection.logo.cover
+          : undefined,
+      badgeUrl: badgeUrl ?? undefined,
+    };
+  }, [selection]);
+
   return (
     <div className={styles.itemContextOptions}>
       <ContextMenuButton
@@ -101,6 +127,8 @@ const RoomsContextBtn = ({
         baseZIndex={310}
         headerOnlyMobile
         ignoreChangeView={isMobile()}
+        header={contextMenuHeader}
+        badgeUrl={contextMenuHeader?.badgeUrl}
       />
     </div>
   );

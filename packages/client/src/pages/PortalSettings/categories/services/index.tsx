@@ -44,8 +44,6 @@ import GracePeriodModal from "./sub-components/AdditionalStorage/GracePeriodModa
 import BackupServiceDialog from "./sub-components/Backup/BackupServiceDialog";
 import ConfirmationDialog from "./sub-components/ConfirmationDialog";
 
-let timerId: NodeJS.Timeout | null = null;
-
 const Services = (props: InjectedProps) => {
   const {
     isInitServicesPage,
@@ -59,6 +57,7 @@ const Services = (props: InjectedProps) => {
     confirmActionType,
     setIsInitServicesPage,
     setVisibleWalletSetting,
+    isPortalSettingsLoading,
   } = props;
   const { t, ready } = useTranslation(["Payments", "Services", "Common"]);
   const [isStorageVisible, setIsStorageVisible] = useState(false);
@@ -71,7 +70,6 @@ const Services = (props: InjectedProps) => {
 
   const [isTopUpBalanceVisible, setIsTopUpBalanceVisible] = useState(false);
 
-  const [showLoader, setShowLoader] = useState(false);
   const shouldShowLoader = !isInitServicesPage || !ready;
   const location = useLocation();
   const navigate = useNavigate();
@@ -98,12 +96,7 @@ const Services = (props: InjectedProps) => {
   }, [openDialog]);
 
   useEffect(() => {
-    timerId = setTimeout(() => {
-      setShowLoader(true);
-    }, 500);
-
     return () => {
-      if (timerId) clearTimeout(timerId);
       setIsInitServicesPage(false);
     };
   }, []);
@@ -243,10 +236,8 @@ const Services = (props: InjectedProps) => {
     }
   };
 
-  return shouldShowLoader ? (
-    showLoader ? (
-      <ServicesLoader />
-    ) : null
+  return shouldShowLoader && isPortalSettingsLoading ? (
+    <ServicesLoader />
   ) : (
     <>
       <ServicesItems onClick={onClick} onToggle={onToggle} />
@@ -304,6 +295,7 @@ const mapStoreToProps = ({
   servicesStore,
   currentTariffStatusStore,
   paymentStore,
+  clientLoadingStore,
 }: TStore) => {
   const {
     isInitServicesPage,
@@ -320,6 +312,8 @@ const mapStoreToProps = ({
     isCardLinkedToPortal,
   } = paymentStore;
 
+  const { isPortalSettingsLoading } = clientLoadingStore;
+
   return {
     isInitServicesPage,
     isVisibleWalletSettings,
@@ -332,6 +326,7 @@ const mapStoreToProps = ({
     confirmActionType,
     setIsInitServicesPage,
     setVisibleWalletSetting,
+    isPortalSettingsLoading,
   };
 };
 

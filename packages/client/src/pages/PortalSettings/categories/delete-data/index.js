@@ -37,13 +37,18 @@ import config from "../../../../../package.json";
 import useDeleteData from "./useDeleteData";
 
 const DeleteData = (props) => {
-  const { t, isNotPaidPeriod, tReady, getPortalOwner } = props;
+  const {
+    t,
+    isNotPaidPeriod,
+    tReady,
+    getPortalOwner,
+    isPortalSettingsLoading,
+  } = props;
 
   const navigate = useNavigate();
   const location = useLocation();
 
   const [currentTabId, setCurrentTabId] = useState();
-  const [isLoading, setIsLoading] = useState(false);
 
   const { stripeUrl, fetchPortalDeletionData, fetchPortalDeactivationData } =
     useDeleteData({
@@ -73,8 +78,6 @@ const DeleteData = (props) => {
     const path = location.pathname;
     const currentTab = data.find((item) => path.includes(item.id));
     if (currentTab && data.length) setCurrentTabId(currentTab.id);
-
-    setIsLoading(true);
   }, [location.pathname]);
 
   const onSelect = (e) => {
@@ -88,7 +91,8 @@ const DeleteData = (props) => {
     setCurrentTabId(e.id);
   };
 
-  if (!isLoading || !tReady) return <DeleteDataLoader />;
+  if (isPortalSettingsLoading || !tReady) return <DeleteDataLoader />;
+
   return isNotPaidPeriod ? (
     <PortalDeletionSection />
   ) : (
@@ -102,13 +106,16 @@ const DeleteData = (props) => {
 };
 
 export const Component = inject(
-  ({ currentTariffStatusStore, settingsStore }) => {
+  ({ currentTariffStatusStore, settingsStore, clientLoadingStore }) => {
     const { isNotPaidPeriod } = currentTariffStatusStore;
     const { getPortalOwner } = settingsStore;
+
+    const { isPortalSettingsLoading } = clientLoadingStore;
 
     return {
       isNotPaidPeriod,
       getPortalOwner,
+      isPortalSettingsLoading,
     };
   },
 )(observer(withTranslation("Settings")(DeleteData)));

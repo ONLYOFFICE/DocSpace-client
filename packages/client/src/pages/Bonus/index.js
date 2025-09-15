@@ -45,9 +45,11 @@ const Bonus = (props) => {
     enterpriseInstallWindowsUrl,
     forEnterprisesUrl,
     demoOrderUrl,
+    isPortalSettingsLoading,
   } = props;
 
-  if (!isInitPaymentPage) return <PaymentsStandaloneLoader />;
+  if (isPortalSettingsLoading || !isInitPaymentPage)
+    return <PaymentsStandaloneLoader />;
 
   return (
     <BonusPage
@@ -73,6 +75,7 @@ export const Component = inject(
     currentTariffStatusStore,
     currentQuotaStore,
     settingsStore,
+    clientLoadingStore,
   }) => {
     const { isInitPaymentPage } = paymentStore;
     const { isCommunity, isEnterprise, isDeveloper } = currentTariffStatusStore;
@@ -88,6 +91,8 @@ export const Component = inject(
       demoOrderUrl,
     } = settingsStore;
 
+    const { isPortalSettingsLoading } = clientLoadingStore;
+
     return {
       isInitPaymentPage,
       isCommunity,
@@ -102,6 +107,7 @@ export const Component = inject(
       enterpriseInstallWindowsUrl,
       forEnterprisesUrl,
       demoOrderUrl,
+      isPortalSettingsLoading,
     };
   },
 )(observer(Bonus));

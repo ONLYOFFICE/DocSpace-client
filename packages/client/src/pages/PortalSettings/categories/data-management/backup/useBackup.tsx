@@ -64,9 +64,7 @@ export type UseBackupProps = {
   setErrorInformation?: BackupStore["setErrorInformation"];
 
   setIsInitialError?: BackupStore["setIsInitialError"];
-  setIsInitialLoading?: BackupStore["setIsInitialLoading"];
   setIsEmptyContentBeforeLoader?: BackupStore["setIsEmptyContentBeforeLoader"];
-  isInitialLoading?: BackupStore["isInitialLoading"];
   isInitialError?: BackupStore["isInitialError"];
   isEmptyContentBeforeLoader?: BackupStore["isEmptyContentBeforeLoader"];
 
@@ -91,9 +89,7 @@ const useBackup = ({
   setErrorInformation,
 
   setIsInitialError,
-  setIsInitialLoading,
   setIsEmptyContentBeforeLoader,
-  isInitialLoading,
   isInitialError,
   isEmptyContentBeforeLoader,
 
@@ -106,8 +102,6 @@ const useBackup = ({
 
   const getManualBackupData = useCallback(async () => {
     try {
-      setIsInitialLoading?.(true);
-
       getProgress?.(t);
 
       // Create individual abort controllers for each request
@@ -168,7 +162,6 @@ const useBackup = ({
       toastr.error(error as Error);
     }
     setIsEmptyContentBeforeLoader?.(false);
-    setIsInitialLoading?.(false);
   }, [
     getProgress,
     setConnectedThirdPartyAccount,
@@ -179,13 +172,10 @@ const useBackup = ({
     setServiceQuota,
     fetchPayerInfo,
     setIsEmptyContentBeforeLoader,
-    setIsInitialLoading,
   ]);
 
   const getAutoBackupData = useCallback(async () => {
     try {
-      setIsInitialLoading?.(true);
-
       getProgress?.(t);
 
       // Create individual abort controllers for each request
@@ -259,7 +249,6 @@ const useBackup = ({
       toastr.error(error as Error);
     } finally {
       setIsEmptyContentBeforeLoader?.(false);
-      setIsInitialLoading?.(false);
     }
   }, [
     getProgress,
@@ -299,8 +288,6 @@ const useBackup = ({
       if (account) setConnectedThirdPartyAccount?.(account);
       setThirdPartyStorage?.(backupStorage);
       setStorageRegions?.(resStorageRegions);
-
-      setIsInitialLoading?.(false);
     } catch (error) {
       if (
         error instanceof Error &&
@@ -341,7 +328,6 @@ const useBackup = ({
 
     isEmptyContentBeforeLoader,
     setIsEmptyContentBeforeLoader,
-    isInitialLoading,
     isInitialError,
   };
 };

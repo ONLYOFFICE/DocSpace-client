@@ -57,6 +57,8 @@ import useServices from "../categories/services/useServices";
 import { createDefaultHookSettingsProps } from "../utils/createDefaultHookSettingsProps";
 import { isMainSectionChange } from "../utils/isMainSectionChange";
 
+const CURRENT_VIEW_STORAGE_KEY = "currentView";
+
 type TView =
   | "customization"
   | "security"
@@ -73,7 +75,7 @@ type TView =
   | "";
 
 const View = ({
-  setIsChangePageRequestRunning,
+  setIsPortalSettingsLoading,
   loadBaseInfo,
   isMobileView,
   settingsStore,
@@ -101,7 +103,9 @@ const View = ({
 }: any) => {
   const location = useLocation();
 
-  const [currentView, setCurrentView] = React.useState<TView>("");
+  const [currentView, setCurrentView] = React.useState<TView>(() => {
+    return (localStorage.getItem(CURRENT_VIEW_STORAGE_KEY) as TView) || "";
+  });
   const [isLoading, setIsLoading] = React.useState(false);
 
   const activeRequestIdRef = useRef(0);
@@ -159,9 +163,22 @@ const View = ({
   const { getPaymentsInitialValue } = usePayments(defaultProps.payment);
   const { getServicesInitialValue } = useServices(defaultProps.services);
 
-  React.useEffect(() => {
+  useEffect(() => {
     clearAbortControllerArrRef.current = clearAbortControllerArr;
   }, [clearAbortControllerArr]);
+
+  useEffect(() => {
+    if (currentView) {
+      localStorage.setItem(CURRENT_VIEW_STORAGE_KEY, currentView);
+    }
+  }, [currentView]);
+
+  useEffect(() => {
+    return () => {
+      console.log("here");
+      localStorage.removeItem(CURRENT_VIEW_STORAGE_KEY);
+    };
+  }, []);
 
   useEffect(() => {
     animationStartedRef.current = false;
@@ -226,7 +243,6 @@ const View = ({
         // Only proceed with data loading if it's a main section change
         if (!isMainSectionChanged && !isSameSectionClick) {
           if (requestId === activeRequestIdRef.current) {
-            setIsChangePageRequestRunning(false);
             setIsLoading(false);
           }
           return;
@@ -235,7 +251,6 @@ const View = ({
         clearAbortControllerArrRef.current();
 
         setIsLoading(true);
-        setIsChangePageRequestRunning(true);
         let view: TView = "";
 
         if (isCustomizationPage) {
@@ -278,10 +293,7 @@ const View = ({
 
         if (requestId === activeRequestIdRef.current) {
           setCurrentView(view);
-        }
-
-        if (requestId === activeRequestIdRef.current) {
-          setIsChangePageRequestRunning(false);
+          setIsPortalSettingsLoading(false);
           setIsLoading(false);
         }
       } catch (error) {
@@ -291,7 +303,7 @@ const View = ({
         }
 
         if (requestId === activeRequestIdRef.current) {
-          setIsChangePageRequestRunning(false);
+          setIsPortalSettingsLoading(false);
           setIsLoading(false);
         }
       }
@@ -299,6 +311,8 @@ const View = ({
 
     getView();
   }, [location]);
+
+  console.log("currentView", currentView);
 
   return (
     <LoaderWrapper isLoading={isLoading}>
@@ -345,8 +359,7 @@ export const ViewComponent = inject(
 
     const { clearAbortControllerArr } = settingsStore;
 
-    const { setIsChangePageRequestRunning, showHeaderLoader } =
-      clientLoadingStore;
+    const { setIsPortalSettingsLoading } = clientLoadingStore;
 
     const isMobileView = settingsStore.deviceType === DeviceType.mobile;
 
@@ -358,8 +371,7 @@ export const ViewComponent = inject(
     const { standaloneInit } = paymentStore;
 
     return {
-      setIsChangePageRequestRunning,
-      showHeaderLoader,
+      setIsPortalSettingsLoading,
       init,
       standaloneInit,
 

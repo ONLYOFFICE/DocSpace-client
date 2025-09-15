@@ -36,6 +36,7 @@ import { Checkbox } from "@docspace/shared/components/checkbox";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import { toastr } from "@docspace/shared/components/toast";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
+import { SettingsDSConnectSkeleton } from "@docspace/shared/skeletons/settings";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import * as Styled from "./index.styled";
 
@@ -49,6 +50,7 @@ const DocumentService = ({
   currentColorScheme,
   integrationSettingsUrl,
   initialDocumentServiceData,
+  isPortalSettingsLoading,
 }) => {
   const { t } = useTranslation(["Settings", "Common"]);
 
@@ -223,6 +225,8 @@ const DocumentService = ({
     !allInputsValid ||
     isSaveLoading ||
     isResetLoading;
+
+  if (isPortalSettingsLoading) return <SettingsDSConnectSkeleton />;
 
   return (
     <Styled.Location>
@@ -426,14 +430,18 @@ const DocumentService = ({
   );
 };
 
-export default inject(({ settingsStore, filesSettingsStore }) => {
-  const { currentColorScheme, integrationSettingsUrl, currentDeviceType } =
-    settingsStore;
-  const { changeDocumentServiceLocation } = filesSettingsStore;
-  return {
-    changeDocumentServiceLocation,
-    currentColorScheme,
-    integrationSettingsUrl,
-    currentDeviceType,
-  };
-})(observer(DocumentService));
+export default inject(
+  ({ settingsStore, filesSettingsStore, clientLoadingStore }) => {
+    const { currentColorScheme, integrationSettingsUrl, currentDeviceType } =
+      settingsStore;
+    const { changeDocumentServiceLocation } = filesSettingsStore;
+    const { isPortalSettingsLoading } = clientLoadingStore;
+    return {
+      changeDocumentServiceLocation,
+      currentColorScheme,
+      integrationSettingsUrl,
+      currentDeviceType,
+      isPortalSettingsLoading,
+    };
+  },
+)(observer(DocumentService));

@@ -42,13 +42,12 @@ import { LinkType } from "@docspace/shared/components/link/Link.enums";
 import { Link } from "@docspace/shared/components/link";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { WorkspacesContainer } from "../StyledDataImport";
+import DataImportLoader from "../sub-components/DataImportLoader";
 import { ProvidersProps, InjectedProvidersProps } from "../types";
 
 const Providers = (props: ProvidersProps) => {
-  const { theme, services, setWorkspace, logoText } =
+  const { theme, services, setWorkspace, logoText, isPortalSettingsLoading } =
     props as InjectedProvidersProps;
-
-  // const [areProvidersReady, setAreProvidersReady] = useState(false);
 
   const { t, ready } = useTranslation(["Settings"]);
 
@@ -73,7 +72,7 @@ const Providers = (props: ProvidersProps) => {
     if (ready) setDocumentTitle(t("DataImport"));
   }, [ready, t]);
 
-  // if (!areProvidersReady) return <DataImportLoader />;
+  if (isPortalSettingsLoading) return <DataImportLoader />;
 
   return (
     <WorkspacesContainer>
@@ -113,16 +112,19 @@ const Providers = (props: ProvidersProps) => {
   );
 };
 export const Component = inject<TStore>(
-  ({ settingsStore, importAccountsStore }) => {
+  ({ settingsStore, importAccountsStore, clientLoadingStore }) => {
     const { services, setWorkspace } = importAccountsStore;
 
     const { theme, logoText } = settingsStore;
+
+    const { isPortalSettingsLoading } = clientLoadingStore;
 
     return {
       services,
       logoText,
       theme,
       setWorkspace,
+      isPortalSettingsLoading,
     };
   },
 )(observer(Providers));

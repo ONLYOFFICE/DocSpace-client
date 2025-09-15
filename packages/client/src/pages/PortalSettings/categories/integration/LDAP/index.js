@@ -42,6 +42,7 @@ import ToggleLDAP from "./sub-components/ToggleLDAP";
 import { SyncContainerSection } from "./sub-components/SyncContainer";
 import LdapMobileView from "./sub-components/LdapMobileView";
 import { SettingsContainerSection } from "./sub-components/SettingsContainer";
+import LdapLoader from "./sub-components/LdapLoader";
 
 const LDAP = ({
   ldapSettingsUrl,
@@ -51,6 +52,7 @@ const LDAP = ({
   isMobileView,
   isLdapEnabled,
   setScrollToSettings,
+  isPortalSettingsLoading,
 }) => {
   const { t } = useTranslation(["Ldap", "Settings", "Common"]);
   const [isSmallWindow, setIsSmallWindow] = useState(false);
@@ -70,7 +72,6 @@ const LDAP = ({
   };
 
   useEffect(() => {
-    // isLdapAvailable && load(t);
     onCheckView();
     setDocumentTitle(t("Ldap:LdapSettings"));
     window.addEventListener("resize", onCheckView);
@@ -78,7 +79,7 @@ const LDAP = ({
     return () => window.removeEventListener("resize", onCheckView);
   }, [isLdapAvailable, load, t]);
 
-  // if (!isLoaded && isLdapAvailable) return <LdapLoader />;
+  if (isPortalSettingsLoading && isLdapAvailable) return <LdapLoader />;
 
   const link = `${`${t("Settings:ManagementCategorySecurity")} > ${t("Settings:InvitationSettings")}.`}`;
 
@@ -143,26 +144,31 @@ const LDAP = ({
   );
 };
 
-export default inject(({ ldapStore, settingsStore, currentQuotaStore }) => {
-  const { isLdapAvailable } = currentQuotaStore;
-  const {
-    ldapSettingsUrl,
-    currentColorScheme,
-    currentDeviceType,
-    setScrollToSettings,
-  } = settingsStore;
-  const { load, isLdapEnabled, isLoaded } = ldapStore;
+export default inject(
+  ({ ldapStore, settingsStore, currentQuotaStore, clientLoadingStore }) => {
+    const { isLdapAvailable } = currentQuotaStore;
+    const {
+      ldapSettingsUrl,
+      currentColorScheme,
+      currentDeviceType,
+      setScrollToSettings,
+    } = settingsStore;
+    const { load, isLdapEnabled, isLoaded } = ldapStore;
 
-  const isMobileView = currentDeviceType === DeviceType.mobile;
+    const { isPortalSettingsLoading } = clientLoadingStore;
 
-  return {
-    ldapSettingsUrl,
-    currentColorScheme,
-    isLdapAvailable,
-    load,
-    isMobileView,
-    isLdapEnabled,
-    isLoaded,
-    setScrollToSettings,
-  };
-})(observer(LDAP));
+    const isMobileView = currentDeviceType === DeviceType.mobile;
+
+    return {
+      ldapSettingsUrl,
+      currentColorScheme,
+      isLdapAvailable,
+      load,
+      isMobileView,
+      isLdapEnabled,
+      isLoaded,
+      setScrollToSettings,
+      isPortalSettingsLoading,
+    };
+  },
+)(observer(LDAP));

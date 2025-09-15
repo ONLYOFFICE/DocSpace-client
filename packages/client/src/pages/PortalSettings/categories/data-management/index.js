@@ -70,6 +70,7 @@ const DataManagementWrapper = (props) => {
     currentTariffStatusStore,
     settingsStore,
     clearAbortControllerArr,
+    isPortalSettingsLoading,
   } = props;
 
   const navigate = useNavigate();
@@ -94,7 +95,6 @@ const DataManagementWrapper = (props) => {
     getAutoBackupData,
 
     isEmptyContentBeforeLoader,
-    isInitialLoading,
     isInitialError,
     setIsEmptyContentBeforeLoader,
   } = useBackup(defaultProps.backup);
@@ -146,7 +146,7 @@ const DataManagementWrapper = (props) => {
           renderTooltip={renderTooltip}
           isEmptyContentBeforeLoader={isEmptyContentBeforeLoader}
           setIsEmptyContentBeforeLoader={setIsEmptyContentBeforeLoader}
-          isInitialLoading={isInitialLoading}
+          isInitialLoading={isPortalSettingsLoading}
           isInitialError={isInitialError}
         />
       ),
@@ -163,7 +163,7 @@ const DataManagementWrapper = (props) => {
           buttonSize={buttonSize}
           renderTooltip={renderTooltip}
           isEmptyContentBeforeLoader={isEmptyContentBeforeLoader}
-          isInitialLoading={isInitialLoading}
+          isInitialLoading={isPortalSettingsLoading}
           isInitialError={isInitialError}
         />
       ),
@@ -244,6 +244,7 @@ export const Component = inject(
     currentQuotaStore,
     backup,
     authStore,
+    clientLoadingStore,
   }) => {
     const {
       dataBackupUrl,
@@ -253,6 +254,8 @@ export const Component = inject(
       standalone,
       clearAbortControllerArr,
     } = settingsStore;
+
+    const { isPortalSettingsLoading } = clientLoadingStore;
 
     const buttonSize =
       currentDeviceType !== DeviceType.desktop ? "normal" : "small";
@@ -271,6 +274,7 @@ export const Component = inject(
       currentTariffStatusStore,
       settingsStore,
       clearAbortControllerArr,
+      isPortalSettingsLoading,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(DataManagementWrapper)));

@@ -174,8 +174,6 @@ class BackupStore {
 
   isEmptyContentBeforeLoader = true;
 
-  isInitialLoading = false;
-
   isInitialError = false;
 
   constructor(
@@ -198,10 +196,6 @@ class BackupStore {
 
   setIsInitialError = (isInitialError) => {
     this.isInitialError = isInitialError;
-  };
-
-  setIsInitialLoading = (isInitialLoading) => {
-    this.isInitialLoading = isInitialLoading;
   };
 
   setIsEmptyContentBeforeLoader = (isEmptyContentBeforeLoader) => {

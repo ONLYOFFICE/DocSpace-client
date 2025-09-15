@@ -47,6 +47,8 @@ class ClientLoadingStore {
 
   isProfileLoaded: boolean = false;
 
+  isPortalSettingsLoading: boolean = true;
+
   loaderStates: Record<SectionType, LoaderState> = {
     header: {
       isLoading: false,
@@ -84,6 +86,10 @@ class ClientLoadingStore {
 
   setIsChangePageRequestRunning = (isChangePageRequestRunning: boolean) => {
     this.isChangePageRequestRunning = isChangePageRequestRunning;
+  };
+
+  setIsPortalSettingsLoading = (isPortalSettingsLoading: boolean) => {
+    this.isPortalSettingsLoading = isPortalSettingsLoading;
   };
 
   setCurrentClientView = (

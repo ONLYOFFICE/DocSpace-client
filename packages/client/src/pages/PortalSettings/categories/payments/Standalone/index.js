@@ -50,8 +50,7 @@ const StandalonePage = (props) => {
     buyUrl,
     salesEmail,
     isEnterprise,
-    isLoadedArticleBody,
-    isLoadedSectionHeader,
+    isPortalSettingsLoading,
   } = props;
 
   const { t, ready } = useTranslation("Common");
@@ -66,8 +65,7 @@ const StandalonePage = (props) => {
       !isLoadedCurrentQuota ||
       !ready ||
       isUpdatingBasicSettings) &&
-    !isLoadedArticleBody &&
-    !isLoadedSectionHeader
+    isPortalSettingsLoading
   )
     return <PaymentsStandaloneLoader isEnterprise={!isTrial} />;
 
@@ -89,7 +87,12 @@ const StandalonePage = (props) => {
 };
 
 export default inject(
-  ({ currentQuotaStore, paymentStore, currentTariffStatusStore, common }) => {
+  ({
+    currentQuotaStore,
+    paymentStore,
+    currentTariffStatusStore,
+    clientLoadingStore,
+  }) => {
     const {
       isInitPaymentPage,
       isUpdatingBasicSettings,
@@ -108,7 +111,8 @@ export default inject(
       isDeveloper,
       isEnterprise,
     } = currentTariffStatusStore;
-    const { isLoadedArticleBody, isLoadedSectionHeader } = common;
+
+    const { isPortalSettingsLoading } = clientLoadingStore;
 
     return {
       isTrial,
@@ -126,8 +130,7 @@ export default inject(
       buyUrl,
       salesEmail,
       isEnterprise,
-      isLoadedArticleBody,
-      isLoadedSectionHeader,
+      isPortalSettingsLoading,
     };
   },
 )(observer(StandalonePage));

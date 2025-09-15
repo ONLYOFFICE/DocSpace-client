@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
@@ -62,11 +62,23 @@ const EmptyContainer = styled(EmptyScreenContainer)`
 `;
 
 const Api = (props) => {
-  const { t, theme, apiBasicLink, currentDeviceType, logoText } = props;
+  const {
+    t,
+    tReady,
+    theme,
+    apiBasicLink,
+    currentDeviceType,
+    logoText,
+    isPortalSettingsLoading,
+  } = props;
 
   const imgSrc = theme.isBase ? ApiSvgUrl : ApiDarkSvgUrl;
 
-  setDocumentTitle(t("Api"));
+  useEffect(() => {
+    if (tReady) setDocumentTitle(t("Api"));
+  }, [tReady]);
+
+  if (isPortalSettingsLoading || !tReady) return null;
 
   return (
     <ConfirmWrapper height="100%">

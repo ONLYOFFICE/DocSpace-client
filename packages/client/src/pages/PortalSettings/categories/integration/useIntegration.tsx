@@ -130,11 +130,6 @@ const useIntegration = ({
     getDocumentServiceData,
   ]);
 
-  useEffect(() => {
-    if (window.location.pathname.includes("integration"))
-      getIntegrationInitialValue();
-  }, [getIntegrationInitialValue]);
-
   return {
     openThirdPartyModal,
     documentServiceLocationData,

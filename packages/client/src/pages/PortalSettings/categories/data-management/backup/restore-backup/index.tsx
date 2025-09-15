@@ -95,12 +95,12 @@ export default inject<
     filesSettingsStore,
     filesSelectorInput,
     thirdPartyStore,
+    clientLoadingStore,
   }) => {
     const {
       errorInformation,
       selectedThirdPartyAccount,
       isBackupProgressVisible,
-      isInitialLoading,
       restoreResource,
       formSettings,
       errorsFieldsBeforeSafe,
@@ -133,6 +133,8 @@ export default inject<
       getStorageParams,
       uploadLocalFile,
     } = backup;
+
+    const { isPortalSettingsLoading: isInitialLoading } = clientLoadingStore;
 
     const {
       basePath,

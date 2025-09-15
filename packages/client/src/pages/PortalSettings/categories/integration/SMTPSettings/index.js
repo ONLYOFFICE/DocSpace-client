@@ -30,13 +30,19 @@ import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
+import { SettingsSMTPSkeleton } from "@docspace/shared/skeletons/settings";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import CustomSettings from "./sub-components/CustomSettings";
 import { StyledComponent } from "./StyledComponent";
 
 const SMTPSettings = (props) => {
-  const { currentColorScheme, integrationSettingsUrl, logoText } = props;
+  const {
+    currentColorScheme,
+    integrationSettingsUrl,
+    logoText,
+    isPortalSettingsLoading,
+  } = props;
 
   const { t, ready } = useTranslation([
     "SMTPSettings",
@@ -48,6 +54,8 @@ const SMTPSettings = (props) => {
   useEffect(() => {
     if (ready) setDocumentTitle(t("Settings:SMTPSettings"));
   }, [ready]);
+
+  if (isPortalSettingsLoading) return <SettingsSMTPSkeleton />;
 
   return (
     <StyledComponent withoutExternalLink={!integrationSettingsUrl}>
@@ -76,15 +84,18 @@ const SMTPSettings = (props) => {
   );
 };
 
-export default inject(({ settingsStore, setup }) => {
+export default inject(({ settingsStore, setup, clientLoadingStore }) => {
   const { currentColorScheme, integrationSettingsUrl, logoText } =
     settingsStore;
   const { setInitSMTPSettings } = setup;
+
+  const { isPortalSettingsLoading } = clientLoadingStore;
 
   return {
     setInitSMTPSettings,
     currentColorScheme,
     integrationSettingsUrl,
     logoText,
+    isPortalSettingsLoading,
   };
 })(observer(SMTPSettings));

@@ -52,17 +52,16 @@ const DeveloperToolsWrapper = (props) => {
   const {
     currentDeviceType,
     identityServerEnabled,
-    isLoadedArticleBody,
 
     settingsStore,
     webhooksStore,
     oauthStore,
     clearAbortControllerArr,
+    isPortalSettingsLoading,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [isLoaded, setIsLoaded] = useState(false);
   const [currentTabId, setCurrentTabId] = useState();
 
   const { t } = useTranslation([
@@ -178,8 +177,6 @@ const DeveloperToolsWrapper = (props) => {
     if (currentTab !== -1 && data.length) {
       setCurrentTabId(currentTab?.id);
     }
-
-    setIsLoaded(true);
   }, [location.pathname]);
 
   const onSelect = (e) => {
@@ -196,9 +193,7 @@ const DeveloperToolsWrapper = (props) => {
     setCurrentTabId(e.id);
   };
 
-  if (isLoadedArticleBody) {
-    !isLoaded ? <SSOLoader /> : null;
-  }
+  if (isPortalSettingsLoading) return <SSOLoader />;
 
   return (
     <Tabs
@@ -212,23 +207,29 @@ const DeveloperToolsWrapper = (props) => {
 };
 
 export const Component = inject(
-  ({ settingsStore, authStore, webhooksStore, oauthStore, common }) => {
+  ({
+    settingsStore,
+    authStore,
+    webhooksStore,
+    oauthStore,
+    clientLoadingStore,
+  }) => {
     const identityServerEnabled =
       authStore?.capabilities?.identityServerEnabled;
 
     const { currentDeviceType, clearAbortControllerArr } = settingsStore;
 
-    const { isLoadedArticleBody } = common;
+    const { isPortalSettingsLoading } = clientLoadingStore;
 
     return {
       currentDeviceType,
       identityServerEnabled,
-      isLoadedArticleBody,
 
       settingsStore,
       webhooksStore,
       oauthStore,
       clearAbortControllerArr,
+      isPortalSettingsLoading,
     };
   },
 )(observer(DeveloperToolsWrapper));

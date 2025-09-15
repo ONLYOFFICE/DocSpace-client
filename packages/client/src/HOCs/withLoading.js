@@ -42,6 +42,7 @@ const withLoading = (WrappedComponent) => {
       setIsBurgerLoading,
       enablePortalRename,
       deviceType,
+      isPortalSettingsLoading,
     } = props;
 
     const viewMobile = deviceType === DeviceType.mobile;
@@ -70,38 +71,46 @@ const withLoading = (WrappedComponent) => {
     const loadedPortalRenaming = !!enablePortalRename;
 
     const isLoadedCustomizationSettings =
-      isLoadedArticleBody && !isBurgerLoading && isLoadedSectionHeader;
+      isLoadedArticleBody &&
+      !isBurgerLoading &&
+      isLoadedSectionHeader &&
+      !isPortalSettingsLoading;
 
     const isLoadedCustomizationNavbarSettings =
       isLoadedCustomizationNavbar &&
       isLoadedArticleBody &&
       !isBurgerLoading &&
       isLoadedSectionHeader &&
-      isLoadedSubmenu;
+      isLoadedSubmenu &&
+      !isPortalSettingsLoading;
 
     const isLoadedCustomizationSettingLngTZSettings =
       isLoadedArticleBody &&
       !isBurgerLoading &&
       isLoadedSectionHeader &&
-      isLoadedLngTZSettings;
+      isLoadedLngTZSettings &&
+      !isPortalSettingsLoading;
 
     const isLoadedCustomizationSettingWelcomePageSettings =
       isLoadedArticleBody &&
       !isBurgerLoading &&
       isLoadedSectionHeader &&
-      isLoadedWelcomePageSettings;
+      isLoadedWelcomePageSettings &&
+      !isPortalSettingsLoading;
 
     const isLoadedCustomizationSettingPortalRenaming =
       isLoadedArticleBody &&
       !isBurgerLoading &&
       isLoadedSectionHeader &&
-      loadedPortalRenaming;
+      loadedPortalRenaming &&
+      !isPortalSettingsLoading;
 
     const isLoadedCustomizationSettingDNSSettings =
       isLoadedArticleBody &&
       !isBurgerLoading &&
       isLoadedSectionHeader &&
-      isLoadedDNSSettings;
+      isLoadedDNSSettings &&
+      !isPortalSettingsLoading;
 
     const isLoadedPage =
       setting === "language-and-time-zone"
@@ -125,7 +134,7 @@ const withLoading = (WrappedComponent) => {
     );
   };
 
-  return inject(({ common, settingsStore }) => {
+  return inject(({ common, settingsStore, clientLoadingStore }) => {
     const {
       isLoadedArticleBody,
       isLoadedSectionHeader,
@@ -143,6 +152,8 @@ const withLoading = (WrappedComponent) => {
       deviceType,
     } = settingsStore;
 
+    const { isPortalSettingsLoading } = clientLoadingStore;
+
     return {
       isLoadedArticleBody,
       isLoadedSectionHeader,
@@ -155,6 +166,7 @@ const withLoading = (WrappedComponent) => {
       setIsBurgerLoading,
       enablePortalRename,
       deviceType,
+      isPortalSettingsLoading,
     };
   })(observer(LoaderWrapper));
 };

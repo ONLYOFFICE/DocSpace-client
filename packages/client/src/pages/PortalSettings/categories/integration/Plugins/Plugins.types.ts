@@ -97,6 +97,8 @@ export interface PluginsProps {
   isEmptyList: boolean;
 
   apiPluginSDKLink: string | undefined;
+
+  isPortalSettingsLoading: boolean;
 }
 
 export interface UploadDecsriptionProps {

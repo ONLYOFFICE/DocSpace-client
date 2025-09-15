@@ -50,14 +50,12 @@ const SecurityWrapper = (props) => {
     t,
     resetIsInit,
     currentDeviceType,
-    isLoadedArticleBody,
-    isLoadedSectionHeader,
-    isBurgerLoading,
 
     settingsStore,
     tfaStore,
     setup,
     clearAbortControllerArr,
+    isPortalSettingsLoading,
   } = props;
 
   const navigate = useNavigate();
@@ -127,11 +125,7 @@ const SecurityWrapper = (props) => {
     );
   };
 
-  const isLoaded = Boolean(
-    isLoadedArticleBody && isLoadedSectionHeader && !isBurgerLoading,
-  );
-
-  if (!isLoaded && data.length)
+  if (isPortalSettingsLoading && data.length)
     return currentTabId === data[0].id ? (
       currentDeviceType !== DeviceType.desktop ? (
         <MobileSecurityLoader />
@@ -154,23 +148,23 @@ const SecurityWrapper = (props) => {
 };
 
 export const Component = inject(
-  ({ settingsStore, setup, tfaStore, common }) => {
-    const { isLoadedArticleBody, isLoadedSectionHeader } = common;
+  ({ settingsStore, setup, tfaStore, clientLoadingStore }) => {
     const { resetIsInit } = setup;
 
-    const { isBurgerLoading, clearAbortControllerArr } = settingsStore;
+    const { clearAbortControllerArr, currentDeviceType } = settingsStore;
+
+    const { isPortalSettingsLoading } = clientLoadingStore;
 
     return {
       resetIsInit,
 
-      isLoadedArticleBody,
-      isLoadedSectionHeader,
-      isBurgerLoading,
+      isPortalSettingsLoading,
 
       settingsStore,
       tfaStore,
       setup,
       clearAbortControllerArr,
+      currentDeviceType,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(SecurityWrapper)));

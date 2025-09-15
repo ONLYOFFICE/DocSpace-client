@@ -49,14 +49,14 @@ const ClientArticle = React.memo(
     withMainButton,
     showArticleLoader,
     isInfoPanelVisible,
-    isAccountsPage,
+    isAccountsArticle,
   }) => {
     return (
       <ArticleWrapper
         isInfoPanelVisible={isInfoPanelVisible}
         withMainButton={withMainButton}
         showArticleLoader={showArticleLoader}
-        showBackButton={isAccountsPage}
+        showBackButton={isAccountsArticle}
       >
         <Article.Header>
           <ArticleHeaderContent />
@@ -67,7 +67,7 @@ const ClientArticle = React.memo(
         </Article.MainButton>
 
         <Article.Body>
-          <ArticleBodyContent />
+          <ArticleBodyContent isAccountsArticle={isAccountsArticle} />
         </Article.Body>
       </ArticleWrapper>
     );
@@ -103,7 +103,6 @@ const ClientContent = (props) => {
 
   const isEditor = location.pathname.indexOf("doceditor") !== -1;
   const isFormGallery = location.pathname.split("/").includes("form-gallery");
-  const isAccountsPage = location.pathname.includes("accounts");
 
   React.useEffect(() => {
     loadClientInfo()
@@ -152,7 +151,11 @@ const ClientContent = (props) => {
   //   }
   // }, [isLoading]);
 
-  const withMainButton = !isAccountsPage;
+  const isAccountsArticle =
+    location.pathname.includes("/accounts") ||
+    (location.pathname.includes("/profile") &&
+      location.state?.fromUrl?.includes("/accounts"));
+  const withMainButton = !isAccountsArticle;
 
   return (
     <>
@@ -167,7 +170,7 @@ const ClientContent = (props) => {
               setIsHeaderLoading={setIsHeaderLoading}
               setIsFilterLoading={setIsFilterLoading}
               showArticleLoader={showArticleLoader}
-              isAccountsPage={isAccountsPage}
+              isAccountsArticle={isAccountsArticle}
             />
           )
         ) : (
@@ -177,7 +180,7 @@ const ClientContent = (props) => {
             setIsHeaderLoading={setIsHeaderLoading}
             setIsFilterLoading={setIsFilterLoading}
             showArticleLoader={showArticleLoader}
-            isAccountsPage={isAccountsPage}
+            isAccountsArticle={isAccountsArticle}
           />
         )
       ) : null}

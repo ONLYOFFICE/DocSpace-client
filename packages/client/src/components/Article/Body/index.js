@@ -86,6 +86,8 @@ const ArticleBodyContent = (props) => {
     setDropTargetPreview,
 
     isRoomAdmin,
+
+    isAccountsArticle,
   } = props;
 
   const location = useLocation();
@@ -374,11 +376,9 @@ const ArticleBodyContent = (props) => {
 
   if (showArticleLoader) return <ArticleFolderLoader />;
 
-  const isAccountsPage = location.pathname.includes("/accounts");
-
   return (
     <>
-      {isAccountsPage ? (
+      {isAccountsArticle ? (
         <AccountsItems
           onClick={onClick}
           getLinkData={getLinkData}
@@ -399,7 +399,7 @@ const ArticleBodyContent = (props) => {
       campaigns.length > 0 &&
       !isFrame &&
       displayBanners &&
-      !isAccountsPage ? (
+      !isAccountsArticle ? (
         <Banner />
       ) : null}
     </>

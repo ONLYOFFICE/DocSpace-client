@@ -36,7 +36,7 @@ import CatalogPrivateReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.privat
 import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
 import CatalogAccountsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.user.react.svg?url";
 import CatalogGroupsReactSvgUrl from "PUBLIC_DIR/images/icons/16/departments.react.svg?url";
-import CatalogGuestsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.accounts.react.svg?url";
+import CatalogGuestsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.guest.react.svg?url";
 
 import CatalogSettingsCommonReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-common.svg?url";
 import CatalogSettingsSecurityReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-security.svg?url";
@@ -61,7 +61,7 @@ import CatalogPrivate20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.priv
 import CatalogTrash20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.trash.react.svg?url";
 import CatalogAccounts20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.user.react.svg?url";
 import CatalogGroups20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.accounts.react.svg?url";
-import CatalogGuests20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.accounts.react.svg?url";
+import CatalogGuests20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.guest.react.svg?url";
 
 import CatalogSettingsCommon20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-common.svg?url";
 import CatalogSettingsSecurity20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-security.svg?url";

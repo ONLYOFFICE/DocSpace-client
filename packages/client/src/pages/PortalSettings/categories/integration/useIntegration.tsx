@@ -123,6 +123,7 @@ const useIntegration = ({
 
     await Promise.all(actions);
   }, [
+    getLDAPData,
     getSSOData,
     getPluginsData,
     getThirdPartyData,

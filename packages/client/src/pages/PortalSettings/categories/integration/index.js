@@ -171,6 +171,11 @@ const IntegrationWrapper = (props) => {
 
   const currentTabId = getCurrentTabId();
 
+  // Guard: Don't render if we're not in the integration section
+  if (!window.location.pathname.includes("/portal-settings/integration")) {
+    return null;
+  }
+
   const onSelect = (e) => {
     navigate(
       combineUrl(

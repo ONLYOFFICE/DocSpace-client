@@ -175,7 +175,6 @@ const View = ({
 
   useEffect(() => {
     return () => {
-      console.log("here");
       localStorage.removeItem(CURRENT_VIEW_STORAGE_KEY);
     };
   }, []);
@@ -311,8 +310,6 @@ const View = ({
 
     getView();
   }, [location]);
-
-  console.log("currentView", currentView);
 
   return (
     <LoaderWrapper isLoading={isLoading}>

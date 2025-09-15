@@ -38,7 +38,7 @@ export type LinkProps = TextProps & {
   isHovered?: boolean;
   /** Sets the 'opacity' css-property to 0.5. Usually applied for the users with "pending" status */
   isSemitransparent?: boolean;
-  /** Activates or deactivates _text-overflow_ CSS property with ellipsis (' … ') value */
+  /** Activates or deactivates _text-overflow_ CSS property with ellipsis (' ... ') value */
   isTextOverflow?: boolean;
   /** Disables hover effect */
   noHover?: boolean;

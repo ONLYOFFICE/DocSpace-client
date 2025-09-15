@@ -110,7 +110,7 @@ const TagDropdown = ({
           className="dropdown-item"
           onMouseDown={preventDefault}
           onClick={addNewTag}
-          label={`${createTagLabel}  “${tagInputValue}”`}
+          label={`${createTagLabel}  "${tagInputValue}"`}
           height={32}
           heightTablet={32}
         />,

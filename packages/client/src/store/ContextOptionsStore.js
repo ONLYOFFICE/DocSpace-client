@@ -2536,6 +2536,7 @@ class ContextOptionsStore {
         ["share", "show-info"],
         [
           "mark-as-favorite",
+          "mark-read",
           "link-for-room-members",
           "download",
           "move",

@@ -125,6 +125,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
         | KeyboardEvent,
     ) => {
       if (option.isSeparator) return;
+      if (option.disabled && option.tooltip) return;
 
       setIsOpen((v) => {
         setIsOpenItemAccess?.(!v);
@@ -358,6 +359,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
           isSelected={isSelected}
           style={optionStyle}
           isSeparator={option.isSeparator}
+          tooltip={option.tooltip}
         />
       );
     });

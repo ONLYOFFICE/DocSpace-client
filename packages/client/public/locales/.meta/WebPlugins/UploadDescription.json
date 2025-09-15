@@ -3,7 +3,7 @@
   "content": "You can add plugins to extend the functionality of {{productName}} with extra features. Click Upload plugin or drop file in the ZIP archive.",
   "content_en_sha1_hash": "dacf9512f3550b50c54e9898f5427ca019da6e73",
   "created_at": "2025-05-19T21:30:49.925Z",
-  "updated_at": "2025-05-24T01:54:14.599Z",
+  "updated_at": "2025-09-07T07:53:15.306Z",
   "comment": {
     "text": "This translation key is used to display a message encouraging users to upload plugins to extend the functionality of {{productName}}. It appears as a text in a dropzone component where users can upload files, and also on an empty screen when no plugins are available.",
     "is_auto": true,
@@ -11,15 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/Plugins/index.tsx",
-      "line_number": 106,
-      "context": "withUpload={withUpload}\n /> */}\n {withUpload ? (\n <>\n <Text>\n {t(\"UploadDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <Dropzone\n onDrop={onDrop}\n isDisabled={!withUpload}\n isLoading={false}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/Plugins/sub-components/EmptyScreen.tsx",
-      "line_number": 70,
-      "context": "<StyledEmptyScreen\n headerText={t(\"NoPlugins\")}\n descriptionText={\n <Text>\n {withUpload\n ? t(\"UploadDescription\", { productName: t(\"Common:ProductName\") })\n : null}\n </Text>\n }\n style={{ gridColumnGap: \"39px\" }}\n buttonStyle={{ marginTop: \"16px\" }}",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/Plugins/sub-components/UploadDescription.tsx",
+      "line_number": 3,
+      "context": "import { Text } from \"@docspace/shared/components/text\";\n import { Link, LinkTarget } from \"@docspace/shared/components/link\";\n import { StyledUploadDescription } from \"../Plugins.styled\";\n import { UploadDecsriptionProps } from \"../Plugins.types\";\n \n const UploadDescription = ({\n apiPluginSDKLink,\n currentColorScheme,",
       "module": "/packages/client"
     }
   ],

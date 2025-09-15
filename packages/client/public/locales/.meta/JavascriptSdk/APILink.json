@@ -3,7 +3,7 @@
   "content": "API library",
   "content_en_sha1_hash": "2e8c30c46ac47f76494735b3d24e32dd53045866",
   "created_at": "2025-05-19T21:30:54.365Z",
-  "updated_at": "2025-08-04T07:30:01.383Z",
+  "updated_at": "2025-09-07T07:53:15.259Z",
   "comment": {
     "text": "The \"APILink\" translation key is used to display the English label for a button that links to an API library. In the provided code snippet, it appears as part of a Link component within a CategoryDescription element.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
       "line_number": 170,
-      "context": "fontWeight=\"400\"\n dataTestId=\"sdk_api_library_link\"\n onClick={() => window.open(sdkLink, \"_blank\")}\n >\n {\" \"}\n {t(\"APILink\")}.\n </Link>\n <CSP t={t} theme={theme} />\n </CategoryDescription>\n <CategoryHeader>\n {t(\"SelectModeEmbedding\", { productName: t(\"Common:ProductName\") })}",
+      "context": "fontWeight=\"400\"\n dataTestId=\"sdk_api_library_link\"\n onClick={() => window.open(sdkLink, \"_blank\")}\n >\n {\" \"}\n {t(\"APILink\")}.\n </Link>\n <CSPSetting t={t} theme={theme} />\n </CategoryDescription>\n <CategoryHeader>\n {t(\"SelectModeEmbedding\", { productName: t(\"Common:ProductName\") })}",
       "module": "/packages/client"
     }
   ],

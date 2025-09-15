@@ -565,7 +565,7 @@ class PluginStore {
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
 
-    const items = this.contextMenuItems.values();
+    const items = Array.from(this.contextMenuItems.values());
     const keys: string[] = [];
 
     switch (type) {

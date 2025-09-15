@@ -72,6 +72,8 @@ import FormFillingTipsDialog from "./FormFillingTipsDialog";
 import ReducedRightsDialog from "./ReducedRightsDialog";
 import SocialAuthWelcomeDialog from "./SocialAuthWelcomeDialog";
 import StorageTariffDeactiveted from "./StorageTariffDeactiveted";
+import ConnectAccountDialog from "./ConnectAccountDialog";
+import DisconnectAccountDialog from "./DisconnectAccountDialog";
 
 export {
   EmptyTrashDialog,
@@ -122,4 +124,6 @@ export {
   ReducedRightsDialog,
   SocialAuthWelcomeDialog,
   StorageTariffDeactiveted,
+  ConnectAccountDialog,
+  DisconnectAccountDialog,
 };

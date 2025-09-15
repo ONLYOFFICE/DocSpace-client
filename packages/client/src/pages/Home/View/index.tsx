@@ -122,6 +122,9 @@ const View = ({
 
   getTfaType,
   setIsProfileLoaded,
+
+  setNotificationChannels,
+  checkTg,
 }: ViewProps) => {
   const location = useLocation();
 
@@ -170,6 +173,7 @@ const View = ({
   const { getProfileInitialValue } = useProfileBody({
     getFilesSettings: getFilesSettings!,
     setSubscriptions: setSubscriptions!,
+    setNotificationChannels: setNotificationChannels!,
     isFirstSubscriptionsLoad,
     fetchConsents: fetchConsents!,
     fetchScopes: fetchScopes!,
@@ -181,6 +185,7 @@ const View = ({
     setIsProfileLoaded: setIsProfileLoaded!,
     setIsSectionHeaderLoading: setIsSectionHeaderLoading!,
     getTfaType: getTfaType!,
+    checkTg: checkTg!,
   });
 
   const getFilesRef = React.useRef(getFiles);
@@ -376,6 +381,7 @@ export const ViewComponent = inject(
     tfaStore,
     setup,
     authStore,
+    telegramStore,
   }: TStore) => {
     const { usersStore, groupsStore } = peopleStore;
 
@@ -423,8 +429,11 @@ export const ViewComponent = inject(
 
     const { getFilesSettings } = filesSettingsStore;
 
-    const { setSubscriptions, isFirstSubscriptionsLoad } =
-      peopleStore.targetUserStore!;
+    const {
+      setSubscriptions,
+      setNotificationChannels,
+      isFirstSubscriptionsLoad,
+    } = peopleStore.targetUserStore!;
 
     const { fetchConsents, fetchScopes } = oauthStore;
 
@@ -434,6 +443,9 @@ export const ViewComponent = inject(
     const { getCapabilities } = authStore;
 
     const { getSessions } = setup;
+
+    const { checkTg } = telegramStore;
+
     return {
       setContactsTab,
       getUsersList,
@@ -487,6 +499,8 @@ export const ViewComponent = inject(
 
       getTfaType,
       setIsProfileLoaded,
+      setNotificationChannels,
+      checkTg,
     };
   },
 )(observer(View));

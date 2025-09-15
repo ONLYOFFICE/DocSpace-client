@@ -3,7 +3,7 @@
   "content": "Sign in with Google",
   "content_en_sha1_hash": "4a0b7281397ff6a6cf1e5d19aad8dd3b71043677",
   "created_at": "2025-05-19T21:30:48.762Z",
-  "updated_at": "2025-08-29T14:33:38.474Z",
+  "updated_at": "2025-09-09T10:39:53.045Z",
   "comment": {
     "text": "The \"Sign in with Google\" translation key is used to display a button label or title that allows users to sign in to the application using their Google account credentials. This text typically appears on a login form, such as a button or dialog prompt, and is intended for display in multiple languages.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 399,
+      "line_number": 422,
       "context": "case \"apple\":\n return signUp ? t(\"Common:SignUpWithApple\") : t(\"Common:SignInWithApple\");\n case \"google\":\n return signUp\n ? t(\"Common:SignUpWithGoogle\")\n : t(\"Common:SignInWithGoogle\");\n case \"facebook\":\n return signUp\n ? t(\"Common:SignUpWithFacebook\")\n : t(\"Common:SignInWithFacebook\");\n case \"twitter\":",
       "module": "/packages/shared"
     }

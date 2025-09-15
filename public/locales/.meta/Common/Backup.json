@@ -3,7 +3,7 @@
   "content": "Backup",
   "content_en_sha1_hash": "dd96994d01e723dd6f9b0bdb6119722dbeb9faf0",
   "created_at": "2025-05-19T21:30:50.645Z",
-  "updated_at": "2025-09-01T11:05:24.231Z",
+  "updated_at": "2025-09-12T14:18:49.374Z",
   "comment": {
     "text": "The translation key \"Backup\" is used to display the label for a backup option in the Portal Settings, likely appearing as a button or toggle. It corresponds to a specific section within the data management category.",
     "is_auto": true,
@@ -14,12 +14,6 @@
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
       "line_number": 217,
       "context": "case \"ThirdPartyAuthorization\":\n return t(\"ThirdPartyAuthorization\");\n case \"Migration\":\n return t(\"Migration\");\n case \"Backup\":\n return t(\"Common:Backup\");\n case \"Common:PaymentsTitle\":\n return t(\"Common:PaymentsTitle\");\n case \"ManagementCategoryDataManagement\":\n return t(\"ManagementCategoryDataManagement\");\n case \"LdapSettings\":",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/index.tsx",
-      "line_number": 142,
-      "context": "};\n }, []);\n \n const confirmationDialogContent = {\n backup: {\n title: t(\"Common:Backup\"),\n body: t(\"Services:EnableBackupConfirm\", {\n productName: t(\"Common:ProductName\"),\n }),\n },\n };",
       "module": "/packages/client"
     },
     {
@@ -48,7 +42,7 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 680,
+      "line_number": 671,
       "context": "operationsAlert={Boolean(backupProgressError)}\n operationsCompleted={operationsCompleted}\n operations={[\n {\n label: operationsCompleted\n ? t(\"Common:Backup\")\n : downloadingProgress === 0\n ? t(\"Common:PreparingBackup\")\n : t(\"Common:BackupProgress\", {\n progress: downloadingProgress,\n }),",
       "module": "/packages/shared"
     },

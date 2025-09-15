@@ -3,13 +3,19 @@
   "content": "Retry",
   "content_en_sha1_hash": "9f5cd8a2e8807d73efa02c844bfbca9fe552b283",
   "created_at": "2025-05-19T21:30:49.814Z",
-  "updated_at": "2025-05-26T07:57:32.674Z",
+  "updated_at": "2025-09-07T07:53:15.039Z",
   "comment": {
     "text": "The translation key \"Retry\" is used to display a button or action that allows users to re-attempt a failed operation. This text appears in the UI of the Webhook History Table and is linked to the \"retryWebhook\" API function. It is likely displayed on a button or similar UI element.",
     "is_auto": true,
     "updated_at": "2025-05-20T09:46:54.592Z"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/PanelComponents/ErrorFile.js",
+      "line_number": 46,
+      "context": "t,\n item,\n theme,\n onTextClick,\n showPasswordInput,\n onRetryClick,\n }) => {\n const { interfaceDirection } = useTheme();\n const placeTooltip = interfaceDirection === \"rtl\" ? \"right\" : \"left\";\n const tooltipId = uniqueid(\"uploading_tooltip\");",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/HistoryHeader.js",
       "line_number": 34,

@@ -59,6 +59,8 @@ import {
   TPortalCultures,
   TStorageBackup,
   TEncryptionSettings,
+  TTelegramCheck,
+  TNotificationChannel,
 } from "./types";
 
 export async function getSettings(withPassword = false, headers = null) {
@@ -1419,4 +1421,40 @@ export async function setAdManagement(hidden: boolean) {
   });
 
   return res;
+}
+
+export async function checkTelegram() {
+  const res = await request({
+    method: "get",
+    url: "/settings/telegram/check",
+  });
+
+  return res as TTelegramCheck;
+}
+
+export async function getTelegramLink() {
+  const res = await request({
+    method: "get",
+    url: "/settings/telegram/link",
+  });
+
+  return res as string;
+}
+
+export async function deleteTelegramLink() {
+  const res = await request({
+    method: "delete",
+    url: "/settings/telegram/link",
+  });
+
+  return res as boolean;
+}
+
+export async function getNotificationsSettings() {
+  const res = await request({
+    method: "get",
+    url: "/settings/notification/channels",
+  });
+
+  return res.channels as TNotificationChannel[];
 }

@@ -3,7 +3,7 @@
   "content": "Room quota has been successfully enabled.",
   "content_en_sha1_hash": "f8798ae2d7b3467cc9ad848be06b25332ae111b7",
   "created_at": "2025-05-19T21:30:52.450Z",
-  "updated_at": "2025-08-21T14:45:44.229Z",
+  "updated_at": "2025-09-07T07:53:15.510Z",
   "comment": {
     "text": "The RoomQuotaEnabled translation key is used to display a success message when room quota has been successfully enabled. This text appears in a toast notification after enabling room quota and is provided by the CurrentQuotaStore file.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/store/CurrentQuotaStore.ts",
-      "line_number": 487,
+      "line_number": 486,
       "context": "const isEnable = +quota !== -1;\n \n try {\n await setDefaultRoomQuota(isEnable, +quota);\n const toastrText = isEnable\n ? t(\"RoomQuotaEnabled\")\n : t(\"RoomQuotaDisabled\");\n \n toastr.success(toastrText);\n } catch (e: unknown) {\n toastr.error(e as TData);",
       "module": "/packages/shared"
     }

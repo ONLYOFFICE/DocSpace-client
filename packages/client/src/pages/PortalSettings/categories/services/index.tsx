@@ -103,7 +103,7 @@ const Services = (props: InjectedProps) => {
 
   const confirmationDialogContent = {
     backup: {
-      title: t("Common:Backup"),
+      title: t("Common:Confirmation"),
       body: t("Services:EnableBackupConfirm", {
         productName: t("Common:ProductName"),
       }),

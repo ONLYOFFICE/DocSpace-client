@@ -894,5 +894,7 @@
   "RevokeLink": "リンクの取り消し",
   "LogoForEditors": "{{editorName}}エディタ用のロゴ",
   "LogoForViewer": "{{diagramViewer}}用のロゴ",
-  "LogoDocsEditor": "エディターズヘッダーのロゴ"
+  "LogoDocsEditor": "エディターズヘッダーのロゴ",
+  "PortalRestoring": "{{productName}}が復元中",
+  "PreparationPortalDescription": "復元作業が終わると、自動的に{{productName}}にリダイレクトされます。"
 }

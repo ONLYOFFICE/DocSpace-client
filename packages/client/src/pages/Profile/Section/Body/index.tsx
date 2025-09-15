@@ -33,7 +33,7 @@ import { useEffect } from "react";
 import { ProfileViewLoader } from "@docspace/shared/skeletons/profile";
 import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
 import { DeviceType } from "@docspace/shared/enums";
-import { tablet, mobile } from "@docspace/shared/utils";
+import { tablet } from "@docspace/shared/utils";
 import { toastr } from "@docspace/shared/components/toast";
 
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
@@ -47,6 +47,7 @@ import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import SettingsSetupStore from "SRC_DIR/store/SettingsSetupStore";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import FilesStore from "SRC_DIR/store/FilesStore";
+import TelegramStore from "SRC_DIR/store/TelegramStore";
 
 import MainProfile from "./sub-components/main-profile";
 import LoginContent from "./sub-components/login";
@@ -64,12 +65,9 @@ const Wrapper = styled.div`
   margin-top: -19px;
 
   @media ${tablet} {
+    margin-top: 0;
     width: 100%;
     max-width: 100%;
-  }
-
-  @media ${mobile} {
-    margin-top: 0;
   }
 `;
 
@@ -96,8 +94,12 @@ type SectionBodyContentProps = {
   getCapabilities?: AuthStore["getCapabilities"];
   getSessions?: SettingsSetupStore["getSessions"];
   setIsProfileLoaded?: ClientLoadingStore["setIsProfileLoaded"];
+  setIsSectionBodyLoading?: ClientLoadingStore["setIsSectionBodyLoading"];
   setIsSectionHeaderLoading?: ClientLoadingStore["setIsSectionHeaderLoading"];
+  setIsArticleLoading?: ClientLoadingStore["setIsArticleLoading"];
   resetSelections?: FilesStore["resetSelections"];
+  setNotificationChannels?: TargetUserStore["setNotificationChannels"];
+  checkTg?: TelegramStore["checkTg"];
 };
 
 const SectionBodyContent = (props: SectionBodyContentProps) => {
@@ -117,9 +119,13 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     getCapabilities,
     getSessions,
     setIsProfileLoaded,
+    setIsSectionBodyLoading,
     setIsSectionHeaderLoading,
+    setIsArticleLoading,
     getTfaType,
     resetSelections,
+    setNotificationChannels,
+    checkTg,
   } = props;
   const navigate = useNavigate();
 
@@ -149,6 +155,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
   } = useProfileBody({
     getFilesSettings: getFilesSettings!,
     setSubscriptions: setSubscriptions!,
+    setNotificationChannels: setNotificationChannels!,
     isFirstSubscriptionsLoad,
     fetchConsents: fetchConsents!,
     fetchScopes: fetchScopes!,
@@ -159,7 +166,10 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     getSessions: getSessions!,
     setIsProfileLoaded: setIsProfileLoaded!,
     setIsSectionHeaderLoading: setIsSectionHeaderLoading!,
+    setIsArticleLoading: setIsArticleLoading!,
     getTfaType: getTfaType!,
+    checkTg: checkTg!,
+    setIsSectionBodyLoading: setIsSectionBodyLoading!,
   });
 
   const data = [
@@ -248,15 +258,24 @@ export default inject(
     tfaStore,
     setup,
     filesStore,
+    telegramStore,
   }: TStore) => {
-    const { showProfileLoader, setIsProfileLoaded, setIsSectionHeaderLoading } =
-      clientLoadingStore;
+    const {
+      showProfileLoader,
+      setIsProfileLoaded,
+      setIsSectionHeaderLoading,
+      setIsSectionBodyLoading,
+      setIsArticleLoading,
+    } = clientLoadingStore;
 
     const identityServerEnabled =
       authStore?.capabilities?.identityServerEnabled;
 
-    const { setSubscriptions, isFirstSubscriptionsLoad } =
-      peopleStore.targetUserStore!;
+    const {
+      setSubscriptions,
+      setNotificationChannels,
+      isFirstSubscriptionsLoad,
+    } = peopleStore.targetUserStore!;
 
     const { fetchConsents, fetchScopes } = oauthStore;
 
@@ -268,6 +287,8 @@ export default inject(
     const { getSessions } = setup;
 
     const { resetSelections } = filesStore;
+
+    const { checkTg } = telegramStore;
 
     return {
       currentDeviceType: settingsStore.currentDeviceType,
@@ -287,7 +308,11 @@ export default inject(
       getTfaType,
       setIsProfileLoaded,
       setIsSectionHeaderLoading,
+      setIsSectionBodyLoading,
+      setIsArticleLoading,
       resetSelections,
+      setNotificationChannels,
+      checkTg,
     };
   },
 )(

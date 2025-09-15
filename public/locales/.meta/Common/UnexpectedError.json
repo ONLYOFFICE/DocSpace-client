@@ -3,7 +3,7 @@
   "content": "An unexpected error occurred. Try again later or contact support.",
   "content_en_sha1_hash": "25ad5a8afd50db67da636bee026c36dbe54b15d6",
   "created_at": "2025-05-19T21:30:49.388Z",
-  "updated_at": "2025-09-02T07:59:28.417Z",
+  "updated_at": "2025-09-09T10:39:52.786Z",
   "comment": {
     "text": "This translation key is used to display an error message when an unexpected issue occurs while performing a specific action, such as opening a link or sending a test email. It appears in a notification dialog, typically triggered by user interaction, and informs the user that they should try again later or contact support for assistance.",
     "is_auto": true,
@@ -119,6 +119,12 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PublicPreview/PublicPreview.viewer.tsx",
+      "line_number": 84,
+      "context": "if (status !== undefined && status === 403) {\n return setErrorStatus(status);\n }\n \n toastr.error(error?.message || t(\"Common:UnexpectedError\"));\n }\n \n console.error(error);\n } finally {\n setIsLoading(false);",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/store/LdapFormStore.js",
       "line_number": 545,
       "context": ") {\n status = {\n completed: true,\n percents: 100,\n certificateConfirmRequest: null,\n error: t(\"Common:UnexpectedError\"),\n };\n }\n \n this.setProgress(status);",
@@ -126,31 +132,31 @@
     },
     {
       "file_path": "/packages/client/src/store/PaymentStore.ts",
-      "line_number": 338,
+      "line_number": 336,
       "context": "try {\n await Promise.all(requests);\n this.setBasicTariffContainer();\n } catch (error) {\n // toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n }\n \n this.setIsUpdatingBasicSettings(false);\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/PaymentStore.ts",
-      "line_number": 338,
+      "line_number": 336,
       "context": "try {\n await Promise.all(requests);\n this.setBasicTariffContainer();\n } catch (error) {\n // toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n }\n \n this.setIsUpdatingBasicSettings(false);\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/PaymentStore.ts",
-      "line_number": 338,
+      "line_number": 336,
       "context": "try {\n await Promise.all(requests);\n this.setBasicTariffContainer();\n } catch (error) {\n // toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n }\n \n this.setIsUpdatingBasicSettings(false);\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/PaymentStore.ts",
-      "line_number": 338,
+      "line_number": 336,
       "context": "try {\n await Promise.all(requests);\n this.setBasicTariffContainer();\n } catch (error) {\n // toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n }\n \n this.setIsUpdatingBasicSettings(false);\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/PaymentStore.ts",
-      "line_number": 338,
+      "line_number": 336,
       "context": "try {\n await Promise.all(requests);\n this.setBasicTariffContainer();\n } catch (error) {\n // toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n }\n \n this.setIsUpdatingBasicSettings(false);\n };",
       "module": "/packages/client"
     },
@@ -162,19 +168,19 @@
     },
     {
       "file_path": "/packages/client/src/store/ServicesStore.ts",
-      "line_number": 207,
+      "line_number": 205,
       "context": "document.title,\n window.location.pathname,\n );\n }\n } catch (e) {\n toastr.error(t(\"Common:UnexpectedError\"));\n console.error(e);\n }\n };\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 1543,
+      "line_number": 1545,
       "context": "(\"message\" in knownError && knownError.message) ||\n \"\";\n }\n \n if (knownError?.response?.status === 502)\n message = t(\"Common:UnexpectedError\");\n \n return message ?? t(\"Common:UnexpectedError\");\n };\n \n export function splitFileAndFolderIds<T extends TFolder | TFile>(items: T[]) {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 1543,
+      "line_number": 1545,
       "context": "(\"message\" in knownError && knownError.message) ||\n \"\";\n }\n \n if (knownError?.response?.status === 502)\n message = t(\"Common:UnexpectedError\");\n \n return message ?? t(\"Common:UnexpectedError\");\n };\n \n export function splitFileAndFolderIds<T extends TFolder | TFile>(items: T[]) {",
       "module": "/packages/shared"
     }

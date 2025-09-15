@@ -498,6 +498,12 @@ class SettingsStore {
       : this.helpCenterDomain;
   }
 
+  get weixinUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.connectweixin
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectweixin}`
+      : this.helpCenterDomain;
+  }
+
   get telegramUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.connecttelegram
       ? `${this.helpCenterDomain}${this.helpCenterEntries.connecttelegram}`

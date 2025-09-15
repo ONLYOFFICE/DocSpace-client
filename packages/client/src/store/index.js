@@ -90,6 +90,8 @@ import OAuthStore from "./OAuthStore";
 
 import BrandingStore from "./portal-settings/BrandingStore";
 
+import TelegramStore from "./TelegramStore";
+
 const selectedFolderStore = new SelectedFolderStore(settingsStore);
 
 const pluginStore = new PluginStore(
@@ -356,6 +358,8 @@ const editGroupStore = new EditGroupStore(peopleStore);
 
 const brandingStore = new BrandingStore(settingsStore);
 
+const telegramStore = new TelegramStore();
+
 const store = {
   authStore,
   userStore,
@@ -419,6 +423,8 @@ const store = {
   brandingStore,
 
   guidanceStore,
+
+  telegramStore,
 };
 
 export default store;

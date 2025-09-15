@@ -3,7 +3,7 @@
   "content": "Something went wrong.",
   "content_en_sha1_hash": "bee54c9cc30c539ab2ed15c0c936e055cf8ef67e",
   "created_at": "2025-05-19T21:30:48.934Z",
-  "updated_at": "2025-08-21T11:22:39.775Z",
+  "updated_at": "2025-09-07T07:53:15.013Z",
   "comment": {
     "text": "This translation key is used to display an error message when a specific action fails, such as clicking a button or importing data. It appears in the UI as a generic error notification and can be found in a catch block of code that handles errors thrown during certain user interactions. Translators should provide a clear and concise alternative text for this key to help users understand what went wrong.",
     "is_auto": true,
@@ -42,19 +42,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectFileStep.tsx",
-      "line_number": 201,
+      "line_number": 200,
       "context": "navigate(\"/portal-settings/management/disk-space\");\n };\n \n const handleError = useCallback(\n (message?: string) => {\n toastr.error(message || t(\"Common:SomethingWentWrong\"));\n setIsFileError(true);\n setLoadingStatus(\"none\");\n clearInterval(uploadInterval.current);\n },\n [t, setLoadingStatus],",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectFileStep.tsx",
-      "line_number": 201,
+      "line_number": 200,
       "context": "navigate(\"/portal-settings/management/disk-space\");\n };\n \n const handleError = useCallback(\n (message?: string) => {\n toastr.error(message || t(\"Common:SomethingWentWrong\"));\n setIsFileError(true);\n setLoadingStatus(\"none\");\n clearInterval(uploadInterval.current);\n },\n [t, setLoadingStatus],",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectFileStep.tsx",
-      "line_number": 201,
+      "line_number": 200,
       "context": "navigate(\"/portal-settings/management/disk-space\");\n };\n \n const handleError = useCallback(\n (message?: string) => {\n toastr.error(message || t(\"Common:SomethingWentWrong\"));\n setIsFileError(true);\n setLoadingStatus(\"none\");\n clearInterval(uploadInterval.current);\n },\n [t, setLoadingStatus],",
       "module": "/packages/client"
     },
@@ -78,19 +78,19 @@
     },
     {
       "file_path": "/packages/login/src/utils/index.ts",
-      "line_number": 121,
+      "line_number": 122,
       "context": "messageKey?: OAuth2ErrorKey,\n ) => {\n if (!messageKey) return;\n switch (messageKey) {\n case OAuth2ErrorKey.asc_retrieval_error:\n return t(\"Common:SomethingWentWrong\");\n case OAuth2ErrorKey.client_disabled_error:\n return t(\"Errors:OAuthApplicationDisabled\");\n case OAuth2ErrorKey.client_not_found_error:\n return t(\"Errors:OAuthApplicationEmpty\");\n case OAuth2ErrorKey.client_permission_denied_error:",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/shared/components/errors/Error520.tsx",
-      "line_number": 93,
+      "line_number": 92,
       "context": "zendeskAPI.addChanges(\"webWidget\", \"show\");\n \n if (!firebaseHelper?.isEnabledDB)\n return (\n <ErrorContainer\n headerText={t(\"SomethingWentWrong\")}\n customizedBodyText={errorLog?.message ?? customErrorLog?.message}\n />\n );\n \n return (",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/errors/Error520.tsx",
-      "line_number": 93,
+      "line_number": 92,
       "context": "zendeskAPI.addChanges(\"webWidget\", \"show\");\n \n if (!firebaseHelper?.isEnabledDB)\n return (\n <ErrorContainer\n headerText={t(\"SomethingWentWrong\")}\n customizedBodyText={errorLog?.message ?? customErrorLog?.message}\n />\n );\n \n return (",
       "module": "/packages/shared"
     }

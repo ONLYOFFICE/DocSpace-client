@@ -52,6 +52,7 @@ import type {
   TFolder,
   TShareToUser,
 } from "../api/files/types";
+import { SHARED_MEMBERS_COUNT } from "../constants";
 
 /**
  * Service for managing document sharing links
@@ -223,7 +224,7 @@ export class ShareLinkService {
   public static getShareFile = (
     id: string | number,
     startIndex = 0,
-    count = 50,
+    count = SHARED_MEMBERS_COUNT,
     signal?: AbortSignal,
   ) => {
     return getFileSharedUsers(id, startIndex, count, signal);
@@ -232,7 +233,7 @@ export class ShareLinkService {
   public static getShareFolder = (
     id: string | number,
     startIndex = 0,
-    count = 50,
+    count = SHARED_MEMBERS_COUNT,
     signal?: AbortSignal,
   ) => {
     return getFolderSharedUsers(id, startIndex, count, signal);
@@ -241,14 +242,14 @@ export class ShareLinkService {
   public static getShare = (
     item: TFile | TFolder,
     filter: {
-      page?: number;
+      count?: number;
       startIndex?: number;
     },
     signal?: AbortSignal,
   ) => {
     const getShare = isFile(item) ? this.getShareFile : this.getShareFolder;
 
-    return getShare(item.id, filter.startIndex, filter.page, signal);
+    return getShare(item.id, filter.startIndex, filter.count, signal);
   };
 
   public static shareItemToUser = async (

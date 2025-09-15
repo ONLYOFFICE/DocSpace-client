@@ -45,6 +45,7 @@ import {
 
 import type { TNewFiles } from "../rooms/types";
 import { request } from "../client";
+import { SHARED_MEMBERS_COUNT } from "../../constants";
 
 import FilesFilter from "./filter";
 import {
@@ -1824,7 +1825,7 @@ export async function getFormFillingStatus(
 export async function getFileSharedUsers(
   id: string | number,
   startIndex = 0,
-  count = 50,
+  count = SHARED_MEMBERS_COUNT,
   signal?: AbortSignal,
 ) {
   const linkParams = `?startIndex=${startIndex}&count=${count}`;
@@ -1840,7 +1841,7 @@ export async function getFileSharedUsers(
 export async function getFolderSharedUsers(
   id: string | number,
   startIndex = 0,
-  count = 50,
+  count = SHARED_MEMBERS_COUNT,
   signal?: AbortSignal,
 ) {
   const linkParams = `?startIndex=${startIndex}&count=${count}`;

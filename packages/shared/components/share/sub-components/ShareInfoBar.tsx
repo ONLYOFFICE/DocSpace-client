@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useMemo } from "react";
+import classNames from "classnames";
 
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import FolderIcon from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
@@ -41,6 +42,7 @@ const ShareInfoBar = ({
   selfId,
   parentShared,
   isFolder,
+  isEditor,
 }: TShareBarProps) => {
   const [visibleBar, setVisibleBar] = useLocalStorage(
     `document-bar-${selfId}`,
@@ -77,11 +79,17 @@ const ShareInfoBar = ({
   if (!barIsVisible) return null;
 
   return (
-    <PublicRoomBar
-      {...barData}
-      className={styles.shareInfoBar}
-      dataTestId="info_panel_share_public_room_bar"
-    />
+    <div
+      className={classNames(styles.containerShareInfoBar, {
+        [styles.shareInfoBarEditor]: isEditor,
+      })}
+    >
+      <PublicRoomBar
+        {...barData}
+        dataTestId="info_panel_share_public_room_bar"
+        className={styles.shareInfoBar}
+      />
+    </div>
   );
 };
 

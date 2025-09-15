@@ -35,6 +35,7 @@ import {
 import { TFileLink } from "@docspace/shared/api/files/types";
 
 import { RoomMember } from "@docspace/shared/api/rooms/types";
+import { SHARED_MEMBERS_COUNT } from "@docspace/shared/constants";
 
 interface UseShareProps {
   id: string;
@@ -78,7 +79,7 @@ export const useShare = ({
       const sharedToUsersResponse = getShareUsers(
         id,
         0,
-        50,
+        SHARED_MEMBERS_COUNT,
         abortController.current.signal,
       );
 

@@ -53,6 +53,7 @@ const Share = (props: ShareProps) => {
     fileLinkProps,
     members,
     shareMembersTotal = 0,
+    isEditor = false,
   } = props;
 
   const isFolder = infoPanelSelection.isFolder;
@@ -77,9 +78,15 @@ const Share = (props: ShareProps) => {
     setView,
     shareChanged,
   });
+
   const links = getLinkElements();
 
-  const { getUsers, total, fetchMoreShareMembers } = useMembers({
+  const {
+    getUsers,
+    total,
+    fetchMoreShareMembers,
+    isLoading: isLoadingMembers,
+  } = useMembers({
     members,
     selfId,
     shareMembersTotal,
@@ -98,8 +105,9 @@ const Share = (props: ShareProps) => {
         selfId={selfId}
         isFolder={isFolder}
         parentShared={parentShared}
+        isEditor={isEditor}
       />
-      {isLoading ? (
+      {isLoading || isLoadingMembers ? (
         <ShareLoader t={t} />
       ) : (
         <div className={styles.links}>

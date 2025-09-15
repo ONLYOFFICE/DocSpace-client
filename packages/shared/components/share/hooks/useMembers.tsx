@@ -24,21 +24,30 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import axios from "axios";
 import isNil from "lodash/isNil";
 import uniqBy from "lodash/uniqBy";
 import { useTranslation } from "react-i18next";
 import type { IndexRange } from "react-virtualized";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-import { useUnmount } from "../../../hooks/useUnmount";
 import { ShareAccessRights } from "../../../enums";
+import { useUnmount } from "../../../hooks/useUnmount";
+import { useDidMount } from "../../../hooks/useDidMount";
+import { SHARED_MEMBERS_COUNT } from "../../../constants";
 import { ShareLinkService } from "../../../services/share-link.service";
+
 import type { TOption } from "../../combobox";
 import { TData, toastr } from "../../toast";
 
-import type { TShare, TShareMember, UseMembersProps } from "../Share.types";
+import type {
+  Filter,
+  TShare,
+  TShareMember,
+  UseMembersProps,
+} from "../Share.types";
 import { convertMembers, getShareAccessRightOptions } from "../Share.helpers";
-import { ShareEventName, PAGE_COUNT } from "../Share.constants";
+import { ShareEventName } from "../Share.constants";
 
 import { User } from "../sub-components/User";
 import ShareHeader from "../sub-components/ShareHeader";
@@ -49,19 +58,16 @@ export const useMembers = (props: UseMembersProps) => {
 
   const abortController = useRef(new AbortController());
 
+  const [isLoading, setIsLoading] = useState(() => !props.members);
   const { t } = useTranslation("Common");
 
-  const [filter, setFilter] = useState(() => ({
-    page: 0,
+  const filterRef = useRef<Filter>({
     startIndex: 0,
-  }));
+    count: SHARED_MEMBERS_COUNT,
+  });
 
   const [total, setTotal] = useState(() => shareMembersTotal);
   const [members, setMembers] = useState(() => props.members ?? []);
-
-  useEffect(() => {
-    setMembers(props.members ?? []);
-  }, [props.members]);
 
   useEffect(() => {
     setTotal(shareMembersTotal);
@@ -78,27 +84,16 @@ export const useMembers = (props: UseMembersProps) => {
 
   const countMembers = props.members?.length ?? 0;
 
-  const fetchMoreShareMembers = useCallback(async (range: IndexRange) => {
-    console.log(range);
-
-    abortController.current.abort();
-    abortController.current = new AbortController();
-
-    const newStartIndex = filter.startIndex + PAGE_COUNT;
-    const newPage = filter.page + 1;
-
-    setFilter({
-      startIndex: newStartIndex,
-      page: newPage,
-    });
-
+  const fetchShareMembers = async (filter: Filter) => {
     try {
+      setIsLoading(true);
+
+      abortController.current.abort();
+      abortController.current = new AbortController();
+
       const data = await ShareLinkService.getShare(
         infoPanelSelection,
-        {
-          page: newPage,
-          startIndex: newStartIndex,
-        },
+        filter,
         abortController.current.signal,
       );
       setTotal(data.length);
@@ -107,10 +102,37 @@ export const useMembers = (props: UseMembersProps) => {
         uniqBy([...prev, ...data], (item) => item.sharedTo.id),
       );
     } catch (error) {
+      if (axios.isCancel(error)) return;
+
       console.error(error);
       toastr.error(error as TData);
+    } finally {
+      setIsLoading(false);
     }
+  };
+
+  const fetchMoreShareMembers = useCallback(async (range: IndexRange) => {
+    console.log(range);
+
+    filterRef.current.startIndex += SHARED_MEMBERS_COUNT;
+
+    return fetchShareMembers(filterRef.current);
   }, []);
+
+  useDidMount(() => {
+    const filter = {
+      startIndex: 0,
+      count: SHARED_MEMBERS_COUNT,
+    };
+
+    fetchShareMembers(filter);
+  });
+
+  useEffect(() => {
+    if (props.members) {
+      return setMembers(props.members);
+    }
+  }, [props.members]);
 
   const onAdded = useCallback(() => {
     const event = new CustomEvent(ShareEventName, {
@@ -232,5 +254,6 @@ export const useMembers = (props: UseMembersProps) => {
     getUsers,
     total,
     fetchMoreShareMembers,
+    isLoading,
   };
 };

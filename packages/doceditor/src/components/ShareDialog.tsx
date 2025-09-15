@@ -112,8 +112,9 @@ const SharingDialog = ({
     <ModalDialog
       withBorder
       withBodyScroll
-      onClose={onClosePanel}
       visible={isVisible}
+      scrollbarCreateContext
+      onClose={onClosePanel}
       displayType={ModalDialogType.aside}
       containerVisible={editLinkPanelVisible}
     >
@@ -142,6 +143,7 @@ const SharingDialog = ({
         <StyledWrapper>
           <div className="share-file_body">
             <Share
+              isEditor
               infoPanelSelection={fileInfo}
               selfId={selfId ?? ""}
               onOpenPanel={onOpenPanel}

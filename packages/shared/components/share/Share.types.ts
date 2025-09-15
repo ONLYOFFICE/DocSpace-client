@@ -138,6 +138,7 @@ export type ShareProps = {
   fileLinkProps?: TFileLink[];
   members?: RoomMember[];
   shareMembersTotal?: number;
+  isEditor?: boolean;
 };
 
 export interface LinkTitleProps {
@@ -161,6 +162,7 @@ export type TShareBarProps = {
   isFolder?: boolean;
   parentShared?: boolean;
   selfId?: string;
+  isEditor?: boolean;
 };
 
 export interface UseMembersProps {
@@ -243,4 +245,9 @@ export type ListProps = {
   linksBlockLength: number;
   withoutTitlesAndLinks: boolean;
   children: React.ReactNode;
+};
+
+export type Filter = {
+  startIndex: number;
+  count: number;
 };

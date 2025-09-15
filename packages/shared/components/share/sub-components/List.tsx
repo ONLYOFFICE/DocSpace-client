@@ -55,7 +55,7 @@ import { ListProps } from "../Share.types";
 const itemSize = 48;
 const shareLinkItemSize = 68;
 const SHARE_HEADER_HEIGHT = 28;
-const GENERAL_LINK_HEADER_HEIGHT = 38;
+const GENERAL_LINK_HEADER_HEIGHT = 28;
 
 const List: FC<ListProps> = (props) => {
   const {
@@ -104,6 +104,7 @@ const List: FC<ListProps> = (props) => {
         displayName:
           "displayName" in item.props.user ? item.props.user?.displayName : "",
         index: item.props.index!,
+        key: item.key,
       };
     });
 

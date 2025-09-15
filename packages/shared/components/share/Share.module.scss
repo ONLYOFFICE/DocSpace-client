@@ -36,14 +36,28 @@
   pointer-events: none;
 }
 
-.shareInfoBar {
+.containerShareInfoBar {
   position: sticky;
-  top: 80px;
   overflow: hidden;
   z-index: 1;
 
-  &:global(.public-room-bar) {
-    margin-top: 0;
+  top: 80px;
+  background-color: var(--background-color);
+
+  .shareInfoBar {
+    &:global(.public-room-bar) {
+      margin-top: 0;
+    }
+  }
+
+  &.shareInfoBarEditor {
+    top: 0px;
+
+    .shareInfoBar {
+      &:global(.public-room-bar) {
+        margin-top: 10px;
+      }
+    }
   }
 }
 
@@ -82,7 +96,7 @@
 }
 
 .links {
-  margin-top: 20px;
+  // margin-top: 20px;
 
   .titleLink {
     margin-bottom: 12px;
@@ -476,7 +490,7 @@
   :global(#members-list-header) {
     display: none;
     position: fixed;
-    height: 52px;
+    height: 48px;
     width: calc(100% - 32px);
     padding: 0;
     z-index: 1;

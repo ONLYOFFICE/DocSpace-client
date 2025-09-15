@@ -28,17 +28,39 @@ import { inject, observer } from "mobx-react";
 
 import InfoPanelHeaderTemplateGallery from "./headerTemplateGallery";
 import InfoPanelHeaderGeneral from "./headerGeneral";
-import InfoPanelHeaderContentProps from "./Header.types";
+import { InfoPanelHeaderContentProps } from "./Header.types";
 
 const InfoPanelHeaderContent = ({
   isGallery,
   onClose,
   ...restProps
 }: InfoPanelHeaderContentProps) => {
-  return isGallery ? (
-    <InfoPanelHeaderTemplateGallery onClose={onClose} />
-  ) : (
-    <InfoPanelHeaderGeneral {...restProps} />
+  if (isGallery) return <InfoPanelHeaderTemplateGallery onClose={onClose} />;
+
+  const {
+    selection,
+    roomsView,
+    fileView,
+    setView,
+    setIsVisible,
+    getIsTrash,
+    infoPanelItemsList,
+    enablePlugins,
+    isRecentFolder,
+  } = restProps as Exclude<InfoPanelHeaderContentProps, { isGallery: true }>;
+
+  return (
+    <InfoPanelHeaderGeneral
+      selection={selection}
+      roomsView={roomsView}
+      fileView={fileView}
+      setView={setView}
+      setIsVisible={setIsVisible}
+      getIsTrash={getIsTrash}
+      infoPanelItemsList={infoPanelItemsList}
+      enablePlugins={enablePlugins}
+      isRecentFolder={isRecentFolder}
+    />
   );
 };
 

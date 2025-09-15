@@ -41,7 +41,7 @@ import { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 
 import styles from "./Header.module.scss";
-import InfoPanelHeaderContentProps from "./Header.types";
+import { HeaderProps } from "./Header.types";
 
 const InfoPanelHeaderGeneral = ({
   selection,
@@ -52,9 +52,8 @@ const InfoPanelHeaderGeneral = ({
   getIsTrash,
   infoPanelItemsList,
   enablePlugins,
-
   isRecentFolder,
-}: InfoPanelHeaderContentProps) => {
+}: HeaderProps) => {
   const { t } = useTranslation(["Common", "InfoPanel"]);
 
   const isContacts = getContactsView();

@@ -33,27 +33,31 @@ import { InfoPanelBodyContentProps } from "./Body.types";
 
 const InfoPanelBodyContent: React.FC<InfoPanelBodyContentProps> = ({
   isGallery,
-  selection,
-  contactsTab,
-  roomsView,
-  fileView,
-  getIsFiles,
-  getIsRooms,
-  setView,
-  maxImageUploadSize,
-  editRoomDialogProps,
-  createRoomDialogProps,
-  templateEventVisible,
-  avatarEditorDialogVisible,
-  image,
-  setAvatarEditorDialogVisible,
-  onSaveRoomLogo,
-  onChangeFile,
-  setImage,
+  ...restProps
 }) => {
-  return isGallery ? (
-    <InfoPanelBodyTemplateGallery />
-  ) : (
+  if (isGallery) return <InfoPanelBodyTemplateGallery />;
+
+  const {
+    selection,
+    contactsTab,
+    roomsView,
+    fileView,
+    getIsFiles,
+    getIsRooms,
+    setView,
+    maxImageUploadSize,
+    editRoomDialogProps,
+    createRoomDialogProps,
+    templateEventVisible,
+    avatarEditorDialogVisible,
+    image,
+    setAvatarEditorDialogVisible,
+    onSaveRoomLogo,
+    onChangeFile,
+    setImage,
+  } = restProps as Exclude<InfoPanelBodyContentProps, { isGallery: true }>;
+
+  return (
     <InfoPanelBodyGeneral
       selection={selection}
       contactsTab={contactsTab}

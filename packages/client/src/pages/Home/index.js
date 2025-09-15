@@ -441,7 +441,6 @@ export const Component = inject(
     mediaViewerDataStore,
     peopleStore,
     filesActionsStore,
-    oformsStore,
     selectedFolderStore,
     clientLoadingStore,
     userStore,

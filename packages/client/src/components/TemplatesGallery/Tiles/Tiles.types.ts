@@ -49,7 +49,6 @@ export interface TilesProps {
   setOformFilesLoaded: (loaded: boolean) => void;
   isShowOneTile?: boolean;
   smallPreview: boolean;
-  setIsVisible: (isVisible: boolean) => void;
   setGallerySelected: (item: { id: Key | null | undefined } | null) => void;
   submitToGalleryTileIsVisible: boolean;
   canSubmitToFormGallery: () => boolean;
@@ -57,6 +56,7 @@ export interface TilesProps {
   onCreateOform: (navigate: NavigateFunction) => void;
   setTemplatesGalleryVisible: (isVisible: boolean) => void;
   isInitLoading: boolean;
+  setIsVisibleInfoPanelTemplateGallery: (visible: boolean) => void;
 }
 
 export interface TileProps {

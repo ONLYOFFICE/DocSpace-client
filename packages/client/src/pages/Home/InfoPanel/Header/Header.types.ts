@@ -29,28 +29,25 @@ import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import PluginStore from "SRC_DIR/store/PluginStore";
 import type TreeFoldersStore from "SRC_DIR/store/TreeFoldersStore";
-import OformsStore from "SRC_DIR/store/OformsStore";
 
-type InfoPanelHeaderContentProps = {
-  isGallery?: boolean;
-  onClose?: () => void;
-
+export type HeaderProps = {
   selection: InfoPanelStore["infoPanelSelection"];
-
   roomsView: InfoPanelStore["roomsView"];
   fileView: InfoPanelStore["fileView"];
   setView: InfoPanelStore["setView"];
-
   setIsVisible: InfoPanelStore["setIsVisible"];
   getIsTrash: InfoPanelStore["getIsTrash"];
-
   infoPanelItemsList: PluginStore["infoPanelItemsList"];
-
   enablePlugins: SettingsStore["enablePlugins"];
-
   isRecentFolder: TreeFoldersStore["isRecentFolder"];
-
-  gallerySelected: OformsStore["gallerySelected"];
 };
 
-export default InfoPanelHeaderContentProps;
+export type InfoPanelHeaderContentProps =
+  | {
+      isGallery: true;
+      onClose?: () => void;
+    }
+  | ({
+      isGallery?: false;
+      onClose?: () => void;
+    } & HeaderProps);

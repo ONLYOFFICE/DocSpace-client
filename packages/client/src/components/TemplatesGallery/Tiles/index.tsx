@@ -131,13 +131,7 @@ const Tiles: FC<TilesProps> = ({
 };
 
 export default inject<TStore>(
-  ({
-    settingsStore,
-    accessRightsStore,
-    oformsStore,
-    infoPanelStore,
-    contextOptionsStore,
-  }) => ({
+  ({ settingsStore, accessRightsStore, oformsStore, contextOptionsStore }) => ({
     theme: settingsStore.theme,
     oformFiles: oformsStore.oformFiles,
     hasGalleryFiles: oformsStore.hasGalleryFiles,
@@ -149,7 +143,6 @@ export default inject<TStore>(
     categoryFilterLoaded: oformsStore.categoryFilterLoaded,
     languageFilterLoaded: oformsStore.languageFilterLoaded,
     oformFilesLoaded: oformsStore.oformFilesLoaded,
-    setIsVisible: infoPanelStore.setIsVisible,
     onCreateOform: contextOptionsStore.onCreateOform,
     setTemplatesGalleryVisible: oformsStore.setTemplatesGalleryVisible,
     setIsVisibleInfoPanelTemplateGallery:

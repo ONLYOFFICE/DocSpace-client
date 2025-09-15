@@ -55,6 +55,10 @@ export type BodyProps = {
   contactsTab: UsersStore["contactsTab"];
 };
 
-export interface InfoPanelBodyContentProps extends BodyProps {
-  isGallery: boolean;
-}
+export type InfoPanelBodyContentProps =
+  | {
+      isGallery: true;
+    }
+  | ({
+      isGallery?: false;
+    } & BodyProps);

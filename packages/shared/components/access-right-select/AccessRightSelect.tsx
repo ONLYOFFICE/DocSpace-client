@@ -101,6 +101,7 @@ export const AccessRightSelectPure = ({
           onClick={() => onSelectCurrentItem(item)}
           testId={`access_right_option_${item.key.toString().toLowerCase()}`}
           disabled={item?.disabled}
+          tooltip={item?.tooltip}
         >
           <div className={styles.item}>
             {item.icon && typeof item.icon === "string" ? (
@@ -111,6 +112,7 @@ export const AccessRightSelectPure = ({
                 src={item.icon}
               />
             ) : null}
+
             <div className={styles.itemContent}>
               <div className={styles.itemTitle}>
                 {item.label}

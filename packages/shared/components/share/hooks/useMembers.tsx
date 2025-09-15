@@ -69,10 +69,6 @@ export const useMembers = (props: UseMembersProps) => {
   const [total, setTotal] = useState(() => shareMembersTotal);
   const [members, setMembers] = useState(() => props.members ?? []);
 
-  useEffect(() => {
-    setTotal(shareMembersTotal);
-  }, [shareMembersTotal]);
-
   useUnmount(() => {
     abortController.current.abort();
   });
@@ -120,6 +116,8 @@ export const useMembers = (props: UseMembersProps) => {
   }, []);
 
   useDidMount(() => {
+    if (props.members) return;
+
     const filter = {
       startIndex: 0,
       count: SHARED_MEMBERS_COUNT,
@@ -133,6 +131,10 @@ export const useMembers = (props: UseMembersProps) => {
       return setMembers(props.members);
     }
   }, [props.members]);
+
+  useEffect(() => {
+    setTotal(shareMembersTotal);
+  }, [shareMembersTotal]);
 
   const onAdded = useCallback(() => {
     const event = new CustomEvent(ShareEventName, {

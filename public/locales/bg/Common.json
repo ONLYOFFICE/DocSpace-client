@@ -894,5 +894,6 @@
   "RevokeLink": "Отмени линк",
   "LogoForEditors": "Лого за редактора {{editorName}}",
   "LogoForViewer": "Лого за {{diagramViewer}}",
-  "LogoDocsEditor": "Лого за редакторското заглавие"
+  "LogoDocsEditor": "Лого за редакторското заглавие",
+  "RoomCreateUser": "Добавени потребители."
 }

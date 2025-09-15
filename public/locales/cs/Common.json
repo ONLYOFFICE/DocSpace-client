@@ -894,5 +894,6 @@
   "RevokeLink": "Odvolat odkaz",
   "LogoForEditors": "Logo pro editor {{editorName}}",
   "LogoForViewer": "Logo pro {{diagramViewer}}",
-  "LogoDocsEditor": "Logo pro záhlaví editorů"
+  "LogoDocsEditor": "Logo pro záhlaví editorů",
+  "RoomCreateUser": "Přidáno uživatelů."
 }

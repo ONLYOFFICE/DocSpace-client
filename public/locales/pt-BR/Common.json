@@ -894,5 +894,6 @@
   "RevokeLink": "Revogar link",
   "LogoForEditors": "Logotipo para o editor {{editorName}}",
   "LogoForViewer": "Logotipo para {{diagramViewer}}",
-  "LogoDocsEditor": "Logo para o título dos editores"
+  "LogoDocsEditor": "Logo para o título dos editores",
+  "RoomCreateUser": "Usuários adicionados."
 }

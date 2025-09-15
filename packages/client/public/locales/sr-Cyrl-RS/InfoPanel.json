@@ -58,7 +58,6 @@
   "MembersEmptyScreenText": "Погледајте детаље о члановима овде",
   "NoRecordsFound": "Нема пронађених записа",
   "Properties": "Својства",
-  "RoomCreateUser": "Корисници додати.",
   "RoomCreateUserCount": "Додати корисници ({{count}}).",
   "RoomDenyDownloadDisabled": "Преузимање и копирање без ограничења",
   "RoomDenyDownloadEnabled": "Преузимање и копирање ограничено",

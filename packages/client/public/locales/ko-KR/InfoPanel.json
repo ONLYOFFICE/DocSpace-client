@@ -58,7 +58,6 @@
   "MembersEmptyScreenText": "여기에서 멤버 세부 정보를 확인하세요",
   "NoRecordsFound": "기록을 찾을 수 없습니다",
   "Properties": "속성",
-  "RoomCreateUser": "사용자가 추가되었습니다.",
   "RoomCreateUserCount": "사용자 추가됨 ({{count}}).",
   "RoomDenyDownloadDisabled": "다운로드 및 복사가 제한되지 않습니다",
   "RoomDenyDownloadEnabled": "다운로드 및 복사가 제한되었습니다",

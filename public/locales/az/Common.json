@@ -894,5 +894,6 @@
   "RevokeLink": "Keçidi ləğv edin",
   "LogoForEditors": "{{editorName}} redaktoru üçün loqo",
   "LogoForViewer": "{{diagramViewer}} üçün loqo",
-  "LogoDocsEditor": "Redaktorlar başlığı üçün loqo"
+  "LogoDocsEditor": "Redaktorlar başlığı üçün loqo",
+  "RoomCreateUser": "İstifadəçilər əlavə edildi."
 }

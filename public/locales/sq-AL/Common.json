@@ -893,5 +893,6 @@
   "RevokeLink": "Revokoni lidhjen",
   "LogoForEditors": "Logoja për redaktorin {{editorName}}",
   "LogoForViewer": "Logo për {{diagramViewer}}",
-  "LogoDocsEditor": "Logo për menunë kompakte të majtë"
+  "LogoDocsEditor": "Logo për menunë kompakte të majtë",
+  "RoomCreateUser": "Përdoruesit u shtuan."
 }

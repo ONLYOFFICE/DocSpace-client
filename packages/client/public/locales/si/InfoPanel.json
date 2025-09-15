@@ -56,7 +56,6 @@
   "MembersEmptyScreenText": "මෙසේ සාමාජික විස්තර බලන්න:",
   "NoRecordsFound": "වාර්තා කිසිවක් හමු නොවීය.",
   "Properties": "ගුණාංග",
-  "RoomCreateUser": "පරිශීලකයින් එකතු කරන ලදි.",
   "RoomCreateUserCount": "පරිශීලකයින් එකතු කරන ලදි ({{count}}).",
   "RoomDenyDownloadDisabled": "බාගත කිරීම සහ කොපිරී කිරීම අවරෝධයකින් තොරව",
   "RoomDenyDownloadEnabled": "බාගැනීම සහ පිටපත් කිරීම සීමා කර ඇත",

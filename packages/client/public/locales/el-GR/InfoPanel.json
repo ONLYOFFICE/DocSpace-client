@@ -58,7 +58,6 @@
   "MembersEmptyScreenText": "Δείτε λεπτομέρειες για τα μέλη εδώ",
   "NoRecordsFound": "Δεν βρέθηκαν εγγραφές",
   "Properties": "Ιδιότητες",
-  "RoomCreateUser": "Οι χρήστες προστέθηκαν.",
   "RoomCreateUserCount": "Προσθήκη χρηστών ({{count}}).",
   "RoomDenyDownloadDisabled": "Λήψη και αντιγραφή χωρίς περιορισμούς",
   "RoomDenyDownloadEnabled": "Λήψη και αντιγραφή περιορισμένη",

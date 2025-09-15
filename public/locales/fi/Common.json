@@ -894,5 +894,6 @@
   "RevokeLink": "Peru linkki",
   "LogoForEditors": "Editorin {{editorName}} logo",
   "LogoForViewer": "Logo kohteelle {{diagramViewer}}",
-  "LogoDocsEditor": "Toimittajan otsikon logo"
+  "LogoDocsEditor": "Toimittajan otsikon logo",
+  "RoomCreateUser": "Käyttäjät lisätty."
 }

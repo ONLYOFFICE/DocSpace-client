@@ -58,7 +58,6 @@
   "MembersEmptyScreenText": "Здесь будут представлены подробности об участниках",
   "NoRecordsFound": "Записи не найдены",
   "Properties": "Cвойства",
-  "RoomCreateUser": "Пользователи добавлены.",
   "RoomCreateUserCount": "Пользователи добавлены ({{count}}).",
   "RoomDenyDownloadDisabled": "Скачивание и копирование без ограничений",
   "RoomDenyDownloadEnabled": "Загрузка и копирование ограничены",

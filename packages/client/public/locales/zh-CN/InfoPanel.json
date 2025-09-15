@@ -58,7 +58,6 @@
   "MembersEmptyScreenText": "在此处查看成员详情",
   "NoRecordsFound": "未找到记录",
   "Properties": "属性",
-  "RoomCreateUser": "用户已添加。",
   "RoomCreateUserCount": "用户已添加 ({{count}})。",
   "RoomDenyDownloadDisabled": "已解除下载和复制限制",
   "RoomDenyDownloadEnabled": "已添加下载和复制限制",

@@ -893,5 +893,6 @@
   "RevokeLink": "Atsaukt saiti",
   "LogoForEditors": "Logotips redaktoram {{editorName}}",
   "LogoForViewer": "Logotips priekš {{diagramViewer}}",
-  "LogoDocsEditor": "Redaktora galvenes logotips"
+  "LogoDocsEditor": "Redaktora galvenes logotips",
+  "RoomCreateUser": "Lietotāji ir pievienoti."
 }

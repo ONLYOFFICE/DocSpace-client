@@ -58,7 +58,6 @@
   "MembersEmptyScreenText": "メンバーの詳細はここをクリックしてご覧ください",
   "NoRecordsFound": "レコードが見つかりません",
   "Properties": "プロパティ",
-  "RoomCreateUser": "ユーザーが追加されました。",
   "RoomCreateUserCount": "ユーザーが追加されました ({{count}})。",
   "RoomDenyDownloadDisabled": "無制限のダウンロードとコピー",
   "RoomDenyDownloadEnabled": "制限付きのダウンロードとコピー",

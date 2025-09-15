@@ -58,7 +58,6 @@
   "MembersEmptyScreenText": "Див. інформацію про учасників тут",
   "NoRecordsFound": "Записів не знайдено",
   "Properties": "Властивості",
-  "RoomCreateUser": "Користувачів додано.",
   "RoomCreateUserCount": "Користувачів додано ({{count}}).",
   "RoomDenyDownloadDisabled": "Завантаження та копіювання не обмежено",
   "RoomDenyDownloadEnabled": "Завантаження та копіювання обмежено",

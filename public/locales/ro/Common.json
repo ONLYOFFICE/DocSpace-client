@@ -894,5 +894,6 @@
   "RevokeLink": "Revocare link",
   "LogoForEditors": "Logo pentru editorul {{editorName}}",
   "LogoForViewer": "Logo pentru {{diagramViewer}}",
-  "LogoDocsEditor": "Logo-ul pentru antetul aplicațiilor de editare"
+  "LogoDocsEditor": "Logo-ul pentru antetul aplicațiilor de editare",
+  "RoomCreateUser": "Utilizatorul a fost adăugat."
 }

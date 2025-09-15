@@ -894,5 +894,6 @@
   "RevokeLink": "Link intrekken",
   "LogoForEditors": "Logo voor {{editorName}}-editor",
   "LogoForViewer": "Logo voor {{diagramViewer}}",
-  "LogoDocsEditor": "Logo voor de koptekst van de editors"
+  "LogoDocsEditor": "Logo voor de koptekst van de editors",
+  "RoomCreateUser": "Gebruikers toegevoegd."
 }

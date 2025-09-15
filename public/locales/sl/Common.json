@@ -894,5 +894,6 @@
   "RevokeLink": "Prekliči povezavo",
   "LogoForEditors": "Logotip za urejevalnik {{editorName}}",
   "LogoForViewer": "Logotip za {{diagramViewer}}",
-  "LogoDocsEditor": "Logotip za glavo urednika"
+  "LogoDocsEditor": "Logotip za glavo urednika",
+  "RoomCreateUser": "Uporabniki dodani."
 }

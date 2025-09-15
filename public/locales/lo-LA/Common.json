@@ -881,5 +881,6 @@
   "RevokeLink": "ຖອນການເຊື່ອມຕໍ່",
   "LogoForEditors": "ໂລໂກ້ສຳລັບບັນນາທິການ {{editorName}}",
   "LogoForViewer": "ໂລໂກ້ສຳລັບ {{diagramViewer}}",
-  "LogoDocsEditor": "ໂລໂກສຳລັບແກ້ໄຂສ່ວນຫົວ"
+  "LogoDocsEditor": "ໂລໂກສຳລັບແກ້ໄຂສ່ວນຫົວ",
+  "RoomCreateUser": "ຜູ້ໃຊ້ເພີ່ມເຕີມ"
 }

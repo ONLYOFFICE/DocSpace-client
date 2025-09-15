@@ -62,7 +62,6 @@
   "MembersEmptyScreenText": "See members details here",
   "NoRecordsFound": "No records found",
   "Properties": "Properties",
-  "RoomCreateUser": "Users added.",
   "RoomCreateUserCount": "Users added ({{count}}).",
   "RoomDenyDownloadDisabled": "Downloading and copying unrestricted",
   "RoomDenyDownloadEnabled": "Downloading and copying restricted",

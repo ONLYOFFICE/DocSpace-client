@@ -885,5 +885,6 @@
   "RevokeLink": "Відкликати посилання",
   "LogoForEditors": "Логотип для редактора {{editorName}}",
   "LogoForViewer": "Логотип для {{diagramViewer}}",
-  "LogoDocsEditor": "Логотип заголовка редакторів"
+  "LogoDocsEditor": "Логотип заголовка редакторів",
+  "RoomCreateUser": "Користувачів додано."
 }

@@ -52,6 +52,12 @@ export const ShareSelector: FC<ShareSelectorProps> = ({ item, onClose }) => {
 
     try {
       await ShareLinkService.shareItemToUser(share, item);
+
+      if (share.length === 1) {
+        toastr.success(t("Common:UserAdded"));
+      } else {
+        toastr.success(t("Common:RoomCreateUser"));
+      }
     } catch (error) {
       toastr.error(error as TData);
       console.error(error);

@@ -893,5 +893,6 @@
   "GeneralLinkRevokedAndCreatedSuccessfully": "Yeni genel bağlantı başarıyla oluşturuldu",
   "RevokeLink": "Bağlantıyı iptal et",
   "LogoForEditors": "{{editorName}} editörü için logo",
-  "LogoForViewer": "{{diagramViewer}} için logo"
+  "LogoForViewer": "{{diagramViewer}} için logo",
+  "RoomCreateUser": "Kullanıcılar eklendi."
 }

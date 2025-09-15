@@ -894,5 +894,6 @@
   "RevokeLink": "リンクの取り消し",
   "LogoForEditors": "{{editorName}}エディタ用のロゴ",
   "LogoForViewer": "{{diagramViewer}}用のロゴ",
-  "LogoDocsEditor": "エディターズヘッダーのロゴ"
+  "LogoDocsEditor": "エディターズヘッダーのロゴ",
+  "RoomCreateUser": "ユーザーが追加されました。"
 }

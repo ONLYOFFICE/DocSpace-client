@@ -894,5 +894,6 @@
   "RevokeLink": "Չեղարկել հղումը",
   "LogoForEditors": "{{editorName}} խմբագրի լոգո",
   "LogoForViewer": "{{diagramViewer}}-ի լոգո",
-  "LogoDocsEditor": "Էջագլխի խմբագրիչների լոգո"
+  "LogoDocsEditor": "Էջագլխի խմբագրիչների լոգո",
+  "RoomCreateUser": "Օգտատերերն ավելացվել են։"
 }

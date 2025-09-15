@@ -949,5 +949,7 @@
   "FullAccess": "Full access",
   "FullAccessDescription": "Operations with files and folders: creating, uploading, editing, reviewing, moving, and deleting.",
   "EditorDescription": "Operations with existing files: viewing, editing, reviewing, commenting.",
-  "AddUsers": "Add users"
+  "AddUsers": "Add users",
+  "RoomCreateUser": "Users added.",
+  "UserAdded": "User added"
 }

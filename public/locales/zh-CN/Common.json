@@ -894,5 +894,6 @@
   "RevokeLink": "撤销链接",
   "LogoForEditors": "{{editorName}}编辑器 logo",
   "LogoForViewer": "{{diagramViewer}} logo",
-  "LogoDocsEditor": "编辑器标头Logo"
+  "LogoDocsEditor": "编辑器标头Logo",
+  "RoomCreateUser": "用户已添加。"
 }

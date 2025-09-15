@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState } from "react";
+import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
 import ShareLoader from "../../skeletons/share";
@@ -99,7 +100,12 @@ const Share = (props: ShareProps) => {
   const { content, headersCount } = getUsers();
 
   return (
-    <div data-testid="shared-links">
+    <div
+      className={classNames({
+        [styles.shareContainer]: isEditor,
+      })}
+      data-testid="shared-links"
+    >
       <ShareInfoBar
         t={t}
         selfId={selfId}

@@ -532,3 +532,11 @@
 .createButton {
   height: 48px;
 }
+
+.shareContainer {
+  padding-top: 10px;
+
+  .list {
+    width: 100% !important;
+  }
+}

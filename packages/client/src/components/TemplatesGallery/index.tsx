@@ -38,7 +38,7 @@ import TilesContainer from "./TilesContainer";
 import ErrorView from "./ErrorView";
 import styles from "./TemplatesGallery.module.scss";
 
-const TemplatesGallery = (props: {
+const TemplateGallery = (props: {
   templatesGalleryVisible: boolean;
   setTemplatesGalleryVisible: (isVisible: boolean) => void;
   setCurrentExtensionGallery: (extension: string) => void;
@@ -137,7 +137,7 @@ const TemplatesGallery = (props: {
 
   const nodeTemplatesGallery = (
     <>
-      <Backdrop visible withBackground />
+      <Backdrop visible withBackground zIndex={309} />
       <div className={styles.container}>
         <div className={styles.templatesGallery}>
           <div className={styles.header}>
@@ -239,4 +239,4 @@ export default inject<TStore>(({ oformsStore, dialogsStore }) => {
     oformsLoadError,
     setSubmitToGalleryDialogVisible,
   };
-})(observer(TemplatesGallery));
+})(observer(TemplateGallery));

@@ -32,6 +32,9 @@ import type TreeFoldersStore from "SRC_DIR/store/TreeFoldersStore";
 import OformsStore from "SRC_DIR/store/OformsStore";
 
 type InfoPanelHeaderContentProps = {
+  isGallery?: boolean;
+  onClose?: () => void;
+
   selection: InfoPanelStore["infoPanelSelection"];
 
   roomsView: InfoPanelStore["roomsView"];

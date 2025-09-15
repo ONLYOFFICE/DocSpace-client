@@ -24,56 +24,37 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { inject, observer } from "mobx-react";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
+import DialogsStore from "SRC_DIR/store/DialogsStore";
+import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
+import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 
-import InfoPanelHeaderTemplateGallery from "./headerTemplateGallery";
-import InfoPanelHeaderGeneral from "./headerGeneral";
-import InfoPanelHeaderContentProps from "./Header.types";
+export type BodyProps = {
+  selection: InfoPanelStore["infoPanelSelection"];
+  roomsView: InfoPanelStore["roomsView"];
+  fileView: InfoPanelStore["fileView"];
+  getIsFiles: InfoPanelStore["getIsFiles"];
+  getIsRooms: InfoPanelStore["getIsRooms"];
+  setView: InfoPanelStore["setView"];
 
-const InfoPanelHeaderContent = ({
-  isGallery,
-  onClose,
-  ...restProps
-}: InfoPanelHeaderContentProps) => {
-  return isGallery ? (
-    <InfoPanelHeaderTemplateGallery onClose={onClose} />
-  ) : (
-    <InfoPanelHeaderGeneral {...restProps} />
-  );
+  maxImageUploadSize: SettingsStore["maxImageUploadSize"];
+
+  editRoomDialogProps: DialogsStore["editRoomDialogProps"];
+  createRoomDialogProps: DialogsStore["createRoomDialogProps"];
+  templateEventVisible: DialogsStore["templateEventVisible"];
+
+  avatarEditorDialogVisible: AvatarEditorDialogStore["avatarEditorDialogVisible"];
+  image: AvatarEditorDialogStore["image"];
+
+  setAvatarEditorDialogVisible: AvatarEditorDialogStore["setAvatarEditorDialogVisible"];
+  onSaveRoomLogo: AvatarEditorDialogStore["onSaveRoomLogo"];
+  onChangeFile: AvatarEditorDialogStore["onChangeFile"];
+  setImage: AvatarEditorDialogStore["setImage"];
+
+  contactsTab: UsersStore["contactsTab"];
 };
 
-export default inject(
-  ({
-    settingsStore,
-    infoPanelStore,
-    pluginStore,
-    treeFoldersStore,
-  }: TStore) => {
-    const { infoPanelItemsList } = pluginStore;
-
-    const { roomsView, fileView, setView, setIsVisible, getIsTrash } =
-      infoPanelStore;
-
-    const { enablePlugins } = settingsStore;
-
-    const selection = infoPanelStore.infoPanelSelection;
-
-    const { isRecentFolder } = treeFoldersStore;
-
-    return {
-      selection,
-      roomsView,
-      fileView,
-      setView,
-
-      setIsVisible,
-      getIsTrash,
-
-      infoPanelItemsList,
-
-      enablePlugins,
-
-      isRecentFolder,
-    };
-  },
-)(observer(InfoPanelHeaderContent));
+export interface InfoPanelBodyContentProps extends BodyProps {
+  isGallery: boolean;
+}

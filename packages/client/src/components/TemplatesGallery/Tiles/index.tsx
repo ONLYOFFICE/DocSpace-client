@@ -38,22 +38,15 @@ import InfiniteGrid from "./InfiniteGrid";
 import SubmitToGalleryTile from "./SubmitToGalleryTile";
 
 const Tiles: FC<TilesProps> = ({
-  // t,
   tReady,
-  // theme,
   oformFiles,
-  // hasGalleryFiles,
   setGallerySelected,
-  // resetFilters,
   submitToGalleryTileIsVisible,
   canSubmitToFormGallery,
   setOformFilesLoaded,
-  // categoryFilterLoaded,
-  // languageFilterLoaded,
-  // oformFilesLoaded,
   isShowOneTile,
   smallPreview,
-  setIsVisible,
+  setIsVisibleInfoPanelTemplateGallery,
   viewMobile,
   onCreateOform,
   setTemplatesGalleryVisible,
@@ -89,7 +82,7 @@ const Tiles: FC<TilesProps> = ({
 
   const onClickInfo = (item: { id: Key | null | undefined }) => {
     if (!item) return;
-    setIsVisible(true);
+    setIsVisibleInfoPanelTemplateGallery(true);
     setGallerySelected(item);
   };
 
@@ -159,5 +152,7 @@ export default inject<TStore>(
     setIsVisible: infoPanelStore.setIsVisible,
     onCreateOform: contextOptionsStore.onCreateOform,
     setTemplatesGalleryVisible: oformsStore.setTemplatesGalleryVisible,
+    setIsVisibleInfoPanelTemplateGallery:
+      oformsStore.setIsVisibleInfoPanelTemplateGallery,
   }),
 )(withTranslation(["Common", "FormGallery"])(observer(Tiles)));

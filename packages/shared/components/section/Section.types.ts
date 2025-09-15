@@ -49,6 +49,8 @@ export type InfoPanelProps = {
   viewAs?: TViewAs;
   currentDeviceType?: DeviceType;
   asideInfoPanel?: boolean;
+  topInfoPanel?: boolean;
+  onClose?: () => void;
 };
 
 export type SectionBodyContentProps = {

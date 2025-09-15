@@ -24,56 +24,34 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
-import InfoPanelHeaderTemplateGallery from "./headerTemplateGallery";
-import InfoPanelHeaderGeneral from "./headerGeneral";
-import InfoPanelHeaderContentProps from "./Header.types";
+import { AsideHeader } from "@docspace/shared/components/aside-header";
 
-const InfoPanelHeaderContent = ({
-  isGallery,
+import styles from "./Header.module.scss";
+
+type InfoPanelHeaderTemplateGalleryProps = {
+  onClose?: () => void;
+};
+
+const InfoPanelHeaderTemplateGallery = ({
   onClose,
-  ...restProps
-}: InfoPanelHeaderContentProps) => {
-  return isGallery ? (
-    <InfoPanelHeaderTemplateGallery onClose={onClose} />
-  ) : (
-    <InfoPanelHeaderGeneral {...restProps} />
+}: InfoPanelHeaderTemplateGalleryProps) => {
+  const { t } = useTranslation(["Common", "InfoPanel"]);
+
+  return (
+    <div className={classNames(styles.infoPanelHeader)}>
+      <AsideHeader
+        header={t("Common:Info")}
+        onCloseClick={onClose}
+        withoutBorder
+        className="header-text"
+        isCloseable
+        dataTestId="info_panel_aside_header"
+      />
+    </div>
   );
 };
 
-export default inject(
-  ({
-    settingsStore,
-    infoPanelStore,
-    pluginStore,
-    treeFoldersStore,
-  }: TStore) => {
-    const { infoPanelItemsList } = pluginStore;
-
-    const { roomsView, fileView, setView, setIsVisible, getIsTrash } =
-      infoPanelStore;
-
-    const { enablePlugins } = settingsStore;
-
-    const selection = infoPanelStore.infoPanelSelection;
-
-    const { isRecentFolder } = treeFoldersStore;
-
-    return {
-      selection,
-      roomsView,
-      fileView,
-      setView,
-
-      setIsVisible,
-      getIsTrash,
-
-      infoPanelItemsList,
-
-      enablePlugins,
-
-      isRecentFolder,
-    };
-  },
-)(observer(InfoPanelHeaderContent));
+export default InfoPanelHeaderTemplateGallery;

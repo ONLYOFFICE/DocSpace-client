@@ -43,7 +43,7 @@ export type AsideProps = AsideHeaderProps & {
   /** Disables body scroll when aside is open */
   withoutBodyScroll?: boolean;
   /** Callback function when the aside is closed */
-  onClose: () => void;
+  onClose?: () => void;
   /** Removes the header section if true */
   withoutHeader?: boolean;
 };

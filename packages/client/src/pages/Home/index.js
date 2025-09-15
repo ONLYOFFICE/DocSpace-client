@@ -159,7 +159,6 @@ const PureHome = (props) => {
     clearDropPreviewLocation,
     canCreateSecurity,
     startDropPreview,
-    gallerySelected,
   } = props;
 
   const [shouldShowFilter, setShouldShowFilter] = React.useState(false);
@@ -354,7 +353,6 @@ const PureHome = (props) => {
   sectionProps.onDragLeaveEmpty = onDragLeaveEmpty;
   sectionProps.dragging = dragging;
   sectionProps.startDropPreview = startDropPreview;
-  sectionProps.asideInfoPanel = !!gallerySelected;
 
   const hasVisibleContent =
     !isEmptyPage ||
@@ -517,8 +515,6 @@ export const Component = inject(
       mainButtonVisible,
     } = filesStore;
 
-    const { gallerySelected } = oformsStore;
-
     const {
       isRecycleBinFolder,
       isPrivacyFolder,
@@ -649,7 +645,6 @@ export const Component = inject(
       playlist,
 
       getFileInfo,
-      gallerySelected,
       setIsUpdatingRowItem,
 
       setFrameConfig,

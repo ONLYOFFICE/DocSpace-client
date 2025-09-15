@@ -79,6 +79,8 @@ class OformsStore {
 
   templatesGalleryVisible = false;
 
+  isVisibleInfoPanelTemplateGallery = false;
+
   currentExtensionGallery = ".docx";
 
   submitToGalleryTileIsVisible = !localStorage.getItem(
@@ -135,6 +137,12 @@ class OformsStore {
 
   setOformFilesLoaded = (oformFilesLoaded) => {
     this.oformFilesLoaded = oformFilesLoaded;
+  };
+
+  setIsVisibleInfoPanelTemplateGallery = (
+    isVisibleInfoPanelTemplateGallery,
+  ) => {
+    this.isVisibleInfoPanelTemplateGallery = isVisibleInfoPanelTemplateGallery;
   };
 
   fetchOformLocales = async () => {

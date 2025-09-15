@@ -320,12 +320,11 @@ const InfiniteGrid = (props) => {
   );
 };
 
-export default inject(({ oformsStore, infoPanelStore }) => {
+export default inject(({ oformsStore }) => {
   const { oformFiles, hasMoreForms, oformsFilterTotal, fetchMoreOforms } =
     oformsStore;
 
   const filesLength = oformFiles?.length;
-  const { isVisible } = infoPanelStore;
 
   return {
     filesList: oformFiles,
@@ -333,6 +332,5 @@ export default inject(({ oformsStore, infoPanelStore }) => {
     filterTotal: oformsFilterTotal,
     fetchMoreFiles: fetchMoreOforms,
     filesLength,
-    isVisible,
   };
 })(observer(InfiniteGrid));

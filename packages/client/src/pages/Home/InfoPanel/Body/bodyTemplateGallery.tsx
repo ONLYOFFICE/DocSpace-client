@@ -24,56 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { inject, observer } from "mobx-react";
+import ItemTitle from "./sub-components/ItemTitle";
+import Gallery from "./views/Gallery";
+import commonStyles from "./helpers/Common.module.scss";
 
-import InfoPanelHeaderTemplateGallery from "./headerTemplateGallery";
-import InfoPanelHeaderGeneral from "./headerGeneral";
-import InfoPanelHeaderContentProps from "./Header.types";
+const InfoPanelBodyTemplateGallery = () => {
+  return (
+    <div className={commonStyles.infoPanelBody}>
+      <ItemTitle isGallery />
 
-const InfoPanelHeaderContent = ({
-  isGallery,
-  onClose,
-  ...restProps
-}: InfoPanelHeaderContentProps) => {
-  return isGallery ? (
-    <InfoPanelHeaderTemplateGallery onClose={onClose} />
-  ) : (
-    <InfoPanelHeaderGeneral {...restProps} />
+      <Gallery />
+    </div>
   );
 };
 
-export default inject(
-  ({
-    settingsStore,
-    infoPanelStore,
-    pluginStore,
-    treeFoldersStore,
-  }: TStore) => {
-    const { infoPanelItemsList } = pluginStore;
-
-    const { roomsView, fileView, setView, setIsVisible, getIsTrash } =
-      infoPanelStore;
-
-    const { enablePlugins } = settingsStore;
-
-    const selection = infoPanelStore.infoPanelSelection;
-
-    const { isRecentFolder } = treeFoldersStore;
-
-    return {
-      selection,
-      roomsView,
-      fileView,
-      setView,
-
-      setIsVisible,
-      getIsTrash,
-
-      infoPanelItemsList,
-
-      enablePlugins,
-
-      isRecentFolder,
-    };
-  },
-)(observer(InfoPanelHeaderContent));
+export default InfoPanelBodyTemplateGallery;

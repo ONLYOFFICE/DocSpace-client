@@ -43,7 +43,7 @@ let requestsCount = 0;
 export const PreparationPortal = (props: IPreparationPortal) => {
   const { withoutHeader, isDialog, style } = props;
 
-  const { t, ready } = useTranslation(["PreparationPortal", "Common"]);
+  const { t, ready } = useTranslation(["Common"]);
 
   const errorInternalServer = t("Common:ErrorInternalServer");
 
@@ -143,7 +143,7 @@ export const PreparationPortal = (props: IPreparationPortal) => {
     <Text className={styles.preparationPortalError}>{`${errorMessage}`}</Text>
   ) : (
     <PreparationPortalProgress
-      text={t("PreparationPortal:PreparationPortalDescription", {
+      text={t("Common:PreparationPortalDescription", {
         productName: t("Common:ProductName"),
       })}
       percent={percent}

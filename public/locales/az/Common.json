@@ -894,5 +894,7 @@
   "RevokeLink": "Keçidi ləğv edin",
   "LogoForEditors": "{{editorName}} redaktoru üçün loqo",
   "LogoForViewer": "{{diagramViewer}} üçün loqo",
-  "LogoDocsEditor": "Redaktorlar başlığı üçün loqo"
+  "LogoDocsEditor": "Redaktorlar başlığı üçün loqo",
+  "PortalRestoring": "{{productName}} bərpa edilir",
+  "PreparationPortalDescription": "Bərpa prosesi başa çatdıqdan sonra siz avtomatik olaraq {{productName}}-ə yönləndiriləcəksiniz."
 }

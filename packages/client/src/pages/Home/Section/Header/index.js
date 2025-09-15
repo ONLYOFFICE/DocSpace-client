@@ -181,6 +181,7 @@ const SectionHeaderContent = (props) => {
     setChangePasswordVisible,
     setChangeAvatarVisible,
     setChangeNameVisible,
+    contactsTab,
   } = props;
 
   const location = useLocation();
@@ -517,7 +518,7 @@ const SectionHeaderContent = (props) => {
   }
 
   const getAccountsTitle = () => {
-    switch (contactsView) {
+    switch (contactsTab) {
       case "people":
         return t("Common:Members");
       case "groups":
@@ -937,7 +938,7 @@ export default inject(
     const { getContactsModel, contactsCanCreate } =
       peopleStore.contextOptionsStore;
 
-    const { setSelected: setUsersSelected } = usersStore;
+    const { setSelected: setUsersSelected, contactsTab } = usersStore;
 
     const { isIndexEditingMode, setIsIndexEditingMode, getIndexingArray } =
       indexingStore;
@@ -1099,6 +1100,8 @@ export default inject(
       setChangePasswordVisible,
       setChangeAvatarVisible,
       setChangeNameVisible,
+
+      contactsTab,
     };
   },
 )(

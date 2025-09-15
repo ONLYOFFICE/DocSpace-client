@@ -2550,18 +2550,18 @@
 .dark {
   --search-input-default-icon-fill: #{$gray-dark-strong};
   --search-input-filled-icon-fill: #{$gray-dark};
-  // --quantity-picker-disable-color: #{$light-gray-hover};
-  --payment-rectangle-color: #{$light-gray-hover};
-
+}
+.light {
   --payment-price-container-disable-background: #{$gray-light};
-
   --payment-warning-color: #{$light-status-warning};
   --payment-accent-color: var(--color-scheme-main-buttons);
+  --payment-rectangle-color: #{$light-gray-hover};
+  // --quantity-picker-disable-color: #{$light-gray-hover};
 }
+
 .dark {
   // --quantity-picker-disable-color: #{$light-dark-gray-hover};
   --payment-rectangle-color: #{$light-dark-gray-hover};
-
   --payment-price-container-disable-background: #{$dark-gray-light};
   --payment-warning-color: #{$dark-status-warning};
   --payment-accent-color: var(--color-scheme-main-buttons);

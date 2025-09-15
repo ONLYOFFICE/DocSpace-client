@@ -893,5 +893,7 @@
   "RevokeLink": "Atsaukt saiti",
   "LogoForEditors": "Logotips redaktoram {{editorName}}",
   "LogoForViewer": "Logotips priekš {{diagramViewer}}",
-  "LogoDocsEditor": "Redaktora galvenes logotips"
+  "LogoDocsEditor": "Redaktora galvenes logotips",
+  "PortalRestoring": "{{productName}} atjaunošana",
+  "PreparationPortalDescription": "Kad atjaunošanas process būs pabeigts, jūs automātiski pārsūtīs uz jūsu {{productName}}."
 }

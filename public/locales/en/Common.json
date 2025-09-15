@@ -946,5 +946,7 @@
   "FolderAvailableViaParentFolderLinkDescription": "This folder is accessible via a shared link from its parent folder, but you can create a custom external link with specific permissions.",
   "LogoForEditors": "Logo for {{editorName}} editor",
   "LogoForViewer": "Logo for {{diagramViewer}}",
-  "LogoDocsEditor": "Logo for the editors header"
+  "LogoDocsEditor": "Logo for the editors header",
+  "PortalRestoring": "{{productName}} restoring",
+  "PreparationPortalDescription": "Once the restoring process is over, you'll be automatically redirected to your {{productName}}."
 }

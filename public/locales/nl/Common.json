@@ -894,5 +894,7 @@
   "RevokeLink": "Link intrekken",
   "LogoForEditors": "Logo voor {{editorName}}-editor",
   "LogoForViewer": "Logo voor {{diagramViewer}}",
-  "LogoDocsEditor": "Logo voor de koptekst van de editors"
+  "LogoDocsEditor": "Logo voor de koptekst van de editors",
+  "PortalRestoring": "{{productName}} herstellen",
+  "PreparationPortalDescription": "Zodra het herstelproces voorbij is, wordt u automatisch doorgestuurd naar uw {{productName}}."
 }

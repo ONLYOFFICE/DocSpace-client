@@ -27,5 +27,6 @@
 module.exports = {
   rules: {
     "no-iterator-foreach": require("./no-iterator-foreach.js"),
+    "no-ascii-characters": require("./no-ascii-characters.js"),
   },
 };

@@ -197,6 +197,7 @@ const ItemTitle = ({
         model={contextOptions || []}
         getContextModel={getData}
         withBackdrop
+        baseZIndex={310}
       />
       {contextOptions.length ? (
         <ContextMenuButton

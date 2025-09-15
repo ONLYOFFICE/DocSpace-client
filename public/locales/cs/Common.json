@@ -894,5 +894,7 @@
   "RevokeLink": "Odvolat odkaz",
   "LogoForEditors": "Logo pro editor {{editorName}}",
   "LogoForViewer": "Logo pro {{diagramViewer}}",
-  "LogoDocsEditor": "Logo pro záhlaví editorů"
+  "LogoDocsEditor": "Logo pro záhlaví editorů",
+  "PortalRestoring": "Obnovení {{productName}}",
+  "PreparationPortalDescription": "Po ukončení procesu obnovy, budete automaticky přesměrováni na Váš {{productName}}."
 }

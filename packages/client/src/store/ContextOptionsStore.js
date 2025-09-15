@@ -129,13 +129,18 @@ import {
   getFileLink,
   getFolderLink,
   removeSharedFolder,
+  removeSharedFolderOrFile,
 } from "@docspace/shared/api/files";
 
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { createLoader } from "@docspace/shared/utils/createLoader";
 import { FILLING_STATUS_ID } from "@docspace/shared/constants";
-import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
+import {
+  isFile as isFileUtil,
+  isFolder as isFolderUtil,
+  isRoom as isRoomUtil,
+} from "@docspace/shared/utils/typeGuards";
 import {
   getInfoPanelOpen,
   hideInfoPanel,
@@ -637,6 +642,47 @@ class ContextOptionsStore {
     } finally {
       setGroupMenuBlocked(false);
       clearActiveOperations([], folderIds);
+    }
+  };
+
+  onRemoveSharedFilesOrFolder = async (items) => {
+    if (!Array.isArray(items) || items.length === 0) return;
+
+    const { addActiveItems } = this.filesStore;
+    const { setGroupMenuBlocked } = this.filesActionsStore;
+    const { clearActiveOperations } = this.uploadDataStore;
+
+    const { folderIds, fileIds } = items.reduce(
+      (acc, item) => {
+        if (isFolderUtil(item)) acc.folderIds.push(item.id);
+        else if (isFileUtil(item)) acc.fileIds.push(item.id);
+
+        return acc;
+      },
+      { folderIds: [], fileIds: [] },
+    );
+
+    const { endLoader, startLoader } = createLoader();
+
+    try {
+      startLoader(() => {
+        runInAction(() => {
+          setGroupMenuBlocked(true);
+          addActiveItems(fileIds, folderIds);
+        });
+      });
+
+      await removeSharedFolderOrFile(folderIds, fileIds);
+    } catch (error) {
+      console.error(error);
+      toastr.error(error);
+    } finally {
+      endLoader(() =>
+        runInAction(() => {
+          setGroupMenuBlocked(false);
+          clearActiveOperations(fileIds, folderIds);
+        }),
+      );
     }
   };
 
@@ -2281,6 +2327,14 @@ class ContextOptionsStore {
         disabled: !this.treeFoldersStore.isRecentFolder,
       },
       {
+        id: "option_remove-shared-file-or-folder",
+        key: "remove-shared-folder-or-file",
+        label: t("Common:RemoveFromList"),
+        icon: CircleCrossSvgUrl,
+        onClick: () => this.onRemoveSharedFilesOrFolder([item]),
+        disabled: false,
+      },
+      {
         key: "separate-stop-filling",
         isSeparator: true,
       },
@@ -2480,8 +2534,15 @@ class ContextOptionsStore {
       const groups = [
         ["select", "open"],
         ["share", "show-info"],
-        ["mark-as-favorite", "download", "move", "copy-to", "rename"],
-        ["remove-from-favorites", "delete"],
+        [
+          "mark-as-favorite",
+          "link-for-room-members",
+          "download",
+          "move",
+          "copy-to",
+          "rename",
+        ],
+        ["remove-from-favorites", "remove-shared-folder-or-file", "delete"],
       ];
 
       const items = resultOptions.filter((opt) => !opt.isSeparator);

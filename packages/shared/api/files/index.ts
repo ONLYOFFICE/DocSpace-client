@@ -1758,6 +1758,20 @@ export async function removeSharedFolder(folderIds: Array<string | number>) {
   });
 }
 
+export async function removeSharedFolderOrFile(
+  folderIds: Array<string | number> = [],
+  fileIds: Array<string | number> = [],
+) {
+  return request({
+    method: "delete",
+    url: `/files/share`,
+    data: {
+      folderIds,
+      fileIds,
+    },
+  });
+}
+
 export async function deleteVersionFile(
   fileId: number,
   versions: number[],

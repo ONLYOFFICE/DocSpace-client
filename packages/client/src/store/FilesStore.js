@@ -2360,6 +2360,7 @@ class FilesStore {
         "separator5",
         "delete",
         "remove-from-recent",
+        "remove-shared-folder-or-file",
         "copy-general-link",
         "separate-stop-filling",
         "stop-filling",
@@ -2869,6 +2870,7 @@ class FilesStore {
       // "change-thirdparty-info",
       "separator2",
       // "unsubscribe",
+      "remove-shared-folder-or-file",
       "delete",
     ];
 

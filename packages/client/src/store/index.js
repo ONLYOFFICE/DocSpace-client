@@ -216,6 +216,7 @@ const profileActionsStore = new ProfileActionsStore(
   settingsStore,
   currentTariffStatusStore,
   infoPanelStore,
+  clientLoadingStore,
 );
 
 const peopleStore = new PeopleStore(

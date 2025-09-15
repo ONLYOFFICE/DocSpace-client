@@ -50,6 +50,7 @@ import {
 
 import Banner from "./Banner";
 import Items from "./Items";
+import AccountsItems from "./AccountsItems";
 
 const ArticleBodyContent = (props) => {
   const {
@@ -79,11 +80,14 @@ const ArticleBodyContent = (props) => {
     campaigns,
     userId,
     isFrame,
-    setContactsTab,
 
     displayBanners,
     startDrag,
     setDropTargetPreview,
+
+    isRoomAdmin,
+
+    isAccountsArticle,
   } = props;
 
   const location = useLocation();
@@ -195,6 +199,25 @@ const ArticleBodyContent = (props) => {
 
           break;
         }
+        case "groups": {
+          const accountsFilter = AccountsFilter.getDefault();
+          params = accountsFilter.toUrlParams();
+          path = getCategoryUrl(CategoryType.Groups);
+
+          break;
+        }
+        case "guests": {
+          const accountsFilter = AccountsFilter.getDefault();
+          if (!isRoomAdmin) {
+            accountsFilter.area = "guests";
+            accountsFilter.inviterId = userId;
+          }
+
+          params = accountsFilter.toUrlParams();
+          path = getCategoryUrl(CategoryType.Guests);
+
+          break;
+        }
         default: {
           const newRoomsFilter = RoomsFilter.getDefault(
             userId,
@@ -254,7 +277,6 @@ const ArticleBodyContent = (props) => {
       recycleBinFolderId,
       activeItemId,
       selectedFolderId,
-      setContactsTab,
       setSelection,
     ],
   );
@@ -296,7 +318,13 @@ const ArticleBodyContent = (props) => {
     )
       return setActiveItemId(favoritesFolderId);
 
-    if (location.pathname.includes("/accounts") && activeItemId !== "accounts")
+    if (location.pathname.includes("/groups") && activeItemId !== "groups")
+      return setActiveItemId("groups");
+
+    if (location.pathname.includes("/guests") && activeItemId !== "guests")
+      return setActiveItemId("guests");
+
+    if (location.pathname.includes("/people") && activeItemId !== "accounts")
       return setActiveItemId("accounts");
 
     if (location.pathname.includes("/settings") && activeItemId !== "settings")
@@ -350,20 +378,28 @@ const ArticleBodyContent = (props) => {
 
   return (
     <>
-      <Items
-        onClick={onClick}
-        getLinkData={getLinkData}
-        showText={showText}
-        onHide={toggleArticleOpen}
-        activeItemId={activeItemId}
-      />
-
+      {isAccountsArticle ? (
+        <AccountsItems
+          onClick={onClick}
+          getLinkData={getLinkData}
+          activeItemId={activeItemId}
+        />
+      ) : (
+        <Items
+          onClick={onClick}
+          getLinkData={getLinkData}
+          showText={showText}
+          onHide={toggleArticleOpen}
+          activeItemId={activeItemId}
+        />
+      )}
       {!isDesktopClient &&
       showText &&
       !firstLoad &&
       campaigns.length > 0 &&
       !isFrame &&
-      displayBanners ? (
+      displayBanners &&
+      !isAccountsArticle ? (
         <Banner />
       ) : null}
     </>
@@ -379,7 +415,6 @@ export default inject(
     clientLoadingStore,
     userStore,
     campaignsStore,
-    peopleStore,
     uploadDataStore,
   }) => {
     const { clearFiles, setSelection, roomsFilter, startDrag } = filesStore;
@@ -433,6 +468,7 @@ export default inject(
       showText,
       showArticleLoader,
       isVisitor: userStore.user.isVisitor,
+      isRoomAdmin: userStore.user.isRoomAdmin,
       userId: userStore.user?.id,
 
       firstLoad,
@@ -458,7 +494,6 @@ export default inject(
       currentDeviceType,
       campaigns,
       isFrame,
-      setContactsTab: peopleStore.usersStore.setContactsTab,
 
       displayBanners,
       startDrag,

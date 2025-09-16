@@ -10,7 +10,7 @@ interface TranslationTableKeyHeaderProps {
   handleTranslateToAllLanguages: (keyPath: string) => void;
   translating: boolean;
   handleKeyContextMenu: (e: React.MouseEvent, keyPath: string) => void;
-  keyContainerRef: React.RefObject<HTMLDivElement>;
+  keyContainerRef: React.RefObject<HTMLDivElement | null>;
   projectName: string;
   namespace: string;
 }

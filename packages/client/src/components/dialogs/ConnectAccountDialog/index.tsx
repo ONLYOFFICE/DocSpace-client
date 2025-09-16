@@ -45,10 +45,10 @@ import { globalColors } from "@docspace/shared/themes";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 
 type ConnectAccountDialogProps = {
-  connectAccountDialogVisible: DialogsStore["connectAccountDialogVisible"];
-  setConnectAccountDialogVisible: DialogsStore["setConnectAccountDialogVisible"];
-  getTgLink: TStore["telegramStore"]["getTgLink"];
-  botUrl: TStore["telegramStore"]["botUrl"];
+  connectAccountDialogVisible?: DialogsStore["connectAccountDialogVisible"];
+  setConnectAccountDialogVisible?: DialogsStore["setConnectAccountDialogVisible"];
+  getTgLink?: TStore["telegramStore"]["getTgLink"];
+  botUrl?: TStore["telegramStore"]["botUrl"];
 };
 
 const ConnectAccountDialog = ({
@@ -60,16 +60,16 @@ const ConnectAccountDialog = ({
   const { t } = useTranslation(["Profile", "Common"]);
 
   useEffect(() => {
-    getTgLink();
+    getTgLink?.();
   }, []);
 
   const onClickConnect = () => {
     window.open(botUrl, "_blank");
-    setConnectAccountDialogVisible(false);
+    setConnectAccountDialogVisible?.(false);
   };
 
   const onClose = () => {
-    setConnectAccountDialogVisible(false);
+    setConnectAccountDialogVisible?.(false);
   };
 
   return (
@@ -86,7 +86,7 @@ const ConnectAccountDialog = ({
           {t("Profile:TelegramAccountDescription")}
         </Text>
         <InputBlock
-          value={botUrl}
+          value={botUrl || ""}
           type={InputType.text}
           isAutoFocussed
           isReadOnly
@@ -96,7 +96,7 @@ const ConnectAccountDialog = ({
           iconColor={globalColors.lightGrayDark}
           isIconFill
           onIconClick={() => {
-            copy(botUrl);
+            copy(botUrl || "");
             toastr.success(t("Common:LinkCopySuccess"));
           }}
         />

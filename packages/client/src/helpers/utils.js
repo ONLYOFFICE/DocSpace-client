@@ -29,7 +29,11 @@ import { toCommunityHostname } from "@docspace/shared/utils/common";
 import { FolderType } from "@docspace/shared/enums";
 import { CategoryType } from "./constants";
 
-import { PEOPLE_ROUTE_WITH_FILTER } from "./contacts";
+import {
+  PEOPLE_ROUTE_WITH_FILTER,
+  GROUPS_ROUTE_WITH_FILTER,
+  GUESTS_ROUTE_WITH_FILTER,
+} from "./contacts";
 
 export const setDocumentTitle = (subTitle = "") => {
   const { isAuthenticated, product: currentModule } = authStore;
@@ -187,6 +191,12 @@ export const getCategoryUrl = (categoryType, folderId = null) => {
 
     case CategoryType.Accounts:
       return PEOPLE_ROUTE_WITH_FILTER;
+
+    case CategoryType.Groups:
+      return GROUPS_ROUTE_WITH_FILTER;
+
+    case CategoryType.Guests:
+      return GUESTS_ROUTE_WITH_FILTER;
 
     case CategoryType.Settings:
       return "/settings/personal";

@@ -63,7 +63,7 @@ if %errorlevel% neq 0 (
 
 echo.
 echo Starting backend server...
-start /b cmd /c "cd /d "%BACKEND_DIR%" && npm run dev > backend.log 2>&1"
+start /b cmd /c "cd /d "%BACKEND_DIR%" && npm run start > backend.log 2>&1"
 REM Get the PID of the most recently started process
 for /f "tokens=2" %%a in ('tasklist /fi "imagename eq node.exe" /fo list ^| findstr "PID:"') do (
     set BACKEND_PID=%%a
@@ -73,7 +73,7 @@ for /f "tokens=2" %%a in ('tasklist /fi "imagename eq node.exe" /fo list ^| find
 echo Backend server started with PID: %BACKEND_PID%
 
 echo Starting frontend server...
-start /b cmd /c "cd /d "%FRONTEND_DIR%" && npm run dev > frontend.log 2>&1"
+start /b cmd /c "cd /d "%FRONTEND_DIR%" && npm run build && npm run start > frontend.log 2>&1"
 REM Get the PID of the most recently started process
 for /f "tokens=2" %%a in ('tasklist /fi "imagename eq node.exe" /fo list ^| findstr "PID:"') do (
     if not %%a==%BACKEND_PID% (

@@ -79,7 +79,7 @@ export interface SwipeEventData {
    */
   initial: Vector2;
   /**
-   * "Absolute velocity" (speed) - √(absX^2 + absY^2) / time
+   * "Absolute velocity" (speed) - sqr(absX^2 + absY^2) / time
    */
   velocity: number;
   /**

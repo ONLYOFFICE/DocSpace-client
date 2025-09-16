@@ -56,7 +56,9 @@ export const getNamespaces = (
 
   const queryString = params.toString();
   return api.get(
-    `/namespaces/${projectName}/${language}${queryString ? `?${queryString}` : ""}`
+    `/namespaces/${projectName}/${language}${
+      queryString ? `?${queryString}` : ""
+    }`
   );
 };
 export const addNamespace = (
@@ -146,7 +148,9 @@ export const deleteTranslationKey = (
   keyPath: string
 ) =>
   api.delete(
-    `/translations/${projectName}/${namespace}/key/${encodeURIComponent(keyPath)}`
+    `/translations/${projectName}/${namespace}/key/${encodeURIComponent(
+      keyPath
+    )}`
   );
 
 // Ollama
@@ -308,6 +312,6 @@ export const exportUntranslatedKeys = (
 };
 
 export const importTranslatedKeys = (fileData: any) =>
-  api.post<ApiResponse<ImportResponse>>(`/export-import/import`, fileData);
+  api.post<ImportResponse>(`/export-import/import`, fileData);
 
 export default api;

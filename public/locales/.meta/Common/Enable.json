@@ -3,7 +3,7 @@
   "content": "Enable",
   "content_en_sha1_hash": "20063ad9053289cecaa20ae630ed2dd758282a07",
   "created_at": "2025-05-19T21:30:44.923Z",
-  "updated_at": "2025-08-11T18:11:59.129Z",
+  "updated_at": "2025-09-09T10:39:52.735Z",
   "comment": {
     "text": "This translation key is used to display the label \"Enable\" on a button in a modal dialog, typically found in settings or configuration sections of an application. It appears as the primary action button in a footer section and is used for enabling a feature or functionality.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/sub-components/consumerModalDialog.js",
-      "line_number": 339,
+      "line_number": 342,
       "context": "<ModalDialog.Footer>\n <Button\n primary\n size=\"normal\"\n id=\"enable-button\"\n label={isLoading ? t(\"Common:Sending\") : t(\"Common:Enable\")}\n isLoading={isLoading}\n isDisabled={isLoading || isDisabled}\n scale\n onClick={updateConsumerValues}\n testId=\"consumer_dialog_enable_button\"",
       "module": "/packages/client"
     },

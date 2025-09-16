@@ -42,6 +42,9 @@ import EmptyTrashLightIcon from "PUBLIC_DIR/images/emptyview/empty.trash.light.s
 import EmptyFavoritesLightIcon from "PUBLIC_DIR/images/emptyview/empty.favorites.svg";
 import EmptyFavoritesDarkIcon from "PUBLIC_DIR/images/emptyview/empty.favorites.dark.svg";
 
+import EmptyShareLightIcon from "PUBLIC_DIR/images/emptyview/empty.share.svg";
+import EmptyShareDarkIcon from "PUBLIC_DIR/images/emptyview/empty.share.dark.svg";
+
 import EmptyArchiveDarkIcon from "PUBLIC_DIR/images/emptyview/empty.archive.dark.svg";
 import EmptyArchiveLightIcon from "PUBLIC_DIR/images/emptyview/empty.archive.light.svg";
 
@@ -499,7 +502,7 @@ export const getRootIcon = (
       isBaseTheme ? <EmptyFavoritesLightIcon /> : <EmptyFavoritesDarkIcon />,
     )
     .with([FolderType.SHARE, P._], () =>
-      isBaseTheme ? <EmptyFavoritesLightIcon /> : <EmptyFavoritesDarkIcon />,
+      isBaseTheme ? <EmptyShareLightIcon /> : <EmptyShareDarkIcon />,
     )
     .with([FolderType.Archive, ShareAccessRights.None], () =>
       isBaseTheme ? <EmptyArchiveLightIcon /> : <EmptyArchiveDarkIcon />,

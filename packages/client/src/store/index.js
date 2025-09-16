@@ -125,7 +125,7 @@ const ldapStore = new LdapFormStore(currentQuotaStore, settingsStore);
 
 const tagsStore = new TagsStore();
 
-const clientLoadingStore = new ClientLoadingStore();
+const clientLoadingStore = new ClientLoadingStore(settingsStore);
 const publicRoomStore = new PublicRoomStore(clientLoadingStore);
 
 const infoPanelStore = new InfoPanelStore(userStore);

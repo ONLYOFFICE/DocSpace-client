@@ -25,7 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable } from "mobx";
-import { isMobile } from "react-device-detect";
+import { DeviceType } from "@docspace/shared/enums";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 const SHOW_LOADER_TIMER = 500;
 const MIN_LOADER_TIMER = 500;
@@ -49,6 +50,8 @@ class ClientLoadingStore {
   isProfileLoaded: boolean = false;
 
   isPortalSettingsLoading: boolean = true;
+
+  settingsStore: SettingsStore | null = null;
 
   loaderStates: Record<SectionType, LoaderState> = {
     header: {
@@ -81,7 +84,8 @@ class ClientLoadingStore {
 
   currentClientView: "users" | "groups" | "files" | "profile" | "" = "";
 
-  constructor() {
+  constructor(settingsStore: SettingsStore) {
+    this.settingsStore = settingsStore;
     makeAutoObservable(this);
   }
 
@@ -276,7 +280,8 @@ class ClientLoadingStore {
   }
 
   get showPortalSettingsLoader(): boolean {
-    return this.isPortalSettingsLoading && !isMobile;
+    const isMobileView = this.settingsStore?.deviceType === DeviceType.mobile;
+    return this.isPortalSettingsLoading && !isMobileView;
   }
 }
 

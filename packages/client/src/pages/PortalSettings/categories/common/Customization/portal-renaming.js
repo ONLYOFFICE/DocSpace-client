@@ -57,8 +57,6 @@ const PortalRenamingComponent = (props) => {
     setIsLoadedPortalRenaming,
     isLoadedPage,
     tenantAlias,
-    initSettings,
-    setIsLoaded,
     domain,
     isSettingPaid,
     standalone,
@@ -133,8 +131,6 @@ const PortalRenamingComponent = (props) => {
       t("PortalRenaming", { productName: t("Common:ProductName") }),
     );
     setPortalName(portalNameInitially);
-    const page = isMobileView ? "language-and-time-zone" : "general";
-    if (!isLoaded) initSettings(page).then(() => setIsLoaded(true));
 
     const checkScroll = checkScrollSettingsBlock();
     checkInnerWidth();
@@ -418,14 +414,8 @@ export const PortalRenaming = inject(
       domainValidator,
     } = settingsStore;
     const { setPortalRename } = setup;
-    const {
-      isLoaded,
-      setIsLoadedPortalRenaming,
-      initSettings,
-      setIsLoaded,
-      setPortalName,
-      portalName,
-    } = common;
+    const { isLoaded, setIsLoadedPortalRenaming, setPortalName, portalName } =
+      common;
     const { isCustomizationAvailable } = currentQuotaStore;
 
     return {
@@ -433,8 +423,6 @@ export const PortalRenaming = inject(
       isLoaded,
       setIsLoadedPortalRenaming,
       tenantAlias,
-      initSettings,
-      setIsLoaded,
       domain: baseDomain,
       currentColorScheme,
       renamingSettingsUrl,

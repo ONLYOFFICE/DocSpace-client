@@ -113,3 +113,12 @@ export const copySelectedText = (
       return e;
   }
 };
+
+export const clearTextSelection = () => {
+  if (typeof window === "undefined") return;
+
+  if (window.getSelection) {
+    const selection = window.getSelection();
+    if (selection) selection.removeAllRanges();
+  }
+};

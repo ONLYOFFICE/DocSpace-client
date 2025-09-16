@@ -33,8 +33,6 @@ import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
-import { showLoader, hideLoader } from "@docspace/shared/utils/common";
-
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { Badge } from "@docspace/shared/components/badge";
@@ -131,25 +129,14 @@ class ThirdPartyServices extends React.Component {
     };
   }
 
-  componentDidMount() {
-    const { getConsumers, fetchAndSetConsumers, isThirdPartyAvailable } =
-      this.props;
-    showLoader();
-    const urlParts = window.location.href.split("?");
-    if (urlParts.length > 1 && isThirdPartyAvailable) {
-      const queryValue = urlParts[1].split("=")[1];
-      fetchAndSetConsumers(queryValue)
-        .then((isConsumerExist) => isConsumerExist && this.onModalOpen())
-        .finally(() => hideLoader());
-    } else {
-      getConsumers().finally(() => hideLoader());
-    }
-  }
-
   componentDidUpdate(prevProps) {
-    const { t, tReady } = this.props;
+    const { t, tReady, openModal } = this.props;
     if (prevProps.tReady !== tReady && tReady)
       setDocumentTitle(t("ThirdPartyAuthorization"));
+
+    if (openModal !== prevProps.openModal && openModal) {
+      this.onModalOpen();
+    }
   }
 
   onChangeLoading = (status) => {
@@ -332,9 +319,9 @@ ThirdPartyServices.propTypes = {
   i18n: PropTypes.object.isRequired,
   consumers: PropTypes.arrayOf(PropTypes.object).isRequired,
   integrationSettingsUrl: PropTypes.string,
-  getConsumers: PropTypes.func.isRequired,
   updateConsumerProps: PropTypes.func.isRequired,
   setSelectedConsumer: PropTypes.func.isRequired,
+  openModal: PropTypes.bool,
 };
 
 export default inject(({ setup, settingsStore, currentQuotaStore }) => {
@@ -346,7 +333,6 @@ export default inject(({ setup, settingsStore, currentQuotaStore }) => {
     logoText,
   } = settingsStore;
   const {
-    getConsumers,
     integration,
     updateConsumerProps,
     setSelectedConsumer,
@@ -359,7 +345,6 @@ export default inject(({ setup, settingsStore, currentQuotaStore }) => {
     theme,
     consumers,
     integrationSettingsUrl,
-    getConsumers,
     updateConsumerProps,
     setSelectedConsumer,
     fetchAndSetConsumers,

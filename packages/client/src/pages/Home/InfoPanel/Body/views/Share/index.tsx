@@ -24,17 +24,34 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { FC } from "react";
+import { useCallback, type FC } from "react";
 import { inject, observer } from "mobx-react";
 
 import Share from "@docspace/shared/components/share";
-import { ShareProps } from "@docspace/shared/components/share/Share.types";
+import type { ShareProps } from "@docspace/shared/components/share/Share.types";
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
+import { ShareEventName } from "@docspace/shared/components/share/Share.constants";
 
 interface ExternalShareProps {
   infoPanelSelection?: ShareProps["infoPanelSelection"];
   fileLinkProps?: ShareProps["fileLinkProps"];
   members?: ShareProps["members"];
 }
+
+const WrapperShare: FC<Omit<ShareProps, "onAddUser">> = (props) => {
+  const onAddUser = useCallback((item: TFolder | TFile) => {
+    const event = new CustomEvent(ShareEventName, {
+      detail: {
+        open: true,
+        item,
+      },
+    });
+
+    window.dispatchEvent(event);
+  }, []);
+
+  return <Share {...props} onAddUser={onAddUser} />;
+};
 
 export default inject<TStore>(({ infoPanelStore, userStore, dialogsStore }) => {
   const selfId = userStore.user?.id ?? "";
@@ -66,4 +83,4 @@ export default inject<TStore>(({ infoPanelStore, userStore, dialogsStore }) => {
     setEmbeddingPanelData,
     onOpenPanel: setIsShareFormData,
   };
-})(observer(Share as FC<ExternalShareProps>));
+})(observer(WrapperShare as FC<ExternalShareProps>));

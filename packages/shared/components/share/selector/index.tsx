@@ -40,7 +40,11 @@ import { toastr, TData } from "../../toast";
 
 import type { ShareSelectorProps } from "./Selector.types";
 
-export const ShareSelector: FC<ShareSelectorProps> = ({ item, onClose }) => {
+export const ShareSelector: FC<ShareSelectorProps> = ({
+  item,
+  onClose,
+  onSubmit,
+}) => {
   const { t } = useTranslation("Common");
 
   const handleSubmit: TOnSubmit = async (selectedItems, accessRight) => {
@@ -52,7 +56,9 @@ export const ShareSelector: FC<ShareSelectorProps> = ({ item, onClose }) => {
     });
 
     try {
-      await ShareLinkService.shareItemToUser(share, item);
+      const list = await ShareLinkService.shareItemToUser(share, item);
+
+      onSubmit?.(list);
 
       if (share.length === 1) {
         toastr.success(t("Common:UserAdded"));

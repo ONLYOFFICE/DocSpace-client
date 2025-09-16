@@ -139,6 +139,7 @@ export type ShareProps = {
   members?: RoomMember[];
   shareMembersTotal?: number;
   isEditor?: boolean;
+  onAddUser?: (item: TFolder | TFile) => void;
 };
 
 export interface LinkTitleProps {
@@ -172,6 +173,7 @@ export interface UseMembersProps {
   infoPanelSelection: TFile | TFolder;
 
   linksCount: number;
+  onAddUser?: (item: TFolder | TFile) => void;
 }
 
 export interface UseShareProps {

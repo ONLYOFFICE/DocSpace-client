@@ -36,6 +36,8 @@ import { useUnmount } from "../../../hooks/useUnmount";
 import { useDidMount } from "../../../hooks/useDidMount";
 import { SHARED_MEMBERS_COUNT } from "../../../constants";
 import { ShareLinkService } from "../../../services/share-link.service";
+import { useEventListener } from "../../../hooks/useEventListener";
+import type { RoomMember } from "../../../api/rooms/types";
 
 import type { TOption } from "../../combobox";
 import { TData, toastr } from "../../toast";
@@ -47,7 +49,7 @@ import type {
   UseMembersProps,
 } from "../Share.types";
 import { convertMembers, getShareAccessRightOptions } from "../Share.helpers";
-import { ShareEventName } from "../Share.constants";
+import { ShareUpdateListEventName } from "../Share.constants";
 
 import { User } from "../sub-components/User";
 import ShareHeader from "../sub-components/ShareHeader";
@@ -76,6 +78,15 @@ export const useMembers = (props: UseMembersProps) => {
   const memoMembers = useMemo(
     () => convertMembers(members ?? [], t),
     [members, t],
+  );
+
+  useEventListener(
+    ShareUpdateListEventName,
+    (event: CustomEvent<RoomMember[]>) => {
+      setMembers((prev) =>
+        uniqBy([...prev, ...event.detail], (item) => item.sharedTo.id),
+      );
+    },
   );
 
   const countMembers = props.members?.length ?? 0;
@@ -137,15 +148,8 @@ export const useMembers = (props: UseMembersProps) => {
   }, [shareMembersTotal]);
 
   const onAdded = useCallback(() => {
-    const event = new CustomEvent(ShareEventName, {
-      detail: {
-        open: true,
-        item: infoPanelSelection,
-      },
-    });
-
-    window.dispatchEvent(event);
-  }, [infoPanelSelection]);
+    props.onAddUser?.(infoPanelSelection);
+  }, [props.onAddUser, infoPanelSelection]);
 
   const onSelectOption = useCallback(
     async (option: TOption, member: TShare) => {

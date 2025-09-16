@@ -30,11 +30,15 @@ import { ShareSelector as ShareSelectorComponent } from "@docspace/shared/compon
 
 import { useEventListener } from "@docspace/shared/hooks/useEventListener";
 
-import { ShareEventName } from "@docspace/shared/components/share/Share.constants";
+import {
+  ShareEventName,
+  ShareUpdateListEventName,
+} from "@docspace/shared/components/share/Share.constants";
 
 import type { Nullable } from "@docspace/shared/types";
 import { Portal } from "@docspace/shared/components/portal";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
+import type { RoomMember } from "@docspace/shared/api/rooms/types";
 
 interface ShareSelectorProps {
   item: Nullable<TFile | TFolder>;
@@ -51,12 +55,26 @@ const ShareSelector: FC<ShareSelectorProps> = ({ item }) => {
     setOpen(event.detail.open);
   });
 
+  const onSubmit = (list: RoomMember[]) => {
+    const event = new CustomEvent<RoomMember[]>(ShareUpdateListEventName, {
+      detail: list,
+    });
+
+    window.dispatchEvent(event);
+  };
+
   if (!item || !open) return null;
 
   return (
     <Portal
       visible
-      element={<ShareSelectorComponent item={item} onClose={onClose} />}
+      element={
+        <ShareSelectorComponent
+          item={item}
+          onClose={onClose}
+          onSubmit={onSubmit}
+        />
+      }
     />
   );
 };

@@ -24,9 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { RoomMember } from "api/rooms/types";
 import type { TFile, TFolder } from "../../../api/files/types";
 
 export interface ShareSelectorProps {
   item: TFile | TFolder;
   onClose: VoidFunction;
+  onSubmit?: (list: RoomMember[]) => void;
 }

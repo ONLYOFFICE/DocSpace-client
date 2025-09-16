@@ -55,6 +55,7 @@ const Share = (props: ShareProps) => {
     members,
     shareMembersTotal = 0,
     isEditor = false,
+    onAddUser,
   } = props;
 
   const isFolder = infoPanelSelection.isFolder;
@@ -93,6 +94,7 @@ const Share = (props: ShareProps) => {
     shareMembersTotal,
     infoPanelSelection,
     linksCount: links.length,
+    onAddUser,
   });
 
   if (hideSharePanel) return null;

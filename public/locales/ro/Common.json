@@ -894,5 +894,7 @@
   "RevokeLink": "Revocare link",
   "LogoForEditors": "Logo pentru editorul {{editorName}}",
   "LogoForViewer": "Logo pentru {{diagramViewer}}",
-  "LogoDocsEditor": "Logo-ul pentru antetul aplicațiilor de editare"
+  "LogoDocsEditor": "Logo-ul pentru antetul aplicațiilor de editare",
+  "PortalRestoring": "Restaurarea spațiului {{productName}}",
+  "PreparationPortalDescription": "După finalizarea procesului de restaurare, veți fi redirecționat automat către {{productName}}."
 }

@@ -234,6 +234,8 @@ export const enum PageType {
   dataImport = "dataImport",
   storageManagement = "storageManagement",
   services = "services",
+  groups = "groups",
+  guests = "guests",
 }
 
 /**

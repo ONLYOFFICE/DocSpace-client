@@ -99,7 +99,7 @@ describe("<PreparationPortal />", () => {
     // Wait for the progress to be displayed
     await waitFor(() => {
       expect(
-        screen.getByText("PreparationPortal:PreparationPortalDescription"),
+        screen.getByText("Common:PreparationPortalDescription"),
       ).toBeInTheDocument();
     });
   });
@@ -162,7 +162,7 @@ describe("<PreparationPortal />", () => {
     // Check if progress was updated
     await waitFor(() => {
       expect(
-        screen.getByText("PreparationPortal:PreparationPortalDescription"),
+        screen.getByText("Common:PreparationPortalDescription"),
       ).toBeInTheDocument();
     });
   });

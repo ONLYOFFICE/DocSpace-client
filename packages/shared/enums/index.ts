@@ -875,3 +875,9 @@ export const enum ShareLinkType {
   Internal = 0,
   External = 1,
 }
+
+export enum VectorizationStatus {
+  InProgress,
+  Completed,
+  Failed,
+}

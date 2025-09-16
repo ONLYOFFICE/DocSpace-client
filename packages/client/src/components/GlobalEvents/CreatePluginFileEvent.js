@@ -42,6 +42,8 @@ const CreatePluginFile = ({
   onCancel,
   onClose,
   isCreateDialog,
+  isCreateDisabled,
+  isCloseAfterCreate = true,
   options,
   selectedOption,
   onSelect,
@@ -91,9 +93,18 @@ const CreatePluginFile = ({
         updateFileItems,
         updateCreateDialogProps: updateCreatePluginFileProps,
       });
-      !message.createDialogProps?.errorText && onCloseAction();
+      isCloseAfterCreate && onCloseAction();
     } catch (error) {
       if (!onError) return;
+
+      if (error && isAutoFocusOnError) {
+        setTimeout(() => {
+          const input = document?.getElementById("create-text-input");
+          if (input) {
+            input.focus();
+          }
+        }, 50);
+      }
 
       const message = await onError(error);
 
@@ -138,26 +149,49 @@ const CreatePluginFile = ({
     });
   };
 
-  const onChangeAction = (value) => {
-    if (!onChange) return;
-    const message = onChange(value);
+  const onChangeAction = async (value) => {
+    try {
+      if (!onChange) return;
+      const message = onChange(value);
 
-    messageActions({
-      message,
-      pluginName,
-      setSettingsPluginDialogVisible,
-      setCurrentSettingsDialogPlugin,
-      updatePluginStatus,
-      setPluginDialogVisible,
-      setPluginDialogProps,
-      updateContextMenuItems,
-      updateInfoPanelItems,
-      updateMainButtonItems,
-      updateProfileMenuItems,
-      updateEventListenerItems,
-      updateFileItems,
-      updateCreateDialogProps: updateCreatePluginFileProps,
-    });
+      messageActions({
+        message,
+        pluginName,
+        setSettingsPluginDialogVisible,
+        setCurrentSettingsDialogPlugin,
+        updatePluginStatus,
+        setPluginDialogVisible,
+        setPluginDialogProps,
+        updateContextMenuItems,
+        updateInfoPanelItems,
+        updateMainButtonItems,
+        updateProfileMenuItems,
+        updateEventListenerItems,
+        updateFileItems,
+        updateCreateDialogProps: updateCreatePluginFileProps,
+      });
+    } catch (error) {
+      if (!onError) return;
+
+      const message = await onError(error);
+
+      messageActions({
+        message,
+        pluginName,
+        setSettingsPluginDialogVisible,
+        setCurrentSettingsDialogPlugin,
+        updatePluginStatus,
+        setPluginDialogVisible,
+        setPluginDialogProps,
+        updateContextMenuItems,
+        updateInfoPanelItems,
+        updateMainButtonItems,
+        updateProfileMenuItems,
+        updateEventListenerItems,
+        updateFileItems,
+        updateCreateDialogProps: updateCreatePluginFileProps,
+      });
+    }
   };
 
   return (
@@ -176,7 +210,7 @@ const CreatePluginFile = ({
       onSelect={onSelectAction}
       extension={extension}
       errorText={errorText}
-      isAutoFocusOnError={isAutoFocusOnError}
+      isCreateDisabled={isCreateDisabled}
     />
   );
 };

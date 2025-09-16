@@ -32,8 +32,9 @@ import { useEventListener } from "@docspace/shared/hooks/useEventListener";
 
 import { ShareEventName } from "@docspace/shared/components/share/Share.constants";
 
-import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import type { Nullable } from "@docspace/shared/types";
+import { Portal } from "@docspace/shared/components/portal";
+import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 
 interface ShareSelectorProps {
   item: Nullable<TFile | TFolder>;
@@ -52,7 +53,12 @@ const ShareSelector: FC<ShareSelectorProps> = ({ item }) => {
 
   if (!item || !open) return null;
 
-  return <ShareSelectorComponent item={item} onClose={onClose} />;
+  return (
+    <Portal
+      visible
+      element={<ShareSelectorComponent item={item} onClose={onClose} />}
+    />
+  );
 };
 
 export default inject<TStore>(({ infoPanelStore }) => {

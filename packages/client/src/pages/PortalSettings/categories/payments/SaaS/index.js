@@ -51,7 +51,7 @@ const SaaSPage = ({
   isDesktopClientInit,
   setIsDesktopClientInit,
   isShowStorageTariffDeactivatedModal,
-  isPortalSettingsLoading,
+  showPortalSettingsLoader,
 }) => {
   const { t, ready } = useTranslation(["Payments", "Common", "Settings"]);
   const shouldShowLoader =
@@ -80,7 +80,7 @@ const SaaSPage = ({
     setDocumentTitle(t("Common:PaymentsTitle"));
   }, [ready]);
 
-  return shouldShowLoader && isPortalSettingsLoading ? (
+  return shouldShowLoader && showPortalSettingsLoader ? (
     <PaymentsLoader />
   ) : (
     <>
@@ -124,7 +124,7 @@ export default inject(
       setIsDesktopClientInit,
     } = settingsStore;
 
-    const { isPortalSettingsLoading } = clientLoadingStore;
+    const { showPortalSettingsLoader } = clientLoadingStore;
 
     return {
       isDesktopClientInit,
@@ -140,7 +140,7 @@ export default inject(
       language,
       isUpdatingBasicSettings,
       isShowStorageTariffDeactivatedModal,
-      isPortalSettingsLoading,
+      showPortalSettingsLoader,
     };
   },
 )(observer(SaaSPage));

@@ -42,7 +42,7 @@ const DeleteData = (props) => {
     isNotPaidPeriod,
     tReady,
     getPortalOwner,
-    isPortalSettingsLoading,
+    showPortalSettingsLoader,
     clearAbortControllerArr,
   } = props;
 
@@ -94,7 +94,7 @@ const DeleteData = (props) => {
     setCurrentTabId(e.id);
   };
 
-  if (isPortalSettingsLoading || !tReady) return <DeleteDataLoader />;
+  if (showPortalSettingsLoader || !tReady) return <DeleteDataLoader />;
 
   return isNotPaidPeriod ? (
     <PortalDeletionSection />
@@ -113,12 +113,12 @@ export const Component = inject(
     const { isNotPaidPeriod } = currentTariffStatusStore;
     const { getPortalOwner, clearAbortControllerArr } = settingsStore;
 
-    const { isPortalSettingsLoading } = clientLoadingStore;
+    const { showPortalSettingsLoader } = clientLoadingStore;
 
     return {
       isNotPaidPeriod,
       getPortalOwner,
-      isPortalSettingsLoading,
+      showPortalSettingsLoader,
       clearAbortControllerArr,
     };
   },

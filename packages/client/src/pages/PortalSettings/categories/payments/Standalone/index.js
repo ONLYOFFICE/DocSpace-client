@@ -50,7 +50,7 @@ const StandalonePage = (props) => {
     buyUrl,
     salesEmail,
     isEnterprise,
-    isPortalSettingsLoading,
+    showPortalSettingsLoader,
   } = props;
 
   const { t, ready } = useTranslation("Common");
@@ -65,7 +65,7 @@ const StandalonePage = (props) => {
       !isLoadedCurrentQuota ||
       !ready ||
       isUpdatingBasicSettings) &&
-    isPortalSettingsLoading
+    showPortalSettingsLoader
   )
     return <PaymentsStandaloneLoader isEnterprise={!isTrial} />;
 
@@ -112,7 +112,7 @@ export default inject(
       isEnterprise,
     } = currentTariffStatusStore;
 
-    const { isPortalSettingsLoading } = clientLoadingStore;
+    const { showPortalSettingsLoader } = clientLoadingStore;
 
     return {
       isTrial,
@@ -130,7 +130,7 @@ export default inject(
       buyUrl,
       salesEmail,
       isEnterprise,
-      isPortalSettingsLoading,
+      showPortalSettingsLoader,
     };
   },
 )(observer(StandalonePage));

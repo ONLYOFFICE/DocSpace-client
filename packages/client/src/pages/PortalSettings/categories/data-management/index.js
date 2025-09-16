@@ -70,7 +70,7 @@ const DataManagementWrapper = (props) => {
     currentTariffStatusStore,
     settingsStore,
     clearAbortControllerArr,
-    isPortalSettingsLoading,
+    showPortalSettingsLoader,
   } = props;
 
   const navigate = useNavigate();
@@ -146,7 +146,7 @@ const DataManagementWrapper = (props) => {
           renderTooltip={renderTooltip}
           isEmptyContentBeforeLoader={isEmptyContentBeforeLoader}
           setIsEmptyContentBeforeLoader={setIsEmptyContentBeforeLoader}
-          isInitialLoading={isPortalSettingsLoading}
+          isInitialLoading={showPortalSettingsLoader}
           isInitialError={isInitialError}
         />
       ),
@@ -163,7 +163,7 @@ const DataManagementWrapper = (props) => {
           buttonSize={buttonSize}
           renderTooltip={renderTooltip}
           isEmptyContentBeforeLoader={isEmptyContentBeforeLoader}
-          isInitialLoading={isPortalSettingsLoading}
+          isInitialLoading={showPortalSettingsLoader}
           isInitialError={isInitialError}
         />
       ),
@@ -255,7 +255,7 @@ export const Component = inject(
       clearAbortControllerArr,
     } = settingsStore;
 
-    const { isPortalSettingsLoading } = clientLoadingStore;
+    const { showPortalSettingsLoader } = clientLoadingStore;
 
     const buttonSize =
       currentDeviceType !== DeviceType.desktop ? "normal" : "small";
@@ -274,7 +274,7 @@ export const Component = inject(
       currentTariffStatusStore,
       settingsStore,
       clearAbortControllerArr,
-      isPortalSettingsLoading,
+      showPortalSettingsLoader,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(DataManagementWrapper)));

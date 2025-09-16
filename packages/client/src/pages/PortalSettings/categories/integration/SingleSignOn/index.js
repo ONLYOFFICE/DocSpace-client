@@ -52,7 +52,7 @@ const SingleSignOn = (props) => {
     isSSOAvailable,
     currentDeviceType,
     logoText,
-    isPortalSettingsLoading,
+    showPortalSettingsLoader,
   } = props;
   const { t, ready } = useTranslation(["SingleSignOn", "Settings"]);
   const isMobileView = currentDeviceType === DeviceType.mobile;
@@ -61,7 +61,7 @@ const SingleSignOn = (props) => {
     if (ready) setDocumentTitle(t("Settings:SingleSignOn"));
   }, [ready]);
 
-  if (isPortalSettingsLoading && !isMobileView && isSSOAvailable)
+  if (showPortalSettingsLoader && !isMobileView && isSSOAvailable)
     return <SSOLoader />;
 
   return (
@@ -118,7 +118,7 @@ export default inject(
 
     const { serviceProviderSettings, spMetadata } = ssoStore;
 
-    const { isPortalSettingsLoading } = clientLoadingStore;
+    const { showPortalSettingsLoader } = clientLoadingStore;
 
     return {
       serviceProviderSettings,
@@ -126,7 +126,7 @@ export default inject(
       isSSOAvailable,
       currentDeviceType,
       logoText,
-      isPortalSettingsLoading,
+      showPortalSettingsLoader,
     };
   },
 )(observer(SingleSignOn));

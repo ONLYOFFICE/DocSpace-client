@@ -50,7 +50,7 @@ const DocumentService = ({
   currentColorScheme,
   integrationSettingsUrl,
   initialDocumentServiceData,
-  isPortalSettingsLoading,
+  showPortalSettingsLoader,
 }) => {
   const { t } = useTranslation(["Settings", "Common"]);
 
@@ -226,7 +226,7 @@ const DocumentService = ({
     isSaveLoading ||
     isResetLoading;
 
-  if (isPortalSettingsLoading) return <SettingsDSConnectSkeleton />;
+  if (showPortalSettingsLoader) return <SettingsDSConnectSkeleton />;
 
   return (
     <Styled.Location>
@@ -435,13 +435,13 @@ export default inject(
     const { currentColorScheme, integrationSettingsUrl, currentDeviceType } =
       settingsStore;
     const { changeDocumentServiceLocation } = filesSettingsStore;
-    const { isPortalSettingsLoading } = clientLoadingStore;
+    const { showPortalSettingsLoader } = clientLoadingStore;
     return {
       changeDocumentServiceLocation,
       currentColorScheme,
       integrationSettingsUrl,
       currentDeviceType,
-      isPortalSettingsLoading,
+      showPortalSettingsLoader,
     };
   },
 )(observer(DocumentService));

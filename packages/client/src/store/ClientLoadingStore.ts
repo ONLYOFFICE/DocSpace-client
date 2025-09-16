@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable } from "mobx";
+import { isMobile } from "react-device-detect";
 
 const SHOW_LOADER_TIMER = 500;
 const MIN_LOADER_TIMER = 500;
@@ -272,6 +273,10 @@ class ClientLoadingStore {
 
   get showProfileLoader(): boolean {
     return this.showHeaderLoader || !this.isProfileLoaded;
+  }
+
+  get showPortalSettingsLoader(): boolean {
+    return this.isPortalSettingsLoading && !isMobile;
   }
 }
 

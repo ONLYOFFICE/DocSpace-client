@@ -69,7 +69,7 @@ const Api = (props) => {
     apiBasicLink,
     currentDeviceType,
     logoText,
-    isPortalSettingsLoading,
+    showPortalSettingsLoader,
   } = props;
 
   const imgSrc = theme.isBase ? ApiSvgUrl : ApiDarkSvgUrl;
@@ -78,7 +78,7 @@ const Api = (props) => {
     if (tReady) setDocumentTitle(t("Api"));
   }, [tReady]);
 
-  if (isPortalSettingsLoading || !tReady) return null;
+  if (showPortalSettingsLoader || !tReady) return null;
 
   return (
     <ConfirmWrapper height="100%">

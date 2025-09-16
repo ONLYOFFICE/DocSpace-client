@@ -41,7 +41,7 @@ const SMTPSettings = (props) => {
     currentColorScheme,
     integrationSettingsUrl,
     logoText,
-    isPortalSettingsLoading,
+    showPortalSettingsLoader,
   } = props;
 
   const { t, ready } = useTranslation([
@@ -55,7 +55,7 @@ const SMTPSettings = (props) => {
     if (ready) setDocumentTitle(t("Settings:SMTPSettings"));
   }, [ready]);
 
-  if (isPortalSettingsLoading) return <SettingsSMTPSkeleton />;
+  if (showPortalSettingsLoader) return <SettingsSMTPSkeleton />;
 
   return (
     <StyledComponent withoutExternalLink={!integrationSettingsUrl}>
@@ -89,13 +89,13 @@ export default inject(({ settingsStore, setup, clientLoadingStore }) => {
     settingsStore;
   const { setInitSMTPSettings } = setup;
 
-  const { isPortalSettingsLoading } = clientLoadingStore;
+  const { showPortalSettingsLoader } = clientLoadingStore;
 
   return {
     setInitSMTPSettings,
     currentColorScheme,
     integrationSettingsUrl,
     logoText,
-    isPortalSettingsLoading,
+    showPortalSettingsLoader,
   };
 })(observer(SMTPSettings));

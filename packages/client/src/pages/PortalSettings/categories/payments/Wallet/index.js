@@ -40,7 +40,7 @@ const Wallet = (props) => {
     isShowStorageTariffDeactivatedModal,
     language,
     setIsInitWalletPage,
-    isPortalSettingsLoading,
+    showPortalSettingsLoader,
   } = props;
 
   const { t, ready } = useTranslation(["Payments", "Common"]);
@@ -57,7 +57,7 @@ const Wallet = (props) => {
     };
   }, []);
 
-  return shouldShowLoader && isPortalSettingsLoading ? (
+  return shouldShowLoader && showPortalSettingsLoader ? (
     <TransactionHistoryLoader />
   ) : (
     <>
@@ -79,7 +79,7 @@ export default inject(({ paymentStore, authStore, clientLoadingStore }) => {
   } = paymentStore;
   const { language } = authStore;
 
-  const { isPortalSettingsLoading } = clientLoadingStore;
+  const { showPortalSettingsLoader } = clientLoadingStore;
 
   return {
     isInitWalletPage,
@@ -88,6 +88,6 @@ export default inject(({ paymentStore, authStore, clientLoadingStore }) => {
 
     setIsInitWalletPage,
 
-    isPortalSettingsLoading,
+    showPortalSettingsLoader,
   };
 })(observer(Wallet));

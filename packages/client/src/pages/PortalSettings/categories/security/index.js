@@ -55,7 +55,7 @@ const SecurityWrapper = (props) => {
     tfaStore,
     setup,
     clearAbortControllerArr,
-    isPortalSettingsLoading,
+    showPortalSettingsLoader,
   } = props;
 
   const navigate = useNavigate();
@@ -125,7 +125,7 @@ const SecurityWrapper = (props) => {
     );
   };
 
-  if (isPortalSettingsLoading && data.length)
+  if (showPortalSettingsLoader && data.length)
     return currentTabId === data[0].id ? (
       currentDeviceType !== DeviceType.desktop ? (
         <MobileSecurityLoader />
@@ -153,12 +153,12 @@ export const Component = inject(
 
     const { clearAbortControllerArr, currentDeviceType } = settingsStore;
 
-    const { isPortalSettingsLoading } = clientLoadingStore;
+    const { showPortalSettingsLoader } = clientLoadingStore;
 
     return {
       resetIsInit,
 
-      isPortalSettingsLoading,
+      showPortalSettingsLoader,
 
       settingsStore,
       tfaStore,

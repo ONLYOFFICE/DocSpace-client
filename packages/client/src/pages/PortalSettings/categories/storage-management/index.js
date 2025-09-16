@@ -46,7 +46,7 @@ const StorageManagementWrapper = (props) => {
     language,
     clearIntervalCheckRecalculate,
     standalone,
-    isPortalSettingsLoading,
+    showPortalSettingsLoader,
   } = props;
 
   useEffect(() => {
@@ -63,7 +63,7 @@ const StorageManagementWrapper = (props) => {
     ready && setDocumentTitle(t("Settings:StorageManagement"));
   }, [ready]);
 
-  if (isPortalSettingsLoading || !isInit)
+  if (showPortalSettingsLoader || !isInit)
     return <SettingsStorageManagementSkeleton />;
 
   return (
@@ -85,14 +85,14 @@ export const Component = inject(
     const { language } = authStore;
     const { isInit, clearIntervalCheckRecalculate } = storageManagement;
     const { standalone } = settingsStore;
-    const { isPortalSettingsLoading } = clientLoadingStore;
+    const { showPortalSettingsLoader } = clientLoadingStore;
 
     return {
       isInit,
       language,
       clearIntervalCheckRecalculate,
       standalone,
-      isPortalSettingsLoading,
+      showPortalSettingsLoader,
     };
   },
 )(observer(StorageManagementWrapper));

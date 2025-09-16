@@ -62,7 +62,7 @@ const PluginPage = ({
   currentColorScheme,
   apiPluginSDKLink,
 
-  isPortalSettingsLoading,
+  showPortalSettingsLoader,
 }: PluginsProps) => {
   const { t } = useTranslation(["WebPlugins", "Common"]);
 
@@ -77,7 +77,7 @@ const PluginPage = ({
     setDocumentTitle(t("Common:Plugins"));
   }, [t]);
 
-  return isPortalSettingsLoading ||
+  return showPortalSettingsLoader ||
     (!isEmptyList && pluginList.length === 0) ? (
     <StyledContainer>
       <ListLoader withUpload={withUpload} />
@@ -144,7 +144,7 @@ export default inject(
     const { pluginOptions, currentColorScheme, theme, apiPluginSDKLink } =
       settingsStore;
 
-    const { isPortalSettingsLoading } = clientLoadingStore;
+    const { showPortalSettingsLoader } = clientLoadingStore;
 
     const withUpload = pluginOptions.upload;
 
@@ -182,7 +182,7 @@ export default inject(
       isEmptyList,
       apiPluginSDKLink,
 
-      isPortalSettingsLoading,
+      showPortalSettingsLoader,
     };
   },
 )(observer(PluginPage));

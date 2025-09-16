@@ -48,7 +48,7 @@ export interface InjectedProvidersProps extends ProvidersProps {
   getMigrationList: TStore["importAccountsStore"]["getMigrationList"];
   setWorkspace: TStore["importAccountsStore"]["setWorkspace"];
   logoText: TStore["settingsStore"]["logoText"];
-  isPortalSettingsLoading: TStore["clientLoadingStore"]["isPortalSettingsLoading"];
+  showPortalSettingsLoader: TStore["clientLoadingStore"]["showPortalSettingsLoader"];
 }
 
 export interface SelectFileStepProps {

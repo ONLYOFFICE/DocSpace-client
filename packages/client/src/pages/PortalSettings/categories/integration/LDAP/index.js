@@ -52,7 +52,7 @@ const LDAP = ({
   isMobileView,
   isLdapEnabled,
   setScrollToSettings,
-  isPortalSettingsLoading,
+  showPortalSettingsLoader,
 }) => {
   const { t } = useTranslation(["Ldap", "Settings", "Common"]);
   const [isSmallWindow, setIsSmallWindow] = useState(false);
@@ -79,7 +79,7 @@ const LDAP = ({
     return () => window.removeEventListener("resize", onCheckView);
   }, [isLdapAvailable, load, t]);
 
-  if (isPortalSettingsLoading && isLdapAvailable) return <LdapLoader />;
+  if (showPortalSettingsLoader && isLdapAvailable) return <LdapLoader />;
 
   const link = `${`${t("Settings:ManagementCategorySecurity")} > ${t("Settings:InvitationSettings")}.`}`;
 
@@ -155,7 +155,7 @@ export default inject(
     } = settingsStore;
     const { load, isLdapEnabled, isLoaded } = ldapStore;
 
-    const { isPortalSettingsLoading } = clientLoadingStore;
+    const { showPortalSettingsLoader } = clientLoadingStore;
 
     const isMobileView = currentDeviceType === DeviceType.mobile;
 
@@ -168,7 +168,7 @@ export default inject(
       isLdapEnabled,
       isLoaded,
       setScrollToSettings,
-      isPortalSettingsLoading,
+      showPortalSettingsLoader,
     };
   },
 )(observer(LDAP));

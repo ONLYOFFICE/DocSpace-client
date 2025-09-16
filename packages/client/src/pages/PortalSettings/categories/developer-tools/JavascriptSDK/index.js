@@ -67,7 +67,7 @@ const PortalIntegration = (props) => {
     sdkLink,
     theme,
     tReady,
-    isPortalSettingsLoading,
+    showPortalSettingsLoader,
   } = props;
 
   const isSmall = useRef(
@@ -160,7 +160,7 @@ const PortalIntegration = (props) => {
     };
   }, []);
 
-  if (isPortalSettingsLoading) return null;
+  if (showPortalSettingsLoader) return null;
 
   return (
     <SDKContainer>
@@ -206,13 +206,13 @@ const PortalIntegration = (props) => {
 
 export default inject(({ settingsStore, clientLoadingStore }) => {
   const { theme, currentColorScheme, sdkLink } = settingsStore;
-  const { isPortalSettingsLoading } = clientLoadingStore;
+  const { showPortalSettingsLoader } = clientLoadingStore;
 
   return {
     theme,
     currentColorScheme,
     sdkLink,
-    isPortalSettingsLoading,
+    showPortalSettingsLoader,
   };
 })(
   withTranslation([

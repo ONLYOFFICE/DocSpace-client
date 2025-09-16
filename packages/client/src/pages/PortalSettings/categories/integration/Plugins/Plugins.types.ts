@@ -98,7 +98,7 @@ export interface PluginsProps {
 
   apiPluginSDKLink: string | undefined;
 
-  isPortalSettingsLoading: boolean;
+  showPortalSettingsLoader: boolean;
 }
 
 export interface UploadDecsriptionProps {

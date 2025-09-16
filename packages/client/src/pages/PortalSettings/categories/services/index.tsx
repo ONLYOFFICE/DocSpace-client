@@ -57,7 +57,7 @@ const Services = (props: InjectedProps) => {
     confirmActionType,
     setIsInitServicesPage,
     setVisibleWalletSetting,
-    isPortalSettingsLoading,
+    showPortalSettingsLoader,
   } = props;
   const { t, ready } = useTranslation(["Payments", "Services", "Common"]);
   const [isStorageVisible, setIsStorageVisible] = useState(false);
@@ -236,7 +236,7 @@ const Services = (props: InjectedProps) => {
     }
   };
 
-  return shouldShowLoader && isPortalSettingsLoading ? (
+  return shouldShowLoader && showPortalSettingsLoader ? (
     <ServicesLoader />
   ) : (
     <>
@@ -312,7 +312,7 @@ const mapStoreToProps = ({
     isCardLinkedToPortal,
   } = paymentStore;
 
-  const { isPortalSettingsLoading } = clientLoadingStore;
+  const { showPortalSettingsLoader } = clientLoadingStore;
 
   return {
     isInitServicesPage,
@@ -326,7 +326,7 @@ const mapStoreToProps = ({
     confirmActionType,
     setIsInitServicesPage,
     setVisibleWalletSetting,
-    isPortalSettingsLoading,
+    showPortalSettingsLoader,
   };
 };
 

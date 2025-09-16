@@ -46,7 +46,7 @@ import DataImportLoader from "../sub-components/DataImportLoader";
 import { ProvidersProps, InjectedProvidersProps } from "../types";
 
 const Providers = (props: ProvidersProps) => {
-  const { theme, services, setWorkspace, logoText, isPortalSettingsLoading } =
+  const { theme, services, setWorkspace, logoText, showPortalSettingsLoader } =
     props as InjectedProvidersProps;
 
   const { t, ready } = useTranslation(["Settings"]);
@@ -72,7 +72,7 @@ const Providers = (props: ProvidersProps) => {
     if (ready) setDocumentTitle(t("DataImport"));
   }, [ready, t]);
 
-  if (isPortalSettingsLoading) return <DataImportLoader />;
+  if (showPortalSettingsLoader) return <DataImportLoader />;
 
   return (
     <WorkspacesContainer>
@@ -117,14 +117,14 @@ export const Component = inject<TStore>(
 
     const { theme, logoText } = settingsStore;
 
-    const { isPortalSettingsLoading } = clientLoadingStore;
+    const { showPortalSettingsLoader } = clientLoadingStore;
 
     return {
       services,
       logoText,
       theme,
       setWorkspace,
-      isPortalSettingsLoading,
+      showPortalSettingsLoader,
     };
   },
 )(observer(Providers));

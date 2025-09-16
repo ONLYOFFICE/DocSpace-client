@@ -42,7 +42,7 @@ const withLoading = (WrappedComponent) => {
       setIsBurgerLoading,
       enablePortalRename,
       deviceType,
-      isPortalSettingsLoading,
+      showPortalSettingsLoader,
     } = props;
 
     const viewMobile = deviceType === DeviceType.mobile;
@@ -74,7 +74,7 @@ const withLoading = (WrappedComponent) => {
       isLoadedArticleBody &&
       !isBurgerLoading &&
       isLoadedSectionHeader &&
-      !isPortalSettingsLoading;
+      !showPortalSettingsLoader;
 
     const isLoadedCustomizationNavbarSettings =
       isLoadedCustomizationNavbar &&
@@ -82,35 +82,35 @@ const withLoading = (WrappedComponent) => {
       !isBurgerLoading &&
       isLoadedSectionHeader &&
       isLoadedSubmenu &&
-      !isPortalSettingsLoading;
+      !showPortalSettingsLoader;
 
     const isLoadedCustomizationSettingLngTZSettings =
       isLoadedArticleBody &&
       !isBurgerLoading &&
       isLoadedSectionHeader &&
       isLoadedLngTZSettings &&
-      !isPortalSettingsLoading;
+      !showPortalSettingsLoader;
 
     const isLoadedCustomizationSettingWelcomePageSettings =
       isLoadedArticleBody &&
       !isBurgerLoading &&
       isLoadedSectionHeader &&
       isLoadedWelcomePageSettings &&
-      !isPortalSettingsLoading;
+      !showPortalSettingsLoader;
 
     const isLoadedCustomizationSettingPortalRenaming =
       isLoadedArticleBody &&
       !isBurgerLoading &&
       isLoadedSectionHeader &&
       loadedPortalRenaming &&
-      !isPortalSettingsLoading;
+      !showPortalSettingsLoader;
 
     const isLoadedCustomizationSettingDNSSettings =
       isLoadedArticleBody &&
       !isBurgerLoading &&
       isLoadedSectionHeader &&
       isLoadedDNSSettings &&
-      !isPortalSettingsLoading;
+      !showPortalSettingsLoader;
 
     const isLoadedPage =
       setting === "language-and-time-zone"
@@ -152,7 +152,7 @@ const withLoading = (WrappedComponent) => {
       deviceType,
     } = settingsStore;
 
-    const { isPortalSettingsLoading } = clientLoadingStore;
+    const { showPortalSettingsLoader } = clientLoadingStore;
 
     return {
       isLoadedArticleBody,
@@ -166,7 +166,7 @@ const withLoading = (WrappedComponent) => {
       setIsBurgerLoading,
       enablePortalRename,
       deviceType,
-      isPortalSettingsLoading,
+      showPortalSettingsLoader,
     };
   })(observer(LoaderWrapper));
 };

@@ -134,7 +134,7 @@ export default inject<
       uploadLocalFile,
     } = backup;
 
-    const { isPortalSettingsLoading: isInitialLoading } = clientLoadingStore;
+    const { showPortalSettingsLoader: isInitialLoading } = clientLoadingStore;
 
     const {
       basePath,

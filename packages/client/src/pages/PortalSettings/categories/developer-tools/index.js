@@ -57,7 +57,7 @@ const DeveloperToolsWrapper = (props) => {
     webhooksStore,
     oauthStore,
     clearAbortControllerArr,
-    isPortalSettingsLoading,
+    showPortalSettingsLoader,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -193,7 +193,7 @@ const DeveloperToolsWrapper = (props) => {
     setCurrentTabId(e.id);
   };
 
-  if (isPortalSettingsLoading) return <SSOLoader />;
+  if (showPortalSettingsLoader) return <SSOLoader />;
 
   return (
     <Tabs
@@ -219,7 +219,7 @@ export const Component = inject(
 
     const { currentDeviceType, clearAbortControllerArr } = settingsStore;
 
-    const { isPortalSettingsLoading } = clientLoadingStore;
+    const { showPortalSettingsLoader } = clientLoadingStore;
 
     return {
       currentDeviceType,
@@ -229,7 +229,7 @@ export const Component = inject(
       webhooksStore,
       oauthStore,
       clearAbortControllerArr,
-      isPortalSettingsLoading,
+      showPortalSettingsLoader,
     };
   },
 )(observer(DeveloperToolsWrapper));

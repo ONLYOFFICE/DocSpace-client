@@ -32,6 +32,7 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import SortDesc from "PUBLIC_DIR/images/sort.desc.react.svg";
 import { Text } from "@docspace/shared/components/text";
 import { Backdrop } from "@docspace/shared/components/backdrop";
+import { ComboBox } from "@docspace/shared/components/combobox";
 import * as Styled from "./index.styled";
 
 const SortFilter = ({ t, oformsFilter, sortOforms }) => {
@@ -77,21 +78,17 @@ const SortFilter = ({ t, oformsFilter, sortOforms }) => {
         title={t("Common:SortBy")}
         onClick={onToggleCombobox}
       >
-        <Styled.SortComboBox
+        <ComboBox
           id="comboBoxSort"
           tabIndex={1}
           opened={isOpen}
           onToggle={onToggleCombobox}
           className="sort-combo-box"
-          directionX="right"
-          directionY="both"
           scaled
-          size="content"
           disableIconClick={false}
           disableItemClick
           isDefaultMode={false}
           manualY="102%"
-          fixedDirection
           advancedOptionsCount={sortData.length}
           fillIcon={false}
           options={[]}
@@ -112,7 +109,7 @@ const SortFilter = ({ t, oformsFilter, sortOforms }) => {
           ))}
         >
           <IconButton iconName={SortReactSvgUrl} size={16} />
-        </Styled.SortComboBox>
+        </ComboBox>
       </Styled.SortButton>
     </>
   );

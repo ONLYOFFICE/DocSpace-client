@@ -25,14 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { mobile } from "@docspace/shared/utils";
 import styled, { css } from "styled-components";
-import { ComboBox } from "@docspace/shared/components/combobox";
 
 export const SortButton = styled.div`
   .combo-button {
     background: ${(props) =>
       props.theme.filterInput.sort.background} !important;
+
+    padding-inline-start: 15px;
+    padding-inline-end: 2px;
 
     .icon-button_svg {
       cursor: pointer;
@@ -50,16 +51,6 @@ export const SortButton = styled.div`
       bottom: auto;
       min-width: 200px;
       margin-top: 3px;
-
-      /* @media ${mobile} {
-        position: absolute;
-        width: 100%;
-        bottom: 0;
-        inset-inline-end: 0;
-        top: auto;
-        border-end-start-radius: 0;
-        border-end-end-radius: 0;
-      }*/
     }
 
     .optionalBlock {
@@ -67,7 +58,6 @@ export const SortButton = styled.div`
       align-items: center;
       justify-content: center;
       margin: 0;
-      padding: 0 16px;
     }
 
     .combo-buttons_arrow-icon {
@@ -77,12 +67,6 @@ export const SortButton = styled.div`
     .backdrop-active {
       display: none;
     }
-  }
-`;
-
-export const SortComboBox = styled(ComboBox)`
-  @media ${mobile} {
-    /* position: static; */
   }
 `;
 

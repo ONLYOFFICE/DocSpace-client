@@ -225,10 +225,10 @@ const ManualBackup = ({
       if (success) toastr.success(success);
     };
 
-    SocketHelper.on(SocketEvents.BackupProgress, onBackupProgress);
+    SocketHelper?.on(SocketEvents.BackupProgress, onBackupProgress);
 
     return () => {
-      SocketHelper.off(SocketEvents.BackupProgress, onBackupProgress);
+      SocketHelper?.off(SocketEvents.BackupProgress, onBackupProgress);
     };
   }, [setDownloadingProgress, setTemporaryLink, setBackupProgressError, t]);
 

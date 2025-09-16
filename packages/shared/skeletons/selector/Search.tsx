@@ -64,7 +64,6 @@ interface SearchLoaderProps extends RectangleSkeletonProps {
 }
 
 const SearchLoader = ({
-  id,
   className,
   style,
 

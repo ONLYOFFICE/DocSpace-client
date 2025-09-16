@@ -109,7 +109,6 @@ const DropDownItem = ({
   isModern,
   style,
   isPaidBadge,
-  heightTablet,
   badgeLabel,
   testId,
   ...rest

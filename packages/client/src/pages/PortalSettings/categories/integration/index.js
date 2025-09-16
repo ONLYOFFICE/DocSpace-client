@@ -34,8 +34,8 @@ import config from "PACKAGE_FILE";
 
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 
-import SSO from "./SingleSignOn";
-import LDAP from "./LDAP";
+import SsoSettings from "./SingleSignOn";
+import LdapSettings from "./LDAP";
 import ThirdParty from "./ThirdPartyServicesSettings";
 
 import SMTPSettings from "./SMTPSettings";
@@ -65,12 +65,12 @@ const IntegrationWrapper = (props) => {
     {
       id: "ldap",
       name: t("LDAP"),
-      content: <LDAP />,
+      content: <LdapSettings />,
     },
     {
       id: "sso",
       name: t("SingleSignOn"),
-      content: <SSO />,
+      content: <SsoSettings />,
     },
     {
       id: "third-party-services",

@@ -3,7 +3,7 @@
   "content": "Connection URL",
   "content_en_sha1_hash": "22b85b6a5b0bef41e8b971f0d7606df9f534107e",
   "created_at": "2025-05-26T07:15:41.520Z",
-  "updated_at": "2025-08-11T09:02:44.087Z",
+  "updated_at": "2025-09-07T07:53:15.474Z",
   "comment": {
     "text": "This translation key is used to display the connection URL label in a dialogue box, providing users with clear information about the required field. It appears as a label above a text input field, guiding users to enter a valid connection URL.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/connect/ConnectDialog.tsx",
-      "line_number": 315,
+      "line_number": 312,
       "context": "<>\n {showUrlField ? (\n <FieldContainer\n labelVisible\n isRequired\n labelText={t(\"Common:ConnectionUrl\")}\n isVertical\n hasError={!isUrlValid}\n errorMessage={t(\"Common:RequiredField\")}\n >\n <TextInput",
       "module": "/packages/shared"
     }

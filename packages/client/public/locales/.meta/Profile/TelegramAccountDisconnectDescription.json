@@ -1,0 +1,28 @@
+{
+  "key_path": "TelegramAccountDisconnectDescription",
+  "content": "Your @{{username}} account is connected for telegram notifications. You can disconnect from this account. In this case, you will not receive notifications.",
+  "content_en_sha1_hash": "86d49c9c44691c06b550baa12aba824254b6d0ea",
+  "created_at": "2025-09-10T09:59:16.172Z",
+  "updated_at": "2025-09-10T10:01:43.139Z",
+  "comment": {
+    "text": "This text explains the purpose of a connected Telegram account and provides the option to disconnect. It appears within a dialog, informing the user that disconnecting will prevent them from receiving Telegram notifications. The description includes the user's Telegram username for personalization.",
+    "is_auto": true,
+    "updated_at": "2025-09-10T10:01:43.139Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DisconnectAccountDialog/index.tsx",
+      "line_number": 75,
+      "context": "<ModalDialog.Header>\n {t(\"Profile:TelegramAccountDisconnect\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\" fontWeight={400}>\n {t(\"Profile:TelegramAccountDisconnectDescription\", {\n username,\n })}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

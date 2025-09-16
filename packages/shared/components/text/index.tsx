@@ -51,8 +51,6 @@ const TextPure = ({
   truncate,
   className,
   style,
-  containerWidth,
-  containerMinWidth,
   dataTestId,
   ...rest
 }: TextProps) => {

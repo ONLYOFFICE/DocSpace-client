@@ -945,7 +945,6 @@ export const TableHeader = (props: TableHeaderProps) => {
         let overWidth = 0;
 
         if (!hideColumns && !hideColumnsConst) {
-          // eslint-disable-next-line guard-for-in, no-restricted-syntax
           for (const index in tableContainer) {
             const item = tableContainer[index];
 

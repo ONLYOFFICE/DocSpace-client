@@ -57,7 +57,7 @@ const StyledMenuIcon = styled(MenuIcon).attrs(injectDefaultTheme)`
 `;
 
 const HeaderCatalogBurger = (props) => {
-  const { isProduct, onClick, ...rest } = props;
+  const { onClick, ...rest } = props;
 
   return (
     <StyledIconBox onClick={onClick} name="catalog-burger" {...rest}>

@@ -135,21 +135,21 @@ const Shell = ({ page = "home", ...rest }) => {
   }, []);
 
   useEffect(() => {
-    SocketHelper.emit(SocketCommands.Subscribe, {
+    SocketHelper?.emit(SocketCommands.Subscribe, {
       roomParts: "restore",
     });
 
     if (standalone) {
-      SocketHelper.emit(SocketCommands.SubscribeInSpaces, {
+      SocketHelper?.emit(SocketCommands.SubscribeInSpaces, {
         roomParts: "restore",
       });
     }
 
-    SocketHelper.emit(SocketCommands.Subscribe, {
+    SocketHelper?.emit(SocketCommands.Subscribe, {
       roomParts: "quota",
     });
 
-    SocketHelper.emit(SocketCommands.Subscribe, {
+    SocketHelper?.emit(SocketCommands.Subscribe, {
       roomParts: "QUOTA",
       individual: true,
     });
@@ -157,18 +157,18 @@ const Shell = ({ page = "home", ...rest }) => {
 
   useEffect(() => {
     if (standalone) {
-      SocketHelper.emit(SocketCommands.SubscribeInSpaces, {
+      SocketHelper?.emit(SocketCommands.SubscribeInSpaces, {
         roomParts: "restore",
       });
 
-      SocketHelper.emit(SocketCommands.SubscribeInSpaces, {
+      SocketHelper?.emit(SocketCommands.SubscribeInSpaces, {
         roomParts: "storage-encryption",
       });
     }
   }, [standalone]);
 
   useEffect(() => {
-    SocketHelper.emit(SocketCommands.Subscribe, { roomParts: userId });
+    SocketHelper?.emit(SocketCommands.Subscribe, { roomParts: userId });
   }, [userId]);
 
   useEffect(() => {
@@ -183,12 +183,12 @@ const Shell = ({ page = "home", ...rest }) => {
   }, [userId]);
 
   useEffect(() => {
-    SocketHelper.on(SocketEvents.RestoreBackup, () => {
+    SocketHelper?.on(SocketEvents.RestoreBackup, () => {
       setPreparationPortalDialogVisible(true);
     });
 
     return () => {
-      SocketHelper.off(SocketEvents.RestoreBackup, () => {
+      SocketHelper?.off(SocketEvents.RestoreBackup, () => {
         setPreparationPortalDialogVisible(false);
       });
     };
@@ -199,10 +199,10 @@ const Shell = ({ page = "home", ...rest }) => {
       window.location.href = "/encryption-portal";
     };
 
-    SocketHelper.on(SocketEvents.StorageEncryption, storageEncryptionHandler);
+    SocketHelper?.on(SocketEvents.StorageEncryption, storageEncryptionHandler);
 
     return () => {
-      SocketHelper.off(
+      SocketHelper?.off(
         SocketEvents.StorageEncryption,
         storageEncryptionHandler,
       );
@@ -223,10 +223,10 @@ const Shell = ({ page = "home", ...rest }) => {
       }
     };
 
-    SocketHelper.on(SocketEvents.LogoutSession, callback);
+    SocketHelper?.on(SocketEvents.LogoutSession, callback);
 
     return () => {
-      SocketHelper.off(SocketEvents.LogoutSession, callback);
+      SocketHelper?.off(SocketEvents.LogoutSession, callback);
     };
   }, [userLoginEventId]);
 

@@ -24,10 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable no-console */
-/* eslint-disable no-multi-str */
-/* eslint-disable no-plusplus */
-
 import type { Location } from "react-router";
 import find from "lodash/find";
 import moment from "moment-timezone";
@@ -161,7 +157,7 @@ export const isPublicPreview = () => {
 
 export const parseDomain = (
   domain: string,
-  setError: Function,
+  setError: (error: string[] | null) => void,
   t: (key: string) => string,
 ) => {
   const parsedDomain = parseAddress(`test@${domain}`);
@@ -200,7 +196,7 @@ export const parseDomain = (
 export const validatePortalName = (
   value: string,
   nameValidator: TDomainValidator,
-  setError: Function,
+  setError: (error: string | null) => void,
   t: TTranslation,
 ) => {
   const validName = new RegExp(nameValidator.regex);
@@ -352,8 +348,8 @@ export function clickBackdrop() {
   }
 }
 
-export function objectToGetParams(object: {}) {
-  const params = Object.entries(object)
+export function objectToGetParams(obj: object) {
+  const params = Object.entries(obj)
     .filter(([, value]) => value !== undefined && value !== null)
     .map(
       ([key, value]) =>
@@ -378,16 +374,43 @@ export function toCommunityHostname(hostname: string) {
   return communityHostname;
 }
 
+export function getProviderLabel(provider: string, t: (key: string) => string) {
+  switch (provider) {
+    case "apple":
+      return t("Common:ProviderApple");
+    case "google":
+      return t("Common:ProviderGoogle");
+    case "facebook":
+      return t("Common:ProviderFacebook");
+    case "twitter":
+      return t("Common:ProviderTwitter");
+    case "linkedin":
+      return t("Common:ProviderLinkedIn");
+    case "microsoft":
+      return t("Common:ProviderMicrosoft");
+    case "sso":
+      return t("Common:SSO");
+    case "zoom":
+      return t("Common:ProviderZoom");
+    case "weixin":
+      return t("Common:ProviderWechat");
+    case "sso-full":
+      return t("Common:ProviderSsoSetting");
+    default:
+      return "";
+  }
+}
+
 export function getProviderTranslation(
   provider: string,
   t: (key: string) => string,
   linked = false,
   signUp = false,
 ) {
-  const capitalizeProvider =
-    provider.charAt(0).toUpperCase() + provider.slice(1);
+  const providerLabel = getProviderLabel(provider, t);
+
   if (linked) {
-    return `${t("Common:Disconnect")} ${capitalizeProvider}`;
+    return `${t("Common:Disconnect")} ${providerLabel}`;
   }
 
   switch (provider) {
@@ -417,30 +440,10 @@ export function getProviderTranslation(
       return signUp ? t("Common:SignUpWithSso") : t("Common:SignInWithSso");
     case "zoom":
       return signUp ? t("Common:SignUpWithZoom") : t("Common:SignInWithZoom");
-    default:
-      return "";
-  }
-}
-export function getProviderLabel(provider: string, t: (key: string) => string) {
-  switch (provider) {
-    case "apple":
-      return t("Common:ProviderApple");
-    case "google":
-      return t("Common:ProviderGoogle");
-    case "facebook":
-      return t("Common:ProviderFacebook");
-    case "twitter":
-      return t("Common:ProviderTwitter");
-    case "linkedin":
-      return t("Common:ProviderLinkedIn");
-    case "microsoft":
-      return t("Common:ProviderMicrosoft");
-    case "sso":
-      return t("Common:SSO");
-    case "zoom":
-      return t("Common:ProviderZoom");
-    case "sso-full":
-      return t("Common:ProviderSsoSetting");
+    case "weixin":
+      return signUp
+        ? t("Common:SignUpWithWechat")
+        : t("Common:SignInWithWechat");
     default:
       return "";
   }
@@ -580,18 +583,18 @@ export function isElementInViewport(el: HTMLElement) {
 }
 
 export function assign(
-  objParam: { [key: string]: {} },
+  objParam: Record<string, unknown>,
   keyPath: string[],
-  value: {},
+  value: unknown,
 ) {
-  let obj = objParam;
+  let obj: Record<string, unknown> = objParam;
   const lastKeyIndex = keyPath.length - 1;
   for (let i = 0; i < lastKeyIndex; ++i) {
     const key = keyPath[i];
     if (!(key in obj)) {
       obj[key] = {};
     }
-    obj = obj[key];
+    obj = obj[key] as Record<string, unknown>;
   }
   obj[keyPath[lastKeyIndex]] = value;
 }
@@ -907,8 +910,8 @@ export const decodeDisplayName = <T extends TFile | TFolder | TRoom>(
 };
 
 export const checkFilterInstance = (
-  filterObject: {},
-  certainClass: { prototype: {} },
+  filterObject: object,
+  certainClass: { prototype: object },
 ) => {
   const isInstance =
     filterObject.constructor.name === certainClass.prototype.constructor.name;
@@ -1363,7 +1366,6 @@ export const imageProcessing = async (file: File, maxSize?: number) => {
     }
 
     return new Promise((resolve) => {
-      // eslint-disable-next-line no-promise-executor-return
       return resolve(newFile);
     }).then(() => resizeRecursiveAsync(img, compressionRatio + 1, depth + 1));
   }

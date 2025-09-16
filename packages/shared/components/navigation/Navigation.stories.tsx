@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React from "react";
 import { Meta, StoryFn } from "@storybook/react";
 import Navigation from "./Navigation";

@@ -2248,7 +2248,7 @@ class ContextOptionsStore {
         action: "unarchive",
       },
       {
-        key: "separator4",
+        key: "separator5",
         isSeparator: true,
       },
       {

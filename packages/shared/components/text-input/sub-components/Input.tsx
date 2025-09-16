@@ -55,13 +55,6 @@ const InputComponent = ({
   mask,
   forwardedRef,
   keepCharPositions,
-  hasError,
-  hasWarning,
-  scale,
-  withBorder,
-  fontWeight,
-  isBold,
-  size,
 
   // Rest of props
   ...props
@@ -83,10 +76,15 @@ const InputComponent = ({
     ...props,
   };
 
+  // MaskedInput expects `size` to be a number, while our TextInput props may use an enum.
+  // Omit `size` when rendering MaskedInput and the native input to avoid the type mismatch.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { size, ...commonPropsForInput } = commonProps;
+
   if (mask) {
     return (
       <MaskedInput
-        {...commonProps}
+        {...commonPropsForInput}
         mask={mask}
         guide={guide}
         keepCharPositions={keepCharPositions}
@@ -94,7 +92,7 @@ const InputComponent = ({
     );
   }
 
-  return <input {...commonProps} ref={forwardedRef} />;
+  return <input {...commonPropsForInput} ref={forwardedRef} />;
 };
 
 export const Input = memo(InputComponent);

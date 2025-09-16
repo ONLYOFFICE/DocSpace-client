@@ -197,7 +197,6 @@ export const Viewer = (props: ViewerProps) => {
 
   useEffect(() => {
     resetToolbarVisibleTimer();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

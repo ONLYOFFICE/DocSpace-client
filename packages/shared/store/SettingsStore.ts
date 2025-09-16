@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable prefer-regex-literals */
 import { makeAutoObservable, runInAction } from "mobx";
 
 import Filter from "../api/people/filter";
@@ -479,6 +477,12 @@ class SettingsStore {
   get appleIDUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.connectapple
       ? `${this.helpCenterDomain}${this.helpCenterEntries.connectapple}`
+      : this.helpCenterDomain;
+  }
+
+  get weixinUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.connectweixin
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectweixin}`
       : this.helpCenterDomain;
   }
 

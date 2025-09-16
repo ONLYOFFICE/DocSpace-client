@@ -3,7 +3,7 @@
   "content": "Selected elements were successfully deleted from {{sectionName}}",
   "content_en_sha1_hash": "34001013ab8ad0b2c793c6ef5b07cc520c8c155d",
   "created_at": "2025-06-02T10:19:18.540Z",
-  "updated_at": "2025-09-02T07:59:28.281Z",
+  "updated_at": "2025-09-07T07:53:14.994Z",
   "comment": {
     "text": "Selected elements were successfully deleted from the Trash Section. This translation key is used to display a confirmation message when deleting items from the trash. It appears in a delete dialog and should be translated to indicate success in the user's preferred language.",
     "is_auto": true,
@@ -42,7 +42,7 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2346,
+      "line_number": 2347,
       "context": "onClick: () => {\n if (this.filesSettingsStore.confirmDelete) {\n setDeleteDialogVisible(true);\n } else {\n const translations = {\n deleteFromTrash: t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n };\n \n this.deleteAction(translations).catch((err) => toastr.error(err));",
       "module": "/packages/client"
     }

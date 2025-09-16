@@ -2550,18 +2550,18 @@
 .dark {
   --search-input-default-icon-fill: #{$gray-dark-strong};
   --search-input-filled-icon-fill: #{$gray-dark};
-  // --quantity-picker-disable-color: #{$light-gray-hover};
-  --payment-rectangle-color: #{$light-gray-hover};
-
+}
+.light {
   --payment-price-container-disable-background: #{$gray-light};
-
   --payment-warning-color: #{$light-status-warning};
   --payment-accent-color: var(--color-scheme-main-buttons);
+  --payment-rectangle-color: #{$light-gray-hover};
+  // --quantity-picker-disable-color: #{$light-gray-hover};
 }
+
 .dark {
   // --quantity-picker-disable-color: #{$light-dark-gray-hover};
   --payment-rectangle-color: #{$light-dark-gray-hover};
-
   --payment-price-container-disable-background: #{$dark-gray-light};
   --payment-warning-color: #{$dark-status-warning};
   --payment-accent-color: var(--color-scheme-main-buttons);
@@ -2580,6 +2580,26 @@
   --quantity-picker-track-number: #{$gray-dark};
   --quantity-picker-rectangle-color: #{$light-dark-gray-hover};
   --quantity-picker-warning-color: #{$dark-error-status};
+}
+
+.light {
+  --notification-text-border: 1px solid #{$gray-light-mid};
+  --channel-body-color: #{$gray-light};
+  --channel-body-color-active: var(--accent-main, #{$light-blue-main});
+  --channel-body-color-active-opacity: 0.1;
+  --channel-type-color: #{$gray};
+  --channel-icon-email-color: #{$light-gray-dark};
+  --channel-error-color: #{$light-error-status};
+}
+
+.dark {
+  --notification-text-border: 1px solid #{$gray-dark-strong};
+  --channel-body-color: #{$dark-gray-light};
+  --channel-body-color-active: #{$on-black-color};
+  --channel-body-color-active-opacity: 1;
+  --channel-type-color: #{$gray-dark};
+  --channel-icon-email-color: #{$dark-gray-dark};
+  --channel-error-color: #{$dark-error-status};
 }
 
 .light {

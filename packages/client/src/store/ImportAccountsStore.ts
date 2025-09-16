@@ -459,7 +459,7 @@ class ImportAccountsStore {
           this.fileLoadingStatus === "proceed")
       ) {
         if (isAbort.current) return;
-        // eslint-disable-next-line no-await-in-loop
+
         await uploadFile(
           `${location}?Name=${requestsDataArray[chunk].fileName}`,
           requestsDataArray[chunk].formData,
@@ -482,12 +482,10 @@ class ImportAccountsStore {
     this.services = services;
   };
 
-  // eslint-disable-next-line class-methods-use-this
   getMigrationList = () => {
     return migrationList();
   };
 
-  // eslint-disable-next-line class-methods-use-this
   initMigrations = (name: TWorkspaceService) => {
     return initMigration(name);
   };
@@ -504,22 +502,18 @@ class ImportAccountsStore {
     });
   };
 
-  // eslint-disable-next-line class-methods-use-this
   cancelMigration = () => {
     return migrationCancel();
   };
 
-  // eslint-disable-next-line class-methods-use-this
   clearMigration = () => {
     return migrationClear();
   };
 
-  // eslint-disable-next-line class-methods-use-this
   getMigrationStatus = () => {
     return migrationStatus();
   };
 
-  // eslint-disable-next-line class-methods-use-this
   getMigrationLog = () => {
     try {
       return migrationLog();
@@ -529,7 +523,6 @@ class ImportAccountsStore {
     }
   };
 
-  // eslint-disable-next-line class-methods-use-this
   sendWelcomeLetter = (data: TSendWelcomeEmailData) => {
     return migrationFinish(data);
   };

@@ -73,7 +73,7 @@ const getPaymentError = (
   const onClickWalletUrl = () => {
     const walletPageUrl = combineUrl(
       "/portal-settings",
-      `/payments/wallet?open=true&price=${backupPrice.toString()}`,
+      `/payments/wallet?open=true&price=${Math.ceil(backupPrice).toString()}`,
     );
 
     window.DocSpace.navigate(walletPageUrl);

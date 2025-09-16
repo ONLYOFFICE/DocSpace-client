@@ -25,22 +25,46 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect, useState } from "react";
-import { Tabs } from "@docspace/shared/components/tabs";
+import { inject, observer } from "mobx-react";
 import { useLocation, useNavigate } from "react-router";
 import { withTranslation } from "react-i18next";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import config from "PACKAGE_FILE";
-import { inject, observer } from "mobx-react";
-import withLoading from "SRC_DIR/HOCs/withLoading";
-import { DeviceType } from "@docspace/shared/enums";
+
+import { Tabs } from "@docspace/shared/components/tabs";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
+import { DeviceType } from "@docspace/shared/enums";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import type { TTranslation } from "@docspace/shared/types";
+
+import config from "PACKAGE_FILE";
+import withLoading from "SRC_DIR/HOCs/withLoading";
+import BrandingStore from "SRC_DIR/store/portal-settings/BrandingStore";
+import CommonStore from "SRC_DIR/store/CommonStore";
+
 import Customization from "./customization";
 import Branding from "./branding";
 import Appearance from "./appearance";
 import LoaderTabs from "./sub-components/loaderTabs";
+import useCommon from "./useCommon";
 import { resetSessionStorage } from "../../utils";
+import { createDefaultHookSettingsProps } from "../../utils/createDefaultHookSettingsProps";
 
-const TabsCommon = (props) => {
+type TabsCommonProps = {
+  t: TTranslation;
+  tReady: boolean;
+  setIsLoadedSubmenu: (value: boolean) => void;
+  loadBaseInfo: (page: string) => Promise<void>;
+  isLoadedSubmenu: boolean;
+  currentDeviceType: DeviceType;
+  isMobileView: boolean;
+  isCommunity: boolean;
+  brandingStore: BrandingStore;
+  settingsStore: SettingsStore;
+  common: CommonStore;
+  clearAbortControllerArr: SettingsStore["clearAbortControllerArr"];
+};
+
+const TabsCommon = (props: TabsCommonProps) => {
   const {
     t,
     tReady,
@@ -50,22 +74,43 @@ const TabsCommon = (props) => {
     currentDeviceType,
     isMobileView,
     isCommunity,
+    brandingStore,
+    settingsStore,
+    common,
+    clearAbortControllerArr,
   } = props;
   const location = useLocation();
   const navigate = useNavigate();
 
-  const [currentTabId, setCurrentTabId] = useState();
+  const [currentTabId, setCurrentTabId] = useState<string>("");
+
+  const defaultProps = createDefaultHookSettingsProps({
+    loadBaseInfo,
+    isMobileView,
+    settingsStore,
+    brandingStore,
+    common,
+  });
+
+  const { getCustomizationData, getBrandingData } = useCommon(
+    defaultProps.common,
+  );
 
   const data = [
     {
       id: "general",
       name: t("Common:SettingsGeneral"),
       content: <Customization />,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getCustomizationData();
+      },
     },
     {
       id: "appearance",
       name: t("Appearance"),
       content: <Appearance />,
+      onClick: () => {},
     },
   ];
 
@@ -74,6 +119,10 @@ const TabsCommon = (props) => {
       id: "branding",
       name: t("Common:Branding"),
       content: <Branding />,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getBrandingData();
+      },
     });
   }
 
@@ -81,21 +130,6 @@ const TabsCommon = (props) => {
     const path = location.pathname;
     const currentTab = data.find((item) => path.includes(item.id));
     return currentTab && data.length ? currentTab.id : data[0].id;
-  };
-
-  const load = async () => {
-    const tabId = getCurrentTabId();
-    setCurrentTabId(tabId);
-
-    await loadBaseInfo(
-      !isMobileView
-        ? tabId === "general"
-          ? "customization"
-          : tabId === "branding"
-            ? "branding"
-            : "appearance"
-        : "customization",
-    );
   };
 
   useEffect(() => {
@@ -107,11 +141,12 @@ const TabsCommon = (props) => {
   useEffect(() => {
     if (tReady) setIsLoadedSubmenu(true);
     if (isLoadedSubmenu) {
-      load();
+      const tabId = getCurrentTabId();
+      setCurrentTabId(tabId);
     }
   }, [tReady, isLoadedSubmenu]);
 
-  const onSelect = (e) => {
+  const onSelect = (e: { id: string }) => {
     navigate(
       combineUrl(
         window.ClientConfig?.proxy?.url,
@@ -130,29 +165,38 @@ const TabsCommon = (props) => {
       selectedItemId={currentTabId}
       onSelect={onSelect}
       stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
+      withAnimation
     />
   );
 };
 
 export const Component = inject(
-  ({ settingsStore, common, currentTariffStatusStore }) => {
-    const { isLoaded, setIsLoadedSubmenu, initSettings, isLoadedSubmenu } =
-      common;
+  ({
+    settingsStore,
+    common,
+    currentTariffStatusStore,
+    brandingStore,
+  }: TStore) => {
+    const { setIsLoadedSubmenu, initSettings, isLoadedSubmenu } = common;
+    const { clearAbortControllerArr } = settingsStore;
 
     const { isCommunity } = currentTariffStatusStore;
-    const currentDeviceType = settingsStore.currentDeviceType;
+    const currentDeviceType = settingsStore.currentDeviceType as DeviceType;
 
     const isMobileView = settingsStore.deviceType === DeviceType.mobile;
     return {
-      loadBaseInfo: async (page) => {
+      loadBaseInfo: async (page: string) => {
         await initSettings(page);
       },
-      isLoaded,
       setIsLoadedSubmenu,
       isLoadedSubmenu,
       currentDeviceType,
       isMobileView,
       isCommunity,
+      brandingStore,
+      settingsStore,
+      common,
+      clearAbortControllerArr,
     };
   },
 )(withLoading(withTranslation("Settings")(observer(TabsCommon))));

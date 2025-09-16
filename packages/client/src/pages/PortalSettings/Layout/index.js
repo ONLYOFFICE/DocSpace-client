@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect } from "react";
+import { useParams, useLocation } from "react-router";
 import Article from "@docspace/shared/components/article";
 import { inject, observer } from "mobx-react";
 import Section from "@docspace/shared/components/section";
@@ -38,6 +39,10 @@ import SectionWrapper from "SRC_DIR/components/Section";
 import SectionHeaderContent from "./Section/Header";
 import { ArticleHeaderContent, ArticleBodyContent } from "./Article";
 import Warning from "./WarningComponent";
+
+import HistoryHeader from "../categories/developer-tools/Webhooks/WebhookHistory/sub-components/HistoryHeader";
+import DetailsNavigationHeader from "../categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/DetailsNavigationHeader";
+import OAuthSectionHeader from "../categories/developer-tools/OAuth/OAuthSectionHeader";
 
 const ArticleSettings = React.memo(
   ({ showArticleLoader, needPageReload, isNotPaidPeriod }) => {
@@ -82,6 +87,19 @@ const Layout = ({
   isNotPaidPeriod,
   currentDeviceType,
 }) => {
+  const { id, eventId } = useParams();
+  const location = useLocation();
+
+  const path = location.pathname.includes("/portal-settings")
+    ? "/portal-settings"
+    : "";
+
+  const webhookHistoryPath = `${path}/developer-tools/webhooks/${id}`;
+  const webhookDetailsPath = `${path}/developer-tools/webhooks/${id}/${eventId}`;
+  const oauthCreatePath = `${path}/developer-tools/oauth/create`;
+  const oauthEditPath = `${path}/developer-tools/oauth/${id}`;
+  const currentPath = window.location.pathname;
+
   useEffect(() => {
     currentProductId !== "settings" && setCurrentProductId("settings");
   }, [language, currentProductId, setCurrentProductId]);
@@ -100,7 +118,16 @@ const Layout = ({
       {!isGeneralPage ? (
         <SectionWrapper viewAs="settings" withBodyScroll settingsStudio>
           <Section.SectionHeader>
-            <SectionHeaderContent />
+            {currentPath === webhookHistoryPath ? (
+              <HistoryHeader />
+            ) : currentPath === webhookDetailsPath ? (
+              <DetailsNavigationHeader />
+            ) : currentPath === oauthCreatePath ||
+              currentPath === oauthEditPath ? (
+              <OAuthSectionHeader isEdit={currentPath === oauthEditPath} />
+            ) : (
+              <SectionHeaderContent />
+            )}
           </Section.SectionHeader>
 
           {currentDeviceType !== DeviceType.desktop ? (

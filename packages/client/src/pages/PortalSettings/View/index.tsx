@@ -1,0 +1,402 @@
+// (c) Copyright Ascensio System SIA 2009-2025
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import React, { useEffect, useRef } from "react";
+import { inject, observer } from "mobx-react";
+import { useLocation } from "react-router";
+
+import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
+import { DeviceType } from "@docspace/shared/enums";
+import { AnimationEvents } from "@docspace/shared/hooks/useAnimation";
+
+import { Component as Customization } from "../categories/common";
+import { Component as Security } from "../categories/security";
+import { Component as Backup } from "../categories/data-management";
+import RestoreBackup from "../categories/data-management/backup/restore-backup";
+import { Component as Integration } from "../categories/integration";
+import { Component as DataImport } from "../categories/data-import";
+import { Component as DeveloperTools } from "../categories/developer-tools";
+import { Component as DeleteData } from "../categories/delete-data";
+import { Component as StorageManagement } from "../categories/storage-management";
+import { Component as Payments } from "../categories/payments";
+import { Component as Bonus } from "../../Bonus";
+import { Component as Services } from "../categories/services";
+
+import useSecurity from "../categories/security/useSecurity";
+import useBackup from "../categories/data-management/backup/useBackup";
+import useIntegration from "../categories/integration/useIntegration";
+import useDeveloperTools from "../categories/developer-tools/useDeveloperTools";
+import useDeleteData from "../categories/delete-data/useDeleteData";
+import useCommon from "../categories/common/useCommon";
+import useDataImport from "../categories/data-import/useDataImport";
+import usePayments from "../categories/payments/usePayments";
+import useServices from "../categories/services/useServices";
+import { createDefaultHookSettingsProps } from "../utils/createDefaultHookSettingsProps";
+import { isMainSectionChange } from "../utils/isMainSectionChange";
+
+const CURRENT_VIEW_STORAGE_KEY = "currentView";
+
+type TView =
+  | "customization"
+  | "security"
+  | "backup"
+  | "restore"
+  | "integration"
+  | "data-import"
+  | "management"
+  | "developer-tools"
+  | "delete-data"
+  | "payments"
+  | "bonus"
+  | "services"
+  | "";
+
+const View = ({
+  setIsPortalSettingsLoading,
+  loadBaseInfo,
+  isMobileView,
+  settingsStore,
+  tfaStore,
+  backupStore,
+  ssoFormStore,
+  init,
+  standaloneInit,
+  setup,
+  authStore,
+  currentQuotaStore,
+  pluginStore,
+  filesSettingsStore,
+  webhooksStore,
+  oauthStore,
+  brandingStore,
+  importAccountsStore,
+  ldapStore,
+  common,
+  paymentStore,
+  servicesStore,
+  currentTariffStatusStore,
+
+  clearAbortControllerArr,
+}: any) => {
+  const location = useLocation();
+
+  const [currentView, setCurrentView] = React.useState<TView>(() => {
+    return (localStorage.getItem(CURRENT_VIEW_STORAGE_KEY) as TView) || "";
+  });
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  const activeRequestIdRef = useRef(0);
+  const prevPathRef = useRef<string>("");
+  const clearAbortControllerArrRef = React.useRef(clearAbortControllerArr);
+  const animationStartedRef = useRef(false);
+
+  const isCustomizationPage = location.pathname.includes("customization");
+  const isSecurityPage = location.pathname.includes("security");
+  const isBackupPage = location.pathname.includes("backup");
+  const isRestorePage = location.pathname.includes("restore");
+  const isIntegrationPage = location.pathname.includes("integration");
+  const isDataImportPage = location.pathname.includes("data-import");
+  const isStorageManagementPage = location.pathname.includes("management");
+  const isDeveloperToolsPage = location.pathname.includes("developer-tools");
+  const isDeletePage = location.pathname.includes("delete-data");
+  const isPaymentsPage = location.pathname.includes("payments");
+  const isBonusPage = location.pathname.includes("bonus");
+  const isServicesPage = location.pathname.includes("services");
+
+  const defaultProps = createDefaultHookSettingsProps({
+    loadBaseInfo,
+    isMobileView,
+    settingsStore,
+    tfaStore,
+    backupStore,
+    setup,
+    authStore,
+    currentQuotaStore,
+    ssoFormStore,
+    pluginStore,
+    filesSettingsStore,
+    webhooksStore,
+    oauthStore,
+    brandingStore,
+    importAccountsStore,
+    ldapStore,
+    common,
+    paymentStore,
+    servicesStore,
+    currentTariffStatusStore,
+  });
+
+  const { getCommonInitialValue } = useCommon(defaultProps.common);
+  const { getSecurityInitialValue } = useSecurity(defaultProps.security);
+  const { getBackupInitialValue } = useBackup(defaultProps.backup);
+  const { getIntegrationInitialValue } = useIntegration(
+    defaultProps.integration,
+  );
+  const { getDataImportInitialValue } = useDataImport(defaultProps.dataImport);
+  const { getDeveloperToolsInitialValue } = useDeveloperTools(
+    defaultProps.developerTools,
+  );
+  const { getDeleteDataInitialValue } = useDeleteData(defaultProps.deleteData);
+  const { getPaymentsInitialValue } = usePayments(defaultProps.payment);
+  const { getServicesInitialValue } = useServices(defaultProps.services);
+
+  useEffect(() => {
+    clearAbortControllerArrRef.current = clearAbortControllerArr;
+  }, [clearAbortControllerArr]);
+
+  useEffect(() => {
+    if (currentView) {
+      localStorage.setItem(CURRENT_VIEW_STORAGE_KEY, currentView);
+    }
+  }, [currentView]);
+
+  useEffect(() => {
+    return () => {
+      localStorage.removeItem(CURRENT_VIEW_STORAGE_KEY);
+    };
+  }, []);
+
+  useEffect(() => {
+    animationStartedRef.current = false;
+
+    const animationStartedAction = () => {
+      animationStartedRef.current = true;
+    };
+
+    window.addEventListener(
+      AnimationEvents.ANIMATION_STARTED,
+      animationStartedAction,
+    );
+
+    return () => {
+      window.removeEventListener(
+        AnimationEvents.ANIMATION_STARTED,
+        animationStartedAction,
+      );
+    };
+  }, []);
+
+  useEffect(() => {
+    animationStartedRef.current = false;
+
+    const animationEndedAction = () => {
+      animationStartedRef.current = false;
+    };
+
+    window.addEventListener(
+      AnimationEvents.ANIMATION_ENDED,
+      animationEndedAction,
+    );
+
+    return () => {
+      window.removeEventListener(
+        AnimationEvents.ANIMATION_ENDED,
+        animationEndedAction,
+      );
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isLoading) {
+      window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION));
+    }
+  }, [isLoading]);
+
+  useEffect(() => {
+    const getView = async () => {
+      const requestId = ++activeRequestIdRef.current;
+      try {
+        const currentPath = location.pathname;
+        const previousPath = prevPathRef.current;
+
+        const isMainSectionChanged =
+          !previousPath || isMainSectionChange(currentPath, previousPath);
+        const isSameSectionClick =
+          previousPath && !isMainSectionChanged && currentPath === previousPath;
+
+        prevPathRef.current = currentPath;
+
+        // Only proceed with data loading if it's a main section change
+        if (!isMainSectionChanged && !isSameSectionClick) {
+          if (requestId === activeRequestIdRef.current) {
+            setIsLoading(false);
+          }
+          return;
+        }
+
+        clearAbortControllerArrRef.current();
+
+        setIsLoading(true);
+        let view: TView = "";
+
+        if (isCustomizationPage) {
+          view = "customization";
+          await getCommonInitialValue();
+        } else if (isSecurityPage) {
+          view = "security";
+          await getSecurityInitialValue();
+        } else if (isRestorePage) {
+          view = "restore";
+          await getBackupInitialValue();
+        } else if (isBackupPage) {
+          view = "backup";
+          await getBackupInitialValue();
+        } else if (isIntegrationPage) {
+          view = "integration";
+          await getIntegrationInitialValue();
+        } else if (isDataImportPage) {
+          view = "data-import";
+          await getDataImportInitialValue();
+        } else if (isStorageManagementPage) {
+          view = "management";
+          await init();
+        } else if (isDeveloperToolsPage) {
+          view = "developer-tools";
+          await getDeveloperToolsInitialValue();
+        } else if (isDeletePage) {
+          view = "delete-data";
+          await getDeleteDataInitialValue();
+        } else if (isPaymentsPage) {
+          view = "payments";
+          await getPaymentsInitialValue();
+        } else if (isBonusPage) {
+          view = "bonus";
+          await standaloneInit();
+        } else if (isServicesPage) {
+          view = "services";
+          await getServicesInitialValue();
+        }
+
+        if (requestId === activeRequestIdRef.current) {
+          setCurrentView(view);
+          setIsPortalSettingsLoading(false);
+          setIsLoading(false);
+        }
+      } catch (error) {
+        console.log(error);
+        if ((error as Error).message === "canceled") {
+          return;
+        }
+
+        if (requestId === activeRequestIdRef.current) {
+          setIsPortalSettingsLoading(false);
+          setIsLoading(false);
+        }
+      }
+    };
+
+    getView();
+  }, [location]);
+
+  return (
+    <LoaderWrapper isLoading={isLoading}>
+      {currentView === "customization" ? <Customization /> : null}
+      {currentView === "security" ? <Security /> : null}
+      {currentView === "backup" ? <Backup /> : null}
+      {currentView === "restore" ? <RestoreBackup /> : null}
+      {currentView === "integration" ? <Integration /> : null}
+      {currentView === "data-import" ? <DataImport /> : null}
+      {currentView === "management" ? <StorageManagement /> : null}
+      {currentView === "developer-tools" ? <DeveloperTools /> : null}
+      {currentView === "delete-data" ? <DeleteData /> : null}
+      {currentView === "payments" ? <Payments /> : null}
+      {currentView === "bonus" ? <Bonus /> : null}
+      {currentView === "services" ? <Services /> : null}
+    </LoaderWrapper>
+  );
+};
+
+export const ViewComponent = inject(
+  ({
+    clientLoadingStore,
+    setup,
+    settingsStore,
+    tfaStore,
+    backup,
+    authStore,
+    currentQuotaStore,
+    ssoStore,
+    pluginStore,
+    filesSettingsStore,
+    webhooksStore,
+    oauthStore,
+    brandingStore,
+    common,
+    importAccountsStore,
+    storageManagement,
+    ldapStore,
+    paymentStore,
+    servicesStore,
+    currentTariffStatusStore,
+  }: TStore) => {
+    const { initSettings: initSettingsCommon } = common;
+
+    const { clearAbortControllerArr } = settingsStore;
+
+    const { setIsPortalSettingsLoading } = clientLoadingStore;
+
+    const isMobileView = settingsStore.deviceType === DeviceType.mobile;
+
+    const loadBaseInfo = async (page: string) => {
+      await initSettingsCommon(page);
+    };
+
+    const { init } = storageManagement;
+    const { standaloneInit } = paymentStore;
+
+    return {
+      setIsPortalSettingsLoading,
+      init,
+      standaloneInit,
+
+      // Stores for safeProps
+      setup,
+      settingsStore,
+      tfaStore,
+      backupStore: backup,
+      authStore,
+      currentQuotaStore,
+      ssoStore,
+      pluginStore,
+      filesSettingsStore,
+      webhooksStore,
+      oauthStore,
+      brandingStore,
+      importAccountsStore,
+      ldapStore,
+      common,
+      paymentStore,
+      servicesStore,
+      currentTariffStatusStore,
+
+      // Direct values needed in safeProps
+      isMobileView,
+      loadBaseInfo,
+
+      clearAbortControllerArr,
+    };
+  },
+)(observer(View));

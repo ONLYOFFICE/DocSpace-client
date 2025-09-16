@@ -2345,6 +2345,7 @@ class FilesStore {
         "fill-form",
         "edit",
         "open-pdf",
+        "vectorization",
         "preview",
         "view",
         "pdf-view",

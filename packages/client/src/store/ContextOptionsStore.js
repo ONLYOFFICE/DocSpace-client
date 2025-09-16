@@ -82,6 +82,7 @@ import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
 import HelpCenterReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
 import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/icons/16/custom-filter.react.svg?url";
 import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
+import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
 import CreateTemplateSvgUrl from "PUBLIC_DIR/images/template.react.svg?url";
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
@@ -122,6 +123,7 @@ import {
   FilterType,
   FileExtensions,
   ShareAccessRights,
+  VectorizationStatus,
 } from "@docspace/shared/enums";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import {
@@ -245,6 +247,10 @@ class ContextOptionsStore {
     this.clientLoadingStore = clientLoadingStore;
     this.guidanceStore = guidanceStore;
   }
+
+  onRetryVectorization = (fileId) => {
+    console.log("retry vectorization", fileId);
+  };
 
   onOpenFolder = async (item, t) => {
     const { isExpiredLinkAsync } = this.filesActionsStore;
@@ -1807,6 +1813,14 @@ class ContextOptionsStore {
           this.onClickLinkEdit(item);
         },
         disabled: false,
+      },
+      {
+        id: "option_vectorization",
+        key: "vectorization",
+        label: t("Files:Vectorization"),
+        icon: RefreshReactSvgUrl,
+        onClick: () => this.onRetryVectorization(item.id),
+        disabled: item.vectorizationStatus !== VectorizationStatus.Failed,
       },
       {
         id: "option_preview",

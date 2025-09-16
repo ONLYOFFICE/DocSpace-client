@@ -1,4 +1,4 @@
-/*
+/*!
  * (c) Copyright Ascensio System SIA 2009-2025
  *
  * This program is a free software product.
@@ -26,32 +26,19 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import type { TTranslation, TViewAs } from "../../types";
-import { type TRoom, TRoomLifetime } from "../../api/rooms/types";
-import { type TFile, type TFolder } from "../../api/files/types";
+@use "../../styles/mixins";
 
-type TQuickButtonItem = TFile | TFolder | TRoom;
+.badge {
+  path,
+  rect {
+    fill: revert-layer !important;
+  }
+}
 
-export type QuickButtonsProps = {
-  t: TTranslation;
-  item: TQuickButtonItem;
-  viewAs: TViewAs;
-  roomLifetime?: TRoomLifetime;
-  expiredDate?: string | null;
+.small {
+  @include mixins.icon-size(small);
+}
 
-  isDisabled?: boolean;
-  isPublicRoom?: boolean;
-  isArchiveFolder?: boolean;
-  isTemplatesFolder?: boolean;
-  isIndexEditingMode?: boolean;
-  showLifetimeIcon?: boolean;
-  isRecentFolder?: boolean;
-
-  onClickDownload?: VoidFunction;
-  onCopyPrimaryLink?: VoidFunction;
-  onClickShare?: VoidFunction;
-  onCreateRoom?: VoidFunction;
-  onClickLock?: VoidFunction;
-  onClickFavorite?: VoidFunction;
-  onRetryVectorization?: VoidFunction;
-};
+.medium {
+  @include mixins.icon-size(medium);
+}

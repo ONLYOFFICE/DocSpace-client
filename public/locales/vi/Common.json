@@ -894,5 +894,7 @@
   "RevokeLink": "Thu hồi liên kết",
   "LogoForEditors": "Logo cho trình soạn thảo {{editorName}}",
   "LogoForViewer": "Logo cho {{diagramViewer}}",
-  "LogoDocsEditor": "Logo cho tiêu đề trình chỉnh sửa"
+  "LogoDocsEditor": "Logo cho tiêu đề trình chỉnh sửa",
+  "PortalRestoring": "Đang khôi phục {{productName}}",
+  "PreparationPortalDescription": "Khi quá trình khôi phục kết thúc, bạn sẽ tự động được chuyển hướng đến {{productName}} của mình."
 }

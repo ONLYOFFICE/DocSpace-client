@@ -26,68 +26,89 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import { PageType } from "@docspace/shared/enums";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 
 import { ArticleItem } from "@docspace/shared/components/article-item/ArticleItemWrapper";
 
-const PureAccountsItem = ({
+interface IAccountsItem {
+  showText: boolean;
+  activeItemId: string;
+  onClick: (e: React.MouseEvent, folderId: string) => void;
+  getLinkData: (folderId: string) => { path: string; state: any };
+  hideGuests: boolean;
+}
+
+const AccountsItems = ({
   showText,
-  isActive,
+  activeItemId,
   onClick,
-  t,
-  currentColorScheme,
   getLinkData,
-}) => {
+  hideGuests,
+}: IAccountsItem) => {
+  const { t } = useTranslation("Common");
+
   const onClickAction = React.useCallback(
-    (e) => {
+    (e: React.MouseEvent) => {
       onClick && onClick(e, "accounts");
     },
     [onClick],
   );
 
-  const icon = getCatalogIconUrlByType(PageType.account);
-
-  const title = t("Common:Contacts");
-
-  const linkData = getLinkData("accounts");
-
   return (
-    <ArticleItem
-      key="accounts"
-      text={title}
-      linkData={linkData}
-      title={title}
-      icon={icon}
-      showText={showText}
-      onClick={onClickAction}
-      isActive={isActive}
-      folderId="document_catalog-accounts"
-      $currentColorScheme={currentColorScheme}
-      withAnimation
-      isEndOfBlock
-    />
+    <>
+      <ArticleItem
+        key="accounts-members"
+        text={t("Common:Members")}
+        linkData={getLinkData("accounts")}
+        title={t("Common:Members")}
+        icon={getCatalogIconUrlByType(PageType.account)}
+        showText={showText}
+        onClick={onClickAction}
+        isActive={activeItemId === "accounts"}
+        folderId="accounts_catalog-members"
+        withAnimation
+      />
+      <ArticleItem
+        key="accounts-groups"
+        text={t("Common:Groups")}
+        linkData={getLinkData("groups")}
+        title={t("Common:Groups")}
+        icon={getCatalogIconUrlByType(PageType.groups)}
+        showText={showText}
+        onClick={onClickAction}
+        isActive={activeItemId === "groups"}
+        folderId="accounts_catalog-groups"
+        withAnimation
+      />
+      {hideGuests ? null : (
+        <ArticleItem
+          key="accounts-guests"
+          text={t("Common:Guests")}
+          linkData={getLinkData("guests")}
+          title={t("Common:Guests")}
+          icon={getCatalogIconUrlByType(PageType.guests)}
+          showText={showText}
+          onClick={onClickAction}
+          isActive={activeItemId === "guests"}
+          folderId="accounts_catalog-guests"
+          withAnimation
+          isEndOfBlock
+        />
+      )}
+    </>
   );
 };
 
-const AccountsItem = withTranslation(["Common"])(PureAccountsItem);
-
-export default inject(({ settingsStore, filesStore, peopleStore }) => {
-  const { showText, currentColorScheme } = settingsStore;
-
-  const { setContactsTab } = peopleStore.usersStore;
-
-  const { filesController, roomsController } = filesStore;
+export default inject(({ settingsStore, userStore }: TStore) => {
+  const { showText } = settingsStore;
+  const { isVisitor, isCollaborator } = userStore.user!;
+  const hideGuests = isVisitor || isCollaborator;
 
   return {
     showText,
-    currentColorScheme,
-
-    setContactsTab,
-
-    filesController,
-    roomsController,
+    hideGuests,
   };
-})(observer(AccountsItem));
+})(observer(AccountsItems));

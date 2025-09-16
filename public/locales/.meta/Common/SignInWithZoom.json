@@ -3,7 +3,7 @@
   "content": "Sign in with Zoom",
   "content_en_sha1_hash": "4bf90e936ec81803bddf7c8046ea7c8f393f6d8b",
   "created_at": "2025-05-19T21:30:48.808Z",
-  "updated_at": "2025-09-07T07:53:15.517Z",
+  "updated_at": "2025-09-09T10:39:53.048Z",
   "comment": {
     "text": "This translation key is used for the \"Sign in with Zoom\" button on a login form. It prompts users to sign in with their Zoom account when using two-factor authentication.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 415,
-      "context": "? t(\"Common:SignUpWithMicrosoft\")\n : t(\"Common:SignInWithMicrosoft\");\n case \"sso\":\n return signUp ? t(\"Common:SignUpWithSso\") : t(\"Common:SignInWithSso\");\n case \"zoom\":\n return signUp ? t(\"Common:SignUpWithZoom\") : t(\"Common:SignInWithZoom\");\n default:\n return \"\";\n }\n }\n export function getProviderLabel(provider: string, t: (key: string) => string) {",
+      "line_number": 442,
+      "context": "? t(\"Common:SignUpWithMicrosoft\")\n : t(\"Common:SignInWithMicrosoft\");\n case \"sso\":\n return signUp ? t(\"Common:SignUpWithSso\") : t(\"Common:SignInWithSso\");\n case \"zoom\":\n return signUp ? t(\"Common:SignUpWithZoom\") : t(\"Common:SignInWithZoom\");\n case \"weixin\":\n return signUp\n ? t(\"Common:SignUpWithWechat\")\n : t(\"Common:SignInWithWechat\");\n default:",
       "module": "/packages/shared"
     }
   ],

@@ -58,6 +58,7 @@
   grid-auto-rows: 1fr;
   width: 100%;
   box-sizing: border-box;
+  grid-gap: 16px;
 
   @media (min-width: 600px) and (max-width: 839px) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -75,8 +76,6 @@
   &.isOneTile {
     grid-template-columns: 1fr;
   }
-
-  grid-gap: 16px;
 }
 
 .row {

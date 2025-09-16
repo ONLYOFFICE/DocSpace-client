@@ -58,9 +58,3 @@ export interface TilesProps {
   isInitLoading: boolean;
   setIsVisibleInfoPanelTemplateGallery: (visible: boolean) => void;
 }
-
-export interface TileProps {
-  // Tile component currently receives everything via MobX inject and therefore
-  // has no own props. We leave an empty interface to keep API consistent and
-  // make future extension easier.
-}

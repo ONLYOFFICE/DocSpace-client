@@ -53,7 +53,7 @@ const StyledSkeletonTile = styled.div`
   }
 `;
 
-const Card = ({ children, countTilesInRow, smallPreview, ...rest }) => {
+const Card = ({ children, smallPreview, ...rest }) => {
   const isSubmitToGalleryTile = children?.props?.isSubmitTile === true;
 
   return (
@@ -84,7 +84,6 @@ const InfiniteGrid = (props) => {
   const {
     children,
     hasMoreFiles,
-    filterTotal,
     fetchMoreFiles,
     filesLength,
     className,
@@ -321,15 +320,13 @@ const InfiniteGrid = (props) => {
 };
 
 export default inject(({ oformsStore }) => {
-  const { oformFiles, hasMoreForms, oformsFilterTotal, fetchMoreOforms } =
-    oformsStore;
+  const { oformFiles, hasMoreForms, fetchMoreOforms } = oformsStore;
 
   const filesLength = oformFiles?.length;
 
   return {
     filesList: oformFiles,
     hasMoreFiles: hasMoreForms,
-    filterTotal: oformsFilterTotal,
     fetchMoreFiles: fetchMoreOforms,
     filesLength,
   };

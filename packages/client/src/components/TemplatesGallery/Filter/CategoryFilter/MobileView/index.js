@@ -40,7 +40,6 @@ const CategoryFilterMobile = ({
   menuItems,
 
   currentCategory,
-  getTypeOfCategory,
   getCategoryTitle,
   filterOformsByCategory,
   setOformsCurrentCategory,
@@ -180,7 +179,6 @@ const CategoryFilterMobile = ({
 
 export default inject(({ oformsStore }) => ({
   currentCategory: oformsStore.currentCategory,
-  getTypeOfCategory: oformsStore.getTypeOfCategory,
   getCategoryTitle: oformsStore.getCategoryTitle,
   filterOformsByCategory: oformsStore.filterOformsByCategory,
   setOformsCurrentCategory: oformsStore.setOformsCurrentCategory,

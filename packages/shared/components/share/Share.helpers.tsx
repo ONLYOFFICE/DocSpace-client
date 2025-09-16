@@ -72,7 +72,7 @@ import {
   TTitleShare,
 } from "./Share.types";
 
-type ItemValue<T> = T extends false ? never : T;
+type ItemValue<T> = T extends false | undefined | null ? never : T;
 
 export const getAccessTypeOptions = (t: TTranslation, withIcon = true) => {
   return [
@@ -569,96 +569,111 @@ export const convertMembers = (
 export const getShareAccessRightOptions = (
   t: TFunction,
   infoPanelSelection: TFile | TFolder,
+  withRemove = true,
 ) => {
+  const {
+    FullAccess,
+    Editing,
+    Review,
+    Comment,
+    Read,
+    None,
+    CustomFilter,
+    FillForms,
+  } = infoPanelSelection.availableExternalRights ?? {};
+
   if (isFolder(infoPanelSelection)) {
     return [
-      {
+      FullAccess && {
         access: ShareAccessRights.FullAccess,
         key: "full-access",
         label: t("Common:FullAccess"),
         description: t("Common:FullAccessDescription"),
       },
-      {
+      Editing && {
         access: ShareAccessRights.Editing,
         key: "editor",
         label: t("Common:Editor"),
         description: t("Common:EditorDescription"),
       },
-      {
+      Review && {
         access: ShareAccessRights.Review,
         key: "review",
         label: t("Common:Review"),
         description: t("Common:RoleReviewerDescription"),
       },
-
-      {
+      Comment && {
         access: ShareAccessRights.Comment,
         key: "commenting",
         label: t("Common:Comment"),
         description: t("Common:RoleCommentatorDescription"),
       },
-      {
+      Read && {
         access: ShareAccessRights.ReadOnly,
         key: "viewing",
         label: t("Common:RoleViewer"),
         description: t("Common:RoleViewerDescription"),
       },
-      {
-        key: "separator",
-        isSeparator: true,
-        label: "",
-      },
-      {
-        access: ShareAccessRights.None,
-        key: "remove",
-        label: t("Common:Remove"),
-      },
-    ];
+      withRemove &&
+        None && {
+          key: "separator",
+          isSeparator: true,
+          label: "",
+        },
+      withRemove &&
+        None && {
+          access: ShareAccessRights.None,
+          key: "remove",
+          label: t("Common:Remove"),
+        },
+    ].filter((item): item is ItemValue<typeof item> => Boolean(item));
   }
 
   const accessOptions = [
-    {
+    Editing && {
       access: ShareAccessRights.Editing,
       key: "editing",
       label: t("Common:Editing"),
     },
-    {
+    CustomFilter && {
       access: ShareAccessRights.CustomFilter,
       key: "custom-filter",
       label: t("Common:CustomFilter"),
     },
-    {
+    Review && {
       access: ShareAccessRights.Review,
       key: "review",
       label: t("Common:Review"),
     },
-    {
+    Comment && {
       access: ShareAccessRights.Comment,
       key: "commenting",
       label: t("Common:Comment"),
     },
-    {
+    Read && {
       access: ShareAccessRights.ReadOnly,
       key: "viewing",
       label: t("Common:ReadOnly"),
       title: t("Common:ReadOnly"),
     },
-    {
+    FillForms && {
       access: ShareAccessRights.FormFilling,
       key: "filling",
       label: t("Common:Filling"),
     },
-    {
-      key: "separator",
-      isSeparator: true,
-      label: "",
-    },
-    {
-      access: ShareAccessRights.None,
-      key: "remove",
-      label: t("Common:Remove"),
-    },
-  ];
+    withRemove &&
+      None && {
+        key: "separator",
+        isSeparator: true,
+        label: "",
+      },
+    withRemove &&
+      None && {
+        access: ShareAccessRights.None,
+        key: "remove",
+        label: t("Common:Remove"),
+      },
+  ].filter((item): item is ItemValue<typeof item> => Boolean(item));
 
   return accessOptions;
 };

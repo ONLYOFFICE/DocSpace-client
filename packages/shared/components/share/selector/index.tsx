@@ -27,6 +27,7 @@
 import { useMemo, FC } from "react";
 import { useTranslation } from "react-i18next";
 
+import { isFile } from "../../../utils/typeGuards";
 import { ShareAccessRights } from "../../../enums";
 import PeopleSelector from "../../../selectors/People";
 import { ShareLinkService } from "../../../services/share-link.service";
@@ -67,16 +68,19 @@ export const ShareSelector: FC<ShareSelectorProps> = ({ item, onClose }) => {
   };
 
   const accessOptions = useMemo(
-    () => getShareAccessRightOptions(t, item) as TAccessRight[],
+    () => getShareAccessRightOptions(t, item, false) as TAccessRight[],
     [t, item],
   );
 
-  const selectedAccessRight = useMemo(
-    () =>
-      accessOptions.find((a) => a.access === ShareAccessRights.ReadOnly) ||
-      null,
-    [accessOptions],
-  );
+  const selectedAccessRight = useMemo(() => {
+    const isForm = isFile(item) && item.isForm;
+
+    const accessDefault = isForm
+      ? ShareAccessRights.FormFilling
+      : ShareAccessRights.ReadOnly;
+
+    return accessOptions.find((a) => a.access === accessDefault) || null;
+  }, [accessOptions]);
 
   const invitedUsersArray: string[] = [];
 

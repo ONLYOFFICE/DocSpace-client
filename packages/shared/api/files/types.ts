@@ -88,6 +88,7 @@ export type TAvailableExternalRights = {
   Restrict: boolean;
   Review: boolean;
   FillForms: boolean;
+  FullAccess: boolean;
 };
 
 export type TShareSettings = {

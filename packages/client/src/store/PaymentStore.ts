@@ -730,7 +730,9 @@ class PaymentStore {
       if (priceParam) {
         const reccomendedAmount = this.walletBalance - Number(priceParam);
         if (reccomendedAmount < 0)
-          this.setReccomendedAmount(Math.abs(reccomendedAmount).toString());
+          this.setReccomendedAmount(
+            Math.ceil(Math.abs(reccomendedAmount)).toString(),
+          );
       } else {
         this.setReccomendedAmount("");
       }

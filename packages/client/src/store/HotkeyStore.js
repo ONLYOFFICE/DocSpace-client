@@ -33,6 +33,7 @@ import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { toastr } from "@docspace/shared/components/toast";
 import { isMobile, getCountTilesInRow } from "@docspace/shared/utils";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
+import { clearTextSelection } from "@docspace/shared/utils/copy";
 
 import config from "PACKAGE_FILE";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
@@ -752,6 +753,7 @@ class HotkeyStore {
 
   enableSelection = (e) => {
     if (e.type === "keydown" && this.selectionAreaIsEnabled) {
+      clearTextSelection();
       this.setSelectionAreaIsEnabled(false);
       this.setWithContentSelection(true);
     } else if (e.type === "keyup") {

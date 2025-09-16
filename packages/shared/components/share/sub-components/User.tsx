@@ -41,9 +41,11 @@ import { getUserType, getUserTypeTranslation } from "../../../utils/common";
 import { TUser } from "../../../api/people/types";
 import { isNextImage } from "../../../utils/typeGuards";
 import type { StaticImageData } from "../../../types";
+import { createLoader } from "../../../utils/createLoader";
 
 import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
-import { ComboBox, type TOption } from "../../combobox";
+import { ComboBoxSize, type TOption } from "../../combobox";
+import { AccessRightSelect } from "../../access-right-select";
 
 import { Text } from "../../text";
 import { IconButton } from "../../icon-button";
@@ -73,8 +75,19 @@ export const User = ({
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSelectOption = async (option: TOption) => {
-    setIsLoading(true);
-    onSelectOption?.(option).finally(() => setIsLoading(false));
+    if (!onSelectOption) return;
+
+    const { endLoader, startLoader } = createLoader();
+
+    startLoader(() => {
+      setIsLoading(true);
+    });
+
+    onSelectOption(option).finally(() => {
+      endLoader(() => {
+        setIsLoading(false);
+      });
+    });
   };
 
   if (
@@ -215,22 +228,25 @@ export const User = ({
       {selectedOption && options && !hideCombobox ? (
         <div className="role-wrapper">
           {canChangeUserRole ? (
-            <ComboBox
+            <AccessRightSelect
+              modernView
               className="role-combobox"
               selectedOption={selectedOption}
-              options={options}
+              usePortalBackdrop
               onSelect={handleSelectOption}
+              accessOptions={options}
+              noSelect={false}
+              manualWidth="300px"
+              directionY="both"
+              size={ComboBoxSize.content}
               scaled={false}
-              withBackdrop={isMobile}
-              size="content"
-              modernView
-              title={t("Common:Role")}
-              manualWidth="auto"
+              scaledOptions={false}
+              isAside={isMobile}
+              withBlur={isMobile}
               isLoading={isLoading}
               isMobileView={isMobileOnly}
-              directionY="both"
-              displaySelectedOption
-              noSelect={false}
+              fixedDirection={isMobile}
+              shouldShowBackdrop={isMobile}
               dataTestId="info_panel_members_user_role_combobox"
             />
           ) : (

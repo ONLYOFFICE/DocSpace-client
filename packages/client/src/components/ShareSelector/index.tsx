@@ -71,8 +71,11 @@ const ShareSelector: FC<ShareSelectorProps> = ({ item }) => {
       element={
         <ShareSelectorComponent
           item={item}
+          withAccessRights
           onClose={onClose}
           onSubmit={onSubmit}
+          onBackClick={onClose}
+          onCloseClick={onClose}
         />
       }
     />

@@ -43,15 +43,29 @@ import type { ShareSelectorProps } from "./Selector.types";
 export const ShareSelector: FC<ShareSelectorProps> = ({
   item,
   onClose,
+  onBackClick,
+  onCloseClick,
   onSubmit,
+  withAccessRights,
 }) => {
   const { t } = useTranslation("Common");
+
+  const getDefaultAccessRight = () => {
+    const isForm = isFile(item) && item.isForm;
+
+    const accessDefault = isForm
+      ? ShareAccessRights.FormFilling
+      : ShareAccessRights.ReadOnly;
+
+    return accessDefault;
+  };
 
   const handleSubmit: TOnSubmit = async (selectedItems, accessRight) => {
     const share: TShareToUser[] = selectedItems.map((selectedItem) => {
       return {
         shareTo: selectedItem.id!.toString(),
-        access: accessRight!.access as ShareAccessRights,
+        access:
+          (accessRight?.access as ShareAccessRights) ?? getDefaultAccessRight(),
       };
     });
 
@@ -60,11 +74,7 @@ export const ShareSelector: FC<ShareSelectorProps> = ({
 
       onSubmit?.(list);
 
-      if (share.length === 1) {
-        toastr.success(t("Common:UserAdded"));
-      } else {
-        toastr.success(t("Common:RoomCreateUser"));
-      }
+      toastr.success(t("Common:RoomCreateUser"));
     } catch (error) {
       toastr.error(error as TData);
       console.error(error);
@@ -90,13 +100,21 @@ export const ShareSelector: FC<ShareSelectorProps> = ({
 
   const invitedUsersArray: string[] = [];
 
+  const accessRightsProps = withAccessRights
+    ? ({
+        withAccessRights: true,
+        accessRights: accessOptions,
+        selectedAccessRight,
+        onAccessRightsChange: () => {},
+      } as const)
+    : {};
+
   return (
     <PeopleSelector
       withHeader
       withGuests
       withGroups
       isMultiSelect
-      withAccessRights
       disableDisabledUsers
       useAside
       withBlur={false}
@@ -105,18 +123,16 @@ export const ShareSelector: FC<ShareSelectorProps> = ({
       submitButtonLabel={t("Common:SelectAction")}
       disableSubmitButton={false}
       onSubmit={handleSubmit}
-      accessRights={accessOptions}
-      selectedAccessRight={selectedAccessRight}
-      onAccessRightsChange={() => {}}
       disableInvitedUsers={invitedUsersArray}
       data-test-id="share_to_people_selector"
+      {...accessRightsProps}
       headerProps={{
         headerLabel: t("Common:Contacts"),
         withoutBackButton: false,
         withoutBorder: true,
         isCloseable: true,
-        onBackClick: onClose,
-        onCloseClick: onClose,
+        onBackClick,
+        onCloseClick,
       }}
     />
   );

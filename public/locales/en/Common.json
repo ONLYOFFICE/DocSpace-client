@@ -951,5 +951,6 @@
   "EditorDescription": "Operations with existing files: viewing, editing, reviewing, commenting.",
   "AddUsers": "Add users",
   "RoomCreateUser": "Users added.",
-  "UserAdded": "User added"
+  "ShareWithPortalUsers": "Share with {{productName}} users",
+  "ShareWithPortalUsersDescription": "Select specific users from {{productName}} and invite them to fill out the original form."
 }

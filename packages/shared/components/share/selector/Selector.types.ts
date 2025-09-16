@@ -30,5 +30,8 @@ import type { TFile, TFolder } from "../../../api/files/types";
 export interface ShareSelectorProps {
   item: TFile | TFolder;
   onClose: VoidFunction;
+  onBackClick: VoidFunction;
+  onCloseClick: VoidFunction;
   onSubmit?: (list: RoomMember[]) => void;
+  withAccessRights?: boolean;
 }

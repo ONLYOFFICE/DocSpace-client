@@ -537,6 +537,6 @@
   padding-top: 10px;
 
   .list {
-    width: 100% !important;
+    width: calc(100% + 16px) !important;
   }
 }

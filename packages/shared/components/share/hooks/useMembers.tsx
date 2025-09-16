@@ -89,8 +89,6 @@ export const useMembers = (props: UseMembersProps) => {
     },
   );
 
-  const countMembers = props.members?.length ?? 0;
-
   const fetchShareMembers = async (filter: Filter) => {
     try {
       setIsLoading(true);
@@ -202,6 +200,8 @@ export const useMembers = (props: UseMembersProps) => {
       (member): member is TShareMember => member.id === selfId,
     );
 
+    const countMembers = members?.length ?? 0;
+
     const headersCount = membersList.length - countMembers;
 
     if (membersList.length === 0) {
@@ -247,7 +247,6 @@ export const useMembers = (props: UseMembersProps) => {
     };
   }, [
     memoMembers,
-    countMembers,
     t,
     infoPanelSelection,
     selfId,

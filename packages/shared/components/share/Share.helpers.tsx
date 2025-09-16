@@ -533,7 +533,7 @@ export const convertMembers = (
         } satisfies TTitleShare);
       }
 
-      groups.push(member);
+      groups.push({ ...member, isGroup: true });
     } else if ("isVisitor" in member && member.isVisitor) {
       if (guests.length === 0) {
         guests.push({

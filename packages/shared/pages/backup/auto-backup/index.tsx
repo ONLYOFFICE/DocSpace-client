@@ -169,6 +169,7 @@ const AutomaticBackup = ({
   isManagement = false,
   backupProgressError,
   setBackupProgressError,
+  setDefaultFolderId,
 }: AutomaticBackupProps) => {
   const isCheckedDocuments =
     selectedStorageType === `${BackupStorageType.DocumentModuleType}`;
@@ -548,6 +549,7 @@ const AutomaticBackup = ({
             </Text>
             {isCheckedThirdParty ? (
               <ThirdPartyModule
+                setDefaultFolderId={setDefaultFolderId}
                 setSelectedFolder={setSelectedFolder}
                 defaultStorageType={defaultStorageType}
                 defaultFolderId={defaultFolderId}

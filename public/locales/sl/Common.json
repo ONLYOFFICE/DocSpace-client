@@ -895,5 +895,7 @@
   "LogoForEditors": "Logotip za urejevalnik {{editorName}}",
   "LogoForViewer": "Logotip za {{diagramViewer}}",
   "LogoDocsEditor": "Logotip za glavo urednika",
-  "RoomCreateUser": "Uporabniki dodani."
+  "RoomCreateUser": "Uporabniki dodani.",
+  "PortalRestoring": "Obnavljanje {{productName}}",
+  "PreparationPortalDescription": "Ko bo postopek obnavljanja končan, boste samodejno preusmerjeni na {{productName}}."
 }

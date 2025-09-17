@@ -895,5 +895,7 @@
   "LogoForEditors": "Logo per l'editor {{editorName}}",
   "LogoForViewer": "Logo per {{diagramViewer}}",
   "LogoDocsEditor": "Logo per l'intestazione degli editor",
-  "RoomCreateUser": "Utenti aggiunti."
+  "RoomCreateUser": "Utenti aggiunti.",
+  "PortalRestoring": "Ripristino {{productName}}",
+  "PreparationPortalDescription": "Una volta completato il ripristino, sarai automaticamente reindirizzato al tuo {{productName}}."
 }

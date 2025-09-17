@@ -895,5 +895,7 @@
   "LogoForEditors": "Logo voor {{editorName}}-editor",
   "LogoForViewer": "Logo voor {{diagramViewer}}",
   "LogoDocsEditor": "Logo voor de koptekst van de editors",
-  "RoomCreateUser": "Gebruikers toegevoegd."
+  "RoomCreateUser": "Gebruikers toegevoegd.",
+  "PortalRestoring": "{{productName}} herstellen",
+  "PreparationPortalDescription": "Zodra het herstelproces voorbij is, wordt u automatisch doorgestuurd naar uw {{productName}}."
 }

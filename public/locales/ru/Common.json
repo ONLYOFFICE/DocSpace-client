@@ -898,5 +898,7 @@
   "LogoForEditors": "Логотип для редактора {{editorName}}",
   "LogoForViewer": "Логотип для {{diagramViewer}}",
   "LogoDocsEditor": "Логотип для заголовка редакторов",
-  "RoomCreateUser": "Пользователи добавлены."
+  "RoomCreateUser": "Пользователи добавлены.",
+  "PortalRestoring": "Восстановление {{productName}}",
+  "PreparationPortalDescription": "Когда восстановление завершится, Вы будете автоматически перенаправлены на ваш {{productName}}."
 }

@@ -42,10 +42,18 @@ import { saveDeepLinkSettings } from "@docspace/shared/api/settings";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 
+import CommonStore from "SRC_DIR/store/CommonStore";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+
+import useCommon from "../useCommon";
+import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
+
 interface Props {
   isMobileView: boolean;
   deepLinkSettings: DeepLinkType;
-  initSettings: (path: string) => Promise<void>;
+  loadBaseInfo: (page: string) => Promise<void>;
+  common: CommonStore;
+  settingsStore: SettingsStore;
 }
 
 const StyledWrapper = styled.div`
@@ -65,11 +73,26 @@ const StyledWrapper = styled.div`
 `;
 
 const ConfigureDeepLinkComponent = (props: Props) => {
-  const { isMobileView, deepLinkSettings, initSettings } = props;
+  const {
+    isMobileView,
+    deepLinkSettings,
+    loadBaseInfo,
+    common,
+    settingsStore,
+  } = props;
 
   const { t } = useTranslation(["Settings", "Common"]);
   const navigate = useNavigate();
   const location = useLocation();
+
+  const defaultProps = createDefaultHookSettingsProps({
+    loadBaseInfo,
+    isMobileView,
+    settingsStore,
+    common,
+  });
+
+  const { getCommonInitialValue } = useCommon(defaultProps.common);
 
   const [type, setType] = useState(0);
   const [showReminder, setShowReminder] = useState(false);
@@ -103,10 +126,13 @@ const ConfigureDeepLinkComponent = (props: Props) => {
   }, [type]);
 
   useEffect(() => {
-    initSettings(isMobileView ? "configure-deep-link" : "general");
     checkWidth();
     window.addEventListener("resize", checkWidth);
     return () => window.removeEventListener("resize", checkWidth);
+  }, []);
+
+  useEffect(() => {
+    if (isMobileView) getCommonInitialValue();
   }, []);
 
   useEffect(() => {
@@ -206,6 +232,10 @@ export const ConfigureDeepLink = inject<TStore>(({ settingsStore, common }) => {
   return {
     isMobileView,
     deepLinkSettings,
-    initSettings,
+    common,
+    settingsStore,
+    loadBaseInfo: async (page: string) => {
+      await initSettings(page);
+    },
   };
 })(observer(ConfigureDeepLinkComponent));

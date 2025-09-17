@@ -37,10 +37,10 @@ import { Text } from "@docspace/shared/components/text";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 
 type DisconnectAccountDialogProps = {
-  disconnectAccountDialogVisible: DialogsStore["disconnectAccountDialogVisible"];
-  setDisconnectAccountDialogVisible: DialogsStore["setDisconnectAccountDialogVisible"];
-  deleteTgLink: TStore["telegramStore"]["deleteTgLink"];
-  username: TStore["telegramStore"]["username"];
+  disconnectAccountDialogVisible?: DialogsStore["disconnectAccountDialogVisible"];
+  setDisconnectAccountDialogVisible?: DialogsStore["setDisconnectAccountDialogVisible"];
+  deleteTgLink?: TStore["telegramStore"]["deleteTgLink"];
+  username?: TStore["telegramStore"]["username"];
 };
 
 const DisconnectAccountDialog = ({
@@ -52,12 +52,12 @@ const DisconnectAccountDialog = ({
   const { t } = useTranslation(["Profile", "Common"]);
 
   const onClickDisconnect = () => {
-    deleteTgLink();
-    setDisconnectAccountDialogVisible(false);
+    deleteTgLink?.();
+    setDisconnectAccountDialogVisible?.(false);
   };
 
   const onClose = () => {
-    setDisconnectAccountDialogVisible(false);
+    setDisconnectAccountDialogVisible?.(false);
   };
 
   return (

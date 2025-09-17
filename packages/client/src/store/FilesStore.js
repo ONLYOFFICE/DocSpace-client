@@ -3993,6 +3993,10 @@ class FilesStore {
     this.setFolders(favoritesFolder.folders);
     this.setFiles(favoritesFolder.files);
 
+    const newFilter = this.filter.clone();
+    newFilter.total = favoritesFolder.total;
+    this.setFilter(newFilter);
+
     this.selectedFolderStore.setSelectedFolder({
       folders: favoritesFolder.folders,
       ...favoritesFolder.current,

@@ -79,6 +79,7 @@ export const getClient = async (clientId: string): Promise<IClientProps> => {
 export const getClientList = async (
   page: number,
   limit: number,
+  signal?: AbortSignal,
 ): Promise<IClientListProps> => {
   const hdrs = getOAuth2Headers();
   const data = (await request(
@@ -86,6 +87,7 @@ export const getClientList = async (
       method: "get",
       url: `/clients?page=${page}&limit=${limit}`,
       headers: hdrs,
+      signal,
     },
     false,
     true,
@@ -204,7 +206,7 @@ export const getScope = async (name: string): Promise<TScope> => {
   return scope;
 };
 
-export const getScopeList = async (): Promise<TScope[]> => {
+export const getScopeList = async (signal?: AbortSignal): Promise<TScope[]> => {
   const hdrs = getOAuth2Headers();
 
   const scopeList = (await request(
@@ -212,6 +214,7 @@ export const getScopeList = async (): Promise<TScope[]> => {
       method: "get",
       url: `/scopes`,
       headers: hdrs,
+      signal,
     },
     false,
     true,

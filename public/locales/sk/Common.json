@@ -895,5 +895,7 @@
   "LogoForEditors": "Logo pre editor {{editorName}}",
   "LogoForViewer": "Logo pre {{diagramViewer}}",
   "LogoDocsEditor": "Logo pre hlavičku editora",
-  "RoomCreateUser": "Používatelia pridaní."
+  "RoomCreateUser": "Používatelia pridaní.",
+  "PortalRestoring": "Obnovenie {{productName}}",
+  "PreparationPortalDescription": "Po dokončení procesu obnovenia budete automaticky presmerovaný na Váš {{productName}}."
 }

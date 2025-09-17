@@ -895,5 +895,7 @@
   "LogoForEditors": "Logo pentru editorul {{editorName}}",
   "LogoForViewer": "Logo pentru {{diagramViewer}}",
   "LogoDocsEditor": "Logo-ul pentru antetul aplicațiilor de editare",
-  "RoomCreateUser": "Utilizatorul a fost adăugat."
+  "RoomCreateUser": "Utilizatorul a fost adăugat.",
+  "PortalRestoring": "Restaurarea spațiului {{productName}}",
+  "PreparationPortalDescription": "După finalizarea procesului de restaurare, veți fi redirecționat automat către {{productName}}."
 }

@@ -325,10 +325,11 @@ export function changeProductAdmin(userId, productId, administrator) {
   });
 }
 
-export async function getUserById(userId: string) {
+export async function getUserById(userId: string, signal?: AbortSignal) {
   const res = (await request({
     method: "get",
     url: `/people/${userId}`,
+    signal,
   })) as TUser;
 
   res.displayName = Encoder.htmlDecode(res.displayName);

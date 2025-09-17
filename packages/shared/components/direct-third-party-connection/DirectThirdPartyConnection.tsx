@@ -409,7 +409,7 @@ const DirectThirdPartyConnection = ({
           visible={deleteThirdPartyDialogVisible}
           deleteThirdParty={deleteThirdParty}
           setConnectedThirdPartyAccount={setConnectedThirdPartyAccount}
-          setDefaultFolderId={setDefaultFolderId}
+          {...(setDefaultFolderId && { setDefaultFolderId })}
           setDeleteThirdPartyDialogVisible={setDeleteThirdPartyDialogVisible}
           setThirdPartyProviders={setThirdPartyProviders}
           providers={providers}

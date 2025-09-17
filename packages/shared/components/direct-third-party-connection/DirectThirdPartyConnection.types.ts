@@ -84,7 +84,7 @@ export interface DirectThirdPartyConnectionProps {
   toDefault: VoidFunction;
   setNewPath: (folders: TBreadCrumb[], fileName?: string) => void;
 
-  setDefaultFolderId: (id: string | number | null) => void;
+  setDefaultFolderId?: (id: string | number | null) => void;
   // other
 
   isError?: boolean;

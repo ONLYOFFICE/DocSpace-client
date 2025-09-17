@@ -68,7 +68,7 @@ const DeleteThirdPartyDialog = ({
         .catch((err) => toastr.error(err))
         .finally(() => {
           setConnectedThirdPartyAccount(null);
-          setDefaultFolderId(null);
+          setDefaultFolderId?.(null);
 
           updateInfo?.();
           setIsLoading(false);

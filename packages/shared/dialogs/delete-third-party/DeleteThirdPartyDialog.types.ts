@@ -44,5 +44,5 @@ export interface DeleteThirdPartyDialogProps {
   setThirdPartyProviders: (providers: TThirdParties) => void;
   providers: TThirdParties;
   removeItem: ThirdPartyAccountType;
-  setDefaultFolderId: (id: string | number | null) => void;
+  setDefaultFolderId?: (id: string | number | null) => void;
 }

@@ -114,6 +114,9 @@ export const QuickButtons = (props: QuickButtonsProps) => {
     "vectorizationStatus" in item &&
     item.vectorizationStatus === VectorizationStatus.Failed;
 
+  const hasRetryVectorizationAccess =
+    security && "Vectorization" in security && security.Vectorization;
+
   const getTooltipContent = () => (
     <Text fontSize="12px" fontWeight={400} noSelect>
       {roomLifetime?.deletePermanently
@@ -257,6 +260,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               className={classNames("badge icons-group")}
               size="medium"
               onRetryVectorization={onRetryVectorization}
+              withRetryVectorization={hasRetryVectorizationAccess}
             />
           ) : null}
         </>

@@ -78,6 +78,7 @@ export type TFileSecurity = {
   CreateRoomFrom: boolean;
   CopyLink: boolean;
   Embed: boolean;
+  Vectorization: boolean;
 };
 
 export type TAvailableExternalRights = {

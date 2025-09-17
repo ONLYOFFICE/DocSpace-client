@@ -224,6 +224,9 @@ const Badges = ({
     !isArchiveFolder &&
     !isTile;
 
+  const hasRetryVectorizationAccess =
+    security && "Vectorization" in security && security.Vectorization;
+
   const onDraftClick = () => {
     if (!isTrashFolder) openLocationFile?.();
   };
@@ -467,6 +470,7 @@ const Badges = ({
           )}
           size={tabletViewBadge ? "medium" : "small"}
           onRetryVectorization={onRetryVectorization}
+          withRetryVectorization={hasRetryVectorizationAccess}
         />
       ) : null}
     </div>

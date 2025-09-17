@@ -1824,7 +1824,9 @@ class ContextOptionsStore {
         label: t("Files:Vectorization"),
         icon: RefreshReactSvgUrl,
         onClick: () => this.onRetryVectorization(item.id),
-        disabled: item.vectorizationStatus !== VectorizationStatus.Failed,
+        disabled:
+          !item.security?.Vectorization ||
+          item.vectorizationStatus !== VectorizationStatus.Failed,
       },
       {
         id: "option_preview",
@@ -2679,8 +2681,10 @@ class ContextOptionsStore {
       k.contextOptions.includes("restore"),
     ).length;
 
-    const canRetryVectorization = selection.every((k) =>
-      k.contextOptions.includes("vectorization"),
+    const canRetryVectorization = selection.every(
+      (k) =>
+        k.security?.Vectorization &&
+        k.vectorizationStatus === VectorizationStatus.Failed,
     );
 
     /* const removeFromFavoriteItems = selection.filter((k) =>

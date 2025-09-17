@@ -2014,7 +2014,9 @@ class FilesActionStore {
         return hasRoomsToResetQuota;
       case "vectorization":
         return selection.every(
-          (s) => s.vectorizationStatus === VectorizationStatus.Failed,
+          (s) =>
+            s.security?.Vectorization &&
+            s.vectorizationStatus === VectorizationStatus.Failed,
         );
       default:
         return false;

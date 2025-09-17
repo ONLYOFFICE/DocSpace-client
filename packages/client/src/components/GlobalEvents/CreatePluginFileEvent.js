@@ -97,7 +97,7 @@ const CreatePluginFile = ({
     } catch (error) {
       if (!onError) return;
 
-      if (error && isAutoFocusOnError) {
+      if (isAutoFocusOnError) {
         setTimeout(() => {
           const input = document?.getElementById("create-text-input");
           if (input) {
@@ -129,30 +129,9 @@ const CreatePluginFile = ({
 
   const onSelectAction = (option) => {
     if (!onSelect) return;
-    const message = onSelect(option);
 
-    messageActions({
-      message,
-      pluginName,
-      setSettingsPluginDialogVisible,
-      setCurrentSettingsDialogPlugin,
-      updatePluginStatus,
-      setPluginDialogVisible,
-      setPluginDialogProps,
-      updateContextMenuItems,
-      updateInfoPanelItems,
-      updateMainButtonItems,
-      updateProfileMenuItems,
-      updateEventListenerItems,
-      updateFileItems,
-      updateCreateDialogProps: updateCreatePluginFileProps,
-    });
-  };
-
-  const onChangeAction = async (value) => {
     try {
-      if (!onChange) return;
-      const message = onChange(value);
+      const message = onSelect(option);
 
       messageActions({
         message,
@@ -171,9 +150,15 @@ const CreatePluginFile = ({
         updateCreateDialogProps: updateCreatePluginFileProps,
       });
     } catch (error) {
-      if (!onError) return;
+      console.error(error);
+    }
+  };
 
-      const message = await onError(error);
+  const onChangeAction = async (value) => {
+    if (!onChange) return;
+
+    try {
+      const message = onChange(value);
 
       messageActions({
         message,
@@ -191,6 +176,8 @@ const CreatePluginFile = ({
         updateFileItems,
         updateCreateDialogProps: updateCreatePluginFileProps,
       });
+    } catch (err) {
+      console.error(err);
     }
   };
 

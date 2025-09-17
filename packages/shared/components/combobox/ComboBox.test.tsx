@@ -55,7 +55,9 @@ describe("ComboBox", () => {
 
   test("renders with base props", () => {
     render(<ComboBox {...baseProps} />);
-    expect(screen.getByText("Option 1")).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Option 1" }),
+    ).toBeInTheDocument();
   });
 
   test("opens dropdown on click", async () => {

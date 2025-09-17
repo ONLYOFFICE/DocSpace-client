@@ -3,7 +3,7 @@
   "content": "Welcome Page settings have been successfully saved",
   "content_en_sha1_hash": "9423c52b478ba171e34c7255eaa0faeb80e5c709",
   "created_at": "2025-05-19T21:30:52.827Z",
-  "updated_at": "2025-05-24T03:59:20.316Z",
+  "updated_at": "2025-09-17T13:43:01.732Z",
   "comment": {
     "text": "The \"SuccessfullySaveGreetingSettingsMessage\" translation key is used to display a success message after saving welcome page settings. It appears when the user clicks a button or submits form data in the Portal Settings categories common/Customization/welcome-page-settings.js file. This message informs the user that their changes have been successfully saved.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/welcome-page-settings.js",
-      "line_number": 284,
+      "line_number": 302,
       "context": "const onSaveGreetingSettings = () => {\n const { greetingTitle } = state;\n setState((val) => ({ ...val, isLoadingGreetingSave: true }));\n setGreetingTitle(greetingTitle)\n .then(() => {\n toastr.success(t(\"SuccessfullySaveGreetingSettingsMessage\"));\n setState((val) => ({ ...val, greetingTitleDefault: greetingTitle }));\n })\n .catch((error) => toastr.error(error))\n .finally(() => {\n getGreetingSettingsIsDefault();",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/welcome-page-settings.js",
-      "line_number": 284,
+      "line_number": 302,
       "context": "const onSaveGreetingSettings = () => {\n const { greetingTitle } = state;\n setState((val) => ({ ...val, isLoadingGreetingSave: true }));\n setGreetingTitle(greetingTitle)\n .then(() => {\n toastr.success(t(\"SuccessfullySaveGreetingSettingsMessage\"));\n setState((val) => ({ ...val, greetingTitleDefault: greetingTitle }));\n })\n .catch((error) => toastr.error(error))\n .finally(() => {\n getGreetingSettingsIsDefault();",
       "module": "/packages/client"
     }

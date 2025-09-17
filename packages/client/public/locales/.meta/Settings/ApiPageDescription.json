@@ -3,7 +3,7 @@
   "content": "Create your own productivity platform based on {{organizationName}} {{productName}} and collaborate on documents with teams, clients, and partners.",
   "content_en_sha1_hash": "2fec16a0e87329b3160f8c9bb2a7319e6a6493ae",
   "created_at": "2025-05-19T21:30:50.568Z",
-  "updated_at": "2025-08-04T07:30:01.330Z",
+  "updated_at": "2025-09-17T13:43:01.768Z",
   "comment": {
     "text": "This translation key is used for a page description that will appear on a portal settings button. It describes a productivity platform based on {{organizationName}} {{productName}}, and is translated to be displayed in different languages.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Api/index.js",
-      "line_number": 85,
+      "line_number": 97,
       "context": "testId=\"learn_more_button\"\n onClick={() => window.open(apiBasicLink, \"_blank\")}\n scale={currentDeviceType === DeviceType.mobile}\n />\n }\n descriptionText={t(\"ApiPageDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n })}\n headerText={t(\"ApiPageHeader\")}\n imageAlt={t(\"ApiPageHeader\")}",
       "module": "/packages/client"
     }

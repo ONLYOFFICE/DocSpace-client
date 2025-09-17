@@ -3,7 +3,7 @@
   "content": "The report will be saved to {{sectionName}}",
   "content_en_sha1_hash": "55671fe19ba077a1c4e0ef79f837de41f87ae103",
   "created_at": "2025-05-19T21:30:52.387Z",
-  "updated_at": "2025-09-02T07:59:28.609Z",
+  "updated_at": "2025-09-17T13:43:01.863Z",
   "comment": {
     "text": "The \"ReportSaveLocation\" translation key is used to display a section name where reports will be saved. It appears in UI elements related to report download, providing context for users about the location of their files.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/index.js",
-      "line_number": 144,
+      "line_number": 116,
       "context": "securityLifetime={securityLifetime}\n lifetime={securityLifetime.auditTrailLifeTime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}\n downloadReport={t(\"DownloadReportBtnText\")}\n downloadReportDescription={t(\"ReportSaveLocation\", {\n sectionName: t(\"Common:MyDocuments\"),\n })}\n getReport={getAuditTrailReport}\n isSettingNotPaid={!isAuditAvailable}\n isLoadingDownloadReport={isLoadingDownloadReport}",
       "module": "/packages/client"
     },

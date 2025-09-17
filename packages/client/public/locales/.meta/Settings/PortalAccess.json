@@ -3,7 +3,7 @@
   "content": "{{productName}} access",
   "content_en_sha1_hash": "47d03f020b562535e6eb17ded31112639c75a4e8",
   "created_at": "2025-05-19T21:30:52.162Z",
-  "updated_at": "2025-08-04T07:30:01.278Z",
+  "updated_at": "2025-09-17T13:43:01.716Z",
   "comment": {
     "text": "The \"PortalAccess\" translation key displays a label indicating access to a portal, typically found on a page or button related to security settings in a software application. The label includes the product name, making it context-specific and user-friendly for end-users. It appears on various pages within the Portal Settings section.",
     "is_auto": true,
@@ -30,8 +30,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/index.js",
-      "line_number": 56,
-      "context": "const location = useLocation();\n \n const data = [\n {\n id: \"access-portal\",\n name: t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n content: <AccessPortal />,\n },\n {\n id: \"login-history\",\n name: t(\"LoginHistoryTitle\"),",
+      "line_number": 76,
+      "context": "useSecurity(defaultProps.security);\n \n const data = [\n {\n id: \"access-portal\",\n name: t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n content: <AccessPortal />,\n onClick: async () => {\n clearAbortControllerArr();\n await getAccessPortalData();\n },",
       "module": "/packages/client"
     },
     {

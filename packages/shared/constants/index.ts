@@ -274,8 +274,8 @@ export const CategoryType = Object.freeze({
   PublicRoom: 10,
   Flows: 11,
   SharedWithMe: 12,
-  Groups: 12,
-  Guests: 13,
+  Groups: 13,
+  Guests: 14,
 });
 
 export const AVATAR_ACTION_KEYS = {

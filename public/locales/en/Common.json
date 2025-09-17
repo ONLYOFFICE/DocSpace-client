@@ -970,7 +970,6 @@
   "AIWouldLikeToUseThisTool": "AI would like to use this tool",
   "AlwaysAllowToolCall": "Always allow this tool to perform this action without asking againw",
   "Allow": "Allow",
-  "AiWouldUseTool": "AI would like to use this tool",
   "PortalRestoring": "{{productName}} restoring",
   "PreparationPortalDescription": "Once the restoring process is over, you'll be automatically redirected to your {{productName}}.",
   "NoMCPServers": "No MCP servers connected yet",

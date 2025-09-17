@@ -77,7 +77,6 @@ newInstance
       "Errors",
       "Translations",
       "FormFillingTipsDialog",
-      "MCPServers",
     ],
 
     backend: {

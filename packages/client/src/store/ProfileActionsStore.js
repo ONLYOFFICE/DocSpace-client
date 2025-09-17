@@ -176,7 +176,12 @@ class ProfileActionsStore {
     if (openingNewTab(settingsUrl, obj.originalEvent)) return;
 
     this.selectedFolderStore.setSelectedFolder(null);
-    window.DocSpace.navigate(settingsUrl);
+
+    const state = {
+      fromUrl: `${window.DocSpace.location.pathname}${window.DocSpace.location.search}`,
+    };
+
+    window.DocSpace.navigate(settingsUrl, { state });
   };
 
   onAccountsClick = (accountsUrl, obj) => {
@@ -190,7 +195,11 @@ class ProfileActionsStore {
     const params = accountsFilter.toUrlParams();
     const path = getCategoryUrl(CategoryType.Accounts);
 
-    window.DocSpace.navigate(`${path}?${params}`);
+    const state = {
+      fromUrl: `${window.DocSpace.location.pathname}${window.DocSpace.location.search}`,
+    };
+
+    window.DocSpace.navigate(`${path}?${params}`, { state });
   };
 
   onSpacesClick = () => {

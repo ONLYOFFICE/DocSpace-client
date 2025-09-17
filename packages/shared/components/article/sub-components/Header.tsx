@@ -74,6 +74,7 @@ const ArticleHeader = ({
             <BackButton
               showText={showText}
               currentDeviceType={currentDeviceType}
+              toggleArticleOpen={onIconClick}
             />
           ) : null
         }

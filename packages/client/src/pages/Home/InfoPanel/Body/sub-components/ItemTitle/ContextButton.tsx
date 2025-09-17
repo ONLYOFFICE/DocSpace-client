@@ -43,6 +43,7 @@ import {
 } from "@docspace/shared/components/context-menu-button";
 
 import ContextOptionsStore from "SRC_DIR/store/ContextOptionsStore";
+import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 
 import styles from "./itemTitle.module.scss";
 
@@ -52,12 +53,15 @@ type RoomsContextBtnProps = {
   selection: TSelection;
 
   getItemContextOptionsActions?: ContextOptionsStore["getFilesContextOptions"];
+
+  getIcon?: FilesSettingsStore["getIcon"];
 };
 
 const RoomsContextBtn = ({
   selection,
 
   getItemContextOptionsActions,
+  getIcon,
 }: RoomsContextBtnProps) => {
   const { t } = useTranslation([
     "Files",
@@ -86,9 +90,24 @@ const RoomsContextBtn = ({
     const isRoom = "isRoom" in selection && selection.isRoom;
     const badgeUrl = isRoom ? getRoomBadgeUrl(selection) : null;
 
+    const isFile = "isFile" in selection && selection.isFile;
+
+    const iconUrl = getIcon
+      ? getIcon(
+          32,
+          isFile ? selection.fileExst : undefined,
+          "providerKey" in selection ? selection.providerKey : undefined,
+          isFile ? selection.contentLength : undefined,
+          undefined,
+          "isArchive" in selection ? selection.isArchive : undefined,
+          "type" in selection ? selection.type : undefined,
+        )
+      : "";
+
     return {
       title: selection.title || "",
-      icon: "icon" in selection ? (selection.icon as string) || "" : "",
+      icon:
+        "icon" in selection ? (selection.icon as string) || iconUrl || "" : "",
       original: "logo" in selection ? selection.logo?.original : "",
       large: "logo" in selection ? selection.logo?.large : "",
       medium: "logo" in selection ? selection.logo?.medium : "",
@@ -134,6 +153,9 @@ const RoomsContextBtn = ({
   );
 };
 
-export default inject(({ contextOptionsStore }: TStore) => ({
-  getItemContextOptionsActions: contextOptionsStore.getFilesContextOptions,
-}))(observer(RoomsContextBtn));
+export default inject(
+  ({ contextOptionsStore, filesSettingsStore }: TStore) => ({
+    getItemContextOptionsActions: contextOptionsStore.getFilesContextOptions,
+    getIcon: filesSettingsStore.getIcon,
+  }),
+)(observer(RoomsContextBtn));

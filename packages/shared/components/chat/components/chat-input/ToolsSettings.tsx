@@ -304,9 +304,15 @@ const ToolsSettings = () => {
       };
     });
 
+    const showManageConnectionItem = servers.some(
+      (server) =>
+        server.serverType !== ServerType.Portal &&
+        server.serverType !== ServerType.Custom,
+    );
+
     return [
       ...serverItems,
-      ...(serverItems.length > 0
+      ...(serverItems.length > 0 && showManageConnectionItem
         ? [{ key: "separator-1", isSeparator: true }]
         : []),
       {
@@ -316,6 +322,7 @@ const ToolsSettings = () => {
           setShowManageConnections(true);
         },
         icon: ManageConnectionsReactSvgUrl,
+        disabled: !showManageConnectionItem,
       },
     ];
   }, [MCPTools, isBase, servers, t, toggleTool]);

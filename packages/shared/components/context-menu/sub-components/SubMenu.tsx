@@ -143,11 +143,13 @@ const SubMenu = (props: SubMenuProps) => {
     keepClosingRef.current = false;
     if (delay === 0) {
       setActiveItem(itm);
+      setActiveItemKey(itm.key);
       return;
     }
     openTimeoutRef.current = setTimeout(() => {
       if (keepClosingRef.current) return;
       setActiveItem(itm);
+      setActiveItemKey(itm.key);
     }, delay);
   };
 
@@ -158,6 +160,7 @@ const SubMenu = (props: SubMenuProps) => {
     hideTimeoutRef.current = setTimeout(() => {
       if (keepClosingRef.current) {
         setActiveItem(null);
+        setActiveItemKey(null);
         keepClosingRef.current = false;
       }
     }, delay);
@@ -192,6 +195,7 @@ const SubMenu = (props: SubMenuProps) => {
       if (root) {
         cancelAll();
         setActiveItem(item);
+        setActiveItemKey(item.key);
         return;
       }
 
@@ -270,6 +274,7 @@ const SubMenu = (props: SubMenuProps) => {
 
     if ((items || item.onLoad) && isMobileDevice) {
       setActiveItem(item);
+      setActiveItemKey(item.key);
 
       e.stopPropagation();
       return;
@@ -465,7 +470,7 @@ const SubMenu = (props: SubMenuProps) => {
     ) as ContextMenuType;
 
     setActiveItem(item || null);
-  }, [model]);
+  }, [model, activeItemKey]);
 
   useEffect(() => {
     return () => {

@@ -77,9 +77,6 @@ const AdManagementComponent = ({
   useEffect(() => {
     const defaultSettings = getFromSessionStorage("defaultDisplayBanners");
 
-    console.log("defaultSettings", defaultSettings);
-    console.log("type", type);
-
     if (defaultSettings === type) {
       setShowReminder(false);
     } else {

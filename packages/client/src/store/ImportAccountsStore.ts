@@ -49,6 +49,7 @@ import {
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { parseQuota } from "SRC_DIR/pages/PortalSettings/utils/parseQuota";
 import { getUserByEmail } from "@docspace/shared/api/people";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 type TUsers = {
   new: TEnhancedMigrationUser[];
@@ -120,8 +121,14 @@ class ImportAccountsStore {
 
   migrationPhase: TMigrationPhase = "";
 
-  constructor(currentQuotaStoreConst: CurrentQuotasStore) {
+  settingsStore: SettingsStore;
+
+  constructor(
+    currentQuotaStoreConst: CurrentQuotasStore,
+    settingsStoreConst: SettingsStore,
+  ) {
     this.currentQuotaStore = currentQuotaStoreConst;
+    this.settingsStore = settingsStoreConst;
     makeAutoObservable(this);
   }
 
@@ -483,7 +490,14 @@ class ImportAccountsStore {
   };
 
   getMigrationList = () => {
-    return migrationList();
+    const abortController = new AbortController();
+    this.settingsStore.addAbortControllers(abortController);
+    try {
+      return migrationList(abortController.signal);
+    } catch (e) {
+      if (axios.isCancel(e)) return;
+      throw e;
+    }
   };
 
   initMigrations = (name: TWorkspaceService) => {
@@ -511,7 +525,15 @@ class ImportAccountsStore {
   };
 
   getMigrationStatus = () => {
-    return migrationStatus();
+    const abortController = new AbortController();
+    this.settingsStore.addAbortControllers(abortController);
+
+    try {
+      return migrationStatus(abortController.signal);
+    } catch (e) {
+      if (axios.isCancel(e)) return;
+      throw e;
+    }
   };
 
   getMigrationLog = () => {

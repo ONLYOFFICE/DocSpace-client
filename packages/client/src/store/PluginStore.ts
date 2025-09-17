@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable, runInAction } from "mobx";
+import axios from "axios";
 import cloneDeep from "lodash/cloneDeep";
 
 import api from "@docspace/shared/api";
@@ -111,8 +112,6 @@ class PluginStore {
 
   deletePluginDialogProps: null | { pluginName: string } = null;
 
-  isLoading = false;
-
   isEmptyList = false;
 
   needPageReload = false;
@@ -131,10 +130,6 @@ class PluginStore {
 
   setNeedPageReload = (value: boolean) => {
     this.needPageReload = value;
-  };
-
-  setIsLoading = (value: boolean) => {
-    this.isLoading = value;
   };
 
   setIsEmptyList = (value: boolean) => {
@@ -240,25 +235,28 @@ class PluginStore {
   };
 
   updatePlugins = async (fromList?: boolean) => {
-    if (!this.userStore || !this.userStore.user || this.isLoading) return;
+    if (!this.userStore || !this.userStore.user) return;
 
     const { isAdmin, isOwner } = this.userStore.user;
 
-    this.setIsLoading(true);
+    const abortController = new AbortController();
+    this.settingsStore.addAbortControllers(abortController);
 
     try {
       this.plugins = [];
 
       const plugins = await api.plugins.getPlugins(
         !isAdmin && !isOwner ? true : null,
+        abortController.signal,
       );
 
       this.setIsEmptyList(plugins.length === 0);
       plugins.forEach((plugin) => this.initPlugin(plugin, undefined, fromList));
     } catch (e) {
+      if (axios.isCancel(e)) {
+        return;
+      }
       console.log(e);
-    } finally {
-      this.setIsLoading(false);
     }
   };
 

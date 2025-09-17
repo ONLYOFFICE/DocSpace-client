@@ -894,5 +894,7 @@
   "RevokeLink": "إبطال الرابط",
   "LogoForEditors": "شعار محرر {{editorName}}",
   "LogoForViewer": "شعار {{diagramViewer}}",
-  "LogoDocsEditor": "شعار ترويسة المحررين"
+  "LogoDocsEditor": "شعار ترويسة المحررين",
+  "PortalRestoring": "استعادة {{productName}}",
+  "PreparationPortalDescription": "بمجرد انتهاء عملية الاستعادة ، ستتم إعادة توجيهك تلقائيًا إلى {{productName}} الخاص بك.\""
 }

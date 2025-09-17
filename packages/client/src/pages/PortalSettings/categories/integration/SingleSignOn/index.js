@@ -47,26 +47,22 @@ const SP_METADATA = "spMetadata";
 
 const SingleSignOn = (props) => {
   const {
-    init,
     serviceProviderSettings,
     spMetadata,
     isSSOAvailable,
-    isInit,
     currentDeviceType,
     logoText,
+    showPortalSettingsLoader,
   } = props;
   const { t, ready } = useTranslation(["SingleSignOn", "Settings"]);
   const isMobileView = currentDeviceType === DeviceType.mobile;
 
   useEffect(() => {
-    isSSOAvailable && !isInit && init();
-  }, []);
-
-  useEffect(() => {
     if (ready) setDocumentTitle(t("Settings:SingleSignOn"));
   }, [ready]);
 
-  if (!isInit && !isMobileView && isSSOAvailable) return <SSOLoader />;
+  if (showPortalSettingsLoader && !isMobileView && isSSOAvailable)
+    return <SSOLoader />;
 
   return (
     <StyledSsoPage
@@ -115,19 +111,22 @@ const SingleSignOn = (props) => {
   );
 };
 
-export default inject(({ settingsStore, ssoStore, currentQuotaStore }) => {
-  const { isSSOAvailable } = currentQuotaStore;
-  const { currentDeviceType, logoText } = settingsStore;
+export default inject(
+  ({ settingsStore, ssoStore, currentQuotaStore, clientLoadingStore }) => {
+    const { isSSOAvailable } = currentQuotaStore;
+    const { currentDeviceType, logoText } = settingsStore;
 
-  const { init, serviceProviderSettings, spMetadata, isInit } = ssoStore;
+    const { serviceProviderSettings, spMetadata } = ssoStore;
 
-  return {
-    init,
-    serviceProviderSettings,
-    spMetadata,
-    isSSOAvailable,
-    isInit,
-    currentDeviceType,
-    logoText,
-  };
-})(observer(SingleSignOn));
+    const { showPortalSettingsLoader } = clientLoadingStore;
+
+    return {
+      serviceProviderSettings,
+      spMetadata,
+      isSSOAvailable,
+      currentDeviceType,
+      logoText,
+      showPortalSettingsLoader,
+    };
+  },
+)(observer(SingleSignOn));

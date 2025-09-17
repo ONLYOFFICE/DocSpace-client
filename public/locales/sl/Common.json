@@ -894,5 +894,7 @@
   "RevokeLink": "Prekliči povezavo",
   "LogoForEditors": "Logotip za urejevalnik {{editorName}}",
   "LogoForViewer": "Logotip za {{diagramViewer}}",
-  "LogoDocsEditor": "Logotip za glavo urednika"
+  "LogoDocsEditor": "Logotip za glavo urednika",
+  "PortalRestoring": "Obnavljanje {{productName}}",
+  "PreparationPortalDescription": "Ko bo postopek obnavljanja končan, boste samodejno preusmerjeni na {{productName}}."
 }

@@ -33,7 +33,7 @@ import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
-import { size } from "@docspace/shared/utils";
+import { size, isMobileDevice } from "@docspace/shared/utils";
 import isEqual from "lodash/isEqual";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
@@ -42,6 +42,8 @@ import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorag
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import TfaLoader from "../sub-components/loaders/tfa-loader";
 import { LearnMoreWrapper } from "../StyledSecurity";
+import useSecurity from "../useSecurity";
+import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -60,15 +62,17 @@ const SCROLL_MARGIN_TOP =
 const TwoFactorAuth = (props) => {
   const {
     t,
-    isInit,
     setIsInit,
     currentColorScheme,
     tfaSettingsUrl,
     currentDeviceType,
     appAvailable,
     tfaSettings,
-    getTfaType,
     onSettingsSkeletonNotShown,
+
+    settingsStore,
+    tfaStore,
+    setup,
   } = props;
 
   const [type, setType] = useState("none");
@@ -79,6 +83,14 @@ const TwoFactorAuth = (props) => {
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  const defaultProps = createDefaultHookSettingsProps({
+    settingsStore,
+    tfaStore,
+    setup,
+  });
+
+  const { getSecurityInitialValue } = useSecurity(defaultProps.security);
 
   const checkWidth = () => {
     window.innerWidth > size.mobile &&
@@ -103,6 +115,13 @@ const TwoFactorAuth = (props) => {
     }
     setIsLoading(true);
   };
+
+  useEffect(() => {
+    if (isMobileDevice()) {
+      getSecurityInitialValue();
+      setIsLoading(true);
+    }
+  }, [isMobileDevice]);
 
   useEffect(() => {
     if (!onSettingsSkeletonNotShown) return;
@@ -141,9 +160,6 @@ const TwoFactorAuth = (props) => {
   useEffect(() => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
-
-    if (!isInit) getTfaType().then(() => setIsLoading(true));
-    else setIsLoading(true);
 
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
@@ -296,24 +312,23 @@ export const TfaSection = inject(({ settingsStore, setup, tfaStore }) => {
     tfaSettings,
     smsAvailable,
     appAvailable,
-    getTfaType,
   } = tfaStore;
 
-  const { isInit, setIsInit } = setup;
+  const { setIsInit } = setup;
   const { currentColorScheme, tfaSettingsUrl, currentDeviceType } =
     settingsStore;
 
   return {
     setTfaSettings,
-
     tfaSettings,
     smsAvailable,
     appAvailable,
-    isInit,
     setIsInit,
     currentColorScheme,
     tfaSettingsUrl,
     currentDeviceType,
-    getTfaType,
+    settingsStore,
+    tfaStore,
+    setup,
   };
 })(withTranslation(["Settings", "Common"])(observer(TwoFactorAuth)));

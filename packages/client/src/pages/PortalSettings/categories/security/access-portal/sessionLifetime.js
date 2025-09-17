@@ -34,7 +34,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { toastr } from "@docspace/shared/components/toast";
-import { size } from "@docspace/shared/utils";
+import { size, isMobileDevice } from "@docspace/shared/utils";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import isEqual from "lodash/isEqual";
 
@@ -43,6 +43,8 @@ import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorag
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import SessionLifetimeLoader from "../sub-components/loaders/session-lifetime-loader";
 import { LearnMoreWrapper } from "../StyledSecurity";
+import useSecurity from "../useSecurity";
+import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -65,15 +67,16 @@ const MainContainer = styled.div`
 const SessionLifetime = (props) => {
   const {
     t,
-
     lifetime,
     enabled,
     setSessionLifetimeSettings,
-    isInit,
     lifetimeSettingsUrl,
     currentColorScheme,
     currentDeviceType,
-    getSessionLifetime,
+
+    settingsStore,
+    tfaStore,
+    setup,
   } = props;
 
   const [type, setType] = useState(false);
@@ -84,6 +87,14 @@ const SessionLifetime = (props) => {
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  const defaultProps = createDefaultHookSettingsProps({
+    settingsStore,
+    tfaStore,
+    setup,
+  });
+
+  const { getSecurityInitialValue } = useSecurity(defaultProps.security);
 
   const checkWidth = () => {
     window.innerWidth > size.mobile &&
@@ -123,10 +134,14 @@ const SessionLifetime = (props) => {
   };
 
   useEffect(() => {
-    checkWidth();
+    if (isMobileDevice()) {
+      getSecurityInitialValue();
+      setIsLoading(true);
+    }
+  }, [isMobileDevice]);
 
-    if (!isInit) getSessionLifetime().then(() => setIsLoading(true));
-    else setIsLoading(true);
+  useEffect(() => {
+    checkWidth();
 
     window.addEventListener("resize", checkWidth);
     return () => window.removeEventListener("resize", checkWidth);
@@ -316,26 +331,28 @@ const SessionLifetime = (props) => {
   );
 };
 
-export const SessionLifetimeSection = inject(({ settingsStore, setup }) => {
-  const {
-    sessionLifetime,
-    enabledSessionLifetime,
-    setSessionLifetimeSettings,
-    lifetimeSettingsUrl,
-    currentColorScheme,
-    currentDeviceType,
-    getSessionLifetime,
-  } = settingsStore;
-  const { isInit } = setup;
+export const SessionLifetimeSection = inject(
+  ({ settingsStore, tfaStore, setup }) => {
+    const {
+      sessionLifetime,
+      enabledSessionLifetime,
+      setSessionLifetimeSettings,
+      lifetimeSettingsUrl,
+      currentColorScheme,
+      currentDeviceType,
+    } = settingsStore;
 
-  return {
-    enabled: enabledSessionLifetime,
-    lifetime: sessionLifetime,
-    setSessionLifetimeSettings,
-    isInit,
-    lifetimeSettingsUrl,
-    currentColorScheme,
-    currentDeviceType,
-    getSessionLifetime,
-  };
-})(withTranslation(["Settings", "Common"])(observer(SessionLifetime)));
+    return {
+      enabled: enabledSessionLifetime,
+      lifetime: sessionLifetime,
+      setSessionLifetimeSettings,
+      lifetimeSettingsUrl,
+      currentColorScheme,
+      currentDeviceType,
+
+      settingsStore,
+      tfaStore,
+      setup,
+    };
+  },
+)(withTranslation(["Settings", "Common"])(observer(SessionLifetime)));

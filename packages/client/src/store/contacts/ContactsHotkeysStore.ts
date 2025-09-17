@@ -27,6 +27,7 @@
 import { makeAutoObservable } from "mobx";
 import { isMobile } from "@docspace/shared/utils";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
+import { clearTextSelection } from "@docspace/shared/utils/copy";
 import { TGroup } from "@docspace/shared/api/groups/types";
 import { TABLE_HEADER_HEIGHT } from "@docspace/shared/components/table/Table.constants";
 import GroupsStore from "./GroupsStore";
@@ -337,6 +338,7 @@ class ContactsHotkeysStore {
 
   enableSelection = (e: KeyboardEvent) => {
     if (e.type === "keydown" && this.selectionAreaIsEnabled) {
+      clearTextSelection();
       this.setSelectionAreaIsEnabled(false);
       this.setWithContentSelection(true);
     } else if (e.type === "keyup") {

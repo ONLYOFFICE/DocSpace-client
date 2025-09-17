@@ -1,6 +1,8 @@
+output:
+  - meta
+  - summary
 pre-push:
-  parallel: true
-  skip_on_merge_commit: true
+  parallel: false
   env:
     LEFTHOOK: "1"
   commands:
@@ -14,23 +16,9 @@ pre-push:
       skip_empty: true
       follow: true
       skip_on_fail: false
-    images:
-      run: npm --prefix ./common/tests run test:images
+    common:
+      run: npm --prefix ./common/tests run test:lefthook
       skip_empty: true
       follow: true
       skip_on_fail: false
-    colors:
-      run: npm --prefix ./common/tests run test:colors
-      skip_empty: true
-      follow: true
-      skip_on_fail: false
-    dependencies:
-      run: npm --prefix ./common/tests run test:dependencies
-      skip_empty: true
-      follow: true
-      skip_on_fail: false
-    translations:
-      run: npm --prefix ./common/tests run test:skip-base-languages
-      skip_empty: true
-      follow: true
-      skip_on_fail: false
+      fail_text: See report ./common/tests/reports/tests-results.html

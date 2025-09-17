@@ -124,7 +124,9 @@ export default function ExportImportPanel({
           details: response.data.details,
         });
       } else {
-        throw new Error(response.data.error || "Failed to import translations");
+        throw new Error(
+          response.data.message || "Failed to import translations"
+        );
       }
 
       // Reset file input
@@ -190,7 +192,9 @@ export default function ExportImportPanel({
         </div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className={`h-5 w-5 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`}
+          className={`h-5 w-5 transition-transform duration-200 ${
+            isExpanded ? "rotate-180" : ""
+          }`}
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"

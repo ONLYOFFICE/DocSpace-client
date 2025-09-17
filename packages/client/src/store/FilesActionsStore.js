@@ -124,6 +124,7 @@ import { showSuccessExportRoomIndexToast } from "SRC_DIR/helpers/toast-helpers";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 import { createFolderNavigation } from "SRC_DIR/helpers/createFolderNavigation";
 import { hideInfoPanel, showInfoPanel } from "SRC_DIR/helpers/info-panel";
+import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { checkProtocol } from "../helpers/files-helpers";
@@ -2011,6 +2012,10 @@ class FilesActionStore {
         return hasRoomsToDisableQuota;
       case "default-quota":
         return hasRoomsToResetQuota;
+      case "vectorization":
+        return selection.every(
+          (s) => s.vectorizationStatus === VectorizationStatus.Failed,
+        );
       default:
         return false;
     }
@@ -2367,6 +2372,14 @@ class FilesActionStore {
           onClick: () => this.onClickRemoveFromRecent(selection),
           iconUrl: RemoveOutlineSvgUrl,
         };
+      case "vectorization":
+        if (!this.isAvailableOption("vectorization")) return null;
+        return {
+          id: "menu-vectorization",
+          label: t("Files:Vectorization"),
+          iconUrl: RefreshReactSvgUrl,
+          onClick: this.retryVectorizationMany,
+        };
       default:
         break;
     }
@@ -2424,8 +2437,10 @@ class FilesActionStore {
     const copy = this.getOption("copy", t);
     const deleteOption = this.getOption("delete", t);
     const showInfo = this.getOption("showInfo", t);
+    const vectorization = this.getOption("vectorization", t);
 
     itemsCollection
+      .set("vectorization", vectorization)
       .set("createRoom", createRoom)
       .set("download", download)
       .set("downloadAs", downloadAs)
@@ -3824,6 +3839,10 @@ class FilesActionStore {
       updateFileVectorizationStatus(fileId, VectorizationStatus.Failed);
       console.error(e);
     }
+  };
+
+  retryVectorizationMany = async () => {
+    console.log("retry vectorization many");
   };
 }
 

@@ -252,6 +252,10 @@ class ContextOptionsStore {
     this.filesActionsStore.retryVectorization(fileId);
   };
 
+  onRetryVectorizationMany = () => {
+    console.log("onRetryVectorizationMany");
+  };
+
   onOpenFolder = async (item, t) => {
     const { isExpiredLinkAsync } = this.filesActionsStore;
 
@@ -2675,6 +2679,10 @@ class ContextOptionsStore {
       k.contextOptions.includes("restore"),
     ).length;
 
+    const canRetryVectorization = selection.every((k) =>
+      k.contextOptions.includes("vectorization"),
+    );
+
     /* const removeFromFavoriteItems = selection.filter((k) =>
       k.contextOptions.includes("remove-from-favorites"),
     ); */
@@ -2704,6 +2712,13 @@ class ContextOptionsStore {
         icon: CatalogRoomsReactSvgUrl,
         onClick: () => this.onCreateRoom(null, true),
         disabled: !selection.security?.CreateRoomFrom,
+      },
+      {
+        key: "vectorization",
+        label: t("Files:Vectorization"),
+        icon: RefreshReactSvgUrl,
+        onClick: this.onRetryVectorizationMany,
+        disabled: !canRetryVectorization,
       },
       {
         key: "download",

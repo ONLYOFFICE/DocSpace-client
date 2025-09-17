@@ -109,7 +109,7 @@ type MainProfileProps = {
   onChangeFile?: AvatarEditorDialogStore["onChangeFile"];
   image?: AvatarEditorDialogStore["image"];
   setImage?: AvatarEditorDialogStore["setImage"];
-  fetchTreeFolders: TreeFoldersStore["fetchTreeFolders"];
+  fetchTreeFolders?: TreeFoldersStore["fetchTreeFolders"];
 };
 
 const MainProfile = (props: MainProfileProps) => {
@@ -308,7 +308,7 @@ const MainProfile = (props: MainProfileProps) => {
       TopLoadingIndicator.start();
       await updateProfileCulture?.(profile!.id, newLanguage.key as string);
       i18n.changeLanguage(newLanguage.key?.toString());
-      await fetchTreeFolders();
+      await fetchTreeFolders?.();
     } catch (error: unknown) {
       toastr.error(
         error && (error as { message: string }).message

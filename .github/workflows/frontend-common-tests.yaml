@@ -137,27 +137,36 @@ jobs:
     runs-on: ubuntu-latest
     needs: [changes]
     if: needs.changes.outputs.playwright == 'true' || needs.changes.outputs.workflow == 'true'
-    timeout-minutes: 12
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+      - name: Free up disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/ghc
+          sudo rm -rf /usr/local/share/boost
+          docker system prune -af
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-      - name: Cleanup existing containers
-        run: docker ps -a --filter name=login-tests-ci -q | xargs -r docker rm -f
-      - uses: adambirds/docker-compose-action@v1.5.0
-        with:
-          compose-file: packages/login/compose.yaml
-          up-flags: --build --remove-orphans
-          down-flags: --volumes --remove-orphans
-          services: tests-ci
-          test-container: tests-ci
-          test-command: pnpm exec playwright test --workers=1
-          environment: |
-            CI=true
-            GITHUB_WORKFLOW=${{ github.workflow }}
-            GITHUB_RUN_ID=${{ github.run_id }}
-            GITHUB_RUN_NUMBER=${{ github.run_number }}
-            BUILDKIT_INLINE_CACHE=1
+      - name: Cleanup existing containers and images
+        run: |
+          docker ps -a --filter name=login-tests-ci -q | xargs -r docker rm -f
+          docker images --filter reference="*login*" -q | xargs -r docker rmi -f
+      - name: Build and run tests
+        working-directory: packages/login
+        run: |
+          # Set environment variables
+          export CI=true
+          export NODE_OPTIONS="--max-old-space-size=4096"
+          export NEXT_TELEMETRY_DISABLED=1
+          
+          # Build and run with docker-compose
+          docker-compose -f compose.yaml build tests-ci
+          docker-compose -f compose.yaml run --rm tests-ci pnpm exec playwright test --workers=1
+        env:
+          GITHUB_WORKFLOW: ${{ github.workflow }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          GITHUB_RUN_NUMBER: ${{ github.run_number }}
 
   # Playwright SDK tests
   playwright-sdk:
@@ -165,27 +174,36 @@ jobs:
     runs-on: ubuntu-latest
     needs: [playwright-login]
     if: needs.changes.outputs.playwright == 'true' || needs.changes.outputs.workflow == 'true'
-    timeout-minutes: 12
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+      - name: Free up disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/ghc
+          sudo rm -rf /usr/local/share/boost
+          docker system prune -af
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-      - name: Cleanup existing containers
-        run: docker ps -a --filter name=sdk-tests-ci -q | xargs -r docker rm -f
-      - uses: adambirds/docker-compose-action@v1.5.0
-        with:
-          compose-file: packages/sdk/compose.yaml
-          up-flags: --build --remove-orphans
-          down-flags: --volumes --remove-orphans
-          services: tests-ci
-          test-container: tests-ci
-          test-command: pnpm exec playwright test --workers=1
-          environment: |
-            CI=true
-            GITHUB_WORKFLOW=${{ github.workflow }}
-            GITHUB_RUN_ID=${{ github.run_id }}
-            GITHUB_RUN_NUMBER=${{ github.run_number }}
-            BUILDKIT_INLINE_CACHE=1
+      - name: Cleanup existing containers and images
+        run: |
+          docker ps -a --filter name=sdk-tests-ci -q | xargs -r docker rm -f
+          docker images --filter reference="*sdk*" -q | xargs -r docker rmi -f
+      - name: Build and run tests
+        working-directory: packages/sdk
+        run: |
+          # Set environment variables
+          export CI=true
+          export NODE_OPTIONS="--max-old-space-size=4096"
+          export NEXT_TELEMETRY_DISABLED=1
+          
+          # Build and run with docker-compose
+          docker-compose -f compose.yaml build tests-ci
+          docker-compose -f compose.yaml run --rm tests-ci pnpm exec playwright test --workers=1
+        env:
+          GITHUB_WORKFLOW: ${{ github.workflow }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          GITHUB_RUN_NUMBER: ${{ github.run_number }}
   # ESLint tests
   eslint:
     name: "Lint tests"

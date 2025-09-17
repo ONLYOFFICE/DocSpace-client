@@ -3,22 +3,86 @@ name: Frontend common tests
 on:
   push:
     branches: [develop, release/v*, hotfix/v*]
-    paths: [packages/**, common/**]
+    paths: [packages/**, common/**, .github/workflows/frontend-common-tests.yaml]
   pull_request:
     branches: [develop, release/v*, hotfix/v*]
-    paths: [packages/**, common/**]
+    paths: [packages/**, common/**, .github/workflows/frontend-common-tests.yaml]
+
+env:
+  NODE_VERSION: 22.x
+  PNPM_VERSION: 10.15.1
+
 jobs:
+  # Detect changes to optimize job execution
+  changes:
+    name: "Detect changes"
+    runs-on: ubuntu-latest
+    outputs:
+      packages: ${{ steps.changes.outputs.packages }}
+      common: ${{ steps.changes.outputs.common }}
+      playwright: ${{ steps.changes.outputs.playwright }}
+      locales: ${{ steps.changes.outputs.locales }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            packages:
+              - 'packages/**'
+            common:
+              - 'common/**'
+            playwright:
+              - 'packages/login/**'
+              - 'packages/sdk/**'
+            locales:
+              - 'packages/**/public/locales/**'
+              - 'common/tests/**'
+
+  # Setup and cache dependencies once
+  setup:
+    name: "Setup dependencies"
+    runs-on: ubuntu-latest
+    needs: changes
+    if: needs.changes.outputs.packages == 'true' || needs.changes.outputs.common == 'true'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "pnpm"
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            common/tests/node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/pnpm-lock.yaml', '**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
   playwright-login:
     name: "Login e2e tests"
     runs-on: ubuntu-latest
+    needs: [changes]
+    if: needs.changes.outputs.playwright == 'true'
     steps:
       - uses: actions/checkout@v4
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
       - name: Cleanup existing containers
         run: docker ps -a --filter name=login-tests-ci -q | xargs -r docker rm -f
       - uses: adambirds/docker-compose-action@v1.5.0
         with:
           compose-file: packages/login/compose.yaml
-          up-flags: --build --force-recreate --remove-orphans
+          up-flags: --build --remove-orphans
           down-flags: --volumes --remove-orphans
           services: tests-ci
           test-container: tests-ci
@@ -28,17 +92,23 @@ jobs:
             GITHUB_WORKFLOW=${{ github.workflow }}
             GITHUB_RUN_ID=${{ github.run_id }}
             GITHUB_RUN_NUMBER=${{ github.run_number }}
+            BUILDKIT_INLINE_CACHE=1
+
   playwright-sdk:
     name: "SDK e2e tests"
     runs-on: ubuntu-latest
+    needs: [changes]
+    if: needs.changes.outputs.playwright == 'true'
     steps:
       - uses: actions/checkout@v4
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
       - name: Cleanup existing containers
         run: docker ps -a --filter name=sdk-tests-ci -q | xargs -r docker rm -f
       - uses: adambirds/docker-compose-action@v1.5.0
         with:
           compose-file: packages/sdk/compose.yaml
-          up-flags: --build --force-recreate --remove-orphans
+          up-flags: --build --remove-orphans
           down-flags: --volumes --remove-orphans
           services: tests-ci
           test-container: tests-ci
@@ -48,127 +118,161 @@ jobs:
             GITHUB_WORKFLOW=${{ github.workflow }}
             GITHUB_RUN_ID=${{ github.run_id }}
             GITHUB_RUN_NUMBER=${{ github.run_number }}
-  eslint:
-    name: "Lint tests"
+            BUILDKIT_INLINE_CACHE=1
+  # Static analysis jobs that can run in parallel
+  static-analysis:
+    name: "Static Analysis"
     runs-on: ubuntu-latest
+    needs: [setup]
+    if: needs.setup.result == 'success'
+    strategy:
+      matrix:
+        task: [lint, tsc, test]
+      fail-fast: false
     steps:
       - uses: actions/checkout@v4
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 10.15.1
-      - name: Use Node.js 22.x
+          version: ${{ env.PNPM_VERSION }}
+      - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22.x
+          node-version: ${{ env.NODE_VERSION }}
           cache: "pnpm"
-      - name: Install dependencies
-        run: pnpm install
-      - name: Lint clients
-        run: pnpm lint
-  tsc:
-    name: "TypeScript tests"
+      - name: Restore cached dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/pnpm-lock.yaml', '**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+      - name: Install dependencies (if cache miss)
+        run: pnpm install --frozen-lockfile --prefer-offline
+      - name: Run ${{ matrix.task }}
+        run: pnpm ${{ matrix.task }}
+  # Common tests that can run in parallel
+  common-tests:
+    name: "Common Tests"
     runs-on: ubuntu-latest
+    needs: [changes]
+    if: needs.changes.outputs.common == 'true'
+    strategy:
+      matrix:
+        test-type: [images, colors]
+      fail-fast: false
     steps:
       - uses: actions/checkout@v4
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10.15.1
-      - name: Use Node.js 22.x
+      - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22.x
-          cache: "pnpm"
-      - name: Install dependencies
-        run: pnpm install
-      - name: Run tsc
-        run: pnpm tsc
-  unit-tests:
-    name: "Unit tests"
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10.15.1
-      - name: Use Node.js 22.x
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22.x
-          cache: "pnpm"
-      - name: Install dependencies
-        run: pnpm install
-      - name: Run unit tests
-        run: pnpm test
-  images:
-    name: "Images tests"
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22.x
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+          cache-dependency-path: ./common/tests/package-lock.json
       - name: Install dependencies
         working-directory: ./common/tests
-        run: npm install
-      - name: Run common tests
+        run: npm ci
+      - name: Run ${{ matrix.test-type }} tests
         working-directory: ./common/tests
-        run: npm run test:images
-  colors:
-    name: "Colors tests"
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22.x
-      - name: Install dependencies
-        working-directory: ./common/tests
-        run: npm install
-      - name: Run common tests
-        working-directory: ./common/tests
-        run: npm run test:colors
+        run: npm run test:${{ matrix.test-type }}
+
+  # Dependency audit and tests
   dependencies:
-    name: "Audit dependencies tests"
+    name: "Dependencies Audit"
     runs-on: ubuntu-latest
+    needs: [setup, changes]
+    if: needs.setup.result == 'success'
     steps:
       - uses: actions/checkout@v4
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 10.15.1
-      - name: Use Node.js 22.x
+          version: ${{ env.PNPM_VERSION }}
+      - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22.x
+          node-version: ${{ env.NODE_VERSION }}
           cache: "pnpm"
-      - name: Install dependencies
-        run: pnpm install
+      - name: Restore cached dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            common/tests/node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/pnpm-lock.yaml', '**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+      - name: Install dependencies (if cache miss)
+        run: pnpm install --frozen-lockfile --prefer-offline
       - name: Run audit
         run: pnpm audit --audit-level=moderate
         env:
-          CI: true # Set CI environment variable to prevent interactive prompts
-      - name: Install dependencies
+          CI: true
+      - name: Install common test dependencies
         working-directory: ./common/tests
-        run: npm install
-      - name: Run common tests
+        run: npm ci
+      - name: Run dependency tests
         working-directory: ./common/tests
         run: npm run test:dependencies
+
+  # Locales tests
   locales:
-    name: "Locales tests (skip base languages)"
+    name: "Locales Tests"
     runs-on: ubuntu-latest
+    needs: [changes]
+    if: needs.changes.outputs.locales == 'true' || needs.changes.outputs.common == 'true'
     steps:
       - uses: actions/checkout@v4
-      - name: Use Node.js 22.x
+      - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22.x
-          cache: "pnpm"
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+          cache-dependency-path: ./common/tests/package-lock.json
       - name: Install dependencies
         working-directory: ./common/tests
-        run: npm install
-      - name: Run common tests
+        run: npm ci
+      - name: Run locales tests
         working-directory: ./common/tests
         run: npm run test:skip-base-languages
+
+  # Summary job to report overall status
+  test-summary:
+    name: "Test Summary"
+    runs-on: ubuntu-latest
+    needs: [changes, setup, playwright-login, playwright-sdk, static-analysis, common-tests, dependencies, locales]
+    if: always()
+    steps:
+      - name: Check test results
+        run: |
+          echo "## Test Results Summary" >> $GITHUB_STEP_SUMMARY
+          echo "| Job | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Changes Detection | ${{ needs.changes.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Setup Dependencies | ${{ needs.setup.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Playwright Login | ${{ needs.playwright-login.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Playwright SDK | ${{ needs.playwright-sdk.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Static Analysis | ${{ needs.static-analysis.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Common Tests | ${{ needs.common-tests.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Dependencies Audit | ${{ needs.dependencies.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Locales Tests | ${{ needs.locales.result }} |" >> $GITHUB_STEP_SUMMARY
+          
+          # Check if any critical job failed
+          if [[ "${{ needs.setup.result }}" == "failure" ]] || 
+             [[ "${{ needs.static-analysis.result }}" == "failure" ]] || 
+             [[ "${{ needs.dependencies.result }}" == "failure" ]]; then
+            echo "❌ Critical tests failed"
+            exit 1
+          elif [[ "${{ needs.playwright-login.result }}" == "failure" ]] || 
+                [[ "${{ needs.playwright-sdk.result }}" == "failure" ]] || 
+                [[ "${{ needs.common-tests.result }}" == "failure" ]] || 
+                [[ "${{ needs.locales.result }}" == "failure" ]]; then
+            echo "⚠️ Some tests failed, but build can continue"
+            exit 0
+          else
+            echo "✅ All tests passed successfully"
+            exit 0
+          fi

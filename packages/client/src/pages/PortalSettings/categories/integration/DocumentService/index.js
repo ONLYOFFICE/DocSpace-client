@@ -52,7 +52,7 @@ const DocumentService = ({
   initialDocumentServiceData,
   showPortalSettingsLoader,
 }) => {
-  const { t } = useTranslation(["Settings", "Common"]);
+  const { t, ready } = useTranslation(["Settings", "Common"]);
 
   const [isSaveLoading, setSaveIsLoading] = useState(false);
   const [isResetLoading, setResetIsLoading] = useState(false);
@@ -226,7 +226,7 @@ const DocumentService = ({
     isSaveLoading ||
     isResetLoading;
 
-  if (showPortalSettingsLoader) return <SettingsDSConnectSkeleton />;
+  if (showPortalSettingsLoader || !ready) return <SettingsDSConnectSkeleton />;
 
   return (
     <Styled.Location>

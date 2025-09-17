@@ -176,6 +176,7 @@ class ThirdPartyServices extends React.Component {
       isThirdPartyAvailable,
       supportEmail,
       logoText,
+      tReady,
     } = this.props;
     const { dialogVisible, isLoading } = this.state;
     const { onModalClose, onModalOpen, setConsumer, onChangeLoading } = this;
@@ -193,49 +194,49 @@ class ThirdPartyServices extends React.Component {
 
     return (
       <>
-        <RootContainer className="RootContainer">
-          <Text className="third-party-description">
-            {t("AuthorizationKeysInfo")}
-          </Text>
-          <div className="third-party-box">
-            {integrationSettingsUrl ? (
-              <Link
-                className="third-party-link"
-                color={currentColorScheme.main?.accent}
-                isHovered
-                target="_blank"
-                href={integrationSettingsUrl}
-                dataTestId="integration_settings_link"
-              >
-                {t("Common:LearnMore")}
-              </Link>
-            ) : null}
-          </div>
-          <div className="consumer-item-wrapper request-block">
-            <img
-              className="integration-image"
-              src={imgSrc}
-              alt="integration_icon"
-            />
-            <Text>
-              {t("IntegrationRequest", {
-                productName: t("Common:ProductName"),
-                organizationName: logoText,
-              })}
+        {!consumers.length || !tReady ? (
+          <ThirdPartyLoader />
+        ) : (
+          <RootContainer className="RootContainer">
+            <Text className="third-party-description">
+              {t("AuthorizationKeysInfo")}
             </Text>
-            <Button
-              label={t("Submit")}
-              primary
-              size="normal"
-              minWidth="138px"
-              onClick={submitRequest}
-              scale={isMobile()}
-              testId="submit_request_team_button"
-            />
-          </div>
-          {!consumers.length ? (
-            <ThirdPartyLoader />
-          ) : (
+            <div className="third-party-box">
+              {integrationSettingsUrl ? (
+                <Link
+                  className="third-party-link"
+                  color={currentColorScheme.main?.accent}
+                  isHovered
+                  target="_blank"
+                  href={integrationSettingsUrl}
+                  dataTestId="integration_settings_link"
+                >
+                  {t("Common:LearnMore")}
+                </Link>
+              ) : null}
+            </div>
+            <div className="consumer-item-wrapper request-block">
+              <img
+                className="integration-image"
+                src={imgSrc}
+                alt="integration_icon"
+              />
+              <Text>
+                {t("IntegrationRequest", {
+                  productName: t("Common:ProductName"),
+                  organizationName: logoText,
+                })}
+              </Text>
+              <Button
+                label={t("Submit")}
+                primary
+                size="normal"
+                minWidth="138px"
+                onClick={submitRequest}
+                scale={isMobile()}
+                testId="submit_request_team_button"
+              />
+            </div>
             <div className="consumers-list-container">
               {freeConsumers.map((consumer) => (
                 <div
@@ -296,8 +297,8 @@ class ThirdPartyServices extends React.Component {
                 </div>
               ))}
             </div>
-          )}
-        </RootContainer>
+          </RootContainer>
+        )}
         {dialogVisible ? (
           <ConsumerModalDialog
             t={t}

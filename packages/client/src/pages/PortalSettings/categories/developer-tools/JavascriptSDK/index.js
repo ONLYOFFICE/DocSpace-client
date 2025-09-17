@@ -160,8 +160,6 @@ const PortalIntegration = (props) => {
     };
   }, []);
 
-  if (showPortalSettingsLoader) return null;
-
   return (
     <SDKContainer>
       <CategoryDescription theme={theme}>

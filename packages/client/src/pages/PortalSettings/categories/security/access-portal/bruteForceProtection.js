@@ -48,6 +48,7 @@ import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHook
 const BruteForceProtection = (props) => {
   const {
     t,
+    tReady,
     numberAttempt,
     blockingTime,
     checkPeriod,
@@ -262,7 +263,10 @@ const BruteForceProtection = (props) => {
     setBruteForceProtectionSettings(result);
   };
 
-  if (currentDeviceType !== DeviceType.desktop && !isGetSettingsLoaded)
+  if (
+    (currentDeviceType !== DeviceType.desktop && !isGetSettingsLoaded) ||
+    !tReady
+  )
     return <BruteForceProtectionLoader />;
 
   return (

@@ -62,6 +62,7 @@ const SCROLL_MARGIN_TOP =
 const TwoFactorAuth = (props) => {
   const {
     t,
+    tReady,
     setIsInit,
     currentColorScheme,
     tfaSettingsUrl,
@@ -225,7 +226,7 @@ const TwoFactorAuth = (props) => {
     setShowReminder(false);
   };
 
-  if (currentDeviceType !== DeviceType.desktop && !isLoading) {
+  if ((currentDeviceType !== DeviceType.desktop && !isLoading) || !tReady) {
     return <TfaLoader />;
   }
 

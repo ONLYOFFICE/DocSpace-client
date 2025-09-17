@@ -789,7 +789,7 @@ const SectionHeaderContent = (props) => {
                   !allowInvitingMembers ? isPlusButtonVisible() : true
                 }
                 showBackButton={isProfile}
-                contextMenuHeader={contextMenuHeader}
+                contextMenuHeader={isProfile ? undefined : contextMenuHeader}
               />
               {showSignInButton ? (
                 <Button

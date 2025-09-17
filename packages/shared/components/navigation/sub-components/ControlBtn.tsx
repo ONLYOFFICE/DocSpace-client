@@ -156,7 +156,7 @@ const ControlButtons = ({
         contextButtonAnimation={contextButtonAnimation}
         guidAnimationVisible={guidAnimationVisible}
         setGuidAnimationVisible={setGuidAnimationVisible}
-        ignoreChangeView={isMobile}
+        ignoreChangeView={!!(isMobile && !!contextMenuHeader)}
       />
     );
   };

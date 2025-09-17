@@ -152,7 +152,7 @@ const ContextButton = ({
         withBackdrop
         leftOffset={isTrashFolder ? 188 : isMobile ? 150 : 0}
         ignoreChangeView={ignoreChangeView}
-        headerOnlyMobile
+        headerOnlyMobile={!!contextMenuHeader}
         header={contextMenuHeader}
         badgeUrl={contextMenuHeader?.badgeUrl}
       />

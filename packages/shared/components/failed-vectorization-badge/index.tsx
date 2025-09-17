@@ -94,6 +94,7 @@ export const FailedVectorizationBadge = ({
       />
       <Tooltip
         id={tooltipId}
+        className="not-selectable"
         getContent={getAlertTooltipContent}
         place="bottom-start"
         clickable

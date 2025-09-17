@@ -449,6 +449,7 @@ const Badges = ({
           </BadgeWrapper>
           <Tooltip
             id={preparingForAITooltipId}
+            className="not-selectable"
             getContent={getPreparingForAITooltipContent}
             place="bottom-start"
             clickable

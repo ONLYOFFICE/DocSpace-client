@@ -78,10 +78,11 @@ export async function getSettings(withPassword = false, headers = null) {
   return res;
 }
 
-export async function getPortalCultures() {
+export async function getPortalCultures(signal?: AbortSignal) {
   const res = (await request({
     method: "get",
     url: "/settings/cultures",
+    signal,
   })) as TPortalCultures;
 
   return res;
@@ -89,10 +90,12 @@ export async function getPortalCultures() {
 
 export async function getPortalPasswordSettings(
   confirmKey: Nullable<string> = null,
+  signal?: AbortSignal,
 ) {
   const options: AxiosRequestConfig = {
     method: "get",
     url: "/settings/security/password",
+    signal,
   };
 
   if (confirmKey) options.headers = { confirm: confirmKey };
@@ -143,10 +146,11 @@ export function setDNSSettings(dnsName, enable) {
   });
 }
 
-export async function getIpRestrictions() {
+export async function getIpRestrictions(signal?: AbortSignal) {
   const res = (await request({
     method: "get",
     url: "/settings/iprestrictions",
+    signal,
   })) as TIpRestriction[];
 
   return res;
@@ -165,10 +169,11 @@ export async function setIpRestrictions(data: {
   return res;
 }
 
-export async function getIpRestrictionsEnable() {
+export async function getIpRestrictionsEnable(signal?: AbortSignal) {
   const res = (await request({
     method: "get",
     url: "/settings/iprestrictions/settings",
+    signal,
   })) as { enable: boolean };
 
   return res;
@@ -190,10 +195,11 @@ export function setCookieSettings(lifeTime, enabled) {
   });
 }
 
-export async function getCookieSettings() {
+export async function getCookieSettings(signal?: AbortSignal) {
   const res = (await request({
     method: "get",
     url: "/settings/cookiesettings",
+    signal,
   })) as TCookieSettings;
 
   return res;
@@ -209,10 +215,11 @@ export async function setLifetimeAuditSettings(data: TCookieSettings) {
   return res;
 }
 
-export async function getBruteForceProtection() {
+export async function getBruteForceProtection(signal?: AbortSignal) {
   const res = (await request({
     method: "get",
     url: "/settings/security/loginSettings",
+    signal,
   })) as TLoginSettings;
 
   return res;
@@ -246,10 +253,14 @@ export function getAuditTrailReport() {
   });
 }
 
-export async function getPortalTimezones(confirmKey = null) {
+export async function getPortalTimezones(
+  confirmKey = null,
+  signal?: AbortSignal,
+) {
   const options: AxiosRequestConfig = {
     method: "get",
     url: "/settings/timezones",
+    signal,
   };
 
   if (confirmKey) options.headers = { confirm: confirmKey };
@@ -275,10 +286,11 @@ export function setGreetingSettings(title) {
   });
 }
 
-export function getGreetingSettingsIsDefault() {
+export function getGreetingSettingsIsDefault(signal?: AbortSignal) {
   return request({
     method: "get",
     url: `/settings/greetingsettings/isDefault`,
+    signal,
   });
 }
 
@@ -322,12 +334,14 @@ export function deleteAppearanceTheme(id) {
 export async function getLogoUrls(
   headers = null,
   isManagement: boolean = false,
+  signal?: AbortSignal,
 ) {
   const url = "/settings/whitelabel/logos";
 
   const options: AxiosRequestConfig = {
     method: "get",
     url: isManagement ? `${url}?isDefault=true` : url,
+    signal,
   };
 
   if (headers) options.headers = headers;
@@ -339,12 +353,16 @@ export async function getLogoUrls(
   return res;
 }
 
-export function getIsDefaultWhiteLabelLogos(isManagement: boolean = false) {
+export function getIsDefaultWhiteLabelLogos(
+  isManagement: boolean = false,
+  signal?: AbortSignal,
+) {
   const url = "/settings/whitelabel/logos/isdefault";
 
   return request({
     method: "get",
     url: isManagement ? `${url}?isDefault=true` : url,
+    signal,
   });
 }
 
@@ -381,12 +399,16 @@ export function setBrandName(data, isManagement: boolean = false) {
   return request(options);
 }
 
-export function getBrandName(isManagement: boolean = false) {
+export function getBrandName(
+  isManagement: boolean = false,
+  signal?: AbortSignal,
+) {
   const url = "/settings/whitelabel/logotext";
 
   return request({
     method: "get",
     url: isManagement ? `${url}?isDefault=true` : url,
+    signal,
   });
 }
 
@@ -647,10 +669,11 @@ export async function setLicense(confirmKey: string | null, data: FormData) {
   return res;
 }
 
-export async function getPaymentSettings() {
+export async function getPaymentSettings(signal?: AbortSignal) {
   const res = (await request({
     method: "get",
     url: `/settings/payment`,
+    signal,
   })) as TPaymentSettings;
 
   return res;
@@ -661,10 +684,11 @@ export function acceptLicense() {
     url: `/settings/license/accept`,
   });
 }
-export function getConsumersList() {
+export function getConsumersList(signal?: AbortSignal) {
   return request({
     method: "get",
     url: `/settings/authservice`,
+    signal,
   });
 }
 
@@ -687,20 +711,22 @@ export function updateConsumerProps(newProps) {
   return request(options);
 }
 
-export async function getTfaSettings() {
+export async function getTfaSettings(signal?: AbortSignal) {
   const res = (await request({
     method: "get",
     url: `/settings/tfaapp`,
+    signal,
   })) as TTfa[];
 
   return res;
 }
 
-export async function setTfaSettings(type: TTfaType) {
+export async function setTfaSettings(type: TTfaType, signal?: AbortSignal) {
   const res = (await request({
     method: "put",
     url: "/settings/tfaappwithlink",
     data: { type },
+    signal,
   })) as TTfa;
 
   return res;
@@ -766,13 +792,14 @@ export function validateTfaCode(code, confirmKey: Nullable<string> = null) {
   return request(options);
 }
 
-export function getBackupStorage(dump: boolean = false) {
+export function getBackupStorage(dump: boolean = false, signal?: AbortSignal) {
   const options = {
     method: "get",
     url: "/settings/storage/backup",
     params: {
       dump,
     },
+    signal,
   };
   return request<TStorageBackup[]>(options);
 }
@@ -838,10 +865,11 @@ export function toggleTipsSubscription() {
   return request(options);
 }
 
-export async function getCurrentSsoSettings() {
+export async function getCurrentSsoSettings(signal?: AbortSignal) {
   const options: AxiosRequestConfig = {
     method: "get",
     url: "/settings/ssov2",
+    signal,
   };
 
   const res = (await request(options)) as TGetSsoSettings;
@@ -868,25 +896,28 @@ export function resetSsoForm() {
   return request(options);
 }
 
-export function getLifetimeAuditSettings(data) {
+export function getLifetimeAuditSettings(data, signal) {
   return request({
     method: "get",
     url: "/security/audit/settings/lifetime",
     data,
+    signal,
   });
 }
 
-export function getLoginHistory() {
+export function getLoginHistory(signal?: AbortSignal) {
   return request({
     method: "get",
     url: "/security/audit/login/last",
+    signal,
   });
 }
 
-export function getAuditTrail() {
+export function getAuditTrail(signal?: AbortSignal) {
   return request({
     method: "get",
     url: "/security/audit/events/last",
+    signal,
   });
 }
 
@@ -910,10 +941,11 @@ export function getMetadata() {
   return axios.get("/sso/metadata");
 }
 
-export function getStorageRegions() {
+export function getStorageRegions(signal?: AbortSignal) {
   const options = {
     method: "get",
     url: "/settings/storage/s3/regions",
+    signal,
   };
   return request(options);
 }
@@ -974,10 +1006,11 @@ export function setDefaultRoomQuota(enableQuota, defaultQuota) {
   return request(options);
 }
 
-export function getQuotaSettings() {
+export function getQuotaSettings(signal?: AbortSignal) {
   return request({
     method: "get",
     url: "/settings/userquotasettings",
+    signal,
   });
 }
 
@@ -989,10 +1022,11 @@ export function createWebhook(name, uri, secretKey, ssl, triggers, targetId) {
   });
 }
 
-export function getAllWebhooks() {
+export function getAllWebhooks(signal?: AbortSignal) {
   return request({
     method: "get",
     url: `/settings/webhook`,
+    signal,
   });
 }
 
@@ -1095,10 +1129,11 @@ export function setSMTPSettings(data) {
   return request(options);
 }
 
-export function getSMTPSettings() {
+export function getSMTPSettings(signal?: AbortSignal) {
   return request({
     method: "get",
     url: `/smtpsettings/smtp`,
+    signal,
   });
 }
 
@@ -1123,10 +1158,11 @@ export function getSendingTestMailStatus() {
   });
 }
 
-export async function migrationList() {
+export async function migrationList(signal?: AbortSignal) {
   const res = (await request({
     method: "get",
     url: `/migration/list`,
+    signal,
   })) as TWorkspaceService[];
   return res;
 }
@@ -1138,10 +1174,11 @@ export function initMigration(name: TWorkspaceService) {
   });
 }
 
-export async function migrationStatus() {
+export async function migrationStatus(signal?: AbortSignal) {
   const res = (await request({
     method: "get",
     url: `/migration/status`,
+    signal,
   })) as TWorkspaceStatusResponse;
   return res;
 }
@@ -1161,10 +1198,11 @@ export function migrationCancel() {
   });
 }
 
-export function getLdapSettings() {
+export function getLdapSettings(signal?: AbortSignal) {
   const options = {
     method: "get",
     url: "/settings/ldap",
+    signal,
   };
 
   return request(options);
@@ -1209,10 +1247,11 @@ export async function setCSPSettings(data: string[]) {
   return res;
 }
 
-export async function getCSPSettings() {
+export async function getCSPSettings(signal?: AbortSignal) {
   const res = (await request({
     method: "get",
     url: `/security/csp`,
+    signal,
   })) as TGetCSPSettings;
 
   return res;
@@ -1225,10 +1264,11 @@ export function recalculateQuota() {
   });
 }
 
-export function checkRecalculateQuota() {
+export function checkRecalculateQuota(signal?: AbortSignal) {
   return request({
     method: "get",
     url: `/settings/checkrecalculatequota`,
+    signal,
   });
 }
 
@@ -1251,10 +1291,11 @@ export function getLdapStatus() {
   return request(options);
 }
 
-export function getLdapDefaultSettings() {
+export function getLdapDefaultSettings(signal?: AbortSignal) {
   const options = {
     method: "get",
     url: "/settings/ldap/default",
+    signal,
   };
 
   return request(options);
@@ -1279,10 +1320,11 @@ export function saveCronLdap(cron) {
   return request(options);
 }
 
-export function getCronLdap() {
+export function getCronLdap(signal?: AbortSignal) {
   const options = {
     method: "get",
     url: "/settings/ldap/cron",
+    signal,
   };
 
   return request(options);
@@ -1299,10 +1341,11 @@ export function setLimitedAccessForUsers(enable: boolean) {
   return request(options);
 }
 
-export function getDeepLinkSettings() {
+export function getDeepLinkSettings(signal?: AbortSignal) {
   const options = {
     method: "get",
     url: "/settings/deeplink",
+    signal,
   };
 
   return request(options);
@@ -1346,10 +1389,11 @@ export function getEncryptionSettings() {
   return request(options) as TEncryptionSettings;
 }
 
-export async function getInvitationSettings() {
+export async function getInvitationSettings(signal?: AbortSignal) {
   const res = (await request({
     method: "get",
     url: "/settings/invitationsettings",
+    signal,
   })) as TInvitationSettings;
 
   return res;

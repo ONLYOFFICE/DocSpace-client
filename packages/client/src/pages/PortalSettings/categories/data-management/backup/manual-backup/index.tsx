@@ -23,17 +23,11 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+
+import React, { useEffect, useLayoutEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { getSettingsThirdParty } from "@docspace/shared/api/files";
-import {
-  getBackupStorage,
-  getStorageRegions,
-} from "@docspace/shared/api/settings";
-
-import { toastr } from "@docspace/shared/components/toast";
 import { isManagement } from "@docspace/shared/utils/common";
 import ManualBackup from "@docspace/shared/pages/backup/manual-backup";
 import type { ThirdPartyAccountType } from "@docspace/shared/types";
@@ -49,26 +43,17 @@ import type {
 
 const ManualBackupWrapper = ({
   isNotPaidPeriod,
-  getProgress,
-  setStorageRegions,
-  setThirdPartyStorage,
   resetDownloadingProgress,
   setConnectedThirdPartyAccount,
   setBackupsCount,
   setIsInited,
-  fetchPayerInfo,
-  setDownloadingProgress,
   isBackupPaid,
-  maxFreeBackups,
-  setServiceQuota,
+  setDownloadingProgress,
+  setIsEmptyContentBeforeLoader,
+  isEmptyContentBeforeLoader,
+  isInitialLoading,
   ...props
 }: ManualBackupWrapperProps) => {
-  const [isInitialLoading, setIsInitialLoading] = useState(false);
-  const [isEmptyContentBeforeLoader, setIsEmptyContentBeforeLoader] =
-    useState(true);
-
-  const timerId = useRef<number>(null);
-
   const { t } = useTranslation(["Settings", "Common"]);
 
   useLayoutEffect(() => {
@@ -77,63 +62,10 @@ const ManualBackupWrapper = ({
 
   useEffect(() => {
     if (isNotPaidPeriod) return setIsEmptyContentBeforeLoader(false);
-
-    timerId.current = window.setTimeout(() => {
-      setIsInitialLoading(true);
-    }, 200);
-
-    (async () => {
-      try {
-        getProgress(t);
-
-        const baseRequests = [
-          getSettingsThirdParty(),
-          getBackupStorage(),
-          getStorageRegions(),
-        ];
-
-        const optionalRequests = [];
-
-        if (isBackupPaid) {
-          if (maxFreeBackups > 0) {
-            baseRequests.push(getBackupsCount());
-          }
-
-          optionalRequests.push(setServiceQuota());
-          optionalRequests.push(fetchPayerInfo());
-        }
-
-        const [account, backupStorage, storageRegionsS3, backupsCount] =
-          await Promise.all([...baseRequests, ...optionalRequests]);
-
-        setConnectedThirdPartyAccount(account ?? null);
-        setThirdPartyStorage(backupStorage);
-        setStorageRegions(storageRegionsS3);
-
-        if (isBackupPaid) {
-          if (typeof backupsCount === "number") setBackupsCount(backupsCount);
-        }
-        setIsInited(true);
-      } catch (error) {
-        toastr.error(error as Error);
-      } finally {
-        if (timerId.current) {
-          window.clearTimeout(timerId.current);
-          timerId.current = null;
-        }
-
-        setIsInitialLoading(false);
-        setIsEmptyContentBeforeLoader(false);
-      }
-    })();
   }, []);
 
   useEffect(() => {
     return () => {
-      if (timerId.current) {
-        window.clearTimeout(timerId.current);
-        timerId.current = null;
-      }
       resetDownloadingProgress();
       setIsInited(false);
     };
@@ -197,13 +129,10 @@ export default inject<
       setBackupProgressError,
 
       isFormReady,
-      getProgress,
       setTemporaryLink,
       getStorageParams,
       clearLocalStorage,
-      setStorageRegions,
       saveToLocalStorage,
-      setThirdPartyStorage,
 
       resetDownloadingProgress,
       setCompletedFormFields,
@@ -221,7 +150,7 @@ export default inject<
       backupPageEnable,
     } = backup;
 
-    const { isPayer, setServiceQuota, backupServicePrice } = paymentStore;
+    const { isPayer, backupServicePrice } = paymentStore;
     const {
       newPath,
       basePath,
@@ -242,8 +171,7 @@ export default inject<
       setDeleteThirdPartyDialogVisible,
     } = dialogsStore;
 
-    const { isNotPaidPeriod, fetchPayerInfo, walletCustomerEmail } =
-      currentTariffStatusStore;
+    const { isNotPaidPeriod, walletCustomerEmail } = currentTariffStatusStore;
 
     const {
       providers,
@@ -251,8 +179,7 @@ export default inject<
       setThirdPartyProviders,
       openConnectWindow,
     } = thirdPartyStore;
-    const { isBackupPaid, maxFreeBackups, isThirdPartyAvailable } =
-      currentQuotaStore;
+    const { isBackupPaid, isThirdPartyAvailable } = currentQuotaStore;
 
     const { getIcon, filesSettings } = filesSettingsStore;
 
@@ -297,14 +224,11 @@ export default inject<
       setBackupProgressError,
 
       isFormReady,
-      getProgress,
       setTemporaryLink,
       getStorageParams,
       clearLocalStorage,
-      setStorageRegions,
       saveToLocalStorage,
 
-      setThirdPartyStorage,
       resetDownloadingProgress,
       setCompletedFormFields,
       addValueInFormSettings,
@@ -353,14 +277,11 @@ export default inject<
       setBackupsCount,
 
       setIsInited,
-      fetchPayerInfo,
-
-      maxFreeBackups,
 
       isPayer,
       walletCustomerEmail,
       isThirdPartyAvailable,
-      setServiceQuota,
+
       backupServicePrice,
     };
   },

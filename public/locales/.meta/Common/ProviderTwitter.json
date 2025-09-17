@@ -3,7 +3,7 @@
   "content": "Twitter",
   "content_en_sha1_hash": "5392c950bdde4be7e5f5b8fdc6a1ca5f21e905cf",
   "created_at": "2025-05-19T21:30:47.613Z",
-  "updated_at": "2025-09-07T07:53:15.519Z",
+  "updated_at": "2025-09-09T10:39:53.042Z",
   "comment": {
     "text": "This translation key is used for displaying social media providers on a platform, commonly found on authentication or sign-up buttons. It is likely used to display \"Twitter\" as one of the available provider options.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 429,
+      "line_number": 386,
       "context": "case \"google\":\n return t(\"Common:ProviderGoogle\");\n case \"facebook\":\n return t(\"Common:ProviderFacebook\");\n case \"twitter\":\n return t(\"Common:ProviderTwitter\");\n case \"linkedin\":\n return t(\"Common:ProviderLinkedIn\");\n case \"microsoft\":\n return t(\"Common:ProviderMicrosoft\");\n case \"sso\":",
       "module": "/packages/shared"
     }

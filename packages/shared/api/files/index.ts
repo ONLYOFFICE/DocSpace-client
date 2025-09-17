@@ -1145,10 +1145,11 @@ export function saveSettingsThirdParty(
 }
 
 // TODO: Need update res type
-export function getSettingsThirdParty() {
+export function getSettingsThirdParty(signal?: AbortSignal) {
   return request<SettingsThirdPartyType>({
     method: "get",
     url: "files/thirdparty/backup",
+    signal,
   });
 }
 
@@ -1438,7 +1439,10 @@ export async function sendEditorNotify(
   return res;
 }
 
-export async function getDocumentServiceLocation(version?: number | string) {
+export async function getDocumentServiceLocation(
+  version?: number | string,
+  signal?: AbortSignal,
+) {
   const params: { version?: string | number } = {};
 
   if (version !== undefined) {
@@ -1449,6 +1453,7 @@ export async function getDocumentServiceLocation(version?: number | string) {
     method: "get",
     url: `/files/docservice`,
     params,
+    signal,
   })) as TDocServiceLocation;
 
   return res;
@@ -1696,10 +1701,11 @@ export function deleteFilesFromRecent(fileIds: number[]) {
   });
 }
 
-export async function getFilesUsedSpace() {
+export async function getFilesUsedSpace(signal?: AbortSignal) {
   const options: AxiosRequestConfig = {
     method: "get",
     url: `/files/filesusedspace`,
+    signal,
   };
 
   const res = (await request(options)) as TFilesUsedSpace;

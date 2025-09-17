@@ -40,6 +40,10 @@ export type ApiKeysProps = {
   currentColorScheme: TColorScheme;
   apiKeysLink: string;
   isUser: boolean;
+  error: Error | null;
+  listItems: TApiKey[];
+  permissions: string[];
+  setListItems: React.Dispatch<React.SetStateAction<TApiKey[]>>;
 };
 
 export type ApiKeyViewProps = {

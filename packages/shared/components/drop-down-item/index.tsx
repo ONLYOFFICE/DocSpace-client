@@ -123,15 +123,16 @@ const DropDownItem = ({
 }: DropDownItemProps) => {
   const { t } = useTranslation(["Common"]);
   const { isRTL } = useInterfaceDirection();
-
   const { isBase } = useTheme();
+
+  const withDisabledTooltip = disabled && tooltip;
 
   const handleClick = (
     e: React.MouseEvent<HTMLElement> | React.ChangeEvent<HTMLInputElement>,
   ) => {
     if (!disabled) onClick?.(e);
     if (isSelected) onClickSelectedItem?.();
-    if (tooltip && isTouchDevice) return e.stopPropagation();
+    if (withDisabledTooltip && isTouchDevice) return e.stopPropagation();
 
     setOpen?.(false);
   };
@@ -170,7 +171,9 @@ const DropDownItem = ({
       tabIndex={tabIndex}
       data-testid={testId ?? "drop-down-item"}
       data-focused={isActiveDescendant}
-      data-tooltip-id={disabled ? "drop-down-item-tooltip" : undefined}
+      data-tooltip-id={
+        withDisabledTooltip ? "drop-down-item-tooltip" : undefined
+      }
       data-tooltip-content={tooltip}
       role={isSeparator ? "separator" : "option"}
       aria-selected={isSelected}
@@ -263,7 +266,7 @@ const DropDownItem = ({
         <div className={styles.elementWrapper}>{additionalElement}</div>
       ) : null}
 
-      {tooltip?.length && disabled ? (
+      {withDisabledTooltip ? (
         <Tooltip
           float
           openOnClick={isTouchDevice}

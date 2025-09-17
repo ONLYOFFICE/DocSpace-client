@@ -22,6 +22,8 @@ jobs:
       common: ${{ steps.changes.outputs.common }}
       playwright: ${{ steps.changes.outputs.playwright }}
       locales: ${{ steps.changes.outputs.locales }}
+      workflow: ${{ steps.changes.outputs.workflow }}
+      any_changes: ${{ steps.changes.outputs.packages == 'true' || steps.changes.outputs.common == 'true' || steps.changes.outputs.workflow == 'true' }}
     steps:
       - uses: actions/checkout@v4
       - uses: dorny/paths-filter@v3
@@ -38,13 +40,15 @@ jobs:
             locales:
               - 'packages/**/public/locales/**'
               - 'common/tests/**'
+            workflow:
+              - '.github/workflows/**'
 
   # Setup and cache dependencies once
   setup:
     name: "Setup dependencies"
     runs-on: ubuntu-latest
     needs: changes
-    if: needs.changes.outputs.packages == 'true' || needs.changes.outputs.common == 'true'
+    if: needs.changes.outputs.any_changes == 'true'
     steps:
       - uses: actions/checkout@v4
       - name: Install pnpm
@@ -72,7 +76,7 @@ jobs:
     name: "Login e2e tests"
     runs-on: ubuntu-latest
     needs: [changes]
-    if: needs.changes.outputs.playwright == 'true'
+    if: needs.changes.outputs.playwright == 'true' || needs.changes.outputs.workflow == 'true'
     steps:
       - uses: actions/checkout@v4
       - name: Set up Docker Buildx
@@ -98,7 +102,7 @@ jobs:
     name: "SDK e2e tests"
     runs-on: ubuntu-latest
     needs: [changes]
-    if: needs.changes.outputs.playwright == 'true'
+    if: needs.changes.outputs.playwright == 'true' || needs.changes.outputs.workflow == 'true'
     steps:
       - uses: actions/checkout@v4
       - name: Set up Docker Buildx
@@ -123,8 +127,8 @@ jobs:
   static-analysis:
     name: "Static Analysis"
     runs-on: ubuntu-latest
-    needs: [setup]
-    if: needs.setup.result == 'success'
+    needs: [setup, changes]
+    if: needs.setup.result == 'success' && (needs.changes.outputs.packages == 'true' || needs.changes.outputs.workflow == 'true')
     strategy:
       matrix:
         task: [lint, tsc, test]
@@ -158,7 +162,7 @@ jobs:
     name: "Common Tests"
     runs-on: ubuntu-latest
     needs: [changes]
-    if: needs.changes.outputs.common == 'true'
+    if: needs.changes.outputs.common == 'true' || needs.changes.outputs.workflow == 'true'
     strategy:
       matrix:
         test-type: [images, colors]
@@ -183,7 +187,7 @@ jobs:
     name: "Dependencies Audit"
     runs-on: ubuntu-latest
     needs: [setup, changes]
-    if: needs.setup.result == 'success'
+    if: needs.setup.result == 'success' && (needs.changes.outputs.packages == 'true' || needs.changes.outputs.common == 'true' || needs.changes.outputs.workflow == 'true')
     steps:
       - uses: actions/checkout@v4
       - name: Install pnpm
@@ -223,7 +227,7 @@ jobs:
     name: "Locales Tests"
     runs-on: ubuntu-latest
     needs: [changes]
-    if: needs.changes.outputs.locales == 'true' || needs.changes.outputs.common == 'true'
+    if: needs.changes.outputs.locales == 'true' || needs.changes.outputs.common == 'true' || needs.changes.outputs.workflow == 'true'
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js

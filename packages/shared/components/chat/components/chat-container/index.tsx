@@ -38,10 +38,12 @@ const ChatContainer = ({ children }: ChatContainerProps) => {
       "section-sticky-container",
     );
 
+    const mainBar = document.getElementById("main-bar");
+
     const resizeObserver = new ResizeObserver((el) => {
       if (!containerRef.current || !el[0]) return;
 
-      containerRef.current.style.height = `${window.innerHeight - el[0].contentRect.height - 40}px`;
+      containerRef.current.style.height = `${window.innerHeight - el[0].contentRect.height - (mainBar?.clientHeight || 0) - 40}px`;
     });
 
     if (sectionStickyContainer[0])

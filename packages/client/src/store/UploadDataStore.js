@@ -54,7 +54,6 @@ import {
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { Link } from "@docspace/shared/components/link";
-import { getVectorizationTasksById } from "@docspace/shared/api/ai";
 
 const removeDuplicate = (items) => {
   const obj = {};
@@ -2186,7 +2185,7 @@ class UploadDataStore {
         );
   };
 
-  loopFilesOperations = async (data, pbData, isAI) => {
+  loopFilesOperations = async (data, pbData) => {
     const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
 
     if (!data) {
@@ -2203,20 +2202,19 @@ class UploadDataStore {
     // let progress = data.progress;
 
     let operationItem = data;
-    let finished = data.finished ?? data.isCompleted;
+    let finished = data.finished;
 
     while (!finished) {
       const item = await getOperationProgress(
         data.id,
         getUnexpectedErrorText(),
         true,
-        isAI ? getVectorizationTasksById : undefined,
       );
 
       operationItem = item;
 
       // progress = item ? item.progress : 100;
-      finished = item ? item.finished || item.isCompleted : true;
+      finished = item ? item.finished : true;
 
       setSecondaryProgressBarData({
         operation: pbData.operation,

@@ -437,43 +437,6 @@ export const retryVectorization = async (fileId: TFile["id"]) => {
   return res as TVectorizeOperation;
 };
 
-export const getVectorizationTasksById = async (id: string) => {
-  try {
-    const res = await request({
-      method: "GET",
-      url: `${baseUrl}/vectorization/tasks/${id}`,
-    });
-
-    return res;
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-export const getVectorizationTasks = async () => {
-  try {
-    const res = await request({
-      method: "GET",
-      url: `${baseUrl}/vectorization/tasks`,
-    });
-
-    return res;
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-export const removeVectorizationTasks = async (id: string) => {
-  try {
-    await request({
-      method: "DELETE",
-      url: `${baseUrl}/vectorization/tasks/${id}`,
-    });
-  } catch (e) {
-    console.log(e);
-  }
-};
-
 export const updateToolsPermission = async (
   callId: string,
   decision: ToolsPermission,

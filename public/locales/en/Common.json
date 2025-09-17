@@ -973,7 +973,7 @@
   "PortalRestoring": "{{productName}} restoring",
   "PreparationPortalDescription": "Once the restoring process is over, you'll be automatically redirected to your {{productName}}.",
   "NoMCPServers": "No MCP servers connected yet",
-  "NoMCPServersDescription": "Please connect MCP servers in {{productName}} settings to use them in the AI agent."
+  "NoMCPServersDescription": "Please connect MCP servers in {{productName}} settings to use them in the AI agent.",
   "AiWouldUseTool": "AI would like to use this tool",
   "Preparing": "Preparing",
   "PreparingForAI": "Preparing for AI",

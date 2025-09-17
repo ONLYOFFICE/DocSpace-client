@@ -64,7 +64,7 @@ const TemplateGallery = (props: {
   const [currentTabId, setCurrentTabId] = useState("documents");
   const [isInitLoading, setIsInitLoading] = useState(true);
 
-  const getData = async (ext: string) => resetFilters(ext);
+  const getData = async (ext: string) => await resetFilters(ext);
 
   useEffect(() => {
     initTemplateGallery().then(() => setIsInitLoading(false));
@@ -75,43 +75,29 @@ const TemplateGallery = (props: {
       id: "documents",
       name: "Documents",
       content: <TilesContainer ext=".docx" isInitLoading={isInitLoading} />,
-      onClick: async () => {
-        await getData(".docx");
-      },
+      onClick: async () => await getData(".docx"),
     },
     {
       id: "spreadsheet",
       name: "Spreadsheet",
       content: <TilesContainer ext=".xlsx" isInitLoading={false} />,
-      onClick: async () => {
-        await getData(".xlsx");
-      },
+      onClick: async () => await getData(".xlsx"),
     },
     {
       id: "presentation",
       name: "Presentation",
       content: <TilesContainer ext=".pptx" isInitLoading={false} />,
-      onClick: async () => {
-        await getData(".pptx");
-      },
+      onClick: async () => await getData(".pptx"),
     },
     {
       id: "forms",
       name: "Forms",
       content: <TilesContainer ext=".pdf" isInitLoading={false} />,
-      onClick: async () => {
-        await getData(".pdf");
-      },
+      onClick: async () => await getData(".pdf"),
     },
   ];
 
-  const onCheckView = () => {
-    if (isMobile()) {
-      setViewMobile(true);
-    } else {
-      setViewMobile(false);
-    }
-  };
+  const onCheckView = () => setViewMobile(isMobile());
 
   useEffect(() => {
     onCheckView();
@@ -206,6 +192,7 @@ const TemplateGallery = (props: {
                 items={tabs}
                 selectedItemId={currentTabId}
                 onSelect={onSelect}
+                withAnimation
               />
             </div>
           )}

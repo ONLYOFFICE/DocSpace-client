@@ -161,7 +161,6 @@ export default inject<TStore>(({ oformsStore }) => ({
   fetchCurrentCategory: oformsStore.fetchCurrentCategory,
   hasGalleryFiles: oformsStore.hasGalleryFiles,
   defaultOformLocale: oformsStore.defaultOformLocale,
-  fetchOformLocales: oformsStore.fetchOformLocales,
   oformsFilter: oformsStore.oformsFilter,
   setOformsFilter: oformsStore.setOformsFilter,
   resetFilters: oformsStore.resetFilters,

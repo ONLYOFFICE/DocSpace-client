@@ -380,7 +380,7 @@ class OformsStore {
     runInAction(() => this.fetchOforms(newOformsFilter));
   };
 
-  resetFilters = (ext) => {
+  resetFilters = async (ext) => {
     this.currentCategory = null;
 
     const defaultFilter =
@@ -393,7 +393,7 @@ class OformsStore {
             : OformsFilter.getDefault();
 
     defaultFilter.locale = this.defaultOformLocale;
-    runInAction(() => this.fetchOforms(defaultFilter));
+    await this.fetchOforms(defaultFilter);
   };
 
   hideSubmitToGalleryTile = () => {

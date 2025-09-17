@@ -38,7 +38,7 @@
   border: 2px solid transparent;
   border-radius: 4px;
   background: var(--template-tile-background);
-
+  padding: 10px 10px 0 10px;
   &:hover {
     border-color: var(--template-tile-border-hover);
 
@@ -74,10 +74,12 @@
   justify-content: center;
   overflow: hidden;
   border: 1px solid var(--template-tile-container-border);
-  margin: 10px 10px 0 10px;
+  width: 100%;
+  aspect-ratio: 162 / 229;
 
   &.smallPreview {
     align-items: flex-start;
+    aspect-ratio: 229 / 162;
   }
 }
 

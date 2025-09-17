@@ -3,7 +3,7 @@
   "content": "Name",
   "content_en_sha1_hash": "709a23220f2c3d64d1e1d6d18c4d5280f8d82fca",
   "created_at": "2025-05-19T21:30:46.705Z",
-  "updated_at": "2025-08-11T18:11:59.157Z",
+  "updated_at": "2025-09-17T13:43:01.651Z",
   "comment": {
     "text": "This translation key displays the user's full name, typically their first and last names. It is used in a social authentication welcome dialog to provide user information. Translators should note that the name may be truncated or displayed as an alias if not available.",
     "is_auto": true,
@@ -78,13 +78,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 366,
+      "line_number": 375,
       "context": "</div>\n ) : null}\n </StyledAvatarWrapper>\n <StyledInfo withActivationBar={withActivationBar}>\n <div className=\"rows-container\">\n <StyledLabel as=\"div\">{t(\"Common:Name\")}</StyledLabel>\n <div className=\"profile-block-field\">\n <Text fontWeight={600} truncate title={profile!.displayName}>\n {profile!.displayName}\n </Text>\n {profile!.isSSO ? (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 366,
+      "line_number": 375,
       "context": "</div>\n ) : null}\n </StyledAvatarWrapper>\n <StyledInfo withActivationBar={withActivationBar}>\n <div className=\"rows-container\">\n <StyledLabel as=\"div\">{t(\"Common:Name\")}</StyledLabel>\n <div className=\"profile-block-field\">\n <Text fontWeight={600} truncate title={profile!.displayName}>\n {profile!.displayName}\n </Text>\n {profile!.isSSO ? (",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Custom domains",
   "content_en_sha1_hash": "b18c921ec5318c9e2ce5dfcd1e4ec6b536183c22",
   "created_at": "2025-05-19T21:30:50.996Z",
-  "updated_at": "2025-08-04T07:30:01.555Z",
+  "updated_at": "2025-09-17T13:43:01.894Z",
   "comment": {
     "text": "This translation key controls the label and value displayed for custom domain options on a portal settings page. It appears as a dropdown or select field in the UI where users can choose between \"All Domains\" or \"Custom Domains\".",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/trustedMail.js",
-      "line_number": 270,
+      "line_number": 269,
       "context": "value: \"2\",\n dataTestId: \"trusted_mail_any_domains\",\n },\n {\n id: \"custom-domains\",\n label: t(\"CustomDomains\"),\n value: \"1\",\n dataTestId: \"trusted_mail_custom_domains\",\n },\n ]}\n selected={type}",
       "module": "/packages/client"
     }

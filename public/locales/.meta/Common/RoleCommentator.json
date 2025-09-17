@@ -3,7 +3,7 @@
   "content": "Commenter",
   "content_en_sha1_hash": "bf4df9c00c605d80b4491471e60b45b6eaaca147",
   "created_at": "2025-05-19T21:30:47.984Z",
-  "updated_at": "2025-08-04T07:30:01.252Z",
+  "updated_at": "2025-09-17T13:43:01.694Z",
   "comment": {
     "text": "This translation key is used to display \"Commenter\" as a role label in the application's UI. It appears on various screens where user roles are displayed, such as information panels and room member settings, helping users understand their permissions and access levels.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/Members.utils.ts",
-      "line_number": 83,
+      "line_number": 86,
       "context": "access: ShareAccessRights.Review,\n type: \"user\",\n },\n commentator: {\n key: \"commentator\",\n label: this.t(\"Common:RoleCommentator\"),\n access: ShareAccessRights.Comment,\n type: \"user\",\n },\n };\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 170,
+      "line_number": 174,
       "context": "access: ShareAccessRights.Review,\n type: EmployeeType.User,\n },\n commentator: {\n key: \"commentator\",\n label: t(\"Common:RoleCommentator\"),\n description: t(\"Common:RoleCommentatorDescription\"),\n access: ShareAccessRights.Comment,\n type: EmployeeType.User,\n },\n viewer: {",
       "module": "/packages/shared"
     },

@@ -3,7 +3,7 @@
   "content": "Login History",
   "content_en_sha1_hash": "d755284b3b68f68fa53e1d95ff88d8d202c5bbc1",
   "created_at": "2025-05-19T21:30:51.828Z",
-  "updated_at": "2025-08-04T07:30:01.557Z",
+  "updated_at": "2025-09-17T13:43:01.897Z",
   "comment": {
     "text": "The \"LoginHistoryTitle\" translation key is used to display the title \"Login History\" in various parts of the application's UI. It appears on a category page and is also set as the document title when accessing login history data. Translators should ensure this phrase accurately reflects the content being displayed.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/index.js",
-      "line_number": 61,
-      "context": "name: t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n content: <AccessPortal />,\n },\n {\n id: \"login-history\",\n name: t(\"LoginHistoryTitle\"),\n content: <LoginHistory />,\n },\n {\n id: \"audit-trail\",\n name: t(\"AuditTrailNav\"),",
+      "line_number": 85,
+      "context": "await getAccessPortalData();\n },\n },\n {\n id: \"login-history\",\n name: t(\"LoginHistoryTitle\"),\n content: <LoginHistory />,\n onClick: async () => {\n clearAbortControllerArr();\n await getLoginHistoryData();\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/login-history/index.js",
       "line_number": 55,
-      "context": "tfaEnabled,\n currentColorScheme,\n } = props;\n \n useEffect(() => {\n setDocumentTitle(t(\"LoginHistoryTitle\"));\n \n getLoginHistory();\n \n getLifetimeAuditSettings();",
+      "context": "tfaEnabled,\n currentColorScheme,\n } = props;\n \n useEffect(() => {\n setDocumentTitle(t(\"LoginHistoryTitle\"));\n \n // getLoginHistory();\n \n //  getLifetimeAuditSettings();",
       "module": "/packages/client"
     },
     {

@@ -3,7 +3,7 @@
   "content": "Disabled",
   "content_en_sha1_hash": "f4f4473df8cb59f0a369aebee3d1509adc0151c6",
   "created_at": "2025-05-19T21:30:44.535Z",
-  "updated_at": "2025-09-07T07:53:15.134Z",
+  "updated_at": "2025-09-17T13:43:01.662Z",
   "comment": {
     "text": "This translation key is used to display the text \"Disabled\" when a feature or setting is disabled in the UI. It appears as part of dropdown menus and options lists in various admin settings and configuration pages.",
     "is_auto": true,
@@ -30,25 +30,25 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
-      "line_number": 272,
+      "line_number": 285,
       "context": "spacing=\"8px\"\n dataTestId=\"ip_security_radio_button_group\"\n options={[\n {\n id: \"ip-security-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"disabled\",\n dataTestId: \"ip_security_disabled\",\n },\n {\n id: \"ip-security-enable\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/sessionLifetime.js",
-      "line_number": 266,
+      "line_number": 281,
       "context": "spacing=\"8px\"\n dataTestId=\"session_lifetime_radio_button_group\"\n options={[\n {\n id: \"session-lifetime-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"disabled\",\n dataTestId: \"session_lifetime_disabled\",\n },\n {\n id: \"session-lifetime-enable\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
-      "line_number": 249,
+      "line_number": 265,
       "context": "spacing=\"8px\"\n dataTestId=\"tfa_radio_button_group\"\n options={[\n {\n id: \"tfa-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"none\",\n dataTestId: \"tfa_radio_button_disabled\",\n },\n // TODO: hide while 2fa by sms is not working\n /* {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/trustedMail.js",
-      "line_number": 258,
+      "line_number": 257,
       "context": "orientation=\"vertical\"\n spacing=\"8px\"\n options={[\n {\n id: \"trusted-mail-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"0\",\n dataTestId: \"trusted_mail_disabled\",\n },\n {\n id: \"any-domains\",",
       "module": "/packages/client"
     },

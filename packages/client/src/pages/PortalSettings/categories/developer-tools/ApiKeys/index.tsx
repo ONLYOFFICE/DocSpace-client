@@ -33,8 +33,6 @@ import { EmptyServerErrorContainer } from "SRC_DIR/components/EmptyContainer/Emp
 import {
   changeApiKeyStatus,
   deleteApiKey,
-  getApiKeyPermissions,
-  getApiKeys,
 } from "@docspace/shared/api/api-keys";
 import {
   TApiKey,
@@ -52,20 +50,25 @@ import { ApiKeysProps } from "./types";
 import { StyledApiKeys, StyledMobileButton } from "./StyledApiKeys";
 
 const ApiKeys = (props: ApiKeysProps) => {
-  const { viewAs, currentColorScheme, apiKeysLink, isUser } = props;
+  const {
+    viewAs,
+    currentColorScheme,
+    apiKeysLink,
+    isUser,
+    listItems,
+    setListItems,
+    permissions,
+    error,
+  } = props;
 
   const { t, ready } = useTranslation(["Settings", "Common"]);
 
-  const [listItems, setListItems] = useState<TApiKey[]>([]);
-  const [permissions, setPermissions] = useState<string[]>([]);
   const [createKeyDialogIsVisible, setCreateKeyDialogIsVisible] =
     useState(false);
   const [deleteKeyDialogIsVisible, setDeleteKeyDialogIsVisible] =
     useState(false);
   const [actionItem, setActionItem] = useState<TApiKey | null>(null);
   const [isRequestRunning, setIsRequestRunning] = useState(false);
-  const [error, setError] = useState<null | Error>(null);
-  const [isLoading, setIsLoading] = useState(true);
 
   const onDeleteApiKey = (id: TApiKey["id"]) => {
     const itemIndex = listItems.findIndex((x) => x.id === id);
@@ -136,28 +139,6 @@ const ApiKeys = (props: ApiKeysProps) => {
     }
   };
 
-  const getKeys = async () => {
-    setIsLoading(true);
-    try {
-      const [keys, permissionsData] = await Promise.all([
-        getApiKeys(),
-        getApiKeyPermissions(),
-      ]);
-
-      setListItems(keys);
-      setPermissions(permissionsData);
-    } catch (err) {
-      toastr.error(err as Error);
-      setError(err as Error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getKeys();
-  }, []);
-
   useEffect(() => {
     if (ready) {
       setDocumentTitle(t("Settings:ApiKeys"));
@@ -207,7 +188,6 @@ const ApiKeys = (props: ApiKeysProps) => {
                   primary
                   size={ButtonSize.normal}
                   scale
-                  isDisabled={isLoading}
                   testId="create_new_secret_key_button"
                 />
               </StyledMobileButton>
@@ -217,12 +197,11 @@ const ApiKeys = (props: ApiKeysProps) => {
                 label={t("Settings:CreateNewSecretKey")}
                 primary
                 size={ButtonSize.small}
-                isDisabled={isLoading}
                 testId="create_new_secret_key_button"
               />
             )}
             <div>
-              {!isLoading && listItems.length ? (
+              {listItems.length ? (
                 <ApiKeysView
                   items={listItems}
                   viewAs={viewAs}

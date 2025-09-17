@@ -306,8 +306,8 @@ const AutomaticBackup = ({
       setDefaultOptions(periodsObject, weekdaysLabelArray, selectedSchedule);
       toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (e) {
-      toastr.error(e as Error);
       setErrorInformation(e, t);
+      toastr.error(e as Error);
       console.error(e);
       if (isCheckedThirdParty || isCheckedDocuments) updateBaseFolderPath();
     } finally {

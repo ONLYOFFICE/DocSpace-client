@@ -36,14 +36,13 @@ const withLoading = (WrappedComponent) => {
       isLoadedSubmenu,
       isLoadedLngTZSettings,
       isLoadedDNSSettings,
-      isLoadedPortalRenaming,
-      isLoadedCustomization,
       isLoadedCustomizationNavbar,
       isLoadedWelcomePageSettings,
       isBurgerLoading,
       setIsBurgerLoading,
       enablePortalRename,
       deviceType,
+      showPortalSettingsLoader,
     } = props;
 
     const viewMobile = deviceType === DeviceType.mobile;
@@ -69,51 +68,49 @@ const withLoading = (WrappedComponent) => {
       }
     }, [isLoadedArticleBody, setIsBurgerLoading]);
 
-    const loadedPortalRenaming = enablePortalRename
-      ? isLoadedPortalRenaming
-      : true;
+    const loadedPortalRenaming = !!enablePortalRename;
 
     const isLoadedCustomizationSettings =
-      isLoadedCustomization &&
-      isLoadedLngTZSettings &&
-      isLoadedWelcomePageSettings &&
-      isLoadedDNSSettings &&
-      loadedPortalRenaming &&
       isLoadedArticleBody &&
       !isBurgerLoading &&
       isLoadedSectionHeader &&
-      isLoadedSubmenu;
+      !showPortalSettingsLoader;
 
     const isLoadedCustomizationNavbarSettings =
       isLoadedCustomizationNavbar &&
       isLoadedArticleBody &&
       !isBurgerLoading &&
       isLoadedSectionHeader &&
-      isLoadedSubmenu;
+      isLoadedSubmenu &&
+      !showPortalSettingsLoader;
 
     const isLoadedCustomizationSettingLngTZSettings =
       isLoadedArticleBody &&
       !isBurgerLoading &&
       isLoadedSectionHeader &&
-      isLoadedLngTZSettings;
+      isLoadedLngTZSettings &&
+      !showPortalSettingsLoader;
 
     const isLoadedCustomizationSettingWelcomePageSettings =
       isLoadedArticleBody &&
       !isBurgerLoading &&
       isLoadedSectionHeader &&
-      isLoadedWelcomePageSettings;
+      isLoadedWelcomePageSettings &&
+      !showPortalSettingsLoader;
 
     const isLoadedCustomizationSettingPortalRenaming =
       isLoadedArticleBody &&
       !isBurgerLoading &&
       isLoadedSectionHeader &&
-      loadedPortalRenaming;
+      loadedPortalRenaming &&
+      !showPortalSettingsLoader;
 
     const isLoadedCustomizationSettingDNSSettings =
       isLoadedArticleBody &&
       !isBurgerLoading &&
       isLoadedSectionHeader &&
-      isLoadedDNSSettings;
+      isLoadedDNSSettings &&
+      !showPortalSettingsLoader;
 
     const isLoadedPage =
       setting === "language-and-time-zone"
@@ -137,15 +134,13 @@ const withLoading = (WrappedComponent) => {
     );
   };
 
-  return inject(({ common, settingsStore }) => {
+  return inject(({ common, settingsStore, clientLoadingStore }) => {
     const {
       isLoadedArticleBody,
       isLoadedSectionHeader,
       isLoadedSubmenu,
       isLoadedLngTZSettings,
       isLoadedDNSSettings,
-      isLoadedPortalRenaming,
-      isLoadedCustomization,
       isLoadedCustomizationNavbar,
       isLoadedWelcomePageSettings,
     } = common;
@@ -157,20 +152,21 @@ const withLoading = (WrappedComponent) => {
       deviceType,
     } = settingsStore;
 
+    const { showPortalSettingsLoader } = clientLoadingStore;
+
     return {
       isLoadedArticleBody,
       isLoadedSectionHeader,
       isLoadedSubmenu,
       isLoadedLngTZSettings,
       isLoadedDNSSettings,
-      isLoadedPortalRenaming,
-      isLoadedCustomization,
       isLoadedCustomizationNavbar,
       isLoadedWelcomePageSettings,
       isBurgerLoading,
       setIsBurgerLoading,
       enablePortalRename,
       deviceType,
+      showPortalSettingsLoader,
     };
   })(observer(LoaderWrapper));
 };

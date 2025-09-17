@@ -26,6 +26,7 @@
 
 import api from "@docspace/shared/api";
 import { makeAutoObservable } from "mobx";
+import axios from "axios";
 
 import {
   getSMTPSettings,
@@ -237,11 +238,21 @@ class SettingsSetupStore {
   };
 
   setInitSMTPSettings = async () => {
-    const result = await getSMTPSettings();
+    const abortController = new AbortController();
+    this.settingsStore.addAbortControllers(abortController);
 
-    if (!result) return;
+    try {
+      const result = await getSMTPSettings(abortController.signal);
 
-    this.setSMTPFields(result);
+      if (!result) return;
+
+      this.setSMTPFields(result);
+    } catch (error) {
+      if (axios.isCancel(error)) {
+        return;
+      }
+      throw error;
+    }
   };
 
   resetSMTPSettings = async () => {
@@ -396,8 +407,19 @@ class SettingsSetupStore {
   };
 
   getLifetimeAuditSettings = async (data) => {
-    const res = await api.settings.getLifetimeAuditSettings(data);
-    this.setSecurityLifeTime(res);
+    const abortController = new AbortController();
+    this.settingsStore.addAbortControllers(abortController);
+
+    try {
+      const res = await api.settings.getLifetimeAuditSettings(
+        data,
+        abortController.signal,
+      );
+      this.setSecurityLifeTime(res);
+    } catch (e) {
+      if (axios.isCancel(e)) return;
+      throw e;
+    }
   };
 
   setLifetimeAuditSettings = async (data) => {
@@ -418,13 +440,29 @@ class SettingsSetupStore {
   };
 
   getLoginHistory = async () => {
-    const res = await api.settings.getLoginHistory();
-    return this.setLoginHistoryUsers(res);
+    const abortController = new AbortController();
+    this.settingsStore.addAbortControllers(abortController);
+
+    try {
+      const res = await api.settings.getLoginHistory(abortController.signal);
+      return this.setLoginHistoryUsers(res);
+    } catch (e) {
+      if (axios.isCancel(e)) return;
+      throw e;
+    }
   };
 
   getAuditTrail = async () => {
-    const res = await api.settings.getAuditTrail();
-    return this.setAuditTrailUsers(res);
+    const abortController = new AbortController();
+    this.settingsStore.addAbortControllers(abortController);
+
+    try {
+      const res = await api.settings.getAuditTrail(abortController.signal);
+      return this.setAuditTrailUsers(res);
+    } catch (e) {
+      if (axios.isCancel(e)) return;
+      throw e;
+    }
   };
 
   getLoginHistoryReport = async () => {
@@ -502,17 +540,35 @@ class SettingsSetupStore {
   };
 
   getConsumers = async () => {
-    const res = await api.settings.getConsumersList();
-    this.setConsumers(res);
+    try {
+      const abortController = new AbortController();
+      this.settingsStore.addAbortControllers(abortController);
+
+      const res = await api.settings.getConsumersList(abortController.signal);
+      this.setConsumers(res);
+    } catch (e) {
+      if (axios.isCancel(e)) return;
+
+      throw e;
+    }
   };
 
   fetchAndSetConsumers = async (consumerName) => {
-    const res = await api.settings.getConsumersList();
-    const consumer = res.find((c) => c.name === consumerName);
-    this.integration.selectedConsumer = consumer || {};
-    this.setConsumers(res);
+    const abortController = new AbortController();
+    this.settingsStore.addAbortControllers(abortController);
 
-    return !!consumer;
+    try {
+      const res = await api.settings.getConsumersList(abortController.signal);
+      const consumer = res.find((c) => c.name === consumerName);
+      this.integration.selectedConsumer = consumer || {};
+      this.setConsumers(res);
+
+      return !!consumer;
+    } catch (e) {
+      if (axios.isCancel(e)) return;
+
+      throw e;
+    }
   };
 
   updateConsumerProps = async (newProps) => {

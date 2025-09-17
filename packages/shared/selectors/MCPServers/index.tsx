@@ -27,6 +27,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
+import EmptyScreenRoomSvgUrl from "PUBLIC_DIR/images/emptyview/empty.room.selector.light.svg?url";
+import EmptyScreenRoomDarkSvgUrl from "PUBLIC_DIR/images/emptyview/empty.room.selector.dark.svg?url";
+
 import { getAvailableServersList } from "../../api/ai";
 import { TServer } from "../../api/ai/types";
 import { useTheme } from "../../hooks/useTheme";
@@ -137,12 +140,18 @@ const MCPServersSelector = ({ onSubmit, onClose }: MCPServersSelectorProps) => {
   return (
     <Selector
       items={servers}
-      emptyScreenImage=""
-      emptyScreenHeader=""
-      emptyScreenDescription=""
-      searchEmptyScreenImage=""
-      searchEmptyScreenHeader=""
-      searchEmptyScreenDescription=""
+      emptyScreenImage={
+        isBase ? EmptyScreenRoomSvgUrl : EmptyScreenRoomDarkSvgUrl
+      }
+      emptyScreenHeader={t("Common:NoMCPServers")}
+      emptyScreenDescription={t("Common:NoMCPServersDescription", {
+        productName: t("Common:ProductName"),
+      })}
+      searchEmptyScreenImage={
+        isBase ? EmptyScreenRoomSvgUrl : EmptyScreenRoomDarkSvgUrl
+      }
+      searchEmptyScreenHeader={t("Common:NotFoundTitle")}
+      searchEmptyScreenDescription={t("Common:SearchEmptyRoomsDescription")}
       submitButtonLabel={t("Common:AddButton")}
       disableSubmitButton={false}
       onSubmit={onSubmitAction}

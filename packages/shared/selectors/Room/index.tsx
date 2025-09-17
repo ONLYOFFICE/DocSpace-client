@@ -28,6 +28,7 @@ import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import EmptyScreenCorporateSvgUrl from "PUBLIC_DIR/images/empty_screen_corporate.svg?url";
+import EmptyScreenCorporateDarkSvgUrl from "PUBLIC_DIR/images/empty_screen_corporate_dark.svg?url";
 
 import { Selector, TSelectorItem } from "../../components/selector";
 import {
@@ -38,6 +39,7 @@ import {
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
 
 import { TTranslation } from "../../types";
+import { useTheme } from "../../hooks/useTheme";
 
 import useSocketHelper from "../utils/hooks/useSocketHelper";
 import useRoomsHelper from "../utils/hooks/useRoomsHelper";
@@ -91,6 +93,8 @@ const RoomSelectorComponent = ({
   initSearchValue,
 }: RoomSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
+
+  const { isBase } = useTheme();
 
   const { isFirstLoad, isNextPageLoading, setIsFirstLoad } =
     React.useContext(LoadersContext);
@@ -234,12 +238,16 @@ const RoomSelectorComponent = ({
       submitButtonLabel={submitButtonLabel || t("Common:SelectAction")}
       onSubmit={onSubmit}
       isMultiSelect={isMultiSelect}
-      emptyScreenImage={EmptyScreenCorporateSvgUrl}
+      emptyScreenImage={
+        isBase ? EmptyScreenCorporateSvgUrl : EmptyScreenCorporateDarkSvgUrl
+      }
       emptyScreenHeader={emptyScreenHeader ?? t("Common:EmptyRoomsHeader")}
       emptyScreenDescription={
         emptyScreenDescription ?? t("Common:EmptyRoomsDescription")
       }
-      searchEmptyScreenImage={EmptyScreenCorporateSvgUrl}
+      searchEmptyScreenImage={
+        isBase ? EmptyScreenCorporateSvgUrl : EmptyScreenCorporateDarkSvgUrl
+      }
       searchEmptyScreenHeader={t("Common:NotFoundTitle")}
       searchEmptyScreenDescription={t("Common:SearchEmptyRoomsDescription")}
       totalItems={total}

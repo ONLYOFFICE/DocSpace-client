@@ -427,21 +427,14 @@ export const exportChatMessage = async (
   }
 };
 
-export const moveFilesToKnowledge = async (
-  knowledgeFolderId: number,
-  files: (string | number)[],
-) => {
-  try {
-    const res = await request({
-      method: "POST",
-      url: `${baseUrl}/vectorization/tasks`,
-      data: { files, knowledgeFolderId },
-    });
+export const retryVectorization = async (fileId: TFile["id"]) => {
+  const res = await request({
+    method: "POST",
+    url: `${baseUrl}/vectorization/tasks`,
+    data: { fileId },
+  });
 
-    return res as TVectorizeOperation;
-  } catch (e) {
-    console.log(e);
-  }
+  return res as TVectorizeOperation;
 };
 
 export const getVectorizationTasksById = async (id: string) => {

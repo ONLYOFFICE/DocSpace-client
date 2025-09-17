@@ -71,6 +71,7 @@ import {
   VDRIndexingAction,
   RoomSearchArea,
   UrlActionType,
+  VectorizationStatus,
 } from "@docspace/shared/enums";
 import { makeAutoObservable, runInAction } from "mobx";
 
@@ -3806,6 +3807,23 @@ class FilesActionStore {
     });
 
     return errorMessage || `Started ${operationResults.join(" and ")}`;
+  };
+
+  retryVectorization = async (fileId) => {
+    const { updateFileVectorizationStatus } = this.filesStore;
+
+    try {
+      updateFileVectorizationStatus(fileId, VectorizationStatus.InProgress);
+
+      const task = await api.ai.retryVectorization(fileId);
+
+      if (task.error) {
+        updateFileVectorizationStatus(fileId, VectorizationStatus.Failed);
+      }
+    } catch (e) {
+      updateFileVectorizationStatus(fileId, VectorizationStatus.Failed);
+      console.error(e);
+    }
   };
 }
 

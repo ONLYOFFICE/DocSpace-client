@@ -1267,6 +1267,13 @@ class FilesStore {
     this.files[index].fileStatus = status;
   };
 
+  updateFileVectorizationStatus = (fileId, status) => {
+    const foundIndex = this.files.findIndex((file) => file.id === fileId);
+    if (foundIndex < 0) return;
+
+    this.files[foundIndex].vectorizationStatus = status;
+  };
+
   updateRoomMute = (index, status) => {
     if (index < 0) return;
 

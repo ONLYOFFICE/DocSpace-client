@@ -156,6 +156,12 @@ export default function withBadges(WrappedComponent) {
       onCreateRoomFromTemplate(item, true);
     };
 
+    onRetryVectorization = () => {
+      const { item, retryVectorization } = this.props;
+
+      retryVectorization(item.id);
+    };
+
     render() {
       const {
         t,
@@ -205,6 +211,7 @@ export default function withBadges(WrappedComponent) {
           onBadgeClick={this.onBadgeClick}
           onUnpinClick={this.onUnpinClick}
           onUnmuteClick={this.onUnmuteClick}
+          onRetryVectorization={this.onRetryVectorization}
           openLocationFile={this.openLocationFile}
           setConvertDialogVisible={this.setConvertDialogVisible}
           onFilesClick={onFilesClick}
@@ -263,6 +270,7 @@ export default function withBadges(WrappedComponent) {
         setMuteAction,
         checkAndOpenLocationAction,
         onCreateRoomFromTemplate,
+        retryVectorization,
       } = filesActionsStore;
       const {
         isTabletView,
@@ -310,6 +318,7 @@ export default function withBadges(WrappedComponent) {
         onCreateRoomFromTemplate,
         isExtsCustomFilter,
         docspaceManagingRoomsHelpUrl,
+        retryVectorization,
       };
     },
   )(observer(WithBadges));

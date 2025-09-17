@@ -249,7 +249,7 @@ class ContextOptionsStore {
   }
 
   onRetryVectorization = (fileId) => {
-    console.log("retry vectorization", fileId);
+    this.filesActionsStore.retryVectorization(fileId);
   };
 
   onOpenFolder = async (item, t) => {

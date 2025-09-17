@@ -354,10 +354,7 @@ const PortalSettingsRoutes = {
     },
     {
       path: "integration/ai-settings",
-      lazy: () =>
-        componentLoader(
-          () => import("SRC_DIR/pages/PortalSettings/categories/integration"),
-        ),
+      element: <ViewComponent />,
     },
     {
       path: "integration/ldap/settings",

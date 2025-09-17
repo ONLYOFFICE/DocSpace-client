@@ -35,36 +35,22 @@ import { AIProvider } from "./sub-components/ai-provider";
 import { MCPServers } from "./sub-components/mcp-servers";
 import styles from "./AISettings.module.scss";
 
-type StoreProps = Pick<
-  AISettingsStore,
-  "isInit" | "initAISettings" | "setIsInit"
->;
+type StoreProps = Pick<AISettingsStore, "isInit">;
 
 type AISettingsProps = Partial<StoreProps> & {
   standalone: boolean; // Todo: Get from store after enabling ai settings for saas
 };
 
-const AISettngs = ({
-  standalone,
-  isInit,
-  setIsInit,
-  initAISettings,
-}: AISettingsProps) => {
+const AISettngs = ({ standalone, isInit }: AISettingsProps) => {
   const { t, ready } = useTranslation("AISettings");
-
-  useEffect(() => {
-    initAISettings?.(standalone);
-
-    return () => {
-      setIsInit?.(false);
-    };
-  }, [standalone, initAISettings, setIsInit]);
 
   useEffect(() => {
     const titleKey = standalone ? "Settings:AISettings" : "Settings:MCPServers";
 
     if (ready) setDocumentTitle(t(titleKey));
   }, [ready, standalone]);
+
+  console.log(isInit);
 
   if (!isInit) return null;
 
@@ -77,7 +63,7 @@ const AISettngs = ({
 };
 
 export default inject(({ aiSettingsStore }: TStore) => {
-  const { isInit, initAISettings, setIsInit } = aiSettingsStore;
+  const { isInit } = aiSettingsStore;
 
-  return { isInit, initAISettings, setIsInit };
+  return { isInit };
 })(observer(AISettngs));

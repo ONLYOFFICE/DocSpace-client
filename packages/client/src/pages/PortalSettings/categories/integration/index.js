@@ -61,6 +61,8 @@ const IntegrationWrapper = (props) => {
     filesSettingsStore,
     ldapStore,
     clearAbortControllerArr,
+    initAISettings,
+    setIsInit,
   } = props;
   const navigate = useNavigate();
 
@@ -73,6 +75,9 @@ const IntegrationWrapper = (props) => {
     ldapStore,
   });
 
+  console.log("====");
+  console.log(initAISettings, setIsInit);
+
   const {
     openThirdPartyModal,
     documentServiceLocationData,
@@ -81,7 +86,12 @@ const IntegrationWrapper = (props) => {
     getThirdPartyData,
     getSMTPSettingsData,
     getDocumentServiceData,
-  } = useIntegration(defaultProps.integration);
+    getAISettingsData,
+  } = useIntegration({
+    ...defaultProps.integration,
+    initAISettings,
+    setIsInit,
+  });
 
   useEffect(() => {
     return () => {
@@ -129,6 +139,10 @@ const IntegrationWrapper = (props) => {
       id: "ai-settings",
       name: standalone ? t("AISettings") : t("MCPServers"),
       content: <AISettngs standalone />, // TODO: Change to standalone={standalone} when adding providers on stand is not needed
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getAISettingsData();
+      },
     },
   ];
 
@@ -211,6 +225,7 @@ export const Component = inject(
     setup,
     filesSettingsStore,
     ldapStore,
+    aiSettingsStore,
   }) => {
     const {
       standalone,
@@ -221,6 +236,8 @@ export const Component = inject(
     const { load: toDefault } = ssoStore;
 
     const { isSSOAvailable } = currentQuotaStore;
+
+    const { initAISettings, setIsInit } = aiSettingsStore;
 
     return {
       toDefault,
@@ -236,6 +253,8 @@ export const Component = inject(
       filesSettingsStore,
       ldapStore,
       clearAbortControllerArr,
+      initAISettings,
+      setIsInit,
     };
   },
 )(

@@ -115,7 +115,7 @@ const MarkdownField = ({
 
             if (typeof content === "string") {
               if (content.length) {
-                if (content[0] === "▍") {
+                if (content[0] === " ") {
                   return <span className="form-modal-markdown-span" />;
                 }
 

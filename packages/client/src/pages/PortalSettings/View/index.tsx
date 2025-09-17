@@ -100,6 +100,8 @@ const View = ({
   currentTariffStatusStore,
 
   clearAbortControllerArr,
+  initAISettings,
+  setIsInit,
 }: any) => {
   const location = useLocation();
 
@@ -152,9 +154,11 @@ const View = ({
   const { getCommonInitialValue } = useCommon(defaultProps.common);
   const { getSecurityInitialValue } = useSecurity(defaultProps.security);
   const { getBackupInitialValue } = useBackup(defaultProps.backup);
-  const { getIntegrationInitialValue } = useIntegration(
-    defaultProps.integration,
-  );
+  const { getIntegrationInitialValue } = useIntegration({
+    ...defaultProps.integration,
+    initAISettings,
+    setIsInit,
+  });
   const { getDataImportInitialValue } = useDataImport(defaultProps.dataImport);
   const { getDeveloperToolsInitialValue } = useDeveloperTools(
     defaultProps.developerTools,
@@ -351,6 +355,7 @@ export const ViewComponent = inject(
     paymentStore,
     servicesStore,
     currentTariffStatusStore,
+    aiSettingsStore,
   }: TStore) => {
     const { initSettings: initSettingsCommon } = common;
 
@@ -397,6 +402,9 @@ export const ViewComponent = inject(
       loadBaseInfo,
 
       clearAbortControllerArr,
+
+      setIsInit: aiSettingsStore.setIsInit,
+      initAISettings: aiSettingsStore.initAISettings,
     };
   },
 )(observer(View));

@@ -258,7 +258,8 @@ const ViewerInfoWatermark = ({
   };
 
   const lockLastSelection =
-    Object.values(elements.current).filter((v) => v === true).length === 1;
+    Object.values(elements.current ?? {}).filter((v) => v === true).length ===
+    1;
 
   return (
     <StyledWatermark>

@@ -547,7 +547,7 @@ const SectionHeaderContent = (props) => {
   const contextMenuHeader = React.useMemo(() => {
     const srcLogo = selectedFolder?.logo || null;
     const title = currentTitle || selectedFolder?.title || "";
-    const headerBadgeUrl = titleIcon.includes("public-room") && titleIcon;
+    const headerBadgeUrl = titleIcon.includes("public-room") ? titleIcon : "";
 
     const iconUrl = getIcon(
       32,

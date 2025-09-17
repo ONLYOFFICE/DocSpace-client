@@ -3,7 +3,7 @@
   "content": "Customize cover",
   "content_en_sha1_hash": "b5b9c63cc83c3598cc9ddb9857ac47fb18bca819",
   "created_at": "2025-05-19T21:30:53.313Z",
-  "updated_at": "2025-09-07T07:53:15.395Z",
+  "updated_at": "2025-09-10T09:59:20.922Z",
   "comment": {
     "text": "The translation key \"CustomizeCover\" is used to display a button label in a dialog that allows users to customize their room logo cover. The text appears as part of a UI element and should be translated accordingly.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/DialogsStore.js",
-      "line_number": 981,
+      "line_number": 985,
       "context": "icon: TrashIconSvgUrl,\n key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_DELETE,\n onClick: onDelete ? onDelete() : () => this.deleteRoomLogo(),\n }\n : {\n label: t(\"RoomLogoCover:CustomizeCover\"),\n icon: PenSvgUrl,\n key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_CUSTOMIZE_COVER,\n onClick: () => this.setRoomLogoCoverDialogVisible(true),\n },\n ];",
       "module": "/packages/client"
     }

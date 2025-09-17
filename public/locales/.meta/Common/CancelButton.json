@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2025-09-07T07:53:15.032Z",
+  "updated_at": "2025-09-12T14:18:49.259Z",
   "comment": {
     "text": "This translation key is used for the \"Cancel\" button in various UI elements such as dialogs and form buttons. It provides the text to be displayed when a user clicks the cancel action, allowing them to terminate an operation or return to their previous state. This key appears in files such as Dialog.js, QuotaForm, and ShareCollectSelector.",
     "is_auto": true,
@@ -92,6 +92,12 @@
       "file_path": "/packages/client/src/components/dialogs/ConflictResolveDialog/index.tsx",
       "line_number": 328,
       "context": "visible={visible}\n headerLabel={t(\"Common:ActionRequired\")}\n isLoading={!ready}\n onSubmit={isUploadConflict ? onAcceptUploadType : onAcceptType}\n onClose={onCloseConflictDialog}\n cancelButtonLabel={t(\"CancelButton\")}\n submitButtonLabel={t(\"OKButton\")}\n messageText={messageText}\n selectActionText={t(\"Common:ConflictResolveSelectAction\")}\n overwriteTitle={overwriteTitle}\n overwriteDescription={overwriteDescription}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/ConnectAccountDialog/index.tsx",
+      "line_number": 113,
+      "context": "scale\n primary\n onClick={onClickConnect}\n />\n <Button\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n />\n </ModalDialog.Footer>",
       "module": "/packages/client"
     },
     {
@@ -188,6 +194,12 @@
       "file_path": "/packages/client/src/components/dialogs/DeleteVersionDialog/index.tsx",
       "line_number": 108,
       "context": "onClick={onDelete}\n />\n <Button\n id=\"delete-version-modal_cancel\"\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n />\n </ModalDialog.Footer>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/DisconnectAccountDialog/index.tsx",
+      "line_number": 89,
+      "context": "scale\n primary\n onClick={onClickDisconnect}\n />\n <Button\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n />\n </ModalDialog.Footer>",
       "module": "/packages/client"
     },
     {
@@ -558,7 +570,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/sub-components/consumerModalDialog.js",
-      "line_number": 350,
+      "line_number": 353,
       "context": "/>\n <Button\n size=\"normal\"\n scale\n id=\"cancel-button\"\n label={t(\"Common:CancelButton\")}\n isLoading={isLoading}\n isDisabled={isLoading}\n onClick={onModalClose}\n testId=\"consumer_dialog_cancel_button\"\n />",
       "module": "/packages/client"
     },
@@ -650,6 +662,12 @@
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AdditionalStorage/GracePeriodModal.tsx",
       "line_number": 111,
       "context": "onClick={onClick}\n testId=\"grace_period_ok_button\"\n />\n <Button\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n onClick={onClose}\n testId=\"grace_period_cancel_button\"\n />\n </ModalDialog.Footer>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/ConfirmationDialog.tsx",
+      "line_number": 76,
+      "context": "primary\n scale\n testId=\"service-confirmation-dialog-continue-button\"\n />\n <Button\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n onClick={onClose}\n testId=\"service-confirmation-dialog-close-button\"\n scale\n />",
       "module": "/packages/client"
     },
     {

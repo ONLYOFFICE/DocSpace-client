@@ -41,6 +41,9 @@ import SMTPSettings from "./SMTPSettings";
 import DocumentService from "./DocumentService";
 import PluginPage from "./Plugins";
 import AISettngs from "./AISettngs";
+import useIntegration from "./useIntegration";
+
+import { createDefaultHookSettingsProps } from "../../utils/createDefaultHookSettingsProps";
 
 const IntegrationWrapper = (props) => {
   const {
@@ -50,8 +53,35 @@ const IntegrationWrapper = (props) => {
     isSSOAvailable,
     standalone,
     enablePlugins,
+
+    setup,
+    currentQuotaStore,
+    ssoFormStore,
+    pluginStore,
+    filesSettingsStore,
+    ldapStore,
+    clearAbortControllerArr,
   } = props;
   const navigate = useNavigate();
+
+  const defaultProps = createDefaultHookSettingsProps({
+    setup,
+    currentQuotaStore,
+    ssoFormStore,
+    pluginStore,
+    filesSettingsStore,
+    ldapStore,
+  });
+
+  const {
+    openThirdPartyModal,
+    documentServiceLocationData,
+    getSSOData,
+    getPluginsData,
+    getThirdPartyData,
+    getSMTPSettingsData,
+    getDocumentServiceData,
+  } = useIntegration(defaultProps.integration);
 
   useEffect(() => {
     return () => {
@@ -66,21 +96,34 @@ const IntegrationWrapper = (props) => {
       id: "ldap",
       name: t("LDAP"),
       content: <LdapSettings />,
+      onClick: () => {},
     },
     {
       id: "sso",
       name: t("SingleSignOn"),
       content: <SsoSettings />,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getSSOData();
+      },
     },
     {
       id: "third-party-services",
       name: t("Translations:ThirdPartyTitle"),
-      content: <ThirdParty />,
+      content: <ThirdParty openModal={openThirdPartyModal} />,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getThirdPartyData();
+      },
     },
     {
       id: "smtp-settings",
       name: t("SMTPSettings"),
       content: <SMTPSettings />,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getSMTPSettingsData();
+      },
     },
     {
       id: "ai-settings",
@@ -93,7 +136,15 @@ const IntegrationWrapper = (props) => {
     const documentServiceData = {
       id: "document-service",
       name: t("DocumentService"),
-      content: <DocumentService />,
+      content: (
+        <DocumentService
+          initialDocumentServiceData={documentServiceLocationData}
+        />
+      ),
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getDocumentServiceData();
+      },
     };
 
     data.push(documentServiceData);
@@ -110,6 +161,10 @@ const IntegrationWrapper = (props) => {
       id: "plugins",
       name: pluginLabel,
       content: <PluginPage />,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getPluginsData();
+      },
     });
   }
 
@@ -120,6 +175,11 @@ const IntegrationWrapper = (props) => {
   };
 
   const currentTabId = getCurrentTabId();
+
+  // Guard: Don't render if we're not in the integration section
+  if (!window.location.pathname.includes("/portal-settings/integration")) {
+    return null;
+  }
 
   const onSelect = (e) => {
     navigate(
@@ -137,13 +197,27 @@ const IntegrationWrapper = (props) => {
       selectedItemId={currentTabId}
       onSelect={onSelect}
       stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
+      withAnimation
     />
   );
 };
 
 export const Component = inject(
-  ({ settingsStore, ssoStore, currentQuotaStore }) => {
-    const { standalone, enablePlugins, currentDeviceType } = settingsStore;
+  ({
+    settingsStore,
+    ssoStore,
+    currentQuotaStore,
+    pluginStore,
+    setup,
+    filesSettingsStore,
+    ldapStore,
+  }) => {
+    const {
+      standalone,
+      enablePlugins,
+      currentDeviceType,
+      clearAbortControllerArr,
+    } = settingsStore;
     const { load: toDefault } = ssoStore;
 
     const { isSSOAvailable } = currentQuotaStore;
@@ -154,6 +228,14 @@ export const Component = inject(
       standalone,
       currentDeviceType,
       enablePlugins,
+
+      setup,
+      currentQuotaStore,
+      ssoFormStore: ssoStore,
+      pluginStore,
+      filesSettingsStore,
+      ldapStore,
+      clearAbortControllerArr,
     };
   },
 )(

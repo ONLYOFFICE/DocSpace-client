@@ -885,5 +885,7 @@
   "RevokeLink": "Відкликати посилання",
   "LogoForEditors": "Логотип для редактора {{editorName}}",
   "LogoForViewer": "Логотип для {{diagramViewer}}",
-  "LogoDocsEditor": "Логотип заголовка редакторів"
+  "LogoDocsEditor": "Логотип заголовка редакторів",
+  "PortalRestoring": "Відновлення {{productName}}",
+  "PreparationPortalDescription": "Після завершення процесу відновлення ви автоматично перейдете в {{productName}}."
 }

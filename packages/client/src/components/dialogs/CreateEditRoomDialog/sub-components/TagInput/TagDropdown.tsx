@@ -112,7 +112,7 @@ const TagDropdown = ({
           key={-2}
           className="dropdown-item"
           onClick={addNewTag}
-          label={`${createTagLabel}  “${tagInputValue}”`}
+          label={`${createTagLabel}  "${tagInputValue}"`}
           height={32}
           heightTablet={32}
         />,

@@ -23,10 +23,8 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 
-import ContactsTabs from "./ContactsTabs";
 import RoomTemplatesTabs from "./RoomTemplatesTabs";
 import AiRoomTabs from "./AiRoomTabs";
 
@@ -36,31 +34,17 @@ const SectionSubmenuContent = ({
   isTemplatesFolder,
   allowInvitingGuests,
   checkGuests,
-  hasGuests,
   currentClientView,
 }) => {
-  const [showGuestsTab, setShowGuestsTab] = useState(true);
-  const [isCheckGuests, setIsCheckGuests] = useState(false);
-
   const isContacts =
     currentClientView === "users" || currentClientView === "groups";
   const isProfile = currentClientView === "profile";
-
-  useEffect(() => {
-    if (typeof hasGuests !== "boolean") return;
-    if (!hasGuests) setShowGuestsTab(hasGuests);
-    setIsCheckGuests(true);
-  }, [hasGuests]);
 
   if (isProfile) return null;
 
   if (isContacts && allowInvitingGuests === false) checkGuests();
 
   if (isAIRoom) return <AiRoomTabs />;
-  if (isContacts && (allowInvitingGuests || isCheckGuests))
-    return (
-      <ContactsTabs showGuestsTab={allowInvitingGuests || showGuestsTab} />
-    );
 
   if (!isContacts && (isRoomsFolderRoot || isTemplatesFolder))
     return <RoomTemplatesTabs />;
@@ -76,7 +60,7 @@ export default inject(
   }) => {
     const { isRoomsFolderRoot, isTemplatesFolder } = treeFoldersStore;
 
-    const { allowInvitingGuests, checkGuests, hasGuests } = settingsStore;
+    const { allowInvitingGuests, checkGuests } = settingsStore;
 
     const { currentClientView } = clientLoadingStore;
 
@@ -86,7 +70,6 @@ export default inject(
       isTemplatesFolder,
       allowInvitingGuests,
       checkGuests,
-      hasGuests,
       currentClientView,
     };
   },

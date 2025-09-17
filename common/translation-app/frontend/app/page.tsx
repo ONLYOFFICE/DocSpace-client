@@ -98,7 +98,9 @@ export default function Home() {
               try {
                 setIsSearching(true);
                 const response = await fetch(
-                  `${process.env.API_URL}/search?query=${encodeURIComponent(searchQuery)}`
+                  `${process.env.API_URL}/search?query=${encodeURIComponent(
+                    searchQuery
+                  )}`
                 );
 
                 if (!response.ok) {
@@ -114,7 +116,11 @@ export default function Home() {
               }
             }}
             disabled={isSearching || !searchQuery.trim()}
-            className={`flex-[1] h-[42px] px-4 py-2 rounded-lg text-white font-medium ${isSearching || !searchQuery.trim() ? "bg-gray-400 cursor-not-allowed" : "bg-primary-600 hover:bg-primary-700"} transition-colors`}
+            className={`flex-[1] h-[42px] px-4 py-2 rounded-lg text-white font-medium ${
+              isSearching || !searchQuery.trim()
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-primary-600 hover:bg-primary-700"
+            } transition-colors`}
           >
             {isSearching ? (
               <>
@@ -149,7 +155,9 @@ export default function Home() {
         {searchResults && (
           <div className="mt-4">
             <h3 className="text-lg font-medium mb-2 text-gray-800 dark:text-gray-200">
-              Results for "{searchQuery}" ({searchResults.totalResults} matches)
+              Results for {""}
+              {searchQuery}
+              {""} ({searchResults.totalResults} matches)
             </h3>
 
             {searchResults.results.length === 0 ? (
@@ -471,7 +479,13 @@ export default function Home() {
                 }
               }}
               disabled={testRunning}
-              className={`flex items-center justify-center px-6 py-3 ${testRunning && runningTest === "only-base-languages" ? "bg-primary-400" : "bg-primary-600 hover:bg-primary-700"} text-white font-medium rounded-lg transition-colors duration-200 ${testRunning ? "cursor-not-allowed opacity-80" : ""}`}
+              className={`flex items-center justify-center px-6 py-3 ${
+                testRunning && runningTest === "only-base-languages"
+                  ? "bg-primary-400"
+                  : "bg-primary-600 hover:bg-primary-700"
+              } text-white font-medium rounded-lg transition-colors duration-200 ${
+                testRunning ? "cursor-not-allowed opacity-80" : ""
+              }`}
             >
               {testRunning && runningTest === "only-base-languages" ? (
                 <>
@@ -570,7 +584,13 @@ export default function Home() {
                 }
               }}
               disabled={testRunning}
-              className={`flex items-center justify-center px-6 py-3 ${testRunning && runningTest === "skip-base-languages" ? "bg-green-400" : "bg-green-600 hover:bg-green-700"} text-white font-medium rounded-lg transition-colors duration-200 ${testRunning ? "cursor-not-allowed opacity-80" : ""}`}
+              className={`flex items-center justify-center px-6 py-3 ${
+                testRunning && runningTest === "skip-base-languages"
+                  ? "bg-green-400"
+                  : "bg-green-600 hover:bg-green-700"
+              } text-white font-medium rounded-lg transition-colors duration-200 ${
+                testRunning ? "cursor-not-allowed opacity-80" : ""
+              }`}
             >
               {testRunning && runningTest === "skip-base-languages" ? (
                 <>

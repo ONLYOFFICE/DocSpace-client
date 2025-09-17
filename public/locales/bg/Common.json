@@ -894,5 +894,7 @@
   "RevokeLink": "Отмени линк",
   "LogoForEditors": "Лого за редактора {{editorName}}",
   "LogoForViewer": "Лого за {{diagramViewer}}",
-  "LogoDocsEditor": "Лого за редакторското заглавие"
+  "LogoDocsEditor": "Лого за редакторското заглавие",
+  "PortalRestoring": "Възстановяване на {{productName}}",
+  "PreparationPortalDescription": "След като процесът на възстановяване приключи, ще бъдете автоматично пренасочени към вашия {{productName}}."
 }

@@ -235,6 +235,8 @@ export const enum PageType {
   storageManagement = "storageManagement",
   flows = "flows",
   services = "services",
+  groups = "groups",
+  guests = "guests",
 }
 
 /**

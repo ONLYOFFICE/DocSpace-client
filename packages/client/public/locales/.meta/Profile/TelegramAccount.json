@@ -1,0 +1,28 @@
+{
+  "key_path": "TelegramAccount",
+  "content": "Telegram account",
+  "content_en_sha1_hash": "9b8ac26e7b4a631327a1834706b62a06d842b15c",
+  "created_at": "2025-09-10T09:59:16.166Z",
+  "updated_at": "2025-09-10T10:02:56.336Z",
+  "comment": {
+    "text": "This key displays the label \"Telegram account\" within a modal dialog, specifically in the header. It's used to identify the purpose of the dialog, which is likely related to connecting or managing a Telegram account. Translators should ensure the translation accurately reflects this connection context.",
+    "is_auto": true,
+    "updated_at": "2025-09-10T10:02:56.336Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ConnectAccountDialog/index.tsx",
+      "line_number": 83,
+      "context": "onClose={onClose}\n displayType={ModalDialogType.modal}\n autoMaxHeight\n isLoading={!botUrl}\n >\n <ModalDialog.Header>{t(\"Profile:TelegramAccount\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\" fontWeight={400} style={{ marginBottom: \"16px\" }}>\n {t(\"Profile:TelegramAccountDescription\")}\n </Text>\n <InputBlock",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

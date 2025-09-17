@@ -71,7 +71,6 @@ newInstance
       "ConvertDialog",
       "ConnectDialog",
       "CreateEditRoomDialog",
-      "DeleteThirdPartyDialog",
       "PortalUnavailable",
       "UploadPanel",
       "Files",

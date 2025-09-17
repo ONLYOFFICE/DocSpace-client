@@ -65,6 +65,7 @@ import {
   showInfoPanel,
   hideInfoPanel as hideInfoPanelEvent,
 } from "SRC_DIR/helpers/info-panel";
+import { getContactsView, createGroup } from "SRC_DIR/helpers/contacts";
 import TariffBar from "SRC_DIR/components/TariffBar";
 import { getLifetimePeriodTranslation } from "@docspace/shared/utils/common";
 import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
@@ -179,7 +180,6 @@ const SectionHeaderContent = (props) => {
 
     isAIRoom,
     isKnowledgeTab,
-    contactsTab,
     currentClientView,
     profile,
     profileClicked,
@@ -190,15 +190,15 @@ const SectionHeaderContent = (props) => {
     setChangePasswordVisible,
     setChangeAvatarVisible,
     setChangeNameVisible,
+    contactsTab,
   } = props;
 
   const location = useLocation();
 
-  const contactsView =
-    currentClientView === "users" || currentClientView === "groups";
-  const isContactsPage = contactsView;
-  const isContactsGroupsPage = contactsTab === "groups";
-  const isContactsInsideGroupPage = contactsTab === "inside_group";
+  const contactsView = getContactsView(location);
+  const isContactsPage = !!contactsView;
+  const isContactsGroupsPage = contactsView === "groups";
+  const isContactsInsideGroupPage = contactsView === "inside_group";
   const isProfile = currentClientView === "profile";
 
   const addButtonRefCallback = React.useCallback(
@@ -537,14 +537,27 @@ const SectionHeaderContent = (props) => {
       isIndexEditingMode || isPublicRoom;
   }
 
+  const getAccountsTitle = () => {
+    switch (contactsTab) {
+      case "people":
+        return t("Common:Members");
+      case "groups":
+        return t("Common:Groups");
+      case "inside_group":
+        return getInsideGroupTitle();
+      case "guests":
+        return t("Common:Guests");
+      default:
+        return t("Common:Members");
+    }
+  };
+
   const currentTitle = isProfile
     ? t("Profile:MyProfile")
     : isSettingsPage
       ? t("Common:Settings")
       : isContactsPage
-        ? isContactsInsideGroupPage
-          ? getInsideGroupTitle()
-          : t("Common:Contacts")
+        ? getAccountsTitle()
         : title;
 
   const currentCanCreate =
@@ -623,6 +636,11 @@ const SectionHeaderContent = (props) => {
     return (isRecycleBinFolder && !isEmptyFilesList) || !isRootFolder;
   };
 
+  const onPlusClick = () => {
+    if (!isContactsPage) return onCreateRoom();
+    if (isContactsGroupsPage) return createGroup();
+  };
+
   const isPlusButtonVisible = () => {
     if (!isContactsPage || isContactsInsideGroupPage) return true;
 
@@ -631,6 +649,8 @@ const SectionHeaderContent = (props) => {
 
     return true;
   };
+
+  const withMenu = !isRoomsFolder && !isContactsGroupsPage;
 
   return (
     <Consumer key="header">
@@ -695,8 +715,8 @@ const SectionHeaderContent = (props) => {
                   contextMenu: t("Translations:TitleShowFolderActions"),
                   infoPanel: t("Common:InfoPanel"),
                 }}
-                withMenu={!isRoomsFolder}
-                onPlusClick={onCreateRoom}
+                withMenu={withMenu}
+                onPlusClick={onPlusClick}
                 isEmptyPage={isEmptyPage}
                 isRoom={isCurrentRoom || isContactsPage || isProfile}
                 hideInfoPanel={

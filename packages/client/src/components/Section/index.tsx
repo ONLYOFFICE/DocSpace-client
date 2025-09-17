@@ -31,12 +31,19 @@ import Section, { SectionProps } from "@docspace/shared/components/section";
 
 const SectionWrapper = ({
   children,
+  viewAs,
 
   ...rest
 }: SectionProps) => {
   const location = useLocation();
+  const isInfoPanelAvailable = viewAs !== "settings";
+
   return (
-    <Section {...rest} pathname={location.pathname}>
+    <Section
+      {...rest}
+      pathname={location.pathname}
+      isInfoPanelAvailable={isInfoPanelAvailable}
+    >
       {children}
     </Section>
   );

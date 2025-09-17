@@ -27,7 +27,7 @@
 import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
-import { isMobile } from "react-device-detect";
+import { isMobile } from "../../../utils";
 import { ReactSVG } from "react-svg";
 import { Checkbox } from "../../checkbox";
 import {
@@ -123,7 +123,7 @@ export const FolderTile = ({
   };
 
   const onFolderIconClick = () => {
-    if (!isMobile) return;
+    if (!isMobile()) return;
     if (onSelect) {
       onSelect(true, item);
     }
@@ -322,6 +322,8 @@ export const FolderTile = ({
             ref={cmRef}
             header={contextMenuHeader}
             withBackdrop
+            ignoreChangeView={isMobile()}
+            headerOnlyMobile
           />
         </div>
       </div>

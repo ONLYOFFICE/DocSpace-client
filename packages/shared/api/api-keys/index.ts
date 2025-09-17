@@ -27,10 +27,11 @@
 import { request } from "../client";
 import { TApiKey, TApiKeyParamsRequest, TApiKeyRequest } from "./types";
 
-export async function getApiKeys() {
+export async function getApiKeys(signal?: AbortSignal) {
   const res = await request({
     method: "get",
     url: "/keys",
+    signal,
   });
 
   return res as TApiKey[];
@@ -67,10 +68,11 @@ export async function deleteApiKey(keyId: TApiKey["id"]) {
   return res;
 }
 
-export async function getApiKeyPermissions() {
+export async function getApiKeyPermissions(signal?: AbortSignal) {
   const res = await request({
     method: "get",
     url: "/keys/permissions",
+    signal,
   });
 
   return res as string[];

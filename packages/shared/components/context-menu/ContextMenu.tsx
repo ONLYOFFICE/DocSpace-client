@@ -61,6 +61,7 @@ const ContextMenu = (props: ContextMenuProps) => {
   const [model, setModel] = React.useState<ContextMenuModel[] | null>(null);
   const [changeView, setChangeView] = React.useState(false);
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
+  const [menuHovered, setMenuHovered] = React.useState(false);
   const [mobileSubMenuItems, setMobileSubMenuItems] = React.useState<
     ContextMenuModel[] | undefined
   >([]);
@@ -115,6 +116,11 @@ const ContextMenu = (props: ContextMenuProps) => {
 
   const onMenuMouseEnter = () => {
     setResetMenu(false);
+    setMenuHovered(true);
+  };
+
+  const onMenuMouseLeave = () => {
+    setMenuHovered(false);
   };
 
   const show = React.useCallback(
@@ -528,7 +534,7 @@ const ContextMenu = (props: ContextMenuProps) => {
         className={classNames(styles.contextMenu, {
           [styles.isRoom]: isRoom,
           [styles.coverExist]: isCoverExist,
-          [styles.isIconExist]: isIconExist,
+          [styles.isIconExist]: isIconExist || showMobileMenu,
           [styles.fillIcon]: fillIcon,
           [styles.changeView]: changeView,
         })}
@@ -551,6 +557,7 @@ const ContextMenu = (props: ContextMenuProps) => {
             style={style}
             onClick={onMenuClick}
             onMouseEnter={onMenuMouseEnter}
+            onMouseLeave={onMenuMouseLeave}
           >
             {changeView && (withHeader || isHeaderMobileSubMenu) ? (
               <div className="contextmenu-header">
@@ -641,6 +648,7 @@ const ContextMenu = (props: ContextMenuProps) => {
                 changeView={changeView}
                 withHeader={withHeader}
                 maxHeightLowerSubmenu={maxHeightLowerSubmenu}
+                menuHovered={menuHovered}
               />
             )}
           </div>

@@ -17,7 +17,7 @@
     "test:e2e:docker:start": "docker-compose run --rm tests-local npx playwright test",
     "test:e2e:docker:clear": "docker rmi tests",
     "lint": "eslint ./src --max-warnings=0",
-    "lint:fix": "eslint-interactive ./src --fix",
+    "lint:fix": "eslint ./src --fix",
     "tsc": "tsc"
   },
   "dependencies": {
@@ -127,7 +127,6 @@
     "typescript-eslint": "^8.15.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-import-resolver-webpack": "0.13.9",
-    "eslint-interactive": "11.1.0",
     "eslint-plugin-import": "2.31.0",
     "eslint-plugin-jsx-a11y": "6.10.0",
     "eslint-plugin-prettier": "5.2.1",

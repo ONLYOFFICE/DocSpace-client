@@ -34,7 +34,6 @@ import {
   iconSize64,
   iconSize96,
 } from "@docspace/shared/utils/image-helpers";
-import type { TTranslation } from "@docspace/shared/types";
 
 export const getIconBySize = (path: string, size: number = 32) => {
   const getOrDefault = (container: TIconContainer): string => {
@@ -100,19 +99,6 @@ export const getRoomsIcon = (
   }
 
   return getIconBySize(path, size);
-};
-
-export const setDocumentTitle = (t: TTranslation, titleI18nKey: string) => {
-  let title;
-  const organizationName = t("Common:OrganizationName");
-
-  if (titleI18nKey) {
-    title = `${t(titleI18nKey)} - ${organizationName}`;
-  } else {
-    title = organizationName;
-  }
-
-  document.title = title;
 };
 
 export const getThemeClass = (

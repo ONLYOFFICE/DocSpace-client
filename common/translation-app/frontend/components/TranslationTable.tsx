@@ -528,6 +528,7 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
     setContextMenu(null);
     // Use function form of setState to ensure we're working with the latest state
     setIsRenameModalOpen(() => true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeKeyPath]);
 
   // Handle move key action
@@ -536,6 +537,7 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
     setContextMenu(null);
     // Use function form of setState to ensure we're working with the latest state
     setIsMoveModalOpen(() => true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeKeyPath]);
 
   // Handle delete key action
@@ -544,6 +546,7 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
     setContextMenu(null);
     // Use function form of setState to ensure we're working with the latest state
     setIsDeleteModalOpen(() => true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeKeyPath]);
 
   // Handle find in Figma action
@@ -572,6 +575,7 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
 
     // Open the key info modal
     setIsKeyInfoModalOpen(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeKeyPath]);
 
   // Track state for pagination and URL selection

@@ -34,7 +34,7 @@ import { Link } from "@docspace/shared/components/link";
 import { Slider } from "@docspace/shared/components/slider";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { toastr } from "@docspace/shared/components/toast";
-import { size } from "@docspace/shared/utils";
+import { isMobileDevice, size } from "@docspace/shared/utils";
 import isEqual from "lodash/isEqual";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
@@ -43,6 +43,8 @@ import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorag
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import PasswordLoader from "../sub-components/loaders/password-loader";
 import { LearnMoreWrapper } from "../StyledSecurity";
+import useSecurity from "../useSecurity";
+import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -78,12 +80,13 @@ const PasswordStrength = (props) => {
     t,
     setPortalPasswordSettings,
     passwordSettings,
-    isInit,
     currentColorScheme,
     passwordStrengthSettingsUrl,
     currentDeviceType,
-    getPortalPasswordSettings,
     onSettingsSkeletonNotShown,
+    settingsStore,
+    tfaStore,
+    setup,
   } = props;
 
   const navigate = useNavigate();
@@ -95,18 +98,21 @@ const PasswordStrength = (props) => {
   const [useSpecialSymbols, setUseSpecialSymbols] = useState(false);
 
   const [showReminder, setShowReminder] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+
+  const defaultProps = createDefaultHookSettingsProps({
+    settingsStore,
+    tfaStore,
+    setup,
+  });
+
+  const { getSecurityInitialValue } = useSecurity(defaultProps.security);
 
   const checkWidth = () => {
     window.innerWidth > size.mobile &&
       location.pathname.includes("password") &&
       navigate("/portal-settings/security/access-portal");
-  };
-
-  const load = async () => {
-    if (!isInit) await getPortalPasswordSettings();
-    setIsLoading(true);
   };
 
   const getSettingsFromDefault = () => {
@@ -145,12 +151,18 @@ const PasswordStrength = (props) => {
 
   useEffect(() => {
     if (!onSettingsSkeletonNotShown) return;
-    if (!(currentDeviceType !== DeviceType.desktop && !isLoading))
+    if (!(currentDeviceType !== DeviceType.desktop))
       onSettingsSkeletonNotShown("PasswordStrength");
-  }, [currentDeviceType, isLoading, onSettingsSkeletonNotShown]);
+  }, [currentDeviceType, onSettingsSkeletonNotShown]);
 
   useEffect(() => {
-    load();
+    if (isMobileDevice()) {
+      getSecurityInitialValue();
+      setIsLoaded(true);
+    }
+  }, [isMobileDevice]);
+
+  useEffect(() => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
 
@@ -158,7 +170,7 @@ const PasswordStrength = (props) => {
   }, []);
 
   useEffect(() => {
-    if (!isLoading || !passwordSettings) return;
+    if (!passwordSettings) return;
     const currentSettings = getFromSessionStorage("currentPasswordSettings");
     const defaultSettings = getFromSessionStorage("defaultPasswordSettings");
 
@@ -167,10 +179,9 @@ const PasswordStrength = (props) => {
     } else {
       getSettingsFromDefault();
     }
-  }, [isLoading, passwordSettings]);
+  }, [passwordSettings]);
 
   useEffect(() => {
-    if (!isLoading) return;
     const defaultSettings = getFromSessionStorage("defaultPasswordSettings");
 
     const newSettings = {
@@ -246,7 +257,7 @@ const PasswordStrength = (props) => {
     setShowReminder(false);
   };
 
-  if (currentDeviceType !== DeviceType.desktop && !isLoading) {
+  if (currentDeviceType !== DeviceType.desktop && !isLoaded) {
     return <PasswordLoader />;
   }
 
@@ -338,24 +349,25 @@ const PasswordStrength = (props) => {
   );
 };
 
-export const PasswordStrengthSection = inject(({ settingsStore, setup }) => {
-  const {
-    setPortalPasswordSettings,
-    passwordSettings,
-    currentColorScheme,
-    passwordStrengthSettingsUrl,
-    currentDeviceType,
-    getPortalPasswordSettings,
-  } = settingsStore;
-  const { isInit } = setup;
+export const PasswordStrengthSection = inject(
+  ({ settingsStore, tfaStore, setup }) => {
+    const {
+      setPortalPasswordSettings,
+      passwordSettings,
+      currentColorScheme,
+      passwordStrengthSettingsUrl,
+      currentDeviceType,
+    } = settingsStore;
 
-  return {
-    setPortalPasswordSettings,
-    passwordSettings,
-    isInit,
-    currentColorScheme,
-    passwordStrengthSettingsUrl,
-    currentDeviceType,
-    getPortalPasswordSettings,
-  };
-})(withTranslation(["Settings", "Common"])(observer(PasswordStrength)));
+    return {
+      setPortalPasswordSettings,
+      passwordSettings,
+      currentColorScheme,
+      passwordStrengthSettingsUrl,
+      currentDeviceType,
+      settingsStore,
+      tfaStore,
+      setup,
+    };
+  },
+)(withTranslation(["Settings", "Common"])(observer(PasswordStrength)));

@@ -206,6 +206,7 @@ class ConsumerModalDialog extends React.Component {
       smsclUrl,
       firebaseUrl,
       appleIDUrl,
+      weixinUrl,
       telegramUrl,
       wordpressUrl,
       awsUrl,
@@ -243,6 +244,8 @@ class ConsumerModalDialog extends React.Component {
         return firebaseUrl;
       case "appleID":
         return appleIDUrl;
+      case "weixin":
+        return weixinUrl;
       case "telegram":
         return telegramUrl;
       case "wordpress":
@@ -388,6 +391,7 @@ export default inject(({ setup, settingsStore }) => {
     smsclUrl,
     firebaseUrl,
     appleIDUrl,
+    weixinUrl,
     telegramUrl,
     wordpressUrl,
     awsUrl,
@@ -418,6 +422,7 @@ export default inject(({ setup, settingsStore }) => {
     smsclUrl,
     firebaseUrl,
     appleIDUrl,
+    weixinUrl,
     telegramUrl,
     wordpressUrl,
     awsUrl,

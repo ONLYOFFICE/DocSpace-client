@@ -57,29 +57,47 @@ const StyledBox = styled.div.attrs(injectDefaultTheme)`
   box-sizing: border-box;
 
   .consumer-icon {
-    ${(props) =>
-      !props.theme.isBase &&
+    ${({ theme, isLinkedIn, isWeixin, isTelegram }) =>
+      !theme.isBase &&
       css`
         path {
           fill: ${globalColors.white};
           opacity: 1;
         }
-        ${props.isLinkedIn &&
+
+        ${isLinkedIn &&
         css`
-          path:nth-child(8) {
+          path:nth-child(8),
+          path:nth-child(9) {
             fill: ${globalColors.black};
             opacity: 1;
           }
-          path:nth-child(9) {
+        `}
+
+        ${isWeixin &&
+        css`
+          path:nth-child(11),
+          path:nth-child(12),
+          path:nth-child(13),
+          path:nth-child(14) {
+            fill: ${globalColors.black};
+            opacity: 1;
+          }
+        `}
+
+        ${isTelegram &&
+        css`
+          path:nth-child(11),
+          path:nth-child(12) {
             fill: ${globalColors.black};
             opacity: 1;
           }
         `}
       `}
 
-    ${(props) =>
-      !props.isThirdPartyAvailable &&
-      props.canSet &&
+    ${({ isThirdPartyAvailable, canSet }) =>
+      !isThirdPartyAvailable &&
+      canSet &&
       css`
         path {
           opacity: 0.5;
@@ -105,6 +123,8 @@ const ConsumerItem = ({
         <StyledBox
           canSet={consumer.canSet}
           isLinkedIn={consumer.name === "linkedin"}
+          isWeixin={consumer.name === "weixin"}
+          isTelegram={consumer.name === "telegram"}
           isThirdPartyAvailable={isThirdPartyAvailable}
         >
           {logo ? (

@@ -75,6 +75,8 @@ export const CategoryType = Object.freeze({
   Accounts: 9,
   PublicRoom: 10,
   Chat: 11,
+  Groups: 12,
+  Guests: 13,
 });
 
 /**

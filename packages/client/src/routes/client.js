@@ -38,7 +38,7 @@ import PublicRoute from "../components/PublicRouteWrapper";
 import ErrorBoundary from "../components/ErrorBoundaryWrapper";
 
 import { profileClientRoutes, generalClientRoutes } from "./general";
-import { contanctsRoutes } from "./contacts";
+import { contactsRoutes } from "./contacts";
 
 /**
  * @type {import("react-router").RouteObject[]}
@@ -280,7 +280,7 @@ const ClientRoutes = [
               </PrivateRoute>
             ),
           },
-          ...contanctsRoutes,
+          ...contactsRoutes,
           ...profileClientRoutes,
         ],
       },

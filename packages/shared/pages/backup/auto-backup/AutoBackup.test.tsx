@@ -172,6 +172,7 @@ describe("AutomaticBackup", () => {
     isManagement: false,
     backupProgressError: "",
     setBackupProgressError: jest.fn(),
+    setDefaultFolderId: jest.fn(),
   };
 
   beforeEach(() => {

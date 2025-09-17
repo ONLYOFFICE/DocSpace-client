@@ -200,6 +200,7 @@ export default inject<
       backupPageEnable,
 
       setIsInited,
+      setDefaultFolderId,
     } = backup;
 
     const isEnableAuto = backupPageEnable ?? false;
@@ -309,6 +310,7 @@ export default inject<
       setConnectDialogVisible,
       setDeleteThirdPartyDialogVisible,
       setIsInited,
+      setDefaultFolderId,
     };
   },
 )(observer(AutoBackupWrapper as React.FC<ExternalAutoBackupWrapperProps>));

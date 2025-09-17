@@ -75,6 +75,7 @@ describe("<Badges />", () => {
       CreateRoomFrom: true,
       CopyLink: true,
       Embed: true,
+      Vectorization: false,
     },
   };
 

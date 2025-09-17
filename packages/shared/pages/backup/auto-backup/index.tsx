@@ -549,7 +549,7 @@ const AutomaticBackup = ({
             </Text>
             {isCheckedThirdParty ? (
               <ThirdPartyModule
-                setDefaultFolderId={setDefaultFolderId}
+                {...(setDefaultFolderId && { setDefaultFolderId })}
                 setSelectedFolder={setSelectedFolder}
                 defaultStorageType={defaultStorageType}
                 defaultFolderId={defaultFolderId}

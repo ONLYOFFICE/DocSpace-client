@@ -27,6 +27,7 @@
 import React, { useEffect, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useLocation } from "react-router";
+import { useTranslation } from "react-i18next";
 
 import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
 import { DeviceType } from "@docspace/shared/enums";
@@ -56,23 +57,9 @@ import usePayments from "../categories/payments/usePayments";
 import useServices from "../categories/services/useServices";
 import { createDefaultHookSettingsProps } from "../utils/createDefaultHookSettingsProps";
 import { isMainSectionChange } from "../utils/isMainSectionChange";
+import { TView, ViewProps } from "./View.types";
 
 const CURRENT_VIEW_STORAGE_KEY = "currentView";
-
-type TView =
-  | "customization"
-  | "security"
-  | "backup"
-  | "restore"
-  | "integration"
-  | "data-import"
-  | "management"
-  | "developer-tools"
-  | "delete-data"
-  | "payments"
-  | "bonus"
-  | "services"
-  | "";
 
 const View = ({
   setIsPortalSettingsLoading,
@@ -100,8 +87,9 @@ const View = ({
   currentTariffStatusStore,
 
   clearAbortControllerArr,
-}: any) => {
+}: ViewProps) => {
   const location = useLocation();
+  const { t } = useTranslation();
 
   const [currentView, setCurrentView] = React.useState<TView>(() => {
     return (localStorage.getItem(CURRENT_VIEW_STORAGE_KEY) as TView) || "";
@@ -284,7 +272,7 @@ const View = ({
           await getPaymentsInitialValue();
         } else if (isBonusPage) {
           view = "bonus";
-          await standaloneInit();
+          await standaloneInit(t);
         } else if (isServicesPage) {
           view = "services";
           await getServicesInitialValue();

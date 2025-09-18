@@ -52,7 +52,7 @@ export const useUserStatisticsDialog = ({
     }
   };
 
-  const usersStatistics = licenseQuota
+  const usersStatistics = licenseQuota?.licenseTypeByUsers
     ? {
         limitUsers: licenseQuota.license.users_count,
         totalUsers: licenseQuota.totalUsers,

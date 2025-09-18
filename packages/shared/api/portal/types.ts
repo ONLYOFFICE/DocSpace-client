@@ -202,6 +202,7 @@ export type TLicenseQuota = {
   totalUsers: number;
   portalUsers: number;
   externalUsers: number;
+  licenseTypeByUsers: boolean;
 };
 
 export type TCustomerInfo = {

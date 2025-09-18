@@ -28,10 +28,11 @@ import { useMemo, FC } from "react";
 import { useTranslation } from "react-i18next";
 
 import { isFile } from "../../../utils/typeGuards";
-import { ShareAccessRights } from "../../../enums";
+import { EmployeeStatus, ShareAccessRights } from "../../../enums";
 import PeopleSelector from "../../../selectors/People";
 import { ShareLinkService } from "../../../services/share-link.service";
 import type { TShareToUser } from "../../../api/files/types";
+import Filter from "../../../api/people/filter";
 
 import type { TAccessRight, TOnSubmit } from "../../selector/Selector.types";
 
@@ -98,8 +99,6 @@ export const ShareSelector: FC<ShareSelectorProps> = ({
     return accessOptions.find((a) => a.access === accessDefault) || null;
   }, [accessOptions]);
 
-  const invitedUsersArray: string[] = [];
-
   const accessRightsProps = withAccessRights
     ? ({
         withAccessRights: true,
@@ -109,6 +108,14 @@ export const ShareSelector: FC<ShareSelectorProps> = ({
       } as const)
     : {};
 
+  const targetEntityType = isFile(item) ? "file" : "folder";
+
+  const filter = useMemo(() => {
+    const temp = Filter.getDefault();
+    temp.employeeStatus = EmployeeStatus.Active;
+    return temp;
+  }, []);
+
   return (
     <PeopleSelector
       withHeader
@@ -117,14 +124,17 @@ export const ShareSelector: FC<ShareSelectorProps> = ({
       isMultiSelect
       disableDisabledUsers
       useAside
+      filter={filter}
       withBlur={false}
+      roomId={item.id}
       withoutBackground={false}
       onClose={onClose}
       submitButtonLabel={t("Common:SelectAction")}
       disableSubmitButton={false}
       onSubmit={handleSubmit}
-      disableInvitedUsers={invitedUsersArray}
+      targetEntityType={targetEntityType}
       data-test-id="share_to_people_selector"
+      disabledInvitedText={t("Common:Shared")}
       {...accessRightsProps}
       headerProps={{
         headerLabel: t("Common:Contacts"),

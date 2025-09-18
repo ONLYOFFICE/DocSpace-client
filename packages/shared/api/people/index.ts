@@ -51,20 +51,18 @@ import { TOperation } from "../files/filter";
 export async function getUserList(
   filter = Filter.getDefault(),
   signal?: AbortSignal,
-  searchArea: AccountsSearchArea = AccountsSearchArea.People,
 ) {
   let params = "";
-  const isGroups = searchArea === AccountsSearchArea.Groups;
 
   if (filter) {
     checkFilterInstance(filter, Filter);
 
     const search = filter.toApiUrlParams();
 
-    params = isGroups ? `?${search}` : `/filter?${search}`;
+    params = `/filter?${search}`;
   }
 
-  const url = isGroups ? `/group${params}` : `/people${params}`;
+  const url = `/people${params}`;
 
   const res = (await request({
     method: "get",
@@ -627,6 +625,7 @@ export async function getMembersList(
   roomId: string | number,
   filter = Filter.getDefault(),
   signal?: AbortSignal,
+  targetEntityType: "file" | "folder" | "room" = "room",
 ) {
   let params = "";
 
@@ -648,13 +647,13 @@ export async function getMembersList(
 
   switch (searchArea) {
     case AccountsSearchArea.People:
-      url = `people/room/${roomId}${params}`;
+      url = `people/${targetEntityType}/${roomId}${params}`;
       break;
     case AccountsSearchArea.Groups:
-      url = `group/room/${roomId}${params}`;
+      url = `group/${targetEntityType}/${roomId}${params}`;
       break;
     default:
-      url = `accounts/room/${roomId}/search${params}`;
+      url = `accounts/${targetEntityType}/${roomId}/search${params}`;
   }
 
   const res = (await request({

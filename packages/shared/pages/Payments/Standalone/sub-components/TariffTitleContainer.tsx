@@ -118,30 +118,40 @@ export const TariffTitleContainer = ({
       <div className={styles.paymentsSubscription}>
         <div className={styles.title}>
           <Text fontWeight={600} fontSize="14px" as="span">
-            <Trans
-              i18nKey="ActivateTariffDescrUsers"
-              values={{
+            {usersStatistics ? (
+              <Trans
+                i18nKey="ActivateTariffDescrUsers"
+                values={{
+                  productName: t("Common:ProductName"),
+                  organizationName: logoText,
+                  license: isDeveloper
+                    ? t("Common:DeveloperLicense")
+                    : t("Common:EnterpriseLicense"),
+                  editingCount: usersStatistics.portalUsers ?? 0,
+                  limit: usersStatistics.limitUsers ?? 0,
+                }}
+                t={t}
+                ns="Common"
+                components={{
+                  1: (
+                    <Link
+                      color="accent"
+                      onClick={openUserStatistics}
+                      fontWeight="600"
+                      dataTestId="open_user_statistics_link"
+                    />
+                  ),
+                }}
+              />
+            ) : (
+              t("ActivateTariffDescrConnections", {
                 productName: t("Common:ProductName"),
                 organizationName: logoText,
                 license: isDeveloper
                   ? t("Common:DeveloperLicense")
                   : t("Common:EnterpriseLicense"),
-                editingCount: usersStatistics?.portalUsers ?? 0,
-                limit: usersStatistics?.limitUsers ?? 0,
-              }}
-              t={t}
-              ns="Common"
-              components={{
-                1: (
-                  <Link
-                    color="accent"
-                    onClick={openUserStatistics}
-                    fontWeight="600"
-                    dataTestId="open_user_statistics_link"
-                  />
-                ),
-              }}
-            />
+              })
+            )}
           </Text>{" "}
           {!isLicenseDateExpired ? (
             <Text fontSize="13px" as="span">

@@ -75,9 +75,6 @@ const IntegrationWrapper = (props) => {
     ldapStore,
   });
 
-  console.log("====");
-  console.log(initAISettings, setIsInit);
-
   const {
     openThirdPartyModal,
     documentServiceLocationData,

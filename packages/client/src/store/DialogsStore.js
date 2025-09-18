@@ -253,6 +253,11 @@ class DialogsStore {
     onClose: null,
   };
 
+  aiAgentSelectorDialogProps = {
+    visible: false,
+    file: null,
+  };
+
   newFilesPanelFolderId = null;
 
   formFillingTipsVisible = false;
@@ -338,6 +343,14 @@ class DialogsStore {
 
   setNewFilesPanelFolderId = (folderId) => {
     this.newFilesPanelFolderId = folderId;
+  };
+
+  setAiAgentSelectorDialogProps = (visible, file) => {
+    this.aiAgentSelectorDialogProps = {
+      visible,
+      file:
+        file === null ? null : (file ?? this.aiAgentSelectorDialogProps.file),
+    };
   };
 
   setEditRoomDialogProps = (props) => {

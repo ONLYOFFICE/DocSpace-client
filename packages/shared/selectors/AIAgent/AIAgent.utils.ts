@@ -24,50 +24,65 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { MessageStoreContextProvider } from "./store/messageStore";
-import { ChatStoreContextProvider } from "./store/chatStore";
+import { FolderType } from "../../enums";
+import { TRoom } from "../../api/rooms/types";
+import { TSelectorItem } from "../../components/selector";
 
-import { ChatProps } from "./Chat.types";
+export const convertToItems = (folders: TRoom[]) => {
+  const items: TSelectorItem[] = folders.map((folder) => {
+    const {
+      id,
+      title,
+      roomType,
+      logo,
+      shared,
+      parentId,
+      filesCount,
+      foldersCount,
+      rootFolderType,
+      security,
 
-import ChatContainer from "./components/chat-container";
-import ChatHeader from "./components/chat-header";
-import ChatMessageBody from "./components/chat-message-body";
-import ChatInput from "./components/chat-input";
+      denyDownload,
+      indexing,
+      lifetime,
+      watermark,
+      tags,
+      quotaLimit,
+    } = folder;
 
-import { CHAT_SUPPORTED_FORMATS } from "./Chat.constants";
+    const icon = logo.medium;
+    const iconOriginal = logo.original;
+    const { color } = logo;
+    const cover = logo?.cover;
+    const isTemplate = rootFolderType === FolderType.RoomTemplates;
 
-export { CHAT_SUPPORTED_FORMATS };
+    return {
+      id,
+      label: title,
+      icon,
+      iconOriginal,
+      color,
+      roomType,
+      shared,
+      isFolder: true,
+      parentId,
+      filesCount,
+      foldersCount,
+      rootFolderType,
+      security,
+      cover,
+      isTemplate,
+      logo,
 
-const Chat = ({
-  roomId,
-  userAvatar,
-  selectedModel,
-  isLoading,
+      title,
+      denyDownload,
+      indexing,
+      lifetime,
+      watermark,
+      tags,
+      quotaLimit,
+    };
+  });
 
-  getIcon,
-  attachmentFile,
-  clearAttachmentFile,
-}: ChatProps) => {
-  return (
-    <ChatStoreContextProvider roomId={roomId}>
-      <MessageStoreContextProvider roomId={roomId}>
-        <ChatContainer>
-          <ChatHeader selectedModel={selectedModel} isLoading={isLoading} />
-          <ChatMessageBody
-            userAvatar={userAvatar}
-            isLoading={isLoading}
-            getIcon={getIcon}
-          />
-          <ChatInput
-            attachmentFile={attachmentFile}
-            clearAttachmentFile={clearAttachmentFile}
-            isLoading={isLoading}
-            getIcon={getIcon}
-          />
-        </ChatContainer>
-      </MessageStoreContextProvider>
-    </ChatStoreContextProvider>
-  );
+  return items;
 };
-
-export default Chat;

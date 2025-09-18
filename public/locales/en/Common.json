@@ -62,6 +62,7 @@
   "Archive": "Archive",
   "ArchivedRoomAction": "The room '{{name}}' is archived",
   "Archives": "Archives",
+  "AskAI": "Ask AI",
   "Favorites": "Favorites",
   "ArchivingData": "Archiving data",
   "Assign": "Assign",
@@ -979,5 +980,11 @@
   "PreparingForAIInfo": "We’re analyzing and processing this file so that it can be used by AI as part of the knowledge base. Once preparation is complete, the file will be available for search, summaries, and other AI-powered features.",
   "PreparationForAIFailed": "Preparation failed",
   "PreparationForAIFailedInfo": "Couldn’t prepare the file for AI — run preparation again.",
-  "TryAgain": "Try again"
+  "TryAgain": "Try again",
+  "AskAIChat": "Ask AI-Chat",
+  "ChooseAIAgent": "Choose an AI agent",
+  "ChooseAIAgentDescription": "Select the agent where you want to chat with AI about the selected file. You can pick an existing agent or create a new one.",
+  "CreateAIAgent": "Create AI agent",
+  "NoAIAgents": "No AI agents yet",
+  "NoAIAgentsDescription": "You haven’t created any agents for AI chat. Create a new agent to start chatting with AI about your files."
 }

@@ -83,6 +83,7 @@ import HelpCenterReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
 import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/icons/16/custom-filter.react.svg?url";
 import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
+import AISvgUrl from "PUBLIC_DIR/images/icons/16/AI.svg?url";
 
 import CreateTemplateSvgUrl from "PUBLIC_DIR/images/template.react.svg?url";
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
@@ -1599,8 +1600,10 @@ class ContextOptionsStore {
 
     const hasInfoPanel = contextOptions.includes("show-info");
 
+    const withAI = contextOptions.includes("ask-ai");
+
     // const emailSendIsDisabled = true;
-    const showSeparator0 = hasInfoPanel || !isMedia; // || !emailSendIsDisabled;
+    const showSeparator0 = hasInfoPanel || !isMedia || withAI; // || !emailSendIsDisabled;
 
     const separator0 = showSeparator0
       ? {
@@ -1855,6 +1858,19 @@ class ContextOptionsStore {
       ...pinOptions,
       ...muteOptions,
       separator0,
+      {
+        id: "option_ask-ai",
+        key: "ask-ai",
+        label: t("Common:AskAI"),
+        icon: AISvgUrl,
+        onClick: () =>
+          this.dialogsStore.setAiAgentSelectorDialogProps(true, item),
+        disabled: false,
+      },
+      {
+        key: "separator6",
+        isSeparator: true,
+      },
       {
         id: "option_submit-to-gallery",
         key: "submit-to-gallery",
@@ -2475,8 +2491,8 @@ class ContextOptionsStore {
       (option) => !keysToRemove.includes(option.key),
     );
 
-    const separatorIndex = resultOptions.findIndex(
-      (option) => option.key === "separator0",
+    const separatorIndex = resultOptions.findIndex((option) =>
+      withAI ? option.key === "separator6" : option.key === "separator0",
     );
     const insertIndex = separatorIndex !== -1 ? separatorIndex + 1 : 1;
 

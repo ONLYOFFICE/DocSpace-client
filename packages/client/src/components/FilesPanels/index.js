@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useMemo, useState, useCallback, useEffect } from "react";
-
+import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -38,6 +38,10 @@ import {
 import { StopFillingDialog } from "@docspace/shared/dialogs/stop-filling";
 import { Guidance } from "@docspace/shared/components/guidance";
 import { getFormFillingTipsStorageName } from "@docspace/shared/utils";
+import AIAgentsSelector from "@docspace/shared/selectors/AIAgent";
+
+import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import { CategoryType } from "SRC_DIR/helpers/constants";
 
 import {
   UploadPanel,
@@ -93,6 +97,7 @@ import FillingStatusPanel from "../panels/FillingStatusPanel";
 import TemplateAccessSettingsPanel from "../panels/TemplateAccessSettingsPanel";
 import RemoveUserConfirmationDialog from "../dialogs/RemoveUserConfirmationDialog";
 import AssignRoles from "../dialogs/AssignRoles";
+import FilesFilter from "@docspace/shared/api/files/filter";
 
 const Panels = (props) => {
   const {
@@ -172,7 +177,11 @@ const Panels = (props) => {
     assignRolesDialogVisible,
     socialAuthWelcomeDialogVisible,
     extsFilesVectorized,
+    aiAgentSelectorDialogProps,
+    setAiAgentSelectorDialogProps,
   } = props;
+
+  const navigate = useNavigate();
 
   const [sharePDFForm, setSharePDFForm] = useState({
     visible: false,
@@ -339,6 +348,28 @@ const Panels = (props) => {
         isMultiSelect
         withRecentTreeFolder
         withFavoritesTreeFolder
+      />
+    ),
+
+    aiAgentSelectorDialogProps.visible && (
+      <AIAgentsSelector
+        key="ai-agents-selector"
+        onClose={() => setAiAgentSelectorDialogProps(false, null)}
+        withPadding
+        withSearch
+        onSubmit={(items) => {
+          const id = items[0]?.id;
+
+          setAiAgentSelectorDialogProps(false);
+
+          const url = getCategoryUrl(CategoryType.Chat, id);
+
+          const filter = new FilesFilter();
+
+          filter.folder = id;
+
+          navigate(`${url}?${filter.toUrlParams()}`);
+        }}
       />
     ),
 
@@ -529,6 +560,9 @@ export default inject(
       removeUserConfirmation,
       assignRolesDialogData,
       socialAuthWelcomeDialogVisible,
+
+      aiAgentSelectorDialogProps,
+      setAiAgentSelectorDialogProps,
     } = dialogsStore;
 
     const { viewAs } = filesStore;
@@ -650,6 +684,9 @@ export default inject(
       assignRolesDialogVisible: assignRolesDialogData.visible,
       socialAuthWelcomeDialogVisible,
       extsFilesVectorized,
+
+      aiAgentSelectorDialogProps,
+      setAiAgentSelectorDialogProps,
     };
   },
 )(observer(Panels));

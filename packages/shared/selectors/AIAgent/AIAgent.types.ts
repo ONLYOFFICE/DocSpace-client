@@ -24,50 +24,31 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { MessageStoreContextProvider } from "./store/messageStore";
-import { ChatStoreContextProvider } from "./store/chatStore";
+import { WithFlag } from "../../types";
+import { TRoom } from "../../api/rooms/types";
+import { TSelectorItem } from "../../components/selector/Selector.types";
 
-import { ChatProps } from "./Chat.types";
+export type TInitValue = WithFlag<
+  "withInit",
+  {
+    withInit: true;
+    initItems: TRoom[];
+    initTotal: number;
+    initHasNextPage: boolean;
+    initSearchValue?: string;
+  }
+>;
 
-import ChatContainer from "./components/chat-container";
-import ChatHeader from "./components/chat-header";
-import ChatMessageBody from "./components/chat-message-body";
-import ChatInput from "./components/chat-input";
+export type AIAgentSelectorProps = {
+  id?: string;
+  className?: string;
+  style?: React.CSSProperties;
 
-import { CHAT_SUPPORTED_FORMATS } from "./Chat.constants";
+  onSubmit: (items: TSelectorItem[]) => void | Promise<void>;
+  excludeItems?: (number | string | undefined)[];
+  setIsDataReady?: (value: boolean) => void;
 
-export { CHAT_SUPPORTED_FORMATS };
+  withPadding?: boolean;
 
-const Chat = ({
-  roomId,
-  userAvatar,
-  selectedModel,
-  isLoading,
-
-  getIcon,
-  attachmentFile,
-  clearAttachmentFile,
-}: ChatProps) => {
-  return (
-    <ChatStoreContextProvider roomId={roomId}>
-      <MessageStoreContextProvider roomId={roomId}>
-        <ChatContainer>
-          <ChatHeader selectedModel={selectedModel} isLoading={isLoading} />
-          <ChatMessageBody
-            userAvatar={userAvatar}
-            isLoading={isLoading}
-            getIcon={getIcon}
-          />
-          <ChatInput
-            attachmentFile={attachmentFile}
-            clearAttachmentFile={clearAttachmentFile}
-            isLoading={isLoading}
-            getIcon={getIcon}
-          />
-        </ChatContainer>
-      </MessageStoreContextProvider>
-    </ChatStoreContextProvider>
-  );
-};
-
-export default Chat;
+  onClose: () => void;
+} & TInitValue;

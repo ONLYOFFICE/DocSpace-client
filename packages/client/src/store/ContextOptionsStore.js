@@ -487,6 +487,7 @@ class ContextOptionsStore {
     const isArchive = item.rootFolderType === FolderType.Archive;
 
     const { href } = item;
+
     const sharedItem = navigationPath.find((r) => r.shared);
 
     const isShared = shared || sharedItem || item.shared;
@@ -543,6 +544,8 @@ class ContextOptionsStore {
       item.isRoom || item.isFolder,
       needConvert,
       canOpenPlayer,
+      "",
+      item.roomType === RoomsType.AIRoom,
     );
 
     copy(url);

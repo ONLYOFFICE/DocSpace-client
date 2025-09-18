@@ -3406,10 +3406,20 @@ class FilesStore {
     return this.filter.search;
   }
 
-  getItemUrl = (id, isFolder, needConvert, canOpenPlayer, shareKey) => {
+  getItemUrl = (
+    id,
+    isFolder,
+    needConvert,
+    canOpenPlayer,
+    shareKey,
+    isAiRoom,
+  ) => {
     const proxyURL = window.ClientConfig?.proxy?.url || window.location.origin;
 
-    const url = getCategoryUrl(this.categoryType, id);
+    const url = getCategoryUrl(
+      isAiRoom ? CategoryType.Chat : this.categoryType,
+      id,
+    );
 
     if (canOpenPlayer) {
       if (this.publicRoomStore.isPublicRoom) {
@@ -3556,7 +3566,16 @@ class FilesStore {
 
       const { isRecycleBinFolder } = this.treeFoldersStore;
 
-      const folderUrl = isFolder && this.getItemUrl(id, isFolder, false, false);
+      const folderUrl =
+        isFolder &&
+        this.getItemUrl(
+          id,
+          isFolder,
+          false,
+          false,
+          "",
+          roomType === RoomsType.AIRoom,
+        );
 
       const docUrl =
         !canOpenPlayer &&

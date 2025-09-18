@@ -29,13 +29,13 @@ import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 import classNames from "classnames";
 
-import { Text } from "../../../../../text";
+import { Text } from "../../../../../../text";
 
-import { MessageMarkdownFieldProps } from "../../../../Chat.types";
+import { MessageMarkdownFieldProps } from "../../../../../Chat.types";
 
-import styles from "../../ChatMessageBody.module.scss";
+import styles from "../../../ChatMessageBody.module.scss";
 
-import CodeBlock from "./CodeBlock";
+import CodeBlock from "../CodeBlock";
 
 // Function to replace <think> tags with a placeholder before markdown processing
 const preprocessChatMessage = (text: string): string => {

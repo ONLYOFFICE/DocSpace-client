@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import { DeviceType, FolderType } from "../../../../enums";
@@ -44,6 +44,8 @@ const Attachment = ({
   toggleAttachment,
   getIcon,
   setSelectedFiles,
+  attachmentFile,
+  clearAttachmentFile,
 }: AttachmentProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -66,6 +68,19 @@ const Attachment = ({
       { id: Number(item.id), title: item.label, fileExst: item.fileExst },
     ]);
   };
+
+  useEffect(() => {
+    if (attachmentFile) {
+      setSelectedFiles([
+        {
+          id: Number(attachmentFile.id),
+          title: attachmentFile.title,
+          fileExst: attachmentFile.fileExst,
+        },
+      ]);
+      clearAttachmentFile();
+    }
+  }, [attachmentFile, clearAttachmentFile, setSelectedFiles]);
 
   if (!isVisible) return null;
 

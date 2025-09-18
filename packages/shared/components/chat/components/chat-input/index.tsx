@@ -47,7 +47,12 @@ import Buttons from "./Buttons";
 
 import styles from "./ChatInput.module.scss";
 
-const ChatInput = ({ getIcon, isLoading }: ChatInputProps) => {
+const ChatInput = ({
+  getIcon,
+  isLoading,
+  attachmentFile,
+  clearAttachmentFile,
+}: ChatInputProps) => {
   const { t } = useTranslation(["Common"]);
 
   const { startChat, sendMessage, currentChatId } = useMessageStore();
@@ -77,6 +82,8 @@ const ChatInput = ({ getIcon, isLoading }: ChatInputProps) => {
   const handleRemoveFile = (file: Partial<TFile>) => {
     setSelectedFiles((prev) => prev.filter((f) => f.id !== file.id));
   };
+
+  console.log(attachmentFile);
 
   const sendMessageAction = React.useCallback(async () => {
     if (!value) return;
@@ -127,11 +134,23 @@ const ChatInput = ({ getIcon, isLoading }: ChatInputProps) => {
       fetchChat(currentChatId);
     }
 
+    if (!prevSession.current) {
+      prevSession.current = currentChatId;
+
+      return;
+    }
+
     prevSession.current = currentChatId;
 
     setValue("");
     setSelectedFiles([]);
-  }, [currentChatId, currentChat, fetchChat]);
+  }, [
+    currentChatId,
+    currentChat,
+    attachmentFile,
+    clearAttachmentFile,
+    fetchChat,
+  ]);
 
   React.useEffect(() => {
     const onResize = () => {
@@ -198,6 +217,8 @@ const ChatInput = ({ getIcon, isLoading }: ChatInputProps) => {
         toggleAttachment={toggleFilesSelector}
         getIcon={getIcon}
         setSelectedFiles={setSelectedFiles}
+        attachmentFile={attachmentFile}
+        clearAttachmentFile={clearAttachmentFile}
       />
       <Text
         fontSize="10px"

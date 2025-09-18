@@ -152,7 +152,27 @@ const View = ({
   const isContactsPage = location.pathname.includes("accounts");
   const isProfilePage = location.pathname.includes("profile");
 
-  const [currentView, setCurrentView] = React.useState("");
+  const [currentView, setCurrentView] = React.useState(() => {
+    const type = getCategoryType(location);
+
+    if (type === CategoryType.Chat) {
+      return "chat";
+    }
+
+    if (type === CategoryType.Accounts) {
+      return "users";
+    }
+
+    if (type === CategoryType.Groups) {
+      return "groups";
+    }
+
+    if (isProfilePage) {
+      return "profile";
+    }
+
+    return "files";
+  });
   const [isLoading, setIsLoading] = React.useState(false);
 
   const prevCurrentViewRef = React.useRef(currentView);

@@ -171,8 +171,8 @@ export const ChatStoreContextProvider = ({
   const store = React.useMemo(() => new ChatStore(roomId), [roomId]);
 
   React.useEffect(() => {
-    store.fetchChats();
-  }, [store]);
+    if (roomId) store.fetchChats();
+  }, [store, roomId]);
 
   return (
     <ChatStoreContext.Provider value={store}>

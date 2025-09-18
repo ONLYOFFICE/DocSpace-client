@@ -136,6 +136,10 @@ export const getCategoryType = (location) => {
     categoryType = CategoryType.Settings;
   } else if (pathname.startsWith("/accounts")) {
     categoryType = CategoryType.Accounts;
+
+    if (pathname.indexOf("groups") > -1) {
+      categoryType = CategoryType.Groups;
+    }
   } else {
     categoryType = CategoryType.Shared;
   }

@@ -38,6 +38,7 @@ import {
   Events,
   FilterKeys,
   RoomSearchArea,
+  SearchArea,
 } from "@docspace/shared/enums";
 import SocketHelper, {
   SocketCommands,
@@ -1703,6 +1704,17 @@ class FilesStore {
           !this.publicRoomStore.isPublicRoom
         ) {
           await this.publicRoomStore.getExternalLinks(data.current.id);
+        }
+
+        if (
+          data.current.roomType === RoomsType.AIRoom &&
+          this.categoryType !== CategoryType.Chat
+        ) {
+          this.categoryType = CategoryType.Chat;
+          filterData.searchArea = SearchArea.Active;
+          const newUrl = getCategoryUrl(CategoryType.Chat, folderId);
+
+          history.pushState(null, "", `${newUrl}?${filterData.toUrlParams()}`);
         }
 
         if (newTotal > 0) {

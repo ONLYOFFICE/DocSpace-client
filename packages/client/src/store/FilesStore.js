@@ -2370,13 +2370,6 @@ class FilesStore {
         fileOptions = removeOptions(fileOptions, optionsToRemove);
       }
 
-      if (this.treeFoldersStore.isSharedWithMeFolder) {
-        fileOptions = removeOptions(fileOptions, [
-          "mark-as-favorite",
-          "remove-from-favorites",
-        ]);
-      }
-
       if (this.publicRoomStore.isPublicRoom) {
         fileOptions = removeOptions(fileOptions, [
           "separator0",
@@ -2887,13 +2880,6 @@ class FilesStore {
         "create-room-separator",
         "separator1",
         "create-room",
-      ]);
-    }
-
-    if (this.treeFoldersStore.isSharedWithMeFolder) {
-      folderOptions = removeOptions(folderOptions, [
-        "mark-as-favorite",
-        "remove-from-favorites",
       ]);
     }
 

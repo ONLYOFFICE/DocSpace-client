@@ -225,7 +225,7 @@ const TwoFactorAuth = (props) => {
     setShowReminder(false);
   };
 
-  if (currentDeviceType !== DeviceType.desktop && !isLoading) {
+  if (currentDeviceType === DeviceType.mobile && !isLoading) {
     return <TfaLoader />;
   }
 

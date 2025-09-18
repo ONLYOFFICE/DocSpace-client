@@ -221,7 +221,7 @@ const InvitationSettings = ({
   };
 
   if (
-    (currentDeviceType !== DeviceType.desktop && !isLoaded) ||
+    (currentDeviceType === DeviceType.mobile && !isLoaded) ||
     !tReady ||
     typeof allowInvitingMembers !== "boolean" ||
     typeof allowInvitingGuests !== "boolean"

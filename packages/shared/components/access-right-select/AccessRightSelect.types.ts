@@ -51,6 +51,7 @@ type PropsFromCombobox = Pick<
   | "shouldShowBackdrop"
   | "dataTestId"
   | "noSelect"
+  | "showDisabledItems"
 >;
 
 export type AccessRightSelectProps = PropsFromCombobox & {

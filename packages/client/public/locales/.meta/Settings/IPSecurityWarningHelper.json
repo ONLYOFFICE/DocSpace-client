@@ -3,7 +3,7 @@
   "content": "First, you need to specify your current IP or the IP range your current IP address belongs to, otherwise your space access will be blocked right after you save the settings. The space owner will have the space access from any IP address.",
   "content_en_sha1_hash": "25490f5125cf44c29790cae04b3c1e1a30e87500",
   "created_at": "2025-05-19T21:30:51.742Z",
-  "updated_at": "2025-08-04T07:30:01.549Z",
+  "updated_at": "2025-09-17T13:43:01.881Z",
   "comment": {
     "text": "\"This translation key is used to display a warning message when setting up IP security access. It informs users that specifying their current IP or IP range is required to access the space, and that the space owner will have access from any IP address.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
-      "line_number": 310,
+      "line_number": 323,
       "context": "<>\n <Text fontSize=\"16px\" fontWeight=\"700\" className=\"warning-text\">\n {t(\"Common:Warning\")}\n </Text>\n <Text className=\"ip-security_warning\">\n {t(\"IPSecurityWarningHelper\")}\n </Text>\n </>\n ) : null}\n \n <SaveCancelButtons",
       "module": "/packages/client"
     }

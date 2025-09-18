@@ -177,7 +177,7 @@ const AIAgentSelectorComponent = ({
   const headerSelectorProps: TSelectorHeader = {
     withHeader: true,
     headerProps: {
-      headerLabel: t("Common:AIAgents"),
+      headerLabel: t("Common:AskAIChat"),
       onCloseClick: onClose,
       isCloseable: true,
     },

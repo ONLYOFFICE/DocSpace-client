@@ -447,7 +447,7 @@ export const getOptions = (
           productName: t("Common:ProductName"),
         }),
         t("AIRoom:UploadFilesPortal", {
-          sectionNameFirst: t("Common:MyFilesSection"),
+          sectionNameFirst: t("Common:MyDocuments"),
           sectionNameSecond: t("Common:Rooms"),
         }),
         "",

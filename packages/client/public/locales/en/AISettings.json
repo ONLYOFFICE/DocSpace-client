@@ -34,6 +34,6 @@
   "ProviderRemovedSuccess": "Provider removed successfully",
   "DeleteProvider": "Delete provider",
   "DeleteProviderDescription": "Deleting this provider will revoke access for all users, and its settings will be permanently erased. To use the provider again, you will need to set it up from scratch.",
-  "MCPConnectDocSpaceDescription": "Connect {{productName}} to your data and tools.",
+  "MCPConnectDescription": "Connect {{productName}} to your data and tools.",
   "ToUseMCPAddProvider": "To use MCP servers, make sure to connect at least one provider first."
 }

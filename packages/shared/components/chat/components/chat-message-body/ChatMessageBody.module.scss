@@ -387,3 +387,9 @@
     }
   }
 }
+
+.paragraph {
+  padding: 8px 0;
+  white-space: pre-line;
+  color: var(--chat-message-color);
+}

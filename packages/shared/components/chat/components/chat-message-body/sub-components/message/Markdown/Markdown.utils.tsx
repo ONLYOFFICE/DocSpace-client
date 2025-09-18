@@ -126,15 +126,13 @@ export const createMarkdownComponents = ({
   tr: () => <tr />,
   // TODO: Chat redesign - add styles
   sup: () => <sup />,
-  // TODO: Chat redesign - add styles
   p: ({ children }) => {
     return (
       <Text
         fontSize="15px"
         lineHeight="22px"
         fontWeight={400}
-        className={styles.chatMessageTextColor}
-        style={{ whiteSpace: "pre-line" }}
+        className={classNames(styles.paragraph)}
       >
         {children as React.ReactNode}
       </Text>

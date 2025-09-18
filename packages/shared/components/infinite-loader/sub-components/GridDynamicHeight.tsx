@@ -31,25 +31,21 @@ import { RectangleSkeleton } from "../../../skeletons/rectangle";
 import { GridDynamicHeightProps } from "../InfiniteLoader.types";
 import styles from "../InfiniteLoader.module.scss";
 
-const StyledSkeletonTile = styled.div<{
-  $height?: string;
-  $minHeight?: string;
-}>`
+type SkeletonTileProps = {
+  smallPreview?: boolean;
+};
+
+const StyledSkeletonTile = styled.div<SkeletonTileProps>`
   .loader-container {
     display: flex;
     flex-direction: column;
     gap: 8px;
-
-    margin: 10px;
+    width: 100%;
+    aspect-ratio: ${(props) => (props.smallPreview ? "229 / 162" : "12 /16")};
   }
 
   .loader-title {
     width: 70%;
-  }
-
-  &.Card {
-    min-height: ${(props) => props.$minHeight || "auto"};
-    height: ${(props) => props.$height || "auto"};
   }
 `;
 
@@ -67,7 +63,6 @@ const GridDynamicHeight = ({
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
-  const heightSyncTimeoutRef = useRef<number | null>(null);
 
   const handleLoadMoreItems = useCallback(async () => {
     if (isLoadingMore || !hasMoreFiles) return;
@@ -103,165 +98,6 @@ const GridDynamicHeight = ({
     }
   }, [hasMoreFiles, isLoadingMore, handleLoadMoreItems, onScroll]);
 
-  // Synchronize card heights within each row
-  const synchronizeCardHeights = useCallback(() => {
-    if (heightSyncTimeoutRef.current) {
-      clearTimeout(heightSyncTimeoutRef.current);
-    }
-
-    heightSyncTimeoutRef.current = window.setTimeout(() => {
-      const rows = containerRef.current?.querySelectorAll(".Item");
-      if (!rows || rows.length === 0) return;
-
-      // Wait for ALL images to load before synchronizing heights
-      const images = containerRef.current?.querySelectorAll(
-        "img, .thumbnail-image, [class*='image'], [class*='Image']",
-      );
-      const imagePromises = Array.from(images || []).map((img) => {
-        return new Promise<void>((resolve) => {
-          const image = img as HTMLImageElement;
-
-          // Check if image is already loaded
-          if (image.complete && image.naturalHeight !== 0) {
-            resolve();
-            return;
-          }
-
-          // If image has no src or is broken, resolve immediately
-          if (!image.src || image.src === "") {
-            resolve();
-            return;
-          }
-
-          const handleLoad = () => {
-            image.removeEventListener("load", handleLoad);
-            image.removeEventListener("error", handleLoad);
-            resolve();
-          };
-
-          image.addEventListener("load", handleLoad);
-          image.addEventListener("error", handleLoad);
-
-          // Increased timeout for slower connections
-          setTimeout(resolve, 2000);
-        });
-      });
-
-      Promise.all(imagePromises).then(() => {
-        // Small additional delay to ensure DOM has updated after image loads
-        setTimeout(() => {
-          // First, reset all heights to auto to measure natural heights
-          rows.forEach((row) => {
-            const cards = row.querySelectorAll(".Card");
-            cards.forEach((card) => {
-              (card as HTMLElement).style.height = "auto";
-              (card as HTMLElement).style.minHeight = "auto";
-            });
-          });
-
-          // Force reflow
-          // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-          document.body.offsetHeight;
-
-          if (smallPreview) {
-            // For smallPreview: find the global minimum height across ALL rows,
-
-            let globalMinHeight = Infinity;
-
-            rows.forEach((row) => {
-              const cards = row.querySelectorAll(".Card");
-              cards.forEach((card) => {
-                const isSubmitCard = (card as HTMLElement).querySelector(
-                  '[data-submit-tile="true"]',
-                );
-
-                if (isSubmitCard) return; // skip submit tile when measuring min height
-
-                const cardHeight = (card as HTMLElement).offsetHeight;
-                if (cardHeight > 0 && cardHeight < globalMinHeight) {
-                  globalMinHeight = cardHeight;
-                }
-              });
-            });
-
-            // If all cards were excluded or heights are too small, use fallback
-            const minAcceptableHeight = 100;
-            const fallbackHeight = 120;
-            const targetHeight =
-              globalMinHeight === Infinity ||
-              globalMinHeight < minAcceptableHeight
-                ? fallbackHeight
-                : globalMinHeight;
-
-            // Apply height only to rows that have cards taller than the minimum
-            rows.forEach((row) => {
-              const cards = row.querySelectorAll(".Card");
-              let rowNeedsAdjustment = false;
-
-              // Check if this row has any cards taller than the minimum
-              cards.forEach((card) => {
-                const cardHeight = (card as HTMLElement).offsetHeight;
-                if (cardHeight > 0 && cardHeight > targetHeight + 2) {
-                  rowNeedsAdjustment = true;
-                }
-              });
-
-              // Only adjust height for rows that need it
-              if (rowNeedsAdjustment) {
-                cards.forEach((card) => {
-                  (card as HTMLElement).style.height = `${targetHeight}px`;
-                  (card as HTMLElement).style.minHeight = `${targetHeight}px`;
-                });
-              }
-            });
-          } else {
-            // For normal view: find the global maximum height across ALL rows
-            let globalMaxHeight = 0;
-
-            rows.forEach((row) => {
-              const cards = row.querySelectorAll(".Card");
-              cards.forEach((card) => {
-                const cardHeight = (card as HTMLElement).offsetHeight;
-                if (cardHeight > 0) {
-                  globalMaxHeight = Math.max(globalMaxHeight, cardHeight);
-                }
-              });
-            });
-
-            // Apply height only to rows that have cards shorter than the maximum
-            const minAcceptableHeight = 150;
-            const fallbackHeight = 200;
-            const targetHeight =
-              globalMaxHeight === 0 || globalMaxHeight < minAcceptableHeight
-                ? fallbackHeight
-                : globalMaxHeight;
-
-            rows.forEach((row) => {
-              const cards = row.querySelectorAll(".Card");
-              let rowNeedsAdjustment = false;
-
-              // Check if this row has any cards shorter than the target
-              cards.forEach((card) => {
-                const cardHeight = (card as HTMLElement).offsetHeight;
-                if (cardHeight > 0 && cardHeight < targetHeight - 2) {
-                  rowNeedsAdjustment = true;
-                }
-              });
-
-              // Only adjust height for rows that need it
-              if (rowNeedsAdjustment) {
-                cards.forEach((card) => {
-                  (card as HTMLElement).style.height = `${targetHeight}px`;
-                  (card as HTMLElement).style.minHeight = `${targetHeight}px`;
-                });
-              }
-            });
-          }
-        }, 50);
-      });
-    }, 100);
-  }, [smallPreview]);
-
   // Set up scroll listener
   useEffect(() => {
     const scrollElement = scroll || scrollContainerRef.current;
@@ -271,49 +107,9 @@ const GridDynamicHeight = ({
     }
   }, [scroll, handleScroll]);
 
-  // Synchronize heights when children change
-  useEffect(() => {
-    synchronizeCardHeights();
-  }, [children, synchronizeCardHeights]);
-
-  // Handle window resize
-  useEffect(() => {
-    const handleResize = () => {
-      synchronizeCardHeights();
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      if (heightSyncTimeoutRef.current) {
-        clearTimeout(heightSyncTimeoutRef.current);
-      }
-    };
-  }, [synchronizeCardHeights]);
-
   const renderLoadingRow = () => {
     if (!hasMoreFiles) return null;
 
-    // Calculate height for skeleton tiles based on existing cards
-    const calculateCardHeight = () => {
-      const existingCards = containerRef.current?.querySelectorAll(".Card");
-      if (!existingCards || existingCards.length === 0) return null;
-
-      let totalHeight = 0;
-      let validCards = 0;
-
-      existingCards.forEach((card) => {
-        const height = (card as HTMLElement).offsetHeight;
-        if (height > 0) {
-          totalHeight += height;
-          validCards += 1;
-        }
-      });
-
-      return validCards > 0 ? Math.round(totalHeight / validCards) : null;
-    };
-
-    const calculatedHeight = calculateCardHeight();
     const skeletons = [];
 
     for (let i = 0; i < countTilesInRow; i += 1) {
@@ -321,16 +117,10 @@ const GridDynamicHeight = ({
         <StyledSkeletonTile
           key={`skeleton-${i}`}
           className="tiles-loader isTemplate Card"
-          $height={calculatedHeight ? `${calculatedHeight}px` : "auto"}
-          $minHeight={calculatedHeight ? `${calculatedHeight}px` : "auto"}
+          smallPreview={smallPreview}
         >
           <div className="loader-container">
-            <RectangleSkeleton
-              className="image-skeleton"
-              height={calculatedHeight ? `${calculatedHeight - 50}px` : "120px"}
-              width="100%"
-              animate
-            />
+            <RectangleSkeleton height="100%" width="100%" animate />
 
             <div className="loader-title">
               <RectangleSkeleton height="20px" animate />

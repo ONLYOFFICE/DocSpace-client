@@ -40,16 +40,12 @@ const StyledSkeletonTile = styled.div`
     flex-direction: column;
     gap: 8px;
 
-    margin: 10px;
+    width: 100%;
+    aspect-ratio: ${(props) => (props.smallPreview ? "229 / 162" : "12 /16")};
   }
 
   .loader-title {
     width: 70%;
-  }
-
-  &.Card {
-    min-height: ${(props) => props.$minHeight || "auto"};
-    height: ${(props) => props.$height || "auto"};
   }
 `;
 
@@ -186,21 +182,17 @@ const InfiniteGrid = (props) => {
           <StyledSkeletonTile
             key={key}
             className="tiles-loader isTemplate Card"
-            $height={averageCardHeight ? `${averageCardHeight}px` : "200px"}
-            $minHeight={averageCardHeight ? `${averageCardHeight}px` : "200px"}
+            smallPreview={smallPreview}
           >
             <div className="loader-container">
-              <RectangleSkeleton
-                className="image-skeleton"
-                height={
-                  averageCardHeight ? `${averageCardHeight - 50}px` : "150px"
-                }
-                width="100%"
-                animate
-              />
+              <RectangleSkeleton height="100%" width="100%" animate />
 
               <div className="loader-title">
-                <RectangleSkeleton height="20px" animate />
+                <RectangleSkeleton
+                  className="title-skeleton"
+                  height="20px"
+                  animate
+                />
               </div>
             </div>
           </StyledSkeletonTile>,
@@ -270,18 +262,10 @@ const InfiniteGrid = (props) => {
           <StyledSkeletonTile
             key={key}
             className="tiles-loader isTemplate Card"
-            $height={averageCardHeight ? `${averageCardHeight}px` : "auto"}
-            $minHeight={averageCardHeight ? `${averageCardHeight}px` : "auto"}
+            smallPreview={smallPreview}
           >
             <div className="loader-container">
-              <RectangleSkeleton
-                className="image-skeleton"
-                height={
-                  averageCardHeight ? `${averageCardHeight - 50}px` : "120px"
-                }
-                width="100%"
-                animate
-              />
+              <RectangleSkeleton height="100%" width="100%" animate />
 
               <div className="loader-title">
                 <RectangleSkeleton height="20px" animate />

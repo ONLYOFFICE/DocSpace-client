@@ -133,6 +133,56 @@ jobs:
             packages/*/node_modules
           key: deps-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ github.run_id }}
 
+  # Playwright Login tests
+  playwright-login:
+    name: "Login e2e tests"
+    runs-on: ubuntu-latest
+    needs: [changes]
+    if: needs.changes.outputs.playwright == 'true' || needs.changes.outputs.workflow == 'true'
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cleanup existing containers
+        run: docker ps -a --filter name=login-tests-ci -q | xargs -r docker rm -f
+      - uses: adambirds/docker-compose-action@v1.5.0
+        with:
+          compose-file: packages/login/compose.yaml
+          up-flags: --build --force-recreate --remove-orphans
+          down-flags: --volumes --remove-orphans
+          services: tests-ci
+          test-container: tests-ci
+          test-command: pnpm exec playwright test
+          environment: |
+            CI=true
+            GITHUB_WORKFLOW=${{ github.workflow }}
+            GITHUB_RUN_ID=${{ github.run_id }}
+            GITHUB_RUN_NUMBER=${{ github.run_number }}
+
+  # Playwright SDK tests
+  playwright-sdk:
+    name: "SDK e2e tests"
+    runs-on: ubuntu-latest
+    needs: [playwright-login]
+    if: needs.changes.outputs.playwright == 'true' || needs.changes.outputs.workflow == 'true'
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cleanup existing containers
+        run: docker ps -a --filter name=sdk-tests-ci -q | xargs -r docker rm -f
+      - uses: adambirds/docker-compose-action@v1.5.0
+        with:
+          compose-file: packages/sdk/compose.yaml
+          up-flags: --build --force-recreate --remove-orphans
+          down-flags: --volumes --remove-orphans
+          services: tests-ci
+          test-container: tests-ci
+          test-command: pnpm exec playwright test
+          environment: |
+            CI=true
+            GITHUB_WORKFLOW=${{ github.workflow }}
+            GITHUB_RUN_ID=${{ github.run_id }}
+            GITHUB_RUN_NUMBER=${{ github.run_number }}
+
   # ESLint tests
   eslint:
     name: "Lint tests"
@@ -318,106 +368,6 @@ jobs:
       - name: Run locales tests
         working-directory: ./common/tests
         run: npm run test:skip-base-languages
-
-  # Playwright Login tests
-  playwright-login:
-    name: "Login e2e tests"
-    runs-on: ubuntu-latest
-    needs: [changes]
-    if: needs.changes.outputs.playwright == 'true' || needs.changes.outputs.workflow == 'true'
-    timeout-minutes: 15
-    steps:
-      - uses: actions/checkout@v4
-      - name: Free up disk space
-        run: |
-          sudo rm -rf /usr/share/dotnet
-          sudo rm -rf /opt/ghc
-          sudo rm -rf /usr/local/share/boost
-          docker system prune -af
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      - name: Cleanup existing containers and images
-        run: |
-          docker ps -a --filter name=login-tests-ci -q | xargs -r docker rm -f
-          docker images --filter reference="*login*" -q | xargs -r docker rmi -f
-      - name: Build and run tests
-        working-directory: packages/login
-        run: |
-          # Set environment variables
-          export CI=true
-          export NODE_OPTIONS="--max-old-space-size=4096"
-          export NEXT_TELEMETRY_DISABLED=1
-
-          # Check if docker compose plugin is available, fallback to docker-compose
-          if docker compose version >/dev/null 2>&1; then
-            echo "Using docker compose (plugin)"
-            docker compose -f compose.yaml build tests-ci
-            docker compose -f compose.yaml run --rm tests-ci pnpm exec playwright test --workers=1
-          elif command -v docker-compose >/dev/null 2>&1; then
-            echo "Using docker-compose (standalone)"
-            docker-compose -f compose.yaml build tests-ci
-            docker-compose -f compose.yaml run --rm tests-ci pnpm exec playwright test --workers=1
-          else
-            echo "Neither docker compose nor docker-compose found, installing docker-compose"
-            sudo curl -L "https://github.com/docker/compose/releases/download/v2.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-            sudo chmod +x /usr/local/bin/docker-compose
-            docker-compose -f compose.yaml build tests-ci
-            docker-compose -f compose.yaml run --rm tests-ci pnpm exec playwright test --workers=1
-          fi
-        env:
-          GITHUB_WORKFLOW: ${{ github.workflow }}
-          GITHUB_RUN_ID: ${{ github.run_id }}
-          GITHUB_RUN_NUMBER: ${{ github.run_number }}
-
-  # Playwright SDK tests
-  playwright-sdk:
-    name: "SDK e2e tests"
-    runs-on: ubuntu-latest
-    needs: [playwright-login]
-    if: needs.changes.outputs.playwright == 'true' || needs.changes.outputs.workflow == 'true'
-    timeout-minutes: 15
-    steps:
-      - uses: actions/checkout@v4
-      - name: Free up disk space
-        run: |
-          sudo rm -rf /usr/share/dotnet
-          sudo rm -rf /opt/ghc
-          sudo rm -rf /usr/local/share/boost
-          docker system prune -af
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      - name: Cleanup existing containers and images
-        run: |
-          docker ps -a --filter name=sdk-tests-ci -q | xargs -r docker rm -f
-          docker images --filter reference="*sdk*" -q | xargs -r docker rmi -f
-      - name: Build and run tests
-        working-directory: packages/sdk
-        run: |
-          # Set environment variables
-          export CI=true
-          export NODE_OPTIONS="--max-old-space-size=4096"
-          export NEXT_TELEMETRY_DISABLED=1
-
-          # Check if docker compose plugin is available, fallback to docker-compose
-          if docker compose version >/dev/null 2>&1; then
-            echo "Using docker compose (plugin)"
-            docker compose -f compose.yaml build tests-ci
-            docker compose -f compose.yaml run --rm tests-ci pnpm exec playwright test --workers=1
-          elif command -v docker-compose >/dev/null 2>&1; then
-            echo "Using docker-compose (standalone)"
-            docker-compose -f compose.yaml build tests-ci
-            docker-compose -f compose.yaml run --rm tests-ci pnpm exec playwright test --workers=1
-          else
-            echo "Neither docker compose nor docker-compose found, installing docker-compose"
-            sudo curl -L "https://github.com/docker/compose/releases/download/v2.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-            sudo chmod +x /usr/local/bin/docker-compose
-            docker-compose -f compose.yaml build tests-ci
-            docker-compose -f compose.yaml run --rm tests-ci pnpm exec playwright test --workers=1
-          fi
-        env:
-          GITHUB_WORKFLOW: ${{ github.workflow }}
-          GITHUB_RUN_ID: ${{ github.run_id }}
-          GITHUB_RUN_NUMBER: ${{ github.run_number }}
 
   # Summary job to report overall status
   test-summary:

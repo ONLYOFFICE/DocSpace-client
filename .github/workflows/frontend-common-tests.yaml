@@ -367,51 +367,51 @@ jobs:
           echo "playwright-sdk.result: '${{ needs.playwright-sdk.result }}'"
           echo "=========================="
 
-          # Generate the report content
-          cat > "$REPORT_FILE" << 'EOF'
-          # 🚀 DocSpace Frontend Test Results
+          # Generate the report content with proper variable substitution
+          cat > "$REPORT_FILE" << EOF
+# 🚀 DocSpace Frontend Test Results
 
-          **Workflow:** `${{ github.workflow }}`
-          **Run ID:** `${{ github.run_id }}`
-          **Branch:** `${{ github.ref_name }}`
-          **Commit:** `${{ github.sha }}`
-          **Triggered by:** `${{ github.event_name }}`
-          **Date:** `$(date -u '+%Y-%m-%d %H:%M:%S UTC')`
+**Workflow:** \`${{ github.workflow }}\`
+**Run ID:** \`${{ github.run_id }}\`
+**Branch:** \`${{ github.ref_name }}\`
+**Commit:** \`${{ github.sha }}\`
+**Triggered by:** \`${{ github.event_name }}\`
+**Date:** \`$(date -u '+%Y-%m-%d %H:%M:%S UTC')\`
 
-          ---
+---
 
-          ## 📁 Changes Detection
+## 📁 Changes Detection
 
-          | Change Type | Detected | Status |
-          |-------------|----------|--------|
-          | 📦 **Packages** | ${{ needs.changes.outputs.packages }} | $([ '${{ needs.changes.outputs.packages }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |
-          | 🔧 **Common** | ${{ needs.changes.outputs.common }} | $([ '${{ needs.changes.outputs.common }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |
-          | 🎭 **Playwright** | ${{ needs.changes.outputs.playwright }} | $([ '${{ needs.changes.outputs.playwright }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |
-          | 🌐 **Locales** | ${{ needs.changes.outputs.locales }} | $([ '${{ needs.changes.outputs.locales }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |
-          | 🔄 **Workflow** | ${{ needs.changes.outputs.workflow }} | $([ '${{ needs.changes.outputs.workflow }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |
-          | 📋 **Any Changes** | ${{ needs.changes.outputs.any_changes }} | $([ '${{ needs.changes.outputs.any_changes }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |
+| Change Type | Detected | Status |
+|-------------|----------|--------|
+| 📦 **Packages** | ${{ needs.changes.outputs.packages }} | $([ '${{ needs.changes.outputs.packages }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |
+| 🔧 **Common** | ${{ needs.changes.outputs.common }} | $([ '${{ needs.changes.outputs.common }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |
+| 🎭 **Playwright** | ${{ needs.changes.outputs.playwright }} | $([ '${{ needs.changes.outputs.playwright }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |
+| 🌐 **Locales** | ${{ needs.changes.outputs.locales }} | $([ '${{ needs.changes.outputs.locales }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |
+| 🔄 **Workflow** | ${{ needs.changes.outputs.workflow }} | $([ '${{ needs.changes.outputs.workflow }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |
+| 📋 **Any Changes** | ${{ needs.changes.outputs.any_changes }} | $([ '${{ needs.changes.outputs.any_changes }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |
 
-          ### 📁 Changed Files
+### 📁 Changed Files
 
-          ```
-          ${{ needs.changes.outputs.changed_files }}
-          ```
+\`\`\`
+${{ needs.changes.outputs.changed_files }}
+\`\`\`
 
-          ## 📊 Test Results Overview
+## 📊 Test Results Overview
 
-          | Test Category | Test Type | Status | Result |
-          |---------------|-----------|--------|--------|
-          | **Setup** | Changes Detection | ${{ needs.changes.result }} | $([ '${{ needs.changes.result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |
-          | **Static Analysis** | 🔍 ESLint | ${{ needs.static-analysis-and-tests.outputs.lint_result || 'skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.lint_result }}' = 'success' ] && echo '✅ Passed' || echo '⏭️ Skipped') |
-          | **Static Analysis** | 🔧 TypeScript | ${{ needs.static-analysis-and-tests.outputs.tsc_result || 'skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.tsc_result }}' = 'success' ] && echo '✅ Passed' || echo '⏭️ Skipped') |
-          | **Testing** | 🧪 Unit Tests | ${{ needs.static-analysis-and-tests.outputs.unit_tests_result || 'skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.unit_tests_result }}' = 'success' ] && echo '✅ Passed' || echo '⏭️ Skipped') |
-          | **E2E Testing** | 🎭 Playwright Login | ${{ needs.playwright-login.result }} | $([ '${{ needs.playwright-login.result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |
-          | **E2E Testing** | 🎭 Playwright SDK | ${{ needs.playwright-sdk.result }} | $([ '${{ needs.playwright-sdk.result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |
+| Test Category | Test Type | Status | Result |
+|---------------|-----------|--------|--------|
+| **Setup** | Changes Detection | ${{ needs.changes.result }} | $([ '${{ needs.changes.result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |
+| **Static Analysis** | 🔍 ESLint | ${{ needs.static-analysis-and-tests.outputs.lint_result || 'skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.lint_result }}' = 'success' ] && echo '✅ Passed' || echo '⏭️ Skipped') |
+| **Static Analysis** | 🔧 TypeScript | ${{ needs.static-analysis-and-tests.outputs.tsc_result || 'skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.tsc_result }}' = 'success' ] && echo '✅ Passed' || echo '⏭️ Skipped') |
+| **Testing** | 🧪 Unit Tests | ${{ needs.static-analysis-and-tests.outputs.unit_tests_result || 'skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.unit_tests_result }}' = 'success' ] && echo '✅ Passed' || echo '⏭️ Skipped') |
+| **E2E Testing** | 🎭 Playwright Login | ${{ needs.playwright-login.result }} | $([ '${{ needs.playwright-login.result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |
+| **E2E Testing** | 🎭 Playwright SDK | ${{ needs.playwright-sdk.result }} | $([ '${{ needs.playwright-sdk.result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |
 
-          ## ✅ All Tests Completed!
+## ✅ All Tests Completed!
 
-          **Ready for review! 🚀**
-          EOF
+**Ready for review! 🚀**
+EOF
 
           # Copy to GitHub Step Summary
           cat "$REPORT_FILE" >> $GITHUB_STEP_SUMMARY

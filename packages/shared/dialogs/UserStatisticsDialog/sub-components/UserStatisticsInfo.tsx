@@ -63,7 +63,7 @@ export const UserStatisticsInfo = ({
       return null;
     }
 
-    return ` (${detailedInfo})`;
+    return ` (${detailedInfo.join("")})`;
   };
 
   return (

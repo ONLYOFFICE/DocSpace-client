@@ -247,7 +247,7 @@ const IpSecurity = (props) => {
     setShowReminder(false);
   };
 
-  if (currentDeviceType !== DeviceType.desktop && !isLoaded) {
+  if (currentDeviceType === DeviceType.mobile && !isLoaded) {
     return <IpSecurityLoader />;
   }
 

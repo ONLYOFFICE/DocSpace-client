@@ -3,7 +3,7 @@
   "content": "Please provide only the domain name, avoiding URL paths or extra characters.",
   "content_en_sha1_hash": "8518f3b5c2600c34e8bf485ef87d1b3b4d31f203",
   "created_at": "2025-06-08T12:02:20.112Z",
-  "updated_at": "2025-08-04T07:30:01.418Z",
+  "updated_at": "2025-09-17T13:43:01.796Z",
   "comment": {
     "text": "Provide a domain name only, without URL paths or extra characters. This text is used to inform users about the expected format for the Custom Security Policy (CSP) URL in the Portal Settings.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/csp.js",
-      "line_number": 290,
+      "line_number": 285,
       "context": "</Container>\n <Text\n lineHeight=\"20px\"\n color={error ? theme?.input.focusErrorBorderColor : globalColors.gray}\n >\n {error || t(\"CSPUrlHelp\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <ChipsContainer>{getChips(cspDomains)}</ChipsContainer>\n </>\n );\n };",
       "module": "/packages/client"
     }

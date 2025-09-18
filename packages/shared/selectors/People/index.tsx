@@ -31,6 +31,8 @@ import { useTranslation } from "react-i18next";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import EmptyScreenPersonsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
 import EmptyScreenPersonsSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
+import EmptyScreenFilterSvgUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.people.light.svg?url";
+import EmptyScreenFilterSvgDarkUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.people.dark.svg?url";
 
 import { Selector, SelectorAccessRightsMode } from "../../components/selector";
 import {
@@ -672,7 +674,9 @@ const PeopleSelector = ({
               })
             : t("Common:GroupsNotFoundDescription"))
       }
-      searchEmptyScreenImage={emptyScreenImage}
+      searchEmptyScreenImage={
+        isBase ? EmptyScreenFilterSvgUrl : EmptyScreenFilterSvgDarkUrl
+      }
       searchEmptyScreenHeader={
         activeTabId === GUESTS_TAB_ID
           ? t("Common:NotFoundGuestsFilter")

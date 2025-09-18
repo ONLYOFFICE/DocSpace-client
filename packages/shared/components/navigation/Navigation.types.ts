@@ -27,6 +27,7 @@
 import { RefObject } from "react";
 import { DeviceType } from "../../enums";
 import { TGetContextMenuModel } from "../context-menu";
+import type { HeaderType } from "../context-menu/ContextMenu.types";
 
 export type TOnBackToParenFolder = () => void;
 
@@ -52,6 +53,8 @@ export type TContextButtonProps = {
   ) => () => void;
   guidAnimationVisible?: boolean;
   setGuidAnimationVisible?: (visible: boolean) => void;
+  ignoreChangeView?: boolean;
+  contextMenuHeader?: HeaderType;
 };
 
 export type TPlusButtonProps = {
@@ -229,5 +232,6 @@ export type TNavigationProps = Omit<
     showNavigationButton: boolean;
     titleIconTooltip?: string;
     onLogoClick?: () => void;
+    contextMenuHeader?: HeaderType;
     showBackButton?: boolean;
   };

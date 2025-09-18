@@ -83,8 +83,6 @@ const ChatInput = ({
     setSelectedFiles((prev) => prev.filter((f) => f.id !== file.id));
   };
 
-  console.log(attachmentFile);
-
   const sendMessageAction = React.useCallback(async () => {
     if (!value) return;
 

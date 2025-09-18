@@ -27,15 +27,12 @@
 import Markdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
-import classNames from "classnames";
-
-import { Text } from "../../../../../../text";
 
 import { MessageMarkdownFieldProps } from "../../../../../Chat.types";
 
 import styles from "../../../ChatMessageBody.module.scss";
 
-import CodeBlock from "../CodeBlock";
+import { createMarkdownComponents } from "./Markdown.utils";
 
 // Function to replace <think> tags with a placeholder before markdown processing
 const preprocessChatMessage = (text: string): string => {
@@ -57,91 +54,7 @@ const MarkdownField = ({
       <Markdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw]}
-        components={{
-          p: ({ children }) => {
-            return (
-              <Text
-                fontSize="13px"
-                lineHeight="20px"
-                fontWeight={400}
-                className={styles.chatMessageTextColor}
-                style={{ whiteSpace: "pre-line", padding: "8px 0" }}
-              >
-                {children as React.ReactNode}
-              </Text>
-            );
-          },
-          ol({ children }) {
-            return (
-              <ol
-                className={classNames(
-                  styles.chatMessageTextColor,
-                  styles.listBlock,
-                )}
-              >
-                {children}
-              </ol>
-            );
-          },
-          ul({ children }) {
-            return (
-              <ul
-                className={classNames(
-                  styles.chatMessageTextColor,
-                  styles.listBlock,
-                )}
-              >
-                {children}
-              </ul>
-            );
-          },
-          pre: ({ children }) => {
-            return <pre>{children}</pre>;
-          },
-          code: ({ className, children, ...props }) => {
-            let content = children as string;
-
-            const inline = content ? content.indexOf("\n") === -1 : false;
-
-            if (
-              Array.isArray(children) &&
-              children.length === 1 &&
-              typeof children[0] === "string"
-            ) {
-              content = children[0] as string;
-            }
-
-            const match = /language-(\w+)/.exec(className || "");
-
-            if (typeof content === "string") {
-              if (content.length) {
-                if (content[0] === " ") {
-                  return <span className="form-modal-markdown-span" />;
-                }
-
-                // Specifically handle <think> tags that were wrapped in backticks
-                if (content === "<think>" || content === "</think>") {
-                  return <span>{content}</span>;
-                }
-              }
-
-              if (inline) {
-                return (
-                  <code className={styles.inlineCodeBlock} {...props}>
-                    {content}
-                  </code>
-                );
-              }
-
-              return (
-                <CodeBlock
-                  language={propLanguage ?? match?.[1].toLowerCase()}
-                  content={content}
-                />
-              );
-            }
-          },
-        }}
+        components={createMarkdownComponents({ propLanguage })}
       >
         {processedChatMessage}
       </Markdown>

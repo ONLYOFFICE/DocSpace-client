@@ -38,6 +38,7 @@ describe("StandalonePage", () => {
       totalUsers: 20,
       portalUsers: 1,
       externalUsers: 0,
+      licenseTypeByUsers: false,
     },
     docspaceFaqUrl: "https://example.com/faq",
   };

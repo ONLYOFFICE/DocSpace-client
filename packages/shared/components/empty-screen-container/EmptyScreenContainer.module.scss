@@ -32,8 +32,7 @@
   }
 
   .image {
-    height: 100px;
-    width: 100px;
+    width: 150px;
     margin-bottom: 32px;
     @include mixins.no-user-select;
     background: no-repeat 0 0 transparent;

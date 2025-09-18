@@ -44,6 +44,7 @@ import FilesStore from "SRC_DIR/store/FilesStore";
 import { getCategoryType } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
+import DialogsStore from "SRC_DIR/store/DialogsStore";
 
 import { SectionBodyContent, ContactsSectionBodyContent } from "../Section";
 import ProfileSectionBodyContent from "../../Profile/Section/Body";
@@ -75,6 +76,9 @@ type ViewProps = UseContactsProps &
     roomsAbortController: Nullable<AbortController>;
 
     showHeaderLoader: ClientLoadingStore["showHeaderLoader"];
+
+    aiAgentSelectorDialogProps: DialogsStore["aiAgentSelectorDialogProps"];
+    setAiAgentSelectorDialogProps: DialogsStore["setAiAgentSelectorDialogProps"];
   };
 
 const View = ({
@@ -139,6 +143,9 @@ const View = ({
 
   setNotificationChannels,
   checkTg,
+
+  aiAgentSelectorDialogProps,
+  setAiAgentSelectorDialogProps,
 }: ViewProps) => {
   const location = useLocation();
 
@@ -360,6 +367,15 @@ const View = ({
     getView();
   }, [location, isContactsPage, isProfilePage]);
 
+  const attachmentFile = React.useMemo(
+    () => aiAgentSelectorDialogProps?.file,
+    [aiAgentSelectorDialogProps?.file],
+  );
+
+  const onClearAttachmentFile = React.useCallback(() => {
+    setAiAgentSelectorDialogProps(false, null);
+  }, [setAiAgentSelectorDialogProps]);
+
   return (
     <LoaderWrapper isLoading={isLoading ? !showHeaderLoader : false}>
       <Consumer>
@@ -377,6 +393,8 @@ const View = ({
               getIcon={getIcon}
               selectedModel={chatSettings?.modelId ?? ""}
               isLoading={showBodyLoader}
+              attachmentFile={attachmentFile}
+              clearAttachmentFile={onClearAttachmentFile}
             />
           ) : currentView === "profile" ? (
             <ProfileSectionBodyContent />
@@ -406,6 +424,7 @@ export const ViewComponent = inject(
     setup,
     authStore,
     telegramStore,
+    dialogsStore,
   }: TStore) => {
     const { usersStore, groupsStore } = peopleStore;
 
@@ -470,6 +489,9 @@ export const ViewComponent = inject(
 
     const { checkTg } = telegramStore;
 
+    const { aiAgentSelectorDialogProps, setAiAgentSelectorDialogProps } =
+      dialogsStore;
+
     return {
       setContactsTab,
       getUsersList,
@@ -529,6 +551,9 @@ export const ViewComponent = inject(
       setIsProfileLoaded,
       setNotificationChannels,
       checkTg,
+
+      aiAgentSelectorDialogProps,
+      setAiAgentSelectorDialogProps,
     };
   },
 )(observer(View));

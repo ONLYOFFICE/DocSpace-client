@@ -62,6 +62,7 @@
   "Archive": "Archive",
   "ArchivedRoomAction": "The room '{{name}}' is archived",
   "Archives": "Archives",
+  "AskAI": "Ask AI",
   "Favorites": "Favorites",
   "ArchivingData": "Archiving data",
   "Assign": "Assign",
@@ -973,5 +974,11 @@
   "PortalRestoring": "{{productName}} restoring",
   "PreparationPortalDescription": "Once the restoring process is over, you'll be automatically redirected to your {{productName}}.",
   "NoMCPServers": "No MCP servers connected yet",
-  "NoMCPServersDescription": "Please connect MCP servers in {{productName}} settings to use them in the AI agent."
+  "NoMCPServersDescription": "Please connect MCP servers in {{productName}} settings to use them in the AI agent.",
+  "AskAIChat": "Ask AI-Chat",
+  "ChooseAIAgent": "Choose an AI agent",
+  "ChooseAIAgentDescription": "Select the agent where you want to chat with AI about the selected file. You can pick an existing agent or create a new one.",
+  "CreateAIAgent": "Create AI agent",
+  "NoAIAgents": "No AI agents yet",
+  "NoAIAgentsDescription": "You haven’t created any agents for AI chat. Create a new agent to start chatting with AI about your files."
 }

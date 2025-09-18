@@ -3,7 +3,7 @@
   "content": "Protect all documents in this room with watermarks. If a document already contains one, it will not be replaced.",
   "content_en_sha1_hash": "2e056742504b46dd1b79913edc7568d76aafd5c2",
   "created_at": "2025-05-19T21:30:56.777Z",
-  "updated_at": "2025-05-24T13:55:32.224Z",
+  "updated_at": "2025-08-12T19:46:25.851Z",
   "comment": {
     "text": "This translation key is used for the button text \"AddWatermarksToDocuments\" in a dialog component, prompting users to apply watermarks to documents.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/VirtualDataRoomBlock.js",
-      "line_number": 171,
-      "context": "isChecked={copyAndDownloadChecked}\n />\n \n <Block\n headerText={t(\"AddWatermarksToDocuments\")}\n bodyText={t(\"AddWatermarksToDocumentsDescription\")}\n onChange={onChangeAddWatermarksToDocuments}\n isDisabled={false}\n isChecked={watermarksChecked}\n >\n <Watermarks",
+      "line_number": 175,
+      "context": "dataTestId=\"virtual_data_room_restrict_copy_download\"\n />\n \n <Block\n headerText={t(\"AddWatermarksToDocuments\")}\n bodyText={t(\"AddWatermarksToDocumentsDescription\")}\n onChange={onChangeAddWatermarksToDocuments}\n isDisabled={false}\n isChecked={watermarksChecked}\n dataTestId=\"virtual_data_room_add_watermarks\"\n >",
       "module": "/packages/client"
     }
   ],

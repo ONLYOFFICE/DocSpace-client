@@ -32,6 +32,7 @@ import config from "PACKAGE_FILE";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import { toastr } from "@docspace/shared/components/toast";
 import Badges from "@docspace/shared/components/badges";
+import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
 
@@ -43,6 +44,7 @@ export default function withBadges(WrappedComponent) {
       this.state = {
         disableBadgeClick: false,
         disableUnpinClick: false,
+        isLoading: false,
       };
     }
 
@@ -125,8 +127,8 @@ export default function withBadges(WrappedComponent) {
     };
 
     onCopyPrimaryLink = async () => {
-      const { t, item, getPrimaryLink } = this.props;
-      const primaryLink = await getPrimaryLink(item.id);
+      const { t, item } = this.props;
+      const primaryLink = await ShareLinkService.getPrimaryLink(item);
       if (primaryLink) {
         copyShareLink(primaryLink.sharedTo.shareLink);
         toastr.success(t("Common:LinkSuccessfullyCopied"));
@@ -155,6 +157,20 @@ export default function withBadges(WrappedComponent) {
       onCreateRoomFromTemplate(item, true);
     };
 
+    onClickLock = () => {
+      const { item, lockFileAction, t } = this.props;
+      const { locked, id, security } = item;
+      const { isLoading } = this.state;
+
+      if (!security?.Lock || isLoading) return;
+
+      this.setState({ isLoading: true });
+      return lockFileAction(id, !locked)
+        .then(() => toastr.success(t("Translations:FileUnlocked")))
+        .catch((err) => toastr.error(err))
+        .finally(() => this.setState({ isLoading: false }));
+    };
+
     render() {
       const {
         t,
@@ -171,7 +187,6 @@ export default function withBadges(WrappedComponent) {
         isArchiveFolderRoot,
         isArchiveFolder,
         isPublicRoom,
-        isRecentTab,
         isTemplatesFolder,
         isExtsCustomFilter,
         docspaceManagingRoomsHelpUrl,
@@ -186,8 +201,6 @@ export default function withBadges(WrappedComponent) {
       const accessToEdit =
         access === ShareAccessRights.FullAccess ||
         access === ShareAccessRights.None; // TODO: fix access type for owner (now - None)
-
-      const canEditing = access === ShareAccessRights.Editing;
 
       const badgesComponent = (
         <Badges
@@ -209,13 +222,12 @@ export default function withBadges(WrappedComponent) {
           onUnmuteClick={this.onUnmuteClick}
           openLocationFile={this.openLocationFile}
           setConvertDialogVisible={this.setConvertDialogVisible}
+          onClickLock={this.onClickLock}
           onFilesClick={onFilesClick}
           viewAs={viewAs}
           isMutedBadge={isMutedBadge}
           onCopyPrimaryLink={this.onCopyPrimaryLink}
           isArchiveFolder={isArchiveFolder}
-          isRecentTab={isRecentTab}
-          canEditing={canEditing}
           onCreateRoom={this.onCreateRoom}
           isTemplatesFolder={isTemplatesFolder}
           isExtsCustomFilter={isExtsCustomFilter}
@@ -259,7 +271,6 @@ export default function withBadges(WrappedComponent) {
         isPrivacyFolder,
         isArchiveFolderRoot,
         isArchiveFolder,
-        isRecentTab,
         isTemplatesFolder,
       } = treeFoldersStore;
       const {
@@ -278,8 +289,7 @@ export default function withBadges(WrappedComponent) {
       const { setIsVerHistoryPanel, fetchFileVersions } = versionHistoryStore;
       const { setConvertDialogVisible, setConvertItem, setConvertDialogData } =
         dialogsStore;
-      const { setIsLoading, isMuteCurrentRoomNotifications, getPrimaryLink } =
-        filesStore;
+      const { setIsLoading, isMuteCurrentRoomNotifications } = filesStore;
       const { roomType, mute } = item;
 
       const isRoom = !!roomType;
@@ -309,10 +319,8 @@ export default function withBadges(WrappedComponent) {
         setPinAction,
         setMuteAction,
         isMutedBadge,
-        getPrimaryLink,
         isArchiveFolder,
         isPublicRoom: publicRoomStore.isPublicRoom,
-        isRecentTab,
         checkAndOpenLocationAction,
         isTemplatesFolder,
         onCreateRoomFromTemplate,

@@ -3,7 +3,7 @@
   "content": "Code to insert",
   "content_en_sha1_hash": "73eb0e1ccc3a17f76090eb3ee695245eb8c9ba3b",
   "created_at": "2025-05-19T21:30:54.384Z",
-  "updated_at": "2025-08-04T07:30:01.164Z",
+  "updated_at": "2025-08-26T11:15:14.116Z",
   "comment": {
     "text": "\"Used as a header text in an EmbeddingPanel component, displaying 'Code' for a translation key that provides a placeholder for inserting code.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
-      "line_number": 543,
+      "line_number": 547,
       "context": "<Text\n className=\"embedding-panel_header-text\"\n fontSize=\"15px\"\n fontWeight={600}\n >\n {t(\"JavascriptSdk:Code\")}\n </Text>\n <IconButton\n className=\"embedding-panel_copy-icon\"\n size={16}\n iconName={CopyReactSvgUrl}",
       "module": "/packages/client"
     },

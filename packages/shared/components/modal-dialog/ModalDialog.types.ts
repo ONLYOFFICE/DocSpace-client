@@ -89,6 +89,8 @@ export type ModalSubComponentsProps = AsideHeaderProps & {
   onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
   /** Removes default padding from body */
   withoutPadding?: boolean;
+  /** Removes default margin from header */
+  withoutHeaderMargin?: boolean;
   /** Hides modal content */
   hideContent?: boolean;
   /** Sets backdrop blur value */
@@ -99,6 +101,8 @@ export type ModalSubComponentsProps = AsideHeaderProps & {
   withBodyScrollForcibly?: boolean;
 
   withBorder?: boolean;
+  /** Test id */
+  dataTestId?: string;
 };
 
 export type ModalDialogProps = Partial<
@@ -113,6 +117,8 @@ export type ModalDialogProps = Partial<
   displayType?: ModalDialogType;
   /** Detailed display type for each dimension */
   displayTypeDetailed?: ModalDialogTypeDetailed;
+  /** Test id */
+  dataTestId?: string;
 };
 
 export type ModalDialogFormWrapperProps = {

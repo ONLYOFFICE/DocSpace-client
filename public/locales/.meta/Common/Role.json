@@ -3,7 +3,7 @@
   "content": "Role",
   "content_en_sha1_hash": "c3f104d1365744b538bfde9f4adb6a6df4b80355",
   "created_at": "2025-05-19T21:30:47.956Z",
-  "updated_at": "2025-08-04T07:30:01.106Z",
+  "updated_at": "2025-09-17T13:43:01.628Z",
   "comment": {
     "text": "This translation key is used for the title of a dropdown menu or select field, typically appearing as \"Role\". It is displayed in various contexts within the application, including dialogs and info panels, to identify the user's role.",
     "is_auto": true,
@@ -24,13 +24,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/sub-components/User.tsx",
-      "line_number": 292,
+      "line_number": 298,
       "context": "onSelect={onOptionClick}\n scaled={false}\n withBackdrop={isMobile}\n size=\"content\"\n modernView\n title={t(\"Common:Role\")}\n manualWidth=\"auto\"\n isLoading={isLoading}\n isMobileView={isMobileOnly}\n directionY=\"both\"\n displaySelectedOption",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/sub-components/User.tsx",
-      "line_number": 292,
+      "line_number": 298,
       "context": "onSelect={onOptionClick}\n scaled={false}\n withBackdrop={isMobile}\n size=\"content\"\n modernView\n title={t(\"Common:Role\")}\n manualWidth=\"auto\"\n isLoading={isLoading}\n isMobileView={isMobileOnly}\n directionY=\"both\"\n displaySelectedOption",
       "module": "/packages/client"
     }

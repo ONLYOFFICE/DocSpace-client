@@ -237,11 +237,13 @@ class FilesSettingsStore {
           });
       })
       .then(() => {
-        api.files.getDocumentServiceLocation().then(({ docServiceUrlApi }) => {
-          if (docServiceUrlApi) {
-            insertEditorPreloadFrame(docServiceUrlApi);
-          }
-        });
+        api.files
+          .getDocumentServiceLocation()
+          .then(({ docServicePreloadUrl }) => {
+            if (docServicePreloadUrl) {
+              insertEditorPreloadFrame(docServicePreloadUrl);
+            }
+          });
       })
       .catch(() => this.setIsErrorSettings(true));
   };
@@ -274,8 +276,8 @@ class FilesSettingsStore {
       .catch((e) => toastr.error(e));
   };
 
-  setKeepNewFileName = (data) => {
-    api.files
+  setKeepNewFileName = async (data) => {
+    return api.files
       .changeKeepNewFileName(data)
       .then((res) => this.setFilesSetting("keepNewFileName", res))
       .catch((e) => toastr.error(e));
@@ -319,7 +321,21 @@ class FilesSettingsStore {
   setForceSave = (data) =>
     api.files.forceSave(data).then((res) => this.setForcesave(res));
 
-  getDocumentServiceLocation = () => api.files.getDocumentServiceLocation();
+  getDocumentServiceLocation = async () => {
+    const abortController = new AbortController();
+    this.settingsStore.addAbortControllers(abortController);
+
+    try {
+      return await api.files.getDocumentServiceLocation(
+        null,
+        abortController.signal,
+      );
+    } catch (error) {
+      if (axios.isCancel(error)) return;
+
+      throw error;
+    }
+  };
 
   changeDocumentServiceLocation = (
     docServiceUrl,

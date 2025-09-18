@@ -3,7 +3,7 @@
   "content": "Live chat was successfully disconnected",
   "content_en_sha1_hash": "ae2a6017f6a674929d0c42e27c69de090c46cd8b",
   "created_at": "2025-05-19T21:30:46.244Z",
-  "updated_at": "2025-06-18T07:34:15.286Z",
+  "updated_at": "2025-09-17T13:43:01.941Z",
   "comment": {
     "text": "The \"LiveChatOff\" translation key is used to display a success message when a live chat widget is successfully hidden or disconnected. This message appears after clicking on a support button, indicating that the chat has been removed from view.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ProfileActionsStore.js",
-      "line_number": 200,
+      "line_number": 230,
       "context": "this.setStateLiveChat(isShow);\n \n zendeskAPI.addChanges(\"webWidget\", isShow ? \"show\" : \"hide\");\n \n toastr.success(isShow ? t(\"LiveChatOn\") : t(\"LiveChatOff\"));\n };\n \n onSupportClick = () => {\n const supportUrl = this.settingsStore.feedbackAndSupportUrl;",
       "module": "/packages/client"
     }

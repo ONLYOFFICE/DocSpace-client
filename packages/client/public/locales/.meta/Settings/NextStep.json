@@ -3,7 +3,7 @@
   "content": "Next step",
   "content_en_sha1_hash": "5500eef9fdb1576f57ac29498a8e4ae9b3b9dbba",
   "created_at": "2025-05-19T21:30:51.999Z",
-  "updated_at": "2025-06-30T12:20:31.412Z",
+  "updated_at": "2025-09-07T07:53:15.234Z",
   "comment": {
     "text": "The \"NextStep\" translation key is used to display the text \"Next step\" in various contexts throughout the application, such as buttons and dialogs, where it serves as a label for progression or navigation to the next stage of an import process. This text provides clarity and instructions to users on what action to take next, helping them understand the workflow and progress through data imports.",
     "is_auto": true,
@@ -18,13 +18,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 277,
+      "line_number": 247,
       "context": "<MigrationButtons\n className=\"save-cancel-buttons\"\n onSaveClick={incrementStep}\n onCancelClick={decrementStep}\n saveButtonLabel={t(\"Settings:NextStep\")}\n cancelButtonLabel={t(\"Common:Back\")}\n displaySettings\n showReminder\n migrationCancelLabel={t(\"Settings:CancelImport\")}\n onMigrationCancelClick={showCancelDialog}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectFileStep.tsx",
-      "line_number": 480,
+      "line_number": 484,
       "context": ") : (\n <SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={incrementStep}\n onCancelClick={returnToProviders}\n saveButtonLabel={t(\"Settings:NextStep\")}\n cancelButtonLabel={t(\"Common:Back\")}\n displaySettings\n saveButtonDisabled={\n migratingWorkspace !== migratorName || isSaveDisabled\n }",
       "module": "/packages/client"
     },

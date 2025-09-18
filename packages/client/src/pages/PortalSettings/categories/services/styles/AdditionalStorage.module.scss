@@ -53,8 +53,10 @@
 .middleBlock {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   gap: 12px;
 }
+
 .disabled {
   cursor: default;
 }
@@ -79,12 +81,12 @@
   height: 100%;
 
   rect {
-    fill: var(--payment-accent-color);
+    fill: var(--color-scheme-main-buttons);
     opacity: 0.1;
   }
 
   path {
-    fill: var(--payment-accent-color);
+    fill: var(--color-scheme-main-buttons);
     opacity: 1;
   }
 }

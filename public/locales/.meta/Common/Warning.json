@@ -3,7 +3,7 @@
   "content": "Warning",
   "content_en_sha1_hash": "e9c45563358e813f157ba81b33143542165ba84e",
   "created_at": "2025-05-19T21:30:49.575Z",
-  "updated_at": "2025-08-04T07:30:00.958Z",
+  "updated_at": "2025-09-17T13:43:01.528Z",
   "comment": {
     "text": "This \"Warning\" translation key is used to display a caution message when sensitive information about file protection is detected in a file. It appears as a warning text in error messages or dialog boxes, providing context for users when accessing protected files.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/Hooks/useCreateFileError.ts",
-      "line_number": 63,
+      "line_number": 74,
       "context": "const error = JSON.parse(createError);\n \n if (error?.fileInfo?.password) {\n toastr.error(\n t(\"ConvertPasswordDialog:CreationError\"),\n t(\"Common:Warning\"),\n );\n } else {\n toastr.error(t(\"Translations:FileProtected\"), t(\"Common:Warning\"));\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/Hooks/useCreateFileError.ts",
-      "line_number": 63,
+      "line_number": 74,
       "context": "const error = JSON.parse(createError);\n \n if (error?.fileInfo?.password) {\n toastr.error(\n t(\"ConvertPasswordDialog:CreationError\"),\n t(\"Common:Warning\"),\n );\n } else {\n toastr.error(t(\"Translations:FileProtected\"), t(\"Common:Warning\"));\n }",
       "module": "/packages/client"
     },
@@ -67,7 +67,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/LifetimeDialog/index.js",
       "line_number": 58,
-      "context": "};\n }, []);\n \n return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"Common:Warning\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <StyledBodyContent className=\"modal-dialog-content-body\">\n <Text fontWeight={600} fontSize=\"13px\" noSelect>\n {t(\"Files:LifetimeDialogDescriptionHeader\")}\n </Text>",
+      "context": "};\n }, []);\n \n return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"Common:Warning\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <StyledBodyContent className=\"modal-dialog-content-body\">\n <Text fontWeight={600} fontSize=\"13px\">\n {t(\"Files:LifetimeDialogDescriptionHeader\")}\n </Text>",
       "module": "/packages/client"
     },
     {
@@ -79,7 +79,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/ReorderIndexDialog/index.tsx",
       "line_number": 77,
-      "context": "displayType={ModalDialogType.modal}\n isLoading={!ready}\n visible={visible}\n onClose={onClose}\n >\n <ModalDialog.Header>{t(\"Common:Warning\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\" fontWeight={400} noSelect>\n {t(\"Files:ReorderIndex\")}\n </Text>\n </ModalDialog.Body>",
+      "context": "displayType={ModalDialogType.modal}\n isLoading={!ready}\n visible={visible}\n onClose={onClose}\n >\n <ModalDialog.Header>{t(\"Common:Warning\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\" fontWeight={400}>\n {t(\"Files:ReorderIndex\")}\n </Text>\n </ModalDialog.Body>",
       "module": "/packages/client"
     },
     {
@@ -91,30 +91,30 @@
     {
       "file_path": "/packages/client/src/components/dialogs/WarningQuotaDialog/WarningQuotaDialog.tsx",
       "line_number": 92,
-      "context": "autoMaxHeight\n visible={visible}\n onClose={onCloseDialog}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"Common:Warning\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text noSelect style={{ marginBottom: \"16px\" }}>\n {getWarningDescription()}\n </Text>\n <Text noSelect>{t(\"Settings:WantToContinue\")}</Text>",
+      "context": "autoMaxHeight\n visible={visible}\n onClose={onCloseDialog}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"Common:Warning\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text style={{ marginBottom: \"16px\" }}>{getWarningDescription()}</Text>\n <Text>{t(\"Settings:WantToContinue\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
-      "line_number": 307,
+      "line_number": 320,
       "context": ") : null}\n \n {enable ? (\n <>\n <Text fontSize=\"16px\" fontWeight=\"700\" className=\"warning-text\">\n {t(\"Common:Warning\")}\n </Text>\n <Text className=\"ip-security_warning\">\n {t(\"IPSecurityWarningHelper\")}\n </Text>\n </>",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/GracePeriodModal.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/AdditionalStorage/GracePeriodModal.tsx",
       "line_number": 72,
       "context": "onClose={onClose}\n displayType={ModalDialogType.modal}\n autoMaxHeight\n isLarge\n >\n <ModalDialog.Header>{t(\"Common:Warning\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontWeight={600}>\n {t(\"ServiceManagementUnavailable\", { planName: tariffPlanTitle })}\n </Text>\n <br />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 356,
+      "line_number": 359,
       "context": "} else {\n errorMessage = err;\n }\n \n if (errorMessage.indexOf(\"password\") == -1) {\n toastr.error(errorMessage, t(\"Common:Warning\"));\n return;\n }\n \n toastr.error(t(\"Translations:FileProtected\"), t(\"Common:Warning\"));\n setFormCreationInfo({",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 356,
+      "line_number": 359,
       "context": "} else {\n errorMessage = err;\n }\n \n if (errorMessage.indexOf(\"password\") == -1) {\n toastr.error(errorMessage, t(\"Common:Warning\"));\n return;\n }\n \n toastr.error(t(\"Translations:FileProtected\"), t(\"Common:Warning\"));\n setFormCreationInfo({",
       "module": "/packages/client"
     },
@@ -126,8 +126,8 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/index.tsx",
-      "line_number": 357,
-      "context": "styles.settingsUnavailable,\n \"restore-backup_warning settings_unavailable\",\n )}\n noSelect\n >\n {t(\"Common:Warning\")}!\n </Text>\n <Text\n className={classNames(\n styles.restoreBackupWarningDescription,\n styles.settingsUnavailable,",
+      "line_number": 359,
+      "context": "styles.restoreBackupWarning,\n styles.settingsUnavailable,\n \"restore-backup_warning settings_unavailable\",\n )}\n >\n {t(\"Common:Warning\")}!\n </Text>\n <Text\n className={classNames(\n styles.restoreBackupWarningDescription,\n styles.settingsUnavailable,",
       "module": "/packages/shared"
     },
     {

@@ -35,12 +35,15 @@ export interface PluginDropzoneProps {
   onDrop: <T extends File>(acceptedFiles: T[]) => void;
   isLoading: boolean;
   isDisabled: boolean;
+  dataTestId?: string;
 }
 
 export interface PluginsEmptyScreen {
   t: TTranslation;
   theme: TTheme;
   withUpload: boolean;
+  apiPluginSDKLink: string | undefined;
+  currentColorScheme: TColorScheme;
   onDrop: <T extends File>(acceptedFiles: T[]) => void;
 }
 
@@ -63,6 +66,8 @@ export interface PluginItemProps {
 
   image: string;
   url: string;
+
+  dataTestId?: string;
 }
 
 export interface ListLoaderProps {
@@ -90,4 +95,14 @@ export interface PluginsProps {
 
   isLoading: boolean;
   isEmptyList: boolean;
+
+  apiPluginSDKLink: string | undefined;
+
+  showPortalSettingsLoader: boolean;
+}
+
+export interface UploadDecsriptionProps {
+  apiPluginSDKLink: string | undefined;
+  currentColorScheme: TColorScheme;
+  t: TTranslation;
 }

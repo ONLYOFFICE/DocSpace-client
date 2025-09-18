@@ -361,9 +361,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
   const createBody = (
     <StyledBodyContent>
       {!isEdit ? (
-        <Text noSelect>
-          {t("Settings:CreateNewSecretKeyDialogDescription")}
-        </Text>
+        <Text>{t("Settings:CreateNewSecretKeyDialogDescription")}</Text>
       ) : null}
       <div className="api-key_name">
         <Text fontSize="13px" fontWeight={600}>
@@ -467,7 +465,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
 
   const keyBody = (
     <StyledBodyContent>
-      <Text noSelect>{t("Settings:CreateNewSecretKeyDialogDescription")}</Text>
+      <Text>{t("Settings:CreateNewSecretKeyDialogDescription")}</Text>
       <div className="api-key_name">
         <InputBlock
           forwardedRef={inputRef}

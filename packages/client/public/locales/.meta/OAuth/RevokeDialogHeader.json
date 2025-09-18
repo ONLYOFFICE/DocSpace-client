@@ -3,7 +3,7 @@
   "content": "Revoke token",
   "content_en_sha1_hash": "9b8466169cf13a97ddbd21c83909af55a5a8e71a",
   "created_at": "2025-05-19T21:30:54.026Z",
-  "updated_at": "2025-08-04T07:30:01.448Z",
+  "updated_at": "2025-09-17T13:43:01.803Z",
   "comment": {
     "text": "The translation key \"RevokeDialogHeader\" is used to display the text \"Revoke token\" in a modal dialog header. It appears when revoking a developer token and serves as a label for the revoke action. Translators should provide an equivalent phrase that communicates this same action in the user's native language.",
     "is_auto": true,
@@ -13,12 +13,12 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/RevokeDeveloperTokenDialog.tsx",
       "line_number": 157,
-      "context": "visible\n onClose={onClose}\n displayType={ModalDialogType.modal}\n autoMaxHeight\n >\n <ModalDialog.Header>{t(\"OAuth:RevokeDialogHeader\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div>\n <Text style={{ marginBottom: \"16px\" }} noSelect>\n {t(\"OAuth:RevokeDialogDescription\")}\n </Text>",
+      "context": "visible\n onClose={onClose}\n displayType={ModalDialogType.modal}\n autoMaxHeight\n >\n <ModalDialog.Header>{t(\"OAuth:RevokeDialogHeader\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div>\n <Text style={{ marginBottom: \"16px\" }}>\n {t(\"OAuth:RevokeDialogDescription\")}\n </Text>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 777,
+      "line_number": 808,
       "context": "};\n \n const revokeDeveloperTokenOption = {\n key: \"revoke-token\",\n icon: RevokeIconUrl,\n label: t(\"OAuth:RevokeDialogHeader\"),\n onClick: onRevokeDeveloperToken,\n disabled: !item.enabled,\n dataTestId: \"oauth_revoke_token_option\",\n };",
       "module": "/packages/client"
     }

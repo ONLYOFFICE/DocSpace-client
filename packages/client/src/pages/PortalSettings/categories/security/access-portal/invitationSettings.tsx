@@ -33,27 +33,33 @@ import { toastr } from "@docspace/shared/components/toast";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Text } from "@docspace/shared/components/text";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import { size } from "@docspace/shared/utils";
+import { size, isMobileDevice } from "@docspace/shared/utils";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import { DeviceType } from "@docspace/shared/enums";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { TfaStore } from "@docspace/shared/store/TfaStore";
+import SettingsSetupStore from "SRC_DIR/store/SettingsSetupStore";
 import styles from "./InvitationSettings.module.scss";
 import { LearnMoreWrapper } from "../StyledSecurity";
 import InvitationLoader from "../sub-components/loaders/invitation-loader";
+import useSecurity from "../useSecurity";
+import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 
 const InvitationSettings = ({
   t,
-  isInit,
   setInvitationSettings,
   allowInvitingMembers,
   allowInvitingGuests,
   currentDeviceType,
-  getInvitationSettings,
   tReady,
+  settingsStore,
+  tfaStore,
+  setup,
 }: {
   t: TTranslation;
-  isInit: boolean;
+
   setInvitationSettings: (
     allowInvitingMembers: boolean,
     allowInvitingGuests: boolean,
@@ -61,12 +67,14 @@ const InvitationSettings = ({
   allowInvitingMembers: boolean;
   allowInvitingGuests: boolean;
   currentDeviceType: DeviceType;
-  getInvitationSettings: () => void;
   tReady: boolean;
+  settingsStore: SettingsStore;
+  tfaStore: TfaStore;
+  setup: SettingsSetupStore;
 }) => {
   const [showReminder, setShowReminder] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const [isCheckedContacts, setIsCheckedContacts] =
     useState(allowInvitingMembers);
@@ -75,18 +83,18 @@ const InvitationSettings = ({
   const navigate = useNavigate();
   const location = useLocation();
 
+  const defaultProps = createDefaultHookSettingsProps({
+    settingsStore,
+    tfaStore,
+    setup,
+  });
+
+  const { getSecurityInitialValue } = useSecurity(defaultProps.security);
+
   const checkWidth = () => {
     window.innerWidth > size.mobile &&
       location.pathname.includes("invitation-settings") &&
       navigate("/portal-settings/security/access-portal");
-  };
-
-  const load = async () => {
-    if (isInit) return;
-
-    setIsLoading(true);
-    getInvitationSettings();
-    setIsLoading(false);
   };
 
   const getSettingsFromDefault = () => {
@@ -119,7 +127,13 @@ const InvitationSettings = ({
   };
 
   useEffect(() => {
-    load();
+    if (isMobileDevice()) {
+      getSecurityInitialValue();
+      setIsLoaded(true);
+    }
+  }, [isMobileDevice]);
+
+  useEffect(() => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
 
@@ -128,7 +142,6 @@ const InvitationSettings = ({
 
   useEffect(() => {
     if (
-      isLoading ||
       typeof allowInvitingMembers !== "boolean" ||
       typeof allowInvitingGuests !== "boolean"
     )
@@ -142,11 +155,9 @@ const InvitationSettings = ({
     } else {
       getSettingsFromDefault();
     }
-  }, [isLoading, allowInvitingMembers, allowInvitingGuests]);
+  }, [allowInvitingMembers, allowInvitingGuests]);
 
   useEffect(() => {
-    if (isLoading) return;
-
     const defaultSettings = getFromSessionStorage("defaultInvitationSettings");
 
     const newSettings = {
@@ -210,7 +221,7 @@ const InvitationSettings = ({
   };
 
   if (
-    (currentDeviceType !== DeviceType.desktop && isLoading) ||
+    (currentDeviceType === DeviceType.mobile && !isLoaded) ||
     !tReady ||
     typeof allowInvitingMembers !== "boolean" ||
     typeof allowInvitingGuests !== "boolean"
@@ -242,6 +253,7 @@ const InvitationSettings = ({
               fontWeight="600"
               lineHeight="20px"
               onClick={onChangeContacts}
+              noSelect
             >
               {t("InviteViaContacts", {
                 productName: t("Common:ProductName"),
@@ -276,6 +288,7 @@ const InvitationSettings = ({
               fontWeight="600"
               lineHeight="20px"
               onClick={onChangeGuests}
+              noSelect
             >
               {t("InvitationSettingsGuests")}
             </Text>
@@ -313,24 +326,22 @@ const InvitationSettings = ({
 };
 
 export const InvitationSettingsSection = inject(
-  ({ settingsStore, setup }: TStore) => {
+  ({ settingsStore, tfaStore, setup }: TStore) => {
     const {
-      getInvitationSettings,
       setInvitationSettings,
       allowInvitingMembers,
       allowInvitingGuests,
       currentDeviceType,
     } = settingsStore;
 
-    const { isInit } = setup;
-
     return {
-      isInit,
-      getInvitationSettings,
       setInvitationSettings,
       allowInvitingMembers,
       allowInvitingGuests,
       currentDeviceType,
+      settingsStore,
+      tfaStore,
+      setup,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(InvitationSettings)));

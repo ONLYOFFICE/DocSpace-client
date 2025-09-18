@@ -47,6 +47,7 @@ export const AccessRightSelectPure = ({
   selectionErrorText,
   availableAccess,
   isDisabled,
+  dataTestId,
   ...props
 }: AccessRightSelectProps) => {
   const [currentItem, setCurrentItem] = useState(selectedOption);
@@ -88,7 +89,6 @@ export const AccessRightSelectPure = ({
   const formatToAccessRightItem = (data: TOption[]) => {
     const items = data.map((item: TOption) => {
       const isSelected = currentItem?.key === item?.key;
-
       return "isSeparator" in item && item.isSeparator ? (
         <DropDownItem key={item.key} isSeparator />
       ) : (
@@ -99,6 +99,9 @@ export const AccessRightSelectPure = ({
           isSelected={isSelected}
           isActive={isSelected}
           onClick={() => onSelectCurrentItem(item)}
+          testId={`access_right_option_${item.key.toString().toLowerCase()}`}
+          disabled={item?.disabled}
+          tooltip={item?.tooltip}
         >
           <div className={styles.item}>
             {item.icon && typeof item.icon === "string" ? (
@@ -109,6 +112,7 @@ export const AccessRightSelectPure = ({
                 src={item.icon}
               />
             ) : null}
+
             <div className={styles.itemContent}>
               <div className={styles.itemTitle}>
                 {item.label}
@@ -152,7 +156,6 @@ export const AccessRightSelectPure = ({
       selectedOption={
         {
           icon: currentItem?.icon,
-          default: true,
           key: currentItem?.key,
           label: type === "onlyIcon" ? "" : currentItem?.label,
           description: type === "onlyIcon" ? "" : currentItem?.description,
@@ -160,6 +163,8 @@ export const AccessRightSelectPure = ({
       }
       forceCloseClickOutside
       dropDownClassName={styles.accessRightSelectDropdown}
+      dataTestId={dataTestId}
+      useImageIcon
       {...props}
     />
   );

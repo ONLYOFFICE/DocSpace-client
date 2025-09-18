@@ -26,12 +26,10 @@
 
 import React from "react";
 import "@testing-library/jest-dom";
-import { screen, fireEvent, waitFor } from "@testing-library/react";
+import { screen, fireEvent, waitFor, render } from "@testing-library/react";
 
 import { InfoBadge } from ".";
 import type InfoBadgeProps from "./InfoBadge.types";
-
-import { renderWithTheme } from "../../utils/render-with-theme";
 
 const baseProps: InfoBadgeProps = {
   label: "label",
@@ -43,19 +41,19 @@ const baseProps: InfoBadgeProps = {
 
 describe("<InfoBadge />", () => {
   it("renders without error", () => {
-    renderWithTheme(<InfoBadge {...baseProps} />);
+    render(<InfoBadge {...baseProps} />);
 
     expect(screen.getByTestId("info-badge")).toBeInTheDocument();
   });
 
   it("renders badge with correct label", () => {
-    renderWithTheme(<InfoBadge {...baseProps} />);
+    render(<InfoBadge {...baseProps} />);
 
     expect(screen.getByText(baseProps.label)).toBeInTheDocument();
   });
 
   it("renders tooltip with correct title and description", async () => {
-    renderWithTheme(<InfoBadge {...baseProps} />);
+    render(<InfoBadge {...baseProps} />);
 
     const badge = screen.getByText(baseProps.label);
     fireEvent.click(badge);
@@ -67,7 +65,7 @@ describe("<InfoBadge />", () => {
   });
 
   it("closes tooltip when close button is clicked", async () => {
-    renderWithTheme(<InfoBadge {...baseProps} />);
+    render(<InfoBadge {...baseProps} />);
 
     const badge = screen.getByText(baseProps.label);
     fireEvent.click(badge);
@@ -85,7 +83,7 @@ describe("<InfoBadge />", () => {
       await waitFor(() => {
         expect(screen.queryByTestId("tooltip-title")).not.toBeInTheDocument();
       });
-    } catch (e) {
+    } catch {
       expect(true);
     }
   });
@@ -97,7 +95,7 @@ describe("<InfoBadge />", () => {
       offset: 10,
     };
 
-    renderWithTheme(<InfoBadge {...customProps} />);
+    render(<InfoBadge {...customProps} />);
 
     const badge = screen.getByText(baseProps.label);
     fireEvent.click(badge);

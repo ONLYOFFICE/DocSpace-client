@@ -3,7 +3,7 @@
   "content": "Viewer",
   "content_en_sha1_hash": "dbad9f126b33570e09839a2d60720898de1a512d",
   "created_at": "2025-05-19T21:30:48.141Z",
-  "updated_at": "2025-08-04T07:30:01.088Z",
+  "updated_at": "2025-09-17T13:43:01.613Z",
   "comment": {
     "text": "The translation key \"Common:RoleViewer\" is used to display the text \"Viewer\" in various UI elements, such as buttons and labels. It appears in dialogues like the Create Edit Room Dialog and in page components like the InfoPanel Body's MembersHelper. The text is meant to represent a role or access level for users.",
     "is_auto": true,
@@ -12,19 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/VirtualDataRoomBlock.js",
-      "line_number": 80,
+      "line_number": 81,
       "context": "setRoomParams,\n isEdit,\n showLifetimeDialog,\n setLifetimeDialogVisible,\n }) => {\n const role = t(\"Common:RoleViewer\");\n \n const initialInfo = useRef(null);\n \n if (initialInfo.current === null) {\n initialInfo.current = { ...roomParams };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/Members.utils.ts",
-      "line_number": 59,
+      "line_number": 62,
       "context": "access: ShareAccessRights.Collaborator,\n type: \"collaborator\",\n },\n viewer: {\n key: \"viewer\",\n label: this.t(\"Common:RoleViewer\"),\n access: ShareAccessRights.ReadOnly,\n type: \"user\",\n },\n editor: {\n key: \"editor\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 177,
+      "line_number": 181,
       "context": "access: ShareAccessRights.Comment,\n type: EmployeeType.User,\n },\n viewer: {\n key: \"viewer\",\n label: t(\"Common:RoleViewer\"),\n description: t(\"Common:RoleViewerDescription\"),\n access: ShareAccessRights.ReadOnly,\n type: EmployeeType.User,\n },\n };",
       "module": "/packages/shared"
     },

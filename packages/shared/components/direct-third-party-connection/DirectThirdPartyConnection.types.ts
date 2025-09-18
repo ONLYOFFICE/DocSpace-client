@@ -83,6 +83,8 @@ export interface DirectThirdPartyConnectionProps {
   setBasePath: (folders: TBreadCrumb[]) => void;
   toDefault: VoidFunction;
   setNewPath: (folders: TBreadCrumb[], fileName?: string) => void;
+
+  setDefaultFolderId?: (id: string | number | null) => void;
   // other
 
   isError?: boolean;
@@ -101,4 +103,5 @@ export interface DirectThirdPartyConnectionProps {
   ) => void;
   onSelectFile?: (fileInfo: FileInfoType, breadCrumbs?: TBreadCrumb[]) => void;
   checkCreating?: boolean;
+  dataTestId?: string;
 }

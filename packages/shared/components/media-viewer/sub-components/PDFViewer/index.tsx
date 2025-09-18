@@ -104,7 +104,6 @@ export const PDFViewer = ({
   const [isOpenMobileDrawer, setIsOpenMobileDrawer] = useState<boolean>(false);
 
   const initViewer = () => {
-    // eslint-disable-next-line no-console
     console.log("init PDF Viewer");
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -164,7 +163,7 @@ export const PDFViewer = ({
       (event: unknown) => {
         setIsLoadingScript(false);
         setIsError(true);
-        // eslint-disable-next-line no-console
+
         console.error(event);
       },
     );
@@ -268,7 +267,7 @@ export const PDFViewer = ({
       })
       .catch((event) => {
         setIsError(true);
-        // eslint-disable-next-line no-console
+
         console.error(event);
       })
       .finally(() => {
@@ -284,7 +283,7 @@ export const PDFViewer = ({
         pdfViewer.current?.open(file);
       } catch (error) {
         setIsError(true);
-        // eslint-disable-next-line no-console
+
         console.log(error);
       }
     }

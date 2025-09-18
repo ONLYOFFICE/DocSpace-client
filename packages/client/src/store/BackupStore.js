@@ -26,6 +26,7 @@
 
 import { getBackupProgress } from "@docspace/shared/api/portal";
 import { makeAutoObservable } from "mobx";
+import axios from "axios";
 import { toastr } from "@docspace/shared/components/toast";
 import { AutoBackupPeriod } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -34,7 +35,7 @@ import {
   getSettingsThirdParty,
   uploadBackup,
 } from "@docspace/shared/api/files";
-import { isManagement } from "@docspace/shared/utils/common";
+import { getErrorInfo, isManagement } from "@docspace/shared/utils/common";
 
 import {
   saveToLocalStorage,
@@ -59,6 +60,14 @@ async function* uploadBackupFile(requestsDataArray, url) {
 
 class BackupStore {
   authStore = null;
+
+  currentQuotaStore = null;
+
+  currentTariffStatusStore = null;
+
+  settingsStore = null;
+
+  paymentStore = null;
 
   /** @type {import("./ThirdPartyStore").default} */
   thirdPartyStore = null;
@@ -159,11 +168,62 @@ class BackupStore {
 
   backupProgressError = "";
 
-  constructor(authStore, thirdPartyStore) {
+  backupsCount = null;
+
+  isInited = false;
+
+  isEmptyContentBeforeLoader = true;
+
+  isInitialError = false;
+
+  constructor(
+    authStore,
+    thirdPartyStore,
+    currentQuotaStore,
+    currentTariffStatusStore,
+    settingsStore,
+    paymentStore,
+  ) {
     makeAutoObservable(this);
 
     this.authStore = authStore;
     this.thirdPartyStore = thirdPartyStore;
+    this.currentQuotaStore = currentQuotaStore;
+    this.currentTariffStatusStore = currentTariffStatusStore;
+    this.settingsStore = settingsStore;
+    this.paymentStore = paymentStore;
+  }
+
+  setIsInitialError = (isInitialError) => {
+    this.isInitialError = isInitialError;
+  };
+
+  setIsEmptyContentBeforeLoader = (isEmptyContentBeforeLoader) => {
+    this.isEmptyContentBeforeLoader = isEmptyContentBeforeLoader;
+  };
+
+  setBackupsCount = (counts) => {
+    if (counts === undefined || counts === null) return;
+
+    this.backupsCount = counts;
+  };
+
+  setIsInited = (isInited) => {
+    this.isInited = isInited;
+  };
+
+  get backupPageEnable() {
+    const { maxFreeBackups, isBackupPaid } = this.currentQuotaStore;
+    const { isNotPaidPeriod } = this.currentTariffStatusStore;
+    const { isBackupServiceOn } = this.paymentStore;
+
+    if (!isBackupPaid || isNotPaidPeriod) return true;
+
+    if (maxFreeBackups === 0) return isBackupServiceOn;
+
+    if (this.backupsCount >= maxFreeBackups) return isBackupServiceOn;
+
+    return true;
   }
 
   setConnectedThirdPartyAccount = (account) => {
@@ -465,6 +525,10 @@ class BackupStore {
     this.setIsThirdStorageChanged(false);
   };
 
+  setDefaultFolderId = (id) => {
+    this.defaultFolderId = id;
+  };
+
   setThirdPartyStorage = (list) => {
     this.thirdPartyStorage = list;
   };
@@ -563,23 +627,19 @@ class BackupStore {
     }
   };
 
-  setErrorInformation = (err, t) => {
-    let message = "";
-    if (typeof err === "string") message = err;
-    else
-      message =
-        ("response" in err && err.response?.data?.error?.message) ||
-        ("message" in err && err.message) ||
-        "";
-
-    if (err?.response?.status === 502) message = t("Common:UnexpectedError");
-
-    this.errorInformation = message ?? t("Common:UnexpectedError");
+  setErrorInformation = (err, t, customText) => {
+    this.errorInformation = getErrorInfo(err, t, customText);
   };
 
   getProgress = async (t) => {
+    const abortController = new AbortController();
+    this.settingsStore.addAbortControllers(abortController);
+
     try {
-      const response = await getBackupProgress(isManagement());
+      const response = await getBackupProgress(
+        isManagement(),
+        abortController.signal,
+      );
 
       if (response) {
         const { progress, link, error } = response;
@@ -599,7 +659,9 @@ class BackupStore {
         }
       }
     } catch (err) {
-      this.setErrorInformation(err, t);
+      if (axios.isCancel(err)) return;
+
+      if (err) this.setErrorInformation(err, t);
     }
   };
 
@@ -692,7 +754,7 @@ class BackupStore {
 
   get isValidForm() {
     const requiredKeys = Object.keys(this.requiredFormSettings);
-    if (!requiredKeys.length) return;
+    if (!requiredKeys.length) return true;
 
     return !this.requiredFormSettings.some((key) => {
       const value = this.formSettings[key];
@@ -786,7 +848,6 @@ class BackupStore {
       url,
     );
 
-    // eslint-disable-next-line no-restricted-syntax
     for await (const value of uploadBackupFile(requestsDataArray, uploadUrl)) {
       if (!value) return false;
 

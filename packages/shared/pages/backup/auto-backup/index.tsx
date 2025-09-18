@@ -27,8 +27,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useTheme } from "styled-components";
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 import {
@@ -36,11 +35,7 @@ import {
   getBackupSchedule,
   createBackupSchedule,
 } from "../../../api/portal";
-import {
-  BackupStorageType,
-  AutoBackupPeriod,
-  FolderType,
-} from "../../../enums";
+import { BackupStorageType, AutoBackupPeriod } from "../../../enums";
 import { OPERATIONS_NAME } from "../../../constants";
 import { ToggleButton } from "../../../components/toggle-button";
 import { getBackupStorage } from "../../../api/settings";
@@ -51,12 +46,9 @@ import SocketHelper, {
   type TSocketListener,
 } from "../../../utils/socket";
 import { getBackupProgressInfo } from "../../../utils/common";
-
-import { globalColors } from "../../../themes";
 import { useStateCallback } from "../../../hooks/useStateCallback";
 import type { Nullable, Option } from "../../../types";
 import OperationsProgressButton from "../../../components/operations-progress-button";
-import { Badge } from "../../../components/badge";
 import { toastr } from "../../../components/toast";
 import { Text } from "../../../components/text";
 import { RadioButton } from "../../../components/radio-button";
@@ -93,7 +85,7 @@ const AutomaticBackup = ({
   setThirdPartyStorage,
   setBackupSchedule,
   setConnectedThirdPartyAccount,
-  rootFoldersTitles,
+
   seStorageType,
   setSelectedEnableSchedule,
   toDefault,
@@ -177,6 +169,7 @@ const AutomaticBackup = ({
   isManagement = false,
   backupProgressError,
   setBackupProgressError,
+  setDefaultFolderId,
 }: AutomaticBackupProps) => {
   const isCheckedDocuments =
     selectedStorageType === `${BackupStorageType.DocumentModuleType}`;
@@ -186,7 +179,6 @@ const AutomaticBackup = ({
     selectedStorageType === `${BackupStorageType.StorageModuleType}`;
 
   const { t } = useTranslation(["Common"]);
-  const theme = useTheme();
 
   const [isLoadingData, setIsLoadingData] = useStateCallback(false);
 
@@ -216,10 +208,10 @@ const AutomaticBackup = ({
       if (success) toastr.success(success);
     };
 
-    SocketHelper.on(SocketEvents.BackupProgress, onBackupProgress);
+    SocketHelper?.on(SocketEvents.BackupProgress, onBackupProgress);
 
     return () => {
-      SocketHelper.off(SocketEvents.BackupProgress, onBackupProgress);
+      SocketHelper?.off(SocketEvents.BackupProgress, onBackupProgress);
     };
   }, [setDownloadingProgress, setBackupProgressError, setTemporaryLink, t]);
 
@@ -315,8 +307,8 @@ const AutomaticBackup = ({
       setDefaultOptions(periodsObject, weekdaysLabelArray, selectedSchedule);
       toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (e) {
-      toastr.error(e as Error);
       setErrorInformation(e, t);
+      toastr.error(e as Error);
       console.error(e);
       if (isCheckedThirdParty || isCheckedDocuments) updateBaseFolderPath();
     } finally {
@@ -391,14 +383,14 @@ const AutomaticBackup = ({
 
   const operationsCompleted = downloadingProgress === 100;
 
-  const roomName = rootFoldersTitles[FolderType.USER]?.title;
-
   const isSaveCancelDisabled =
     isLoadingData || !(isChanged || isThirdStorageChanged);
 
   if (isEmptyContentBeforeLoader && !isInitialLoading) return null;
 
   if (isInitialLoading) return <AutoBackupLoader />;
+
+  const mainDisabled = isLoadingData || !isEnableAuto || isInitialError;
 
   return (
     <div data-testid="auto-backup" className={styles.autoBackup}>
@@ -428,6 +420,7 @@ const AutomaticBackup = ({
             fontSize="13px"
             color={currentColorScheme?.main?.accent}
             isHovered
+            dataTestId="automatic_backup_learn_link"
           >
             {t("Common:LearnMore")}
           </Link>
@@ -438,6 +431,9 @@ const AutomaticBackup = ({
         className={classNames(
           styles.backupToggleWrapper,
           "backup_toggle-wrapper",
+          {
+            [styles.isDisabled]: mainDisabled,
+          },
         )}
       >
         <ToggleButton
@@ -447,7 +443,8 @@ const AutomaticBackup = ({
           )}
           onChange={onClickPermissions}
           isChecked={selectedEnableSchedule}
-          isDisabled={isLoadingData || !isEnableAuto || isInitialError}
+          isDisabled={mainDisabled}
+          dataTestId="enable_automatic_backup_button"
         />
 
         <div className={classNames(styles.toggleCaption, "toggle-caption")}>
@@ -468,22 +465,6 @@ const AutomaticBackup = ({
             >
               {t("Common:EnableAutomaticBackup")}
             </Text>
-            {!isEnableAuto && !isManagement ? (
-              <Badge
-                backgroundColor={
-                  theme.isBase
-                    ? globalColors.favoritesStatus
-                    : globalColors.favoriteStatusDark
-                }
-                label={t("Common:Paid")}
-                fontWeight="700"
-                className={classNames(
-                  styles.autoBackupBadge,
-                  "auto-backup_badge",
-                )}
-                isPaidBadge
-              />
-            ) : null}
           </div>
           <Text
             className={classNames(
@@ -506,6 +487,7 @@ const AutomaticBackup = ({
               name={`${BackupStorageType.DocumentModuleType}`}
               isChecked={isCheckedDocuments}
               isDisabled={isLoadingData}
+              testId="auto_backup_room_radio_button"
             />
             <Text
               className={classNames(
@@ -513,9 +495,9 @@ const AutomaticBackup = ({
                 "backup-description",
               )}
             >
-              <Trans t={t} i18nKey="RoomsModuleDescription" ns="Common">
-                {{ roomName }}
-              </Trans>
+              {t("Common:RoomsModuleDescription", {
+                roomName: t("Common:MyDocuments"),
+              })}
             </Text>
             {isCheckedDocuments ? (
               <RoomsModule
@@ -555,6 +537,7 @@ const AutomaticBackup = ({
               name={`${BackupStorageType.ResourcesModuleType}`}
               isChecked={isCheckedThirdParty}
               isDisabled={isLoadingData}
+              testId="auto_backup_resource_radio_button"
             />
             <Text
               className={classNames(
@@ -566,6 +549,7 @@ const AutomaticBackup = ({
             </Text>
             {isCheckedThirdParty ? (
               <ThirdPartyModule
+                {...(setDefaultFolderId && { setDefaultFolderId })}
                 setSelectedFolder={setSelectedFolder}
                 defaultStorageType={defaultStorageType}
                 defaultFolderId={defaultFolderId}
@@ -620,6 +604,7 @@ const AutomaticBackup = ({
               name={`${BackupStorageType.StorageModuleType}`}
               isChecked={isCheckedThirdPartyStorage}
               isDisabled={isLoadingData}
+              testId="auto_backup_storage_radio_button"
             />
             <Text
               className={classNames(
@@ -673,6 +658,8 @@ const AutomaticBackup = ({
           saveButtonDisabled={isSaveCancelDisabled}
           disableRestoreToDefault={isSaveCancelDisabled}
           displaySettings
+          saveButtonDataTestId="auto_backup_storage_save_button"
+          cancelButtonDataTestId="auto_backup_storage_cancel_button"
         />
       ) : null}
 

@@ -39,8 +39,7 @@ import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
 import { MainContainer, ButtonWrapper } from "./StyledDeleteData";
 
 const PortalDeactivation = (props) => {
-  const { t, getPortalOwner, owner, currentColorScheme, sendActivationLink } =
-    props;
+  const { t, owner, currentColorScheme, sendActivationLink } = props;
   const [isDesktopView, setIsDesktopView] = useState(false);
 
   const onCheckView = () => {
@@ -48,15 +47,10 @@ const PortalDeactivation = (props) => {
     else setIsDesktopView(false);
   };
 
-  const fetchData = async () => {
-    await getPortalOwner();
-  };
-
   useEffect(() => {
     setDocumentTitle(
       t("PortalDeactivation", { productName: t("Common:ProductName") }),
     );
-    fetchData();
     onCheckView();
     window.addEventListener("resize", onCheckView);
     return () => window.removeEventListener("resize", onCheckView);
@@ -98,6 +92,7 @@ const PortalDeactivation = (props) => {
           size={isDesktopView ? "small" : "normal"}
           onClick={onDeactivateClick}
           isDisabled={notActivatedEmail}
+          testId="request_deactivate_portal_button"
         />
         {notActivatedEmail ? (
           <Text fontSize="12px" fontWeight="600">
@@ -111,6 +106,7 @@ const PortalDeactivation = (props) => {
               fontSize="12px"
               fontWeight="400"
               onClick={requestAgain}
+              testId="request_deactivate_portal_link"
             >
               {t("MainBar:RequestActivation")}
             </Link>
@@ -122,11 +118,10 @@ const PortalDeactivation = (props) => {
 };
 
 export default inject(({ settingsStore, userStore }) => {
-  const { getPortalOwner, owner, currentColorScheme } = settingsStore;
+  const { owner, currentColorScheme } = settingsStore;
   const { sendActivationLink } = userStore;
 
   return {
-    getPortalOwner,
     owner,
     currentColorScheme,
     sendActivationLink,

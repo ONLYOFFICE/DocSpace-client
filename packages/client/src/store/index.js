@@ -90,6 +90,8 @@ import OAuthStore from "./OAuthStore";
 
 import BrandingStore from "./portal-settings/BrandingStore";
 
+import TelegramStore from "./TelegramStore";
+
 const selectedFolderStore = new SelectedFolderStore(settingsStore);
 
 const pluginStore = new PluginStore(
@@ -108,15 +110,22 @@ const servicesStore = new ServicesStore(currentTariffStatusStore, paymentStore);
 
 const wizardStore = new WizardStore();
 const confirmStore = new ConfirmStore();
-const backupStore = new BackupStore(authStore, thirdPartyStore);
+const backupStore = new BackupStore(
+  authStore,
+  thirdPartyStore,
+  currentQuotaStore,
+  currentTariffStatusStore,
+  settingsStore,
+  paymentStore,
+);
 const commonStore = new CommonStore(settingsStore);
 
-const ssoStore = new SsoFormStore();
-const ldapStore = new LdapFormStore(currentQuotaStore);
+const ssoStore = new SsoFormStore(settingsStore);
+const ldapStore = new LdapFormStore(currentQuotaStore, settingsStore);
 
 const tagsStore = new TagsStore();
 
-const clientLoadingStore = new ClientLoadingStore();
+const clientLoadingStore = new ClientLoadingStore(settingsStore);
 const publicRoomStore = new PublicRoomStore(clientLoadingStore);
 
 const infoPanelStore = new InfoPanelStore(userStore);
@@ -183,7 +192,10 @@ const secondaryProgressDataStore = new SecondaryProgressDataStore(
   treeFoldersStore,
   mediaViewerDataStore,
 );
-const primaryProgressDataStore = new PrimaryProgressDataStore();
+const primaryProgressDataStore = new PrimaryProgressDataStore(
+  filesStore,
+  selectedFolderStore,
+);
 const versionHistoryStore = new VersionHistoryStore(filesStore, settingsStore);
 
 const dialogsStore = new DialogsStore(
@@ -204,6 +216,7 @@ const profileActionsStore = new ProfileActionsStore(
   settingsStore,
   currentTariffStatusStore,
   infoPanelStore,
+  clientLoadingStore,
 );
 
 const peopleStore = new PeopleStore(
@@ -326,7 +339,10 @@ const createEditRoomStore = new CreateEditRoomStore(
 );
 
 const webhooksStore = new WebhooksStore(settingsStore);
-const importAccountsStore = new ImportAccountsStore(currentQuotaStore);
+const importAccountsStore = new ImportAccountsStore(
+  currentQuotaStore,
+  settingsStore,
+);
 const storageManagement = new StorageManagement(
   filesStore,
   peopleStore,
@@ -335,13 +351,15 @@ const storageManagement = new StorageManagement(
   settingsStore,
 );
 
-const oauthStore = new OAuthStore(userStore, storageManagement);
+const oauthStore = new OAuthStore(userStore, settingsStore);
 
 const campaignsStore = new CampaignsStore(settingsStore, userStore);
 
 const editGroupStore = new EditGroupStore(peopleStore);
 
 const brandingStore = new BrandingStore(settingsStore);
+
+const telegramStore = new TelegramStore();
 
 const store = {
   authStore,
@@ -406,6 +424,8 @@ const store = {
   brandingStore,
 
   guidanceStore,
+
+  telegramStore,
 };
 
 export default store;

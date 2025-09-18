@@ -3,7 +3,7 @@
   "content": "Invite",
   "content_en_sha1_hash": "b136609f068403340f94e46a0174da273bfbce30",
   "created_at": "2025-05-19T21:30:45.964Z",
-  "updated_at": "2025-08-04T07:30:00.972Z",
+  "updated_at": "2025-09-17T13:43:01.541Z",
   "comment": {
     "text": "This translation key is used for the label \"Invite\" in UI elements such as buttons and dialogs. It appears on a main button where user actions are displayed, as well as a modal dialog inviting users to join a room. Translators should focus on providing a consistent invite-related message across various contexts.",
     "is_auto": true,
@@ -18,19 +18,13 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 568,
+      "line_number": 570,
       "context": "}}\n />\n </ModalDialog.Container>\n ) : null}\n \n <ModalDialog.Header>{t(\"Common:Invite\")}</ModalDialog.Header>\n <ModalDialog.Body>{bodyInvitePanel}</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"send-invitation\"\n scale",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 469,
-      "context": "onClick: showInfoPanel,\n icon: InfoOutlineReactSvgUrl,\n },\n {\n key: \"cm-invite\",\n label: t(\"Common:Invite\"),\n disabled: !hasUsersToInvite,\n onClick: () => setSendInviteDialogVisible(true),\n icon: InviteAgainReactSvgUrl,\n },\n {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 469,
+      "line_number": 466,
       "context": "onClick: showInfoPanel,\n icon: InfoOutlineReactSvgUrl,\n },\n {\n key: \"cm-invite\",\n label: t(\"Common:Invite\"),\n disabled: !hasUsersToInvite,\n onClick: () => setSendInviteDialogVisible(true),\n icon: InviteAgainReactSvgUrl,\n },\n {",
       "module": "/packages/client"
     },

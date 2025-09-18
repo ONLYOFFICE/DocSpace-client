@@ -3,7 +3,7 @@
   "content": "If this property is set to true, the client attempts to use HTTP protocol, if the target endpoint supports it. By default, this property is set to false.",
   "content_en_sha1_hash": "cee047b295247a75beff622fdf5c057a35ac83a4",
   "created_at": "2025-05-26T07:15:40.376Z",
-  "updated_at": "2025-08-04T07:30:01.671Z",
+  "updated_at": "2025-09-07T07:53:15.434Z",
   "comment": {
     "text": "This translation key describes the help tooltip for a checkbox that controls HTTP protocol usage. It indicates when using HTTP protocol is preferred by default. The tooltip appears in an Amazon settings component.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/amazon-settings/AmazonSettings.tsx",
-      "line_number": 387,
+      "line_number": 390,
       "context": "className={classNames(\n styles.backupStorageTooltip,\n \"backup_storage-tooltip\",\n )}\n >\n {renderTooltip(t(\"Common:AmazonHTTPTip\"), \"http-tooltip\")}\n </div>\n }\n />\n </div>\n <div className={styles.body} data-testid=\"amazon-settings-sse-method\">",
       "module": "/packages/shared"
     }

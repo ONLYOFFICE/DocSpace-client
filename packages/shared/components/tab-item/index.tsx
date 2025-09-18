@@ -38,6 +38,8 @@ const TabItem = ({
   className,
   allowNoSelection,
   withMultiSelect = false,
+  dataTestId,
+  lockLastSelection = false,
   ...rest
 }: TTabItemProps) => {
   const [isActive, setIsActive] = useState(isActiveInit);
@@ -54,6 +56,7 @@ const TabItem = ({
   const onItemClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (isDisabled) return;
     if (!(isActive && !withMultiSelect)) {
+      if (lockLastSelection && isActive) return;
       onSelectItem(!isActive);
       onSelect?.(e);
     }
@@ -76,7 +79,7 @@ const TabItem = ({
       )}
       onClick={onItemClick}
       aria-selected={isActive}
-      data-testid="tab-item"
+      data-testid={dataTestId ?? "tab-item"}
       {...rest}
     >
       <Text

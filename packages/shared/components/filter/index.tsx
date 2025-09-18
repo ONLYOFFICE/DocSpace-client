@@ -26,6 +26,7 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import { DeviceType, FilterGroups } from "../../enums";
 
@@ -78,6 +79,7 @@ const FilterInput = React.memo(
     isFlowsPage,
     isIndexing,
     isIndexEditingMode,
+    isRecentFolder,
 
     filterTitle,
     sortByTitle,
@@ -196,8 +198,17 @@ const FilterInput = React.memo(
       isFirstRenderRef.current = false;
     }, []);
 
+    const showSortButton = !isIndexing && !isFlowsPage && !isRecentFolder;
+
+    const showViewSelector =
+      viewSelectorVisible &&
+      viewSettings &&
+      !isIndexing &&
+      !isFlowsPage &&
+      (isRecentFolder || currentDeviceType === DeviceType.desktop);
+
     return (
-      <div className={styles.filterInput}>
+      <div className={styles.filterInput} data-testid="filter_container">
         <div className="filter-input_filter-row">
           {searchComponent}
           {!isIndexEditingMode && !isFlowsPage ? (
@@ -220,7 +231,7 @@ const FilterInput = React.memo(
             />
           ) : null}
 
-          {!isIndexing && !isFlowsPage ? (
+          {showSortButton ? (
             <SortButton
               id="sort-by-button"
               onSort={onSort}
@@ -239,14 +250,12 @@ const FilterInput = React.memo(
               title={sortByTitle}
             />
           ) : null}
-          {viewSettings &&
-          !isIndexing &&
-          !isFlowsPage &&
-          currentDeviceType === DeviceType.desktop &&
-          viewSelectorVisible ? (
+          {showViewSelector ? (
             <ViewSelector
               id={viewAs === "tile" ? "view-switch--row" : "view-switch--tile"}
-              className={styles.viewSelector}
+              className={classNames(styles.viewSelector, {
+                [styles.desktopOnly]: !isRecentFolder, // css hiding for ssr
+              })}
               style={{ marginInlineStart: "8px" }}
               viewAs={viewAs === "table" ? "row" : viewAs}
               viewSettings={viewSettings}
@@ -265,6 +274,7 @@ const FilterInput = React.memo(
                 group={item.group}
                 onClose={removeSelectedItemAction}
                 onClick={removeSelectedItemAction}
+                dataTestId={`filter_selected_item_${Array.isArray(item.key) ? item.key[0] : item.key}`}
               />
             ))}
             {selectedItems.filter((item) => item.label).length > 1 ? (
@@ -275,6 +285,7 @@ const FilterInput = React.memo(
                 isSemitransparent
                 type={LinkType.action}
                 onClick={clearAll}
+                dataTestId="filter_clear_all_link"
               >
                 {t("Common:ClearAll")}
               </Link>

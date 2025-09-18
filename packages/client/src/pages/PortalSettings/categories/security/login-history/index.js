@@ -37,12 +37,12 @@ import HistoryMainContent from "../sub-components/HistoryMainContent";
 const LoginHistory = (props) => {
   const {
     t,
-    getLoginHistory,
+    // getLoginHistory,
     historyUsers,
     theme,
     viewAs,
     getLoginHistoryReport,
-    getLifetimeAuditSettings,
+    // getLifetimeAuditSettings,
     setLifetimeAuditSettings,
     securityLifetime,
     isAuditAvailable,
@@ -54,9 +54,9 @@ const LoginHistory = (props) => {
   useEffect(() => {
     setDocumentTitle(t("LoginHistoryTitle"));
 
-    getLoginHistory();
+    // getLoginHistory();
 
-    getLifetimeAuditSettings();
+    //  getLifetimeAuditSettings();
 
     return () => resetIsInit();
   }, []);
@@ -98,7 +98,7 @@ const LoginHistory = (props) => {
         content={getContent()}
         downloadReport={t("DownloadReportBtnText")}
         downloadReportDescription={t("ReportSaveLocation", {
-          sectionName: t("Common:MyFilesSection"),
+          sectionName: t("Common:MyDocuments"),
         })}
         getReport={getLoginHistoryReport}
         isSettingNotPaid={!isAuditAvailable}

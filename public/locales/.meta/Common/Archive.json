@@ -3,7 +3,7 @@
   "content": "Archive",
   "content_en_sha1_hash": "2621c6fd51a58e1d1d5c491aac71488647b20224",
   "created_at": "2025-05-19T21:30:43.051Z",
-  "updated_at": "2025-08-04T07:30:01.045Z",
+  "updated_at": "2025-09-02T07:59:28.329Z",
   "comment": {
     "text": "This translation key is used to display the text \"Archive\" as a label when indicating that a file has been archived. It appears in a table view cell on the Home page, displaying information about different types of files.",
     "is_auto": true,
@@ -13,13 +13,13 @@
     {
       "file_path": "/packages/client/src/components/dialogs/ArchiveDialog/index.js",
       "line_number": 96,
-      "context": "onClose={onClose}\n displayType=\"modal\"\n >\n <ModalDialog.Header>\n {t(\"Common:SectionMoveConfirmation\", {\n sectionName: t(\"Common:Archive\"),\n })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text noSelect>{description}</Text>\n </ModalDialog.Body>",
+      "context": "onClose={onClose}\n displayType=\"modal\"\n >\n <ModalDialog.Header>\n {t(\"Common:SectionMoveConfirmation\", {\n sectionName: t(\"Common:Archive\"),\n })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{description}</Text>\n </ModalDialog.Body>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/EmptyTrashDialog/index.js",
       "line_number": 52,
-      "context": "} = props;\n \n const onClose = () => setEmptyTrashDialogVisible(false);\n \n const sectionName = isArchiveFolder\n ? t(\"Common:Archive\")\n : isPersonalReadOnly\n ? t(\"Common:MyFilesSection\")\n : t(\"Common:TrashSection\");\n \n const onEmptyTrash = () => {",
+      "context": "} = props;\n \n const onClose = () => setEmptyTrashDialogVisible(false);\n \n const sectionName = isArchiveFolder\n ? t(\"Common:Archive\")\n : isPersonalReadOnly\n ? t(\"Common:MyDocuments\")\n : t(\"Common:TrashSection\");\n \n const onEmptyTrash = () => {",
       "module": "/packages/client"
     },
     {
@@ -55,7 +55,7 @@
     {
       "file_path": "/packages/client/src/store/TreeFoldersStore.js",
       "line_number": 73,
-      "context": "break;\n case FolderType.Rooms:\n folder.title = i18n.t(\"Common:Rooms\");\n break;\n case FolderType.Archive:\n folder.title = i18n.t(\"Common:Archive\");\n break;\n case FolderType.TRASH:\n folder.title = i18n.t(\"Common:TrashSection\");\n break;\n default:",
+      "context": "break;\n case FolderType.Rooms:\n folder.title = i18n.t(\"Common:Rooms\");\n break;\n case FolderType.Archive:\n folder.title = i18n.t(\"Common:Archive\");\n break;\n case FolderType.TRASH:\n folder.title = i18n.t(\"Common:TrashSection\");\n break;\n case FolderType.Favorites:",
       "module": "/packages/client"
     },
     {

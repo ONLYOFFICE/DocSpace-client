@@ -185,16 +185,19 @@ export default inject(
     filesActionsStore,
     selectedFolderStore,
   }) => {
-    const { isAuthenticated } = authStore;
     const { enableAdmMess, wizardToken, theme, cultures, isFrame } =
       settingsStore;
-    const { isPublicRoom, onOpenSignInWindow, windowIsOpen } = publicRoomStore;
+    const { isPublicRoom, onOpenSignInWindow, windowIsOpen, validationData } =
+      publicRoomStore;
     const { moveToPublicRoom } = filesActionsStore;
     const { navigationPath, id } = selectedFolderStore;
 
     const rootFolderId = navigationPath.length
       ? navigationPath[navigationPath.length - 1]?.id
       : id;
+
+    const isAuthenticated =
+      validationData?.isAuthenticated || authStore.isAuthenticated;
 
     return {
       enableAdmMess,

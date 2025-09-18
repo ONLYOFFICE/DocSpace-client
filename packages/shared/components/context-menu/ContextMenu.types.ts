@@ -105,8 +105,9 @@ export type HeaderType =
       avatar?: string;
       logo?: string;
       icon?: string;
+      badgeUrl?: string;
     })
-  | { title: string; icon: string };
+  | { title: string; icon: string; badgeUrl?: string };
 
 export type ContextMenuModel = ContextMenuType | SeparatorType;
 
@@ -172,5 +173,5 @@ export interface ContextMenuProps {
 
 export type TContextMenuRef = {
   show: (e: React.MouseEvent) => void;
-  hide: (e: React.MouseEvent) => {};
+  hide: (e: React.MouseEvent) => object | void;
 };

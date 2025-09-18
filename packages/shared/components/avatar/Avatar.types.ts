@@ -26,16 +26,17 @@
 
 import React from "react";
 import { Nullable } from "../../types";
+import { AVATAR_ACTION_KEYS } from "../../constants";
 
 import { AvatarRole, AvatarSize } from "./Avatar.enums";
 
-export type TAvarModel = { label: string; icon: string } & (
+export type TAvatarModel = { label: string; icon: string } & (
   | {
       key: string;
       onClick: () => void;
     }
   | {
-      key: "upload";
+      key: typeof AVATAR_ACTION_KEYS.PROFILE_AVATAR_UPLOAD;
       onClick: (ref?: React.RefObject<Nullable<HTMLDivElement>>) => void;
     }
 );
@@ -76,7 +77,7 @@ export type AvatarProps = {
   hasAvatar?: boolean;
   onChangeFile?: () => void;
 
-  model?: TAvarModel[];
+  model?: TAvatarModel[];
   isNotIcon?: boolean;
   imgClassName?: string;
   dataTestId?: string;

@@ -3,7 +3,7 @@
   "content": "All deleted files are moved to '{{sectionName}}'. Restore files deleted by mistake or delete them permanently. Files in '{{sectionName}}' are automatically deleted after 30 days. Please note, that the files deleted from the '{{sectionName}}' cannot be restored any longer.",
   "content_en_sha1_hash": "cf396eae02d86cc85cd6346b1bf8f7ebd329b2c2",
   "created_at": "2025-06-02T10:19:23.453Z",
-  "updated_at": "2025-06-02T10:21:36.743Z",
+  "updated_at": "2025-08-29T14:33:37.928Z",
   "comment": {
     "text": "This translation key is used to describe files moved to a trash section. It informs users that deleted files can be restored or permanently deleted, and explains the automatic deletion process after 30 days. This text appears in UI elements related to empty folders, such as an archive or trash functionality.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 208,
+      "line_number": 214,
       "context": ")\n .with([FolderType.Archive, ShareAccessRights.DenyAccess], () =>\n t(\"Files:ArchiveEmptyScreenUser\"),\n )\n .with([FolderType.TRASH, P._], () =>\n t(\"Files:TrashFunctionalityDescription\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n )\n .otherwise(() => \"\");\n };",
       "module": "/packages/client"
     }

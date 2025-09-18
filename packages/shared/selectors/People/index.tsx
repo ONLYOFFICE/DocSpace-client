@@ -26,7 +26,6 @@
 
 import axios from "axios";
 import React, { useState, useCallback, useRef, useEffect } from "react";
-import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
@@ -57,6 +56,7 @@ import { Text } from "../../components/text";
 import { globalColors } from "../../themes";
 import { isNextImage } from "../../utils/typeGuards";
 import { toastr } from "../../components/toast";
+import { useTheme } from "../../hooks/useTheme";
 
 import { PeopleSelectorProps } from "./PeopleSelector.types";
 import StyledSendClockIcon from "./components/SendClockIcon";
@@ -231,7 +231,7 @@ const PeopleSelector = ({
 }: PeopleSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
   const [activeTabId, setActiveTabId] = useState<string>(
     isGuestsOnly ? GUESTS_TAB_ID : isGroupsOnly ? GROUP_TAB_ID : PEOPLE_TAB_ID,
@@ -467,7 +467,7 @@ const PeopleSelector = ({
     [resetSelectorList],
   );
 
-  const emptyScreenImage = theme.isBase
+  const emptyScreenImage = isBase
     ? EmptyScreenPersonsSvgUrl
     : EmptyScreenPersonsSvgDarkUrl;
 
@@ -646,7 +646,7 @@ const PeopleSelector = ({
       renderCustomItem={renderCustomItem}
       aria-label={ariaLabel || "People Selector"}
       data-selector-type={dataSelectorType || "people"}
-      data-test-id={dataTestId || "people-selector"}
+      dataTestId={dataTestId || "people-selector"}
       items={itemsList}
       submitButtonLabel={submitButtonLabel || t("Common:SelectAction")}
       onSubmit={onSubmit}

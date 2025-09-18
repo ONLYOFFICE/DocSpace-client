@@ -31,6 +31,7 @@ import { ContextMenuModel } from "../context-menu";
 
 export interface TableContainerProps {
   forwardedRef: React.Ref<HTMLDivElement>;
+  noSelect?: boolean;
   useReactWindow: boolean;
   children?: React.ReactNode;
   className?: string;
@@ -151,6 +152,8 @@ export interface TableCellProps {
   style?: React.CSSProperties;
   children?: React.ReactNode;
   value?: string;
+  dataTestId?: string;
+  documentTitle?: string;
 }
 
 export type TGroupMenuItem = {

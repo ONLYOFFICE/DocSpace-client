@@ -3,7 +3,7 @@
   "content": "Edit room",
   "content_en_sha1_hash": "5f5fa3dd732a628dd88ba173574e6ee90598df28",
   "created_at": "2025-05-19T21:30:55.513Z",
-  "updated_at": "2025-08-04T07:30:01.600Z",
+  "updated_at": "2025-09-07T07:53:15.385Z",
   "comment": {
     "text": "Edit room button label is used to confirm opening an edit room within the application. This key is likely applied to a button in the Context Options dialog (/packages/client/src/store/ContextOptionsStore.js).",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 907,
+      "line_number": 884,
       "context": "if (item) {\n setView(view);\n }\n };\n \n onClickEditRoom = (item) => {\n const event = new Event(Events.ROOM_EDIT);\n event.item = item;\n window.dispatchEvent(event);\n };",
       "module": "/packages/client"
     }

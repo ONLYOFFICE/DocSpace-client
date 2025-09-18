@@ -3,7 +3,7 @@
   "content": "Virtual Data Room",
   "content_en_sha1_hash": "29f2e3affa77388673134388754b5295d908047b",
   "created_at": "2025-05-19T21:30:49.548Z",
-  "updated_at": "2025-08-04T07:30:01.188Z",
+  "updated_at": "2025-08-27T10:14:35.208Z",
   "comment": {
     "text": "The translation key \"VirtualDataRoom\" refers to a virtual data room in a collaborative workspace, used to display a specific type of room on the UI. It appears as a filter option and a room title, guiding users to a secure space for sharing sensitive information. Its context is within the client-side application's file management system.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 836,
+      "line_number": 867,
       "context": "case RoomsType.VirtualDataRoom:\n return {\n id: \"filter_type-virtual-data\",\n key: RoomsType.VirtualDataRoom,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:VirtualDataRoom\"),\n };\n case RoomsType.CustomRoom:\n default:\n return {\n id: \"filter_type-custom\",",
       "module": "/packages/client"
     },
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 380,
+      "line_number": 377,
       "context": "return t(\"Common:FormRoom\");\n \n case `room-${RoomsType.PublicRoom}`:\n return t(\"Common:PublicRoomLabel\");\n case `room-${RoomsType.VirtualDataRoom}`:\n return t(\"Common:VirtualDataRoom\");\n \n default:\n return \"\";\n }\n };",
       "module": "/packages/shared"
     }

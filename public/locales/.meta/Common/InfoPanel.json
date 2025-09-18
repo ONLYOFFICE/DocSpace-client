@@ -3,7 +3,7 @@
   "content": "Info panel",
   "content_en_sha1_hash": "700658d503d6d7ee04433b62d51c26c408f588da",
   "created_at": "2025-05-19T21:30:45.909Z",
-  "updated_at": "2025-06-18T17:11:42.403Z",
+  "updated_at": "2025-09-17T13:43:01.678Z",
   "comment": {
     "text": "The \"InfoPanel\" translation key is used to display a panel's title in various places within the application, such as on toggle buttons and in section headers. It provides information about an info panel component, indicating its purpose as a container for displaying additional details. This translation key appears primarily on header elements.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/FormGallery/Header.js",
-      "line_number": 138,
+      "line_number": 141,
       "context": "className=\"info-panel-toggle\"\n iconName={PanelReactSvgUrl}\n size=\"16\"\n isFill\n onClick={onToggleInfoPanel}\n title={t(\"Common:InfoPanel\")}\n />\n </div>\n </StyledInfoPanelToggleWrapper>\n ) : null}\n </StyledContainer>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 664,
-      "context": "warningText,\n actions: isRoomsFolder\n ? t(\"Common:NewRoom\")\n : t(\"Common:Actions\"),\n contextMenu: t(\"Translations:TitleShowFolderActions\"),\n infoPanel: t(\"Common:InfoPanel\"),\n }}\n withMenu={!isRoomsFolder}\n onPlusClick={onCreateRoom}\n isEmptyPage={isEmptyPage}\n isRoom={isCurrentRoom || isContactsPage}",
+      "line_number": 695,
+      "context": "warningText,\n actions: isRoomsFolder\n ? t(\"Common:NewRoom\")\n : t(\"Common:Actions\"),\n contextMenu: t(\"Translations:TitleShowFolderActions\"),\n infoPanel: t(\"Common:InfoPanel\"),\n }}\n withMenu={withMenu}\n onPlusClick={onPlusClick}\n isEmptyPage={isEmptyPage}\n isRoom={isCurrentRoom || isContactsPage || isProfile}",
       "module": "/packages/client"
     }
   ],

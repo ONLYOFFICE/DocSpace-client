@@ -58,6 +58,7 @@ interface AccessSelectorProps {
   selectionErrorText?: React.ReactNode;
   availableAccess?: number[];
   scaledOptions?: boolean;
+  dataTestId?: string;
 }
 
 const AccessSelector: React.FC<AccessSelectorProps> = ({
@@ -76,12 +77,13 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
   noBorder = false,
   manualWidth,
   isDisabled,
-  directionX = "right",
+  directionX = "left",
   directionY = "bottom",
   isSelectionDisabled,
   selectionErrorText,
   availableAccess,
   scaledOptions,
+  dataTestId,
 }) => {
   const [horizontalOrientation, setHorizontalOrientation] = useState(false);
   const [width, setWidth] = useState(manualWidth || 0);
@@ -148,6 +150,8 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
           selectionErrorText={selectionErrorText}
           availableAccess={availableAccess}
           scaledOptions={scaledOptions}
+          dataTestId={dataTestId}
+          showDisabledItems={true}
         />
       ) : null}
 
@@ -172,6 +176,8 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
           selectionErrorText={selectionErrorText}
           availableAccess={availableAccess}
           scaledOptions={scaledOptions}
+          dataTestId={dataTestId}
+          showDisabledItems={true}
         />
       ) : null}
     </StyledAccessSelector>

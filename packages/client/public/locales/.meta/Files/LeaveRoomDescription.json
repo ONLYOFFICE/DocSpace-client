@@ -3,7 +3,7 @@
   "content": "You are the owner of this room. Before you leave the room, you must transfer the owner's role to another user.",
   "content_en_sha1_hash": "7fad132658521906219ad21519aa804777ae5ed8",
   "created_at": "2025-05-19T21:30:55.732Z",
-  "updated_at": "2025-08-04T07:30:01.122Z",
+  "updated_at": "2025-08-12T19:46:25.927Z",
   "comment": {
     "text": "This translation key is used to display a message when leaving a room, explaining that the owner must transfer their role to another user. It appears in a leave room dialog modal. The purpose is to inform users of the required action before leaving the room.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/LeaveRoomDialog/index.js",
       "line_number": 82,
-      "context": "<ModalDialog.Header>{t(\"Files:LeaveTheRoom\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className=\"modal-dialog-content-body\">\n <Text noSelect>\n {isRoomOwner\n ? t(\"Files:LeaveRoomDescription\")\n : t(\"Files:WantLeaveRoom\")}\n </Text>\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
+      "context": "<ModalDialog.Header>{t(\"Files:LeaveTheRoom\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className=\"modal-dialog-content-body\">\n <Text>\n {isRoomOwner\n ? t(\"Files:LeaveRoomDescription\")\n : t(\"Files:WantLeaveRoom\")}\n </Text>\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
       "module": "/packages/client"
     }
   ],

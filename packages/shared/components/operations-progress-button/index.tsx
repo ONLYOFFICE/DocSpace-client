@@ -45,6 +45,7 @@ import { OPERATIONS_NAME } from "../../constants/index";
 import { HelpButton } from "../help-button";
 import { Backdrop } from "../backdrop";
 import { Text } from "../text";
+import PreviewButton from "./PreviewButton";
 
 type ValueOf<T> = T[keyof T];
 
@@ -81,21 +82,52 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
   needErrorChecking,
   showCancelButton,
   isInfoPanelVisible,
+  dropTargetFolderName,
+  isDragging,
+  clearDropPreviewLocation,
 }) => {
   const { t } = useTranslation(["Common"]);
 
   const [isOpenDropdown, setIsOpenDropdown] = useState<boolean>(false);
   const [isHideTooltip, setIsHideTooltip] = useState<boolean>(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [hideMainButton, setHideMainButton] = useState<boolean>(false);
+  const [showSeveralOperationsIcon, setShowSeveralOperationsIcon] =
+    useState<boolean>(true);
+
   const containerRef = useRef<HTMLDivElement>(null);
   const hideTimerRef = useRef<NodeJS.Timeout | null>(null);
   const resetTimerRef = useRef<NodeJS.Timeout | null>(null);
+  // Track the last seen dragged operation ID to detect new uploads
+  const lastDraggedOperationId = useRef<string | null>(null);
 
   const panelOperationsLength = panelOperations.length;
   const operationsLength = operations.length;
 
   const allOperationsLength = panelOperationsLength + operationsLength;
   const isSeveralOperations = allOperationsLength > 1;
+
+  const hasUploadOperationByDrag = useCallback(() => {
+    const uploadOperation = panelOperations.find(
+      (operation) =>
+        operation.operation === OPERATIONS_NAME.upload &&
+        operation.dragged &&
+        operation.completed === false,
+    );
+
+    if (!uploadOperation) {
+      return false;
+    }
+
+    const isNewDraggedUpload =
+      uploadOperation.dragged !== lastDraggedOperationId.current;
+
+    if (isNewDraggedUpload) {
+      lastDraggedOperationId.current = uploadOperation.dragged || null;
+    }
+
+    return isNewDraggedUpload;
+  }, [panelOperations]);
 
   const clearTimers = () => {
     if (hideTimerRef.current) {
@@ -212,12 +244,25 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
     }
   }, [isOpenDropdown, isSeveralOperations]);
 
+  useEffect(() => {
+    if (isDragging && operationsLength && !isSeveralOperations) {
+      setShowSeveralOperationsIcon(false);
+    }
+  }, [isDragging, operationsLength, isSeveralOperations]);
+
+  useEffect(() => {
+    if (allOperationsLength === 0) {
+      lastDraggedOperationId.current = null;
+    }
+  }, [allOperationsLength]);
+
   const getIcons = () => {
-    if (isSeveralOperations) {
+    if (isSeveralOperations && showSeveralOperationsIcon) {
       return isOpenDropdown
         ? FloatingButtonIcons.arrow
         : FloatingButtonIcons.dots;
     }
+
     const operation = operationsLength
       ? operations[0].operation
       : panelOperations[0].operation;
@@ -256,7 +301,15 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
         ? operations[0].label
         : panelOperations[0].label;
 
-      if (getPercent()) {
+      const operation = operationsLength
+        ? operations[0].operation
+        : panelOperations[0].operation;
+
+      if (
+        operation === OPERATIONS_NAME.upload &&
+        getPercent() &&
+        getErrorCount()
+      ) {
         return (
           <Text fontWeight={600}>
             {operationName}
@@ -265,6 +318,7 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
           </Text>
         );
       }
+
       return (
         <Text fontWeight={600}>
           {t("Common:ErrorOperation", {
@@ -314,6 +368,15 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
 
   const checkError = needErrorChecking && !disableOpenPanel;
 
+  const hideMainButtonHandler = useCallback(
+    (flag: boolean) => setHideMainButton(flag),
+    [],
+  );
+  const setShowSeveralOperationsIconHandler = useCallback(
+    (flag: boolean) => setShowSeveralOperationsIcon(flag),
+    [],
+  );
+
   return (
     <>
       <Backdrop
@@ -321,6 +384,17 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
         visible={isOpenDropdown}
         onClick={() => setIsOpenDropdown(false)}
       />
+
+      <PreviewButton
+        dropTargetFolderName={dropTargetFolderName || null}
+        isDragging={isDragging ?? false}
+        clearDropPreviewLocation={clearDropPreviewLocation}
+        hasUploadOperationByDrag={hasUploadOperationByDrag}
+        setHideMainButton={hideMainButtonHandler}
+        allOperationsLength={allOperationsLength > 0}
+        setShowSeveralOperationsIcon={setShowSeveralOperationsIconHandler}
+      />
+
       <div
         ref={containerRef}
         className={classNames(styles.progressBarContainer, {
@@ -336,41 +410,42 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
         onMouseEnter={!isMobile ? handleMouseEnter : undefined}
         onMouseLeave={!isMobile ? handleMouseLeave : undefined}
       >
-        <HelpButton
-          className="layout-progress-bar"
-          place="left"
-          tooltipContent={getTooltipLabel()}
-          openOnClick={isMobile}
-          {...(isMobile && { afterShow: handleTooltipOpen })}
-          {...(isHideTooltip && { isOpen: false })}
-          noUserSelect
-        >
-          <FloatingButton
-            className={classNames(styles.floatingButton, {
-              [styles.cursorDefault]:
-                !panelOperationsLength || disableOpenPanel,
-            })}
-            icon={getIcons()}
-            alert={operationsAlert}
-            completed={operationsCompleted}
-            onClick={handleFloatingButtonClick}
-            {...(!isSeveralOperations &&
-              !isMobile && {
-                showCancelButton,
-                clearUploadedFilesHistory: onCancelOperation,
+        {allOperationsLength > 0 && !hideMainButton ? (
+          <HelpButton
+            className="layout-progress-bar"
+            place="left"
+            tooltipContent={getTooltipLabel()}
+            openOnClick={isMobile}
+            {...(isMobile && { afterShow: handleTooltipOpen })}
+            {...(isHideTooltip && { isOpen: false })}
+            noUserSelect
+          >
+            <FloatingButton
+              className={classNames(styles.floatingButton, {
+                [styles.cursorDefault]:
+                  !panelOperationsLength || disableOpenPanel,
               })}
-            withoutStatus={withoutStatus}
-            percent={getPercent()}
-          />
-        </HelpButton>
-
+              icon={getIcons()}
+              alert={operationsAlert}
+              completed={operationsCompleted}
+              onClick={handleFloatingButtonClick}
+              {...(!isSeveralOperations &&
+                !isMobile && {
+                  showCancelButton,
+                  clearUploadedFilesHistory: onCancelOperation,
+                })}
+              withoutStatus={withoutStatus}
+              percent={getPercent()}
+            />
+          </HelpButton>
+        ) : null}
         {isOpenDropdown ? (
           <DropDown
             open={isOpenDropdown}
             withBackdrop={false}
             manualWidth="344px"
             directionY="top"
-            directionX="right"
+            directionX="left"
             fixedDirection
             isDefaultMode={false}
             className={classNames(styles.styledDropDown)}

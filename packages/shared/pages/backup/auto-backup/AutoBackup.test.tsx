@@ -1,11 +1,10 @@
 import React from "react";
-import { screen } from "@testing-library/react";
+import { screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 
 import { BackupStorageType, FolderType } from "../../../enums";
 import { ButtonSize } from "../../../components/button";
-import { renderWithTheme } from "../../../utils/render-with-theme";
 import {
   deleteBackupSchedule,
   createBackupSchedule,
@@ -173,6 +172,7 @@ describe("AutomaticBackup", () => {
     isManagement: false,
     backupProgressError: "",
     setBackupProgressError: jest.fn(),
+    setDefaultFolderId: jest.fn(),
   };
 
   beforeEach(() => {
@@ -180,19 +180,19 @@ describe("AutomaticBackup", () => {
   });
 
   it("renders without errors", () => {
-    renderWithTheme(<AutomaticBackup {...defaultProps} />);
+    render(<AutomaticBackup {...defaultProps} />);
 
     expect(screen.getByTestId("auto-backup")).toBeInTheDocument();
   });
 
   it("shows loader when isInitialLoading is true", () => {
-    renderWithTheme(<AutomaticBackup {...defaultProps} isInitialLoading />);
+    render(<AutomaticBackup {...defaultProps} isInitialLoading />);
 
     expect(screen.getByTestId("auto-backup-loader")).toBeInTheDocument();
   });
 
   it("does not render content when isEmptyContentBeforeLoader is true and isInitialLoading is false", () => {
-    const { container } = renderWithTheme(
+    const { container } = render(
       <AutomaticBackup
         {...defaultProps}
         isEmptyContentBeforeLoader
@@ -204,7 +204,7 @@ describe("AutomaticBackup", () => {
   });
 
   it("displays error message when errorInformation is provided", () => {
-    renderWithTheme(
+    render(
       <AutomaticBackup
         {...defaultProps}
         errorInformation="Test error message"
@@ -215,7 +215,7 @@ describe("AutomaticBackup", () => {
   });
 
   it("toggles automatic backup when toggle button is clicked", async () => {
-    renderWithTheme(<AutomaticBackup {...defaultProps} />);
+    render(<AutomaticBackup {...defaultProps} />);
 
     const toggleButton = screen.getByRole("checkbox");
     await userEvent.click(toggleButton);
@@ -224,7 +224,7 @@ describe("AutomaticBackup", () => {
   });
 
   it("switches to Third Party Resource when selected", async () => {
-    renderWithTheme(<AutomaticBackup {...defaultProps} />);
+    render(<AutomaticBackup {...defaultProps} />);
 
     const thirdPartyRadio = screen.getByLabelText("Common:ThirdPartyResource");
     await userEvent.click(thirdPartyRadio);
@@ -235,7 +235,7 @@ describe("AutomaticBackup", () => {
   });
 
   it("switches to Third Party Storage when selected", async () => {
-    renderWithTheme(<AutomaticBackup {...defaultProps} />);
+    render(<AutomaticBackup {...defaultProps} />);
 
     const thirdPartyStorageRadio = screen.getByLabelText(
       "Common:ThirdPartyStorage",
@@ -248,20 +248,14 @@ describe("AutomaticBackup", () => {
   });
 
   it("renders save and cancel buttons when changes are made", () => {
-    renderWithTheme(<AutomaticBackup {...defaultProps} isChanged />);
+    render(<AutomaticBackup {...defaultProps} isChanged />);
 
     expect(screen.getByText("Common:SaveButton")).toBeInTheDocument();
     expect(screen.getByText("Common:CancelButton")).toBeInTheDocument();
   });
 
-  it("shows paid badge when isEnableAuto is false", () => {
-    renderWithTheme(<AutomaticBackup {...defaultProps} isEnableAuto={false} />);
-
-    expect(screen.getByText("Common:Paid")).toBeInTheDocument();
-  });
-
   it("calls deleteBackupSchedule when toggle is turned off and save is clicked", async () => {
-    renderWithTheme(
+    render(
       <AutomaticBackup
         {...defaultProps}
         selectedEnableSchedule={false}
@@ -276,7 +270,7 @@ describe("AutomaticBackup", () => {
   });
 
   it("calls createBackupSchedule when settings are saved", async () => {
-    renderWithTheme(<AutomaticBackup {...defaultProps} isChanged />);
+    render(<AutomaticBackup {...defaultProps} isChanged />);
 
     const saveButton = screen.getByText("Common:SaveButton");
     await userEvent.click(saveButton);
@@ -285,7 +279,7 @@ describe("AutomaticBackup", () => {
   });
 
   it("calls toDefault when cancel button is clicked", async () => {
-    renderWithTheme(<AutomaticBackup {...defaultProps} isChanged />);
+    render(<AutomaticBackup {...defaultProps} isChanged />);
 
     const cancelButton = screen.getByText("Common:CancelButton");
     await userEvent.click(cancelButton);

@@ -48,7 +48,6 @@ const svgLoader = () => <div style={{ width: "96px" }} />;
 const FileTile = ({
   checked,
   children,
-  contextButtonSpacerWidth,
   contextOptions,
   contentElement,
   inProgress,
@@ -56,7 +55,6 @@ const FileTile = ({
   element,
   onSelect,
   setSelection,
-  sideColor,
   temporaryIcon,
   thumbnail,
   thumbSize,
@@ -74,6 +72,7 @@ const FileTile = ({
   badges,
   isEdit,
   forwardRef,
+  dataTestId,
   ...rest
 }: FileTileProps) => {
   const childrenArray = React.Children.toArray(children);
@@ -293,6 +292,7 @@ const FileTile = ({
       className={fileTileClassNames}
       onContextMenu={onContextMenu}
       onClick={onFileClick}
+      data-testid={dataTestId ?? "tile"}
     >
       <div className={fileTileTopClassNames} onClick={thumbnailClick}>
         {icon}

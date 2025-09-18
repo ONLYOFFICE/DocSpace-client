@@ -100,6 +100,7 @@ const RoomsListComponent = (props) => {
             {...buttonProps}
             label={t("Common:ShowMore")}
             onClick={onClickRooms}
+            testId="show_more_rooms_button"
           />
         ) : null}
       </div>

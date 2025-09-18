@@ -116,7 +116,9 @@ const ButtonContainer = (props: ButtonContainerProps) => {
       );
       setTenantStatus(TenantStatus.PortalRestore);
 
-      SocketHelper.emit(SocketCommands.RestoreBackup, { dump: isManagement() });
+      SocketHelper?.emit(SocketCommands.RestoreBackup, {
+        dump: isManagement(),
+      });
 
       navigate(
         "/preparation-portal",
@@ -160,8 +162,8 @@ const ButtonContainer = (props: ButtonContainerProps) => {
         isDisabled={isButtonDisabled}
         isLoading={isLoadingButton}
         size={buttonSize}
-        // eslint-disable-next-line jsx-a11y/tabindex-no-positive
         tabIndex={10}
+        testId="restore_backup_button"
       />
 
       {isBackupProgressVisible ? (

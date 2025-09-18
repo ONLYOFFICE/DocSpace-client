@@ -39,14 +39,28 @@ import {
 } from "@docspace/shared/components/combobox";
 import { DatePicker } from "@docspace/shared/components/date-picker";
 import { toastr } from "@docspace/shared/components/toast";
-import { getTransactionHistoryReport } from "@docspace/shared/api/portal";
-import { DeviceType } from "@docspace/shared/enums";
+import {
+  checkTransactionHistoryReport,
+  startTransactionHistoryReport,
+} from "@docspace/shared/api/portal";
+import {
+  DeviceType,
+  EmployeeStatus,
+  EmployeeType,
+} from "@docspace/shared/enums";
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import FilterIcon from "@docspace/shared/components/filter/sub-components/FilterIcon";
+import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
+import { SelectedItemPure } from "@docspace/shared/components/selected-item/SelectedItem";
+import { TSelectorItem } from "@docspace/shared/components/selector";
+import { TUser } from "@docspace/shared/api/people/types";
+import PeopleSelector from "@docspace/shared/selectors/People";
+import Filter from "@docspace/shared/api/people/filter";
 
+import FilterPanel from "./sub-components/FilterPanel";
 import TransactionBody from "./sub-components/TransactionBody";
 import styles from "./styles/TransactionHistory.module.scss";
 import TableLoader from "./sub-components/TableLoader";
@@ -70,6 +84,50 @@ const getTransactionType = (key: string) => {
   };
 };
 
+const filter = () => {
+  const newFilter = Filter.getDefault();
+  newFilter.role = [EmployeeType.Admin];
+  newFilter.employeeStatus = EmployeeStatus.Active;
+  return newFilter;
+};
+
+let timerId = null;
+
+const fetchTransactions = async (
+  fetchTransactionHistory: (
+    startDate: moment.Moment,
+    endDate: moment.Moment,
+    isCredit: boolean,
+    isDebit: boolean,
+    participantName?: string,
+  ) => Promise<void>,
+  setIsLoading: (loading: boolean) => void,
+  selectedType: string,
+  startDate: moment.Moment,
+  endDate: moment.Moment,
+  participantName?: string,
+) => {
+  timerId = setTimeout(() => setIsLoading(true), 500);
+
+  const { isCredit, isDebit } = getTransactionType(selectedType as string);
+
+  try {
+    await fetchTransactionHistory(
+      startDate,
+      endDate,
+      isCredit,
+      isDebit,
+      participantName,
+    );
+
+    setIsLoading(false);
+    if (timerId) clearTimeout(timerId);
+    timerId = null;
+  } catch (e) {
+    toastr.error(e as Error);
+  }
+};
+
 const TransactionHistory = (props: TransactionHistoryProps) => {
   const {
     getStartTransactionDate,
@@ -89,17 +147,21 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
     {
       key: "allTransactions",
       label: t("AllTransactions"),
+      dataTestId: "all_transactions_option",
     },
     {
       key: "credit",
       label: t("Credit"),
+      dataTestId: "credit_transactions_option",
     },
     {
       key: "debit",
       label: t("Debit"),
+      dataTestId: "debit_transactions_option",
     },
   ];
 
+  const [isSelectorVisible, setIsSelectorVisible] = useState(false);
   const [selectedType, setSelectedType] = useState<TOption>(typeOfHistoty[0]);
   const [startDate, setStartDate] = useState<moment.Moment>(
     moment(getStartTransactionDate!()),
@@ -107,11 +169,28 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
   const [endDate, setEndDate] = useState<moment.Moment>(
     moment(getEndTransactionDate!()),
   );
+  const [selectedContact, setSelectedContact] = useState<TUser | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [hasAppliedDateFilter, setHasAppliedDateFilter] = useState(false);
   const [isFormationHistory, setIsFormationHistory] = useState(false);
   const [isFilterDialogVisible, setIsFilterDialogVisible] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
+
+  const openFilterDialog = () => {
+    setIsFilterDialogVisible(true);
+  };
+
+  const closeFilterDialog = () => {
+    setIsFilterDialogVisible(false);
+  };
+
+  const onCloseContactSelector = () => {
+    setIsSelectorVisible(false);
+  };
+
+  const onSelectorAddButtonClick = () => {
+    setIsSelectorVisible(true);
+  };
 
   const onSelectType = async (option: TOption) => {
     setSelectedType(option);
@@ -122,17 +201,14 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
       return;
     }
 
-    const timerId = setTimeout(() => setIsLoading(true), 500);
-
-    const { isCredit, isDebit } = getTransactionType(option.key as string);
-
-    try {
-      await fetchTransactionHistory(startDate, endDate, isCredit, isDebit);
-      setIsLoading(false);
-      clearTimeout(timerId);
-    } catch (e) {
-      toastr.error(e as Error);
-    }
+    await fetchTransactions(
+      fetchTransactionHistory,
+      setIsLoading,
+      option.key as string,
+      startDate,
+      endDate,
+      selectedContact?.id,
+    );
   };
 
   const onStartDateChange = async (
@@ -150,19 +226,14 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
       return;
     }
 
-    const timerId = setTimeout(() => setIsLoading(true), 500);
-
-    const { isCredit, isDebit } = getTransactionType(
+    await fetchTransactions(
+      fetchTransactionHistory,
+      setIsLoading,
       selectedType.key as string,
+      date,
+      endDate,
+      selectedContact?.id,
     );
-
-    try {
-      await fetchTransactionHistory(date, endDate, isCredit, isDebit);
-      setIsLoading(false);
-      clearTimeout(timerId);
-    } catch (e) {
-      toastr.error(e as Error);
-    }
   };
 
   const onEndDateChange = async (date: moment.Moment | null): Promise<void> => {
@@ -178,40 +249,116 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
       return;
     }
 
-    const timerId = setTimeout(() => setIsLoading(true), 500);
-
-    const { isCredit, isDebit } = getTransactionType(
+    await fetchTransactions(
+      fetchTransactionHistory,
+      setIsLoading,
       selectedType.key as string,
+      startDate,
+      date,
+      selectedContact?.id,
     );
+  };
 
-    try {
-      await fetchTransactionHistory(startDate, date, isCredit, isDebit);
+  const onSubmitContactSelector = async (contacts: TSelectorItem[]) => {
+    setIsSelectorVisible(false);
+    setSelectedContact(contacts[0] as unknown as TUser);
 
-      setIsLoading(false);
-      clearTimeout(timerId);
-    } catch (e) {
-      toastr.error(e as Error);
+    if (isFilterDialogVisible) {
+      setIsChanged(true);
+      return;
     }
+
+    await fetchTransactions(
+      fetchTransactionHistory,
+      setIsLoading,
+      selectedType.key as string,
+      startDate,
+      endDate,
+      contacts[0].id as string,
+    );
+  };
+
+  const onCloseSelectedContact = async () => {
+    setSelectedContact(null);
+
+    if (isFilterDialogVisible) {
+      setIsChanged(true);
+      return;
+    }
+
+    await fetchTransactions(
+      fetchTransactionHistory,
+      setIsLoading,
+      selectedType.key as string,
+      startDate,
+      endDate,
+    );
+  };
+
+  const onApplyFilter = async () => {
+    setIsFilterDialogVisible(false);
+    setIsChanged(false);
+
+    await fetchTransactions(
+      fetchTransactionHistory,
+      setIsLoading,
+      selectedType.key as string,
+      startDate,
+      endDate,
+      selectedContact?.id,
+    );
   };
 
   const getReport = async () => {
-    const timerId = setTimeout(() => setIsFormationHistory(true), 200);
+    const reportTimerId = setTimeout(() => setIsFormationHistory(true), 200);
 
     const isCredit = selectedType.key !== "debit";
     const isDebit = selectedType.key !== "credit";
 
     try {
-      const editorLink = await getTransactionHistoryReport(
+      await startTransactionHistoryReport(
         formatDate!(startDate),
         formatDate!(endDate),
         isCredit,
         isDebit,
       );
 
-      if (!editorLink) return;
+      const result = await new Promise<any>((resolve, reject) => {
+        const checkStatus = async () => {
+          try {
+            const response = await checkTransactionHistoryReport();
+
+            if (!response) {
+              reject(new Error(t("Common:UnexpectedError")));
+              return;
+            }
+
+            if (response.error) {
+              reject(new Error(response.error));
+              return;
+            }
+
+            if (response.isCompleted) {
+              resolve(response);
+              return;
+            }
+
+            setTimeout(checkStatus, 1000);
+          } catch (err) {
+            reject(err);
+          }
+        };
+
+        checkStatus();
+      });
+
+      if (!result || !result.resultFileUrl) {
+        throw new Error(t("Common:UnexpectedError"));
+      }
 
       setTimeout(
-        () => window.open(editorLink, openOnNewPage ? "_blank" : "_self"),
+        () =>
+          window.open(result.resultFileUrl, openOnNewPage ? "_blank" : "_self"),
         100,
       );
     } catch (e) {
@@ -219,35 +366,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
     }
 
     setIsFormationHistory(false);
-    clearTimeout(timerId);
-  };
-
-  const openFilterDialog = () => {
-    setIsFilterDialogVisible(true);
-  };
-
-  const closeFilterDialog = () => {
-    setIsFilterDialogVisible(false);
-  };
-
-  const onApplyFilter = async () => {
-    setIsFilterDialogVisible(false);
-    setIsChanged(false);
-
-    const timerId = setTimeout(() => setIsLoading(true), 500);
-
-    const { isCredit, isDebit } = getTransactionType(
-      selectedType.key as string,
-    );
-
-    try {
-      await fetchTransactionHistory(startDate, endDate, isCredit, isDebit);
-
-      setIsLoading(false);
-      clearTimeout(timerId);
-    } catch (e) {
-      toastr.error(e as Error);
-    }
+    clearTimeout(reportTimerId);
   };
 
   const datesComponent = (
@@ -259,6 +378,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         components={{
           1: (
             <DatePicker
+              key="start-date-picker"
               initialDate={startDate}
               onChange={onStartDateChange}
               selectDateText={t("Common:SelectDate")}
@@ -269,10 +389,12 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
               outerDate={startDate}
               hideCross
               autoPosition={isTablet}
+              testId="transaction_start_date_picker"
             />
           ),
           2: (
             <DatePicker
+              key="end-date-picker"
               initialDate={endDate}
               onChange={onEndDateChange}
               selectDateText={t("Common:SelectDate")}
@@ -283,6 +405,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
               outerDate={endDate}
               hideCross
               autoPosition={isTablet}
+              testId="transaction_end_date_picker"
             />
           ),
         }}
@@ -290,9 +413,24 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
     </div>
   );
 
+  const contactSelector = !selectedContact ? (
+    <SelectorAddButton
+      label={t("SelectContact")}
+      onClick={onSelectorAddButtonClick}
+    />
+  ) : (
+    <SelectedItemPure
+      key={`${selectedContact}`}
+      propKey={selectedContact?.id}
+      label={selectedContact.displayName}
+      onClose={onCloseSelectedContact}
+    />
+  );
+
   const filterCombobox = (
     <div className={styles.transactionHistoryCombobox}>
       <ComboBox
+        className={styles.transactionTypeCombobox}
         tabIndex={1}
         options={typeOfHistoty}
         selectedOption={selectedType}
@@ -303,8 +441,11 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         showDisabledItems
         size={ComboBoxSize.content}
         scaled={false}
+        dataTestId="transaction_type_combobox"
+        dropDownTestId="transaction_type_dropdown"
       />
       {datesComponent}
+      {contactSelector}
     </div>
   );
 
@@ -315,9 +456,36 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         onClick={openFilterDialog}
         isOpen={isFilterDialogVisible}
         isShowIndicator={hasAppliedDateFilter}
+        dataTestId="transaction_filter_icon"
       />
     </div>
   );
+
+  const selectorComponent = isSelectorVisible ? (
+    <PeopleSelector
+      withCancelButton
+      onCancel={onCloseContactSelector}
+      cancelButtonLabel=""
+      disableSubmitButton={false}
+      submitButtonLabel={t("Common:SelectAction")}
+      onSubmit={onSubmitContactSelector}
+      withHeader
+      headerProps={{
+        onCloseClick: onCloseContactSelector,
+        isCloseable: true,
+        headerLabel: t("ListContacts"),
+      }}
+      filter={filter}
+      withInfo
+      infoText={t("OnlyPortalAdminsShown", {
+        productName: t("Common:ProductName"),
+      })}
+      emptyScreenHeader={t("Common:NotFoundMembers")}
+      emptyScreenDescription={t("CreateEditRoomDialog:PeopleSelectorInfo", {
+        productName: t("Common:ProductName"),
+      })}
+    />
+  ) : null;
 
   return (
     <>
@@ -363,10 +531,11 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
               isLoading={isFormationHistory}
               isDisabled={isNotPaidPeriod}
               scale={isMobile}
+              testId="download_report_button"
             />
             <Text as="span" className={styles.downloadReportDescription}>
               {t("Settings:ReportSaveLocation", {
-                sectionName: t("Common:MyFilesSection"),
+                sectionName: t("Common:MyDocuments"),
               })}
             </Text>
           </div>
@@ -374,56 +543,29 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
       ) : null}
 
       {isFilterDialogVisible ? (
+        <FilterPanel
+          isFilterDialogVisible={isFilterDialogVisible}
+          closeFilterDialog={closeFilterDialog}
+          isSelectorVisible={isSelectorVisible}
+          selectorComponent={selectorComponent}
+          datesComponent={datesComponent}
+          contactSelector={contactSelector}
+          typeOfHistoty={typeOfHistoty}
+          selectedType={selectedType}
+          onSelectType={onSelectType}
+          onApplyFilter={onApplyFilter}
+          isChanged={isChanged}
+        />
+      ) : null}
+
+      {isSelectorVisible ? (
         <ModalDialog
-          visible={isFilterDialogVisible}
-          onClose={closeFilterDialog}
+          visible={isSelectorVisible}
+          onClose={onCloseContactSelector}
           displayType={ModalDialogType.aside}
-          className={styles.filterDialog}
+          withoutPadding
         >
-          <ModalDialog.Header>{t("Filter")}</ModalDialog.Header>
-          <ModalDialog.Body>
-            <div className={styles.filterDialogContent}>
-              <div className={styles.filterDialogSection}>
-                <Text fontWeight={600} fontSize="15px">
-                  {t("Common:Type")}
-                </Text>
-                <ComboBox
-                  options={typeOfHistoty}
-                  selectedOption={selectedType}
-                  onSelect={onSelectType}
-                  directionY="both"
-                  noBorder={false}
-                  dropDownMaxHeight={300}
-                  showDisabledItems
-                  size={ComboBoxSize.content}
-                  scaled
-                />
-              </div>
-              <div className={styles.filterDialogDivider} />
-              <div className={styles.filterDialogSection}>
-                <Text fontWeight={600} fontSize="15px">
-                  {t("TransactionPeriod")}
-                </Text>
-                <div>{datesComponent}</div>
-              </div>
-            </div>
-          </ModalDialog.Body>
-          <ModalDialog.Footer>
-            <Button
-              onClick={onApplyFilter}
-              size={ButtonSize.medium}
-              label={t("Common:ApplyButton")}
-              isDisabled={!isChanged}
-              primary
-              scale
-            />
-            <Button
-              onClick={closeFilterDialog}
-              size={ButtonSize.medium}
-              label={t("Common:CancelButton")}
-              scale
-            />
-          </ModalDialog.Footer>
+          <ModalDialog.Body>{selectorComponent}</ModalDialog.Body>
         </ModalDialog>
       ) : null}
     </>

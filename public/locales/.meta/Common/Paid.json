@@ -3,7 +3,7 @@
   "content": "Paid",
   "content_en_sha1_hash": "dc9d4584a55464cd571719ee0066acb16d411f86",
   "created_at": "2025-05-19T21:30:47.223Z",
-  "updated_at": "2025-08-04T07:30:01.150Z",
+  "updated_at": "2025-09-17T13:43:01.650Z",
   "comment": {
     "text": "This translation key is used to display a paid status label. It appears on a badge component in the contacts list, indicating that an account has made payments and should be considered paid. The text changes depending on whether a user is paying or not, using the \"Paid\" label for paid accounts.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 221,
+      "line_number": 215,
       "context": "const typeData = renderTypeData();\n \n const { isVisitor, isCollaborator } = userSelection;\n \n const statusText =\n isVisitor || isCollaborator ? t(\"Common:Free\") : t(\"Common:Paid\");\n \n if (!ready) return <InfoPanelViewLoader view=\"users\" />;\n \n return (\n <>",
       "module": "/packages/client"
     },
@@ -42,85 +42,85 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Section/Header/index.js",
-      "line_number": 372,
+      "line_number": 386,
       "context": "backgroundColor={\n theme.isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n label={t(\"Common:Paid\")}\n fontWeight=\"700\"\n className=\"settings-section_badge\"\n isPaidBadge\n />\n ) : (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/dns-settings.js",
-      "line_number": 304,
+      "line_number": 315,
       "context": "backgroundColor={\n theme.isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n label={t(\"Common:Paid\")}\n isPaidBadge\n />\n ) : null}\n </div>\n ) : null}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 354,
+      "line_number": 350,
       "context": "backgroundColor={\n theme.isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n label={t(\"Common:Paid\")}\n isPaidBadge\n />\n ) : null}\n </div>\n ) : null}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization-navbar.js",
-      "line_number": 89,
+      "line_number": 87,
       "context": "title={t(\"DNSSettings\")}\n subtitle={t(\"DNSSettingsNavDescription\")}\n url=\"/portal-settings/customization/general/dns-settings\"\n onClickLink={onClickLink}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Common:Paid\")}\n />\n {enablePortalRename ? (\n <MobileCategoryWrapper\n title={t(\"PortalRenaming\")}\n subtitle={t(\"PortalRenamingNavDescription\")}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization-navbar.js",
-      "line_number": 89,
+      "line_number": 87,
       "context": "title={t(\"DNSSettings\")}\n subtitle={t(\"DNSSettingsNavDescription\")}\n url=\"/portal-settings/customization/general/dns-settings\"\n onClickLink={onClickLink}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Common:Paid\")}\n />\n {enablePortalRename ? (\n <MobileCategoryWrapper\n title={t(\"PortalRenaming\")}\n subtitle={t(\"PortalRenamingNavDescription\")}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/LdapMobileView.js",
       "line_number": 55,
-      "context": "<MobileCategoryWrapper\n title={t(\"Ldap:LdapSettings\")}\n subtitle={t(\"Ldap:LdapMobileSettingsDescription\")}\n url=\"/portal-settings/integration/ldap/settings\"\n withPaidBadge={!isLDAPAvailable}\n badgeLabel={t(\"Common:Paid\")}\n onClickLink={onClickLink}\n disabled={!isLdapEnabled}\n />\n <MobileCategoryWrapper\n title={t(\"Ldap:LdapSyncTitle\")}",
+      "context": "<MobileCategoryWrapper\n title={t(\"Ldap:LdapSettings\")}\n subtitle={t(\"Ldap:LdapMobileSettingsDescription\")}\n url=\"/portal-settings/integration/ldap/settings\"\n withPaidBadge={!isLDAPAvailable}\n badgeLabel={t(\"Common:Paid\")}\n onClickLink={onClickLink}\n disabled={!isLdapEnabled}\n dataTestId=\"ldap_settings\"\n />\n <MobileCategoryWrapper",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/LdapMobileView.js",
       "line_number": 55,
-      "context": "<MobileCategoryWrapper\n title={t(\"Ldap:LdapSettings\")}\n subtitle={t(\"Ldap:LdapMobileSettingsDescription\")}\n url=\"/portal-settings/integration/ldap/settings\"\n withPaidBadge={!isLDAPAvailable}\n badgeLabel={t(\"Common:Paid\")}\n onClickLink={onClickLink}\n disabled={!isLdapEnabled}\n />\n <MobileCategoryWrapper\n title={t(\"Ldap:LdapSyncTitle\")}",
+      "context": "<MobileCategoryWrapper\n title={t(\"Ldap:LdapSettings\")}\n subtitle={t(\"Ldap:LdapMobileSettingsDescription\")}\n url=\"/portal-settings/integration/ldap/settings\"\n withPaidBadge={!isLDAPAvailable}\n badgeLabel={t(\"Common:Paid\")}\n onClickLink={onClickLink}\n disabled={!isLdapEnabled}\n dataTestId=\"ldap_settings\"\n />\n <MobileCategoryWrapper",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/ToggleAutoSync.js",
-      "line_number": 126,
+      "line_number": 127,
       "context": "backgroundColor={\n theme.isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n label={t(\"Common:Paid\")}\n className=\"toggle-caption_title_badge\"\n isPaidBadge\n />\n ) : null}\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/ToggleLDAP.js",
-      "line_number": 120,
+      "line_number": 121,
       "context": "backgroundColor={\n theme.isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n label={t(\"Common:Paid\")}\n className=\"toggle-caption_title_badge\"\n isPaidBadge\n />\n ) : null}\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/MobileView.js",
       "line_number": 58,
-      "context": "organizationName: logoText,\n })}\n subtitle={t(\"ServiceProviderSettingsDescription\")}\n url=\"/portal-settings/integration/sso/settings\"\n withPaidBadge={!isSSOAvailable}\n badgeLabel={t(\"Common:Paid\")}\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper\n title={t(\"SpMetadata\", {\n organizationName: logoText,",
+      "context": "organizationName: logoText,\n })}\n subtitle={t(\"ServiceProviderSettingsDescription\")}\n url=\"/portal-settings/integration/sso/settings\"\n withPaidBadge={!isSSOAvailable}\n badgeLabel={t(\"Common:Paid\")}\n onClickLink={onClickLink}\n dataTestId=\"sp_settings\"\n />\n <MobileCategoryWrapper\n title={t(\"SpMetadata\", {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/MobileView.js",
       "line_number": 58,
-      "context": "organizationName: logoText,\n })}\n subtitle={t(\"ServiceProviderSettingsDescription\")}\n url=\"/portal-settings/integration/sso/settings\"\n withPaidBadge={!isSSOAvailable}\n badgeLabel={t(\"Common:Paid\")}\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper\n title={t(\"SpMetadata\", {\n organizationName: logoText,",
+      "context": "organizationName: logoText,\n })}\n subtitle={t(\"ServiceProviderSettingsDescription\")}\n url=\"/portal-settings/integration/sso/settings\"\n withPaidBadge={!isSSOAvailable}\n badgeLabel={t(\"Common:Paid\")}\n onClickLink={onClickLink}\n dataTestId=\"sp_settings\"\n />\n <MobileCategoryWrapper\n title={t(\"SpMetadata\", {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/ToggleSSO.js",
-      "line_number": 105,
+      "line_number": 106,
       "context": "backgroundColor={\n theme.isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n label={t(\"Common:Paid\")}\n fontWeight=\"700\"\n className=\"toggle-caption_title_badge\"\n isPaidBadge\n />\n ) : null}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/index.js",
-      "line_number": 275,
+      "line_number": 273,
       "context": "theme.isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n fontWeight=\"700\"\n label={t(\"Common:Paid\")}\n isPaidBadge\n />\n </div>\n ) : null}\n {paidConsumers.map((consumer) => (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/sub-components/HistoryMainContent.js",
-      "line_number": 337,
+      "line_number": 241,
       "context": "backgroundColor={\n theme.isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n label={t(\"Common:Paid\")}\n isPaidBadge\n />\n ) : null}\n <div className=\"main-wrapper\">\n <Text fontSize=\"13px\" className=\"login-history-description\">",
       "module": "/packages/client"
     },
@@ -137,21 +137,27 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/Channel.tsx",
+      "line_number": 220,
+      "context": "{!isThirdPartyAvailable && isNeedConfig ? (\n <Badge\n className={styles.paidBadge}\n fontWeight=\"700\"\n label={t(\"Common:Paid\")}\n backgroundColor={\n isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 357,
+      "line_number": 354,
       "context": "id: \"menu_change-user_administrator\",\n className: \"group-menu_drop-down\",\n label: getUserTypeTranslation(EmployeeType.Admin, t),\n title: getUserTypeTranslation(EmployeeType.Admin, t),\n icon: isGuests ? PersonAdminReactSvgUrl : null,\n badgeLabel: isGuests ? t(\"Common:Paid\") : undefined,\n isPaidBadge: !standalone,\n onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),\n \"data-action\": EmployeeType.Admin,\n action: EmployeeType.Admin,\n key: EmployeeType.Admin,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 357,
+      "line_number": 354,
       "context": "id: \"menu_change-user_administrator\",\n className: \"group-menu_drop-down\",\n label: getUserTypeTranslation(EmployeeType.Admin, t),\n title: getUserTypeTranslation(EmployeeType.Admin, t),\n icon: isGuests ? PersonAdminReactSvgUrl : null,\n badgeLabel: isGuests ? t(\"Common:Paid\") : undefined,\n isPaidBadge: !standalone,\n onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),\n \"data-action\": EmployeeType.Admin,\n action: EmployeeType.Admin,\n key: EmployeeType.Admin,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/drop-down-item/index.tsx",
-      "line_number": 245,
-      "context": "backgroundColor={\n theme.isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n label={badgeLabel || t(\"Common:Paid\")}\n isPaidBadge\n />\n </div>\n ) : null}",
+      "line_number": 259,
+      "context": "backgroundColor={\n isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n label={badgeLabel || t(\"Common:Paid\")}\n isPaidBadge\n />\n </div>\n ) : null}",
       "module": "/packages/shared"
     },
     {
@@ -191,27 +197,21 @@
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 478,
-      "context": "backgroundColor={\n theme.isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n label={t(\"Common:Paid\")}\n fontWeight=\"700\"\n className={classNames(\n styles.autoBackupBadge,\n \"auto-backup_badge\",\n )}",
+      "file_path": "/packages/shared/utils/getAccessOptions.ts",
+      "line_number": 102,
+      "context": "label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: t(\"Common:RolePortalAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyDocuments\"),\n }),\n ...(!standalone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access:\n roomType === None ? EmployeeType.Admin : ShareAccessRights.FullAccess,\n type: EmployeeType.Admin,\n },",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 101,
-      "context": "label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: t(\"Common:RolePortalAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyFilesSection\"),\n }),\n ...(!standalone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access:\n roomType === None ? EmployeeType.Admin : ShareAccessRights.FullAccess,\n type: EmployeeType.Admin,\n },",
+      "line_number": 102,
+      "context": "label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: t(\"Common:RolePortalAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyDocuments\"),\n }),\n ...(!standalone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access:\n roomType === None ? EmployeeType.Admin : ShareAccessRights.FullAccess,\n type: EmployeeType.Admin,\n },",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 101,
-      "context": "label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: t(\"Common:RolePortalAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyFilesSection\"),\n }),\n ...(!standalone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access:\n roomType === None ? EmployeeType.Admin : ShareAccessRights.FullAccess,\n type: EmployeeType.Admin,\n },",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 101,
-      "context": "label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: t(\"Common:RolePortalAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyFilesSection\"),\n }),\n ...(!standalone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access:\n roomType === None ? EmployeeType.Admin : ShareAccessRights.FullAccess,\n type: EmployeeType.Admin,\n },",
+      "line_number": 102,
+      "context": "label: getUserTypeTranslation(EmployeeType.Admin, t),\n description: t(\"Common:RolePortalAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyDocuments\"),\n }),\n ...(!standalone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access:\n roomType === None ? EmployeeType.Admin : ShareAccessRights.FullAccess,\n type: EmployeeType.Admin,\n },",
       "module": "/packages/shared"
     }
   ],

@@ -39,6 +39,8 @@ const TableCell = (props: TableCellProps) => {
     hasAccess,
     children,
     value,
+    dataTestId,
+    documentTitle,
   } = props;
 
   const classes = classNames(
@@ -51,15 +53,18 @@ const TableCell = (props: TableCellProps) => {
     },
   );
 
+  const cellTestId = dataTestId ?? "table-cell";
+
   return (
     <div
-      data-testid="table-cell"
+      data-testid={cellTestId}
       className={classes}
       ref={forwardedRef}
       style={style}
       // @ts-expect-error: value used by DnD and maybe somewhere else;
       // TODO: Refactor logic to use data-value
       value={value}
+      data-document-title={documentTitle}
     >
       {children}
     </div>

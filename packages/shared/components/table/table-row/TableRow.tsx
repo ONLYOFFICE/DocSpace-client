@@ -59,7 +59,7 @@ const TableRow = (props: TableRowProps) => {
     onClick,
     onDoubleClick,
     contextMenuCellStyle,
-    dataTestId,
+    dataTestId = "table-row",
     contextMenuTestId,
   } = props;
 
@@ -88,6 +88,7 @@ const TableRow = (props: TableRowProps) => {
     styles.tableRow,
     className,
     "table-container_row",
+    checked ? "checked" : "",
     {
       [styles.isIndexEditingMode]: isIndexEditingMode,
       [styles.isActive]: isActive,

@@ -51,7 +51,7 @@ import CustomImgDark from "PUBLIC_DIR/images/sdk-presets_custom_dark.react.svg?u
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import Integration from "./sub-components/Integration";
 import PresetTile from "./sub-components/PresetTile";
-import CSP from "./sub-components/csp";
+import CSPSetting from "./sub-components/csp";
 
 import {
   SDKContainer,
@@ -61,7 +61,14 @@ import {
 } from "./sub-components/StyledPortalIntegration";
 
 const PortalIntegration = (props) => {
-  const { t, currentColorScheme, sdkLink, theme, tReady } = props;
+  const {
+    t,
+    currentColorScheme,
+    sdkLink,
+    theme,
+    tReady,
+    showPortalSettingsLoader,
+  } = props;
 
   const isSmall = useRef(
     (() => {
@@ -153,6 +160,8 @@ const PortalIntegration = (props) => {
     };
   }, []);
 
+  if (showPortalSettingsLoader) return null;
+
   return (
     <SDKContainer>
       <CategoryDescription theme={theme}>
@@ -169,7 +178,7 @@ const PortalIntegration = (props) => {
           {" "}
           {t("APILink")}.
         </Link>
-        <CSP t={t} theme={theme} />
+        <CSPSetting t={t} theme={theme} />
       </CategoryDescription>
       <CategoryHeader>
         {t("SelectModeEmbedding", { productName: t("Common:ProductName") })}
@@ -195,13 +204,15 @@ const PortalIntegration = (props) => {
   );
 };
 
-export default inject(({ settingsStore }) => {
+export default inject(({ settingsStore, clientLoadingStore }) => {
   const { theme, currentColorScheme, sdkLink } = settingsStore;
+  const { showPortalSettingsLoader } = clientLoadingStore;
 
   return {
     theme,
     currentColorScheme,
     sdkLink,
+    showPortalSettingsLoader,
   };
 })(
   withTranslation([

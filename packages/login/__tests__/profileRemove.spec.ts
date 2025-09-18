@@ -40,8 +40,8 @@ const QUERY_PARAMS = [
     value: "123",
   },
   {
-    name: "email",
-    value: "mail@mail.com",
+    name: "encemail",
+    value: "b5COc6kRm3veeYqA72sOfA&uid=66faa6e4-f133-11ea-b126-00ffeec8b4ef",
   },
   {
     name: "uid",
@@ -65,9 +65,10 @@ test("profile remove success", async ({ page, context, mockRequest }) => {
   await mockRequest.router([endpoints.removeUser]);
   await page.goto(URL_WITH_PARAMS);
 
-  await page.getByTestId("button").click();
+  const deleteButton = page.getByTestId("delete_profile_button");
+  await deleteButton.click();
 
-  await page.getByTestId("button").waitFor({ state: "detached" });
+  await deleteButton.waitFor({ state: "detached" });
 
   await expect(page).toHaveScreenshot([
     "desktop",

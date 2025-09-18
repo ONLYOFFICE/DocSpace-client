@@ -82,6 +82,7 @@ const ThirdPartyModule = ({
   setTime,
   setWeekday,
   weekdaysLabelArray,
+  setDefaultFolderId,
 }: ThirdPartyModuleProps) => {
   const isResourcesDefault =
     defaultStorageType === BackupStorageType.ResourcesModuleType.toString();
@@ -100,6 +101,8 @@ const ThirdPartyModule = ({
 
   const checkCreating = selectedThirdPartyAccount?.key === ProvidersType.WebDav;
 
+  const withoutInitPath = isResourcesDefault ? !passedId : true;
+
   return (
     <div data-testid="third-party-module">
       <div
@@ -115,7 +118,7 @@ const ThirdPartyModule = ({
           isDisabled={isLoadingData}
           checkCreating={checkCreating}
           onSelectFolder={onSelectFolder}
-          withoutInitPath={!isResourcesDefault}
+          withoutInitPath={withoutInitPath}
           openConnectWindow={openConnectWindow}
           connectDialogVisible={connectDialogVisible}
           deleteThirdPartyDialogVisible={deleteThirdPartyDialogVisible}
@@ -140,6 +143,8 @@ const ThirdPartyModule = ({
           setBasePath={setBasePath}
           toDefault={toDefault}
           setNewPath={setNewPath}
+          dataTestId="auto_backup"
+          setDefaultFolderId={setDefaultFolderId}
         />
       </div>
       <ScheduleComponent

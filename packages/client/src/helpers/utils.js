@@ -29,7 +29,11 @@ import { toCommunityHostname } from "@docspace/shared/utils/common";
 import { FolderType } from "@docspace/shared/enums";
 import { CategoryType } from "./constants";
 
-import { PEOPLE_ROUTE_WITH_FILTER } from "./contacts";
+import {
+  PEOPLE_ROUTE_WITH_FILTER,
+  GROUPS_ROUTE_WITH_FILTER,
+  GUESTS_ROUTE_WITH_FILTER,
+} from "./contacts";
 
 export const setDocumentTitle = (subTitle = "") => {
   const { isAuthenticated, product: currentModule } = authStore;
@@ -106,9 +110,9 @@ export const getCategoryType = (location) => {
     if (pathname.indexOf("personal") > -1) {
       categoryType = CategoryType.Personal;
     } else if (pathname.indexOf("shared") > -1) {
-      const regexp = /(rooms)\/([\d])\/(shared)/;
+      const regexp = /(rooms)\/shared\/([\d])/;
 
-      categoryType = !regexp.test(location)
+      categoryType = !regexp.test(location.pathname)
         ? CategoryType.Shared
         : CategoryType.SharedRoom;
     } else if (pathname.indexOf("share") > -1) {
@@ -116,7 +120,7 @@ export const getCategoryType = (location) => {
     } else if (pathname.indexOf("archive") > -1) {
       categoryType = CategoryType.Archive;
     }
-  } else if (pathname.startsWith("/favorite")) {
+  } else if (pathname.startsWith("/files/favorite")) {
     categoryType = CategoryType.Favorite;
   } else if (pathname.startsWith("/recent")) {
     categoryType = CategoryType.Recent;
@@ -158,8 +162,10 @@ export const getCategoryUrl = (categoryType, folderId = null) => {
   const cType = categoryType;
 
   switch (cType) {
-    case CategoryType.Personal:
     case CategoryType.Recent:
+      return "/recent/filter";
+
+    case CategoryType.Personal:
       return "/rooms/personal/filter";
 
     case CategoryType.Shared:
@@ -185,6 +191,12 @@ export const getCategoryUrl = (categoryType, folderId = null) => {
 
     case CategoryType.Accounts:
       return PEOPLE_ROUTE_WITH_FILTER;
+
+    case CategoryType.Groups:
+      return GROUPS_ROUTE_WITH_FILTER;
+
+    case CategoryType.Guests:
+      return GUESTS_ROUTE_WITH_FILTER;
 
     case CategoryType.Settings:
       return "/settings/personal";

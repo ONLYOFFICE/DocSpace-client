@@ -217,6 +217,7 @@ const ThirdPartyModule = ({
         isError={isError}
         buttonSize={buttonSize}
         isSelectFolder
+        dataTestId="manual_backup"
       />
 
       {connectedThirdPartyAccount?.id && isTheSameThirdPartyAccount ? (
@@ -226,6 +227,7 @@ const ThirdPartyModule = ({
           onClick={handleMakeCopy}
           label={t("Common:CreateCopy")}
           isDisabled={isModuleDisabled || selectedFolder === ""}
+          testId="third_party_create_copy_button"
         />
       ) : null}
     </div>

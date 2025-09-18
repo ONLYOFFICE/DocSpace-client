@@ -75,6 +75,10 @@ Note: Parent element must have \`position: relative\` for proper positioning.`,
       control: "number",
       description: "Custom z-index for the dropdown",
     },
+    offsetX: {
+      control: "number",
+      description: "Custom offset for the dropdown in the horizontal direction",
+    },
   },
 } satisfies Meta<typeof DropDown>;
 
@@ -84,15 +88,12 @@ export default meta;
 
 const ToggleDropDownTemplate = (args: DropDownProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
-  const toggleDropdown = () => setIsOpen(!isOpen);
-  const parentRef = React.useRef<HTMLDivElement>(null);
+  const parentRef = React.useRef<HTMLButtonElement>(null);
 
   return (
-    <div
-      ref={parentRef}
-      style={{ height: "100px", position: "relative", padding: "20px" }}
-    >
+    <div style={{ height: "100px", position: "relative", padding: "20px" }}>
       <Button
+        ref={parentRef}
         label="Toggle Dropdown"
         onClick={() => setIsOpen(true)}
         style={{ marginBottom: "8px" }}
@@ -101,7 +102,7 @@ const ToggleDropDownTemplate = (args: DropDownProps) => {
         {...args}
         open={isOpen}
         forwardedRef={parentRef}
-        enableOnClickOutside={toggleDropdown}
+        clickOutsideAction={() => setIsOpen(false)}
       >
         <DropDownItem isHeader label="Menu" />
         <DropDownItem label="Option 1" onClick={() => {}} />

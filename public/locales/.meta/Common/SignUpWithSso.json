@@ -3,7 +3,7 @@
   "content": "Sign up with SSO",
   "content_en_sha1_hash": "aa2bbf27ca1af663107f2a143436cf3c8c71d4e8",
   "created_at": "2025-05-19T21:30:48.862Z",
-  "updated_at": "2025-05-26T07:57:32.981Z",
+  "updated_at": "2025-09-09T10:39:53.047Z",
   "comment": {
     "text": "This translation key is used to display a sign-up option via Single Sign-On (SSO) method in the UI. It appears as a button or dialog prompt where users can choose to sign up using their SSO credentials. The purpose of this text is to inform users about an alternative way to create an account.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 408,
-      "context": "case \"microsoft\":\n return signUp\n ? t(\"Common:SignUpWithMicrosoft\")\n : t(\"Common:SignInWithMicrosoft\");\n case \"sso\":\n return signUp ? t(\"Common:SignUpWithSso\") : t(\"Common:SignInWithSso\");\n case \"zoom\":\n return signUp ? t(\"Common:SignUpWithZoom\") : t(\"Common:SignInWithZoom\");\n default:\n return \"\";\n }",
+      "line_number": 440,
+      "context": "case \"microsoft\":\n return signUp\n ? t(\"Common:SignUpWithMicrosoft\")\n : t(\"Common:SignInWithMicrosoft\");\n case \"sso\":\n return signUp ? t(\"Common:SignUpWithSso\") : t(\"Common:SignInWithSso\");\n case \"zoom\":\n return signUp ? t(\"Common:SignUpWithZoom\") : t(\"Common:SignInWithZoom\");\n case \"weixin\":\n return signUp\n ? t(\"Common:SignUpWithWechat\")",
       "module": "/packages/shared"
     }
   ],

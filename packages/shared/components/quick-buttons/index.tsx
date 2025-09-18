@@ -25,7 +25,7 @@
  * content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
-
+import isNil from "lodash/isNil";
 import { isTablet as isTabletDevice } from "react-device-detect";
 
 import FileActionsDownloadReactSvg from "PUBLIC_DIR/images/icons/16/download.react.svg";
@@ -34,14 +34,15 @@ import LifetimeReactSvgUrl from "PUBLIC_DIR/images/lifetime.react.svg?url";
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
 import LockedIconReactSvg from "PUBLIC_DIR/images/file.actions.locked.react.svg?url";
 import LockedIconReact12Svg from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";
-
-import { useTheme } from "styled-components";
+import FavoriteReactSvgUrl from "PUBLIC_DIR/images/favorite.react.svg?url";
+import FavoriteFillReactSvgUrl from "PUBLIC_DIR/images/favorite.fill.react.svg?url";
 
 import { classNames, IconSizeType, isTablet, isDesktop } from "../../utils";
 import { RoomsType, ShareAccessRights } from "../../enums";
 import { Tooltip } from "../tooltip";
 import { Text } from "../text";
 import { IconButton } from "../icon-button";
+import { isRoom } from "../../utils/typeGuards";
 
 import type { QuickButtonsProps } from "./QuickButtons.types";
 
@@ -55,7 +56,6 @@ export const QuickButtons = (props: QuickButtonsProps) => {
     viewAs,
     isPublicRoom,
     onClickShare,
-    isPersonalRoom,
     isArchiveFolder,
     isIndexEditingMode,
     showLifetimeIcon,
@@ -64,9 +64,9 @@ export const QuickButtons = (props: QuickButtonsProps) => {
     onCreateRoom,
     isTemplatesFolder,
     onClickLock,
+    onClickFavorite,
+    isRecentFolder,
   } = props;
-
-  const theme = useTheme();
 
   const { id, shared, security } = item;
 
@@ -75,13 +75,10 @@ export const QuickButtons = (props: QuickButtonsProps) => {
 
   const lockedBy = "lockedBy" in item ? (item.lockedBy as string) : undefined;
   const locked = "locked" in item ? item.locked : undefined;
-  const colorLock = locked
-    ? theme.filesQuickButtons.sharedColor
-    : theme.filesQuickButtons.color;
   const iconLock = desktopView ? LockedIconReact12Svg : LockedIconReactSvg;
   const canLock = security && "Lock" in security ? security.Lock : undefined;
 
-  const colorShare = shared ? "accent" : theme.filesQuickButtons.color;
+  const showShareIcon = !isNil(item.shareSettings?.PrimaryExternalLink);
 
   const tabletViewQuickButton = isTablet() || isTabletDevice;
 
@@ -91,7 +88,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
   const isAvailableDownloadFile =
     isPublicRoom && item.security?.Download && viewAs === "tile";
 
-  const isAvailableShareFile = isPersonalRoom && item.canShare;
+  const isAvailableShareFile = item.canShare && !isRoom(item);
 
   const isPublicRoomType =
     "roomType" in item &&
@@ -176,7 +173,6 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               className="badge create-room icons-group"
               size={IconSizeType.medium}
               onClick={onCreateRoom}
-              color={colorLock}
               isDisabled={isDisabled}
               hoverColor="accent"
               title={t("Common:CreateRoom")}
@@ -188,7 +184,6 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               className="badge copy-link icons-group"
               size={sizeQuickButton}
               onClick={onCopyPrimaryLink}
-              color={colorLock}
               isDisabled={isDisabled}
               hoverColor="accent"
               title={t("Common:CopySharedLink")}
@@ -198,18 +193,18 @@ export const QuickButtons = (props: QuickButtonsProps) => {
             <IconButton
               iconName={LinkReactSvgUrl}
               className={classNames("badge copy-link icons-group", {
-                "create-share-link": !item.shared,
-                "link-shared": item.shared,
+                "create-share-link": !item.shared && !showShareIcon,
+                "link-shared": item.shared || showShareIcon,
               })}
               size={sizeQuickButton}
               onClick={onClickShare}
-              color={colorShare}
+              color={shared || showShareIcon ? "accent" : undefined}
               isDisabled={isDisabled}
               hoverColor="accent"
               title={t("Common:CopySharedLink")}
             />
           ) : null}
-          {locked ? (
+          {locked && isTile ? (
             <>
               <IconButton
                 iconName={iconLock}
@@ -220,8 +215,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
                 data-id={id}
                 data-locked={!!locked}
                 onClick={onIconLockClick}
-                color={theme.filesQuickButtons.sharedColor}
-                hoverColor="accent"
+                color="accent"
                 title={t("Common:UnblockFile")}
                 data-tooltip-id={`lockTooltip${item.id}`}
               />
@@ -235,6 +229,20 @@ export const QuickButtons = (props: QuickButtonsProps) => {
                 />
               ) : null}
             </>
+          ) : null}
+
+          {!isRoom(item) && item?.isFavorite && !isRecentFolder ? (
+            <IconButton
+              iconName={
+                item?.isFavorite ? FavoriteFillReactSvgUrl : FavoriteReactSvgUrl
+              }
+              className={classNames("badge icons-group")}
+              size={sizeQuickButton}
+              onClick={onClickFavorite}
+              color="accent"
+              isDisabled={isDisabled}
+              title={t("Common:Favorites")}
+            />
           ) : null}
         </>
       ) : null}

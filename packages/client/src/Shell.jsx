@@ -89,12 +89,7 @@ const Shell = ({ page = "home", ...rest }) => {
     pagesWithoutNavMenu,
     isFrame,
     barTypeInFrame,
-    setShowGuestReleaseTip,
 
-    isOwner,
-    isAdmin,
-    releaseDate,
-    registrationDate,
     logoText,
     setLogoText,
     standalone,
@@ -140,25 +135,21 @@ const Shell = ({ page = "home", ...rest }) => {
   }, []);
 
   useEffect(() => {
-    SocketHelper.emit(SocketCommands.Subscribe, {
-      roomParts: "storage-encryption",
-    });
-
-    SocketHelper.emit(SocketCommands.Subscribe, {
+    SocketHelper?.emit(SocketCommands.Subscribe, {
       roomParts: "restore",
     });
 
     if (standalone) {
-      SocketHelper.emit(SocketCommands.SubscribeInSpaces, {
+      SocketHelper?.emit(SocketCommands.SubscribeInSpaces, {
         roomParts: "restore",
       });
     }
 
-    SocketHelper.emit(SocketCommands.Subscribe, {
+    SocketHelper?.emit(SocketCommands.Subscribe, {
       roomParts: "quota",
     });
 
-    SocketHelper.emit(SocketCommands.Subscribe, {
+    SocketHelper?.emit(SocketCommands.Subscribe, {
       roomParts: "QUOTA",
       individual: true,
     });
@@ -166,14 +157,18 @@ const Shell = ({ page = "home", ...rest }) => {
 
   useEffect(() => {
     if (standalone) {
-      SocketHelper.emit(SocketCommands.SubscribeInSpaces, {
+      SocketHelper?.emit(SocketCommands.SubscribeInSpaces, {
         roomParts: "restore",
+      });
+
+      SocketHelper?.emit(SocketCommands.SubscribeInSpaces, {
+        roomParts: "storage-encryption",
       });
     }
   }, [standalone]);
 
   useEffect(() => {
-    SocketHelper.emit(SocketCommands.Subscribe, { roomParts: userId });
+    SocketHelper?.emit(SocketCommands.Subscribe, { roomParts: userId });
   }, [userId]);
 
   useEffect(() => {
@@ -188,16 +183,31 @@ const Shell = ({ page = "home", ...rest }) => {
   }, [userId]);
 
   useEffect(() => {
-    SocketHelper.on(SocketEvents.RestoreBackup, () => {
+    SocketHelper?.on(SocketEvents.RestoreBackup, () => {
       setPreparationPortalDialogVisible(true);
     });
 
     return () => {
-      SocketHelper.off(SocketEvents.RestoreBackup, () => {
+      SocketHelper?.off(SocketEvents.RestoreBackup, () => {
         setPreparationPortalDialogVisible(false);
       });
     };
   }, [setPreparationPortalDialogVisible]);
+
+  useEffect(() => {
+    const storageEncryptionHandler = () => {
+      window.location.href = "/encryption-portal";
+    };
+
+    SocketHelper?.on(SocketEvents.StorageEncryption, storageEncryptionHandler);
+
+    return () => {
+      SocketHelper?.off(
+        SocketEvents.StorageEncryption,
+        storageEncryptionHandler,
+      );
+    };
+  }, []);
 
   useEffect(() => {
     const callback = (loginEventId) => {
@@ -213,10 +223,10 @@ const Shell = ({ page = "home", ...rest }) => {
       }
     };
 
-    SocketHelper.on(SocketEvents.LogoutSession, callback);
+    SocketHelper?.on(SocketEvents.LogoutSession, callback);
 
     return () => {
-      SocketHelper.off(SocketEvents.LogoutSession, callback);
+      SocketHelper?.off(SocketEvents.LogoutSession, callback);
     };
   }, [userLoginEventId]);
 
@@ -475,31 +485,6 @@ const Shell = ({ page = "home", ...rest }) => {
     });
   }, [isLoaded]);
 
-  useEffect(() => {
-    if (isFrame) return setShowGuestReleaseTip(false);
-
-    if (!releaseDate || !registrationDate) return;
-
-    if (!isAdmin && !isOwner) return setShowGuestReleaseTip(false);
-
-    const closed = localStorage.getItem(`closedGuestReleaseTip-${userId}`);
-
-    if (closed) return setShowGuestReleaseTip(false);
-
-    const regDate = new Date(registrationDate).getTime();
-    const release = new Date(releaseDate).getTime();
-
-    setShowGuestReleaseTip(regDate < release);
-  }, [
-    isFrame,
-    userId,
-    setShowGuestReleaseTip,
-    isAdmin,
-    isOwner,
-    releaseDate,
-    registrationDate,
-  ]);
-
   const rootElement = document.getElementById("root");
 
   const toast =
@@ -576,8 +561,6 @@ const ShellWrapper = inject(
       frameConfig,
       isPortalDeactivate,
       isPortalRestoring,
-      setShowGuestReleaseTip,
-      buildVersionInfo,
       logoText,
       setLogoText,
       standalone,
@@ -654,8 +637,6 @@ const ShellWrapper = inject(
       pagesWithoutNavMenu,
       isFrame,
       barTypeInFrame: frameConfig?.showHeaderBanner,
-      setShowGuestReleaseTip,
-      releaseDate: buildVersionInfo.releaseDate,
       logoText,
       setLogoText,
       standalone,

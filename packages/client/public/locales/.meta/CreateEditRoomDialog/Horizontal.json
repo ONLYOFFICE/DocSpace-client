@@ -3,7 +3,7 @@
   "content": "Horizontal",
   "content_en_sha1_hash": "4f57a1ce99e68a7b05c42d0a7ea0070eafabd31c",
   "created_at": "2025-05-19T21:30:56.806Z",
-  "updated_at": "2025-05-24T13:48:47.271Z",
+  "updated_at": "2025-08-11T09:02:43.865Z",
   "comment": {
     "text": "This translation key is used to display the label for a tab or button that allows users to rotate an image. In the provided code snippet, it appears in a \"Viewer Info\" dialog, likely as part of a watermark or editing feature. The translated text should describe this action in English, providing context for translators.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/Watermarks/ViewerInfo.js",
-      "line_number": 102,
-      "context": "return getTabsInfo(additions, t, dataTabs);\n };\n \n const rotateOptions = (t) => [\n { key: -45, label: t(\"Diagonal\") },\n { key: 0, label: t(\"Horizontal\") },\n ];\n \n const getInitialRotate = (rotate, isEdit, isImage, t) => {\n const dataRotate = rotateOptions(t);",
+      "line_number": 108,
+      "context": "label: t(\"Diagonal\"),\n dataTestId: \"virtual_data_room_watermark_position_diagonal\",\n },\n {\n key: 0,\n label: t(\"Horizontal\"),\n dataTestId: \"virtual_data_room_watermark_position_horizontal\",\n },\n ];\n \n const getInitialRotate = (rotate, isEdit, isImage, t) => {",
       "module": "/packages/client"
     }
   ],

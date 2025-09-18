@@ -3,7 +3,7 @@
   "content": "Operations with existing files: viewing, reviewing, commenting.",
   "content_en_sha1_hash": "47084e89cece6c67096d21cb0a5b610942ae04f5",
   "created_at": "2025-05-19T21:30:48.095Z",
-  "updated_at": "2025-06-02T10:20:51.581Z",
+  "updated_at": "2025-09-17T13:43:02.002Z",
   "comment": {
     "text": "This translation key is used for the label that describes the role of a user who can review files, and its purpose is to provide a clear explanation in the UI. It appears on buttons or dialogs related to file sharing and access permissions. Translators should focus on conveying this concept in their target language.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 166,
-      "context": "label: t(\"Common:Editor\"),\n icon: AccessEditReactSvgUrl,\n },\n {\n access: ShareAccessRights.Review,\n description: t(\"Common:RoleReviewerDescription\"),\n key: \"review\",\n label: t(\"Common:RoleReviewer\"),\n icon: AccessReviewReactSvgUrl,\n },\n {",
+      "line_number": 160,
+      "context": "label: t(\"Common:Editor\"),\n icon: AccessEditReactSvgUrl,\n },\n available.Review && {\n access: ShareAccessRights.Review,\n description: t(\"Common:RoleReviewerDescription\"),\n key: \"review\",\n label: t(\"Common:RoleReviewer\"),\n icon: AccessReviewReactSvgUrl,\n },\n available.Comment && {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 164,
+      "line_number": 168,
       "context": "type: EmployeeType.User,\n },\n reviewer: {\n key: \"reviewer\",\n label: t(\"Common:RoleReviewer\"),\n description: t(\"Common:RoleReviewerDescription\"),\n access: ShareAccessRights.Review,\n type: EmployeeType.User,\n },\n commentator: {\n key: \"commentator\",",
       "module": "/packages/shared"
     }

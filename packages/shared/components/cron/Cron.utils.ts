@@ -440,7 +440,6 @@ export const findDate = (arr: number[][], dateProp: DateTime) => {
   let hourChanged: boolean;
   let date = dateProp;
 
-  // eslint-disable-next-line no-plusplus
   while (--retry) {
     date = shiftMonth(arr, date);
     [date, monthChanged] = shiftDay(arr, date);

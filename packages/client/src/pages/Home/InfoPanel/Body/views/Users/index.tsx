@@ -158,13 +158,7 @@ const Users = ({
     const selectedOption = typesOptions.find((option) => option.key === role);
 
     const text = (
-      <Text
-        title={typeLabel}
-        fontSize="13px"
-        fontWeight={600}
-        truncate
-        noSelect
-      >
+      <Text title={typeLabel} fontSize="13px" fontWeight={600} truncate>
         {typeLabel}
       </Text>
     );
@@ -231,7 +225,6 @@ const Users = ({
       <div className={styles.userContent}>
         <div className={styles.header}>
           <Text
-            noSelect
             title={t("Data")}
             fontSize="14px"
             fontWeight={600}
@@ -243,7 +236,6 @@ const Users = ({
         <div className={styles.body}>
           <Text
             className={classNames(styles.infoField, styles.firstRow)}
-            noSelect
             title={t("Data")}
           >
             {t("Common:Account")}
@@ -252,32 +244,22 @@ const Users = ({
             className={classNames(styles.infoData, styles.firstRow)}
             fontSize="13px"
             fontWeight={600}
-            noSelect
             title={statusLabel}
           >
             {statusLabel}
           </Text>
 
-          <Text className={styles.infoField} noSelect title={t("Common:Type")}>
+          <Text className={styles.infoField} title={t("Common:Type")}>
             {t("Common:Type")}
           </Text>
           {typeData}
 
           {isGuests && userSelection.createdBy?.displayName ? (
             <>
-              <Text
-                className={styles.infoField}
-                noSelect
-                title={t("Common:Inviter")}
-              >
+              <Text className={styles.infoField} title={t("Common:Inviter")}>
                 {t("Common:Inviter")}
               </Text>
-              <Text
-                fontSize="13px"
-                fontWeight={600}
-                noSelect
-                title={statusLabel}
-              >
+              <Text fontSize="13px" fontWeight={600} title={statusLabel}>
                 {userSelection.createdBy.displayName}
               </Text>
             </>
@@ -287,7 +269,6 @@ const Users = ({
             <>
               <Text
                 className={styles.infoField}
-                noSelect
                 title={t("PeopleTranslations:RegistrationDate")}
               >
                 {t("PeopleTranslations:RegistrationDate")}
@@ -295,7 +276,6 @@ const Users = ({
               <Text
                 fontSize="13px"
                 fontWeight={600}
-                noSelect
                 title={userSelection.registrationDate}
               >
                 {userSelection.registrationDate}
@@ -304,30 +284,17 @@ const Users = ({
           ) : null}
           {!standalone ? (
             <>
-              <Text
-                className={styles.infoField}
-                noSelect
-                title={t("UserStatus")}
-              >
+              <Text className={styles.infoField} title={t("UserStatus")}>
                 {t("UserStatus")}
               </Text>
-              <Text
-                fontSize="13px"
-                fontWeight={600}
-                noSelect
-                title={statusLabel}
-              >
+              <Text fontSize="13px" fontWeight={600} title={statusLabel}>
                 {statusText}
               </Text>
             </>
           ) : null}
           {showStorageInfo && !isGuests ? (
             <>
-              <Text
-                className={styles.infoField}
-                noSelect
-                title={t("Common:Storage")}
-              >
+              <Text className={styles.infoField} title={t("Common:Storage")}>
                 {t("Common:Storage")}
               </Text>
               <SpaceQuota
@@ -335,6 +302,7 @@ const Users = ({
                 item={userSelection}
                 className={styles.typeCombobox}
                 onAbort={onAbort}
+                dataTestId="info_panel_contacts_user_space_quota"
               />
             </>
           ) : null}
@@ -343,14 +311,13 @@ const Users = ({
             <>
               <Text
                 className={styles.infoFieldGroups}
-                noSelect
                 title={t("Common:Group")}
               >
                 {t("Common:Group")}
               </Text>
 
               <div className={styles.groups}>
-                {userSelection.groups.map((group) => (
+                {userSelection.groups.map((group, index) => (
                   <Link
                     key={group.id}
                     isHovered
@@ -360,6 +327,7 @@ const Users = ({
                     title={group.name}
                     onClick={() => onGroupClick(group.id)}
                     isTextOverflow
+                    dataTestId={`info_panel_contacts_user_group_link_${index}`}
                   >
                     {group.name}
                   </Link>

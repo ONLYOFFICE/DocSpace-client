@@ -77,6 +77,7 @@ const ContextMenuButtonPure = ({
   zIndex,
   usePortal = true,
   iconName,
+  fixedDirection = false,
   testId,
 }: ContextMenuButtonProps) => {
   const ref = React.useRef<HTMLDivElement | null>(null);
@@ -231,6 +232,7 @@ const ContextMenuButtonPure = ({
       {state.displayType === ContextMenuButtonDisplayType.dropdown ? (
         <DropDown
           className={dropDownClassName}
+          fixedDirection={fixedDirection}
           directionX={directionX}
           directionY={directionY}
           open={state.isOpen}
@@ -251,7 +253,7 @@ const ContextMenuButtonPure = ({
                   key={key || index}
                   {...rest}
                   id={item.id}
-                  testId={item?.dataTestId}
+                  testId={item?.dataTestId ?? `${key}_item`}
                   label={getLabel(item)}
                   onClick={(
                     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,

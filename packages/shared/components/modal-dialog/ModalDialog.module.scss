@@ -139,7 +139,7 @@
 }
 
 .header {
-  &.displayTypeModal {
+  &.displayTypeModal:not(&.withoutHeaderMargin) {
     margin-bottom: 16px;
   }
 }
@@ -165,7 +165,7 @@
     }
   }
 
-  &.displayTypeModal {
+  &.displayTypeModal:not(&.withoutPadding) {
     padding-bottom: 16px;
 
     &.hasFooter {

@@ -1,0 +1,28 @@
+{
+  "key_path": "PreventDownloadFolder",
+  "content": "Enable this setting to disable downloading of files and folders from this folder shared via a link",
+  "content_en_sha1_hash": "4198f9e70e43736e0e35e37237c1ff8909531466",
+  "created_at": "2025-08-26T11:15:03.599Z",
+  "updated_at": "2025-08-26T11:18:20.309Z",
+  "comment": {
+    "text": "This text appears in a link editing dialog to control file and folder sharing permissions. It explains that enabling this setting prevents users from downloading files or folders shared via a link. Translators should convey the meaning of disabling download functionality.",
+    "is_auto": true,
+    "updated_at": "2025-08-26T11:18:20.309Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/dialogs/EditLinkPanel/index.tsx",
+      "line_number": 425,
+      "context": "if (isFile(item)) {\n return t(\"Common:PreventDownloadFile\");\n }\n \n if (isFolder(item)) {\n return t(\"Common:PreventDownloadFolder\");\n }\n \n return t(\"Common:PreventDownloadFilesAndFolders\");\n };",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

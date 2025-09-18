@@ -107,6 +107,7 @@ export const EnterpriseContainer = ({
                   tag="a"
                   href={`mailto:${salesEmail}`}
                   color="accent"
+                  dataTestId="activate_renew_descr_key_link"
                 />
               ),
             }}

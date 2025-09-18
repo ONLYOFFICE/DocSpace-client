@@ -3,7 +3,7 @@
   "content": "Some users have already been added",
   "content_en_sha1_hash": "11ba705efbb4050c93a4d4827ad25f4eb90bb39d",
   "created_at": "2025-05-19T21:30:54.741Z",
-  "updated_at": "2025-08-04T07:30:01.077Z",
+  "updated_at": "2025-08-11T09:02:43.853Z",
   "comment": {
     "text": "\"This translation key is used to display a message when a user has already been added to a group or panel, indicating that they cannot be added again. It appears in warning notifications and dialog boxes, typically triggered by actions such as adding users to a group or editing invite panels.\"",
     "is_auto": true,
@@ -36,7 +36,7 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/Item.js",
-      "line_number": 261,
+      "line_number": 262,
       "context": "const saveEdit = async () => {\n if (searchRequestRunning) return;\n \n if (isSharedUser) {\n return toastr.warning(t(\"UsersAlreadyAdded\"));\n }\n \n const value = inputValue === \"\" ? name : inputValue;\n \n setEdit(false);",
       "module": "/packages/client"
     },

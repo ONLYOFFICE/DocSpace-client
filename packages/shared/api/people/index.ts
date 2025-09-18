@@ -216,8 +216,13 @@ export function changePassword(userId, passwordHash, key) {
   });
 }
 
-export async function changeEmail(userId: string, email: string, key: string) {
-  const data = { email };
+export async function changeEmail(
+  userId: string,
+  email: string,
+  encemail: string,
+  key: string,
+) {
+  const data = encemail ? { encemail } : { email };
 
   const res = (await request({
     method: "put",
@@ -239,7 +244,7 @@ export async function updateActivationStatus(
     url: `/people/activationstatus/${activationStatus}`,
     data: { userIds: [userId] },
     headers: { confirm: key },
-  })) as TUser;
+  })) as TUser[];
 
   return res;
 }
@@ -314,10 +319,11 @@ export function changeProductAdmin(userId, productId, administrator) {
   });
 }
 
-export async function getUserById(userId: string) {
+export async function getUserById(userId: string, signal?: AbortSignal) {
   const res = (await request({
     method: "get",
     url: `/people/${userId}`,
+    signal,
   })) as TUser;
 
   res.displayName = Encoder.htmlDecode(res.displayName);

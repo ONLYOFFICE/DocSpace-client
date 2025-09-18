@@ -275,7 +275,7 @@ const StartFillingPanel = ({
             onClose={closeUsersPanel}
             submitButtonLabel={t("Common:SelectAction")}
             cancelButtonLabel={t("Common:CancelButton")}
-            disableDisabledUsers={false}
+            disableDisabledUsers
             disableSubmitButton={false}
             checkIfUserInvited={checkIfUserInvited}
             injectedElement={
@@ -306,7 +306,7 @@ const StartFillingPanel = ({
             onSubmit={inviteUsers}
             onClose={closeInvitePanel}
             submitButtonLabel={t("Common:AddToRoom")}
-            disableDisabledUsers={false}
+            disableDisabledUsers
             disableSubmitButton={false}
             headerProps={invitePanelSelectorHeader}
           />

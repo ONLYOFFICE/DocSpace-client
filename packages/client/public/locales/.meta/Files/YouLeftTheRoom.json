@@ -3,7 +3,7 @@
   "content": "You have left the room",
   "content_en_sha1_hash": "46542dad576cfe3647d36a31566045dcad57950c",
   "created_at": "2025-05-19T21:30:56.359Z",
-  "updated_at": "2025-08-04T07:30:01.615Z",
+  "updated_at": "2025-09-07T07:53:15.397Z",
   "comment": {
     "text": "\"When you exit a room, displays a confirmation message to inform users that they have left the current room.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 3071,
+      "line_number": 3083,
       "context": "this.filesStore.setInRoomFolder(roomId, false);\n }\n \n isOwner\n ? toastr.success(t(\"Files:LeftAndAppointNewOwner\"))\n : toastr.success(t(\"Files:YouLeftTheRoom\"));\n });\n };\n \n changeRoomOwner = (t, userId, isLeaveChecked = false) => {\n const { setFolder, setSelected, selection, bufferSelection } =",
       "module": "/packages/client"
     }

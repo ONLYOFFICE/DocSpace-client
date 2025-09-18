@@ -3,7 +3,7 @@
   "content": "Unknown error",
   "content_en_sha1_hash": "e5fd9aa24c9417e7332e6f25936ae2a6ec8f1524",
   "created_at": "2025-05-19T21:30:49.406Z",
-  "updated_at": "2025-06-08T12:02:32.764Z",
+  "updated_at": "2025-09-17T13:43:01.794Z",
   "comment": {
     "text": "This translation key is used to display a generic error message when an unknown error occurs, often in situations where user input or system actions result in unexpected outcomes. It appears as part of error messages and dialogues throughout the application, providing a standardized response for users when unknown errors occur.",
     "is_auto": true,
@@ -12,19 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/csp.js",
-      "line_number": 165,
+      "line_number": 160,
       "context": "try {\n await setCSPSettings({ domains: Array.from(domainSet) });\n if (error) setError(null);\n } catch (err) {\n setError(\n err?.response?.data?.error?.message || t(\"Common:UnknownError\"),\n );\n }\n }\n \n changeDomain(\"\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/login/src/utils/index.ts",
-      "line_number": 68,
+      "line_number": 69,
       "context": "export const getMessageKeyTranslate = (t: TTranslation, message: string) => {\n switch (message) {\n case \"Error\":\n return t(\"Common:Error\");\n case \"None\":\n return t(\"Common:UnknownError\");\n case \"ErrorUserNotFound\":\n return t(\"Errors:ErrorUserNotFound\");\n case \"ErrorExpiredActivationLink\":\n return t(\"Errors:ErrorExpiredActivationLink\");\n case \"ErrorInvalidActivationLink\":",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/utils/index.ts",
-      "line_number": 68,
+      "line_number": 69,
       "context": "export const getMessageKeyTranslate = (t: TTranslation, message: string) => {\n switch (message) {\n case \"Error\":\n return t(\"Common:Error\");\n case \"None\":\n return t(\"Common:UnknownError\");\n case \"ErrorUserNotFound\":\n return t(\"Errors:ErrorUserNotFound\");\n case \"ErrorExpiredActivationLink\":\n return t(\"Errors:ErrorExpiredActivationLink\");\n case \"ErrorInvalidActivationLink\":",
       "module": "/packages/login"
     }

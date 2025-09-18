@@ -51,7 +51,6 @@ import {
 } from "../panels";
 import {
   ConnectDialog,
-  DeleteThirdPartyDialog,
   EmptyTrashDialog,
   DeleteDialog,
   DownloadDialog,
@@ -62,7 +61,6 @@ import {
   SubmitToFormGallery,
   EditGroupMembersDialog,
   ChangeQuotaDialog,
-  UnsavedChangesDialog,
   DeleteLinkDialog,
   MoveToPublicRoom,
   SettingsPluginDialog,
@@ -70,7 +68,6 @@ import {
   DeletePluginDialog,
   ShareFolderDialog,
   RoomLogoCoverDialog,
-  GuestReleaseTipDialog,
   FormFillingTipsDialog,
   DeleteVersionDialog,
   CancelOperationDialog,
@@ -104,7 +101,6 @@ const Panels = (props) => {
     moveToPanelVisible,
     restorePanelVisible,
     connectDialogVisible,
-    deleteThirdPartyDialogVisible,
     versionHistoryPanelVisible,
     deleteDialogVisible,
     lifetimeDialogVisible,
@@ -133,7 +129,6 @@ const Panels = (props) => {
     editGroupMembersDialogVisible,
     changeQuotaDialogVisible,
     editLinkPanelIsVisible,
-    unsavedChangesDialogVisible,
     deleteLinkDialogVisible,
     embeddingPanelData,
     moveToPublicRoomVisible,
@@ -155,7 +150,6 @@ const Panels = (props) => {
     roomLogoCoverDialogVisible,
     welcomeFormFillingTipsVisible,
     passwordEntryDialogDate,
-    guestReleaseTipDialogVisible,
     closeEditIndexDialogVisible,
     conversionVisible,
     deleteVersionDialogVisible,
@@ -265,9 +259,6 @@ const Panels = (props) => {
     pluginDialogVisible && (
       <PluginDialog isVisible={pluginDialogVisible} key="plugin-dialog" />
     ),
-    guestReleaseTipDialogVisible && (
-      <GuestReleaseTipDialog key="guest-release-tip-dialog" />
-    ),
     uploadPanelVisible && <UploadPanel key="upload-panel" />,
     conversionVisible && <ConversionPanel key="conversion-panel" />,
     (moveToPanelVisible ||
@@ -283,9 +274,6 @@ const Panels = (props) => {
       />
     ),
     connectDialogVisible && <ConnectDialog key="connect-dialog" />,
-    deleteThirdPartyDialogVisible && (
-      <DeleteThirdPartyDialog key="thirdparty-delete-dialog" />
-    ),
     versionHistoryPanelVisible && (
       <VersionHistoryPanel key="version-history-panel" />
     ),
@@ -310,6 +298,8 @@ const Panels = (props) => {
         isPanelVisible={selectFileDialogVisible}
         onSelectFile={createMasterForm}
         onClose={onClose}
+        withRecentTreeFolder
+        withFavoritesTreeFolder
       />
     ),
 
@@ -323,6 +313,8 @@ const Panels = (props) => {
         onSelectFile={(file) => copyFromTemplateForm(file, t)}
         filterParam={selectFileFormRoomFilterParam}
         descriptionText={descriptionTextFileFormRoomDialog}
+        withRecentTreeFolder
+        withFavoritesTreeFolder
       />
     ),
 
@@ -347,9 +339,7 @@ const Panels = (props) => {
     ),
     changeQuotaDialogVisible && <ChangeQuotaDialog key="change-quota-dialog" />,
     editLinkPanelIsVisible && <EditLinkPanel key="edit-link-panel" />,
-    unsavedChangesDialogVisible && (
-      <UnsavedChangesDialog key="unsaved-dialog" />
-    ),
+
     deleteLinkDialogVisible && <DeleteLinkDialog key="delete-link-dialog" />,
     embeddingPanelData.visible && <EmbeddingPanel key="embedding-panel" />,
     moveToPublicRoomVisible && (
@@ -453,7 +443,6 @@ export default inject(
       moveToPanelVisible,
       restorePanelVisible,
       connectDialogVisible,
-      deleteThirdPartyDialogVisible,
       deleteDialogVisible,
       lifetimeDialogVisible,
       downloadDialogVisible,
@@ -469,7 +458,6 @@ export default inject(
       restoreRoomDialogVisible,
       welcomeFormFillingTipsVisible,
 
-      unsavedChangesDialogVisible,
       createMasterForm,
       selectFileDialogVisible,
       setSelectFileDialogVisible,
@@ -501,7 +489,6 @@ export default inject(
       isNewUserByCurrentUser,
       isNewRoomByCurrentUser,
       passwordEntryDialogDate,
-      guestReleaseTipDialogVisible,
       closeEditIndexDialogVisible,
 
       setStopFillingDialogVisible,
@@ -563,7 +550,6 @@ export default inject(
       moveToPanelVisible,
       restorePanelVisible,
       connectDialogVisible: connectDialogVisible || !!connectItem, // TODO:
-      deleteThirdPartyDialogVisible,
       versionHistoryPanelVisible,
       deleteDialogVisible,
       lifetimeDialogVisible,
@@ -592,7 +578,6 @@ export default inject(
       editGroupMembersDialogVisible,
       changeQuotaDialogVisible,
       editLinkPanelIsVisible,
-      unsavedChangesDialogVisible,
       deleteLinkDialogVisible,
       embeddingPanelData,
       moveToPublicRoomVisible,
@@ -614,7 +599,6 @@ export default inject(
       resetQuotaItem,
       isShowWarningDialog,
       passwordEntryDialogDate,
-      guestReleaseTipDialogVisible,
       closeEditIndexDialogVisible,
       conversionVisible,
       deleteVersionDialogVisible,

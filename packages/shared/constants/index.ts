@@ -27,10 +27,11 @@
 import ShareAppleReactSvg from "PUBLIC_DIR/images/share.apple.react.svg";
 import ShareGoogleReactSvg from "PUBLIC_DIR/images/share.google.react.svg";
 import ShareFacebookReactSvg from "PUBLIC_DIR/images/share.facebook.react.svg";
-import ShareTwitterReactSvg from "PUBLIC_DIR/images/thirdparties/twitter.svg";
+import ShareTwitterReactSvg from "PUBLIC_DIR/images/share.twitter.svg";
 import ShareLinkedinReactSvg from "PUBLIC_DIR/images/share.linkedin.react.svg";
 import ShareMicrosoftReactSvg from "PUBLIC_DIR/images/share.microsoft.react.svg";
 import ShareZoomReactSvg from "PUBLIC_DIR/images/share.zoom.react.svg";
+import ShareWeixinReactSvg from "PUBLIC_DIR/images/share.weixin.react.svg";
 import { globalColors } from "../themes/globalColors";
 import { FileFillingFormStatus } from "../enums";
 
@@ -55,6 +56,8 @@ export const ROOM = "room";
 export const USERS = "users";
 export const USERS_IN_ROOM = "usersInRoom";
 export const YEAR_KEY = "year";
+export const BACKUP_SERVICE = "backup";
+export const FREE_BACKUP = "free_backup";
 export const PDF_FORM_DIALOG_KEY = "pdf_form_dialog";
 export const CREATED_FORM_KEY = "created_form_key";
 export const PUBLIC_STORAGE_KEY = "public-auth";
@@ -141,6 +144,11 @@ export const PROVIDERS_DATA = Object.freeze({
     icon: ShareZoomReactSvg,
     iconOptions: undefined,
   },
+  weixin: {
+    label: "weixin",
+    icon: ShareWeixinReactSvg,
+    iconOptions: undefined,
+  },
 });
 
 export const PASSWORD_LIMIT_SPECIAL_CHARACTERS = "!@#$%^&*";
@@ -183,7 +191,7 @@ export const EBOOK_EXST = [".fb2", ".pb2", ".ibk", ".prc", ".epub", ".djvu"];
 
 export const SYSTEM_THEME_KEY = "system_theme";
 
-const SDK_VERSION = "2.0.0";
+const SDK_VERSION = "2.1.0";
 
 export const SDK_SCRIPT_URL =
   typeof window !== "undefined"
@@ -247,3 +255,14 @@ export const STORAGE_TARIFF_DEACTIVATED = "storageTariffDeactivated";
 // any unicode letters are allowed, characters are prohibited
 export const BRAND_NAME_REGEX =
   /^[^\s-]([^<>\/\\|:*?"'`~!@#$%^&()+={}[\];,.])*[^\s-]$/;
+
+export const AVATAR_ACTION_KEYS = {
+  PROFILE_AVATAR_UPLOAD: "profile_avatar_upload",
+  PROFILE_AVATAR_DELETE: "profile_avatar_delete",
+} as const;
+
+export const ROOM_ACTION_KEYS = {
+  CREATE_EDIT_ROOM_UPLOAD: "create_edit_room_upload",
+  CREATE_EDIT_ROOM_DELETE: "create_edit_room_delete",
+  CREATE_EDIT_ROOM_CUSTOMIZE_COVER: "create_edit_room_customize_cover",
+} as const;

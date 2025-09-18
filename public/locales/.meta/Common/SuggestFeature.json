@@ -3,7 +3,7 @@
   "content": "Suggest a feature",
   "content_en_sha1_hash": "b77aa8e17acff2e00b94f853f0b677ad7ef00d3d",
   "created_at": "2025-06-18T07:33:49.951Z",
-  "updated_at": "2025-06-18T17:11:42.537Z",
+  "updated_at": "2025-09-17T13:43:01.944Z",
   "comment": {
     "text": "The translation key \"SuggestFeature\" is used to display a suggestion feature option on user menu items. It appears as a button label, prompting users to suggest new features, and its content is translated from \"Suggest a feature\". This translation should be used in contexts where users can provide feedback or request new features.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ProfileActionsStore.js",
-      "line_number": 462,
+      "line_number": 506,
       "context": "preventNewTab: true,\n },\n feedbackAndSupportEnabled && {\n key: \"user-menu-suggest-feature\",\n icon: LampReactSvgUrl,\n label: t(\"Common:SuggestFeature\"),\n onClick: this.onSuggestFeatureClick,\n url: this.settingsStore.suggestFeatureUrl || \"#\",\n preventNewTab: true,\n },\n bookTraining,",
       "module": "/packages/client"
     }

@@ -160,7 +160,7 @@ const BackupListModalDialog = ({
     startRestore(backupId, storageType, storageParams, isNotify, isManagement())
       ?.then(() => setTenantStatus(TenantStatus.PortalRestore))
       .then(() => {
-        SocketHelper.emit(SocketCommands.RestoreBackup, {
+        SocketHelper?.emit(SocketCommands.RestoreBackup, {
           dump: isManagement(),
         });
       })
@@ -250,6 +250,7 @@ const BackupListModalDialog = ({
                   onClick={onCleanBackupList}
                   fontWeight={600}
                   style={{ textDecoration: "underline dotted" }}
+                  dataTestId="delete_backups_link"
                 >
                   {t("Common:ClearBackupList")}
                 </Link>
@@ -300,6 +301,7 @@ const BackupListModalDialog = ({
               className="backup-list_checkbox"
               onChange={onChangeCheckbox}
               isChecked={isChecked}
+              dataTestId="backup_list_agreement_checkbox"
             />
             <Text
               as="span"
@@ -318,6 +320,7 @@ const BackupListModalDialog = ({
                 iconName={HelpReactSvgUrl}
                 getContent={helpContent}
                 tooltipMaxWidth="286px"
+                dataTestId="backup_list_agreement_help_button"
               />
             </Text>
           </div>
@@ -335,12 +338,14 @@ const BackupListModalDialog = ({
               label={t("Common:Restore")}
               onClick={onRestorePortal}
               isDisabled={isCopyingToLocal || !isChecked}
+              testId="backup_list_restore_button"
             />
             <Button
               className="close"
               size={ButtonSize.normal}
               label={t("Common:CloseButton")}
               onClick={onModalClose}
+              testId="backup_list_close_button"
             />
           </div>
         </div>

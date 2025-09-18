@@ -83,7 +83,7 @@ const useSocketHelper = ({
       SocketHelper?.socketSubscribers.has(path) &&
       folderSubscribers.current.has(path)
     ) {
-      SocketHelper.emit(SocketCommands.Unsubscribe, {
+      SocketHelper?.emit(SocketCommands.Unsubscribe, {
         roomParts: path,
         individual: true,
       });

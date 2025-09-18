@@ -3,7 +3,7 @@
   "content": "Hide auth page",
   "content_en_sha1_hash": "5316ca6866fa2cf3366a0647deae3c189d460422",
   "created_at": "2025-05-19T21:30:50.088Z",
-  "updated_at": "2025-05-24T03:25:29.759Z",
+  "updated_at": "2025-08-11T18:11:59.254Z",
   "comment": {
     "text": "The translation key \"HideAuthPage\" is used to display a label for a checkbox that allows users to hide the authentication page in the Portal Settings. This value appears as a label on a Checkbox component and can be translated to provide clarity for users in different languages.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/AdvancedSettings.tsx",
       "line_number": 87,
-      "context": "<div className=\"advanced-block\">\n <Checkbox\n id=\"hide-auth-page\"\n className=\"checkbox-input\"\n label={t(\"HideAuthPage\")}\n name=\"hideAuthPage\"\n isChecked={hideAuthPage}\n isDisabled={!enableSso || isLoadingXml}\n onChange={setCheckbox}\n />",
+      "context": "<div className=\"advanced-block\">\n <Checkbox\n id=\"hide-auth-page\"\n className=\"checkbox-input\"\n label={t(\"HideAuthPage\")}\n name=\"hideAuthPage\"\n isChecked={hideAuthPage}\n isDisabled={!enableSso || isLoadingXml}\n onChange={setCheckbox}\n dataTestId=\"hide_auth_page_checkbox\"",
       "module": "/packages/client"
     }
   ],

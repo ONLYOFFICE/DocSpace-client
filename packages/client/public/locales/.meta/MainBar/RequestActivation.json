@@ -3,7 +3,7 @@
   "content": "Request activation once again",
   "content_en_sha1_hash": "d92ae80e8cd52b009bd09980e39a20c69c79d8a6",
   "created_at": "2025-05-19T21:30:54.123Z",
-  "updated_at": "2025-05-26T07:57:32.187Z",
+  "updated_at": "2025-09-17T13:43:01.564Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Request activation once again\" as a button label in various places within the application, including confirmation email bars and portal deletion dialogs. The purpose of this text is to prompt users to activate their accounts or portals again.",
     "is_auto": true,
@@ -18,14 +18,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/delete-data/portalDeactivation.js",
-      "line_number": 115,
-      "context": "color={currentColorScheme?.main?.accent}\n fontSize=\"12px\"\n fontWeight=\"400\"\n onClick={requestAgain}\n >\n {t(\"MainBar:RequestActivation\")}\n </Link>\n </Text>\n ) : null}\n </ButtonWrapper>\n </MainContainer>",
+      "line_number": 111,
+      "context": "fontSize=\"12px\"\n fontWeight=\"400\"\n onClick={requestAgain}\n testId=\"request_deactivate_portal_link\"\n >\n {t(\"MainBar:RequestActivation\")}\n </Link>\n </Text>\n ) : null}\n </ButtonWrapper>\n </MainContainer>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/delete-data/portalDeletion.js",
-      "line_number": 123,
-      "context": "color={currentColorScheme?.main?.accent}\n fontSize=\"12px\"\n fontWeight=\"400\"\n onClick={requestAgain}\n >\n {t(\"MainBar:RequestActivation\")}\n </Link>\n </Text>\n ) : null}\n </ButtonWrapper>\n <DeletePortalDialog",
+      "line_number": 114,
+      "context": "fontSize=\"12px\"\n fontWeight=\"400\"\n onClick={requestAgain}\n testId=\"request_delete_portal_link\"\n >\n {t(\"MainBar:RequestActivation\")}\n </Link>\n </Text>\n ) : null}\n </ButtonWrapper>\n <DeletePortalDialog",
       "module": "/packages/client"
     }
   ],

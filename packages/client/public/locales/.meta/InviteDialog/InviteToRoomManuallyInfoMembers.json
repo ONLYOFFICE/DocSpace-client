@@ -3,7 +3,7 @@
   "content": "Add existing {{productName}} members to the room.",
   "content_en_sha1_hash": "816770fbd8f562c5be684447272d1393838bad6e",
   "created_at": "2025-05-26T07:15:53.261Z",
-  "updated_at": "2025-08-04T07:30:01.179Z",
+  "updated_at": "2025-08-12T19:46:25.985Z",
   "comment": {
     "text": "This translation key is used to display a message that prompts users to add existing members from {{productName}} to a room. It appears in an invite panel when manually inviting members and allows users to select multiple members at once.",
     "is_auto": true,

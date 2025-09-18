@@ -14,6 +14,7 @@
   --app-loader-background-color: #{$white};
 
   --files-article-body-download-app-list-text-color: #{$gray};
+  --files-article-body-download-app-list-mac-hover-color: #{$dark-black};
   --files-article-body-dev-tools-background-color: var(
     --accent-main,
     #{$light-blue-main}
@@ -21,6 +22,9 @@
   --files-article-body-dev-tools-background-opacity: 0.17;
   --files-article-body-dev-tools-color: #{$gray-text};
   --article-catalog-background: #{$gray-light};
+  --article-desktop-width: 252px;
+  --article-tablet-width: 243px;
+  --article-tablet-width-collapsed: 60px;
   --article-catalog-show-text: #{$light-gray-dark};
   --article-catalog-header-border-bottom: 1px solid #{$gray-light-mid};
   --article-client-home-logo-color: #{$black};
@@ -363,10 +367,14 @@
   --app-loader-background-color: #{$black};
 
   --files-article-body-download-app-list-text-color: #{$gray-dark};
+  --files-article-body-download-app-list-mac-hover-color: #{$white};
   --files-article-body-dev-tools-background-color: #{$dark-gray-dark};
   --files-article-body-dev-tools-background-opacity: 1;
   --files-article-body-dev-tools-color: #{$black};
   --article-catalog-background: #{$dark-gray-light};
+  --article-desktop-width: 252px;
+  --article-tablet-width: 243px;
+  --article-tablet-width-collapsed: 60px;
   --article-catalog-show-text: #{$dark-gray-dark};
   --article-catalog-header-border-bottom: 1px solid #{$gray-dark-strong};
   --article-client-home-logo-color: #{$white};
@@ -1034,6 +1042,8 @@
   --section-header-height: 69px;
   --section-header-height-tablet: 61px;
   --section-header-height-mobile: 53px;
+  --section-desktop-padding: -20px;
+  --section-tablet-padding: -24px;
 }
 
 .light {
@@ -1077,6 +1087,8 @@
   --section-header-height: 69px;
   --section-header-height-tablet: 61px;
   --section-header-height-mobile: 53px;
+  --section-desktop-padding: -20px;
+  --section-tablet-padding: -24px;
 
   --section-header-bg: #{$white};
   --info-panel-blur-color: #{$blur-light};
@@ -1547,30 +1559,27 @@
   // Sizes
   --input-width-base: 173px;
   --input-width-middle: 300px;
-  --input-width-big: 350px;
-  --input-width-huge: 500px;
   --input-width-large: 550px;
 
   // Line heights
   --text-input-line-height-base: 20px;
   --text-input-line-height-middle: 20px;
-  --text-input-line-height-big: 20px;
-  --text-input-line-height-huge: 21px;
-  --text-input-line-height-large: 20px;
+  --text-input-line-height-large: 22px;
 
   // Font sizes
   --text-input-font-size-base: 13px;
-  --text-input-font-size-middle: 14px;
-  --text-input-font-size-big: 16px;
-  --text-input-font-size-huge: 18px;
+  --text-input-font-size-middle: 13px;
   --text-input-font-size-large: 16px;
 
   // Padding
-  --text-input-padding-base: 5px 6px;
-  --text-input-padding-middle: 8px 12px;
-  --text-input-padding-big: 8px 16px;
-  --text-input-padding-huge: 8px 20px;
-  --text-input-padding-large: 11px 12px;
+  --text-input-padding-base: 5px 8px;
+  --text-input-padding-middle: 5px 8px;
+  --text-input-padding-large: 10px 12px;
+
+  // Input font weight
+  --text-input-font-weight-base: 400;
+  --text-input-font-weight-middle: 600;
+  --text-input-font-weight-large: 400;
 
   // Placeholder colors
   --text-input-placeholder-color: #{$gray};
@@ -1613,30 +1622,27 @@
   // Sizes
   --input-width-base: 173px;
   --input-width-middle: 300px;
-  --input-width-big: 350px;
-  --input-width-huge: 500px;
   --input-width-large: 550px;
 
   // Line heights
   --text-input-line-height-base: 20px;
   --text-input-line-height-middle: 20px;
-  --text-input-line-height-big: 20px;
-  --text-input-line-height-huge: 21px;
-  --text-input-line-height-large: 20px;
+  --text-input-line-height-large: 22px;
 
   // Font sizes
   --text-input-font-size-base: 13px;
-  --text-input-font-size-middle: 14px;
-  --text-input-font-size-big: 16px;
-  --text-input-font-size-huge: 18px;
+  --text-input-font-size-middle: 13px;
   --text-input-font-size-large: 16px;
 
   // Padding
-  --text-input-padding-base: 5px 6px;
-  --text-input-padding-middle: 8px 12px;
-  --text-input-padding-big: 8px 16px;
-  --text-input-padding-huge: 8px 20px;
-  --text-input-padding-large: 11px 12px;
+  --text-input-padding-base: 5px 8px;
+  --text-input-padding-middle: 5px 8px;
+  --text-input-padding-large: 10px 12px;
+
+  // Input font weight
+  --text-input-font-weight-base: 400;
+  --text-input-font-weight-middle: 600;
+  --text-input-font-weight-large: 400;
 }
 
 .light {
@@ -2171,6 +2177,14 @@
 }
 
 .light {
+  --services-text-description: #{$gray-text};
+}
+
+.dark {
+  --services-text-description: #{$gray-dark};
+}
+
+.light {
   --modal-dialog-border-color: #{$gray-light-mid};
 }
 
@@ -2391,6 +2405,8 @@
   --settings-common-white-label-not-available-background: #{$gray-light};
   --settings-common-white-label-text-color: #{$black};
   --settings-common-backup-rectangle-bg-color: #{$gray-light};
+  --settings-backup-text-disabled: #{$gray};
+  --settings-backup-background: #{$gray-light};
 }
 
 .dark {
@@ -2401,6 +2417,8 @@
   --settings-common-white-label-not-available-background: #{$gray-dark};
   --settings-common-white-label-text-color: #{$white};
   --settings-common-backup-rectangle-bg-color: #{$light-dark-gray-hover};
+  --settings-backup-text-disabled: #{$gray-dark-text};
+  --settings-backup-background: #{$dark-gray-light};
 }
 
 .light {
@@ -2534,18 +2552,18 @@
 .dark {
   --search-input-default-icon-fill: #{$gray-dark-strong};
   --search-input-filled-icon-fill: #{$gray-dark};
-  // --quantity-picker-disable-color: #{$light-gray-hover};
-  --payment-rectangle-color: #{$light-gray-hover};
-
+}
+.light {
   --payment-price-container-disable-background: #{$gray-light};
-
   --payment-warning-color: #{$light-status-warning};
   --payment-accent-color: var(--color-scheme-main-buttons);
+  --payment-rectangle-color: #{$light-gray-hover};
+  // --quantity-picker-disable-color: #{$light-gray-hover};
 }
+
 .dark {
   // --quantity-picker-disable-color: #{$light-dark-gray-hover};
   --payment-rectangle-color: #{$light-dark-gray-hover};
-
   --payment-price-container-disable-background: #{$dark-gray-light};
   --payment-warning-color: #{$dark-status-warning};
   --payment-accent-color: var(--color-scheme-main-buttons);
@@ -2564,6 +2582,26 @@
   --quantity-picker-track-number: #{$gray-dark};
   --quantity-picker-rectangle-color: #{$light-dark-gray-hover};
   --quantity-picker-warning-color: #{$dark-error-status};
+}
+
+.light {
+  --notification-text-border: 1px solid #{$gray-light-mid};
+  --channel-body-color: #{$gray-light};
+  --channel-body-color-active: var(--accent-main, #{$light-blue-main});
+  --channel-body-color-active-opacity: 0.1;
+  --channel-type-color: #{$gray};
+  --channel-icon-email-color: #{$light-gray-dark};
+  --channel-error-color: #{$light-error-status};
+}
+
+.dark {
+  --notification-text-border: 1px solid #{$gray-dark-strong};
+  --channel-body-color: #{$dark-gray-light};
+  --channel-body-color-active: #{$on-black-color};
+  --channel-body-color-active-opacity: 1;
+  --channel-type-color: #{$gray-dark};
+  --channel-icon-email-color: #{$dark-gray-dark};
+  --channel-error-color: #{$dark-error-status};
 }
 
 .light {
@@ -2787,4 +2825,32 @@
   --settings-payment-color: #{$dark-status-warning};
   --settings-payment-border: 1px solid #{$gray-dark-strong};
   --settings-payment-bg-benefits-color: #{$black};
+}
+
+.light {
+  --share-selector-default-color: #{$light-gray-dark};
+  --share-selector-hover-color: #{$light-gray-dark};
+  --share-selector-selected-color: #{$black};
+  --share-selector-disabled-color: #{$gray};
+  --share-selector-not-active-color: #{$light-gray-dark};
+
+  --share-bg-pressed-color: #{$gray-strong};
+}
+
+.dark {
+  --share-selector-default-color: #{$dark-gray-dark};
+  --share-selector-hover-color: #{$dark-gray-dark};
+  --share-selector-selected-color: #{$white};
+  --share-selector-disabled-color: #{$gray-dark};
+  --share-selector-not-active-color: #{$dark-gray-dark};
+
+  --share-bg-pressed-color: #{$dark-gray-light};
+}
+
+.light {
+  --quick-buttons-shared-color: #{$light-icons};
+}
+
+.dark {
+  --quick-buttons-shared-color: #{$white};
 }

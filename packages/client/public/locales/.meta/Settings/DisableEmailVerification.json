@@ -3,7 +3,7 @@
   "content": "Disable email verification",
   "content_en_sha1_hash": "6752c83196d2f72faefb0d749546f8b3600209a5",
   "created_at": "2025-05-19T21:30:51.198Z",
-  "updated_at": "2025-05-26T07:57:32.692Z",
+  "updated_at": "2025-08-11T18:11:59.235Z",
   "comment": {
     "text": "This translation key is used to display a label for a checkbox that controls email verification settings. In the PortalSettings page, it will be used as a label in an Advanced Settings component. The content should convey that this setting disables email verification, providing clarity for users navigating the portal's settings.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/AdvancedSettings.tsx",
-      "line_number": 100,
-      "context": "<div className=\"advanced-block\">\n <Checkbox\n id=\"disable-email-verification\"\n className=\"checkbox-input\"\n label={t(\"Settings:DisableEmailVerification\")}\n name=\"disableEmailVerification\"\n isChecked={disableEmailVerification}\n isDisabled={!enableSso || isLoadingXml}\n onChange={setCheckbox}\n />",
+      "line_number": 104,
+      "context": "<div className=\"advanced-block\">\n <Checkbox\n id=\"disable-email-verification\"\n className=\"checkbox-input\"\n label={t(\"Settings:DisableEmailVerification\")}\n name=\"disableEmailVerification\"\n isChecked={disableEmailVerification}\n isDisabled={!enableSso || isLoadingXml}\n onChange={setCheckbox}\n dataTestId=\"disable_email_verification_checkbox\"",
       "module": "/packages/client"
     }
   ],

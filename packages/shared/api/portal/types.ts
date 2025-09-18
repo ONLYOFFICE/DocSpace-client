@@ -237,9 +237,12 @@ export type TTransactionCollection = {
   quantity: number;
   amount: number;
   credit: number;
-  withdrawal: number;
+  debit: number;
   currency: string;
   description: string;
+  details: string;
+  participantName?: string;
+  participantDisplayName?: string;
 };
 
 export type TTransactionHistory = {
@@ -256,4 +259,15 @@ export type TAutoTopUpSettings = {
   minBalance: number;
   upToBalance: number;
   currency: string | null;
+};
+
+export type TransactionHistoryReport = {
+  id: string;
+  error: string;
+  percentage: number;
+  isCompleted: boolean;
+  status: number;
+  resultFileId: number;
+  resultFileName: string;
+  resultFileUrl: string;
 };

@@ -24,10 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable no-console */
-/* eslint-disable no-multi-str */
-/* eslint-disable no-plusplus */
-
 import type { Location } from "react-router";
 import find from "lodash/find";
 import moment from "moment-timezone";
@@ -45,6 +41,14 @@ import LightSmallSvgUrl from "PUBLIC_DIR/images/logo/lightsmall.svg?url";
 import DocsEditoRembedSvgUrl from "PUBLIC_DIR/images/logo/docseditorembed.svg?url";
 import DarkLightSmallSvgUrl from "PUBLIC_DIR/images/logo/dark_lightsmall.svg?url";
 import FaviconIco from "PUBLIC_DIR/images/logo/favicon.ico";
+import SpreadsheetEditorSvgUrl from "PUBLIC_DIR/images/logo/spreadsheeteditor.svg?url";
+import SpreadsheetEditorEmbedSvgUrl from "PUBLIC_DIR/images/logo/spreadsheeteditorembed.svg?url";
+import PresentationEditorSvgUrl from "PUBLIC_DIR/images/logo/presentationeditor.svg?url";
+import PresentationEditorEmbedSvgUrl from "PUBLIC_DIR/images/logo/presentationeditorembed.svg?url";
+import PDFEditorSvgUrl from "PUBLIC_DIR/images/logo/pdfeditor.svg?url";
+import PDFEditorEmbedSvgUrl from "PUBLIC_DIR/images/logo/pdfeditorembed.svg?url";
+import DiagramEditorSvgUrl from "PUBLIC_DIR/images/logo/diagrameditor.svg?url";
+import DiagramEditorEmbedSvgUrl from "PUBLIC_DIR/images/logo/diagrameditorembed.svg?url";
 
 import BackgroundPatternReactSvgUrl from "PUBLIC_DIR/images/background.pattern.react.svg?url";
 import BackgroundPatternOrangeReactSvgUrl from "PUBLIC_DIR/images/background.pattern.orange.react.svg?url";
@@ -94,6 +98,7 @@ import { getCookie, setCookie } from "./cookie";
 import { checkIsSSR } from "./device";
 import { hasOwnProperty } from "./object";
 import { TFrameConfig } from "../types/Frame";
+import { isFile, isFolder } from "./typeGuards";
 
 export const desktopConstants = Object.freeze({
   domain: !checkIsSSR() && window.location.origin,
@@ -152,7 +157,7 @@ export const isPublicPreview = () => {
 
 export const parseDomain = (
   domain: string,
-  setError: Function,
+  setError: (error: string[] | null) => void,
   t: (key: string) => string,
 ) => {
   const parsedDomain = parseAddress(`test@${domain}`);
@@ -191,7 +196,7 @@ export const parseDomain = (
 export const validatePortalName = (
   value: string,
   nameValidator: TDomainValidator,
-  setError: Function,
+  setError: (error: string | null) => void,
   t: TTranslation,
 ) => {
   const validName = new RegExp(nameValidator.regex);
@@ -343,8 +348,8 @@ export function clickBackdrop() {
   }
 }
 
-export function objectToGetParams(object: {}) {
-  const params = Object.entries(object)
+export function objectToGetParams(obj: object) {
+  const params = Object.entries(obj)
     .filter(([, value]) => value !== undefined && value !== null)
     .map(
       ([key, value]) =>
@@ -369,16 +374,43 @@ export function toCommunityHostname(hostname: string) {
   return communityHostname;
 }
 
+export function getProviderLabel(provider: string, t: (key: string) => string) {
+  switch (provider) {
+    case "apple":
+      return t("Common:ProviderApple");
+    case "google":
+      return t("Common:ProviderGoogle");
+    case "facebook":
+      return t("Common:ProviderFacebook");
+    case "twitter":
+      return t("Common:ProviderTwitter");
+    case "linkedin":
+      return t("Common:ProviderLinkedIn");
+    case "microsoft":
+      return t("Common:ProviderMicrosoft");
+    case "sso":
+      return t("Common:SSO");
+    case "zoom":
+      return t("Common:ProviderZoom");
+    case "weixin":
+      return t("Common:ProviderWechat");
+    case "sso-full":
+      return t("Common:ProviderSsoSetting");
+    default:
+      return "";
+  }
+}
+
 export function getProviderTranslation(
   provider: string,
   t: (key: string) => string,
   linked = false,
   signUp = false,
 ) {
-  const capitalizeProvider =
-    provider.charAt(0).toUpperCase() + provider.slice(1);
+  const providerLabel = getProviderLabel(provider, t);
+
   if (linked) {
-    return `${t("Common:Disconnect")} ${capitalizeProvider}`;
+    return `${t("Common:Disconnect")} ${providerLabel}`;
   }
 
   switch (provider) {
@@ -408,30 +440,10 @@ export function getProviderTranslation(
       return signUp ? t("Common:SignUpWithSso") : t("Common:SignInWithSso");
     case "zoom":
       return signUp ? t("Common:SignUpWithZoom") : t("Common:SignInWithZoom");
-    default:
-      return "";
-  }
-}
-export function getProviderLabel(provider: string, t: (key: string) => string) {
-  switch (provider) {
-    case "apple":
-      return t("Common:ProviderApple");
-    case "google":
-      return t("Common:ProviderGoogle");
-    case "facebook":
-      return t("Common:ProviderFacebook");
-    case "twitter":
-      return t("Common:ProviderTwitter");
-    case "linkedin":
-      return t("Common:ProviderLinkedIn");
-    case "microsoft":
-      return t("Common:ProviderMicrosoft");
-    case "sso":
-      return t("Common:SSO");
-    case "zoom":
-      return t("Common:ProviderZoom");
-    case "sso-full":
-      return t("Common:ProviderSsoSetting");
+    case "weixin":
+      return signUp
+        ? t("Common:SignUpWithWechat")
+        : t("Common:SignInWithWechat");
     default:
       return "";
   }
@@ -571,18 +583,18 @@ export function isElementInViewport(el: HTMLElement) {
 }
 
 export function assign(
-  objParam: { [key: string]: {} },
+  objParam: Record<string, unknown>,
   keyPath: string[],
-  value: {},
+  value: unknown,
 ) {
-  let obj = objParam;
+  let obj: Record<string, unknown> = objParam;
   const lastKeyIndex = keyPath.length - 1;
   for (let i = 0; i < lastKeyIndex; ++i) {
     const key = keyPath[i];
     if (!(key in obj)) {
       obj[key] = {};
     }
-    obj = obj[key];
+    obj = obj[key] as Record<string, unknown>;
   }
   obj[keyPath[lastKeyIndex]] = value;
 }
@@ -785,6 +797,18 @@ export const sortInDisplayOrder = (folders: TGetFolder[]) => {
   );
   if (myFolder) sorted.push(myFolder);
 
+  const favoritesFolder = find(
+    folders,
+    (folder) => folder.current.rootFolderType === FolderType.Favorites,
+  );
+  if (favoritesFolder) sorted.push(favoritesFolder);
+
+  const recentFolder = find(
+    folders,
+    (folder) => folder.current.rootFolderType === FolderType.Recent,
+  );
+  if (recentFolder) sorted.push(recentFolder);
+
   const shareRoom = find(
     folders,
     (folder) => folder.current.rootFolderType === FolderType.Rooms,
@@ -802,18 +826,6 @@ export const sortInDisplayOrder = (folders: TGetFolder[]) => {
     (folder) => folder.current.rootFolderType === FolderType.SHARE,
   );
   if (shareFolder) sorted.push(shareFolder);
-
-  const favoritesFolder = find(
-    folders,
-    (folder) => folder.current.rootFolderType === FolderType.Favorites,
-  );
-  if (favoritesFolder) sorted.push(favoritesFolder);
-
-  const recentFolder = find(
-    folders,
-    (folder) => folder.current.rootFolderType === FolderType.Recent,
-  );
-  if (recentFolder) sorted.push(recentFolder);
 
   const privateFolder = find(
     folders,
@@ -898,8 +910,8 @@ export const decodeDisplayName = <T extends TFile | TFolder | TRoom>(
 };
 
 export const checkFilterInstance = (
-  filterObject: {},
-  certainClass: { prototype: {} },
+  filterObject: object,
+  certainClass: { prototype: object },
 ) => {
   const isInstance =
     filterObject.constructor.name === certainClass.prototype.constructor.name;
@@ -1085,6 +1097,22 @@ export const getLogoFromPath = (path: string) => {
       return DocsEditoRembedSvgUrl;
     case "favicon.ico":
       return FaviconIco;
+    case "spreadsheeteditor.svg":
+      return SpreadsheetEditorSvgUrl;
+    case "spreadsheeteditorembed.svg":
+      return SpreadsheetEditorEmbedSvgUrl;
+    case "presentationeditor.svg":
+      return PresentationEditorSvgUrl;
+    case "presentationeditorembed.svg":
+      return PresentationEditorEmbedSvgUrl;
+    case "pdfeditor.svg":
+      return PDFEditorSvgUrl;
+    case "pdfeditorembed.svg":
+      return PDFEditorEmbedSvgUrl;
+    case "diagrameditor.svg":
+      return DiagramEditorSvgUrl;
+    case "diagrameditorembed.svg":
+      return DiagramEditorEmbedSvgUrl;
     default:
       break;
   }
@@ -1247,12 +1275,12 @@ export const getUserTypeDescription = (
   if (isPortalAdmin)
     return t("Common:RolePortalAdminDescription", {
       productName: t("Common:ProductName"),
-      sectionName: t("Common:MyFilesSection"),
+      sectionName: t("Common:MyDocuments"),
     });
 
   if (isRoomAdmin)
     return t("Common:RoleRoomAdminDescription", {
-      sectionName: t("Common:MyFilesSection"),
+      sectionName: t("Common:MyDocuments"),
     });
 
   if (isCollaborator) return t("Common:RoleNewUserDescription");
@@ -1338,7 +1366,6 @@ export const imageProcessing = async (file: File, maxSize?: number) => {
     }
 
     return new Promise((resolve) => {
-      // eslint-disable-next-line no-promise-executor-return
       return resolve(newFile);
     }).then(() => resizeRecursiveAsync(img, compressionRatio + 1, depth + 1));
   }
@@ -1361,11 +1388,15 @@ export const getBackupProgressInfo = (
   setLink: (link: string) => void,
 ) => {
   const { isCompleted, link, error, progress } = opt;
-  setBackupProgress(progress);
+
+  if (progress !== 100) {
+    setBackupProgress(progress);
+  }
 
   if (isCompleted) {
+    setBackupProgress(100);
+
     if (error) {
-      setBackupProgress(100);
       return { error };
     }
 
@@ -1453,11 +1484,8 @@ export const insertEditorPreloadFrame = (docServiceUrl: string) => {
     return;
   }
 
-  const preloadUrl = docServiceUrl.endsWith("/api.js")
-    ? docServiceUrl.replace("/api.js", "/preload.html")
-    : `${docServiceUrl.replace(/\/$/, "")}/preload.html`;
-
   const iframe = document.createElement("iframe");
+
   iframe.id = "editor-preload-frame";
   iframe.style.cssText =
     "position:absolute;width:0;height:0;border:0;opacity:0;pointer-events:none;visibility:hidden";
@@ -1472,7 +1500,7 @@ export const insertEditorPreloadFrame = (docServiceUrl: string) => {
 
   const appendIframe = () => {
     document.body.appendChild(iframe);
-    iframe.src = preloadUrl;
+    iframe.src = docServiceUrl;
   };
 
   if (document.readyState === "loading") {
@@ -1481,3 +1509,57 @@ export const insertEditorPreloadFrame = (docServiceUrl: string) => {
     appendIframe();
   }
 };
+
+export function buildDataTestId(
+  dataTestId: string | undefined,
+  suffix: string,
+): string | undefined {
+  if (!dataTestId) return undefined;
+  return `${dataTestId}_${suffix}`;
+}
+
+export const getErrorInfo = (
+  err: unknown,
+  t: TTranslation,
+  customText: string | React.ReactNode,
+) => {
+  let message;
+
+  const knownError = err as {
+    response?: { status: number; data: { error: { message: string } } };
+    message?: string;
+  };
+
+  if (customText) {
+    message = customText;
+  } else if (typeof err === "string") {
+    message = err;
+  } else {
+    message =
+      ("response" in knownError && knownError.response?.data?.error?.message) ||
+      ("message" in knownError && knownError.message) ||
+      "";
+  }
+
+  if (knownError?.response?.status === 502)
+    message = t("Common:UnexpectedError");
+
+  return message ?? t("Common:UnexpectedError");
+};
+
+export function splitFileAndFolderIds<T extends TFolder | TFile>(items: T[]) {
+  const initial = {
+    fileIds: [] as Array<string | number>,
+    folderIds: [] as Array<string | number>,
+  };
+
+  return (items ?? []).reduce((acc, item) => {
+    const id = (item as TFolder | TFile)?.id;
+    if (id === undefined || id === null) return acc;
+
+    if (isFolder(item)) acc.folderIds.push(id);
+    else if (isFile(item)) acc.fileIds.push(id);
+
+    return acc;
+  }, initial);
+}

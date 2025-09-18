@@ -3,7 +3,7 @@
   "content": "Restore",
   "content_en_sha1_hash": "3cbe6d6b9a8d1596bb5bca12e14d81c9e108a1a3",
   "created_at": "2025-05-26T07:15:46.895Z",
-  "updated_at": "2025-08-04T07:30:01.280Z",
+  "updated_at": "2025-09-17T13:43:01.718Z",
   "comment": {
     "text": "This translation key \"Common:RestoreBackup\" is used to display the text \"Restore\" on a UI element, likely a button or link, that allows users to restore backups in the data management section of a portal settings page. The text should be clear and concise, indicating the action's purpose without revealing sensitive information.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/restore-backup/index.tsx",
-      "line_number": 97,
-      "context": "setThirdPartyStorage,\n setConnectedThirdPartyAccount,\n ]);\n \n useEffect(() => {\n setDocumentTitle(t(\"Common:RestoreBackup\"));\n }, [t]);\n \n useEffect(() => {\n return () => {\n resetDownloadingProgress();",
+      "line_number": 58,
+      "context": "}: RestoreBackupWrapperProps) => {\n const { t } = useTranslation([\"Settings\", \"Common\"]);\n const navigate = useNavigate();\n \n useEffect(() => {\n setDocumentTitle(t(\"Common:RestoreBackup\"));\n }, [t]);\n \n useEffect(() => {\n return () => {\n resetDownloadingProgress();",
       "module": "/packages/client"
     },
     {
@@ -36,8 +36,8 @@
     },
     {
       "file_path": "/packages/management/src/app/settings/layout.tsx",
-      "line_number": 46,
-      "context": "name: t(\"Common:AutoBackup\"),\n content: children,\n },\n {\n id: \"restore\",\n name: t(\"Common:RestoreBackup\"),\n content: children,\n },\n {\n id: \"encrypt-data\",\n name: t(\"Common:Storage\"),",
+      "line_number": 74,
+      "context": "name: t(\"Common:AutoBackup\"),\n content: <LoaderWrapper isLoading={isLoading}>{children}</LoaderWrapper>,\n },\n {\n id: \"restore\",\n name: t(\"Common:RestoreBackup\"),\n content: <LoaderWrapper isLoading={isLoading}>{children}</LoaderWrapper>,\n },\n {\n id: \"encrypt-data\",\n name: t(\"Common:Storage\"),",
       "module": "/packages/management"
     }
   ],

@@ -8,11 +8,10 @@ import ThemeWrapper from "./globals/theme-wrapper";
 import { DocsContainer } from "./DocsContainer";
 import globalTypes from "./globals";
 import { initialize, mswLoader } from "msw-storybook-addon";
-// import "../index";
 
 import lightTheme from "./lightTheme";
 import darkTheme from "./darkTheme";
-import StorybookGlobalStyles from "./styles/StorybookGlobalStyles";
+import "./styles/StorybookGlobalStyles.scss";
 import i18n from "./i18n";
 
 initialize({
@@ -62,7 +61,6 @@ const preview = {
 
       return (
         <ThemeWrapper theme={{ ...theme, interfaceDirection }}>
-          <StorybookGlobalStyles />
           <Story />
         </ThemeWrapper>
       );

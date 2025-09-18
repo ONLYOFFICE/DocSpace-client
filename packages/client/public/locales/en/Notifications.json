@@ -4,10 +4,15 @@
   "DailyFeed": "Daily {{productName}} feed",
   "DailyFeedDescription": "Read news and events from your {{productName}} in a daily digest.",
   "FileActivityNotify": "Actions with files in {{sectionName}}",
-  "ManageNotifications": "Manage",
   "Notifications": "Notifications",
   "RoomsActivityDescription": "Hourly notifications. Stay updated about all activity in your rooms.",
   "RoomUpdateNotify": "{{sectionName}} activity",
   "UsefulTips": "Useful {{productName}} tips",
-  "UsefulTipsDescription": "Get useful guides about {{productName}}"
+  "UsefulTipsDescription": "Get useful guides about {{productName}}",
+  "SettingUpNotifications": "Setting up notifications",
+  "LdapEmailTooltip": "This user account is loaded from LDAP. The user's email address was not specified, and the current one was generated automatically and cannot be used to send notifications.",
+  "AdminSetupRequired": "Admin setup required",
+  "GoToSettings": "Go to Settings",
+  "NotConfigured": "Not configured",
+  "IsNotValid": "Is not valid"
 }

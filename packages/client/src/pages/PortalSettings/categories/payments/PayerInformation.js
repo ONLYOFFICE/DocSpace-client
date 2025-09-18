@@ -112,6 +112,7 @@ const PayerInformation = ({
           </Text>
         </>
       }
+      dataTestId="payer_info_help_button"
     />
   );
 
@@ -143,7 +144,7 @@ const PayerInformation = ({
 
   const unknownPayerInformation = (
     <div>
-      <Text as="span" fontSize="13px" noSelect>
+      <Text as="span" fontSize="13px">
         {unknownPayerDescription()}
       </Text>
       <div>
@@ -156,6 +157,7 @@ const PayerInformation = ({
             className="payer-info_account-link"
             color="accent"
             onClick={goToStripePortal}
+            dataTestId="stripe_customer_portal_link"
           >
             {t("ChooseNewPayer")}
           </Link>
@@ -173,11 +175,18 @@ const PayerInformation = ({
       target="_blank"
       color="accent"
       onClick={goToStripePortal}
+      dataTestId="stripe_customer_portal_link"
     >
       {t("StripeCustomerPortal")}
     </Link>
   ) : (
-    <Link fontWeight={600} href={`mailto:${email}`} tag="a" color="accent">
+    <Link
+      fontWeight={600}
+      href={`mailto:${email}`}
+      tag="a"
+      color="accent"
+      dataTestId="payer_email_link"
+    >
       {email}
     </Link>
   );
@@ -185,10 +194,10 @@ const PayerInformation = ({
   const payerName = () => {
     let emailUnfoundedUser;
 
-    if (email) emailUnfoundedUser = `«${email}»`;
+    if (email) emailUnfoundedUser = `"${email}"`;
 
     return (
-      <Text as="span" fontWeight={600} noSelect fontSize="14px">
+      <Text as="span" fontWeight={600} fontSize="14px">
         {payerInfo ? (
           payerInfo.displayName
         ) : (

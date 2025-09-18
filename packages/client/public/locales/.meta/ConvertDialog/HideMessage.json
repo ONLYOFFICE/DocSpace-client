@@ -3,7 +3,7 @@
   "content": "Do not show this message again",
   "content_en_sha1_hash": "afe501e83003a3a7a215ca5582ac910c0271fb9b",
   "created_at": "2025-05-19T21:30:56.887Z",
-  "updated_at": "2025-06-02T10:20:51.102Z",
+  "updated_at": "2025-09-02T07:59:28.350Z",
   "comment": {
     "text": "This translation key is used to display a message that allows users to dismiss a warning message. It is used in a checkbox within a dialog footer in a file conversion dialog, allowing users to choose whether or not to see this message again.",
     "is_auto": true,
@@ -13,12 +13,12 @@
     {
       "file_path": "/packages/client/src/components/dialogs/ConvertDialog/index.js",
       "line_number": 104,
-      "context": "rootFolderTitle = isShareFolder\n ? t(\"Common:MyFilesSection\")\n : rootFoldersTitles[convertItem.rootFolderType]?.title;\n }\n \n const [hideMessage, setHideMessage] = useState(false);\n const [selectedOptionType, setSelectedOptionType] = useState(\n options[0].value,\n );\n \n const onChangeRadioButton = (e) => {",
+      "context": "rootFolderTitle = isShareFolder\n ? t(\"Common:MyDocuments\")\n : rootFoldersTitles[convertItem.rootFolderType]?.title;\n }\n \n const [hideMessage, setHideMessage] = useState(false);\n const [selectedOptionType, setSelectedOptionType] = useState(\n options[0].value,\n );\n \n const onChangeRadioButton = (e) => {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/LifetimeDialog/index.js",
-      "line_number": 73,
+      "line_number": 71,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <StyledFooterContent>\n <Checkbox\n className=\"modal-dialog_lifetime-checkbox\"\n label={t(\"ConvertDialog:HideMessage\")}\n isChecked={isChecked}\n onChange={onChange}\n />\n <div className=\"modal-dialog_lifetime-buttons\">\n <Button",
       "module": "/packages/client"
     }

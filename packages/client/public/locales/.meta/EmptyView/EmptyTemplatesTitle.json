@@ -3,7 +3,7 @@
   "content": "No templates here yet",
   "content_en_sha1_hash": "ac038623b83b527b9ec9d2b5ab9e844f41bf6b36",
   "created_at": "2025-05-19T21:30:56.504Z",
-  "updated_at": "2025-06-02T10:20:51.034Z",
+  "updated_at": "2025-08-29T14:33:37.948Z",
   "comment": {
     "text": "This translation key is used to display a placeholder message when no templates are available in a room. It appears on an empty view container and is used to provide a clear indication that there are no templates to display.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 309,
-      "context": ")\n .with([FolderType.Rooms, ShareAccessRights.DenyAccess], () =>\n t(\"EmptyView:EmptyRootRoomUserTitle\"),\n )\n .with([FolderType.RoomTemplates, P._], () =>\n t(\"EmptyView:EmptyTemplatesTitle\"),\n )\n .with([FolderType.USER, ShareAccessRights.None], () =>\n t(\"Common:EmptyScreenFolder\"),\n )\n .with([FolderType.Recent, P._], () => t(\"Files:NoFilesHereYet\"))",
+      "line_number": 315,
+      "context": ")\n .with([FolderType.Rooms, ShareAccessRights.DenyAccess], () =>\n t(\"EmptyView:EmptyRootRoomUserTitle\"),\n )\n .with([FolderType.RoomTemplates, P._], () =>\n t(\"EmptyView:EmptyTemplatesTitle\"),\n )\n .with([FolderType.USER, ShareAccessRights.None], () =>\n t(\"Common:EmptyScreenFolder\"),\n )\n .with([FolderType.Favorites, P._], () => t(\"EmptyView:EmptyFavoritesTitle\"))",
       "module": "/packages/client"
     }
   ],

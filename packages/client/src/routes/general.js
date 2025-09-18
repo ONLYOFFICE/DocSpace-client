@@ -27,43 +27,64 @@
 import { Navigate } from "react-router";
 
 import componentLoader from "@docspace/shared/utils/component-loader";
+import { ViewComponent } from "SRC_DIR/pages/Home/View";
 
-const generalRoutes = [
+import { ViewComponent as PortalSettingsViewComponent } from "SRC_DIR/pages/PortalSettings/View";
+
+import PrivateRouteWrapper from "SRC_DIR/components/PrivateRouteWrapper";
+
+export const profileClientRoutes = [
   {
-    path: "profile/",
-    children: [
-      {
-        index: true,
-        Component: () => (
-          <Navigate
-            to="login"
-            state={window.DocSpace?.location?.state}
-            replace
-          />
-        ),
-      },
-      {
-        path: "login",
-        lazy: () => componentLoader(() => import("SRC_DIR/pages/Profile")),
-      },
-      {
-        path: "notifications",
-        lazy: () => componentLoader(() => import("SRC_DIR/pages/Profile")),
-      },
-      {
-        path: "file-management",
-        lazy: () => componentLoader(() => import("SRC_DIR/pages/Profile")),
-      },
-      {
-        path: "interface-theme",
-        lazy: () => componentLoader(() => import("SRC_DIR/pages/Profile")),
-      },
-      {
-        path: "authorized-apps",
-        lazy: () => componentLoader(() => import("SRC_DIR/pages/Profile")),
-      },
-    ],
+    path: "profile",
+    element: (
+      <PrivateRouteWrapper>
+        <Navigate to="login" state={window.DocSpace?.location?.state} replace />
+      </PrivateRouteWrapper>
+    ),
   },
+  {
+    path: "profile/login",
+    element: (
+      <PrivateRouteWrapper>
+        <ViewComponent />
+      </PrivateRouteWrapper>
+    ),
+  },
+  {
+    path: "profile/notifications",
+    element: (
+      <PrivateRouteWrapper>
+        <ViewComponent />
+      </PrivateRouteWrapper>
+    ),
+  },
+  {
+    path: "profile/file-management",
+    element: (
+      <PrivateRouteWrapper>
+        <ViewComponent />
+      </PrivateRouteWrapper>
+    ),
+  },
+  {
+    path: "profile/interface-theme",
+    element: (
+      <PrivateRouteWrapper>
+        <ViewComponent />
+      </PrivateRouteWrapper>
+    ),
+  },
+  {
+    path: "profile/authorized-apps",
+    element: (
+      <PrivateRouteWrapper>
+        <ViewComponent />
+      </PrivateRouteWrapper>
+    ),
+  },
+];
+
+export const generalClientRoutes = [
   {
     path: "developer-tools/",
     lazy: () =>
@@ -86,27 +107,15 @@ const generalRoutes = [
       },
       {
         path: "api",
-        lazy: () =>
-          componentLoader(
-            () =>
-              import("SRC_DIR/pages/PortalSettings/categories/developer-tools"),
-          ),
+        element: <PortalSettingsViewComponent />,
       },
       {
         path: "api-keys",
-        lazy: () =>
-          componentLoader(
-            () =>
-              import("SRC_DIR/pages/PortalSettings/categories/developer-tools"),
-          ),
+        element: <PortalSettingsViewComponent />,
       },
       {
         path: "javascript-sdk",
-        lazy: () =>
-          componentLoader(
-            () =>
-              import("SRC_DIR/pages/PortalSettings/categories/developer-tools"),
-          ),
+        element: <PortalSettingsViewComponent />,
       },
       {
         path: "javascript-sdk/docspace",
@@ -180,19 +189,11 @@ const generalRoutes = [
       },
       {
         path: "plugin-sdk",
-        lazy: () =>
-          componentLoader(
-            () =>
-              import("SRC_DIR/pages/PortalSettings/categories/developer-tools"),
-          ),
+        element: <PortalSettingsViewComponent />,
       },
       {
         path: "webhooks",
-        lazy: () =>
-          componentLoader(
-            () =>
-              import("SRC_DIR/pages/PortalSettings/categories/developer-tools"),
-          ),
+        element: <PortalSettingsViewComponent />,
       },
       {
         path: "webhooks/:id",
@@ -216,11 +217,7 @@ const generalRoutes = [
       },
       {
         path: "oauth",
-        lazy: () =>
-          componentLoader(
-            () =>
-              import("SRC_DIR/pages/PortalSettings/categories/developer-tools"),
-          ),
+        element: <PortalSettingsViewComponent />,
       },
       {
         path: "oauth/create",
@@ -241,6 +238,44 @@ const generalRoutes = [
                 "SRC_DIR/pages/PortalSettings/categories/developer-tools/OAuth/OAuthEditPage"
               ),
           ),
+      },
+    ],
+  },
+];
+
+const generalRoutes = [
+  {
+    path: "profile/",
+    children: [
+      {
+        index: true,
+        Component: () => (
+          <Navigate
+            to="login"
+            state={window.DocSpace?.location?.state}
+            replace
+          />
+        ),
+      },
+      {
+        path: "login",
+        lazy: () => componentLoader(() => import("SRC_DIR/pages/Profile")),
+      },
+      {
+        path: "notifications",
+        lazy: () => componentLoader(() => import("SRC_DIR/pages/Profile")),
+      },
+      {
+        path: "file-management",
+        lazy: () => componentLoader(() => import("SRC_DIR/pages/Profile")),
+      },
+      {
+        path: "interface-theme",
+        lazy: () => componentLoader(() => import("SRC_DIR/pages/Profile")),
+      },
+      {
+        path: "authorized-apps",
+        lazy: () => componentLoader(() => import("SRC_DIR/pages/Profile")),
       },
     ],
   },

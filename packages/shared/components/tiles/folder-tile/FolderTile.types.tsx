@@ -86,6 +86,8 @@ export type FolderTileProps = {
   /** The temporary icon to display when thumbnail is not available */
   temporaryIcon?: string;
   isBigFolder?: boolean;
+  /** Data test id for the tile */
+  dataTestId?: string;
 };
 
 export type FolderChildProps = {

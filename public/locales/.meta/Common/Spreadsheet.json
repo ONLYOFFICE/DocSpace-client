@@ -3,7 +3,7 @@
   "content": "Spreadsheet",
   "content_en_sha1_hash": "cc6fdf1b0963eceb567d2f5b641f4950751636eb",
   "created_at": "2025-05-19T21:30:48.999Z",
-  "updated_at": "2025-08-04T07:30:00.969Z",
+  "updated_at": "2025-08-13T18:28:17.469Z",
   "comment": {
     "text": "This translation key is used for the label \"Spreadsheet\" which appears on a button in the \"Actions\" dropdown menu, allowing users to create a new spreadsheet. It is also used as part of a dialog and links within the application, consistently displaying the term \"Spreadsheet\". The text should be translated to appear cohesively across these different contexts.",
     "is_auto": true,
@@ -39,6 +39,12 @@
       "line_number": 49,
       "context": "case FileType.Audio:\n return t(\"Common:Audio\");\n case FileType.Image:\n return t(\"Common:Image\");\n case FileType.Spreadsheet:\n return t(\"Common:Spreadsheet\");\n case FileType.Presentation:\n return t(\"Common:Presentation\");\n case FileType.Document:\n return t(\"Common:Document\");\n case FileType.Diagram:",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
+      "line_number": 459,
+      "context": "<Text\n fontSize=\"15px\"\n fontWeight=\"600\"\n className=\"settings_unavailable\"\n >\n {t(\"LogoForEditors\", { editorName: t(\"Common:Spreadsheet\") })} (\n {logoUrls[8].size.width}x{logoUrls[8].size.height})\n </Text>\n <div className={styles.logosWrapper}>\n <Logo\n name={logoUrls[8].name}",
+      "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getFileType.ts",

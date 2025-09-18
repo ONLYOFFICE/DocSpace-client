@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable @typescript-eslint/no-throw-literal */
+/* eslint-disable @typescript-eslint/only-throw-error */
 import { RecaptchaType } from "../enums";
 import api from "../api";
 import { setWithCredentialsStatus } from "../api/client";

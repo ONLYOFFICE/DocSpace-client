@@ -3,7 +3,7 @@
   "content": "Me",
   "content_en_sha1_hash": "94563ec383e29aa3743abd9b337b2e084fb199fb",
   "created_at": "2025-05-19T21:30:46.429Z",
-  "updated_at": "2025-08-04T07:30:00.955Z",
+  "updated_at": "2025-09-17T13:43:01.525Z",
   "comment": {
     "text": "This translation key \"MeLabel\" is used to display a user's name when they have ownership rights or are the current room owner in various UI components, such as dialogs and templates. The text appears next to the username in a bold font and indicates that the user has specific permissions or access.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ChangeRoomOwner/index.js",
-      "line_number": 75,
-      "context": "<div className=\"change-owner-display-name\">\n <Text fontWeight={600} fontSize=\"13px\" noSelect>\n {userName}\n </Text>\n {roomOwner.id === currentUserId ? (\n <Text className=\"me-label\">({t(\"Common:MeLabel\")})</Text>\n ) : null}\n </div>\n </div>\n \n {canChangeOwner ? (",
+      "line_number": 70,
+      "context": "<div className=\"change-owner-display-name\">\n <Text fontWeight={600} fontSize=\"13px\">\n {userName}\n </Text>\n {roomOwner.id === currentUserId ? (\n <Text className=\"me-label\">({t(\"Common:MeLabel\")})</Text>\n ) : null}\n </div>\n </div>\n \n {canChangeOwner ? (",
       "module": "/packages/client"
     },
     {
@@ -30,37 +30,37 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/sub-components/Item.tsx",
-      "line_number": 103,
-      "context": "<div className=\"invite-input-item\">\n <Text truncate noSelect className=\"invite-input-text\">\n {Encoder.htmlDecode(name ?? \"\")}\n </Text>\n <Text truncate noSelect className=\"invite-input-text_me\">\n {item.isOwner ? `(${t(\"Common:MeLabel\")})` : null}\n </Text>\n </div>\n </StyledInviteUserBody>\n {canDelete ? (\n <ReactSVG",
+      "line_number": 106,
+      "context": "<div className=\"invite-input-item\">\n <Text truncate className=\"invite-input-text\">\n {Encoder.htmlDecode(name ?? \"\")}\n </Text>\n <Text truncate className=\"invite-input-text_me\">\n {item.isOwner ? `(${t(\"Common:MeLabel\")})` : null}\n </Text>\n </div>\n </StyledInviteUserBody>\n {canDelete ? (\n <ReactSVG",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/sub-components/User.tsx",
-      "line_number": 261,
+      "line_number": 267,
       "context": ": null}\n </Text>\n )}\n \n {currentUser?.id === user.id ? (\n <div className=\"me-label\">&nbsp;{`(${t(\"Common:MeLabel\")})`}</div>\n ) : null}\n </div>\n {!(\"isGroup\" in user) ? (\n <div className=\"role-email\" style={{ display: \"flex\" }}>\n <Text",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 515,
+      "line_number": 520,
       "context": "if (roomsFilter.subjectId) {\n const user = await getUser(roomsFilter.subjectId);\n const isMe = userId === roomsFilter.subjectId;\n \n const label = isMe ? t(\"Common:MeLabel\") : user.displayName;\n \n const subject = {\n key: isMe ? FilterKeys.me : roomsFilter.subjectId,\n group: FilterGroups.roomFilterSubject,\n label,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 515,
+      "line_number": 520,
       "context": "if (roomsFilter.subjectId) {\n const user = await getUser(roomsFilter.subjectId);\n const isMe = userId === roomsFilter.subjectId;\n \n const label = isMe ? t(\"Common:MeLabel\") : user.displayName;\n \n const subject = {\n key: isMe ? FilterKeys.me : roomsFilter.subjectId,\n group: FilterGroups.roomFilterSubject,\n label,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 515,
+      "line_number": 520,
       "context": "if (roomsFilter.subjectId) {\n const user = await getUser(roomsFilter.subjectId);\n const isMe = userId === roomsFilter.subjectId;\n \n const label = isMe ? t(\"Common:MeLabel\") : user.displayName;\n \n const subject = {\n key: isMe ? FilterKeys.me : roomsFilter.subjectId,\n group: FilterGroups.roomFilterSubject,\n label,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 515,
+      "line_number": 520,
       "context": "if (roomsFilter.subjectId) {\n const user = await getUser(roomsFilter.subjectId);\n const isMe = userId === roomsFilter.subjectId;\n \n const label = isMe ? t(\"Common:MeLabel\") : user.displayName;\n \n const subject = {\n key: isMe ? FilterKeys.me : roomsFilter.subjectId,\n group: FilterGroups.roomFilterSubject,\n label,",
       "module": "/packages/client"
     },
@@ -96,7 +96,7 @@
     },
     {
       "file_path": "/packages/shared/components/filling-role-selector/FillingRoleSelector.tsx",
-      "line_number": 78,
+      "line_number": 76,
       "context": "/>\n <div className={styles.info}>\n <h5>\n {decode(role.user.displayName)} &nbsp;\n {currentUserId === role.user.id ? (\n <span className={styles.me}>({t(\"Common:MeLabel\")})</span>\n ) : null}\n </h5>\n <span>{role.name}</span>\n </div>\n <CrossIcon",
       "module": "/packages/shared"
     }

@@ -120,7 +120,6 @@ const EditGroupMembers = ({
 
   useEffect(() => {
     loadNextPage(0);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchValue]);
 
   if (!infoPanelSelection?.isRoom) {
@@ -136,13 +135,7 @@ const EditGroupMembers = ({
       withoutPadding
     >
       <ModalDialog.Header>
-        <StyledHeaderText
-          fontSize="21px"
-          fontWeight={700}
-          dir="auto"
-          truncate
-          noSelect
-        >
+        <StyledHeaderText fontSize="21px" fontWeight={700} dir="auto" truncate>
           {group.name}
         </StyledHeaderText>
       </ModalDialog.Header>

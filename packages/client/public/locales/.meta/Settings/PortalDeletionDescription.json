@@ -3,7 +3,7 @@
   "content": "Use this option to delete your space permanently.",
   "content_en_sha1_hash": "eda8701798195496d0dcc13393b3bf9f69ca3417",
   "created_at": "2025-05-19T21:30:52.208Z",
-  "updated_at": "2025-05-24T04:35:21.282Z",
+  "updated_at": "2025-09-17T13:43:01.767Z",
   "comment": {
     "text": "This translation key is used for a description that informs users about the permanent deletion of their space. It appears on a button in the Portal Settings page when the user has not activated their account.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/delete-data/portalDeletion.js",
-      "line_number": 98,
+      "line_number": 87,
       "context": "owner?.activationStatus === EmployeeActivationStatus.NotActivated;\n \n return (\n <MainContainer>\n <Text fontSize=\"13px\" className=\"description\">\n {t(\"PortalDeletionDescription\")}\n </Text>\n <Text className=\"helper\">{t(\"PortalDeletionHelper\")}</Text>\n <ButtonWrapper>\n <Button\n className=\"delete-button button\"",
       "module": "/packages/client"
     }

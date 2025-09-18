@@ -24,9 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable prefer-regex-literals */
 import { makeAutoObservable, runInAction } from "mobx";
+import axios from "axios";
 
 import Filter from "../api/people/filter";
 import { TFrameConfig } from "../types/Frame";
@@ -320,8 +319,6 @@ class SettingsStore {
 
   isBannerVisible = false;
 
-  showGuestReleaseTip = false;
-
   logoText = "";
 
   limitedAccessDevToolsForUsers = false;
@@ -336,9 +333,26 @@ class SettingsStore {
 
   displayBanners: boolean = false;
 
+  abortControllerArr: Nullable<AbortController>[] = [];
+
   constructor() {
     makeAutoObservable(this);
   }
+
+  clearAbortControllerArr = () => {
+    this.abortControllerArr.forEach((controller) => {
+      controller?.abort();
+    });
+    this.abortControllerArr = [];
+  };
+
+  addAbortControllers = (controllers: AbortController[] | AbortController) => {
+    if (Array.isArray(controllers)) {
+      this.abortControllerArr.push(...controllers);
+    } else {
+      this.abortControllerArr.push(controllers);
+    }
+  };
 
   setLogoText = (logoText: string) => {
     this.logoText = logoText;
@@ -346,10 +360,6 @@ class SettingsStore {
 
   setTenantStatus = (tenantStatus: TenantStatus) => {
     this.tenantStatus = tenantStatus;
-  };
-
-  setShowGuestReleaseTip = (showGuestReleaseTip: boolean) => {
-    this.showGuestReleaseTip = showGuestReleaseTip;
   };
 
   get wizardCompleted() {
@@ -485,6 +495,12 @@ class SettingsStore {
   get appleIDUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.connectapple
       ? `${this.helpCenterDomain}${this.helpCenterEntries.connectapple}`
+      : this.helpCenterDomain;
+  }
+
+  get weixinUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.connectweixin
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectweixin}`
       : this.helpCenterDomain;
   }
 
@@ -747,19 +763,19 @@ class SettingsStore {
   get downloaddesktopUrl() {
     return this.siteDomain && this.siteEntries?.downloaddesktop
       ? `${this.siteDomain}${this.siteEntries.downloaddesktop}`
-      : this.siteDomain;
+      : null;
   }
 
   get officeforandroidUrl() {
     return this.siteDomain && this.siteEntries?.officeforandroid
       ? `${this.siteDomain}${this.siteEntries.officeforandroid}`
-      : this.siteDomain;
+      : null;
   }
 
   get officeforiosUrl() {
     return this.siteDomain && this.siteEntries?.officeforios
       ? `${this.siteDomain}${this.siteEntries.officeforios}`
-      : this.siteDomain;
+      : null;
   }
 
   get forumLinkUrl() {
@@ -773,7 +789,7 @@ class SettingsStore {
   }
 
   get requestEntriesUrl() {
-    return this.externalResources?.support.entries?.request;
+    return this.externalResources?.support?.entries?.request;
   }
 
   get requestSupportUrl() {
@@ -783,11 +799,11 @@ class SettingsStore {
   }
 
   get documentationEmail() {
-    return this.externalResources?.common.entries.documentationemail;
+    return this.externalResources?.common?.entries?.documentationemail;
   }
 
   get bookTrainingEmail() {
-    return this.externalResources?.common.entries?.booktrainingemail;
+    return this.externalResources?.common?.entries?.booktrainingemail;
   }
 
   get appearanceBlockHelpUrl() {
@@ -1047,8 +1063,18 @@ class SettingsStore {
   };
 
   getPortalCultures = async () => {
-    const cultures = await api.settings.getPortalCultures();
-    this.setCultures(cultures);
+    const abortController = new AbortController();
+    this.addAbortControllers(abortController);
+
+    try {
+      const cultures = await api.settings.getPortalCultures(
+        abortController.signal,
+      );
+      this.setCultures(cultures);
+    } catch (e) {
+      if (axios.isCancel(e)) return;
+      throw e;
+    }
   };
 
   setIsEncryptionSupport = (isEncryptionSupport: boolean) => {
@@ -1096,12 +1122,25 @@ class SettingsStore {
   };
 
   getWhiteLabelLogoUrls = async () => {
-    const res = await api.settings.getLogoUrls(null, isManagement());
+    const abortController = new AbortController();
+    this.addAbortControllers(abortController);
 
-    this.setLogoUrls(Object.values(res));
-    this.setLogoUrl(Object.values(res));
+    try {
+      const res = await api.settings.getLogoUrls(
+        null,
+        isManagement(),
+        abortController.signal,
+      );
 
-    return res;
+      this.setLogoUrls(Object.values(res));
+      this.setLogoUrl(Object.values(res));
+
+      return res;
+    } catch (e) {
+      if (axios.isCancel(e)) return;
+
+      throw e;
+    }
   };
 
   getDomainName = async () => {
@@ -1160,10 +1199,21 @@ class SettingsStore {
   };
 
   getPortalOwner = async () => {
-    const owner = await api.people.getUserById(this.ownerId);
+    const abortController = new AbortController();
+    this.addAbortControllers(abortController);
 
-    this.setPortalOwner(owner);
-    return owner;
+    try {
+      const owner = await api.people.getUserById(
+        this.ownerId,
+        abortController.signal,
+      );
+
+      this.setPortalOwner(owner);
+      return owner;
+    } catch (e) {
+      if (axios.isCancel(e)) return;
+      throw e;
+    }
   };
 
   setWizardComplete = () => {
@@ -1175,8 +1225,19 @@ class SettingsStore {
   };
 
   getPortalPasswordSettings = async (confirmKey = null) => {
-    const settings = await api.settings.getPortalPasswordSettings(confirmKey);
-    this.setPasswordSettings(settings);
+    const abortController = new AbortController();
+    this.addAbortControllers(abortController);
+
+    try {
+      const settings = await api.settings.getPortalPasswordSettings(
+        confirmKey,
+        abortController.signal,
+      );
+      this.setPasswordSettings(settings);
+    } catch (e) {
+      if (axios.isCancel(e)) return;
+      throw e;
+    }
   };
 
   setPortalPasswordSettings = async (
@@ -1199,9 +1260,21 @@ class SettingsStore {
   };
 
   getPortalTimezones = async (token = undefined) => {
-    const timezones = await api.settings.getPortalTimezones(token);
-    this.setTimezones(timezones);
-    return timezones;
+    const abortController = new AbortController();
+    this.addAbortControllers(abortController);
+
+    try {
+      const timezones = await api.settings.getPortalTimezones(
+        token,
+        abortController.signal,
+      );
+
+      this.setTimezones(timezones);
+      return timezones;
+    } catch (e) {
+      if (axios.isCancel(e)) return;
+      throw e;
+    }
   };
 
   setHeaderVisible = (isHeaderVisible: boolean) => {
@@ -1324,8 +1397,16 @@ class SettingsStore {
   };
 
   getIpRestrictions = async () => {
-    const res = await api.settings.getIpRestrictions();
-    this.ipRestrictions = res?.map((el) => el.ip);
+    const abortController = new AbortController();
+    this.addAbortControllers(abortController);
+
+    try {
+      const res = await api.settings.getIpRestrictions(abortController.signal);
+      this.ipRestrictions = res?.map((el) => el.ip);
+    } catch (e) {
+      if (axios.isCancel(e)) return;
+      throw e;
+    }
   };
 
   setIpRestrictions = async (ips: string[], enable: boolean) => {
@@ -1340,15 +1421,34 @@ class SettingsStore {
   };
 
   getIpRestrictionsEnable = async () => {
-    const res = await api.settings.getIpRestrictionsEnable();
-    this.ipRestrictionEnable = res.enable;
+    const abortController = new AbortController();
+    this.addAbortControllers(abortController);
+
+    try {
+      const res = await api.settings.getIpRestrictionsEnable(
+        abortController.signal,
+      );
+      this.ipRestrictionEnable = res.enable;
+    } catch (e) {
+      if (axios.isCancel(e)) return;
+      throw e;
+    }
   };
 
   getInvitationSettings = async () => {
-    const res = await api.settings.getInvitationSettings();
+    const abortController = new AbortController();
+    this.addAbortControllers(abortController);
 
-    this.allowInvitingGuests = res.allowInvitingGuests;
-    this.allowInvitingMembers = res.allowInvitingMembers;
+    try {
+      const res = await api.settings.getInvitationSettings(
+        abortController.signal,
+      );
+      this.allowInvitingGuests = res.allowInvitingGuests;
+      this.allowInvitingMembers = res.allowInvitingMembers;
+    } catch (e) {
+      if (axios.isCancel(e)) return;
+      throw e;
+    }
   };
 
   setInvitationSettings = async (
@@ -1371,10 +1471,17 @@ class SettingsStore {
   };
 
   getSessionLifetime = async () => {
-    const res = await api.settings.getCookieSettings();
+    const abortController = new AbortController();
+    this.addAbortControllers(abortController);
 
-    this.enabledSessionLifetime = res.enabled;
-    this.sessionLifetime = res.lifeTime;
+    try {
+      const res = await api.settings.getCookieSettings(abortController.signal);
+      this.enabledSessionLifetime = res.enabled;
+      this.sessionLifetime = res.lifeTime;
+    } catch (e) {
+      if (axios.isCancel(e)) return;
+      throw e;
+    }
   };
 
   setSessionLifetimeSettings = async (lifeTime: number, enabled: boolean) => {
@@ -1394,9 +1501,18 @@ class SettingsStore {
   };
 
   getBruteForceProtection = async () => {
-    const res = await api.settings.getBruteForceProtection();
+    const abortController = new AbortController();
+    this.addAbortControllers(abortController);
 
-    this.setBruteForceProtectionSettings(res);
+    try {
+      const res = await api.settings.getBruteForceProtection(
+        abortController.signal,
+      );
+      this.setBruteForceProtectionSettings(res);
+    } catch (e) {
+      if (axios.isCancel(e)) return;
+      throw e;
+    }
   };
 
   setIsBurgerLoading = (isBurgerLoading: boolean) => {
@@ -1467,11 +1583,21 @@ class SettingsStore {
   };
 
   getCSPSettings = async () => {
-    const { domains } = await api.settings.getCSPSettings();
+    const abortController = new AbortController();
+    this.addAbortControllers(abortController);
 
-    this.setCSPDomains(domains || []);
+    try {
+      const { domains } = await api.settings.getCSPSettings(
+        abortController.signal,
+      );
 
-    return domains;
+      this.setCSPDomains(domains || []);
+
+      return domains;
+    } catch (e) {
+      if (axios.isCancel(e)) return;
+      throw e;
+    }
   };
 
   setCSPSettings = async (data: string[]) => {

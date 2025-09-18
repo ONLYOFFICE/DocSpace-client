@@ -319,6 +319,7 @@ const ArticleBodyContent = (props) => {
           folderId={item.id}
           style={style}
           $currentColorScheme={currentColorScheme}
+          withAnimation
         />,
       );
     });

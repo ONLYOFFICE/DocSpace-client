@@ -75,6 +75,8 @@ export const CategoryType = Object.freeze({
   Accounts: 9,
   PublicRoom: 10,
   Flows: 11,
+  Groups: 12,
+  Guests: 13,
 });
 
 /**
@@ -85,10 +87,11 @@ export const TableVersions = Object.freeze({
   Rooms: "3",
   Files: "3",
   People: "3",
-  Trash: "4",
+  Trash: "5",
   Groups: "6",
   InsideGroup: "6",
-  Recent: "1",
+  Recent: "2",
+  Favorites: "1",
   Guests: "1",
 });
 

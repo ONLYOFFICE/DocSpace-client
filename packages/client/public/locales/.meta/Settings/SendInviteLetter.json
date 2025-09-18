@@ -3,7 +3,7 @@
   "content": "Send invite letter",
   "content_en_sha1_hash": "72755e8fdfedd5113bd950ce2b3e632ee5bfce23",
   "created_at": "2025-05-19T21:30:52.606Z",
-  "updated_at": "2025-05-26T07:57:32.522Z",
+  "updated_at": "2025-08-11T09:02:43.945Z",
   "comment": {
     "text": "This translation key is used to display a button label that sends an invite letter. It appears on a checkbox within a UI component and is likely displayed in a portal settings page or similar context where user notifications are configured.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportCompleteStep.tsx",
       "line_number": 159,
-      "context": "<ErrorText>{t(\"Settings:ErrorOccuredDownloadLog\")}</ErrorText>\n ) : null}\n \n <Wrapper>\n <Checkbox\n label={t(\"Settings:SendInviteLetter\")}\n isChecked={isChecked}\n onChange={onChangeCheckbox}\n />\n <HelpButton\n place=\"right\"",
+      "context": "<ErrorText>{t(\"Settings:ErrorOccuredDownloadLog\")}</ErrorText>\n ) : null}\n \n <Wrapper>\n <Checkbox\n label={t(\"Settings:SendInviteLetter\")}\n isChecked={isChecked}\n onChange={onChangeCheckbox}\n dataTestId=\"send_invite_letter_checkbox\"\n />\n <HelpButton",
       "module": "/packages/client"
     }
   ],

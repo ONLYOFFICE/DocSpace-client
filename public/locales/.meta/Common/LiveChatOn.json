@@ -3,7 +3,7 @@
   "content": "Live chat was successfully connected",
   "content_en_sha1_hash": "7bcf42efaa0f21c0fcd4e7feb04b48e397e369c3",
   "created_at": "2025-05-19T21:30:46.253Z",
-  "updated_at": "2025-06-18T17:11:42.534Z",
+  "updated_at": "2025-09-17T13:43:01.940Z",
   "comment": {
     "text": "This translation key is used to display a success message when live chat is successfully connected. It appears as a toast notification and indicates that the live chat feature is now active.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ProfileActionsStore.js",
-      "line_number": 200,
+      "line_number": 230,
       "context": "this.setStateLiveChat(isShow);\n \n zendeskAPI.addChanges(\"webWidget\", isShow ? \"show\" : \"hide\");\n \n toastr.success(isShow ? t(\"LiveChatOn\") : t(\"LiveChatOff\"));\n };\n \n onSupportClick = () => {\n const supportUrl = this.settingsStore.feedbackAndSupportUrl;",
       "module": "/packages/client"
     }

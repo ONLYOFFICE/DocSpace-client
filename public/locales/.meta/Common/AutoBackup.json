@@ -3,7 +3,7 @@
   "content": "Automatic backup",
   "content_en_sha1_hash": "63c9d2eb5520b137dffca1ebb5266759080b1352",
   "created_at": "2025-05-26T07:15:40.628Z",
-  "updated_at": "2025-08-04T07:30:01.322Z",
+  "updated_at": "2025-09-17T13:43:01.765Z",
   "comment": {
     "text": "The \"AutoBackup\" translation key refers to a UI element used in data management settings that enables automatic backups. It appears on a page where users can configure backup options and is likely displayed as a button or icon in a dialog box. Its purpose is to provide a clear label for this feature, helping users understand its functionality.",
     "is_auto": true,
@@ -12,8 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/index.js",
-      "line_number": 121,
-      "context": "<ManualBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />\n ),\n },\n {\n id: \"auto-backup\",\n name: t(\"Common:AutoBackup\"),\n content: (\n <AutoBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />\n ),\n },\n ];",
+      "line_number": 160,
+      "context": "await getManualBackupData();\n },\n },\n {\n id: \"auto-backup\",\n name: t(\"Common:AutoBackup\"),\n content: (\n <AutoBackup\n buttonSize={buttonSize}\n renderTooltip={renderTooltip}\n isEmptyContentBeforeLoader={isEmptyContentBeforeLoader}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/Backup/BackupServiceDialog.tsx",
+      "line_number": 113,
+      "context": "description: t(\"ThirdPartyStorageDescription\"),\n icon: <CloudsIcon />,\n },\n {\n id: \"automatic-backup\",\n title: t(\"Common:AutoBackup\"),\n description: t(\"AutomaticBackupDescription\"),\n icon: <HistoryIcon />,\n },\n ];",
       "module": "/packages/client"
     },
     {
@@ -24,8 +30,8 @@
     },
     {
       "file_path": "/packages/management/src/app/settings/layout.tsx",
-      "line_number": 41,
-      "context": "name: t(\"Common:DataBackup\"),\n content: children,\n },\n {\n id: \"auto-backup\",\n name: t(\"Common:AutoBackup\"),\n content: children,\n },\n {\n id: \"restore\",\n name: t(\"Common:RestoreBackup\"),",
+      "line_number": 69,
+      "context": "name: t(\"Common:DataBackup\"),\n content: <LoaderWrapper isLoading={isLoading}>{children}</LoaderWrapper>,\n },\n {\n id: \"auto-backup\",\n name: t(\"Common:AutoBackup\"),\n content: <LoaderWrapper isLoading={isLoading}>{children}</LoaderWrapper>,\n },\n {\n id: \"restore\",\n name: t(\"Common:RestoreBackup\"),",
       "module": "/packages/management"
     }
   ],

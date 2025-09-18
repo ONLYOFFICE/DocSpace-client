@@ -36,11 +36,8 @@ import * as Styled from "./index.styled";
 
 const CategoryFilterMobile = ({
   t,
-
   menuItems,
-
   currentCategory,
-  getTypeOfCategory,
   getCategoryTitle,
   filterOformsByCategory,
   setOformsCurrentCategory,
@@ -79,12 +76,15 @@ const CategoryFilterMobile = ({
 
   let height = 0;
   const maxCalculatedHeight = 385;
+  const headerHeightWithMargin = 48 + 6;
+  const menuItemHeight = 36;
+  const separatorHeight = 9;
 
   const calculatedHeight =
-    48 +
+    headerHeightWithMargin +
     (!openedMenuItem
-      ? 36 + 13 + menuItems.length * 36
-      : openedMenuItem.categories.length * 36);
+      ? menuItemHeight + separatorHeight + menuItems.length * menuItemHeight
+      : openedMenuItem.categories.length * menuItemHeight);
 
   if (calculatedHeight > maxCalculatedHeight) height = maxCalculatedHeight;
   else height = calculatedHeight;
@@ -116,14 +116,14 @@ const CategoryFilterMobile = ({
           manualWidth="100%"
           directionY="bottom"
           directionX="right"
-          isMobile
+          isMobileView
           fixedDirection
           isDefaultMode={false}
           className="mainBtnDropdown"
           forsedHeight={`${height}px`}
         >
           <Scrollbar
-            style={{ position: "absolute" }}
+            style={{ position: "absolute", top: 0 }}
             scrollClass="section-scroll"
             ref={scrollRef}
           >
@@ -160,6 +160,7 @@ const CategoryFilterMobile = ({
                     label={item.label}
                     onClick={() => onOpenMenuItem(item)}
                     style={{ paddingLeft: "0" }}
+                    testId={`category_filter_${item.key}`}
                     isSubMenu
                   />
                 ))
@@ -168,6 +169,7 @@ const CategoryFilterMobile = ({
                     key={category.id}
                     label={getCategoryTitle(category)}
                     onClick={() => onFilterByCategory(category)}
+                    testId={`category_filter_${category.id}`}
                     style={{ paddingLeft: "0" }}
                   />
                 ))}

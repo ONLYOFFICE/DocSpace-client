@@ -7,20 +7,20 @@ export interface AuthorizedAppsProps {
   consents?: IClientProps[];
   fetchConsents?: () => Promise<void>;
 
-  viewAs: ViewAsType;
-  setViewAs: (value: string) => void;
+  viewAs?: ViewAsType;
+  setViewAs?: (value: string) => void;
 
-  currentDeviceType: DeviceType;
+  currentDeviceType?: DeviceType;
 
-  infoDialogVisible: boolean;
+  infoDialogVisible?: boolean;
   fetchScopes?: () => Promise<void>;
 
-  revokeDialogVisible: boolean;
-  setRevokeDialogVisible: (value: boolean) => void;
-  selection: string[];
-  bufferSelection: IClientProps;
-  revokeClient: (value: string[]) => Promise<void>;
-  logoText: string;
+  revokeDialogVisible?: boolean;
+  setRevokeDialogVisible?: (value: boolean) => void;
+  selection?: string[];
+  bufferSelection?: IClientProps;
+  revokeClient?: (value: string[]) => Promise<void>;
+  logoText?: string;
 }
 
 export interface RevokeDialogProps {

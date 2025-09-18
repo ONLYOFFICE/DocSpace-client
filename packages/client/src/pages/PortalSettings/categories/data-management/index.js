@@ -50,6 +50,8 @@ import config from "../../../../../package.json";
 
 import ManualBackup from "./backup/manual-backup";
 import AutoBackup from "./backup/auto-backup";
+import useBackup from "./backup/useBackup";
+import { createDefaultHookSettingsProps } from "../../utils/createDefaultHookSettingsProps";
 
 const DataManagementWrapper = (props) => {
   const {
@@ -58,24 +60,50 @@ const DataManagementWrapper = (props) => {
     buttonSize,
     t,
 
-    isNotPaidPeriod,
     currentDeviceType,
     standalone,
+
+    backup,
+    authStore,
+    currentQuotaStore,
+    paymentStore,
+    currentTariffStatusStore,
+    settingsStore,
+    clearAbortControllerArr,
+    showPortalSettingsLoader,
   } = props;
 
   const navigate = useNavigate();
   const location = useLocation();
 
   const [currentTabId, setCurrentTabId] = useState();
-  const [isLoaded, setIsLoaded] = useState(false);
 
   const { interfaceDirection } = useTheme();
   const directionTooltip = interfaceDirection === "rtl" ? "left" : "right";
+
+  const defaultProps = createDefaultHookSettingsProps({
+    backupStore: backup,
+    authStore,
+    currentQuotaStore,
+    paymentStore,
+    currentTariffStatusStore,
+    settingsStore,
+  });
+
+  const {
+    getManualBackupData,
+    getAutoBackupData,
+
+    isEmptyContentBeforeLoader,
+    isInitialError,
+    setIsEmptyContentBeforeLoader,
+  } = useBackup(defaultProps.backup);
 
   const renderTooltip = (helpInfo, className) => {
     const isAutoBackupPage = window.location.pathname.includes(
       "portal-settings/backup/auto-backup",
     );
+
     return (
       <HelpButton
         size={12}
@@ -113,15 +141,36 @@ const DataManagementWrapper = (props) => {
       id: "data-backup",
       name: t("Common:DataBackup"),
       content: (
-        <ManualBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />
+        <ManualBackup
+          buttonSize={buttonSize}
+          renderTooltip={renderTooltip}
+          isEmptyContentBeforeLoader={isEmptyContentBeforeLoader}
+          setIsEmptyContentBeforeLoader={setIsEmptyContentBeforeLoader}
+          isInitialLoading={showPortalSettingsLoader}
+          isInitialError={isInitialError}
+        />
       ),
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getManualBackupData();
+      },
     },
     {
       id: "auto-backup",
       name: t("Common:AutoBackup"),
       content: (
-        <AutoBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />
+        <AutoBackup
+          buttonSize={buttonSize}
+          renderTooltip={renderTooltip}
+          isEmptyContentBeforeLoader={isEmptyContentBeforeLoader}
+          isInitialLoading={showPortalSettingsLoader}
+          isInitialError={isInitialError}
+        />
       ),
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getAutoBackupData();
+      },
     },
   ];
 
@@ -129,8 +178,6 @@ const DataManagementWrapper = (props) => {
     const path = location.pathname;
     const currentTab = data.find((item) => path.includes(item.id));
     if (currentTab && data.length) setCurrentTabId(currentTab.id);
-
-    setIsLoaded(true);
   }, [location.pathname]);
 
   useEffect(() => {
@@ -138,7 +185,7 @@ const DataManagementWrapper = (props) => {
 
     if (!socketSubscribers.has("backup")) {
       if (!isManagement()) {
-        SocketHelper.emit(SocketCommands.Subscribe, {
+        SocketHelper?.emit(SocketCommands.Subscribe, {
           roomParts: "backup",
         });
       }
@@ -151,10 +198,10 @@ const DataManagementWrapper = (props) => {
     }
 
     return () => {
-      SocketHelper.off(SocketEvents.BackupProgress);
+      SocketHelper?.off(SocketEvents.BackupProgress);
 
       if (!isManagement()) {
-        SocketHelper.emit(SocketCommands.Unsubscribe, {
+        SocketHelper?.emit(SocketCommands.Unsubscribe, {
           roomParts: "backup",
         });
       }
@@ -166,6 +213,7 @@ const DataManagementWrapper = (props) => {
       }
     };
   }, []);
+
   const onSelect = (e) => {
     const url = isManagement()
       ? `/management/settings/backup/${e.id}`
@@ -174,52 +222,59 @@ const DataManagementWrapper = (props) => {
     navigate(
       combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, url),
     );
-
-    setIsLoaded(false);
+    setCurrentTabId(e.id);
   };
 
-  if (!isLoaded) return null;
-
-  return isNotPaidPeriod ? (
-    <ManualBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />
-  ) : (
+  return (
     <Tabs
       items={data}
       selectedItemId={currentTabId}
       onSelect={(e) => onSelect(e)}
       stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
+      withAnimation
     />
   );
 };
 
 export const Component = inject(
-  ({ settingsStore, setup, currentTariffStatusStore }) => {
-    const { initSettings } = setup;
-
-    const { isNotPaidPeriod } = currentTariffStatusStore;
-
+  ({
+    settingsStore,
+    paymentStore,
+    currentTariffStatusStore,
+    currentQuotaStore,
+    backup,
+    authStore,
+    clientLoadingStore,
+  }) => {
     const {
       dataBackupUrl,
       automaticBackupUrl,
 
-      currentColorScheme,
       currentDeviceType,
       standalone,
+      clearAbortControllerArr,
     } = settingsStore;
+
+    const { showPortalSettingsLoader } = clientLoadingStore;
 
     const buttonSize =
       currentDeviceType !== DeviceType.desktop ? "normal" : "small";
     return {
-      loadBaseInfo: async () => {
-        await initSettings();
-      },
       dataBackupUrl,
       automaticBackupUrl,
       buttonSize,
-      isNotPaidPeriod,
-      currentColorScheme,
+
       currentDeviceType,
       standalone,
+
+      backup,
+      authStore,
+      currentQuotaStore,
+      paymentStore,
+      currentTariffStatusStore,
+      settingsStore,
+      clearAbortControllerArr,
+      showPortalSettingsLoader,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(DataManagementWrapper)));

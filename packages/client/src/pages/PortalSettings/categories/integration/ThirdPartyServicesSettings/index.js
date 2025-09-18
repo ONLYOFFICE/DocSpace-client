@@ -33,14 +33,12 @@ import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
-import { showLoader, hideLoader } from "@docspace/shared/utils/common";
-
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { Badge } from "@docspace/shared/components/badge";
 
 import { Button } from "@docspace/shared/components/button";
-import { isMobile } from "@docspace/shared/utils";
+import { isMobile, NoUserSelect } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/shared/themes";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
@@ -86,6 +84,10 @@ const RootContainer = styled.div`
     min-height: 116px;
     padding-block: 12px 8px;
     padding-inline: 20px 12px;
+
+    .integration-image {
+      ${NoUserSelect}
+    }
   }
 
   .request-block {
@@ -127,24 +129,14 @@ class ThirdPartyServices extends React.Component {
     };
   }
 
-  componentDidMount() {
-    const { getConsumers, fetchAndSetConsumers } = this.props;
-    showLoader();
-    const urlParts = window.location.href.split("?");
-    if (urlParts.length > 1) {
-      const queryValue = urlParts[1].split("=")[1];
-      fetchAndSetConsumers(queryValue)
-        .then((isConsumerExist) => isConsumerExist && this.onModalOpen())
-        .finally(() => hideLoader());
-    } else {
-      getConsumers().finally(() => hideLoader());
-    }
-  }
-
   componentDidUpdate(prevProps) {
-    const { t, tReady } = this.props;
+    const { t, tReady, openModal } = this.props;
     if (prevProps.tReady !== tReady && tReady)
       setDocumentTitle(t("ThirdPartyAuthorization"));
+
+    if (openModal !== prevProps.openModal && openModal) {
+      this.onModalOpen();
+    }
   }
 
   onChangeLoading = (status) => {
@@ -213,6 +205,7 @@ class ThirdPartyServices extends React.Component {
                 isHovered
                 target="_blank"
                 href={integrationSettingsUrl}
+                dataTestId="integration_settings_link"
               >
                 {t("Common:LearnMore")}
               </Link>
@@ -237,6 +230,7 @@ class ThirdPartyServices extends React.Component {
               minWidth="138px"
               onClick={submitRequest}
               scale={isMobile()}
+              testId="submit_request_team_button"
             />
           </div>
           {!consumers.length ? (
@@ -244,7 +238,11 @@ class ThirdPartyServices extends React.Component {
           ) : (
             <div className="consumers-list-container">
               {freeConsumers.map((consumer) => (
-                <div className="consumer-item-wrapper" key={consumer.name}>
+                <div
+                  className="consumer-item-wrapper"
+                  key={consumer.name}
+                  data-testid={`${consumer.name}_item`}
+                >
                   <ConsumerItem
                     consumer={consumer}
                     dialogVisible={dialogVisible}
@@ -278,7 +276,11 @@ class ThirdPartyServices extends React.Component {
                 </div>
               ) : null}
               {paidConsumers.map((consumer) => (
-                <div className="consumer-item-wrapper" key={consumer.name}>
+                <div
+                  className="consumer-item-wrapper"
+                  key={consumer.name}
+                  data-testid={`consumer_${consumer.name}_item`}
+                >
                   <ConsumerItem
                     consumer={consumer}
                     dialogVisible={dialogVisible}
@@ -317,9 +319,9 @@ ThirdPartyServices.propTypes = {
   i18n: PropTypes.object.isRequired,
   consumers: PropTypes.arrayOf(PropTypes.object).isRequired,
   integrationSettingsUrl: PropTypes.string,
-  getConsumers: PropTypes.func.isRequired,
   updateConsumerProps: PropTypes.func.isRequired,
   setSelectedConsumer: PropTypes.func.isRequired,
+  openModal: PropTypes.bool,
 };
 
 export default inject(({ setup, settingsStore, currentQuotaStore }) => {
@@ -331,7 +333,6 @@ export default inject(({ setup, settingsStore, currentQuotaStore }) => {
     logoText,
   } = settingsStore;
   const {
-    getConsumers,
     integration,
     updateConsumerProps,
     setSelectedConsumer,
@@ -344,7 +345,6 @@ export default inject(({ setup, settingsStore, currentQuotaStore }) => {
     theme,
     consumers,
     integrationSettingsUrl,
-    getConsumers,
     updateConsumerProps,
     setSelectedConsumer,
     fetchAndSetConsumers,

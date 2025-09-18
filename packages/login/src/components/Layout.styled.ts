@@ -77,6 +77,10 @@ export const ContentWrapper = styled.div.attrs(injectDefaultTheme)<{
 
       @media ${mobile} {
         margin-top: 32px;
+
+        &.confirm-email-change {
+          margin-top: 0;
+        }
       }
     }
   }

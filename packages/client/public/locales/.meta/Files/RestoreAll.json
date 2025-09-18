@@ -3,7 +3,7 @@
   "content": "Restore all",
   "content_en_sha1_hash": "9eca7fb8c0e99c10b51061dabb85aee7a49051cf",
   "created_at": "2025-05-19T21:30:56.049Z",
-  "updated_at": "2025-08-04T07:30:01.595Z",
+  "updated_at": "2025-09-07T07:53:15.380Z",
   "comment": {
     "text": "Restore all button text: \"Restore all\" is used as a label on a restore all button in the empty trash dialog, prompting users to retrieve deleted files. It appears on the screen when an empty trash dialog is opened. Translators should consider the context of file management and restoration.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1327,
+      "line_number": 1304,
       "context": "if (this.filesActionsStore.emptyPersonalRoomInProgress) return;\n \n this.dialogsStore.setEmptyTrashDialogVisible(true);\n };\n \n onRestoreAllAction = () => {\n const { activeFiles, activeFolders } = this.filesStore;\n const isExistActiveItems = [...activeFiles, ...activeFolders].length > 0;\n \n if (isExistActiveItems) return;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1327,
+      "line_number": 1304,
       "context": "if (this.filesActionsStore.emptyPersonalRoomInProgress) return;\n \n this.dialogsStore.setEmptyTrashDialogVisible(true);\n };\n \n onRestoreAllAction = () => {\n const { activeFiles, activeFolders } = this.filesStore;\n const isExistActiveItems = [...activeFiles, ...activeFolders].length > 0;\n \n if (isExistActiveItems) return;",
       "module": "/packages/client"
     }

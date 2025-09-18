@@ -30,6 +30,8 @@ import { useTranslation } from "react-i18next";
 import React, { useMemo, useState } from "react";
 import classNames from "classnames";
 
+import LockedReactSvg from "PUBLIC_DIR/images/icons/16/locked.react.svg";
+
 import { Text } from "../../../../../components/text";
 import { ComboBox } from "../../../../../components/combobox";
 import { DropDownItem } from "../../../../../components/drop-down-item";
@@ -85,6 +87,7 @@ interface ThirdPartyStorageModuleProps {
   addValueInFormSettings: (name: string, value: string) => void;
   setRequiredFormSettings: (arr: string[]) => void;
   setIsThirdStorageChanged: (changed: boolean) => void;
+  isThirdPartyAvailable: boolean;
 }
 
 const ThirdPartyStorageModule = ({
@@ -104,6 +107,7 @@ const ThirdPartyStorageModule = ({
   deleteValueFormSetting,
   setRequiredFormSettings,
   setIsThirdStorageChanged,
+  isThirdPartyAvailable,
 }: ThirdPartyStorageModuleProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -180,6 +184,7 @@ const ThirdPartyStorageModule = ({
     addValueInFormSettings,
     setRequiredFormSettings,
     setIsThirdStorageChanged,
+    isThirdPartyAvailable,
   };
 
   const advancedOptions = (
@@ -197,6 +202,7 @@ const ThirdPartyStorageModule = ({
               data-third-party-key={item.key}
               disabled={item.disabled}
               isActive={selectedId === item.key}
+              testId={`${item.key}_dropdown_item`}
             >
               <Text
                 className={classNames(
@@ -218,6 +224,7 @@ const ThirdPartyStorageModule = ({
                   )}
                   onClick={() => onSelect(item.key)}
                   iconName={ExternalLinkReactSvgUrl}
+                  dataTestId={`${item.key}_dropdown_item_icon`}
                 />
               ) : null}
             </DropDownItem>
@@ -235,6 +242,16 @@ const ThirdPartyStorageModule = ({
           "manual-backup_storages-module",
         )}
       >
+        {!isThirdPartyAvailable ? (
+          <div
+            className={styles.notAvailable}
+            data-testid="third-party-storage-not-available"
+          >
+            <LockedReactSvg />
+            <Text>{t("Common:NotIncludedInYourCurrentPlan")}</Text>
+          </div>
+        ) : null}
+
         <ComboBox
           options={[]}
           displayArrow
@@ -251,6 +268,8 @@ const ThirdPartyStorageModule = ({
           advancedOptions={advancedOptions}
           selectedOption={{ key: 0, label: selectedStorageTitle }}
           isDisabled={!isMaxProgress || isStartCopy || !thirdPartyStorage}
+          dataTestId="backup_storage_combobox"
+          dropDownTestId="backup_storage_dropdown"
         />
 
         {selectedId === ThirdPartyStorages.GoogleId ? (

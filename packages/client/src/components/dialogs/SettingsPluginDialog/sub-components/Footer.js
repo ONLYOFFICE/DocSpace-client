@@ -62,9 +62,10 @@ const Footer = ({
             primary: true,
             size: "normal",
             label: t("Common:SaveButton"),
-            modalRequestRunning,
+            settingsModalRequestRunning: modalRequestRunning,
             setSettingsModalRequestRunning: setModalRequestRunning,
             onCloseAction,
+            testId: "settings_plugin_save_button",
           },
         }}
         pluginName={pluginName}
@@ -75,6 +76,7 @@ const Footer = ({
         size="normal"
         onClick={onCloseAction}
         label={t("Common:CancelButton")}
+        testId="settings_plugin_cancel_button"
       />
     </StyledContainer>
   );

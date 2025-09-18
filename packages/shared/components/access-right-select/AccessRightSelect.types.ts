@@ -49,6 +49,9 @@ type PropsFromCombobox = Pick<
   | "isDisabled"
   | "isMobileView"
   | "shouldShowBackdrop"
+  | "dataTestId"
+  | "noSelect"
+  | "showDisabledItems"
 >;
 
 export type AccessRightSelectProps = PropsFromCombobox & {
@@ -65,4 +68,5 @@ export type AccessRightSelectProps = PropsFromCombobox & {
   usePortalBackdrop?: boolean;
   directionX?: string;
   directionY?: string;
+  dataTestId?: string;
 };

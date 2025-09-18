@@ -110,6 +110,7 @@ const HistoryGroupList = ({
             style={
               withWrapping ? { display: "inline", wordBreak: "break-all" } : {}
             }
+            data-testid={`history_group_${i}`}
           >
             {isVisitor || isCollaborator ? (
               <Text as="span" className="text" fontWeight={600}>
@@ -117,11 +118,17 @@ const HistoryGroupList = ({
               </Text>
             ) : (
               <Link
-                className="text link"
-                onClick={() => onGroupClick(group.id)}
+                className={classNames("text link", styles.groupLink, {
+                  [styles.notClickable]: group.isSystem,
+                })}
+                onClick={
+                  group.isSystem ? undefined : () => onGroupClick(group.id)
+                }
                 style={
                   withWrapping ? { display: "inline", textWrap: "wrap" } : {}
                 }
+                dataTestId={`history_group_link_${i}`}
+                noHover={group.isSystem}
               >
                 {decode(group.name)}
               </Link>
@@ -140,6 +147,7 @@ const HistoryGroupList = ({
             styles.userListExpandLink,
           )}
           onClick={onExpand}
+          data-testid="history_groups_expand_more"
         >
           <Trans
             t={t as TFunction}

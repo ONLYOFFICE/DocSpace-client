@@ -3,7 +3,7 @@
   "content": "Copying",
   "content_en_sha1_hash": "43b7de9894fd26b8d14ca6988e963239baff6ad4",
   "created_at": "2025-05-19T21:30:43.791Z",
-  "updated_at": "2025-08-04T07:30:01.195Z",
+  "updated_at": "2025-08-27T10:14:35.214Z",
   "comment": {
     "text": "This translation key \"CopyOperation\" is used to display a message that indicates an operation where content will be duplicated or mimicked. It is displayed as a label on a button in UI elements, typically allowing users to initiate a copy action, such as copying files or data.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 350,
-      "context": "style={{ marginInlineStart: \"8px\" }}\n />\n ) : null}\n {!isMaxProgress ? (\n <Button\n label={`${t(\"Common:CopyOperation\")} ...`}\n isDisabled\n size={buttonSize}\n style={{ marginInlineStart: \"8px\" }}\n />\n ) : null}",
+      "line_number": 464,
+      "context": "testId=\"download_temporary_copy_button\"\n />\n ) : null}\n {!isMaxProgress ? (\n <Button\n label={`${t(\"Common:CopyOperation\")} ...`}\n isDisabled\n size={buttonSize}\n style={{ marginInlineStart: \"8px\" }}\n testId=\"copy_temporary_operation_button\"\n />",
       "module": "/packages/shared"
     }
   ],

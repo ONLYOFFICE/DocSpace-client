@@ -51,4 +51,6 @@ export type RowContainerProps = {
   fetchMoreFiles?: (params: IndexRange) => Promise<void>;
   /** The property required for the infinite loader */
   hasMoreFiles?: boolean;
+  /** Disables text selection */
+  noSelect?: boolean;
 };

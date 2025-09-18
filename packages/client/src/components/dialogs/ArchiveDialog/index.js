@@ -97,7 +97,7 @@ const ArchiveDialogComponent = (props) => {
         })}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <Text noSelect>{description}</Text>
+        <Text>{description}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -110,6 +110,7 @@ const ArchiveDialogComponent = (props) => {
           scale
           isDisabled={isLoading}
           isLoading={isLoading}
+          testId="move_to_archived_modal_submit"
         />
         <Button
           id="shared_move-to-archived-modal_cancel"
@@ -119,6 +120,7 @@ const ArchiveDialogComponent = (props) => {
           onClick={onClose}
           scale
           isDisabled={isLoading}
+          testId="move_to_archived_modal_cancel"
         />
       </ModalDialog.Footer>
     </ModalDialog>

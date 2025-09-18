@@ -3,7 +3,7 @@
   "content": "Access denied",
   "content_en_sha1_hash": "64343a83ad8c0b8e2789c32ca5ab1eb6abb614e0",
   "created_at": "2025-05-19T21:30:42.816Z",
-  "updated_at": "2025-06-30T12:20:31.671Z",
+  "updated_at": "2025-09-07T07:53:15.419Z",
   "comment": {
     "text": "This translation key displays a message indicating that access has been denied, used when the user lacks permissions to perform an action. It is displayed in an error container within the login component and can also be triggered by OAuth errors, such as client permission denial.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/login/src/components/ConfirmRoute.tsx",
-      "line_number": 63,
+      "line_number": 64,
       "context": "user &&\n !user.isAdmin &&\n !user.isOwner &&\n !user.isRoomAdmin\n ) {\n throw new Error(t(\"Common:AccessDenied\"));\n }\n \n useEffect(() => {\n if (window.location.search.includes(\"culture\")) return;\n const lng = getCookie(LANGUAGE);",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/utils/index.ts",
-      "line_number": 127,
+      "line_number": 128,
       "context": "case OAuth2ErrorKey.client_disabled_error:\n return t(\"Errors:OAuthApplicationDisabled\");\n case OAuth2ErrorKey.client_not_found_error:\n return t(\"Errors:OAuthApplicationEmpty\");\n case OAuth2ErrorKey.client_permission_denied_error:\n return t(\"Common:AccessDenied\");\n case OAuth2ErrorKey.missing_client_id_error:\n return t(\"Errors:OAuthClientEmpty\");\n case OAuth2ErrorKey.something_went_wrong_error:\n return t(\"Common:UnknownError\");\n case OAuth2ErrorKey.missing_asc_cookie_error:",
       "module": "/packages/login"
     },

@@ -3,7 +3,7 @@
   "content": "Configure IP Security to restrict login possibility to select IP addresses. Use either exact IP addresses in the IPv4 format, IP range or CIDR masking. The IP security does not work for space owners, they can access the space from any IP address.",
   "content_en_sha1_hash": "285f2427eec118d67b6d3cbbf9ebe80d3e4719d1",
   "created_at": "2025-05-19T21:30:51.733Z",
-  "updated_at": "2025-08-04T07:30:01.545Z",
+  "updated_at": "2025-09-17T13:43:01.877Z",
   "comment": {
     "text": "This translation key is used to describe the IP Security setting option, explaining its purpose and usage context. It appears in a security category page on the portal settings, guiding users on how to configure IP restrictions for secure login access.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 268,
+      "line_number": 269,
       "context": "<Text fontSize=\"16px\" fontWeight=\"700\">\n {t(\"IPSecurity\")}\n </Text>\n <div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"IPSecuritySettingDescription\")}\n </Text>\n \n {ipSettingsUrl ? (\n <Link\n className=\"link-learn-more\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
-      "line_number": 245,
+      "line_number": 258,
       "context": "return (\n <MainContainer>\n <LearnMoreWrapper withoutExternalLink={!ipSettingsUrl}>\n <Text className=\"page-subtitle\">\n {t(\"IPSecuritySettingDescription\")}\n </Text>\n {ipSettingsUrl ? (\n <Link\n className=\"link-learn-more\"\n dataTestId=\"ip_security_component_learn_more\"",
       "module": "/packages/client"
     }

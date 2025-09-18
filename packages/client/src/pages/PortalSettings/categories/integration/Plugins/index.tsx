@@ -28,16 +28,17 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import PluginStore from "SRC_DIR/store/PluginStore";
+import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 
 import Dropzone from "./sub-components/Dropzone";
 import PluginItem from "./sub-components/PluginItem";
 import EmptyScreen from "./sub-components/EmptyScreen";
 import ListLoader from "./sub-components/ListLoader";
+import UploadDescription from "./sub-components/UploadDescription";
 
 import {
   PluginListContainer,
@@ -56,11 +57,12 @@ const PluginPage = ({
   updatePlugin,
   addPlugin,
 
-  updatePlugins,
-
   theme,
-  isLoading,
   isEmptyList,
+  currentColorScheme,
+  apiPluginSDKLink,
+
+  showPortalSettingsLoader,
 }: PluginsProps) => {
   const { t } = useTranslation(["WebPlugins", "Common"]);
 
@@ -75,11 +77,8 @@ const PluginPage = ({
     setDocumentTitle(t("Common:Plugins"));
   }, [t]);
 
-  React.useEffect(() => {
-    updatePlugins(true);
-  }, [updatePlugins]);
-
-  return isLoading || (!isEmptyList && pluginList.length === 0) ? (
+  return showPortalSettingsLoader ||
+    (!isEmptyList && pluginList.length === 0) ? (
     <StyledContainer>
       <ListLoader withUpload={withUpload} />
     </StyledContainer>
@@ -90,6 +89,8 @@ const PluginPage = ({
         theme={theme}
         onDrop={onDrop}
         withUpload={withUpload}
+        apiPluginSDKLink={apiPluginSDKLink}
+        currentColorScheme={currentColorScheme}
       />
     </StyledEmptyContainer>
   ) : (
@@ -102,13 +103,16 @@ const PluginPage = ({
           /> */}
       {withUpload ? (
         <>
-          <Text>
-            {t("UploadDescription", { productName: t("Common:ProductName") })}
-          </Text>
+          <UploadDescription
+            t={t}
+            apiPluginSDKLink={apiPluginSDKLink}
+            currentColorScheme={currentColorScheme}
+          />
           <Dropzone
             onDrop={onDrop}
             isDisabled={!withUpload}
             isLoading={false}
+            dataTestId="upload_plugin_dropzone"
           />
         </>
       ) : null}
@@ -118,6 +122,7 @@ const PluginPage = ({
             key={`plugin-${plugin.name}-${plugin.version}`}
             openSettingsDialog={openSettingsDialog}
             updatePlugin={updatePlugin}
+            dataTestId={`plugin_${plugin.name}`}
             {...plugin}
           />
         ))}
@@ -130,11 +135,16 @@ export default inject(
   ({
     settingsStore,
     pluginStore,
+    clientLoadingStore,
   }: {
     settingsStore: SettingsStore;
     pluginStore: PluginStore;
+    clientLoadingStore: ClientLoadingStore;
   }) => {
-    const { pluginOptions, currentColorScheme, theme } = settingsStore;
+    const { pluginOptions, currentColorScheme, theme, apiPluginSDKLink } =
+      settingsStore;
+
+    const { showPortalSettingsLoader } = clientLoadingStore;
 
     const withUpload = pluginOptions.upload;
 
@@ -147,7 +157,6 @@ export default inject(
 
       addPlugin,
 
-      isLoading,
       isEmptyList,
     } = pluginStore;
 
@@ -170,8 +179,10 @@ export default inject(
 
       currentColorScheme,
       theme,
-      isLoading,
       isEmptyList,
+      apiPluginSDKLink,
+
+      showPortalSettingsLoader,
     };
   },
 )(observer(PluginPage));

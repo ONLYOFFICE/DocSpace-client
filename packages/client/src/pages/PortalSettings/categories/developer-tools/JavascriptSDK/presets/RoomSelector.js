@@ -104,11 +104,14 @@ const RoomSelector = (props) => {
     },
   ];
 
-  const [version, onSetVersion] = useState(sdkVersion[200]);
+  const [version, onSetVersion] = useState(sdkVersion[210]);
 
   const [source, onSetSource] = useState(sdkSource.Package);
 
-  const [roomType, setRoomType] = useState(roomTypeOptions[0]);
+  const [selectedKey, setSelectedKey] = useState(roomTypeOptions[0].key);
+
+  const selectedOption =
+    roomTypeOptions.find((o) => o.key === selectedKey) ?? roomTypeOptions[0];
 
   const [config, setConfig] = useState({
     src: window.location.origin,
@@ -185,7 +188,7 @@ const RoomSelector = (props) => {
   }, []);
 
   const changeRoomType = (option) => {
-    setRoomType(option);
+    setSelectedKey(option.key);
     setConfig((oldConfig) => ({ ...oldConfig, roomType: option.roomType }));
   };
 
@@ -277,7 +280,7 @@ const RoomSelector = (props) => {
               onSelect={changeRoomType}
               options={roomTypeOptions}
               scaled
-              selectedOption={roomType}
+              selectedOption={selectedOption}
               displaySelectedOption
               directionY="top"
               dataTestId="room_type_combobox"

@@ -106,13 +106,14 @@ export function startBackup(
   return request(options);
 }
 
-export function getBackupProgress(dump: boolean = false) {
+export function getBackupProgress(dump: boolean = false, signal) {
   const options = {
     method: "get",
     url: "/portal/getbackupprogress",
     params: {
       dump,
     },
+    signal,
   };
   return request(options);
 }
@@ -128,13 +129,14 @@ export function deleteBackupSchedule(dump: boolean = false) {
   return request(options);
 }
 
-export function getBackupSchedule(dump: boolean = false) {
+export function getBackupSchedule(dump: boolean = false, signal?: AbortSignal) {
   const options = {
     method: "get",
     url: "/portal/getbackupschedule",
     params: {
       dump,
     },
+    signal,
   };
   return request<TBackupSchedule>(options);
 }
@@ -288,52 +290,82 @@ export function deletePortal(confirmKey: Nullable<string> = null) {
   return request(options);
 }
 
-export async function getPortalPaymentQuotas() {
+export async function getPortalPaymentQuotas(signal?: AbortSignal) {
   const res = (await request({
     method: "get",
     url: "/portal/payment/quotas",
+    signal,
   })) as TPaymentQuota[];
 
   return res;
 }
 
-export async function getServicesQuotas() {
+export async function getServicesQuotas(signal?: AbortSignal) {
   const res = (await request({
     method: "get",
-    url: "/portal/payment/quotas?wallet=true",
+    url: "/portal/payment/walletservices",
+    signal,
   })) as TPaymentQuota[];
 
   return res;
 }
 
-export async function getPortalQuota(refresh = false) {
+export async function getServiceQuota(
+  serviceName?: string,
+  signal?: AbortSignal,
+) {
+  const res = (await request({
+    method: "get",
+    url: `/portal/payment/walletservice?service=${serviceName}`,
+    signal,
+  })) as TPaymentQuota;
+
+  return res;
+}
+
+export async function setServiceState(data: {
+  service: string;
+  enabled: boolean;
+}) {
+  const res = (await request({
+    method: "post",
+    url: "/portal/payment/servicestate",
+    data,
+  })) as TPaymentQuota;
+
+  return res;
+}
+export async function getPortalQuota(refresh = false, signal?: AbortSignal) {
   const params = refresh ? { refresh: true } : {};
   // console.log("getPortalQuota", { params });
   const res = (await request({
     method: "get",
     url: "/portal/payment/quota",
     params,
+    signal,
   })) as TPaymentQuota;
 
   return res;
 }
 
-export async function getPortalTariff(refresh = false) {
+export async function getPortalTariff(refresh = false, signal?: AbortSignal) {
   const params = refresh ? { refresh: true } : {};
 
   const res = (await request({
     method: "get",
     url: "/portal/tariff",
     params,
+    signal,
   })) as TPortalTariff;
 
   return res;
 }
 
-export async function getPaymentAccount() {
+export async function getPaymentAccount(signal?: AbortSignal) {
   const res = (await request({
     method: "get",
     url: "/portal/payment/account",
+    signal,
   })) as string;
 
   return res;
@@ -428,33 +460,36 @@ export function sendPaymentRequest(email, userName, message) {
   });
 }
 
-export function getBalance(refresh?: boolean) {
+export function getBalance(refresh?: boolean, signal?: AbortSignal) {
   const params = refresh ? { refresh: true } : {};
 
   return request({
     method: "get",
     url: `/portal/payment/customer/balance`,
     params,
+    signal,
   }) as TBalance;
 }
 
-export function getWalletPayer(refresh?: boolean) {
+export function getWalletPayer(refresh?: boolean, signal?: AbortSignal) {
   const params = refresh ? { refresh: true } : {};
 
   return request({
     method: "get",
     url: `/portal/payment/customerinfo`,
     params,
+    signal,
   }) as TCustomerInfo;
 }
 
-export async function getCardLinked(backUrl) {
+export async function getCardLinked(backUrl, signal?: AbortSignal) {
   const params = backUrl ? { backUrl } : {};
 
   const res = (await request({
     method: "get",
     url: "/portal/payment/chechoutsetupurl",
     params,
+    signal,
   })) as string;
 
   return res;
@@ -475,31 +510,41 @@ export async function getTransactionHistory(
   startDate: string,
   endDate: string,
   credit: boolean = true,
-  withdrawal: boolean = true,
+  debit: boolean = true,
+  participantName: string = "",
   offset: number = 0,
   limit: number = 25,
+  signal?: AbortSignal,
 ) {
+  const params = {
+    startDate,
+    endDate,
+    credit,
+    debit,
+    offset,
+    limit,
+  };
+
+  if (participantName) {
+    params.participantName = participantName;
+  }
+
   const options = {
     method: "get",
     url: "/portal/payment/customer/operations",
-    params: {
-      startDate,
-      endDate,
-      credit,
-      withdrawal,
-      offset,
-      limit,
-    },
+    params,
+    signal,
   };
   const res = (await request(options)) as TCustomerOperation;
 
   return res;
 }
 
-export async function getAutoTopUpSettings() {
+export async function getAutoTopUpSettings(signal?: AbortSignal) {
   const options = {
     method: "get",
     url: "/portal/payment/topupsettings",
+    signal,
   };
   const res = (await request(options)) as TAutoTopUpSettings;
 
@@ -531,7 +576,7 @@ export async function updateAutoTopUpSettings(
   return request(options);
 }
 
-export async function getTransactionHistoryReport(
+export async function startTransactionHistoryReport(
   startDate: string,
   endDate: string,
   credit: boolean,
@@ -547,25 +592,37 @@ export async function getTransactionHistoryReport(
       withdrawal,
     },
   };
-  const res = (await request(options)) as string;
+  const res = (await request(options)) as TransactionHistoryReport;
 
   return res;
 }
 
-export async function getPortal() {
+export async function checkTransactionHistoryReport() {
+  const options = {
+    method: "get",
+    url: "/portal/payment/customer/operationsreport",
+  };
+  const res = (await request(options)) as TransactionHistoryReport;
+
+  return res;
+}
+
+export async function getPortal(signal?: AbortSignal) {
   const options = {
     method: "get",
     url: "/portal",
+    signal,
   };
   const res = (await request(options)) as TPortal;
 
   return res;
 }
 
-export function getPortalUsersCount() {
+export function getPortalUsersCount(signal?: AbortSignal) {
   const options = {
     method: "get",
     url: "/portal/userscount",
+    signal,
   };
   return request(options);
 }

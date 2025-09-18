@@ -3,7 +3,7 @@
   "content": "Single Sign-On",
   "content_en_sha1_hash": "9cd5b7eb1680d90f18ef828206965ff742d88dda",
   "created_at": "2025-05-19T21:30:52.736Z",
-  "updated_at": "2025-08-04T07:30:01.502Z",
+  "updated_at": "2025-09-17T13:43:01.846Z",
   "comment": {
     "text": "This translation key is used to display a custom label for a single sign-on entry button. It appears in an IDP settings page and is used as a placeholder until a custom value is set. Translators should provide a clear and concise text that will be displayed on the UI.",
     "is_auto": true,
@@ -18,14 +18,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/index.js",
-      "line_number": 66,
-      "context": "useEffect(() => {\n isSSOAvailable && !isInit && init();\n }, []);\n \n useEffect(() => {\n if (ready) setDocumentTitle(t(\"Settings:SingleSignOn\"));\n }, [ready]);\n \n if (!isInit && !isMobileView && isSSOAvailable) return <SSOLoader />;\n \n return (",
+      "line_number": 61,
+      "context": "} = props;\n const { t, ready } = useTranslation([\"SingleSignOn\", \"Settings\"]);\n const isMobileView = currentDeviceType === DeviceType.mobile;\n \n useEffect(() => {\n if (ready) setDocumentTitle(t(\"Settings:SingleSignOn\"));\n }, [ready]);\n \n if (showPortalSettingsLoader && !isMobileView && isSSOAvailable)\n return <SSOLoader />;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/index.js",
       "line_number": 37,
-      "context": "import { combineUrl } from \"@docspace/shared/utils/combineUrl\";\n import config from \"PACKAGE_FILE\";\n \n import { SECTION_HEADER_HEIGHT } from \"@docspace/shared/components/section/Section.constants\";\n \n import SSO from \"./SingleSignOn\";\n import LDAP from \"./LDAP\";\n import ThirdParty from \"./ThirdPartyServicesSettings\";\n \n import SMTPSettings from \"./SMTPSettings\";\n import DocumentService from \"./DocumentService\";",
+      "context": "import { combineUrl } from \"@docspace/shared/utils/combineUrl\";\n import config from \"PACKAGE_FILE\";\n \n import { SECTION_HEADER_HEIGHT } from \"@docspace/shared/components/section/Section.constants\";\n \n import SsoSettings from \"./SingleSignOn\";\n import LdapSettings from \"./LDAP\";\n import ThirdParty from \"./ThirdPartyServicesSettings\";\n \n import SMTPSettings from \"./SMTPSettings\";\n import DocumentService from \"./DocumentService\";",
       "module": "/packages/client"
     },
     {

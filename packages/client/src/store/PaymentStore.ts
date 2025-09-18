@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable class-methods-use-this */
-/* eslint-disable no-console */
 import axios from "axios";
 import { makeAutoObservable } from "mobx";
 import moment from "moment";
@@ -43,6 +41,7 @@ import {
   getAutoTopUpSettings,
   updateAutoTopUpSettings,
   getServicesQuotas,
+  getServiceQuota,
   getLicenseQuota,
 } from "@docspace/shared/api/portal";
 import api from "@docspace/shared/api";
@@ -66,10 +65,20 @@ import {
   TLicenseQuota,
 } from "@docspace/shared/api/portal/types";
 import { formatCurrencyValue } from "@docspace/shared/utils/common";
-import { STORAGE_TARIFF_DEACTIVATED } from "@docspace/shared/constants";
+import {
+  BACKUP_SERVICE,
+  STORAGE_TARIFF_DEACTIVATED,
+} from "@docspace/shared/constants";
 
 // Constants for feature identifiers
 export const TOTAL_SIZE = "total_size";
+
+type TServiceFeatureWithPrice = TNumericPaymentFeature & {
+  price: {
+    value: number;
+    currencySymbol: string;
+  };
+};
 
 class PaymentStore {
   userStore: UserStore | null = null;
@@ -152,6 +161,8 @@ class PaymentStore {
   servicesQuotas: TPaymentQuota | null = null; // temporary solution, should be in the service store
 
   isShowStorageTariffDeactivatedModal = false;
+
+  reccomendedAmount = "";
 
   constructor(
     userStore: UserStore,
@@ -395,7 +406,24 @@ class PaymentStore {
   }
 
   get storagePriceIncrement() {
-    return this.servicesQuotas?.price.value ?? 0;
+    return (
+      (this.servicesQuotasFeatures.get(TOTAL_SIZE) as TServiceFeatureWithPrice)
+        ?.price?.value || 0
+    );
+  }
+
+  get backupServicePrice() {
+    return (
+      (
+        this.servicesQuotasFeatures.get(
+          BACKUP_SERVICE,
+        ) as TServiceFeatureWithPrice
+      )?.price?.value || 0
+    );
+  }
+
+  get isBackupServiceOn() {
+    return this.servicesQuotasFeatures.get(BACKUP_SERVICE)?.value;
   }
 
   formatWalletCurrency = (
@@ -433,11 +461,19 @@ class PaymentStore {
   };
 
   fetchBalance = async (isRefresh?: boolean) => {
-    const res = await getBalance(isRefresh);
+    const abortController = new AbortController();
+    this.settingsStore?.addAbortControllers(abortController);
 
-    if (!res) return;
+    try {
+      const res = await getBalance(isRefresh, abortController.signal);
 
-    this.balance = res;
+      if (!res) return;
+
+      this.balance = res;
+    } catch (e) {
+      if (axios.isCancel(e)) return;
+      throw e;
+    }
   };
 
   getEndTransactionDate = (format = "YYYY-MM-DDTHH:mm:ss") => {
@@ -448,10 +484,6 @@ class PaymentStore {
     return moment().subtract(4, "weeks").format(format);
   };
 
-  fetchMoreTransactionHistory = async () => {
-    console.log("fetchMoreTransactionHistory");
-  };
-
   formatDate = (date: moment.Moment) => {
     return date.clone().locale("en").format("YYYY-MM-DDTHH:mm:ss");
   };
@@ -460,45 +492,70 @@ class PaymentStore {
     startDate = moment().subtract(4, "weeks"),
     endDate = moment(),
     credit = true,
-    withdrawal = true,
+    debit = true,
+    participantName?: string,
   ) => {
-    const res = await getTransactionHistory(
-      this.formatDate(startDate),
-      this.formatDate(endDate),
-      credit,
-      withdrawal,
-    );
+    const abortController = new AbortController();
+    this.settingsStore?.addAbortControllers(abortController);
 
-    if (!res) return;
+    try {
+      const res = await getTransactionHistory(
+        this.formatDate(startDate),
+        this.formatDate(endDate),
+        credit,
+        debit,
+        participantName,
+        0,
+        25,
+        abortController.signal,
+      );
 
-    this.transactionHistory = res.collection;
-    this.isTransactionHistoryExist = res.collection.length > 0;
+      if (!res) return;
+
+      this.transactionHistory = res.collection;
+      this.isTransactionHistoryExist = res.collection.length > 0;
+    } catch (error) {
+      if (axios.isCancel(error)) return;
+      console.error(error);
+    }
   };
 
   fetchAutoPayments = async () => {
-    const res = await getAutoTopUpSettings();
+    const abortController = new AbortController();
+    this.settingsStore?.addAbortControllers(abortController);
 
-    if (!res) return;
+    try {
+      const res = await getAutoTopUpSettings(abortController.signal);
 
-    this.autoPayments = res;
-    this.isAutomaticPaymentsEnabled = res.enabled;
+      if (!res) return;
 
-    if (res.enabled) {
-      this.setMinBalance(res.minBalance.toString());
-      this.setUpToBalance(res.upToBalance.toString());
+      this.autoPayments = res;
+      this.isAutomaticPaymentsEnabled = res.enabled;
+
+      if (res.enabled) {
+        this.setMinBalance(res.minBalance.toString());
+        this.setUpToBalance(res.upToBalance.toString());
+      }
+    } catch (error) {
+      if (axios.isCancel(error)) return;
+      console.error(error);
     }
   };
 
   fetchCardLinked = async (url?: string) => {
+    const abortController = new AbortController();
+    this.settingsStore?.addAbortControllers(abortController);
+
     const backUrl = url || `${window.location.href}?complete=true`;
 
     try {
-      const res = await getCardLinked(backUrl);
+      const res = await getCardLinked(backUrl, abortController.signal);
 
       if (!res) return;
 
       this.cardLinked = res;
     } catch (error) {
+      if (axios.isCancel(error)) return;
       console.error(error);
     }
   };
@@ -529,17 +586,37 @@ class PaymentStore {
   handleServicesQuotas = async () => {
     // temporary solution, should be in the service store
 
-    const res = await getServicesQuotas();
+    const abortController = new AbortController();
+    this.settingsStore?.addAbortControllers(abortController);
+
+    const res = await getServicesQuotas(abortController.signal);
 
     if (!res) return;
 
-    res[0].features.forEach((feature) => {
-      this.servicesQuotasFeatures.set(feature.id, feature);
+    const quotas = res.map((service) => {
+      const feature = service.features[0];
+      return {
+        ...feature,
+        price: service.price,
+      };
     });
 
-    this.servicesQuotas = res[0];
+    this.servicesQuotasFeatures = new Map(
+      quotas.map((feature) => [feature.id, feature]),
+    );
 
     return res;
+  };
+
+  changeServiceState = async (service: string) => {
+    const feature = this.servicesQuotasFeatures.get(service);
+
+    if (!feature) return;
+
+    this.servicesQuotasFeatures.set(service, {
+      ...feature,
+      value: !feature.value,
+    });
   };
 
   isShowStorageTariffDeactivated = () => {
@@ -555,8 +632,11 @@ class PaymentStore {
   };
 
   setPaymentAccount = async () => {
+    const abortController = new AbortController();
+    this.settingsStore?.addAbortControllers(abortController);
+
     try {
-      const res = await api.portal.getPaymentAccount();
+      const res = await api.portal.getPaymentAccount(abortController.signal);
 
       if (!res) return;
 
@@ -566,6 +646,7 @@ class PaymentStore {
         console.error(res);
       }
     } catch (error) {
+      if (axios.isCancel(error)) return;
       console.error(error);
     }
   };
@@ -580,11 +661,36 @@ class PaymentStore {
     ]);
   };
 
+  setReccomendedAmount = (amount: string) => {
+    this.reccomendedAmount = amount;
+  };
+
+  setServiceQuota = async (serviceName = "backup") => {
+    const abortController = new AbortController();
+    this.settingsStore?.addAbortControllers(abortController);
+
+    const service = await getServiceQuota(serviceName, abortController.signal);
+
+    const feature = service.features[0];
+
+    this.servicesQuotasFeatures = new Map([
+      [
+        feature.id,
+        {
+          ...feature,
+          price: service.price,
+        },
+      ],
+    ]);
+  };
+
   walletInit = async (t: TTranslation) => {
     const isRefresh = window.location.href.includes("complete=true");
     if (!this.currentTariffStatusStore) return;
 
-    this.setVisibleWalletSetting(false);
+    if (!isRefresh) {
+      if (this.isVisibleWalletSettings) this.setVisibleWalletSetting(false);
+    }
 
     const { fetchPortalTariff, walletCustomerStatusNotActive } =
       this.currentTariffStatusStore;
@@ -620,7 +726,25 @@ class PaymentStore {
 
       this.setIsInitWalletPage(true);
 
-      if (window.location.href.includes("complete=true")) {
+      const url = new URL(window.location.href);
+      const params = url.searchParams;
+
+      const priceParam = params.get("price");
+
+      if (priceParam) {
+        const reccomendedAmount = this.walletBalance - Number(priceParam);
+        if (reccomendedAmount < 0)
+          this.setReccomendedAmount(
+            Math.ceil(Math.abs(reccomendedAmount)).toString(),
+          );
+      } else {
+        this.setReccomendedAmount("");
+      }
+
+      if (
+        window.location.href.includes("complete=true") ||
+        window.location.href.includes("open=true")
+      ) {
         window.history.replaceState(
           {},
           document.title,
@@ -636,7 +760,7 @@ class PaymentStore {
 
   init = async (t: TTranslation) => {
     if (this.isInitPaymentPage) {
-      this.basicSettings();
+      await this.basicSettings();
 
       return;
     }
@@ -705,12 +829,20 @@ class PaymentStore {
       "/portal-settings/payments/portal-payments?complete=true",
     );
 
+    const abortController = new AbortController();
+    this.settingsStore?.addAbortControllers(abortController);
+
     try {
-      const link = await getPaymentLink(managersCount, backUrl);
+      const link = await getPaymentLink(
+        managersCount,
+        backUrl,
+        abortController.signal,
+      );
 
       if (!link) return;
       this.setPaymentLink(link);
     } catch (err) {
+      if (axios.isCancel(err)) return;
       console.error(err);
     }
   };
@@ -747,6 +879,7 @@ class PaymentStore {
     try {
       await getPaymentInfo();
     } catch (e) {
+      console.error(e);
       toastr.error(t("Common:UnexpectedError"));
 
       return;
@@ -780,8 +913,11 @@ class PaymentStore {
   };
 
   getSettingsPayment = async () => {
+    const abortController = new AbortController();
+    this.settingsStore?.addAbortControllers(abortController);
+
     try {
-      const newSettings = await getPaymentSettings();
+      const newSettings = await getPaymentSettings(abortController.signal);
 
       if (!newSettings) return;
 
@@ -806,6 +942,9 @@ class PaymentStore {
           this.currentLicense.trialMode = currentLicense.trial;
       }
     } catch (e) {
+      if (axios.isCancel(e)) {
+        return;
+      }
       console.error(e);
     }
   };
@@ -817,6 +956,9 @@ class PaymentStore {
 
       this.licenseQuota = licenseQuota;
     } catch (e) {
+      if (axios.isCancel(e)) {
+        return;
+      }
       console.error(e);
     }
   };

@@ -3,7 +3,7 @@
   "content": "Block",
   "content_en_sha1_hash": "82dd2cdf36f9436d89f404454654ad3e53fd428d",
   "created_at": "2025-05-19T21:30:43.300Z",
-  "updated_at": "2025-08-04T07:30:01.603Z",
+  "updated_at": "2025-09-07T07:53:15.391Z",
   "comment": {
     "text": "This translation key is used to display a file as \"blocked\" or \"unlocked\", depending on its locked status. It appears in UI elements such as quick buttons and color themes, providing a visual indication of file access permissions.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2042,
+      "line_number": 2121,
       "context": "),\n },\n {\n id: \"option_block-unblock-version\",\n key: \"block-unblock-version\",\n label: item.locked ? t(\"Common:UnblockFile\") : t(\"Common:BlockFile\"),\n icon: LockedReactSvgUrl,\n onClick: () => this.lockFile(item, t),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     }

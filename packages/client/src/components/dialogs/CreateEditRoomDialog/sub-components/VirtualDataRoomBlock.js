@@ -40,11 +40,12 @@ const Block = ({
   isDisabled,
   isChecked,
   children,
+  dataTestId,
 }) => {
   return (
-    <div className="virtual-data-room-block">
+    <div className="virtual-data-room-block" data-testid={dataTestId}>
       <div className="virtual-data-room-block_header">
-        <Text noSelect fontWeight={600} fontSize="13px">
+        <Text fontWeight={600} fontSize="13px">
           {headerText}
         </Text>
         <ToggleButton
@@ -52,13 +53,13 @@ const Block = ({
           isChecked={isChecked}
           onChange={onChange}
           className="virtual-data-room-block_toggle"
+          dataTestId={dataTestId ? `${dataTestId}_toggle` : undefined}
         />
       </div>
       <Text
         fontWeight={400}
         fontSize="12px"
         className="virtual-data-room-block_description"
-        noSelect
       >
         {bodyText}
       </Text>
@@ -138,6 +139,7 @@ const VirtualDataRoomBlock = ({
         onChange={onChangeAutomaticIndexing}
         isDisabled={false}
         isChecked={roomParams.indexing}
+        dataTestId="virtual_data_room_automatic_indexing"
       />
       <Block
         headerText={t("FileLifetime")}
@@ -146,6 +148,7 @@ const VirtualDataRoomBlock = ({
         isDisabled={false}
         isChecked={fileLifetimeChecked}
         setLifetimeDialogVisible={setLifetimeDialogVisible}
+        dataTestId="virtual_data_room_file_lifetime"
       >
         <FileLifetime
           t={t}
@@ -164,6 +167,7 @@ const VirtualDataRoomBlock = ({
         onChange={onChangeRestrictCopyAndDownload}
         isDisabled={false}
         isChecked={copyAndDownloadChecked}
+        dataTestId="virtual_data_room_restrict_copy_download"
       />
 
       <Block
@@ -172,6 +176,7 @@ const VirtualDataRoomBlock = ({
         onChange={onChangeAddWatermarksToDocuments}
         isDisabled={false}
         isChecked={watermarksChecked}
+        dataTestId="virtual_data_room_add_watermarks"
       >
         <Watermarks
           isEdit={isEdit}

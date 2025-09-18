@@ -61,7 +61,6 @@ const Error520 = ({
 
   useEffect(() => {
     if (firebaseHelper?.isEnabledDB) autoSendReport();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

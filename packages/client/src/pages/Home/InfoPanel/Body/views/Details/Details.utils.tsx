@@ -58,7 +58,7 @@ const link = (txt: React.ReactNode, onClick: () => void) => (
     className="property-content"
     isHovered
     onClick={onClick}
-    enableUserSelect
+    dataTestId="info_panel_details_author_link"
   >
     {txt}
   </Link>
@@ -68,14 +68,15 @@ const tagList = (
   tags: string[],
   selectTag: (tag: { label: string }) => void,
 ) => (
-  <div className="property-tag_list">
-    {tags.map((tag) => (
+  <div className="property-tag_list" data-testid="info_panel_details_tag_list">
+    {tags.map((tag, index) => (
       <Tag
         key={tag}
         className="property-tag"
         label={tag}
         tag={tag}
         onClick={() => selectTag({ label: tag })}
+        dataTestId={`info_panel_details_tag_${index}`}
       />
     ))}
   </div>

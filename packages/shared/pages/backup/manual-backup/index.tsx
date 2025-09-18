@@ -29,6 +29,7 @@
 import React, { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import classNames from "classnames";
+import { TFunction } from "i18next";
 
 import { Text } from "../../../components/text";
 import { Button } from "../../../components/button";
@@ -36,11 +37,7 @@ import { Link, LinkTarget } from "../../../components/link";
 import { startBackup } from "../../../api/portal";
 import { RadioButton } from "../../../components/radio-button";
 import { toastr } from "../../../components/toast";
-import {
-  BackupStorageLocalKey,
-  BackupStorageType,
-  FolderType,
-} from "../../../enums";
+import { BackupStorageLocalKey, BackupStorageType } from "../../../enums";
 import StatusMessage from "../../../components/status-message";
 import SocketHelper, {
   SocketEvents,
@@ -49,7 +46,7 @@ import SocketHelper, {
 import { OPERATIONS_NAME } from "../../../constants";
 import OperationsProgressButton from "../../../components/operations-progress-button";
 import DataBackupLoader from "../../../skeletons/backup/DataBackup";
-import { getBackupProgressInfo } from "../../../utils/common";
+import { getBackupProgressInfo, getErrorInfo } from "../../../utils/common";
 import { getFromLocalStorage } from "../../../utils";
 import { useDidMount } from "../../../hooks/useDidMount";
 
@@ -65,6 +62,58 @@ import {
   THIRD_PARTY_STORAGE,
 } from "./ManualBackup.constants";
 import styles from "./ManualBackup.module.scss";
+import { combineUrl } from "../../../utils/combineUrl";
+
+const getPaymentError = (
+  t: TFunction,
+  isPayer: boolean | undefined,
+  walletCustomerEmail: string | null,
+  backupPrice: number,
+) => {
+  const onClickWalletUrl = () => {
+    const walletPageUrl = combineUrl(
+      "/portal-settings",
+      `/payments/wallet?open=true&price=${Math.ceil(backupPrice).toString()}`,
+    );
+
+    window.DocSpace.navigate(walletPageUrl);
+  };
+
+  return isPayer ? (
+    <Trans
+      t={t}
+      ns="Common"
+      i18nKey="InsufficientFundsWithTopUp"
+      components={{
+        1: (
+          <Link
+            tag="a"
+            onClick={onClickWalletUrl}
+            color="accent"
+            dataTestId="insufficient-funds-top-up-link"
+          />
+        ),
+      }}
+    />
+  ) : (
+    <Trans
+      t={t}
+      ns="Common"
+      i18nKey="InsufficientFundsWithContact"
+      components={{
+        1: (
+          <Link
+            key="contact-payer-link"
+            tag="a"
+            color="accent"
+            href={`mailto:${walletCustomerEmail}`}
+            dataTestId="insufficient-funds-contact-link"
+          />
+        ),
+      }}
+    />
+  );
+};
 
 const ManualBackup = ({
   isInitialLoading,
@@ -73,12 +122,11 @@ const ManualBackup = ({
   dataBackupUrl,
   pageIsDisabled,
   isNotPaidPeriod,
-  rootFoldersTitles,
   currentColorScheme,
   downloadingProgress,
   isBackupProgressVisible,
-  isEmptyContentBeforeLoader,
   basePath,
+  isEmptyContentBeforeLoader,
   isErrorPath,
   newPath,
   providers,
@@ -121,18 +169,26 @@ const ManualBackup = ({
   setConnectedThirdPartyAccount,
   setConnectDialogVisible,
   setIsThirdStorageChanged,
-  setErrorInformation,
+
   errorInformation,
   isManagement = false,
 
   backupProgressError,
   setBackupProgressError,
   setIsBackupProgressVisible,
+  isPayer,
+  walletCustomerEmail,
+  isThirdPartyAvailable,
+  backupServicePrice,
 }: ManualBackupProps) => {
   const { t } = useTranslation(["Common"]);
 
   const [storageType, setStorageType] =
     useState<TStorageType>(TEMPORARY_STORAGE);
+
+  const [errorMessage, setErrorMessage] = useState<string | React.ReactNode>(
+    "",
+  );
 
   const isCheckedTemporaryStorage = storageType === TEMPORARY_STORAGE;
   const isCheckedDocuments = storageType === DOCUMENTS;
@@ -169,21 +225,24 @@ const ManualBackup = ({
       if (success) toastr.success(success);
     };
 
-    SocketHelper.on(SocketEvents.BackupProgress, onBackupProgress);
+    SocketHelper?.on(SocketEvents.BackupProgress, onBackupProgress);
 
     return () => {
-      SocketHelper.off(SocketEvents.BackupProgress, onBackupProgress);
+      SocketHelper?.off(SocketEvents.BackupProgress, onBackupProgress);
     };
   }, [setDownloadingProgress, setTemporaryLink, setBackupProgressError, t]);
 
   const onMakeTemporaryBackup = async () => {
-    setErrorInformation("");
+    setErrorMessage("");
     setBackupProgressError("");
     clearLocalStorage();
     localStorage.setItem(
       BackupStorageLocalKey.StorageType,
       JSON.stringify(TEMPORARY_STORAGE),
     );
+
+    setDownloadingProgress(1);
+    setIsBackupProgressVisible(true);
 
     try {
       await startBackup(
@@ -192,10 +251,28 @@ const ManualBackup = ({
         false,
         isManagement,
       );
-      setDownloadingProgress(1);
-      setIsBackupProgressVisible(true);
     } catch (err) {
-      setErrorInformation(err, t);
+      let customText;
+
+      const knownError = err as {
+        response?: { status: number; data: { error: { message: string } } };
+        statusText?: string;
+        message?: string;
+      };
+
+      if (knownError?.response?.status === 402 && backupServicePrice) {
+        customText = getPaymentError(
+          t,
+          isPayer ?? false,
+          walletCustomerEmail ?? "",
+          backupServicePrice,
+        );
+      }
+
+      const message = getErrorInfo(err, t, customText);
+      setErrorMessage(message);
+      setBackupProgressError("error");
+      setDownloadingProgress(100);
       console.error(err);
     }
   };
@@ -222,7 +299,8 @@ const ManualBackup = ({
     selectedStorageTitle?: string,
   ) => {
     clearLocalStorage();
-    setErrorInformation("");
+
+    setErrorMessage("");
     setBackupProgressError("");
     const storageParams = getStorageParams(
       isCheckedThirdPartyStorage,
@@ -241,13 +319,35 @@ const ManualBackup = ({
       selectedStorageTitle,
     );
 
+    setDownloadingProgress(1);
+    setIsBackupProgressVisible(true);
+
     try {
       await startBackup(moduleType, storageParams, false, isManagement);
-      setIsBackupProgressVisible(true);
-      setDownloadingProgress(1);
+
       setTemporaryLink("");
     } catch (err) {
-      setErrorInformation(err, t);
+      let customText;
+
+      const knownError = err as {
+        response?: { status: number; data: { error: { message: string } } };
+        statusText?: string;
+        message?: string;
+      };
+
+      if (knownError?.response?.status === 402 && backupServicePrice) {
+        customText = getPaymentError(
+          t,
+          isPayer ?? false,
+          walletCustomerEmail ?? "",
+          backupServicePrice,
+        );
+      }
+
+      const message = getErrorInfo(err, t, customText);
+      setErrorMessage(message);
+      setBackupProgressError("error");
+      setDownloadingProgress(100);
       console.error(err);
     }
   };
@@ -268,15 +368,17 @@ const ManualBackup = ({
     buttonSize,
   };
 
-  const roomName = rootFoldersTitles[FolderType.USER]?.title;
-
   if (isEmptyContentBeforeLoader && !isInitialLoading) return null;
 
   if (isInitialLoading) return <DataBackupLoader />;
 
+  const mainDisabled = !isMaxProgress || pageIsDisabled;
+  const additionalDisabled =
+    !isMaxProgress || isNotPaidPeriod || pageIsDisabled;
+
   return (
     <div className={styles.manualBackup}>
-      <StatusMessage message={errorInformation} />
+      <StatusMessage message={errorMessage || errorInformation} />
       <div
         className={classNames(
           styles.backupModulesHeaderWrapper,
@@ -299,6 +401,7 @@ const ManualBackup = ({
             fontSize="13px"
             color={currentColorScheme?.main?.accent}
             isHovered
+            dataTestId="creating_backup_learn_link"
           >
             {t("Common:LearnMore")}
           </Link>
@@ -306,59 +409,72 @@ const ManualBackup = ({
       </div>
 
       <div className={styles.modules}>
-        <RadioButton
-          key={0}
-          id="temporary-storage"
-          label={t("Common:TemporaryStorage")}
-          name={TEMPORARY_STORAGE}
-          isChecked={isCheckedTemporaryStorage}
-          isDisabled={!isMaxProgress || pageIsDisabled}
-          {...commonRadioButtonProps}
-        />
-        <Text
-          className={classNames(styles.backupDescription, "backup-description")}
+        <div
+          className={classNames(styles.modules, {
+            [styles.isDisabled]: mainDisabled,
+          })}
         >
-          {t("Common:TemporaryStorageDescription")}
-        </Text>
-        {isCheckedTemporaryStorage ? (
-          <div
+          <RadioButton
+            key={0}
+            id="temporary-storage"
+            label={t("Common:TemporaryStorage")}
+            name={TEMPORARY_STORAGE}
+            isChecked={isCheckedTemporaryStorage}
+            isDisabled={mainDisabled}
+            {...commonRadioButtonProps}
+            testId="temporary_storage_radio_button"
+          />
+          <Text
             className={classNames(
-              styles.manualBackupButtons,
-              "manual-backup_buttons",
+              styles.backupDescription,
+              "backup-description",
             )}
           >
-            <Button
-              id="create-button"
-              label={t("Common:Create")}
-              onClick={onMakeTemporaryBackup}
-              primary
-              isDisabled={!isMaxProgress || pageIsDisabled}
-              size={buttonSize}
-            />
-            {temporaryLink && temporaryLink.length > 0 && isMaxProgress ? (
+            {t("Common:TemporaryStorageDescription")}
+          </Text>
+          {isCheckedTemporaryStorage ? (
+            <div
+              className={classNames(
+                styles.manualBackupButtons,
+                "manual-backup_buttons",
+              )}
+            >
               <Button
-                id="download-copy"
-                label={t("Common:DownloadCopy")}
-                onClick={onClickDownloadBackup}
-                isDisabled={pageIsDisabled}
+                id="create-button"
+                label={t("Common:Create")}
+                onClick={onMakeTemporaryBackup}
+                primary
+                isDisabled={mainDisabled}
                 size={buttonSize}
-                style={{ marginInlineStart: "8px" }}
+                testId="create_temporary_backup_button"
               />
-            ) : null}
-            {!isMaxProgress ? (
-              <Button
-                label={`${t("Common:CopyOperation")} ...`}
-                isDisabled
-                size={buttonSize}
-                style={{ marginInlineStart: "8px" }}
-              />
-            ) : null}
-          </div>
-        ) : null}
+              {temporaryLink && temporaryLink.length > 0 && isMaxProgress ? (
+                <Button
+                  id="download-copy"
+                  label={t("Common:DownloadCopy")}
+                  onClick={onClickDownloadBackup}
+                  isDisabled={pageIsDisabled}
+                  size={buttonSize}
+                  style={{ marginInlineStart: "8px" }}
+                  testId="download_temporary_copy_button"
+                />
+              ) : null}
+              {!isMaxProgress ? (
+                <Button
+                  label={`${t("Common:CopyOperation")} ...`}
+                  isDisabled
+                  size={buttonSize}
+                  style={{ marginInlineStart: "8px" }}
+                  testId="copy_temporary_operation_button"
+                />
+              ) : null}
+            </div>
+          ) : null}
+        </div>
       </div>
       <div
         className={classNames(styles.modules, {
-          [styles.isDisabled]: isNotPaidPeriod,
+          [styles.isDisabled]: additionalDisabled,
         })}
       >
         <RadioButton
@@ -367,18 +483,20 @@ const ManualBackup = ({
           name={DOCUMENTS}
           key={1}
           isChecked={isCheckedDocuments}
-          isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}
+          isDisabled={additionalDisabled}
           {...commonRadioButtonProps}
+          testId="backup_room_radio_button"
         />
         <Text
           className={classNames(
             styles.backupDescription,
             "backup-description module-documents",
+            { [styles.disabled]: additionalDisabled },
           )}
         >
-          <Trans t={t} i18nKey="RoomsModuleDescription" ns="Common">
-            {{ roomName }}
-          </Trans>
+          {t("Common:RoomsModuleDescription", {
+            roomName: t("Common:MyDocuments"),
+          })}
         </Text>
         {isCheckedDocuments ? (
           <RoomsModule
@@ -398,7 +516,7 @@ const ManualBackup = ({
 
       <div
         className={classNames(styles.modules, {
-          [styles.isDisabled]: isNotPaidPeriod,
+          [styles.isDisabled]: additionalDisabled,
         })}
       >
         <RadioButton
@@ -407,8 +525,9 @@ const ManualBackup = ({
           name={THIRD_PARTY_RESOURCE}
           key={2}
           isChecked={isCheckedThirdParty}
-          isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}
+          isDisabled={additionalDisabled}
           {...commonRadioButtonProps}
+          testId="third_party_resource_radio_button"
         />
         <Text
           className={classNames(styles.backupDescription, "backup-description")}
@@ -447,7 +566,7 @@ const ManualBackup = ({
       </div>
       <div
         className={classNames(styles.modules, {
-          [styles.isDisabled]: isNotPaidPeriod,
+          [styles.isDisabled]: additionalDisabled,
         })}
       >
         <RadioButton
@@ -456,8 +575,9 @@ const ManualBackup = ({
           name={THIRD_PARTY_STORAGE}
           key={3}
           isChecked={isCheckedThirdPartyStorage}
-          isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}
+          isDisabled={additionalDisabled}
           {...commonRadioButtonProps}
+          testId="third_party_storage_radio_button"
         />
         <Text
           className={classNames(styles.backupDescription, "backup-description")}
@@ -482,6 +602,7 @@ const ManualBackup = ({
             isMaxProgress={isMaxProgress}
             onMakeCopy={onMakeCopy}
             buttonSize={buttonSize}
+            isThirdPartyAvailable={isThirdPartyAvailable ?? true}
           />
         ) : null}
       </div>

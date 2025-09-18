@@ -89,7 +89,9 @@ const ModalDialog = ({
   withBodyScroll = false,
   containerVisible = false,
   withoutPadding = false,
+  withoutHeaderMargin = false,
   hideContent = false,
+  dataTestId,
 
   ...rest
 }: ModalDialogProps) => {
@@ -203,7 +205,9 @@ const ModalDialog = ({
           isCloseable={isCloseable ? !embedded : false}
           embedded={embedded}
           withoutPadding={withoutPadding}
+          withoutHeaderMargin={withoutHeaderMargin}
           hideContent={hideContent}
+          dataTestId={dataTestId}
           {...rest}
         />
       }

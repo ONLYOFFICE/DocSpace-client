@@ -23,21 +23,15 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+
+import React, { useEffect, useLayoutEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { getSettingsThirdParty } from "@docspace/shared/api/files";
-import {
-  getBackupStorage,
-  getStorageRegions,
-} from "@docspace/shared/api/settings";
-
-import { toastr } from "@docspace/shared/components/toast";
 import { isManagement } from "@docspace/shared/utils/common";
 import ManualBackup from "@docspace/shared/pages/backup/manual-backup";
-import { isObjectEmpty } from "@docspace/shared/utils/isObjectEmpty";
 import type { ThirdPartyAccountType } from "@docspace/shared/types";
+import { getBackupsCount } from "@docspace/shared/api/backup";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
@@ -49,21 +43,17 @@ import type {
 
 const ManualBackupWrapper = ({
   isNotPaidPeriod,
-  rootFoldersTitles,
-  getProgress,
-  fetchTreeFolders,
-  setStorageRegions,
-  setThirdPartyStorage,
   resetDownloadingProgress,
   setConnectedThirdPartyAccount,
+  setBackupsCount,
+  setIsInited,
+  isBackupPaid,
+  setDownloadingProgress,
+  setIsEmptyContentBeforeLoader,
+  isEmptyContentBeforeLoader,
+  isInitialLoading,
   ...props
 }: ManualBackupWrapperProps) => {
-  const [isInitialLoading, setIsInitialLoading] = useState(false);
-  const [isEmptyContentBeforeLoader, setIsEmptyContentBeforeLoader] =
-    useState(true);
-
-  const timerId = useRef<number>(null);
-
   const { t } = useTranslation(["Settings", "Common"]);
 
   useLayoutEffect(() => {
@@ -72,66 +62,31 @@ const ManualBackupWrapper = ({
 
   useEffect(() => {
     if (isNotPaidPeriod) return setIsEmptyContentBeforeLoader(false);
-
-    timerId.current = window.setTimeout(() => {
-      setIsInitialLoading(true);
-    }, 200);
-
-    (async () => {
-      try {
-        getProgress(t);
-
-        const baseRequests = [
-          getSettingsThirdParty(),
-          getBackupStorage(),
-          getStorageRegions(),
-        ] as const;
-
-        const optionalRequests = [];
-
-        if (isObjectEmpty(rootFoldersTitles)) {
-          optionalRequests.push(fetchTreeFolders());
-        }
-
-        const [account, backupStorage, storageRegionsS3] = await Promise.all([
-          ...baseRequests,
-          ...optionalRequests,
-        ]);
-
-        setConnectedThirdPartyAccount(account ?? null);
-        setThirdPartyStorage(backupStorage);
-        setStorageRegions(storageRegionsS3);
-      } catch (error) {
-        toastr.error(error as Error);
-      } finally {
-        if (timerId.current) {
-          window.clearTimeout(timerId.current);
-          timerId.current = null;
-        }
-
-        setIsInitialLoading(false);
-        setIsEmptyContentBeforeLoader(false);
-      }
-    })();
   }, []);
 
   useEffect(() => {
     return () => {
-      if (timerId.current) {
-        window.clearTimeout(timerId.current);
-        timerId.current = null;
-      }
       resetDownloadingProgress();
+      setIsInited(false);
     };
   }, []);
+
+  const updateDownloadingProgress = async (progress: number) => {
+    if (progress === 100 && isBackupPaid) {
+      const backupsCount = await getBackupsCount();
+      setBackupsCount(backupsCount);
+    }
+
+    setDownloadingProgress(progress);
+  };
 
   return (
     <ManualBackup
       isNotPaidPeriod={isNotPaidPeriod}
       isInitialLoading={isInitialLoading}
-      rootFoldersTitles={rootFoldersTitles}
       isEmptyContentBeforeLoader={isEmptyContentBeforeLoader}
       setConnectedThirdPartyAccount={setConnectedThirdPartyAccount}
+      setDownloadingProgress={updateDownloadingProgress}
       {...props}
     />
   );
@@ -148,9 +103,10 @@ export default inject<
     settingsStore,
     dialogsStore,
     currentTariffStatusStore,
-    treeFoldersStore,
     thirdPartyStore,
     filesSettingsStore,
+    currentQuotaStore,
+    paymentStore,
   }) => {
     const {
       accounts,
@@ -173,14 +129,11 @@ export default inject<
       setBackupProgressError,
 
       isFormReady,
-      getProgress,
       setTemporaryLink,
       getStorageParams,
       clearLocalStorage,
-      setStorageRegions,
       saveToLocalStorage,
-      setThirdPartyStorage,
-      setErrorInformation,
+
       resetDownloadingProgress,
       setCompletedFormFields,
       addValueInFormSettings,
@@ -191,8 +144,13 @@ export default inject<
       setThirdPartyAccountsInfo,
       setSelectedThirdPartyAccount,
       setConnectedThirdPartyAccount,
+      setBackupsCount,
+      setIsInited,
+
+      backupPageEnable,
     } = backup;
 
+    const { isPayer, backupServicePrice } = paymentStore;
     const {
       newPath,
       basePath,
@@ -213,18 +171,21 @@ export default inject<
       setDeleteThirdPartyDialogVisible,
     } = dialogsStore;
 
-    const { isNotPaidPeriod } = currentTariffStatusStore;
-    const { rootFoldersTitles, fetchTreeFolders } = treeFoldersStore;
+    const { isNotPaidPeriod, walletCustomerEmail } = currentTariffStatusStore;
+
     const {
       providers,
       deleteThirdParty,
       setThirdPartyProviders,
       openConnectWindow,
     } = thirdPartyStore;
+    const { isBackupPaid, isThirdPartyAvailable } = currentQuotaStore;
 
     const { getIcon, filesSettings } = filesSettingsStore;
 
-    const pageIsDisabled = isManagement() && portals?.length === 1;
+    const pageIsDisabled = isManagement()
+      ? portals?.length === 1 || !backupPageEnable
+      : !backupPageEnable;
 
     // TODO: fix may be an empty object!!!
     const removeItem = (selectedThirdPartyAccount ??
@@ -263,14 +224,11 @@ export default inject<
       setBackupProgressError,
 
       isFormReady,
-      getProgress,
       setTemporaryLink,
       getStorageParams,
       clearLocalStorage,
-      setStorageRegions,
       saveToLocalStorage,
-      setErrorInformation,
-      setThirdPartyStorage,
+
       resetDownloadingProgress,
       setCompletedFormFields,
       addValueInFormSettings,
@@ -305,9 +263,8 @@ export default inject<
       // currentTariffStatusStore
       isNotPaidPeriod,
 
-      // treeFoldersStore
-      rootFoldersTitles,
-      fetchTreeFolders,
+      // currentQuotaStore
+      isBackupPaid,
 
       // thirdPartyStore
       providers,
@@ -316,6 +273,16 @@ export default inject<
       openConnectWindow,
       // filesSettingsStore
       settingsFileSelector,
+
+      setBackupsCount,
+
+      setIsInited,
+
+      isPayer,
+      walletCustomerEmail,
+      isThirdPartyAvailable,
+
+      backupServicePrice,
     };
   },
 )(observer(ManualBackupWrapper as React.FC<ExternalManualBackupProps>));

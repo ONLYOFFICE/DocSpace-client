@@ -79,6 +79,7 @@ class ConsumerModalDialog extends React.Component {
           isHovered={false}
           target="_blank"
           href={this.thirdPartyServicesUrl()}
+          dataTestId="dialog_help_center_link"
         >
           Help Center
         </Link>
@@ -96,6 +97,7 @@ class ConsumerModalDialog extends React.Component {
             isHovered={false}
             target="_blank"
             href={feedbackAndSupportUrl}
+            dataTestId="dialog_support_team_link"
           >
             Support Team
           </Link>
@@ -204,6 +206,7 @@ class ConsumerModalDialog extends React.Component {
       smsclUrl,
       firebaseUrl,
       appleIDUrl,
+      weixinUrl,
       telegramUrl,
       wordpressUrl,
       awsUrl,
@@ -241,6 +244,8 @@ class ConsumerModalDialog extends React.Component {
         return firebaseUrl;
       case "appleID":
         return appleIDUrl;
+      case "weixin":
+        return weixinUrl;
       case "telegram":
         return telegramUrl;
       case "wordpress":
@@ -291,6 +296,7 @@ class ConsumerModalDialog extends React.Component {
               isDisabled={isLoading}
               onChange={onChangeHandler}
               maxLength={maxLength[item.name] ?? defaultMaxLength}
+              testId={`${item.name}_input`}
             />
           </div>
         </div>
@@ -338,6 +344,7 @@ class ConsumerModalDialog extends React.Component {
             isDisabled={isLoading || isDisabled}
             scale
             onClick={updateConsumerValues}
+            testId="consumer_dialog_enable_button"
           />
           <Button
             size="normal"
@@ -347,6 +354,7 @@ class ConsumerModalDialog extends React.Component {
             isLoading={isLoading}
             isDisabled={isLoading}
             onClick={onModalClose}
+            testId="consumer_dialog_cancel_button"
           />
         </ModalDialog.Footer>
       </ModalDialog>
@@ -383,6 +391,7 @@ export default inject(({ setup, settingsStore }) => {
     smsclUrl,
     firebaseUrl,
     appleIDUrl,
+    weixinUrl,
     telegramUrl,
     wordpressUrl,
     awsUrl,
@@ -413,6 +422,7 @@ export default inject(({ setup, settingsStore }) => {
     smsclUrl,
     firebaseUrl,
     appleIDUrl,
+    weixinUrl,
     telegramUrl,
     wordpressUrl,
     awsUrl,

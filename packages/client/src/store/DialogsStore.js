@@ -35,6 +35,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import TrashIconSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import PenSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import UploadSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
+import { ROOM_ACTION_KEYS } from "@docspace/shared/constants";
 
 import {
   getRoomCovers,
@@ -98,8 +99,6 @@ class DialogsStore {
   inviteQuotaWarningDialogVisible = false;
 
   changeQuotaDialogVisible = false;
-
-  unsavedChangesDialogVisible = false;
 
   moveToPublicRoomVisible = false;
 
@@ -178,6 +177,9 @@ class DialogsStore {
 
   submitToGalleryDialogVisible = false;
 
+  /**
+   * @type {?import("@docspace/shared/types").LinkParamsType}
+   */
   linkParams = null;
 
   leaveRoomDialogVisible = false;
@@ -216,8 +218,6 @@ class DialogsStore {
   warningQuotaDialogVisible = false;
 
   isNewQuotaItemsByCurrentUser = false;
-
-  guestReleaseTipDialogVisible = false;
 
   covers = null;
 
@@ -302,6 +302,10 @@ class DialogsStore {
 
   socialAuthWelcomeDialogVisible = false;
 
+  connectAccountDialogVisible = false;
+
+  disconnectAccountDialogVisible = false;
+
   constructor(
     authStore,
     treeFoldersStore,
@@ -332,10 +336,6 @@ class DialogsStore {
 
   setNewFilesPanelFolderId = (folderId) => {
     this.newFilesPanelFolderId = folderId;
-  };
-
-  setGuestReleaseTipDialogVisible = (visible) => {
-    this.guestReleaseTipDialogVisible = visible;
   };
 
   setEditRoomDialogProps = (props) => {
@@ -784,12 +784,11 @@ class DialogsStore {
     this.formItem = formItem;
   };
 
+  /**
+   * @param {import("@docspace/shared/types").LinkParamsType} linkParams
+   */
   setLinkParams = (linkParams) => {
     this.linkParams = linkParams;
-  };
-
-  setUnsavedChangesDialog = (unsavedChangesDialogVisible) => {
-    this.unsavedChangesDialogVisible = unsavedChangesDialogVisible;
   };
 
   setEditLinkPanelIsVisible = (editLinkPanelIsVisible) => {
@@ -971,7 +970,7 @@ class DialogsStore {
       {
         label: t("RoomLogoCover:UploadPicture"),
         icon: UploadSvgUrl,
-        key: "upload",
+        key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_UPLOAD,
         onClick: (ref) => ref.current.click(),
       },
 
@@ -979,13 +978,13 @@ class DialogsStore {
         ? {
             label: t("Common:Delete"),
             icon: TrashIconSvgUrl,
-            key: "delete",
+            key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_DELETE,
             onClick: onDelete ? onDelete() : () => this.deleteRoomLogo(),
           }
         : {
             label: t("RoomLogoCover:CustomizeCover"),
             icon: PenSvgUrl,
-            key: "cover",
+            key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_CUSTOMIZE_COVER,
             onClick: () => this.setRoomLogoCoverDialogVisible(true),
           },
     ];
@@ -1034,6 +1033,14 @@ class DialogsStore {
 
   setSocialAuthWelcomeDialogVisible = (visible) => {
     this.socialAuthWelcomeDialogVisible = visible;
+  };
+
+  setConnectAccountDialogVisible = (visible) => {
+    this.connectAccountDialogVisible = visible;
+  };
+
+  setDisconnectAccountDialogVisible = (visible) => {
+    this.disconnectAccountDialogVisible = visible;
   };
 }
 

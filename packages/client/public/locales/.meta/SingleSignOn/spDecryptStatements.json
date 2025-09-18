@@ -3,7 +3,7 @@
   "content": "Decrypt Assertions",
   "content_en_sha1_hash": "eaebd6a20f344646b8d0e78e11449954b24a719a",
   "created_at": "2025-05-19T21:30:50.160Z",
-  "updated_at": "2025-05-24T03:04:56.602Z",
+  "updated_at": "2025-08-11T18:11:59.266Z",
   "comment": {
     "text": "Decrypt statements are presented as a checkbox label to enable or disable encryption of assertions during single sign-on integration. This key is used in UI components, such as checkboxes, where users can toggle this setting.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/CheckboxSet.js",
-      "line_number": 140,
-      "context": "<Checkbox\n id=\"sp-encrypt-assertions\"\n className=\"checkbox-input\"\n isDisabled={isDisabledSpEncrypt}\n onChange={setCheckbox}\n label={t(\"spDecryptStatements\")}\n name={checkboxesNames[prefix][3]}\n tabIndex={13}\n isChecked={spEncryptAssertions}\n />\n ) : null}",
+      "line_number": 161,
+      "context": "<Checkbox\n id=\"sp-encrypt-assertions\"\n className=\"checkbox-input\"\n isDisabled={isDisabledSpEncrypt}\n onChange={setCheckbox}\n label={t(\"spDecryptStatements\")}\n name={checkboxesNames[prefix][3]}\n tabIndex={13}\n isChecked={spEncryptAssertions}\n dataTestId={checkboxesDataTestId.encryptAssertionCheckbox[prefix]}\n />",
       "module": "/packages/client"
     }
   ],

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useRef } from "react";
+import { useRef, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 import { decode } from "he";
@@ -39,6 +39,7 @@ import {
   ContextMenu,
   ContextMenuRefType,
 } from "@docspace/shared/components/context-menu";
+import { HeaderType } from "@docspace/shared/components/context-menu/ContextMenu.types";
 import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
 import { Badge } from "@docspace/shared/components/badge";
 import { getUserAvatarRoleByType } from "@docspace/shared/utils/common";
@@ -110,6 +111,17 @@ const ItemTitle = ({
 
   const role = getUserAvatarRoleByType(userSelection.role);
 
+  const contextMenuHeader = useMemo((): HeaderType | undefined => {
+    if (!userSelection) return undefined;
+
+    return {
+      title: displayName || userSelection.email || "",
+      avatar: userAvatar || DefaultUserPhoto,
+      logo: "",
+      icon: "",
+    };
+  }, [userSelection, displayName, userAvatar]);
+
   return (
     <div className={styles.userTitle} ref={itemTitleRef}>
       <Avatar
@@ -118,6 +130,7 @@ const ItemTitle = ({
         size={AvatarSize.big}
         source={userAvatar}
         noClick
+        dataTestId="info_panel_contacts_user_avatar"
       />
       <div className={styles.infoText}>
         <div className={styles.infoWrapper}>
@@ -196,6 +209,8 @@ const ItemTitle = ({
         model={contextOptions || []}
         getContextModel={getData}
         withBackdrop
+        baseZIndex={310}
+        header={contextMenuHeader}
       />
       {contextOptions.length ? (
         <ContextMenuButton

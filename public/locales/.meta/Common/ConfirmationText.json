@@ -3,7 +3,7 @@
   "content": "All the data you entered will be lost. Are you sure you want to continue?",
   "content_en_sha1_hash": "e99a68715daa80c6d8b8fffc16f35951fc75370e",
   "created_at": "2025-05-19T21:30:43.634Z",
-  "updated_at": "2025-05-26T07:57:32.325Z",
+  "updated_at": "2025-08-12T19:46:25.937Z",
   "comment": {
     "text": "This translation key is used to display a confirmation message when a user wants to reset data, warning them that all entered data will be lost. It appears in a modal dialog footer and is translated from the English content \"All the data you entered will be lost. Are you sure you want to continue?\".",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/ResetConfirmationDialog/ResetConfirmationModal.js",
       "line_number": 47,
-      "context": "visible={confirmationResetModal}\n >\n <ModalDialog.Header>{t(\"Common:Confirmation\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <Text noSelect>{t(\"Common:ConfirmationText\")}</Text>\n </ModalDialog.Body>\n \n <ModalDialog.Footer>\n <Button\n id=\"ok-button\"",
+      "context": "visible={confirmationResetModal}\n >\n <ModalDialog.Header>{t(\"Common:Confirmation\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <Text>{t(\"Common:ConfirmationText\")}</Text>\n </ModalDialog.Body>\n \n <ModalDialog.Footer>\n <Button\n id=\"ok-button\"",
       "module": "/packages/client"
     }
   ],

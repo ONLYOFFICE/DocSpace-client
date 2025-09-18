@@ -27,7 +27,6 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Text } from "@docspace/shared/components/text";
 import { mobile } from "@docspace/shared/utils";
 
 import EmptyScreenPluginsUrl from "PUBLIC_DIR/images/emptyview/empty.plugins.light.svg?url";
@@ -37,6 +36,7 @@ import EmptyFolderContainer from "SRC_DIR/components/EmptyContainer/EmptyContain
 import { PluginsEmptyScreen } from "../Plugins.types";
 
 import Dropzone from "./Dropzone";
+import UploadDescription from "./UploadDescription";
 
 const StyledEmptyScreen = styled(EmptyFolderContainer)`
   .ec-buttons {
@@ -56,7 +56,14 @@ const StyledEmptyScreen = styled(EmptyFolderContainer)`
   }
 `;
 
-const EmptyScreen = ({ t, theme, withUpload, onDrop }: PluginsEmptyScreen) => {
+const EmptyScreen = ({
+  t,
+  theme,
+  withUpload,
+  onDrop,
+  apiPluginSDKLink,
+  currentColorScheme,
+}: PluginsEmptyScreen) => {
   const imageSrc = theme.isBase
     ? EmptyScreenPluginsUrl
     : EmptyScreenPluginsDarkUrl;
@@ -65,11 +72,13 @@ const EmptyScreen = ({ t, theme, withUpload, onDrop }: PluginsEmptyScreen) => {
     <StyledEmptyScreen
       headerText={t("NoPlugins")}
       descriptionText={
-        <Text>
-          {withUpload
-            ? t("UploadDescription", { productName: t("Common:ProductName") })
-            : null}
-        </Text>
+        withUpload ? (
+          <UploadDescription
+            apiPluginSDKLink={apiPluginSDKLink}
+            t={t}
+            currentColorScheme={currentColorScheme}
+          />
+        ) : null
       }
       style={{ gridColumnGap: "39px" }}
       buttonStyle={{ marginTop: "16px" }}
@@ -80,6 +89,7 @@ const EmptyScreen = ({ t, theme, withUpload, onDrop }: PluginsEmptyScreen) => {
             isDisabled={!withUpload}
             isLoading={false}
             onDrop={onDrop}
+            dataTestId="upload_plugin_dropzone"
           />
         ) : null
       }

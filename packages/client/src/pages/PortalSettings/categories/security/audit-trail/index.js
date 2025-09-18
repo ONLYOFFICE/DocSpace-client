@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { inject } from "mobx-react";
@@ -38,18 +38,13 @@ import { Table } from "./TableView/TableView";
 import AuditRowContainer from "./RowView/AuditRowContainer";
 import HistoryMainContent from "../sub-components/HistoryMainContent";
 
-import AuditTrailLoader from "./AuditTrailLoader";
-
-let timerId = null;
 const AuditTrail = (props) => {
   const {
     t,
-    getAuditTrail,
     auditTrailUsers,
     theme,
     viewAs,
     setLifetimeAuditSettings,
-    getLifetimeAuditSettings,
     getAuditTrailReport,
     securityLifetime,
     isAuditAvailable,
@@ -57,25 +52,8 @@ const AuditTrail = (props) => {
     resetIsInit,
   } = props;
 
-  const [isLoading, setIsLoading] = useState(!auditTrailUsers.length);
-  const [isShowLoader, setIShowLoader] = useState(false);
-  const initAudit = async () => {
-    timerId = setTimeout(() => {
-      if (!auditTrailUsers.length) setIShowLoader(true);
-    }, 500);
-
-    await getAuditTrail();
-
-    clearTimeout(timerId);
-    timerId = null;
-    setIShowLoader(false);
-    setIsLoading(false);
-  };
-
   useEffect(() => {
     setDocumentTitle(t("AuditTrailNav"));
-    initAudit();
-    getLifetimeAuditSettings();
 
     return () => resetIsInit();
   }, []);
@@ -103,12 +81,6 @@ const AuditTrail = (props) => {
       </div>
     );
   };
-
-  if (isShowLoader) {
-    return <AuditTrailLoader />;
-  }
-
-  if (isLoading) return null;
 
   if (auditTrailUsers.length === 0) {
     return (
@@ -142,7 +114,7 @@ const AuditTrail = (props) => {
         content={getContent()}
         downloadReport={t("DownloadReportBtnText")}
         downloadReportDescription={t("ReportSaveLocation", {
-          sectionName: t("Common:MyFilesSection"),
+          sectionName: t("Common:MyDocuments"),
         })}
         getReport={getAuditTrailReport}
         isSettingNotPaid={!isAuditAvailable}
@@ -154,10 +126,8 @@ const AuditTrail = (props) => {
 
 export default inject(({ setup, settingsStore, currentQuotaStore }) => {
   const {
-    getAuditTrail,
     security,
     viewAs,
-    getLifetimeAuditSettings,
     setLifetimeAuditSettings,
     getAuditTrailReport,
     securityLifetime,
@@ -168,11 +138,9 @@ export default inject(({ setup, settingsStore, currentQuotaStore }) => {
   const { theme } = settingsStore;
   const { isAuditAvailable } = currentQuotaStore;
   return {
-    getAuditTrail,
     auditTrailUsers: security.auditTrail.users,
     theme,
     viewAs,
-    getLifetimeAuditSettings,
     setLifetimeAuditSettings,
     getAuditTrailReport,
     securityLifetime,

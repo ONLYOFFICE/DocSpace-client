@@ -240,12 +240,25 @@ const GlobalEvents = ({
       if (!enablePlugins) return;
 
       const { payload } = e;
+
+      const onClose = () => {
+        payload.onClose && payload.onClose();
+        setCreatePluginFileProps({
+          visible: false,
+          onClose: null,
+        });
+      };
+
       setCreatePluginFileProps({
         ...payload,
         visible: true,
-        onClose: () => {
-          payload.onClose && payload.onClose();
-          setCreatePluginFileProps({ visible: false, onClose: null });
+        onClose,
+        updateCreatePluginFileProps: (newProps) => {
+          setCreatePluginFileProps((prevProps) => ({
+            ...prevProps,
+            ...newProps,
+            onClose,
+          }));
         },
       });
     },

@@ -92,7 +92,7 @@ const RemovePortalForm = ({
       <Trans t={t} i18nKey="SuccessRemoved" ns="Confirm">
         Your account has been successfully removed. In 10 seconds you will be
         redirected to the
-        <Link isHovered href={url}>
+        <Link isHovered href={url} dataTestId="redirect_site_link">
           site
         </Link>
       </Trans>
@@ -112,6 +112,7 @@ const RemovePortalForm = ({
           label={t("Common:Delete")}
           tabIndex={1}
           onClick={onDeleteClick}
+          testId="delete_portal_button"
         />
         <Button
           scale
@@ -119,6 +120,7 @@ const RemovePortalForm = ({
           label={t("Common:CancelButton")}
           tabIndex={1}
           onClick={onCancelClick}
+          testId="cancel_button"
         />
       </ButtonsWrapper>
     </>

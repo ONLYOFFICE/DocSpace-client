@@ -63,6 +63,7 @@ const LanguageFilter = ({
   languageFilterLoaded,
   oformsLocal,
   isMobileView,
+  isShowInitSkeleton,
 }) => {
   const onFilterByLocale = async (newLocale) => {
     const key = getOformLocaleByIndex(newLocale.index, oformLocales);
@@ -80,6 +81,7 @@ const LanguageFilter = ({
   }, [oformLocales, oformLocales?.length]);
 
   if (
+    isShowInitSkeleton ||
     filterOformsByLocaleIsLoading ||
     !(categoryFilterLoaded && languageFilterLoaded)
   )

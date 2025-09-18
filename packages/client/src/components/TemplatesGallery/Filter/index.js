@@ -113,7 +113,8 @@ export const StyledFilter = styled.div.attrs(injectDefaultTheme)`
 `;
 
 const SectionFilterContent = (props) => {
-  const { setShowOneTile, isShowOneTile, viewMobile } = props;
+  const { setShowOneTile, isShowOneTile, viewMobile, isShowInitSkeleton } =
+    props;
 
   const onClickViewChange = () => {
     setShowOneTile(!isShowOneTile);
@@ -122,8 +123,8 @@ const SectionFilterContent = (props) => {
   return (
     <StyledFilter>
       <div className="form-only-filters">
-        <CategoryFilter />
-        <LanguageFilter />
+        <CategoryFilter isShowInitSkeleton={isShowInitSkeleton} />
+        <LanguageFilter isShowInitSkeleton={isShowInitSkeleton} />
       </div>
       <div className="general-filters">
         <SearchFilter />

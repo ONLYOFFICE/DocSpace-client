@@ -50,7 +50,7 @@ const Tiles: FC<TilesProps> = ({
   viewMobile,
   onCreateOform,
   setTemplatesGalleryVisible,
-  isInitLoading,
+  isShowInitSkeleton,
 }) => {
   const navigate = useNavigate();
 
@@ -105,14 +105,14 @@ const Tiles: FC<TilesProps> = ({
 
   return (
     <StyledTileContainer className="tile-container">
-      {viewMobile && !isInitLoading ? submitToGalleryTileNode : null}
+      {viewMobile && !isShowInitSkeleton ? submitToGalleryTileNode : null}
       <InfiniteGrid
         isShowOneTile={isShowOneTile}
         smallPreview={smallPreview}
-        showLoading={isInitLoading}
+        showLoading={isShowInitSkeleton}
       >
-        {viewMobile && !isInitLoading ? null : submitToGalleryTileNode}
-        {isInitLoading
+        {viewMobile && !isShowInitSkeleton ? null : submitToGalleryTileNode}
+        {isShowInitSkeleton
           ? null
           : oformFiles.map((item: { id: Key | null | undefined }) => {
               return (

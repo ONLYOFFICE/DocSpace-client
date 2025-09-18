@@ -49,7 +49,7 @@ import Tiles from "../Tiles";
 
 interface TilesContainerOwnProps {
   ext: string;
-  isInitLoading: boolean;
+  isShowInitSkeleton?: boolean;
 }
 
 interface TilesContainerInjectedProps {
@@ -64,7 +64,7 @@ interface TilesContainerProps
 
 const TilesContainer: FC<TilesContainerProps> = ({
   ext,
-  isInitLoading,
+  isShowInitSkeleton,
   hasGalleryFiles,
   resetFilters,
   t,
@@ -94,8 +94,9 @@ const TilesContainer: FC<TilesContainerProps> = ({
         isShowOneTile={isShowOneTile}
         setShowOneTile={setShowOneTile}
         viewMobile={viewMobile}
+        isShowInitSkeleton={isShowInitSkeleton}
       />
-      {!hasGalleryFiles && !isInitLoading ? (
+      {!hasGalleryFiles && !isShowInitSkeleton ? (
         <EmptyScreenContainer
           imageSrc={
             isBase ? EmptyScreenFilterAltSvgUrl : EmptyScreenFilterAltDarkSvgUrl
@@ -135,7 +136,7 @@ const TilesContainer: FC<TilesContainerProps> = ({
             isShowOneTile={isShowOneTile}
             smallPreview={ext === ".pptx" || ext === ".xlsx"}
             viewMobile={viewMobile}
-            isInitLoading={isInitLoading}
+            isShowInitSkeleton={isShowInitSkeleton}
           />
         </Scrollbar>
       ) : (
@@ -147,7 +148,7 @@ const TilesContainer: FC<TilesContainerProps> = ({
           <Tiles
             isShowOneTile={false}
             smallPreview={ext === ".pptx" || ext === ".xlsx"}
-            isInitLoading={isInitLoading}
+            isShowInitSkeleton={isShowInitSkeleton}
           />
         </Scrollbar>
       )}

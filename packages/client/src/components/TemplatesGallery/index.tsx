@@ -49,6 +49,9 @@ const TemplateGallery = (props: {
   oformsLoadError: boolean;
   setSubmitToGalleryDialogVisible: (isVisible: boolean) => void;
   t: TTranslation;
+  filterOformsByLocaleIsLoading: boolean;
+  categoryFilterLoaded: boolean;
+  languageFilterLoaded: boolean;
 }) => {
   const {
     templatesGalleryVisible,
@@ -59,10 +62,14 @@ const TemplateGallery = (props: {
     oformsLoadError,
     setSubmitToGalleryDialogVisible,
     t,
+    filterOformsByLocaleIsLoading,
+    categoryFilterLoaded,
+    languageFilterLoaded,
   } = props;
   const [viewMobile, setViewMobile] = useState(false);
   const [currentTabId, setCurrentTabId] = useState("documents");
   const [isInitLoading, setIsInitLoading] = useState(true);
+  const [isShowInitSkeleton, setShowInitSkeleton] = useState(true);
 
   const getData = async (ext: string) => await resetFilters(ext);
 
@@ -70,29 +77,46 @@ const TemplateGallery = (props: {
     initTemplateGallery().then(() => setIsInitLoading(false));
   }, []);
 
+  useEffect(() => {
+    if (
+      !isInitLoading &&
+      !filterOformsByLocaleIsLoading &&
+      categoryFilterLoaded &&
+      languageFilterLoaded
+    )
+      setShowInitSkeleton(false);
+  }, [
+    isInitLoading,
+    filterOformsByLocaleIsLoading,
+    categoryFilterLoaded,
+    languageFilterLoaded,
+  ]);
+
   const tabs = [
     {
       id: "documents",
       name: "Documents",
-      content: <TilesContainer ext=".docx" isInitLoading={isInitLoading} />,
+      content: (
+        <TilesContainer ext=".docx" isShowInitSkeleton={isShowInitSkeleton} />
+      ),
       onClick: async () => await getData(".docx"),
     },
     {
       id: "spreadsheet",
       name: "Spreadsheet",
-      content: <TilesContainer ext=".xlsx" isInitLoading={false} />,
+      content: <TilesContainer ext=".xlsx" />,
       onClick: async () => await getData(".xlsx"),
     },
     {
       id: "presentation",
       name: "Presentation",
-      content: <TilesContainer ext=".pptx" isInitLoading={false} />,
+      content: <TilesContainer ext=".pptx" />,
       onClick: async () => await getData(".pptx"),
     },
     {
       id: "forms",
       name: "Forms",
-      content: <TilesContainer ext=".pdf" isInitLoading={false} />,
+      content: <TilesContainer ext=".pdf" />,
       onClick: async () => await getData(".pdf"),
     },
   ];
@@ -217,6 +241,9 @@ export default inject<TStore>(({ oformsStore, dialogsStore }) => {
     resetFilters,
     initTemplateGallery,
     oformsLoadError,
+    filterOformsByLocaleIsLoading,
+    categoryFilterLoaded,
+    languageFilterLoaded,
   } = oformsStore;
 
   const { setSubmitToGalleryDialogVisible } = dialogsStore;
@@ -229,5 +256,8 @@ export default inject<TStore>(({ oformsStore, dialogsStore }) => {
     initTemplateGallery,
     oformsLoadError,
     setSubmitToGalleryDialogVisible,
+    filterOformsByLocaleIsLoading,
+    categoryFilterLoaded,
+    languageFilterLoaded,
   };
 })(withTranslation("Common")(observer(TemplateGallery)));

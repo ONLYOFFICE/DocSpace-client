@@ -27,25 +27,13 @@
 import type { Key } from "react";
 import type { NavigateFunction } from "react-router";
 
-/**
- * Minimal representation of a file inside the Template Gallery.
- * Currently only the `id` field is required by the UI layer but we keep the
- * interface extensible for future use.
- */
 export interface TOformFile {
   id: Key | null | undefined;
-  // You can add other fields here when they become required by the UI
 }
 
 export interface TilesProps {
-  /** Flag returned by `react-i18next` hook that indicates that translations are ready. */
   tReady: boolean;
-  /** Array with files that should be rendered in the gallery. */
   oformFiles: TOformFile[];
-
-  /**
-   * Callback that informs mobx store whether the `oformFiles` have been fetched and can be displayed.
-   */
   setOformFilesLoaded: (loaded: boolean) => void;
   isShowOneTile?: boolean;
   smallPreview: boolean;
@@ -55,6 +43,6 @@ export interface TilesProps {
   viewMobile: boolean;
   onCreateOform: (navigate: NavigateFunction) => void;
   setTemplatesGalleryVisible: (isVisible: boolean) => void;
-  isInitLoading: boolean;
+  isShowInitSkeleton?: boolean;
   setIsVisibleInfoPanelTemplateGallery: (visible: boolean) => void;
 }

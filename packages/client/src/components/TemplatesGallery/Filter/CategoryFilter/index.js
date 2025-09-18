@@ -89,6 +89,7 @@ const CategoryFilter = ({
   setCategoryFilterLoaded,
   categoryFilterLoaded,
   languageFilterLoaded,
+  isShowInitSkeleton,
 }) => {
   const [menuItems, setMenuItems] = useState([]);
 
@@ -139,6 +140,7 @@ const CategoryFilter = ({
   }, [menuItems.length]);
 
   if (
+    isShowInitSkeleton ||
     filterOformsByLocaleIsLoading ||
     !(categoryFilterLoaded && languageFilterLoaded)
   )

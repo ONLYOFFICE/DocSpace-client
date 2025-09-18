@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 @use "../../../../styles/mixins";
+@use "../../../../styles/variables";
 
 .chatMessageBody {
   height: 100%;
@@ -392,4 +393,29 @@
   padding: 8px 0;
   white-space: pre-line;
   color: var(--chat-message-color);
+}
+
+.blockquote {
+  position: relative;
+
+  margin: 0;
+  padding: 6px 12px;
+
+  width: fit-content;
+
+  border-left: 3px solid var(--accent-main);
+  border-radius: 3px;
+
+  color: variables.$gray-text;
+  font-size: 15px;
+  line-height: 22px;
+
+  overflow: hidden;
+
+  .blockquoteBg {
+    position: absolute;
+    inset: 0;
+    background-color: var(--accent-main);
+    opacity: 8%;
+  }
 }

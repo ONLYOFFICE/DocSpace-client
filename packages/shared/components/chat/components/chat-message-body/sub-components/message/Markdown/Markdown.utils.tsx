@@ -112,8 +112,12 @@ export const createMarkdownComponents = ({
       {children}
     </Link>
   ),
-  // TODO: Chat redesign - add styles
-  blockquote: () => <blockquote />,
+  blockquote: ({ children }) => (
+    <blockquote className={styles.blockquote}>
+      <div className={styles.blockquoteBg} />
+      {children}
+    </blockquote>
+  ),
   // TODO: Chat redesign - add styles
   hr: () => <hr />,
   // TODO: Chat redesign - add styles

@@ -117,7 +117,7 @@ export const TariffTitleContainer = ({
     >
       <div className={styles.paymentsSubscription}>
         <div className={styles.title}>
-          <Text fontWeight={600} fontSize="14px" as="span">
+          <Text fontWeight={600} fontSize="13px" as="span">
             {usersStatistics ? (
               <Trans
                 i18nKey="ActivateTariffDescrUsers"

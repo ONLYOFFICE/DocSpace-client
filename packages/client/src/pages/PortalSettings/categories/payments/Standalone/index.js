@@ -96,14 +96,10 @@ const StandalonePage = (props) => {
 
 export default inject(
   ({
-   
     currentQuotaStore,
-   
     paymentStore,
-   
     currentTariffStatusStore,
     clientLoadingStore,
- ,
     settingsStore,
     filesSettingsStore,
   }) => {

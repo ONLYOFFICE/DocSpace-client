@@ -26,6 +26,7 @@ jobs:
       locales: ${{ steps.changes.outputs.locales }}
       workflow: ${{ steps.changes.outputs.workflow }}
       any_changes: ${{ steps.changes.outputs.any_changes }}
+      changed_files: ${{ steps.changes.outputs.changed_files }}
       lint: ${{ steps.changes.outputs.packages }}
       tsc: ${{ steps.changes.outputs.packages }}
       unit-tests: ${{ steps.changes.outputs.packages }}
@@ -109,6 +110,17 @@ jobs:
           else
             echo "any_changes=false" >> $GITHUB_OUTPUT
             echo "❌ No relevant changes detected"
+          fi
+
+          # Output changed files (encode for safe transport)
+          if [ -n "$CHANGED_FILES" ]; then
+            # Convert newlines to commas for safe transport
+            CHANGED_FILES_ENCODED=$(echo "$CHANGED_FILES" | tr '\n' ',' | sed 's/,$//')
+            echo "changed_files=$CHANGED_FILES_ENCODED" >> $GITHUB_OUTPUT
+            echo "📁 Changed files: $CHANGED_FILES_ENCODED"
+          else
+            echo "changed_files=" >> $GITHUB_OUTPUT
+            echo "📁 No changed files detected"
           fi
 
   # Combined static analysis and common tests
@@ -361,6 +373,34 @@ jobs:
             echo ""
             echo "---"
             echo ""
+            echo "## 📁 Changes Detection"
+            echo ""
+            echo "| Change Type | Detected | Status |"
+            echo "|-------------|----------|--------|"
+            echo "| 📦 **Packages** | ${{ needs.changes.outputs.packages }} | $([ '${{ needs.changes.outputs.packages }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |"
+            echo "| 🔧 **Common** | ${{ needs.changes.outputs.common }} | $([ '${{ needs.changes.outputs.common }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |"
+            echo "| 🎭 **Playwright** | ${{ needs.changes.outputs.playwright }} | $([ '${{ needs.changes.outputs.playwright }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |"
+            echo "| 🌐 **Locales** | ${{ needs.changes.outputs.locales }} | $([ '${{ needs.changes.outputs.locales }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |"
+            echo "| 🔄 **Workflow** | ${{ needs.changes.outputs.workflow }} | $([ '${{ needs.changes.outputs.workflow }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |"
+            echo "| 📋 **Any Changes** | ${{ needs.changes.outputs.any_changes }} | $([ '${{ needs.changes.outputs.any_changes }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |"
+            echo ""
+            
+            # Add changed files section
+            CHANGED_FILES_RAW="${{ needs.changes.outputs.changed_files }}"
+            if [ -n "$CHANGED_FILES_RAW" ]; then
+              echo "### 📁 Changed Files"
+              echo ""
+              echo "\`\`\`"
+              # Convert comma-separated back to newlines for display
+              echo "$CHANGED_FILES_RAW" | tr ',' '\n'
+              echo "\`\`\`"
+              echo ""
+            else
+              echo "### 📁 Changed Files"
+              echo ""
+              echo "_No files changed or unable to detect changes._"
+              echo ""
+            fi
             echo "## 📊 Test Results Overview"
             echo ""
             echo "| Test Category | Test Type | Status | Result |"

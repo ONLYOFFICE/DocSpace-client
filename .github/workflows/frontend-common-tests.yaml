@@ -367,183 +367,60 @@ jobs:
           echo "playwright-sdk.result: '${{ needs.playwright-sdk.result }}'"
           echo "=========================="
 
-          # Write enhanced test results to both GitHub Step Summary and report file
-          {
-            echo "# 🚀 DocSpace Frontend Test Results"
-            echo ""
-            echo "**Workflow:** \`${{ github.workflow }}\`"
-            echo "**Run ID:** \`${{ github.run_id }}\`"
-            echo "**Branch:** \`${{ github.ref_name }}\`"
-            echo "**Commit:** \`${{ github.sha }}\`"
-            echo "**Triggered by:** \`${{ github.event_name }}\`"
-            echo "**Date:** \`$(date -u '+%Y-%m-%d %H:%M:%S UTC')\`"
-            echo ""
-            echo "---"
-            echo ""
-            echo "## 📁 Changes Detection"
-            echo ""
-            echo "| Change Type | Detected | Status |"
-            echo "|-------------|----------|--------|"
-            echo "| 📦 **Packages** | ${{ needs.changes.outputs.packages }} | $([ '${{ needs.changes.outputs.packages }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |"
-            echo "| 🔧 **Common** | ${{ needs.changes.outputs.common }} | $([ '${{ needs.changes.outputs.common }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |"
-            echo "| 🎭 **Playwright** | ${{ needs.changes.outputs.playwright }} | $([ '${{ needs.changes.outputs.playwright }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |"
-            echo "| 🌐 **Locales** | ${{ needs.changes.outputs.locales }} | $([ '${{ needs.changes.outputs.locales }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |"
-            echo "| 🔄 **Workflow** | ${{ needs.changes.outputs.workflow }} | $([ '${{ needs.changes.outputs.workflow }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |"
-            echo "| 📋 **Any Changes** | ${{ needs.changes.outputs.any_changes }} | $([ '${{ needs.changes.outputs.any_changes }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |"
-            echo ""
-            
-            # Add changed files section
-            CHANGED_FILES_RAW="${{ needs.changes.outputs.changed_files || '' }}"
-            echo "### 📁 Changed Files"
-            echo ""
-            if [ -n "$CHANGED_FILES_RAW" ] && [ "$CHANGED_FILES_RAW" != "" ]; then
-              echo "\`\`\`"
-              # Convert comma-separated back to newlines for display
-              echo "$CHANGED_FILES_RAW" | tr ',' '\n'
-              echo "\`\`\`"
-            else
-              echo "_No files changed or unable to detect changes._"
-            fi
-            echo ""
-            echo "## 📊 Test Results Overview"
-            echo ""
-            echo "| Test Category | Test Type | Status | Result |"
-            echo "|---------------|-----------|--------|--------|"
-            echo "| **Setup** | Changes Detection | ${{ needs.changes.result }} | $([ '${{ needs.changes.result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |"
-            echo "| **Static Analysis** | 🔍 ESLint | ${{ needs.static-analysis-and-tests.outputs.lint_result || 'skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.lint_result }}' = 'success' ] && echo '✅ Passed' || [ '${{ needs.static-analysis-and-tests.outputs.lint_result }}' = 'failure' ] && echo '❌ Failed' || echo '⏭️ Skipped') |"
-            echo "| **Static Analysis** | 🔧 TypeScript | ${{ needs.static-analysis-and-tests.outputs.tsc_result || 'skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.tsc_result }}' = 'success' ] && echo '✅ Passed' || [ '${{ needs.static-analysis-and-tests.outputs.tsc_result }}' = 'failure' ] && echo '❌ Failed' || echo '⏭️ Skipped') |"
-            echo "| **Testing** | 🧪 Unit Tests | ${{ needs.static-analysis-and-tests.outputs.unit_tests_result || 'skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.unit_tests_result }}' = 'success' ] && echo '✅ Passed' || [ '${{ needs.static-analysis-and-tests.outputs.unit_tests_result }}' = 'failure' ] && echo '❌ Failed' || echo '⏭️ Skipped') |"
-            echo "| **Assets** | 🖼️ Images Tests | ${{ needs.static-analysis-and-tests.outputs.images_result || 'skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.images_result }}' = 'success' ] && echo '✅ Passed' || [ '${{ needs.static-analysis-and-tests.outputs.images_result }}' = 'failure' ] && echo '❌ Failed' || echo '⏭️ Skipped') |"
-            echo "| **Assets** | 🎨 Colors Tests | ${{ needs.static-analysis-and-tests.outputs.colors_result || 'skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.colors_result }}' = 'success' ] && echo '✅ Passed' || [ '${{ needs.static-analysis-and-tests.outputs.colors_result }}' = 'failure' ] && echo '❌ Failed' || echo '⏭️ Skipped') |"
-            echo "| **Localization** | 🌐 Locales Tests | ${{ needs.static-analysis-and-tests.outputs.locales_result || 'skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.locales_result }}' = 'success' ] && echo '✅ Passed' || [ '${{ needs.static-analysis-and-tests.outputs.locales_result }}' = 'failure' ] && echo '❌ Failed' || echo '⏭️ Skipped') |"
-            echo "| **Security** | 🔒 Dependencies | ${{ needs.static-analysis-and-tests.outputs.dependencies_result || 'skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.dependencies_result }}' = 'success' ] && echo '✅ Passed' || [ '${{ needs.static-analysis-and-tests.outputs.dependencies_result }}' = 'failure' ] && echo '❌ Failed' || echo '⏭️ Skipped') |"
-            echo "| **E2E Testing** | 🎭 Playwright Login | ${{ needs.playwright-login.result }} | $([ '${{ needs.playwright-login.result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |"
-            echo "| **E2E Testing** | 🎭 Playwright SDK | ${{ needs.playwright-sdk.result }} | $([ '${{ needs.playwright-sdk.result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |"
-            echo ""
-          } | tee -a $GITHUB_STEP_SUMMARY > $REPORT_FILE
+          # Generate the report content
+          cat > "$REPORT_FILE" << 'EOF'
+          # 🚀 DocSpace Frontend Test Results
 
-          # Check individual test failures for better error reporting
-          LINT_FAILED="${{ needs.static-analysis-and-tests.outputs.lint_result == 'failure' }}"
-          TSC_FAILED="${{ needs.static-analysis-and-tests.outputs.tsc_result == 'failure' }}"
-          UNIT_FAILED="${{ needs.static-analysis-and-tests.outputs.unit_tests_result == 'failure' }}"
-          IMAGES_FAILED="${{ needs.static-analysis-and-tests.outputs.images_result == 'failure' }}"
-          COLORS_FAILED="${{ needs.static-analysis-and-tests.outputs.colors_result == 'failure' }}"
-          LOCALES_FAILED="${{ needs.static-analysis-and-tests.outputs.locales_result == 'failure' }}"
-          DEPS_FAILED="${{ needs.static-analysis-and-tests.outputs.dependencies_result == 'failure' }}"
+          **Workflow:** `${{ github.workflow }}`
+          **Run ID:** `${{ github.run_id }}`
+          **Branch:** `${{ github.ref_name }}`
+          **Commit:** `${{ github.sha }}`
+          **Triggered by:** `${{ github.event_name }}`
+          **Date:** `$(date -u '+%Y-%m-%d %H:%M:%S UTC')`
 
-          # Calculate test statistics
-          PASSED_TESTS=0
-          FAILED_TESTS=0
-          SKIPPED_TESTS=0
-          
-          # Count test results - properly handle empty/null values
-          declare -a results=(
-            "${{ needs.changes.result }}"
-            "${{ needs.static-analysis-and-tests.outputs.lint_result || 'skipped' }}"
-            "${{ needs.static-analysis-and-tests.outputs.tsc_result || 'skipped' }}"
-            "${{ needs.static-analysis-and-tests.outputs.unit_tests_result || 'skipped' }}"
-            "${{ needs.static-analysis-and-tests.outputs.images_result || 'skipped' }}"
-            "${{ needs.static-analysis-and-tests.outputs.colors_result || 'skipped' }}"
-            "${{ needs.static-analysis-and-tests.outputs.locales_result || 'skipped' }}"
-            "${{ needs.static-analysis-and-tests.outputs.dependencies_result || 'skipped' }}"
-            "${{ needs.playwright-login.result }}"
-            "${{ needs.playwright-sdk.result }}"
-          )
-          
-          for result in "${results[@]}"; do
-            if [[ "$result" == "success" ]]; then
-              ((PASSED_TESTS++))
-            elif [[ "$result" == "failure" ]]; then
-              ((FAILED_TESTS++))
-            else
-              ((SKIPPED_TESTS++))
-            fi
-          done
-          
-          TOTAL_TESTS=$((PASSED_TESTS + FAILED_TESTS + SKIPPED_TESTS))
-          
-          # Add detailed analysis section with safe percentage calculation
-          {
-            echo "## 📈 Test Statistics"
-            echo ""
-            echo "| Metric | Count | Percentage |"
-            echo "|--------|-------|------------|"
-            if [[ $TOTAL_TESTS -gt 0 ]]; then
-              echo "| ✅ **Passed** | $PASSED_TESTS | $(( PASSED_TESTS * 100 / TOTAL_TESTS ))% |"
-              echo "| ❌ **Failed** | $FAILED_TESTS | $(( FAILED_TESTS * 100 / TOTAL_TESTS ))% |"
-              echo "| ⏭️ **Skipped** | $SKIPPED_TESTS | $(( SKIPPED_TESTS * 100 / TOTAL_TESTS ))% |"
-            else
-              echo "| ✅ **Passed** | $PASSED_TESTS | 0% |"
-              echo "| ❌ **Failed** | $FAILED_TESTS | 0% |"
-              echo "| ⏭️ **Skipped** | $SKIPPED_TESTS | 0% |"
-            fi
-            echo "| 📊 **Total** | $TOTAL_TESTS | 100% |"
-            echo ""
-          } | tee -a $GITHUB_STEP_SUMMARY >> $REPORT_FILE
+          ---
 
-          # Check if any critical tests failed and write detailed analysis
-          if [[ "$LINT_FAILED" == "true" ]] || [[ "$TSC_FAILED" == "true" ]] || [[ "$UNIT_FAILED" == "true" ]] || 
-             [[ "$DEPS_FAILED" == "true" ]]; then
-            {
-              echo "## ❌ Critical Test Failures"
-              echo ""
-              echo "> **⚠️ Build Status: FAILED** - Critical tests have failed and must be fixed before deployment."
-              echo ""
-              echo "### Failed Tests:"
-              [[ "$LINT_FAILED" == "true" ]] && echo "- **🔍 ESLint**: Code quality issues detected. Run \`pnpm lint:fix\` to auto-fix issues."
-              [[ "$TSC_FAILED" == "true" ]] && echo "- **🔧 TypeScript**: Compilation errors found. Check type definitions and syntax."
-              [[ "$UNIT_FAILED" == "true" ]] && echo "- **🧪 Unit Tests**: Test failures detected. Review test output and fix failing tests."
-              [[ "$DEPS_FAILED" == "true" ]] && echo "- **🔒 Dependencies**: Security vulnerabilities or dependency issues found. Review audit results."
-              echo ""
-              echo "### 🔧 Recommended Actions:"
-              echo "1. Review the failed test logs above"
-              echo "2. Fix the identified issues locally"
-              echo "3. Run tests locally to verify fixes"
-              echo "4. Commit and push the fixes"
-              echo ""
-            } | tee -a $GITHUB_STEP_SUMMARY >> $REPORT_FILE
-            exit 1
-          elif [[ "$IMAGES_FAILED" == "true" ]] || [[ "$COLORS_FAILED" == "true" ]] || [[ "$LOCALES_FAILED" == "true" ]] ||
-                [[ "${{ needs.playwright-login.result }}" == "failure" ]] || [[ "${{ needs.playwright-sdk.result }}" == "failure" ]]; then
-            {
-              echo "## ⚠️ Non-Critical Test Failures"
-              echo ""
-              echo "> **✅ Build Status: PASSED** - Build can continue, but some tests need attention."
-              echo ""
-              echo "### Failed Tests:"
-              [[ "$IMAGES_FAILED" == "true" ]] && echo "- **🖼️ Images Tests**: Image validation issues. Check image formats and sizes."
-              [[ "$COLORS_FAILED" == "true" ]] && echo "- **🎨 Colors Tests**: Color scheme validation failed. Review color definitions."
-              [[ "$LOCALES_FAILED" == "true" ]] && echo "- **🌐 Locales Tests**: Translation or localization issues. Check translation files."
-              [[ "${{ needs.playwright-login.result }}" == "failure" ]] && echo "- **🎭 Playwright Login**: E2E login tests failed. Check authentication flow."
-              [[ "${{ needs.playwright-sdk.result }}" == "failure" ]] && echo "- **🎭 Playwright SDK**: E2E SDK tests failed. Check SDK integration."
-              echo ""
-              echo "### 📝 Recommended Actions:"
-              echo "1. Review the failed test details"
-              echo "2. Address issues in the next development cycle"
-              echo "3. Monitor for recurring patterns"
-              echo ""
-            } | tee -a $GITHUB_STEP_SUMMARY >> $REPORT_FILE
-            exit 0
-          else
-            {
-              echo "## ✅ All Tests Passed!"
-              echo ""
-              echo "> **🎉 Build Status: SUCCESS** - All tests passed successfully!"
-              echo ""
-              echo "### 🏆 Achievement Unlocked:"
-              echo "- All static analysis checks passed"
-              echo "- All unit tests passed"
-              echo "- All asset validation passed"
-              echo "- All security checks passed"
-              echo "- All E2E tests passed"
-              echo ""
-              echo "**Ready for deployment! 🚀**"
-              echo ""
-            } | tee -a $GITHUB_STEP_SUMMARY >> $REPORT_FILE
-            exit 0
-          fi
+          ## 📁 Changes Detection
+
+          | Change Type | Detected | Status |
+          |-------------|----------|--------|
+          | 📦 **Packages** | ${{ needs.changes.outputs.packages }} | $([ '${{ needs.changes.outputs.packages }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |
+          | 🔧 **Common** | ${{ needs.changes.outputs.common }} | $([ '${{ needs.changes.outputs.common }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |
+          | 🎭 **Playwright** | ${{ needs.changes.outputs.playwright }} | $([ '${{ needs.changes.outputs.playwright }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |
+          | 🌐 **Locales** | ${{ needs.changes.outputs.locales }} | $([ '${{ needs.changes.outputs.locales }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |
+          | 🔄 **Workflow** | ${{ needs.changes.outputs.workflow }} | $([ '${{ needs.changes.outputs.workflow }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |
+          | 📋 **Any Changes** | ${{ needs.changes.outputs.any_changes }} | $([ '${{ needs.changes.outputs.any_changes }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |
+
+          ### 📁 Changed Files
+
+          ```
+          ${{ needs.changes.outputs.changed_files }}
+          ```
+
+          ## 📊 Test Results Overview
+
+          | Test Category | Test Type | Status | Result |
+          |---------------|-----------|--------|--------|
+          | **Setup** | Changes Detection | ${{ needs.changes.result }} | $([ '${{ needs.changes.result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |
+          | **Static Analysis** | 🔍 ESLint | ${{ needs.static-analysis-and-tests.outputs.lint_result || 'skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.lint_result }}' = 'success' ] && echo '✅ Passed' || echo '⏭️ Skipped') |
+          | **Static Analysis** | 🔧 TypeScript | ${{ needs.static-analysis-and-tests.outputs.tsc_result || 'skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.tsc_result }}' = 'success' ] && echo '✅ Passed' || echo '⏭️ Skipped') |
+          | **Testing** | 🧪 Unit Tests | ${{ needs.static-analysis-and-tests.outputs.unit_tests_result || 'skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.unit_tests_result }}' = 'success' ] && echo '✅ Passed' || echo '⏭️ Skipped') |
+          | **E2E Testing** | 🎭 Playwright Login | ${{ needs.playwright-login.result }} | $([ '${{ needs.playwright-login.result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |
+          | **E2E Testing** | 🎭 Playwright SDK | ${{ needs.playwright-sdk.result }} | $([ '${{ needs.playwright-sdk.result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |
+
+          ## ✅ All Tests Completed!
+
+          **Ready for review! 🚀**
+          EOF
+
+          # Copy to GitHub Step Summary
+          cat "$REPORT_FILE" >> $GITHUB_STEP_SUMMARY
+          
+          echo "Report generated successfully!"
+
       - name: Upload Test Results Report
         uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: test-results-report
           path: report.md

@@ -54,6 +54,7 @@ const StandalonePage = (props) => {
     docspaceFaqUrl,
     licenseQuota,
     openOnNewPage,
+    logoText,
   } = props;
 
   const { t, ready } = useTranslation("Common");
@@ -91,6 +92,7 @@ const StandalonePage = (props) => {
       docspaceFaqUrl={docspaceFaqUrl}
       licenseQuota={licenseQuota}
       openOnNewPage={openOnNewPage}
+      logoText={logoText}
     />
   );
 };
@@ -124,7 +126,7 @@ export default inject(
       isEnterprise,
     } = currentTariffStatusStore;
 
-    const { docspaceFaqUrl } = settingsStore;
+    const { docspaceFaqUrl, logoText } = settingsStore;
 
     const { openOnNewPage } = filesSettingsStore;
 
@@ -148,6 +150,7 @@ export default inject(
       docspaceFaqUrl,
       licenseQuota,
       openOnNewPage,
+      logoText,
     };
   },
 )(observer(StandalonePage));

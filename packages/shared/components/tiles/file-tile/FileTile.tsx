@@ -209,7 +209,8 @@ const FileTile = ({
       !(e.target as HTMLElement).closest(".badges") &&
       !(e.target as HTMLElement).closest(".item-file-name") &&
       !(e.target as HTMLElement).closest(".tag") &&
-      !(e.target as HTMLElement).closest(`.${styles.checkbox}`)
+      !(e.target as HTMLElement).closest(`.${styles.checkbox}`) &&
+      !(e.target as HTMLElement).closest(".not-selectable")
     ) {
       if (
         (e.target as HTMLElement).nodeName !== "IMG" &&

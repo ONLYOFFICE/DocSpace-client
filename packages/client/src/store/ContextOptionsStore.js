@@ -82,6 +82,7 @@ import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
 import HelpCenterReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
 import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/icons/16/custom-filter.react.svg?url";
 import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
+import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import AISvgUrl from "PUBLIC_DIR/images/icons/16/AI.svg?url";
 
 import CreateTemplateSvgUrl from "PUBLIC_DIR/images/template.react.svg?url";
@@ -123,6 +124,7 @@ import {
   FilterType,
   FileExtensions,
   ShareAccessRights,
+  VectorizationStatus,
 } from "@docspace/shared/enums";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import {
@@ -1812,6 +1814,16 @@ class ContextOptionsStore {
         disabled: false,
       },
       {
+        id: "option_vectorization",
+        key: "vectorization",
+        label: t("Files:Vectorization"),
+        icon: RefreshReactSvgUrl,
+        onClick: () => this.filesActionsStore.retryVectorization([item]),
+        disabled:
+          !item.security?.Vectorization ||
+          item.vectorizationStatus !== VectorizationStatus.Failed,
+      },
+      {
         id: "option_preview",
         key: "preview",
         label: t("Common:Preview"),
@@ -2677,6 +2689,12 @@ class ContextOptionsStore {
       k.contextOptions.includes("restore"),
     ).length;
 
+    const canRetryVectorization = selection.some(
+      (k) =>
+        k.security?.Vectorization &&
+        k.vectorizationStatus === VectorizationStatus.Failed,
+    );
+
     /* const removeFromFavoriteItems = selection.filter((k) =>
       k.contextOptions.includes("remove-from-favorites"),
     ); */
@@ -2706,6 +2724,13 @@ class ContextOptionsStore {
         icon: CatalogRoomsReactSvgUrl,
         onClick: () => this.onCreateRoom(null, true),
         disabled: !selection.security?.CreateRoomFrom,
+      },
+      {
+        key: "vectorization",
+        label: t("Files:Vectorization"),
+        icon: RefreshReactSvgUrl,
+        onClick: () => this.filesActionsStore.retryVectorization(selection),
+        disabled: !canRetryVectorization,
       },
       {
         key: "download",

@@ -71,6 +71,7 @@ import {
   VDRIndexingAction,
   RoomSearchArea,
   UrlActionType,
+  VectorizationStatus,
 } from "@docspace/shared/enums";
 import { makeAutoObservable, runInAction } from "mobx";
 
@@ -123,6 +124,7 @@ import { showSuccessExportRoomIndexToast } from "SRC_DIR/helpers/toast-helpers";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 import { createFolderNavigation } from "SRC_DIR/helpers/createFolderNavigation";
 import { hideInfoPanel, showInfoPanel } from "SRC_DIR/helpers/info-panel";
+import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { checkProtocol } from "../helpers/files-helpers";
@@ -1996,7 +1998,7 @@ class FilesActionStore {
         return canRemove;
       }
       case "delete": {
-        const canDelete = selection.every((s) => s.security?.Delete);
+        const canDelete = selection.some((s) => s.security?.Delete);
 
         return !allFilesIsEditing && canDelete && hasSelection;
       }
@@ -2010,6 +2012,12 @@ class FilesActionStore {
         return hasRoomsToDisableQuota;
       case "default-quota":
         return hasRoomsToResetQuota;
+      case "vectorization":
+        return selection.some(
+          (s) =>
+            s.security?.Vectorization &&
+            s.vectorizationStatus === VectorizationStatus.Failed,
+        );
       default:
         return false;
     }
@@ -2366,6 +2374,14 @@ class FilesActionStore {
           onClick: () => this.onClickRemoveFromRecent(selection),
           iconUrl: RemoveOutlineSvgUrl,
         };
+      case "vectorization":
+        if (!this.isAvailableOption("vectorization")) return null;
+        return {
+          id: "menu-vectorization",
+          label: t("Files:Vectorization"),
+          iconUrl: RefreshReactSvgUrl,
+          onClick: () => this.retryVectorization(selection),
+        };
       default:
         break;
     }
@@ -2423,8 +2439,10 @@ class FilesActionStore {
     const copy = this.getOption("copy", t);
     const deleteOption = this.getOption("delete", t);
     const showInfo = this.getOption("showInfo", t);
+    const vectorization = this.getOption("vectorization", t);
 
     itemsCollection
+      .set("vectorization", vectorization)
       .set("createRoom", createRoom)
       .set("download", download)
       .set("downloadAs", downloadAs)
@@ -3191,7 +3209,6 @@ class FilesActionStore {
   };
 
   copyFileToAiKnowledge = async (filesInfo) => {
-    console.log(filesInfo);
     const selectedItemId = this.aiRoomStore.knowledgeId;
     const fileIds = filesInfo.map((f) => f.id);
 
@@ -3806,6 +3823,35 @@ class FilesActionStore {
     });
 
     return errorMessage || `Started ${operationResults.join(" and ")}`;
+  };
+
+  retryVectorization = async (files) => {
+    const { updateFileVectorizationStatus } = this.filesStore;
+
+    const filteredFiles = files.filter(
+      (file) =>
+        file.security?.Vectorization &&
+        file.vectorizationStatus === VectorizationStatus.Failed,
+    );
+
+    if (!filteredFiles.length) return;
+
+    const fileIds = filteredFiles.map((file) => file.id);
+
+    try {
+      fileIds.forEach((fileId) =>
+        updateFileVectorizationStatus(fileId, VectorizationStatus.InProgress),
+      );
+
+      await api.ai.retryVectorization(fileIds);
+    } catch (e) {
+      fileIds.forEach((fileId) =>
+        updateFileVectorizationStatus(fileId, VectorizationStatus.Failed),
+      );
+
+      toastr.error(e);
+      console.error(e);
+    }
   };
 }
 

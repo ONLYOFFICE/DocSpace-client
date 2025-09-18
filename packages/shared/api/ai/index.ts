@@ -427,58 +427,14 @@ export const exportChatMessage = async (
   }
 };
 
-export const moveFilesToKnowledge = async (
-  knowledgeFolderId: number,
-  files: (string | number)[],
-) => {
-  try {
-    const res = await request({
-      method: "POST",
-      url: `${baseUrl}/vectorization/tasks`,
-      data: { files, knowledgeFolderId },
-    });
+export const retryVectorization = async (fileIds: TFile["id"][]) => {
+  const res = await request({
+    method: "POST",
+    url: `${baseUrl}/vectorization/tasks`,
+    data: { files: fileIds },
+  });
 
-    return res as TVectorizeOperation;
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-export const getVectorizationTasksById = async (id: string) => {
-  try {
-    const res = await request({
-      method: "GET",
-      url: `${baseUrl}/vectorization/tasks/${id}`,
-    });
-
-    return res;
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-export const getVectorizationTasks = async () => {
-  try {
-    const res = await request({
-      method: "GET",
-      url: `${baseUrl}/vectorization/tasks`,
-    });
-
-    return res;
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-export const removeVectorizationTasks = async (id: string) => {
-  try {
-    await request({
-      method: "DELETE",
-      url: `${baseUrl}/vectorization/tasks/${id}`,
-    });
-  } catch (e) {
-    console.log(e);
-  }
+  return res as TVectorizeOperation;
 };
 
 export const updateToolsPermission = async (

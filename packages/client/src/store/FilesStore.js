@@ -317,8 +317,6 @@ class FilesStore {
           ? `DIR-${data.folderId}`
           : `DIR-${data.parentId}`;
 
-        console.log(socketSubscribers);
-
         if (
           !socketSubscribers.has(pathParts) &&
           !socketSubscribers.has(`DIR-${data.id}`)
@@ -1265,6 +1263,13 @@ class FilesStore {
     if (index < 0) return;
 
     this.files[index].fileStatus = status;
+  };
+
+  updateFileVectorizationStatus = (fileId, status) => {
+    const foundIndex = this.files.findIndex((file) => file.id === fileId);
+    if (foundIndex < 0) return;
+
+    this.files[foundIndex].vectorizationStatus = status;
   };
 
   updateRoomMute = (index, status) => {
@@ -2346,6 +2351,7 @@ class FilesStore {
         "fill-form",
         "edit",
         "open-pdf",
+        "vectorization",
         "preview",
         "view",
         "pdf-view",

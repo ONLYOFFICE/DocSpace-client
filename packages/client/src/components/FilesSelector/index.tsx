@@ -168,7 +168,6 @@ const FilesSelectorWrapper = ({
     if (selectedFiles.find((f) => f.id === file.id)) {
       setSelectedFiles(selectedFiles.filter((f) => f.id !== file.id));
     } else {
-      console.log(file);
       setSelectedFiles((prev) => [...prev, file]);
     }
   };

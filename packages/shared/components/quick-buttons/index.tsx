@@ -38,13 +38,14 @@ import FavoriteReactSvgUrl from "PUBLIC_DIR/images/favorite.react.svg?url";
 import FavoriteFillReactSvgUrl from "PUBLIC_DIR/images/favorite.fill.react.svg?url";
 
 import { classNames, IconSizeType, isTablet, isDesktop } from "../../utils";
-import { RoomsType, ShareAccessRights } from "../../enums";
+import { RoomsType, ShareAccessRights, VectorizationStatus } from "../../enums";
 import { Tooltip } from "../tooltip";
 import { Text } from "../text";
 import { IconButton } from "../icon-button";
 import { isRoom } from "../../utils/typeGuards";
 
 import type { QuickButtonsProps } from "./QuickButtons.types";
+import { FailedVectorizationBadge } from "../failed-vectorization-badge";
 
 export const QuickButtons = (props: QuickButtonsProps) => {
   const {
@@ -66,6 +67,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
     onClickLock,
     onClickFavorite,
     isRecentFolder,
+    onRetryVectorization,
   } = props;
 
   const { id, shared, security } = item;
@@ -106,6 +108,14 @@ export const QuickButtons = (props: QuickButtonsProps) => {
     item.shared &&
     !isArchiveFolder &&
     !isTile;
+
+  const showFailedVectorizationBadge =
+    isTile &&
+    "vectorizationStatus" in item &&
+    item.vectorizationStatus === VectorizationStatus.Failed;
+
+  const hasRetryVectorizationAccess =
+    security && "Vectorization" in security && security.Vectorization;
 
   const getTooltipContent = () => (
     <Text fontSize="12px" fontWeight={400} noSelect>
@@ -242,6 +252,15 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               color="accent"
               isDisabled={isDisabled}
               title={t("Common:Favorites")}
+            />
+          ) : null}
+
+          {showFailedVectorizationBadge ? (
+            <FailedVectorizationBadge
+              className={classNames("badge icons-group")}
+              size="medium"
+              onRetryVectorization={onRetryVectorization}
+              withRetryVectorization={hasRetryVectorizationAccess}
             />
           ) : null}
         </>

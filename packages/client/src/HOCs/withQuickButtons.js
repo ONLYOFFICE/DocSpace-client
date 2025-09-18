@@ -138,6 +138,12 @@ export default function withQuickButtons(WrappedComponent) {
       onCreateRoomFromTemplate(item);
     };
 
+    onRetryVectorization = () => {
+      const { item, retryVectorization } = this.props;
+
+      retryVectorization([item]);
+    };
+
     render() {
       const {
         t,
@@ -183,6 +189,7 @@ export default function withQuickButtons(WrappedComponent) {
           onCreateRoom={this.onCreateRoom}
           isTemplatesFolder={isTemplatesFolder}
           isRecentFolder={isRecentFolder}
+          onRetryVectorization={this.onRetryVectorization}
         />
       );
 
@@ -214,6 +221,7 @@ export default function withQuickButtons(WrappedComponent) {
         onSelectItem,
         onCreateRoomFromTemplate,
         lockFileAction,
+        retryVectorization,
       } = filesActionsStore;
       const {
         isPersonalRoom,
@@ -252,6 +260,7 @@ export default function withQuickButtons(WrappedComponent) {
         setBufferSelection: filesStore.setBufferSelection,
         lockFileAction,
         isRecentFolder,
+        retryVectorization,
       };
     },
   )(observer(WithQuickButtons));

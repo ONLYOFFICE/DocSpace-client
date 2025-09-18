@@ -119,7 +119,7 @@ const EditMCPDialogComponent = ({
         <div className={styles.bodyContainer}>
           <div className={styles.connectDocspace}>
             <Text className={styles.connectDocspaceDescription}>
-              {t("AISettings:MCPConnectDescription", {
+              {t("AISettings:ConnectProductToYourDataAndTools", {
                 productName: t("Common:ProductName"),
               })}
             </Text>

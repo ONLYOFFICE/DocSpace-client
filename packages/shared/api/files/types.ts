@@ -35,6 +35,7 @@ import type {
   FolderType,
   RoomsType,
   ShareAccessRights,
+  VectorizationStatus,
 } from "../../enums";
 import type { TUser } from "../people/types";
 import type { TRoom } from "../rooms/types";
@@ -77,6 +78,7 @@ export type TFileSecurity = {
   CreateRoomFrom: boolean;
   CopyLink: boolean;
   Embed: boolean;
+  Vectorization: boolean;
 };
 
 export type TAvailableExternalRights = {
@@ -149,6 +151,7 @@ export type TFile = {
   originTitle?: string;
   requestToken?: string;
   isFavorite?: boolean;
+  vectorizationStatus?: VectorizationStatus;
 };
 
 export type TOpenEditRequest = {

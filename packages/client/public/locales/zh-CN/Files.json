@@ -57,8 +57,6 @@
   "EditTemplate": "编辑模板",
   "EmbeddingSettings": "嵌入设置",
   "EmptyFile": "空文件",
-  "EmptyFolderDecription": "请上传或创建新文件",
-  "EmptyFolderDescriptionUser": "由管理员上传的文件和文件夹将在此出现。",
   "EmptyFormFolderDoneDescriptionText": "此板块会显示所有已完成填写的表单。",
   "EmptyFormFolderDoneHeaderText": "尚无已完成填写的表单",
   "EmptyFormFolderProgressDescriptionText": "此板块会显示处理中的表单。",

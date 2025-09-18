@@ -57,8 +57,6 @@
   "EditTemplate": "Edit template",
   "EmbeddingSettings": "Embedding settings",
   "EmptyFile": "Empty file",
-  "EmptyFolderDecription": "Drop files here or create new ones",
-  "EmptyFolderDescriptionUser": "Files and folders uploaded by admins will appear here.",
   "EmptyFormFolderDoneDescriptionText": "This section will display all forms that are complete.",
   "EmptyFormFolderDoneHeaderText": "No finished forms yet",
   "EmptyFormFolderProgressDescriptionText": "This section will display the forms in progress.",

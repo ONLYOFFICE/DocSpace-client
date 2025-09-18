@@ -57,8 +57,6 @@
   "EditTemplate": "Muokkaa mallia",
   "EmbeddingSettings": "Upotusasetukset",
   "EmptyFile": "Tyhjä tiedosto",
-  "EmptyFolderDecription": "Pudota tiedostot tähän tai luo uusia",
-  "EmptyFolderDescriptionUser": "Järjestelmänvalvojien lataamat tiedostot ja kansiot ilmestyvät tähän.",
   "EmptyFormFolderDoneDescriptionText": "Tässä osiossa näkyy kaikki lomakkeet, jotka ovat valmiita.",
   "EmptyFormFolderDoneHeaderText": "Ei vielä valmiita lomakkeita",
   "EmptyFormFolderProgressDescriptionText": "Tämä osio näyttää keskeneräiset lomakkeet.",

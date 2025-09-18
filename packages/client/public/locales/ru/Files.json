@@ -57,8 +57,6 @@
   "EditTemplate": "Редактировать шаблон",
   "EmbeddingSettings": "Настройки встраивания",
   "EmptyFile": "Пустой файл",
-  "EmptyFolderDecription": "Перетащите файлы сюда или создайте новые",
-  "EmptyFolderDescriptionUser": "Здесь будут отображаться файлы и папки, загруженные администраторами.",
   "EmptyFormFolderDoneDescriptionText": "В этом разделе будут отображаться все заполненные формы.",
   "EmptyFormFolderDoneHeaderText": "Заполненных форм пока нет",
   "EmptyFormFolderProgressDescriptionText": "В этом разделе будут отображаться незавершенные формы.",

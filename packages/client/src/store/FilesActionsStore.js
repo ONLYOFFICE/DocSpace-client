@@ -1998,7 +1998,7 @@ class FilesActionStore {
         return canRemove;
       }
       case "delete": {
-        const canDelete = selection.every((s) => s.security?.Delete);
+        const canDelete = selection.some((s) => s.security?.Delete);
 
         return !allFilesIsEditing && canDelete && hasSelection;
       }

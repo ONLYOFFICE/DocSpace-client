@@ -22,6 +22,7 @@
   "ActivateRenewDescr": "To get your personal renewal terms, contact your dedicated manager or write us at <1>{{email}}</1>",
   "ActivateRenewSubscriptionHeader": "Renew subscription for {{license}}",
   "ActivateSwithToProHeader": "Switch to full {{license}} version",
+  "ActivateTariffDescrConnections": "You are using {{organizationName}} {{productName}} {{license}}.",
   "ActivateTariffDescrUsers": "You are using {{organizationName}} {{productName}} {{license}} for <1>{{editingCount}}/{{limit}}</1> users.",
   "ActivateTariffLicenseTrialExpiration": "Your trial expires on {{date}}.",
   "ActivateToProBannerHeaderTrial": "Buy the full {{license}} version to get:",

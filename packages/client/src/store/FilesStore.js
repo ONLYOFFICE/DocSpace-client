@@ -317,8 +317,6 @@ class FilesStore {
           ? `DIR-${data.folderId}`
           : `DIR-${data.parentId}`;
 
-        console.log(socketSubscribers);
-
         if (
           !socketSubscribers.has(pathParts) &&
           !socketSubscribers.has(`DIR-${data.id}`)

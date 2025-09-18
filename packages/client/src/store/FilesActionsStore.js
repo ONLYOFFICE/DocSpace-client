@@ -3209,7 +3209,6 @@ class FilesActionStore {
   };
 
   copyFileToAiKnowledge = async (filesInfo) => {
-    console.log(filesInfo);
     const selectedItemId = this.aiRoomStore.knowledgeId;
     const fileIds = filesInfo.map((f) => f.id);
 

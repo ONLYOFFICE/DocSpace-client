@@ -159,7 +159,7 @@ export default function withBadges(WrappedComponent) {
     onRetryVectorization = () => {
       const { item, retryVectorization } = this.props;
 
-      retryVectorization(item.id);
+      retryVectorization([item]);
     };
 
     render() {

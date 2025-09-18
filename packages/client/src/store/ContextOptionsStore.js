@@ -248,14 +248,6 @@ class ContextOptionsStore {
     this.guidanceStore = guidanceStore;
   }
 
-  onRetryVectorization = (fileId) => {
-    this.filesActionsStore.retryVectorization(fileId);
-  };
-
-  onRetryVectorizationMany = () => {
-    console.log("onRetryVectorizationMany");
-  };
-
   onOpenFolder = async (item, t) => {
     const { isExpiredLinkAsync } = this.filesActionsStore;
 
@@ -1823,7 +1815,7 @@ class ContextOptionsStore {
         key: "vectorization",
         label: t("Files:Vectorization"),
         icon: RefreshReactSvgUrl,
-        onClick: () => this.onRetryVectorization(item.id),
+        onClick: () => this.filesActionsStore.retryVectorization([item]),
         disabled:
           !item.security?.Vectorization ||
           item.vectorizationStatus !== VectorizationStatus.Failed,
@@ -2681,7 +2673,7 @@ class ContextOptionsStore {
       k.contextOptions.includes("restore"),
     ).length;
 
-    const canRetryVectorization = selection.every(
+    const canRetryVectorization = selection.some(
       (k) =>
         k.security?.Vectorization &&
         k.vectorizationStatus === VectorizationStatus.Failed,
@@ -2721,7 +2713,7 @@ class ContextOptionsStore {
         key: "vectorization",
         label: t("Files:Vectorization"),
         icon: RefreshReactSvgUrl,
-        onClick: this.onRetryVectorizationMany,
+        onClick: () => this.filesActionsStore.retryVectorization(selection),
         disabled: !canRetryVectorization,
       },
       {

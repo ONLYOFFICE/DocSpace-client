@@ -2013,7 +2013,7 @@ class FilesActionStore {
       case "default-quota":
         return hasRoomsToResetQuota;
       case "vectorization":
-        return selection.every(
+        return selection.some(
           (s) =>
             s.security?.Vectorization &&
             s.vectorizationStatus === VectorizationStatus.Failed,
@@ -2380,7 +2380,7 @@ class FilesActionStore {
           id: "menu-vectorization",
           label: t("Files:Vectorization"),
           iconUrl: RefreshReactSvgUrl,
-          onClick: this.retryVectorizationMany,
+          onClick: () => this.retryVectorization(selection),
         };
       default:
         break;
@@ -3826,25 +3826,33 @@ class FilesActionStore {
     return errorMessage || `Started ${operationResults.join(" and ")}`;
   };
 
-  retryVectorization = async (fileId) => {
+  retryVectorization = async (files) => {
     const { updateFileVectorizationStatus } = this.filesStore;
 
+    const filteredFiles = files.filter(
+      (file) =>
+        file.security?.Vectorization &&
+        file.vectorizationStatus === VectorizationStatus.Failed,
+    );
+
+    if (!filteredFiles.length) return;
+
+    const fileIds = filteredFiles.map((file) => file.id);
+
     try {
-      updateFileVectorizationStatus(fileId, VectorizationStatus.InProgress);
+      fileIds.forEach((fileId) =>
+        updateFileVectorizationStatus(fileId, VectorizationStatus.InProgress),
+      );
 
-      const task = await api.ai.retryVectorization(fileId);
-
-      if (task.error) {
-        updateFileVectorizationStatus(fileId, VectorizationStatus.Failed);
-      }
+      await api.ai.retryVectorization(fileIds);
     } catch (e) {
-      updateFileVectorizationStatus(fileId, VectorizationStatus.Failed);
+      fileIds.forEach((fileId) =>
+        updateFileVectorizationStatus(fileId, VectorizationStatus.Failed),
+      );
+
+      toastr.error(e);
       console.error(e);
     }
-  };
-
-  retryVectorizationMany = async () => {
-    console.log("retry vectorization many");
   };
 }
 

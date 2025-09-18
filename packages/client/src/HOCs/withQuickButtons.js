@@ -141,7 +141,7 @@ export default function withQuickButtons(WrappedComponent) {
     onRetryVectorization = () => {
       const { item, retryVectorization } = this.props;
 
-      retryVectorization(item.id);
+      retryVectorization([item]);
     };
 
     render() {

@@ -427,11 +427,11 @@ export const exportChatMessage = async (
   }
 };
 
-export const retryVectorization = async (fileId: TFile["id"]) => {
+export const retryVectorization = async (fileIds: TFile["id"][]) => {
   const res = await request({
     method: "POST",
     url: `${baseUrl}/vectorization/tasks`,
-    data: { fileId },
+    data: { files: fileIds },
   });
 
   return res as TVectorizeOperation;

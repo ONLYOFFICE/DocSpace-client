@@ -345,23 +345,29 @@ jobs:
     steps:
       - name: Check test results
         run: |
-          echo "## Test Results Summary" >> $GITHUB_STEP_SUMMARY
-          echo "| Test Type | Status |" >> $GITHUB_STEP_SUMMARY
-          echo "|-----------|--------|" >> $GITHUB_STEP_SUMMARY
-          echo "| Changes Detection | ${{ needs.changes.result }} |" >> $GITHUB_STEP_SUMMARY
+          # Create report file
+          REPORT_FILE="report.md"
 
-          # Individual test results from merged job
-          echo "| 🔍 ESLint | ${{ needs.static-analysis-and-tests.outputs.lint_result || 'skipped' }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| 🔧 TypeScript | ${{ needs.static-analysis-and-tests.outputs.tsc_result || 'skipped' }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| 🧪 Unit Tests | ${{ needs.static-analysis-and-tests.outputs.unit_tests_result || 'skipped' }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| 🖼️ Images Tests | ${{ needs.static-analysis-and-tests.outputs.images_result || 'skipped' }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| 🎨 Colors Tests | ${{ needs.static-analysis-and-tests.outputs.colors_result || 'skipped' }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| 🌐 Locales Tests | ${{ needs.static-analysis-and-tests.outputs.locales_result || 'skipped' }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| 🔒 Dependencies | ${{ needs.static-analysis-and-tests.outputs.dependencies_result || 'skipped' }} |" >> $GITHUB_STEP_SUMMARY
-
-          # Other jobs
-          echo "| Playwright Login | ${{ needs.playwright-login.result }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| Playwright SDK | ${{ needs.playwright-sdk.result }} |" >> $GITHUB_STEP_SUMMARY
+          # Write test results to both GitHub Step Summary and report file
+          {
+            echo "## Test Results Summary"
+            echo "| Test Type | Status |"
+            echo "|-----------|--------|"
+            echo "| Changes Detection | ${{ needs.changes.result }} |"
+            echo ""
+            echo "# Individual test results from merged job"
+            echo "| 🔍 ESLint | ${{ needs.static-analysis-and-tests.outputs.lint_result || 'skipped' }} |"
+            echo "| 🔧 TypeScript | ${{ needs.static-analysis-and-tests.outputs.tsc_result || 'skipped' }} |"
+            echo "| 🧪 Unit Tests | ${{ needs.static-analysis-and-tests.outputs.unit_tests_result || 'skipped' }} |"
+            echo "| 🖼️ Images Tests | ${{ needs.static-analysis-and-tests.outputs.images_result || 'skipped' }} |"
+            echo "| 🎨 Colors Tests | ${{ needs.static-analysis-and-tests.outputs.colors_result || 'skipped' }} |"
+            echo "| 🌐 Locales Tests | ${{ needs.static-analysis-and-tests.outputs.locales_result || 'skipped' }} |"
+            echo "| 🔒 Dependencies | ${{ needs.static-analysis-and-tests.outputs.dependencies_result || 'skipped' }} |"
+            echo ""
+            echo "# Other jobs"
+            echo "| Playwright Login | ${{ needs.playwright-login.result }} |"
+            echo "| Playwright SDK | ${{ needs.playwright-sdk.result }} |"
+          } | tee -a $GITHUB_STEP_SUMMARY > $REPORT_FILE
 
           # Check individual test failures for better error reporting
           LINT_FAILED="${{ needs.static-analysis-and-tests.outputs.lint_result == 'failure' }}"
@@ -372,28 +378,40 @@ jobs:
           LOCALES_FAILED="${{ needs.static-analysis-and-tests.outputs.locales_result == 'failure' }}"
           DEPS_FAILED="${{ needs.static-analysis-and-tests.outputs.dependencies_result == 'failure' }}"
 
-          # Check if any critical tests failed
+          # Check if any critical tests failed and write to both summary and report
           if [[ "$LINT_FAILED" == "true" ]] || [[ "$TSC_FAILED" == "true" ]] || [[ "$UNIT_FAILED" == "true" ]] || 
              [[ "$DEPS_FAILED" == "true" ]]; then
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "❌ **Critical tests failed:**" >> $GITHUB_STEP_SUMMARY
-            [[ "$LINT_FAILED" == "true" ]] && echo "- ESLint issues found" >> $GITHUB_STEP_SUMMARY
-            [[ "$TSC_FAILED" == "true" ]] && echo "- TypeScript compilation errors" >> $GITHUB_STEP_SUMMARY
-            [[ "$UNIT_FAILED" == "true" ]] && echo "- Unit test failures" >> $GITHUB_STEP_SUMMARY
-            [[ "$DEPS_FAILED" == "true" ]] && echo "- Dependency audit issues" >> $GITHUB_STEP_SUMMARY
+            {
+              echo ""
+              echo "❌ **Critical tests failed:**"
+              [[ "$LINT_FAILED" == "true" ]] && echo "- ESLint issues found"
+              [[ "$TSC_FAILED" == "true" ]] && echo "- TypeScript compilation errors"
+              [[ "$UNIT_FAILED" == "true" ]] && echo "- Unit test failures"
+              [[ "$DEPS_FAILED" == "true" ]] && echo "- Dependency audit issues"
+            } | tee -a $GITHUB_STEP_SUMMARY >> $REPORT_FILE
             exit 1
           elif [[ "$IMAGES_FAILED" == "true" ]] || [[ "$COLORS_FAILED" == "true" ]] || [[ "$LOCALES_FAILED" == "true" ]] ||
                 [[ "${{ needs.playwright-login.result }}" == "failure" ]] || [[ "${{ needs.playwright-sdk.result }}" == "failure" ]]; then
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "⚠️ **Some tests failed, but build can continue:**" >> $GITHUB_STEP_SUMMARY
-            [[ "$IMAGES_FAILED" == "true" ]] && echo "- Images test issues" >> $GITHUB_STEP_SUMMARY
-            [[ "$COLORS_FAILED" == "true" ]] && echo "- Colors test issues" >> $GITHUB_STEP_SUMMARY
-            [[ "$LOCALES_FAILED" == "true" ]] && echo "- Locales test issues" >> $GITHUB_STEP_SUMMARY
-            [[ "${{ needs.playwright-login.result }}" == "failure" ]] && echo "- Login e2e test failures" >> $GITHUB_STEP_SUMMARY
-            [[ "${{ needs.playwright-sdk.result }}" == "failure" ]] && echo "- SDK e2e test failures" >> $GITHUB_STEP_SUMMARY
+            {
+              echo ""
+              echo "⚠️ **Some tests failed, but build can continue:**"
+              [[ "$IMAGES_FAILED" == "true" ]] && echo "- Images test issues"
+              [[ "$COLORS_FAILED" == "true" ]] && echo "- Colors test issues"
+              [[ "$LOCALES_FAILED" == "true" ]] && echo "- Locales test issues"
+              [[ "${{ needs.playwright-login.result }}" == "failure" ]] && echo "- Login e2e test failures"
+              [[ "${{ needs.playwright-sdk.result }}" == "failure" ]] && echo "- SDK e2e test failures"
+            } | tee -a $GITHUB_STEP_SUMMARY >> $REPORT_FILE
             exit 0
           else
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "✅ **All tests passed successfully!**" >> $GITHUB_STEP_SUMMARY
+            {
+              echo ""
+              echo "✅ **All tests passed successfully!**"
+            } | tee -a $GITHUB_STEP_SUMMARY >> $REPORT_FILE
             exit 0
           fi
+      - name: Upload Test Results Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-report
+          path: report.md
+          retention-days: 2

@@ -350,8 +350,7 @@ jobs:
   test-summary:
     name: "Test Summary"
     runs-on: ubuntu-latest
-    needs:
-      [changes, static-analysis-and-tests, playwright-login, playwright-sdk]
+    needs: [changes, static-analysis-and-tests, playwright-login, playwright-sdk]
     if: always()
     timeout-minutes: 2
     steps:
@@ -359,6 +358,14 @@ jobs:
         run: |
           # Create report file
           REPORT_FILE="report.md"
+          
+          # Debug: Show what job results we have
+          echo "=== DEBUG: Job Results ==="
+          echo "changes.result: '${{ needs.changes.result }}'"
+          echo "static-analysis-and-tests.result: '${{ needs.static-analysis-and-tests.result }}'"
+          echo "playwright-login.result: '${{ needs.playwright-login.result }}'"
+          echo "playwright-sdk.result: '${{ needs.playwright-sdk.result }}'"
+          echo "=========================="
 
           # Write enhanced test results to both GitHub Step Summary and report file
           {
@@ -386,21 +393,18 @@ jobs:
             echo ""
             
             # Add changed files section
-            CHANGED_FILES_RAW="${{ needs.changes.outputs.changed_files }}"
-            if [ -n "$CHANGED_FILES_RAW" ]; then
-              echo "### 📁 Changed Files"
-              echo ""
+            CHANGED_FILES_RAW="${{ needs.changes.outputs.changed_files || '' }}"
+            echo "### 📁 Changed Files"
+            echo ""
+            if [ -n "$CHANGED_FILES_RAW" ] && [ "$CHANGED_FILES_RAW" != "" ]; then
               echo "\`\`\`"
               # Convert comma-separated back to newlines for display
               echo "$CHANGED_FILES_RAW" | tr ',' '\n'
               echo "\`\`\`"
-              echo ""
             else
-              echo "### 📁 Changed Files"
-              echo ""
               echo "_No files changed or unable to detect changes._"
-              echo ""
             fi
+            echo ""
             echo "## 📊 Test Results Overview"
             echo ""
             echo "| Test Category | Test Type | Status | Result |"

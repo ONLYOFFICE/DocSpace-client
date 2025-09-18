@@ -158,8 +158,13 @@
     }
   }
 
-  &:hover {
+  &:not(.disabled):hover {
     opacity: 0.85;
+  }
+
+  &.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
   }
 
   .square {

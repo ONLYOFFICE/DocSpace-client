@@ -986,5 +986,6 @@
   "ChooseAIAgentDescription": "Select the agent where you want to chat with AI about the selected file. You can pick an existing agent or create a new one.",
   "CreateAIAgent": "Create AI agent",
   "NoAIAgents": "No AI agents yet",
-  "NoAIAgentsDescription": "You haven’t created any agents for AI chat. Create a new agent to start chatting with AI about your files."
+  "NoAIAgentsDescription": "You haven’t created any agents for AI chat. Create a new agent to start chatting with AI about your files.",
+  "CheckAIInfo": "AI Chat can make mistakes. Check important info."
 }

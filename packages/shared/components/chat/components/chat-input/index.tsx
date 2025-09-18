@@ -206,6 +206,7 @@ const ChatInput = ({
               isFilesSelectorVisible={isFilesSelectorVisible}
               toggleFilesSelector={toggleFilesSelector}
               sendMessageAction={sendMessageAction}
+              value={value}
             />
           </>
         )}
@@ -224,7 +225,7 @@ const ChatInput = ({
         className={styles.chatInputText}
         noSelect
       >
-        AI Chat can make mistakes. Check important info.
+        {t("Common:CheckAIInfo")}
       </Text>
     </>
   );

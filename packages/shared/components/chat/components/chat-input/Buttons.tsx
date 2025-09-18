@@ -45,11 +45,18 @@ const Buttons = ({
   isFilesSelectorVisible,
   toggleFilesSelector,
   sendMessageAction,
+  value,
 }: ButtonsProps) => {
   const { isRequestRunning, stopMessage } = useMessageStore();
 
+  const isDisabled = !isRequestRunning ? !value : false;
+
   const sendIconProps = !isRequestRunning
-    ? { onClick: sendMessageAction, isDisabled: false, iconNode: null }
+    ? {
+        onClick: sendMessageAction,
+        isDisabled,
+        iconNode: null,
+      }
     : {
         onClick: stopMessage,
         isDisabled: false,
@@ -81,7 +88,7 @@ const Buttons = ({
         size={16}
         isClickable
         className={classNames(styles.chatInputButtonsSend, {
-          [styles.disabled]: false,
+          [styles.disabled]: isDisabled,
         })}
         {...sendIconProps}
       />

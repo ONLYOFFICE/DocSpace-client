@@ -119,6 +119,8 @@ export type ButtonsProps = {
 
   toggleFilesSelector: VoidFunction;
   sendMessageAction: () => Promise<void>;
+
+  value: string;
 };
 
 export type AttachmentProps = {

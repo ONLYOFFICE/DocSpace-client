@@ -73,6 +73,7 @@ const SessionLifetime = (props) => {
     lifetimeSettingsUrl,
     currentColorScheme,
     currentDeviceType,
+    isInit,
 
     settingsStore,
     tfaStore,
@@ -139,6 +140,12 @@ const SessionLifetime = (props) => {
       setIsLoading(true);
     }
   }, [isMobileDevice]);
+
+  useEffect(() => {
+    if (isInit) {
+      setIsLoading(true);
+    }
+  }, []);
 
   useEffect(() => {
     checkWidth();
@@ -342,6 +349,8 @@ export const SessionLifetimeSection = inject(
       currentDeviceType,
     } = settingsStore;
 
+    const { isInit } = setup;
+
     return {
       enabled: enabledSessionLifetime,
       lifetime: sessionLifetime,
@@ -349,6 +358,7 @@ export const SessionLifetimeSection = inject(
       lifetimeSettingsUrl,
       currentColorScheme,
       currentDeviceType,
+      isInit,
 
       settingsStore,
       tfaStore,

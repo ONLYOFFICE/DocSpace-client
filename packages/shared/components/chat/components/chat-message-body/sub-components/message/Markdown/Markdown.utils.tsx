@@ -30,10 +30,11 @@ import { Components } from "react-markdown";
 import classNames from "classnames";
 
 import { Text } from "../../../../../../text";
+import { Heading, HeadingLevel } from "../../../../../../heading";
+import { Link, LinkTarget } from "../../../../../../link";
 
 import styles from "../../../ChatMessageBody.module.scss";
 import CodeBlock from "../CodeBlock";
-import { Heading, HeadingLevel } from "../../../../../../heading";
 
 export const createMarkdownComponents = ({
   propLanguage,
@@ -100,8 +101,17 @@ export const createMarkdownComponents = ({
       {children}
     </Heading>
   ),
-  // TODO: Chat redesign - add styles
-  a: () => <a />,
+  a: ({ children, href }) => (
+    <Link
+      target={LinkTarget.blank}
+      href={href}
+      fontSize="15px"
+      lineHeight="22px"
+      color="accent"
+    >
+      {children}
+    </Link>
+  ),
   // TODO: Chat redesign - add styles
   blockquote: () => <blockquote />,
   // TODO: Chat redesign - add styles
@@ -120,11 +130,11 @@ export const createMarkdownComponents = ({
   p: ({ children }) => {
     return (
       <Text
-        fontSize="13px"
-        lineHeight="20px"
+        fontSize="15px"
+        lineHeight="22px"
         fontWeight={400}
         className={styles.chatMessageTextColor}
-        style={{ whiteSpace: "pre-line", padding: "8px 0" }}
+        style={{ whiteSpace: "pre-line" }}
       >
         {children as React.ReactNode}
       </Text>

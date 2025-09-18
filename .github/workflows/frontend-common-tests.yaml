@@ -388,13 +388,25 @@ jobs:
           DEPS_FAILED="${{ needs.static-analysis-and-tests.outputs.dependencies_result == 'failure' }}"
 
           # Calculate test statistics
-          TOTAL_TESTS=9
           PASSED_TESTS=0
           FAILED_TESTS=0
           SKIPPED_TESTS=0
           
-          # Count test results
-          for result in "${{ needs.changes.result }}" "${{ needs.static-analysis-and-tests.outputs.lint_result }}" "${{ needs.static-analysis-and-tests.outputs.tsc_result }}" "${{ needs.static-analysis-and-tests.outputs.unit_tests_result }}" "${{ needs.static-analysis-and-tests.outputs.images_result }}" "${{ needs.static-analysis-and-tests.outputs.colors_result }}" "${{ needs.static-analysis-and-tests.outputs.locales_result }}" "${{ needs.static-analysis-and-tests.outputs.dependencies_result }}" "${{ needs.playwright-login.result }}" "${{ needs.playwright-sdk.result }}"; do
+          # Count test results - properly handle empty/null values
+          declare -a results=(
+            "${{ needs.changes.result }}"
+            "${{ needs.static-analysis-and-tests.outputs.lint_result || 'skipped' }}"
+            "${{ needs.static-analysis-and-tests.outputs.tsc_result || 'skipped' }}"
+            "${{ needs.static-analysis-and-tests.outputs.unit_tests_result || 'skipped' }}"
+            "${{ needs.static-analysis-and-tests.outputs.images_result || 'skipped' }}"
+            "${{ needs.static-analysis-and-tests.outputs.colors_result || 'skipped' }}"
+            "${{ needs.static-analysis-and-tests.outputs.locales_result || 'skipped' }}"
+            "${{ needs.static-analysis-and-tests.outputs.dependencies_result || 'skipped' }}"
+            "${{ needs.playwright-login.result }}"
+            "${{ needs.playwright-sdk.result }}"
+          )
+          
+          for result in "${results[@]}"; do
             if [[ "$result" == "success" ]]; then
               ((PASSED_TESTS++))
             elif [[ "$result" == "failure" ]]; then
@@ -404,15 +416,23 @@ jobs:
             fi
           done
           
-          # Add detailed analysis section
+          TOTAL_TESTS=$((PASSED_TESTS + FAILED_TESTS + SKIPPED_TESTS))
+          
+          # Add detailed analysis section with safe percentage calculation
           {
             echo "## 📈 Test Statistics"
             echo ""
             echo "| Metric | Count | Percentage |"
             echo "|--------|-------|------------|"
-            echo "| ✅ **Passed** | $PASSED_TESTS | $(( PASSED_TESTS * 100 / TOTAL_TESTS ))% |"
-            echo "| ❌ **Failed** | $FAILED_TESTS | $(( FAILED_TESTS * 100 / TOTAL_TESTS ))% |"
-            echo "| ⏭️ **Skipped** | $SKIPPED_TESTS | $(( SKIPPED_TESTS * 100 / TOTAL_TESTS ))% |"
+            if [[ $TOTAL_TESTS -gt 0 ]]; then
+              echo "| ✅ **Passed** | $PASSED_TESTS | $(( PASSED_TESTS * 100 / TOTAL_TESTS ))% |"
+              echo "| ❌ **Failed** | $FAILED_TESTS | $(( FAILED_TESTS * 100 / TOTAL_TESTS ))% |"
+              echo "| ⏭️ **Skipped** | $SKIPPED_TESTS | $(( SKIPPED_TESTS * 100 / TOTAL_TESTS ))% |"
+            else
+              echo "| ✅ **Passed** | $PASSED_TESTS | 0% |"
+              echo "| ❌ **Failed** | $FAILED_TESTS | 0% |"
+              echo "| ⏭️ **Skipped** | $SKIPPED_TESTS | 0% |"
+            fi
             echo "| 📊 **Total** | $TOTAL_TESTS | 100% |"
             echo ""
           } | tee -a $GITHUB_STEP_SUMMARY >> $REPORT_FILE

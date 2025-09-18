@@ -89,8 +89,8 @@ export const useShare = ({
       ]);
 
       setFilesLink(link.items);
-      setShareMembers(shareUsers);
-      setShareMembersTotal(shareUsers.length);
+      setShareMembers(shareUsers.items);
+      setShareMembersTotal(shareUsers.total);
     } catch (error) {
       console.error("Error fetching external links:", error);
       throw error;

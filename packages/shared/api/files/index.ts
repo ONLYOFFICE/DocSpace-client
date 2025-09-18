@@ -43,7 +43,7 @@ import {
   sortInDisplayOrder,
 } from "../../utils/common";
 
-import type { TNewFiles } from "../rooms/types";
+import type { RoomMember, TGetRoomMembers, TNewFiles } from "../rooms/types";
 import { request } from "../client";
 import { SHARED_MEMBERS_COUNT } from "../../constants";
 
@@ -1840,7 +1840,7 @@ export async function getFileSharedUsers(
     method: "get",
     url: `/files/file/${id}/share${linkParams}`,
     signal,
-  })) as RoomMember[];
+  })) as TGetRoomMembers;
 
   return res;
 }
@@ -1856,7 +1856,7 @@ export async function getFolderSharedUsers(
     method: "get",
     url: `/files/folder/${id}/share${linkParams}`,
     signal,
-  })) as RoomMember[];
+  })) as TGetRoomMembers;
 
   return res;
 }

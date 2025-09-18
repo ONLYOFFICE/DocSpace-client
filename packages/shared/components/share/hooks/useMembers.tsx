@@ -101,10 +101,10 @@ export const useMembers = (props: UseMembersProps) => {
         filter,
         abortController.current.signal,
       );
-      setTotal(data.length);
+      setTotal(data.total);
 
       setMembers((prev) =>
-        uniqBy([...prev, ...data], (item) => item.sharedTo.id),
+        uniqBy([...prev, ...data.items], (item) => item.sharedTo.id),
       );
     } catch (error) {
       if (axios.isCancel(error)) return;

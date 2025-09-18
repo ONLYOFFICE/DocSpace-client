@@ -54,7 +54,7 @@ import { ListProps } from "../Share.types";
 
 const itemSize = 48;
 const shareLinkItemSize = 68;
-const SHARE_HEADER_HEIGHT = 28;
+const SHARE_HEADER_HEIGHT = 36;
 const GENERAL_LINK_HEADER_HEIGHT = 28;
 
 const List: FC<ListProps> = (props) => {

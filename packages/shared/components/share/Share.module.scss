@@ -49,16 +49,6 @@
       margin-top: 0;
     }
   }
-
-  &.shareInfoBarEditor {
-    top: 0px;
-
-    .shareInfoBar {
-      &:global(.public-room-bar) {
-        margin-top: 10px;
-      }
-    }
-  }
 }
 
 .linkRow.linkRow {
@@ -99,7 +89,7 @@
   // margin-top: 20px;
 
   .titleLink {
-    margin-bottom: 12px;
+    // margin-bottom: 12px;
     line-height: 16px;
     color: variables.$gray;
   }
@@ -107,6 +97,7 @@
   .additionalLink {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 10px;
 
     margin-top: 20px;
@@ -121,6 +112,7 @@
 
   .shareHeader {
     margin-top: 0;
+    height: 100%;
   }
 }
 
@@ -534,8 +526,6 @@
 }
 
 .shareContainer {
-  padding-top: 10px;
-
   .list {
     width: calc(100% + 16px) !important;
   }

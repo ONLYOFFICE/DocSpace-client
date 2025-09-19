@@ -109,6 +109,20 @@ const Info = ({ t, plugin, withDelete, withSeparator }) => {
           </>
         ) : null}
 
+        {/* Todo: change on minDocspaceVersion */}
+        {plugin.docspaceVersions ? (
+          <>
+            <Text fontSize="13px" fontWeight={400} lineHeight="20px" truncate>
+              {t("MinDocspaceVersion", {
+                productName: t("Common:ProductName"),
+              })}
+            </Text>
+            <Text fontSize="13px" fontWeight={600} lineHeight="20px">
+              {plugin.docspaceVersions}
+            </Text>
+          </>
+        ) : null}
+
         {!plugin.system ? (
           <>
             <Text fontSize="13px" fontWeight={400} lineHeight="20px" truncate>

@@ -96,6 +96,7 @@ const ChatInput = ({
       setValue("");
       setSelectedFiles([]);
     } catch (e) {
+      console.log("from here");
       console.log(e);
     }
   }, [currentChatId, startChat, sendMessage, value, selectedFiles]);

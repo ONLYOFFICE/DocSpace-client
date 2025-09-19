@@ -123,25 +123,17 @@ export const startNewChat = async (
 ) => {
   const authHeader = getCookie("asc_auth_key")!;
 
-  try {
-    const response = await fetch(`/api/2.0${baseUrl}/rooms/${roomId}/chats`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: authHeader,
-      },
-      signal: abortController?.signal,
-      body: JSON.stringify({ message, files }),
-    });
+  const response = await fetch(`/api/2.0${baseUrl}/rooms/${roomId}/chats`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: authHeader,
+    },
+    signal: abortController?.signal,
+    body: JSON.stringify({ message, files }),
+  });
 
-    if (!response.ok) {
-      throw new Error(`Failed to start new chat: ${response.status}`);
-    }
-
-    return response.body;
-  } catch (e) {
-    console.log(e);
-  }
+  return response.body;
 };
 
 export const sendMessageToChat = async (
@@ -152,28 +144,17 @@ export const sendMessageToChat = async (
 ) => {
   const authHeader = getCookie("asc_auth_key")!;
 
-  try {
-    const response = await fetch(
-      `/api/2.0${baseUrl}/chats/${chatId}/messages`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: authHeader,
-        },
-        signal: abortController?.signal,
-        body: JSON.stringify({ message, files }),
-      },
-    );
+  const response = await fetch(`/api/2.0${baseUrl}/chats/${chatId}/messages`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: authHeader,
+    },
+    signal: abortController?.signal,
+    body: JSON.stringify({ message, files }),
+  });
 
-    if (!response.ok) {
-      throw new Error(`Failed to send message to chat: ${response.status}`);
-    }
-
-    return response.body;
-  } catch (e) {
-    console.log(e);
-  }
+  return response.body;
 };
 
 export const getChats = async (

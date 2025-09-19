@@ -418,6 +418,23 @@ jobs:
             GITHUB_RUN_ID=${{ github.run_id }}
             GITHUB_RUN_NUMBER=${{ github.run_number }}
 
+      - name: Check test results
+        if: always()
+        run: |
+          echo "📝 Checking all test results..."
+          if [ "${{ steps.lint.outputs.result }}" = "failure" ] || \
+             [ "${{ steps.tsc.outputs.result }}" = "failure" ] || \
+             [ "${{ steps.unit-tests.outputs.result }}" = "failure" ] || \
+             [ "${{ steps.images.outputs.result }}" = "failure" ] || \
+             [ "${{ steps.colors.outputs.result }}" = "failure" ] || \
+             [ "${{ steps.locales.outputs.result }}" = "failure" ] || \
+             [ "${{ steps.dependencies.outputs.result }}" = "failure" ]; then
+            echo "❌ One or more tests failed. Marking job as failed."
+            exit 1
+          else
+            echo "✅ All tests passed."
+          fi
+
   # Summary job to report overall status
   test-summary:
     name: "Test Summary"

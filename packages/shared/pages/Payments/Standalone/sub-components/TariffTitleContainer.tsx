@@ -127,7 +127,7 @@ export const TariffTitleContainer = ({
                   license: isDeveloper
                     ? t("Common:DeveloperLicense")
                     : t("Common:EnterpriseLicense"),
-                  editingCount: usersStatistics.portalUsers ?? 0,
+                  editingCount: usersStatistics.totalUsers ?? 0,
                   limit: usersStatistics.limitUsers ?? 0,
                 }}
                 t={t}

@@ -2370,6 +2370,12 @@ class FilesStore {
         fileOptions = removeOptions(fileOptions, optionsToRemove);
       }
 
+      if (item.rootFolderType !== FolderType.SHARE) {
+        fileOptions = removeOptions(fileOptions, [
+          "remove-shared-folder-or-file",
+        ]);
+      }
+
       if (this.publicRoomStore.isPublicRoom) {
         fileOptions = removeOptions(fileOptions, [
           "separator0",
@@ -2866,6 +2872,12 @@ class FilesStore {
       "remove-shared-folder-or-file",
       "delete",
     ];
+
+    if (item.rootFolderType !== FolderType.SHARE) {
+      folderOptions = removeOptions(folderOptions, [
+        "remove-shared-folder-or-file",
+      ]);
+    }
 
     if (optionsToRemove.length) {
       folderOptions = removeOptions(folderOptions, optionsToRemove);

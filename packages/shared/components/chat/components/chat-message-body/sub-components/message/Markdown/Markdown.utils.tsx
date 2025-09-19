@@ -127,8 +127,6 @@ export const createMarkdownComponents = ({
   td: () => <td />,
   // TODO: Chat redesign - add styles
   tr: () => <tr />,
-  // TODO: Chat redesign - add styles
-  sup: () => <sup />,
   p: ({ children }) => {
     return (
       <Text

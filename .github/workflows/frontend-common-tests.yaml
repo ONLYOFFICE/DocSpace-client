@@ -77,7 +77,7 @@ jobs:
           fi
 
           # Check for playwright changes
-          if echo "$CHANGED_FILES" | grep -E "^packages/(login|sdk)/"; then
+          if echo "$CHANGED_FILES" | grep -E "^packages/(login|sdk|shared)/"; then
             echo "playwright=true" >> $GITHUB_OUTPUT
             echo "✅ Playwright changes detected"
           else

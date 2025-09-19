@@ -63,6 +63,7 @@ const Chat = ({
             clearAttachmentFile={clearAttachmentFile}
             isLoading={isLoading}
             getIcon={getIcon}
+            selectedModel={selectedModel}
           />
         </ChatContainer>
       </MessageStoreContextProvider>

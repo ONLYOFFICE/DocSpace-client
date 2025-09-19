@@ -32,17 +32,16 @@ import CopyIconUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 import RefreshIconUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import SaveToFileIconUrl from "PUBLIC_DIR/images/message.save.svg?url";
 
-import { DeviceType, FolderType } from "../../../../../../enums";
 import { exportChatMessage } from "../../../../../../api/ai";
-import { isDesktop, isTablet } from "../../../../../../utils";
 
-import FilesSelector from "../../../../../../selectors/Files";
 import { TBreadCrumb } from "../../../../../selector/Selector.types";
 
 import { toastr } from "../../../../../toast";
 import { Link, LinkType, LinkTarget } from "../../../../../link";
 
 import { useMessageStore } from "../../../../store/messageStore";
+
+import ExportSelector from "../../../../components/export-selector";
 
 import styles from "../../ChatMessageBody.module.scss";
 
@@ -140,64 +139,14 @@ const Buttons = ({
         </div>
       </div>
       {showFolderSelector ? (
-        <FilesSelector
-          isPanelVisible={showFolderSelector}
-          onCancel={onCloseFolderSelector}
-          getIcon={getIcon}
-          getIsDisabled={(
-            isFirstLoad,
-            isSelectedParentFolder,
-            selectedItemId,
-            selectedItemType,
-            isRoot,
-            selectedItemSecurity,
-          ) => {
-            if (selectedItemType === "rooms") return true;
-
-            if (
-              selectedItemSecurity &&
-              "Create" in selectedItemSecurity &&
-              selectedItemSecurity.Create
-            )
-              return false;
-
-            return true;
-          }}
+        <ExportSelector
+          onCloseFolderSelector={onCloseFolderSelector}
           onSubmit={onExportMessage}
-          withHeader
-          headerProps={{
-            headerLabel: t("Common:SaveButton"),
-            isCloseable: true,
-            onCloseClick: onCloseFolderSelector,
-          }}
-          withSearch
-          withBreadCrumbs
-          withoutBackButton
-          withCancelButton
-          withCreate={false}
-          initAiRoom
-          // TODO: restore when api will be ready
-          withFooterCheckbox={false}
-          withFooterInput
-          cancelButtonLabel={t("Common:CancelButton")}
-          submitButtonLabel={t("Common:SaveButton")}
-          disabledItems={[]}
-          isRoomsOnly={false}
-          isThirdParty={false}
-          currentFolderId={roomId}
-          rootFolderType={FolderType.Rooms}
-          footerCheckboxLabel={t("Common:OpenSavedDocument")}
-          footerInputHeader={t("Common:FileName")}
-          currentFooterInputValue={`${chatName}_${messageId}`}
-          descriptionText=""
-          getFilesArchiveError={() => ""}
-          currentDeviceType={
-            isDesktop()
-              ? DeviceType.desktop
-              : isTablet()
-                ? DeviceType.tablet
-                : DeviceType.mobile
-          }
+          roomId={roomId}
+          chatName={chatName ?? ""}
+          messageId={messageId}
+          getIcon={getIcon}
+          showFolderSelector={showFolderSelector}
         />
       ) : null}
     </>

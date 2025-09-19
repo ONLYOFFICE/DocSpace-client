@@ -29,7 +29,7 @@ import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router";
-
+import classNames from "classnames";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { Text } from "@docspace/shared/components/text";
 import {
@@ -86,7 +86,9 @@ const ItemTitle = ({
 
   return (
     <div
-      className={commonStyles.title}
+      className={classNames(commonStyles.title, {
+        [commonStyles.aside]: true,
+      })}
       ref={itemTitleRef}
       data-testid="info_panel_gallery_item_title"
     >

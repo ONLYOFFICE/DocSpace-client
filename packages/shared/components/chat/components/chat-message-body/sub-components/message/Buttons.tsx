@@ -176,7 +176,8 @@ const Buttons = ({
           withCancelButton
           withCreate={false}
           initAiRoom
-          withFooterCheckbox
+          // TODO: restore when api will be ready
+          withFooterCheckbox={false}
           withFooterInput
           cancelButtonLabel={t("Common:CancelButton")}
           submitButtonLabel={t("Common:SaveButton")}

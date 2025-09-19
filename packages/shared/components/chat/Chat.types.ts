@@ -121,6 +121,7 @@ export type ButtonsProps = {
   sendMessageAction: () => Promise<void>;
 
   value: string;
+  selectedModel: string;
 };
 
 export type AttachmentProps = {
@@ -139,6 +140,7 @@ export type ChatInputProps = {
 
   attachmentFile: AttachmentProps["attachmentFile"];
   clearAttachmentFile: AttachmentProps["clearAttachmentFile"];
+  selectedModel: string;
 };
 
 export type ChatContainerProps = {

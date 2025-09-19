@@ -602,6 +602,7 @@ class FilesStore {
   wsModifyFolderUpdate = async (opt) => {
     if (opt?.type === "file" && opt?.data) {
       const file = JSON.parse(opt?.data);
+
       if (!file || !file.id) return;
 
       const fileInfo = await this.getFileInfo(file.id, file.requestToken); // this.setFile(file);
@@ -1844,6 +1845,8 @@ class FilesStore {
         ) {
           if (currentFolder.type === FolderType.Knowledge) {
             this.aiRoomStore.setKnowledgeId(currentFolder.id);
+          } else {
+            this.aiRoomStore.setKnowledgeId(null);
           }
 
           const aiRoom =
@@ -1860,8 +1863,10 @@ class FilesStore {
           currentFolder = { ...aiRoom, isRoom: true };
         } else if (currentFolder.roomType === RoomsType.AIRoom) {
           this.aiRoomStore.setCurrentTab("chat");
+          this.aiRoomStore.setKnowledgeId(null);
         } else if (currentFolder.rootRoomType === RoomsType.AIRoom) {
           this.aiRoomStore.setCurrentTab("result");
+          this.aiRoomStore.setKnowledgeId(null);
         } else {
           this.aiRoomStore.setKnowledgeId(null);
         }
@@ -1905,6 +1910,7 @@ class FilesStore {
           } else {
             this.setIsEmptyPage(isEmptyList);
           }
+
           this.setFolders(isPrivacyFolder && !isDesktop() ? [] : data.folders);
           this.setFiles(isPrivacyFolder && !isDesktop() ? [] : data.files);
         });
@@ -2080,6 +2086,8 @@ class FilesStore {
 
     this.roomsController = new AbortController();
     this.filesController = null;
+
+    this.aiRoomStore.setKnowledgeId(null);
 
     const request = () =>
       api.rooms
@@ -3748,6 +3756,8 @@ class FilesStore {
 
   get filesList() {
     // return [...this.folders, ...this.files];
+
+    console.log(this.folders);
 
     const newFolders = [...this.folders];
     const orderItems = [...this.folders, ...this.files].filter((x) => x.order);

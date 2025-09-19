@@ -49,6 +49,7 @@ type AiRoomTabsProps = {
 
   currentTab?: AiRoomStore["currentTab"];
   setCurrentTab: AiRoomStore["setCurrentTab"];
+  setKnowledgeId: AiRoomStore["setKnowledgeId"];
 };
 
 const AiRoomTabs = ({
@@ -61,6 +62,8 @@ const AiRoomTabs = ({
 
   currentTab,
   setCurrentTab,
+
+  setKnowledgeId,
 }: AiRoomTabsProps) => {
   const navigate = useNavigate();
 
@@ -81,8 +84,14 @@ const AiRoomTabs = ({
 
       filesFilter.searchArea = SearchArea.Any;
 
+      setKnowledgeId(null);
+
       navigate(`${path}?${filesFilter.toUrlParams()}`);
     } else {
+      if (tab.id !== "knowledge") {
+        setKnowledgeId(null);
+      }
+
       const path = getCategoryUrl(CategoryType.SharedRoom, rootRoomId ?? id);
 
       filesFilter.searchArea =
@@ -133,7 +142,7 @@ export default inject(
     const { showTabsLoader, setIsSectionBodyLoading, currentClientView } =
       clientLoadingStore;
 
-    const { currentTab, setCurrentTab } = aiRoomStore;
+    const { currentTab, setCurrentTab, setKnowledgeId } = aiRoomStore;
 
     const { id, rootRoomId } = selectedFolderStore;
 
@@ -146,6 +155,8 @@ export default inject(
 
       currentTab,
       setCurrentTab,
+
+      setKnowledgeId,
 
       currentClientView,
     };

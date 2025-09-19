@@ -46,10 +46,11 @@ const Buttons = ({
   toggleFilesSelector,
   sendMessageAction,
   value,
+  selectedModel,
 }: ButtonsProps) => {
   const { isRequestRunning, stopMessage } = useMessageStore();
 
-  const isDisabled = !isRequestRunning ? !value : false;
+  const isDisabled = !isRequestRunning ? !value || !selectedModel : false;
 
   const sendIconProps = !isRequestRunning
     ? {

@@ -52,6 +52,7 @@ const ChatInput = ({
   isLoading,
   attachmentFile,
   clearAttachmentFile,
+  selectedModel,
 }: ChatInputProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -96,6 +97,7 @@ const ChatInput = ({
       setValue("");
       setSelectedFiles([]);
     } catch (e) {
+      console.log("from here");
       console.log(e);
     }
   }, [currentChatId, startChat, sendMessage, value, selectedFiles]);
@@ -207,6 +209,7 @@ const ChatInput = ({
               toggleFilesSelector={toggleFilesSelector}
               sendMessageAction={sendMessageAction}
               value={value}
+              selectedModel={selectedModel}
             />
           </>
         )}

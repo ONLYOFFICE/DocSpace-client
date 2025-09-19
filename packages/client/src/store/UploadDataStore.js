@@ -1191,8 +1191,8 @@ class UploadDataStore {
       let folderInfo = null;
       const index = path.findIndex((x) => x === this.selectedFolderStore.id);
       const folderId = index !== -1 ? path[index + 1] : null;
-      if (folderId && folderId !== this.aiRoomStore.knowledgeId)
-        folderInfo = await getFolderInfo(folderId);
+      // if (folderId && folderId !== this.aiRoomStore.knowledgeId)
+      //   folderInfo = await getFolderInfo(folderId);
 
       const newPath = [];
       if (folderInfo || path[path.length - 1] === this.selectedFolderStore.id) {
@@ -1218,6 +1218,7 @@ class UploadDataStore {
         if (folderInfo) {
           const isFolderExist = newFolders.find((x) => x.id === folderInfo.id);
           if (!isFolderExist && folderInfo) {
+            console.error(this.selectedFolderStore.id);
             newFolders.unshift(folderInfo);
             setFolders(newFolders);
             const newFilter = filter;

@@ -250,7 +250,12 @@ export default class MessageStore {
   };
 
   handleStreamError = (jsonData: string) => {
-    const { message } = JSON.parse(jsonData);
+    let message = "";
+    try {
+      message = JSON.parse(jsonData).message;
+    } catch {
+      message = jsonData;
+    }
 
     const newMsg: TMessage = {
       role: RoleType.Error,
@@ -296,6 +301,20 @@ export default class MessageStore {
         const decodedChunk = textDecoder.decode(value);
 
         buffer += decodedChunk;
+
+        try {
+          const jsonData = JSON.parse(decodedChunk);
+
+          if (jsonData.error) {
+            this.handleStreamError(JSON.stringify(jsonData.error));
+
+            reader.cancel();
+
+            return;
+          }
+        } catch {
+          // ignore
+        }
 
         try {
           const chunks = buffer.split("\n\n");
@@ -397,22 +416,26 @@ export default class MessageStore {
   };
 
   startChat = async (message: string, files: Partial<TFile>[]) => {
-    this.addUserMessage(message, files);
+    try {
+      this.addUserMessage(message, files);
 
-    this.setIsRequestRunning(true);
+      this.setIsRequestRunning(true);
 
-    this.abortController.abort("Start new chat");
+      this.abortController.abort("Start new chat");
 
-    this.abortController = new AbortController();
+      this.abortController = new AbortController();
 
-    const stream = await startNewChat(
-      this.roomId,
-      message,
-      files.map((f) => f.id!.toString()),
-      this.abortController,
-    );
+      const stream = await startNewChat(
+        this.roomId,
+        message,
+        files.map((f) => f.id!.toString()),
+        this.abortController,
+      );
 
-    await this.startStream(stream);
+      await this.startStream(stream);
+    } catch (e) {
+      this.handleStreamError(JSON.stringify(e));
+    }
   };
 
   sendMessage = async (message: string, files: Partial<TFile>[]) => {

@@ -74,6 +74,7 @@ const useRootHelper = ({
       currentTree = treeFolders;
     } else {
       const folders = await getFoldersTree();
+
       currentTree = folders;
     }
 
@@ -89,8 +90,25 @@ const useRootHelper = ({
         (withFavoritesTreeFolder &&
           folder.rootFolderType === FolderType.Favorites)
       ) {
+        let title = "";
+        switch (folder.rootFolderType) {
+          case FolderType.USER:
+            title = t("Common:MyDocuments");
+            break;
+          case FolderType.Rooms:
+            title = t("Common:Rooms");
+            break;
+          case FolderType.Favorites:
+            title = t("Common:Favorites");
+            break;
+          case FolderType.Recent:
+            title = t("Common:Recent");
+            break;
+          default:
+            break;
+        }
         newItems.push({
-          label: folder.title,
+          label: title,
           id: folder.id,
           parentId: folder.parentId,
           rootFolderType: folder.rootFolderType,

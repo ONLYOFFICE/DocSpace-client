@@ -264,12 +264,12 @@ class PluginStore {
     }
   };
 
-  checkPluginCompatibility = (minDocspaceVersion?: string): boolean => {
-    if (!minDocspaceVersion) return false;
+  checkPluginCompatibility = (minDocSpaceVersion?: string): boolean => {
+    if (!minDocSpaceVersion) return false;
 
     const currentDocspaceVersion = this.settingsStore.buildVersionInfo.docspace;
 
-    const parts1 = minDocspaceVersion.split(".").map(Number);
+    const parts1 = minDocSpaceVersion.split(".").map(Number);
     const parts2 = currentDocspaceVersion.split(".").map(Number);
 
     const len = Math.max(parts1.length, parts2.length);
@@ -290,7 +290,7 @@ class PluginStore {
       const plugin = await api.plugins.addPlugin(data);
 
       const isPluginCompatible = this.checkPluginCompatibility(
-        plugin.docspaceVersions, // minDocspaceVersion
+        plugin.minDocSpaceVersion,
       );
 
       if (!isPluginCompatible) {
@@ -352,7 +352,7 @@ class PluginStore {
       newPlugin.iconUrl = getPluginUrl(newPlugin.url, "");
 
       const isPluginCompatible = this.checkPluginCompatibility(
-        plugin.docspaceVersions, // minDocspaceVersion
+        plugin.minDocSpaceVersion,
       );
 
       newPlugin.compatible = isPluginCompatible;

@@ -29,7 +29,7 @@ import { TCreatedBy } from "../../types";
 export type TAPIPlugin = {
   name: string;
   version: string;
-  docspaceVersions?: string; // minDocspaceVersion
+  minDocSpaceVersion?: string;
   description: string;
   license: string;
   author: string;

@@ -32,7 +32,8 @@
   }
 
   .image {
-    width: 150px;
+    height: 140px;
+    width: 200px;
     margin-bottom: 32px;
     @include mixins.no-user-select;
     background: no-repeat 0 0 transparent;
@@ -104,8 +105,8 @@
     width: fit-content;
 
     .image {
-      height: 75px;
-      width: 75px;
+      height: 105px;
+      width: 150px;
     }
 
     .buttons {

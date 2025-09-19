@@ -296,6 +296,24 @@ jobs:
           fi
         continue-on-error: true
 
+      # Check test results
+      - name: Check test results
+        if: always()
+        run: |
+          echo "📝 Checking all test results..."
+          if [ "${{ steps.lint.outputs.result }}" = "failure" ] || \
+             [ "${{ steps.tsc.outputs.result }}" = "failure" ] || \
+             [ "${{ steps.unit-tests.outputs.result }}" = "failure" ] || \
+             [ "${{ steps.images.outputs.result }}" = "failure" ] || \
+             [ "${{ steps.colors.outputs.result }}" = "failure" ] || \
+             [ "${{ steps.locales.outputs.result }}" = "failure" ] || \
+             [ "${{ steps.dependencies.outputs.result }}" = "failure" ]; then
+            echo "❌ One or more tests failed. Marking job as failed."
+            exit 1
+          else
+            echo "✅ All tests passed."
+          fi
+
   # Playwright Login tests
   playwright-login:
     name: "Login e2e tests"
@@ -346,28 +364,12 @@ jobs:
             GITHUB_RUN_ID=${{ github.run_id }}
             GITHUB_RUN_NUMBER=${{ github.run_number }}
 
-      - name: Check test results
-        if: always()
-        run: |
-          echo "📝 Checking all test results..."
-          if [ "${{ steps.lint.outputs.result }}" = "failure" ] || \
-             [ "${{ steps.tsc.outputs.result }}" = "failure" ] || \
-             [ "${{ steps.unit-tests.outputs.result }}" = "failure" ] || \
-             [ "${{ steps.images.outputs.result }}" = "failure" ] || \
-             [ "${{ steps.colors.outputs.result }}" = "failure" ] || \
-             [ "${{ steps.locales.outputs.result }}" = "failure" ] || \
-             [ "${{ steps.dependencies.outputs.result }}" = "failure" ]; then
-            echo "❌ One or more tests failed. Marking job as failed."
-            exit 1
-          else
-            echo "✅ All tests passed."
-          fi
-
   # Summary job to report overall status
   test-summary:
     name: "Test Summary"
     runs-on: ubuntu-latest
-    needs: [changes, static-analysis-and-tests, playwright-login, playwright-sdk]
+    needs:
+      [changes, static-analysis-and-tests, playwright-login, playwright-sdk]
     if: always()
     timeout-minutes: 2
     steps:
@@ -375,7 +377,7 @@ jobs:
         run: |
           # Create report file
           REPORT_FILE="report.md"
-          
+
           # Debug: Show what job results we have
           echo "=== DEBUG: Job Results ==="
           echo "changes.result: '${{ needs.changes.result }}'"
@@ -432,7 +434,7 @@ jobs:
 
           # Copy to GitHub Step Summary
           cat "$REPORT_FILE" >> $GITHUB_STEP_SUMMARY
-          
+
           echo "Report generated successfully!"
 
       - name: Upload Test Results Report

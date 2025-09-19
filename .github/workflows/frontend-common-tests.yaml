@@ -439,135 +439,67 @@ jobs:
           echo "playwright-sdk.result: '${{ needs.playwright-sdk.result }}'"
           echo "=========================="
 
-          # Generate the report content with proper variable substitution
-          cat > "$REPORT_FILE" << 'EOF'
-# 🚀 DocSpace Frontend Test Results
-
-**Workflow:** 'WORKFLOW_PLACEHOLDER'
-**Run ID:** 'RUN_ID_PLACEHOLDER'
-**Branch:** 'BRANCH_PLACEHOLDER'
-**Commit:** 'COMMIT_PLACEHOLDER'
-**Triggered by:** 'EVENT_NAME_PLACEHOLDER'
-**Date:** 'DATE_PLACEHOLDER'
-EOF
-          
-          # Replace all GitHub Actions placeholders
-          sed -i "s/WORKFLOW_PLACEHOLDER/${{ github.workflow }}/" "$REPORT_FILE"
-          sed -i "s/RUN_ID_PLACEHOLDER/${{ github.run_id }}/" "$REPORT_FILE"
-          sed -i "s/BRANCH_PLACEHOLDER/${{ github.ref_name }}/" "$REPORT_FILE"
-          sed -i "s/COMMIT_PLACEHOLDER/${{ github.sha }}/" "$REPORT_FILE"
-          sed -i "s/EVENT_NAME_PLACEHOLDER/${{ github.event_name }}/" "$REPORT_FILE"
-          sed -i "s/DATE_PLACEHOLDER/$(date -u '+%Y-%m-%d %H:%M:%S UTC')/" "$REPORT_FILE"
+          # Generate the report content line-by-line to avoid YAML parsing issues
+          echo '# 🚀 DocSpace Frontend Test Results' > "$REPORT_FILE"
+          echo '' >> "$REPORT_FILE"
+          echo "**Workflow:** '${{ github.workflow }}'" >> "$REPORT_FILE"
+          echo "**Run ID:** '${{ github.run_id }}'" >> "$REPORT_FILE"
+          echo "**Branch:** '${{ github.ref_name }}'" >> "$REPORT_FILE"
+          echo "**Commit:** '${{ github.sha }}'" >> "$REPORT_FILE"
+          echo "**Triggered by:** '${{ github.event_name }}'" >> "$REPORT_FILE"
+          echo "**Date:** '$(date -u '+%Y-%m-%d %H:%M:%S UTC')'" >> "$REPORT_FILE"
 
           # Add manual run configuration if triggered manually
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            cat >> "$REPORT_FILE" << 'EOF'
-
-## ⚙️ Manual Run Configuration
-
-| Setting | Value |
-|---------|-------|
-| **Node Version** | 'NODE_VERSION_PLACEHOLDER' |
-| **pnpm Version** | 'PNPM_VERSION_PLACEHOLDER' |
-| **Skip Cache** | 'SKIP_CACHE_PLACEHOLDER' |
-| **Force All Tests** | 'FORCE_ALL_TESTS_PLACEHOLDER' |
-| **Debug Mode** | 'DEBUG_MODE_PLACEHOLDER' |
-| **Target Branch** | 'TARGET_BRANCH_PLACEHOLDER' |
-EOF
-            
-            # Replace placeholders with actual values
-            sed -i "s/NODE_VERSION_PLACEHOLDER/${{ env.NODE_VERSION }}/" "$REPORT_FILE"
-            sed -i "s/PNPM_VERSION_PLACEHOLDER/${{ env.PNPM_VERSION }}/" "$REPORT_FILE"
-            sed -i "s/SKIP_CACHE_PLACEHOLDER/${{ env.SKIP_CACHE }}/" "$REPORT_FILE"
-            sed -i "s/FORCE_ALL_TESTS_PLACEHOLDER/${{ env.FORCE_ALL_TESTS }}/" "$REPORT_FILE"
-            sed -i "s/DEBUG_MODE_PLACEHOLDER/${{ env.DEBUG_MODE }}/" "$REPORT_FILE"
-            TARGET_BRANCH_VALUE="${{ github.event.inputs.target_branch }}"
-            if [ -z "$TARGET_BRANCH_VALUE" ]; then
-              TARGET_BRANCH_VALUE="auto-detect"
-            fi
-            sed -i "s/TARGET_BRANCH_PLACEHOLDER/$TARGET_BRANCH_VALUE/" "$REPORT_FILE"
+            echo '' >> "$REPORT_FILE"
+            echo '## ⚙️ Manual Run Configuration' >> "$REPORT_FILE"
+            echo '' >> "$REPORT_FILE"
+            echo '| Setting | Value |' >> "$REPORT_FILE"
+            echo '|---------|-------|' >> "$REPORT_FILE"
+            echo "| **Node Version** | '${{ env.NODE_VERSION }}' |" >> "$REPORT_FILE"
+            echo "| **pnpm Version** | '${{ env.PNPM_VERSION }}' |" >> "$REPORT_FILE"
+            echo "| **Skip Cache** | '${{ env.SKIP_CACHE }}' |" >> "$REPORT_FILE"
+            echo "| **Force All Tests** | '${{ env.FORCE_ALL_TESTS }}' |" >> "$REPORT_FILE"
+            echo "| **Debug Mode** | '${{ env.DEBUG_MODE }}' |" >> "$REPORT_FILE"
+            TARGET_BRANCH_VALUE="${{ github.event.inputs.target_branch || 'auto-detect' }}"
+            echo "| **Target Branch** | '$TARGET_BRANCH_VALUE' |" >> "$REPORT_FILE"
           fi
 
           # Continue with the rest of the report
-          cat >> "$REPORT_FILE" << 'EOF'
-
----
-
-## 📁 Changes Detection
-
-| Change Type | Detected | Status |
-|-------------|----------|--------|
-| 📦 **Packages** | PACKAGES_VALUE | PACKAGES_STATUS |
-| 🔧 **Common** | COMMON_VALUE | COMMON_STATUS |
-| 🎭 **Playwright** | PLAYWRIGHT_VALUE | PLAYWRIGHT_STATUS |
-| 🌐 **Locales** | LOCALES_VALUE | LOCALES_STATUS |
-| 🔄 **Workflow** | WORKFLOW_VALUE | WORKFLOW_STATUS |
-| 📋 **Any Changes** | ANY_CHANGES_VALUE | ANY_CHANGES_STATUS |
-
-### 📁 Changed Files
-
-```
-CHANGED_FILES_PLACEHOLDER
-```
-
-## 📊 Test Results Overview
-
-| Test Category | Test Type | Status | Result |
-|---------------|-----------|--------|--------|
-| **Setup** | Changes Detection | CHANGES_RESULT_VALUE | CHANGES_RESULT_STATUS |
-| **Static Analysis** | 🔍 ESLint | LINT_RESULT_VALUE | LINT_RESULT_STATUS |
-| **Static Analysis** | 🔧 TypeScript | TSC_RESULT_VALUE | TSC_RESULT_STATUS |
-| **Testing** | 🧪 Unit Tests | UNIT_RESULT_VALUE | UNIT_RESULT_STATUS |
-| **E2E Testing** | 🎭 Playwright Login | PLAYWRIGHT_LOGIN_VALUE | PLAYWRIGHT_LOGIN_STATUS |
-| **E2E Testing** | 🎭 Playwright SDK | PLAYWRIGHT_SDK_VALUE | PLAYWRIGHT_SDK_STATUS |
-
-## ✅ All Tests Completed!
-
-**Ready for review! 🚀**
-EOF
-
-          # Replace all placeholders with actual values
-          # Changes Detection
-          sed -i "s/PACKAGES_VALUE/${{ needs.changes.outputs.packages }}/" "$REPORT_FILE"
-          sed -i "s/PACKAGES_STATUS/$([ '${{ needs.changes.outputs.packages }}' = 'true' ] && echo '✅ Yes' || echo '❌ No')/" "$REPORT_FILE"
-          
-          sed -i "s/COMMON_VALUE/${{ needs.changes.outputs.common }}/" "$REPORT_FILE"
-          sed -i "s/COMMON_STATUS/$([ '${{ needs.changes.outputs.common }}' = 'true' ] && echo '✅ Yes' || echo '❌ No')/" "$REPORT_FILE"
-          
-          sed -i "s/PLAYWRIGHT_VALUE/${{ needs.changes.outputs.playwright }}/" "$REPORT_FILE"
-          sed -i "s/PLAYWRIGHT_STATUS/$([ '${{ needs.changes.outputs.playwright }}' = 'true' ] && echo '✅ Yes' || echo '❌ No')/" "$REPORT_FILE"
-          
-          sed -i "s/LOCALES_VALUE/${{ needs.changes.outputs.locales }}/" "$REPORT_FILE"
-          sed -i "s/LOCALES_STATUS/$([ '${{ needs.changes.outputs.locales }}' = 'true' ] && echo '✅ Yes' || echo '❌ No')/" "$REPORT_FILE"
-          
-          sed -i "s/WORKFLOW_VALUE/${{ needs.changes.outputs.workflow }}/" "$REPORT_FILE"
-          sed -i "s/WORKFLOW_STATUS/$([ '${{ needs.changes.outputs.workflow }}' = 'true' ] && echo '✅ Yes' || echo '❌ No')/" "$REPORT_FILE"
-          
-          sed -i "s/ANY_CHANGES_VALUE/${{ needs.changes.outputs.any_changes }}/" "$REPORT_FILE"
-          sed -i "s/ANY_CHANGES_STATUS/$([ '${{ needs.changes.outputs.any_changes }}' = 'true' ] && echo '✅ Yes' || echo '❌ No')/" "$REPORT_FILE"
-          
-          # Changed files
-          CHANGED_FILES_ESCAPED=$(echo "${{ needs.changes.outputs.changed_files }}" | sed 's/[[\.*^$()+?{|]/\\&/g')
-          sed -i "s/CHANGED_FILES_PLACEHOLDER/$CHANGED_FILES_ESCAPED/" "$REPORT_FILE"
-          
-          # Test Results
-          sed -i "s/CHANGES_RESULT_VALUE/${{ needs.changes.result }}/" "$REPORT_FILE"
-          sed -i "s/CHANGES_RESULT_STATUS/$([ '${{ needs.changes.result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed')/" "$REPORT_FILE"
-          
-          sed -i "s/LINT_RESULT_VALUE/${{ needs.static-analysis-and-tests.outputs.lint_result || 'skipped' }}/" "$REPORT_FILE"
-          sed -i "s/LINT_RESULT_STATUS/$([ '${{ needs.static-analysis-and-tests.outputs.lint_result }}' = 'success' ] && echo '✅ Passed' || echo '⏭️ Skipped')/" "$REPORT_FILE"
-          
-          sed -i "s/TSC_RESULT_VALUE/${{ needs.static-analysis-and-tests.outputs.tsc_result || 'skipped' }}/" "$REPORT_FILE"
-          sed -i "s/TSC_RESULT_STATUS/$([ '${{ needs.static-analysis-and-tests.outputs.tsc_result }}' = 'success' ] && echo '✅ Passed' || echo '⏭️ Skipped')/" "$REPORT_FILE"
-          
-          sed -i "s/UNIT_RESULT_VALUE/${{ needs.static-analysis-and-tests.outputs.unit_tests_result || 'skipped' }}/" "$REPORT_FILE"
-          sed -i "s/UNIT_RESULT_STATUS/$([ '${{ needs.static-analysis-and-tests.outputs.unit_tests_result }}' = 'success' ] && echo '✅ Passed' || echo '⏭️ Skipped')/" "$REPORT_FILE"
-          
-          sed -i "s/PLAYWRIGHT_LOGIN_VALUE/${{ needs.playwright-login.result }}/" "$REPORT_FILE"
-          sed -i "s/PLAYWRIGHT_LOGIN_STATUS/$([ '${{ needs.playwright-login.result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed')/" "$REPORT_FILE"
-          
-          sed -i "s/PLAYWRIGHT_SDK_VALUE/${{ needs.playwright-sdk.result }}/" "$REPORT_FILE"
-          sed -i "s/PLAYWRIGHT_SDK_STATUS/$([ '${{ needs.playwright-sdk.result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed')/" "$REPORT_FILE"
+          echo '' >> "$REPORT_FILE"
+          echo '---' >> "$REPORT_FILE"
+          echo '' >> "$REPORT_FILE"
+          echo '## 📁 Changes Detection' >> "$REPORT_FILE"
+          echo '' >> "$REPORT_FILE"
+          echo '| Change Type | Detected | Status |' >> "$REPORT_FILE"
+          echo '|-------------|----------|--------|' >> "$REPORT_FILE"
+          echo "| 📦 **Packages** | ${{ needs.changes.outputs.packages }} | $([ '${{ needs.changes.outputs.packages }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |" >> "$REPORT_FILE"
+          echo "| 🔧 **Common** | ${{ needs.changes.outputs.common }} | $([ '${{ needs.changes.outputs.common }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |" >> "$REPORT_FILE"
+          echo "| 🎭 **Playwright** | ${{ needs.changes.outputs.playwright }} | $([ '${{ needs.changes.outputs.playwright }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |" >> "$REPORT_FILE"
+          echo "| 🌐 **Locales** | ${{ needs.changes.outputs.locales }} | $([ '${{ needs.changes.outputs.locales }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |" >> "$REPORT_FILE"
+          echo "| 🔄 **Workflow** | ${{ needs.changes.outputs.workflow }} | $([ '${{ needs.changes.outputs.workflow }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |" >> "$REPORT_FILE"
+          echo "| 📋 **Any Changes** | ${{ needs.changes.outputs.any_changes }} | $([ '${{ needs.changes.outputs.any_changes }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |" >> "$REPORT_FILE"
+          echo '' >> "$REPORT_FILE"
+          echo '### 📁 Changed Files' >> "$REPORT_FILE"
+          echo '' >> "$REPORT_FILE"
+          echo '```' >> "$REPORT_FILE"
+          echo '${{ needs.changes.outputs.changed_files }}' >> "$REPORT_FILE"
+          echo '```' >> "$REPORT_FILE"
+          echo '' >> "$REPORT_FILE"
+          echo '## 📊 Test Results Overview' >> "$REPORT_FILE"
+          echo '' >> "$REPORT_FILE"
+          echo '| Test Category | Test Type | Status | Result |' >> "$REPORT_FILE"
+          echo '|---------------|-----------|--------|--------|' >> "$REPORT_FILE"
+          echo "| **Setup** | Changes Detection | ${{ needs.changes.result }} | $([ '${{ needs.changes.result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
+          echo "| **Static Analysis** | 🔍 ESLint | ${{ needs.static-analysis-and-tests.outputs.lint_result || 'skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.lint_result }}' = 'success' ] && echo '✅ Passed' || echo '⏭️ Skipped') |" >> "$REPORT_FILE"
+          echo "| **Static Analysis** | 🔧 TypeScript | ${{ needs.static-analysis-and-tests.outputs.tsc_result || 'skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.tsc_result }}' = 'success' ] && echo '✅ Passed' || echo '⏭️ Skipped') |" >> "$REPORT_FILE"
+          echo "| **Testing** | 🧪 Unit Tests | ${{ needs.static-analysis-and-tests.outputs.unit_tests_result || 'skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.unit_tests_result }}' = 'success' ] && echo '✅ Passed' || echo '⏭️ Skipped') |" >> "$REPORT_FILE"
+          echo "| **E2E Testing** | 🎭 Playwright Login | ${{ needs.playwright-login.result }} | $([ '${{ needs.playwright-login.result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
+          echo "| **E2E Testing** | 🎭 Playwright SDK | ${{ needs.playwright-sdk.result }} | $([ '${{ needs.playwright-sdk.result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
+          echo '' >> "$REPORT_FILE"
+          echo '## ✅ All Tests Completed!' >> "$REPORT_FILE"
+          echo '' >> "$REPORT_FILE"
+          echo '**Ready for review! 🚀**' >> "$REPORT_FILE"
 
           # Copy to GitHub Step Summary
           cat "$REPORT_FILE" >> $GITHUB_STEP_SUMMARY

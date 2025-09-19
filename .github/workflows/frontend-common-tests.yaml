@@ -449,9 +449,13 @@ jobs:
 **Commit:** \`${{ github.sha }}\`
 **Triggered by:** \`${{ github.event_name }}\`
 **Date:** \`$(date -u '+%Y-%m-%d %H:%M:%S UTC')\`
+EOF
 
-$(if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-echo "## ⚙️ Manual Run Configuration
+          # Add manual run configuration if triggered manually
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            cat >> "$REPORT_FILE" << EOF
+
+## ⚙️ Manual Run Configuration
 
 | Setting | Value |
 |---------|-------|
@@ -461,8 +465,11 @@ echo "## ⚙️ Manual Run Configuration
 | **Force All Tests** | \`${{ env.FORCE_ALL_TESTS }}\` |
 | **Debug Mode** | \`${{ env.DEBUG_MODE }}\` |
 | **Target Branch** | \`${{ github.event.inputs.target_branch || 'auto-detect' }}\` |
-"
-fi)
+EOF
+          fi
+
+          # Continue with the rest of the report
+          cat >> "$REPORT_FILE" << EOF
 
 ---
 

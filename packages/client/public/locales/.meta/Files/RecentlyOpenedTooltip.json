@@ -3,7 +3,7 @@
   "content": "Recently opened via the link",
   "content_en_sha1_hash": "ba1b7dbd261f921af480d706c47f89b68942c829",
   "created_at": "2025-05-19T21:30:56.021Z",
-  "updated_at": "2025-08-11T18:11:59.176Z",
+  "updated_at": "2025-09-19T15:39:23.097Z",
   "comment": {
     "text": "This translation key is used for a tooltip that displays \"Recently opened via the link\" when a user interacts with an item in a file list or room details view. It appears as a tooltip when the selection has an external link and indicates the source of the recent open.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 445,
+      "line_number": 447,
       "context": "return \"\";\n };\n \n const getTitleIconTooltip = () => {\n if (sharedType) return t(\"Files:RecentlyOpenedTooltip\");\n \n if (lifetime)\n return `${t(\"Files:RoomFilesLifetime\", {\n days: lifetime.value,\n period: getLifetimePeriodTranslation(lifetime.period, t),",
       "module": "/packages/client"
     }

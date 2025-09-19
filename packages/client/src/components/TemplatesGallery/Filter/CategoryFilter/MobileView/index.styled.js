@@ -71,9 +71,9 @@ export const CategoryFilterMobile = styled(DropDown)`
     bottom: 0;
   }
 
-  .section-scroll,
   .scroll-body {
     padding-inline-end: 0 !important;
+    padding-inline-start: 16px !important;
   }
 `;
 

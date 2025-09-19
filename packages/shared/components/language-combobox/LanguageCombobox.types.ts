@@ -52,4 +52,7 @@ export type ComboboxProps = {
   /** Manual width for dropdown */
   manualWidth?: string;
   dataTestId?: string;
+  usePortalBackdrop?: boolean;
+  withBackdrop?: boolean;
+  shouldShowBackdrop?: boolean;
 };

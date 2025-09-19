@@ -30,8 +30,6 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { ComboButton } from "@docspace/shared/components/combobox/sub-components/ComboButton";
-import { Backdrop } from "@docspace/shared/components/backdrop";
-import { isMobile } from "@docspace/shared/utils";
 import * as Styled from "./index.styled";
 
 const CategoryFilterMobile = ({
@@ -89,91 +87,86 @@ const CategoryFilterMobile = ({
   else height = calculatedHeight;
 
   return (
-    <>
-      <Backdrop
-        visible={isOpen}
-        withBackground={isMobile()}
-        onClick={onCloseDropdown}
-        withoutBlur={!isMobile()}
+    <Styled.CategoryFilterMobileWrapper {...rest}>
+      <ComboButton
+        selectedOption={{
+          label:
+            getCategoryTitle(currentCategory) || t("FormGallery:Categories"),
+        }}
+        isOpen={isOpen}
+        scaled
+        onClick={onToggleDropdown}
+        tabIndex={1}
       />
 
-      <Styled.CategoryFilterMobileWrapper {...rest}>
-        <ComboButton
-          selectedOption={{
-            label:
-              getCategoryTitle(currentCategory) || t("FormGallery:Categories"),
-          }}
-          isOpen={isOpen}
-          scaled
-          onClick={onToggleDropdown}
-          tabIndex={1}
-        />
-
-        <Styled.CategoryFilterMobile
-          open={isOpen}
-          withBackdrop={false}
-          manualWidth="100%"
-          directionY="bottom"
-          directionX="right"
-          isMobile
-          fixedDirection
-          isDefaultMode={false}
-          className="mainBtnDropdown"
-          forsedHeight={`${height}px`}
+      <Styled.CategoryFilterMobile
+        open={isOpen}
+        withBackdrop
+        withBackground
+        usePortalBackdrop
+        shouldShowBackdrop
+        manualWidth="100%"
+        directionY="top"
+        manualY="0px"
+        directionX="right"
+        fixedDirection
+        isDefaultMode={true}
+        className="mainBtnDropdown"
+        forsedHeight={`${height}px`}
+        clickOutsideAction={onCloseDropdown}
+      >
+        <Scrollbar
+          style={{ position: "absolute" }}
+          scrollClass="section-scroll"
+          ref={scrollRef}
         >
-          <Scrollbar
-            style={{ position: "absolute" }}
-            scrollClass="section-scroll"
-            ref={scrollRef}
-          >
-            <DropDownItem
-              isHeader
-              withHeaderArrow={!!openedMenuItem}
-              headerArrowAction={onHeaderArrowClick}
-              label={openedMenuItem?.label || t("Categories")}
-              style={{ paddingLeft: "0" }}
-            />
+          <DropDownItem
+            isHeader
+            withHeaderArrow={!!openedMenuItem}
+            headerArrowAction={onHeaderArrowClick}
+            label={openedMenuItem?.label || t("Categories")}
+            style={{ paddingLeft: "0" }}
+          />
 
-            {!openedMenuItem
-              ? [
-                  <Styled.CategoryFilterItemMobile
-                    key="view-all"
-                    className="dropdown-item"
-                    label={t("FormGallery:ViewAllTemplates")}
-                    onClick={onViewAllTemplates}
-                    style={{ paddingLeft: "0" }}
-                  />,
-                  <DropDownItem
-                    isSeparator
-                    key="separator"
-                    className="huge-separator"
-                  />,
-                ]
-              : null}
+          {!openedMenuItem
+            ? [
+                <Styled.CategoryFilterItemMobile
+                  key="view-all"
+                  className="dropdown-item"
+                  label={t("FormGallery:ViewAllTemplates")}
+                  onClick={onViewAllTemplates}
+                  style={{ paddingLeft: "0" }}
+                />,
+                <DropDownItem
+                  isSeparator
+                  key="separator"
+                  className="huge-separator"
+                />,
+              ]
+            : null}
 
-            {!openedMenuItem
-              ? menuItems.map((item) => (
-                  <Styled.CategoryFilterItemMobile
-                    key={item.key}
-                    className={`item-by-${item.key}`}
-                    label={item.label}
-                    onClick={() => onOpenMenuItem(item)}
-                    style={{ paddingLeft: "0" }}
-                    isSubMenu
-                  />
-                ))
-              : openedMenuItem.categories.map((category) => (
-                  <Styled.CategoryFilterItemMobile
-                    key={category.id}
-                    label={getCategoryTitle(category)}
-                    onClick={() => onFilterByCategory(category)}
-                    style={{ paddingLeft: "0" }}
-                  />
-                ))}
-          </Scrollbar>
-        </Styled.CategoryFilterMobile>
-      </Styled.CategoryFilterMobileWrapper>
-    </>
+          {!openedMenuItem
+            ? menuItems.map((item) => (
+                <Styled.CategoryFilterItemMobile
+                  key={item.key}
+                  className={`item-by-${item.key}`}
+                  label={item.label}
+                  onClick={() => onOpenMenuItem(item)}
+                  style={{ paddingLeft: "0" }}
+                  isSubMenu
+                />
+              ))
+            : openedMenuItem.categories.map((category) => (
+                <Styled.CategoryFilterItemMobile
+                  key={category.id}
+                  label={getCategoryTitle(category)}
+                  onClick={() => onFilterByCategory(category)}
+                  style={{ paddingLeft: "0" }}
+                />
+              ))}
+        </Scrollbar>
+      </Styled.CategoryFilterMobile>
+    </Styled.CategoryFilterMobileWrapper>
   );
 };
 

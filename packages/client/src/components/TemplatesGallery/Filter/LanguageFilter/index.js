@@ -97,6 +97,9 @@ const LanguageFilter = ({
       selectedCulture={convertToCulture(oformsLocal)}
       id="comboBoxLanguage"
       isMobileView={isMobileView}
+      withBackdrop={isMobileView}
+      usePortalBackdrop={isMobileView}
+      shouldShowBackdrop={isMobileView}
     />
   );
 };

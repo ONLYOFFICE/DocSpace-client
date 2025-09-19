@@ -443,16 +443,21 @@ jobs:
           cat > "$REPORT_FILE" << 'EOF'
 # 🚀 DocSpace Frontend Test Results
 
-**Workflow:** `${{ github.workflow }}`
-**Run ID:** `${{ github.run_id }}`
-**Branch:** `${{ github.ref_name }}`
-**Commit:** `${{ github.sha }}`
-**Triggered by:** `${{ github.event_name }}`
-**Date:** `PLACEHOLDER_DATE`
+**Workflow:** 'WORKFLOW_PLACEHOLDER'
+**Run ID:** 'RUN_ID_PLACEHOLDER'
+**Branch:** 'BRANCH_PLACEHOLDER'
+**Commit:** 'COMMIT_PLACEHOLDER'
+**Triggered by:** 'EVENT_NAME_PLACEHOLDER'
+**Date:** 'DATE_PLACEHOLDER'
 EOF
           
-          # Replace the date placeholder with actual date
-          sed -i "s/PLACEHOLDER_DATE/$(date -u '+%Y-%m-%d %H:%M:%S UTC')/" "$REPORT_FILE"
+          # Replace all GitHub Actions placeholders
+          sed -i "s/WORKFLOW_PLACEHOLDER/${{ github.workflow }}/" "$REPORT_FILE"
+          sed -i "s/RUN_ID_PLACEHOLDER/${{ github.run_id }}/" "$REPORT_FILE"
+          sed -i "s/BRANCH_PLACEHOLDER/${{ github.ref_name }}/" "$REPORT_FILE"
+          sed -i "s/COMMIT_PLACEHOLDER/${{ github.sha }}/" "$REPORT_FILE"
+          sed -i "s/EVENT_NAME_PLACEHOLDER/${{ github.event_name }}/" "$REPORT_FILE"
+          sed -i "s/DATE_PLACEHOLDER/$(date -u '+%Y-%m-%d %H:%M:%S UTC')/" "$REPORT_FILE"
 
           # Add manual run configuration if triggered manually
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
@@ -462,12 +467,12 @@ EOF
 
 | Setting | Value |
 |---------|-------|
-| **Node Version** | `NODE_VERSION_PLACEHOLDER` |
-| **pnpm Version** | `PNPM_VERSION_PLACEHOLDER` |
-| **Skip Cache** | `SKIP_CACHE_PLACEHOLDER` |
-| **Force All Tests** | `FORCE_ALL_TESTS_PLACEHOLDER` |
-| **Debug Mode** | `DEBUG_MODE_PLACEHOLDER` |
-| **Target Branch** | `TARGET_BRANCH_PLACEHOLDER` |
+| **Node Version** | 'NODE_VERSION_PLACEHOLDER' |
+| **pnpm Version** | 'PNPM_VERSION_PLACEHOLDER' |
+| **Skip Cache** | 'SKIP_CACHE_PLACEHOLDER' |
+| **Force All Tests** | 'FORCE_ALL_TESTS_PLACEHOLDER' |
+| **Debug Mode** | 'DEBUG_MODE_PLACEHOLDER' |
+| **Target Branch** | 'TARGET_BRANCH_PLACEHOLDER' |
 EOF
             
             # Replace placeholders with actual values
@@ -476,7 +481,11 @@ EOF
             sed -i "s/SKIP_CACHE_PLACEHOLDER/${{ env.SKIP_CACHE }}/" "$REPORT_FILE"
             sed -i "s/FORCE_ALL_TESTS_PLACEHOLDER/${{ env.FORCE_ALL_TESTS }}/" "$REPORT_FILE"
             sed -i "s/DEBUG_MODE_PLACEHOLDER/${{ env.DEBUG_MODE }}/" "$REPORT_FILE"
-            sed -i "s/TARGET_BRANCH_PLACEHOLDER/${{ github.event.inputs.target_branch || 'auto-detect' }}/" "$REPORT_FILE"
+            TARGET_BRANCH_VALUE="${{ github.event.inputs.target_branch }}"
+            if [ -z "$TARGET_BRANCH_VALUE" ]; then
+              TARGET_BRANCH_VALUE="auto-detect"
+            fi
+            sed -i "s/TARGET_BRANCH_PLACEHOLDER/$TARGET_BRANCH_VALUE/" "$REPORT_FILE"
           fi
 
           # Continue with the rest of the report

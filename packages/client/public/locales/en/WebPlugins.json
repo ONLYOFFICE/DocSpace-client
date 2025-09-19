@@ -5,6 +5,7 @@
   "ExpandFunctionality": "Expand functionality using Plugin SDK",
   "GoToRepo": "Go to repository",
   "Metadata": "Metadata",
+  "MinDocspaceVersion": "Version ({{productName}})",
   "NeedSettings": "Need enter settings",
   "NoPlugins": "No plugins added",
   "NotNeedSettings": "Not need enter settings",

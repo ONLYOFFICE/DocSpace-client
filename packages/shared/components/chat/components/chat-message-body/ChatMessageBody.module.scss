@@ -419,3 +419,10 @@
     opacity: 8%;
   }
 }
+
+.hr {
+  border: none;
+  height: 1px;
+  background-color: var(--chat-message-hr-color);
+  margin: 8px 0;
+}

@@ -118,8 +118,7 @@ export const createMarkdownComponents = ({
       {children}
     </blockquote>
   ),
-  // TODO: Chat redesign - add styles
-  hr: () => <hr />,
+  hr: () => <hr className={styles.hr} />,
   // TODO: Chat redesign - add styles
   table: () => <table />,
   // TODO: Chat redesign - add styles

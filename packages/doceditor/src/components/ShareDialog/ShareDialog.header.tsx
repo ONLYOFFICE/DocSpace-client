@@ -47,22 +47,25 @@ const ShareDialogHeader: FC<ShareDialogHeaderProps> = ({
 
   const { getIcon } = useItemIcon({ filesSettings });
 
-  const icon = useMemo(() => {
-    return getIcon(file.fileExst, 32);
-  }, [file.fileExst]);
+  const icon = useMemo(() => getIcon(file.fileExst, 32), [file.fileExst]);
+
+  const title = useMemo(
+    () => file.title.replace(/\.[^/.]+$/, ""),
+    [file.title],
+  );
 
   return (
     <div className={styles.header}>
-      <RoomIcon logo={icon} title={file.title} showDefault={false} />
+      <RoomIcon logo={icon} title={title} showDefault={false} />
       <Text
         truncate
         dir="auto"
         fontSize="16px"
         fontWeight={700}
-        title={file.title}
+        title={title}
         className={styles.title}
       >
-        {file.title}
+        {title}
       </Text>
       {disabledIcon ? null : (
         <IconButton

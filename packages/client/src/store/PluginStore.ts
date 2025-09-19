@@ -264,9 +264,41 @@ class PluginStore {
     }
   };
 
+  checkPluginCompatibility = (minDocspaceVersion?: string): boolean => {
+    if (!minDocspaceVersion) return false;
+
+    const currentDocspaceVersion = this.settingsStore.buildVersionInfo.docspace;
+
+    const parts1 = minDocspaceVersion.split(".").map(Number);
+    const parts2 = currentDocspaceVersion.split(".").map(Number);
+
+    const len = Math.max(parts1.length, parts2.length);
+
+    for (let i = 0; i < len; i++) {
+      const num1 = parts1[i] ?? 0;
+      const num2 = parts2[i] ?? 0;
+
+      if (num1 < num2) return true;
+      if (num1 > num2) return false;
+    }
+
+    return true;
+  };
+
   addPlugin = async (data: FormData) => {
     try {
       const plugin = await api.plugins.addPlugin(data);
+
+      const isPluginCompatible = this.checkPluginCompatibility(
+        plugin.docspaceVersions, // minDocspaceVersion
+      );
+
+      if (!isPluginCompatible) {
+        // Temporary toast, need to change (locale) or remove
+        toastr.error(
+          "Plugin is not compatible with your DocSpace version, some features may not work.",
+        );
+      }
 
       this.setNeedPageReload(true);
 
@@ -318,6 +350,12 @@ class PluginStore {
           : newPlugin.scopes;
 
       newPlugin.iconUrl = getPluginUrl(newPlugin.url, "");
+
+      const isPluginCompatible = this.checkPluginCompatibility(
+        plugin.docspaceVersions, // minDocspaceVersion
+      );
+
+      newPlugin.compatible = isPluginCompatible;
 
       this.installPlugin(newPlugin);
 

@@ -3,7 +3,7 @@
   "content": "activation required",
   "content_en_sha1_hash": "76f386238b282abadda4b1e1fbd6696b1704ebc9",
   "created_at": "2025-05-26T07:15:40.182Z",
-  "updated_at": "2025-09-17T13:43:01.611Z",
+  "updated_at": "2025-09-19T15:39:23.047Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that activation is required. It appears as an overlay or tooltip when a third-party storage provider is not connected or requires activation. Translators should update this text to match the context of their language.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     {
       "file_path": "/packages/management/src/store/BackupStore.ts",
       "line_number": 130,
-      "context": "isAdmin: boolean,\n ) => {\n const serviceTitle = connectedCloudsTypeTitleTranslation(provider.name, t);\n const serviceLabel = provider.connected\n ? serviceTitle\n : `${serviceTitle} (${t(\"Common:ActivationRequired\")})`;\n \n const isConnected =\n provider.name === this.connectedThirdPartyAccount?.title;\n \n const isDisabled = !provider.connected && !isAdmin;",
+      "context": "isAdmin: boolean,\n ) => {\n const serviceTitle = connectedCloudsTypeTitleTranslation(provider.name, t);\n const serviceLabel = provider.connected\n ? serviceTitle\n : `${serviceTitle} (${t(\"Common:ActivationRequired\")})`;\n \n const isConnected =\n provider.name === this.connectedThirdPartyAccount?.providerKey ||\n provider.name === this.connectedThirdPartyAccount?.title;",
       "module": "/packages/management"
     }
   ],

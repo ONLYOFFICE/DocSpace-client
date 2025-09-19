@@ -59,7 +59,7 @@
     }
   }
 
-  @include mixins.tablet {
+  @include mixins.tablet-and-below {
     .infoIcon {
       display: block;
     }

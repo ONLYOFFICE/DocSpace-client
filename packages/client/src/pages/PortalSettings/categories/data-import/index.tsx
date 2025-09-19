@@ -24,10 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useCallback } from "react";
+import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { toastr } from "@docspace/shared/components/toast";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
@@ -39,20 +38,8 @@ import { Component as GoogleWorkspace } from "./GoogleWorkspace";
 import { Component as OnlyofficeWorkspace } from "./OnlyofficeWorkspace";
 
 const DataImport = (props: DataImportProps) => {
-  const {
-    viewAs,
-    setViewAs,
-    currentDeviceType,
-    getMigrationStatus,
-    isMigrationInit,
-    setUsers,
-    workspace,
-    setWorkspace,
-    setFiles,
-    setLoadingStatus,
-    setMigratingWorkspace,
-    setMigrationPhase,
-  } = props as InjectedDataImportProps;
+  const { viewAs, setViewAs, currentDeviceType, workspace } =
+    props as InjectedDataImportProps;
 
   const { t } = useTranslation(["Settings"]);
 
@@ -65,66 +52,6 @@ const DataImport = (props: DataImportProps) => {
   useEffect(() => {
     setDocumentTitle(t("DataImport"));
   }, [t]);
-
-  const updateStatus = useCallback(async () => {
-    const response = await getMigrationStatus();
-
-    if (!response) return;
-
-    const { parseResult, error, isCompleted } = response;
-
-    const isErrorOrFailedParse = error || parseResult.failedArchives.length > 0;
-    const isNoUsersParsed =
-      parseResult.users.length +
-        parseResult.existUsers.length +
-        parseResult.withoutEmailUsers.length ===
-      0;
-
-    if (isErrorOrFailedParse || isNoUsersParsed) return;
-
-    if (parseResult.operation === "parse") {
-      setWorkspace(parseResult.migratorName);
-      setMigratingWorkspace(parseResult.migratorName);
-      setFiles(parseResult.files);
-
-      if (isCompleted) {
-        setUsers(parseResult);
-        setMigrationPhase("setup");
-        setLoadingStatus("done");
-      } else {
-        setLoadingStatus("proceed");
-      }
-    }
-
-    if (parseResult.operation === "migration") {
-      setWorkspace(parseResult.migratorName);
-      setMigratingWorkspace(parseResult.migratorName);
-
-      if (isCompleted) {
-        setMigrationPhase("complete");
-      } else {
-        setMigrationPhase("migrating");
-      }
-    }
-  }, [
-    getMigrationStatus,
-    setUsers,
-    setWorkspace,
-    setMigratingWorkspace,
-    setFiles,
-    setLoadingStatus,
-    setMigrationPhase,
-  ]);
-
-  useEffect(() => {
-    try {
-      if (!isMigrationInit) {
-        updateStatus();
-      }
-    } catch (error) {
-      toastr.error(error as string);
-    }
-  }, [isMigrationInit, updateStatus]);
 
   return workspace === "Nextcloud" ? (
     <NextcloudWorkspace />
@@ -139,17 +66,7 @@ const DataImport = (props: DataImportProps) => {
 
 export const Component = inject<TStore>(
   ({ settingsStore, setup, importAccountsStore }) => {
-    const {
-      getMigrationStatus,
-      isMigrationInit,
-      setUsers,
-      workspace,
-      setWorkspace,
-      setFiles,
-      setLoadingStatus,
-      setMigratingWorkspace,
-      setMigrationPhase,
-    } = importAccountsStore;
+    const { workspace } = importAccountsStore;
 
     const { viewAs, setViewAs } = setup;
     const { currentDeviceType } = settingsStore;
@@ -158,15 +75,7 @@ export const Component = inject<TStore>(
       viewAs,
       setViewAs,
       currentDeviceType,
-      getMigrationStatus,
-      isMigrationInit,
-      setUsers,
       workspace,
-      setWorkspace,
-      setFiles,
-      setLoadingStatus,
-      setMigratingWorkspace,
-      setMigrationPhase,
     };
   },
 )(observer(DataImport));

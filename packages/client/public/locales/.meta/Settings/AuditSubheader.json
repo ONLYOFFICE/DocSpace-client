@@ -3,7 +3,7 @@
   "content": "The subsection allows you to browse through the list of the latest changes (creation, modification, deletion etc.) made by users to the entities (rooms, opportunities, files etc.) within your {{productName}}.",
   "content_en_sha1_hash": "14dcf30f13f317e2c76ba01c199429d2e0ccc37a",
   "created_at": "2025-05-19T21:30:50.592Z",
-  "updated_at": "2025-05-24T05:46:00.072Z",
+  "updated_at": "2025-09-17T13:43:01.895Z",
   "comment": {
     "text": "This translation key is used as a subheader on an empty screen that displays when there are no audit trail users. It informs the user about the purpose of the section and how it relates to their {{productName}}.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/index.js",
-      "line_number": 116,
-      "context": "if (isLoading) return null;\n \n if (auditTrailUsers.length === 0) {\n return (\n <EmptyScreenContainer\n descriptionText={t(\"AuditSubheader\", {\n productName: t(\"Common:ProductName\"),\n })}\n imageSrc={\n theme.isBase ? EmptyScreenRecentUrl : EmptyScreenRecentDarkUrl\n }",
+      "line_number": 88,
+      "context": "};\n \n if (auditTrailUsers.length === 0) {\n return (\n <EmptyScreenContainer\n descriptionText={t(\"AuditSubheader\", {\n productName: t(\"Common:ProductName\"),\n })}\n imageSrc={\n theme.isBase ? EmptyScreenRecentUrl : EmptyScreenRecentDarkUrl\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/index.js",
-      "line_number": 116,
-      "context": "if (isLoading) return null;\n \n if (auditTrailUsers.length === 0) {\n return (\n <EmptyScreenContainer\n descriptionText={t(\"AuditSubheader\", {\n productName: t(\"Common:ProductName\"),\n })}\n imageSrc={\n theme.isBase ? EmptyScreenRecentUrl : EmptyScreenRecentDarkUrl\n }",
+      "line_number": 88,
+      "context": "};\n \n if (auditTrailUsers.length === 0) {\n return (\n <EmptyScreenContainer\n descriptionText={t(\"AuditSubheader\", {\n productName: t(\"Common:ProductName\"),\n })}\n imageSrc={\n theme.isBase ? EmptyScreenRecentUrl : EmptyScreenRecentDarkUrl\n }",
       "module": "/packages/client"
     }
   ],

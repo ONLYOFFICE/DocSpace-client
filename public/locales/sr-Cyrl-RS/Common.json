@@ -894,5 +894,7 @@
   "RevokeLink": "Опозови линк",
   "LogoForEditors": "Лого за {{editorName}} уредник",
   "LogoForViewer": "Лого за {{diagramViewer}}",
-  "LogoDocsEditor": "Логотип за заглавље уређивача"
+  "LogoDocsEditor": "Логотип за заглавље уређивача",
+  "PortalRestoring": "Обнављање {{productName}}-а",
+  "PreparationPortalDescription": "Када је процес обнављања завршен, бићете аутоматски преусмерени на ваш {{productName}}."
 }

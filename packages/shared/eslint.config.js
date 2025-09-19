@@ -105,6 +105,13 @@ module.exports = [
       "react/no-unstable-nested-components": ["error", { allowAsProps: true }],
       "react/no-this-in-sfc": "error",
       "local-rules/no-iterator-foreach": "error",
+      "local-rules/no-ascii-characters": [
+        "error",
+        {
+          allowedCharacters: ["↓", "↑", "←", "→", "⌘", "⌥", "©", "•", "—"],
+          ignoreFiles: ["Backdrop.stories.tsx", "email.test.ts"],
+        },
+      ],
     },
     settings: {
       react: {

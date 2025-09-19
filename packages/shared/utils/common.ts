@@ -374,16 +374,43 @@ export function toCommunityHostname(hostname: string) {
   return communityHostname;
 }
 
+export function getProviderLabel(provider: string, t: (key: string) => string) {
+  switch (provider) {
+    case "apple":
+      return t("Common:ProviderApple");
+    case "google":
+      return t("Common:ProviderGoogle");
+    case "facebook":
+      return t("Common:ProviderFacebook");
+    case "twitter":
+      return t("Common:ProviderTwitter");
+    case "linkedin":
+      return t("Common:ProviderLinkedIn");
+    case "microsoft":
+      return t("Common:ProviderMicrosoft");
+    case "sso":
+      return t("Common:SSO");
+    case "zoom":
+      return t("Common:ProviderZoom");
+    case "weixin":
+      return t("Common:ProviderWechat");
+    case "sso-full":
+      return t("Common:ProviderSsoSetting");
+    default:
+      return "";
+  }
+}
+
 export function getProviderTranslation(
   provider: string,
   t: (key: string) => string,
   linked = false,
   signUp = false,
 ) {
-  const capitalizeProvider =
-    provider.charAt(0).toUpperCase() + provider.slice(1);
+  const providerLabel = getProviderLabel(provider, t);
+
   if (linked) {
-    return `${t("Common:Disconnect")} ${capitalizeProvider}`;
+    return `${t("Common:Disconnect")} ${providerLabel}`;
   }
 
   switch (provider) {
@@ -413,30 +440,10 @@ export function getProviderTranslation(
       return signUp ? t("Common:SignUpWithSso") : t("Common:SignInWithSso");
     case "zoom":
       return signUp ? t("Common:SignUpWithZoom") : t("Common:SignInWithZoom");
-    default:
-      return "";
-  }
-}
-export function getProviderLabel(provider: string, t: (key: string) => string) {
-  switch (provider) {
-    case "apple":
-      return t("Common:ProviderApple");
-    case "google":
-      return t("Common:ProviderGoogle");
-    case "facebook":
-      return t("Common:ProviderFacebook");
-    case "twitter":
-      return t("Common:ProviderTwitter");
-    case "linkedin":
-      return t("Common:ProviderLinkedIn");
-    case "microsoft":
-      return t("Common:ProviderMicrosoft");
-    case "sso":
-      return t("Common:SSO");
-    case "zoom":
-      return t("Common:ProviderZoom");
-    case "sso-full":
-      return t("Common:ProviderSsoSetting");
+    case "weixin":
+      return signUp
+        ? t("Common:SignUpWithWechat")
+        : t("Common:SignInWithWechat");
     default:
       return "";
   }

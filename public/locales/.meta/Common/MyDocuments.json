@@ -3,7 +3,7 @@
   "content": "My documents",
   "content_en_sha1_hash": "143f7ba1fed6d88c5657c9a23c89975723c9f700",
   "created_at": "2025-09-02T08:31:42.199Z",
-  "updated_at": "2025-09-07T07:53:15.016Z",
+  "updated_at": "2025-09-17T13:43:01.548Z",
   "comment": {
     "text": "This key displays the label \"My documents\" to indicate a section or area within the UI where users can access their personal documents. It appears as a section name in a link, likely directing users to their personal document storage area. Translators should ensure the translation accurately conveys the meaning of a user's personal files.",
     "is_auto": true,
@@ -132,7 +132,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/index.js",
-      "line_number": 145,
+      "line_number": 117,
       "context": "lifetime={securityLifetime.auditTrailLifeTime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}\n downloadReport={t(\"DownloadReportBtnText\")}\n downloadReportDescription={t(\"ReportSaveLocation\", {\n sectionName: t(\"Common:MyDocuments\"),\n })}\n getReport={getAuditTrailReport}\n isSettingNotPaid={!isAuditAvailable}\n isLoadingDownloadReport={isLoadingDownloadReport}\n />",
       "module": "/packages/client"
     },
@@ -180,7 +180,7 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 498,
+      "line_number": 499,
       "context": "styles.backupDescription,\n \"backup-description\",\n )}\n >\n {t(\"Common:RoomsModuleDescription\", {\n roomName: t(\"Common:MyDocuments\"),\n })}\n </Text>\n {isCheckedDocuments ? (\n <RoomsModule\n settingsFileSelector={settingsFileSelector}",
       "module": "/packages/shared"
     },
@@ -192,25 +192,25 @@
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 1271,
+      "line_number": 1278,
       "context": "t: TTranslation,\n ) => {\n if (isPortalAdmin)\n return t(\"Common:RolePortalAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyDocuments\"),\n });\n \n if (isRoomAdmin)\n return t(\"Common:RoleRoomAdminDescription\", {\n sectionName: t(\"Common:MyDocuments\"),",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 1271,
+      "line_number": 1278,
       "context": "t: TTranslation,\n ) => {\n if (isPortalAdmin)\n return t(\"Common:RolePortalAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyDocuments\"),\n });\n \n if (isRoomAdmin)\n return t(\"Common:RoleRoomAdminDescription\", {\n sectionName: t(\"Common:MyDocuments\"),",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 56,
+      "line_number": 57,
       "context": "switch (roomType) {\n case RoomsType.FormRoom:\n return t(\"Common:RoleRoomAdminFormRoomDescription\");\n case None:\n return t(\"Common:RoleRoomAdminDescription\", {\n sectionName: t(\"Common:MyDocuments\"),\n });\n default:\n return t(\"Common:RoleRoomManagerDescription\");\n }\n };",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 56,
+      "line_number": 57,
       "context": "switch (roomType) {\n case RoomsType.FormRoom:\n return t(\"Common:RoleRoomAdminFormRoomDescription\");\n case None:\n return t(\"Common:RoleRoomAdminDescription\", {\n sectionName: t(\"Common:MyDocuments\"),\n });\n default:\n return t(\"Common:RoleRoomManagerDescription\");\n }\n };",
       "module": "/packages/shared"
     }

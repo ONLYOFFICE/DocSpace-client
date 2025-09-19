@@ -42,6 +42,8 @@ const CreatePluginFile = ({
   onCancel,
   onClose,
   isCreateDialog,
+  isCreateDisabled,
+  isCloseAfterCreate = true,
   options,
   selectedOption,
   onSelect,
@@ -91,9 +93,18 @@ const CreatePluginFile = ({
         updateFileItems,
         updateCreateDialogProps: updateCreatePluginFileProps,
       });
-      !message.createDialogProps?.errorText && onCloseAction();
+      isCloseAfterCreate && onCloseAction();
     } catch (error) {
       if (!onError) return;
+
+      if (isAutoFocusOnError) {
+        setTimeout(() => {
+          const input = document?.getElementById("create-text-input");
+          if (input) {
+            input.focus();
+          }
+        }, 50);
+      }
 
       const message = await onError(error);
 
@@ -118,46 +129,56 @@ const CreatePluginFile = ({
 
   const onSelectAction = (option) => {
     if (!onSelect) return;
-    const message = onSelect(option);
 
-    messageActions({
-      message,
-      pluginName,
-      setSettingsPluginDialogVisible,
-      setCurrentSettingsDialogPlugin,
-      updatePluginStatus,
-      setPluginDialogVisible,
-      setPluginDialogProps,
-      updateContextMenuItems,
-      updateInfoPanelItems,
-      updateMainButtonItems,
-      updateProfileMenuItems,
-      updateEventListenerItems,
-      updateFileItems,
-      updateCreateDialogProps: updateCreatePluginFileProps,
-    });
+    try {
+      const message = onSelect(option);
+
+      messageActions({
+        message,
+        pluginName,
+        setSettingsPluginDialogVisible,
+        setCurrentSettingsDialogPlugin,
+        updatePluginStatus,
+        setPluginDialogVisible,
+        setPluginDialogProps,
+        updateContextMenuItems,
+        updateInfoPanelItems,
+        updateMainButtonItems,
+        updateProfileMenuItems,
+        updateEventListenerItems,
+        updateFileItems,
+        updateCreateDialogProps: updateCreatePluginFileProps,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const onChangeAction = (value) => {
+  const onChangeAction = async (value) => {
     if (!onChange) return;
-    const message = onChange(value);
 
-    messageActions({
-      message,
-      pluginName,
-      setSettingsPluginDialogVisible,
-      setCurrentSettingsDialogPlugin,
-      updatePluginStatus,
-      setPluginDialogVisible,
-      setPluginDialogProps,
-      updateContextMenuItems,
-      updateInfoPanelItems,
-      updateMainButtonItems,
-      updateProfileMenuItems,
-      updateEventListenerItems,
-      updateFileItems,
-      updateCreateDialogProps: updateCreatePluginFileProps,
-    });
+    try {
+      const message = onChange(value);
+
+      messageActions({
+        message,
+        pluginName,
+        setSettingsPluginDialogVisible,
+        setCurrentSettingsDialogPlugin,
+        updatePluginStatus,
+        setPluginDialogVisible,
+        setPluginDialogProps,
+        updateContextMenuItems,
+        updateInfoPanelItems,
+        updateMainButtonItems,
+        updateProfileMenuItems,
+        updateEventListenerItems,
+        updateFileItems,
+        updateCreateDialogProps: updateCreatePluginFileProps,
+      });
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -176,7 +197,7 @@ const CreatePluginFile = ({
       onSelect={onSelectAction}
       extension={extension}
       errorText={errorText}
-      isAutoFocusOnError={isAutoFocusOnError}
+      isCreateDisabled={isCreateDisabled}
     />
   );
 };

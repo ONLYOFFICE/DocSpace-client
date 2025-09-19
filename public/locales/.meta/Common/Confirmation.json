@@ -3,7 +3,7 @@
   "content": "Confirmation",
   "content_en_sha1_hash": "3424edc2354c7c55f6eb740b673d349b02d27c8d",
   "created_at": "2025-05-19T21:30:43.625Z",
-  "updated_at": "2025-08-12T19:46:25.797Z",
+  "updated_at": "2025-09-17T13:43:01.581Z",
   "comment": {
     "text": "This translation key is used to display a confirmation message in a user interface. It appears as the title of a dialog header, indicating that the application is seeking user confirmation before proceeding with an action such as canceling an operation or deleting a file or room.",
     "is_auto": true,
@@ -32,6 +32,12 @@
       "file_path": "/packages/client/src/components/dialogs/ResetConfirmationDialog/ResetConfirmationModal.js",
       "line_number": 44,
       "context": "contentHeight=\"100%\"\n displayType=\"modal\"\n onClose={closeResetModal}\n visible={confirmationResetModal}\n >\n <ModalDialog.Header>{t(\"Common:Confirmation\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <Text>{t(\"Common:ConfirmationText\")}</Text>\n </ModalDialog.Body>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/index.tsx",
+      "line_number": 106,
+      "context": "};\n }, []);\n \n const confirmationDialogContent = {\n backup: {\n title: t(\"Common:Confirmation\"),\n body: t(\"Services:EnableBackupConfirm\", {\n productName: t(\"Common:ProductName\"),\n }),\n },\n };",
       "module": "/packages/client"
     },
     {

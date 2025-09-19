@@ -24,47 +24,79 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Tabs } from "@docspace/shared/components/tabs";
 import { useNavigate, useLocation } from "react-router";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { DeviceType } from "@docspace/shared/enums";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
-
 import config from "PACKAGE_FILE";
-import AccessPortal from "./access-portal";
-import SecurityLoader from "./sub-components/loaders/security-loader";
-import LoginHistory from "./login-history";
 import MobileSecurityLoader from "./sub-components/loaders/mobile-security-loader";
 import AccessLoader from "./sub-components/loaders/access-loader";
+import SecurityLoader from "./sub-components/loaders/security-loader";
+
+import { createDefaultHookSettingsProps } from "../../utils/createDefaultHookSettingsProps";
+
+import AccessPortal from "./access-portal";
+import LoginHistory from "./login-history";
 import AuditTrail from "./audit-trail";
 import { resetSessionStorage } from "../../utils";
+import useSecurity from "./useSecurity";
 
 const SecurityWrapper = (props) => {
-  const { t, initSettings, isInit, resetIsInit, currentDeviceType } = props;
-  const [isLoading, setIsLoading] = useState(false);
+  const {
+    t,
+    resetIsInit,
+    currentDeviceType,
+
+    settingsStore,
+    tfaStore,
+    setup,
+    clearAbortControllerArr,
+    showPortalSettingsLoader,
+  } = props;
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  const defaultProps = createDefaultHookSettingsProps({
+    settingsStore,
+    tfaStore,
+    setup,
+  });
+
+  const { getAccessPortalData, getLoginHistoryData, getAuditTrailData } =
+    useSecurity(defaultProps.security);
 
   const data = [
     {
       id: "access-portal",
       name: t("PortalAccess", { productName: t("Common:ProductName") }),
       content: <AccessPortal />,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getAccessPortalData();
+      },
     },
     {
       id: "login-history",
       name: t("LoginHistoryTitle"),
       content: <LoginHistory />,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getLoginHistoryData();
+      },
     },
     {
       id: "audit-trail",
       name: t("AuditTrailNav"),
       content: <AuditTrail />,
+      onClick: async () => {
+        clearAbortControllerArr();
+        await getAuditTrailData();
+      },
     },
   ];
 
@@ -76,15 +108,7 @@ const SecurityWrapper = (props) => {
 
   const currentTabId = getCurrentTabId();
 
-  const load = async () => {
-    !isInit &&
-      currentDeviceType !== DeviceType.mobile &&
-      (await initSettings());
-    setIsLoading(true);
-  };
-
   useEffect(() => {
-    load();
     return () => {
       resetIsInit();
       resetSessionStorage();
@@ -101,7 +125,7 @@ const SecurityWrapper = (props) => {
     );
   };
 
-  if (!isLoading && data.length)
+  if (showPortalSettingsLoader && data.length)
     return currentTabId === data[0].id ? (
       currentDeviceType !== DeviceType.desktop ? (
         <MobileSecurityLoader />
@@ -118,17 +142,29 @@ const SecurityWrapper = (props) => {
       selectedItemId={currentTabId}
       onSelect={(e) => onSelect(e)}
       stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
+      withAnimation
     />
   );
 };
 
-export const Component = inject(({ settingsStore, setup }) => {
-  const { resetIsInit, initSettings, isInit } = setup;
+export const Component = inject(
+  ({ settingsStore, setup, tfaStore, clientLoadingStore }) => {
+    const { resetIsInit } = setup;
 
-  return {
-    isInit,
-    initSettings,
-    resetIsInit,
-    currentDeviceType: settingsStore.currentDeviceType,
-  };
-})(withTranslation(["Settings", "Common"])(observer(SecurityWrapper)));
+    const { clearAbortControllerArr, currentDeviceType } = settingsStore;
+
+    const { showPortalSettingsLoader } = clientLoadingStore;
+
+    return {
+      resetIsInit,
+
+      showPortalSettingsLoader,
+
+      settingsStore,
+      tfaStore,
+      setup,
+      clearAbortControllerArr,
+      currentDeviceType,
+    };
+  },
+)(withTranslation(["Settings", "Common"])(observer(SecurityWrapper)));

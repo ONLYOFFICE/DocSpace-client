@@ -3,7 +3,7 @@
   "content": "Info",
   "content_en_sha1_hash": "4b631f69842530d659306c8f06dbad594a6b1807",
   "created_at": "2025-05-19T21:30:45.900Z",
-  "updated_at": "2025-09-07T07:53:15.197Z",
+  "updated_at": "2025-09-17T13:43:01.701Z",
   "comment": {
     "text": "This translation key is used for the text \"Info\", which is displayed as a header or label in various UI components, including an info panel and an OAuth information dialog. The purpose of this text is to provide basic information or context, often accompanied by icons. It appears in places such as headers, dialogs, and context options.",
     "is_auto": true,
@@ -42,19 +42,19 @@
     },
     {
       "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 701,
+      "line_number": 732,
       "context": "};\n \n const infoOption = {\n key: \"info\",\n icon: SettingsIconUrl,\n label: t(\"Common:Info\"),\n onClick: onShowInfo,\n disabled: isInfo,\n dataTestId: \"oauth_info_option\",\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 268,
+      "line_number": 265,
       "context": "case \"details\":\n return {\n id: \"option_details\",\n key: option,\n icon: InfoOutlineReactSvgUrl,\n label: t(\"Common:Info\"),\n onClick: () => this.onDetailsClick(item),\n };\n \n case \"invite-again\":\n return !this.settingsStore.allowInvitingMembers",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 268,
+      "line_number": 265,
       "context": "case \"details\":\n return {\n id: \"option_details\",\n key: option,\n icon: InfoOutlineReactSvgUrl,\n label: t(\"Common:Info\"),\n onClick: () => this.onDetailsClick(item),\n };\n \n case \"invite-again\":\n return !this.settingsStore.allowInvitingMembers",
       "module": "/packages/client"
     },

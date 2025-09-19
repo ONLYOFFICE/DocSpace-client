@@ -23,22 +23,15 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { useEffect, useState } from "react";
+
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router";
 
 import config from "PACKAGE_FILE";
 
-import {
-  getBackupStorage,
-  getStorageRegions,
-} from "@docspace/shared/api/settings";
-import { getSettingsThirdParty } from "@docspace/shared/api/files";
-
 import { DeviceType } from "@docspace/shared/enums";
-import { toastr } from "@docspace/shared/components/toast";
-import { isManagement } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { ButtonSize } from "@docspace/shared/components/button";
 import { RestoreBackup } from "@docspace/shared/pages/backup/restore-backup";
@@ -52,46 +45,14 @@ import type {
 } from "./RestoreBackup.types";
 
 const RestoreBackupWrapper = ({
-  getProgress,
-  setStorageRegions,
   setRestoreResource,
-  setThirdPartyStorage,
   resetDownloadingProgress,
   setConnectedThirdPartyAccount,
+  isInitialLoading,
   ...props
 }: RestoreBackupWrapperProps) => {
-  const [isInitialLoading, setIsInitialLoading] = useState(true);
-
   const { t } = useTranslation(["Settings", "Common"]);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    (async () => {
-      try {
-        getProgress(t);
-
-        const [account, backupStorage, resStorageRegions] = await Promise.all([
-          getSettingsThirdParty(),
-          getBackupStorage(isManagement()),
-          getStorageRegions(),
-        ]);
-
-        if (account) setConnectedThirdPartyAccount(account);
-        setThirdPartyStorage(backupStorage);
-        setStorageRegions(resStorageRegions);
-
-        setIsInitialLoading(false);
-      } catch (error) {
-        toastr.error(error as Error);
-      }
-    })();
-  }, [
-    t,
-    getProgress,
-    setStorageRegions,
-    setThirdPartyStorage,
-    setConnectedThirdPartyAccount,
-  ]);
 
   useEffect(() => {
     setDocumentTitle(t("Common:RestoreBackup"));
@@ -134,6 +95,7 @@ export default inject<
     filesSettingsStore,
     filesSelectorInput,
     thirdPartyStore,
+    clientLoadingStore,
   }) => {
     const {
       errorInformation,
@@ -153,12 +115,9 @@ export default inject<
       backupProgressError,
       setIsBackupProgressVisible,
       setBackupProgressError,
-      getProgress,
       setTemporaryLink,
-      setThirdPartyStorage,
       setErrorInformation,
       setDownloadingProgress,
-      setStorageRegions,
       setConnectedThirdPartyAccount,
       resetDownloadingProgress,
       setRestoreResource,
@@ -174,6 +133,8 @@ export default inject<
       getStorageParams,
       uploadLocalFile,
     } = backup;
+
+    const { showPortalSettingsLoader: isInitialLoading } = clientLoadingStore;
 
     const {
       basePath,
@@ -234,6 +195,7 @@ export default inject<
       buttonSize,
       isEnableRestore,
       settingsFileSelector,
+      isInitialLoading,
 
       // settingsStore
       standalone,
@@ -256,12 +218,10 @@ export default inject<
       backupProgressError,
       setIsBackupProgressVisible,
       setBackupProgressError,
-      getProgress,
-      setThirdPartyStorage,
       setTemporaryLink,
       setErrorInformation,
       setDownloadingProgress,
-      setStorageRegions,
+
       setConnectedThirdPartyAccount,
       resetDownloadingProgress,
       setRestoreResource,

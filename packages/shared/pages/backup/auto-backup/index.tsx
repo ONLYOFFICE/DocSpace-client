@@ -169,6 +169,7 @@ const AutomaticBackup = ({
   isManagement = false,
   backupProgressError,
   setBackupProgressError,
+  setDefaultFolderId,
 }: AutomaticBackupProps) => {
   const isCheckedDocuments =
     selectedStorageType === `${BackupStorageType.DocumentModuleType}`;
@@ -306,8 +307,8 @@ const AutomaticBackup = ({
       setDefaultOptions(periodsObject, weekdaysLabelArray, selectedSchedule);
       toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (e) {
-      toastr.error(e as Error);
       setErrorInformation(e, t);
+      toastr.error(e as Error);
       console.error(e);
       if (isCheckedThirdParty || isCheckedDocuments) updateBaseFolderPath();
     } finally {
@@ -548,6 +549,7 @@ const AutomaticBackup = ({
             </Text>
             {isCheckedThirdParty ? (
               <ThirdPartyModule
+                {...(setDefaultFolderId && { setDefaultFolderId })}
                 setSelectedFolder={setSelectedFolder}
                 defaultStorageType={defaultStorageType}
                 defaultFolderId={defaultFolderId}

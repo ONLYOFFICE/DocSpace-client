@@ -45,12 +45,18 @@ import {
 import ArticleWrapper from "./components/ArticleWrapper";
 
 const ClientArticle = React.memo(
-  ({ withMainButton, showArticleLoader, isInfoPanelVisible }) => {
+  ({
+    withMainButton,
+    showArticleLoader,
+    isInfoPanelVisible,
+    isAccountsArticle,
+  }) => {
     return (
       <ArticleWrapper
         isInfoPanelVisible={isInfoPanelVisible}
         withMainButton={withMainButton}
         showArticleLoader={showArticleLoader}
+        showBackButton={isAccountsArticle}
       >
         <Article.Header>
           <ArticleHeaderContent />
@@ -61,7 +67,7 @@ const ClientArticle = React.memo(
         </Article.MainButton>
 
         <Article.Body>
-          <ArticleBodyContent />
+          <ArticleBodyContent isAccountsArticle={isAccountsArticle} />
         </Article.Body>
       </ArticleWrapper>
     );
@@ -84,7 +90,6 @@ const ClientContent = (props) => {
     showMenu,
     isFrame,
     isInfoPanelVisible,
-    withMainButton,
     t,
 
     setIsFilterLoading,
@@ -146,6 +151,12 @@ const ClientContent = (props) => {
   //   }
   // }, [isLoading]);
 
+  const isAccountsArticle =
+    location.pathname.includes("/accounts") ||
+    (location.pathname.includes("/profile") &&
+      location.state?.fromUrl?.includes("/accounts"));
+  const withMainButton = !isAccountsArticle;
+
   return (
     <>
       <FilesPanels />
@@ -159,6 +170,7 @@ const ClientContent = (props) => {
               setIsHeaderLoading={setIsHeaderLoading}
               setIsFilterLoading={setIsFilterLoading}
               showArticleLoader={showArticleLoader}
+              isAccountsArticle={isAccountsArticle}
             />
           )
         ) : (
@@ -168,6 +180,7 @@ const ClientContent = (props) => {
             setIsHeaderLoading={setIsHeaderLoading}
             setIsFilterLoading={setIsFilterLoading}
             showArticleLoader={showArticleLoader}
+            isAccountsArticle={isAccountsArticle}
           />
         )
       ) : null}
@@ -209,8 +222,6 @@ export const Client = inject(
       showArticleLoader,
     } = clientLoadingStore;
 
-    const withMainButton = true; // !isVisitor; // Allways true for any type of users
-
     const { isInit: isInitPlugins, initPlugins } = pluginStore;
 
     const { isVisible } = infoPanelStore;
@@ -228,7 +239,6 @@ export const Client = inject(
       isEncryption: isEncryptionSupport,
       isLoaded: authStore.isLoaded && clientLoadingStore.isLoaded,
       setIsLoaded: clientLoadingStore.setIsLoaded,
-      withMainButton,
       isInfoPanelVisible: isVisible && !isProfile,
       setIsFilterLoading: setIsSectionFilterLoading,
       setIsHeaderLoading: setIsSectionHeaderLoading,

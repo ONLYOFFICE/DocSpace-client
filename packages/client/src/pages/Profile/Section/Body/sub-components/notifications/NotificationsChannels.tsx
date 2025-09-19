@@ -28,6 +28,9 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 
+import ConnectAccountDialog from "SRC_DIR/components/dialogs/ConnectAccountDialog";
+import DisconnectAccountDialog from "SRC_DIR/components/dialogs/DisconnectAccountDialog";
+
 import TargetUserStore from "SRC_DIR/store/contacts/TargetUserStore";
 
 import Channel from "./sub-components/Channel";
@@ -35,6 +38,8 @@ import Channel from "./sub-components/Channel";
 import styles from "./Notifications.module.scss";
 
 type NotificationsChannelsProps = {
+  connectAccountDialogVisible?: TStore["dialogsStore"]["connectAccountDialogVisible"];
+  disconnectAccountDialogVisible?: TStore["dialogsStore"]["disconnectAccountDialogVisible"];
   setConnectAccountDialogVisible?: TStore["dialogsStore"]["setConnectAccountDialogVisible"];
   setDisconnectAccountDialogVisible?: TStore["dialogsStore"]["setDisconnectAccountDialogVisible"];
   user?: TStore["userStore"]["user"];
@@ -47,6 +52,8 @@ type NotificationsChannelsProps = {
 };
 
 const NotificationsChannels = ({
+  connectAccountDialogVisible,
+  disconnectAccountDialogVisible,
   setConnectAccountDialogVisible,
   setDisconnectAccountDialogVisible,
   user,
@@ -86,6 +93,12 @@ const NotificationsChannels = ({
           isThirdPartyAvailable={isThirdPartyAvailable}
         />
       </div>
+      {connectAccountDialogVisible ? (
+        <ConnectAccountDialog key="connect-account-dialog" />
+      ) : null}
+      {disconnectAccountDialogVisible ? (
+        <DisconnectAccountDialog key="disconnect-account-dialog" />
+      ) : null}
     </div>
   );
 };
@@ -99,6 +112,8 @@ export default inject(
     currentQuotaStore,
   }: TStore) => {
     const {
+      connectAccountDialogVisible,
+      disconnectAccountDialogVisible,
       setConnectAccountDialogVisible,
       setDisconnectAccountDialogVisible,
     } = dialogsStore;
@@ -111,6 +126,8 @@ export default inject(
     const { isThirdPartyAvailable } = currentQuotaStore;
 
     return {
+      connectAccountDialogVisible,
+      disconnectAccountDialogVisible,
       setConnectAccountDialogVisible,
       setDisconnectAccountDialogVisible,
       user,

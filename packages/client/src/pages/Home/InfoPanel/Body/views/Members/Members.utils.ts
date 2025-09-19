@@ -45,6 +45,9 @@ class MembersHelper {
       roomAdmin: {
         key: "roomAdmin",
         label: this.t("Common:RoomManager"),
+        tooltip: this.t("InviteDialog:UserMaxAvailableRoleWarning", {
+          productName: this.t("Common:ProductName"),
+        }),
         access: ShareAccessRights.RoomManager,
         type: "manager",
       },

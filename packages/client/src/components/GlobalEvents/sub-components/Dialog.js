@@ -51,12 +51,12 @@ const Dialog = ({
   onCancel,
   onClose,
   isCreateDialog,
+  isCreateDisabled,
   extension,
   keepNewFileName,
   setKeepNewFileName,
   withForm,
   errorText,
-  isAutoFocusOnError,
 }) => {
   const [value, setValue] = useState("");
 
@@ -105,10 +105,23 @@ const Dialog = ({
     (e) => {
       if (e.keyCode === 27) onCancelAction(e);
 
-      if (e.keyCode === 13 && !withForm && !hasError && !isDisabled)
+      if (
+        e.keyCode === 13 &&
+        !withForm &&
+        !isError &&
+        !isDisabled &&
+        !isCreateDisabled
+      )
         onSaveAction(e);
     },
-    [onCancelAction, onSaveAction, withForm, hasError, isDisabled],
+    [
+      onCancelAction,
+      onSaveAction,
+      withForm,
+      isError,
+      isDisabled,
+      isCreateDisabled,
+    ],
   );
 
   useEffect(() => {
@@ -159,17 +172,6 @@ const Dialog = ({
     isCreateDialog && setIsChecked((val) => !val);
   };
 
-  useEffect(() => {
-    if (hasError && isAutoFocusOnError) {
-      setTimeout(() => {
-        const input = document?.getElementById("create-text-input");
-        if (input) {
-          input.focus();
-        }
-      }, 50);
-    }
-  }, [hasError, isAutoFocusOnError]);
-
   return (
     <ModalDialog
       withForm={withForm}
@@ -195,6 +197,7 @@ const Dialog = ({
             scale
             value={value}
             isAutoFocussed
+            hasError={Boolean(errorText)}
             tabIndex={1}
             onChange={onChangeAction}
             onFocus={onFocus}
@@ -242,7 +245,7 @@ const Dialog = ({
           scale
           primary
           isLoading={isDisabled}
-          isDisabled={isDisabled || hasError}
+          isDisabled={isCreateDisabled || isDisabled || isError}
           onClick={onSaveAction}
           testId={`${getTestIdPrefix()}_save_button`}
         />

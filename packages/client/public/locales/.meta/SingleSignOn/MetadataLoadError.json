@@ -3,7 +3,7 @@
   "content": "Metadata file not transferred",
   "content_en_sha1_hash": "cda5ccce62dbf3d4f7635fc868380764681ac8cb",
   "created_at": "2025-05-19T21:30:50.110Z",
-  "updated_at": "2025-05-24T03:17:51.561Z",
+  "updated_at": "2025-09-17T13:43:01.947Z",
   "comment": {
     "text": "This translation key is used to display an error message when a metadata file fails to transfer, typically appearing in an application that handles XML uploads. The text should be localized for use in UI elements such as tooltips or error notifications.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/SsoFormStore.js",
-      "line_number": 342,
+      "line_number": 351,
       "context": "this.setFieldsFromMetaData(response.data.meta);\n this.hideErrors();\n this.isLoadingXml = false;\n } catch (err) {\n this.isLoadingXml = false;\n toastr.error(t(\"MetadataLoadError\"));\n console.error(err);\n }\n };\n \n uploadXml = async (file) => {",
       "module": "/packages/client"
     }

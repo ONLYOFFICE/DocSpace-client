@@ -893,5 +893,7 @@
   "GeneralLinkRevokedAndCreatedSuccessfully": "Yeni genel bağlantı başarıyla oluşturuldu",
   "RevokeLink": "Bağlantıyı iptal et",
   "LogoForEditors": "{{editorName}} editörü için logo",
-  "LogoForViewer": "{{diagramViewer}} için logo"
+  "LogoForViewer": "{{diagramViewer}} için logo",
+  "PortalRestoring": "{{productName}} geri yükleme",
+  "PreparationPortalDescription": "Geri yükleme süreci tamamlandığında, otomatik olarak {{productName}}'inize yönlendirileceksiniz."
 }

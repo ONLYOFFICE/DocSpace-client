@@ -894,5 +894,7 @@
   "RevokeLink": "Չեղարկել հղումը",
   "LogoForEditors": "{{editorName}} խմբագրի լոգո",
   "LogoForViewer": "{{diagramViewer}}-ի լոգո",
-  "LogoDocsEditor": "Էջագլխի խմբագրիչների լոգո"
+  "LogoDocsEditor": "Էջագլխի խմբագրիչների լոգո",
+  "PortalRestoring": "{{productName}}-ի վերականգնում",
+  "PreparationPortalDescription": "Վերականգնման գործընթացն ավարտվելուն պես դուք ավտոմատ կերպով կուղղորդվեք ձեր {{productName}}:"
 }

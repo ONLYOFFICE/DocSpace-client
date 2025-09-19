@@ -894,5 +894,7 @@
   "RevokeLink": "Revogar link",
   "LogoForEditors": "Logotipo para o editor {{editorName}}",
   "LogoForViewer": "Logotipo para {{diagramViewer}}",
-  "LogoDocsEditor": "Logo para o título dos editores"
+  "LogoDocsEditor": "Logo para o título dos editores",
+  "PortalRestoring": "Restauração de {{productName}}",
+  "PreparationPortalDescription": "Assim que o processo de restauração for concluído, você será automaticamente redirecionado para {{productName}}."
 }

@@ -238,7 +238,9 @@ export interface IframeWindow extends Window {
 export type TPlugin = {
   name: string;
   version: string;
+  docspaceVersions: string; // minDocSpaceVersion
   description: string;
+  compatible: boolean;
   license: string;
   author: string;
   homePage: string;

@@ -9,10 +9,49 @@ on:
     branches: [develop, release/v*, hotfix/v*]
     paths:
       [packages/**, common/**, .github/workflows/frontend-common-tests.yaml]
+  workflow_dispatch:
+    inputs:
+      node_version:
+        description: 'Node.js version to use'
+        required: false
+        default: '22.x'
+        type: choice
+        options:
+          - '18.x'
+          - '20.x'
+          - '22.x'
+      pnpm_version:
+        description: 'pnpm version to use'
+        required: false
+        default: '10.15.1'
+        type: string
+      skip_cache:
+        description: 'Skip dependency cache'
+        required: false
+        default: false
+        type: boolean
+      force_all_tests:
+        description: 'Force run all tests (ignore change detection)'
+        required: false
+        default: false
+        type: boolean
+      debug_mode:
+        description: 'Enable debug output'
+        required: false
+        default: false
+        type: boolean
+      target_branch:
+        description: 'Target branch for comparison (leave empty for auto-detect)'
+        required: false
+        default: ''
+        type: string
 
 env:
-  NODE_VERSION: 22.x
-  PNPM_VERSION: 10.15.1
+  NODE_VERSION: ${{ github.event.inputs.node_version || '22.x' }}
+  PNPM_VERSION: ${{ github.event.inputs.pnpm_version || '10.15.1' }}
+  DEBUG_MODE: ${{ github.event.inputs.debug_mode == 'true' }}
+  FORCE_ALL_TESTS: ${{ github.event.inputs.force_all_tests == 'true' }}
+  SKIP_CACHE: ${{ github.event.inputs.skip_cache == 'true' }}
 
 jobs:
   # Detect changes to optimize job execution
@@ -40,9 +79,35 @@ jobs:
       - name: Detect file changes
         id: changes
         run: |
+          # Debug mode output
+          if [ "${{ env.DEBUG_MODE }}" = "true" ]; then
+            echo "=== DEBUG: Change Detection ==="
+            echo "Event name: ${{ github.event_name }}"
+            echo "Force all tests: ${{ env.FORCE_ALL_TESTS }}"
+            echo "Target branch input: ${{ github.event.inputs.target_branch }}"
+            echo "==============================="
+          fi
+
+          # Check if we should force all tests
+          if [ "${{ env.FORCE_ALL_TESTS }}" = "true" ]; then
+            echo "🚀 Force all tests enabled - skipping change detection"
+            echo "packages=true" >> $GITHUB_OUTPUT
+            echo "common=true" >> $GITHUB_OUTPUT
+            echo "playwright=true" >> $GITHUB_OUTPUT
+            echo "locales=true" >> $GITHUB_OUTPUT
+            echo "workflow=true" >> $GITHUB_OUTPUT
+            echo "any_changes=true" >> $GITHUB_OUTPUT
+            echo "changed_files=all-files-forced" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
           # Get the base branch for comparison
           if [ "${{ github.event_name }}" = "pull_request" ]; then
             BASE_SHA="${{ github.event.pull_request.base.sha }}"
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ -n "${{ github.event.inputs.target_branch }}" ]; then
+            # For manual runs, use specified target branch
+            BASE_SHA="origin/${{ github.event.inputs.target_branch }}"
+            echo "Using manual target branch: ${{ github.event.inputs.target_branch }}"
           else
             BASE_SHA="${{ github.event.before }}"
           fi
@@ -56,6 +121,13 @@ jobs:
 
           # Get changed files
           CHANGED_FILES=$(git diff --name-only $BASE_SHA HEAD || echo "")
+          
+          if [ "${{ env.DEBUG_MODE }}" = "true" ]; then
+            echo "=== DEBUG: Changed Files ==="
+            echo "$CHANGED_FILES"
+            echo "============================"
+          fi
+          
           echo "Changed files: $CHANGED_FILES"
 
           # Check for packages changes
@@ -377,6 +449,20 @@ jobs:
 **Commit:** \`${{ github.sha }}\`
 **Triggered by:** \`${{ github.event_name }}\`
 **Date:** \`$(date -u '+%Y-%m-%d %H:%M:%S UTC')\`
+
+$(if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+echo "## ⚙️ Manual Run Configuration
+
+| Setting | Value |
+|---------|-------|
+| **Node Version** | \`${{ env.NODE_VERSION }}\` |
+| **pnpm Version** | \`${{ env.PNPM_VERSION }}\` |
+| **Skip Cache** | \`${{ env.SKIP_CACHE }}\` |
+| **Force All Tests** | \`${{ env.FORCE_ALL_TESTS }}\` |
+| **Debug Mode** | \`${{ env.DEBUG_MODE }}\` |
+| **Target Branch** | \`${{ github.event.inputs.target_branch || 'auto-detect' }}\` |
+"
+fi)
 
 ---
 

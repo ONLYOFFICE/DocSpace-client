@@ -423,24 +423,15 @@
 
 .listBlock {
   font-size: 15px;
-  margin: 0;
-
-  white-space: normal;
-}
-
-.ul {
-  font-size: 15px;
 
   margin: 0;
   padding-inline-start: 22px;
 
   white-space: normal;
-
-  list-style: disc;
 }
 
-.ul,
-li {
+.listBlock,
+.listItem {
   line-height: 22px;
 
   .paragraph {
@@ -448,42 +439,42 @@ li {
   }
 }
 
-// ul with sublists
-.ul:has(.ul) {
+// multilevel lists
+.listBlock:has(.listBlock) {
   // first level
-  & > li {
+  & > .listItem {
     font-weight: 600;
   }
 
   // other levels
-  & > li li {
+  & > .listItem .listItem {
     font-weight: 400;
   }
 
   // gap between first level items
-  &:not(.ul .ul) > li + li {
+  &:not(.listBlock .listBlock) > .listItem + .listItem {
     margin-top: 8px;
   }
 
   // gap between other items
-  li + li {
+  .listItem + .listItem {
     margin-top: 4px;
   }
 }
 
-// first level ul
-.ul {
+// first level
+.listBlock {
   margin: 8px 0;
 }
 
-// other levels ul
-.ul .ul {
+// other levels
+.listBlock .listBlock {
   margin: 4px 0 0;
   padding-inline-start: 16px;
 }
 
-// marker styles
-.ul li {
+// bullet styles
+.ul > .listItem {
   list-style: none;
   position: relative;
 
@@ -494,8 +485,8 @@ li {
   }
 }
 
-// experimental ul list with scroll if it has more than 4 levels nesting
-.ul:has(.ul .ul .ul):not(.ul .ul) {
+// experimental list with scroll if it has more than 4 levels nesting
+.listBlock:has(.listBlock .listBlock .listBlock):not(.listBlock .listBlock) {
   overflow: auto;
 
   max-height: 600px;

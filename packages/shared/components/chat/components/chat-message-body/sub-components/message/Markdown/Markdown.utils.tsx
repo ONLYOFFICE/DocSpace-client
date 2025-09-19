@@ -139,22 +139,13 @@ export const createMarkdownComponents = ({
       </Text>
     );
   },
-  // TODO: Chat redesign - add styles
-  ol({ children }) {
-    return (
-      <ol className={classNames(styles.chatMessageTextColor, styles.listBlock)}>
-        {children}
-      </ol>
-    );
-  },
-  // TODO: Chat redesign - add styles
-  ul({ children }) {
-    return (
-      <ul className={classNames(styles.chatMessageTextColor, styles.ul)}>
-        {children}
-      </ul>
-    );
-  },
+  ol: ({ children }) => (
+    <ol className={classNames(styles.listBlock, styles.ol)}>{children}</ol>
+  ),
+  ul: ({ children }) => (
+    <ul className={classNames(styles.listBlock, styles.ul)}>{children}</ul>
+  ),
+  li: ({ children }) => <li className={styles.listItem}>{children}</li>,
   // TODO: Chat redesign - add styles
   pre: ({ children }) => {
     return <pre>{children}</pre>;

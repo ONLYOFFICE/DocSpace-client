@@ -478,6 +478,11 @@ export const MessageStoreContextProvider = ({
 }: TMessageStoreProps) => {
   const store = React.useMemo(() => new MessageStore(roomId), [roomId]);
 
+  React.useEffect(() => {
+    const chatId = new URLSearchParams(window.location.search).get("chat");
+    if (chatId) store.fetchMessages(chatId);
+  }, [store]);
+
   return (
     <MessageStoreContext.Provider value={store}>
       {children}

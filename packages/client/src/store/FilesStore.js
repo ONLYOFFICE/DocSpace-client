@@ -3757,8 +3757,6 @@ class FilesStore {
   get filesList() {
     // return [...this.folders, ...this.files];
 
-    console.log(this.folders);
-
     const newFolders = [...this.folders];
     const orderItems = [...this.folders, ...this.files].filter((x) => x.order);
 

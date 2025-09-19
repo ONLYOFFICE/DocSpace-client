@@ -29,6 +29,8 @@ import { useTranslation } from "react-i18next";
 
 import PlusReactSvgUrl from "PUBLIC_DIR/images/icons/16/plus.svg";
 
+import { RectangleSkeleton } from "../../../../../skeletons";
+
 import { Text } from "../../../../text";
 
 import { useMessageStore } from "../../../store/messageStore";
@@ -36,11 +38,21 @@ import { useChatStore } from "../../../store/chatStore";
 
 import styles from "../ChatHeader.module.scss";
 
-const CreateChat = () => {
+const CreateChat = ({ isLoadingProp }: { isLoadingProp?: boolean }) => {
   const { messages, isRequestRunning, startNewChat } = useMessageStore();
   const { setCurrentChat } = useChatStore();
 
   const { t } = useTranslation(["Common"]);
+
+  if (isLoadingProp)
+    return (
+      <RectangleSkeleton
+        width="96px"
+        height="32px"
+        borderRadius="3px"
+        style={{ minWidth: "32px" }}
+      />
+    );
 
   if (messages.length === 0) return null;
 

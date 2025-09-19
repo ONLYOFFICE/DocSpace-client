@@ -60,7 +60,7 @@ const ChatMessageBody = ({
   const prevBodyHeight = useRef(0);
   const currentScroll = useRef(0);
 
-  const isEmpty = messages.length === 0;
+  const isEmpty = messages.length === 0 || isLoading;
 
   useEffect(() => {
     if (!currentChat?.id) return;
@@ -194,7 +194,7 @@ const ChatMessageBody = ({
       })}
       style={isMobile() ? { height: `${height}px` } : undefined}
     >
-      {messages.length === 0 ? (
+      {isEmpty ? (
         <EmptyScreen isLoading={isLoading} />
       ) : (
         <Scrollbar

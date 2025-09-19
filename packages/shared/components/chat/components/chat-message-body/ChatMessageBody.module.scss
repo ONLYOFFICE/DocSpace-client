@@ -65,7 +65,7 @@
 }
 
 .chatMessageTextColor {
-  color: var(--chat-message-color);
+  color: var(--text-color);
 
   font-size: 12px;
   line-height: 16px;
@@ -212,12 +212,6 @@
 .inlineCodeBlock {
   font-weight: 700;
   font-style: italic;
-}
-
-.listBlock {
-  margin: 0;
-
-  white-space: normal;
 }
 
 .toolCallManage {
@@ -392,7 +386,7 @@
 .paragraph {
   padding: 8px 0;
   white-space: pre-line;
-  color: var(--chat-message-color);
+  color: var(--text-color);
 }
 
 .blockquote {
@@ -425,4 +419,84 @@
   height: 1px;
   background-color: var(--chat-message-hr-color);
   margin: 8px 0;
+}
+
+.listBlock {
+  font-size: 15px;
+  margin: 0;
+
+  white-space: normal;
+}
+
+.ul {
+  font-size: 15px;
+
+  margin: 0;
+  padding-inline-start: 22px;
+
+  white-space: normal;
+
+  list-style: disc;
+}
+
+.ul,
+li {
+  line-height: 22px;
+
+  .paragraph {
+    padding: 0;
+  }
+}
+
+// ul with sublists
+.ul:has(.ul) {
+  // first level
+  & > li {
+    font-weight: 600;
+  }
+
+  // other levels
+  & > li li {
+    font-weight: 400;
+  }
+
+  // gap between first level items
+  &:not(.ul .ul) > li + li {
+    margin-top: 8px;
+  }
+
+  // gap between other items
+  li + li {
+    margin-top: 4px;
+  }
+}
+
+// first level ul
+.ul {
+  margin: 8px 0;
+}
+
+// other levels ul
+.ul .ul {
+  margin: 4px 0 0;
+  padding-inline-start: 16px;
+}
+
+// marker styles
+.ul li {
+  list-style: none;
+  position: relative;
+
+  &::before {
+    content: "\2022";
+    position: absolute;
+    inset-inline-start: -13px;
+  }
+}
+
+// experimental ul list with scroll if it has more than 4 levels nesting
+.ul:has(.ul .ul .ul):not(.ul .ul) {
+  overflow: auto;
+
+  max-height: 600px;
 }

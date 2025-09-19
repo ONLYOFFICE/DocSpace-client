@@ -150,7 +150,7 @@ export const createMarkdownComponents = ({
   // TODO: Chat redesign - add styles
   ul({ children }) {
     return (
-      <ul className={classNames(styles.chatMessageTextColor, styles.listBlock)}>
+      <ul className={classNames(styles.chatMessageTextColor, styles.ul)}>
         {children}
       </ul>
     );

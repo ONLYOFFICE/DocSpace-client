@@ -3,7 +3,7 @@
   "content": "Learn more",
   "content_en_sha1_hash": "824d76b124e6289f372e2ff6bcba91e8939343bd",
   "created_at": "2025-05-19T21:30:46.111Z",
-  "updated_at": "2025-09-17T13:43:01.608Z",
+  "updated_at": "2025-09-19T15:39:23.044Z",
   "comment": {
     "text": "The translation key \"LearnMore\" is used to display a link or button that encourages users to access more information about a particular topic, in this case, privacy limitations warnings, DNS settings, or language and time zone settings. This text appears as a clickable link or button, prompting users to learn additional details.",
     "is_auto": true,
@@ -108,7 +108,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/bruteForceProtection.js",
-      "line_number": 285,
+      "line_number": 292,
       "context": "target=\"_blank\"\n isHovered\n href={bruteForceProtectionUrl}\n color={currentColorScheme.main?.accent}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <FieldContainer",
       "module": "/packages/client"
     },
@@ -174,13 +174,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/sessionLifetime.js",
-      "line_number": 265,
+      "line_number": 272,
       "context": "color={currentColorScheme.main?.accent}\n target=\"_blank\"\n isHovered\n href={lifetimeSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </LearnMoreWrapper>\n \n <RadioButtonGroup",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
-      "line_number": 249,
+      "line_number": 256,
       "context": "target=\"_blank\"\n isHovered\n href={tfaSettingsUrl}\n dataTestId=\"tfa_component_learn_more\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </LearnMoreWrapper>\n \n <RadioButtonGroup",
       "module": "/packages/client"
     },
@@ -198,7 +198,7 @@
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 251,
+      "line_number": 261,
       "context": "fontSize=\"13px\"\n fontWeight={600}\n href={customFilterExternalLink}\n isHovered\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </>\n );",
       "module": "/packages/shared"
     },

@@ -38,8 +38,11 @@ import {
   TPortal,
   TPortalTariff,
   TRestoreProgress,
+  TLicenseQuota,
 } from "./types";
 import { Nullable } from "../../types";
+
+const baseURL = "/apisystem";
 
 export async function getShortenedLink(link: string) {
   const shortLink = (await request({
@@ -622,4 +625,17 @@ export function getPortalUsersCount(signal?: AbortSignal) {
     signal,
   };
   return request(options);
+}
+
+export async function getLicenseQuota() {
+  const options = {
+    baseURL,
+    method: "get",
+    url: "/portal/licensequota",
+    params: {
+      useCache: false,
+    },
+  };
+  const res = (await request(options)) as TLicenseQuota;
+  return res;
 }

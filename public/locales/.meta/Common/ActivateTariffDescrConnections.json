@@ -1,0 +1,28 @@
+{
+  "key_path": "ActivateTariffDescrConnections",
+  "content": "You are using {{organizationName}} {{productName}} {{license}}.",
+  "content_en_sha1_hash": "b4abdf15a611d8d64134d0f192a4d7f887e9e399",
+  "created_at": "2025-09-19T15:39:04.582Z",
+  "updated_at": "2025-09-19T15:52:58.963Z",
+  "comment": {
+    "text": "This key displays a description of the user's current tariff or subscription details, including the organization, product, and license type. It appears within a tariff title container, likely on a payments or subscription management page, to inform the user about their active plan. Translators should ensure the wording accurately reflects the user's entitlement.",
+    "is_auto": true,
+    "updated_at": "2025-09-19T15:52:58.963Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/TariffTitleContainer.tsx",
+      "line_number": 147,
+      "context": "/>\n ),\n }}\n />\n ) : (\n t(\"ActivateTariffDescrConnections\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n license: isDeveloper\n ? t(\"Common:DeveloperLicense\")\n : t(\"Common:EnterpriseLicense\"),",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

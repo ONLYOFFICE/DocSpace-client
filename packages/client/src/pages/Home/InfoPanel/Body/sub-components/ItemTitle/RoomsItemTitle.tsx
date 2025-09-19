@@ -127,7 +127,12 @@ const RoomsItemHeader = ({
     ("isTemplate" in selection && selection.isTemplate) ||
     selection?.rootFolderType === FolderType.RoomTemplates;
 
-  const canShare = !isRoomType(selection) && selection.canShare && isShareTab;
+  const canShare =
+    !isRoomType(selection) &&
+    selection.canShare &&
+    isShareTab &&
+    // HACK: Hide share option for rooms — remove after implementation is ready
+    selection.rootFolderType !== FolderType.Rooms;
 
   const roomType =
     "roomType" in selection ? selection.roomType : RoomsType.CustomRoom;

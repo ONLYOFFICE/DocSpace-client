@@ -140,6 +140,7 @@ export type ShareProps = {
   shareMembersTotal?: number;
   isEditor?: boolean;
   onAddUser?: (item: TFolder | TFile) => void;
+  disabledSharedUser?: boolean;
 };
 
 export interface LinkTitleProps {
@@ -174,6 +175,7 @@ export interface UseMembersProps {
 
   linksCount: number;
   onAddUser?: (item: TFolder | TFile) => void;
+  disabledSharedUser?: boolean;
 }
 
 export interface UseShareProps {

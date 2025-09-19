@@ -60,7 +60,9 @@ export const useMembers = (props: UseMembersProps) => {
 
   const abortController = useRef(new AbortController());
 
-  const [isLoading, setIsLoading] = useState(() => !props.members);
+  const [isLoading, setIsLoading] = useState(
+    () => !props.members && !props.disabledSharedUser,
+  );
   const { t } = useTranslation("Common");
 
   const filterRef = useRef<Filter>({
@@ -89,7 +91,7 @@ export const useMembers = (props: UseMembersProps) => {
     },
   );
 
-  const fetchShareMembers = async (filter: Filter) => {
+  const fetchShareMembers = useCallback(async (filter: Filter) => {
     try {
       setIsLoading(true);
 
@@ -114,7 +116,7 @@ export const useMembers = (props: UseMembersProps) => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
   const fetchMoreShareMembers = useCallback(async (range: IndexRange) => {
     console.log(range);
@@ -125,7 +127,7 @@ export const useMembers = (props: UseMembersProps) => {
   }, []);
 
   useDidMount(() => {
-    if (props.members) return;
+    if (props.members || props.disabledSharedUser) return;
 
     const filter = {
       startIndex: 0,
@@ -186,6 +188,8 @@ export const useMembers = (props: UseMembersProps) => {
   );
 
   const getUsers = useCallback(() => {
+    if (props.disabledSharedUser) return { content: [], headersCount: 0 };
+
     const { users, groups, administrators, expected, guests } = memoMembers;
 
     const membersList = [
@@ -253,6 +257,7 @@ export const useMembers = (props: UseMembersProps) => {
     onAdded,
     linksCount,
     onSelectOption,
+    props.disabledSharedUser,
   ]);
 
   return {

@@ -31,6 +31,7 @@ export interface ShareDialogHeaderProps {
   file: TFile;
   filesSettings: TFilesSettings;
   onClickAddUser: () => void;
+  disabledIcon?: boolean;
 }
 
 export type SharingDialogProps = {

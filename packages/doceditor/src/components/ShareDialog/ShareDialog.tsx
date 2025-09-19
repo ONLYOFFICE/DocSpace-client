@@ -39,7 +39,7 @@ import { getPortalPasswordSettings } from "@docspace/shared/api/settings";
 import EditLinkPanel, {
   type EditLinkPanelRef,
 } from "@docspace/shared/dialogs/EditLinkPanel";
-import { DeviceType } from "@docspace/shared/enums";
+import { DeviceType, FolderType } from "@docspace/shared/enums";
 import type { LinkParamsType, Nullable } from "@docspace/shared/types";
 import { TPasswordSettings } from "@docspace/shared/api/settings/types";
 import { ShareSelector } from "@docspace/shared/components/share/selector";
@@ -151,6 +151,8 @@ const SharingDialog = ({
               file={fileInfo}
               filesSettings={filesSettings}
               onClickAddUser={onClickAddUser}
+              // HACK: Hide share option for rooms — remove after implementation is ready
+              disabledIcon={fileInfo.rootFolderType === FolderType.Rooms}
             />
             <Share
               isEditor

@@ -35,7 +35,11 @@ import { ShareFormDialog as ShareFormDialogComponent } from "@docspace/shared/di
 import { ShareSelector } from "@docspace/shared/components/share/selector";
 
 import type { TFile, TFilesSettings } from "@docspace/shared/api/files/types";
-import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
+import {
+  FolderType,
+  RoomsType,
+  ShareAccessRights,
+} from "@docspace/shared/enums";
 
 import { addExternalLink, getExternalLinks } from "@docspace/shared/api/files";
 import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
@@ -181,7 +185,8 @@ const ShareFormDialog = ({
       buttonLabel: t("Common:Share"),
       onClick: shareFileToUsers,
       icon: <ShareFileToUsersIcon />,
-      disabled: !file.canShare,
+      // HACK: Hide share option for rooms — remove after implementation is ready
+      disabled: !file.canShare || file.rootFolderType === FolderType.Rooms,
     },
     {
       id: "form-room",

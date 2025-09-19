@@ -28,6 +28,7 @@ import { useState } from "react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
+import { FolderType } from "../../enums";
 import ShareLoader from "../../skeletons/share";
 
 import type { ShareProps } from "./Share.types";
@@ -57,6 +58,10 @@ const Share = (props: ShareProps) => {
     isEditor = false,
     onAddUser,
   } = props;
+
+  // HACK: Hide share option for rooms — remove after implementation is ready
+  const disabledSharedUser =
+    infoPanelSelection.rootFolderType === FolderType.Rooms;
 
   const isFolder = infoPanelSelection.isFolder;
   const parentShared = infoPanelSelection.parentShared;
@@ -95,6 +100,7 @@ const Share = (props: ShareProps) => {
     infoPanelSelection,
     linksCount: links.length,
     onAddUser,
+    disabledSharedUser,
   });
 
   if (hideSharePanel) return null;

@@ -39,6 +39,7 @@ import type { ShareDialogHeaderProps } from "./ShareDialog.types";
 
 const ShareDialogHeader: FC<ShareDialogHeaderProps> = ({
   file,
+  disabledIcon,
   filesSettings,
   onClickAddUser,
 }) => {
@@ -63,16 +64,17 @@ const ShareDialogHeader: FC<ShareDialogHeaderProps> = ({
       >
         {file.title}
       </Text>
-
-      <IconButton
-        size={16}
-        isFill
-        id="share-panel_add-user"
-        className={styles.icon}
-        title={t("Common:AddUsers")}
-        iconName={PersonPlusReactSvgUrl}
-        onClick={onClickAddUser}
-      />
+      {disabledIcon ? null : (
+        <IconButton
+          size={16}
+          isFill
+          id="share-panel_add-user"
+          className={styles.icon}
+          title={t("Common:AddUsers")}
+          iconName={PersonPlusReactSvgUrl}
+          onClick={onClickAddUser}
+        />
+      )}
     </div>
   );
 };

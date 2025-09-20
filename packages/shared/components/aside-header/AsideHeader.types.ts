@@ -33,7 +33,6 @@ type HeaderIcon = {
   key: string;
   url: string;
   onClick: () => void;
-  size: number;
 };
 
 export type AsideHeaderProps = PickedDivProps & {

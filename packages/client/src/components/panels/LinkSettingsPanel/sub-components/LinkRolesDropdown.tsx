@@ -90,7 +90,7 @@ const LinkRolesDropdown = ({
         />
       </div>
       {isMobile() ? (
-        <>
+        <div>
           {/* <DropdownMobile
           t={t}
           open={isOpen}
@@ -98,7 +98,7 @@ const LinkRolesDropdown = ({
           chooseRoomType={chooseRoomType}
           forceHideDropdown={forceHideDropdown}
         /> */}
-        </>
+        </div>
       ) : (
         <>
           {/*         <DropdownDesktop

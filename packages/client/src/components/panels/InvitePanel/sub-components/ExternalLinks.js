@@ -26,15 +26,15 @@
 
 // import MediaDownloadReactSvgUrl from "PUBLIC_DIR/images/media.download.react.svg?url";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
+import SettingsOutlineSvgUrl from "PUBLIC_DIR/images/icons/16/settings-outline.react.svg?url";
 import React, { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
 
-import { copyShareLink } from "@docspace/shared/utils/copy";
 import { toastr } from "@docspace/shared/components/toast";
 // import { objectToGetParams } from "@docspace/shared/utils/common";
 
 import { InputBlock } from "@docspace/shared/components/input-block";
-// import { IconButton } from "@docspace/shared/components/icon-button";
+import { IconButton } from "@docspace/shared/components/icon-button";
 // import { DropDown } from "@docspace/shared/components/drop-down";
 // import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
@@ -74,24 +74,15 @@ const ExternalLinks = ({
   isUserTariffLimit,
   standalone,
   allowInvitingGuests,
+  setLinkSettingsPanelVisible,
+  onSelectAccess,
+  copyLink,
 }) => {
   const [isLinksToggling, setIsLinksToggling] = useState(false);
 
   // const [actionLinksVisible, setActionLinksVisible] = useState(false);
 
   const inputsRef = useRef();
-
-  const copyLink = (link) => {
-    if (link) {
-      toastr.success(
-        `${t("Common:LinkCopySuccess")}. ${t("Translations:LinkValidTime", {
-          days_count: 7,
-        })}`,
-      );
-
-      copyShareLink(link);
-    }
-  };
 
   const disableLink = async () => {
     shareLinks?.length &&
@@ -122,31 +113,6 @@ const ExternalLinks = ({
     copyLink(shareLink);
     setShareLinks([newShareLink]);
     return setActiveLink(newShareLink);
-  };
-
-  const onSelectAccess = async (access) => {
-    let link = null;
-    const selectedAccess = access.access;
-
-    if (roomId === -1) {
-      link = shareLinks.find((l) => l.access === selectedAccess);
-
-      link.shareLink = await getPortalInviteLink(selectedAccess);
-
-      setActiveLink(link);
-    } else {
-      api.rooms.setInvitationLinks(
-        roomId,
-        "Invite",
-        +selectedAccess,
-        shareLinks[0].id,
-      );
-
-      link = shareLinks[0];
-      setActiveLink(shareLinks[0]);
-    }
-
-    copyLink(link.shareLink);
   };
 
   const toggleLinks = async (e) => {
@@ -238,6 +204,12 @@ const ExternalLinks = ({
     <StyledExternalLink noPadding ref={inputsRef}>
       <StyledSubHeader $inline>
         {t("InviteViaLink")}
+        <IconButton
+          iconName={SettingsOutlineSvgUrl}
+          size={16}
+          onClick={() => setLinkSettingsPanelVisible(true)}
+        />
+
         {/* {false ? (
           <div style={{ position: "relative" }}>
             <IconButton

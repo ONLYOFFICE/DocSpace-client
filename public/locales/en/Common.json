@@ -691,6 +691,7 @@
   "SharePermissionsEntityAccessScope": "<1>{{accessType}}</1> will be able to <3>{{accessRights}}</3> {{shareContents}} of {{shareParent}}.",
   "SameEmail": "You can't use the same email address",
   "SaveButton": "Save",
+  "SaveAndCopy": "Save & copy",
   "SaveHereButton": "Save here",
   "SaveToPublicRoom": "Save to Public room",
   "Search": "Search",
@@ -948,5 +949,6 @@
   "LogoForViewer": "Logo for {{diagramViewer}}",
   "LogoDocsEditor": "Logo for the editors header",
   "PortalRestoring": "{{productName}} restoring",
-  "PreparationPortalDescription": "Once the restoring process is over, you'll be automatically redirected to your {{productName}}."
+  "PreparationPortalDescription": "Once the restoring process is over, you'll be automatically redirected to your {{productName}}.",
+  "UserLimit": "User limit"
 }

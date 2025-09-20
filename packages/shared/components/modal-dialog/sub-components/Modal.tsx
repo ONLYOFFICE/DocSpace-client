@@ -73,6 +73,7 @@ const Modal = ({
   withBodyScrollForcibly = false,
   withBorder = false,
   dataTestId,
+  backdropVisible = true,
   ...rest
 }: ModalSubComponentsProps) => {
   const contentRef = React.useRef<null | HTMLDivElement>(null);
@@ -196,6 +197,7 @@ const Modal = ({
       <ModalBackdrop
         className={classNames({
           [styles.modalBackdropActive]: visible,
+          [styles.hideBackdrop]: visible && !backdropVisible,
           "backdrop-active": visible,
         })}
         zIndex={zIndex}

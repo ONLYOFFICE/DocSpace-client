@@ -24,38 +24,36 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-type PickedDivProps = Pick<
-  React.ComponentPropsWithoutRef<"div">,
-  "className" | "id" | "style"
->;
+import { TComboboxProps, TOption } from "@docspace/shared/components/combobox";
+import { ShareAccessRights } from "@docspace/shared/enums";
 
-type HeaderIcon = {
-  key: string;
-  url: string;
-  onClick: () => void;
-  size: number;
+export type LinkRolesDropdownItemProps = {
+  item: TOption;
+  currentItem?: TOption;
+  setCurrentItem?: (item: TOption) => void;
 };
 
-export type AsideHeaderProps = PickedDivProps & {
-  /** Header content - can be a string or a ReactNode */
-  header?: string | React.ReactNode;
-  /** Array of icons to display in the header */
-  headerIcons?: HeaderIcon[];
-  /** Additional component to render in the header */
-  headerComponent?: React.ReactNode;
-  /** Whether the header is in a loading state */
-  isLoading?: boolean;
-  /** Whether to hide the bottom border */
-  withoutBorder?: boolean;
-  /** Custom height for the header */
-  headerHeight?: string;
-  /** Whether to show the close button */
-  isCloseable?: boolean;
-  /** Click handler for the close button */
-  onCloseClick?: () => void;
-  /** Whether to show the back button */
-  isBackButton?: boolean;
-  /** Click handler for the back button */
-  onBackClick?: () => void;
-  dataTestId?: string;
+export type LinkRolesDropdownProps = {
+  accesses: TComboboxProps["options"];
+  currentAccess?: TOption;
+  linkSelectedAccess: TOption;
+  setLinkSelectedAccess: (access: TOption) => void;
+};
+
+export type LinkSettingsPanelProps = {
+  isVisible: boolean;
+  filteredAccesses: TComboboxProps["options"];
+  onBackClick: VoidFunction;
+  onClose: VoidFunction;
+  onSubmit: VoidFunction;
+  linkSelectedAccess: TOption;
+  setLinkSelectedAccess: (access: TOption) => void;
+  activeLink: {
+    access: ShareAccessRights;
+    expirationDate?: string | null;
+    id: string;
+    shareLink: string;
+    title: string;
+  };
+  defaultAccess: ShareAccessRights;
 };

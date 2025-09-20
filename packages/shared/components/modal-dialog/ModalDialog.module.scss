@@ -239,4 +239,8 @@
   &.modalBackdropActive {
     opacity: 1;
   }
+
+  &.hideBackdrop {
+    background: none;
+  }
 }

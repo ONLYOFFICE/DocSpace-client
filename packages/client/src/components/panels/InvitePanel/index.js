@@ -51,10 +51,13 @@ import { Link } from "@docspace/shared/components/link";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
 import PeopleSelector from "@docspace/shared/selectors/People";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
+import { filterPaidRoleOptions } from "SRC_DIR/helpers";
 import { fixAccess } from "./utils";
 import ExternalLinks from "./sub-components/ExternalLinks";
 import InviteInput from "./sub-components/InviteInput";
 import ItemsList from "./sub-components/ItemsList";
+import LinkSettingsPanel from "../LinkSettingsPanel";
+import { copyShareLink } from "@docspace/shared/utils/copy";
 
 const InvitePanel = ({
   folders,
@@ -81,6 +84,7 @@ const InvitePanel = ({
   allowInvitingGuests,
   checkGuests,
   hasGuests,
+  getPortalInviteLink,
 }) => {
   const [invitePanelIsLoding, setInvitePanelIsLoading] = useState(
     roomId !== -1,
@@ -93,11 +97,14 @@ const InvitePanel = ({
   const [scrollAllPanelContent, setScrollAllPanelContent] = useState(false);
   const [activeLink, setActiveLink] = useState({});
   const [addUsersPanelVisible, setAddUsersPanelVisible] = useState(false);
+  const [linkSettingsPanelVisible, setLinkSettingsPanelVisible] =
+    useState(false);
   const [isMobileView, setIsMobileView] = useState(isMobile());
   const [inputValue, setInputValue] = useState("");
   const [usersList, setUsersList] = useState([]);
   const [cultureKey, setCultureKey] = useState();
   const [showGuestsTab, setShowGuestsTab] = useState(true);
+  const [linkSelectedAccess, setLinkSelectedAccess] = useState(null);
 
   const navigate = useNavigate();
 
@@ -405,6 +412,48 @@ const InvitePanel = ({
     return filtered;
   };
 
+  const onCloseLinkSettingsPanel = () => {
+    setLinkSettingsPanelVisible(false);
+  };
+
+  const copyLink = (link) => {
+    if (link) {
+      toastr.success(
+        `${t("Common:LinkCopySuccess")}. ${t("Translations:LinkValidTime", {
+          days_count: 7,
+        })}`,
+      );
+
+      copyShareLink(link);
+    }
+  };
+
+  const onSelectAccess = async (access) => {
+    console.log("onSelectAccess", access);
+    let link = null;
+    const selectedAccess = access.access;
+
+    if (roomId === -1) {
+      link = shareLinks.find((l) => l.access === selectedAccess);
+
+      link.shareLink = await getPortalInviteLink(selectedAccess);
+
+      setActiveLink(link);
+    } else {
+      api.rooms.setInvitationLinks(
+        roomId,
+        "Invite",
+        +selectedAccess,
+        shareLinks[0].id,
+      );
+
+      link = shareLinks[0];
+      setActiveLink(shareLinks[0]);
+    }
+
+    copyLink(link.shareLink);
+  };
+
   const bodyInvitePanel = useMemo(() => {
     return (
       <div style={{ display: "contents" }} ref={invitePanelBodyRef}>
@@ -419,6 +468,9 @@ const InvitePanel = ({
           setActiveLink={setActiveLink}
           activeLink={activeLink}
           isMobileView={isMobileView}
+          setLinkSettingsPanelVisible={setLinkSettingsPanelVisible}
+          onSelectAccess={onSelectAccess}
+          copyLink={copyLink}
         />
 
         <InviteInput
@@ -427,7 +479,6 @@ const InvitePanel = ({
           setCultureKey={setCultureKey}
           roomType={roomType}
           inputsRef={inputsRef}
-          addUsersPanelVisible={addUsersPanelVisible}
           setAddUsersPanelVisible={setAddUsersPanelVisible}
           isMobileView={isMobileView}
           removeExist={removeExist}
@@ -516,13 +567,21 @@ const InvitePanel = ({
 
   const access = defaultAccess ?? ShareAccessRights.ReadOnly;
 
+  const filteredAccesses =
+    roomType === -1 ? accessOptions : filterPaidRoleOptions(accessOptions);
+
   return (
     <ModalDialog
       visible={isVisible}
       onClose={onClose}
       onBackClick={onBackClick}
       displayType={ModalDialogType.aside}
-      containerVisible={!hideSelector ? addUsersPanelVisible : null}
+      // containerVisible={
+      //   !hideSelector
+      //     ? addUsersPanelVisible
+      //     : (linkSettingsPanelVisible ?? null)
+      // }
+      containerVisible={linkSettingsPanelVisible ?? null}
       isLoading={invitePanelIsLoding}
       withBodyScroll
       isInvitePanelLoader
@@ -567,6 +626,29 @@ const InvitePanel = ({
         </ModalDialog.Container>
       ) : null}
 
+      {linkSettingsPanelVisible ? (
+        <ModalDialog.Container>
+          <LinkSettingsPanel
+            isVisible={linkSettingsPanelVisible}
+            onClose={() => {
+              onCloseLinkSettingsPanel();
+              onClose();
+            }}
+            onBackClick={onCloseLinkSettingsPanel}
+            onSubmit={() => {
+              onCloseLinkSettingsPanel();
+              console.log("LinkSettingsPanel onSubmit Save & copy");
+              onSelectAccess(linkSelectedAccess);
+            }}
+            activeLink={activeLink}
+            filteredAccesses={filteredAccesses}
+            linkSelectedAccess={linkSelectedAccess}
+            setLinkSelectedAccess={setLinkSelectedAccess}
+            defaultAccess={defaultAccess ?? ShareAccessRights.ReadOnly}
+          />
+        </ModalDialog.Container>
+      ) : null}
+
       <ModalDialog.Header>{t("Common:Invite")}</ModalDialog.Header>
       <ModalDialog.Body>{bodyInvitePanel}</ModalDialog.Body>
       <ModalDialog.Footer>
@@ -604,6 +686,7 @@ export default inject(
     authStore,
     currentQuotaStore,
     userStore,
+    peopleStore,
   }) => {
     const { theme, standalone, allowInvitingGuests, checkGuests, hasGuests } =
       settingsStore;
@@ -629,6 +712,7 @@ export default inject(
     const { isUserTariffLimit } = currentQuotaStore;
 
     const { isOwner, isAdmin } = userStore.user;
+    const { getPortalInviteLink } = peopleStore.inviteLinksStore;
 
     return {
       folders,
@@ -654,6 +738,7 @@ export default inject(
       allowInvitingGuests,
       checkGuests,
       hasGuests,
+      getPortalInviteLink,
     };
   },
 )(

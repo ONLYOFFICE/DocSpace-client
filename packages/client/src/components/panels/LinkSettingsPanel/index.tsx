@@ -62,7 +62,7 @@ const LinkSettingsPanel = ({
   const currentAccess = filteredAccesses.find(
     (a) =>
       a.access ===
-      (activeLink?.access ?? linkSelectedAccess?.access ?? defaultAccess),
+      (linkSelectedAccess?.access ?? activeLink?.access ?? defaultAccess),
   );
 
   const usersNumber = 0; // TODO: Link settings

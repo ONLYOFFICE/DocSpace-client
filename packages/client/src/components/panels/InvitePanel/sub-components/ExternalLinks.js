@@ -27,7 +27,7 @@
 // import MediaDownloadReactSvgUrl from "PUBLIC_DIR/images/media.download.react.svg?url";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 import SettingsOutlineSvgUrl from "PUBLIC_DIR/images/icons/16/settings-outline.react.svg?url";
-import React, { useState, useRef } from "react";
+import { useRef } from "react";
 import { inject, observer } from "mobx-react";
 
 import { toastr } from "@docspace/shared/components/toast";
@@ -37,7 +37,6 @@ import { InputBlock } from "@docspace/shared/components/input-block";
 import { IconButton } from "@docspace/shared/components/icon-button";
 // import { DropDown } from "@docspace/shared/components/drop-down";
 // import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 // import { globalColors } from "@docspace/shared/themes";
@@ -77,9 +76,10 @@ const ExternalLinks = ({
   setLinkSettingsPanelVisible,
   onSelectAccess,
   copyLink,
+  editLink,
+  isLinksToggling,
+  setIsLinksToggling,
 }) => {
-  const [isLinksToggling, setIsLinksToggling] = useState(false);
-
   // const [actionLinksVisible, setActionLinksVisible] = useState(false);
 
   const inputsRef = useRef();
@@ -93,26 +93,6 @@ const ExternalLinks = ({
         shareLinks[0].id,
       ));
     return setShareLinks([]);
-  };
-
-  const editLink = async () => {
-    const type = getDefaultAccessUser(roomType);
-
-    const link = await api.rooms.setInvitationLinks(roomId, "Invite", type);
-
-    const { shareLink, id, title, expirationDate } = link.sharedTo;
-
-    const newShareLink = {
-      id,
-      title,
-      shareLink,
-      expirationDate,
-      access: link.access || defaultAccess,
-    };
-
-    copyLink(shareLink);
-    setShareLinks([newShareLink]);
-    return setActiveLink(newShareLink);
   };
 
   const toggleLinks = async (e) => {
@@ -204,11 +184,14 @@ const ExternalLinks = ({
     <StyledExternalLink noPadding ref={inputsRef}>
       <StyledSubHeader $inline>
         {t("InviteViaLink")}
-        <IconButton
-          iconName={SettingsOutlineSvgUrl}
-          size={16}
-          onClick={() => setLinkSettingsPanelVisible(true)}
-        />
+
+        {roomId !== -1 ? (
+          <IconButton
+            iconName={SettingsOutlineSvgUrl}
+            size={16}
+            onClick={() => setLinkSettingsPanelVisible(true)}
+          />
+        ) : null}
 
         {/* {false ? (
           <div style={{ position: "relative" }}>

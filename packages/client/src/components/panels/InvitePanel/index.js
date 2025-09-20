@@ -58,6 +58,7 @@ import InviteInput from "./sub-components/InviteInput";
 import ItemsList from "./sub-components/ItemsList";
 import LinkSettingsPanel from "../LinkSettingsPanel";
 import { copyShareLink } from "@docspace/shared/utils/copy";
+import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 
 const InvitePanel = ({
   folders,
@@ -105,6 +106,7 @@ const InvitePanel = ({
   const [cultureKey, setCultureKey] = useState();
   const [showGuestsTab, setShowGuestsTab] = useState(true);
   const [linkSelectedAccess, setLinkSelectedAccess] = useState(null);
+  const [isLinksToggling, setIsLinksToggling] = useState(false);
 
   const navigate = useNavigate();
 
@@ -428,8 +430,34 @@ const InvitePanel = ({
     }
   };
 
+  const editLink = async (linkAccess = null) => {
+    const type = getDefaultAccessUser(roomType);
+
+    let link = null;
+
+    try {
+      link = await api.rooms.setInvitationLinks(roomId, "Invite", type);
+      setIsLinksToggling(true);
+    } catch (error) {
+      toastr.error(error);
+    }
+
+    const { shareLink, id, title, expirationDate } = link.sharedTo;
+
+    const newShareLink = {
+      id,
+      title,
+      shareLink,
+      expirationDate,
+      access: linkAccess ?? (link.access || defaultAccess),
+    };
+
+    copyLink(shareLink);
+    setShareLinks([newShareLink]);
+    return setActiveLink(newShareLink);
+  };
+
   const onSelectAccess = async (access) => {
-    console.log("onSelectAccess", access);
     let link = null;
     const selectedAccess = access.access;
 
@@ -440,15 +468,31 @@ const InvitePanel = ({
 
       setActiveLink(link);
     } else {
-      api.rooms.setInvitationLinks(
-        roomId,
-        "Invite",
-        +selectedAccess,
-        shareLinks[0].id,
-      );
+      try {
+        const newLink = await api.rooms.setInvitationLinks(
+          roomId,
+          "Invite",
+          +selectedAccess,
+          shareLinks[0]?.id ?? null,
+        );
 
-      link = shareLinks[0];
-      setActiveLink(shareLinks[0]);
+        const { shareLink, id, title, expirationDate } = newLink.sharedTo;
+        const newActiveLink = {
+          id,
+          title,
+          shareLink,
+          expirationDate,
+          access: newLink.access,
+        };
+
+        link = newActiveLink;
+
+        setActiveLink(newActiveLink);
+
+        setLinkSelectedAccess(access);
+      } catch (error) {
+        toastr.error(error);
+      }
     }
 
     copyLink(link.shareLink);
@@ -471,6 +515,9 @@ const InvitePanel = ({
           setLinkSettingsPanelVisible={setLinkSettingsPanelVisible}
           onSelectAccess={onSelectAccess}
           copyLink={copyLink}
+          editLink={editLink}
+          isLinksToggling={isLinksToggling}
+          setIsLinksToggling={setIsLinksToggling}
         />
 
         <InviteInput
@@ -632,13 +679,14 @@ const InvitePanel = ({
             isVisible={linkSettingsPanelVisible}
             onClose={() => {
               onCloseLinkSettingsPanel();
+              setLinkSelectedAccess(null);
               onClose();
             }}
             onBackClick={onCloseLinkSettingsPanel}
             onSubmit={() => {
               onCloseLinkSettingsPanel();
-              console.log("LinkSettingsPanel onSubmit Save & copy");
-              onSelectAccess(linkSelectedAccess);
+              if (activeLink?.shareLink) onSelectAccess(linkSelectedAccess);
+              else editLink(linkSelectedAccess.access);
             }}
             activeLink={activeLink}
             filteredAccesses={filteredAccesses}

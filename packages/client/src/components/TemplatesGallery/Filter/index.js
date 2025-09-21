@@ -43,7 +43,7 @@ export const StyledFilter = styled.div.attrs(injectDefaultTheme)`
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  padding: 0 0 8px 0;
+  padding-bottom: 22px;
 
   .form-only-filters {
     height: 32px;
@@ -51,6 +51,7 @@ export const StyledFilter = styled.div.attrs(injectDefaultTheme)`
     flex-direction: row;
     align-items: center;
     gap: 8px;
+    padding-right: 24px;
 
     &:empty {
       display: none;
@@ -93,16 +94,14 @@ export const StyledFilter = styled.div.attrs(injectDefaultTheme)`
     }
   }
 
-  @media ${tablet} {
-    padding-bottom: 16px;
-  }
-
   @media ${mobile} {
     flex-direction: ${({ theme }) =>
       theme.interfaceDirection === "rtl" ? `column` : `column-reverse`};
+    padding-bottom: 16px;
 
     .form-only-filters {
       width: 100%;
+      padding-right: 0;
     }
     .general-filters {
       max-width: 100%;

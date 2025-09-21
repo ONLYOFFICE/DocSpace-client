@@ -107,8 +107,6 @@ export const StyledFilter = styled.div.attrs(injectDefaultTheme)`
     .general-filters {
       max-width: 100%;
     }
-
-    padding-right: 16px;
   }
 `;
 

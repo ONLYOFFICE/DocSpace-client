@@ -40,6 +40,8 @@ const StyledSkeletonTile = styled.div<SkeletonTileProps>`
     display: flex;
     flex-direction: column;
     gap: 8px;
+    box-sizing: border-box;
+    padding: 10px;
     width: 100%;
     aspect-ratio: ${(props) => (props.smallPreview ? "229 / 162" : "12 /16")};
   }
@@ -165,7 +167,6 @@ const GridDynamicHeight = ({
         }}
       >
         {children.map((child, index) => {
-          // Extract the key from the child element, but ensure uniqueness by combining with index
           const childKey =
             React.isValidElement(child) && child.key
               ? `${child.key}-${index}`

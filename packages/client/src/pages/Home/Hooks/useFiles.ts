@@ -60,6 +60,7 @@ export type UseFilesProps = {
   setToPreviewFile: MediaViewerDataStore["setToPreviewFile"];
 
   gallerySelected: OformsStore["gallerySelected"];
+  isVisibleInfoPanelTemplateGallery: OformsStore["isVisibleInfoPanelTemplateGallery"];
 
   userId: string;
 
@@ -79,6 +80,7 @@ const useFiles = ({
   setToPreviewFile,
 
   gallerySelected,
+  isVisibleInfoPanelTemplateGallery,
   userId,
 
   selectedFolderStore,
@@ -273,7 +275,7 @@ const useFiles = ({
         return Promise.resolve();
       })
       .then(() => {
-        if (gallerySelected) {
+        if (gallerySelected && !isVisibleInfoPanelTemplateGallery) {
           setIsUpdatingRowItem(false);
 
           const isFormRoom =
@@ -322,6 +324,7 @@ const useFiles = ({
     setToPreviewFile,
 
     gallerySelected,
+    isVisibleInfoPanelTemplateGallery,
     userId,
 
     selectedFolderStore,

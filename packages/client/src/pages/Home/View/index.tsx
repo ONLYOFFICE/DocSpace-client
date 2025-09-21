@@ -99,6 +99,7 @@ const View = ({
   setIsUpdatingRowItem,
 
   gallerySelected,
+  isVisibleInfoPanelTemplateGallery,
   userId,
 
   selectedFolderStore,
@@ -163,6 +164,7 @@ const View = ({
     setIsUpdatingRowItem,
 
     gallerySelected,
+    isVisibleInfoPanelTemplateGallery,
     userId,
 
     scrollToTop,
@@ -423,7 +425,7 @@ export const ViewComponent = inject(
 
     const { playlist, setToPreviewFile } = mediaViewerDataStore;
 
-    const { gallerySelected } = oformsStore;
+    const { gallerySelected, isVisibleInfoPanelTemplateGallery } = oformsStore;
 
     const { getFilesSettings } = filesSettingsStore;
 
@@ -473,6 +475,7 @@ export const ViewComponent = inject(
       setToPreviewFile,
 
       gallerySelected,
+      isVisibleInfoPanelTemplateGallery,
 
       userId: userStore?.user?.id,
 

@@ -22,7 +22,6 @@
   "ActivateRenewDescr": "Për të marrë kushtet tuaja personale të rinovimit, kontaktoni menaxherin tuaj të dedikuar ose na shkruani në <1>{{email}}</1>",
   "ActivateRenewSubscriptionHeader": "Rinovo abonimin për {{license}}",
   "ActivateSwithToProHeader": "Kalo në versionin e plotë të {{license}}",
-  "ActivateTariffDescr": "Po përdorni {{organizationName}} {{productName}} {{license}}.",
   "ActivateTariffLicenseTrialExpiration": "Prova juaj skadon më {{date}}.",
   "ActivateToProBannerHeaderTrial": "Blini versionin e plotë të {{license}} për të marrë:",
   "ActivateUploadDescr": "Për të aktivizuar licensën tuaj, ngarkoni atë më poshtë dhe klikoni Aktivizo.",

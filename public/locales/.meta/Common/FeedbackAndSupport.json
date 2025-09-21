@@ -3,7 +3,7 @@
   "content": "Feedback & Support",
   "content_en_sha1_hash": "7714e1a8a44cee405d24cfadd08ff22d9fc4f6b9",
   "created_at": "2025-05-19T21:30:45.233Z",
-  "updated_at": "2025-08-11T18:11:59.319Z",
+  "updated_at": "2025-09-17T13:43:01.944Z",
   "comment": {
     "text": "This translation key is used to display a label on a user menu item for accessing support and feedback features. It appears in the user menu, allowing users to access common feedback and support options. The exact UI component this label is part of can be found at /packages/client/src/store/ProfileActionsStore.js line 439.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ProfileActionsStore.js",
-      "line_number": 451,
+      "line_number": 498,
       "context": "},\n liveChat,\n feedbackAndSupportEnabled && {\n key: \"user-menu-support\",\n icon: EmailReactSvgUrl,\n label: t(\"Common:FeedbackAndSupport\"),\n onClick: this.onSupportClick,\n url: this.settingsStore.feedbackAndSupportUrl || \"#\",\n preventNewTab: true,\n },\n feedbackAndSupportEnabled && {",
       "module": "/packages/client"
     }

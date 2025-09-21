@@ -204,7 +204,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               title={t("Common:CopySharedLink")}
             />
           ) : null}
-          {locked ? (
+          {locked && isTile ? (
             <>
               <IconButton
                 iconName={iconLock}

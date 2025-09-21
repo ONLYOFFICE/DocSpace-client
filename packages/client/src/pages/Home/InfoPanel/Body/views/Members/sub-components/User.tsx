@@ -56,6 +56,7 @@ const User = ({
 }: UserProps) => {
   const { t } = useTranslation([
     "InfoPanel",
+    "InviteDialog",
     "Common",
     "Translations",
     "People",

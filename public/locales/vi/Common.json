@@ -22,7 +22,6 @@
   "ActivateRenewDescr": "Để nhận các điều khoản gia hạn cho riêng bạn, hãy liên hệ với người quản lý tận tâm của bạn hoặc gửi thư cho chúng tôi qua <1>{{email}}</1>",
   "ActivateRenewSubscriptionHeader": "Gia hạn đăng ký cho {{license}}",
   "ActivateSwithToProHeader": "Chuyển sang phiên bản {{license}} đầy đủ",
-  "ActivateTariffDescr": "Bạn đang sử dụng {{license}} {{productName}}{{organizationName}}.",
   "ActivateTariffLicenseTrialExpiration": "Bản dùng thử của bạn sẽ hết hạn vào {{date}}.",
   "ActivateToProBannerHeaderTrial": "Mua phiên bản {{license}} đầy đủ để nhận:",
   "ActivateUploadDescr": "Để kích hoạt giấy phép của bạn, hãy tải nó lên bên dưới và nhấp vào Kích hoạt.",

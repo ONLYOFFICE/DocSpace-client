@@ -525,6 +525,10 @@ class BackupStore {
     this.setIsThirdStorageChanged(false);
   };
 
+  setDefaultFolderId = (id) => {
+    this.defaultFolderId = id;
+  };
+
   setThirdPartyStorage = (list) => {
     this.thirdPartyStorage = list;
   };

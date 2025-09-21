@@ -49,6 +49,7 @@ const DeleteThirdPartyDialog = ({
   setThirdPartyProviders,
   setDeleteThirdPartyDialogVisible,
   setConnectedThirdPartyAccount,
+  setDefaultFolderId,
 }: DeleteThirdPartyDialogProps) => {
   const { t, ready } = useTranslation(["Common"]);
 
@@ -67,6 +68,8 @@ const DeleteThirdPartyDialog = ({
         .catch((err) => toastr.error(err))
         .finally(() => {
           setConnectedThirdPartyAccount(null);
+          setDefaultFolderId?.(null);
+
           updateInfo?.();
           setIsLoading(false);
           onClose();

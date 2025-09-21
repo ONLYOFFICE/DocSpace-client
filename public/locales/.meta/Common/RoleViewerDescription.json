@@ -3,7 +3,7 @@
   "content": "File viewing",
   "content_en_sha1_hash": "959903daecf1599e5d6cf7634ea77484419513db",
   "created_at": "2025-05-19T21:30:48.151Z",
-  "updated_at": "2025-08-26T11:15:14.267Z",
+  "updated_at": "2025-09-17T13:43:02.004Z",
   "comment": {
     "text": "This translation key is used to describe a read-only access option for viewing files, appearing on share settings pages. The text helps provide clarity and context for users, allowing them to understand their role when accessing shared content.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.ts",
-      "line_number": 178,
+      "line_number": 182,
       "context": "type: EmployeeType.User,\n },\n viewer: {\n key: \"viewer\",\n label: t(\"Common:RoleViewer\"),\n description: t(\"Common:RoleViewerDescription\"),\n access: ShareAccessRights.ReadOnly,\n type: EmployeeType.User,\n },\n };",
       "module": "/packages/shared"
     }

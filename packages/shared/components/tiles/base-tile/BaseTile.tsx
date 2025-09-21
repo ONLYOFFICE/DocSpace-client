@@ -68,6 +68,7 @@ export const BaseTile = ({
   checkboxContainerRef,
   forwardRef,
   dataTestId,
+  badgeUrl,
 }: BaseTileProps) => {
   const childrenArray = React.Children.toArray(topContent);
 
@@ -235,6 +236,7 @@ export const BaseTile = ({
             withBackdrop
             ignoreChangeView={isMobile()}
             headerOnlyMobile
+            badgeUrl={badgeUrl}
           />
         </div>
       </div>

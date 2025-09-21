@@ -3,7 +3,7 @@
   "content": "Restore to default",
   "content_en_sha1_hash": "4679ca338a63ec93afce427c08feb4f9b69c6008",
   "created_at": "2025-05-19T21:30:52.427Z",
-  "updated_at": "2025-08-04T07:30:01.541Z",
+  "updated_at": "2025-09-19T15:39:23.246Z",
   "comment": {
     "text": "RestoreToDefault is used as a label for the cancel button on a portal settings page, prompting users to revert to default brute force protection settings. This translation key appears in a dialog box where users can customize security settings.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/bruteForceProtection.js",
-      "line_number": 341,
+      "line_number": 366,
       "context": "tabIndex={4}\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"RestoreToDefault\")}\n displaySettings\n hasScroll={false}\n additionalClassSaveButton=\"brute-force-protection-save\"\n additionalClassCancelButton=\"brute-force-protection-cancel\"\n isSaving={isLoadingSave}",
       "module": "/packages/client"
     }

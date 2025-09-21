@@ -52,6 +52,7 @@ type PropsFromCombobox = Pick<
   | "dataTestId"
   | "noSelect"
   | "isLoading"
+  | "showDisabledItems"
 >;
 
 export type AccessRightSelectProps = PropsFromCombobox & {

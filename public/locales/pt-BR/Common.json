@@ -22,7 +22,6 @@
   "ActivateRenewDescr": "Para obter seus termos de renovação pessoais, entre em contato com seu gerente dedicado ou escreva para <1>{{email}}</1>",
   "ActivateRenewSubscriptionHeader": "Renovar assinatura para {{license}}",
   "ActivateSwithToProHeader": "Mudar para a versão {{license}} completa",
-  "ActivateTariffDescr": "Você está usando o {{organizationName}} {{productName}} {{license}}.",
   "ActivateTariffLicenseTrialExpiration": "Seu teste expira em {{date}}.",
   "ActivateToProBannerHeaderTrial": "Compre a versão {{license}} completa para obter:",
   "ActivateUploadDescr": "Para ativar sua licença, faça o upload abaixo e clique no botão Ativar.",

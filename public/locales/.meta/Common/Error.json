@@ -3,7 +3,7 @@
   "content": "Error",
   "content_en_sha1_hash": "7f2f6a15cf8da2b27e5a4af47b58e7ad71c0b3d9",
   "created_at": "2025-05-19T21:30:45.027Z",
-  "updated_at": "2025-09-07T07:53:15.408Z",
+  "updated_at": "2025-09-17T13:43:01.958Z",
   "comment": {
     "text": "This translation key is used to display an \"Error\" message in the app, indicating a specific type of error occurred. It appears as part of error messages in various UI elements, such as confirm routes and error containers, providing context for users when an unexpected issue arises.",
     "is_auto": true,
@@ -55,7 +55,7 @@
     {
       "file_path": "/packages/shared/pages/PreparationPortal/index.tsx",
       "line_number": 48,
-      "context": "export const PreparationPortal = (props: IPreparationPortal) => {\n const { withoutHeader, isDialog, style } = props;\n \n const { t, ready } = useTranslation([\"PreparationPortal\", \"Common\"]);\n \n const errorInternalServer = t(\"Common:ErrorInternalServer\");\n \n const [percent, setPercent] = useState(0);\n const [errorMessage, setErrorMessage] = useState(\"\");\n \n const getRecoveryProgress = useCallback(async () => {",
+      "context": "export const PreparationPortal = (props: IPreparationPortal) => {\n const { withoutHeader, isDialog, style } = props;\n \n const { t, ready } = useTranslation([\"Common\"]);\n \n const errorInternalServer = t(\"Common:ErrorInternalServer\");\n \n const [percent, setPercent] = useState(0);\n const [errorMessage, setErrorMessage] = useState(\"\");\n \n const getRecoveryProgress = useCallback(async () => {",
       "module": "/packages/shared"
     }
   ],

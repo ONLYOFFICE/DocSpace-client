@@ -3,7 +3,7 @@
   "content": "Import users and groups via LDAP, and enable user authentication through logins/passwords stored on the LDAP server. Users will be imported immediately after the settings are saved. Users added later will be imported during their first authentication. If you want to provide access via LDAP only, disable the option to invite new {{productName}} members via {{sectionName}}: <1>{{link}}</1>",
   "content_en_sha1_hash": "357f3211aa64ba05352debea1cbeb2a2445fab62",
   "created_at": "2025-06-02T10:19:21.552Z",
-  "updated_at": "2025-06-18T17:11:42.472Z",
+  "updated_at": "2025-09-17T13:43:01.831Z",
   "comment": {
     "text": "This translation key is used for a notification message that explains the settings for importing users and groups via LDAP and enabling user authentication. It appears in a portal settings page when using LDAP integration, prompting users to disable an option if they only want access through LDAP.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/index.js",
-      "line_number": 92,
+      "line_number": 91,
       "context": "return (\n <StyledLdapPage isSmallWindow={isSmallWindow}>\n <Text className=\"intro-text settings_unavailable\">\n <Trans\n t={t}\n i18nKey=\"LdapIntegrationDescription\"\n ns=\"Ldap\"\n values={{\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Contacts\"),\n link,",
       "module": "/packages/client"
     }

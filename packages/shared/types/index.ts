@@ -195,6 +195,30 @@ export interface LinkParamsType {
   updateLink?: (newLink: TFileLink) => void;
 }
 
+export type TShareRights =
+  | "None"
+  | "ReadWrite"
+  | "Read"
+  | "Restrict"
+  | "Varies"
+  | "Review"
+  | "Comment"
+  | "FillForms"
+  | "CustomFilter"
+  | "RoomManager"
+  | "Editing"
+  | "ContentCreator";
+
+export type TShareRightsType =
+  | "ExternalLink"
+  | "Group"
+  | "PrimaryExternalLink"
+  | "User";
+
+export type TAvailableShareRights = Partial<
+  Record<TShareRightsType, TShareRights[]>
+>;
+
 export type ValueOf<T> = T[keyof T];
 
 declare global {

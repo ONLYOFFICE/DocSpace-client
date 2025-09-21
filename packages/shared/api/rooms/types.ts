@@ -38,7 +38,11 @@ import {
   ShareAccessRights,
   ValidationStatus,
 } from "../../enums";
-import { TCreatedBy, TPathParts } from "../../types";
+import type {
+  TAvailableShareRights,
+  TCreatedBy,
+  TPathParts,
+} from "../../types";
 import { TUser } from "../people/types";
 import { TGroup } from "../groups/types";
 
@@ -135,7 +139,9 @@ export type TRoom = {
   isAvailable?: boolean;
   isRoom?: boolean;
   shareSettings?: TShareSettings;
+  /** @deprecated */
   availableExternalRights?: TAvailableExternalRights;
+  availableShareRights?: TAvailableShareRights;
 };
 
 export type TGetRooms = {

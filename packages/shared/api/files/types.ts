@@ -24,7 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TCreatedBy, TPathParts } from "../../types";
+import type {
+  TAvailableShareRights,
+  TCreatedBy,
+  TPathParts,
+} from "../../types";
 import type {
   EmployeeActivationStatus,
   EmployeeStatus,
@@ -130,7 +134,9 @@ export type TFile = {
   viewUrl: string;
   webUrl: string;
   shortWebUrl: string;
+  /** @deprecated */
   availableExternalRights?: TAvailableExternalRights;
+  availableShareRights?: TAvailableShareRights;
   providerId?: number;
   providerKey?: string;
   providerItem?: boolean;
@@ -240,7 +246,9 @@ export type TFolder = {
   order?: string;
   isRoom?: false;
   shareSettings?: TShareSettings;
+  /** @deprecated */
   availableExternalRights?: TAvailableExternalRights;
+  availableShareRights?: TAvailableShareRights;
   isFavorite?: boolean;
 };
 

@@ -39,8 +39,8 @@ import { ContextMenuButton } from "../../context-menu-button";
 
 import {
   getAccessTypeOptions,
-  getAccessRightOptions,
-  getRoomAccessOptions,
+  getLinkAccessRightOptions,
+  getRoomLinkAccessOptions,
 } from "../Share.helpers";
 import type { LinkRowProps } from "../Share.types";
 
@@ -57,7 +57,7 @@ const LinkRow = ({
   changeShareOption,
   changeAccessOption,
   changeExpirationOption,
-  availableExternalRights,
+  availableShareRights,
   loadingLinks,
   isFolder = false,
   isRoomsLink = false,
@@ -74,19 +74,6 @@ const LinkRow = ({
   const isMobileViewLink = useIsMobile();
 
   const shareOptions = useMemo(() => getAccessTypeOptions(t), [t]);
-  const accessOptions = useMemo(() => {
-    return availableExternalRights
-      ? getAccessRightOptions(t, availableExternalRights)
-      : [];
-  }, [availableExternalRights, t]);
-
-  const roomAccessOptions = useMemo(
-    () =>
-      (isRoomsLink || isFolder) && availableExternalRights
-        ? getRoomAccessOptions(t, availableExternalRights)
-        : [],
-    [t, isFolder, isRoomsLink, availableExternalRights],
-  );
 
   const changeAccessOptionHandler = (item: TOption, link: TFileLink) => {
     if (isRoomsLink) {
@@ -103,6 +90,18 @@ const LinkRow = ({
   return links?.map((link) => {
     if (("isLoaded" in link && link.isLoaded) || "isLoaded" in link)
       return <RowSkeleton key="loading-link" />;
+
+    const accessOptions = getLinkAccessRightOptions(
+      t,
+      availableShareRights,
+      link.sharedTo.primary,
+    );
+
+    const roomAccessOptions = getRoomLinkAccessOptions(
+      t,
+      availableShareRights,
+      link.sharedTo.primary,
+    );
 
     const shareOption = shareOptions.find(
       (option) => option.internal === link.sharedTo.internal,

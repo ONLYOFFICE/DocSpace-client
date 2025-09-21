@@ -42,7 +42,12 @@ import {
   editExternalLink as editExternalRoomLink,
 } from "../api/rooms";
 
-import { FolderType, ShareAccessRights, ShareLinkType } from "../enums";
+import {
+  FolderType,
+  ShareAccessRights,
+  ShareLinkType,
+  ShareRights,
+} from "../enums";
 import { isFile, isRoom } from "../utils/typeGuards";
 
 import type { TRoom } from "../api/rooms/types";
@@ -69,8 +74,16 @@ export class ShareLinkService {
    * @param file - The file to determine access rights for
    * @returns The appropriate ShareAccessRights value
    */
-  public static getShareLinkAccessFile(file: TFile): ShareAccessRights {
-    const { availableExternalRights: rights, isForm, parentRoomType } = file;
+  public static getShareLinkAccessFile(
+    file: TFile,
+    isPrimary = false,
+  ): ShareAccessRights {
+    const { availableShareRights, isForm, parentRoomType } = file;
+
+    const rights =
+      (isPrimary
+        ? availableShareRights?.PrimaryExternalLink
+        : availableShareRights?.ExternalLink) || [];
 
     if (!rights) {
       return ShareAccessRights.ReadOnly;
@@ -79,17 +92,20 @@ export class ShareLinkService {
     // Handle form files with special access rights logic
     if (isForm) {
       // Forms in FormRooms get FormFilling rights if available
-      if (parentRoomType === FolderType.FormRoom && rights.FillForms) {
+      if (
+        parentRoomType === FolderType.FormRoom &&
+        rights.includes(ShareRights.FillForms)
+      ) {
         return ShareAccessRights.FormFilling;
       }
 
       // Prioritize editing rights for forms when available
-      if (rights.Editing) {
+      if (rights.includes(ShareRights.Editing)) {
         return ShareAccessRights.Editing;
       }
 
       // Fall back to form filling if available
-      if (rights.FillForms) {
+      if (rights.includes(ShareRights.FillForms)) {
         return ShareAccessRights.FormFilling;
       }
     }
@@ -121,7 +137,7 @@ export class ShareLinkService {
   public static async getFilePrimaryLink(file: TFile): Promise<TFileLink> {
     return getPrimaryLinkIfNotExistCreate(
       file.id,
-      this.getShareLinkAccessFile(file),
+      this.getShareLinkAccessFile(file, true),
       this.DEFAULT_CREATE_LINK_SETTINGS.internal,
       this.DEFAULT_CREATE_LINK_SETTINGS.diffExpirationDate,
     );

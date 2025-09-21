@@ -32,6 +32,8 @@ import {
   createEditExternalLinkHandler,
 } from "../../__mocks__/storybook/handlers/files/externalLinks";
 
+import { ShareRights } from "../../enums";
+
 import type { ShareProps } from "./Share.types";
 import Share from ".";
 
@@ -127,6 +129,12 @@ const createDefaultProps = (): ShareProps => ({
       FillForms: false,
       Restrict: true,
       None: true,
+    },
+    availableShareRights: {
+      User: [ShareRights.Read, ShareRights.None],
+      Group: [ShareRights.Read, ShareRights.None],
+      ExternalLink: [ShareRights.Read, ShareRights.None],
+      PrimaryExternalLink: [ShareRights.Read, ShareRights.None],
     },
     viewUrl: "https://example.com/view",
     webUrl: "https://example.com/web",

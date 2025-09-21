@@ -397,10 +397,7 @@ export const useShare = ({
     [fileLinks],
   );
 
-  const availableExternalRights =
-    infoPanelSelection && "availableExternalRights" in infoPanelSelection
-      ? infoPanelSelection.availableExternalRights
-      : undefined;
+  const availableShareRights = infoPanelSelection?.availableShareRights;
 
   const countCanCreateLink = Math.max(
     0,
@@ -479,7 +476,7 @@ export const useShare = ({
           changeAccessOption={changeAccessOption}
           onCloseContextMenu={onCloseContextMenu}
           changeExpirationOption={changeExpirationOption}
-          availableExternalRights={availableExternalRights}
+          availableShareRights={availableShareRights}
         />
       )),
     ];

@@ -222,10 +222,16 @@ export const useMembers = (props: UseMembersProps) => {
       };
     }
 
-    const options = getShareAccessRightOptions(t, infoPanelSelection);
-
     return {
       content: membersList.map((member, index) => {
+        const isGroup = "isGroup" in member && member.isGroup;
+
+        const options = getShareAccessRightOptions(
+          t,
+          infoPanelSelection,
+          true,
+          isGroup,
+        );
         const selectedOption = options.find(
           (option) => "access" in member && option.access === member.access,
         );

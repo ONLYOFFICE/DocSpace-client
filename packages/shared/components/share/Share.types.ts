@@ -29,13 +29,8 @@ import moment from "moment";
 import type { TFunction } from "i18next";
 import type { IndexRange } from "react-virtualized";
 
-import type {
-  TAvailableExternalRights,
-  TFile,
-  TFileLink,
-  TFolder,
-} from "../../api/files/types";
-import type { LinkParamsType } from "../../types";
+import type { TFile, TFileLink, TFolder } from "../../api/files/types";
+import type { LinkParamsType, TAvailableShareRights } from "../../types";
 import type { ShareAccessRights } from "../../enums";
 
 import type { TOption } from "../combobox";
@@ -75,7 +70,7 @@ export type LinkRowProps = {
 
   removedExpiredLink: (link: TFileLink) => void;
 
-  availableExternalRights?: TAvailableExternalRights;
+  availableShareRights?: TAvailableShareRights;
 
   loadingLinks: (string | number)[];
 

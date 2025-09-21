@@ -134,7 +134,7 @@ export type TFile = {
   viewUrl: string;
   webUrl: string;
   shortWebUrl: string;
-  /** @deprecated */
+  /** @deprecated use availableShareRights instead */
   availableExternalRights?: TAvailableExternalRights;
   availableShareRights?: TAvailableShareRights;
   providerId?: number;
@@ -246,7 +246,7 @@ export type TFolder = {
   order?: string;
   isRoom?: false;
   shareSettings?: TShareSettings;
-  /** @deprecated */
+  /** @deprecated use availableShareRights instead */
   availableExternalRights?: TAvailableExternalRights;
   availableShareRights?: TAvailableShareRights;
   isFavorite?: boolean;

@@ -26,7 +26,7 @@
 
 import type { TFile, TFileLink, TFolder } from "../api/files/types";
 import type { TBreadCrumb } from "../components/selector/Selector.types";
-import type { RoomsType, ShareAccessRights } from "../enums";
+import type { RoomsType, ShareAccessRights, ShareRights } from "../enums";
 import type { TTheme, TColorScheme } from "../themes";
 import type FirebaseHelper from "../utils/firebase";
 import type { TRoom } from "../api/rooms/types";
@@ -195,20 +195,6 @@ export interface LinkParamsType {
   updateLink?: (newLink: TFileLink) => void;
 }
 
-export type TShareRights =
-  | "None"
-  | "ReadWrite"
-  | "Read"
-  | "Restrict"
-  | "Varies"
-  | "Review"
-  | "Comment"
-  | "FillForms"
-  | "CustomFilter"
-  | "RoomManager"
-  | "Editing"
-  | "ContentCreator";
-
 export type TShareRightsType =
   | "ExternalLink"
   | "Group"
@@ -216,8 +202,25 @@ export type TShareRightsType =
   | "User";
 
 export type TAvailableShareRights = Partial<
-  Record<TShareRightsType, TShareRights[]>
+  Record<TShareRightsType, ShareRights[]>
 >;
+
+export type TShareLinkAccessRightOption = {
+  key: string;
+  icon: string;
+  label: string;
+  access: ShareAccessRights;
+  description?: string;
+  title?: string;
+};
+
+export type TShareToUserAccessRightOption = {
+  key: string;
+  label: string;
+  access: ShareAccessRights;
+  description?: string;
+  isSeparator?: boolean;
+};
 
 export type ValueOf<T> = T[keyof T];
 

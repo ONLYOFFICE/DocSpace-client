@@ -139,7 +139,7 @@ export type TRoom = {
   isAvailable?: boolean;
   isRoom?: boolean;
   shareSettings?: TShareSettings;
-  /** @deprecated */
+  /** @deprecated use availableShareRights instead */
   availableExternalRights?: TAvailableExternalRights;
   availableShareRights?: TAvailableShareRights;
 };

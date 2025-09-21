@@ -66,7 +66,7 @@ const LinkRow = (props: LinkRowProps) => {
     item,
   } = props;
 
-  const availableExternalRights = item.availableExternalRights;
+  const availableShareRights = item.availableShareRights;
 
   const isFormRoom = item.roomType === RoomsType.FormRoom;
   const isPublicRoomType = item.roomType === RoomsType.PublicRoom;
@@ -276,7 +276,7 @@ const LinkRow = (props: LinkRowProps) => {
       isArchiveFolder={isArchiveFolder!}
       isPublicRoom={isPublicRoomType}
       changeShareOption={changeShareOption}
-      availableExternalRights={availableExternalRights}
+      availableShareRights={availableShareRights}
       onCopyLink={onCopyLink}
     />
   );

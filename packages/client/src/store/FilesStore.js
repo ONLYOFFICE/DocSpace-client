@@ -3413,7 +3413,6 @@ class FilesStore {
 
     return items.map((item) => {
       const {
-        availableExternalRights,
         access,
         autoDelete,
         originTitle,
@@ -3578,7 +3577,6 @@ class FilesStore {
       const isForm = fileExst === ".oform";
 
       return {
-        availableExternalRights,
         access,
         daysRemaining: autoDelete && getDaysRemaining(autoDelete),
         originTitle,

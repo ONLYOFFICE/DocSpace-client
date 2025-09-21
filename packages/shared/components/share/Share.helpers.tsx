@@ -44,6 +44,7 @@ import {
   EmployeeActivationStatus,
   MembersSubjectType,
   ShareAccessRights,
+  ShareRights,
 } from "../../enums";
 import { copyShareLink as copy } from "../../utils/copy";
 import {
@@ -54,13 +55,13 @@ import {
 } from "../../utils/typeGuards";
 
 import type { RoomMember, TRoom } from "../../api/rooms/types";
-import type { TTranslation } from "../../types";
 import type {
-  TAvailableExternalRights,
-  TFile,
-  TFileLink,
-  TFolder,
-} from "../../api/files/types";
+  TAvailableShareRights,
+  TShareLinkAccessRightOption,
+  TShareToUserAccessRightOption,
+  TTranslation,
+} from "../../types";
+import type { TFile, TFileLink, TFolder } from "../../api/files/types";
 
 import { Link } from "../link";
 import { toastr } from "../toast";
@@ -71,8 +72,6 @@ import {
   TShareMembers,
   TTitleShare,
 } from "./Share.types";
-
-type ItemValue<T> = T extends false | undefined | null ? never : T;
 
 export const getAccessTypeOptions = (t: TTranslation, withIcon = true) => {
   return [
@@ -93,105 +92,103 @@ export const getAccessTypeOptions = (t: TTranslation, withIcon = true) => {
   ];
 };
 
-export const getAccessRightOptions = (
+export const getLinkAccessRightOptions = (
   t: TTranslation,
-  available: TAvailableExternalRights,
+  available?: TAvailableShareRights,
+  isPrimary = false,
 ) => {
-  const accessOptions = [
-    available.Editing && {
+  const linkAccess =
+    (isPrimary ? available?.PrimaryExternalLink : available?.ExternalLink) ||
+    [];
+
+  const accessOptions: Partial<
+    Record<ShareRights, TShareLinkAccessRightOption>
+  > = {
+    [ShareRights.Editing]: {
       access: ShareAccessRights.Editing,
       key: "editing",
       label: t("Common:Editing"),
       icon: AccessEditReactSvgUrl,
     },
-    available.CustomFilter && {
+    [ShareRights.CustomFilter]: {
       access: ShareAccessRights.CustomFilter,
       key: "custom-filter",
       label: t("Common:CustomFilter"),
       icon: CustomFilterReactSvgUrl,
     },
-    available.Review && {
+    [ShareRights.Review]: {
       access: ShareAccessRights.Review,
       key: "review",
       label: t("Common:Review"),
       icon: AccessReviewReactSvgUrl,
     },
-    available.Comment && {
+    [ShareRights.Comment]: {
       access: ShareAccessRights.Comment,
       key: "commenting",
       label: t("Common:Comment"),
       icon: AccessCommentReactSvgUrl,
     },
-    available.Read && {
+    [ShareRights.Read]: {
       access: ShareAccessRights.ReadOnly,
       key: "viewing",
       label: t("Common:ReadOnly"),
       icon: EyeReactSvgUrl,
       title: t("Common:ReadOnly"),
     },
-    available.FillForms && {
+    [ShareRights.FillForms]: {
       access: ShareAccessRights.FormFilling,
       key: "filling",
       label: t("Common:Filling"),
       icon: FillFormsReactSvgUrl,
     },
-    // available.Restrict && {
-    //   access: ShareAccessRights.DenyAccess,
-    //   key: "deny-access",
-    //   label: t("Common:DenyAccess"),
-    //   icon: EyeOffReactSvgUrl,
-    // },
-    // {
-    //   key: "separator",
-    //   isSeparator: true,
-    // },
-    // available.None && {
-    //   access: ShareAccessRights.None,
-    //   key: "remove",
-    //   label: t("Common:Remove"),
-    //   icon: RemoveReactSvgUrl,
-    // },
-  ];
+  };
 
-  return accessOptions.filter(
-    (item): item is ItemValue<(typeof accessOptions)[number]> => Boolean(item),
-  );
+  return linkAccess
+    .map((access) => accessOptions[access])
+    .filter((item): item is TShareLinkAccessRightOption => Boolean(item));
 };
 
-export const getRoomAccessOptions = (
+export const getRoomLinkAccessOptions = (
   t: TTranslation,
-  available: TAvailableExternalRights,
+  available?: TAvailableShareRights,
+  isPrimary = false,
 ) => {
-  const accessOptions = [
-    available.Editing && {
+  const roomAccess =
+    (isPrimary ? available?.PrimaryExternalLink : available?.ExternalLink) ||
+    [];
+
+  const accessOptions: Partial<
+    Record<ShareRights, TShareLinkAccessRightOption>
+  > = {
+    [ShareRights.Editing]: {
       access: ShareAccessRights.Editing,
       description: t("Common:RoleEditorDescription"),
       key: "editing",
       label: t("Common:Editor"),
       icon: AccessEditReactSvgUrl,
     },
-    available.Review && {
+    [ShareRights.Review]: {
       access: ShareAccessRights.Review,
       description: t("Common:RoleReviewerDescription"),
       key: "review",
       label: t("Common:RoleReviewer"),
       icon: AccessReviewReactSvgUrl,
     },
-    available.Comment && {
+    [ShareRights.Comment]: {
       access: ShareAccessRights.Comment,
       description: t("Common:RoleCommentatorDescription"),
       key: "commenting",
       label: t("Commentator"),
       icon: AccessCommentReactSvgUrl,
     },
-    available.Read && {
+    [ShareRights.Read]: {
       access: ShareAccessRights.ReadOnly,
       description: t("Common:RoleViewerDescription"),
       key: "viewing",
       label: t("Common:Viewer"),
       icon: EyeReactSvgUrl,
     },
-    available.FillForms && {
+    [ShareRights.FillForms]: {
       access: ShareAccessRights.FormFilling,
       description: "",
       key: "filling",
@@ -199,11 +196,11 @@ export const getRoomAccessOptions = (
       icon: FillFormsReactSvgUrl,
       title: t("Common:FillingOnly"),
     },
-  ];
+  };
 
-  return accessOptions.filter(
-    (item): item is ItemValue<(typeof accessOptions)[number]> => Boolean(item),
-  );
+  return roomAccess
+    .map((access) => accessOptions[access])
+    .filter((item): item is TShareLinkAccessRightOption => Boolean(item));
 };
 
 export const getExpiredOptions = (
@@ -570,110 +567,128 @@ export const getShareAccessRightOptions = (
   t: TFunction,
   infoPanelSelection: TFile | TFolder,
   withRemove = true,
+  isGroup = false,
 ) => {
-  const {
-    FullAccess,
-    Editing,
-    Review,
-    Comment,
-    Read,
-    None,
-    CustomFilter,
-    FillForms,
-  } = infoPanelSelection.availableExternalRights ?? {};
+  const availableShareRights = infoPanelSelection.availableShareRights;
+
+  const rights =
+    (isGroup ? availableShareRights?.Group : availableShareRights?.User) || [];
 
   if (isFolder(infoPanelSelection)) {
-    return [
-      FullAccess && {
+    const options: Partial<
+      Record<
+        ShareRights,
+        TShareToUserAccessRightOption | TShareToUserAccessRightOption[]
+      >
+    > = {
+      [ShareRights.ReadWrite]: {
         access: ShareAccessRights.FullAccess,
         key: "full-access",
         label: t("Common:FullAccess"),
         description: t("Common:FullAccessDescription"),
       },
-      Editing && {
+      [ShareRights.Editing]: {
         access: ShareAccessRights.Editing,
         key: "editor",
         label: t("Common:Editor"),
         description: t("Common:EditorDescription"),
       },
-      Review && {
+      [ShareRights.Review]: {
         access: ShareAccessRights.Review,
         key: "review",
         label: t("Common:Review"),
         description: t("Common:RoleReviewerDescription"),
       },
-      Comment && {
+      [ShareRights.Comment]: {
         access: ShareAccessRights.Comment,
         key: "commenting",
         label: t("Common:Comment"),
         description: t("Common:RoleCommentatorDescription"),
       },
-      Read && {
+      [ShareRights.Read]: {
         access: ShareAccessRights.ReadOnly,
         key: "viewing",
         label: t("Common:RoleViewer"),
         description: t("Common:RoleViewerDescription"),
       },
-      withRemove &&
-        None && {
-          key: "separator",
-          isSeparator: true,
-          label: "",
-        },
-      withRemove &&
-        None && {
-          access: ShareAccessRights.None,
-          key: "remove",
-          label: t("Common:Remove"),
-        },
-    ].filter((item): item is ItemValue<typeof item> => Boolean(item));
+      [ShareRights.None]: withRemove
+        ? [
+            {
+              key: "separator",
+              isSeparator: true,
+              label: "",
+              access: ShareAccessRights.None,
+            },
+            {
+              access: ShareAccessRights.None,
+              key: "remove",
+              label: t("Common:Remove"),
+            },
+          ]
+        : [],
+    };
+
+    return rights
+      .map((right) => options[right])
+      .flat()
+      .filter((item): item is TShareToUserAccessRightOption => Boolean(item));
   }
 
-  const accessOptions = [
-    Editing && {
+  const accessOptions: Partial<
+    Record<
+      ShareRights,
+      TShareToUserAccessRightOption | TShareToUserAccessRightOption[]
+    >
+  > = {
+    [ShareRights.Editing]: {
       access: ShareAccessRights.Editing,
       key: "editing",
       label: t("Common:Editing"),
     },
-    CustomFilter && {
+    [ShareRights.CustomFilter]: {
       access: ShareAccessRights.CustomFilter,
       key: "custom-filter",
       label: t("Common:CustomFilter"),
     },
-    Review && {
+    [ShareRights.Review]: {
       access: ShareAccessRights.Review,
       key: "review",
       label: t("Common:Review"),
     },
-    Comment && {
+    [ShareRights.Comment]: {
       access: ShareAccessRights.Comment,
       key: "commenting",
       label: t("Common:Comment"),
     },
-    Read && {
+    [ShareRights.Read]: {
       access: ShareAccessRights.ReadOnly,
       key: "viewing",
       label: t("Common:ReadOnly"),
-      title: t("Common:ReadOnly"),
     },
-    FillForms && {
+    [ShareRights.FillForms]: {
       access: ShareAccessRights.FormFilling,
       key: "filling",
       label: t("Common:Filling"),
     },
-    withRemove &&
-      None && {
-        key: "separator",
-        isSeparator: true,
-        label: "",
-      },
-    withRemove &&
-      None && {
-        access: ShareAccessRights.None,
-        key: "remove",
-        label: t("Common:Remove"),
-      },
-  ].filter((item): item is ItemValue<typeof item> => Boolean(item));
+    [ShareRights.None]: withRemove
+      ? [
+          {
+            key: "separator",
+            isSeparator: true,
+            label: "",
+            access: ShareAccessRights.None,
+          },
+          {
+            access: ShareAccessRights.None,
+            key: "remove",
+            label: t("Common:Remove"),
+          },
+        ]
+      : [],
+  };
 
-  return accessOptions;
+  return rights
+    .map((right) => accessOptions[right])
+    .flat()
+    .filter((item): item is TShareToUserAccessRightOption => Boolean(item));
 };

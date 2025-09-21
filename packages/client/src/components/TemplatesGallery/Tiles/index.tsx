@@ -54,28 +54,6 @@ const Tiles: FC<TilesProps> = ({
 }) => {
   const navigate = useNavigate();
 
-  const onMouseDown = (e: MouseEvent) => {
-    const target = e.target as HTMLElement;
-    if (
-      target.closest(".scroll-body") &&
-      !target.closest(".files-item") &&
-      !target.closest(".not-selectable") &&
-      !target.closest(".info-panel") &&
-      !target.closest(".info-panel-toggle-bg")
-    ) {
-      setGallerySelected(null);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("mousedown", onMouseDown);
-    setGallerySelected(null);
-
-    return () => {
-      window.removeEventListener("mousedown", onMouseDown);
-    };
-  }, [onMouseDown]);
-
   useEffect(() => {
     setOformFilesLoaded(tReady && oformFiles?.length > 0);
   }, [tReady, oformFiles]);

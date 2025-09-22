@@ -45,7 +45,6 @@
   "FormStartedToFill": "記入を始めたフォーム。",
   "FormStopped": "中止されているフォーム。",
   "GalleryEmptyScreenText": "フォームテンプレートの詳細はこちら",
-  "GroupsEmptyScreenText": "",
   "GuestsEmptyScreenText": "ゲストの詳細はこちらでご確認いただけます",
   "HistoryEmptyScreenText": "アクティビティ履歴はこちらに表示されます",
   "HistoryRoomCopied": "<1>「{{roomTitle}}」</1>ルームがコピーされました ",

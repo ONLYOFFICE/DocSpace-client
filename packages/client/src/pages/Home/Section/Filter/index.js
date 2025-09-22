@@ -60,6 +60,7 @@ import {
   FilterLocation,
   FilterSubject,
   FilterType,
+  FolderType,
   RoomSearchArea,
   RoomsProviderType,
   RoomsType,
@@ -133,6 +134,8 @@ const SectionFilterContent = ({
   isTemplatesFolder,
 
   currentClientView,
+
+  getSelectedFolder,
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -1075,13 +1078,22 @@ const SectionFilterContent = ({
         isDefaultRoomsQuotaSet &&
         filterOptions.push(...quotaFilter);
     } else {
+      const selectedFolder = getSelectedFolder();
+
+      const isFolderSharedWithMe =
+        selectedFolder.isFolder &&
+        !selectedFolder.isRootFolder &&
+        selectedFolder.rootFolderType === FolderType.SHARE;
+
+      const author = {
+        key: FilterGroups.filterAuthor,
+        group: FilterGroups.filterAuthor,
+        label: t("ByAuthor"),
+        isHeader: true,
+      };
+
       const authorOption = [
-        {
-          key: FilterGroups.filterAuthor,
-          group: FilterGroups.filterAuthor,
-          label: t("ByAuthor"),
-          isHeader: true,
-        },
+        ...(isFolderSharedWithMe ? [] : [author]),
         {
           id: "filter_author-me",
           key: FilterKeys.me,
@@ -1208,6 +1220,7 @@ const SectionFilterContent = ({
     isCollaborator,
     isVisitor,
     getContactsFilterData,
+    getSelectedFolder,
   ]);
 
   const getViewSettingsData = React.useCallback(() => {
@@ -1565,7 +1578,7 @@ export default inject(
     const { showStorageInfo, isDefaultRoomsQuotaSet } = currentQuotaStore;
 
     const { isIndexEditingMode } = indexingStore;
-    const { isIndexedFolder } = selectedFolderStore;
+    const { isIndexedFolder, getSelectedFolder } = selectedFolderStore;
 
     const { usersStore, groupsStore, viewAs: contactsViewAs } = peopleStore;
 
@@ -1588,6 +1601,7 @@ export default inject(
 
       isCollaborator: user?.isCollaborator,
       isVisitor: user?.isVisitor,
+      getSelectedFolder,
 
       filter,
       roomsFilter,

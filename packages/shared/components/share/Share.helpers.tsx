@@ -611,6 +611,12 @@ export const getShareAccessRightOptions = (
         label: t("Common:RoleViewer"),
         description: t("Common:RoleViewerDescription"),
       },
+      [ShareRights.Restrict]: {
+        access: ShareAccessRights.DenyAccess,
+        key: "deny-access",
+        label: t("Common:DenyAccess"),
+        // description: t("Common:DenyAccessDescription"),
+      },
       [ShareRights.None]: withRemove
         ? [
             {
@@ -669,6 +675,12 @@ export const getShareAccessRightOptions = (
       access: ShareAccessRights.FormFilling,
       key: "filling",
       label: t("Common:Filling"),
+    },
+    [ShareRights.Restrict]: {
+      access: ShareAccessRights.DenyAccess,
+      key: "deny-access",
+      label: t("Common:DenyAccess"),
+      // description: t("Common:DenyAccessDescription"),
     },
     [ShareRights.None]: withRemove
       ? [

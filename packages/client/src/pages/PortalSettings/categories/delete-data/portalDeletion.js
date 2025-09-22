@@ -33,20 +33,16 @@ import { Link } from "@docspace/shared/components/link";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { DeletePortalDialog } from "SRC_DIR/components/dialogs";
 import { toastr } from "@docspace/shared/components/toast";
-import {
-  getPaymentAccount,
-  sendDeletePortalEmail,
-} from "@docspace/shared/api/portal";
+import { sendDeletePortalEmail } from "@docspace/shared/api/portal";
 import { isDesktop } from "@docspace/shared/utils";
 import { EmployeeActivationStatus } from "@docspace/shared/enums";
 import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
 import { MainContainer, ButtonWrapper } from "./StyledDeleteData";
 
 const PortalDeletion = (props) => {
-  const { t, getPortalOwner, owner, currentColorScheme, sendActivationLink } =
-    props;
+  const { t, owner, currentColorScheme, sendActivationLink, stripeUrl } = props;
   const [isDialogVisible, setIsDialogVisible] = useState(false);
-  const [stripeUrl, setStripeUrl] = useState(null);
+
   const [isDesktopView, setIsDesktopView] = useState(false);
 
   const onCheckView = () => {
@@ -54,17 +50,10 @@ const PortalDeletion = (props) => {
     else setIsDesktopView(false);
   };
 
-  const fetchData = async () => {
-    await getPortalOwner();
-    const res = await getPaymentAccount();
-    setStripeUrl(res);
-  };
-
   useEffect(() => {
     setDocumentTitle(
       t("DeletePortal", { productName: t("Common:ProductName") }),
     );
-    fetchData();
     onCheckView();
     window.addEventListener("resize", onCheckView);
     return () => window.removeEventListener("resize", onCheckView);
@@ -138,11 +127,10 @@ const PortalDeletion = (props) => {
 };
 
 export default inject(({ settingsStore, userStore }) => {
-  const { getPortalOwner, owner, currentColorScheme } = settingsStore;
+  const { owner, currentColorScheme } = settingsStore;
   const { sendActivationLink } = userStore;
 
   return {
-    getPortalOwner,
     owner,
     currentColorScheme,
     sendActivationLink,

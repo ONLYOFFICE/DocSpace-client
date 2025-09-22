@@ -3,7 +3,7 @@
   "content": "Back",
   "content_en_sha1_hash": "b52b36b7269fbfc58ec24bb724691951a3decbe8",
   "created_at": "2025-05-19T21:30:43.167Z",
-  "updated_at": "2025-09-07T07:53:15.234Z",
+  "updated_at": "2025-09-17T13:43:01.751Z",
   "comment": {
     "text": "The translation key \"Back\" is used to display a label that navigates users back to a previous step or screen in a data import process. It appears as the label of a cancel button on forms such as the \"Add Emails Step\", allowing users to exit and return to their previous step.",
     "is_auto": true,
@@ -60,7 +60,7 @@
     },
     {
       "file_path": "/packages/shared/components/article/sub-components/BackButton.tsx",
-      "line_number": 77,
+      "line_number": 84,
       "context": "className={styles.backButton}\n data-show-article={showText ? \"true\" : \"false\"}\n onClick={onClickBack}\n >\n <IconButton className={styles.arrowIcon} iconName={icon} isClickable />\n {showText ? <Text truncate>{t(\"Common:Back\")}</Text> : null}\n </div>\n );\n };\n \n export default BackButton;",
       "module": "/packages/shared"
     },

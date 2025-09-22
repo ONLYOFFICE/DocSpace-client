@@ -151,6 +151,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
           availableAccess={availableAccess}
           scaledOptions={scaledOptions}
           dataTestId={dataTestId}
+          showDisabledItems={true}
         />
       ) : null}
 
@@ -176,6 +177,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
           availableAccess={availableAccess}
           scaledOptions={scaledOptions}
           dataTestId={dataTestId}
+          showDisabledItems={true}
         />
       ) : null}
     </StyledAccessSelector>

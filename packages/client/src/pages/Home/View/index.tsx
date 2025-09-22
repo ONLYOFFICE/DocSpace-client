@@ -345,6 +345,8 @@ const View = ({
     getView();
   }, [location, isContactsPage, isProfilePage]);
 
+  console.log("currentView", currentView);
+
   return (
     <LoaderWrapper isLoading={isLoading ? !showHeaderLoader : false}>
       <Consumer>

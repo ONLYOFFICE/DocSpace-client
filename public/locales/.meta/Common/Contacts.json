@@ -3,19 +3,13 @@
   "content": "Contacts",
   "content_en_sha1_hash": "b0dd615cbbdcbf21ffb72115599ca915634fcb85",
   "created_at": "2025-05-19T21:30:43.662Z",
-  "updated_at": "2025-08-27T10:14:35.024Z",
+  "updated_at": "2025-09-19T15:39:23.020Z",
   "comment": {
     "text": "The translation key \"Contacts\" is used to display a title for a list or directory of contacts, appearing as a header in various UI elements such as articles, template access selectors, and invite panels. This text provides context and helps distinguish this section from others, guiding the user's understanding of what they are viewing.",
     "is_auto": true,
     "updated_at": "2025-05-20T09:37:00.070Z"
   },
   "usage": [
-    {
-      "file_path": "/packages/client/src/components/Article/Body/AccountsItem.js",
-      "line_number": 53,
-      "context": "[onClick],\n );\n \n const icon = getCatalogIconUrlByType(PageType.account);\n \n const title = t(\"Common:Contacts\");\n \n const linkData = getLinkData(\"accounts\");\n \n return (\n <ArticleItem",
-      "module": "/packages/client"
-    },
     {
       "file_path": "/packages/client/src/components/TemplateAccessSelector/index.tsx",
       "line_number": 106,
@@ -42,14 +36,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 527,
-      "context": ": isSettingsPage\n ? t(\"Common:Settings\")\n : isContactsPage\n ? isContactsInsideGroupPage\n ? getInsideGroupTitle()\n : t(\"Common:Contacts\")\n : title;\n \n const currentCanCreate = security?.Create;\n \n const currentRootRoomTitle =",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 527,
-      "context": ": isSettingsPage\n ? t(\"Common:Settings\")\n : isContactsPage\n ? isContactsInsideGroupPage\n ? getInsideGroupTitle()\n : t(\"Common:Contacts\")\n : title;\n \n const currentCanCreate = security?.Create;\n \n const currentRootRoomTitle =",
+      "line_number": 609,
+      "context": "navigationPath[navigationPath.length - 2].title;\n \n const accountsNavigationPath = isContactsInsideGroupPage && [\n {\n id: 0,\n title: t(\"Common:Contacts\"),\n isRoom: false,\n isRootRoom: true,\n },\n ];",
       "module": "/packages/client"
     },
     {
@@ -84,7 +72,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/index.js",
-      "line_number": 96,
+      "line_number": 95,
       "context": "t={t}\n i18nKey=\"LdapIntegrationDescription\"\n ns=\"Ldap\"\n values={{\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Contacts\"),\n link,\n }}\n components={{\n 1: (\n <Link",
       "module": "/packages/client"
     },
@@ -96,14 +84,20 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 249,
+      "line_number": 260,
       "context": "onClick={onChangeContacts}\n noSelect\n >\n {t(\"InviteViaContacts\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Contacts\"),\n })}\n </Text>\n </div>\n \n <Text",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 249,
+      "line_number": 260,
       "context": "onClick={onChangeContacts}\n noSelect\n >\n {t(\"InviteViaContacts\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Contacts\"),\n })}\n </Text>\n </div>\n \n <Text",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ProfileActionsStore.js",
+      "line_number": 433,
+      "context": "const accounts =\n !isVisitor && !isCollaborator\n ? {\n key: \"user-menu-accounts\",\n icon: CatalogAccountsReactSvgUrl,\n label: t(\"Common:Contacts\"),\n onClick: (obj) =>\n this.onAccountsClick(PEOPLE_ROUTE_WITH_FILTER, obj),\n url: PEOPLE_ROUTE_WITH_FILTER,\n preventNewTab: true,\n }",
       "module": "/packages/client"
     },
     {

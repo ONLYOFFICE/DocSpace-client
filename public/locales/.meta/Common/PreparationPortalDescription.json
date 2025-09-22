@@ -3,7 +3,7 @@
   "content": "Once the restoring process is over, you'll be automatically redirected to your {{productName}}.",
   "content_en_sha1_hash": "60714cd70ca7d13efc48745ab7823e95ca812d51",
   "created_at": "2025-05-19T21:30:53.442Z",
-  "updated_at": "2025-09-07T07:53:15.499Z",
+  "updated_at": "2025-09-17T13:43:02.038Z",
   "comment": {
     "text": "The PreparationPortalDescription translation key is used to display a message that will be shown after the restoring process is complete, informing users that they will be automatically redirected to their product name. This text appears in the UI on a screen where a progress indicator and percentage are displayed, likely on a preparation portal page.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/shared/pages/PreparationPortal/index.tsx",
       "line_number": 146,
-      "context": "const componentBody = errorMessage ? (\n <Text className={styles.preparationPortalError}>{`${errorMessage}`}</Text>\n ) : (\n <PreparationPortalProgress\n text={t(\"PreparationPortal:PreparationPortalDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n percent={percent}\n />\n );",
+      "context": "const componentBody = errorMessage ? (\n <Text className={styles.preparationPortalError}>{`${errorMessage}`}</Text>\n ) : (\n <PreparationPortalProgress\n text={t(\"Common:PreparationPortalDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n percent={percent}\n />\n );",
       "module": "/packages/shared"
     }
   ],

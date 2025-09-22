@@ -40,12 +40,28 @@ export const filterPaidRoleOptions = (
     label?: string;
     type?: string;
     isSepearator?: boolean;
+    disabled?: boolean;
   }[],
 ) => {
-  if (!options) return options;
+  if (!options?.length) return options;
 
-  return options.filter(
-    (o) =>
-      !checkIfAccessPaid(o.access ? +o.access : undefined) && o.key !== "s1",
+  const needsModification = options.some(
+    (option) =>
+      checkIfAccessPaid(option.access) &&
+      option.key !== "s1" &&
+      !option.disabled,
   );
+
+  if (!needsModification) return options;
+
+  return options.map((option) => {
+    const shouldDisable =
+      checkIfAccessPaid(option.access) && option.key !== "s1";
+
+    if (shouldDisable && !option.disabled) {
+      return { ...option, disabled: true };
+    }
+
+    return option;
+  });
 };

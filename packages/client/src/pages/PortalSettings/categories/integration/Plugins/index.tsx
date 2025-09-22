@@ -70,7 +70,7 @@ const PluginPage = ({
     const formData = new FormData();
 
     formData.append("file", files[0]);
-    addPlugin(formData);
+    addPlugin(formData, t);
   };
 
   React.useEffect(() => {
@@ -125,6 +125,7 @@ const PluginPage = ({
             key={`plugin-${plugin.name}-${plugin.version}`}
             openSettingsDialog={openSettingsDialog}
             updatePlugin={updatePlugin}
+            theme={theme}
             dataTestId={`plugin_${plugin.name}`}
             {...plugin}
           />

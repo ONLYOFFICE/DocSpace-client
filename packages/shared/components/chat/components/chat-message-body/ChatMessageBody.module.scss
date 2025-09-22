@@ -496,13 +496,6 @@
   }
 }
 
-// experimental list with scroll if it has more than 4 levels nesting
-.listBlock:has(.listBlock .listBlock .listBlock):not(.listBlock .listBlock) {
-  overflow: auto;
-
-  max-height: 600px;
-}
-
 .tableScroll {
   margin-bottom: 8px;
 }

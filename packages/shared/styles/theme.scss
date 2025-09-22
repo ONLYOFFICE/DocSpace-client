@@ -2214,6 +2214,7 @@
   --chat-message-code-block-separator-color: #{$gray-light-mid};
   --chat-message-tool-block-color: #{$gray-light};
   --chat-message-hr-color: #{$gray};
+  --chat-message-table-row-border-color: #{$gray-light-mid};
 }
 
 .dark {
@@ -2253,6 +2254,7 @@
   --chat-message-code-block-separator-color: #{$gray-dark-strong};
   --chat-message-tool-block-color: #{$gray-dark-mid};
   --chat-message-hr-color: #{$gray-dark};
+  --chat-message-table-row-border-color: #{$gray-dark-strong};
 }
 
 .light {

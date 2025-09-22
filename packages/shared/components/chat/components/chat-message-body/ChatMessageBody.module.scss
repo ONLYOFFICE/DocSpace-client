@@ -491,3 +491,34 @@
 
   max-height: 600px;
 }
+
+.table {
+  border-collapse: collapse;
+
+  margin-bottom: 8px;
+}
+
+.th {
+  font-weight: 600;
+}
+
+.th,
+.td {
+  box-sizing: border-box;
+
+  font-size: 15px;
+  line-height: 22px;
+  vertical-align: middle;
+  text-align: start;
+
+  min-width: 175px;
+
+  padding: 8px 12px;
+}
+
+.tr {
+  .th,
+  &:not(:last-child) .td {
+    border-bottom: 1px solid var(--chat-message-table-row-border-color);
+  }
+}

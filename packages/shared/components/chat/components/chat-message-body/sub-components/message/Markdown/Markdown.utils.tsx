@@ -35,6 +35,7 @@ import { Link, LinkTarget } from "../../../../../../link";
 
 import styles from "../../../ChatMessageBody.module.scss";
 import CodeBlock from "../CodeBlock";
+import { Scrollbar } from "../../../../../../scrollbar";
 
 export const createMarkdownComponents = ({
   propLanguage,
@@ -119,14 +120,14 @@ export const createMarkdownComponents = ({
     </blockquote>
   ),
   hr: () => <hr className={styles.hr} />,
-  // TODO: Chat redesign - add styles
-  table: () => <table />,
-  // TODO: Chat redesign - add styles
-  th: () => <th />,
-  // TODO: Chat redesign - add styles
-  td: () => <td />,
-  // TODO: Chat redesign - add styles
-  tr: () => <tr />,
+  table: ({ children }) => (
+    <Scrollbar translateContentSizeYToHolder>
+      <table className={styles.table}>{children}</table>
+    </Scrollbar>
+  ),
+  th: ({ children }) => <th className={styles.th}>{children}</th>,
+  td: ({ children }) => <td className={styles.td}>{children}</td>,
+  tr: ({ children }) => <tr className={styles.tr}>{children}</tr>,
   p: ({ children }) => {
     return (
       <Text

@@ -173,7 +173,7 @@
 
         border-radius: inherit;
 
-        background-color: var(--accent-main);
+        background-color: var(--chat-message-user-background-color);
         opacity: 10%;
       }
     }
@@ -403,15 +403,15 @@
 .blockquote {
   position: relative;
 
-  margin: 0;
+  margin: 0 0 8px;
   padding: 6px 12px;
 
   width: fit-content;
 
-  border-left: 3px solid var(--accent-main);
+  border-left: 3px solid var(--chat-message-blockquote-bg-color);
   border-radius: 3px;
 
-  color: variables.$gray-text;
+  color: var(--chat-message);
   font-size: 15px;
   line-height: 22px;
 
@@ -420,7 +420,7 @@
   .blockquoteBg {
     position: absolute;
     inset: 0;
-    background-color: var(--accent-main);
+    background-color: var(--chat-message-blockquote-bg-color);
     opacity: 8%;
   }
 }

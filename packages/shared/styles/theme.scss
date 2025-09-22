@@ -2205,7 +2205,7 @@
   --chat-input-send-button-background: var(--accent-main);
 
   --chat-message-color: #{$gray-text};
-  --chat-message-user-background-color: #{$light-gray-hover};
+  --chat-message-user-background-color: var(--accent-main);
   --chat-message-ai-background-color: #{$light-gray-hover};
   --chat-message-error-background-color: #{$light-error-status};
   --chat-message-file-border-color: #{$gray-light-mid};
@@ -2215,6 +2215,8 @@
   --chat-message-tool-block-color: #{$gray-light};
   --chat-message-hr-color: #{$gray};
   --chat-message-table-row-border-color: #{$gray-light-mid};
+  --chat-message-blockquote-bg-color: var(--accent-main);
+  --chat-message-blockquote-color: #{$gray-text};
 }
 
 .dark {
@@ -2245,7 +2247,7 @@
   --chat-input-send-button-background: #{$active-color-dark};
 
   --chat-message-color: #{$dark-gray-dark};
-  --chat-message-user-background-color: #{$light-dark-gray-hover};
+  --chat-message-user-background-color: #{$white};
   --chat-message-ai-background-color: #{$light-dark-gray-hover};
   --chat-message-error-background-color: #{$dark-error-status};
   --chat-message-file-border-color: #{$gray-dark-strong};
@@ -2255,6 +2257,8 @@
   --chat-message-tool-block-color: #{$gray-dark-mid};
   --chat-message-hr-color: #{$gray-dark};
   --chat-message-table-row-border-color: #{$gray-dark-strong};
+  --chat-message-blockquote-bg-color: #{$white};
+  --chat-message-blockquote-color: #{$dark-gray-dark};
 }
 
 .light {

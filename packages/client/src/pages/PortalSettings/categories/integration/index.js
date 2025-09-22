@@ -94,13 +94,13 @@ const IntegrationWrapper = (props) => {
   const data = [
     {
       id: "ldap",
-      name: t("LDAP"),
+      name: t("Settings:LDAP"),
       content: <LdapSettings />,
       onClick: () => {},
     },
     {
       id: "sso",
-      name: t("SingleSignOn"),
+      name: t("Settings:SingleSignOn"),
       content: <SsoSettings />,
       onClick: async () => {
         clearAbortControllerArr();
@@ -118,7 +118,7 @@ const IntegrationWrapper = (props) => {
     },
     {
       id: "smtp-settings",
-      name: t("SMTPSettings"),
+      name: t("Settings:SMTPSettings"),
       content: <SMTPSettings />,
       onClick: async () => {
         clearAbortControllerArr();
@@ -235,6 +235,7 @@ export const Component = inject(
   },
 )(
   withTranslation([
+    "SMTPSettings",
     "Settings",
     "SingleSignOn",
     "Translations",

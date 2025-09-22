@@ -121,7 +121,11 @@ export const createMarkdownComponents = ({
   ),
   hr: () => <hr className={styles.hr} />,
   table: ({ children }) => (
-    <Scrollbar translateContentSizeYToHolder>
+    <Scrollbar
+      className={styles.tableScroll}
+      scrollBodyClassName={styles.tableScrollBody}
+      translateContentSizeYToHolder
+    >
       <table className={styles.table}>{children}</table>
     </Scrollbar>
   ),

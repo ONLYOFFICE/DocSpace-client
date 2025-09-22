@@ -492,10 +492,17 @@
   max-height: 600px;
 }
 
+.tableScroll {
+  margin-bottom: 8px;
+}
+
+.tableScrollBody {
+  display: block !important;
+}
+
 .table {
   border-collapse: collapse;
-
-  margin-bottom: 8px;
+  min-width: 100%;
 }
 
 .th {
@@ -512,8 +519,11 @@
   text-align: start;
 
   min-width: 175px;
+  max-width: 175px;
 
   padding: 8px 12px;
+
+  overflow-wrap: break-word;
 }
 
 .tr {

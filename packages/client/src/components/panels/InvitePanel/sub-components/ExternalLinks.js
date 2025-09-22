@@ -26,6 +26,8 @@
 
 // import MediaDownloadReactSvgUrl from "PUBLIC_DIR/images/media.download.react.svg?url";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
+import ClockIconUrl from "PUBLIC_DIR/images/clock.react.svg?url";
+import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/icons/12/person-plus.react.svg?url";
 import SettingsOutlineSvgUrl from "PUBLIC_DIR/images/icons/16/settings-outline.react.svg?url";
 import { useRef } from "react";
 import { inject, observer } from "mobx-react";
@@ -54,6 +56,7 @@ import {
 } from "../StyledInvitePanel";
 
 import { getFreeUsersRoleArray, getFreeUsersTypeArray } from "../utils";
+import { Text } from "@docspace/shared/components/text";
 
 const ExternalLinks = ({
   t,
@@ -240,36 +243,71 @@ const ExternalLinks = ({
             : t("InviteViaLinkDescriptionRoomGuest")}
       </StyledDescription>
       {externalLinksVisible ? (
-        <StyledInviteInputContainer key={activeLink.id}>
-          <StyledInviteInput isShowCross>
-            <InputBlock
-              className="input-link"
-              iconSize={16}
-              iconButtonClassName="copy-link-icon"
-              scale
-              value={activeLink.shareLink}
-              isReadOnly
-              iconName={CopyReactSvgUrl}
-              onIconClick={onCopyLink}
-              dataTestId="invite_panel_external_link_input"
+        <>
+          <StyledInviteInputContainer key={activeLink.id}>
+            <StyledInviteInput isShowCross>
+              <InputBlock
+                className="input-link"
+                iconSize={16}
+                iconButtonClassName="copy-link-icon"
+                scale
+                value={activeLink.shareLink}
+                isReadOnly
+                iconName={CopyReactSvgUrl}
+                onIconClick={onCopyLink}
+                dataTestId="invite_panel_external_link_input"
+              />
+            </StyledInviteInput>
+            <AccessSelector
+              className="invite-via-link-access"
+              t={t}
+              roomType={roomType}
+              defaultAccess={activeLink.access}
+              onSelectAccess={onSelectAccess}
+              containerRef={inputsRef}
+              isOwner={isOwner}
+              isMobileView={isMobileView}
+              isSelectionDisabled={isUserTariffLimit}
+              selectionErrorText={<PaidQuotaLimitError />}
+              filteredAccesses={filteredAccesses}
+              availableAccess={availableAccess}
+              dataTestId="invite_panel_external_link_access"
             />
-          </StyledInviteInput>
-          <AccessSelector
-            className="invite-via-link-access"
-            t={t}
-            roomType={roomType}
-            defaultAccess={activeLink.access}
-            onSelectAccess={onSelectAccess}
-            containerRef={inputsRef}
-            isOwner={isOwner}
-            isMobileView={isMobileView}
-            isSelectionDisabled={isUserTariffLimit}
-            selectionErrorText={<PaidQuotaLimitError />}
-            filteredAccesses={filteredAccesses}
-            availableAccess={availableAccess}
-            dataTestId="invite_panel_external_link_access"
-          />
-        </StyledInviteInputContainer>
+          </StyledInviteInputContainer>
+
+          <div className="invite-via-link-settings-container">
+            <div className="invite-via-link-settings">
+              <IconButton iconName={ClockIconUrl} size={12} isDisabled />
+              <Text
+                className="invite-via-link-settings-text"
+                fontSize="12px"
+                fontWeight={400}
+              >
+                {t("Files:ValidUntil")}
+              </Text>
+              <Text fontSize="12px" fontWeight={600}>
+                12 Jan 2023 | 23:59
+              </Text>
+            </div>
+            <div className="invite-via-link-settings">
+              <IconButton
+                iconName={PersonPlusReactSvgUrl}
+                size={12}
+                isDisabled
+              />
+              <Text
+                className="invite-via-link-settings-text"
+                fontSize="12px"
+                fontWeight={400}
+              >
+                {t("Files:UsersJoined")}
+              </Text>
+              <Text fontSize="12px" fontWeight={600}>
+                0 / 20
+              </Text>
+            </div>
+          </div>
+        </>
       ) : null}
     </StyledExternalLink>
   );

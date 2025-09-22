@@ -215,5 +215,7 @@
   "UserLimitDescription": "Define the number of users who can join via this invite link.",
   "MaxNumber": "Max. number",
   "LinkSettingsLimitDescription": "Once this limit is reached, registration via the link will become unavailable",
-  "LinkSettingsJoinedUsers": "Users have joined via this link"
+  "LinkSettingsJoinedUsers": "Users have joined via this link",
+  "ValidUntil": "Valid until:",
+  "UsersJoined": "Users joined:"
 }

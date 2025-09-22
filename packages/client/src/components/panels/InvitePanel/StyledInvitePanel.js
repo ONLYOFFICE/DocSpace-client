@@ -110,6 +110,27 @@ const ScrollList = styled.div.attrs((props) => ({
 
 const StyledExternalLink = styled.div`
   border-bottom: ${(props) => props.theme.filesPanels.sharing.borderBottom};
+
+  .invite-via-link-settings-container {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-bottom: 18px;
+
+    .invite-via-link-settings {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+
+      svg circle {
+        fill: unset;
+      }
+
+      .invite-via-link-settings-text {
+        color: ${(props) => props.theme.filesPanels.invite.textColor};
+      }
+    }
+  }
 `;
 const StyledInviteUserBody = styled.div`
   display: flex;

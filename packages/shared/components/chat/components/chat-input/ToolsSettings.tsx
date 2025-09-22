@@ -350,7 +350,7 @@ const ToolsSettings = () => {
       },
       { key: "separator-1", isSeparator: true },
       ...serverItems,
-      ...(serverItems.length > 0 && showManageConnectionItem
+      ...(serverItems.length > 0
         ? [{ key: "separator-2", isSeparator: true }]
         : []),
       {

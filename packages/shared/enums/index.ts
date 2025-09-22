@@ -237,6 +237,7 @@ export const enum PageType {
   services = "services",
   groups = "groups",
   guests = "guests",
+  aiSettings = "aiSettings",
 }
 
 /**

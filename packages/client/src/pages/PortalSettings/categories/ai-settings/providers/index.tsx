@@ -30,7 +30,6 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Heading, HeadingLevel } from "@docspace/shared/components/heading";
 import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
@@ -40,12 +39,14 @@ import type {
 } from "@docspace/shared/api/ai/types";
 import { getAvailableProviderUrls } from "@docspace/shared/api/ai";
 
-import { DeleteAIProviderDialog } from "SRC_DIR/pages/PortalSettings/categories/integration/AISettngs/sub-components/ai-provider/dialogs/delete";
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
-import styles from "../../AISettings.module.scss";
-import { AiProviderTile } from "../tiles/ai-provider-tile";
+import styles from "../AISettings.module.scss";
+
 import { AddUpdateProviderDialog } from "./dialogs/add-update";
+import { DeleteAIProviderDialog } from "./dialogs/delete";
+
+import { AiProviderTile } from "./Tile";
 
 type TDeleteDialogData =
   | {
@@ -69,9 +70,13 @@ type TUpdateDialogData =
 
 type AIProviderProps = {
   aiProviders?: AISettingsStore["aiProviders"];
+  aiProvidersInitied?: AISettingsStore["aiProvidersInitied"];
 };
 
-const AIProviderComponent = ({ aiProviders }: AIProviderProps) => {
+const AIProviderComponent = ({
+  aiProviders,
+  aiProvidersInitied,
+}: AIProviderProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
   const [addDialogVisible, setaddDialogVisible] = useState(false);
   const [updateDialogData, setUpdateDialogData] = useState<TUpdateDialogData>({
@@ -113,17 +118,10 @@ const AIProviderComponent = ({ aiProviders }: AIProviderProps) => {
     init();
   }, []);
 
+  if (!aiProvidersInitied) return null;
+
   return (
     <div className={styles.aiProvider}>
-      <Heading
-        className={styles.heading}
-        level={HeadingLevel.h3}
-        fontSize="16px"
-        fontWeight={700}
-        lineHeight="22px"
-      >
-        {t("AISettings:AIProvider")}
-      </Heading>
       <Text className={styles.description}>
         {t("AISettings:AIProviderSettingDescription", {
           productName: t("Common:ProductName"),
@@ -190,5 +188,6 @@ const AIProviderComponent = ({ aiProviders }: AIProviderProps) => {
 export const AIProvider = inject(({ aiSettingsStore }: TStore) => {
   return {
     aiProviders: aiSettingsStore.aiProviders,
+    aiProvidersInitied: aiSettingsStore.aiProvidersInitied,
   };
 })(observer(AIProviderComponent));

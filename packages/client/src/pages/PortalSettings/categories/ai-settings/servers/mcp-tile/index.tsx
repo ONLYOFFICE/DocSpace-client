@@ -39,7 +39,7 @@ import { ServerType } from "@docspace/shared/api/ai/enums";
 import SettingsIcon from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
 
-import { AiTile } from "../ai-tile";
+import { AiTile } from "../../sub-components/ai-tile";
 
 import styles from "./MCPTile.module.scss";
 

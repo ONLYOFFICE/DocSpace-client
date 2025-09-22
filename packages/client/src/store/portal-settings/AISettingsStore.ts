@@ -29,6 +29,7 @@
 import { makeAutoObservable } from "mobx";
 
 import {
+  WebSearchConfig,
   type TAddNewServer,
   type TAiProvider,
   type TCreateAiProvider,
@@ -46,8 +47,10 @@ import {
   updateProvider,
   updateServer,
   updateServerStatus,
+  getWebSearchConfig,
+  updateWebSearchConfig,
 } from "@docspace/shared/api/ai";
-import { ServerType } from "@docspace/shared/api/ai/enums";
+import { ServerType, WebSearchType } from "@docspace/shared/api/ai/enums";
 
 class AISettingsStore {
   isInit = false;
@@ -55,6 +58,14 @@ class AISettingsStore {
   aiProviders: TAiProvider[] = [];
 
   mcpServers: TServer[] = [];
+
+  webSearchConfig: WebSearchConfig | null = null;
+
+  aiProvidersInitied = false;
+
+  mcpServersInitied = false;
+
+  webSearchInitied = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -64,12 +75,28 @@ class AISettingsStore {
     this.isInit = value;
   };
 
+  setAiProvidersInitied = (value: boolean) => {
+    this.aiProvidersInitied = value;
+  };
+
+  setMCPServersInitied = (value: boolean) => {
+    this.mcpServersInitied = value;
+  };
+
+  setWebSearchInitied = (value: boolean) => {
+    this.webSearchInitied = value;
+  };
+
   setAIProviders = (providers: TAiProvider[]) => {
     this.aiProviders = providers;
   };
 
   setMCPServers = (servers: TServer[]) => {
     this.mcpServers = servers;
+  };
+
+  setWebSearchConfig = (config: WebSearchConfig | null) => {
+    this.webSearchConfig = config;
   };
 
   addAIProvider = async (provider: TCreateAiProvider) => {
@@ -98,6 +125,7 @@ class AISettingsStore {
   fetchAIProviders = async () => {
     try {
       const res = await getProviders();
+      this.setAiProvidersInitied(true);
 
       this.setAIProviders(res);
     } catch (e) {
@@ -108,12 +136,47 @@ class AISettingsStore {
   fetchMCPServers = async () => {
     try {
       const res = await getServersList(0);
+      this.setMCPServersInitied(true);
 
       if (!res) return;
 
       this.setMCPServers(res.items);
     } catch (e) {
       console.error(e);
+    }
+  };
+
+  fetchWebSearch = async () => {
+    try {
+      const res = await getWebSearchConfig();
+
+      this.setWebSearchInitied(true);
+
+      if (res) this.setWebSearchConfig(res);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  updateWebSearch = async (
+    enabled: boolean,
+    type: WebSearchType,
+    key: string,
+  ) => {
+    try {
+      await updateWebSearchConfig(enabled, type, key);
+      this.setWebSearchConfig({ enabled, type, key });
+    } catch {
+      //ignore
+    }
+  };
+
+  restoreWebSearch = async () => {
+    try {
+      await updateWebSearchConfig(false, WebSearchType.None, "");
+      this.setWebSearchConfig(null);
+    } catch {
+      //ignore
     }
   };
 

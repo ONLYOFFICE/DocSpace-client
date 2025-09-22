@@ -24,48 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const enum RoleType {
-  UserMessage = 0,
-  AssistantMessage = 1,
-  Error = 10,
+@use "@docspace/shared/styles/mixins";
+
+.searchForm {
+  max-width: 340px;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  margin-top: 12px;
+  margin-bottom: 16px;
 }
 
-export const enum ContentType {
-  Text = 0,
-  Tool = 1,
-  Files = 2,
-}
-
-export const enum ProviderType {
-  OpenAi = 1,
-  TogetherAi = 2,
-  OpenAiCompatible = 3,
-  Anthropic = 4,
-}
-
-export const enum EventType {
-  MessageStart = "message_start",
-  MessageStop = "message_stop",
-  NewToken = "new_token",
-  ToolCall = "tool_call",
-  ToolResult = "tool_result",
-  Error = "error",
-}
-
-export const enum ServerType {
-  Custom,
-  Portal,
-  GitHub,
-  Box,
-}
-
-export const enum ToolsPermission {
-  Allow,
-  AlwaysAllow,
-  Deny,
-}
-
-export const enum WebSearchType {
-  None,
-  Exa,
+.buttonContainer {
+  display: flex;
+  gap: 8px;
 }

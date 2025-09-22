@@ -30,6 +30,7 @@ import { observer } from "mobx-react";
 import classNames from "classnames";
 
 import McpToolReactSvgUrl from "PUBLIC_DIR/images/mcp.tool.svg?url";
+import WebSearchIconUrl from "PUBLIC_DIR/images/web.search.svg?url";
 import ManageConnectionsReactSvgUrl from "PUBLIC_DIR/images/manage.connection.react.svg?url";
 
 import { openConnectWindow } from "../../../../api/files";
@@ -39,6 +40,9 @@ import {
   disconnectServer,
   getMCPToolsForRoom,
   getServersListForRoom,
+  getWebSearchConfig,
+  getWebSearchInRoom,
+  updateWebSearchInRoom,
 } from "../../../../api/ai";
 import { ServerType } from "../../../../api/ai/enums";
 import { TMCPTool, TServer } from "../../../../api/ai/types";
@@ -73,6 +77,9 @@ const ToolsSettings = () => {
   const [MCPTools, setMCPTools] = React.useState<Map<string, TMCPTool[]>>(
     new Map(),
   );
+  const [webSearchPortalEnabled, setWebSearchPortalEnabled] =
+    React.useState(false);
+  const [webSearchEnabled, setWebSearchEnabled] = React.useState(false);
   const [isFetched, setIsFetched] = React.useState(false);
   const contextMenuRef = React.useRef<ContextMenuRefType>(null);
 
@@ -154,6 +161,16 @@ const ToolsSettings = () => {
     setIsFetched(true);
   }, [roomId]);
 
+  const initTools = React.useCallback(async () => {
+    const [webSearchConfig, webSearchInRoom] = await Promise.all([
+      getWebSearchConfig(),
+      getWebSearchInRoom(Number(roomId)),
+      fetchTools(),
+    ]);
+    setWebSearchPortalEnabled(webSearchConfig?.enabled ?? false);
+    setWebSearchEnabled(webSearchInRoom?.webSearchEnabled ?? false);
+  }, [fetchTools, roomId]);
+
   const onModifyFolder = React.useCallback(
     (data?: TOptSocket) => {
       if (!data) return;
@@ -170,8 +187,8 @@ const ToolsSettings = () => {
   );
 
   React.useEffect(() => {
-    fetchTools();
-  }, [fetchTools]);
+    initTools();
+  }, [initTools]);
 
   React.useEffect(() => {
     socket?.on(SocketEvents.ModifyFolder, onModifyFolder);
@@ -248,7 +265,6 @@ const ToolsSettings = () => {
   };
 
   const showMcpTools = (e: React.MouseEvent<HTMLElement>) => {
-    if (!servers.length) return;
     if (showManageConnections) return;
 
     setIsMcpToolsVisible(true);
@@ -258,6 +274,13 @@ const ToolsSettings = () => {
   const hideMcpTools = React.useCallback(() => {
     setIsMcpToolsVisible(false);
   }, []);
+
+  const onWebSearchToggle = React.useCallback(() => {
+    if (!webSearchPortalEnabled) return;
+
+    updateWebSearchInRoom(Number(roomId), !webSearchEnabled);
+    setWebSearchEnabled(!webSearchEnabled);
+  }, [roomId, webSearchEnabled, webSearchPortalEnabled]);
 
   const model = React.useMemo(() => {
     const serverItems = Array.from(MCPTools.entries()).map(([mcpId, tools]) => {
@@ -311,9 +334,22 @@ const ToolsSettings = () => {
     );
 
     return [
+      {
+        key: "web-search",
+        label: "Web Search",
+        icon: WebSearchIconUrl,
+        withToggle: true,
+        checked: webSearchEnabled && webSearchPortalEnabled,
+        onClick: onWebSearchToggle,
+        disabled: !webSearchPortalEnabled,
+        tooltip: <p>asd</p>,
+      },
+      ...(serverItems.length > 0 || showManageConnectionItem
+        ? [{ key: "separator-1", isSeparator: true }]
+        : []),
       ...serverItems,
       ...(serverItems.length > 0 && showManageConnectionItem
-        ? [{ key: "separator-1", isSeparator: true }]
+        ? [{ key: "separator-2", isSeparator: true }]
         : []),
       {
         key: "manage-connections",
@@ -325,9 +361,17 @@ const ToolsSettings = () => {
         disabled: !showManageConnectionItem,
       },
     ];
-  }, [MCPTools, isBase, servers, t, toggleTool]);
+  }, [
+    MCPTools,
+    isBase,
+    servers,
+    t,
+    toggleTool,
+    webSearchEnabled,
+    webSearchPortalEnabled,
+  ]);
 
-  if (!servers.length || !isFetched) return;
+  if (!isFetched) return;
 
   return (
     <>

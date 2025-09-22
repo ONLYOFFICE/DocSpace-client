@@ -35,7 +35,6 @@ import SsoFormStore from "SRC_DIR/store/SsoFormStore";
 import PluginStore from "SRC_DIR/store/PluginStore";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 import LdapFormStore from "SRC_DIR/store/LdapFormStore";
-import AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
 export type UseIntegrationProps = {
   isSSOAvailable?: CurrentQuotasStore["isSSOAvailable"];
@@ -49,8 +48,6 @@ export type UseIntegrationProps = {
   loadLDAP?: LdapFormStore["load"];
   isLdapAvailable?: CurrentQuotasStore["isLdapAvailable"];
   isThirdPartyAvailable?: CurrentQuotasStore["isThirdPartyAvailable"];
-  initAISettings?: AISettingsStore["initAISettings"];
-  setIsInit?: AISettingsStore["setIsInit"];
 };
 
 const useIntegration = ({
@@ -65,8 +62,6 @@ const useIntegration = ({
   loadLDAP,
   isLdapAvailable,
   isThirdPartyAvailable,
-  initAISettings,
-  setIsInit,
 }: UseIntegrationProps) => {
   const { t } = useTranslation(["Ldap", "Settings", "Common"]);
 
@@ -108,11 +103,6 @@ const useIntegration = ({
     });
   }, [getDocumentServiceLocation]);
 
-  const getAISettingsData = useCallback(async () => {
-    await initAISettings?.(true); // TODO: fix after add SAAS version
-    setIsInit?.(true);
-  }, [initAISettings, setIsInit]);
-
   const getIntegrationInitialValue = useCallback(async () => {
     const actions = [];
     if (window.location.pathname.includes("ldap")) actions.push(getLDAPData());
@@ -131,9 +121,6 @@ const useIntegration = ({
     if (window.location.pathname.includes("document-service"))
       actions.push(getDocumentServiceData());
 
-    if (window.location.pathname.includes("ai-settings"))
-      actions.push(getAISettingsData());
-
     await Promise.all(actions);
   }, [
     getLDAPData,
@@ -142,10 +129,7 @@ const useIntegration = ({
     getThirdPartyData,
     getSMTPSettingsData,
     getDocumentServiceData,
-    getAISettingsData,
   ]);
-
-  console.log(initAISettings, setIsInit);
 
   return {
     openThirdPartyModal,
@@ -156,7 +140,6 @@ const useIntegration = ({
     getThirdPartyData,
     getSMTPSettingsData,
     getDocumentServiceData,
-    getAISettingsData,
     getIntegrationInitialValue,
   };
 };

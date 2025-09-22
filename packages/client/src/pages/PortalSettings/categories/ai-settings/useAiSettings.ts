@@ -24,46 +24,45 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
-import { useTranslation } from "react-i18next";
-import { inject, observer } from "mobx-react";
+import React from "react";
 
-import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
-import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
-import { AIProvider } from "./sub-components/ai-provider";
-import { MCPServers } from "./sub-components/mcp-servers";
-import styles from "./AISettings.module.scss";
-
-type StoreProps = Pick<AISettingsStore, "isInit">;
-
-type AISettingsProps = Partial<StoreProps> & {
-  standalone: boolean; // Todo: Get from store after enabling ai settings for saas
+type UseAiSettingsProps = {
+  fetchAIProviders?: AISettingsStore["fetchAIProviders"];
+  fetchMCPServers?: AISettingsStore["fetchMCPServers"];
+  fetchWebSearch?: AISettingsStore["fetchWebSearch"];
 };
 
-const AISettngs = ({ standalone, isInit }: AISettingsProps) => {
-  const { t, ready } = useTranslation("AISettings");
+const useAISettings = ({
+  fetchAIProviders,
+  fetchMCPServers,
+  fetchWebSearch,
+}: UseAiSettingsProps) => {
+  const initAIProviders = React.useCallback(async () => {
+    await fetchAIProviders?.();
+  }, [fetchAIProviders]);
 
-  useEffect(() => {
-    const titleKey = standalone ? "Settings:AISettings" : "Settings:MCPServers";
+  const initMCPServers = React.useCallback(async () => {
+    await fetchMCPServers?.();
+  }, [fetchMCPServers]);
 
-    if (ready) setDocumentTitle(t(titleKey));
-  }, [ready, standalone]);
+  const initWebSearch = React.useCallback(async () => {
+    await fetchWebSearch?.();
+  }, [fetchWebSearch]);
 
-  console.log(isInit);
+  const getAiSettingsInitialValue = React.useCallback(async () => {
+    if (window.location.pathname.includes("providers")) await initAIProviders();
+    if (window.location.pathname.includes("servers")) await initMCPServers();
+    if (window.location.pathname.includes("search")) await initWebSearch();
+  }, [initAIProviders, initMCPServers, initWebSearch]);
 
-  if (!isInit) return null;
-
-  return (
-    <div className={styles.aiSettingsContainer}>
-      {standalone ? <AIProvider /> : null}
-      <MCPServers standalone={standalone} />
-    </div>
-  );
+  return {
+    initAIProviders,
+    initMCPServers,
+    initWebSearch,
+    getAiSettingsInitialValue,
+  };
 };
 
-export default inject(({ aiSettingsStore }: TStore) => {
-  const { isInit } = aiSettingsStore;
-
-  return { isInit };
-})(observer(AISettngs));
+export default useAISettings;

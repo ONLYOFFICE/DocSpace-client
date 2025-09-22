@@ -25,7 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TCreatedBy } from "../../types";
-import { ContentType, ProviderType, RoleType, ServerType } from "./enums";
+import {
+  ContentType,
+  ProviderType,
+  RoleType,
+  ServerType,
+  WebSearchType,
+} from "./enums";
 
 export type TCreateAiProvider = {
   type: ProviderType;
@@ -141,4 +147,10 @@ export type TUpdateServer = {
   name: string;
   description?: string;
   headers?: Record<string, string>;
+};
+
+export type WebSearchConfig = {
+  enabled: boolean;
+  type: WebSearchType;
+  key?: string;
 };

@@ -136,7 +136,16 @@ const LinkSettingsPanel = ({
                   type={InputType.text}
                   value={maxNumber}
                   scale
-                  onChange={(e) => setMaxNumber(e.target.value)}
+                  maxLength={3}
+                  onChange={(e) => {
+                    if (
+                      e.target.value &&
+                      !/^(?:[1-9][0-9]*)$/.test(e.target.value)
+                    ) {
+                      return;
+                    }
+                    setMaxNumber(e.target.value);
+                  }}
                 />
                 <Text
                   fontSize="12px"

@@ -285,7 +285,7 @@ class PluginStore {
     return true;
   };
 
-  addPlugin = async (data: FormData) => {
+  addPlugin = async (data: FormData, t: TTranslation) => {
     try {
       const plugin = await api.plugins.addPlugin(data);
 
@@ -294,10 +294,13 @@ class PluginStore {
       );
 
       if (!isPluginCompatible) {
-        // Temporary toast, need to change (locale) or remove
         toastr.error(
-          "Plugin is not compatible with your DocSpace version, some features may not work.",
+          t("PluginIsNotCompatible", {
+            productName: t("Common:ProductName"),
+          }),
         );
+      } else {
+        toastr.success(t("PluginLoadedSuccessfully"));
       }
 
       this.setNeedPageReload(true);

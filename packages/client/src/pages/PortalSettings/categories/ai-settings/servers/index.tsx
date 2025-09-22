@@ -36,6 +36,7 @@ import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import type { TServer } from "@docspace/shared/api/ai/types";
 import { toastr, TData } from "@docspace/shared/components/toast";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
@@ -203,7 +204,26 @@ const MCPServersComponent = ({
     });
   };
 
-  if (!mcpServersInitied) return null;
+  if (!mcpServersInitied)
+    return (
+      <div className={styles.mcpServers}>
+        <RectangleSkeleton
+          className={styles.description}
+          width="700px"
+          height="54px"
+        />
+        <RectangleSkeleton
+          className={styles.learnMoreLink}
+          width="100px"
+          height="19px"
+        />
+        <RectangleSkeleton
+          className={styles.addProviderButton}
+          width="158px"
+          height="32px"
+        />
+      </div>
+    );
 
   return (
     <div className={styles.mcpServers}>

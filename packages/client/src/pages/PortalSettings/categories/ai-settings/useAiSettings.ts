@@ -44,8 +44,8 @@ const useAISettings = ({
   }, [fetchAIProviders]);
 
   const initMCPServers = React.useCallback(async () => {
-    await fetchMCPServers?.();
-  }, [fetchMCPServers]);
+    await Promise.all([fetchMCPServers?.(), fetchAIProviders?.()]);
+  }, [fetchMCPServers, fetchAIProviders]);
 
   const initWebSearch = React.useCallback(async () => {
     await fetchWebSearch?.();

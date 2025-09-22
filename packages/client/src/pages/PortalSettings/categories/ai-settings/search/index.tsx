@@ -37,8 +37,11 @@ import { FieldContainer } from "@docspace/shared/components/field-container";
 import { InputType, TextInput } from "@docspace/shared/components/text-input";
 import { ComboBox, TOption } from "@docspace/shared/components/combobox";
 import { WebSearchType } from "@docspace/shared/api/ai/enums";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 import AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
+
+import generalStyles from "../AISettings.module.scss";
 
 import styles from "./Search.module.scss";
 
@@ -106,7 +109,43 @@ const SearchComponent = ({
     });
   }, [webSearchConfig]);
 
-  if (!webSearchInitied) return null;
+  if (!webSearchInitied)
+    return (
+      <div className={generalStyles.search}>
+        <RectangleSkeleton
+          className={generalStyles.description}
+          width="700px"
+          height="36px"
+        />
+        <RectangleSkeleton
+          className={generalStyles.learnMoreLink}
+          width="100px"
+          height="19px"
+        />
+        <div className={styles.searchForm}>
+          <div className={generalStyles.fieldContainer}>
+            <RectangleSkeleton width="119px" height="20px" />
+            <RectangleSkeleton width="340px" height="32px" />
+          </div>
+          <div className={generalStyles.fieldContainer}>
+            <RectangleSkeleton width="48px" height="32px" />
+            <RectangleSkeleton width="340px" height="32px" />
+          </div>
+        </div>
+        <div className={styles.buttonContainer}>
+          <RectangleSkeleton
+            className={styles.addProviderButton}
+            width="128px"
+            height="32px"
+          />
+          <RectangleSkeleton
+            className={styles.learnMoreLink}
+            width="322px"
+            height="32px"
+          />
+        </div>
+      </div>
+    );
 
   const isSaveDisabled =
     !value ||
@@ -115,14 +154,14 @@ const SearchComponent = ({
       selectedOption === webSearchConfig?.type);
 
   return (
-    <div className={styles.aiProvider}>
-      <Text className={styles.description}>
+    <div className={generalStyles.search}>
+      <Text className={generalStyles.description}>
         {t("AISettings:SearchDescription", {
           productName: t("Common:ProductName"),
         })}
       </Text>
       <Link
-        className={styles.learnMoreLink}
+        className={generalStyles.learnMoreLink}
         target={LinkTarget.blank}
         type={LinkType.page}
         fontWeight={600}

@@ -47,6 +47,7 @@ import { AddUpdateProviderDialog } from "./dialogs/add-update";
 import { DeleteAIProviderDialog } from "./dialogs/delete";
 
 import { AiProviderTile } from "./Tile";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 type TDeleteDialogData =
   | {
@@ -118,7 +119,26 @@ const AIProviderComponent = ({
     init();
   }, []);
 
-  if (!aiProvidersInitied) return null;
+  if (!aiProvidersInitied)
+    return (
+      <div className={styles.aiProvider}>
+        <RectangleSkeleton
+          className={styles.description}
+          width="700px"
+          height="36px"
+        />
+        <RectangleSkeleton
+          className={styles.learnMoreLink}
+          width="100px"
+          height="19px"
+        />
+        <RectangleSkeleton
+          className={styles.addProviderButton}
+          width="155px"
+          height="32px"
+        />
+      </div>
+    );
 
   return (
     <div className={styles.aiProvider}>

@@ -36,6 +36,11 @@
 
   margin-top: 12px;
   margin-bottom: 16px;
+
+  .fieldContainer {
+    display: flex;
+    gap: 8px;
+  }
 }
 
 .buttonContainer {

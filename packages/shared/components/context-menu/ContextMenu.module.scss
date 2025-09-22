@@ -104,9 +104,6 @@
       -moz-box-shadow: var(--context-menu-box-shadow);
       -webkit-box-shadow: var(--context-menu-box-shadow);
 
-      // ISSUE: overflow: hidden hides the submenu
-      // @include mixins.truncate;
-
       margin-top: -4px;
 
       margin-left: var(--context-menu-submenu-list-margin);

@@ -33,7 +33,6 @@ import type { FC } from "react";
 import type { TilesProps, TFile } from "./Tiles.types";
 import FileTile from "./FileTile";
 
-import { StyledTileContainer } from "./StyledTileView";
 import InfiniteGrid from "../InfiniteGrid";
 import SubmitToGalleryTile from "./SubmitToGalleryTile";
 
@@ -84,7 +83,7 @@ const Tiles: FC<TilesProps> = ({
     ) : null;
 
   return (
-    <StyledTileContainer className="tile-container">
+    <div className="tile-container">
       {viewMobile && !isShowInitSkeleton ? submitToGalleryTileNode : null}
       <InfiniteGrid
         filesList={oformFiles}
@@ -109,7 +108,7 @@ const Tiles: FC<TilesProps> = ({
               );
             })}
       </InfiniteGrid>
-    </StyledTileContainer>
+    </div>
   );
 };
 

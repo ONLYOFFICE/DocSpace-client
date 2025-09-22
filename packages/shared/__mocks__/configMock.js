@@ -24,57 +24,43 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { mobileMore } from "@docspace/shared/utils";
-
-const StyledBreakpointWarning = styled.div`
-  padding-block: 24px 0;
-  padding-inline: 24px 44px;
-  display: flex;
-  flex-direction: column;
-
-  .description {
-    display: flex;
-    flex-direction: column;
-    padding-top: 32px;
-    white-space: break-spaces;
-  }
-
-  .text-breakpoint {
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 22px;
-    padding-bottom: 8px;
-    max-width: 348px;
-  }
-
-  .text-prompt {
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 16px;
-  }
-
-  img {
-    width: 72px;
-    height: 72px;
-  }
-
-  @media ${mobileMore} {
-    flex-direction: row;
-
-    padding-block: 65px 0;
-    padding-inline: 104px 0;
-
-    .description {
-      padding-block: 0;
-      padding-inline: 32px 0;
-    }
-
-    img {
-      width: 100px;
-      height: 100px;
-    }
-  }
-`;
-
-export default StyledBreakpointWarning;
+// Mock for PUBLIC_DIR/scripts/config.json
+module.exports = {
+  api: {
+    origin: "",
+    prefix: "/api/2.0",
+    timeout: 30000,
+  },
+  proxy: {
+    url: "",
+  },
+  wrongPortalNameUrl: "",
+  pdfViewer: false,
+  pdfViewerUrl: "sdkjs/pdf/src/engine/viewer.js",
+  imageThumbnails: true,
+  editor: {
+    requestClose: false,
+  },
+  management: {
+    checkDomain: false,
+  },
+  oauth2: {
+    origin: "",
+    apiSystem: [],
+    identity: [],
+  },
+  firebase: {
+    fetchTimeoutMillis: 3600000,
+    minimumFetchIntervalMillis: 3600000,
+  },
+  campaigns: [],
+  logs: {
+    enableLogs: false,
+    logsToConsole: false,
+  },
+  loaders: {
+    showLoader: true,
+    showLoaderTime: 1000,
+    loaderTime: null,
+  },
+};

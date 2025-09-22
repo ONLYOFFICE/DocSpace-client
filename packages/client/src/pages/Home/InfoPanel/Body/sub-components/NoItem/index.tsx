@@ -51,6 +51,7 @@ type NoItemsProps = {
   isGallery?: boolean;
   isRooms?: boolean;
   isFiles?: boolean;
+  isTemplatesRoom?: boolean;
 } & SharedRoom;
 
 const NoItem = ({
@@ -60,6 +61,7 @@ const NoItem = ({
   isGallery,
   isRooms,
   isFiles,
+  isTemplatesRoom,
   isLockedSharedRoom,
   infoPanelSelection,
 }: NoItemsProps) => {
@@ -70,6 +72,7 @@ const NoItem = ({
     isGallery,
     isRooms,
     isFiles,
+    isTemplatesRoom,
     isLockedSharedRoom,
   });
 
@@ -80,6 +83,7 @@ const NoItem = ({
     isGallery ||
     isRooms ||
     isFiles ||
+    isTemplatesRoom ||
     isLockedSharedRoom
   ) {
     prevNoItemsRef.current = {
@@ -89,6 +93,7 @@ const NoItem = ({
       isGallery,
       isRooms,
       isFiles,
+      isTemplatesRoom,
       isLockedSharedRoom,
     };
   }
@@ -108,6 +113,7 @@ const NoItem = ({
   if (prevNoItemsRef.current.isGallery) return <NoGalleryItem />;
 
   if (prevNoItemsRef.current.isFiles) return <NoFileOrFolderItem />;
+  if (prevNoItemsRef.current.isTemplatesRoom) return <NoGalleryItem />;
   if (prevNoItemsRef.current.isRooms) return <NoRoomItem />;
 
   return null;

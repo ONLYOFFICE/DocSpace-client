@@ -26,6 +26,7 @@
 
 import { ReactNode } from "react";
 import { IndexRange } from "react-virtualized";
+import { TFile } from "../Tiles/Tiles.types";
 
 export interface CardProps {
   children: ReactNode;
@@ -50,7 +51,7 @@ export interface InfiniteGridProps {
 }
 
 export interface InfiniteGridInjectedProps extends InfiniteGridProps {
-  filesList: any[];
+  filesList: TFile[];
 }
 
 export interface SkeletonTileProps {

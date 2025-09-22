@@ -97,7 +97,7 @@ const Grid = ({
       scrollElement.addEventListener("scroll", handleScroll);
       return () => scrollElement.removeEventListener("scroll", handleScroll);
     }
-  }, [scroll, handleScroll]);
+  }, [handleScroll]);
 
   const renderLoadingRow = () => {
     if (!hasMoreFiles) return null;

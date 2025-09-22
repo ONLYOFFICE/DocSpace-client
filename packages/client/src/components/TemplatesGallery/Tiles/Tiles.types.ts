@@ -28,8 +28,18 @@ import type { Key } from "react";
 import type { NavigateFunction } from "react-router";
 import type { IndexRange } from "react-virtualized";
 
-export interface TOformFile {
+export interface TFile {
   id: Key | null | undefined;
+  attributes: {
+    name_form: string;
+    card_prewiew: {
+      data?: {
+        attributes: {
+          url: string;
+        };
+      };
+    };
+  };
 }
 
 export interface TilesProps {

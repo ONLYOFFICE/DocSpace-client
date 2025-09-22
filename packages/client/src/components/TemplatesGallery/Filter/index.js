@@ -30,7 +30,7 @@ import { ReactSVG } from "react-svg";
 import ViewTilesReactSvg from "PUBLIC_DIR/images/view-tiles.react.svg?url";
 import ViewChangeReactUrl from "PUBLIC_DIR/images/view-change.react.svg?url";
 
-import { injectDefaultTheme, mobile, tablet } from "@docspace/shared/utils";
+import { injectDefaultTheme, mobile } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/shared/themes";
 import CategoryFilter from "./CategoryFilter";
 import LanguageFilter from "./LanguageFilter";

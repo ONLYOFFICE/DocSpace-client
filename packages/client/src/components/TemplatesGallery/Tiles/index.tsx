@@ -30,7 +30,7 @@ import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import type { FC } from "react";
-import type { TilesProps } from "./Tiles.types";
+import type { TilesProps, TFile } from "./Tiles.types";
 import FileTile from "./FileTile";
 
 import { StyledTileContainer } from "./StyledTileView";
@@ -97,7 +97,7 @@ const Tiles: FC<TilesProps> = ({
         {viewMobile && !isShowInitSkeleton ? null : submitToGalleryTileNode}
         {isShowInitSkeleton
           ? null
-          : oformFiles.map((item: { id: Key | null | undefined }) => {
+          : oformFiles.map((item: TOformFile) => {
               return (
                 <FileTile
                   key={item.id}

@@ -256,6 +256,7 @@ export default class MessageStore {
   };
 
   handleStreamError = (jsonData: string) => {
+    this.setIsStreamRunning(true);
     let message = "";
     try {
       message = JSON.parse(jsonData).message;

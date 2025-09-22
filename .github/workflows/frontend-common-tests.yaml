@@ -3,14 +3,324 @@ name: Frontend common tests
 on:
   push:
     branches: [develop, release/v*, hotfix/v*]
-    paths: [packages/**, common/**]
+    paths:
+      [packages/**, common/**, .github/workflows/frontend-common-tests.yaml]
   pull_request:
     branches: [develop, release/v*, hotfix/v*]
-    paths: [packages/**, common/**]
+    paths:
+      [packages/**, common/**, .github/workflows/frontend-common-tests.yaml]
+
+env:
+  NODE_VERSION: 22.x
+  PNPM_VERSION: 10.15.1
+
 jobs:
+  # Detect changes to optimize job execution
+  changes:
+    name: "Detect changes"
+    runs-on: ubuntu-latest
+    outputs:
+      packages: ${{ steps.changes.outputs.packages }}
+      common: ${{ steps.changes.outputs.common }}
+      playwright: ${{ steps.changes.outputs.playwright }}
+      locales: ${{ steps.changes.outputs.locales }}
+      workflow: ${{ steps.changes.outputs.workflow }}
+      any_changes: ${{ steps.changes.outputs.any_changes }}
+      changed_files: ${{ steps.changes.outputs.changed_files }}
+      lint: ${{ steps.changes.outputs.packages }}
+      tsc: ${{ steps.changes.outputs.packages }}
+      unit-tests: ${{ steps.changes.outputs.packages }}
+      images: ${{ steps.changes.outputs.common }}
+      colors: ${{ steps.changes.outputs.common }}
+      dependencies: ${{ steps.changes.outputs.packages }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Detect file changes
+        id: changes
+        run: |
+          # Get the base branch for comparison
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE_SHA="${{ github.event.pull_request.base.sha }}"
+          else
+            BASE_SHA="${{ github.event.before }}"
+          fi
+
+          # If BASE_SHA is empty or all zeros, compare with HEAD~1
+          if [ -z "$BASE_SHA" ] || [ "$BASE_SHA" = "0000000000000000000000000000000000000000" ]; then
+            BASE_SHA="HEAD~1"
+          fi
+
+          echo "Comparing against: $BASE_SHA"
+
+          # Get changed files
+          CHANGED_FILES=$(git diff --name-only $BASE_SHA HEAD || echo "")
+          echo "Changed files: $CHANGED_FILES"
+
+          # Check for packages changes
+          if echo "$CHANGED_FILES" | grep -q "^packages/"; then
+            echo "packages=true" >> $GITHUB_OUTPUT
+            echo "✅ Packages changes detected"
+          else
+            echo "packages=false" >> $GITHUB_OUTPUT
+            echo "❌ No packages changes"
+          fi
+
+          # Check for common changes
+          if echo "$CHANGED_FILES" | grep -q "^common/"; then
+            echo "common=true" >> $GITHUB_OUTPUT
+            echo "✅ Common changes detected"
+          else
+            echo "common=false" >> $GITHUB_OUTPUT
+            echo "❌ No common changes"
+          fi
+
+          # Check for playwright changes
+          if echo "$CHANGED_FILES" | grep -E "^packages/(login|sdk|shared)/"; then
+            echo "playwright=true" >> $GITHUB_OUTPUT
+            echo "✅ Playwright changes detected"
+          else
+            echo "playwright=false" >> $GITHUB_OUTPUT
+            echo "❌ No playwright changes"
+          fi
+
+          # Check for locales changes
+          if echo "$CHANGED_FILES" | grep -E "(public/locales/|common/tests/)"; then
+            echo "locales=true" >> $GITHUB_OUTPUT
+            echo "✅ Locales changes detected"
+          else
+            echo "locales=false" >> $GITHUB_OUTPUT
+            echo "❌ No locales changes"
+          fi
+
+          # Check for workflow changes
+          if echo "$CHANGED_FILES" | grep -q "^\.github/workflows/"; then
+            echo "workflow=true" >> $GITHUB_OUTPUT
+            echo "✅ Workflow changes detected"
+          else
+            echo "workflow=false" >> $GITHUB_OUTPUT
+            echo "❌ No workflow changes"
+          fi
+
+          # Set any_changes flag
+          if echo "$CHANGED_FILES" | grep -E "(^packages/|^common/|^\.github/workflows/)"; then
+            echo "any_changes=true" >> $GITHUB_OUTPUT
+            echo "✅ Any relevant changes detected"
+          else
+            echo "any_changes=false" >> $GITHUB_OUTPUT
+            echo "❌ No relevant changes detected"
+          fi
+
+          # Output changed files (encode for safe transport)
+          if [ -n "$CHANGED_FILES" ]; then
+            # Convert newlines to commas for safe transport
+            CHANGED_FILES_ENCODED=$(echo "$CHANGED_FILES" | tr '\n' ',' | sed 's/,$//')
+            echo "changed_files=$CHANGED_FILES_ENCODED" >> $GITHUB_OUTPUT
+            echo "📁 Changed files: $CHANGED_FILES_ENCODED"
+          else
+            echo "changed_files=" >> $GITHUB_OUTPUT
+            echo "📁 No changed files detected"
+          fi
+
+  # Combined static analysis and common tests
+  static-analysis-and-tests:
+    name: "Static Analysis & Tests"
+    runs-on: ubuntu-latest
+    needs: [changes]
+    if: needs.changes.outputs.packages == 'true' || needs.changes.outputs.common == 'true' || needs.changes.outputs.workflow == 'true'
+    timeout-minutes: 15
+    outputs:
+      lint_result: ${{ steps.lint.outputs.result }}
+      tsc_result: ${{ steps.tsc.outputs.result }}
+      unit_tests_result: ${{ steps.unit-tests.outputs.result }}
+      images_result: ${{ steps.images.outputs.result }}
+      colors_result: ${{ steps.colors.outputs.result }}
+      locales_result: ${{ steps.locales.outputs.result }}
+      dependencies_result: ${{ steps.dependencies.outputs.result }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "pnpm"
+
+      # Install all dependencies
+      - name: Install pnpm dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Install common test npm dependencies
+        working-directory: ./common/tests
+        run: npm ci --prefer-offline
+
+      # Run ESLint (if needed)
+      - name: Run ESLint
+        id: lint
+        if: needs.changes.outputs.lint == 'true' || needs.changes.outputs.workflow == 'true'
+        run: |
+          echo "🔍 Running ESLint..."
+          if pnpm lint; then
+            echo "result=success" >> $GITHUB_OUTPUT
+            echo "✅ ESLint passed"
+          else
+            echo "result=failure" >> $GITHUB_OUTPUT
+            echo "❌ ESLint failed"
+            exit 1
+          fi
+        continue-on-error: true
+
+      # Run TypeScript compilation (if needed)
+      - name: Run TypeScript compilation
+        id: tsc
+        if: needs.changes.outputs.tsc == 'true' || needs.changes.outputs.workflow == 'true'
+        run: |
+          echo "🔧 Running TypeScript compilation..."
+          if pnpm tsc; then
+            echo "result=success" >> $GITHUB_OUTPUT
+            echo "✅ TypeScript compilation passed"
+          else
+            echo "result=failure" >> $GITHUB_OUTPUT
+            echo "❌ TypeScript compilation failed"
+            exit 1
+          fi
+        continue-on-error: true
+
+      # Run images tests (if needed)
+      - name: Run images tests
+        id: images
+        if: needs.changes.outputs.images == 'true' || needs.changes.outputs.workflow == 'true'
+        working-directory: ./common/tests
+        run: |
+          echo "🖼️ Running images tests..."
+          if npm run test:images; then
+            echo "result=success" >> $GITHUB_OUTPUT
+            echo "✅ Images tests passed"
+          else
+            echo "result=failure" >> $GITHUB_OUTPUT
+            echo "❌ Images tests failed"
+            exit 1
+          fi
+        continue-on-error: true
+
+      # Run colors tests (if needed)
+      - name: Run colors tests
+        id: colors
+        if: needs.changes.outputs.colors == 'true' || needs.changes.outputs.workflow == 'true'
+        working-directory: ./common/tests
+        run: |
+          echo "🎨 Running colors tests..."
+          if npm run test:colors; then
+            echo "result=success" >> $GITHUB_OUTPUT
+            echo "✅ Colors tests passed"
+          else
+            echo "result=failure" >> $GITHUB_OUTPUT
+            echo "❌ Colors tests failed"
+            exit 1
+          fi
+        continue-on-error: true
+
+      # Run locales tests (if needed)
+      - name: Run locales tests
+        id: locales
+        if: needs.changes.outputs.locales == 'true' || needs.changes.outputs.workflow == 'true'
+        working-directory: ./common/tests
+        run: |
+          echo "🌐 Running locales tests..."
+          if npm run test:skip-base-languages; then
+            echo "result=success" >> $GITHUB_OUTPUT
+            echo "✅ Locales tests passed"
+          else
+            echo "result=failure" >> $GITHUB_OUTPUT
+            echo "❌ Locales tests failed"
+            exit 1
+          fi
+        continue-on-error: true
+
+      # Run dependencies audit and tests (if needed)
+      - name: Run dependencies audit and tests
+        id: dependencies
+        if: needs.changes.outputs.dependencies == 'true' || needs.changes.outputs.workflow == 'true'
+        run: |
+          echo "🔒 Running dependencies audit..."
+          AUDIT_SUCCESS=true
+          DEPS_TEST_SUCCESS=true
+
+          # Run pnpm audit
+          if ! pnpm audit --audit-level=moderate; then
+            echo "❌ Dependencies audit failed"
+            AUDIT_SUCCESS=false
+          else
+            echo "✅ Dependencies audit passed"
+          fi
+
+          # Run dependency tests
+          echo "🔍 Running dependency tests..."
+          cd ./common/tests
+          if ! npm run test:dependencies; then
+            echo "❌ Dependency tests failed"
+            DEPS_TEST_SUCCESS=false
+          else
+            echo "✅ Dependency tests passed"
+          fi
+
+          # Set overall result
+          if [[ "$AUDIT_SUCCESS" == "true" ]] && [[ "$DEPS_TEST_SUCCESS" == "true" ]]; then
+            echo "result=success" >> $GITHUB_OUTPUT
+            echo "✅ All dependency checks passed"
+          else
+            echo "result=failure" >> $GITHUB_OUTPUT
+            echo "❌ Some dependency checks failed"
+            exit 1
+          fi
+        continue-on-error: true
+        env:
+          CI: true
+
+      # Run unit tests (if needed)
+      - name: Run unit tests
+        id: unit-tests
+        if: needs.changes.outputs.unit-tests == 'true' || needs.changes.outputs.workflow == 'true'
+        run: |
+          echo "🧪 Running unit tests..."
+          if pnpm test; then
+            echo "result=success" >> $GITHUB_OUTPUT
+            echo "✅ Unit tests passed"
+          else
+            echo "result=failure" >> $GITHUB_OUTPUT
+            echo "❌ Unit tests failed"
+            exit 1
+          fi
+        continue-on-error: true
+
+      # Check test results
+      - name: Check test results
+        if: always()
+        run: |
+          echo "📝 Checking all test results..."
+          if [ "${{ steps.lint.outputs.result }}" = "failure" ] || \
+             [ "${{ steps.tsc.outputs.result }}" = "failure" ] || \
+             [ "${{ steps.unit-tests.outputs.result }}" = "failure" ] || \
+             [ "${{ steps.images.outputs.result }}" = "failure" ] || \
+             [ "${{ steps.colors.outputs.result }}" = "failure" ] || \
+             [ "${{ steps.locales.outputs.result }}" = "failure" ] || \
+             [ "${{ steps.dependencies.outputs.result }}" = "failure" ]; then
+            echo "❌ One or more tests failed. Marking job as failed."
+            exit 1
+          else
+            echo "✅ All tests passed."
+          fi
+
+  # Playwright Login tests
   playwright-login:
     name: "Login e2e tests"
     runs-on: ubuntu-latest
+    needs: [changes, static-analysis-and-tests]
+    if: needs.changes.outputs.playwright == 'true' || needs.changes.outputs.workflow == 'true'
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - name: Cleanup existing containers
@@ -28,9 +338,14 @@ jobs:
             GITHUB_WORKFLOW=${{ github.workflow }}
             GITHUB_RUN_ID=${{ github.run_id }}
             GITHUB_RUN_NUMBER=${{ github.run_number }}
+
+  # Playwright SDK tests
   playwright-sdk:
     name: "SDK e2e tests"
     runs-on: ubuntu-latest
+    needs: [changes, static-analysis-and-tests]
+    if: needs.changes.outputs.playwright == 'true' || needs.changes.outputs.workflow == 'true'
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - name: Cleanup existing containers
@@ -48,127 +363,88 @@ jobs:
             GITHUB_WORKFLOW=${{ github.workflow }}
             GITHUB_RUN_ID=${{ github.run_id }}
             GITHUB_RUN_NUMBER=${{ github.run_number }}
-  eslint:
-    name: "Lint tests"
+
+  # Summary job to report overall status
+  test-summary:
+    name: "Test Summary"
     runs-on: ubuntu-latest
+    needs:
+      [changes, static-analysis-and-tests, playwright-login, playwright-sdk]
+    if: always()
+    timeout-minutes: 2
     steps:
-      - uses: actions/checkout@v4
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
+      - name: Check test results
+        run: |
+          # Create report file
+          REPORT_FILE="report.md"
+
+          # Debug: Show what job results we have
+          echo "=== DEBUG: Job Results ==="
+          echo "changes.result: '${{ needs.changes.result }}'"
+          echo "static-analysis-and-tests.result: '${{ needs.static-analysis-and-tests.result }}'"
+          echo "playwright-login.result: '${{ needs.playwright-login.result }}'"
+          echo "playwright-sdk.result: '${{ needs.playwright-sdk.result }}'"
+          echo "=========================="
+
+          # Generate the report content line-by-line to avoid YAML parsing issues
+          echo '# 🚀 DocSpace Frontend Test Results' > "$REPORT_FILE"
+          echo '' >> "$REPORT_FILE"
+          echo "**Workflow:** '${{ github.workflow }}'" >> "$REPORT_FILE"
+          echo "**Run ID:** '${{ github.run_id }}'" >> "$REPORT_FILE"
+          echo "**Branch:** '${{ github.ref_name }}'" >> "$REPORT_FILE"
+          echo "**Commit:** '${{ github.sha }}'" >> "$REPORT_FILE"
+          echo "**Triggered by:** '${{ github.event_name }}'" >> "$REPORT_FILE"
+          echo "**Date:** '$(date -u '+%Y-%m-%d %H:%M:%S UTC')'" >> "$REPORT_FILE"
+
+          # Continue with the rest of the report
+          echo '' >> "$REPORT_FILE"
+          echo '---' >> "$REPORT_FILE"
+          echo '' >> "$REPORT_FILE"
+          echo '## 📁 Changes Detection' >> "$REPORT_FILE"
+          echo '' >> "$REPORT_FILE"
+          echo '| Change Type | Detected | Status |' >> "$REPORT_FILE"
+          echo '|-------------|----------|--------|' >> "$REPORT_FILE"
+          echo "| 📦 **Packages** | ${{ needs.changes.outputs.packages }} | $([ '${{ needs.changes.outputs.packages }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |" >> "$REPORT_FILE"
+          echo "| 🔧 **Common** | ${{ needs.changes.outputs.common }} | $([ '${{ needs.changes.outputs.common }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |" >> "$REPORT_FILE"
+          echo "| 🎭 **Playwright** | ${{ needs.changes.outputs.playwright }} | $([ '${{ needs.changes.outputs.playwright }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |" >> "$REPORT_FILE"
+          echo "| 🌐 **Locales** | ${{ needs.changes.outputs.locales }} | $([ '${{ needs.changes.outputs.locales }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |" >> "$REPORT_FILE"
+          echo "| 🔄 **Workflow** | ${{ needs.changes.outputs.workflow }} | $([ '${{ needs.changes.outputs.workflow }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |" >> "$REPORT_FILE"
+          echo "| 📋 **Any Changes** | ${{ needs.changes.outputs.any_changes }} | $([ '${{ needs.changes.outputs.any_changes }}' = 'true' ] && echo '✅ Yes' || echo '❌ No') |" >> "$REPORT_FILE"
+          echo '' >> "$REPORT_FILE"
+          echo '### 📁 Changed Files' >> "$REPORT_FILE"
+          echo '' >> "$REPORT_FILE"
+          echo '```' >> "$REPORT_FILE"
+          echo '${{ needs.changes.outputs.changed_files }}' >> "$REPORT_FILE"
+          echo '```' >> "$REPORT_FILE"
+          echo '' >> "$REPORT_FILE"
+          echo '## 📊 Test Results Overview' >> "$REPORT_FILE"
+          echo '' >> "$REPORT_FILE"
+          echo '| Test Category | Test Type | Status | Result |' >> "$REPORT_FILE"
+          echo '|---------------|-----------|--------|--------|' >> "$REPORT_FILE"
+          echo "| **Setup** | Changes Detection | ${{ needs.changes.result }} | $([ '${{ needs.changes.result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
+          echo "| **Static Analysis** | 🔍 ESLint | ${{ needs.static-analysis-and-tests.outputs.lint_result || '⏭️ Skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.lint_result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
+          echo "| **Static Analysis** | 🔧 TypeScript | ${{ needs.static-analysis-and-tests.outputs.tsc_result || '⏭️ Skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.tsc_result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
+          echo "| **Static Analysis** | 🧪 Unit Tests | ${{ needs.static-analysis-and-tests.outputs.unit_tests_result || '⏭️ Skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.unit_tests_result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
+          echo "| **Static Analysis** | 🖼️ Images | ${{ needs.static-analysis-and-tests.outputs.images_result || '⏭️ Skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.images_result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
+          echo "| **Static Analysis** | 🎨 Colors | ${{ needs.static-analysis-and-tests.outputs.colors_result || '⏭️ Skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.colors_result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
+          echo "| **Static Analysis** | 🌐 Locales | ${{ needs.static-analysis-and-tests.outputs.locales_result || '⏭️ Skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.locales_result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
+          echo "| **Static Analysis** | 🔒 Dependencies | ${{ needs.static-analysis-and-tests.outputs.dependencies_result || '⏭️ Skipped' }} | $([ '${{ needs.static-analysis-and-tests.outputs.dependencies_result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
+          echo "| **E2E Testing** | 🎭 Playwright Login | ${{ needs.playwright-login.result || '⏭️ Skipped' }} | $([ '${{ needs.playwright-login.result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
+          echo "| **E2E Testing** | 🎭 Playwright SDK | ${{ needs.playwright-sdk.result || '⏭️ Skipped' }} | $([ '${{ needs.playwright-sdk.result }}' = 'success' ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$REPORT_FILE"
+          echo '' >> "$REPORT_FILE"
+          echo '## ✅ All Tests Completed!' >> "$REPORT_FILE"
+          echo '' >> "$REPORT_FILE"
+          echo '**Ready for review! 🚀**' >> "$REPORT_FILE"
+
+          # Copy to GitHub Step Summary
+          cat "$REPORT_FILE" >> $GITHUB_STEP_SUMMARY
+
+          echo "Report generated successfully!"
+
+      - name: Upload Test Results Report
+        uses: actions/upload-artifact@v4
+        if: always()
         with:
-          version: 10.15.1
-      - name: Use Node.js 22.x
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22.x
-          cache: "pnpm"
-      - name: Install dependencies
-        run: pnpm install
-      - name: Lint clients
-        run: pnpm lint
-  tsc:
-    name: "TypeScript tests"
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10.15.1
-      - name: Use Node.js 22.x
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22.x
-          cache: "pnpm"
-      - name: Install dependencies
-        run: pnpm install
-      - name: Run tsc
-        run: pnpm tsc
-  unit-tests:
-    name: "Unit tests"
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10.15.1
-      - name: Use Node.js 22.x
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22.x
-          cache: "pnpm"
-      - name: Install dependencies
-        run: pnpm install
-      - name: Run unit tests
-        run: pnpm test
-  images:
-    name: "Images tests"
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22.x
-      - name: Install dependencies
-        working-directory: ./common/tests
-        run: npm install
-      - name: Run common tests
-        working-directory: ./common/tests
-        run: npm run test:images
-  colors:
-    name: "Colors tests"
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22.x
-      - name: Install dependencies
-        working-directory: ./common/tests
-        run: npm install
-      - name: Run common tests
-        working-directory: ./common/tests
-        run: npm run test:colors
-  dependencies:
-    name: "Audit dependencies tests"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Use Node.js 22.x
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22.x
-          cache: "pnpm"
-      - uses: actions/checkout@v4
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10.15.1
-      - name: Install dependencies
-        run: pnpm install
-      - name: Run audit
-        run: pnpm audit --audit-level=moderate
-        env:
-          CI: true # Set CI environment variable to prevent interactive prompts
-      - name: Install dependencies
-        working-directory: ./common/tests
-        run: npm install
-      - name: Run common tests
-        working-directory: ./common/tests
-        run: npm run test:dependencies
-  locales:
-    name: "Locales tests (skip base languages)"
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js 22.x
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22.x
-          cache: "pnpm"
-      - name: Install dependencies
-        working-directory: ./common/tests
-        run: npm install
-      - name: Run common tests
-        working-directory: ./common/tests
-        run: npm run test:skip-base-languages
+          name: test-results-report
+          path: report.md
+          retention-days: 2

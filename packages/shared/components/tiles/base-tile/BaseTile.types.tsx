@@ -69,6 +69,7 @@ export type BaseTileProps = {
   forwardRef?: React.RefObject<HTMLDivElement | null>;
   /** Data test id for the tile */
   dataTestId?: string;
+  badgeUrl?: string;
 };
 
 export type ItemProps = {

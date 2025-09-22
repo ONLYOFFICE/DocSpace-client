@@ -202,6 +202,14 @@ const useSelectorBody = ({
       }
     : {};
 
+  const isEmptyRoomsRootScreen = breadCrumbs?.[1]?.isRoom;
+  const emptyScreenHeader = isEmptyRoomsRootScreen
+    ? t("Common:EmptyRoomsHeader")
+    : t("Common:SelectorEmptyScreenHeader");
+  const emptyScreenDescription = isEmptyRoomsRootScreen
+    ? t("Common:EmptyRoomsDescription")
+    : "";
+
   const SelectorBody = (
     <Selector
       {...headerSelectorProps}
@@ -217,8 +225,8 @@ const useSelectorBody = ({
       emptyScreenImage={
         isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl
       }
-      emptyScreenHeader={t("Common:SelectorEmptyScreenHeader")}
-      emptyScreenDescription=""
+      emptyScreenHeader={emptyScreenHeader}
+      emptyScreenDescription={emptyScreenDescription}
       searchEmptyScreenImage={
         isBase ? EmptyScreenFilterAltSvgUrl : EmptyScreenFilterAltDarkSvgUrl
       }

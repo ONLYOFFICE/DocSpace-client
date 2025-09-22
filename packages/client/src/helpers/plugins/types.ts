@@ -135,7 +135,7 @@ export interface IMessage {
   settings?: string;
 }
 
-type TButtonGroup = {
+export type TButtonGroup = {
   component: PluginComponents.button;
   props: ButtonProps;
   contextName?: string;

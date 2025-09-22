@@ -1,9 +1,9 @@
 {
   "key_path": "GroupsEmptyScreenText",
-  "content": "See group details here",
-  "content_en_sha1_hash": "b145d4f6361aa93cf71c3cc9adb3bebd08aa21c1",
-  "created_at": "2025-05-19T21:30:54.871Z",
-  "updated_at": "2025-08-04T07:30:01.204Z",
+  "content": "See groups details here",
+  "content_en_sha1_hash": "be45dd5d1059b10f16b3868ecf13d8aca1cf9be6",
+  "created_at": "2025-09-22T10:04:10.683Z",
+  "updated_at": "2025-09-22T10:04:13.862Z",
   "comment": {
     "text": "This translation key is used to display a message when viewing group details. It appears on an info panel and serves as a placeholder text until group information is loaded or available.",
     "is_auto": true,
@@ -123,13 +123,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Skonfiguruj szczegóły grupy tutaj' implies configuration, whereas the English 'See group details here' suggests a display of existing details. The translation's meaning is shifted.",
-          "suggestion": "Zobacz szczegóły grupy tutaj"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -153,49 +147,31 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Здесь будут представлены подробности о группах\" (Here the details of groups will be presented) is a bit formal and passive for a screen text that encourages exploration. It doesn't convey the immediacy of the English \"See group details here\".",
-          "suggestion": "Consider a more direct and inviting translation like \"Смотрите подробности о группах\" (See group details) or \"Узнайте больше о группах\" (Learn more about groups)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'මෙතැන සමූහයේ විස්තර බලන්න' while literally translatable, doesn't quite capture the intended meaning of 'See group details here'. It's a bit too literal and formal for a user interface element. A more natural phrasing would be more suitable.",
-          "suggestion": "මෙහි මූත්‍ර විස්තර බලන්න (Mehi mootra visthar balanna)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation 'Tu nájdete informácie o skupine' translates to 'Here you will find information about the group'. While not entirely wrong, it doesn't convey the meaning of 'See group details here' as directly. It's more descriptive than directive.",
-          "suggestion": "Consider 'Prezrite si detaily skupiny' or 'Zobraziť detaily skupiny'. These are more aligned with the English instruction to 'See group details'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Tukaj si oglejte podrobnosti o skupini' is a literal translation but sounds unnatural in Slovenian. A more natural phrasing would be 'Oglejte si podrobnosti o skupini' or 'Poglejte si podrobnosti o skupini'. The use of 'si' after 'oglejte' or 'poglejte' is a common construction, but the initial 'Tukaj' (Here) is unnecessary.",
-          "suggestion": "Oglejte si podrobnosti o skupini"
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -207,13 +183,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Vidi detalje grupe ovde\" is not the most natural or accurate translation of \"See group details here.\" \"Vidi\" is a present tense form and implies a continuous action. A more appropriate translation would convey the meaning of seeing details in a specific location or resource.",
-          "suggestion": "Pogledaj detalje grupe ovde"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

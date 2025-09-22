@@ -1,0 +1,13 @@
+<svg width="150" height="105" viewBox="0 0 150 105" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M46.5 1H91.916L101.5 10.4189V73C101.5 73.5523 101.052 74 100.5 74H46.5C45.9477 74 45.5 73.5523 45.5 73V2C45.5 1.44772 45.9477 1 46.5 1Z" fill="white" stroke="#AAAAAA" stroke-width="2"/>
+<path d="M101.5 31C105.645 33.3813 113.78 38.2232 111.669 43.3033C110.503 46.1104 105.017 46.2289 102.112 45.8529C101.56 45.7816 101.014 46.1304 101.001 46.6865C100.973 47.9573 101.429 49.4722 103.756 48.8596" stroke="#AAAAAA" stroke-width="2" stroke-linecap="round"/>
+<circle cx="82" cy="31.5" r="1.5" fill="#AAAAAA"/>
+<circle cx="65" cy="32.5" r="2.5" fill="#AAAAAA"/>
+<path d="M45 31C39.6572 34.0544 34 37.9813 34 41.472C34 45.3231 37.4275 45.8885 40.6092 45.8682C41.2496 45.8641 41.7526 46.4453 41.846 47.0789C41.9199 47.5802 42.103 48.0991 42.4857 48.4533C43.24 49.1515 43.8476 49.0351 44.0571 48.8897" stroke="#AAAAAA" stroke-width="2" stroke-linecap="round"/>
+<path d="M82.757 41.5477C80.1865 42.7739 79.0166 43.8707 80.1134 45.0406" stroke="#AAAAAA" stroke-width="2" stroke-linecap="round"/>
+<path d="M92 0L102 10H93C92.4477 10 92 9.55228 92 9V0Z" fill="#AAAAAA"/>
+<rect x="101" y="104" width="42" height="4" rx="2" transform="rotate(-180 101 104)" fill="#ECEEF1"/>
+<rect x="101" y="90" width="29" height="4" rx="2" transform="rotate(-180 101 90)" fill="#ECEEF1"/>
+<rect x="101" y="97" width="53" height="4" rx="2" transform="rotate(-180 101 97)" fill="#ECEEF1"/>
+<rect x="101" y="83" width="53" height="4" rx="2" transform="rotate(-180 101 83)" fill="#ECEEF1"/>
+</svg>

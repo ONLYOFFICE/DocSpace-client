@@ -24,9 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import EmptyScreenPersonSvgUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.people.light.svg?url";
+import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.people.dark.svg?url";
+import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
+
 import { inject, observer } from "mobx-react";
 import { tablet } from "@docspace/shared/utils/device";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 import { IconButton } from "@docspace/shared/components/icon-button";
@@ -34,10 +38,9 @@ import { Link, LinkType } from "@docspace/shared/components/link";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { RowContainer, Row } from "@docspace/shared/components/rows";
 import { Text } from "@docspace/shared/components/text";
-import EmptyScreenUserReactSvgUrl from "PUBLIC_DIR/images/empty_screen_user.react.svg?url";
-import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 import { globalColors } from "@docspace/shared/themes";
 import { TEnhancedMigrationUser } from "@docspace/shared/api/settings/types";
+
 import UsersRow from "./UsersRow";
 import { InjectedRowViewProps, RowViewProps } from "../../../../types";
 
@@ -139,6 +142,7 @@ const RowView = (props: RowViewProps) => {
     isAccountChecked,
     setSearchValue,
   } = props as InjectedRowViewProps;
+  const theme = useTheme();
 
   const toggleAll = (e: React.ChangeEvent<HTMLInputElement>) =>
     toggleAllAccounts(e.target.checked, withEmailUsers, checkedAccountType);
@@ -184,8 +188,10 @@ const RowView = (props: RowViewProps) => {
         </>
       ) : (
         <EmptyScreenContainer
-          imageSrc={EmptyScreenUserReactSvgUrl}
-          imageAlt="Empty Screen user image"
+          imageSrc={
+            theme.isBase ? EmptyScreenPersonSvgUrl : EmptyScreenPersonSvgDarkUrl
+          }
+          imageAlt={t("Common:NotFoundUsers")}
           headerText={t("Common:NotFoundUsers")}
           descriptionText={t("Common:NotFoundUsersDescription")}
           buttons={

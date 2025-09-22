@@ -32,8 +32,8 @@ import { inject } from "mobx-react";
 import { Consumer } from "@docspace/shared/utils";
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 
-import EmptyScreenRecentUrl from "PUBLIC_DIR/images/empty_screen_recent.svg?url";
-import EmptyScreenRecentDarkUrl from "PUBLIC_DIR/images/empty_screen_recent_dark.svg?url";
+import EmptyScreenRecentUrl from "PUBLIC_DIR/images/emptyview/empty.history.light.svg?url";
+import EmptyScreenRecentDarkUrl from "PUBLIC_DIR/images/emptyview/empty.history.dark.svg?url";
 import { Table } from "./TableView/TableView";
 import AuditRowContainer from "./RowView/AuditRowContainer";
 import HistoryMainContent from "../sub-components/HistoryMainContent";

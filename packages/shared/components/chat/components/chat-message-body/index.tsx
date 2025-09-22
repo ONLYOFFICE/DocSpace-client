@@ -200,7 +200,9 @@ const ChatMessageBody = ({
         <Scrollbar
           ref={scrollbarRef}
           className="chat-scroll-bar"
+          scrollBodyClassName={styles.chatScrollBody}
           onScroll={onScroll}
+          fixedSize
         >
           <div
             className={classNames(styles.chatMessageContainer)}

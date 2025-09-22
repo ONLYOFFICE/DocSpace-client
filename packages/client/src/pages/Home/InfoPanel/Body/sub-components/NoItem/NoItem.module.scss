@@ -49,9 +49,9 @@
   gap: 32px;
 
   :global(.no-item-text) {
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 16px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
     text-align: center;
   }
 
@@ -64,9 +64,11 @@
 
   :global(.no-thumbnail-img-wrapper) {
     width: 150px;
+    height: 105px;
 
     img {
       width: 150px;
+      height: 105px;
     }
   }
 

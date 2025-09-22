@@ -45,7 +45,7 @@
   "FormStartedToFill": "Begon met vullen.",
   "FormStopped": "Formulier gestopt.",
   "GalleryEmptyScreenText": "Bekijk hier de details van het formulier sjabloon",
-  "GroupsEmptyScreenText": "Bekijk hier de details van de groep",
+  "GroupsEmptyScreenText": "",
   "GuestsEmptyScreenText": "Bekijk hier de details van de gasten",
   "HistoryEmptyScreenText": "De activiteitsgeschiedenis wordt hier getoond",
   "HistoryRoomCopied": "<1>«{{roomTitle}}»</1> kamer gekopieerd",

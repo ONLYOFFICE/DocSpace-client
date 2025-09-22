@@ -45,7 +45,7 @@
   "FormStartedToFill": "Form doldurulmaya başlandı.",
   "FormStopped": "Form durduruldu.",
   "GalleryEmptyScreenText": "Form şablonu ayrıntılarına buradan bakın",
-  "GroupsEmptyScreenText": "Grup ayrıntılarını buradan görebilirsiniz",
+  "GroupsEmptyScreenText": "",
   "GuestsEmptyScreenText": "Konukların ayrıntılarını burada görün",
   "HistoryEmptyScreenText": "Etkinlik geçmişi burada gösterilecek",
   "HistoryRoomCopied": "<1>«{{roomTitle}}»</1> oda kopyalandı",

@@ -45,7 +45,7 @@
   "FormStartedToFill": "Completarea s-a început. ",
   "FormStopped": "Completarea formularului încetată",
   "GalleryEmptyScreenText": "Detalii despre formular șablon aici",
-  "GroupsEmptyScreenText": "Detaliile grupei aici",
+  "GroupsEmptyScreenText": "",
   "GuestsEmptyScreenText": "Afișare detalii invitaților aici",
   "HistoryEmptyScreenText": "Istoricul activităților va fi afișat aici",
   "HistoryRoomCopied": "Sala <1>«{{roomTitle}}»</1> a fost copiată",

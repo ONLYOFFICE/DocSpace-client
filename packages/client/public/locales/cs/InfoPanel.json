@@ -45,7 +45,7 @@
   "FormStartedToFill": "Vyplňování zahájeno.",
   "FormStopped": "Formulář byl zastaven.",
   "GalleryEmptyScreenText": "Podrobnosti o šabloně formuláře naleznete zde",
-  "GroupsEmptyScreenText": "Podrobnosti o skupině naleznete zde",
+  "GroupsEmptyScreenText": "",
   "GuestsEmptyScreenText": "Podrobnosti o hostech naleznete zde",
   "HistoryEmptyScreenText": "Historie aktivit se zobrazí zde",
   "HistoryRoomCopied": "<1>«{{roomTitle}}»</1> místnost zkopírována",

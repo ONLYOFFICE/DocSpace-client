@@ -45,7 +45,7 @@
   "FormStartedToFill": "Aloitettu täyttämään.",
   "FormStopped": "Lomake pysäytetty.",
   "GalleryEmptyScreenText": "Katso lomakemallien yksityiskohdat täältä",
-  "GroupsEmptyScreenText": "Katso ryhmän tiedot tästä",
+  "GroupsEmptyScreenText": "",
   "GuestsEmptyScreenText": "Katso vieraiden tiedot täältä",
   "HistoryEmptyScreenText": "Toimintahistoria näytetään tässä",
   "HistoryRoomCopied": "<1>«{{roomTitle}}»</1> huone kopioitu",

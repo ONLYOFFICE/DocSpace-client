@@ -45,7 +45,7 @@
   "FormStartedToFill": "Започето попуњавање.",
   "FormStopped": "Формулар прекинут.",
   "GalleryEmptyScreenText": "Види детаље шаблона обрасца овде",
-  "GroupsEmptyScreenText": "Види детаље групе овде",
+  "GroupsEmptyScreenText": "",
   "GuestsEmptyScreenText": "Овде погледајте детаље о гостима",
   "HistoryEmptyScreenText": "Историја активности ће бити приказана овде",
   "HistoryRoomCopied": "<1> «{{roomTitle}}»</1> просторија копирана",

@@ -45,7 +45,7 @@
   "FormStartedToFill": "تم البدء في تعبئة النموذج",
   "FormStopped": "تم إيقاف تعبئة النموذج",
   "GalleryEmptyScreenText": "راجع تفاصيل قالب النموذج هنا",
-  "GroupsEmptyScreenText": "انظر تفاصيل المجموعة هنا",
+  "GroupsEmptyScreenText": "",
   "GuestsEmptyScreenText": "عرض تفاصيل الضيوف هنا",
   "HistoryEmptyScreenText": "سيتم عرض سجل النشاط هنا",
   "HistoryRoomCopied": "<1>«{{roomTitle}}»</1> تم نسخ الغرفة",

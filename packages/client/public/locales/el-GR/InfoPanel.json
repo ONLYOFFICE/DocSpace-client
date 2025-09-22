@@ -45,7 +45,7 @@
   "FormStartedToFill": "Έγινε έναρξη συμπλήρωσης.",
   "FormStopped": "Η φόρμα διακόπηκε.",
   "GalleryEmptyScreenText": "Δείτε τις λεπτομέρειες του προτύπου φόρμας εδώ",
-  "GroupsEmptyScreenText": "Δείτε τις λεπτομέρειες της ομάδας εδώ",
+  "GroupsEmptyScreenText": "",
   "GuestsEmptyScreenText": "Δείτε τις λεπτομέρειες για τους επισκέπτες εδώ",
   "HistoryEmptyScreenText": "Το ιστορικό δραστηριοτήτων θα εμφανίζεται εδώ",
   "HistoryRoomCopied": "<1>Το δωμάτιο «{{roomTitle}}»</1> αντιγράφηκε",

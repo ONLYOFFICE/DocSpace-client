@@ -45,7 +45,7 @@
   "FormStartedToFill": "Započeto popunjavanje.",
   "FormStopped": "Formular prekinut.",
   "GalleryEmptyScreenText": "Vidi detalje šablona obrasca ovde",
-  "GroupsEmptyScreenText": "Vidi detalje grupe ovde",
+  "GroupsEmptyScreenText": "",
   "GuestsEmptyScreenText": "Ovde pogledajte detalje o gostima",
   "HistoryEmptyScreenText": "Istorija aktivnosti će biti prikazana ovde",
   "HistoryRoomCopied": "<1>«{{roomTitle}}»</1> prostorija kopirana",

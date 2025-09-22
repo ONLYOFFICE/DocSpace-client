@@ -45,7 +45,7 @@
   "FormStartedToFill": "Começou a encher.",
   "FormStopped": "Formulário parado.",
   "GalleryEmptyScreenText": "Veja detalhes do modelo de formulário aqui",
-  "GroupsEmptyScreenText": "Veja detalhes do grupo aqui",
+  "GroupsEmptyScreenText": "",
   "GuestsEmptyScreenText": "Veja os detalhes dos convidados aqui",
   "HistoryEmptyScreenText": "O histórico de atividades será mostrado aqui",
   "HistoryRoomCopied": "<1>«{{roomTitle}}»</1> sala copiada",

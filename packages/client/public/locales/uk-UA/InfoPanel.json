@@ -45,7 +45,7 @@
   "FormStartedToFill": "Заповнення розпочато.",
   "FormStopped": "Форму зупинено.",
   "GalleryEmptyScreenText": "Перегляньте деталі шаблону форми тут",
-  "GroupsEmptyScreenText": "Див. інформацію про групу тут",
+  "GroupsEmptyScreenText": "",
   "GuestsEmptyScreenText": "Див. інформацію про гостей тут",
   "HistoryEmptyScreenText": "Тут буде показано історію активності",
   "HistoryRoomCopied": "Кімнату <1>«{{roomTitle}}»</1> скопійовано",

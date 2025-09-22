@@ -45,7 +45,7 @@
   "FormStartedToFill": "Започна да се попълва.",
   "FormStopped": "Формулярът спря.",
   "GalleryEmptyScreenText": "Виж подробности за шаблон на формуляр тук",
-  "GroupsEmptyScreenText": "Вижте груповите подробности тук",
+  "GroupsEmptyScreenText": "",
   "GuestsEmptyScreenText": "Вижте подробности за гостите тук",
   "HistoryEmptyScreenText": "Историята на дейностите ще бъде показана тук",
   "HistoryRoomCopied": "<1>«{{roomTitle}}»</1> стаята е копирана",

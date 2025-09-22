@@ -45,7 +45,7 @@
   "FormStartedToFill": "Vyplňovanie bolo začaté.",
   "FormStopped": "Formulár bol ukončený.",
   "GalleryEmptyScreenText": "Podrobnosti o šablóne formulára nájdete tu",
-  "GroupsEmptyScreenText": "Tu nájdete informácie o skupine",
+  "GroupsEmptyScreenText": "",
   "GuestsEmptyScreenText": "Podrobnosti o hosťoch nájdete tu",
   "HistoryEmptyScreenText": "Tu sa zobrazí história aktivít",
   "HistoryRoomCopied": "Miestnosť <1>«{{roomTitle}}»</1> skopírovaná",

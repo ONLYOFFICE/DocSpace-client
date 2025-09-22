@@ -28,7 +28,10 @@ import { useState } from "react";
 import moment from "moment";
 import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
+
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/icons/12/person-plus.react.svg?url";
+import ButtonAlertIcon from "PUBLIC_DIR/images/button.alert.react.svg";
+
 import { Text } from "@docspace/shared/components/text";
 import {
   ModalDialog,
@@ -41,6 +44,7 @@ import { InputType, TextInput } from "@docspace/shared/components/text-input";
 import LinkRolesDropdown from "./sub-components/LinkRolesDropdown";
 import styles from "./LinkSettingsPanel.module.scss";
 import { LinkSettingsPanelProps } from "./LinkSettingsPanel.types";
+import { HelpButton } from "@docspace/shared/components/help-button";
 
 const LinkSettingsPanel = ({
   isVisible,
@@ -68,6 +72,8 @@ const LinkSettingsPanel = ({
   const usersNumber = 0; // TODO: Link settings
 
   console.log("limitDate", limitDate);
+
+  const showUsersLimitWarning = true; // TODO: Link settings
 
   return (
     <ModalDialog
@@ -128,9 +134,22 @@ const LinkSettingsPanel = ({
 
             {userLimitIsChecked ? (
               <div className={styles.userLimitInputBlock}>
-                <Text fontSize="13px" fontWeight={600}>
-                  {t("Files:MaxNumber")}
-                </Text>
+                <div className={styles.userLimitInputBlockText}>
+                  <Text fontSize="13px" fontWeight={600}>
+                    {/* TODO: Link settings Max number or max users (translation) */}
+                    {t("Files:MaxNumber")}
+                  </Text>
+                  {showUsersLimitWarning ? (
+                    <HelpButton
+                      place="right"
+                      iconNode={<ButtonAlertIcon />}
+                      tooltipContent={
+                        <Text>{t("Files:WarningUsersLimit")}</Text>
+                      }
+                      className={styles.linkSettingsHelpButton}
+                    />
+                  ) : null}
+                </div>
                 <TextInput
                   className={styles.userLimitTextInput}
                   type={InputType.text}

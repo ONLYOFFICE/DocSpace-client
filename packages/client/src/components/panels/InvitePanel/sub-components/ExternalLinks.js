@@ -26,6 +26,7 @@
 
 // import MediaDownloadReactSvgUrl from "PUBLIC_DIR/images/media.download.react.svg?url";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
+import ButtonAlertIcon from "PUBLIC_DIR/images/button.alert.react.svg";
 import ClockIconUrl from "PUBLIC_DIR/images/clock.react.svg?url";
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/icons/12/person-plus.react.svg?url";
 import SettingsOutlineSvgUrl from "PUBLIC_DIR/images/icons/16/settings-outline.react.svg?url";
@@ -37,11 +38,13 @@ import { toastr } from "@docspace/shared/components/toast";
 
 import { InputBlock } from "@docspace/shared/components/input-block";
 import { IconButton } from "@docspace/shared/components/icon-button";
+import { Text } from "@docspace/shared/components/text";
+import { HelpButton } from "@docspace/shared/components/help-button";
 // import { DropDown } from "@docspace/shared/components/drop-down";
 // import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
-// import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
 import { filterPaidRoleOptions } from "SRC_DIR/helpers";
 import api from "@docspace/shared/api";
 import AccessSelector from "../../../AccessSelector";
@@ -56,7 +59,6 @@ import {
 } from "../StyledInvitePanel";
 
 import { getFreeUsersRoleArray, getFreeUsersTypeArray } from "../utils";
-import { Text } from "@docspace/shared/components/text";
 
 const ExternalLinks = ({
   t,
@@ -82,8 +84,11 @@ const ExternalLinks = ({
   editLink,
   isLinksToggling,
   setIsLinksToggling,
+  theme,
 }) => {
   // const [actionLinksVisible, setActionLinksVisible] = useState(false);
+
+  const showUsersLimitWarning = true; // TODO: Link settings
 
   const inputsRef = useRef();
 
@@ -305,6 +310,19 @@ const ExternalLinks = ({
               <Text fontSize="12px" fontWeight={600}>
                 0 / 20
               </Text>
+              {showUsersLimitWarning ? (
+                <HelpButton
+                  place="right"
+                  iconNode={<ButtonAlertIcon />}
+                  tooltipContent={<Text>{t("Files:WarningUsersLimit")}</Text>}
+                  className="invite-via-link-settings-warning"
+                  color={
+                    theme?.isBase
+                      ? globalColors.lightErrorStatus
+                      : globalColors.darkErrorStatus
+                  }
+                />
+              ) : null}
             </div>
           </div>
         </>
@@ -326,9 +344,10 @@ export default inject(
     const { roomId, hideSelector, defaultAccess } = invitePanelOptions;
     const { getPortalInviteLink } = peopleStore.inviteLinksStore;
     const { isUserTariffLimit } = currentQuotaStore;
-    const { standalone, allowInvitingGuests } = settingsStore;
+    const { theme, standalone, allowInvitingGuests } = settingsStore;
 
     return {
+      theme,
       roomId,
       hideSelector,
       defaultAccess,

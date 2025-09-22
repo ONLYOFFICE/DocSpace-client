@@ -38,6 +38,18 @@
     .userLimitInputBlock {
       margin-top: 16px;
 
+      .userLimitInputBlockText {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+
+        .linkSettingsHelpButton {
+          svg path {
+            fill: var(--warning-color) !important;
+          }
+        }
+      }
+
       .userLimitTextInput {
         margin: 5px 0 4px;
       }

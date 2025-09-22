@@ -26,7 +26,7 @@
 
 import React from "react";
 import uniqueId from "lodash/uniqueId";
-import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg";
+import InfoReactSvg from "PUBLIC_DIR/images/info.react.svg";
 import { classNames } from "../../utils";
 import { IconButton } from "../icon-button";
 import { Tooltip } from "../tooltip";
@@ -54,6 +54,7 @@ const HelpButton = (props: HelpButtonProps) => {
     isOpen,
     noUserSelect,
     dataTestId,
+    iconNode,
   } = props;
 
   const currentId = id || uniqueId();
@@ -88,7 +89,7 @@ const HelpButton = (props: HelpButtonProps) => {
           className={componentClass}
           isClickable={isClickable}
           iconName={iconName}
-          iconNode={<InfoReactSvgUrl />}
+          iconNode={iconNode ?? <InfoReactSvg />}
           size={size}
           color={color}
           data-for={currentId}

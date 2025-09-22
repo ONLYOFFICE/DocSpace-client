@@ -3,7 +3,7 @@
   "content": "Name",
   "content_en_sha1_hash": "709a23220f2c3d64d1e1d6d18c4d5280f8d82fca",
   "created_at": "2025-05-19T21:30:46.705Z",
-  "updated_at": "2025-09-22T10:04:13.835Z",
+  "updated_at": "2025-09-22T13:39:52.425Z",
   "comment": {
     "text": "This translation key displays the user's full name, typically their first and last names. It is used in a social authentication welcome dialog to provide user information. Translators should note that the name may be truncated or displayed as an alias if not available.",
     "is_auto": true,
@@ -42,8 +42,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/AccountsTable/RowView/index.tsx",
-      "line_number": 174,
-      "context": "isIndeterminate={isIndeterminate}\n isChecked={isChecked}\n onChange={toggleAll}\n />\n ) : null}\n <Text className=\"row-header-title\">{t(\"Common:Name\")}</Text>\n </div>\n </StyledRow>\n \n {accountsData.map((data) => (\n <UsersRow",
+      "line_number": 171,
+      "context": "{checkedUsers.withEmail.length > 0 ? (\n <Checkbox\n isIndeterminate={isIndeterminate}\n isChecked={isChecked}\n onChange={toggleAll}\n label={t(\"Common:Name\")}\n />\n ) : null}\n </div>\n </StyledRow>",
       "module": "/packages/client"
     },
     {

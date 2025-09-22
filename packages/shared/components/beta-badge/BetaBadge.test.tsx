@@ -130,7 +130,7 @@ describe("<BetaBadge />", () => {
       expect(screen.getByText("Beta Feature")).toBeInTheDocument();
     });
 
-    const closeButton = screen.getByTestId("icon-button");
+    const closeButton = screen.getByTestId("close-tooltip-button");
     await userEvent.click(closeButton);
 
     await waitFor(() => {

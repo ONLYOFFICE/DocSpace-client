@@ -52,7 +52,7 @@ const ChatMessageBody = ({
   const { messages, fetchNextMessages, addMessageId } = useMessageStore();
   const { currentChat } = useChatStore();
 
-  const [isScrolled, setIsScrolled] = React.useState(false);
+  const isScrolledRef = useRef(false);
   const [height, setHeight] = React.useState(0);
 
   const scrollbarRef = useRef<CustomScrollbar>(null);
@@ -83,13 +83,13 @@ const ChatMessageBody = ({
   }, [addMessageId]);
 
   useEffect(() => {
-    setIsScrolled(false);
+    isScrolledRef.current = false;
   }, [currentChat]);
 
   useEffect(() => {
     if (isEmpty) return;
 
-    if (isScrolled) return;
+    if (isScrolledRef.current) return;
 
     requestAnimationFrame(() => {
       if (scrollbarRef.current?.scrollToBottom) {
@@ -175,9 +175,9 @@ const ChatMessageBody = ({
         Math.abs(currentHeight - chatBodyRef.current.offsetHeight) < 5) ||
       (chatBodyRef.current && chatBodyRef.current.offsetHeight < currentHeight)
     ) {
-      setIsScrolled(false);
+      isScrolledRef.current = false;
     } else {
-      setIsScrolled(true);
+      isScrolledRef.current = true;
     }
 
     if (e.currentTarget.scrollTop < 500 + e.currentTarget.clientHeight) {

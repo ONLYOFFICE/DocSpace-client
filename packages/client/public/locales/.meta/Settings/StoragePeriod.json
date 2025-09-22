@@ -3,7 +3,7 @@
   "content": "Storage period",
   "content_en_sha1_hash": "58eebe4d0ed34f94e0198cff2f9111c9ccc932b0",
   "created_at": "2025-05-19T21:30:52.796Z",
-  "updated_at": "2025-08-04T07:30:01.557Z",
+  "updated_at": "2025-09-17T13:43:01.896Z",
   "comment": {
     "text": "This translation key is used to display the \"Storage period\" label in various security settings pages. It will appear as a subheader or caption, indicating the duration of stored login history or audit trail data.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/index.js",
-      "line_number": 136,
+      "line_number": 108,
       "context": "t={t}\n subHeader={t(\"AuditSubheader\", {\n productName: t(\"Common:ProductName\"),\n })}\n latestText={t(\"LoginLatestText\")}\n storagePeriod={t(\"StoragePeriod\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n securityLifetime={securityLifetime}\n lifetime={securityLifetime.auditTrailLifeTime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}",
       "module": "/packages/client"
     },

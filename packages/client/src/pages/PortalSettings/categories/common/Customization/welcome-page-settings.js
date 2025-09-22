@@ -39,9 +39,12 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
+import { DeviceType } from "@docspace/shared/enums";
 import checkScrollSettingsBlock from "../utils";
 import { StyledSettingsComponent } from "./StyledSettings";
 import LoaderCustomization from "../sub-components/loaderCustomization";
+import useCommon from "../useCommon";
+import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 
 let greetingTitleFromSessionStorage = "";
 let greetingTitleDefaultFromSessionStorage = "";
@@ -54,19 +57,32 @@ const WelcomePageSettingsComponent = (props) => {
     isLoaded,
     setIsLoadedWelcomePageSettings,
     tReady,
-    initSettings,
     setIsLoaded,
     setGreetingTitle,
     restoreGreetingTitle,
-    isMobileView,
     isLoadedPage,
     greetingSettingsIsDefault,
     getGreetingSettingsIsDefault,
     currentColorScheme,
     welcomePageSettingsUrl,
+    loadBaseInfo,
+    common,
+    settingsStore,
+    deviceType,
   } = props;
 
   const navigate = useNavigate();
+
+  const isMobileView = deviceType === DeviceType.mobile;
+
+  const defaultProps = createDefaultHookSettingsProps({
+    loadBaseInfo,
+    isMobileView,
+    settingsStore,
+    common,
+  });
+
+  const { getCommonInitialValue } = useCommon(defaultProps.common);
 
   const [state, setState] = React.useState({
     isLoading: false,
@@ -129,13 +145,21 @@ const WelcomePageSettingsComponent = (props) => {
 
       const newUrl = "/portal-settings/customization/general";
 
-      if (newUrl === currentUrl) return;
+      if (currentUrl.startsWith("/portal-settings/")) {
+        return;
+      }
+
+      // if (newUrl === currentUrl) return;
 
       navigate(newUrl);
     } else {
       setState((val) => ({ ...val, isCustomizationView: false }));
     }
   };
+
+  React.useEffect(() => {
+    if (isMobileView) getCommonInitialValue();
+  }, [isMobileView]);
 
   React.useEffect(() => {
     greetingTitleFromSessionStorage = getFromSessionStorage("greetingTitle");
@@ -157,12 +181,6 @@ const WelcomePageSettingsComponent = (props) => {
       greetingTitleDefaultFromSessionStorage === "none"
         ? greetingSettings
         : greetingTitleDefaultFromSessionStorage;
-
-    const page = isMobileView ? "language-and-time-zone" : "general";
-    if (!isLoaded) {
-      initSettings(page).then(() => setIsLoaded(true));
-      getGreetingSettingsIsDefault();
-    }
 
     checkInnerWidth();
     window.addEventListener("resize", checkInnerWidth);
@@ -403,15 +421,16 @@ export const WelcomePageSettings = inject(
       theme,
       currentColorScheme,
       welcomePageSettingsUrl,
+      deviceType,
     } = settingsStore;
     const { setGreetingTitle, restoreGreetingTitle } = setup;
     const {
       isLoaded,
       setIsLoadedWelcomePageSettings,
-      initSettings,
       setIsLoaded,
       greetingSettingsIsDefault,
       getGreetingSettingsIsDefault,
+      initSettings,
     } = common;
 
     return {
@@ -423,10 +442,15 @@ export const WelcomePageSettings = inject(
       setIsLoadedWelcomePageSettings,
       greetingSettingsIsDefault,
       getGreetingSettingsIsDefault,
-      initSettings,
       setIsLoaded,
       currentColorScheme,
       welcomePageSettingsUrl,
+      common,
+      settingsStore,
+      loadBaseInfo: async (page) => {
+        await initSettings(page);
+      },
+      deviceType,
     };
   },
 )(

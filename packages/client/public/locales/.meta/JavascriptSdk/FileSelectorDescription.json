@@ -3,7 +3,7 @@
   "content": "Embed a file selector to allow users to access any file from the list of the available ones.",
   "content_en_sha1_hash": "ebf79504392ba71c2020434596bead7b73d2608b",
   "created_at": "2025-05-19T21:30:54.503Z",
-  "updated_at": "2025-08-04T07:30:01.381Z",
+  "updated_at": "2025-09-17T13:43:01.784Z",
   "comment": {
     "text": "\"This translation key is used to describe a file selector component, allowing users to access any file from a list of available options. It appears in UI elements such as buttons and dialogues, where it provides context to help users understand the purpose of the file selection functionality.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 121,
+      "line_number": 128,
       "context": "image: theme.isBase ? RoomSelectorImg : RoomSelectorImgDark,\n handleOnClick: navigateToRoomSelector,\n },\n {\n title: t(\"Common:FileSelector\"),\n description: t(\"FileSelectorDescription\"),\n image: theme.isBase ? FileSelectorImg : FileSelectorImgDark,\n handleOnClick: navigateToFileSelector,\n },\n {\n title: t(\"Common:Custom\"),",
       "module": "/packages/client"
     },

@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable } from "mobx";
+import axios from "axios";
 
 import { toastr } from "@docspace/shared/components/toast";
 
@@ -142,13 +143,13 @@ class ServicesStore {
     const { fetchPortalTariff, walletCustomerStatusNotActive } =
       this.currentTariffStatusStore!;
 
-    const requests = [
-      handleServicesQuotas(),
-      initWalletPayerAndBalance(isRefresh),
-      fetchPortalTariff(),
-    ];
-
     try {
+      const requests = [
+        handleServicesQuotas(),
+        initWalletPayerAndBalance(isRefresh),
+        fetchPortalTariff(),
+      ];
+
       const [quotas] = await Promise.all(requests);
 
       if (!quotas) throw new Error();
@@ -202,6 +203,7 @@ class ServicesStore {
         );
       }
     } catch (e) {
+      if (axios.isCancel(e)) return;
       toastr.error(t("Common:UnexpectedError"));
       console.error(e);
     }

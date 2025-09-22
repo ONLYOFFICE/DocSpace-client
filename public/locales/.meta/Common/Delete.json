@@ -3,7 +3,7 @@
   "content": "Delete",
   "content_en_sha1_hash": "f6fdbe48dc54dd86f63097a03bd24094dedd713a",
   "created_at": "2025-05-19T21:30:44.452Z",
-  "updated_at": "2025-09-10T09:59:20.800Z",
+  "updated_at": "2025-09-17T13:43:01.579Z",
   "comment": {
     "text": "This translation key is used to display the text \"Delete\" on a button in a file editor component, specifically within an avatar cropper. It appears as a button's text and title, allowing users to confirm deletion of an image.",
     "is_auto": true,
@@ -84,7 +84,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/delete-data/portalDeletion.js",
-      "line_number": 104,
+      "line_number": 93,
       "context": "</Text>\n <Text className=\"helper\">{t(\"PortalDeletionHelper\")}</Text>\n <ButtonWrapper>\n <Button\n className=\"delete-button button\"\n label={t(\"Common:Delete\")}\n primary\n size={isDesktopView ? \"small\" : \"normal\"}\n onClick={onDeleteClick}\n isDisabled={notActivatedEmail}\n testId=\"delete_portal_button\"",
       "module": "/packages/client"
     },
@@ -150,19 +150,19 @@
     },
     {
       "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 786,
+      "line_number": 817,
       "context": "};\n \n const contextOptions: ContextMenuModel[] = [\n {\n key: \"delete\",\n label: t(\"Common:Delete\"),\n icon: DeleteIconUrl,\n onClick: () => this.onDelete(clientId),\n dataTestId: \"oauth_delete_option\",\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 786,
+      "line_number": 817,
       "context": "};\n \n const contextOptions: ContextMenuModel[] = [\n {\n key: \"delete\",\n label: t(\"Common:Delete\"),\n icon: DeleteIconUrl,\n onClick: () => this.onDelete(clientId),\n dataTestId: \"oauth_delete_option\",\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 490,
+      "line_number": 487,
       "context": "onClick: () => onChangeStatus(EmployeeStatus.Disabled),\n icon: DisableReactSvgUrl,\n },\n {\n key: \"cm-delete\",\n label: t(\"Common:Delete\"),\n disabled: !hasOnlyOneUserToRemove || (isRoomAdmin && isGuests),\n onClick: () => setDeleteProfileDialogVisible(true),\n icon: DeleteReactSvgUrl,\n },\n {",
       "module": "/packages/client"
     },

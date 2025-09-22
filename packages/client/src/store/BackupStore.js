@@ -26,6 +26,7 @@
 
 import { getBackupProgress } from "@docspace/shared/api/portal";
 import { makeAutoObservable } from "mobx";
+import axios from "axios";
 import { toastr } from "@docspace/shared/components/toast";
 import { AutoBackupPeriod } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -171,6 +172,10 @@ class BackupStore {
 
   isInited = false;
 
+  isEmptyContentBeforeLoader = true;
+
+  isInitialError = false;
+
   constructor(
     authStore,
     thirdPartyStore,
@@ -188,6 +193,14 @@ class BackupStore {
     this.settingsStore = settingsStore;
     this.paymentStore = paymentStore;
   }
+
+  setIsInitialError = (isInitialError) => {
+    this.isInitialError = isInitialError;
+  };
+
+  setIsEmptyContentBeforeLoader = (isEmptyContentBeforeLoader) => {
+    this.isEmptyContentBeforeLoader = isEmptyContentBeforeLoader;
+  };
 
   setBackupsCount = (counts) => {
     if (counts === undefined || counts === null) return;
@@ -512,6 +525,10 @@ class BackupStore {
     this.setIsThirdStorageChanged(false);
   };
 
+  setDefaultFolderId = (id) => {
+    this.defaultFolderId = id;
+  };
+
   setThirdPartyStorage = (list) => {
     this.thirdPartyStorage = list;
   };
@@ -615,8 +632,14 @@ class BackupStore {
   };
 
   getProgress = async (t) => {
+    const abortController = new AbortController();
+    this.settingsStore.addAbortControllers(abortController);
+
     try {
-      const response = await getBackupProgress(isManagement());
+      const response = await getBackupProgress(
+        isManagement(),
+        abortController.signal,
+      );
 
       if (response) {
         const { progress, link, error } = response;
@@ -636,7 +659,9 @@ class BackupStore {
         }
       }
     } catch (err) {
-      this.setErrorInformation(err, t);
+      if (axios.isCancel(err)) return;
+
+      if (err) this.setErrorInformation(err, t);
     }
   };
 

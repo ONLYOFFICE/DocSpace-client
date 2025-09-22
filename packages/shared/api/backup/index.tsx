@@ -26,7 +26,11 @@
 
 import { request } from "../client";
 
-export async function getBackupsCount(from?: string, to?: string) {
+export async function getBackupsCount(
+  from?: string,
+  to?: string,
+  signal?: AbortSignal,
+) {
   const params = new URLSearchParams();
 
   if (from) params.append("from", from);
@@ -38,6 +42,7 @@ export async function getBackupsCount(from?: string, to?: string) {
   const res = (await request({
     method: "get",
     url,
+    signal,
   })) as number;
 
   return res;

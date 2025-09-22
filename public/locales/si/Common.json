@@ -22,7 +22,6 @@
   "ActivateRenewDescr": "ඔබේ පුද්ගලික අලුත් කිරීමේ නියමයන් ලබා ගැනීමට, ඔබේ කැප වූ කළමනාකරු අමතන්න හෝ <1>{{email}}</1> හිදී අපට ලියන්න",
   "ActivateRenewSubscriptionHeader": "{{license}} සඳහා ගිවිසුම අලුතින් කර ගන්න.",
   "ActivateSwithToProHeader": "පූර්ණ {{license}} අනුවාදයට මාරුවන්න",
-  "ActivateTariffDescr": "ඔබ {{organizationName}} {{productName}} {{license}} භාවිතා කරමින් සිටී.",
   "ActivateTariffLicenseTrialExpiration": "ඔබගේ නැහැසුම {{date}} දී කල් ඉකුත් වේ.",
   "ActivateToProBannerHeaderTrial": "පූර්ණ {{license}} අනුවර්තනය මිලදී ගෙන පහත දේ ලබා ගන්න:",
   "ActivateUploadDescr": "ඔබගේ බලපත්‍රය සක්‍රිය කිරීමට, එය පහතින් උඩුගත කර සක්‍රිය කරන්න ඔබන්න.",

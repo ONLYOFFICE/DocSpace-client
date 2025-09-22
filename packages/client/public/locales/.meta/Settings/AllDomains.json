@@ -3,7 +3,7 @@
   "content": "Any domains",
   "content_en_sha1_hash": "6c09447a43e7477b8bac50862ab834d1e732e621",
   "created_at": "2025-05-19T21:30:50.411Z",
-  "updated_at": "2025-08-04T07:30:01.554Z",
+  "updated_at": "2025-09-17T13:43:01.893Z",
   "comment": {
     "text": "This translation key is used to display the label \"Any domains\" in a security settings page, likely as an option for users to select. It appears on a portal settings category and may be associated with a button or other interactive element that allows users to configure access to trusted mail.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/trustedMail.js",
-      "line_number": 264,
+      "line_number": 263,
       "context": "value: \"0\",\n dataTestId: \"trusted_mail_disabled\",\n },\n {\n id: \"any-domains\",\n label: t(\"AllDomains\"),\n value: \"2\",\n dataTestId: \"trusted_mail_any_domains\",\n },\n {\n id: \"custom-domains\",",
       "module": "/packages/client"
     }

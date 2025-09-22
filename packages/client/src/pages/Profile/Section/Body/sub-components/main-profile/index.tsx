@@ -56,6 +56,7 @@ import { TDirectionY } from "@docspace/shared/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { TAvatarModel } from "@docspace/shared/components/avatar/Avatar.types";
+import TopLoadingIndicator from "@docspace/shared/components/top-loading-indicator";
 
 import SendClockReactSvgUrl from "PUBLIC_DIR/images/send.clock.react.svg?url";
 import PencilOutlineReactSvgUrl from "PUBLIC_DIR/images/pencil.outline.react.svg?url";
@@ -68,6 +69,7 @@ import BetaBadge from "SRC_DIR/components/BetaBadgeWrapper";
 import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
 import TargetUserStore from "SRC_DIR/store/contacts/TargetUserStore";
 import DialogStore from "SRC_DIR/store/contacts/DialogStore";
+import TreeFoldersStore from "SRC_DIR/store/TreeFoldersStore";
 
 import {
   StyledWrapper,
@@ -107,10 +109,11 @@ type MainProfileProps = {
   onChangeFile?: AvatarEditorDialogStore["onChangeFile"];
   image?: AvatarEditorDialogStore["image"];
   setImage?: AvatarEditorDialogStore["setImage"];
+  fetchTreeFolders?: TreeFoldersStore["fetchTreeFolders"];
 };
 
 const MainProfile = (props: MainProfileProps) => {
-  const { t } = useTranslation(["Profile", "Common", "RoomLogoCover"]);
+  const { t, i18n } = useTranslation(["Profile", "Common", "RoomLogoCover"]);
 
   const {
     profile,
@@ -133,6 +136,7 @@ const MainProfile = (props: MainProfileProps) => {
     onChangeFile,
     image,
     setImage,
+    fetchTreeFolders,
   } = props;
 
   const styleContainerRef = useRef<HTMLDivElement>(null);
@@ -297,18 +301,23 @@ const MainProfile = (props: MainProfileProps) => {
       isBeta: false,
     };
 
-  const onLanguageSelect = (newLanguage: TOption) => {
+  const onLanguageSelect = async (newLanguage: TOption) => {
     if (profile!.cultureName === newLanguage.key) return;
 
-    updateProfileCulture?.(profile!.id, newLanguage.key as string)
-      .then(() => window.location.reload())
-      .catch((error: unknown) => {
-        toastr.error(
-          error && (error as { message: string }).message
-            ? (error as { message: string }).message
-            : (error as string),
-        );
-      });
+    try {
+      TopLoadingIndicator.start();
+      await updateProfileCulture?.(profile!.id, newLanguage.key as string);
+      i18n.changeLanguage(newLanguage.key?.toString());
+      await fetchTreeFolders?.();
+    } catch (error: unknown) {
+      toastr.error(
+        error && (error as { message: string }).message
+          ? (error as { message: string }).message
+          : (error as string),
+      );
+    } finally {
+      TopLoadingIndicator.end();
+    }
   };
 
   const isBetaLanguage = selectedLanguage?.isBeta;
@@ -738,6 +747,7 @@ export default inject(
     peopleStore,
     userStore,
     avatarEditorDialogStore,
+    treeFoldersStore,
   }: TStore) => {
     const { withActivationBar, sendActivationLink, user: profile } = userStore;
     const { becometranslatorUrl, culture, documentationEmail } = settingsStore;
@@ -760,6 +770,8 @@ export default inject(
     } = peopleStore.targetUserStore!;
     const { setDialogData, setChangeEmailVisible } = peopleStore.dialogStore!;
 
+    const { fetchTreeFolders } = treeFoldersStore;
+
     return {
       profile,
       culture,
@@ -781,6 +793,7 @@ export default inject(
       image,
       onChangeFile,
       setImage,
+      fetchTreeFolders,
     };
   },
 )(withCultureNames<MainProfileProps>(observer(MainProfile)));

@@ -87,8 +87,8 @@ const StyledBox = styled.div.attrs(injectDefaultTheme)`
 
         ${isTelegram &&
         css`
-          path:nth-child(9),
-          path:nth-child(10) {
+          path:nth-child(11),
+          path:nth-child(12) {
             fill: ${globalColors.black};
             opacity: 1;
           }

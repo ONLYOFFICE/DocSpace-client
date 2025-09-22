@@ -3,7 +3,7 @@
   "content": "Are you sure you want to remove the {{service}}? This will not affect your {{account}} account in any way.",
   "content_en_sha1_hash": "6c59206f54809027b688a9b82f186032c0a4a006",
   "created_at": "2025-05-26T07:15:48.781Z",
-  "updated_at": "2025-06-30T12:20:31.716Z",
+  "updated_at": "2025-09-17T13:43:02.018Z",
   "comment": {
     "text": "This translation key is used for a confirmation prompt in a user interface, specifically a dialog that allows users to disconnect from third-party services. The text appears as part of a modal dialog and informs the user about the consequences of removing the service, which will not affect their account in any way.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/delete-third-party/DeleteThirdPartyDialog.tsx",
-      "line_number": 122,
+      "line_number": 125,
       "context": ">\n <ModalDialog.Header>\n {t(\"Common:DisconnectCloudTitle\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n {t(\"Common:ThirdPartyDisconnectPrompt\", {\n service: removeItem.title,\n account: removeItem.provider_key,\n })}\n </ModalDialog.Body>\n <ModalDialog.Footer>",
       "module": "/packages/shared"
     }

@@ -115,6 +115,7 @@ describe("DirectThirdPartyConnection", () => {
     setBasePath: jest.fn(),
     toDefault: jest.fn(),
     setNewPath: jest.fn(),
+    setDefaultFolderId: jest.fn(),
     accounts: mockAccounts,
     buttonSize: ButtonSize.normal,
     onSelectFolder: jest.fn(),

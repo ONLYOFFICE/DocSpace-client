@@ -335,7 +335,9 @@ describe("<QuickButtons />", () => {
       lockedBy: "John Doe",
     };
 
-    renderWithTheme(<QuickButtons {...baseProps} item={lockedItem} />);
+    renderWithTheme(
+      <QuickButtons {...baseProps} viewAs="tile" item={lockedItem} />,
+    );
 
     const lockButton = screen.getByTitle("Unblock File");
     expect(lockButton).toBeInTheDocument();
@@ -353,8 +355,9 @@ describe("<QuickButtons />", () => {
     renderWithTheme(
       <QuickButtons
         {...baseProps}
-        item={lockedItem}
+        viewAs="tile"
         onClickLock={onClickLock}
+        item={lockedItem}
       />,
     );
 
@@ -368,7 +371,7 @@ describe("<QuickButtons />", () => {
     const onClickLock = jest.fn();
     const lockedItem = {
       ...baseFileItem,
-      locked: true as unknown as boolean,
+      locked: true,
       lockedBy: "John Doe",
       security: {
         ...baseFileItem.security,
@@ -379,6 +382,7 @@ describe("<QuickButtons />", () => {
     renderWithTheme(
       <QuickButtons
         {...baseProps}
+        viewAs="tile"
         item={lockedItem}
         onClickLock={onClickLock}
       />,

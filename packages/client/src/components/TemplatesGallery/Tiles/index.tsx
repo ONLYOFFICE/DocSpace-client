@@ -97,7 +97,7 @@ const Tiles: FC<TilesProps> = ({
         {viewMobile && !isShowInitSkeleton ? null : submitToGalleryTileNode}
         {isShowInitSkeleton
           ? null
-          : oformFiles.map((item: TOformFile) => {
+          : oformFiles.map((item: TFile) => {
               return (
                 <FileTile
                   key={item.id}

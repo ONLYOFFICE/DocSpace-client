@@ -44,7 +44,7 @@ export interface TFile {
 
 export interface TilesProps {
   tReady: boolean;
-  oformFiles: TOformFile[];
+  oformFiles: TFile[];
   hasMoreFiles: boolean;
   fetchMoreFiles: (params: IndexRange) => Promise<void>;
   setOformFilesLoaded: (loaded: boolean) => void;

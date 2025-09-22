@@ -24,48 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ReactSVG } from "react-svg";
-import InfoReactSvgUrl from "PUBLIC_DIR/images/info.icon.react.svg?url";
-import classNames from "classnames";
-import styles from "./FileTile.module.scss";
+import { Key } from "react";
 
-const FileTile = ({ item, smallPreview, onClickInfo, onClick }) => {
-  const previewSrc = item?.attributes.card_prewiew.data?.attributes.url;
-
-  const handleInfoClick = (e) => {
-    e.stopPropagation();
-    onClickInfo?.(e);
+export interface FileTileProps {
+  item: {
+    id: Key | null | undefined;
+    attributes: {
+      name_form: string;
+      card_prewiew: {
+        data?: {
+          attributes: {
+            url: string;
+          };
+        };
+      };
+    };
   };
-
-  const thumbnailContainerClass = classNames(styles.thumbnailContainer, {
-    [styles.smallPreview]: smallPreview,
-  });
-
-  const thumbnailImageClass = classNames(styles.thumbnailImage, {
-    [styles.smallPreview]: smallPreview,
-  });
-
-  return (
-    <div className={styles.fileTile} onClick={onClick}>
-      <div className={thumbnailContainerClass}>
-        <img
-          src={previewSrc}
-          className={thumbnailImageClass}
-          alt="Thumbnail-img"
-          data-testid="template-thumbnail"
-        />
-      </div>
-      <div className={styles.name}>
-        <div className={styles.nameText} title={item.attributes.name_form}>
-          {item.attributes.name_form}
-        </div>
-      </div>
-
-      <div className={styles.infoIcon} onClick={handleInfoClick}>
-        <ReactSVG src={InfoReactSvgUrl} className={styles.icon} />
-      </div>
-    </div>
-  );
-};
-
-export default FileTile;
+  smallPreview: boolean;
+  onClickInfo: (e: React.MouseEvent) => void;
+  onClick: () => void;
+}

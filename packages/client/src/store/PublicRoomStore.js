@@ -238,11 +238,16 @@ class PublicRoomStore {
   };
 
   gotoFolder = (res, key) => {
+    const categoryType =
+      res.isRoom || res.isRoomMember
+        ? CategoryType.Room
+        : CategoryType.SharedWithMe;
+
     const filter = FilesFilter.getDefault();
 
     const subFolder = new URLSearchParams(window.location.search).get("folder");
 
-    const url = getCategoryUrl(CategoryType.Shared);
+    const url = getCategoryUrl(categoryType);
 
     filter.folder = subFolder || res.id;
     filter.key = key;
@@ -274,11 +279,12 @@ class PublicRoomStore {
 
         const currentUrl = window.location.href;
 
+        const isNotRoomsSection = !currentUrl.includes("/rooms/shared");
+
         if (
           !needPassword &&
-          (res?.shared || res?.isAuthenticated) &&
-          !currentUrl.includes("/rooms/shared") &&
-          (res.isRoom || res.isRoomMember)
+          isNotRoomsSection &&
+          (res?.shared || res?.isAuthenticated)
         ) {
           return this.gotoFolder(res, key);
         }

@@ -112,7 +112,7 @@ const StyledRow = styled(Row)`
     margin-inline-start: 6px;
   }
 
-  .row-header-title {
+  .checkbox-text {
     color: ${(props) => props.theme.client.settings.migration.tableHeaderText};
     font-weight: 600;
     font-size: 12px;
@@ -165,9 +165,9 @@ const RowView = (props: RowViewProps) => {
                   isIndeterminate={isIndeterminate}
                   isChecked={isChecked}
                   onChange={toggleAll}
+                  label={t("Common:Name")}
                 />
               ) : null}
-              <Text className="row-header-title">{t("Common:Name")}</Text>
             </div>
           </StyledRow>
 

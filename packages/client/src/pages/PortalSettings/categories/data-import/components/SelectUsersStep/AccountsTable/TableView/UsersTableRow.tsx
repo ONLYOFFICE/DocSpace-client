@@ -38,7 +38,7 @@ const StyledTableRow = styled(TableRow)`
     text-overflow: ellipsis;
   }
 
-  .username {
+  .checkbox-text {
     font-size: 13px;
     font-weight: 600;
     color: ${(props) => props.theme.client.settings.migration.subtitleColor};
@@ -86,8 +86,11 @@ const UsersTableRow = (props: UsersTableRowProps) => {
   return (
     <StyledTableRow onClick={toggleAccount}>
       <TableCell className="checkboxWrapper">
-        <Checkbox isChecked={isChecked} onChange={toggleAccount} />
-        <Text className="username">{displayName}</Text>
+        <Checkbox
+          isChecked={isChecked}
+          onChange={toggleAccount}
+          label={displayName}
+        />
       </TableCell>
 
       <TableCell>

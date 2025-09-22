@@ -75,13 +75,11 @@ const Footer = ({
       {showDeleteProfileCheckbox ? (
         <div className="delete-profile-container">
           <Checkbox
+            label={t("DataReassignmentDialog:DeleteProfileIsFinished")}
             className="delete-profile-checkbox"
             isChecked={isDeleteProfile}
             onClick={onToggleDeleteProfile}
           />
-          <Text fontSize="13px" fontWeight="400" lineHeight="20px" noSelect>
-            {t("DataReassignmentDialog:DeleteProfileIsFinished")}
-          </Text>
         </div>
       ) : null}
       <div className="button-wrapper">

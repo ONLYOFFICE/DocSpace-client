@@ -63,8 +63,7 @@ const StorageManagementWrapper = (props) => {
     ready && setDocumentTitle(t("Settings:StorageManagement"));
   }, [ready]);
 
-  if (showPortalSettingsLoader || !isInit)
-    return <SettingsStorageManagementSkeleton />;
+  if (showPortalSettingsLoader) return <SettingsStorageManagementSkeleton />;
 
   return (
     <StyledBody>

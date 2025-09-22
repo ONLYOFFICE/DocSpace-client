@@ -3,7 +3,7 @@
   "content": "Provide a choice (web or app)",
   "content_en_sha1_hash": "c9fd6c7fc15f2174a7e0860621d49b561ee899ac",
   "created_at": "2025-05-19T21:30:52.331Z",
-  "updated_at": "2025-08-04T07:30:01.285Z",
+  "updated_at": "2025-09-17T13:43:01.724Z",
   "comment": {
     "text": "This translation key is used to display a label for selecting whether to open a link via web or app. It appears in a UI element where users can customize their preferences for a specific feature, likely a button or dialog.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/configure-deep-link.tsx",
-      "line_number": 165,
+      "line_number": 191,
       "context": "orientation=\"vertical\"\n spacing=\"8px\"\n options={[\n {\n id: \"provide-a-choice\",\n label: t(\"ProvideChoice\"),\n value: 0,\n dataTestId: \"deep_link_provide-a-choice\",\n },\n {\n id: \"by-web\",",
       "module": "/packages/client"
     }

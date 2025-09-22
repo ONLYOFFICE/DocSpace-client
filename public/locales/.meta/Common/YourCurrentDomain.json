@@ -3,7 +3,7 @@
   "content": "Your current domain",
   "content_en_sha1_hash": "b3923c670b1406884e6e252bae5cd97477f25260",
   "created_at": "2025-05-26T07:15:49.720Z",
-  "updated_at": "2025-08-04T07:30:01.288Z",
+  "updated_at": "2025-09-17T13:43:01.727Z",
   "comment": {
     "text": "This translation key is used to display \"Your current domain\" in various UI elements, such as settings pages and input fields, to provide users with clear information about their active domain. It appears on screens related to domain management and DNS settings, where users can edit or configure their domain details.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/dns-settings.js",
-      "line_number": 249,
+      "line_number": 260,
       "context": "{t(\"DNSSettingsMobile\")}\n </div>\n <FieldContainer\n id=\"fieldContainerDNSSettings\"\n className=\"field-container-width settings_unavailable\"\n labelText={`${t(\"Common:YourCurrentDomain\")}`}\n isVertical\n >\n <TextInput\n {...textInputProps}\n isDisabled",
       "module": "/packages/client"
     },

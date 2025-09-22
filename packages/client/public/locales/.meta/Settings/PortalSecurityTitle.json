@@ -3,7 +3,7 @@
   "content": "This subsection allows you to provide users with secure and convenient ways to access the portal.",
   "content_en_sha1_hash": "0f3b230f6983fda1db2a358a7aa46ce3c5840a0f",
   "created_at": "2025-05-19T21:30:52.300Z",
-  "updated_at": "2025-06-18T17:11:42.490Z",
+  "updated_at": "2025-09-17T13:43:01.870Z",
   "comment": {
     "text": "This translation key is used for the subtitle displayed next to a button or similar element that allows users to access the secure portal. It provides a brief description of the functionality offered by this section, helping users understand its purpose in the portal settings page.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 138,
+      "line_number": 139,
       "context": "return (\n <MainContainer\n className=\"desktop-view\"\n withoutExternalLink={!helpCenterDomain}\n >\n <Text className=\"subtitle\">{t(\"PortalSecurityTitle\")}</Text>\n \n <Text fontSize=\"16px\" fontWeight=\"700\">\n {t(\"SettingPasswordTittle\")}\n </Text>",
       "module": "/packages/client"
     }

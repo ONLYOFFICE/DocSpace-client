@@ -51,6 +51,10 @@ const StandalonePage = (props) => {
     salesEmail,
     isEnterprise,
     showPortalSettingsLoader,
+    docspaceFaqUrl,
+    licenseQuota,
+    openOnNewPage,
+    logoText,
   } = props;
 
   const { t, ready } = useTranslation("Common");
@@ -82,6 +86,10 @@ const StandalonePage = (props) => {
       trialDaysLeft={trialDaysLeft}
       paymentDate={paymentDate}
       isEnterprise={isEnterprise}
+      docspaceFaqUrl={docspaceFaqUrl}
+      licenseQuota={licenseQuota}
+      openOnNewPage={openOnNewPage}
+      logoText={logoText}
     />
   );
 };
@@ -92,6 +100,8 @@ export default inject(
     paymentStore,
     currentTariffStatusStore,
     clientLoadingStore,
+    settingsStore,
+    filesSettingsStore,
   }) => {
     const {
       isInitPaymentPage,
@@ -101,6 +111,7 @@ export default inject(
       isLicenseCorrect,
       buyUrl,
       salesEmail,
+      licenseQuota,
     } = paymentStore;
     const { isLoaded: isLoadedCurrentQuota, isTrial } = currentQuotaStore;
     const {
@@ -113,6 +124,10 @@ export default inject(
     } = currentTariffStatusStore;
 
     const { showPortalSettingsLoader } = clientLoadingStore;
+
+    const { docspaceFaqUrl, logoText } = settingsStore;
+
+    const { openOnNewPage } = filesSettingsStore;
 
     return {
       isTrial,
@@ -131,6 +146,10 @@ export default inject(
       salesEmail,
       isEnterprise,
       showPortalSettingsLoader,
+      docspaceFaqUrl,
+      licenseQuota,
+      openOnNewPage,
+      logoText,
     };
   },
 )(observer(StandalonePage));

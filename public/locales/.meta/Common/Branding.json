@@ -3,7 +3,7 @@
   "content": "Branding",
   "content_en_sha1_hash": "d17dc3843de8e54fc084f0b952690209018ca128",
   "created_at": "2025-05-26T07:15:40.963Z",
-  "updated_at": "2025-08-21T11:22:39.862Z",
+  "updated_at": "2025-09-17T13:43:01.739Z",
   "comment": {
     "text": "The \"Branding\" translation key is used to display the name of a portal setting category in the UI. It is shown on a settings page and appears as part of the data structure in the /packages/client/src/pages/PortalSettings/categories/common/index.js file. Translators should provide a phrase that describes this concept, commonly found in branding or marketing contexts.",
     "is_auto": true,
@@ -17,9 +17,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/index.js",
-      "line_number": 75,
-      "context": "];\n \n if (!isCommunity) {\n data.splice(1, 0, {\n id: \"branding\",\n name: t(\"Common:Branding\"),\n content: <Branding />,\n });\n }\n \n const getCurrentTabId = () => {",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/index.tsx",
+      "line_number": 120,
+      "context": "];\n \n if (!isCommunity) {\n data.splice(1, 0, {\n id: \"branding\",\n name: t(\"Common:Branding\"),\n content: <Branding />,\n onClick: async () => {\n clearAbortControllerArr();\n await getBrandingData();\n },",
       "module": "/packages/client"
     },
     {

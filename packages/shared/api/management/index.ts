@@ -162,3 +162,16 @@ export const getAvailablePortals = async (data: {
 
   return res.tenants;
 };
+
+export async function createLicenseQuotaReport() {
+  const res = (await request({
+    baseURL,
+    method: "post",
+    url: "/portal/licensequota/report",
+    params: {
+      useCache: false,
+    },
+  })) as { result: string };
+
+  return res.result;
+}

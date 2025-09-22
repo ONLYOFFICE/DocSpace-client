@@ -3,7 +3,7 @@
   "content": "Guests and Users cannot be assigned as Room managers. Only Room and {{productName}} admins are suitable for the specified role.",
   "content_en_sha1_hash": "c301475a90b7e7caea7bcb0e1ce1edfacec602b6",
   "created_at": "2025-05-19T21:30:54.739Z",
-  "updated_at": "2025-05-24T09:47:36.152Z",
+  "updated_at": "2025-09-17T13:43:01.663Z",
   "comment": {
     "text": "This translation key is used to display a warning message when users or guests are assigned as room managers. It informs the user that only certain admins (room and {{productName}}) are suitable for this role. This message appears in an invite panel and alerts users about accessibility restrictions.",
     "is_auto": true,
@@ -15,6 +15,18 @@
       "line_number": 71,
       "context": "item.access = freeRole.access;\n item.warning = item.isGroup\n ? t(\"GroupMaxAvailableRoleWarning\", {\n roleName: freeRole.label,\n })\n : t(\"UserMaxAvailableRoleWarning\", {\n productName: t(\"Common:ProductName\"),\n });\n return item;\n };",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/Members.utils.ts",
+      "line_number": 48,
+      "context": "type: \"admin\",\n },\n roomAdmin: {\n key: \"roomAdmin\",\n label: this.t(\"Common:RoomManager\"),\n tooltip: this.t(\"InviteDialog:UserMaxAvailableRoleWarning\", {\n productName: this.t(\"Common:ProductName\"),\n }),\n access: ShareAccessRights.RoomManager,\n type: \"manager\",\n },",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/utils/getAccessOptions.ts",
+      "line_number": 124,
+      "context": "},\n roomManager: {\n key: \"roomManager\",\n label: t(\"Common:RoomManager\"),\n description: getRoomAdminDescription(roomType, t),\n tooltip: t(\"UserMaxAvailableRoleWarning\", {\n productName: t(\"Common:ProductName\"),\n }),\n ...(!standalone && { quota: t(\"Common:Paid\") }),\n color: globalColors.favoritesStatus,\n access:",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

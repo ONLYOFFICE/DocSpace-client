@@ -394,7 +394,12 @@ const ContextMenu = (props: ContextMenuProps) => {
   };
 
   const onClickBackdrop = () => {
-    setVisible(false);
+    // Use full hide path to ensure submenu/mobile state is reset properly
+    try {
+      hide(new MouseEvent("click") as unknown as React.MouseEvent);
+    } catch {
+      setVisible(false);
+    }
   };
 
   React.useEffect(() => {

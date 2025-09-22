@@ -38,6 +38,7 @@ type AccessOptionType = {
 
   color?: string;
   quota?: string;
+  tooltip?: string;
 };
 
 type SeparatorOptionType = {
@@ -120,6 +121,9 @@ export const getAccessOptions = (
       key: "roomManager",
       label: t("Common:RoomManager"),
       description: getRoomAdminDescription(roomType, t),
+      tooltip: t("UserMaxAvailableRoleWarning", {
+        productName: t("Common:ProductName"),
+      }),
       ...(!standalone && { quota: t("Common:Paid") }),
       color: globalColors.favoritesStatus,
       access:

@@ -61,6 +61,8 @@ type ItemData = {
   formFillingStatus?: FileFillingFormStatus;
   customFilterEnabled?: boolean;
   vectorizationStatus?: TFile["vectorizationStatus"];
+  lockedBy?: string;
+  locked?: boolean;
 };
 
 export type BadgesProps = {
@@ -76,6 +78,7 @@ export type BadgesProps = {
   setConvertDialogVisible?: () => void;
   onUnpinClick?: () => void;
   onUnmuteClick?: () => void;
+  onClickLock?: () => void;
   isMutedBadge?: boolean;
   isTrashFolder?: boolean;
   isArchiveFolderRoot?: boolean;

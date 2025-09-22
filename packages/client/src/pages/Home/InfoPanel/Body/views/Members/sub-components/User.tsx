@@ -79,6 +79,7 @@ const User = ({
   const theme = useTheme();
   const { t } = useTranslation([
     "InfoPanel",
+    "InviteDialog",
     "Common",
     "Translations",
     "People",

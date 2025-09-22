@@ -107,6 +107,7 @@ const SectionHeaderContent = (props) => {
     isEmptyArchive,
 
     isRoom,
+    roomType,
     isGroupMenuBlocked,
 
     onClickBack,
@@ -190,6 +191,7 @@ const SectionHeaderContent = (props) => {
     setChangePasswordVisible,
     setChangeAvatarVisible,
     setChangeNameVisible,
+    getIcon,
     contactsTab,
   } = props;
 
@@ -560,6 +562,60 @@ const SectionHeaderContent = (props) => {
         ? getAccountsTitle()
         : title;
 
+  const titleIcon = getTitleIcon();
+
+  const contextMenuHeader = React.useMemo(() => {
+    const srcLogo = selectedFolder?.logo || null;
+    const title = currentTitle || selectedFolder?.title || "";
+    const headerBadgeUrl = titleIcon.includes("public-room") ? titleIcon : "";
+
+    const iconUrl = getIcon(
+      32,
+      selectedFolder?.fileExst,
+      selectedFolder?.providerKey,
+      selectedFolder?.contentLength,
+      isRoom ? roomType : undefined,
+      selectedFolder?.isArchive,
+      selectedFolder?.type,
+    );
+
+    const normalizedCover =
+      typeof srcLogo?.cover === "string"
+        ? { data: srcLogo?.cover, id: "" }
+        : srcLogo?.cover;
+
+    const normalizedLogo =
+      typeof srcLogo === "object" &&
+      srcLogo &&
+      !srcLogo?.medium &&
+      srcLogo?.original
+        ? { ...srcLogo, medium: srcLogo?.original }
+        : srcLogo;
+
+    return {
+      title,
+      icon: normalizedLogo?.medium || iconUrl,
+      original: normalizedLogo?.original,
+      large: normalizedLogo?.large,
+      medium: normalizedLogo?.medium,
+      small: normalizedLogo?.small,
+      color: normalizedLogo?.color,
+      cover: normalizedCover,
+      badgeUrl: headerBadgeUrl,
+    };
+  }, [
+    selectedFolder?.logo,
+    selectedFolder?.title,
+    currentTitle,
+    isRoom,
+    getIcon,
+    selectedFolder?.fileExst,
+    selectedFolder?.providerKey,
+    selectedFolder?.contentLength,
+    selectedFolder?.isArchive,
+    selectedFolder?.type,
+  ]);
+
   const currentCanCreate =
     isAIRoom && !isKnowledgeTab ? false : security?.Create;
 
@@ -595,8 +651,6 @@ const SectionHeaderContent = (props) => {
 
   const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
   const burgerLogo = getLogoUrl(WhiteLabelLogoType.LeftMenu, !theme.isBase);
-
-  const titleIcon = getTitleIcon();
 
   const titleIconTooltip = getTitleIconTooltip();
 
@@ -756,6 +810,7 @@ const SectionHeaderContent = (props) => {
                   !allowInvitingMembers ? isPlusButtonVisible() : true
                 }
                 showBackButton={isProfile}
+                contextMenuHeader={isProfile ? undefined : contextMenuHeader}
               />
               {showSignInButton ? (
                 <Button
@@ -1017,6 +1072,7 @@ export default inject(
       isRootFolder: isPublicRoom && !folderPath?.length ? true : isRoot,
       title,
       isRoom,
+      roomType,
 
       navigationPath: folderPath,
 
@@ -1128,6 +1184,7 @@ export default inject(
       setChangePasswordVisible,
       setChangeAvatarVisible,
       setChangeNameVisible,
+      getIcon: filesStore.filesSettingsStore.getIcon,
     };
   },
 )(

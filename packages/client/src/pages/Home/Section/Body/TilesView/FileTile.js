@@ -224,6 +224,7 @@ const FileTile = (props) => {
     children: tileContent,
     forwardRef: tileRef,
     dataTestId,
+    badgeUrl,
   };
 
   const fileTile = (

@@ -26,63 +26,86 @@
 
 import uniqueid from "lodash/uniqueId";
 import { inject, observer } from "mobx-react";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, FC } from "react";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import styled from "styled-components";
-import { InfiniteLoaderComponent } from "@docspace/shared/components/infinite-loader";
+
 import { getCountTilesInRow } from "@docspace/shared/utils";
+import classNames from "classnames";
 
-import { StyledCard, StyledItem } from "./StyledTileView";
+import Grid from "./Grid";
 
-const StyledSkeletonTile = styled.div`
-  .loader-container {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    box-sizing: border-box;
-    padding: 10px;
-    width: 100%;
-    aspect-ratio: ${(props) => (props.smallPreview ? "229 / 162" : "12 /16")};
-  }
+import {
+  CardProps,
+  ItemProps,
+  InfiniteGridInjectedProps,
+  SkeletonTileProps,
+  TStore,
+} from "./InfiniteGrid.types";
+import styles from "./InfiniteGrid.module.scss";
 
-  .loader-title {
-    width: 70%;
-  }
-`;
-
-const Card = ({ children, smallPreview, ...rest }) => {
-  const isSubmitToGalleryTile = children?.props?.isSubmitTile === true;
+const SkeletonTile: FC<SkeletonTileProps> = ({ smallPreview, className }) => {
+  const containerClass = classNames(styles.loaderContainer, {
+    [styles.smallPreview]: smallPreview,
+    [styles.largePreview]: !smallPreview,
+  });
 
   return (
-    <StyledCard
-      className="Card"
-      $isDoubleWidth={Boolean(smallPreview && isSubmitToGalleryTile)}
-      smallPreview={smallPreview}
-      {...rest}
-    >
-      {children}
-    </StyledCard>
+    <div className={classNames(styles.skeletonTile, className)}>
+      <div className={containerClass}>
+        <RectangleSkeleton height="100%" width="100%" animate />
+        <div className={styles.loaderTitle}>
+          <RectangleSkeleton height="20px" animate />
+        </div>
+      </div>
+    </div>
   );
 };
 
-const Item = ({ children, className, smallPreview, ...rest }) => {
+const Card: FC<CardProps> = ({
+  children,
+  smallPreview,
+  className,
+  ...rest
+}) => {
+  const isSubmitToGalleryTile = (children as any)?.props?.isSubmitTile === true;
+  const cardClass = classNames(
+    styles.card,
+    "Card",
+    {
+      [styles.doubleWidth]: Boolean(smallPreview && isSubmitToGalleryTile),
+    },
+    className,
+  );
+
   return (
-    <StyledItem
-      className={`Item ${className}`}
-      smallPreview={smallPreview}
-      {...rest}
-    >
+    <div className={cardClass} {...rest}>
       {children}
-    </StyledItem>
+    </div>
   );
 };
 
-const InfiniteGrid = (props) => {
+const Item: FC<ItemProps> = ({ children, className, isOneTile, ...rest }) => {
+  const itemClass = classNames(
+    styles.item,
+    "Item",
+    {
+      [styles.oneTile]: isOneTile,
+    },
+    className,
+  );
+
+  return (
+    <div className={itemClass} {...rest}>
+      {children}
+    </div>
+  );
+};
+
+const InfiniteGrid: FC<InfiniteGridInjectedProps> = (props) => {
   const {
     children,
     hasMoreFiles,
     fetchMoreFiles,
-    filesLength,
     className,
     isShowOneTile,
     smallPreview,
@@ -90,74 +113,34 @@ const InfiniteGrid = (props) => {
     ...rest
   } = props;
 
-  // Pass isTemplates=true to align with template breakpoints
-  const [countTilesInRow, setCountTilesInRow] = useState(
+  const [countTilesInRow, setCountTilesInRow] = useState<number>(
     getCountTilesInRow(false, false, true, isShowOneTile),
   );
-  const [averageCardHeight, setAverageCardHeight] = useState(null);
-  const containerRef = useRef(null);
 
-  let cards = [];
-  const list = [];
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  // Function to calculate the height of existing cards
-  const calculateCardHeight = (container) => {
-    if (!container) return null;
+  let cards: React.ReactElement[] = [];
+  const list: React.ReactElement[] = [];
 
-    // Try multiple selectors to find existing cards
-    let existingCards = container.querySelectorAll(".Card:not(.tiles-loader)");
-
-    if (existingCards.length === 0) {
-      existingCards = container.querySelectorAll("[class*='StyledCard']");
-    }
-
-    if (existingCards.length === 0) return null;
-
-    let totalHeight = 0;
-    let validCards = 0;
-
-    existingCards.forEach((card) => {
-      const height = card.offsetHeight;
-
-      if (height > 0) {
-        totalHeight += height;
-        validCards++;
-      }
-    });
-
-    return validCards > 0 ? Math.round(totalHeight / validCards) : null;
-  };
-
-  // Update average height when component updates
-  useEffect(() => {
-    if (containerRef.current) {
-      const height = calculateCardHeight(containerRef.current);
-      if (height && height !== averageCardHeight) {
-        setAverageCardHeight(height);
-      }
-    }
-  });
-
-  const addItemToList = (key, clear, isOneTile) => {
+  const addItemToList = (
+    key: string,
+    clear: boolean,
+    isOneTile?: boolean,
+  ): void => {
     list.push(
-      <Item
-        key={key}
-        className="isTemplateGallery"
-        isOneTile={isOneTile}
-        smallPreview={smallPreview}
-      >
+      <Item key={key} className="isTemplateGallery" isOneTile={isOneTile}>
         {cards}
       </Item>,
     );
     if (clear) cards = [];
   };
 
-  const setTilesCount = () => {
+  const setTilesCount = (): void => {
     const newCount = getCountTilesInRow(false, false, true, isShowOneTile);
     if (countTilesInRow !== newCount) setCountTilesInRow(newCount);
   };
 
-  const onResize = () => {
+  const onResize = (): void => {
     setTilesCount();
   };
 
@@ -180,23 +163,11 @@ const InfiniteGrid = (props) => {
       for (let col = 0; col < countTilesInRow; col++) {
         const key = `skeleton-loader_${row}_${col}`;
         cards.push(
-          <StyledSkeletonTile
+          <SkeletonTile
             key={key}
             className="tiles-loader isTemplate Card"
             smallPreview={smallPreview}
-          >
-            <div className="loader-container">
-              <RectangleSkeleton height="100%" width="100%" animate />
-
-              <div className="loader-title">
-                <RectangleSkeleton
-                  className="title-skeleton"
-                  height="20px"
-                  animate
-                />
-              </div>
-            </div>
-          </StyledSkeletonTile>,
+          />,
         );
       }
 
@@ -209,7 +180,7 @@ const InfiniteGrid = (props) => {
     React.Children.map(children, (child) => {
       if (child) {
         // Check if this is a SubmitToGalleryTile that will span 2 columns
-        const isSubmitTile = child?.props?.isSubmitTile === true;
+        const isSubmitTile = (child as any)?.props?.isSubmitTile === true;
         const elementSpan = smallPreview && isSubmitTile ? 2 : 1;
 
         // If adding this element would exceed the row capacity, start a new row
@@ -260,19 +231,11 @@ const InfiniteGrid = (props) => {
       ) {
         const key = `tiles-loader_${countTilesInRow - cards.length}`;
         cards.push(
-          <StyledSkeletonTile
+          <SkeletonTile
             key={key}
             className="tiles-loader isTemplate Card"
             smallPreview={smallPreview}
-          >
-            <div className="loader-container">
-              <RectangleSkeleton height="100%" width="100%" animate />
-
-              <div className="loader-title">
-                <RectangleSkeleton height="20px" animate />
-              </div>
-            </div>
-          </StyledSkeletonTile>,
+          />,
         );
       }
 
@@ -286,33 +249,26 @@ const InfiniteGrid = (props) => {
 
   return (
     <div ref={containerRef}>
-      <InfiniteLoaderComponent
-        viewAs="tileDynamicHeight"
+      <Grid
         countTilesInRow={countTilesInRow}
-        filesLength={filesLength}
         hasMoreFiles={hasMoreFiles}
-        itemCount={hasMoreFiles ? list.length + 1 : list.length}
         loadMoreItems={fetchMoreFiles}
-        className={`TileList ${className}`}
         smallPreview={smallPreview}
         isOneTile={isShowOneTile}
         {...rest}
       >
         {list}
-      </InfiniteLoaderComponent>
+      </Grid>
     </div>
   );
 };
 
-export default inject(({ oformsStore }) => {
+export default inject<TStore>(({ oformsStore }) => {
   const { oformFiles, hasMoreForms, fetchMoreOforms } = oformsStore;
-
-  const filesLength = oformFiles?.length;
 
   return {
     filesList: oformFiles,
     hasMoreFiles: hasMoreForms,
     fetchMoreFiles: fetchMoreOforms,
-    filesLength,
   };
 })(observer(InfiniteGrid));

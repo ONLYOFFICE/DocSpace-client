@@ -30,7 +30,6 @@ import { MAX_INFINITE_LOADER_SHIFT, isMobile } from "../../utils/device";
 
 import ListComponent from "./sub-components/List";
 import GridComponent from "./sub-components/Grid";
-import GridDynamicHeight from "./sub-components/GridDynamicHeight";
 
 import { InfiniteLoaderProps } from "./InfiniteLoader.types";
 
@@ -40,14 +39,9 @@ const InfiniteLoaderComponent = (props: InfiniteLoaderProps) => {
   const [scrollTop, setScrollTop] = useState(0);
   const [showSkeleton, setShowSkeleton] = useState(false);
 
-  const scroll =
-    viewAs === "tileDynamicHeight"
-      ? document.querySelector(
-          "#scroll-template-gallery .scroll-wrapper > .scroller",
-        )
-      : isMobile()
-        ? document.querySelector("#customScrollBar .scroll-wrapper > .scroller")
-        : document.querySelector("#sectionScroll .scroll-wrapper > .scroller");
+  const scroll = isMobile()
+    ? document.querySelector("#customScrollBar .scroll-wrapper > .scroller")
+    : document.querySelector("#sectionScroll .scroll-wrapper > .scroller");
 
   const onScroll = (e: Event) => {
     const eventTarget = e.target as HTMLElement;
@@ -78,13 +72,7 @@ const InfiniteLoaderComponent = (props: InfiniteLoaderProps) => {
 
   if (isLoading) return null;
 
-  return viewAs === "tileDynamicHeight" ? (
-    <GridDynamicHeight
-      scroll={scroll ?? window}
-      showSkeleton={showSkeleton}
-      {...props}
-    />
-  ) : viewAs === "tile" ? (
+  return viewAs === "tile" ? (
     <GridComponent
       scroll={scroll ?? window}
       showSkeleton={showSkeleton}

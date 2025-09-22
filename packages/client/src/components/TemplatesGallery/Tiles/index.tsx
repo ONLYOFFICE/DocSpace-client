@@ -34,7 +34,7 @@ import type { TilesProps } from "./Tiles.types";
 import FileTile from "./FileTile";
 
 import { StyledTileContainer } from "./StyledTileView";
-import InfiniteGrid from "./InfiniteGrid";
+import InfiniteGrid from "../InfiniteGrid";
 import SubmitToGalleryTile from "./SubmitToGalleryTile";
 
 const Tiles: FC<TilesProps> = ({

@@ -26,42 +26,32 @@
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import classNames from "classnames";
-import styled from "styled-components";
-import { RectangleSkeleton } from "../../../skeletons/rectangle";
-import { GridDynamicHeightProps } from "../InfiniteLoader.types";
-import styles from "../InfiniteLoader.module.scss";
+import { IndexRange } from "react-virtualized";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-type SkeletonTileProps = {
+import styles from "./InfiniteGrid.module.scss";
+
+type GridProps = {
+  children: React.ReactNode[];
+  hasMoreFiles: boolean;
+  loadMoreItems: (params: IndexRange) => Promise<void>;
+  listClassName?: string;
+  onScroll?: () => void;
   smallPreview?: boolean;
+  countTilesInRow?: number;
+  isOneTile?: boolean;
 };
 
-const StyledSkeletonTile = styled.div<SkeletonTileProps>`
-  .loader-container {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    box-sizing: border-box;
-    padding: 10px;
-    width: 100%;
-    aspect-ratio: ${(props) => (props.smallPreview ? "229 / 162" : "12 /16")};
-  }
-
-  .loader-title {
-    width: 70%;
-  }
-`;
-
-const GridDynamicHeight = ({
+const Grid = ({
   children,
   hasMoreFiles,
   loadMoreItems,
   listClassName,
-  scroll,
   onScroll,
   smallPreview = false,
   countTilesInRow = 1,
   isOneTile,
-}: GridDynamicHeightProps) => {
+}: GridProps) => {
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
@@ -94,14 +84,14 @@ const GridDynamicHeight = ({
       handleLoadMoreItems();
     }
 
-    // Call parent onScroll if provided
-    if (onScroll) {
-      onScroll();
-    }
+    if (onScroll) onScroll();
   }, [hasMoreFiles, isLoadingMore, handleLoadMoreItems, onScroll]);
 
-  // Set up scroll listener
   useEffect(() => {
+    const scroll = document.querySelector(
+      "#scroll-template-gallery .scroll-wrapper > .scroller",
+    );
+
     const scrollElement = scroll || scrollContainerRef.current;
     if (scrollElement) {
       scrollElement.addEventListener("scroll", handleScroll);
@@ -116,27 +106,34 @@ const GridDynamicHeight = ({
 
     for (let i = 0; i < countTilesInRow; i += 1) {
       skeletons.push(
-        <StyledSkeletonTile
+        <div
           key={`skeleton-${i}`}
-          className="tiles-loader isTemplate Card"
-          smallPreview={smallPreview}
+          className={classNames(
+            styles.skeletonTile,
+            "tiles-loader isTemplate Card",
+          )}
         >
-          <div className="loader-container">
+          <div
+            className={classNames(styles.loaderContainer, {
+              [styles.smallPreview]: smallPreview,
+              [styles.largePreview]: !smallPreview,
+            })}
+          >
             <RectangleSkeleton height="100%" width="100%" animate />
 
-            <div className="loader-title">
+            <div className={styles.loaderTitle}>
               <RectangleSkeleton height="20px" animate />
             </div>
           </div>
-        </StyledSkeletonTile>,
+        </div>,
       );
     }
 
     return (
       <div className="Item">
         <div
-          className={classNames(styles.skeleton, {
-            [styles.isOneTile]: isOneTile,
+          className={classNames(styles.item, {
+            [styles.oneTile]: isOneTile,
           })}
         >
           {skeletons}
@@ -188,4 +185,4 @@ const GridDynamicHeight = ({
   );
 };
 
-export default GridDynamicHeight;
+export default Grid;

@@ -24,30 +24,78 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { IndexRange } from "react-virtualized";
-import { TViewAs } from "../../types";
+.skeletonTile {
+  .loaderContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-sizing: border-box;
+    padding: 10px;
+    width: 100%;
 
-export type InfiniteLoaderProps = {
-  viewAs: TViewAs;
-  hasMoreFiles: boolean;
-  filesLength: number;
-  itemCount: number;
-  loadMoreItems: (params: IndexRange) => Promise<void>;
-  itemSize: number;
-  children: React.ReactNode[];
-  onScroll?: () => void;
-  isLoading?: boolean;
-  columnStorageName?: string;
-  columnInfoPanelStorageName?: string;
-  className?: string;
-  infoPanelVisible?: boolean;
-  countTilesInRow?: number;
-  showSkeleton?: boolean;
-  currentFolderId?: string | number;
-  smallPreview?: boolean;
-  isOneTile?: boolean;
-};
+    &.smallPreview {
+      aspect-ratio: 229 / 162;
+    }
 
-export type ListComponentProps = InfiniteLoaderProps & {
-  scroll: Element | (Window & typeof globalThis);
-};
+    &.largePreview {
+      aspect-ratio: 12 / 16;
+    }
+  }
+
+  .loaderTitle {
+    width: 70%;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+
+  /* Cards should all have same height with dynamic content */
+  &.Card {
+    height: 100%;
+  }
+
+  /* Double width for SubmitToGalleryTile when smallPreview is true */
+  &.doubleWidth {
+    grid-column: span 2;
+  }
+}
+
+.item {
+  display: grid;
+
+  /* Default: 2 FileTiles per row for screens < 600px */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
+  width: 100%;
+  box-sizing: border-box;
+  grid-gap: 16px;
+
+  /* Ensure all Cards in a row have identical heights */
+  :global(.Card) {
+    height: 100%;
+  }
+
+  @media (min-width: 600px) and (max-width: 839px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  @media (min-width: 840px) and (max-width: 1199px) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  @media (min-width: 1200px) and (max-width: 1439px) {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  @media (min-width: 1440px) {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  &.oneTile {
+    grid-template-columns: 1fr;
+  }
+}

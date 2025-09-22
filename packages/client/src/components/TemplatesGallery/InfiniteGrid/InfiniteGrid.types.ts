@@ -24,30 +24,49 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { ReactNode } from "react";
 import { IndexRange } from "react-virtualized";
-import { TViewAs } from "../../types";
 
-export type InfiniteLoaderProps = {
-  viewAs: TViewAs;
-  hasMoreFiles: boolean;
-  filesLength: number;
-  itemCount: number;
-  loadMoreItems: (params: IndexRange) => Promise<void>;
-  itemSize: number;
-  children: React.ReactNode[];
-  onScroll?: () => void;
-  isLoading?: boolean;
-  columnStorageName?: string;
-  columnInfoPanelStorageName?: string;
-  className?: string;
-  infoPanelVisible?: boolean;
+export interface CardProps {
+  children: ReactNode;
+  smallPreview: boolean;
   countTilesInRow?: number;
-  showSkeleton?: boolean;
-  currentFolderId?: string | number;
-  smallPreview?: boolean;
-  isOneTile?: boolean;
-};
+  className?: string;
+}
 
-export type ListComponentProps = InfiniteLoaderProps & {
-  scroll: Element | (Window & typeof globalThis);
-};
+export interface ItemProps {
+  children: ReactNode;
+  className: string;
+  isOneTile?: boolean;
+}
+
+export interface InfiniteGridProps {
+  children: ReactNode;
+  hasMoreFiles: boolean;
+  fetchMoreFiles: (params: IndexRange) => Promise<void>;
+  filesLength: number;
+  className?: string;
+  isShowOneTile?: boolean;
+  smallPreview: boolean;
+  showLoading?: boolean;
+  blockHeightSync?: boolean;
+  infoPanelVisible?: boolean;
+}
+
+export interface InfiniteGridInjectedProps extends InfiniteGridProps {
+  filesList: any[];
+}
+
+export interface SkeletonTileProps {
+  smallPreview: boolean;
+  className?: string;
+}
+
+// Store interface for MobX injection
+export interface TStore {
+  oformsStore: {
+    oformFiles: any[];
+    hasMoreForms: boolean;
+    fetchMoreOforms: (params: IndexRange) => Promise<void>;
+  };
+}

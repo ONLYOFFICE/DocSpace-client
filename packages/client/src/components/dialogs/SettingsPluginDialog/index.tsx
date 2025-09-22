@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useCallback, useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -40,7 +41,6 @@ import Header from "./sub-components/Header";
 import Info from "./sub-components/Info";
 import Footer from "./sub-components/Footer";
 import { SettingsPluginDialogProps } from "./SettingsPluginDialog.types";
-import { useCallback, useEffect, useState } from "react";
 
 const SettingsPluginDialog = ({
   plugin,

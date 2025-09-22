@@ -44,13 +44,9 @@ export interface InfiniteGridProps {
   children: ReactNode;
   hasMoreFiles: boolean;
   fetchMoreFiles: (params: IndexRange) => Promise<void>;
-  filesLength: number;
-  className?: string;
   isShowOneTile?: boolean;
   smallPreview: boolean;
-  showLoading?: boolean;
-  blockHeightSync?: boolean;
-  infoPanelVisible?: boolean;
+  showLoading: boolean;
 }
 
 export interface InfiniteGridInjectedProps extends InfiniteGridProps {
@@ -60,13 +56,4 @@ export interface InfiniteGridInjectedProps extends InfiniteGridProps {
 export interface SkeletonTileProps {
   smallPreview: boolean;
   className?: string;
-}
-
-// Store interface for MobX injection
-export interface TStore {
-  oformsStore: {
-    oformFiles: any[];
-    hasMoreForms: boolean;
-    fetchMoreOforms: (params: IndexRange) => Promise<void>;
-  };
 }

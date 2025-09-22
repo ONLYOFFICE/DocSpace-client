@@ -40,6 +40,8 @@ import SubmitToGalleryTile from "./SubmitToGalleryTile";
 const Tiles: FC<TilesProps> = ({
   tReady,
   oformFiles,
+  hasMoreFiles,
+  fetchMoreFiles,
   setGallerySelected,
   submitToGalleryTileIsVisible,
   canSubmitToFormGallery,
@@ -85,6 +87,9 @@ const Tiles: FC<TilesProps> = ({
     <StyledTileContainer className="tile-container">
       {viewMobile && !isShowInitSkeleton ? submitToGalleryTileNode : null}
       <InfiniteGrid
+        filesList={oformFiles}
+        hasMoreFiles={hasMoreFiles}
+        fetchMoreFiles={fetchMoreFiles}
         isShowOneTile={isShowOneTile}
         smallPreview={smallPreview}
         showLoading={isShowInitSkeleton}
@@ -113,6 +118,8 @@ export default inject<TStore>(
     theme: settingsStore.theme,
     oformFiles: oformsStore.oformFiles,
     hasGalleryFiles: oformsStore.hasGalleryFiles,
+    hasMoreFiles: oformsStore.hasMoreForms,
+    fetchMoreFiles: oformsStore.fetchMoreOforms,
     setGallerySelected: oformsStore.setGallerySelected,
     resetFilters: oformsStore.resetFilters,
     submitToGalleryTileIsVisible: oformsStore.submitToGalleryTileIsVisible,

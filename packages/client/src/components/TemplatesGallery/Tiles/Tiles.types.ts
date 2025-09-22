@@ -26,6 +26,7 @@
 
 import type { Key } from "react";
 import type { NavigateFunction } from "react-router";
+import type { IndexRange } from "react-virtualized";
 
 export interface TOformFile {
   id: Key | null | undefined;
@@ -34,6 +35,8 @@ export interface TOformFile {
 export interface TilesProps {
   tReady: boolean;
   oformFiles: TOformFile[];
+  hasMoreFiles: boolean;
+  fetchMoreFiles: (params: IndexRange) => Promise<void>;
   setOformFilesLoaded: (loaded: boolean) => void;
   isShowOneTile?: boolean;
   smallPreview: boolean;
@@ -43,6 +46,6 @@ export interface TilesProps {
   viewMobile: boolean;
   onCreateOform: (navigate: NavigateFunction) => void;
   setTemplatesGalleryVisible: (isVisible: boolean) => void;
-  isShowInitSkeleton?: boolean;
+  isShowInitSkeleton: boolean;
   setIsVisibleInfoPanelTemplateGallery: (visible: boolean) => void;
 }

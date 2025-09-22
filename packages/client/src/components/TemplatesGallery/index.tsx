@@ -104,19 +104,19 @@ const TemplateGallery = (props: {
     {
       id: "spreadsheet",
       name: "Spreadsheet",
-      content: <TilesContainer ext=".xlsx" />,
+      content: <TilesContainer ext=".xlsx" isShowInitSkeleton={false} />,
       onClick: async () => await getData(".xlsx"),
     },
     {
       id: "presentation",
       name: "Presentation",
-      content: <TilesContainer ext=".pptx" />,
+      content: <TilesContainer ext=".pptx" isShowInitSkeleton={false} />,
       onClick: async () => await getData(".pptx"),
     },
     {
       id: "forms",
       name: "Forms",
-      content: <TilesContainer ext=".pdf" />,
+      content: <TilesContainer ext=".pdf" isShowInitSkeleton={false} />,
       onClick: async () => await getData(".pdf"),
     },
   ];

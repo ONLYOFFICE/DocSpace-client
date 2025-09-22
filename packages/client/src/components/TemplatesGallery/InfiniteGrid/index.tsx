@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import uniqueid from "lodash/uniqueId";
-import { inject, observer } from "mobx-react";
 import React, { useEffect, useState, useRef, FC } from "react";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
@@ -39,7 +38,6 @@ import {
   ItemProps,
   InfiniteGridInjectedProps,
   SkeletonTileProps,
-  TStore,
 } from "./InfiniteGrid.types";
 import styles from "./InfiniteGrid.module.scss";
 
@@ -106,7 +104,6 @@ const InfiniteGrid: FC<InfiniteGridInjectedProps> = (props) => {
     children,
     hasMoreFiles,
     fetchMoreFiles,
-    className,
     isShowOneTile,
     smallPreview,
     showLoading,
@@ -263,12 +260,4 @@ const InfiniteGrid: FC<InfiniteGridInjectedProps> = (props) => {
   );
 };
 
-export default inject<TStore>(({ oformsStore }) => {
-  const { oformFiles, hasMoreForms, fetchMoreOforms } = oformsStore;
-
-  return {
-    filesList: oformFiles,
-    hasMoreFiles: hasMoreForms,
-    fetchMoreFiles: fetchMoreOforms,
-  };
-})(observer(InfiniteGrid));
+export default InfiniteGrid;

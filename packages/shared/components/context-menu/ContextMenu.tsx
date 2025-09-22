@@ -108,6 +108,7 @@ const ContextMenu = (props: ContextMenuProps) => {
     headerOnlyMobile = false,
     dataTestId,
     maxHeightLowerSubmenu,
+    showDisabledItems,
   } = props;
 
   const onMenuClick = () => {
@@ -654,6 +655,7 @@ const ContextMenu = (props: ContextMenuProps) => {
                 withHeader={withHeader}
                 maxHeightLowerSubmenu={maxHeightLowerSubmenu}
                 menuHovered={menuHovered}
+                showDisabledItems={showDisabledItems}
               />
             )}
           </div>

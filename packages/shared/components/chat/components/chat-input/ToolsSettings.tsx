@@ -342,11 +342,13 @@ const ToolsSettings = () => {
         checked: webSearchEnabled && webSearchPortalEnabled,
         onClick: onWebSearchToggle,
         disabled: !webSearchPortalEnabled,
-        tooltip: <p>asd</p>,
+        getTooltipContent: () => (
+          <Text>
+            {t("ConnectWebSearch", { productName: t("Common:ProductName") })}
+          </Text>
+        ),
       },
-      ...(serverItems.length > 0 || showManageConnectionItem
-        ? [{ key: "separator-1", isSeparator: true }]
-        : []),
+      { key: "separator-1", isSeparator: true },
       ...serverItems,
       ...(serverItems.length > 0 && showManageConnectionItem
         ? [{ key: "separator-2", isSeparator: true }]
@@ -359,6 +361,7 @@ const ToolsSettings = () => {
         },
         icon: ManageConnectionsReactSvgUrl,
         disabled: !showManageConnectionItem,
+        getTooltipContent: () => <Text>{t("ConnectMCPServers")}</Text>,
       },
     ];
   }, [
@@ -390,6 +393,7 @@ const ToolsSettings = () => {
           model={model}
           onHide={hideMcpTools}
           maxHeightLowerSubmenu={360}
+          showDisabledItems
         />
       </div>
       {showManageConnections ? (

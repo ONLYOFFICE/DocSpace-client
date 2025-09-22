@@ -3,7 +3,7 @@
   "content": "Custom filter is enabled for this table. Users who opened the file will be able to personalize the data display in the table.",
   "content_en_sha1_hash": "a4cee544da647a31bf53a66e8b82b2c767dbc3d4",
   "created_at": "2025-05-19T21:30:55.411Z",
-  "updated_at": "2025-08-27T10:14:35.555Z",
+  "updated_at": "2025-09-19T15:39:23.324Z",
   "comment": {
     "text": "This translation key is used to display a tooltip explaining that custom filters are enabled for a table, allowing users who opened the file to personalize data display. It appears as a popup or tooltip on the \"Custom Filter\" button, guiding users on how to use this feature effectively. Translators should focus on conveying the core idea of enabling custom filtering for tables in their respective languages.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 239,
+      "line_number": 249,
       "context": ");\n \n const getTooltipContent = () => (\n <>\n <Text fontSize=\"12px\" fontWeight={400} noSelect>\n {t(\"CustomFilterEnableDiscription\")}\n </Text>\n {customFilterExternalLink ? (\n <Link\n type={LinkType.action}\n target={LinkTarget.blank}",
       "module": "/packages/shared"
     }

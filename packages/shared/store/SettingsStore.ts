@@ -812,6 +812,12 @@ class SettingsStore {
       : this.helpCenterDomain;
   }
 
+  get docspaceFaqUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.docspacefaq
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.docspacefaq}`
+      : this.helpCenterDomain;
+  }
+
   get limitedDevToolsBlockHelpUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.limiteddevtools
       ? `${this.helpCenterDomain}${this.helpCenterEntries.limiteddevtools}`

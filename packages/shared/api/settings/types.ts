@@ -228,6 +228,7 @@ export type THelpCenterEntries = {
   welcomepage: string;
   limiteddevtools: string;
   encryption: string;
+  docspacefaq: string;
 };
 
 export type TIntegrationsEntries = {

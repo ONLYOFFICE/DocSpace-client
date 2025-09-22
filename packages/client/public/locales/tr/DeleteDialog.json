@@ -6,8 +6,6 @@
   "DeleteGroupTitle": "Grubu sil",
   "DeleteItems": "Bu öğeleri silmek üzeresiniz. ",
   "DeleteItemsSharedNote": "Bunları birisiyle paylaştıysanız kullanılamayacaklarını lütfen unutmayın.",
-  "DeleteRoom": "Bu odayı silmek üzeresiniz. Onu geri yükleyemezsiniz.",
-  "DeleteRooms": "Bu odaları silmek üzeresiniz. Onları geri yükleyemezsiniz.",
   "DeleteSharedNote": "Bunu birisiyle paylaştıysanız kullanılamayacağını lütfen unutmayın.",
   "DeleteTemplate": "<1>«{{templateName}}»</1> adlı şablon odayı silmek istediğinize emin misiniz? Şablon geri yüklenemez.",
   "DeleteTemplates": "Seçilen oda şablonlarını silmek istediğinize emin misiniz? Bunlar geri yüklenemezler.",

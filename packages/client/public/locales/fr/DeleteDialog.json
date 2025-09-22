@@ -6,8 +6,6 @@
   "DeleteGroupTitle": "Supprimer le groupe",
   "DeleteItems": "Vous êtes sur le point de supprimer ces éléments. ",
   "DeleteItemsSharedNote": "Veuillez noter que si vous les avez partagés avec quelqu'un, ils deviendront indisponibles.",
-  "DeleteRoom": "Vous êtes sur le point de supprimer cette salle. Vous ne pourrez pas la restaurer.",
-  "DeleteRooms": "Vous êtes sur le point de supprimer ces salles. Vous ne pourrez pas les restaurer.",
   "DeleteSharedNote": "Veuillez noter que si vous l'avez partagé avec quelqu'un, il deviendra indisponible.",
   "DeleteTemplate": "Voulez-vous vraiment supprimer le modèle de salle <1>«{{templateName}}»</1> ? Le modèle ne peut pas être restauré.",
   "DeleteTemplates": "Voulez-vous vraiment supprimer les modèles de salle sélectionnés ? Ils ne peuvent pas être restaurés.",

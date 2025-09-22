@@ -61,6 +61,22 @@ import { TView, ViewProps } from "./View.types";
 
 const CURRENT_VIEW_STORAGE_KEY = "currentView";
 
+const getViewFromPathname = (pathname: string): TView => {
+  if (pathname.includes("customization")) return "customization";
+  if (pathname.includes("security")) return "security";
+  if (pathname.includes("restore")) return "restore";
+  if (pathname.includes("backup")) return "backup";
+  if (pathname.includes("integration")) return "integration";
+  if (pathname.includes("data-import")) return "data-import";
+  if (pathname.includes("management")) return "management";
+  if (pathname.includes("developer-tools")) return "developer-tools";
+  if (pathname.includes("delete-data")) return "delete-data";
+  if (pathname.includes("payments")) return "payments";
+  if (pathname.includes("bonus")) return "bonus";
+  if (pathname.includes("services")) return "services";
+  return "";
+};
+
 const View = ({
   setIsPortalSettingsLoading,
   loadBaseInfo,
@@ -92,7 +108,9 @@ const View = ({
   const { t } = useTranslation();
 
   const [currentView, setCurrentView] = React.useState<TView>(() => {
-    return (localStorage.getItem(CURRENT_VIEW_STORAGE_KEY) as TView) || "";
+    const savedView = localStorage.getItem(CURRENT_VIEW_STORAGE_KEY) as TView;
+    const pathView = getViewFromPathname(location.pathname);
+    return pathView || savedView;
   });
   const [isLoading, setIsLoading] = React.useState(false);
 
@@ -100,19 +118,6 @@ const View = ({
   const prevPathRef = useRef<string>("");
   const clearAbortControllerArrRef = React.useRef(clearAbortControllerArr);
   const animationStartedRef = useRef(false);
-
-  const isCustomizationPage = location.pathname.includes("customization");
-  const isSecurityPage = location.pathname.includes("security");
-  const isBackupPage = location.pathname.includes("backup");
-  const isRestorePage = location.pathname.includes("restore");
-  const isIntegrationPage = location.pathname.includes("integration");
-  const isDataImportPage = location.pathname.includes("data-import");
-  const isStorageManagementPage = location.pathname.includes("management");
-  const isDeveloperToolsPage = location.pathname.includes("developer-tools");
-  const isDeletePage = location.pathname.includes("delete-data");
-  const isPaymentsPage = location.pathname.includes("payments");
-  const isBonusPage = location.pathname.includes("bonus");
-  const isServicesPage = location.pathname.includes("services");
 
   const defaultProps = createDefaultHookSettingsProps({
     loadBaseInfo,
@@ -137,6 +142,8 @@ const View = ({
     currentTariffStatusStore,
   });
 
+  console.log("currentView", currentView);
+
   const { getCommonInitialValue } = useCommon(defaultProps.common);
   const { getSecurityInitialValue } = useSecurity(defaultProps.security);
   const { getBackupInitialValue } = useBackup(defaultProps.backup);
@@ -156,14 +163,17 @@ const View = ({
   }, [clearAbortControllerArr]);
 
   useEffect(() => {
-    if (currentView) {
-      localStorage.setItem(CURRENT_VIEW_STORAGE_KEY, currentView);
+    const pathView = getViewFromPathname(location.pathname);
+    if (pathView) {
+      localStorage.setItem(CURRENT_VIEW_STORAGE_KEY, pathView);
+      setCurrentView(pathView);
     }
-  }, [currentView]);
+  }, [location.pathname]);
 
   useEffect(() => {
     return () => {
       localStorage.removeItem(CURRENT_VIEW_STORAGE_KEY);
+      // setIsPortalSettingsLoading(true);
     };
   }, []);
 
@@ -238,44 +248,45 @@ const View = ({
         clearAbortControllerArrRef.current();
 
         setIsLoading(true);
-        let view: TView = "";
+        const view = getViewFromPathname(currentPath);
 
-        if (isCustomizationPage) {
-          view = "customization";
-          await getCommonInitialValue();
-        } else if (isSecurityPage) {
-          view = "security";
-          await getSecurityInitialValue();
-        } else if (isRestorePage) {
-          view = "restore";
-          await getBackupInitialValue();
-        } else if (isBackupPage) {
-          view = "backup";
-          await getBackupInitialValue();
-        } else if (isIntegrationPage) {
-          view = "integration";
-          await getIntegrationInitialValue();
-        } else if (isDataImportPage) {
-          view = "data-import";
-          await getDataImportInitialValue();
-        } else if (isStorageManagementPage) {
-          view = "management";
-          await init();
-        } else if (isDeveloperToolsPage) {
-          view = "developer-tools";
-          await getDeveloperToolsInitialValue();
-        } else if (isDeletePage) {
-          view = "delete-data";
-          await getDeleteDataInitialValue();
-        } else if (isPaymentsPage) {
-          view = "payments";
-          await getPaymentsInitialValue();
-        } else if (isBonusPage) {
-          view = "bonus";
-          await standaloneInit(t);
-        } else if (isServicesPage) {
-          view = "services";
-          await getServicesInitialValue();
+        switch (view) {
+          case "customization":
+            await getCommonInitialValue();
+            break;
+          case "security":
+            await getSecurityInitialValue();
+            break;
+          case "restore":
+            await getBackupInitialValue();
+            break;
+          case "backup":
+            await getBackupInitialValue();
+            break;
+          case "integration":
+            await getIntegrationInitialValue();
+            break;
+          case "data-import":
+            await getDataImportInitialValue();
+            break;
+          case "management":
+            await init();
+            break;
+          case "developer-tools":
+            await getDeveloperToolsInitialValue();
+            break;
+          case "delete-data":
+            await getDeleteDataInitialValue();
+            break;
+          case "payments":
+            await getPaymentsInitialValue();
+            break;
+          case "bonus":
+            await standaloneInit(t);
+            break;
+          case "services":
+            await getServicesInitialValue();
+            break;
         }
 
         if (requestId === activeRequestIdRef.current) {

@@ -30,6 +30,7 @@ import classNames from "classnames";
 import { ContentType, RoleType } from "../../../../../../api/ai/enums";
 
 import { Avatar, AvatarRole, AvatarSize } from "../../../../../avatar";
+import { Text } from "../../../../../text";
 
 import { MessageProps } from "../../../../Chat.types";
 import { useChatStore } from "../../../../store/chatStore";
@@ -80,7 +81,14 @@ const Message = ({
                   key={`${currentChat?.id}-${c.text}-${idx * 2}`}
                   className={classNames(styles.chatMessageUser)}
                 >
-                  <Markdown chatMessage={c.text} />
+                  <Text
+                    fontSize="15px"
+                    lineHeight="22px"
+                    fontWeight={400}
+                    className={classNames(styles.paragraph)}
+                  >
+                    {c.text}
+                  </Text>
                 </div>
               );
 

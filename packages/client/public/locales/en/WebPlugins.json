@@ -9,7 +9,6 @@
   "NoPlugins": "No plugins added",
   "NotNeedSettings": "Not need enter settings",
   "PluginLoadedSuccessfully": "Plugin loaded successfully",
-  "PluginProductVersion": "Version ({{productName}})",
   "PluginIsNotCompatible": "The plugin SDK version doesn’t match the {{productName}} version. Please update to a compatible version.",
   "PluginSamples": "Plugin samples",
   "PluginSDK": "Plugin SDK",

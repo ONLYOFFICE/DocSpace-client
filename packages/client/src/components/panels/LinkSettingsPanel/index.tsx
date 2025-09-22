@@ -56,12 +56,15 @@ const LinkSettingsPanel = ({
   setLinkSelectedAccess,
   activeLink,
   defaultAccess,
+  showUsersLimitWarning,
+  usersNumber,
+  maxUsersNumber,
 }: LinkSettingsPanelProps) => {
   const { t, ready } = useTranslation(["Common", "Files"]);
 
   const [userLimitIsChecked, setUserLimitIsChecked] = useState(true);
   const [limitDate, setLimitDate] = useState<moment.Moment | null>(null);
-  const [maxNumber, setMaxNumber] = useState("20");
+  const [maxNumber, setMaxNumber] = useState(maxUsersNumber);
 
   const currentAccess = filteredAccesses.find(
     (a) =>
@@ -69,11 +72,7 @@ const LinkSettingsPanel = ({
       (linkSelectedAccess?.access ?? activeLink?.access ?? defaultAccess),
   );
 
-  const usersNumber = 0; // TODO: Link settings
-
   console.log("limitDate", limitDate);
-
-  const showUsersLimitWarning = true; // TODO: Link settings
 
   return (
     <ModalDialog
@@ -235,6 +234,7 @@ const LinkSettingsPanel = ({
           className="cancel-button"
           scale
           size={ButtonSize.normal}
+          onClick={onBackClick}
           label={t("Common:CancelButton")}
           testId="template_access_settings_modal_cancel_button"
         />

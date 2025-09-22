@@ -38,6 +38,8 @@ import { LinkRolesDropdownItem } from "./LinkRolesDropdownItem";
 import { TOption } from "@docspace/shared/components/combobox";
 import styles from "./LinkRolesDropdown.module.scss";
 import { LinkRolesDropdownProps } from "../LinkSettingsPanel.types";
+import { Portal } from "@docspace/shared/components/portal";
+import { Backdrop } from "@docspace/shared/components/backdrop";
 
 const LinkRolesDropdown = ({
   currentAccess,
@@ -90,47 +92,59 @@ const LinkRolesDropdown = ({
         />
       </div>
       {isMobile() ? (
-        <div>
-          {/* <DropdownMobile
-          t={t}
-          open={isOpen}
-          onClose={toggleDropdown}
-          chooseRoomType={chooseRoomType}
-          forceHideDropdown={forceHideDropdown}
-        /> */}
-        </div>
+        <Portal
+          visible
+          element={
+            <>
+              <Backdrop
+                visible={isOpen}
+                onClick={() => setIsOpen(false)}
+                withBackground
+                withoutBlur={false}
+                isAside
+                zIndex={450}
+              />
+              <div
+                className={classNames(
+                  styles.linkRolesDropdownMobileContainer,
+                  "dropdown-mobile-content-wrapper",
+                  {
+                    [styles.isOpen]: isOpen,
+                  },
+                )}
+              >
+                {roomTypes}
+              </div>
+            </>
+          }
+        />
       ) : (
-        <>
-          {/*         <DropdownDesktop
-           t={t}  open={isOpen}  chooseRoomType={chooseRoomType} 
-        /> */}
+        <div
+          className={classNames(
+            styles.linkRolesDropdownContainer,
+            "dropdown-content-wrapper",
+            {
+              [styles.isOpen]: isOpen,
+            },
+          )}
+        >
           <div
-            className={classNames(
-              styles.linkRolesDropdownContainer,
-              "dropdown-content-wrapper",
-              {
-                [styles.isOpen]: isOpen,
-              },
-            )}
+            className={classNames("dropdown-content", styles.dropdownContent)}
+            // ref={dropdownRef}
           >
-            <div
-              className={classNames("dropdown-content", styles.dropdownContent)}
-              // ref={dropdownRef}
-            >
-              {heightList ? (
-                <Scrollbar
-                  paddingInlineEnd="0"
-                  paddingAfterLastItem="0"
-                  style={{ height: heightList, width: "100%" }}
-                >
-                  {roomTypes}
-                </Scrollbar>
-              ) : (
-                roomTypes
-              )}
-            </div>
+            {heightList ? (
+              <Scrollbar
+                paddingInlineEnd="0"
+                paddingAfterLastItem="0"
+                style={{ height: heightList, width: "100%" }}
+              >
+                {roomTypes}
+              </Scrollbar>
+            ) : (
+              roomTypes
+            )}
           </div>
-        </>
+        </div>
       )}
     </div>
   );

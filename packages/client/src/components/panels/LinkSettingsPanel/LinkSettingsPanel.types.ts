@@ -42,6 +42,9 @@ export type LinkRolesDropdownProps = {
 
 export type LinkSettingsPanelProps = {
   isVisible: boolean;
+  showUsersLimitWarning: boolean;
+  usersNumber: number;
+  maxUsersNumber: string;
   filteredAccesses: TComboboxProps["options"];
   onBackClick: VoidFunction;
   onClose: VoidFunction;

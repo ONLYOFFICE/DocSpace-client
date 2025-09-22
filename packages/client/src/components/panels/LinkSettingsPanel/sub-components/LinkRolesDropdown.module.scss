@@ -31,6 +31,7 @@
 .linkRolesDropdownContainer {
   max-width: 100%;
   position: relative;
+  visibility: visible;
 
   &:not(.isOpen) {
     visibility: hidden;
@@ -129,6 +130,23 @@
   &.isOpen,
   &:active {
     border-color: var(--accent-main);
+  }
+}
+
+/* DropDown Mobile styles */
+
+.linkRolesDropdownMobileContainer {
+  visibility: visible;
+  position: fixed;
+  bottom: 0;
+  z-index: 500;
+  padding-top: 6px;
+  border-radius: 6px 6px 0px 0px;
+  background-color: var(--room-type-dropdown-item-background);
+  box-shadow: 0px -4px 60px #{$popup-shadow};
+
+  &:not(.isOpen) {
+    visibility: hidden;
   }
 }
 

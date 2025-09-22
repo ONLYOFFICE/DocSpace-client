@@ -131,6 +131,10 @@ const StyledExternalLink = styled.div`
       }
     }
   }
+
+  .invite-via-link-settings-warning {
+    margin-top: -2px;
+  }
 `;
 const StyledInviteUserBody = styled.div`
   display: flex;

@@ -84,11 +84,12 @@ const ExternalLinks = ({
   editLink,
   isLinksToggling,
   setIsLinksToggling,
+  showUsersLimitWarning,
+  usersNumber,
+  maxUsersNumber,
   theme,
 }) => {
   // const [actionLinksVisible, setActionLinksVisible] = useState(false);
-
-  const showUsersLimitWarning = true; // TODO: Link settings
 
   const inputsRef = useRef();
 
@@ -308,7 +309,7 @@ const ExternalLinks = ({
                 {t("Files:UsersJoined")}
               </Text>
               <Text fontSize="12px" fontWeight={600}>
-                0 / 20
+                {usersNumber}/{maxUsersNumber}
               </Text>
               {showUsersLimitWarning ? (
                 <HelpButton

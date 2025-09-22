@@ -108,6 +108,10 @@ const InvitePanel = ({
   const [linkSelectedAccess, setLinkSelectedAccess] = useState(null);
   const [isLinksToggling, setIsLinksToggling] = useState(false);
 
+  const showUsersLimitWarning = true; // TODO: Link settings
+  const linkUsersNumber = 0; // TODO: Link settings
+  const maxUsersNumber = "20"; // TODO: Link settings
+
   const navigate = useNavigate();
 
   const inputsRef = useRef();
@@ -518,6 +522,9 @@ const InvitePanel = ({
           editLink={editLink}
           isLinksToggling={isLinksToggling}
           setIsLinksToggling={setIsLinksToggling}
+          showUsersLimitWarning={showUsersLimitWarning}
+          usersNumber={linkUsersNumber}
+          maxUsersNumber={maxUsersNumber}
         />
 
         <InviteInput
@@ -693,6 +700,7 @@ const InvitePanel = ({
             linkSelectedAccess={linkSelectedAccess}
             setLinkSelectedAccess={setLinkSelectedAccess}
             defaultAccess={defaultAccess ?? ShareAccessRights.ReadOnly}
+            maxUsersNumber={maxUsersNumber}
           />
         </ModalDialog.Container>
       ) : null}

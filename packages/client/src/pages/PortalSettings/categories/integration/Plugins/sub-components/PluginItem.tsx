@@ -41,10 +41,12 @@ import { PluginScopes } from "SRC_DIR/helpers/plugins/enums";
 
 import { StyledPluginItem, StyledPluginHeader } from "../Plugins.styled";
 import { PluginItemProps } from "../Plugins.types";
+import { Tooltip } from "@docspace/shared/components/tooltip";
 
 const PluginItem = ({
   name,
   version,
+  compatible,
   description,
 
   enabled,
@@ -56,6 +58,7 @@ const PluginItem = ({
   image,
   url,
   dataTestId,
+  theme,
 }: PluginItemProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -70,6 +73,8 @@ const PluginItem = ({
   const onOpenSettingsDialog = () => {
     openSettingsDialog?.(name);
   };
+
+  const badgeId = `plugin_version_${name}_badge`;
 
   return (
     <StyledPluginItem description={description} data-testid={dataTestId}>
@@ -101,12 +106,31 @@ const PluginItem = ({
         </StyledPluginHeader>
 
         <Badge
+          id={badgeId}
           label={version}
           fontSize="12px"
           fontWeight={700}
-          noHover
-          backgroundColor={globalColors.mainGreen}
+          noHover={compatible}
+          backgroundColor={
+            compatible
+              ? globalColors.mainGreen
+              : theme.isBase
+                ? globalColors.lightErrorStatus
+                : globalColors.darkErrorStatus
+          }
+          dataTestId={badgeId}
         />
+        {!compatible ? (
+          <Tooltip
+            anchorSelect={`#${badgeId.replace(/\./g, "\\.")}`}
+            place="bottom"
+            getContent={() =>
+              t("WebPlugins:PluginIsNotCompatible", {
+                productName: t("ProductName"),
+              })
+            }
+          />
+        ) : null}
 
         {imgSrc && description ? (
           <Text

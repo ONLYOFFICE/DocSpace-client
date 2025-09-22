@@ -502,7 +502,7 @@ const ContextMenu = (props: ContextMenuProps) => {
       setMobileMenuStack((prev) => [...prev, { items: res, header: label }]);
     }
 
-    if (res && menuRef.current) {
+    if (res && menuRef.current && mobileMenuStack.length === 0) {
       const height =
         menuRef.current && menuRef.current.offsetParent
           ? menuRef.current.offsetHeight

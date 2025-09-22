@@ -37,7 +37,6 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { Link, LinkType } from "@docspace/shared/components/link";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { RowContainer, Row } from "@docspace/shared/components/rows";
-import { Text } from "@docspace/shared/components/text";
 import { globalColors } from "@docspace/shared/themes";
 import { TEnhancedMigrationUser } from "@docspace/shared/api/settings/types";
 

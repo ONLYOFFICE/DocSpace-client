@@ -26,7 +26,6 @@
 
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Button } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
 import { StyledFooterWrapper } from "../../../ChangePortalOwnerDialog/StyledDialog";
 
 const Footer = ({

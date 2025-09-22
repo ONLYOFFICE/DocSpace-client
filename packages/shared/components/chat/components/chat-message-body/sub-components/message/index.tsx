@@ -81,7 +81,6 @@ const Message = ({
                   key={`${currentChat?.id}-${c.text}-${idx * 2}`}
                   className={classNames(styles.chatMessageUser)}
                 >
-                  <div className={styles.userMessageBg} />
                   <Text
                     fontSize="15px"
                     lineHeight="22px"

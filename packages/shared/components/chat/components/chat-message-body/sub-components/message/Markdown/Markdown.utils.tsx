@@ -114,10 +114,7 @@ export const createMarkdownComponents = ({
     </Link>
   ),
   blockquote: ({ children }) => (
-    <blockquote className={styles.blockquote}>
-      <div className={styles.blockquoteBg} />
-      {children}
-    </blockquote>
+    <blockquote className={styles.blockquote}>{children}</blockquote>
   ),
   hr: () => <hr className={styles.hr} />,
   table: ({ children }) => (

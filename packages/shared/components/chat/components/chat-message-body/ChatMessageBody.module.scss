@@ -176,7 +176,9 @@
       position: relative;
       overflow: hidden;
 
-      .userMessageBg {
+      &::before {
+        content: "";
+
         position: absolute;
         inset: 0;
 
@@ -184,6 +186,8 @@
 
         background-color: var(--chat-message-user-background-color);
         opacity: 10%;
+
+        z-index: -1;
       }
     }
   }
@@ -426,11 +430,16 @@
 
   overflow: hidden;
 
-  .blockquoteBg {
+  &::before {
+    content: "";
+
     position: absolute;
     inset: 0;
+
     background-color: var(--chat-message-blockquote-bg-color);
     opacity: 8%;
+
+    z-index: -1;
   }
 }
 

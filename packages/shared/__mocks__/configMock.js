@@ -53,7 +53,12 @@ module.exports = {
     fetchTimeoutMillis: 3600000,
     minimumFetchIntervalMillis: 3600000,
   },
-  campaigns: [],
+  campaigns: [
+    "OnlyofficeForDevelopers",
+    "OnlyofficeForPlatform",
+    "BookTraining",
+    "FormGallery",
+  ],
   logs: {
     enableLogs: false,
     logsToConsole: false,

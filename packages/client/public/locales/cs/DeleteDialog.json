@@ -6,8 +6,6 @@
   "DeleteGroupTitle": "Smazat skupinu",
   "DeleteItems": "Chystáte se odstranit tyto položky. ",
   "DeleteItemsSharedNote": "Upozorňujeme, že pokud jste je s někým sdíleli, stanou se nedostupnými.",
-  "DeleteRoom": "Chystáte se odstranit tuto místnost. Nebudete ji moci obnovit.",
-  "DeleteRooms": "Tyto místnosti se chystáte smazat. Nebudete je moci obnovit.",
   "DeleteSharedNote": "Upozorňujeme, že pokud jste jej s někým sdíleli, stane se nedostupným.",
   "DeleteTemplate": "Opravdu chcete odstranit místnost šablony <1>\"{{templateName}}\"</1>? Šablonu nelze obnovit.",
   "DeleteTemplates": "Opravdu chcete odstranit vybrané šablony místností? Nelze je obnovit.",

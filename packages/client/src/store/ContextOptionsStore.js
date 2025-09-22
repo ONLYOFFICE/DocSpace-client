@@ -2267,8 +2267,10 @@ class ContextOptionsStore {
           ? t("Common:Disconnect")
           : item.isTemplate
             ? t("DeleteTemplate")
-            : t("Common:Delete"),
-        icon: TrashReactSvgUrl,
+            : item.isRoom
+              ? t("Common:DeleteRoom")
+              : t("Common:Delete"),
+        icon: item.isRoom ? RemoveOutlineSvgUrl : TrashReactSvgUrl,
         onClick: () => this.onDelete(item, t),
         disabled: item.isTemplate ? !isTemplateOwner : false,
       },
@@ -2552,7 +2554,7 @@ class ContextOptionsStore {
     const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
       this.treeFoldersStore;
 
-    const { pinRooms, unpinRooms, deleteRooms } = this.filesActionsStore;
+    const { pinRooms, unpinRooms /* deleteRooms */ } = this.filesActionsStore;
 
     if (isRoomsFolder || isArchiveFolder) {
       const isPinOption = selection.filter((item) => !item.pinned).length > 0;
@@ -2628,13 +2630,13 @@ class ContextOptionsStore {
 
       options.push(archiveOptions);
 
-      canDelete &&
+      /* canDelete &&
         options.push({
           key: "delete-rooms",
           label: t("Common:Delete"),
           icon: TrashReactSvgUrl,
           onClick: () => deleteRooms(t),
-        });
+        }); */
 
       return options;
     }

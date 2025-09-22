@@ -227,7 +227,11 @@ const Editor = ({
   }
 
   try {
-    if (newConfig.document && newConfig.document.info)
+    if (
+      newConfig.document &&
+      newConfig.document.info &&
+      !fileInfo?.requestToken
+    )
       newConfig.document.info.favorite = !!fileInfo?.isFavorite;
 
     const url = typeof window !== "undefined" ? window.location.href : "";

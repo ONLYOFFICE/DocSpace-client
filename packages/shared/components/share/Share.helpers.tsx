@@ -615,6 +615,7 @@ export const getShareAccessRightOptions = (
         access: ShareAccessRights.DenyAccess,
         key: "deny-access",
         label: t("Common:DenyAccess"),
+        description: t("Common:DenyAccessDescription"),
       },
       [ShareRights.None]: withRemove
         ? [

@@ -236,6 +236,7 @@
   "DeletePermanently": "Delete permanently",
   "Deny": "Deny",
   "DenyAccess": "Deny access",
+  "DenyAccessDescription": "No access to view, edit, or manage files or folders.",
   "Description": "Description",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Developer Tools",

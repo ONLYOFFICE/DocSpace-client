@@ -158,13 +158,24 @@
     }
 
     .chatMessageUser {
-      background-color: #4781d11a;
-
-      padding: 0px 12px;
+      padding: 0 12px;
 
       border-radius: 16px;
 
       width: fit-content;
+
+      position: relative;
+      overflow: hidden;
+
+      .userMessageBg {
+        position: absolute;
+        inset: 0;
+
+        border-radius: inherit;
+
+        background-color: var(--accent-main);
+        opacity: 10%;
+      }
     }
   }
 }

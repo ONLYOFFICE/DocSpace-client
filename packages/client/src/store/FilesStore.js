@@ -2555,6 +2555,13 @@ class FilesStore {
         fileOptions = removeOptions(fileOptions, ["delete"]);
       }
 
+      if (isRecycleBinFolder) {
+        fileOptions = removeOptions(fileOptions, [
+          "mark-as-favorite",
+          "remove-from-favorites",
+        ]);
+      }
+
       if (isEncrypted) {
         fileOptions = removeOptions(fileOptions, [
           "open",
@@ -2944,6 +2951,8 @@ class FilesStore {
         "mark-read",
         "separator0",
         "separator1",
+        "mark-as-favorite",
+        "remove-from-favorites",
       ]);
     } else {
       folderOptions = removeOptions(folderOptions, ["restore"]);

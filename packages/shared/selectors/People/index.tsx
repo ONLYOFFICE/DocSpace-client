@@ -24,13 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
+import EmptyScreenPersonsSvgUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.people.light.svg?url";
+import EmptyScreenPersonsSvgDarkUrl from "PUBLIC_DIR/images/emptyFilter/empty.filter.people.dark.svg?url";
+
 import axios from "axios";
 import React, { useState, useCallback, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-
-import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
-import EmptyScreenPersonsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
-import EmptyScreenPersonsSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
 
 import { Selector, SelectorAccessRightsMode } from "../../components/selector";
 import {

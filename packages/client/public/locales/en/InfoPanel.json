@@ -49,7 +49,7 @@
   "FormStartedToFill": "Started to fill.",
   "FormStopped": "Form stopped.",
   "GalleryEmptyScreenText": "See form template details here",
-  "GroupsEmptyScreenText": "See group details here",
+  "GroupsEmptyScreenText": "See groups details here",
   "GuestsEmptyScreenText": "See guests details here",
   "HistoryEmptyScreenText": "Activity history will be shown here",
   "HistoryRoomCopied": "<1>«{{roomTitle}}»</1> room copied",

@@ -3,7 +3,7 @@
   "content": "DocSpace",
   "content_en_sha1_hash": "ce0b96eab5006b875f6c4a6c31ad73c3c86edcf5",
   "created_at": "2025-05-19T21:30:47.504Z",
-  "updated_at": "2025-09-19T15:39:22.986Z",
+  "updated_at": "2025-09-22T10:04:13.681Z",
   "comment": {
     "text": "This translation key is used for the \"From Portal\" button label, which indicates that a document can be uploaded from DocSpace. It appears in a dropdown menu on a main button in a shell interface. Translators should provide a translated version of \"From Portal\" with the product name inserted.",
     "is_auto": true,
@@ -20,18 +20,6 @@
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
       "line_number": 378,
       "context": "const uploadFromDocSpace = {\n id: \"actions_upload-from-docspace\",\n className: \"main-button_drop-down\",\n icon: ActionsUploadReactSvgUrl,\n label: t(\"Common:FromPortal\", { productName: t(\"Common:ProductName\") }),\n key: \"actions_upload-from-docspace\",\n disabled: false,\n onClick: () => onShowFormRoomSelectFileDialog(FilterType.PDFForm),\n };",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
-      "line_number": 123,
-      "context": ");\n \n const archiveRoomsDescription =\n isVisitor || isCollaborator\n ? t(\"ArchiveEmptyScreenUser\")\n : t(\"ArchiveEmptyScreen\", { productName: t(\"Common:ProductName\") });\n \n const privateRoomHeader = t(\"PrivateRoomHeader\", {\n organizationName: logoText,\n });",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
-      "line_number": 123,
-      "context": ");\n \n const archiveRoomsDescription =\n isVisitor || isCollaborator\n ? t(\"ArchiveEmptyScreenUser\")\n : t(\"ArchiveEmptyScreen\", { productName: t(\"Common:ProductName\") });\n \n const privateRoomHeader = t(\"PrivateRoomHeader\", {\n organizationName: logoText,\n });",
       "module": "/packages/client"
     },
     {

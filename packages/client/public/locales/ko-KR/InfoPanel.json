@@ -45,7 +45,6 @@
   "FormStartedToFill": "작성이 시작되었습니다.",
   "FormStopped": "양식이 중지되었습니다.",
   "GalleryEmptyScreenText": "여기에서 양식 템플릿 세부 정보를 확인하세요",
-  "GroupsEmptyScreenText": "여기에서 그룹 세부 정보를 확인하세요.",
   "GuestsEmptyScreenText": "여기에서 게스트 세부 정보를 확인하세요",
   "HistoryEmptyScreenText": "활동 내역이 여기에 표시됩니다",
   "HistoryRoomCopied": "<1>«{{roomTitle}}»</1> 룸이 복사되었습니다",

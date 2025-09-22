@@ -45,7 +45,6 @@
   "FormStartedToFill": "开始填写。",
   "FormStopped": "表单填写已停止。",
   "GalleryEmptyScreenText": "请在此处查看表单模板的详细信息",
-  "GroupsEmptyScreenText": "在此查看群组详细信息",
   "GuestsEmptyScreenText": "在此查看访客详细信息。",
   "HistoryEmptyScreenText": "活动历史记录将在这里显示",
   "HistoryRoomCopied": "<1>«{{roomTitle}}»</1>房间已复制",

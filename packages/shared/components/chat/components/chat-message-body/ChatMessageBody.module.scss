@@ -435,6 +435,11 @@
   white-space: pre-line;
   color: var(--text-color);
   font-weight: 400;
+  word-break: break-word;
+}
+
+.link {
+  word-break: break-word;
 }
 
 .blockquote {

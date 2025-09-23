@@ -120,16 +120,6 @@ const createDefaultProps = (): ShareProps => ({
       WebReview: true,
       WebView: true,
     },
-    availableExternalRights: {
-      Editing: true,
-      CustomFilter: true,
-      Review: false,
-      Comment: true,
-      Read: true,
-      FillForms: false,
-      Restrict: true,
-      None: true,
-    },
     availableShareRights: {
       User: [ShareRights.Read, ShareRights.None],
       Group: [ShareRights.Read, ShareRights.None],

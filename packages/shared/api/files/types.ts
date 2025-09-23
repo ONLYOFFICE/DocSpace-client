@@ -83,18 +83,6 @@ export type TFileSecurity = {
   Embed: boolean;
 };
 
-export type TAvailableExternalRights = {
-  Comment: boolean;
-  CustomFilter: boolean;
-  Editing: boolean;
-  None: boolean;
-  Read: boolean;
-  Restrict: boolean;
-  Review: boolean;
-  FillForms: boolean;
-  FullAccess?: boolean;
-};
-
 export type TShareSettings = {
   ExternalLink?: number;
   PrimaryExternalLink?: number;
@@ -134,8 +122,6 @@ export type TFile = {
   viewUrl: string;
   webUrl: string;
   shortWebUrl: string;
-  /** @deprecated use availableShareRights instead */
-  availableExternalRights?: TAvailableExternalRights;
   availableShareRights?: TAvailableShareRights;
   providerId?: number;
   providerKey?: string;
@@ -246,8 +232,6 @@ export type TFolder = {
   order?: string;
   isRoom?: false;
   shareSettings?: TShareSettings;
-  /** @deprecated use availableShareRights instead */
-  availableExternalRights?: TAvailableExternalRights;
   availableShareRights?: TAvailableShareRights;
   isFavorite?: boolean;
 };

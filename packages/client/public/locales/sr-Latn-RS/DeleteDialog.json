@@ -6,8 +6,6 @@
   "DeleteGroupTitle": "Obriši grupu",
   "DeleteItems": "Spremate se da obrišete ove stavke.",
   "DeleteItemsSharedNote": "Imajte na umu da ako ih podelite sa nekim, oni će postati nedostupni.",
-  "DeleteRoom": "Spremate se da obrišete ovu sobu. Nećete moći da je povratite.",
-  "DeleteRooms": "Spremate se da obrišete ove sobe. Nećete moći da ih povratite.",
   "DeleteSharedNote": "Imajte na umu da ako to podelite sa nekim, postaće nedostupno.",
   "DeleteTemplate": "Da li zaista želite da obrišete šablon sobe <1>«{{templateName}}»</1>? Šablon se ne može vratiti.",
   "DeleteTemplates": "Da li zaista želite da obrišete izabrane šablone soba? Oni se ne mogu vratiti.",

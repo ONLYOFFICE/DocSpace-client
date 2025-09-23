@@ -76,7 +76,7 @@ describe("<InfoBadge />", () => {
     });
 
     // Now find the close button and click it
-    const closeButton = screen.getByTestId("icon-button");
+    const closeButton = screen.getByTestId("close-tooltip-button");
     fireEvent.click(closeButton);
 
     try {

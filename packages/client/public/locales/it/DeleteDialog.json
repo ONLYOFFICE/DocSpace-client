@@ -6,8 +6,6 @@
   "DeleteGroupTitle": "Elimina gruppo",
   "DeleteItems": "Stai per eliminare questi elementi. ",
   "DeleteItemsSharedNote": "Tieni presente che se li hai condivisi con qualcuno, non saranno più disponibili.",
-  "DeleteRoom": "Stai per eliminare questa stanza. Non sarai in grado di ripristinarla.",
-  "DeleteRooms": "Stai per eliminare queste stanze. Non sarai in grado di ripristinarli.",
   "DeleteSharedNote": "Tieni presente che se lo hai condiviso con qualcuno, non sarà più disponibile.",
   "DeleteTemplate": "Sei sicuro di voler eliminare il modello di stanza <1>«{{templateName}}»</1>? Il modello non potrà essere ripristinato.",
   "DeleteTemplates": "Sei sicuro di voler eliminare i modelli di stanza selezionati? Non potranno essere ripristinati.",

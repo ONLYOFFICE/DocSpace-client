@@ -234,7 +234,7 @@ const ModelSettings = ({ roomParams, setRoomParams }: ModelSettingsProps) => {
             scaledOptions
             noBorder={false}
             className="ai-combobox"
-            isDisabled={providerOptions.length === 1}
+            displaySelectedOption
           />
         )}
         {!selectedModel ? (
@@ -249,7 +249,7 @@ const ModelSettings = ({ roomParams, setRoomParams }: ModelSettingsProps) => {
             dropDownMaxHeight={modelOptions.length > 7 ? 300 : undefined}
             isDefaultMode
             className="ai-combobox"
-            isDisabled={modelOptions.length === 1}
+            displaySelectedOption
           />
         )}
       </div>

@@ -176,4 +176,6 @@ export interface AutomaticBackupProps {
   setConnectDialogVisible: (visible: boolean) => void;
   setDeleteThirdPartyDialogVisible: (visible: boolean) => void;
   // end dialogsStore
+
+  setDefaultFolderId?: (id: string | number | null) => void;
 }

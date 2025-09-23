@@ -2297,7 +2297,6 @@ class FilesStore {
     const isRoom = !!item.roomType;
     const isTemplate =
       item.rootFolderType === FolderType.RoomTemplates && isRoom;
-    const { extsFilesVectorized } = this.filesSettingsStore;
 
     const hasNew =
       item.new > 0 || (item.fileStatus & FileStatus.IsNew) === FileStatus.IsNew;
@@ -2429,12 +2428,7 @@ class FilesStore {
         "stop-filling",
       ];
 
-      // TODO: change to security for ask-ai
-      if (
-        !item.fileExst ||
-        !extsFilesVectorized.includes(item.fileExst) ||
-        !item.security?.Read
-      ) {
+      if (!item?.security?.AscAi) {
         fileOptions = removeOptions(fileOptions, ["ask-ai", "separator6"]);
       }
 
@@ -3756,8 +3750,6 @@ class FilesStore {
 
   get filesList() {
     // return [...this.folders, ...this.files];
-
-    console.log(this.folders);
 
     const newFolders = [...this.folders];
     const orderItems = [...this.folders, ...this.files].filter((x) => x.order);

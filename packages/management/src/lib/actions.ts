@@ -42,6 +42,7 @@ import type { TGetAllPortals } from "@docspace/shared/api/management/types";
 import type {
   TBackupProgress,
   TBackupSchedule,
+  TLicenseQuota,
   TPaymentQuota,
   TPortalTariff,
   TStorageRegion,
@@ -773,5 +774,36 @@ export async function getEncryptionSettings() {
       throw error;
     }
     logger.error(`Error in getEncryptionSettings: ${error}`);
+  }
+}
+
+export async function getLicenseQuota() {
+  const pathReq = "/portal/licensequota?useCache=false";
+  logger.debug(`Start GET ${pathReq}`);
+
+  try {
+    const [getLicenseQuotaRequest] = await createRequest(
+      [pathReq],
+      [["", ""]],
+      "GET",
+      undefined,
+      true,
+    );
+
+    const licenseQuotaRes = await fetch(getLicenseQuotaRequest);
+
+    if (!licenseQuotaRes.ok) {
+      logger.error(`GET ${pathReq} failed: ${licenseQuotaRes.status}`);
+      return;
+    }
+
+    const licenseQuota = await licenseQuotaRes.json();
+
+    return licenseQuota as TLicenseQuota;
+  } catch (error) {
+    if (isDynamicServerError(error)) {
+      throw error;
+    }
+    logger.error(`Error in getLicenseQuota: ${error}`);
   }
 }

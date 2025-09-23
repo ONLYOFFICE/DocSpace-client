@@ -59,6 +59,8 @@ export default class MessageStore {
 
   isRequestRunning: boolean = false;
 
+  isStreamRunning: boolean = false;
+
   isGetMessageRequestRunning: boolean = false;
 
   constructor(roomId: number | string) {
@@ -89,6 +91,10 @@ export default class MessageStore {
 
   setIsRequestRunning = (isRequestRunning: boolean) => {
     this.isRequestRunning = isRequestRunning;
+  };
+
+  setIsStreamRunning = (isStreamRunning: boolean) => {
+    this.isStreamRunning = isStreamRunning;
   };
 
   startNewChat = async () => {
@@ -250,6 +256,7 @@ export default class MessageStore {
   };
 
   handleStreamError = (jsonData: string) => {
+    this.setIsStreamRunning(true);
     let message = "";
     try {
       message = JSON.parse(jsonData).message;
@@ -269,6 +276,7 @@ export default class MessageStore {
   startStream = async (stream?: ReadableStream<Uint8Array> | null) => {
     if (!stream) {
       this.setIsRequestRunning(false);
+      this.setIsStreamRunning(false);
 
       return;
     }
@@ -289,6 +297,8 @@ export default class MessageStore {
 
         if (done) {
           this.setIsRequestRunning(false);
+          this.setIsStreamRunning(false);
+
           try {
             reader.cancel();
           } catch (e) {
@@ -335,6 +345,8 @@ export default class MessageStore {
             }
 
             if (event.includes(EventType.MessageStart)) {
+              this.setIsStreamRunning(true);
+
               this.handleMetadata(jsonData);
 
               return;
@@ -403,6 +415,7 @@ export default class MessageStore {
           console.log(e);
         } finally {
           this.setIsRequestRunning(false);
+          this.setIsStreamRunning(false);
         }
       };
 
@@ -412,6 +425,7 @@ export default class MessageStore {
       toastr.error(e as string);
     } finally {
       this.setIsRequestRunning(false);
+      this.setIsStreamRunning(false);
     }
   };
 
@@ -477,6 +491,11 @@ export const MessageStoreContextProvider = ({
   roomId,
 }: TMessageStoreProps) => {
   const store = React.useMemo(() => new MessageStore(roomId), [roomId]);
+
+  React.useEffect(() => {
+    const chatId = new URLSearchParams(window.location.search).get("chat");
+    if (chatId) store.fetchMessages(chatId);
+  }, [store]);
 
   return (
     <MessageStoreContext.Provider value={store}>

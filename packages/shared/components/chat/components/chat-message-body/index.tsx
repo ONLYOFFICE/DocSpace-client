@@ -27,12 +27,14 @@
 import React, { useEffect, useRef } from "react";
 import { observer } from "mobx-react";
 import classNames from "classnames";
+import { useTranslation } from "react-i18next";
 
 import socket, { SocketCommands, SocketEvents } from "../../../../utils/socket";
 import { isMobile } from "../../../../utils";
 
 import { Scrollbar } from "../../../scrollbar";
 import type { Scrollbar as CustomScrollbar } from "../../../scrollbar/custom-scrollbar";
+import { Loader, LoaderTypes } from "../../../loader";
 
 import { useMessageStore } from "../../store/messageStore";
 import { useChatStore } from "../../store/chatStore";
@@ -49,8 +51,16 @@ const ChatMessageBody = ({
   getIcon,
   isLoading,
 }: MessageBodyProps) => {
-  const { messages, fetchNextMessages, addMessageId } = useMessageStore();
+  const {
+    messages,
+    isStreamRunning,
+    isRequestRunning,
+    fetchNextMessages,
+    addMessageId,
+  } = useMessageStore();
   const { currentChat } = useChatStore();
+
+  const { t } = useTranslation(["Common"]);
 
   const [height, setHeight] = React.useState(0);
 
@@ -60,7 +70,7 @@ const ChatMessageBody = ({
   const prevScrollTopRef = useRef(0);
   const disableAutoScrollRef = useRef(false);
 
-  const isEmpty = messages.length === 0;
+  const isEmpty = messages.length === 0 || isLoading;
 
   useEffect(() => {
     if (!currentChat?.id) return;
@@ -197,7 +207,7 @@ const ChatMessageBody = ({
       })}
       style={isMobile() ? { height: `${height}px` } : undefined}
     >
-      {messages.length === 0 ? (
+      {isEmpty ? (
         <EmptyScreen isLoading={isLoading} />
       ) : (
         <Scrollbar
@@ -211,6 +221,12 @@ const ChatMessageBody = ({
             className={classNames(styles.chatMessageContainer)}
             ref={chatBodyRef}
           >
+            {!isStreamRunning && isRequestRunning ? (
+              <div className={styles.chatLoader}>
+                <Loader type={LoaderTypes.track} />
+                {t("Common:Analyzing")}
+              </div>
+            ) : null}
             {messages.map((message, index) => {
               return (
                 <Message

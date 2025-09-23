@@ -36,7 +36,7 @@ import { getAiProviderIcon, getAiProviderLabel } from "@docspace/shared/utils";
 import SettingsIcon from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
 
-import { AiTile } from "../ai-tile";
+import { AiTile } from "../sub-components/ai-tile";
 
 type AiProviderTileProps = {
   item: TAiProvider;

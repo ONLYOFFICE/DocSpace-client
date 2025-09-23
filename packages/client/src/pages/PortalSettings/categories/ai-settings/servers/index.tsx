@@ -36,15 +36,17 @@ import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import type { TServer } from "@docspace/shared/api/ai/types";
 import { toastr, TData } from "@docspace/shared/components/toast";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
-import styles from "../../AISettings.module.scss";
-import { MCPTile } from "../tiles/mcp-tile";
+import styles from "../AISettings.module.scss";
+
 import { AddMCPDialog } from "./dialogs/add";
 import { DeleteMCPDialog } from "./dialogs/delete";
 import { DisableMCPDialog } from "./dialogs/disable";
 import { EditMCPDialog } from "./dialogs/edit";
+import { MCPTile } from "./mcp-tile";
 
 type MCPListProps = {
   showHeading: boolean;
@@ -111,6 +113,7 @@ type MCPServersProps = {
   systemMCPServers?: AISettingsStore["systemMCPServers"];
   updateMCPStatus?: AISettingsStore["updateMCPStatus"];
   hasAIProviders?: AISettingsStore["hasAIProviders"];
+  mcpServersInitied?: AISettingsStore["mcpServersInitied"];
 };
 
 const MCPServersComponent = ({
@@ -119,6 +122,7 @@ const MCPServersComponent = ({
   systemMCPServers,
   updateMCPStatus,
   hasAIProviders,
+  mcpServersInitied,
 }: MCPServersProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
   const [addDialogVisible, setAddDialogVisible] = useState(false);
@@ -200,20 +204,29 @@ const MCPServersComponent = ({
     });
   };
 
+  if (!mcpServersInitied)
+    return (
+      <div className={styles.mcpServers}>
+        <RectangleSkeleton
+          className={styles.description}
+          width="700px"
+          height="54px"
+        />
+        <RectangleSkeleton
+          className={styles.learnMoreLink}
+          width="100px"
+          height="19px"
+        />
+        <RectangleSkeleton
+          className={styles.addProviderButton}
+          width="158px"
+          height="32px"
+        />
+      </div>
+    );
+
   return (
     <div className={styles.mcpServers}>
-      {standalone ? (
-        <Heading
-          className={styles.heading}
-          level={HeadingLevel.h3}
-          fontSize="16px"
-          fontWeight={700}
-          lineHeight="22px"
-        >
-          {t("AISettings:MCPSettingTitle")}
-        </Heading>
-      ) : null}
-
       <Text className={styles.description}>
         {t("AISettings:MCPSettingDescription")}
       </Text>
@@ -290,6 +303,7 @@ export const MCPServers = inject(({ aiSettingsStore }: TStore) => {
     systemMCPServers,
     updateMCPStatus,
     hasAIProviders,
+    mcpServersInitied,
   } = aiSettingsStore;
 
   return {
@@ -297,5 +311,6 @@ export const MCPServers = inject(({ aiSettingsStore }: TStore) => {
     systemMCPServers,
     updateMCPStatus,
     hasAIProviders,
+    mcpServersInitied,
   };
 })(observer(MCPServersComponent));

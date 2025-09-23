@@ -3,7 +3,7 @@
   "content": "General",
   "content_en_sha1_hash": "9239ee2cda84eca4c3440e2a7b50148af67da3d4",
   "created_at": "2025-05-19T21:30:48.597Z",
-  "updated_at": "2025-08-12T19:46:26.060Z",
+  "updated_at": "2025-09-17T13:43:01.715Z",
   "comment": {
     "text": "This translation key is used to display the general settings title in the Portal Settings page. It appears as a label on the top level of the settings tree and is also referenced in a data object that lists categories of settings. Translators should provide a clear and concise translation for this key, which will be displayed in the user interface.",
     "is_auto": true,
@@ -17,9 +17,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/index.js",
-      "line_number": 62,
-      "context": "const [currentTabId, setCurrentTabId] = useState();\n \n const data = [\n {\n id: \"general\",\n name: t(\"Common:SettingsGeneral\"),\n content: <Customization />,\n },\n {\n id: \"appearance\",\n name: t(\"Appearance\"),",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/index.tsx",
+      "line_number": 102,
+      "context": ");\n \n const data = [\n {\n id: \"general\",\n name: t(\"Common:SettingsGeneral\"),\n content: <Customization />,\n onClick: async () => {\n clearAbortControllerArr();\n await getCustomizationData();\n },",
       "module": "/packages/client"
     },
     {

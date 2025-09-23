@@ -85,6 +85,7 @@ export type ContextMenuType = {
   isPaidBadge?: boolean;
   preventNewTab?: boolean;
   dataTestId?: string;
+  getTooltipContent?: () => React.ReactNode;
 };
 
 export type SeparatorType = {
@@ -105,8 +106,9 @@ export type HeaderType =
       avatar?: string;
       logo?: string;
       icon?: string;
+      badgeUrl?: string;
     })
-  | { title: string; icon: string };
+  | { title: string; icon: string; badgeUrl?: string };
 
 export type ContextMenuModel = ContextMenuType | SeparatorType;
 
@@ -169,6 +171,7 @@ export interface ContextMenuProps {
   headerOnlyMobile?: boolean;
   dataTestId?: string;
   maxHeightLowerSubmenu?: number;
+  showDisabledItems?: boolean;
 }
 
 export type TContextMenuRef = {

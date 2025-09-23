@@ -24,11 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { toastr } from "../../components/toast";
 import { getCookie } from "../../utils";
 
 import { request } from "../client";
 import { TFile } from "../files/types";
-import { ToolsPermission } from "./enums";
+import { ToolsPermission, WebSearchType } from "./enums";
 
 import {
   TCreateAiProvider,
@@ -44,6 +45,7 @@ import {
   type TProviderTypeWithUrl,
   type TAddNewServer,
   type TUpdateServer,
+  WebSearchConfig,
 } from "./types";
 
 const baseUrl = "/ai";
@@ -229,6 +231,7 @@ export const getServersList = async (startIndex: number, count?: number) => {
     return res as { items: TServer[]; total: number };
   } catch (e) {
     console.log(e);
+    toastr.error(e as string);
   }
 };
 
@@ -245,6 +248,7 @@ export const getAvailableServersList = async (
     return res as { items: TServer[]; total: number };
   } catch (e) {
     console.log(e);
+    toastr.error(e as string);
   }
 };
 
@@ -283,6 +287,7 @@ export const addServersForRoom = async (roomId: number, servers: string[]) => {
     });
   } catch (e) {
     console.log(e);
+    toastr.error(e as string);
   }
 };
 
@@ -296,6 +301,7 @@ export const getServersListForRoom = async (roomId: number) => {
     return res as TServer[];
   } catch (e) {
     console.log(e);
+    toastr.error(e as string);
   }
 };
 
@@ -312,6 +318,7 @@ export const connectServer = async (
     });
   } catch (e) {
     console.log(e);
+    toastr.error(e as string);
   }
 };
 
@@ -323,6 +330,7 @@ export const disconnectServer = async (roomId: number, serverId: string) => {
     });
   } catch (e) {
     console.log(e);
+    toastr.error(e as string);
   }
 };
 
@@ -338,6 +346,7 @@ export const deleteServersForRoom = async (
     });
   } catch (e) {
     console.log(e);
+    toastr.error(e as string);
   }
 };
 
@@ -364,6 +373,7 @@ export const getMCPToolsForRoom = async (room: number, mcpId: string) => {
     return res as TMCPTool[];
   } catch (e) {
     console.log(e);
+    toastr.error(e as string);
   }
 };
 
@@ -389,6 +399,7 @@ export const exportChat = async (chatId: string) => {
     })) as TFile;
   } catch (e) {
     console.log(e);
+    toastr.error(e as string);
   }
 };
 
@@ -405,6 +416,7 @@ export const exportChatMessage = async (
     })) as TFile;
   } catch (e) {
     console.log(e);
+    toastr.error(e as string);
   }
 };
 
@@ -430,5 +442,86 @@ export const updateToolsPermission = async (
     });
   } catch (e) {
     console.log(e);
+    toastr.error(e as string);
+  }
+};
+
+export const getWebSearchInRoom = async (roomId: number) => {
+  try {
+    const res = await request({
+      method: "get",
+      url: `${baseUrl}/rooms/${roomId}/chats/config`,
+    });
+
+    return res as { webSearchEnabled: boolean };
+  } catch (e) {
+    console.log(e);
+    toastr.error(e as string);
+  }
+};
+
+export const updateWebSearchInRoom = async (
+  roomId: number,
+  webSearchEnabled: boolean,
+) => {
+  try {
+    const res = await request({
+      method: "put",
+      url: `${baseUrl}/rooms/${roomId}/chats/config`,
+      data: { webSearchEnabled },
+    });
+
+    return res;
+  } catch (e) {
+    console.log(e);
+    toastr.error(e as string);
+  }
+};
+
+export const getAIConfig = async () => {
+  try {
+    const res = await request({
+      method: "get",
+      url: `${baseUrl}/config`,
+    });
+
+    return res as { webSearchEnabled: boolean };
+  } catch (e) {
+    console.log(e);
+    toastr.error(e as string);
+  }
+};
+
+export const getWebSearchConfig = async () => {
+  try {
+    const res = await request({
+      method: "get",
+      url: `${baseUrl}/config/web-search`,
+    });
+
+    return res as WebSearchConfig;
+  } catch (e) {
+    console.log(e);
+    toastr.error(e as string);
+  }
+};
+
+export const updateWebSearchConfig = async (
+  enabled: boolean,
+  type: WebSearchType,
+  key: string,
+) => {
+  try {
+    const res = await request({
+      method: "put",
+      url: `${baseUrl}/config/web-search`,
+      data: { enabled, type, key },
+    });
+
+    return res;
+  } catch (e) {
+    console.log(e);
+    toastr.error(e as string);
+    throw e;
   }
 };

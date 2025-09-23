@@ -64,3 +64,8 @@ export const enum ToolsPermission {
   AlwaysAllow,
   Deny,
 }
+
+export const enum WebSearchType {
+  None,
+  Exa,
+}

@@ -24,46 +24,63 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
-import { useTranslation } from "react-i18next";
-import { inject, observer } from "mobx-react";
+@use "@docspace/shared/styles/mixins";
 
-import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
-import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+.aiSettingsContainer {
+  width: 100%;
+  max-width: 700px;
+}
 
-import { AIProvider } from "./sub-components/ai-provider";
-import { MCPServers } from "./sub-components/mcp-servers";
-import styles from "./AISettings.module.scss";
+.aiProvider,
+.mcpServers,
+.search {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 
-type StoreProps = Pick<AISettingsStore, "isInit">;
+  max-width: 700px;
+}
 
-type AISettingsProps = Partial<StoreProps> & {
-  standalone: boolean; // Todo: Get from store after enabling ai settings for saas
-};
+.aiProvider {
+  margin-bottom: 24px;
+}
 
-const AISettngs = ({ standalone, isInit }: AISettingsProps) => {
-  const { t, ready } = useTranslation("AISettings");
+.heading {
+  margin-bottom: 8px;
+}
 
-  useEffect(() => {
-    const titleKey = standalone ? "Settings:AISettings" : "Settings:MCPServers";
+.description {
+  color: var(--settings-common-description-color);
 
-    if (ready) setDocumentTitle(t(titleKey));
-  }, [ready, standalone]);
+  margin-bottom: 8px;
+}
 
-  console.log(isInit);
+.learnMoreLink {
+  margin-bottom: 16px;
+}
 
-  if (!isInit) return null;
+.addProviderButton {
+  margin-bottom: 20px;
+}
 
-  return (
-    <div className={styles.aiSettingsContainer}>
-      {standalone ? <AIProvider /> : null}
-      <MCPServers standalone={standalone} />
-    </div>
-  );
-};
+.providerList,
+.mcpList {
+  width: 100%;
 
-export default inject(({ aiSettingsStore }: TStore) => {
-  const { isInit } = aiSettingsStore;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 340px);
+  gap: 20px;
 
-  return { isInit };
-})(observer(AISettngs));
+  @include mixins.mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mcpHeading {
+  margin-bottom: 20px;
+}
+
+.mcpListContainer {
+  margin-bottom: 20px;
+  width: 100%;
+}

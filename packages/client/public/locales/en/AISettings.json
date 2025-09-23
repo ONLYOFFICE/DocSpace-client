@@ -35,5 +35,9 @@
   "DeleteProvider": "Delete provider",
   "DeleteProviderDescription": "Deleting this provider will revoke access for all users, and its settings will be permanently erased. To use the provider again, you will need to set it up from scratch.",
   "ConnectProductToYourDataAndTools": "Connect {{productName}} to your data and tools.",
-  "ToUseMCPAddProvider": "To use MCP servers, make sure to connect at least one provider first."
+  "ToUseMCPAddProvider": "To use MCP servers, make sure to connect at least one provider first.",
+  "Search": "Web Search",
+  "SearchDescription": "Connect a web search engine to enhance AI chats with real-time information from the internet. Once configured, it will be available to all users in {{productName}}.",
+  "SearchEngine": "Web Search Engine",
+  "APIKey": "API Key"
 }

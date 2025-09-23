@@ -49,7 +49,10 @@ import {
 import { Badge } from "../../badge";
 import { globalColors } from "../../../themes";
 import { useTheme } from "../../../hooks/useTheme";
+import { isTouchDevice } from "../../../utils/device";
 import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
+
+import { Tooltip } from "../../tooltip";
 
 import styles from "../ContextMenu.module.scss";
 
@@ -82,6 +85,7 @@ type SubMenuProps = {
   isLowerSubmenu?: boolean;
   maxHeightLowerSubmenu?: number;
   menuHovered?: boolean;
+  showDisabledItems?: boolean;
 };
 
 const SubMenu = (props: SubMenuProps) => {
@@ -99,6 +103,7 @@ const SubMenu = (props: SubMenuProps) => {
     isLowerSubmenu,
     maxHeightLowerSubmenu,
     menuHovered,
+    showDisabledItems,
   } = props;
 
   const [model, setModel] = useState(props?.model);
@@ -492,7 +497,7 @@ const SubMenu = (props: SubMenuProps) => {
     index: number,
     style: React.CSSProperties,
   ) => {
-    if (item.disabled) return;
+    if (showDisabledItems ? false : item.disabled) return;
     // TODO: Not render disabled items
     const active = activeItem === item;
     const className = classNames(
@@ -621,43 +626,78 @@ const SubMenu = (props: SubMenuProps) => {
 
     if (item.withToggle) {
       return (
+        <>
+          <li
+            id={item.id}
+            key={item.key}
+            data-testid={item.dataTestId ?? item.key}
+            role="none"
+            className={classNames(className, styles.subMenuItem, {
+              [styles.noHover]: item.disabled,
+            })}
+            style={{ ...item.style, ...style }}
+            onClick={onClick}
+            onMouseDown={onMouseDown}
+            onMouseEnter={(e) => onItemMouseEnter(e, item)}
+            onMouseLeave={() => onItemMouseLeave(item)}
+            data-tooltip-id={
+              item.disabled
+                ? `context-menu-item-tooltip-${item.key}`
+                : undefined
+            }
+          >
+            {content}
+            <ToggleButton
+              isChecked={item.checked || false}
+              onChange={onClick}
+              noAnimation
+              isDisabled={item?.disabled ?? false}
+            />
+          </li>
+          {item.disabled && item.getTooltipContent ? (
+            <Tooltip
+              float
+              openOnClick={isTouchDevice}
+              id={`context-menu-item-tooltip-${item.key}`}
+              getContent={item.getTooltipContent}
+              place="bottom-end"
+              zIndex={1003}
+            />
+          ) : null}
+        </>
+      );
+    }
+
+    return (
+      <>
         <li
           id={item.id}
           key={item.key}
           data-testid={item.dataTestId ?? item.key}
           role="none"
-          className={classNames(className, styles.subMenuItem)}
+          className={className || ""}
           style={{ ...item.style, ...style }}
           onClick={onClick}
           onMouseDown={onMouseDown}
           onMouseEnter={(e) => onItemMouseEnter(e, item)}
           onMouseLeave={() => onItemMouseLeave(item)}
+          data-tooltip-id={
+            item.disabled ? `context-menu-item-tooltip-${item.key}` : undefined
+          }
         >
           {content}
-          <ToggleButton
-            isChecked={item.checked || false}
-            onChange={onClick}
-            noAnimation
-          />
         </li>
-      );
-    }
-
-    return (
-      <li
-        id={item.id}
-        key={item.key}
-        data-testid={item.dataTestId ?? item.key}
-        role="none"
-        className={className || ""}
-        style={{ ...item.style, ...style }}
-        onClick={onClick}
-        onMouseDown={onMouseDown}
-        onMouseEnter={(e) => onItemMouseEnter(e, item)}
-        onMouseLeave={() => onItemMouseLeave(item)}
-      >
-        {content}
-      </li>
+        {item.disabled && item.getTooltipContent ? (
+          <Tooltip
+            float
+            openOnClick={isTouchDevice}
+            id={`context-menu-item-tooltip-${item.key}`}
+            getContent={item.getTooltipContent}
+            place="bottom-end"
+            zIndex={1003}
+          />
+        ) : null}
+      </>
     );
   };
 
@@ -698,7 +738,7 @@ const SubMenu = (props: SubMenuProps) => {
     if (!model) return null;
 
     return model.map((item: ContextMenuModel, index: number) => {
-      if (item?.disabled) return null;
+      if (item?.disabled && !showDisabledItems) return null;
       return renderItem(item, index);
     });
   };
@@ -746,8 +786,8 @@ const SubMenu = (props: SubMenuProps) => {
   const submenuLower = renderSubMenuLower();
 
   if (model?.length) {
-    const newModel = model.filter(
-      (item: ContextMenuModel) => item && !item.disabled,
+    const newModel = model.filter((item: ContextMenuModel) =>
+      showDisabledItems ? item : item && !item.disabled,
     );
     const rowHeights: number[] = newModel.map((item: ContextMenuModel) => {
       if (!item) return 0;

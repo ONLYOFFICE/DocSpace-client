@@ -292,6 +292,5 @@
   "WantToContinue": "Do you want to continue or change the user storage quota?",
   "WhiteLabelSubtitle": "Upload logos with a transparent background (PNG, SVG, JPG) for light and dark themes, or generate one instantly by entering your Your logo below.",
   "WithoutEmailHint": "You don’t have users without emails. Please proceed to the next step.",
-  "AISettings": "AI settings",
-  "MCPServers": "MCP servers"
+  "AISettings": "AI settings"
 }

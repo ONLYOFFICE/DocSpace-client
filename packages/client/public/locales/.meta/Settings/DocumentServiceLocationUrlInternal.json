@@ -3,7 +3,7 @@
   "content": "Document Service address for internal requests from the {{productName}}",
   "content_en_sha1_hash": "2e77cbaa428ed8b0c1752c38f06e1df3760ca3af",
   "created_at": "2025-05-19T21:30:51.393Z",
-  "updated_at": "2025-08-11T18:11:59.234Z",
+  "updated_at": "2025-09-17T13:43:01.829Z",
   "comment": {
     "text": "This translation key is used for internal requests to access document service addresses related to the product name. It appears in a label within an input field, prompting users to enter or select their document service location URL internally.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 359,
+      "line_number": 357,
       "context": "</Text>\n </div>\n <div className=\"input-wrapper\">\n <Label\n htmlFor=\"internalAdress\"\n text={t(\"Settings:DocumentServiceLocationUrlInternal\", {\n productName: t(\"Common:ProductName\"),\n })}\n />\n <InputBlock\n id=\"internalAdress\"",
       "module": "/packages/client"
     }

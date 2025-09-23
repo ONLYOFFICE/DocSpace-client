@@ -26,7 +26,6 @@
 
 import React from "react";
 
-import { getRoomCreationAdditionalParams } from "../../../utils/rooms";
 import { createFolder } from "../../../api/files";
 import { createRoom } from "../../../api/rooms";
 import { RoomsType } from "../../../enums";
@@ -65,8 +64,7 @@ const useInputItemHelper = ({
       try {
         if (selectedItemId) await createFolder(selectedItemId, value);
         else if (roomType) {
-          const additionalParams = getRoomCreationAdditionalParams(roomType);
-          await createRoom({ roomType, title: value, ...additionalParams });
+          await createRoom({ roomType, title: value });
         }
       } catch (e) {
         console.log(e);

@@ -63,6 +63,21 @@ export default class ChatStore {
   };
 
   setCurrentChat = (chat: TChat | null) => {
+    const currentSearch = new URLSearchParams(window.location.search);
+
+    if (currentSearch.get("chat") !== chat?.id) {
+      if (chat) {
+        currentSearch.set("chat", chat.id);
+      } else {
+        currentSearch.delete("chat");
+      }
+      window.history.replaceState(
+        null,
+        "",
+        `${window.location.pathname}?${currentSearch.toString()}`,
+      );
+    }
+
     this.currentChat = chat;
   };
 

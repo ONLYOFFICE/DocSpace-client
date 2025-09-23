@@ -44,6 +44,7 @@ import { Component as StorageManagement } from "../categories/storage-management
 import { Component as Payments } from "../categories/payments";
 import { Component as Bonus } from "../../Bonus";
 import { Component as Services } from "../categories/services";
+import { Component as AISettings } from "../categories/ai-settings";
 
 import useSecurity from "../categories/security/useSecurity";
 import useBackup from "../categories/data-management/backup/useBackup";
@@ -54,6 +55,7 @@ import useCommon from "../categories/common/useCommon";
 import useDataImport from "../categories/data-import/useDataImport";
 import usePayments from "../categories/payments/usePayments";
 import useServices from "../categories/services/useServices";
+import useAiSettings from "../categories/ai-settings/useAiSettings";
 import { createDefaultHookSettingsProps } from "../utils/createDefaultHookSettingsProps";
 import { isMainSectionChange } from "../utils/isMainSectionChange";
 
@@ -72,6 +74,7 @@ type TView =
   | "payments"
   | "bonus"
   | "services"
+  | "ai-settings"
   | "";
 
 const View = ({
@@ -100,8 +103,10 @@ const View = ({
   currentTariffStatusStore,
 
   clearAbortControllerArr,
-  initAISettings,
-  setIsInit,
+
+  fetchAIProviders,
+  fetchMCPServers,
+  fetchWebSearch,
 }: any) => {
   const location = useLocation();
 
@@ -127,6 +132,7 @@ const View = ({
   const isPaymentsPage = location.pathname.includes("payments");
   const isBonusPage = location.pathname.includes("bonus");
   const isServicesPage = location.pathname.includes("services");
+  const isAISettingsPage = location.pathname.includes("ai-settings");
 
   const defaultProps = createDefaultHookSettingsProps({
     loadBaseInfo,
@@ -156,8 +162,6 @@ const View = ({
   const { getBackupInitialValue } = useBackup(defaultProps.backup);
   const { getIntegrationInitialValue } = useIntegration({
     ...defaultProps.integration,
-    initAISettings,
-    setIsInit,
   });
   const { getDataImportInitialValue } = useDataImport(defaultProps.dataImport);
   const { getDeveloperToolsInitialValue } = useDeveloperTools(
@@ -166,6 +170,11 @@ const View = ({
   const { getDeleteDataInitialValue } = useDeleteData(defaultProps.deleteData);
   const { getPaymentsInitialValue } = usePayments(defaultProps.payment);
   const { getServicesInitialValue } = useServices(defaultProps.services);
+  const { getAiSettingsInitialValue } = useAiSettings({
+    fetchAIProviders,
+    fetchMCPServers,
+    fetchWebSearch,
+  });
 
   useEffect(() => {
     clearAbortControllerArrRef.current = clearAbortControllerArr;
@@ -292,6 +301,9 @@ const View = ({
         } else if (isServicesPage) {
           view = "services";
           await getServicesInitialValue();
+        } else if (isAISettingsPage) {
+          view = "ai-settings";
+          await getAiSettingsInitialValue();
         }
 
         if (requestId === activeRequestIdRef.current) {
@@ -329,6 +341,7 @@ const View = ({
       {currentView === "payments" ? <Payments /> : null}
       {currentView === "bonus" ? <Bonus /> : null}
       {currentView === "services" ? <Services /> : null}
+      {currentView === "ai-settings" ? <AISettings /> : null}
     </LoaderWrapper>
   );
 };
@@ -403,8 +416,9 @@ export const ViewComponent = inject(
 
       clearAbortControllerArr,
 
-      setIsInit: aiSettingsStore.setIsInit,
-      initAISettings: aiSettingsStore.initAISettings,
+      fetchAIProviders: aiSettingsStore.fetchAIProviders,
+      fetchMCPServers: aiSettingsStore.fetchMCPServers,
+      fetchWebSearch: aiSettingsStore.fetchWebSearch,
     };
   },
 )(observer(View));

@@ -38,7 +38,7 @@ const ChatHeader = ({ selectedModel, isLoading }: ChatHeaderProps) => {
   return (
     <div className={`${styles.chatHeader} chat-header`}>
       <SelectChat isLoadingProp={isLoading} />
-      <CreateChat />
+      <CreateChat isLoadingProp={isLoading} />
       <SelectModel selectedModel={selectedModel} isLoading={isLoading} />
     </div>
   );

@@ -458,8 +458,36 @@ export const settingsTree = [
     ],
   },
   {
-    id: "portal-settings_catalog-developer-tools",
+    id: "portal-settings_catalog-ai-settings",
     key: "7",
+    type: PageType.aiSettings,
+    link: "ai-settings",
+    tKey: "AISettings",
+    isHeader: true,
+    children: [
+      {
+        id: "portal-settings_catalog-ai-settings-providers",
+        key: "7-0",
+        link: "providers",
+        tKey: "AISettings",
+      },
+      {
+        id: "portal-settings_catalog-ai-settings-servers",
+        key: "7-1",
+        link: "servers",
+        tKey: "AISettings",
+      },
+      {
+        id: "portal-settings_catalog-ai-settings-search",
+        key: "7-2",
+        link: "search",
+        tKey: "AISettings",
+      },
+    ],
+  },
+  {
+    id: "portal-settings_catalog-developer-tools",
+    key: "8",
     type: PageType.developerTools,
     link: "developer-tools",
     tKey: "Common:DeveloperTools",
@@ -467,7 +495,7 @@ export const settingsTree = [
     children: [
       {
         id: "portal-settings_catalog-api",
-        key: "7-0",
+        key: "8-0",
         icon: "",
         link: "api",
         tKey: "Api",
@@ -475,7 +503,7 @@ export const settingsTree = [
       },
       {
         id: "portal-settings_catalog-javascript-sdk",
-        key: "7-1",
+        key: "8-1",
         icon: "",
         link: "javascript-sdk",
         tKey: "Common:DeveloperTools",
@@ -483,49 +511,49 @@ export const settingsTree = [
         children: [
           {
             id: "portal-settings_catalog-javascript-sdk_public-room",
-            key: "7-1-0",
+            key: "8-1-0",
             icon: "",
             link: "public-room",
             tKey: "Common:PublicRoom",
           },
           {
             id: "portal-settings_catalog-javascript-sdk_custom",
-            key: "7-1-1",
+            key: "8-1-1",
             icon: "",
             link: "custom",
             tKey: "Common:Custom",
           },
           {
             id: "portal-settings_catalog-javascript-sdk_room-selector",
-            key: "7-1-2",
+            key: "8-1-2",
             icon: "",
             link: "room-selector",
             tKey: "Common:RoomSelector",
           },
           {
             id: "portal-settings_catalog-javascript-sdk_file-selector",
-            key: "7-1-3",
+            key: "8-1-3",
             icon: "",
             link: "file-selector",
             tKey: "Common:FileSelector",
           },
           {
             id: "portal-settings_catalog-javascript-sdk_editor",
-            key: "7-1-4",
+            key: "8-1-4",
             icon: "",
             link: "editor",
             tKey: "Common:Editor",
           },
           {
             id: "portal-settings_catalog-javascript-sdk_viewer",
-            key: "7-1-5",
+            key: "8-1-5",
             icon: "",
             link: "viewer",
             tKey: "Common:Viewer",
           },
           {
             id: "portal-settings_catalog-javascript-sdk_portal",
-            key: "7-1-6",
+            key: "8-1-6",
             icon: "",
             link: "docspace",
             tKey: "Common:ProductName",
@@ -534,7 +562,7 @@ export const settingsTree = [
       },
       {
         id: "portal-settings_catalog-plugin-sdk",
-        key: "7-2",
+        key: "8-2",
         icon: "",
         link: "plugin-sdk",
         tKey: "PluginSDK",
@@ -542,7 +570,7 @@ export const settingsTree = [
       },
       {
         id: "portal-settings_catalog-webhooks",
-        key: "7-3",
+        key: "8-3",
         icon: "",
         link: "webhooks",
         tKey: "Common:DeveloperTools",
@@ -550,7 +578,7 @@ export const settingsTree = [
       },
       {
         id: "portal-settings_catalog-oauth",
-        key: "7-4",
+        key: "8-4",
         icon: "",
         link: "oauth",
         tKey: "OAuth:OAuth",
@@ -558,7 +586,7 @@ export const settingsTree = [
       },
       {
         id: "portal-settings_catalog-api-keys",
-        key: "7-5",
+        key: "8-5",
         icon: "",
         link: "api-keys",
         tKey: "Settings:ApiKeys",
@@ -568,21 +596,21 @@ export const settingsTree = [
   },
   {
     id: "portal-settings_catalog-delete",
-    key: "8",
+    key: "9",
     type: PageType.portalDeletion,
     link: "delete-data",
     tKey: "PortalDeletion",
     isHeader: true,
     children: [
       {
-        key: "8-0",
+        key: "9-0",
         icon: "",
         link: "deletion",
         tKey: "PortalDeletion",
         isCategory: true,
       },
       {
-        key: "8-1",
+        key: "9-1",
         icon: "",
         link: "deactivation",
         tKey: "PortalDeactivation",
@@ -592,7 +620,7 @@ export const settingsTree = [
   },
   {
     id: "portal-settings_catalog-payments",
-    key: "9",
+    key: "10",
     type: PageType.payments,
     link: "payments",
     tKey: "Common:PaymentsTitle",
@@ -600,7 +628,7 @@ export const settingsTree = [
     children: [
       {
         id: "portal-settings_catalog-portal-payments",
-        key: "9-0",
+        key: "10-0",
         icon: "",
         link: "portal-payments",
         tKey: "Common:PaymentsTitle",
@@ -608,7 +636,7 @@ export const settingsTree = [
       },
       {
         id: "portal-settings_catalog-wallet",
-        key: "9-1",
+        key: "10-1",
         icon: "",
         link: "wallet",
         tKey: "Wallet",
@@ -618,7 +646,7 @@ export const settingsTree = [
   },
   {
     id: "portal-settings_catalog-services",
-    key: "10",
+    key: "11",
     type: PageType.services,
     link: "services",
     tKey: "Services",
@@ -626,7 +654,7 @@ export const settingsTree = [
     children: [
       {
         id: "portal-settings_catalog-services",
-        key: "10-0",
+        key: "11-0",
         icon: "",
         link: "",
         tKey: "Services",
@@ -636,7 +664,7 @@ export const settingsTree = [
   },
   {
     id: "portal-settings_catalog-bonus",
-    key: "11",
+    key: "12",
     type: PageType.bonus,
     link: "bonus",
     tKey: "Common:Bonus",

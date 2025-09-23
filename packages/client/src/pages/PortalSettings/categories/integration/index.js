@@ -40,7 +40,6 @@ import ThirdParty from "./ThirdPartyServicesSettings";
 import SMTPSettings from "./SMTPSettings";
 import DocumentService from "./DocumentService";
 import PluginPage from "./Plugins";
-import AISettngs from "./AISettngs";
 import useIntegration from "./useIntegration";
 
 import { createDefaultHookSettingsProps } from "../../utils/createDefaultHookSettingsProps";
@@ -61,8 +60,6 @@ const IntegrationWrapper = (props) => {
     filesSettingsStore,
     ldapStore,
     clearAbortControllerArr,
-    initAISettings,
-    setIsInit,
   } = props;
   const navigate = useNavigate();
 
@@ -83,11 +80,8 @@ const IntegrationWrapper = (props) => {
     getThirdPartyData,
     getSMTPSettingsData,
     getDocumentServiceData,
-    getAISettingsData,
   } = useIntegration({
     ...defaultProps.integration,
-    initAISettings,
-    setIsInit,
   });
 
   useEffect(() => {
@@ -130,15 +124,6 @@ const IntegrationWrapper = (props) => {
       onClick: async () => {
         clearAbortControllerArr();
         await getSMTPSettingsData();
-      },
-    },
-    {
-      id: "ai-settings",
-      name: standalone ? t("AISettings") : t("MCPServers"),
-      content: <AISettngs standalone />, // TODO: Change to standalone={standalone} when adding providers on stand is not needed
-      onClick: async () => {
-        clearAbortControllerArr();
-        await getAISettingsData();
       },
     },
   ];
@@ -222,7 +207,6 @@ export const Component = inject(
     setup,
     filesSettingsStore,
     ldapStore,
-    aiSettingsStore,
   }) => {
     const {
       standalone,
@@ -233,8 +217,6 @@ export const Component = inject(
     const { load: toDefault } = ssoStore;
 
     const { isSSOAvailable } = currentQuotaStore;
-
-    const { initAISettings, setIsInit } = aiSettingsStore;
 
     return {
       toDefault,
@@ -250,8 +232,6 @@ export const Component = inject(
       filesSettingsStore,
       ldapStore,
       clearAbortControllerArr,
-      initAISettings,
-      setIsInit,
     };
   },
 )(

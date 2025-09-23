@@ -22,7 +22,6 @@
   "ActivateRenewDescr": "Да бисте добили ваше личне услове обнове, контактирајте вашег посвећеног менаџера или нам пишите на <1>{{email}}</1>",
   "ActivateRenewSubscriptionHeader": "Обновите претплату за {{license}}",
   "ActivateSwithToProHeader": "Пребаците се на пуну {{license}} верзију",
-  "ActivateTariffDescr": "Користите {{organizationName}} {{productName}} {{license}}.",
   "ActivateTariffLicenseTrialExpiration": "Ваш пробни период истиче {{date}}.",
   "ActivateToProBannerHeaderTrial": "Купите пуну {{license}} верзију да добијете:",
   "ActivateUploadDescr": "Да бисте активирали вашу лиценцу, отпремите је испод и кликните на Активирај.",

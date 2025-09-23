@@ -24,60 +24,48 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@use "@docspace/shared/styles/mixins";
+import { useState } from "react";
+import { TLicenseQuota } from "../../../../../api/portal/types";
+import { createLicenseQuotaReport } from "../../../../../api/management";
+import { toastr } from "../../../../../components/toast";
 
-.aiSettingsContainer {
-  width: 100%;
-  max-width: 700px;
-}
+type TUserStatisticsDialogProps = {
+  openOnNewPage?: boolean;
+  licenseQuota?: TLicenseQuota;
+};
 
-.aiProvider,
-.mcpServers {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
+export const useUserStatisticsDialog = ({
+  licenseQuota,
+  openOnNewPage,
+}: TUserStatisticsDialogProps) => {
+  const [visible, setVisible] = useState(false);
 
-.aiProvider {
-  margin-bottom: 24px;
-}
+  const open = () => setVisible(true);
+  const close = () => setVisible(false);
 
-.heading {
-  margin-bottom: 8px;
-}
+  const downloadAndOpenReport = async () => {
+    try {
+      const url = await createLicenseQuotaReport();
+      window.open(url, openOnNewPage ? "_blank" : "_self");
+    } catch (error) {
+      toastr.error(error!);
+    }
+  };
 
-.description {
-  color: var(--settings-common-description-color);
+  const usersStatistics = licenseQuota?.licenseTypeByUsers
+    ? {
+        limitUsers: licenseQuota.license.users_count,
+        totalUsers: licenseQuota.totalUsers,
+        portalUsers: licenseQuota.portalUsers,
+        externalUsers: licenseQuota.externalUsers,
+      }
+    : null;
 
-  margin-bottom: 8px;
-}
-
-.learnMoreLink {
-  margin-bottom: 16px;
-}
-
-.addProviderButton {
-  margin-bottom: 20px;
-}
-
-.providerList,
-.mcpList {
-  width: 100%;
-
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 340px);
-  gap: 20px;
-
-  @include mixins.mobile {
-    grid-template-columns: 1fr;
-  }
-}
-
-.mcpHeading {
-  margin-bottom: 20px;
-}
-
-.mcpListContainer {
-  margin-bottom: 20px;
-  width: 100%;
-}
+  return {
+    isUserStatisticsVisible: visible,
+    openUserStatistics: open,
+    closeUserStatistics: close,
+    downloadAndOpenReport,
+    usersStatistics,
+  };
+};

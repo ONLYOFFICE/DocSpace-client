@@ -3,7 +3,7 @@
   "content": "Enable",
   "content_en_sha1_hash": "20063ad9053289cecaa20ae630ed2dd758282a07",
   "created_at": "2025-05-19T21:30:44.923Z",
-  "updated_at": "2025-09-09T10:39:52.735Z",
+  "updated_at": "2025-09-19T15:39:23.032Z",
   "comment": {
     "text": "This translation key is used to display the label \"Enable\" on a button in a modal dialog, typically found in settings or configuration sections of an application. It appears as the primary action button in a footer section and is used for enabling a feature or functionality.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ad-management.tsx",
-      "line_number": 157,
+      "line_number": 154,
       "context": "value: 0,\n dataTestId: \"ad_management_disable\",\n },\n {\n id: \"enable\",\n label: t(\"Common:Enable\"),\n value: 1,\n dataTestId: \"ad_management_enable\",\n },\n ]}\n selected={type}",
       "module": "/packages/client"
     },
@@ -42,31 +42,31 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
-      "line_number": 278,
+      "line_number": 291,
       "context": "value: \"disabled\",\n dataTestId: \"ip_security_disabled\",\n },\n {\n id: \"ip-security-enable\",\n label: t(\"Common:Enable\"),\n value: \"enable\",\n dataTestId: \"ip_security_enabled\",\n },\n ]}\n selected={enable ? \"enable\" : \"disabled\"}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/sessionLifetime.js",
-      "line_number": 272,
+      "line_number": 294,
       "context": "value: \"disabled\",\n dataTestId: \"session_lifetime_disabled\",\n },\n {\n id: \"session-lifetime-enable\",\n label: t(\"Common:Enable\"),\n value: \"enable\",\n dataTestId: \"session_lifetime_enabled\",\n },\n ]}\n selected={type ? \"enable\" : \"disabled\"}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 753,
+      "line_number": 784,
       "context": "};\n \n const enableOption = {\n key: \"enable\",\n icon: EnableReactSvgUrl,\n label: t(\"Common:Enable\"),\n onClick: () => this.onEnable(t, clientId),\n };\n \n const disableOption = {\n key: \"disable\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 753,
+      "line_number": 784,
       "context": "};\n \n const enableOption = {\n key: \"enable\",\n icon: EnableReactSvgUrl,\n label: t(\"Common:Enable\"),\n onClick: () => this.onEnable(t, clientId),\n };\n \n const disableOption = {\n key: \"disable\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 476,
+      "line_number": 473,
       "context": "onClick: () => setSendInviteDialogVisible(true),\n icon: InviteAgainReactSvgUrl,\n },\n {\n key: \"cm-enable\",\n label: t(\"Common:Enable\"),\n disabled: !hasUsersToActivate || (isRoomAdmin && isGuests),\n onClick: () => onChangeStatus(EmployeeStatus.Active),\n icon: EnableReactSvgUrl,\n },\n {",
       "module": "/packages/client"
     },

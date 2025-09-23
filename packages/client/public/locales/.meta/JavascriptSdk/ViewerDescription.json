@@ -3,7 +3,7 @@
   "content": "Embed a viewer to allow users to open a file for viewing from the corresponding room.",
   "content_en_sha1_hash": "a8616ccb3592bd915cdd0ade3cee2667a44bb152",
   "created_at": "2025-05-19T21:30:54.708Z",
-  "updated_at": "2025-08-04T07:30:01.379Z",
+  "updated_at": "2025-09-17T13:43:01.782Z",
   "comment": {
     "text": "Embed a viewer allows users to open a file for viewing from the corresponding room. This feature is used in the RoomSelector preset and appears as the viewer component.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 109,
+      "line_number": 116,
       "context": "image: theme.isBase ? EditorImg : EditorImgDark,\n handleOnClick: navigateToEditor,\n },\n {\n title: t(\"Viewer\"),\n description: t(\"ViewerDescription\"),\n image: theme.isBase ? ViewerImg : ViewerImgDark,\n handleOnClick: navigateToViewer,\n },\n {\n title: t(\"Common:RoomSelector\"),",
       "module": "/packages/client"
     },

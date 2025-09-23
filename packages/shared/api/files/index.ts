@@ -1870,6 +1870,7 @@ export async function shareFolderToUsers(
     url: `/files/folder/${folderId}/share`,
     data: {
       share,
+      notify: true,
     },
   })) as RoomMember[];
 
@@ -1884,6 +1885,7 @@ export async function shareFileToUsers(
     url: `/files/file/${fileId}/share`,
     data: {
       share,
+      notify: true,
     },
   })) as RoomMember[];
 

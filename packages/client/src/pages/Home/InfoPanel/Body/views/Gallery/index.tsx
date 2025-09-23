@@ -45,7 +45,19 @@ import styles from "./Gallery.module.scss";
 import ItemTitle from "./ItemTitle";
 
 type GalleryProps = {
-  gallerySelected?: OformsStore["gallerySelected"] | any;
+  gallerySelected?:
+    | OformsStore["gallerySelected"]
+    | {
+        attributes: {
+          name_form: string;
+          template_desc: string;
+          description_card: string;
+          updatedAt: string;
+          template_image: {
+            data: { attributes: { formats: { small: { url: string } } } };
+          };
+        };
+      };
   getIcon?: FilesSettingsStore["getIcon"];
   culture?: string;
 };

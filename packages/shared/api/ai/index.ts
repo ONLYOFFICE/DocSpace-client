@@ -482,7 +482,7 @@ export const getAIConfig = async () => {
   try {
     const res = await request({
       method: "get",
-      url: `${baseUrl}/config/`,
+      url: `${baseUrl}/config`,
     });
 
     return res as { webSearchEnabled: boolean };

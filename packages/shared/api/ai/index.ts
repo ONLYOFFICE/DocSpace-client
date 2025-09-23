@@ -478,6 +478,20 @@ export const updateWebSearchInRoom = async (
   }
 };
 
+export const getAIConfig = async () => {
+  try {
+    const res = await request({
+      method: "get",
+      url: `${baseUrl}/config/`,
+    });
+
+    return res as { webSearchEnabled: boolean };
+  } catch (e) {
+    console.log(e);
+    toastr.error(e as string);
+  }
+};
+
 export const getWebSearchConfig = async () => {
   try {
     const res = await request({

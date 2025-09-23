@@ -40,7 +40,7 @@ import {
   disconnectServer,
   getMCPToolsForRoom,
   getServersListForRoom,
-  getWebSearchConfig,
+  getAIConfig,
   getWebSearchInRoom,
   updateWebSearchInRoom,
 } from "../../../../api/ai";
@@ -162,12 +162,12 @@ const ToolsSettings = () => {
   }, [roomId]);
 
   const initTools = React.useCallback(async () => {
-    const [webSearchConfig, webSearchInRoom] = await Promise.all([
-      getWebSearchConfig(),
+    const [aiConfig, webSearchInRoom] = await Promise.all([
+      getAIConfig(),
       getWebSearchInRoom(Number(roomId)),
       fetchTools(),
     ]);
-    setWebSearchPortalEnabled(webSearchConfig?.enabled ?? false);
+    setWebSearchPortalEnabled(aiConfig?.webSearchEnabled ?? false);
     setWebSearchEnabled(webSearchInRoom?.webSearchEnabled ?? false);
   }, [fetchTools, roomId]);
 

@@ -26,9 +26,11 @@
 
 import React from "react";
 import classNames from "classnames";
+import Linkify from "linkify-react";
 
 import { ContentType, RoleType } from "../../../../../../api/ai/enums";
 
+import { Link, LinkTarget } from "../../../../../link";
 import { Avatar, AvatarRole, AvatarSize } from "../../../../../avatar";
 import { Text } from "../../../../../text";
 
@@ -42,6 +44,25 @@ import ToolCallMessage from "./ToolCallMessage";
 import Error from "./Error";
 import Files from "./Files";
 import Buttons from "./Buttons";
+
+const renderLink = ({
+  attributes,
+  content,
+}: {
+  attributes: { href?: string };
+  content: string;
+}) => (
+  <Link
+    href={attributes.href}
+    className={styles.link}
+    target={LinkTarget.blank}
+    fontSize="15px"
+    lineHeight="22px"
+    color="accent"
+  >
+    {content}
+  </Link>
+);
 
 const Message = ({
   message,
@@ -87,7 +108,16 @@ const Message = ({
                     fontWeight={400}
                     className={classNames(styles.paragraph)}
                   >
-                    {c.text}
+                    <Linkify
+                      options={{
+                        validate: {
+                          url: (value) => /^https?:\/\//.test(value),
+                        },
+                        render: renderLink,
+                      }}
+                    >
+                      {c.text}
+                    </Linkify>
                   </Text>
                 </div>
               );

@@ -273,6 +273,10 @@
   }
 }
 
+.toolCallMessage {
+  margin: 8px 0;
+}
+
 .toolCall {
   width: 100%;
 
@@ -422,16 +426,21 @@
   }
 }
 
+.heading {
+  padding: 8px 0;
+}
+
 .paragraph {
   padding: 8px 0;
   white-space: pre-line;
   color: var(--text-color);
+  font-weight: 400;
 }
 
 .blockquote {
   position: relative;
 
-  margin: 0 0 8px;
+  margin: 8px 0;
   padding: 6px 12px;
 
   width: fit-content;
@@ -458,11 +467,14 @@
   }
 }
 
+.hrWrapper {
+  padding: 8px 0;
+}
+
 .hr {
   border: none;
   height: 1px;
   background-color: var(--chat-message-hr-color);
-  margin: 8px 0;
 }
 
 .listBlock {
@@ -472,6 +484,12 @@
   padding-inline-start: 22px;
 
   white-space: normal;
+}
+
+.listItem {
+  > .paragraph {
+    font-weight: inherit;
+  }
 }
 
 .listBlock,
@@ -530,7 +548,7 @@
 }
 
 .tableScroll {
-  margin-bottom: 8px;
+  margin: 8px 0;
 }
 
 .tableScrollBody {

@@ -44,6 +44,7 @@ export const createMarkdownComponents = ({
 }): Components => ({
   h1: ({ children }) => (
     <Heading
+      className={styles.heading}
       level={HeadingLevel.h1}
       fontWeight={700}
       fontSize="24px"
@@ -54,6 +55,7 @@ export const createMarkdownComponents = ({
   ),
   h2: ({ children }) => (
     <Heading
+      className={styles.heading}
       level={HeadingLevel.h2}
       fontWeight={700}
       fontSize="20px"
@@ -64,6 +66,7 @@ export const createMarkdownComponents = ({
   ),
   h3: ({ children }) => (
     <Heading
+      className={styles.heading}
       level={HeadingLevel.h3}
       fontWeight={600}
       fontSize="18px"
@@ -74,6 +77,7 @@ export const createMarkdownComponents = ({
   ),
   h4: ({ children }) => (
     <Heading
+      className={styles.heading}
       level={HeadingLevel.h4}
       fontWeight={600}
       fontSize="16px"
@@ -84,6 +88,7 @@ export const createMarkdownComponents = ({
   ),
   h5: ({ children }) => (
     <Heading
+      className={styles.heading}
       level={HeadingLevel.h5}
       fontWeight={600}
       fontSize="15px"
@@ -94,6 +99,7 @@ export const createMarkdownComponents = ({
   ),
   h6: ({ children }) => (
     <Heading
+      className={styles.heading}
       level={HeadingLevel.h6}
       fontWeight={600}
       fontSize="14px"
@@ -104,6 +110,7 @@ export const createMarkdownComponents = ({
   ),
   a: ({ children, href }) => (
     <Link
+      className={styles.link}
       target={LinkTarget.blank}
       href={href}
       fontSize="15px"
@@ -116,7 +123,11 @@ export const createMarkdownComponents = ({
   blockquote: ({ children }) => (
     <blockquote className={styles.blockquote}>{children}</blockquote>
   ),
-  hr: () => <hr className={styles.hr} />,
+  hr: () => (
+    <div className={styles.hrWrapper}>
+      <hr className={styles.hr} />
+    </div>
+  ),
   table: ({ children }) => (
     <Scrollbar
       className={styles.tableScroll}
@@ -134,7 +145,6 @@ export const createMarkdownComponents = ({
       <Text
         fontSize="15px"
         lineHeight="22px"
-        fontWeight={400}
         className={classNames(styles.paragraph)}
       >
         {children as React.ReactNode}

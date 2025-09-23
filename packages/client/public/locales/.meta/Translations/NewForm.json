@@ -3,7 +3,7 @@
   "content": "PDF Form",
   "content_en_sha1_hash": "d6182f70d8b22eaa5700e3917f6ccb00e1d25bdb",
   "created_at": "2025-05-19T21:30:49.997Z",
-  "updated_at": "2025-09-22T13:39:52.232Z",
+  "updated_at": "2025-09-23T07:24:23.989Z",
   "comment": {
     "text": "The translation key \"Translations:NewForm\" represents the text \"PDF Form\". It is used to display this text in a button within an empty folder container.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/CommonButtons.js",
-      "line_number": 72,
+      "line_number": 73,
       "context": "</Link>\n <Link data-format=\"pptx\" onClick={onCreate} {...linkStyles}>\n {t(\"Presentation\")},\n </Link>\n <Link data-format=\"pdf\" onClick={onCreate} {...linkStyles}>\n {t(\"Translations:NewForm\")}\n </Link>\n </div>\n </div>\n \n <div className=\"empty-folder_container-links\">",
       "module": "/packages/client"
     },
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3097,
+      "line_number": 3159,
       "context": "const formActions = [\n {\n id: \"personal_form-template\",\n icon: FormReactSvgUrl,\n label: t(\"Translations:NewForm\"),\n key: \"new-form-base\",\n items: [\n createTemplateForm,\n createTemplateNewFormFile,\n templateOformsGallery,",
       "module": "/packages/client"
     }

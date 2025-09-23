@@ -3,7 +3,7 @@
   "content": "Change quota",
   "content_en_sha1_hash": "02de777a63ceae10d68258c04b8924d83239debc",
   "created_at": "2025-05-19T21:30:43.407Z",
-  "updated_at": "2025-09-07T07:53:15.043Z",
+  "updated_at": "2025-09-23T07:24:24.036Z",
   "comment": {
     "text": "\"Change quota\" is used as a button label and header title in a modal dialog to prompt user action of changing storage limits. It appears in two contexts: a warning quota dialog and a space quota settings dialog. The translation key should be used for situations where users need to edit or adjust their storage quotas.",
     "is_auto": true,
@@ -36,7 +36,7 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2302,
+      "line_number": 2301,
       "context": "case \"change-quota\":\n if (!this.isAvailableOption(\"change-quota\")) return null;\n return {\n id: \"menu-change-quota\",\n key: \"change-quota\",\n label: t(\"Common:ChangeQuota\"),\n iconUrl: ChangQuotaReactSvgUrl,\n onClick: () => this.changeRoomQuota(selection),\n disabled: !showStorageInfo,\n };\n case \"default-quota\":",
       "module": "/packages/client"
     },

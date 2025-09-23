@@ -3,7 +3,7 @@
   "content": "Author",
   "content_en_sha1_hash": "5fda23d62015b99fb2a9f86b38bcdf2bdf7609c8",
   "created_at": "2025-05-19T21:30:55.305Z",
-  "updated_at": "2025-08-29T14:33:38.067Z",
+  "updated_at": "2025-09-23T07:24:24.125Z",
   "comment": {
     "text": "This translation key is used to display \"Author\" in various UI contexts, typically as a column title or label. It appears in settings dialogs and table headers, providing context for users to filter or sort data by author.",
     "is_auto": true,
@@ -18,38 +18,44 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 231,
+      "line_number": 236,
       "context": "} = this.props;\n \n const authorBlock = !isPublicRoom\n ? {\n key: \"Author\",\n title: t(\"ByAuthor\"),\n enable: authorColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Author,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 231,
+      "line_number": 236,
       "context": "} = this.props;\n \n const authorBlock = !isPublicRoom\n ? {\n key: \"Author\",\n title: t(\"ByAuthor\"),\n enable: authorColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Author,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 231,
+      "line_number": 236,
       "context": "} = this.props;\n \n const authorBlock = !isPublicRoom\n ? {\n key: \"Author\",\n title: t(\"ByAuthor\"),\n enable: authorColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Author,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 231,
+      "line_number": 236,
       "context": "} = this.props;\n \n const authorBlock = !isPublicRoom\n ? {\n key: \"Author\",\n title: t(\"ByAuthor\"),\n enable: authorColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Author,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 231,
+      "line_number": 236,
+      "context": "} = this.props;\n \n const authorBlock = !isPublicRoom\n ? {\n key: \"Author\",\n title: t(\"ByAuthor\"),\n enable: authorColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Author,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
+      "line_number": 236,
       "context": "} = this.props;\n \n const authorBlock = !isPublicRoom\n ? {\n key: \"Author\",\n title: t(\"ByAuthor\"),\n enable: authorColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Author,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1082,
-      "context": "} else {\n const authorOption = [\n {\n key: FilterGroups.filterAuthor,\n group: FilterGroups.filterAuthor,\n label: t(\"ByAuthor\"),\n isHeader: true,\n },\n {\n id: \"filter_author-me\",\n key: FilterKeys.me,",
+      "line_number": 1091,
+      "context": "selectedFolder.rootFolderType === FolderType.SHARE;\n \n const author = {\n key: FilterGroups.filterAuthor,\n group: FilterGroups.filterAuthor,\n label: t(\"ByAuthor\"),\n isHeader: true,\n };\n \n const authorOption = [\n ...(isFolderSharedWithMe ? [] : [author]),",
       "module": "/packages/client"
     },
     {

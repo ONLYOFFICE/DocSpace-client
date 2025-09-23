@@ -3,7 +3,7 @@
   "content": "Last opened",
   "content_en_sha1_hash": "6674c9e55888c1169f005b2ea8c53555f625f330",
   "created_at": "2025-08-27T10:14:24.104Z",
-  "updated_at": "2025-08-29T14:33:38.135Z",
+  "updated_at": "2025-09-23T07:24:24.175Z",
   "comment": {
     "text": "This key displays the label \"Last opened\" for a column header in a table view, likely showing the last time a file or item was accessed. It's used to allow users to sort or view data based on recent access.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 428,
+      "line_number": 499,
       "context": "enable: locationRecentColumnIsEnabled,\n resizable: true,\n onChange: this.onColumnChange,\n },\n {\n key: \"LastOpenedRecent\",\n title: t(\"LastOpened\"),\n enable: lastOpenedRecentColumnIsEnabled,\n resizable: true,\n onChange: this.onColumnChange,\n },",
       "module": "/packages/client"
     }

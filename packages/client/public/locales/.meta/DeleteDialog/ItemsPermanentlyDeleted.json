@@ -3,7 +3,7 @@
   "content": "Items will be permanently deleted in 30 days.",
   "content_en_sha1_hash": "498e17195ea2014f36206b2ad558d1a38e7874bf",
   "created_at": "2025-05-19T21:30:56.716Z",
-  "updated_at": "2025-09-22T13:39:52.377Z",
+  "updated_at": "2025-09-23T07:24:24.100Z",
   "comment": {
     "text": "This translation key is used to display a message that informs users about the permanent deletion of items after 30 days. It appears in a delete confirmation dialog and prompts users to confirm their action. Translators should provide a clear and concise message that conveys this information in the target language.",
     "is_auto": true,
@@ -12,19 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 220,
+      "line_number": 232,
       "context": "</>\n )\n ) : (\n <>\n <>{t(\"DeleteItems\")} </>\n <>{t(\"ItemsPermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>\n </>\n );\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 220,
+      "line_number": 232,
       "context": "</>\n )\n ) : (\n <>\n <>{t(\"DeleteItems\")} </>\n <>{t(\"ItemsPermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>\n </>\n );\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 220,
+      "line_number": 232,
       "context": "</>\n )\n ) : (\n <>\n <>{t(\"DeleteItems\")} </>\n <>{t(\"ItemsPermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>\n </>\n );\n }",
       "module": "/packages/client"
     }

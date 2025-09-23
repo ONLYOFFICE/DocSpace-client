@@ -3,7 +3,7 @@
   "content": "In a Public room, the main link is valid for an unlimited time period. You can create additional links with time limit.",
   "content_en_sha1_hash": "79a4f8b269e2f9e04d5e7e9a2156982f8b68c54c",
   "created_at": "2025-08-26T11:15:03.480Z",
-  "updated_at": "2025-08-26T11:24:32.804Z",
+  "updated_at": "2025-09-23T07:24:24.405Z",
   "comment": {
     "text": "This text explains the time limit behavior for links in a Public room. It appears in a dialog (EditLinkPanel) to inform users that the main link is permanent, while additional links can have time limits. Translators should ensure the description accurately conveys this distinction.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/EditLinkPanel/index.tsx",
-      "line_number": 401,
+      "line_number": 410,
       "context": "!isRoom(item) && item.parentRoomType === FolderType.PublicRoom;\n \n if (isFormRoom || isParentFormRoom)\n return t(\"Common:LimitTimeBlockFormRoomDescription\");\n if (isPublic || isParentPublicRoom)\n return t(\"Common:LimitTimeBlockPublicRoomDescription\");\n \n return \"\";\n }\n \n if (isExpired) {",
       "module": "/packages/shared"
     }

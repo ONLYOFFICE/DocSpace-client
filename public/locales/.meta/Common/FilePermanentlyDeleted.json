@@ -3,7 +3,7 @@
   "content": "The file will be permanently deleted in 30 days.",
   "content_en_sha1_hash": "0893b91fab956db6aa23b845defda697042a8cb4",
   "created_at": "2025-05-19T21:30:45.251Z",
-  "updated_at": "2025-09-22T13:39:52.377Z",
+  "updated_at": "2025-09-23T07:24:24.099Z",
   "comment": {
     "text": "The translation key \"FilePermanentlyDeleted\" is used to display a message indicating that a file will be permanently deleted in 30 days. It appears as part of a delete confirmation dialog in the UI, providing context for users who have chosen to delete a file and ensuring they understand the permanent nature of the action.",
     "is_auto": true,
@@ -12,19 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 213,
+      "line_number": 225,
       "context": "isFolder ? (\n t(\"DeleteFolder\")\n ) : (\n <>\n <>{t(\"Common:DeleteFile\")} </>\n <>{t(\"Common:FilePermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>\n </>\n )\n ) : (\n <>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 213,
+      "line_number": 225,
       "context": "isFolder ? (\n t(\"DeleteFolder\")\n ) : (\n <>\n <>{t(\"Common:DeleteFile\")} </>\n <>{t(\"Common:FilePermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>\n </>\n )\n ) : (\n <>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 213,
+      "line_number": 225,
       "context": "isFolder ? (\n t(\"DeleteFolder\")\n ) : (\n <>\n <>{t(\"Common:DeleteFile\")} </>\n <>{t(\"Common:FilePermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>\n </>\n )\n ) : (\n <>",
       "module": "/packages/client"
     },

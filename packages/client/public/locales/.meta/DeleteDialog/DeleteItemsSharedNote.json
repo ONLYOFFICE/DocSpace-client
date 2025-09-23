@@ -3,7 +3,7 @@
   "content": "Please note that if you have shared them with someone, they will become unavailable.",
   "content_en_sha1_hash": "840b5acfff4dfd6368270d6e180b41874d1ce417",
   "created_at": "2025-05-19T21:30:56.705Z",
-  "updated_at": "2025-09-22T13:39:52.379Z",
+  "updated_at": "2025-09-23T07:24:24.101Z",
   "comment": {
     "text": "This translation key is used for a confirmation message that explains what happens when shared notes are deleted. It informs users that deleted notes will be unavailable to those they've shared with. This appears in a delete dialog component.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 270,
+      "line_number": 282,
       "context": "</>\n )\n ) : (\n <>\n <>{t(\"DeleteItems\")} </>\n <>{t(\"DeleteItemsSharedNote\")} </>\n {!isThirdParty ? <>{t(\"ItemsPermanentlyDeleted\")} </> : null}\n <>{t(\"Common:WantToContinue\")}</>\n </>\n );\n }",
       "module": "/packages/client"
     }

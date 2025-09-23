@@ -59,8 +59,6 @@ import { createDefaultHookSettingsProps } from "../utils/createDefaultHookSettin
 import { isMainSectionChange } from "../utils/isMainSectionChange";
 import { TView, ViewProps } from "./View.types";
 
-const CURRENT_VIEW_STORAGE_KEY = "currentView";
-
 const getViewFromPathname = (pathname: string): TView => {
   if (pathname.includes("customization")) return "customization";
   if (pathname.includes("security")) return "security";
@@ -108,9 +106,8 @@ const View = ({
   const { t } = useTranslation();
 
   const [currentView, setCurrentView] = React.useState<TView>(() => {
-    const savedView = localStorage.getItem(CURRENT_VIEW_STORAGE_KEY) as TView;
     const pathView = getViewFromPathname(location.pathname);
-    return pathView || savedView;
+    return pathView;
   });
   const [isLoading, setIsLoading] = React.useState(false);
 
@@ -142,8 +139,6 @@ const View = ({
     currentTariffStatusStore,
   });
 
-  console.log("currentView", currentView);
-
   const { getCommonInitialValue } = useCommon(defaultProps.common);
   const { getSecurityInitialValue } = useSecurity(defaultProps.security);
   const { getBackupInitialValue } = useBackup(defaultProps.backup);
@@ -161,21 +156,6 @@ const View = ({
   useEffect(() => {
     clearAbortControllerArrRef.current = clearAbortControllerArr;
   }, [clearAbortControllerArr]);
-
-  useEffect(() => {
-    const pathView = getViewFromPathname(location.pathname);
-    if (pathView) {
-      localStorage.setItem(CURRENT_VIEW_STORAGE_KEY, pathView);
-      setCurrentView(pathView);
-    }
-  }, [location.pathname]);
-
-  useEffect(() => {
-    return () => {
-      localStorage.removeItem(CURRENT_VIEW_STORAGE_KEY);
-      // setIsPortalSettingsLoading(true);
-    };
-  }, []);
 
   useEffect(() => {
     animationStartedRef.current = false;

@@ -258,7 +258,7 @@ export const getDesktopMediaContextModel = (
       label: t("Common:Delete"),
       icon: TrashReactSvgUrl,
       onClick: () => onClickDelete?.(targetFile, t),
-      disabled: archiveRoom || isPublicFile,
+      disabled: archiveRoom || isPublicFile || !targetFile.security.Delete,
     },
   ];
 

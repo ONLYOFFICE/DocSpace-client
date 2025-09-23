@@ -28,8 +28,8 @@ import { useTranslation } from "react-i18next";
 
 import { useTheme } from "@docspace/shared/hooks/useTheme";
 
-import EmptyScreenAltSvgUrl from "PUBLIC_DIR/images/empty_screen_alt.svg?url";
-import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_alt_dark.svg?url";
+import EmptyScreenAltSvgUrl from "PUBLIC_DIR/images/emptyview/empty.files.info.light.svg?url";
+import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/emptyview/empty.files.info.dark.svg?url";
 
 import styles from "./NoItem.module.scss";
 

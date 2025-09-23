@@ -24,9 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
+import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 
 import UsefulTipsContainer from "./sub-components/UsefulTipsContainer";
 import RoomsActionsContainer from "./sub-components/RoomsActionsContainer";
@@ -37,6 +39,13 @@ import { StyledSectionBodyContent, StyledTextContent } from "./StyledComponent";
 
 const Notifications = () => {
   const { t } = useTranslation(["Notifications", "Common"]);
+
+  useEffect(() => {
+    SocketHelper?.emit(SocketCommands.Subscribe, {
+      roomParts: "telegram",
+      individual: true,
+    });
+  }, []);
 
   const textProps = { fontSize: "13px", fontWeight: "600" };
   const textDescriptionsProps = {

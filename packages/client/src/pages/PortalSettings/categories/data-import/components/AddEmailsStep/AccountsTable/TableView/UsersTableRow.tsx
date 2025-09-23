@@ -190,10 +190,9 @@ const UsersTableRow = (props: AddEmailTableRowProps) => {
           onChange={handleAccountToggle}
           isChecked={isChecked}
           isDisabled={!isPrevEmailValid}
+          truncate
+          label={displayName}
         />
-        <Text fontWeight={600} truncate>
-          {displayName}
-        </Text>
       </TableCell>
 
       <TableCell>

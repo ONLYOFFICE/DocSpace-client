@@ -208,6 +208,11 @@
   box-sizing: border-box;
 
   margin: 8px 0;
+  max-height: 420px;
+
+  @include mixins.mobile {
+    max-height: 320px;
+  }
 
   .codeHeader {
     width: 100%;
@@ -218,16 +223,14 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    flex-basis: 32px;
+    flex-shrink: 0;
 
     padding: 0 8px;
 
     box-sizing: border-box;
 
     border-bottom: 1px solid var(--chat-message-code-block-separator-color);
-  }
-
-  .codeBlockScroll {
-    max-height: 168px;
   }
 
   .codeBody {
@@ -274,6 +277,12 @@
   width: 100%;
 
   box-sizing: border-box;
+
+  &.inDialog {
+    .codeContainer {
+      max-height: 168px;
+    }
+  }
 
   .toolCallHeader {
     display: flex;
@@ -347,6 +356,10 @@
           margin: 0;
         }
       }
+    }
+
+    .codeContainer {
+      max-height: 210px;
     }
   }
 }

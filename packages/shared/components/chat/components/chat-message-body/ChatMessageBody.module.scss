@@ -226,10 +226,12 @@
     border-bottom: 1px solid var(--chat-message-code-block-separator-color);
   }
 
+  .codeBlockScroll {
+    max-height: 168px;
+  }
+
   .codeBody {
     background-color: var(--chat-message-code-block-background-color);
-
-    max-height: 168px;
   }
 }
 

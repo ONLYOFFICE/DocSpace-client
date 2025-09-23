@@ -79,6 +79,7 @@ export type TFileSecurity = {
   CopyLink: boolean;
   Embed: boolean;
   Vectorization: boolean;
+  AscAi?: boolean;
 };
 
 export type TAvailableExternalRights = {

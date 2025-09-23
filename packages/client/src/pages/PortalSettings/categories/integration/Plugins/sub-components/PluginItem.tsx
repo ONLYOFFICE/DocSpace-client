@@ -37,7 +37,6 @@ import PluginSettingsIconUrl from "PUBLIC_DIR/images/plugin.settings.react.svg?u
 import PluginDefaultLogoUrl from "PUBLIC_DIR/images/plugin.default-logo.png";
 
 import { getPluginUrl } from "SRC_DIR/helpers/plugins/utils";
-import { PluginScopes } from "SRC_DIR/helpers/plugins/enums";
 
 import { StyledPluginItem, StyledPluginHeader } from "../Plugins.styled";
 import { PluginItemProps } from "../Plugins.types";
@@ -52,7 +51,6 @@ const PluginItem = ({
   enabled,
   updatePlugin,
 
-  scopes,
   openSettingsDialog,
 
   image,
@@ -63,8 +61,6 @@ const PluginItem = ({
   const { t } = useTranslation(["Common"]);
 
   const imgSrc = image ? getPluginUrl(url, `/assets/${image}`) : null;
-
-  const withSettings = scopes.includes(PluginScopes.Settings);
 
   const onChangeStatus = () => {
     updatePlugin?.(name, !enabled, undefined, t);
@@ -88,14 +84,12 @@ const PluginItem = ({
         <StyledPluginHeader>
           <Heading className="plugin-name">{name}</Heading>
           <div className="plugin-controls">
-            {withSettings ? (
-              <IconButton
-                iconName={PluginSettingsIconUrl}
-                size={16}
-                onClick={onOpenSettingsDialog}
-                data-testid="open_settings_icon_button"
-              />
-            ) : null}
+            <IconButton
+              iconName={PluginSettingsIconUrl}
+              size={16}
+              onClick={onOpenSettingsDialog}
+              data-testid="open_settings_icon_button"
+            />
             <ToggleButton
               className="plugin-toggle-button"
               onChange={onChangeStatus}

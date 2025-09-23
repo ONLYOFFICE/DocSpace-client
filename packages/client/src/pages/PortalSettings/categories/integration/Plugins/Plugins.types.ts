@@ -28,7 +28,6 @@ import { TFunction } from "i18next";
 import { TColorScheme, TTheme } from "@docspace/shared/themes";
 import { TTranslation } from "@docspace/shared/types";
 
-import { PluginScopes } from "SRC_DIR/helpers/plugins/enums";
 import { TPlugin } from "SRC_DIR/helpers/plugins/types";
 import PluginStore from "SRC_DIR/store/PluginStore";
 
@@ -61,8 +60,6 @@ export interface PluginItemProps {
     settings?: string,
     t?: TFunction,
   ) => Promise<unknown>;
-
-  scopes: PluginScopes | PluginScopes[];
 
   openSettingsDialog: (name: string) => void;
 

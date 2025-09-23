@@ -48,12 +48,13 @@ import {
   StyledHeaderText,
 } from "./EditGroupMembersDialog.styled";
 import { ModalBodyLoader } from "./sub-components/ModalBodyLoader/ModalBodyLoader";
+import { TRoom } from "@docspace/shared/api/rooms/types";
 
 interface EditGroupMembersProps {
   visible: boolean;
   setVisible: (visible: boolean) => void;
   group: TGroup;
-  infoPanelSelection: any;
+  infoPanelSelection: TRoom;
 }
 
 const EditGroupMembers = ({
@@ -176,10 +177,20 @@ const EditGroupMembers = ({
   );
 };
 
-export default inject(({ infoPanelStore, userStore, dialogsStore }: any) => ({
-  infoPanelSelection: infoPanelStore.infoPanelSelection,
-  selfId: userStore.user.id,
-  group: dialogsStore.editMembersGroup,
-  visible: dialogsStore.editGroupMembersDialogVisible,
-  setVisible: dialogsStore.setEditGroupMembersDialogVisible,
-}))(observer(EditGroupMembers));
+export default inject(
+  ({
+    infoPanelStore,
+    userStore,
+    dialogsStore,
+  }: {
+    infoPanelStore: TStore["infoPanelStore"];
+    userStore: TStore["userStore"];
+    dialogsStore: TStore["dialogsStore"];
+  }) => ({
+    infoPanelSelection: infoPanelStore.infoPanelSelection,
+    selfId: userStore.user?.id,
+    group: dialogsStore.editMembersGroup,
+    visible: dialogsStore.editGroupMembersDialogVisible,
+    setVisible: dialogsStore.setEditGroupMembersDialogVisible,
+  }),
+)(observer(EditGroupMembers));

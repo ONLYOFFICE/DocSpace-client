@@ -6,8 +6,6 @@
   "DeleteGroupTitle": "Usuń grupę",
   "DeleteItems": "Zamierzasz usunąć te pozycje. ",
   "DeleteItemsSharedNote": "Należy pamiętać, że jeśli zostały komuś udostępnione, staną się niedostępne.",
-  "DeleteRoom": "Zamierzasz usunąć ten pokój. Nie będziesz w stanie go odzyskać.",
-  "DeleteRooms": "Zamierzasz usunąć te pokoje. Nie będziesz w stanie ich odzyskać.",
   "DeleteSharedNote": "Należy pamiętać, że jeśli został komuś udostępniony, stanie się niedostępny.",
   "DeleteTemplate": "Czy na pewno chcesz usunąć szablon pokoju <1>„{{templateName}}”</1>? Szablon nie może zostać przywrócony.",
   "DeleteTemplates": "Czy na pewno chcesz usunąć wybrane szablony pokojów? Nie można ich przywrócić.",

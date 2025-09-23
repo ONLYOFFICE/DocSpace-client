@@ -6,8 +6,6 @@
   "DeleteGroupTitle": "Vymazať skupinu",
   "DeleteItems": "Chystáte sa vymazať tieto položky. ",
   "DeleteItemsSharedNote": "Upozorňujeme, že ak ste ich s niekým zdieľali, stanú sa nedostupnými.",
-  "DeleteRoom": "Chystáte sa vymazať túto miestnosť. Nemôžete ju obnoviť.",
-  "DeleteRooms": "Chystáte sa vymazať tieto miestnosti. Nemôžete ich obnoviť.",
   "DeleteSharedNote": "Upozorňujeme, že ak ste to s niekým zdieľali, stane sa to nedostupným.",
   "DeleteTemplate": "Naozaj chcete odstrániť šablónu miestnosti <1>„{{templateName}}“</1>? Šablónu nebude možné obnoviť.",
   "DeleteTemplates": "Naozaj chcete odstrániť vybrané šablóny miestností? Nebudú sa dať obnoviť.",

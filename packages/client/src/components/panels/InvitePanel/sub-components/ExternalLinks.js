@@ -283,7 +283,12 @@ const ExternalLinks = ({
 
           <div className="invite-via-link-settings-container">
             <div className="invite-via-link-settings">
-              <IconButton iconName={ClockIconUrl} size={12} isDisabled />
+              <IconButton
+                className="invite-via-link-settings-icon"
+                iconName={ClockIconUrl}
+                size={12}
+                isDisabled
+              />
               <Text
                 className="invite-via-link-settings-text"
                 fontSize="12px"

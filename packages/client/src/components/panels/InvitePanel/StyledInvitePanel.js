@@ -114,16 +114,20 @@ const StyledExternalLink = styled.div`
   .invite-via-link-settings-container {
     display: flex;
     flex-direction: column;
-    gap: 7px;
-    margin-bottom: 18px;
+    gap: 6px;
+    margin-bottom: 20px;
 
     .invite-via-link-settings {
       display: flex;
       align-items: center;
       gap: 4px;
 
-      svg circle {
-        fill: unset;
+      .invite-via-link-settings-icon {
+        margin-top: -1px;
+
+        svg circle {
+          fill: unset;
+        }
       }
 
       .invite-via-link-settings-text {
@@ -160,21 +164,21 @@ const StyledInviteUserBody = styled.div`
 const StyledSubHeader = styled(Heading)`
   font-weight: 700 !important;
   font-size: 16px !important;
-  margin: 16px 0 8px;
+  margin: 20px 0 9px;
 
   ${(props) =>
     props.$inline &&
     css`
       display: inline-flex;
       align-items: center;
-      gap: 16px;
+      gap: 17px;
     `};
 `;
 
 const StyledDescription = styled(Text).attrs(injectDefaultTheme)`
   color: ${(props) =>
     props.theme.createEditRoomDialog.commonParam.descriptionColor};
-  margin-bottom: 16px;
+  margin-bottom: 11px;
 
   font-weight: 400;
   font-size: 12px;
@@ -235,7 +239,7 @@ const StyledInviteInput = styled.div`
   margin-inline-end: ${(props) => (props.hideSelector ? "16px" : "8px")};
 
   .input-link {
-    height: 32px;
+    height: 30px;
     border: 0px;
 
     > input {
@@ -317,7 +321,19 @@ const StyledInviteInputContainer = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
+
+  /* .invite-via-link-access {
+    min-width: 93px;
+
+    .combo-button-label {
+      font-size: 14px;
+      font-weight: 600;
+      margin-inline-start: 7px;
+      margin-inline-end: 0;
+      margin-top: -1px;
+    }
+  } */
 
   .header_aside-panel {
     max-width: 100% !important;
@@ -519,11 +535,12 @@ const StyledLink = styled(Link).attrs((props) => ({
   "data-testid": props.dataTestId,
 }))`
   float: inline-end;
+  margin-top: 2px;
 `;
 
 const StyledToggleButton = styled(ToggleButton)`
   inset-inline-end: 8px;
-  margin-top: -4px;
+  margin-top: -5.5px;
 `;
 
 const StyledInviteLanguage = styled.div`

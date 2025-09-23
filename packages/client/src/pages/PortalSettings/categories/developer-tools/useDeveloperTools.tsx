@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { toastr } from "@docspace/shared/components/toast";
 
@@ -65,6 +66,15 @@ const useDeveloperTools = ({
   const [listItems, setListItems] = useState<TApiKey[]>([]);
   const [permissions, setPermissions] = useState<string[]>([]);
   const [errorKeys, setErrorKeys] = useState<Error | null>(null);
+
+  const { ready: translationsReady } = useTranslation([
+    "JavascriptSdk",
+    "Webhooks",
+    "Settings",
+    "WebPlugins",
+    "Common",
+    "OAuth",
+  ]);
 
   const getJavascriptSDKData = React.useCallback(async () => {
     await getCSPSettings?.();
@@ -120,8 +130,28 @@ const useDeveloperTools = ({
     }
   }, [getApiKeys, getApiKeyPermissions, addAbortControllers]);
 
+  // Waiting for translations to load for the API page, since there’s no request logic there.
+  const waiters = React.useRef<((ready: boolean) => void)[]>([]);
+  React.useEffect(() => {
+    if (translationsReady) {
+      waiters.current.forEach((resolve) => resolve(true));
+      waiters.current = [];
+    }
+  }, [translationsReady]);
+
+  const waitForTranslations = React.useCallback((): Promise<boolean> => {
+    return new Promise((resolve) => {
+      if (translationsReady) {
+        resolve(true);
+      } else {
+        waiters.current.push(resolve);
+      }
+    });
+  }, [translationsReady]);
+
   const getDeveloperToolsInitialValue = React.useCallback(async () => {
     const actions = [];
+
     if (window.location.pathname.includes("javascript-sdk"))
       actions.push(getJavascriptSDKData());
 
@@ -134,8 +164,19 @@ const useDeveloperTools = ({
     if (window.location.pathname.includes("api-keys"))
       actions.push(getKeysData());
 
+    if (window.location.pathname.includes("api")) {
+      await waitForTranslations();
+      return;
+    }
+
     await Promise.all(actions);
-  }, [getJavascriptSDKData, getWebhooksData, getOAuthData, getKeysData]);
+  }, [
+    getJavascriptSDKData,
+    getWebhooksData,
+    getOAuthData,
+    getKeysData,
+    waitForTranslations,
+  ]);
 
   return {
     getDeveloperToolsInitialValue,

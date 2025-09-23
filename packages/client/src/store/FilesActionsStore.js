@@ -1701,8 +1701,13 @@ class FilesActionStore {
   };
 
   checkAndOpenLocationAction = async (item) => {
-    const { myRoomsId, myFolderId, archiveRoomsId, recycleBinFolderId } =
-      this.treeFoldersStore;
+    const {
+      myRoomsId,
+      myFolderId,
+      archiveRoomsId,
+      recycleBinFolderId,
+      sharedWithMeFolderId,
+    } = this.treeFoldersStore;
     const { setIsSectionBodyLoading } = this.clientLoadingStore;
     const {
       rootFolderType,
@@ -1724,6 +1729,7 @@ class FilesActionStore {
       myFolderId,
       archiveRoomsId,
       recycleBinFolderId,
+      sharedWithMeFolderId,
     ].includes(parentId);
 
     const state = {

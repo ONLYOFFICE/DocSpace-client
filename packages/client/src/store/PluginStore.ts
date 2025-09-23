@@ -261,9 +261,44 @@ class PluginStore {
     }
   };
 
-  addPlugin = async (data: FormData) => {
+  checkPluginCompatibility = (minDocSpaceVersion?: string): boolean => {
+    if (!minDocSpaceVersion) return false;
+
+    const currentDocspaceVersion = this.settingsStore.buildVersionInfo.docspace;
+
+    const parts1 = minDocSpaceVersion.split(".").map(Number);
+    const parts2 = currentDocspaceVersion.split(".").map(Number);
+
+    const len = Math.max(parts1.length, parts2.length);
+
+    for (let i = 0; i < len; i++) {
+      const num1 = parts1[i] ?? 0;
+      const num2 = parts2[i] ?? 0;
+
+      if (num1 < num2) return true;
+      if (num1 > num2) return false;
+    }
+
+    return true;
+  };
+
+  addPlugin = async (data: FormData, t: TTranslation) => {
     try {
       const plugin = await api.plugins.addPlugin(data);
+
+      const isPluginCompatible = this.checkPluginCompatibility(
+        plugin.minDocSpaceVersion,
+      );
+
+      if (!isPluginCompatible) {
+        toastr.error(
+          t("PluginIsNotCompatible", {
+            productName: t("Common:ProductName"),
+          }),
+        );
+      } else {
+        toastr.success(t("PluginLoadedSuccessfully"));
+      }
 
       this.setNeedPageReload(true);
 
@@ -315,6 +350,12 @@ class PluginStore {
           : newPlugin.scopes;
 
       newPlugin.iconUrl = getPluginUrl(newPlugin.url, "");
+
+      const isPluginCompatible = this.checkPluginCompatibility(
+        plugin.minDocSpaceVersion,
+      );
+
+      newPlugin.compatible = isPluginCompatible;
 
       this.installPlugin(newPlugin);
 

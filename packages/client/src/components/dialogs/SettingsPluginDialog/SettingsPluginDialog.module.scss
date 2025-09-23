@@ -24,23 +24,67 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TCreatedBy } from "../../types";
+@use "@docspace/shared/styles/mixins";
 
-export type TAPIPlugin = {
-  name: string;
-  version: string;
-  minDocSpaceVersion?: string;
-  description: string;
-  license: string;
-  author: string;
-  homePage: string;
-  pluginName: string;
-  scopes: string;
-  image: string;
-  createBy: TCreatedBy;
-  createOn: Date;
-  enabled: boolean;
-  system: boolean;
-  url: string;
-  settings: string;
-};
+.header {
+  display: flex;
+  align-items: center;
+
+  div {
+    color: var(--plugins-plugin-name-color);
+  }
+}
+
+.footer {
+  width: 100%;
+
+  display: flex;
+  align-items: space-between;
+  gap: 10px;
+}
+
+.container {
+  width: 100%;
+
+  &.withDelete {
+    margin-bottom: 24px;
+  }
+}
+
+.separator {
+  width: 100%;
+  height: 1px;
+
+  margin: 24px 0;
+
+  background-color: var(--plugins-border-color);
+}
+
+.info {
+  margin-top: 24px;
+
+  width: 100%;
+  height: auto;
+
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 8px 24px;
+
+  .version {
+    width: min-content;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &.incompatible {
+      cursor: pointer;
+    }
+
+    .incompatibleSvg {
+      vertical-align: middle;
+      path {
+        fill: var(--plugins-error-status-color);
+      }
+    }
+  }
+}

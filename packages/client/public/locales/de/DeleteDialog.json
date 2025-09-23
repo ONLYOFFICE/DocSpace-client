@@ -6,8 +6,6 @@
   "DeleteGroupTitle": "Gruppe löschen",
   "DeleteItems": "Sie löschen diese Objekte. ",
   "DeleteItemsSharedNote": "Bitte beachten Sie, dass die Daten nicht mehr verfügbar sind, wenn Sie diese mit jemandem geteilt haben.",
-  "DeleteRoom": "Sie löschen diesen Raum. Dies kann nicht rückgängig gemacht.",
-  "DeleteRooms": "Sie möchten diese Räume löschen. Dies kann nicht rückgängig gemacht.",
   "DeleteSharedNote": "Bitte beachten Sie, dass die Datei nicht mehr verfügbar ist, wenn Sie diese mit jemandem geteilt haben.",
   "DeleteTemplate": "Möchten Sie den Vorlagenraum <1>«{{templateName}}»</1> wirklich löschen? Die Vorlage kann nicht wiederhergestellt werden.",
   "DeleteTemplates": "Möchten Sie die ausgewählten Raumvorlagen wirklich löschen? Sie können nicht wiederhergestellt werden.",

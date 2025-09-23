@@ -6,8 +6,6 @@
   "DeleteGroupTitle": "Eliminar grupo",
   "DeleteItems": "Está a punto de eliminar estos elementos. ",
   "DeleteItemsSharedNote": "Por favor, tenga en cuenta que si los ha compartido con alguien, dejarán de estar disponibles.",
-  "DeleteRoom": "Está a punto de eliminar esta sala. No podrá restaurarla.",
-  "DeleteRooms": "Está a punto de eliminar estas salas. No podrá restaurarlas.",
   "DeleteSharedNote": "Por favor, tenga en cuenta que si lo ha compartido con alguien, dejará de estar disponible.",
   "DeleteTemplate": "¿Realmente desea eliminar la sala de plantilla <1>«{{templateName}}»</1>? La plantilla no se podrá restaurar.",
   "DeleteTemplates": "¿Realmente desea eliminar pas plantillas de sala seleccionadas? No se podrán resaturar.",

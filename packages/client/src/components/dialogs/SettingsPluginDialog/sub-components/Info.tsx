@@ -29,6 +29,7 @@ import { LANGUAGE } from "@docspace/shared/constants";
 import { Text } from "@docspace/shared/components/text";
 import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 import { getCorrectDate, getCookie, classNames } from "@docspace/shared/utils";
+import { Tooltip } from "@docspace/shared/components/tooltip";
 
 import PluginIncompatibleSvg from "PUBLIC_DIR/images/plugin.incompatible.react.svg";
 import { PluginStatus } from "SRC_DIR/helpers/plugins/enums";
@@ -71,12 +72,28 @@ const Info = ({ t, plugin, withDelete, withSeparator }: InfoProps) => {
             <Text fontSize="13px" fontWeight={400} lineHeight="20px" truncate>
               {t("Common:Version")}
             </Text>
-            <div className={styles.version}>
+            <div
+              className={classNames(styles.version, {
+                [styles.incompatible]: !plugin.compatible,
+              })}
+              id="plugin_version"
+            >
               <Text fontSize="13px" fontWeight={600} lineHeight="20px">
                 {plugin.version}
               </Text>
               {!plugin.compatible ? (
-                <PluginIncompatibleSvg className={styles.incompatibleSvg} />
+                <>
+                  <PluginIncompatibleSvg className={styles.incompatibleSvg} />
+                  <Tooltip
+                    anchorSelect="#plugin_version"
+                    place="bottom"
+                    getContent={() =>
+                      t("WebPlugins:PluginIsNotCompatible", {
+                        productName: t("Common:ProductName"),
+                      })
+                    }
+                  />
+                </>
               ) : null}
             </div>
           </>

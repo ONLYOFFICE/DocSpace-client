@@ -24,12 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import { useCallback, useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Button } from "@docspace/shared/components/button";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
 
 import { PluginComponents } from "SRC_DIR/helpers/plugins/enums";
 import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
@@ -37,43 +40,45 @@ import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
 import Header from "./sub-components/Header";
 import Info from "./sub-components/Info";
 import Footer from "./sub-components/Footer";
+import { SettingsPluginDialogProps } from "./SettingsPluginDialog.types";
 
 const SettingsPluginDialog = ({
   plugin,
   withDelete,
-  onLoad,
 
-  settings,
-  saveButton,
+  pluginSettings,
 
   settingsPluginDialogVisible,
 
   onClose,
   onDelete,
   updatePlugin,
-}) => {
+}: SettingsPluginDialogProps) => {
   const { t } = useTranslation(["WebPlugins", "Common", "Files", "People"]);
 
-  const [customSettingsProps, setCustomSettingsProps] =
-    React.useState(settings);
+  const { saveButton, settings, onLoad } = pluginSettings ? pluginSettings : {};
 
-  const [saveButtonProps, setSaveButtonProps] = React.useState(saveButton);
+  const [customSettingsProps, setCustomSettingsProps] = useState(settings);
 
-  const [modalRequestRunning, setModalRequestRunning] = React.useState(false);
+  const [saveButtonProps, setSaveButtonProps] = useState(saveButton);
 
-  const onLoadAction = React.useCallback(async () => {
+  const [modalRequestRunning, setModalRequestRunning] = useState(false);
+
+  const onLoadAction = useCallback(async () => {
     if (!onLoad) return;
     const res = await onLoad();
 
-    setCustomSettingsProps(res.settings);
-    if (res.saveButton)
+    const { settings, saveButton } = res;
+
+    setCustomSettingsProps(settings);
+    if (saveButton)
       setSaveButtonProps({
-        ...res.saveButton,
-        props: { ...res.saveButton, scale: true },
+        ...saveButton,
+        props: { ...saveButton.props },
       });
   }, [onLoad]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     onLoadAction();
   }, [onLoadAction]);
 
@@ -92,7 +97,7 @@ const SettingsPluginDialog = ({
   return (
     <ModalDialog
       visible={settingsPluginDialogVisible}
-      displayType="aside"
+      displayType={ModalDialogType.aside}
       onClose={onCloseAction}
       withBodyScroll
     >
@@ -107,9 +112,10 @@ const SettingsPluginDialog = ({
               component: PluginComponents.box,
               props: customSettingsProps,
             }}
-            saveButton={saveButton}
+            saveButton={saveButtonProps}
             setSaveButtonProps={setSaveButtonProps}
             setModalRequestRunning={setModalRequestRunning}
+            modalRequestRunning={modalRequestRunning}
           />
           <Info
             t={t}
@@ -122,7 +128,7 @@ const SettingsPluginDialog = ({
               label={t("DeletePlugin")}
               onClick={onDeleteAction}
               scale
-              size="normal"
+              size={ButtonSize.normal}
               testId="settings_delete_plugin_button"
             />
           ) : null}
@@ -143,7 +149,7 @@ const SettingsPluginDialog = ({
   );
 };
 
-export default inject(({ settingsStore, pluginStore }) => {
+export default inject(({ settingsStore, pluginStore }: TStore) => {
   const {
     pluginList,
     settingsPluginDialogVisible,
@@ -157,13 +163,17 @@ export default inject(({ settingsStore, pluginStore }) => {
 
   const { pluginOptions } = settingsStore;
 
-  const { pluginName } = currentSettingsDialogPlugin;
+  const currentSettingsDialog = currentSettingsDialogPlugin
+    ? { ...currentSettingsDialogPlugin }
+    : null;
+
+  const pluginName = currentSettingsDialog?.pluginName;
 
   const plugin = pluginList.find((p) => p.name === pluginName);
 
   const withDelete = pluginOptions.delete && !plugin?.system;
 
-  const pluginSettings = plugin?.getAdminPluginSettings();
+  const pluginSettings = plugin?.getAdminPluginSettings?.();
 
   const onClose = () => {
     setSettingsPluginDialogVisible(false);
@@ -172,13 +182,13 @@ export default inject(({ settingsStore, pluginStore }) => {
 
   const onDelete = () => {
     setDeletePluginDialogVisible(true);
-    setDeletePluginDialogProps({ pluginName });
+    setDeletePluginDialogProps(currentSettingsDialog);
   };
 
   return {
     plugin,
     withDelete,
-    ...pluginSettings,
+    pluginSettings,
     settingsPluginDialogVisible,
     updatePlugin,
 

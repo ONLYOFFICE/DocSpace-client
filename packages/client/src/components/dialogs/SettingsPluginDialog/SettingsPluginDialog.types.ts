@@ -23,86 +23,44 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { TFunction } from "i18next";
 
-import { TColorScheme, TTheme } from "@docspace/shared/themes";
 import { TTranslation } from "@docspace/shared/types";
-
-import { TPlugin } from "SRC_DIR/helpers/plugins/types";
+import { Dispatch, SetStateAction } from "react";
+import {
+  ISettings,
+  TButtonGroup,
+  TPlugin,
+} from "SRC_DIR/helpers/plugins/types";
 import PluginStore from "SRC_DIR/store/PluginStore";
 
-export interface PluginDropzoneProps {
-  onDrop: <T extends File>(acceptedFiles: T[]) => void;
-  isLoading: boolean;
-  isDisabled: boolean;
-  dataTestId?: string;
-}
-
-export interface PluginsEmptyScreen {
+export type HeaderProps = {
   t: TTranslation;
-  theme: TTheme;
-  withUpload: boolean;
-  apiPluginSDKLink: string | undefined;
-  currentColorScheme: TColorScheme;
-  onDrop: <T extends File>(acceptedFiles: T[]) => void;
-}
-
-export interface PluginItemProps {
   name: string;
-  version: string;
-  compatible: boolean;
-  description?: string;
+};
 
-  enabled: boolean;
-  updatePlugin: (
-    name: string,
-    status: boolean,
-    settings?: string,
-    t?: TFunction,
-  ) => Promise<unknown>;
-
-  openSettingsDialog: (name: string) => void;
-
-  image: string;
-  url: string;
-
-  theme: TTheme;
-  dataTestId?: string;
-}
-
-export interface ListLoaderProps {
-  withUpload: boolean;
-}
-
-export interface PluginsProps {
-  withUpload: boolean;
-
-  pluginList: TPlugin[];
-
-  openSettingsDialog: (name: string) => void;
-
-  updatePlugin: (
-    name: string,
-    status: boolean,
-    settings?: string,
-  ) => Promise<unknown>;
-  addPlugin: PluginStore["addPlugin"];
-
-  updatePlugins: (fromList?: boolean) => Promise<void>;
-
-  currentColorScheme: TColorScheme;
-  theme: TTheme;
-
-  isLoading: boolean;
-  isEmptyList: boolean;
-
-  apiPluginSDKLink: string | undefined;
-
-  showPortalSettingsLoader: boolean;
-}
-
-export interface UploadDecsriptionProps {
-  apiPluginSDKLink: string | undefined;
-  currentColorScheme: TColorScheme;
+export type FooterProps = {
   t: TTranslation;
-}
+  pluginName: string;
+  saveButtonProps?: TButtonGroup;
+  modalRequestRunning: boolean;
+  setModalRequestRunning: Dispatch<SetStateAction<boolean>>;
+  onCloseAction: () => void;
+  updatePlugin: PluginStore["updatePlugin"];
+};
+
+export type InfoProps = {
+  t: TTranslation;
+  plugin: TPlugin;
+  withDelete: boolean;
+  withSeparator: boolean;
+};
+
+export type SettingsPluginDialogProps = {
+  plugin: TPlugin;
+  withDelete: boolean;
+  pluginSettings?: ISettings | null;
+  settingsPluginDialogVisible: boolean;
+  updatePlugin: PluginStore["updatePlugin"];
+  onClose: () => void;
+  onDelete: () => void;
+};

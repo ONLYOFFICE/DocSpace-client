@@ -240,7 +240,7 @@ class PublicRoomStore {
   gotoFolder = (res, key) => {
     const categoryType =
       res.isRoom || res.isRoomMember
-        ? CategoryType.Room
+        ? CategoryType.Shared
         : CategoryType.SharedWithMe;
 
     const filter = FilesFilter.getDefault();

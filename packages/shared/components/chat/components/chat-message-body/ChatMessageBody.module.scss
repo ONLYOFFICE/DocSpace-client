@@ -274,7 +274,9 @@
 }
 
 .toolCallMessage {
-  margin: 8px 0;
+  &:not(:last-child) {
+    margin: 8px 0;
+  }
 }
 
 .toolCall {
@@ -315,6 +317,10 @@
 
     .toolName {
       color: var(--chat-message-color);
+    }
+
+    .arrowRightIcon svg path {
+      fill: var(--text-color);
     }
 
     &.hide {

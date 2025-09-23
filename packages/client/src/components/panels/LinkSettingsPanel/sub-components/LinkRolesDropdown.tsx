@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 import { isMobile } from "@docspace/shared/utils";
 
@@ -48,8 +48,9 @@ const LinkRolesDropdown = ({
   setLinkSelectedAccess,
 }: LinkRolesDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  // const [heightList, setHeightList] = useState(null);
-  const heightList = null;
+  const [heightList, setHeightList] = useState<number | null>(null);
+
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const roomTypes = accesses.map((access: TOption) => (
     <LinkRolesDropdownItem
@@ -62,6 +63,45 @@ const LinkRolesDropdown = ({
       }}
     />
   ));
+
+  const onHeightCalculation = () => {
+    if (!dropdownRef.current) return;
+
+    const screenHeight = document.documentElement.clientHeight;
+    const elementHeight = dropdownRef.current.getBoundingClientRect().bottom;
+    const elementShadowHeight = 12;
+    const buttonHeight = 73;
+    const padding = 12;
+    const showElementFullHeight =
+      screenHeight -
+        elementHeight -
+        padding / 2 -
+        elementShadowHeight -
+        buttonHeight >=
+      0;
+
+    if (!showElementFullHeight) {
+      const newHeightList =
+        screenHeight -
+        dropdownRef.current.getBoundingClientRect().y -
+        elementShadowHeight -
+        buttonHeight -
+        padding;
+
+      setHeightList(newHeightList);
+    } else setHeightList(0);
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      onHeightCalculation();
+      window.addEventListener("resize", onHeightCalculation);
+    } else if (typeof heightList === "number") setHeightList(null);
+
+    return () => {
+      window.removeEventListener("resize", onHeightCalculation);
+    };
+  }, [isOpen, heightList]);
 
   return (
     <div className={styles.linkRolesDropdown}>
@@ -130,7 +170,7 @@ const LinkRolesDropdown = ({
         >
           <div
             className={classNames("dropdown-content", styles.dropdownContent)}
-            // ref={dropdownRef}
+            ref={dropdownRef}
           >
             {heightList ? (
               <Scrollbar

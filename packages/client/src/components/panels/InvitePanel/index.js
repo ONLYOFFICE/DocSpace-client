@@ -109,7 +109,7 @@ const InvitePanel = ({
   const [isLinksToggling, setIsLinksToggling] = useState(false);
 
   const showUsersLimitWarning = true; // TODO: Link settings
-  const linkUsersNumber = 0; // TODO: Link settings
+  const linkUsersNumber = "0"; // TODO: Link settings
   const maxUsersNumber = "20"; // TODO: Link settings
 
   const navigate = useNavigate();
@@ -701,6 +701,7 @@ const InvitePanel = ({
             setLinkSelectedAccess={setLinkSelectedAccess}
             defaultAccess={defaultAccess ?? ShareAccessRights.ReadOnly}
             maxUsersNumber={maxUsersNumber}
+            usersNumber={linkUsersNumber}
           />
         </ModalDialog.Container>
       ) : null}

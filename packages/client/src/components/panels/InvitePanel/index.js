@@ -630,12 +630,9 @@ const InvitePanel = ({
       onClose={onClose}
       onBackClick={onBackClick}
       displayType={ModalDialogType.aside}
-      // containerVisible={
-      //   !hideSelector
-      //     ? addUsersPanelVisible
-      //     : (linkSettingsPanelVisible ?? null)
-      // }
-      containerVisible={linkSettingsPanelVisible ?? null}
+      containerVisible={
+        !hideSelector ? addUsersPanelVisible || linkSettingsPanelVisible : false
+      }
       isLoading={invitePanelIsLoding}
       withBodyScroll
       isInvitePanelLoader
@@ -680,7 +677,7 @@ const InvitePanel = ({
         </ModalDialog.Container>
       ) : null}
 
-      {linkSettingsPanelVisible ? (
+      {!hideSelector && linkSettingsPanelVisible ? (
         <ModalDialog.Container>
           <LinkSettingsPanel
             isVisible={linkSettingsPanelVisible}

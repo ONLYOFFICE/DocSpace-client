@@ -234,6 +234,7 @@
   "Delete": "Delete",
   "DeleteFile": "You are about to delete this file.",
   "DeletePermanently": "Delete permanently",
+  "DeleteRoom": "Delete room",
   "Deny": "Deny",
   "DenyAccess": "Deny access",
   "DenyAccessDescription": "No access to view, edit, or manage files or folders.",

@@ -6,8 +6,6 @@
   "DeleteGroupTitle": "Excluir grupo",
   "DeleteItems": "Está prestes a eliminar estes itens. ",
   "DeleteItemsSharedNote": "Observe que se você os compartilhou com alguém, eles ficarão indisponíveis.",
-  "DeleteRoom": "Está prestes a apagar esta sala. Não será possível restaurá-la.",
-  "DeleteRooms": "Está prestes a eliminar estas salas. Não será possível restaurá-las.",
   "DeleteSharedNote": "Observe que se você o compartilhou com alguém, ele ficará indisponível.",
   "DeleteTemplate": "Pretende mesmo eliminar a sala de modelos <1>“{{templateName}}”</1>? Não pode restaurar os templates.",
   "DeleteTemplates": "Pretende mesmo apagar os templates de salas selecionadas? Não podem ser restaurados.",

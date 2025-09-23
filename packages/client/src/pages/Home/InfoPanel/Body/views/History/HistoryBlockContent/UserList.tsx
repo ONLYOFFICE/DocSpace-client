@@ -68,7 +68,7 @@ const HistoryUserList = ({
 
   const usersData = [
     feed.data,
-    ...feed.related.map((relatedFeed: any) => relatedFeed.data),
+    ...feed.related.map((relatedFeed) => relatedFeed.data),
   ];
 
   return (

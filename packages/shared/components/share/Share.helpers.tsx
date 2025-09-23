@@ -483,76 +483,75 @@ export const convertMembers = (
   const groups: TShare[] = [];
   const guests: TShare[] = [];
 
-  membersList?.forEach(({ access, canEditAccess, sharedTo, subjectType }) => {
-    const member: TShareMember = {
-      access,
-      canEditAccess,
-      ...sharedTo,
-    };
+  membersList?.forEach(
+    ({ access, canEditAccess, sharedTo, subjectType, isOwner }) => {
+      const member: TShareMember = {
+        access,
+        canEditAccess,
+        ...sharedTo,
+      };
 
-    if (
-      "activationStatus" in member &&
-      member.activationStatus === EmployeeActivationStatus.Pending
-    ) {
-      if (expected.length === 0) {
-        expected.push({
-          id: "expected",
-          displayName: t("InfoPanel:ExpectUsers"),
-          isTitle: true,
-          isExpect: true,
-        } satisfies TTitleShare);
+      if (
+        "activationStatus" in member &&
+        member.activationStatus === EmployeeActivationStatus.Pending
+      ) {
+        if (expected.length === 0) {
+          expected.push({
+            id: "expected",
+            displayName: t("InfoPanel:ExpectUsers"),
+            isTitle: true,
+            isExpect: true,
+          } satisfies TTitleShare);
+        }
+
+        member.isExpect = true;
+        expected.push(member);
+      } else if (access === ShareAccessRights.RoomManager || isOwner) {
+        if (administrators.length === 0) {
+          administrators.push({
+            id: "administrators",
+            displayName: t("InfoPanel:Administration"),
+            isTitle: true,
+          } satisfies TTitleShare);
+        }
+
+        administrators.push(member);
+      } else if (
+        ("isGroup" in member && member.isGroup) ||
+        subjectType === MembersSubjectType.Group
+      ) {
+        if (groups.length === 0) {
+          groups.push({
+            id: "groups",
+            displayName: t("Common:Groups"),
+            isTitle: true,
+          } satisfies TTitleShare);
+        }
+
+        groups.push({ ...member, isGroup: true });
+      } else if ("isVisitor" in member && member.isVisitor) {
+        if (guests.length === 0) {
+          guests.push({
+            id: "guests",
+            displayName: t("Common:Guests"),
+            isTitle: true,
+          } satisfies TTitleShare);
+        }
+
+        guests.push(member);
+      } else {
+        if (users.length === 0) {
+          users.push({
+            id: "users",
+            displayName: t("InfoPanel:Users"),
+            isTitle: true,
+          } satisfies TTitleShare);
+        }
+
+        users.push(member);
       }
-
-      member.isExpect = true;
-      expected.push(member);
-    } else if (
-      access === ShareAccessRights.FullAccess ||
-      access === ShareAccessRights.RoomManager
-    ) {
-      if (administrators.length === 0) {
-        administrators.push({
-          id: "administrators",
-          displayName: t("InfoPanel:Administration"),
-          isTitle: true,
-        } satisfies TTitleShare);
-      }
-
-      administrators.push(member);
-    } else if (
-      ("isGroup" in member && member.isGroup) ||
-      subjectType === MembersSubjectType.Group
-    ) {
-      if (groups.length === 0) {
-        groups.push({
-          id: "groups",
-          displayName: t("Common:Groups"),
-          isTitle: true,
-        } satisfies TTitleShare);
-      }
-
-      groups.push({ ...member, isGroup: true });
-    } else if ("isVisitor" in member && member.isVisitor) {
-      if (guests.length === 0) {
-        guests.push({
-          id: "guests",
-          displayName: t("Common:Guests"),
-          isTitle: true,
-        } satisfies TTitleShare);
-      }
-
-      guests.push(member);
-    } else {
-      if (users.length === 0) {
-        users.push({
-          id: "users",
-          displayName: t("InfoPanel:Users"),
-          isTitle: true,
-        } satisfies TTitleShare);
-      }
-
-      users.push(member);
-    }
-  });
+    },
+  );
 
   return {
     administrators,

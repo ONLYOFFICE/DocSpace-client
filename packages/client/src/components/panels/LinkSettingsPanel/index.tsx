@@ -59,11 +59,14 @@ const LinkSettingsPanel = ({
   showUsersLimitWarning,
   usersNumber,
   maxUsersNumber,
+  validUntil,
 }: LinkSettingsPanelProps) => {
   const { t, ready } = useTranslation(["Common", "Files"]);
 
+  const date = validUntil ?? moment().add(7, "days");
+
   const [userLimitIsChecked, setUserLimitIsChecked] = useState(true);
-  const [limitDate, setLimitDate] = useState<moment.Moment | null>(null);
+  const [limitDate, setLimitDate] = useState<moment.Moment | null>(date);
   const [maxNumber, setMaxNumber] = useState(maxUsersNumber);
 
   const currentAccess = filteredAccesses.find(
@@ -72,7 +75,12 @@ const LinkSettingsPanel = ({
       (linkSelectedAccess?.access ?? activeLink?.access ?? defaultAccess),
   );
 
-  console.log("limitDate", limitDate);
+  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value && !/^(?:[1-9][0-9]*)$/.test(e.target.value)) {
+      return;
+    }
+    setMaxNumber(e.target.value);
+  };
 
   return (
     <ModalDialog
@@ -155,15 +163,7 @@ const LinkSettingsPanel = ({
                   value={maxNumber}
                   scale
                   maxLength={3}
-                  onChange={(e) => {
-                    if (
-                      e.target.value &&
-                      !/^(?:[1-9][0-9]*)$/.test(e.target.value)
-                    ) {
-                      return;
-                    }
-                    setMaxNumber(e.target.value);
-                  }}
+                  onChange={onInputChange}
                 />
                 <Text
                   fontSize="12px"
@@ -217,6 +217,8 @@ const LinkSettingsPanel = ({
             openDate={new Date()}
             className={styles.linkSettingsDatePicker}
             selectDateText={t("Common:SelectDate")}
+            initialDate={limitDate}
+            minDate={new Date()}
           />
         </div>
       </ModalDialog.Body>

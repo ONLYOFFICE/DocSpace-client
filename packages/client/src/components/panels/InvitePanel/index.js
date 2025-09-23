@@ -108,9 +108,10 @@ const InvitePanel = ({
   const [linkSelectedAccess, setLinkSelectedAccess] = useState(null);
   const [isLinksToggling, setIsLinksToggling] = useState(false);
 
-  const showUsersLimitWarning = true; // TODO: Link settings
-  const linkUsersNumber = "0"; // TODO: Link settings
-  const maxUsersNumber = "20"; // TODO: Link settings
+  const linkUsersNumber = 0; // TODO: Link settings
+  const maxUsersNumber = 20; // TODO: Link settings
+  const validUntil = null; // TODO: Link settings / api date
+  const showUsersLimitWarning = linkUsersNumber >= maxUsersNumber; // TODO: Link settings
 
   const navigate = useNavigate();
 
@@ -624,6 +625,17 @@ const InvitePanel = ({
   const filteredAccesses =
     roomType === -1 ? accessOptions : filterPaidRoleOptions(accessOptions);
 
+  const onSubmitLinkSettingsPanel = () => {
+    const defaultLinkAccess = filteredAccesses.find(
+      (a) => a.access === (defaultAccess ?? ShareAccessRights.ReadOnly),
+    );
+
+    onCloseLinkSettingsPanel();
+    if (activeLink?.shareLink)
+      onSelectAccess(linkSelectedAccess ?? defaultLinkAccess);
+    else editLink(linkSelectedAccess.access);
+  };
+
   return (
     <ModalDialog
       visible={isVisible}
@@ -687,18 +699,16 @@ const InvitePanel = ({
               onClose();
             }}
             onBackClick={onCloseLinkSettingsPanel}
-            onSubmit={() => {
-              onCloseLinkSettingsPanel();
-              if (activeLink?.shareLink) onSelectAccess(linkSelectedAccess);
-              else editLink(linkSelectedAccess.access);
-            }}
+            onSubmit={onSubmitLinkSettingsPanel}
             activeLink={activeLink}
             filteredAccesses={filteredAccesses}
             linkSelectedAccess={linkSelectedAccess}
             setLinkSelectedAccess={setLinkSelectedAccess}
             defaultAccess={defaultAccess ?? ShareAccessRights.ReadOnly}
-            maxUsersNumber={maxUsersNumber}
-            usersNumber={linkUsersNumber}
+            maxUsersNumber={String(maxUsersNumber)}
+            usersNumber={String(linkUsersNumber)}
+            validUntil={validUntil}
+            showUsersLimitWarning={showUsersLimitWarning}
           />
         </ModalDialog.Container>
       ) : null}

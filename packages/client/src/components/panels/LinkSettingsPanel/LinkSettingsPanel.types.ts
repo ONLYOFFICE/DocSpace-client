@@ -59,4 +59,5 @@ export type LinkSettingsPanelProps = {
     title: string;
   };
   defaultAccess: ShareAccessRights;
+  validUntil: moment.Moment | null;
 };

@@ -32,20 +32,23 @@ import { AccessRightSelect } from "@docspace/shared/components/access-right-sele
 import { TOption } from "@docspace/shared/components/combobox";
 import { TTranslation } from "@docspace/shared/types";
 import { RoomsType } from "@docspace/shared/enums";
-import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
+import {
+  getAccessOptions,
+  AccessOptionType,
+} from "@docspace/shared/utils/getAccessOptions";
 
 import StyledAccessSelector from "./AccessSelector.styled";
 
 interface AccessSelectorProps {
   t: TTranslation;
   roomType: RoomsType | -1;
-  onSelectAccess: (access: any) => void;
+  onSelectAccess: (access: AccessOptionType) => void;
   containerRef?: React.RefObject<HTMLDivElement | null>;
   defaultAccess: number;
   isOwner: boolean;
   isAdmin: boolean;
   withRemove?: boolean;
-  filteredAccesses?: any[];
+  filteredAccesses?: AccessOptionType[];
   className: string;
   standalone?: boolean;
   isMobileView: boolean;

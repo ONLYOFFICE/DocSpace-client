@@ -24,75 +24,43 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { makeAutoObservable } from "mobx";
-
+import { TTranslation } from "@docspace/shared/types";
+import { Dispatch, SetStateAction } from "react";
 import {
-  getTelegramLink,
-  deleteTelegramLink,
-  checkTelegram,
-} from "@docspace/shared/api/settings";
-import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
+  ISettings,
+  TButtonGroup,
+  TPlugin,
+} from "SRC_DIR/helpers/plugins/types";
+import PluginStore from "SRC_DIR/store/PluginStore";
 
-class TelegramStore {
-  botUrl = "";
+export type HeaderProps = {
+  t: TTranslation;
+  name: string;
+};
 
-  isConnected = false;
+export type FooterProps = {
+  t: TTranslation;
+  pluginName: string;
+  saveButtonProps?: TButtonGroup;
+  modalRequestRunning: boolean;
+  setModalRequestRunning: Dispatch<SetStateAction<boolean>>;
+  onCloseAction: () => void;
+  updatePlugin: PluginStore["updatePlugin"];
+};
 
-  username = "";
+export type InfoProps = {
+  t: TTranslation;
+  plugin: TPlugin;
+  withDelete: boolean;
+  withSeparator: boolean;
+};
 
-  constructor() {
-    makeAutoObservable(this);
-
-    SocketHelper?.on(SocketEvents.UpdateTelegram, (option) => {
-      if (typeof option === "string") {
-        this.checkTg();
-      }
-    });
-  }
-
-  setBotUrl = (botUrl: string) => {
-    this.botUrl = botUrl;
-  };
-
-  setIsConnected = (isConnected: boolean) => {
-    this.isConnected = isConnected;
-  };
-
-  setUsername = (username: string) => {
-    this.username = username;
-  };
-
-  getTgLink = async () => {
-    try {
-      const res = await getTelegramLink();
-      const urlWithProtocol = res.startsWith("http") ? res : `https://${res}`;
-      this.setBotUrl(urlWithProtocol);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  deleteTgLink = async () => {
-    try {
-      const res = await deleteTelegramLink();
-      if (res) {
-        this.setIsConnected(false);
-        this.setUsername("");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  checkTg = async () => {
-    try {
-      const res = await checkTelegram();
-      this.setIsConnected(res?.status === "linked");
-      this.setUsername(res?.username || "");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
-
-export default TelegramStore;
+export type SettingsPluginDialogProps = {
+  plugin: TPlugin;
+  withDelete: boolean;
+  pluginSettings?: ISettings | null;
+  settingsPluginDialogVisible: boolean;
+  updatePlugin: PluginStore["updatePlugin"];
+  onClose: () => void;
+  onDelete: () => void;
+};

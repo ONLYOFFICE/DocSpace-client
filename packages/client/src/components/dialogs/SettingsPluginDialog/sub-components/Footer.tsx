@@ -24,26 +24,53 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 
-import { injectDefaultTheme } from "@docspace/shared/utils";
+import { PluginComponent } from "SRC_DIR/helpers/plugins/WrappedComponent";
+import styles from "../SettingsPluginDialog.module.scss";
+import { FooterProps } from "../SettingsPluginDialog.types";
 
-const StyledHeader = styled.div.attrs(injectDefaultTheme)`
-  display: flex;
-  align-items: center;
+const Footer = ({
+  t,
 
-  div {
-    color: ${(props) => props.theme.plugins.pluginName};
-  }
-`;
+  pluginName,
 
-const Header = ({ t, name }) => {
+  saveButtonProps,
+  modalRequestRunning,
+  setModalRequestRunning,
+  onCloseAction,
+  updatePlugin,
+}: FooterProps) => {
   return (
-    <StyledHeader>
-      {t("Common:Settings")}&nbsp;
-      <div>({name})</div>
-    </StyledHeader>
+    <div className={styles.footer}>
+      <PluginComponent
+        component={{
+          ...saveButtonProps,
+          props: {
+            ...saveButtonProps?.props,
+            scale: true,
+            isSaveButton: true,
+            primary: true,
+            size: "normal",
+            label: t("Common:SaveButton"),
+            settingsModalRequestRunning: modalRequestRunning,
+            setSettingsModalRequestRunning: setModalRequestRunning,
+            onCloseAction,
+            testId: "settings_plugin_save_button",
+          },
+        }}
+        pluginName={pluginName}
+        updatePlugin={updatePlugin}
+      />
+      <Button
+        scale
+        size={ButtonSize.normal}
+        onClick={onCloseAction}
+        label={t("Common:CancelButton")}
+        testId="settings_plugin_cancel_button"
+      />
+    </div>
   );
 };
 
-export default Header;
+export default Footer;

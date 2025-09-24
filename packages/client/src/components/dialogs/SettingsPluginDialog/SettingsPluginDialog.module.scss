@@ -24,75 +24,67 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { makeAutoObservable } from "mobx";
+@use "@docspace/shared/styles/mixins";
 
-import {
-  getTelegramLink,
-  deleteTelegramLink,
-  checkTelegram,
-} from "@docspace/shared/api/settings";
-import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
+.header {
+  display: flex;
+  align-items: center;
 
-class TelegramStore {
-  botUrl = "";
-
-  isConnected = false;
-
-  username = "";
-
-  constructor() {
-    makeAutoObservable(this);
-
-    SocketHelper?.on(SocketEvents.UpdateTelegram, (option) => {
-      if (typeof option === "string") {
-        this.checkTg();
-      }
-    });
+  div {
+    color: var(--plugins-plugin-name-color);
   }
-
-  setBotUrl = (botUrl: string) => {
-    this.botUrl = botUrl;
-  };
-
-  setIsConnected = (isConnected: boolean) => {
-    this.isConnected = isConnected;
-  };
-
-  setUsername = (username: string) => {
-    this.username = username;
-  };
-
-  getTgLink = async () => {
-    try {
-      const res = await getTelegramLink();
-      const urlWithProtocol = res.startsWith("http") ? res : `https://${res}`;
-      this.setBotUrl(urlWithProtocol);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  deleteTgLink = async () => {
-    try {
-      const res = await deleteTelegramLink();
-      if (res) {
-        this.setIsConnected(false);
-        this.setUsername("");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  checkTg = async () => {
-    try {
-      const res = await checkTelegram();
-      this.setIsConnected(res?.status === "linked");
-      this.setUsername(res?.username || "");
-    } catch (error) {
-      console.log(error);
-    }
-  };
 }
 
-export default TelegramStore;
+.footer {
+  width: 100%;
+
+  display: flex;
+  align-items: space-between;
+  gap: 10px;
+}
+
+.container {
+  width: 100%;
+
+  &.withDelete {
+    margin-bottom: 24px;
+  }
+}
+
+.separator {
+  width: 100%;
+  height: 1px;
+
+  margin: 24px 0;
+
+  background-color: var(--plugins-border-color);
+}
+
+.info {
+  margin-top: 24px;
+
+  width: 100%;
+  height: auto;
+
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 8px 24px;
+
+  .version {
+    width: min-content;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &.incompatible {
+      cursor: pointer;
+    }
+
+    .incompatibleSvg {
+      vertical-align: middle;
+      path {
+        fill: var(--plugins-error-status-color);
+      }
+    }
+  }
+}

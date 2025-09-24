@@ -24,62 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import styled from "styled-components";
+import { HeaderProps } from "../SettingsPluginDialog.types";
+import styles from "../SettingsPluginDialog.module.scss";
 
-import { Button } from "@docspace/shared/components/button";
-
-import { PluginComponent } from "SRC_DIR/helpers/plugins/WrappedComponent";
-
-const StyledContainer = styled.div`
-  width: 100%;
-
-  display: flex;
-  align-items: space-between;
-  gap: 10px;
-`;
-
-const Footer = ({
-  t,
-
-  pluginName,
-
-  saveButtonProps,
-  modalRequestRunning,
-  setModalRequestRunning,
-  onCloseAction,
-  updatePlugin,
-}) => {
+const Header = ({ t, name }: HeaderProps) => {
   return (
-    <StyledContainer>
-      <PluginComponent
-        component={{
-          ...saveButtonProps,
-          props: {
-            ...saveButtonProps?.props,
-            scale: true,
-            isSaveButton: true,
-            primary: true,
-            size: "normal",
-            label: t("Common:SaveButton"),
-            settingsModalRequestRunning: modalRequestRunning,
-            setSettingsModalRequestRunning: setModalRequestRunning,
-            onCloseAction,
-            testId: "settings_plugin_save_button",
-          },
-        }}
-        pluginName={pluginName}
-        updatePlugin={updatePlugin}
-      />
-      <Button
-        scale
-        size="normal"
-        onClick={onCloseAction}
-        label={t("Common:CancelButton")}
-        testId="settings_plugin_cancel_button"
-      />
-    </StyledContainer>
+    <div className={styles.header}>
+      {t("Common:Settings")}&nbsp;
+      <div>({name})</div>
+    </div>
   );
 };
 
-export default Footer;
+export default Header;

@@ -1,17 +1,12 @@
 {
   "DeleteAllGroupDescription": "선택한 그룹이 삭제됩니다. 그룹의 사용자는 {{productName}}에서 삭제되지 않습니다. 정말로 계속하시겠습니까?",
   "DeleteAllGroupsTitle": "그룹 삭제",
-  "DeleteFolder": "이 폴더를 삭제하려고 합니다. ",
   "DeleteGroupDescription": "{{groupName}} 그룹이 삭제됩니다. 그룹의 사용자는 {{productName}}에서 삭제되지 않습니다. 정말로 계속하시겠습니까?",
   "DeleteGroupTitle": "그룹 삭제",
-  "DeleteItems": "이 항목을 삭제하려고 합니다. ",
-  "DeleteItemsSharedNote": "사용할 수 없게 되므로, 다른 사람과 공유한 경우 주의하시기 바랍니다.",
-  "DeleteSharedNote": "사용할 수 없게 되므로, 다른 사람과 공유한 경우 주의하시기 바랍니다.",
   "DeleteTemplate": "정말로 <1>«{{templateName}}»</1> 룸 템플릿을 삭제하시겠습니까? 템플릿을 삭제하면 복원할 수 없습니다.",
   "DeleteTemplates": "정말로 선택한 룸 템플릿을 삭제하시겠습니까? 삭제하면 복원할 수 없습니다.",
-  "FolderPermanentlyDeleted": "폴더는 30일 후에 영구적으로 삭제됩니다.",
-  "ItemsPermanentlyDeleted": "항목은 30일 후에 영구적으로 삭제됩니다.",
   "UnsubscribeButton": "구독 취소",
   "UnsubscribeNote": "정말로 목록에서 선택한 항목의 구독을 취소하시겠습니까?",
-  "UnsubscribeTitle": "구독 취소 확인"
+  "UnsubscribeTitle": "구독 취소 확인",
+  "FileDeletedAfter": "파일은 30일 후에 영구적으로 삭제됩니다."
 }

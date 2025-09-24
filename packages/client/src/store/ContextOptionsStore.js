@@ -2545,7 +2545,12 @@ class ContextOptionsStore {
           "copy-to",
           "rename",
         ],
-        ["remove-from-favorites", "remove-shared-folder-or-file", "delete"],
+        [
+          "remove-from-favorites",
+          "restore",
+          "remove-shared-folder-or-file",
+          "delete",
+        ],
       ];
 
       const items = resultOptions.filter((opt) => !opt.isSeparator);

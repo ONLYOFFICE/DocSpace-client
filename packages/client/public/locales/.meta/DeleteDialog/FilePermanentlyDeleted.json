@@ -1,0 +1,28 @@
+{
+  "key_path": "FilePermanentlyDeleted",
+  "content": "The file will be permanently removed from the Trash.",
+  "content_en_sha1_hash": "749f15db2aa3afb89081ad810425320e3066e76a",
+  "created_at": "2025-09-24T13:10:15.404Z",
+  "updated_at": "2025-09-24T13:12:37.764Z",
+  "comment": {
+    "text": "This text confirms the permanent deletion of a file from the Trash. It appears within a confirmation dialog, informing the user that the file will be permanently removed. Translators should ensure the wording accurately conveys the irreversible nature of the action.",
+    "is_auto": true,
+    "updated_at": "2025-09-24T13:12:37.764Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
+      "line_number": 89,
+      "context": "<strong>{{ name: selection[0].title }}</strong>\n to Trash.\n </Trans>{\" \"}\n {isFolder\n ? t(\"FolderPermanentlyDeleted\")\n : t(\"FilePermanentlyDeleted\")}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n const items = separateItems(selection);",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

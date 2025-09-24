@@ -1,17 +1,12 @@
 {
   "DeleteAllGroupDescription": "Wybrane grupy zostaną usunięte. Użytkownicy w tych grupach nie zostaną usunięci z {{productName}}. Czy na pewno chcesz kontynuować?",
   "DeleteAllGroupsTitle": "Usuń grupy",
-  "DeleteFolder": "Zamierzasz usunąć ten katalog. ",
   "DeleteGroupDescription": "Grupa {{groupName}} zostanie usunięta. Użytkownicy w tej grupie nie zostaną usunięci z {{productName}}. Czy na pewno chcesz kontynuować?",
   "DeleteGroupTitle": "Usuń grupę",
-  "DeleteItems": "Zamierzasz usunąć te pozycje. ",
-  "DeleteItemsSharedNote": "Należy pamiętać, że jeśli zostały komuś udostępnione, staną się niedostępne.",
-  "DeleteSharedNote": "Należy pamiętać, że jeśli został komuś udostępniony, stanie się niedostępny.",
   "DeleteTemplate": "Czy na pewno chcesz usunąć szablon pokoju <1>„{{templateName}}”</1>? Szablon nie może zostać przywrócony.",
   "DeleteTemplates": "Czy na pewno chcesz usunąć wybrane szablony pokojów? Nie można ich przywrócić.",
-  "FolderPermanentlyDeleted": "Katalog zostanie trwale usunięty za 30 dni.",
-  "ItemsPermanentlyDeleted": "Pozycje zostaną trwale usunięte za 30 dni.",
   "UnsubscribeButton": "Zrezygnuj z subskrypcji",
   "UnsubscribeNote": "Czy na pewno chcesz zrezygnować z subskrypcji dla wybranych elementów z listy?",
-  "UnsubscribeTitle": "Potwierdź rezygnację"
+  "UnsubscribeTitle": "Potwierdź rezygnację",
+  "FileDeletedAfter": "Plik zostanie trwale usunięty za 30 dni."
 }

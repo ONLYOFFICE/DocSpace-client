@@ -14,5 +14,7 @@
   "AdminSetupRequired": "Admin setup required",
   "GoToSettings": "Go to Settings",
   "NotConfigured": "Not configured",
-  "IsNotValid": "Is not valid"
+  "IsNotValid": "Is not valid",
+  "SuccessConnected": "{{serviceName}} has been successfully connected as a notification channel. You will now receive updates there.",
+  "SuccessDisconnected": "{{serviceName}} has been successfully disconnected as a notification channel. Notifications will no longer be sent there."
 }

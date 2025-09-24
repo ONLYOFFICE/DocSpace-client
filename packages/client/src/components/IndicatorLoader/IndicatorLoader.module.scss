@@ -49,4 +49,12 @@
       top: 48px;
     }
   }
+
+  &[data-smart-banner="true"] {
+    :global(#ipl-progress-indicator) {
+      @include mixins.mobile {
+        top: 128px;
+      }
+    }
+  }
 }

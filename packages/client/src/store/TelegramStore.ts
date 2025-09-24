@@ -31,7 +31,6 @@ import {
   deleteTelegramLink,
   checkTelegram,
 } from "@docspace/shared/api/settings";
-import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
 
 class TelegramStore {
   botUrl = "";
@@ -42,12 +41,6 @@ class TelegramStore {
 
   constructor() {
     makeAutoObservable(this);
-
-    SocketHelper?.on(SocketEvents.UpdateTelegram, (option) => {
-      if (typeof option === "string") {
-        this.checkTg();
-      }
-    });
   }
 
   setBotUrl = (botUrl: string) => {

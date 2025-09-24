@@ -60,6 +60,7 @@ import { Backdrop } from "../../../backdrop";
 import { Portal } from "../../../portal";
 
 import { useChatStore } from "../../store/chatStore";
+import { useMessageStore } from "../../store/messageStore";
 
 import styles from "./ChatInput.module.scss";
 
@@ -67,6 +68,11 @@ const ToolsSettings = () => {
   const { t } = useTranslation(["Common"]);
 
   const { roomId } = useChatStore();
+  const {
+    setKnowledgeSearchToolName,
+    setWebSearchToolName,
+    setWebCrawlingToolName,
+  } = useMessageStore();
   const { isBase } = useTheme();
 
   const [showManageConnections, setShowManageConnections] =
@@ -167,6 +173,11 @@ const ToolsSettings = () => {
       getWebSearchInRoom(Number(roomId)),
       fetchTools(),
     ]);
+    if (aiConfig) {
+      setKnowledgeSearchToolName(aiConfig.knowledgeSearchToolName);
+      setWebSearchToolName(aiConfig.webSearchToolName);
+      setWebCrawlingToolName(aiConfig.webCrawlingToolName);
+    }
     setWebSearchPortalEnabled(aiConfig?.webSearchEnabled ?? false);
     setWebSearchEnabled(webSearchInRoom?.webSearchEnabled ?? false);
   }, [fetchTools, roomId]);

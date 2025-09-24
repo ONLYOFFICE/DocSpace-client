@@ -31,7 +31,10 @@ import { useTranslation } from "react-i18next";
 
 import styles from "../../../ChatMessageBody.module.scss";
 import { Text } from "../../../../../../text";
-import type { TToolCallContent } from "../../../../../../../api/ai/types";
+import type {
+  TToolCallContent,
+  TToolCallResultSourceData,
+} from "../../../../../../../api/ai/types";
 import { formatJsonWithMarkdown } from "../../../../../utils";
 
 import MarkdownField from "../Markdown";
@@ -40,13 +43,34 @@ import type { ToolCallPlacement } from "./ToolCall.enum";
 type ToolCallBodyProps = {
   content: TToolCallContent;
   placement: ToolCallPlacement;
+  withSource?: boolean;
 };
 
-export const ToolCallBody = ({ content, placement }: ToolCallBodyProps) => {
+export const ToolCallBody = ({
+  content,
+  placement,
+  withSource,
+}: ToolCallBodyProps) => {
   const { t } = useTranslation(["Common"]);
 
-  const result = (content.result?.content as Record<string, unknown>[])?.[0]
-    .text as string;
+  const getResult = () => {
+    if (withSource) {
+      return JSON.stringify(
+        content.result?.data as TToolCallResultSourceData[],
+        null,
+        2,
+      );
+    }
+
+    if (content.result && "content" in content.result) {
+      return (content.result?.content as Record<string, unknown>[])?.[0]
+        .text as string;
+    }
+
+    return "";
+  };
+
+  const result = getResult();
 
   let isJson = false;
 

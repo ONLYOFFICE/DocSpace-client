@@ -45,7 +45,8 @@ import {
   type TProviderTypeWithUrl,
   type TAddNewServer,
   type TUpdateServer,
-  WebSearchConfig,
+  type WebSearchConfig,
+  type TAIConfig,
 } from "./types";
 
 const baseUrl = "/ai";
@@ -485,7 +486,7 @@ export const getAIConfig = async () => {
       url: `${baseUrl}/config`,
     });
 
-    return res as { webSearchEnabled: boolean };
+    return res as TAIConfig;
   } catch (e) {
     console.log(e);
     toastr.error(e as string);

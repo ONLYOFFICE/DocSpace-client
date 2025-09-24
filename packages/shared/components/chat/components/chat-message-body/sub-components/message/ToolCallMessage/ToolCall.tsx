@@ -28,7 +28,12 @@
 
 import React from "react";
 
-import type { TToolCallContent } from "../../../../../../../api/ai/types";
+import type {
+  TToolCallContent,
+  TToolCallResultSourceData,
+} from "../../../../../../../api/ai/types";
+
+import { useMessageStore } from "../../../../../store/messageStore";
 
 import styles from "../../../ChatMessageBody.module.scss";
 
@@ -36,7 +41,6 @@ import { ToolCallHeader } from "./ToolCallHeader";
 import { ToolCallBody } from "./ToolCallBody";
 import { ToolCallPlacement, ToolCallStatus } from "./ToolCall.enum";
 import classNames from "classnames";
-
 type ToolCallProps = {
   content: TToolCallContent;
   placement: ToolCallPlacement;
@@ -44,7 +48,29 @@ type ToolCallProps = {
 };
 
 export const ToolCall = ({ content, status, placement }: ToolCallProps) => {
+  const { knowledgeSearchToolName, webSearchToolName, webCrawlingToolName } =
+    useMessageStore();
+
   const [collapsed, setCollapsed] = React.useState(true);
+  const [sources, setSources] = React.useState<TToolCallResultSourceData[]>([]);
+
+  React.useEffect(() => {
+    if (
+      (content.name === knowledgeSearchToolName ||
+        content.name === webCrawlingToolName ||
+        content.name === webSearchToolName) &&
+      content.result &&
+      "data" in content.result
+    ) {
+      setSources(content.result?.data as TToolCallResultSourceData[]);
+    }
+  }, [
+    content.name,
+    content.result,
+    knowledgeSearchToolName,
+    webCrawlingToolName,
+    webSearchToolName,
+  ]);
 
   const expandable =
     placement === ToolCallPlacement.ConfirmDialog ||
@@ -66,7 +92,11 @@ export const ToolCall = ({ content, status, placement }: ToolCallProps) => {
       />
 
       {!expandable || collapsed ? null : (
-        <ToolCallBody content={content} placement={placement} />
+        <ToolCallBody
+          content={content}
+          placement={placement}
+          withSource={sources.length > 0}
+        />
       )}
     </div>
   );

@@ -75,11 +75,23 @@ export type TChat = {
   createdBy: TCreatedBy;
 };
 
+export type TToolCallResultSourceData = {
+  title: string;
+  text: string;
+  fileId?: number;
+  url?: string;
+  faviconUrl?: string;
+};
+
+export type TToolCallResultSource = {
+  data: TToolCallResultSourceData[];
+};
+
 export type TToolCallContent = {
   type: ContentType.Tool;
   arguments: Record<string, unknown>;
   name: string;
-  result?: Record<string, unknown>;
+  result?: Record<string, unknown> | TToolCallResultSource;
   callId?: string;
   mcpServerInfo?: {
     serverId: string;
@@ -153,4 +165,11 @@ export type WebSearchConfig = {
   enabled: boolean;
   type: WebSearchType;
   key?: string;
+};
+
+export type TAIConfig = {
+  webSearchEnabled: boolean;
+  knowledgeSearchToolName: string;
+  webSearchToolName: string;
+  webCrawlingToolName: string;
 };

@@ -63,6 +63,12 @@ export default class MessageStore {
 
   isGetMessageRequestRunning: boolean = false;
 
+  knowledgeSearchToolName: string = "";
+
+  webSearchToolName: string = "";
+
+  webCrawlingToolName: string = "";
+
   constructor(roomId: number | string) {
     makeAutoObservable(this);
 
@@ -75,6 +81,18 @@ export default class MessageStore {
 
   setMessages = (messages: TMessage[]) => {
     this.messages = messages;
+  };
+
+  setKnowledgeSearchToolName = (knowledgeSearchToolName: string) => {
+    this.knowledgeSearchToolName = knowledgeSearchToolName;
+  };
+
+  setWebSearchToolName = (webSearchToolName: string) => {
+    this.webSearchToolName = webSearchToolName;
+  };
+
+  setWebCrawlingToolName = (webCrawlingToolName: string) => {
+    this.webCrawlingToolName = webCrawlingToolName;
   };
 
   setStartIndex = (startIndex: number) => {

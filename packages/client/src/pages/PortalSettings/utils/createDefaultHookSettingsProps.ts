@@ -135,6 +135,7 @@ export const createDefaultHookSettingsProps = ({
     isSSOAvailable: currentQuotaStore?.isSSOAvailable,
     init: ssoFormStore?.init,
     isInit: ssoFormStore?.isInit,
+    isPluginsInit: pluginStore?.isInit,
     updatePlugins: pluginStore?.updatePlugins,
     getConsumers: setup?.getConsumers,
     fetchAndSetConsumers: setup?.fetchAndSetConsumers,

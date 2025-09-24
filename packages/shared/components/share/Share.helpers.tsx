@@ -645,6 +645,11 @@ export const getShareAccessRightOptions = (
       TShareToUserAccessRightOption | TShareToUserAccessRightOption[]
     >
   > = {
+    [ShareRights.ReadWrite]: {
+      access: ShareAccessRights.FullAccess,
+      key: "full-access",
+      label: t("Common:FullAccess"),
+    },
     [ShareRights.Editing]: {
       access: ShareAccessRights.Editing,
       key: "editing",

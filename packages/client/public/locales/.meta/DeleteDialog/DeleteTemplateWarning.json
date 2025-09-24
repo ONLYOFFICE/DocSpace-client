@@ -1,0 +1,28 @@
+{
+  "key_path": "DeleteTemplateWarning",
+  "content": "I understand the consequences and want to delete the template",
+  "content_en_sha1_hash": "cf4d946cfddc8793cb523172d2d13b82092fd4e5",
+  "created_at": "2025-09-24T13:10:15.400Z",
+  "updated_at": "2025-09-24T13:13:13.064Z",
+  "comment": {
+    "text": "This text appears within a checkbox in a delete dialog. It confirms the user understands the consequences of deleting a template and explicitly consents to the action. Translators should ensure the wording accurately conveys this acknowledgement and consent.",
+    "is_auto": true,
+    "updated_at": "2025-09-24T13:13:13.064Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
+      "line_number": 236,
+      "context": "<Text>{noteText}</Text>\n {isRoomDelete || isTemplate ? (\n <Checkbox\n style={{ marginTop: \"16px\" }}\n label={\n isTemplate ? t(\"DeleteTemplateWarning\") : t(\"DeleteRoomWarning\")\n }\n isChecked={isChecked}\n onChange={() => setIsChecked(!isChecked)}\n />\n ) : null}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

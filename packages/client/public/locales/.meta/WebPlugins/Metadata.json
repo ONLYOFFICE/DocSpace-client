@@ -3,7 +3,7 @@
   "content": "Metadata",
   "content_en_sha1_hash": "251edc0eb5a820646bda4e103f0f007fd55321f3",
   "created_at": "2025-05-19T21:30:49.911Z",
-  "updated_at": "2025-08-12T19:46:25.942Z",
+  "updated_at": "2025-09-24T13:10:16.964Z",
   "comment": {
     "text": "This translation key is used to display the label \"Metadata\" in a settings plugin dialog. It appears as a heading and is likely associated with a button or section title, providing context for users viewing plugin information.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Info.js",
-      "line_number": 87,
-      "context": "return (\n <StyledContainer withDelete={withDelete}>\n {withSeparator ? <StyledSeparator /> : null}\n <Text fontSize=\"14px\" fontWeight={600} lineHeight=\"16px\">\n {t(\"Metadata\")}\n </Text>\n <StyledInfo>\n {plugin.author ? (\n <>\n <Text fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\" truncate>",
+      "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Info.tsx",
+      "line_number": 56,
+      "context": "[styles.withDelete]: withDelete,\n })}\n >\n {withSeparator ? <div className={styles.separator} /> : null}\n <Text fontSize=\"14px\" fontWeight={600} lineHeight=\"16px\">\n {t(\"Metadata\")}\n </Text>\n <div className={styles.info}>\n {plugin.author ? (\n <>\n <Text fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\" truncate>",
       "module": "/packages/client"
     }
   ],

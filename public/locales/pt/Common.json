@@ -318,7 +318,6 @@
   "FeedbackAndSupport": "Feedback e Suporte",
   "FileActionRequired": "O destino já contém um arquivo chamado «<1>{{fileName}}</1>».",
   "FileName": "Nome do ficheiro",
-  "FilePermanentlyDeleted": "O arquivo será excluído permanentemente em 30 dias.",
   "FileProtectionMessage": "Estes ficheiros estão protegidos. Por favor, tente introduzir a palavra-passe para todos os ficheiros. Se não se lembrar da palavra-passe mas precisar destes ficheiros, pode descarregá-los no seu formato original ou simplesmente removê-los da lista. Em seguida, pode descarregar os restantes ficheiros.",
   "Files": "Ficheiros",
   "FilesAlreadyContains": "O destino já contém arquivos com o mesmo nome.",

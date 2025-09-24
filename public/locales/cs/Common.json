@@ -318,7 +318,6 @@
   "FeedbackAndSupport": "Zpětná vazba a technická podpora",
   "FileActionRequired": "V cílovém umístění se již nachází soubor s názvem «<1>{{fileName}}</1>».",
   "FileName": "Název souboru",
-  "FilePermanentlyDeleted": "Soubor bude za 30 dní trvale smazán.",
   "FileProtectionMessage": "Tyto soubory jsou chráněny. Zkuste prosím zadat heslo pro všechny soubory. Pokud si heslo nepamatujete, ale tyto soubory potřebujete, můžete si je stáhnout v původním formátu nebo je jednoduše odstranit ze seznamu. Poté si můžete stáhnout ostatní soubory.",
   "Files": "Soubory",
   "FilesAlreadyContains": "Cílová destinace již obsahuje soubory se stejným názvem.",

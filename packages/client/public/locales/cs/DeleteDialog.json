@@ -10,5 +10,6 @@
   "DeleteTemplates": "Opravdu chcete odstranit vybrané šablony místností? Nelze je obnovit.",
   "UnsubscribeButton": "Zrušit odběr",
   "UnsubscribeNote": "Určitě chcete zrušit odběr vybraných položek ze seznamu?",
-  "UnsubscribeTitle": "Potvrzení o odhlášení"
+  "UnsubscribeTitle": "Potvrzení o odhlášení",
+  "FileDeletedAfter": "Soubor bude za 30 dní trvale smazán."
 }

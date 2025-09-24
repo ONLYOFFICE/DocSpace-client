@@ -318,7 +318,6 @@
   "FeedbackAndSupport": "Opinion & Suport",
   "FileActionRequired": "Destinacioni tashmë përmban një skedar të quajtur «<1>{{fileName}}</1>».",
   "FileName": "Emri skedarit",
-  "FilePermanentlyDeleted": "Skedari do të fshihet përgjithmonë brenda 30 ditësh.",
   "FileProtectionMessage": "Këto skedarë janë të mbrojtur. Ju lutem provoni të vendosni fjalëkalimin për të gjithë skedarët. Nëse nuk e mbani mend fjalëkalimin, por ju nevojiten këta skedarë, mund të i shkarkoni në formatin e tyre origjinal ose mundeni thjesht t'i hiqni nga lista.",
   "Files": "Skedarë",
   "FilesAlreadyContains": "Destinacioni tashmë përmban skedarë me të njëjtin emër.",

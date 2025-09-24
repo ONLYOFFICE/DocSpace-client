@@ -10,5 +10,6 @@
   "DeleteTemplates": "Vai tiešām vēlaties dzēst atlasītās telpu veidnes? Tās nevar atjaunot.",
   "UnsubscribeButton": "Anulēt abonementu",
   "UnsubscribeNote": "Vai tiešām vēlaties atteikties no sarakstā atlasīto vienumu abonēšanas?",
-  "UnsubscribeTitle": "Abonēšanas atcelšanas apstiprinājums"
+  "UnsubscribeTitle": "Abonēšanas atcelšanas apstiprinājums",
+  "FileDeletedAfter": "Fails tiks neatgriezeniski izdzēsts 30 dienu laikā."
 }

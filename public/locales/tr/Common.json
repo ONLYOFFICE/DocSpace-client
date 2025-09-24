@@ -318,7 +318,6 @@
   "FeedbackAndSupport": "Geri Bildirim & Destek",
   "FileActionRequired": "Hedef zaten «<1>{{fileName}}</1>» adlı bir dosya içeriyor.",
   "FileName": "Dosya Adı",
-  "FilePermanentlyDeleted": "Dosya 30 gün içinde kalıcı olarak silinecek.",
   "FileProtectionMessage": "Bu dosyalar korumalıdır. Lütfen tüm dosyalar için parolayı girmeyi deneyin. Parolayı hatırlamıyorsanız fakat bu dosyalara ihtiyacınız varsa, orijinal formatlarında indirebilir ya da listeden kaldırabilirsiniz. Daha sonra kalan dosyaları indirebilirsiniz.",
   "Files": "Dosyalar",
   "FilesAlreadyContains": "Hedef zaten aynı ada sahip dosyalar içeriyor.",

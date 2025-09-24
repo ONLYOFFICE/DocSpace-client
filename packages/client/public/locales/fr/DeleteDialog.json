@@ -10,5 +10,6 @@
   "DeleteTemplates": "Voulez-vous vraiment supprimer les modèles de salle sélectionnés ? Ils ne peuvent pas être restaurés.",
   "UnsubscribeButton": "Se désabonner",
   "UnsubscribeNote": "Êtes-vous sûr de vouloir vous désabonner des éléments sélectionnés dans la liste ?",
-  "UnsubscribeTitle": "Confirmation de désabonnement"
+  "UnsubscribeTitle": "Confirmation de désabonnement",
+  "FileDeletedAfter": "Le fichier sera définitivement supprimé dans les 30 jours."
 }

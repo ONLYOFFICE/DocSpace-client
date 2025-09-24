@@ -10,5 +10,6 @@
   "DeleteTemplates": "Wilt u echt geselecteerde kamer sjablonen verwijderen? Ze kunnen niet hersteld worden.",
   "UnsubscribeButton": "Uitschrijven",
   "UnsubscribeNote": "Weet u zeker dat u zich wilt uitschrijven voor de gekozen items van de lijst?",
-  "UnsubscribeTitle": "Uitschrijven bevestiging"
+  "UnsubscribeTitle": "Uitschrijven bevestiging",
+  "FileDeletedAfter": "Het bestand wordt na 30 dagen definitief verwijderd."
 }

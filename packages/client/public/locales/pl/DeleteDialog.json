@@ -10,5 +10,6 @@
   "DeleteTemplates": "Czy na pewno chcesz usunąć wybrane szablony pokojów? Nie można ich przywrócić.",
   "UnsubscribeButton": "Zrezygnuj z subskrypcji",
   "UnsubscribeNote": "Czy na pewno chcesz zrezygnować z subskrypcji dla wybranych elementów z listy?",
-  "UnsubscribeTitle": "Potwierdź rezygnację"
+  "UnsubscribeTitle": "Potwierdź rezygnację",
+  "FileDeletedAfter": "Plik zostanie trwale usunięty za 30 dni."
 }

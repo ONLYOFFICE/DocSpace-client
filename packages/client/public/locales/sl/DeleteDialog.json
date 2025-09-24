@@ -10,5 +10,6 @@
   "DeleteTemplates": "Ali res želite izbrisati izbrane predloge sob? Ne bo jih mogoče obnoviti.",
   "UnsubscribeButton": "Odjavi se",
   "UnsubscribeNote": "Ali ste prepričani, da se želite odjaviti od izbranih elementov iz seznama?",
-  "UnsubscribeTitle": "Potrditev odjave"
+  "UnsubscribeTitle": "Potrditev odjave",
+  "FileDeletedAfter": "Datoteka bo v 30 dneh trajno izbrisana."
 }

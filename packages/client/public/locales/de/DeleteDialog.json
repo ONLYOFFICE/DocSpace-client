@@ -10,5 +10,6 @@
   "DeleteTemplates": "Möchten Sie die ausgewählten Raumvorlagen wirklich löschen? Sie können nicht wiederhergestellt werden.",
   "UnsubscribeButton": "Abbestellen",
   "UnsubscribeNote": "Sind Sie sicher, dass Sie die ausgewählten Elemente aus der Liste abbestellen möchten?",
-  "UnsubscribeTitle": "Abbestellungsbestätigung"
+  "UnsubscribeTitle": "Abbestellungsbestätigung",
+  "FileDeletedAfter": "Die Datei wird nach 30 Tagen endgültig gelöscht."
 }

@@ -318,7 +318,6 @@
   "FeedbackAndSupport": "Spätná väzba a Podpora",
   "FileActionRequired": "Cieľová destinácia už obsahuje súbor s názvom «<1>{{fileName}}</1>».",
   "FileName": "Názov súboru",
-  "FilePermanentlyDeleted": "Súbor bude natrvalo vymazaný do 30 dní.",
   "FileProtectionMessage": "Tieto súbory sú zabezpečené. Skúste zadať heslo pre všetky súbory. Ak si heslo nepamätáte, ale tieto súbory potrebujete, môžete si ich stiahnuť v pôvodnom formáte alebo ich jednoducho odstrániť zo zoznamu. Potom si môžete stiahnuť ostatné súbory.",
   "Files": "Súbory",
   "FilesAlreadyContains": "V cieľovej destinácii sa už nachádzajú súbory s rovnakým názvom.",

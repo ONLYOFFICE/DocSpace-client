@@ -318,7 +318,6 @@
   "FeedbackAndSupport": "Palaute & Tuki",
   "FileActionRequired": "Kohde sisältää jo tiedoston nimeltä «<1>{{fileName}}</1>».",
   "FileName": "Tiedostonimi",
-  "FilePermanentlyDeleted": "Tiedosto poistetaan pysyvästi 30 päivän päästä. ",
   "FileProtectionMessage": "Nämä tiedostot ovat suojattuja. Ole hyvä ja kokeile syöttää kaikkien tiedostojen salasana. Jos et muista salasanaa, mutta tarvitset näitä tiedostoja, niin voit ladata ne alkuperäisessä muodossaan tai yksinkertaisesti poistaa ne listalta. Sitten voit ladata loput tiedostot.",
   "Files": "Tiedostot",
   "FilesAlreadyContains": "Kohde sisältää jo samannimiset tiedostot.",

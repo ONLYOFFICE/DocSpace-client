@@ -318,7 +318,6 @@
   "FeedbackAndSupport": "Feedback & Support",
   "FileActionRequired": "Galamērķī jau ir fails ar nosaukumu «<1>{{fileName}}</1>».",
   "FileName": "Faila nosaukums",
-  "FilePermanentlyDeleted": "Fails tiks neatgriezeniski izdzēsts 30 dienu laikā.",
   "FileProtectionMessage": "Šie faili ir aizsargāti. Lūdzu, mēģiniet ievadīt paroli visiem failiem. Ja neatceraties paroli, bet šie faili jums ir nepieciešami, varat tos lejupielādēt oriģinālajā formātā vai vienkārši dzēst no saraksta. Pēc tam varat lejupielādēt pārējos failus.",
   "Files": "Faili",
   "FilesAlreadyContains": "Galamērķī jau ir faili ar tādu pašu nosaukumu.",

@@ -10,5 +10,6 @@
   "DeleteTemplates": "選択したルームテンプレートを本当に削除しますか？それらは復元できません。",
   "UnsubscribeButton": "登録解除",
   "UnsubscribeNote": "本当にリストから選択したアイテムの登録を解除してもよろしいですか？",
-  "UnsubscribeTitle": "登録解除確認"
+  "UnsubscribeTitle": "登録解除確認",
+  "FileDeletedAfter": "ファイルは30日で永久に削除されます。"
 }

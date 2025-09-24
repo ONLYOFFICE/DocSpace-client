@@ -10,5 +10,6 @@
   "DeleteTemplates": "Seçilen oda şablonlarını silmek istediğinize emin misiniz? Bunlar geri yüklenemezler.",
   "UnsubscribeButton": "Abonelikten çık",
   "UnsubscribeNote": "Listeden seçilen öğelerin aboneliğinden çıkmak istediğinizden emin misiniz?",
-  "UnsubscribeTitle": "Abonelikten çıkma onayı"
+  "UnsubscribeTitle": "Abonelikten çıkma onayı",
+  "FileDeletedAfter": "Dosya 30 gün içinde kalıcı olarak silinecek."
 }

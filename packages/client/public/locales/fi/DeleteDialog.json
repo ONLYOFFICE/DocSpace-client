@@ -10,5 +10,6 @@
   "DeleteTemplates": "Haluatko todella poistaa valitun huoneen mallit? Niitä ei voi palauttaa. ",
   "UnsubscribeButton": "Lopeta tilaus",
   "UnsubscribeNote": "Haluatko varmasti peruuttaa luettelosta valittujen kohteiden tilauksen?",
-  "UnsubscribeTitle": "Tilauksen peruuttamisen vahvistus"
+  "UnsubscribeTitle": "Tilauksen peruuttamisen vahvistus",
+  "FileDeletedAfter": "Tiedosto poistetaan pysyvästi 30 päivän päästä."
 }

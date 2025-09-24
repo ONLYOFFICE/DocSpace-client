@@ -10,5 +10,6 @@
   "DeleteTemplates": "Seçilmiş otaq şablonlarını silmək istədiyinizdən əminsiniz? Onları bərpa etmək mümkün deyil.",
   "UnsubscribeButton": "Abunəlikdən çıx",
   "UnsubscribeNote": "Siyahıda göstərilən elementlərdən abunəliyi dayandırmağı əminsinizmi?",
-  "UnsubscribeTitle": "Abunəlikdən çıxma təsdiqi"
+  "UnsubscribeTitle": "Abunəlikdən çıxma təsdiqi",
+  "FileDeletedAfter": "Fayl 30 gün ərzində həmişəlik silinəcək."
 }

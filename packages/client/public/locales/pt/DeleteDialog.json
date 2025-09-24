@@ -10,5 +10,6 @@
   "DeleteTemplates": "Pretende mesmo apagar os templates de salas selecionadas? Não podem ser restaurados.",
   "UnsubscribeButton": "Cancelar subscrição",
   "UnsubscribeNote": "Cancelar a inscrição dos itens selecionados da lista?",
-  "UnsubscribeTitle": "Confirmar o cancelamento da subscrição"
+  "UnsubscribeTitle": "Confirmar o cancelamento da subscrição",
+  "FileDeletedAfter": "O arquivo será excluído permanentemente em 30 dias."
 }

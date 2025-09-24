@@ -10,5 +10,6 @@
   "DeleteTemplates": "¿Realmente desea eliminar pas plantillas de sala seleccionadas? No se podrán resaturar.",
   "UnsubscribeButton": "Cancelar suscripción",
   "UnsubscribeNote": "¿Está seguro de que quiere cancelar la suscripción a los elementos seleccionados de la lista?",
-  "UnsubscribeTitle": "Confirmación de anulación de suscripción"
+  "UnsubscribeTitle": "Confirmación de anulación de suscripción",
+  "FileDeletedAfter": "El archivo se eliminará definitivamente dentro de 30 días."
 }

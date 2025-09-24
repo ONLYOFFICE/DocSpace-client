@@ -24,30 +24,34 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React, { useState, useRef } from "react";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { DropDown } from "@docspace/shared/components/drop-down";
-import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { ComboButton } from "@docspace/shared/components/combobox/sub-components/ComboButton";
 import classNames from "classnames";
 import styles from "./MobileView.module.scss";
+import type {
+  CategoryFilterMobileProps,
+  MenuItem,
+  Category,
+  InjectedProps,
+} from "../CategoryFilter.types";
 
-const CategoryFilterMobile = ({
+const CategoryFilterMobile: React.FC<CategoryFilterMobileProps> = ({
   t,
-
   menuItems,
-
   currentCategory,
   getCategoryTitle,
   filterOformsByCategory,
   setOformsCurrentCategory,
 }) => {
-  const scrollRef = useRef();
+  const scrollRef = useRef<any>(null);
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [openedMenuItem, setOpenedMenuItem] = useState(null);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [openedMenuItem, setOpenedMenuItem] = useState<MenuItem | null>(null);
 
   const onCloseDropdown = () => {
     setIsOpen(false);
@@ -63,12 +67,12 @@ const CategoryFilterMobile = ({
     onCloseDropdown();
   };
 
-  const onOpenMenuItem = (category) => setOpenedMenuItem(category);
+  const onOpenMenuItem = (category: MenuItem) => setOpenedMenuItem(category);
   const onHeaderArrowClick = () => setOpenedMenuItem(null);
 
-  const onFilterByCategory = (category) => {
+  const onFilterByCategory = (category: Category) => {
+    if (!openedMenuItem) return;
     filterOformsByCategory(openedMenuItem.key, category.id);
-
     setOformsCurrentCategory(category);
     setOpenedMenuItem(null);
     setIsOpen(false);
@@ -90,6 +94,7 @@ const CategoryFilterMobile = ({
     <div id="containerMobile" className={styles.categoryFilterMobileWrapper}>
       <ComboButton
         selectedOption={{
+          key: currentCategory?.id || "categories",
           label:
             getCategoryTitle(currentCategory) || t("FormGallery:Categories"),
         }}
@@ -101,7 +106,7 @@ const CategoryFilterMobile = ({
 
       <DropDown
         className={classNames(styles.categoryFilterMobile, "mainBtnDropdown")}
-        style={{ "--forced-height": `${height}px` }}
+        style={{ "--forced-height": `${height}px` } as React.CSSProperties}
         open={isOpen}
         withBackdrop
         withBackground
@@ -177,7 +182,7 @@ const CategoryFilterMobile = ({
   );
 };
 
-export default inject(({ oformsStore }) => ({
+export default inject(({ oformsStore }: InjectedProps) => ({
   currentCategory: oformsStore.currentCategory,
   getCategoryTitle: oformsStore.getCategoryTitle,
   filterOformsByCategory: oformsStore.filterOformsByCategory,

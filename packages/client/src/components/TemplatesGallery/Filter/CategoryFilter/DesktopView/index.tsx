@@ -24,24 +24,28 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React, { useState } from "react";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { ComboBox } from "@docspace/shared/components/combobox";
-import { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import classNames from "classnames";
 import styles from "./DesktopView.module.scss";
 import SubList from "./SubList";
+import type {
+  CategoryFilterDesktopProps,
+  InjectedProps,
+} from "../CategoryFilter.types";
 
-const CategoryFilterDesktop = ({
+const CategoryFilterDesktop: React.FC<CategoryFilterDesktopProps> = ({
   t,
   menuItems,
   currentCategory,
   getCategoryTitle,
   filterOformsByCategory,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [hoveredSub, setHoveredSub] = useState(null);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [hoveredSub, setHoveredSub] = useState<string | null>(null);
 
   const onOpenDropdown = () => setIsOpen(true);
   const onCloseDropdown = () => {
@@ -49,10 +53,11 @@ const CategoryFilterDesktop = ({
     setHoveredSub(null);
   };
 
-  const onBackdropClick = (e) => {
+  const onBackdropClick = (e: any) => {
+    const target = e?.target as HTMLElement;
     if (
-      e?.target?.className !== "item-content" &&
-      e?.target?.className !== "dropdown-item"
+      target?.className !== "item-content" &&
+      target?.className !== "dropdown-item"
     )
       onCloseDropdown();
   };
@@ -86,34 +91,39 @@ const CategoryFilterDesktop = ({
         disableItemClickFirstLevel
         advancedOptionsCount={5}
         selectedOption={{
+          key: currentCategory?.id || "categories-combobox",
           label:
             getCategoryTitle(currentCategory) || t("FormGallery:Categories"),
         }}
         advancedOptions={
           <>
-            <DropDownItem
-              id="ViewAllTemplates"
-              key="ViewAllTemplates"
-              title={t("FormGallery:ViewAllTemplates")}
-              className={classNames("dropdown-item", styles.categoryFilterItem)}
-              label={t("FormGallery:ViewAllTemplates")}
-              onClick={onViewAllTemplates}
+            <div
               onMouseEnter={() => setHoveredSub(null)}
-            />
-            <DropDownItem isSeparator />
-            {menuItems?.map((item) => (
+              key="ViewAllTemplates"
+            >
               <DropDownItem
-                id={item.key}
-                key={item.key}
-                title={item.label}
+                id="ViewAllTemplates"
                 className={classNames(
-                  `item-by-${item.key} item-by-first-level`,
+                  "dropdown-item",
                   styles.categoryFilterItem,
                 )}
-                label={item.label}
-                onMouseEnter={() => setHoveredSub(item.key)}
-                isSubMenu
+                label={t("FormGallery:ViewAllTemplates")}
+                onClick={onViewAllTemplates}
               />
+            </div>
+            <DropDownItem isSeparator />
+            {menuItems?.map((item) => (
+              <div onMouseEnter={() => setHoveredSub(item.key)} key={item.key}>
+                <DropDownItem
+                  id={item.key}
+                  className={classNames(
+                    `item-by-${item.key} item-by-first-level`,
+                    styles.categoryFilterItem,
+                  )}
+                  label={item.label}
+                  isSubMenu
+                />
+              </div>
             ))}
           </>
         }
@@ -133,7 +143,8 @@ const CategoryFilterDesktop = ({
     </>
   );
 };
-export default inject(({ oformsStore }) => ({
+
+export default inject(({ oformsStore }: InjectedProps) => ({
   currentCategory: oformsStore.currentCategory,
   getCategoryTitle: oformsStore.getCategoryTitle,
   filterOformsByCategory: oformsStore.filterOformsByCategory,

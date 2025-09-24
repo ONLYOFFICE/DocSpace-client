@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import classNames from "classnames";
@@ -32,8 +32,14 @@ import { isMobile } from "@docspace/shared/utils";
 import CategoryFilterDesktop from "./DesktopView";
 import CategoryFilterMobile from "./MobileView";
 import styles from "./CategoryFilter.module.scss";
+import type {
+  CategoryFilterProps,
+  MenuItem,
+  InjectedProps,
+  Category,
+} from "./CategoryFilter.types";
 
-const CategoryFilter = ({
+const CategoryFilter: React.FC<CategoryFilterProps> = ({
   oformsFilter,
   noLocales,
   fetchCategoryTypes,
@@ -45,10 +51,10 @@ const CategoryFilter = ({
   languageFilterLoaded,
   isShowInitSkeleton,
 }) => {
-  const [menuItems, setMenuItems] = useState([]);
-  const [viewMobile, setViewMobile] = useState(false);
+  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+  const [viewMobile, setViewMobile] = useState<boolean>(false);
 
-  const onCheckView = () => setViewMobile(isMobile());
+  const onCheckView = useCallback(() => setViewMobile(isMobile()), []);
 
   useEffect(() => {
     onCheckView();
@@ -69,15 +75,15 @@ const CategoryFilter = ({
       }
 
       const categoryPromises = newMenuItems.map(
-        (item) =>
-          new Promise((resolve) => {
+        (item: Category) =>
+          new Promise<Category[]>((resolve) => {
             resolve(fetchCategoriesOfCategoryType(item.attributes.categoryId));
           }),
       );
 
       Promise.all(categoryPromises)
         .then((results) => {
-          newMenuItems = newMenuItems.map((item, index) => ({
+          newMenuItems = newMenuItems.map((item: Category, index: number) => ({
             key: item.attributes.categoryId,
             label: item.attributes.name,
             categories: results[index],
@@ -85,7 +91,7 @@ const CategoryFilter = ({
         })
         .catch((err) => {
           console.error(err);
-          newMenuItems = newMenuItems.map((item) => ({
+          newMenuItems = newMenuItems.map((item: Category) => ({
             key: item.attributes.categoryId,
             label: item.attributes.name,
             categories: [],
@@ -97,11 +103,17 @@ const CategoryFilter = ({
             setFilterOformsByLocaleIsLoading(false);
         });
     })();
-  }, [oformsFilter.locale]);
+  }, [
+    oformsFilter.locale,
+    fetchCategoryTypes,
+    fetchCategoriesOfCategoryType,
+    filterOformsByLocaleIsLoading,
+    setFilterOformsByLocaleIsLoading,
+  ]);
 
   useEffect(() => {
     setCategoryFilterLoaded(menuItems.length !== 0);
-  }, [menuItems.length]);
+  }, [menuItems.length, setCategoryFilterLoaded]);
 
   if (
     isShowInitSkeleton ||
@@ -130,7 +142,8 @@ const CategoryFilter = ({
     </div>
   );
 };
-export default inject(({ oformsStore }) => ({
+
+export default inject(({ oformsStore }: InjectedProps) => ({
   oformsFilter: oformsStore.oformsFilter,
   noLocales:
     oformsStore.oformLocales !== null && oformsStore.oformLocales?.length === 0,

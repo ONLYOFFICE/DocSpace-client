@@ -24,29 +24,33 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { DropDown } from "@docspace/shared/components/drop-down";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import classNames from "classnames";
 import styles from "./DesktopView.module.scss";
+import type {
+  SubListProps,
+  Category,
+  InjectedProps,
+} from "../CategoryFilter.types";
 
-const SubList = ({
+const SubList: React.FC<SubListProps> = ({
   categoryType,
   categories,
-
   isDropdownOpen,
   isSubHovered,
   marginTop,
   onCloseDropdown,
-
   getCategoryTitle,
   filterOformsByCategory,
   setOformsCurrentCategory,
 }) => {
-  const onPreventDefault = (e) => e.preventDefault();
+  const onPreventDefault = (e: React.MouseEvent) => e.preventDefault();
 
-  const onFilterByCategory = (category) => {
+  const onFilterByCategory = (category: Category) => {
     onCloseDropdown();
     setOformsCurrentCategory(category);
     filterOformsByCategory(categoryType, category.id);
@@ -55,7 +59,6 @@ const SubList = ({
   return (
     <DropDown
       open={isDropdownOpen}
-      isSubHovered={isSubHovered}
       className={classNames(
         `dropdown-sub sub-by-${categoryType}`,
         styles.categoryFilterSubList,
@@ -64,7 +67,7 @@ const SubList = ({
           [styles.isSubHovered]: isSubHovered,
         },
       )}
-      style={{ "--margin-top": marginTop }}
+      style={{ "--margin-top": marginTop } as React.CSSProperties}
       id={`category-sub-list-${categoryType}`}
       directionX="right"
       directionY="bottom"
@@ -94,10 +97,10 @@ const SubList = ({
             key={category.id}
             onClick={onCategoryClick}
             onMouseDown={onPreventDefault}
-            title={categoryTitle}
           >
             <div
               className="item-content"
+              title={categoryTitle}
               style={{
                 maxWidth: "182px",
                 whiteSpace: "nowrap",
@@ -114,7 +117,7 @@ const SubList = ({
   );
 };
 
-export default inject(({ oformsStore }) => ({
+export default inject(({ oformsStore }: InjectedProps) => ({
   getCategoryTitle: oformsStore.getCategoryTitle,
   setOformsCurrentCategory: oformsStore.setOformsCurrentCategory,
   filterOformsByCategory: oformsStore.filterOformsByCategory,

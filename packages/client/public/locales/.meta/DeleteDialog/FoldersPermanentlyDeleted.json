@@ -1,0 +1,28 @@
+{
+  "key_path": "FoldersPermanentlyDeleted",
+  "content": "The folders will be permanently removed from the Trash.",
+  "content_en_sha1_hash": "54f51ca233da39fff71005e8e6283481bd6e2660",
+  "created_at": "2025-09-24T13:10:15.409Z",
+  "updated_at": "2025-09-24T13:11:34.052Z",
+  "comment": {
+    "text": "This text explains the final step in deleting folders, confirming they will be permanently removed from the Trash. It appears within a confirmation dialog when deleting multiple folders, informing the user of the irreversible action. Translators should ensure the tone conveys finality and clarity.",
+    "is_auto": true,
+    "updated_at": "2025-09-24T13:11:34.052Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
+      "line_number": 130,
+      "context": "<>\n <Trans t={t} i18nKey=\"DeleteFolders\" ns=\"DeleteDialog\">\n You are about to move <strong>folders ({{ foldersCount }})</strong>{\" \"}\n to Trash.{\" \"}\n </Trans>{\" \"}\n {t(\"FoldersPermanentlyDeleted\")} {t(\"Common:WantToContinue\")}\n </>\n );\n }\n }",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

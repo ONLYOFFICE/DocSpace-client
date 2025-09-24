@@ -3,7 +3,7 @@
   "content": "Delete plugin",
   "content_en_sha1_hash": "78509ae90f9433b054c76f9f8003b75eef79307f",
   "created_at": "2025-05-19T21:30:49.895Z",
-  "updated_at": "2025-08-11T18:11:59.154Z",
+  "updated_at": "2025-09-24T13:10:16.962Z",
   "comment": {
     "text": "This translation key is used to display the text \"Delete plugin\" on a button within a settings plugin dialog. It is intended to be translated by users who want to customize the UI of their application, and it appears in the button label when deleting an option has been selected.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/index.js",
-      "line_number": 122,
-      "context": "withDelete={withDelete}\n withSeparator={!!customSettingsProps?.children}\n />\n {withDelete ? (\n <Button\n label={t(\"DeletePlugin\")}\n onClick={onDeleteAction}\n scale\n size=\"normal\"\n testId=\"settings_delete_plugin_button\"\n />",
+      "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/index.tsx",
+      "line_number": 128,
+      "context": "withDelete={withDelete}\n withSeparator={!!customSettingsProps?.children}\n />\n {withDelete ? (\n <Button\n label={t(\"DeletePlugin\")}\n onClick={onDeleteAction}\n scale\n size={ButtonSize.normal}\n testId=\"settings_delete_plugin_button\"\n />",
       "module": "/packages/client"
     }
   ],

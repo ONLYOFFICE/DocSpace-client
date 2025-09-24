@@ -24,9 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+
 import { Text } from "@docspace/shared/components/text";
+import { toastr } from "@docspace/shared/components/toast";
+import SocketHelper, {
+  SocketCommands,
+  SocketEvents,
+} from "@docspace/shared/utils/socket";
 
 import ConnectAccountDialog from "SRC_DIR/components/dialogs/ConnectAccountDialog";
 import DisconnectAccountDialog from "SRC_DIR/components/dialogs/DisconnectAccountDialog";
@@ -49,6 +56,7 @@ type NotificationsChannelsProps = {
   isTelegramEnabled?: TargetUserStore["isTelegramEnabled"];
   isEmailNotValid?: TargetUserStore["isEmailNotValid"];
   isThirdPartyAvailable?: boolean;
+  checkTg?: TStore["telegramStore"]["checkTg"];
 };
 
 const NotificationsChannels = ({
@@ -63,8 +71,27 @@ const NotificationsChannels = ({
   isTelegramEnabled,
   isEmailNotValid,
   isThirdPartyAvailable,
+  checkTg,
 }: NotificationsChannelsProps) => {
-  const { t } = useTranslation("Profile");
+  const { t } = useTranslation(["Profile", "Notifications", "Common"]);
+
+  useEffect(() => {
+    SocketHelper?.emit(SocketCommands.Subscribe, {
+      roomParts: "telegram",
+      individual: true,
+    });
+
+    SocketHelper?.on(SocketEvents.UpdateTelegram, (option) => {
+      if (typeof option === "string") {
+        checkTg?.();
+        toastr.success(
+          t("Notifications:SuccessConnected", {
+            serviceName: t("Common:ProviderTelegram"),
+          }),
+        );
+      }
+    });
+  }, []);
 
   return (
     <div className={styles.notificationsChannels}>
@@ -118,7 +145,7 @@ export default inject(
       setDisconnectAccountDialogVisible,
     } = dialogsStore;
     const { user } = userStore;
-    const { isConnected, username } = telegramStore;
+    const { isConnected, username, checkTg } = telegramStore;
 
     const { isEmailEnabled, isTelegramEnabled, isEmailNotValid } =
       peopleStore.targetUserStore!;
@@ -137,6 +164,7 @@ export default inject(
       isTelegramEnabled,
       isEmailNotValid,
       isThirdPartyAvailable,
+      checkTg,
     };
   },
 )(observer(NotificationsChannels));

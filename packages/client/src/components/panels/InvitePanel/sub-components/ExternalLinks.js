@@ -29,7 +29,7 @@ import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 import ButtonAlertIcon from "PUBLIC_DIR/images/button.alert.react.svg";
 import ClockIconUrl from "PUBLIC_DIR/images/clock.react.svg?url";
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/icons/12/person-plus.react.svg?url";
-import SettingsOutlineSvgUrl from "PUBLIC_DIR/images/icons/16/settings-outline.react.svg?url";
+import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-common.svg?url";
 import { useRef } from "react";
 import { inject, observer } from "mobx-react";
 
@@ -198,7 +198,7 @@ const ExternalLinks = ({
 
         {roomId !== -1 ? (
           <IconButton
-            iconName={SettingsOutlineSvgUrl}
+            iconName={SettingsReactSvgUrl}
             size={16}
             onClick={() => setLinkSettingsPanelVisible(true)}
           />

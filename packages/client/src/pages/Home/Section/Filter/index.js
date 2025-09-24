@@ -132,6 +132,7 @@ const SectionFilterContent = ({
   showStorageInfo,
   isDefaultRoomsQuotaSet,
   isTemplatesFolder,
+  isSharedWithMeFolder,
 
   currentClientView,
 
@@ -717,6 +718,65 @@ const SectionFilterContent = ({
     t,
   ]);
 
+  const getAuthorFilter = React.useCallback(() => {
+    const selectedFolder = getSelectedFolder();
+
+    const isFolderSharedWithMe =
+      selectedFolder.isFolder &&
+      !selectedFolder.isRootFolder &&
+      selectedFolder.rootFolderType === FolderType.SHARE;
+
+    if (isFolderSharedWithMe) return [];
+
+    if (isSharedWithMeFolder)
+      return [
+        {
+          key: FilterGroups.filterAuthor,
+          group: FilterGroups.filterAuthor,
+          label: t("ByAuthor"),
+          isHeader: true,
+        },
+        {
+          id: "filter_author-user-button",
+          key: FilterKeys.user,
+          group: FilterGroups.filterAuthor,
+          displaySelectorType: "button",
+          label: t("Translations:ChooseFromList"),
+        },
+      ];
+
+    return [
+      {
+        key: FilterGroups.filterAuthor,
+        group: FilterGroups.filterAuthor,
+        label: t("ByAuthor"),
+        isHeader: true,
+      },
+      {
+        id: "filter_author-me",
+        key: FilterKeys.me,
+        group: FilterGroups.filterAuthor,
+        label: t("Common:MeLabel"),
+      },
+      {
+        id: "filter_author-user",
+        key: FilterKeys.user,
+        group: FilterGroups.filterAuthor,
+        displaySelectorType: "link",
+      },
+      ...(isCollaborator || isVisitor
+        ? []
+        : [
+            {
+              id: "filter_author-other",
+              key: FilterKeys.other,
+              group: FilterGroups.filterAuthor,
+              label: t("Common:OtherLabel"),
+            },
+          ]),
+    ];
+  }, [getSelectedFolder, isSharedWithMeFolder, isCollaborator, isVisitor]);
+
   const getFilterData = React.useCallback(async () => {
     const quotaFilter = [
       {
@@ -1078,45 +1138,7 @@ const SectionFilterContent = ({
         isDefaultRoomsQuotaSet &&
         filterOptions.push(...quotaFilter);
     } else {
-      const selectedFolder = getSelectedFolder();
-
-      const isFolderSharedWithMe =
-        selectedFolder.isFolder &&
-        !selectedFolder.isRootFolder &&
-        selectedFolder.rootFolderType === FolderType.SHARE;
-
-      const author = {
-        key: FilterGroups.filterAuthor,
-        group: FilterGroups.filterAuthor,
-        label: t("ByAuthor"),
-        isHeader: true,
-      };
-
-      const authorOption = [
-        ...(isFolderSharedWithMe ? [] : [author]),
-        {
-          id: "filter_author-me",
-          key: FilterKeys.me,
-          group: FilterGroups.filterAuthor,
-          label: t("Common:MeLabel"),
-        },
-
-        {
-          id: "filter_author-user",
-          key: FilterKeys.user,
-          group: FilterGroups.filterAuthor,
-          displaySelectorType: "link",
-        },
-      ];
-
-      if (!isCollaborator && !isVisitor) {
-        authorOption.push({
-          id: "filter_author-other",
-          key: FilterKeys.other,
-          group: FilterGroups.filterAuthor,
-          label: t("Common:OtherLabel"),
-        });
-      }
+      const authorOption = getAuthorFilter();
 
       !isPublicRoom && filterOptions.push(...authorOption);
       filterOptions.push(...typeOptions);
@@ -1220,7 +1242,7 @@ const SectionFilterContent = ({
     isCollaborator,
     isVisitor,
     getContactsFilterData,
-    getSelectedFolder,
+    getAuthorFilter,
   ]);
 
   const getViewSettingsData = React.useCallback(() => {
@@ -1570,6 +1592,7 @@ export default inject(
       isPersonalRoom,
       isTrashFolder: isTrash,
       isTemplatesFolder,
+      isSharedWithMeFolder,
     } = treeFoldersStore;
 
     const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
@@ -1615,6 +1638,7 @@ export default inject(
       isTemplatesFolder,
       isIndexing: isIndexedFolder,
       isIndexEditingMode,
+      isSharedWithMeFolder,
 
       setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
       showFilterLoader: clientLoadingStore.showFilterLoader,

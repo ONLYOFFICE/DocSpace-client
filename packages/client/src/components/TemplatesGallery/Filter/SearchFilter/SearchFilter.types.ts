@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { OformsStore } from "@/store";
-import type { OformsFilter } from "@/store/oforms/oforms.types";
+import type OformsStore from "../../../../store/OformsStore";
+import type OformsFilter from "@docspace/shared/api/oforms/filter";
 import type { TFunction } from "i18next";
 
 export interface InjectedProps {

@@ -24,11 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { OformsFilterStore } from "../../../store/oforms/filter";
+import OformsFilter from "@docspace/shared/api/oforms/filter";
 import { Category } from "./CategoryFilter/CategoryFilter.types";
 
 export interface FilterContentProps {
-  oformsFilter: OformsFilterStore;
+  oformsFilter: OformsFilter;
   noLocales: boolean;
   fetchCategoryTypes: () => Promise<Category[]>;
   fetchCategoriesOfCategoryType: (categoryId: string) => Promise<Category[]>;

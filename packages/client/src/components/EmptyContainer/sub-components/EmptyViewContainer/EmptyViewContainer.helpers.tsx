@@ -207,6 +207,7 @@ export const getOptions = (
   const isFormFiller = access === ShareAccessRights.FormFilling;
   const isCollaborator = access === ShareAccessRights.Collaborator;
   const isNotAdmin = isUser(access);
+  const canUseChat = !!security && "UseChat" in security && security.UseChat;
 
   const {
     createInviteOption,
@@ -479,7 +480,7 @@ export const getOptions = (
             window.DocSpace.navigate(`${path}?${filesFilter.toUrlParams()}`);
           },
           description: t("AIRoom:CreateChatDescription"),
-          disabled: false,
+          disabled: !canUseChat,
         },
       ];
   }

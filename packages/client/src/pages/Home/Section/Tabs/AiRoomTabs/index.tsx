@@ -38,10 +38,12 @@ import AiRoomStore from "SRC_DIR/store/AiRoomStore";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
+import type AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
 
 type AiRoomTabsProps = {
   id?: SelectedFolderStore["id"];
   rootRoomId?: SelectedFolderStore["rootRoomId"];
+  canUseChat?: AccessRightsStore["canUseChat"];
 
   currentClientView?: ClientLoadingStore["currentClientView"];
   showTabsLoader?: ClientLoadingStore["showTabsLoader"];
@@ -55,6 +57,7 @@ type AiRoomTabsProps = {
 const AiRoomTabs = ({
   id,
   rootRoomId,
+  canUseChat,
 
   showTabsLoader,
   currentClientView,
@@ -112,16 +115,19 @@ const AiRoomTabs = ({
       content: null,
     },
     {
-      id: "knowledge",
-      name: t("Knowledge"),
-      content: null,
-    },
-    {
       id: "result",
       name: t("ResultStorage"),
       content: null,
     },
   ];
+
+  if (canUseChat) {
+    items.splice(1, 0, {
+      id: "knowledge",
+      name: t("Knowledge"),
+      content: null,
+    });
+  }
 
   return (
     <Tabs
@@ -138,17 +144,24 @@ const AiRoomTabs = ({
 };
 
 export default inject(
-  ({ clientLoadingStore, aiRoomStore, selectedFolderStore }: TStore) => {
+  ({
+    clientLoadingStore,
+    aiRoomStore,
+    selectedFolderStore,
+    accessRightsStore,
+  }: TStore) => {
     const { showTabsLoader, setIsSectionBodyLoading, currentClientView } =
       clientLoadingStore;
 
     const { currentTab, setCurrentTab, setKnowledgeId } = aiRoomStore;
 
     const { id, rootRoomId } = selectedFolderStore;
+    const { canUseChat } = accessRightsStore;
 
     return {
       id,
       rootRoomId,
+      canUseChat,
 
       showTabsLoader,
       setIsSectionBodyLoading,

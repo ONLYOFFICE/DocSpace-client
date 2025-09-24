@@ -43,11 +43,16 @@ const Chat = ({
   userAvatar,
   selectedModel,
   isLoading,
+  canUseChat,
 
   getIcon,
   attachmentFile,
   clearAttachmentFile,
 }: ChatProps) => {
+  if (!canUseChat) {
+    return <div>Chat is not available</div>;
+  }
+
   return (
     <ChatStoreContextProvider roomId={roomId}>
       <MessageStoreContextProvider roomId={roomId}>

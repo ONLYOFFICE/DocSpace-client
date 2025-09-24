@@ -45,6 +45,7 @@ import { getCategoryType } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
+import type AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
 
 import { SectionBodyContent, ContactsSectionBodyContent } from "../Section";
 import ProfileSectionBodyContent from "../../Profile/Section/Body";
@@ -79,6 +80,8 @@ type ViewProps = UseContactsProps &
 
     aiAgentSelectorDialogProps: DialogsStore["aiAgentSelectorDialogProps"];
     setAiAgentSelectorDialogProps: DialogsStore["setAiAgentSelectorDialogProps"];
+
+    canUseChat: AccessRightsStore["canUseChat"];
   };
 
 const View = ({
@@ -146,6 +149,8 @@ const View = ({
 
   aiAgentSelectorDialogProps,
   setAiAgentSelectorDialogProps,
+
+  canUseChat,
 }: ViewProps) => {
   const location = useLocation();
 
@@ -415,6 +420,7 @@ const View = ({
               isLoading={showBodyLoader}
               attachmentFile={attachmentFile}
               clearAttachmentFile={onClearAttachmentFile}
+              canUseChat={canUseChat}
             />
           ) : currentView === "profile" ? (
             <ProfileSectionBodyContent />
@@ -445,7 +451,10 @@ export const ViewComponent = inject(
     authStore,
     telegramStore,
     dialogsStore,
+    accessRightsStore,
   }: TStore) => {
+    const { canUseChat } = accessRightsStore;
+
     const { usersStore, groupsStore } = peopleStore;
 
     const {
@@ -574,6 +583,8 @@ export const ViewComponent = inject(
 
       aiAgentSelectorDialogProps,
       setAiAgentSelectorDialogProps,
+
+      canUseChat,
     };
   },
 )(observer(View));

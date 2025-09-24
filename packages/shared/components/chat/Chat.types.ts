@@ -153,6 +153,7 @@ export type ChatProps = {
   selectedModel: string;
   getIcon: ChatInputProps["getIcon"];
   isLoading?: boolean;
+  canUseChat?: boolean;
 
   attachmentFile: ChatInputProps["attachmentFile"];
   clearAttachmentFile: ChatInputProps["clearAttachmentFile"];

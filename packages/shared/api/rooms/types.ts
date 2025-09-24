@@ -78,6 +78,7 @@ export type TRoomSecurity = {
   Duplicate: boolean;
   Download: boolean;
   CopySharedLink: boolean;
+  UseChat: boolean;
 };
 
 export type TRoomLifetime = {

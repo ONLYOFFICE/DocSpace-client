@@ -74,10 +74,13 @@ const SubmitToGalleryTile: FC<SubmitToGalleryTileProps> = ({
         style={
           {
             "--color-background": isBase
-              ? hexRgb(currentColorScheme.main?.accent || "#000000", {
-                  alpha: 0.03,
-                  format: "css",
-                })
+              ? hexRgb(
+                  currentColorScheme.main?.accent || globalColors.lightBlueMain,
+                  {
+                    alpha: 0.03,
+                    format: "css",
+                  },
+                )
               : hexRgb(globalColors.white, {
                   alpha: 0.03,
                   format: "css",

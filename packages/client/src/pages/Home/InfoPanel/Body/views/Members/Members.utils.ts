@@ -115,7 +115,6 @@ class MembersHelper {
         ];
 
       case RoomsType.CustomRoom:
-      case RoomsType.AIRoom:
         return [
           options.roomAdmin,
           options.collaborator,
@@ -141,6 +140,13 @@ class MembersHelper {
           options.collaborator,
           options.editor,
           options.formFiller,
+          options.viewer,
+          ...deleteOption,
+        ];
+      case RoomsType.AIRoom:
+        return [
+          options.roomAdmin,
+          options.collaborator,
           options.viewer,
           ...deleteOption,
         ];

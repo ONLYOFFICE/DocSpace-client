@@ -27,6 +27,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import styled from "styled-components";
 
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
@@ -34,6 +35,17 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 
 import { getDialogContent } from "./DeleteDialog.helper";
+
+const StyledModalWrapper = styled(ModalDialog)`
+  strong {
+    display: inline-block;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: top;
+  }
+`;
 
 const DeleteDialogComponent = (props) => {
   const {
@@ -225,7 +237,7 @@ const DeleteDialogComponent = (props) => {
     isRoomDelete || isTemplate ? !isChecked : !selection.length;
 
   return (
-    <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
+    <StyledModalWrapper isLoading={!tReady} visible={visible} onClose={onClose}>
       <ModalDialog.Header>{title}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text>{noteText}</Text>
@@ -264,7 +276,7 @@ const DeleteDialogComponent = (props) => {
           testId="delete_dialog_modal_cancel"
         />
       </ModalDialog.Footer>
-    </ModalDialog>
+    </StyledModalWrapper>
   );
 };
 

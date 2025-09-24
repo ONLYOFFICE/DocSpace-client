@@ -24,38 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Button } from "@docspace/shared/components/button";
-import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
-import ErrorImageSvgUrl from "PUBLIC_DIR/images/errors/error500.svg?url";
-import { isMobile as isMobileUtils } from "@docspace/shared/utils";
-import { withTranslation } from "react-i18next";
-import { Scrollbar } from "@docspace/shared/components/scrollbar";
-import styles from "./ErrorView.module.scss";
+import type { TFunction } from "i18next";
 
-const ErrorView = ({ t, onCloseClick }) => {
-  const isMobile = isMobileUtils();
-
-  return (
-    <Scrollbar style={{ height: "calc(100vh - 173px)" }}>
-      <EmptyScreenContainer
-        className={styles.errorView}
-        imageSrc={ErrorImageSvgUrl}
-        imageAlt="Error Screen Gallery image"
-        headerText="Gallery is temporarily unavailable"
-        descriptionText={t("FormGallery:ErrorViewDescription")}
-        buttons={
-          <Button
-            primary
-            label={t("Common:GoBack")}
-            scale={isMobile}
-            size={!isMobile ? "small" : "normal"}
-            onClick={onCloseClick}
-            testId="form_gallery_error_view_back_button"
-          />
-        }
-      />
-    </Scrollbar>
-  );
-};
-
-export default withTranslation("Common", "FormGallery")(ErrorView);
+export interface ErrorViewProps {
+  t: TFunction;
+  onCloseClick: () => void;
+}

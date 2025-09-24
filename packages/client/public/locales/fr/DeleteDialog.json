@@ -1,7 +1,6 @@
 {
   "DeleteAllGroupDescription": "Les groupes sélectionnés seront supprimés. Les utilisateurs des groupes ne seront pas supprimés de {{productName}}. Souhaitez-vous vraiment continuer ?",
   "DeleteAllGroupsTitle": "Supprimer les groupes",
-  "DeleteFolder": "Vous êtes sur le point de supprimer ce dossier. ",
   "DeleteGroupDescription": "Le groupe {{groupName}} sera supprimé. Les utilisateurs du groupe ne seront pas supprimés de {{productName}}. Souhaitez-vous vraiment continuer ?",
   "DeleteGroupTitle": "Supprimer le groupe",
   "DeleteItems": "Vous êtes sur le point de supprimer ces éléments. ",
@@ -9,8 +8,6 @@
   "DeleteSharedNote": "Veuillez noter que si vous l'avez partagé avec quelqu'un, il deviendra indisponible.",
   "DeleteTemplate": "Voulez-vous vraiment supprimer le modèle de salle <1>«{{templateName}}»</1> ? Le modèle ne peut pas être restauré.",
   "DeleteTemplates": "Voulez-vous vraiment supprimer les modèles de salle sélectionnés ? Ils ne peuvent pas être restaurés.",
-  "FolderPermanentlyDeleted": "Le dossier sera définitivement supprimé dans les 30 jours.",
-  "ItemsPermanentlyDeleted": "Les éléments seront définitivement supprimés dans les 30 jours.",
   "UnsubscribeButton": "Se désabonner",
   "UnsubscribeNote": "Êtes-vous sûr de vouloir vous désabonner des éléments sélectionnés dans la liste ?",
   "UnsubscribeTitle": "Confirmation de désabonnement"

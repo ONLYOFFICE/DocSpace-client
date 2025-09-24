@@ -1,7 +1,6 @@
 {
   "DeleteAllGroupDescription": "Các nhóm đã được chọn sẽ bị xóa. Người dùng trong các nhóm sẽ không bị xóa khỏi {{productName}}. Bạn có chắc muốn tiếp tục?",
   "DeleteAllGroupsTitle": "Xóa các nhóm",
-  "DeleteFolder": "Bạn sắp xóa thư mục này. ",
   "DeleteGroupDescription": "Nhóm {{groupName}} sẽ bị xóa. Người dùng trong nhóm sẽ không bị xóa khỏi {{productName}}. Bạn có chắc muốn tiếp tục?",
   "DeleteGroupTitle": "Xoá nhóm",
   "DeleteItems": "Bạn sắp xóa các mục này. ",
@@ -9,8 +8,6 @@
   "DeleteSharedNote": "Xin lưu ý rằng nếu bạn đã chia sẻ nó với ai đó, nó sẽ không khả dụng. ",
   "DeleteTemplate": "Bạn có thực sự muốn xóa phòng mẫu <1>«{{templateName}}»</1> không? Không thể khôi phục mẫu.",
   "DeleteTemplates": "Bạn có thực sự muốn xóa các mẫu phòng đã chọn không? Bạn sẽ không thể khôi phục chúng.",
-  "FolderPermanentlyDeleted": "Thư mục sẽ bị xóa vĩnh viễn trong 30 ngày. ",
-  "ItemsPermanentlyDeleted": "Các mục sẽ bị xóa vĩnh viễn trong 30 ngày.",
   "UnsubscribeButton": "Hủy đăng ký",
   "UnsubscribeNote": "Bạn có chắc muốn hủy đăng ký các mục đã chọn từ danh sách không?",
   "UnsubscribeTitle": "Xác nhận hủy đăng ký"

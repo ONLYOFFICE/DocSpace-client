@@ -1,7 +1,6 @@
 {
   "DeleteAllGroupDescription": "Vybrané skupiny budú vymazané. Používatelia v skupinách nebudú z priestoru {{productName}} odstránení. Ste si istí, že chcete pokračovať?",
   "DeleteAllGroupsTitle": "Vymazať skupiny",
-  "DeleteFolder": "Chystáte sa vymazať tento priečinok. ",
   "DeleteGroupDescription": "Skupina {{groupName}} bude vymazaná. Používatelia v skupine nebudú z {{productName}} odstránení. Ste si istí, že chcete pokračovať?",
   "DeleteGroupTitle": "Vymazať skupinu",
   "DeleteItems": "Chystáte sa vymazať tieto položky. ",
@@ -9,8 +8,6 @@
   "DeleteSharedNote": "Upozorňujeme, že ak ste to s niekým zdieľali, stane sa to nedostupným.",
   "DeleteTemplate": "Naozaj chcete odstrániť šablónu miestnosti <1>„{{templateName}}“</1>? Šablónu nebude možné obnoviť.",
   "DeleteTemplates": "Naozaj chcete odstrániť vybrané šablóny miestností? Nebudú sa dať obnoviť.",
-  "FolderPermanentlyDeleted": "Priečinok bude natrvalo vymazaný do 30 dní.",
-  "ItemsPermanentlyDeleted": "Položky budú natrvalo vymazané do 30 dní.",
   "UnsubscribeButton": "Zrušiť odber",
   "UnsubscribeNote": "Naozaj sa chcete odhlásiť z odberu vybratých položiek zo zoznamu?",
   "UnsubscribeTitle": "Potvrdenie zrušenia odberu"

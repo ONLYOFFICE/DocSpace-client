@@ -1,7 +1,6 @@
 {
   "DeleteAllGroupDescription": "Grupurile selectate vor fi șterse. Utilizatorii care fac parte din grupurile nu vor fi eliminați din {{productName}}. Sigur doriţi să continuați?",
   "DeleteAllGroupsTitle": "Ștergere grup",
-  "DeleteFolder": "Sunteţi pe cale să ştergeţi acest dosar. ",
   "DeleteGroupDescription": "Grupul {{groupName}} va fi șters. Utilizatorii care fac parte din acest grup nu vor fi eliminați din {{productName}}. Sigur doriţi să continuați?",
   "DeleteGroupTitle": "Ștergere grup",
   "DeleteItems": "Sunteţi pe cale să ştergeţi aceste elemente. ",
@@ -9,8 +8,6 @@
   "DeleteSharedNote": "Rețineți că, dacă l-ați partajat cu cineva, acesta va deveni indisponibil.",
   "DeleteTemplate": "Doriți să ștergeți șablonul sălii <1>«{{templateName}}»</1>? Recuperarea șablonului este imposibilă.",
   "DeleteTemplates": "Doriți să ștergeți șabloanele de săli selectate? Recuperarea acestor șabloane este imposibilă.",
-  "FolderPermanentlyDeleted": "Dosarul va fi șters definitiv după 30 de zile.",
-  "ItemsPermanentlyDeleted": "Elemente vor fi șterse definitiv după 30 de zile.",
   "UnsubscribeButton": "Dezabonare",
   "UnsubscribeNote": "Sunteți sigur că doriți să vă dezabonați de la elementele selectate din lista?",
   "UnsubscribeTitle": "Confirmare dezabonare"

@@ -120,11 +120,8 @@
     --accent-button,
     #{$light-second-main-hover}
   );
-  --button-background-primary-active: linear-gradient(
-      0deg,
-      #{$light-second-main},
-      #{$light-second-main}
-    ),
+  --button-background-primary-active:
+    linear-gradient(0deg, #{$light-second-main}, #{$light-second-main}),
     linear-gradient(0deg, #{$on-white-color}, #{$on-white-color});
   --button-background-primary-disabled: var(
     --accent-button,
@@ -460,11 +457,8 @@
     --accent-button,
     #{$light-second-main-hover}
   );
-  --button-background-primary-active: linear-gradient(
-      0deg,
-      #{$light-second-main},
-      #{$light-second-main}
-    ),
+  --button-background-primary-active:
+    linear-gradient(0deg, #{$light-second-main}, #{$light-second-main}),
     linear-gradient(0deg, #{$on-white-color}, #{$on-white-color});
   --button-background-primary-disabled: var(
     --accent-button,
@@ -477,11 +471,8 @@
   --button-border-base-disabled: 1px solid #{$gray-dark-strong};
 
   --button-border-primary: 1px solid var(--accent-button, #{$light-second-main});
-  --button-border-primary-active: linear-gradient(
-      0deg,
-      #{$light-second-main},
-      #{$light-second-main}
-    ),
+  --button-border-primary-active:
+    linear-gradient(0deg, #{$light-second-main}, #{$light-second-main}),
     linear-gradient(0deg, #{$on-white-color}, #{$on-white-color});
   --button-border-primary-disabled: 1px solid
     var(--accent-button, #{$light-second-main-disabled});
@@ -2683,8 +2674,8 @@
 
   --table-group-menu-border-bottom: 1px solid transparent;
   --table-group-menu-border-right: 1px solid #{$gray-strong};
-  --table-group-menu-box-shadow: 0px 8px 16px #{$popup-shadow},
-    0px 0px 4px #{$menu-shadow};
+  --table-group-menu-box-shadow:
+    0px 8px 16px #{$popup-shadow}, 0px 0px 4px #{$menu-shadow};
 }
 
 .dark {
@@ -2721,8 +2712,8 @@
 
   --table-group-menu-border-bottom: 1px solid #{$gray-dark-strong};
   --table-group-menu-border-right: 1px solid #{$gray-dark-strong};
-  --table-group-menu-box-shadow: 0px 8px 16px #{$badge-shadow},
-    0px 0px 4px #{$menu-shadow-dark};
+  --table-group-menu-box-shadow:
+    0px 8px 16px #{$badge-shadow}, 0px 0px 4px #{$menu-shadow-dark};
 }
 
 .light {
@@ -2881,6 +2872,12 @@
   --submit-gallery-tile-text-background: #{$white};
 
   --template-gallery-empty-screen: #{$gray-text};
+
+  --template-gallery-sort-background: #{$white};
+  --template-gallery-sort-fill: #{$light-gray-dark};
+  --template-gallery-sort-hover: #{$gray-light};
+
+  --template-gallery-view-button-border: #{$gray-strong};
 }
 
 .dark {
@@ -2908,4 +2905,10 @@
   --submit-gallery-tile-text-body: #{$dark-gray-dark};
 
   --template-gallery-empty-screen: #{$dark-gray-dark};
+
+  --template-gallery-sort-background: #{$black};
+  --template-gallery-sort-fill: #{$dark-gray-dark};
+  --template-gallery-sort-hover: #{$black};
+
+  --template-gallery-view-button-border: #{$gray-dark-strong};
 }

@@ -33,7 +33,8 @@ import SortDesc from "PUBLIC_DIR/images/sort.desc.react.svg";
 import { Text } from "@docspace/shared/components/text";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 import { ComboBox } from "@docspace/shared/components/combobox";
-import * as Styled from "./index.styled";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import styles from "./SortFilter.module.scss";
 
 const SortFilter = ({ t, oformsFilter, sortOforms }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -73,7 +74,8 @@ const SortFilter = ({ t, oformsFilter, sortOforms }) => {
         withoutBlur
       />
 
-      <Styled.SortButton
+      <div
+        className={styles.sortButton}
         id="oform-sort"
         title={t("Common:SortBy")}
         onClick={onToggleCombobox}
@@ -94,23 +96,34 @@ const SortFilter = ({ t, oformsFilter, sortOforms }) => {
           options={[]}
           selectedOption={{}}
           manualWidth="auto"
-          advancedOptions={sortData?.map((item) => (
-            <Styled.SortDropdownItem
-              id={item.id}
-              onClick={() => onSort(item.key)}
-              key={item.key}
-              data-value={item.key}
-              isSelected={oformsFilter.sortBy === item.key}
-              $isDescending={oformsFilter.sortOrder === "desc"}
-            >
-              <Text fontWeight={600}>{item.label}</Text>
-              <SortDesc className="sortorder-arrow" />
-            </Styled.SortDropdownItem>
-          ))}
+          advancedOptions={sortData?.map((item) => {
+            const isSelected = oformsFilter.sortBy === item.key;
+            const isDescending = oformsFilter.sortOrder === "desc";
+            const itemClasses = [
+              styles.sortDropdownItem,
+              isSelected ? styles.selected : "",
+              !isDescending ? styles.ascending : "",
+            ]
+              .filter(Boolean)
+              .join(" ");
+
+            return (
+              <DropDownItem
+                id={item.id}
+                onClick={() => onSort(item.key)}
+                key={item.key}
+                data-value={item.key}
+                className={itemClasses}
+              >
+                <Text fontWeight={600}>{item.label}</Text>
+                <SortDesc className="sortorder-arrow" />
+              </DropDownItem>
+            );
+          })}
         >
           <IconButton iconName={SortReactSvgUrl} size={16} />
         </ComboBox>
-      </Styled.SortButton>
+      </div>
     </>
   );
 };

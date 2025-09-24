@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Tabs } from "@docspace/shared/components/tabs";
 import { useNavigate } from "react-router";
 import { withTranslation } from "react-i18next";
@@ -63,6 +63,8 @@ const IntegrationWrapper = (props) => {
     clearAbortControllerArr,
   } = props;
   const navigate = useNavigate();
+
+  const [currentTabId, setCurrentTabId] = useState();
 
   const defaultProps = createDefaultHookSettingsProps({
     setup,
@@ -157,13 +159,11 @@ const IntegrationWrapper = (props) => {
     });
   }
 
-  const getCurrentTabId = () => {
+  useEffect(() => {
     const path = window.location.pathname;
     const currentTab = data.find((item) => path.includes(item.id));
-    return currentTab && data.length ? currentTab.id : data[0].id;
-  };
-
-  const currentTabId = getCurrentTabId();
+    if (currentTab && data.length) setCurrentTabId(currentTab.id);
+  }, [location.pathname]);
 
   const onSelect = (e) => {
     navigate(

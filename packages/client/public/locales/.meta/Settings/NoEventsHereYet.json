@@ -3,7 +3,7 @@
   "content": "No events here yet",
   "content_en_sha1_hash": "d5dabb69303d00324a084b615296dcb2481cba3d",
   "created_at": "2025-05-19T21:30:52.033Z",
-  "updated_at": "2025-05-24T04:40:53.401Z",
+  "updated_at": "2025-09-17T13:43:01.895Z",
   "comment": {
     "text": "This translation key is used to display a message when there are currently no events logged or tracked in an audit trail. It appears as a header text on a screen where user activity is expected to be logged. Translators should provide a localized version of this phrase to indicate that no data is available.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/index.js",
-      "line_number": 122,
+      "line_number": 94,
       "context": "productName: t(\"Common:ProductName\"),\n })}\n imageSrc={\n theme.isBase ? EmptyScreenRecentUrl : EmptyScreenRecentDarkUrl\n }\n headerText={t(\"NoEventsHereYet\")}\n />\n );\n }\n \n return (",
       "module": "/packages/client"
     }

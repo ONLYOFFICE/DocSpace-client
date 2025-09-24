@@ -28,8 +28,8 @@ import { TFunction } from "i18next";
 import { TColorScheme, TTheme } from "@docspace/shared/themes";
 import { TTranslation } from "@docspace/shared/types";
 
-import { PluginScopes } from "SRC_DIR/helpers/plugins/enums";
 import { TPlugin } from "SRC_DIR/helpers/plugins/types";
+import PluginStore from "SRC_DIR/store/PluginStore";
 
 export interface PluginDropzoneProps {
   onDrop: <T extends File>(acceptedFiles: T[]) => void;
@@ -50,6 +50,7 @@ export interface PluginsEmptyScreen {
 export interface PluginItemProps {
   name: string;
   version: string;
+  compatible: boolean;
   description?: string;
 
   enabled: boolean;
@@ -60,13 +61,12 @@ export interface PluginItemProps {
     t?: TFunction,
   ) => Promise<unknown>;
 
-  scopes: PluginScopes | PluginScopes[];
-
   openSettingsDialog: (name: string) => void;
 
   image: string;
   url: string;
 
+  theme: TTheme;
   dataTestId?: string;
 }
 
@@ -86,7 +86,7 @@ export interface PluginsProps {
     status: boolean,
     settings?: string,
   ) => Promise<unknown>;
-  addPlugin: (data: FormData) => Promise<void>;
+  addPlugin: PluginStore["addPlugin"];
 
   updatePlugins: (fromList?: boolean) => Promise<void>;
 

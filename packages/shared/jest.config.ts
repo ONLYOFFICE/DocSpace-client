@@ -137,6 +137,7 @@ const config: Config = {
       "<rootDir>/__mocks__/fileMock.js",
     "\\.(css|less|scss)$": "identity-obj-proxy",
     "react-i18next": "<rootDir>/__mocks__/reacti18nextMock.tsx",
+    "PUBLIC_DIR/scripts/config.json": "<rootDir>/__mocks__/configMock.js",
     "PUBLIC_DIR/": "<rootDir>/__mocks__/fileMock.js",
     "hex-rgb": "<rootDir>/__mocks__/hex-rgb.js",
     "react-svg": "<rootDir>/__mocks__/reactSvgMock.tsx",

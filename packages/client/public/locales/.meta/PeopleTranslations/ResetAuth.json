@@ -3,7 +3,7 @@
   "content": "Reset authentication",
   "content_en_sha1_hash": "b433426988dd4bcf376fbbd983df57e4b0ffc1f5",
   "created_at": "2025-05-19T21:30:53.508Z",
-  "updated_at": "2025-08-04T07:30:01.626Z",
+  "updated_at": "2025-09-17T13:43:01.955Z",
   "comment": {
     "text": "This translation key is used to display the text \"Reset authentication\" in various contexts, such as button labels or dialog headers. It is likely used when the user needs to reset their authentication settings, and it appears on screens related to account management or security options.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 287,
+      "line_number": 284,
       "context": "case \"reset-auth\":\n return {\n id: \"option_reset-auth\",\n key: option,\n icon: RestoreAuthReactSvgUrl,\n label: t(\"PeopleTranslations:ResetAuth\"),\n onClick: () => this.onResetAuth(item),\n disabled: !item.tfaAppEnabled,\n };\n case \"share-guest\":\n return {",
       "module": "/packages/client"
     }

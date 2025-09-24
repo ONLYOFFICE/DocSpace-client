@@ -84,6 +84,7 @@ const InfoBadge: FC<InfoBadgeProps> = ({
                 {tooltipTitle}
               </h3>
               <IconButton
+                data-testid="close-tooltip-button"
                 isFill
                 size={16}
                 onClick={onClose}

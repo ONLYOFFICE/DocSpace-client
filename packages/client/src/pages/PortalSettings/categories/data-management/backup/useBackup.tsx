@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { t } from "i18next";
+import i18n from "../../../../../i18n";
 import React, { useCallback } from "react";
 
 import { getSettingsThirdParty } from "@docspace/shared/api/files";
@@ -95,6 +95,8 @@ const useBackup = ({
 
   addAbortControllers,
 }: UseBackupProps) => {
+  const { t } = i18n;
+
   const { periodsObject, weekdaysLabelArray } = useDefaultOptions(
     t,
     language ?? "",

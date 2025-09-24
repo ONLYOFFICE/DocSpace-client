@@ -37,6 +37,8 @@ import { setLicense, acceptLicense } from "@docspace/shared/api/settings";
 
 import { useEndAnimation } from "@/hooks/useEndAnimation";
 import { getIsLicenseDateExpired, getPaymentDate, getDaysLeft } from "@/lib";
+import { TLicenseQuota } from "@docspace/shared/api/portal/types";
+import { TFilesSettings } from "@docspace/shared/api/files/types";
 
 const PaymentsPage = ({
   isTrial,
@@ -46,6 +48,9 @@ const PaymentsPage = ({
   dueDate,
   isEnterprise,
   logoText,
+  docspaceFaqUrl,
+  licenseQuota,
+  filesSettings,
 }: {
   isTrial: boolean;
   salesEmail: string;
@@ -54,6 +59,9 @@ const PaymentsPage = ({
   dueDate: Date | string;
   isEnterprise: boolean;
   logoText: string;
+  docspaceFaqUrl: string;
+  licenseQuota: TLicenseQuota;
+  filesSettings: TFilesSettings;
 }) => {
   const { t } = useTranslation("Common");
   const router = useRouter();
@@ -63,6 +71,16 @@ const PaymentsPage = ({
   const [paymentDate, setPaymentDate] = useState("");
   const [trialDaysLeft, setTrialDaysLeft] = useState(0);
   const [isLicenseCorrect, setIsLicenseCorrect] = useState(false);
+
+  const shouldOpenEditorInNewTab = () => {
+    if (
+      window.navigator.userAgent.includes("ZoomWebKit") ||
+      window.navigator.userAgent.includes("ZoomApps")
+    )
+      return false;
+
+    return !filesSettings.openEditorInSameTab;
+  };
 
   const setPaymentsLicense = async (
     confirmKey: string | null,
@@ -118,6 +136,9 @@ const PaymentsPage = ({
         paymentDate={paymentDate}
         isEnterprise={isEnterprise}
         logoText={logoText}
+        docspaceFaqUrl={docspaceFaqUrl}
+        licenseQuota={licenseQuota}
+        openOnNewPage={shouldOpenEditorInNewTab()}
       />
     </LoaderWrapper>
   );

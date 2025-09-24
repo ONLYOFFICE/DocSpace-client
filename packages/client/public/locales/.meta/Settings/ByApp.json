@@ -3,7 +3,7 @@
   "content": "By authenticator app",
   "content_en_sha1_hash": "3b67ff7b02933cd6dfbd70b74628ba41aaf1425f",
   "created_at": "2025-05-19T21:30:50.850Z",
-  "updated_at": "2025-09-07T07:53:15.352Z",
+  "updated_at": "2025-09-19T15:39:23.256Z",
   "comment": {
     "text": "\"This translation key is used for 'By authenticator app' and appears on a settings page. It's likely part of an accessibility option or feature related to two-factor authentication.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
-      "line_number": 262,
+      "line_number": 285,
       "context": "value: \"sms\",\n disabled: !smsAvailable,\n }, */\n {\n id: \"by-app\",\n label: t(\"ByApp\"),\n value: \"app\",\n disabled: !appAvailable,\n dataTestId: \"tfa_radio_button_app\",\n },\n ]}",
       "module": "/packages/client"
     }

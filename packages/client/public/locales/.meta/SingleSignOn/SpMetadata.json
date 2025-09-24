@@ -3,7 +3,7 @@
   "content": "{{organizationName}} SP Metadata",
   "content_en_sha1_hash": "e10f705fc5ab78e95d83d6b7504bfb479ac5118a",
   "created_at": "2025-05-19T21:30:50.167Z",
-  "updated_at": "2025-08-12T19:46:26.208Z",
+  "updated_at": "2025-09-17T13:43:01.848Z",
   "comment": {
     "text": "The translation key \"SpMetadata\" is used to display the metadata of an organization's Single Sign-On (SSO) setup. It appears in a button or dialog related to portal settings and provides context about the SSO configuration, such as whether it's available for paid badges.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/index.js",
-      "line_number": 100,
+      "line_number": 96,
       "context": "<SPSettingsSection />\n <StyledSettingsSeparator />\n \n <HideButton\n id=\"sp-metadata-hide-button\"\n text={t(\"SpMetadata\", {\n organizationName: logoText,\n })}\n label={SP_METADATA}\n value={spMetadata}\n dataTestId=\"sp_metadata_hide_button\"",
       "module": "/packages/client"
     },

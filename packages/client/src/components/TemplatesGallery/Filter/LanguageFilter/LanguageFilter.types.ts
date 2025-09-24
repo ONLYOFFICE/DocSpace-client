@@ -24,5 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export * from "./LanguageCombobox";
-export * from "./LanguageCombobox.types";
+import type { TFunction } from "i18next";
+
+export interface LanguageFilterProps {
+  oformLocales: string[] | null;
+  filterOformsByLocale: (key: string) => Promise<void>;
+  filterOformsByLocaleIsLoading: boolean;
+  setLanguageFilterLoaded: (isLoaded: boolean) => void;
+  categoryFilterLoaded: boolean;
+  languageFilterLoaded: boolean;
+  oformsLocal: string;
+  viewMobile: boolean;
+  isShowInitSkeleton?: boolean;
+  t: TFunction;
+}

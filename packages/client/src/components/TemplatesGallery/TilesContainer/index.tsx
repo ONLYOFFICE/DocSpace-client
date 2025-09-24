@@ -44,18 +44,31 @@ import { Link, LinkType } from "@docspace/shared/components/link";
 import { IconButton } from "@docspace/shared/components/icon-button";
 
 import styles from "../TemplatesGallery.module.scss";
-import SectionFilterContent from "../Filter";
+import FilterContent from "../Filter";
 import Tiles from "../Tiles";
 
 interface TilesContainerOwnProps {
   ext: string;
-  isShowInitSkeleton?: boolean;
+  isShowInitSkeleton: boolean;
 }
 
 interface TilesContainerInjectedProps {
   hasGalleryFiles: boolean;
   resetFilters: (ext: string) => Promise<void>;
   t: TTranslation;
+  oformsFilter: any;
+  noLocales: boolean;
+  fetchCategoryTypes: () => Promise<any[]>;
+  fetchCategoriesOfCategoryType: (categoryId: string) => Promise<any[]>;
+  filterOformsByLocaleIsLoading: boolean;
+  setFilterOformsByLocaleIsLoading: (isLoading: boolean) => void;
+  setCategoryFilterLoaded: (isLoaded: boolean) => void;
+  categoryFilterLoaded: boolean;
+  languageFilterLoaded: boolean;
+  setLanguageFilterLoaded: (isLoaded: boolean) => void;
+  oformsLocal: string;
+  oformLocales: string[] | null;
+  filterOformsByLocale: (locale: string) => Promise<void>;
 }
 
 interface TilesContainerProps
@@ -68,6 +81,19 @@ const TilesContainer: FC<TilesContainerProps> = ({
   hasGalleryFiles,
   resetFilters,
   t,
+  oformsFilter,
+  noLocales,
+  fetchCategoryTypes,
+  fetchCategoriesOfCategoryType,
+  filterOformsByLocaleIsLoading,
+  setFilterOformsByLocaleIsLoading,
+  setCategoryFilterLoaded,
+  categoryFilterLoaded,
+  languageFilterLoaded,
+  setLanguageFilterLoaded,
+  oformsLocal,
+  oformLocales,
+  filterOformsByLocale,
 }) => {
   const { isBase } = useTheme();
 
@@ -90,11 +116,24 @@ const TilesContainer: FC<TilesContainerProps> = ({
 
   return (
     <div style={{ width: "100%" }}>
-      <SectionFilterContent
+      <FilterContent
+        oformsFilter={oformsFilter}
+        noLocales={noLocales}
+        fetchCategoryTypes={fetchCategoryTypes}
+        fetchCategoriesOfCategoryType={fetchCategoriesOfCategoryType}
+        filterOformsByLocaleIsLoading={filterOformsByLocaleIsLoading}
+        setFilterOformsByLocaleIsLoading={setFilterOformsByLocaleIsLoading}
+        setCategoryFilterLoaded={setCategoryFilterLoaded}
+        categoryFilterLoaded={categoryFilterLoaded}
+        languageFilterLoaded={languageFilterLoaded}
         isShowOneTile={isShowOneTile}
         setShowOneTile={setShowOneTile}
         viewMobile={viewMobile}
         isShowInitSkeleton={isShowInitSkeleton}
+        setLanguageFilterLoaded={setLanguageFilterLoaded}
+        oformsLocal={oformsLocal}
+        oformLocales={oformLocales}
+        filterOformsByLocale={filterOformsByLocale}
       />
       {!hasGalleryFiles && !isShowInitSkeleton ? (
         <EmptyScreenContainer
@@ -156,17 +195,27 @@ const TilesContainer: FC<TilesContainerProps> = ({
   );
 };
 
-export default inject<TStore>(({ oformsStore }) => ({
-  oformsLoadError: oformsStore.oformsLoadError,
-  currentCategory: oformsStore.currentCategory,
-  fetchCurrentCategory: oformsStore.fetchCurrentCategory,
-  hasGalleryFiles: oformsStore.hasGalleryFiles,
-  defaultOformLocale: oformsStore.defaultOformLocale,
-  oformsFilter: oformsStore.oformsFilter,
-  setOformsFilter: oformsStore.setOformsFilter,
-  resetFilters: oformsStore.resetFilters,
-  fetchOforms: oformsStore.fetchOforms,
-  setOformFromFolderId: oformsStore.setOformFromFolderId,
-}))(
+export default inject<TStore>(({ oformsStore }) => {
+  const oformLocales = oformsStore.oformLocales as string[] | null;
+
+  return {
+    hasGalleryFiles: oformsStore.hasGalleryFiles,
+    resetFilters: oformsStore.resetFilters,
+    oformsFilter: oformsStore.oformsFilter,
+    noLocales: !oformLocales || oformLocales.length === 0,
+    fetchCategoryTypes: oformsStore.fetchCategoryTypes,
+    fetchCategoriesOfCategoryType: oformsStore.fetchCategoriesOfCategoryType,
+    filterOformsByLocaleIsLoading: oformsStore.filterOformsByLocaleIsLoading,
+    setFilterOformsByLocaleIsLoading:
+      oformsStore.setFilterOformsByLocaleIsLoading,
+    setCategoryFilterLoaded: oformsStore.setCategoryFilterLoaded,
+    categoryFilterLoaded: oformsStore.categoryFilterLoaded,
+    languageFilterLoaded: oformsStore.languageFilterLoaded,
+    setLanguageFilterLoaded: oformsStore.setLanguageFilterLoaded,
+    oformsLocal: oformsStore.oformsFilter.locale,
+    oformLocales: oformLocales,
+    filterOformsByLocale: oformsStore.filterOformsByLocale,
+  };
+})(
   withTranslation("Common")(observer(TilesContainer)),
 ) as unknown as React.ComponentType<TilesContainerOwnProps>;

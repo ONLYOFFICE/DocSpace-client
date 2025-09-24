@@ -24,20 +24,49 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useState, useEffect, FC } from "react";
 import { ReactSVG } from "react-svg";
 
 import ViewTilesReactSvg from "PUBLIC_DIR/images/view-tiles.react.svg?url";
 import ViewChangeReactUrl from "PUBLIC_DIR/images/view-change.react.svg?url";
-
+import { isMobile } from "@docspace/shared/utils";
 import CategoryFilter from "./CategoryFilter";
 import LanguageFilter from "./LanguageFilter";
 import SearchFilter from "./SearchFilter";
 import SortFilter from "./SortFilter";
 import styles from "./Filter.module.scss";
+import { FilterContentProps } from "./Filter.types";
 
-const SectionFilterContent = (props) => {
-  const { setShowOneTile, isShowOneTile, viewMobile, isShowInitSkeleton } =
-    props;
+const FilterContent: FC<FilterContentProps> = (props) => {
+  const {
+    oformsFilter,
+    noLocales,
+    fetchCategoryTypes,
+    fetchCategoriesOfCategoryType,
+    filterOformsByLocaleIsLoading,
+    setFilterOformsByLocaleIsLoading,
+    setCategoryFilterLoaded,
+    setLanguageFilterLoaded,
+    categoryFilterLoaded,
+    languageFilterLoaded,
+    setShowOneTile,
+    isShowOneTile,
+    isShowInitSkeleton,
+    oformsLocal,
+    oformLocales,
+    filterOformsByLocale,
+  } = props;
+
+  const [viewMobile, setViewMobile] = useState<boolean>(false);
+
+  const onCheckView = () => setViewMobile(isMobile());
+
+  useEffect(() => {
+    onCheckView();
+    window.addEventListener("resize", onCheckView);
+
+    return () => window.removeEventListener("resize", onCheckView);
+  }, [onCheckView]);
 
   const onClickViewChange = () => {
     setShowOneTile(!isShowOneTile);
@@ -46,8 +75,30 @@ const SectionFilterContent = (props) => {
   return (
     <div className={styles.filter}>
       <div className={styles.formOnlyFilters}>
-        <CategoryFilter isShowInitSkeleton={isShowInitSkeleton} />
-        <LanguageFilter isShowInitSkeleton={isShowInitSkeleton} />
+        <CategoryFilter
+          oformsFilter={oformsFilter}
+          noLocales={noLocales}
+          fetchCategoryTypes={fetchCategoryTypes}
+          fetchCategoriesOfCategoryType={fetchCategoriesOfCategoryType}
+          filterOformsByLocaleIsLoading={filterOformsByLocaleIsLoading}
+          setFilterOformsByLocaleIsLoading={setFilterOformsByLocaleIsLoading}
+          setCategoryFilterLoaded={setCategoryFilterLoaded}
+          categoryFilterLoaded={categoryFilterLoaded}
+          languageFilterLoaded={languageFilterLoaded}
+          isShowInitSkeleton={isShowInitSkeleton}
+          viewMobile={viewMobile}
+        />
+        <LanguageFilter
+          filterOformsByLocaleIsLoading={filterOformsByLocaleIsLoading}
+          setLanguageFilterLoaded={setLanguageFilterLoaded}
+          isShowInitSkeleton={isShowInitSkeleton}
+          oformLocales={oformLocales}
+          filterOformsByLocale={filterOformsByLocale}
+          categoryFilterLoaded={categoryFilterLoaded}
+          languageFilterLoaded={languageFilterLoaded}
+          oformsLocal={oformsLocal}
+          viewMobile={viewMobile}
+        />
       </div>
       <div className={styles.generalFilters}>
         <SearchFilter />
@@ -65,4 +116,4 @@ const SectionFilterContent = (props) => {
   );
 };
 
-export default SectionFilterContent;
+export default FilterContent;

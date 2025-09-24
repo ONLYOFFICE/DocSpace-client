@@ -39,27 +39,6 @@ export interface MenuItem {
   label: string;
   categories: Category[];
 }
-
-export interface OformsStore {
-  oformsFilter: OformsFilter;
-  oformLocales: any[] | null;
-  currentCategory: Category | null;
-  fetchCategoryTypes: () => Promise<any[]>;
-  fetchCategoriesOfCategoryType: (categoryId: string) => Promise<Category[]>;
-  filterOformsByLocaleIsLoading: boolean;
-  setFilterOformsByLocaleIsLoading: (loading: boolean) => void;
-  setCategoryFilterLoaded: (loaded: boolean) => void;
-  categoryFilterLoaded: boolean;
-  languageFilterLoaded: boolean;
-  getCategoryTitle: (category: Category | null) => string;
-  filterOformsByCategory: (categoryType: string, categoryId: string) => void;
-  setOformsCurrentCategory: (category: Category) => void;
-}
-
-export interface InjectedProps {
-  oformsStore: OformsStore;
-}
-
 export interface OformsFilter {
   locale: string;
   sortBy: string;
@@ -77,6 +56,7 @@ export interface CategoryFilterProps {
   categoryFilterLoaded: boolean;
   languageFilterLoaded: boolean;
   isShowInitSkeleton: boolean;
+  viewMobile: boolean;
 }
 
 export interface CategoryFilterDesktopProps {
@@ -107,4 +87,13 @@ export interface CategoryFilterMobileProps {
   getCategoryTitle: (category: Category | null) => string;
   filterOformsByCategory: (categoryType: string, categoryId: string) => void;
   setOformsCurrentCategory: (category: Category) => void;
+}
+
+export interface InjectedProps {
+  oformsStore: {
+    currentCategory: Category | null;
+    getCategoryTitle: (category: Category | null) => string;
+    filterOformsByCategory: (categoryType: string, categoryId: string) => void;
+    setOformsCurrentCategory: (category: Category) => void;
+  };
 }

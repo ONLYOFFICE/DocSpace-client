@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState } from "react";
+import { useState, FC } from "react";
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import SortReactSvgUrl from "PUBLIC_DIR/images/sort.react.svg?url";
@@ -35,12 +35,13 @@ import { Backdrop } from "@docspace/shared/components/backdrop";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import styles from "./SortFilter.module.scss";
+import { InjectedProps, SortFilterProps, SortData } from "./SortFilter.types";
 
-const SortFilter = ({ t, oformsFilter, sortOforms }) => {
+const SortFilter: FC<SortFilterProps> = ({ t, oformsFilter, sortOforms }) => {
   const [isOpen, setIsOpen] = useState(false);
   const onToggleCombobox = () => setIsOpen(!isOpen);
 
-  const sortData = [
+  const sortData: SortData[] = [
     {
       id: "sort-by_name",
       key: "name_form",
@@ -57,10 +58,12 @@ const SortFilter = ({ t, oformsFilter, sortOforms }) => {
     },
   ];
 
-  const onSort = (newSortBy) => {
-    if (oformsFilter.sortBy === newSortBy)
+  const onSort = (newSortBy: string) => {
+    if (oformsFilter.sortBy === newSortBy) {
       sortOforms(newSortBy, oformsFilter.sortOrder === "asc" ? "desc" : "asc");
-    else sortOforms(newSortBy, "desc");
+    } else {
+      sortOforms(newSortBy, "desc");
+    }
 
     setIsOpen(false);
   };
@@ -94,32 +97,36 @@ const SortFilter = ({ t, oformsFilter, sortOforms }) => {
           advancedOptionsCount={sortData.length}
           fillIcon={false}
           options={[]}
-          selectedOption={{}}
+          selectedOption={{ key: "", label: "" }}
           manualWidth="auto"
-          advancedOptions={sortData?.map((item) => {
-            const isSelected = oformsFilter.sortBy === item.key;
-            const isDescending = oformsFilter.sortOrder === "desc";
-            const itemClasses = [
-              styles.sortDropdownItem,
-              isSelected ? styles.selected : "",
-              !isDescending ? styles.ascending : "",
-            ]
-              .filter(Boolean)
-              .join(" ");
+          advancedOptions={
+            <div>
+              {sortData?.map((item) => {
+                const isSelected = oformsFilter.sortBy === item.key;
+                const isDescending = oformsFilter.sortOrder === "desc";
+                const itemClasses = [
+                  styles.sortDropdownItem,
+                  isSelected ? styles.selected : "",
+                  !isDescending ? styles.ascending : "",
+                ]
+                  .filter(Boolean)
+                  .join(" ");
 
-            return (
-              <DropDownItem
-                id={item.id}
-                onClick={() => onSort(item.key)}
-                key={item.key}
-                data-value={item.key}
-                className={itemClasses}
-              >
-                <Text fontWeight={600}>{item.label}</Text>
-                <SortDesc className="sortorder-arrow" />
-              </DropDownItem>
-            );
-          })}
+                return (
+                  <DropDownItem
+                    id={item.id}
+                    onClick={() => onSort(item.key)}
+                    key={item.key}
+                    data-value={item.key}
+                    className={itemClasses}
+                  >
+                    <Text fontWeight={600}>{item.label}</Text>
+                    <SortDesc className="sortorder-arrow" />
+                  </DropDownItem>
+                );
+              })}
+            </div>
+          }
         >
           <IconButton iconName={SortReactSvgUrl} size={16} />
         </ComboBox>
@@ -128,7 +135,7 @@ const SortFilter = ({ t, oformsFilter, sortOforms }) => {
   );
 };
 
-export default inject(({ oformsStore }) => ({
+export default inject(({ oformsStore }: InjectedProps) => ({
   oformsFilter: oformsStore.oformsFilter,
   sortOforms: oformsStore.sortOforms,
 }))(withTranslation(["Common"])(SortFilter));

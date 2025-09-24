@@ -19,21 +19,22 @@
 // Pursuant to Section 7(b) of the License you must retain the original Product logo when
 // distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
 // trademark law for use of our trademarks.
-//
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { withTranslation } from "react-i18next";
-
-import { useEffect } from "react";
-import { inject, observer } from "mobx-react";
+import { FC, useEffect } from "react";
 
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { LanguageCombobox } from "@docspace/shared/components/language-combobox";
-import { DeviceType } from "@docspace/shared/enums";
+import {
+  LanguageCombobox,
+  TCulture,
+} from "@docspace/shared/components/language-combobox";
 
-const keyedCollections = {
+import { type LanguageFilterProps } from "./LanguageFilter.types";
+
+const keyedCollections: { [key: string]: string } = {
   ar: "ar-SA",
   en: "en-US",
   el: "el-GR",
@@ -47,14 +48,15 @@ const keyedCollections = {
   sq: "sq-AL",
 };
 
-const convertToCulture = (key) => {
+const convertToCulture = (key: string) => {
   return keyedCollections[key] ?? key;
 };
 
-const getOformLocaleByIndex = (index, array) => {
+const getOformLocaleByIndex = (index: number, array: string[]) => {
   return array[index];
 };
-const LanguageFilter = ({
+
+const LanguageFilter: FC<LanguageFilterProps> = ({
   oformLocales,
   filterOformsByLocale,
   filterOformsByLocaleIsLoading,
@@ -62,10 +64,11 @@ const LanguageFilter = ({
   categoryFilterLoaded,
   languageFilterLoaded,
   oformsLocal,
-  isMobileView,
   isShowInitSkeleton,
+  viewMobile,
 }) => {
-  const onFilterByLocale = async (newLocale) => {
+  const onFilterByLocale = async (newLocale: TCulture) => {
+    if (typeof newLocale.index !== "number" || !oformLocales) return;
     const key = getOformLocaleByIndex(newLocale.index, oformLocales);
 
     await filterOformsByLocale(key);
@@ -73,60 +76,40 @@ const LanguageFilter = ({
     const sectionScroll = document.querySelector(
       "#scroll-template-gallery .scroll-wrapper > .scroller",
     );
-    sectionScroll.scrollTop = 0;
+    if (sectionScroll) {
+      sectionScroll.scrollTop = 0;
+    }
   };
 
   useEffect(() => {
-    setLanguageFilterLoaded(oformLocales && oformLocales?.length !== 0);
-  }, [oformLocales, oformLocales?.length]);
+    setLanguageFilterLoaded(
+      Boolean(oformLocales && oformLocales?.length !== 0),
+    );
+  }, [oformLocales, oformLocales?.length, setLanguageFilterLoaded]);
 
   if (
     isShowInitSkeleton ||
     filterOformsByLocaleIsLoading ||
     !(categoryFilterLoaded && languageFilterLoaded)
-  )
+  ) {
     return <RectangleSkeleton width="41px" height="32px" />;
+  }
 
-  const convertedLocales = oformLocales.map((item) => convertToCulture(item));
+  const convertedLocales =
+    oformLocales?.map((item) => convertToCulture(item)) || [];
 
   return (
     <LanguageCombobox
       cultures={convertedLocales}
-      isAuthenticated
       onSelectLanguage={onFilterByLocale}
       selectedCulture={convertToCulture(oformsLocal)}
       id="comboBoxLanguage"
-      isMobileView={isMobileView}
-      withBackdrop={isMobileView}
-      usePortalBackdrop={isMobileView}
-      shouldShowBackdrop={isMobileView}
+      isMobileView={viewMobile}
+      withBackdrop={viewMobile}
+      usePortalBackdrop={viewMobile}
+      shouldShowBackdrop={viewMobile}
     />
   );
 };
 
-export default inject(({ oformsStore, settingsStore }) => {
-  const {
-    oformLocales,
-    filterOformsByLocale,
-    filterOformsByLocaleIsLoading,
-    setLanguageFilterLoaded,
-    languageFilterLoaded,
-    categoryFilterLoaded,
-    oformsFilter,
-  } = oformsStore;
-
-  const { currentDeviceType } = settingsStore;
-
-  const isMobileView = currentDeviceType === DeviceType.mobile;
-
-  return {
-    oformLocales,
-    filterOformsByLocale,
-    filterOformsByLocaleIsLoading,
-    setLanguageFilterLoaded,
-    categoryFilterLoaded,
-    languageFilterLoaded,
-    oformsLocal: oformsFilter.locale,
-    isMobileView,
-  };
-})(withTranslation(["Common"])(observer(LanguageFilter)));
+export default withTranslation(["Common"])(LanguageFilter);

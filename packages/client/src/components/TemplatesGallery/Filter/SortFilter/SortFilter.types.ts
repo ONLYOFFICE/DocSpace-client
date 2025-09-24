@@ -24,5 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export * from "./LanguageCombobox";
-export * from "./LanguageCombobox.types";
+import type { OformsStore } from "@/store";
+import type { OformsFilter, SortOrder } from "@/store/oforms/oforms.types";
+import type { TFunction } from "i18next";
+
+export interface InjectedProps {
+  oformsStore: OformsStore;
+}
+
+export interface SortFilterProps {
+  t: TFunction;
+  oformsFilter: OformsFilter;
+  sortOforms: (sortBy: string, sortOrder: SortOrder) => void;
+}
+
+export interface SortData {
+  id: string;
+  key: string;
+  label: string;
+  default: boolean;
+  isSelected: boolean;
+}

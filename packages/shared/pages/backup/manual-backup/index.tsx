@@ -200,6 +200,11 @@ const ManualBackup = ({
       BackupStorageLocalKey.StorageType,
     );
 
+    if (pageIsDisabled) {
+      clearLocalStorage();
+      return;
+    }
+
     if (saveStorageType) setStorageType(saveStorageType);
   });
 

@@ -129,9 +129,12 @@ const Consent = ({
     );
 
     deleteCookie("x-redirect-authorization-uri");
+
     const splitedURL = decodedRedirectUrl.split("&scope=");
     if (splitedURL[1]) {
-      const splitedScopes = splitedURL[1].split("%20") as string[];
+      const splitedScopes = splitedURL[1]
+        .split("&")?.[0]
+        .split("%20") as string[];
       setCookie("x-scopes", splitedScopes.join(";"));
 
       setCurrentScopes(splitedScopes);

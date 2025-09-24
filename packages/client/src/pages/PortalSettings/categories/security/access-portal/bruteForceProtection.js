@@ -60,6 +60,7 @@ const BruteForceProtection = (props) => {
     currentColorScheme,
     isDefaultPasswordProtection,
     setBruteForceProtectionSettings,
+    isInit,
 
     settingsStore,
     tfaStore,
@@ -125,6 +126,12 @@ const BruteForceProtection = (props) => {
       setIsGetSettingsLoaded(true);
     }
   }, [isMobileDevice]);
+
+  useEffect(() => {
+    if (isInit) {
+      setIsGetSettingsLoaded(true);
+    }
+  }, []);
 
   useEffect(() => {
     if (
@@ -388,6 +395,8 @@ export const BruteForceProtectionSection = inject(
       setBruteForceProtectionSettings,
     } = settingsStore;
 
+    const { isInit } = setup;
+
     return {
       numberAttempt,
       blockingTime,
@@ -398,6 +407,7 @@ export const BruteForceProtectionSection = inject(
       bruteForceProtectionUrl,
       currentDeviceType,
       currentColorScheme,
+      isInit,
 
       settingsStore,
       tfaStore,

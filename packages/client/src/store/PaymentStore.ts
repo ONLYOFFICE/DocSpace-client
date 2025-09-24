@@ -42,6 +42,7 @@ import {
   updateAutoTopUpSettings,
   getServicesQuotas,
   getServiceQuota,
+  getLicenseQuota,
 } from "@docspace/shared/api/portal";
 import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
@@ -61,6 +62,7 @@ import {
   TPaymentFeature,
   TPaymentQuota,
   TNumericPaymentFeature,
+  TLicenseQuota,
 } from "@docspace/shared/api/portal/types";
 import { formatCurrencyValue } from "@docspace/shared/utils/common";
 import {
@@ -88,6 +90,8 @@ class PaymentStore {
   settingsStore: SettingsStore | null = null;
 
   paymentQuotasStore: PaymentQuotasStore | null = null;
+
+  licenseQuota: TLicenseQuota | null = null;
 
   salesEmail = "";
 
@@ -894,7 +898,11 @@ class PaymentStore {
     }
 
     try {
-      await Promise.all([this.getSettingsPayment(), getPaymentInfo()]);
+      await Promise.all([
+        this.getSettingsPayment(),
+        this.getPortalLicenseQuota(),
+        getPaymentInfo(),
+      ]);
     } catch (error) {
       toastr.error(t("Common:UnexpectedError"));
       console.error(error);
@@ -933,6 +941,20 @@ class PaymentStore {
         if (currentLicense.trial)
           this.currentLicense.trialMode = currentLicense.trial;
       }
+    } catch (e) {
+      if (axios.isCancel(e)) {
+        return;
+      }
+      console.error(e);
+    }
+  };
+
+  getPortalLicenseQuota = async () => {
+    try {
+      const licenseQuota = await getLicenseQuota();
+      if (!licenseQuota) return;
+
+      this.licenseQuota = licenseQuota;
     } catch (e) {
       if (axios.isCancel(e)) {
         return;

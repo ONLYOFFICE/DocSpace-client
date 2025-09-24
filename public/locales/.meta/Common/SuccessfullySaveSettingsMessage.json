@@ -3,7 +3,7 @@
   "content": "Settings have been successfully updated",
   "content_en_sha1_hash": "a3e0f1940499fb1b34253a9a7b050c2136e1f58b",
   "created_at": "2025-05-26T07:15:48.667Z",
-  "updated_at": "2025-09-17T13:43:01.722Z",
+  "updated_at": "2025-09-19T15:39:23.128Z",
   "comment": {
     "text": "The translation key \"SuccessfullySaveSettingsMessage\" is used to display a success message after saving portal settings. It appears in UI elements such as buttons or dialogs that trigger setting updates, providing feedback to the user that changes have been successfully applied.",
     "is_auto": true,
@@ -132,7 +132,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/bruteForceProtection.js",
-      "line_number": 252,
+      "line_number": 259,
       "context": "});\n \n getBruteForceProtection();\n setShowReminder(false);\n setIsLoadingSave(false);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n })\n .catch((error) => {\n toastr.error(error);\n });\n };",
       "module": "/packages/client"
     },
@@ -162,13 +162,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/sessionLifetime.js",
-      "line_number": 227,
+      "line_number": 234,
       "context": "});\n }\n \n setSessionLifetimeSettings(sessionValue, type)\n .then(() => {\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n saveToSessionStorage(\"defaultSessionLifetimeSettings\", {\n lifetime: sessionValue?.toString(),\n type,\n });\n setShowReminder(false);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
-      "line_number": 208,
+      "line_number": 215,
       "context": "const res = await setTfaSettings(type);\n setType(type);\n setShowReminder(false);\n saveToSessionStorage(\"defaultTfaSettings\", type);\n saveToSessionStorage(\"currentTfaSettings\", type);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n \n if (res) {\n setIsInit(false);\n window.location.replace(res);\n }",
       "module": "/packages/client"
     },

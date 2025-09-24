@@ -27,6 +27,7 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
 import { screen, render } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 
 import { TViewAs } from "../../types";
@@ -239,6 +240,112 @@ describe("<Badges />", () => {
       // Looking for the badge container since the copy link badge might not have a specific test ID
       const badgesContainer = screen.getByTestId("badges");
       expect(badgesContainer).toBeInTheDocument();
+    });
+  });
+
+  describe("Lock functionality", () => {
+    test("renders locked file icon when file is locked", () => {
+      const lockedItem = {
+        ...defaultItem,
+        locked: true,
+        lockedBy: "John Doe",
+      };
+
+      renderWithTheme(
+        <Badges {...defaultProps} item={lockedItem} viewAs="row" />,
+      );
+
+      const lockButton = screen.getByTitle("Common:UnblockFile");
+      expect(lockButton).toBeInTheDocument();
+      expect(lockButton).toHaveAttribute("data-locked", "true");
+    });
+
+    test("handles lock button click", async () => {
+      const onClickLock = jest.fn();
+      const lockedItem = {
+        ...defaultItem,
+        locked: true,
+        lockedBy: "John Doe",
+      };
+
+      renderWithTheme(
+        <Badges
+          {...defaultProps}
+          item={lockedItem}
+          viewAs="row"
+          onClickLock={onClickLock}
+        />,
+      );
+
+      const lockButton = screen.getByTitle("Common:UnblockFile");
+      await userEvent.click(lockButton);
+
+      expect(onClickLock).toHaveBeenCalledTimes(1);
+    });
+
+    test("does not call onClickLock when canLock is false", async () => {
+      const onClickLock = jest.fn();
+      const lockedItem = {
+        ...defaultItem,
+        locked: true,
+        lockedBy: "John Doe",
+        security: {
+          ...defaultItem.security,
+          Lock: false,
+        },
+      };
+
+      renderWithTheme(
+        <Badges
+          {...defaultProps}
+          item={lockedItem}
+          viewAs="row"
+          onClickLock={onClickLock}
+        />,
+      );
+
+      const lockButton = screen.getByTitle("Common:UnblockFile");
+      await userEvent.click(lockButton);
+
+      expect(onClickLock).not.toHaveBeenCalled();
+    });
+
+    test("does not render lock button in tile view", () => {
+      const lockedItem = {
+        ...defaultItem,
+        locked: true,
+        lockedBy: "John Doe",
+      };
+
+      renderWithTheme(
+        <Badges {...defaultProps} item={lockedItem} viewAs="tile" />,
+      );
+
+      const lockButton = screen.queryByTitle("Common:UnblockFile");
+      expect(lockButton).not.toBeInTheDocument();
+    });
+
+    test("shows tooltip for locked file when user cannot unlock", () => {
+      const lockedItem = {
+        ...defaultItem,
+        locked: true,
+        lockedBy: "John Doe",
+        security: {
+          ...defaultItem.security,
+          Lock: false,
+        },
+      };
+
+      renderWithTheme(
+        <Badges {...defaultProps} item={lockedItem} viewAs="row" />,
+      );
+
+      const lockButton = screen.getByTitle("Common:UnblockFile");
+      expect(lockButton).toBeInTheDocument();
+      expect(lockButton).toHaveAttribute(
+        "data-tooltip-id",
+        `lockTooltip${defaultItem.id}`,
+      );
     });
   });
 });

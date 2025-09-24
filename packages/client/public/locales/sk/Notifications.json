@@ -1,10 +1,8 @@
 {
-  "ActionsWithFilesDescription": "Označenia vás budú upozorňovať na akcie, ako je nahrávanie, vytváranie a úprava súborov.",
   "Badges": "Menovky",
   "DailyFeed": "Denný informačný kanál {{productName}}",
   "DailyFeedDescription": "Prečítajte si správy a udalosti z vášho {{productName}} v dennom prehľade.",
   "Notifications": "Upozornenia",
-  "RoomsActivityDescription": "Hodinové upozornenia. Buďte informovaní o všetkých aktivitách vo svojich miestnostiach.",
   "UsefulTips": "Užitočné tipy pre {{productName}}",
   "UsefulTipsDescription": "Získajte užitočných sprievodcov o {{productName}}"
 }

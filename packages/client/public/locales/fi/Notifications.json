@@ -1,10 +1,8 @@
 {
-  "ActionsWithFilesDescription": "Merkit ilmoittavat sinulle toiminnoista, kuten latauksesta, luonnista ja muutoksista tiedostoissa.",
   "Badges": "Merkit",
   "DailyFeed": "Päivittäinen {{productName}}-syöte",
   "DailyFeedDescription": "Lue uutiset ja tapahtumat {{productName}}-si päivittäisistä uutisista.",
   "Notifications": "Ilmoitukset",
-  "RoomsActivityDescription": "Ilmoitukset tunneittain. Pysy ajan tasalla kaikesta toiminnasta huoneissasi.",
   "UsefulTips": "Hyödylliset {{productName}}-vinkit",
   "UsefulTipsDescription": "Saa hyödyllisiä oppaita {{productName}}-sta"
 }

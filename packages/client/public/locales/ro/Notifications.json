@@ -1,10 +1,8 @@
 {
-  "ActionsWithFilesDescription": "Ecusonul vă va notifica despre acțiunile efectuate asupra fișierelor, precum încărcare, creare și modificare.",
   "Badges": "Ecusoane",
   "DailyFeed": "Fluxul zilnic {{productName}}",
   "DailyFeedDescription": "Citiţi ştirile şi evenimentele din spațiul dvs {{productName}} într-un rezumat zilnic.",
   "Notifications": "Notificări",
-  "RoomsActivityDescription": "Notificări la fiecare oră. Rămâneți la curent cu activităţile în sălile dvs.",
   "UsefulTips": "Sfaturi utile {{productName}}",
   "UsefulTipsDescription": "Obţineţi instrucţiuni utile privind {{productName}}"
 }

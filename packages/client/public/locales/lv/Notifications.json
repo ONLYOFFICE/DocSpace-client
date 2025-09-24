@@ -1,10 +1,8 @@
 {
-  "ActionsWithFilesDescription": "Žetonus informēs jūs par tādām darbībām kā augšupielāde, izveide un izmaiņas failos.",
   "Badges": "Žetoni",
   "DailyFeed": "Ikdienas {{productName}} plūsma",
   "DailyFeedDescription": "Lasiet {{productName}} jaunumus un notikumus ikdienas īssavilkumā.",
   "Notifications": "Paziņojumi",
-  "RoomsActivityDescription": "Ik stundu paziņojumi. Esiet informēts par visām aktivitātēm savās telpās",
   "UsefulTips": "Noderīgi {{productName}} padomi",
   "UsefulTipsDescription": "Iegūt noderīgus ceļvežus par {{productName}}"
 }

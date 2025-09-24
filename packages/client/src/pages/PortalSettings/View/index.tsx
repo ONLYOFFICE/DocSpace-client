@@ -74,6 +74,33 @@ type TView =
   | "services"
   | "";
 
+type ViewProps = {
+  setIsPortalSettingsLoading: (value: boolean) => void;
+  loadBaseInfo: (page: string) => Promise<void>;
+  isMobileView: boolean;
+  settingsStore: TStore["settingsStore"];
+  tfaStore: TStore["tfaStore"];
+  backupStore: TStore["backup"];
+  ssoStore?: TStore["ssoStore"];
+  init: () => Promise<unknown>;
+  standaloneInit: () => Promise<unknown>;
+  setup: TStore["setup"];
+  authStore: TStore["authStore"];
+  currentQuotaStore: TStore["currentQuotaStore"];
+  pluginStore: TStore["pluginStore"];
+  filesSettingsStore: TStore["filesSettingsStore"];
+  webhooksStore: TStore["webhooksStore"];
+  oauthStore: TStore["oauthStore"];
+  brandingStore: TStore["brandingStore"];
+  importAccountsStore: TStore["importAccountsStore"];
+  ldapStore: TStore["ldapStore"];
+  common: TStore["common"];
+  paymentStore: TStore["paymentStore"];
+  servicesStore: TStore["servicesStore"];
+  currentTariffStatusStore: TStore["currentTariffStatusStore"];
+  clearAbortControllerArr: () => void;
+};
+
 const View = ({
   setIsPortalSettingsLoading,
   loadBaseInfo,
@@ -81,7 +108,7 @@ const View = ({
   settingsStore,
   tfaStore,
   backupStore,
-  ssoFormStore,
+  ssoStore: ssoFormStore,
   init,
   standaloneInit,
   setup,
@@ -98,9 +125,8 @@ const View = ({
   paymentStore,
   servicesStore,
   currentTariffStatusStore,
-
   clearAbortControllerArr,
-}: any) => {
+}: ViewProps) => {
   const location = useLocation();
 
   const [currentView, setCurrentView] = React.useState<TView>(() => {

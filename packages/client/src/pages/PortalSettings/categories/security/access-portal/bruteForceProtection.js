@@ -271,7 +271,7 @@ const BruteForceProtection = (props) => {
   };
 
   if (
-    (currentDeviceType !== DeviceType.desktop && !isGetSettingsLoaded) ||
+    (currentDeviceType === DeviceType.mobile && !isGetSettingsLoaded) ||
     !tReady
   )
     return <BruteForceProtectionLoader />;

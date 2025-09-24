@@ -251,7 +251,7 @@ const SessionLifetime = (props) => {
     setShowReminder(false);
   };
 
-  if ((currentDeviceType !== DeviceType.desktop && !isLoading) || !tReady) {
+  if ((currentDeviceType === DeviceType.mobile && !isLoading) || !tReady) {
     return <SessionLifetimeLoader />;
   }
 

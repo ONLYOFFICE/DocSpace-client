@@ -242,7 +242,7 @@ const LinkSettingsPanel = ({
             id="link-settings_date-time-picker"
             locale={moment.locale()}
             hasError={false}
-            onChange={(date) => setLimitDate(date)}
+            onChange={(date) => date && setLimitDate(date)}
             openDate={new Date()}
             className={styles.linkSettingsDatePicker}
             selectDateText={t("Common:SelectDate")}

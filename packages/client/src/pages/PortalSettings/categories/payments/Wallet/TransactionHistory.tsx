@@ -65,25 +65,10 @@ import TransactionBody from "./sub-components/TransactionBody";
 import styles from "./styles/TransactionHistory.module.scss";
 import TableLoader from "./sub-components/TableLoader";
 
-// Helper types
-type FetchTransactionHistoryFn = (
-  startDate: moment.Moment,
-  endDate: moment.Moment,
-  isCredit: boolean,
-  isDebit: boolean,
-  participantName?: string,
-) => Promise<void>;
-
-interface TransactionHistoryReportStatus {
-  error?: string;
-  isCompleted: boolean;
-  resultFileUrl?: string;
-}
-
 type TransactionHistoryProps = {
   getStartTransactionDate?: () => string;
   getEndTransactionDate?: () => string;
-  fetchTransactionHistory: FetchTransactionHistoryFn; // injected, required
+  fetchTransactionHistory?: any;
   openOnNewPage?: boolean;
   isTransactionHistoryExist?: boolean;
   isMobile?: boolean;
@@ -106,19 +91,25 @@ const filter = () => {
   return newFilter;
 };
 
-let timerId: ReturnType<typeof setTimeout> | null = null;
+let timerId = null;
 
 const fetchTransactions = async (
-  fetchTransactionHistory: FetchTransactionHistoryFn,
+  fetchTransactionHistory: (
+    startDate: moment.Moment,
+    endDate: moment.Moment,
+    isCredit: boolean,
+    isDebit: boolean,
+    participantName?: string,
+  ) => Promise<void>,
   setIsLoading: (loading: boolean) => void,
   selectedType: string,
   startDate: moment.Moment,
   endDate: moment.Moment,
   participantName?: string,
-): Promise<void> => {
+) => {
   timerId = setTimeout(() => setIsLoading(true), 500);
 
-  const { isCredit, isDebit } = getTransactionType(selectedType);
+  const { isCredit, isDebit } = getTransactionType(selectedType as string);
 
   try {
     await fetchTransactionHistory(
@@ -332,7 +323,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         isDebit,
       );
 
-      const result = await new Promise<TransactionHistoryReportStatus>((resolve, reject) => {
+      const result = await new Promise<any>((resolve, reject) => {
         const checkStatus = async () => {
           try {
             const response = await checkTransactionHistoryReport();

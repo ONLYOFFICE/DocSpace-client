@@ -33,6 +33,7 @@ import SettingsOutlineSvgUrl from "PUBLIC_DIR/images/icons/16/settings-outline.r
 import { useRef } from "react";
 import { inject, observer } from "mobx-react";
 
+import { getCorrectDate } from "@docspace/shared/utils";
 import { toastr } from "@docspace/shared/components/toast";
 // import { objectToGetParams } from "@docspace/shared/utils/common";
 
@@ -88,6 +89,7 @@ const ExternalLinks = ({
   usersNumber,
   maxUsersNumber,
   theme,
+  culture,
 }) => {
   // const [actionLinksVisible, setActionLinksVisible] = useState(false);
 
@@ -297,7 +299,7 @@ const ExternalLinks = ({
                 {t("Files:ValidUntil")}
               </Text>
               <Text fontSize="12px" fontWeight={600}>
-                12 Jan 2023 | 23:59
+                {getCorrectDate(culture ?? "en", activeLink.expirationDate)}
               </Text>
             </div>
             <div className="invite-via-link-settings">
@@ -350,10 +352,11 @@ export default inject(
     const { roomId, hideSelector, defaultAccess } = invitePanelOptions;
     const { getPortalInviteLink } = peopleStore.inviteLinksStore;
     const { isUserTariffLimit } = currentQuotaStore;
-    const { theme, standalone, allowInvitingGuests } = settingsStore;
+    const { theme, standalone, allowInvitingGuests, culture } = settingsStore;
 
     return {
       theme,
+      culture,
       roomId,
       hideSelector,
       defaultAccess,

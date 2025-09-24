@@ -44,11 +44,11 @@ export type LinkSettingsPanelProps = {
   isVisible: boolean;
   showUsersLimitWarning: boolean;
   usersNumber: number;
-  maxUsersNumber: string;
+  maxUsersNumber: number;
   filteredAccesses: TComboboxProps["options"];
   onBackClick: VoidFunction;
   onClose: VoidFunction;
-  onSubmit: VoidFunction;
+  onSubmit: (item: TOption) => void;
   linkSelectedAccess: TOption;
   setLinkSelectedAccess: (access: TOption) => void;
   activeLink: {
@@ -59,5 +59,4 @@ export type LinkSettingsPanelProps = {
     title: string;
   };
   defaultAccess: ShareAccessRights;
-  validUntil: moment.Moment | null;
 };

@@ -49,4 +49,5 @@ export type DateTimePickerProps = {
   openDate: moment.Moment | Date;
   /** Allows to set data-testid */
   dataTestId?: string;
+  hideCross?: boolean;
 };

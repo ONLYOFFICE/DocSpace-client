@@ -45,6 +45,7 @@ import LinkRolesDropdown from "./sub-components/LinkRolesDropdown";
 import styles from "./LinkSettingsPanel.module.scss";
 import { LinkSettingsPanelProps } from "./LinkSettingsPanel.types";
 import { HelpButton } from "@docspace/shared/components/help-button";
+import { TOption } from "@docspace/shared/components/combobox";
 
 const LinkSettingsPanel = ({
   isVisible,
@@ -59,15 +60,17 @@ const LinkSettingsPanel = ({
   showUsersLimitWarning,
   usersNumber,
   maxUsersNumber,
-  validUntil,
 }: LinkSettingsPanelProps) => {
   const { t, ready } = useTranslation(["Common", "Files"]);
 
-  const date = validUntil ?? moment().add(7, "days");
+  const date = activeLink.expirationDate
+    ? moment(activeLink.expirationDate)
+    : moment().add(7, "days");
 
   const [userLimitIsChecked, setUserLimitIsChecked] = useState(true);
-  const [limitDate, setLimitDate] = useState<moment.Moment | null>(date);
-  const [maxNumber, setMaxNumber] = useState(maxUsersNumber);
+  const [limitDate, setLimitDate] = useState<moment.Moment>(date);
+  const [maxNumber, setMaxNumber] = useState(String(maxUsersNumber));
+  const [hasError, setHasError] = useState(false);
 
   const currentAccess = filteredAccesses.find(
     (a) =>
@@ -79,8 +82,22 @@ const LinkSettingsPanel = ({
     if (e.target.value && !/^(?:[1-9][0-9]*)$/.test(e.target.value)) {
       return;
     }
+
+    setHasError(false);
+
+    if (
+      !e.target.value ||
+      Number(e.target.value) <= 0 ||
+      +e.target.value < +usersNumber
+    ) {
+      setHasError(true);
+    }
+
     setMaxNumber(e.target.value);
   };
+
+  const maxDate = new Date();
+  maxDate.setFullYear(maxDate.getFullYear() + 1);
 
   return (
     <ModalDialog
@@ -91,7 +108,19 @@ const LinkSettingsPanel = ({
       onBackClick={onBackClick}
       withBodyScroll
       isLoading={!ready}
-      onSubmit={onSubmit}
+      onSubmit={() => {
+        const defaultLink = filteredAccesses.find(
+          (a) => a.access === defaultAccess,
+        );
+        if (defaultLink) {
+          const linkToSubmit = {
+            ...defaultLink,
+            expirationDate: moment(limitDate).toISOString(),
+          } as TOption & { expirationDate: string };
+
+          onSubmit(linkToSubmit);
+        }
+      }}
       withForm
       withoutPadding
       isBackButton
@@ -143,7 +172,6 @@ const LinkSettingsPanel = ({
               <div className={styles.userLimitInputBlock}>
                 <div className={styles.userLimitInputBlockText}>
                   <Text fontSize="13px" fontWeight={600}>
-                    {/* TODO: Link settings Max number or max users (translation) */}
                     {t("Files:MaxNumber")}
                   </Text>
                   {showUsersLimitWarning ? (
@@ -164,6 +192,7 @@ const LinkSettingsPanel = ({
                   scale
                   maxLength={3}
                   onChange={onInputChange}
+                  hasError={hasError}
                 />
                 <Text
                   fontSize="12px"
@@ -179,7 +208,7 @@ const LinkSettingsPanel = ({
                       src={PersonPlusReactSvgUrl}
                     />
                     <Text fontSize="13px" fontWeight={400}>
-                      {usersNumber}/{maxNumber}
+                      {usersNumber}/{maxNumber ? maxNumber : 1}
                     </Text>
                   </div>
                   <Text
@@ -219,6 +248,8 @@ const LinkSettingsPanel = ({
             selectDateText={t("Common:SelectDate")}
             initialDate={limitDate}
             minDate={new Date()}
+            maxDate={maxDate}
+            hideCross
           />
         </div>
       </ModalDialog.Body>
@@ -231,6 +262,7 @@ const LinkSettingsPanel = ({
           label={t("Common:SaveAndCopy")}
           type="submit"
           testId="template_access_settings_modal_save_button"
+          isDisabled={hasError}
         />
         <Button
           className="cancel-button"

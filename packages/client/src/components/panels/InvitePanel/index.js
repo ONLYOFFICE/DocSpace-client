@@ -110,7 +110,6 @@ const InvitePanel = ({
 
   const linkUsersNumber = 0; // TODO: Link settings
   const maxUsersNumber = 20; // TODO: Link settings
-  const validUntil = null; // TODO: Link settings / api date
   const showUsersLimitWarning = linkUsersNumber >= maxUsersNumber; // TODO: Link settings
 
   const navigate = useNavigate();
@@ -435,16 +434,24 @@ const InvitePanel = ({
     }
   };
 
-  const editLink = async (linkAccess = null) => {
+  const editLink = async (linkAccess = null, linkExpirationDate) => {
     const type = getDefaultAccessUser(roomType);
 
     let link = null;
 
     try {
-      link = await api.rooms.setInvitationLinks(roomId, "Invite", type);
+      link = await api.rooms.setInvitationLinks(
+        roomId,
+        "Invite",
+        type,
+        undefined,
+        linkExpirationDate,
+      );
       setIsLinksToggling(true);
     } catch (error) {
       toastr.error(error);
+    } finally {
+      setIsLinksToggling(false);
     }
 
     const { shareLink, id, title, expirationDate } = link.sharedTo;
@@ -479,6 +486,7 @@ const InvitePanel = ({
           "Invite",
           +selectedAccess,
           shareLinks[0]?.id ?? null,
+          access.expirationDate,
         );
 
         const { shareLink, id, title, expirationDate } = newLink.sharedTo;
@@ -625,15 +633,15 @@ const InvitePanel = ({
   const filteredAccesses =
     roomType === -1 ? accessOptions : filterPaidRoleOptions(accessOptions);
 
-  const onSubmitLinkSettingsPanel = () => {
-    const defaultLinkAccess = filteredAccesses.find(
-      (a) => a.access === (defaultAccess ?? ShareAccessRights.ReadOnly),
-    );
+  const onSubmitLinkSettingsPanel = (defaultLink) => {
+    const defaultLinkAccess = (linkSelectedAccess ?? defaultLink).access;
 
     onCloseLinkSettingsPanel();
     if (activeLink?.shareLink)
-      onSelectAccess(linkSelectedAccess ?? defaultLinkAccess);
-    else editLink(linkSelectedAccess.access);
+      onSelectAccess(linkSelectedAccess ?? defaultLink);
+    else editLink(defaultLinkAccess, defaultLink.expirationDate);
+
+    onChangeExternalLinksVisible(true);
   };
 
   return (
@@ -705,9 +713,8 @@ const InvitePanel = ({
             linkSelectedAccess={linkSelectedAccess}
             setLinkSelectedAccess={setLinkSelectedAccess}
             defaultAccess={defaultAccess ?? ShareAccessRights.ReadOnly}
-            maxUsersNumber={String(maxUsersNumber)}
-            usersNumber={String(linkUsersNumber)}
-            validUntil={validUntil}
+            maxUsersNumber={maxUsersNumber}
+            usersNumber={linkUsersNumber}
             showUsersLimitWarning={showUsersLimitWarning}
           />
         </ModalDialog.Container>

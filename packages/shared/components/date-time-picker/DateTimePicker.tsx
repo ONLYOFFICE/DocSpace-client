@@ -51,6 +51,7 @@ const DateTimePicker = (props: DateTimePickerProps) => {
     locale,
     openDate,
     dataTestId,
+    hideCross,
   } = props;
 
   const [isTimeFocused, setIsTimeFocused] = useState(false);
@@ -110,6 +111,7 @@ const DateTimePicker = (props: DateTimePickerProps) => {
         locale={locale}
         openDate={openDate}
         outerDate={date}
+        hideCross={hideCross}
       />
       <span
         className={styles.timeSelector}

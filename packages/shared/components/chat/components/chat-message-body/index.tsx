@@ -62,13 +62,13 @@ const ChatMessageBody = ({
 
   const { t } = useTranslation(["Common"]);
 
-  const [isScrolled, setIsScrolled] = React.useState(false);
   const [height, setHeight] = React.useState(0);
 
   const scrollbarRef = useRef<CustomScrollbar>(null);
   const chatBodyRef = useRef<HTMLDivElement>(null);
   const prevBodyHeight = useRef(0);
-  const currentScroll = useRef(0);
+  const prevScrollTopRef = useRef(0);
+  const disableAutoScrollRef = useRef(false);
 
   const isEmpty = messages.length === 0 || isLoading;
 
@@ -93,13 +93,13 @@ const ChatMessageBody = ({
   }, [addMessageId]);
 
   useEffect(() => {
-    setIsScrolled(false);
+    disableAutoScrollRef.current = false;
   }, [currentChat]);
 
   useEffect(() => {
     if (isEmpty) return;
 
-    if (isScrolled) return;
+    if (disableAutoScrollRef.current) return;
 
     requestAnimationFrame(() => {
       if (scrollbarRef.current?.scrollToBottom) {
@@ -170,7 +170,7 @@ const ChatMessageBody = ({
       prevBodyHeight.current = bodyHeight;
     }
 
-    if (currentScroll.current === 0 && diff > 0) {
+    if (prevScrollTopRef.current === 0 && diff > 0) {
       scrollbarRef.current?.scrollTo(0, diff);
     }
   }, [messages.length]);
@@ -179,22 +179,25 @@ const ChatMessageBody = ({
     const currentHeight =
       e.currentTarget.scrollTop + e.currentTarget.clientHeight;
 
+    const chatBodyOffsetHeight = chatBodyRef.current?.offsetHeight || 0;
+
+    if (prevScrollTopRef.current > e.currentTarget.scrollTop) {
+      disableAutoScrollRef.current = true;
+    }
+
     if (
-      currentHeight === chatBodyRef.current?.offsetHeight ||
-      (chatBodyRef.current &&
-        Math.abs(currentHeight - chatBodyRef.current.offsetHeight) < 5) ||
-      (chatBodyRef.current && chatBodyRef.current.offsetHeight < currentHeight)
+      currentHeight === chatBodyOffsetHeight ||
+      Math.abs(currentHeight - chatBodyOffsetHeight) < 5 ||
+      chatBodyOffsetHeight < currentHeight
     ) {
-      setIsScrolled(false);
-    } else {
-      setIsScrolled(true);
+      disableAutoScrollRef.current = false;
     }
 
     if (e.currentTarget.scrollTop < 500 + e.currentTarget.clientHeight) {
       fetchNextMessages();
     }
 
-    currentScroll.current = e.currentTarget.scrollTop;
+    prevScrollTopRef.current = e.currentTarget.scrollTop;
   };
 
   return (
@@ -210,7 +213,9 @@ const ChatMessageBody = ({
         <Scrollbar
           ref={scrollbarRef}
           className="chat-scroll-bar"
+          scrollBodyClassName={styles.chatScrollBody}
           onScroll={onScroll}
+          fixedSize
         >
           <div
             className={classNames(styles.chatMessageContainer)}

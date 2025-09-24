@@ -25,24 +25,34 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 @use "../../../../styles/mixins";
+@use "../../../../styles/variables";
 
 .chatMessageBody {
   height: 100%;
   max-height: 100%;
-  width: 100%;
-  max-width: 700px;
+
+  margin: 0 -20px;
 
   overflow: hidden;
 
   display: flex;
   flex-direction: column;
   align-items: center;
+  align-self: stretch;
 
   box-sizing: border-box;
 
   &.empty {
     max-height: fit-content;
   }
+
+  @include mixins.tablet-and-below {
+    margin: 0 -16px;
+  }
+}
+
+.chatScrollBody {
+  padding-inline: 0 !important;
 }
 
 .chatMessageContainer {
@@ -53,7 +63,7 @@
 
   max-width: 700px;
 
-  padding: 20px 0;
+  padding: 20px;
 
   margin: auto;
 }
@@ -64,7 +74,7 @@
 }
 
 .chatMessageTextColor {
-  color: var(--chat-message-color);
+  color: var(--text-color);
 
   font-size: 12px;
   line-height: 16px;
@@ -157,13 +167,28 @@
     }
 
     .chatMessageUser {
-      background-color: #4781d11a;
-
-      padding: 0px 12px;
+      padding: 0 12px;
 
       border-radius: 16px;
 
       width: fit-content;
+
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        content: "";
+
+        position: absolute;
+        inset: 0;
+
+        border-radius: inherit;
+
+        background-color: var(--chat-message-user-background-color);
+        opacity: 10%;
+
+        z-index: -1;
+      }
     }
   }
 }
@@ -183,6 +208,11 @@
   box-sizing: border-box;
 
   margin: 8px 0;
+  max-height: 420px;
+
+  @include mixins.mobile {
+    max-height: 320px;
+  }
 
   .codeHeader {
     width: 100%;
@@ -193,6 +223,8 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    flex-basis: 32px;
+    flex-shrink: 0;
 
     padding: 0 8px;
 
@@ -203,20 +235,12 @@
 
   .codeBody {
     background-color: var(--chat-message-code-block-background-color);
-
-    max-height: 168px;
   }
 }
 
 .inlineCodeBlock {
   font-weight: 700;
   font-style: italic;
-}
-
-.listBlock {
-  margin: 0;
-
-  white-space: normal;
 }
 
 .toolCallManage {
@@ -249,10 +273,22 @@
   }
 }
 
+.toolCallMessage {
+  &:not(:last-child) {
+    margin: 8px 0;
+  }
+}
+
 .toolCall {
   width: 100%;
 
   box-sizing: border-box;
+
+  &.inDialog {
+    .codeContainer {
+      max-height: 168px;
+    }
+  }
 
   .toolCallHeader {
     display: flex;
@@ -281,6 +317,10 @@
 
     .toolName {
       color: var(--chat-message-color);
+    }
+
+    .arrowRightIcon svg path {
+      fill: var(--text-color);
     }
 
     &.hide {
@@ -326,6 +366,10 @@
           margin: 0;
         }
       }
+    }
+
+    .codeContainer {
+      max-height: 210px;
     }
   }
 }
@@ -391,4 +435,171 @@
 .chatLoader {
   display: flex;
   gap: 8px;
+}
+
+.heading {
+  padding: 8px 0;
+}
+
+.paragraph {
+  padding: 8px 0;
+  white-space: pre-line;
+  color: var(--text-color);
+  font-weight: 400;
+  word-break: break-word;
+}
+
+.link {
+  word-break: break-word;
+}
+
+.blockquote {
+  position: relative;
+
+  margin: 8px 0;
+  padding: 6px 12px;
+
+  width: fit-content;
+
+  border-left: 3px solid var(--chat-message-blockquote-bg-color);
+  border-radius: 3px;
+
+  color: var(--chat-message);
+  font-size: 15px;
+  line-height: 22px;
+
+  overflow: hidden;
+
+  &::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background-color: var(--chat-message-blockquote-bg-color);
+    opacity: 8%;
+
+    z-index: -1;
+  }
+}
+
+.hrWrapper {
+  padding: 8px 0;
+}
+
+.hr {
+  border: none;
+  height: 1px;
+  background-color: var(--chat-message-hr-color);
+}
+
+.listBlock {
+  font-size: 15px;
+
+  margin: 0;
+  padding-inline-start: 22px;
+
+  white-space: normal;
+}
+
+.listItem {
+  > .paragraph {
+    font-weight: inherit;
+  }
+}
+
+.listBlock,
+.listItem {
+  line-height: 22px;
+
+  .paragraph {
+    padding: 0;
+  }
+}
+
+// multilevel lists
+.listBlock:has(.listBlock) {
+  // first level
+  & > .listItem {
+    font-weight: 600;
+  }
+
+  // other levels
+  & > .listItem .listItem {
+    font-weight: 400;
+  }
+
+  // gap between first level items
+  &:not(.listBlock .listBlock) > .listItem + .listItem {
+    margin-top: 8px;
+  }
+
+  // gap between other items
+  .listItem + .listItem {
+    margin-top: 4px;
+  }
+}
+
+// first level
+.listBlock {
+  margin: 8px 0;
+}
+
+// other levels
+.listBlock .listBlock {
+  margin: 4px 0 0;
+  padding-inline-start: 16px;
+}
+
+// bullet styles
+.ul > .listItem {
+  list-style: none;
+  position: relative;
+
+  &::before {
+    content: "\2022";
+    position: absolute;
+    inset-inline-start: -13px;
+  }
+}
+
+.tableScroll {
+  margin: 8px 0;
+}
+
+.tableScrollBody {
+  display: block !important;
+}
+
+.table {
+  border-collapse: collapse;
+  min-width: 100%;
+}
+
+.th {
+  font-weight: 600;
+}
+
+.th,
+.td {
+  box-sizing: border-box;
+
+  font-size: 15px;
+  line-height: 22px;
+  vertical-align: middle;
+  text-align: start;
+
+  min-width: 175px;
+  max-width: 175px;
+
+  padding: 8px 12px;
+
+  overflow-wrap: break-word;
+}
+
+.tr {
+  .th,
+  &:not(:last-child) .td {
+    border-bottom: 1px solid var(--chat-message-table-row-border-color);
+  }
 }

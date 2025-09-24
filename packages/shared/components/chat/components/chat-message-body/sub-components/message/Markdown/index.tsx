@@ -24,67 +24,42 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { classNames } from "../../utils";
+import Markdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
+import remarkGfm from "remark-gfm";
 
-import styles from "./Heading.module.scss";
-import { HeadingProps } from "./Heading.types";
-import { HeadingLevel, HeadingSize } from "./Heading.enums";
+import { MessageMarkdownFieldProps } from "../../../../../Chat.types";
 
-export const HeadingPure = ({
-  id,
-  level = HeadingLevel.h1,
-  color,
-  title,
-  truncate = false,
-  isInline = false,
-  className = "",
-  size = HeadingSize.medium,
-  type,
-  children,
-  style,
-  as,
-  fontSize,
-  fontWeight,
-  lineHeight,
-  ...rest
-}: HeadingProps) => {
-  const Element = (as || `h${level}`) as React.ElementType;
+import styles from "../../../ChatMessageBody.module.scss";
 
-  const classes = classNames(className, styles.heading, {
-    [styles.small]: size === HeadingSize.small,
-    [styles.medium]: size === HeadingSize.medium,
-    [styles.large]: size === HeadingSize.large,
-    [styles.xlarge]: size === HeadingSize.xlarge,
-    [styles.xsmall]: size === HeadingSize.xsmall,
-    [styles.truncate]: truncate,
-    [styles.inline]: isInline,
-    [styles.header]: type === "header",
-    [styles.menu]: type === "menu",
-    [styles.content]: type === "content",
-    [styles["not-selectable"]]: true,
-  });
+import { createMarkdownComponents } from "./Markdown.utils";
+
+// Function to replace <think> tags with a placeholder before markdown processing
+const preprocessChatMessage = (text: string): string => {
+  // Replace <think> tags with `<span class="think-tag">think:</span>`
+  return text
+    .replace(/<think>/g, "`<think>`")
+    .replace(/<\/think>/g, "`</think>`");
+};
+
+const MarkdownField = ({
+  chatMessage,
+  propLanguage,
+}: MessageMarkdownFieldProps) => {
+  // Process the chat message to handle <think> tags
+  const processedChatMessage = preprocessChatMessage(chatMessage);
 
   return (
-    <Element
-      id={id}
-      title={title}
-      className={classes}
-      style={{
-        ...style,
-        color: color || undefined,
-        fontSize: fontSize || undefined,
-        fontWeight: fontWeight || undefined,
-        lineHeight: lineHeight || undefined,
-      }}
-      data-testid="heading"
-      {...rest}
-    >
-      {children}
-    </Element>
+    <div style={{ width: "100%" }} className={styles.markdownField}>
+      <Markdown
+        remarkPlugins={[remarkGfm]}
+        rehypePlugins={[rehypeRaw]}
+        components={createMarkdownComponents({ propLanguage })}
+      >
+        {processedChatMessage}
+      </Markdown>
+    </div>
   );
 };
 
-const Heading = React.memo(HeadingPure);
-
-export { Heading, HeadingSize, HeadingLevel };
+export default MarkdownField;

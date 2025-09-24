@@ -33,6 +33,7 @@ import { MessageToolCallProps } from "../../../../../Chat.types";
 import { ToolCallConfirmDialog } from "./ToolCallConfirmDialog";
 import { ToolCall } from "./ToolCall";
 import { ToolCallPlacement, ToolCallStatus } from "./ToolCall.enum";
+import styles from "../../../ChatMessageBody.module.scss";
 
 const ToolCallMessage = ({ content }: MessageToolCallProps) => {
   const [needConfirmation, setNeedConfirmation] = React.useState(
@@ -48,7 +49,7 @@ const ToolCallMessage = ({ content }: MessageToolCallProps) => {
       : ToolCallStatus.Finished;
 
   return (
-    <div>
+    <div className={styles.toolCallMessage}>
       <ToolCall
         content={content}
         status={toolCallStatus}

@@ -28,7 +28,8 @@ import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import InfoIconSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
-import EmptyScreenAIAgentsSelectorSvgUrl from "PUBLIC_DIR/images/emptyview/empty.ai.agents.selector.svg?url";
+import EmptyScreenAIAgentsSelectorSvgUrl from "PUBLIC_DIR/images/emptyview/ai.agents.selector.light.svg?url";
+import EmptyScreenAIAgentsSelectorSvgUrlDark from "PUBLIC_DIR/images/emptyview/ai.agents.selector.dark.svg?url";
 
 import { RoomsType } from "../../enums";
 import { Selector, TSelectorItem } from "../../components/selector";
@@ -216,17 +217,17 @@ const AIAgentSelectorComponent = ({
       emptyScreenImage={
         isBase
           ? EmptyScreenAIAgentsSelectorSvgUrl
-          : EmptyScreenAIAgentsSelectorSvgUrl
+          : EmptyScreenAIAgentsSelectorSvgUrlDark
       }
       emptyScreenHeader={t("Common:NoAIAgents")}
       emptyScreenDescription={t("Common:NoAIAgentsDescription")}
       searchEmptyScreenImage={
         isBase
           ? EmptyScreenAIAgentsSelectorSvgUrl
-          : EmptyScreenAIAgentsSelectorSvgUrl
+          : EmptyScreenAIAgentsSelectorSvgUrlDark
       }
-      searchEmptyScreenHeader={t("Common:NoAIAgents")}
-      searchEmptyScreenDescription={t("Common:NoAIAgentsDescription")}
+      searchEmptyScreenHeader={t("Common:NoAIAgentsSearch")}
+      searchEmptyScreenDescription={t("Common:NoAIAgentsSearchDescription")}
       totalItems={total}
       hasNextPage={hasNextPage}
       isNextPageLoading={isNextPageLoading}

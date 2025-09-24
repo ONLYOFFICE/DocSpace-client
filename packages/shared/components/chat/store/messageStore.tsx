@@ -181,22 +181,36 @@ export default class MessageStore {
   };
 
   addNewAIMessage = (message: string) => {
-    const newMsg: TMessage = {
-      role: RoleType.AssistantMessage,
-      createdOn: new Date().toString(),
-      contents: [{ type: ContentType.Text, text: message }],
-    };
+    if (this.messages[0].role === RoleType.AssistantMessage) {
+      const newMsg: TMessage = {
+        ...this.messages[0],
+        contents: [
+          ...this.messages[0].contents,
+          { type: ContentType.Text, text: message },
+        ],
+      };
 
-    this.setMessages([newMsg, ...this.messages]);
+      this.setMessages([newMsg, ...this.messages.slice(1)]);
+      return;
+    } else {
+      const newMsg: TMessage = {
+        role: RoleType.AssistantMessage,
+        createdOn: new Date().toString(),
+        contents: [{ type: ContentType.Text, text: message }],
+      };
 
-    this.setTotalMessages(this.totalMessages + 1);
-    this.setStartIndex(this.startIndex + 1);
+      this.setMessages([newMsg, ...this.messages]);
+
+      this.setTotalMessages(this.totalMessages + 1);
+      this.setStartIndex(this.startIndex + 1);
+    }
   };
 
   continueAIMessage = (message: string) => {
     const msg: TMessage = {
       ...this.messages[0],
       contents: [
+        ...this.messages[0].contents.slice(0, -1),
         {
           type: ContentType.Text,
           text: message,
@@ -204,7 +218,7 @@ export default class MessageStore {
       ],
     };
 
-    this.messages[0] = msg;
+    this.setMessages([msg, ...this.messages.slice(1)]);
   };
 
   handleMetadata = (jsonData: string) => {
@@ -218,41 +232,48 @@ export default class MessageStore {
   handleToolCall = (jsonData: string) => {
     const { name, arguments: args, callId, ...rest } = JSON.parse(jsonData);
 
-    const newMsg: TMessage = {
-      role: RoleType.AssistantMessage,
-      createdOn: new Date().toString(),
-      contents: [
-        {
-          type: ContentType.Tool,
-          name,
-          arguments: args,
-          callId,
-          ...rest,
-        },
-      ],
+    const content = {
+      type: ContentType.Tool,
+      name,
+      arguments: args,
+      callId,
+      ...rest,
     };
 
-    this.setMessages([newMsg, ...this.messages]);
-    this.setTotalMessages(this.totalMessages + 1);
-    this.setStartIndex(this.startIndex + 1);
+    const newMsg: TMessage = {
+      ...this.messages[0],
+      contents: [...this.messages[0].contents, content],
+    };
+
+    this.setMessages([newMsg, ...this.messages.slice(1)]);
   };
 
   handleToolResult = (jsonData: string) => {
-    const { result } = JSON.parse(jsonData);
+    const { result, callId } = JSON.parse(jsonData);
+
+    const lstMsgContents = this.messages[0].contents;
+
+    const idx = lstMsgContents.findIndex(
+      (c) => (c as TToolCallContent).callId === callId,
+    );
+
+    const content = {
+      ...lstMsgContents[idx],
+      managed: false,
+      result,
+    } as TToolCallContent;
 
     const newMsg: TMessage = {
       ...this.messages[0],
 
       contents: [
-        {
-          ...this.messages[0].contents[0],
-          managed: false,
-          result,
-        } as TToolCallContent,
+        ...lstMsgContents.slice(0, idx),
+        content,
+        ...lstMsgContents.slice(idx + 1),
       ],
     };
 
-    this.messages[0] = newMsg;
+    this.setMessages([newMsg, ...this.messages.slice(1)]);
   };
 
   handleStreamError = (jsonData: string) => {

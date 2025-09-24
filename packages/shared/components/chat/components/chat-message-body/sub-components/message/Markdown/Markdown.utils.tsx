@@ -158,11 +158,6 @@ export const createMarkdownComponents = ({
     <ul className={classNames(styles.listBlock, styles.ul)}>{children}</ul>
   ),
   li: ({ children }) => <li className={styles.listItem}>{children}</li>,
-  // TODO: Chat redesign - add styles
-  pre: ({ children }) => {
-    return <pre>{children}</pre>;
-  },
-  // TODO: Chat redesign - add styles
   code: ({ className, children, ...props }) => {
     let content = children as string;
 

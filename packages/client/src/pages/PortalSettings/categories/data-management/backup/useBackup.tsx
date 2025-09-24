@@ -195,7 +195,7 @@ const useBackup = ({
         backupsCountController,
       ]);
 
-      const baseRequests: (Promise<any> | undefined)[] = [
+      const baseRequests: (Promise<unknown> | undefined)[] = [
         getSettingsThirdParty(thirdPartyController.signal),
         getBackupSchedule(undefined, backupScheduleController.signal),
         getBackupStorage(undefined, backupStorageController.signal),

@@ -45,6 +45,7 @@ export type UseIntegrationProps = {
   fetchAndSetConsumers?: SetupStore["fetchAndSetConsumers"];
   setInitSMTPSettings?: SetupStore["setInitSMTPSettings"];
   getDocumentServiceLocation?: FilesSettingsStore["getDocumentServiceLocation"];
+  setDocumentServiceLocation?: FilesSettingsStore["setDocumentServiceLocation"];
   loadLDAP?: LdapFormStore["load"];
   isLdapAvailable?: CurrentQuotasStore["isLdapAvailable"];
   isThirdPartyAvailable?: CurrentQuotasStore["isThirdPartyAvailable"];
@@ -60,15 +61,13 @@ const useIntegration = ({
   fetchAndSetConsumers,
   setInitSMTPSettings,
   getDocumentServiceLocation,
+  setDocumentServiceLocation,
   loadLDAP,
   isLdapAvailable,
   isThirdPartyAvailable,
   setOpenThirdPartyModal,
 }: UseIntegrationProps) => {
   const { t } = useTranslation(["Ldap", "Settings", "Common"]);
-
-  const [documentServiceLocationData, setDocumentServiceLocationData] =
-    useState<TDocServiceLocation>();
 
   const getLDAPData = useCallback(async () => {
     isLdapAvailable && (await loadLDAP?.(t));
@@ -100,7 +99,7 @@ const useIntegration = ({
 
   const getDocumentServiceData = useCallback(async () => {
     await getDocumentServiceLocation?.().then((result) => {
-      setDocumentServiceLocationData(result);
+      setDocumentServiceLocation?.(result);
     });
   }, [getDocumentServiceLocation]);
 
@@ -133,7 +132,6 @@ const useIntegration = ({
   ]);
 
   return {
-    documentServiceLocationData,
     getSSOData,
     getPluginsData,
     getThirdPartyData,

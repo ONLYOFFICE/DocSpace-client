@@ -434,14 +434,19 @@ export default inject(
   ({ settingsStore, filesSettingsStore, clientLoadingStore }) => {
     const { currentColorScheme, integrationSettingsUrl, currentDeviceType } =
       settingsStore;
-    const { changeDocumentServiceLocation } = filesSettingsStore;
+    const {
+      changeDocumentServiceLocation,
+      documentServiceLocation: initialDocumentServiceData,
+    } = filesSettingsStore;
     const { showPortalSettingsLoader } = clientLoadingStore;
+
     return {
       changeDocumentServiceLocation,
       currentColorScheme,
       integrationSettingsUrl,
       currentDeviceType,
       showPortalSettingsLoader,
+      initialDocumentServiceData,
     };
   },
 )(observer(DocumentService));

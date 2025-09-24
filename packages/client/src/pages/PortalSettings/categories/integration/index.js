@@ -74,7 +74,6 @@ const IntegrationWrapper = (props) => {
   });
 
   const {
-    documentServiceLocationData,
     getSSOData,
     getPluginsData,
     getThirdPartyData,
@@ -129,12 +128,8 @@ const IntegrationWrapper = (props) => {
   if (standalone) {
     const documentServiceData = {
       id: "document-service",
-      name: t("DocumentService"),
-      content: (
-        <DocumentService
-          initialDocumentServiceData={documentServiceLocationData}
-        />
-      ),
+      name: t("Settings:DocumentService"),
+      content: <DocumentService />,
       onClick: async () => {
         clearAbortControllerArr();
         await getDocumentServiceData();

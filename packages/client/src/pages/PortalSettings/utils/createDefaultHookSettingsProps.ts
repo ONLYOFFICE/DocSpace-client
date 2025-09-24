@@ -139,6 +139,7 @@ export const createDefaultHookSettingsProps = ({
     getConsumers: setup?.getConsumers,
     fetchAndSetConsumers: setup?.fetchAndSetConsumers,
     setInitSMTPSettings: setup?.setInitSMTPSettings,
+    setDocumentServiceLocation: filesSettingsStore?.setDocumentServiceLocation,
     getDocumentServiceLocation: filesSettingsStore?.getDocumentServiceLocation,
     loadLDAP: ldapStore?.load,
     isLdapAvailable: currentQuotaStore?.isLdapAvailable,

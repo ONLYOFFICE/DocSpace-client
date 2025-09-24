@@ -80,7 +80,7 @@ export const ShareSelector: FC<ShareSelectorProps> = ({
       toastr.error(error as TData);
       console.error(error);
     } finally {
-      onBackClick();
+      onClose();
     }
   };
 

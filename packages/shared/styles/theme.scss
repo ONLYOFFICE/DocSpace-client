@@ -791,6 +791,7 @@
   --modal-dialog-text-color: #{$black};
   --modal-dialog-backdrop-bg-color: #{$blur-light};
   --modal-dialog-header-border-color: #{$gray-light-mid};
+  --modal-dialog-link-underline-color: #{$light-gray-dark};
 
   --modal-dialog-content-transform-x: 100%;
 }
@@ -800,6 +801,7 @@
   --modal-dialog-text-color: #{$white};
   --modal-dialog-backdrop-bg-color: #{$blur-dark};
   --modal-dialog-header-border-color: #{$gray-dark-strong};
+  --modal-dialog-link-underline-color: #{$dark-gray-dark};
 
   --modal-dialog-content-transform-x: 100%;
 
@@ -2858,4 +2860,16 @@
   --link-settings-joined-users-cell-background: #{$gray-dark-mid};
   --link-settings-joined-users-cell-icon: #{$dark-gray-dark};
   --link-settings-dropdown-border: 1px solid #{$gray-dark-strong};
+}
+
+.light {
+  --plugins-plugin-name-color: #{$gray};
+  --plugins-border-color: #{$gray-light-mid};
+  --plugins-error-status-color: #{$light-error-status};
+}
+
+.dark {
+  --plugins-plugin-name-color: #{$gray-dark};
+  --plugins-border-color: #{$gray-dark-strong};
+  --plugins-error-status-color: #{$dark-error-status};
 }

@@ -6,8 +6,6 @@
   "DeleteGroupTitle": "Izbriši skupino",
   "DeleteItems": "Izbrisali boste te elemente. ",
   "DeleteItemsSharedNote": "Upoštevajte, da ti ne bodo na voljo, če ste jih dali v skupno rabo z nekom drugim.",
-  "DeleteRoom": "Izbrisali boste to sobo. Ne boste je mogli obnoviti.",
-  "DeleteRooms": "Izbrisali boste te sobe. Ne boste jih mogli obnoviti.",
   "DeleteSharedNote": "Upoštevajte, da ne bo na voljo, če ste to dali v skupno rabo z nekom drugim.",
   "DeleteTemplate": "Ali res želite izbrisati predlogo sobe <1>«{{templateName}}»</1>? Predloge ne bo mogoče obnoviti.",
   "DeleteTemplates": "Ali res želite izbrisati izbrane predloge sob? Ne bo jih mogoče obnoviti.",

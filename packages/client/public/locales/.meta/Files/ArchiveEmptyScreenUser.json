@@ -3,19 +3,13 @@
   "content": "Rooms that have been archived will appear here.",
   "content_en_sha1_hash": "05ac670d31c702deb65adabc6bd0d48ebe2ed0bc",
   "created_at": "2025-05-19T21:30:55.286Z",
-  "updated_at": "2025-08-29T14:33:37.929Z",
+  "updated_at": "2025-09-22T10:04:13.699Z",
   "comment": {
     "text": "This translation key is used to display a message explaining that archived rooms are visible on an empty screen. It appears in a UI component related to folder management or organization views, and is intended to provide clarity to users on what they will see when viewing an empty archive.",
     "is_auto": true,
     "updated_at": "2025-05-20T09:40:09.479Z"
   },
   "usage": [
-    {
-      "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
-      "line_number": 122,
-      "context": "t(\"RoomEmptyContainerDescription\")\n );\n \n const archiveRoomsDescription =\n isVisitor || isCollaborator\n ? t(\"ArchiveEmptyScreenUser\")\n : t(\"ArchiveEmptyScreen\", { productName: t(\"Common:ProductName\") });\n \n const privateRoomHeader = t(\"PrivateRoomHeader\", {\n organizationName: logoText,\n });",
-      "module": "/packages/client"
-    },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
       "line_number": 211,

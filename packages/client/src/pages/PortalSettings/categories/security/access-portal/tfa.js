@@ -63,6 +63,7 @@ const TwoFactorAuth = (props) => {
   const {
     t,
     setIsInit,
+    isInit,
     currentColorScheme,
     tfaSettingsUrl,
     currentDeviceType,
@@ -122,6 +123,12 @@ const TwoFactorAuth = (props) => {
       setIsLoading(true);
     }
   }, [isMobileDevice]);
+
+  useEffect(() => {
+    if (isInit) {
+      setIsLoading(true);
+    }
+  }, []);
 
   useEffect(() => {
     if (!onSettingsSkeletonNotShown) return;
@@ -314,7 +321,7 @@ export const TfaSection = inject(({ settingsStore, setup, tfaStore }) => {
     appAvailable,
   } = tfaStore;
 
-  const { setIsInit } = setup;
+  const { setIsInit, isInit } = setup;
   const { currentColorScheme, tfaSettingsUrl, currentDeviceType } =
     settingsStore;
 
@@ -324,6 +331,7 @@ export const TfaSection = inject(({ settingsStore, setup, tfaStore }) => {
     smsAvailable,
     appAvailable,
     setIsInit,
+    isInit,
     currentColorScheme,
     tfaSettingsUrl,
     currentDeviceType,

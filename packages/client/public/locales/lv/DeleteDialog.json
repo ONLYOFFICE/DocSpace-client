@@ -6,8 +6,6 @@
   "DeleteGroupTitle": "Izdzēst grupu",
   "DeleteItems": "Jūs gatavojaties izdzēst šos vienumus. ",
   "DeleteItemsSharedNote": "Ņemiet vērā: ja tos kopīgojāt ar kādu personu, tas kļūs nepieejams.",
-  "DeleteRoom": "Jūs gatavojaties izdzēst šo telpu. Jūs nevarēsiet to atjaunot.",
-  "DeleteRooms": "Jūs gatavojaties izdzēst šīs telpas. Jūs nevarēsiet tos atjaunot.",
   "DeleteSharedNote": "Ņemiet vērā: ja tos kopīgojāt ar kādu, tas kļūs nepieejams.",
   "DeleteTemplate": "Vai tiešām vēlaties dzēst veidnes telpu <1>«{{templateName}}»</1>? Veidni nevar atjaunot.",
   "DeleteTemplates": "Vai tiešām vēlaties dzēst atlasītās telpu veidnes? Tās nevar atjaunot.",

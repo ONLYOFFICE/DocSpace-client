@@ -270,7 +270,7 @@ const DropDownItem = ({
         <Tooltip
           float
           openOnClick={isTouchDevice}
-          id={"drop-down-item-tooltip"}
+          id="drop-down-item-tooltip"
           getContent={TooltipContent}
           place="bottom-end"
         />

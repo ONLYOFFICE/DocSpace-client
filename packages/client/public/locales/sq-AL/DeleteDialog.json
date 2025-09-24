@@ -6,8 +6,6 @@
   "DeleteGroupTitle": "Fshini grupin",
   "DeleteItems": "Ju jeni gati t'i fshini këta artikuj.",
   "DeleteItemsSharedNote": "Ju lutem vini re se nëse i keni ndarë me dikë, ai do të bëhet i padisponueshëm.",
-  "DeleteRoom": "Ju jeni gati ta fshini këtë dhomë. Ju nuk do të jeni në gjendje ta rivendosni atë.",
-  "DeleteRooms": "Ju jeni gati t'i fshini këto dhoma. Ju nuk do të jeni në gjendje që t'i rivendosni ato.",
   "DeleteSharedNote": "Ju lutem vini re se nëse e keni ndarë me dikë, ai do të bëhet i padisponueshëm.",
   "DeleteTemplate": "A e dëshironi vërtet të fshani dhomën e modelit <1>«{{templateName}}»</1>? Modeli nuk mund të rivendoset.",
   "DeleteTemplates": "A ju vërtetë doni të fshani qendrueshmëritë e dhoma të zgjedhura? Ato nuk mund të rivendosen.",

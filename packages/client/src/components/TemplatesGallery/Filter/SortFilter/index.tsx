@@ -60,9 +60,12 @@ const SortFilter: FC<SortFilterProps> = ({ t, oformsFilter, sortOforms }) => {
 
   const onSort = (newSortBy: string) => {
     if (oformsFilter.sortBy === newSortBy) {
-      sortOforms(newSortBy, oformsFilter.sortOrder === "asc" ? "desc" : "asc");
+      sortOforms(
+        newSortBy,
+        oformsFilter.sortOrder === "ascending" ? "descending" : "ascending",
+      );
     } else {
-      sortOforms(newSortBy, "desc");
+      sortOforms(newSortBy, "descending");
     }
 
     setIsOpen(false);
@@ -103,7 +106,7 @@ const SortFilter: FC<SortFilterProps> = ({ t, oformsFilter, sortOforms }) => {
             <div>
               {sortData?.map((item) => {
                 const isSelected = oformsFilter.sortBy === item.key;
-                const isDescending = oformsFilter.sortOrder === "desc";
+                const isDescending = oformsFilter.sortOrder === "descending";
                 const itemClasses = [
                   styles.sortDropdownItem,
                   isSelected ? styles.selected : "",

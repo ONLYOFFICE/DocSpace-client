@@ -25,12 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import { DropDown } from "@docspace/shared/components/drop-down";
 import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { ComboButton } from "@docspace/shared/components/combobox/sub-components/ComboButton";
-import * as Styled from "./index.styled";
+import classNames from "classnames";
+import styles from "./MobileView.module.scss";
 
 const CategoryFilterMobile = ({
   t,
@@ -41,8 +43,6 @@ const CategoryFilterMobile = ({
   getCategoryTitle,
   filterOformsByCategory,
   setOformsCurrentCategory,
-
-  ...rest
 }) => {
   const scrollRef = useRef();
 
@@ -87,7 +87,7 @@ const CategoryFilterMobile = ({
   else height = calculatedHeight;
 
   return (
-    <Styled.CategoryFilterMobileWrapper {...rest}>
+    <div id="containerMobile" className={styles.categoryFilterMobileWrapper}>
       <ComboButton
         selectedOption={{
           label:
@@ -99,7 +99,9 @@ const CategoryFilterMobile = ({
         tabIndex={1}
       />
 
-      <Styled.CategoryFilterMobile
+      <DropDown
+        className={classNames(styles.categoryFilterMobile, "mainBtnDropdown")}
+        style={{ "--forced-height": `${height}px` }}
         open={isOpen}
         withBackdrop
         withBackground
@@ -111,8 +113,6 @@ const CategoryFilterMobile = ({
         directionX="right"
         fixedDirection
         isDefaultMode={true}
-        className="mainBtnDropdown"
-        forsedHeight={`${height}px`}
         clickOutsideAction={onCloseDropdown}
       >
         <Scrollbar
@@ -130,9 +130,12 @@ const CategoryFilterMobile = ({
 
           {!openedMenuItem
             ? [
-                <Styled.CategoryFilterItemMobile
+                <DropDownItem
                   key="view-all"
-                  className="dropdown-item"
+                  className={classNames(
+                    "dropdown-item",
+                    styles.categoryFilterItemMobile,
+                  )}
                   label={t("FormGallery:ViewAllTemplates")}
                   onClick={onViewAllTemplates}
                   style={{ paddingLeft: "0" }}
@@ -140,16 +143,19 @@ const CategoryFilterMobile = ({
                 <DropDownItem
                   isSeparator
                   key="separator"
-                  className="huge-separator"
+                  className={classNames("huge-separator", "isSeparator")}
                 />,
               ]
             : null}
 
           {!openedMenuItem
             ? menuItems.map((item) => (
-                <Styled.CategoryFilterItemMobile
+                <DropDownItem
                   key={item.key}
-                  className={`item-by-${item.key}`}
+                  className={classNames(
+                    `item-by-${item.key}`,
+                    styles.categoryFilterItemMobile,
+                  )}
                   label={item.label}
                   onClick={() => onOpenMenuItem(item)}
                   style={{ paddingLeft: "0" }}
@@ -157,16 +163,17 @@ const CategoryFilterMobile = ({
                 />
               ))
             : openedMenuItem.categories.map((category) => (
-                <Styled.CategoryFilterItemMobile
+                <DropDownItem
                   key={category.id}
+                  className={styles.categoryFilterItemMobile}
                   label={getCategoryTitle(category)}
                   onClick={() => onFilterByCategory(category)}
                   style={{ paddingLeft: "0" }}
                 />
               ))}
         </Scrollbar>
-      </Styled.CategoryFilterMobile>
-    </Styled.CategoryFilterMobileWrapper>
+      </DropDown>
+    </div>
   );
 };
 

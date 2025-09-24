@@ -1,0 +1,91 @@
+// (c) Copyright Ascensio System SIA 2009-2025
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+
+@use "@docspace/shared/styles/mixins";
+
+.filter {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-bottom: 22px;
+
+  .formOnlyFilters {
+    height: 32px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    padding-right: 24px;
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  .generalFilters {
+    height: 32px;
+    width: 100%;
+    max-width: 693px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+    gap: 8px;
+  }
+
+  .formOnlyFilters:empty + .generalFilters {
+    justify-content: space-between;
+    max-width: 100%;
+  }
+
+  .viewButton {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    box-sizing: border-box;
+    border: 1px solid var(--gray-strong);
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    .iconView {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  @include mixins.mobile {
+    flex-direction: column-reverse;
+    padding-bottom: 16px;
+
+    .formOnlyFilters {
+      width: 100%;
+      padding-right: 0;
+    }
+
+    .generalFilters {
+      max-width: 100%;
+    }
+  }
+
+  // RTL support
+  :global([dir="rtl"]) & {
+    @include mixins.mobile {
+      flex-direction: column;
+    }
+  }
+}

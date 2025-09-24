@@ -24,40 +24,36 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
+@use "@docspace/shared/styles/mixins";
 
-import { DropDown } from "@docspace/shared/components/drop-down";
-import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { injectDefaultTheme, mobile, tablet } from "@docspace/shared/utils";
-
-export const CategoryFilterMobileWrapper = styled.div`
+.categoryFilterMobileWrapper {
   width: 100%;
-  max-width: 280px;
+
   position: relative;
 
-  .combo-button-label {
+  :global(.combo-button-label) {
     font-weight: 400;
     font-size: 13px;
     line-height: 20px;
   }
 
-  @media ${tablet} {
+  @include mixins.tablet {
     max-width: 100%;
   }
 
-  @media ${mobile} {
+  @include mixins.mobile {
     position: static;
   }
-`;
+}
 
-export const CategoryFilterMobile = styled(DropDown)`
+.categoryFilterMobile {
   position: fixed;
   top: 36px;
   inset-inline-start: 0;
   width: 100%;
 
   padding: 6px 0;
-  height: ${({ forsedHeight }) => forsedHeight};
+  height: var(--forced-height);
 
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
@@ -66,37 +62,31 @@ export const CategoryFilterMobile = styled(DropDown)`
   overflow: hidden;
   text-overflow: ellipsis;
 
-  @media ${mobile} {
+  @include mixins.mobile {
     top: auto;
     bottom: 0;
   }
 
-  .scroll-body {
+  :global(.scroll-body) {
     padding-inline-end: 0 !important;
     padding-inline-start: 16px !important;
   }
-`;
+}
 
-export const CategoryFilterItemMobile = styled(DropDownItem).attrs(
-  injectDefaultTheme,
-)`
+.categoryFilterItemMobile {
   width: 100%;
   height: 36px;
   box-sizing: border-box;
-
   font-size: 13px;
   font-weight: 600;
   line-height: 20px;
-
   padding: 8px 16px;
 
-  ${({ isSeparator }) =>
-    isSeparator &&
-    css`
-      margin: 6px 16px;
-    `}
+  &.isSeparator {
+    margin: 6px 16px;
+  }
 
-  .submenu-arrow {
+  :global(.submenu-arrow) {
     margin-block: 0;
     margin-inline: auto 0;
 
@@ -105,14 +95,8 @@ export const CategoryFilterItemMobile = styled(DropDownItem).attrs(
       width: 12px;
     }
 
-    ${({ isMobileOpen }) =>
-      isMobileOpen &&
-      css`
-        transform: rotate(270deg);
-      `}
+    &.isMobileOpen {
+      transform: rotate(270deg);
+    }
   }
-`;
-
-export const StyledSubItemMobile = styled(DropDownItem)`
-  padding-inline-start: 28px;
-`;
+}

@@ -24,90 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
 import { ReactSVG } from "react-svg";
 
 import ViewTilesReactSvg from "PUBLIC_DIR/images/view-tiles.react.svg?url";
 import ViewChangeReactUrl from "PUBLIC_DIR/images/view-change.react.svg?url";
 
-import { injectDefaultTheme, mobile } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/shared/themes";
 import CategoryFilter from "./CategoryFilter";
 import LanguageFilter from "./LanguageFilter";
 import SearchFilter from "./SearchFilter";
 import SortFilter from "./SortFilter";
-
-export const StyledFilter = styled.div.attrs(injectDefaultTheme)`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  padding-bottom: 22px;
-
-  .form-only-filters {
-    height: 32px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 8px;
-    padding-right: 24px;
-
-    &:empty {
-      display: none;
-    }
-  }
-
-  .general-filters {
-    height: 32px;
-    width: 100%;
-    max-width: 693px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: end;
-    gap: 8px;
-  }
-
-  .form-only-filters:empty + .general-filters {
-    justify-content: space-between;
-    max-width: 100%;
-  }
-
-  .view-button {
-    width: 32px;
-    height: 32px;
-
-    min-width: 32px;
-
-    box-sizing: border-box;
-
-    border: 1px solid ${globalColors.grayStrong};
-    border-radius: 3px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .icon-view {
-      width: 16px;
-      height: 16px;
-    }
-  }
-
-  @media ${mobile} {
-    flex-direction: ${({ theme }) =>
-      theme.interfaceDirection === "rtl" ? `column` : `column-reverse`};
-    padding-bottom: 16px;
-
-    .form-only-filters {
-      width: 100%;
-      padding-right: 0;
-    }
-    .general-filters {
-      max-width: 100%;
-    }
-  }
-`;
+import styles from "./Filter.module.scss";
 
 const SectionFilterContent = (props) => {
   const { setShowOneTile, isShowOneTile, viewMobile, isShowInitSkeleton } =
@@ -118,24 +44,24 @@ const SectionFilterContent = (props) => {
   };
 
   return (
-    <StyledFilter>
-      <div className="form-only-filters">
+    <div className={styles.filter}>
+      <div className={styles.formOnlyFilters}>
         <CategoryFilter isShowInitSkeleton={isShowInitSkeleton} />
         <LanguageFilter isShowInitSkeleton={isShowInitSkeleton} />
       </div>
-      <div className="general-filters">
+      <div className={styles.generalFilters}>
         <SearchFilter />
         <SortFilter />
         {viewMobile ? (
-          <div className="view-button" onClick={onClickViewChange}>
+          <div className={styles.viewButton} onClick={onClickViewChange}>
             <ReactSVG
               src={isShowOneTile ? ViewTilesReactSvg : ViewChangeReactUrl}
-              className="icon-view"
+              className={styles.iconView}
             />
           </div>
         ) : null}
       </div>
-    </StyledFilter>
+    </div>
   );
 };
 

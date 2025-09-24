@@ -26,7 +26,10 @@
 
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import * as Styled from "./index.styled";
+import { DropDown } from "@docspace/shared/components/drop-down";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import classNames from "classnames";
+import styles from "./DesktopView.module.scss";
 
 const SubList = ({
   categoryType,
@@ -50,13 +53,20 @@ const SubList = ({
   };
 
   return (
-    <Styled.CategoryFilterSubList
+    <DropDown
       open={isDropdownOpen}
       isSubHovered={isSubHovered}
-      marginTop={marginTop}
+      className={classNames(
+        `dropdown-sub sub-by-${categoryType}`,
+        styles.categoryFilterSubList,
+        {
+          [styles.open]: isDropdownOpen,
+          [styles.isSubHovered]: isSubHovered,
+        },
+      )}
+      style={{ "--margin-top": marginTop }}
       id={`category-sub-list-${categoryType}`}
-      className={`dropdown-sub sub-by-${categoryType}`}
-      directionX="left"
+      directionX="right"
       directionY="bottom"
       manualY="0px"
       manualX="0px"
@@ -74,8 +84,11 @@ const SubList = ({
         const categoryTitle = getCategoryTitle(category);
         const onCategoryClick = () => onFilterByCategory(category);
         return (
-          <Styled.CategoryFilterSubListItem
-            className="dropdown-item"
+          <DropDownItem
+            className={classNames(
+              "dropdown-item",
+              styles.categoryFilterSubListItem,
+            )}
             height={36}
             heightTablet={36}
             key={category.id}
@@ -94,10 +107,10 @@ const SubList = ({
             >
               {categoryTitle}
             </div>
-          </Styled.CategoryFilterSubListItem>
+          </DropDownItem>
         );
       })}
-    </Styled.CategoryFilterSubList>
+    </DropDown>
   );
 };
 

@@ -26,58 +26,12 @@
 
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import { mobile } from "@docspace/shared/utils";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
-
-import styled, { css } from "styled-components";
-
+import classNames from "classnames";
+import { isMobile } from "@docspace/shared/utils";
 import CategoryFilterDesktop from "./DesktopView";
 import CategoryFilterMobile from "./MobileView";
-
-export const StyledCategoryFilterWrapper = styled.div`
-  width: 100%;
-
-  ${({ noLocales }) =>
-    !noLocales &&
-    css`
-      @media ${mobile} {
-        max-width: calc(100% - 49px);
-      }
-    `}
-
-  .mobileView {
-    display: none;
-  }
-  .desktopView {
-    display: block;
-  }
-
-  @media ${mobile} {
-    .mobileView {
-      display: block;
-    }
-    .desktopView {
-      display: none;
-    }
-  }
-`;
-
-export const StyledSkeleton = styled(RectangleSkeleton)`
-  width: 220px;
-  height: 32px;
-
-  @media ${mobile} {
-    width: 100%;
-  }
-
-  ${({ noLocales }) =>
-    !noLocales &&
-    css`
-      @media ${mobile} {
-        max-width: calc(100% - 49px);
-      }
-    `}
-`;
+import styles from "./CategoryFilter.module.scss";
 
 const CategoryFilter = ({
   oformsFilter,
@@ -92,6 +46,16 @@ const CategoryFilter = ({
   isShowInitSkeleton,
 }) => {
   const [menuItems, setMenuItems] = useState([]);
+  const [viewMobile, setViewMobile] = useState(false);
+
+  const onCheckView = () => setViewMobile(isMobile());
+
+  useEffect(() => {
+    onCheckView();
+    window.addEventListener("resize", onCheckView);
+
+    return () => window.removeEventListener("resize", onCheckView);
+  }, [onCheckView]);
 
   useEffect(() => {
     (async () => {
@@ -144,16 +108,26 @@ const CategoryFilter = ({
     filterOformsByLocaleIsLoading ||
     !(categoryFilterLoaded && languageFilterLoaded)
   )
-    return <StyledSkeleton $noLocales={noLocales} />;
+    return (
+      <RectangleSkeleton
+        className={classNames(styles.skeleton, {
+          [styles.withLocales]: !noLocales,
+        })}
+      />
+    );
 
   return (
-    <StyledCategoryFilterWrapper
-      noLocales={noLocales}
-      className="categoryFilterWrapper"
+    <div
+      className={classNames(styles.categoryFilterWrapper, {
+        [styles.withLocales]: !noLocales,
+      })}
     >
-      <CategoryFilterDesktop className="desktopView" menuItems={menuItems} />
-      <CategoryFilterMobile className="mobileView" menuItems={menuItems} />
-    </StyledCategoryFilterWrapper>
+      {viewMobile ? (
+        <CategoryFilterMobile menuItems={menuItems} />
+      ) : (
+        <CategoryFilterDesktop menuItems={menuItems} />
+      )}
+    </div>
   );
 };
 export default inject(({ oformsStore }) => ({

@@ -25,22 +25,20 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import { ComboBox } from "@docspace/shared/components/combobox";
 import { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import * as Styled from "./index.styled";
+import classNames from "classnames";
+import styles from "./DesktopView.module.scss";
 import SubList from "./SubList";
 
 const CategoryFilterDesktop = ({
   t,
-
   menuItems,
-
   currentCategory,
   getCategoryTitle,
   filterOformsByCategory,
-
-  ...rest
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [hoveredSub, setHoveredSub] = useState(null);
@@ -62,11 +60,11 @@ const CategoryFilterDesktop = ({
   const onViewAllTemplates = () => filterOformsByCategory("", "");
 
   return (
-    <Styled.CategoryFilterWrapper {...rest}>
-      <Styled.CategoryFilter
+    <>
+      <ComboBox
+        className={styles.categoryFilter}
         id="comboBoxLanguage"
         tabIndex={1}
-        className="combobox"
         opened={isOpen}
         onToggle={onOpenDropdown}
         onBackdropClick={onBackdropClick}
@@ -93,22 +91,25 @@ const CategoryFilterDesktop = ({
         }}
         advancedOptions={
           <>
-            <Styled.CategoryFilterItem
+            <DropDownItem
               id="ViewAllTemplates"
               key="ViewAllTemplates"
               title={t("FormGallery:ViewAllTemplates")}
-              className="dropdown-item"
+              className={classNames("dropdown-item", styles.categoryFilterItem)}
               label={t("FormGallery:ViewAllTemplates")}
               onClick={onViewAllTemplates}
               onMouseEnter={() => setHoveredSub(null)}
             />
             <DropDownItem isSeparator />
             {menuItems?.map((item) => (
-              <Styled.CategoryFilterItem
+              <DropDownItem
                 id={item.key}
                 key={item.key}
                 title={item.label}
-                className={`item-by-${item.key} item-by-first-level`}
+                className={classNames(
+                  `item-by-${item.key} item-by-first-level`,
+                  styles.categoryFilterItem,
+                )}
                 label={item.label}
                 onMouseEnter={() => setHoveredSub(item.key)}
                 isSubMenu
@@ -129,7 +130,7 @@ const CategoryFilterDesktop = ({
           onCloseDropdown={onCloseDropdown}
         />
       ))}
-    </Styled.CategoryFilterWrapper>
+    </>
   );
 };
 export default inject(({ oformsStore }) => ({

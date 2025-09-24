@@ -1,17 +1,12 @@
 {
   "DeleteAllGroupDescription": "Seçilmiş qruplar silinəcək. Qruplardakı istifadəçilər {{productName}}-dən silinməyəcək. Davam etmək istədiyinizə əminsiniz?",
   "DeleteAllGroupsTitle": "Qrupları silin",
-  "DeleteFolder": "Bu qovluğu silmək üzrəsiniz.",
   "DeleteGroupDescription": "{{groupName}} qrupu silinəcək. Qrupdakı istifadəçilər {{productName}}-dən silinməyəcək. Davam etmək istədiyinizə əminsiniz?",
   "DeleteGroupTitle": "Qrupu silin",
-  "DeleteItems": "Bu elementləri silmək üzrəsiniz. ",
-  "DeleteItemsSharedNote": "Nəzərə alın ki, əgər onları kiminləsə paylaşmısınızsa, onlar əlçatan olmayacaq.",
-  "DeleteSharedNote": "Nəzərə alın ki, onu kiminləsə paylaşmısınızsa, ondan istifadə etmək mümkün deyil.",
   "DeleteTemplate": "<1>«{{templateName}}»</1> şablon otağını silmək istədiyinizdən əminsiniz? Şablonu bərpa etmək mümkün deyil.",
   "DeleteTemplates": "Seçilmiş otaq şablonlarını silmək istədiyinizdən əminsiniz? Onları bərpa etmək mümkün deyil.",
-  "FolderPermanentlyDeleted": "Qovluq 30 gün ərzində həmişəlik silinəcək.",
-  "ItemsPermanentlyDeleted": "Elementlər 30 gün ərzində həmişəlik silinəcək.",
   "UnsubscribeButton": "Abunəlikdən çıx",
   "UnsubscribeNote": "Siyahıda göstərilən elementlərdən abunəliyi dayandırmağı əminsinizmi?",
-  "UnsubscribeTitle": "Abunəlikdən çıxma təsdiqi"
+  "UnsubscribeTitle": "Abunəlikdən çıxma təsdiqi",
+  "FileDeletedAfter": "Fayl 30 gün ərzində həmişəlik silinəcək."
 }

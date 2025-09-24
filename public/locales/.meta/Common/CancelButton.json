@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2025-09-22T13:39:52.263Z",
+  "updated_at": "2025-09-24T13:10:16.912Z",
   "comment": {
     "text": "This translation key is used for the \"Cancel\" button in various UI elements such as dialogs and form buttons. It provides the text to be displayed when a user clicks the cancel action, allowing them to terminate an operation or return to their previous state. This key appears in files such as Dialog.js, QuotaForm, and ShareCollectSelector.",
     "is_auto": true,
@@ -144,7 +144,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 336,
+      "line_number": 259,
       "context": "testId=\"delete_dialog_modal_submit\"\n />\n <Button\n id=\"delete-file-modal_cancel\"\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size=\"normal\"\n scale\n onClick={onClose}\n isLoading={isLoading}\n testId=\"delete_dialog_modal_cancel\"",
       "module": "/packages/client"
     },
@@ -329,9 +329,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Footer.js",
-      "line_number": 78,
-      "context": "/>\n <Button\n scale\n size=\"normal\"\n onClick={onCloseAction}\n label={t(\"Common:CancelButton\")}\n testId=\"settings_plugin_cancel_button\"\n />\n </StyledContainer>\n );\n };",
+      "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Footer.tsx",
+      "line_number": 69,
+      "context": "/>\n <Button\n scale\n size={ButtonSize.normal}\n onClick={onCloseAction}\n label={t(\"Common:CancelButton\")}\n testId=\"settings_plugin_cancel_button\"\n />\n </div>\n );\n };",
       "module": "/packages/client"
     },
     {
@@ -692,18 +692,6 @@
       "file_path": "/packages/doceditor/src/components/ConflictResolveDialog/ConflictResolveDialog.tsx",
       "line_number": 50,
       "context": "<ConflictResolve\n isLoading={false}\n visible={visible}\n onClose={reject}\n onSubmit={resolve}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n submitButtonLabel={t(\"Common:OKButton\")}\n messageText={\n <Trans\n t={t}\n ns=\"Common\"",
-      "module": "/packages/doceditor"
-    },
-    {
-      "file_path": "/packages/doceditor/src/components/DeleteFileDialog.tsx",
-      "line_number": 74,
-      "context": "})}\n />\n <Button\n id=\"delete-file-button_cancel\"\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n aria-label={t(\"Common:CancelButton\")}\n />",
-      "module": "/packages/doceditor"
-    },
-    {
-      "file_path": "/packages/doceditor/src/components/DeleteFileDialog.tsx",
-      "line_number": 74,
-      "context": "})}\n />\n <Button\n id=\"delete-file-button_cancel\"\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n aria-label={t(\"Common:CancelButton\")}\n />",
       "module": "/packages/doceditor"
     },
     {

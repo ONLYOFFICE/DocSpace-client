@@ -2483,7 +2483,7 @@ class ContextOptionsStore {
         ["select", "open"],
         ["share", "show-info"],
         ["mark-as-favorite", "download", "move", "copy-to", "rename"],
-        ["remove-from-favorites", "delete"],
+        ["remove-from-favorites", "restore", "delete"],
       ];
 
       const items = resultOptions.filter((opt) => !opt.isSeparator);

@@ -25,14 +25,27 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useCallback, useEffect, useState } from "react";
+import { withTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
+import styled from "styled-components";
+
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 
-import { withTranslation, Trans } from "react-i18next";
+import { getDialogContent } from "./DeleteDialog.helper";
 
-import { inject, observer } from "mobx-react";
+const StyledModalWrapper = styled(ModalDialog)`
+  strong {
+    display: inline-block;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: top;
+  }
+`;
 
 const DeleteDialogComponent = (props) => {
   const {
@@ -183,110 +196,6 @@ const DeleteDialogComponent = (props) => {
     });
   };
 
-  const moveToTrashNoteText = () => {
-    const isFolder = selection[0]?.isFolder || !!selection[0]?.parentId;
-    const isSingle = selection.length === 1;
-    const isThirdParty = selection[0]?.providerKey;
-
-    if (isTemplate) {
-      return isSingle ? (
-        <Trans
-          i18nKey="DeleteTemplate"
-          ns="DeleteDialog"
-          t={t}
-          values={{ templateName: selection[0].title }}
-          components={{ 1: <Text fontWeight={600} as="span" /> }}
-        />
-      ) : (
-        t("DeleteTemplates")
-      );
-    }
-
-    if (isRoomDelete) {
-      return (
-        <>
-          <Trans t={t} i18nKey="DeleteRoom" ns="DeleteDialog">
-            The room <strong>\"{{ roomName: selection[0].title }}\"</strong>
-            will be permanently deleted. All data and user accesses will be
-            lost.
-          </Trans>{" "}
-          {t("Common:WantToContinue")}
-        </>
-      );
-    }
-
-    if (isRecycleBinFolder) {
-      return isSingle ? (
-        isFolder ? (
-          t("DeleteFolder")
-        ) : (
-          <>
-            <>{t("Common:DeleteFile")} </>
-            <>{t("Common:FilePermanentlyDeleted")} </>
-            <>{t("Common:WantToContinue")}</>
-          </>
-        )
-      ) : (
-        <>
-          <>{t("DeleteItems")} </>
-          <>{t("ItemsPermanentlyDeleted")} </>
-          <>{t("Common:WantToContinue")}</>
-        </>
-      );
-    }
-
-    if (isPersonalRoom) {
-      return isSingle ? (
-        isFolder ? (
-          <>
-            <>{t("DeleteFolder")} </>
-            <>{t("FolderPermanentlyDeleted")} </>
-            <>{t("Common:WantToContinue")}</>
-          </>
-        ) : (
-          <>
-            <>{t("Common:DeleteFile")} </>
-            <>{t("Common:FilePermanentlyDeleted")} </>
-            <>{t("Common:WantToContinue")}</>
-          </>
-        )
-      ) : (
-        <>
-          <>{t("DeleteItems")} </>
-          <>{t("ItemsPermanentlyDeleted")} </>
-          <>{t("Common:WantToContinue")}</>
-        </>
-      );
-    }
-
-    if (isRoom || isTemplatesFolder) {
-      return isSingle ? (
-        isFolder ? (
-          <>
-            <>{t("DeleteFolder")} </>
-            <>{t("DeleteSharedNote")} </>
-            {!isThirdParty ? <>{t("FolderPermanentlyDeleted")} </> : null}
-            <>{t("Common:WantToContinue")}</>
-          </>
-        ) : (
-          <>
-            <>{t("Common:DeleteFile")} </>
-            <>{t("DeleteSharedNote")} </>
-            {!isThirdParty ? <>{t("Common:FilePermanentlyDeleted")} </> : null}
-            <>{t("Common:WantToContinue")}</>
-          </>
-        )
-      ) : (
-        <>
-          <>{t("DeleteItems")} </>
-          <>{t("DeleteItemsSharedNote")} </>
-          {!isThirdParty ? <>{t("ItemsPermanentlyDeleted")} </> : null}
-          <>{t("Common:WantToContinue")}</>
-        </>
-      );
-    }
-  };
-
   const title = isTemplate
     ? `${t("Files:DeleteTemplate")}?`
     : isRoomDelete
@@ -297,7 +206,18 @@ const DeleteDialogComponent = (props) => {
           ? t("Common:Confirmation")
           : moveToTrashTitle();
 
-  const noteText = unsubscribe ? t("UnsubscribeNote") : moveToTrashNoteText();
+  const noteText = unsubscribe
+    ? t("UnsubscribeNote")
+    : getDialogContent(
+        t,
+        selection,
+        isTemplate,
+        isRoomDelete,
+        isRecycleBinFolder,
+        isPersonalRoom,
+        isRoom,
+        isTemplatesFolder,
+      );
 
   const accessButtonLabel = isTemplate
     ? t("Common:Delete")
@@ -317,7 +237,7 @@ const DeleteDialogComponent = (props) => {
     isRoomDelete || isTemplate ? !isChecked : !selection.length;
 
   return (
-    <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
+    <StyledModalWrapper isLoading={!tReady} visible={visible} onClose={onClose}>
       <ModalDialog.Header>{title}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text>{noteText}</Text>
@@ -356,7 +276,7 @@ const DeleteDialogComponent = (props) => {
           testId="delete_dialog_modal_cancel"
         />
       </ModalDialog.Footer>
-    </ModalDialog>
+    </StyledModalWrapper>
   );
 };
 

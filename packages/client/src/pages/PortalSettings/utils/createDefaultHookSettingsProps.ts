@@ -142,6 +142,8 @@ export const createDefaultHookSettingsProps = ({
     getDocumentServiceLocation: filesSettingsStore?.getDocumentServiceLocation,
     loadLDAP: ldapStore?.load,
     isLdapAvailable: currentQuotaStore?.isLdapAvailable,
+    isThirdPartyAvailable: currentQuotaStore?.isThirdPartyAvailable,
+    setOpenThirdPartyModal: setup?.setOpenThirdPartyModal,
   },
   dataImport: {
     isMigrationInit: importAccountsStore?.isMigrationInit,

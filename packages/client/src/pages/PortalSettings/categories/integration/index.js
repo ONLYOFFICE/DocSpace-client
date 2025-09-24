@@ -74,7 +74,6 @@ const IntegrationWrapper = (props) => {
   });
 
   const {
-    openThirdPartyModal,
     documentServiceLocationData,
     getSSOData,
     getPluginsData,
@@ -110,7 +109,7 @@ const IntegrationWrapper = (props) => {
     {
       id: "third-party-services",
       name: t("Translations:ThirdPartyTitle"),
-      content: <ThirdParty openModal={openThirdPartyModal} />,
+      content: <ThirdParty />,
       onClick: async () => {
         clearAbortControllerArr();
         await getThirdPartyData();

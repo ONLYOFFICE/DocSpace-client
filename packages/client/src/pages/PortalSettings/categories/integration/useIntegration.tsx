@@ -48,6 +48,7 @@ export type UseIntegrationProps = {
   loadLDAP?: LdapFormStore["load"];
   isLdapAvailable?: CurrentQuotasStore["isLdapAvailable"];
   isThirdPartyAvailable?: CurrentQuotasStore["isThirdPartyAvailable"];
+  setOpenThirdPartyModal?: SetupStore["setOpenThirdPartyModal"];
 };
 
 const useIntegration = ({
@@ -62,10 +63,10 @@ const useIntegration = ({
   loadLDAP,
   isLdapAvailable,
   isThirdPartyAvailable,
+  setOpenThirdPartyModal,
 }: UseIntegrationProps) => {
   const { t } = useTranslation(["Ldap", "Settings", "Common"]);
 
-  const [openThirdPartyModal, setOpenThirdPartyModal] = useState(false);
   const [documentServiceLocationData, setDocumentServiceLocationData] =
     useState<TDocServiceLocation>();
 
@@ -85,9 +86,9 @@ const useIntegration = ({
     const urlParts = window.location.href.split("?");
     if (urlParts.length > 1 && isThirdPartyAvailable) {
       const queryValue = urlParts[1].split("=")[1];
-      await fetchAndSetConsumers?.(queryValue).then(
-        (isConsumerExist) => isConsumerExist && setOpenThirdPartyModal(true),
-      );
+      await fetchAndSetConsumers?.(queryValue).then((isConsumerExist) => {
+        isConsumerExist && setOpenThirdPartyModal?.(true);
+      });
     } else {
       await getConsumers?.();
     }
@@ -132,9 +133,7 @@ const useIntegration = ({
   ]);
 
   return {
-    openThirdPartyModal,
     documentServiceLocationData,
-
     getSSOData,
     getPluginsData,
     getThirdPartyData,

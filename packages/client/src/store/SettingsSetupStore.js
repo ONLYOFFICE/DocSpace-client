@@ -126,6 +126,8 @@ class SettingsSetupStore {
 
   platformModalData = {};
 
+  openThirdPartyModal = false;
+
   constructor(
     tfaStore,
     authStore,
@@ -656,6 +658,10 @@ class SettingsSetupStore {
       platform: data.platform,
       browser: data.browser,
     };
+  };
+
+  setOpenThirdPartyModal = (state) => {
+    this.openThirdPartyModal = state;
   };
 }
 

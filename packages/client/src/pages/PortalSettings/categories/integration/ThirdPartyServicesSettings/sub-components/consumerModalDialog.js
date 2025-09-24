@@ -180,7 +180,7 @@ class ConsumerModalDialog extends React.Component {
 
   mapTokenNameToState = () => {
     const { selectedConsumer } = this.props;
-    selectedConsumer.props.forEach((prop) => {
+    selectedConsumer.props?.forEach((prop) => {
       this.requiredRef.push(prop.name);
 
       this.setState({
@@ -328,7 +328,7 @@ class ConsumerModalDialog extends React.Component {
         <ModalDialog.Body>
           <div style={{ padding: "16px 0 16px" }}>{consumerInstruction}</div>
           <>
-            {selectedConsumer.props.map((prop, i) =>
+            {selectedConsumer.props?.map((prop, i) =>
               this.inputsRender(prop, i),
             )}
           </>

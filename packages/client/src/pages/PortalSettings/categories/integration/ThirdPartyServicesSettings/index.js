@@ -130,11 +130,14 @@ class ThirdPartyServices extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { t, tReady, openModal } = this.props;
+    const { t, tReady, openThirdPartyModal } = this.props;
     if (prevProps.tReady !== tReady && tReady)
       setDocumentTitle(t("ThirdPartyAuthorization"));
 
-    if (openModal !== prevProps.openModal && openModal) {
+    if (
+      openThirdPartyModal !== prevProps.openThirdPartyModal &&
+      openThirdPartyModal
+    ) {
       this.onModalOpen();
     }
   }
@@ -322,7 +325,6 @@ ThirdPartyServices.propTypes = {
   integrationSettingsUrl: PropTypes.string,
   updateConsumerProps: PropTypes.func.isRequired,
   setSelectedConsumer: PropTypes.func.isRequired,
-  openModal: PropTypes.bool,
 };
 
 export default inject(({ setup, settingsStore, currentQuotaStore }) => {
@@ -338,6 +340,7 @@ export default inject(({ setup, settingsStore, currentQuotaStore }) => {
     updateConsumerProps,
     setSelectedConsumer,
     fetchAndSetConsumers,
+    openThirdPartyModal,
   } = setup;
   const { consumers } = integration;
   const { isThirdPartyAvailable } = currentQuotaStore;
@@ -353,5 +356,6 @@ export default inject(({ setup, settingsStore, currentQuotaStore }) => {
     isThirdPartyAvailable,
     supportEmail: companyInfoSettingsData?.email,
     logoText,
+    openThirdPartyModal,
   };
 })(withTranslation(["Settings", "Common"])(observer(ThirdPartyServices)));

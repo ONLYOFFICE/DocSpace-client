@@ -29,6 +29,8 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useNavigate, useLocation } from "react-router";
 
+import withLoading from "SRC_DIR/HOCs/withLoading";
+
 import { Text } from "@docspace/shared/components/text";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
@@ -39,15 +41,18 @@ import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorag
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 
 import styles from "./customization.module.scss";
+import LoaderCustomization from "../sub-components/loaderCustomization";
 
 const AdManagementComponent = ({
   isMobileView,
   displayBanners,
   setDisplayBanners,
+  isLoadedPage,
 }: {
   isMobileView: boolean;
   displayBanners: boolean;
   setDisplayBanners: (value: boolean) => void;
+  isLoadedPage: boolean;
 }) => {
   const { t } = useTranslation(["Settings", "Common"]);
   const navigate = useNavigate();
@@ -126,6 +131,8 @@ const AdManagementComponent = ({
     setShowReminder(false);
   };
 
+  if (!isLoadedPage) return <LoaderCustomization adManagement />;
+
   return (
     <div className={styles.wrapper}>
       {!isMobileView ? (
@@ -186,4 +193,4 @@ export const AdManagement = inject<TStore>(({ settingsStore }) => {
     displayBanners,
     setDisplayBanners,
   };
-})(observer(AdManagementComponent));
+})(withLoading(observer(AdManagementComponent)));

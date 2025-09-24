@@ -31,6 +31,8 @@ import { useNavigate, useLocation } from "react-router";
 import { inject, observer } from "mobx-react";
 import isEqual from "lodash/isEqual";
 
+import withLoading from "SRC_DIR/HOCs/withLoading";
+
 import { Text } from "@docspace/shared/components/text";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
@@ -47,6 +49,7 @@ import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import useCommon from "../useCommon";
 import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
+import LoaderCustomization from "../sub-components/loaderCustomization";
 
 interface Props {
   isMobileView: boolean;
@@ -54,6 +57,7 @@ interface Props {
   loadBaseInfo: (page: string) => Promise<void>;
   common: CommonStore;
   settingsStore: SettingsStore;
+  isLoadedPage: boolean;
 }
 
 const StyledWrapper = styled.div`
@@ -79,6 +83,7 @@ const ConfigureDeepLinkComponent = (props: Props) => {
     loadBaseInfo,
     common,
     settingsStore,
+    isLoadedPage,
   } = props;
 
   const { t } = useTranslation(["Settings", "Common"]);
@@ -170,6 +175,8 @@ const ConfigureDeepLinkComponent = (props: Props) => {
     setShowReminder(false);
   };
 
+  if (!isLoadedPage) return <LoaderCustomization deepLink />;
+
   return (
     <StyledWrapper>
       {!isMobileView ? (
@@ -238,4 +245,4 @@ export const ConfigureDeepLink = inject<TStore>(({ settingsStore, common }) => {
       await initSettings(page);
     },
   };
-})(observer(ConfigureDeepLinkComponent));
+})(withLoading(observer(ConfigureDeepLinkComponent)));

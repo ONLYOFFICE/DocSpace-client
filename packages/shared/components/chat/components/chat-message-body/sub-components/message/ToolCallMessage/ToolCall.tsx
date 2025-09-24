@@ -35,6 +35,7 @@ import styles from "../../../ChatMessageBody.module.scss";
 import { ToolCallHeader } from "./ToolCallHeader";
 import { ToolCallBody } from "./ToolCallBody";
 import { ToolCallPlacement, ToolCallStatus } from "./ToolCall.enum";
+import classNames from "classnames";
 
 type ToolCallProps = {
   content: TToolCallContent;
@@ -50,7 +51,11 @@ export const ToolCall = ({ content, status, placement }: ToolCallProps) => {
     status === ToolCallStatus.Finished;
 
   return (
-    <div className={styles.toolCall}>
+    <div
+      className={classNames(styles.toolCall, {
+        [styles.inDialog]: placement === ToolCallPlacement.ConfirmDialog,
+      })}
+    >
       <ToolCallHeader
         content={content}
         collapsed={collapsed}

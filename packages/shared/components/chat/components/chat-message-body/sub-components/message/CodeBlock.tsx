@@ -37,6 +37,7 @@ import { useTheme } from "../../../../../../hooks/useTheme";
 
 import { Text } from "../../../../../text";
 import { IconButton } from "../../../../../icon-button";
+import { Scrollbar } from "../../../../../scrollbar";
 
 import styles from "../../ChatMessageBody.module.scss";
 
@@ -60,14 +61,19 @@ const CodeBlock = ({ language, content }: MessageCodeBlockProps) => {
           onClick={onCopy}
         />
       </div>
-      <SyntaxHighlighter
-        language={language}
-        style={isBase ? a11yLight : a11yDark}
-        className={styles.codeBody}
-        customStyle={isBase ? {} : { background: "none" }}
+      <Scrollbar
+        className={styles.codeBlockScroll}
+        translateContentSizeYToHolder
       >
-        {content}
-      </SyntaxHighlighter>
+        <SyntaxHighlighter
+          language={language}
+          style={isBase ? a11yLight : a11yDark}
+          className={styles.codeBody}
+          customStyle={isBase ? {} : { background: "none" }}
+        >
+          {content}
+        </SyntaxHighlighter>
+      </Scrollbar>
     </div>
   );
 };

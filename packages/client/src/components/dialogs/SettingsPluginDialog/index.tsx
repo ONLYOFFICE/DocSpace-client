@@ -94,6 +94,8 @@ const SettingsPluginDialog = ({
     onDelete();
   };
 
+  if (!plugin) return null;
+
   return (
     <ModalDialog
       visible={settingsPluginDialogVisible}
@@ -102,7 +104,7 @@ const SettingsPluginDialog = ({
       withBodyScroll
     >
       <ModalDialog.Header>
-        <Header t={t} name={plugin?.name} />
+        <Header t={t} name={plugin.name} />
       </ModalDialog.Header>
       <ModalDialog.Body>
         <div style={{ marginTop: "16px" }}>

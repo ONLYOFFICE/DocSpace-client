@@ -130,7 +130,7 @@ const useDeveloperTools = ({
     }
   }, [getApiKeys, getApiKeyPermissions, addAbortControllers]);
 
-  // Waiting for translations to load for the API page, since there’s no request logic there.
+  // Waiting for translations to load for the API page, since there is no request logic there.
   const waiters = React.useRef<((ready: boolean) => void)[]>([]);
   React.useEffect(() => {
     if (translationsReady) {

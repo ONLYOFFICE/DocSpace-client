@@ -24,16 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { mobile } from "@docspace/shared/utils";
-import styled from "styled-components";
-import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
+@use "@docspace/shared/styles/mixins";
 
-export const ErrorView = styled(EmptyScreenContainer)`
+.errorView {
   padding: 56px 0 0 0;
   position: relative;
   box-sizing: border-box;
 
-  @media ${mobile} {
+  @include mixins.mobile {
     padding: 16px 0 0 0;
     width: 100%;
     max-width: 100%;
@@ -43,23 +41,25 @@ export const ErrorView = styled(EmptyScreenContainer)`
     margin-bottom: 40px;
     height: 360px !important;
     width: 360px !important;
-    @media ${mobile} {
+
+    @include mixins.mobile {
       height: 210px !important;
       width: 210px !important;
     }
   }
 
-  .ec-header {
+  :global(.ec-header) {
     font-size: 23px;
     line-height: 30px;
-    @media ${mobile} {
+
+    @include mixins.mobile {
       font-size: 21px;
       line-height: 28px;
     }
   }
 
-  .ec-buttons {
+  :global(.ec-buttons) {
     width: 100%;
     max-width: 100%;
   }
-`;
+}

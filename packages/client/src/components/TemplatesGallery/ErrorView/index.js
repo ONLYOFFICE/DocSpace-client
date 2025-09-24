@@ -25,21 +25,23 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { Button } from "@docspace/shared/components/button";
+import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 import ErrorImageSvgUrl from "PUBLIC_DIR/images/errors/error500.svg?url";
 import { isMobile as isMobileUtils } from "@docspace/shared/utils";
 import { withTranslation } from "react-i18next";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
-import * as Styled from "./index.styled";
+import styles from "./ErrorView.module.scss";
 
 const ErrorView = ({ t, onCloseClick }) => {
   const isMobile = isMobileUtils();
 
   return (
     <Scrollbar style={{ height: "calc(100vh - 173px)" }}>
-      <Styled.ErrorView
+      <EmptyScreenContainer
+        className={styles.errorView}
         imageSrc={ErrorImageSvgUrl}
         imageAlt="Error Screen Gallery image"
-        headerText={t("FormGallery:ErrorViewHeader")}
+        headerText="Gallery is temporarily unavailable"
         descriptionText={t("FormGallery:ErrorViewDescription")}
         buttons={
           <Button

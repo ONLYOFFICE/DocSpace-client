@@ -157,11 +157,13 @@ const TemplateGallery = (props: {
           <div className={styles.header}>
             <div className={styles.headerContent}>
               <div className={styles.headerText}>Template gallery</div>
-              <Button
-                className={styles.headerButton}
-                onClick={onOpenSubmitToGalleryDialog}
-                label={t("Common:SubmitToFormGallery")}
-              />
+              {oformsLoadError ? null : (
+                <Button
+                  className={styles.headerButton}
+                  onClick={onOpenSubmitToGalleryDialog}
+                  label={t("Common:SubmitToFormGallery")}
+                />
+              )}
             </div>
 
             <IconButton

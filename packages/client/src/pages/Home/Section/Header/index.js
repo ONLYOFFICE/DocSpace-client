@@ -675,10 +675,10 @@ const SectionHeaderContent = (props) => {
   };
 
   const isPlusButtonVisible = () => {
-    if (!isContactsPage || isContactsInsideGroupPage) return true;
+    if (!isContactsPage || isContactsGroupsPage) return true;
 
     const lengthList = getContextOptionsPlus()?.length;
-    if (lengthList === 0) return false;
+    if (!lengthList || lengthList === 0) return false;
 
     return true;
   };

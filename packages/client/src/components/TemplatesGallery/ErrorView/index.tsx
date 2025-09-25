@@ -43,7 +43,7 @@ const ErrorView: React.FC<ErrorViewProps> = ({ t, onCloseClick }) => {
         className={styles.errorView}
         imageSrc={ErrorImageSvgUrl}
         imageAlt="Error Screen Gallery image"
-        headerText="Gallery is temporarily unavailable"
+        headerText={t("FormGallery:ErrorViewHeader")}
         descriptionText={t("FormGallery:ErrorViewDescription")}
         buttons={
           <Button

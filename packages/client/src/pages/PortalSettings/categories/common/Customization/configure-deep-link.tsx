@@ -31,6 +31,8 @@ import { useNavigate, useLocation } from "react-router";
 import { inject, observer } from "mobx-react";
 import isEqual from "lodash/isEqual";
 
+import withLoading from "SRC_DIR/HOCs/withLoading";
+
 import { Text } from "@docspace/shared/components/text";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
@@ -47,6 +49,7 @@ import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import useCommon from "../useCommon";
 import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
+import LoaderCustomization from "../sub-components/loaderCustomization";
 
 interface Props {
   isMobileView: boolean;
@@ -54,6 +57,9 @@ interface Props {
   loadBaseInfo: (page: string) => Promise<void>;
   common: CommonStore;
   settingsStore: SettingsStore;
+  isLoaded: boolean;
+  isLoadedPage: boolean;
+  setIsLoadedConfigureDeepLink: (value: boolean) => void;
 }
 
 const StyledWrapper = styled.div`
@@ -79,9 +85,12 @@ const ConfigureDeepLinkComponent = (props: Props) => {
     loadBaseInfo,
     common,
     settingsStore,
+    isLoaded,
+    isLoadedPage,
+    setIsLoadedConfigureDeepLink,
   } = props;
 
-  const { t } = useTranslation(["Settings", "Common"]);
+  const { t, ready } = useTranslation(["Settings", "Common"]);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -97,6 +106,8 @@ const ConfigureDeepLinkComponent = (props: Props) => {
   const [type, setType] = useState(0);
   const [showReminder, setShowReminder] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+
+  const isLoadedSetting = isLoaded && ready;
 
   const getSettings = () => {
     const currentSettings = getFromSessionStorage("currentConfigureDeepLink");
@@ -130,6 +141,10 @@ const ConfigureDeepLinkComponent = (props: Props) => {
     window.addEventListener("resize", checkWidth);
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
+
+  useEffect(() => {
+    if (isLoadedSetting) setIsLoadedConfigureDeepLink(isLoadedSetting);
+  }, [isLoadedSetting]);
 
   useEffect(() => {
     if (isMobileView) getCommonInitialValue();
@@ -169,6 +184,8 @@ const ConfigureDeepLinkComponent = (props: Props) => {
     saveToSessionStorage("currentConfigureDeepLink", defaultType);
     setShowReminder(false);
   };
+
+  if (!isLoadedPage) return <LoaderCustomization deepLink />;
 
   return (
     <StyledWrapper>
@@ -227,8 +244,13 @@ const ConfigureDeepLinkComponent = (props: Props) => {
 };
 
 export const ConfigureDeepLink = inject<TStore>(({ settingsStore, common }) => {
-  const isMobileView = settingsStore.currentDeviceType === DeviceType.mobile;
-  const { deepLinkSettings, initSettings } = common;
+  const isMobileView = settingsStore.deviceType === DeviceType.mobile;
+  const {
+    deepLinkSettings,
+    initSettings,
+    isLoaded,
+    setIsLoadedConfigureDeepLink,
+  } = common;
   return {
     isMobileView,
     deepLinkSettings,
@@ -237,5 +259,7 @@ export const ConfigureDeepLink = inject<TStore>(({ settingsStore, common }) => {
     loadBaseInfo: async (page: string) => {
       await initSettings(page);
     },
+    isLoaded,
+    setIsLoadedConfigureDeepLink,
   };
-})(observer(ConfigureDeepLinkComponent));
+})(withLoading(observer(ConfigureDeepLinkComponent)));

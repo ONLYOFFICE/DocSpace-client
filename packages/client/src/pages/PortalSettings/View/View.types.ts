@@ -24,50 +24,44 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
+export type TView =
+  | "customization"
+  | "security"
+  | "backup"
+  | "restore"
+  | "integration"
+  | "data-import"
+  | "management"
+  | "developer-tools"
+  | "delete-data"
+  | "payments"
+  | "bonus"
+  | "services"
+  | "";
 
-const StyledLoader = styled.div`
-  width: 100%;
-
-  .description {
-    max-width: 700px;
-    margin-bottom: 20px;
-  }
-
-  .request {
-    max-width: 700px;
-    margin-bottom: 20px;
-  }
-
-  .service-wrapper {
-    max-width: 700px;
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(293px, 1fr));
-    gap: 20px;
-  }
-`;
-
-const ThirdPartyLoader = () => {
-  const rectangles = new Array(6).fill(0);
-
-  return (
-    <StyledLoader>
-      <RectangleSkeleton className="description" height="87px" />
-      <RectangleSkeleton className="request" height="162px" />
-
-      <div className="service-wrapper">
-        {rectangles.map((_, index) => (
-          <RectangleSkeleton
-            key={`third-party-loader-${index}`}
-            height="120px"
-            borderRadius="6px"
-          />
-        ))}
-      </div>
-    </StyledLoader>
-  );
+export type ViewProps = {
+  setIsPortalSettingsLoading: TStore["clientLoadingStore"]["setIsPortalSettingsLoading"];
+  loadBaseInfo: (page: string) => Promise<void>;
+  isMobileView: boolean;
+  settingsStore: TStore["settingsStore"];
+  tfaStore: TStore["tfaStore"];
+  backupStore: TStore["backup"];
+  ssoFormStore: TStore["ssoStore"];
+  init: TStore["storageManagement"]["init"];
+  standaloneInit: TStore["paymentStore"]["standaloneInit"];
+  setup: TStore["setup"];
+  authStore: TStore["authStore"];
+  currentQuotaStore: TStore["currentQuotaStore"];
+  pluginStore: TStore["pluginStore"];
+  filesSettingsStore: TStore["filesSettingsStore"];
+  webhooksStore: TStore["webhooksStore"];
+  oauthStore: TStore["oauthStore"];
+  brandingStore: TStore["brandingStore"];
+  importAccountsStore: TStore["importAccountsStore"];
+  ldapStore: TStore["ldapStore"];
+  common: TStore["common"];
+  paymentStore: TStore["paymentStore"];
+  servicesStore: TStore["servicesStore"];
+  currentTariffStatusStore: TStore["currentTariffStatusStore"];
+  clearAbortControllerArr: TStore["settingsStore"]["clearAbortControllerArr"];
 };
-
-export default ThirdPartyLoader;

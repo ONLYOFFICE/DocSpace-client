@@ -64,7 +64,7 @@ const PluginPage = ({
 
   showPortalSettingsLoader,
 }: PluginsProps) => {
-  const { t } = useTranslation(["WebPlugins", "Common"]);
+  const { t, ready } = useTranslation(["WebPlugins", "Common"]);
 
   const onDrop = (files: File[]) => {
     const formData = new FormData();
@@ -78,7 +78,8 @@ const PluginPage = ({
   }, [t]);
 
   return showPortalSettingsLoader ||
-    (!isEmptyList && pluginList.length === 0) ? (
+    (!isEmptyList && pluginList.length === 0) ||
+    !ready ? (
     <StyledContainer>
       <ListLoader withUpload={withUpload} />
     </StyledContainer>

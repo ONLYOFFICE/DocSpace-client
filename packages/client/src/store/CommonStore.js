@@ -64,6 +64,10 @@ class CommonStore {
 
   isLoadedWelcomePageSettings = false;
 
+  isLoadedAdManagement = false;
+
+  isLoadedConfigureDeepLink = false;
+
   greetingSettingsIsDefault = true;
 
   deepLinkSettings = null;
@@ -239,6 +243,14 @@ class CommonStore {
 
   setIsLoadedDNSSettings = (isLoadedDNSSettings) => {
     this.isLoadedDNSSettings = isLoadedDNSSettings;
+  };
+
+  setIsLoadedAdManagement = (isLoadedAdManagement) => {
+    this.isLoadedAdManagement = isLoadedAdManagement;
+  };
+
+  setIsLoadedConfigureDeepLink = (isLoadedConfigureDeepLink) => {
+    this.isLoadedConfigureDeepLink = isLoadedConfigureDeepLink;
   };
 
   setIsLoadedCustomization = (isLoadedCustomization) => {

@@ -718,10 +718,6 @@ class FilesStore {
         this.isHidePagination = true;
       });
 
-      this.setActiveFiles(
-        this.activeFiles.filter((x) => x.id !== foundFile.id),
-      );
-
       runInAction(() => {
         if (
           this.files.length === 0 &&
@@ -3179,6 +3175,7 @@ class FilesStore {
           runInAction(() => {
             this.setRoomsFilter(roomsFilter);
             this.setFolders(newFolders);
+            this.clearActiveOperations(fileIds, folderIds);
           });
 
           showToast && showToast();
@@ -3189,7 +3186,6 @@ class FilesStore {
         .finally(() => {
           if (fileIds) this.setTempActionFilesIds([]);
           if (folderIds) this.setTempActionFoldersIds([]);
-          this.clearActiveOperations(fileIds, folderIds);
         });
     }
     api.files

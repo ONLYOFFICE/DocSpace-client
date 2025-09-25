@@ -61,14 +61,7 @@ import {
 } from "./sub-components/StyledPortalIntegration";
 
 const PortalIntegration = (props) => {
-  const {
-    t,
-    currentColorScheme,
-    sdkLink,
-    theme,
-    tReady,
-    showPortalSettingsLoader,
-  } = props;
+  const { t, currentColorScheme, sdkLink, theme, tReady } = props;
 
   const isSmall = useRef(
     (() => {
@@ -160,8 +153,6 @@ const PortalIntegration = (props) => {
     };
   }, []);
 
-  if (showPortalSettingsLoader) return null;
-
   return (
     <SDKContainer>
       <CategoryDescription theme={theme}>
@@ -204,15 +195,13 @@ const PortalIntegration = (props) => {
   );
 };
 
-export default inject(({ settingsStore, clientLoadingStore }) => {
+export default inject(({ settingsStore }) => {
   const { theme, currentColorScheme, sdkLink } = settingsStore;
-  const { showPortalSettingsLoader } = clientLoadingStore;
 
   return {
     theme,
     currentColorScheme,
     sdkLink,
-    showPortalSettingsLoader,
   };
 })(
   withTranslation([

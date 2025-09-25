@@ -59,6 +59,7 @@ const MainContainer = styled.div`
 const TrustedMail = (props) => {
   const {
     t,
+    tReady,
     trustedDomainsType,
     trustedDomains,
     setMailDomainSettings,
@@ -217,7 +218,7 @@ const TrustedMail = (props) => {
     setShowReminder(false);
   };
 
-  if (currentDeviceType !== DeviceType.desktop && !isLoading) {
+  if ((currentDeviceType !== DeviceType.desktop && !isLoading) || !tReady) {
     return <TrustedMailLoader />;
   }
 

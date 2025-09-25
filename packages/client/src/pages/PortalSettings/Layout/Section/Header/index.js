@@ -27,6 +27,7 @@
 import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import ActionsHeaderTouchReactSvgUrl from "PUBLIC_DIR/images/actions.header.touch.react.svg?url";
+
 import React from "react";
 import { inject, observer } from "mobx-react";
 import styled, { useTheme } from "styled-components";
@@ -494,6 +495,7 @@ export default inject(
       "Common",
       "JavascriptSdk",
       "OAuth",
+      "Ldap",
     ])(observer(SectionHeaderContent)),
   ),
 );

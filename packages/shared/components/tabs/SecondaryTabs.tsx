@@ -354,7 +354,7 @@ const SecondaryTabs = (props: TabsProps) => {
       )}
       {items[selectedItemIndex]?.content ? (
         <div
-          style={{ overflow: "hidden" }}
+          // style={{ overflow: "hidden" }}
           className={`${styles.tabsBody} tabs-body`}
         >
           {items[selectedItemIndex].content}

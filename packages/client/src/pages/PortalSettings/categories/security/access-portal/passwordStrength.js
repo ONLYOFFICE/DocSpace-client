@@ -78,6 +78,7 @@ const MainContainer = styled.div`
 const PasswordStrength = (props) => {
   const {
     t,
+    tReady,
     setPortalPasswordSettings,
     passwordSettings,
     currentColorScheme,
@@ -257,7 +258,7 @@ const PasswordStrength = (props) => {
     setShowReminder(false);
   };
 
-  if (currentDeviceType == DeviceType.mobile && !isLoaded) {
+  if ((currentDeviceType === DeviceType.mobile && !isLoaded) || !tReady) {
     return <PasswordLoader />;
   }
 

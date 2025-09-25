@@ -55,7 +55,7 @@ const SMTPSettings = (props) => {
     if (ready) setDocumentTitle(t("Settings:SMTPSettings"));
   }, [ready]);
 
-  if (showPortalSettingsLoader) return <SettingsSMTPSkeleton />;
+  if (showPortalSettingsLoader || !ready) return <SettingsSMTPSkeleton />;
 
   return (
     <StyledComponent withoutExternalLink={!integrationSettingsUrl}>

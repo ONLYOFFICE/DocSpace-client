@@ -61,7 +61,7 @@ const SingleSignOn = (props) => {
     if (ready) setDocumentTitle(t("Settings:SingleSignOn"));
   }, [ready]);
 
-  if (showPortalSettingsLoader && !isMobileView && isSSOAvailable)
+  if ((showPortalSettingsLoader && !isMobileView && isSSOAvailable) || !ready)
     return <SSOLoader />;
 
   return (

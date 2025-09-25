@@ -95,7 +95,11 @@ const SubmitToGalleryTile: FC<SubmitToGalleryTileProps> = ({
         />
 
         <div className={styles.info}>
-          <div className={styles.title}>ONLYOFFICE Template Gallery</div>
+          <div className={styles.title}>
+            {t("FormGallery:GalleryTitle", {
+              organizationName: logoText,
+            })}
+          </div>
           <div className={styles.body}>
             {t("Common:SubmitToGalleryBlockBody", {
               organizationName: logoText,

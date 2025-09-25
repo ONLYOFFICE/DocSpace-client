@@ -156,7 +156,9 @@ const TemplateGallery = (props: {
         <div className={styles.templatesGallery}>
           <div className={styles.header}>
             <div className={styles.headerContent}>
-              <div className={styles.headerText}>Template gallery</div>
+              <div className={styles.headerText}>
+                {t("Common:TemplateGallery")}
+              </div>
               {oformsLoadError ? null : (
                 <Button
                   className={styles.headerButton}
@@ -199,7 +201,9 @@ const TemplateGallery = (props: {
       <div className={styles.containerMobile}>
         <div className={styles.templatesGalleryMobile}>
           <div className={styles.header}>
-            <div className={styles.headerText}>Template gallery</div>
+            <div className={styles.headerText}>
+              {t("Common:TemplateGallery")}
+            </div>
             <IconButton
               size={17}
               className={styles.closeButton}

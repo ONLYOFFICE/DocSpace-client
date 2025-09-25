@@ -1,17 +1,12 @@
 {
   "DeleteAllGroupDescription": "Die ausgewählten Gruppen werden gelöscht. Benutzer in den Gruppen werden nicht aus {{productName}} entfernt. Sind Sie sicher, dass Sie fortfahren möchten?",
   "DeleteAllGroupsTitle": "Gruppen löschen",
-  "DeleteFolder": "Sie möchten diesen Ordner löschen. ",
   "DeleteGroupDescription": "Die Gruppe {{groupName}} wird gelöscht. Benutzer in der Gruppe werden nicht aus {{productName}} entfernt. Sind Sie sicher, dass Sie fortfahren möchten?",
   "DeleteGroupTitle": "Gruppe löschen",
-  "DeleteItems": "Sie löschen diese Objekte. ",
-  "DeleteItemsSharedNote": "Bitte beachten Sie, dass die Daten nicht mehr verfügbar sind, wenn Sie diese mit jemandem geteilt haben.",
-  "DeleteSharedNote": "Bitte beachten Sie, dass die Datei nicht mehr verfügbar ist, wenn Sie diese mit jemandem geteilt haben.",
   "DeleteTemplate": "Möchten Sie den Vorlagenraum <1>«{{templateName}}»</1> wirklich löschen? Die Vorlage kann nicht wiederhergestellt werden.",
   "DeleteTemplates": "Möchten Sie die ausgewählten Raumvorlagen wirklich löschen? Sie können nicht wiederhergestellt werden.",
-  "FolderPermanentlyDeleted": "Der Ordner wird nach 30 Tagen endgültig gelöscht.",
-  "ItemsPermanentlyDeleted": "Objekte werden innerhalb von 30 Tagen endgültig gelöscht.",
   "UnsubscribeButton": "Abbestellen",
   "UnsubscribeNote": "Sind Sie sicher, dass Sie die ausgewählten Elemente aus der Liste abbestellen möchten?",
-  "UnsubscribeTitle": "Abbestellungsbestätigung"
+  "UnsubscribeTitle": "Abbestellungsbestätigung",
+  "FileDeletedAfter": "Die Datei wird nach 30 Tagen endgültig gelöscht."
 }

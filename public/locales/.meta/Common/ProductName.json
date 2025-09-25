@@ -3,7 +3,7 @@
   "content": "DocSpace",
   "content_en_sha1_hash": "ce0b96eab5006b875f6c4a6c31ad73c3c86edcf5",
   "created_at": "2025-05-19T21:30:47.504Z",
-  "updated_at": "2025-09-22T13:39:52.213Z",
+  "updated_at": "2025-09-24T13:10:16.898Z",
   "comment": {
     "text": "This translation key is used for the \"From Portal\" button label, which indicates that a document can be uploaded from DocSpace. It appears in a dropdown menu on a main button in a shell interface. Translators should provide a translated version of \"From Portal\" with the product name inserted.",
     "is_auto": true,
@@ -374,6 +374,12 @@
       "file_path": "/packages/client/src/components/dialogs/ReducedRightsDialog/index.tsx",
       "line_number": 51,
       "context": "t={t}\n ns=\"Files\"\n i18nKey=\"YourUserTypeHasChanged\"\n values={{\n userType: t(\"Common:Guest\"),\n productName: t(\"Common:ProductName\"),\n adminName,\n }}\n components={{ 1: <span style={{ fontWeight: 600 }} /> }}\n />\n <StyledText>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Info.tsx",
+      "line_number": 92,
+      "context": "<Tooltip\n anchorSelect=\"#plugin_version\"\n place=\"bottom\"\n getContent={() =>\n t(\"WebPlugins:PluginIsNotCompatible\", {\n productName: t(\"Common:ProductName\"),\n })\n }\n />\n </>\n ) : null}",
       "module": "/packages/client"
     },
     {
@@ -959,6 +965,12 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/Plugins/sub-components/PluginItem.tsx",
+      "line_number": 123,
+      "context": "<Tooltip\n anchorSelect={`#${badgeId.replace(/\\./g, \"\\\\.\")}`}\n place=\"bottom\"\n getContent={() =>\n t(\"WebPlugins:PluginIsNotCompatible\", {\n productName: t(\"ProductName\"),\n })\n }\n />\n ) : null}",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/Plugins/sub-components/UploadDescription.tsx",
       "line_number": 14,
       "context": "t,\n }: UploadDecsriptionProps) => {\n return (\n <StyledUploadDescription>\n <Text className=\"upload-description-text\">\n {t(\"UploadDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n {apiPluginSDKLink ? (\n <Link\n className=\"link-learn-more\"\n color={currentColorScheme.main?.accent}",
@@ -1355,6 +1367,12 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/store/PluginStore.ts",
+      "line_number": 295,
+      "context": ");\n \n if (!isPluginCompatible) {\n toastr.error(\n t(\"PluginIsNotCompatible\", {\n productName: t(\"Common:ProductName\"),\n }),\n );\n } else {\n toastr.success(t(\"PluginLoadedSuccessfully\"));\n }",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
       "line_number": 668,
       "context": "isOwner && {\n id: \"accounts-add_administrator\",\n className: \"main-button_drop-down\",\n icon: PersonAdminReactSvgUrl,\n label: t(\"Common:PortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n }),\n onClick: () => this.inviteUser(EmployeeType.Admin),\n \"data-type\": EmployeeType.Admin,\n action: EmployeeType.Admin,\n key: \"administrator\",",
@@ -1416,7 +1434,7 @@
     },
     {
       "file_path": "/packages/login/src/app/(root)/consent/page.client.tsx",
-      "line_number": 292,
+      "line_number": 295,
       "context": "dataTestId=\"terms_of_service_link\"\n >\n terms of service\n </Link>\n . You can revoke this consent at any time in your{\" \"}\n {{ productName: t(\"Common:ProductName\") }} account settings.\n </Trans>\n </Text>\n </StyledDescriptionContainer>\n <StyledUserContainer>\n <div className=\"block\">",
       "module": "/packages/login"
     },

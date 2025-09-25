@@ -1,17 +1,12 @@
 {
   "DeleteAllGroupDescription": "Os grupos selecionados serão excluídos. Os usuários dos grupos não serão removidos do {{productName}}. Você tem certeza que quer continuar?",
   "DeleteAllGroupsTitle": "Excluir grupos",
-  "DeleteFolder": "Você está prestes a excluir esta pasta. ",
   "DeleteGroupDescription": "O grupo {{groupName}} será excluído. Os usuários do grupo não serão removidos do {{productName}}. Você tem certeza que quer continuar?",
   "DeleteGroupTitle": "Excluir grupo",
-  "DeleteItems": "Você está prestes a excluir esses itens. ",
-  "DeleteItemsSharedNote": "Observe que se você os compartilhou com alguém, eles ficarão indisponíveis.",
-  "DeleteSharedNote": "Observe que se você o compartilhou com alguém, ele ficará indisponível.",
   "DeleteTemplate": "Você realmente deseja excluir a sala modelo <1>«{{templateName}}»</1>? O modelo não pode ser restaurado.",
   "DeleteTemplates": "Você realmente deseja excluir os modelos de sala selecionados? Eles não podem ser restaurados.",
-  "FolderPermanentlyDeleted": "A pasta será excluída permanentemente em 30 dias.",
-  "ItemsPermanentlyDeleted": "Os itens serão excluídos permanentemente em 30 dias.",
   "UnsubscribeButton": "Cancelar assinatura",
   "UnsubscribeNote": "Você tem certeza de que deseja cancelar a inscrição dos itens selecionados da lista?",
-  "UnsubscribeTitle": "Cancelar a confirmação da inscrição"
+  "UnsubscribeTitle": "Cancelar a confirmação da inscrição",
+  "FileDeletedAfter": "O arquivo será excluído permanentemente em 30 dias."
 }

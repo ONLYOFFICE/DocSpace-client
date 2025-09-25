@@ -39,6 +39,7 @@ export type UseIntegrationProps = {
   isSSOAvailable?: CurrentQuotasStore["isSSOAvailable"];
   init?: SsoFormStore["init"];
   isInit?: SsoFormStore["isInit"];
+  isPluginsInit?: PluginStore["isInit"];
   updatePlugins?: PluginStore["updatePlugins"];
   getConsumers?: SetupStore["getConsumers"];
   fetchAndSetConsumers?: SetupStore["fetchAndSetConsumers"];
@@ -55,6 +56,7 @@ const useIntegration = ({
   isSSOAvailable,
   init,
   isInit,
+  isPluginsInit,
   updatePlugins,
   getConsumers,
   fetchAndSetConsumers,
@@ -77,8 +79,8 @@ const useIntegration = ({
   }, [isSSOAvailable, isInit, init]);
 
   const getPluginsData = useCallback(async () => {
-    await updatePlugins?.(true);
-  }, [updatePlugins]);
+    isPluginsInit && (await updatePlugins?.(true));
+  }, [isPluginsInit, updatePlugins]);
 
   const getThirdPartyData = useCallback(async () => {
     const urlParts = window.location.href.split("?");

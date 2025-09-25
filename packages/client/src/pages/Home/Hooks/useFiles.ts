@@ -65,6 +65,7 @@ export type UseFilesProps = {
   userId: string;
 
   selectedFolderStore: SelectedFolderStore;
+  currentExtensionGallery: OformsStore["currentExtensionGallery"];
 };
 
 const useFiles = ({
@@ -81,6 +82,7 @@ const useFiles = ({
 
   gallerySelected,
   isVisibleInfoPanelTemplateGallery,
+  currentExtensionGallery,
   userId,
 
   selectedFolderStore,
@@ -283,7 +285,7 @@ const useFiles = ({
             selectedFolderStore.parentRoomType === FolderType.FormRoom;
 
           const payload = {
-            extension: "pdf",
+            extension: currentExtensionGallery.replace(".", ""),
             id: -1,
             fromTemplate: true,
             title: (

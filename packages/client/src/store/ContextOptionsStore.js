@@ -1157,34 +1157,24 @@ class ContextOptionsStore {
     cb && cb();
   };
 
-  onCreateOform = async (navigate) => {
-    const { oformFromFolderId } = this.oformsStore;
-    const { getFolderInfo } = this.filesStore;
-    const { getPublicKey } = this.filesActionsStore;
+  onCreateTemplate = async () => {
+    this.oformsStore.setTemplatesGalleryVisible(false);
+    this.oformsStore.setIsVisibleInfoPanelTemplateGallery(false);
 
-    hideInfoPanel();
+    const event = new Event(Events.CREATE);
 
-    const filesFilter = FilesFilter.getDefault();
-    filesFilter.folder = this.oformsStore.oformFromFolderId;
+    const payload = {
+      extension: this.oformsStore.currentExtensionGallery.replace(".", ""),
+      id: -1,
+      fromTemplate: true,
+      title: this.oformsStore.gallerySelected.attributes.name_form,
+      openEditor: true,
+      edit: true,
+    };
 
-    const currentFolder = await getFolderInfo(oformFromFolderId);
-    const publicKey = await getPublicKey(currentFolder);
-    if (publicKey) filesFilter.key = publicKey;
+    event.payload = payload;
 
-    const filterUrlParams = filesFilter.toUrlParams();
-
-    const url = getCategoryUrl(
-      this.filesStore.categoryType,
-      filesFilter.folder,
-    );
-
-    navigate(
-      combineUrl(
-        window.ClientConfig?.proxy?.url,
-        config.homepage,
-        `${url}?${filterUrlParams}`,
-      ),
-    );
+    window.dispatchEvent(event);
   };
 
   onShowOformTemplateInfo = (item) => {
@@ -1206,7 +1196,7 @@ class ContextOptionsStore {
       {
         key: "create",
         label: t("Common:Create"),
-        onClick: () => this.onCreateOform(navigate),
+        onClick: () => this.onCreateTemplate(navigate),
       },
       {
         key: "template-info",
@@ -1848,7 +1838,7 @@ class ContextOptionsStore {
       {
         id: "option_submit-to-gallery",
         key: "submit-to-gallery",
-        label: t("Common:SubmitToFormGallery"),
+        label: "Submit to Template Gallery",
         icon: FormFileReactSvgUrl,
         onClick: () => this.onClickSubmitToFormGallery(item),
         isOutsideLink: true,

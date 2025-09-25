@@ -58,4 +58,5 @@ export interface TilesProps {
   setTemplatesGalleryVisible: (isVisible: boolean) => void;
   isShowInitSkeleton: boolean;
   setIsVisibleInfoPanelTemplateGallery: (visible: boolean) => void;
+  onCreateTemplate: () => void;
 }

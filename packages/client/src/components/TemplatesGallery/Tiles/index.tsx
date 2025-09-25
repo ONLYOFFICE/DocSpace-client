@@ -28,7 +28,7 @@ import { Key, useEffect } from "react";
 import { observer, inject } from "mobx-react";
 
 import { withTranslation } from "react-i18next";
-import { useNavigate } from "react-router";
+
 import type { FC } from "react";
 import type { TilesProps, TFile } from "./Tiles.types";
 import FileTile from "./FileTile";
@@ -49,12 +49,10 @@ const Tiles: FC<TilesProps> = ({
   smallPreview,
   setIsVisibleInfoPanelTemplateGallery,
   viewMobile,
-  onCreateOform,
+  onCreateTemplate,
   setTemplatesGalleryVisible,
   isShowInitSkeleton,
 }) => {
-  const navigate = useNavigate();
-
   useEffect(() => {
     setOformFilesLoaded(tReady && oformFiles?.length > 0);
   }, [tReady, oformFiles]);
@@ -67,7 +65,7 @@ const Tiles: FC<TilesProps> = ({
 
   const onClick = (item: { id: Key | null | undefined }) => {
     setGallerySelected(item);
-    onCreateOform(navigate);
+    onCreateTemplate();
     setTemplatesGalleryVisible(false);
   };
 
@@ -127,7 +125,7 @@ export default inject<TStore>(
     categoryFilterLoaded: oformsStore.categoryFilterLoaded,
     languageFilterLoaded: oformsStore.languageFilterLoaded,
     oformFilesLoaded: oformsStore.oformFilesLoaded,
-    onCreateOform: contextOptionsStore.onCreateOform,
+    onCreateTemplate: contextOptionsStore.onCreateTemplate,
     setTemplatesGalleryVisible: oformsStore.setTemplatesGalleryVisible,
     setIsVisibleInfoPanelTemplateGallery:
       oformsStore.setIsVisibleInfoPanelTemplateGallery,

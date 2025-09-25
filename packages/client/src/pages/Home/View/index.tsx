@@ -48,6 +48,7 @@ import useProfileBody, {
 } from "../../Profile/Section/Body/useProfileBody";
 import useContacts, { UseContactsProps } from "../Hooks/useContacts";
 import useFiles, { UseFilesProps } from "../Hooks/useFiles";
+import OformsStore from "SRC_DIR/store/OformsStore";
 
 type ViewProps = UseContactsProps &
   UseFilesProps &
@@ -65,6 +66,7 @@ type ViewProps = UseContactsProps &
     roomsAbortController: Nullable<AbortController>;
 
     showHeaderLoader: ClientLoadingStore["showHeaderLoader"];
+    currentExtensionGallery: OformsStore["currentExtensionGallery"];
   };
 
 const View = ({
@@ -100,6 +102,7 @@ const View = ({
 
   gallerySelected,
   isVisibleInfoPanelTemplateGallery,
+  currentExtensionGallery,
   userId,
 
   selectedFolderStore,
@@ -170,6 +173,7 @@ const View = ({
     scrollToTop,
     selectedFolderStore,
     wsCreatedPDFForm,
+    currentExtensionGallery,
   });
 
   const { getProfileInitialValue } = useProfileBody({
@@ -425,7 +429,11 @@ export const ViewComponent = inject(
 
     const { playlist, setToPreviewFile } = mediaViewerDataStore;
 
-    const { gallerySelected, isVisibleInfoPanelTemplateGallery } = oformsStore;
+    const {
+      gallerySelected,
+      isVisibleInfoPanelTemplateGallery,
+      currentExtensionGallery,
+    } = oformsStore;
 
     const { getFilesSettings } = filesSettingsStore;
 
@@ -476,6 +484,7 @@ export const ViewComponent = inject(
 
       gallerySelected,
       isVisibleInfoPanelTemplateGallery,
+      currentExtensionGallery,
 
       userId: userStore?.user?.id,
 

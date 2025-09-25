@@ -718,6 +718,10 @@ class FilesStore {
         this.isHidePagination = true;
       });
 
+      this.setActiveFiles(
+        this.activeFiles.filter((x) => x.id !== foundFile.id),
+      );
+
       runInAction(() => {
         if (
           this.files.length === 0 &&
@@ -3125,6 +3129,7 @@ class FilesStore {
         this.setHotkeysClipboard(hotkeysClipboard);
         if (fileIds) this.setTempActionFilesIds([]);
         if (folderIds) this.setTempActionFoldersIds([]);
+        this.clearActiveOperations(fileIds, folderIds);
       });
 
       showToast && showToast();
@@ -3147,6 +3152,7 @@ class FilesStore {
         this.setFolders(folders);
         if (fileIds) this.setTempActionFilesIds([]);
         if (folderIds) this.setTempActionFoldersIds([]);
+        this.clearActiveOperations(fileIds, folderIds);
       });
 
       showToast && showToast();
@@ -3183,6 +3189,7 @@ class FilesStore {
         .finally(() => {
           if (fileIds) this.setTempActionFilesIds([]);
           if (folderIds) this.setTempActionFoldersIds([]);
+          this.clearActiveOperations(fileIds, folderIds);
         });
     }
     api.files
@@ -3205,6 +3212,7 @@ class FilesStore {
           this.setFilter(filter);
           this.setFiles(newFiles);
           this.setFolders(newFolders);
+          this.clearActiveOperations(fileIds, folderIds);
         });
 
         showToast && showToast();
@@ -4492,6 +4500,18 @@ class FilesStore {
 
   setMainButtonVisible = (mainButtonVisible) => {
     this.mainButtonVisible = mainButtonVisible;
+  };
+
+  clearActiveOperations = (fileIds = [], folderIds = []) => {
+    const newActiveFiles = this.activeFiles.filter(
+      (el) => !fileIds?.includes(el.id),
+    );
+    const newActiveFolders = this.activeFolders.filter(
+      (el) => !folderIds?.includes(el.id),
+    );
+
+    this.setActiveFiles(newActiveFiles);
+    this.setActiveFolders(newActiveFolders);
   };
 }
 

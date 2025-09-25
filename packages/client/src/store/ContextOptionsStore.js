@@ -254,7 +254,11 @@ class ContextOptionsStore {
   onOpenFolder = async (item, t) => {
     const { isExpiredLinkAsync } = this.filesActionsStore;
 
-    if (item.external && (item.expired || (await isExpiredLinkAsync(item))))
+    if (
+      isRoomUtil(item) &&
+      item.external &&
+      (item.expired || (await isExpiredLinkAsync(item)))
+    )
       return toastr.error(
         t("Common:RoomLinkExpired"),
         t("Common:RoomNotAvailable"),
@@ -650,7 +654,7 @@ class ContextOptionsStore {
 
     const { addActiveItems } = this.filesStore;
     const { setGroupMenuBlocked } = this.filesActionsStore;
-    const { clearActiveOperations } = this.uploadDataStore;
+    // const { clearActiveOperations } = this.uploadDataStore;
 
     const { folderIds, fileIds } = items.reduce(
       (acc, item) => {
@@ -680,7 +684,7 @@ class ContextOptionsStore {
       endLoader(() =>
         runInAction(() => {
           setGroupMenuBlocked(false);
-          clearActiveOperations(fileIds, folderIds);
+          // clearActiveOperations(fileIds, folderIds);
         }),
       );
     }

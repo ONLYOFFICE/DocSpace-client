@@ -279,7 +279,7 @@ const Panels = (props) => {
       <VersionHistoryPanel key="version-history-panel" />
     ),
     deleteDialogVisible && <DeleteDialog key="delete-dialog" />,
-    lifetimeDialogVisible && <LifetimeDialog key="delete-dialog" />,
+    lifetimeDialogVisible && <LifetimeDialog key="lifetime-dialog" />,
     emptyTrashDialogVisible && <EmptyTrashDialog key="empty-trash-dialog" />,
     downloadDialogVisible && <DownloadDialog key="download-dialog" />,
 

@@ -2470,6 +2470,7 @@ class FilesActionStore {
           setUnsubscribe(true);
           setDeleteDialogVisible(true);
         },
+        iconUrl: RemoveOutlineSvgUrl,
       })
       .set("showInfo", showInfo);
 

@@ -231,7 +231,10 @@ export const QuickButtons = (props: QuickButtonsProps) => {
             </>
           ) : null}
 
-          {!isRoom(item) && item?.isFavorite && !isRecentFolder ? (
+          {!isRoom(item) &&
+          item?.isFavorite &&
+          !isRecentFolder &&
+          !isPublicRoom ? (
             <IconButton
               iconName={
                 item?.isFavorite ? FavoriteFillReactSvgUrl : FavoriteReactSvgUrl

@@ -135,7 +135,7 @@ export interface IMessage {
   settings?: string;
 }
 
-type TButtonGroup = {
+export type TButtonGroup = {
   component: PluginComponents.button;
   props: ButtonProps;
   contextName?: string;
@@ -248,7 +248,9 @@ export interface IframeWindow extends Window {
 export type TPlugin = {
   name: string;
   version: string;
+  minDocSpaceVersion?: string;
   description: string;
+  compatible: boolean;
   license: string;
   author: string;
   homePage: string;

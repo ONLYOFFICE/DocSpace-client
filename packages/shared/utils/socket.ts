@@ -71,6 +71,7 @@ export const enum SocketEvents {
   RestoreProgress = "s:restore-progress",
   EncryptionProgress = "s:encryption-progress",
   ChangeMyType = "s:change-my-type",
+  UpdateTelegram = "s:update-telegram",
 }
 
 /**
@@ -279,6 +280,7 @@ export type TListenEventCallbackMap = {
     admin: string;
     hasPersonalFolder: boolean;
   }) => void;
+  [SocketEvents.UpdateTelegram]: (data: { username: string }) => void;
 };
 
 /**

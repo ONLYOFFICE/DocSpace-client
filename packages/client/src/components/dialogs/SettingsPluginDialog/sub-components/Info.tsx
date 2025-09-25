@@ -24,54 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import styled, { css } from "styled-components";
-
 import { LANGUAGE } from "@docspace/shared/constants";
 
 import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
-import {
-  getCorrectDate,
-  getCookie,
-  injectDefaultTheme,
-} from "@docspace/shared/utils";
+import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
+import { getCorrectDate, getCookie, classNames } from "@docspace/shared/utils";
+import { Tooltip } from "@docspace/shared/components/tooltip";
 
+import PluginIncompatibleSvg from "PUBLIC_DIR/images/plugin.incompatible.react.svg";
 import { PluginStatus } from "SRC_DIR/helpers/plugins/enums";
+import { InfoProps } from "../SettingsPluginDialog.types";
+import styles from "../SettingsPluginDialog.module.scss";
 
-const StyledContainer = styled.div`
-  width: 100%;
-
-  ${(props) =>
-    props.withDelete &&
-    css`
-      margin-bottom: 24px;
-    `}
-`;
-
-const StyledSeparator = styled.div.attrs(injectDefaultTheme)`
-  width: 100%;
-  height: 1px;
-
-  margin: 24px 0;
-
-  background-color: ${(props) => props.theme.plugins.borderColor};
-`;
-
-const StyledInfo = styled.div`
-  margin-top: 24px;
-
-  width: 100%;
-  height: auto;
-
-  display: grid;
-
-  grid-template-columns: max-content 1fr;
-
-  gap: 8px 24px;
-`;
-
-const Info = ({ t, plugin, withDelete, withSeparator }) => {
+const Info = ({ t, plugin, withDelete, withSeparator }: InfoProps) => {
   const locale = getCookie(LANGUAGE) || "en";
   const uploadDate = plugin.createOn && getCorrectDate(locale, plugin.createOn);
 
@@ -81,12 +46,16 @@ const Info = ({ t, plugin, withDelete, withSeparator }) => {
       : t("NeedSettings");
 
   return (
-    <StyledContainer withDelete={withDelete}>
-      {withSeparator ? <StyledSeparator /> : null}
+    <div
+      className={classNames(styles.container, {
+        [styles.withDelete]: withDelete,
+      })}
+    >
+      {withSeparator ? <div className={styles.separator} /> : null}
       <Text fontSize="14px" fontWeight={600} lineHeight="16px">
         {t("Metadata")}
       </Text>
-      <StyledInfo>
+      <div className={styles.info}>
         {plugin.author ? (
           <>
             <Text fontSize="13px" fontWeight={400} lineHeight="20px" truncate>
@@ -103,9 +72,30 @@ const Info = ({ t, plugin, withDelete, withSeparator }) => {
             <Text fontSize="13px" fontWeight={400} lineHeight="20px" truncate>
               {t("Common:Version")}
             </Text>
-            <Text fontSize="13px" fontWeight={600} lineHeight="20px">
-              {plugin.version}
-            </Text>
+            <div
+              className={classNames(styles.version, {
+                [styles.incompatible]: !plugin.compatible,
+              })}
+              id="plugin_version"
+            >
+              <Text fontSize="13px" fontWeight={600} lineHeight="20px">
+                {plugin.version}
+              </Text>
+              {!plugin.compatible ? (
+                <>
+                  <PluginIncompatibleSvg className={styles.incompatibleSvg} />
+                  <Tooltip
+                    anchorSelect="#plugin_version"
+                    place="bottom"
+                    getContent={() =>
+                      t("WebPlugins:PluginIsNotCompatible", {
+                        productName: t("Common:ProductName"),
+                      })
+                    }
+                  />
+                </>
+              ) : null}
+            </div>
           </>
         ) : null}
 
@@ -153,9 +143,9 @@ const Info = ({ t, plugin, withDelete, withSeparator }) => {
               fontSize="13px"
               fontWeight={600}
               lineHeight="20px"
-              type="page"
+              type={LinkType.page}
               href={plugin?.homePage}
-              target="_blank"
+              target={LinkTarget.blank}
               isHovered
               dataTestId="plugin_home_page_link"
             >
@@ -173,8 +163,8 @@ const Info = ({ t, plugin, withDelete, withSeparator }) => {
             </Text>
           </>
         ) : null}
-      </StyledInfo>
-    </StyledContainer>
+      </div>
+    </div>
   );
 };
 

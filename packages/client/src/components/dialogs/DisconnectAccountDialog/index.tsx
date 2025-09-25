@@ -33,6 +33,7 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
+import { toastr } from "@docspace/shared/components/toast";
 
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 
@@ -49,11 +50,16 @@ const DisconnectAccountDialog = ({
   deleteTgLink,
   username,
 }: DisconnectAccountDialogProps) => {
-  const { t } = useTranslation(["Profile", "Common"]);
+  const { t } = useTranslation(["Profile", "Notifications", "Common"]);
 
   const onClickDisconnect = () => {
     deleteTgLink?.();
     setDisconnectAccountDialogVisible?.(false);
+    toastr.success(
+      t("Notifications:SuccessDisconnected", {
+        serviceName: t("Common:ProviderTelegram"),
+      }),
+    );
   };
 
   const onClose = () => {

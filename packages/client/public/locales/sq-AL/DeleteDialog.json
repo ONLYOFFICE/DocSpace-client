@@ -1,17 +1,12 @@
 {
   "DeleteAllGroupDescription": "Grupet e selektuara do të fshihen. Përdoruesit në grupe nuk do të hiqen nga {{productName}}. Jeni të sigurt që dëshironi të vazhdoni?",
   "DeleteAllGroupsTitle": "Fshini grupet",
-  "DeleteFolder": "Ju jeni gati të fshini këtë dosje.",
   "DeleteGroupDescription": "Grupi {{groupName}} do të fshihet. Përdoruesit në grup nuk do të hiqen nga {{productName}}. Jeni të sigurt që dëshironi të vazhdoni?",
   "DeleteGroupTitle": "Fshini grupin",
-  "DeleteItems": "Ju jeni gati t'i fshini këta artikuj.",
-  "DeleteItemsSharedNote": "Ju lutem vini re se nëse i keni ndarë me dikë, ai do të bëhet i padisponueshëm.",
-  "DeleteSharedNote": "Ju lutem vini re se nëse e keni ndarë me dikë, ai do të bëhet i padisponueshëm.",
   "DeleteTemplate": "A e dëshironi vërtet të fshani dhomën e modelit <1>«{{templateName}}»</1>? Modeli nuk mund të rivendoset.",
   "DeleteTemplates": "A ju vërtetë doni të fshani qendrueshmëritë e dhoma të zgjedhura? Ato nuk mund të rivendosen.",
-  "FolderPermanentlyDeleted": "Dosja do të fshihet përgjithmonë pas 30 ditësh.",
-  "ItemsPermanentlyDeleted": "Artikujt do të fshihen përgjithmonë brenda 30 ditësh.",
   "UnsubscribeButton": "Çregjistrohuni",
   "UnsubscribeNote": "A jeni të sigurt që dëshironi të çregjistroheni nga artikujt e selektuar nga lista?",
-  "UnsubscribeTitle": "Konfirmimi i çregjistrimit"
+  "UnsubscribeTitle": "Konfirmimi i çregjistrimit",
+  "FileDeletedAfter": "Skedari do të fshihet përgjithmonë brenda 30 ditësh."
 }

@@ -649,41 +649,49 @@ export const getShareAccessRightOptions = (
       access: ShareAccessRights.FullAccess,
       key: "full-access",
       label: t("Common:FullAccess"),
+      description: t("Common:FullAccessDescriptionFile"),
     },
     [ShareRights.Editing]: {
       access: ShareAccessRights.Editing,
       key: "editing",
       label: t("Common:Editing"),
+      description: t("Common:EditingDescriptionFile"),
     },
     [ShareRights.CustomFilter]: {
       access: ShareAccessRights.CustomFilter,
       key: "custom-filter",
       label: t("Common:CustomFilter"),
+      description: t("Common:CustomFilterDescriptionFile"),
     },
     [ShareRights.Review]: {
       access: ShareAccessRights.Review,
       key: "review",
       label: t("Common:Review"),
+      description: t("Common:ReviewDescriptionFile"),
     },
     [ShareRights.Comment]: {
       access: ShareAccessRights.Comment,
       key: "commenting",
       label: t("Common:Comment"),
+      description: t("Common:CommentDescriptionFile"),
     },
     [ShareRights.Read]: {
       access: ShareAccessRights.ReadOnly,
       key: "viewing",
       label: t("Common:ReadOnly"),
+      description: t("Common:ReadOnlyDescriptionFile"),
     },
     [ShareRights.FillForms]: {
       access: ShareAccessRights.FormFilling,
       key: "filling",
       label: t("Common:Filling"),
+      description: t("Common:FillingDescriptionFile"),
     },
     [ShareRights.Restrict]: {
       access: ShareAccessRights.DenyAccess,
       key: "deny-access",
       label: t("Common:DenyAccess"),
+      description: t("Common:DenyAccessDescriptionFile"),
     },
     [ShareRights.None]: withRemove
       ? [

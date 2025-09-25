@@ -34,7 +34,7 @@ import { ShareLinkService } from "../../../services/share-link.service";
 import type { TShareToUser } from "../../../api/files/types";
 import Filter from "../../../api/people/filter";
 
-import { SelectorAccessRightsMode } from "../../selector/Selector.enums";
+// import { SelectorAccessRightsMode } from "../../selector/Selector.enums";
 import type { TAccessRight, TOnSubmit } from "../../selector/Selector.types";
 
 import { getShareAccessRightOptions } from "../Share.helpers";
@@ -106,9 +106,9 @@ export const ShareSelector: FC<ShareSelectorProps> = ({
         accessRights: accessOptions,
         selectedAccessRight,
         onAccessRightsChange: () => {},
-        accessRightsMode: isFile(item)
-          ? SelectorAccessRightsMode.Compact
-          : SelectorAccessRightsMode.Detailed,
+        // accessRightsMode: isFile(item)
+        //   ? SelectorAccessRightsMode.Compact
+        //   : SelectorAccessRightsMode.Detailed,
       } as const)
     : {};
 

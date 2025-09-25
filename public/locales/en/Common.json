@@ -969,5 +969,13 @@
   "ShareWithPortalUsersDescription": "Select specific users from {{productName}} and invite them to fill out the original form.",
   "PortalRestoring": "{{productName}} restoring",
   "PreparationPortalDescription": "Once the restoring process is over, you'll be automatically redirected to your {{productName}}.",
-  "Shared": "Shared"
+  "Shared": "Shared",
+  "FullAccessDescriptionFile": "Sharing, editing, reviewing, commenting and renaming.",
+  "EditingDescriptionFile": "Viewing, editing, reviewing, commenting.",
+  "ReviewDescriptionFile": "Viewing, reviewing, commenting.",
+  "CustomFilterDescriptionFile": "Viewing with applied filters. All other editing options are available.",
+  "CommentDescriptionFile": "Viewing, commenting.",
+  "ReadOnlyDescriptionFile": "Viewing only.",
+  "DenyAccessDescriptionFile": "No access to view, edit, or manage this file.",
+  "FillingDescriptionFile": "Viewing, filling."
 }

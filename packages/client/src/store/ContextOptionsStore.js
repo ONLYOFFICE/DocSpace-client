@@ -86,7 +86,6 @@ import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
 import CreateTemplateSvgUrl from "PUBLIC_DIR/images/template.react.svg?url";
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
 import TemplateGalleryReactSvgUrl from "PUBLIC_DIR/images/template.gallery.react.svg?url";
-import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
 import { makeAutoObservable, runInAction } from "mobx";
 import copy from "copy-to-clipboard";
@@ -94,7 +93,7 @@ import { isMobile, isTablet } from "react-device-detect";
 import config from "PACKAGE_FILE";
 import { Trans } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
+
 import {
   isMobile as isMobileUtils,
   isLockedSharedRoom,
@@ -124,7 +123,7 @@ import {
   FileExtensions,
   ShareAccessRights,
 } from "@docspace/shared/enums";
-import FilesFilter from "@docspace/shared/api/files/filter";
+
 import {
   formRoleMapping,
   getFileLink,
@@ -139,7 +138,6 @@ import { FILLING_STATUS_ID } from "@docspace/shared/constants";
 import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
 import {
   getInfoPanelOpen,
-  hideInfoPanel,
   openMembersTab,
   openShareTab,
   setInfoPanelMobileHidden,

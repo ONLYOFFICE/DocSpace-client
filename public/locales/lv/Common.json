@@ -758,7 +758,6 @@
   "StorageQuotaDisabled": "Krātuves kvota ir atspējota.",
   "StorageQuotaReset": "Krātuves kvota ir veiksmīgi iestatīta uz noklusējumu.",
   "StorageQuotaSet": "Krātuves kvota ir veiksmīgi iestatīta.",
-  "SubmitToFormGallery": "Iesniedziet veidlapu galerijā",
   "SubmitToGallery": "Iesniegt galerijā",
   "SubmitToGalleryBlockBody": "Iesniedziet savas veidnes, lai tās kopīgotu ar {{organizationName}} kopienu.",
   "SubmitToGalleryBlockHeader": "{{organizationName}} veidlapu galerija",

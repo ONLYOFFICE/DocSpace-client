@@ -758,7 +758,6 @@
   "StorageQuotaDisabled": "Складишна квота онемогућена.",
   "StorageQuotaReset": "Складишна квота успешно постављена на подразумевано.",
   "StorageQuotaSet": "Складишна квота успешно постављена.",
-  "SubmitToFormGallery": "Поднеси у Форм Галерију",
   "SubmitToGallery": "Поднеси у Галерију",
   "SubmitToGalleryBlockBody": "Поднесите своје шаблоне да их делите са {{organizationName}} заједницом.",
   "SubmitToGalleryBlockHeader": "{{organizationName}} Форм Галерија",

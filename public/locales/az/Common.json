@@ -758,7 +758,6 @@
   "StorageQuotaDisabled": "Yaddaş kvotası deaktiv edildi.",
   "StorageQuotaReset": "Yaddaş kvotası uğurla defolt olaraq ayarlandı.",
   "StorageQuotaSet": "Yaddaş kvotası uğurla təyin olundu.",
-  "SubmitToFormGallery": "Form Qalereyasına göndərin",
   "SubmitToGallery": "Qalereyaya göndərin",
   "SubmitToGalleryBlockBody": "{{organizationName}} icması ilə paylaşmaq üçün şablonlarınızı təqdim edin.",
   "SubmitToGalleryBlockHeader": "{{organizationName}} Forma Qalereyası",

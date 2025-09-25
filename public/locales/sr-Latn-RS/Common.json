@@ -749,7 +749,6 @@
   "StorageQuotaDisabled": "Skladišna kvota onemogućena.",
   "StorageQuotaReset": "Skladišna kvota uspešno postavljena na podrazumevano.",
   "StorageQuotaSet": "Skladišna kvota uspešno postavljena.",
-  "SubmitToFormGallery": "Podnesi u Form Galeriju",
   "SubmitToGallery": "Podnesi u Galeriju",
   "SubmitToGalleryBlockBody": "Podnesite svoje šablone da ih delite sa {{organizationName}} zajednicom.",
   "SubmitToGalleryBlockHeader": "{{organizationName}} Form Galerija",

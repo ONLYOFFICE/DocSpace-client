@@ -758,7 +758,6 @@
   "StorageQuotaDisabled": "Kvóta úložiska vypnutá.",
   "StorageQuotaReset": "Kvóta úložiska bola úspešne upravená na predvolené nastavenie.",
   "StorageQuotaSet": "Kvóta úložiska bola úspešne nastavená.",
-  "SubmitToFormGallery": "Odoslať do galérie formulárov",
   "SubmitToGallery": "Odoslať do galérie",
   "SubmitToGalleryBlockBody": "Pošlite svoje šablóny, aby ste ich mohli zdieľať s komunitou {{organizationName}}.",
   "SubmitToGalleryBlockHeader": "Galéria formulárov {{organizationName}}",

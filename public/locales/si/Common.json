@@ -747,7 +747,6 @@
   "StorageQuotaDisabled": "ආචයන සලාකය අබල කෙරිණි.",
   "StorageQuotaReset": "ආචයන සලාකය පෙරනිමියට සැකසිණි.",
   "StorageQuotaSet": "ආචයන සලාකය සැකසිණි.",
-  "SubmitToFormGallery": "ආකෘතිපත්‍ර එකතුවට යොමන්න",
   "SubmitToGallery": "එකතුවට යොමන්න",
   "SubmitToGalleryBlockBody": "ඔබේ සැකිලි {{organizationName}} ප්‍රජාව සමඟ බෙදා ගැනීමට ඉදිරිපත් කරන්න.",
   "SubmitToGalleryBlockHeader": "{{organizationName}} ආකෘති එකතුව",

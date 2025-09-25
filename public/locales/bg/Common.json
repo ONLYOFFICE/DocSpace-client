@@ -758,7 +758,6 @@
   "StorageQuotaDisabled": "Квотата за съхранение е деактивирана.",
   "StorageQuotaReset": "Квотата за съхранение е успешно зададена по подразбиране.",
   "StorageQuotaSet": "Квотата за съхранение е зададена успешно.",
-  "SubmitToFormGallery": "Изпрати до Галерия с формуляри",
   "SubmitToGallery": "Изпрати до Галерия",
   "SubmitToGalleryBlockBody": "Изпратете вашите шаблони, за да ги споделите с {{organizationName}} общността.",
   "SubmitToGalleryBlockHeader": "{{organizationName}} Галерия с Формуляри",

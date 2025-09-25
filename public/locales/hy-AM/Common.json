@@ -758,7 +758,6 @@
   "StorageQuotaDisabled": "Պահպանման քվոտան անջատված է։",
   "StorageQuotaReset": "Պահպանման քվոտան հաջողությամբ սահմանվեց լռելյայն։",
   "StorageQuotaSet": "Պահպանման սահմանաչափը հաջողությամբ սահմանվեց:",
-  "SubmitToFormGallery": "Ներկայացնել ձևերի պատկերասրահի ",
   "SubmitToGallery": "Ներկայացնել պատկերասրահ",
   "SubmitToGalleryBlockBody": "Ներկայացրեք ձեր ձևանմուշները՝ դրանք կիսելու {{organizationName}} community-ի հետ:",
   "SubmitToGalleryBlockHeader": "{{organizationName}} ձևերի պատկերասրահ",

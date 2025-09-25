@@ -758,7 +758,6 @@
   "StorageQuotaDisabled": "存储空间配额已停用。",
   "StorageQuotaReset": "存储空间配额已成功设为默认值。",
   "StorageQuotaSet": "存储空间配额设置成功。",
-  "SubmitToFormGallery": "提交至表单库",
   "SubmitToGallery": "提交至表单库",
   "SubmitToGalleryBlockBody": "提交模板，与 {{organizationName}} 社区共享。",
   "SubmitToGalleryBlockHeader": "{{organizationName}} 表单库",

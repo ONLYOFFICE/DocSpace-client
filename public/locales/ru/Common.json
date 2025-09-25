@@ -761,7 +761,6 @@
   "StorageQuotaDisabled": "Квота хранилища отключена.",
   "StorageQuotaReset": "Квота хранилища успешно установлена по умолчанию.",
   "StorageQuotaSet": "Квота хранилища успешно установлена.",
-  "SubmitToFormGallery": "Отправить в Галерею Форм",
   "SubmitToGallery": "Отправить в Галерею",
   "SubmitToGalleryBlockBody": "Присылайте свои шаблоны, чтобы поделиться ими с сообществом {{organizationName}}.",
   "SubmitToGalleryBlockHeader": "Галерея Форм {{organizationName}}",

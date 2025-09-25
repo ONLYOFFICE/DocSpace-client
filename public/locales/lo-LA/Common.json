@@ -745,7 +745,6 @@
   "StorageQuotaDisabled": "ກຳນົດຈຳນວນເກັບຮັກສາຖືກປິດການໃຊ້ງານແລ້ວ",
   "StorageQuotaReset": "ກຳນົດກໍານານບ່ອນເກັບຂໍ້ມູນສຳເລັດແລ້ວຕາມຄ່າເລີ່ມຕົ້ນ.",
   "StorageQuotaSet": "ກຳນົດກໍານານບ່ອນເກັບຂໍ້ມູນສຳເລັດແລ້ວ.",
-  "SubmitToFormGallery": "ສະເບີກສະບັບສົ່ງໄປທີ່ຫ້ອງສະໝຸດແບບຟອມ",
   "SubmitToGallery": "ສະເບີມເຂົ້າຮຽນງານສະແດງ",
   "SubmitToGalleryBlockBody": "ສົ່ງແບບຢ່າງຂອງທ່ານ ໃຫ້ແບ່ງປັນກັບສະບ້ານຊຸມຊົນ {{organizationName}}.",
   "SubmitToGalleryBlockHeader": "ຫ້ອງສະແດງແບບຟອມ {{organizationName}}",

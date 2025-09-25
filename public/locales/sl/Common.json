@@ -758,7 +758,6 @@
   "StorageQuotaDisabled": "Kvota za shranjevanje je onemogočena.",
   "StorageQuotaReset": "Kvota za shranjevanje je uspešno nastavljena na privzeto.",
   "StorageQuotaSet": "Kvota za shranjevanje je uspešno nastavljena.",
-  "SubmitToFormGallery": "Oddaj v Fgalerijo obrazcev",
   "SubmitToGallery": "Oddaj v galerijo",
   "SubmitToGalleryBlockBody": "Predložite svoje predloge, da jih delite s skupnostjo {{organizationName}}.",
   "SubmitToGalleryBlockHeader": "{{organizationName}} galerija obrazcev",

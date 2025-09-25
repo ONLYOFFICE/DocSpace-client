@@ -758,7 +758,6 @@
   "StorageQuotaDisabled": "ストレージ容量制限が無効になっています。",
   "StorageQuotaReset": "ストレージ容量制限が正常にデフォルトに設定されました。",
   "StorageQuotaSet": "ストレージ容量制限が正常に設定されました。",
-  "SubmitToFormGallery": " フォームギャラリーに投稿",
   "SubmitToGallery": "ギャラリーに投稿",
   "SubmitToGalleryBlockBody": "{{organizationName}}コミュニティで共有するためにテンプレートを投稿してください。",
   "SubmitToGalleryBlockHeader": "{{organizationName}}フォームライブラリ",

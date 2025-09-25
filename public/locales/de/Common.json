@@ -758,7 +758,6 @@
   "StorageQuotaDisabled": "Speicherquote wird deaktiviert.",
   "StorageQuotaReset": " Die Speicherquote wurde erfolgreich auf den Standardwert gesetzt.",
   "StorageQuotaSet": " Die Speicherquote wurde erfolgreich festgelegt.",
-  "SubmitToFormGallery": "An die Formulargalerie senden",
   "SubmitToGallery": "Zur Galerie einreichen",
   "SubmitToGalleryBlockBody": "Reichen Sie Ihre Vorlagen ein, um sie mit der {{organizationName}} Gemeinschaft zu teilen.",
   "SubmitToGalleryBlockHeader": "Formulargalerie von {{organizationName}}",

@@ -758,7 +758,6 @@
   "StorageQuotaDisabled": "Muistikiintiö poistettu käytöstä.",
   "StorageQuotaReset": "Muistikiintiö on onnistuneesti asetettu oletukseksi.",
   "StorageQuotaSet": "Muistikiintiö on onnistuneesti asetettu.",
-  "SubmitToFormGallery": "Lähetä Lomakegalleriaan",
   "SubmitToGallery": "Lähetä Galleriaan",
   "SubmitToGalleryBlockBody": "Lähetä pohjat jakaaksesi ne {{organizationName}}-yhteisön kanssa.",
   "SubmitToGalleryBlockHeader": "{{organizationName}} Lomakegalleria",

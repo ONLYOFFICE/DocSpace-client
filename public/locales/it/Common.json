@@ -758,7 +758,6 @@
   "StorageQuotaDisabled": "Quota di archiviazione disabilitata.",
   "StorageQuotaReset": "Quota di archiviazione impostata con successo su valore predefinito.",
   "StorageQuotaSet": "Quota di archiviazione impostata correttamente.",
-  "SubmitToFormGallery": "Invia alla Galleria dei moduli",
   "SubmitToGallery": "Invia alla Galleria",
   "SubmitToGalleryBlockBody": "Invia i tuoi modelli per condividerli con la community di {{organizationName}}.",
   "SubmitToGalleryBlockHeader": "Galleria dei moduli di {{organizationName}}",

@@ -758,7 +758,6 @@
   "StorageQuotaDisabled": "Cota de armazenamento desativada.",
   "StorageQuotaReset": "Cota de armazenamento definida com êxito como padrão.",
   "StorageQuotaSet": "Cota de armazenamento definida com sucesso.",
-  "SubmitToFormGallery": "Enviar para Galeria de Formulários",
   "SubmitToGallery": "Enviar para Galeria",
   "SubmitToGalleryBlockBody": "Envie seus modelos para compartilhá-los com a comunidade {{organizationName}}.",
   "SubmitToGalleryBlockHeader": "Galeria de formulários do {{organizationName}}",

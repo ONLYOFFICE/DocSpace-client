@@ -758,7 +758,6 @@
   "StorageQuotaDisabled": "تم تعطيل حصة التخزين.",
   "StorageQuotaReset": "تم ضبط حصة التخزين على الوضع الافتراضي بنجاح.",
   "StorageQuotaSet": "تم ضبط حصة التخزين بنجاح.",
-  "SubmitToFormGallery": "تسليم إلى نموذج المعرض",
   "SubmitToGallery": "تسليم إلى المعرض",
   "SubmitToGalleryBlockBody": "تسليم القوالب الخاصة بك لمشاركتهم مع مجتمع {{organizationName}}.",
   "SubmitToGalleryBlockHeader": "معرض نموذج {{organizationName}}",

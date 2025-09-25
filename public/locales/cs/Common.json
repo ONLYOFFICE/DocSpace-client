@@ -758,7 +758,6 @@
   "StorageQuotaDisabled": "Kvóta úložiště je zakázána.",
   "StorageQuotaReset": "Kvóta úložiště byla úspěšně nastavena na výchozí hodnotu.",
   "StorageQuotaSet": "Kvóta úložiště byla úspěšně nastavena.",
-  "SubmitToFormGallery": "Odeslat do Galerie formulářů",
   "SubmitToGallery": "Odeslat do galerie",
   "SubmitToGalleryBlockBody": "Pošlete své šablony a podělte se o ně s komunitou {{organizationName}}.",
   "SubmitToGalleryBlockHeader": "Formulář {{organizationName}} Galerie",

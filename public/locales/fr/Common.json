@@ -749,7 +749,6 @@
   "StorageQuotaDisabled": "Le quota de stockage est désactivé.",
   "StorageQuotaReset": "Le quota de stockage a été défini par défaut avec succès.",
   "StorageQuotaSet": "Le quota de stockage a été défini avec succès.",
-  "SubmitToFormGallery": "Soumettre à la galerie de formulaires",
   "SubmitToGallery": "Soumettre à la galerie",
   "SubmitToGalleryBlockBody": "Soumettez vos modèles pour les partager avec la communauté {{organizationName}}.",
   "SubmitToGalleryBlockHeader": "Galerie de formulaires {{organizationName}}",

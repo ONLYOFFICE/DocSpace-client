@@ -758,7 +758,6 @@
   "StorageQuotaDisabled": "Limit pamięci został wyłączony.",
   "StorageQuotaReset": "Limit pamięci został pomyślnie ustawiony na domyślny.",
   "StorageQuotaSet": "Limit pamięci został pomyślnie ustawiony.",
-  "SubmitToFormGallery": "Prześlij do galerii formularzy",
   "SubmitToGallery": "Prześlij do galerii",
   "SubmitToGalleryBlockBody": "Prześlij swoje szablony, aby udostępnić je społeczności {{organizationName}}.",
   "SubmitToGalleryBlockHeader": "Galeria formularzy {{organizationName}}",

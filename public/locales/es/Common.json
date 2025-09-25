@@ -758,7 +758,6 @@
   "StorageQuotaDisabled": "Cuota de almacenamiento deshabilitada.",
   "StorageQuotaReset": "La cuota de almacenamiento se ha establecido correctamente como predeterminada.",
   "StorageQuotaSet": "La cuota de almacenamiento se ha establecido correctamente.",
-  "SubmitToFormGallery": "Enviar a la Galería de formularios",
   "SubmitToGallery": "Enviar a la Galería",
   "SubmitToGalleryBlockBody": "Envíe sus plantillas para compartirlas con la comunidad de {{organizationName}}.",
   "SubmitToGalleryBlockHeader": "Galería de formularios de {{organizationName}}",

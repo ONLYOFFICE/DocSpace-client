@@ -758,7 +758,6 @@
   "StorageQuotaDisabled": "Đã vô hiệu hóa hạn mức lưu trữ.",
   "StorageQuotaReset": "Hạn mức lưu trữ được đặt làm mặc định thành công.",
   "StorageQuotaSet": "Đã đặt hạn mức lưu trữ thành công.",
-  "SubmitToFormGallery": "Gửi đến Bộ Sưu Tập Biểu Mẫu",
   "SubmitToGallery": "Gửi đến Bộ Sưu Tập",
   "SubmitToGalleryBlockBody": "Gửi mẫu của bạn để chia sẻ với cộng đồng {{organizationName}}.",
   "SubmitToGalleryBlockHeader": "Bộ Sưu tập Biểu mẫu {{organizationName}}",

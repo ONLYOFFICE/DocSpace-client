@@ -758,7 +758,6 @@
   "StorageQuotaDisabled": "스토리지 할당량이 비활성화되었습니다.",
   "StorageQuotaReset": "스토리지 할당량이 기본값으로 설정되었습니다.",
   "StorageQuotaSet": "스토리지 할당량이 설정되었습니다.",
-  "SubmitToFormGallery": "양식 갤러리에 제출",
   "SubmitToGallery": "갤러리에 제출",
   "SubmitToGalleryBlockBody": "{{organizationName}} 커뮤니티와 공유할 템플릿을 제출해 주세요.",
   "SubmitToGalleryBlockHeader": "{{organizationName}} 양식 갤러리",

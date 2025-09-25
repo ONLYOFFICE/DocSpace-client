@@ -70,7 +70,6 @@ const Grid = ({
     }
   }, [loadMoreItems, hasMoreFiles, isLoadingMore, children.length]);
 
-  // Handle scroll to detect when to load more items
   const handleScroll = useCallback(() => {
     if (!scrollContainerRef.current || !hasMoreFiles || isLoadingMore) return;
 
@@ -79,7 +78,6 @@ const Grid = ({
     const scrollHeight = container.scrollHeight;
     const clientHeight = container.clientHeight;
 
-    // Load more when scrolled to within 200px of bottom
     if (scrollTop + clientHeight >= scrollHeight - 200) {
       handleLoadMoreItems();
     }

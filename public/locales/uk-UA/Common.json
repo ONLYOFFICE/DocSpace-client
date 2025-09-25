@@ -749,7 +749,6 @@
   "StorageQuotaDisabled": "Квоту сховища вимкнено.",
   "StorageQuotaReset": "Квоту сховища успішно встановлено за замовчуванням.",
   "StorageQuotaSet": "Квоту сховища успішно встановлено.",
-  "SubmitToFormGallery": "Надіслати до галереї форм",
   "SubmitToGallery": "Надіслати до галереї",
   "SubmitToGalleryBlockBody": "Надішліть свої шаблони, щоб поділитися ними зі спільнотою {{organizationName}}.",
   "SubmitToGalleryBlockHeader": "Галерея форм {{organizationName}}",

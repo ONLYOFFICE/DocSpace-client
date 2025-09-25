@@ -758,7 +758,6 @@
   "StorageQuotaDisabled": "Η ποσόστωση αποθ. χώρου είναι απενεργοποιημένη.",
   "StorageQuotaReset": "Η ποσόστωση αποθ. χώρου έχει ρυθμιστεί επιτυχώς στην προεπιλεγμένη τιμή.",
   "StorageQuotaSet": "Η ποσόστωση αποθ. χώρου ορίστηκε επιτυχώς.",
-  "SubmitToFormGallery": "Υποβολή στη Συλλογή Φορμών",
   "SubmitToGallery": "Υποβολή στη Συλλογή",
   "SubmitToGalleryBlockBody": "Υποβάλετε τα πρότυπά σας για να τα μοιραστείτε με την κοινότητα του {{organizationName}}.",
   "SubmitToGalleryBlockHeader": "Συλλογή Φορμών {{organizationName}}",

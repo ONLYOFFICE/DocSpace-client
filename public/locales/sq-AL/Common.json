@@ -758,7 +758,6 @@
   "StorageQuotaDisabled": "Kuota e hapësirës ruajtëse është çaktivizuar.",
   "StorageQuotaReset": "Kuota e hapësirës ruajtëse u vendos me sukses në parazgjedhje.",
   "StorageQuotaSet": "Kuota e hapësirës ruajtëse u vendos me sukses.",
-  "SubmitToFormGallery": "Dorëzojeni në Galerinë e Formularëve",
   "SubmitToGallery": "Dorëzojeni në Galeri",
   "SubmitToGalleryBlockBody": "Paraqisni shabllonet tuaja për t'i ndarë me komunitetin {{organizationName}}.",
   "SubmitToGalleryBlockHeader": "Galeria e formularëve të {{organizationName}}",

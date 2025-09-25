@@ -95,7 +95,7 @@ const TemplateGallery = (props: {
   const tabs = [
     {
       id: "documents",
-      name: "Documents",
+      name: t("Common:Documents"),
       content: (
         <TilesContainer ext=".docx" isShowInitSkeleton={isShowInitSkeleton} />
       ),
@@ -103,19 +103,19 @@ const TemplateGallery = (props: {
     },
     {
       id: "spreadsheet",
-      name: "Spreadsheet",
+      name: t("Common:Spreadsheet"),
       content: <TilesContainer ext=".xlsx" isShowInitSkeleton={false} />,
       onClick: async () => await getData(".xlsx"),
     },
     {
       id: "presentation",
-      name: "Presentation",
+      name: t("Common:Presentation"),
       content: <TilesContainer ext=".pptx" isShowInitSkeleton={false} />,
       onClick: async () => await getData(".pptx"),
     },
     {
       id: "forms",
-      name: "Forms",
+      name: t("Common:Forms"),
       content: <TilesContainer ext=".pdf" isShowInitSkeleton={false} />,
       onClick: async () => await getData(".pdf"),
     },

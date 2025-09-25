@@ -758,7 +758,6 @@
   "StorageQuotaDisabled": "Depolama kotası devre dışı bırakıldı.",
   "StorageQuotaReset": "Depolama kotası başarıyla varsayılana ayarlandı.",
   "StorageQuotaSet": "Depolama kotası başarıyla ayarlandı.",
-  "SubmitToFormGallery": "Form Galerisine Gönder",
   "SubmitToGallery": "Galeriye Gönder",
   "SubmitToGalleryBlockBody": "{{organizationName}} topluluğuyla paylaşmak için şablonlarınızı gönderin.",
   "SubmitToGalleryBlockHeader": "{{organizationName}} Form Galerisi",

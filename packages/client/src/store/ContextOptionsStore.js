@@ -1950,16 +1950,6 @@ class ContextOptionsStore {
         disabled: false,
       },
       {
-        id: "option_archive-room",
-        key: "archive-room",
-        label: t("MoveToArchive"),
-        icon: RoomArchiveSvgUrl,
-        onClick: (e) => this.onClickArchive(e),
-        disabled: false,
-        "data-action": "archive",
-        action: "archive",
-      },
-      {
         id: "option_reconnect-storage",
         key: "reconnect-storage",
         label: t("Common:ReconnectStorage"),
@@ -2237,6 +2227,16 @@ class ContextOptionsStore {
           isArchive || !item.inRoom || isPublicRoom || Boolean(item.external),
       },
       {
+        id: "option_archive-room",
+        key: "archive-room",
+        label: t("MoveToArchive"),
+        icon: RoomArchiveSvgUrl,
+        onClick: (e) => this.onClickArchive(e),
+        disabled: false,
+        "data-action": "archive",
+        action: "archive",
+      },
+      {
         id: "option_unarchive-room",
         key: "unarchive-room",
         label: t("Common:Restore"),
@@ -2347,7 +2347,6 @@ class ContextOptionsStore {
             { key: "change-room-owner" },
             { key: "reconnect-storage" },
             { key: "export-room-index" },
-            { key: "archive-room" },
           ],
         ],
         needsGrouping: true,
@@ -2483,7 +2482,8 @@ class ContextOptionsStore {
         ["select", "open"],
         ["share", "show-info"],
         ["mark-as-favorite", "download", "move", "copy-to", "rename"],
-        ["remove-from-favorites", "restore", "delete"],
+        ["restore"],
+        ["remove-from-favorites", "delete"],
       ];
 
       const items = resultOptions.filter((opt) => !opt.isSeparator);
@@ -2501,6 +2501,13 @@ class ContextOptionsStore {
           const isDeleteGroup = group.includes("delete");
           const shouldAddSeparator =
             result.length > 0 && (groupItems.length >= 2 || isDeleteGroup);
+
+          if (group.includes("restore")) {
+            result.push({
+              key: `separator${folderSeparatorIndex++}`,
+              isSeparator: true,
+            });
+          }
 
           if (shouldAddSeparator) {
             result.push({

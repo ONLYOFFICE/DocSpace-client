@@ -40,7 +40,14 @@ import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
 import { MainContainer, ButtonWrapper } from "./StyledDeleteData";
 
 const PortalDeletion = (props) => {
-  const { t, owner, currentColorScheme, sendActivationLink, stripeUrl } = props;
+  const {
+    t,
+    tReady,
+    owner,
+    currentColorScheme,
+    sendActivationLink,
+    stripeUrl,
+  } = props;
   const [isDialogVisible, setIsDialogVisible] = useState(false);
 
   const [isDesktopView, setIsDesktopView] = useState(false);
@@ -97,7 +104,7 @@ const PortalDeletion = (props) => {
           isDisabled={notActivatedEmail}
           testId="delete_portal_button"
         />
-        {notActivatedEmail ? (
+        {notActivatedEmail && tReady ? (
           <Text fontSize="12px" fontWeight="600">
             {t("MainBar:ConfirmEmailHeader", {
               email: owner.email,

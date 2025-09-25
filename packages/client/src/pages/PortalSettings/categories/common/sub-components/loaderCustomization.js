@@ -39,7 +39,9 @@ const tabletStyles = css`
           ? "201px"
           : props.portalRenaming
             ? "150px"
-            : 0};
+            : props.deepLink || props.adManagement
+              ? "250px"
+              : 0};
     padding-bottom: 16px;
   }
 
@@ -79,6 +81,11 @@ const tabletStyles = css`
 
   .dns-description {
     width: 122px;
+    padding-bottom: 12px;
+  }
+
+  .deep-link-description {
+    width: 400px;
     padding-bottom: 12px;
   }
 
@@ -135,7 +142,7 @@ const StyledLoader = styled.div`
     padding-bottom: 8px;
   }
 
-  .dns-description {
+  .description {
     padding-bottom: 8px;
   }
 
@@ -145,6 +152,13 @@ const StyledLoader = styled.div`
 
   .dns-field {
     height: 32px;
+  }
+
+  .checkboxs {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 50px;
   }
 
   @media ${mobileMore} {
@@ -158,12 +172,15 @@ const StyledLoader = styled.div`
   }
 `;
 
-const LoaderCustomization = ({
-  lngTZSettings,
-  portalRenaming,
-  welcomePage,
-  dnsSettings,
-}) => {
+const LoaderCustomization = (props) => {
+  const {
+    lngTZSettings,
+    portalRenaming,
+    welcomePage,
+    dnsSettings,
+    deepLink,
+    adManagement,
+  } = props;
   const [isMobileView, setIsMobileView] = useState(false);
   const [isDesktopView, setIsDesktopView] = useState(false);
 
@@ -197,6 +214,8 @@ const LoaderCustomization = ({
       portalRenaming={portalRenaming}
       welcomePage={welcomePage}
       dnsSettings={dnsSettings}
+      deepLink={deepLink}
+      adManagement={adManagement}
       className="category-item-wrapper"
     >
       <RectangleSkeleton height="22px" className="header" />
@@ -221,12 +240,22 @@ const LoaderCustomization = ({
           </div>
           <RectangleSkeleton className="dns-field" />
         </>
-      ) : (
+      ) : !deepLink && !adManagement ? (
         <>
           <RectangleSkeleton height="20px" className="title" />
           <RectangleSkeleton height="32px" className="combo-box" />
         </>
-      )}
+      ) : null}
+
+      {deepLink || adManagement ? (
+        <>
+          <RectangleSkeleton className="description" />
+          <div className="checkboxs">
+            <RectangleSkeleton height="20px" />
+            <RectangleSkeleton height="20px" />
+          </div>
+        </>
+      ) : null}
 
       {lngTZSettings ? (
         <>
@@ -234,6 +263,7 @@ const LoaderCustomization = ({
           <RectangleSkeleton height="32px" className="combo-box" />
         </>
       ) : null}
+
       <RectangleSkeleton
         height={heightSaveCancelButtons}
         className="save-cancel-buttons"

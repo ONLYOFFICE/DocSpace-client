@@ -64,7 +64,7 @@ const DeveloperToolsWrapper = (props) => {
 
   const [currentTabId, setCurrentTabId] = useState();
 
-  const { t } = useTranslation([
+  const { t, ready } = useTranslation([
     "JavascriptSdk",
     "Webhooks",
     "Settings",
@@ -193,7 +193,7 @@ const DeveloperToolsWrapper = (props) => {
     setCurrentTabId(e.id);
   };
 
-  if (showPortalSettingsLoader) return <SSOLoader />;
+  if (showPortalSettingsLoader || !ready) return <SSOLoader />;
 
   return (
     <Tabs

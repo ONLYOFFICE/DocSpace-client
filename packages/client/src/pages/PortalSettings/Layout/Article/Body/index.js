@@ -348,7 +348,7 @@ export default inject(
 
     const { isNotPaidPeriod, isCommunity } = currentTariffStatusStore;
     const { user } = userStore;
-    const { isOwner } = user;
+    const { isOwner } = user || {};
     const {
       standalone,
       showText,

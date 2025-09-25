@@ -153,6 +153,8 @@ class FilesSettingsStore {
 
   hideConfirmCancelOperation = false;
 
+  documentServiceLocation = null;
+
   constructor(
     thirdPartyStore,
     treeFoldersStore,
@@ -335,6 +337,10 @@ class FilesSettingsStore {
 
       throw error;
     }
+  };
+
+  setDocumentServiceLocation = (data) => {
+    this.documentServiceLocation = data;
   };
 
   changeDocumentServiceLocation = (

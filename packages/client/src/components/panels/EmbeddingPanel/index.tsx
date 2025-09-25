@@ -520,7 +520,9 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                     isChecked={embeddingConfig.showTitle}
                     img={theme.isBase ? HeaderUrl : HeaderDarkUrl}
                     title={t("JavascriptSdk:Header")}
-                    description={t("JavascriptSdk:HeaderDescription")}
+                    description={t("JavascriptSdk:HeaderDescription", {
+                      productName: t("Common:ProductName"),
+                    })}
                     dataTestId="show_title"
                   />
                   <CheckboxElement

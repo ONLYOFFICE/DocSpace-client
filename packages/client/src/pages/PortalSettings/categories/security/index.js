@@ -48,6 +48,7 @@ import useSecurity from "./useSecurity";
 const SecurityWrapper = (props) => {
   const {
     t,
+    tReady,
     resetIsInit,
     currentDeviceType,
 
@@ -125,7 +126,7 @@ const SecurityWrapper = (props) => {
     );
   };
 
-  if (showPortalSettingsLoader && data.length)
+  if ((showPortalSettingsLoader && data.length) || !tReady)
     return currentTabId === data[0].id ? (
       currentDeviceType !== DeviceType.desktop ? (
         <MobileSecurityLoader />

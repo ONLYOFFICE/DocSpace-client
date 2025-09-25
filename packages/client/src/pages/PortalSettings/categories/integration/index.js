@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Tabs } from "@docspace/shared/components/tabs";
 import { useNavigate } from "react-router";
 import { withTranslation } from "react-i18next";
@@ -64,6 +64,8 @@ const IntegrationWrapper = (props) => {
   } = props;
   const navigate = useNavigate();
 
+  const [currentTabId, setCurrentTabId] = useState();
+
   const defaultProps = createDefaultHookSettingsProps({
     setup,
     currentQuotaStore,
@@ -74,8 +76,6 @@ const IntegrationWrapper = (props) => {
   });
 
   const {
-    openThirdPartyModal,
-    documentServiceLocationData,
     getSSOData,
     getPluginsData,
     getThirdPartyData,
@@ -94,13 +94,13 @@ const IntegrationWrapper = (props) => {
   const data = [
     {
       id: "ldap",
-      name: t("LDAP"),
+      name: t("Settings:LDAP"),
       content: <LdapSettings />,
       onClick: () => {},
     },
     {
       id: "sso",
-      name: t("SingleSignOn"),
+      name: t("Settings:SingleSignOn"),
       content: <SsoSettings />,
       onClick: async () => {
         clearAbortControllerArr();
@@ -110,7 +110,7 @@ const IntegrationWrapper = (props) => {
     {
       id: "third-party-services",
       name: t("Translations:ThirdPartyTitle"),
-      content: <ThirdParty openModal={openThirdPartyModal} />,
+      content: <ThirdParty />,
       onClick: async () => {
         clearAbortControllerArr();
         await getThirdPartyData();
@@ -118,7 +118,7 @@ const IntegrationWrapper = (props) => {
     },
     {
       id: "smtp-settings",
-      name: t("SMTPSettings"),
+      name: t("Settings:SMTPSettings"),
       content: <SMTPSettings />,
       onClick: async () => {
         clearAbortControllerArr();
@@ -130,12 +130,8 @@ const IntegrationWrapper = (props) => {
   if (standalone) {
     const documentServiceData = {
       id: "document-service",
-      name: t("DocumentService"),
-      content: (
-        <DocumentService
-          initialDocumentServiceData={documentServiceLocationData}
-        />
-      ),
+      name: t("Settings:DocumentService"),
+      content: <DocumentService />,
       onClick: async () => {
         clearAbortControllerArr();
         await getDocumentServiceData();
@@ -163,18 +159,11 @@ const IntegrationWrapper = (props) => {
     });
   }
 
-  const getCurrentTabId = () => {
+  useEffect(() => {
     const path = window.location.pathname;
     const currentTab = data.find((item) => path.includes(item.id));
-    return currentTab && data.length ? currentTab.id : data[0].id;
-  };
-
-  const currentTabId = getCurrentTabId();
-
-  // Guard: Don't render if we're not in the integration section
-  if (!window.location.pathname.includes("/portal-settings/integration")) {
-    return null;
-  }
+    if (currentTab && data.length) setCurrentTabId(currentTab.id);
+  }, [location.pathname]);
 
   const onSelect = (e) => {
     navigate(
@@ -235,6 +224,7 @@ export const Component = inject(
   },
 )(
   withTranslation([
+    "SMTPSettings",
     "Settings",
     "SingleSignOn",
     "Translations",

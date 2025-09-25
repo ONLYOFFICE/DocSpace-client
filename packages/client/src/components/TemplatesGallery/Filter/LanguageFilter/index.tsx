@@ -76,9 +76,7 @@ const LanguageFilter: FC<LanguageFilterProps> = ({
     const sectionScroll = document.querySelector(
       "#scroll-template-gallery .scroll-wrapper > .scroller",
     );
-    if (sectionScroll) {
-      sectionScroll.scrollTop = 0;
-    }
+    if (sectionScroll) sectionScroll.scrollTop = 0;
   };
 
   useEffect(() => {

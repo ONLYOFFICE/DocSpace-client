@@ -94,13 +94,16 @@ class OformsStore {
   }
 
   get defaultOformLocale() {
-    const userLocale =
-      getCookie(LANGUAGE) || this.userStore.user?.cultureName || "en";
+    const userLocale = getCookie(LANGUAGE) || this.userStore.user?.cultureName;
     const convertedLocale = convertToLanguage(userLocale);
 
-    return this.oformLocales?.includes(convertedLocale)
-      ? convertedLocale
-      : "en";
+    const locale = this.oformLocales?.includes(this.settingsStore.culture)
+      ? this.settingsStore.culture
+      : this.oformLocales?.includes(convertedLocale)
+        ? convertedLocale
+        : "en";
+
+    return locale;
   }
 
   setOformFiles = (oformFiles) => (this.oformFiles = oformFiles);
@@ -359,12 +362,13 @@ class OformsStore {
   };
 
   initTemplateGallery = async () => {
+    await this.fetchOformLocales();
+
     const firstLoadFilter = OformsFilter.getDefaultDocx();
     firstLoadFilter.locale = this.defaultOformLocale;
 
     await Promise.all([
       this.fetchOforms(firstLoadFilter),
-      this.fetchOformLocales(),
       this.fetchCurrentCategory(),
     ]);
   };

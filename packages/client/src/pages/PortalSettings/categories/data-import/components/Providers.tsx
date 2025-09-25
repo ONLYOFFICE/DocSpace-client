@@ -72,7 +72,7 @@ const Providers = (props: ProvidersProps) => {
     if (ready) setDocumentTitle(t("DataImport"));
   }, [ready, t]);
 
-  if (showPortalSettingsLoader) return <DataImportLoader />;
+  if (showPortalSettingsLoader || !ready) return <DataImportLoader />;
 
   return (
     <WorkspacesContainer>
